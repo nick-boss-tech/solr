@@ -28,7 +28,6 @@ import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.RequestNotSentException;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
-import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.NamedList;
@@ -63,9 +62,7 @@ public abstract class LBAsyncSolrClient extends LBSolrClient {
   public CompletableFuture<Rsp> requestAsync(Req req) {
     CompletableFuture<Rsp> apiFuture = new CompletableFuture<>();
     Rsp rsp = new Rsp();
-    boolean isAdmin =
-        req.request.getRequestType() == SolrRequestType.ADMIN && !req.request.requiresCollection();
-    boolean isNonRetryable = req.request.getRequestType() == SolrRequestType.UPDATE || isAdmin;
+    boolean isNonRetryable = !req.request.isRetriable();
     EndpointIterator it = new EndpointIterator(req, zombieServers);
     AtomicReference<CompletableFuture<NamedList<Object>>> currentFuture = new AtomicReference<>();
     RetryListener retryListener =
@@ -192,7 +189,7 @@ public abstract class LBAsyncSolrClient extends LBSolrClient {
         isNonRetryable = rse.shouldSkipRetry();
       }
       // we retry on 404 or 403 or 503 or 500
-      // unless it's an update - then we only retry on connect exception
+      // unless the request is not retriable - then we only retry on connect exception
       if (!isNonRetryable && RETRY_CODES.contains(e.code())) {
         listener.onFailure((!isZombie) ? makeServerAZombie(endpoint, e) : e, true);
       } else {

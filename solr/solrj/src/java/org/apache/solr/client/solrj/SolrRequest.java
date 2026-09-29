@@ -240,6 +240,20 @@ public abstract class SolrRequest<T> implements Serializable {
   }
 
   /**
+   * Whether this request may be re-sent when the client does not know if the server received it.
+   * Only consulted on the failure path. Connect-class failures (TCP never completed) stay with the
+   * caller; those are always safe to replay.
+   *
+   * <p>The HTTP method is not consulted. GET is the constructor default in this class, not a
+   * declaration that the request is safe.
+   *
+   * @return true only for {@link SolrRequestType#QUERY} unless a subclass overrides
+   */
+  public boolean isRetriable() {
+    return requestType == SolrRequestType.QUERY;
+  }
+
+  /**
    * The parameters for this request; never null. The runtime type may be mutable but modifications
    * <b>may</b> not affect this {@link SolrRequest} instance, as it may return a new instance here
    * every time. If the subclass specifies the response type as {@link

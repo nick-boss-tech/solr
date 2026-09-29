@@ -722,14 +722,17 @@ public abstract class CloudSolrClient extends SolrClient {
               ? ((SolrException) rootCause).code()
               : SolrException.ErrorCode.UNKNOWN.code;
 
-      final boolean wasCommError = wasCommError(exc);
+      final boolean wasCommError = wasCommError(rootCause);
+      // Connect-class failures never reached the server. Other comm errors (reset, broken pipe)
+      // may have applied the update, so only replay when the request says that is safe.
+      final boolean mayReplay = LBSolrClient.isConnectException(rootCause) || request.isRetriable();
 
-      if (wasCommError
-          || (exc instanceof RouteException
-              && (errorCode == 503)) // 404 because the core does not exist 503 service unavailable
-      // TODO there are other reasons for 404. We need to change the solr response format from HTML
-      // to structured data to know that
-      ) {
+      if (mayReplay
+          && (wasCommError
+              || (exc instanceof RouteException && errorCode == 503))) { // 503 service unavailable
+        // TODO there are other reasons for 404. We need to change the solr response format from
+        // HTML
+        // to structured data to know that
         // it was a communication error. it is likely that
         // the node to which the request to be sent is down . So , expire the state
         // so that the next attempt would fetch the fresh state
@@ -813,7 +816,8 @@ public abstract class CloudSolrClient extends SolrClient {
           && !stateWasStale
           && requestedCollections != null
           && !requestedCollections.isEmpty()
-          && wasCommError) {
+          && wasCommError
+          && mayReplay) {
         for (DocCollection ext : requestedCollections) {
           DocCollection latestStateFromZk = getDocCollection(ext.getName(), null);
           if (latestStateFromZk.getZNodeVersion() != ext.getZNodeVersion()) {
@@ -1543,6 +1547,9 @@ public abstract class CloudSolrClient extends SolrClient {
      * If provided, the CloudSolrClient will build it's internal client using this builder (instead
      * of the empty default one). Providing this builder allows users to configure the internal
      * clients (authentication, timeouts, etc.).
+     *
+     * <p>This replaces the Solr 9.10-deprecated {@code withInternalClientBuilder} name, which was
+     * removed in Solr 11 (SOLR-18368).
      *
      * @param internalClientBuilder the builder to use for creating the internal http client.
      * @return this

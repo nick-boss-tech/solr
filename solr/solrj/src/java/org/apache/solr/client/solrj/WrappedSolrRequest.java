@@ -111,6 +111,11 @@ public class WrappedSolrRequest<T> extends SolrRequest<T> {
   }
 
   @Override
+  public boolean isRetriable() {
+    return wrapped.isRetriable();
+  }
+
+  @Override
   public List<String> getPreferredNodes() {
     return wrapped.getPreferredNodes();
   }
