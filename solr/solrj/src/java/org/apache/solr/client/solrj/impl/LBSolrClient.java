@@ -46,7 +46,6 @@ import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.RequestNotSentException;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
-import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.RequestWriter;
@@ -310,6 +309,9 @@ public abstract class LBSolrClient extends SolrClient {
     final Endpoint endpoint;
 
     int failedPings = 0;
+    private String basicAuthUser;
+    private String basicAuthPassword;
+    private Map<String, String> requestHeaders;
 
     EndpointWrapper(Endpoint endpoint) {
       this.endpoint = endpoint;
@@ -317,6 +319,28 @@ public abstract class LBSolrClient extends SolrClient {
 
     public Endpoint getEndpoint() {
       return endpoint;
+    }
+
+    public void captureRequestAuth(SolrRequest<?> request) {
+      basicAuthUser = request.getBasicAuthUser();
+      basicAuthPassword = request.getBasicAuthPassword();
+    }
+
+    public void captureRequestHeaders(SolrRequest<?> request) {
+      Map<String, String> headers = request.getHeaders();
+      requestHeaders = headers == null ? null : new HashMap<>(headers);
+    }
+
+    public void applyRequestAuth(SolrRequest<?> request) {
+      if (basicAuthUser != null && basicAuthPassword != null) {
+        request.setBasicAuthCredentials(basicAuthUser, basicAuthPassword);
+      }
+    }
+
+    public void applyRequestHeaders(SolrRequest<?> request) {
+      if (requestHeaders != null) {
+        request.addHeaders(requestHeaders);
+      }
     }
 
     @Override
@@ -571,9 +595,7 @@ public abstract class LBSolrClient extends SolrClient {
   public Rsp request(Req req) throws SolrServerException, IOException {
     Rsp rsp = new Rsp();
     Exception ex = null;
-    boolean isAdmin =
-        req.request.getRequestType() == SolrRequestType.ADMIN && !req.request.requiresCollection();
-    boolean isNonRetryable = req.request.getRequestType() == SolrRequestType.UPDATE || isAdmin;
+    boolean isNonRetryable = !req.request.isRetriable();
     EndpointIterator endpointIterator = new EndpointIterator(req, zombieServers);
     Endpoint serverStr;
     while ((serverStr = endpointIterator.nextOrError(ex)) != null) {
@@ -645,7 +667,7 @@ public abstract class LBSolrClient extends SolrClient {
         isNonRetryable = rse.shouldSkipRetry();
       }
       // we retry on 404 or 403 or 503 or 500
-      // unless it's an update - then we only retry on connect exception
+      // unless the request is not retriable - then we only retry on connect exception
       if (!isNonRetryable && RETRY_CODES.contains(e.code())) {
         ex = (!isZombie) ? makeServerAZombie(baseUrl, e) : e;
       } else {
@@ -688,7 +710,11 @@ public abstract class LBSolrClient extends SolrClient {
     return ex;
   }
 
-  protected boolean isConnectException(Throwable t) {
+  /**
+   * TCP never completed, so the server did not see the request and replay is safe even when {@link
+   * SolrRequest#isRetriable()} is false.
+   */
+  public static boolean isConnectException(Throwable t) {
     if (t instanceof ConnectException || t instanceof HttpConnectTimeoutException) {
       return true;
     }
@@ -748,6 +774,8 @@ public abstract class LBSolrClient extends SolrClient {
     try {
       log.debug("Checking zombie server {} for {}", zombieServer, this);
       QueryRequest queryRequest = new QueryRequest(solrQuery);
+      zombieServer.applyRequestAuth(queryRequest);
+      zombieServer.applyRequestHeaders(queryRequest);
       // First the one on the endpoint, then the default collection
       final String effectiveCollection =
           Objects.requireNonNullElse(zombieEndpoint.getCore(), getDefaultCollection());
@@ -855,6 +883,8 @@ public abstract class LBSolrClient extends SolrClient {
       final var endpoint = wrapper.getEndpoint();
       try {
         ++numServersTried;
+        wrapper.captureRequestHeaders(request);
+        wrapper.captureRequestAuth(request);
         // Choose the endpoint's core/collection over any specified by the user
         final var effectiveCollection =
             endpoint.getCore() == null ? collection : endpoint.getCore();
@@ -900,6 +930,8 @@ public abstract class LBSolrClient extends SolrClient {
         continue;
       try {
         ++numServersTried;
+        wrapper.captureRequestHeaders(request);
+        wrapper.captureRequestAuth(request);
         final String effectiveCollection =
             endpoint.getCore() == null ? collection : endpoint.getCore();
         NamedList<Object> rsp =

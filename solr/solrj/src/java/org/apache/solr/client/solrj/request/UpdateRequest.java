@@ -35,9 +35,11 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.LBSolrClient;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.SolrInputField;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.DocRouter;
 import org.apache.solr.common.cloud.Slice;
+import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.UpdateParams;
 import org.apache.solr.common.util.CollectionUtil;
@@ -398,5 +400,111 @@ public class UpdateRequest extends AbstractUpdateRequest {
   public UpdateRequest setSendToLeaders(final boolean sendToLeaders) {
     this.sendToLeaders = sendToLeaders;
     return this;
+  }
+
+  /**
+   * Full document adds, deletes, commits, and idempotent atomic operators may be replayed. {@code
+   * inc} and scalar {@code add} may not. A document iterator is exhausted after the first attempt.
+   * Optimistic concurrency ({@code _version_ > 0}) is retriable because a successful first attempt
+   * fails the replay with 409.
+   */
+  @Override
+  public boolean isRetriable() {
+    if (docIterator != null) {
+      return false;
+    }
+    if (documents != null) {
+      for (SolrInputDocument doc : documents.keySet()) {
+        if (!isDocumentRetriable(doc)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  private static boolean isDocumentRetriable(SolrInputDocument doc) {
+    if (hasOptimisticVersion(doc)) {
+      return true;
+    }
+    for (SolrInputField field : doc) {
+      if (!isValueRetriable(field.getValue())) {
+        return false;
+      }
+    }
+    if (doc.hasChildDocuments()) {
+      for (SolrInputDocument child : doc.getChildDocuments()) {
+        if (!isDocumentRetriable(child)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  private static boolean hasOptimisticVersion(SolrInputDocument doc) {
+    Object version = doc.getFieldValue(CommonParams.VERSION_FIELD);
+    return version instanceof Number n && n.longValue() > 0;
+  }
+
+  private static boolean isValueRetriable(Object val) {
+    if (val == null) {
+      return true;
+    }
+    if (val instanceof SolrInputDocument child) {
+      return isDocumentRetriable(child);
+    }
+    if (val instanceof Map<?, ?> map) {
+      return isAtomicMapRetriable(map);
+    }
+    if (val instanceof Collection<?> col) {
+      for (Object item : col) {
+        if (!isValueRetriable(item)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  private static boolean isAtomicMapRetriable(Map<?, ?> map) {
+    for (Map.Entry<?, ?> entry : map.entrySet()) {
+      if (!(entry.getKey() instanceof String op)) {
+        return false;
+      }
+      switch (op) {
+        case "inc":
+          return false;
+        case "add":
+          if (!isChildDocAdd(entry.getValue())) {
+            return false;
+          }
+          if (!isValueRetriable(entry.getValue())) {
+            return false;
+          }
+          break;
+        case "set":
+        case "remove":
+        case "removeregex":
+        case "add-distinct":
+          if (!isValueRetriable(entry.getValue())) {
+            return false;
+          }
+          break;
+        default:
+          return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean isChildDocAdd(Object value) {
+    if (value instanceof SolrInputDocument) {
+      return true;
+    }
+    if (value instanceof Collection<?> col && !col.isEmpty()) {
+      return col.iterator().next() instanceof SolrInputDocument;
+    }
+    return false;
   }
 }

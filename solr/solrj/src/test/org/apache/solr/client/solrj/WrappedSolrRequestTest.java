@@ -128,6 +128,14 @@ public class WrappedSolrRequestTest extends SolrTestCase {
   }
 
   @Test
+  public void testIsRetriableDelegates() {
+    inner.setRequestType(SolrRequest.SolrRequestType.QUERY);
+    assertTrue(wrapper.isRetriable());
+    inner.setRequestType(SolrRequest.SolrRequestType.ADMIN);
+    assertFalse(wrapper.isRetriable());
+  }
+
+  @Test
   public void testGetPreferredNodes() {
     inner.setPreferredNodes(List.of("node1:8983_solr", "node2:8983_solr"));
     assertEquals(inner.getPreferredNodes(), wrapper.getPreferredNodes());
