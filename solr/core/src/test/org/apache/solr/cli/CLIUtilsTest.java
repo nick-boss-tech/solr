@@ -18,9 +18,16 @@ package org.apache.solr.cli;
 
 import java.net.SocketException;
 import java.net.URISyntaxException;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.cloud.SolrCloudTestCase;
+import org.apache.solr.cloud.ZkController;
+import org.apache.solr.cloud.ZkTestServer;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.cloud.SolrZkClient;
+import org.apache.solr.common.cloud.ZkStateReader;
 import org.junit.Test;
 
 public class CLIUtilsTest extends SolrCloudTestCase {
@@ -140,5 +147,46 @@ public class CLIUtilsTest extends SolrCloudTestCase {
     // Note that a bunch of invalid URIs like "http::example.com", "http:/example.com" and
     // "//example.com" are not throwing URISyntaxException. This however is an issue of
     // java.lang.URI, which is very lenient.
+  }
+
+  @Test
+  public void testNormalizeSolrUrlFromZkHonorsSslEnabled() throws Exception {
+    String previousSslEnabled = System.getProperty("solr.ssl.enabled");
+    ZkTestServer zkServer = new ZkTestServer(createTempDir("zk-ssl-scheme"));
+    try {
+      zkServer.run();
+      try (SolrZkClient zkClient =
+          new SolrZkClient.Builder().withUrl(zkServer.getZkAddress()).build()) {
+        ZkController.createClusterZkNodes(zkClient);
+        zkClient.makePath(
+            ZkStateReader.LIVE_NODES_ZKNODE + "/ssl-node:8983_solr", new byte[0], true);
+      }
+      CommandLine cli =
+          new DefaultParser()
+              .parse(
+                  new Options().addOption(CommonCLIOptions.ZK_HOST_OPTION),
+                  new String[] {"-z", zkServer.getZkAddress()});
+
+      if (!isSSLMode()) {
+        System.clearProperty("solr.ssl.enabled");
+        assertEquals(
+            "Without solr.ssl.enabled, a ZK-discovered node URL should default to http",
+            "http://ssl-node:8983",
+            CLIUtils.normalizeSolrUrl(cli));
+      }
+
+      System.setProperty("solr.ssl.enabled", "true");
+      assertEquals(
+          "solr.ssl.enabled should make ZK-discovered node URLs https even when urlScheme is unset",
+          "https://ssl-node:8983",
+          CLIUtils.normalizeSolrUrl(cli));
+    } finally {
+      zkServer.shutdown();
+      if (previousSslEnabled == null) {
+        System.clearProperty("solr.ssl.enabled");
+      } else {
+        System.setProperty("solr.ssl.enabled", previousSslEnabled);
+      }
+    }
   }
 }

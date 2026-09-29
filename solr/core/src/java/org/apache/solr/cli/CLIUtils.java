@@ -262,8 +262,7 @@ public final class CLIUtils {
             "No live nodes found! Cannot determine 'solrUrl' from SolrCloud: " + solrConnection);
 
       String firstLiveNode = liveNodes.iterator().next();
-      String urlScheme =
-          cloudSolrClient.getClusterStateProvider().getClusterProperty("urlScheme", "http");
+      String urlScheme = cloudSolrClient.getClusterStateProvider().getUrlScheme();
       return normalizeSolrUrl(
           URLUtil.getBaseUrlForNodeName(firstLiveNode, urlScheme, false), false);
     }

@@ -253,6 +253,9 @@ bin\solr.cmd create -c mycollection --shards 2
 
 The `create` action will pass the `SOLR_SSL_*` properties set in your include file to the SolrJ code used to create the collection.
 
+With `SOLR_SSL_ENABLED=true`, Solr also sets the `solr.ssl.enabled` system property so inter-node URLs use `https`.
+That is independent of ZooKeeper SSL: an external ZooKeeper ensemble can stay on plaintext, and you do not need to set the `urlScheme` cluster property for collection creation to talk to the Solr nodes.
+
 === Retrieve SolrCloud Cluster Status using curl
 
 To get the resulting cluster status (again, if you have not enabled client authentication, remove the `-E solr-ssl.pem:secret` option):
