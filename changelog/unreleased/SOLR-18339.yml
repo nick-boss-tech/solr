@@ -1,0 +1,7 @@
+title: bin/solr start waits for Solr with StatusTool instead of an lsof poll loop.
+type: changed
+authors:
+  - name: ICLA pending
+links:
+  - name: SOLR-18339
+    url: https://issues.apache.org/jira/browse/SOLR-18339
