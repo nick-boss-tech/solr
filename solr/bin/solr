@@ -1377,37 +1377,13 @@ function start_solr() {
       fi
     fi
 
-    # no lsof on cygwin though
-    if lsof -v 2>&1 | grep -q revision; then
-      echo -n "Waiting up to $SOLR_START_WAIT seconds to see Solr running on port $SOLR_PORT_LISTEN"
-      # Launch in a subshell to show the spinner
-      (loops=0
-      while true
-      do
-        running=$(lsof -t -PniTCP:$SOLR_PORT_LISTEN -sTCP:LISTEN || :)
-        if [ -z "${running:-}" ]; then
-          slept=$((loops * 2))
-          if [ $slept -lt $SOLR_START_WAIT ]; then
-            sleep 2
-            loops=$((loops+1))
-          else
-            echo -e "Still not seeing Solr listening on $SOLR_PORT_LISTEN after $SOLR_START_WAIT seconds!"
-            tail -30 "$SOLR_LOGS_DIR/solr.log"
-            exit # subshell!
-          fi
-        else
-          SOLR_PID=$(ps auxww | grep start\.jar | awk "/\-Dsolr\.port\.listen=$SOLR_PORT_LISTEN/"' {print $2}' | sort -r)
-          echo -e "\nStarted Solr server on port $SOLR_PORT_LISTEN (pid=$SOLR_PID). Happy searching!\n"
-          exit # subshell!
-        fi
-      done) &
-      spinner $!
-    else
-      echo -e "NOTE: Please install lsof as this script needs it to determine if Solr is listening on port $SOLR_PORT_LISTEN."
-      sleep 10
-      SOLR_PID=$(ps auxww | grep start\.jar | awk "/\-Dsolr\.port\.listen=$SOLR_PORT_LISTEN/"' {print $2}' | sort -r)
-      echo -e "\nStarted Solr server on port $SOLR_PORT_LISTEN (pid=$SOLR_PID). Happy searching!\n"
-      return;
+    # Wait for Solr to come online using StatusTool (same path as bin/solr.cmd).
+    if ! run_tool status --solr-url "${SOLR_URL_SCHEME}://localhost:${SOLR_PORT_LISTEN}/solr" --max-wait-secs "$SOLR_START_WAIT"; then
+      echo -e "Solr did not start or was not reachable. Check the logs for errors."
+      if [ -f "$SOLR_LOGS_DIR/solr.log" ]; then
+        tail -30 "$SOLR_LOGS_DIR/solr.log"
+      fi
+      exit 1
     fi
   fi
 }
