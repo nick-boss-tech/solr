@@ -101,6 +101,9 @@ IF NOT DEFINED SOLR_SECURITY_MANAGER_ENABLED (
 IF "%SOLR_SSL_ENABLED%"=="true" (
   set "SOLR_JETTY_CONFIG=--module=https --lib="%DEFAULT_SERVER_DIR%\solr-webapp\webapp\WEB-INF\lib\*""
   set SOLR_URL_SCHEME=https
+  REM Advertise HTTPS to other Solr nodes. ZooKeeper SSL is independent; this must
+  REM not require the urlScheme cluster property (SOLR-18132 / SOLR-18056).
+  set "SOLR_SSL_OPTS=!SOLR_SSL_OPTS! -Dsolr.ssl.enabled=true"
   IF "%SOLR_SSL_RELOAD_ENABLED%"=="true" (
     set "SOLR_JETTY_CONFIG=!SOLR_JETTY_CONFIG! --module=ssl-reload"
     set "SOLR_SSL_OPTS=!SOLR_SSL_OPTS! -Dsolr.keystore.reload.enabled=true"
