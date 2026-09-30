@@ -1,4 +1,4 @@
-title: SolrJ requests declare whether they may be retried so CloudSolrClient and LBSolrClient no longer double-apply atomic inc/add on comm errors.
+title: SolrJ adds SolrRequest.isRetriable() so CloudSolrClient and LBSolrClient no longer double-apply atomic inc/add on comm errors.
 type: changed
 authors:
   - name: Nick Shanin

@@ -250,7 +250,7 @@ public abstract class SolrRequest<T> implements Serializable {
    * @return true only for {@link SolrRequestType#QUERY} unless a subclass overrides
    */
   public boolean isRetriable() {
-    return requestType == SolrRequestType.QUERY;
+    return getRequestType() == SolrRequestType.QUERY;
   }
 
   /**
