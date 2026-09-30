@@ -51,6 +51,9 @@ teardown() {
   export SOLR_SSL_WANT_CLIENT_AUTH=false
   export SOLR_HOST_ADVERTISE=localhost
 
+  # BATS executes bin/solr; keep the matching Windows launcher wiring in the distribution.
+  assert_file_contains "${SOLR_TIP}/bin/solr.cmd" 'set "SOLR_SSL_OPTS=!SOLR_SSL_OPTS! -Dsolr\.ssl\.enabled=true"'
+
   solr start
   solr assert --started https://localhost:${SOLR_PORT} --timeout 5000
 
