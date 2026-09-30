@@ -51,6 +51,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.params.ModifiableSolrParams;
@@ -188,7 +189,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
   }
 
   @Test
-  public void testUpdateIsRetriedOnRouteExceptionWith503WhenRequestWasUnsent() throws Exception {
+  public void testUnsafeUpdateIsNotRetriedOnRouteExceptionWithUnsentShard() throws Exception {
     String collName = "gettingstarted";
     Set<String> livenodes = new HashSet<>();
     Map<String, ClusterState.CollectionRef> refs = new HashMap<>();
@@ -224,8 +225,56 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
             return new NamedList<>();
           });
 
-      UpdateRequest update = new UpdateRequest().add("id", "123", "desc", "Something 0");
-      cloudClient.request(update, collName);
+      UpdateRequest update = new UpdateRequest().add(unsafeIncrementDocument("123"));
+      assertFalse(update.isRetriable());
+      expectThrows(
+          CloudSolrClient.RouteException.class, () -> cloudClient.request(update, collName));
+      // A RouteException proves at most that one shard request was unsent. Other direct-update
+      // routes may already have applied the request, so the original update must not be replayed.
+      assertEquals(1, lbhttpRequestCount.get());
+    }
+  }
+
+  @Test
+  public void testUnsafeMultiRouteUpdateIsNotRetriedAfterAnUnsentShard() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> livenodes = new HashSet<>();
+    Map<String, ClusterState.CollectionRef> refs = new HashMap<>();
+    DocCollection collection = loadCollection(collName, 1);
+    List<String> ids = idsOnDifferentShards(collection);
+
+    Map<String, Function<?, ?>> responses = new HashMap<>();
+    LBJettySolrClient mockLbclient = getMockLbHttpSolrClient(responses);
+    AtomicInteger lbhttpRequestCount = new AtomicInteger();
+    try (ClusterStateProvider clusterStateProvider = getStateProvider(livenodes, refs);
+        CloudSolrClient cloudClient =
+            new RandomizingCloudSolrClientBuilder(clusterStateProvider) {
+              @Override
+              protected LBSolrClient createOrGetLbClient(HttpSolrClient myClient) {
+                return mockLbclient;
+              }
+            }.build()) {
+      livenodes.addAll(Set.of("192.168.1.108:7574_solr", "192.168.1.108:8983_solr"));
+      refs.put(collName, new ClusterState.CollectionRef(collection));
+      responses.put(
+          "request",
+          o -> {
+            if (lbhttpRequestCount.incrementAndGet() == 2) {
+              return new RequestNotSentException(
+                  "request was not sent", new IOException("connection failed"));
+            }
+            return new NamedList<>();
+          });
+
+      UpdateRequest update = new UpdateRequest();
+      for (String id : ids) {
+        update.add(unsafeIncrementDocument(id));
+      }
+      assertFalse(update.isRetriable());
+      expectThrows(
+          CloudSolrClient.RouteException.class, () -> cloudClient.request(update, collName));
+      // One shard already completed before another route proved only its own request unsent. A
+      // whole-request retry would send the successful shard's increment a second time.
       assertEquals(2, lbhttpRequestCount.get());
     }
   }
@@ -465,6 +514,27 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     ClusterState state =
         ClusterState.createFromCollectionMap(version, stateMap, Set.of(), Instant.now(), null);
     return state.getCollectionOrNull(collection);
+  }
+
+  private List<String> idsOnDifferentShards(DocCollection collection) {
+    Map<String, String> idsByShard = new HashMap<>();
+    for (int i = 0; idsByShard.size() < 2 && i < 100; i++) {
+      String id = "retry-" + i;
+      String shard =
+          collection
+              .getRouter()
+              .getTargetSlice(id, null, null, null, collection)
+              .getName();
+      idsByShard.putIfAbsent(shard, id);
+    }
+    assertEquals("Expected test collection to route to two shards", 2, idsByShard.size());
+    return new ArrayList<>(idsByShard.values());
+  }
+
+  private static SolrInputDocument unsafeIncrementDocument(String id) {
+    SolrInputDocument document = new SolrInputDocument("id", id);
+    document.addField("count", Map.of("inc", 1));
+    return document;
   }
 
   private static class RecordingCloudSolrClient extends CloudSolrClient implements AutoCloseable {
