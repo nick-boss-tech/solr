@@ -1549,8 +1549,8 @@ public abstract class CloudSolrClient extends SolrClient {
      * of the empty default one). Providing this builder allows users to configure the internal
      * clients (authentication, timeouts, etc.).
      *
-     * <p>This replaces the Solr 9.10-deprecated {@code withInternalClientBuilder} name, which was
-     * removed in Solr 11 (SOLR-18368).
+     * <p>This replaces the Solr 9.10-deprecated builder method name, which was removed in Solr 11
+     * (SOLR-18368).
      *
      * @param internalClientBuilder the builder to use for creating the internal http client.
      * @return this
