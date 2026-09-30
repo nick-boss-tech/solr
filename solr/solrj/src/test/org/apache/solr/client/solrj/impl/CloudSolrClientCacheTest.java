@@ -558,7 +558,11 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     private final String collection;
 
     DummyRequest(String collection) {
-      super(METHOD.GET, "/dummy", SolrRequestType.QUERY);
+      this(collection, SolrRequestType.QUERY);
+    }
+
+    DummyRequest(String collection, SolrRequestType requestType) {
+      super(METHOD.GET, "/dummy", requestType);
       this.collection = collection;
     }
 
@@ -581,21 +585,11 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     public String getCollection() {
       return collection;
     }
-
-    @Override
-    public SolrRequestType getRequestType() {
-      return SolrRequestType.QUERY;
-    }
   }
 
   private static class DummyUpdateRequest extends DummyRequest {
     DummyUpdateRequest(String collection) {
-      super(collection);
-    }
-
-    @Override
-    public SolrRequestType getRequestType() {
-      return SolrRequestType.UPDATE;
+      super(collection, SolrRequestType.UPDATE);
     }
   }
 
