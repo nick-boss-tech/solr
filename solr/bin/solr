@@ -1377,8 +1377,19 @@ function start_solr() {
       fi
     fi
 
+    # Probe the configured bind address. A wildcard bind is not connectable,
+    # so use its loopback equivalent.
+    local status_host="${SOLR_HOST_BIND:-127.0.0.1}"
+    if [[ "$status_host" == "0.0.0.0" ]]; then
+      status_host="127.0.0.1"
+    elif [[ "$status_host" == "::" || "$status_host" == "[::]" ]]; then
+      status_host="[::1]"
+    elif [[ "$status_host" == *:* && "$status_host" != \[*\] ]]; then
+      status_host="[$status_host]"
+    fi
+
     # Wait for Solr to come online using StatusTool (same path as bin/solr.cmd).
-    if ! run_tool status --solr-url "${SOLR_URL_SCHEME}://localhost:${SOLR_PORT_LISTEN}/solr" --max-wait-secs "$SOLR_START_WAIT"; then
+    if ! run_tool status --solr-url "${SOLR_URL_SCHEME}://${status_host}:${SOLR_PORT_LISTEN}/solr" --max-wait-secs "$SOLR_START_WAIT"; then
       echo -e "Solr did not start or was not reachable. Check the logs for errors."
       if [ -f "$SOLR_LOGS_DIR/solr.log" ]; then
         tail -30 "$SOLR_LOGS_DIR/solr.log"

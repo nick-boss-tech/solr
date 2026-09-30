@@ -40,6 +40,19 @@ teardown() {
   refute_output --partial 'forcefully killing'
 }
 
+@test "SOLR-18339 start waits on the configured bind address" {
+  export SOLR_HOST_BIND=127.0.0.2
+  export SOLR_HOST_ADVERTISE=127.0.0.2
+  export SOLR_START_WAIT=30
+
+  run solr start
+  assert_success
+  assert_output --partial "Started Solr server on port ${SOLR_PORT}. Happy searching!"
+  refute_output --partial '(pid='
+
+  solr assert --started http://127.0.0.2:${SOLR_PORT} --timeout 5000
+}
+
 @test "stop command for single port" {
 
   solr start
