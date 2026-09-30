@@ -25,12 +25,15 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.apache.solr.SolrTestCase;
+import org.apache.solr.client.solrj.RequestNotSentException;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
 import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
 import org.apache.solr.client.solrj.request.QueryRequest;
+import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.MapSolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.junit.Test;
@@ -256,6 +259,86 @@ public class LBAsyncSolrClientTest extends SolrTestCase {
     }
   }
 
+  @Test
+  public void testAsyncUnsafeUpdateIsRetriedWhenRequestWasNeverSent() throws Exception {
+    LBSolrClient.Endpoint ep1 = new LBSolrClient.Endpoint("http://endpoint.one");
+    LBSolrClient.Endpoint ep2 = new LBSolrClient.Endpoint("http://endpoint.two");
+    List<LBSolrClient.Endpoint> endpointList = List.of(ep1, ep2);
+
+    var b = new HttpJettySolrClient.Builder("http://base.url");
+    try (MockHttpSolrClient client = new MockHttpSolrClient("http://base.url", b);
+        var testClient = new LBJettySolrClient.Builder(client, ep1, ep2).build()) {
+      client.basePathToFail = ep1.getBaseUrl();
+      client.failureToThrow =
+          new RequestNotSentException("request was not sent", new IOException("connection failed"));
+
+      LBSolrClient.Rsp response =
+          testClient
+              .requestAsync(new LBSolrClient.Req(unsafeUpdate(), endpointList))
+              .get(1, TimeUnit.MINUTES);
+
+      assertEquals(ep2.toString(), response.server);
+      assertEquals(List.of(ep1.toString(), ep2.toString()), client.lastBasePaths);
+    }
+  }
+
+  @Test
+  public void testAsyncUnsafeUpdateIsNotRetriedWhenRequestMayHaveBeenSent() throws Exception {
+    LBSolrClient.Endpoint ep1 = new LBSolrClient.Endpoint("http://endpoint.one");
+    LBSolrClient.Endpoint ep2 = new LBSolrClient.Endpoint("http://endpoint.two");
+    List<LBSolrClient.Endpoint> endpointList = List.of(ep1, ep2);
+
+    var b = new HttpJettySolrClient.Builder("http://base.url");
+    try (MockHttpSolrClient client = new MockHttpSolrClient("http://base.url", b);
+        var testClient = new LBJettySolrClient.Builder(client, ep1, ep2).build()) {
+      client.basePathToFail = ep1.getBaseUrl();
+      client.failureToThrow = new IOException("connection reset after the request was written");
+
+      ExecutionException failure =
+          expectThrows(
+              ExecutionException.class,
+              () ->
+                  testClient
+                      .requestAsync(new LBSolrClient.Req(unsafeUpdate(), endpointList))
+                      .get(1, TimeUnit.MINUTES));
+
+      assertTrue(failure.getCause() instanceof IOException);
+      assertEquals(List.of(ep1.toString()), client.lastBasePaths);
+    }
+  }
+
+  @Test
+  public void testAsyncIdempotentUpdateIsRetriedOnCommunicationError() throws Exception {
+    LBSolrClient.Endpoint ep1 = new LBSolrClient.Endpoint("http://endpoint.one");
+    LBSolrClient.Endpoint ep2 = new LBSolrClient.Endpoint("http://endpoint.two");
+    List<LBSolrClient.Endpoint> endpointList = List.of(ep1, ep2);
+
+    var b = new HttpJettySolrClient.Builder("http://base.url");
+    try (MockHttpSolrClient client = new MockHttpSolrClient("http://base.url", b);
+        var testClient = new LBJettySolrClient.Builder(client, ep1, ep2).build()) {
+      client.basePathToFail = ep1.getBaseUrl();
+      client.failureToThrow = new IOException("connection reset after the request was written");
+
+      LBSolrClient.Rsp response =
+          testClient
+              .requestAsync(new LBSolrClient.Req(idempotentUpdate(), endpointList))
+              .get(1, TimeUnit.MINUTES);
+
+      assertEquals(ep2.toString(), response.server);
+      assertEquals(List.of(ep1.toString(), ep2.toString()), client.lastBasePaths);
+    }
+  }
+
+  private static UpdateRequest unsafeUpdate() {
+    SolrInputDocument document = new SolrInputDocument("id", "1");
+    document.addField("count", Map.of("inc", 1));
+    return new UpdateRequest().add(document);
+  }
+
+  private static UpdateRequest idempotentUpdate() {
+    return new UpdateRequest().add("id", "1");
+  }
+
   public static class MockHttpSolrClient extends HttpJettySolrClient {
 
     public List<SolrRequest<?>> lastSolrRequests = new ArrayList<>();
@@ -265,6 +348,8 @@ public class LBAsyncSolrClientTest extends SolrTestCase {
     public List<String> lastCollections = new ArrayList<>();
 
     public String basePathToFail = null;
+
+    public Exception failureToThrow = null;
 
     public String tmpBaseUrl = null;
 
@@ -283,7 +368,7 @@ public class LBAsyncSolrClientTest extends SolrTestCase {
       lastBasePaths.add(tmpBaseUrl);
       lastCollections.add(collection);
       if (tmpBaseUrl.equals(basePathToFail)) {
-        throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, "We should retry this.");
+        throwConfiguredFailure();
       }
       return generateResponse(request);
     }
@@ -309,17 +394,34 @@ public class LBAsyncSolrClientTest extends SolrTestCase {
       lastBasePaths.add(tmpBaseUrl);
       lastCollections.add(collection);
       if (tmpBaseUrl != null && tmpBaseUrl.equals(basePathToFail)) {
-        cf.completeExceptionally(
-            new SolrException(SolrException.ErrorCode.SERVER_ERROR, "We should retry this."));
+        if (failureToThrow == null) {
+          cf.completeExceptionally(
+              new SolrException(SolrException.ErrorCode.SERVER_ERROR, "We should retry this."));
+        } else {
+          cf.completeExceptionally(failureToThrow);
+        }
       } else {
         cf.complete(generateResponse(solrRequest));
       }
       return cf;
     }
 
+    private void throwConfiguredFailure() throws SolrServerException, IOException {
+      if (failureToThrow == null) {
+        throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, "We should retry this.");
+      }
+      if (failureToThrow instanceof SolrServerException sse) {
+        throw sse;
+      }
+      if (failureToThrow instanceof IOException ioe) {
+        throw ioe;
+      }
+      throw new SolrServerException(failureToThrow);
+    }
+
     private NamedList<Object> generateResponse(SolrRequest<?> solrRequest) {
       String id = solrRequest.getParams().get("q");
-      return new NamedList<>(Map.of("response", id));
+      return new NamedList<>(Map.of("response", id == null ? "ok" : id));
     }
   }
 }

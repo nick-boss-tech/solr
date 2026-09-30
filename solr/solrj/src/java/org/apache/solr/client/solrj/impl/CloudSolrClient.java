@@ -21,8 +21,6 @@ import static org.apache.solr.common.params.CommonParams.ID;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -48,7 +46,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import org.apache.solr.client.solrj.RequestNotSentException;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
@@ -204,16 +201,6 @@ public abstract class CloudSolrClient extends SolrClient {
     // snapshot, so we un-deprecate. Or we avoid it and maybe make the ClusterStateProvider as that
     // cache.  SOLR-17604 is related.
     return getClusterStateProvider().getClusterState();
-  }
-
-  /**
-   * Is this a communication error? We will retry if so. The whole cause chain is inspected, since a
-   * transport may report the underlying failure wrapped at any depth.
-   */
-  protected boolean wasCommError(Throwable t) {
-    return SolrException.hasCause(t, SocketException.class)
-        || SolrException.hasCause(t, UnknownHostException.class)
-        || SolrException.hasCause(t, RequestNotSentException.class);
   }
 
   @Override
@@ -722,14 +709,25 @@ public abstract class CloudSolrClient extends SolrClient {
               ? ((SolrException) rootCause).code()
               : SolrException.ErrorCode.UNKNOWN.code;
 
-      final boolean wasCommError = wasCommError(rootCause);
-      // Connect-class failures never reached the server. Other comm errors (reset, broken pipe)
-      // may have applied the update, so only replay when the request says that is safe.
-      final boolean mayReplay = LBSolrClient.isConnectException(rootCause) || request.isRetriable();
+      final HttpSolrClient transport = getHttpClient();
+      final boolean wasCommError = transport.wasCommError(exc);
+      // Transport-proven-unsent failures never reached the server. Other comm errors (reset,
+      // broken pipe) may have applied the update, so only replay when the request says that is
+      // safe.
+      final boolean mayReplay = transport.wasRequestUnsent(exc) || request.isRetriable();
+      // A RouteException with 503 is raised after directUpdate has collected every shard's result;
+      // an update may have succeeded on one shard, so do not replay it unless it was proven unsent.
+      final boolean isRouteException503 =
+          exc instanceof RouteException
+              && errorCode == SolrException.ErrorCode.SERVICE_UNAVAILABLE.code;
+      final boolean mayReplayAfterRouteException503 =
+          !isRouteException503
+              || request.getRequestType() != SolrRequestType.UPDATE
+              || transport.wasRequestUnsent(exc);
 
       if (mayReplay
-          && (wasCommError
-              || (exc instanceof RouteException && errorCode == 503))) { // 503 service unavailable
+          && mayReplayAfterRouteException503
+          && (wasCommError || isRouteException503)) { // 503 service unavailable
         // TODO there are other reasons for 404. We need to change the solr response format from
         // HTML
         // to structured data to know that
@@ -1548,9 +1546,6 @@ public abstract class CloudSolrClient extends SolrClient {
      * If provided, the CloudSolrClient will build it's internal client using this builder (instead
      * of the empty default one). Providing this builder allows users to configure the internal
      * clients (authentication, timeouts, etc.).
-     *
-     * <p>This replaces the Solr 9.10-deprecated {@code withInternalClientBuilder} name, which was
-     * removed in Solr 11 (SOLR-18368).
      *
      * @param internalClientBuilder the builder to use for creating the internal http client.
      * @return this

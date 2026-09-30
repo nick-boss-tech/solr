@@ -44,6 +44,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.client.solrj.RequestNotSentException;
+import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
@@ -57,6 +59,7 @@ import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SolrNamedThreadFactory;
 import org.apache.solr.common.util.Utils;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
 
@@ -135,6 +138,95 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
       // Race: sometimes async completes fast enough for 2 fetches, sometimes only 1.
       int fetchCount = refs.get(collName).getCount();
       assertTrue("Expected 1 or 2 fetches, got " + fetchCount, fetchCount >= 1 && fetchCount <= 2);
+    }
+  }
+
+  /**
+   * {@link CloudSolrClient#directUpdate} raises a {@link CloudSolrClient.RouteException} only after
+   * collecting every shard's result, so a 503 from one shard can follow success on another and a
+   * replay would re-apply the update.
+   */
+  public void testUpdateIsNotRetriedOnRouteExceptionWith503() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> livenodes = new HashSet<>();
+    Map<String, ClusterState.CollectionRef> refs = new HashMap<>();
+
+    Map<String, Function<?, ?>> responses = new HashMap<>();
+    LBJettySolrClient mockLbclient = getMockLbHttpSolrClient(responses);
+    AtomicInteger lbhttpRequestCount = new AtomicInteger();
+    try (ClusterStateProvider clusterStateProvider = getStateProvider(livenodes, refs);
+        CloudSolrClient cloudClient =
+            new RandomizingCloudSolrClientBuilder(clusterStateProvider) {
+              @Override
+              protected LBSolrClient createOrGetLbClient(HttpSolrClient myClient) {
+                return mockLbclient;
+              }
+            }.sendUpdatesToAnyReplica().build()) {
+      livenodes.addAll(Set.of("192.168.1.108:7574_solr", "192.168.1.108:8983_solr"));
+      refs.put(collName, new ClusterState.CollectionRef(loadCollection(collName, 1)));
+
+      NamedList<Throwable> shardFailures = new NamedList<>();
+      shardFailures.add(
+          "http://127.0.0.1:8983/solr/gettingstarted_shard1_replica_n1",
+          new RemoteSolrException("127.0.0.1:8983", 503, "Service Unavailable", null));
+      responses.put(
+          "request",
+          o -> {
+            lbhttpRequestCount.incrementAndGet();
+            return new CloudSolrClient.RouteException(
+                SolrException.ErrorCode.SERVICE_UNAVAILABLE, shardFailures, Map.of());
+          });
+
+      UpdateRequest update = new UpdateRequest().add("id", "123", "desc", "Something 0");
+      expectThrows(
+          CloudSolrClient.RouteException.class, () -> cloudClient.request(update, collName));
+      assertEquals(
+          "a 503 may follow partial success, so it must not be replayed",
+          1,
+          lbhttpRequestCount.get());
+    }
+  }
+
+  @Test
+  public void testUpdateIsRetriedOnRouteExceptionWith503WhenRequestWasUnsent() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> livenodes = new HashSet<>();
+    Map<String, ClusterState.CollectionRef> refs = new HashMap<>();
+
+    Map<String, Function<?, ?>> responses = new HashMap<>();
+    LBJettySolrClient mockLbclient = getMockLbHttpSolrClient(responses);
+    AtomicInteger lbhttpRequestCount = new AtomicInteger();
+    try (ClusterStateProvider clusterStateProvider = getStateProvider(livenodes, refs);
+        CloudSolrClient cloudClient =
+            new RandomizingCloudSolrClientBuilder(clusterStateProvider) {
+              @Override
+              protected LBSolrClient createOrGetLbClient(HttpSolrClient myClient) {
+                return mockLbclient;
+              }
+            }
+            .sendUpdatesToAnyReplica()
+            .build()) {
+      livenodes.addAll(Set.of("192.168.1.108:7574_solr", "192.168.1.108:8983_solr"));
+      refs.put(collName, new ClusterState.CollectionRef(loadCollection(collName, 1)));
+
+      responses.put(
+          "request",
+          o -> {
+            if (lbhttpRequestCount.incrementAndGet() == 1) {
+              NamedList<Throwable> shardFailures = new NamedList<>();
+              shardFailures.add(
+                  "http://127.0.0.1:8983/solr/gettingstarted_shard1_replica_n1",
+                  new RequestNotSentException(
+                      "request was not sent", new IOException("connection failed")));
+              return new CloudSolrClient.RouteException(
+                  SolrException.ErrorCode.SERVICE_UNAVAILABLE, shardFailures, Map.of());
+            }
+            return new NamedList<>();
+          });
+
+      UpdateRequest update = new UpdateRequest().add("id", "123", "desc", "Something 0");
+      cloudClient.request(update, collName);
+      assertEquals(2, lbhttpRequestCount.get());
     }
   }
 
@@ -381,6 +473,8 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     private volatile Invocation defaultInvocation;
     private final List<String> stateHistory = Collections.synchronizedList(new ArrayList<>());
     private final NamedList<Object> okResponse;
+    // These tests exercise cache behavior, not transport classification.
+    private final HttpSolrClient httpClient = mock(HttpSolrClient.class);
 
     RecordingCloudSolrClient(ClusterStateProvider provider, int refreshThreads) {
       this(provider, true, true, false, refreshThreads);
@@ -449,7 +543,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
 
     @Override
     public HttpSolrClient getHttpClient() {
-      throw new UnsupportedOperationException();
+      return httpClient;
     }
 
     @FunctionalInterface
@@ -464,7 +558,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     private final String collection;
 
     DummyRequest(String collection) {
-      super(METHOD.GET, "/dummy", SolrRequestType.UNSPECIFIED);
+      super(METHOD.GET, "/dummy", SolrRequestType.QUERY);
       this.collection = collection;
     }
 
@@ -490,7 +584,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
 
     @Override
     public SolrRequestType getRequestType() {
-      return SolrRequestType.UNSPECIFIED;
+      return SolrRequestType.QUERY;
     }
   }
 

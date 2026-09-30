@@ -17,17 +17,22 @@
 package org.apache.solr.client.solrj.impl;
 
 import java.io.IOException;
+import java.net.http.HttpConnectTimeoutException;
+import java.nio.channels.ClosedChannelException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.client.solrj.RequestNotSentException;
-import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
-import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.UpdateRequest;
+import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.common.util.NamedList;
+import org.eclipse.jetty.io.EofException;
 import org.junit.Test;
 
 /**
@@ -45,32 +50,37 @@ public class LBSolrClientRetryUnsentTest extends SolrTestCase {
   /** Fails whatever endpoint is tried first with {@code failure}; any later endpoint succeeds. */
   private static class FailFirstEndpoint extends LBSolrClient {
     final List<String> attempted = new ArrayList<>();
-    private final Exception failure;
+    private final HttpSolrClient transport;
 
     FailFirstEndpoint(Exception failure) {
       super(List.of(DEAD_HOST_1, DEAD_HOST_2));
-      this.failure = failure;
+      this.transport =
+          new HttpJdkSolrClient(DEAD_HOST_1.getBaseUrl(), new HttpJdkSolrClient.Builder()) {
+            @Override
+            public NamedList<Object> requestWithBaseUrl(
+                String baseUrl, SolrRequest<?> solrRequest, String collection)
+                throws SolrServerException, IOException {
+              attempted.add(baseUrl);
+              if (attempted.size() > 1) {
+                return new NamedList<>();
+              }
+              if (failure instanceof SolrServerException sse) {
+                throw sse;
+              }
+              throw (IOException) failure;
+            }
+          };
     }
 
     @Override
-    protected SolrClient getClient(Endpoint endpoint) {
-      return new SolrClient() {
-        @Override
-        public NamedList<Object> request(SolrRequest<?> request, String collection)
-            throws SolrServerException, IOException {
-          attempted.add(endpoint.getBaseUrl());
-          if (attempted.size() > 1) {
-            return new NamedList<>();
-          }
-          if (failure instanceof SolrServerException sse) {
-            throw sse;
-          }
-          throw (IOException) failure;
-        }
+    protected HttpSolrClient getClient(Endpoint endpoint) {
+      return transport;
+    }
 
-        @Override
-        public void close() {}
-      };
+    @Override
+    public void close() {
+      super.close();
+      IOUtils.closeQuietly(transport);
     }
   }
 
@@ -99,14 +109,14 @@ public class LBSolrClientRetryUnsentTest extends SolrTestCase {
   public void testUpdateIsRetriedWhenRequestWasNeverSent() throws Exception {
     assertEquals(
         List.of(DEAD_HOST_1.getBaseUrl(), DEAD_HOST_2.getBaseUrl()),
-        requestReturningAttemptedUrls(unsentException(), new UpdateRequest().add("id", "1")));
+        requestReturningAttemptedUrls(unsentException(), unsafeUpdate()));
   }
 
-  /** LBSolrClient classifies {@link SolrRequestType#UPDATE} as non-retryable. */
+  /** An unsafe update is not retried when the transport cannot prove it was unsent. */
   @Test
   public void testRequestThatMayHaveBeenReceivedIsNotRetried() {
     LBSolrClient.Req req =
-        new LBSolrClient.Req(new UpdateRequest().add("id", "1"), List.of(DEAD_HOST_1, DEAD_HOST_2));
+        new LBSolrClient.Req(unsafeUpdate(), List.of(DEAD_HOST_1, DEAD_HOST_2));
     try (FailFirstEndpoint client = new FailFirstEndpoint(maybeSentException())) {
       expectThrows(SolrServerException.class, () -> client.request(req));
       assertEquals(List.of(DEAD_HOST_1.getBaseUrl()), client.attempted);
@@ -114,9 +124,41 @@ public class LBSolrClientRetryUnsentTest extends SolrTestCase {
   }
 
   @Test
+  public void testIdempotentUpdateIsRetriedOnCommunicationError() throws Exception {
+    assertEquals(
+        List.of(DEAD_HOST_1.getBaseUrl(), DEAD_HOST_2.getBaseUrl()),
+        requestReturningAttemptedUrls(maybeSentException(), new UpdateRequest().add("id", "1")));
+  }
+
+  @Test
   public void testQueryIsStillRetriedOnAnyIOException() throws Exception {
     assertEquals(
         List.of(DEAD_HOST_1.getBaseUrl(), DEAD_HOST_2.getBaseUrl()),
         requestReturningAttemptedUrls(maybeSentException(), new QueryRequest()));
+  }
+
+  @Test
+  public void testJdkConnectTimeoutProvesRequestWasUnsent() throws Exception {
+    try (HttpJdkSolrClient client =
+        new HttpJdkSolrClient(DEAD_HOST_1.getBaseUrl(), new HttpJdkSolrClient.Builder())) {
+      HttpConnectTimeoutException timeout = new HttpConnectTimeoutException("connection timed out");
+      assertTrue(client.wasRequestUnsent(timeout));
+      assertTrue(client.wasCommError(timeout));
+    }
+  }
+
+  @Test
+  public void testJettyTransportFailuresAreCommunicationErrors() throws Exception {
+    try (HttpSolrClient client =
+        new HttpJettySolrClient.Builder(DEAD_HOST_1.getBaseUrl()).build()) {
+      assertTrue(client.wasCommError(new EofException("HTTP/2 stream closed")));
+      assertTrue(client.wasCommError(new ClosedChannelException()));
+    }
+  }
+
+  private static UpdateRequest unsafeUpdate() {
+    SolrInputDocument document = new SolrInputDocument("id", "1");
+    document.addField("count", Map.of("inc", 1));
+    return new UpdateRequest().add(document);
   }
 }

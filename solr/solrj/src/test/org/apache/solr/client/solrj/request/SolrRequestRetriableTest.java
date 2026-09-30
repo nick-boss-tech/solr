@@ -37,12 +37,16 @@ public class SolrRequestRetriableTest extends SolrTestCase {
   }
 
   @Test
-  public void adminAndUnspecifiedAreNotRetriable() {
+  public void nonQueryTypesAreNotRetriable() {
     assertFalse(CollectionAdminRequest.createCollection("c", "conf", 1, 1).isRetriable());
     assertFalse(new GenericSolrRequest(METHOD.GET, "/foo").isRetriable());
     assertFalse(
         new GenericSolrRequest(METHOD.GET, "/admin/info/system", SolrRequestType.ADMIN)
             .isRetriable());
+    assertFalse(
+        new GenericSolrRequest(METHOD.GET, "/security", SolrRequestType.SECURITY).isRetriable());
+    assertFalse(
+        new GenericSolrRequest(METHOD.GET, "/stream", SolrRequestType.STREAMING).isRetriable());
   }
 
   @Test
@@ -143,6 +147,18 @@ public class SolrRequestRetriableTest extends SolrTestCase {
   @Test
   public void genericQueryTypeIsRetriable() {
     SolrRequest<?> req = new GenericSolrRequest(METHOD.GET, "/select", SolrRequestType.QUERY);
+    assertTrue(req.isRetriable());
+  }
+
+  @Test
+  public void overriddenRequestTypeControlsRetriability() {
+    SolrRequest<?> req =
+        new GenericSolrRequest(METHOD.GET, "/select") {
+          @Override
+          public SolrRequestType getRequestType() {
+            return SolrRequestType.QUERY;
+          }
+        };
     assertTrue(req.isRetriable());
   }
 
