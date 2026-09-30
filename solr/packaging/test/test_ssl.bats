@@ -54,7 +54,15 @@ teardown() {
   solr start
   solr assert --started https://localhost:${SOLR_PORT} --timeout 5000
 
-  run solr create -c test --shards 2
+  # Exercise the launched server and tools without relying on a urlScheme ZK property.
+  run solr api --solr-url "https://localhost:${SOLR_PORT}/solr/admin/info/system"
+  assert_output --partial '"solr.ssl.enabled":"true"'
+
+  printf '{}' > "${BATS_TEST_TMPDIR}/clusterprops.json"
+  run solr zk cp "${BATS_TEST_TMPDIR}/clusterprops.json" zk:/clusterprops.json -z localhost:${ZK_PORT}
+  assert_success
+
+  run solr create -c test --shards 2 -z localhost:${ZK_PORT}
   assert_output --partial "Created collection 'test'"
 
   run solr api --solr-url "https://localhost:${SOLR_PORT}/solr/test/select?q=*:*"
