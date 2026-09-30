@@ -241,8 +241,9 @@ public abstract class SolrRequest<T> implements Serializable {
 
   /**
    * Whether this request may be re-sent when the client does not know if the server received it.
-   * Only consulted on the failure path. Connect-class failures (TCP never completed) stay with the
-   * caller; those are always safe to replay.
+   * Only consulted on the failure path. Connect-class failures (TCP never completed) may be
+   * replayed by an individual endpoint failover; a higher-level retry that spans multiple
+   * endpoints must still apply this request's replay policy.
    *
    * <p>The HTTP method is not consulted. GET is the constructor default in this class, not a
    * declaration that the request is safe.

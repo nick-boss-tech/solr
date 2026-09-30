@@ -711,19 +711,18 @@ public abstract class CloudSolrClient extends SolrClient {
 
       final HttpSolrClient transport = getHttpClient();
       final boolean wasCommError = transport.wasCommError(exc);
-      // Transport-proven-unsent failures never reached the server. Other comm errors (reset,
-      // broken pipe) may have applied the update, so only replay when the request says that is
-      // safe.
-      final boolean mayReplay = transport.wasRequestUnsent(exc) || request.isRetriable();
+      // LBSolrClient may use a transport-proven-unsent failure to fail over a single endpoint.
+      // This layer can retry a whole direct update, which may have already reached another shard,
+      // so it must rely on the request-level replay policy instead.
+      final boolean mayReplay = request.isRetriable();
       // A RouteException with 503 is raised after directUpdate has collected every shard's result;
-      // an update may have succeeded on one shard, so do not replay it unless it was proven unsent.
+      // an update may have succeeded on one shard, so do not replay an update at this layer.
       final boolean isRouteException503 =
           exc instanceof RouteException
               && errorCode == SolrException.ErrorCode.SERVICE_UNAVAILABLE.code;
       final boolean mayReplayAfterRouteException503 =
           !isRouteException503
-              || request.getRequestType() != SolrRequestType.UPDATE
-              || transport.wasRequestUnsent(exc);
+              || request.getRequestType() != SolrRequestType.UPDATE;
 
       if (mayReplay
           && mayReplayAfterRouteException503
