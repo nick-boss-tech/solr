@@ -614,7 +614,7 @@ public abstract class CloudSolrClient extends SolrClient {
   /**
    * As this class doesn't watch external collections on the client side, there's a chance that the
    * request will fail due to cached stale state, which means the state must be refreshed from ZK
-   * and retried.
+   * and retried when the request may safely be replayed.
    */
   protected NamedList<Object> requestWithRetryOnStaleState(
       SolrRequest<?> request,
@@ -796,6 +796,7 @@ public abstract class CloudSolrClient extends SolrClient {
       if (retryCount < MAX_STALE_RETRIES
           && requestedCollections != null
           && !requestedCollections.isEmpty()
+          && mayReplay
           && (SolrException.ErrorCode.getErrorCode(errorCode)
                   == SolrException.ErrorCode.INVALID_STATE
               || errorCode == 404)) {

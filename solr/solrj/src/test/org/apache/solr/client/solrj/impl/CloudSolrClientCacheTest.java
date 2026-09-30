@@ -165,7 +165,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     }
   }
 
-  public void testDirectUpdatesToLeadersSkipStateVersionBeforeWait() throws Exception {
+  public void testNonRetriableRequestDoesNotRetryOnStaleState() throws Exception {
     String collName = "gettingstarted";
     Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
     AtomicInteger refGets = new AtomicInteger();
@@ -179,17 +179,35 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
           (req, cols) -> {
             throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale");
           });
-      client.enqueue((req, cols) -> null);
 
       DummyUpdateRequest request = new DummyUpdateRequest(collName);
-      NamedList<Object> resp = client.request(request, collName);
-      assertNotNull(resp);
+      expectThrows(SolrException.class, () -> client.request(request, collName));
 
       List<String> history = client.getStateVersionHistory();
-      assertEquals(2, history.size());
+      assertEquals(1, history.size());
       assertTrue(history.get(0).startsWith(collName + ":"));
-      assertNull(history.get(1));
-      assertTrue(refGets.get() >= 1);
+    }
+  }
+
+  public void testNonRetriableRequestDoesNotRetryOnNotFound() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
+    AtomicInteger refGets = new AtomicInteger();
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(collName, new TestCollectionRef(currentDoc::get, refGets, null, null, -1));
+    try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
+        RecordingCloudSolrClient client =
+            new RecordingCloudSolrClient(provider, true, true, true, 3)) {
+      client.enqueue(
+          (req, cols) -> {
+            throw new SolrException(SolrException.ErrorCode.NOT_FOUND, "not found");
+          });
+
+      DummyUpdateRequest request = new DummyUpdateRequest(collName);
+      expectThrows(SolrException.class, () -> client.request(request, collName));
+
+      assertEquals(1, client.getStateVersionHistory().size());
     }
   }
 
