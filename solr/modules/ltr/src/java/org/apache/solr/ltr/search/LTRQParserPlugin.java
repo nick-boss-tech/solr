@@ -26,6 +26,7 @@ import org.apache.lucene.util.ResourceLoaderAware;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.core.SolrCore;
 import org.apache.solr.core.SolrResourceLoader;
 import org.apache.solr.ltr.FeatureLogger;
 import org.apache.solr.ltr.LTRScoringQuery;
@@ -140,6 +141,25 @@ public class LTRQParserPlugin extends QParserPlugin
     }
   }
 
+  /**
+   * Returns the model store, resolving it from the core's RestManager when the
+   * managed-resource callback never fired (e.g. on stateless coordinator nodes,
+   * where registration is logged but onManagedResourceInitialized is not
+   * invoked). Replicates the callback's wiring so queries work instead of
+   * throwing NullPointerException.
+   */
+  private synchronized ManagedModelStore modelStore(SolrCore core) {
+    if (mr == null) {
+      mr = ManagedModelStore.getManagedModelStore(core);
+      if (fr == null) {
+        fr = ManagedFeatureStore.getManagedFeatureStore(core);
+      }
+      mr.setManagedFeatureStore(fr);
+      mr.loadStoredModels();
+    }
+    return mr;
+  }
+
   public class LTRQParser extends QParser {
 
     public LTRQParser(
@@ -174,7 +194,7 @@ public class LTRQParserPlugin extends QParserPlugin
               "the " + LTRQParserPlugin.MODEL + " " + i + " is empty");
         }
         if (!ORIGINAL_RANKING.equals(modelNames[i])) {
-          final LTRScoringModel ltrScoringModel = mr.getModel(modelNames[i]);
+          final LTRScoringModel ltrScoringModel = modelStore(req.getCore()).getModel(modelNames[i]);
           if (ltrScoringModel == null) {
             throw new SolrException(
                 SolrException.ErrorCode.BAD_REQUEST,
