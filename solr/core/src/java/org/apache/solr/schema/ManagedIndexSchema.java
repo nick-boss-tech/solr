@@ -580,7 +580,8 @@ public final class ManagedIndexSchema extends IndexSchema {
       List<CopyField> copyFieldsToRebuild = new ArrayList<>();
       newSchema.removeCopyFieldSource(fieldName, copyFieldsToRebuild);
 
-      newSchema.copyFieldTargetCounts.remove(oldField); // zero out target count for this field
+      // zero out target counts for this field and its sub-fields; copy fields are rebuilt below
+      newSchema.removeCopyFieldTargetCount(oldField);
 
       // Remove copy fields where the target is this field; remember them to rebuild
       for (Map.Entry<String, List<CopyField>> entry : newSchema.copyFieldsMap.entrySet()) {
@@ -1032,6 +1033,17 @@ public final class ManagedIndexSchema extends IndexSchema {
     } else {
       copyFieldTargetCounts.put(dest, count - 1);
     }
+    // SOLR-15357: sub-fields were recorded as targets alongside dest; keep them in sync.
+    for (SchemaField subField : dest.getType().getSubFields(dest, this)) {
+      Integer subCount = copyFieldTargetCounts.get(subField);
+      if (subCount != null) {
+        if (subCount <= 1) {
+          copyFieldTargetCounts.remove(subField);
+        } else {
+          copyFieldTargetCounts.put(subField, subCount - 1);
+        }
+      }
+    }
   }
 
   @Override
@@ -1234,7 +1246,8 @@ public final class ManagedIndexSchema extends IndexSchema {
           if (typeName.equals(destination.getType().getTypeName())) {
             checkDestCopyFieldsIter.remove();
             copyFieldsToRebuild.add(checkDestCopyField);
-            newSchema.copyFieldTargetCounts.remove(destination); // zero out target count
+            // zero out target counts for the destination and its sub-fields; rebuilt below
+            newSchema.removeCopyFieldTargetCount(destination);
           }
         }
         if (perSourceCopyFields.isEmpty()) {

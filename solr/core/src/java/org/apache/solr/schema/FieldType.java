@@ -169,6 +169,16 @@ public abstract class FieldType extends FieldProperties {
    */
   protected void init(IndexSchema schema, Map<String, String> args) {}
 
+  /**
+   * Returns the internal sub-fields derived from the given base field, for field types that
+   * decompose a single logical field into multiple indexed/stored fields (e.g. CurrencyFieldType,
+   * PointType, BBoxField). Only sub-fields present in the schema are returned. The default
+   * implementation returns an empty list.
+   */
+  public List<SchemaField> getSubFields(SchemaField baseField, IndexSchema schema) {
+    return Collections.emptyList();
+  }
+
   public boolean write(IteratorWriter.ItemWriter itemWriter) {
     return false;
   }
