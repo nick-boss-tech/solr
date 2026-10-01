@@ -668,6 +668,15 @@ public class IndexSchema {
     }
     // Make sure all analyzers have resource loaders, even SPI loaded ones
     fieldTypes.values().forEach(this::informResourceLoaderAwareObjectsForFieldType);
+    // SOLR-15357: sub-fields registered during inform() (e.g. BBoxField's) were not present when
+    // copy fields were registered; record them as copy targets now.
+    for (SchemaField dest : new ArrayList<>(copyFieldTargetCounts.keySet())) {
+      for (SchemaField subField : dest.getType().getSubFields(dest, this)) {
+        if (!copyFieldTargetCounts.containsKey(subField)) {
+          copyFieldTargetCounts.put(subField, 1);
+        }
+      }
+    }
   }
 
   /**
@@ -1056,6 +1065,26 @@ public class IndexSchema {
   private void incrementCopyFieldTargetCount(SchemaField dest) {
     copyFieldTargetCounts.put(
         dest, copyFieldTargetCounts.containsKey(dest) ? copyFieldTargetCounts.get(dest) + 1 : 1);
+    // SOLR-15357: sub-fields of a copyField target are targets too; RealTimeGetComponent strips
+    // them from returned documents via isCopyFieldTarget, so record them here as well.
+    for (SchemaField subField : dest.getType().getSubFields(dest, this)) {
+      copyFieldTargetCounts.put(
+          subField,
+          copyFieldTargetCounts.containsKey(subField)
+              ? copyFieldTargetCounts.get(subField) + 1
+              : 1);
+    }
+  }
+
+  /**
+   * Drops the given destination field and its sub-fields from copyFieldTargetCounts. Used when a
+   * field or field type is replaced and the copy fields targeting it are rebuilt afterwards.
+   */
+  protected void removeCopyFieldTargetCount(SchemaField dest) {
+    copyFieldTargetCounts.remove(dest);
+    for (SchemaField subField : dest.getType().getSubFields(dest, this)) {
+      copyFieldTargetCounts.remove(subField);
+    }
   }
 
   private void registerDynamicCopyField(DynamicCopy dcopy) {

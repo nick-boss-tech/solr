@@ -202,6 +202,22 @@ public class CurrencyFieldType extends FieldType implements SchemaAware, Resourc
     return schema.getField(field.getName() + POLY_FIELD_SEPARATOR + fieldSuffixCurrency);
   }
 
+  @Override
+  public List<SchemaField> getSubFields(SchemaField baseField, IndexSchema schema) {
+    List<SchemaField> subFields = new ArrayList<>(2);
+    SchemaField amountField =
+        schema.getFieldOrNull(baseField.getName() + POLY_FIELD_SEPARATOR + fieldSuffixAmountRaw);
+    if (amountField != null) {
+      subFields.add(amountField);
+    }
+    SchemaField currencyField =
+        schema.getFieldOrNull(baseField.getName() + POLY_FIELD_SEPARATOR + fieldSuffixCurrency);
+    if (currencyField != null) {
+      subFields.add(currencyField);
+    }
+    return subFields;
+  }
+
   /**
    * When index schema is informed, get field types for the configured dynamic sub-fields
    *

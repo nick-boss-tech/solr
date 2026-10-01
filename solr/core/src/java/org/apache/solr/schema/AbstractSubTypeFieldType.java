@@ -16,7 +16,10 @@
  */
 package org.apache.solr.schema;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.apache.lucene.search.Query;
 import org.apache.solr.common.SolrException;
@@ -135,5 +138,20 @@ public abstract class AbstractSubTypeFieldType extends FieldType implements Sche
 
   protected SchemaField subField(SchemaField base, int i, IndexSchema schema) {
     return schema.getField(base.getName() + suffixes[i]);
+  }
+
+  @Override
+  public List<SchemaField> getSubFields(SchemaField baseField, IndexSchema schema) {
+    if (suffixes == null) {
+      return Collections.emptyList();
+    }
+    List<SchemaField> subFields = new ArrayList<>(suffixes.length);
+    for (String sfx : suffixes) {
+      SchemaField subField = schema.getFieldOrNull(baseField.getName() + sfx);
+      if (subField != null) {
+        subFields.add(subField);
+      }
+    }
+    return subFields;
   }
 }

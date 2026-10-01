@@ -128,6 +128,26 @@ public class BBoxField extends AbstractSpatialFieldType<BBoxStrategy> implements
   }
 
   @Override
+  public List<SchemaField> getSubFields(SchemaField baseField, IndexSchema schema) {
+    String name = baseField.getName();
+    String[] subFieldSuffixes = {
+      BBoxStrategy.SUFFIX_MINX,
+      BBoxStrategy.SUFFIX_MAXX,
+      BBoxStrategy.SUFFIX_MINY,
+      BBoxStrategy.SUFFIX_MAXY,
+      BBoxStrategy.SUFFIX_XDL
+    };
+    List<SchemaField> subFields = new ArrayList<>(subFieldSuffixes.length);
+    for (String sfx : subFieldSuffixes) {
+      SchemaField subField = schema.getFieldOrNull(name + sfx);
+      if (subField != null) {
+        subFields.add(subField);
+      }
+    }
+    return subFields;
+  }
+
+  @Override
   protected BBoxStrategy newSpatialStrategy(String fieldName) {
     // if it's a dynamic field, we register the sub-fields now.
     FieldType numberType = schema.getFieldTypeByName(numberTypeName);
