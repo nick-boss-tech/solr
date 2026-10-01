@@ -136,7 +136,8 @@ public class FacetFieldMerger extends FacetRequestSortedMerger<FacetField> {
     }
 
     result.add("buckets", resultBuckets);
-    if (missingBucket != null) {
+    // screen out the missing bucket when it doesn't meet mincount, just like term buckets
+    if (missingBucket != null && missingBucket.getCount() >= freq.mincount) {
       result.add("missing", missingBucket.getMergedBucket());
     }
     if (allBuckets != null) {
