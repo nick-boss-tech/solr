@@ -1686,6 +1686,11 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
           }
 
           @Override
+          public boolean exists(int doc) throws IOException {
+            return vals.exists(doc);
+          }
+
+          @Override
           public String toString(int doc) throws IOException {
             return name() + '(' + vals.toString(doc) + ')';
           }
@@ -1733,6 +1738,11 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
           @Override
           public double doubleVal(int doc) throws IOException {
             return func(doc, aVals, bVals);
+          }
+
+          @Override
+          public boolean exists(int doc) throws IOException {
+            return aVals.exists(doc) && bVals.exists(doc);
           }
 
           @Override
