@@ -1031,7 +1031,11 @@ public class QueryComponent extends SearchComponent {
     int failedShardCount = 0;
     int failedShardCountForReRankCutoff = 0;
     NamedList<Object> reRankCutoffByShard = null;
+    long maxElapsedTime = 0;
     for (ShardResponse srsp : sreq.responses) {
+      if (srsp.getSolrResponse() != null) {
+        maxElapsedTime = Math.max(maxElapsedTime, srsp.getSolrResponse().getElapsedTime());
+      }
       SolrDocumentList docs = null;
       NamedList<?> responseHeader = null;
 
@@ -1230,6 +1234,9 @@ public class QueryComponent extends SearchComponent {
     // Add hits for distributed requests
     // https://issues.apache.org/jira/browse/SOLR-3518
     rb.rsp.addToLog("hits", numFound);
+
+    // First phase elapsed time is subtracted from the time allowed for the second phase
+    rb.firstPhaseElapsedTime = (int) maxElapsedTime;
 
     setResultIdsAndResponseDocs(
         rb, shardDocQueue, maxScore, numFound, hitCountIsExact, ss.getOffset());
@@ -1434,6 +1441,19 @@ public class QueryComponent extends SearchComponent {
 
       // we already have the field sort values
       sreq.params.remove(ResponseBuilder.FIELD_SORT_VALUES);
+
+      // The time allowance was consumed by the first phase; propagate only the remainder so
+      // the doc-fetch requests don't time out on already-merged ids. If the budget is
+      // exhausted, drop it: partial results were already flagged in phase one.
+      int origTimeAllowed = sreq.params.getInt(CommonParams.TIME_ALLOWED, -1);
+      if (origTimeAllowed > 0) {
+        int remainingTimeAllowed = origTimeAllowed - rb.firstPhaseElapsedTime;
+        if (remainingTimeAllowed <= 1) {
+          sreq.params.remove(CommonParams.TIME_ALLOWED);
+        } else {
+          sreq.params.set(CommonParams.TIME_ALLOWED, remainingTimeAllowed);
+        }
+      }
 
       if (!rb.rsp.getReturnFields().wantsField(uniqueField.getName())) {
         sreq.params.add(CommonParams.FL, uniqueField.getName());
