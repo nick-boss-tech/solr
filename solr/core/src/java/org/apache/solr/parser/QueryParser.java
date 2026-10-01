@@ -14,6 +14,7 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.Query;
 import org.apache.solr.search.SyntaxError;
+import org.apache.solr.search.PostFilter;
 import org.apache.solr.search.QParser;
 
 import org.apache.lucene.queryparser.charstream.CharStream;
@@ -243,10 +244,18 @@ addClause(clauses, conj, mods, q);
         }
       }
     }
-if (clauses.size() == 1 && clauses.get(0).occur() == BooleanClause.Occur.SHOULD) {
-      Query firstQuery = clauses.get(0).query();
-      if ( ! (firstQuery instanceof RawQuery) || ((RawQuery)firstQuery).getTermCount() == 1) {
-        {if ("" != null) return rawToNormal(firstQuery);}
+if (clauses.size() == 1) {
+      BooleanClause clause = clauses.get(0);
+      Query firstQuery = clause.query();
+      if (firstQuery instanceof PostFilter) {
+        // A lone PostFilter can only be evaluated via the post-filter path; wrapping it in a
+        // BooleanQuery would force Weight-based evaluation, which PostFilters do not support.
+        {if ("" != null) return firstQuery;}
+      }
+      if (clause.occur() == BooleanClause.Occur.SHOULD) {
+        if ( ! (firstQuery instanceof RawQuery) || ((RawQuery)firstQuery).getTermCount() == 1) {
+          {if ("" != null) return rawToNormal(firstQuery);}
+        }
       }
     }
     {if ("" != null) return getBooleanQuery(clauses);}
