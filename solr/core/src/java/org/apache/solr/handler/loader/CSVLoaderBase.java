@@ -146,10 +146,15 @@ public abstract class CSVLoaderBase extends ContentStreamLoader {
     void add(SolrInputDocument doc, int line, int column, String val) {
       CSVParser parser = new CSVParser(new StringReader(val), strategy);
       try {
-        String[] vals = parser.getLine();
-        if (vals != null) {
+        // A value may span multiple records when it contains embedded line breaks
+        // (the outer parse already stripped the quoting), so consume every record.
+        boolean added = false;
+        String[] vals;
+        while ((vals = parser.getLine()) != null) {
           for (String v : vals) base.add(doc, line, column, v);
-        } else {
+          added = true;
+        }
+        if (!added) {
           base.add(doc, line, column, val);
         }
       } catch (IOException e) {
