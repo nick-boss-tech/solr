@@ -486,6 +486,10 @@ public class DistribFileStore implements FileStore {
 
   @Override
   public void delete(String path) {
+    // Remove the ZK entry first: deleteLocal() refuses to delete files that exist in ZK, which is
+    // the normal state for a cluster file. Deleting the shared ZK entry up front lets the guard
+    // pass here and on every node in the fan-out below.
+    deleteZKFileEntry(coreContainer.getZkController().getZkClient(), path);
     deleteLocal(path);
     List<String> nodes = FileStoreUtils.fetchAndShuffleRemoteLiveNodes(coreContainer);
 
