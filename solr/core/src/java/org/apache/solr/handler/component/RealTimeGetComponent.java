@@ -875,19 +875,17 @@ public class RealTimeGetComponent extends SearchComponent {
     for (String fname : doc.getFieldNames()) {
       boolean fieldArrayListCreated = false;
       SchemaField sf = schema.getFieldOrNull(fname);
+      boolean dropNonChildValues = false;
       if (sf != null) {
         if ((!sf.hasDocValues() && !sf.stored()) || schema.isCopyFieldTarget(sf)) {
-          // Never drop nested child documents: they are not real schema fields, so a
-          // catch-all ignored dynamic field must not silently delete them (SOLR-15018).
-          Object fieldValue = doc.getFieldValue(fname);
-          boolean hasChildDocs =
-              fieldValue instanceof SolrDocument
-                  || (fieldValue instanceof Collection<?>
-                      && ((Collection<?>) fieldValue).stream().anyMatch(SolrDocument.class::isInstance));
-          if (!hasChildDocs) continue;
+          // Nested child documents are not real schema fields, so a catch-all ignored
+          // dynamic field must not silently delete them (SOLR-15018). Filter per
+          // element instead: keep child documents, drop the plain values.
+          dropNonChildValues = true;
         }
       }
       for (Object val : doc.getFieldValues(fname)) {
+        if (dropNonChildValues && !(val instanceof SolrDocument)) continue;
         if (val instanceof IndexableField f) {
           // materialize:
           if (sf != null) {
