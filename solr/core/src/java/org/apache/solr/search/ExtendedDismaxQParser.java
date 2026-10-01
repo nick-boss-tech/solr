@@ -1416,6 +1416,14 @@ public class ExtendedDismaxQParser extends QParser {
       List<Query> lst = new ArrayList<>(4);
 
       for (String f : a.fields.keySet()) {
+        // SOLR-14913: skip alias fields missing from the schema. The unknownField() throw
+        // below targets fields explicitly named in the user query; a bad field listed in
+        // an alias definition must not abort the parse into the escape+re-parse fallback.
+        if (aliases.get(f) == null
+            && schema.getFieldTypeNoEx(f) == null
+            && MagicFieldName.get(f) == null) {
+          continue;
+        }
         this.field = f;
         Query sub = getAliasedMultiTermQuery();
         if (sub != null) {
