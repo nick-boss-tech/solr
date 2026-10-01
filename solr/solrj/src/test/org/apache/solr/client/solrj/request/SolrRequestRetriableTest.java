@@ -26,6 +26,7 @@ import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
+import org.apache.solr.common.params.UpdateParams;
 import org.junit.Test;
 
 /** SOLR-18341: each SolrRequest answers whether a failed attempt may be replayed. */
@@ -74,6 +75,16 @@ public class SolrRequestRetriableTest extends SolrTestCase {
     UpdateRequest commit = new UpdateRequest();
     commit.setAction(AbstractUpdateRequest.ACTION.COMMIT, false, false);
     assertTrue(commit.isRetriable());
+  }
+
+  @Test
+  public void overwriteFalseAddsAreNotRetriable() {
+    assertFalse(new UpdateRequest().add(new SolrInputDocument("id", "1"), false).isRetriable());
+
+    UpdateRequest request = new UpdateRequest();
+    request.setParam(UpdateParams.OVERWRITE, "false");
+    request.add(new SolrInputDocument("id", "2"));
+    assertFalse(request.isRetriable());
   }
 
   @Test

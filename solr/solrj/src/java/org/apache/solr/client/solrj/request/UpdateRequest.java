@@ -403,24 +403,31 @@ public class UpdateRequest extends AbstractUpdateRequest {
   }
 
   /**
-   * Full document adds, deletes, commits, and idempotent atomic operators may be replayed. {@code
-   * inc} and scalar {@code add} may not. A document iterator is exhausted after the first attempt.
-   * Optimistic concurrency ({@code _version_ > 0}) is retriable because a successful first attempt
-   * fails the replay with 409.
+   * Full document adds with overwrite enabled, deletes, commits, and idempotent atomic operators
+   * may be replayed. {@code inc}, scalar {@code add}, and {@code overwrite=false} may not. A
+   * document iterator is exhausted after the first attempt. Optimistic concurrency ({@code
+   * _version_ > 0}) is retriable because a successful first attempt fails the replay with 409.
    */
   @Override
   public boolean isRetriable() {
     if (docIterator != null) {
       return false;
     }
+    if (!getParams().getBool(UpdateParams.OVERWRITE, true)) {
+      return false;
+    }
     if (documents != null) {
-      for (SolrInputDocument doc : documents.keySet()) {
-        if (!isDocumentRetriable(doc)) {
+      for (Entry<SolrInputDocument, Map<String, Object>> entry : documents.entrySet()) {
+        if (isOverwriteDisabled(entry.getValue()) || !isDocumentRetriable(entry.getKey())) {
           return false;
         }
       }
     }
     return true;
+  }
+
+  private static boolean isOverwriteDisabled(Map<String, Object> params) {
+    return params != null && Boolean.FALSE.equals(params.get(OVERWRITE));
   }
 
   private static boolean isDocumentRetriable(SolrInputDocument doc) {

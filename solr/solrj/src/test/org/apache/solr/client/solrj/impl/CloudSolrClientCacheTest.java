@@ -44,8 +44,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import org.apache.solr.SolrTestCaseJ4;
-import org.apache.solr.client.solrj.RequestNotSentException;
 import org.apache.solr.client.solrj.RemoteSolrException;
+import org.apache.solr.client.solrj.RequestNotSentException;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
@@ -204,9 +204,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
               protected LBSolrClient createOrGetLbClient(HttpSolrClient myClient) {
                 return mockLbclient;
               }
-            }
-            .sendUpdatesToAnyReplica()
-            .build()) {
+            }.sendUpdatesToAnyReplica().build()) {
       livenodes.addAll(Set.of("192.168.1.108:7574_solr", "192.168.1.108:8983_solr"));
       refs.put(collName, new ClusterState.CollectionRef(loadCollection(collName, 1)));
 
@@ -260,8 +258,13 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
           "request",
           o -> {
             if (lbhttpRequestCount.incrementAndGet() == 2) {
-              return new RequestNotSentException(
-                  "request was not sent", new IOException("connection failed"));
+              NamedList<Throwable> shardFailures = new NamedList<>();
+              shardFailures.add(
+                  "unsent-shard",
+                  new RequestNotSentException(
+                      "request was not sent", new IOException("connection failed")));
+              return new CloudSolrClient.RouteException(
+                  SolrException.ErrorCode.SERVICE_UNAVAILABLE, shardFailures, Map.of());
             }
             return new NamedList<>();
           });
