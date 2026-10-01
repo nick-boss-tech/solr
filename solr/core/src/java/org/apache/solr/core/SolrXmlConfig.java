@@ -681,16 +681,26 @@ public class SolrXmlConfig {
               + "' found in solr.xml");
     }
 
-    try {
-      plugins.forEach(
-          p -> {
-            loader.findClass(p.className, ClusterSingleton.class);
-          });
-    } catch (ClassCastException e) {
-      throw new SolrException(
-          SolrException.ErrorCode.SERVER_ERROR,
-          "clusterSingleton plugins must implement the interface "
-              + ClusterSingleton.class.getName());
+    for (PluginInfo p : plugins) {
+      try {
+        loader.findClass(p.className, ClusterSingleton.class);
+      } catch (ClassCastException e) {
+        throw new SolrException(
+            SolrException.ErrorCode.SERVER_ERROR,
+            "clusterSingleton plugins must implement the interface "
+                + ClusterSingleton.class.getName());
+      } catch (SolrException e) {
+        if (e.getCause() instanceof ClassNotFoundException) {
+          // The class may come from a module whose class loader is not available yet at solr.xml
+          // parse time; skip the early check and let ClusterSingletons validate with instanceof
+          // when the plugin is instantiated.
+          log.debug(
+              "Skipping early ClusterSingleton interface check for unloadable class '{}'",
+              p.className);
+          continue;
+        }
+        throw e;
+      }
     }
 
     return plugins.toArray(new PluginInfo[0]);
