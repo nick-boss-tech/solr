@@ -48,6 +48,7 @@ public class BucketBasedJsonFacet {
   private long beforeFirstBucketCount = UNSET_FLAG;
   private long afterLastBucketCount = UNSET_FLAG;
   private long betweenAllBucketsCount = UNSET_FLAG;
+  private long missingBucketCount = UNSET_FLAG;
 
   public BucketBasedJsonFacet(NamedList<?> bucketBasedFacet) {
     for (Map.Entry<String, ?> entry : bucketBasedFacet) {
@@ -70,6 +71,8 @@ public class BucketBasedJsonFacet {
         afterLastBucketCount = ((Number) ((NamedList) value).get("count")).longValue();
       } else if ("between".equals(key)) {
         betweenAllBucketsCount = ((Number) ((NamedList) value).get("count")).longValue();
+      } else if ("missing".equals(key)) {
+        missingBucketCount = ((Number) ((NamedList) value).get("count")).longValue();
       } else {
         // We don't recognize the key.  Possible JSON faceting schema has changed without updating
         // client. Silently ignore for now, though we may want to consider throwing an error if this
@@ -137,5 +140,15 @@ public class BucketBasedJsonFacet {
    */
   public long getBetween() {
     return betweenAllBucketsCount;
+  }
+
+  /**
+   * The count of all records missing a value for the faceted field.
+   *
+   * <p>This value is only present if the user has specifically requested it with the {@code
+   * missing} option. {@link #UNSET_FLAG} is returned if this is not the case.
+   */
+  public long getMissingCount() {
+    return missingBucketCount;
   }
 }
