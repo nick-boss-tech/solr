@@ -43,6 +43,7 @@ import org.apache.solr.util.DOMConfigNode;
 import org.apache.solr.util.DataConfigNode;
 import org.apache.solr.util.SystemIdResolver;
 import org.apache.solr.util.plugin.NamedListInitializedPlugin;
+import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -140,11 +141,16 @@ public abstract class IndexSchemaFactory implements NamedListInitializedPlugin {
     try (InputStream is =
         (schemaInputStream == null ? loader.openResource(name) : schemaInputStream)) {
       ConfigNode node = getParsedSchema(is, loader, name);
-      int version =
+      Stat stat =
           is instanceof ZkSolrResourceLoader.ZkByteArrayInputStream
-              ? ((ZkSolrResourceLoader.ZkByteArrayInputStream) is).getStat().getVersion()
-              : 0;
-      return new VersionedConfig(version, node);
+              ? ((ZkSolrResourceLoader.ZkByteArrayInputStream) is).getStat()
+              : null;
+      int version = stat == null ? 0 : stat.getVersion();
+      // czxid identifies the znode incarnation: after delete+recreate the data version can be 0
+      // again, but czxid always increases, so the cache below can tell the new znode apart from
+      // the deleted one (SOLR-15674).
+      long czxid = stat == null ? -1 : stat.getCzxid();
+      return new VersionedConfig(version, czxid, node);
     } catch (Exception e) {
       throw new SolrException(ErrorCode.SERVER_ERROR, "Error fetching schema", e);
     }
@@ -175,11 +181,17 @@ public abstract class IndexSchemaFactory implements NamedListInitializedPlugin {
           (Map<String, VersionedConfig>)
               objectCache.computeIfAbsent(
                   ConfigSetService.ConfigResource.class.getName(), k -> new ConcurrentHashMap<>());
-      Pair<String, Integer> res = zkLoader.getZkResourceInfo(name);
+      Pair<String, Stat> res = zkLoader.getZkResourceInfo(name);
       if (res == null) return cfgLoader.get();
       VersionedConfig result = null;
       result = confCache.computeIfAbsent(res.first(), k -> cfgLoader.get());
-      if (result.version == res.second()) {
+      Stat stat = res.second();
+      // A deleted-then-recreated znode can have the same data version again (e.g. 0), so the
+      // version alone cannot prove freshness; the czxid always increases across recreates and
+      // tells the new znode apart from the deleted one (SOLR-15674). A czxid of -1 means the
+      // cached entry predates czxid tracking, so fall back to the version-only check.
+      boolean sameZnode = result.czxid == -1 || result.czxid == stat.getCzxid();
+      if (result.version == stat.getVersion() && sameZnode) {
         return result;
       } else {
         confCache.remove(res.first());
@@ -202,10 +214,16 @@ public abstract class IndexSchemaFactory implements NamedListInitializedPlugin {
 
   public static class VersionedConfig {
     public final int version;
+    public final long czxid;
     public final ConfigNode data;
 
     public VersionedConfig(int version, ConfigNode data) {
+      this(version, -1, data);
+    }
+
+    public VersionedConfig(int version, long czxid, ConfigNode data) {
       this.version = version;
+      this.czxid = czxid;
       this.data = data;
     }
   }
