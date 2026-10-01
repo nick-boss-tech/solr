@@ -45,6 +45,9 @@ class RequestApplyUpdatesOp implements CoreAdminHandler.CoreAdminOp {
       Future<UpdateLog.RecoveryInfo> future = updateLog.applyBufferedUpdates();
       if (future == null) {
         CoreAdminOperation.log().info("No buffered updates available. core=" + cname);
+        // Publish ACTIVE here too so the ending replica state does not depend on
+        // whether there were buffered updates (SOLR-14098).
+        coreContainer.getZkController().publish(core.getCoreDescriptor(), Replica.State.ACTIVE);
         it.rsp.add("core", cname);
         it.rsp.add("status", "EMPTY_BUFFER");
         return;
