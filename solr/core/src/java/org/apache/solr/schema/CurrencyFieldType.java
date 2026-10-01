@@ -179,9 +179,9 @@ public class CurrencyFieldType extends FieldType implements SchemaAware, Resourc
 
     List<IndexableField> f = new ArrayList<>();
     SchemaField amountField = getAmountField(field);
-    f.add(amountField.createField(String.valueOf(value.getAmount())));
+    f.addAll(amountField.createFields(String.valueOf(value.getAmount())));
     SchemaField currencyField = getCurrencyField(field);
-    f.add(currencyField.createField(value.getCurrencyCode()));
+    f.addAll(currencyField.createFields(value.getCurrencyCode()));
 
     if (field.stored()) {
       String storedValue = externalVal.toString().trim();
