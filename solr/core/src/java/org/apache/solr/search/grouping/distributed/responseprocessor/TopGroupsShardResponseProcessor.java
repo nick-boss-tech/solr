@@ -130,7 +130,7 @@ public class TopGroupsShardResponseProcessor implements ShardResponseProcessor {
       Map<String, ?> result =
           serializer.transformToNative(
               secondPhaseResult, groupSort, withinGroupSort, srsp.getShard());
-      int numFound = 0;
+      long numFound = 0;
       float maxScore = Float.NaN;
       for (Map.Entry<String, List<TopGroups<BytesRef>>> entry : commandTopGroups.entrySet()) {
         TopGroups<BytesRef> topGroups = (TopGroups<BytesRef>) result.get(entry.getKey());
@@ -196,7 +196,7 @@ public class TopGroupsShardResponseProcessor implements ShardResponseProcessor {
     for (Map.Entry<String, List<QueryCommandResult>> entry : commandTopDocs.entrySet()) {
       List<QueryCommandResult> queryCommandResults = entry.getValue();
       List<TopDocs> topDocs = new ArrayList<>(queryCommandResults.size());
-      int mergedMatches = 0;
+      long mergedMatches = 0;
       float maxScore = Float.NaN;
       for (QueryCommandResult queryCommandResult : queryCommandResults) {
         TopDocs thisTopDocs = queryCommandResult.getTopDocs();

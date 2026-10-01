@@ -100,7 +100,8 @@ public class TopGroupsResultTransformer
       Integer totalGroupedHitCount = (Integer) commandResult.get("totalGroupedHitCount");
       Number totalHits = (Number) commandResult.get("totalHits"); // previously Integer now Long
       if (totalHits != null) {
-        Integer matches = (Integer) commandResult.get("matches");
+        // previously Integer now Long
+        long matches = ((Number) commandResult.get("matches")).longValue();
         Float maxScore = (Float) commandResult.get("maxScore");
         if (maxScore == null) {
           maxScore = Float.NaN;

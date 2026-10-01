@@ -1337,8 +1337,8 @@ public class TestDistributedGrouping extends BaseDistributedSearchTestCase {
     QueryResponse rsp = client.query(params);
     NamedList<?> nl = (NamedList<?>) rsp.getResponse().get("grouped");
     nl = (NamedList<?>) nl.getVal(0);
-    int matches = (Integer) nl.getVal(0);
-    int groupCount = (Integer) nl.get("ngroups");
+    int matches = ((Number) nl.getVal(0)).intValue();
+    int groupCount = ((Number) nl.get("ngroups")).intValue();
     assertEquals(100 * shardsArr.length, matches);
     assertEquals(shardsArr.length, groupCount);
 
@@ -1607,7 +1607,7 @@ public class TestDistributedGrouping extends BaseDistributedSearchTestCase {
       }
       nl = (NamedList<?>) rsp.getResponse().get("grouped");
       nl = (NamedList<?>) nl.get(i1);
-      assertEquals(rsp.toString(), 6, nl.get("matches"));
+      assertEquals(rsp.toString(), 6L, nl.get("matches"));
       assertEquals(rsp.toString(), 2, ((List<NamedList<?>>) nl.get("groups")).size());
       nl = ((List<NamedList<?>>) nl.get("groups")).get(0);
       assertEquals(rsp.toString(), 232, nl.get("groupValue"));
@@ -1647,7 +1647,7 @@ public class TestDistributedGrouping extends BaseDistributedSearchTestCase {
             b1dv + " asc, id asc");
     nl = (NamedList<?>) rsp.getResponse().get("grouped");
     nl = (NamedList<?>) nl.get(b1dv);
-    assertEquals(rsp.toString(), 9, nl.get("matches"));
+    assertEquals(rsp.toString(), 9L, nl.get("matches"));
     assertEquals(rsp.toString(), 2, ((List<NamedList<?>>) nl.get("groups")).size());
     nl = ((List<NamedList<?>>) nl.get("groups")).get(0);
     assertEquals(rsp.toString(), false, nl.get("groupValue"));

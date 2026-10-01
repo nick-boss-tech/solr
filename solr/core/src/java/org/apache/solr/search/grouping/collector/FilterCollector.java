@@ -31,7 +31,7 @@ import org.apache.solr.search.DocSet;
 public class FilterCollector extends org.apache.lucene.search.FilterCollector {
 
   private final DocSet filter;
-  private int matches;
+  private long matches;
 
   public FilterCollector(DocSet filter, Collector delegate) {
     super(delegate);
@@ -52,7 +52,7 @@ public class FilterCollector extends org.apache.lucene.search.FilterCollector {
     };
   }
 
-  public int getMatches() {
+  public long getMatches() {
     return matches;
   }
 

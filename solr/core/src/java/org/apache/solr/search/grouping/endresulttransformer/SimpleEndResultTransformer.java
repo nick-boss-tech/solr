@@ -47,7 +47,7 @@ public class SimpleEndResultTransformer implements EndResultTransformer {
         NamedList<Object> command = new SimpleOrderedMap<>();
         command.add("matches", rb.totalHitCount);
         if (topGroups.totalGroupCount != null) {
-          command.add("ngroups", topGroups.totalGroupCount);
+          command.add("ngroups", topGroups.totalGroupCount.longValue());
         }
         SolrDocumentList docList = new SolrDocumentList();
         docList.setStart(rb.getGroupingSpec().getGroupSortSpec().getOffset());

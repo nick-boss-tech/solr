@@ -59,7 +59,7 @@ public class QueryResponseSectionParityTest extends SolrTestCase {
     assertEquals(3, r.getFacetPivot().get("cat").get(0).getCount());
   }
 
-  /** grouping: matches / ngroups are Integer casts (QueryResponse extractGroupedInfo). */
+  /** grouping: matches / ngroups are long values (QueryResponse extractGroupedInfo). */
   @Test
   public void testGrouping() throws Exception {
     String json =
@@ -74,7 +74,7 @@ public class QueryResponseSectionParityTest extends SolrTestCase {
     GroupResponse gr = r.getGroupResponse();
     assertNotNull("groupResponse", gr);
     assertEquals(3, gr.getValues().get(0).getMatches());
-    assertEquals(Integer.valueOf(2), gr.getValues().get(0).getNGroups());
+    assertEquals(Long.valueOf(2), gr.getValues().get(0).getNGroups());
   }
 
   /** interval facets: count is an Integer cast (QueryResponse extractFacetInfo). */
