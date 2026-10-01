@@ -1481,6 +1481,13 @@ public class QueryComponent extends SearchComponent {
                 (NamedList<Object>) rb.rsp.getValues().get(ShardParams.SHARDS_INFO);
             @SuppressWarnings("unchecked")
             SimpleOrderedMap<Object> nl = (SimpleOrderedMap<Object>) shardInfo.get(srsp.getShard());
+            if (nl == null) {
+              // No info was recorded for this shard (e.g. its main response was skipped, or its
+              // name was recorded under a generated key); create the entry so the error below
+              // is visible in shards.info instead of throwing NullPointerException.
+              nl = new SimpleOrderedMap<>();
+              shardInfo.add(srsp.getShard(), nl);
+            }
             if (nl.get("error") == null) {
               // Add the error to the shards info section if it wasn't added before
               Throwable t = srsp.getException();
