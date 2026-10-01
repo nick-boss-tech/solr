@@ -63,6 +63,9 @@ import org.apache.solr.cloud.ZkController;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.cloud.DocCollection;
+import org.apache.solr.common.cloud.Replica;
+import org.apache.solr.common.cloud.Slice;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.CursorMarkParams;
 import org.apache.solr.common.params.GroupParams;
@@ -968,6 +971,39 @@ public class QueryComponent extends SearchComponent {
     };
   }
 
+  private static DocCollection getRequestCollection(ResponseBuilder rb) {
+    ZkController zkController = rb.req.getCoreContainer().getZkController();
+    if (zkController == null) {
+      return null;
+    }
+    String collectionName = rb.req.getCore().getCoreDescriptor().getCollectionName();
+    return collectionName == null
+        ? null
+        : zkController.getClusterState().getCollection(collectionName);
+  }
+
+  private static String resolveShardName(
+      DocCollection collection, Map<String, String> cache, String shardUrl) {
+    if (collection == null || shardUrl == null || cache.containsKey(shardUrl)) {
+      return cache.get(shardUrl);
+    }
+    String resolved = null;
+    String coreName = shardUrl.substring(shardUrl.lastIndexOf('/') + 1);
+    for (Slice slice : collection.getSlices()) {
+      for (Replica replica : slice.getReplicas()) {
+        if (coreName.equals(replica.getCoreName()) || shardUrl.equals(replica.getCoreUrl())) {
+          resolved = slice.getName();
+          break;
+        }
+      }
+      if (resolved != null) {
+        break;
+      }
+    }
+    cache.put(shardUrl, resolved);
+    return resolved;
+  }
+
   protected void mergeIds(ResponseBuilder rb, ShardRequest sreq) {
     List<MergeStrategy> mergeStrategies = rb.getMergeStrategies();
     if (mergeStrategies != null) {
@@ -1031,6 +1067,10 @@ public class QueryComponent extends SearchComponent {
     int failedShardCount = 0;
     int failedShardCountForReRankCutoff = 0;
     NamedList<Object> reRankCutoffByShard = null;
+    // Resolve replica URLs to shard names once per merge so tie-breaking in
+    // ShardFieldSortedHitQueue is deterministic across requests.
+    DocCollection collection = getRequestCollection(rb);
+    Map<String, String> shardNameCache = new HashMap<>();
     for (ShardResponse srsp : sreq.responses) {
       SolrDocumentList docs = null;
       NamedList<?> responseHeader = null;
@@ -1206,6 +1246,7 @@ public class QueryComponent extends SearchComponent {
         ShardDoc shardDoc = new ShardDoc();
         shardDoc.id = id;
         shardDoc.shard = srsp.getShard();
+        shardDoc.shardName = resolveShardName(collection, shardNameCache, shardDoc.shard);
         shardDoc.orderInShard = i;
         Object scoreObj = doc.getFieldValue(SolrReturnFields.SCORE);
         if (scoreObj != null) {

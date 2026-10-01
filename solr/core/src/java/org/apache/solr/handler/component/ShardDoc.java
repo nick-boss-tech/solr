@@ -27,6 +27,10 @@ import org.apache.solr.search.SolrReturnFields;
 public class ShardDoc extends FieldDoc {
   public String shard;
   public String shardAddress; // TODO
+  public String shardName;
+  // the SolrCloud shard name the doc's shard belongs to, resolved from the replica
+  // URL in shard; null when unavailable (e.g. non-cloud requests). Used for
+  // deterministic tie-breaking in ShardFieldSortedHitQueue.
 
   public int orderInShard;
   // the position of this doc within the shard... this can be used

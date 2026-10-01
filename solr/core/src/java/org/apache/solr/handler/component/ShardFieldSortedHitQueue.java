@@ -104,10 +104,17 @@ public class ShardFieldSortedHitQueue extends PriorityQueue<ShardDoc> {
     // solve tiebreaks by comparing shards (similar to using docid)
     // smaller docid's beat larger ids, so reverse the natural ordering
     if (c == 0) {
-      c = -docA.shard.compareTo(docB.shard);
+      // Prefer the resolved SolrCloud shard name: the shard address is a replica
+      // URL containing the node, which varies per request and makes ordering
+      // non-deterministic. Falls back to the shard address when unresolved.
+      c = -tieBreakShard(docA).compareTo(tieBreakShard(docB));
     }
 
     return c < 0;
+  }
+
+  private static String tieBreakShard(ShardDoc doc) {
+    return doc.shardName != null ? doc.shardName : doc.shard;
   }
 
   Comparator<ShardDoc> getCachedComparator(SortField sortField, IndexSearcher searcher) {
