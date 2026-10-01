@@ -132,6 +132,7 @@ import org.apache.solr.response.transform.TransformerFactory;
 import org.apache.solr.rest.ManagedResourceStorage;
 import org.apache.solr.rest.ManagedResourceStorage.StorageIO;
 import org.apache.solr.rest.RestManager;
+import org.apache.solr.schema.DenseVectorField;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.ManagedIndexSchema;
@@ -1599,7 +1600,20 @@ public class SolrCore implements SolrInfoBean, Closeable {
           log.error(msg);
           throw new SolrException(ErrorCode.SERVER_ERROR, msg);
         }
+        if (ft instanceof DenseVectorField vectorField && vectorField.hasNonDefaultKnnOptions()) {
+          String msg =
+              "FieldType '"
+                  + ft.getTypeName()
+                  + "' is configured with KNN vector options, but the codec does not support them: "
+                  + factory.getClass();
+          log.error(msg);
+          throw new SolrException(ErrorCode.SERVER_ERROR, msg);
+        }
       }
+    }
+    if (factory instanceof SchemaCodecFactory schemaCodecFactory) {
+      // fail fast on invalid KNN vector options instead of waiting for the first segment flush
+      schemaCodecFactory.validateKnnVectorsOptions(schema);
     }
     return factory.getCodec();
   }

@@ -36,6 +36,7 @@ import org.apache.solr.common.SolrException.ErrorCode;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.schema.DenseVectorField;
 import org.apache.solr.schema.FieldType;
+import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.util.plugin.SolrCoreAware;
 import org.slf4j.Logger;
@@ -127,18 +128,34 @@ public class SchemaCodecFactory extends CodecFactory implements SolrCoreAware {
             final SchemaField schemaField = core.getLatestSchema().getFieldOrNull(field);
             FieldType fieldType = (schemaField == null ? null : schemaField.getType());
             if (fieldType instanceof DenseVectorField vectorField) {
-              final String knnAlgorithm = vectorField.getKnnAlgorithm();
-              if (!DenseVectorField.HNSW_ALGORITHM.equals(knnAlgorithm)
-                  && !DenseVectorField.FLAT_ALGORITHM.equals(knnAlgorithm)) {
-                throw new SolrException(
-                    ErrorCode.SERVER_ERROR, knnAlgorithm + " KNN algorithm is not supported");
-              }
+              validateKnnAlgorithm(vectorField.getKnnAlgorithm());
               return new SolrDelegatingKnnVectorsFormat(
                   vectorField.buildKnnVectorsFormat(), vectorField.getDimension());
             }
             return super.getKnnVectorsFormatForField(field);
           }
         };
+  }
+
+  /**
+   * Eagerly validates the KNN vector options of every {@link DenseVectorField} in the schema, so
+   * misconfigured options fail at core init instead of lazily at first segment flush.
+   */
+  public void validateKnnVectorsOptions(IndexSchema schema) {
+    for (FieldType fieldType : schema.getFieldTypes().values()) {
+      if (fieldType instanceof DenseVectorField vectorField) {
+        validateKnnAlgorithm(vectorField.getKnnAlgorithm());
+      }
+    }
+  }
+
+  /** Throws {@link SolrException} if the KNN algorithm is not supported by this factory. */
+  static void validateKnnAlgorithm(String knnAlgorithm) {
+    if (!DenseVectorField.HNSW_ALGORITHM.equals(knnAlgorithm)
+        && !DenseVectorField.FLAT_ALGORITHM.equals(knnAlgorithm)) {
+      throw new SolrException(
+          ErrorCode.SERVER_ERROR, knnAlgorithm + " KNN algorithm is not supported");
+    }
   }
 
   @Override

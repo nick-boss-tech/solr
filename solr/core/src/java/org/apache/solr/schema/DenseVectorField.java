@@ -266,6 +266,25 @@ public class DenseVectorField extends FloatPointField {
     return knnAlgorithm;
   }
 
+  /**
+   * Returns true if any KNN vector option is configured to a non-default value. Such options are
+   * only honored by {@code SchemaCodecFactory}; with any other codec factory they are silently
+   * ignored.
+   */
+  public boolean hasNonDefaultKnnOptions() {
+    return !DEFAULT_KNN_ALGORITHM.equals(knnAlgorithm)
+        || vectorEncoding != DEFAULT_VECTOR_ENCODING
+        || similarityFunction != DEFAULT_SIMILARITY
+        || hnswM != DEFAULT_MAX_CONN
+        || hnswEfConstruction != DEFAULT_BEAM_WIDTH
+        || cuvsWriterThreads != DEFAULT_CUVS_WRITER_THREADS
+        || cuvsIntGraphDegree != DEFAULT_CUVS_INT_GRAPH_DEGREE
+        || cuvsGraphDegree != DEFAULT_CUVS_GRAPH_DEGREE
+        || cuvsHnswLayers != DEFAULT_CUVS_HNSW_LAYERS
+        || cuvsHnswM != DEFAULT_CUVS_HNSW_MAX_CONNECTIONS
+        || cuvsHnswEfConstruction != DEFAULT_CUVS_HNSW_EF_CONSTRUCTION;
+  }
+
   public Integer getHnswM() {
     return hnswM;
   }
