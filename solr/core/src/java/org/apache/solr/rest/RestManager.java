@@ -339,10 +339,10 @@ public class RestManager {
             managedResource.doGet(this, childId);
             break;
           case "PUT":
-            managedResource.doPut(this, parseJsonFromRequestBody(req));
+            managedResource.doPut(this, parseJsonFromRequestBody(req), childId);
             break;
           case "POST":
-            managedResource.doPost(this, parseJsonFromRequestBody(req));
+            managedResource.doPost(this, parseJsonFromRequestBody(req), childId);
             break;
           case "DELETE":
             doDelete();

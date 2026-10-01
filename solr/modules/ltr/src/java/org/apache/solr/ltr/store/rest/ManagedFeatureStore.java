@@ -159,6 +159,39 @@ public class ManagedFeatureStore extends ManagedResource
     storeManagedData(applyUpdatesToManagedData(null));
   }
 
+  @Override
+  public synchronized void doPut(BaseSolrResource endpoint, Object json, String childId) {
+    super.doPut(endpoint, withDefaultStore(json, childId));
+  }
+
+  /**
+   * Defaults the target feature store to the child id from the request URL (e.g. PUT
+   * /schema/feature-store/store1) for feature maps that carry no explicit "store" attribute. An
+   * explicit "store" attribute keeps precedence, so existing usage is unchanged.
+   */
+  @SuppressWarnings("unchecked")
+  private static Object withDefaultStore(Object json, String childId) {
+    if (childId == null) {
+      return json;
+    }
+    if (json instanceof List) {
+      for (Object e : (List<Object>) json) {
+        withDefaultStore(e, childId);
+      }
+    } else if (json instanceof Map) {
+      Map<String, Object> map = (Map<String, Object>) json;
+      if (map.containsKey(INIT_ARGS_JSON_FIELD)
+          || map.containsKey(MANAGED_JSON_LIST_FIELD)
+          || map.containsKey(MANAGED_JSON_MAP_FIELD)) {
+        withDefaultStore(map.get(MANAGED_JSON_LIST_FIELD), childId);
+        withDefaultStore(map.get(MANAGED_JSON_MAP_FIELD), childId);
+      } else {
+        map.putIfAbsent(FEATURE_STORE_NAME_KEY, childId);
+      }
+    }
+    return json;
+  }
+
   /**
    * Called to retrieve a named part (the given childId) of the resource at the given endpoint.
    * Note: since we have a unique child feature store we ignore the childId.

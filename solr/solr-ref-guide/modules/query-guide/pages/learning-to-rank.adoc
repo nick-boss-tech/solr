@@ -291,6 +291,8 @@ To upload features in a `/path/myFeatures.json` file, please run:
 curl -XPUT 'http://localhost:8983/solr/techproducts/schema/feature-store' --data-binary "@/path/myFeatures.json" -H 'Content-type:application/json'
 ----
 
+A `PUT` to `/schema/feature-store/<storeName>` targets that store directly for any features in the request body that do not specify a `store` attribute; an explicit `store` attribute in the body takes precedence.
+
 To view the features you just uploaded please open the following URL in a browser:
 
 [source,text]

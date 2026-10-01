@@ -343,6 +343,24 @@ public abstract class ManagedResource {
     doPut(endpoint, json);
   }
 
+  /**
+   * POST variant that also receives the child id when the request URL addresses a child resource.
+   * The default implementation delegates to {@link #doPut(BaseSolrResource,Object,String)}.
+   */
+  public void doPost(BaseSolrResource endpoint, Object json, String childId) {
+    doPut(endpoint, json, childId);
+  }
+
+  /**
+   * PUT variant that also receives the child id when the request URL addresses a child resource.
+   * The default implementation ignores the child id and delegates to {@link
+   * #doPut(BaseSolrResource,Object)}; resources implementing {@link ChildResourceSupport} may
+   * override this to honor it.
+   */
+  public synchronized void doPut(BaseSolrResource endpoint, Object json, String childId) {
+    doPut(endpoint, json);
+  }
+
   /** Applies changes to initArgs or managed data. */
   @SuppressWarnings("unchecked")
   public synchronized void doPut(BaseSolrResource endpoint, Object json) {
