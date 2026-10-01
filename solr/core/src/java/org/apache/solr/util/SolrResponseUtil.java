@@ -52,7 +52,7 @@ public class SolrResponseUtil {
                     SolrQueryResponse.RESPONSE_HEADER_PARTIAL_RESULTS_KEY))) {
           return null;
         } else {
-          log.warn("corrupted response on {} : {}", srsp.getShardRequest(), solrResponse);
+          log.warn("corrupted response on {} : {}", srsp.getNodeName(), solrResponse);
           throw new SolrException(
               SolrException.ErrorCode.SERVER_ERROR,
               shardResponseKey
