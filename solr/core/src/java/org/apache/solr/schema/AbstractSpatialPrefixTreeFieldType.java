@@ -146,24 +146,28 @@ public abstract class AbstractSpatialPrefixTreeFieldType<T extends PrefixTreeStr
   public void checkSchemaField(final SchemaField field) {
     super.checkSchemaField(field);
 
-    if (!field.omitNorms()) {
-      final String message =
-          String.format(
-              Locale.ROOT,
-              "%s of type %s is incompatible with omitNorms=false; hardcoded "
-                  + "behavior is omitNorms=true.  Remove specification in schema",
-              field.getName(),
-              getClass().getSimpleName());
-      throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, message);
-    }
-    if (field.indexOptions() != IndexOptions.DOCS) {
-      final String message =
-          String.format(
-              Locale.ROOT,
-              "%s of type %s is incompatible with termFreq or position storage.  Remove specification in schema.",
-              field.getName(),
-              getClass().getSimpleName());
-      throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, message);
+    // Norms and index options only exist on indexed fields; a non-indexed (e.g. stored-only or
+    // docValues-only) field trivially satisfies these constraints (SOLR-15945).
+    if (field.indexed()) {
+      if (!field.omitNorms()) {
+        final String message =
+            String.format(
+                Locale.ROOT,
+                "%s of type %s is incompatible with omitNorms=false; hardcoded "
+                    + "behavior is omitNorms=true.  Remove specification in schema",
+                field.getName(),
+                getClass().getSimpleName());
+        throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, message);
+      }
+      if (field.indexOptions() != IndexOptions.DOCS) {
+        final String message =
+            String.format(
+                Locale.ROOT,
+                "%s of type %s is incompatible with termFreq or position storage.  Remove specification in schema.",
+                field.getName(),
+                getClass().getSimpleName());
+        throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, message);
+      }
     }
   }
 
