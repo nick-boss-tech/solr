@@ -116,8 +116,8 @@ public class CreateAliasCmd extends AliasCmd {
       String aliasName,
       ZkStateReader zkStateReader)
       throws Exception {
-    // Validate we got a basic minimum
-    if (!message.getProperties().keySet().containsAll(RoutedAlias.MINIMAL_REQUIRED_PARAMS)) {
+    // A router type is required up front; without it fromProps cannot determine the alias type.
+    if (!message.getProperties().containsKey(RoutedAlias.ROUTER_TYPE_NAME)) {
       throw new SolrException(
           BAD_REQUEST,
           "A routed alias requires these params: "
@@ -129,11 +129,23 @@ public class CreateAliasCmd extends AliasCmd {
     Map<String, String> props = new LinkedHashMap<>();
     message.getProperties().forEach((key, value) -> props.put(key, String.valueOf(value)));
 
-    // Further validation happens here
+    // Further validation happens here. fromProps also normalizes dimensional router params,
+    // synthesizing router.field from the per-dimension router.<i>.field entries.
     RoutedAlias routedAlias = RoutedAlias.fromProps(aliasName, props);
     if (routedAlias == null) {
       // should never happen here, but keep static analysis in IDE's happy...
       throw new SolrException(SERVER_ERROR, "Tried to create a routed alias with no type!");
+    }
+
+    // Validate we got a basic minimum. This runs after normalization so that Dimensional
+    // routed aliases, which supply per-dimension router.<i>.field params instead of a
+    // top-level router.field, are not wrongly rejected.
+    if (!props.keySet().containsAll(RoutedAlias.MINIMAL_REQUIRED_PARAMS)) {
+      throw new SolrException(
+          BAD_REQUEST,
+          "A routed alias requires these params: "
+              + RoutedAlias.MINIMAL_REQUIRED_PARAMS
+              + " plus some create-collection prefixed ones.");
     }
 
     if (!props.keySet().containsAll(routedAlias.getRequiredParams())) {
