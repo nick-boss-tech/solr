@@ -61,7 +61,10 @@ public class ChildFieldValueSourceParser extends ValueSourceParser {
 
       @Override
       public void setTopValue(String value) {
-        byteRefs.setTopValue(new BytesRef(value));
+        // value() may return null for missing values; feed that through as a null BytesRef so
+        // cursorMark paging over a page boundary with a missing value doesn't NPE. The delegate
+        // maps a null top value to its missing-value ord.
+        byteRefs.setTopValue(value == null ? null : new BytesRef(value));
       }
 
       @Override
