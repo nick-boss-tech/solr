@@ -53,6 +53,7 @@ import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.WrappedSolrRequest;
 import org.apache.solr.client.solrj.request.RequestWriter;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.client.solrj.request.V2Request;
@@ -612,6 +613,24 @@ public abstract class CloudSolrClient extends SolrClient {
   }
 
   /**
+   * A request view that reports overridden params (used to attach _stateVer_ when the original
+   * request params are not modifiable). Everything else delegates to the wrapped request.
+   */
+  private static class StateVerRequest<T> extends WrappedSolrRequest<T> {
+    private final SolrParams params;
+
+    StateVerRequest(SolrRequest<T> wrapped, SolrParams params) {
+      super(wrapped);
+      this.params = params;
+    }
+
+    @Override
+    public SolrParams getParams() {
+      return params;
+    }
+  }
+
+  /**
    * As this class doesn't watch external collections on the client side, there's a chance that the
    * request will fail due to cached stale state, which means the state must be refreshed from ZK
    * and retried.
@@ -670,17 +689,25 @@ public abstract class CloudSolrClient extends SolrClient {
       }
     }
 
-    if (request.getParams() instanceof ModifiableSolrParams params) {
+    SolrRequest<?> requestToSend = request;
+    SolrParams requestParams = request.getParams();
+    if (requestParams instanceof ModifiableSolrParams params) {
       if (!skipStateVersion && stateVerParam != null) {
         params.set(STATE_VERSION, stateVerParam);
       } else {
         params.remove(STATE_VERSION);
       }
-    } // else: ??? how to set this ???
+    } else if (!skipStateVersion && stateVerParam != null) {
+      // The request params are not modifiable (e.g. MultiMapSolrParams): send a
+      // params-overriding view carrying _stateVer_, leaving the caller's params untouched.
+      ModifiableSolrParams stateVerParams = new ModifiableSolrParams(requestParams);
+      stateVerParams.set(STATE_VERSION, stateVerParam);
+      requestToSend = new StateVerRequest<>(request, stateVerParams);
+    }
 
     NamedList<Object> resp = null;
     try {
-      resp = sendRequest(request, inputCollections);
+      resp = sendRequest(requestToSend, inputCollections);
       // to avoid an O(n) operation we always add STATE_VERSION to the last and try to read it from
       // there
       Object o = null;
