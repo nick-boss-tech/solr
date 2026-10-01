@@ -53,12 +53,15 @@ public class ZkSolrResourceLoader extends SolrResourceLoader {
     setCoreContainer(zooKeeperController.getCoreContainer());
   }
 
-  public Pair<String, Integer> getZkResourceInfo(String resource) {
+  public Pair<String, Stat> getZkResourceInfo(String resource) {
     String file = (".".equals(resource)) ? configSetZkPath : configSetZkPath + "/" + resource;
     try {
       Stat stat = zkController.getZkClient().exists(file, null);
       if (stat != null) {
-        return new Pair<>(file, stat.getVersion());
+        // The full Stat (not just the data version) is returned so callers can also compare the
+        // znode's czxid: a deleted-then-recreated znode can legitimately have data version 0 again,
+        // but its czxid always increases (SOLR-15674).
+        return new Pair<>(file, stat);
       } else {
         return null;
       }
