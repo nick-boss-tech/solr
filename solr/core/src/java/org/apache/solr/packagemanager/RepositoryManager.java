@@ -53,6 +53,7 @@ import org.apache.solr.common.cloud.SolrZkClient;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.filestore.ClusterFileStore;
+import org.apache.solr.filestore.DistribFileStore;
 import org.apache.solr.packagemanager.SolrPackage.Artifact;
 import org.apache.solr.packagemanager.SolrPackage.SolrPackageRelease;
 import org.apache.solr.pkg.PackageAPI;
@@ -173,6 +174,9 @@ public class RepositoryManager {
     // TODO: Should we introduce a checksum to validate the downloading?
     // Currently, not a big problem since signature based checking happens anyway
 
+    // Tracks every file posted to the file store so a failed install can be
+    // rolled back, keeping the install atomic from the user's perspective.
+    List<String> postedFiles = new ArrayList<>();
     try {
       // post the manifest
       runtime.printSuccess("Posting manifest...");
@@ -189,25 +193,31 @@ public class RepositoryManager {
       String manifestJson = getMapper().writeValueAsString(release.manifest);
       String manifestSHA512 =
           Utils.sha512Digest(ByteBuffer.wrap(manifestJson.getBytes(StandardCharsets.UTF_8)));
+      String manifestPath =
+          String.format(Locale.ROOT, "/package/%s/%s/%s", packageName, version, "manifest.json");
       PackageUtils.postFile(
           solrClient,
           ByteBuffer.wrap(manifestJson.getBytes(StandardCharsets.UTF_8)),
-          String.format(Locale.ROOT, "/package/%s/%s/%s", packageName, version, "manifest.json"),
+          manifestPath,
           null);
+      postedFiles.add(manifestPath);
 
       // post the artifacts
       runtime.printSuccess("Posting artifacts...");
       for (int i = 0; i < release.artifacts.size(); i++) {
-        PackageUtils.postFile(
-            solrClient,
-            ByteBuffer.wrap(Files.readAllBytes(downloaded.get(i))),
+        String artifactPath =
             String.format(
                 Locale.ROOT,
                 "/package/%s/%s/%s",
                 packageName,
                 version,
-                downloaded.get(i).getFileName().toString()),
+                downloaded.get(i).getFileName().toString());
+        PackageUtils.postFile(
+            solrClient,
+            ByteBuffer.wrap(Files.readAllBytes(downloaded.get(i))),
+            artifactPath,
             release.artifacts.get(i).sig);
+        postedFiles.add(artifactPath);
       }
 
       // Call Package API to add this version of the package
@@ -244,10 +254,36 @@ public class RepositoryManager {
         throw new SolrException(ErrorCode.BAD_REQUEST, e);
       }
 
+    } catch (SolrException e) {
+      // Includes registration failures from the Package API above; the files
+      // already posted must be removed so the install can be retried cleanly.
+      cleanupPartialInstall(postedFiles);
+      throw e;
     } catch (SolrServerException | IOException e) {
+      // Posting the manifest or an artifact failed (e.g. a signature check);
+      // roll back what was posted instead of stranding a partial install.
+      cleanupPartialInstall(postedFiles);
       throw new SolrException(ErrorCode.BAD_REQUEST, e);
     }
     return false;
+  }
+
+  /**
+   * Deletes the given file-store paths, best effort, so a failed {@code installPackage} does not
+   * leave orphaned files that block a retry or confuse {@code uninstall}. Mirrors the deletion
+   * steps in {@link PackageManager#uninstall}. Cleanup failures are logged and swallowed so the
+   * original install failure is what the user sees.
+   */
+  private void cleanupPartialInstall(List<String> postedFiles) {
+    for (String filePath : postedFiles) {
+      try {
+        runtime.printSuccess("Cleaning up partially installed file: " + filePath);
+        DistribFileStore.deleteZKFileEntry(packageManager.zkClient, filePath);
+        new FileStoreApi.DeleteFile(filePath).process(solrClient);
+      } catch (Exception cleanupEx) {
+        log.warn("Unable to clean up partially installed package file {}", filePath, cleanupEx);
+      }
+    }
   }
 
   private List<Path> downloadPackageArtifacts(String packageName, String version)
