@@ -32,6 +32,8 @@ import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.ZkStateReader;
 import org.apache.solr.common.params.SolrParams;
+import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.TimeSource;
 import org.apache.solr.crossdc.common.IQueueHandler;
 import org.apache.solr.crossdc.common.MirroredSolrRequest;
@@ -277,6 +279,12 @@ public class SolrMessageProcessor extends MessageProcessor
    * @param request The SolrRequest to be cleaned up for submitting locally.
    */
   private void prepareIfUpdateRequest(SolrRequest<?> request) {
+    // The consumer's CloudSolrClient parses responses as binary. A mirrored wt param (e.g. wt=json
+    // from the original request URL) would make the client misparse the response, so force the
+    // response writer to match the client's binary parser.
+    if (request.getParams() instanceof ModifiableSolrParams params) {
+      params.set(CommonParams.WT, CommonParams.JAVABIN);
+    }
     if (request instanceof UpdateRequest updateRequest) {
       // Remove versions from add requests
 
