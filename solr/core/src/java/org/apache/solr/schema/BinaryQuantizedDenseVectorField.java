@@ -40,4 +40,10 @@ public class BinaryQuantizedDenseVectorField extends DenseVectorField {
     return new Lucene104HnswScalarQuantizedVectorsFormat(
         ScalarEncoding.SINGLE_BIT_QUERY_NIBBLE, getHnswM(), getHnswEfConstruction());
   }
+
+  @Override
+  public boolean hasNonDefaultKnnOptions() {
+    // quantization itself is a non-default KNN configuration
+    return true;
+  }
 }

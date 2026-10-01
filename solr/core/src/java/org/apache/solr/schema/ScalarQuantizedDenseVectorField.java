@@ -122,6 +122,12 @@ public class ScalarQuantizedDenseVectorField extends DenseVectorField {
   }
 
   @Override
+  public boolean hasNonDefaultKnnOptions() {
+    // quantization itself is a non-default KNN configuration
+    return true;
+  }
+
+  @Override
   public void checkSchemaField(final SchemaField field) throws SolrException {
     super.checkSchemaField(field);
 
