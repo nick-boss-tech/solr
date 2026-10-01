@@ -1832,10 +1832,7 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
                       + query
                       + "\" should return FieldExistsQuery",
                   createdQuery instanceof FieldExistsQuery);
-            } else if (!schemaField.omitNorms()
-                && !schemaField
-                    .getType()
-                    .isPointField()) { // TODO: Remove !isPointField() for SOLR-14199
+            } else if (!schemaField.omitNorms()) {
               assertTrue(
                   "Field has norms and no docValues, so existence query \""
                       + query

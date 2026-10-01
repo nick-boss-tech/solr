@@ -1071,8 +1071,7 @@ public abstract class FieldType extends FieldProperties {
   public Query getExistenceQuery(QParser parser, SchemaField field) {
     if (field.hasDocValues()) {
       return validateFieldExistsQuery(parser, new FieldExistsQuery(field.getName()));
-    } else if (!field.omitNorms()
-        && !isPointField()) { // TODO: Remove !isPointField() for SOLR-14199
+    } else if (!field.omitNorms()) {
       return validateFieldExistsQuery(parser, new FieldExistsQuery(field.getName()));
     } else {
       // Default to an unbounded range query
