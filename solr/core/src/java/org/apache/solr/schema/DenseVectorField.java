@@ -523,32 +523,26 @@ public class DenseVectorField extends FloatPointField {
 
     Query baseQuery;
     switch (vectorEncoding) {
-      case FLOAT32:
+      case FLOAT32: {
+        float[] queryVector = vectorBuilder.getFloatVector();
+        checkQueryVectorNotAllZeros(queryVector);
         baseQuery =
             searchStrategy != null
                 ? new SolrKnnFloatVectorQuery(
-                    fieldName,
-                    vectorBuilder.getFloatVector(),
-                    topK,
-                    efSearch,
-                    filterQuery,
-                    searchStrategy)
-                : new SolrKnnFloatVectorQuery(
-                    fieldName, vectorBuilder.getFloatVector(), topK, efSearch, filterQuery);
+                    fieldName, queryVector, topK, efSearch, filterQuery, searchStrategy)
+                : new SolrKnnFloatVectorQuery(fieldName, queryVector, topK, efSearch, filterQuery);
         break;
-      case BYTE:
+      }
+      case BYTE: {
+        byte[] queryVector = vectorBuilder.getByteVector();
+        checkQueryVectorNotAllZeros(queryVector);
         baseQuery =
             searchStrategy != null
                 ? new SolrKnnByteVectorQuery(
-                    fieldName,
-                    vectorBuilder.getByteVector(),
-                    topK,
-                    efSearch,
-                    filterQuery,
-                    searchStrategy)
-                : new SolrKnnByteVectorQuery(
-                    fieldName, vectorBuilder.getByteVector(), topK, efSearch, filterQuery);
+                    fieldName, queryVector, topK, efSearch, filterQuery, searchStrategy)
+                : new SolrKnnByteVectorQuery(fieldName, queryVector, topK, efSearch, filterQuery);
         break;
+      }
       default:
         throw new SolrException(
             SolrException.ErrorCode.SERVER_ERROR,
@@ -566,6 +560,31 @@ public class DenseVectorField extends FloatPointField {
     }
 
     return baseQuery;
+  }
+
+  /**
+   * Rejects all-zero query vectors, which carry no directional information and otherwise fail
+   * opaquely deep inside result rendering.
+   */
+  private static void checkQueryVectorNotAllZeros(float[] queryVector) {
+    for (float v : queryVector) {
+      if (v != 0.0f) {
+        return;
+      }
+    }
+    throw new SolrException(
+        SolrException.ErrorCode.BAD_REQUEST, "KNN query vector must not be an all-zero vector");
+  }
+
+  /** Rejects all-zero query vectors, which carry no directional information. */
+  private static void checkQueryVectorNotAllZeros(byte[] queryVector) {
+    for (byte v : queryVector) {
+      if (v != 0) {
+        return;
+      }
+    }
+    throw new SolrException(
+        SolrException.ErrorCode.BAD_REQUEST, "KNN query vector must not be an all-zero vector");
   }
 
   @Override
