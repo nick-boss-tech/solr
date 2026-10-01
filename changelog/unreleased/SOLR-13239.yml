@@ -1,0 +1,7 @@
+title: Don't report new collections to CloudCollectionsListeners before their state.json exists
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-13239
+    url: https://issues.apache.org/jira/browse/SOLR-13239

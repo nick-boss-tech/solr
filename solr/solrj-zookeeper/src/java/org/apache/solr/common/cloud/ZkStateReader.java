@@ -741,7 +741,13 @@ public class ZkStateReader implements SolrCloseable {
   public Set<String> getCurrentCollections() {
     Set<String> collections = new HashSet<>();
     collections.addAll(collectionWatches.activeCollections());
-    collections.addAll(lazyCollectionStates.keySet());
+    for (Map.Entry<String, LazyCollectionRef> entry : lazyCollectionStates.entrySet()) {
+      // The /collections child znode is created before its state.json during collection creation;
+      // only report collections whose state can actually be read yet.
+      if (entry.getValue().get(true) != null) {
+        collections.add(entry.getKey());
+      }
+    }
     return collections;
   }
 
