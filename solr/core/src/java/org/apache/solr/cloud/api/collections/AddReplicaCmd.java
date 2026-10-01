@@ -302,6 +302,7 @@ public class AddReplicaCmd implements CollApiCmds.CollectionApiCommand {
     params.set(COLL_CONF, configName);
     params.set(CoreAdminParams.COLLECTION, collectionName);
     params.set(CoreAdminParams.REPLICA_TYPE, createReplica.replicaType.name());
+    params.set(ZkStateReader.NUM_SHARDS_PROP, coll.getSlices().size());
     if (createReplica.sliceName != null) {
       params.set(CoreAdminParams.SHARD, createReplica.sliceName);
     } else if (routeKey != null) {
