@@ -878,9 +878,15 @@ public class ZkController implements Closeable {
     ExecutorService customThreadPool =
         ExecutorUtil.newMDCAwareCachedThreadPool(new SolrNamedThreadFactory("closeThreadPool"));
 
-    customThreadPool.execute(() -> IOUtils.closeQuietly(overseerElector.getContext()));
-
-    customThreadPool.execute(() -> IOUtils.closeQuietly(overseer));
+    // Close the overseer before releasing the election node: the overseer close drains
+    // in-flight queue tasks, while releasing the election node lets a new overseer be elected
+    // immediately. Doing these in parallel (or in reverse) lets one command be processed twice
+    // (SOLR-16013).
+    customThreadPool.execute(
+        () -> {
+          IOUtils.closeQuietly(overseer);
+          IOUtils.closeQuietly(overseerElector.getContext());
+        });
 
     try {
       customThreadPool.execute(
