@@ -132,17 +132,23 @@ public class PerReplicaStatesOps {
   public void persist(String znode, SolrZkClient zkClient)
       throws KeeperException, InterruptedException {
     List<PerReplicaStates.Operation> operations = ops;
+    KeeperException lastStaleException = null;
     for (int i = 0; i < PerReplicaStates.MAX_RETRIES; i++) {
       try {
         persist(operations, znode, zkClient);
         return;
       } catch (KeeperException.NodeExistsException | KeeperException.NoNodeException e) {
         // state is stale
+        lastStaleException = e;
         if (log.isInfoEnabled()) {
           log.info("Stale state for {}, attempt: {}. retrying...", znode, i);
         }
         operations = refresh(fetch(znode, zkClient, null));
       }
+    }
+    // Retries exhausted without persisting: don't swallow the failure, propagate it.
+    if (lastStaleException != null) {
+      throw lastStaleException;
     }
   }
 
