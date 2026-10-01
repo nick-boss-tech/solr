@@ -888,6 +888,7 @@ public class SolrConfigHandler extends RequestHandlerBase
 
       // determine whether all replicas have the update
       List<String> failedList = null; // lazily init'd
+      Set<String> currentActiveCoreUrls = null; // lazily init'd; fresh read, see below
       for (int f = 0; f < results.size(); f++) {
         Boolean success = false;
         Future<Boolean> next = results.get(f);
@@ -902,6 +903,21 @@ public class SolrConfigHandler extends RequestHandlerBase
 
         if (!success) {
           String coreUrl = concurrentTasks.get(f).replica.getCoreUrl();
+          // A replica deleted (or otherwise gone from the active set) while we waited can never
+          // report the new version; don't fail the whole request for it.
+          if (currentActiveCoreUrls == null) {
+            currentActiveCoreUrls = new HashSet<>();
+            for (Replica r : getActiveReplicas(zkController, collection)) {
+              currentActiveCoreUrls.add(r.getCoreUrl());
+            }
+          }
+          if (!currentActiveCoreUrls.contains(coreUrl)) {
+            log.info(
+                "Core {} is no longer an active replica of collection {}; not requiring the property version from it",
+                coreUrl,
+                collection);
+            continue;
+          }
           log.warn("Core {} could not get the expected version {}", coreUrl, expectedVersion);
           if (failedList == null) failedList = new ArrayList<>();
           failedList.add(coreUrl);
