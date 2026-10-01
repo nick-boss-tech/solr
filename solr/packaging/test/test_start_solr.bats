@@ -28,6 +28,15 @@ teardown() {
   SOLR_STOP_WAIT=30 solr stop --all >/dev/null 2>&1
 }
 
+@test "start returns nonzero when Solr exits before becoming ready" {
+  export SOLR_START_WAIT=1
+  export SOLR_JAVA_MEM="-Xmsinvalid"
+  unset SOLR_HEAP
+
+  run solr start
+  [ "$status" -ne 0 ]
+}
+
 @test "SOLR-11740 check 'solr stop' connection" {
   solr start
   solr start --user-managed -p ${SOLR2_PORT}
