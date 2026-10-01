@@ -116,6 +116,26 @@ public abstract class DocTransformer {
     return null;
   }
 
+  /**
+   * When a transformer adds fields to the {@link SolrDocument} during {@link #transform} whose
+   * names are not in the requested field list, this option lets it name those fields so {@link
+   * org.apache.solr.search.ReturnFields#wantsField} still returns them to the client instead of
+   * silently dropping them.
+   *
+   * <p>This is the response-side corollary of {@link #getExtraRequestFields()}: extra request
+   * fields are fetched from the index for the transformer's use, while extra response fields are
+   * written to the response for the client's use.
+   *
+   * <p>Implementations whose added field names are only known once documents are transformed may
+   * report additional names over time; callers should consult this method when writing each
+   * document rather than caching it once per request.
+   *
+   * @return field names added to response documents, or null if none
+   */
+  public String[] getExtraResponseFields() {
+    return null;
+  }
+
   @Override
   public String toString() {
     return getName();

@@ -555,9 +555,33 @@ public class SolrReturnFields extends ReturnFields {
     if (_wantsAllFields || okFieldNames.contains(name)) {
       return true;
     }
+    if (isTransformerAddedField(name)) {
+      return true;
+    }
     for (String s : globs) {
       if (GlobPatternUtil.matches(s, name)) {
         okFieldNames.add(name); // Don't calculate it again
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Returns true if the named field was added to response documents by a {@link DocTransformer}
+   * (see {@link DocTransformer#getExtraResponseFields()}) rather than requested in the field
+   * list.
+   */
+  private boolean isTransformerAddedField(String name) {
+    if (transformer == null) {
+      return false;
+    }
+    String[] extraResponseFields = transformer.getExtraResponseFields();
+    if (extraResponseFields == null) {
+      return false;
+    }
+    for (String field : extraResponseFields) {
+      if (field.equals(name)) {
         return true;
       }
     }

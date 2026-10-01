@@ -71,6 +71,9 @@ class ChildDocTransformer extends DocTransformer {
   private final boolean isNestedSchema;
   private final SolrReturnFields childReturnFields;
   private final String[] extraRequestedFields;
+  // Nest-path field names added to parent docs during transform(); reported via
+  // getExtraResponseFields() so they survive ReturnFields.wantsField() filtering.
+  private final Set<String> extraResponseFields = new HashSet<>();
 
   ChildDocTransformer(
       String name,
@@ -102,6 +105,11 @@ class ChildDocTransformer extends DocTransformer {
   @Override
   public String[] getExtraRequestFields() {
     return extraRequestedFields;
+  }
+
+  @Override
+  public String[] getExtraResponseFields() {
+    return extraResponseFields.isEmpty() ? null : extraResponseFields.toArray(new String[0]);
   }
 
   private int getPrevRootGivenFilter(LeafReaderContext leafReaderContext, int segRootId)
@@ -283,6 +291,8 @@ class ChildDocTransformer extends DocTransformer {
 
       // size == 1, so get the last remaining entry
       if (!multiValuedFLoatVectorFields.isEmpty() || !multiValuedByteVectorFields.isEmpty()) {
+        extraResponseFields.addAll(multiValuedFLoatVectorFields);
+        extraResponseFields.addAll(multiValuedByteVectorFields);
         addFlatMultiValuedVectorsToParent(
             rootDoc,
             pendingParentPathsToChildren.values().iterator().next(),
@@ -294,7 +304,14 @@ class ChildDocTransformer extends DocTransformer {
             multiValuedByteVectorFields,
             VectorEncoding.BYTE);
       } else {
-        addChildrenToParent(rootDoc, pendingParentPathsToChildren.values().iterator().next());
+        Map<String, List<SolrDocument>> childrenByPath =
+            pendingParentPathsToChildren.values().iterator().next();
+        for (String cDocsPath : childrenByPath.keySet()) {
+          if (!ANON_CHILD_KEY.equals(cDocsPath)) {
+            extraResponseFields.add(trimLastPound(cDocsPath));
+          }
+        }
+        addChildrenToParent(rootDoc, childrenByPath);
       }
 
     } catch (IOException e) {

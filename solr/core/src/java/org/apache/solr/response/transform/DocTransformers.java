@@ -18,9 +18,11 @@ package org.apache.solr.response.transform;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.response.ResultContext;
@@ -51,6 +53,17 @@ public class DocTransformers extends DocTransformer {
         .map(DocTransformer::getRawFields)
         .flatMap(Collection::stream)
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public String[] getExtraResponseFields() {
+    String[] aggregated =
+        children.stream()
+            .map(DocTransformer::getExtraResponseFields)
+            .filter(Objects::nonNull)
+            .flatMap(Arrays::stream)
+            .toArray(String[]::new);
+    return aggregated.length == 0 ? null : aggregated;
   }
 
   public void addTransformer(DocTransformer a) {
