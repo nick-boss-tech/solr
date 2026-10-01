@@ -277,8 +277,11 @@ class SplitOp implements CoreAdminHandler.CoreAdminOp {
         if (routerObj instanceof Map<?, ?> routerProps) {
           routeFieldName = (String) routerProps.get("field");
         }
+        // router.field explicitly configured: route values live in that field, not in id prefixes
+        boolean hasRouteField = routeFieldName != null;
+        String uniqueKeyField = searcher.getSchema().getUniqueKeyField().getName();
         if (routeFieldName == null) {
-          routeFieldName = searcher.getSchema().getUniqueKeyField().getName();
+          routeFieldName = uniqueKeyField;
         }
 
         Collection<RangeCount> counts = getHashHistogram(searcher, prefixField, router, collection);
@@ -287,9 +290,12 @@ class SplitOp implements CoreAdminHandler.CoreAdminOp {
           // How to determine if we should look at the id field to figure out the prefix buckets?
           // There may legitimately be no indexed terms in id_prefix if no ids have a prefix yet.
           // For now, avoid using splitByPrefix unless you are actually using prefixes.
+          // With router.field defined, hash the route field's own terms instead of id prefixes,
+          // so the split ranges reflect where the documents will actually land.
           counts =
-              getHashHistogramFromId(
-                  searcher, searcher.getSchema().getUniqueKeyField().getName(), router, collection);
+              hasRouteField
+                  ? getHashHistogramFromRouteField(searcher, routeFieldName, router, collection)
+                  : getHashHistogramFromId(searcher, uniqueKeyField, router, collection);
         }
 
         Collection<DocRouter.Range> splits = getSplits(counts, currentRange);
@@ -511,6 +517,44 @@ class SplitOp implements CoreAdminHandler.CoreAdminOp {
           sumBuckets,
           numPrefixes,
           numCollisions);
+    }
+
+    return counts.values();
+  }
+
+  /**
+   * Returns a list of range counts sorted by the range lower bound, using the terms of the
+   * router.field. Each term is a complete route value and is hashed directly (unlike {@link
+   * #getHashHistogramFromId}, which extracts route prefixes from id terms). This matches how
+   * SolrIndexSplitter hashes route-field terms when placing documents during the split.
+   */
+  static Collection<RangeCount> getHashHistogramFromRouteField(
+      SolrIndexSearcher searcher,
+      String routeFieldName,
+      CompositeIdRouter router,
+      DocCollection collection)
+      throws IOException {
+    TreeMap<DocRouter.Range, RangeCount> counts = new TreeMap<>();
+
+    Terms terms = MultiTerms.getTerms(searcher.getIndexReader(), routeFieldName);
+    if (terms == null) {
+      return counts.values();
+    }
+
+    TermsEnum termsEnum = terms.iterator();
+    for (; ; ) {
+      BytesRef term = termsEnum.next();
+      if (term == null) break;
+      DocRouter.Range range =
+          router.getSearchRangeSingle(term.utf8ToString(), null, collection);
+      // unlike unique ids, route values repeat across documents, so count them all
+      RangeCount rangeCount = new RangeCount(range, termsEnum.docFreq());
+
+      RangeCount prev = counts.put(rangeCount.range, rangeCount);
+      if (prev != null) {
+        // hash collision between two route values; merge the counts
+        rangeCount.count += prev.count;
+      }
     }
 
     return counts.values();
