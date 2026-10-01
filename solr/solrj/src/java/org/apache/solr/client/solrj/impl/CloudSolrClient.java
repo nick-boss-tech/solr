@@ -721,8 +721,7 @@ public abstract class CloudSolrClient extends SolrClient {
           exc instanceof RouteException
               && errorCode == SolrException.ErrorCode.SERVICE_UNAVAILABLE.code;
       final boolean mayReplayAfterRouteException503 =
-          !isRouteException503
-              || request.getRequestType() != SolrRequestType.UPDATE;
+          !isRouteException503 || request.getRequestType() != SolrRequestType.UPDATE;
 
       if (mayReplay
           && mayReplayAfterRouteException503

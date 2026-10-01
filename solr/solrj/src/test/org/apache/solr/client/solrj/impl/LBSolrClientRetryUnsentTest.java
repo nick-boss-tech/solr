@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.client.solrj.RequestNotSentException;
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
@@ -84,6 +85,42 @@ public class LBSolrClientRetryUnsentTest extends SolrTestCase {
     }
   }
 
+  /**
+   * An extension client that is deliberately not HTTP-based. Its {@link #getClient(Endpoint)}
+   * signature protects the LBSolrClient extension contract as well as exercising the generic
+   * request path.
+   */
+  private static class FailFirstNonHttpEndpoint extends LBSolrClient {
+    final List<String> attempted = new ArrayList<>();
+    private final Exception failure;
+
+    FailFirstNonHttpEndpoint(Exception failure) {
+      super(List.of(DEAD_HOST_1, DEAD_HOST_2));
+      this.failure = failure;
+    }
+
+    @Override
+    protected SolrClient getClient(Endpoint endpoint) {
+      return new SolrClient() {
+        @Override
+        public NamedList<Object> request(SolrRequest<?> request, String collection)
+            throws SolrServerException, IOException {
+          attempted.add(endpoint.getBaseUrl());
+          if (attempted.size() > 1) {
+            return new NamedList<>();
+          }
+          if (failure instanceof SolrServerException sse) {
+            throw sse;
+          }
+          throw (IOException) failure;
+        }
+
+        @Override
+        public void close() {}
+      };
+    }
+  }
+
   private static SolrServerException unsentException() {
     IOException onTheWire = new IOException("Broken pipe");
     return new SolrServerException(
@@ -110,6 +147,23 @@ public class LBSolrClientRetryUnsentTest extends SolrTestCase {
     assertEquals(
         List.of(DEAD_HOST_1.getBaseUrl(), DEAD_HOST_2.getBaseUrl()),
         requestReturningAttemptedUrls(unsentException(), unsafeUpdate()));
+  }
+
+  @Test
+  public void testNonHttpClientSubclassRetainsUnsentFailover() throws Exception {
+    try (FailFirstNonHttpEndpoint client = new FailFirstNonHttpEndpoint(unsentException())) {
+      client.request(new LBSolrClient.Req(unsafeUpdate(), List.of(DEAD_HOST_1, DEAD_HOST_2)));
+      assertEquals(List.of(DEAD_HOST_1.getBaseUrl(), DEAD_HOST_2.getBaseUrl()), client.attempted);
+    }
+  }
+
+  @Test
+  public void testGetClientRetainsSolrClientBinaryExtensionContract() throws Exception {
+    assertEquals(
+        SolrClient.class,
+        LBSolrClient.class
+            .getDeclaredMethod("getClient", LBSolrClient.Endpoint.class)
+            .getReturnType());
   }
 
   /** An unsafe update is not retried when the transport cannot prove it was unsent. */

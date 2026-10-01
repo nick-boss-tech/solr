@@ -20,6 +20,8 @@ package org.apache.solr.client.solrj.impl;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.lang.ref.WeakReference;
+import java.net.ConnectException;
+import java.net.http.HttpConnectTimeoutException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -39,6 +41,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import org.apache.solr.client.solrj.RemoteSolrException;
+import org.apache.solr.client.solrj.RequestNotSentException;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -204,7 +207,7 @@ public abstract class LBSolrClient extends SolrClient {
     public LBSolrClient build() {
       return new LBSolrClient(this) {
         @Override
-        protected HttpSolrClient getClient(Endpoint endpoint) {
+        protected SolrClient getClient(Endpoint endpoint) {
           return solrClient;
         }
       };
@@ -606,10 +609,20 @@ public abstract class LBSolrClient extends SolrClient {
     return doRequest(solrClient, endpoint.getBaseUrl(), endpoint.getCore(), solrRequest);
   }
 
+  // TODO SOLR-17541 should remove the need for the special-casing below; remove as a part of that
+  // ticket.
   private NamedList<Object> doRequest(
-      HttpSolrClient solrClient, String baseUrl, String collection, SolrRequest<?> solrRequest)
+      SolrClient solrClient, String baseUrl, String collection, SolrRequest<?> solrRequest)
       throws SolrServerException, IOException {
-    return solrClient.requestWithBaseUrl(baseUrl, solrRequest, collection);
+    // Some implementations of LBSolrClient.getClient(...) return a HttpSolrClient that may not
+    // be pointed at the desired URL (or any URL for that matter). We special-case that here to
+    // ensure the appropriate URL is provided.
+    if (solrClient instanceof HttpSolrClient hasRequestWithUrl) {
+      return hasRequestWithUrl.requestWithBaseUrl(baseUrl, solrRequest, collection);
+    }
+
+    // Assume the provided client already uses baseUrl.
+    return solrClient.request(solrRequest, collection);
   }
 
   protected Exception doRequest(
@@ -657,7 +670,7 @@ public abstract class LBSolrClient extends SolrClient {
    * failure.
    */
   protected boolean mayFailOver(Endpoint endpoint, Exception e, boolean isNonRetryable) {
-    if (getClient(endpoint).wasRequestUnsent(e)) {
+    if (wasRequestUnsent(endpoint, e)) {
       return true;
     }
     Throwable rootCause = (e instanceof SolrServerException sse) ? sse.getRootCause() : e;
@@ -666,10 +679,34 @@ public abstract class LBSolrClient extends SolrClient {
   }
 
   /**
-   * The transport used to reach {@code endpoint}. Declared as an {@link HttpSolrClient} so callers
-   * can ask it to classify its own failures; {@link Builder} already requires one.
+   * Determines whether a failed request can safely be replayed. HTTP clients have transport-aware
+   * classification; non-HTTP subclasses retain the legacy connection and marker-exception checks.
    */
-  protected abstract HttpSolrClient getClient(Endpoint endpoint);
+  private boolean wasRequestUnsent(Endpoint endpoint, Exception e) {
+    SolrClient solrClient = getClient(endpoint);
+    if (solrClient instanceof HttpSolrClient httpSolrClient) {
+      return httpSolrClient.wasRequestUnsent(e);
+    }
+
+    Throwable rootCause = (e instanceof SolrServerException sse) ? sse.getRootCause() : e;
+    return isConnectException(rootCause)
+        || SolrException.hasCause(e, RequestNotSentException.class);
+  }
+
+  protected boolean isConnectException(Throwable t) {
+    if (t instanceof ConnectException || t instanceof HttpConnectTimeoutException) {
+      return true;
+    }
+    // Check for common connection timeout exceptions by name to avoid hard dependencies on
+    // specific HTTP client libraries (e.g., Jetty or Apache HttpClient).
+    return t != null && t.getClass().getName().endsWith("ConnectTimeoutException");
+  }
+
+  /**
+   * The client used to reach {@code endpoint}. Subclasses may return non-HTTP {@link SolrClient}
+   * implementations.
+   */
+  protected abstract SolrClient getClient(Endpoint endpoint);
 
   private void startAliveCheckExecutor() {
     // double-checked locking, but it's OK because we don't *do* anything with aliveCheckExecutor
