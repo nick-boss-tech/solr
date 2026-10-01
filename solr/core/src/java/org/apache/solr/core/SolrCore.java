@@ -647,24 +647,34 @@ public class SolrCore implements SolrInfoBean, Closeable {
         String indexDirPath = metadata.get().getIndexDirPath();
 
         if (!indexDirPath.equals(getIndexDir())) {
-          Directory d = getDirectoryFactory().get(indexDirPath, DirContext.DEFAULT, "none");
-          try {
-            Collection<SnapshotMetaData> snapshots =
-                snapshotMgr.listSnapshotsInIndexDir(indexDirPath);
-            log.info(
-                "Following snapshots exist in the index directory {} : {}",
-                indexDirPath,
-                snapshots);
-            if (snapshots.isEmpty()) { // No snapshots remain in this directory. Can be cleaned up!
+          if (!Files.isDirectory(Path.of(indexDirPath))) {
+            // The index directory recorded in the snapshot metadata no longer exists
+            // (e.g. removed by replication recovery). The snapshot files are already
+            // gone, so there is nothing to clean up.
+            log.warn(
+                "Snapshot {} references index directory {} which no longer exists; skipping file cleanup.",
+                commitName,
+                indexDirPath);
+          } else {
+            Directory d = getDirectoryFactory().get(indexDirPath, DirContext.DEFAULT, "none");
+            try {
+              Collection<SnapshotMetaData> snapshots =
+                  snapshotMgr.listSnapshotsInIndexDir(indexDirPath);
               log.info(
-                  "Removing index directory {} since all named snapshots are deleted.",
-                  indexDirPath);
-              getDirectoryFactory().remove(d);
-            } else {
-              SolrSnapshotManager.deleteSnapshotIndexFiles(this, d, gen);
+                  "Following snapshots exist in the index directory {} : {}",
+                  indexDirPath,
+                  snapshots);
+              if (snapshots.isEmpty()) { // No snapshots remain in this directory. Can be cleaned up!
+                log.info(
+                    "Removing index directory {} since all named snapshots are deleted.",
+                    indexDirPath);
+                getDirectoryFactory().remove(d);
+              } else {
+                SolrSnapshotManager.deleteSnapshotIndexFiles(this, d, gen);
+              }
+            } finally {
+              getDirectoryFactory().release(d);
             }
-          } finally {
-            getDirectoryFactory().release(d);
           }
         }
       }

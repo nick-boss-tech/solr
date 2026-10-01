@@ -745,9 +745,9 @@ public class IndexFetcher {
             // let the system know we are changing dir's and the old one
             // may be closed
             if (indexDir != null) {
-              log.info("removing old index directory {}", indexDir);
               solrCore.getDirectoryFactory().doneWithDirectory(indexDir);
-              solrCore.getDirectoryFactory().remove(indexDir);
+              // Cleanup all index files not associated with any *named* snapshot.
+              solrCore.deleteNonSnapshotIndexFiles(indexDirPath);
             }
           }
           if (isFullCopyNeeded) {
