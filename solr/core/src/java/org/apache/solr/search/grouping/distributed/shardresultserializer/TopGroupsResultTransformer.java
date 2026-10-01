@@ -28,6 +28,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.StoredField;
+import org.apache.lucene.index.IndexableField;
+import org.apache.lucene.index.LeafReader;
+import org.apache.lucene.index.LeafReaderContext;
+import org.apache.lucene.index.NumericDocValues;
+import org.apache.lucene.index.SortedDocValues;
+import org.apache.lucene.index.SortedSetDocValues;
 import org.apache.lucene.search.FieldDoc;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.Sort;
@@ -45,6 +52,7 @@ import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.SolrDocumentFetcher;
+import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.search.grouping.Command;
 import org.apache.solr.search.grouping.distributed.command.QueryCommand;
 import org.apache.solr.search.grouping.distributed.command.QueryCommandResult;
@@ -242,7 +250,7 @@ public class TopGroupsResultTransformer
         NamedList<Object> document = new NamedList<>();
         documents.add(document);
 
-        Document doc = retrieveDocument(uniqueField, searchGroup.scoreDocs()[i].doc, docFetcher);
+        Document doc = retrieveDocument(uniqueField, searchGroup.scoreDocs()[i].doc, docFetcher, rb.req.getSearcher());
         document.add(ID, uniqueField.getType().toExternal(doc.getField(uniqueField.getName())));
         if (!Float.isNaN(searchGroup.scoreDocs()[i].score)) {
           document.add("score", searchGroup.scoreDocs()[i].score);
@@ -304,7 +312,7 @@ public class TopGroupsResultTransformer
       NamedList<Object> document = new NamedList<>();
       documents.add(document);
 
-      Document doc = retrieveDocument(uniqueField, scoreDoc.doc, docFetcher);
+      Document doc = retrieveDocument(uniqueField, scoreDoc.doc, docFetcher, rb.req.getSearcher());
       document.add(ID, uniqueField.getType().toExternal(doc.getField(uniqueField.getName())));
       if (!Float.isNaN(scoreDoc.score)) {
         document.add("score", scoreDoc.score);
@@ -330,7 +338,61 @@ public class TopGroupsResultTransformer
   }
 
   private Document retrieveDocument(
-      final SchemaField uniqueField, int doc, SolrDocumentFetcher docFetcher) throws IOException {
-    return docFetcher.doc(doc, Set.of(uniqueField.getName()));
+      final SchemaField uniqueField,
+      int doc,
+      SolrDocumentFetcher docFetcher,
+      SolrIndexSearcher searcher)
+      throws IOException {
+    Document luceneDoc = docFetcher.doc(doc, Set.of(uniqueField.getName()));
+    if (luceneDoc.getField(uniqueField.getName()) == null) {
+      // The unique key field is not stored; fall back to its docValues value (if any) so that
+      // serializing the group documents doesn't fail on a null field.
+      IndexableField docValuesField = readDocValuesField(uniqueField, doc, searcher);
+      if (docValuesField != null) {
+        luceneDoc.add(docValuesField);
+      }
+    }
+    return luceneDoc;
+  }
+
+  /**
+   * Reads a single field value from docValues for the given top-level doc id, wrapped as an
+   * {@link IndexableField} suitable for {@link FieldType#toExternal(IndexableField)}. Returns null
+   * when the field has no docValues or the doc has no value.
+   */
+  private static IndexableField readDocValuesField(
+      SchemaField uniqueField, int docId, SolrIndexSearcher searcher) throws IOException {
+    String fieldName = uniqueField.getName();
+    for (LeafReaderContext leaf : searcher.getIndexReader().leaves()) {
+      if (docId < leaf.docBase || docId >= leaf.docBase + leaf.reader().maxDoc()) {
+        continue;
+      }
+      int leafDoc = docId - leaf.docBase;
+      LeafReader leafReader = leaf.reader();
+      SortedDocValues sorted = leafReader.getSortedDocValues(fieldName);
+      if (sorted != null) {
+        return sorted.advanceExact(leafDoc)
+            ? new StoredField(fieldName, BytesRef.deepCopyOf(sorted.binaryValue()))
+            : null;
+      }
+      SortedSetDocValues sortedSet = leafReader.getSortedSetDocValues(fieldName);
+      if (sortedSet != null) {
+        if (sortedSet.advanceExact(leafDoc)) {
+          long ord = sortedSet.nextOrd();
+          return ord != SortedSetDocValues.NO_MORE_ORDS
+              ? new StoredField(fieldName, BytesRef.deepCopyOf(sortedSet.lookupOrd(ord)))
+              : null;
+        }
+        return null;
+      }
+      NumericDocValues numeric = leafReader.getNumericDocValues(fieldName);
+      if (numeric != null) {
+        return numeric.advanceExact(leafDoc)
+            ? new StoredField(fieldName, numeric.longValue())
+            : null;
+      }
+      return null;
+    }
+    return null;
   }
 }
