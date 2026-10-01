@@ -4,6 +4,11 @@
 (no compile, no tests). A reviewer must compile and test before this goes
 anywhere near a PR.
 
+This patch also resolves SOLR-15403 ("Non-indexed DateRangeField throws
+SolrException"), a duplicate report of the same `checkSchemaField()` bug —
+the `if (field.indexed())` guard below fixes both tickets. Upstream PR time
+should reference both.
+
 ## What the patch does
 
 `AbstractSpatialPrefixTreeFieldType.checkSchemaField()` unconditionally
