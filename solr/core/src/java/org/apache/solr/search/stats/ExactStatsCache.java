@@ -18,7 +18,6 @@ package org.apache.solr.search.stats;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -111,15 +110,15 @@ public class ExactStatsCache extends StatsCache {
             r.getShard(),
             r.getSolrResponse().getResponse());
       }
-      // response's "shard" is really a shardURL, or even a list of URLs
+      // The per-shard stats maps are keyed by the shard URL itself (r.getShard()),
+      // which uniquely identifies the (collection, shard) pair. Keying by the
+      // bare shard id instead collides when collections reuse shard names
+      // (e.g. multi-collection queries), clobbering one collection's stats.
       String shard = r.getShard();
       SolrResponse res = r.getSolrResponse();
       if (res.getException() != null) {
         log.debug("Exception response={}", res);
         continue;
-      }
-      if (res.getResponse().get(ShardParams.SHARD_NAME) != null) {
-        shard = (String) res.getResponse().get(ShardParams.SHARD_NAME);
       }
       NamedList<Object> nl = res.getResponse();
 
@@ -218,6 +217,7 @@ public class ExactStatsCache extends StatsCache {
 
       CloudDescriptor cloudDescriptor = searcher.getCore().getCoreDescriptor().getCloudDescriptor();
       if (cloudDescriptor != null) {
+        // Retained for older aggregating nodes, which key per-shard stats by this value.
         rb.rsp.add(ShardParams.SHARD_NAME, cloudDescriptor.getShardId());
       }
       if (!terms.isEmpty()) {
@@ -253,24 +253,10 @@ public class ExactStatsCache extends StatsCache {
       Set<String> fields = terms.stream().map(t -> t.field()).collect(Collectors.toSet());
       Map<String, TermStats> globalTermStats = new HashMap<>();
       Map<String, CollectionStats> globalColStats = new HashMap<>();
-      // aggregate collection stats, only for the field in terms
-      String collectionName = rb.req.getCore().getCoreDescriptor().getCollectionName();
-      if (collectionName == null) {
-        collectionName = rb.req.getCore().getCoreDescriptor().getName();
-      }
-      List<String> shards = new ArrayList<>();
-      for (String shardUrl : rb.shards) {
-        String shard = StatsUtil.shardUrlToShard(collectionName, shardUrl);
-        if (shard == null) {
-          log.warn(
-              "Can't determine shard from collectionName={} and shardUrl={}, skipping...",
-              collectionName,
-              shardUrl);
-          continue;
-        } else {
-          shards.add(shard);
-        }
-      }
+      // Look up per-shard stats by shard URL, matching the keys stored in
+      // doMergeToGlobalStats. The URL embeds the collection name, so shards
+      // with the same id in different collections stay distinct.
+      List<String> shards = List.of(rb.shards);
       for (String shard : shards) {
         Map<String, CollectionStats> s = getPerShardColStats(rb, shard);
         if (s == null) {
