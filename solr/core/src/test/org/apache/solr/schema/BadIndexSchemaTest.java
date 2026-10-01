@@ -32,6 +32,12 @@ public class BadIndexSchemaTest extends AbstractBadConfigTestBase {
     doTest("bad-schema-omit-tf-but-not-pos.xml", "bad_field");
   }
 
+  public void testSevereErrorsForPointFieldOmitNorms() throws Exception {
+    // SOLR-14199: point fields do not support norms, explicit omitNorms=false is rejected
+    doTest("bad-schema-pointfield-omitnorms-ft.xml", "omitNorms=false");
+    doTest("bad-schema-pointfield-omitnorms-field.xml", "omitNorms=false");
+  }
+
   public void testSevereErrorsForDuplicateFields() throws Exception {
     doTest("bad-schema-dup-field.xml", "fAgain");
   }

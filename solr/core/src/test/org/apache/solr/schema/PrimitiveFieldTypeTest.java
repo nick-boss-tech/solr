@@ -75,7 +75,9 @@ public class PrimitiveFieldTypeTest extends SolrTestCaseJ4 {
     for (Class<? extends FieldType> clazz : types) {
       FieldType ft = clazz.getConstructor().newInstance();
       ft.init(schema, initMap);
-      assertFalse(ft.getClass().getName(), ft.hasProperty(FieldType.OMIT_NORMS));
+      // Point fields are never scored, so they always omit norms, regardless of schema version
+      assertEquals(
+          ft.getClass().getName(), ft instanceof PointField, ft.hasProperty(FieldType.OMIT_NORMS));
     }
 
     // ***********************

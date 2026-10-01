@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.apache.lucene.document.NumericDocValuesField;
 import org.apache.lucene.document.SortedNumericDocValuesField;
@@ -78,6 +79,30 @@ public abstract class PointField extends NumericFieldType {
     super.init(schema, args);
     if (TEST_HACK_IGNORE_USELESS_TRIEFIELD_ARGS) {
       args.remove("precisionStep");
+    }
+    if (0 != (falseProperties & OMIT_NORMS)) {
+      throw new SolrException(
+          SolrException.ErrorCode.BAD_REQUEST,
+          "FieldType "
+              + getClass().getSimpleName()
+              + " is incompatible with omitNorms=false; point fields do not support norms. Remove specification in schema");
+    }
+    // Point fields are never scored, so norms are meaningless; always omit them, including on old
+    // schema versions where PrimitiveFieldType does not default them away.
+    properties |= OMIT_NORMS;
+  }
+
+  @Override
+  public void checkSchemaField(final SchemaField field) {
+    super.checkSchemaField(field);
+    if (!field.omitNorms()) {
+      final String message =
+          String.format(
+              Locale.ROOT,
+              "%s of type %s is incompatible with omitNorms=false; point fields do not support norms. Remove specification in schema",
+              field.getName(),
+              getClass().getSimpleName());
+      throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, message);
     }
   }
 
