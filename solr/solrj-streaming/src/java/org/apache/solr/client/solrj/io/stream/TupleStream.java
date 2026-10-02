@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -216,7 +217,12 @@ public abstract class TupleStream implements Closeable, Serializable, MapWriter 
         streamContext != null ? (Map<String, List<String>>) streamContext.get("shards") : null;
     if (shardsMap != null) {
       // Manual Sharding
-      shards = shardsMap.get(collection);
+      List<String> configuredShards = shardsMap.get(collection);
+      if (configuredShards == null) {
+        return Collections.emptyList();
+      }
+
+      shards = new ArrayList<>(configuredShards);
       final Object core = streamContext.isLocal() ? streamContext.get("core") : null;
       if (core != null) {
         shards.removeIf(shardUrl -> !shardUrl.contains((CharSequence) core));
