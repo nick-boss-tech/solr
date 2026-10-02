@@ -32,6 +32,37 @@ import org.junit.Test;
 public class TestJettySolrRunner extends SolrTestCaseJ4 {
 
   @Test
+  public void testJettyThreadPoolDefaultIsBounded() throws Exception {
+    Path solrHome = createTempDir();
+    Files.write(
+        solrHome.resolve("solr.xml"),
+        MiniSolrCloudCluster.DEFAULT_CLOUD_SOLR_XML.getBytes(Charset.defaultCharset()));
+
+    JettySolrRunner jetty = new JettySolrRunner(solrHome.toString(), JettyConfig.builder().build());
+    try {
+      assertEquals(254, jetty.getConfiguredMaxThreads());
+    } finally {
+      jetty.close();
+    }
+  }
+
+  @Test
+  public void testJettyThreadPoolCanBeConfigured() throws Exception {
+    Path solrHome = createTempDir();
+    Files.write(
+        solrHome.resolve("solr.xml"),
+        MiniSolrCloudCluster.DEFAULT_CLOUD_SOLR_XML.getBytes(Charset.defaultCharset()));
+
+    JettySolrRunner jetty =
+        new JettySolrRunner(solrHome.toString(), JettyConfig.builder().withMaxThreads(123).build());
+    try {
+      assertEquals(123, jetty.getConfiguredMaxThreads());
+    } finally {
+      jetty.close();
+    }
+  }
+
+  @Test
   public void testPassSolrHomeToRunner() throws Exception {
 
     // We set a non-standard coreRootDirectory, create a core, and check that it has been

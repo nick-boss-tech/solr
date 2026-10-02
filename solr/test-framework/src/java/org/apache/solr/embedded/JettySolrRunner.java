@@ -101,7 +101,8 @@ public class JettySolrRunner implements SolrBackend {
 
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-  private static final int THREAD_POOL_MAX_THREADS = 10000;
+  // Keep the Jetty pool bounded so high request churn doesn't balloon thread-local caches.
+  private static final int DEFAULT_THREAD_POOL_MAX_THREADS = 254;
   // NOTE: needs to be larger than SolrHttpClient.threadPoolSweeperMaxIdleTime
   private static final int THREAD_POOL_MAX_IDLE_TIME_MS = 260000;
 
@@ -200,7 +201,8 @@ public class JettySolrRunner implements SolrBackend {
   private void init(int port) {
 
     QueuedThreadPool qtp = new QueuedThreadPool();
-    qtp.setMaxThreads(THREAD_POOL_MAX_THREADS);
+    qtp.setMaxThreads(
+        config.maxThreads != null ? config.maxThreads : DEFAULT_THREAD_POOL_MAX_THREADS);
     qtp.setIdleTimeout(THREAD_POOL_MAX_IDLE_TIME_MS);
     qtp.setReservedThreads(0);
     server = new Server(qtp);
@@ -853,6 +855,10 @@ public class JettySolrRunner implements SolrBackend {
   @Override
   public String getBaseUrl(Random r) {
     return getBaseUrl().toString();
+  }
+
+  int getConfiguredMaxThreads() {
+    return ((QueuedThreadPool) server.getThreadPool()).getMaxThreads();
   }
 
   @Override

@@ -36,6 +36,7 @@ public class JettyConfig {
   public final SSLConfig sslConfig;
   public final boolean enableV2;
   public final boolean enableGracefulShutdown;
+  public final Integer maxThreads;
 
   private JettyConfig(
       boolean onlyHttp1,
@@ -47,7 +48,8 @@ public class JettyConfig {
       Map<Class<? extends Filter>, String> extraFilters,
       SSLConfig sslConfig,
       boolean enableV2,
-      boolean enableGracefulShutdown) {
+      boolean enableGracefulShutdown,
+      Integer maxThreads) {
     this.onlyHttp1 = onlyHttp1;
     this.port = port;
     this.portRetryTime = portRetryTime;
@@ -58,6 +60,7 @@ public class JettyConfig {
     this.sslConfig = sslConfig;
     this.enableV2 = enableV2;
     this.enableGracefulShutdown = enableGracefulShutdown;
+    this.maxThreads = maxThreads;
   }
 
   public static Builder builder() {
@@ -77,6 +80,7 @@ public class JettyConfig {
     builder.sslConfig = other.sslConfig;
     builder.enableV2 = other.enableV2;
     builder.enableGracefulShutdown = other.enableGracefulShutdown;
+    builder.maxThreads = other.maxThreads;
     return builder;
   }
 
@@ -93,6 +97,7 @@ public class JettyConfig {
     SSLConfig sslConfig =
         SolrTestCaseJ4.sslConfig != null ? SolrTestCaseJ4.sslConfig.buildServerSSLConfig() : null;
     int portRetryTime = 60;
+    Integer maxThreads = null;
 
     public Builder useOnlyHttp1(boolean useOnlyHttp1) {
       this.onlyHttp1 = useOnlyHttp1;
@@ -154,6 +159,11 @@ public class JettyConfig {
       return this;
     }
 
+    public Builder withMaxThreads(int maxThreads) {
+      this.maxThreads = maxThreads;
+      return this;
+    }
+
     public JettyConfig build() {
       return new JettyConfig(
           onlyHttp1,
@@ -165,7 +175,8 @@ public class JettyConfig {
           extraFilters,
           sslConfig,
           enableV2,
-          enableGracefulShutdown);
+          enableGracefulShutdown,
+          maxThreads);
     }
   }
 }
