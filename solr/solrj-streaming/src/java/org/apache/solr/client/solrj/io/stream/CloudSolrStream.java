@@ -51,9 +51,11 @@ import org.apache.solr.client.solrj.io.stream.expr.StreamExpression;
 import org.apache.solr.client.solrj.io.stream.expr.StreamExpressionNamedParameter;
 import org.apache.solr.client.solrj.io.stream.expr.StreamExpressionValue;
 import org.apache.solr.client.solrj.io.stream.expr.StreamFactory;
+import org.apache.solr.client.solrj.request.schema.SchemaRequest;
 import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.cloud.Slice;
+import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.IOUtils;
@@ -315,6 +317,7 @@ public class CloudSolrStream extends TupleStream implements Expressible {
     this.tuples = new TreeSet<>();
     this.solrStreams = new ArrayList<>();
     this.eofTuples = Collections.synchronizedMap(new HashMap<>());
+    ensureExportSortUsesUniqueKey();
     constructStreams();
     openStreams();
   }
@@ -591,5 +594,74 @@ public class CloudSolrStream extends TupleStream implements Expressible {
 
   protected ModifiableSolrParams adjustParams(ModifiableSolrParams params) {
     return params;
+  }
+
+  private void ensureExportSortUsesUniqueKey() throws IOException {
+    if (!"/export".equals(params.get(CommonParams.QT))) {
+      return;
+    }
+
+    final String[] sortParams = params.getParams(SORT);
+    if (sortParams == null) {
+      return;
+    }
+    final String sort = String.join(",", sortParams);
+
+    final String uniqueKeyField = getUniqueKeyField();
+    if (uniqueKeyField == null || sortContainsField(sort, uniqueKeyField)) {
+      return;
+    }
+
+    final ModifiableSolrParams exportParams = new ModifiableSolrParams(params);
+    exportParams.set(SORT, sort + "," + uniqueKeyField + " asc");
+    params = exportParams;
+    // Keep the merge comparator aligned with the export handler's stable sort.
+    comp = comp.append(new FieldComparator(uniqueKeyField, ComparatorOrder.ASCENDING));
+  }
+
+  private String getUniqueKeyField() throws IOException {
+    SolrClientCache cache =
+        streamContext != null && streamContext.getSolrClientCache() != null
+            ? streamContext.getSolrClientCache()
+            : new SolrClientCache();
+    boolean closeCache =
+        cache != (streamContext == null ? null : streamContext.getSolrClientCache());
+
+    try {
+      return new SchemaRequest.UniqueKey()
+          .process(cache.getCloudSolrClient(solrConnection), collection)
+          .getUniqueKey();
+    } catch (Exception e) {
+      throw new IOException("Unable to resolve unique key for export sort", e);
+    } finally {
+      if (closeCache) {
+        try {
+          cache.close();
+        } catch (Exception ignored) {
+          // Best effort cleanup of the temporary client cache.
+        }
+      }
+    }
+  }
+
+  private boolean sortContainsField(String sort, String fieldName) {
+    for (String clause : sort.split(",")) {
+      String trimmed = clause.trim();
+      if (trimmed.isEmpty()) {
+        continue;
+      }
+
+      String sortField = trimmed.split("\\s+")[0];
+      int equalsIdx = sortField.indexOf('=');
+      if (equalsIdx >= 0) {
+        sortField = sortField.substring(0, equalsIdx).trim();
+      }
+
+      if (fieldName.equals(sortField)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
