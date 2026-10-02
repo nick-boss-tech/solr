@@ -744,6 +744,27 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         "//doc[1]/str[@name='id'][.='48']",
         "//doc[2]/str[@name='id'][.='50']",
         "//doc[3]/str[@name='id'][.='49']");
+
+    // Multiplicative boosts should keep the base score when a doc is missing the
+    // referenced field instead of zeroing the whole result.
+    assertQ(
+        req(
+            "q",
+            "*:*",
+            "qf",
+            "text_sw",
+            "defType",
+            "edismax",
+            "boost",
+            "field(foo_i)",
+            "fq",
+            "id:[47 TO 48]",
+            "fl",
+            "id,score"),
+        "//doc[1]/str[@name='id'][.='48']",
+        "//doc[2]/str[@name='id'][.='47']",
+        "//doc[str[@name='id'][.='48'] and float[@name='score'][.='100.0']]",
+        "//doc[str[@name='id'][.='47'] and float[@name='score'][.='1.0']]");
   }
 
   public void testUserFields() {

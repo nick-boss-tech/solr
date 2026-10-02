@@ -32,7 +32,6 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.queries.function.FunctionScoreQuery;
 import org.apache.lucene.queries.function.ValueSource;
 import org.apache.lucene.queries.function.valuesource.ProductFloatFunction;
-import org.apache.lucene.queries.function.valuesource.QueryValueSource;
 import org.apache.lucene.queries.spans.SpanQuery;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
@@ -546,11 +545,11 @@ public class ExtendedDismaxQParser extends QParser {
     if (config.hasMultiplicativeBoosts()) {
       for (String boostStr : config.multBoosts) {
         if (boostStr == null || boostStr.isEmpty()) continue;
-        ValueSource vs = subQuery(boostStr, FunctionQParserPlugin.NAME).parseAsValueSource();
-        // the default score should be 1, not 0
-        if (vs instanceof QueryValueSource qvs && qvs.getDefaultValue() == 0.0f) {
-          vs = new QueryValueSource(qvs.getQuery(), 1.0f);
-        }
+        // Multiplicative boosts should fall back to the identity value when the
+        // wrapped function has no value for a document.
+        ValueSource vs =
+            subQuery("def(" + boostStr.trim() + ",1.0)", FunctionQParserPlugin.NAME)
+                .parseAsValueSource();
         boosts.add(vs);
       }
     }
