@@ -67,6 +67,7 @@ public class ConcurrentLRUCache<K, V> implements Cache<K, V>, Accountable {
   private final ReentrantLock markAndSweepLock = new ReentrantLock(true);
   private boolean isCleaning = false; // not volatile... piggybacked on other volatile vars
   private boolean newThreadForCleanup;
+  private volatile boolean suppressCleaning = false;
   private volatile boolean islive = true;
   private final Stats stats = new Stats();
   private int acceptableWaterMark;
@@ -339,7 +340,8 @@ public class ConcurrentLRUCache<K, V> implements Cache<K, V>, Accountable {
     if ((currentSize > upperWaterMark
             || ramBytes.sum() > ramUpperWatermark
             || oldestEntryNs.get() < idleCutoff)
-        && !isCleaning) {
+        && !isCleaning
+        && !suppressCleaning) {
       if (newThreadForCleanup) {
         new Thread(this::markAndSweep, "CacheCleanupThread").start();
       } else if (cleanupThread != null) {
@@ -699,7 +701,7 @@ public class ConcurrentLRUCache<K, V> implements Cache<K, V>, Accountable {
     Map<K, V> result = new LinkedHashMap<>();
     if (n <= 0) return result;
     TreeSet<CacheEntry<K, V>> tree = new TreeSet<>();
-    markAndSweepLock.lock();
+    lockForAccessOrderScan();
     try {
       for (Map.Entry<Object, CacheEntry<K, V>> entry : map.entrySet()) {
         CacheEntry<K, V> ce = entry.getValue();
@@ -727,7 +729,7 @@ public class ConcurrentLRUCache<K, V> implements Cache<K, V>, Accountable {
     if (n <= 0) return result;
     TreeSet<CacheEntry<K, V>> tree = new TreeSet<>();
     // we need to grab the lock since we are changing lastAccessedCopy
-    markAndSweepLock.lock();
+    lockForAccessOrderScan();
     try {
       for (Map.Entry<Object, CacheEntry<K, V>> entry : map.entrySet()) {
         CacheEntry<K, V> ce = entry.getValue();
@@ -748,6 +750,15 @@ public class ConcurrentLRUCache<K, V> implements Cache<K, V>, Accountable {
       result.put(e.key, e.value);
     }
     return result;
+  }
+
+  private void lockForAccessOrderScan() {
+    suppressCleaning = true;
+    try {
+      markAndSweepLock.lock();
+    } finally {
+      suppressCleaning = false;
+    }
   }
 
   public int size() {
