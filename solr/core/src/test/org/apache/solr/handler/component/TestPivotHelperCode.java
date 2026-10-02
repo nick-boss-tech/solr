@@ -21,7 +21,9 @@ import java.util.Arrays;
 import java.util.List;
 import org.apache.lucene.tests.util.TestUtil;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SuppressForbidden;
+import org.apache.solr.util.PivotListEntry;
 
 /** A lightweight test of various helper methods used in pivot faceting */
 public class TestPivotHelperCode extends SolrTestCaseJ4 {
@@ -99,6 +101,17 @@ public class TestPivotHelperCode extends SolrTestCaseJ4 {
 
     assertTrue(0 < PivotFacetFieldValueCollection.compareWithNullLast(null, a));
     assertTrue(0 < PivotFacetFieldValueCollection.compareWithNullLast(null, b));
+  }
+
+  public void testPivotListEntryOptionalLookupSkipsEarlierMatches() {
+    NamedList<Object> pivotData = new NamedList<>();
+    pivotData.add("stats", "before-min-index");
+    pivotData.add("field", "category");
+    pivotData.add("value", "electronics");
+    pivotData.add("count", 7);
+    pivotData.add("stats", "after-min-index");
+
+    assertEquals("after-min-index", PivotListEntry.STATS.extract(pivotData));
   }
 
   private List<String> strs(String... strs) {

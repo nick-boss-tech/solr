@@ -454,10 +454,14 @@ public class CombinedQueryComponent extends QueryComponent implements SolrCoreAw
     populateNextCursorMarkFromMergedShards(rb);
 
     if (thereArePartialResults) {
-      rb.rsp
-          .getResponseHeader()
-          .asShallowMap()
-          .put(SolrQueryResponse.RESPONSE_HEADER_PARTIAL_RESULTS_KEY, Boolean.TRUE);
+      NamedList<Object> responseHeader = rb.rsp.getResponseHeader();
+      int partialResultsIdx =
+          responseHeader.indexOf(SolrQueryResponse.RESPONSE_HEADER_PARTIAL_RESULTS_KEY, 0);
+      if (partialResultsIdx < 0) {
+        responseHeader.add(SolrQueryResponse.RESPONSE_HEADER_PARTIAL_RESULTS_KEY, Boolean.TRUE);
+      } else {
+        responseHeader.setVal(partialResultsIdx, Boolean.TRUE);
+      }
     }
     if (segmentTerminatedEarly != null) {
       final Object existingSegmentTerminatedEarly =
