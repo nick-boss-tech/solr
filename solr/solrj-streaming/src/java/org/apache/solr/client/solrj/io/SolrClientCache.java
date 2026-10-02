@@ -35,16 +35,14 @@ import org.apache.solr.common.util.URLUtil;
 /** The SolrClientCache caches SolrClients, so they can be reused by different TupleStreams. */
 public class SolrClientCache implements Closeable {
 
-  // Set the floor for timeouts to 60 seconds.
-  // Timeouts can be increased by setting the system properties defined below.
+  // Set the floor for timeouts to 60 seconds unless a caller supplies explicit overrides.
+  // The default constructor still honors the system properties defined below.
   private static final int MIN_TIMEOUT = 60000;
-  private static final int minConnTimeout =
-      Math.max(
-          Integer.getInteger(SolrHttpConstants.PROP_CONNECTION_TIMEOUT, MIN_TIMEOUT), MIN_TIMEOUT);
-  private static final int minSocketTimeout =
-      Math.max(Integer.getInteger(SolrHttpConstants.PROP_SO_TIMEOUT, MIN_TIMEOUT), MIN_TIMEOUT);
 
   protected String basicAuthCredentials = null; // Only support with the httpJettySolrClient
+
+  private final int minConnTimeout;
+  private final int minSocketTimeout;
 
   private final Map<String, SolrClient> httpSolrClients = new HashMap<>();
   private final Map<CloudSolrClient.CloudSolrClientConnection, CloudSolrClient> cloudSolClients =
@@ -54,11 +52,31 @@ public class SolrClientCache implements Closeable {
   private final AtomicReference<String> defaultZkHost = new AtomicReference<>();
 
   public SolrClientCache() {
-    this.httpSolrClient = null;
+    this(
+        null,
+        configuredMinTimeout(SolrHttpConstants.PROP_CONNECTION_TIMEOUT),
+        configuredMinTimeout(SolrHttpConstants.PROP_SO_TIMEOUT));
+  }
+
+  public SolrClientCache(int minConnTimeout, int minSocketTimeout) {
+    this(null, minConnTimeout, minSocketTimeout);
   }
 
   public SolrClientCache(HttpSolrClient httpSolrClient) {
+    this(
+        httpSolrClient,
+        configuredMinTimeout(SolrHttpConstants.PROP_CONNECTION_TIMEOUT),
+        configuredMinTimeout(SolrHttpConstants.PROP_SO_TIMEOUT));
+  }
+
+  public SolrClientCache(HttpSolrClient httpSolrClient, int minConnTimeout, int minSocketTimeout) {
     this.httpSolrClient = httpSolrClient;
+    this.minConnTimeout = minConnTimeout;
+    this.minSocketTimeout = minSocketTimeout;
+  }
+
+  private static int configuredMinTimeout(String propertyName) {
+    return Math.max(Integer.getInteger(propertyName, MIN_TIMEOUT), MIN_TIMEOUT);
   }
 
   public void setBasicAuthCredentials(String basicAuthCredentials) {
@@ -157,6 +175,8 @@ public class SolrClientCache implements Closeable {
     }
     builder.withIdleTimeout(
         Math.max(minSocketTimeout, builder.getIdleTimeoutMillis()), TimeUnit.MILLISECONDS);
+    // Streaming requests can legitimately run for far longer than the idle timeout floor.
+    builder.withRequestTimeout(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
     builder.withOptionalBasicAuthCredentials(basicAuthCredentials);
 
     return builder;
