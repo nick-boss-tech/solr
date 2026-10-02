@@ -185,6 +185,13 @@ public class ZkStateReader implements SolrCloseable {
 
   private Set<CloudCollectionsListener> cloudCollectionsListeners = ConcurrentHashMap.newKeySet();
 
+  /**
+   * Lazy collections whose znode has been seen but whose state.json is not readable yet. Each has a
+   * one-shot exists-watch on its state.json so listeners are still notified when the state appears
+   * (no /collections children event fires for that).
+   */
+  private final Set<String> collectionsAwaitingState = ConcurrentHashMap.newKeySet();
+
   private final ExecutorService notifications = ExecutorUtil.newMDCAwareCachedThreadPool("watches");
 
   private Set<LiveNodesListener> liveNodesListeners = ConcurrentHashMap.newKeySet();
@@ -687,6 +694,9 @@ public class ZkStateReader implements SolrCloseable {
 
       // First, drop any children that disappeared.
       this.lazyCollectionStates.keySet().retainAll(new HashSet<>(children)); // Set avoids O(N^2)
+      // Drop pending state watches for collections that are gone; surviving entries are re-armed
+      // by getCurrentCollections (their one-shot watches may have died with a session expiry).
+      this.collectionsAwaitingState.retainAll(new HashSet<>(children));
       for (String coll : children) {
         // We will create an eager collection for any interesting collections, so don't add to lazy.
         if (!collectionWatches.watchedCollections().contains(coll)) {
@@ -744,11 +754,61 @@ public class ZkStateReader implements SolrCloseable {
     for (Map.Entry<String, LazyCollectionRef> entry : lazyCollectionStates.entrySet()) {
       // The /collections child znode is created before its state.json during collection creation;
       // only report collections whose state can actually be read yet.
-      if (entry.getValue().get(true) != null) {
+      DocCollection state = entry.getValue().get(true);
+      if (state == null) {
+        state = watchForCollectionState(entry.getKey(), entry.getValue());
+      }
+      if (state != null) {
         collections.add(entry.getKey());
+        collectionsAwaitingState.remove(entry.getKey());
       }
     }
     return collections;
+  }
+
+  /**
+   * Arm a one-shot exists-watch on the collection's state.json so {@link CloudCollectionsListener}s
+   * are notified when the state becomes readable. Without this, a collection whose state.json
+   * appears after the initial /collections children event would never be reported, since no further
+   * children event fires for it.
+   *
+   * @return the collection state if it became readable before the watch was armed, otherwise null
+   */
+  private DocCollection watchForCollectionState(String collection, LazyCollectionRef ref) {
+    if (!collectionsAwaitingState.add(collection)) {
+      return null; // watch already armed
+    }
+    Watcher watcher =
+        event -> {
+          EventType type = event.getType();
+          if (type == EventType.NodeCreated || type == EventType.NodeDeleted) {
+            collectionsAwaitingState.remove(collection);
+            LazyCollectionRef r = lazyCollectionStates.get(collection);
+            if (r != null) {
+              r.get(false); // force a fresh read; the cached value may predate state.json
+            }
+            synchronized (getUpdateLock()) {
+              constructState(Set.of(collection));
+            }
+          }
+        };
+    try {
+      if (zkClient.exists(DocCollection.getCollectionPath(collection), watcher) != null) {
+        // state.json appeared between the readability check and arming the watch
+        DocCollection state = ref.get(false);
+        if (state != null) {
+          collectionsAwaitingState.remove(collection);
+        }
+        return state;
+      }
+    } catch (KeeperException | InterruptedException e) {
+      collectionsAwaitingState.remove(collection);
+      if (e instanceof InterruptedException) {
+        Thread.currentThread().interrupt();
+      }
+      log.warn("Failed to watch for state of collection {}", collection, e);
+    }
+    return null;
   }
 
   private class LazyCollectionRef extends ClusterState.CollectionRef {
