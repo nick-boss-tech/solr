@@ -334,6 +334,20 @@ public class ClusterStatus {
     return collection;
   }
 
+  private static void normalizeCollectionCountTypes(Map<String, Object> collectionStatus) {
+    for (String prop :
+        List.of(
+            ZkStateReader.REPLICATION_FACTOR,
+            ZkStateReader.NRT_REPLICAS,
+            ZkStateReader.TLOG_REPLICAS,
+            ZkStateReader.PULL_REPLICAS)) {
+      Object value = collectionStatus.get(prop);
+      if (value != null) {
+        collectionStatus.put(prop, value.toString());
+      }
+    }
+  }
+
   private Map<String, Object> buildResponseForCollection(
       DocCollection clusterStateCollection,
       Map<String, List<String>> collectionVsAliases,
@@ -356,6 +370,7 @@ public class ClusterStatus {
     @SuppressWarnings("unchecked")
     Map<String, Object> docCollection = (Map<String, Object>) Utils.fromJSON(bytes);
     collectionStatus = getCollectionStatus(docCollection, name, shards);
+    normalizeCollectionCountTypes(collectionStatus);
 
     collectionStatus.put("znodeVersion", clusterStateCollection.getZNodeVersion());
     collectionStatus.put(
