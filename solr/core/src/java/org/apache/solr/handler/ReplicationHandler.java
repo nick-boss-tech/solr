@@ -86,6 +86,7 @@ import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.common.util.SolrNamedThreadFactory;
 import org.apache.solr.common.util.StrUtils;
 import org.apache.solr.common.util.SuppressForbidden;
+import org.apache.solr.common.util.URLUtil;
 import org.apache.solr.core.CloseHook;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.DirectoryFactory.DirContext;
@@ -1018,7 +1019,7 @@ public class ReplicationHandler extends RequestHandlerBase
           follower.add(ERR_STATUS, "invalid_leader");
         }
       }
-      follower.add(LEADER_URL, fetcher.getLeaderCoreUrl());
+      follower.add(LEADER_URL, URLUtil.redactUserInfo(fetcher.getLeaderCoreUrl()));
       if (getPollInterval() != null) {
         follower.add(ReplicationAPIBase.POLL_INTERVAL, getPollInterval());
       }

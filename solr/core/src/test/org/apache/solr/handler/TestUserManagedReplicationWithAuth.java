@@ -41,6 +41,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
+import org.apache.solr.common.util.NamedList;
 import org.apache.solr.embedded.JettySolrRunner;
 import org.junit.After;
 import org.junit.Before;
@@ -181,6 +182,14 @@ public class TestUserManagedReplicationWithAuth extends SolrTestCaseJ4 {
     assertEquals(
         docsAdded,
         queryWithBasicAuth(followerClient, new SolrQuery("*:*")).getResults().getNumFound());
+
+    NamedList<Object> details = ReplicationTestHelper.getDetails(followerClient);
+    @SuppressWarnings("unchecked")
+    NamedList<Object> followerDetails = (NamedList<Object>) details.get("follower");
+    assertNotNull("null follower details", followerDetails);
+    String leaderUrl = (String) followerDetails.get("leaderUrl");
+    assertEquals(buildUrl(leaderJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, leaderUrl);
+    assertFalse("leaderUrl should not expose credentials", leaderUrl.contains(user + ":"));
   }
 
   @Test
@@ -253,6 +262,9 @@ public class TestUserManagedReplicationWithAuth extends SolrTestCaseJ4 {
     solrParams.set(COMMAND, CMD_FETCH_INDEX);
     solrParams.set(CommonParams.WT, JAVABIN);
     solrParams.set(CommonParams.QT, ReplicationHandler.PATH);
+    if (authEnabled) {
+      srcUrl = srcUrl.replace("://", "://" + user + ":" + pass + "@");
+    }
     solrParams.set("leaderUrl", srcUrl);
     solrParams.set("wait", "true");
     if (authEnabled) {

@@ -96,6 +96,51 @@ public class URLUtil {
     return baseUrl + "/" + coreName;
   }
 
+  /**
+   * Redact any user-info component from a URL while keeping the rest of the address intact.
+   *
+   * <p>This is intended for display/logging only. Callers should continue to use the original URL
+   * for any connection logic.
+   *
+   * @param url a full URL that may contain embedded credentials
+   * @return the same URL with the password replaced by {@code ********}, or the original value if
+   *     no user-info is present or the URL cannot be parsed cleanly
+   */
+  public static String redactUserInfo(String url) {
+    if (url == null) {
+      return null;
+    }
+
+    try {
+      URI uri = URI.create(url);
+      String userInfo = uri.getUserInfo();
+      if (userInfo == null) {
+        return url;
+      }
+
+      String redactedUserInfo;
+      int colonAt = userInfo.indexOf(':');
+      if (colonAt >= 0) {
+        redactedUserInfo = userInfo.substring(0, colonAt + 1) + "********";
+      } else {
+        redactedUserInfo = "********";
+      }
+
+      return new URI(
+              uri.getScheme(),
+              redactedUserInfo,
+              uri.getHost(),
+              uri.getPort(),
+              uri.getPath(),
+              uri.getQuery(),
+              uri.getFragment())
+          .toString();
+    } catch (IllegalArgumentException | URISyntaxException e) {
+      log.debug("Unable to redact credentials from URL [{}]", url, e);
+      return url;
+    }
+  }
+
   private static String removeTrailingSlashIfPresent(String url) {
     if (url.endsWith("/")) {
       return url.substring(0, url.length() - 1);
