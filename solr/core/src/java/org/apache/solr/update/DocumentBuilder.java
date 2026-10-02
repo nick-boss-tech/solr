@@ -41,7 +41,6 @@ public class DocumentBuilder {
   // accessible only for tests
   static int MIN_LENGTH_TO_MOVE_LAST =
       Integer.getInteger("solr.docBuilder.minLengthToMoveLast", 4 * 1024); // internal setting
-  static int MAX_VALUES_AS_STRING_LENGTH = 256;
 
   /**
    * Add a field value to a given document.
@@ -91,6 +90,11 @@ public class DocumentBuilder {
       id = "[doc=" + doc.getFieldValue(sf.getName()) + "] ";
     }
     return id;
+  }
+
+  private static String getFieldErrorMessage(
+      SolrInputDocument doc, IndexSchema schema, String fieldName) {
+    return "ERROR: " + getID(doc, schema) + "Error adding field '" + fieldName + "'";
   }
 
   /**
@@ -163,21 +167,12 @@ public class DocumentBuilder {
           && field.getValueCount() > 1
           && !(sfield.getType() instanceof DenseVectorField)) {
 
-        // Ensure we do not flood the logs with extremely long values
-        String fieldValue = field.getValue().toString();
-        if (fieldValue.length() > MAX_VALUES_AS_STRING_LENGTH) {
-          assert fieldValue.endsWith("]");
-          fieldValue = fieldValue.substring(0, MAX_VALUES_AS_STRING_LENGTH - 4) + "...]";
-        }
-
         throw new SolrException(
             SolrException.ErrorCode.BAD_REQUEST,
             "ERROR: "
                 + getID(doc, schema)
                 + "multiple values encountered for non multiValued field "
-                + sfield.getName()
-                + ": "
-                + fieldValue);
+                + sfield.getName());
       }
 
       List<CopyField> copyFields = schema.getCopyFieldsList(name);
@@ -274,27 +269,11 @@ public class DocumentBuilder {
       } catch (SolrException ex) {
         throw new SolrException(
             SolrException.ErrorCode.getErrorCode(ex.code()),
-            "ERROR: "
-                + getID(doc, schema)
-                + "Error adding field '"
-                + field.getName()
-                + "'='"
-                + field.getValue()
-                + "' msg="
-                + ex.getMessage(),
+            getFieldErrorMessage(doc, schema, name),
             ex);
       } catch (Exception ex) {
         throw new SolrException(
-            SolrException.ErrorCode.BAD_REQUEST,
-            "ERROR: "
-                + getID(doc, schema)
-                + "Error adding field '"
-                + field.getName()
-                + "'='"
-                + field.getValue()
-                + "' msg="
-                + ex.getMessage(),
-            ex);
+            SolrException.ErrorCode.BAD_REQUEST, getFieldErrorMessage(doc, schema, name), ex);
       }
 
       // make sure the field was used somehow...
@@ -376,9 +355,7 @@ public class DocumentBuilder {
         throw new SolrException(
             SolrException.ErrorCode.BAD_REQUEST,
             "Multiple values encountered for non multiValued copy field "
-                + destinationField.getName()
-                + ": "
-                + originalFieldValue);
+                + destinationField.getName());
       }
       Object fieldValue = originalFieldValue;
       // Perhaps trim the length of a copy field

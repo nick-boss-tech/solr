@@ -123,7 +123,7 @@ public class JavabinLoader extends ContentStreamLoader {
               addCmd.clear();
             } catch (IOException e) {
               throw new SolrException(
-                  SolrException.ErrorCode.SERVER_ERROR, "ERROR adding document " + document, e);
+                  SolrException.ErrorCode.SERVER_ERROR, "ERROR adding document", e);
             }
           }
         };
