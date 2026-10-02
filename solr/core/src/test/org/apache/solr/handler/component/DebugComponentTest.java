@@ -17,14 +17,19 @@
 package org.apache.solr.handler.component;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
+import org.apache.solr.util.SolrPluginUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -274,6 +279,52 @@ public class DebugComponentTest extends SolrTestCaseJ4 {
     assertQ(
         req("debugQuery", "true", "indent", "true", "rows", "0", "q", "foo_s:aaa^=3"),
         "//str[@name='parsedquery'][contains(.,'3.0')]");
+  }
+
+  @Test
+  public void testDoStandardDebugMovedFromSolrPluginUtils() {
+    Set<String> pluginUtilsNames = new HashSet<>();
+    for (Method method : SolrPluginUtils.class.getDeclaredMethods()) {
+      pluginUtilsNames.add(method.getName());
+    }
+    assertFalse(
+        "SOLR-18109: SolrPluginUtils.doStandardDebug moved to DebugComponent",
+        pluginUtilsNames.contains("doStandardDebug"));
+    assertFalse(
+        "SOLR-18109: SolrPluginUtils.doStandardQueryDebug moved to DebugComponent",
+        pluginUtilsNames.contains("doStandardQueryDebug"));
+    assertFalse(
+        "SOLR-18109: SolrPluginUtils.doStandardResultsDebug moved to DebugComponent",
+        pluginUtilsNames.contains("doStandardResultsDebug"));
+    assertFalse(
+        "SOLR-18109: SolrPluginUtils.doSimpleQuery moved with doStandardResultsDebug",
+        pluginUtilsNames.contains("doSimpleQuery"));
+
+    boolean foundPublicSimple = false;
+    Set<String> debugNames = new HashSet<>();
+    for (Method method : DebugComponent.class.getDeclaredMethods()) {
+      debugNames.add(method.getName());
+      if ("doSimpleQuery".equals(method.getName()) && Modifier.isPublic(method.getModifiers())) {
+        foundPublicSimple = true;
+      }
+    }
+    assertTrue(debugNames.contains("doStandardDebug"));
+    assertTrue(debugNames.contains("doStandardQueryDebug"));
+    assertTrue(debugNames.contains("doStandardResultsDebug"));
+    assertTrue(
+        "doSimpleQuery should move with doStandardResultsDebug as a private helper",
+        debugNames.contains("doSimpleQuery"));
+    assertFalse("doSimpleQuery should stay private on DebugComponent", foundPublicSimple);
+  }
+
+  @Test
+  public void testExplainOther() {
+    assertQ(
+        req("q", "id:1", CommonParams.DEBUG_QUERY, "true", CommonParams.EXPLAIN_OTHER, "id:2"),
+        "//str[@name='rawquerystring']='id:1'",
+        "//str[@name='otherQuery']='id:2'",
+        "//lst[@name='explain']/str[@name='1']",
+        "//lst[@name='explainOther']/str[@name='2']");
   }
 
   @Test

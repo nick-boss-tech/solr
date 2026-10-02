@@ -52,11 +52,13 @@ import org.apache.solr.common.util.ContentStream;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.StrUtils;
 import org.apache.solr.handler.admin.api.MoreLikeThisAPI;
+import org.apache.solr.handler.component.DebugComponent;
 import org.apache.solr.handler.component.FacetComponent;
 import org.apache.solr.handler.component.ResponseBuilder;
 import org.apache.solr.request.SimpleFacets;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
+import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.DocIterator;
 import org.apache.solr.search.DocList;
@@ -246,12 +248,10 @@ public class MoreLikeThisHandler extends RequestHandlerBase {
         dbgQuery = true;
         dbgResults = true;
       }
-      // TODO resolve duplicated code with DebugComponent.  Perhaps it should be added to
-      // doStandardDebug?
       if (dbg == true) {
         try {
           NamedList<Object> dbgInfo =
-              SolrPluginUtils.doStandardDebug(
+              DebugComponent.doStandardDebug(
                   req, q, mlt.getRawMLTQuery(), mltDocs.docList, dbgQuery, dbgResults);
           if (null != filters) {
             dbgInfo.add("filter_queries", req.getParams().getParams(CommonParams.FQ));
@@ -321,6 +321,21 @@ public class MoreLikeThisHandler extends RequestHandlerBase {
             SolrException.ErrorCode.BAD_REQUEST,
             "MoreLikeThis requires at least one similarity field: "
                 + MoreLikeThisParams.SIMILARITY_FIELDS);
+      }
+
+      IndexSchema schema = searcher.getSchema();
+      for (String field : fields) {
+        SchemaField schemaField = schema.getFieldOrNull(field);
+        if (schemaField == null) {
+          throw new SolrException(
+              SolrException.ErrorCode.BAD_REQUEST,
+              "MoreLikeThis similarity field does not exist: " + field);
+        }
+        if (schemaField.getType().getNumberType() != null) {
+          throw new SolrException(
+              SolrException.ErrorCode.BAD_REQUEST,
+              "MoreLikeThis only supports text similarity fields: " + field);
+        }
       }
 
       // TODO -- after LUCENE-896, we can use, searcher.getSimilarity() );
