@@ -18,6 +18,7 @@ package org.apache.solr.core;
 
 import io.opentelemetry.api.common.Attributes;
 import java.util.concurrent.TimeUnit;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
 import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.metrics.SolrMetricsContext;
@@ -42,8 +43,12 @@ final class HttpSolrClientProvider implements AutoCloseable {
     trackHttpSolrMetrics = new InstrumentedHttpListenerFactory(getNameStrategy(cfg));
     initializeMetrics(parentContext);
 
-    var httpClientBuilder =
-        new HttpJettySolrClient.Builder().addListenerFactory(trackHttpSolrMetrics);
+    // Route construction through the generic SolrJ entrypoint so the provider does not hard-code
+    // the Jetty builder when the runtime can already select the available implementation.
+    var httpClientBuilder = HttpSolrClient.builder(null);
+    if (httpClientBuilder instanceof HttpJettySolrClient.Builder jettyBuilder) {
+      jettyBuilder.addListenerFactory(trackHttpSolrMetrics);
+    }
 
     if (cfg != null) {
       httpClientBuilder
@@ -51,7 +56,7 @@ final class HttpSolrClientProvider implements AutoCloseable {
           .withIdleTimeout(cfg.getDistributedSocketTimeout(), TimeUnit.MILLISECONDS)
           .withMaxConnectionsPerHost(cfg.getMaxUpdateConnectionsPerHost());
     }
-    httpSolrClient = httpClientBuilder.build();
+    httpSolrClient = (HttpJettySolrClient) httpClientBuilder.build();
   }
 
   private InstrumentedHttpListenerFactory.NameStrategy getNameStrategy(
