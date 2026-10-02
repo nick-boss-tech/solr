@@ -1116,6 +1116,8 @@ Solr provides support for the http://www.mtholyoke.edu/~lballest/Pubs/arab_stem0
 
 This algorithm defines both character normalization and stemming, so these are split into two filters to provide more flexibility.
 
+If you want searches for bare `ا` to match the common hamza variants `أ`, `إ`, and `آ`, include `solr.ArabicNormalizationFilterFactory` in both the index and query analyzers. `solr.ArabicStemFilterFactory` alone does not provide that normalization step.
+
 *Factory classes:* `solr.ArabicStemFilterFactory`, `solr.ArabicNormalizationFilterFactory`
 
 *Arguments:* None
@@ -2290,6 +2292,8 @@ Set to `false` to not normalize kana iteration marks.
 Tokenizer for Japanese that uses morphological analysis, and annotates each term with part-of-speech, base form (a.k.a. lemma), reading and pronunciation.
 
 `JapaneseTokenizer` has a `search` mode (the default) that does segmentation useful for search: a heuristic is used to segment compound terms into their constituent parts while also keeping the original compound terms as synonyms.
+
+NOTE: Because `search` mode can emit graph-like output for compound terms, avoid chaining it directly before `SynonymGraphFilter` in the same analyzer. If you need query-time synonym expansion, consider using `normal` mode for the query analyzer or otherwise start from a linear token stream.
 
 *Factory class:* `solr.JapaneseTokenizerFactory`
 
