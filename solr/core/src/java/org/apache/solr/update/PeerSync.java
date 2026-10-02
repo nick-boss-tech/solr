@@ -364,7 +364,8 @@ public class PeerSync implements SolrMetricProducer {
     shardHandler.submit(sreq, replica, sreq.params);
   }
 
-  private boolean handleResponse(ShardResponse srsp) {
+  @VisibleForTesting
+  boolean handleResponse(ShardResponse srsp) {
     ShardRequest sreq = srsp.getShardRequest();
 
     if (srsp.getException() != null) {
@@ -413,6 +414,18 @@ public class PeerSync implements SolrMetricProducer {
           && ((SolrException) srsp.getException()).code() == 404) {
         log.warn(
             "{} got a 404 from {}, counting as success. {} Perhaps /get is not registered?",
+            msg(),
+            srsp.getShardAddress(),
+            srsp.getException());
+        return true;
+      }
+
+      if (cantReachIsSuccess
+          && sreq.purpose == SHARD_REQUEST_PURPOSE_GET_VERSIONS
+          && srsp.getException() instanceof SolrException
+          && ((SolrException) srsp.getException()).code() == 500) {
+        log.warn(
+            "{} got a 500 from {}, counting as success. {} Replica may not have loaded the core.",
             msg(),
             srsp.getShardAddress(),
             srsp.getException());

@@ -20,6 +20,7 @@ import static org.apache.solr.update.processor.DistributingUpdateProcessorFactor
 import static org.hamcrest.core.StringContains.containsString;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -37,6 +38,8 @@ import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.StrUtils;
+import org.apache.solr.handler.component.ShardRequest;
+import org.apache.solr.handler.component.ShardResponse;
 import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.update.PeerSync.MissedUpdatesRequest;
 import org.apache.solr.update.processor.DistributedUpdateProcessor;
@@ -679,5 +682,41 @@ public class PeerSyncTest extends BaseDistributedSearchTestCase {
         }
       }
     }
+  }
+
+  @Test
+  public void testPeerSyncIgnores500FromVersionRequestWhenCantReachIsSuccess() throws Exception {
+    PeerSync peerSync =
+        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true);
+
+    ShardRequest request = new ShardRequest();
+    request.purpose = PeerSync.SHARD_REQUEST_PURPOSE_GET_VERSIONS;
+
+    ShardResponse response = new ShardResponse();
+    response.setShardRequest(request);
+    setException(response, new SolrException(SolrException.ErrorCode.SERVER_ERROR, "boom"));
+
+    assertTrue(peerSync.handleResponse(response));
+  }
+
+  @Test
+  public void testPeerSyncStillFails500FromUpdateRequest() throws Exception {
+    PeerSync peerSync =
+        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true);
+
+    ShardRequest request = new ShardRequest();
+    request.purpose = PeerSync.SHARD_REQUEST_PURPOSE_GET_UPDATES;
+
+    ShardResponse response = new ShardResponse();
+    response.setShardRequest(request);
+    setException(response, new SolrException(SolrException.ErrorCode.SERVER_ERROR, "boom"));
+
+    assertFalse(peerSync.handleResponse(response));
+  }
+
+  private static void setException(ShardResponse response, Throwable exception) throws Exception {
+    Field field = ShardResponse.class.getDeclaredField("exception");
+    field.setAccessible(true);
+    field.set(response, exception);
   }
 }
