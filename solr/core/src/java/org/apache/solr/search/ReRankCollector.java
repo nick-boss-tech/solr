@@ -250,8 +250,6 @@ public class ReRankCollector extends TopDocsCollector<ScoreDoc> {
         final int idx;
         if ((idx = boostedDocs.indexOf(scoreDocs[i].doc)) >= 0) {
           boostedMap.put(scoreDocs[i].doc, maxScore + boostedDocs.indexGet(idx));
-        } else {
-          break;
         }
       }
     }
