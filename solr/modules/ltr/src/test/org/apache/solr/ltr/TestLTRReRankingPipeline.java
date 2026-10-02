@@ -22,18 +22,22 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Explanation;
+import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Scorable;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.ScoreMode;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.util.BytesRef;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.core.SolrResourceLoader;
@@ -45,6 +49,8 @@ import org.apache.solr.ltr.norm.IdentityNormalizer;
 import org.apache.solr.ltr.norm.Normalizer;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrQueryRequestBase;
+import org.apache.solr.search.QueryCommand;
+import org.apache.solr.search.ReRankCollector;
 import org.apache.solr.search.SolrIndexSearcher;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -227,6 +233,51 @@ public class TestLTRReRankingPipeline extends SolrTestCaseJ4 {
           assertEquals((i + 1) * features.size() * featureWeight, hits.scoreDocs[j].score, 0.00001);
         }
       }
+    }
+  }
+
+  @Test
+  public void testBoostedDocsSurviveLTRRescore() throws Exception {
+    assertU(delQ("*:*"));
+    assertU(adoc("id", "0", "field", "match", "finalScoreFloat", "1.0"));
+    assertU(adoc("id", "1", "field", "match", "finalScoreFloat", "2.0"));
+    assertU(commit());
+
+    try (SolrQueryRequest solrQueryRequest =
+        new SolrQueryRequestBase(h.getCore(), new ModifiableSolrParams())) {
+      final SolrIndexSearcher searcher = solrQueryRequest.getSearcher();
+
+      final List<Feature> features = makeFieldValueFeatures(new int[] {0, 1, 2}, "finalScoreFloat");
+      final List<Normalizer> norms =
+          new ArrayList<>(Collections.nCopies(features.size(), IdentityNormalizer.INSTANCE));
+      final List<Feature> allFeatures =
+          makeFieldValueFeatures(new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, "finalScoreFloat");
+      final LTRScoringModel ltrScoringModel =
+          TestLinearModel.createLinearModel(
+              "test",
+              features,
+              norms,
+              "test",
+              allFeatures,
+              TestLinearModel.makeFeatureWeights(features));
+
+      final LTRScoringQuery ltrScoringQuery = new LTRScoringQuery(ltrScoringModel);
+      ltrScoringQuery.setRequest(solrQueryRequest);
+
+      final QueryCommand cmd = new QueryCommand().setQuery(new MatchAllDocsQuery()).setLen(2);
+      final Set<BytesRef> boostedPriority = new LinkedHashSet<>();
+      boostedPriority.add(new BytesRef("0"));
+
+      final ReRankCollector collector =
+          new ReRankCollector(
+              2, 2, new LTRRescorer(ltrScoringQuery), cmd, searcher, boostedPriority);
+
+      searcher.search(new MatchAllDocsQuery(), collector);
+
+      final TopDocs hits = collector.topDocs(0, 2);
+      assertEquals(2, hits.scoreDocs.length);
+      assertEquals("0", searcher.getDocFetcher().doc(hits.scoreDocs[0].doc).get("id"));
+      assertEquals("1", searcher.getDocFetcher().doc(hits.scoreDocs[1].doc).get("id"));
     }
   }
 
