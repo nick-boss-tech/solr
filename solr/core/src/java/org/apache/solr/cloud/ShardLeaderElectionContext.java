@@ -380,7 +380,7 @@ final class ShardLeaderElectionContext extends ShardLeaderElectionContextBase {
     for (Replica replica : slices.getReplicas()) {
       if (replica.getName().equals(coreNodeName)) continue;
 
-      if (clusterState.getLiveNodes().contains(replica.getNodeName())) {
+      if (replica.isActive(clusterState.getLiveNodes())) {
         long otherTerm = zkShardTerms.getTerm(replica.getName());
         boolean isOtherReplicaRecovering = zkShardTerms.isRecovering(replica.getName());
 
