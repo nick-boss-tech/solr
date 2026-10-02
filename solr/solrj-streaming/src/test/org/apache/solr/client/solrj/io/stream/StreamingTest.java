@@ -3079,6 +3079,33 @@ public class StreamingTest extends SolrCloudTestCase {
     }
   }
 
+  @Test
+  public void testTupleStreamGetShardsWithMissingManualShardMapping() throws Exception {
+    StreamContext streamContext = new StreamContext();
+    streamContext.put("shards", Map.of("otherCollection", List.of("http://example.com/solr/other")));
+
+    List<String> shards = TupleStream.getShards(solrConnection, COLLECTIONORALIAS, streamContext);
+    assertTrue("Missing manual shard mapping should return an empty list", shards.isEmpty());
+  }
+
+  @Test
+  public void testTupleStreamGetShardsLocalFilterDoesNotMutateContextShards() throws Exception {
+    StreamContext streamContext = new StreamContext();
+    List<String> configuredShards = new ArrayList<>();
+    configuredShards.add("http://example.com/solr/coreA");
+    configuredShards.add("http://example.com/solr/coreB");
+    streamContext.put("shards", Map.of(COLLECTIONORALIAS, configuredShards));
+    streamContext.setLocal(true);
+    streamContext.put("core", "coreA");
+
+    List<String> filteredShards =
+        TupleStream.getShards(solrConnection, COLLECTIONORALIAS, streamContext);
+    assertEquals(List.of("http://example.com/solr/coreA"), filteredShards);
+    assertEquals(
+        List.of("http://example.com/solr/coreA", "http://example.com/solr/coreB"),
+        configuredShards);
+  }
+
   public void testTupleStreamSorting(
       StreamContext streamContext,
       SolrParams solrParams,
@@ -3235,6 +3262,28 @@ public class StreamingTest extends SolrCloudTestCase {
             "core filter for " + rr.core + " not applied for " + coll, rr, replicas.get(0));
       }
 
+    } finally {
+      solrClientCache.close();
+    }
+  }
+
+  @Test
+  public void testCloudStreamExportSortAddsUniqueKeyTieBreaker() throws Exception {
+    SolrParams exportParams = params("q", "*:*", "fl", "a_i", "qt", "/export", "sort", "a_i asc");
+
+    StreamContext streamContext = new StreamContext();
+    SolrClientCache solrClientCache = new SolrClientCache();
+    streamContext.setSolrClientCache(solrClientCache);
+
+    try (CloudSolrStream solrStream =
+        new CloudSolrStream(solrConnection, COLLECTIONORALIAS, exportParams)) {
+      solrStream.setStreamContext(streamContext);
+      solrStream.open();
+
+      String sortExpression = solrStream.getStreamSort().toExpression(streamFactory).toString();
+      assertTrue(
+          "Export sort should include the unique key as a stable tie-breaker: " + sortExpression,
+          sortExpression.contains("id asc"));
     } finally {
       solrClientCache.close();
     }
