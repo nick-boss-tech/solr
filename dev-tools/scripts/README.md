@@ -49,6 +49,10 @@ the steps and commands required for a major/minor/bugfix release. It also lets
 you generate a full Asciidoc guide for the release. The wizard will execute many
 of the other tools in this folder.
 
+The wizard expects `EDITOR` to point to an editor that opens in its own window
+or process. Terminal-attached editors such as `vi`, `vim`, `nano`, `pico`, and
+`emacs` are not supported.
+
     usage: releaseWizard.py [-h] [--dry-run] [--init]
 
     Script to guide a RM through the whole release process

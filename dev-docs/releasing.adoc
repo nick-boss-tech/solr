@@ -53,6 +53,10 @@ The release wizard is meant to be used from any working copy you like, with the 
 2. Install dependencies with `pip3 install -r requirements.txt`, from the `dev-tools/scripts` folder.
 3. Run the command you see documented at `dev-tools/scripts/README.md`. Using `--dry-run` initially is fine.
 
+IMPORTANT: When the wizard opens an editor, it expects `EDITOR` to launch in a
+separate window or process. Terminal-attached editors such as `vi`, `vim`,
+`nano`, `pico`, and `emacs` are not supported.
+
 NOTE: `--dry-run` does still create `~/.solr_releases` and `~/.solrrc` files and record the release version you intend for future reference so one might say it's really better described as a "slightly damp" run :).  It should however not execute other commands (in theory). Also, checklist elements approved during a dry run are remembered, but this may change, see https://issues.apache.org/jira/browse/SOLR-17246[SOLR-17246]
 
 
