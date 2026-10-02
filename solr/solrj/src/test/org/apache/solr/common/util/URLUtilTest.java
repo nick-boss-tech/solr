@@ -104,6 +104,19 @@ public class URLUtilTest extends SolrTestCase {
   }
 
   @Test
+  public void testRedactUserInfo() {
+    assertEquals(
+        "http://solr:********@localhost:8983/solr/techproducts",
+        URLUtil.redactUserInfo("http://solr:secret@localhost:8983/solr/techproducts"));
+    assertEquals(
+        "http://********@localhost:8983/solr/techproducts",
+        URLUtil.redactUserInfo("http://secret@localhost:8983/solr/techproducts"));
+    assertEquals(
+        "http://localhost:8983/solr/techproducts",
+        URLUtil.redactUserInfo("http://localhost:8983/solr/techproducts"));
+  }
+
+  @Test
   public void testGetNodeNameForBaseUrl() throws MalformedURLException, URISyntaxException {
     assertEquals("node-1-url:8983_solr", getNodeNameForBaseUrl("https://node-1-url:8983/solr"));
     assertEquals("node-1-url:8983_solr", getNodeNameForBaseUrl("http://node-1-url:8983/solr"));
