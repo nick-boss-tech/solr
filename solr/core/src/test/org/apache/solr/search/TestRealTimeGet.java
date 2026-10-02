@@ -44,6 +44,18 @@ public class TestRealTimeGet extends TestRTGBase {
   }
 
   @Test
+  public void testCopyFieldTargetSetDirectly() throws Exception {
+    clearIndex();
+    assertU(commit());
+
+    assertU(adoc("id", "copyfield-target", "author_s", "direct value"));
+
+    assertJQ(
+        req("qt", "/get", "id", "copyfield-target", "fl", "id,author_s"),
+        "=={'doc':{'id':'copyfield-target','author_s':'direct value'}}");
+  }
+
+  @Test
   public void testGetRealtime() throws Exception {
     clearIndex();
     assertU(commit());

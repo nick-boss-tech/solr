@@ -276,7 +276,6 @@ public class RealTimeGetComponent extends SearchComponent {
                 SolrDocument doc;
                 if (oper == UpdateLog.ADD) {
                   doc = toSolrDoc((SolrInputDocument) entry.get(entry.size() - 1), req.getSchema());
-                  // toSolrDoc filtered copy-field targets already
                   if (transformer != null) {
                     transformer.transform(doc, -1, DocIterationInfo.NONE); // unknown docID
                   }
@@ -295,8 +294,6 @@ public class RealTimeGetComponent extends SearchComponent {
                   if (doc == null) {
                     break; // document has been deleted as the resolve was going on
                   }
-                  doc.visitSelfAndNestedDocs(
-                      (label, d) -> removeCopyFieldTargets(d, req.getSchema()));
                 } else {
                   throw new SolrException(
                       ErrorCode.INVALID_STATE, "Expected ADD or UPDATE_INPLACE. Got: " + oper);
@@ -351,7 +348,7 @@ public class RealTimeGetComponent extends SearchComponent {
             docFetcher.doc(docid, rsp.getReturnFields().getLuceneFieldNames());
         SolrDocument doc = toSolrDoc(luceneDocument, searcherInfo.getSearcher().getSchema());
         if (reuseDvIters == null) {
-          reuseDvIters = new DocValuesIteratorCache(searcherInfo.getSearcher());
+          reuseDvIters = docFetcher.createDocValuesIteratorCache();
         }
         docFetcher.decorateDocValueFields(
             doc, docid, docFetcher.getNonStoredDVs(true), reuseDvIters);
@@ -441,8 +438,6 @@ public class RealTimeGetComponent extends SearchComponent {
    * to a full document by populating all the partial updates that were applied on top of that last
    * full document update. Transformers are applied.
    *
-   * <p>TODO <em>Sometimes</em> there's copy-field target removal; it ought to be consistent.
-   *
    * @param idBytes doc ID to find; never a child doc.
    * @param partialDoc partial doc (an in-place update). Could be a child doc, thus not having
    *     idBytes.
@@ -506,8 +501,7 @@ public class RealTimeGetComponent extends SearchComponent {
                           null != f
                               && AtomicUpdateDocumentMerger.isSupportedFieldForInPlaceUpdate(f));
 
-      SolrDocument solrDoc =
-          toSolrDoc(partialDoc, schema, forInPlaceUpdate); // filters copy-field targets TODO don't
+      SolrDocument solrDoc = toSolrDoc(partialDoc, schema, forInPlaceUpdate);
       DocTransformer transformer = returnFields.getTransformer();
       if (transformer != null && !transformer.needsSolrIndexSearcher()) {
         transformer.transform(solrDoc, -1, DocIterationInfo.NONE); // no docId when from the ulog
@@ -623,19 +617,6 @@ public class RealTimeGetComponent extends SearchComponent {
     return solrDoc;
   }
 
-  private static void removeCopyFieldTargets(SolrDocument solrDoc, IndexSchema schema) {
-    // TODO ideally we wouldn't have fetched these in the first place!
-    final Iterator<Map.Entry<String, Object>> iterator = solrDoc.iterator();
-    while (iterator.hasNext()) {
-      Map.Entry<String, Object> fieldVal = iterator.next();
-      String fieldName = fieldVal.getKey();
-      SchemaField sf = schema.getFieldOrNull(fieldName);
-      if (sf != null && schema.isCopyFieldTarget(sf)) {
-        iterator.remove();
-      }
-    }
-  }
-
   public static SolrInputDocument DELETED = new SolrInputDocument();
 
   /**
@@ -681,7 +662,7 @@ public class RealTimeGetComponent extends SearchComponent {
   /**
    * returns the SolrInputDocument from the current tlog, or DELETED if it has been deleted, or null
    * if there is no record of it in the current update log. If null is returned, it could still be
-   * in the latest index. Copy-field target fields are excluded.
+   * in the latest index.
    *
    * @param idBytes doc ID to find; never a child doc.
    * @param versionReturned If a non-null AtomicLong is passed in, it is set to the version of the
@@ -752,8 +733,7 @@ public class RealTimeGetComponent extends SearchComponent {
    * @param versionReturned If a non-null AtomicLong is passed in, it is set to the version of the
    *     update returned from the TLog.
    * @param onlyTheseFields If not-null, this limits the fields that are returned. However it is
-   *     only an optimization hint since other fields may be returned. Copy field targets are never
-   *     returned.
+   *     only an optimization hint since other fields may be returned.
    * @param resolveStrategy {@link Resolution#DOC} or {@link Resolution#ROOT_WITH_CHILDREN}.
    * @see Resolution
    */
@@ -876,7 +856,7 @@ public class RealTimeGetComponent extends SearchComponent {
       boolean fieldArrayListCreated = false;
       SchemaField sf = schema.getFieldOrNull(fname);
       if (sf != null) {
-        if ((!sf.hasDocValues() && !sf.stored()) || schema.isCopyFieldTarget(sf)) continue;
+        if (!sf.hasDocValues() && !sf.stored()) continue;
       }
       for (Object val : doc.getFieldValues(fname)) {
         if (val instanceof IndexableField f) {
@@ -912,9 +892,6 @@ public class RealTimeGetComponent extends SearchComponent {
       Object existing = out.get(f.name());
       if (existing == null) {
         SchemaField sf = schema.getFieldOrNull(f.name());
-
-        // don't return copyField targets
-        if (sf != null && schema.isCopyFieldTarget(sf)) continue;
 
         if (sf != null && sf.multiValued()) {
           List<Object> vals = new ArrayList<>();
