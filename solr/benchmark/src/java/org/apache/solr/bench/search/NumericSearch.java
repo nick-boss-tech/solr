@@ -35,10 +35,12 @@ import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.SolrQuery;
 import org.apache.solr.client.solrj.response.FacetField;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.params.CommonParams;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -60,6 +62,8 @@ public class NumericSearch {
     int setQuerySize = 20; // TODO: Params
     String termQueryField = "term_low_s";
     String basePath;
+    @Param({"false", "true"})
+    boolean multiThreaded;
     SolrGen<Integer> setValues;
     SolrGen<String> lowCardinalityTerms;
     SolrGen<String> highCardinalityTerms;
@@ -70,6 +74,7 @@ public class NumericSearch {
     @Setup(Level.Trial)
     public void setupTrial(SolrBenchState solrBenchState) throws Exception {
       solrBenchState.setUseHttp1(true);
+      System.setProperty("indexSearcherExecutorThreads", multiThreaded ? "4" : "0");
       solrBenchState.startSolr(1);
       solrBenchState.createCollection(COLLECTION, 1, 1);
       int maxCardinality = 10000;
@@ -162,14 +167,29 @@ public class NumericSearch {
     }
 
     QueryRequest setQuery(String field) {
-      QueryRequest q =
-          new QueryRequest(
-              new SolrQuery(
-                  "q",
-                  termQueryField + ":\"" + lowCardTerms.next() + "\"",
-                  "fq",
-                  "{!terms cache=false f='" + field + "'}" + queries.next()));
-      return q;
+      return new QueryRequest(
+          new SolrQuery(
+              "q",
+              termQueryField + ":\"" + lowCardTerms.next() + "\"",
+              "fq",
+              "{!terms cache=false f='" + field + "'}" + queries.next(),
+              CommonParams.MULTI_THREADED,
+              String.valueOf(multiThreaded)));
+    }
+
+    QueryRequest rangeQuery() {
+      SolrQuery q =
+          new SolrQuery(
+              "q",
+              "numbers_i:[1000 TO 9000]",
+              "rows",
+              "10",
+              "fl",
+              "id",
+              "sort",
+              "numbers_i asc");
+      q.set(CommonParams.MULTI_THREADED, String.valueOf(multiThreaded));
+      return new QueryRequest(q);
     }
   }
 
@@ -243,6 +263,14 @@ public class NumericSearch {
       throws SolrServerException, IOException {
     QueryResponse response =
         benchState.doubleSetQuery(true).process(solrBenchState.client, COLLECTION);
+    blackhole.consume(response);
+    return response;
+  }
+
+  @Benchmark
+  public Object intRange(Blackhole blackhole, BenchState benchState, SolrBenchState solrBenchState)
+      throws SolrServerException, IOException {
+    QueryResponse response = benchState.rangeQuery().process(solrBenchState.client, COLLECTION);
     blackhole.consume(response);
     return response;
   }
