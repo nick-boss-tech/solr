@@ -1,4 +1,6 @@
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.util.VersionNumber
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -44,6 +46,11 @@ dependencies {
   implementation libs.apache.kafka.clients
   runtimeOnly libs.apache.kafka.kafka213
   runtimeOnly libs.apache.kafka.streams
+  constraints {
+    implementation('commons-beanutils:commons-beanutils:1.11.0') {
+      because 'CVE-2025-48734: keep commons-beanutils at a safe floor for cross-dc-manager'
+    }
+  }
 
   runtimeOnly libs.apache.log4j.api
   runtimeOnly libs.apache.log4j.core
@@ -104,6 +111,30 @@ task run(type: JavaExec) {
   classpath = sourceSets.main.runtimeClasspath
   systemProperties = ["log4j.configurationFile": "file:conf/log4j2.xml"]
 }
+
+tasks.register('verifyCommonsBeanutilsFloor') {
+  group = 'verification'
+  description = 'Verify commons-beanutils stays at a safe version in cross-dc-manager.'
+  inputs.files(configurations.runtimeClasspath)
+  doLast {
+    def beanutils = configurations.runtimeClasspath.incoming.resolutionResult.allComponents.find { component ->
+      component.id instanceof ModuleComponentIdentifier &&
+        component.id.group == 'commons-beanutils' &&
+        component.id.module == 'commons-beanutils'
+    }
+
+    if (beanutils == null) {
+      throw new GradleException('commons-beanutils was not found on the runtimeClasspath')
+    }
+
+    def resolvedVersion = VersionNumber.parse(beanutils.id.version)
+    if (resolvedVersion < VersionNumber.parse('1.11.0')) {
+      throw new GradleException("commons-beanutils ${beanutils.id.version} is below 1.11.0")
+    }
+  }
+}
+
+check.dependsOn tasks.named('verifyCommonsBeanutilsFloor')
 
 jar {
   manifest {
