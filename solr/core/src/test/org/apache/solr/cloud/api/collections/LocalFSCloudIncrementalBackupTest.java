@@ -21,12 +21,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import org.apache.lucene.tests.util.LuceneTestCase;
+import org.apache.solr.client.solrj.SolrRequest.METHOD;
+import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
+import org.apache.solr.client.solrj.request.GenericSolrRequest;
 import org.apache.solr.client.solrj.request.SolrQuery;
 import org.apache.solr.client.solrj.response.CollectionAdminResponse;
 import org.apache.solr.cloud.AbstractFullDistribZkTestBase;
 import org.apache.solr.common.cloud.ZkStateReader;
+import org.apache.solr.common.params.ModifiableSolrParams;
+import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.backup.repository.BackupRepository;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -110,8 +115,16 @@ public class LocalFSCloudIncrementalBackupTest extends AbstractIncrementalBackup
 
     CloudSolrClient solrClient = cluster.getSolrClient();
 
-    CollectionAdminRequest.createCollection(backupCollectionName, "conf1", NUM_SHARDS, 1)
+    ModifiableSolrParams createParams = new ModifiableSolrParams();
+    createParams.set("action", "CREATE");
+    createParams.set("name", backupCollectionName);
+    createParams.set("collection.configName", "conf1");
+    createParams.set("numShards", NUM_SHARDS);
+    createParams.set("replicationFactor", 1);
+    new GenericSolrRequest(METHOD.GET, "/admin/collections", SolrRequestType.ADMIN, createParams)
         .process(solrClient);
+    AbstractFullDistribZkTestBase.waitForRecoveriesToFinish(
+        backupCollectionName, ZkStateReader.from(solrClient), false, false, 3);
     int numDocs = indexDocs(backupCollectionName, true);
     String backupName = BACKUPNAME_PREFIX + testSuffix;
     try (BackupRepository repository =
@@ -148,6 +161,11 @@ public class LocalFSCloudIncrementalBackupTest extends AbstractIncrementalBackup
 
       AbstractFullDistribZkTestBase.waitForRecoveriesToFinish(
           restoreCollectionName, ZkStateReader.from(solrClient), false, false, 3);
+
+      Map<String, Object> sourceStatus = getCollectionStatus(solrClient, backupCollectionName);
+      Map<String, Object> restoredStatus = getCollectionStatus(solrClient, restoreCollectionName);
+      assertReplicaCountTypesMatch(sourceStatus, restoredStatus);
+
       assertEquals(
           numDocs,
           cluster
@@ -156,5 +174,38 @@ public class LocalFSCloudIncrementalBackupTest extends AbstractIncrementalBackup
               .getResults()
               .getNumFound());
     }
+  }
+
+  private void assertReplicaCountTypesMatch(
+      Map<String, Object> sourceStatus, Map<String, Object> restoredStatus) {
+    for (String key : List.of("replicationFactor", "nrtReplicas", "tlogReplicas", "pullReplicas")) {
+      assertNotNull("Missing source replica count: " + key, sourceStatus.get(key));
+      assertNotNull("Missing restored replica count: " + key, restoredStatus.get(key));
+      assertEquals(
+          "Replica count type mismatch for " + key,
+          sourceStatus.get(key).getClass(),
+          restoredStatus.get(key).getClass());
+      assertEquals(
+          "Replica count value mismatch for " + key,
+          sourceStatus.get(key),
+          restoredStatus.get(key));
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private Map<String, Object> getCollectionStatus(CloudSolrClient solrClient, String collection)
+      throws Exception {
+    NamedList<?> cluster =
+        (NamedList<?>)
+            CollectionAdminRequest.getClusterStatus()
+                .setCollectionName(collection)
+                .process(solrClient)
+                .getResponse()
+                .get("cluster");
+    assertNotNull(cluster);
+    Map<?, ?> collections = (Map<?, ?>) cluster.get("collections");
+    assertNotNull(collections);
+    assertTrue(collections.containsKey(collection));
+    return (Map<String, Object>) collections.get(collection);
   }
 }
