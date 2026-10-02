@@ -26,6 +26,7 @@
   <str name="coreRootDirectory">${coreRootDirectory:.}</str>
   <str name="allowPaths">${solr.security.allow.paths:}</str>
   <str name="allowUrls">${solr.tests.security.allow.urls:}</str>
+  <int name="indexSearcherExecutorThreads">${indexSearcherExecutorThreads:0}</int>
 
   <shardHandlerFactory name="shardHandlerFactory" class="HttpShardHandlerFactory">
     <int name="socketTimeout">${socketTimeout:15000}</int>

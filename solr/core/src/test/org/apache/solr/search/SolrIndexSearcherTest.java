@@ -20,6 +20,7 @@ import java.io.IOException;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.Explanation;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.QueryVisitor;
 import org.apache.lucene.search.Rescorer;
@@ -30,12 +31,14 @@ import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.TopDocsCollector;
+import org.apache.lucene.search.TopScoreDocCollectorManager;
 import org.apache.lucene.search.TotalHits;
 import org.apache.lucene.search.Weight;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.handler.component.MergeStrategy;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class SolrIndexSearcherTest extends SolrTestCaseJ4 {
 
@@ -116,6 +119,86 @@ public class SolrIndexSearcherTest extends SolrTestCaseJ4 {
             "rows", "2"),
         "//*[@numFoundExact='true']",
         "//*[@numFound='" + NUM_DOCS + "']");
+  }
+
+  @Test
+  public void testReRankCollectorFallsBackWhenRescoringAborts() throws Exception {
+    h.getCore()
+        .withSearcher(
+            searcher -> {
+              final MatchAllDocsQuery query = new MatchAllDocsQuery();
+              TopDocsCollector<? extends ScoreDoc> baselineCollector =
+                  new TopScoreDocCollectorManager(3, Integer.MAX_VALUE).newCollector();
+              searcher.search(query, baselineCollector);
+              TopDocs baseline = baselineCollector.topDocs(0, 3);
+
+              QueryCommand cmd =
+                  new QueryCommand()
+                      .setQuery(query)
+                      .setLen(3)
+                      .setFlags(SolrIndexSearcher.GET_SCORES);
+              ReRankCollector collector =
+                  new ReRankCollector(
+                      3,
+                      3,
+                      new Rescorer() {
+                        @Override
+                        public TopDocs rescore(
+                            IndexSearcher searcher, TopDocs firstPassTopDocs, int topN) {
+                          throw new IncompleteRerankingException();
+                        }
+
+                        @Override
+                        public Explanation explain(
+                            IndexSearcher searcher, Explanation firstPassExplanation, int docID) {
+                          return firstPassExplanation;
+                        }
+                      },
+                      cmd,
+                      searcher,
+                      null);
+
+              searcher.search(query, collector);
+              TopDocs topDocs = collector.topDocs(0, 3);
+
+              assertEquals(3, topDocs.scoreDocs.length);
+              for (int i = 0; i < baseline.scoreDocs.length; i++) {
+                assertEquals(baseline.scoreDocs[i].doc, topDocs.scoreDocs[i].doc);
+                assertEquals(baseline.scoreDocs[i].score, topDocs.scoreDocs[i].score, 0.0f);
+              }
+              return null;
+            });
+  }
+
+  @Test
+  public void testMultiThreadedSearchMatchesSingleThreadedResults() throws Exception {
+    h.getCore()
+        .withSearcher(
+            searcher -> {
+              QueryCommand singleThreaded =
+                  createBasicQueryCommand(NUM_DOCS, 10, "field1_s", "foo");
+              singleThreaded.setSort(new Sort(new SortField("id", SortField.Type.STRING)));
+
+              QueryCommand multiThreaded = createBasicQueryCommand(NUM_DOCS, 10, "field1_s", "foo");
+              multiThreaded.setSort(new Sort(new SortField("id", SortField.Type.STRING)));
+              multiThreaded.setMultiThreaded(true);
+
+              QueryResult expected = searcher.search(singleThreaded);
+              QueryResult actual = searcher.search(multiThreaded);
+
+              assertEquals(expected.getDocList().matches(), actual.getDocList().matches());
+              assertEquals(expected.getDocList().size(), actual.getDocList().size());
+
+              DocIterator expectedIter = expected.getDocList().iterator();
+              DocIterator actualIter = actual.getDocList().iterator();
+              while (expectedIter.hasNext()) {
+                assertTrue(actualIter.hasNext());
+                assertEquals(expectedIter.nextDoc(), actualIter.nextDoc());
+                assertEquals(expectedIter.score(), actualIter.score(), 0.0f);
+              }
+              assertFalse(actualIter.hasNext());
+              return null;
+            });
   }
 
   private void assertMatchesEqual(int expectedCount, SolrIndexSearcher searcher, QueryCommand cmd)
