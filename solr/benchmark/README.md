@@ -416,3 +416,10 @@ identify performance bottlenecks and hotspots.
 
 - 📒 [docs/jmh-profilers.md](docs/jmh-profilers.md)
 - 📒 [docs/jmh-profilers-setup.md](docs/jmh-profilers-setup.md)
+
+### Release Benchmark Guidance
+
+If you are using this module to support a release or a release candidate,
+start with [docs/release-benchmarking.md](docs/release-benchmarking.md). That
+guide keeps the benchmark scope intentionally small and repeatable so release
+runs can compare like with like.
