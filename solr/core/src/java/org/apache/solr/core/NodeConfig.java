@@ -221,8 +221,8 @@ public class NodeConfig {
               + " is set to true. Cluster plugins may only be declared in solr.xml with immutable configs.");
     }
 
-    setupSharedLib();
     initModules();
+    setupSharedLib();
   }
 
   /**
