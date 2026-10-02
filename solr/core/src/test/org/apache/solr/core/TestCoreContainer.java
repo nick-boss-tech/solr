@@ -24,6 +24,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,7 +37,13 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 import java.util.regex.Pattern;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.StandardLocation;
+import javax.tools.ToolProvider;
 import org.apache.commons.exec.OS;
+import org.apache.lucene.codecs.PostingsFormat;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.handler.admin.CollectionsHandler;
@@ -456,6 +463,43 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testModuleHelpersAreVisibleToSharedLibSpis() throws Exception {
+    Path tmpRoot = createTempDir("testModuleHelpersAreVisibleToSharedLibSpis");
+    Path sharedLib = Files.createDirectories(tmpRoot.resolve("lib"));
+    Path moduleLib = Files.createDirectories(ModuleUtils.getModuleLibPath(tmpRoot, "mod1"));
+
+    writeFixtureJar(
+        sharedLib.resolve("shared-spi.jar"),
+        "SharedLibPostingsFormat.java",
+        sharedLibSpiSource(),
+        "META-INF/services/org.apache.lucene.codecs.PostingsFormat",
+        "org.apache.solr.core.test17297.shared.SharedLibPostingsFormat");
+    writeFixtureJar(
+        moduleLib.resolve("module-helper.jar"),
+        "ModuleHelper.java",
+        moduleHelperSource(),
+        null,
+        null);
+
+    String previousInstallDir = System.getProperty(SOLR_INSTALL_DIR);
+    System.setProperty(SOLR_INSTALL_DIR, tmpRoot.toAbsolutePath().toString());
+    try {
+      final CoreContainer cc = init(tmpRoot, "<solr><str name=\"modules\">mod1</str></solr>");
+      try {
+        assertEquals("sharedlibpf17297", PostingsFormat.forName("sharedlibpf17297").getName());
+      } finally {
+        cc.shutdown();
+      }
+    } finally {
+      if (previousInstallDir == null) {
+        System.clearProperty(SOLR_INSTALL_DIR);
+      } else {
+        System.setProperty(SOLR_INSTALL_DIR, previousInstallDir);
+      }
+    }
+  }
+
+  @Test
   public void testSolrInstallDir() throws Exception {
     Path installDirPath = createTempDir("solrInstallDirTest").toAbsolutePath().normalize();
     Files.createDirectories(installDirPath.resolve("lib"));
@@ -493,6 +537,111 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
           + "<solr>\n"
           + "<str name=\"allowPaths\">${solr.security.allow.paths:}</str>\n"
           + "</solr>";
+
+  private static String sharedLibSpiSource() {
+    return """
+        package org.apache.solr.core.test17297.shared;
+
+        import java.io.IOException;
+        import org.apache.lucene.codecs.FieldsConsumer;
+        import org.apache.lucene.codecs.FieldsProducer;
+        import org.apache.lucene.codecs.PostingsFormat;
+        import org.apache.lucene.index.SegmentReadState;
+        import org.apache.lucene.index.SegmentWriteState;
+
+        public final class SharedLibPostingsFormat extends PostingsFormat {
+          public SharedLibPostingsFormat() {
+            super("sharedlibpf17297");
+            try {
+              Class.forName(
+                  "org.apache.solr.core.test17297.module.ModuleHelper",
+                  true,
+                  getClass().getClassLoader());
+            } catch (ClassNotFoundException e) {
+              throw new IllegalStateException(e);
+            }
+          }
+
+          @Override
+          public FieldsConsumer fieldsConsumer(SegmentWriteState state) throws IOException {
+            throw new UnsupportedOperationException("test-only SPI");
+          }
+
+          @Override
+          public FieldsProducer fieldsProducer(SegmentReadState state) throws IOException {
+            throw new UnsupportedOperationException("test-only SPI");
+          }
+        }
+        """;
+  }
+
+  private static String moduleHelperSource() {
+    return """
+        package org.apache.solr.core.test17297.module;
+
+        public final class ModuleHelper {
+          private ModuleHelper() {}
+        }
+        """;
+  }
+
+  private static void writeFixtureJar(
+      Path jarPath,
+      String sourceFileName,
+      String source,
+      String serviceFileName,
+      String serviceImpl)
+      throws Exception {
+    Path workDir = Files.createTempDirectory("solr17297-fixture");
+    Path srcDir = Files.createDirectories(workDir.resolve("src"));
+    Path classesDir = Files.createDirectories(workDir.resolve("classes"));
+    Path sourceFile = srcDir.resolve(sourceFileName);
+    Files.writeString(sourceFile, source, StandardCharsets.UTF_8);
+
+    compileFixtureSource(sourceFile, classesDir);
+
+    if (serviceFileName != null) {
+      Path serviceFile = classesDir.resolve(serviceFileName);
+      Files.createDirectories(serviceFile.getParent());
+      Files.writeString(serviceFile, serviceImpl + System.lineSeparator(), StandardCharsets.UTF_8);
+    }
+
+    try (var paths = Files.walk(classesDir);
+        JarOutputStream jarOut = new JarOutputStream(Files.newOutputStream(jarPath))) {
+      paths
+          .filter(Files::isRegularFile)
+          .forEach(
+              path -> {
+                String entryName = classesDir.relativize(path).toString().replace('\\', '/');
+                try {
+                  jarOut.putNextEntry(new JarEntry(entryName));
+                  Files.copy(path, jarOut);
+                  jarOut.closeEntry();
+                } catch (IOException e) {
+                  throw new RuntimeException(e);
+                }
+              });
+    }
+  }
+
+  private static void compileFixtureSource(Path sourceFile, Path classesDir) throws Exception {
+    JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+    assertNotNull("A JDK is required to compile the fixture jar", compiler);
+
+    try (StandardJavaFileManager fileManager =
+        compiler.getStandardFileManager(null, null, StandardCharsets.UTF_8)) {
+      fileManager.setLocationFromPaths(StandardLocation.CLASS_OUTPUT, List.of(classesDir));
+      Iterable<? extends JavaFileObject> compilationUnits =
+          fileManager.getJavaFileObjectsFromPaths(List.of(sourceFile));
+      String classPath = System.getProperty("java.class.path");
+      boolean compiled =
+          compiler
+              .getTask(
+                  null, fileManager, null, List.of("-classpath", classPath), null, compilationUnits)
+              .call();
+      assertTrue("Failed to compile fixture jar", compiled);
+    }
+  }
 
   private static final String CUSTOM_HANDLERS_SOLR_XML =
       "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"
