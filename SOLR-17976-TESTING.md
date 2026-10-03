@@ -42,22 +42,36 @@ cp ~/workspace/solr/gradle.properties .
   -Pvalidation.errorprone=true
 ```
 
-Suggested new tests (not written):
+Tests added (round 4, not compiled or run): `TestShardTieBreak`
+(`solr/core/src/test/org/apache/solr/handler/component/`):
 
-1. `ShardFieldSortedHitQueue.lessThan()` unit test: two docs with equal
-   comparator results, `shardName` = "shard1"/"shard2" but `shard` URLs
-   differing in node IP — ordering must be identical regardless of which
-   replica URL is attached, and shard1 must consistently win/lose vs shard2.
-2. `resolveShardName` against a fake `DocCollection` (2 shards x 2 replicas):
-   assert each replica URL maps to its shard name, and unknown URLs map to
-   null (fallback path).
+1. tie-break gives the same order whichever replica URLs are attached;
+2. fallback to the shard address when `shardName` is null;
+3. `resolveShardName` from a single replica URL, from a `|`-joined list, and
+   for unknown URL / null collection / null URL.
+
+Still untested: `getRequestCollection` on a real coordinator node
+(node-roles cluster), and multi-collection queries.
+
+## Round 4 review changes
+
+See `research/branch-reviews/round-4/SOLR-17976-review.md`.
+
+- `getRequestCollection` now reads `rb.req.getCloudDescriptor()` (the real
+  collection; the core's own descriptor names a synthetic collection on a
+  coordinator) and uses `getCollectionOrNull`, so a missing collection can no
+  longer throw out of `mergeIds`.
+- `resolveShardName` is package-private for the test and splits the shard
+  string on `|` (`ShardDoc.shard` is the joined replica list in SolrCloud),
+  resolving each URL instead of only the text after the last `/`.
+- Added `changelog/unreleased/SOLR-17976.yml`.
+- Not changed (needs a decision): multi-collection / alias queries (only the
+  request collection is scanned, and equal shard names in two collections tie);
+  taking the name from `rb.slices`/`rb.shards` instead of cluster state.
 
 ## Patch limits, risks, open questions
 
-- **Not compiled or tested.** The logic is straightforward but the cluster-state
-  plumbing (`getRequestCollection`) is new code paths — verify in a real
-  SolrCloud test, especially that `rb.req.getCore().getCoreDescriptor()
-  .getCollectionName()` returns the right collection on the coordinating node.
+- **Not compiled or tested.**
 - Resolution cost: one cluster-state lookup + one slice/replica scan per
   distinct shard URL per merge. Negligible, but a reviewer who wants it lazier
   could resolve only when a tie actually occurs.

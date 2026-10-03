@@ -59,6 +59,7 @@ import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.BytesRefBuilder;
 import org.apache.lucene.util.InPlaceMergeSorter;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.cloud.CloudDescriptor;
 import org.apache.solr.cloud.ZkController;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
@@ -973,35 +974,52 @@ public class QueryComponent extends SearchComponent {
 
   private static DocCollection getRequestCollection(ResponseBuilder rb) {
     ZkController zkController = rb.req.getCoreContainer().getZkController();
-    if (zkController == null) {
+    // The request's cloud descriptor names the real collection; on a coordinator node the core's
+    // own descriptor names a synthetic collection that is not in cluster state.
+    CloudDescriptor cloudDescriptor = rb.req.getCloudDescriptor();
+    if (zkController == null || cloudDescriptor == null) {
       return null;
     }
-    String collectionName = rb.req.getCore().getCoreDescriptor().getCollectionName();
+    String collectionName = cloudDescriptor.getCollectionName();
     return collectionName == null
         ? null
-        : zkController.getClusterState().getCollection(collectionName);
+        : zkController.getClusterState().getCollectionOrNull(collectionName);
   }
 
-  private static String resolveShardName(
+  /**
+   * Maps a shard string, a replica core URL or several of them joined with '|', to the name of the
+   * slice that hosts one of those replicas. Returns null when none of them is a replica of {@code
+   * collection}.
+   */
+  static String resolveShardName(
       DocCollection collection, Map<String, String> cache, String shardUrl) {
-    if (collection == null || shardUrl == null || cache.containsKey(shardUrl)) {
+    if (collection == null || shardUrl == null) {
+      return null;
+    }
+    if (cache.containsKey(shardUrl)) {
       return cache.get(shardUrl);
     }
     String resolved = null;
-    String coreName = shardUrl.substring(shardUrl.lastIndexOf('/') + 1);
-    for (Slice slice : collection.getSlices()) {
-      for (Replica replica : slice.getReplicas()) {
-        if (coreName.equals(replica.getCoreName()) || shardUrl.equals(replica.getCoreUrl())) {
-          resolved = slice.getName();
-          break;
-        }
-      }
+    for (String url : StrUtils.splitSmart(shardUrl, "|", true)) {
+      resolved = sliceNameOfReplicaUrl(collection, url);
       if (resolved != null) {
         break;
       }
     }
     cache.put(shardUrl, resolved);
     return resolved;
+  }
+
+  private static String sliceNameOfReplicaUrl(DocCollection collection, String url) {
+    String coreName = url.substring(url.lastIndexOf('/') + 1);
+    for (Slice slice : collection.getSlices()) {
+      for (Replica replica : slice.getReplicas()) {
+        if (coreName.equals(replica.getCoreName()) || url.equals(replica.getCoreUrl())) {
+          return slice.getName();
+        }
+      }
+    }
+    return null;
   }
 
   protected void mergeIds(ResponseBuilder rb, ShardRequest sreq) {
