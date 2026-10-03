@@ -186,11 +186,14 @@ public class ZkStateReader implements SolrCloseable {
   private Set<CloudCollectionsListener> cloudCollectionsListeners = ConcurrentHashMap.newKeySet();
 
   /**
-   * Lazy collections whose znode has been seen but whose state.json is not readable yet. Each has a
-   * one-shot exists-watch on its state.json so listeners are still notified when the state appears
+   * Lazy collections whose znode has been seen but whose state.json does not exist yet. Each has a
+   * one-shot exists-watch on its state.json, so listeners are still notified when the state appears
    * (no /collections children event fires for that).
    */
   private final Set<String> collectionsAwaitingState = ConcurrentHashMap.newKeySet();
+
+  /** Lazy collections whose state.json is known to exist, so they need no further checks. */
+  private final Set<String> lazyCollectionsWithState = ConcurrentHashMap.newKeySet();
 
   private final ExecutorService notifications = ExecutorUtil.newMDCAwareCachedThreadPool("watches");
 
@@ -445,6 +448,8 @@ public class ZkStateReader implements SolrCloseable {
     if (!zkSessionExpired.compareAndSet(true, false)) {
       return;
     }
+    // the one-shot watches for states that did not exist yet were lost with the session
+    collectionsAwaitingState.clear();
     try {
       createClusterStateWatchersAndUpdate();
     } catch (InterruptedException e) {
@@ -694,9 +699,8 @@ public class ZkStateReader implements SolrCloseable {
 
       // First, drop any children that disappeared.
       this.lazyCollectionStates.keySet().retainAll(new HashSet<>(children)); // Set avoids O(N^2)
-      // Drop pending state watches for collections that are gone; surviving entries are re-armed
-      // by getCurrentCollections (their one-shot watches may have died with a session expiry).
       this.collectionsAwaitingState.retainAll(new HashSet<>(children));
+      this.lazyCollectionsWithState.retainAll(new HashSet<>(children));
       for (String coll : children) {
         // We will create an eager collection for any interesting collections, so don't add to lazy.
         if (!collectionWatches.watchedCollections().contains(coll)) {
@@ -751,64 +755,69 @@ public class ZkStateReader implements SolrCloseable {
   public Set<String> getCurrentCollections() {
     Set<String> collections = new HashSet<>();
     collections.addAll(collectionWatches.activeCollections());
-    for (Map.Entry<String, LazyCollectionRef> entry : lazyCollectionStates.entrySet()) {
-      // The /collections child znode is created before its state.json during collection creation;
-      // only report collections whose state can actually be read yet.
-      DocCollection state = entry.getValue().get(true);
-      if (state == null) {
-        state = watchForCollectionState(entry.getKey(), entry.getValue());
-      }
-      if (state != null) {
-        collections.add(entry.getKey());
-        collectionsAwaitingState.remove(entry.getKey());
+    for (String collection : lazyCollectionStates.keySet()) {
+      // A collection's znode is created before its state.json, so only report a lazy collection
+      // once its state.json exists.
+      if (lazyCollectionsWithState.contains(collection) || stateExistsOrAwait(collection)) {
+        collections.add(collection);
       }
     }
     return collections;
   }
 
   /**
-   * Arm a one-shot exists-watch on the collection's state.json so {@link CloudCollectionsListener}s
-   * are notified when the state becomes readable. Without this, a collection whose state.json
-   * appears after the initial /collections children event would never be reported, since no further
+   * Checks that the state.json of a lazy collection exists. If it does not yet, arms a one-shot
+   * watch so the {@link CloudCollectionsListener}s are notified when it appears, as no further
    * children event fires for it.
    *
-   * @return the collection state if it became readable before the watch was armed, otherwise null
+   * @return false only when the state.json is known not to exist yet
    */
-  private DocCollection watchForCollectionState(String collection, LazyCollectionRef ref) {
-    if (!collectionsAwaitingState.add(collection)) {
-      return null; // watch already armed
+  private boolean stateExistsOrAwait(String collection) {
+    if (collectionsAwaitingState.contains(collection)) {
+      return false;
     }
-    Watcher watcher =
-        event -> {
-          EventType type = event.getType();
-          if (type == EventType.NodeCreated || type == EventType.NodeDeleted) {
-            collectionsAwaitingState.remove(collection);
-            LazyCollectionRef r = lazyCollectionStates.get(collection);
-            if (r != null) {
-              r.get(false); // force a fresh read; the cached value may predate state.json
-            }
-            synchronized (getUpdateLock()) {
-              constructState(Set.of(collection));
-            }
-          }
-        };
+    final String path = DocCollection.getCollectionPath(collection);
     try {
-      if (zkClient.exists(DocCollection.getCollectionPath(collection), watcher) != null) {
-        // state.json appeared between the readability check and arming the watch
-        DocCollection state = ref.get(false);
-        if (state != null) {
-          collectionsAwaitingState.remove(collection);
-        }
-        return state;
+      if (zkClient.exists(path)) {
+        lazyCollectionsWithState.add(collection);
+        return true;
       }
-    } catch (KeeperException | InterruptedException e) {
-      collectionsAwaitingState.remove(collection);
-      if (e instanceof InterruptedException) {
-        Thread.currentThread().interrupt();
+      Watcher watcher = event -> onCollectionStateEvent(collection, event);
+      if (zkClient.exists(path, watcher) != null) {
+        lazyCollectionsWithState.add(collection);
+        return true;
       }
-      log.warn("Failed to watch for state of collection {}", collection, e);
+      collectionsAwaitingState.add(collection);
+      return false;
+    } catch (KeeperException e) {
+      // do not hide a collection because of a transient error
+      log.warn("Failed to check the state of collection {}", collection, e);
+      return true;
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      return true;
     }
-    return null;
+  }
+
+  private void onCollectionStateEvent(String collection, WatchedEvent event) {
+    EventType type = event.getType();
+    if (type == EventType.NodeCreated) {
+      collectionsAwaitingState.remove(collection);
+      lazyCollectionsWithState.add(collection);
+    } else if (type == EventType.NodeDeleted) {
+      collectionsAwaitingState.remove(collection);
+      lazyCollectionsWithState.remove(collection);
+    } else {
+      return;
+    }
+    if (closed) {
+      return;
+    }
+    try {
+      notifications.execute(() -> notifyCloudCollectionsListeners());
+    } catch (RejectedExecutionException e) {
+      log.debug("Not notifying about the state of collection {}, closing", collection);
+    }
   }
 
   private class LazyCollectionRef extends ClusterState.CollectionRef {

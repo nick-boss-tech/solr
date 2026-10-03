@@ -613,6 +613,43 @@ public class ZkStateReaderTest extends SolrTestCaseJ4 {
     assertEquals(2, currentCollections.size());
   }
 
+  public void testLazyCollectionIsReportedOnceItsStateExists() throws Exception {
+    ZkStateWriter writer = fixture.writer;
+    ZkStateReader reader = fixture.reader;
+
+    CountDownLatch reported = new CountDownLatch(1);
+    reader.registerCloudCollectionsListener(
+        (oldCollections, newCollections) -> {
+          if (newCollections != null && newCollections.contains("c3")) {
+            reported.countDown();
+          }
+        });
+
+    // the collection znode is created before its state.json
+    fixture.zkClient.makePath(ZkStateReader.COLLECTIONS_ZKNODE + "/c3", true);
+    reader.forciblyRefreshAllClusterStateSlow();
+    assertFalse(reader.getCurrentCollections().contains("c3"));
+    assertEquals(1, reported.getCount());
+
+    DocCollection state =
+        DocCollection.create(
+            "c3",
+            new HashMap<>(),
+            Map.of(ZkStateReader.CONFIGNAME_PROP, ConfigSetsHandler.DEFAULT_CONFIGSET_NAME),
+            DocRouter.DEFAULT,
+            0,
+            Instant.now(),
+            PerReplicaStatesOps.getZkClientPrsSupplier(
+                fixture.zkClient, DocCollection.getCollectionPath("c3")));
+    writer.enqueueUpdate(reader.getClusterState(), List.of(new ZkWriteCommand("c3", state)), null);
+    writer.writePendingUpdates();
+
+    assertTrue(
+        "listeners were not told about the collection once its state existed",
+        reported.await(30, TimeUnit.SECONDS));
+    assertTrue(reader.getCurrentCollections().contains("c3"));
+  }
+
   /**
    * Simulates race condition that might arise when state updates triggered by watch notification
    * contend with removal of collection watches.
