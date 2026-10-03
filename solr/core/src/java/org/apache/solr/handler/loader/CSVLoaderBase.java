@@ -159,11 +159,11 @@ public abstract class CSVLoaderBase extends ContentStreamLoader {
     }
 
     /**
-     * Splits a value on the strategy delimiter, honoring the strategy encapsulator and escape.
-     * The parser ends a record at every line break, but a line break inside this value is
-     * content, not a record boundary: the value was a single field of the outer document
-     * (SOLR-15041). Records after the first are therefore stitched back onto the last value
-     * with the exact line break the parser consumed between them.
+     * Splits a value on the strategy delimiter, honoring the strategy encapsulator and escape. The
+     * parser ends a record at every line break, but a line break inside this value is content, not
+     * a record boundary: the value was a single field of the outer document (SOLR-15041). Records
+     * after the first are therefore stitched back onto the last value with the exact line break the
+     * parser consumed between them.
      */
     private List<String> split(String val) throws IOException {
       CSVParser parser = new CSVParser(new StringReader(val), strategy);
@@ -185,10 +185,10 @@ public abstract class CSVLoaderBase extends ContentStreamLoader {
     }
 
     /**
-     * Returns the line break sequences ({@code \n}, {@code \r} or {@code \r\n}) in {@code val}
-     * that sit outside any encapsulated section, in order. These are exactly the breaks the
-     * parser treats as record ends when reading {@code val}; breaks inside an encapsulated
-     * section are field content for the parser as well.
+     * Returns the line break sequences ({@code \n}, {@code \r} or {@code \r\n}) in {@code val} that
+     * sit outside any encapsulated section, in order. These are exactly the breaks the parser
+     * treats as record ends when reading {@code val}; breaks inside an encapsulated section are
+     * field content for the parser as well.
      */
     private List<String> recordTerminators(String val) {
       List<String> terminators = new ArrayList<>();
