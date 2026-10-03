@@ -201,7 +201,8 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
     AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
     Map<String, ClusterState.CollectionRef> refs =
-        Map.of(collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+        Map.of(
+            collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
     try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 3)) {
       MultiMapSolrParams multiMapParams = new MultiMapSolrParams(Map.of("q", new String[] {"*:*"}));
@@ -226,7 +227,8 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
     AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
     Map<String, ClusterState.CollectionRef> refs =
-        Map.of(collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+        Map.of(
+            collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
     try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 3)) {
       client.enqueue(
@@ -251,7 +253,8 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
     AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
     Map<String, ClusterState.CollectionRef> refs =
-        Map.of(collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+        Map.of(
+            collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
     try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 3)) {
       client.enqueue(
@@ -278,8 +281,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
       assertTrue(
           "First attempt should carry the computed state version, not the caller's",
           history.get(0).startsWith(collName + ":"));
-      assertNull(
-          "Stale-state retry must not send the caller-supplied _stateVer_", history.get(1));
+      assertNull("Stale-state retry must not send the caller-supplied _stateVer_", history.get(1));
     }
   }
 
