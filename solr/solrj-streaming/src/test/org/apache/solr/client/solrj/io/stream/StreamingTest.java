@@ -3248,24 +3248,16 @@ public class StreamingTest extends SolrCloudTestCase {
   }
 
   @Test
-  public void testCloudStreamExportSortAddsUniqueKeyTieBreaker() throws Exception {
-    SolrParams exportParams = params("q", "*:*", "fl", "a_i", "qt", "/export", "sort", "a_i asc");
-
+  public void testCloudStreamMissingManualShardMappingFailsClearly() throws Exception {
     StreamContext streamContext = new StreamContext();
-    SolrClientCache solrClientCache = new SolrClientCache();
-    streamContext.setSolrClientCache(solrClientCache);
+    streamContext.put("shards", Map.of("otherCollection", List.of("http://example.com/solr/other")));
+    SolrParams searchParams = params("q", "*:*", "fl", "a_i", "sort", "a_i asc");
 
     try (CloudSolrStream solrStream =
-        new CloudSolrStream(solrConnection, COLLECTIONORALIAS, exportParams)) {
+        new CloudSolrStream(solrConnection, COLLECTIONORALIAS, searchParams)) {
       solrStream.setStreamContext(streamContext);
-      solrStream.open();
-
-      String sortExpression = solrStream.getStreamSort().toExpression(streamFactory).toString();
-      assertTrue(
-          "Export sort should include the unique key as a stable tie-breaker: " + sortExpression,
-          sortExpression.contains("id asc"));
-    } finally {
-      solrClientCache.close();
+      IOException e = expectThrows(IOException.class, solrStream::open);
+      assertTrue(e.getMessage(), e.getMessage().contains("No shards available"));
     }
   }
 }
