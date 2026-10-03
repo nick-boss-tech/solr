@@ -42,24 +42,9 @@ class RequestApplyUpdatesOp implements CoreAdminHandler.CoreAdminOp {
         throw new SolrException(
             SolrException.ErrorCode.SERVER_ERROR, "Core " + cname + " not in buffering state");
       }
-      Future<UpdateLog.RecoveryInfo> future = updateLog.applyBufferedUpdates();
-      if (future == null) {
-        CoreAdminOperation.log().info("No buffered updates available. core=" + cname);
-        // Publish ACTIVE here too so the ending replica state does not depend on
-        // whether there were buffered updates (SOLR-14098).
-        coreContainer.getZkController().publish(core.getCoreDescriptor(), Replica.State.ACTIVE);
-        it.rsp.add("core", cname);
-        it.rsp.add("status", "EMPTY_BUFFER");
-        return;
-      }
-      UpdateLog.RecoveryInfo report = future.get();
-      if (report.failed) {
-        CoreAdminOperation.log().error("Replay failed");
-        throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, "Replay failed");
-      }
-      coreContainer.getZkController().publish(core.getCoreDescriptor(), Replica.State.ACTIVE);
+      String status = applyBufferedUpdates(coreContainer, core, updateLog);
       it.rsp.add("core", cname);
-      it.rsp.add("status", "BUFFER_APPLIED");
+      it.rsp.add("status", status);
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
       CoreAdminOperation.log().warn("Recovery was interrupted", e);
@@ -70,6 +55,39 @@ class RequestApplyUpdatesOp implements CoreAdminHandler.CoreAdminOp {
             SolrException.ErrorCode.SERVER_ERROR, "Could not apply buffered updates", e);
     } finally {
       if (it.req != null) it.req.close();
+    }
+  }
+
+  /**
+   * Applies the buffered updates of a buffering core and publishes the replica ACTIVE once its
+   * update log is ACTIVE.
+   *
+   * @return the response status, {@code BUFFER_APPLIED} or {@code EMPTY_BUFFER}
+   */
+  static String applyBufferedUpdates(
+      CoreContainer coreContainer, SolrCore core, UpdateLog updateLog) throws Exception {
+    Future<UpdateLog.RecoveryInfo> future = updateLog.applyBufferedUpdates();
+    if (future == null) {
+      CoreAdminOperation.log().info("No buffered updates available. core=" + core.getName());
+      // A null future also means the log was no longer buffering, e.g. it is being recovered or
+      // already applying a buffer, in which case the replica must not be published ACTIVE here.
+      if (updateLog.getState() == UpdateLog.State.ACTIVE) {
+        publishActive(coreContainer, core);
+      }
+      return "EMPTY_BUFFER";
+    }
+    UpdateLog.RecoveryInfo report = future.get();
+    if (report.failed) {
+      CoreAdminOperation.log().error("Replay failed");
+      throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, "Replay failed");
+    }
+    publishActive(coreContainer, core);
+    return "BUFFER_APPLIED";
+  }
+
+  private static void publishActive(CoreContainer coreContainer, SolrCore core) throws Exception {
+    if (coreContainer.isZooKeeperAware()) {
+      coreContainer.getZkController().publish(core.getCoreDescriptor(), Replica.State.ACTIVE);
     }
   }
 }
