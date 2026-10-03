@@ -39,6 +39,7 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.BoostQuery;
 import org.apache.lucene.search.DisjunctionMaxQuery;
 import org.apache.lucene.search.MatchAllDocsQuery;
+import org.apache.lucene.search.MatchNoDocsQuery;
 import org.apache.lucene.search.MultiPhraseQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
@@ -1178,6 +1179,11 @@ public class ExtendedDismaxQParser extends QParser {
       Alias a = aliases.get(field);
       this.validateCyclicAliasing(field);
       if (a != null) {
+        if (a.fields.size() > 0 && !hasValidAliasTarget(a, new HashSet<>())) {
+          // Every target in the alias definition is unusable; match nothing instead of
+          // falling back to querying the alias name as if it were a field.
+          return new MatchNoDocsQuery();
+        }
         List<Query> lst = getQueries(a);
         if (lst == null || lst.size() == 0) return getQuery();
         // make a DisjunctionMaxQuery in this case too... it will stop
@@ -1221,6 +1227,11 @@ public class ExtendedDismaxQParser extends QParser {
       Alias a = aliases.get(field);
       this.validateCyclicAliasing(field);
       if (a != null) {
+        if (a.fields.size() > 0 && !hasValidAliasTarget(a, new HashSet<>())) {
+          // Every target in the alias definition is unusable; match nothing instead of
+          // falling back to querying the alias name as if it were a field.
+          return new MatchNoDocsQuery();
+        }
         List<Query> lst = getMultiTermQueries(a);
         if (lst == null || lst.size() == 0) {
           return getQuery();
@@ -1397,6 +1408,9 @@ public class ExtendedDismaxQParser extends QParser {
       List<Query> lst = new ArrayList<>(4);
 
       for (String f : a.fields.keySet()) {
+        if (!isValidAliasTarget(f)) {
+          continue;
+        }
         this.field = f;
         Query sub = getAliasedQuery();
         if (sub != null) {
@@ -1416,12 +1430,7 @@ public class ExtendedDismaxQParser extends QParser {
       List<Query> lst = new ArrayList<>(4);
 
       for (String f : a.fields.keySet()) {
-        // SOLR-14913: skip alias fields missing from the schema. The unknownField() throw
-        // below targets fields explicitly named in the user query; a bad field listed in
-        // an alias definition must not abort the parse into the escape+re-parse fallback.
-        if (aliases.get(f) == null
-            && schema.getFieldTypeNoEx(f) == null
-            && MagicFieldName.get(f) == null) {
+        if (!isValidAliasTarget(f)) {
           continue;
         }
         this.field = f;
@@ -1435,6 +1444,32 @@ public class ExtendedDismaxQParser extends QParser {
         }
       }
       return lst;
+    }
+
+    /**
+     * An alias target is usable when it is itself an alias, a field in the schema, or a magic
+     * field. Alias definitions come from request parameters, not from the query string, so an
+     * unusable target (for example a field removed from the schema) is skipped instead of
+     * aborting the whole parse the way an explicitly queried unknown field does.
+     */
+    private boolean isValidAliasTarget(String f) {
+      return aliases.get(f) != null
+          || schema.getFieldTypeNoEx(f) != null
+          || MagicFieldName.get(f) != null;
+    }
+
+    /** True when at least one target of the alias is usable, looking through nested aliases. */
+    private boolean hasValidAliasTarget(Alias a, Set<String> seen) {
+      for (String f : a.fields.keySet()) {
+        if (aliases.get(f) == null) {
+          if (isValidAliasTarget(f)) {
+            return true;
+          }
+        } else if (seen.add(f) && hasValidAliasTarget(aliases.get(f), seen)) {
+          return true;
+        }
+      }
+      return false;
     }
 
     private Query getQuery() {

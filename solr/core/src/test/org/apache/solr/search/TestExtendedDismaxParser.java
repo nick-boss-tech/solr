@@ -949,8 +949,88 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         twor);
   }
 
-  public void testAliasingBoost() {
+  /** SOLR-14913: alias targets that are missing from the schema are skipped, on every path. */
+  public void testAliasingWithNonSchemaField() {
+    String oner = "*[count(//doc)=1]";
+    String nor = "*[count(//doc)=0]";
+
+    // Multi-term expansion: both terms must land on the valid target (name), and the
+    // nonexistent target must not abort the parse into the escape+re-parse fallback,
+    // where the second term would be searched against the default field instead.
     assertQ(
+        req(
+            "defType",
+            "edismax",
+            "debugQuery",
+            "true",
+            "rows",
+            "0",
+            "q",
+            "myalias:(Zapp Brannigan)",
+            "f.myalias.qf",
+            "name nosuchfield"),
+        "//str[@name='parsedquery'][contains(.,'name:Zapp')]",
+        "//str[@name='parsedquery'][contains(.,'name:Brannigan')]");
+    assertQ(
+        req(
+            "defType",
+            "edismax",
+            "q",
+            "myalias:(Zapp Brannigan)",
+            "f.myalias.qf",
+            "name nosuchfield"),
+        oner);
+
+    // Single-term expansion takes the same skip path.
+    assertQ(
+        req("defType", "edismax", "q", "myalias:Zapp", "f.myalias.qf", "name nosuchfield"),
+        oner);
+
+    // Wildcard expansion takes the same skip path.
+    assertQ(
+        req("defType", "edismax", "q", "myalias:Brannig*", "f.myalias.qf", "name nosuchfield"),
+        oner);
+
+    // Nested alias: myalias points at another alias whose targets mix valid and invalid.
+    assertQ(
+        req(
+            "defType",
+            "edismax",
+            "q",
+            "myalias:(Zapp Brannigan)",
+            "f.myalias.qf",
+            "otheralias",
+            "f.otheralias.qf",
+            "name nosuchfield"),
+        oner);
+    assertQ(
+        req(
+            "defType",
+            "edismax",
+            "q",
+            "myalias:Zapp",
+            "f.myalias.qf",
+            "otheralias",
+            "f.otheralias.qf",
+            "name nosuchfield"),
+        oner);
+
+    // An alias whose targets are all missing from the schema matches nothing; it must
+    // not fall back to searching the alias name as if it were a field.
+    assertQ(
+        req("defType", "edismax", "q", "myalias:Zapp", "f.myalias.qf", "nosuchfield"), nor);
+    assertQ(
+        req(
+            "defType",
+            "edismax",
+            "q",
+            "myalias:(Zapp Brannigan)",
+            "f.myalias.qf",
+            "nosuchfield alsobad"),
+        nor);
+  }
+
+  public void testAliasingBoost() {    assertQ(
         req(
             "defType",
             "edismax",
