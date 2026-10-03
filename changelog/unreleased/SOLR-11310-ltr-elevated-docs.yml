@@ -1,0 +1,7 @@
+title: Documents elevated with elevateIds are now kept at the top of the results when an LTR rerank query is used, instead of only the ones that happened to sort first by internal document id
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-11310
+    url: https://issues.apache.org/jira/browse/SOLR-11310
