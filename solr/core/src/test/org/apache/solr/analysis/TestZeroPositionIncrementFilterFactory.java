@@ -21,6 +21,7 @@ import static org.apache.lucene.tests.analysis.BaseTokenStreamTestCase.assertTok
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.lucene.analysis.TokenFilterFactory;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.tests.analysis.CannedTokenStream;
@@ -61,6 +62,7 @@ public class TestZeroPositionIncrementFilterFactory extends SolrTestCase {
     assertEquals(0, pos.getPositionIncrement());
     assertFalse(input.incrementToken());
     input.end();
+    input.close();
 
     input.reset();
     assertTrue(input.incrementToken());
@@ -69,6 +71,12 @@ public class TestZeroPositionIncrementFilterFactory extends SolrTestCase {
     assertEquals(0, pos.getPositionIncrement());
     input.end();
     input.close();
+  }
+
+  public void testResolvesBySpiName() {
+    TokenFilterFactory factory =
+        TokenFilterFactory.forName(ZeroPositionIncrementFilterFactory.NAME, new HashMap<>());
+    assertTrue(factory instanceof ZeroPositionIncrementFilterFactory);
   }
 
   public void testRejectsUnknownArgs() {

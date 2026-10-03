@@ -465,6 +465,7 @@
         </analyzer>
         <analyzer type="query">
             <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/"/>
+            <filter class="solr.ZeroPositionIncrementFilterFactory"/>
         </analyzer>
     </fieldType>
 
