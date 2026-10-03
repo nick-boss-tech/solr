@@ -38,14 +38,14 @@ each of these areas:
 The repository already has benchmark classes that can be used as a release
 baseline:
 
-- `org.apache.solr.bench.index.CloudIndexing`
-- `org.apache.solr.bench.search.SimpleSearch`
-- `org.apache.solr.bench.search.StreamingSearch`
-- `org.apache.solr.bench.search.JsonFaceting`
-- `org.apache.solr.bench.search.FilterCache`
-- `org.apache.solr.bench.search.NumericSearch`
-- `org.apache.solr.bench.lifecycle.SolrStartup`
-- `org.apache.solr.bench.search.ExitableDirectoryReaderSearch`
+| Area | Benchmark class |
+| --- | --- |
+| indexing | `org.apache.solr.bench.index.CloudIndexing` |
+| search | `org.apache.solr.bench.search.SimpleSearch`, `NumericSearch`, `ExitableDirectoryReaderSearch` |
+| streaming | `org.apache.solr.bench.search.StreamingSearch` |
+| faceting | `org.apache.solr.bench.search.JsonFaceting` |
+| cache behavior | `org.apache.solr.bench.search.FilterCache` |
+| startup or lifecycle | `org.apache.solr.bench.lifecycle.SolrStartup` |
 
 These are useful because they already exercise common Solr feature families and
 they are easier to compare across branches than one-off ad hoc scripts.
@@ -61,7 +61,16 @@ When you prepare a release benchmark pass, keep the following stable:
 - the output format and result filename
 
 For release comparisons, prefer machine-readable output such as CSV or JSON so
-results can be archived and diffed later.
+results can be archived and diffed later. For example, from the `solr/benchmark`
+directory, with one fork, five warmup and five measurement iterations, and the
+result written to a file named for the build under test:
+
+```zsh
+./jmh.sh SimpleSearch JsonFaceting FilterCache -f 1 -wi 5 -i 5 -rf json -rff work/jmh-<build>.json
+```
+
+Run the same command on each build and compare the `primaryMetric.score` of the
+matching benchmark and parameter entries in the two JSON files.
 
 ## Suggested Workflow
 
