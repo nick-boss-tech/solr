@@ -16,6 +16,7 @@
  */
 package org.apache.solr.update;
 
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -34,9 +35,13 @@ import org.apache.solr.schema.DenseVectorField;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.SchemaField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** Builds a Lucene {@link Document} from a {@link SolrInputDocument}. */
 public class DocumentBuilder {
+
+  private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   // accessible only for tests
   static int MIN_LENGTH_TO_MOVE_LAST =
@@ -95,6 +100,13 @@ public class DocumentBuilder {
   private static String getFieldErrorMessage(
       SolrInputDocument doc, IndexSchema schema, String fieldName) {
     return "ERROR: " + getID(doc, schema) + "Error adding field '" + fieldName + "'";
+  }
+
+  /** The error message omits field values, so keep them available for debugging at TRACE. */
+  private static void traceFieldError(String message, SolrInputField field, Exception ex) {
+    if (log.isTraceEnabled()) {
+      log.trace("{}: value={} cause={}", message, field.getValue(), ex.getMessage());
+    }
   }
 
   /**
@@ -267,13 +279,13 @@ public class DocumentBuilder {
           }
         }
       } catch (SolrException ex) {
-        throw new SolrException(
-            SolrException.ErrorCode.getErrorCode(ex.code()),
-            getFieldErrorMessage(doc, schema, name),
-            ex);
+        String message = getFieldErrorMessage(doc, schema, name);
+        traceFieldError(message, field, ex);
+        throw new SolrException(SolrException.ErrorCode.getErrorCode(ex.code()), message, ex);
       } catch (Exception ex) {
-        throw new SolrException(
-            SolrException.ErrorCode.BAD_REQUEST, getFieldErrorMessage(doc, schema, name), ex);
+        String message = getFieldErrorMessage(doc, schema, name);
+        traceFieldError(message, field, ex);
+        throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, message, ex);
       }
 
       // make sure the field was used somehow...
