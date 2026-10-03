@@ -2563,6 +2563,26 @@ public class TestJsonFacets extends SolrTestCaseHS {
             "{f1:{terms:{${terms} field:${sparse_s}, missing:true, prefix:ppp, facet:{x:'sum(${num_d})'}   }}}"),
         "facets=={ 'count':6, " + "'f1':{ 'buckets':[], missing:{count:4, x:-12.0}   } } ");
 
+    // test that the missing bucket is returned when it meets mincount
+    client.testJQ(
+        params(
+            p,
+            "q",
+            "*:*",
+            "json.facet",
+            "{f1:{terms:{${terms} field:${sparse_s}, missing:true, mincount:4 }}}"),
+        "facets=={ 'count':6, " + "'f1':{ 'buckets':[], missing:{count:4} } } ");
+
+    // test that the missing bucket is left out when it doesn't meet mincount
+    client.testJQ(
+        params(
+            p,
+            "q",
+            "*:*",
+            "json.facet",
+            "{f1:{terms:{${terms} field:${sparse_s}, missing:true, mincount:5 }}}"),
+        "facets=={ 'count':6, " + "'f1':{ 'buckets':[] } } ");
+
     // test numBuckets
     client.testJQ(
         params(
