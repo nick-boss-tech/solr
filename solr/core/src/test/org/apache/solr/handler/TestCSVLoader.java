@@ -155,7 +155,7 @@ public class TestCSVLoader extends SolrTestCaseJ4 {
     assertQ(req("id:101"), "count(//arr[@name='str_s']/str)=2");
     assertQ(req("id:101"), "//arr[@name='str_s']/str[2][.='second line']");
     // XML responses normalize CRLF, so check the raw JSON for the intact CRLF
-    String json = h.query(req("id:101", "wt", "json"));
+    String json = h.query(req("q", "id:101", "wt", "json"));
     assertTrue(json, json.contains("\"first line\\r\\nwith break\""));
   }
 
