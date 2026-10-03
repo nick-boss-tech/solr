@@ -114,9 +114,7 @@ public class ZkConfigSetService extends ConfigSetService {
     if (stat == null) { // not found
       return null;
     }
-    // Use mzxid rather than the data version: mzxid increases monotonically and is never reset by
-    // znode delete/re-create, so a deleted and re-uploaded configset gets a new cache key instead
-    // of colliding with the stale cached schema of the previous generation (SOLR-15478).
+    // mzxid is never reused, unlike the data version, which starts over when the znode is recreated
     return stat.getMzxid();
   }
 
