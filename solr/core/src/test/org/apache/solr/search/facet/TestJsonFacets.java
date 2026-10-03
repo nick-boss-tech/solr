@@ -2146,6 +2146,33 @@ public class TestJsonFacets extends SolrTestCaseHS {
             + "  f1:{  'buckets':[{ val:'A', count:2, n1:6.0 }, { val:'B', count:3, n1:-2.0}]}"
             + ", f2:{  'buckets':[{ val:'B', count:3, n1:-2.0}, { val:'A', count:2, n1:6.0 }]} }");
 
+    // test stats over single and two argument math functions of a field that has no value in most
+    // docs: only the docs with a value (6 and -4) may take part
+    client.testJQ(
+        params(
+            p,
+            "q",
+            "*:*",
+            "json.facet",
+            "{ a1:'avg(floor(${sparse_num_d}))', c1:'countvals(floor(${sparse_num_d}))'"
+                + ", m1:'missing(floor(${sparse_num_d}))'"
+                + ", a2:'avg(pow(${sparse_num_d},2))', c2:'countvals(pow(${sparse_num_d},2))'"
+                + ", n2:'min(pow(${sparse_num_d},2))', x2:'max(pow(${sparse_num_d},2))'"
+                + ", m2:'missing(pow(${sparse_num_d},2))' }"),
+        "facets=={ 'count':6, a1:1.0, c1:2, m1:4, a2:26.0, c2:2, n2:16.0, x2:36.0, m2:4 }");
+
+    // the same per bucket: the 3 docs of bucket B have no value, so none may be counted
+    client.testJQ(
+        params(
+            p,
+            "q",
+            "*:*",
+            "json.facet",
+            "{f1:{terms:{${terms} field:'${cat_s}', sort:'index asc', "
+                + "facet:{c:'countvals(floor(${sparse_num_d}))'}  }} }"),
+        "facets=={ 'count':6, "
+            + "  f1:{  'buckets':[{ val:'A', count:2, c:2 }, { val:'B', count:3, c:0 }]} }");
+
     // test sorting by missing stat with function
     client.testJQ(
         params(
