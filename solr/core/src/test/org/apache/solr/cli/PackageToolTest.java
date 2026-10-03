@@ -19,12 +19,16 @@ package org.apache.solr.cli;
 
 import java.io.StringReader;
 import java.lang.invoke.MethodHandles;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrResponse;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
+import org.apache.solr.client.solrj.request.FileStoreApi;
 import org.apache.solr.cloud.SolrCloudTestCase;
 import org.apache.solr.common.LinkedHashMapWriter;
 import org.apache.solr.common.util.StrUtils;
@@ -58,6 +62,7 @@ public class PackageToolTest extends SolrCloudTestCase {
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   private static LocalWebServer repositoryServer;
+  private static LocalWebServer badRepositoryServer;
 
   @BeforeClass
   public static void setupClusterWithSecurityEnabled() throws Exception {
@@ -81,6 +86,9 @@ public class PackageToolTest extends SolrCloudTestCase {
 
     if (repositoryServer != null) {
       repositoryServer.stop();
+    }
+    if (badRepositoryServer != null) {
+      badRepositoryServer.stop();
     }
   }
 
@@ -428,6 +436,74 @@ public class PackageToolTest extends SolrCloudTestCase {
     assertTrue(
         "Should report package not deployed",
         undeployOut.contains("Package NONEXISTENT_PKG not deployed on collection validation-test"));
+  }
+
+  /** A failed install must not leave the files it already posted in the file store. */
+  @Test
+  public void testFailedInstallLeavesNoPostedFilesBehind() throws Exception {
+    final String packageName = "question-answer-badsig";
+    final String goodSignature =
+        "C9UWKkucmY3UNzqn0VLneVMe9kCbJjw7Urc76vGenoRwp32xvNn5ZIGZ7G34xZP7cVjqn/ltDlLWBZ/C3eAtuw==";
+    final String brokenSignature =
+        "A9UWKkucmY3UNzqn0VLneVMe9kCbJjw7Urc76vGenoRwp32xvNn5ZIGZ7G34xZP7cVjqn/ltDlLWBZ/C3eAtuw==";
+
+    // a copy of the test repository, under another package name and with a signature that does
+    // not match any public key
+    Path repositoryDir = createTempDir("bad-signature-repository");
+    try (Stream<Path> files = Files.list(TEST_PATH().resolve("question-answer-repository"))) {
+      for (Path file : (Iterable<Path>) files::iterator) {
+        Files.copy(file, repositoryDir.resolve(file.getFileName()));
+      }
+    }
+    Path repositoryJson = repositoryDir.resolve("repository.json");
+    String original = Files.readString(repositoryJson);
+    String modified =
+        original
+            .replace("\"name\": \"question-answer\"", "\"name\": \"" + packageName + "\"")
+            .replace(goodSignature, brokenSignature);
+    assertNotEquals(original, modified);
+    Files.writeString(repositoryJson, modified);
+
+    String solrUrl = cluster.getJettySolrRunner(0).getBaseUrl().toString();
+    ToolRuntime runtime = new CLITestHelper.TestingRuntime(false);
+    PackageTool tool = new PackageTool(runtime);
+
+    // stays up until the class is torn down: every repository is refreshed on each package command
+    badRepositoryServer = new LocalWebServer(repositoryDir.toString());
+    badRepositoryServer.start();
+    run(
+        tool,
+        new String[] {
+          "--solr-url",
+          solrUrl,
+          "add-repo",
+          "badsig",
+          "http://localhost:" + badRepositoryServer.getPort(),
+          "--credentials",
+          SecurityJson.USER_PASS
+        });
+
+    // the failure itself is reported by the tool; only what it leaves behind is checked
+    try {
+      tool.runTool(
+          SolrCLI.processCommandLineArgs(
+              tool,
+              new String[] {
+                "--solr-url",
+                solrUrl,
+                "install",
+                packageName + ":1.0.0",
+                "--credentials",
+                SecurityJson.USER_PASS
+              }));
+    } catch (Exception expected) {
+      log.info("The install of {} failed as expected", packageName, expected);
+    }
+
+    String manifestPath = "/package/" + packageName + "/1.0.0/manifest.json";
+    var metadata =
+        withBasicAuth(new FileStoreApi.GetMetadata(manifestPath)).process(cluster.getSolrClient());
+    assertNull("Manifest left behind by a failed install", metadata.files.get(manifestPath));
   }
 
   private void run(PackageTool tool, String[] args) throws Exception {
