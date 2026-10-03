@@ -195,11 +195,17 @@ public class TestDistribIDF extends SolrTestCaseJ4 {
 
     int docsInA = TestUtil.nextInt(random(), 10, 30);
     for (int i = 0; i < docsInA; i++) {
-      addCatDoc("a" + i, i == 0 ? "football" : "filler" + i, "stats_a", "stats_all");
+      // numeric ids only: the randomized schema can type the id field numerically
+      addCatDoc(
+          String.valueOf(1000 + i), i == 0 ? "football" : "filler" + i, "stats_a", "stats_all");
     }
     int docsInB = TestUtil.nextInt(random(), 10, 30);
     for (int i = 0; i < docsInB; i++) {
-      addCatDoc("b" + i, i < docsInB - 2 ? "football" : "filler" + i, "stats_b", "stats_all");
+      addCatDoc(
+          String.valueOf(2000 + i),
+          i == docsInB - 2 ? "football" : "filler" + i,
+          "stats_b",
+          "stats_all");
     }
     for (String collection : new String[] {"stats_a", "stats_b", "stats_all"}) {
       solrCluster.getSolrClient().commit(collection);
