@@ -16,6 +16,7 @@
  */
 package org.apache.solr.servlet;
 
+import static org.apache.solr.SolrTestCaseJ4.assumeWorkingMockito;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -30,9 +31,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
 import org.apache.solr.SolrTestCase;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CoreContainerProviderTest extends SolrTestCase {
+
+  @BeforeClass
+  public static void ensureAssumptions() {
+    assumeWorkingMockito();
+  }
 
   @Test
   public void testStartupFailureFailsContextInitialization() throws Exception {
