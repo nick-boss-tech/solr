@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<schema name="copyfield-subfields" version="1.7">
+  <fieldType name="string" class="solr.StrField"/>
+  <fieldType name="plong" class="solr.LongPointField"/>
+  <fieldType name="pdouble" class="solr.DoublePointField"/>
+  <fieldType name="point2D" class="solr.PointType" dimension="2" subFieldType="pdouble"/>
+  <fieldType name="currency" class="solr.CurrencyFieldType" currencyConfig="currency.xml"
+             amountLongSuffix="_l_pl" codeStrSuffix="_s_c" multiValued="false"/>
+  <fieldType name="bbox" class="solr.BBoxField" numberType="pdouble" distanceUnits="degrees"
+             storeSubFields="false"/>
+
+  <field name="id" type="string" indexed="true" stored="true" multiValued="false" required="true"/>
+  <field name="_version_" type="plong" indexed="false" stored="false" docValues="true"/>
+  <field name="src1" type="string" indexed="true" stored="true"/>
+  <field name="src2" type="string" indexed="true" stored="true"/>
+  <field name="src3" type="string" indexed="true" stored="true"/>
+  <field name="price" type="string" indexed="true" stored="true"/>
+
+  <field name="loc" type="point2D" indexed="true" stored="true" multiValued="false"/>
+  <field name="amount" type="currency" indexed="true" stored="true"/>
+  <field name="unused_amount" type="currency" indexed="true" stored="true"/>
+  <field name="box" type="bbox" indexed="true" stored="true"/>
+
+  <dynamicField name="*_c" type="currency" indexed="true" stored="true"/>
+  <dynamicField name="*_l_pl" type="plong" indexed="true" stored="false" docValues="true"/>
+  <dynamicField name="*_s_c" type="string" indexed="true" stored="false" docValues="true"/>
+
+  <uniqueKey>id</uniqueKey>
+
+  <copyField source="src1" dest="loc"/>
+  <copyField source="src2" dest="loc"/>
+  <copyField source="src1" dest="amount"/>
+  <copyField source="price" dest="price_c"/>
+  <copyField source="src1" dest="box"/>
+  <copyField source="src2" dest="box"/>
+  <copyField source="src3" dest="box"/>
+</schema>

@@ -668,13 +668,12 @@ public class IndexSchema {
     }
     // Make sure all analyzers have resource loaders, even SPI loaded ones
     fieldTypes.values().forEach(this::informResourceLoaderAwareObjectsForFieldType);
-    // SOLR-15357: sub-fields registered during inform() (e.g. BBoxField's) were not present when
-    // copy fields were registered; record them as copy targets now.
-    for (SchemaField dest : new ArrayList<>(copyFieldTargetCounts.keySet())) {
-      for (SchemaField subField : dest.getType().getSubFields(dest, this)) {
-        if (!copyFieldTargetCounts.containsKey(subField)) {
-          copyFieldTargetCounts.put(subField, 1);
-        }
+    // sub-fields registered during inform() (e.g. BBoxField's) did not exist when the copy fields
+    // were registered
+    for (Map.Entry<SchemaField, Integer> target :
+        new ArrayList<>(copyFieldTargetCounts.entrySet())) {
+      for (SchemaField subField : getSubFields(target.getKey())) {
+        copyFieldTargetCounts.putIfAbsent(subField, target.getValue());
       }
     }
   }
@@ -826,8 +825,14 @@ public class IndexSchema {
       registerCopyField(source, dest, maxCharsInt);
     }
 
+    Set<SchemaField> subFields = new HashSet<>();
+    for (SchemaField target : copyFieldTargetCounts.keySet()) {
+      subFields.addAll(getSubFields(target));
+    }
     for (Map.Entry<SchemaField, Integer> entry : copyFieldTargetCounts.entrySet()) {
-      if (entry.getValue() > 1 && !entry.getKey().multiValued()) {
+      if (entry.getValue() > 1
+          && !entry.getKey().multiValued()
+          && !subFields.contains(entry.getKey())) {
         log.warn(
             "Field {} is not multivalued and destination for multiple {} ({})",
             entry.getKey().name,
@@ -1065,9 +1070,8 @@ public class IndexSchema {
   private void incrementCopyFieldTargetCount(SchemaField dest) {
     copyFieldTargetCounts.put(
         dest, copyFieldTargetCounts.containsKey(dest) ? copyFieldTargetCounts.get(dest) + 1 : 1);
-    // SOLR-15357: sub-fields of a copyField target are targets too; RealTimeGetComponent strips
-    // them from returned documents via isCopyFieldTarget, so record them here as well.
-    for (SchemaField subField : dest.getType().getSubFields(dest, this)) {
+    // sub-fields of a target are targets too (RealTimeGetComponent leaves them out of documents)
+    for (SchemaField subField : getSubFields(dest)) {
       copyFieldTargetCounts.put(
           subField,
           copyFieldTargetCounts.containsKey(subField)
@@ -1082,9 +1086,17 @@ public class IndexSchema {
    */
   protected void removeCopyFieldTargetCount(SchemaField dest) {
     copyFieldTargetCounts.remove(dest);
-    for (SchemaField subField : dest.getType().getSubFields(dest, this)) {
+    for (SchemaField subField : getSubFields(dest)) {
       copyFieldTargetCounts.remove(subField);
     }
+  }
+
+  /**
+   * The sub-fields of a copyField destination. A destination given as a glob has no concrete
+   * sub-fields yet, so none are returned for it.
+   */
+  protected List<SchemaField> getSubFields(SchemaField dest) {
+    return dest.getName().contains("*") ? List.of() : dest.getType().getSubFields(dest, this);
   }
 
   private void registerDynamicCopyField(DynamicCopy dcopy) {
