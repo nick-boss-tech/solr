@@ -4,6 +4,30 @@
 (no compile, no tests). A reviewer must compile and test before this goes
 anywhere near a PR.
 
+## Round 4 review outcome (read this first)
+
+See `research/branch-reviews/round-4/SOLR-17722-review.md`. **The premise is
+unproven and the patch may be a no-op.** On `upstream/main`,
+`HttpSolrClient.initializeSolrParams` (used by the Jetty, JDK and concurrent
+update clients) copies the request params and then calls
+`params.set(CommonParams.WT, parserToUse.getWriterType())`, so a mirrored
+`wt=json` is replaced by the parser's writer type at send time. Reproduce the
+failure on current `main` before shipping anything; if it does not fail, the
+right outcome is a comment on the ticket.
+
+Changes in this round (no behaviour change):
+
+- Fixed the import order in `SolrMessageProcessor` (`spotlessCheck` would fail).
+- Added `SolrMessageProcessorTest#handleItemForcesJavabinResponseWriter` (not
+  compiled or run). It only proves the sanitizer sets `wt=javabin` on a mocked
+  request's `ModifiableSolrParams`; it does not prove the ticket. It also pins
+  that the edit applies to every request type, which the review questions.
+- No changelog added, because the fix is not shown to change behaviour.
+- Not changed: placement inside `prepareIfUpdateRequest` (applies to all request
+  types), and `MirroredSolrRequest.setParams` as an alternative to the
+  `instanceof ModifiableSolrParams` guard (the "no `setParams`" remark below is
+  wrong: that static helper exists for `MirroredAdminRequest` and `UpdateRequest`).
+
 ## What the patch does
 
 The CrossDC consumer replays mirrored `SolrRequest`s (with their original

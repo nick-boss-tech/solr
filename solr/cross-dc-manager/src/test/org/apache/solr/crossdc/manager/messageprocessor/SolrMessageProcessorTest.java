@@ -33,6 +33,8 @@ import org.apache.solr.client.solrj.impl.ClusterStateProvider;
 import org.apache.solr.client.solrj.response.SolrResponseBase;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
+import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.crossdc.common.IQueueHandler;
 import org.apache.solr.crossdc.common.MirroredSolrRequest;
@@ -140,5 +142,27 @@ public class SolrMessageProcessorTest {
     assertEquals(IQueueHandler.ResultStatus.HANDLED, result.status());
     verify(clusterStateProvider, times(1)).getLiveNodes();
     verify(solrRequest, times(1)).process(client);
+  }
+
+  /** A mirrored response writer param must not reach the consumer's binary-parsing client */
+  @Test
+  public void handleItemForcesJavabinResponseWriter() throws SolrServerException, IOException {
+    MirroredSolrRequest mirroredSolrRequest = mock(MirroredSolrRequest.class);
+    SolrRequest solrRequest = mock(SolrRequest.class);
+    SolrResponseBase solrResponse = mock(SolrResponseBase.class);
+    ModifiableSolrParams params = new ModifiableSolrParams();
+    params.set(CommonParams.WT, "json");
+
+    when(mirroredSolrRequest.getType()).thenReturn(MirroredSolrRequest.Type.UPDATE);
+    when(mirroredSolrRequest.getSolrRequest()).thenReturn(solrRequest);
+    when(solrRequest.getParams()).thenReturn(params);
+    when(solrRequest.process(client)).thenReturn(solrResponse);
+    when(solrResponse.getStatus()).thenReturn(0);
+
+    IQueueHandler.Result<MirroredSolrRequest<?>> result =
+        solrMessageProcessor.handleItem(mirroredSolrRequest);
+
+    assertEquals(IQueueHandler.ResultStatus.HANDLED, result.status());
+    assertEquals(CommonParams.JAVABIN, params.get(CommonParams.WT));
   }
 }
