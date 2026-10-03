@@ -4,6 +4,32 @@
 (no compile, no tests). A reviewer must compile and test before this goes
 anywhere near a PR.
 
+## Round-3 review: premise needs re-validation (read this first)
+
+On `upstream/main`, `GetSegmentData` already passes `failOnReadOnly=false` to
+`getIndexWriter` at both call sites (commit `f2aaf8769fd`, SOLR-18083,
+"GetSegmentData should work in read-only mode as well"), and
+`DefaultSolrCoreState.getIndexWriter(core, failOnReadOnly)` throws the ticket's
+"Indexing is temporarily disabled" only when `failOnReadOnly` is `true`. This
+branch is based on that commit. So the error in the ticket (reported on 8.11.2)
+very likely no longer reproduces, and the code change below removes
+`indexWriterConfig` and merge information from the response of read-only cores
+where they are currently available. **Decision needed from you:** confirm on
+current `main` with a read-only collection; if COLSTATUS and `/admin/segments`
+work, treat SOLR-16849 as fixed by SOLR-18083 and do not submit the code change
+(the handoff text below describes the original reasoning, which the statement
+"`getIndexWriter(core, false)` ... is the one that throws" contradicts). The
+code was left unchanged in this pass.
+
+What was added instead (test only, no changelog needed):
+`SegmentsInfoRequestHandlerTest#testSegmentInfosOnReadOnlyCore` sets
+`core.readOnly = true`, requests `/admin/segments` with `coreInfo=true`, and
+asserts the segments and the core info are returned, then resets the flag.
+It passes on `main` as it is and with this branch's change, so it does not
+decide between them; it locks in that read-only cores can serve segment info.
+Queued: `org.apache.solr.handler.admin.SegmentsInfoRequestHandlerTest` with
+Spotless. Not compiled or run.
+
 ## What the patch does
 
 `/admin/segments` (and COLSTATUS with `coreInfo`/`segments`/`sizeInfo`/
