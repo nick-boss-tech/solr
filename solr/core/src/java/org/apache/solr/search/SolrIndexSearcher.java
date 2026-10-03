@@ -888,8 +888,8 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
    * unique identifier.
    *
    * @return the first document number containing the term
-   * @throws IllegalStateException if the term matches more than one document; this method is only
-   *     intended for unique fields
+   * @throws IllegalStateException if the term matches more than one live document in a single
+   *     segment; this method is only intended for unique fields
    */
   public int getFirstMatch(Term t) throws IOException {
     long pair = lookupId(t.field(), t.bytes());
@@ -927,11 +927,9 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
         int id = docs.nextDoc();
         if (id == DocIdSetIterator.NO_MORE_DOCS) continue;
         if (docs.nextDoc() != DocIdSetIterator.NO_MORE_DOCS) {
-          // getFirstMatch is only intended for unique fields; fail loudly instead of depending
-          // on assertions being enabled (SOLR-13851).
           throw new IllegalStateException(
               "More than one document matches term "
-                  + idBytes
+                  + Term.toString(idBytes)
                   + " on field "
                   + field
                   + "; getFirstMatch is only intended for unique fields");

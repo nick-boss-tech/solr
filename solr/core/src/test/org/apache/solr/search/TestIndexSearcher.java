@@ -29,6 +29,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexReaderContext;
 import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.index.ReaderUtil;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queries.function.FunctionValues;
 import org.apache.lucene.queries.function.ValueSource;
 import org.apache.solr.SolrTestCaseJ4;
@@ -163,6 +164,28 @@ public class TestIndexSearcher extends SolrTestCaseJ4 {
 
     sr5.close();
     sr6.close();
+  }
+
+  public void testGetFirstMatch() throws Exception {
+    assertU(adoc("id", "1", "a_s", "dup"));
+    assertU(adoc("id", "2", "a_s", "dup"));
+    assertU(adoc("id", "3", "a_s", "single"));
+    assertU(commit());
+
+    h.getCore()
+        .withSearcher(
+            searcher -> {
+              assertTrue(searcher.getFirstMatch(new Term("id", "1")) >= 0);
+              assertTrue(searcher.getFirstMatch(new Term("a_s", "single")) >= 0);
+              assertEquals(-1, searcher.getFirstMatch(new Term("id", "missing")));
+
+              IllegalStateException e =
+                  expectThrows(
+                      IllegalStateException.class,
+                      () -> searcher.getFirstMatch(new Term("a_s", "dup")));
+              assertTrue(e.getMessage(), e.getMessage().contains("dup"));
+              return null;
+            });
   }
 
   // make sure we don't leak searchers (SOLR-3391)

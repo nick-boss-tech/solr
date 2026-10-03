@@ -1,0 +1,7 @@
+title: SolrIndexSearcher.getFirstMatch now throws an IllegalStateException when a term matches more than one live document in a segment, instead of only failing an assertion when assertions are enabled
+type: changed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-13851
+    url: https://issues.apache.org/jira/browse/SOLR-13851
