@@ -1,4 +1,4 @@
-title: bin/solr start waits for Solr with StatusTool instead of an lsof poll loop.
+title: bin/solr start waits for Solr with StatusTool instead of an lsof poll loop, and exits non-zero if Solr does not come online in time.
 type: changed
 authors:
   - name: Nick Shanin

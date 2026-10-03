@@ -305,12 +305,6 @@ SOLR_HOST_ADVERTISE=solr1.example.com
 
 Setting the hostname of the Solr server is recommended, especially when running in SolrCloud mode, as this determines the address of the node when it registers with ZooKeeper.
 
-[NOTE]
-====
-If clients reach Solr through a load balancer, that load balancer URL is for client traffic only.
-SolrCloud still needs to register a real node address that other Solr nodes and ZooKeeper can reach, so set `SOLR_HOST_ADVERTISE` to the routable host name for each node.
-====
-
 === Environment Banner in Admin UI
 
 To guard against accidentally doing changes to the wrong cluster, you may configure a visual indication in the Admin UI of whether you currently work with a production environment or not.

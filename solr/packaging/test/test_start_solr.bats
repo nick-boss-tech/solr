@@ -34,7 +34,8 @@ teardown() {
   unset SOLR_HEAP
 
   run solr start
-  [ "$status" -ne 0 ]
+  assert_failure
+  assert_output --partial "Solr did not start or was not reachable"
 }
 
 @test "SOLR-11740 check 'solr stop' connection" {
@@ -47,6 +48,20 @@ teardown() {
 
   run bash -c 'solr stop --all 2>&1'
   refute_output --partial 'forcefully killing'
+}
+
+@test "SOLR-18339 start waits on the configured bind address" {
+  export SOLR_HOST_BIND=127.0.0.2
+  export SOLR_HOST_ADVERTISE=127.0.0.2
+  export SOLR_START_WAIT=30
+
+  run solr start
+  assert_success
+  assert_output --partial "Started Solr server on port ${SOLR_PORT}. Happy searching!"
+  refute_output --partial '(pid='
+  refute_output --partial 'context-root'
+
+  solr assert --started http://127.0.0.2:${SOLR_PORT} --timeout 5000
 }
 
 @test "stop command for single port" {
