@@ -310,9 +310,9 @@ public class ExactStatsCache extends StatsCache {
   }
 
   /**
-   * The key of a shard's stats: collection and shard name when the shard reports both, so shards
-   * of different collections that share a name stay apart; the shard name alone for shards that
-   * report no collection; otherwise the shard URL(s).
+   * The key of a shard's stats: collection and shard name when the shard reports both, so shards of
+   * different collections that share a name stay apart; the shard name alone for shards that report
+   * no collection; otherwise the shard URL(s).
    */
   private static String perShardKey(NamedList<Object> response, String shardUrl) {
     String shardName = (String) response.get(ShardParams.SHARD_NAME);
