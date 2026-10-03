@@ -185,9 +185,7 @@ public class CoreContainerProvider implements ServletContextListener {
       }
     } catch (Throwable t) {
       log.error("Could not start Solr. Check solr/home property and the logs", t);
-      // Fail fast instead of leaving a zombie node: swallowing startup exceptions leaves "cores"
-      // null, so every subsequent request fails with a misleading "CoreContainer has shut down"
-      // (SOLR-15805). Rethrowing marks context initialization as failed.
+      // fail context initialization rather than serve requests without a CoreContainer
       if (t instanceof Error) {
         throw (Error) t;
       } else if (t instanceof RuntimeException) {
