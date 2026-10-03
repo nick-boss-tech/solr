@@ -15,21 +15,23 @@ SOLR-16393 ran BEFORE `RoutedAlias.fromProps` normalized the dimensional
 params into a synthetic top-level `router.field` — so a valid, documented DRA
 create could never pass validation.
 
-Fix (in `CreateAliasCmd.callCreateRoutedAlias`): validate after
-normalization. The full `MINIMAL_REQUIRED_PARAMS` check now runs on the
-`props` map AFTER `RoutedAlias.fromProps` has synthesized `router.field`
-from the per-dimension entries; a valid DRA passes it, and the existing
-post-normalization `getRequiredParams()` check is unchanged. To avoid
-regressing the error for requests missing `router.name` entirely (which
-`fromProps` answers with null), a small up-front check still requires
-`router.name` with the same BAD_REQUEST message as before.
+Fix (in `CreateAliasCmd.callCreateRoutedAlias`): the early check now only
+requires `router.name` (same BAD_REQUEST message as before, needed because
+`fromProps` answers null without it). Round 4 review: the full-minimum check
+that the first version repeated after normalization was redundant, because the
+existing `getRequiredParams()` check after `RoutedAlias.fromProps` already
+requires `router.name` and `router.field` for time, category and dimensional
+aliases, and `fromProps` synthesizes `router.field` for dimensional aliases.
+That second check was removed.
 
 Behavior matrix after the patch:
 
 - DRA per the guide (`router.name=Dimensional[...]`, `router.0.field`,
   `router.1.field`) → passes validation (previously wrongly rejected).
-- Plain routed alias missing `router.field` → still BAD_REQUEST, same
-  message (the SOLR-16393 validation keeps working).
+- Plain time routed alias missing `router.field` → still BAD_REQUEST, but the
+  text now comes from the `TimeRoutedAlias` constructor ("A time routed alias
+  requires these params: ..."), not from `CreateAliasCmd` (the first version of
+  this handoff said "same message"; that was wrong).
 - Any `router.*` request missing `router.name` → still BAD_REQUEST, same
   message.
 
@@ -44,14 +46,17 @@ cp ~/workspace/solr/gradle.properties .   # worktrees don't inherit it
 ~/workspace/tools/solr-gradle.sh :solr:core:compileJava -Pvalidation.errorprone=true
 ```
 
-Suggested tests (not written):
+Tests added (round 4, not compiled or run), in `CreateRoutedAliasTest` (raw
+`CREATEALIAS` URLs, because the SolrJ builder adds `router.field` itself and so
+hid the bug):
 
-1. Drive the create-alias command path with the guide's DRA params
-   (`router.name=Dimensional[time,category]`, `router.0.field`,
-   `router.1.field`, `create-collection.*` params) → expect the routed-alias
-   creation path instead of BAD_REQUEST. Existing DRA tests:
-   `DimensionalRoutedAliasUpdateProcessorTest`, `CreateAliasAPITest`.
-2. Regression: plain routed alias without `router.field` → still BAD_REQUEST.
+1. `testDimensionalRoutedAliasWithoutTopLevelFieldV1`: the reference guide
+   request succeeds and the alias metadata holds `router.name` and the
+   per-dimension fields.
+2. `testDimensionalRoutedAliasMissingDimensionFieldFails`: missing
+   `router.1.field` returns 400 (message not asserted).
+3. `testRoutedAliasMissingFieldOrNameFails`: time alias without `router.field`
+   and request without `router.name` both return 400 with their messages.
 
 ## Patch limits and follow-ups
 

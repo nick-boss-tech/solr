@@ -137,17 +137,6 @@ public class CreateAliasCmd extends AliasCmd {
       throw new SolrException(SERVER_ERROR, "Tried to create a routed alias with no type!");
     }
 
-    // Validate we got a basic minimum. This runs after normalization so that Dimensional
-    // routed aliases, which supply per-dimension router.<i>.field params instead of a
-    // top-level router.field, are not wrongly rejected.
-    if (!props.keySet().containsAll(RoutedAlias.MINIMAL_REQUIRED_PARAMS)) {
-      throw new SolrException(
-          BAD_REQUEST,
-          "A routed alias requires these params: "
-              + RoutedAlias.MINIMAL_REQUIRED_PARAMS
-              + " plus some create-collection prefixed ones.");
-    }
-
     if (!props.keySet().containsAll(routedAlias.getRequiredParams())) {
       throw new SolrException(
           BAD_REQUEST,

@@ -396,6 +396,106 @@ public class CreateRoutedAliasTest extends SolrCloudTestCase {
         "Invalid alias");
   }
 
+  // The reference guide example for a Dimensional Routed Alias has per-dimension router.<i>.field
+  // params and no top-level router.field
+  @Test
+  public void testDimensionalRoutedAliasWithoutTopLevelFieldV1() throws Exception {
+    final String aliasName = getSaferTestName();
+    final var jetty = cluster.getRandomJetty(random());
+    final String baseUrl = jetty.getBaseUrl().toString();
+    assertSuccess(
+        jetty
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(
+                baseUrl
+                    + "/admin/collections?action=CREATEALIAS"
+                    + "&wt=xml"
+                    + "&name="
+                    + aliasName
+                    + "&router.name=Dimensional%5Btime,category%5D"
+                    + "&router.0.start=2019-01-01T00:00:00Z"
+                    + "&router.0.field=myDate_tdt"
+                    + "&router.0.interval=%2B1MONTH"
+                    + "&router.0.maxFutureMs=600000"
+                    + "&router.1.maxCardinality=20"
+                    + "&router.1.field=myCategory_s"
+                    + "&create-collection.collection.configName=_default"
+                    + "&create-collection.numShards=1"));
+
+    Map<String, String> meta =
+        cluster.getZkStateReader().getAliases().getCollectionAliasProperties(aliasName);
+    assertEquals("Dimensional[time,category]", meta.get("router.name"));
+    assertEquals("myDate_tdt", meta.get("router.0.field"));
+    assertEquals("myCategory_s", meta.get("router.1.field"));
+  }
+
+  @Test
+  public void testDimensionalRoutedAliasMissingDimensionFieldFails() throws Exception {
+    final String aliasName = getSaferTestName();
+    final var jetty = cluster.getRandomJetty(random());
+    final String baseUrl = jetty.getBaseUrl().toString();
+    var response =
+        jetty
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(
+                baseUrl
+                    + "/admin/collections?action=CREATEALIAS"
+                    + "&wt=json"
+                    + "&name="
+                    + aliasName
+                    + "&router.name=Dimensional%5Btime,category%5D"
+                    + "&router.0.start=2019-01-01T00:00:00Z"
+                    + "&router.0.field=myDate_tdt"
+                    + "&router.0.interval=%2B1MONTH"
+                    + "&router.1.maxCardinality=20"
+                    + "&create-collection.collection.configName=_default"
+                    + "&create-collection.numShards=1")
+            .send();
+    assertEquals(400, response.getStatus());
+  }
+
+  @Test
+  public void testRoutedAliasMissingFieldOrNameFails() throws Exception {
+    final String aliasName = getSaferTestName();
+    final var jetty = cluster.getRandomJetty(random());
+    final String baseUrl = jetty.getBaseUrl().toString();
+    assertFailure(
+        jetty
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(
+                baseUrl
+                    + "/admin/collections?action=CREATEALIAS"
+                    + "&wt=json"
+                    + "&name="
+                    + aliasName
+                    + "&router.name=time"
+                    + "&router.start=2018-01-15T00:00:00Z"
+                    + "&router.interval=%2B30MINUTE"
+                    + "&create-collection.collection.configName=_default"
+                    + "&create-collection.numShards=1"),
+        "requires these params");
+
+    assertFailure(
+        jetty
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(
+                baseUrl
+                    + "/admin/collections?action=CREATEALIAS"
+                    + "&wt=json"
+                    + "&name="
+                    + aliasName
+                    + "&router.field=evt_dt"
+                    + "&router.start=2018-01-15T00:00:00Z"
+                    + "&router.interval=%2B30MINUTE"
+                    + "&create-collection.collection.configName=_default"
+                    + "&create-collection.numShards=1"),
+        "A routed alias requires these params");
+  }
+
   @Test
   public void testRandomRouterNameFails() throws Exception {
     final String aliasName = getSaferTestName();
