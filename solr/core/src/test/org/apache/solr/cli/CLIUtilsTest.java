@@ -153,8 +153,8 @@ public class CLIUtilsTest extends SolrCloudTestCase {
   public void testNormalizeSolrUrlFromZkHonorsSslEnabled() throws Exception {
     String previousSslEnabled = System.getProperty("solr.ssl.enabled");
     ZkTestServer zkServer = new ZkTestServer(createTempDir("zk-ssl-scheme"));
+    zkServer.run();
     try {
-      zkServer.run();
       try (SolrZkClient zkClient =
           new SolrZkClient.Builder().withUrl(zkServer.getZkAddress()).build()) {
         ZkController.createClusterZkNodes(zkClient);

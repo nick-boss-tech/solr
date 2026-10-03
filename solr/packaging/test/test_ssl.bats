@@ -59,7 +59,7 @@ teardown() {
 
   # Exercise the launched server and tools without relying on a urlScheme ZK property.
   run solr api --solr-url "https://localhost:${SOLR_PORT}/solr/admin/info/system"
-  assert_output --partial '"solr.ssl.enabled":"true"'
+  assert_output --partial '-Dsolr.ssl.enabled=true'
 
   printf '{}' > "${BATS_TEST_TMPDIR}/clusterprops.json"
   run solr zk cp "${BATS_TEST_TMPDIR}/clusterprops.json" zk:/clusterprops.json -z localhost:${ZK_PORT}
