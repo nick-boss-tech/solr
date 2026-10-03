@@ -123,7 +123,7 @@ public class ExactStatsCache extends StatsCache {
       }
       NamedList<Object> nl = res.getResponse();
       String shard = perShardKey(nl, r.getShard());
-      ({"unchecked"})
+      @SuppressWarnings({"unchecked"})
       Map<String, String> shardKeys =
           (Map<String, String>)
               req.getContext().computeIfAbsent(SHARD_KEYS, k -> new HashMap<String, String>());
