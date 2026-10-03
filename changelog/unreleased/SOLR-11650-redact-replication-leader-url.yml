@@ -1,0 +1,7 @@
+title: The Replication handler no longer shows the password from a leaderUrl that contains user-info in its follower details
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-11650
+    url: https://issues.apache.org/jira/browse/SOLR-11650

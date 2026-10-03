@@ -183,14 +183,41 @@ public class TestUserManagedReplicationWithAuth extends SolrTestCaseJ4 {
     assertEquals(
         docsAdded,
         queryWithBasicAuth(followerClient, new SolrQuery("*:*")).getResults().getNumFound());
+  }
 
-    NamedList<Object> details = ReplicationTestHelper.getDetails(followerClient);
-    @SuppressWarnings("unchecked")
-    NamedList<Object> followerDetails = (NamedList<Object>) details.get("follower");
-    assertNotNull("null follower details", followerDetails);
-    String leaderUrl = (String) followerDetails.get("leaderUrl");
-    assertEquals(buildUrl(leaderJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, leaderUrl);
-    assertFalse("leaderUrl should not expose credentials", leaderUrl.contains(user + ":"));
+  @Test
+  public void testFollowerDetailsRedactLeaderUrlPassword() throws Exception {
+    final int leaderPort = leaderJetty.getLocalPort();
+    ReplicationTestHelper.SolrInstance credentialed =
+        new ReplicationTestHelper.SolrInstance(
+            createTempDir("solr-instance"), "follower", leaderPort);
+    credentialed.setUp();
+
+    // put the credentials in the leaderUrl configured in solrconfig.xml
+    Path solrConfig = Path.of(credentialed.getConfDir()).resolve("solrconfig.xml");
+    String plainLeader = "http://127.0.0.1:" + leaderPort;
+    String config = Files.readString(solrConfig, StandardCharsets.UTF_8);
+    assertTrue("leaderUrl not found in solrconfig.xml", config.contains(plainLeader));
+    Files.writeString(
+        solrConfig,
+        config.replace(plainLeader, "http://" + user + ":" + pass + "@127.0.0.1:" + leaderPort),
+        StandardCharsets.UTF_8);
+
+    JettySolrRunner credentialedJetty = createAndStartJetty(credentialed);
+    try (HttpJettySolrClient client =
+        ReplicationTestHelper.createNewSolrClient(
+            buildUrl(credentialedJetty.getLocalPort()), DEFAULT_TEST_CORENAME)) {
+      NamedList<Object> details = ReplicationTestHelper.getDetails(client);
+      @SuppressWarnings("unchecked")
+      NamedList<Object> followerDetails = (NamedList<Object>) details.get("follower");
+      assertNotNull("null follower details", followerDetails);
+      String leaderUrl = (String) followerDetails.get("leaderUrl");
+      assertNotNull("null leaderUrl", leaderUrl);
+      assertFalse("leaderUrl exposes the password: " + leaderUrl, leaderUrl.contains(pass));
+      assertTrue("leaderUrl not redacted: " + leaderUrl, leaderUrl.contains(user + ":********@"));
+    } finally {
+      credentialedJetty.stop();
+    }
   }
 
   @Test

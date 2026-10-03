@@ -32,6 +32,10 @@ public class URLUtil {
 
   public static final Pattern URL_PREFIX = Pattern.compile("^([a-z]*?://).*");
 
+  /** Scheme, then user-info up to the last {@code @} before the first {@code /} or {@code ?}. */
+  private static final Pattern USER_INFO =
+      Pattern.compile("^([A-Za-z][A-Za-z0-9+.-]*://)([^/?]*)(?=@)");
+
   public static String removeScheme(String url) {
     Matcher matcher = URL_PREFIX.matcher(url);
     if (matcher.matches()) {
@@ -104,41 +108,24 @@ public class URLUtil {
    *
    * @param url a full URL that may contain embedded credentials
    * @return the same URL with the password replaced by {@code ********}, or the original value if
-   *     no user-info is present or the URL cannot be parsed cleanly
+   *     no user-info is present. The URL is not parsed, so unusual host names or unencoded
+   *     characters in the password do not stop the redaction.
    */
   public static String redactUserInfo(String url) {
     if (url == null) {
       return null;
     }
 
-    try {
-      URI uri = URI.create(url);
-      String userInfo = uri.getUserInfo();
-      if (userInfo == null) {
-        return url;
-      }
-
-      String redactedUserInfo;
-      int colonAt = userInfo.indexOf(':');
-      if (colonAt >= 0) {
-        redactedUserInfo = userInfo.substring(0, colonAt + 1) + "********";
-      } else {
-        redactedUserInfo = "********";
-      }
-
-      return new URI(
-              uri.getScheme(),
-              redactedUserInfo,
-              uri.getHost(),
-              uri.getPort(),
-              uri.getPath(),
-              uri.getQuery(),
-              uri.getFragment())
-          .toString();
-    } catch (IllegalArgumentException | URISyntaxException e) {
-      log.debug("Unable to redact credentials from URL [{}]", url, e);
+    Matcher matcher = USER_INFO.matcher(url);
+    if (!matcher.find()) {
       return url;
     }
+
+    String userInfo = matcher.group(2);
+    int colonAt = userInfo.indexOf(':');
+    String redactedUserInfo =
+        colonAt >= 0 ? userInfo.substring(0, colonAt + 1) + "********" : "********";
+    return matcher.group(1) + redactedUserInfo + url.substring(matcher.end(2));
   }
 
   private static String removeTrailingSlashIfPresent(String url) {

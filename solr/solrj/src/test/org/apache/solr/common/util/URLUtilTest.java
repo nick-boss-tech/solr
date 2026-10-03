@@ -114,6 +114,30 @@ public class URLUtilTest extends SolrTestCase {
     assertEquals(
         "http://localhost:8983/solr/techproducts",
         URLUtil.redactUserInfo("http://localhost:8983/solr/techproducts"));
+    assertNull(URLUtil.redactUserInfo(null));
+  }
+
+  @Test
+  public void testRedactUserInfoFailsClosedOnUnparseableUrls() {
+    // java.net.URI treats a host with an underscore as a registry-based authority
+    assertEquals(
+        "http://solr:********@solr_leader:8983/solr/core",
+        URLUtil.redactUserInfo("http://solr:secret@solr_leader:8983/solr/core"));
+    // characters that are illegal in user-info when not percent-encoded
+    assertEquals(
+        "http://solr:********@localhost:8983/solr/core",
+        URLUtil.redactUserInfo("http://solr:pa#ss{word}@localhost:8983/solr/core"));
+    assertEquals(
+        "http://solr:********@localhost:8983/solr/core",
+        URLUtil.redactUserInfo("http://solr:pa ss%zz@localhost:8983/solr/core"));
+    // an '@' in the path or query is not user-info
+    assertEquals(
+        "http://localhost:8983/solr/a@b?x=y@z",
+        URLUtil.redactUserInfo("http://localhost:8983/solr/a@b?x=y@z"));
+    // the path and query are kept exactly as given
+    assertEquals(
+        "http://solr:********@localhost:8983/solr/core?a=b%26c",
+        URLUtil.redactUserInfo("http://solr:secret@localhost:8983/solr/core?a=b%26c"));
   }
 
   @Test
