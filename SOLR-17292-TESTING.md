@@ -32,23 +32,30 @@ cp ~/workspace/solr/gradle.properties .   # worktrees don't inherit it
 ~/workspace/tools/solr-gradle.sh :solr:solrj-zookeeper:compileJava -Pvalidation.errorprone=true
 ```
 
-Suggested tests (not written):
+Test added (round-3 patch pass, **not compiled or run**):
 
-1. `persist(znode, zkClient)` where every attempt fails with stale state
-   (mocked `SolrZkClient` always throwing `NodeExistsException`/`NoNodeException`
-   on multi, `fetch` returning refreshed state) → expect `KeeperException`
-   thrown after retries, not a silent return.
-2. Regression: a persist that succeeds on a retry still returns normally.
-3. Existing coverage: `solr/solrj-zookeeper/src/test/org/apache/solr/common/cloud/TestPerReplicaStates.java`
-   (uses a real ZK cluster via SolrTestCaseJ4).
+- `TestPerReplicaStates#testPersistRetriesOnStaleState` (real ZK via the
+  existing cluster setup, using the package-private `PerReplicaStatesOps(Function)`
+  constructor): (1) an operation computed from a stale view re-adds an existing
+  node, then succeeds with the next version after the retry refreshes it;
+  (2) an operation that is stale on every attempt now throws
+  `KeeperException.NodeExistsException` instead of returning silently.
+
+Queued for the verification run: `org.apache.solr.common.cloud.TestPerReplicaStates`
+(module `:solr:solrj-zookeeper`), with Spotless.
 
 ## Patch limits and follow-ups
 
 - **Not compiled or tested.**
 - Rethrows the last caught stale-state exception (a `NodeExistsException` or
   `NoNodeException`) rather than inventing a new exception type — this is the
-  "relevant exception" the ticket asks for.
+  "relevant exception" the ticket asks for. An error is logged first with the
+  znode and attempt count, and the refresh after the final failed attempt is
+  skipped.
 - Callers that previously (incorrectly) relied on silent success will now see
-  the exception; that is the intended behavior change.
-- No changelog entry (repo convention: scaffold once a Jira/PR is assigned).
+  the exception; that is the intended behavior change. The call sites
+  (`ZkStateWriter`, `DistributedClusterStateUpdater`,
+  `ShardLeaderElectionContextBase`, `ZkController`) were not traced for how each
+  handles it; describe that in the PR.
+- Changelog fragment added: `changelog/unreleased/SOLR-17292.yml`.
 - Remove this file before opening the upstream PR.
