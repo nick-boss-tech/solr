@@ -14,11 +14,17 @@ docID=2147483647)` — a zero-magnitude query vector produces undefined
 the stored document for the hit.
 
 `DenseVectorField.getKnnVectorQuery` now validates the parsed query vector
-up front (both `FLOAT32` and `BYTE` encodings) and throws
-`SolrException(ErrorCode.BAD_REQUEST, "KNN query vector must not be an
-all-zero vector")` instead. The parsed vector is now extracted once per
-encoding branch (previously `getFloatVector()`/`getByteVector()` was called
-inline in each ternary branch) — same single-call semantics.
+up front, when the field's similarity function is `COSINE` (both `FLOAT32` and
+`BYTE` encodings), and throws `SolrException(ErrorCode.BAD_REQUEST, "KNN query
+vector must not be an all-zero vector when the similarity function is
+cosine")` instead. The original `switch` building the query is unchanged.
+
+Round-3 review correction: the first version rejected an all-zero query vector
+for every similarity function. The field type's default similarity is
+`EUCLIDEAN`, where a zero query is a valid "nearest to the origin" query, so
+existing working queries would have become 400s. `DOT_PRODUCT` and
+`MAXIMUM_INNER_PRODUCT` give degenerate but defined scores and are not rejected
+either.
 
 Notes for the reviewer:
 
@@ -28,15 +34,14 @@ Notes for the reviewer:
 - Query-side only, per the ticket: already-indexed all-zero *document*
   vectors are a separate, murkier problem (can't be rejected at query time;
   index-time validation is a bigger behavioral call) and are out of scope.
-- Design point worth a second look: the rejection is unconditional across
-  similarity functions. A zero query vector is degenerate input in every
-  case, but strictly speaking only cosine produces the reported crash
-  (dot_product yields all-zero scores, euclidean is well-defined). If
-  reviewers prefer, the check could be gated on
-  `similarityFunction == VectorSimilarityFunction.COSINE`.
+- Not verified: whether the reported `docID=2147483647` failure still
+  reproduces with the Lucene version on `main` (nothing was run); the new
+  tests assert the validation itself, not the old failure.
 
 Files changed:
 - `solr/core/src/java/org/apache/solr/schema/DenseVectorField.java`
+- `solr/core/src/test/org/apache/solr/schema/DenseVectorFieldTest.java`
+- `changelog/unreleased/SOLR-16977.yml` (new)
 
 ## Recommended reviewer commands
 
@@ -45,17 +50,26 @@ cp ~/workspace/solr/gradle.properties .   # worktrees don't inherit it
 ~/workspace/tools/solr-gradle.sh :solr:core:compileJava -Pvalidation.errorprone=true
 ```
 
-Suggested tests (not written):
+Tests added (round-3 patch pass, **not compiled or run**), in
+`DenseVectorFieldTest`, building `DenseVectorField` instances directly with the
+existing 3-argument constructor (as `VectorSimilaritySourceParserTest` does), so
+no core or new schema is needed:
 
-1. `{!knn}` with an all-zero float query vector → HTTP 400 with the
-   "all-zero vector" message (was: 500-ish `IllegalArgumentException`
-   about docID at render time).
-2. All-zero byte-encoded query vector → same 400.
-3. Non-zero query vector → query builds and executes normally (no regression).
-4. Existing `TestDenseVectorField` / knn query test suites.
+- `zeroQueryVector_cosineSimilarity_shouldBeRejected`: FLOAT32 and BYTE, a
+  `[0, 0, 0, 0]` query → `SolrException` BAD_REQUEST mentioning "all-zero".
+- `zeroQueryVector_nonCosineSimilarity_shouldBeAccepted`: EUCLIDEAN,
+  DOT_PRODUCT and MAXIMUM_INNER_PRODUCT with both encodings → a query is built.
+- `nonZeroQueryVector_cosineSimilarity_shouldBeAccepted`: cosine with
+  `[0, 0, 0, 1]` → `KnnFloatVectorQuery` / `KnnByteVectorQuery`.
+
+Queued for the verification run: `org.apache.solr.schema.DenseVectorFieldTest`
+and `org.apache.solr.search.vector.KnnQParserTest` (existing knn query
+coverage), with Spotless.
 
 ## Patch limits and follow-ups
 
 - **Not compiled or tested.**
-- No changelog entry (repo convention: scaffold once a Jira/PR is assigned).
+- Document-side all-zero vectors are not handled (the ticket's second case);
+  say so in the PR.
+- Changelog fragment added: `changelog/unreleased/SOLR-16977.yml`.
 - Remove this file before opening the upstream PR.
