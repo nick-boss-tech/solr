@@ -24,6 +24,7 @@ import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
+import org.apache.solr.common.util.StrUtils;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.update.CommitUpdateCommand;
@@ -112,6 +113,22 @@ public class IgnoreCommitOptimizeUpdateProcessorFactory extends UpdateRequestPro
       this.ignoreOptimizeOnly = factory.ignoreOptimizeOnly;
     }
 
+    /**
+     * The COMMIT_END_POINT param marks commits Solr sends internally: "true" from a recovering
+     * replica to its leader, and the "leaders" / "replicas" endpoint names the distributed update
+     * processor substitutes when it forwards a commit. The endpoint names are not booleans, so
+     * parsing the value with getBool would reject forwarded recovery commits with a 400.
+     */
+    private static boolean isInternalEndpointCommit(SolrParams params) {
+      String endPoint = params.get(DistributedUpdateProcessor.COMMIT_END_POINT);
+      if (endPoint == null) {
+        return false;
+      }
+      return StrUtils.parseBool(endPoint, false)
+          || "leaders".equals(endPoint)
+          || "replicas".equals(endPoint);
+    }
+
     @Override
     public void processCommit(CommitUpdateCommand cmd) throws IOException {
 
@@ -122,7 +139,7 @@ public class IgnoreCommitOptimizeUpdateProcessorFactory extends UpdateRequestPro
         return;
       }
 
-      if (cmd.getReq().getParams().getBool(DistributedUpdateProcessor.COMMIT_END_POINT, false)) {
+      if (isInternalEndpointCommit(cmd.getReq().getParams())) {
         // this is a targeted commit from replica to leader needed for recovery, so can't be ignored
         if (next != null) next.processCommit(cmd);
         return;

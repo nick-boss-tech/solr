@@ -1,0 +1,7 @@
+title: IgnoreCommitOptimizeUpdateProcessor no longer breaks replica recovery; recovery commits forwarded by the leader with an internal endpoint marker are let through instead of failing with a 400
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-14919
+    url: https://issues.apache.org/jira/browse/SOLR-14919

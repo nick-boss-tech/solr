@@ -59,13 +59,34 @@ public class IgnoreCommitOptimizeUpdateProcessorFactoryTest extends SolrTestCase
         "Sending a commit should NOT have resulted in an exception in the response: "
             + shouldBeNull,
         shouldBeNull);
+
+    // The distributed update processor replaces the marker with an endpoint name when it
+    // forwards a commit: "leaders" on the way to the leader, "replicas" when the leader
+    // forwards to its peers. Those internal endpoint commits (the leader hop of a recovery
+    // commit is forwarded this way) must also pass, and must not fail boolean parsing.
+    for (String endPoint : new String[] {"leaders", "replicas"}) {
+      rsp = processCommit("ignore-commit-from-client-403", false, endPoint);
+      shouldBeNull = rsp.getException();
+      assertNull(
+          "Sending a commit with commit_end_point="
+              + endPoint
+              + " should NOT have resulted in an exception in the response: "
+              + shouldBeNull,
+          shouldBeNull);
+    }
   }
 
   SolrQueryResponse processCommit(final String chain, boolean optimize) throws IOException {
-    return processCommit(chain, optimize, null);
+    return processCommit(chain, optimize, (String) null);
   }
 
   SolrQueryResponse processCommit(final String chain, boolean optimize, Boolean commitEndPoint)
+      throws IOException {
+    return processCommit(
+        chain, optimize, commitEndPoint == null ? null : commitEndPoint.toString());
+  }
+
+  SolrQueryResponse processCommit(final String chain, boolean optimize, String commitEndPoint)
       throws IOException {
     SolrCore core = h.getCore();
     UpdateRequestProcessorChain pc = core.getUpdateProcessingChain(chain);
