@@ -65,11 +65,6 @@ public class RestManager {
   // used for validating resourceIds provided during registration
   private static final Pattern resourceIdRegex = Pattern.compile("(/config|/schema)(/.*)");
 
-  // Characters illegal in filenames on some platforms (e.g. Windows). Resource ids are persisted
-  // as files by ManagedResourceStorage, so ids containing these would silently create corrupt,
-  // undeletable storage.
-  private static final Pattern illegalFilenameCharsPattern = Pattern.compile("[<>:\"|?*\\x00-\\x1F]");
-
   private static final boolean DECODE = true;
 
   /** Used internally to keep track of registrations during core initialization */
@@ -197,19 +192,6 @@ public class RestManager {
             ErrorCode.SERVER_ERROR,
             reservedEndpointsMatcher.group(1)
                 + " is a reserved endpoint used by the Solr REST API!");
-      }
-
-      // Resource ids are persisted as files (see ManagedResourceStorage#getStoredResourceId, which
-      // replaces '/' with '_'). Reject characters illegal in filenames so a bad id fails fast with
-      // a 400 instead of silently creating corrupt, undeletable storage (SOLR-15895).
-      Matcher illegalFilenameCharsMatcher =
-          illegalFilenameCharsPattern.matcher(resourceId.replace('/', '_'));
-      if (illegalFilenameCharsMatcher.find()) {
-        throw new SolrException(
-            ErrorCode.BAD_REQUEST,
-            "Invalid resourceId '"
-                + resourceId
-                + "'; must not contain characters illegal in filenames (< > : \" | ? * or control characters).");
       }
 
       // IMPORTANT: this code should assume there is no RestManager at this point
@@ -489,6 +471,7 @@ public class RestManager {
       if (json instanceof Map) {
         String resourceId = ManagedEndpoint.resolveResourceId(endpoint.getSolrRequest().getPath());
         Map<String, String> info = (Map<String, String>) json;
+        restManager.storageIO.validateStoredResourceId(storage.getStoredResourceId(resourceId));
         info.put("resourceId", resourceId);
         storeManagedData(applyUpdatesToManagedData(json));
       } else {

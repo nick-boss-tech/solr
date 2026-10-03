@@ -149,6 +149,19 @@ public class TestRestManager extends SolrRestletTestBase {
   }
 
   @Test
+  public void testRegisterResourceIdWithFilenameSpecialChars() throws IOException {
+    try (SolrResourceLoader loader = new SolrResourceLoader(Path.of("./"))) {
+      RestManager restManager = new RestManager();
+      restManager.init(loader, new NamedList<>(), new ManagedResourceStorage.InMemoryStorageIO());
+
+      // registration, which also replays persisted resources at startup, does not validate ids
+      assertNotNull(
+          restManager.addManagedResource(
+              "/schema/analysis/stopwords/a:b", ManagedWordSetResource.class));
+    }
+  }
+
+  @Test
   public void testResolveResourceId() {
     String path = "http://solr.apache.org/schema/analysis/synonyms/de";
     String resourceId = RestManager.ManagedEndpoint.resolveResourceId(path);

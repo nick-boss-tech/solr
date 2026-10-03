@@ -22,7 +22,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.lucene.util.Constants;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.SolrResourceLoader;
 import org.apache.solr.rest.ManagedResourceStorage.FileStorageIO;
@@ -43,6 +45,40 @@ public class TestManagedFileStorage extends SolrTestCaseJ4 {
       FileStorageIO fileStorageIO = new FileStorageIO();
       fileStorageIO.configure(loader, initArgs);
       TestManagedFileStorage.doStorageTests(loader, fileStorageIO);
+    }
+  }
+
+  @Test
+  public void testValidateStoredResourceId() throws Exception {
+    Path instanceDir = createTempDir("json-storage-validate");
+    try (SolrResourceLoader loader = new SolrResourceLoader(instanceDir)) {
+      NamedList<String> initArgs = new NamedList<>();
+      initArgs.add(
+          ManagedResourceStorage.STORAGE_DIR_INIT_ARG, instanceDir.resolve("managed").toString());
+      FileStorageIO fileStorageIO = new FileStorageIO();
+      fileStorageIO.configure(loader, initArgs);
+      JsonStorage jsonStorage = new JsonStorage(fileStorageIO, loader);
+
+      String plain = jsonStorage.getStoredResourceId("/schema/analysis/stopwords/english");
+      fileStorageIO.validateStoredResourceId(plain);
+
+      String colon = jsonStorage.getStoredResourceId("/schema/analysis/stopwords/a:b");
+      String backslash = jsonStorage.getStoredResourceId("/schema/analysis/stopwords/a\\b");
+      if (Constants.WINDOWS) {
+        for (String stored : List.of(colon, backslash)) {
+          SolrException e =
+              expectThrows(
+                  SolrException.class, () -> fileStorageIO.validateStoredResourceId(stored));
+          assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+        }
+      } else {
+        // legal file names here, so ids that were accepted before must keep working
+        fileStorageIO.validateStoredResourceId(colon);
+        fileStorageIO.validateStoredResourceId(backslash);
+        String resourceId = "/schema/analysis/stopwords/a:b";
+        jsonStorage.store(resourceId, new HashMap<String, Object>());
+        assertNotNull(jsonStorage.load(resourceId));
+      }
     }
   }
 

@@ -33,6 +33,7 @@ import java.lang.invoke.MethodHandles;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Locale;
@@ -77,6 +78,12 @@ public abstract class ManagedResourceStorage {
     OutputStream openOutputStream(String storedResourceId) throws IOException;
 
     boolean delete(String storedResourceId) throws IOException;
+
+    /**
+     * Throws a {@link SolrException} with {@link ErrorCode#BAD_REQUEST} if this storage cannot
+     * store a resource under the given stored id. The default accepts every id.
+     */
+    default void validateStoredResourceId(String storedResourceId) {}
   }
 
   public static final String STORAGE_IO_CLASS_INIT_ARG = "storageIO";
@@ -183,6 +190,28 @@ public abstract class ManagedResourceStorage {
 
       storageDir = dir.toAbsolutePath().toString();
       log.info("File-based storage initialized to use dir: {}", storageDir);
+    }
+
+    @Override
+    public void validateStoredResourceId(String storedResourceId) {
+      Path dir = Path.of(storageDir).normalize();
+      final Path file;
+      try {
+        file = dir.resolve(storedResourceId).normalize();
+      } catch (InvalidPathException e) {
+        throw new SolrException(
+            ErrorCode.BAD_REQUEST,
+            "Resource id cannot be stored as a file in " + storageDir + ": " + e.getMessage(),
+            e);
+      }
+      if (!dir.equals(file.getParent())) {
+        throw new SolrException(
+            ErrorCode.BAD_REQUEST,
+            "Resource id must map to a single file name in "
+                + storageDir
+                + ": "
+                + storedResourceId);
+      }
     }
 
     @Override
