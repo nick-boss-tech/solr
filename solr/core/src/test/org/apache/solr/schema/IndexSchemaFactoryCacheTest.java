@@ -16,6 +16,7 @@
  */
 package org.apache.solr.schema;
 
+import static org.apache.solr.SolrTestCaseJ4.assumeWorkingMockito;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,9 +27,15 @@ import org.apache.solr.cloud.ZkSolrResourceLoader;
 import org.apache.solr.common.util.ObjectCache;
 import org.apache.solr.common.util.Pair;
 import org.apache.zookeeper.data.Stat;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class IndexSchemaFactoryCacheTest extends SolrTestCase {
+
+  @BeforeClass
+  public static void ensureAssumptions() {
+    assumeWorkingMockito();
+  }
 
   private static Stat stat(int version, long mzxid) {
     Stat stat = new Stat();
