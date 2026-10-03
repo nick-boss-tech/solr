@@ -425,7 +425,7 @@ public class PeerSync implements SolrMetricProducer {
           && srsp.getException() instanceof SolrException
           && ((SolrException) srsp.getException()).code() == 500) {
         log.warn(
-            "{} got a 500 from {}, counting as success. {} Replica may not have loaded the core.",
+            "{} got a 500 from {}, counting as success ",
             msg(),
             srsp.getShardAddress(),
             srsp.getException());
