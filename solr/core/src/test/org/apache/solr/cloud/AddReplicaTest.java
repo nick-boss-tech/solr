@@ -18,7 +18,8 @@ package org.apache.solr.cloud;
 
 import static org.apache.solr.client.solrj.response.RequestStatusState.COMPLETED;
 
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
@@ -270,8 +271,8 @@ public class AddReplicaTest extends SolrCloudTestCase {
       coreProperties = core.getInstancePath().resolve("core.properties");
     }
     Properties properties = new Properties();
-    try (InputStream in = Files.newInputStream(coreProperties)) {
-      properties.load(in);
+    try (BufferedReader reader = Files.newBufferedReader(coreProperties, StandardCharsets.UTF_8)) {
+      properties.load(reader);
     }
     return properties.getProperty("numShards");
   }
