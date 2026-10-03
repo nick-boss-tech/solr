@@ -17,6 +17,7 @@
 -->
 <schema name="copyfield-subfields" version="1.7">
   <fieldType name="string" class="solr.StrField"/>
+  <fieldType name="boolean" class="solr.BoolField"/>
   <fieldType name="plong" class="solr.LongPointField"/>
   <fieldType name="pdouble" class="solr.DoublePointField"/>
   <fieldType name="point2D" class="solr.PointType" dimension="2" subFieldType="pdouble"/>
