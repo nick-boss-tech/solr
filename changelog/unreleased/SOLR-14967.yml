@@ -1,0 +1,7 @@
+title: CloudSolrClient now sends the _stateVer_ parameter for requests whose params are not modifiable (for example MultiMapSolrParams or MapSolrParams), so the server can flag stale cached cluster state for those requests as well
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-14967
+    url: https://issues.apache.org/jira/browse/SOLR-14967

@@ -697,12 +697,20 @@ public abstract class CloudSolrClient extends SolrClient {
       } else {
         params.remove(STATE_VERSION);
       }
-    } else if (!skipStateVersion && stateVerParam != null) {
+    } else if (requestParams != null) {
       // The request params are not modifiable (e.g. MultiMapSolrParams): send a
-      // params-overriding view carrying _stateVer_, leaving the caller's params untouched.
-      ModifiableSolrParams stateVerParams = new ModifiableSolrParams(requestParams);
-      stateVerParams.set(STATE_VERSION, stateVerParam);
-      requestToSend = new StateVerRequest<>(request, stateVerParams);
+      // params-overriding view, leaving the caller's params untouched. Mirror the modifiable
+      // path: carry the computed _stateVer_ when there is one, otherwise make sure a
+      // caller-supplied _stateVer_ is not sent (the deliberate no-state-version retry).
+      if (!skipStateVersion && stateVerParam != null) {
+        ModifiableSolrParams stateVerParams = new ModifiableSolrParams(requestParams);
+        stateVerParams.set(STATE_VERSION, stateVerParam);
+        requestToSend = new StateVerRequest<>(request, stateVerParams);
+      } else if (requestParams.get(STATE_VERSION) != null) {
+        ModifiableSolrParams stateVerParams = new ModifiableSolrParams(requestParams);
+        stateVerParams.remove(STATE_VERSION);
+        requestToSend = new StateVerRequest<>(request, stateVerParams);
+      }
     }
 
     NamedList<Object> resp = null;

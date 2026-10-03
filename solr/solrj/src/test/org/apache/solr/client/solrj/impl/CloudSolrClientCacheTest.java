@@ -51,7 +51,10 @@ import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.DocCollection;
+import org.apache.solr.common.params.MapSolrParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
+import org.apache.solr.common.params.MultiMapSolrParams;
+import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.ExecutorUtil;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SolrNamedThreadFactory;
@@ -190,6 +193,93 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
       assertTrue(history.get(0).startsWith(collName + ":"));
       assertNull(history.get(1));
       assertTrue(refGets.get() >= 1);
+    }
+  }
+
+  public void testImmutableParamsCarryStateVersionAndOriginalUnchanged() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+    try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 3)) {
+      MultiMapSolrParams multiMapParams = new MultiMapSolrParams(Map.of("q", new String[] {"*:*"}));
+      assertNotNull(client.request(new ImmutableParamsRequest(collName, multiMapParams), collName));
+      assertNull(
+          "Caller's params must stay unchanged", multiMapParams.get(CloudSolrClient.STATE_VERSION));
+
+      MapSolrParams mapParams = new MapSolrParams(Map.of("q", "*:*"));
+      assertNotNull(client.request(new ImmutableParamsRequest(collName, mapParams), collName));
+      assertNull(
+          "Caller's params must stay unchanged", mapParams.get(CloudSolrClient.STATE_VERSION));
+
+      List<String> history = client.getStateVersionHistory();
+      assertEquals(2, history.size());
+      assertTrue(history.get(0).startsWith(collName + ":"));
+      assertTrue(history.get(1).startsWith(collName + ":"));
+    }
+  }
+
+  public void testImmutableParamsStaleRetryOmitsStateVersion() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+    try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 3)) {
+      client.enqueue(
+          (req, cols) -> {
+            throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale");
+          });
+      client.enqueue((req, cols) -> null);
+
+      MultiMapSolrParams params = new MultiMapSolrParams(Map.of("q", new String[] {"*:*"}));
+      assertNotNull(client.request(new ImmutableParamsRequest(collName, params), collName));
+      assertNull("Caller's params must stay unchanged", params.get(CloudSolrClient.STATE_VERSION));
+
+      List<String> history = client.getStateVersionHistory();
+      assertEquals(2, history.size());
+      assertTrue(history.get(0).startsWith(collName + ":"));
+      assertNull("Stale-state retry should omit _stateVer_ before refreshing", history.get(1));
+    }
+  }
+
+  public void testImmutableParamsCallerStateVersionRemovedOnStaleRetry() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+    try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 3)) {
+      client.enqueue(
+          (req, cols) -> {
+            throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale");
+          });
+      client.enqueue((req, cols) -> null);
+
+      MultiMapSolrParams params =
+          new MultiMapSolrParams(
+              Map.of(
+                  "q",
+                  new String[] {"*:*"},
+                  CloudSolrClient.STATE_VERSION,
+                  new String[] {"caller:999"}));
+      assertNotNull(client.request(new ImmutableParamsRequest(collName, params), collName));
+      assertEquals(
+          "Caller's params must stay unchanged",
+          "caller:999",
+          params.get(CloudSolrClient.STATE_VERSION));
+
+      List<String> history = client.getStateVersionHistory();
+      assertEquals(2, history.size());
+      assertTrue(
+          "First attempt should carry the computed state version, not the caller's",
+          history.get(0).startsWith(collName + ":"));
+      assertNull(
+          "Stale-state retry must not send the caller-supplied _stateVer_", history.get(1));
     }
   }
 
@@ -438,6 +528,37 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     interface Invocation {
       NamedList<Object> invoke(SolrRequest<?> request, List<String> inputCollections)
           throws Exception;
+    }
+  }
+
+  private static class ImmutableParamsRequest extends SolrRequest<NamedList<Object>> {
+    private final SolrParams params;
+    private final String collection;
+
+    ImmutableParamsRequest(String collection, SolrParams params) {
+      super(METHOD.GET, "/dummy", SolrRequestType.UNSPECIFIED);
+      this.collection = collection;
+      this.params = params;
+    }
+
+    @Override
+    public SolrParams getParams() {
+      return params;
+    }
+
+    @Override
+    protected NamedList<Object> createResponse(NamedList<Object> namedList) {
+      return namedList;
+    }
+
+    @Override
+    public boolean requiresCollection() {
+      return true;
+    }
+
+    @Override
+    public String getCollection() {
+      return collection;
     }
   }
 
