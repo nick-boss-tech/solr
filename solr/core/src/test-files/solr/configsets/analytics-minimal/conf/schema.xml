@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<schema name="analytics-minimal" version="1.7">
+  <fieldType name="string" class="solr.StrField"/>
+  <fieldType name="long" class="solr.LongPointField" docValues="true"/>
+  <fieldType name="int_dv" class="solr.IntPointField" docValues="true"/>
+  <fieldType name="text_std" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="_nest_path_" class="solr.NestPathField"/>
+  <!-- for versioning -->
+  <field name="_version_" type="long" indexed="true" stored="true"/>
+  <field name="_root_" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
+  <field name="_nest_path_" type="_nest_path_"/>
+  <field name="id" type="string" indexed="true" stored="true"/>
+  <field name="text" type="text_std" indexed="true" stored="false"/>
+  <field name="outcome" type="int_dv" indexed="false" stored="false"/>
+  <uniqueKey>id</uniqueKey>
+</schema>
