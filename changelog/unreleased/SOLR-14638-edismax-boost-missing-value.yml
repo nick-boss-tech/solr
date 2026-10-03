@@ -1,0 +1,7 @@
+title: In edismax, a document that a multiplicative boost function has no value for, for example boost=field(f) with no value in f, now keeps its score instead of scoring 0
+type: changed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-14638
+    url: https://issues.apache.org/jira/browse/SOLR-14638
