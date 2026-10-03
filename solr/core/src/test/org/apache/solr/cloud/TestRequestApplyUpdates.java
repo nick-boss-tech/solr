@@ -22,8 +22,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
 import org.apache.solr.client.solrj.SolrRequest;
-import org.apache.solr.client.solrj.impl.HttpJdkSolrClient;
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.GenericSolrRequest;
 import org.apache.solr.client.solrj.request.UpdateRequest;
@@ -104,17 +102,14 @@ public class TestRequestApplyUpdates extends SolrCloudTestCase {
 
     // The buffered update was replayed onto the replica.
     JettySolrRunner jetty = jettyForCore(target.getCoreName());
-    try (HttpSolrClient client =
-        new HttpJdkSolrClient.Builder(jetty.getBaseUrl() + "/" + target.getCoreName()).build()) {
-      GenericSolrRequest req =
-          new GenericSolrRequest(
-              SolrRequest.METHOD.GET,
-              "/get",
-              SolrRequest.SolrRequestType.QUERY,
-              new ModifiableSolrParams().set("id", "1"));
-      NamedList<Object> getRsp = client.request(req);
-      assertNotNull("buffered document was not replayed", getRsp.get("doc"));
-    }
+    GenericSolrRequest req =
+        new GenericSolrRequest(
+            SolrRequest.METHOD.GET,
+            "/" + target.getCoreName() + "/get",
+            SolrRequest.SolrRequestType.QUERY,
+            new ModifiableSolrParams().set("id", "1"));
+    NamedList<Object> getRsp = jetty.getSolrClient().request(req);
+    assertNotNull("buffered document was not replayed", getRsp.get("doc"));
   }
 
   private static Replica getReplica(String collection) {
@@ -169,19 +164,17 @@ public class TestRequestApplyUpdates extends SolrCloudTestCase {
 
   private static NamedList<Object> requestApplyUpdates(Replica replica) throws Exception {
     JettySolrRunner jetty = jettyForCore(replica.getCoreName());
-    try (HttpSolrClient client = newClient(jetty)) {
-      GenericSolrRequest req =
-          new GenericSolrRequest(
-              SolrRequest.METHOD.GET,
-              "/admin/cores",
-              SolrRequest.SolrRequestType.ADMIN,
-              new ModifiableSolrParams()
-                  .set(
-                      CoreAdminParams.ACTION,
-                      CoreAdminParams.CoreAdminAction.REQUESTAPPLYUPDATES.name())
-                  .set(CoreAdminParams.NAME, replica.getCoreName()));
-      return client.request(req);
-    }
+    GenericSolrRequest req =
+        new GenericSolrRequest(
+            SolrRequest.METHOD.GET,
+            "/admin/cores",
+            SolrRequest.SolrRequestType.ADMIN,
+            new ModifiableSolrParams()
+                .set(
+                    CoreAdminParams.ACTION,
+                    CoreAdminParams.CoreAdminAction.REQUESTAPPLYUPDATES.name())
+                .set(CoreAdminParams.NAME, replica.getCoreName()));
+    return jetty.getSolrClient().request(req);
   }
 
   private static Path waitForBufferTlog(Replica replica) throws Exception {
@@ -203,9 +196,5 @@ public class TestRequestApplyUpdates extends SolrCloudTestCase {
     }
     fail("no buffer transaction log appeared under " + dataDir);
     return null; // unreachable
-  }
-
-  private static HttpSolrClient newClient(JettySolrRunner jetty) {
-    return new HttpJdkSolrClient.Builder(jetty.getBaseUrl().toString()).build();
   }
 }
