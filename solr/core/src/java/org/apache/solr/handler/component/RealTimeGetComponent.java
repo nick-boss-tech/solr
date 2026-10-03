@@ -350,7 +350,7 @@ public class RealTimeGetComponent extends SearchComponent {
             docFetcher.doc(docid, rsp.getReturnFields().getLuceneFieldNames());
         SolrDocument doc = toSolrDoc(luceneDocument, core.getLatestSchema());
         if (reuseDvIters == null) {
-          reuseDvIters = docFetcher.createDocValuesIteratorCache();
+          reuseDvIters = new DocValuesIteratorCache(searcherInfo.getSearcher());
         }
         docFetcher.decorateDocValueFields(
             doc, docid, docFetcher.getNonStoredDVs(true), reuseDvIters);
@@ -662,7 +662,7 @@ public class RealTimeGetComponent extends SearchComponent {
   /**
    * returns the SolrInputDocument from the current tlog, or DELETED if it has been deleted, or null
    * if there is no record of it in the current update log. If null is returned, it could still be
-   * in the latest index.
+   * in the latest index. Copy-field target fields are excluded.
    *
    * @param idBytes doc ID to find; never a child doc.
    * @param versionReturned If a non-null AtomicLong is passed in, it is set to the version of the
@@ -733,7 +733,8 @@ public class RealTimeGetComponent extends SearchComponent {
    * @param versionReturned If a non-null AtomicLong is passed in, it is set to the version of the
    *     update returned from the TLog.
    * @param onlyTheseFields If not-null, this limits the fields that are returned. However it is
-   *     only an optimization hint since other fields may be returned.
+   *     only an optimization hint since other fields may be returned. Copy field targets are never
+   *     returned.
    * @param resolveStrategy {@link Resolution#DOC} or {@link Resolution#ROOT_WITH_CHILDREN}.
    * @see Resolution
    */
@@ -780,7 +781,7 @@ public class RealTimeGetComponent extends SearchComponent {
 
         SolrDocument solrDoc =
             fetchSolrDoc(searcher, docId, makeReturnFields(core, onlyTheseFields, resolveStrategy));
-        sid = toSolrInputDocument(solrDoc, core.getLatestSchema());
+        sid = toSolrInputDocument(solrDoc, core.getLatestSchema()); // filters copy-field targets
         // the assertions above furthermore guarantee the result corresponds to idBytes
       } finally {
         searcherHolder.decref();
@@ -854,7 +855,7 @@ public class RealTimeGetComponent extends SearchComponent {
       boolean fieldArrayListCreated = false;
       SchemaField sf = schema.getFieldOrNull(fname);
       if (sf != null) {
-        if (!sf.hasDocValues() && !sf.stored()) continue;
+        if ((!sf.hasDocValues() && !sf.stored()) || schema.isCopyFieldTarget(sf)) continue;
       }
       for (Object val : doc.getFieldValues(fname)) {
         if (val instanceof IndexableField f) {
