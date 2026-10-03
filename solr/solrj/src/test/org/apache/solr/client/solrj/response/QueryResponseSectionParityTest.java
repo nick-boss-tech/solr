@@ -77,6 +77,23 @@ public class QueryResponseSectionParityTest extends SolrTestCase {
     assertEquals(Long.valueOf(2), gr.getValues().get(0).getNGroups());
   }
 
+  /** SOLR-14381: grouped counts past Integer.MAX_VALUE parse as longs, not ints. */
+  @Test
+  public void testGroupingWideCounts() throws Exception {
+    String json =
+        "{"
+            + HEADER
+            + """
+            "grouped":{"cat":{"matches":2500000000,"ngroups":2200000000,"groups":[
+            {"groupValue":"a","doclist":{"numFound":2,"start":0,"docs":[{"id":"1"}]}}
+            ]}}}""";
+    QueryResponse r = parse(json);
+    GroupResponse gr = r.getGroupResponse();
+    assertNotNull("groupResponse", gr);
+    assertEquals(2_500_000_000L, gr.getValues().get(0).getMatches());
+    assertEquals(Long.valueOf(2_200_000_000L), gr.getValues().get(0).getNGroups());
+  }
+
   /** interval facets: count is an Integer cast (QueryResponse extractFacetInfo). */
   @Test
   public void testIntervalFacets() throws Exception {

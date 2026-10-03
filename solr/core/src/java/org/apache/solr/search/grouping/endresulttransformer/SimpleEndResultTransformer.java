@@ -51,7 +51,7 @@ public class SimpleEndResultTransformer implements EndResultTransformer {
         }
         SolrDocumentList docList = new SolrDocumentList();
         docList.setStart(rb.getGroupingSpec().getGroupSortSpec().getOffset());
-        docList.setNumFound(topGroups.totalHitCount);
+        docList.setNumFound(rb.totalHitCount);
 
         float maxScore = Float.NEGATIVE_INFINITY;
         for (GroupDocs<BytesRef> group : topGroups.groups) {

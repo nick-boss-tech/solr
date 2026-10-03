@@ -134,7 +134,7 @@ public class QueryResponseTest extends SolrTestCase {
     GroupCommand fieldCommand = commands.get(0);
     assertEquals("acco_id", fieldCommand.getName());
     assertEquals(30000000, fieldCommand.getMatches());
-    assertEquals(5687, fieldCommand.getNGroups().intValue());
+    assertEquals(Long.valueOf(5687), fieldCommand.getNGroups());
     List<Group> fieldCommandGroups = fieldCommand.getValues();
     assertEquals(10, fieldCommandGroups.size());
     assertEquals("116_ar", fieldCommandGroups.get(0).getGroupValue());
@@ -240,7 +240,7 @@ public class QueryResponseTest extends SolrTestCase {
     GroupCommand fieldCommand = commands.get(0);
     assertEquals("acco_id", fieldCommand.getName());
     assertEquals(30000000, fieldCommand.getMatches());
-    assertEquals(5687, fieldCommand.getNGroups().intValue());
+    assertEquals(Long.valueOf(5687), fieldCommand.getNGroups());
     List<Group> fieldCommandGroups = fieldCommand.getValues();
     assertEquals(1, fieldCommandGroups.size());
 

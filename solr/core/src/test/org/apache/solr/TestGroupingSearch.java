@@ -246,8 +246,8 @@ public class TestGroupingSearch extends SolrTestCaseJ4 {
     assertQ(
         req("q", "{!func}id_i", "group", "true", "group.field", "name", "group.ngroups", "true"),
         "//lst[@name='grouped']/lst[@name='name']",
-        "//lst[@name='grouped']/lst[@name='name']/int[@name='matches'][.='5']",
-        "//lst[@name='grouped']/lst[@name='name']/int[@name='ngroups'][.='3']",
+        "//lst[@name='grouped']/lst[@name='name']/long[@name='matches'][.='5']",
+        "//lst[@name='grouped']/lst[@name='name']/long[@name='ngroups'][.='3']",
         "*[count(//arr[@name='groups']/lst) = 3]",
         "//arr[@name='groups']/lst[1]/str[@name='groupValue'][.='author3']",
         "//arr[@name='groups']/lst[1]/result[@numFound='1']",
@@ -262,8 +262,8 @@ public class TestGroupingSearch extends SolrTestCaseJ4 {
     // function based query for predictable scores not affect by similarity
     assertQ(
         req("q", "{!func}id_i", "group", "true", "group.field", "group_i", "group.ngroups", "true"),
-        "//lst[@name='grouped']/lst[@name='group_i']/int[@name='matches'][.='5']",
-        "//lst[@name='grouped']/lst[@name='group_i']/int[@name='ngroups'][.='2']",
+        "//lst[@name='grouped']/lst[@name='group_i']/long[@name='matches'][.='5']",
+        "//lst[@name='grouped']/lst[@name='group_i']/long[@name='ngroups'][.='2']",
         "*[count(//arr[@name='groups']/lst) = 2]",
         "//arr[@name='groups']/lst[1]/int[@name='groupValue'][.='1']",
         "//arr[@name='groups']/lst[1]/result[@numFound='3']",
@@ -328,11 +328,11 @@ public class TestGroupingSearch extends SolrTestCaseJ4 {
             "weight desc"),
         "*[count(//arr[@name='groups']/lst) = 2]",
         "//arr[@name='groups']/lst[1]/str[@name='groupValue'][.='author1']",
-        //        ,"//arr[@name='groups']/lst[1]/int[@name='matches'][.='2']"
+        //        ,"//arr[@name='groups']/lst[1]/long[@name='matches'][.='2']"
         "//arr[@name='groups']/lst[1]/result[@numFound='2']",
         "//arr[@name='groups']/lst[1]/result/doc/*[@name='id'][.='1']",
         "//arr[@name='groups']/lst[2]/str[@name='groupValue'][.='author2']",
-        //        ,"//arr[@name='groups']/lst[2]/int[@name='matches'][.='2']"
+        //        ,"//arr[@name='groups']/lst[2]/long[@name='matches'][.='2']"
         "//arr[@name='groups']/lst[2]/result[@numFound='2']",
         "//arr[@name='groups']/lst[2]/result/doc/*[@name='id'][.='4']");
   }

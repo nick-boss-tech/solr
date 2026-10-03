@@ -1,0 +1,7 @@
+title: Grouping counts (matches, ngroups and the simple-format numFound) are now long values, so distributed grouping over more than Integer.MAX_VALUE documents no longer overflows
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-14381
+    url: https://issues.apache.org/jira/browse/SOLR-14381
