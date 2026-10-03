@@ -4,6 +4,32 @@
 (no compile, no tests). A reviewer must compile and test before this goes
 anywhere near a PR.
 
+## Round 4 review outcome (read this first)
+
+See `research/branch-reviews/round-4/SOLR-17377-review.md`. No code was changed
+in this round: the fix needs a design decision first.
+
+- **The patch breaks an existing test.**
+  `TestSolrXml.testFailAtConfigParseTimeWhenClusterSingletonClassNotFound`
+  expects a `SolrException` (" Error loading class 'class.not.found.Class'") at
+  parse time; the patch skips unloadable classes, so that test fails. Running
+  `TestSolrXml` is queued to confirm. Either keep fail-fast for genuinely
+  unknown classes, or change the test deliberately and say why.
+- **The deferred check is not a check.** The `instanceof ClusterSingleton`
+  guard in `ClusterSingletons.added` silently ignores a non-singleton; it does
+  not raise the "must implement the interface" error. A loadable but wrong-typed
+  module class would be silently ignored.
+- **A typo'd class no longer stops startup.** In `ContainerPluginsRegistry`
+  a plugin class that fails to load is added to `errs` and the entry is skipped
+  with `log.error(...)`; startup continues without the singleton. The "log
+  warn" and "fails loudly either way" statements below are wrong.
+- Candidate designs: check the interface where the full class loader exists
+  (plugin registration) and fail there; or keep the early check but only for
+  classes the parse-time loader can see.
+
+No test, changelog or code change was added, because each depends on the
+decision above.
+
 ## What the patch does
 
 Since SOLR-17096, custom cluster singletons can be declared via a
