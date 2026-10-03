@@ -56,6 +56,41 @@ public class TestRealTimeGet extends TestRTGBase {
   }
 
   @Test
+  public void testCopyFieldTargetSetDirectlyAfterCommit() throws Exception {
+    clearIndex();
+    assertU(commit());
+
+    assertU(adoc("id", "copyfield-target", "author_s", "direct value"));
+    assertU(commit());
+
+    assertJQ(
+        req("qt", "/get", "id", "copyfield-target", "fl", "id,author_s"),
+        "=={'doc':{'id':'copyfield-target','author_s':'direct value'}}");
+  }
+
+  @Test
+  public void testAtomicUpdateOfDocumentWithCopyFieldTarget() throws Exception {
+    clearIndex();
+    assertU(commit());
+
+    // author is copied to author_s; the copy must not be fed back in when the update is re-indexed
+    assertU(adoc("id", "atomic-copyfield", "author", "someone"));
+
+    // the previous version is read from the update log
+    assertU(adoc(sdoc("id", "atomic-copyfield", "name", Map.of("set", "first"))));
+    assertJQ(
+        req("qt", "/get", "id", "atomic-copyfield", "fl", "id,name,author,author_s"),
+        "=={'doc':{'id':'atomic-copyfield','name':'first','author':'someone','author_s':'someone'}}");
+
+    // the previous version is read from the index
+    assertU(commit());
+    assertU(adoc(sdoc("id", "atomic-copyfield", "name", Map.of("set", "second"))));
+    assertJQ(
+        req("qt", "/get", "id", "atomic-copyfield", "fl", "id,name,author,author_s"),
+        "=={'doc':{'id':'atomic-copyfield','name':'second','author':'someone','author_s':'someone'}}");
+  }
+
+  @Test
   public void testGetRealtime() throws Exception {
     clearIndex();
     assertU(commit());
