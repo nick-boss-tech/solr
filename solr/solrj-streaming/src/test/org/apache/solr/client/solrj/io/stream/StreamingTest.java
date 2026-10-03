@@ -3239,4 +3239,26 @@ public class StreamingTest extends SolrCloudTestCase {
       solrClientCache.close();
     }
   }
+
+  @Test
+  public void testCloudStreamExportSortAddsUniqueKeyTieBreaker() throws Exception {
+    SolrParams exportParams = params("q", "*:*", "fl", "a_i", "qt", "/export", "sort", "a_i asc");
+
+    StreamContext streamContext = new StreamContext();
+    SolrClientCache solrClientCache = new SolrClientCache();
+    streamContext.setSolrClientCache(solrClientCache);
+
+    try (CloudSolrStream solrStream =
+        new CloudSolrStream(solrConnection, COLLECTIONORALIAS, exportParams)) {
+      solrStream.setStreamContext(streamContext);
+      solrStream.open();
+
+      String sortExpression = solrStream.getStreamSort().toExpression(streamFactory).toString();
+      assertTrue(
+          "Export sort should include the unique key as a stable tie-breaker: " + sortExpression,
+          sortExpression.contains("id asc"));
+    } finally {
+      solrClientCache.close();
+    }
+  }
 }

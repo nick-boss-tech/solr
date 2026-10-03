@@ -620,12 +620,9 @@ public class CloudSolrStream extends TupleStream implements Expressible {
   }
 
   private String getUniqueKeyField() throws IOException {
-    SolrClientCache cache =
-        streamContext != null && streamContext.getSolrClientCache() != null
-            ? streamContext.getSolrClientCache()
-            : new SolrClientCache();
-    boolean closeCache =
-        cache != (streamContext == null ? null : streamContext.getSolrClientCache());
+    final SolrClientCache contextCache =
+        streamContext != null ? streamContext.getSolrClientCache() : null;
+    final SolrClientCache cache = contextCache != null ? contextCache : new SolrClientCache();
 
     try {
       return new SchemaRequest.UniqueKey()
@@ -634,7 +631,7 @@ public class CloudSolrStream extends TupleStream implements Expressible {
     } catch (Exception e) {
       throw new IOException("Unable to resolve unique key for export sort", e);
     } finally {
-      if (closeCache) {
+      if (contextCache == null) {
         try {
           cache.close();
         } catch (Exception ignored) {
