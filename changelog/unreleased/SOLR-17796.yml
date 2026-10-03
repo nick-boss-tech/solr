@@ -1,0 +1,7 @@
+title: A filter query made only of a collapse or other post filter, such as fq={!tag=t}{!collapse field=x}, no longer fails with an UnsupportedOperationException when q.op is AND
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17796
+    url: https://issues.apache.org/jira/browse/SOLR-17796

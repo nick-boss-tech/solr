@@ -16,11 +16,13 @@ in `SolrIndexSearcher.getProcessedFilter` and forced Weight-based evaluation
 that PostFilters cannot do.
 
 The patch extends the single-clause unwrap in `QueryParser.jj`'s `Query()`
-production: when the lone clause's query is a `PostFilter`
-(`org.apache.solr.search.PostFilter`), it is returned directly for ANY occur
-(MUST/SHOULD/MUST_NOT is untouched — only the single-clause path). A lone
-MUST is semantically "apply this filter", identical to what the SHOULD path
-already produced. The same edit is mirrored in the checked-in generated
+production: when the lone clause is `MUST` and its query is a `PostFilter`
+(`org.apache.solr.search.PostFilter`), it is returned directly. (Round 4
+review: the first version of this patch unwrapped for any occur, which dropped
+the negation of a lone `-{!frange ...}` and returned the opposite result set;
+`MUST_NOT` now stays wrapped.) A lone MUST is semantically "apply this
+filter", identical to what the SHOULD path already produced. The same edit is
+mirrored in the checked-in generated
 `QueryParser.java` (see below). Non-PostFilter single clauses are completely
 unchanged.
 
@@ -54,17 +56,17 @@ git diff --stat   # confirm regeneration matches the hand edit
   -Pvalidation.errorprone=true
 ```
 
-Suggested new tests (not written):
+Tests added (round 4, not compiled or run), in `TestCollapseQParserPlugin`:
 
-1. Parser-level: parse `{!collapse field=<single-valued string w/ docValues>}`
-   via `LuceneQParser` with `q.op=AND` → assert the result is the bare
-   `CollapsingPostFilter`, not a `BooleanQuery`; same with `q.op=OR`
-   (unchanged behavior).
-2. Same for `{!frange ...}` (`FunctionRangeQuery`, also a PostFilter) with
-   `q.op=AND`.
-3. Integration: the ticket's repro — `fq={!tag=t}{!collapse field=...}`
-   with `q.op=AND` returns 200 with collapsed results; facet exclusion via
-   the tag still works.
+1. `testCollapseFilterIsNotWrappedWhenRequired`: the ticket's
+   `fq={!tag=collapse_tag}{!collapse field=group_s}` under `q.op=OR` and `AND`,
+   and an explicit `+{!collapse ...}` under `OR`; each returns one doc per group.
+2. `testNegatedPostFilterStaysNegated`: `{!frange}` positive and
+   `-{!frange}` negated under both operators; the negated form must return the
+   complement (guards the `MUST_NOT` regression found in review).
+
+Still untested: facet exclusion through the tag, and multi-clause forms
+(`q={!collapse ...} foo:bar` with `q.op=AND` still wraps; out of scope).
 
 ## Patch limits and risks
 

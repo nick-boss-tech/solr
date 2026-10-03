@@ -284,6 +284,49 @@ public class TestCollapseQParserPlugin extends SolrTestCaseJ4 {
     assertQ(req(params)); // fails *second* time!
   }
 
+  @Test // https://issues.apache.org/jira/browse/SOLR-17796
+  public void testCollapseFilterIsNotWrappedWhenRequired() {
+    assertU(adoc("id", "1", "group_s", "group1", "test_i", "5"));
+    assertU(adoc("id", "2", "group_s", "group1", "test_i", "10"));
+    assertU(adoc("id", "3", "group_s", "group2", "test_i", "5"));
+    assertU(commit());
+
+    for (String op : new String[] {"OR", "AND"}) {
+      assertQ(
+          "tagged collapse with q.op=" + op,
+          req("q", "*:*", "q.op", op, "fq", "{!tag=collapse_tag}{!collapse field=group_s}"),
+          "*[count(//doc)=2]");
+    }
+
+    assertQ(
+        "explicitly required collapse with q.op=OR",
+        req("q", "*:*", "q.op", "OR", "fq", "+{!collapse field=group_s}"),
+        "*[count(//doc)=2]");
+  }
+
+  @Test // https://issues.apache.org/jira/browse/SOLR-17796
+  public void testNegatedPostFilterStaysNegated() {
+    assertU(adoc("id", "1", "group_s", "group1", "test_i", "5"));
+    assertU(adoc("id", "2", "group_s", "group1", "test_i", "10"));
+    assertU(adoc("id", "3", "group_s", "group2", "test_i", "5"));
+    assertU(commit());
+
+    for (String op : new String[] {"OR", "AND"}) {
+      assertQ(
+          "frange with q.op=" + op,
+          req("q", "*:*", "q.op", op, "fq", "{!frange l=6 u=100}test_i"),
+          "*[count(//doc)=1]",
+          "//result/doc[1]/str[@name='id'][.='2']");
+
+      assertQ(
+          "negated frange with q.op=" + op,
+          req("q", "*:*", "q.op", op, "fq", "-{!frange l=6 u=100}test_i", "sort", "id asc"),
+          "*[count(//doc)=2]",
+          "//result/doc[1]/str[@name='id'][.='1']",
+          "//result/doc[2]/str[@name='id'][.='3']");
+    }
+  }
+
   @Test
   public void testMergeBoost() throws Exception {
 

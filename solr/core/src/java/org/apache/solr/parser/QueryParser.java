@@ -247,9 +247,9 @@ addClause(clauses, conj, mods, q);
 if (clauses.size() == 1) {
       BooleanClause clause = clauses.get(0);
       Query firstQuery = clause.query();
-      if (firstQuery instanceof PostFilter) {
-        // A lone PostFilter can only be evaluated via the post-filter path; wrapping it in a
-        // BooleanQuery would force Weight-based evaluation, which PostFilters do not support.
+      if (clause.occur() == BooleanClause.Occur.MUST && firstQuery instanceof PostFilter) {
+        // A lone required PostFilter is returned as is: wrapping it in a BooleanQuery would force
+        // Weight-based evaluation, which PostFilters do not support. A negated one must stay wrapped.
         {if ("" != null) return firstQuery;}
       }
       if (clause.occur() == BooleanClause.Occur.SHOULD) {
