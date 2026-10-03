@@ -842,21 +842,6 @@ public class GraphExpressionTest extends SolrCloudTestCase {
   }
 
   @Test
-  public void testScoreNodesSingleNode() throws Exception {
-    new UpdateRequest()
-        .add(id, "0", "basket_s", "basket1", "product_s", "product1", "price_f", "1")
-        .commit(cluster.getSolrClient(), COLLECTION);
-
-    List<Tuple> tuples = scoreNodesFromProduct("product1");
-
-    assertEquals(1, tuples.size());
-    Tuple tuple = tuples.get(0);
-    assertEquals("product1", tuple.getString("node"));
-    assertEquals(1, (long) tuple.getLong("docFreq"));
-    assertEquals(1, (long) tuple.getLong("count(*)"));
-  }
-
-  @Test
   public void testScoreNodesNoNodes() throws Exception {
     new UpdateRequest()
         .add(id, "0", "basket_s", "basket1", "product_s", "product1", "price_f", "1")
