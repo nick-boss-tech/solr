@@ -64,7 +64,6 @@ If it does become a leader, it will behave the same as if it was a NRT type of r
 * *PULL*: This type of replica does not maintain a transaction log nor index document changes locally.
 It only replicates the index from the shard leader.
 It is not eligible to become a shard leader and doesn't participate in shard leader election at all.
-Because each refresh still recreates the replication writer and searcher state, PULL replicas trade lower update-side work for a potentially higher CPU cost during replication cycles.
 
 If you do not specify the type of replica when it is created, it will be NRT type.
 
