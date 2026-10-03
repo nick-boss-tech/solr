@@ -1,0 +1,7 @@
+title: JSON Facet stats such as avg, countvals, min, max, missing and percentile over a single or two argument math function (for example avg(sqrt(field))) no longer count documents that have no value for the underlying field. The exists() function and def() likewise see no value for such documents.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16267
+    url: https://issues.apache.org/jira/browse/SOLR-16267

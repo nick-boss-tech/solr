@@ -48,20 +48,34 @@ cp ~/workspace/solr/gradle.properties .   # worktrees don't inherit it
 ~/workspace/tools/solr-gradle.sh :solr:core:compileJava -Pvalidation.errorprone=true
 ```
 
-Suggested tests (not written):
+Behavior changes to state in the PR (round-3 review): the same `exists()` fix
+also changes `min`/`max` (`MinMaxAgg` skips a doc when `val == 0 && !exists`, so
+`min(sqrt(f))` stops returning 0 for missing docs), `missing(sqrt(f))`,
+`percentile` (`PercentileAgg` skips non-existing docs), the `exists(...)`
+function query and `def(...)`, for the functions in `DoubleParser` and
+`Double2Parser`.
 
-1. JSON-facet test (FacetTestBase style): index docs where some lack the
-   numeric field; assert `avg(sqrt(field)) ==
-   sum(sqrt(field))/countvals(field)` and `countvals(sqrt(field)) ==
-   countvals(field)`.
-2. Regression: `avg(field)` unchanged; `min`/`max`/`stddev`/`variance`
-   with a nested function on a partially-missing field.
-3. Existing function-query / facet test suites.
+Tests added (round-3 patch pass, **not compiled or run**), in `TestJsonFacets`
+(`doStatsTemplated`, so they run standalone and distributed), using the existing
+`sparse_num_d` fixture (only docs 1 and 4, both in bucket `A`, have a value: 6
+and -4):
+
+- Global stats over `floor(sparse_num_d)` and `pow(sparse_num_d,2)` (one and two
+  argument functions): `avg` 1.0 and 26.0, `countvals` 2, `missing` 4, and for
+  `pow` also `min` 16.0 / `max` 36.0 (before the fix `min` would be 0.0 and the
+  counts would be 6). `floor` is used because `sqrt(-4)` is NaN.
+- Per bucket: `countvals(floor(sparse_num_d))` is 2 for `A` and 0 for `B`.
+
+Not covered: `variance`/`stddev`, `percentile`, and the `exists()`/`def()`
+function queries (a `TestFunctionQuery` case would cover those).
+
+Queued for the verification run: `org.apache.solr.search.facet.TestJsonFacets`
+and `org.apache.solr.search.function.TestFunctionQuery`, with Spotless.
 
 ## Patch limits and follow-ups
 
 - **Not compiled or tested.**
 - Other single-source wrappers outside `ValueSourceParser` were not
   audited; if the pattern recurs elsewhere it is a follow-up.
-- No changelog entry (repo convention: scaffold once a Jira/PR is assigned).
+- Changelog fragment added: `changelog/unreleased/SOLR-16267.yml`.
 - Remove this file before opening the upstream PR.
