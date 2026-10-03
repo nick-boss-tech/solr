@@ -248,6 +248,41 @@ public class LukeRequestHandlerTest extends SolrTestCaseJ4 {
     }
   }
 
+  /**
+   * SOLR-15024: two char filters of the same class in one analyzer must both appear in the Luke
+   * schema response, as an ordered list. Keyed by class name, the second one used to hide the
+   * first.
+   */
+  public void testDuplicateCharFilters() throws Exception {
+    deleteCore();
+    initCore("solrconfig.xml", "schema-dup-charfilters-analyzer.xml");
+
+    try {
+      String analyzer =
+          "//lst[@name='text_dup_cf']/lst[@name='indexAnalyzer']/arr[@name='charFilters']";
+      assertQ(
+          reqWithPath("/admin/luke", "show", "schema"),
+          "count(" + analyzer + "/lst)=2",
+          analyzer
+              + "/lst[1]/str[@name='className']"
+              + "[.='org.apache.lucene.analysis.pattern.PatternReplaceCharFilterFactory']",
+          analyzer + "/lst[1]/lst[@name='args']/str[@name='pattern'][.='a']",
+          analyzer + "/lst[2]/lst[@name='args']/str[@name='pattern'][.='b']");
+
+      String json = h.query(reqWithPath("/admin/luke", "show", "schema", "wt", "json"));
+      int listStart = json.indexOf("\"charFilters\":[");
+      assertTrue("charFilters should serialize as a JSON array: " + json, listStart >= 0);
+      int first = json.indexOf("\"pattern\":\"a\"", listStart);
+      int second = json.indexOf("\"pattern\":\"b\"", listStart);
+      assertTrue(
+          "both char filters should be present, in order: " + json, first >= 0 && second > first);
+    } finally {
+      // Put back the configuration expected by the rest of the tests in this suite
+      deleteCore();
+      initCore("solrconfig.xml", "schema12.xml");
+    }
+  }
+
   public void testCopyFieldLists() throws Exception {
     SolrQueryRequest req = reqWithPath("/admin/luke", "show", "schema");
 

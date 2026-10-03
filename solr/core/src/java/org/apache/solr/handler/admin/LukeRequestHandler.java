@@ -33,6 +33,7 @@ import java.util.Base64;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -1026,15 +1027,13 @@ public class LukeRequestHandler extends RequestHandlerBase implements SolrCoreAw
 
       TokenFilterFactory[] filtfacs = tchain.getTokenFilterFactories();
       if (0 < filtfacs.length) {
-        // List (not a class-name-keyed map): duplicate token filters of the same
-        // class would collapse into a single JSON object entry otherwise.
-        List<SimpleOrderedMap<Object>> filters = new ArrayList<>(filtfacs.length);
+        SimpleOrderedMap<Map<String, Object>> filters = new SimpleOrderedMap<>();
         for (TokenFilterFactory filtfac : filtfacs) {
-          SimpleOrderedMap<Object> tok = new SimpleOrderedMap<>();
+          Map<String, Object> tok = new HashMap<>();
           String className = filtfac.getClass().getName();
-          tok.add("className", className);
-          tok.add("args", filtfac.getOriginalArgs());
-          filters.add(tok);
+          tok.put("className", className);
+          tok.put("args", filtfac.getOriginalArgs());
+          filters.add(className.substring(className.lastIndexOf('.') + 1), tok);
         }
         aninfo.add("filters", filters);
       }

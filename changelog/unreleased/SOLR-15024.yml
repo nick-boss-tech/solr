@@ -1,0 +1,7 @@
+title: Luke schema info now emits charFilters as an ordered list, so an analyzer that uses the same char filter class more than once shows every entry instead of only the last one.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15024
+    url: https://issues.apache.org/jira/browse/SOLR-15024
