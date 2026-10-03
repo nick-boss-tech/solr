@@ -647,7 +647,7 @@ public class SolrCore implements SolrInfoBean, Closeable {
         String indexDirPath = metadata.get().getIndexDirPath();
 
         if (!indexDirPath.equals(getIndexDir())) {
-          if (!Files.isDirectory(Path.of(indexDirPath))) {
+          if (!getDirectoryFactory().exists(indexDirPath)) {
             // The index directory recorded in the snapshot metadata no longer exists
             // (e.g. removed by replication recovery). The snapshot files are already
             // gone, so there is nothing to clean up.

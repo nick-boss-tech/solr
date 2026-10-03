@@ -705,8 +705,6 @@ public class IndexFetcher {
                 // may be closed
                 if (indexDir != null) {
                   solrCore.getDirectoryFactory().doneWithDirectory(indexDir);
-                  // Cleanup all index files not associated with any *named* snapshot.
-                  solrCore.deleteNonSnapshotIndexFiles(indexDirPath);
                 }
               }
 
@@ -746,8 +744,6 @@ public class IndexFetcher {
             // may be closed
             if (indexDir != null) {
               solrCore.getDirectoryFactory().doneWithDirectory(indexDir);
-              // Cleanup all index files not associated with any *named* snapshot.
-              solrCore.deleteNonSnapshotIndexFiles(indexDirPath);
             }
           }
           if (isFullCopyNeeded) {
@@ -755,6 +751,13 @@ public class IndexFetcher {
           }
 
           openNewSearcherAndUpdateCommitPoint();
+
+          if (isFullCopyNeeded && indexDir != null) {
+            // The new index is now the active one, so the guard in
+            // deleteNonSnapshotIndexFiles no longer treats the old directory as
+            // current. Remove the old index files that no named snapshot pins.
+            solrCore.deleteNonSnapshotIndexFiles(indexDirPath);
+          }
         }
 
         if (!isFullCopyNeeded && !forceReplication && !successfulInstall) {

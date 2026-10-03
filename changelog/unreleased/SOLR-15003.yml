@@ -1,0 +1,7 @@
+title: Keep snapshot metadata consistent across replication recovery; clean up the old index after a full copy without deleting files pinned by named snapshots.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15003
+    url: https://issues.apache.org/jira/browse/SOLR-15003
