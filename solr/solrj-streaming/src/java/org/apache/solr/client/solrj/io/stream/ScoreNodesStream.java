@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.io.SolrClientCache;
@@ -213,10 +214,15 @@ public class ScoreNodesStream extends TupleStream implements Expressible {
       nodes.put(nodeId, node);
       if (builder.length() > 0) {
         builder.append(",");
-        field = node.getString("field");
-        collection = node.getString("collection");
       }
+      field = node.getString("field");
+      collection = node.getString("collection");
       builder.append(nodeId);
+    }
+
+    if (nodes.isEmpty()) {
+      tuples = nodes.values().iterator();
+      return;
     }
 
     CloudSolrClient client = clientCache.getCloudSolrClient(solrConnection);
@@ -227,6 +233,8 @@ public class ScoreNodesStream extends TupleStream implements Expressible {
     params.add(TermsParams.TERMS_LIMIT, Integer.toString(nodes.size()));
 
     QueryRequest request = new QueryRequest("/terms", params);
+    // Use POST so large term lists travel in the request body rather than the URL
+    request.setMethod(SolrRequest.METHOD.POST);
 
     try {
       // Get the response from the terms component

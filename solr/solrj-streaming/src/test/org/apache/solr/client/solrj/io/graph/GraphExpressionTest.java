@@ -842,6 +842,60 @@ public class GraphExpressionTest extends SolrCloudTestCase {
   }
 
   @Test
+  public void testScoreNodesSingleNode() throws Exception {
+    new UpdateRequest()
+        .add(id, "0", "basket_s", "basket1", "product_s", "product1", "price_f", "1")
+        .commit(cluster.getSolrClient(), COLLECTION);
+
+    List<Tuple> tuples = scoreNodesFromProduct("product1");
+
+    assertEquals(1, tuples.size());
+    Tuple tuple = tuples.get(0);
+    assertEquals("product1", tuple.getString("node"));
+    assertEquals(1, (long) tuple.getLong("docFreq"));
+    assertEquals(1, (long) tuple.getLong("count(*)"));
+  }
+
+  @Test
+  public void testScoreNodesNoNodes() throws Exception {
+    new UpdateRequest()
+        .add(id, "0", "basket_s", "basket1", "product_s", "product1", "price_f", "1")
+        .commit(cluster.getSolrClient(), COLLECTION);
+
+    assertTrue(scoreNodesFromProduct("product9").isEmpty());
+  }
+
+  private List<Tuple> scoreNodesFromProduct(String product) throws Exception {
+    var solrConnection =
+        CloudSolrClient.CloudSolrClientConnection.parse(cluster.getZkServer().getZkAddress());
+    StreamFactory factory =
+        new StreamFactory()
+            .withCollectionUseThisConnection("collection1", solrConnection)
+            .withDefaultSolrConnection(solrConnection)
+            .withFunctionName("gatherNodes", GatherNodesStream.class)
+            .withFunctionName("scoreNodes", ScoreNodesStream.class)
+            .withFunctionName("count", CountMetric.class);
+
+    String expr =
+        "scoreNodes(gatherNodes(collection1, "
+            + "gatherNodes(collection1, walk=\""
+            + product
+            + "->product_s\", gather=\"basket_s\"), "
+            + "walk=\"node->basket_s\", gather=\"product_s\", count(*)))";
+
+    SolrClientCache cache = new SolrClientCache();
+    try {
+      StreamContext context = new StreamContext();
+      context.setSolrClientCache(cache);
+      TupleStream stream = factory.constructStream(expr);
+      stream.setStreamContext(context);
+      return getTuples(stream);
+    } finally {
+      cache.close();
+    }
+  }
+
+  @Test
   public void testScoreNodesFacetStream() throws Exception {
 
     new UpdateRequest()
