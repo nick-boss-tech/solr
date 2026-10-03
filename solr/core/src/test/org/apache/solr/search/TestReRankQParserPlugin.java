@@ -207,6 +207,35 @@ public class TestReRankQParserPlugin extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testRerankMaxScoreFollowsRescoredDocs() {
+    assertU(adoc("id", "1", "term_s", "YYYY", "test_ti", "5"));
+    assertU(adoc("id", "2", "term_s", "YYYY", "test_ti", "50"));
+    assertU(adoc("id", "3", "term_s", "YYYY", "test_ti", "5000"));
+    assertU(commit());
+
+    for (boolean multiThreaded : new boolean[] {false, true}) {
+      String mt = Boolean.toString(multiThreaded);
+
+      // the boost raises scores far above the scores seen during collection
+      String[] boosted = {
+        "q", "term_s:YYYY", "rq", "{!rerank reRankQuery=$rqq reRankDocs=200}", "rqq",
+        "{!func}field(test_ti)", "fl", "id,score", "multiThreaded", mt
+      };
+      assertQ(
+          req(boosted),
+          "//result/doc[1]/str[@name='id'][.='3']",
+          "//result[@maxScore>'9999']");
+
+      // replacing the scores lowers them, so the first pass maximum must not be reported
+      String[] replaced = {
+        "q", "term_s:YYYY", "rq", "{!rerank reRankQuery=$rqq reRankOperator=replace}", "rqq",
+        "{!func}0.001", "fl", "id,score", "multiThreaded", mt
+      };
+      assertQ(req(replaced), "*[count(//doc)=3]", "//result[@maxScore<'0.01']");
+    }
+  }
+
+  @Test
   public void testRerankReturnOriginalScoreNotRequested() throws Exception {
 
     assertU(delQ("*:*"));

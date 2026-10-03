@@ -1824,15 +1824,25 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
     }
   }
 
-  /** Max score across the given docs, or NaN when there are none. */
-  private static float maxScoreOf(ScoreDoc[] scoreDocs) {
+  /**
+   * A {@link RankQuery} rescores the collected docs after collection, so the max score recorded
+   * during collection can be stale. Returns the highest score among the returned docs, or the
+   * collected one when no returned doc carries a score.
+   */
+  private static float rescoredMaxScore(
+      QueryCommand cmd, boolean needScores, TopDocs topDocs, float collectedMaxScore) {
+    if (!needScores || !(cmd.getQuery() instanceof RankQuery) || topDocs == null) {
+      return collectedMaxScore;
+    }
     float max = Float.NaN;
-    for (ScoreDoc sd : scoreDocs) {
-      if (sd != null && (Float.isNaN(max) || sd.score > max)) {
-        max = sd.score;
+    for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
+      if (scoreDoc != null
+          && !Float.isNaN(scoreDoc.score)
+          && (Float.isNaN(max) || scoreDoc.score > max)) {
+        max = scoreDoc.score;
       }
     }
-    return max;
+    return Float.isNaN(max) ? collectedMaxScore : max;
   }
 
   private void getDocListNC(QueryResult qr, QueryCommand cmd) throws IOException {
@@ -1919,17 +1929,14 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
         totalHits = topCollector.getTotalHits();
         topDocs = topCollector.topDocs(0, len);
 
-        float collectedMaxScore =
-            totalHits > 0
-                ? (maxScoreCollector == null ? Float.NaN : maxScoreCollector.getMaxScore())
-                : 0.0f;
-        if (totalHits > 0 && topCollector instanceof ReRankCollector && topDocs.scoreDocs != null) {
-          // Rescoring (rq/rerank) runs after collection and can raise doc scores above the max
-          // recorded during collection; the response maxScore must cover the rescored docs too
-          // (SOLR-15479).
-          collectedMaxScore = Math.max(collectedMaxScore, maxScoreOf(topDocs.scoreDocs));
-        }
-        maxScore = collectedMaxScore;
+        maxScore =
+            rescoredMaxScore(
+                cmd,
+                needScores,
+                topDocs,
+                totalHits > 0
+                    ? (maxScoreCollector == null ? Float.NaN : maxScoreCollector.getMaxScore())
+                    : 0.0f);
       } else {
         log.trace("MULTI-THREADED search, using CollectorManager int getDocListNC");
         final MultiThreadedSearcher.SearchResult searchResult =
@@ -1940,17 +1947,7 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
         MultiThreadedSearcher.TopDocsResult topDocsResult = searchResult.getTopDocsResult();
         totalHits = topDocsResult.totalHits;
         topDocs = topDocsResult.topDocs;
-        float collectedMaxScore = searchResult.getMaxScore(totalHits);
-        if (totalHits > 0
-            && cmd.getQuery() instanceof RankQuery
-            && topDocs != null
-            && topDocs.scoreDocs != null) {
-          // Same SOLR-15479 correction as the single-threaded path: the merged TopDocs carry
-          // rescored scores (each per-thread ReRankCollector rescored its segment docs), which can
-          // exceed the pre-rescore max recorded during collection.
-          collectedMaxScore = Math.max(collectedMaxScore, maxScoreOf(topDocs.scoreDocs));
-        }
-        maxScore = collectedMaxScore;
+        maxScore = rescoredMaxScore(cmd, needScores, topDocs, searchResult.getMaxScore(totalHits));
       }
 
       hitsRelation = populateScoresIfNeeded(cmd, needScores, topDocs, query, scoreModeUsed);
@@ -2056,17 +2053,14 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
         assert (totalHits == set.size()) || qr.isPartialResults();
 
         topDocs = topCollector.topDocs(0, len);
-        float collectedMaxScore =
-            totalHits > 0
-                ? (maxScoreCollector == null ? Float.NaN : maxScoreCollector.getMaxScore())
-                : 0.0f;
-        if (totalHits > 0 && topCollector instanceof ReRankCollector && topDocs.scoreDocs != null) {
-          // Rescoring (rq/rerank) runs after collection and can raise doc scores above the max
-          // recorded during collection; the response maxScore must cover the rescored docs too
-          // (SOLR-15479).
-          collectedMaxScore = Math.max(collectedMaxScore, maxScoreOf(topDocs.scoreDocs));
-        }
-        maxScore = collectedMaxScore;
+        maxScore =
+            rescoredMaxScore(
+                cmd,
+                needScores,
+                topDocs,
+                totalHits > 0
+                    ? (maxScoreCollector == null ? Float.NaN : maxScoreCollector.getMaxScore())
+                    : 0.0f);
       } else {
         log.trace("MULTI-THREADED search, using CollectorManager in getDocListAndSetNC");
 
@@ -2076,17 +2070,7 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
         MultiThreadedSearcher.TopDocsResult topDocsResult = searchResult.getTopDocsResult();
         totalHits = topDocsResult.totalHits;
         topDocs = topDocsResult.topDocs;
-        float collectedMaxScore = searchResult.getMaxScore(totalHits);
-        if (totalHits > 0
-            && cmd.getQuery() instanceof RankQuery
-            && topDocs != null
-            && topDocs.scoreDocs != null) {
-          // Same SOLR-15479 correction as the single-threaded path: the merged TopDocs carry
-          // rescored scores (each per-thread ReRankCollector rescored its segment docs), which can
-          // exceed the pre-rescore max recorded during collection.
-          collectedMaxScore = Math.max(collectedMaxScore, maxScoreOf(topDocs.scoreDocs));
-        }
-        maxScore = collectedMaxScore;
+        maxScore = rescoredMaxScore(cmd, needScores, topDocs, searchResult.getMaxScore(totalHits));
         set = new BitDocSet(searchResult.getFixedBitSet());
         // TODO: Think about using ScoreMode from searchResult down below
       }
