@@ -20,12 +20,22 @@ import java.util.List;
 import org.apache.lucene.document.NumericDocValuesField;
 import org.apache.lucene.document.SortedDocValuesField;
 import org.apache.lucene.index.IndexableField;
+import org.apache.solr.SolrTestCase;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.request.SolrQuery;
+import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.core.SolrCore;
+import org.apache.solr.util.EmbeddedSolrServerTestRule;
 import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 
 /** The docValues setting of the amount and currency code sub-fields is honored. */
-public class CurrencyFieldTypeDocValuesTest extends SolrTestCaseJ4 {
+public class CurrencyFieldTypeDocValuesTest extends SolrTestCase {
+
+  @ClassRule
+  public static final EmbeddedSolrServerTestRule solrTestRule = new EmbeddedSolrServerTestRule();
 
   private static final String AMOUNT = "money" + FieldType.POLY_FIELD_SEPARATOR + "_l_dv";
   private static final String CODE = "money" + FieldType.POLY_FIELD_SEPARATOR + "_s_dv";
@@ -33,12 +43,22 @@ public class CurrencyFieldTypeDocValuesTest extends SolrTestCaseJ4 {
   @BeforeClass
   public static void beforeClass() throws Exception {
     CurrencyFieldTypeTest.assumeCurrencySupport("USD", "EUR");
-    initCore("solrconfig-minimal.xml", "schema-currency-docvalues.xml");
+    SolrTestCaseJ4.newRandomConfig();
+    solrTestRule.startSolr(SolrTestCaseJ4.TEST_HOME());
+    solrTestRule
+        .newCollection()
+        .withConfigSet(SolrTestCaseJ4.TEST_COLL1_CONF())
+        .withConfigFile("solrconfig-minimal.xml")
+        .withSchemaFile("schema-currency-docvalues.xml")
+        .create();
   }
 
   @Test
   public void testSubFieldsWriteDocValues() {
-    SchemaField money = h.getCore().getLatestSchema().getField("money");
+    SchemaField money;
+    try (SolrCore core = solrTestRule.getCoreContainer().getCore("collection1")) {
+      money = core.getLatestSchema().getField("money");
+    }
     List<IndexableField> fields = money.createFields("1.50,EUR");
 
     assertTrue(
@@ -51,21 +71,28 @@ public class CurrencyFieldTypeDocValuesTest extends SolrTestCaseJ4 {
   }
 
   @Test
-  public void testSubFieldsCanBeSortedOnThroughDocValues() {
-    assertU(adoc("id", "1", "money", "2.00,USD"));
-    assertU(adoc("id", "2", "money", "1.00,USD"));
-    assertU(adoc("id", "3", "money", "3.00,EUR"));
-    assertU(commit());
+  public void testSubFieldsCanBeSortedOnThroughDocValues() throws Exception {
+    SolrClient client = solrTestRule.getSolrClient();
+    client.add(doc("1", "2.00,USD"));
+    client.add(doc("2", "1.00,USD"));
+    client.add(doc("3", "3.00,EUR"));
+    client.commit();
 
-    assertQ(
-        req("q", "*:*", "fl", "id", "sort", AMOUNT + " asc"),
-        "//result/doc[1]/str[@name='id'][.='2']",
-        "//result/doc[2]/str[@name='id'][.='1']",
-        "//result/doc[3]/str[@name='id'][.='3']");
-    assertQ(
-        req("q", "*:*", "fl", "id", "sort", CODE + " asc, " + AMOUNT + " asc"),
-        "//result/doc[1]/str[@name='id'][.='3']",
-        "//result/doc[2]/str[@name='id'][.='2']",
-        "//result/doc[3]/str[@name='id'][.='1']");
+    assertEquals(List.of("2", "1", "3"), idsSortedBy(client, AMOUNT + " asc"));
+    assertEquals(List.of("3", "2", "1"), idsSortedBy(client, CODE + " asc, " + AMOUNT + " asc"));
+  }
+
+  private static SolrInputDocument doc(String id, String money) {
+    SolrInputDocument doc = new SolrInputDocument();
+    doc.addField("id", id);
+    doc.addField("money", money);
+    return doc;
+  }
+
+  private static List<String> idsSortedBy(SolrClient client, String sort) throws Exception {
+    SolrQuery query = new SolrQuery("*:*");
+    query.setFields("id");
+    query.setParam("sort", sort);
+    return client.query(query).getResults().stream().map(d -> (String) d.get("id")).toList();
   }
 }
