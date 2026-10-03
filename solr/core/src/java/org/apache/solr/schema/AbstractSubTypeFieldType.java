@@ -17,7 +17,6 @@
 package org.apache.solr.schema;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,7 +142,7 @@ public abstract class AbstractSubTypeFieldType extends FieldType implements Sche
   @Override
   public List<SchemaField> getSubFields(SchemaField baseField, IndexSchema schema) {
     if (suffixes == null) {
-      return Collections.emptyList();
+      return List.of();
     }
     List<SchemaField> subFields = new ArrayList<>(suffixes.length);
     for (String sfx : suffixes) {

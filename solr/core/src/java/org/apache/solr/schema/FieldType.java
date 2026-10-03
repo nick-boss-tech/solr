@@ -176,7 +176,7 @@ public abstract class FieldType extends FieldProperties {
    * implementation returns an empty list.
    */
   public List<SchemaField> getSubFields(SchemaField baseField, IndexSchema schema) {
-    return Collections.emptyList();
+    return List.of();
   }
 
   public boolean write(IteratorWriter.ItemWriter itemWriter) {
