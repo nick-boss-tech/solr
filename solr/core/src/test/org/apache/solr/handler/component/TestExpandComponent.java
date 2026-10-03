@@ -940,6 +940,58 @@ public class TestExpandComponent extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testExpandMaxScore() {
+    // SOLR-13876: an expanded group must report the maximum score of its documents when
+    // scores are requested, instead of NaN (which is serialized as a missing maxScore).
+    // The main query is a function query, so each document's score is exactly its test_i
+    // value: doc 1 (40) is the collapse head of group "x", docs 2 (30) and 3 (10) expand.
+    assertU(adoc("id", "1", "group_s", "x", "test_i", "40", "test_l", "1"));
+    assertU(adoc("id", "2", "group_s", "x", "test_i", "30", "test_l", "2"));
+    assertU(adoc("id", "3", "group_s", "x", "test_i", "10", "test_l", "3"));
+    assertU(commit());
+
+    // Relevance sort: expanded documents come back in score order
+    assertQ(
+        req(
+            "q",
+            "{!func}test_i",
+            "fq",
+            "{!collapse field=group_s}",
+            "expand",
+            "true",
+            "expand.rows",
+            "2",
+            "fl",
+            "id,score"),
+        "*[count(/response/result/doc)=1]",
+        "*[count(/response/lst[@name='expanded']/result[@name='x']/doc)=2]",
+        "/response/lst[@name='expanded']/result[@name='x']/doc[1]/str[@name='id'][.='2']",
+        "/response/lst[@name='expanded']/result[@name='x']/@maxScore[.='30.0']");
+
+    // Non-score expand sort: doc 3 (test_l=3) sorts before doc 2 (test_l=2), but the
+    // reported maxScore must still be the maximum document score, from doc 2
+    assertQ(
+        req(
+            "q",
+            "{!func}test_i",
+            "fq",
+            "{!collapse field=group_s}",
+            "expand",
+            "true",
+            "expand.rows",
+            "2",
+            "expand.sort",
+            "test_l desc",
+            "fl",
+            "id,score"),
+        "*[count(/response/lst[@name='expanded']/result[@name='x']/doc)=2]",
+        "/response/lst[@name='expanded']/result[@name='x']/doc[1]/str[@name='id'][.='3']",
+        "/response/lst[@name='expanded']/result[@name='x']/@maxScore[.='30.0']",
+        "/response/lst[@name='expanded']/result[@name='x']/@maxScore"
+            + "=/response/lst[@name='expanded']/result[@name='x']/doc[2]/float[@name='score']");
+  }
+
+  @Test
   public void testExpandWithEmptyIndexReturnsZeroResults() {
 
     ModifiableSolrParams params = new ModifiableSolrParams();
