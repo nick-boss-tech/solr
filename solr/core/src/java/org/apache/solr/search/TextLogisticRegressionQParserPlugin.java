@@ -32,6 +32,7 @@ import org.apache.lucene.index.TermsEnum;
 import org.apache.lucene.search.DocIdSetIterator;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.util.BitSetIterator;
 import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.SparseFixedBitSet;
 import org.apache.solr.client.solrj.io.ClassificationEvaluation;
@@ -139,8 +140,8 @@ public class TextLogisticRegressionQParserPlugin extends QParserPlugin {
       this.rbsp = rbsp;
       this.classificationEvaluation = new ClassificationEvaluation();
       this.searcher = searcher;
-      positiveDocsSet = new SparseFixedBitSet(searcher.getIndexReader().numDocs());
-      docsSet = new SparseFixedBitSet(searcher.getIndexReader().numDocs());
+      positiveDocsSet = new SparseFixedBitSet(searcher.getIndexReader().maxDoc());
+      docsSet = new SparseFixedBitSet(searcher.getIndexReader().maxDoc());
     }
 
     @Override
@@ -197,10 +198,21 @@ public class TextLogisticRegressionQParserPlugin extends QParserPlugin {
         termIndex++;
       }
 
-      for (Map.Entry<Integer, double[]> entry : docVectors.entrySet()) {
-        double[] vector = entry.getValue();
+      // Training docs that matched none of the selected terms are scored with an intercept-only
+      // vector so every training doc counts in the evaluation and weight updates.
+      double[] interceptVector = new double[trainingParams.terms.length + 1];
+      interceptVector[0] = 1.0;
+
+      DocIdSetIterator trainingDocs = new BitSetIterator(docsSet, docsSet.approximateCardinality());
+      for (int docId = trainingDocs.nextDoc();
+          docId != DocIdSetIterator.NO_MORE_DOCS;
+          docId = trainingDocs.nextDoc()) {
+        double[] vector = docVectors.get(docId);
+        if (vector == null) {
+          vector = interceptVector;
+        }
         int outcome = 0;
-        if (positiveDocsSet.get(entry.getKey())) {
+        if (positiveDocsSet.get(docId)) {
           outcome = 1;
         }
         double sig = sigmoid(sum(multiply(vector, weights)));

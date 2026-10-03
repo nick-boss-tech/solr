@@ -1,0 +1,7 @@
+title: The tlogit query parser's confusion matrix and error now cover training documents that contain none of the selected terms
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-13903
+    url: https://issues.apache.org/jira/browse/SOLR-13903
