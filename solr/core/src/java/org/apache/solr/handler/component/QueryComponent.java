@@ -1480,19 +1480,21 @@ public class QueryComponent extends SearchComponent {
             NamedList<Object> shardInfo =
                 (NamedList<Object>) rb.rsp.getValues().get(ShardParams.SHARDS_INFO);
             @SuppressWarnings("unchecked")
-            SimpleOrderedMap<Object> nl = (SimpleOrderedMap<Object>) shardInfo.get(srsp.getShard());
-            if (nl == null) {
-              // No info was recorded for this shard (e.g. its main response was skipped, or its
-              // name was recorded under a generated key); create the entry so the error below
-              // is visible in shards.info instead of throwing NullPointerException.
+            SimpleOrderedMap<Object> nl =
+                shardInfo == null
+                    ? null
+                    : (SimpleOrderedMap<Object>) shardInfo.get(srsp.getShard());
+            if (nl == null && shardInfo != null && !StrUtils.isNullOrEmpty(srsp.getShard())) {
+              // No entry was recorded under this shard's name, so add one for the error below. A
+              // shard without a name is recorded under a generated key that is not known here.
               nl = new SimpleOrderedMap<>();
               shardInfo.add(srsp.getShard(), nl);
             }
-            if (nl.get("error") == null) {
+            if (nl != null && nl.get("error") == null) {
               // Add the error to the shards info section if it wasn't added before
               Throwable t = srsp.getException();
-              if (t instanceof SolrServerException) {
-                t = ((SolrServerException) t).getCause();
+              if (t instanceof SolrServerException && t.getCause() != null) {
+                t = t.getCause();
               }
               nl.add("error", t.toString());
               if (!rb.req.getCore().getCoreContainer().hideStackTrace()) {

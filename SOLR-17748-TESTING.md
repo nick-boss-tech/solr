@@ -4,6 +4,29 @@
 (no compile, no tests). A reviewer must compile and test before this goes
 anywhere near a PR.
 
+## Round 4 review outcome (read this first)
+
+See `research/branch-reviews/round-4/SOLR-17748-review.md`. The root cause of
+the ticket's NPE is **not established**. Mechanism (1) below cannot reach this
+block: the `continue`s in the populating loop are in the branch for responses
+without an exception, while this block only runs for responses with one.
+
+Changes in this round, all guards against NPE sites visible in the block:
+
+- `t.getCause()` is only used when non-null (the same guard `mergeIds` has); a
+  `SolrServerException` without a cause threw an NPE at `t.toString()`.
+- No entry is added for a shard without a name (the first version added one
+  under a `null` key); the generated `unknown_shard_N` key is not known here.
+- A missing `shards.info` section no longer throws.
+- Added `changelog/unreleased/SOLR-17748.yml`, worded for what is guarded. Drop
+  it if the ticket's actual failure is found elsewhere.
+- Added `TestShardsInfoErrorRecording` (not compiled or run): missing entry plus
+  cause-less exception is recorded; null shard name adds nothing; missing
+  section does not throw; an existing error entry is kept. It calls
+  `returnFields` directly; no real second-phase failure is exercised.
+
+Not changed (needs a reproduction first): which dereference the 9.6 trace hit.
+
 ## What the patch does
 
 With `shards.info=true` and some shards down, distributed queries threw NPE
