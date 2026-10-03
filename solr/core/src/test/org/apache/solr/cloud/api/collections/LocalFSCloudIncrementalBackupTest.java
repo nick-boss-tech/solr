@@ -203,9 +203,16 @@ public class LocalFSCloudIncrementalBackupTest extends AbstractIncrementalBackup
                 .getResponse()
                 .get("cluster");
     assertNotNull(cluster);
-    Map<?, ?> collections = (Map<?, ?>) cluster.get("collections");
+    Object collections = cluster.get("collections");
     assertNotNull(collections);
-    assertTrue(collections.containsKey(collection));
-    return (Map<String, Object>) collections.get(collection);
+    // the wire format may decode "collections" as a NamedList or as a Map
+    Object status =
+        collections instanceof NamedList<?> namedCollections
+            ? namedCollections.get(collection)
+            : ((Map<?, ?>) collections).get(collection);
+    assertNotNull("No cluster status for " + collection, status);
+    return status instanceof NamedList<?> namedStatus
+        ? (Map<String, Object>) namedStatus.asMap(0)
+        : (Map<String, Object>) status;
   }
 }
