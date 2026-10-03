@@ -185,6 +185,48 @@ public class TestPackages extends SolrCloudTestCase {
   }
 
   @Test
+  public void testPackageLoadsWhenManifestIsNotInFileStore() throws Exception {
+    String FILE1 = "/mypkg/runtimelibs.jar";
+    String COLLECTION_NAME = "testMissingManifestColl";
+    byte[] derFile = readFile("cryptokeys/pub_key512.der");
+    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pub_key512.der", cluster);
+    postFileAndWait(
+        cluster,
+        "runtimecode/runtimelibs.jar.bin",
+        FILE1,
+        "L3q/qIGs4NaF6JiO0ZkMUFa88j0OmYc+I6O7BOdNuMct/xoZ4h73aZHZGc0+nmI1f/U3bOlMPINlSOM6LK3JpQ==");
+
+    PackagePayload.AddVersion add = new PackagePayload.AddVersion();
+    add.version = "1.0";
+    add.pkg = "mypkg";
+    add.files = Arrays.asList(new String[] {FILE1});
+    // registered with the package, but never uploaded to the file store
+    add.manifest = "/mypkg/manifest.json";
+    V2Request req =
+        new V2Request.Builder("/cluster/package")
+            .forceV2(true)
+            .withMethod(SolrRequest.METHOD.POST)
+            .withPayload(Map.of("add", add))
+            .build();
+    req.process(cluster.getSolrClient());
+    TestDistribFileStore.assertResponseValues(
+        10,
+        () ->
+            new V2Request.Builder("/cluster/package")
+                .withMethod(SolrRequest.METHOD.GET)
+                .build()
+                .process(cluster.getSolrClient()),
+        Map.of(":result:packages:mypkg[0]:version", "1.0"));
+
+    CollectionAdminRequest.createCollection(COLLECTION_NAME, "conf", 2, 2)
+        .process(cluster.getSolrClient());
+    cluster.waitForActiveCollection(COLLECTION_NAME, 2, 4);
+
+    verifyComponent(
+        cluster.getSolrClient(), COLLECTION_NAME, "query", "filterCache", add.pkg, add.version);
+  }
+
+  @Test
   public void testPluginLoading() throws Exception {
     String FILE1 = "/mypkg/runtimelibs.jar";
     String FILE2 = "/mypkg/runtimelibs_v2.jar";

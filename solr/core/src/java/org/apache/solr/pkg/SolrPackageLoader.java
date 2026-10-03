@@ -273,15 +273,7 @@ public class SolrPackageLoader implements Closeable {
         if (!errs.isEmpty()) {
           throw new RuntimeException("Cannot load package: " + errs);
         }
-        // the manifest is not part of version.files, so fetch it explicitly; without it
-        // every package command against this node fails with NOT_FOUND in the filestore
-        if (version.manifest != null
-            && coreContainer.getFileStore().getType(version.manifest, true)
-                != FileStore.FileType.FILE) {
-          throw new RuntimeException(
-              "Cannot load package: manifest.json is not available in filestore: "
-                  + version.manifest);
-        }
+        fetchManifest();
         for (String file : version.files) {
           paths.add(coreContainer.getFileStore().getRealPath(file));
         }
@@ -292,6 +284,34 @@ public class SolrPackageLoader implements Closeable {
                 paths,
                 coreContainer.getSolrHome(),
                 coreContainer.getResourceLoader().getClassLoader());
+      }
+
+      /**
+       * Makes the manifest available in this node's filestore. It is not part of {@code
+       * version.files}, so the validation of the package files does not fetch it, and package
+       * commands against this node fail without it. Best effort: the package loads without it.
+       */
+      private void fetchManifest() {
+        if (version.manifest == null) {
+          return;
+        }
+        try {
+          if (coreContainer.getFileStore().getType(version.manifest, true)
+              != FileStore.FileType.FILE) {
+            log.warn(
+                "The manifest {} of package {} version {} is not available in the filestore",
+                version.manifest,
+                parent.name(),
+                version.version);
+          }
+        } catch (Exception e) {
+          log.warn(
+              "Unable to fetch the manifest {} of package {} version {}",
+              version.manifest,
+              parent.name(),
+              version.version,
+              e);
+        }
       }
 
       public String getVersion() {

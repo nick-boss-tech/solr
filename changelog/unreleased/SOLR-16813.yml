@@ -1,0 +1,7 @@
+title: A node that joins a cluster with installed packages now also fetches each package version's manifest.json into its file store, so package commands such as list-installed no longer fail with NOT_FOUND on that node
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16813
+    url: https://issues.apache.org/jira/browse/SOLR-16813
