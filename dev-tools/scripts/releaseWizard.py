@@ -191,11 +191,19 @@ def getScriptVersion():
     return scriptutil.find_current_version()
 
 
+def is_terminal_editor(editor_cmd):
+    try:
+        words = shlex.split(editor_cmd)
+    except ValueError:
+        words = editor_cmd.split()
+    return len(words) > 0 and os.path.basename(words[0]) in TERMINAL_EDITORS
+
+
 def get_editor():
     global editor
     if editor is None:
       if 'EDITOR' in os.environ:
-          if os.environ['EDITOR'] in TERMINAL_EDITORS:
+          if is_terminal_editor(os.environ['EDITOR']):
               sys.exit(
                   "EDITOR=%s launches in the current terminal and will not work from this tool. "
                   "Please use an editor that opens in a separate window/process."
