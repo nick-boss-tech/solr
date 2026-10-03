@@ -19,6 +19,7 @@ package org.apache.solr.client.solrj.response;
 
 import java.util.List;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.client.solrj.response.json.BucketBasedJsonFacet;
 import org.apache.solr.client.solrj.response.json.NestableJsonFacet;
 import org.apache.solr.common.util.NamedList;
 import org.junit.Test;
@@ -123,5 +124,30 @@ public class NestableJsonFacetTest extends SolrTestCaseJ4 {
     facet = new NestableJsonFacet(list);
     assertEquals(12L, facet.getCount());
     assertEquals(2L, facet.getBucketBasedFacets("test").getAfter());
+  }
+
+  @Test
+  public void testMissingBucketCount() {
+    NamedList<Object> missing = new NamedList<>();
+    missing.add("count", 7L);
+    NamedList<Object> withMissing = new NamedList<>();
+    withMissing.add("buckets", List.of());
+    withMissing.add("missing", missing);
+    NamedList<Object> list = new NamedList<>();
+    list.add("count", 12L);
+    list.add("test", withMissing);
+
+    NestableJsonFacet facet = new NestableJsonFacet(list);
+    assertEquals(7L, facet.getBucketBasedFacets("test").getMissingCount());
+
+    NamedList<Object> withoutMissing = new NamedList<>();
+    withoutMissing.add("buckets", List.of());
+    list.clear();
+    list.add("count", 12L);
+    list.add("test", withoutMissing);
+
+    facet = new NestableJsonFacet(list);
+    assertEquals(
+        BucketBasedJsonFacet.UNSET_FLAG, facet.getBucketBasedFacets("test").getMissingCount());
   }
 }

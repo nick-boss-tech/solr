@@ -38,7 +38,7 @@ import org.apache.solr.common.util.NamedList;
  * </pre>
  *
  * <p>Allows access to all top-level "terms" and "range" response properties (e.g. {@code
- * allBuckets}, {@code numBuckets}, {@code before}, etc.)
+ * allBuckets}, {@code numBuckets}, {@code before}, {@code missing}, etc.)
  */
 public class BucketBasedJsonFacet {
   public static final int UNSET_FLAG = -1;
