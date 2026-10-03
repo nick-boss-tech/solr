@@ -1449,8 +1449,8 @@ public class ExtendedDismaxQParser extends QParser {
     /**
      * An alias target is usable when it is itself an alias, a field in the schema, or a magic
      * field. Alias definitions come from request parameters, not from the query string, so an
-     * unusable target (for example a field removed from the schema) is skipped instead of
-     * aborting the whole parse the way an explicitly queried unknown field does.
+     * unusable target (for example a field removed from the schema) is skipped instead of aborting
+     * the whole parse the way an explicitly queried unknown field does.
      */
     private boolean isValidAliasTarget(String f) {
       return aliases.get(f) != null

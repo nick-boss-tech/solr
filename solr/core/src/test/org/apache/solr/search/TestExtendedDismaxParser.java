@@ -983,8 +983,7 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
 
     // Single-term expansion takes the same skip path.
     assertQ(
-        req("defType", "edismax", "q", "myalias:Zapp", "f.myalias.qf", "name nosuchfield"),
-        oner);
+        req("defType", "edismax", "q", "myalias:Zapp", "f.myalias.qf", "name nosuchfield"), oner);
 
     // Wildcard expansion takes the same skip path.
     assertQ(
@@ -1017,8 +1016,7 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
 
     // An alias whose targets are all missing from the schema matches nothing; it must
     // not fall back to searching the alias name as if it were a field.
-    assertQ(
-        req("defType", "edismax", "q", "myalias:Zapp", "f.myalias.qf", "nosuchfield"), nor);
+    assertQ(req("defType", "edismax", "q", "myalias:Zapp", "f.myalias.qf", "nosuchfield"), nor);
     assertQ(
         req(
             "defType",
@@ -1030,7 +1028,8 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         nor);
   }
 
-  public void testAliasingBoost() {    assertQ(
+  public void testAliasingBoost() {
+    assertQ(
         req(
             "defType",
             "edismax",
