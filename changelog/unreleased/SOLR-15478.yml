@@ -1,0 +1,7 @@
+title: A schema cached for a configset in SolrCloud is no longer served after the configset was deleted and uploaded again, for example when restoring a backup that reuses a configset name
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15478
+    url: https://issues.apache.org/jira/browse/SOLR-15478
