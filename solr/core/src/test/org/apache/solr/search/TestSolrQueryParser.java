@@ -75,8 +75,8 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
     createIndex();
   }
 
-  private static final List<String> HAS_VAL_FIELDS = new ArrayList<String>(41);
-  private static final List<String> HAS_NAN_FIELDS = new ArrayList<String>(12);
+  private static final List<String> HAS_VAL_FIELDS = new ArrayList<String>(37);
+  private static final List<String> HAS_NAN_FIELDS = new ArrayList<String>(10);
 
   @AfterClass
   public static void afterClass() {
@@ -105,7 +105,7 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
 
       // numbers...
       for (String t : Arrays.asList("i", "l", "f", "d")) {
-        for (String s : Arrays.asList("", "s", "_dv", "s_dv", "_dvo", "_norms")) {
+        for (String s : Arrays.asList("", "s", "_dv", "s_dv", "_dvo")) {
           final String f = "has_val_" + t + s;
           HAS_VAL_FIELDS.add(f);
           doc.addField(f, "42");
@@ -151,7 +151,7 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
   public void testDocsWithValuesInField() throws Exception {
     assertEquals(
         "someone changed the test setup of HAS_VAL_FIELDS, w/o updating the sanity check",
-        41,
+        37,
         HAS_VAL_FIELDS.size());
     for (String f : HAS_VAL_FIELDS) {
       // for all of these fields, these 2 query forms should be functionally equivalent
@@ -167,7 +167,7 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
   public void testDocsWithNaNInField() throws Exception {
     assertEquals(
         "someone changed the test setup of HAS_NAN_FIELDS, w/o updating the sanity check",
-        12,
+        10,
         HAS_NAN_FIELDS.size());
     for (String f : HAS_NAN_FIELDS) {
       // for all of these fields, field:* should NOT be equivalent to field:[* TO *]
@@ -1784,11 +1784,7 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
             "t_on",
             "b_norms",
             "s_norms",
-            "dt_norms",
-            "i_norms",
-            "l_norms",
-            "f_norms",
-            "d_norms"
+            "dt_norms"
           };
       String[] existenceQueries = new String[] {"*", "[* TO *]"};
 

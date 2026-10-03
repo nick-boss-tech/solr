@@ -774,16 +774,11 @@
   <dynamicField name="*_trie_i" type="trieint_dv" indexed="false" stored="false" useDocValuesAsStored="true"/>
   <dynamicField name="*_trie_is" type="trieint_nodv" indexed="true" stored="true" multiValued="true"/>
 
-  <!-- testing fields with & without norms
-       TODO: Remove numeric norms for SOLR-14199 -->
+  <!-- testing fields with & without norms (point fields never have norms) -->
   <dynamicField name="*_t_on" type="text" indexed="true" stored="true" omitNorms="true" docValues="false"/>
   <dynamicField name="*_b_norms" type="boolean" indexed="true" stored="true" omitNorms="false" docValues="false"/>
   <dynamicField name="*_s_norms" type="string" indexed="true" stored="true" omitNorms="false" docValues="false"/>
   <dynamicField name="*_dt_norms" type="date" indexed="true" stored="true" omitNorms="true" docValues="false"/>
-  <dynamicField name="*_i_norms" type="int" indexed="true" stored="true" omitNorms="false" docValues="false"/>
-  <dynamicField name="*_l_norms" type="long" indexed="true" stored="true" omitNorms="false" docValues="false"/>
-  <dynamicField name="*_f_norms" type="float" indexed="true" stored="true" omitNorms="false" docValues="false"/>
-  <dynamicField name="*_d_norms" type="double" indexed="true" stored="true" omitNorms="false" docValues="false"/>
 
   <!-- Subfields used with CurrencyFieldType -->
   <dynamicField name="*_s_ns" type="string" indexed="true" stored="false" />
