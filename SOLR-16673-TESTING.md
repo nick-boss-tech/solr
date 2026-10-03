@@ -16,10 +16,15 @@ ParsePosition)` returns `null` when nothing can be parsed, and both
 `DefaultSchemaSuggester.isIntOrLong` → `guessFieldType` →
 `SchemaDesignerAPI.analyzeInputDocs`, killing the whole analysis.
 
-One-line-class fix in two files:
+One-line-class fix in four files (the last two were added in the round-3 patch
+pass: `ParseIntFieldUpdateProcessorFactory` and
+`ParseFloatFieldUpdateProcessorFactory` parse inline with the same guard and the
+same NPE, e.g. for an empty string in a schemaless update chain):
 
 - `solr/core/src/java/org/apache/solr/update/processor/ParseLongFieldUpdateProcessorFactory.java`
 - `solr/core/src/java/org/apache/solr/update/processor/ParseDoubleFieldUpdateProcessorFactory.java`
+- `solr/core/src/java/org/apache/solr/update/processor/ParseIntFieldUpdateProcessorFactory.java`
+- `solr/core/src/java/org/apache/solr/update/processor/ParseFloatFieldUpdateProcessorFactory.java`
 
 The guard is now `if (number == null || pos.getIndex() != stringVal.length())`,
 returning `null` (value not mutated) instead of NPEing. Callers
@@ -28,9 +33,15 @@ return correctly. This matches the maintainer-endorsed direction in the
 ticket comments (Houston Putman: "mitigable by checking for empty string /
 null parse result and returning null").
 
-Out of scope (separate threads, no maintainer-endorsed fix):
-- `SchemaDesignerAPI` assuming uniqueField is a string field.
+Out of scope (separate threads, no maintainer-endorsed fix) — so the PR should
+say it fixes the NPE only, not "fixes SOLR-16673":
+- `SchemaDesigner` assuming uniqueField is a string field
+  (`(String) d.getFieldValue(uniqueKeyField)` still on `main`).
 - The `"_root_"` / uniqueKey fieldType mismatch on child docs.
+
+Behavior to state: one empty string among otherwise numeric sample values makes
+the Schema Designer suggest a string/text type for that field, like any other
+unparseable value.
 
 ## Recommended reviewer commands
 
@@ -39,17 +50,24 @@ cp ~/workspace/solr/gradle.properties .   # worktrees don't inherit it
 ~/workspace/tools/solr-gradle.sh :solr:core:compileJava -Pvalidation.errorprone=true
 ```
 
-Suggested tests (not written):
+Test added (round-3 patch pass, **not compiled or run**):
 
-1. Direct: `parsePossibleLong("", format)`, `parsePossibleLong("abc",
-   format)`, `parsePossibleDouble("", format)` → `null`, not NPE.
-2. Regression: `parsePossibleLong("42", format)` → `42L`;
-   `parsePossibleDouble("4.2", format)` → `4.2` (guard against
-   over-rejection).
-3. Existing update-processor test suites for these factories.
+- `ParsingFieldUpdateProcessorsTest#testEmptyStringIsNotParsedAsNumber`: runs a
+  document with an empty `not_in_schema` value through the existing
+  `parse-{int,long,float,double}-no-run-processor` chains; each must return the
+  document with the value left as the string `""` (before the fix: a
+  NullPointerException from the processor).
+
+Not added: a `DefaultSchemaSuggester` / Schema Designer test with an empty sample
+value, and direct `parsePossibleLong`/`parsePossibleDouble` calls (the existing
+round-trip tests cover the non-empty regression cases).
+
+Queued for the verification run:
+`org.apache.solr.update.processor.ParsingFieldUpdateProcessorsTest`, with
+Spotless.
 
 ## Patch limits and follow-ups
 
 - **Not compiled or tested.**
-- No changelog entry (repo convention: scaffold once a Jira/PR is assigned).
+- Changelog fragment added: `changelog/unreleased/SOLR-16673.yml`.
 - Remove this file before opening the upstream PR.
