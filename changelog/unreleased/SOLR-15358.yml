@@ -1,0 +1,7 @@
+title: CurrencyFieldType now writes docValues for its amount and currency code sub-fields when their field types have docValues enabled. Documents indexed earlier have no such docValues until they are reindexed.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15358
+    url: https://issues.apache.org/jira/browse/SOLR-15358

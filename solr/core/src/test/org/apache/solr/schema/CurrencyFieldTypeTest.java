@@ -124,18 +124,23 @@ public class CurrencyFieldTypeTest extends SolrTestCaseJ4 {
         fieldName + " is not an instance of CurrencyFieldType", tmp instanceof CurrencyFieldType);
     String currencyValue = "1.50,EUR";
     List<IndexableField> fields = amount.createFields(currencyValue);
-    assertEquals(fields.size(), 3);
 
-    // First field is currency code, second is value, third is stored.
-    for (int i = 0; i < 3; i++) {
+    // The sub-fields come first (an amount docValues field follows the amount when the amount type
+    // has docValues); the stored value is last.
+    boolean amountDocValues =
+        schema.getField(fieldName + FieldType.POLY_FIELD_SEPARATOR + "_l1_ns").hasDocValues();
+    assertEquals(amountDocValues ? 4 : 3, fields.size());
+
+    for (IndexableField field : fields) {
       boolean hasValue =
-          fields.get(i).readerValue() != null
-              || fields.get(i).numericValue() != null
-              || fields.get(i).stringValue() != null;
-      assertTrue("Doesn't have a value: " + fields.get(i), hasValue);
+          field.readerValue() != null
+              || field.numericValue() != null
+              || field.stringValue() != null;
+      assertTrue("Doesn't have a value: " + field, hasValue);
     }
 
-    assertEquals(schema.getFieldTypeByName("string").toExternal(fields.get(2)), "1.50,EUR");
+    assertEquals(
+        schema.getFieldTypeByName("string").toExternal(fields.get(fields.size() - 1)), "1.50,EUR");
 
     // A few tests on the provider directly
     ExchangeRateProvider p = ((CurrencyFieldType) tmp).getProvider();
