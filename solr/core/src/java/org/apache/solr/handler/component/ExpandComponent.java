@@ -777,6 +777,17 @@ public class ExpandComponent extends SearchComponent implements PluginInfoInitia
             docs[i] = scoreDoc.doc;
             scores[i] = scoreDoc.score;
           }
+          float maxScore = Float.NaN;
+          if (returnFields.wantsScore()) {
+            // Scores are set here, by the collector for a relevance sort or by populateScores for
+            // other sorts. The max covers only the docs in this slice, not every doc of the group.
+            maxScore = scores[0];
+            for (int i = 1; i < scores.length; i++) {
+              if (scores[i] > maxScore) {
+                maxScore = scores[i];
+              }
+            }
+          }
           assert topDocs.totalHits.relation() == TotalHits.Relation.EQUAL_TO;
           return new DocSlice(
               0,
@@ -784,7 +795,7 @@ public class ExpandComponent extends SearchComponent implements PluginInfoInitia
               docs,
               scores,
               topDocs.totalHits.value(),
-              Float.NaN,
+              maxScore,
               TotalHits.Relation.EQUAL_TO);
         }
       } else {
