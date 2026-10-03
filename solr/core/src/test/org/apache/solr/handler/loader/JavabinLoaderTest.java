@@ -151,7 +151,7 @@ public class JavabinLoaderTest extends SolrTestCaseJ4 {
                           new SolrQueryResponse(),
                           new ContentStreamBase.ByteArrayStream(os.toByteArray(), "test"),
                           failingProcessor));
-      assertEquals("ERROR adding document", ex.getMessage());
+      assertEquals("ERROR adding document [doc=7]", ex.getMessage());
       assertFalse(ex.getMessage().contains("secret customer value"));
     } finally {
       req.close();
