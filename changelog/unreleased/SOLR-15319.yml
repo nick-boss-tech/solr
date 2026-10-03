@@ -1,0 +1,7 @@
+title: ExactStatsCache and its subclasses now use the term statistics of every collection in a multi-collection query, instead of only those of shards whose name can be derived from the collection of the receiving core
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15319
+    url: https://issues.apache.org/jira/browse/SOLR-15319
