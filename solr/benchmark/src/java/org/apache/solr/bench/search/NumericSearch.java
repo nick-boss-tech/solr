@@ -44,6 +44,7 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
@@ -148,6 +149,11 @@ public class NumericSearch {
       // Reload the collection/core to drop existing caches
       CollectionAdminRequest.Reload reload = CollectionAdminRequest.reloadCollection(COLLECTION);
       solrBenchState.client.requestWithBaseUrl(solrBenchState.nodes.get(0), reload, null);
+    }
+
+    @TearDown(Level.Trial)
+    public void tearDownTrial() {
+      System.clearProperty("indexSearcherExecutorThreads");
     }
 
     public QueryRequest intSetQuery(boolean dvs) {
