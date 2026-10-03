@@ -16,10 +16,18 @@
  */
 package org.apache.solr.search.join;
 
+import static org.apache.solr.common.params.CursorMarkParams.CURSOR_MARK_NEXT;
+import static org.apache.solr.common.params.CursorMarkParams.CURSOR_MARK_START;
+import static org.apache.solr.common.util.Utils.fromJSONString;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.search.SolrCache;
 import org.apache.solr.search.SortSpec;
@@ -94,6 +102,56 @@ public class TestNestedDocsSort extends SolrTestCaseJ4 {
   @Test
   public void testOmitSpaceInFrontOfOrd() {
     parseAssertEq("childfield(name_s1,$q)asc", "childfield(name_s1,$q) asc");
+  }
+
+  public void testCursorMarkPagingOverMissingChildValue() throws Exception {
+    clearIndex();
+    for (int p = 1; p <= 6; p++) {
+      final SolrInputDocument parent = new SolrInputDocument();
+      parent.addField("id", "p" + p);
+      parent.addField("type_s1", "parent");
+      final SolrInputDocument child = new SolrInputDocument();
+      child.addField("id", "c" + p);
+      child.addField("kid_s1", "yes");
+      if (p % 2 == 0) {
+        // odd parents have no child value to sort by, so their sort value is null
+        child.addField("name_s1", "name" + p);
+      }
+      parent.addChildDocument(child);
+      assertU(adoc(parent));
+    }
+    assertU(commit());
+
+    final String q = "{!parent which=type_s1:parent}kid_s1:yes";
+    final String sort = "childfield(name_s1,$q) asc, id asc";
+
+    final List<String> expected =
+        parentIds(
+            assertJQ(
+                req("q", q, "sort", sort, "rows", "10", "fl", "id"), "/response/numFound==6"));
+
+    final List<String> paged = new ArrayList<>();
+    String cursorMark = CURSOR_MARK_START;
+    for (int page = 0; page < 10; page++) {
+      final String json =
+          assertJQ(req("q", q, "sort", sort, "rows", "1", "fl", "id", "cursorMark", cursorMark));
+      paged.addAll(parentIds(json));
+      final String next = (String) ((Map<?, ?>) fromJSONString(json)).get(CURSOR_MARK_NEXT);
+      if (next.equals(cursorMark)) {
+        break;
+      }
+      cursorMark = next;
+    }
+    assertEquals(expected, paged);
+  }
+
+  private static List<String> parentIds(String json) {
+    final Map<?, ?> response = (Map<?, ?>) ((Map<?, ?>) fromJSONString(json)).get("response");
+    final List<String> ids = new ArrayList<>();
+    for (Object doc : (List<?>) response.get("docs")) {
+      ids.add((String) ((Map<?, ?>) doc).get("id"));
+    }
+    return ids;
   }
 
   private void parseAssertEq(String sortField, String sortField2) {
