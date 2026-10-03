@@ -20,7 +20,6 @@ import static org.apache.solr.schema.FieldType.ExternalizeStoredValuesAsObjects;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -132,9 +131,6 @@ public class DocsStreamer implements Iterator<SolrDocument> {
    * the {@link Document} from {@link SolrDocumentFetcher} because the Document may have been cached
    * with more fields then are desired.
    *
-   * <p>The 2-arg overload that converted every field via {@code new SolrReturnFields()} was
-   * deprecated since 8.0 and removed in Solr 11 (SOLR-18356).
-   *
    * @param doc <code>Document</code> to be converted, must not be null
    * @param schema <code>IndexSchema</code> containing the field/fieldType details for the index the
    *     <code>Document</code> came from, must not be null.
@@ -187,57 +183,6 @@ public class DocsStreamer implements Iterator<SolrDocument> {
 
   @Override
   public void remove() { // do nothing
-  }
-
-  /**
-   * Replace Lucene {@link IndexableField} values on a {@link SolrDocument} (and nested / child
-   * documents) with the SolrJ-native objects that HTTP clients already see after javabin
-   * deserialization. Used by the EmbeddedSolrServer streaming path so {@code
-   * queryAndStreamResponse} matches {@code query} / {@code HttpSolrClient}.
-   *
-   * <p>Do not call this from {@link #convertLuceneDocToSolrDoc}; JSON/XML writers and some
-   * transformers still expect stored fields as {@link IndexableField}.
-   *
-   * @see #getValue(SchemaField, IndexableField)
-   */
-  public static SolrDocument externalizeStoredValues(SolrDocument doc, IndexSchema schema) {
-    if (doc == null || schema == null) {
-      return doc;
-    }
-    for (String name : new ArrayList<>(doc.getFieldNames())) {
-      Object val = doc.getFieldValue(name);
-      Object converted = externalizeValue(val, schema);
-      if (converted != val) {
-        doc.setField(name, converted);
-      }
-    }
-    List<SolrDocument> children = doc.getChildDocuments();
-    if (children != null) {
-      for (SolrDocument child : children) {
-        externalizeStoredValues(child, schema);
-      }
-    }
-    return doc;
-  }
-
-  private static Object externalizeValue(Object val, IndexSchema schema) {
-    if (val instanceof IndexableField f) {
-      return getValue(schema.getFieldOrNull(f.name()), f);
-    }
-    if (val instanceof SolrDocument nested) {
-      return externalizeStoredValues(nested, schema);
-    }
-    if (val instanceof Collection<?> coll) {
-      List<Object> out = new ArrayList<>(coll.size());
-      boolean changed = false;
-      for (Object item : coll) {
-        Object converted = externalizeValue(item, schema);
-        changed |= converted != item;
-        out.add(converted);
-      }
-      return changed ? out : val;
-    }
-    return val;
   }
 
   public static Object getValue(SchemaField sf, IndexableField f) {

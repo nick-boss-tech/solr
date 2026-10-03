@@ -30,7 +30,6 @@ import org.apache.lucene.document.StringField;
 import org.apache.lucene.tests.util.TestUtil;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrDocument;
-import org.apache.solr.response.DocsStreamer;
 import org.apache.solr.response.transform.DocTransformers;
 import org.apache.solr.response.transform.ScoreAugmenter;
 import org.apache.solr.schema.IndexSchema;
@@ -480,30 +479,6 @@ public class ReturnFieldsTest extends SolrTestCaseJ4 {
         assertTrue(debug, docOut.get("foo_" + i + "_s1") instanceof StringField);
       }
     }
-  }
-
-  /** SOLR-18356: the 8.0-deprecated 2-arg converter is gone; callers pass ReturnFields. */
-  @Test
-  public void testTwoArgConvertLuceneDocToSolrDocRemoved() {
-    boolean foundTwoArg = false;
-    boolean foundThreeArg = false;
-    for (Method method : DocsStreamer.class.getDeclaredMethods()) {
-      if (!"convertLuceneDocToSolrDoc".equals(method.getName())) {
-        continue;
-      }
-      int params = method.getParameterCount();
-      if (params == 2) {
-        foundTwoArg = true;
-      } else if (params == 3) {
-        foundThreeArg = true;
-      }
-    }
-    assertFalse(
-        "SOLR-18356: DocsStreamer.convertLuceneDocToSolrDoc(Document, IndexSchema) was removed; use the 3-arg overload",
-        foundTwoArg);
-    assertTrue(
-        "DocsStreamer.convertLuceneDocToSolrDoc(Document, IndexSchema, ReturnFields) must remain",
-        foundThreeArg);
   }
 
   public void testWhitespace() {
