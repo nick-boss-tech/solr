@@ -18,9 +18,10 @@ package org.apache.solr.update;
 
 import static org.apache.solr.update.processor.DistributingUpdateProcessorFactory.DISTRIB_UPDATE_PARAM;
 import static org.hamcrest.core.StringContains.containsString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -686,37 +687,40 @@ public class PeerSyncTest extends BaseDistributedSearchTestCase {
 
   @Test
   public void testPeerSyncIgnores500FromVersionRequestWhenCantReachIsSuccess() throws Exception {
-    PeerSync peerSync =
-        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true);
+    assumeWorkingMockito();
+    try (PeerSync peerSync =
+        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true)) {
+      ShardResponse response =
+          failedResponse(
+              PeerSync.SHARD_REQUEST_PURPOSE_GET_VERSIONS,
+              new SolrException(SolrException.ErrorCode.SERVER_ERROR, "boom"));
 
-    ShardRequest request = new ShardRequest();
-    request.purpose = PeerSync.SHARD_REQUEST_PURPOSE_GET_VERSIONS;
-
-    ShardResponse response = new ShardResponse();
-    response.setShardRequest(request);
-    setException(response, new SolrException(SolrException.ErrorCode.SERVER_ERROR, "boom"));
-
-    assertTrue(peerSync.handleResponse(response));
+      assertTrue(peerSync.handleResponse(response));
+    }
   }
 
   @Test
   public void testPeerSyncStillFails500FromUpdateRequest() throws Exception {
-    PeerSync peerSync =
-        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true);
+    assumeWorkingMockito();
+    try (PeerSync peerSync =
+        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true)) {
+      ShardResponse response =
+          failedResponse(
+              PeerSync.SHARD_REQUEST_PURPOSE_GET_UPDATES,
+              new SolrException(SolrException.ErrorCode.SERVER_ERROR, "boom"));
 
-    ShardRequest request = new ShardRequest();
-    request.purpose = PeerSync.SHARD_REQUEST_PURPOSE_GET_UPDATES;
-
-    ShardResponse response = new ShardResponse();
-    response.setShardRequest(request);
-    setException(response, new SolrException(SolrException.ErrorCode.SERVER_ERROR, "boom"));
-
-    assertFalse(peerSync.handleResponse(response));
+      assertFalse(peerSync.handleResponse(response));
+    }
   }
 
-  private static void setException(ShardResponse response, Throwable exception) throws Exception {
-    Field field = ShardResponse.class.getDeclaredField("exception");
-    field.setAccessible(true);
-    field.set(response, exception);
+  private static ShardResponse failedResponse(int purpose, Throwable exception) {
+    ShardRequest request = new ShardRequest();
+    request.purpose = purpose;
+
+    ShardResponse response = mock(ShardResponse.class);
+    when(response.getShardRequest()).thenReturn(request);
+    when(response.getException()).thenReturn(exception);
+    when(response.getShardAddress()).thenReturn("http://example.com/solr/core");
+    return response;
   }
 }
