@@ -102,8 +102,7 @@ public class NestedAtomicUpdateIgnoredFieldTest extends SolrTestCase {
     List<String> nestedIds = new ArrayList<>();
     collectNestedIds(result, nestedIds);
     assertTrue("child doc must survive the atomic update: " + result, nestedIds.contains("2"));
-    assertTrue(
-        "grandchild doc must survive the atomic update: " + result, nestedIds.contains("3"));
+    assertTrue("grandchild doc must survive the atomic update: " + result, nestedIds.contains("3"));
 
     // The child and grandchild are also still indexed as documents in their own right.
     assertEquals(1, client.query(new SolrQuery("id:2")).getResults().getNumFound());
