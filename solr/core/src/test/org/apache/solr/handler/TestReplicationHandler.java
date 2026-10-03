@@ -306,17 +306,32 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
         buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
     assertEquals(4, numFound(rQuery(4, "*:*", followerClient)));
 
+    // The full-copy cleanup runs on the fetcher thread after the new index
+    // becomes active, so poll until the unpinned commit files are gone before
+    // asserting on the final state of the old directory.
+    long deadline = System.currentTimeMillis() + TIMEOUT;
+    boolean cleanedUp = false;
+    while (System.currentTimeMillis() < deadline) {
+      cleanedUp = true;
+      for (String fileName : unpinnedCommitFiles) {
+        if (Files.exists(oldIndexDir.resolve(fileName))) {
+          cleanedUp = false;
+          break;
+        }
+      }
+      if (cleanedUp) {
+        break;
+      }
+      Thread.sleep(100);
+    }
+    assertTrue("full-copy cleanup should remove the unpinned commit files", cleanedUp);
+
     assertTrue(
         "old index directory must be retained while a snapshot references it",
         Files.isDirectory(oldIndexDir));
     for (String fileName : snapshotFiles) {
       assertTrue(
           "snapshot file should survive the full copy: " + fileName,
-          Files.exists(oldIndexDir.resolve(fileName)));
-    }
-    for (String fileName : unpinnedCommitFiles) {
-      assertFalse(
-          "unpinned commit file should be removed by the full-copy cleanup: " + fileName,
           Files.exists(oldIndexDir.resolve(fileName)));
     }
 
