@@ -865,6 +865,53 @@ public class GraphExpressionTest extends SolrCloudTestCase {
     assertTrue(scoreNodesFromProduct("product9").isEmpty());
   }
 
+  @Test
+  public void testScoreNodesStreamSingleNode() throws Exception {
+
+    new UpdateRequest()
+        .add(id, "0", "basket_s", "basket1", "product_s", "product1", "price_f", "1")
+        .add(id, "1", "basket_s", "basket1", "product_s", "product3", "price_f", "1")
+        .add(id, "2", "basket_s", "basket2", "product_s", "product1", "price_f", "1")
+        .add(id, "3", "basket_s", "basket3", "product_s", "product1", "price_f", "1")
+        .commit(cluster.getSolrClient(), COLLECTION);
+
+    StreamContext context = new StreamContext();
+    SolrClientCache cache = new SolrClientCache();
+    context.setSolrClientCache(cache);
+
+    var solrConnection =
+        CloudSolrClient.CloudSolrClientConnection.parse(cluster.getZkServer().getZkAddress());
+    StreamFactory factory =
+        new StreamFactory()
+            .withCollectionUseThisConnection("collection1", solrConnection)
+            .withDefaultSolrConnection(solrConnection)
+            .withFunctionName("gatherNodes", GatherNodesStream.class)
+            .withFunctionName("scoreNodes", ScoreNodesStream.class)
+            .withFunctionName("count", CountMetric.class);
+
+    // basket2 holds a single product, so the gather produces exactly one node.
+    // SOLR-14231: scoreNodes used to build its /terms request with a null field and a
+    // null collection in this case, because those values were only assigned once a
+    // second tuple had been read.
+    String expr =
+        "scoreNodes(gatherNodes(collection1, "
+            + "walk=\"basket2->basket_s\", "
+            + "gather=\"product_s\", "
+            + "count(*)))";
+
+    TupleStream stream = factory.constructStream(expr);
+    stream.setStreamContext(context);
+    List<Tuple> tuples = getTuples(stream);
+
+    assertEquals(1, tuples.size());
+    Tuple tuple = tuples.get(0);
+    assertEquals("product1", tuple.getString("node"));
+    assertEquals(3, (long) tuple.getLong("docFreq"));
+    assertEquals(1, (long) tuple.getLong("count(*)"));
+
+    cache.close();
+  }
+
   private List<Tuple> scoreNodesFromProduct(String product) throws Exception {
     var solrConnection =
         CloudSolrClient.CloudSolrClientConnection.parse(cluster.getZkServer().getZkAddress());
