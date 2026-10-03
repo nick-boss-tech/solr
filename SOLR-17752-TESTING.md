@@ -25,14 +25,24 @@ cp ~/workspace/solr/gradle.properties .   # worktrees don't inherit it
 ~/workspace/tools/solr-gradle.sh :solr:core:compileJava -Pvalidation.errorprone=true
 ```
 
-Suggested tests (not written):
+Test added (round 4, not compiled or run): `TestShardResponseLogging`
+(`solr/core/src/test/org/apache/solr/handler/component/`, same package because
+the `ShardResponse` setters are package-private). It builds a shard response
+whose header exists but whose `response` section is missing, with a shard
+request carrying `q=name:customer_secret_term`, captures the WARN with
+`LogListener`, and asserts it names the node and does not contain the term.
+The earlier suggestion to assert on the thrown exception message was dropped:
+that message never contained the query, so it would also pass without the fix.
 
-1. Construct a `ShardResponse` with a query-bearing shard request and a
-   subsection-less response; invoke `getSubsectionFromShardResponse`; assert
-   the thrown `SolrException` message does not contain the query text.
-2. Log-appender assertion that the WARN names the node but not the query params.
-3. Negative check: no `getShardRequest()` remains in any warn/error log line
-   in `SolrResponseUtil`.
+## Round 4 review changes
+
+See `research/branch-reviews/round-4/SOLR-17752-review.md`.
+
+- Added `changelog/unreleased/SOLR-17752.yml`.
+- Not changed (needs a decision): the same WARN still prints `solrResponse`,
+  whose header can echo the request params (`echoParams`) and so still carry
+  the query; and `getNodeName()` can be null (shard / shard address would be
+  better context).
 
 ## Patch limits
 

@@ -1,0 +1,7 @@
+title: The warning logged for a corrupted shard response no longer includes the shard request, and with it the query
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17752
+    url: https://issues.apache.org/jira/browse/SOLR-17752
