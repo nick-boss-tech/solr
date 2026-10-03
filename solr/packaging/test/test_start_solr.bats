@@ -136,10 +136,18 @@ teardown() {
   # Used to fail with: Error: Could not find or load main class space"
   SOLR_OPTS='-Dsolr.17029.prop="white space"' solr start
   solr assert --started http://localhost:${SOLR_PORT} --timeout 5000
+
+  run curl "http://localhost:${SOLR_PORT}/solr/admin/info/properties"
+  assert_output --partial 'solr.17029.prop'
+  assert_output --partial 'white space'
 }
 
 @test "SOLR-17029 quoted whitespace in --jvm-opts" {
   # Used to fail with: Error: Could not find or load main class space"
   solr start --jvm-opts '-Dsolr.17029.prop="white space"'
   solr assert --started http://localhost:${SOLR_PORT} --timeout 5000
+
+  run curl "http://localhost:${SOLR_PORT}/solr/admin/info/properties"
+  assert_output --partial 'solr.17029.prop'
+  assert_output --partial 'white space'
 }

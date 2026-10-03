@@ -36,6 +36,24 @@ from the operator's own environment / command line, and the script already
 runs with the operator's privileges. This matches the approach discussed
 on the ticket.
 
+**Open design decision (round-3 review, not changed here):** `eval` changes
+the meaning of option strings that work today. Before, `SOLR_OPTS=(${SOLR_OPTS:-})`
+only split on whitespace; `eval` also interprets `$`, backticks, `;`, `&`, `|`,
+`(`, `)`, `<`, `>` and backslashes in the value. Examples that would change or
+break: a ZooKeeper credential in `SOLR_OPTS` such as
+`-DzkDigestPassword=pa$$word` (becomes the shell PID), an `&` or `;` in a
+password (runs or backgrounds a command), an unbalanced `(` (syntax error at
+script start), and a Windows-style `C:\path` (backslashes consumed).
+`solr.in.sh` documents `SOLR_OPTS="$SOLR_OPTS $SOLR_ZK_CREDS_AND_ACLS"`. The
+"operator's own environment" argument covers injection by a third party, not
+breakage of existing values. Options to decide between: a quote-aware split that
+does not execute expansions (for example reading the string through a small
+`read`/`xargs`-style loop, or the `@Q` approach from the ticket), or accepting
+`eval` and documenting it as a breaking change in the ref guide and
+`solr.in.sh`. Also unchecked: `bin/solr start -e ...` re-passes `--jvm-opts`
+through `RunExampleTool` (`" --jvm-opts \"" + jvmOpts + "\""` and
+`addArgument`), so values with embedded quotes cross two more quoting layers.
+
 Deliberately out of scope: `GC_TUNE_ARR=($GC_TUNE)` has the same smell
 but was left alone per the research note (reviewers can ask).
 
@@ -49,9 +67,17 @@ but was left alone per the research note (reviewers can ask).
 In `test_start_solr.bats`:
 
 - `"SOLR-17029 quoted whitespace in SOLR_OPTS"`: starts Solr with
-  `SOLR_OPTS='-Dsolr.17029.prop="white space"'`, asserts it comes up.
-- `"SOLR-17029 quoted whitespace in --jvm-opts"`: starts Solr with
-  `--jvm-opts '-Dsolr.17029.prop="white space"'`, asserts it comes up.
+  `SOLR_OPTS='-Dsolr.17029.prop="white space"'`, asserts it comes up, then
+  (round-3 patch pass) asserts `/solr/admin/info/properties` lists
+  `solr.17029.prop` with the value `white space`.
+- `"SOLR-17029 quoted whitespace in --jvm-opts"`: the same through
+  `--jvm-opts`.
+
+Not added, because it depends on the decision above: a test that a value with
+`$`, `&` or `;` passes through unchanged. It would fail with the current `eval`.
+Changelog fragment added: `changelog/unreleased/SOLR-17029.yml` (states the
+quoted-whitespace fix only; revise it, and add a ref-guide note, with the
+decision). Bats and shellcheck are not available here; nothing was run.
 
 Pre-fix both fail (java cannot find main class `space"`; the port never
 opens and `solr assert --started` times out). Post-fix both should pass.
