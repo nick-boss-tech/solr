@@ -18,9 +18,13 @@ Both `openRealtimeSearcher()` and `deleteAll()` (same pattern, "Error
 opening realtime searcher for deleteByQuery") now catch
 `SolrCoreState.CoreIsClosedException` separately and log at debug level
 instead of ERROR with a stack trace. All other exceptions keep the old
-ERROR behavior. The id-cache clearing after the try/catch still runs in the
-closed-core path (harmless in-memory maps). This matches the reporter's
-proposed fix ("if we are closing the core then we don't really care about
+ERROR behavior. In `openRealtimeSearcher()` the closed-core path now also
+returns before the id caches are cleared, like the generic failure path does
+(round-3 review correction: the first version fell through and cleared the
+caches although no fresh searcher had been opened, which would let a realtime
+get on a still-closing core miss tlog pointers; `deleteAll()` clears the
+caches after a failure on `main` already, so it is unchanged). This matches the
+reporter's proposed fix ("if we are closing the core then we don't really care about
 failure to open a new searcher") and existing precedent in
 `SolrCore.java:3432`, which swallows `CoreIsClosedException` with "no
 problem this core is already closed" on reload.
@@ -38,19 +42,28 @@ cp ~/workspace/solr/gradle.properties .   # worktrees don't inherit it
 ~/workspace/tools/solr-gradle.sh :solr:core:compileJava -Pvalidation.errorprone=true
 ```
 
-Suggested tests (not written):
+Test added (round-3 patch pass, **not compiled or run**):
 
-1. Unit test on `UpdateLog.openRealtimeSearcher()` with a closed core
-   (mock `UpdateHandler`/`SolrCore` with `isClosed()=true` and
-   `openNewSearcher` throwing `CoreIsClosedException`): assert no ERROR is
-   logged (log capture) and no exception escapes.
-2. Same for `deleteAll()` (currently for testing only).
-3. Regression: a genuine `openNewSearcher` failure (non-closed core) still
-   logs ERROR as before.
-4. Existing UpdateLog test suites.
+- `UpdateLogClosedCoreTest#testOpeningRealtimeSearcherOnClosedCoreIsNotAnError`
+  (new class, same tlog config as `UpdateLogTest`): grabs the `UpdateLog`,
+  closes the core with `deleteCore()`, then calls `openRealtimeSearcher()` and
+  `deleteAll()` and asserts no ERROR event is logged by `UpdateLog` (using the
+  test framework's `LogListener`). Before this change the generic catch logs
+  `Error opening realtime searcher`. It does not cover the `return` (cache
+  retention) or a genuine non-closed failure still logging ERROR.
+
+Queued for the verification run:
+`org.apache.solr.update.UpdateLogClosedCoreTest` and
+`org.apache.solr.update.UpdateLogTest`, with Spotless.
 
 ## Patch limits and follow-ups
 
 - **Not compiled or tested.**
-- No changelog entry (repo convention: scaffold once a Jira/PR is assigned).
+- Not changed, for a scope decision: the ticket's log also shows
+  `DocExpirationUpdateProcessorFactory ... Runtime error in periodic deletion of
+  expired docs: SolrCoreState already closed` (a plain `SolrException` from the
+  commit, not `CoreIsClosedException`). Quieting that thread when the core is
+  closing belongs in `DeleteExpiredDocsRunnable`; leave it for a follow-up unless
+  the whole ticket should close in one PR.
+- Changelog fragment added: `changelog/unreleased/SOLR-16356.yml`.
 - Remove this file before opening the upstream PR.
