@@ -174,9 +174,9 @@ public class RepositoryManager {
     // TODO: Should we introduce a checksum to validate the downloading?
     // Currently, not a big problem since signature based checking happens anyway
 
-    // Tracks every file posted to the file store so a failed install can be
-    // rolled back, keeping the install atomic from the user's perspective.
+    // Tracks every file posted to the file store so a failed install can be rolled back
     List<String> postedFiles = new ArrayList<>();
+    boolean registrationAttempted = false;
     try {
       // post the manifest
       runtime.printSuccess("Posting manifest...");
@@ -221,6 +221,7 @@ public class RepositoryManager {
       }
 
       // Call Package API to add this version of the package
+      registrationAttempted = true;
       runtime.printSuccess("Executing Package API to register this package...");
       PackagePayload.AddVersion add = new PackagePayload.AddVersion();
       add.version = version;
@@ -255,14 +256,10 @@ public class RepositoryManager {
       }
 
     } catch (SolrException e) {
-      // Includes registration failures from the Package API above; the files
-      // already posted must be removed so the install can be retried cleanly.
-      cleanupPartialInstall(postedFiles);
+      cleanupPartialInstall(postedFiles, packageName, version, registrationAttempted);
       throw e;
     } catch (SolrServerException | IOException e) {
-      // Posting the manifest or an artifact failed (e.g. a signature check);
-      // roll back what was posted instead of stranding a partial install.
-      cleanupPartialInstall(postedFiles);
+      cleanupPartialInstall(postedFiles, packageName, version, registrationAttempted);
       throw new SolrException(ErrorCode.BAD_REQUEST, e);
     }
     return false;
@@ -273,16 +270,46 @@ public class RepositoryManager {
    * leave orphaned files that block a retry or confuse {@code uninstall}. Mirrors the deletion
    * steps in {@link PackageManager#uninstall}. Cleanup failures are logged and swallowed so the
    * original install failure is what the user sees.
+   *
+   * <p>If the registration request was sent, the files are kept unless the package version is
+   * confirmed not to be registered: a client-side failure (such as a timeout) does not mean the
+   * server rejected the request, and deleting the files of a registered version would break it.
    */
-  private void cleanupPartialInstall(List<String> postedFiles) {
+  private void cleanupPartialInstall(
+      List<String> postedFiles,
+      String packageName,
+      String version,
+      boolean registrationAttempted) {
+    if (registrationAttempted && mayBeRegistered(packageName, version)) {
+      log.warn(
+          "Not removing the files of package {} version {}: it may have been registered",
+          packageName,
+          version);
+      return;
+    }
     for (String filePath : postedFiles) {
       try {
-        runtime.printSuccess("Cleaning up partially installed file: " + filePath);
+        runtime.println("Cleaning up partially installed file: " + filePath);
         DistribFileStore.deleteZKFileEntry(packageManager.zkClient, filePath);
         new FileStoreApi.DeleteFile(filePath).process(solrClient);
       } catch (Exception cleanupEx) {
         log.warn("Unable to clean up partially installed package file {}", filePath, cleanupEx);
       }
+    }
+  }
+
+  /** Returns true unless the package version is confirmed not to be registered. */
+  private boolean mayBeRegistered(String packageName, String version) {
+    try {
+      SolrPackageInstance registered = packageManager.getPackageInstance(packageName, version);
+      return registered != null && registered.version.equals(version);
+    } catch (Exception e) {
+      log.warn(
+          "Unable to determine whether package {} version {} is registered",
+          packageName,
+          version,
+          e);
+      return true;
     }
   }
 
