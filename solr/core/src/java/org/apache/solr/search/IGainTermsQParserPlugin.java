@@ -149,7 +149,6 @@ public class IGainTermsQParserPlugin extends QParserPlugin {
     public void complete() throws IOException {
       NamedList<Double> analytics = new NamedList<>();
       NamedList<Integer> topFreq = new NamedList<>();
-      NamedList<Integer> allFreq = new NamedList<>();
 
       rb.rsp.add("featuredTerms", analytics);
       rb.rsp.add("docFreq", topFreq);
@@ -178,6 +177,10 @@ public class IGainTermsQParserPlugin extends QParserPlugin {
         }
 
         int docFreq = xc + nc;
+        if (docFreq == 0) {
+          // The term is in none of the collected documents, and its score would be NaN.
+          continue;
+        }
 
         double entropyContainsTerm = binaryEntropy((double) xc / docFreq);
         double entropyNotContainsTerm =
@@ -187,20 +190,19 @@ public class IGainTermsQParserPlugin extends QParserPlugin {
                 - ((docFreq / numDocs) * entropyContainsTerm
                     + (1.0 - docFreq / numDocs) * entropyNotContainsTerm);
 
-        topFreq.add(term.utf8ToString(), docFreq);
         if (topTerms.size() < numTerms) {
-          topTerms.add(new TermWithScore(term.utf8ToString(), score));
+          topTerms.add(new TermWithScore(term.utf8ToString(), score, docFreq));
         } else {
           if (topTerms.first().score < score) {
             topTerms.pollFirst();
-            topTerms.add(new TermWithScore(term.utf8ToString(), score));
+            topTerms.add(new TermWithScore(term.utf8ToString(), score, docFreq));
           }
         }
       }
 
       for (TermWithScore topTerm : topTerms) {
         analytics.add(topTerm.term, topTerm.score);
-        topFreq.add(topTerm.term, allFreq.get(topTerm.term));
+        topFreq.add(topTerm.term, topTerm.docFreq);
       }
 
       if (this.delegate instanceof DelegatingCollector) {
@@ -217,10 +219,12 @@ public class IGainTermsQParserPlugin extends QParserPlugin {
   private static class TermWithScore implements Comparable<TermWithScore> {
     public final String term;
     public final double score;
+    public final int docFreq;
 
-    public TermWithScore(String term, double score) {
+    public TermWithScore(String term, double score, int docFreq) {
       this.term = term;
       this.score = score;
+      this.docFreq = docFreq;
     }
 
     @Override

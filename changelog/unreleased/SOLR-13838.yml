@@ -1,0 +1,7 @@
+title: The igain query parser no longer produces NaN scores for terms that are in none of the matching documents, and lists document frequencies only for the featured terms
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-13838
+    url: https://issues.apache.org/jira/browse/SOLR-13838
