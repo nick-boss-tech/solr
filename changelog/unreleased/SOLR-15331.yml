@@ -1,0 +1,7 @@
+title: SolrJ's BucketBasedJsonFacet now exposes the count of the "missing" bucket of a terms facet through getMissingCount()
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15331
+    url: https://issues.apache.org/jira/browse/SOLR-15331
