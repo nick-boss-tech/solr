@@ -241,8 +241,9 @@ public class TestLTRReRankingPipeline extends SolrTestCaseJ4 {
   @Test
   public void testBoostedDocsSurviveLTRRescore() throws Exception {
     assertU(delQ("*:*"));
-    assertU(adoc("id", "0", "field", "match", "finalScoreFloat", "1.0"));
-    assertU(adoc("id", "1", "field", "match", "finalScoreFloat", "2.0"));
+    // doc 0 has the best model score but is not elevated; doc 1 comes later by doc id and is elevated
+    assertU(adoc("id", "0", "field", "match", "finalScoreFloat", "2.0"));
+    assertU(adoc("id", "1", "field", "match", "finalScoreFloat", "1.0"));
     assertU(commit());
 
     try (SolrQueryRequest solrQueryRequest =
@@ -268,7 +269,7 @@ public class TestLTRReRankingPipeline extends SolrTestCaseJ4 {
 
       final QueryCommand cmd = new QueryCommand().setQuery(new MatchAllDocsQuery()).setLen(2);
       final Set<BytesRef> boostedPriority = new LinkedHashSet<>();
-      boostedPriority.add(new BytesRef("0"));
+      boostedPriority.add(new BytesRef("1"));
 
       final ReRankCollector collector =
           new ReRankCollector(
@@ -278,8 +279,8 @@ public class TestLTRReRankingPipeline extends SolrTestCaseJ4 {
 
       final TopDocs hits = collector.topDocs(0, 2);
       assertEquals(2, hits.scoreDocs.length);
-      assertEquals("0", searcher.getDocFetcher().doc(hits.scoreDocs[0].doc).get("id"));
-      assertEquals("1", searcher.getDocFetcher().doc(hits.scoreDocs[1].doc).get("id"));
+      assertEquals("1", searcher.getDocFetcher().doc(hits.scoreDocs[0].doc).get("id"));
+      assertEquals("0", searcher.getDocFetcher().doc(hits.scoreDocs[1].doc).get("id"));
     }
   }
 
