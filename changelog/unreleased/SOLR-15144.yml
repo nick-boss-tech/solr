@@ -1,0 +1,7 @@
+title: A distributed request whose timeAllowed ran out in the first phase now still fetches the documents of the ids it merged, instead of returning a count with an empty document list
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15144
+    url: https://issues.apache.org/jira/browse/SOLR-15144

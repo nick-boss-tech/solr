@@ -95,6 +95,12 @@ public class TimeAllowedLimit implements QueryLimit {
     usedTimeAllowedMs += reqInflightMs;
     boolean result = false;
     if (usedTimeAllowedMs >= reqTimeAllowedMs) {
+      if ((sreq.purpose & ShardRequest.PURPOSE_GET_FIELDS) != 0) {
+        // the ids were already merged; skipping the fetch of their fields, or limiting it, would
+        // only return the count without documents
+        params.remove(CommonParams.TIME_ALLOWED);
+        return false;
+      }
       // there's no point in sending this request to the shard because the time will run out
       // before it's processed at the target
       result = true;
