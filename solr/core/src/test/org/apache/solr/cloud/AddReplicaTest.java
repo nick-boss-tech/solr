@@ -18,9 +18,13 @@ package org.apache.solr.cloud;
 
 import static org.apache.solr.client.solrj.response.RequestStatusState.COMPLETED;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.LinkedHashSet;
+import java.util.Properties;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.response.RequestStatusState;
@@ -28,6 +32,7 @@ import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.core.CoreDescriptor;
+import org.apache.solr.core.SolrCore;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -226,5 +231,48 @@ public class AddReplicaTest extends SolrCloudTestCase {
     assertEquals("val1", coreDescriptor.getCoreProperty("customProp1", ""));
     assertEquals("val2.1", coreDescriptor.getCoreProperty("customProp2", ""));
     assertEquals("val3", coreDescriptor.getCoreProperty("customProp3", ""));
+  }
+
+  @Test
+  public void testAddReplicaPersistsNumShardsInCoreProperties() throws Exception {
+    String collection = "addreplica_numshards_coll";
+    CloudSolrClient cloudClient = cluster.getSolrClient();
+
+    CollectionAdminRequest.Create create =
+        CollectionAdminRequest.createCollection(collection, "conf1", 2, 1);
+    cloudClient.request(create);
+    cluster.waitForActiveCollection(collection, 2, 2);
+
+    DocCollection coll = cloudClient.getClusterState().getCollection(collection);
+    Collection<Replica> shard1Replicas = coll.getSlice("shard1").getReplicas();
+    assertEquals(1, shard1Replicas.size());
+    // A replica created by CREATE records the collection's shard count on disk.
+    assertEquals("2", readPersistedNumShards(shard1Replicas.iterator().next()));
+
+    CollectionAdminRequest.AddReplica addReplica =
+        CollectionAdminRequest.addReplicaToShard(collection, "shard1");
+    addReplica.setWaitForFinalState(true);
+    addReplica.process(cloudClient);
+    cluster.waitForActiveCollection(collection, 2, 3);
+
+    Collection<Replica> replicasAfter =
+        cloudClient.getClusterState().getCollection(collection).getSlice("shard1").getReplicas();
+    replicasAfter.removeAll(shard1Replicas);
+    assertEquals(1, replicasAfter.size());
+    // SOLR-15035: a replica created by ADDREPLICA must record the same value.
+    assertEquals("2", readPersistedNumShards(replicasAfter.iterator().next()));
+  }
+
+  private String readPersistedNumShards(Replica replica) throws Exception {
+    Path coreProperties;
+    try (SolrCore core =
+        cluster.getReplicaJetty(replica).getCoreContainer().getCore(replica.getCoreName())) {
+      coreProperties = core.getInstancePath().resolve("core.properties");
+    }
+    Properties properties = new Properties();
+    try (InputStream in = Files.newInputStream(coreProperties)) {
+      properties.load(in);
+    }
+    return properties.getProperty("numShards");
   }
 }
