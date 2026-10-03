@@ -71,8 +71,9 @@ so on.
 
 If documents tie in all of the explicit sort criteria, Solr uses each document's Lucene document ID as the final tie-breaker.
 This internal property is subject to change during segment merges and document updates, which can lead to unexpected result ordering changes.
-In SolrCloud, this also means two replicas of the same shard can return the same matching documents in a different order when the query sorts only on `score` or any other non-unique criteria.
-This affects result ordering, not `numFound`.
+In SolrCloud, this also means two replicas of the same shard can order tied documents differently when the query sorts only on `score` or any other non-unique criteria.
+The documents on a page, not only their order, can then differ between replicas, and consecutive pages served by different replicas can repeat or skip a document.
+When the replicas are in sync and have the same searcher, `numFound` is not affected.
 Users looking to avoid this behavior can define an additional sort criteria on a unique or rarely-shared field such as `id` to prevent ties from occurring (e.g., `price desc,id asc`).
 
 NOTE: A sort ordering must always include a field name (or `score` as a pseudo field), followed by whitespace (escaped as + or `%20` in URL strings), followed by a sort direction (`asc` or `desc`, case insensitive).
