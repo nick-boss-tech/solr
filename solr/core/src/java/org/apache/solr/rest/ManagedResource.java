@@ -345,10 +345,12 @@ public abstract class ManagedResource {
 
   /**
    * POST variant that also receives the child id when the request URL addresses a child resource.
-   * The default implementation delegates to {@link #doPut(BaseSolrResource,Object,String)}.
+   * The default implementation ignores the child id and delegates to {@link
+   * #doPost(BaseSolrResource,Object)}, so resources that override that method keep working;
+   * resources implementing {@link ChildResourceSupport} may override this to honor the child id.
    */
   public void doPost(BaseSolrResource endpoint, Object json, String childId) {
-    doPut(endpoint, json, childId);
+    doPost(endpoint, json);
   }
 
   /**

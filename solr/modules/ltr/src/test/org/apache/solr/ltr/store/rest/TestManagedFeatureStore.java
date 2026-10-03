@@ -16,7 +16,9 @@
  */
 package org.apache.solr.ltr.store.rest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.ltr.feature.Feature;
@@ -24,6 +26,7 @@ import org.apache.solr.ltr.feature.FeatureException;
 import org.apache.solr.ltr.feature.OriginalScoreFeature;
 import org.apache.solr.ltr.feature.ValueFeature;
 import org.apache.solr.ltr.store.FeatureStore;
+import org.apache.solr.rest.ManagedResource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -101,6 +104,60 @@ public class TestManagedFeatureStore extends SolrTestCaseJ4 {
       final ValueFeature vf = (ValueFeature) f;
       assertEquals(i, vf.getValue());
     }
+  }
+
+  private static List<Object> featureList(Map<String, Object> feature) {
+    final List<Object> features = new ArrayList<>();
+    features.add(feature);
+    return features;
+  }
+
+  @Test
+  public void testPutWithChildIdUsesItAsDefaultStore() {
+    featureStore.doPut(
+        null,
+        featureList(createMap("f1", OriginalScoreFeature.class.getName(), null)),
+        "childStore1");
+
+    assertNotNull(featureStore.getFeatureStore("childStore1").get("f1"));
+    final FeatureStore defaultStore =
+        featureStore.getFeatureStore(FeatureStore.DEFAULT_FEATURE_STORE_NAME);
+    assertTrue(defaultStore.getFeatures().isEmpty());
+  }
+
+  @Test
+  public void testPutWithChildIdKeepsExplicitStore() {
+    final Map<String, Object> feature = createMap("f2", OriginalScoreFeature.class.getName(), null);
+    feature.put(ManagedFeatureStore.FEATURE_STORE_NAME_KEY, "explicitStore");
+
+    featureStore.doPut(null, featureList(feature), "childStore2");
+
+    assertNotNull(featureStore.getFeatureStore("explicitStore").get("f2"));
+    assertNull(featureStore.getFeatureStore("childStore2").get("f2"));
+  }
+
+  @Test
+  public void testPostAndEnvelopeWithChildId() {
+    featureStore.doPost(
+        null, createMap("f3", OriginalScoreFeature.class.getName(), null), "childStore3");
+    assertNotNull(featureStore.getFeatureStore("childStore3").get("f3"));
+
+    final Map<String, Object> envelope = new HashMap<>();
+    envelope.put(ManagedResource.INIT_ARGS_JSON_FIELD, new HashMap<String, Object>());
+    envelope.put(
+        ManagedResource.MANAGED_JSON_LIST_FIELD,
+        featureList(createMap("f4", OriginalScoreFeature.class.getName(), null)));
+    featureStore.doPut(null, envelope, "childStore4");
+    assertNotNull(featureStore.getFeatureStore("childStore4").get("f4"));
+  }
+
+  @Test
+  public void testPutWithoutChildIdUsesDefaultStore() {
+    featureStore.doPut(
+        null, featureList(createMap("f5", OriginalScoreFeature.class.getName(), null)), null);
+
+    assertNotNull(
+        featureStore.getFeatureStore(FeatureStore.DEFAULT_FEATURE_STORE_NAME).get("f5"));
   }
 
   @Test

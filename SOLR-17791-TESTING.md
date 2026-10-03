@@ -41,15 +41,29 @@ cp ~/workspace/solr/gradle.properties .   # worktrees don't inherit it
 ~/workspace/tools/solr-gradle.sh :solr:core:compileJava :solr:modules:ltr:compileJava -Pvalidation.errorprone=true
 ```
 
-Suggested tests (not written):
+Tests added (round 4, not compiled or run), in `TestManagedFeatureStore`:
+child id used as default store (list body, `_DEFAULT_` stays empty); explicit
+body `store` still wins; POST with a single feature map and a `managedList`
+envelope; no child id still uses `_DEFAULT_`. They call `doPut`/`doPost`
+directly with a null endpoint, not through the REST layer.
 
-1. `ManagedFeatureStore`: PUT-style update with childId `store1` and a body
-   lacking `"store"` → feature retrievable via `getFeatureStore("store1")`,
-   `_DEFAULT_` empty.
-2. Regression: body `"store": "other"` still wins over the childId.
-3. List payload and `{"managedList": [...]}` envelope payload with childId.
-4. Other managed resources (e.g. schema, stopwords): PUT/POST behavior
-   unchanged via the default overloads.
+Still untested: a real `PUT /schema/feature-store/<name>` request, and that a
+`ManagedResource` subclass overriding the 2-arg `doPost` is still reached via
+REST (see below).
+
+## Round 4 review changes
+
+See `research/branch-reviews/round-4/SOLR-17791-review.md`.
+
+- The default 3-arg `ManagedResource.doPost(endpoint, json, childId)` now
+  delegates to the 2-arg `doPost`, not straight to `doPut`, so resources that
+  override the documented 2-arg extension point keep working.
+  `ManagedFeatureStore` overrides the 3-arg `doPost` to reach its 3-arg `doPut`.
+- Added `changelog/unreleased/SOLR-17791.yml`.
+- Not changed (needs a decision): whether a behaviour change for callers that
+  relied on `_DEFAULT_` needs an upgrade note in `major-changes-in-solr-X.adoc`;
+  whether a smaller design (a child-id getter on `ManagedEndpoint`) is
+  preferred over the two new public overloads.
 
 ## Patch limits, risks, open questions
 

@@ -1,0 +1,7 @@
+title: A PUT or POST to /schema/feature-store/<storeName> now adds features that do not name a store to that store instead of to the default store
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17791
+    url: https://issues.apache.org/jira/browse/SOLR-17791

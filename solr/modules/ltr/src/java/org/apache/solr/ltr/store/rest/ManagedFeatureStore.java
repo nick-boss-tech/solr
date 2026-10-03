@@ -160,6 +160,11 @@ public class ManagedFeatureStore extends ManagedResource
   }
 
   @Override
+  public void doPost(BaseSolrResource endpoint, Object json, String childId) {
+    doPut(endpoint, json, childId);
+  }
+
+  @Override
   public synchronized void doPut(BaseSolrResource endpoint, Object json, String childId) {
     super.doPut(endpoint, withDefaultStore(json, childId));
   }
