@@ -16,6 +16,7 @@
  */
 package org.apache.solr.handler.admin;
 
+import static org.apache.solr.SolrTestCaseJ4.assumeWorkingMockito;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -45,6 +46,7 @@ public class RequestApplyUpdatesOpTest extends SolrTestCase {
 
   @Before
   public void setUpMocks() {
+    assumeWorkingMockito();
     zkController = mock(ZkController.class);
     coreDescriptor = mock(CoreDescriptor.class);
     core = mock(SolrCore.class);
