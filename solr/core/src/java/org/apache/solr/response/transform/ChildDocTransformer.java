@@ -291,8 +291,6 @@ class ChildDocTransformer extends DocTransformer {
 
       // size == 1, so get the last remaining entry
       if (!multiValuedFLoatVectorFields.isEmpty() || !multiValuedByteVectorFields.isEmpty()) {
-        extraResponseFields.addAll(multiValuedFLoatVectorFields);
-        extraResponseFields.addAll(multiValuedByteVectorFields);
         addFlatMultiValuedVectorsToParent(
             rootDoc,
             pendingParentPathsToChildren.values().iterator().next(),
@@ -304,14 +302,7 @@ class ChildDocTransformer extends DocTransformer {
             multiValuedByteVectorFields,
             VectorEncoding.BYTE);
       } else {
-        Map<String, List<SolrDocument>> childrenByPath =
-            pendingParentPathsToChildren.values().iterator().next();
-        for (String cDocsPath : childrenByPath.keySet()) {
-          if (!ANON_CHILD_KEY.equals(cDocsPath)) {
-            extraResponseFields.add(trimLastPound(cDocsPath));
-          }
-        }
-        addChildrenToParent(rootDoc, childrenByPath);
+        addChildrenToParent(rootDoc, pendingParentPathsToChildren.values().iterator().next());
       }
 
     } catch (IOException e) {
@@ -340,9 +331,13 @@ class ChildDocTransformer extends DocTransformer {
     return multiValuedVectorsFields;
   }
 
-  private static void addChildrenToParent(
-      SolrDocument parent, Map<String, List<SolrDocument>> children) {
+  private void addChildrenToParent(SolrDocument parent, Map<String, List<SolrDocument>> children) {
     for (Map.Entry<String, List<SolrDocument>> entry : children.entrySet()) {
+      if (!ANON_CHILD_KEY.equals(entry.getKey())) {
+        // Record every named field as it is attached, at any nesting depth, so the
+        // response writers keep nested children when fl omits the nest-path fields.
+        extraResponseFields.add(trimLastPound(entry.getKey()));
+      }
       addChildrenToParent(parent, entry.getValue(), entry.getKey());
     }
   }
@@ -373,6 +368,8 @@ class ChildDocTransformer extends DocTransformer {
       Map<String, List<SolrDocument>> children,
       Set<String> multiValuedVectorFields,
       VectorEncoding encoding) {
+    // Record the fields as they are attached, as in addChildrenToParent.
+    extraResponseFields.addAll(multiValuedVectorFields);
     for (String multiValuedVectorField : multiValuedVectorFields) {
       List<SolrDocument> solrDocuments = children.get(multiValuedVectorField);
       List<List<Number>> multiValuedVectors = new ArrayList<>(solrDocuments.size());

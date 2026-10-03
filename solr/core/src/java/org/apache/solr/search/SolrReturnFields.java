@@ -569,8 +569,7 @@ public class SolrReturnFields extends ReturnFields {
 
   /**
    * Returns true if the named field was added to response documents by a {@link DocTransformer}
-   * (see {@link DocTransformer#getExtraResponseFields()}) rather than requested in the field
-   * list.
+   * (see {@link DocTransformer#getExtraResponseFields()}) rather than requested in the field list.
    */
   private boolean isTransformerAddedField(String name) {
     if (transformer == null) {

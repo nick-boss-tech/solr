@@ -152,6 +152,111 @@ public class TestChildDocTransformerHierarchy extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testNestedChildrenRetainedWhenFlOmitsNestPathsJSON() throws Exception {
+    indexSampleData(numberOfDocsPerNestedTest);
+    // SOLR-14678: fl names only id and [child]. The writers must still keep the
+    // nested named children (ingredients under toppings, lonelyGrandChild under
+    // lonely), not just the paths attached directly to the root doc. The child
+    // docs carry only the fields fl permits (here id), as the XML variant of
+    // this test shows in the raw response.
+    assertJQ(
+        req(
+            "q",
+            "type_s:donut",
+            "sort",
+            "id asc",
+            "fl",
+            "id,[child]",
+            "fq",
+            fqToExcludeNonTestedDocs),
+        "/response/docs/[0]/toppings/[0]/id=='4'",
+        "/response/docs/[0]/toppings/[1]/id=='6'",
+        "/response/docs/[0]/toppings/[0]/ingredients/[0]/id=='5'",
+        "/response/docs/[0]/toppings/[1]/ingredients/[1]/id=='8'",
+        "/response/docs/[0]/lonely/id=='2'",
+        "/response/docs/[0]/lonely/lonelyGrandChild/id=='3'");
+
+    // When fl also names the child docs' own fields, those fields are present
+    // at every level of the retained structure.
+    assertJQ(
+        req(
+            "q",
+            "type_s:donut",
+            "sort",
+            "id asc",
+            "fl",
+            "id,type_s,name_s,test_s,test2_s,[child]",
+            "fq",
+            fqToExcludeNonTestedDocs),
+        "/response/docs/[0]/toppings/[0]/type_s==Regular",
+        "/response/docs/[0]/toppings/[1]/type_s==Chocolate",
+        "/response/docs/[0]/toppings/[0]/ingredients/[0]/name_s==cocoa",
+        "/response/docs/[0]/toppings/[1]/ingredients/[1]/name_s==cocoa",
+        "/response/docs/[0]/lonely/test_s==testing",
+        "/response/docs/[0]/lonely/lonelyGrandChild/test2_s==secondTest");
+  }
+
+  @Test
+  public void testNestedChildrenRetainedWhenFlOmitsNestPathsXML() throws Exception {
+    indexSampleData(numberOfDocsPerNestedTest);
+    // SOLR-14678: same repro as the JSON variant, through the XML writer.
+    assertQ(
+        req(
+            "q",
+            "type_s:donut",
+            "sort",
+            "id asc",
+            "fl",
+            "id,[child]",
+            "fq",
+            fqToExcludeNonTestedDocs),
+        "/response/result/doc[1]/arr[@name='toppings']/doc[1]/str[@name='id']='4'",
+        "/response/result/doc[1]/arr[@name='toppings']/doc[1]/arr[@name='ingredients']/doc[1]/str[@name='id']='5'",
+        "/response/result/doc[1]/doc[@name='lonely']/str[@name='id']='2'",
+        "/response/result/doc[1]/doc[@name='lonely']/doc[@name='lonelyGrandChild']/str[@name='id']='3'");
+  }
+
+  @Test
+  public void testNestedChildrenRetainedWithChildFilterAndFlOmissionJSON() throws Exception {
+    indexSampleData(numberOfDocsPerNestedTest);
+    // SOLR-14678: with a child filter, matched grandchildren and their ancestors
+    // are kept, and the nested path fields survive an fl that omits them.
+    assertJQ(
+        req(
+            "q",
+            "type_s:donut",
+            "sort",
+            "id asc",
+            "fl",
+            "id,[child childFilter='name_s:cocoa']",
+            "fq",
+            fqToExcludeNonTestedDocs),
+        "/response/docs/[0]/toppings/[0]/ingredients/[0]/id=='5'",
+        "/response/docs/[0]/toppings/[1]/ingredients/[0]/id=='7'",
+        "/response/docs/[0]/toppings/[1]/ingredients/[1]/id=='8'",
+        "!/response/docs/[0]/lonely/id=='2'");
+  }
+
+  @Test
+  public void testNestedChildrenRetainedWithAliasAndFlOmissionJSON() throws Exception {
+    indexSampleData(numberOfDocsPerNestedTest);
+    // SOLR-14678: the alias form fake:[child] must retain nested named children too.
+    assertJQ(
+        req(
+            "q",
+            "type_s:donut",
+            "sort",
+            "id asc",
+            "fl",
+            "id,fake:[child]",
+            "fq",
+            fqToExcludeNonTestedDocs),
+        "/response/docs/[0]/toppings/[0]/ingredients/[0]/id=='5'",
+        "/response/docs/[0]/toppings/[1]/ingredients/[1]/id=='8'",
+        "/response/docs/[0]/lonely/lonelyGrandChild/id=='3'");
+  }
+
+  @Test
   public void testParentFilterLimitJSON() throws Exception {
     indexSampleData(numberOfDocsPerNestedTest);
 
