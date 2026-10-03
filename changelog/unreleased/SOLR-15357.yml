@@ -1,0 +1,7 @@
+title: The sub-fields of CurrencyFieldType, PointType and BBoxField copyField destinations are now recorded as copyField targets, so real-time get no longer returns them in documents
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15357
+    url: https://issues.apache.org/jira/browse/SOLR-15357

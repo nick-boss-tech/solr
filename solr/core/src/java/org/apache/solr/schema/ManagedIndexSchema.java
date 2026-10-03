@@ -1033,8 +1033,8 @@ public final class ManagedIndexSchema extends IndexSchema {
     } else {
       copyFieldTargetCounts.put(dest, count - 1);
     }
-    // SOLR-15357: sub-fields were recorded as targets alongside dest; keep them in sync.
-    for (SchemaField subField : dest.getType().getSubFields(dest, this)) {
+    // sub-fields were recorded as targets alongside dest; keep them in sync
+    for (SchemaField subField : getSubFields(dest)) {
       Integer subCount = copyFieldTargetCounts.get(subField);
       if (subCount != null) {
         if (subCount <= 1) {
