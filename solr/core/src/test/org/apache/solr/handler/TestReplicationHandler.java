@@ -31,6 +31,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -40,6 +41,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexCommit;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -195,6 +197,153 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
       log.info("Waited for {}ms and found {} docs", timeSlept, numFound(res));
     }
     return res;
+  }
+
+  private SolrCore followerCore() {
+    return followerJetty.getCoreContainer().getCore(DEFAULT_TEST_CORENAME);
+  }
+
+  private static Set<String> listFileNames(Path dir) throws IOException {
+    Set<String> names = new HashSet<>();
+    if (Files.isDirectory(dir)) {
+      try (Stream<Path> stream = Files.list(dir)) {
+        stream.forEach(f -> names.add(f.getFileName().toString()));
+      }
+    }
+    return names;
+  }
+
+  /**
+   * SOLR-15003: after a forced full copy, the old index directory must be removed when no named
+   * snapshot references it.
+   */
+  @Test
+  public void testFullCopyRemovesOldIndexDirWhenNoSnapshot() throws Exception {
+    clearIndexWithReplication();
+    for (int i = 0; i < 3; i++) index(leaderClient, "id", i, "name", "name = " + i);
+    leaderClient.commit();
+    invokeReplicationCommand(
+        buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
+    assertEquals(3, numFound(rQuery(3, "*:*", followerClient)));
+
+    final Path oldIndexDir;
+    try (SolrCore core = followerCore()) {
+      oldIndexDir = Path.of(core.getIndexDir());
+    }
+    assertTrue(Files.isDirectory(oldIndexDir));
+
+    // Diverge the follower so its generation passes the leader's, then add a doc
+    // to the leader. The next fetch must be a full copy into a new directory.
+    index(followerClient, "id", 900, "name", "follower only");
+    followerClient.commit(true, true);
+    index(followerClient, "id", 901, "name", "follower only 2");
+    followerClient.commit(true, true);
+    index(leaderClient, "id", 3, "name", "name = 3");
+    leaderClient.commit();
+
+    invokeReplicationCommand(
+        buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
+    assertEquals(4, numFound(rQuery(4, "*:*", followerClient)));
+    assertEquals(0, numFound(rQuery(0, "id:900", followerClient)));
+
+    try (SolrCore core = followerCore()) {
+      assertFalse(
+          "full copy must switch the follower to a new index directory",
+          oldIndexDir.toString().equals(core.getIndexDir()));
+    }
+    assertFalse(
+        "old index directory should be removed when no snapshot references it: " + oldIndexDir,
+        Files.exists(oldIndexDir));
+  }
+
+  /**
+   * SOLR-15003: a named snapshot taken on the follower must keep exactly its own files in the old
+   * index directory across a forced full copy; deleting the snapshot afterwards removes the rest.
+   */
+  @Test
+  public void testFullCopyKeepsSnapshotFilesInOldIndexDir() throws Exception {
+    clearIndexWithReplication();
+    for (int i = 0; i < 3; i++) index(leaderClient, "id", i, "name", "name = " + i);
+    leaderClient.commit();
+    invokeReplicationCommand(
+        buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
+    assertEquals(3, numFound(rQuery(3, "*:*", followerClient)));
+
+    final Path oldIndexDir;
+    final Set<String> snapshotFiles = new HashSet<>();
+    try (SolrCore core = followerCore()) {
+      oldIndexDir = Path.of(core.getIndexDir());
+      IndexCommit commit = core.getDeletionPolicy().getAndSaveLatestCommit();
+      try {
+        snapshotFiles.addAll(commit.getFileNames());
+        core.getSnapshotMetaDataManager()
+            .snapshot("snap15003", core.getIndexDir(), commit.getGeneration());
+      } finally {
+        core.getDeletionPolicy().releaseCommitPoint(commit);
+      }
+    }
+
+    // Diverge the follower (new segments that no snapshot pins), then move the leader on.
+    index(followerClient, "id", 900, "name", "follower only");
+    followerClient.commit(true, true);
+    index(followerClient, "id", 901, "name", "follower only 2");
+    followerClient.commit(true, true);
+    index(leaderClient, "id", 3, "name", "name = 3");
+    leaderClient.commit();
+
+    Set<String> divergedFiles = listFileNames(oldIndexDir);
+    // The cleanup deletes the non-snapshot commit points in the old directory.
+    // Their segments files must go; the snapshot's own segments file must stay.
+    Set<String> unpinnedCommitFiles = new HashSet<>();
+    for (String fileName : divergedFiles) {
+      if (fileName.startsWith("segments_") && !snapshotFiles.contains(fileName)) {
+        unpinnedCommitFiles.add(fileName);
+      }
+    }
+    assertFalse("divergence should add unpinned commit files", unpinnedCommitFiles.isEmpty());
+
+    invokeReplicationCommand(
+        buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
+    assertEquals(4, numFound(rQuery(4, "*:*", followerClient)));
+
+    assertTrue(
+        "old index directory must be retained while a snapshot references it",
+        Files.isDirectory(oldIndexDir));
+    for (String fileName : snapshotFiles) {
+      assertTrue(
+          "snapshot file should survive the full copy: " + fileName,
+          Files.exists(oldIndexDir.resolve(fileName)));
+    }
+    for (String fileName : unpinnedCommitFiles) {
+      assertFalse(
+          "unpinned commit file should be removed by the full-copy cleanup: " + fileName,
+          Files.exists(oldIndexDir.resolve(fileName)));
+    }
+
+    try (SolrCore core = followerCore()) {
+      assertEquals(
+          1, core.getSnapshotMetaDataManager().listSnapshotsInIndexDir(oldIndexDir.toString()).size());
+      core.deleteNamedSnapshot("snap15003");
+      assertTrue(core.getSnapshotMetaDataManager().listSnapshots().isEmpty());
+    }
+    // Note: DirectoryFactory.remove marks the old directory delete-on-close,
+    // so its physical removal completes when the core closes; the fetch-path
+    // removal with no snapshot is covered by
+    // testFullCopyRemovesOldIndexDirWhenNoSnapshot.
+  }
+
+  /**
+   * SOLR-15003: deleting a snapshot whose recorded index directory no longer exists must not
+   * fail; the metadata entry is removed and there are no files left to clean up.
+   */
+  @Test
+  public void testDeleteNamedSnapshotWithMissingIndexDir() throws Exception {
+    try (SolrCore core = followerCore()) {
+      String missingDir = core.getDataDir() + "index.never-existed/";
+      core.getSnapshotMetaDataManager().snapshot("stale15003", missingDir, 1L);
+      core.deleteNamedSnapshot("stale15003");
+      assertTrue(core.getSnapshotMetaDataManager().listSnapshots().isEmpty());
+    }
   }
 
   private long numFound(NamedList<Object> res) {
