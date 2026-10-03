@@ -43,6 +43,7 @@ import org.apache.solr.api.JerseyResource;
 import org.apache.solr.cloud.CloudDescriptor;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
+import org.apache.solr.common.cloud.ZkStateReader;
 import org.apache.solr.common.params.CommonAdminParams;
 import org.apache.solr.common.params.CoreAdminParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
@@ -246,6 +247,7 @@ public class CoreAdminHandler extends RequestHandlerBase implements PermissionNa
           Map.entry(CoreAdminParams.SHARD, CoreDescriptor.CORE_SHARD),
           Map.entry(CoreAdminParams.COLLECTION, CoreDescriptor.CORE_COLLECTION),
           Map.entry(CoreAdminParams.CORE_NODE_NAME, CoreDescriptor.CORE_NODE_NAME),
+          Map.entry(ZkStateReader.NUM_SHARDS_PROP, ZkStateReader.NUM_SHARDS_PROP),
           Map.entry(CoreAdminParams.REPLICA_TYPE, CloudDescriptor.REPLICA_TYPE));
 
   private static Map<String, CoreAdminOp> initializeOpMap() {
