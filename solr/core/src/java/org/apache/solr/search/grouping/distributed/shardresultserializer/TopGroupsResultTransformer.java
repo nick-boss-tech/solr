@@ -27,14 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.StoredField;
 import org.apache.lucene.index.IndexableField;
-import org.apache.lucene.index.LeafReader;
-import org.apache.lucene.index.LeafReaderContext;
-import org.apache.lucene.index.NumericDocValues;
-import org.apache.lucene.index.SortedDocValues;
-import org.apache.lucene.index.SortedSetDocValues;
 import org.apache.lucene.search.FieldDoc;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.Sort;
@@ -45,14 +38,16 @@ import org.apache.lucene.search.grouping.GroupDocs;
 import org.apache.lucene.search.grouping.TopGroups;
 import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.CharsRefBuilder;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.handler.component.ResponseBuilder;
 import org.apache.solr.handler.component.ShardDoc;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.SchemaField;
+import org.apache.solr.search.DocValuesIteratorCache;
 import org.apache.solr.search.SolrDocumentFetcher;
-import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.search.grouping.Command;
 import org.apache.solr.search.grouping.distributed.command.QueryCommand;
 import org.apache.solr.search.grouping.distributed.command.QueryCommandResult;
@@ -236,6 +231,7 @@ public class TopGroupsResultTransformer
 
     final IndexSchema schema = rb.req.getSearcher().getSchema();
     SchemaField uniqueField = schema.getUniqueKeyField();
+    final DocValuesIteratorCache docValuesCache = new DocValuesIteratorCache(rb.req.getSearcher());
     for (GroupDocs<BytesRef> searchGroup : data.groups) {
       NamedList<Object> groupResult = new NamedList<>();
       assert searchGroup.totalHits().relation() == TotalHits.Relation.EQUAL_TO;
@@ -250,8 +246,10 @@ public class TopGroupsResultTransformer
         NamedList<Object> document = new NamedList<>();
         documents.add(document);
 
-        Document doc = retrieveDocument(uniqueField, searchGroup.scoreDocs()[i].doc, docFetcher, rb.req.getSearcher());
-        document.add(ID, uniqueField.getType().toExternal(doc.getField(uniqueField.getName())));
+        document.add(
+            ID,
+            retrieveUniqueKey(
+                uniqueField, searchGroup.scoreDocs()[i].doc, docFetcher, docValuesCache));
         if (!Float.isNaN(searchGroup.scoreDocs()[i].score)) {
           document.add("score", searchGroup.scoreDocs()[i].score);
         }
@@ -308,12 +306,12 @@ public class TopGroupsResultTransformer
     SolrDocumentFetcher docFetcher = rb.req.getSearcher().getDocFetcher();
     final IndexSchema schema = rb.req.getSearcher().getSchema();
     SchemaField uniqueField = schema.getUniqueKeyField();
+    final DocValuesIteratorCache docValuesCache = new DocValuesIteratorCache(rb.req.getSearcher());
     for (ScoreDoc scoreDoc : result.getTopDocs().scoreDocs) {
       NamedList<Object> document = new NamedList<>();
       documents.add(document);
 
-      Document doc = retrieveDocument(uniqueField, scoreDoc.doc, docFetcher, rb.req.getSearcher());
-      document.add(ID, uniqueField.getType().toExternal(doc.getField(uniqueField.getName())));
+      document.add(ID, retrieveUniqueKey(uniqueField, scoreDoc.doc, docFetcher, docValuesCache));
       if (!Float.isNaN(scoreDoc.score)) {
         document.add("score", scoreDoc.score);
       }
@@ -337,62 +335,33 @@ public class TopGroupsResultTransformer
     return queryResult;
   }
 
-  private Document retrieveDocument(
+  /**
+   * Returns the external form of the unique key of a document, read from its stored value or, when
+   * the unique key is not stored, from its docValues. The fetched document may be a shared document
+   * cache entry, so it is never modified.
+   */
+  private String retrieveUniqueKey(
       final SchemaField uniqueField,
       int doc,
       SolrDocumentFetcher docFetcher,
-      SolrIndexSearcher searcher)
+      DocValuesIteratorCache docValuesCache)
       throws IOException {
-    Document luceneDoc = docFetcher.doc(doc, Set.of(uniqueField.getName()));
-    if (luceneDoc.getField(uniqueField.getName()) == null) {
-      // The unique key field is not stored; fall back to its docValues value (if any) so that
-      // serializing the group documents doesn't fail on a null field.
-      IndexableField docValuesField = readDocValuesField(uniqueField, doc, searcher);
-      if (docValuesField != null) {
-        luceneDoc.add(docValuesField);
-      }
+    final String fieldName = uniqueField.getName();
+    final IndexableField stored = docFetcher.doc(doc, Set.of(fieldName)).getField(fieldName);
+    if (stored != null) {
+      return uniqueField.getType().toExternal(stored);
     }
-    return luceneDoc;
-  }
-
-  /**
-   * Reads a single field value from docValues for the given top-level doc id, wrapped as an
-   * {@link IndexableField} suitable for {@link FieldType#toExternal(IndexableField)}. Returns null
-   * when the field has no docValues or the doc has no value.
-   */
-  private static IndexableField readDocValuesField(
-      SchemaField uniqueField, int docId, SolrIndexSearcher searcher) throws IOException {
-    String fieldName = uniqueField.getName();
-    for (LeafReaderContext leaf : searcher.getIndexReader().leaves()) {
-      if (docId < leaf.docBase || docId >= leaf.docBase + leaf.reader().maxDoc()) {
-        continue;
-      }
-      int leafDoc = docId - leaf.docBase;
-      LeafReader leafReader = leaf.reader();
-      SortedDocValues sorted = leafReader.getSortedDocValues(fieldName);
-      if (sorted != null) {
-        return sorted.advanceExact(leafDoc)
-            ? new StoredField(fieldName, BytesRef.deepCopyOf(sorted.binaryValue()))
-            : null;
-      }
-      SortedSetDocValues sortedSet = leafReader.getSortedSetDocValues(fieldName);
-      if (sortedSet != null) {
-        if (sortedSet.advanceExact(leafDoc)) {
-          long ord = sortedSet.nextOrd();
-          return ord != SortedSetDocValues.NO_MORE_ORDS
-              ? new StoredField(fieldName, BytesRef.deepCopyOf(sortedSet.lookupOrd(ord)))
-              : null;
-        }
-        return null;
-      }
-      NumericDocValues numeric = leafReader.getNumericDocValues(fieldName);
-      if (numeric != null) {
-        return numeric.advanceExact(leafDoc)
-            ? new StoredField(fieldName, numeric.longValue())
-            : null;
-      }
-      return null;
+    final SolrDocument docValuesDoc = new SolrDocument();
+    docFetcher.decorateDocValueFields(docValuesDoc, doc, Set.of(fieldName), docValuesCache);
+    final Object value = docValuesDoc.getFieldValue(fieldName);
+    if (value == null) {
+      throw new SolrException(
+          SolrException.ErrorCode.SERVER_ERROR,
+          "The unique key field '"
+              + fieldName
+              + "' has neither a stored value nor docValues for document "
+              + doc);
     }
-    return null;
+    return value.toString();
   }
 }
