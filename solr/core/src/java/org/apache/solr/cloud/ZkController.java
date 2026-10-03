@@ -878,15 +878,14 @@ public class ZkController implements Closeable {
     ExecutorService customThreadPool =
         ExecutorUtil.newMDCAwareCachedThreadPool(new SolrNamedThreadFactory("closeThreadPool"));
 
-    // Close the overseer before releasing the election node: the overseer close drains
-    // in-flight queue tasks, while releasing the election node lets a new overseer be elected
-    // immediately. Doing these in parallel (or in reverse) lets one command be processed twice
-    // (SOLR-16013).
-    customThreadPool.execute(
-        () -> {
-          IOUtils.closeQuietly(overseer);
-          IOUtils.closeQuietly(overseerElector.getContext());
-        });
+    // The overseer threads must be stopped before the ZooKeeper session ends: that releases the
+    // ephemeral leader node and lets another node start an overseer that processes the same queues.
+    Future<?> overseerClosed =
+        customThreadPool.submit(
+            () -> {
+              IOUtils.closeQuietly(overseerElector.getContext());
+              IOUtils.closeQuietly(overseer);
+            });
 
     try {
       customThreadPool.execute(
@@ -906,6 +905,13 @@ public class ZkController implements Closeable {
       customThreadPool.execute(() -> IOUtils.closeQuietly(internalSolrClientCache));
 
       try {
+        try {
+          overseerClosed.get();
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+          log.error("Error closing overseer", e);
+        }
         try {
           zkStateReader.close();
         } catch (Exception e) {
