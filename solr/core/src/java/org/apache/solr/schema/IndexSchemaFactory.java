@@ -146,11 +146,8 @@ public abstract class IndexSchemaFactory implements NamedListInitializedPlugin {
               ? ((ZkSolrResourceLoader.ZkByteArrayInputStream) is).getStat()
               : null;
       int version = stat == null ? 0 : stat.getVersion();
-      // czxid identifies the znode incarnation: after delete+recreate the data version can be 0
-      // again, but czxid always increases, so the cache below can tell the new znode apart from
-      // the deleted one (SOLR-15674).
-      long czxid = stat == null ? -1 : stat.getCzxid();
-      return new VersionedConfig(version, czxid, node);
+      long mzxid = stat == null ? -1 : stat.getMzxid();
+      return new VersionedConfig(version, mzxid, node);
     } catch (Exception e) {
       throw new SolrException(ErrorCode.SERVER_ERROR, "Error fetching schema", e);
     }
@@ -185,13 +182,9 @@ public abstract class IndexSchemaFactory implements NamedListInitializedPlugin {
       if (res == null) return cfgLoader.get();
       VersionedConfig result = null;
       result = confCache.computeIfAbsent(res.first(), k -> cfgLoader.get());
-      Stat stat = res.second();
-      // A deleted-then-recreated znode can have the same data version again (e.g. 0), so the
-      // version alone cannot prove freshness; the czxid always increases across recreates and
-      // tells the new znode apart from the deleted one (SOLR-15674). A czxid of -1 means the
-      // cached entry predates czxid tracking, so fall back to the version-only check.
-      boolean sameZnode = result.czxid == -1 || result.czxid == stat.getCzxid();
-      if (result.version == stat.getVersion() && sameZnode) {
+      // mzxid changes on every data change and is never reused, unlike the data version, which
+      // starts over when the znode is deleted and created again
+      if (result.mzxid == res.second().getMzxid()) {
         return result;
       } else {
         confCache.remove(res.first());
@@ -214,16 +207,12 @@ public abstract class IndexSchemaFactory implements NamedListInitializedPlugin {
 
   public static class VersionedConfig {
     public final int version;
-    public final long czxid;
+    public final long mzxid;
     public final ConfigNode data;
 
-    public VersionedConfig(int version, ConfigNode data) {
-      this(version, -1, data);
-    }
-
-    public VersionedConfig(int version, long czxid, ConfigNode data) {
+    public VersionedConfig(int version, long mzxid, ConfigNode data) {
       this.version = version;
-      this.czxid = czxid;
+      this.mzxid = mzxid;
       this.data = data;
     }
   }
