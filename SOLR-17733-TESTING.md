@@ -4,6 +4,28 @@
 (no compile, no tests). A reviewer must compile and test before this goes
 anywhere near a PR.
 
+## Round 4 review changes
+
+See `research/branch-reviews/round-4/SOLR-17733-review.md`.
+
+- `delete()` now calls a private `deleteZKFileEntryIfPresent(path)`: it checks
+  `exists` first, so callers that already removed the entry (package manager
+  uninstall, the existing `TestDistribFileStore` flow) no longer hit
+  `NoNodeException` and an ERROR stack trace from `deleteZKFileEntry`. The
+  shared helper itself is unchanged. The ZK path is `/packagestore` (not
+  `/packageStore`).
+- `TestDistribFileStore#testFileStoreManagement` gets a final step (not
+  compiled or run): a local-only delete (`?localDelete=true`) of a ZK-registered
+  file still returns 400, then a cluster DELETE with no explicit ZK delete
+  returns 200, removes the ZK entry and the file on all nodes. It assumes the
+  `localDelete` query parameter name and that the guard's BAD_REQUEST reaches
+  the client as 400.
+- Added `changelog/unreleased/SOLR-17733.yml`.
+- Not changed (needs a decision): whether the API delete should remove the ZK
+  entry at all (the old guard and `PackageManager` treat that as a separate
+  caller step), and the partial-failure ordering (the entry is removed before
+  any file is, and the node fan-out is asynchronous).
+
 ## What the patch does
 
 `DELETE /cluster/filestore/files/{file}` 500ed in cloud mode whenever the

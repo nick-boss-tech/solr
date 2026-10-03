@@ -486,10 +486,7 @@ public class DistribFileStore implements FileStore {
 
   @Override
   public void delete(String path) {
-    // Remove the ZK entry first: deleteLocal() refuses to delete files that exist in ZK, which is
-    // the normal state for a cluster file. Deleting the shared ZK entry up front lets the guard
-    // pass here and on every node in the fan-out below.
-    deleteZKFileEntry(coreContainer.getZkController().getZkClient(), path);
+    deleteZKFileEntryIfPresent(path);
     deleteLocal(path);
     List<String> nodes = FileStoreUtils.fetchAndShuffleRemoteLiveNodes(coreContainer);
 
@@ -511,6 +508,24 @@ public class DistribFileStore implements FileStore {
             "Failed to delete " + path + " on node " + node,
             e);
       }
+    }
+  }
+
+  /**
+   * Removes the shared ZooKeeper entry of a file, so that {@link #deleteLocal(String)} no longer
+   * refuses to delete it here and on the other nodes. Callers that already removed the entry, such
+   * as the package manager, leave nothing to do.
+   */
+  private void deleteZKFileEntryIfPresent(String path) {
+    final SolrZkClient zkClient = coreContainer.getZkController().getZkClient();
+    try {
+      if (zkClient.exists(ZK_PACKAGESTORE + path)) {
+        deleteZKFileEntry(zkClient, path);
+      }
+    } catch (KeeperException e) {
+      log.error("Could not check the ZK entry of {}", path, e);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
     }
   }
 

@@ -197,6 +197,26 @@ public class TestDistribFileStore extends SolrCloudTestCase {
 
       expected = Collections.singletonMap(":files:/package/mypkg/v1.0/runtimelibs.jar", null);
       checkAllNodesForFile(cluster, "/package/mypkg/v1.0/runtimelibs.jar", expected, false);
+
+      // A cluster delete through the API alone removes the file and its ZK entry
+      final String v2File = "/package/mypkg/v1.0/runtimelibs_v2.jar";
+      final String v2Url = j.getBaseURLV2() + "/cluster/filestore/files" + v2File;
+      assertTrue(cluster.getZkClient().exists(DistribFileStore.ZK_PACKAGESTORE + v2File));
+
+      // while a local-only delete still refuses a file that is registered in ZK
+      var localResp =
+          j.getSolrClient()
+              .getHttpClient()
+              .newRequest(v2Url + "?localDelete=true")
+              .method("DELETE")
+              .send();
+      assertEquals(400, localResp.getStatus());
+
+      resp = j.getSolrClient().getHttpClient().newRequest(v2Url).method("DELETE").send();
+      assertEquals(200, resp.getStatus());
+      assertFalse(cluster.getZkClient().exists(DistribFileStore.ZK_PACKAGESTORE + v2File));
+      expected = Collections.singletonMap(":files:" + v2File, null);
+      checkAllNodesForFile(cluster, v2File, expected, false);
     } finally {
       cluster.shutdown();
     }
