@@ -16,25 +16,50 @@
  */
 package org.apache.solr.schema;
 
+import org.apache.solr.SolrTestCase;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.request.SolrQuery;
+import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.util.EmbeddedSolrServerTestRule;
 import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import org.junit.Test;
 
 /** Spatial prefix-tree fields that are stored but not indexed must load and round-trip values. */
-public class NonIndexedSpatialFieldTest extends SolrTestCaseJ4 {
+public class NonIndexedSpatialFieldTest extends SolrTestCase {
+
+  @ClassRule
+  public static final EmbeddedSolrServerTestRule solrTestRule = new EmbeddedSolrServerTestRule();
 
   @BeforeClass
   public static void beforeClass() throws Exception {
-    initCore("solrconfig-minimal.xml", "schema-nonindexed-spatial.xml");
+    SolrTestCaseJ4.newRandomConfig();
+    solrTestRule.startSolr(SolrTestCaseJ4.TEST_HOME());
+    solrTestRule
+        .newCollection()
+        .withConfigSet(SolrTestCaseJ4.TEST_COLL1_CONF())
+        .withConfigFile("solrconfig-minimal.xml")
+        .withSchemaFile("schema-nonindexed-spatial.xml")
+        .create();
   }
 
-  public void testStoredOnlyFieldsRoundTrip() {
-    assertU(adoc("id", "1", "daterange_stored", "[2000 TO 2014-05-21]", "srpt_stored", "25,82"));
-    assertU(commit());
+  @Test
+  public void testStoredOnlyFieldsRoundTrip() throws Exception {
+    SolrClient client = solrTestRule.getSolrClient();
+    SolrInputDocument doc = new SolrInputDocument();
+    doc.addField("id", "1");
+    doc.addField("daterange_stored", "[2000 TO 2014-05-21]");
+    doc.addField("srpt_stored", "25,82");
+    client.add(doc);
+    client.commit();
 
-    assertQ(
-        req("q", "id:1", "fl", "daterange_stored,srpt_stored"),
-        "//result[@numFound='1']",
-        "//result/doc/*[@name='daterange_stored']",
-        "//result/doc/*[@name='srpt_stored']");
+    SolrQuery query = new SolrQuery("id:1");
+    query.setFields("daterange_stored", "srpt_stored");
+    SolrDocumentList results = client.query(query).getResults();
+    assertEquals(1, results.getNumFound());
+    assertNotNull(results.get(0).getFieldValue("daterange_stored"));
+    assertNotNull(results.get(0).getFieldValue("srpt_stored"));
   }
 }
