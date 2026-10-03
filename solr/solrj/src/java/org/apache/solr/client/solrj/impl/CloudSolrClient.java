@@ -723,9 +723,7 @@ public abstract class CloudSolrClient extends SolrClient {
       final boolean mayReplayAfterRouteException503 =
           !isRouteException503 || request.getRequestType() != SolrRequestType.UPDATE;
 
-      if (mayReplay
-          && mayReplayAfterRouteException503
-          && (wasCommError || isRouteException503)) { // 503 service unavailable
+      if (wasCommError || isRouteException503) { // 503 service unavailable
         // TODO there are other reasons for 404. We need to change the solr response format from
         // HTML
         // to structured data to know that
@@ -753,7 +751,10 @@ public abstract class CloudSolrClient extends SolrClient {
             }
           }
         }
-        if (retryCount < MAX_STALE_RETRIES) { // if it is a communication error , we must try again
+        // The state is refreshed above even when this request may not be replayed, so that the
+        // caller's next attempt does not route to the same node.
+        if (mayReplay && mayReplayAfterRouteException503 && retryCount < MAX_STALE_RETRIES) {
+          // if it is a communication error, we must try again
           // may be, we have a stale version of the collection state,
           // and we could not get any information from the server
           // it is probably not worth trying again and again because

@@ -355,6 +355,33 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     }
   }
 
+  public void testNonRetriableRequestStillMarksStateStaleOnCommError() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
+    AtomicInteger refGets = new AtomicInteger();
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(collName, new TestCollectionRef(currentDoc::get, refGets, null, null, -1));
+    try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
+        RecordingCloudSolrClient client =
+            new RecordingCloudSolrClient(provider, true, true, true, 3)) {
+      when(client.getHttpClient().wasCommError(any())).thenReturn(true);
+      client.enqueue(
+          (req, cols) -> {
+            throw new SolrServerException(
+                "connection reset", new SocketException("Connection reset"));
+          });
+
+      DummyUpdateRequest request = new DummyUpdateRequest(collName);
+      expectThrows(Exception.class, () -> client.request(request, collName));
+
+      // The request is not replayed, but the cached state must still be flagged so that the
+      // caller's next attempt does not route to the same node.
+      assertEquals(1, client.getStateVersionHistory().size());
+      assertTrue(client.collectionStateCache.peek(collName).maybeStale);
+    }
+  }
+
   public void testStaleStateRetryWaitsAfterSkipFailure() throws Exception {
     String collName = "gettingstarted";
     AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
