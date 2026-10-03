@@ -1,0 +1,7 @@
+title: A config API change no longer fails with "the property overlay to be of version N" when a replica was deleted or became inactive while the request waited for all replicas to pick up the new version
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17363
+    url: https://issues.apache.org/jira/browse/SOLR-17363

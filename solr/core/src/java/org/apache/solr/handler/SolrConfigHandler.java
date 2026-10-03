@@ -887,8 +887,7 @@ public class SolrConfigHandler extends RequestHandlerBase
           parallelExecutor.invokeAll(concurrentTasks, maxWaitSecs, TimeUnit.SECONDS);
 
       // determine whether all replicas have the update
-      List<String> failedList = null; // lazily init'd
-      Set<String> currentActiveCoreUrls = null; // lazily init'd; fresh read, see below
+      List<String> failedCoreUrls = null; // lazily init'd
       for (int f = 0; f < results.size(); f++) {
         Boolean success = false;
         Future<Boolean> next = results.get(f);
@@ -902,40 +901,40 @@ public class SolrConfigHandler extends RequestHandlerBase
         }
 
         if (!success) {
-          String coreUrl = concurrentTasks.get(f).replica.getCoreUrl();
-          // A replica deleted (or otherwise gone from the active set) while we waited can never
-          // report the new version; don't fail the whole request for it.
-          if (currentActiveCoreUrls == null) {
-            currentActiveCoreUrls = new HashSet<>();
-            for (Replica r : getActiveReplicas(zkController, collection)) {
-              currentActiveCoreUrls.add(r.getCoreUrl());
-            }
-          }
-          if (!currentActiveCoreUrls.contains(coreUrl)) {
+          if (failedCoreUrls == null) failedCoreUrls = new ArrayList<>();
+          failedCoreUrls.add(concurrentTasks.get(f).replica.getCoreUrl());
+        }
+      }
+
+      if (failedCoreUrls != null) {
+        // read the cluster state again: a replica that is no longer active can't report the version
+        List<String> failedList =
+            failedCoresStillActive(failedCoreUrls, getActiveReplicas(zkController, collection));
+        for (String coreUrl : failedCoreUrls) {
+          if (failedList.contains(coreUrl)) {
+            log.warn("Core {} could not get the expected version {}", coreUrl, expectedVersion);
+          } else {
             log.info(
                 "Core {} is no longer an active replica of collection {}; not requiring the property version from it",
                 coreUrl,
                 collection);
-            continue;
           }
-          log.warn("Core {} could not get the expected version {}", coreUrl, expectedVersion);
-          if (failedList == null) failedList = new ArrayList<>();
-          failedList.add(coreUrl);
         }
-      }
 
-      // if any tasks haven't completed within the specified timeout, it's an error
-      if (failedList != null)
-        throw new SolrException(
-            SolrException.ErrorCode.SERVER_ERROR,
-            formatString(
-                "{0} out of {1} the property {2} to be of version {3} within {4} seconds! Failed cores: {5}",
-                failedList.size(),
-                concurrentTasks.size() + 1,
-                prop,
-                expectedVersion,
-                maxWaitSecs,
-                failedList));
+        // if any tasks that are still active haven't completed within the specified timeout, it's
+        // an error
+        if (!failedList.isEmpty())
+          throw new SolrException(
+              SolrException.ErrorCode.SERVER_ERROR,
+              formatString(
+                  "{0} out of {1} the property {2} to be of version {3} within {4} seconds! Failed cores: {5}",
+                  failedList.size(),
+                  concurrentTasks.size() + 1,
+                  prop,
+                  expectedVersion,
+                  maxWaitSecs,
+                  failedList));
+      }
 
     } catch (InterruptedException ie) {
       log.warn(
@@ -955,6 +954,26 @@ public class SolrConfigHandler extends RequestHandlerBase
           expectedVersion,
           collection);
     }
+  }
+
+  /**
+   * Returns the cores among {@code failedCoreUrls} that are still active replicas. A failed core
+   * that is no longer active, for example because its replica was deleted while waiting, can never
+   * report the new version and must not fail the request.
+   */
+  static List<String> failedCoresStillActive(
+      List<String> failedCoreUrls, Collection<Replica> activeReplicas) {
+    Set<String> activeCoreUrls = new HashSet<>();
+    for (Replica replica : activeReplicas) {
+      activeCoreUrls.add(replica.getCoreUrl());
+    }
+    List<String> stillActive = new ArrayList<>();
+    for (String coreUrl : failedCoreUrls) {
+      if (activeCoreUrls.contains(coreUrl)) {
+        stillActive.add(coreUrl);
+      }
+    }
+    return stillActive;
   }
 
   public static List<Replica> getActiveReplicas(ZkController zkController, String collection) {
