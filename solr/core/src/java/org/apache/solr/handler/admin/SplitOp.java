@@ -29,10 +29,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+import org.apache.lucene.index.LeafReader;
+import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.index.MultiTerms;
 import org.apache.lucene.index.Terms;
 import org.apache.lucene.index.TermsEnum;
+import org.apache.lucene.queries.function.FunctionValues;
+import org.apache.lucene.util.Bits;
 import org.apache.lucene.util.BytesRef;
+import org.apache.lucene.util.CharsRefBuilder;
 import org.apache.lucene.util.StringHelper;
 import org.apache.solr.cloud.CloudDescriptor;
 import org.apache.solr.cloud.ZkShardTerms;
@@ -50,6 +55,7 @@ import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrQueryRequestBase;
+import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.update.SolrIndexSplitter;
 import org.apache.solr.update.SplitIndexCommand;
@@ -277,25 +283,20 @@ class SplitOp implements CoreAdminHandler.CoreAdminOp {
         if (routerObj instanceof Map<?, ?> routerProps) {
           routeFieldName = (String) routerProps.get("field");
         }
-        // router.field explicitly configured: route values live in that field, not in id prefixes
-        boolean hasRouteField = routeFieldName != null;
         String uniqueKeyField = searcher.getSchema().getUniqueKeyField().getName();
-        if (routeFieldName == null) {
-          routeFieldName = uniqueKeyField;
-        }
 
-        Collection<RangeCount> counts = getHashHistogram(searcher, prefixField, router, collection);
-
-        if (counts.size() == 0) {
-          // How to determine if we should look at the id field to figure out the prefix buckets?
-          // There may legitimately be no indexed terms in id_prefix if no ids have a prefix yet.
-          // For now, avoid using splitByPrefix unless you are actually using prefixes.
-          // With router.field defined, hash the route field's own terms instead of id prefixes,
-          // so the split ranges reflect where the documents will actually land.
-          counts =
-              hasRouteField
-                  ? getHashHistogramFromRouteField(searcher, routeFieldName, router, collection)
-                  : getHashHistogramFromId(searcher, uniqueKeyField, router, collection);
+        Collection<RangeCount> counts;
+        if (routeFieldName != null) {
+          // documents are routed by router.field, so id prefixes say nothing about where they land
+          counts = getHashHistogramFromRouteField(searcher, routeFieldName, router);
+        } else {
+          counts = getHashHistogram(searcher, prefixField, router, collection);
+          if (counts.size() == 0) {
+            // How to determine if we should look at the id field to figure out the prefix buckets?
+            // There may legitimately be no indexed terms in id_prefix if no ids have a prefix yet.
+            // For now, avoid using splitByPrefix unless you are actually using prefixes.
+            counts = getHashHistogramFromId(searcher, uniqueKeyField, router, collection);
+          }
         }
 
         Collection<DocRouter.Range> splits = getSplits(counts, currentRange);
@@ -523,41 +524,57 @@ class SplitOp implements CoreAdminHandler.CoreAdminOp {
   }
 
   /**
-   * Returns a list of range counts sorted by the range lower bound, using the terms of the
-   * router.field. Each term is a complete route value and is hashed directly (unlike {@link
-   * #getHashHistogramFromId}, which extracts route prefixes from id terms). This matches how
-   * SolrIndexSplitter hashes route-field terms when placing documents during the split.
+   * Returns a list of range counts sorted by the range lower bound, built from the values of the
+   * {@code router.field}. Each value is hashed with {@link CompositeIdRouter#sliceHash} exactly as
+   * {@link SolrIndexSplitter} does when placing documents, so a value containing the route
+   * separator maps to a single hash here too. Like the splitter, this reads the term dictionary
+   * through {@code indexedToReadable} and falls back to docValues when the field has no terms (for
+   * example a point field). Counts from the term dictionary include deleted documents that are not
+   * yet merged away.
    */
   static Collection<RangeCount> getHashHistogramFromRouteField(
-      SolrIndexSearcher searcher,
-      String routeFieldName,
-      CompositeIdRouter router,
-      DocCollection collection)
+      SolrIndexSearcher searcher, String routeFieldName, CompositeIdRouter router)
       throws IOException {
     TreeMap<DocRouter.Range, RangeCount> counts = new TreeMap<>();
+    SchemaField field = searcher.getSchema().getField(routeFieldName);
 
     Terms terms = MultiTerms.getTerms(searcher.getIndexReader(), routeFieldName);
-    if (terms == null) {
-      return counts.values();
-    }
-
-    TermsEnum termsEnum = terms.iterator();
-    for (; ; ) {
-      BytesRef term = termsEnum.next();
-      if (term == null) break;
-      DocRouter.Range range =
-          router.getSearchRangeSingle(term.utf8ToString(), null, collection);
-      // unlike unique ids, route values repeat across documents, so count them all
-      RangeCount rangeCount = new RangeCount(range, termsEnum.docFreq());
-
-      RangeCount prev = counts.put(rangeCount.range, rangeCount);
-      if (prev != null) {
-        // hash collision between two route values; merge the counts
-        rangeCount.count += prev.count;
+    if (terms != null) {
+      TermsEnum termsEnum = terms.iterator();
+      CharsRefBuilder readable = new CharsRefBuilder();
+      for (BytesRef term = termsEnum.next(); term != null; term = termsEnum.next()) {
+        field.getType().indexedToReadable(term, readable);
+        addRouteValue(counts, router, readable.toString(), termsEnum.docFreq());
+      }
+    } else if (field.hasDocValues()) {
+      for (LeafReaderContext leaf : searcher.getIndexReader().leaves()) {
+        LeafReader reader = leaf.reader();
+        Bits liveDocs = reader.getLiveDocs();
+        FunctionValues values =
+            field.getType().getValueSource(field, null).getValues(Map.of(), leaf);
+        for (int doc = 0; doc < reader.maxDoc(); doc++) {
+          if ((liveDocs == null || liveDocs.get(doc)) && values.exists(doc)) {
+            addRouteValue(counts, router, values.strVal(doc), 1);
+          }
+        }
       }
     }
 
     return counts.values();
+  }
+
+  private static void addRouteValue(
+      TreeMap<DocRouter.Range, RangeCount> counts,
+      CompositeIdRouter router,
+      String routeValue,
+      int docCount) {
+    int hash = router.sliceHash(routeValue, null, null, null);
+    RangeCount rangeCount = new RangeCount(new DocRouter.Range(hash, hash), docCount);
+    RangeCount prev = counts.put(rangeCount.range, rangeCount);
+    if (prev != null) {
+      // two route values with the same hash; merge the counts
+      rangeCount.count += prev.count;
+    }
   }
 
   /*

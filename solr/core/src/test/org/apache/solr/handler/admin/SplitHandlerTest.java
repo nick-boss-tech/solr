@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.cloud.api.collections.SplitByPrefixTest;
 import org.apache.solr.cloud.api.collections.SplitByPrefixTest.Prefix;
@@ -289,5 +291,57 @@ public class SplitHandlerTest extends SolrTestCaseJ4 {
       }
     }
     return true;
+  }
+
+  @Test
+  public void testRouteFieldHistogramMatchesSplitterHashing() throws Exception {
+    // terms, with a separator in one value
+    assertRouteFieldHistogram("tenant_s", "tenantA", "tenantB", "tenantB", "org!tenantC");
+    // indexed form (T/F) differs from the readable form (true/false) that the splitter hashes
+    assertRouteFieldHistogram("flag_b", "true", "false", "true", "true");
+    // no term dictionary for this field: counted from docValues
+    assertRouteFieldHistogram("tenant_sdN", "tenantA", "tenantB", "tenantB", "tenantD");
+    assertRouteFieldHistogram("tenant_ld", "17", "42", "42", "-5");
+  }
+
+  @Test
+  public void testRouteFieldHistogramIgnoresDocsWithoutValue() throws Exception {
+    assertU(adoc("id", "noroute_1"));
+    assertU(adoc("id", "noroute_2", "norouteA_s", "x"));
+    assertU(commit());
+    SolrQueryRequest req = req("q", "*:*");
+    try {
+      Collection<SplitOp.RangeCount> counts =
+          SplitOp.getHashHistogramFromRouteField(
+              req.getSearcher(), "norouteA_s", new CompositeIdRouter());
+      assertEquals(1, counts.size());
+      assertEquals(1, counts.iterator().next().count);
+    } finally {
+      req.close();
+    }
+  }
+
+  private void assertRouteFieldHistogram(String field, String... values) throws Exception {
+    CompositeIdRouter router = new CompositeIdRouter();
+    Map<Integer, Integer> expected = new TreeMap<>();
+    for (int i = 0; i < values.length; i++) {
+      assertU(adoc("id", field + "_doc" + i, field, values[i]));
+      expected.merge(router.sliceHash(values[i], null, null, null), 1, Integer::sum);
+    }
+    assertU(commit());
+
+    SolrQueryRequest req = req("q", "*:*");
+    try {
+      Map<Integer, Integer> actual = new TreeMap<>();
+      for (SplitOp.RangeCount rc :
+          SplitOp.getHashHistogramFromRouteField(req.getSearcher(), field, router)) {
+        // a route value hashes to one point, as it does when the splitter places documents
+        assertEquals(rc.range.min, rc.range.max);
+        actual.put(rc.range.min, rc.count);
+      }
+      assertEquals(field, expected, actual);
+    } finally {
+      req.close();
+    }
   }
 }
