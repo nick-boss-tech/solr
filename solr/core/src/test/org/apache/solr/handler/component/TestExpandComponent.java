@@ -760,7 +760,7 @@ public class TestExpandComponent extends SolrTestCaseJ4 {
             + "']/doc[2]/str[@name='id'][.='8']",
         "count(//*[@name='score' and .='NaN'])=0",
         "count(/response/lst[@name='expanded']/result[@maxScore='NaN'])=0",
-        "count(/response/lst[@name='expanded']/result[number(@maxScore)=number(doc[1]/*[@name='score'])])=2");
+        "count(/response/lst[@name='expanded']/result[doc/*[@name='score'] = @maxScore and not(doc/*[@name='score'] > @maxScore)])=2");
 
     // Test fl with score, sort by non-score
     assertQ(
@@ -786,7 +786,7 @@ public class TestExpandComponent extends SolrTestCaseJ4 {
         "count(/response/lst[@name='expanded']/result/doc[number(*/@name='score')!=number(*/@name='test_i')])=0",
         // maxScore is the highest score among the docs in the slice, whatever the sort
         "count(/response/lst[@name='expanded']/result[@maxScore='NaN'])=0",
-        "count(/response/lst[@name='expanded']/result[number(@maxScore)=number(doc[1]/*[@name='score'])])=2");
+        "count(/response/lst[@name='expanded']/result[doc/*[@name='score'] = @maxScore and not(doc/*[@name='score'] > @maxScore)])=2");
 
     // Test fl with score with multi-sort
     assertQ(
