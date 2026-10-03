@@ -664,7 +664,8 @@ public class SolrCore implements SolrInfoBean, Closeable {
                   "Following snapshots exist in the index directory {} : {}",
                   indexDirPath,
                   snapshots);
-              if (snapshots.isEmpty()) { // No snapshots remain in this directory. Can be cleaned up!
+              if (snapshots
+                  .isEmpty()) { // No snapshots remain in this directory. Can be cleaned up!
                 log.info(
                     "Removing index directory {} since all named snapshots are deleted.",
                     indexDirPath);

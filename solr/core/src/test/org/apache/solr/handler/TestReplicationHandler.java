@@ -31,8 +31,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
@@ -322,7 +322,8 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
 
     try (SolrCore core = followerCore()) {
       assertEquals(
-          1, core.getSnapshotMetaDataManager().listSnapshotsInIndexDir(oldIndexDir.toString()).size());
+          1,
+          core.getSnapshotMetaDataManager().listSnapshotsInIndexDir(oldIndexDir.toString()).size());
       core.deleteNamedSnapshot("snap15003");
       assertTrue(core.getSnapshotMetaDataManager().listSnapshots().isEmpty());
     }
@@ -333,8 +334,8 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
   }
 
   /**
-   * SOLR-15003: deleting a snapshot whose recorded index directory no longer exists must not
-   * fail; the metadata entry is removed and there are no files left to clean up.
+   * SOLR-15003: deleting a snapshot whose recorded index directory no longer exists must not fail;
+   * the metadata entry is removed and there are no files left to clean up.
    */
   @Test
   public void testDeleteNamedSnapshotWithMissingIndexDir() throws Exception {
