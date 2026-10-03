@@ -95,7 +95,10 @@ public abstract class PointField extends NumericFieldType {
   @Override
   public void checkSchemaField(final SchemaField field) {
     super.checkSchemaField(field);
-    if (!field.omitNorms()) {
+    // Only indexed fields can carry norms at all: SchemaField computation clears OMIT_NORMS
+    // for non-indexed (for example docValues-only) fields, so those report omitNorms()=false
+    // without anyone specifying it and must not be rejected.
+    if (field.indexed() && !field.omitNorms()) {
       final String message =
           String.format(
               Locale.ROOT,
