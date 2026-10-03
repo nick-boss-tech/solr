@@ -78,11 +78,8 @@ final class OverseerElectionContext extends ElectionContext {
 
   @Override
   public synchronized void close() {
-    // Close the overseer first so in-flight queue tasks drain before this context reports
-    // closed; otherwise a new overseer can be elected and process the same commands twice
-    // (SOLR-16013).
-    overseer.close();
     this.isClosed = true;
+    overseer.close();
   }
 
   @Override
