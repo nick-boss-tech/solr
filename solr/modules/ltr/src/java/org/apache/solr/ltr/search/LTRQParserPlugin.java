@@ -142,20 +142,20 @@ public class LTRQParserPlugin extends QParserPlugin
   }
 
   /**
-   * Returns the model store, resolving it from the core's RestManager when the
-   * managed-resource callback never fired (e.g. on stateless coordinator nodes,
-   * where registration is logged but onManagedResourceInitialized is not
-   * invoked). Replicates the callback's wiring so queries work instead of
-   * throwing NullPointerException.
+   * Returns the model store, resolving it from the core's RestManager when the managed-resource
+   * callback has not run. The stores are published only after they are wired and loaded. Throws
+   * NOT_FOUND when the core's RestManager holds no model store, which is the case for the synthetic
+   * core of a coordinator node.
    */
   private synchronized ManagedModelStore modelStore(SolrCore core) {
     if (mr == null) {
-      mr = ManagedModelStore.getManagedModelStore(core);
-      if (fr == null) {
-        fr = ManagedFeatureStore.getManagedFeatureStore(core);
-      }
-      mr.setManagedFeatureStore(fr);
-      mr.loadStoredModels();
+      final ManagedModelStore modelStore = ManagedModelStore.getManagedModelStore(core);
+      final ManagedFeatureStore featureStore =
+          fr != null ? fr : ManagedFeatureStore.getManagedFeatureStore(core);
+      modelStore.setManagedFeatureStore(featureStore);
+      modelStore.loadStoredModels();
+      fr = featureStore;
+      mr = modelStore;
     }
     return mr;
   }

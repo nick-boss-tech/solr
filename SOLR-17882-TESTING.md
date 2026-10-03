@@ -4,6 +4,20 @@
 Gradle (no compile, no tidy, no tests). A reviewer must compile and test
 before this goes anywhere near a PR.
 
+## Round 4 review outcome (read this first)
+
+See `research/branch-reviews/round-4/SOLR-17882-review.md`. This fallback does
+not fix the ticket. On `upstream/main`, `SyntheticSolrCore.initRestManager()`
+returns a bare `new RestManager()` that is never `init`-ed, so no managed
+resources exist on a coordinator; `getManagedResource` throws NOT_FOUND and the
+NPE becomes that error. The fix belongs in how coordinator synthetic cores
+initialize their `RestManager` (core, needs a design decision and a node-roles
+test). Only change made in this round: `modelStore()` now publishes `mr`/`fr`
+after wiring and loading succeed, so a failure inside it cannot leave a
+half-wired store behind. No test and no changelog were added because behaviour
+on a coordinator is unchanged. Existing `TestLTRQParserPlugin` is queued to
+check the normal (callback) path still works.
+
 ## What the patch does
 
 With the new node-roles setup, a stateless coordinator node fails every LTR
