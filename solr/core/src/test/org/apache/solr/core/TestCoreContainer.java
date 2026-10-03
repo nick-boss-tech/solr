@@ -463,30 +463,36 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
   }
 
   @Test
-  public void testModuleHelpersAreVisibleToSharedLibSpis() throws Exception {
-    Path tmpRoot = createTempDir("testModuleHelpersAreVisibleToSharedLibSpis");
+  public void testSharedLibSpiCanStillLoadItsClassesWhenModulesAreEnabled() throws Exception {
+    Path tmpRoot = createTempDir("testSharedLibSpiWithModules");
     Path sharedLib = Files.createDirectories(tmpRoot.resolve("lib"));
     Path moduleLib = Files.createDirectories(ModuleUtils.getModuleLibPath(tmpRoot, "mod1"));
+    // Lucene's SPI registry is JVM-wide and never replaces a name it already has
+    String spiName = "sharedlibpf17297" + Long.toHexString(random().nextLong());
 
+    // The SPI and the helper class it loads on first use are in the same shared lib jar
     writeFixtureJar(
         sharedLib.resolve("shared-spi.jar"),
-        "SharedLibPostingsFormat.java",
-        sharedLibSpiSource(),
+        Map.of(
+            "SharedLibPostingsFormat.java", sharedLibSpiSource(spiName),
+            "SharedLibHelper.java", sharedLibHelperSource()),
         "META-INF/services/org.apache.lucene.codecs.PostingsFormat",
         "org.apache.solr.core.test17297.shared.SharedLibPostingsFormat");
-    writeFixtureJar(
-        moduleLib.resolve("module-helper.jar"),
-        "ModuleHelper.java",
-        moduleHelperSource(),
-        null,
-        null);
+    try (JarOutputStream moduleJar =
+        new JarOutputStream(Files.newOutputStream(moduleLib.resolve("jar1.jar")))) {
+      moduleJar.putNextEntry(new JarEntry("moduleLibFile"));
+      moduleJar.closeEntry();
+    }
 
     String previousInstallDir = System.getProperty(SOLR_INSTALL_DIR);
     System.setProperty(SOLR_INSTALL_DIR, tmpRoot.toAbsolutePath().toString());
     try {
       final CoreContainer cc = init(tmpRoot, "<solr><str name=\"modules\">mod1</str></solr>");
       try {
-        assertEquals("sharedlibpf17297", PostingsFormat.forName("sharedlibpf17297").getName());
+        PostingsFormat format = PostingsFormat.forName(spiName);
+        // Loads SharedLibHelper through the loader that created the SPI. That fails with a
+        // ClassNotFoundException if the loader was closed when the module jars were added.
+        assertThrows(UnsupportedOperationException.class, () -> format.fieldsProducer(null));
       } finally {
         cc.shutdown();
       }
@@ -538,7 +544,7 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
           + "<str name=\"allowPaths\">${solr.security.allow.paths:}</str>\n"
           + "</solr>";
 
-  private static String sharedLibSpiSource() {
+  private static String sharedLibSpiSource(String spiName) {
     return """
         package org.apache.solr.core.test17297.shared;
 
@@ -551,15 +557,7 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
 
         public final class SharedLibPostingsFormat extends PostingsFormat {
           public SharedLibPostingsFormat() {
-            super("sharedlibpf17297");
-            try {
-              Class.forName(
-                  "org.apache.solr.core.test17297.module.ModuleHelper",
-                  true,
-                  getClass().getClassLoader());
-            } catch (ClassNotFoundException e) {
-              throw new IllegalStateException(e);
-            }
+            super("%s");
           }
 
           @Override
@@ -569,36 +567,45 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
 
           @Override
           public FieldsProducer fieldsProducer(SegmentReadState state) throws IOException {
+            try {
+              Class.forName(
+                  "org.apache.solr.core.test17297.shared.SharedLibHelper",
+                  true,
+                  getClass().getClassLoader());
+            } catch (ClassNotFoundException e) {
+              throw new IllegalStateException(e);
+            }
             throw new UnsupportedOperationException("test-only SPI");
           }
         }
-        """;
+        """
+        .formatted(spiName);
   }
 
-  private static String moduleHelperSource() {
+  private static String sharedLibHelperSource() {
     return """
-        package org.apache.solr.core.test17297.module;
+        package org.apache.solr.core.test17297.shared;
 
-        public final class ModuleHelper {
-          private ModuleHelper() {}
+        public final class SharedLibHelper {
+          private SharedLibHelper() {}
         }
         """;
   }
 
   private static void writeFixtureJar(
-      Path jarPath,
-      String sourceFileName,
-      String source,
-      String serviceFileName,
-      String serviceImpl)
+      Path jarPath, Map<String, String> sources, String serviceFileName, String serviceImpl)
       throws Exception {
-    Path workDir = Files.createTempDirectory("solr17297-fixture");
+    Path workDir = createTempDir("solr17297-fixture");
     Path srcDir = Files.createDirectories(workDir.resolve("src"));
     Path classesDir = Files.createDirectories(workDir.resolve("classes"));
-    Path sourceFile = srcDir.resolve(sourceFileName);
-    Files.writeString(sourceFile, source, StandardCharsets.UTF_8);
+    List<Path> sourceFiles = new ArrayList<>();
+    for (Map.Entry<String, String> source : sources.entrySet()) {
+      Path sourceFile = srcDir.resolve(source.getKey());
+      Files.writeString(sourceFile, source.getValue(), StandardCharsets.UTF_8);
+      sourceFiles.add(sourceFile);
+    }
 
-    compileFixtureSource(sourceFile, classesDir);
+    compileFixtureSources(sourceFiles, classesDir);
 
     if (serviceFileName != null) {
       Path serviceFile = classesDir.resolve(serviceFileName);
@@ -624,7 +631,8 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
     }
   }
 
-  private static void compileFixtureSource(Path sourceFile, Path classesDir) throws Exception {
+  private static void compileFixtureSources(List<Path> sourceFiles, Path classesDir)
+      throws Exception {
     JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
     assertNotNull("A JDK is required to compile the fixture jar", compiler);
 
@@ -632,7 +640,7 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
         compiler.getStandardFileManager(null, null, StandardCharsets.UTF_8)) {
       fileManager.setLocationFromPaths(StandardLocation.CLASS_OUTPUT, List.of(classesDir));
       Iterable<? extends JavaFileObject> compilationUnits =
-          fileManager.getJavaFileObjectsFromPaths(List.of(sourceFile));
+          fileManager.getJavaFileObjectsFromPaths(sourceFiles);
       String classPath = System.getProperty("java.class.path");
       boolean compiled =
           compiler
