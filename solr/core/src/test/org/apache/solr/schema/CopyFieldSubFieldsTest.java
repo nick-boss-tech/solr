@@ -22,18 +22,25 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.io.file.PathUtils;
 import org.apache.lucene.tests.mockfile.FilterPath;
+import org.apache.solr.SolrTestCase;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.core.SolrCore;
+import org.apache.solr.util.EmbeddedSolrServerTestRule;
 import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 
 /** Sub-fields of copyField destinations are copy targets as well. */
-public class CopyFieldSubFieldsTest extends SolrTestCaseJ4 {
+public class CopyFieldSubFieldsTest extends SolrTestCase {
+
+  @ClassRule
+  public static final EmbeddedSolrServerTestRule solrTestRule = new EmbeddedSolrServerTestRule();
 
   @BeforeClass
   public static void beforeClass() throws Exception {
-    Path solrHome = createTempDir();
-    Path confDir = FilterPath.unwrap(solrHome.resolve("collection1/conf"));
-    Path testConfDir = TEST_HOME().resolve("collection1/conf");
+    Path configHome = createTempDir();
+    Path confDir = FilterPath.unwrap(configHome.resolve("collection1/conf"));
+    Path testConfDir = SolrTestCaseJ4.TEST_HOME().resolve("collection1/conf");
     Files.createDirectories(confDir);
     for (String file :
         List.of(
@@ -46,7 +53,20 @@ public class CopyFieldSubFieldsTest extends SolrTestCaseJ4 {
     }
     System.setProperty("managed.schema.mutable", "true");
     System.setProperty("solr.index.updatelog.enabled", "false");
-    initCore("solrconfig-managed-schema.xml", "schema-copyfield-subfields.xml", solrHome);
+    SolrTestCaseJ4.newRandomConfig();
+    solrTestRule.startSolr(createTempDir());
+    solrTestRule
+        .newCollection("collection1")
+        .withConfigSet(confDir)
+        .withConfigFile("solrconfig-managed-schema.xml")
+        .withSchemaFile("schema-copyfield-subfields.xml")
+        .create();
+  }
+
+  private static IndexSchema latestSchema() {
+    try (SolrCore core = solrTestRule.getCoreContainer().getCore("collection1")) {
+      return core.getLatestSchema();
+    }
   }
 
   private static List<SchemaField> subFields(IndexSchema schema, String fieldName) {
@@ -58,7 +78,7 @@ public class CopyFieldSubFieldsTest extends SolrTestCaseJ4 {
 
   @Test
   public void testSubFieldsOfTargetsAreTargets() {
-    IndexSchema schema = h.getCore().getLatestSchema();
+    IndexSchema schema = latestSchema();
     for (String name : List.of("loc", "amount", "box", "price_c")) {
       assertTrue(name, schema.isCopyFieldTarget(schema.getField(name)));
       for (SchemaField subField : subFields(schema, name)) {
@@ -72,7 +92,7 @@ public class CopyFieldSubFieldsTest extends SolrTestCaseJ4 {
 
   @Test
   public void testSubFieldsStayTargetsUntilTheLastCopyFieldIsDeleted() {
-    ManagedIndexSchema schema = (ManagedIndexSchema) h.getCore().getLatestSchema();
+    ManagedIndexSchema schema = (ManagedIndexSchema) latestSchema();
     SchemaField box = schema.getField("box");
 
     schema = schema.deleteCopyFields(Map.of("src1", List.of("box")));
