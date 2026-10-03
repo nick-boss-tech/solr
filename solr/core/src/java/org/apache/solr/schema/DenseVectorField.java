@@ -521,28 +521,36 @@ public class DenseVectorField extends FloatPointField {
       searchStrategy = new KnnSearchStrategy.Hnsw(filteredSearchThreshold);
     }
 
+    checkQueryVectorUsableForCosine(vectorBuilder);
+
     Query baseQuery;
     switch (vectorEncoding) {
-      case FLOAT32: {
-        float[] queryVector = vectorBuilder.getFloatVector();
-        checkQueryVectorNotAllZeros(queryVector);
+      case FLOAT32:
         baseQuery =
             searchStrategy != null
                 ? new SolrKnnFloatVectorQuery(
-                    fieldName, queryVector, topK, efSearch, filterQuery, searchStrategy)
-                : new SolrKnnFloatVectorQuery(fieldName, queryVector, topK, efSearch, filterQuery);
+                    fieldName,
+                    vectorBuilder.getFloatVector(),
+                    topK,
+                    efSearch,
+                    filterQuery,
+                    searchStrategy)
+                : new SolrKnnFloatVectorQuery(
+                    fieldName, vectorBuilder.getFloatVector(), topK, efSearch, filterQuery);
         break;
-      }
-      case BYTE: {
-        byte[] queryVector = vectorBuilder.getByteVector();
-        checkQueryVectorNotAllZeros(queryVector);
+      case BYTE:
         baseQuery =
             searchStrategy != null
                 ? new SolrKnnByteVectorQuery(
-                    fieldName, queryVector, topK, efSearch, filterQuery, searchStrategy)
-                : new SolrKnnByteVectorQuery(fieldName, queryVector, topK, efSearch, filterQuery);
+                    fieldName,
+                    vectorBuilder.getByteVector(),
+                    topK,
+                    efSearch,
+                    filterQuery,
+                    searchStrategy)
+                : new SolrKnnByteVectorQuery(
+                    fieldName, vectorBuilder.getByteVector(), topK, efSearch, filterQuery);
         break;
-      }
       default:
         throw new SolrException(
             SolrException.ErrorCode.SERVER_ERROR,
@@ -563,28 +571,29 @@ public class DenseVectorField extends FloatPointField {
   }
 
   /**
-   * Rejects all-zero query vectors, which carry no directional information and otherwise fail
-   * opaquely deep inside result rendering.
+   * Rejects an all-zero query vector when the similarity function is cosine, which is undefined for
+   * a zero vector. Other similarity functions are well defined for it.
    */
-  private static void checkQueryVectorNotAllZeros(float[] queryVector) {
-    for (float v : queryVector) {
-      if (v != 0.0f) {
-        return;
+  private void checkQueryVectorUsableForCosine(DenseVectorParser vectorBuilder) {
+    if (similarityFunction != VectorSimilarityFunction.COSINE) {
+      return;
+    }
+    if (vectorEncoding == VectorEncoding.BYTE) {
+      for (byte v : vectorBuilder.getByteVector()) {
+        if (v != 0) {
+          return;
+        }
+      }
+    } else {
+      for (float v : vectorBuilder.getFloatVector()) {
+        if (v != 0.0f) {
+          return;
+        }
       }
     }
     throw new SolrException(
-        SolrException.ErrorCode.BAD_REQUEST, "KNN query vector must not be an all-zero vector");
-  }
-
-  /** Rejects all-zero query vectors, which carry no directional information. */
-  private static void checkQueryVectorNotAllZeros(byte[] queryVector) {
-    for (byte v : queryVector) {
-      if (v != 0) {
-        return;
-      }
-    }
-    throw new SolrException(
-        SolrException.ErrorCode.BAD_REQUEST, "KNN query vector must not be an all-zero vector");
+        SolrException.ErrorCode.BAD_REQUEST,
+        "KNN query vector must not be an all-zero vector when the similarity function is cosine");
   }
 
   @Override

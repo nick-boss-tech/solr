@@ -1312,4 +1312,49 @@ public class DenseVectorFieldTest extends AbstractBadConfigTestBase {
       deleteCore();
     }
   }
+
+  @Test
+  public void zeroQueryVector_cosineSimilarity_shouldBeRejected() {
+    for (VectorEncoding encoding : VectorEncoding.values()) {
+      DenseVectorField type = new DenseVectorField(4, VectorSimilarityFunction.COSINE, encoding);
+      SolrException ex =
+          expectThrows(
+              SolrException.class,
+              () ->
+                  type.getKnnVectorQuery(
+                      "vector", "[0, 0, 0, 0]", 3, 3, null, null, null, null));
+      assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
+      assertTrue(ex.getMessage().contains("all-zero"));
+    }
+  }
+
+  @Test
+  public void zeroQueryVector_nonCosineSimilarity_shouldBeAccepted() {
+    for (VectorEncoding encoding : VectorEncoding.values()) {
+      for (VectorSimilarityFunction similarity :
+          List.of(
+              VectorSimilarityFunction.EUCLIDEAN,
+              VectorSimilarityFunction.DOT_PRODUCT,
+              VectorSimilarityFunction.MAXIMUM_INNER_PRODUCT)) {
+        DenseVectorField type = new DenseVectorField(4, similarity, encoding);
+        Query query =
+            type.getKnnVectorQuery("vector", "[0, 0, 0, 0]", 3, 3, null, null, null, null);
+        assertNotNull(query);
+      }
+    }
+  }
+
+  @Test
+  public void nonZeroQueryVector_cosineSimilarity_shouldBeAccepted() {
+    DenseVectorField floatType =
+        new DenseVectorField(4, VectorSimilarityFunction.COSINE, VectorEncoding.FLOAT32);
+    assertTrue(
+        floatType.getKnnVectorQuery("vector", "[0, 0, 0, 1]", 3, 3, null, null, null, null)
+            instanceof KnnFloatVectorQuery);
+    DenseVectorField byteType =
+        new DenseVectorField(4, VectorSimilarityFunction.COSINE, VectorEncoding.BYTE);
+    assertTrue(
+        byteType.getKnnVectorQuery("vector", "[0, 0, 0, 1]", 3, 3, null, null, null, null)
+            instanceof KnnByteVectorQuery);
+  }
 }
