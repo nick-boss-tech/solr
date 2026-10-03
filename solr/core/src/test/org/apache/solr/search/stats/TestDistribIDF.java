@@ -18,6 +18,8 @@ package org.apache.solr.search.stats;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.lucene.tests.util.TestUtil;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.SolrClient;
@@ -181,6 +183,54 @@ public class TestDistribIDF extends SolrTestCaseJ4 {
           1,
           Float.compare(score1_local, score2_local));
     }
+  }
+
+  @Test
+  public void testMultiCollectionUsesStatsOfEveryCollection() throws Exception {
+    // the collections have different term statistics and both have shards named shard1, shard2;
+    // scoring across them must match scoring the same documents in a single collection
+    createCollection("stats_a", "conf1");
+    createCollection("stats_b", "conf1");
+    createCollection("stats_all", "conf1");
+
+    int docsInA = TestUtil.nextInt(random(), 10, 30);
+    for (int i = 0; i < docsInA; i++) {
+      addCatDoc("a" + i, i == 0 ? "football" : "filler" + i, "stats_a", "stats_all");
+    }
+    int docsInB = TestUtil.nextInt(random(), 10, 30);
+    for (int i = 0; i < docsInB; i++) {
+      addCatDoc("b" + i, i < docsInB - 2 ? "football" : "filler" + i, "stats_b", "stats_all");
+    }
+    for (String collection : new String[] {"stats_a", "stats_b", "stats_all"}) {
+      solrCluster.getSolrClient().commit(collection);
+    }
+
+    SolrQuery query = new SolrQuery("cat:football");
+    query.setFields("id,score").setRows(1000);
+    Map<String, Float> expected = scoresById(solrCluster.getSolrClient().query("stats_all", query));
+    assertFalse(expected.isEmpty());
+
+    query.add("collection", "stats_a,stats_b");
+    for (JettySolrRunner jetty : solrCluster.getJettySolrRunners()) {
+      assertEquals(expected, scoresById(jetty.getSolrClient().query("stats_a", query)));
+    }
+  }
+
+  private void addCatDoc(String id, String cat, String... collections) throws Exception {
+    SolrInputDocument doc = new SolrInputDocument();
+    doc.setField("id", id);
+    doc.setField("cat", cat);
+    for (String collection : collections) {
+      solrCluster.getSolrClient().add(collection, doc);
+    }
+  }
+
+  private static Map<String, Float> scoresById(QueryResponse response) {
+    Map<String, Float> scores = new HashMap<>();
+    response
+        .getResults()
+        .forEach(doc -> scores.put((String) doc.get("id"), (Float) doc.get("score")));
+    return scores;
   }
 
   private void createCollection(String name, String config) throws Exception {

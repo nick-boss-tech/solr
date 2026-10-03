@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -64,6 +65,10 @@ public class ExactStatsCache extends StatsCache {
   private static final String CURRENT_GLOBAL_TERM_STATS = "solr.stats.globalTerm";
   private static final String PER_SHARD_TERM_STATS = "solr.stats.shardTerm";
   private static final String PER_SHARD_COL_STATS = "solr.stats.shardCol";
+  private static final String SHARD_KEYS = "solr.stats.shardKeys";
+
+  /** Response key carrying the collection name of the shard that produced the local stats. */
+  static final String SHARD_COLLECTION_KEY = "shard.collection";
 
   @Override
   protected StatsSource doGet(SolrQueryRequest req) {
@@ -110,17 +115,19 @@ public class ExactStatsCache extends StatsCache {
             r.getShard(),
             r.getSolrResponse().getResponse());
       }
-      // The per-shard stats maps are keyed by the shard URL itself (r.getShard()),
-      // which uniquely identifies the (collection, shard) pair. Keying by the
-      // bare shard id instead collides when collections reuse shard names
-      // (e.g. multi-collection queries), clobbering one collection's stats.
-      String shard = r.getShard();
+      // response's "shard" is really a shardURL, or even a list of URLs
       SolrResponse res = r.getSolrResponse();
       if (res.getException() != null) {
         log.debug("Exception response={}", res);
         continue;
       }
       NamedList<Object> nl = res.getResponse();
+      String shard = perShardKey(nl, r.getShard());
+      ({"unchecked"})
+      Map<String, String> shardKeys =
+          (Map<String, String>)
+              req.getContext().computeIfAbsent(SHARD_KEYS, k -> new HashMap<String, String>());
+      shardKeys.put(r.getShard(), shard);
 
       String termStatsString = (String) nl.get(TERM_STATS_KEY);
       if (termStatsString != null) {
@@ -217,8 +224,8 @@ public class ExactStatsCache extends StatsCache {
 
       CloudDescriptor cloudDescriptor = searcher.getCore().getCoreDescriptor().getCloudDescriptor();
       if (cloudDescriptor != null) {
-        // Retained for older aggregating nodes, which key per-shard stats by this value.
         rb.rsp.add(ShardParams.SHARD_NAME, cloudDescriptor.getShardId());
+        rb.rsp.add(SHARD_COLLECTION_KEY, cloudDescriptor.getCollectionName());
       }
       if (!terms.isEmpty()) {
         rb.rsp.add(TERMS_KEY, StatsUtil.termsToEncodedString(terms));
@@ -253,10 +260,14 @@ public class ExactStatsCache extends StatsCache {
       Set<String> fields = terms.stream().map(t -> t.field()).collect(Collectors.toSet());
       Map<String, TermStats> globalTermStats = new HashMap<>();
       Map<String, CollectionStats> globalColStats = new HashMap<>();
-      // Look up per-shard stats by shard URL, matching the keys stored in
-      // doMergeToGlobalStats. The URL embeds the collection name, so shards
-      // with the same id in different collections stay distinct.
-      List<String> shards = List.of(rb.shards);
+      // aggregate collection stats, only for the field in terms
+      @SuppressWarnings({"unchecked"})
+      Map<String, String> shardKeys =
+          (Map<String, String>) rb.req.getContext().getOrDefault(SHARD_KEYS, Map.of());
+      Set<String> shards = new LinkedHashSet<>();
+      for (String shardUrl : rb.shards) {
+        shards.add(shardKeys.getOrDefault(shardUrl, shardUrl));
+      }
       for (String shard : shards) {
         Map<String, CollectionStats> s = getPerShardColStats(rb, shard);
         if (s == null) {
@@ -296,6 +307,20 @@ public class ExactStatsCache extends StatsCache {
       // need global TermStats here...
       params.add(TERM_STATS_KEY, StatsUtil.termStatsMapToString(globalTermStats));
     }
+  }
+
+  /**
+   * The key of a shard's stats: collection and shard name when the shard reports both, so shards
+   * of different collections that share a name stay apart; the shard name alone for shards that
+   * report no collection; otherwise the shard URL(s).
+   */
+  private static String perShardKey(NamedList<Object> response, String shardUrl) {
+    String shardName = (String) response.get(ShardParams.SHARD_NAME);
+    if (shardName == null) {
+      return shardUrl;
+    }
+    String collection = (String) response.get(SHARD_COLLECTION_KEY);
+    return collection == null ? shardName : collection + "!" + shardName;
   }
 
   protected Map<String, CollectionStats> getPerShardColStats(ResponseBuilder rb, String shard) {
