@@ -15,9 +15,13 @@ segment flush inside `SchemaCodecFactory.getKnnVectorsFormatForField`.
 
 Changes:
 
-1. `DenseVectorField.hasNonDefaultKnnOptions()` (new): true when any KNN
-   option (`knnAlgorithm`, `vectorEncoding`, `similarityFunction`, `hnswM`,
+1. `DenseVectorField.hasNonDefaultKnnOptions()` (new): true when any option
+   the codec's KNN vectors format applies (`knnAlgorithm`, `hnswM`,
    `hnswEfConstruction`, all `cuvs*` params) differs from its default.
+   (Round-3 review correction: the first version also counted
+   `vectorEncoding` and `similarityFunction`, which the field type applies
+   itself and the codec never reads; that would have rejected every cosine
+   field under `LuceneDefaultCodecFactory` / `SimpleTextCodecFactory`.)
    Overridden to return `true` in `BinaryQuantizedDenseVectorField` and
    `ScalarQuantizedDenseVectorField` (quantization inherently requires
    `SchemaCodecFactory`, which is the only caller of their overridden
@@ -41,7 +45,12 @@ Notes for the reviewer:
   "require" `SchemaCodecFactory`).
 - `getKnnVectorsFormatForField` behavior is unchanged (same exception, now
   via the extracted method).
-- No changelog entry (repo convention: scaffold once a Jira/PR is assigned).
+- Behavior change to mention in the PR: with `SchemaCodecFactory`, a
+  `DenseVectorField` type with an unsupported `knnAlgorithm` now stops the core
+  from loading even if no field uses the type or no segment was ever flushed.
+- `validateKnnVectorsOptions` is now package-private (only `SolrCore`, same
+  package, calls it).
+- Changelog fragment added: `changelog/unreleased/SOLR-17047.yml`.
 
 Files changed:
 - `solr/core/src/java/org/apache/solr/schema/DenseVectorField.java`
@@ -57,17 +66,26 @@ cp ~/workspace/solr/gradle.properties .   # worktrees don't inherit it
 ~/workspace/tools/solr-gradle.sh :solr:core:compileJava -Pvalidation.errorprone=true
 ```
 
-Suggested tests (not written):
+Tests added (round-3 patch pass, **not compiled or run**), in `BadIndexSchemaTest`
+next to the existing postings-format/codec case, with two new schemas under
+`src/test-files/solr/collection1/conf/`:
 
-1. Core init with a non-`SolrCoreAware` `CodecFactory` and a schema
-   containing a `knn_vector` field with `knnAlgorithm="hnsw"`
-   `hnswM="32"` (or any non-default option) → expect init-time
-   `SolrException` naming the field type.
-2. Same setup but all-default vector options → core loads (no regression).
-3. `SchemaCodecFactory` (default codec) + `knnAlgorithm="typo"` →
-   init-time failure, not flush-time.
-4. Regression: default schema + default codec still loads; run existing
-   `TestDenseVectorField` / codec-related suites.
+- `testKnnVectorOptionsButNoSchemaCodecFactory`: `LuceneDefaultCodecFactory`
+  (`solrconfig-lucene-codec.xml`) + a `DenseVectorField` with
+  `knnAlgorithm="flat"` (`bad-schema-codec-knn-options-mismatch.xml`) → init
+  fails with "codec does not support".
+- `testVectorFieldWithoutKnnCodecOptionsAndNoSchemaCodecFactory`: the same
+  codec factory with `schema-densevector.xml` (cosine and BYTE types, no codec
+  options) → the core loads (regression for the first version's false positive).
+- `testUnsupportedKnnAlgorithmFailsAtCoreInit`: `SchemaCodecFactory`
+  (`solrconfig_codec.xml`) + `knnAlgorithm="typo"`
+  (`bad-schema-codec-knn-algorithm-unsupported.xml`) → init fails with "typo KNN
+  algorithm is not supported".
+
+Queued for the verification run: `org.apache.solr.schema.BadIndexSchemaTest`,
+`org.apache.solr.schema.DenseVectorFieldTest` and
+`org.apache.solr.core.TestSchemaCodecFactoryDefaults` (existing coverage), with
+Spotless.
 
 ## Patch limits and follow-ups
 

@@ -1,0 +1,7 @@
+title: A core now fails to load, instead of ignoring the setting, when a DenseVectorField configures a KNN algorithm or HNSW option that the configured codec factory does not support, and an unsupported knnAlgorithm is rejected when the core is created rather than at the first segment flush
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17047
+    url: https://issues.apache.org/jira/browse/SOLR-17047

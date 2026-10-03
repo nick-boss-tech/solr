@@ -141,7 +141,7 @@ public class SchemaCodecFactory extends CodecFactory implements SolrCoreAware {
    * Eagerly validates the KNN vector options of every {@link DenseVectorField} in the schema, so
    * misconfigured options fail at core init instead of lazily at first segment flush.
    */
-  public void validateKnnVectorsOptions(IndexSchema schema) {
+  void validateKnnVectorsOptions(IndexSchema schema) {
     for (FieldType fieldType : schema.getFieldTypes().values()) {
       if (fieldType instanceof DenseVectorField vectorField) {
         validateKnnAlgorithm(vectorField.getKnnAlgorithm());

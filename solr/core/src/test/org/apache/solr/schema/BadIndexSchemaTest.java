@@ -117,6 +117,30 @@ public class BadIndexSchemaTest extends AbstractBadConfigTestBase {
         "codec does not support");
   }
 
+  public void testKnnVectorOptionsButNoSchemaCodecFactory() throws Exception {
+    assertConfigs(
+        "solrconfig-lucene-codec.xml",
+        "bad-schema-codec-knn-options-mismatch.xml",
+        "codec does not support");
+  }
+
+  public void testVectorFieldWithoutKnnCodecOptionsAndNoSchemaCodecFactory() throws Exception {
+    // similarityFunction and vectorEncoding are applied by the field type, not by the codec
+    try {
+      initCore("solrconfig-lucene-codec.xml", "schema-densevector.xml");
+      assertNotNull(h.getCore().getLatestSchema().getFieldOrNull("vector"));
+    } finally {
+      deleteCore();
+    }
+  }
+
+  public void testUnsupportedKnnAlgorithmFailsAtCoreInit() throws Exception {
+    assertConfigs(
+        "solrconfig_codec.xml",
+        "bad-schema-codec-knn-algorithm-unsupported.xml",
+        "typo KNN algorithm is not supported");
+  }
+
   public void testDocValuesUnsupported() throws Exception {
     doTest("bad-schema-unsupported-docValues.xml", "does not support doc values");
   }
