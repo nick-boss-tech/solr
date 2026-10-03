@@ -1,0 +1,7 @@
+title: CSV update handler field splitting now preserves line breaks embedded in a quoted field value, instead of dropping everything after the first break or splitting at it.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15041
+    url: https://issues.apache.org/jira/browse/SOLR-15041

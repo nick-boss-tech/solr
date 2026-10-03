@@ -141,6 +141,25 @@ public class TestCSVLoader extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testSplitFieldWithEmbeddedLineBreaks() throws Exception {
+    // SOLR-15041: a quoted field value containing a line break and the split
+    // separator must split into exactly two values, the first keeping its break.
+    makeFile(
+        "id,str_s\n"
+            + "100,\"first line\nwith break!second line\"\n"
+            + "101,\"first line\r\nwith break!second line\"\n");
+    loadLocal("commit", "true", "f.str_s.split", "true", "f.str_s.separator", "!");
+    assertQ(req("id:100"), "count(//arr[@name='str_s']/str)=2");
+    assertQ(req("id:100"), "//arr[@name='str_s']/str[1][.='first line\nwith break']");
+    assertQ(req("id:100"), "//arr[@name='str_s']/str[2][.='second line']");
+    assertQ(req("id:101"), "count(//arr[@name='str_s']/str)=2");
+    assertQ(req("id:101"), "//arr[@name='str_s']/str[2][.='second line']");
+    // XML responses normalize CRLF, so check the raw JSON for the intact CRLF
+    String json = h.query(req("id:101", "wt", "json"));
+    assertTrue(json, json.contains("\"first line\\r\\nwith break\""));
+  }
+
+  @Test
   public void testCSV() throws Exception {
     makeFile("id,str_s\n100,\"quoted\"\n101,\n102,\"\"\n103,");
     loadLocal("commit", "true");

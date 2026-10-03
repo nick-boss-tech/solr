@@ -20,6 +20,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -144,22 +146,99 @@ public abstract class CSVLoaderBase extends ContentStreamLoader {
 
     @Override
     void add(SolrInputDocument doc, int line, int column, String val) {
-      CSVParser parser = new CSVParser(new StringReader(val), strategy);
       try {
-        // A value may span multiple records when it contains embedded line breaks
-        // (the outer parse already stripped the quoting), so consume every record.
-        boolean added = false;
-        String[] vals;
-        while ((vals = parser.getLine()) != null) {
-          for (String v : vals) base.add(doc, line, column, v);
-          added = true;
-        }
-        if (!added) {
+        List<String> values = split(val);
+        if (values.isEmpty()) {
           base.add(doc, line, column, val);
+        } else {
+          for (String v : values) base.add(doc, line, column, v);
         }
       } catch (IOException e) {
         throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, e);
       }
+    }
+
+    /**
+     * Splits a value on the strategy delimiter, honoring the strategy encapsulator and escape.
+     * The parser ends a record at every line break, but a line break inside this value is
+     * content, not a record boundary: the value was a single field of the outer document
+     * (SOLR-15041). Records after the first are therefore stitched back onto the last value
+     * with the exact line break the parser consumed between them.
+     */
+    private List<String> split(String val) throws IOException {
+      CSVParser parser = new CSVParser(new StringReader(val), strategy);
+      List<String> values = new ArrayList<>();
+      String[] record = parser.getLine();
+      if (record == null) return values;
+      Collections.addAll(values, record);
+      List<String> terminators = null;
+      int boundary = 0;
+      while ((record = parser.getLine()) != null) {
+        if (terminators == null) terminators = recordTerminators(val);
+        String terminator = boundary < terminators.size() ? terminators.get(boundary) : "\n";
+        boundary++;
+        int last = values.size() - 1;
+        values.set(last, values.get(last) + terminator + (record.length == 0 ? "" : record[0]));
+        for (int i = 1; i < record.length; i++) values.add(record[i]);
+      }
+      return values;
+    }
+
+    /**
+     * Returns the line break sequences ({@code \n}, {@code \r} or {@code \r\n}) in {@code val}
+     * that sit outside any encapsulated section, in order. These are exactly the breaks the
+     * parser treats as record ends when reading {@code val}; breaks inside an encapsulated
+     * section are field content for the parser as well.
+     */
+    private List<String> recordTerminators(String val) {
+      List<String> terminators = new ArrayList<>();
+      char delimiter = strategy.getDelimiter();
+      char encapsulator = strategy.getEncapsulator();
+      char escape = strategy.getEscape();
+      boolean encapsulated = false;
+      boolean atFieldStart = true;
+      int i = 0;
+      while (i < val.length()) {
+        char c = val.charAt(i);
+        if (escape != CSVStrategy.ESCAPE_DISABLED && c == escape && i + 1 < val.length()) {
+          // an escaped character is never a delimiter, encapsulator or line break
+          if (!encapsulated) atFieldStart = false;
+          i += 2;
+        } else if (encapsulated) {
+          if (encapsulator != CSVStrategy.ENCAPSULATOR_DISABLED && c == encapsulator) {
+            if (i + 1 < val.length() && val.charAt(i + 1) == encapsulator) {
+              i += 2; // a doubled encapsulator is a literal
+            } else {
+              encapsulated = false;
+              i++;
+            }
+          } else {
+            i++;
+          }
+        } else if (atFieldStart
+            && encapsulator != CSVStrategy.ENCAPSULATOR_DISABLED
+            && c == encapsulator) {
+          encapsulated = true;
+          atFieldStart = false;
+          i++;
+        } else if (c == delimiter) {
+          atFieldStart = true;
+          i++;
+        } else if (c == '\r' || c == '\n') {
+          if (c == '\r' && i + 1 < val.length() && val.charAt(i + 1) == '\n') {
+            terminators.add("\r\n");
+            i += 2;
+          } else {
+            terminators.add(String.valueOf(c));
+            i++;
+          }
+          atFieldStart = true;
+        } else {
+          atFieldStart = false;
+          i++;
+        }
+      }
+      return terminators;
     }
   }
 
