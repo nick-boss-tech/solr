@@ -1,0 +1,9 @@
+title: >
+  Sorting by childfield() on a field type whose sort needs rewriting (such as CurrencyFieldType) is now rejected with a clear 400 error instead of a Lucene UnsupportedOperationException.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-12871
+    url: https://issues.apache.org/jira/browse/SOLR-12871
