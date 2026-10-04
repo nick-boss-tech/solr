@@ -1,0 +1,9 @@
+title: >
+  A node's shutdown DOWNNODE message no longer marks its replicas down if the Overseer processes it after the node has restarted and is live again.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-15386
+    url: https://issues.apache.org/jira/browse/SOLR-15386
