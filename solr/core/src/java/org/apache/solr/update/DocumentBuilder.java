@@ -105,7 +105,7 @@ public class DocumentBuilder {
   /** The error message omits field values, so keep them available for debugging at TRACE. */
   private static void traceFieldError(String message, SolrInputField field, Exception ex) {
     if (log.isTraceEnabled()) {
-      log.trace("{}: value={} cause={}", message, field.getValue(), ex.getMessage());
+      log.trace("{}: value={}", message, field.getValue(), ex);
     }
   }
 
