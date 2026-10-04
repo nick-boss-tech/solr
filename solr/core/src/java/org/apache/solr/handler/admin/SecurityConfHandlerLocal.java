@@ -24,6 +24,7 @@ import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.CommandOperation;
 import org.apache.solr.common.util.Utils;
@@ -83,8 +84,16 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
           SolrException.ErrorCode.SERVER_ERROR,
           "Failed persisting security.json to SOLR_HOME. Object was empty.");
     }
+    @SuppressWarnings("unchecked")
+    Map<String, Object> sanitizedData =
+        (Map<String, Object>) Utils.getDeepCopy(securityConfig.getData(), 4);
+    for (Object pluginConfig : sanitizedData.values()) {
+      if (pluginConfig instanceof Map<?, ?> pluginConfigMap) {
+        pluginConfigMap.remove("");
+      }
+    }
     try (OutputStream securityJsonOs = Files.newOutputStream(securityJsonPath)) {
-      securityJsonOs.write(Utils.toJSON(securityConfig.getData()));
+      securityJsonOs.write(Utils.toJSON(sanitizedData));
       log.debug("Persisted security.json to {}", securityJsonPath);
       return true;
     } catch (Exception e) {
