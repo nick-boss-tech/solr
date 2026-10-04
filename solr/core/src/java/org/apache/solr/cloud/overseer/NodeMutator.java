@@ -44,10 +44,21 @@ public class NodeMutator {
     zkClient = SliceMutator.getZkClient(cloudManager);
   }
 
+  /**
+   * Optional boolean property of a DOWNNODE message: when true, the message is ignored if the node
+   * is in the live nodes of the cluster state it is applied to.
+   */
+  public static final String ONLY_IF_NODE_NOT_LIVE = "onlyIfNodeNotLive";
+
   public List<ZkWriteCommand> downNode(ClusterState clusterState, ZkNodeProps message) {
     String nodeName = message.getStr(ZkStateReader.NODE_NAME_PROP);
 
     log.debug("DownNode state invoked for node: {}", nodeName);
+
+    if (message.getBool(ONLY_IF_NODE_NOT_LIVE, false) && clusterState.liveNodesContain(nodeName)) {
+      log.info("Ignoring DownNode for node {} because it is live again", nodeName);
+      return List.of();
+    }
 
     return clusterState
         .collectionStream()
