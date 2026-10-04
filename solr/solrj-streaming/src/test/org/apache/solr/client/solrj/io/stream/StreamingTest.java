@@ -3082,7 +3082,8 @@ public class StreamingTest extends SolrCloudTestCase {
   @Test
   public void testTupleStreamGetShardsWithMissingManualShardMapping() throws Exception {
     StreamContext streamContext = new StreamContext();
-    streamContext.put("shards", Map.of("otherCollection", List.of("http://example.com/solr/other")));
+    streamContext.put(
+        "shards", Map.of("otherCollection", List.of("http://example.com/solr/other")));
 
     List<String> shards = TupleStream.getShards(solrConnection, COLLECTIONORALIAS, streamContext);
     assertTrue("Missing manual shard mapping should return an empty list", shards.isEmpty());
@@ -3270,7 +3271,8 @@ public class StreamingTest extends SolrCloudTestCase {
   @Test
   public void testCloudStreamMissingManualShardMappingFailsClearly() throws Exception {
     StreamContext streamContext = new StreamContext();
-    streamContext.put("shards", Map.of("otherCollection", List.of("http://example.com/solr/other")));
+    streamContext.put(
+        "shards", Map.of("otherCollection", List.of("http://example.com/solr/other")));
     SolrParams searchParams = params("q", "*:*", "fl", "a_i", "sort", "a_i asc");
 
     try (CloudSolrStream solrStream =
