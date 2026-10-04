@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -221,7 +220,7 @@ public abstract class TupleStream implements Closeable, Serializable, MapWriter 
       // Manual Sharding
       List<String> configuredShards = shardsMap.get(collection);
       if (configuredShards == null) {
-        return Collections.emptyList();
+        return List.of();
       }
 
       shards = new ArrayList<>(configuredShards);
