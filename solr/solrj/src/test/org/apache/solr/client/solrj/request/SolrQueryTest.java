@@ -129,6 +129,22 @@ public class SolrQueryTest extends SolrTestCase {
    * Verifies that getSort() returns an immutable map,
    * for both empty and non-empty situations
    */
+  public void testGetCopyKeepsSortClauses() {
+    SolrQuery q = new SolrQuery("dog");
+    q.addSort("price", SolrQuery.ORDER.asc);
+    q.addSort("id", SolrQuery.ORDER.desc);
+
+    SolrQuery copy = q.getCopy();
+    assertEquals(q.getSorts(), copy.getSorts());
+    assertEquals("price asc,id desc", copy.getSortField());
+
+    // changing the copy must not change the original, and must keep the copied clauses
+    copy.addSort("score", SolrQuery.ORDER.desc);
+    assertEquals("price asc,id desc,score desc", copy.getSortField());
+    assertEquals(2, q.getSorts().size());
+    assertEquals("price asc,id desc", q.getSortField());
+  }
+
   public void testGetSortImmutable() {
     SolrQuery q = new SolrQuery("dog");
 
