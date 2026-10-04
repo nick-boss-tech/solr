@@ -557,7 +557,7 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
 
         public final class SharedLibPostingsFormat extends PostingsFormat {
           public SharedLibPostingsFormat() {
-            super("%s");
+            super("__SPI_NAME__");
           }
 
           @Override
@@ -579,7 +579,7 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
           }
         }
         """
-        .formatted(spiName);
+        .replace("__SPI_NAME__", spiName);
   }
 
   private static String sharedLibHelperSource() {
