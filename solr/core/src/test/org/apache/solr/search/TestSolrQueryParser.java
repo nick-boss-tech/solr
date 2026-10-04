@@ -53,6 +53,7 @@ import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.parser.QueryParser;
+import org.apache.solr.parser.SolrQueryParserBase;
 import org.apache.solr.query.FilterQuery;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.schema.IndexSchema;
@@ -268,6 +269,24 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
               "debug",
               "query"),
           "/debug/parsedquery=='" + expected + "'");
+    }
+  }
+
+  @Test
+  public void testRepeatedWildcardsAreCollapsed() throws Exception {
+    // SOLR-12608: thousands of "*" built a huge automaton (OOM with edismax); they are equivalent
+    // to a single "*"
+    assertEquals("a*b", SolrQueryParserBase.collapseRepeatedWildcards("a***b"));
+    assertEquals("*", SolrQueryParserBase.collapseRepeatedWildcards("*".repeat(5000)));
+    // an escaped star is a literal and must be kept
+    assertEquals("a\\**b", SolrQueryParserBase.collapseRepeatedWildcards("a\\***b"));
+    assertEquals("a?b", SolrQueryParserBase.collapseRepeatedWildcards("a?b"));
+
+    final String manyStars = "*".repeat(5000);
+    for (String defType : new String[] {"lucene", "edismax"}) {
+      assertQ(
+          req("q", manyStars, "defType", defType, "df", "v_t", "qf", "v_t", "debugQuery", "true"),
+          "//lst[@name='responseHeader']/int[@name='status'][.='0']");
     }
   }
 

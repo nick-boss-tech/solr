@@ -1264,6 +1264,34 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
     return newPrefixQuery(new Term(field, termStr));
   }
 
+  /**
+   * Collapses runs of unescaped {@code *} into a single one. They match the same strings, but each
+   * extra {@code *} makes the automaton for the wildcard larger (see SOLR-12608).
+   */
+  public static String collapseRepeatedWildcards(String termStr) {
+    if (termStr == null || termStr.indexOf("**") < 0) {
+      return termStr;
+    }
+    StringBuilder sb = new StringBuilder(termStr.length());
+    boolean lastWasStar = false;
+    for (int i = 0; i < termStr.length(); i++) {
+      char c = termStr.charAt(i);
+      if (c == '\\' && i + 1 < termStr.length()) { // a backslash escapes the next char
+        sb.append(c).append(termStr.charAt(++i));
+        lastWasStar = false;
+      } else if (c == '*') {
+        if (!lastWasStar) {
+          sb.append(c);
+        }
+        lastWasStar = true;
+      } else {
+        sb.append(c);
+        lastWasStar = false;
+      }
+    }
+    return sb.toString();
+  }
+
   // called from parser
   protected Query getExistenceQuery(String field) {
     checkNullField(field);
@@ -1274,6 +1302,7 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
   // called from parser
   protected Query getWildcardQuery(String field, String termStr) throws SyntaxError {
     checkNullField(field);
+    termStr = collapseRepeatedWildcards(termStr);
 
     if ("*".equals(termStr)) {
       if ("*".equals(field) || getExplicitField() == null) {
