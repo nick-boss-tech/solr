@@ -651,6 +651,7 @@ public class Overseer implements SolrCloseable {
   public static class OverseerThread extends Thread implements Closeable {
 
     protected volatile boolean isClosed;
+    private volatile boolean closeRequested;
     private final Closeable thread;
 
     public <T extends Runnable & Closeable> OverseerThread(
@@ -661,8 +662,14 @@ public class Overseer implements SolrCloseable {
 
     @Override
     public void close() throws IOException {
+      closeRequested = true;
       thread.close();
       this.isClosed = true;
+    }
+
+    /** True once the Overseer asked this thread to stop, as opposed to the thread ending itself. */
+    boolean isCloseRequested() {
+      return closeRequested;
     }
 
     public Closeable getThread() {
@@ -676,7 +683,7 @@ public class Overseer implements SolrCloseable {
 
   private OverseerThread ccThread;
 
-  private OverseerThread updaterThread;
+  private volatile OverseerThread updaterThread;
 
   private final ZkStateReader reader;
 
@@ -762,7 +769,15 @@ public class Overseer implements SolrCloseable {
         new OverseerThread(
             ccTg,
             overseerCollectionConfigSetProcessor,
-            "OverseerCollectionConfigSetProcessor-" + id);
+            "OverseerCollectionConfigSetProcessor-" + id) {
+          @Override
+          public void run() {
+            super.run();
+            if (!isCloseRequested() && !closed) {
+              stopStateUpdaterAfterProcessorExit();
+            }
+          }
+        };
     ccThread.setDaemon(true);
 
     updaterThread.start();
@@ -801,6 +816,33 @@ public class Overseer implements SolrCloseable {
    */
   public synchronized OverseerThread getUpdaterThread() {
     return updaterThread;
+  }
+
+  /**
+   * For tests.
+   *
+   * @lucene.internal
+   * @return collection and config set processor thread
+   */
+  public synchronized OverseerThread getCollectionProcessorThread() {
+    return ccThread;
+  }
+
+  /**
+   * The collection and config set processor thread ended without being asked to, which would leave
+   * this node as the Overseer without anyone processing its queue. Stop the state updater too: its
+   * exit makes this node give up leadership and rejoin the election. Not synchronized, since {@link
+   * #close()} holds the monitor while it waits for this thread.
+   */
+  private void stopStateUpdaterAfterProcessorExit() {
+    log.warn(
+        "Overseer (id={}) collection and config set processor stopped unexpectedly, giving up leadership",
+        id);
+    OverseerThread updater = updaterThread;
+    if (updater != null) {
+      IOUtils.closeQuietly(updater);
+      updater.interrupt();
+    }
   }
 
   @Override
