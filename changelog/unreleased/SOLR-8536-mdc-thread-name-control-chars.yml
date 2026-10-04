@@ -1,0 +1,10 @@
+title: >
+  Thread names set by MDC aware executors no longer contain line breaks or other control
+  characters coming from application MDC values.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-8536
+    url: https://issues.apache.org/jira/browse/SOLR-8536
