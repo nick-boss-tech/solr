@@ -41,7 +41,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-${{ github.ref_name }}
+          name: test-results-${{ github.run_id }}
           path: |
             **/build/test-results/test/*.xml
             **/build/reports/tests/**
