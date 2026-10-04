@@ -499,6 +499,17 @@
     </analyzer>
   </fieldType>
 
+  <!-- Field type whose query analyzer, but not its index analyzer, removes managed stopwords -->
+  <fieldType name="managed_en_query_stop" class="solr.TextField">
+    <analyzer type="index">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.ManagedStopFilterFactory" managed="english"/>
+    </analyzer>
+  </fieldType>
+
   <!-- Field type where english stopwords are managed by the REST API -->
   <fieldType name="managed_graph_en" class="solr.TextField" autoGeneratePhraseQueries="false">
     <analyzer type="index">
