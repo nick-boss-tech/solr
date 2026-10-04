@@ -1262,7 +1262,8 @@ public class IndexFetcher {
         compareResult.equal = true;
         return compareResult;
       } else {
-        log.warn(
+        // not a problem in itself: the file is simply fetched again (same level as the length case)
+        log.info(
             "File {} did not match. expected checksum is {} and actual is checksum {}. "
                 + "expected length is {} and actual length is {}",
             filename,
