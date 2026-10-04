@@ -110,6 +110,13 @@ public class GraphQueryTest extends SolrTestCaseJ4 {
             "q",
             "{!graph from=${node_id} to=${edge_id} returnRoot=true returnOnlyLeaf=false traversalFilter='text:foo11'}id:doc_8"),
         "/response/numFound==2");
+    // SOLR-8977: a pure negative traversalFilter excludes docs 12 and 13 but still follows 10 -> 11
+    assertJQ(
+        req(
+            p,
+            "q",
+            "{!graph from=${node_id} to=${edge_id} returnRoot=true returnOnlyLeaf=false traversalFilter='-text:foo10'}id:doc_10"),
+        "/response/numFound==2");
     assertJQ(
         req(
             p,

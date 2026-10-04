@@ -22,6 +22,7 @@ import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.schema.StrField;
 import org.apache.solr.search.QParser;
 import org.apache.solr.search.QueryParsing;
+import org.apache.solr.search.QueryUtils;
 import org.apache.solr.search.SyntaxError;
 
 /** Solr query parser that will handle parsing graph query requests. */
@@ -41,6 +42,10 @@ public class GraphQueryParser extends QParser {
     String traversalFilterS = localParams.get("traversalFilter");
     Query traversalFilter =
         traversalFilterS == null ? null : subQuery(traversalFilterS, null).getQuery();
+    if (traversalFilter != null) {
+      // the filter is added as a MUST clause on every hop, so a pure negative query needs *:*
+      traversalFilter = QueryUtils.makeQueryable(traversalFilter);
+    }
 
     // NOTE: the from/to are reversed from {!join}
     String fromField = localParams.get("from", "node_id");
