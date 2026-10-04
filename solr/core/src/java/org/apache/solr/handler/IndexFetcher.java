@@ -76,6 +76,7 @@ import java.util.zip.Adler32;
 import java.util.zip.Checksum;
 import java.util.zip.InflaterInputStream;
 import org.apache.lucene.codecs.CodecUtil;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexCommit;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.SegmentInfos;
@@ -864,10 +865,17 @@ public class IndexFetcher {
     }
   }
 
-  private boolean hasUnusedFiles(Directory indexDir, IndexCommit commit) throws IOException {
+  /**
+   * Whether the index directory holds files that no retained commit point refers to. Files of
+   * other commits kept by the deletion policy (maxCommitsToKeep &gt; 1) are in use, not unused.
+   */
+  static boolean hasUnusedFiles(Directory indexDir, IndexCommit commit) throws IOException {
     String segmentsFileName = commit.getSegmentsFileName();
     SegmentInfos infos = SegmentInfos.readCommit(indexDir, segmentsFileName);
     Set<String> currentFiles = new HashSet<>(infos.files(true));
+    for (IndexCommit retained : DirectoryReader.listCommits(indexDir)) {
+      currentFiles.addAll(retained.getFileNames());
+    }
     String[] allFiles = indexDir.listAll();
     for (String file : allFiles) {
       if (!file.equals(segmentsFileName)
