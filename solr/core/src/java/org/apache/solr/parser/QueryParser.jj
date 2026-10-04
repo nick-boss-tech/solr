@@ -234,6 +234,14 @@ Query Query(String field) throws SyntaxError :
         return rawToNormal(firstQuery);
       }
     }
+    if (clauses.size() == 1 && clauses.get(0).getOccur() == BooleanClause.Occur.MUST) {
+      // with q.op=AND a lone parenthesized clause is MUST; a pure-negative sub-query must not stay
+      // nested (it would match nothing), so return it for QueryUtils.makeQueryable to fix up
+      Query onlyQuery = clauses.get(0).getQuery();
+      if (org.apache.solr.search.QueryUtils.isNegative(onlyQuery)) {
+        return onlyQuery;
+      }
+    }
     return getBooleanQuery(clauses);
   }
 }

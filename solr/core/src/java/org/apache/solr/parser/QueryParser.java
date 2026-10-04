@@ -249,6 +249,14 @@ if (clauses.size() == 1 && clauses.get(0).occur() == BooleanClause.Occur.SHOULD)
         {if ("" != null) return rawToNormal(firstQuery);}
       }
     }
+    if (clauses.size() == 1 && clauses.get(0).occur() == BooleanClause.Occur.MUST) {
+      // with q.op=AND a lone parenthesized clause is MUST; a pure-negative sub-query must not stay
+      // nested (it would match nothing), so return it for QueryUtils.makeQueryable to fix up
+      Query onlyQuery = clauses.get(0).query();
+      if (org.apache.solr.search.QueryUtils.isNegative(onlyQuery)) {
+        {if ("" != null) return onlyQuery;}
+      }
+    }
     {if ("" != null) return getBooleanQuery(clauses);}
     throw new Error("Missing return statement in function");
 }
