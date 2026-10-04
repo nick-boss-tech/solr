@@ -481,8 +481,11 @@ public final class SolrRangeQuery extends ExtendedQueryBase implements DocSetPro
 
       if (doCheck) {
         answer = createDocSet(solrSearcher, count);
-        // This can be a naked put because the cache usually gets checked in SolrIndexSearcher
-        solrSearcher.getFilterCache().put(SolrRangeQuery.this, answer);
+        // Deliberately NOT put into the filterCache from here (SOLR-17280): we may be running
+        // inside a filterCache.computeIfAbsent() mapping function for an enclosing query, and a
+        // put() on the same (async) cache from within it can fail with "IllegalStateException:
+        // Recursive update". When this query is used directly as a filter, SolrIndexSearcher
+        // caches its DocSet itself.
         return segStates[context.ord] = new SegState(new SegmentDocIdSet(answer, context));
       }
 

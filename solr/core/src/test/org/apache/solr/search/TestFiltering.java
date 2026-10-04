@@ -106,6 +106,36 @@ public class TestFiltering extends SolrTestCaseJ4 {
     }
   }
 
+  /**
+   * A range query with too many terms to rewrite to a BooleanQuery builds a DocSet itself. It used
+   * to put that DocSet straight into the filterCache from inside the weight, which can happen while
+   * the same cache is already computing an entry for an enclosing query (SOLR-17280, "Recursive
+   * update"). Only the enclosing filter may be cached, never the nested range query.
+   */
+  @Test
+  public void testNestedRangeQueryNotPutInFilterCache() throws Exception {
+    clearIndex();
+    for (int i = 0; i < 40; i++) {
+      assertU(adoc("id", Integer.toString(i), "val_s", String.format(Locale.ROOT, "v%02d", i)));
+    }
+    assertU(commit());
+
+    final String rangeStr = "val_s:[v00 TO v99]";
+    assertJQ(
+        req("q", "*:*", "fq", rangeStr + " OR id:nomatch", "rows", "0"), "/response/numFound==40");
+
+    SolrQueryRequest req = req();
+    try {
+      final SolrIndexSearcher searcher = req.getSearcher();
+      final Query rangeQuery = QParser.getParser(rangeStr, null, req).getQuery();
+      assertNull(
+          "range query nested in a filter must not be put directly in the filterCache",
+          searcher.getFilterCache().get(rangeQuery));
+    } finally {
+      req.close();
+    }
+  }
+
   public void testCaching() throws Exception {
     clearIndex();
     assertU(adoc("id", "4", "val_i", "1"));
