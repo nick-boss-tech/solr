@@ -21,28 +21,37 @@ import java.util.List;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.core.SolrCore;
 import org.apache.solr.handler.component.ShardRequest;
 import org.apache.solr.handler.component.ShardResponse;
+import org.apache.solr.util.EmbeddedSolrServerTestRule;
 import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 
 /**
  * Unit tests for {@link PeerSync#handleResponse}. These live outside {@link PeerSyncTest} because
  * that suite calls initCore from its constructor, so every additional test method in it leaks a
- * harness core.
+ * harness core. The core here only exists so a PeerSync can be constructed; handleResponse itself
+ * reads nothing from it beyond the log prefix.
  */
 public class PeerSyncHandleResponseTest extends SolrTestCase {
 
+  @ClassRule
+  public static final EmbeddedSolrServerTestRule solrTestRule = new EmbeddedSolrServerTestRule();
+
   @BeforeClass
   public static void beforeClass() throws Exception {
+    solrTestRule.startSolr(SolrTestCaseJ4.TEST_HOME());
     SolrTestCaseJ4.newRandomConfig();
-    initCore("solrconfig-tlog.xml", "schema.xml");
+    solrTestRule.newCollection().withConfigSet(SolrTestCaseJ4.TEST_COLL1_CONF()).create();
   }
 
   @Test
   public void testPeerSyncIgnores500FromVersionRequestWhenCantReachIsSuccess() throws Exception {
-    try (PeerSync peerSync =
-        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true)) {
+    try (SolrCore core = solrTestRule.getCoreContainer().getCore("collection1");
+        PeerSync peerSync =
+            new PeerSync(core, List.of("http://example.com/solr/core"), 10, true)) {
       ShardResponse response =
           failedResponse(
               PeerSync.SHARD_REQUEST_PURPOSE_GET_VERSIONS,
@@ -54,8 +63,9 @@ public class PeerSyncHandleResponseTest extends SolrTestCase {
 
   @Test
   public void testPeerSyncStillFails500FromUpdateRequest() throws Exception {
-    try (PeerSync peerSync =
-        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true)) {
+    try (SolrCore core = solrTestRule.getCoreContainer().getCore("collection1");
+        PeerSync peerSync =
+            new PeerSync(core, List.of("http://example.com/solr/core"), 10, true)) {
       ShardResponse response =
           failedResponse(
               PeerSync.SHARD_REQUEST_PURPOSE_GET_UPDATES,
