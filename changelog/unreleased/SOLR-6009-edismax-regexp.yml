@@ -1,0 +1,10 @@
+title: >
+  The edismax query parser now applies the qf fields to regular expression clauses such as
+  /.*foo.*/ instead of leaking its internal placeholder field name into the query.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-6009
+    url: https://issues.apache.org/jira/browse/SOLR-6009
