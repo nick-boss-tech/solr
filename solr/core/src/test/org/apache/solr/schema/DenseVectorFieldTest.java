@@ -1320,9 +1320,7 @@ public class DenseVectorFieldTest extends AbstractBadConfigTestBase {
       SolrException ex =
           expectThrows(
               SolrException.class,
-              () ->
-                  type.getKnnVectorQuery(
-                      "vector", "[0, 0, 0, 0]", 3, 3, null, null, null, null));
+              () -> type.getKnnVectorQuery("vector", "[0, 0, 0, 0]", 3, 3, null, null, null, null));
       assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
       assertTrue(ex.getMessage().contains("all-zero"));
     }
