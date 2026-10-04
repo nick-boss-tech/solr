@@ -711,6 +711,26 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
     assertJQ(req("fq", "wdf_nocase:.,", "fl", "id", "debug", "query"), "/response/numFound==0");
   }
 
+  /**
+   * SOLR-12532: slop given in the query string must also be applied when the phrase becomes a graph
+   * query (WordDelimiterGraphFilter with preserveOriginal and generateWordParts). NOTE: written
+   * without being compiled or run; see SOLR-12532-TESTING.md.
+   */
+  @Test
+  public void testQueryStringSlopOnGraphPhrase() throws Exception {
+    assertU(adoc("id", "41", "wdf_partspreserve", "you just can't"));
+    assertU(commit());
+
+    // "you" and "can't" are two positions apart in the indexed text, so slop 2 is needed
+    assertJQ(
+        req("q", "wdf_partspreserve:\"you can't\"~2", "fl", "id", "debug", "query"),
+        "/response/numFound==1");
+    // control: without enough slop the phrase must not match
+    assertJQ(
+        req("q", "wdf_partspreserve:\"you can't\"", "fl", "id", "debug", "query"),
+        "/response/numFound==0");
+  }
+
   @Test
   public void testRegex() throws Exception {
     // leading slash in a regex fixed by SOLR-8605

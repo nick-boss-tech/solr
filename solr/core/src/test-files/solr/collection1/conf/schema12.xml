@@ -90,6 +90,23 @@
     </analyzer>
   </fieldType>
 
+  <!-- SOLR-12532: graph phrase queries (preserveOriginal + generateWordParts) must keep the query-string slop -->
+  <fieldType name="wdf_partspreserve" class="solr.TextField">
+    <analyzer type="index">
+      <tokenizer class="solr.MockTokenizerFactory"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="0"
+              catenateNumbers="0" catenateAll="0" splitOnCaseChange="0" preserveOriginal="1"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.FlattenGraphFilterFactory"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.MockTokenizerFactory"/>
+      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="0"
+              catenateNumbers="0" catenateAll="0" splitOnCaseChange="0" preserveOriginal="1"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+  </fieldType>
+
   <fieldType name="wdf_preserve" class="solr.TextField">
     <analyzer type="index">
       <tokenizer class="solr.MockTokenizerFactory"/>
@@ -645,6 +662,7 @@
   <field name="lengthfilt" type="lengthfilt" indexed="true" stored="true"/>
   <field name="dedup" type="dedup" indexed="true" stored="true"/>
   <field name="wdf_nocase" type="wdf_nocase" indexed="true" stored="true"/>
+  <field name="wdf_partspreserve" type="wdf_partspreserve" indexed="true" stored="true"/>
   <field name="wdf_preserve" type="wdf_preserve" indexed="true" stored="true"/>
 
   <field name="numberpartfail" type="failtype1" indexed="true" stored="true"/>
