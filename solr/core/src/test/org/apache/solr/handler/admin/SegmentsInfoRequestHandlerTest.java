@@ -22,6 +22,7 @@ import org.apache.lucene.index.SegmentCommitInfo;
 import org.apache.lucene.index.SegmentInfos;
 import org.apache.lucene.util.Version;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.core.SolrCore;
 import org.apache.solr.index.NoMergePolicyFactory;
 import org.apache.solr.util.RefCounted;
 import org.junit.AfterClass;
@@ -150,6 +151,21 @@ public class SegmentsInfoRequestHandlerTest extends SolrTestCaseJ4 {
         "Missing core info",
         reqWithPath("/admin/segments", "coreInfo", "true"),
         "boolean(//lst[@name='info']/lst[@name='core'])");
+  }
+
+  @Test
+  public void testSegmentInfosOnReadOnlyCore() {
+    final SolrCore core = h.getCore();
+    core.readOnly = true;
+    try {
+      assertQ(
+          "Segments info should be returned for a read-only core",
+          reqWithPath("/admin/segments", "coreInfo", "true"),
+          NUM_SEGMENTS + "=count(//lst[@name='segments']/lst)",
+          "boolean(//lst[@name='info']/lst[@name='core'])");
+    } finally {
+      core.readOnly = false;
+    }
   }
 
   @Test
