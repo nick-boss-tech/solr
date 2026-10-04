@@ -1,0 +1,10 @@
+title: >
+  A query with an unterminated comment such as "/*" no longer makes the same query parser instance
+  fail on later queries that contain valid comments.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-11761
+    url: https://issues.apache.org/jira/browse/SOLR-11761
