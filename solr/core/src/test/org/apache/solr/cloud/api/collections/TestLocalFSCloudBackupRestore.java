@@ -117,8 +117,9 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
 
   private void errorRestore(CloudSolrClient solrClient) throws SolrServerException, IOException {
     String backupName = BACKUPNAME_PREFIX + testSuffix;
+    final String restoreCollectionName = getCollectionName() + "boo";
     CollectionAdminRequest.Restore restore =
-        CollectionAdminRequest.restoreCollection(getCollectionName() + "boo", backupName)
+        CollectionAdminRequest.restoreCollection(restoreCollectionName, backupName)
             .setLocation(backupLocation);
     if (random().nextBoolean()) {
       restore.setRepositoryName(poisoned);
@@ -130,6 +131,11 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
       assertEquals(ErrorCode.SERVER_ERROR.code, ex.code());
       assertTrue(ex.getMessage(), ex.getMessage().contains(poisoned));
     }
+    // SOLR-12651: the data copy failed after the collection was created, so the half-restored
+    // collection must be cleaned up. NOTE: written without being compiled or run.
+    assertFalse(
+        "Failed restore left collection " + restoreCollectionName + " behind",
+        CollectionAdminRequest.listCollections(solrClient).contains(restoreCollectionName));
   }
 
   private void errorBackup(CloudSolrClient solrClient) throws SolrServerException, IOException {
