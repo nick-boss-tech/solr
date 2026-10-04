@@ -29,7 +29,6 @@ import java.nio.file.Path;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.Properties;
 import java.util.stream.Stream;
 import javax.naming.Context;
@@ -215,34 +214,19 @@ public class CoreContainerProvider implements ServletContextListener {
     }
     try {
       RuntimeMXBean mx = ManagementFactory.getRuntimeMXBean();
-      Optional<String> crashOnOutOfMemoryErrorArg =
+      boolean exitOnOutOfMemoryError =
           mx.getInputArguments().stream()
-              .filter(x -> x.startsWith("-XX:+CrashOnOutOfMemoryError"))
-              .findFirst();
-      if (crashOnOutOfMemoryErrorArg.isPresent()) {
-        String errorFileArg =
-            mx.getInputArguments().stream()
-                .filter(x -> x.startsWith("-XX:ErrorFile"))
-                .findFirst()
-                .orElse("-XX:ErrorFile=hs_err_%p.log");
-        String errorFilePath =
-            errorFileArg
-                .substring(errorFileArg.indexOf('=') + 1)
-                .replace("%p", String.valueOf(mx.getPid()));
-        String logMessage =
-            "Solr started with \"-XX:+CrashOnOutOfMemoryError\" that will crash on any OutOfMemoryError exception. "
-                + "The cause of the OOME will be logged in the crash file at the following path: {}";
-        log.info(logMessage, errorFilePath);
+              .anyMatch(x -> x.startsWith("-XX:+ExitOnOutOfMemoryError"));
+      if (exitOnOutOfMemoryError) {
+        log.info(
+            "Solr started with \"-XX:+ExitOnOutOfMemoryError\" that will exit on any OutOfMemoryError exception. "
+                + "The cause of the OOME will be logged to the console.");
       }
     } catch (Exception e) {
-      String logMessage =
-          String.format(
-              Locale.ROOT,
-              "Solr typically starts with \"-XX:+CrashOnOutOfMemoryError\" that will crash on any OutOfMemoryError exception. "
-                  + "Unable to get the specific file due to an exception."
-                  + "The cause of the OOME will be logged in a crash file in the logs directory: %s",
-              EnvUtils.getProperty("solr.logs.dir"));
-      log.info(logMessage, e);
+      log.info(
+          "Solr typically starts with \"-XX:+ExitOnOutOfMemoryError\" that will exit on any OutOfMemoryError exception. "
+              + "Unable to check the JVM arguments due to an exception.",
+          e);
     }
   }
 

@@ -131,3 +131,12 @@ teardown() {
   # Verify the techproducts configset was uploaded
   config_exists "techproducts"
 }
+
+@test "solr exits on OutOfMemoryError instead of crashing" {
+  solr start
+  solr assert --started http://localhost:${SOLR_PORT} --timeout 5000
+
+  run curl -s "http://localhost:${SOLR_PORT}/solr/admin/info/system"
+  assert_output --partial "-XX:+ExitOnOutOfMemoryError"
+  refute_output --partial "CrashOnOutOfMemoryError"
+}

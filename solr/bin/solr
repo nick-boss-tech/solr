@@ -1327,9 +1327,9 @@ function start_solr() {
     # '-OmitStackTraceInFastThrow' ensures stack traces in errors,
     # users who don't care about useful error msgs can override in SOLR_OPTS with +OmitStackTraceInFastThrow
     "${SOLR_HOST_ADVERTISE_ARG[@]}" "-Duser.timezone=$SOLR_TIMEZONE" "-XX:-OmitStackTraceInFastThrow" \
-    # '+CrashOnOutOfMemoryError' ensures that Solr crashes whenever
-    # OOME is thrown. Program operation after OOME is unpredictable.
-    "-XX:+CrashOnOutOfMemoryError" "-XX:ErrorFile=${SOLR_LOGS_DIR}/jvm_crash_%p.log" \
+    # '+ExitOnOutOfMemoryError' ensures that Solr exits whenever OOME is thrown, with a non-zero exit
+    # code and the cause logged to the console. Program operation after OOME is unpredictable.
+    "-XX:+ExitOnOutOfMemoryError" \
     "-Djetty.home=$SOLR_SERVER_DIR" "-Dsolr.solr.home=$SOLR_HOME" "-Dsolr.install.dir=$SOLR_TIP" "-Dsolr.install.symDir=$SOLR_TIP_SYM" \
     "${LOG4J_CONFIG[@]}" "${SCRIPT_SOLR_OPTS[@]}" "${SECURITY_MANAGER_OPTS[@]}" "${SOLR_OPTS[@]}")
 

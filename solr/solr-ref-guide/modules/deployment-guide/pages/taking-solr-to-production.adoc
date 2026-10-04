@@ -248,7 +248,7 @@ You can also refer to xref:jvm-settings.adoc[] for tuning your memory and garbag
 
 ==== Out-of-Memory Handling
 
-The `bin/solr` script uses the `-XX:+CrashOnOutOfMemoryError` JVM option to crash Solr on `OutOfMemoryError` exceptions.
+The `bin/solr` script uses the `-XX:+ExitOnOutOfMemoryError` JVM option to make Solr exit with a non-zero exit code on `OutOfMemoryError` exceptions, with the cause logged to the console.
 This behavior is recommended. In SolrCloud mode ZooKeeper will be immediately notified that a node has experienced a non-recoverable error.
 
 === Going to Production with SolrCloud
