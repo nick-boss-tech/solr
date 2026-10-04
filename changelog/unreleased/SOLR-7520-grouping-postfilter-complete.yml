@@ -1,0 +1,10 @@
+title: >
+  A post filter collector is now completed on shards when a distributed grouping request uses it,
+  so its complete() results (for example an AnalyticsQuery) are no longer lost.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-7520
+    url: https://issues.apache.org/jira/browse/SOLR-7520
