@@ -207,4 +207,31 @@ public class TestManagedStopFilterFactory extends RestTestBase {
     // and of it is unavailable again
     assertJQ(endpoint + "/schön", "/error/code==404");
   }
+
+  /** SOLR-12092: edismax stopwords=false must also keep the words of a ManagedStopFilterFactory. */
+  @Test
+  public void testEdismaxStopwordsFalseKeepsManagedStopwords() throws Exception {
+    String endpoint = "/schema/analysis/stopwords/english";
+    assertJPut(
+        endpoint, Utils.toJSONString(Arrays.asList("a", "an", "the")), "/responseHeader/status==0");
+    restTestHarness.reload(); // make the word set available
+
+    String fieldName = "managed_en_query_stop_field";
+    assertJPost(
+        "/schema/fields",
+        "{add-field : { name :" + fieldName + ", type : managed_en_query_stop}}",
+        "/responseHeader/status==0");
+
+    // the index analyzer has no stop filter, so "one" is the only indexed term
+    assertU(adoc(fieldName, "one", "id", "7"));
+    assertU(commit());
+
+    String query = "/select?defType=edismax&mm=100%25&qf=" + fieldName + "&q=the%20one";
+
+    // default: "the" is removed from the query, so the document matches on "one"
+    assertQ(query, "//result[@numFound='1']");
+
+    // stopwords=false: "the" must be kept and required (mm=100%), which no document satisfies
+    assertQ(query + "&stopwords=false", "//result[@numFound='0']");
+  }
 }
