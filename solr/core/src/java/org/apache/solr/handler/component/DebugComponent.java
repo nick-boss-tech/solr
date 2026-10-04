@@ -51,6 +51,7 @@ import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.search.SortSpecParsing;
 import org.apache.solr.search.SyntaxError;
 import org.apache.solr.search.facet.FacetDebugInfo;
+import org.apache.solr.search.facet.FacetModule;
 import org.apache.solr.search.stats.StatsCache;
 import org.apache.solr.util.SolrPluginUtils;
 import org.apache.solr.util.SolrResponseUtil;
@@ -175,6 +176,14 @@ public class DebugComponent extends SearchComponent {
     } else {
       sreq.params.set(CommonParams.DEBUG_QUERY, "false");
       sreq.params.set(CommonParams.DEBUG, "false");
+      // shards only collect facet debug info when they are in debug mode themselves
+      boolean facetRequest =
+          (sreq.purpose
+                  & (FacetModule.PURPOSE_GET_JSON_FACETS | FacetModule.PURPOSE_REFINE_JSON_FACETS))
+              != 0;
+      if (facetRequest && !rb.isDebugTimings() && !rb.isDebugTrack()) {
+        sreq.params.add(CommonParams.DEBUG, CommonParams.QUERY);
+      }
     }
     if (rb.isDebugTimings()) {
       sreq.params.add(CommonParams.DEBUG, CommonParams.TIMING);

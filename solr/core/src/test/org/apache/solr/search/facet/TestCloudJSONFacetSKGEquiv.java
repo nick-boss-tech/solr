@@ -266,7 +266,7 @@ public class TestCloudJSONFacetSKGEquiv extends SolrCloudTestCase {
     final SolrParams facetParams =
         params(
             "rows", "0",
-            "debug", "true", // SOLR-14451
+            "debug", "query",
             // *:* is the only "safe" query for this test,
             // to ensure we always have at least one bucket for every facet,
             // so we can be confident in getting the debug we expect...
@@ -306,7 +306,7 @@ public class TestCloudJSONFacetSKGEquiv extends SolrCloudTestCase {
     final SolrParams baseParams =
         params(
             "rows", "0",
-            "debug", "true", // SOLR-14451
+            "debug", "query",
             // *:* is the only "safe" query for this test,
             // to ensure we always have at least one bucket for every facet,
             // so we can be confident in getting the debug we expect...
