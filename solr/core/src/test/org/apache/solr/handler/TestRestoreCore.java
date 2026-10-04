@@ -180,6 +180,65 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testFailedRestoreAfterSuccessfulRestoreKeepsCurrentIndex() throws Exception {
+    // SOLR-9865: a failed restore used to delete index.properties, which rolled the core back to
+    // the default "index" directory instead of the restore.<timestamp> directory it was using
+    int nDocs = BackupRestoreUtils.indexDocs(leaderClient, "collection1", docsSeed);
+
+    String location = createTempDir().toString();
+    leaderJetty.getCoreContainer().getAllowPaths().add(Path.of(location));
+    String snapshotName = TestUtil.randomSimpleString(random(), 1, 5);
+    String params =
+        "&name="
+            + snapshotName
+            + "&location="
+            + URLEncoder.encode(location, StandardCharsets.UTF_8);
+    String baseUrl = leaderJetty.getBaseUrl().toString();
+
+    TestReplicationHandlerBackup.runBackupCommand(
+        leaderJetty, ReplicationHandler.CMD_BACKUP, params);
+    final BackupStatusChecker backupStatus =
+        new BackupStatusChecker(leaderClient, "/" + DEFAULT_TEST_CORENAME + "/replication");
+    final String backupDirName = backupStatus.waitForBackupSuccess(snapshotName, 30);
+
+    // first restore succeeds, so index.properties now points at a restore.<timestamp> directory
+    TestReplicationHandlerBackup.runBackupCommand(
+        leaderJetty, ReplicationHandler.CMD_RESTORE, params);
+    while (!TestRestoreCoreUtil.fetchRestoreStatus(baseUrl, DEFAULT_TEST_CORENAME)) {
+      Thread.sleep(1000);
+    }
+    BackupRestoreUtils.verifyDocs(nDocs, leaderClient, DEFAULT_TEST_CORENAME);
+
+    // add one more doc to the restored index
+    SolrInputDocument extra = new SolrInputDocument();
+    extra.addField("id", nDocs + 1000);
+    extra.addField("name", "added after the first restore");
+    leaderClient.add(DEFAULT_TEST_CORENAME, extra);
+    leaderClient.commit(DEFAULT_TEST_CORENAME);
+    BackupRestoreUtils.verifyDocs(nDocs + 1, leaderClient, DEFAULT_TEST_CORENAME);
+
+    // corrupt the backup so that the second restore fails and rolls back
+    final Path restoreIndexPath = Path.of(location, backupDirName);
+    try (DirectoryStream<Path> stream =
+        Files.newDirectoryStream(restoreIndexPath, IndexFileNames.SEGMENTS + "*")) {
+      Files.delete(stream.iterator().next());
+    }
+    TestReplicationHandlerBackup.runBackupCommand(
+        leaderJetty, ReplicationHandler.CMD_RESTORE, params);
+    expectThrows(
+        AssertionError.class,
+        () -> {
+          for (int i = 0; i < 10; i++) {
+            TestRestoreCoreUtil.fetchRestoreStatus(baseUrl, DEFAULT_TEST_CORENAME);
+            Thread.sleep(50);
+          }
+        });
+
+    // the core must still serve the index it had before the failed restore, including the extra doc
+    BackupRestoreUtils.verifyDocs(nDocs + 1, leaderClient, DEFAULT_TEST_CORENAME);
+  }
+
+  @Test
   public void testFailedRestore() throws Exception {
     int nDocs = BackupRestoreUtils.indexDocs(leaderClient, "collection1", docsSeed);
 

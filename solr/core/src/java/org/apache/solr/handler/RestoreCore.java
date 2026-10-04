@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Array;
 import java.net.URI;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -204,6 +205,9 @@ public class RestoreCore implements Callable<Boolean> {
         throw new SolrException(SolrException.ErrorCode.UNKNOWN, "Restore interrupted", e);
       }
       log.debug("Switching directories");
+      // remember where index.properties pointed before the switch, so a failed restore can go back
+      // to it instead of falling back to the default "index" directory
+      final String previousIndexDirName = Path.of(indexDirPath).getFileName().toString();
       core.modifyIndexProps(restoreIndexName);
 
       boolean success;
@@ -224,7 +228,12 @@ public class RestoreCore implements Callable<Boolean> {
                       core.getDataDir(),
                       DirectoryFactory.DirContext.META_DATA,
                       core.getSolrConfig().indexConfig.lockType);
-          dir.deleteFile(IndexFetcher.INDEX_PROPERTIES);
+          // "index" is the default directory used when there is no index.properties
+          if ("index".equals(previousIndexDirName)) {
+            dir.deleteFile(IndexFetcher.INDEX_PROPERTIES);
+          } else {
+            core.modifyIndexProps(previousIndexDirName);
+          }
         } finally {
           if (dir != null) {
             core.getDirectoryFactory().release(dir);
