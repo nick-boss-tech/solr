@@ -73,6 +73,7 @@ import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
 import org.apache.solr.client.solrj.request.CoreAdminRequest.WaitForState;
 import org.apache.solr.cloud.api.collections.DistributedCollectionConfigSetCommandRunner;
 import org.apache.solr.cloud.overseer.ClusterStateMutator;
+import org.apache.solr.cloud.overseer.NodeMutator;
 import org.apache.solr.cloud.overseer.OverseerAction;
 import org.apache.solr.cloud.overseer.SliceMutator;
 import org.apache.solr.common.AlreadyClosedException;
@@ -844,7 +845,7 @@ public class ZkController implements Closeable {
     try {
       if (getZkClient().isConnected()) {
         log.info("Publish this node as DOWN...");
-        publishNodeAsDown(getNodeName());
+        publishNodeAsDown(getNodeName(), true);
       }
     } catch (Exception e) {
       log.warn("Error publishing nodes as down. Continuing to close CoreContainer", e);
@@ -3026,6 +3027,15 @@ public class ZkController implements Closeable {
    * @return the names of the collections that have replicas on the given node
    */
   public Collection<String> publishNodeAsDown(String nodeName) {
+    return publishNodeAsDown(nodeName, false);
+  }
+
+  /**
+   * Like {@link #publishNodeAsDown(String)}. When {@code onlyIfNodeNotLive} is true, the Overseer
+   * ignores the request if the node is live again when the request is processed, so a shutdown
+   * message that is delayed past a restart does not mark the restarted node's replicas down.
+   */
+  private Collection<String> publishNodeAsDown(String nodeName, boolean onlyIfNodeNotLive) {
     log.info("Publish node={} as DOWN", nodeName);
 
     ClusterState clusterState = getClusterState();
@@ -3072,7 +3082,8 @@ public class ZkController implements Closeable {
             .offer(
                 m ->
                     m.put(Overseer.QUEUE_OPERATION, OverseerAction.DOWNNODE.toLower())
-                        .put(ZkStateReader.NODE_NAME_PROP, nodeName));
+                        .put(ZkStateReader.NODE_NAME_PROP, nodeName)
+                        .put(NodeMutator.ONLY_IF_NODE_NOT_LIVE, onlyIfNodeNotLive));
       } catch (IllegalStateException e) {
         log.info(
             "Not publishing node as DOWN because a resource required to do so is already closed.");
