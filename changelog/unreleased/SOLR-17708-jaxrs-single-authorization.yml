@@ -1,0 +1,9 @@
+title: >
+  v2 APIs implemented with JAX-RS are now authorized once per request instead of twice (once by HttpSolrCall and again by SolrRequestAuthorizer).
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-17708
+    url: https://issues.apache.org/jira/browse/SOLR-17708
