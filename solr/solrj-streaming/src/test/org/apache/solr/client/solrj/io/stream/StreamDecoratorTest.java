@@ -5479,6 +5479,48 @@ public class StreamDecoratorTest extends SolrCloudTestCase {
     return true;
   }
 
+  @Test
+  public void testParallelCartesianProductStream() throws Exception {
+    // SOLR-11922: parallel(cartesianProduct(search(...))) used to fail with a NullPointerException
+    new UpdateRequest()
+        .add(
+            id, "0", "a_ss", "a", "a_ss", "b", "a_ss", "c", "a_ss", "d", "a_ss", "e", "b_ls", "1",
+            "b_ls", "2", "b_ls", "3")
+        .add(id, "1", "a_ss", "a", "a_ss", "b", "a_ss", "c", "a_ss", "d", "a_ss", "e")
+        .commit(cluster.getSolrClient(), COLLECTIONORALIAS);
+
+    // the function name must match the one registered by the server's StreamHandler
+    StreamFactory streamFactory =
+        new StreamFactory()
+            .withCollectionUseThisConnection(COLLECTIONORALIAS, getSolrConnection())
+            .withFunctionName("search", CloudSolrStream.class)
+            .withFunctionName("cartesianProduct", CartesianProductStream.class)
+            .withFunctionName("parallel", ParallelStream.class);
+    StreamContext streamContext = new StreamContext();
+    SolrClientCache solrClientCache = new SolrClientCache();
+    streamContext.setSolrClientCache(solrClientCache);
+
+    try {
+      ParallelStream pstream =
+          (ParallelStream)
+              streamFactory.constructStream(
+                  "parallel("
+                      + COLLECTIONORALIAS
+                      + ", cartesianProduct(search(collection1, q=*:*, fl=\"id,a_ss\", sort=\"id asc\", partitionKeys=\"id\", path=\"/export\"), a_ss),"
+                      + " workers=\"2\", solrConnection=\""
+                      + getSolrConnection().toString()
+                      + "\", sort=\"id asc\")");
+      pstream.setStreamContext(streamContext);
+      List<Tuple> tuples = getTuples(pstream);
+
+      // two documents with five a_ss values each
+      assertEquals(10, tuples.size());
+      assertOrder(tuples, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1);
+    } finally {
+      solrClientCache.close();
+    }
+  }
+
   public boolean assertString(Tuple tuple, String fieldName, String expected) throws Exception {
     String actual = (String) tuple.get(fieldName);
 
