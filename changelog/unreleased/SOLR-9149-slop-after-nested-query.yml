@@ -1,0 +1,10 @@
+title: >
+  A phrase slop such as "white cat"~3 is no longer dropped when the query has an earlier nested
+  _query_ clause.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-9149
+    url: https://issues.apache.org/jira/browse/SOLR-9149
