@@ -3,7 +3,6 @@ title: >
 type: fixed
 authors:
   - name: Nick Shanin
-    nick: nick-boss-tech
 links:
   - name: SOLR-14931
     url: https://issues.apache.org/jira/browse/SOLR-14931
