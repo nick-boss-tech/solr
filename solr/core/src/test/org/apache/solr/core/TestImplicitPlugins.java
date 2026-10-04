@@ -16,8 +16,10 @@
  */
 package org.apache.solr.core;
 
+import java.util.Map;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.util.Utils;
 import org.apache.solr.response.QueryResponseWriter;
 import org.apache.solr.response.ResponseWritersRegistry;
 import org.junit.BeforeClass;
@@ -39,6 +41,20 @@ public class TestImplicitPlugins extends SolrTestCaseJ4 {
   @BeforeClass
   public static void beforeClass() throws Exception {
     initCore("solrconfig.xml", "schema.xml");
+  }
+
+  @Test
+  public void testGraphHandlerParamsetName() {
+    // SOLR-9750: implicit paramsets are named after the endpoint, upper-cased: /graph -> _GRAPH
+    @SuppressWarnings("unchecked")
+    Map<String, Object> plugins =
+        (Map<String, Object>)
+            Utils.fromJSONResource(SolrCore.class.getClassLoader(), "ImplicitPlugins.json");
+    @SuppressWarnings("unchecked")
+    Map<String, Object> handlers = (Map<String, Object>) plugins.get("requestHandler");
+    @SuppressWarnings("unchecked")
+    Map<String, Object> graph = (Map<String, Object>) handlers.get("/graph");
+    assertEquals("_GRAPH", graph.get("useParams"));
   }
 
   // ========== Core vs Built-in Writer Separation Tests ==========

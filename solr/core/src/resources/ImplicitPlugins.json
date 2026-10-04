@@ -94,7 +94,7 @@
     },
     "/graph": {
       "class": "solr.GraphHandler",
-      "useParams":"_ADMIN_GRAPH",
+      "useParams":"_GRAPH",
       "invariants": {
         "wt": "graphml",
         "distrib": false

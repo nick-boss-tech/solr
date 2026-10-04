@@ -468,7 +468,7 @@ Graph Traversal:: Return http://graphml.graphdrawing.org/[GraphML] formatted out
 solr/<collection>/graph
 ----
 +
-Paramset: `_ADMIN_GRAPH`
+Paramset: `_GRAPH`
 
 SQL:: SQL query support.
 +
