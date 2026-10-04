@@ -658,15 +658,11 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     private final String collection;
 
     DummyRequest(String collection) {
-<<<<<<< HEAD
       this(collection, SolrRequestType.QUERY);
     }
 
     DummyRequest(String collection, SolrRequestType requestType) {
       super(METHOD.GET, "/dummy", requestType);
-=======
-      super(METHOD.GET, "/dummy", SolrRequestType.QUERY);
->>>>>>> b694fea9931 (SOLR-18341: Cover retry safety across transports)
       this.collection = collection;
     }
 
@@ -689,14 +685,6 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     public String getCollection() {
       return collection;
     }
-<<<<<<< HEAD
-=======
-
-    @Override
-    public SolrRequestType getRequestType() {
-      return SolrRequestType.QUERY;
-    }
->>>>>>> b694fea9931 (SOLR-18341: Cover retry safety across transports)
   }
 
   private static class DummyUpdateRequest extends DummyRequest {
