@@ -169,8 +169,7 @@ public class LBSolrClientRetryUnsentTest extends SolrTestCase {
   /** An unsafe update is not retried when the transport cannot prove it was unsent. */
   @Test
   public void testRequestThatMayHaveBeenReceivedIsNotRetried() {
-    LBSolrClient.Req req =
-        new LBSolrClient.Req(unsafeUpdate(), List.of(DEAD_HOST_1, DEAD_HOST_2));
+    LBSolrClient.Req req = new LBSolrClient.Req(unsafeUpdate(), List.of(DEAD_HOST_1, DEAD_HOST_2));
     try (FailFirstEndpoint client = new FailFirstEndpoint(maybeSentException())) {
       expectThrows(SolrServerException.class, () -> client.request(req));
       assertEquals(List.of(DEAD_HOST_1.getBaseUrl()), client.attempted);

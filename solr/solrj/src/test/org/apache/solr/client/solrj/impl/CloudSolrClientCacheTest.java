@@ -551,10 +551,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     for (int i = 0; idsByShard.size() < 2 && i < 100; i++) {
       String id = "retry-" + i;
       String shard =
-          collection
-              .getRouter()
-              .getTargetSlice(id, null, null, null, collection)
-              .getName();
+          collection.getRouter().getTargetSlice(id, null, null, null, collection).getName();
       idsByShard.putIfAbsent(shard, id);
     }
     assertEquals("Expected test collection to route to two shards", 2, idsByShard.size());
