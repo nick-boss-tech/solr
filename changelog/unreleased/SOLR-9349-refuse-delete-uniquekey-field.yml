@@ -1,0 +1,10 @@
+title: >
+  The Schema API delete-field command now refuses to delete the uniqueKey field instead of leaving
+  a schema that fails to load.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-9349
+    url: https://issues.apache.org/jira/browse/SOLR-9349
