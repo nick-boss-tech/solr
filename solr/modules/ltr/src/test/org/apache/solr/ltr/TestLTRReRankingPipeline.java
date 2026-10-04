@@ -239,7 +239,8 @@ public class TestLTRReRankingPipeline extends SolrTestCaseJ4 {
   @Test
   public void testBoostedDocsSurviveLTRRescore() throws Exception {
     assertU(delQ("*:*"));
-    // doc 0 has the best model score but is not elevated; doc 1 comes later by doc id and is elevated
+    // doc 0 has the best model score but is not elevated; doc 1 comes later by doc id and is
+    // elevated
     assertU(adoc("id", "0", "field", "match", "finalScoreFloat", "2.0"));
     assertU(adoc("id", "1", "field", "match", "finalScoreFloat", "1.0"));
     assertU(commit());
