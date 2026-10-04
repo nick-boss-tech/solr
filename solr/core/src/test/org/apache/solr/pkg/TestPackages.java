@@ -254,7 +254,10 @@ public class TestPackages extends SolrCloudTestCase {
         MANIFEST,
         org.apache.solr.common.util.Utils.sha512Digest(ByteBuffer.wrap(manifestBytes)));
     TestDistribFileStore.checkAllNodesForFile(
-        cluster, MANIFEST, Map.of(":files:" + MANIFEST + ":sha512", DigestUtils.sha512Hex(manifestBytes)), false);
+        cluster,
+        MANIFEST,
+        Map.of(":files:" + MANIFEST + ":sha512", DigestUtils.sha512Hex(manifestBytes)),
+        false);
 
     PackagePayload.AddVersion add = new PackagePayload.AddVersion();
     add.version = "1.0";
@@ -298,8 +301,7 @@ public class TestPackages extends SolrCloudTestCase {
     // Loading the version on the restarted node must have fetched the
     // manifest into its local file store.
     assertEquals(
-        FileStore.FileType.FILE,
-        jetty.getCoreContainer().getFileStore().getType(MANIFEST, false));
+        FileStore.FileType.FILE, jetty.getCoreContainer().getFileStore().getType(MANIFEST, false));
   }
 
   @Test
