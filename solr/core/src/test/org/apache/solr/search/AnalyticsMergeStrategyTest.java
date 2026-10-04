@@ -88,6 +88,16 @@ public class AnalyticsMergeStrategyTest extends BaseDistributedSearchTestCase {
     setDistributedParams(params);
     rsp = queryRandomShard(params);
     assertCount(rsp, 4);
+
+    // SOLR-7520: the post filter must also be completed when grouping across shards
+    params = new ModifiableSolrParams();
+    params.add("q", "*:*");
+    params.add("fq", "{!count}");
+    params.add("group", "true");
+    params.add("group.field", "sort_i");
+    setDistributedParams(params);
+    rsp = queryRandomShard(params);
+    assertNotNull("analytics section missing for grouped query", rsp.getResponse().get("analytics"));
   }
 
   private void assertCountOnly(QueryResponse rsp, int count) throws Exception {
