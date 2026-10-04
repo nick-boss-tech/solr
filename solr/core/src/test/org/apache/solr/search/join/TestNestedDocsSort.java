@@ -86,6 +86,12 @@ public class TestNestedDocsSort extends SolrTestCaseJ4 {
     parse("childfield(NEVER_SEEN_IT,$q) asc");
   }
 
+  @Test
+  public void testRewriteableSortFieldTypeIsRejected() {
+    SolrException e = expectThrows(SolrException.class, () -> parse("childfield(amount,$q) desc"));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+  }
+
   @Test(expected = SolrException.class)
   public void testOmitOrder() {
     parse("childfield(name_s1,$q)");

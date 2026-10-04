@@ -192,6 +192,15 @@ public class ChildFieldValueSourceParser extends ValueSourceParser {
         throw new SyntaxError(
             NAME + " sort param field \"" + sortFieldName + "\" can't be found in schema");
       }
+      if (sf.getSortField(false).getType() == Type.REWRITEABLE) {
+        throw new SyntaxError(
+            NAME
+                + " sort param field \""
+                + sortFieldName
+                + "\" of type \""
+                + sf.getType().getTypeName()
+                + "\" can't be used for sorting by child values");
+      }
     } catch (SyntaxError e) {
       log.error("can't parse {}", fp.getString(), e);
       throw e;
