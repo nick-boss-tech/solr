@@ -346,7 +346,8 @@ public class ExecutorUtil {
         }
       }
 
-      String ctxStr = contextString.toString().replace("/", "//");
+      // MDC values may come from the application and contain line breaks or other control chars
+      String ctxStr = contextString.toString().replace("/", "//").replaceAll("\\p{Cntrl}", " ");
       final String submitterContextStr =
           ctxStr.length() <= MAX_THREAD_NAME_LEN
               ? ctxStr

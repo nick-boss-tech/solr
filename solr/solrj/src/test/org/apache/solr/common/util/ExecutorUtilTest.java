@@ -45,6 +45,25 @@ public class ExecutorUtilTest extends SolrTestCase {
    */
   private static final long MAX_SANE_WAIT_DURATION_MS = 2_000;
 
+  /** SOLR-8536: control characters in MDC values must not end up in the thread name. */
+  @Test
+  public void testMdcControlCharactersNotInThreadName() throws Exception {
+    final ExecutorService executorService =
+        ExecutorUtil.newMDCAwareSingleThreadExecutor(
+            new SolrNamedThreadFactory(this.getClass().getSimpleName() + "mdc-name"));
+    MDC.put("app_key", "line1\nline2\tx");
+    try {
+      final String name =
+          executorService.submit(() -> Thread.currentThread().getName()).get(10, TimeUnit.SECONDS);
+      assertTrue(name, name.contains("line1 line2 x"));
+      assertFalse(name, name.contains("\n"));
+      assertFalse(name, name.contains("\t"));
+    } finally {
+      MDC.remove("app_key");
+      ExecutorUtil.shutdownAndAwaitTermination(executorService);
+    }
+  }
+
   /** Test that if there is a non interruptable thread that awaitTermination eventually returns. */
   @Test
   // Must prevent runaway failures so limit this to short timeframe in case of failure
