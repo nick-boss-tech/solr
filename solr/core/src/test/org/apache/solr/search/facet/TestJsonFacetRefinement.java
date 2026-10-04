@@ -935,7 +935,6 @@ public class TestJsonFacetRefinement extends SolrTestCaseHS {
     }
   }
 
-  @AwaitsFix(bugUrl = "https://issues.apache.org/jira/browse/SOLR-12556")
   @Test
   public void testProcessEmptyRefinement() throws Exception {
     initServers();

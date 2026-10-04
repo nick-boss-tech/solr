@@ -149,13 +149,16 @@ abstract class FacetRequestSortedMerger<FacetRequestT extends FacetRequestSorted
   }
 
   boolean isBucketComplete(FacetBucket bucket, Context mcontext) {
-    if (mcontext.numShards <= 1 || shardHasMoreBuckets == null) return true;
+    if (mcontext.numShards <= 1) return true;
+    // with processEmpty a shard that did not report "more" may still not have returned this bucket,
+    // see getRefinement (SOLR-12556)
+    if (shardHasMoreBuckets == null && !freq.processEmpty) return true;
     for (int shard = 0; shard < mcontext.numShards; shard++) {
-      // bucket is incomplete if we didn't see the bucket for this shard, and the shard has more
-      // buckets
-      if (!mcontext.getShardFlag(bucket.bucketNumber, shard)
-          && shardHasMoreBuckets != null
-          && shardHasMoreBuckets.get(shard)) {
+      // bucket is incomplete if we didn't see the bucket for this shard, and the shard has (or, for
+      // processEmpty, may have) more buckets
+      boolean shardMayHaveMore =
+          freq.processEmpty || (shardHasMoreBuckets != null && shardHasMoreBuckets.get(shard));
+      if (!mcontext.getShardFlag(bucket.bucketNumber, shard) && shardMayHaveMore) {
         return false;
       }
     }
