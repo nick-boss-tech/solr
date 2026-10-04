@@ -22,6 +22,7 @@ import java.util.Set;
 import org.apache.solr.cloud.SolrCloudTestCase;
 import org.apache.solr.common.cloud.Replica.State;
 import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
 import org.junit.After;
 import org.junit.Before;
 
@@ -137,5 +138,40 @@ public class TestPerReplicaStates extends SolrCloudTestCase {
     ops.persist(root, cluster.getZkClient());
     rs = PerReplicaStatesOps.fetch(root, zkStateReader.getZkClient(), null);
     assertTrue(rs.get("R3").isLeader);
+  }
+
+  public void testPersistRetriesOnStaleState() throws Exception {
+    String root = "/testPersistRetriesOnStaleState";
+    cluster.getZkClient().create(root, null, CreateMode.PERSISTENT);
+    cluster.getZkClient().create(root + "/R1:0:A", null, CreateMode.PERSISTENT);
+
+    // Computed from a stale view (no R1), the operation re-adds R1:0:A, which already exists. The
+    // retry recomputes it from the real state and succeeds with the next version.
+    PerReplicaStatesOps retried =
+        new PerReplicaStatesOps(
+            prs -> {
+              PerReplicaStates.State existing = prs.get("R1");
+              int version = existing == null ? 0 : existing.version + 1;
+              return List.of(
+                  new PerReplicaStates.Operation(
+                      PerReplicaStates.Operation.Type.ADD,
+                      new PerReplicaStates.State("R1", State.ACTIVE, Boolean.FALSE, version)));
+            });
+    retried.get(new PerReplicaStates(root, 0, List.of()));
+    retried.persist(root, cluster.getZkClient());
+    assertTrue(cluster.getZkClient().getChildren(root, null).contains("R1:1:A"));
+
+    // An operation that is stale on every attempt must fail instead of returning silently.
+    PerReplicaStatesOps alwaysStale =
+        new PerReplicaStatesOps(
+            prs ->
+                List.of(
+                    new PerReplicaStates.Operation(
+                        PerReplicaStates.Operation.Type.ADD,
+                        new PerReplicaStates.State("R1", State.ACTIVE, Boolean.FALSE, 0))));
+    alwaysStale.get(PerReplicaStatesOps.fetch(root, cluster.getZkClient(), null));
+    expectThrows(
+        KeeperException.NodeExistsException.class,
+        () -> alwaysStale.persist(root, cluster.getZkClient()));
   }
 }

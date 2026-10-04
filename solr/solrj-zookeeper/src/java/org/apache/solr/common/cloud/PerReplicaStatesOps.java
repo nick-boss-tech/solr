@@ -143,11 +143,16 @@ public class PerReplicaStatesOps {
         if (log.isInfoEnabled()) {
           log.info("Stale state for {}, attempt: {}. retrying...", znode, i);
         }
-        operations = refresh(fetch(znode, zkClient, null));
+        if (i < PerReplicaStates.MAX_RETRIES - 1) {
+          operations = refresh(fetch(znode, zkClient, null));
+        }
       }
     }
-    // Retries exhausted without persisting: don't swallow the failure, propagate it.
     if (lastStaleException != null) {
+      log.error(
+          "Unable to persist per-replica states for {} after {} attempts",
+          znode,
+          PerReplicaStates.MAX_RETRIES);
       throw lastStaleException;
     }
   }
