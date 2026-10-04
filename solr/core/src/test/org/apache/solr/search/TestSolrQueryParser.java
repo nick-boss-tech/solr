@@ -295,6 +295,11 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
         req("q", "  {!v=$qq}~1", "qq", "\"how brown\"~2", "debug", "query"),
         "/response/docs/[0]/id=='1'");
 
+    // SOLR-9149: a nested query clause must not make the slop of a later phrase get lost
+    assertJQ(
+        req("q", "_query_:\"foo\" text:\"how brown\"~2", "debug", "query"),
+        "/debug/parsedquery=='text:foo text:\"how brown\"~2'");
+
     assertJQ(
         req("fq", "id:1", "fl", "id,score", "q", subqq + "^3", "qq", "text:x^2", "debug", "query"),
         "/debug/parsedquery_toString=='((text:x)^2.0)^3.0'");

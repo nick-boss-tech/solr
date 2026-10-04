@@ -543,6 +543,8 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
    * method may be overridden, for example, to return a SpanNearQuery instead of a PhraseQuery.
    */
   protected Query getFieldQuery(String field, String queryText, int slop) throws SyntaxError {
+    // subQParser is only set by a nested _query_ style clause, so forget one from an earlier clause
+    subQParser = null;
     Query query = getFieldQuery(field, queryText, true, false);
 
     // only set slop of the phrase query was a result of this parser
