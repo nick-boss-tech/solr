@@ -1,0 +1,10 @@
+title: >
+  The edismax parameter stopwords=false now also keeps the words removed by a
+  ManagedStopFilterFactory in the query analyzer, not only those removed by StopFilterFactory.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-12092
+    url: https://issues.apache.org/jira/browse/SOLR-12092
