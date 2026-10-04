@@ -270,6 +270,35 @@ public class TestReRankQParserPlugin extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testReRankWithPureNegativeMainQuery() {
+    // SOLR-11470: a pure negative main query must still match everything it does not exclude
+    assertU(delQ("*:*"));
+    assertU(adoc("id", "1", "term_s", "YYYY"));
+    assertU(adoc("id", "2", "term_s", "YYYY"));
+    assertU(adoc("id", "3", "term_s", "ZZZZ"));
+    assertU(commit());
+
+    String[] queryChecks = {
+      "*[count(//doc)=2]", "//result/doc/str[@name='id'][.='1']", "//result/doc/str[@name='id'][.='2']"
+    };
+
+    // control: no re-ranking
+    assertQ(req("q", "-term_s:ZZZZ", "fl", "id"), queryChecks);
+
+    assertQ(
+        req(
+            "q",
+            "-term_s:ZZZZ",
+            "rq",
+            "{!" + ReRankQParserPlugin.NAME + " reRankQuery=$rqq reRankDocs=10}",
+            "rqq",
+            "{!func}sum(1.0,2.0)",
+            "fl",
+            "id"),
+        queryChecks);
+  }
+
+  @Test
   public void testReRankQueries() {
 
     assertU(delQ("*:*"));

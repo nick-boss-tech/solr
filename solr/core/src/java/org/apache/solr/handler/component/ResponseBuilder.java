@@ -41,6 +41,7 @@ import org.apache.solr.search.DocSlice;
 import org.apache.solr.search.QParser;
 import org.apache.solr.search.QueryCommand;
 import org.apache.solr.search.QueryResult;
+import org.apache.solr.search.QueryUtils;
 import org.apache.solr.search.RankQuery;
 import org.apache.solr.search.SortSpec;
 import org.apache.solr.search.grouping.GroupingSpecification;
@@ -478,7 +479,8 @@ public class ResponseBuilder {
    */
   public Query wrap(Query q) {
     if (this.rankQuery != null) {
-      return this.rankQuery.wrap(q);
+      // a pure negative main query would otherwise rewrite to MatchNoDocsQuery inside the rank query
+      return this.rankQuery.wrap(QueryUtils.makeQueryable(q));
     } else {
       return q;
     }
