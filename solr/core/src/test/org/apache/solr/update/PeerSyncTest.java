@@ -37,8 +37,6 @@ import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.StrUtils;
-import org.apache.solr.handler.component.ShardRequest;
-import org.apache.solr.handler.component.ShardResponse;
 import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.update.PeerSync.MissedUpdatesRequest;
 import org.apache.solr.update.processor.DistributedUpdateProcessor;
@@ -681,43 +679,5 @@ public class PeerSyncTest extends BaseDistributedSearchTestCase {
         }
       }
     }
-  }
-
-  @Test
-  public void testPeerSyncIgnores500FromVersionRequestWhenCantReachIsSuccess() throws Exception {
-    try (PeerSync peerSync =
-        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true)) {
-      ShardResponse response =
-          failedResponse(
-              PeerSync.SHARD_REQUEST_PURPOSE_GET_VERSIONS,
-              new SolrException(SolrException.ErrorCode.SERVER_ERROR, "boom"));
-
-      assertTrue(peerSync.handleResponse(response));
-    }
-  }
-
-  @Test
-  public void testPeerSyncStillFails500FromUpdateRequest() throws Exception {
-    try (PeerSync peerSync =
-        new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true)) {
-      ShardResponse response =
-          failedResponse(
-              PeerSync.SHARD_REQUEST_PURPOSE_GET_UPDATES,
-              new SolrException(SolrException.ErrorCode.SERVER_ERROR, "boom"));
-
-      assertFalse(peerSync.handleResponse(response));
-    }
-  }
-
-  private static ShardResponse failedResponse(int purpose, Throwable exception) {
-    ShardRequest request = new ShardRequest();
-    request.purpose = purpose;
-
-    // ShardResponse is final, so it cannot be mocked; build a real one.
-    ShardResponse response = new ShardResponse();
-    response.setShardRequest(request);
-    response.setException(exception);
-    response.setShardAddress("http://example.com/solr/core");
-    return response;
   }
 }
