@@ -50,8 +50,7 @@ public class PeerSyncHandleResponseTest extends SolrTestCase {
   @Test
   public void testPeerSyncIgnores500FromVersionRequestWhenCantReachIsSuccess() throws Exception {
     try (SolrCore core = solrTestRule.getCoreContainer().getCore("collection1");
-        PeerSync peerSync =
-            new PeerSync(core, List.of("http://example.com/solr/core"), 10, true)) {
+        PeerSync peerSync = new PeerSync(core, List.of("http://example.com/solr/core"), 10, true)) {
       ShardResponse response =
           failedResponse(
               PeerSync.SHARD_REQUEST_PURPOSE_GET_VERSIONS,
@@ -64,8 +63,7 @@ public class PeerSyncHandleResponseTest extends SolrTestCase {
   @Test
   public void testPeerSyncStillFails500FromUpdateRequest() throws Exception {
     try (SolrCore core = solrTestRule.getCoreContainer().getCore("collection1");
-        PeerSync peerSync =
-            new PeerSync(core, List.of("http://example.com/solr/core"), 10, true)) {
+        PeerSync peerSync = new PeerSync(core, List.of("http://example.com/solr/core"), 10, true)) {
       ShardResponse response =
           failedResponse(
               PeerSync.SHARD_REQUEST_PURPOSE_GET_UPDATES,
