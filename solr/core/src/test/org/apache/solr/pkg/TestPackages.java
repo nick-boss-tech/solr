@@ -249,10 +249,7 @@ public class TestPackages extends SolrCloudTestCase {
     byte[] manifestBytes =
         "{\"name\":\"mypkg\",\"version\":\"1.0\"}".getBytes(StandardCharsets.UTF_8);
     TestDistribFileStore.postFile(
-        cluster.getSolrClient(),
-        ByteBuffer.wrap(manifestBytes),
-        MANIFEST,
-        Utils.sha512Digest(ByteBuffer.wrap(manifestBytes)));
+        cluster.getSolrClient(), ByteBuffer.wrap(manifestBytes), MANIFEST, null);
     TestDistribFileStore.checkAllNodesForFile(
         cluster,
         MANIFEST,
