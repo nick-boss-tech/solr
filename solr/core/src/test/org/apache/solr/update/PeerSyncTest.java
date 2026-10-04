@@ -18,8 +18,6 @@ package org.apache.solr.update;
 
 import static org.apache.solr.update.processor.DistributingUpdateProcessorFactory.DISTRIB_UPDATE_PARAM;
 import static org.hamcrest.core.StringContains.containsString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -687,7 +685,6 @@ public class PeerSyncTest extends BaseDistributedSearchTestCase {
 
   @Test
   public void testPeerSyncIgnores500FromVersionRequestWhenCantReachIsSuccess() throws Exception {
-    assumeWorkingMockito();
     try (PeerSync peerSync =
         new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true)) {
       ShardResponse response =
@@ -701,7 +698,6 @@ public class PeerSyncTest extends BaseDistributedSearchTestCase {
 
   @Test
   public void testPeerSyncStillFails500FromUpdateRequest() throws Exception {
-    assumeWorkingMockito();
     try (PeerSync peerSync =
         new PeerSync(h.getCore(), List.of("http://example.com/solr/core"), 10, true)) {
       ShardResponse response =
@@ -717,10 +713,11 @@ public class PeerSyncTest extends BaseDistributedSearchTestCase {
     ShardRequest request = new ShardRequest();
     request.purpose = purpose;
 
-    ShardResponse response = mock(ShardResponse.class);
-    when(response.getShardRequest()).thenReturn(request);
-    when(response.getException()).thenReturn(exception);
-    when(response.getShardAddress()).thenReturn("http://example.com/solr/core");
+    // ShardResponse is final, so it cannot be mocked; build a real one.
+    ShardResponse response = new ShardResponse();
+    response.setShardRequest(request);
+    response.setException(exception);
+    response.setShardAddress("http://example.com/solr/core");
     return response;
   }
 }
