@@ -904,8 +904,7 @@ public class FacetComponent extends SearchComponent {
     }
     // Do field facets
     for (Entry<String, DistribFieldFacet> ent : fi.facets.entrySet()) {
-      String field = ent.getKey();
-      int minCount = rb.req.getParams().getFieldInt(field, FacetParams.FACET_MINCOUNT, 0);
+      int minCount = ent.getValue().minCount;
       if (minCount == 0) { // return them all
         continue;
       }
@@ -1394,7 +1393,8 @@ public class FacetComponent extends SearchComponent {
 
     public FieldFacet(ResponseBuilder rb, String facetStr) {
       super(rb, FacetParams.FACET_FIELD, facetStr);
-      fillParams(rb, rb.req.getParams(), facetOn);
+      // local params (e.g. {!facet.mincount=1}fld) take precedence, as they do on the shards
+      fillParams(rb, SolrParams.wrapDefaults(localParams, rb.req.getParams()), facetOn);
     }
 
     protected void fillParams(ResponseBuilder rb, SolrParams params, String field) {
