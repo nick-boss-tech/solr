@@ -252,7 +252,7 @@ public class TestPackages extends SolrCloudTestCase {
         cluster.getSolrClient(),
         ByteBuffer.wrap(manifestBytes),
         MANIFEST,
-        org.apache.solr.common.util.Utils.sha512Digest(ByteBuffer.wrap(manifestBytes)));
+        Utils.sha512Digest(ByteBuffer.wrap(manifestBytes)));
     TestDistribFileStore.checkAllNodesForFile(
         cluster,
         MANIFEST,
