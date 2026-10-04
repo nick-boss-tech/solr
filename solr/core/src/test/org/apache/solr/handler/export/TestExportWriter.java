@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.lucene.tests.util.TestUtil;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.StreamParams;
 import org.apache.solr.common.util.SuppressForbidden;
@@ -966,10 +967,18 @@ public class TestExportWriter extends SolrTestCaseJ4 {
     // String s =  h.query(req("q", "id:1", "qt", "/export", "fl",
     // "floatdv,intdv,stringdv,longdv,doubledv", "sort", "intdv asc"));
     String s;
-    s = h.query(reqWithPath("/export"));
-    assertTrue("Should have had a sort error", s.contains("No sort criteria"));
-    s = h.query(reqWithPath("/export", "sort", "intdv asc"));
-    assertTrue("Should have had fl error", s.contains("export field list (fl) must be specified"));
+    // SOLR-12543: missing required params are rejected up front with a 400, not a 200 + EXCEPTION
+    // doc. NOTE: written without being compiled or run.
+    SolrException e = expectThrows(SolrException.class, () -> h.query(reqWithPath("/export")));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+    assertTrue("Should have had a sort error", e.getMessage().contains("No sort criteria"));
+    e =
+        expectThrows(
+            SolrException.class, () -> h.query(reqWithPath("/export", "sort", "intdv asc")));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+    assertTrue(
+        "Should have had fl error",
+        e.getMessage().contains("export field list (fl) must be specified"));
     s = h.query(reqWithPath("/export", "sort", "intdv asc", "fl", "stringdv"));
     // Interesting you don't even need to specify a "q" parameter.
 

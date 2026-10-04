@@ -28,6 +28,7 @@ import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.io.ModelCache;
 import org.apache.solr.client.solrj.io.SolrClientCache;
 import org.apache.solr.client.solrj.io.stream.StreamContext;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.MapSolrParams;
 import org.apache.solr.common.params.SolrParams;
@@ -123,6 +124,18 @@ public class ExportHandler extends SearchHandler {
 
   @Override
   public void handleRequestBody(SolrQueryRequest req, SolrQueryResponse rsp) throws Exception {
+    // Fail fast, before any response bytes are written, so the client sees an HTTP 400 instead of
+    // a 200 carrying an in-body EXCEPTION document (SOLR-12543). Errors found while writing the
+    // export are still reported in the body, since the status line has already been sent.
+    SolrParams requestParams = req.getParams();
+    if (requestParams.get(CommonParams.SORT) == null) {
+      throw new SolrException(
+          SolrException.ErrorCode.BAD_REQUEST, "No sort criteria was provided.");
+    }
+    if (requestParams.get(CommonParams.FL) == null) {
+      throw new SolrException(
+          SolrException.ErrorCode.BAD_REQUEST, "export field list (fl) must be specified.");
+    }
     try {
       super.handleRequestBody(req, rsp);
     } catch (Exception e) {
