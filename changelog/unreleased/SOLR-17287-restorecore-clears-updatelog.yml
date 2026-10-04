@@ -1,0 +1,10 @@
+title: >
+  A standalone core restore (replication handler command=restore) now discards the update log, so updates made after
+  the backup are no longer visible to realtime-get or replayed on restart.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-17287
+    url: https://issues.apache.org/jira/browse/SOLR-17287
