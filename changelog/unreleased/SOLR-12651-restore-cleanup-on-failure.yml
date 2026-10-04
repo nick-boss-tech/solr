@@ -1,0 +1,10 @@
+title: >
+  A RESTORE collection operation that fails after the collection has been created (for example while
+  copying the backed-up index) now cleans up the partially restored collection.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-12651
+    url: https://issues.apache.org/jira/browse/SOLR-12651
