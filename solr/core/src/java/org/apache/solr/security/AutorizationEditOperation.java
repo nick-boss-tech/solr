@@ -72,6 +72,7 @@ enum AutorizationEditOperation {
       }
       try {
         Permission.load(dataMap);
+        Permission.validateOnEdit(dataMap);
       } catch (Exception e) {
         op.addError(e.getMessage());
         return null;

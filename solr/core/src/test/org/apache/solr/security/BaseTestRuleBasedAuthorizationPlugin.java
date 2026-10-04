@@ -748,6 +748,19 @@ public class BaseTestRuleBasedAuthorizationPlugin extends SolrTestCaseJ4 {
     ((Map) rules.get("user-role")).put(user, role);
   }
 
+  public void testNullCollectionRejectedForPerCollectionPermission() throws IOException {
+    Perms perms = new Perms();
+    // SOLR-10627: "update" is per-collection, so a null collection would silently protect nothing
+    perms.runCmd("{set-permission : {name: update, collection: null, role: admin } }", false);
+    perms.runCmd("{set-permission : {name: read, collection: null, role: admin } }", false);
+    // permissions that also apply to system-level requests, and custom ones, still accept null
+    perms.runCmd(
+        "{set-permission : {name: collection-admin-edit, collection: null, role: a } }", true);
+    perms.runCmd(
+        "{set-permission : {name: probe, collection: null, role: a, path: /admin/info/system } }",
+        true);
+  }
+
   public void testEditRules() throws IOException {
     Perms perms = new Perms();
     perms.runCmd("{set-permission : {name: config-edit, role: admin } }", true);

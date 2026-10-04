@@ -112,6 +112,22 @@ class Permission {
     return p;
   }
 
+  /**
+   * Extra checks applied only when a permission is added or changed through the security API, so
+   * that permissions already stored in security.json keep loading.
+   */
+  static void validateOnEdit(Map<?, ?> m) {
+    PermissionNameProvider.Name wellKnown = PermissionNameProvider.Name.get((String) m.get(NAME));
+    if (wellKnown != null
+        && m.containsKey("collection")
+        && m.get("collection") == null
+        && !wellKnown.collName.contains(null)) {
+      throw new SolrException(
+          SolrException.ErrorCode.BAD_REQUEST,
+          "collection cannot be null for the per-collection permission: " + wellKnown.name);
+    }
+  }
+
   /** This checks for the defaults available other rules for the keys */
   @SuppressForbidden(
       reason =
