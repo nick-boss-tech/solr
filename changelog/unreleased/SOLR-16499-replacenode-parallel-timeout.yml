@@ -1,0 +1,10 @@
+title: >
+  The REPLACENODE collection API (v1 and v2) now passes its documented parallel and timeout parameters through to the
+  operation instead of silently ignoring them.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-16499
+    url: https://issues.apache.org/jira/browse/SOLR-16499
