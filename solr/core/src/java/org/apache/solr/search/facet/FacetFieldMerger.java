@@ -139,7 +139,8 @@ public class FacetFieldMerger extends FacetRequestSortedMerger<FacetField> {
     // Screen out the missing bucket when it doesn't meet mincount, just like term buckets, but
     // only above the default mincount of 1: at the default the bucket is always present when
     // requested, even with count 0 (SOLR-17051).
-    if (missingBucket != null && (freq.mincount <= 1 || missingBucket.getCount() >= freq.mincount)) {
+    if (missingBucket != null
+        && (freq.mincount <= 1 || missingBucket.getCount() >= freq.mincount)) {
       result.add("missing", missingBucket.getMergedBucket());
     }
     if (allBuckets != null) {
