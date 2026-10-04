@@ -1,0 +1,10 @@
+title: >
+  Runs of unescaped * in a wildcard query term are collapsed into a single *, which avoids the
+  excessive memory use seen with edismax queries made of thousands of * characters.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-12608
+    url: https://issues.apache.org/jira/browse/SOLR-12608
