@@ -16,7 +16,12 @@
  */
 package org.apache.solr.request.macro;
 
+import java.util.Map;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.params.MapSolrParams;
+import org.apache.solr.common.params.SolrParams;
+import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.request.json.RequestUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -95,5 +100,41 @@ public class TestMacros extends SolrTestCaseJ4 {
 
     // test missing value
     assertJQ(req("fl", "id", "q", "val_s:${missing}aaa"), "/response/docs==[{'id':'1'}]");
+  }
+
+  @Test
+  public void testHandlerAppendsAndInvariantsMacrosAreExpandedOnShardRequests() throws Exception {
+    SolrParams appends = new MapSolrParams(Map.of("fl", "appended:'${my_term}'"));
+    SolrParams invariants = new MapSolrParams(Map.of("rows", "${my_rows}"));
+
+    try (SolrQueryRequest shardReq =
+        req(
+            "q",
+            "*:*",
+            "isShard",
+            "true",
+            "my_term",
+            "foobar",
+            "my_rows",
+            "7",
+            "fl",
+            "coordinator:'foobar'")) {
+      RequestUtil.processParams(null, shardReq, null, appends, invariants);
+
+      assertArrayEquals(
+          new String[] {"coordinator:'foobar'", "appended:'foobar'"},
+          shardReq.getParams().getParams("fl"));
+      assertEquals("7", shardReq.getParams().get("rows"));
+    }
+
+    // values the client sent are never expanded on a shard request
+    try (SolrQueryRequest shardReq =
+        req("q", "*:*", "isShard", "true", "my_term", "foobar", "fl", "literal:'${my_term}'")) {
+      RequestUtil.processParams(null, shardReq, null, appends, null);
+
+      assertArrayEquals(
+          new String[] {"literal:'${my_term}'", "appended:'foobar'"},
+          shardReq.getParams().getParams("fl"));
+    }
   }
 }

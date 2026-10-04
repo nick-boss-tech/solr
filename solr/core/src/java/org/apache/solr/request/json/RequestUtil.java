@@ -143,7 +143,8 @@ public class RequestUtil {
     }
 
     if (appends != null) {
-      Map<String, String[]> appendsMap = MultiMapSolrParams.asMultiMap(appends);
+      Map<String, String[]> appendsMap =
+          expandConfigMacros(MultiMapSolrParams.asMultiMap(appends), newMap, isShard);
 
       for (Map.Entry<String, String[]> entry : appendsMap.entrySet()) {
         String key = entry.getKey();
@@ -161,7 +162,9 @@ public class RequestUtil {
     }
 
     if (invariants != null) {
-      newMap.putAll(MultiMapSolrParams.asMultiMap(invariants));
+      Map<String, String[]> invariantsMap =
+          expandConfigMacros(MultiMapSolrParams.asMultiMap(invariants), newMap, isShard);
+      newMap.putAll(invariantsMap);
     }
 
     if (!isShard) { // Don't expand macros in shard requests
@@ -269,6 +272,23 @@ public class RequestUtil {
     if (json != null) {
       req.setJSON(json);
     }
+  }
+
+  /**
+   * Shard requests are not macro-expanded, since the coordinating node already expanded the
+   * request's own parameters. Values from the handler's appends and invariants were not part of
+   * that, so they are expanded here, using the request parameters as the source of macro values.
+   */
+  private static Map<String, String[]> expandConfigMacros(
+      Map<String, String[]> configValues, Map<String, String[]> requestParams, boolean isShard) {
+    if (!isShard) {
+      return configValues;
+    }
+    String[] doMacrosStr = requestParams.get("expandMacros");
+    if (doMacrosStr != null && !"true".equals(doMacrosStr[0])) {
+      return configValues;
+    }
+    return MacroExpander.expand(configValues, requestParams);
   }
 
   private static void convertJsonPropertyToLocalParams(

@@ -31,6 +31,7 @@ public class MacroExpander {
   private static final int MAX_LEVELS = 25;
 
   private Map<String, String[]> orig;
+  private final Map<String, String[]> paramSource;
   private Map<String, String[]> expanded;
   private String macroStart = MACRO_START;
   private char escape = '\\';
@@ -42,12 +43,29 @@ public class MacroExpander {
   }
 
   public MacroExpander(Map<String, String[]> orig, boolean failOnMissingParams) {
+    this(orig, orig, failOnMissingParams);
+  }
+
+  private MacroExpander(
+      Map<String, String[]> orig, Map<String, String[]> paramSource, boolean failOnMissingParams) {
     this.orig = orig;
+    this.paramSource = paramSource;
     this.failOnMissingParams = failOnMissingParams;
   }
 
   public static Map<String, String[]> expand(Map<String, String[]> params) {
     MacroExpander mc = new MacroExpander(params);
+    mc.expand();
+    return mc.expanded;
+  }
+
+  /**
+   * Expands the macros in {@code toExpand}, looking up the values of referenced parameters in
+   * {@code paramSource} instead of in {@code toExpand} itself.
+   */
+  public static Map<String, String[]> expand(
+      Map<String, String[]> toExpand, Map<String, String[]> paramSource) {
+    MacroExpander mc = new MacroExpander(toExpand, paramSource, false);
     mc.expand();
     return mc.expanded;
   }
@@ -174,7 +192,7 @@ public class MacroExpander {
         }
 
         // in the event that expansions become context dependent... consult original?
-        String[] replacementList = orig.get(paramName);
+        String[] replacementList = paramSource.get(paramName);
 
         // TODO - handle a list somehow...
         String replacement = replacementList != null ? replacementList[0] : defVal;
