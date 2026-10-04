@@ -1837,7 +1837,8 @@ public class SolrCore implements SolrInfoBean, Closeable {
 
     if (coreStateClosed) {
       try {
-        cleanupOldIndexDirectories(false);
+        // synchronous: the DirectoryFactory is closed further down in this method
+        cleanupOldIndexDirectories(false, false);
       } catch (Exception e) {
         log.error("Exception cleanupOldIndexDirectories", e);
       }
@@ -3494,27 +3495,35 @@ public class SolrCore implements SolrInfoBean, Closeable {
   }
 
   public void cleanupOldIndexDirectories(boolean reload) {
+    cleanupOldIndexDirectories(reload, true);
+  }
+
+  private void cleanupOldIndexDirectories(boolean reload, boolean async) {
     final DirectoryFactory myDirFactory = getDirectoryFactory();
     final String myDataDir = getDataDir();
     final String myIndexDir = getNewIndexDir(); // ensure the latest replicated index is protected
     final String coreName = getName();
     if (myDirFactory != null && myDataDir != null && myIndexDir != null) {
-      Thread cleanupThread =
-          new Thread(
-              () -> {
-                log.debug(
-                    "Looking for old index directories to cleanup for core {} in {}",
-                    coreName,
-                    myDataDir);
-                try {
-                  myDirFactory.cleanupOldIndexDirectories(myDataDir, myIndexDir, reload);
-                } catch (Exception exc) {
-                  log.error("Failed to cleanup old index directories for core {}", coreName, exc);
-                }
-              },
-              "OldIndexDirectoryCleanupThreadForCore-" + coreName);
-      cleanupThread.setDaemon(true);
-      cleanupThread.start();
+      Runnable cleanup =
+          () -> {
+            log.debug(
+                "Looking for old index directories to cleanup for core {} in {}",
+                coreName,
+                myDataDir);
+            try {
+              myDirFactory.cleanupOldIndexDirectories(myDataDir, myIndexDir, reload);
+            } catch (Exception exc) {
+              log.error("Failed to cleanup old index directories for core {}", coreName, exc);
+            }
+          };
+      if (async) {
+        Thread cleanupThread =
+            new Thread(cleanup, "OldIndexDirectoryCleanupThreadForCore-" + coreName);
+        cleanupThread.setDaemon(true);
+        cleanupThread.start();
+      } else {
+        cleanup.run();
+      }
     }
   }
 
