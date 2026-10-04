@@ -1,0 +1,10 @@
+title: >
+  Requesting a schema as XML (wt=schema.xml) no longer fails with a NullPointerException when the
+  schema has no name or version attribute.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-11153
+    url: https://issues.apache.org/jira/browse/SOLR-11153
