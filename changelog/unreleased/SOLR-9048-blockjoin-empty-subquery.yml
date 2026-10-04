@@ -1,0 +1,10 @@
+title: >
+  The parent and child block join query parsers no longer fail with a NullPointerException when
+  the nested query parser produces no query, for example when all its terms are stop words.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-9048
+    url: https://issues.apache.org/jira/browse/SOLR-9048
