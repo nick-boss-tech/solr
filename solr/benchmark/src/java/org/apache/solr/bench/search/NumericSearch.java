@@ -63,8 +63,10 @@ public class NumericSearch {
     int setQuerySize = 20; // TODO: Params
     String termQueryField = "term_low_s";
     String basePath;
+
     @Param({"false", "true"})
     boolean multiThreaded;
+
     SolrGen<Integer> setValues;
     SolrGen<String> lowCardinalityTerms;
     SolrGen<String> highCardinalityTerms;
@@ -186,14 +188,7 @@ public class NumericSearch {
     QueryRequest rangeQuery() {
       SolrQuery q =
           new SolrQuery(
-              "q",
-              "numbers_i:[1000 TO 9000]",
-              "rows",
-              "10",
-              "fl",
-              "id",
-              "sort",
-              "numbers_i asc");
+              "q", "numbers_i:[1000 TO 9000]", "rows", "10", "fl", "id", "sort", "numbers_i asc");
       q.set(CommonParams.MULTI_THREADED, String.valueOf(multiThreaded));
       return new QueryRequest(q);
     }
