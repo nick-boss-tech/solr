@@ -30,6 +30,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -70,6 +73,8 @@ import org.apache.solr.common.util.Utils;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.embedded.JettySolrRunner;
 import org.apache.solr.filestore.ClusterFileStore;
+import org.apache.solr.filestore.DistribFileStore;
+import org.apache.solr.filestore.FileStore;
 import org.apache.solr.filestore.TestDistribFileStore;
 import org.apache.solr.handler.RequestHandlerBase;
 import org.apache.solr.request.SolrQueryRequest;
@@ -224,6 +229,77 @@ public class TestPackages extends SolrCloudTestCase {
 
     verifyComponent(
         cluster.getSolrClient(), COLLECTION_NAME, "query", "filterCache", add.pkg, add.version);
+  }
+
+  @Test
+  public void testManifestIsFetchedWhenVersionLoadsOnNodeMissingIt() throws Exception {
+    String FILE1 = "/mypkg/runtimelibs.jar";
+    String MANIFEST = "/mypkg/manifest.json";
+    String COLLECTION_NAME = "testManifestFetchColl";
+    byte[] derFile = readFile("cryptokeys/pub_key512.der");
+    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pub_key512.der", cluster);
+    postFileAndWait(
+        cluster,
+        "runtimecode/runtimelibs.jar.bin",
+        FILE1,
+        "L3q/qIGs4NaF6JiO0ZkMUFa88j0OmYc+I6O7BOdNuMct/xoZ4h73aZHZGc0+nmI1f/U3bOlMPINlSOM6LK3JpQ==");
+
+    // The manifest is a real file store file, posted unsigned the way
+    // RepositoryManager posts it, so another node can serve it on request.
+    byte[] manifestBytes =
+        "{\"name\":\"mypkg\",\"version\":\"1.0\"}".getBytes(StandardCharsets.UTF_8);
+    TestDistribFileStore.postFile(
+        cluster.getSolrClient(),
+        ByteBuffer.wrap(manifestBytes),
+        MANIFEST,
+        org.apache.solr.common.util.Utils.sha512Digest(ByteBuffer.wrap(manifestBytes)));
+    TestDistribFileStore.checkAllNodesForFile(
+        cluster, MANIFEST, Map.of(":files:" + MANIFEST + ":sha512", DigestUtils.sha512Hex(manifestBytes)), false);
+
+    PackagePayload.AddVersion add = new PackagePayload.AddVersion();
+    add.version = "1.0";
+    add.pkg = "mypkg";
+    add.files = Arrays.asList(new String[] {FILE1});
+    add.manifest = MANIFEST;
+    new V2Request.Builder("/cluster/package")
+        .forceV2(true)
+        .withMethod(SolrRequest.METHOD.POST)
+        .withPayload(Map.of("add", add))
+        .build()
+        .process(cluster.getSolrClient());
+    TestDistribFileStore.assertResponseValues(
+        10,
+        () ->
+            new V2Request.Builder("/cluster/package")
+                .withMethod(SolrRequest.METHOD.GET)
+                .build()
+                .process(cluster.getSolrClient()),
+        Map.of(":result:packages:mypkg[0]:version", "1.0"));
+
+    // Simulate a node that joined after the install: it knows the file's
+    // metadata but never received the manifest bytes.
+    JettySolrRunner jetty = cluster.getJettySolrRunner(0);
+    cluster.stopJettySolrRunner(jetty);
+    Path manifestOnDisk =
+        DistribFileStore.getFileStoreDirPath(Path.of(jetty.getSolrHome()))
+            .resolve("mypkg")
+            .resolve("manifest.json");
+    assertTrue(Files.exists(manifestOnDisk));
+    Files.delete(manifestOnDisk);
+    cluster.startJettySolrRunner(jetty, true);
+    cluster.waitForAllNodes(30);
+
+    CollectionAdminRequest.createCollection(COLLECTION_NAME, "conf", 1, 4)
+        .process(cluster.getSolrClient());
+    cluster.waitForActiveCollection(COLLECTION_NAME, 1, 4);
+    verifyComponent(
+        cluster.getSolrClient(), COLLECTION_NAME, "query", "filterCache", add.pkg, add.version);
+
+    // Loading the version on the restarted node must have fetched the
+    // manifest into its local file store.
+    assertEquals(
+        FileStore.FileType.FILE,
+        jetty.getCoreContainer().getFileStore().getType(MANIFEST, false));
   }
 
   @Test
