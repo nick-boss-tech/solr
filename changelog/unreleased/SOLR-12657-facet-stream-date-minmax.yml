@@ -1,0 +1,10 @@
+title: >
+  The facet() streaming expression no longer fails with a ClassCastException for min/max metrics on
+  date fields; the date is returned as an ISO-8601 string.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-12657
+    url: https://issues.apache.org/jira/browse/SOLR-12657
