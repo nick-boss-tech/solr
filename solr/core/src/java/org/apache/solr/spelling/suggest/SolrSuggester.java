@@ -74,6 +74,9 @@ public class SolrSuggester implements Accountable {
    */
   public static final String STORE_DIR = "storeDir";
 
+  /** Whether all query terms must match; used when a request does not say. Default is true. */
+  public static final String ALL_TERMS_REQUIRED = "allTermsRequired";
+
   static SuggesterResult EMPTY_RESULT = new SuggesterResult();
 
   private String sourceLocation;
@@ -87,6 +90,7 @@ public class SolrSuggester implements Accountable {
   private LookupFactory factory;
   private DictionaryFactory dictionaryFactory;
   private Analyzer contextFilterQueryAnalyzer;
+  private boolean defaultAllTermsRequired = true;
 
   /**
    * Uses the <code>config</code> and the <code>core</code> to initialize the underlying Lucene
@@ -101,6 +105,9 @@ public class SolrSuggester implements Accountable {
     lookupImpl = (String) config.get(LOOKUP_IMPL);
     dictionaryImpl = (String) config.get(DICTIONARY_IMPL);
     String store = (String) config.get(STORE_DIR);
+    if (config.get(ALL_TERMS_REQUIRED) != null) {
+      defaultAllTermsRequired = Boolean.parseBoolean(config.get(ALL_TERMS_REQUIRED).toString());
+    }
 
     if (lookupImpl == null) {
       lookupImpl = LookupFactory.DEFAULT_FILE_BASED_DICT;
@@ -234,9 +241,10 @@ public class SolrSuggester implements Accountable {
       suggestions = lookup.lookup(options.token, false, options.count);
     } else {
       BooleanQuery query = parseContextFilterQuery(options.contextFilterQuery);
+      boolean allTermsRequired =
+          options.allTermsRequired != null ? options.allTermsRequired : defaultAllTermsRequired;
       suggestions =
-          lookup.lookup(
-              options.token, query, options.count, options.allTermsRequired, options.highlight);
+          lookup.lookup(options.token, query, options.count, allTermsRequired, options.highlight);
       if (suggestions == null) {
         // Context filtering not supported/configured by lookup
         // Silently ignore filtering and serve a result by querying without context filtering

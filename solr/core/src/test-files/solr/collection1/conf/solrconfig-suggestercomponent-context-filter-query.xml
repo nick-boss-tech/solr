@@ -47,6 +47,22 @@
     </lst>
 
     <lst name="suggester">
+      <str name="name">suggest_blended_infix_suggester_any_term</str>
+      <str name="lookupImpl">BlendedInfixLookupFactory</str>
+      <str name="dictionaryImpl">DocumentDictionaryFactory</str>
+      <str name="field">cat</str>
+      <str name="weightField">price</str>
+      <str name="contextField">my_contexts_t</str>
+      <str name="suggestAnalyzerFieldType">text</str>
+      <str name="buildOnCommit">false</str>
+      <str name="buildOnStartup">false</str>
+      <str name="storeDir">suggest_blended_infix_suggester_any_term</str>
+      <str name="indexPath">suggest_blended_infix_suggester_any_term</str>
+      <str name="highlight">false</str>
+      <str name="allTermsRequired">false</str>
+    </lst>
+
+    <lst name="suggester">
       <str name="name">suggest_blended_infix_suggester_string</str>
       <str name="lookupImpl">BlendedInfixLookupFactory</str>
       <str name="dictionaryImpl">DocumentDictionaryFactory</str>

@@ -377,6 +377,38 @@ public class SuggestComponentContextFilterQueryTest extends SolrTestCaseJ4 {
         "//lst[@name='suggest']/lst[@name='suggest_blended_infix_suggester']/lst[@name='examp']/int[@name='numFound'][.='0']");
   }
 
+  @Test
+  public void testContextFilterHonorsConfiguredAllTermsRequired() {
+    // suggester is configured with allTermsRequired=false and the request does not override it
+    assertQ(
+        reqWithPath(
+            rh,
+            SuggesterParams.SUGGEST_BUILD,
+            "true",
+            SuggesterParams.SUGGEST_DICT,
+            "suggest_blended_infix_suggester_any_term",
+            SuggesterParams.SUGGEST_CONTEXT_FILTER_QUERY,
+            "ctx1",
+            SuggesterParams.SUGGEST_Q,
+            "example nomatchterm"),
+        "//lst[@name='suggest']/lst[@name='suggest_blended_infix_suggester_any_term']/lst[@name='example nomatchterm']/int[@name='numFound'][.='1']",
+        "//lst[@name='suggest']/lst[@name='suggest_blended_infix_suggester_any_term']/lst[@name='example nomatchterm']/arr[@name='suggestions']/lst[1]/str[@name='term'][.='example with ctx1 at 40']");
+
+    // an explicit request parameter still wins over the configured value
+    assertQ(
+        reqWithPath(
+            rh,
+            SuggesterParams.SUGGEST_DICT,
+            "suggest_blended_infix_suggester_any_term",
+            SuggesterParams.SUGGEST_CONTEXT_FILTER_QUERY,
+            "ctx1",
+            SuggesterParams.SUGGEST_ALL_TERMS_REQUIRED,
+            "true",
+            SuggesterParams.SUGGEST_Q,
+            "example nomatchterm"),
+        "//lst[@name='suggest']/lst[@name='suggest_blended_infix_suggester_any_term']/lst[@name='example nomatchterm']/int[@name='numFound'][.='0']");
+  }
+
   @Ignore // TODO: SOLR-7964
   @Test
   public void testContextFilterWithHighlight() {

@@ -33,8 +33,8 @@ public class SuggesterOptions {
   /** A Solr or Lucene query for filtering suggestions */
   String contextFilterQuery;
 
-  /** Are all terms required? */
-  boolean allTermsRequired;
+  /** Are all terms required? Null means the suggester's configured value. */
+  Boolean allTermsRequired;
 
   /** Highlight term in results? */
   boolean highlight;
@@ -43,7 +43,7 @@ public class SuggesterOptions {
       CharsRef token,
       int count,
       String contextFilterQuery,
-      boolean allTermsRequired,
+      Boolean allTermsRequired,
       boolean highlight) {
     this.token = token;
     this.count = count;

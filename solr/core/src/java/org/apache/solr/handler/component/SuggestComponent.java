@@ -267,7 +267,7 @@ public class SuggestComponent extends SearchComponent
     if (query != null) {
       int count = params.getInt(SUGGEST_COUNT, 1);
       boolean highlight = params.getBool(SUGGEST_HIGHLIGHT, false);
-      boolean allTermsRequired = params.getBool(SUGGEST_ALL_TERMS_REQUIRED, true);
+      Boolean allTermsRequired = params.getBool(SUGGEST_ALL_TERMS_REQUIRED);
       String contextFilter = params.get(SUGGEST_CONTEXT_FILTER_QUERY);
       if (contextFilter != null) {
         contextFilter = contextFilter.trim();
