@@ -1,0 +1,10 @@
+title: >
+  SolrRangeQuery no longer puts its DocSet into the filterCache from inside another cache computation, which could
+  fail with "IllegalStateException: Recursive update".
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-17280
+    url: https://issues.apache.org/jira/browse/SOLR-17280
