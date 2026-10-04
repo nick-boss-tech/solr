@@ -74,6 +74,19 @@ public class MergeIndexesTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testReportsErrorIfBothIndexDirAndSrcCoreAreGiven() throws Exception {
+    // SOLR-6438: srcCore used to be silently ignored when indexDir was also given
+    var requestBody = new MergeIndexesRequestBody();
+    requestBody.indexDirs = Arrays.asList("some_dir");
+    requestBody.srcCores = Arrays.asList("some_core");
+    var ex =
+        assertThrows(
+            SolrException.class, () -> mergeIndexesApi.mergeIndexes(coreName, requestBody));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
+    assertTrue(ex.getMessage().contains("Only one of indexDir or srcCore"));
+  }
+
+  @Test
   public void testReportsErrorIfSrcCoreMissing() throws Exception {
     final var INVALID_CORE = "INVALID_CORE";
     var requestBody = new MergeIndexesRequestBody();

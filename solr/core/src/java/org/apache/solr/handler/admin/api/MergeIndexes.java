@@ -104,6 +104,13 @@ public class MergeIndexes extends CoreAdminAPIBase implements MergeIndexesApi {
             try {
               var dirNames =
                   Optional.ofNullable(requestBody.indexDirs).orElseGet(() -> new ArrayList<>());
+              var srcCoreNames =
+                  Optional.ofNullable(requestBody.srcCores).orElseGet(() -> new ArrayList<>());
+              if (!dirNames.isEmpty() && !srcCoreNames.isEmpty()) {
+                throw new SolrException(
+                    SolrException.ErrorCode.BAD_REQUEST,
+                    "Only one of indexDir or srcCore can be specified, not both");
+              }
               if (dirNames.isEmpty()) {
                 var sources =
                     Optional.ofNullable(requestBody.srcCores).orElseGet(() -> new ArrayList<>());
