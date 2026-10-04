@@ -16,9 +16,11 @@
  */
 package org.apache.solr.search.mlt;
 
+import static org.apache.solr.common.cloud.ZkStateReader.COLLECTION_PROP;
 import static org.apache.solr.common.params.CommonParams.ID;
 
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,19 +28,26 @@ import java.util.Map;
 import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.queries.mlt.MoreLikeThis;
 import org.apache.lucene.search.Query;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.common.util.StrUtils;
+import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrQueryRequestBase;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.QueryParsing;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CloudMLTQParser extends SimpleMLTQParser {
+
+  private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   public CloudMLTQParser(
       String qstr, SolrParams localParams, SolrParams params, SolrQueryRequest req) {
@@ -109,7 +118,38 @@ public class CloudMLTQParser extends SimpleMLTQParser {
     core.getRequestHandler("/get").handleRequest(request, rsp);
     NamedList<?> response = rsp.getValues();
 
-    return (SolrDocument) response.get("doc");
+    final SolrDocument doc = (SolrDocument) response.get("doc");
+    return doc != null ? doc : getDocumentFromOtherCollections(core, id);
+  }
+
+  /**
+   * The real-time get above only covers the collection of the core handling this request. For an
+   * alias that resolves to several collections (e.g. a time routed alias), the source document may
+   * live in one of the others; the request carries the alias-resolved collections in its {@code
+   * collection} param (see {@code HttpSolrCall#addCollectionParamIfNeeded}).
+   */
+  private SolrDocument getDocumentFromOtherCollections(SolrCore core, String id) {
+    final String collectionParam = req.getParams().get(COLLECTION_PROP);
+    final CoreContainer coreContainer = core.getCoreContainer();
+    if (collectionParam == null || !coreContainer.isZooKeeperAware()) {
+      return null;
+    }
+    final String ownCollection = core.getCoreDescriptor().getCollectionName();
+    for (String collection : StrUtils.splitSmart(collectionParam, ',')) {
+      if (collection.isBlank() || collection.equals(ownCollection)) {
+        continue;
+      }
+      try {
+        final SolrDocument doc =
+            coreContainer.getZkController().getSolrClient().getById(collection, id);
+        if (doc != null) {
+          return doc;
+        }
+      } catch (SolrServerException | IOException e) {
+        log.warn("Could not fetch MLT source document {} from collection {}", id, collection, e);
+      }
+    }
+    return null;
   }
 
   private Collection<Object> getFieldValuesIncludingCopyField(SolrDocument doc, String field) {

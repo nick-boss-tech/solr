@@ -161,6 +161,37 @@ public class CloudMLTQParserTest extends SolrCloudTestCase {
   }
 
   @Test
+  public void testMLTQParserOnAliasOverMultipleCollections() throws Exception {
+    // SOLR-15615: the source document lives in a different collection than the one whose core
+    // handles the request, so a core-local real-time get cannot find it.
+    final String otherCollection = "mlt-collection-2";
+    final String alias = "mlt-alias";
+    CollectionAdminRequest.createCollection(otherCollection, "conf", 1, 1)
+        .process(cluster.getSolrClient());
+    cluster.waitForActiveCollection(otherCollection, 1, 1);
+    new UpdateRequest()
+        .add(sdoc("id", "100", "lowerfilt_u", "The quote red fox jumped over the lazy brown dogs."))
+        .commit(cluster.getSolrClient(), otherCollection);
+    CollectionAdminRequest.createAlias(alias, COLLECTION + "," + otherCollection)
+        .process(cluster.getSolrClient());
+
+    // run it a few times so every collection gets to be the one handling the request
+    for (int attempt = 0; attempt < 6; attempt++) {
+      final QueryResponse queryResponse =
+          cluster
+              .getSolrClient()
+              .query(alias, new SolrQuery("{!mlt qf=lowerfilt_u mindf=0}100").setRows(100));
+      final ArrayList<String> ids = new ArrayList<>();
+      for (SolrDocument doc : queryResponse.getResults()) {
+        ids.add(String.valueOf(doc.getFieldValue("id")));
+      }
+      // similar docs from the *other* collection (13, 14, ...) are found; the source doc is not
+      assertTrue(ids.toString(), ids.contains("13"));
+      assertFalse(ids.toString(), ids.contains("100"));
+    }
+  }
+
+  @Test
   public void testBoost() throws Exception {
 
     QueryResponse queryResponse =
