@@ -45,6 +45,7 @@ public class ListAliasesAPITest extends SolrTestCaseJ4 {
   private SolrQueryResponse queryResponse;
 
   private ListAliases getAliasesAPI;
+  private GetAliasByName getAliasByNameAPI;
 
   @BeforeClass
   public static void ensureWorkingMockito() {
@@ -71,6 +72,7 @@ public class ListAliasesAPITest extends SolrTestCaseJ4 {
     queryResponse = new SolrQueryResponse();
 
     getAliasesAPI = new ListAliases(mockCoreContainer, mockQueryRequest, queryResponse);
+    getAliasByNameAPI = new GetAliasByName(mockCoreContainer, mockQueryRequest, queryResponse);
   }
 
   @Test
@@ -106,7 +108,7 @@ public class ListAliasesAPITest extends SolrTestCaseJ4 {
             .cloneWithCollectionAliasProperties("alias1", "pkey1", "pvalA");
     when(zkStateReader.getAliases()).thenReturn(aliases);
 
-    GetAliasByNameResponse response = getAliasesAPI.getAliasByName("alias1");
+    GetAliasByNameResponse response = getAliasByNameAPI.getAliasByName("alias1");
     assertEquals("alias1", response.alias);
     assertEquals(List.of("colB"), response.collections);
     assertEquals(Map.of("pkey1", "pvalA"), response.properties);

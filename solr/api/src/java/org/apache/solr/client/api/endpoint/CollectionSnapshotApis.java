@@ -34,10 +34,12 @@ import org.apache.solr.client.api.model.ListCollectionSnapshotsResponse;
 /** V2 API definitions for creating, accessing, and deleting collection-level snapshots. */
 public interface CollectionSnapshotApis {
 
-  @Path("/collections/{collName}/snapshots")
+  // The Create and Delete resources deliberately share the same class-level path.  JAX-RS selects a
+  // single resource class per request path before looking at HTTP methods, so a POST resource that
+  // is nested under a shorter class-level path is shadowed by Delete and answered with a 405.
+  @Path("/collections/{collName}/snapshots/{snapshotName}")
   interface Create {
     @POST
-    @Path("/{snapshotName}")
     @Operation(
         summary = "Creates a new snapshot of the specified collection.",
         tags = {"collection-snapshots"})

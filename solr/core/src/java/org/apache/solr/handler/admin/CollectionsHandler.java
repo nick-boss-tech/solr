@@ -182,6 +182,7 @@ import org.apache.solr.handler.admin.api.DeleteReplica;
 import org.apache.solr.handler.admin.api.DeleteReplicaProperty;
 import org.apache.solr.handler.admin.api.DeleteShard;
 import org.apache.solr.handler.admin.api.ForceLeader;
+import org.apache.solr.handler.admin.api.GetAliasByName;
 import org.apache.solr.handler.admin.api.InstallShardData;
 import org.apache.solr.handler.admin.api.ListAliases;
 import org.apache.solr.handler.admin.api.ListClusterNodes;
@@ -1203,6 +1204,7 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         CollectionProperty.class,
         DeleteNode.class,
         ListAliases.class,
+        GetAliasByName.class,
         AliasProperty.class,
         ListCollectionSnapshots.class,
         CreateCollectionSnapshot.class,

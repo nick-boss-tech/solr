@@ -17,17 +17,28 @@
 package org.apache.solr.client.api.endpoint;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import org.apache.solr.client.api.model.ListAliasesResponse;
+import jakarta.ws.rs.PathParam;
+import org.apache.solr.client.api.model.GetAliasByNameResponse;
 
-/** V2 API definition for listing collection aliases */
-@Path("/aliases")
-public interface ListAliasesApi {
+/**
+ * V2 API definition for inspecting a single collection alias.
+ *
+ * <p>This lives in its own resource class, sharing its class-level path with {@link
+ * DeleteAliasApi}, because JAX-RS picks one resource class per request path and would otherwise
+ * answer {@code GET /aliases/{aliasName}} with a 405 from the delete resource.
+ */
+@Path("/aliases/{aliasName}")
+public interface GetAliasByNameApi {
 
   @GET
   @Operation(
-      summary = "List the existing collection aliases.",
+      summary = "Get details for a specific collection alias.",
       tags = {"aliases"})
-  ListAliasesResponse getAliases() throws Exception;
+  GetAliasByNameResponse getAliasByName(
+      @Parameter(description = "Alias name.", required = true) @PathParam("aliasName")
+          String aliasName)
+      throws Exception;
 }
