@@ -79,7 +79,9 @@ import org.apache.solr.cloud.DistributedClusterStateUpdater;
 import org.apache.solr.cloud.Overseer;
 import org.apache.solr.cloud.OverseerNodePrioritizer;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.Replica;
+import org.apache.solr.common.cloud.Slice;
 import org.apache.solr.common.cloud.SolrZkClient;
 import org.apache.solr.common.cloud.ZkNodeProps;
 import org.apache.solr.common.cloud.ZkStateReader;
@@ -337,6 +339,28 @@ public class CollApiCmds {
           REPLICA_PROP,
           PROPERTY_PROP,
           PROPERTY_VALUE_PROP);
+
+      // The state update below is applied asynchronously and its failures are only logged, so
+      // check up front that the target exists; otherwise a typo gets an HTTP 200 (SOLR-16437).
+      final String collectionName = message.getStr(COLLECTION_PROP);
+      final String shardName = message.getStr(SHARD_ID_PROP);
+      final String replicaName = message.getStr(REPLICA_PROP);
+      final DocCollection docCollection =
+          ccc.getZkStateReader().getClusterState().getCollectionOrNull(collectionName);
+      final Slice slice = docCollection == null ? null : docCollection.getSlice(shardName);
+      final Replica replica = slice == null ? null : slice.getReplica(replicaName);
+      if (replica == null) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST,
+            "Could not find collection/shard/replica "
+                + collectionName
+                + "/"
+                + shardName
+                + "/"
+                + replicaName
+                + ", no action taken.");
+      }
+
       ZkNodeProps m = cloneZkPropsWithOperation(message, ADDREPLICAPROP);
       if (ccc.getDistributedClusterStateUpdater().isDistributedStateUpdate()) {
         ccc.getDistributedClusterStateUpdater()

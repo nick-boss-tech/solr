@@ -1290,6 +1290,38 @@ public class CollectionsAPISolrJTest extends SolrCloudTestCase {
   }
 
   @Test
+  public void testAddReplicaPropRejectsUnknownReplica() throws Exception {
+    final String collection = "replicaPropertiesBadInput";
+    CollectionAdminRequest.createCollection(collection, "conf", 1, 1)
+        .process(cluster.getSolrClient());
+    cluster.waitForActiveCollection(collection, 1, 1);
+
+    // a misspelled replica name must be an error (SOLR-16437), not a silent HTTP 200
+    final RemoteSolrException e =
+        expectThrows(
+            RemoteSolrException.class,
+            () ->
+                CollectionAdminRequest.addReplicaProperty(
+                        collection, "shard1", "noSuchReplica", "preferredleader", "true")
+                    .process(cluster.getSolrClient()));
+    assertEquals(400, e.code());
+
+    // so must an unknown shard or collection
+    expectThrows(
+        RemoteSolrException.class,
+        () ->
+            CollectionAdminRequest.addReplicaProperty(
+                    collection, "noSuchShard", "core_node1", "preferredleader", "true")
+                .process(cluster.getSolrClient()));
+    expectThrows(
+        RemoteSolrException.class,
+        () ->
+            CollectionAdminRequest.addReplicaProperty(
+                    "noSuchCollection", "shard1", "core_node1", "preferredleader", "true")
+                .process(cluster.getSolrClient()));
+  }
+
+  @Test
   public void testAddAndDeleteReplicaProp() throws IOException, SolrServerException {
 
     final String collection = "replicaProperties";
