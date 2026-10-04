@@ -293,6 +293,20 @@ public class ExtendedDismaxQParser extends QParser {
     }
   }
 
+  /** True for the clause {@code ~N} that splitIntoClauses leaves behind after a quoted phrase. */
+  private static boolean isSlopClause(Clause clause) {
+    final String val = clause.val;
+    if (val == null || val.length() < 3 || !val.startsWith("\\~")) {
+      return false;
+    }
+    for (int i = 2; i < val.length(); i++) {
+      if (!Character.isDigit(val.charAt(i))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /** Adds shingled phrase queries to all the fields specified in the pf, pf2 anf pf3 parameters */
   protected void addPhraseFieldQueries(
       BooleanQuery.Builder query, List<Clause> clauses, ExtendedDismaxConfiguration config)
@@ -304,8 +318,13 @@ public class ExtendedDismaxQParser extends QParser {
     if (allPhraseFields.size() > 0) {
       // find non-field clauses
       List<Clause> normalClauses = new ArrayList<>(clauses.size());
+      Clause previousClause = null;
       for (Clause clause : clauses) {
+        final boolean followsPhrase = previousClause != null && previousClause.isPhrase;
+        previousClause = clause;
         if (clause.field != null || clause.isPhrase) continue;
+        // the slop of a phrase ("a b"~3) is split off as a clause of its own, it is not a term
+        if (followsPhrase && isSlopClause(clause)) continue;
         // check for keywords "AND,OR,TO"
         if (clause.isBareWord()) {
           String s = clause.val;

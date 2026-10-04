@@ -258,6 +258,18 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     }
   }
 
+  public void testPf2DoesNotUseSlopOfPhraseAsTerm() {
+    // SOLR-4362: for "phrase query"~10 term, the "~10" was treated as a term of the pf2 shingles
+    assertQ(
+        req(
+            "defType", "edismax",
+            "q", "\"phrase query\"~10 term",
+            "qf", "phrase_sw",
+            "pf2", "phrase_sw",
+            "debugQuery", "true"),
+        "//str[@name='parsedquery_toString'][not(contains(.,'10 term'))]");
+  }
+
   public void testCharFilter() {
     // test that charfilter was applied by the indexer
     assertQ(
