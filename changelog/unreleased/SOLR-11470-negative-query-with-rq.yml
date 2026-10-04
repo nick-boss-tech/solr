@@ -1,0 +1,10 @@
+title: >
+  A pure negative main query such as q=NOT foo no longer returns no results when a rank query
+  (rq, for example rerank) is specified.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-11470
+    url: https://issues.apache.org/jira/browse/SOLR-11470
