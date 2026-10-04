@@ -1,0 +1,10 @@
+title: >
+  A parenthesized pure-negative query such as fq=(NOT(field:value)) now matches the expected
+  documents when q.op=AND instead of matching nothing.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-12212
+    url: https://issues.apache.org/jira/browse/SOLR-12212
