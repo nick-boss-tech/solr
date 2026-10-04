@@ -67,6 +67,7 @@ public class TopGroupsResultTransformerTest extends SolrTestCaseJ4 {
     params.set("q", "*:*");
     params.set(GroupParams.GROUP, true);
     params.set(GroupParams.GROUP_FIELD, "grp_s");
+    params.set(GroupParams.GROUP_LIMIT, 10);
     params.set(GroupParams.GROUP_DISTRIBUTED_SECOND, true);
     params.add(GroupParams.GROUP_DISTRIBUTED_TOPGROUPS_PREFIX + "grp_s", "a", "b");
 
