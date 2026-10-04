@@ -1,0 +1,9 @@
+title: >
+  bin/solr now starts Solr with -XX:+ExitOnOutOfMemoryError instead of -XX:+CrashOnOutOfMemoryError, so the container restarts Solr in Docker; the cause of the OutOfMemoryError is logged to the console.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-16887
+    url: https://issues.apache.org/jira/browse/SOLR-16887
