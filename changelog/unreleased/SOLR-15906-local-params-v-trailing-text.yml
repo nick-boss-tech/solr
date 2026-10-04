@@ -1,0 +1,10 @@
+title: >
+  A query such as {!parser v=$qq} OR other no longer silently ignores the text after the local-params when v is given;
+  the whole string is parsed by the lucene query parser.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-15906
+    url: https://issues.apache.org/jira/browse/SOLR-15906
