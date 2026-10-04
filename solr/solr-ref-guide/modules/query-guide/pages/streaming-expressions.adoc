@@ -99,6 +99,7 @@ In your JSON client you'll need to iterate each doc (tuple) and check for the EO
 === Configuration
 
 Timeouts for Streaming Expressions can be configured with the `socketTimeout` and `connTimeout` startup parameters.
+If you embed streaming expressions in application code and need a longer idle window for a particular workload, you can also supply a custom `SolrClientCache` to the `StreamContext` and tune its timeout floor there without changing the process-wide defaults.
 
 === Adding Custom Expressions
 

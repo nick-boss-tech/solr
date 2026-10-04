@@ -17,7 +17,9 @@
 package org.apache.solr.client.solrj.io;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.cloud.SolrCloudTestCase;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.ClusterState;
@@ -87,6 +89,30 @@ public class SolrClientCacheTest extends SolrCloudTestCase {
           cache.getCloudSolrClient(CloudSolrClient.CloudSolrClientConnection.parse(solrUrl));
       ClusterState clusterState = cloudSolrClient.getClusterStateProvider().getClusterState();
       Assert.assertEquals(1, clusterState.getLiveNodes().size());
+    }
+  }
+
+  @Test
+  public void testCustomTimeoutFloorsAreApplied() {
+    String solrUrl = cluster.getJettySolrRunner(0).getBaseUrl().toString();
+    try (SolrClientCache cache = new SolrClientCache(65000, 700000)) {
+      var builder = cache.newHttpSolrClientBuilder(solrUrl);
+      Assert.assertEquals(65000L, builder.getConnectionTimeoutMillis());
+      Assert.assertEquals(700000L, builder.getIdleTimeoutMillis());
+      Assert.assertEquals(Long.MAX_VALUE, builder.getRequestTimeoutMillis());
+    }
+  }
+
+  @Test
+  public void testStreamingClientsDoNotInheritSeedRequestTimeout() throws Exception {
+    String solrUrl = cluster.getJettySolrRunner(0).getBaseUrl().toString();
+    try (HttpSolrClient seedClient =
+            HttpSolrClient.builder(solrUrl)
+                .withRequestTimeout(1234, TimeUnit.MILLISECONDS)
+                .build();
+        SolrClientCache cache = new SolrClientCache(seedClient)) {
+      var builder = cache.newHttpSolrClientBuilder(solrUrl);
+      Assert.assertEquals(Long.MAX_VALUE, builder.getRequestTimeoutMillis());
     }
   }
 }
