@@ -1,0 +1,9 @@
+title: >
+  debug=query (without timing or track) now also returns the json.facet facet-trace in distributed requests, as debug=true already did.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-14451
+    url: https://issues.apache.org/jira/browse/SOLR-14451
