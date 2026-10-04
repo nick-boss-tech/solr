@@ -220,6 +220,18 @@ public class V2HttpCall extends HttpSolrCall {
     }
   }
 
+  /**
+   * Requests with no {@link Api} are handed to JAX-RS, whose {@code SolrRequestAuthorizer} filter
+   * authorizes them once a resource has matched; authorizing them here as well would do it twice.
+   */
+  @Override
+  protected boolean shouldAuthorize() {
+    if (api == null && (action == ADMIN || action == PROCESS)) {
+      return false;
+    }
+    return super.shouldAuthorize();
+  }
+
   protected void parseRequest() throws Exception {
     config = core.getSolrConfig();
     // get or create/cache the parser for the core
