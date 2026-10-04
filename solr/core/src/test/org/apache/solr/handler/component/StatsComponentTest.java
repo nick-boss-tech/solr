@@ -2295,7 +2295,12 @@ public class StatsComponentTest extends SolrTestCaseJ4 {
           (pKey, pVal) -> {
             String p = percentileIter.next();
             assertEquals(p, pKey);
-            assertEquals(Double.parseDouble(p), pVal, 1.0D);
+            // percentiles are approximated (t-digest) and, depending on the random digest
+            // compression / merge order, can be off by several percent of the expected value
+            // for the mid-range percentiles (SOLR-17372), so allow 10% (at least 1.0) rather
+            // than a fixed 1.0.
+            final double expected = Double.parseDouble(p);
+            assertEquals(expected, pVal, Math.max(1.0D, expected * 0.10D));
           });
     }
 
