@@ -597,7 +597,7 @@ public class CloudSolrStream extends TupleStream implements Expressible {
   }
 
   private void ensureExportSortUsesUniqueKey() throws IOException {
-    if (!"/export".equals(params.get(CommonParams.QT))) {
+    if (params == null || !"/export".equals(params.get(CommonParams.QT))) {
       return;
     }
 
