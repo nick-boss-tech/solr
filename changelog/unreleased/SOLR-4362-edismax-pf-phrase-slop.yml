@@ -1,0 +1,10 @@
+title: >
+  The edismax parser no longer treats the slop of a quoted phrase, as in "phrase query"~10 term, as
+  a term when it builds the pf2 and pf3 phrase boosts.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-4362
+    url: https://issues.apache.org/jira/browse/SOLR-4362
