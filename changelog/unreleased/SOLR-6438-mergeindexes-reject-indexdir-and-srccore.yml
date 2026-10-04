@@ -1,0 +1,10 @@
+title: >
+  The MERGEINDEXES core admin command now returns an error when both indexDir and srcCore are
+  given, instead of silently ignoring srcCore.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-6438
+    url: https://issues.apache.org/jira/browse/SOLR-6438
