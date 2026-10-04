@@ -263,49 +263,60 @@ public class RestoreCmd implements CollApiCmds.CollectionApiCommand {
       // Restore collection properties
       rc.backupManager.uploadCollectionProperties(rc.restoreCollectionName);
 
-      DocCollection restoreCollection =
-          rc.zkStateReader.getClusterState().getCollection(rc.restoreCollectionName);
-      markAllShardsAsConstruction(restoreCollection);
+      try {
+        DocCollection restoreCollection =
+            rc.zkStateReader.getClusterState().getCollection(rc.restoreCollectionName);
+        markAllShardsAsConstruction(restoreCollection);
 
-      List<String> sliceNames = new ArrayList<>();
-      restoreCollection.getSlices().forEach(x -> sliceNames.add(x.getName()));
+        List<String> sliceNames = new ArrayList<>();
+        restoreCollection.getSlices().forEach(x -> sliceNames.add(x.getName()));
 
-      List<ReplicaPosition> replicaPositions =
-          getReplicaPositions(rc.restoreCollectionName, rc.nodeList, sliceNames);
+        List<ReplicaPosition> replicaPositions =
+            getReplicaPositions(rc.restoreCollectionName, rc.nodeList, sliceNames);
 
-      createSingleReplicaPerShard(
-          results,
-          restoreCollection,
-          rc.adminCmdContext.withClusterState(rc.zkStateReader.getClusterState()),
-          replicaPositions);
-      Object failures = results.get("failure");
-      if (failures != null && ((SimpleOrderedMap<?>) failures).size() > 0) {
-        log.error("Restore failed to create initial replicas.");
+        createSingleReplicaPerShard(
+            results,
+            restoreCollection,
+            rc.adminCmdContext.withClusterState(rc.zkStateReader.getClusterState()),
+            replicaPositions);
+        Object failures = results.get("failure");
+        if (failures != null && ((SimpleOrderedMap<?>) failures).size() > 0) {
+          log.error("Restore failed to create initial replicas.");
+          CollectionHandlingUtils.cleanupCollection(
+              rc.adminCmdContext, rc.restoreCollectionName, new NamedList<>(), ccc);
+          return;
+        }
+
+        // refresh the location copy of collection state
+        restoreCollection =
+            rc.zkStateReader.getClusterState().getCollection(rc.restoreCollectionName);
+        requestShardsToRestore(
+            results,
+            restoreCollection,
+            rc.adminCmdContext.withClusterState(rc.zkStateReader.getClusterState()),
+            rc.backupProperties,
+            rc.backupPath,
+            rc.repo,
+            rc.shardHandler);
+        markAllShardsAsActive(restoreCollection);
+        addReplicasToShards(
+            results,
+            restoreCollection,
+            replicaPositions,
+            rc.adminCmdContext.withClusterState(rc.zkStateReader.getClusterState()));
+        restoringAlias(rc.backupProperties);
+
+        log.info(
+            "Completed restoring collection={} backupName={}", restoreCollection, rc.backupName);
+      } catch (Exception e) {
+        log.error(
+            "Restore of collection={} failed; cleaning up the partially restored collection",
+            rc.restoreCollectionName,
+            e);
         CollectionHandlingUtils.cleanupCollection(
             rc.adminCmdContext, rc.restoreCollectionName, new NamedList<>(), ccc);
-        return;
+        throw e;
       }
-
-      // refresh the location copy of collection state
-      restoreCollection =
-          rc.zkStateReader.getClusterState().getCollection(rc.restoreCollectionName);
-      requestShardsToRestore(
-          results,
-          restoreCollection,
-          rc.adminCmdContext.withClusterState(rc.zkStateReader.getClusterState()),
-          rc.backupProperties,
-          rc.backupPath,
-          rc.repo,
-          rc.shardHandler);
-      markAllShardsAsActive(restoreCollection);
-      addReplicasToShards(
-          results,
-          restoreCollection,
-          replicaPositions,
-          rc.adminCmdContext.withClusterState(rc.zkStateReader.getClusterState()));
-      restoringAlias(rc.backupProperties);
-
-      log.info("Completed restoring collection={} backupName={}", restoreCollection, rc.backupName);
     }
 
     private void validate() {
