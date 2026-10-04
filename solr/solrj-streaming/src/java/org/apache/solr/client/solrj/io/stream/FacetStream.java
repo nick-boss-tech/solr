@@ -19,6 +19,7 @@ package org.apache.solr.client.solrj.io.stream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -948,7 +949,14 @@ public class FacetStream extends TupleStream implements Expressible, ParallelMet
         for (Metric metric : _metrics) {
           String identifier = metric.getIdentifier();
           if (!identifier.startsWith("count(")) {
-            Number d = ((Number) bucket.get("facet_" + m));
+            Object raw = bucket.get("facet_" + m);
+            if (!(raw instanceof Number)) {
+              // e.g. min/max of a date field comes back as a Date (javabin) or an ISO-8601 String
+              t.put(identifier, raw instanceof Date date ? date.toInstant().toString() : raw);
+              ++m;
+              continue;
+            }
+            Number d = (Number) raw;
             if (metric.outputLong) {
               if (d instanceof Long || d instanceof Integer) {
                 t.put(identifier, d.longValue());

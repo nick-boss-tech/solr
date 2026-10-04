@@ -1418,6 +1418,42 @@ public class StreamExpressionTest extends SolrCloudTestCase {
     assertEquals(2, tuple.getDouble("count(*)"), 0.0);
   }
 
+  /**
+   * SOLR-12657: min/max of a date field in facet() used to fail with a ClassCastException. NOTE:
+   * written without being compiled or run; see SOLR-12657-TESTING.md.
+   */
+  @Test
+  public void testFacetStreamMinMaxOnDateField() throws Exception {
+    new UpdateRequest()
+        .add(id, "0", "a_s", "hello0", "d_dt", "2018-01-01T00:00:00Z")
+        .add(id, "1", "a_s", "hello0", "d_dt", "2018-03-01T00:00:00Z")
+        .add(id, "2", "a_s", "hello1", "d_dt", "2019-05-05T05:05:05Z")
+        .commit(cluster.getSolrClient(), COLLECTIONORALIAS);
+
+    StreamFactory factory =
+        new StreamFactory()
+            .withCollectionUseThisConnection("collection1", solrConnection)
+            .withFunctionName("facet", FacetStream.class)
+            .withFunctionName("min", MinMetric.class)
+            .withFunctionName("max", MaxMetric.class)
+            .withFunctionName("count", CountMetric.class);
+
+    TupleStream stream =
+        factory.constructStream(
+            "facet(collection1, q=\"*:*\", buckets=\"a_s\", bucketSorts=\"a_s asc\","
+                + " bucketSizeLimit=10, min(d_dt), max(d_dt), count(*))");
+    List<Tuple> tuples = getTuples(stream);
+
+    assertEquals(2, tuples.size());
+    assertEquals("hello0", tuples.get(0).getString("a_s"));
+    assertEquals("2018-01-01T00:00:00Z", tuples.get(0).get("min(d_dt)").toString());
+    assertEquals("2018-03-01T00:00:00Z", tuples.get(0).get("max(d_dt)").toString());
+    assertEquals(2L, tuples.get(0).getLong("count(*)").longValue());
+    assertEquals("hello1", tuples.get(1).getString("a_s"));
+    assertEquals("2019-05-05T05:05:05Z", tuples.get(1).get("min(d_dt)").toString());
+    assertEquals("2019-05-05T05:05:05Z", tuples.get(1).get("max(d_dt)").toString());
+  }
+
   @Test
   public void testFacetStream() throws Exception {
 
