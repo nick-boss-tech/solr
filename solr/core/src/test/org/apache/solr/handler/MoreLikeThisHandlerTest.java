@@ -257,27 +257,33 @@ public class MoreLikeThisHandlerTest extends SolrTestCaseJ4 {
     assertU(adoc("id", "181091", "name", "Tom Cruise", "subword", "Top Gun"));
     assertU(adoc("id", "181092", "name", "Nicole Kidman", "subword", "Top Gun"));
     assertU(commit());
-    assertQ(
-        req(
-            CommonParams.QT,
-            "/mlt",
-            CommonParams.Q,
-            "id:181091",
-            MoreLikeThisParams.MLT,
-            "true",
-            MoreLikeThisParams.SIMILARITY_FIELDS,
-            "name,subword",
-            MoreLikeThisParams.MIN_TERM_FREQ,
-            "1",
-            MoreLikeThisParams.MIN_DOC_FREQ,
-            "1",
-            CommonParams.DEBUG_QUERY,
-            "true"),
-        "//lst[@name='debug']/str[@name='rawquerystring']='id:181091'",
-        "//lst[@name='debug']/str[@name='querystring']='id:181091'",
-        "//lst[@name='debug']/str[@name='parsedquery']",
-        "//lst[@name='debug']/str[@name='parsedquery_toString']",
-        "//lst[@name='debug']/lst[@name='explain']");
+    try {
+      assertQ(
+          req(
+              CommonParams.QT,
+              "/mlt",
+              CommonParams.Q,
+              "id:181091",
+              MoreLikeThisParams.MLT,
+              "true",
+              MoreLikeThisParams.SIMILARITY_FIELDS,
+              "name,subword",
+              MoreLikeThisParams.MIN_TERM_FREQ,
+              "1",
+              MoreLikeThisParams.MIN_DOC_FREQ,
+              "1",
+              CommonParams.DEBUG_QUERY,
+              "true"),
+          "//lst[@name='debug']/str[@name='rawquerystring']='id:181091'",
+          "//lst[@name='debug']/str[@name='querystring']='id:181091'",
+          "//lst[@name='debug']/str[@name='parsedquery']",
+          "//lst[@name='debug']/str[@name='parsedquery_toString']",
+          "//lst[@name='debug']/lst[@name='explain']");
+    } finally {
+      // this suite shares one index across tests; leave it as we found it
+      assertU(delQ("id:181091 OR id:181092"));
+      assertU(commit());
+    }
   }
 
   @Test
