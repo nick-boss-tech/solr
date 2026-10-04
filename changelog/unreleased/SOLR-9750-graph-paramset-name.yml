@@ -1,0 +1,10 @@
+title: >
+  The paramset of the implicit /graph request handler is now named _GRAPH instead of _ADMIN_GRAPH,
+  matching the naming of the other implicit paramsets.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-9750
+    url: https://issues.apache.org/jira/browse/SOLR-9750
