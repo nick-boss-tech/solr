@@ -678,10 +678,68 @@ fi
 # Run in foreground (default is to run in the background)
 FG="false"
 FORCE=false
-# Parse SOLR_OPTS with shell quoting rules so JVM opts containing quoted/escaped
-# whitespace survive as single arguments (SOLR-17029). The value comes from the
-# operator's own environment, so eval-based word splitting is contained here.
-eval "SOLR_OPTS=(${SOLR_OPTS:-})"
+# Splits a JVM options string into the PARSED_OPTS array, honoring single and
+# double quotes and backslash escapes so quoted whitespace survives as a
+# single argument (SOLR-17029). Unlike eval, nothing in the value is
+# expanded or executed, so option values that work today (including ones
+# containing $, backticks or semicolons, such as credentials) keep their
+# exact meaning; only the treatment of quoted whitespace changes.
+function parse_jvm_opts() {
+  PARSED_OPTS=()
+  local _str="$1" _cur="" _quote="" _started=false _c _n _i
+  for ((_i = 0; _i < ${#_str}; _i++)); do
+    _c="${_str:_i:1}"
+    if [ -n "$_quote" ]; then
+      if [ "$_c" == "$_quote" ]; then
+        _quote=""
+      elif [ "$_c" == '\' ] && [ "$_quote" == '"' ] && ((_i + 1 < ${#_str})); then
+        # In double quotes a backslash only escapes ", \, $ and a backtick;
+        # any other backslash is kept literally (e.g. in a Windows path).
+        _n="${_str:_i+1:1}"
+        if [ "$_n" == '"' ] || [ "$_n" == '\' ] || [ "$_n" == '$' ] || [ "$_n" == '`' ]; then
+          _i=$((_i + 1))
+          _cur+="$_n"
+        else
+          _cur+="$_c"
+        fi
+      else
+        _cur+="$_c"
+      fi
+    elif [ "$_c" == "'" ] || [ "$_c" == '"' ]; then
+      _quote="$_c"
+      _started=true
+    elif [ "$_c" == '\' ] && ((_i + 1 < ${#_str})); then
+      # Outside quotes a backslash only escapes whitespace, a quote or another
+      # backslash; any other backslash is kept literally (e.g. C:\path).
+      _n="${_str:_i+1:1}"
+      if [ "$_n" == ' ' ] || [ "$_n" == $'\t' ] || [ "$_n" == "'" ] || [ "$_n" == '"' ] || [ "$_n" == '\' ]; then
+        _i=$((_i + 1))
+        _cur+="$_n"
+        _started=true
+      else
+        _cur+="$_c"
+        _started=true
+      fi
+    elif [ "$_c" == ' ' ] || [ "$_c" == $'\t' ]; then
+      if [ "$_started" == "true" ]; then
+        PARSED_OPTS+=("$_cur")
+        _cur=""
+        _started=false
+      fi
+    else
+      _cur+="$_c"
+      _started=true
+    fi
+  done
+  if [ "$_started" == "true" ]; then
+    PARSED_OPTS+=("$_cur")
+  fi
+}
+
+# Parse SOLR_OPTS honoring quoting so JVM opts containing quoted/escaped
+# whitespace survive as single arguments (SOLR-17029).
+parse_jvm_opts "${SOLR_OPTS:-}"
+SOLR_OPTS=("${PARSED_OPTS[@]}")
 SCRIPT_SOLR_OPTS=()
 PASS_TO_RUN_EXAMPLE=()
 SOLR_MODE="solrcloud"
@@ -1219,10 +1277,10 @@ function start_solr() {
 
   SOLR_ADDL_ARGS_ARR=()
   if [ -n "$2" ]; then
-    # Parse with shell quoting rules so --jvm-opts values containing quoted/escaped
-    # whitespace survive as single JVM arguments (SOLR-17029). The value comes from
-    # the operator's own command line, so eval-based word splitting is contained here.
-    eval "SOLR_ADDL_ARGS_ARR=($2)"
+    # Parse honoring quoting so --jvm-opts values containing quoted/escaped
+    # whitespace survive as single JVM arguments (SOLR-17029).
+    parse_jvm_opts "$2"
+    SOLR_ADDL_ARGS_ARR=("${PARSED_OPTS[@]}")
   fi
   SOLR_JETTY_ADDL_CONFIG="$3"
 
