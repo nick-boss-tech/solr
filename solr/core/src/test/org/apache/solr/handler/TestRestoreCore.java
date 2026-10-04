@@ -165,6 +165,59 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
     }
   }
 
+  /**
+   * A standalone restore replaces the whole index, so the update log must be left empty: a doc added
+   * after the backup (and only present in the tlog / realtime view) must not be visible to
+   * realtime-get after the restore, and a restart must not replay it.
+   */
+  @Test
+  public void testRestoreClearsUpdateLog() throws Exception {
+    // this test needs an update log (which in turn needs a schema with _version_) and RTG
+    leaderClient.close();
+    leaderJetty.stop();
+    leader.copyConfigFile(
+        CONF_DIR.resolve("solrconfig-leader-ulog.xml").toString(), "solrconfig.xml");
+    leader.copyConfigFile(CONF_DIR.resolve("schema.xml").toString(), "schema.xml");
+    leaderJetty = createAndStartJetty(leader);
+    leaderClient = leaderJetty.getSolrClient();
+
+    final String snapshotName = "ulogsnap";
+    final String params = "&name=" + snapshotName;
+    final String baseUrl = leaderJetty.getBaseUrl().toString();
+
+    final SolrInputDocument before = new SolrInputDocument();
+    before.addField("id", "before-backup");
+    leaderClient.add(DEFAULT_TEST_CORENAME, before);
+    leaderClient.commit(DEFAULT_TEST_CORENAME);
+
+    final BackupStatusChecker backupStatus =
+        new BackupStatusChecker(leaderClient, "/" + DEFAULT_TEST_CORENAME + "/replication");
+    TestReplicationHandlerBackup.runBackupCommand(
+        leaderJetty, ReplicationHandler.CMD_BACKUP, params);
+    backupStatus.waitForBackupSuccess(snapshotName, 30);
+
+    // added after the backup and deliberately not committed: it lives only in the update log
+    final SolrInputDocument after = new SolrInputDocument();
+    after.addField("id", "after-backup");
+    leaderClient.add(DEFAULT_TEST_CORENAME, after);
+    assertNotNull(
+        "doc should be visible to realtime-get before the restore",
+        leaderClient.getById(DEFAULT_TEST_CORENAME, "after-backup"));
+
+    TestReplicationHandlerBackup.runBackupCommand(
+        leaderJetty, ReplicationHandler.CMD_RESTORE, params);
+    while (!TestRestoreCoreUtil.fetchRestoreStatus(baseUrl, DEFAULT_TEST_CORENAME)) {
+      Thread.sleep(1000);
+    }
+
+    assertNotNull(
+        "doc from the backup should still be there",
+        leaderClient.getById(DEFAULT_TEST_CORENAME, "before-backup"));
+    assertNull(
+        "update log should have been cleared by the restore",
+        leaderClient.getById(DEFAULT_TEST_CORENAME, "after-backup"));
+  }
+
   public void testBackupFailsMissingAllowPaths() {
     final String params =
         "&location=" + URLEncoder.encode(createTempDir().toString(), StandardCharsets.UTF_8);

@@ -2026,6 +2026,59 @@ public class UpdateLog implements PluginInfoInitialized, SolrMetricProducer {
     return true;
   }
 
+  /**
+   * Discards every logged update (current, previous, old and buffered transaction logs, plus the
+   * in-memory lookup maps) and leaves the log empty and {@link State#ACTIVE}.
+   *
+   * <p>For use when the index has been replaced wholesale (e.g. a standalone core restore), so that
+   * none of the logged updates apply to the new index any more. Otherwise realtime-get would keep
+   * serving them and a restart would replay them on top of the restored index.
+   */
+  public void clearAndActivate() {
+    updateLocks.blockUpdates();
+    try {
+      synchronized (this) {
+        if (log.isInfoEnabled()) {
+          log.info("Discarding all logged updates and returning to ACTIVE {}", this);
+        }
+        dropBufferTlog();
+        deleteBufferLogs();
+
+        discardLog(tlog);
+        tlog = null;
+        discardLog(prevTlog);
+        prevTlog = null;
+        for (TransactionLog oldLog : logs) {
+          discardLog(oldLog);
+        }
+        logs.clear();
+        numOldRecords = 0;
+
+        oldDeletes.clear();
+        deleteByQueries.clear();
+        map = new HashMap<>();
+        prevMap = null;
+        prevMap2 = null;
+        prevMapLog = null;
+        prevMapLog2 = null;
+
+        state = State.ACTIVE;
+      }
+    } finally {
+      updateLocks.unblockUpdates();
+    }
+    // make sure realtime-get reads from the (new) index rather than a stale realtime searcher
+    openRealtimeSearcher();
+  }
+
+  private void discardLog(TransactionLog theLog) {
+    if (theLog != null) {
+      theLog.deleteOnClose = true;
+      theLog.decref();
+      theLog.forceClose();
+    }
+  }
+
   private void dropBufferTlog() {
     synchronized (this) {
       if (bufferTlog != null) {

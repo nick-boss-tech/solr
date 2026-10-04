@@ -48,6 +48,7 @@ import org.apache.solr.core.backup.Checksum;
 import org.apache.solr.core.backup.ShardBackupId;
 import org.apache.solr.core.backup.ShardBackupMetadata;
 import org.apache.solr.core.backup.repository.BackupRepository;
+import org.apache.solr.update.UpdateLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -242,6 +243,16 @@ public class RestoreCore implements Callable<Boolean> {
         core.getDirectoryFactory().doneWithDirectory(indexDir);
         // Cleanup all index files not associated with any *named* snapshot.
         core.deleteNonSnapshotIndexFiles(indexDirPath);
+
+        // The index was replaced wholesale, so nothing in the update log applies to it any more.
+        // In SolrCloud the log is BUFFERING and the caller transitions it (applyBufferedUpdates)
+        // once the restore is complete.
+        if (!core.getCoreContainer().isZooKeeperAware()) {
+          UpdateLog updateLog = core.getUpdateHandler().getUpdateLog();
+          if (updateLog != null) {
+            updateLog.clearAndActivate();
+          }
+        }
       }
 
       return true;
