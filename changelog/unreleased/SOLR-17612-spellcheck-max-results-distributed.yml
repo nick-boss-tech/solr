@@ -1,0 +1,10 @@
+title: >
+  A fractional spellcheck.maxResultsForSuggest is now applied to the filtered document count summed across all
+  shards of a distributed request, instead of the coordinator core's own slice of the data.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-17612
+    url: https://issues.apache.org/jira/browse/SOLR-17612
