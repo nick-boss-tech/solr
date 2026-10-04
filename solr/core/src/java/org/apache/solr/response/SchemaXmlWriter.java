@@ -86,8 +86,16 @@ public class SchemaXmlWriter extends TextResponseWriter {
         (Map<String, Object>) rsp.getValues().get(IndexSchema.SCHEMA);
 
     openStartTag(IndexSchema.SCHEMA);
-    writeAttr(IndexSchema.NAME, schemaProperties.get(IndexSchema.NAME).toString());
-    writeAttr(IndexSchema.VERSION, schemaProperties.get(IndexSchema.VERSION).toString());
+    // a schema without a "name" (or "version") attribute has no such property: omit it
+    // instead of failing with a NullPointerException
+    Object schemaName = schemaProperties.get(IndexSchema.NAME);
+    if (schemaName != null) {
+      writeAttr(IndexSchema.NAME, schemaName.toString());
+    }
+    Object schemaVersion = schemaProperties.get(IndexSchema.VERSION);
+    if (schemaVersion != null) {
+      writeAttr(IndexSchema.VERSION, schemaVersion.toString());
+    }
     closeStartTag(false);
     incLevel();
 
