@@ -1,0 +1,10 @@
+title: >
+  JSON Facet field refinement with processEmpty:true no longer returns buckets that were only
+  partially refined when they sorted ahead of fully refined buckets.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-12556
+    url: https://issues.apache.org/jira/browse/SOLR-12556
