@@ -1,4 +1,4 @@
-title: The "missing" bucket of a JSON Facet terms facet is now left out of the response when its count is below the facet's mincount
+title: The "missing" bucket of a JSON Facet terms facet is now left out of the response when its count is below a mincount set above the default of 1; at the default mincount the bucket is still always returned when requested
 type: fixed
 authors:
   - name: Nick Shanin

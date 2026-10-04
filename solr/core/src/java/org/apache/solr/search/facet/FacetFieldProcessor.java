@@ -531,10 +531,12 @@ abstract class FacetFieldProcessor extends FacetProcessor<FacetField> {
       // TODO: it would be more efficient to build up a missing DocSet if we need it here anyway.
       fillBucket(
           missingBucket, getFieldMissingQuery(fcontext.searcher, freq.field), null, false, null);
-      // shards always report the bucket; for a distributed request the merger screens the summed
-      // count
+      // Shards always report the bucket; for a distributed request the merger screens the summed
+      // count. The screen only applies above the default mincount of 1: at the default the
+      // missing bucket keeps its established contract of always being present when requested,
+      // even with count 0 (SOLR-17051).
       if (!fcontext.isShard()
-          && effectiveMincount > 0
+          && effectiveMincount > 1
           && ((Number) missingBucket.get("count")).longValue() < effectiveMincount) {
         res.remove("missing");
       }
