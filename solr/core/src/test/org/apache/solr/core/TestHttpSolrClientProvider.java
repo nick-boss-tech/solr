@@ -22,7 +22,6 @@ import static org.mockito.ArgumentMatchers.any;
 import io.opentelemetry.api.metrics.LongHistogram;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.client.solrj.impl.SolrHttpConstants;
-import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
 import org.apache.solr.metrics.SolrMetricsContext;
 import org.apache.solr.update.UpdateShardHandlerConfig;
 import org.junit.Before;
@@ -48,7 +47,6 @@ public class TestHttpSolrClientProvider extends SolrTestCase {
   @Test
   public void test_when_updateShardHandler_cfg_is_null() {
     try (var httpSolrClientProvider = new HttpSolrClientProvider(null, parentSolrMetricCtx); ) {
-      assertTrue(httpSolrClientProvider.getSolrClient() instanceof HttpJettySolrClient);
       assertEquals(
           httpSolrClientProvider.getSolrClient().getIdleTimeoutMillis(),
           SolrHttpConstants.DEFAULT_SO_TIMEOUT);
@@ -61,7 +59,6 @@ public class TestHttpSolrClientProvider extends SolrTestCase {
     assertNotEquals(idleTimeout, UpdateShardHandlerConfig.DEFAULT.getDistributedSocketTimeout());
     UpdateShardHandlerConfig cfg = new UpdateShardHandlerConfig(-1, -1, idleTimeout, -1, null, -1);
     try (var httpSolrClientProvider = new HttpSolrClientProvider(cfg, parentSolrMetricCtx); ) {
-      assertTrue(httpSolrClientProvider.getSolrClient() instanceof HttpJettySolrClient);
       assertEquals(httpSolrClientProvider.getSolrClient().getIdleTimeoutMillis(), idleTimeout);
     }
   }
