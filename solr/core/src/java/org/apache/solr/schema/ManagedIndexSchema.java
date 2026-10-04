@@ -496,6 +496,11 @@ public final class ManagedIndexSchema extends IndexSchema {
       for (String name : names) {
         SchemaField field = getFieldOrNull(name);
         if (null != field) {
+          if (name.equals(newSchema.uniqueKeyFieldName)) {
+            throw new SolrException(
+                ErrorCode.BAD_REQUEST,
+                "Can't delete field '" + name + "' because it is the uniqueKey field.");
+          }
           String message =
               "Can't delete field '"
                   + name

@@ -709,6 +709,22 @@ public class TestBulkSchemaAPI extends RestTestBase {
     assertEquals("string", m.get("type"));
   }
 
+  public void testDeleteUniqueKeyFieldRefused() throws Exception {
+    RestTestHarness harness = restTestHarness;
+
+    String response = harness.post("/schema", json("{'delete-field' : {'name':'id'}}"));
+    @SuppressWarnings({"rawtypes"})
+    Map map = (Map) fromJSONString(response);
+    Object errors = map.get("error");
+    assertNotNull("deleting the uniqueKey field must fail", errors);
+    assertTrue(
+        errors.toString(),
+        errors.toString().contains("Can't delete field 'id' because it is the uniqueKey"));
+
+    // the field is still there
+    assertNotNull("'id' field does not exist in the schema", getObj(harness, "id", "fields"));
+  }
+
   public void testCopyFieldRules() throws Exception {
     RestTestHarness harness = restTestHarness;
 
