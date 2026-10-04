@@ -276,10 +276,7 @@ public class RepositoryManager {
    * server rejected the request, and deleting the files of a registered version would break it.
    */
   private void cleanupPartialInstall(
-      List<String> postedFiles,
-      String packageName,
-      String version,
-      boolean registrationAttempted) {
+      List<String> postedFiles, String packageName, String version, boolean registrationAttempted) {
     if (registrationAttempted && mayBeRegistered(packageName, version)) {
       log.warn(
           "Not removing the files of package {} version {}: it may have been registered",

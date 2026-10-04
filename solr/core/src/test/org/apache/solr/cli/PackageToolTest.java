@@ -452,7 +452,7 @@ public class PackageToolTest extends SolrCloudTestCase {
     Path repositoryDir = createTempDir("bad-signature-repository");
     try (Stream<Path> files = Files.list(TEST_PATH().resolve("question-answer-repository"))) {
       for (Path file : (Iterable<Path>) files::iterator) {
-        Files.copy(file, repositoryDir.resolve(file.getFileName()));
+        Files.copy(file, repositoryDir.resolve(file.getFileName().toString()));
       }
     }
     Path repositoryJson = repositoryDir.resolve("repository.json");
@@ -501,8 +501,9 @@ public class PackageToolTest extends SolrCloudTestCase {
     }
 
     String manifestPath = "/package/" + packageName + "/1.0.0/manifest.json";
-    var metadata =
-        withBasicAuth(new FileStoreApi.GetMetadata(manifestPath)).process(cluster.getSolrClient());
+    FileStoreApi.GetMetadata metadataRequest = new FileStoreApi.GetMetadata(manifestPath);
+    metadataRequest.setBasicAuthCredentials(SecurityJson.USER, SecurityJson.PASS);
+    var metadata = metadataRequest.process(cluster.getSolrClient());
     assertNull("Manifest left behind by a failed install", metadata.files.get(manifestPath));
   }
 
