@@ -151,3 +151,13 @@ teardown() {
   assert_output --partial 'solr.17029.prop'
   assert_output --partial 'white space'
 }
+
+@test "SOLR-17029 dollar signs in SOLR_OPTS are not expanded" {
+  export SOLR_OPTS='-Dsolr.17029.dollar=pa$$word'
+  solr start
+  solr assert --started http://localhost:${SOLR_PORT} --timeout 5000
+
+  run curl "http://localhost:${SOLR_PORT}/solr/admin/info/properties"
+  assert_output --partial 'solr.17029.dollar'
+  assert_output --partial 'pa$$word'
+}
