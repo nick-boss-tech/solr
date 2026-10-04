@@ -201,6 +201,21 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testTextAfterLocalParamsWithExplicitValueIsNotIgnored() throws Exception {
+    // SOLR-15906: when local-params carry v=..., the text after the closing brace used to be
+    // silently dropped, so this matched nothing instead of doc 3.
+    assertJQ(
+        req("q", "{!term f=text v=$qq} OR id:3", "qq", "nomatch"), "/response/numFound==1");
+    // and it combines with the sub-query: "now" matches docs 1 and 2, plus doc 3
+    assertJQ(req("q", "{!term f=text v=$qq} OR id:3", "qq", "now"), "/response/numFound==3");
+    // a leading space (the old workaround) behaves the same
+    assertJQ(
+        req("q", " {!term f=text v=$qq} OR id:3", "qq", "nomatch"), "/response/numFound==1");
+    // no text after the local-params: unchanged
+    assertJQ(req("q", "{!term f=text v=$qq}", "qq", "now"), "/response/numFound==2");
+  }
+
+  @Test
   public void testLocalParamsInQP() throws Exception {
     assertJQ(req("q", "qaz {!term f=text v=$qq} wsx", "qq", "now"), "/response/numFound==2");
 

@@ -426,20 +426,29 @@ public abstract class QParser {
       localParamsEnd = QueryParsing.parseLocalParams(qstr, 0, localParams, globalParams);
 
       String val = localParams.get(QueryParsing.V);
-      if (val != null) {
-        // val was directly specified in localParams via v=<something> or v=$arg
-        valFollowedParams = false;
-        // TODO if remainder of query string after '}' is non-empty, then what? Throw error? Fall
-        // back to lucene QParser?
+      if (val != null && !qstr.substring(localParamsEnd).isBlank()) {
+        // v was given in the local-params AND there is more query text after them, e.g.
+        //   {!parser v=$qq} OR other
+        // Previously the trailing text was silently ignored (SOLR-15906). Hand the whole string to
+        // the lucene query parser instead: it understands "{!...}" clauses combined with other
+        // query syntax, so nothing is dropped.
+        localParams = null;
+        localParamsEnd = -1;
+        parserName = QParserPlugin.DEFAULT_QTYPE;
       } else {
-        // use the remainder of the string as the value
-        valFollowedParams = true;
-        val = qstr.substring(localParamsEnd);
-        localParams.set(QueryParsing.V, val);
-      }
+        if (val != null) {
+          // val was directly specified in localParams via v=<something> or v=$arg
+          valFollowedParams = false;
+        } else {
+          // use the remainder of the string as the value
+          valFollowedParams = true;
+          val = qstr.substring(localParamsEnd);
+          localParams.set(QueryParsing.V, val);
+        }
 
-      parserName = localParams.get(QueryParsing.TYPE, parserName);
-      qstr = localParams.get(QueryParsing.V);
+        parserName = localParams.get(QueryParsing.TYPE, parserName);
+        qstr = localParams.get(QueryParsing.V);
+      }
     }
 
     QParserPlugin qplug = req.getCore().getQueryPlugin(parserName);
