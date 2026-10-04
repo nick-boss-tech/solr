@@ -959,6 +959,7 @@ public class ExtendedDismaxQParser extends QParser {
     PHRASE,
     PREFIX,
     WILDCARD,
+    REGEXP,
     FUZZY,
     RANGE
   }
@@ -1152,6 +1153,15 @@ public class ExtendedDismaxQParser extends QParser {
         }
       }
       this.type = QType.WILDCARD;
+      this.field = field;
+      this.val = val;
+      this.vals = null;
+      return getAliasedQuery();
+    }
+
+    @Override
+    protected Query getRegexpQuery(String field, String val) throws SyntaxError {
+      this.type = QType.REGEXP;
       this.field = field;
       this.val = val;
       this.vals = null;
@@ -1474,6 +1484,8 @@ public class ExtendedDismaxQParser extends QParser {
             return super.getPrefixQuery(field, val);
           case WILDCARD:
             return super.getWildcardQuery(field, val);
+          case REGEXP:
+            return super.getRegexpQuery(field, val);
           case FUZZY:
             return super.getFuzzyQuery(field, val, flt);
           case RANGE:

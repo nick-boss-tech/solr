@@ -258,6 +258,15 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     }
   }
 
+  public void testRegexQueryUsesQueryFieldsNotImpossibleFieldName() {
+    // SOLR-6009: a regex clause must go through the qf aliasing like wildcards and prefixes do
+    assertQ(
+        req("defType", "edismax", "qf", "name", "q", "/.*apper/", "debugQuery", "true"),
+        "//*[@numFound='1']",
+        "//str[@name='parsedquery'][contains(.,'name:/.*apper/')]",
+        "//str[@name='parsedquery'][not(contains(.,'\uFFFC'))]");
+  }
+
   public void testCharFilter() {
     // test that charfilter was applied by the indexer
     assertQ(
