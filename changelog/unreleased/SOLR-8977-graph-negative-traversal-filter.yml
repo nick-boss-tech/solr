@@ -1,0 +1,10 @@
+title: >
+  The graph query parser now accepts a pure negative traversalFilter such as
+  traversalFilter='-text:foo' instead of matching no documents.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-8977
+    url: https://issues.apache.org/jira/browse/SOLR-8977
