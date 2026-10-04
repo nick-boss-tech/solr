@@ -277,6 +277,16 @@ public class DebugComponentTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testExplainOther() {
+    assertQ(
+        req("q", "id:1", CommonParams.DEBUG_QUERY, "true", CommonParams.EXPLAIN_OTHER, "id:2"),
+        "//str[@name='rawquerystring']='id:1'",
+        "//str[@name='otherQuery']='id:2'",
+        "//lst[@name='explain']/str[@name='1']",
+        "//lst[@name='explainOther']/str[@name='2']");
+  }
+
+  @Test
   public void testDistributedStageResolution() {
     final DebugComponent debugComponent = new DebugComponent();
     assertEquals(
