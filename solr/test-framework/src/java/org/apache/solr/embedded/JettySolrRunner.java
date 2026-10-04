@@ -204,7 +204,7 @@ public class JettySolrRunner implements SolrBackend {
   private void init(int port) {
 
     QueuedThreadPool qtp = new QueuedThreadPool();
-    qtp.setMaxThreads(THREAD_POOL_MAX_THREADS);
+    qtp.setMaxThreads(config.maxThreads != null ? config.maxThreads : THREAD_POOL_MAX_THREADS);
     qtp.setIdleTimeout(THREAD_POOL_MAX_IDLE_TIME_MS);
     qtp.setReservedThreads(0);
     server = new Server(qtp);
@@ -713,6 +713,11 @@ public class JettySolrRunner implements SolrBackend {
       throw new RuntimeException("Jetty Server has no Connectors");
     }
     return ((ServerConnector) conns[0]).getLocalPort();
+  }
+
+  /** The max threads of the Jetty thread pool this runner was started with. For tests. */
+  int getConfiguredMaxThreads() {
+    return ((QueuedThreadPool) server.getThreadPool()).getMaxThreads();
   }
 
   /**

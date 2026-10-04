@@ -41,6 +41,9 @@ public class JettyConfig {
   /** If true, serve the Admin UI static files and index.html like the production web.xml does. */
   public final boolean enableAdminUi;
 
+  /** Max threads for the embedded Jetty thread pool, or null to use the runner default. */
+  public final Integer maxThreads;
+
   /** Snapshot of the builder that built this config; enables {@link #builder(JettyConfig)}. */
   private final Builder builder;
 
@@ -57,6 +60,7 @@ public class JettyConfig {
     this.enableV2 = builder.enableV2;
     this.enableGracefulShutdown = builder.enableGracefulShutdown;
     this.enableAdminUi = builder.enableAdminUi;
+    this.maxThreads = builder.maxThreads;
   }
 
   public static Builder builder() {
@@ -81,6 +85,7 @@ public class JettyConfig {
     SSLConfig sslConfig =
         SolrTestCaseJ4.sslConfig != null ? SolrTestCaseJ4.sslConfig.buildServerSSLConfig() : null;
     int portRetryTime = 60;
+    Integer maxThreads = null;
 
     public Builder useOnlyHttp1(boolean useOnlyHttp1) {
       this.onlyHttp1 = useOnlyHttp1;
@@ -99,6 +104,11 @@ public class JettyConfig {
 
     public Builder enableAdminUi(boolean flag) {
       this.enableAdminUi = flag;
+      return this;
+    }
+
+    public Builder withMaxThreads(int maxThreads) {
+      this.maxThreads = maxThreads;
       return this;
     }
 
