@@ -18,6 +18,7 @@ package org.apache.solr.handler.admin.api;
 
 import static org.apache.solr.common.params.CollectionParams.SOURCE_NODE;
 import static org.apache.solr.common.params.CollectionParams.TARGET_NODE;
+import static org.apache.solr.common.params.CommonAdminParams.TIMEOUT;
 import static org.apache.solr.common.params.CommonAdminParams.WAIT_FOR_FINAL_STATE;
 import static org.apache.solr.security.PermissionNameProvider.Name.COLL_EDIT_PERM;
 
@@ -40,6 +41,9 @@ import org.apache.solr.response.SolrQueryResponse;
  * <p>This API is analogous to the v1 /admin/collections?action=REPLACENODE command.
  */
 public class ReplaceNode extends AdminAPIBase implements ReplaceNodeApi {
+
+  // the key ReplaceNodeCmd reads
+  private static final String PARALLEL = "parallel";
 
   @Inject
   public ReplaceNode(
@@ -72,6 +76,8 @@ public class ReplaceNode extends AdminAPIBase implements ReplaceNodeApi {
     if (requestBody != null) {
       insertIfValueNotNull(remoteMessage, TARGET_NODE, requestBody.targetNodeName);
       insertIfValueNotNull(remoteMessage, WAIT_FOR_FINAL_STATE, requestBody.waitForFinalState);
+      insertIfValueNotNull(remoteMessage, PARALLEL, requestBody.parallel);
+      insertIfValueNotNull(remoteMessage, TIMEOUT, requestBody.timeout);
     }
 
     return new ZkNodeProps(remoteMessage);

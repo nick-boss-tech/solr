@@ -53,4 +53,17 @@ public class ReplaceNodeRequestBody {
   @Schema(description = "Request ID to track this action which will be processed asynchronously.")
   @JsonProperty("async")
   public String async;
+
+  @Schema(
+      description =
+          "If true, the replicas are moved in parallel instead of one at a time. Defaults to false.")
+  @JsonProperty("parallel")
+  public Boolean parallel;
+
+  @Schema(
+      description =
+          "Time in seconds to wait for the replicas to become active, per replica move. "
+              + "Defaults to 600 (10 minutes).")
+  @JsonProperty("timeout")
+  public Integer timeout;
 }

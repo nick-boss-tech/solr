@@ -87,6 +87,7 @@ import static org.apache.solr.common.params.CommonAdminParams.NUM_SUB_SHARDS;
 import static org.apache.solr.common.params.CommonAdminParams.SPLIT_BY_PREFIX;
 import static org.apache.solr.common.params.CommonAdminParams.SPLIT_FUZZ;
 import static org.apache.solr.common.params.CommonAdminParams.SPLIT_METHOD;
+import static org.apache.solr.common.params.CommonAdminParams.TIMEOUT;
 import static org.apache.solr.common.params.CommonAdminParams.WAIT_FOR_FINAL_STATE;
 import static org.apache.solr.common.params.CommonParams.NAME;
 import static org.apache.solr.common.params.CommonParams.TIMING;
@@ -993,6 +994,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
           requestBody.targetNodeName = params.get(TARGET_NODE);
           requestBody.waitForFinalState = params.getBool(WAIT_FOR_FINAL_STATE);
           requestBody.async = params.get(ASYNC);
+          requestBody.parallel = params.getBool("parallel");
+          requestBody.timeout = params.getInt(TIMEOUT);
           final ReplaceNode replaceNodeAPI = new ReplaceNode(h.coreContainer, req, rsp);
           final SolrJerseyResponse replaceNodeResponse =
               replaceNodeAPI.replaceNode(requiredParams.get(SOURCE_NODE), requestBody);

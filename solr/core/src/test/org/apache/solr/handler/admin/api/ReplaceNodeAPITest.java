@@ -55,6 +55,26 @@ public class ReplaceNodeAPITest extends MockV2APITest {
   }
 
   @Test
+  public void testParallelAndTimeoutAreForwardedToTheOverseerMessage() throws Exception {
+    // SOLR-16499: these were documented parameters of REPLACENODE that were silently dropped
+    final var requestBody = new ReplaceNodeRequestBody("demoTargetNode", null, null);
+    requestBody.parallel = true;
+    requestBody.timeout = 30;
+
+    api.replaceNode("demoSourceNode", requestBody);
+
+    validateRunCommand(
+        CollectionParams.CollectionAction.REPLACENODE,
+        message -> {
+          assertEquals(4, message.size());
+          assertEquals("demoSourceNode", message.get("sourceNode"));
+          assertEquals("demoTargetNode", message.get("targetNode"));
+          assertEquals(true, message.get("parallel"));
+          assertEquals(30, message.get("timeout"));
+        });
+  }
+
+  @Test
   public void testRequestBodyCanBeOmittedAltogether() throws Exception {
     api.replaceNode("demoSourceNode", null);
 
