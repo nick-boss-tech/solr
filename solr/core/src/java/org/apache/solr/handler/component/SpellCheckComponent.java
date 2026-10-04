@@ -91,6 +91,12 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
    */
   public static final String COMPONENT_NAME = "spellcheck";
 
+  /**
+   * Key under which a shard reports its filtered doc count to the coordinator, so a fractional
+   * {@code spellcheck.maxResultsForSuggest} can be applied to the total across shards.
+   */
+  static final String MAX_RESULTS_BY_FILTERS = "maxResultsByFilters";
+
   protected NamedList<?> initParams;
 
   /** Key is the dictionary, value is the SpellChecker for that dictionary name */
@@ -162,7 +168,11 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
         int alternativeTermCount =
             params.getInt(SpellingParams.SPELLCHECK_ALTERNATIVE_TERM_COUNT, 0);
         // If specified, this can be a discrete # of results, or a percentage of fq results.
-        Integer maxResultsForSuggest = maxResultsForSuggest(rb);
+        // A fractional maxResultsForSuggest is a share of the filtered doc count across *all* shards,
+        // which a single shard cannot know. The coordinator computes it in finishStage from the
+        // per-shard counts that each shard reports back (see "maxResultsByFilters" below).
+        final boolean deferToCoordinator = shardRequest && isFractionalMaxResultsForSuggest(params);
+        final Integer maxResultsForSuggest = deferToCoordinator ? null : maxResultsForSuggest(rb);
 
         ModifiableSolrParams customParams = new ModifiableSolrParams();
         for (String checkerName : getDictionaryNames(params)) {
@@ -221,6 +231,12 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
         if (extendedResults) {
           response.add("correctlySpelled", isCorrectlySpelled);
         }
+        if (deferToCoordinator) {
+          final Integer maxResultsByFilters = maxResultsByFilters(rb);
+          if (maxResultsByFilters != null) {
+            response.add(MAX_RESULTS_BY_FILTERS, maxResultsByFilters);
+          }
+        }
         if (collate) {
           addCollationsToResponse(
               params, spellingResult, rb, q, response, spellChecker.isSuggestionsMayOverlap());
@@ -239,7 +255,21 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
     }
   }
 
+  private static boolean isFractionalMaxResultsForSuggest(SolrParams params) {
+    float value = params.getFloat(SpellingParams.SPELLCHECK_MAX_RESULTS_FOR_SUGGEST, 0.0f);
+    return value > 0.0f && value != (int) value;
+  }
+
   private Integer maxResultsForSuggest(ResponseBuilder rb) {
+    return maxResultsForSuggest(rb, null);
+  }
+
+  /**
+   * @param maxResultsByFiltersOverride if non-null, the (cross-shard) filtered doc count to use for
+   *     a fractional {@code maxResultsForSuggest} instead of evaluating the filters against this
+   *     core's searcher
+   */
+  private Integer maxResultsForSuggest(ResponseBuilder rb, Integer maxResultsByFiltersOverride) {
     SolrParams params = rb.req.getParams();
     float maxResultsForSuggestParamValue =
         params.getFloat(SpellingParams.SPELLCHECK_MAX_RESULTS_FOR_SUGGEST, 0.0f);
@@ -252,38 +282,13 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
       } else {
         // If a fractional value was passed in, this is the % of documents returned by the specified
         // filter. If no specified filter, we use the most restrictive filter of the fq parameters
-        String maxResultsFilterQueryString =
-            params.get(SpellingParams.SPELLCHECK_MAX_RESULTS_FOR_SUGGEST_FQ);
-
-        int maxResultsByFilters = Integer.MAX_VALUE;
-        SolrIndexSearcher searcher = rb.req.getSearcher();
-
-        try {
-          if (maxResultsFilterQueryString != null) {
-            // Get the default Lucene query parser
-            QParser parser = QParser.getParser(maxResultsFilterQueryString, rb.req);
-            DocSet s = searcher.getDocSet(parser.getQuery());
-            maxResultsByFilters = s.size();
-          } else {
-            List<Query> filters = rb.getFilters();
-
-            // Get the maximum possible hits within these filters (size of most restrictive filter).
-            if (filters != null) {
-              for (Query query : filters) {
-                DocSet s = searcher.getDocSet(query);
-                if (s != null) {
-                  maxResultsByFilters = Math.min(s.size(), maxResultsByFilters);
-                }
-              }
-            }
-          }
-        } catch (IOException | SyntaxError e) {
-          log.error("Error", e);
-          return null;
-        }
+        Integer maxResultsByFilters =
+            maxResultsByFiltersOverride != null
+                ? maxResultsByFiltersOverride
+                : maxResultsByFilters(rb);
 
         // Recalculate maxResultsForSuggest if filters were specified
-        if (maxResultsByFilters != Integer.MAX_VALUE) {
+        if (maxResultsByFilters != null) {
           maxResultsForSuggest = Math.round(maxResultsByFilters * maxResultsForSuggestParamValue);
         }
       }
@@ -291,6 +296,62 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
     return maxResultsForSuggest;
   }
 
+  /**
+   * The number of documents matching the most restrictive filter (or the explicit {@code
+   * spellcheck.maxResultsForSuggest.fq}), evaluated against this core's searcher; null if there is
+   * no filter or it can't be evaluated.
+   */
+  private Integer maxResultsByFilters(ResponseBuilder rb) {
+    SolrParams params = rb.req.getParams();
+    String maxResultsFilterQueryString =
+        params.get(SpellingParams.SPELLCHECK_MAX_RESULTS_FOR_SUGGEST_FQ);
+
+    int maxResultsByFilters = Integer.MAX_VALUE;
+    SolrIndexSearcher searcher = rb.req.getSearcher();
+
+    try {
+      if (maxResultsFilterQueryString != null) {
+        // Get the default Lucene query parser
+        QParser parser = QParser.getParser(maxResultsFilterQueryString, rb.req);
+        DocSet s = searcher.getDocSet(parser.getQuery());
+        maxResultsByFilters = s.size();
+      } else {
+        List<Query> filters = rb.getFilters();
+
+        // Get the maximum possible hits within these filters (size of most restrictive filter).
+        if (filters != null) {
+          for (Query query : filters) {
+            DocSet s = searcher.getDocSet(query);
+            if (s != null) {
+              maxResultsByFilters = Math.min(s.size(), maxResultsByFilters);
+            }
+          }
+        }
+      }
+    } catch (IOException | SyntaxError e) {
+      log.error("Error", e);
+      return null;
+    }
+    return maxResultsByFilters == Integer.MAX_VALUE ? null : maxResultsByFilters;
+  }
+
+  /**
+   * Sums the per-shard filtered doc counts reported by shards, or null if no shard reported one.
+   */
+  private Integer sumMaxResultsByFiltersFromShards(ResponseBuilder rb) {
+    Long total = null;
+    for (ShardRequest sreq : rb.finished) {
+      for (ShardResponse srsp : sreq.responses) {
+        NamedList<?> nl =
+            (NamedList<?>)
+                SolrResponseUtil.getSubsectionFromShardResponse(rb, srsp, "spellcheck", true);
+        if (nl != null && nl.get(MAX_RESULTS_BY_FILTERS) instanceof Number n) {
+          total = (total == null ? 0L : total) + n.longValue();
+        }
+      }
+    }
+    return total == null ? null : (int) Math.min(total, Integer.MAX_VALUE);
+  }
   protected void addCollationsToResponse(
       SolrParams params,
       SpellingResult spellingResult,
@@ -401,7 +462,12 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
     boolean collationExtendedResults = params.getBool(SPELLCHECK_COLLATE_EXTENDED_RESULTS, false);
     int maxCollationTries = params.getInt(SPELLCHECK_MAX_COLLATION_TRIES, 0);
     int maxCollations = params.getInt(SPELLCHECK_MAX_COLLATIONS, 1);
-    Integer maxResultsForSuggest = maxResultsForSuggest(rb);
+    final Integer maxResultsForSuggest =
+        maxResultsForSuggest(
+            rb,
+            isFractionalMaxResultsForSuggest(params)
+                ? sumMaxResultsByFiltersFromShards(rb)
+                : null);
     int count = rb.req.getParams().getInt(SPELLCHECK_COUNT, 1);
     int numSug = Math.max(count, AbstractLuceneSpellChecker.DEFAULT_SUGGESTION_COUNT);
 

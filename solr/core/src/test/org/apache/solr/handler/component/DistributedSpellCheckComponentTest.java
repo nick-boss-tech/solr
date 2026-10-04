@@ -158,6 +158,24 @@ public class DistributedSpellCheckComponentTest extends BaseDistributedSearchTes
             count,
             "4"));
 
+    // A fractional maxResultsForSuggest is a share of the filtered doc count over *all* shards. The
+    // fq below matches 12 docs spread over the shards, so the threshold is round(12 * 1.5) = 18 and
+    // suggestions must be returned. Evaluating the fraction against just the coordinator core's
+    // share of those docs (SOLR-17612) would give a much smaller threshold and suppress them.
+    query(
+        requestHandlerName,
+        buildRequest(
+            "quoet",
+            true,
+            requestHandlerName,
+            false,
+            extended,
+            "true",
+            maxResults,
+            "1.5",
+            "fq",
+            "lowerfilt:quote"));
+
     // Test Collate functionality
     query(
         requestHandlerName,
