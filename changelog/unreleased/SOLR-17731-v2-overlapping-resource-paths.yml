@@ -1,0 +1,10 @@
+title: >
+  The v2 APIs POST /collections/{name}/snapshots/{snapshotName} and GET /aliases/{aliasName} are reachable again instead
+  of returning HTTP 405 because a sibling resource with the same path claimed the request.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-17731
+    url: https://issues.apache.org/jira/browse/SOLR-17731
