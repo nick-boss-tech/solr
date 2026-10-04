@@ -1,0 +1,9 @@
+title: >
+  Macros (${param}) in a request handler's appends and invariants are now expanded on shard requests too, instead of leaking in unexpanded in distributed searches.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-14931
+    url: https://issues.apache.org/jira/browse/SOLR-14931
