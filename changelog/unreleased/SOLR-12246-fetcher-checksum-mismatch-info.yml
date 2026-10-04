@@ -1,0 +1,10 @@
+title: >
+  A segment file whose checksum differs from the leader's during replication or recovery is now
+  logged at INFO instead of WARN, since the file is simply fetched again.
+type: changed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-12246
+    url: https://issues.apache.org/jira/browse/SOLR-12246
