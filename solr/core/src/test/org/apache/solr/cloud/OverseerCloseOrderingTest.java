@@ -16,54 +16,111 @@
  */
 package org.apache.solr.cloud;
 
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+import org.apache.curator.framework.imps.CuratorFrameworkState;
+import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.embedded.JettySolrRunner;
-import org.apache.zookeeper.Watcher;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/** Stopping the overseer node must stop its overseer threads before its leader node is released. */
+/**
+ * On shutdown the overseer must finish closing before the ZooKeeper session ends (that is, before
+ * {@code ZkController} closes its state reader and client), so the old overseer never works against
+ * a dead session while another node takes over the queues.
+ */
 public class OverseerCloseOrderingTest extends SolrCloudTestCase {
 
   @BeforeClass
   public static void setupCluster() throws Exception {
+    assumeWorkingMockito();
     configureCluster(2).addConfig("conf", configset("cloud-minimal")).configure();
   }
 
   @Test
-  public void testOverseerStoppedBeforeLeaderNodeReleased() throws Exception {
+  public void testZkClientClosesOnlyAfterOverseerCloseCompletes() throws Exception {
     JettySolrRunner overseerNode = null;
-    Thread updaterThread = null;
     for (JettySolrRunner runner : cluster.getJettySolrRunners()) {
-      Thread thread = runner.getCoreContainer().getZkController().getOverseer().getUpdaterThread();
-      if (thread != null) {
+      if (runner.getCoreContainer().getZkController().getOverseer().getUpdaterThread() != null) {
         overseerNode = runner;
-        updaterThread = thread;
+        break;
       }
     }
     assertNotNull("no node is running the overseer", overseerNode);
 
-    CountDownLatch released = new CountDownLatch(1);
-    AtomicBoolean updaterAliveWhenReleased = new AtomicBoolean(true);
-    Thread overseerUpdater = updaterThread;
-    cluster
-        .getZkClient()
-        .exists(
-            Overseer.OVERSEER_ELECT + "/leader",
-            event -> {
-              if (event.getType() == Watcher.Event.EventType.NodeDeleted) {
-                updaterAliveWhenReleased.set(overseerUpdater.isAlive());
-                released.countDown();
+    ZkController zkController = overseerNode.getCoreContainer().getZkController();
+    Overseer realOverseer = zkController.getOverseer();
+
+    // An overseer whose close() blocks until the test releases it. With the field swapped,
+    // ZkController.close() cannot get past the overseer close quickly on any code path.
+    CountDownLatch overseerCloseStarted = new CountDownLatch(1);
+    CountDownLatch finishOverseerClose = new CountDownLatch(1);
+    Overseer blockingOverseer = mock(Overseer.class);
+    doAnswer(
+            invocation -> {
+              overseerCloseStarted.countDown();
+              finishOverseerClose.await(120, TimeUnit.SECONDS);
+              return null;
+            })
+        .when(blockingOverseer)
+        .close();
+    zkController.overseer = blockingOverseer;
+
+    AtomicReference<Throwable> stopError = new AtomicReference<>();
+    JettySolrRunner nodeToStop = overseerNode;
+    Thread stopper =
+        new Thread(
+            () -> {
+              try {
+                cluster.stopJettySolrRunner(nodeToStop);
+              } catch (Throwable t) {
+                stopError.set(t);
               }
-            });
+            },
+            "overseer-node-stopper");
 
-    cluster.stopJettySolrRunner(overseerNode);
+    boolean zkClientClosedDuringOverseerClose = false;
+    try {
+      stopper.start();
+      assertTrue(
+          "overseer close was never started", overseerCloseStarted.await(60, TimeUnit.SECONDS));
+      // While the overseer close is blocked, the ZooKeeper client must stay open. (The poll
+      // reads the Curator state because SolrZkClient.isClosed() also turns true as soon as the
+      // CoreContainer starts shutting down, before ZkController.close() even runs.) On
+      // unpatched code ZkController closes its state reader and client without waiting for
+      // the overseer, so the client closes inside this window.
+      long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+      while (System.nanoTime() < deadline) {
+        if (zkController.getZkClient().getCuratorFramework().getState()
+            == CuratorFrameworkState.STOPPED) {
+          zkClientClosedDuringOverseerClose = true;
+          break;
+        }
+        Thread.sleep(20);
+      }
+    } finally {
+      finishOverseerClose.countDown();
+      stopper.join(TimeUnit.SECONDS.toMillis(120));
+    }
 
-    assertTrue("overseer leader node was not released", released.await(30, TimeUnit.SECONDS));
+    assertNull("stopping the overseer node failed", stopError.get());
+    assertFalse("stopper thread is still running", stopper.isAlive());
+    assertTrue(
+        "ZooKeeper client should be closed once shutdown completes",
+        zkController.getZkClient().getCuratorFramework().getState()
+            == CuratorFrameworkState.STOPPED);
     assertFalse(
-        "overseer was still running when its leader node was released",
-        updaterAliveWhenReleased.get());
+        "ZooKeeper client closed before the overseer finished closing",
+        zkClientClosedDuringOverseerClose);
+
+    // The mock absorbed the shutdown closes; close the real overseer exactly once so its
+    // threads do not linger past the test.
+    if (!realOverseer.isClosed()) {
+      IOUtils.closeQuietly(realOverseer);
+    }
   }
 }
