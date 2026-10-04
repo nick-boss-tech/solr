@@ -1,0 +1,11 @@
+title: >
+  IndexFetcher no longer treats the files of commits kept by the deletion policy
+  (maxCommitsToKeep > 1) as unused, which made replicas wait 30 seconds and then fall back to a
+  full index copy on every replication.
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-12085
+    url: https://issues.apache.org/jira/browse/SOLR-12085
