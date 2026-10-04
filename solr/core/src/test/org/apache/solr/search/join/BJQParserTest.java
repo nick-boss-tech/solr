@@ -167,6 +167,24 @@ public class BJQParserTest extends SolrTestCaseJ4 {
       };
 
   @Test
+  public void testSubQueryWithoutAnyTermsAfterAnalysis() {
+    // SOLR-9048: "and" is a stopword for the subject field, so the nested parser yields no query
+    final String noTerms = "{!field f=subject v=and}";
+    assertQ(
+        req("q", "{!parent which=\"parent_s:[* TO *]\" v=$sub}", "sub", noTerms),
+        "//*[@numFound='" + abcdef.length + "']");
+    assertQ(
+        req(
+            "q",
+            "{!child of=\"parent_s:[* TO *]\" v=$sub}",
+            "sub",
+            noTerms,
+            "fq",
+            "childparent_s:" + abcdef[random().nextInt(abcdef.length)]),
+        "//*[@numFound='" + klm.length + "']");
+  }
+
+  @Test
   public void testJustParentsFilter() {
     assertQ(req("q", "{!parent which=\"parent_s:[* TO *]\"}"), sixParents);
   }

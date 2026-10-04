@@ -59,7 +59,12 @@ public class FiltersQParser extends QParser {
 
     BooleanQuery.Builder builder = createBuilder();
     for (Map.Entry<QParser, Occur> clause : clauses.entrySet()) {
-      builder.add(unwrapQuery(clause.getKey().getQuery(), clause.getValue()), clause.getValue());
+      final Query subQuery = clause.getKey().getQuery();
+      if (subQuery == null) {
+        // a sub parser may produce no query at all, e.g. when every term is removed by analysis
+        continue;
+      }
+      builder.add(unwrapQuery(subQuery, clause.getValue()), clause.getValue());
     }
     // what about empty query?
     return builder.build();
