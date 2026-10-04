@@ -543,6 +543,22 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testCommentsAfterSyntaxError() throws Exception {
+    // SOLR-11761: an unterminated comment must not break later parses on the same parser
+    try (SolrQueryRequest req = req()) {
+      QParserPlugin qParserPlugin = req.getCore().getQueryPlugin("lucene");
+      QParser qParser = qParserPlugin.createParser(null, null, null, req);
+      SolrQueryParser parser = new SolrQueryParser(qParser, "text");
+
+      assertNotNull(parser.parse("/* foo */ bar"));
+      expectThrows(SyntaxError.class, () -> parser.parse("/*"));
+      assertNotNull(parser.parse("/* foo */ bar"));
+      assertNotNull(parser.parse("bar"));
+      assertNotNull(parser.parse("/* foo */ bar"));
+    }
+  }
+
+  @Test
   public void testComments() throws Exception {
     assertJQ(req("q", "id:1 id:2 /* *:* */ id:3"), "/response/numFound==3");
 

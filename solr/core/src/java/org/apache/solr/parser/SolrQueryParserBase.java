@@ -235,6 +235,8 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
   // the generated parser will create these in QueryParser
   public abstract void ReInit(CharStream stream);
 
+  public abstract void ReInit(QueryParserTokenManager tm);
+
   public abstract Query TopLevelQuery(String field) throws ParseException, SyntaxError;
 
   public void init(String defaultField, QParser parser) {
@@ -269,7 +271,9 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
    * @param query the query string to be parsed.
    */
   public Query parse(String query) throws SyntaxError {
-    ReInit(new FastCharStream(new StringReader(query)));
+    // a fresh token manager, because ReInit(CharStream) does not reset the comment nesting depth
+    // left behind by an earlier unterminated comment (SOLR-11761)
+    ReInit(new QueryParserTokenManager(new FastCharStream(new StringReader(query))));
     try {
       // TopLevelQuery is a Query followed by the end-of-input (EOF)
       // pass null so we can tell later if an explicit field was provided or not
