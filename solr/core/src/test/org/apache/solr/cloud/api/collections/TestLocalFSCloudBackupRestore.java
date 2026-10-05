@@ -59,11 +59,17 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
         "    <repository  name=\"local\" "
             + "class=\"org.apache.solr.core.backup.repository.LocalFileSystemRepository\"> \n"
             + "    </repository>\n";
+    String copyPoisoned =
+        "    <repository  name=\""
+            + TestLocalFSCloudBackupRestore.copyPoisoned
+            + "\" class=\"org.apache.solr.cloud.api.collections.TestLocalFSCloudBackupRestore$CopyPoisonedRepository\"> \n"
+            + "    </repository>\n";
     solrXml =
         solrXml.replace(
             "</solr>",
             "<backup>"
                 + (random().nextBoolean() ? poisoned + local : local + poisoned)
+                + copyPoisoned
                 + "</backup>"
                 + "</solr>");
 
@@ -131,11 +137,30 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
       assertEquals(ErrorCode.SERVER_ERROR.code, ex.code());
       assertTrue(ex.getMessage(), ex.getMessage().contains(poisoned));
     }
-    // SOLR-12651: the data copy failed after the collection was created, so the half-restored
-    // collection must be cleaned up. NOTE: written without being compiled or run.
+    // The fully poisoned repository fails while the backup properties are read, before the
+    // collection is created, so nothing may be left behind either.
     assertFalse(
         "Failed restore left collection " + restoreCollectionName + " behind",
         CollectionAdminRequest.listCollections(solrClient).contains(restoreCollectionName));
+
+    // SOLR-12651: the copy-poisoned repository reads metadata normally and fails only while
+    // copying the shard data, after the collection has been created. The half-restored
+    // collection must be cleaned up.
+    final String copyRestoreCollectionName = getCollectionName() + "boo2";
+    CollectionAdminRequest.Restore copyRestore =
+        CollectionAdminRequest.restoreCollection(copyRestoreCollectionName, backupName)
+            .setLocation(backupLocation)
+            .setRepositoryName(copyPoisoned);
+    try {
+      copyRestore.process(solrClient);
+      fail("This request should have failed since the shard data copy is poisoned.");
+    } catch (SolrException ex) {
+      // The shard request failure surfaces without the repository exception's message.
+      assertEquals(ErrorCode.SERVER_ERROR.code, ex.code());
+    }
+    assertFalse(
+        "Failed restore left collection " + copyRestoreCollectionName + " behind",
+        CollectionAdminRequest.listCollections(solrClient).contains(copyRestoreCollectionName));
   }
 
   private void errorBackup(CloudSolrClient solrClient) throws SolrServerException, IOException {
@@ -155,6 +180,8 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
   }
 
   private static final String poisoned = "poisoned";
+
+  private static final String copyPoisoned = "copypoisoned";
 
   // let it go through collection handler, and break only when real thing is doing:
   // Restore/BackupCore
@@ -182,6 +209,23 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
     @Override
     public OutputStream createOutput(URI path) {
       throw new UnsupportedOperationException(poisoned);
+    }
+  }
+
+  /**
+   * Reads backup metadata normally and fails only when the backed-up index files are copied into a
+   * shard, which happens after the restore target collection has been created.
+   */
+  public static class CopyPoisonedRepository extends LocalFileSystemRepository {
+
+    public CopyPoisonedRepository() {
+      super();
+    }
+
+    @Override
+    public void copyIndexFileTo(
+        URI sourceDir, String sourceFileName, Directory dest, String destFileName) {
+      throw new UnsupportedOperationException(copyPoisoned);
     }
   }
 }
