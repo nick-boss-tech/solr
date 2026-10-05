@@ -81,7 +81,8 @@ public class TestShardsInfoErrorRecording extends SolrTestCaseJ4 {
   @Test
   public void testFailureWithoutShardsInfoSectionDoesNotThrow() {
     try (SolrQueryRequest req = req("q", "*:*", ShardParams.SHARDS_INFO, "true")) {
-      final ResponseBuilder rb = new ResponseBuilder(req, new SolrQueryResponse(), new ArrayList<>());
+      final ResponseBuilder rb =
+          new ResponseBuilder(req, new SolrQueryResponse(), new ArrayList<>());
 
       new QueryComponent()
           .returnFields(rb, failedFieldsRequest("shard1", new SolrServerException("shard down")));

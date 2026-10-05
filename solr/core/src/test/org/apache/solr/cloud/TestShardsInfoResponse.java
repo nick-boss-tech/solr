@@ -83,5 +83,31 @@ public class TestShardsInfoResponse extends SolrCloudTestCase {
     // The names of the shards in error are generated as unknown_shard_1 and unknown_shard_2 because
     // we could not get the real shard names.
     assertThat((Iterable<String>) keys, hasItems("unknown_shard_1", "unknown_shard_2"));
+
+    // The same request as a single-pass query: field retrieval then runs on the same shard
+    // responses as the id merge, and a failed shard has no name to look up in shards.info.
+    // It must return the same shards.info keys instead of failing. See SOLR-17748.
+    QueryResponse singlePassResponse =
+        cluster
+            .getSolrClient()
+            .query(
+                "collection",
+                new SolrQuery("*:*")
+                    .setRows(1)
+                    .setParam(ShardParams.SHARDS_TOLERANT, true)
+                    .setParam(ShardParams.SHARDS_INFO, true)
+                    .setParam(ShardParams.DISTRIB_SINGLE_PASS, true));
+    assertEquals(0, singlePassResponse.getStatus());
+    assertTrue(singlePassResponse.getResults().getNumFound() > 0);
+
+    SimpleOrderedMap<Object> singlePassShardsInfo =
+        (SimpleOrderedMap<Object>) singlePassResponse.getResponse().get("shards.info");
+    assertEquals(3, singlePassShardsInfo.size());
+
+    Collection<String> singlePassKeys = new ArrayList<>();
+    singlePassKeys.add(singlePassShardsInfo.getName(0));
+    singlePassKeys.add(singlePassShardsInfo.getName(1));
+    singlePassKeys.add(singlePassShardsInfo.getName(2));
+    assertThat((Iterable<String>) singlePassKeys, hasItems("unknown_shard_1", "unknown_shard_2"));
   }
 }
