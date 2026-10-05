@@ -476,7 +476,7 @@ public class CreateRoutedAliasTest extends SolrCloudTestCase {
                     + "&router.interval=%2B30MINUTE"
                     + "&create-collection.collection.configName=_default"
                     + "&create-collection.numShards=1"),
-        "requires these params");
+        "Missing required parameter: router.field");
 
     assertFailure(
         jetty
@@ -493,7 +493,8 @@ public class CreateRoutedAliasTest extends SolrCloudTestCase {
                     + "&router.interval=%2B30MINUTE"
                     + "&create-collection.collection.configName=_default"
                     + "&create-collection.numShards=1"),
-        "A routed alias requires these params");
+        "Alias creation requires either a list of either collections (for creating a traditional"
+            + " alias) or routers (for creating a routed alias)");
   }
 
   @Test
