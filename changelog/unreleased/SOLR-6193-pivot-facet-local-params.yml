@@ -1,0 +1,8 @@
+title: >
+  Distributed pivot facets now honor facet.limit, facet.sort, facet.offset and facet.pivot.mincount given as local params of facet.pivot when merging shard responses.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-6193
+    url: https://issues.apache.org/jira/browse/SOLR-6193
