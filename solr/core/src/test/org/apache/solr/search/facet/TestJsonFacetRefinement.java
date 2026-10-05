@@ -1182,6 +1182,66 @@ public class TestJsonFacetRefinement extends SolrTestCaseHS {
             + "  ] } }");
   }
 
+  /**
+   * The same request as {@link
+   * #testSortedSubFacetRefinementWhenParentOnlyReturnedByOneShardProcessEmpty}, but pinning only
+   * the outcome base has always produced for the child buckets, which must be preserved: the child
+   * buckets of pX and pY are first seen when the one shard that has them is asked to refine the
+   * parent bucket as a leaf ("_l"), so no other shard can ever be asked about them. They are
+   * returned with their (correct) counts from that single shard, and their debug values show that
+   * only that shard contributed; only their stats are missing the other shards. The
+   * {@code @AwaitsFix} sibling test pins the stronger expectation that every shard contributes to
+   * every bucket, which needs a refinement protocol change.
+   *
+   * @see #testSortedSubFacetRefinementWhenParentOnlyReturnedByOneShardProcessEmpty
+   */
+  @Test
+  public void testProcessEmptySubFacetBucketsFirstSeenDuringRefinement() throws Exception {
+    final int numDocs = initSomeDocsWhere1ShardHasOnlyParentFacetField();
+    final Client client = servers.getClient(random().nextInt());
+    final List<SolrClient> clients = client.getClientProvider().all();
+    final int numClients = clients.size();
+
+    assertTrue(numClients >= 3); // we only use 2, but assert at least 3 to also test empty shard
+
+    client.testJQ(
+        params(
+            "q",
+            "*:*",
+            "rows",
+            "0",
+            "json.facet",
+            "{"
+                + "processEmpty:true,"
+                + "parent:{ type:terms, field:parent_s, limit:2, overrequest:0, refine:true, facet:{"
+                + "  processEmpty:true,"
+                + "  debug:'debug(numShards)',"
+                + "  child:{ type:terms, field:child_s, limit:2, overrequest:0, refine: true,"
+                + "          facet:{ processEmpty:true, debug:'debug(numShards)' } }"
+                + "} } }"),
+        "facets=={ count: "
+            + numDocs
+            + ","
+            + "  parent:{ buckets:[ "
+            + "    { val:pY, count: 24,"
+            + "      debug:"
+            + numClients
+            + ", "
+            + "      child:{ buckets:[ "
+            + "                   {val:c1,count:3, debug:1},"
+            + "                   {val:c0,count:1, debug:1},"
+            + "      ] } },"
+            + "    { val:pX, count: 13,"
+            + "      debug:"
+            + numClients
+            + ", "
+            + "      child:{ buckets:[ "
+            + "                   {val:c0,count:2, debug:1},"
+            + "                   {val:c1,count:1, debug:1},"
+            + "      ] } },"
+            + "  ] } }");
+  }
+
   @Test
   public void testBasicRefinement() throws Exception {
     ModifiableSolrParams p;
