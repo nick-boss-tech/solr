@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
 import org.apache.commons.exec.OS;
 import org.apache.lucene.tests.util.TestUtil;
 import org.apache.solr.SolrTestCaseJ4;
@@ -570,6 +572,46 @@ public class TestSolrXml extends SolrTestCaseJ4 {
     assertEquals(
         "clusterSingleton plugins must implement the interface " + ClusterSingleton.class.getName(),
         thrown.getMessage());
+  }
+
+  public void testClusterSingletonClassFromSharedLib() throws Exception {
+    System.setProperty(ContainerPluginsRegistry.CLUSTER_PLUGIN_EDIT_ENABLED, "false");
+    // Compile a ClusterSingleton implementation into $SOLR_HOME/lib. The class is not on the
+    // test classpath; it becomes visible to the resource loader only when the NodeConfig
+    // constructor adds the shared lib directory, which happens after solr.xml is parsed.
+    String className = "org.apache.solr.core.test.LibClusterSingleton";
+    Path classesDir = Files.createDirectories(solrHome.resolve("lib").resolve("classes"));
+    Path sourceFile = createTempDir().resolve("LibClusterSingleton.java");
+    Files.writeString(
+        sourceFile,
+        "package org.apache.solr.core.test;\n"
+            + "public class LibClusterSingleton"
+            + " implements org.apache.solr.cloud.ClusterSingleton {\n"
+            + "  @Override public String getName() { return \"lib\"; }\n"
+            + "  @Override public void start() {}\n"
+            + "  @Override public State getState() { return State.STOPPED; }\n"
+            + "  @Override public void stop() {}\n"
+            + "}\n");
+    Path clusterSingletonCp =
+        Path.of(ClusterSingleton.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+    JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+    assertNotNull("test must run on a JDK, not a JRE", compiler);
+    int rc =
+        compiler.run(
+            null,
+            null,
+            null,
+            "-cp",
+            clusterSingletonCp.toString(),
+            "-d",
+            classesDir.toString(),
+            sourceFile.toString());
+    assertEquals("compiling the shared lib class failed", 0, rc);
+
+    String solrXml = "<solr><clusterSingleton name=\"a\" class=\"" + className + "\"/></solr>";
+    NodeConfig cfg = SolrXmlConfig.fromString(solrHome, solrXml);
+    assertEquals(1, cfg.getClusterPlugins().length);
+    assertEquals(className, cfg.getClusterPlugins()[0].className);
   }
 
   /**

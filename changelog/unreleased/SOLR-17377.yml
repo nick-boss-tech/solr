@@ -1,0 +1,10 @@
+title: >
+  A clusterSingleton plugin declared in solr.xml can now be loaded from a module or the
+  shared lib directory; its class is validated after those are added to the class loader
+  instead of while solr.xml is parsed.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17377
+    url: https://issues.apache.org/jira/browse/SOLR-17377
