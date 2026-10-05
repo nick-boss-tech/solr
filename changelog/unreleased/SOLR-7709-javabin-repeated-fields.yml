@@ -1,0 +1,8 @@
+title: >
+  JavaBinCodec now keeps all values when a document in the stream repeats a field name, instead of keeping only the last one.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-7709
+    url: https://issues.apache.org/jira/browse/SOLR-7709
