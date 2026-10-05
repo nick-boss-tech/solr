@@ -1,4 +1,4 @@
-title: Recording a failed shard in shards.info while fields are retrieved no longer throws a NullPointerException when the shard has no entry yet or the failure has no cause
+title: A single-pass distributed query with shards.info and shards.tolerant no longer fails with a NullPointerException when a shard has no live replica
 type: fixed
 authors:
   - name: Nick Shanin
