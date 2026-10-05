@@ -1,0 +1,8 @@
+title: >
+  JsonRecordReader now throws an error when a mapped field only appears in the JSON after the split record was emitted, instead of silently dropping it from the record.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-12094
+    url: https://issues.apache.org/jira/browse/SOLR-12094
