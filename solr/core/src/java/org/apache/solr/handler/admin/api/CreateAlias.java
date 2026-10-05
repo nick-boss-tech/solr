@@ -123,10 +123,18 @@ public class CreateAlias extends AdminAPIBase implements CreateAliasApi {
     remoteMessage.put(NAME, requestBody.name);
 
     if (requestBody.routers.size() > 1) { // Multi-dimensional alias
+      final var dimensionTypes = new ArrayList<String>();
       for (int i = 0; i < requestBody.routers.size(); i++) {
+        final String dimensionPrefix = "router." + i + ".";
         createValidationHelper(requestBody.routers.get(i))
-            .addRemoteMessageProperties(remoteMessage, "router." + i + ".");
+            .addRemoteMessageProperties(remoteMessage, dimensionPrefix);
+        dimensionTypes.add(
+            String.valueOf(remoteMessage.get(dimensionPrefix + CoreAdminParams.NAME)));
       }
+      // CreateAliasCmd and RoutedAlias.fromProps need the top-level router type to recognize
+      // this as a dimensional routed alias; the per-dimension properties do not carry it.
+      remoteMessage.put(
+          ROUTER_TYPE_NAME, RoutedAlias.DIMENSIONAL + String.join(",", dimensionTypes) + "]");
     } else if (requestBody.routers.size() == 1) { // Single dimensional alias
       createValidationHelper(requestBody.routers.get(0))
           .addRemoteMessageProperties(remoteMessage, "router.");
