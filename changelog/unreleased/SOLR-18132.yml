@@ -1,4 +1,4 @@
-title: Pass solr.ssl.enabled from SOLR_SSL_ENABLED so collection creation works with HTTPS Solr and a plaintext external ZooKeeper.
+title: Tools given a ZooKeeper connection now build HTTPS URLs when SSL is enabled, without the urlScheme cluster property, so collection creation works with HTTPS Solr and a plaintext external ZooKeeper.
 type: fixed
 authors:
   - name: Nick Shanin
