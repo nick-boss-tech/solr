@@ -16,27 +16,31 @@
  */
 package org.apache.solr.core;
 
-import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
+import org.apache.solr.SolrTestCase;
 import org.apache.solr.SolrTestCaseJ4;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 /** SOLR-12007: old index directories are cleaned up before the DirectoryFactory is closed. */
-public class SolrCoreCleanupOnCloseTest extends SolrTestCaseJ4 {
+public class SolrCoreCleanupOnCloseTest extends SolrTestCase {
 
   private static final String CLEANUP_THREAD_PREFIX = "OldIndexDirectoryCleanupThreadForCore-";
 
   private static final List<String> cleanupThreadNames = new CopyOnWriteArrayList<>();
 
+  private static CoreContainer coreContainer;
+
   /** Records which thread asked the factory to clean up old index directories. */
   public static class RecordingDirectoryFactory extends MockDirectoryFactory {
     @Override
     public void cleanupOldIndexDirectories(
-        String dataDirPath, String currentIndexDirPath, boolean afterCoreReload)
-        throws IOException {
+        String dataDirPath, String currentIndexDirPath, boolean afterCoreReload) {
       cleanupThreadNames.add(Thread.currentThread().getName());
       super.cleanupOldIndexDirectories(dataDirPath, currentIndexDirPath, afterCoreReload);
     }
@@ -44,12 +48,35 @@ public class SolrCoreCleanupOnCloseTest extends SolrTestCaseJ4 {
 
   @BeforeClass
   public static void beforeClass() throws Exception {
+    SolrTestCaseJ4.newRandomConfig();
+    Path solrHome = createTempDir();
+    Path confSource = SolrTestCaseJ4.TEST_COLL1_CONF();
+    Path confTarget = solrHome.resolve("collection1").resolve("conf");
+    try (var stream = Files.walk(confSource)) {
+      for (Path source : stream.toList()) {
+        Path target = confTarget.resolve(confSource.relativize(source).toString());
+        if (Files.isDirectory(source)) {
+          Files.createDirectories(target);
+        } else {
+          Files.copy(source, target);
+        }
+      }
+    }
+    Files.writeString(
+        solrHome.resolve("collection1").resolve("core.properties"), "name=collection1\n");
     System.setProperty("solr.directoryFactory", RecordingDirectoryFactory.class.getName());
-    initCore("solrconfig.xml", "schema.xml");
+    coreContainer =
+        new CoreContainer(new NodeConfig.NodeConfigBuilder("testNode", solrHome).build());
+    coreContainer.load();
+    assertEquals(List.of("collection1"), coreContainer.getLoadedCoreNames());
   }
 
   @AfterClass
-  public static void afterClass() {
+  public static void afterClass() throws Exception {
+    if (coreContainer != null) {
+      coreContainer.shutdown();
+      coreContainer = null;
+    }
     System.clearProperty("solr.directoryFactory");
     cleanupThreadNames.clear();
   }
@@ -64,7 +91,13 @@ public class SolrCoreCleanupOnCloseTest extends SolrTestCaseJ4 {
     }
     cleanupThreadNames.clear();
 
-    deleteCore(); // closes the core
+    coreContainer.unload("collection1"); // closes the core
+
+    // closing is asynchronous; wait for the close-time cleanup to be recorded
+    long deadlineNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(30);
+    while (cleanupThreadNames.isEmpty() && System.nanoTime() < deadlineNanos) {
+      Thread.sleep(100);
+    }
 
     assertFalse("cleanup should run when the core is closed", cleanupThreadNames.isEmpty());
     for (String threadName : cleanupThreadNames) {
