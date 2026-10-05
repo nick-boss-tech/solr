@@ -229,9 +229,16 @@ public class RestManager {
 
       // there may be a RestManager, in which case, we want to add this new ManagedResource
       // immediately
-      if (initializedRestManager != null
-          && initializedRestManager.getManagedResourceOrNull(resourceId) == null) {
-        initializedRestManager.addRegisteredResource(registered.get(resourceId));
+      if (initializedRestManager != null) {
+        ManagedResource existing = initializedRestManager.getManagedResourceOrNull(resourceId);
+        if (existing == null) {
+          initializedRestManager.addRegisteredResource(registered.get(resourceId));
+        } else if (observer != null) {
+          // SOLR-16444: the resource was already loaded and its observers notified, so a component
+          // that registers late (e.g. a new field type with the same managed handle) would never
+          // see onManagedResourceInitialized and stay uninitialized
+          existing.notifyObserversDuringInit(existing.managedInitArgs, List.of(observer));
+        }
       }
     }
   }

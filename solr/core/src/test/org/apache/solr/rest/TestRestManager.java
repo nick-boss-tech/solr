@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.core.SolrResourceLoader;
@@ -146,6 +147,36 @@ public class TestRestManager extends SolrRestletTestBase {
     // verifies a RestManager can be reloaded from a previous RestManager's data
     RestManager restManager2 = new RestManager();
     restManager2.init(loader, initArgs, storageIO);
+  }
+
+  /** SOLR-16444: an observer that registers after the resource was loaded must still be told. */
+  @Test
+  public void testLateObserverIsNotified() throws IOException {
+    SolrResourceLoader loader = new SolrResourceLoader(Path.of("./"));
+    Path storageDir = createTempDir("testLateObserver");
+
+    NamedList<String> ioInitArgs = new NamedList<>();
+    ioInitArgs.add(ManagedResourceStorage.STORAGE_DIR_INIT_ARG, storageDir.toString());
+    StorageIO storageIO = new ManagedResourceStorage.FileStorageIO();
+    storageIO.configure(loader, ioInitArgs);
+
+    RestManager restManager = new RestManager();
+    restManager.init(loader, new NamedList<String>(), storageIO);
+
+    String resourceId = "/schema/analysis/stopwords/late";
+    AtomicInteger first = new AtomicInteger();
+    AtomicInteger second = new AtomicInteger();
+    RestManager.Registry registry = loader.getManagedResourceRegistry();
+    registry.registerManagedResource(
+        resourceId, ManagedWordSetResource.class, (args, res) -> first.incrementAndGet());
+    assertEquals("first observer is told when the resource is created", 1, first.get());
+
+    // the resource now exists and is initialized; a second component (e.g. another field type
+    // using the same managed handle) registers afterwards
+    registry.registerManagedResource(
+        resourceId, ManagedWordSetResource.class, (args, res) -> second.incrementAndGet());
+    assertEquals("late observer must be told too", 1, second.get());
+    assertEquals("first observer is not told again", 1, first.get());
   }
 
   @Test
