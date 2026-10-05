@@ -21,6 +21,7 @@ import org.apache.solr.client.solrj.response.SolrResponseBase;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.util.LogListener;
 import org.apache.solr.util.SolrResponseUtil;
@@ -40,6 +41,10 @@ public class TestShardResponseLogging extends SolrTestCase {
 
     final NamedList<Object> header = new NamedList<>();
     header.add("status", 0);
+    // The handler defaults echo the request params into the header (SolrCore adds them from
+    // the original request params when echoParams resolves to explicit or all), so the
+    // header a real shard response carries also holds the query text.
+    header.add("params", new SimpleOrderedMap<>(shardRequest.params));
     final NamedList<Object> body = new NamedList<>();
     body.add(SolrQueryResponse.RESPONSE_HEADER_KEY, header);
     final SolrResponseBase solrResponse = new SolrResponseBase();
