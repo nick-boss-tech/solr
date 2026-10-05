@@ -757,7 +757,7 @@ public class BaseTestRuleBasedAuthorizationPlugin extends SolrTestCaseJ4 {
     perms.runCmd(
         "{set-permission : {name: collection-admin-edit, collection: null, role: a } }", true);
     perms.runCmd(
-        "{set-permission : {name: probe, collection: null, role: a, path: /admin/info/system } }",
+        "{set-permission : {name: probe, collection: null, role: a, path: '/admin/info/system' } }",
         true);
   }
 
