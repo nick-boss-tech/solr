@@ -1,6 +1,6 @@
 title: >
   Requesting a schema as XML (wt=schema.xml) no longer fails with a NullPointerException when the
-  schema has no name or version attribute.
+  schema has no name attribute.
 type: fixed
 authors:
   - name: Nick Shanin

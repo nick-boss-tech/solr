@@ -19,25 +19,23 @@ package org.apache.solr.response;
 import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.SolrTestCase;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.request.SolrQueryRequestBase;
 import org.apache.solr.schema.IndexSchema;
-import org.junit.BeforeClass;
+import org.junit.Test;
 
 /** SOLR-11153: a schema without a "name" attribute must not make wt=schema.xml fail with an NPE. */
-public class SchemaXmlWriterMissingNameTest extends SolrTestCaseJ4 {
+public class SchemaXmlWriterMissingNameTest extends SolrTestCase {
 
-  @BeforeClass
-  public static void beforeClass() throws Exception {
-    initCore("solrconfig.xml", "schema.xml");
-  }
-
+  @Test
   public void testSchemaWithoutNameOrVersion() throws Exception {
     // what IndexSchema.getNamedPropertyValues() yields for a schema lacking both attributes
     Map<String, Object> schemaProperties = new LinkedHashMap<>();
     schemaProperties.put(IndexSchema.UNIQUE_KEY, "id");
 
-    try (SolrQueryRequest req = req()) {
+    try (SolrQueryRequest req = new SolrQueryRequestBase(null, new ModifiableSolrParams())) {
       SolrQueryResponse rsp = new SolrQueryResponse();
       rsp.add(IndexSchema.SCHEMA, schemaProperties);
 
