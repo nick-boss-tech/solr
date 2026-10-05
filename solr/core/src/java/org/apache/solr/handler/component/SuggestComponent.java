@@ -23,7 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +32,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
-import org.apache.lucene.search.suggest.Lookup;
 import org.apache.lucene.search.suggest.Lookup.LookupResult;
 import org.apache.lucene.util.Accountable;
 import org.apache.lucene.util.Accountables;
@@ -75,6 +74,12 @@ public class SuggestComponent extends SearchComponent
 
   /** Name assigned to an unnamed suggester (at most one suggester) can be unnamed */
   private static final String DEFAULT_DICT_NAME = SolrSuggester.DEFAULT_DICT_NAME;
+
+  /** Order of merged shard suggestions: highest weight first, then suggestion text */
+  private static final Comparator<LookupResult> MERGE_ORDER =
+      Comparator.comparingLong((LookupResult res) -> res.value)
+          .reversed()
+          .thenComparing(res -> res.key.toString());
 
   /** SolrConfig label to identify Config time settings */
   private static final String CONFIG_PARAM_LABEL = "suggester";
@@ -341,9 +346,10 @@ public class SuggestComponent extends SearchComponent
   /**
    * Given a list of {@link SuggesterResult} and <code>count</code> returns a {@link
    * SuggesterResult} containing <code>count</code> number of {@link LookupResult}, sorted by their
-   * associated weights
+   * associated weights (highest first), with ties broken by suggestion text so that the merged order
+   * does not depend on which shard answered first
    */
-  private static SuggesterResult merge(List<SuggesterResult> suggesterResults, int count) {
+  static SuggesterResult merge(List<SuggesterResult> suggesterResults, int count) {
     SuggesterResult result = new SuggesterResult();
     Set<String> allTokens = new HashSet<>();
     SortedSet<String> suggesterNames = new TreeSet<>();
@@ -359,18 +365,17 @@ public class SuggestComponent extends SearchComponent
     // Get Top N for every token in every shard (using weights)
     for (String suggesterName : suggesterNames) {
       for (String token : allTokens) {
-        Lookup.LookupPriorityQueue resultQueue = new Lookup.LookupPriorityQueue(count);
+        List<LookupResult> sortedSuggests = new ArrayList<>();
         for (SuggesterResult shardResult : suggesterResults) {
           List<LookupResult> suggests = shardResult.getLookupResult(suggesterName, token);
-          if (suggests == null) {
-            continue;
-          }
-          for (LookupResult res : suggests) {
-            resultQueue.insertWithOverflow(res);
+          if (suggests != null) {
+            sortedSuggests.addAll(suggests);
           }
         }
-        List<LookupResult> sortedSuggests = new ArrayList<>();
-        Collections.addAll(sortedSuggests, resultQueue.getResults());
+        sortedSuggests.sort(MERGE_ORDER);
+        if (sortedSuggests.size() > count) {
+          sortedSuggests = new ArrayList<>(sortedSuggests.subList(0, count));
+        }
         result.add(suggesterName, token, sortedSuggests);
       }
     }
