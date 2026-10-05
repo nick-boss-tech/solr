@@ -1418,10 +1418,7 @@ public class StreamExpressionTest extends SolrCloudTestCase {
     assertEquals(2, tuple.getDouble("count(*)"), 0.0);
   }
 
-  /**
-   * SOLR-12657: min/max of a date field in facet() used to fail with a ClassCastException. NOTE:
-   * written without being compiled or run; see SOLR-12657-TESTING.md.
-   */
+  /** SOLR-12657: min/max of a date field in facet() used to fail with a ClassCastException. */
   @Test
   public void testFacetStreamMinMaxOnDateField() throws Exception {
     new UpdateRequest()
