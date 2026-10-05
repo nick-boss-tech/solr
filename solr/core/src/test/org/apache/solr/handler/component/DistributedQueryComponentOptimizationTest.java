@@ -346,6 +346,22 @@ public class DistributedQueryComponentOptimizationTest extends SolrCloudTestCase
   }
 
   @Test
+  public void testSortByDocId() throws Exception {
+    // the cross-shard order of _docid_ is not defined, but the request must not fail
+    for (String order : new String[] {"asc", "desc"}) {
+      QueryResponse rsp =
+          cluster
+              .getSolrClient()
+              .query(
+                  COLLECTION,
+                  new SolrQuery("q", "*:*", "fl", "id,test_sS", "sort", "_docid_ " + order)
+                      .setRows(20));
+      assertEquals(rsp.getResults().getNumFound(), rsp.getResults().size());
+      assertTrue(rsp.getResults().size() > 0);
+    }
+  }
+
+  @Test
   public void testDistribSinglePass() throws Exception {
 
     QueryResponse rsp =
