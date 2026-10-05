@@ -1,6 +1,6 @@
 title: >
   A parenthesized pure-negative query such as fq=(NOT(field:value)) now matches the expected
-  documents when q.op=AND instead of matching nothing.
+  documents when q.op=AND and luceneMatchVersion is before 10.2, instead of matching nothing.
 type: fixed
 authors:
   - name: Nick Shanin
