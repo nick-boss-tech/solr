@@ -1,0 +1,8 @@
+title: >
+  The simple query parser now matches terms against point fields (for example IntPointField) instead of silently returning no results.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-10897
+    url: https://issues.apache.org/jira/browse/SOLR-10897
