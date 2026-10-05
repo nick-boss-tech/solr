@@ -20,6 +20,7 @@ import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
 import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope.Scope;
 import org.apache.solr.BaseDistributedSearchTestCase;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
@@ -89,15 +90,20 @@ public class AnalyticsMergeStrategyTest extends BaseDistributedSearchTestCase {
     rsp = queryRandomShard(params);
     assertCount(rsp, 4);
 
-    // SOLR-7520: the post filter must also be completed when grouping across shards
+    // SOLR-7520: the post filter must also be completed on shards when grouping.
+    // Merge strategies do not run for grouped responses at the coordinator, so
+    // assert on a shard response, using the first phase request shape that the
+    // coordinator sends to each shard.
     params = new ModifiableSolrParams();
     params.add("q", "*:*");
     params.add("fq", "{!count}");
     params.add("group", "true");
     params.add("group.field", "sort_i");
-    setDistributedParams(params);
-    rsp = queryRandomShard(params);
-    assertNotNull("analytics section missing for grouped query", rsp.getResponse().get("analytics"));
+    params.add("group.distributed.first", "true");
+    QueryResponse shardRsp = new QueryRequest(params).process(clients.get(0));
+    assertNotNull(
+        "analytics section missing for grouped shard query",
+        shardRsp.getResponse().get("analytics"));
   }
 
   private void assertCountOnly(QueryResponse rsp, int count) throws Exception {

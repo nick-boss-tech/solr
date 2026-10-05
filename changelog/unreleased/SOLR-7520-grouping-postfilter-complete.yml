@@ -1,6 +1,6 @@
 title: >
   A post filter collector is now completed on shards when a distributed grouping request uses it,
-  so its complete() results (for example an AnalyticsQuery) are no longer lost.
+  so its complete() results (for example an AnalyticsQuery) are included in the shard response.
 type: fixed
 authors:
   - name: Nick Shanin
