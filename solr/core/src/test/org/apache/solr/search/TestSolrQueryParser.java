@@ -547,7 +547,7 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
     // SOLR-11761: an unterminated comment must not break later parses on the same parser
     try (SolrQueryRequest req = req()) {
       QParserPlugin qParserPlugin = req.getCore().getQueryPlugin("lucene");
-      QParser qParser = qParserPlugin.createParser(null, null, null, req);
+      QParser qParser = qParserPlugin.createParser("", null, new ModifiableSolrParams(), req);
       SolrQueryParser parser = new SolrQueryParser(qParser, "text");
 
       assertNotNull(parser.parse("/* foo */ bar"));

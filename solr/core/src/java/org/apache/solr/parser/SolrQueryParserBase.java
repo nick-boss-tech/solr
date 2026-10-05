@@ -235,7 +235,14 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
   // the generated parser will create these in QueryParser
   public abstract void ReInit(CharStream stream);
 
-  public abstract void ReInit(QueryParserTokenManager tm);
+  /**
+   * Reinitialises the parser with an existing token manager. The generated parser overrides this to
+   * adopt the given manager; this default reuses the manager's stream, for subclasses that are not
+   * the generated parser.
+   */
+  public void ReInit(QueryParserTokenManager tm) {
+    ReInit(tm.input_stream);
+  }
 
   public abstract Query TopLevelQuery(String field) throws ParseException, SyntaxError;
 
