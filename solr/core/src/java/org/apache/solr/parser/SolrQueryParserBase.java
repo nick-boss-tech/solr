@@ -31,8 +31,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenFilterFactory;
 import org.apache.lucene.analysis.reverse.ReverseStringFilter;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queries.spans.SpanNearQuery;
-import org.apache.lucene.queries.spans.SpanQuery;
 import org.apache.lucene.queryparser.charstream.CharStream;
 import org.apache.lucene.queryparser.charstream.FastCharStream;
 import org.apache.lucene.search.AutomatonQuery;
@@ -550,47 +548,23 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
     // only set slop of the phrase query was a result of this parser
     // and not a sub-parser.
     if (subQParser == null) {
-      query = applySlop(query, slop);
-    }
-
-    return query;
-  }
-
-  /**
-   * Re-applies the slop given in the query string to the phrase-like queries built by the analysis
-   * chain. Graph token streams (e.g. WordDelimiterGraphFilter with preserveOriginal) produce a
-   * {@link SpanNearQuery} or a boolean combination of phrases instead of a plain phrase query.
-   */
-  private static Query applySlop(Query query, int slop) {
-    if (query instanceof PhraseQuery pq) {
-      Term[] terms = pq.getTerms();
-      int[] positions = pq.getPositions();
-      PhraseQuery.Builder builder = new PhraseQuery.Builder();
-      for (int i = 0; i < terms.length; ++i) {
-        builder.add(terms[i], positions[i]);
-      }
-      builder.setSlop(slop);
-      return builder.build();
-    } else if (query instanceof MultiPhraseQuery mpq) {
-      if (slop != mpq.getSlop()) {
-        return new MultiPhraseQuery.Builder(mpq).setSlop(slop).build();
-      }
-    } else if (query instanceof SpanNearQuery snq) {
-      if (slop != snq.getSlop()) {
-        SpanNearQuery.Builder builder = new SpanNearQuery.Builder(snq.getField(), snq.isInOrder());
-        for (SpanQuery clause : snq.getClauses()) {
-          builder.addClause(clause);
+      if (query instanceof PhraseQuery pq) {
+        Term[] terms = pq.getTerms();
+        int[] positions = pq.getPositions();
+        PhraseQuery.Builder builder = new PhraseQuery.Builder();
+        for (int i = 0; i < terms.length; ++i) {
+          builder.add(terms[i], positions[i]);
         }
-        return builder.setSlop(slop).build();
+        builder.setSlop(slop);
+        query = builder.build();
+      } else if (query instanceof MultiPhraseQuery mpq) {
+
+        if (slop != mpq.getSlop()) {
+          query = new MultiPhraseQuery.Builder(mpq).setSlop(slop).build();
+        }
       }
-    } else if (query instanceof BooleanQuery bq) {
-      BooleanQuery.Builder builder = new BooleanQuery.Builder();
-      builder.setMinimumNumberShouldMatch(bq.getMinimumNumberShouldMatch());
-      for (BooleanClause clause : bq) {
-        builder.add(applySlop(clause.query(), slop), clause.occur());
-      }
-      return builder.build();
     }
+
     return query;
   }
 
