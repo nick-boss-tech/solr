@@ -20,17 +20,16 @@ import org.apache.lucene.codecs.CodecUtil;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.IOContext;
 import org.apache.lucene.store.IndexOutput;
-import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.SolrTestCase;
 import org.apache.solr.util.LogListener;
-import org.junit.Test;
 
 /** SOLR-12246: a checksum mismatch just means the file is fetched again, it is not a warning. */
-public class IndexFetcherCompareFileTest extends SolrTestCaseJ4 {
+public class IndexFetcherCompareFileTest extends SolrTestCase {
 
-  @Test
   public void testChecksumMismatchIsNotLoggedAsWarning() throws Exception {
     try (Directory dir = newDirectory();
-        LogListener warnings = LogListener.warn(IndexFetcher.class)) {
+        LogListener warnings = LogListener.warn(IndexFetcher.class);
+        LogListener infos = LogListener.info(IndexFetcher.class).substring("did not match")) {
       try (IndexOutput out = dir.createOutput("_0_1.liv", IOContext.DEFAULT)) {
         CodecUtil.writeHeader(out, "test", 1);
         out.writeInt(42);
@@ -44,6 +43,7 @@ public class IndexFetcherCompareFileTest extends SolrTestCaseJ4 {
       assertFalse("different checksum must not compare equal", result.equal);
       assertTrue(result.checkSummed);
       assertNull("a checksum mismatch should not be logged as a warning", warnings.pollMessage());
+      assertNotNull("a checksum mismatch should still be logged (at info)", infos.pollMessage());
     }
   }
 }
