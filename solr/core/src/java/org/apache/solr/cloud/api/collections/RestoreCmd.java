@@ -263,16 +263,16 @@ public class RestoreCmd implements CollApiCmds.CollectionApiCommand {
       // Restore collection properties
       rc.backupManager.uploadCollectionProperties(rc.restoreCollectionName);
 
+      DocCollection restoreCollection =
+          rc.zkStateReader.getClusterState().getCollection(rc.restoreCollectionName);
+      List<ReplicaPosition> replicaPositions = null;
       try {
-        DocCollection restoreCollection =
-            rc.zkStateReader.getClusterState().getCollection(rc.restoreCollectionName);
         markAllShardsAsConstruction(restoreCollection);
 
         List<String> sliceNames = new ArrayList<>();
         restoreCollection.getSlices().forEach(x -> sliceNames.add(x.getName()));
 
-        List<ReplicaPosition> replicaPositions =
-            getReplicaPositions(rc.restoreCollectionName, rc.nodeList, sliceNames);
+        replicaPositions = getReplicaPositions(rc.restoreCollectionName, rc.nodeList, sliceNames);
 
         createSingleReplicaPerShard(
             results,
@@ -299,24 +299,30 @@ public class RestoreCmd implements CollApiCmds.CollectionApiCommand {
             rc.repo,
             rc.shardHandler);
         markAllShardsAsActive(restoreCollection);
-        addReplicasToShards(
-            results,
-            restoreCollection,
-            replicaPositions,
-            rc.adminCmdContext.withClusterState(rc.zkStateReader.getClusterState()));
-        restoringAlias(rc.backupProperties);
-
-        log.info(
-            "Completed restoring collection={} backupName={}", restoreCollection, rc.backupName);
       } catch (Exception e) {
         log.error(
             "Restore of collection={} failed; cleaning up the partially restored collection",
             rc.restoreCollectionName,
             e);
-        CollectionHandlingUtils.cleanupCollection(
-            rc.adminCmdContext, rc.restoreCollectionName, new NamedList<>(), ccc);
+        try {
+          CollectionHandlingUtils.cleanupCollection(
+              rc.adminCmdContext, rc.restoreCollectionName, new NamedList<>(), ccc);
+        } catch (Exception cleanupException) {
+          // A failed cleanup must not mask the restore failure that triggered it.
+          e.addSuppressed(cleanupException);
+        }
         throw e;
       }
+      // The shards are restored and active from here on. A failure while adding the remaining
+      // replicas or restoring the alias must not delete a usable collection.
+      addReplicasToShards(
+          results,
+          restoreCollection,
+          replicaPositions,
+          rc.adminCmdContext.withClusterState(rc.zkStateReader.getClusterState()));
+      restoringAlias(rc.backupProperties);
+
+      log.info("Completed restoring collection={} backupName={}", restoreCollection, rc.backupName);
     }
 
     private void validate() {
