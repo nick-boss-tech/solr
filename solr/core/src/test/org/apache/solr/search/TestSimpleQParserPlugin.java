@@ -577,6 +577,25 @@ public class TestSimpleQParserPlugin extends SolrTestCaseJ4 {
     assertJQ(req("defType", "simple", "qf", "text0", "q", "BAR~1"), "/response/numFound==0");
   }
 
+  @Test
+  public void testPointFieldQuery() throws Exception {
+    assertU(adoc("id", "60", "int_p", "7", "text0", "pointdoc"));
+    assertU(adoc("id", "61", "int_p", "8", "text0", "pointdoc"));
+    assertU(commit());
+
+    assertJQ(req("defType", "simple", "qf", "int_p", "q", "7"), "/response/numFound==1");
+    assertJQ(req("defType", "simple", "qf", "int_p", "q", "9"), "/response/numFound==0");
+    assertJQ(req("defType", "simple", "df", "int_p", "q", "8"), "/response/numFound==1");
+    assertJQ(req("defType", "simple", "qf", "int_p", "q", "7 8"), "/response/numFound==2");
+    // a value that is not a number cannot match the point field and must not fail the query
+    assertJQ(req("defType", "simple", "qf", "int_p", "q", "foo"), "/response/numFound==0");
+    // mixed qf: the text field matches, the point field ignores the non-numeric text
+    assertJQ(
+        req("defType", "simple", "qf", "text0 int_p", "q", "pointdoc"), "/response/numFound==2");
+    assertJQ(req("defType", "simple", "qf", "text0 int_p", "q", "7"), "/response/numFound==1");
+  }
+
+  @Test
   public void testQueryAnalyzerIsUsed() throws Exception {
     // this should only match one doc, which was lower cased before being added
     assertJQ(req("defType", "simple", "qf", "text-query0", "q", "HELLO"), "/response/numFound==1");

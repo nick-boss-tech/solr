@@ -50,7 +50,10 @@
     </analyzer>
   </fieldType>
 
+  <fieldType name="pint" class="solr.IntPointField"/>
+
   <field name="id" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
+  <field name="int_p" type="pint" indexed="true" stored="true"/>
   <field name="text0" type="text" indexed="true" stored="true"/>
   <field name="text1" type="text" indexed="true" stored="true"/>
   <field name="text-keyword0" type="text-keyword" indexed="true" stored="true"/>

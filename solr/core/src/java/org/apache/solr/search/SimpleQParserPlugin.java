@@ -28,6 +28,7 @@ import org.apache.lucene.search.BoostQuery;
 import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.util.BytesRef;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.SimpleParams;
 import org.apache.solr.common.params.SolrParams;
@@ -178,6 +179,41 @@ public class SimpleQParserPlugin extends QParserPlugin {
       super(analyzer, weights, flags);
       this.qParser = qParser;
       this.schema = schema;
+    }
+
+    @Override
+    protected Query newDefaultQuery(String text) {
+      BooleanQuery.Builder bq = new BooleanQuery.Builder();
+
+      for (Map.Entry<String, Float> entry : weights.entrySet()) {
+        String field = entry.getKey();
+        SchemaField sf = schema.getField(field);
+        Query q;
+
+        if (sf.getType().isPointField()) {
+          // Point fields have no indexed terms, so the analyzer based TermQuery never matches.
+          try {
+            q = sf.getType().getFieldQuery(qParser, sf, text);
+          } catch (SolrException e) {
+            if (e.code() != SolrException.ErrorCode.BAD_REQUEST.code) {
+              throw e;
+            }
+            // The text is not a valid value for this field, so it cannot match here.
+            q = null;
+          }
+        } else {
+          q = createBooleanQuery(field, text, getDefaultOperator());
+        }
+        if (q != null) {
+          float boost = entry.getValue();
+          if (boost != 1f) {
+            q = new BoostQuery(q, boost);
+          }
+          bq.add(q, BooleanClause.Occur.SHOULD);
+        }
+      }
+
+      return simplify(bq.build());
     }
 
     @Override
