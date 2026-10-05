@@ -16,12 +16,15 @@
  */
 package org.apache.solr.search.grouping.distributed.shardresultserializer;
 
+import static org.apache.solr.SolrTestCaseJ4.sdoc;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import org.apache.lucene.tests.util.LuceneTestCase;
+import org.apache.solr.SolrTestCase;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.request.QueryRequest;
@@ -30,9 +33,11 @@ import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.util.EmbeddedSolrServerTestRule;
 import org.apache.solr.util.SolrClientTestRule;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Test;
 
-public class TopGroupsResultTransformerTest extends SolrTestCaseJ4 {
+public class TopGroupsResultTransformerTest extends SolrTestCase {
 
   private static final String STORED_ID =
       "<field name=\"id\" type=\"string\" indexed=\"true\" stored=\"true\" required=\"true\"/>";
@@ -42,6 +47,12 @@ public class TopGroupsResultTransformerTest extends SolrTestCaseJ4 {
 
   @ClassRule public static final SolrClientTestRule solrTestRule = new EmbeddedSolrServerTestRule();
 
+  @BeforeClass
+  public static void beforeClass() {
+    SolrTestCaseJ4.newRandomConfig();
+  }
+
+  @Test
   public void testSecondPhaseWithUniqueKeyNotStored() throws Exception {
     solrTestRule.startSolr();
 
