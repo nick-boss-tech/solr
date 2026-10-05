@@ -1,6 +1,8 @@
 title: >
-  The graph query parser now accepts a pure negative traversalFilter such as
-  traversalFilter='-text:foo' instead of matching no documents.
+  The graph query parser now makes a pure negative traversalFilter such as
+  traversalFilter='-text:foo' queryable itself, so it no longer matches no
+  documents on cores whose luceneMatchVersion disables the query parser's own
+  pure negative handling.
 type: fixed
 authors:
   - name: Nick Shanin

@@ -16,9 +16,14 @@
  */
 package org.apache.solr.search.join;
 
+import org.apache.lucene.search.Query;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.SolrParams;
+import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.search.QParser;
+import org.apache.solr.search.QueryCommand;
+import org.apache.solr.search.QueryResult;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -147,6 +152,39 @@ public class GraphQueryTest extends SolrTestCaseJ4 {
     assertJQ(
         req(p, "q", "{!graph from=${node_id} to=${edge_id} returnRoot=false maxDepth=1}id:doc_1"),
         "/response/numFound==1");
+  }
+
+  // SOLR-8977: the graph parser must handle a pure negative traversalFilter itself. Cores whose
+  // luceneMatchVersion predates LUCENE_10_2_0 run with autoFixPureNegative off, so the sub-query
+  // parser leaves the filter pure negative; setting the flag off here reproduces that
+  // configuration.
+  @Test
+  public void testGraphNegativeTraversalFilterWithoutAutoFix() throws Exception {
+    assertU(delQ("*:*"));
+    assertU(commit());
+    // the same traversal filter graph as doGraph: 10 -> 11 -> (12 | 13)
+    assertU(adoc("id", "doc_10", "node_s", "10", "edge_ss", "11", "title", "foo"));
+    assertU(
+        adoc("id", "doc_11", "node_s", "11", "edge_ss", "12", "edge_ss", "13", "text", "foo11"));
+    assertU(adoc("id", "doc_12", "node_s", "12", "text", "foo10"));
+    assertU(adoc("id", "doc_13", "node_s", "13", "edge_ss", "12", "text", "foo10"));
+    assertU(commit());
+
+    String qstr =
+        "{!graph from=node_s to=edge_ss returnRoot=true returnOnlyLeaf=false "
+            + "traversalFilter='-text:foo10'}id:doc_10";
+    try (SolrQueryRequest request = req("q", qstr)) {
+      QParser parser = QParser.getParser(qstr, request);
+      parser.setAutoFixPureNegative(false);
+      Query query = parser.getQuery();
+      QueryResult result =
+          request.getSearcher().search(new QueryCommand().setQuery(query).setLen(10));
+      // the root and doc_11; docs 12 and 13 carry text:foo10 and stay excluded
+      assertEquals(2, result.getDocList().matches());
+    }
+
+    assertU(delQ("*:*"));
+    assertU(commit());
   }
 
   @Test
