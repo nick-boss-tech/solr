@@ -1,0 +1,8 @@
+title: >
+  Realtime get on a collection with the implicit router and no _route_ or shards parameter now asks all shards instead of silently returning no documents.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-8954
+    url: https://issues.apache.org/jira/browse/SOLR-8954
