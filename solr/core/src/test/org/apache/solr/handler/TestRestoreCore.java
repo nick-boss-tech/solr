@@ -234,6 +234,10 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
           }
         });
 
+    // the running core keeps its in-memory index directory either way; what the rollback wrote
+    // (or deleted) in index.properties only takes effect when the core next opens, so reload it
+    leaderJetty.getCoreContainer().reload(DEFAULT_TEST_CORENAME);
+
     // the core must still serve the index it had before the failed restore, including the extra doc
     BackupRestoreUtils.verifyDocs(nDocs + 1, leaderClient, DEFAULT_TEST_CORENAME);
   }
