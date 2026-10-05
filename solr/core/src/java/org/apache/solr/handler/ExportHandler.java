@@ -35,13 +35,16 @@ import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.handler.admin.api.ReplicationAPIBase;
+import org.apache.solr.handler.component.ResponseBuilder;
 import org.apache.solr.handler.component.SearchHandler;
 import org.apache.solr.handler.export.ExportWriter;
 import org.apache.solr.handler.export.ExportWriterStream;
 import org.apache.solr.metrics.SolrMetricManager;
 import org.apache.solr.metrics.SolrMetricsContext;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.request.SolrRequestInfo;
 import org.apache.solr.response.SolrQueryResponse;
+import org.apache.solr.search.SortSpec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -124,22 +127,28 @@ public class ExportHandler extends SearchHandler {
 
   @Override
   public void handleRequestBody(SolrQueryRequest req, SolrQueryResponse rsp) throws Exception {
-    // Fail fast, before any response bytes are written, so the client sees an HTTP 400 instead of
-    // a 200 carrying an in-body EXCEPTION document (SOLR-12543). Errors found while writing the
-    // export are still reported in the body, since the status line has already been sent.
-    SolrParams requestParams = req.getParams();
-    if (requestParams.get(CommonParams.SORT) == null) {
-      throw new SolrException(
-          SolrException.ErrorCode.BAD_REQUEST, "No sort criteria was provided.");
-    }
-    if (requestParams.get(CommonParams.FL) == null) {
-      throw new SolrException(
-          SolrException.ErrorCode.BAD_REQUEST, "export field list (fl) must be specified.");
-    }
     try {
       super.handleRequestBody(req, rsp);
     } catch (Exception e) {
       rsp.setException(e);
+    }
+    if (rsp.getException() == null) {
+      // No search error to report, so reject the requests ExportWriter would reject, before the
+      // writer is added: the client then sees an HTTP 400 instead of a 200 carrying an in-body
+      // EXCEPTION document (SOLR-12543). The sort is judged from the ResponseBuilder's SortSpec,
+      // the same source ExportWriter uses: a sort supplied as a local param on q counts, while
+      // an absent sort, or one that parses to no sort, does not.
+      SolrRequestInfo info = SolrRequestInfo.getRequestInfo();
+      ResponseBuilder rb = info != null ? info.getResponseBuilder() : null;
+      SortSpec sortSpec = rb != null ? rb.getSortSpec() : null;
+      if (sortSpec == null || sortSpec.getSort() == null) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST, "No sort criteria was provided.");
+      }
+      if (req.getParams().get(CommonParams.FL) == null) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST, "export field list (fl) must be specified.");
+      }
     }
     String wt = req.getParams().get(CommonParams.WT, JSON);
     if ("xsort".equals(wt)) wt = JSON;
