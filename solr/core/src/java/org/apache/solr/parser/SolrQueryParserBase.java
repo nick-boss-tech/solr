@@ -31,8 +31,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenFilterFactory;
 import org.apache.lucene.analysis.reverse.ReverseStringFilter;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queries.spans.SpanNearQuery;
-import org.apache.lucene.queries.spans.SpanQuery;
 import org.apache.lucene.queryparser.charstream.CharStream;
 import org.apache.lucene.queryparser.charstream.FastCharStream;
 import org.apache.lucene.search.AutomatonQuery;
@@ -559,7 +557,8 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
   /**
    * Re-applies the slop given in the query string to the phrase-like queries built by the analysis
    * chain. Graph token streams (e.g. WordDelimiterGraphFilter with preserveOriginal) produce a
-   * {@link SpanNearQuery} or a boolean combination of phrases instead of a plain phrase query.
+   * boolean combination of phrases instead of a plain phrase query, so each phrase clause gets the
+   * slop as well.
    */
   private static Query applySlop(Query query, int slop) {
     if (query instanceof PhraseQuery pq) {
@@ -574,14 +573,6 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
     } else if (query instanceof MultiPhraseQuery mpq) {
       if (slop != mpq.getSlop()) {
         return new MultiPhraseQuery.Builder(mpq).setSlop(slop).build();
-      }
-    } else if (query instanceof SpanNearQuery snq) {
-      if (slop != snq.getSlop()) {
-        SpanNearQuery.Builder builder = new SpanNearQuery.Builder(snq.getField(), snq.isInOrder());
-        for (SpanQuery clause : snq.getClauses()) {
-          builder.addClause(clause);
-        }
-        return builder.setSlop(slop).build();
       }
     } else if (query instanceof BooleanQuery bq) {
       BooleanQuery.Builder builder = new BooleanQuery.Builder();
