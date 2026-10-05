@@ -28,10 +28,10 @@ import org.apache.lucene.index.NoDeletionPolicy;
 import org.apache.lucene.index.NoMergePolicy;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.IOContext;
-import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.SolrTestCase;
 
 /** SOLR-12085: files of commits retained by the deletion policy are not "unused" files. */
-public class IndexFetcherUnusedFilesTest extends SolrTestCaseJ4 {
+public class IndexFetcherUnusedFilesTest extends SolrTestCase {
 
   public void testRetainedCommitFilesAreNotUnused() throws Exception {
     try (Directory dir = newDirectory()) {

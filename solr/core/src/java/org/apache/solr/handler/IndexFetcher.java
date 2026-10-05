@@ -866,8 +866,8 @@ public class IndexFetcher {
   }
 
   /**
-   * Whether the index directory holds files that no retained commit point refers to. Files of
-   * other commits kept by the deletion policy (maxCommitsToKeep &gt; 1) are in use, not unused.
+   * Whether the index directory holds files that no retained commit point refers to. Files of other
+   * commits kept by the deletion policy (maxCommitsToKeep &gt; 1) are in use, not unused.
    */
   static boolean hasUnusedFiles(Directory indexDir, IndexCommit commit) throws IOException {
     String segmentsFileName = commit.getSegmentsFileName();
