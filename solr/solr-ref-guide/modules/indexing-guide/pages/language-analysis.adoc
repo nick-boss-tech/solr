@@ -2289,7 +2289,7 @@ Set to `false` to not normalize kana iteration marks.
 
 Tokenizer for Japanese that uses morphological analysis, and annotates each term with part-of-speech, base form (a.k.a. lemma), reading and pronunciation.
 
-`JapaneseTokenizer` has a `search` mode (the default) that does segmentation useful for search: a heuristic is used to segment compound terms into their constituent parts while also keeping the original compound terms as synonyms.
+`JapaneseTokenizer` has a `search` mode (the default) that does segmentation useful for search: a heuristic is used to segment compound terms into their constituent parts, and with `discardCompoundToken="false"` the original compound terms are kept as well.
 
 *Factory class:* `solr.JapaneseTokenizerFactory`
 
