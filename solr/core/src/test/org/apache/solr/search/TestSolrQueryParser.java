@@ -573,18 +573,14 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
     // SOLR-12212: id=12 has no eee_s:Y, so the negated fq must match it for every q.op
     String fq = "(NOT(eee_s:(Y)))";
     for (String op : new String[] {"OR", "AND"}) {
-      assertQ(
-          "q.op=" + op,
-          req("q", "id:12", "fq", fq, "q.op", op),
-          "//result[@numFound='1']");
+      assertQ("q.op=" + op, req("q", "id:12", "fq", fq, "q.op", op), "//result[@numFound='1']");
       assertQ(
           "q.op=" + op + " without outer parens",
           req("q", "id:12", "fq", "NOT(eee_s:(Y))", "q.op", op),
           "//result[@numFound='1']");
     }
     // the negation must still exclude matching documents
-    assertQ(
-        req("q", "id:12", "fq", "(NOT(eee_s:(X)))", "q.op", "AND"), "//result[@numFound='0']");
+    assertQ(req("q", "id:12", "fq", "(NOT(eee_s:(X)))", "q.op", "AND"), "//result[@numFound='0']");
   }
 
   @Test
