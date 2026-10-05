@@ -55,13 +55,20 @@ public class PivotFacetField {
 
   private boolean needRefinementAtThisLevel = true;
 
-  private PivotFacetField(ResponseBuilder rb, PivotFacetValue parent, String fieldName) {
+  // request params with the local params of the top level pivot (if any) layered on top
+  private final SolrParams parameters;
+
+  private PivotFacetField(
+      ResponseBuilder rb, PivotFacetValue parent, String fieldName, SolrParams localParams) {
 
     field = fieldName;
     parentValue = parent;
 
     // facet params
-    SolrParams parameters = rb.req.getParams();
+    parameters =
+        (null != parent)
+            ? parent.getParentPivot().parameters
+            : SolrParams.wrapDefaults(localParams, rb.req.getParams());
     facetFieldMinimumCount = parameters.getFieldInt(field, FacetParams.FACET_PIVOT_MINCOUNT, 1);
     facetFieldOffset = parameters.getFieldInt(field, FacetParams.FACET_OFFSET, 0);
     facetFieldLimit = parameters.getFieldInt(field, FacetParams.FACET_LIMIT, 100);
@@ -118,12 +125,28 @@ public class PivotFacetField {
       ResponseBuilder rb,
       PivotFacetValue owner,
       List<NamedList<Object>> pivotValues) {
+    return createFromListOfNamedLists(shardNumber, rb, null, owner, pivotValues);
+  }
+
+  /**
+   * Same as {@link #createFromListOfNamedLists(int, ResponseBuilder, PivotFacetValue, List)}, for
+   * the top level field of a pivot declared with the given local params.
+   *
+   * @param localParams the local params of the <code>facet.pivot</code> value, may be null; ignored
+   *     when <code>owner</code> is not null, as nested fields use those of their top level pivot
+   */
+  public static PivotFacetField createFromListOfNamedLists(
+      int shardNumber,
+      ResponseBuilder rb,
+      SolrParams localParams,
+      PivotFacetValue owner,
+      List<NamedList<Object>> pivotValues) {
 
     if (null == pivotValues || pivotValues.size() <= 0) return null;
 
     NamedList<Object> firstValue = pivotValues.get(0);
     PivotFacetField createdPivotFacetField =
-        new PivotFacetField(rb, owner, PivotFacetHelper.getField(firstValue));
+        new PivotFacetField(rb, owner, PivotFacetHelper.getField(firstValue), localParams);
 
     int lowestCount = Integer.MAX_VALUE;
 

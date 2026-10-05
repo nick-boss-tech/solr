@@ -150,7 +150,8 @@ public class PivotFacet extends FacetBase {
 
     knownShards.set(shardNumber);
     if (pivotFacetField == null) {
-      pivotFacetField = PivotFacetField.createFromListOfNamedLists(shardNumber, rb, null, response);
+      pivotFacetField =
+          PivotFacetField.createFromListOfNamedLists(shardNumber, rb, localParams, null, response);
     } else {
       pivotFacetField.contributeFromShard(shardNumber, rb, response);
     }

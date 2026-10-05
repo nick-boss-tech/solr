@@ -56,6 +56,10 @@ public class PivotFacetValue {
     this.value = val;
   }
 
+  PivotFacetField getParentPivot() {
+    return parentPivot;
+  }
+
   /**
    * The value of the asssocated field modeled by this <code>PivotFacetValue</code>. May be null if
    * this <code>PivotFacetValue</code> models the count for docs "missing" the field value.

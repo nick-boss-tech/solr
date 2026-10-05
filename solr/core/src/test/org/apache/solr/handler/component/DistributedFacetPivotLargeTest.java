@@ -274,10 +274,12 @@ public class DistributedFacetPivotLargeTest extends BaseDistributedSearchTestCas
     for (SolrParams facetParams :
         // results should be the same regardless of whether local params are used
         new SolrParams[] {
-          // Broken: SOLR-6193
-          // params("facet.pivot","{!facet.limit=4 facet.sort=index}place_s,company_t"),
-          // params("facet.pivot","{!facet.sort=index}place_s,company_t",
-          //        FacetParams.FACET_LIMIT, "4"),
+          params("facet.pivot", "{!facet.limit=4 facet.sort=index}place_s,company_t"),
+          params(
+              "facet.pivot",
+              "{!facet.sort=index}place_s,company_t",
+              FacetParams.FACET_LIMIT,
+              "4"),
           params(
               "facet.pivot",
               "place_s,company_t",
@@ -554,31 +556,30 @@ public class DistributedFacetPivotLargeTest extends BaseDistributedSearchTestCas
     assertPivot("company_t", "microsoft", 56, firstPlace.getPivot().get(1));
 
     // Same Pivot - one in default (count) order and one in index order
+    rsp =
+        query(
+            "q", "*:*",
+            "rows", "0",
+            "facet", "true",
+            "fq", "pay_i:[2000 TO *]",
+            "facet.pivot", "{!key=sc}place_s,company_t",
+            "facet.pivot", "{!key=si facet.sort=index}place_s,company_t",
+            FacetParams.FACET_LIMIT, "4");
+    pivots = rsp.getFacetPivot().get("sc");
+    assertEquals(4, pivots.size());
+    firstPlace = pivots.get(0);
+    assertPivot("place_s", "cardiff", 105, firstPlace);
+    assertEquals(4, firstPlace.getPivot().size());
+    assertPivot("company_t", "bbc", 101, firstPlace.getPivot().get(0));
+    assertPivot("company_t", "microsoft", 54, firstPlace.getPivot().get(1));
     //
-    // Broken: SOLR-6193 - the facet.sort localparam isn't being picked up correctly
-    //
-    // rsp = query( "q", "*:*",
-    //              "rows", "0",
-    //              "facet","true",
-    //              "fq","pay_i:[2000 TO *]",
-    //              "facet.pivot","{!key=sc}place_s,company_t",
-    //              "facet.pivot","{!key=si facet.sort=index}place_s,company_t",
-    //              FacetParams.FACET_LIMIT, "4");
-    // pivots = rsp.getFacetPivot().get("sc");
-    // assertEquals(4, pivots.size());
-    // firstPlace = pivots.get(0);
-    // assertPivot("place_s", "cardiff", 105, firstPlace);
-    // assertEquals(4, firstPlace.getPivot().size());
-    // assertPivot("company_t", "bbc", 101, firstPlace.getPivot().get(0));
-    // assertPivot("company_t", "microsoft", 54, firstPlace.getPivot().get(1));
-    // //
-    // pivots = rsp.getFacetPivot().get("si");
-    // assertEquals(4, pivots.size());
-    // firstPlace = pivots.get(0);
-    // assertPivot("place_s", "0placeholder", 6, firstPlace);
-    // assertEquals(3, firstPlace.getPivot().size()); // only 3 in the data < facet.limit
-    // assertPivot("company_t", "bbc", 6, firstPlace.getPivot().get(0));
-    // assertPivot("company_t", "microsoft", 6, firstPlace.getPivot().get(1));
+    pivots = rsp.getFacetPivot().get("si");
+    assertEquals(4, pivots.size());
+    firstPlace = pivots.get(0);
+    assertPivot("place_s", "0placeholder", 6, firstPlace);
+    assertEquals(3, firstPlace.getPivot().size()); // only 3 in the data < facet.limit
+    assertPivot("company_t", "bbc", 6, firstPlace.getPivot().get(0));
+    assertPivot("company_t", "microsoft", 6, firstPlace.getPivot().get(1));
 
     // Field level limits and small offset
     rsp =
@@ -752,8 +753,7 @@ public class DistributedFacetPivotLargeTest extends BaseDistributedSearchTestCas
         // a local param, or specified as a per-field override for both fields
         new SolrParams[] {
           params(FacetParams.FACET_LIMIT, "-1", "facet.pivot", "place_s,company_t"),
-          // Broken: SOLR-6193
-          // params("facet.pivot","{!facet.limit=-1}place_s,company_t"),
+          params("facet.pivot", "{!facet.limit=-1}place_s,company_t"),
           params(
               "f.place_s.facet.limit", "-1",
               "f.company_t.facet.limit", "-1",
@@ -783,8 +783,7 @@ public class DistributedFacetPivotLargeTest extends BaseDistributedSearchTestCas
         // results should be the same regardless of whether per-field facet.limit is
         // a global or a local param
         new SolrParams[] {
-          // Broken: SOLR-6193
-          // params( "facet.pivot","{!f.id.facet.limit=-1}place_s,id" ),
+          params("facet.pivot", "{!f.id.facet.limit=-1}place_s,id"),
           params(
               "facet.pivot", "place_s,id",
               "f.id.facet.limit", "-1")
@@ -811,8 +810,7 @@ public class DistributedFacetPivotLargeTest extends BaseDistributedSearchTestCas
         // results should be the same regardless of whether per-field facet.limit is
         // a global or a local param
         new SolrParams[] {
-          // Broken: SOLR-6193
-          // params( "facet.pivot","{!f.place_s.facet.limit=-1}place_s,id" ),
+          params("facet.pivot", "{!f.place_s.facet.limit=-1}place_s,id"),
           params(
               "facet.pivot", "place_s,id",
               "f.place_s.facet.limit", "-1")
