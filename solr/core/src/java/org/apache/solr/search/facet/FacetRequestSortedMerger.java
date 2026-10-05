@@ -38,6 +38,11 @@ abstract class FacetRequestSortedMerger<FacetRequestT extends FacetRequestSorted
   // null, or "true" if we saw a result from this shard and it indicated that there are more results
   BitSet shardHasMoreBuckets;
 
+  // the shards that returned a result for this facet at all. A shard that never returns the
+  // facet (e.g. because its domain is empty and neither it nor its parent uses processEmpty)
+  // can not contribute any buckets to it.
+  BitSet shardReturnedFacet;
+
   Context mcontext; // HACK: this should be passed in getMergedResult as well!
 
   public FacetRequestSortedMerger(FacetRequestT freq) {
@@ -47,6 +52,10 @@ abstract class FacetRequestSortedMerger<FacetRequestT extends FacetRequestSorted
   @Override
   public void merge(Object facetResult, Context mcontext) {
     this.mcontext = mcontext;
+    if (shardReturnedFacet == null) {
+      shardReturnedFacet = new BitSet(mcontext.numShards);
+    }
+    shardReturnedFacet.set(mcontext.shardNum);
     SimpleOrderedMap<?> res = (SimpleOrderedMap<?>) facetResult;
     Boolean more = (Boolean) res.get("more");
     if (more != null && more) {
@@ -150,15 +159,21 @@ abstract class FacetRequestSortedMerger<FacetRequestT extends FacetRequestSorted
 
   boolean isBucketComplete(FacetBucket bucket, Context mcontext) {
     if (mcontext.numShards <= 1) return true;
-    // with processEmpty a shard that did not report "more" may still not have returned this bucket,
-    // see getRefinement (SOLR-12556)
     if (shardHasMoreBuckets == null && !freq.processEmpty) return true;
     for (int shard = 0; shard < mcontext.numShards; shard++) {
-      // bucket is incomplete if we didn't see the bucket for this shard, and the shard has (or, for
-      // processEmpty, may have) more buckets
-      boolean shardMayHaveMore =
-          freq.processEmpty || (shardHasMoreBuckets != null && shardHasMoreBuckets.get(shard));
-      if (!mcontext.getShardFlag(bucket.bucketNumber, shard) && shardMayHaveMore) {
+      // bucket is incomplete if we didn't see the bucket for this shard, and the shard
+      // may have the bucket without having returned it
+      if (mcontext.getShardFlag(bucket.bucketNumber, shard)) continue;
+      boolean shardMayHaveMore;
+      if (freq.processEmpty) {
+        // with processEmpty, a shard that returned this facet may hold buckets it did not
+        // return (see getRefinement), but a shard that never returned the facet at all
+        // can not contribute to it
+        shardMayHaveMore = shardReturnedFacet != null && shardReturnedFacet.get(shard);
+      } else {
+        shardMayHaveMore = shardHasMoreBuckets != null && shardHasMoreBuckets.get(shard);
+      }
+      if (shardMayHaveMore) {
         return false;
       }
     }
