@@ -36,6 +36,7 @@ import org.apache.solr.api.ClusterPluginsSource;
 import org.apache.solr.api.ContainerPluginsRegistry;
 import org.apache.solr.api.NodeConfigClusterPluginsSource;
 import org.apache.solr.client.solrj.impl.SolrZkClientTimeout;
+import org.apache.solr.cloud.ClusterSingleton;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
 import org.apache.solr.common.cloud.SolrZkClient;
@@ -227,6 +228,31 @@ public class NodeConfig {
 
     setupSharedLib();
     initModules();
+    validateClusterSingletonClasses();
+  }
+
+  /**
+   * Validates that every clusterSingleton plugin declared in solr.xml names a class that implements
+   * {@link ClusterSingleton}. This runs at the end of the constructor because the resource loader
+   * only gains the shared lib directories and the modules during construction; when solr.xml is
+   * parsed, classes provided by them are not visible yet.
+   */
+  private void validateClusterSingletonClasses() {
+    if (clusterPlugins == null) {
+      return;
+    }
+    try {
+      for (PluginInfo plugin : clusterPlugins) {
+        if ("clusterSingleton".equals(plugin.type)) {
+          loader.findClass(plugin.className, ClusterSingleton.class);
+        }
+      }
+    } catch (ClassCastException e) {
+      throw new SolrException(
+          SolrException.ErrorCode.SERVER_ERROR,
+          "clusterSingleton plugins must implement the interface "
+              + ClusterSingleton.class.getName());
+    }
   }
 
   /**

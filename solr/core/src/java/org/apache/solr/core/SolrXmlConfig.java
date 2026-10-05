@@ -38,7 +38,6 @@ import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.apache.solr.client.solrj.impl.SolrHttpConstants;
-import org.apache.solr.cloud.ClusterSingleton;
 import org.apache.solr.cluster.placement.PlacementPluginFactory;
 import org.apache.solr.common.ConfigNode;
 import org.apache.solr.common.SolrException;
@@ -163,7 +162,7 @@ public class SolrXmlConfig {
     if (cloudConfig != null) configBuilder.setCloudConfig(cloudConfig);
     configBuilder.setBackupRepositoryPlugins(
         getBackupRepositoryPluginInfos(root.get("backup").getAll("repository")));
-    configBuilder.setClusterPlugins(getClusterPlugins(loader, root));
+    configBuilder.setClusterPlugins(getClusterPlugins(root));
     configBuilder.setMetricsConfig(getMetricsConfig(root.get("metrics")));
     configBuilder.setCachesConfig(getCachesConfig(loader, root.get("caches")));
     configBuilder.setDefaultZkHost(defaultZkHost);
@@ -633,11 +632,11 @@ public class SolrXmlConfig {
         .toArray(PluginInfo[]::new);
   }
 
-  private static PluginInfo[] getClusterPlugins(SolrResourceLoader loader, ConfigNode root) {
+  private static PluginInfo[] getClusterPlugins(ConfigNode root) {
     List<PluginInfo> clusterPlugins = new ArrayList<>();
 
     Collections.addAll(
-        clusterPlugins, getClusterSingletonPluginInfos(loader, root.getAll("clusterSingleton")));
+        clusterPlugins, getClusterSingletonPluginInfos(root.getAll("clusterSingleton")));
 
     PluginInfo replicaPlacementFactory = getPluginInfo(root.get("replicaPlacementFactory"));
     if (replicaPlacementFactory != null) {
@@ -654,8 +653,7 @@ public class SolrXmlConfig {
     return clusterPlugins.toArray(new PluginInfo[0]);
   }
 
-  private static PluginInfo[] getClusterSingletonPluginInfos(
-      SolrResourceLoader loader, List<ConfigNode> nodes) {
+  private static PluginInfo[] getClusterSingletonPluginInfos(List<ConfigNode> nodes) {
     if (nodes == null || nodes.isEmpty()) {
       return new PluginInfo[0];
     }
@@ -681,28 +679,9 @@ public class SolrXmlConfig {
               + "' found in solr.xml");
     }
 
-    for (PluginInfo p : plugins) {
-      try {
-        loader.findClass(p.className, ClusterSingleton.class);
-      } catch (ClassCastException e) {
-        throw new SolrException(
-            SolrException.ErrorCode.SERVER_ERROR,
-            "clusterSingleton plugins must implement the interface "
-                + ClusterSingleton.class.getName());
-      } catch (SolrException e) {
-        if (e.getCause() instanceof ClassNotFoundException) {
-          // The class may come from a module whose class loader is not available yet at solr.xml
-          // parse time; skip the early check and let ClusterSingletons validate with instanceof
-          // when the plugin is instantiated.
-          log.debug(
-              "Skipping early ClusterSingleton interface check for unloadable class '{}'",
-              p.className);
-          continue;
-        }
-        throw e;
-      }
-    }
-
+    // The classes are not validated here: at parse time the resource loader does not yet have
+    // the shared lib directories or the modules on it. NodeConfig validates the classes at the
+    // end of its constructor, once the loader is complete.
     return plugins.toArray(new PluginInfo[0]);
   }
 
