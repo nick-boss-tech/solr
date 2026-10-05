@@ -1,5 +1,5 @@
 title: >
-  The /export handler now rejects a request without sort or fl up front with HTTP 400 instead of an
+  The /export handler now rejects a request without sort or fl with HTTP 400 instead of an
   HTTP 200 response whose body contains an EXCEPTION document.
 type: fixed
 authors:
