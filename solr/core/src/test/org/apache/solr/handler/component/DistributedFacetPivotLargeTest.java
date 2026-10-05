@@ -276,10 +276,7 @@ public class DistributedFacetPivotLargeTest extends BaseDistributedSearchTestCas
         new SolrParams[] {
           params("facet.pivot", "{!facet.limit=4 facet.sort=index}place_s,company_t"),
           params(
-              "facet.pivot",
-              "{!facet.sort=index}place_s,company_t",
-              FacetParams.FACET_LIMIT,
-              "4"),
+              "facet.pivot", "{!facet.sort=index}place_s,company_t", FacetParams.FACET_LIMIT, "4"),
           params(
               "facet.pivot",
               "place_s,company_t",
@@ -558,13 +555,20 @@ public class DistributedFacetPivotLargeTest extends BaseDistributedSearchTestCas
     // Same Pivot - one in default (count) order and one in index order
     rsp =
         query(
-            "q", "*:*",
-            "rows", "0",
-            "facet", "true",
-            "fq", "pay_i:[2000 TO *]",
-            "facet.pivot", "{!key=sc}place_s,company_t",
-            "facet.pivot", "{!key=si facet.sort=index}place_s,company_t",
-            FacetParams.FACET_LIMIT, "4");
+            "q",
+            "*:*",
+            "rows",
+            "0",
+            "facet",
+            "true",
+            "fq",
+            "pay_i:[2000 TO *]",
+            "facet.pivot",
+            "{!key=sc}place_s,company_t",
+            "facet.pivot",
+            "{!key=si facet.sort=index}place_s,company_t",
+            FacetParams.FACET_LIMIT,
+            "4");
     pivots = rsp.getFacetPivot().get("sc");
     assertEquals(4, pivots.size());
     firstPlace = pivots.get(0);
