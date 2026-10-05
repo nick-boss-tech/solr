@@ -221,6 +221,15 @@ public abstract class AbstractLuceneSpellChecker extends SolrSpellChecker {
     spellChecker.setSpellIndex(index);
   }
 
+  @Override
+  public void close() throws IOException {
+    try {
+      spellChecker.close();
+    } finally {
+      index.close();
+    }
+  }
+
   /**
    * Initialize the {@link #index} variable based on the {@link #indexDir}. Does not actually create
    * the spelling index.

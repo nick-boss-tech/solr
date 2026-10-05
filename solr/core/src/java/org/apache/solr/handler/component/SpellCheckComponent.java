@@ -43,8 +43,10 @@ import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.ShardParams;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.params.SpellingParams;
+import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
+import org.apache.solr.core.CloseHook;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.core.SolrEventListener;
 import org.apache.solr.core.SolrResourceLoader;
@@ -731,6 +733,14 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
         // TODO: There's got to be a better way!  Where's Spring when you need it?
         queryConverter.setAnalyzer(analyzer);
       }
+
+      core.addCloseHook(
+          new CloseHook() {
+            @Override
+            public void postClose(SolrCore core) {
+              spellCheckers.values().forEach(IOUtils::closeQuietly);
+            }
+          });
     }
   }
 

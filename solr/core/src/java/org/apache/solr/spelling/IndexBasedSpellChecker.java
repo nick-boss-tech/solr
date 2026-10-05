@@ -23,6 +23,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.search.spell.HighFrequencyDictionary;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.search.SolrIndexSearcher;
@@ -43,6 +44,9 @@ public class IndexBasedSpellChecker extends AbstractLuceneSpellChecker {
   protected float threshold;
   protected IndexReader reader;
 
+  // the directory behind the reader opened from the configured sourceLocation, if any
+  private FSDirectory sourceDir;
+
   @Override
   public String init(NamedList<?> config, SolrCore core) {
     super.init(config, core);
@@ -56,12 +60,29 @@ public class IndexBasedSpellChecker extends AbstractLuceneSpellChecker {
 
   private void initSourceReader() {
     if (sourceLocation != null) {
+      final IndexReader previousReader = this.reader;
+      final FSDirectory previousDir = this.sourceDir;
+      FSDirectory luceneIndexDir = null;
       try {
-        FSDirectory luceneIndexDir = FSDirectory.open(Path.of(sourceLocation));
+        luceneIndexDir = FSDirectory.open(Path.of(sourceLocation));
         this.reader = DirectoryReader.open(luceneIndexDir);
+        this.sourceDir = luceneIndexDir;
       } catch (IOException e) {
+        IOUtils.closeQuietly(luceneIndexDir);
         throw new RuntimeException(e);
       }
+      IOUtils.closeQuietly(previousReader);
+      IOUtils.closeQuietly(previousDir);
+    }
+  }
+
+  @Override
+  public void close() throws IOException {
+    try {
+      super.close();
+    } finally {
+      IOUtils.closeQuietly(reader);
+      IOUtils.closeQuietly(sourceDir);
     }
   }
 

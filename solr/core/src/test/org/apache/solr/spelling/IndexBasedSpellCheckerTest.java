@@ -311,6 +311,44 @@ public class IndexBasedSpellCheckerTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testSourceReaderClosedOnReloadAndClose() throws Exception {
+    Path tmpDir = createTempDir();
+    Path altIndexDir = tmpDir.resolve("alternateIdx");
+    Directory dir = newFSDirectory(altIndexDir);
+    IndexWriter iw = new IndexWriter(dir, new IndexWriterConfig(new WhitespaceAnalyzer()));
+    Document doc = new Document();
+    doc.add(new TextField("title", "jumpin jack flash", Field.Store.YES));
+    iw.addDocument(doc);
+    iw.close();
+    dir.close();
+
+    Path indexDir = tmpDir.resolve("spellingIdx");
+    Files.createDirectories(indexDir);
+    NamedList<Object> spellchecker = new NamedList<>();
+    spellchecker.add("classname", IndexBasedSpellChecker.class.getName());
+    spellchecker.add(AbstractLuceneSpellChecker.INDEX_DIR, indexDir.toString());
+    spellchecker.add(AbstractLuceneSpellChecker.LOCATION, altIndexDir.toString());
+    spellchecker.add(AbstractLuceneSpellChecker.FIELD, "title");
+
+    IndexBasedSpellChecker checker = new IndexBasedSpellChecker();
+    SolrCore core = h.getCore();
+    checker.init(spellchecker, core);
+
+    IndexReader firstReader = checker.reader;
+    assertEquals("source reader is open", 1, firstReader.getRefCount());
+
+    checker.reload(core, null);
+    assertNotSame("reload opens a new source reader", firstReader, checker.reader);
+    assertEquals("reload closes the previous source reader", 0, firstReader.getRefCount());
+
+    IndexReader secondReader = checker.reader;
+    assertEquals("new source reader is open", 1, secondReader.getRefCount());
+
+    checker.close();
+    assertEquals("close closes the source reader", 0, secondReader.getRefCount());
+  }
+
+  @Test
   public void testAlternateLocation() throws Exception {
     String[] ALT_DOCS =
         new String[] {

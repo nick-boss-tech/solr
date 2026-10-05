@@ -16,6 +16,7 @@
  */
 package org.apache.solr.spelling;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -45,7 +46,7 @@ import org.apache.solr.search.SolrIndexSearcher;
  *
  * @since solr 1.3
  */
-public abstract class SolrSpellChecker {
+public abstract class SolrSpellChecker implements Closeable {
   public static final String DICTIONARY_NAME = "name";
   public static final String DEFAULT_DICTIONARY_NAME = "default";
   public static final String FIELD = "field";
@@ -77,6 +78,12 @@ public abstract class SolrSpellChecker {
       analyzer = new WhitespaceAnalyzer();
     }
     return name;
+  }
+
+  /** Releases the resources held by this spell checker; called when the core is closed. */
+  @Override
+  public void close() throws IOException {
+    /* No-Op */
   }
 
   /** modify the shard request to be used in a distributed environment. */
