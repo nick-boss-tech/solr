@@ -56,6 +56,10 @@ public abstract class FacetMerger {
     Object root; // per-shard response
     // current max bucket across all bucket types... incremented as we encounter more
     int maxBucket;
+    // the bucket count at the moment refinement started, recorded by FacetModule before
+    // it computes any refinement; buckets numbered at or above it were first seen in a
+    // refinement response. -1 until refinement starts.
+    int phase1BucketLimit = -1;
     int shardNum = -1; // TODO: keep same mapping across multiple phases...
     boolean bucketWasMissing;
 

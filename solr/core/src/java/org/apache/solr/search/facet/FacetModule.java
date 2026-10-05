@@ -192,6 +192,12 @@ public class FacetModule extends SearchComponent {
     // requests in the outgoing queue at once.
 
     assert rb.shards.length == facetState.mcontext.numShards;
+    // Refinements for all shards are computed in the loop below, before any refinement
+    // response is merged, so the current bucket count is the boundary between the buckets
+    // known in phase 1 and the buckets that refinement responses will create. Recording
+    // it here, rather than in each merger, also covers mergers that a refinement response
+    // creates later.
+    facetState.mcontext.phase1BucketLimit = facetState.mcontext.maxBucket;
     for (String shard : rb.shards) {
       facetState.mcontext.setShard(shard);
 

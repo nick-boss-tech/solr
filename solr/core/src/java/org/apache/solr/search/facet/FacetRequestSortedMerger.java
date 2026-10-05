@@ -43,12 +43,6 @@ abstract class FacetRequestSortedMerger<FacetRequestT extends FacetRequestSorted
   // can not contribute any buckets to it.
   BitSet shardReturnedFacet;
 
-  // the next bucket number to be assigned at the moment refinement started, captured at the
-  // first getRefinement call (-1 until then). Refinements for all shards are computed before
-  // any refinement response is merged, so buckets numbered below this were known in phase 1,
-  // while buckets numbered at or above it were first seen in a refinement response.
-  int phase1BucketLimit = -1;
-
   Context mcontext; // HACK: this should be passed in getMergedResult as well!
 
   public FacetRequestSortedMerger(FacetRequestT freq) {
@@ -171,17 +165,16 @@ abstract class FacetRequestSortedMerger<FacetRequestT extends FacetRequestSorted
       // may have the bucket without having returned it
       if (mcontext.getShardFlag(bucket.bucketNumber, shard)) continue;
       boolean shardMayHaveMore;
-      if (freq.processEmpty) {
+      if (freq.processEmpty && !firstSeenDuringRefinement(bucket, mcontext)) {
         // with processEmpty, a shard that returned this facet may hold buckets it did not
         // return (see getRefinement), but a shard that never returned the facet at all
-        // can not contribute to it. Buckets first seen in a refinement response are exempt:
-        // they arrived as part of a bucket a shard was asked to fill in as a leaf, so no
-        // other shard can ever be asked about them, and this rule would always drop them.
-        shardMayHaveMore =
-            shardReturnedFacet != null
-                && shardReturnedFacet.get(shard)
-                && !firstSeenDuringRefinement(bucket);
+        // can not contribute to it
+        shardMayHaveMore = shardReturnedFacet != null && shardReturnedFacet.get(shard);
       } else {
+        // a shard may hold the bucket without having returned it only if it reported more
+        // buckets. This is also the rule for buckets first seen in a refinement response:
+        // they arrived as part of a bucket a shard was asked to fill in as a leaf, so no
+        // shard can ever be asked about them again.
         shardMayHaveMore = shardHasMoreBuckets != null && shardHasMoreBuckets.get(shard);
       }
       if (shardMayHaveMore) {
@@ -193,15 +186,12 @@ abstract class FacetRequestSortedMerger<FacetRequestT extends FacetRequestSorted
 
   // true if the bucket did not exist yet when refinement started, i.e. it was first seen
   // in a refinement response and can never be refined against any other shard
-  private boolean firstSeenDuringRefinement(FacetBucket bucket) {
-    return phase1BucketLimit >= 0 && bucket.bucketNumber >= phase1BucketLimit;
+  private boolean firstSeenDuringRefinement(FacetBucket bucket, Context mcontext) {
+    return mcontext.phase1BucketLimit >= 0 && bucket.bucketNumber >= mcontext.phase1BucketLimit;
   }
 
   @Override
   public Map<String, Object> getRefinement(Context mcontext) {
-    if (phase1BucketLimit < 0) {
-      phase1BucketLimit = mcontext.maxBucket;
-    }
     // step 1) If this facet request has refining, then we need to fully request top buckets that
     // were not seen by this shard.
     // step 2) If this facet does not have refining, but some sub-facets do, we need to
