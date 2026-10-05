@@ -247,6 +247,37 @@ public class TestJsonRecordReader extends SolrTestCaseJ4 {
     assertEquals(9, ((List) records.get(0).get("txt")).size());
   }
 
+  public void testMappedFieldAfterSplitIsRejected() throws Exception {
+    String json =
+        "{\n"
+            + "  \"first\": \"John\",\n"
+            + "  \"exams\": [\n"
+            + "      {\"subject\": \"Maths\", \"marks\": 90},\n"
+            + "      {\"subject\": \"Biology\", \"marks\": 86}\n"
+            + "  ],\n"
+            + "  \"after\": \"456\"\n"
+            + "}";
+
+    // a field that is mapped but only arrives after the records were emitted cannot be added to
+    // them: it used to be dropped silently
+    final JsonRecordReader withTrailingField =
+        JsonRecordReader.getInst("/exams", List.of("/first", "/after", "/exams/subject"));
+    RuntimeException e =
+        expectThrows(
+            RuntimeException.class, () -> withTrailingField.getAllRecords(new StringReader(json)));
+    assertTrue(e.getMessage(), e.getMessage().contains("after"));
+
+    // fields before the split, and unmapped fields after it, are still fine
+    JsonRecordReader streamer =
+        JsonRecordReader.getInst("/exams", List.of("/first", "/exams/subject"));
+    List<Map<String, Object>> records = streamer.getAllRecords(new StringReader(json));
+    assertEquals(2, records.size());
+    for (Map<String, Object> record : records) {
+      assertEquals("John", record.get("first"));
+      assertFalse(record.containsKey("after"));
+    }
+  }
+
   public void testNestedDocs() throws Exception {
     String json = "{a:{" + "b:{c:d}," + "x:y" + "}}";
     JsonRecordReader streamer = JsonRecordReader.getInst("/|/a/b", Arrays.asList("/a/x", "/a/b/*"));

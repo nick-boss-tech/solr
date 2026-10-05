@@ -310,6 +310,9 @@ public class JsonRecordReader {
         throws IOException {
 
       final boolean isRecordStarted = recordStarted || isRecord;
+      // set once a record was emitted from a split below this object; fields of this object that
+      // follow it can no longer be added to that record
+      final boolean[] recordEmittedBelow = new boolean[1];
       Set<String> valuesAddedInThisFrame = null;
       if (isRecord || !recordStarted) {
         // This Node is a match for an PATH from a forEach attribute,
@@ -364,7 +367,16 @@ public class JsonRecordReader {
                 true,
                 this);
           } else {
-            node.handleObjectStart(parser, handler, values, stack, isRecordStarted, this);
+            node.handleObjectStart(
+                parser,
+                (record, path) -> {
+                  recordEmittedBelow[0] = true;
+                  handler.handle(record, path);
+                },
+                values,
+                stack,
+                isRecordStarted,
+                this);
           }
         }
       }
@@ -400,6 +412,14 @@ public class JsonRecordReader {
               }
               Object val = parseSingleFieldValue(event, parser, runnable);
               if (val != null) {
+                if (recordEmittedBelow[0] && !isRecordStarted) {
+                  throw new RuntimeException(
+                      "Field '"
+                          + name
+                          + "' follows the split record in the JSON input, but records are"
+                          + " streamed and have already been emitted without it. Move the field"
+                          + " before the split node.");
+                }
                 putValue(values, nameInRecord, val);
                 valuesAddedInThisFrame.add(nameInRecord);
               }
