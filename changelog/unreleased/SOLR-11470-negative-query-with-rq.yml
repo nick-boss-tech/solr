@@ -1,6 +1,6 @@
 title: >
-  A pure negative main query such as q=NOT foo no longer returns no results when a rank query
-  (rq, for example rerank) is specified.
+  A pure negative main query is made queryable before it is wrapped in a rank query (rq),
+  so it no longer returns no results when the query parser itself did not fix the query.
 type: fixed
 authors:
   - name: Nick Shanin

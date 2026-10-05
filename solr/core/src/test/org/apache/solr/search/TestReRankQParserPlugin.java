@@ -279,7 +279,9 @@ public class TestReRankQParserPlugin extends SolrTestCaseJ4 {
     assertU(commit());
 
     String[] queryChecks = {
-      "*[count(//doc)=2]", "//result/doc/str[@name='id'][.='1']", "//result/doc/str[@name='id'][.='2']"
+      "*[count(//doc)=2]",
+      "//result/doc/str[@name='id'][.='1']",
+      "//result/doc/str[@name='id'][.='2']"
     };
 
     // control: no re-ranking
@@ -289,6 +291,40 @@ public class TestReRankQParserPlugin extends SolrTestCaseJ4 {
         req(
             "q",
             "-term_s:ZZZZ",
+            "rq",
+            "{!" + ReRankQParserPlugin.NAME + " reRankQuery=$rqq reRankDocs=10}",
+            "rqq",
+            "{!func}sum(1.0,2.0)",
+            "fl",
+            "id"),
+        queryChecks);
+  }
+
+  @Test
+  public void testReRankWithPureNegativeMainQueryFromBoolParser() {
+    // SOLR-11470: the {!bool} parser assembles a pure negative BooleanQuery without applying
+    // QueryUtils.makeQueryable, and the lucene parser's own pure negative handling does not see
+    // it, so only the rank query wrapping can make it queryable. Under a luceneMatchVersion
+    // before 10.2.0 the lucene parser behaves the same way for q=-term_s:ZZZZ.
+    assertU(delQ("*:*"));
+    assertU(adoc("id", "1", "term_s", "YYYY"));
+    assertU(adoc("id", "2", "term_s", "YYYY"));
+    assertU(adoc("id", "3", "term_s", "ZZZZ"));
+    assertU(commit());
+
+    String[] queryChecks = {
+      "*[count(//doc)=2]",
+      "//result/doc/str[@name='id'][.='1']",
+      "//result/doc/str[@name='id'][.='2']"
+    };
+
+    // control: no re-ranking; the searcher makes the query queryable itself
+    assertQ(req("q", "{!bool must_not=term_s:ZZZZ}", "fl", "id"), queryChecks);
+
+    assertQ(
+        req(
+            "q",
+            "{!bool must_not=term_s:ZZZZ}",
             "rq",
             "{!" + ReRankQParserPlugin.NAME + " reRankQuery=$rqq reRankDocs=10}",
             "rqq",

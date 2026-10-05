@@ -479,7 +479,8 @@ public class ResponseBuilder {
    */
   public Query wrap(Query q) {
     if (this.rankQuery != null) {
-      // a pure negative main query would otherwise rewrite to MatchNoDocsQuery inside the rank query
+      // a pure negative main query would otherwise rewrite to MatchNoDocsQuery inside the rank
+      // query
       return this.rankQuery.wrap(QueryUtils.makeQueryable(q));
     } else {
       return q;
