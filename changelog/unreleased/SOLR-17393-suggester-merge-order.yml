@@ -1,0 +1,8 @@
+title: >
+  The distributed Suggester now returns suggestions with equal weights in a stable order (by suggestion text) instead of an order that depends on which shard responded first.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17393
+    url: https://issues.apache.org/jira/browse/SOLR-17393
