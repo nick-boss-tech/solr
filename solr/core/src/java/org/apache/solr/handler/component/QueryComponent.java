@@ -59,14 +59,10 @@ import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.BytesRefBuilder;
 import org.apache.lucene.util.InPlaceMergeSorter;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.cloud.CloudDescriptor;
 import org.apache.solr.cloud.ZkController;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrException;
-import org.apache.solr.common.cloud.DocCollection;
-import org.apache.solr.common.cloud.Replica;
-import org.apache.solr.common.cloud.Slice;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.CursorMarkParams;
 import org.apache.solr.common.params.GroupParams;
@@ -972,54 +968,24 @@ public class QueryComponent extends SearchComponent {
     };
   }
 
-  private static DocCollection getRequestCollection(ResponseBuilder rb) {
-    ZkController zkController = rb.req.getCoreContainer().getZkController();
-    // The request's cloud descriptor names the real collection; on a coordinator node the core's
-    // own descriptor names a synthetic collection that is not in cluster state.
-    CloudDescriptor cloudDescriptor = rb.req.getCloudDescriptor();
-    if (zkController == null || cloudDescriptor == null) {
-      return null;
-    }
-    String collectionName = cloudDescriptor.getCollectionName();
-    return collectionName == null
-        ? null
-        : zkController.getClusterState().getCollectionOrNull(collectionName);
-  }
-
   /**
-   * Maps a shard string, a replica core URL or several of them joined with '|', to the name of the
-   * slice that hosts one of those replicas. Returns null when none of them is a replica of {@code
-   * collection}.
+   * Maps each entry of {@code rb.shards} (a slice's replica URLs joined with '|') to the name of
+   * its slice in {@code rb.slices}. HttpShardHandler fills both arrays from the same index, so the
+   * name is taken from the request itself, with no cluster-state lookup. Slices whose name is
+   * unknown (explicit shard URLs, where {@code rb.slices} holds nulls) are absent from the map, and
+   * callers fall back to the shard address for them.
    */
-  static String resolveShardName(
-      DocCollection collection, Map<String, String> cache, String shardUrl) {
-    if (collection == null || shardUrl == null) {
-      return null;
+  protected static Map<String, String> shardNamesByShardAddress(ResponseBuilder rb) {
+    Map<String, String> shardNames = new HashMap<>();
+    if (rb.shards == null || rb.slices == null) {
+      return shardNames;
     }
-    if (cache.containsKey(shardUrl)) {
-      return cache.get(shardUrl);
-    }
-    String resolved = null;
-    for (String url : StrUtils.splitSmart(shardUrl, "|", true)) {
-      resolved = sliceNameOfReplicaUrl(collection, url);
-      if (resolved != null) {
-        break;
+    for (int i = 0; i < rb.shards.length && i < rb.slices.length; i++) {
+      if (rb.slices[i] != null) {
+        shardNames.put(rb.shards[i], rb.slices[i]);
       }
     }
-    cache.put(shardUrl, resolved);
-    return resolved;
-  }
-
-  private static String sliceNameOfReplicaUrl(DocCollection collection, String url) {
-    String coreName = url.substring(url.lastIndexOf('/') + 1);
-    for (Slice slice : collection.getSlices()) {
-      for (Replica replica : slice.getReplicas()) {
-        if (coreName.equals(replica.getCoreName()) || url.equals(replica.getCoreUrl())) {
-          return slice.getName();
-        }
-      }
-    }
-    return null;
+    return shardNames;
   }
 
   protected void mergeIds(ResponseBuilder rb, ShardRequest sreq) {
@@ -1085,10 +1051,9 @@ public class QueryComponent extends SearchComponent {
     int failedShardCount = 0;
     int failedShardCountForReRankCutoff = 0;
     NamedList<Object> reRankCutoffByShard = null;
-    // Resolve replica URLs to shard names once per merge so tie-breaking in
+    // Map shard addresses to shard names once per merge so tie-breaking in
     // ShardFieldSortedHitQueue is deterministic across requests.
-    DocCollection collection = getRequestCollection(rb);
-    Map<String, String> shardNameCache = new HashMap<>();
+    Map<String, String> shardNames = shardNamesByShardAddress(rb);
     for (ShardResponse srsp : sreq.responses) {
       SolrDocumentList docs = null;
       NamedList<?> responseHeader = null;
@@ -1264,7 +1229,7 @@ public class QueryComponent extends SearchComponent {
         ShardDoc shardDoc = new ShardDoc();
         shardDoc.id = id;
         shardDoc.shard = srsp.getShard();
-        shardDoc.shardName = resolveShardName(collection, shardNameCache, shardDoc.shard);
+        shardDoc.shardName = shardNames.get(shardDoc.shard);
         shardDoc.orderInShard = i;
         Object scoreObj = doc.getFieldValue(SolrReturnFields.SCORE);
         if (scoreObj != null) {

@@ -318,6 +318,9 @@ public class CombinedQueryComponent extends QueryComponent implements SolrCoreAw
     boolean maxHitsTerminatedEarly = false;
     long approximateTotalHits = 0;
     Map<String, List<ShardDoc>> shardDocMap = new HashMap<>();
+    // Map shard addresses to shard names once per merge so tie-breaking in
+    // ShardFieldSortedHitQueue is deterministic across requests.
+    Map<String, String> shardNames = shardNamesByShardAddress(rb);
     String[] queriesToCombineKeys = rb.req.getParams().getParams(CombinerParams.COMBINER_QUERY);
     // Build per-shard set of doc IDs from the shard's combined (deduplicated) response.
     // Used to filter per-query docs so that RRF doesn't reintroduce docs
@@ -418,6 +421,7 @@ public class CombinedQueryComponent extends QueryComponent implements SolrCoreAw
           shardDoc.id = id;
           shardDoc.orderInShard = i;
           shardDoc.shard = srsp.getShard();
+          shardDoc.shardName = shardNames.get(shardDoc.shard);
           Object scoreObj = doc.getFieldValue(SolrReturnFields.SCORE);
           if (scoreObj != null) {
             if (scoreObj instanceof String scoreStr) {
