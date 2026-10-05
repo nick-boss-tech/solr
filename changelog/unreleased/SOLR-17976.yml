@@ -1,4 +1,4 @@
-title: Distributed search now breaks ties between equal-scoring documents by shard name instead of replica address, so the order no longer depends on which replicas served the request
+title: Distributed search now breaks ties between equal-scoring documents by shard name instead of replica address, so the order no longer depends on which replicas served the request; the order of tied documents differs from earlier releases
 type: fixed
 authors:
   - name: Nick Shanin
