@@ -41,3 +41,11 @@ bin/solr start -Dsolr.node.roles=data:on,overseer:preferred
 
 A node started this way asks the Overseer to re-run its node prioritization, so a preferred node takes over without waiting for the current Overseer to restart.
 Note that node roles are fixed for the lifetime of a node: unlike `ADDROLE`, they cannot be changed on a running node.
+
+== Changes in Default Behavior
+
+=== Learning to Rank Feature Stores
+
+A `PUT` or `POST` to `/schema/feature-store/<storeName>` now adds features that do not specify a `store` attribute to the named store, instead of to the default store (`_DEFAULT_`).
+Previously, the store name in the URL was ignored for uploads without a `store` attribute, and a request naming a store that did not exist yet did not create it.
+Models that reference such features through the default store will no longer find newly uploaded ones; use the same store name in the URL (or in the request body) as the models reference.

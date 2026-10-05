@@ -156,8 +156,7 @@ public class TestManagedFeatureStore extends SolrTestCaseJ4 {
     featureStore.doPut(
         null, featureList(createMap("f5", OriginalScoreFeature.class.getName(), null)), null);
 
-    assertNotNull(
-        featureStore.getFeatureStore(FeatureStore.DEFAULT_FEATURE_STORE_NAME).get("f5"));
+    assertNotNull(featureStore.getFeatureStore(FeatureStore.DEFAULT_FEATURE_STORE_NAME).get("f5"));
   }
 
   @Test
