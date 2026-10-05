@@ -24,6 +24,8 @@ import java.util.Set;
 import org.apache.lucene.tests.util.TestUtil;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.cloud.DocCollection;
+import org.apache.solr.common.cloud.Slice;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -63,7 +65,6 @@ public class TriLevelCompositeIdRoutingTest extends ShardRoutingTest {
   }
 
   @Override
-  @AwaitsFix(bugUrl = "https://issues.apache.org/jira/browse/SOLR-13369")
   @Test
   public void test() throws Exception {
     boolean testFinished = false;
@@ -102,7 +103,7 @@ public class TriLevelCompositeIdRoutingTest extends ShardRoutingTest {
 
       commit();
 
-      final Map<String, String> routePrefixMap = new HashMap<>();
+      final Map<String, Set<String>> routePrefixShards = new HashMap<>();
       final Set<String> actualUniqueKeys = new HashSet<>();
       for (int i = 1; i <= sliceCount; i++) {
         final String shardId = "shard" + i;
@@ -118,8 +119,7 @@ public class TriLevelCompositeIdRoutingTest extends ShardRoutingTest {
           actualUniqueKeys.addAll(uniqueKeysInShard);
         }
 
-        // foreach uniqueKey, extract its route prefix and confirm those aren't spread across
-        // multiple shards
+        // foreach uniqueKey, extract its route prefix and record which shards it was found in
         for (String uniqueKey : uniqueKeysInShard) {
           final String routePrefix = uniqueKey.substring(0, uniqueKey.lastIndexOf('!'));
           log.debug(
@@ -129,15 +129,32 @@ public class TriLevelCompositeIdRoutingTest extends ShardRoutingTest {
               routePrefix);
           assertNotNull("null prefix WTF? " + uniqueKey, routePrefix);
 
-          final String otherShard = routePrefixMap.put(routePrefix, shardId);
-          if (null != otherShard)
-            // if we already had a mapping, make sure it's an earlier doc from our current shard...
-            assertEquals(
-                "routePrefix " + routePrefix + " found in multiple shards", shardId, otherShard);
+          routePrefixShards.computeIfAbsent(routePrefix, k -> new HashSet<>()).add(shardId);
         }
       }
 
       assertEquals("Docs missing?", expectedUniqueKeys.size(), actualUniqueKeys.size());
+
+      // A route prefix only fixes the leading bits of the hash, so the hash range it covers may
+      // straddle a shard boundary. Every shard holding the prefix must be one the router would
+      // search for that prefix.
+      final DocCollection collection =
+          cloudClient.getClusterState().getCollection(DEFAULT_COLLECTION);
+      for (Map.Entry<String, Set<String>> entry : routePrefixShards.entrySet()) {
+        final Set<String> searchedShards = new HashSet<>();
+        for (Slice slice :
+            collection.getRouter().getSearchSlicesSingle(entry.getKey() + "!", null, collection)) {
+          searchedShards.add(slice.getName());
+        }
+        assertTrue(
+            "routePrefix "
+                + entry.getKey()
+                + " found in shards "
+                + entry.getValue()
+                + " but router only searches "
+                + searchedShards,
+            searchedShards.containsAll(entry.getValue()));
+      }
 
       testFinished = true;
     } finally {
