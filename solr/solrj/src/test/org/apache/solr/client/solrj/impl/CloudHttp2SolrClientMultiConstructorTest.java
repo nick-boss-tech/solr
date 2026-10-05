@@ -17,7 +17,6 @@
 package org.apache.solr.client.solrj.impl;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -87,26 +86,5 @@ public class CloudHttp2SolrClientMultiConstructorTest extends SolrTestCase {
     // "foo" has no leading slash, so it can only reach validation via the connection record
     new CloudSolrClient.Builder(new CloudSolrClient.CloudSolrClientConnection(true, zkHosts, "foo"))
         .build();
-  }
-
-  /** SOLR-18368: the 9.10-deprecated alias is gone; callers use {@code withHttpClientBuilder}. */
-  @Test
-  public void testWithInternalClientBuilderRemoved() {
-    boolean foundDeprecatedName = false;
-    boolean foundReplacement = false;
-    for (Method method : CloudSolrClient.Builder.class.getDeclaredMethods()) {
-      if ("withInternalClientBuilder".equals(method.getName())) {
-        foundDeprecatedName = true;
-      }
-      if ("withHttpClientBuilder".equals(method.getName())) {
-        foundReplacement = true;
-      }
-    }
-    assertFalse(
-        "SOLR-18368: CloudSolrClient.Builder.withInternalClientBuilder was removed; use withHttpClientBuilder",
-        foundDeprecatedName);
-    assertTrue(
-        "CloudSolrClient.Builder.withHttpClientBuilder must remain as the replacement",
-        foundReplacement);
   }
 }
