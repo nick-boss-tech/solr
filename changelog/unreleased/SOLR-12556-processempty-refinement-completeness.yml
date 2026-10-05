@@ -1,6 +1,8 @@
 title: >
-  JSON Facet field refinement with processEmpty:true no longer returns buckets that were only
-  partially refined when they sorted ahead of fully refined buckets.
+  JSON Facet field refinement with processEmpty:true now drops buckets that were not refined
+  against every shard that returned the facet, instead of returning them with partial stats.
+  Shards that never return the facet (for example because their domain is empty) no longer
+  cause all of its buckets to be dropped.
 type: fixed
 authors:
   - name: Nick Shanin
