@@ -2312,8 +2312,9 @@ Valid values for `mode` are:
 +
 For some applications it might be good to use `search` mode for indexing and `normal` mode for queries to increase precision and prevent parts of compounds from being matched and highlighted.
 +
-`search` and `extended` modes keep each original compound term alongside its parts, so the tokens are not a linear stream.
-The xref:filters.adoc#synonym-graph-filter[Synonym Graph Filter] cannot consume an input token graph correctly, so in an analyzer, index or query, that applies synonyms after this tokenizer, use `normal` mode.
+With the default `discardCompoundToken="true"`, `search` and `extended` modes emit only the parts of each compound term, so the tokens form a linear stream and no mode switch is needed when synonyms follow this tokenizer.
+Setting `discardCompoundToken="false"` also keeps each original compound term alongside its parts, so the tokens are not a linear stream.
+The xref:filters.adoc#synonym-graph-filter[Synonym Graph Filter] cannot consume an input token graph correctly, so in an analyzer, index or query, that applies synonyms after this tokenizer and sets `discardCompoundToken="false"`, use `normal` mode.
 
 `userDictionary`::
 +
@@ -2347,10 +2348,10 @@ Set to `false` to keep punctuation, `true` to discard.
 +
 [%autowidth,frame=none]
 |===
-|Optional |Default: none
+|Optional |Default: `true`
 |===
 +
-Set to `false` to keep original compound tokens with the `search` mode, `true` to discard.
+Set to `false` to keep original compound tokens with the `search` and `extended` modes, `true` to discard.
 
 ==== Japanese Base Form Filter
 
