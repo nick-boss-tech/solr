@@ -1,4 +1,4 @@
-title: DELETE /cluster/filestore/files/{file} no longer fails with "The path exists in ZK, delete and retry"; the file store entry in ZooKeeper is removed together with the file
+title: DELETE /cluster/filestore/files/{file} no longer fails with "The path exist ZK, delete and retry"; the file store entry in ZooKeeper is removed together with the file
 type: fixed
 authors:
   - name: Nick Shanin
