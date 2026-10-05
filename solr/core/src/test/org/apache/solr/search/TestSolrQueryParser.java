@@ -713,15 +713,15 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
 
   /**
    * SOLR-12532: slop given in the query string must also be applied when the phrase becomes a graph
-   * query (WordDelimiterGraphFilter with preserveOriginal and generateWordParts). NOTE: written
-   * without being compiled or run; see SOLR-12532-TESTING.md.
+   * query (WordDelimiterGraphFilter with preserveOriginal and generateWordParts).
    */
   @Test
   public void testQueryStringSlopOnGraphPhrase() throws Exception {
     assertU(adoc("id", "41", "wdf_partspreserve", "you just can't"));
     assertU(commit());
 
-    // "you" and "can't" are two positions apart in the indexed text, so slop 2 is needed
+    // one token ("just") sits between "you" and "can't" in the indexed text, so even slop 1 would
+    // match; the query below uses slop 2
     assertJQ(
         req("q", "wdf_partspreserve:\"you can't\"~2", "fl", "id", "debug", "query"),
         "/response/numFound==1");
