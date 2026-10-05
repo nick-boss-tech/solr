@@ -967,8 +967,7 @@ public class TestExportWriter extends SolrTestCaseJ4 {
     // String s =  h.query(req("q", "id:1", "qt", "/export", "fl",
     // "floatdv,intdv,stringdv,longdv,doubledv", "sort", "intdv asc"));
     String s;
-    // SOLR-12543: missing required params are rejected up front with a 400, not a 200 + EXCEPTION
-    // doc. NOTE: written without being compiled or run.
+    // SOLR-12543: missing required params are rejected with a 400, not a 200 + EXCEPTION doc.
     SolrException e = expectThrows(SolrException.class, () -> h.query(reqWithPath("/export")));
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
     assertTrue("Should have had a sort error", e.getMessage().contains("No sort criteria"));
@@ -979,9 +978,20 @@ public class TestExportWriter extends SolrTestCaseJ4 {
     assertTrue(
         "Should have had fl error",
         e.getMessage().contains("export field list (fl) must be specified"));
+    // A sort param that is present but empty parses to no sort, so it is rejected too.
+    e =
+        expectThrows(
+            SolrException.class,
+            () -> h.query(reqWithPath("/export", "sort", "", "fl", "stringdv")));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+    assertTrue("Should have had a sort error", e.getMessage().contains("No sort criteria"));
     s = h.query(reqWithPath("/export", "sort", "intdv asc", "fl", "stringdv"));
     // Interesting you don't even need to specify a "q" parameter.
 
+    // A sort supplied as a local param on q is a real sort (QParser reads it into the
+    // SortSpec), so the request exports instead of being rejected.
+    s = h.query(reqWithPath("/export", "q", "{!lucene sort='intdv asc'}*:*", "fl", "stringdv"));
+    assertTrue("Local param sort should have exported", s.contains("hello world"));
   }
 
   private void testDates() throws Exception {
