@@ -1242,6 +1242,201 @@ public class TestJsonFacetRefinement extends SolrTestCaseHS {
             + "  ] } }");
   }
 
+  /**
+   * Helper for tests where a parent bucket is returned in phase 1 only by a shard that has no child
+   * values for it, while two other shards (each holding two parent values with higher counts) are
+   * both asked to fill it in as a leaf during refinement.
+   *
+   * <p>Shard layout (3 shards, none empty):
+   *
+   * <ul>
+   *   <li>client 0: 40 docs with only parent_s=pY (no child_s or grand_s values)
+   *   <li>client 1: parent_s=pA (15) and pB (14) with no child values; parent_s=pY (12) with
+   *       child_s cBoth (5, carrying grand_s gX x3 and gY x2), cShared (4) and cOnly1 (3)
+   *   <li>client 2: parent_s=pA (15) and pB (14) with no child values; parent_s=pY (11) with
+   *       child_s cBoth (6, carrying grand_s gX x2 and gZ x4), cOnly2 (4) and cShared (1)
+   * </ul>
+   *
+   * With a child limit of 2, client 1's leaf answer for pY is cBoth and cShared (more:true) and
+   * client 2's leaf answer is cBoth and cOnly2 (more:true): cShared exists on client 2 as well, but
+   * below its child cut-off.
+   */
+  private int initDocsWhereTwoShardsAnswerParentLeafWithChildren() throws Exception {
+    initServers();
+    final Client client = servers.getClient(random().nextInt());
+    client
+        .queryDefaults()
+        .set("shards", servers.getShards())
+        .set("debugQuery", Boolean.toString(random().nextBoolean()));
+
+    final List<SolrClient> clients = client.getClientProvider().all();
+    assertTrue(clients.size() >= 3);
+    final SolrClient c0 = clients.get(0);
+    final SolrClient c1 = clients.get(1);
+    final SolrClient c2 = clients.get(2);
+
+    client.deleteByQuery("*:*");
+    int id = 0;
+
+    // client 0: only pY, with the highest single-shard count, and no child values at all
+    for (int i = 0; i < 40; i++) {
+      c0.add(sdoc("id", id++, "parent_s", "pY"));
+    }
+
+    // client 1: pA & pB outrank pY in phase 1; pY has 3 distinct child values
+    for (int i = 0; i < 15; i++) {
+      c1.add(sdoc("id", id++, "parent_s", "pA"));
+    }
+    for (int i = 0; i < 14; i++) {
+      c1.add(sdoc("id", id++, "parent_s", "pB"));
+    }
+    for (int i = 0; i < 3; i++) {
+      c1.add(sdoc("id", id++, "parent_s", "pY", "child_s", "cBoth", "grand_s", "gX"));
+    }
+    for (int i = 0; i < 2; i++) {
+      c1.add(sdoc("id", id++, "parent_s", "pY", "child_s", "cBoth", "grand_s", "gY"));
+    }
+    for (int i = 0; i < 4; i++) {
+      c1.add(sdoc("id", id++, "parent_s", "pY", "child_s", "cShared"));
+    }
+    for (int i = 0; i < 3; i++) {
+      c1.add(sdoc("id", id++, "parent_s", "pY", "child_s", "cOnly1"));
+    }
+
+    // client 2: same parent layout; different child counts, cShared below the child cut-off
+    for (int i = 0; i < 15; i++) {
+      c2.add(sdoc("id", id++, "parent_s", "pA"));
+    }
+    for (int i = 0; i < 14; i++) {
+      c2.add(sdoc("id", id++, "parent_s", "pB"));
+    }
+    for (int i = 0; i < 2; i++) {
+      c2.add(sdoc("id", id++, "parent_s", "pY", "child_s", "cBoth", "grand_s", "gX"));
+    }
+    for (int i = 0; i < 4; i++) {
+      c2.add(sdoc("id", id++, "parent_s", "pY", "child_s", "cBoth", "grand_s", "gZ"));
+    }
+    for (int i = 0; i < 4; i++) {
+      c2.add(sdoc("id", id++, "parent_s", "pY", "child_s", "cOnly2"));
+    }
+    c2.add(sdoc("id", id++, "parent_s", "pY", "child_s", "cShared"));
+
+    client.commit();
+    return id;
+  }
+
+  /**
+   * A bucket first seen in a refinement response can never be refined against another shard, so it
+   * is judged by whether the shards that did not return it reported more buckets (the rule that
+   * applies to every bucket when processEmpty is off): here two shards answer the leaf request for
+   * pY, each reporting more child buckets than the child limit, so a child bucket returned by only
+   * one of them is incomplete and dropped, even though the other shard holds the same value below
+   * its cut-off. Only cBoth, returned by both, survives.
+   *
+   * @see #testProcessEmptySubFacetBucketsFirstSeenDuringRefinement
+   */
+  @Test
+  public void testProcessEmptyLateBucketsJudgedByShardMore() throws Exception {
+    final int numDocs = initDocsWhereTwoShardsAnswerParentLeafWithChildren();
+    final Client client = servers.getClient(random().nextInt());
+    final List<SolrClient> clients = client.getClientProvider().all();
+    final int numClients = clients.size();
+
+    assertTrue(numClients >= 3); // we need 2 shards answering the same leaf request, plus client 0
+
+    client.testJQ(
+        params(
+            "q",
+            "*:*",
+            "rows",
+            "0",
+            "json.facet",
+            "{"
+                + "processEmpty:true,"
+                + "parent:{ type:terms, field:parent_s, limit:2, overrequest:0, refine:true, facet:{"
+                + "  processEmpty:true,"
+                + "  debug:'debug(numShards)',"
+                + "  child:{ type:terms, field:child_s, limit:2, overrequest:0, refine: true,"
+                + "          facet:{ processEmpty:true, debug:'debug(numShards)' } }"
+                + "} } }"),
+        "facets=={ count: "
+            + numDocs
+            + ","
+            + "  parent:{ buckets:[ "
+            + "    { val:pY, count: 63,"
+            + "      debug:"
+            + numClients
+            + ", "
+            + "      child:{ buckets:[ "
+            + "                   {val:cBoth,count:11, debug:2},"
+            + "      ] } },"
+            + "    { val:pA, count: 30,"
+            + "      debug:"
+            + numClients
+            + ", "
+            + "      child:{ buckets:[] } },"
+            + "  ] } }");
+  }
+
+  /**
+   * The same data as {@link #testProcessEmptyLateBucketsJudgedByShardMore} with one more facet
+   * level: the grandchild buckets under cBoth live in a merger that is only created when the first
+   * leaf answer for pY is merged, after refinement has already started. They are still buckets
+   * first seen during refinement, so they are judged by the same rule; the grandchild limit is high
+   * enough that neither leaf answer reports more, so every grandchild bucket is returned.
+   *
+   * @see #testProcessEmptyLateBucketsJudgedByShardMore
+   */
+  @Test
+  public void testProcessEmptyGrandBucketsFirstSeenDuringRefinement() throws Exception {
+    final int numDocs = initDocsWhereTwoShardsAnswerParentLeafWithChildren();
+    final Client client = servers.getClient(random().nextInt());
+    final List<SolrClient> clients = client.getClientProvider().all();
+    final int numClients = clients.size();
+
+    assertTrue(numClients >= 3);
+
+    client.testJQ(
+        params(
+            "q",
+            "*:*",
+            "rows",
+            "0",
+            "json.facet",
+            "{"
+                + "processEmpty:true,"
+                + "parent:{ type:terms, field:parent_s, limit:2, overrequest:0, refine:true, facet:{"
+                + "  processEmpty:true,"
+                + "  debug:'debug(numShards)',"
+                + "  child:{ type:terms, field:child_s, limit:2, overrequest:0, refine: true,"
+                + "          facet:{ processEmpty:true, debug:'debug(numShards)',"
+                + "                  grand:{ type:terms, field:grand_s, limit:10, overrequest:0,"
+                + "                          refine: true, facet:{ processEmpty:true } } }"
+                + "} } } }"),
+        "facets=={ count: "
+            + numDocs
+            + ","
+            + "  parent:{ buckets:[ "
+            + "    { val:pY, count: 63,"
+            + "      debug:"
+            + numClients
+            + ", "
+            + "      child:{ buckets:[ "
+            + "                   {val:cBoth,count:11, debug:2,"
+            + "                    grand:{ buckets:[ "
+            + "                             {val:gX,count:5},"
+            + "                             {val:gZ,count:4},"
+            + "                             {val:gY,count:2},"
+            + "                    ] } },"
+            + "      ] } },"
+            + "    { val:pA, count: 30,"
+            + "      debug:"
+            + numClients
+            + ", "
+            + "      child:{ buckets:[] } },"
+            + "  ] } }");
+  }
+
   @Test
   public void testBasicRefinement() throws Exception {
     ModifiableSolrParams p;
