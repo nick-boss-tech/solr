@@ -337,6 +337,50 @@ public class TestJavaBinCodec extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testRepeatedFieldNamesKeepAllValues() throws IOException {
+    SolrInputDocument inputDoc =
+        new SolrInputDocument() {
+          @Override
+          public int size() {
+            return 4;
+          }
+
+          @Override
+          public void writeMap(EntryWriter ew) throws IOException {
+            ew.put("single", "only");
+            ew.put("multi", "value_1");
+            ew.put("multi", "value_2");
+            ew.put("multi", "value_3");
+          }
+        };
+    SolrInputDocument readInputDoc = (SolrInputDocument) getObject(getBytes(inputDoc));
+    assertEquals("only", readInputDoc.getFieldValue("single"));
+    assertEquals(
+        List.of("value_1", "value_2", "value_3"),
+        new ArrayList<>(readInputDoc.getFieldValues("multi")));
+
+    SolrDocument doc =
+        new SolrDocument() {
+          @Override
+          public int size() {
+            return 4;
+          }
+
+          @Override
+          public void writeMap(EntryWriter ew) throws IOException {
+            ew.put("single", "only");
+            ew.put("multi", "value_1");
+            ew.put("multi", "value_2");
+            ew.put("multi", "value_3");
+          }
+        };
+    SolrDocument readDoc = (SolrDocument) getObject(getBytes(doc));
+    assertEquals("only", readDoc.getFieldValue("single"));
+    assertEquals(
+        List.of("value_1", "value_2", "value_3"), new ArrayList<>(readDoc.getFieldValues("multi")));
+  }
+
+  @Test
   public void testReadMapEntryTextStreamSource() throws IOException {
     Map.Entry<Object, Object> entryFromTextDoc1 = getMapFromJavaBinCodec(SOLRJ_DOCS_1);
     Map.Entry<Object, Object> entryFromTextDoc1_clone = getMapFromJavaBinCodec(SOLRJ_DOCS_1);

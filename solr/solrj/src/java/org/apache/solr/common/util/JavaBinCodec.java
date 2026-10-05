@@ -731,7 +731,12 @@ public class JavaBinCodec implements PushWriter {
         fieldName = (String) obj;
       }
       Object fieldVal = readVal(dis);
-      doc.setField(fieldName, fieldVal);
+      if (doc.containsKey(fieldName)) {
+        // a field name repeated in the stream carries further values, as it does in XML
+        doc.addField(fieldName, fieldVal);
+      } else {
+        doc.setField(fieldName, fieldVal);
+      }
     }
     return doc;
   }
@@ -801,7 +806,12 @@ public class JavaBinCodec implements PushWriter {
         fieldName = (String) obj;
       }
       Object fieldVal = readVal(dis);
-      sdoc.setField(fieldName, fieldVal);
+      if (sdoc.containsKey(fieldName)) {
+        // a field name repeated in the stream carries further values, as it does in XML
+        sdoc.addField(fieldName, fieldVal);
+      } else {
+        sdoc.setField(fieldName, fieldVal);
+      }
     }
     return sdoc;
   }
