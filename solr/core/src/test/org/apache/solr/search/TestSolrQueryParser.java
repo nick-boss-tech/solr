@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Random;
 import org.apache.lucene.document.DoublePoint;
 import org.apache.lucene.document.FloatPoint;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.BoostQuery;
@@ -584,6 +585,38 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
     // the negation must still exclude matching documents
     assertQ(
         req("q", "id:12", "fq", "(NOT(eee_s:(X)))", "q.op", "AND"), "//result[@numFound='0']");
+  }
+
+  @Test
+  public void testParenthesizedPureNegativeWithAutoFixDisabled() throws Exception {
+    // SOLR-12212: the assertQ test above runs at the default (latest) luceneMatchVersion, where
+    // autoFixPureNegative already repairs the nested negative while parsing. With the auto-fix
+    // off (the behavior at luceneMatchVersion before 10.2, including the ticket's versions) the
+    // parser itself must leave a lone parenthesized pure-negative top-level under q.op=AND, so
+    // that the makeQueryable fix-up the searcher applies to the top-level query can repair it.
+    final int doc12;
+    try (SolrQueryRequest req = req()) {
+      doc12 = req.getSearcher().getFirstMatch(new Term("id", "12"));
+    }
+    assertTrue("test data must contain id=12", doc12 >= 0);
+    for (String op : new String[] {"AND", "OR"}) {
+      try (SolrQueryRequest req = req("q.op", op)) {
+        QParser parser = QParser.getParser("(NOT(eee_s:(Y)))", req);
+        parser.setAutoFixPureNegative(false);
+        Query fq = QueryUtils.makeQueryable(parser.parse());
+        assertTrue(
+            "q.op=" + op + ": id=12 (eee_s=X) must match the negation of eee_s:Y",
+            req.getSearcher().getDocSet(fq).exists(doc12));
+      }
+      try (SolrQueryRequest req = req("q.op", op)) {
+        QParser parser = QParser.getParser("(NOT(eee_s:(X)))", req);
+        parser.setAutoFixPureNegative(false);
+        Query fq = QueryUtils.makeQueryable(parser.parse());
+        assertFalse(
+            "q.op=" + op + ": id=12 (eee_s=X) must not match the negation of eee_s:X",
+            req.getSearcher().getDocSet(fq).exists(doc12));
+      }
+    }
   }
 
   @Test
