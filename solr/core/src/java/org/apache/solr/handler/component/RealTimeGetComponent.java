@@ -1058,11 +1058,14 @@ public class RealTimeGetComponent extends SearchComponent {
       DocCollection coll = clusterState.getCollection(collection);
 
       Map<String, List<String>> sliceToId = new HashMap<>();
+      List<String> unroutedIds = new ArrayList<>(0);
       for (String id : reqIds.allIds) {
         Slice slice =
             coll.getRouter()
                 .getTargetSlice(id, null, params.get(ShardParams._ROUTE_), params, coll);
         if (slice == null) {
+          // e.g. the implicit router with no _route_: the id says nothing about its shard
+          unroutedIds.add(id);
           continue;
         }
 
@@ -1080,6 +1083,15 @@ public class RealTimeGetComponent extends SearchComponent {
         ShardRequest sreq = createShardRequest(rb, entry.getValue());
         // sreq.shards = new String[]{shard};    // TODO: would be nice if this would work...
         sreq.shards = sliceToShards(rb, collection, shard);
+        sreq.actualShards = sreq.shards;
+
+        rb.addRequest(this, sreq);
+      }
+
+      if (!unroutedIds.isEmpty()) {
+        // ask every shard; the ones without the document simply return nothing
+        ShardRequest sreq = createShardRequest(rb, unroutedIds);
+        sreq.shards = null; // ALL
         sreq.actualShards = sreq.shards;
 
         rb.addRequest(this, sreq);

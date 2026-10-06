@@ -178,6 +178,11 @@ public class CustomCollectionTest extends SolrCloudTestCase {
             .query(collection, new SolrQuery("*:*").setParam(_ROUTE_, "a"))
             .getResults()
             .getNumFound());
+
+    // realtime get without _route_ or shards finds the doc on whichever shard holds it
+    assertNotNull(cluster.getSolrClient().getById(collection, "8"));
+    assertNotNull(cluster.getSolrClient().getById(collection, "6"));
+    assertNull(cluster.getSolrClient().getById(collection, "nosuchid"));
   }
 
   @Test
