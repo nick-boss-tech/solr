@@ -107,6 +107,14 @@ public class SpellCheckCollator {
         tryNo++;
         SolrParams origParams = ultimateResponse.req.getParams();
         ModifiableSolrParams params = new ModifiableSolrParams(origParams);
+        // If a dismax query, don't add unnecessary clauses for scoring. Done before the
+        // spellcheck.collateParam.* overrides so those can set these params explicitly.
+        params.remove(DisMaxParams.TIE);
+        params.remove(DisMaxParams.PF);
+        params.remove(DisMaxParams.PF2);
+        params.remove(DisMaxParams.PF3);
+        params.remove(DisMaxParams.BQ);
+        params.remove(DisMaxParams.BF);
         Iterator<String> origParamIterator = origParams.getParameterNamesIterator();
         int pl = SpellingParams.SPELLCHECK_COLLATE_PARAM_OVERRIDE.length();
         while (origParamIterator.hasNext()) {
@@ -133,13 +141,6 @@ public class SpellCheckCollator {
         params.set(CommonParams.SORT, "_docid_ asc");
         // CursorMark does not like _docid_ sorting, and we don't need it.
         params.remove(CursorMarkParams.CURSOR_MARK_PARAM);
-        // If a dismax query, don't add unnecessary clauses for scoring
-        params.remove(DisMaxParams.TIE);
-        params.remove(DisMaxParams.PF);
-        params.remove(DisMaxParams.PF2);
-        params.remove(DisMaxParams.PF3);
-        params.remove(DisMaxParams.BQ);
-        params.remove(DisMaxParams.BF);
         // Collate testing does not support Grouping (see SOLR-2577)
         params.remove(GroupParams.GROUP);
 

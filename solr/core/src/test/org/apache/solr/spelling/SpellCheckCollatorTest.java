@@ -276,6 +276,60 @@ public class SpellCheckCollatorTest extends SolrTestCaseJ4 {
         "//lst[@name='spellcheck']/lst[@name='collations']/str[@name='collation']='partisan political machine'");
   }
 
+  /** The collation check strips scoring params, but spellcheck.collateParam.* may set them. */
+  public void testCollateParamOverrideOfScoringParams() {
+    // a valid boost query set only for the collation check does not hurt
+    assertQ(
+        reqWithPath(
+            "/spellCheckCompRH",
+            SpellCheckComponent.COMPONENT_NAME,
+            "true",
+            SpellCheckComponent.SPELLCHECK_DICT,
+            "direct",
+            SpellingParams.SPELLCHECK_COUNT,
+            "10",
+            SpellingParams.SPELLCHECK_COLLATE,
+            "true",
+            SpellingParams.SPELLCHECK_MAX_COLLATION_TRIES,
+            "10",
+            SpellingParams.SPELLCHECK_MAX_COLLATIONS,
+            "10",
+            "defType",
+            "edismax",
+            "qf",
+            "teststop",
+            SpellingParams.SPELLCHECK_COLLATE_PARAM_OVERRIDE + "bq",
+            "teststop:political",
+            CommonParams.Q,
+            "partisian politcal mashine"),
+        "//lst[@name='spellcheck']/lst[@name='collations']/str[@name='collation']='parisian political machine'");
+    // an unparseable boost query is now seen by the collation check, which therefore finds no hits
+    assertQ(
+        reqWithPath(
+            "/spellCheckCompRH",
+            SpellCheckComponent.COMPONENT_NAME,
+            "true",
+            SpellCheckComponent.SPELLCHECK_DICT,
+            "direct",
+            SpellingParams.SPELLCHECK_COUNT,
+            "10",
+            SpellingParams.SPELLCHECK_COLLATE,
+            "true",
+            SpellingParams.SPELLCHECK_MAX_COLLATION_TRIES,
+            "10",
+            SpellingParams.SPELLCHECK_MAX_COLLATIONS,
+            "10",
+            "defType",
+            "edismax",
+            "qf",
+            "teststop",
+            SpellingParams.SPELLCHECK_COLLATE_PARAM_OVERRIDE + "bq",
+            "teststop:(",
+            CommonParams.Q,
+            "partisian politcal mashine"),
+        "count(//lst[@name='spellcheck']/lst[@name='collations']/str[@name='collation'])=0");
+  }
+
   @Test
   @SuppressWarnings({"unchecked", "rawtypes"})
   public void testCollateWithFilter() {
