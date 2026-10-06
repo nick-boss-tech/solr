@@ -306,6 +306,8 @@ public class ExtendedDismaxQParser extends QParser {
       List<Clause> normalClauses = new ArrayList<>(clauses.size());
       for (Clause clause : clauses) {
         if (clause.field != null || clause.isPhrase) continue;
+        // the match all docs query must not be run through the pf fields' analyzers (SOLR-3962)
+        if ("*:*".equals(clause.raw)) continue;
         // check for keywords "AND,OR,TO"
         if (clause.isBareWord()) {
           String s = clause.val;
@@ -314,6 +316,8 @@ public class ExtendedDismaxQParser extends QParser {
         }
         normalClauses.add(clause);
       }
+      // nothing to build phrase queries from (e.g. the query is only *:* or fielded clauses)
+      if (normalClauses.isEmpty()) return;
 
       // create a map of {wordGram, [phraseField]}
       final Map<Integer, List<FieldParams>> phraseFieldsByWordGram = new HashMap<>();

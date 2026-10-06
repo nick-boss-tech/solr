@@ -159,6 +159,19 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     }
   }
 
+  /** SOLR-3962: pf must not feed *:* to a tokenizer that splits it into several tokens. */
+  @Test
+  public void testMatchAllDocsWithPhraseFields() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      for (String pf : Arrays.asList("pf", "pf2", "pf3")) {
+        try (SolrQueryRequest req = req("sow", sow, "qf", "id", pf, "name_chars")) {
+          QParser qParser = QParser.getParser("*:*", "edismax", req);
+          assertThat(qParser.getQuery(), isA(MatchAllDocsQuery.class));
+        }
+      }
+    }
+  }
+
   public void testTrailingOperators() throws Exception {
     for (String sow : Arrays.asList("true", "false")) {
       // really just test that exceptions aren't thrown by

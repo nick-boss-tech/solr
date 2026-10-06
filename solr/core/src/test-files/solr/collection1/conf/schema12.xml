@@ -503,6 +503,16 @@
     </analyzer>
   </fieldType>
 
+  <!-- a text field whose query analyzer splits every character into its own token (SOLR-3962) -->
+  <fieldType name="text_chars" class="solr.TextField" positionIncrementGap="100">
+    <analyzer type="index">
+      <tokenizer class="solr.MockTokenizerFactory"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.NGramTokenizerFactory" minGramSize="1" maxGramSize="1"/>
+    </analyzer>
+  </fieldType>
+
   <!-- a text field with the stop filter only on the query analyzer
    -->
   <fieldType name="text_sw" class="solr.TextField" positionIncrementGap="100">
@@ -706,6 +716,7 @@
   <dynamicField name="*_mfacet" type="string" indexed="true" stored="false" multiValued="true"/>
 
   <dynamicField name="*_sw" type="text_sw" indexed="true" stored="true" multiValued="true"/>
+  <dynamicField name="*_chars" type="text_chars" indexed="true" stored="true" multiValued="true"/>
 
   <dynamicField name="*_i" type="int" indexed="true" stored="true"/>
   <dynamicField name="*_is" type="int" indexed="true" stored="true" multiValued="true"/>
