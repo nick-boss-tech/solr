@@ -46,4 +46,23 @@ public class QuerySenderListenerTest extends SolrTestCaseJ4 {
     List<NamedList<Object>> allLists = QuerySenderListener.convertQueriesToList(queries);
     assertEquals(allLists.size(), 2);
   }
+
+  @Test
+  public void testFlatNameValueQueryFromConfigApi() {
+    // "queries": [ ["q", "*:*", "rows", 1] ] is deserialized into lists of lists
+    ArrayList<Object> queries = new ArrayList<Object>();
+    ArrayList<Object> flat = new ArrayList<Object>(List.of("q", "*:*", "rows", 1));
+    queries.add(flat);
+
+    // the same pairs one level deeper
+    ArrayList<Object> wrapper = new ArrayList<Object>();
+    wrapper.add(new ArrayList<Object>(List.of("q", "solr")));
+    queries.add(wrapper);
+
+    List<NamedList<Object>> allLists = QuerySenderListener.convertQueriesToList(queries);
+    assertEquals(2, allLists.size());
+    assertEquals("*:*", allLists.get(0).get("q"));
+    assertEquals(1, allLists.get(0).get("rows"));
+    assertEquals("solr", allLists.get(1).get("q"));
+  }
 }

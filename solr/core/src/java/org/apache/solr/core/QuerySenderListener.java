@@ -105,13 +105,18 @@ public class QuerySenderListener extends AbstractSolrEventListener {
     List<NamedList<Object>> allLists = new ArrayList<NamedList<Object>>();
 
     for (Object o : queries) {
-      if (o instanceof ArrayList) {
+      if (o instanceof ArrayList && isFlatNameValueList((ArrayList<?>) o)) {
+        // JSON from Config API: "queries": [ ["q", "*:*", "rows", 1] ]
+        allLists.add(toNamedList((ArrayList<?>) o));
+      } else if (o instanceof ArrayList) {
         // XML config from solrconfig.xml triggers this path
         for (Object o2 : (ArrayList) o) {
           if (o2 instanceof NamedList) {
             @SuppressWarnings("unchecked")
             NamedList<Object> o3 = (NamedList<Object>) o2;
             allLists.add(o3);
+          } else if (o2 instanceof List && isFlatNameValueList((List<?>) o2)) {
+            allLists.add(toNamedList((List<?>) o2));
           } else {
             // this is triggered by unexpected <str> elements
             // (unexpected <arr> is ignored)
@@ -131,5 +136,24 @@ public class QuerySenderListener extends AbstractSolrEventListener {
     }
 
     return allLists;
+  }
+
+  /** True for a non-empty list of alternating String names and plain (non-collection) values. */
+  private static boolean isFlatNameValueList(List<?> list) {
+    if (list.isEmpty() || list.size() % 2 != 0) return false;
+    for (int i = 0; i < list.size(); i++) {
+      Object item = list.get(i);
+      if (item instanceof List || item instanceof NamedList) return false;
+      if (i % 2 == 0 && !(item instanceof String)) return false;
+    }
+    return true;
+  }
+
+  private static NamedList<Object> toNamedList(List<?> nameValues) {
+    NamedList<Object> nl = new NamedList<>();
+    for (int i = 0; i < nameValues.size(); i += 2) {
+      nl.add((String) nameValues.get(i), nameValues.get(i + 1));
+    }
+    return nl;
   }
 }
