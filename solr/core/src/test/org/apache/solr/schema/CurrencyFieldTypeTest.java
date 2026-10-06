@@ -146,6 +146,18 @@ public class CurrencyFieldTypeTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testConvertAmountRoundsInsteadOfTruncating() {
+    // 2554.55 in a 2-digit currency to a 0-digit currency: 2555, not 2554
+    assertEquals(2555L, CurrencyValue.convertAmount(1.0, 2, 255455L, 0));
+    // 2555 KRW (0 digits) at 1116.071429 per USD is 2.2893 USD: 229 cents, not 228
+    assertEquals(229L, CurrencyValue.convertAmount(1.0 / 1116.071429, 0, 2555L, 2));
+    // exact digit shifts stay exact
+    assertEquals(300L, CurrencyValue.convertAmount(1.0, 0, 3L, 2));
+    assertEquals(3L, CurrencyValue.convertAmount(1.0, 2, 300L, 0));
+    assertEquals(7L, CurrencyValue.convertAmount(1.0, 2, 700L, 0));
+  }
+
+  @Test
   public void testMockExchangeRateProvider() {
     assumeTrue(
         "This test is only applicable to the mock exchange rate provider",

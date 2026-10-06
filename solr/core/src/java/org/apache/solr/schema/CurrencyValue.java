@@ -137,19 +137,13 @@ public class CurrencyValue implements Comparable<CurrencyValue> {
     int digitDelta = targetFractionDigits - sourceFractionDigits;
     double value = ((double) sourceAmount * exchangeRate);
 
-    if (digitDelta != 0) {
-      if (digitDelta < 0) {
-        for (int i = 0; i < -digitDelta; i++) {
-          value *= 0.1;
-        }
-      } else {
-        for (int i = 0; i < digitDelta; i++) {
-          value *= 10.0;
-        }
-      }
+    if (digitDelta < 0) {
+      value /= Math.pow(10.0, -digitDelta);
+    } else if (digitDelta > 0) {
+      value *= Math.pow(10.0, digitDelta);
     }
 
-    return (long) value;
+    return Math.round(value);
   }
 
   /**
