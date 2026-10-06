@@ -45,6 +45,11 @@ public class SolrKnnFloatVectorQuery extends KnnFloatVectorQuery {
     this.topK = topK;
   }
 
+  /** The number of results requested by the user; each shard returns up to this many. */
+  public int getTopK() {
+    return topK;
+  }
+
   @Override
   protected TopDocs mergeLeafResults(TopDocs[] perLeafResults) {
     return TopDocs.merge(topK, perLeafResults);

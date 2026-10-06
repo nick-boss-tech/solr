@@ -122,6 +122,8 @@ import org.apache.solr.search.grouping.endresulttransformer.MainEndResultTransfo
 import org.apache.solr.search.grouping.endresulttransformer.SimpleEndResultTransformer;
 import org.apache.solr.search.stats.LocalStatsCache;
 import org.apache.solr.search.stats.StatsCache;
+import org.apache.solr.search.vector.SolrKnnByteVectorQuery;
+import org.apache.solr.search.vector.SolrKnnFloatVectorQuery;
 import org.apache.solr.util.SolrPluginUtils;
 import org.apache.solr.util.SolrResponseUtil;
 import org.slf4j.Logger;
@@ -1012,8 +1014,14 @@ public class QueryComponent extends SearchComponent {
 
     // Merge the docs via a priority queue so we don't have to sort *all* of the
     // documents... we only need to order the top (rows+start)
+    // A knn query returns up to topK hits from every shard, but the user asked for topK overall
+    final int knnTopK = getKnnTopK(rb.getQuery());
+    int queueSize = ss.getOffset() + ss.getCount();
+    if (knnTopK > 0 && sort == null) {
+      queueSize = Math.min(queueSize, knnTopK);
+    }
     final ShardDocQueue shardDocQueue =
-        newShardDocQueue(rb.req.getSearcher(), sortFields, ss.getOffset() + ss.getCount());
+        newShardDocQueue(rb.req.getSearcher(), sortFields, queueSize);
 
     NamedList<Object> shardInfo = null;
     if (rb.req.getParams().getBool(ShardParams.SHARDS_INFO, false)) {
@@ -1227,6 +1235,10 @@ public class QueryComponent extends SearchComponent {
       } // end for-each-doc-in-response
     } // end for-each-response
 
+    if (knnTopK > 0) {
+      numFound = Math.min(numFound, knnTopK);
+    }
+
     // Add hits for distributed requests
     // https://issues.apache.org/jira/browse/SOLR-3518
     rb.rsp.addToLog("hits", numFound);
@@ -1278,6 +1290,17 @@ public class QueryComponent extends SearchComponent {
           .getResponseHeader()
           .add(AbstractReRankQuery.RERANK_CUTOFF_BY_SHARD_RESPONSE_HEADER_KEY, reRankCutoffByShard);
     }
+  }
+
+  /** Returns the topK of a top-level knn query, or -1 when the query is not one. */
+  private static int getKnnTopK(Query query) {
+    if (query instanceof SolrKnnFloatVectorQuery knn) {
+      return knn.getTopK();
+    }
+    if (query instanceof SolrKnnByteVectorQuery knn) {
+      return knn.getTopK();
+    }
+    return -1;
   }
 
   protected void setResultIdsAndResponseDocs(
