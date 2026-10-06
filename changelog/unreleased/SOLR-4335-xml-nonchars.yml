@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: SolrJ XML update requests no longer send the illegal characters U+FFFE and U+FFFF, which made the server reject the whole request; they are escaped like the other illegal control characters.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-4335
+    url: https://issues.apache.org/jira/browse/SOLR-4335
