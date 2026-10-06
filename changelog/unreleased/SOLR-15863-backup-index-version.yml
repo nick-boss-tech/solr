@@ -1,0 +1,8 @@
+title: >
+  backup properties now record the oldest Lucene version of the backed up segments instead of the running Lucene version.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15863
+    url: https://issues.apache.org/jira/browse/SOLR-15863
