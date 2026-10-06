@@ -80,8 +80,12 @@ public class TestDefaultStatsCache extends BaseDistributedSearchTestCase {
     }
     dfQuery("q", "a_t:one a_t:four", "debugQuery", "true", "fl", "*,score");
 
+    checkGroupedScores();
     checkDistribStatsException();
   }
+
+  /** Hook for stats caches that must score grouped results with the global stats. */
+  protected void checkGroupedScores() throws Exception {}
 
   // in this case, as the number of shards increases, per-shard scores begin to
   // diverge due to the different docFreq-s per shard.
