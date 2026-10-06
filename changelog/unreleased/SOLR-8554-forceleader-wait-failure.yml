@@ -1,0 +1,10 @@
+title: >
+  FORCELEADER now returns an error when no active leader appears within the wait (it used to log at INFO
+  and report success), when the shard is removed meanwhile (it used to throw a NullPointerException), and
+  restores the interrupt flag when interrupted.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-8554
+    url: https://issues.apache.org/jira/browse/SOLR-8554
