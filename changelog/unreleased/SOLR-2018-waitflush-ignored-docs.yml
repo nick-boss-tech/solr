@@ -1,0 +1,8 @@
+title: "Document that the waitFlush commit/optimize option is ignored by Solr (SolrClient javadoc and the commit stream decorator reference)"
+type: other
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-2018
+    url: https://issues.apache.org/jira/browse/SOLR-2018
