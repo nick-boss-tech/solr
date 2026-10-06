@@ -1,0 +1,8 @@
+title: >
+  The collection RESTORE command now waits until every replica of the restored collection is active before it returns; pass waitForFinalState=false to restore the old behaviour.
+type: changed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9598
+    url: https://issues.apache.org/jira/browse/SOLR-9598
