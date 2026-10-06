@@ -1,0 +1,10 @@
+title: >
+  Replication handler confFiles on the leader accepts * and ? in the file name part (for example
+  managed-resources/_schema_analysis_*.json), so managed synonyms, stopwords and their language variants
+  replicate without listing each file.
+type: added
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9382
+    url: https://issues.apache.org/jira/browse/SOLR-9382
