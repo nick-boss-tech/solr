@@ -1,0 +1,8 @@
+title: >
+  ZkController.getLeader restores the thread's interrupt status when interrupted, no longer logs and rethrows, and names the collection and a remedy in its error.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9155
+    url: https://issues.apache.org/jira/browse/SOLR-9155
