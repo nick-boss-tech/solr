@@ -1,0 +1,8 @@
+title: >
+  ZkClientClusterStateProvider.close() now closes the provider even when it never connected, so a later use cannot open a ZooKeeper connection that nothing closes.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-3865
+    url: https://issues.apache.org/jira/browse/SOLR-3865
