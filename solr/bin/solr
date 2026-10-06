@@ -453,6 +453,8 @@ function print_usage() {
 function spinner() {
   local pid=$1
   local delay=0.5
+  # some platforms (e.g. AIX) only accept whole seconds for sleep
+  sleep "$delay" 2>/dev/null || delay=1
   # shellcheck disable=SC1003
   local spinstr='|/-\'
   while ps -o pid='' -p "$pid" &> /dev/null ; do

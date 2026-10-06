@@ -131,3 +131,23 @@ teardown() {
   # Verify the techproducts configset was uploaded
   config_exists "techproducts"
 }
+
+@test "spinner falls back to whole-second sleeps when sleep rejects fractions" {
+  # a sleep that only accepts integers, as on AIX
+  local fakebin="${BATS_TEST_TMPDIR}/fakebin"
+  mkdir -p "${fakebin}"
+  cat > "${fakebin}/sleep" <<'SLEEP'
+#!/bin/bash
+case "$1" in
+  *[!0-9]*) echo "sleep: invalid argument: $1" >&2; exit 1 ;;
+esac
+exec /bin/sleep "$1"
+SLEEP
+  chmod +x "${fakebin}/sleep"
+
+  # run just the spinner function of bin/solr against a short-lived process
+  sed -n '/^function spinner() {/,/^}/p' "${SOLR_TIP}/bin/solr" > "${BATS_TEST_TMPDIR}/spinner.sh"
+  run bash -c "source '${BATS_TEST_TMPDIR}/spinner.sh'; PATH='${fakebin}':\$PATH; /bin/sleep 2 & spinner \$!"
+  assert_success
+  refute_output --partial 'invalid argument'
+}
