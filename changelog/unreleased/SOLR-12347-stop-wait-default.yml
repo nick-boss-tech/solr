@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: The default SOLR_STOP_WAIT is now 600 seconds (was 180) so nodes with many cores can stop gracefully; SOLR_START_WAIT keeps its 180 second default.
+type: changed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-12347
+    url: https://issues.apache.org/jira/browse/SOLR-12347
