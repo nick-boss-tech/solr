@@ -19,8 +19,10 @@ package org.apache.solr.client.solrj.beans;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.XMLResponseParser;
@@ -165,6 +167,33 @@ public class TestDocumentObjectBinder extends SolrTestCase {
       }
     }
     return doc;
+  }
+
+  @Test
+  public void testSetFields() {
+    DocumentObjectBinder binder = new DocumentObjectBinder();
+    SolrDocument d = new SolrDocument();
+    d.setField("id", "s1");
+    d.setField("tags", List.of("b", "a", "b"));
+    d.setField("single", "x");
+    SolrDocumentList docs = new SolrDocumentList();
+    docs.add(d);
+
+    SetItem item = binder.getBeans(SetItem.class, docs).get(0);
+    assertEquals(new LinkedHashSet<>(List.of("b", "a")), item.tags);
+    assertEquals(List.of("b", "a"), List.copyOf(item.tags));
+    assertEquals(Set.of("x"), item.single);
+
+    SolrInputDocument out = binder.toSolrInputDocument(item);
+    assertEquals(2, out.getField("tags").getValueCount());
+  }
+
+  public static class SetItem {
+    @Field String id;
+
+    @Field Set<String> tags;
+
+    @Field LinkedHashSet<String> single;
   }
 
   public static class Item {

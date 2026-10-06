@@ -29,10 +29,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
@@ -189,6 +192,7 @@ public class DocumentObjectBinder {
     private Class<?> type;
     private boolean isArray;
     private boolean isList;
+    private boolean isSet;
     private List<DocField> child;
 
     /*
@@ -292,6 +296,12 @@ public class DocumentObjectBinder {
         } else {
           type = Object.class;
         }
+      } else if (type == Set.class || type == HashSet.class || type == LinkedHashSet.class) {
+        if (annotation.child()) {
+          throw new BindingException("Set is not a valid type for a child document");
+        }
+        isSet = true;
+        type = Object.class;
       } else if (type == byte[].class) {
         // no op
       } else if (type.isArray()) {
@@ -485,6 +495,14 @@ public class DocumentObjectBinder {
           val = list;
         }
         set(obj, val);
+      } else if (isSet && !isContainedInMap) {
+        Set<Object> set = new LinkedHashSet<>();
+        if (val instanceof Collection) {
+          set.addAll((Collection<?>) val);
+        } else {
+          set.add(val);
+        }
+        set(obj, set);
       } else if (isContainedInMap) {
         if (val instanceof Map) {
           set(obj, val);
