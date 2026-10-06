@@ -17,6 +17,7 @@
 package org.apache.solr.client.solrj.beans;
 
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -76,6 +77,27 @@ public class TestDocumentObjectBinder extends SolrTestCase {
     d.setField("cat", "hello");
     List<Item> l = binder.getBeans(Item.class, solDocList);
     assertEquals("hello", l.get(0).categories[0]);
+  }
+
+  public static class OrderedDynamicBean {
+    @Field("ord_*")
+    Map<String, String> ordered;
+  }
+
+  @Test
+  public void testDynamicFieldMapKeepsDocumentOrder() {
+    SolrDocument doc = new SolrDocument();
+    List<String> expected = new ArrayList<>();
+    // descending names so that a HashMap iteration order differs from the insertion order
+    for (int i = 40; i > 0; i--) {
+      String name = "ord_" + i;
+      doc.addField(name, "v" + i);
+      expected.add(name);
+    }
+
+    OrderedDynamicBean bean = new DocumentObjectBinder().getBean(OrderedDynamicBean.class, doc);
+
+    assertEquals(expected, new ArrayList<>(bean.ordered.keySet()));
   }
 
   @Test
