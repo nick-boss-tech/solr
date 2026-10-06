@@ -1,0 +1,8 @@
+title: >
+  The SQL handler now passes the request's fq parameters through as filter queries on every Solr query a statement is translated into (select, stats, group by).
+type: added
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9148
+    url: https://issues.apache.org/jira/browse/SOLR-9148
