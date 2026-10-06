@@ -1,0 +1,8 @@
+title: >
+  TopicStream reads persisted checkpoints and slice checkpoints through the stream's own SolrClientCache instead of the stream context's, which may be null.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-10322
+    url: https://issues.apache.org/jira/browse/SOLR-10322
