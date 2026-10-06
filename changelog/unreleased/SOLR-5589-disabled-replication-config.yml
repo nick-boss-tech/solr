@@ -1,0 +1,8 @@
+title: >
+  ReplicationHandler configured with leader and follower sections that are all enable=false now starts with replication disabled instead of falling back to the default leader.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-5589
+    url: https://issues.apache.org/jira/browse/SOLR-5589
