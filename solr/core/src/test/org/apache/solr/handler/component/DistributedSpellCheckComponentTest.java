@@ -157,6 +157,16 @@ public class DistributedSpellCheckComponentTest extends BaseDistributedSearchTes
             "true",
             count,
             "4"));
+    // the same queries without extended results; the coordinator output must be identical.
+    // The frequency tie-break these exercise is proven in testShardMergeRanksTiesByFrequency,
+    // whose tied suggestions have distinct frequencies in an order the unpatched merge
+    // returns reversed.
+    query(
+        requestHandlerName,
+        buildRequest("bluo", true, requestHandlerName, random().nextBoolean(), count, "4"));
+    query(
+        requestHandlerName,
+        buildRequest("rud", true, requestHandlerName, random().nextBoolean(), count, "4"));
 
     // Test Collate functionality
     query(
@@ -402,6 +412,46 @@ public class DistributedSpellCheckComponentTest extends BaseDistributedSearchTes
             // test.expected.suggestions
             "echoParams",
             "all"));
+  }
+
+  @Test
+  public void testShardMergeRanksTiesByFrequency() throws Exception {
+    del("*:*");
+    // Four terms at edit distance 1 from the query token "zxrnt", all of the same length, so
+    // their scores tie and only frequency can order them:
+    // zornt (11 docs) > zirnt (8) > zernt (5) > zarnt (2). The query does not request
+    // extendedResults, so unless the shards still report frequencies the coordinator merge
+    // ranks the ties with every frequency at 0 and returns them in the wrong order.
+    String[] words = {"zarnt", "zernt", "zirnt", "zornt"};
+    int[] freqs = {2, 5, 8, 11};
+    int docNum = 100;
+    for (int w = 0; w < words.length; w++) {
+      for (int i = 0; i < freqs[w]; i++) {
+        index(id, String.valueOf(docNum++), "lowerfilt", words[w]);
+      }
+    }
+    commit();
+
+    handle.clear();
+    handle.put("timestamp", SKIPVAL);
+    handle.put("maxScore", SKIPVAL);
+    // we care only about the spellcheck results
+    handle.put("responseHeader", SKIP);
+    handle.put("response", SKIP);
+    handle.put("grouped", SKIP);
+
+    String build = SpellingParams.SPELLCHECK_BUILD;
+    String count = SpellingParams.SPELLCHECK_COUNT;
+
+    // Build the dictionary for IndexBasedSpellChecker
+    q("/spellCheckCompRH", buildRequest("*:*", false, "/spellCheckCompRH", false, build, "true"));
+
+    // exercise both spellcheckers: IndexBased ("default" dictionary) and Direct
+    query(
+        "/spellCheckCompRH", buildRequest("zxrnt", true, "/spellCheckCompRH", false, count, "10"));
+    query(
+        "/spellCheckCompRH_Direct",
+        buildRequest("zxrnt", true, "/spellCheckCompRH_Direct", false, count, "10"));
   }
 
   private SolrParams buildRequest(

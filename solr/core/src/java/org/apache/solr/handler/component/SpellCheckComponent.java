@@ -156,7 +156,9 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
         int count = params.getInt(SPELLCHECK_COUNT, 1);
         boolean onlyMorePopular =
             params.getBool(SPELLCHECK_ONLY_MORE_POPULAR, DEFAULT_ONLY_MORE_POPULAR);
-        boolean extendedResults = params.getBool(SPELLCHECK_EXTENDED_RESULTS, false);
+        // shards always report frequencies: the merge on the coordinator ranks by them
+        boolean extendedResults =
+            shardRequest || params.getBool(SPELLCHECK_EXTENDED_RESULTS, false);
         boolean collate = params.getBool(SPELLCHECK_COLLATE, false);
         float accuracy = params.getFloat(SPELLCHECK_ACCURACY, Float.MIN_VALUE);
         int alternativeTermCount =
