@@ -494,6 +494,26 @@ public class CollectionsAPISolrJTest extends SolrCloudTestCase {
         c -> c.getSlice("shard1").getReplica(newReplica.getName()) == null);
   }
 
+  @Test
+  public void testAddReplicaWithCoreNodeNameProperty() throws Exception {
+    String collectionName = getSaferTestName();
+    CollectionAdminRequest.createCollection(collectionName, "conf", 1, 1)
+        .process(cluster.getSolrClient());
+    cluster.waitForActiveCollection(collectionName, 1, 1);
+
+    final String coreNodeName = "user_assigned_node_name";
+    CollectionAdminResponse response =
+        CollectionAdminRequest.addReplicaToShard(collectionName, "shard1")
+            .withProperty("coreNodeName", coreNodeName)
+            .process(cluster.getSolrClient());
+    assertEquals(0, response.getStatus());
+
+    cluster.waitForActiveCollection(collectionName, 1, 2);
+    Replica newReplica =
+        getCollectionState(collectionName).getSlice("shard1").getReplica(coreNodeName);
+    assertNotNull("replica named by property.coreNodeName not found", newReplica);
+  }
+
   private Replica grabNewReplica(CollectionAdminResponse response, DocCollection docCollection) {
     String replicaName = response.getCollectionCoresStatus().keySet().iterator().next();
     Optional<Replica> optional =

@@ -355,6 +355,10 @@ public class AddReplicaCmd implements CollApiCmds.CollectionApiCommand {
     if (StrUtils.isBlank(coreName)) {
       coreName = message.getStr(CoreAdminParams.PROPERTY_PREFIX + CoreAdminParams.NAME);
     }
+    if (StrUtils.isBlank(coreNodeName)) {
+      coreNodeName =
+          message.getStr(CoreAdminParams.PROPERTY_PREFIX + CoreAdminParams.CORE_NODE_NAME);
+    }
 
     log.info(
         "Node Identified {} for creating new replica of shard {} for collection {}",
