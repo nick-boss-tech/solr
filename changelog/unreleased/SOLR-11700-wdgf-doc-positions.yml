@@ -1,0 +1,8 @@
+title: >
+  Ref guide: WordDelimiterGraphFilter examples now show the real token positions of concatenated tokens.
+type: other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-11700
+    url: https://issues.apache.org/jira/browse/SOLR-11700
