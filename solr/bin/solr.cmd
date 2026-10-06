@@ -893,11 +893,14 @@ IF NOT EXIST "%SOLR_HOME%\" (
 )
 
 @REM Handle overriding where logs are written to
-IF [%SOLR_LOGS_DIR%] == [] (
+REM IF DEFINED and delayed expansion keep spaces, parentheses and quotes in the value from breaking the parser
+IF NOT DEFINED SOLR_LOGS_DIR (
   set "SOLR_LOGS_DIR=%SOLR_SERVER_DIR%\logs"
 ) ELSE (
-  set SOLR_LOGS_DIR=%SOLR_LOGS_DIR:"=%
+  set "SOLR_LOGS_DIR=!SOLR_LOGS_DIR:"=!"
 )
+REM A value left empty by the quote stripping above counts as unset, as the old bracket test treated an empty value
+IF "!SOLR_LOGS_DIR!"=="" set "SOLR_LOGS_DIR=%SOLR_SERVER_DIR%\logs"
 
 set "EXAMPLE_DIR=%SOLR_TIP%\example"
 set TMP_SOLR_HOME=!SOLR_HOME:%EXAMPLE_DIR%=!
