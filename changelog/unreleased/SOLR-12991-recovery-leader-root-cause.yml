@@ -1,0 +1,8 @@
+title: >
+  RecoveryStrategy now logs the exception when a recovering replica cannot connect to its leader, at WARN level.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-12991
+    url: https://issues.apache.org/jira/browse/SOLR-12991
