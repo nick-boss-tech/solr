@@ -42,6 +42,7 @@ import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.MultiPhraseQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.TermQuery;
 import org.apache.solr.analysis.TokenizerChain;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
@@ -1465,6 +1466,9 @@ public class ExtendedDismaxQParser extends QParser {
               }
             } else if (query instanceof SpanQuery) {
               return query;
+            } else if (query instanceof TermQuery tq && containsWhitespace(tq.getTerm().text())) {
+              // a non-tokenized field kept the whole phrase as one term, so it does match >1 words
+              return query;
             } else if (minClauseSize > 1) {
               // if it's not a type of phrase query, it doesn't meet the minClauseSize requirements
               return null;
@@ -1486,6 +1490,10 @@ public class ExtendedDismaxQParser extends QParser {
         // for example, passing a string to a numeric field.
         return null;
       }
+    }
+
+    private static boolean containsWhitespace(String s) {
+      return s.chars().anyMatch(Character::isWhitespace);
     }
 
     @SuppressWarnings("ReferenceEquality") // Analyzer identity, not equality, is what matters here

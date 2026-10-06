@@ -3378,6 +3378,15 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         exception.getMessage());
   }
 
+  /** SOLR-2988: a non-tokenized (string) field in pf gets the whole phrase as one term */
+  @Test
+  public void testPfOnNonTokenizedField() throws Exception {
+    try (SolrQueryRequest req = req("qf", "subject title", "pf", "id", "defType", "edismax")) {
+      String parsed = QParser.getParser("hard drive", "edismax", req).getQuery().toString();
+      assertTrue(parsed, parsed.contains("id:hard drive"));
+    }
+  }
+
   /** SOLR-504: a missing or blank "pf" must not add an empty/no-op boolean clause to the query */
   @Test
   public void testPfMissingOrBlankAddsNoEmptyClause() throws Exception {
