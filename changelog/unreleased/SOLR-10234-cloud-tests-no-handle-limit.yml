@@ -1,0 +1,8 @@
+title: "Multi-node test base classes (SolrCloudTestCase, BaseDistributedSearchTestCase) no longer run on Lucene's HandleLimitFS, whose fixed JVM-wide open-file cap caused spurious 'Too many open files' failures"
+type: other
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-10234
+    url: https://issues.apache.org/jira/browse/SOLR-10234
