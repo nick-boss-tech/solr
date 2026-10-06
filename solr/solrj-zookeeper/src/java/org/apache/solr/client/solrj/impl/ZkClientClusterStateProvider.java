@@ -184,14 +184,14 @@ public class ZkClientClusterStateProvider
   @Override
   public void close() throws IOException {
     synchronized (this) {
-      if (false == isClosed && zkStateReader != null) {
+      if (false == isClosed) {
         isClosed = true;
 
         // force zkStateReader to null first so that any parallel calls drop into the synch block
         // getZkStateReader() as soon as possible.
         final ZkStateReader zkToClose = zkStateReader;
         zkStateReader = null;
-        if (closeZkStateReader) {
+        if (closeZkStateReader && zkToClose != null) {
           zkToClose.close();
         }
       }
