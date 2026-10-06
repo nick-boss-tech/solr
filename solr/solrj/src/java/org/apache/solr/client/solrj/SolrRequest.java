@@ -262,6 +262,13 @@ public abstract class SolrRequest<T> implements Serializable {
   }
 
   /**
+   * Called by {@link #process(SolrClient, String)} when the caller names a collection explicitly,
+   * before the request is sent. Requests whose {@link #requiresCollection()} is configurable can
+   * use it to honor the collection they were given. Does nothing by default.
+   */
+  protected void collectionProvided(String collection) {}
+
+  /**
    * Indicates which API version this request will make
    *
    * <p>Defaults implementation returns 'V1'.
@@ -300,6 +307,9 @@ public abstract class SolrRequest<T> implements Serializable {
    */
   public final T process(SolrClient client, String collection)
       throws SolrServerException, IOException {
+    if (collection != null) {
+      collectionProvided(collection);
+    }
     long startNanos = System.nanoTime();
     var namedList = client.request(this, collection);
     long endNanos = System.nanoTime();

@@ -31,6 +31,7 @@ public class GenericSolrRequest extends SolrRequest<SimpleSolrResponse> {
   public SimpleSolrResponse response = new SimpleSolrResponse();
   public ContentWriter contentWriter;
   public boolean requiresCollection;
+  private boolean requiresCollectionSet;
 
   /**
    * @param m the HTTP method to use for this request
@@ -88,7 +89,19 @@ public class GenericSolrRequest extends SolrRequest<SimpleSolrResponse> {
    */
   public GenericSolrRequest setRequiresCollection(boolean requiresCollection) {
     this.requiresCollection = requiresCollection;
+    this.requiresCollectionSet = true;
     return this;
+  }
+
+  /**
+   * A collection named in {@code process(client, collection)} makes the request collection-aware,
+   * unless {@link #setRequiresCollection(boolean)} was called explicitly.
+   */
+  @Override
+  protected void collectionProvided(String collection) {
+    if (!requiresCollectionSet) {
+      requiresCollection = true;
+    }
   }
 
   @Override
