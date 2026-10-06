@@ -33,6 +33,7 @@ import org.apache.lucene.search.spell.HighFrequencyDictionary;
 import org.apache.lucene.search.spell.PlainTextDictionary;
 import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.Directory;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.SolrCore;
@@ -59,6 +60,15 @@ public class FileBasedSpellChecker extends AbstractLuceneSpellChecker {
   @Override
   public String init(NamedList<?> config, SolrCore core) {
     super.init(config, core);
+    if (sourceLocation == null) {
+      throw new SolrException(
+          SolrException.ErrorCode.SERVER_ERROR,
+          "FileBasedSpellChecker '"
+              + name
+              + "' requires the '"
+              + LOCATION
+              + "' parameter naming the dictionary file");
+    }
     characterEncoding = (String) config.get(SOURCE_FILE_CHAR_ENCODING);
     return name;
   }

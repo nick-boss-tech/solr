@@ -25,6 +25,7 @@ import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.tests.util.LuceneTestCase;
 import org.apache.lucene.tests.util.LuceneTestCase.SuppressTempFileChecks;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.SolrCore;
 import org.junit.AfterClass;
@@ -63,6 +64,20 @@ public class FileBasedSpellCheckerTest extends SolrTestCaseJ4 {
   /** A stream that emits exactly one token whose term text is empty. */
   private static TokenStream singleEmptyTermTokenStream() {
     return new KeywordAnalyzer().tokenStream("", "");
+  }
+
+  @Test
+  public void testMissingSourceLocationIsRejected() {
+    FileBasedSpellChecker checker = new FileBasedSpellChecker();
+    NamedList<Object> spellchecker = new NamedList<>();
+    spellchecker.add("classname", FileBasedSpellChecker.class.getName());
+    spellchecker.add(SolrSpellChecker.DICTIONARY_NAME, "nolocation");
+    spellchecker.add(AbstractLuceneSpellChecker.FIELD, "teststop");
+
+    SolrException e =
+        expectThrows(SolrException.class, () -> checker.init(spellchecker, h.getCore()));
+    assertTrue(e.getMessage(), e.getMessage().contains(AbstractLuceneSpellChecker.LOCATION));
+    assertTrue(e.getMessage(), e.getMessage().contains("nolocation"));
   }
 
   @Test
