@@ -3378,6 +3378,114 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         exception.getMessage());
   }
 
+  /** SOLR-2988: a non-tokenized (string) field in pf gets the whole phrase as one term */
+  @Test
+  public void testPfOnNonTokenizedField() throws Exception {
+    try (SolrQueryRequest req = req("qf", "subject title", "pf", "id", "defType", "edismax")) {
+      String parsed = QParser.getParser("hard drive", "edismax", req).getQuery().toString();
+      assertTrue(parsed, parsed.contains("id:hard drive"));
+    }
+  }
+
+  /**
+   * SOLR-2988: the pf boost on a non-tokenized (string) field must change the score of a document
+   * whose field value equals the whole phrase, not just appear in the parsed query. Both documents
+   * have identical subject content, so only the pf clause can separate them; the control document
+   * is indexed first, so with the boost dropped (the bug) the tie on score returns it first.
+   */
+  @Test
+  public void testPfBoostScoresOnNonTokenizedField() throws Exception {
+    try {
+      assertU(adoc("id", "2988pfctl", "subject", "hard drive", "name", "pf2988marker"));
+      assertU(adoc("id", "hard drive", "subject", "hard drive", "name", "pf2988marker"));
+      assertU(commit());
+
+      // without pf the two documents tie on score and stay in index order
+      assertQ(
+          req(
+              "q", "hard drive",
+              "qf", "subject",
+              "defType", "edismax",
+              "fq", "name:pf2988marker",
+              "fl", "id,score"),
+          "//result[@numFound='2']",
+          "//doc[1]/str[@name='id'][.='2988pfctl']",
+          "//doc[2]/str[@name='id'][.='hard drive']");
+
+      // with pf=id the document whose id equals the phrase is boosted to the top
+      assertQ(
+          req(
+              "q", "hard drive",
+              "qf", "subject",
+              "pf", "id^10",
+              "defType", "edismax",
+              "fq", "name:pf2988marker",
+              "fl", "id,score"),
+          "//result[@numFound='2']",
+          "//doc[1]/str[@name='id'][.='hard drive']",
+          "//doc[2]/str[@name='id'][.='2988pfctl']");
+    } finally {
+      assertU(delQ("name:pf2988marker"));
+      assertU(commit());
+    }
+  }
+
+  /**
+   * SOLR-2988: pf2 and pf3 build their shingles from the same clause text as pf, so a shingle that
+   * lands on a non-tokenized (string) field must also survive as a whole-value term and boost the
+   * document whose field value equals the shingle.
+   */
+  @Test
+  public void testPf2Pf3OnNonTokenizedField() throws Exception {
+    // parse level: each shingle size produces its whole-value terms on the string field
+    try (SolrQueryRequest req = req("qf", "subject title", "pf2", "id", "defType", "edismax")) {
+      String parsed = QParser.getParser("solid state drive", "edismax", req).getQuery().toString();
+      assertTrue(parsed, parsed.contains("id:solid state"));
+      assertTrue(parsed, parsed.contains("id:state drive"));
+    }
+    try (SolrQueryRequest req = req("qf", "subject title", "pf3", "id", "defType", "edismax")) {
+      String parsed = QParser.getParser("solid state drive", "edismax", req).getQuery().toString();
+      assertTrue(parsed, parsed.contains("id:solid state drive"));
+    }
+
+    // score level: each shingle size boosts the document whose id equals that shingle; all three
+    // documents have identical subject content and the control is indexed first, so with the boost
+    // dropped (the bug) every query below returns the control document first
+    try {
+      assertU(adoc("id", "2988ctl23", "subject", "solid state drive", "name", "pf2988marker23"));
+      assertU(adoc("id", "solid state", "subject", "solid state drive", "name", "pf2988marker23"));
+      assertU(
+          adoc(
+              "id", "solid state drive", "subject", "solid state drive", "name", "pf2988marker23"));
+      assertU(commit());
+
+      assertQ(
+          req(
+              "q", "solid state drive",
+              "qf", "subject",
+              "pf2", "id^10",
+              "defType", "edismax",
+              "fq", "name:pf2988marker23",
+              "fl", "id,score"),
+          "//result[@numFound='3']",
+          "//doc[1]/str[@name='id'][.='solid state']");
+
+      assertQ(
+          req(
+              "q", "solid state drive",
+              "qf", "subject",
+              "pf3", "id^10",
+              "defType", "edismax",
+              "fq", "name:pf2988marker23",
+              "fl", "id,score"),
+          "//result[@numFound='3']",
+          "//doc[1]/str[@name='id'][.='solid state drive']");
+    } finally {
+      assertU(delQ("name:pf2988marker23"));
+      assertU(commit());
+    }
+  }
+
   /** SOLR-504: a missing or blank "pf" must not add an empty/no-op boolean clause to the query */
   @Test
   public void testPfMissingOrBlankAddsNoEmptyClause() throws Exception {
