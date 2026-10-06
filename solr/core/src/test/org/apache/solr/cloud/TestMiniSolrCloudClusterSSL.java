@@ -21,7 +21,6 @@ import java.util.List;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLException;
 import org.apache.lucene.tests.util.TestRuleRestoreSystemProperties;
-import org.apache.lucene.util.Constants;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -119,8 +118,6 @@ public class TestMiniSolrCloudClusterSSL extends SolrTestCaseJ4 {
   }
 
   public void testSslAndClientAuth() throws Exception {
-    assumeFalse("SOLR-9039: SSL w/clientAuth does not work on MAC_OS_X", Constants.MAC_OS_X);
-
     final SSLTestConfig sslConfig = new SSLTestConfig(true, true);
 
     HttpJettySolrClient.setDefaultSSLConfig(sslConfig.buildClientSSLConfig());
