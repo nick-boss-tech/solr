@@ -27,6 +27,8 @@ import java.util.Set;
  * @since solr 1.3
  */
 public class SolrInputField implements Iterable<Object>, Serializable {
+  private static final long serialVersionUID = 1L;
+
   String name;
   Object value = null; // TODO SOLR-15532 investigate if this can be a Collection
 

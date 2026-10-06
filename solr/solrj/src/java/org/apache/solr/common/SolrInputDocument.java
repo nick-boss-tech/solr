@@ -35,6 +35,8 @@ import org.apache.solr.common.params.CommonParams;
  */
 public class SolrInputDocument extends SolrDocumentBase<SolrInputField, SolrInputDocument>
     implements Iterable<SolrInputField> {
+  private static final long serialVersionUID = 1L;
+
   private final Map<String, SolrInputField> _fields;
   private List<SolrInputDocument> _childDocuments;
 

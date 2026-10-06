@@ -23,6 +23,8 @@ import java.util.Map;
 
 public abstract class SolrDocumentBase<T, K> implements Map<String, T>, Serializable, MapWriter {
 
+  private static final long serialVersionUID = 1L;
+
   /** Get all field names. */
   public abstract Collection<String> getFieldNames();
 

@@ -41,6 +41,8 @@ import org.apache.solr.common.util.NamedList;
  */
 public class SolrDocument extends SolrDocumentBase<Object, SolrDocument>
     implements Iterable<Map.Entry<String, Object>> {
+  private static final long serialVersionUID = 1L;
+
   protected final Map<String, Object> _fields;
 
   private List<SolrDocument> _childDocuments;
