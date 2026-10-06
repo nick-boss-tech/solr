@@ -1,0 +1,8 @@
+title: >
+  A node that wins the Overseer election but does not start the Overseer (closed or shutting down) no longer leaves its ephemeral leader registration behind.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-13186
+    url: https://issues.apache.org/jira/browse/SOLR-13186
