@@ -1,0 +1,9 @@
+title: >
+  CoreContainer.create now fails with a clear message when the container has not been loaded,
+  instead of creating a core that later hits a NullPointerException on search.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-4502
+    url: https://issues.apache.org/jira/browse/SOLR-4502
