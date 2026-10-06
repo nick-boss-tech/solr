@@ -1,0 +1,7 @@
+title: "Document in the _default configset's solrconfig.xml why the spellcheck example field (_text_ with text_general) is not a production recommendation."
+type: other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-10252
+    url: https://issues.apache.org/jira/browse/SOLR-10252
