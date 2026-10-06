@@ -190,6 +190,18 @@ public class DisMaxRequestHandlerTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testDanglingBooleanOperator() {
+    // SOLR-874: dismax is supposed to be immune to parse exceptions, so a boolean
+    // operator with no term on one side is dropped instead of failing the query;
+    // each of these must return exactly what the bare "cool" query returns.
+    assertQ("trailing AND", reqWithPath("/dismax", "q", "cool AND"), "//*[@numFound='3']");
+    assertQ("trailing OR", reqWithPath("/dismax", "q", "cool OR"), "//*[@numFound='3']");
+    assertQ("trailing &&", reqWithPath("/dismax", "q", "cool &&"), "//*[@numFound='3']");
+    assertQ("leading OR", reqWithPath("/dismax", "q", "OR cool"), "//*[@numFound='3']");
+    assertQ("leading AND", reqWithPath("/dismax", "q", "AND cool"), "//*[@numFound='3']");
+  }
+
+  @Test
   public void testSubQueriesNotSupported() {
     // See org.apache.solr.search.TestSolrQueryParser.testNestedQueryModifiers()
     assertQ(

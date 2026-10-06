@@ -96,6 +96,30 @@ public class SolrPluginUtilsTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testStripDanglingBooleanOperators() {
+    assertEquals("ipod", stripOp("ipod AND"));
+    assertEquals("ipod", stripOp("ipod OR"));
+    assertEquals("ipod", stripOp("ipod NOT"));
+    assertEquals("ipod", stripOp("ipod &&"));
+    assertEquals("ipod", stripOp("ipod ||"));
+    assertEquals("ipod", stripOp("ipod AND OR"));
+    assertEquals("ipod", stripOp("ipod AND -"));
+    assertEquals("ipod nano", stripOp("OR ipod nano"));
+    assertEquals("ipod", stripOp("AND OR ipod"));
+    assertEquals("ipod", stripOp("&& ipod"));
+
+    // operators between terms are left for the parser
+    assertEquals("ipod AND nano", stripOp("ipod AND nano"));
+    assertEquals("ipod OR nano", stripOp("ipod OR nano"));
+    // lowercase words and operator-like prefixes of words are plain terms
+    assertEquals("ipod and", stripOp("ipod and"));
+    assertEquals("ipod ANDROID", stripOp("ipod ANDROID"));
+    assertEquals("ORACLE ipod", stripOp("ORACLE ipod"));
+    // nothing but an operator is left alone (the caller decides)
+    assertEquals("AND", stripOp("AND"));
+  }
+
+  @Test
   public void testParseFieldBoosts() {
 
     Map<String, Float> e1 = new HashMap<>();

@@ -642,15 +642,24 @@ public class SolrPluginUtils {
   // Pattern to detect consecutive + and/or - operators
   // \s+[+-](?:\s*[+-]+)+
   private static final Pattern CONSECUTIVE_OP_PATTERN = Pattern.compile("\\s+[+-](?:\\s*[+-]+)+");
+  // Pattern to detect boolean operator(s) after the last term, e.g. "ipod AND"
+  private static final Pattern DANGLING_BOOL_PATTERN =
+      Pattern.compile("(?<=\\S)(?:\\s+(?:AND|OR|NOT|&&|\\|\\|))+\\s*$");
+  // Pattern to detect boolean operator(s) before the first term, e.g. "OR ipod"
+  private static final Pattern LEADING_BOOL_PATTERN =
+      Pattern.compile("^\\s*(?:(?:AND|OR|&&|\\|\\|)\\s+)+(?=\\S)");
   protected static final String UNKNOWN_VALUE = "Unknown";
 
   /**
    * Strips operators that are used illegally, otherwise returns its input. Some examples of illegal
-   * user queries are: "chocolate +- chip", "chocolate - - chip", and "chocolate chip -".
+   * user queries are: "chocolate +- chip", "chocolate - - chip", "chocolate chip -", "chocolate
+   * AND", and "OR chocolate".
    */
   public static CharSequence stripIllegalOperators(CharSequence s) {
     String temp = CONSECUTIVE_OP_PATTERN.matcher(s).replaceAll(" ");
-    return DANGLING_OP_PATTERN.matcher(temp).replaceAll("");
+    temp = DANGLING_OP_PATTERN.matcher(temp).replaceAll("");
+    temp = DANGLING_BOOL_PATTERN.matcher(temp).replaceAll("");
+    return LEADING_BOOL_PATTERN.matcher(temp).replaceAll("");
   }
 
   /**
