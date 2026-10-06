@@ -97,6 +97,16 @@ public class RestoreCore implements Callable<Boolean> {
     return doRestore();
   }
 
+  /**
+   * Reads the whole file just copied from the backup and checks it against the checksum in its
+   * footer, so a corrupt backup file fails the restore instead of being switched in.
+   */
+  private static void verifyRestoredFile(Directory dir, String filename) throws IOException {
+    try (IndexInput in = dir.openInput(filename, IOContext.READONCE)) {
+      CodecUtil.checksumEntireFile(in);
+    }
+  }
+
   public boolean doRestore() throws Exception {
     SimpleDateFormat dateFormat = new SimpleDateFormat(SnapShooter.DATE_FMT, Locale.ROOT);
     String restoreIndexName = "restore." + dateFormat.format(new Date());
@@ -167,12 +177,14 @@ public class RestoreCore implements Callable<Boolean> {
                       || (IndexFetcher.filesToAlwaysDownloadIfNoChecksums(
                           filenameFinal, cs.size, compareResult))) {
                     repository.repoCopy(filenameFinal, finalRestoreIndexDir);
+                    verifyRestoredFile(finalRestoreIndexDir, filenameFinal);
                   } else {
                     // prefer local copy
                     repository.localCopy(finalIndexDir, filenameFinal, finalRestoreIndexDir);
                   }
                 } else {
                   repository.repoCopy(filenameFinal, finalRestoreIndexDir);
+                  verifyRestoredFile(finalRestoreIndexDir, filenameFinal);
                 }
               } catch (Exception e) {
                 log.warn("Exception while restoring the backup index ", e);

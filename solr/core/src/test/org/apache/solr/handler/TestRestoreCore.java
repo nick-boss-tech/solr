@@ -230,4 +230,69 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
     nDocs = BackupRestoreUtils.indexDocs(leaderClient, "collection1", docsSeed);
     BackupRestoreUtils.verifyDocs(nDocs, leaderClient, DEFAULT_TEST_CORENAME);
   }
+
+  @Test
+  public void testRestoreRejectsCorruptBackupFile() throws Exception {
+    int nDocs = BackupRestoreUtils.indexDocs(leaderClient, "collection1", docsSeed);
+
+    String location = createTempDir().toString();
+    leaderJetty.getCoreContainer().getAllowPaths().add(Path.of(location));
+    String snapshotName = TestUtil.randomSimpleString(random(), 1, 5);
+    String params =
+        "&name="
+            + snapshotName
+            + "&location="
+            + URLEncoder.encode(location, StandardCharsets.UTF_8);
+    String baseUrl = leaderJetty.getBaseUrl().toString();
+
+    TestReplicationHandlerBackup.runBackupCommand(
+        leaderJetty, ReplicationHandler.CMD_BACKUP, params);
+
+    final BackupStatusChecker backupStatus =
+        new BackupStatusChecker(leaderClient, "/" + DEFAULT_TEST_CORENAME + "/replication");
+    final String backupDirName = backupStatus.waitForBackupSuccess(snapshotName, 30);
+
+    // Flip one byte in the middle of the largest backup file: the footer stays readable, but the
+    // content no longer matches its checksum.
+    final Path backupIndexPath = Path.of(location, backupDirName);
+    Path largest = null;
+    try (DirectoryStream<Path> stream = Files.newDirectoryStream(backupIndexPath)) {
+      for (Path p : stream) {
+        if (p.getFileName().toString().startsWith(IndexFileNames.SEGMENTS)) {
+          continue;
+        }
+        if (largest == null || Files.size(p) > Files.size(largest)) {
+          largest = p;
+        }
+      }
+    }
+    assertNotNull("No index file in " + backupIndexPath, largest);
+    byte[] bytes = Files.readAllBytes(largest);
+    bytes[bytes.length / 2] ^= 0x5A;
+    Files.write(largest, bytes);
+
+    // Replace every segment of the live index, so the corrupt file is not found locally and is
+    // always copied from the backup.
+    leaderClient.deleteByQuery(DEFAULT_TEST_CORENAME, "*:*");
+    leaderClient.commit(DEFAULT_TEST_CORENAME);
+    nDocs = BackupRestoreUtils.indexDocs(leaderClient, "collection1", docsSeed + 1);
+    leaderClient.optimize(DEFAULT_TEST_CORENAME);
+
+    TestReplicationHandlerBackup.runBackupCommand(
+        leaderJetty, ReplicationHandler.CMD_RESTORE, params);
+
+    expectThrows(
+        AssertionError.class,
+        () -> {
+          for (int i = 0; i < 10; i++) {
+            // this will throw an assertion once we get what we expect
+            TestRestoreCoreUtil.fetchRestoreStatus(baseUrl, DEFAULT_TEST_CORENAME);
+            Thread.sleep(50);
+          }
+          // if we never got an assertion let expectThrows complain
+        });
+
+    // the failed restore rolled back to the live index
+    BackupRestoreUtils.verifyDocs(nDocs, leaderClient, DEFAULT_TEST_CORENAME);
+  }
 }
