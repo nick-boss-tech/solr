@@ -127,7 +127,11 @@ public final class RequestHandlers {
     }
   }
 
-  private PluginInfo applyInitParams(SolrConfig config, PluginInfo info) {
+  /**
+   * Returns a copy of {@code info} with the {@code initParams} that apply to it (by {@code
+   * initParams} attribute or by path) merged in; {@code info} itself when none apply.
+   */
+  public static PluginInfo applyInitParams(SolrConfig config, PluginInfo info) {
     List<InitParams> ags = new ArrayList<>();
     String p = info.attributes.get(InitParams.TYPE);
     if (p != null) {

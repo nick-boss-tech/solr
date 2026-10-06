@@ -985,7 +985,11 @@ public class SolrConfig implements MapWriter {
         for (PluginInfo info : infos) {
           // TODO remove after fixing https://issues.apache.org/jira/browse/SOLR-13706
           if (info.type.equals("searchComponent") && info.name.equals("highlight")) continue;
-          items.put(info.name, info);
+          items.put(
+              info.name,
+              SolrRequestHandler.TYPE.equals(info.type)
+                  ? RequestHandlers.applyInitParams(this, info)
+                  : info);
         }
         for (Map.Entry<String, Map<String, Object>> e :
             overlay.getNamedPlugins(plugin.tag).entrySet()) {

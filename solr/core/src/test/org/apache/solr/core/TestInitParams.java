@@ -16,11 +16,14 @@
  */
 package org.apache.solr.core;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.common.util.Utils;
 import org.apache.solr.request.SolrRequestHandler;
 import org.apache.solr.response.SolrQueryResponse;
 import org.junit.BeforeClass;
@@ -58,6 +61,21 @@ public class TestInitParams extends SolrTestCaseJ4 {
             null);
     initParams.apply(pluginInfo);
     assertEquals("A", initParams.defaults.get("a"));
+  }
+
+  @Test
+  public void testConfigReportIncludesInitParams() {
+    Object config = Utils.fromJSONString(Utils.toJSONString(h.getCore().getSolrConfig()));
+    List<String> handlerPath = List.of("requestHandler", "/dump1");
+    assertEquals("A", Utils.getObjectByPath(config, false, join(handlerPath, "defaults", "a")));
+    assertEquals("B", Utils.getObjectByPath(config, false, join(handlerPath, "invariants", "b")));
+    assertEquals("C", Utils.getObjectByPath(config, false, join(handlerPath, "appends", "c")));
+  }
+
+  private static List<String> join(List<String> prefix, String... rest) {
+    List<String> path = new ArrayList<>(prefix);
+    path.addAll(Arrays.asList(rest));
+    return path;
   }
 
   @Test
