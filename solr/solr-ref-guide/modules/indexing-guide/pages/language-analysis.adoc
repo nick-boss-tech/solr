@@ -3463,7 +3463,7 @@ With class name (legacy)::
 Solr provides support for Ukrainian lemmatization with the `solr.MorphologikFilterFactory`, in the `analysis-extras` module.
 To use this filter, you must enable the xref:#analysis-extras-module[analysis-extras Module].
 
-Lucene also includes an example Ukrainian stopword list, in the `lucene-analyzers-morfologik` jar.
+Lucene also includes an example Ukrainian stopword list, in the `lucene-analysis-morfologik` jar.
 
 *Factory class:* `solr.MorfologikFilterFactory`
 
@@ -3477,7 +3477,9 @@ s|Required |Default: none
 |===
 +
 The path to a lemmatizer dictionary.
-The `lucene-analyzers-morfologik` jar contains a Ukrainian dictionary at `org/apache/lucene/analysis/uk/ukrainian.dict`.
+The Ukrainian dictionary is no longer part of the Lucene Morfologik jar (see LUCENE-7785).
+It is provided by the `ua.net.nlp:morfologik-ukrainian-lt` library (https://github.com/brown-uk/dict_uk), which you must add to the `analysis-extras` classpath, for example in the `lib` directory.
+The dictionary is then found at `org/languagetool/resource/uk/ukrainian.dict`.
 
 *Example:*
 
@@ -3492,7 +3494,7 @@ With name::
   <tokenizer name="standard"/>
   <filter name="stop" words="org/apache/lucene/analysis/uk/stopwords.txt"/>
   <filter name="lowercase"/>
-  <filter name="morfologik" dictionary="org/apache/lucene/analysis/uk/ukrainian.dict"/>
+  <filter name="morfologik" dictionary="org/languagetool/resource/uk/ukrainian.dict"/>
 </analyzer>
 ----
 ====
@@ -3506,7 +3508,7 @@ With class name (legacy)::
   <tokenizer class="solr.StandardTokenizerFactory"/>
   <filter class="solr.StopFilterFactory" words="org/apache/lucene/analysis/uk/stopwords.txt"/>
   <filter class="solr.LowerCaseFilterFactory"/>
-  <filter class="solr.MorfologikFilterFactory" dictionary="org/apache/lucene/analysis/uk/ukrainian.dict"/>
+  <filter class="solr.MorfologikFilterFactory" dictionary="org/languagetool/resource/uk/ukrainian.dict"/>
 </analyzer>
 ----
 ====
