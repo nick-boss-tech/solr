@@ -46,6 +46,7 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.io.file.PathUtils;
+import org.apache.lucene.tests.util.LuceneTestCase;
 import org.apache.lucene.util.Constants;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrResponse;
@@ -106,6 +107,9 @@ import org.slf4j.LoggerFactory;
  *
  * @since solr 1.5
  */
+// a subclass annotation replaces the one on SolrTestCaseJ4, so ExtrasFS is repeated here;
+// HandleLimitFS has a fixed handle limit for the whole JVM, but several nodes run in it
+@LuceneTestCase.SuppressFileSystems({"ExtrasFS", "HandleLimitFS"})
 public abstract class BaseDistributedSearchTestCase extends SolrTestCaseJ4 {
 
   protected ExecutorService executor =
