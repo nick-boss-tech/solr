@@ -1419,6 +1419,33 @@ public class HighlighterTest extends SolrTestCaseJ4 {
     }
   }
 
+  @Test
+  public void testHighlightQueryWrappedInBoost() {
+    assertU(
+        adoc(
+            "id", "1",
+            "t_text", "keyword is only here",
+            "tv_text", "keyword is only here too"));
+    assertU(commit());
+
+    // the boosted query is nested in a boolean query, so the highlighter sees the boost wrapper
+    final String q = "+id:1 +_query_:\"{!boost b=3 v=$qq}\"";
+    for (String[] methodAndField :
+        new String[][] {{"original", "t_text"}, {"fastVector", "tv_text"}}) {
+      assertQ(
+          "hl.method=" + methodAndField[0],
+          req(
+              "q", q,
+              "qq", methodAndField[1] + ":keyword",
+              "hl", "true",
+              "hl.method", methodAndField[0],
+              "hl.fl", methodAndField[1]),
+          "//lst[@name='highlighting']/lst[@name='1']/arr[@name='"
+              + methodAndField[1]
+              + "']/str[contains(.,'<em>keyword</em>')]");
+    }
+  }
+
   private static SolrHighlighter getHighlighter() {
     var hl =
         (HighlightComponent)
