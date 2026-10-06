@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: bin/solr.cmd no longer fails to parse a SOLR_LOGS_DIR environment variable whose value contains spaces or parentheses.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17598
+    url: https://issues.apache.org/jira/browse/SOLR-17598
