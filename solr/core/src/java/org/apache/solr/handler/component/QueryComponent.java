@@ -26,6 +26,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -1441,13 +1442,23 @@ public class QueryComponent extends SearchComponent {
 
       ArrayList<String> ids = new ArrayList<>(shardDocs.size());
       for (ShardDoc shardDoc : shardDocs) {
-        // TODO: depending on the type, we may need more tha a simple toString()?
-        ids.add(shardDoc.id.toString());
+        ids.add(idToString(shardDoc.id));
       }
       sreq.params.add(ShardParams.IDS, StrUtils.join(ids, ','));
 
       rb.addRequest(this, sreq);
     }
+  }
+
+  /**
+   * Formats a unique key value from a shard response for the {@link ShardParams#IDS} request. A
+   * {@link Date} must be written in ISO-8601 (with milliseconds), not {@link Date#toString()}.
+   */
+  static String idToString(Object id) {
+    if (id instanceof Date) {
+      return ((Date) id).toInstant().toString();
+    }
+    return id.toString();
   }
 
   protected void returnFields(ResponseBuilder rb, ShardRequest sreq) {
