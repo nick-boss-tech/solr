@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.Matchers.not;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -255,6 +256,103 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
               "sow", sow,
               "defType", "edismax"),
           "*[count(//doc)=1]");
+    }
+  }
+
+  /**
+   * SOLR-6320: a lowercase operator word beside an explicit operator is a term, not an operator.
+   * The assertions compare the whole parsed query. Substring checks on the term names cannot tell
+   * the intended parse from the escaped fallback edismax uses when the rebuilt query is invalid:
+   * the fallback produces the same terms whenever the doubled operator came from two lowercase
+   * words, and demotes an explicit operator to a term only when the query happens to contain one.
+   * The "name" field uses WhitespaceAnalyzer, so terms keep their case in the expected strings.
+   */
+  public void testLowercaseOperatorNextToExplicitOperator() throws Exception {
+    // {user query, q.op, expected parsed query}
+    String[][] cases = {
+      {"Zapp AND and Brannigan", "AND", "+(+(name:Zapp) +(name:and) +(name:Brannigan))"},
+      {"Zapp and AND Brannigan", "AND", "+(+(name:Zapp) +(name:and) +(name:Brannigan))"},
+      {"Zapp AND or Brannigan", "AND", "+(+(name:Zapp) +(name:or) +(name:Brannigan))"},
+      {"Zapp or AND Brannigan", "AND", "+(+(name:Zapp) +(name:or) +(name:Brannigan))"},
+      {"Zapp OR or Brannigan", "OR", "+((name:Zapp) (name:or) (name:Brannigan))"},
+      {"Zapp or OR Brannigan", "OR", "+((name:Zapp) (name:or) (name:Brannigan))"},
+      {"Zapp NOT and Brannigan", "AND", "+(+(name:Zapp) -(name:and) +(name:Brannigan))"},
+      {"Zapp and NOT Brannigan", "AND", "+(+(name:Zapp) +(name:and) -(name:Brannigan))"},
+      {"Zapp AND and +Brannigan", "AND", "+(+(name:Zapp) +(name:and) +(name:Brannigan))"},
+      {"+Zapp AND and Brannigan", "AND", "+(+(name:Zapp) +(name:and) +(name:Brannigan))"},
+    };
+    for (String sow : Arrays.asList("true", "false")) {
+      for (String[] c : cases) {
+        try (SolrQueryRequest req =
+            req("q.op", c[1], "qf", "name", "lowercaseOperators", "true", "sow", sow)) {
+          QParser qParser = QParser.getParser(c[0], "edismax", req);
+          String parsed = qParser.getQuery().toString();
+          assertEquals("sow=" + sow + ", q=" + c[0], c[2], parsed);
+          // The escaped fallback's signature is an explicit operator appearing as a term
+          // (escapeUserQuery quotes it in the escaped string); the intended parse never has one.
+          assertThat(parsed, not(containsString("name:AND")));
+          assertThat(parsed, not(containsString("name:\"AND\"")));
+          assertThat(parsed, not(containsString("name:OR")));
+          assertThat(parsed, not(containsString("name:\"OR\"")));
+          assertThat(parsed, not(containsString("name:NOT")));
+          assertThat(parsed, not(containsString("name:\"NOT\"")));
+        }
+      }
+    }
+  }
+
+  /**
+   * SOLR-6320, result level: in "Zapp NOT and Brannigan" the fixed parse treats "and" as a negated
+   * term, so the "Zapp Brannigan" document (id 42) matches. On the unfixed parser the doubled
+   * operator makes the query fall back to the escaped form, where NOT itself is a required term,
+   * and nothing matches.
+   */
+  public void testLowercaseOperatorNextToExplicitOperatorResults() {
+    for (String sow : Arrays.asList("true", "false")) {
+      assertQ(
+          "lowercase operator word after NOT is a negated term, not an operator",
+          req(
+              "q",
+              "Zapp NOT and Brannigan",
+              "qf",
+              "name",
+              "q.op",
+              "AND",
+              "lowercaseOperators",
+              "true",
+              "sow",
+              sow,
+              "defType",
+              "edismax"),
+          "*[count(//doc)=1]",
+          "//doc/str[@name='id'][.='42']");
+    }
+  }
+
+  /**
+   * SOLR-6320 boundary pins: inputs the neighbour rule deliberately leaves alone, so the parsed
+   * query is the same with and without the fix; both cases also pass on the unfixed parser. In
+   * "Zapp AND +and Brannigan" the operator word carries its own + prefix, so it was never a
+   * promotion candidate. In "Zapp and and Brannigan" the chained lowercase operators have no
+   * explicit operator neighbour, so both still promote exactly as on the unfixed parser, which
+   * still falls back to the escaped form shown here; that shape is outside this ticket's scope.
+   */
+  public void testLowercaseOperatorBoundaryPins() throws Exception {
+    // {user query, q.op, expected parsed query, identical before and after the fix}
+    String[][] cases = {
+      {"Zapp AND +and Brannigan", "AND", "+(+(name:Zapp) +(name:and) +(name:Brannigan))"},
+      {
+        "Zapp and and Brannigan", "AND", "+(+(name:Zapp) +(name:and) +(name:and) +(name:Brannigan))"
+      },
+    };
+    for (String sow : Arrays.asList("true", "false")) {
+      for (String[] c : cases) {
+        try (SolrQueryRequest req =
+            req("q.op", c[1], "qf", "name", "lowercaseOperators", "true", "sow", sow)) {
+          QParser qParser = QParser.getParser(c[0], "edismax", req);
+          assertEquals("sow=" + sow + ", q=" + c[0], c[2], qParser.getQuery().toString());
+        }
+      }
     }
   }
 

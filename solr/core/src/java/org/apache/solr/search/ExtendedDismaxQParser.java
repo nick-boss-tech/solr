@@ -527,7 +527,12 @@ public class ExtendedDismaxQParser extends QParser {
       Clause clause = clauses.get(i);
       String s = clause.raw;
       // and and or won't be operators at the start or end
-      if (lowercaseOperators && i > 0 && i + 1 < clauses.size()) {
+      // and an operator word next to an explicit operator is a term ("x AND and AND y", SOLR-6320)
+      if (lowercaseOperators
+          && i > 0
+          && i + 1 < clauses.size()
+          && !isExplicitOperator(clauses.get(i - 1))
+          && !isExplicitOperator(clauses.get(i + 1))) {
         if ("AND".equalsIgnoreCase(s)) {
           s = "AND";
         } else if ("OR".equalsIgnoreCase(s)) {
@@ -538,6 +543,13 @@ public class ExtendedDismaxQParser extends QParser {
       sb.append(' ');
     }
     return sb.toString();
+  }
+
+  /** True for a clause that is exactly an upper case AND, OR or NOT keyword. */
+  private static boolean isExplicitOperator(Clause clause) {
+    if (!clause.isBareWord()) return false;
+    String s = clause.raw;
+    return "AND".equals(s) || "OR".equals(s) || "NOT".equals(s);
   }
 
   /** Parses all multiplicative boosts */
