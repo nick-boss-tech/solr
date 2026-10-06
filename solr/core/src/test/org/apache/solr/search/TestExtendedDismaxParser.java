@@ -991,6 +991,15 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     assertQ(req("uf", "trait* id", "defType", "edismax"));
   }
 
+  public void testNeitherQfNorDfIsBadRequest() {
+    try (SolrQueryRequest req = req("q", "foo")) {
+      SolrException e =
+          expectThrows(SolrException.class, () -> QParser.getParser("foo", "edismax", req));
+      assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+      assertTrue(e.getMessage(), e.getMessage().contains("Neither qf nor df are present"));
+    }
+  }
+
   @SuppressWarnings("try")
   public void testCyclicAliasing() {
     try (ErrorLogMuter ignored = ErrorLogMuter.regex(".*Field aliases lead to a cycle.*")) {

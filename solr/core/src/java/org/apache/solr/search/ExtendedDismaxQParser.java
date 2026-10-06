@@ -1730,7 +1730,7 @@ public class ExtendedDismaxQParser extends QParser {
         // req.getSearcher() here causes searcher refcount imbalance
         queryFields = DisMaxQParser.parseQueryFields(schema, solrParams);
       } catch (SyntaxError e) {
-        throw new RuntimeException(e);
+        throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, e.getMessage(), e);
       }
       // Phrase slop array
       int pslop[] = new int[4];
