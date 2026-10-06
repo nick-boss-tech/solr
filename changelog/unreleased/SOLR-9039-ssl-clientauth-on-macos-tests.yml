@@ -1,0 +1,8 @@
+title: "Test framework no longer suppresses randomized SSL client authentication on macOS, and TestMiniSolrCloudClusterSSL.testSslAndClientAuth runs there too"
+type: other
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-9039
+    url: https://issues.apache.org/jira/browse/SOLR-9039
