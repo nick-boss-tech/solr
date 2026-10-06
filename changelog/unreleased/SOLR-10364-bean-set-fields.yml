@@ -1,0 +1,9 @@
+title: >
+  SolrJ bean binding (DocumentObjectBinder) now supports Set, HashSet and LinkedHashSet fields,
+  not only List, Collection and arrays.
+type: added
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-10364
+    url: https://issues.apache.org/jira/browse/SOLR-10364
