@@ -25,6 +25,7 @@ import jakarta.inject.Inject;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.apache.solr.client.api.endpoint.ForceLeaderApi;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
@@ -83,6 +84,57 @@ public class ForceLeader extends AdminAPIBase implements ForceLeaderApi {
         response, api.forceShardLeader(params.get(COLLECTION_PROP), params.get(SHARD_ID_PROP)));
   }
 
+  private static final int WAIT_ATTEMPTS = 9;
+  private static final long WAIT_PAUSE_MS = 5000;
+
+  /**
+   * Polls until the shard has an active leader.
+   *
+   * @param currentSlice supplies the latest state of the shard, null if it no longer exists
+   * @throws SolrException if the shard disappears or no active leader shows up in time
+   */
+  static void waitForActiveLeader(
+      Supplier<Slice> currentSlice,
+      int attempts,
+      long pauseMs,
+      String collectionName,
+      String shardName)
+      throws InterruptedException {
+    Slice slice = null;
+    for (int i = 0; i < attempts; i++) {
+      Thread.sleep(pauseMs);
+      slice = currentSlice.get();
+      if (slice == null) {
+        throw new SolrException(
+            SolrException.ErrorCode.SERVER_ERROR,
+            "Shard "
+                + shardName
+                + " of collection "
+                + collectionName
+                + " was removed while waiting for a forced leader");
+      }
+      Replica leader = slice.getLeader();
+      if (leader != null && leader.getState() == Replica.State.ACTIVE) {
+        return;
+      }
+      log.warn(
+          "Force leader attempt {}. Waiting {} ms for an active leader. State of the slice: {}",
+          (i + 1),
+          pauseMs,
+          slice); // nowarn
+    }
+    throw new SolrException(
+        SolrException.ErrorCode.SERVER_ERROR,
+        "Couldn't force an active leader for collection: "
+            + collectionName
+            + " shard: "
+            + shardName
+            + " within "
+            + (attempts * pauseMs)
+            + " ms. State of the slice: "
+            + slice);
+  }
+
   private void doForceLeaderElection(String extCollectionName, String shardName) {
     ZkController zkController = coreContainer.getZkController();
     ClusterState clusterState = zkController.getClusterState();
@@ -129,37 +181,31 @@ public class ForceLeader extends AdminAPIBase implements ForceLeaderApi {
             .forEach(rep -> zkShardTerms.setTermEqualsToLeader(rep.getName()));
       }
 
-      // Wait till we have an active leader
-      boolean success = false;
-      for (int i = 0; i < 9; i++) {
-        Thread.sleep(5000);
-        clusterState = coreContainer.getZkController().getClusterState();
-        collection = clusterState.getCollection(collectionName);
-        slice = collection.getSlice(shardName);
-        if (slice.getLeader() != null && slice.getLeader().getState() == Replica.State.ACTIVE) {
-          success = true;
-          break;
-        }
-        log.warn(
-            "Force leader attempt {}. Waiting 5 secs for an active leader. State of the slice: {}",
-            (i + 1),
-            slice); // nowarn
-      }
-
-      if (success) {
-        log.info(
-            "Successfully issued FORCELEADER command for collection: {}, shard: {}",
-            collectionName,
-            shardName);
-      } else {
-        log.info(
-            "Couldn't successfully force leader, collection: {}, shard: {}. Cluster state: {}",
-            collectionName,
-            shardName,
-            clusterState);
-      }
+      waitForActiveLeader(
+          () -> {
+            DocCollection current =
+                coreContainer.getZkController().getClusterState().getCollectionOrNull(collectionName);
+            return current == null ? null : current.getSlice(shardName);
+          },
+          WAIT_ATTEMPTS,
+          WAIT_PAUSE_MS,
+          collectionName,
+          shardName);
+      log.info(
+          "Successfully issued FORCELEADER command for collection: {}, shard: {}",
+          collectionName,
+          shardName);
     } catch (SolrException e) {
       throw e;
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new SolrException(
+          SolrException.ErrorCode.SERVER_ERROR,
+          "Interrupted while waiting for a leader of collection: "
+              + collectionName
+              + " shard: "
+              + shardName,
+          e);
     } catch (Exception e) {
       throw new SolrException(
           SolrException.ErrorCode.SERVER_ERROR,
