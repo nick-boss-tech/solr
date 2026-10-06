@@ -1,0 +1,8 @@
+title: >
+  edismax no longer puts a lone "(" or ")" clause, as in "( cat:foo ) bar baz", into the pf/pf2/pf3 phrase text, which left position holes ("? ?") in the phrase query.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-3923
+    url: https://issues.apache.org/jira/browse/SOLR-3923
