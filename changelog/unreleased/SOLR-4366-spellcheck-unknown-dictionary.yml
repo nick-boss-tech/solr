@@ -1,0 +1,8 @@
+title: >
+  SpellCheckComponent answers NOT_FOUND instead of failing with a NullPointerException when spellcheck.build or spellcheck.reload names an unknown dictionary, or when one of several spellcheck.dictionary values is unknown.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-4366
+    url: https://issues.apache.org/jira/browse/SOLR-4366
