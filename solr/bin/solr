@@ -1195,6 +1195,12 @@ SCRIPT_SOLR_OPTS+=(${SOLR_JAVA_STACK_SIZE:-"-Xss256k"})
 
 : "${SOLR_TIMEZONE:=UTC}"
 
+# The JVM's GC log timestamps follow the OS timezone, not -Duser.timezone; align them with the
+# Solr log unless the operator already set TZ explicitly
+if [ -z "${TZ:-}" ]; then
+  export TZ="$SOLR_TIMEZONE"
+fi
+
 function mk_writable_dir() {
   local DIRNAME="$1"
   local DESCRIPTION="$2"
