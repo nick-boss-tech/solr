@@ -20,6 +20,7 @@ package org.apache.solr.handler.admin;
 import java.lang.invoke.MethodHandles;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.solr.cloud.CloudDescriptor;
 import org.apache.solr.cloud.ZkController.NotInClusterStateException;
 import org.apache.solr.cloud.ZkShardTerms;
@@ -81,6 +82,7 @@ class PrepRecoveryOp implements CoreAdminHandler.CoreAdminOp {
       collectionName = core.getCoreDescriptor().getCloudDescriptor().getCollectionName();
       cloudDescriptor = core.getCoreDescriptor().getCloudDescriptor();
     }
+    final AtomicReference<String> lastSeen = new AtomicReference<>("no collection state");
     try {
       coreContainer
           .getZkController()
@@ -113,9 +115,13 @@ class PrepRecoveryOp implements CoreAdminHandler.CoreAdminOp {
                 Replica.State state = null;
                 boolean live = false;
                 Slice slice = c.getSlice(cloudDescriptor.getShardId());
-                if (slice != null) {
+                if (slice == null) {
+                  lastSeen.set("shard " + cloudDescriptor.getShardId() + " not in cluster state");
+                } else {
                   final Replica replica = slice.getReplicasMap().get(coreNodeName);
-                  if (replica != null) {
+                  if (replica == null) {
+                    lastSeen.set("replica " + coreNodeName + " not in cluster state");
+                  } else {
                     state = replica.getState();
                     live = n.contains(nodeName);
 
@@ -157,6 +163,16 @@ class PrepRecoveryOp implements CoreAdminHandler.CoreAdminOp {
                         onlyIfLeaderActive != null
                             && onlyIfLeaderActive
                             && localState != Replica.State.ACTIVE;
+                    lastSeen.set(
+                        "replica state="
+                            + state
+                            + ", node live="
+                            + live
+                            + ", this core's published state="
+                            + localState
+                            + (onlyIfActiveCheckResult
+                                ? " (onlyIfLeaderActive requires ACTIVE)"
+                                : ""));
                     if (log.isInfoEnabled()) {
                       log.info(
                           "In WaitForState("
@@ -206,7 +222,19 @@ class PrepRecoveryOp implements CoreAdminHandler.CoreAdminOp {
               });
     } catch (TimeoutException | InterruptedException e) {
       throw new NotInClusterStateException(
-          ErrorCode.SERVER_ERROR, "Timeout waiting for collection state.");
+          ErrorCode.SERVER_ERROR,
+          "Timed out after "
+              + conflictWaitMs
+              + "ms waiting for replica "
+              + coreNodeName
+              + " of "
+              + collectionName
+              + " to reach state "
+              + waitForState
+              + " (checkLive="
+              + checkLive
+              + "), last seen: "
+              + lastSeen.get());
     }
   }
 }

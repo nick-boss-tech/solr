@@ -19,7 +19,10 @@ package org.apache.solr.cloud;
 
 import java.util.concurrent.TimeUnit;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
+import org.apache.solr.client.solrj.request.CoreAdminRequest;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.embedded.JettySolrRunner;
 import org.apache.solr.util.TestInjection;
@@ -81,6 +84,34 @@ public class TestPrepRecovery extends SolrCloudTestCase {
         "Expected collection: testLeaderUnloaded to be live with 1 shard and 3 replicas",
         collectionName,
         clusterShape(1, 3));
+  }
+
+  @Test
+  public void testTimeoutMessageNamesLastSeenState() throws Exception {
+    CloudSolrClient solrClient = cluster.getSolrClient();
+
+    String collectionName = "testTimeoutMessage";
+    CollectionAdminRequest.createCollection(collectionName, 1, 1).process(solrClient);
+    waitForState(
+        "Expected collection: testTimeoutMessage to be live with 1 shard and 1 replica",
+        collectionName,
+        clusterShape(1, 1));
+
+    Replica leader = cluster.getZkStateReader().getLeaderRetry(collectionName, "shard1");
+    CoreAdminRequest.WaitForState prepRecovery = new CoreAdminRequest.WaitForState();
+    prepRecovery.setCoreName(leader.getCoreName());
+    prepRecovery.setNodeName(leader.getNodeName());
+    prepRecovery.setCoreNodeName("core_node_that_does_not_exist");
+    prepRecovery.setState(Replica.State.RECOVERING);
+    prepRecovery.setCheckLive(true);
+
+    try (HttpJettySolrClient client =
+        new HttpJettySolrClient.Builder(leader.getBaseUrl()).build()) {
+      SolrException e = expectThrows(SolrException.class, () -> client.request(prepRecovery));
+      assertTrue(e.getMessage(), e.getMessage().contains("core_node_that_does_not_exist"));
+      assertTrue(e.getMessage(), e.getMessage().contains("last seen"));
+      assertTrue(e.getMessage(), e.getMessage().contains("not in cluster state"));
+    }
   }
 
   @Test
