@@ -17,10 +17,12 @@
 
 package org.apache.solr.cloud.api.collections;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.cloud.ZkNodeProps;
@@ -48,7 +50,12 @@ public class BalanceReplicasCmd implements CollApiCmds.CollectionApiCommand {
     } else if (nodesRaw instanceof Collection) {
       nodes = new HashSet<>((Collection<String>) nodesRaw);
     } else if (nodesRaw instanceof String) {
-      nodes = Set.of(((String) nodesRaw).split(","));
+      // Set.of would reject a repeated node name with an IllegalArgumentException (SOLR-11288)
+      nodes =
+          Arrays.stream(((String) nodesRaw).split(","))
+              .map(String::trim)
+              .filter(s -> !s.isEmpty())
+              .collect(Collectors.toSet());
     } else {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,

@@ -17,6 +17,7 @@
 package org.apache.solr.handler.admin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.solr.client.api.util.SolrVersion;
 import org.apache.solr.common.MapWriter;
@@ -168,7 +170,14 @@ public class ClusterStatus {
     String routeKey = solrParams.get(ShardParams._ROUTE_);
     String shard = solrParams.get(ZkStateReader.SHARD_ID_PROP);
 
-    Set<String> requestedShards = (shard != null) ? Set.of(shard.split(",")) : null;
+    // Set.of would reject a repeated shard name with an IllegalArgumentException (SOLR-11288)
+    Set<String> requestedShards =
+        (shard != null)
+            ? Arrays.stream(shard.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toSet())
+            : null;
 
     Stream<DocCollection> collectionStream;
     if (collection == null) {

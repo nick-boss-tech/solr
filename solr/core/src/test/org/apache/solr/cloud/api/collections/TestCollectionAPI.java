@@ -89,6 +89,7 @@ public class TestCollectionAPI extends ReplicaPropertiesBase {
     clusterStatusNoCollection();
     clusterStatusWithCollection();
     clusterStatusWithCollectionAndShard();
+    clusterStatusWithRepeatedShard();
     clusterStatusWithCollectionAndShardJSON();
     clusterStatusWithCollectionAndMultipleShards();
     clusterStatusWithCollectionHealthState();
@@ -311,6 +312,36 @@ public class TestCollectionAPI extends ReplicaPropertiesBase {
       Map<String, Object> selectedShardStatus = (Map<String, Object>) shardStatus.get(SHARD1);
       assertNotNull(selectedShardStatus);
     }
+  }
+
+  /** SOLR-11288: a repeated or space padded shard name must not fail with a 500 or a 400. */
+  private void clusterStatusWithRepeatedShard() throws IOException, SolrServerException {
+    try (CloudSolrClient client = createCloudClient(null)) {
+      // exact repeat: Set.of threw IllegalArgumentException on the old parsing code
+      assertClusterStatusSingleShard(client, SHARD1 + "," + SHARD1);
+      // padded repeat: the untrimmed " shard1" matched no shard on the old parsing code
+      assertClusterStatusSingleShard(client, SHARD1 + ", " + SHARD1);
+    }
+  }
+
+  private void assertClusterStatusSingleShard(CloudSolrClient client, String shardParam)
+      throws IOException, SolrServerException {
+    ModifiableSolrParams params = new ModifiableSolrParams();
+    params.set("action", CollectionParams.CollectionAction.CLUSTERSTATUS.toString());
+    params.set("collection", COLLECTION_NAME);
+    params.set("shard", shardParam);
+    var request =
+        new GenericSolrRequest(METHOD.GET, "/admin/collections", SolrRequestType.ADMIN, params);
+
+    NamedList<Object> rsp = client.request(request);
+    NamedList<?> cluster = (NamedList<?>) rsp.get("cluster");
+    Map<?, ?> collections = (Map<?, ?>) cluster.get("collections");
+    @SuppressWarnings({"unchecked"})
+    Map<String, Object> collection = (Map<String, Object>) collections.get(COLLECTION_NAME);
+    @SuppressWarnings({"unchecked"})
+    Map<String, Object> shardStatus = (Map<String, Object>) collection.get("shards");
+    assertEquals(1, shardStatus.size());
+    assertNotNull(shardStatus.get(SHARD1));
   }
 
   private void clusterStatusWithCollectionAndMultipleShards()

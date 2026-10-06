@@ -18,6 +18,7 @@
 package org.apache.solr.cloud.api.collections;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -139,7 +140,11 @@ public class MigrateReplicasCmd implements CollApiCmds.CollectionApiCommand {
     } else if (rawParam instanceof Collection) {
       return new HashSet<>((Collection<String>) rawParam);
     } else if (rawParam instanceof String) {
-      return Set.of(((String) rawParam).split(","));
+      // Set.of would reject a repeated name with an IllegalArgumentException (SOLR-11288)
+      return Arrays.stream(((String) rawParam).split(","))
+          .map(String::trim)
+          .filter(s -> !s.isEmpty())
+          .collect(Collectors.toSet());
     } else {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,
