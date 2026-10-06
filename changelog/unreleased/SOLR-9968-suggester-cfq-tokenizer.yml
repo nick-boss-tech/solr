@@ -1,0 +1,8 @@
+title: >
+  Suggester context filter queries (suggest.cfq) can use a configurable tokenizer (contextFilterQueryTokenizer, for example keyword), so context values with special characters match exactly. A context filter parse failure now reports the query and its cause.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9968
+    url: https://issues.apache.org/jira/browse/SOLR-9968
