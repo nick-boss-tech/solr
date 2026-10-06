@@ -1,0 +1,7 @@
+title: "Highlighting now sees through the {!boost} query parser's FunctionScoreQuery when it is nested in another query (original and fastVector methods)."
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-2632
+    url: https://issues.apache.org/jira/browse/SOLR-2632
