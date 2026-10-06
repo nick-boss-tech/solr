@@ -24,11 +24,13 @@ import static org.apache.solr.common.params.CommonParams.NAME;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.net.URI;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import org.apache.lucene.util.Version;
 import org.apache.solr.cloud.api.collections.CollectionHandlingUtils.ShardRequestTracker;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
@@ -305,7 +307,6 @@ public class BackupCmd implements CollApiCmds.CollectionApiCommand {
     aggRsp.add("collection", collectionName);
     aggRsp.add("numShards", slices.size());
     aggRsp.add("backupId", backupManager.getBackupId().id);
-    aggRsp.add("indexVersion", backupProps.getIndexVersion());
     aggRsp.add("startTime", backupProps.getStartTime());
     if (backupProps.getExtraProperties() != null) {
       aggRsp.add("extraProperties", backupProps.getExtraProperties());
@@ -316,6 +317,7 @@ public class BackupCmd implements CollApiCmds.CollectionApiCommand {
     Optional<Integer> uploadedIndexFileCount = Optional.empty();
     Optional<Double> indexSizeMB = Optional.empty();
     Optional<Double> uploadedIndexFileMB = Optional.empty();
+    Version minIndexVersion = null;
     NamedList<?> shards = (NamedList<?>) results.get("success");
     List<String> shardBackupIds = new ArrayList<>(shards.size());
     for (int i = 0; i < shards.size(); i++) {
@@ -340,7 +342,23 @@ public class BackupCmd implements CollApiCmds.CollectionApiCommand {
             Optional.of(uploadedIndexFileMB.orElse(0.0) + shardUploadedIndexFileMB);
       }
       Optional.ofNullable((String) shardResp.get("shardBackupId")).ifPresent(shardBackupIds::add);
+      final String shardIndexVersion = (String) shardResp.get("indexVersion");
+      if (shardIndexVersion != null) {
+        try {
+          final Version shardVersion = Version.parse(shardIndexVersion);
+          if (minIndexVersion == null || minIndexVersion.onOrAfter(shardVersion)) {
+            minIndexVersion = shardVersion;
+          }
+        } catch (ParseException e) {
+          log.warn(
+              "Ignoring unparseable indexVersion from shard response: {}", shardIndexVersion, e);
+        }
+      }
     }
+    if (minIndexVersion != null) {
+      backupProps.setIndexVersion(minIndexVersion.toString());
+    }
+    aggRsp.add("indexVersion", backupProps.getIndexVersion());
     if (backupProps != null) {
       backupProps.countIndexFiles(indexFileCount.orElse(0), indexSizeMB.orElse(0.0));
     }

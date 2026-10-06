@@ -196,6 +196,11 @@ public class BackupProperties {
     return properties.getProperty(BackupManager.INDEX_VERSION_PROP);
   }
 
+  /** Records the oldest Lucene version found among the segments of the backed up shards. */
+  public void setIndexVersion(String indexVersion) {
+    properties.put(BackupManager.INDEX_VERSION_PROP, indexVersion);
+  }
+
   public Map<String, String> getExtraProperties() {
     return extraProperties;
   }

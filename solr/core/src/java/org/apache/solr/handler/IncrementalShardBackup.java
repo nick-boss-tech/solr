@@ -35,7 +35,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.commons.math3.util.Precision;
 import org.apache.lucene.index.IndexCommit;
+import org.apache.lucene.index.SegmentInfos;
 import org.apache.lucene.store.Directory;
+import org.apache.lucene.util.Version;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.cloud.CloudDescriptor;
 import org.apache.solr.common.SolrException;
@@ -177,6 +179,12 @@ public class IncrementalShardBackup {
       details.uploadedIndexFileCount = stats.uploadedFileCount.get();
       details.indexSizeMB = stats.getIndexSizeMB();
       details.uploadedIndexFileMB = stats.getTotalUploadedMB();
+      final Version minVersion =
+          SegmentInfos.readCommit(dir, indexCommit.getSegmentsFileName())
+              .getMinSegmentLuceneVersion();
+      if (minVersion != null) {
+        details.indexVersion = minVersion.toString();
+      }
     } finally {
       solrCore.getDirectoryFactory().release(dir);
     }
@@ -319,6 +327,10 @@ public class IncrementalShardBackup {
     @Schema(description = "The time at which backup snapshot started at.")
     @JsonProperty("startTime")
     public String startTime;
+
+    @Schema(description = "The oldest Lucene version that wrote a segment in the snapshot.")
+    @JsonProperty("indexVersion")
+    public String indexVersion;
 
     @Schema(description = "The count of index files in the snapshot.")
     @JsonProperty("indexFileCount")

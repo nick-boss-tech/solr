@@ -20,6 +20,7 @@ package org.apache.solr.handler.admin.api;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Path;
+import org.apache.lucene.util.Version;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.api.model.CreateCoreBackupRequestBody;
 import org.apache.solr.common.SolrException;
@@ -132,6 +133,28 @@ public class BackupCoreAPITest extends SolrTestCaseJ4 {
     assertEquals(1, response.indexFileCount);
     assertEquals(1, response.uploadedIndexFileCount);
     assertEquals(backupCoreRequestBody.shardBackupId, response.shardBackupId);
+  }
+
+  @Test
+  public void testIncrementalBackupReportsSegmentLuceneVersion() throws Exception {
+    try {
+      assertU(adoc("id", "1"));
+      assertU(commit());
+      CreateCoreBackupRequestBody backupCoreRequestBody = createBackupCoreRequestBody();
+      backupCoreRequestBody.incremental = true;
+      backupCoreRequestBody.shardBackupId = "md_shard1_0";
+      IncrementalShardBackup.IncrementalShardSnapshotResponse response =
+          (IncrementalShardBackup.IncrementalShardSnapshotResponse)
+              api.createBackup(coreName, backupCoreRequestBody);
+
+      // the index was written by this Lucene version, read from the segments file
+      assertEquals(Version.LATEST.toString(), response.indexVersion);
+    } finally {
+      // Indexing a document changes the shared core's index file count, which
+      // other tests in this class assert on; reset to a pristine core.
+      deleteCore();
+      initializeCoreAndRequestFactory();
+    }
   }
 
   @AfterClass // unique core per test
