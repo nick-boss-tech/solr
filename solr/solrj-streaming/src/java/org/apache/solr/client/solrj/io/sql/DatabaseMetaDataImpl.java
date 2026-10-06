@@ -22,6 +22,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.RowIdLifetime;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
 import java.util.Set;
 import org.apache.solr.client.solrj.SolrClient;
@@ -755,7 +756,22 @@ class DatabaseMetaDataImpl implements DatabaseMetaData {
   public ResultSet getColumns(
       String catalog, String schemaPattern, String tableNamePattern, String columnNamePattern)
       throws SQLException {
-    return null;
+    return this.connectionStatement.executeQuery(
+        "select tableCat, tableSchem, tableName, columnName, dataType, typeName, columnSize, "
+            + "bufferLength, decimalDigits, numPrecRadix, nullable, remarks, columnDef, "
+            + "sqlDataType, sqlDatetimeSub, charOctetLength, ordinalPosition, isNullable "
+            + "from metadata.COLUMNS where tableSchem like '"
+            + quotePattern(schemaPattern)
+            + "' and tableName like '"
+            + quotePattern(tableNamePattern)
+            + "' and columnName like '"
+            + quotePattern(columnNamePattern)
+            + "'");
+  }
+
+  /** A null JDBC pattern matches everything; a single quote is doubled to stay inside the literal. */
+  private static String quotePattern(String pattern) {
+    return pattern == null ? "%" : pattern.replace("'", "''");
   }
 
   @Override
@@ -814,7 +830,7 @@ class DatabaseMetaDataImpl implements DatabaseMetaData {
 
   @Override
   public ResultSet getTypeInfo() throws SQLException {
-    throw new UnsupportedOperationException();
+    throw new SQLFeatureNotSupportedException("getTypeInfo is not supported");
   }
 
   @Override

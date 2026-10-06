@@ -23,12 +23,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 import java.util.TreeSet;
 import org.apache.lucene.tests.util.LuceneTestCase;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
@@ -684,6 +687,24 @@ public class JdbcTest extends SolrCloudTestCase {
         }
         assertFalse(rs.next());
       }
+
+      Set<String> columns = new HashSet<>();
+      try (ResultSet rs = databaseMetaData.getColumns(null, zkHost, COLLECTIONORALIAS, "%")) {
+        assertNotNull("getColumns must return a result set", rs);
+        while (rs.next()) {
+          assertEquals(COLLECTIONORALIAS, rs.getString("tableName"));
+          columns.add(rs.getString("columnName"));
+        }
+      }
+      assertTrue("columns: " + columns, columns.containsAll(List.of("id", "a_i", "a_s")));
+
+      try (ResultSet rs = databaseMetaData.getColumns(null, zkHost, COLLECTIONORALIAS, "a_s")) {
+        assertTrue(rs.next());
+        assertEquals("a_s", rs.getString("columnName"));
+        assertFalse(rs.next());
+      }
+
+      assertThrows(SQLFeatureNotSupportedException.class, databaseMetaData::getTypeInfo);
 
       assertEquals(Connection.TRANSACTION_NONE, con.getTransactionIsolation());
       try {
