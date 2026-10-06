@@ -1,0 +1,8 @@
+title: >
+  Grouped faceting (group.facet) on an unsupported numeric facet or group field (points based, docValues, or multi-valued) now fails with a clear 400 error instead of empty counts or an internal error.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-10844
+    url: https://issues.apache.org/jira/browse/SOLR-10844
