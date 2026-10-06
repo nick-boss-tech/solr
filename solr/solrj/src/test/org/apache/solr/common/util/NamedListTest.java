@@ -34,6 +34,19 @@ public class NamedListTest extends SolrTestCase {
     assertEquals("{key1=value1, key2=value2}", nl.toString());
   }
 
+  public void testToSolrParamsRejectsUnnamedEntry() {
+    NamedList<Object> nl = new NamedList<>();
+    nl.add("df", "name");
+    assertEquals("name", nl.toSolrParams().get("df"));
+
+    // e.g. <str Name="rows">5</str> in solrconfig.xml: wrong case, so no 'name' attribute
+    nl.add(null, "5");
+    SolrException e = expectThrows(SolrException.class, nl::toSolrParams);
+    assertEquals(SolrException.ErrorCode.SERVER_ERROR.code, e.code());
+    assertTrue(e.getMessage(), e.getMessage().contains("without a name"));
+    assertTrue(e.getMessage(), e.getMessage().contains("5"));
+  }
+
   public void testRemove() {
     NamedList<String> nl = new NamedList<>();
     nl.add("key1", "value1");

@@ -345,12 +345,20 @@ public class NamedList<T>
    * Create SolrParams from NamedList. Values must be {@code String[]} or {@code List} (with
    * toString()-appropriate entries), or otherwise have a toString()-appropriate value. Nulls are
    * retained as such in arrays/lists but otherwise will NPE.
+   *
+   * @throws SolrException if an entry has no name (for example a {@code <str>} element in
+   *     solrconfig.xml without a {@code name} attribute)
    */
   public SolrParams toSolrParams() {
     HashMap<String, String[]> map = new HashMap<>();
     for (int i = 0; i < this.size(); i++) {
       String name = this.getName(i);
       Object val = this.getVal(i);
+      if (name == null) {
+        throw new SolrException(
+            SolrException.ErrorCode.SERVER_ERROR,
+            "Parameter without a name (missing 'name' attribute?), with value: " + val);
+      }
       if (val instanceof String[]) {
         MultiMapSolrParams.addParam(name, (String[]) val, map);
       } else if (val instanceof List l) {
