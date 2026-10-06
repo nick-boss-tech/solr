@@ -1,0 +1,8 @@
+title: "fl: a field whose name starts with a digit (for example a dynamic field 1001_s) is returned as a field instead of being parsed as a numeric constant"
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-4374
+    url: https://issues.apache.org/jira/browse/SOLR-4374
