@@ -138,6 +138,8 @@ public class SolrResourceLoader
 
   private volatile boolean live;
 
+  private volatile boolean closed;
+
   // Provide a registry so that managed resources can register themselves while the XML
   // configuration documents are being parsed ... after all are registered, they are asked by the
   // RestManager to initialize themselves. This two-step process is required because not all
@@ -908,7 +910,12 @@ public class SolrResourceLoader
 
   @Override
   public void close() throws IOException {
+    closed = true;
     IOUtils.close(classLoader);
+  }
+
+  boolean isClosed() {
+    return closed;
   }
 
   public List<SolrInfoBean> getInfoMBeans() {

@@ -1889,6 +1889,19 @@ public class SolrCore implements SolrInfoBean, Closeable {
       }
     }
 
+    // each core has its own loader (the config set is loaded again on reload), and its class loader
+    // holds the jars of the lib directories open
+    try {
+      if (resourceLoader != null) {
+        resourceLoader.close();
+      }
+    } catch (Throwable e) {
+      log.error("Exception closing resourceLoader", e);
+      if (e instanceof Error) {
+        throw (Error) e;
+      }
+    }
+
     assert ObjectReleaseTracker.release(this);
   }
 
