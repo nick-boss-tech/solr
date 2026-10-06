@@ -1155,6 +1155,40 @@ public class CollectionsAPISolrJTest extends SolrCloudTestCase {
   }
 
   @Test
+  public void testCreateCollectionNameAlreadyTaken() throws Exception {
+    CloudSolrClient solrClient = cluster.getSolrClient();
+    String collectionName = "nameTakenCollection";
+    String aliasName = "nameTakenAlias";
+    CollectionAdminRequest.createCollection(collectionName, "conf", 1, 1).process(solrClient);
+    cluster.waitForActiveCollection(collectionName, 1, 1);
+    CollectionAdminRequest.createAlias(aliasName, collectionName).process(solrClient);
+
+    Exception e =
+        assertThrows(
+            "creating an existing collection should fail",
+            Exception.class,
+            () ->
+                CollectionAdminRequest.createCollection(collectionName, "conf", 1, 1)
+                    .process(solrClient));
+    assertTrue(e.toString(), e.toString().contains("collection already exists: " + collectionName));
+
+    e =
+        assertThrows(
+            "creating a collection named like an alias should fail",
+            Exception.class,
+            () ->
+                CollectionAdminRequest.createCollection(aliasName, "conf", 1, 1)
+                    .process(solrClient));
+    assertTrue(
+        e.toString(), e.toString().contains("collection alias already exists: " + aliasName));
+
+    // the failed attempts must not have disturbed the original collection or the alias
+    assertEquals(
+        collectionName, solrClient.getClusterState().getCollection(collectionName).getName());
+    assertFalse(solrClient.getClusterState().hasCollection(aliasName));
+  }
+
+  @Test
   public void testDeleteAliasedCollection() throws Exception {
     CloudSolrClient solrClient = cluster.getSolrClient();
     String collectionName1 = "aliasedCollection1";
