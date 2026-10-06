@@ -1,0 +1,8 @@
+title: "Replication maxWriteMBPerSec throttling is shared by all concurrent file requests on a node instead of being applied separately to each request"
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-8430
+    url: https://issues.apache.org/jira/browse/SOLR-8430
