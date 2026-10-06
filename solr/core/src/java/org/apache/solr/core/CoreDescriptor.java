@@ -252,6 +252,10 @@ public class CoreDescriptor {
       substitutableProperties.setProperty(propName, propValue);
     }
     substitutableProperties.setProperty("solr.core.instanceDir", instanceDir.toString());
+    // ulogDir has no stored default (null means "under dataDir"), but ${solr.core.ulogDir} must
+    // always resolve
+    substitutableProperties.putIfAbsent(
+        SOLR_CORE_PROP_PREFIX + CORE_ULOGDIR, coreProperties.getProperty(CORE_DATADIR));
   }
 
   /**
