@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: edismax with lowercaseOperators=true no longer turns a lowercase "and" or "or" next to an explicit operator into a second operator ("x AND and AND y"), which made the query fail to parse.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-6320
+    url: https://issues.apache.org/jira/browse/SOLR-6320
