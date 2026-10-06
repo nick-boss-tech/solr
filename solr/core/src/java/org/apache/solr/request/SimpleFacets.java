@@ -79,6 +79,7 @@ import org.apache.solr.request.IntervalFacets.FacetInterval;
 import org.apache.solr.schema.BoolField;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.IndexSchema;
+import org.apache.solr.schema.PointField;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.schema.TrieField;
 import org.apache.solr.search.BitDocSet;
@@ -793,6 +794,27 @@ public class SimpleFacets {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,
           "Specify the group.field as parameter or local parameter");
+    }
+
+    // SOLR-10844: TermGroupFacetCollector needs SORTED docValues on both fields. The only
+    // numeric configuration that works is a single-valued field without docValues whose type
+    // is not points based, which getNumericHidingWrapper can uninvert below; numeric docValues
+    // are NUMERIC or SORTED_NUMERIC and points cannot be uninverted, so those configurations
+    // used to return empty counts or fail with an IllegalStateException from deep inside
+    // Lucene. Fail clearly instead.
+    for (String numericCheck : new String[] {groupField, field}) {
+      SchemaField checked = searcher.getSchema().getFieldOrNull(numericCheck);
+      if (checked != null
+          && checked.getType().getNumberType() != null
+          && (checked.multiValued()
+              || checked.hasDocValues()
+              || checked.getType() instanceof PointField)) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST,
+            "group.facet is not supported on numeric field '"
+                + numericCheck
+                + "' in this configuration; use a string field or remove group.facet");
+      }
     }
 
     BytesRef prefixBytesRef = prefix != null ? new BytesRef(prefix) : null;

@@ -607,6 +607,66 @@ public class SimpleFacetsTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testGroupFacetOnNumericFieldIsBadRequest() {
+    // SOLR-10844: group.facet on a numeric field only works for a single-valued field
+    // without docValues on a non-points type (the numeric hiding wrapper uninverts it);
+    // points based types and numeric docValues make the grouping collector fail with a
+    // 500, so those configurations must be rejected with a 400 instead.
+    final boolean unsupportedNumeric =
+        Boolean.getBoolean(NUMERIC_DOCVALUES_SYSPROP) || Boolean.getBoolean(NUMERIC_POINTS_SYSPROP);
+
+    if (!unsupportedNumeric) {
+      // the supported configuration keeps returning counts for the numeric facet field
+      assertQ(
+          req(
+              "q", "*:*",
+              "fq", "id_i1:[2000 TO 2004]",
+              "group", "true",
+              "group.facet", "true",
+              "group.field", "hotel_s1",
+              "facet", "true",
+              "facet.field", "duration_i1"),
+          "//lst[@name='facet_fields']/lst[@name='duration_i1']",
+          "*[count(//lst[@name='duration_i1']/int)=2]",
+          "//lst[@name='duration_i1']/int[@name='5'][.='2']",
+          "//lst[@name='duration_i1']/int[@name='10'][.='2']");
+      return;
+    }
+
+    // numeric facet field
+    SolrException facetField =
+        expectThrows(
+            SolrException.class,
+            () ->
+                h.query(
+                    req(
+                        "q", "*:*",
+                        "group", "true",
+                        "group.facet", "true",
+                        "group.field", "hotel_s1",
+                        "facet", "true",
+                        "facet.field", "duration_i1")));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, facetField.code());
+    assertTrue(facetField.getMessage(), facetField.getMessage().contains("duration_i1"));
+
+    // numeric group field
+    SolrException groupField =
+        expectThrows(
+            SolrException.class,
+            () ->
+                h.query(
+                    req(
+                        "q", "*:*",
+                        "group", "true",
+                        "group.facet", "true",
+                        "group.field", "duration_i1",
+                        "facet", "true",
+                        "facet.field", "airport_s1")));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, groupField.code());
+    assertTrue(groupField.getMessage(), groupField.getMessage().contains("duration_i1"));
+  }
+
+  @Test
   public void testEmptyFacetCounts() throws Exception {
     doEmptyFacetCounts();
   }
