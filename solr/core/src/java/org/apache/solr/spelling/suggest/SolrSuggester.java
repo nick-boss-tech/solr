@@ -40,6 +40,7 @@ import org.apache.lucene.search.suggest.Lookup.LookupResult;
 import org.apache.lucene.store.AlreadyClosedException;
 import org.apache.lucene.util.Accountable;
 import org.apache.solr.analysis.TokenizerChain;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.CloseHook;
 import org.apache.solr.core.SolrCore;
@@ -226,6 +227,23 @@ public class SolrSuggester implements Accountable {
       return EMPTY_RESULT;
     }
 
+    try {
+      return lookupSuggestions(options);
+    } catch (IllegalStateException e) {
+      // e.g. FreeTextSuggester: "Lookup not supported at this time" when nothing was built or loaded
+      throw new SolrException(
+          SolrException.ErrorCode.SERVICE_UNAVAILABLE,
+          "Suggester '"
+              + name
+              + "' is not built on this node ("
+              + e.getMessage()
+              + "). Suggester dictionaries are not replicated: build it on every node"
+              + " (suggest.build or suggest.buildAll) or enable buildOnStartup/buildOnCommit.",
+          e);
+    }
+  }
+
+  private SuggesterResult lookupSuggestions(SuggesterOptions options) throws IOException {
     SuggesterResult res = new SuggesterResult();
     List<LookupResult> suggestions;
     if (options.contextFilterQuery == null) {
