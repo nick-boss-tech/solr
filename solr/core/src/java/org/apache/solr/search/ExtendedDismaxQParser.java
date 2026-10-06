@@ -306,6 +306,8 @@ public class ExtendedDismaxQParser extends QParser {
       List<Clause> normalClauses = new ArrayList<>(clauses.size());
       for (Clause clause : clauses) {
         if (clause.field != null || clause.isPhrase) continue;
+        // the match all docs query must not be run through the pf fields' analyzers (SOLR-3962)
+        if (isMatchAllDocsClause(clause)) continue;
         // check for keywords "AND,OR,TO"
         if (clause.isBareWord()) {
           String s = clause.val;
@@ -314,6 +316,8 @@ public class ExtendedDismaxQParser extends QParser {
         }
         normalClauses.add(clause);
       }
+      // nothing to build phrase queries from (e.g. the query is only *:* or fielded clauses)
+      if (normalClauses.isEmpty()) return;
 
       // create a map of {wordGram, [phraseField]}
       final Map<Integer, List<FieldParams>> phraseFieldsByWordGram = new HashMap<>();
@@ -349,6 +353,63 @@ public class ExtendedDismaxQParser extends QParser {
         }
       }
     }
+  }
+
+  /**
+   * Whether the clause is the match-all docs query, in any of its spellings: bare, with a leading +
+   * or - modifier, wrapped in grouping parentheses, and/or with a trailing boost. The check works
+   * on the raw clause text because the phrase-field code collects clauses before any per-clause
+   * parsed query exists; the main query is parsed from the rebuilt clause string as a whole.
+   */
+  private static boolean isMatchAllDocsClause(Clause clause) {
+    String s = clause.raw;
+    if (clause.must != 0 && s.length() > 1 && s.charAt(0) == clause.must) {
+      s = s.substring(1);
+    }
+    // splitIntoClauses escapes the colon of every clause except a bare *:*; undo that here
+    s = s.replace("\\:", ":");
+    // strip a trailing boost, as in *:*^2
+    int boost = s.lastIndexOf('^');
+    if (boost > 0 && isBoostValue(s.substring(boost + 1))) {
+      s = s.substring(0, boost);
+    }
+    // strip grouping parentheses that wrap the whole clause, as in (*:*)
+    while (s.length() > 2 && s.charAt(0) == '(' && s.charAt(s.length() - 1) == ')') {
+      int depth = 0;
+      boolean wrapsWhole = true;
+      for (int i = 0; i < s.length() - 1; i++) {
+        char c = s.charAt(i);
+        if (c == '(') {
+          depth++;
+        } else if (c == ')') {
+          depth--;
+        }
+        if (depth == 0) {
+          wrapsWhole = false;
+          break;
+        }
+      }
+      if (!wrapsWhole) break;
+      s = s.substring(1, s.length() - 1);
+    }
+    return "*:*".equals(s);
+  }
+
+  /** Whether the string is a plain boost number: digits with an optional decimal point. */
+  private static boolean isBoostValue(String s) {
+    boolean digitSeen = false;
+    boolean dotSeen = false;
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (c >= '0' && c <= '9') {
+        digitSeen = true;
+      } else if (c == '.' && !dotSeen) {
+        dotSeen = true;
+      } else {
+        return false;
+      }
+    }
+    return digitSeen;
   }
 
   /**

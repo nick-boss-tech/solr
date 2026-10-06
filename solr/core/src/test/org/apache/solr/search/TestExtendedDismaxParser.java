@@ -159,6 +159,84 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     }
   }
 
+  /** SOLR-3962: pf must not feed *:* to a tokenizer that splits it into several tokens. */
+  @Test
+  public void testMatchAllDocsWithPhraseFields() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      for (String pf : Arrays.asList("pf", "pf2", "pf3")) {
+        try (SolrQueryRequest req = req("sow", sow, "qf", "id", pf, "name_chars")) {
+          QParser qParser = QParser.getParser("*:*", "edismax", req);
+          assertThat(qParser.getQuery(), isA(MatchAllDocsQuery.class));
+        }
+      }
+    }
+  }
+
+  /**
+   * SOLR-3962: the modified match-all spellings (a + or - modifier, a boost, grouping parentheses)
+   * must not be run through the pf fields' analyzers either. On the base parser each of them adds a
+   * phrase clause built from the tokens of the literal text, such as name_chars:"* : *". The pf2
+   * and pf3 iterations are guards only: a single clause can never feed a shingle of size 2 or 3, so
+   * they pass on the base parser too.
+   */
+  @Test
+  public void testMatchAllDocsSpellingsWithPhraseFields() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      for (String pf : Arrays.asList("pf", "pf2", "pf3")) {
+        for (String q : Arrays.asList("+*:*", "-*:*", "*:*^2", "(*:*)", "(*:*)^2", "+(*:*)")) {
+          try (SolrQueryRequest req = req("sow", sow, "qf", "id", pf, "name_chars")) {
+            Query parsed = QParser.getParser(q, "edismax", req).getQuery();
+            assertFalse(
+                "phrase clause built from the match-all spelling " + q + ": " + parsed,
+                parsed.toString().contains("name_chars:\""));
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * SOLR-3962: the ticket's symptom is scoring. With pf set on a field whose analyzer splits *:*
+   * into single characters, every hit of a match-all query must still score the constant 1.0. On
+   * the base parser, the document whose field holds the split token sequence (the *:* in its text,
+   * followed by a space) gets the extra phrase clause and scores above 1.0; the other document is
+   * the control and scores 1.0 on both parsers.
+   */
+  @Test
+  public void testMatchAllDocsScoreWithPhraseFields() throws Exception {
+    assertU(adoc("id", "3962scorea", "name_chars", "x *:* y"));
+    assertU(adoc("id", "3962scoreb", "name_chars", "plain tokens here"));
+    assertU(commit());
+    try {
+      for (String sow : Arrays.asList("true", "false")) {
+        for (String id : Arrays.asList("3962scorea", "3962scoreb")) {
+          assertJQ(
+              req(
+                  "q",
+                  "*:*",
+                  "defType",
+                  "edismax",
+                  "qf",
+                  "id",
+                  "pf",
+                  "name_chars",
+                  "fq",
+                  "id:" + id,
+                  "fl",
+                  "id,score",
+                  "sow",
+                  sow),
+              "/response/numFound==1",
+              "/response/docs/[0]/score==1.0");
+        }
+      }
+    } finally {
+      assertU(delI("3962scorea"));
+      assertU(delI("3962scoreb"));
+      assertU(commit());
+    }
+  }
+
   public void testTrailingOperators() throws Exception {
     for (String sow : Arrays.asList("true", "false")) {
       // really just test that exceptions aren't thrown by
