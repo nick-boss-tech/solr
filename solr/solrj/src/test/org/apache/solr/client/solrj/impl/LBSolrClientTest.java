@@ -52,6 +52,14 @@ public class LBSolrClientTest extends SolrTestCase {
   }
 
   @Test
+  public void testZombieCheckQueryIsTraceable() {
+    final var query = LBSolrClient.zombieCheckQuery();
+    assertEquals("true", query.get(LBSolrClient.ZOMBIE_CHECK_PARAM));
+    assertEquals("0", query.get(CommonParams.ROWS));
+    assertEquals("false", query.get("distrib"));
+  }
+
+  @Test
   public void testEndpointNormalizesProvidedBaseUrl() {
     final var normalizedBaseUrl = "http://localhost:8983/solr";
     final var noTrailingSlash = new LBSolrClient.Endpoint(normalizedBaseUrl);

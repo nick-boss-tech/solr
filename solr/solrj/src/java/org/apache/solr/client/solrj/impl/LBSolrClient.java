@@ -152,6 +152,10 @@ public abstract class LBSolrClient extends SolrClient {
   private final AtomicInteger counter = new AtomicInteger(-1);
 
   private static final SolrQuery solrQuery = new SolrQuery("*:*");
+
+  /** Marker parameter on the alive-check request sent to servers that are considered down. */
+  static final String ZOMBIE_CHECK_PARAM = "_zombieservercheck";
+
   protected volatile ResponseParser parser;
   protected volatile RequestWriter requestWriter;
 
@@ -167,6 +171,12 @@ public abstract class LBSolrClient extends SolrClient {
     // not a top-level request, we are interested only in the server being sent to i.e. it need not
     // distribute our request to further servers
     solrQuery.setDistrib(false);
+    // identifies the request in server logs
+    solrQuery.set(ZOMBIE_CHECK_PARAM, true);
+  }
+
+  static SolrQuery zombieCheckQuery() {
+    return solrQuery.getCopy();
   }
 
   public static class Builder<C extends HttpSolrClient> {
