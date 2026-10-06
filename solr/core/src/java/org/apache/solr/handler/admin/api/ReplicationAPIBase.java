@@ -31,6 +31,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Pattern;
 import java.util.zip.Adler32;
 import java.util.zip.Checksum;
@@ -91,6 +93,20 @@ public abstract class ReplicationAPIBase extends JerseyResource {
     this.solrCore = solrCore;
     this.solrQueryRequest = solrQueryRequest;
     this.solrQueryResponse = solrQueryResponse;
+  }
+
+  /** One limiter per configured rate, shared by all concurrent file streams on this node. */
+  private static final ConcurrentMap<Double, RateLimiter> SHARED_RATE_LIMITERS =
+      new ConcurrentHashMap<>();
+
+  /**
+   * Returns the limiter that throttles file streams to {@code maxWriteMBPerSec}, so that N
+   * concurrent replicas fetching at the same configured rate share it instead of each getting the
+   * full rate. A rate of 0 means no throttle.
+   */
+  static RateLimiter rateLimiterFor(double maxWriteMBPerSec) {
+    final double mbPerSec = maxWriteMBPerSec == 0 ? Double.MAX_VALUE : maxWriteMBPerSec;
+    return SHARED_RATE_LIMITERS.computeIfAbsent(mbPerSec, RateLimiter.SimpleRateLimiter::new);
   }
 
   protected IndexVersionResponse doFetchIndexVersion() throws IOException {
@@ -305,12 +321,7 @@ public abstract class ReplicationAPIBase extends JerseyResource {
       if (useChecksum) {
         checksum = new Adler32();
       }
-      // No throttle if MAX_WRITE_PER_SECOND is not specified
-      if (maxWriteMBPerSec == 0) {
-        this.rateLimiter = new RateLimiter.SimpleRateLimiter(Double.MAX_VALUE);
-      } else {
-        this.rateLimiter = new RateLimiter.SimpleRateLimiter(maxWriteMBPerSec);
-      }
+      this.rateLimiter = rateLimiterFor(maxWriteMBPerSec);
     }
 
     // Throw exception on directory traversal attempts
