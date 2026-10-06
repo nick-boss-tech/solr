@@ -451,7 +451,7 @@ public abstract class SolrClient implements Serializable, Closeable {
    * 'autoCommit' settings.
    *
    * @param collection the Solr collection to send the commit to
-   * @param waitFlush block until index changes are flushed to disk
+   * @param waitFlush ignored by Solr, which does not honor this option; kept for compatibility
    * @param waitSearcher block until a new searcher is opened and registered as the main query
    *     searcher, making the changes visible
    * @return an {@link org.apache.solr.client.solrj.response.UpdateResponse} containing the response
@@ -474,7 +474,7 @@ public abstract class SolrClient implements Serializable, Closeable {
    * consider using 'commitWithin' when adding documents or rely on your core's/collection's
    * 'autoCommit' settings.
    *
-   * @param waitFlush block until index changes are flushed to disk
+   * @param waitFlush ignored by Solr, which does not honor this option; kept for compatibility
    * @param waitSearcher block until a new searcher is opened and registered as the main query
    *     searcher, making the changes visible
    * @return an {@link org.apache.solr.client.solrj.response.UpdateResponse} containing the response
@@ -496,7 +496,7 @@ public abstract class SolrClient implements Serializable, Closeable {
    * 'autoCommit' settings.
    *
    * @param collection the Solr collection to send the commit to
-   * @param waitFlush block until index changes are flushed to disk
+   * @param waitFlush ignored by Solr, which does not honor this option; kept for compatibility
    * @param waitSearcher block until a new searcher is opened and registered as the main query
    *     searcher, making the changes visible
    * @param softCommit makes index changes visible while neither fsync-ing index files nor writing a
@@ -522,7 +522,7 @@ public abstract class SolrClient implements Serializable, Closeable {
    * consider using 'commitWithin' when adding documents or rely on your core's/collection's
    * 'autoCommit' settings.
    *
-   * @param waitFlush block until index changes are flushed to disk
+   * @param waitFlush ignored by Solr, which does not honor this option; kept for compatibility
    * @param waitSearcher block until a new searcher is opened and registered as the main query
    *     searcher, making the changes visible
    * @param softCommit makes index changes visible while neither fsync-ing index files nor writing a
@@ -576,7 +576,7 @@ public abstract class SolrClient implements Serializable, Closeable {
    * <p>Note: In most cases it is not required to do explicit optimize
    *
    * @param collection the Solr collection to send the optimize command to
-   * @param waitFlush block until index changes are flushed to disk
+   * @param waitFlush ignored by Solr, which does not honor this option; kept for compatibility
    * @param waitSearcher block until a new searcher is opened and registered as the main query
    *     searcher, making the changes visible
    * @return an {@link org.apache.solr.client.solrj.response.UpdateResponse} containing the response
@@ -594,7 +594,7 @@ public abstract class SolrClient implements Serializable, Closeable {
    *
    * <p>Note: In most cases it is not required to do explicit optimize
    *
-   * @param waitFlush block until index changes are flushed to disk
+   * @param waitFlush ignored by Solr, which does not honor this option; kept for compatibility
    * @param waitSearcher block until a new searcher is opened and registered as the main query
    *     searcher, making the changes visible
    * @return an {@link org.apache.solr.client.solrj.response.UpdateResponse} containing the response
@@ -613,7 +613,7 @@ public abstract class SolrClient implements Serializable, Closeable {
    * <p>Note: In most cases it is not required to do explicit optimize
    *
    * @param collection the Solr collection to send the optimize command to
-   * @param waitFlush block until index changes are flushed to disk
+   * @param waitFlush ignored by Solr, which does not honor this option; kept for compatibility
    * @param waitSearcher block until a new searcher is opened and registered as the main query
    *     searcher, making the changes visible
    * @param maxSegments optimizes down to at most this number of segments
@@ -635,7 +635,7 @@ public abstract class SolrClient implements Serializable, Closeable {
    *
    * <p>Note: In most cases it is not required to do explicit optimize
    *
-   * @param waitFlush block until index changes are flushed to disk
+   * @param waitFlush ignored by Solr, which does not honor this option; kept for compatibility
    * @param waitSearcher block until a new searcher is opened and registered as the main query
    *     searcher, making the changes visible
    * @param maxSegments optimizes down to at most this number of segments
