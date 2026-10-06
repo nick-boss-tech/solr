@@ -383,8 +383,71 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     // test for ignoring stopwords when all query terms are stopwords
     assertQ(req("defType", "edismax", "qf", "text_sw", "q", "the"), oner);
 
+    // a fuzzy stopword is dropped just like a plain one (SOLR-2309)
+    assertQ(
+        req("defType", "edismax", "qf", "text_sw", "q", "the~0.5 big~0.5", "debug", "query"),
+        "//str[@name='parsedquery'][contains(.,'text_sw:big~')]",
+        "//str[@name='parsedquery'][not(contains(.,'text_sw:the'))]");
+
+    // an all-stopword fuzzy query behaves like the plain all-stopword query above: when
+    // every term is a stopword, none of them are removed, so the fuzzy terms are kept
+    assertQ(
+        req("defType", "edismax", "qf", "text_sw", "q", "the~0.5", "debug", "query"),
+        "//str[@name='parsedquery'][contains(.,'text_sw:the~')]",
+        twor);
+    assertQ(
+        req("defType", "edismax", "qf", "text_sw", "q", "the~0.5 of~0.5", "debug", "query"),
+        "//str[@name='parsedquery'][contains(.,'text_sw:the~')]",
+        "//str[@name='parsedquery'][contains(.,'text_sw:of~')]",
+        twor);
+
+    // with stopwords=false a fuzzy stopword is kept, like the plain term further up
+    assertQ(
+        req(
+            "defType",
+            "edismax",
+            "qf",
+            "text_sw",
+            "stopwords",
+            "false",
+            "q",
+            "the~0.5 big~0.5",
+            "debug",
+            "query"),
+        "//str[@name='parsedquery'][contains(.,'text_sw:the~')]",
+        "//str[@name='parsedquery'][contains(.,'text_sw:big~')]");
+    assertQ(
+        req(
+            "defType",
+            "edismax",
+            "qf",
+            "text_sw",
+            "stopwords",
+            "false",
+            "q.op",
+            "AND",
+            "q",
+            "the~0.5 big~0.5"),
+        oner);
+
     // test for not ignoring stopwords when all query terms are stopwords and alwaysStopwords is set
     assertQ(req("defType", "edismax", "qf", "text_sw", "q", "the", "alwaysStopwords", "true"), nor);
+
+    // a fuzzy stopword is dropped even when it is the only term, if alwaysStopwords is set
+    assertQ(
+        req(
+            "defType",
+            "edismax",
+            "qf",
+            "text_sw",
+            "q",
+            "the~0.5",
+            "alwaysStopwords",
+            "true",
+            "debug",
+            "query"),
+        "//str[@name='parsedquery'][.='+()']",
+        nor);
 
     // searching for a literal colon value when clearly not used for a field
     assertQ(
