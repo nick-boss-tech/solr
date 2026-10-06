@@ -83,7 +83,9 @@ public class SpellingQueryConverter extends QueryConverter {
     NMTOKEN = "([" + sb.toString() + "]|" + SURROGATE_PAIR + ")+";
   }
 
-  static final String PATTERN = "(?:(?!(" + NMTOKEN + ":|[\\^.]\\d+)))[^^.:(\\s][\\p{L}_\\-0-9]+";
+  // an apostrophe followed by letters stays inside the word ("pandora's"), it does not split it
+  static final String PATTERN =
+      "(?:(?!(" + NMTOKEN + ":|[\\^.]\\d+)))[^^.:(\\s][\\p{L}_\\-0-9]+(?:['\\u2019]\\p{L}+)*";
   // previous version: Pattern.compile("(?:(?!(\\w+:|\\d+)))\\w+");
   protected Pattern QUERY_REGEX = Pattern.compile(PATTERN);
 

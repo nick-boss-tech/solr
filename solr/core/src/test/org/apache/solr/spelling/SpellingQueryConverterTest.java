@@ -72,6 +72,21 @@ public class SpellingQueryConverterTest extends SolrTestCase {
   }
 
   @Test
+  public void testApostropheStaysInWord() throws IOException {
+    SpellingQueryConverter converter = new SpellingQueryConverter();
+    converter.init(new NamedList<>());
+    converter.setAnalyzer(new WhitespaceAnalyzer());
+    String original = "pandora's star";
+    List<SpellCheckToken> tokens = SpellCheckToken.drain(converter.convert(original));
+    assertEquals("tokens: " + tokens, 2, tokens.size());
+    assertEquals("pandora's", tokens.get(0).toString());
+    assertEquals(0, tokens.get(0).startOffset());
+    assertEquals(9, tokens.get(0).endOffset());
+    assertEquals("star", tokens.get(1).toString());
+    assertTrue("Token offsets do not match", isOffsetCorrect(original, tokens));
+  }
+
+  @Test
   public void testSpecialChars() throws IOException {
     SpellingQueryConverter converter = new SpellingQueryConverter();
     converter.init(new NamedList<>());
