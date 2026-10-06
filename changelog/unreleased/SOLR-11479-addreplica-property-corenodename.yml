@@ -1,0 +1,8 @@
+title: "ADDREPLICA: accept property.coreNodeName as an alias of coreNodeName instead of failing core creation"
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-11479
+    url: https://issues.apache.org/jira/browse/SOLR-11479
