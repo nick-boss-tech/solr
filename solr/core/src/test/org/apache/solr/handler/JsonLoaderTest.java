@@ -189,6 +189,30 @@ public class JsonLoaderTest extends SolrTestCaseJ4 {
     assertTrue(ex.getMessage().contains("JSON"));
   }
 
+  @Test
+  public void testFieldMappingWithMapUniqueKeyOnlyIsRejected() {
+    String json = "{'id':'1','title':'t'}".replace('\'', '"');
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    BufferingRequestProcessor p = new BufferingRequestProcessor(null);
+    JsonLoader loader = new JsonLoader();
+
+    SolrException ex =
+        expectThrows(
+            SolrException.class,
+            () ->
+                loader.load(
+                    req(
+                        "json.command", "false",
+                        "mapUniqueKeyOnly", "true",
+                        "df", "_catch_all",
+                        "f", "title:/title"),
+                    rsp,
+                    new ContentStreamBase.StringStream(json),
+                    p));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
+    assertTrue(ex.getMessage(), ex.getMessage().contains("mapUniqueKeyOnly"));
+  }
+
   public void testSimpleFormatInAdd() throws Exception {
     String str = "{'add':[{'id':'1'},{'id':'2'}]}".replace('\'', '"');
     SolrQueryRequest req = req();
