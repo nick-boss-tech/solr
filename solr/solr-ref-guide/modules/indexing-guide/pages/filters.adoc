@@ -3837,7 +3837,7 @@ Concatenate word parts and number parts, but not word and number parts that occu
 
 *Tokenizer to Filter:* "hot-spot"(1), "100+42"(2), "XL40"(3)
 
-*Out:* "hot"(1), "spot"(2), "hotspot"(2), "100"(3), "42"(4), "10042"(4), "XL"(5), "40"(6)
+*Out:* "hotspot"(1), "hot"(1), "spot"(2), "10042"(3), "100"(3), "42"(4), "XL"(5), "40"(6)
 
 *Example:*
 
@@ -3856,7 +3856,9 @@ Word and/or number parts are joined together.
 
 *Tokenizer to Filter:* "XL-4000/ES"(1)
 
-*Out:* "XL"(1), "4000"(2), "ES"(3), "XL4000ES"(3)
+*Out:* "XL4000ES"(1), "XL"(1), "4000"(2), "ES"(3)
+
+NOTE: This filter produces a token graph, so a concatenated token is emitted at the position of the first part it joins (and spans the parts it joins), before the parts themselves.
 
 *Example:*
 
