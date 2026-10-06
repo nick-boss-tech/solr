@@ -1,0 +1,8 @@
+title: >
+  edismax now drops a fuzzy term (for example the~0.5) that the field's query analyzer removes as a stopword, as it already does for the plain term.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-2309
+    url: https://issues.apache.org/jira/browse/SOLR-2309
