@@ -1,0 +1,8 @@
+title: >
+  Replication-handler restore now verifies every file copied from the backup against the checksum in its footer, so a corrupt backup file fails the restore (and rolls back) instead of being switched in silently.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9091
+    url: https://issues.apache.org/jira/browse/SOLR-9091
