@@ -83,6 +83,9 @@ import org.slf4j.LoggerFactory;
  *   </code>
  * </pre>
  */
+// a subclass annotation replaces the one on SolrTestCaseJ4, so ExtrasFS is repeated here;
+// HandleLimitFS has a fixed handle limit for the whole JVM, but a cluster runs many nodes in it
+@LuceneTestCase.SuppressFileSystems({"ExtrasFS", "HandleLimitFS"})
 public class SolrCloudTestCase extends SolrTestCaseJ4 {
 
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
