@@ -1,0 +1,8 @@
+title: >
+  Ref guide: interval facets take the ex local param on facet.interval (not on facet.interval.set), with an example.
+type: other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-7119
+    url: https://issues.apache.org/jira/browse/SOLR-7119
