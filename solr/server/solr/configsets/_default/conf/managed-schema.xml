@@ -627,6 +627,17 @@
       </analyzer>
     </fieldType>
 
+    <!-- Czech, under the ISO 639 language code "cs"; identical to text_cz, which is kept for compatibility -->
+    <dynamicField name="*_txt_cs" type="text_cs"  indexed="true"  stored="true"/>
+    <fieldType name="text_cs" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer name="standard"/>
+        <filter name="lowercase"/>
+        <filter name="stop" ignoreCase="true" words="lang/stopwords_cs.txt" />
+        <filter name="czechStem"/>
+      </analyzer>
+    </fieldType>
+
     <!-- Danish -->
     <dynamicField name="*_txt_da" type="text_da"  indexed="true"  stored="true"/>
     <fieldType name="text_da" class="solr.TextField" positionIncrementGap="100">
