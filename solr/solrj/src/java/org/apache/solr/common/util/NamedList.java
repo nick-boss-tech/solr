@@ -78,7 +78,8 @@ public class NamedList<T>
   }
 
   /**
-   * Creates a NamedList instance containing the "name,value" pairs contained in the Entry[].
+   * Creates a NamedList instance containing the "name,value" pairs contained in the Entry[]. Null
+   * array elements are skipped.
    *
    * <p>Modifying the contents of the Entry[] after calling this constructor may change the
    * NamedList (in future versions of Solr), but this is not guaranteed and should not be relied
@@ -144,6 +145,9 @@ public class NamedList<T>
   private List<Object> nameValueMapToList(Map.Entry<String, ? extends T>[] nameValuePairs) {
     List<Object> result = new ArrayList<>(nameValuePairs.length << 1);
     for (Map.Entry<String, ?> ent : nameValuePairs) {
+      if (ent == null) {
+        continue;
+      }
       result.add(ent.getKey());
       result.add(ent.getValue());
     }

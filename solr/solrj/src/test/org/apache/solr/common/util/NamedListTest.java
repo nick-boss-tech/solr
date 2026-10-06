@@ -16,8 +16,10 @@
  */
 package org.apache.solr.common.util;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.common.SolrException;
 import org.junit.Test;
@@ -32,6 +34,18 @@ public class NamedListTest extends SolrTestCase {
     assertEquals("{key1=value1}", nl.toString());
     nl.add("key2", "value2");
     assertEquals("{key1=value1, key2=value2}", nl.toString());
+  }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public void testEntryArrayWithNullElements() {
+    Map.Entry<String, String>[] entries = new Map.Entry[3];
+    entries[0] = new AbstractMap.SimpleEntry<>("a", "1");
+    entries[2] = new AbstractMap.SimpleEntry<>("c", "3");
+    NamedList<String> nl = new NamedList<>(entries);
+    assertEquals(2, nl.size());
+    assertEquals("1", nl.get("a"));
+    assertEquals("3", nl.get("c"));
+    assertEquals(2, new SimpleOrderedMap<>(entries).size());
   }
 
   public void testRemove() {
