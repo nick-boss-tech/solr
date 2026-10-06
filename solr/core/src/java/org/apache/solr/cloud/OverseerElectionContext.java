@@ -20,6 +20,7 @@ package org.apache.solr.cloud;
 import static org.apache.solr.common.params.CommonParams.ID;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Map;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
 import org.apache.solr.common.cloud.SolrZkClient;
@@ -28,6 +29,7 @@ import org.apache.solr.common.cloud.ZkNodeProps;
 import org.apache.solr.common.util.Utils;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
+import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +68,27 @@ final class OverseerElectionContext extends ElectionContext {
     synchronized (this) {
       if (!this.isClosed && !overseer.getZkController().getCoreContainer().isShutDown()) {
         overseer.start(id);
+        return;
       }
+    }
+    removeLeaderRegistration(id);
+  }
+
+  /** Removes the leader node just created, if still ours, when no Overseer was started for it. */
+  private void removeLeaderRegistration(String id) throws KeeperException, InterruptedException {
+    try {
+      Stat stat = new Stat();
+      byte[] data = zkClient.getData(leaderPath, null, stat);
+      Map<?, ?> registered = (Map<?, ?>) Utils.fromJSON(data);
+      if (id.equals(registered.get(ID))) {
+        log.info("Not starting the Overseer, removing leader registration of {}", id);
+        zkClient.delete(leaderPath, stat.getVersion());
+      }
+    } catch (KeeperException.NoNodeException
+        | KeeperException.BadVersionException
+        | IllegalStateException e) {
+      // gone already, taken over by another Overseer, or the client is closed (in which case the
+      // ephemeral registration dies with the session anyway)
     }
   }
 
