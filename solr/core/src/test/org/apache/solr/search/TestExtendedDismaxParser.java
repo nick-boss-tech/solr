@@ -159,6 +159,22 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     }
   }
 
+  /** SOLR-3243: an unfielded open-ended range must not be expanded over every qf field. */
+  @Test
+  public void testUnfieldedOpenRangeIsMatchAllDocs() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      try (SolrQueryRequest req = req("sow", sow, "qf", "id name title")) {
+        QParser qParser = QParser.getParser("[* TO *]", "edismax", req);
+        assertThat(qParser.getQuery(), isA(MatchAllDocsQuery.class));
+      }
+      // a fielded range still goes to that field only
+      try (SolrQueryRequest req = req("sow", sow, "qf", "id name title")) {
+        QParser qParser = QParser.getParser("id:[* TO *]", "edismax", req);
+        assertFalse(qParser.getQuery() instanceof MatchAllDocsQuery);
+      }
+    }
+  }
+
   public void testTrailingOperators() throws Exception {
     for (String sow : Arrays.asList("true", "false")) {
       // really just test that exceptions aren't thrown by
