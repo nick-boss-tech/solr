@@ -281,6 +281,41 @@ public class SpellCheckComponentTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testInvalidDictionaryWithBuildOrReload() {
+    for (String command : new String[] {SpellingParams.SPELLCHECK_BUILD, "spellcheck.reload"}) {
+      assertQEx(
+          "unknown dictionary with " + command + " should be NOT_FOUND, not an NPE",
+          "Specified dictionaries do not exist: INVALID",
+          reqWithPath(
+              rh,
+              SpellCheckComponent.COMPONENT_NAME,
+              "true",
+              "q",
+              "documemt",
+              SpellingParams.SPELLCHECK_DICT,
+              "INVALID",
+              command,
+              "true"),
+          SolrException.ErrorCode.NOT_FOUND);
+    }
+
+    assertQEx(
+        "one unknown dictionary among several should be NOT_FOUND, not an NPE",
+        "Specified dictionaries do not exist: INVALID default",
+        reqWithPath(
+            rh,
+            SpellCheckComponent.COMPONENT_NAME,
+            "true",
+            "q",
+            "documemt",
+            SpellingParams.SPELLCHECK_DICT,
+            "INVALID",
+            SpellingParams.SPELLCHECK_DICT,
+            "default"),
+        SolrException.ErrorCode.NOT_FOUND);
+  }
+
+  @Test
   public void testInvalidDictionary() {
     assertQEx(
         "Invalid specified dictionary should throw exception",

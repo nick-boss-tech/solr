@@ -113,6 +113,12 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
     }
     QueryLimits queryLimits = QueryLimits.getCurrentLimits();
     SolrSpellChecker spellChecker = getSpellChecker(params);
+    if (spellChecker == null) {
+      if (spellCheckers.isEmpty()) {
+        return; // same as process(): nothing configured, nothing to check
+      }
+      throw dictionariesDoNotExist(params);
+    }
     if (params.getBool(SPELLCHECK_BUILD, false)) {
       spellChecker.build(rb.req.getCore(), rb.req.getSearcher());
       rb.rsp.add("command", "build");
@@ -232,11 +238,15 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
         rb.rsp.add("spellcheck", response);
       }
     } else {
-      throw new SolrException(
-          SolrException.ErrorCode.NOT_FOUND,
-          "Specified dictionaries do not exist: "
-              + getDictionaryNameAsSingleString(getDictionaryNames(params)));
+      throw dictionariesDoNotExist(params);
     }
+  }
+
+  private SolrException dictionariesDoNotExist(SolrParams params) {
+    return new SolrException(
+        SolrException.ErrorCode.NOT_FOUND,
+        "Specified dictionaries do not exist: "
+            + getDictionaryNameAsSingleString(getDictionaryNames(params)));
   }
 
   private Integer maxResultsForSuggest(ResponseBuilder rb) {
@@ -591,7 +601,11 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
       if (ssc == null) {
         ConjunctionSolrSpellChecker cssc = new ConjunctionSolrSpellChecker();
         for (String dn : dictName) {
-          cssc.addChecker(spellCheckers.get(dn));
+          SolrSpellChecker checker = spellCheckers.get(dn);
+          if (checker == null) {
+            return null; // callers report the unknown dictionary
+          }
+          cssc.addChecker(checker);
         }
         ssc = cssc;
       }
