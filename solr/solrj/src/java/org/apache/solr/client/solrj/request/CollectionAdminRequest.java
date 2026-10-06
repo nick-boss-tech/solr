@@ -1831,6 +1831,22 @@ public abstract class CollectionAdminRequest<T extends CollectionAdminResponse>
     requestStatus(requestId).waitFor(client, timeout);
   }
 
+  /**
+   * Like {@link #waitForAsyncRequest(String, SolrClient, long)}, sending the REQUESTSTATUS polls
+   * and the final DELETESTATUS with the given per-request basic auth credentials.
+   */
+  public static void waitForAsyncRequest(
+      String requestId,
+      SolrClient client,
+      long timeout,
+      String basicAuthUser,
+      String basicAuthPassword)
+      throws SolrServerException, InterruptedException, IOException {
+    RequestStatus status = requestStatus(requestId);
+    status.setBasicAuthCredentials(basicAuthUser, basicAuthPassword);
+    status.waitFor(client, timeout);
+  }
+
   // REQUESTSTATUS request
   public static class RequestStatus extends CollectionAdminRequest<RequestStatusResponse> {
 
