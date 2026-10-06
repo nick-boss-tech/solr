@@ -28,7 +28,7 @@ REM set SOLR_JAVA_HOME=
 REM This controls the number of seconds that the solr script will wait for
 REM Solr to stop gracefully. If the graceful stop fails, the script will
 REM forcibly stop Solr.
-REM set SOLR_STOP_WAIT=180
+REM set SOLR_STOP_WAIT=600
 
 REM This controls the number of seconds that the solr script will wait for
 REM Solr to start. If the start fails you should inspect the Solr log files

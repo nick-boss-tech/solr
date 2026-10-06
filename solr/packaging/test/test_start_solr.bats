@@ -131,3 +131,14 @@ teardown() {
   # Verify the techproducts configset was uploaded
   config_exists "techproducts"
 }
+
+@test "SOLR-12347 stop waits ten minutes by default and start wait stays at three" {
+  solr start
+  solr assert --started http://localhost:${SOLR_PORT} --timeout 5000
+
+  run solr stop -p ${SOLR_PORT}
+  assert_output --partial 'waiting up to 600 seconds'
+
+  SOLR_STOP_WAIT=45 run solr start
+  assert_output --partial 'Waiting up to 45 seconds'
+}

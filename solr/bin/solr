@@ -151,8 +151,8 @@ else
   JSTACK=jstack
 fi
 
-: "${SOLR_STOP_WAIT:=180}"
-: "${SOLR_START_WAIT:=$SOLR_STOP_WAIT}" # defaulting to $SOLR_STOP_WAIT for backwards compatibility reasons
+: "${SOLR_START_WAIT:=${SOLR_STOP_WAIT:-180}}" # start wait keeps following an explicit $SOLR_STOP_WAIT for backwards compatibility reasons
+: "${SOLR_STOP_WAIT:=600}"
 
 # Store whether a solr port was explicitly provided, for the "solr stop" command.
 PROVIDED_SOLR_PORT="${SOLR_PORT_LISTEN:-}"

@@ -821,7 +821,7 @@ IF "%SCRIPT_CMD%"=="start" goto start_solr
 @REM stop logic here
 :stop_solr
 IF "%SOLR_STOP_WAIT%"=="" (
-  set SOLR_STOP_WAIT=180
+  set SOLR_STOP_WAIT=600
 )
 IF "%SOLR_PORT_LISTEN%"=="" (
   IF "%STOP_ALL%"=="1" (
