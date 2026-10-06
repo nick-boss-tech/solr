@@ -813,6 +813,18 @@ For example:
 &facet=true
 ----
 
+Filter exclusion with the `ex` local param (see "Tagging and Excluding Filters" below) applies to the whole interval facet, so it goes in the `facet.interval` parameter.
+It is not read from `facet.interval.set`, where only `key` is supported.
+For example:
+
+[source,text]
+----
+&fq={!tag=weight}weight:[45 TO 100}
+&facet.interval={!ex=weight}weight
+&facet.interval.set=[*,45)
+&facet=true
+----
+
 == Local Params for Faceting
 
 The xref:local-params.adoc[LocalParams syntax] allows overriding global settings.
