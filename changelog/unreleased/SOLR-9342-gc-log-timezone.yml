@@ -1,0 +1,8 @@
+title: >
+  bin/solr now exports TZ from SOLR_TIMEZONE (default UTC) so the GC log uses the same timezone as the Solr log, unless TZ is already set.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9342
+    url: https://issues.apache.org/jira/browse/SOLR-9342
