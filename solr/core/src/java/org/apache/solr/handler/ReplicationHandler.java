@@ -1330,6 +1330,10 @@ public class ReplicationHandler extends RequestHandlerBase
     }
 
     if (!enableFollower && !enableLeader) {
+      if (leader != null || follower != null) {
+        // configured, but every section is explicitly disabled: same as disablereplication
+        replicationEnabled.set(false);
+      }
       enableLeader = true;
       leader = new NamedList<>();
     }
