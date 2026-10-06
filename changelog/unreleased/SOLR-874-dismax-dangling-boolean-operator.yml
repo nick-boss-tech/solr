@@ -1,0 +1,8 @@
+title: "dismax: a trailing or leading AND/OR/NOT/&&/|| in the user query (for example q=ipod AND) is dropped instead of causing a parse error"
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-874
+    url: https://issues.apache.org/jira/browse/SOLR-874
