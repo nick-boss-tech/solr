@@ -264,6 +264,23 @@ public class LukeRequestHandlerTest extends SolrTestCaseJ4 {
     assertNull(xml, r);
   }
 
+  public void testShowAllIncludesIndexFieldsAndSchema() {
+    assertQ(
+        reqWithPath("/admin/luke", "show", "all"),
+        "//lst[@name='index']",
+        "//lst[@name='fields']/lst[@name='solr_t']",
+        "//lst[@name='schema']/lst[@name='fields']",
+        "//lst[@name='schema']/lst[@name='types']");
+  }
+
+  public void testShowIndexOmitsFieldsAndSchema() {
+    assertQ(
+        reqWithPath("/admin/luke", "show", "index"),
+        "//lst[@name='index']",
+        "count(//lst[@name='fields'])=0",
+        "count(//lst[@name='schema'])=0");
+  }
+
   public void testCatchAllCopyField() throws Exception {
     deleteCore();
     initCore("solrconfig.xml", "schema-copyfield-test.xml");

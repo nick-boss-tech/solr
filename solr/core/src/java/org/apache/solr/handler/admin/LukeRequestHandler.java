@@ -236,6 +236,9 @@ public class LukeRequestHandler extends RequestHandlerBase implements SolrCoreAw
       rsp.add(RSP_SCHEMA, getSchemaInfo(req.getSchema()));
     } else {
       rsp.add(RSP_FIELDS, getIndexedFieldsInfo(req));
+      if (ShowStyle.ALL == style) {
+        rsp.add(RSP_SCHEMA, getSchemaInfo(req.getSchema()));
+      }
     }
 
     // Add some generally helpful information
