@@ -1,0 +1,8 @@
+title: >
+  edismax now applies pf, pf2 and pf3 boosts on non-tokenized fields (for example string fields), as dismax does.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-2988
+    url: https://issues.apache.org/jira/browse/SOLR-2988
