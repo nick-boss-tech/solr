@@ -114,6 +114,22 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
     return protoRowType.apply(typeFactory);
   }
 
+  /**
+   * Connection property prefix under which {@code SQLHandler} passes the request's {@code fq}
+   * parameters ({@code solr.sql.fq.0}, {@code solr.sql.fq.1}, ...) to every Solr query built here.
+   */
+  public static final String FILTER_QUERY_PROPERTY_PREFIX = "solr.sql.fq.";
+
+  private static void addFilterQueries(ModifiableSolrParams params, Properties properties) {
+    for (int i = 0; ; i++) {
+      String fq = properties.getProperty(FILTER_QUERY_PROPERTY_PREFIX + i);
+      if (fq == null) {
+        return;
+      }
+      params.add(CommonParams.FQ, fq);
+    }
+  }
+
   private Enumerable<Object> query(final Properties properties) {
     return query(
         properties, List.of(), null, List.of(), List.of(), List.of(), null, null, null, null);
@@ -159,10 +175,11 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
     var solrConnection = CloudSolrClient.CloudSolrClientConnection.parse(zk);
     try {
       if (metricPairs.isEmpty() && buckets.isEmpty()) {
-        tupleStream = handleSelect(solrConnection, collection, q, fields, orders, limit, offset);
+        tupleStream =
+            handleSelect(solrConnection, collection, properties, q, fields, orders, limit, offset);
       } else {
         if (buckets.isEmpty()) {
-          tupleStream = handleStats(solrConnection, collection, q, metricPairs, fields);
+          tupleStream = handleStats(solrConnection, collection, properties, q, metricPairs, fields);
         } else {
           if (mapReduce) {
             tupleStream =
@@ -182,6 +199,7 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
                 handleGroupByFacet(
                     solrConnection,
                     collection,
+                    properties,
                     fields,
                     q,
                     orders,
@@ -282,6 +300,7 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
   private TupleStream handleSelect(
       CloudSolrClient.CloudSolrClientConnection solrConnection,
       String collection,
+      Properties properties,
       String query,
       List<Map.Entry<String, Class<?>>> fields,
       List<Pair<String, String>> orders,
@@ -291,6 +310,7 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
 
     ModifiableSolrParams params = new ModifiableSolrParams();
     params.add(CommonParams.Q, query);
+    addFilterQueries(params, properties);
 
     // Validate the fields
     for (Map.Entry<String, Class<?>> entry : fields) {
@@ -521,6 +541,7 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
 
     params.set(CommonParams.FL, fl);
     params.set(CommonParams.Q, query);
+    addFilterQueries(params, properties);
     params.set(CommonParams.WT, CommonParams.JAVABIN);
 
     if (numWorkers > 1) {
@@ -622,6 +643,7 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
   private TupleStream handleGroupByFacet(
       CloudSolrClient.CloudSolrClientConnection solrConnection,
       String collection,
+      Properties properties,
       final List<Map.Entry<String, Class<?>>> fields,
       final String query,
       final List<Pair<String, String>> orders,
@@ -638,6 +660,7 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
 
     ModifiableSolrParams solrParams = new ModifiableSolrParams();
     solrParams.add(CommonParams.Q, query);
+    addFilterQueries(solrParams, properties);
 
     Bucket[] buckets = buildBuckets(bucketFields, fields);
     Metric[] metrics = buildMetrics(metricPairs, true).toArray(new Metric[0]);
@@ -779,6 +802,7 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
 
     params.set(CommonParams.FL, fl);
     params.set(CommonParams.Q, query);
+    addFilterQueries(params, properties);
     params.set(CommonParams.WT, CommonParams.JAVABIN);
 
     if (numWorkers > 1) {
@@ -857,6 +881,7 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
   private TupleStream handleStats(
       CloudSolrClient.CloudSolrClientConnection solrConnection,
       String collection,
+      Properties properties,
       String query,
       List<Pair<String, String>> metricPairs,
       List<Map.Entry<String, Class<?>>> fields)
@@ -869,6 +894,7 @@ class SolrTable extends AbstractQueryableTable implements TranslatableTable {
 
     ModifiableSolrParams solrParams = new ModifiableSolrParams();
     solrParams.add(CommonParams.Q, query);
+    addFilterQueries(solrParams, properties);
     Metric[] metrics = buildMetrics(metricPairs, false).toArray(new Metric[0]);
 
     for (Metric metric : metrics) {

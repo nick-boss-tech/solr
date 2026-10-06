@@ -130,6 +130,14 @@ public class SQLHandler extends RequestHandlerBase
       properties.setProperty("aggregationMode", params.get("aggregationMode"));
       properties.setProperty("numWorkers", params.get("numWorkers"));
 
+      // Filter queries are passed through to every Solr query the statement turns into
+      String[] filterQueries = params.getParams(CommonParams.FQ);
+      if (filterQueries != null) {
+        for (int i = 0; i < filterQueries.length; i++) {
+          properties.setProperty(SolrTable.FILTER_QUERY_PROPERTY_PREFIX + i, filterQueries[i]);
+        }
+      }
+
       // Set these last to ensure that they are set properly
       properties.setProperty("lex", Lex.MYSQL.toString());
       properties.setProperty("zk", defaultZkhost);

@@ -463,6 +463,51 @@ public class TestSQLHandler extends SolrCloudTestCase {
   }
 
   @Test
+  public void testFilterQueriesArePassedThrough() throws Exception {
+    new UpdateRequest()
+        .add("id", "1", "text_t", "XXXX", "str_s", "a", "field_i", "7")
+        .add("id", "2", "text_t", "XXXX", "str_s", "b", "field_i", "8")
+        .add("id", "3", "text_t", "XXXX", "str_s", "a", "field_i", "9")
+        .commit(cluster.getSolrClient(), COLLECTIONORALIAS);
+
+    String baseUrl = cluster.getJettySolrRunners().getFirst().getBaseUrl().toString();
+
+    // plain select
+    SolrParams sParams =
+        params(
+            "stmt",
+            "select id from collection1 order by id asc",
+            "fq",
+            "str_s:a",
+            "fq",
+            "{!frange l=8 u=10}field_i");
+    List<Tuple> tuples = getTuples(sParams, baseUrl);
+    assertEquals(1, tuples.size());
+    assertEquals(3, tuples.getFirst().getLong("id").longValue());
+
+    // stats (no group by), facet and map_reduce group by
+    for (String mode : new String[] {"facet", "map_reduce"}) {
+      sParams =
+          params(
+              "stmt",
+              "select str_s, count(*) from collection1 group by str_s",
+              "aggregationMode",
+              mode,
+              "fq",
+              "-id:2");
+      tuples = getTuples(sParams, baseUrl);
+      assertEquals(mode, 1, tuples.size());
+      assertEquals(mode, "a", tuples.getFirst().get("str_s"));
+      assertEquals(mode, 2, tuples.getFirst().getDouble("EXPR$1"), 0.0);
+    }
+
+    sParams = params("stmt", "select count(*) from collection1", "fq", "str_s:b");
+    tuples = getTuples(sParams, baseUrl);
+    assertEquals(1, tuples.size());
+    assertEquals(1, tuples.getFirst().getDouble("EXPR$0"), 0.0);
+  }
+
+  @Test
   public void testConnectionParamsAllowlistOverride() throws Exception {
 
     new UpdateRequest()
