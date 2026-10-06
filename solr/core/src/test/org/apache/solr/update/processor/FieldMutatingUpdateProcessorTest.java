@@ -16,8 +16,10 @@
  */
 package org.apache.solr.update.processor;
 
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeSet;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
@@ -757,6 +759,25 @@ public class FieldMutatingUpdateProcessorTest extends UpdateProcessorTestBase {
     assertFalse(d.containsKey("id"));
     assertFalse(d.containsKey("t_raw"));
     assertFalse(d.containsKey("foo_s"));
+  }
+
+  public void testCountValuesAtomicUpdate() throws Exception {
+    SolrInputDocument d =
+        processAdd(
+            "count", doc(f("id", "1111"), f("count_field", Map.of("set", List.of("aaa", "bbb")))));
+    assertEquals(Map.of("set", 2), d.getFieldValue("count_field"));
+
+    Map<String, Object> setNull = new HashMap<>();
+    setNull.put("set", null);
+    d = processAdd("count", doc(f("id", "1111"), f("count_field", setNull)));
+    assertEquals(Map.of("set", 0), d.getFieldValue("count_field"));
+
+    d = processAdd("count", doc(f("id", "1111"), f("count_field", Map.of("set", "aaa"))));
+    assertEquals(Map.of("set", 1), d.getFieldValue("count_field"));
+
+    // the resulting count depends on the stored document, so no count may be produced
+    d = processAdd("count", doc(f("id", "1111"), f("count_field", Map.of("add", "aaa"))));
+    assertFalse(d.containsKey("count_field"));
   }
 
   public void testCountValues() throws Exception {

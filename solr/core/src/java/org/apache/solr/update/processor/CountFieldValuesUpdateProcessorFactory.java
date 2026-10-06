@@ -18,6 +18,8 @@ package org.apache.solr.update.processor;
 
 import static org.apache.solr.update.processor.FieldMutatingUpdateProcessor.mutator;
 
+import java.util.Collection;
+import java.util.Map;
 import org.apache.solr.common.SolrInputField;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
@@ -69,8 +71,33 @@ public final class CountFieldValuesUpdateProcessorFactory
         next,
         src -> {
           SolrInputField result = new SolrInputField(src.getName());
+          if (src.getValueCount() == 1 && src.getFirstValue() instanceof Map) {
+            return countAtomicUpdate(src, result);
+          }
           result.setValue(src.getValueCount());
           return result;
         });
+  }
+
+  /**
+   * An atomic update arrives as a single map of operations, not as the values themselves. Only a
+   * {@code set} can be counted (a {@code null} operand counts as zero); the result stays an atomic
+   * {@code set}. The count after any other operation depends on the stored document, so the field
+   * is dropped and the stored count is left alone.
+   */
+  private static SolrInputField countAtomicUpdate(SolrInputField src, SolrInputField result) {
+    Map<?, ?> operations = (Map<?, ?>) src.getFirstValue();
+    if (operations.size() != 1 || !operations.containsKey("set")) {
+      return null;
+    }
+    Object operand = operations.get("set");
+    int count = 1;
+    if (operand == null) {
+      count = 0;
+    } else if (operand instanceof Collection) {
+      count = ((Collection<?>) operand).size();
+    }
+    result.setValue(Map.of("set", count));
+    return result;
   }
 }
