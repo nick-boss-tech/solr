@@ -1,0 +1,8 @@
+title: >
+  A distributed {!knn} query now returns topK hits overall instead of topK per shard.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17055
+    url: https://issues.apache.org/jira/browse/SOLR-17055
