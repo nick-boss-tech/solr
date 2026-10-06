@@ -1,0 +1,8 @@
+title: >
+  The alive-check request LBSolrClient sends to servers it considers down now carries a _zombieservercheck=true parameter so it can be recognized in server logs.
+type: changed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-14298
+    url: https://issues.apache.org/jira/browse/SOLR-14298
