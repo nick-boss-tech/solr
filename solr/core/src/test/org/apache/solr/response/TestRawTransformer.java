@@ -31,6 +31,7 @@ import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.response.InputStreamResponseParser;
 import org.apache.solr.cloud.MiniSolrCloudCluster;
 import org.apache.solr.cloud.SolrCloudTestCase;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.IOUtils;
@@ -298,6 +299,65 @@ public class TestRawTransformer extends SolrCloudTestCase {
     assertTrue(
         "response (multiValued) does not contain right JSON encoding: " + strResponse,
         strResponse.contains("\"links\":[\""));
+  }
+
+  @Test
+  public void testGlobJsonTransformer() throws Exception {
+    QueryRequest req =
+        new QueryRequest(
+            new ModifiableSolrParams(
+                Map.of(
+                    "q",
+                    new String[] {"*:*"},
+                    "fl",
+                    new String[] {"id,su*:[json],link?:[json]"},
+                    "wt",
+                    new String[] {"json"},
+                    "indent",
+                    new String[] {"false"})));
+    req.setResponseParser(JSON_STREAM_RESPONSE_PARSER);
+    NamedList<Object> rsp = CLIENT.request(req, "collection1");
+    String strResponse = InputStreamResponseParser.consumeResponseToString(rsp);
+
+    assertTrue(
+        "glob did not write the single valued field raw: " + strResponse,
+        strResponse.contains("\"subject\":{poffL:[{offL:[{oGUID:\"7"));
+    assertTrue(
+        "glob did not write the multiValued field raw: " + strResponse,
+        Pattern.compile("\"links\":\\[\\{an_array:\\[1,2,3]},\\s*\\{an_array:\\[4,5,6]}]")
+            .matcher(strResponse)
+            .find());
+    assertFalse("field not matching the globs was returned: " + strResponse, strResponse.contains("\"author\""));
+
+    // [xml] does not apply to a json response: the matching fields are returned, not raw
+    req =
+        new QueryRequest(
+            new ModifiableSolrParams(
+                Map.of(
+                    "q",
+                    new String[] {"*:*"},
+                    "fl",
+                    new String[] {"au*:[xml]"},
+                    "wt",
+                    new String[] {"json"},
+                    "indent",
+                    new String[] {"false"})));
+    req.setResponseParser(JSON_STREAM_RESPONSE_PARSER);
+    rsp = CLIENT.request(req, "collection1");
+    strResponse = InputStreamResponseParser.consumeResponseToString(rsp);
+    assertTrue(
+        "unexpected serialization of XML field value in JSON response: " + strResponse,
+        strResponse.contains("\"author\":\"<root><child1>some</child1>"));
+
+    // a glob cannot be combined with a transformer that is not a raw value transformer
+    req =
+        new QueryRequest(
+            new ModifiableSolrParams(
+                Map.of("q", new String[] {"*:*"}, "fl", new String[] {"su*:[docid]"})));
+    QueryRequest badReq = req;
+    SolrException e =
+        expectThrows(SolrException.class, () -> CLIENT.request(badReq, "collection1"));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
   }
 
   private static final InputStreamResponseParser XML_STREAM_RESPONSE_PARSER =
