@@ -1672,7 +1672,7 @@ public class ZkController implements Closeable {
 
   // timeoutms is the timeout for the first call to get the leader - there is then
   // a longer wait to make sure that leader matches our local state
-  private String getLeader(final CloudDescriptor cloudDesc, int timeoutms) {
+  String getLeader(final CloudDescriptor cloudDesc, int timeoutms) {
 
     String collection = cloudDesc.getCollectionName();
     String shardId = cloudDesc.getShardId();
@@ -1722,11 +1722,20 @@ public class ZkController implements Closeable {
 
     } catch (IllegalStateException e) {
       throw e;
-    } catch (Exception e) {
-      log.error("Error getting leader from zk", e);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
       throw new SolrException(
           SolrException.ErrorCode.SERVER_ERROR,
-          "Error getting leader from zk for shard " + shardId,
+          "Interrupted while getting leader from zk for shard " + shardId,
+          e);
+    } catch (Exception e) {
+      throw new SolrException(
+          SolrException.ErrorCode.SERVER_ERROR,
+          "Error getting leader from zk for shard "
+              + shardId
+              + " of collection "
+              + collection
+              + "; check that ZooKeeper is reachable and that the shard has an elected leader",
           e);
     }
     return leaderUrl;
