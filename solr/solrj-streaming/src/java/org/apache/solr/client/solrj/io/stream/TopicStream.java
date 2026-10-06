@@ -424,7 +424,7 @@ public class TopicStream extends CloudSolrStream implements Expressible {
 
         if (streamContext != null) {
           StreamContext localContext = new StreamContext();
-          localContext.setSolrClientCache(streamContext.getSolrClientCache());
+          localContext.setSolrClientCache(clientCache);
           localContext.setObjectCache(streamContext.getObjectCache());
           solrStream.setStreamContext(localContext);
         }
@@ -482,8 +482,7 @@ public class TopicStream extends CloudSolrStream implements Expressible {
       for (Replica replica : replicas) {
         if (replica.getState() == Replica.State.ACTIVE
             && liveNodes.contains(replica.getNodeName())) {
-          SolrClient solrClient =
-              streamContext.getSolrClientCache().getHttpSolrClient(replica.getCoreUrl());
+          SolrClient solrClient = clientCache.getHttpSolrClient(replica.getCoreUrl());
           try {
             SolrDocument doc = solrClient.getById(id);
             if (doc != null) {
@@ -539,6 +538,11 @@ public class TopicStream extends CloudSolrStream implements Expressible {
       solrStream.setTrace(true);
       if (streamContext != null) {
         solrStream.setStreamContext(streamContext);
+        if (streamContext.getSolrClientCache() == null) {
+          // The context carries no cache, so use this stream's own cache rather than
+          // leaving the SolrStream to create one of its own.
+          solrStream.setClientCache(clientCache);
+        }
       }
       solrStreams.add(solrStream);
     }

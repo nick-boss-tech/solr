@@ -2637,6 +2637,30 @@ public class StreamExpressionTest extends SolrCloudTestCase {
   }
 
   @Test
+  public void testTopicStreamContextWithoutClientCache() throws Exception {
+    Assume.assumeTrue(!useAlias);
+
+    new UpdateRequest()
+        .add(id, "0", "a_s", "hello", "a_i", "0", "a_f", "1")
+        .add(id, "1", "a_s", "hello", "a_i", "1", "a_f", "5")
+        .commit(cluster.getSolrClient(), COLLECTIONORALIAS);
+
+    StreamFactory factory =
+        new StreamFactory()
+            .withCollectionUseThisConnection("collection1", solrConnection)
+            .withFunctionName("topic", TopicStream.class);
+
+    TupleStream stream =
+        factory.constructStream(
+            "topic(collection1, collection1, q=\"a_s:hello\", fl=\"id\", id=\"1000001\", checkpointEvery=1)");
+    // No SolrClientCache on the context: the stream opens its own and must use it everywhere,
+    // including when it looks up persisted checkpoints
+    stream.setStreamContext(new StreamContext());
+    List<Tuple> tuples = getTuples(stream);
+    assertEquals(0, tuples.size());
+  }
+
+  @Test
   public void testTopicStream() throws Exception {
     Assume.assumeTrue(!useAlias);
 
