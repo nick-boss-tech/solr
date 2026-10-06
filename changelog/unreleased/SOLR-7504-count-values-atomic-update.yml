@@ -1,0 +1,8 @@
+title: >
+  CountFieldValuesUpdateProcessorFactory no longer counts an atomic update map as one value: a set is counted, other operations leave the stored count alone.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-7504
+    url: https://issues.apache.org/jira/browse/SOLR-7504
