@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: CLUSTERSTATUS (shard), BALANCE_REPLICAS (nodes) and MIGRATE_REPLICAS (source and target nodes) no longer fail with an IllegalArgumentException when a comma separated value repeats a name, and now ignore blanks around names.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-11288
+    url: https://issues.apache.org/jira/browse/SOLR-11288
