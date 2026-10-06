@@ -121,6 +121,35 @@ public class ArrayEvaluatorTest extends SolrTestCase {
   }
 
   @Test
+  public void arrayMixedNumberTypesSortTest() throws IOException {
+    StreamEvaluator evaluator = factory.constructEvaluator("array(a,b,c,d, sort=asc)");
+    StreamContext context = new StreamContext();
+    evaluator.setStreamContext(context);
+
+    values.put("a", 11.5D);
+    values.put("b", 4L);
+    values.put("c", 12.3D);
+    values.put("d", 0L);
+
+    List<?> result = (List<?>) evaluator.evaluate(new Tuple(values));
+    assertEquals(List.of(0D, 4D, 11.5D, 12.3D), result);
+  }
+
+  @Test
+  public void arrayMixedTypesSortTest() throws IOException {
+    StreamEvaluator evaluator = factory.constructEvaluator("array(a,b,c, sort=asc)");
+    StreamContext context = new StreamContext();
+    evaluator.setStreamContext(context);
+
+    values.put("a", "a");
+    values.put("b", 2L);
+    values.put("c", "c");
+
+    IOException e = expectThrows(IOException.class, () -> evaluator.evaluate(new Tuple(values)));
+    assertTrue(e.getMessage(), e.getMessage().contains("values of different types"));
+  }
+
+  @Test
   public void arrayStringUnsortedTest() throws IOException {
     StreamEvaluator evaluator = factory.constructEvaluator("array(a,b,c)");
     StreamContext context = new StreamContext();

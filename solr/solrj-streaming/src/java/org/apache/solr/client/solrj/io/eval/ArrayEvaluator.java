@@ -65,14 +65,27 @@ public class ArrayEvaluator extends RecursiveObjectEvaluator implements ManyValu
     List<Object> newList = Arrays.stream(values).collect(Collectors.toList());
 
     if (null != sortComparator) {
-      // validate everything is comparable
+      // validate everything is comparable, and comparable with each other
+      Class<?> firstKind = null;
       for (Object value : newList) {
         if (!(value instanceof Comparable<?>)) {
           throw new IOException(
               String.format(
                   Locale.ROOT,
                   "Unable to evaluate because a non-Comparable value ('%s') was found and sorting was requested",
-                  value.toString()));
+                  value));
+        }
+        // all numbers are comparable with each other, anything else only with its own type
+        Class<?> kind = value instanceof Number ? Number.class : value.getClass();
+        if (firstKind == null) {
+          firstKind = kind;
+        } else if (firstKind != kind) {
+          throw new IOException(
+              String.format(
+                  Locale.ROOT,
+                  "Unable to evaluate because values of different types (%s and %s) were found and sorting was requested",
+                  firstKind.getSimpleName(),
+                  kind.getSimpleName()));
         }
       }
 
