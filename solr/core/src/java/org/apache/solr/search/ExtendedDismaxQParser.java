@@ -1132,6 +1132,11 @@ public class ExtendedDismaxQParser extends QParser {
     protected Query getRangeQuery(
         String field, String a, String b, boolean startInclusive, boolean endInclusive)
         throws SyntaxError {
+      // an unfielded [* TO *] is "any value": like a bare *, do not expand it over all qf fields.
+      // The grammar passes an open range end to getRangeQuery as null, not as the string "*".
+      if (getExplicitField() == null && startInclusive && endInclusive && a == null && b == null) {
+        return new MatchAllDocsQuery();
+      }
       this.type = QType.RANGE;
       this.field = field;
       this.val = a;

@@ -159,6 +159,77 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     }
   }
 
+  /** SOLR-3243: an unfielded open-ended range must not be expanded over every qf field. */
+  @Test
+  public void testUnfieldedOpenRangeIsMatchAllDocs() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      try (SolrQueryRequest req = req("sow", sow, "qf", "id name title")) {
+        QParser qParser = QParser.getParser("[* TO *]", "edismax", req);
+        assertThat(qParser.getQuery(), isA(MatchAllDocsQuery.class));
+      }
+      // a fielded range still goes to that field only: an existence query on that field
+      try (SolrQueryRequest req = req("sow", sow, "qf", "id name title")) {
+        QParser qParser = QParser.getParser("id:[* TO *]", "edismax", req);
+        assertEquals("+FieldExistsQuery [field=id]", qParser.getQuery().toString());
+      }
+      // a bounded unfielded range still expands over the qf fields as per-field ranges
+      try (SolrQueryRequest req = req("sow", sow, "qf", "name title")) {
+        QParser qParser = QParser.getParser("[a TO z]", "edismax", req);
+        assertEquals("+(name:[a TO z] | title:[a TO z])", qParser.getQuery().toString());
+      }
+    }
+  }
+
+  /**
+   * SOLR-3243 compatibility decision: an unfielded [* TO *] means every document, the same reading
+   * the parser already gives a bare * (see getWildcardQuery). A document with no value in any qf
+   * field therefore matches, where the old per-field expansion did not match it.
+   */
+  @Test
+  public void testUnfieldedOpenRangeMatchesDocWithoutQfValue() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      // doc 46 has neither a name nor a title value; docs 42 (name) and 43 (title) do
+      assertJQ(
+          req("defType", "edismax", "q", "[* TO *]", "qf", "name title", "fq", "id:46", "sow", sow),
+          "/response/numFound==1");
+      assertJQ(
+          req("defType", "edismax", "q", "[* TO *]", "qf", "name title", "fq", "id:42", "sow", sow),
+          "/response/numFound==1");
+      // phrase fields run after the main parse; the pf boost derived from the range text is the
+      // same one base produces for this input and, being a boost, cannot filter the match away
+      assertJQ(
+          req(
+              "defType",
+              "edismax",
+              "q",
+              "[* TO *]",
+              "qf",
+              "name title",
+              "pf",
+              "name",
+              "fq",
+              "id:46",
+              "sow",
+              sow),
+          "/response/numFound==1");
+    }
+  }
+
+  /** SOLR-3243: with pf set, the combined query is the match-all plus the usual pf phrase boost. */
+  @Test
+  public void testUnfieldedOpenRangeWithPhraseFields() throws Exception {
+    try (SolrQueryRequest req = req("qf", "name title", "pf", "name")) {
+      QParser qParser = QParser.getParser("[* TO *]", "edismax", req);
+      assertEquals("+*:* (name:\"[* *]\")", qParser.getQuery().toString());
+    }
+    try (SolrQueryRequest req = req("qf", "name title", "pf", "name title", "pf2", "name")) {
+      QParser qParser = QParser.getParser("[* TO *]", "edismax", req);
+      assertEquals(
+          "+*:* (name:\"[* *]\" | title:\"[* *]\") (name:\"[* *]\")",
+          qParser.getQuery().toString());
+    }
+  }
+
   public void testTrailingOperators() throws Exception {
     for (String sow : Arrays.asList("true", "false")) {
       // really just test that exceptions aren't thrown by
