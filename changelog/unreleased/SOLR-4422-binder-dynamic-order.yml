@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: SolrJ DocumentObjectBinder now fills a dynamic-field Map in the order the fields appear in the document instead of hash order.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-4422
+    url: https://issues.apache.org/jira/browse/SOLR-4422
