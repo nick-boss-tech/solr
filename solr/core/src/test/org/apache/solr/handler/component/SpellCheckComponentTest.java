@@ -281,6 +281,19 @@ public class SpellCheckComponentTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testSpellcheckerOutsideSpellcheckerListIsRejected() {
+    NamedList<Object> args = new NamedList<>();
+    args.add("name", "misplaced");
+    args.add("classname", "solr.FileBasedSpellChecker");
+    args.add("sourceLocation", "spellings.txt");
+    SpellCheckComponent component = new SpellCheckComponent();
+    component.init(args);
+
+    SolrException e = expectThrows(SolrException.class, () -> component.inform(h.getCore()));
+    assertTrue(e.getMessage(), e.getMessage().contains("spellchecker"));
+  }
+
+  @Test
   public void testInvalidDictionary() {
     assertQEx(
         "Invalid specified dictionary should throw exception",

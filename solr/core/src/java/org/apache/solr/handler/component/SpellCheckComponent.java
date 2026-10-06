@@ -695,6 +695,16 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
       // TODO addSpellChecker response should set hasDefault!
 
       for (Map.Entry<String, ?> initEntry : initParams) {
+        if ("classname".equals(initEntry.getKey())) {
+          // the spellchecker settings were put directly under the component instead of in
+          // <lst name="spellchecker">; they would otherwise be ignored without any message
+          throw new SolrException(
+              SolrException.ErrorCode.SERVER_ERROR,
+              "SpellCheckComponent found a 'classname' ("
+                  + initEntry.getValue()
+                  + ") outside of a 'spellchecker' list; wrap the spellchecker settings in"
+                  + " <lst name=\"spellchecker\">");
+        }
         if ("spellchecker".equals(initEntry.getKey())) {
           Object cfg = initEntry.getValue();
           if (cfg instanceof NamedList) {
