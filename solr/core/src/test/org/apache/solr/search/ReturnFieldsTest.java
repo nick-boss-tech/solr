@@ -396,6 +396,15 @@ public class ReturnFieldsTest extends SolrTestCaseJ4 {
         "//arr[@name='#foo_s']/str[.='how now brown cow']");
   }
 
+  @Test
+  public void testDigitLeadingFieldName() {
+    // "1001_s" matches the "*_s" dynamic field; it must be a plain field, not a numeric constant
+    ReturnFields rf = new SolrReturnFields(req("fl", "1001_s,id"));
+    assertTrue(rf.wantsField("1001_s"));
+    assertTrue(rf.wantsField("id"));
+    assertNull(rf.getTransformer());
+  }
+
   /**
    * Whitebox verification that the conversion from lucene {@link Document} to {@link SolrDocument}
    * respects the {@link ReturnFields} and doesn't unnecessarily convert Fields that aren't needed.
