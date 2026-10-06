@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenFilterFactory;
 import org.apache.lucene.analysis.core.StopFilterFactory;
@@ -64,6 +66,13 @@ import org.apache.solr.util.SolrPluginUtils;
  * Guide page</a>
  */
 public class ExtendedDismaxQParser extends QParser {
+
+  /**
+   * Matches either a standalone match-all {@code *:*} (group 1 unset) or an unescaped colon with
+   * its preceding character (group 1 set).
+   */
+  private static final Pattern ESCAPE_COLON_KEEP_MATCH_ALL =
+      Pattern.compile("(?<![^\\s(+\\-])\\*:\\*(?![^\\s)^])|([^\\\\]):");
 
   /**
    * A field we can't ever find in any schema, so we can safely tell DisjunctionMaxQueryParser to
@@ -874,10 +883,14 @@ public class ExtendedDismaxQParser extends QParser {
       if (clause != null) {
         if (disallowUserField) {
           clause.raw = s.substring(start, pos);
-          // escape colons, except for "match all" query
-          if (!"*:*".equals(clause.raw)) {
-            clause.raw = clause.raw.replaceAll("([^\\\\]):", "$1\\\\:");
-          }
+          // escape colons, except in a standalone "match all" query such as *:* or (*:*)
+          clause.raw =
+              ESCAPE_COLON_KEEP_MATCH_ALL
+                  .matcher(clause.raw)
+                  .replaceAll(
+                      m ->
+                          Matcher.quoteReplacement(
+                              m.group(1) == null ? m.group() : m.group(1) + "\\:"));
         } else {
           clause.raw = s.substring(start, pos);
           // Add default userField boost if no explicit boost exists

@@ -358,6 +358,9 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "Order OR op"), twor);
     assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "Order or op"), twor);
     assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "*:*"), allr);
+    // a parenthesized match-all is still match-all (SOLR-3729)
+    assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "(*:*)"), allr);
+    assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "( *:* )"), allr);
 
     assertQ(
         req("defType", "edismax", "qf", "name title subject text", "q", "star OR (-star)"), allr);
