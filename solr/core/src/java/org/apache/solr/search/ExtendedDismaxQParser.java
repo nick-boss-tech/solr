@@ -311,6 +311,8 @@ public class ExtendedDismaxQParser extends QParser {
           String s = clause.val;
           // avoid putting explicit operators in the phrase query
           if ("OR".equals(s) || "AND".equals(s) || "NOT".equals(s) || "TO".equals(s)) continue;
+          // a lone paren, as in "( cat:foo ) bar", analyzes to nothing and leaves a hole
+          if (isOnlyParens(clause.raw)) continue;
         }
         normalClauses.add(clause);
       }
@@ -349,6 +351,15 @@ public class ExtendedDismaxQParser extends QParser {
         }
       }
     }
+  }
+
+  private static boolean isOnlyParens(String raw) {
+    if (raw == null || raw.isEmpty()) return false;
+    for (int i = 0; i < raw.length(); i++) {
+      char c = raw.charAt(i);
+      if (c != '(' && c != ')') return false;
+    }
+    return true;
   }
 
   /**

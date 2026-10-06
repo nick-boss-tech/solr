@@ -1292,6 +1292,18 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         "//str[@name='parsedquery'][contains(.,'(phrase_sw:\"zzzz xxxx cccc\"~3)^333.0')]",
         "//str[@name='parsedquery'][contains(.,'(phrase_sw:\"xxxx cccc vvvv\"~3)^333.0')]");
 
+    // SOLR-3923: lone parens around a fielded clause must not enter the pf phrase
+    assertQ(
+        "lone parens leaked into pf phrase",
+        req(
+            "q", "( id:s0 ) (zzzz xxxx)",
+            "qf", "phrase_sw",
+            "pf", "phrase_sw^10",
+            "defType", "edismax",
+            "debugQuery", "true"),
+        "//str[@name='parsedquery'][contains(.,'phrase_sw:\"zzzz xxxx\"')]",
+        "//str[@name='parsedquery'][not(contains(.,'?'))]");
+
     assertQ(
         "ps2 not working",
         req(
