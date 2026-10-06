@@ -118,6 +118,19 @@ teardown() {
   solr assert --cloud http://localhost:${SOLR_PORT} --timeout 5000
 }
 
+@test "SOLR-10390 start detects the listening port without a working lsof" {
+  # a stand-in lsof that cannot report anything, like on kernels that restrict ptrace
+  local fakebin="${BATS_TEST_TMPDIR}/fakebin"
+  mkdir -p "${fakebin}"
+  printf '#!/bin/sh\nexit 1\n' > "${fakebin}/lsof"
+  chmod +x "${fakebin}/lsof"
+
+  PATH="${fakebin}:${PATH}" run solr start
+  refute_output --partial 'Please install lsof'
+  assert_output --partial 'Started Solr server on port'
+  solr assert --started http://localhost:${SOLR_PORT} --timeout 5000
+}
+
 @test "bootstrapping a configset" {
   local confdir_path="${SOLR_TIP}/server/solr/configsets/sample_techproducts_configs/conf"
   
