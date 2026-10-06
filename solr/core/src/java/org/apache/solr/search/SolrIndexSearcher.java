@@ -559,6 +559,14 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
     return name + "{" + reader + "}";
   }
 
+  /**
+   * The searcher name, e.g. {@code Searcher@1a2b3c[core] main}, without the reader description that
+   * {@link #toString()} appends and that can be tens of KB on a large index.
+   */
+  public String getSearcherName() {
+    return name;
+  }
+
   public SolrCore getCore() {
     return core;
   }

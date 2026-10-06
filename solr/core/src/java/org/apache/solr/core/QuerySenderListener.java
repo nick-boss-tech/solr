@@ -45,7 +45,11 @@ public class QuerySenderListener extends AbstractSolrEventListener {
   @Override
   public void newSearcher(SolrIndexSearcher newSearcher, SolrIndexSearcher currentSearcher) {
     final SolrIndexSearcher searcher = newSearcher;
-    log.debug("QuerySenderListener sending requests to {}", newSearcher);
+    // Log the searcher name only: the searcher's toString() includes the whole reader
+    // description, which can be tens of KB on a large index.
+    if (log.isDebugEnabled()) {
+      log.debug("QuerySenderListener sending requests to {}", newSearcher.getSearcherName());
+    }
     @SuppressWarnings("unchecked")
     List<NamedList<Object>> allLists =
         convertQueriesToList((ArrayList<Object>) getArgs().getAll("queries"));

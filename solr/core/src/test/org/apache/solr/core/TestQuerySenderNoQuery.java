@@ -18,6 +18,8 @@ package org.apache.solr.core;
 
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.search.SolrIndexSearcher;
+import org.apache.solr.util.LogLevel;
+import org.apache.solr.util.LogListener;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -53,6 +55,26 @@ public class TestQuerySenderNoQuery extends SolrTestCaseJ4 {
 
     assertEquals(2, core.firstSearcherListeners.size());
     assertEquals(2, core.newSearcherListeners.size());
+  }
+
+  @Test
+  @LogLevel("org.apache.solr.core.QuerySenderListener=DEBUG")
+  public void testDebugLogNamesSearcherWithoutDumpingReader() throws Exception {
+    SolrCore core = h.getCore();
+    QuerySenderListener qsl = (QuerySenderListener) core.newSearcherListeners.get(0);
+    try (LogListener debugLog = LogListener.debug(QuerySenderListener.class)) {
+      core.withSearcher(
+          searcher -> {
+            qsl.newSearcher(searcher, null);
+            return null;
+          });
+      String msg = debugLog.pollMessage();
+      assertNotNull(msg);
+      assertTrue(msg, msg.contains("sending requests"));
+      // the message must still name the searcher instance, e.g. Searcher@1a2b[core] main
+      assertTrue(msg, msg.contains("Searcher@"));
+      assertFalse(msg, msg.contains("DirectoryReader"));
+    }
   }
 
   // Determine that when the query lists are commented out of both new and
