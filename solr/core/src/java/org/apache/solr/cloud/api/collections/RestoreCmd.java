@@ -26,6 +26,8 @@ import static org.apache.solr.common.params.CollectionParams.CollectionAction.CR
 import static org.apache.solr.common.params.CollectionParams.CollectionAction.CREATESHARD;
 import static org.apache.solr.common.params.CollectionParams.CollectionAction.INSTALLSHARDDATA;
 import static org.apache.solr.common.params.CollectionParams.CollectionAction.MODIFYCOLLECTION;
+import static org.apache.solr.common.params.CommonAdminParams.TIMEOUT;
+import static org.apache.solr.common.params.CommonAdminParams.WAIT_FOR_FINAL_STATE;
 import static org.apache.solr.common.params.CommonParams.NAME;
 
 import java.io.Closeable;
@@ -303,9 +305,46 @@ public class RestoreCmd implements CollApiCmds.CollectionApiCommand {
           restoreCollection,
           replicaPositions,
           rc.adminCmdContext.withClusterState(rc.zkStateReader.getClusterState()));
+      waitForReplicasToBeActive(rc.restoreCollectionName);
       restoringAlias(rc.backupProperties);
 
       log.info("Completed restoring collection={} backupName={}", restoreCollection, rc.backupName);
+    }
+
+    /**
+     * SOLR-9598: wait until the restored collection is usable. All replicas were requested first,
+     * so the recoveries run concurrently; only then do we wait for the whole collection to be
+     * active. Follows the direction of SOLR-17712 (always wait for final state); {@code
+     * waitForFinalState=false} on the request opts out.
+     */
+    private void waitForReplicasToBeActive(String restoreCollectionName) throws Exception {
+      if (!message.getBool(WAIT_FOR_FINAL_STATE, true)) {
+        return;
+      }
+      int timeout = message.getInt(TIMEOUT, 10 * 60); // 10 minutes, as in ADDREPLICA
+      try {
+        ccc.getZkStateReader()
+            .waitForState(
+                restoreCollectionName,
+                timeout,
+                TimeUnit.SECONDS,
+                (liveNodes, coll) ->
+                    coll != null
+                        && coll.getSlices().stream()
+                            .allMatch(
+                                slice ->
+                                    slice.getReplicas().stream()
+                                        .allMatch(replica -> replica.isActive(liveNodes))));
+      } catch (TimeoutException e) {
+        throw new SolrException(
+            ErrorCode.SERVER_ERROR,
+            "Timeout waiting "
+                + timeout
+                + " seconds for all replicas of restored collection "
+                + restoreCollectionName
+                + " to become active",
+            e);
+      }
     }
 
     private void validate() {

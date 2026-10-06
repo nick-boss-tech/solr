@@ -24,6 +24,7 @@ import static org.apache.solr.common.params.CollectionAdminParams.CREATE_NODE_SE
 import static org.apache.solr.common.params.CollectionAdminParams.PROPERTY_PREFIX;
 import static org.apache.solr.common.params.CollectionAdminParams.REPLICATION_FACTOR;
 import static org.apache.solr.common.params.CommonAdminParams.ASYNC;
+import static org.apache.solr.common.params.CommonAdminParams.WAIT_FOR_FINAL_STATE;
 import static org.apache.solr.common.params.CommonParams.NAME;
 import static org.apache.solr.common.params.CoreAdminParams.BACKUP_ID;
 import static org.apache.solr.common.params.CoreAdminParams.BACKUP_LOCATION;
@@ -173,6 +174,7 @@ public class RestoreCollection extends BackupAPIBase implements CollectionBackup
     restoreBody.repository = solrParams.get(BACKUP_REPOSITORY);
     restoreBody.backupId = solrParams.getInt(BACKUP_ID);
     restoreBody.async = solrParams.get(ASYNC);
+    restoreBody.waitForFinalState = solrParams.getBool(WAIT_FOR_FINAL_STATE);
 
     ModifiableSolrParams createCollectionParams = new ModifiableSolrParams(solrParams);
     createCollectionParams.set(NAME, solrParams.get(COLLECTION_PROP));

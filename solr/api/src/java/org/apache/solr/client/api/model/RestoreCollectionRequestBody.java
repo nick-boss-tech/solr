@@ -37,4 +37,10 @@ public class RestoreCollectionRequestBody {
   public CreateCollectionRequestBody createCollectionParams;
 
   @JsonProperty public String async;
+
+  @Schema(
+      description =
+          "If true (the default), the restore does not complete until every replica of the restored collection is active.")
+  @JsonProperty
+  public Boolean waitForFinalState;
 }

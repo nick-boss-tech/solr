@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
 import org.apache.lucene.tests.util.TestUtil;
@@ -373,6 +374,20 @@ public abstract class AbstractCloudBackupRestoreTestCase extends SolrCloudTestCa
       String asyncId = restore.processAsync(client);
       assertNotNull(asyncId);
       CollectionAdminRequest.waitForAsyncRequest(asyncId, client, 60);
+    }
+    // SOLR-9598: RESTORE must not return before every replica of the new collection is active, so
+    // check right away, before waitForRecoveriesToFinish gives the replicas time to catch up
+    ZkStateReader.from(client).forceUpdateCollection(restoreCollectionName);
+    final DocCollection justRestored =
+        ZkStateReader.from(client).getClusterState().getCollection(restoreCollectionName);
+    final Set<String> liveNodesAfterRestore =
+        ZkStateReader.from(client).getClusterState().getLiveNodes();
+    for (Slice slice : justRestored.getSlices()) {
+      for (Replica replica : slice.getReplicas()) {
+        assertTrue(
+            "replica not active when RESTORE returned: " + replica,
+            replica.isActive(liveNodesAfterRestore));
+      }
     }
     AbstractFullDistribZkTestBase.waitForRecoveriesToFinish(
         restoreCollectionName, ZkStateReader.from(client), log.isDebugEnabled(), true, 30);
