@@ -1481,6 +1481,11 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
       }
     }
 
+    if (query instanceof MatchAllDocsQuery) {
+      // a filter DocSet only holds live docs, so matching everything adds nothing to it
+      return filter == null ? getLiveDocSet() : filter;
+    }
+
     if (!doCache) {
       query = QueryUtils.makeQueryable(query);
       return getDocSetNC(query, filter);

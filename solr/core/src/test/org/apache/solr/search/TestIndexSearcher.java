@@ -29,8 +29,11 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexReaderContext;
 import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.index.ReaderUtil;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queries.function.FunctionValues;
 import org.apache.lucene.queries.function.ValueSource;
+import org.apache.lucene.search.MatchAllDocsQuery;
+import org.apache.lucene.search.TermQuery;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer;
 import org.apache.solr.client.solrj.request.SolrQuery;
@@ -46,6 +49,7 @@ import org.apache.solr.handler.component.SearchComponent;
 import org.apache.solr.index.LogDocMergePolicyFactory;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.schema.SchemaField;
+import org.apache.solr.util.RefCounted;
 import org.apache.solr.util.plugin.SolrCoreAware;
 import org.junit.BeforeClass;
 
@@ -163,6 +167,33 @@ public class TestIndexSearcher extends SolrTestCaseJ4 {
 
     sr5.close();
     sr6.close();
+  }
+
+  public void testMatchAllDocsWithFilterReturnsFilter() throws Exception {
+    assertU(adoc("id", "1"));
+    assertU(adoc("id", "2"));
+    assertU(adoc("id", "3"));
+    assertU(commit());
+    assertU(delI("2"));
+    assertU(commit());
+
+    RefCounted<SolrIndexSearcher> searcherRef = h.getCore().getSearcher();
+    try {
+      SolrIndexSearcher searcher = searcherRef.get();
+      DocSet filter = searcher.getDocSet(new TermQuery(new Term("id", "1")));
+      assertEquals(1, filter.size());
+
+      assertSame(filter, searcher.getDocSet(new MatchAllDocsQuery(), filter));
+
+      WrappedQuery uncached = new WrappedQuery(new MatchAllDocsQuery());
+      uncached.setCache(false);
+      assertSame(filter, searcher.getDocSet(uncached, filter));
+
+      assertEquals(2, searcher.getDocSet(new MatchAllDocsQuery(), null).size());
+      assertEquals(2, searcher.getDocSet(uncached, null).size());
+    } finally {
+      searcherRef.decref();
+    }
   }
 
   // make sure we don't leak searchers (SOLR-3391)
