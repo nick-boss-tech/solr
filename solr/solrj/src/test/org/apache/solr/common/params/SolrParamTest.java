@@ -67,6 +67,23 @@ public class SolrParamTest extends SolrTestCase {
     assertIterSize(toStr, 12, out);
   }
 
+  public void testBlankNumericParamIsUnset() {
+    final SolrParams p = params("start", "", "rows", "", "f", "", "d", "", "bad", "x");
+    assertNull(p.getInt("start"));
+    assertEquals(7, p.getInt("start", 7));
+    assertEquals(0, p.getPrimitiveInt("rows"));
+    assertNull(p.getLong("rows"));
+    assertEquals(9L, p.getLong("rows", 9L));
+    assertNull(p.getFloat("f"));
+    assertEquals(1.5f, p.getFloat("f", 1.5f), 0f);
+    assertNull(p.getDouble("d"));
+    assertEquals(2.5d, p.getDouble("d", 2.5d), 0d);
+    // a non-numeric value is still a client error
+    assertEquals(
+        SolrException.ErrorCode.BAD_REQUEST.code,
+        expectThrows(SolrException.class, () -> p.getInt("bad", 1)).code());
+  }
+
   public void testTrivialEquals() {
     assertEquals(params(), params());
     assertFalse(params().equals(null));
