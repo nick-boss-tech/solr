@@ -1,0 +1,8 @@
+title: >
+  Ref guide: without sortMissingFirst/sortMissingLast, a missing numeric or date sort value is treated as 0 (1970-01-01), not as the lowest value.
+type: other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-6430
+    url: https://issues.apache.org/jira/browse/SOLR-6430
