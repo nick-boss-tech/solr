@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -346,8 +347,8 @@ public class SuggestComponent extends SearchComponent
   /**
    * Given a list of {@link SuggesterResult} and <code>count</code> returns a {@link
    * SuggesterResult} containing <code>count</code> number of {@link LookupResult}, sorted by their
-   * associated weights (highest first), with ties broken by suggestion text so that the merged order
-   * does not depend on which shard answered first
+   * associated weights (highest first), with ties broken by suggestion text so that the merged
+   * order does not depend on which shard answered first
    */
   static SuggesterResult merge(List<SuggesterResult> suggesterResults, int count) {
     SuggesterResult result = new SuggesterResult();
@@ -365,13 +366,16 @@ public class SuggestComponent extends SearchComponent
     // Get Top N for every token in every shard (using weights)
     for (String suggesterName : suggesterNames) {
       for (String token : allTokens) {
-        List<LookupResult> sortedSuggests = new ArrayList<>();
+        Map<String, LookupResult> distinctSuggests = new LinkedHashMap<>();
         for (SuggesterResult shardResult : suggesterResults) {
           List<LookupResult> suggests = shardResult.getLookupResult(suggesterName, token);
           if (suggests != null) {
-            sortedSuggests.addAll(suggests);
+            for (LookupResult suggest : suggests) {
+              distinctSuggests.merge(suggest.key.toString(), suggest, SuggestComponent::sumWeights);
+            }
           }
         }
+        List<LookupResult> sortedSuggests = new ArrayList<>(distinctSuggests.values());
         sortedSuggests.sort(MERGE_ORDER);
         if (sortedSuggests.size() > count) {
           sortedSuggests = new ArrayList<>(sortedSuggests.subList(0, count));
@@ -380,6 +384,16 @@ public class SuggestComponent extends SearchComponent
       }
     }
     return result;
+  }
+
+  /**
+   * Combines the suggestions that two shards returned for the same text: the weights are added, so
+   * a suggestion found on several shards ranks by its total weight, and the other fields come from
+   * the first suggestion.
+   */
+  private static LookupResult sumWeights(LookupResult first, LookupResult second) {
+    return new LookupResult(
+        first.key, first.highlightKey, first.value + second.value, first.payload, first.contexts);
   }
 
   @Override

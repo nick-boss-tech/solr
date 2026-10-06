@@ -59,6 +59,25 @@ public class SuggestComponentMergeTest extends SolrTestCase {
     assertEquals(List.of("test", "test123", "test1234"), mergedTerms(List.of(shard1, shard2), 3));
   }
 
+  public void testSameSuggestionFromSeveralShardsIsReturnedOnce() {
+    SuggesterResult shard1 = shardResult("test", 3L, "testing", 4L);
+    SuggesterResult shard2 = shardResult("test", 2L, "test123", 1L);
+
+    // "test" is on both shards: 3 + 2 = 5, ahead of "testing" (4) and "test123" (1)
+    assertEquals(List.of("test", "testing", "test123"), mergedTerms(List.of(shard1, shard2), 10));
+    List<LookupResult> merged =
+        SuggestComponent.merge(List.of(shard1, shard2), 10).getLookupResult(DICT, TOKEN);
+    assertEquals(3, merged.size());
+    assertEquals(5L, merged.get(0).value);
+  }
+
+  public void testDuplicatesDoNotTakeUpSlotsOfTheRequestedCount() {
+    SuggesterResult shard1 = shardResult("test", 3L, "testing", 2L);
+    SuggesterResult shard2 = shardResult("test", 3L, "test123", 1L);
+
+    assertEquals(List.of("test", "testing"), mergedTerms(List.of(shard1, shard2), 2));
+  }
+
   public void testEqualWeightsDoNotDependOnShardResponseOrder() {
     // no weightField configured: every suggestion has the same weight on every shard
     SuggesterResult shard1 = shardResult("test123", 1L, "testing", 1L);
