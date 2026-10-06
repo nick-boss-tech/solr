@@ -101,8 +101,51 @@ public class SuggestComponentContextFilterQueryTest extends SolrTestCaseJ4 {
             "40",
             "my_contexts_s",
             "ctx4"));
+    assertU(
+        adoc(
+            "id",
+            "10",
+            "cat",
+            "special context entry",
+            "price",
+            "60",
+            "weight",
+            "50",
+            "my_contexts_s",
+            "c#x"));
+    assertU(
+        adoc(
+            "id",
+            "11",
+            "cat",
+            "special plain entry",
+            "price",
+            "65",
+            "weight",
+            "50",
+            "my_contexts_s",
+            "c"));
     assertU((commit()));
     waitForWarming();
+  }
+
+  @Test
+  public void testContextFilterWithSpecialCharactersAndKeywordTokenizer() {
+    // contextFilterQueryTokenizer=keyword keeps "c#x" as one term; the default standard tokenizer
+    // would split it into "c" and "x" and also match the context "c"
+    assertQ(
+        reqWithPath(
+            rh,
+            SuggesterParams.SUGGEST_BUILD,
+            "true",
+            SuggesterParams.SUGGEST_DICT,
+            "suggest_blended_infix_keyword_cfq",
+            SuggesterParams.SUGGEST_CONTEXT_FILTER_QUERY,
+            "c#x",
+            SuggesterParams.SUGGEST_Q,
+            "speci"),
+        "//lst[@name='suggest']/lst[@name='suggest_blended_infix_keyword_cfq']/lst[@name='speci']/int[@name='numFound'][.='1']",
+        "//lst[@name='suggest']/lst[@name='suggest_blended_infix_keyword_cfq']/lst[@name='speci']/arr[@name='suggestions']/lst[1]/str[@name='term'][.='special context entry']");
   }
 
   @Test

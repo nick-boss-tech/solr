@@ -62,6 +62,22 @@
     </lst>
 
     <lst name="suggester">
+      <str name="name">suggest_blended_infix_keyword_cfq</str>
+      <str name="lookupImpl">BlendedInfixLookupFactory</str>
+      <str name="dictionaryImpl">DocumentDictionaryFactory</str>
+      <str name="field">cat</str>
+      <str name="weightField">price</str>
+      <str name="contextField">my_contexts_s</str>
+      <str name="contextFilterQueryTokenizer">keyword</str>
+      <str name="suggestAnalyzerFieldType">text</str>
+      <str name="buildOnCommit">false</str>
+      <str name="buildOnStartup">false</str>
+      <str name="storeDir">suggest_blended_infix_keyword_cfq</str>
+      <str name="indexPath">suggest_blended_infix_keyword_cfq</str>
+      <str name="highlight">false</str>
+    </lst>
+
+    <lst name="suggester">
       <str name="name">suggest_lookup_has_no_context_implementation</str>
       <str name="lookupImpl">AnalyzingLookupFactory</str>
       <str name="dictionaryImpl">DocumentDictionaryFactory</str>

@@ -28,7 +28,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
+import org.apache.lucene.analysis.TokenizerFactory;
 import org.apache.lucene.queryparser.flexible.core.QueryNodeException;
 import org.apache.lucene.queryparser.flexible.standard.StandardQueryParser;
 import org.apache.lucene.search.BooleanClause;
@@ -74,6 +74,15 @@ public class SolrSuggester implements Accountable {
    */
   public static final String STORE_DIR = "storeDir";
 
+  /**
+   * Registered name (SPI name, e.g. {@code keyword}) of the tokenizer used to analyze {@code
+   * suggest.cfq} context filter queries. Defaults to {@code standard}, which splits values such as
+   * {@code c#x}; use {@code keyword} when contexts are exact strings.
+   */
+  public static final String CONTEXT_FILTER_QUERY_TOKENIZER = "contextFilterQueryTokenizer";
+
+  private static final String DEFAULT_CONTEXT_FILTER_QUERY_TOKENIZER = "standard";
+
   static SuggesterResult EMPTY_RESULT = new SuggesterResult();
 
   private String sourceLocation;
@@ -107,8 +116,15 @@ public class SolrSuggester implements Accountable {
       log.info("No {} parameter was provided falling back to {}", LOOKUP_IMPL, lookupImpl);
     }
 
+    String contextFilterQueryTokenizer = (String) config.get(CONTEXT_FILTER_QUERY_TOKENIZER);
     contextFilterQueryAnalyzer =
-        new TokenizerChain(new StandardTokenizerFactory(new HashMap<>()), null);
+        new TokenizerChain(
+            TokenizerFactory.forName(
+                contextFilterQueryTokenizer == null
+                    ? DEFAULT_CONTEXT_FILTER_QUERY_TOKENIZER
+                    : contextFilterQueryTokenizer,
+                new HashMap<>()),
+            null);
 
     // initialize appropriate lookup instance
     factory = core.getResourceLoader().newInstance(lookupImpl, LookupFactory.class);
@@ -265,7 +281,8 @@ public class SolrSuggester implements Accountable {
       }
       return new BooleanQuery.Builder().add(query, BooleanClause.Occur.MUST).build();
     } catch (QueryNodeException e) {
-      throw new IllegalArgumentException("Failed to parse query: " + query);
+      throw new IllegalArgumentException(
+          "Failed to parse context filter query: " + contextFilter, e);
     }
   }
 
