@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: edismax no longer passes the match all docs query "*:*" to the pf, pf2 and pf3 field analyzers, so a tokenizer that splits it no longer lowers the hit scores below 1.0.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-3962
+    url: https://issues.apache.org/jira/browse/SOLR-3962
