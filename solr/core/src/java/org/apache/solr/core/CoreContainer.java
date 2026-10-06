@@ -1500,6 +1500,11 @@ public class CoreContainer {
    */
   public SolrCore create(
       String coreName, Path instancePath, Map<String, String> parameters, boolean newCollection) {
+    if (shardHandlerFactory == null) {
+      throw new SolrException(
+          ErrorCode.SERVER_ERROR,
+          "CoreContainer has not been loaded; call load() before creating core '" + coreName + "'");
+    }
     boolean iAdded = false;
     try {
       iAdded = inFlightCreations.add(coreName);

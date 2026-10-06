@@ -247,6 +247,20 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testCreateBeforeLoadIsRejected() throws Exception {
+    CoreContainer cores =
+        new CoreContainer(SolrXmlConfig.fromString(createTempDir(), CONFIGSETS_SOLR_XML));
+    try {
+      SolrException thrown =
+          expectThrows(
+              SolrException.class, () -> cores.create("core1", Map.of("configSet", "minimal")));
+      assertTrue(thrown.getMessage(), thrown.getMessage().contains("load()"));
+    } finally {
+      cores.shutdown();
+    }
+  }
+
+  @Test
   public void testNoCores() throws Exception {
 
     CoreContainer cores = init(CONFIGSETS_SOLR_XML);
