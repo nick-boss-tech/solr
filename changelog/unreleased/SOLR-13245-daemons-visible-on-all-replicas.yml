@@ -1,0 +1,8 @@
+title: >
+  Streaming daemon list, start, stop and kill requests now see the daemons of every replica of the collection on that node, no matter which replica the request is routed to.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-13245
+    url: https://issues.apache.org/jira/browse/SOLR-13245
