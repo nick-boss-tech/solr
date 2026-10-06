@@ -320,6 +320,64 @@ public class TestJsonFacetsWithNestedObjects extends SolrTestCaseHS {
             + "    buckets:[ {val:5, count:2, in_books:2} ]}}}");
   }
 
+  /** Control for {@link #testNestedChildFacetWithExclusionKeepsBlockChildrenDomain}. */
+  @Test
+  public void testNestedChildFacetWithoutExclusion() throws Exception {
+    final Client client = Client.localClient();
+    client.testJQ(
+        params(
+            "rows",
+            "0",
+            "q",
+            "type_s:book",
+            "fq",
+            "{!parent tag=rev which=type_s:book}author_s:yonik",
+            "json.facet",
+            "{"
+                + "  authors: {"
+                + "    type:terms,"
+                + "    field:author_s,"
+                + "    domain: { blockChildren:\"type_s:book\", excludeTags:rev },"
+                + "    facet:{"
+                + "      stars:{ type:terms, field:stars_i }}}}"),
+        "facets=={ count:2,"
+            + "authors:{buckets:["
+            + "  {val:dan,   count:2, stars:{buckets:[{val:2,count:1},{val:3,count:1}]}},"
+            + "  {val:yonik, count:2, stars:{buckets:[{val:5,count:2}]}},"
+            + "  {val:mary,  count:1, stars:{buckets:[{val:4,count:1}]}} ]}}");
+  }
+
+  /**
+   * A nested facet with its own <code>excludeTags</code> and no domain change must keep the child
+   * domain of its ancestor (the reporter's multi select scenario).
+   */
+  @Test
+  @AwaitsFix(bugUrl = "https://issues.apache.org/jira/browse/SOLR-16290")
+  public void testNestedChildFacetWithExclusionKeepsBlockChildrenDomain() throws Exception {
+    final Client client = Client.localClient();
+    client.testJQ(
+        params(
+            "rows",
+            "0",
+            "q",
+            "type_s:book",
+            "fq",
+            "{!parent tag=rev which=type_s:book}author_s:yonik",
+            "json.facet",
+            "{"
+                + "  authors: {"
+                + "    type:terms,"
+                + "    field:author_s,"
+                + "    domain: { blockChildren:\"type_s:book\", excludeTags:rev },"
+                + "    facet:{"
+                + "      stars:{ type:terms, field:stars_i, domain:{ excludeTags:rev } }}}}"),
+        "facets=={ count:2,"
+            + "authors:{buckets:["
+            + "  {val:dan,   count:2, stars:{buckets:[{val:2,count:1},{val:3,count:1}]}},"
+            + "  {val:yonik, count:2, stars:{buckets:[{val:5,count:2}]}},"
+            + "  {val:mary,  count:1, stars:{buckets:[{val:4,count:1}]}} ]}}");
+  }
+
   public void testDomainFilterExclusionsInFilters() throws Exception {
     final Client client = Client.localClient();
     ModifiableSolrParams p = params("rows", "10");
