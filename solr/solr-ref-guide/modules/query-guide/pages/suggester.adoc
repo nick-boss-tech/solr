@@ -929,3 +929,15 @@ http://localhost:8983/solr/techproducts/suggest?suggest=true&suggest.build=true&
 ----
 
 The suggester will only bring back suggestions for products tagged with 'cat=memory'.
+
+The context filter query is tokenized with the standard tokenizer by default.
+To use a different tokenizer, set `contextFilterQueryTokenizer` in the suggester configuration to the name of a tokenizer factory.
+For example, `keyword` keeps the whole filter value as a single term, so context values containing special characters can match exactly:
+
+[source,xml]
+----
+<str name="contextFilterQueryTokenizer">keyword</str>
+----
+
+Only the tokenizer can be configured this way; token filters cannot.
+The tokenizer factory is always created with an empty set of arguments, so a factory that requires arguments cannot be used here.

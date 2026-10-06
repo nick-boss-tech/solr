@@ -18,7 +18,10 @@ package org.apache.solr.handler.component;
 
 import static org.hamcrest.core.Is.is;
 
+import org.apache.lucene.queryparser.flexible.core.QueryNodeException;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.util.NamedList;
+import org.apache.solr.spelling.suggest.SolrSuggester;
 import org.apache.solr.spelling.suggest.SuggesterParams;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -146,6 +149,47 @@ public class SuggestComponentContextFilterQueryTest extends SolrTestCaseJ4 {
             "speci"),
         "//lst[@name='suggest']/lst[@name='suggest_blended_infix_keyword_cfq']/lst[@name='speci']/int[@name='numFound'][.='1']",
         "//lst[@name='suggest']/lst[@name='suggest_blended_infix_keyword_cfq']/lst[@name='speci']/arr[@name='suggestions']/lst[1]/str[@name='term'][.='special context entry']");
+  }
+
+  @Test
+  public void testBadContextFilterQueryTokenizerFailsAtInit() {
+    NamedList<Object> params = new NamedList<>();
+    params.add("name", "suggest_bad_context_filter_tokenizer");
+    params.add("lookupImpl", "BlendedInfixLookupFactory");
+    params.add("dictionaryImpl", "DocumentDictionaryFactory");
+    params.add("field", "cat");
+    params.add("weightField", "price");
+    params.add("contextField", "my_contexts_s");
+    params.add("suggestAnalyzerFieldType", "text");
+    params.add("contextFilterQueryTokenizer", "no_such_tokenizer");
+    IllegalArgumentException ex =
+        expectThrows(
+            IllegalArgumentException.class, () -> new SolrSuggester().init(params, h.getCore()));
+    // TokenizerFactory.forName rejects a name that no SPI-registered factory provides
+    assertTrue(ex.getMessage().contains("no_such_tokenizer"));
+    assertTrue(ex.getMessage().contains("does not exist"));
+  }
+
+  @Test
+  public void testUnparseableContextFilterQueryReportsQueryAndCause() {
+    IllegalArgumentException ex =
+        expectThrows(
+            IllegalArgumentException.class,
+            () -> {
+              h.query(
+                  rh,
+                  req(
+                      SuggesterParams.SUGGEST_BUILD,
+                      "true",
+                      SuggesterParams.SUGGEST_DICT,
+                      "suggest_blended_infix_suggester",
+                      SuggesterParams.SUGGEST_CONTEXT_FILTER_QUERY,
+                      "(",
+                      SuggesterParams.SUGGEST_Q,
+                      "examp"));
+            });
+    assertThat(ex.getMessage(), is("Failed to parse context filter query: ("));
+    assertTrue(ex.getCause() instanceof QueryNodeException);
   }
 
   @Test
