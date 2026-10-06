@@ -40,9 +40,11 @@ import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandles;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -769,7 +771,7 @@ public class ReplicationHandler extends RequestHandlerBase
     synchronized (confFileInfoCache) {
       Checksum checksum = null;
 
-      for (Map.Entry<String, String> aliasEntry : nameAndAlias) {
+      for (Map.Entry<String, String> aliasEntry : expandConfFileGlobs(nameAndAlias)) {
         String cf = aliasEntry.getKey();
         String aliasValue = aliasEntry.getValue();
 
@@ -798,6 +800,45 @@ public class ReplicationHandler extends RequestHandlerBase
       }
     }
     return confFiles;
+  }
+
+  /**
+   * Replaces a {@code confFiles} entry whose file name part contains {@code *} or {@code ?} by the
+   * matching files of its config directory (sorted, not recursive, never outside the config dir).
+   * Plain entries pass through; an alias on a pattern is ignored.
+   */
+  private List<Map.Entry<String, String>> expandConfFileGlobs(NamedList<String> nameAndAlias) {
+    List<Map.Entry<String, String>> expanded = new ArrayList<>();
+    Path configPath = core.getResourceLoader().getConfigPath().normalize();
+    for (Map.Entry<String, String> entry : nameAndAlias) {
+      String name = entry.getKey();
+      int slash = name.lastIndexOf('/');
+      String fileName = name.substring(slash + 1);
+      if (fileName.indexOf('*') < 0 && fileName.indexOf('?') < 0) {
+        expanded.add(entry);
+        continue;
+      }
+      Path dir = slash < 0 ? configPath : configPath.resolve(name.substring(0, slash)).normalize();
+      if (!dir.startsWith(configPath) || !Files.isDirectory(dir)) {
+        log.warn("Ignoring replication confFiles pattern '{}': not a directory in the config dir", name);
+        continue;
+      }
+      List<String> matches = new ArrayList<>();
+      try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, fileName)) {
+        for (Path match : stream) {
+          if (Files.isRegularFile(match)) {
+            matches.add(configPath.relativize(match).toString().replace('\\', '/'));
+          }
+        }
+      } catch (IOException e) {
+        log.warn("Could not expand replication confFiles pattern '{}'", name, e);
+      }
+      Collections.sort(matches);
+      for (String match : matches) {
+        expanded.add(new AbstractMap.SimpleEntry<>(match, null));
+      }
+    }
+    return expanded;
   }
 
   static class FileInfo {
