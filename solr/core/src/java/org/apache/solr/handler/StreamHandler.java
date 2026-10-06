@@ -90,6 +90,8 @@ public class StreamHandler extends RequestHandlerBase
   private SolrClientCache solrClientCache;
   private Map<String, DaemonStream> daemons = new ConcurrentHashMap<>();
 
+  // see inform(): shared by all StreamHandlers of one collection on this node
+
   @Override
   public PermissionNameProvider.Name getPermissionName(AuthorizationContext request) {
     return PermissionNameProvider.Name.READ_PERM;
@@ -108,6 +110,20 @@ public class StreamHandler extends RequestHandlerBase
             .getObjectCache()
             .computeIfAbsent(
                 cacheKey + "objectCache", ConcurrentHashMap.class, k -> new ConcurrentHashMap<>());
+    // SOLR-13245: daemons are registered per collection (SolrCloud) so that list/start/stop/kill
+    // see
+    // them no matter which co-located replica of the collection the request lands on
+    String daemonScope = coreName;
+    if (coreContainer.isZooKeeperAware()) {
+      daemonScope = core.getCoreDescriptor().getCollectionName();
+    }
+    this.daemons =
+        coreContainer
+            .getObjectCache()
+            .computeIfAbsent(
+                this.getClass().getName() + "_daemons_" + daemonScope,
+                ConcurrentHashMap.class,
+                k -> new ConcurrentHashMap<>());
     if (coreContainer.isZooKeeperAware()) {
       this.solrClientCache = coreContainer.getZkController().getSolrClientCache();
       defaultCollection = core.getCoreDescriptor().getCollectionName();

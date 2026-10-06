@@ -72,15 +72,16 @@ public class DaemonStreamApiTest extends SolrTestCaseJ4 {
     url = cluster.getJettySolrRunners().get(0).getBaseUrl().toString();
 
     cluster.uploadConfigSet(configset("cloud-minimal"), CONF_NAME);
-    // create a single shard, single replica collection. This is necessary until SOLR-13245 since
-    // the commands don't look in all replicas.
     CollectionAdminRequest.createCollection(SOURCE_COLL, CONF_NAME, 1, 1)
         .process(cluster.getSolrClient());
 
     CollectionAdminRequest.createCollection(TARGET_COLL, CONF_NAME, 1, 1)
         .process(cluster.getSolrClient());
 
-    CollectionAdminRequest.createCollection(CHECKPOINT_COLL, CONF_NAME, 1, 1)
+    // SOLR-13245: two shards on the one node means two cores of the collection here; the daemon
+    // commands go to /stream by collection, so they land on either core and must still find the
+    // daemons
+    CollectionAdminRequest.createCollection(CHECKPOINT_COLL, CONF_NAME, 2, 1)
         .process(cluster.getSolrClient());
 
     for (int idx = 0; idx < numDaemons; ++idx) {
@@ -198,6 +199,63 @@ public class DaemonStreamApiTest extends SolrTestCaseJ4 {
       getTuples(params("action", "kill", "id", daemon));
       checkDaemonKilled(daemon);
     }
+  }
+
+  @Test
+  public void testDaemonListedOnEveryCoreOfCollection() throws Exception {
+    List<String> coreNames = new ArrayList<>();
+    cluster
+        .getSolrClient()
+        .getClusterState()
+        .getCollection(CHECKPOINT_COLL)
+        .getSlices()
+        .forEach(
+            slice -> slice.getReplicas().forEach(replica -> coreNames.add(replica.getCoreName())));
+    assertEquals("expected one core per shard on the single node", 2, coreNames.size());
+
+    String name = daemonNames.get(0);
+    createDaemon(DAEMON_DEF.replace("DAEMON_NAME", name), name);
+
+    // SOLR-13245: the daemon runs in one core, but both cores must report it
+    for (String coreName : coreNames) {
+      assertTrue(
+          "daemon not listed by core " + coreName, listDaemonIds(coreName, "list").contains(name));
+    }
+
+    // kill through one core, then neither core may list it
+    TupleStream killStream =
+        new SolrStream(url, coreNames.get(0), "/stream", params("action", "kill", "id", name));
+    killStream.open();
+    try {
+      for (Tuple t = killStream.read(); t.EOF == false; t = killStream.read()) {}
+    } finally {
+      killStream.close();
+    }
+    TimeOut timeout = new TimeOut(10, TimeUnit.SECONDS, TimeSource.NANO_TIME);
+    while (timeout.hasTimedOut() == false
+        && (listDaemonIds(coreNames.get(0), "list").contains(name)
+            || listDaemonIds(coreNames.get(1), "list").contains(name))) {
+      TimeUnit.MILLISECONDS.sleep(100);
+    }
+    for (String coreName : coreNames) {
+      assertFalse(
+          "killed daemon still listed by core " + coreName,
+          listDaemonIds(coreName, "list").contains(name));
+    }
+  }
+
+  private List<String> listDaemonIds(String coreName, String action) throws IOException {
+    TupleStream tupleStream = new SolrStream(url, coreName, "/stream", params("action", action));
+    List<String> ids = new ArrayList<>();
+    tupleStream.open();
+    try {
+      for (Tuple t = tupleStream.read(); t.EOF == false; t = tupleStream.read()) {
+        ids.add(t.getString("id"));
+      }
+    } finally {
+      tupleStream.close();
+    }
+    return ids;
   }
 
   // There can be some delay while threads stabilize, so we need to loop;
