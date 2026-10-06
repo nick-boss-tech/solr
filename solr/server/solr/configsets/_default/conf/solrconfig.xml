@@ -626,6 +626,14 @@
 
     <str name="queryAnalyzerFieldType">text_general</str>
 
+    <!-- NOTE: the catch-all _text_ field and the text_general analyzer used below are a
+         convenient starting point, not a production recommendation. text_general applies
+         stopwords and (if you configure them) synonyms, so a large synonym list can expand every
+         misspelled term into many extra clauses while spellchecking. For production, point the
+         spellchecker at a lightly analyzed field (e.g. lowercase only, no synonyms or stemming)
+         and set queryAnalyzerFieldType to a matching field type.
+      -->
+
     <!-- Multiple "Spell Checkers" can be declared and used by this
          component
       -->
