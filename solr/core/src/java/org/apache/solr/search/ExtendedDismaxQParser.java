@@ -16,6 +16,7 @@
  */
 package org.apache.solr.search;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,6 +28,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenFilterFactory;
+import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.core.StopFilterFactory;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queries.function.FunctionScoreQuery;
@@ -55,6 +57,7 @@ import org.apache.solr.parser.SolrQueryParserBase.MagicFieldName;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.IndexSchema;
+import org.apache.solr.schema.TextField;
 import org.apache.solr.search.ExtendedDismaxQParser.ExtendedSolrQueryParser.Alias;
 import org.apache.solr.util.SolrPluginUtils;
 
@@ -1475,6 +1478,10 @@ public class ExtendedDismaxQParser extends QParser {
           case WILDCARD:
             return super.getWildcardQuery(field, val);
           case FUZZY:
+            if (analysisYieldsNoTokens(field, val)) {
+              // e.g. a stopword: the non-fuzzy path drops it, so the fuzzy path must as well
+              return null;
+            }
             return super.getFuzzyQuery(field, val, flt);
           case RANGE:
             return super.getRangeQuery(field, val, val2, bool, bool2);
@@ -1485,6 +1492,27 @@ public class ExtendedDismaxQParser extends QParser {
         // an exception here is due to the field query not being compatible with the input text
         // for example, passing a string to a numeric field.
         return null;
+      }
+    }
+
+    /**
+     * True if the field's query analyzer (honoring {@code stopwords=false}) removes all of text.
+     */
+    private boolean analysisYieldsNoTokens(String fieldName, String text) throws IOException {
+      FieldType ft = parser.getReq().getSchema().getFieldType(fieldName);
+      if (!(ft instanceof TextField)) {
+        return false;
+      }
+      Analyzer analyzer =
+          removeStopFilter ? noStopwordFilterAnalyzer(fieldName) : ft.getQueryAnalyzer();
+      try (TokenStream ts = analyzer.tokenStream(fieldName, text)) {
+        ts.reset();
+        boolean any = ts.incrementToken();
+        // Drain before end(): a graph filter (e.g. synonyms) may reject end() while it still
+        // holds lookahead state after the first token.
+        while (ts.incrementToken()) {}
+        ts.end();
+        return !any;
       }
     }
 

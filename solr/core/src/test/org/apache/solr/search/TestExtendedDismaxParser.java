@@ -383,6 +383,12 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     // test for ignoring stopwords when all query terms are stopwords
     assertQ(req("defType", "edismax", "qf", "text_sw", "q", "the"), oner);
 
+    // a fuzzy stopword is dropped just like a plain one (SOLR-2309)
+    assertQ(
+        req("defType", "edismax", "qf", "text_sw", "q", "the~0.5 big~0.5", "debug", "query"),
+        "//str[@name='parsedquery'][contains(.,'text_sw:big~')]",
+        "//str[@name='parsedquery'][not(contains(.,'text_sw:the'))]");
+
     // test for not ignoring stopwords when all query terms are stopwords and alwaysStopwords is set
     assertQ(req("defType", "edismax", "qf", "text_sw", "q", "the", "alwaysStopwords", "true"), nor);
 
