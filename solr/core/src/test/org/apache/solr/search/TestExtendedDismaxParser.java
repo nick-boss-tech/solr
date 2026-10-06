@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.Matchers.not;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -155,6 +156,34 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
           QParser qParser = QParser.getParser(q, "edismax", req);
           assertThat(qParser.getQuery(), isA(MatchAllDocsQuery.class));
         }
+      }
+    }
+  }
+
+  @Test
+  public void testMatchAllColonEscaping() throws Exception {
+    // a standalone match-all keeps its colon unescaped, so it parses as a MatchAllDocsQuery,
+    // whether bare with spaces, parenthesized, signed, or boosted (SOLR-3729)
+    for (String q : Arrays.asList("(*:*)", "( *:* )")) {
+      try (SolrQueryRequest req = req("qf", "name title subject text")) {
+        QParser qParser = QParser.getParser(q, "edismax", req);
+        assertThat(qParser.getQuery(), isA(MatchAllDocsQuery.class));
+      }
+    }
+    for (String q : Arrays.asList("+(*:*)", "(*:*)^2")) {
+      try (SolrQueryRequest req = req("qf", "name title subject text")) {
+        Query parsed = QParser.getParser(q, "edismax", req).getQuery();
+        assertThat(parsed.toString(), containsString("*:*"));
+        assertThat(parsed.toString(), not(containsString("*\\:*")));
+      }
+    }
+    // a *:* glued to other text in the same clause is not standalone: its colon is escaped, so
+    // it parses as a wildcard term on the query fields, exactly as it did before SOLR-3729
+    for (String q : Arrays.asList("foo(*:*)bar", "(*:*)foo", "foo(*:*)", "((*:*)bar)")) {
+      try (SolrQueryRequest req = req("qf", "name title subject text")) {
+        Query parsed = QParser.getParser(q, "edismax", req).getQuery();
+        assertThat(parsed.toString(), containsString("*\\:*"));
+        assertThat(parsed.toString().replace("*\\:*", ""), not(containsString("*:*")));
       }
     }
   }
@@ -358,6 +387,36 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "Order OR op"), twor);
     assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "Order or op"), twor);
     assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "*:*"), allr);
+    // a parenthesized match-all is still match-all (SOLR-3729)
+    assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "(*:*)"), allr);
+    assertQ(req("defType", "edismax", "qf", "name title subject text", "q", "( *:* )"), allr);
+    // and the parsed query really is the match-all query, not a wildcard term matching every doc
+    assertQ(
+        req(
+            "defType",
+            "edismax",
+            "debugQuery",
+            "true",
+            "rows",
+            "0",
+            "qf",
+            "name title subject text",
+            "q",
+            "(*:*)"),
+        "//str[@name='parsedquery_toString'][.='*:*']");
+    assertQ(
+        req(
+            "defType",
+            "edismax",
+            "debugQuery",
+            "true",
+            "rows",
+            "0",
+            "qf",
+            "name title subject text",
+            "q",
+            "( *:* )"),
+        "//str[@name='parsedquery_toString'][.='*:*']");
 
     assertQ(
         req("defType", "edismax", "qf", "name title subject text", "q", "star OR (-star)"), allr);

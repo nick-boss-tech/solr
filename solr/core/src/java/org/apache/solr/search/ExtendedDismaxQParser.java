@@ -734,6 +734,46 @@ public class ExtendedDismaxQParser extends QParser {
     protected String raw; // the raw clause w/o leading/trailing whitespace
   }
 
+  /**
+   * Whether a clause is a standalone "match all" query: nothing but a {@code *:*} term, wrapped in
+   * any number of parentheses, with an optional leading {@code +} or {@code -} and an optional
+   * trailing boost. A {@code *:*} glued to other text in the clause, such as {@code foo(*:*)bar} or
+   * {@code (*:*)foo}, is not standalone, so its colon is escaped like any other colon.
+   */
+  private static boolean isStandaloneMatchAll(String raw) {
+    int pos = 0;
+    final int end = raw.length();
+    while (pos < end) {
+      char ch = raw.charAt(pos);
+      if (ch == '(' || ch == '+' || ch == '-' || Character.isWhitespace(ch)) {
+        pos++;
+      } else {
+        break;
+      }
+    }
+    if (!raw.startsWith("*:*", pos)) {
+      return false;
+    }
+    pos += 3;
+    boolean seenBoost = false;
+    while (pos < end) {
+      char ch = raw.charAt(pos);
+      if (ch == ')' || Character.isWhitespace(ch)) {
+        pos++;
+      } else if (ch == '^' && !seenBoost) {
+        seenBoost = true;
+        pos++;
+        // the boost value runs until a closing paren, whitespace, or the end of the clause
+        while (pos < end && raw.charAt(pos) != ')' && !Character.isWhitespace(raw.charAt(pos))) {
+          pos++;
+        }
+      } else {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public List<Clause> splitIntoClauses(String s, boolean ignoreQuote) {
     ArrayList<Clause> lst = new ArrayList<>(4);
     Clause clause;
@@ -874,8 +914,8 @@ public class ExtendedDismaxQParser extends QParser {
       if (clause != null) {
         if (disallowUserField) {
           clause.raw = s.substring(start, pos);
-          // escape colons, except for "match all" query
-          if (!"*:*".equals(clause.raw)) {
+          // escape colons, except in a standalone "match all" query such as *:* or (*:*)
+          if (!isStandaloneMatchAll(clause.raw)) {
             clause.raw = clause.raw.replaceAll("([^\\\\]):", "$1\\\\:");
           }
         } else {
