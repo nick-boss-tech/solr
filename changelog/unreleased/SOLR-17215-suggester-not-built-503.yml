@@ -1,0 +1,10 @@
+title: >
+  A suggester that was never built or loaded on a node (for example FreeTextLookupFactory on a replica,
+  since suggester dictionaries are not replicated) now answers 503 with a message that says so,
+  instead of a bare IllegalStateException "Lookup not supported at this time".
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17215
+    url: https://issues.apache.org/jira/browse/SOLR-17215
