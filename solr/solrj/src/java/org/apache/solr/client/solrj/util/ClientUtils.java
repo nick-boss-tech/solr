@@ -112,6 +112,10 @@ public class ClientUtils {
               for (Object value : values) {
                 writeVal(writer, name, value, update);
               }
+            } else if (v instanceof Object[] values) {
+              for (Object value : values) {
+                writeVal(writer, name, value, update);
+              }
             } else {
               writeVal(writer, name, v, update);
             }

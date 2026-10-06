@@ -16,12 +16,15 @@
  */
 package org.apache.solr.client.solrj.util;
 
+import java.io.StringWriter;
+import java.util.Map;
 import org.apache.lucene.tests.util.TestUtil;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.HealthCheckRequest;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.UpdateRequest;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.search.QueryParsing;
 import org.junit.Test;
@@ -80,6 +83,20 @@ public class ClientUtilsTest extends SolrTestCase {
         "encodeLocalParamVal(" + original + ") -> " + encoded + " swallowed the next local param",
         "followed",
         targetFollowedByAnother.get("next"));
+  }
+
+  public void testWriteXmlAtomicUpdateWithArrayValue() throws Exception {
+    final SolrInputDocument doc = new SolrInputDocument();
+    doc.addField("id", "1");
+    doc.addField("field1", Map.of("set", new String[] {"new_value1", "new_value2"}));
+
+    final StringWriter writer = new StringWriter();
+    ClientUtils.writeXML(doc, writer);
+    final String xml = writer.toString();
+
+    assertFalse("array was written via toString(): " + xml, xml.contains("[Ljava.lang.String;"));
+    assertTrue(xml, xml.contains("<field name=\"field1\" update=\"set\">new_value1</field>"));
+    assertTrue(xml, xml.contains("<field name=\"field1\" update=\"set\">new_value2</field>"));
   }
 
   @Test
