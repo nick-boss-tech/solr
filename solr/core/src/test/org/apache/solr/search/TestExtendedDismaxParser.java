@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.Matchers.not;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -255,6 +256,28 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
               "sow", sow,
               "defType", "edismax"),
           "*[count(//doc)=1]");
+    }
+  }
+
+  /**
+   * SOLR-6320: a lowercase operator word beside an explicit operator is a term, not an operator.
+   */
+  public void testLowercaseOperatorNextToExplicitOperator() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      for (String q : Arrays.asList("Zapp AND and Brannigan", "Zapp and AND Brannigan")) {
+        try (SolrQueryRequest req =
+            req("q.op", "AND", "qf", "name", "lowercaseOperators", "true", "sow", sow)) {
+          QParser qParser = QParser.getParser(q, "edismax", req);
+          String parsed = qParser.getQuery().toString();
+          // "name" uses WhitespaceAnalyzer, so terms keep their case. On the unfixed parser the
+          // query fails to parse and falls back to the escaped form, where the explicit operator
+          // itself shows up as a term (name:AND); the fixed parse has "and" as a term instead.
+          assertThat(parsed, containsString("name:and"));
+          assertThat(parsed, containsString("name:Zapp"));
+          assertThat(parsed, containsString("name:Brannigan"));
+          assertThat(parsed, not(containsString("name:AND")));
+        }
+      }
     }
   }
 
