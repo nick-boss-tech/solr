@@ -1,0 +1,8 @@
+title: >
+  The implicit property solr.core.ulogDir is now always available for substitution in core config files (it defaults to the core's dataDir) instead of failing core load when ulogDir is not set in core.properties.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-5262
+    url: https://issues.apache.org/jira/browse/SOLR-5262
