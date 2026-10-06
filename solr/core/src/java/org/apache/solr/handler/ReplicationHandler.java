@@ -309,7 +309,7 @@ public class ReplicationHandler extends RequestHandlerBase
     } else if (command.equalsIgnoreCase(CMD_FETCH_INDEX)) {
       fetchIndex(solrParams, rsp);
     } else if (command.equalsIgnoreCase(CMD_DISABLE_POLL)) {
-      disablePoll(rsp);
+      disablePoll(solrParams.getBool(PERSIST, false), rsp);
     } else if (command.equalsIgnoreCase(CMD_ENABLE_POLL)) {
       enablePoll(rsp);
     } else if (command.equalsIgnoreCase(CMD_ABORT_FETCH)) {
@@ -810,10 +810,13 @@ public class ReplicationHandler extends RequestHandlerBase
     }
   }
 
-  private void disablePoll(SolrQueryResponse rsp) {
+  private void disablePoll(boolean persist, SolrQueryResponse rsp) {
     if (pollingIndexFetcher != null) {
       pollDisabled.set(true);
       log.info("inside disable poll, value of pollDisabled = {}", pollDisabled);
+      if (persist && !updatePersistedPollDisabled(true, rsp)) {
+        return;
+      }
       rsp.add(STATUS, OK_STATUS);
     } else {
       reportErrorOnResponse(rsp, "No follower configured", null);
@@ -824,9 +827,37 @@ public class ReplicationHandler extends RequestHandlerBase
     if (pollingIndexFetcher != null) {
       pollDisabled.set(false);
       log.info("inside enable poll, value of pollDisabled = {}", pollDisabled);
+      if (!updatePersistedPollDisabled(false, rsp)) {
+        return;
+      }
       rsp.add(STATUS, OK_STATUS);
     } else {
       reportErrorOnResponse(rsp, "No follower configured", null);
+    }
+  }
+
+  /**
+   * Records (or clears) {@link #POLL_DISABLED} in {@code replication.properties} so a disabled
+   * poll survives a restart or core reload. Writes only when the stored value has to change.
+   *
+   * @return false if the file could not be written (an error is already on the response)
+   */
+  private boolean updatePersistedPollDisabled(boolean disabled, SolrQueryResponse rsp) {
+    Properties props = loadReplicationProperties();
+    if (disabled == Boolean.parseBoolean(props.getProperty(POLL_DISABLED))) {
+      return true;
+    }
+    if (disabled) {
+      props.setProperty(POLL_DISABLED, "true");
+    } else {
+      props.remove(POLL_DISABLED);
+    }
+    try {
+      IndexFetcher.storeReplicationProperties(core, props);
+      return true;
+    } catch (IOException e) {
+      reportErrorOnResponse(rsp, "Could not persist the poll setting", e);
+      return false;
     }
   }
 
@@ -1311,6 +1342,7 @@ public class ReplicationHandler extends RequestHandlerBase
     boolean enableFollower = isEnabled(follower);
     if (enableFollower) {
       currentIndexFetcher = pollingIndexFetcher = new IndexFetcher(follower, this, core);
+      pollDisabled.set(Boolean.parseBoolean(loadReplicationProperties().getProperty(POLL_DISABLED)));
       setupPolling((String) follower.get(ReplicationAPIBase.POLL_INTERVAL));
       isFollower = true;
     }
@@ -1636,6 +1668,12 @@ public class ReplicationHandler extends RequestHandlerBase
   public static final String CMD_ENABLE_REPL = "enablereplication";
 
   public static final String CMD_ENABLE_POLL = "enablepoll";
+
+  /** Request parameter of {@code disablepoll}: keep the disabled state across restarts. */
+  public static final String PERSIST = "persist";
+
+  /** Key in {@code replication.properties} that marks polling as disabled. */
+  static final String POLL_DISABLED = "pollDisabled";
 
   public static final String CMD_INDEX_VERSION = "indexversion";
 

@@ -895,6 +895,25 @@ public class IndexFetcher {
     if (fsyncExceptionCopy != null) throw fsyncExceptionCopy;
   }
 
+  /** Atomically replaces {@value #REPLICATION_PROPERTIES} in the core's data directory. */
+  static void storeReplicationProperties(SolrCore core, Properties props) throws IOException {
+    Directory dir =
+        core.getDirectoryFactory()
+            .get(core.getDataDir(), DirContext.META_DATA, core.getSolrConfig().indexConfig.lockType);
+    try {
+      String tmpFileName = REPLICATION_PROPERTIES + "." + System.nanoTime();
+      final IndexOutput out = dir.createOutput(tmpFileName, DirectoryFactory.IOCONTEXT_NO_CACHE);
+      try (Writer outFile =
+          new OutputStreamWriter(new IndexOutputOutputStream(out), StandardCharsets.UTF_8)) {
+        props.store(outFile, "Replication details");
+        dir.sync(Set.of(tmpFileName));
+      }
+      core.getDirectoryFactory().renameWithOverwrite(dir, tmpFileName, REPLICATION_PROPERTIES);
+    } finally {
+      core.getDirectoryFactory().release(dir);
+    }
+  }
+
   /**
    * Helper method to record the last replication's details so that we can show them on the
    * statistics page across restarts.
