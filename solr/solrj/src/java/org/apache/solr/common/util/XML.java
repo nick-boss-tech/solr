@@ -139,6 +139,10 @@ public class XML {
           out.write(replacement);
           continue;
         }
+      } else if (ch == '￾' || ch == '￿') {
+        // not legal XML characters; written like the control characters above (#nn; not &#nn;)
+        out.write(ch == '￾' ? "#65534;" : "#65535;");
+        continue;
       }
       out.write(ch);
     }

@@ -65,4 +65,18 @@ public class TestXMLEscaping extends SolrTestCase {
   public void testGt() throws IOException {
     doSimpleTest("a ]]> b", "a ]]&gt; b");
   }
+
+  public void testNonCharacters() throws IOException {
+    // U+FFFE and U+FFFF are not legal XML characters; handle them like the control characters
+    doSimpleTest("a￿b", "a#65535;b");
+    doSimpleTest("￾b", "#65534;b");
+    // neighbours that are legal stay as they are
+    doSimpleTest("�", "�");
+  }
+
+  public void testNonCharacterInAttribute() throws IOException {
+    final StringWriter sw = new StringWriter();
+    XML.escapeAttributeValue("x￿y", sw);
+    assertEquals("x#65535;y", sw.toString());
+  }
 }
