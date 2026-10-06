@@ -182,8 +182,19 @@ public class SolrSuggester implements Accountable {
     }
     if (storeDir != null) {
       Path target = getStoreFile();
-      if (!lookup.store(Files.newOutputStream(target))) {
-        log.error("Store Lookup build failed");
+      boolean stored;
+      try {
+        stored = lookup.store(Files.newOutputStream(target));
+      } catch (IOException e) {
+        throw new IOException(
+            "Suggester '" + name + "' failed to store its lookup to " + target.toAbsolutePath(), e);
+      }
+      if (!stored) {
+        log.warn(
+            "Suggester '{}': lookup {} did not store its data to {} (it may persist elsewhere, e.g. in its own index)",
+            name,
+            lookup.getClass().getSimpleName(),
+            target.toAbsolutePath());
       } else {
         if (log.isInfoEnabled()) {
           log.info("Stored suggest data to: {}", target.toAbsolutePath());

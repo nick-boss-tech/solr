@@ -19,7 +19,9 @@ package org.apache.solr.handler.component;
 import static org.hamcrest.core.Is.is;
 
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.spelling.suggest.SolrSuggester;
 import org.apache.solr.spelling.suggest.SuggesterParams;
+import org.apache.solr.util.LogListener;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -103,6 +105,27 @@ public class SuggestComponentContextFilterQueryTest extends SolrTestCaseJ4 {
             "ctx4"));
     assertU((commit()));
     waitForWarming();
+  }
+
+  @Test
+  public void testLookupThatDoesNotStoreIsLoggedWithSuggesterName() {
+    try (LogListener errors = LogListener.error(SolrSuggester.class);
+        LogListener warnings =
+            LogListener.warn(SolrSuggester.class).substring("did not store its data")) {
+      assertQ(
+          reqWithPath(
+              rh,
+              SuggesterParams.SUGGEST_BUILD,
+              "true",
+              SuggesterParams.SUGGEST_DICT,
+              "suggest_blended_infix_suggester",
+              SuggesterParams.SUGGEST_Q,
+              "examp"));
+      assertNull("no error expected for a lookup that persists itself", errors.pollMessage());
+      String message = warnings.pollMessage();
+      assertNotNull(message);
+      assertTrue(message, message.contains("suggest_blended_infix_suggester"));
+    }
   }
 
   @Test
