@@ -322,8 +322,7 @@ public class TestReRankQParserPlugin extends SolrTestCaseJ4 {
   public void testRerankMaxScoreBeyondReturnedPage() {
     // 30 matches whose first-pass scores are 1..30 (doc 100+i has score i).
     for (int i = 1; i <= 30; i++) {
-      assertU(
-          adoc("id", String.valueOf(100 + i), "term_s", "YYYY", "test_ti", String.valueOf(i)));
+      assertU(adoc("id", String.valueOf(100 + i), "term_s", "YYYY", "test_ti", String.valueOf(i)));
     }
     assertU(commit());
 
