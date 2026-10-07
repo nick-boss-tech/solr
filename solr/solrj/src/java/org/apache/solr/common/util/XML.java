@@ -139,9 +139,9 @@ public class XML {
           out.write(replacement);
           continue;
         }
-      } else if (ch == '￾' || ch == '￿') {
+      } else if (ch == '\uFFFE' || ch == '\uFFFF') {
         // not legal XML characters; written like the control characters above (#nn; not &#nn;)
-        out.write(ch == '￾' ? "#65534;" : "#65535;");
+        out.write(ch == '\uFFFE' ? "#65534;" : "#65535;");
         continue;
       }
       out.write(ch);

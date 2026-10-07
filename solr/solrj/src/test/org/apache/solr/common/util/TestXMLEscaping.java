@@ -68,15 +68,20 @@ public class TestXMLEscaping extends SolrTestCase {
 
   public void testNonCharacters() throws IOException {
     // U+FFFE and U+FFFF are not legal XML characters; handle them like the control characters
-    doSimpleTest("a￿b", "a#65535;b");
-    doSimpleTest("￾b", "#65534;b");
+    doSimpleTest("a\uFFFFb", "a#65535;b");
+    doSimpleTest("\uFFFEb", "#65534;b");
     // neighbours that are legal stay as they are
     doSimpleTest("�", "�");
   }
 
+  public void testSupplementaryCharacterPassesThrough() throws IOException {
+    // U+1F600 is a legal XML character above the BMP; its surrogate pair is written as-is
+    doSimpleTest("a\uD83D\uDE00b", "a\uD83D\uDE00b");
+  }
+
   public void testNonCharacterInAttribute() throws IOException {
     final StringWriter sw = new StringWriter();
-    XML.escapeAttributeValue("x￿y", sw);
+    XML.escapeAttributeValue("x\uFFFFy", sw);
     assertEquals("x#65535;y", sw.toString());
   }
 }
