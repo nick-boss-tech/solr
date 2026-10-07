@@ -72,6 +72,20 @@ public class TestInitParams extends SolrTestCaseJ4 {
     assertEquals("C", Utils.getObjectByPath(config, false, join(handlerPath, "appends", "c")));
   }
 
+  @Test
+  public void testConfigReportHandlerValuesBeatInitParams() {
+    // /dump2 references initParams "a" but also defines its own defaults, invariants and
+    // appends; in the report the handler's own values win, as they do for the live handler
+    // (see testComponentWithConflictingInitParams), and the initParams appends still follow.
+    Object config = Utils.fromJSONString(Utils.toJSONString(h.getCore().getSolrConfig()));
+    List<String> handlerPath = List.of("requestHandler", "/dump2");
+    assertEquals("A1", Utils.getObjectByPath(config, false, join(handlerPath, "defaults", "a")));
+    assertEquals("B1", Utils.getObjectByPath(config, false, join(handlerPath, "invariants", "b")));
+    assertEquals(
+        Arrays.asList("C1", "C"),
+        Utils.getObjectByPath(config, false, join(handlerPath, "appends", "c")));
+  }
+
   private static List<String> join(List<String> prefix, String... rest) {
     List<String> path = new ArrayList<>(prefix);
     path.addAll(Arrays.asList(rest));
