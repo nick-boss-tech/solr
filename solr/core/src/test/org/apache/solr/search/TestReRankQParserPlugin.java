@@ -249,6 +249,75 @@ public class TestReRankQParserPlugin extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testRerankMaxScoreOutsideWindowMatch() {
+    assertU(adoc("id", "1", "term_s", "YYYY", "test_ti", "5"));
+    assertU(adoc("id", "2", "term_s", "YYYY", "test_ti", "50"));
+    assertU(adoc("id", "3", "term_s", "YYYY", "test_ti", "5000"));
+    assertU(commit());
+
+    for (boolean multiThreaded : new boolean[] {false, true}) {
+      String mt = Boolean.toString(multiThreaded);
+
+      // The rerank window holds only the top two first-pass docs, and the replace
+      // rerank lowers both. The page is large enough to return every match, so the
+      // match outside the window (doc 1, final score 5.0) is returned with its
+      // untouched score, and it supplies the reported maxScore: maxScore follows the
+      // final scores of the returned documents, window membership does not matter.
+      String[] allReturned = {
+        "q",
+        "{!func}field(test_ti)",
+        "fq",
+        "term_s:YYYY",
+        "rq",
+        "{!rerank reRankQuery=$rqq reRankDocs=2 reRankOperator=replace}",
+        "rqq",
+        "{!func}0.001",
+        "rows",
+        "10",
+        "fl",
+        "id,score",
+        "multiThreaded",
+        mt
+      };
+      assertQ(
+          req(allReturned),
+          "*[count(//doc)=3]",
+          "//result[@numFound='3']",
+          "//result[@maxScore>'4.9']",
+          "//result[@maxScore<'5.1']",
+          "//doc/str[@name='id'][.='1']/../float[@name='score'][.>'4.9']");
+
+      // With a one-document page, only the head of the reranked list is returned and
+      // maxScore follows the returned documents only: doc 2's untouched 50.0 (a match,
+      // but not on the page) is not counted. This pins the implemented contract;
+      // whether maxScore should instead span all matches after reranking, returned
+      // or not, is an open question on SOLR-15479.
+      String[] firstPageOnly = {
+        "q",
+        "{!func}field(test_ti)",
+        "fq",
+        "term_s:YYYY",
+        "rq",
+        "{!rerank reRankQuery=$rqq reRankDocs=1 reRankOperator=replace}",
+        "rqq",
+        "{!func}0.001",
+        "rows",
+        "1",
+        "fl",
+        "id,score",
+        "multiThreaded",
+        mt
+      };
+      assertQ(
+          req(firstPageOnly),
+          "*[count(//doc)=1]",
+          "//result[@numFound='3']",
+          "//result[@maxScore<'0.01']",
+          "//doc/str[@name='id'][.='3']");
+    }
+  }
+
+  @Test
   public void testRerankReturnOriginalScoreNotRequested() throws Exception {
 
     assertU(delQ("*:*"));
