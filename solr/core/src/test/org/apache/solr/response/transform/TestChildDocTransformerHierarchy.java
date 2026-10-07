@@ -17,6 +17,7 @@
 package org.apache.solr.response.transform;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -259,10 +260,10 @@ public class TestChildDocTransformerHierarchy extends SolrTestCaseJ4 {
   @Test
   public void testExtraResponseFieldsDoNotLeakAcrossDocuments() throws Exception {
     // SOLR-14678: the nest-path names a transformer reports via getExtraResponseFields
-    // must stay scoped to the document being transformed. The first doc nests a child
-    // under the "name_s" path; the second doc has an ordinary name_s value and no
-    // children. While the second doc is written, wantsField("name_s") must be false
-    // again: the name was never requested in fl, so the ordinary field must not pass
+    // must stay scoped to the document being transformed. One doc nests a child
+    // under the "name_s" path; another doc has an ordinary name_s value and no
+    // children. While that second doc is written, wantsField("name_s") must be false:
+    // the name was never requested in fl, so the ordinary field must not pass
     // the projection just because another document's children used the same name.
     final int parentId = id();
     final int childId = id();
@@ -270,23 +271,23 @@ public class TestChildDocTransformerHierarchy extends SolrTestCaseJ4 {
     updateJ(
         "{\"add\":{\"doc\":{\"id\": "
             + parentId
-            + ", \"type_s\": \"donut\", \"name_s\": {\"id\": "
+            + ", \"id_i\": 1, \"type_s\": \"donut\", \"name_s\": {\"id\": "
             + childId
             + ", \"name_s\": \"inner\"}}}}",
         null);
     updateJ(
         "{\"add\":{\"doc\":{\"id\": "
             + plainId
-            + ", \"type_s\": \"cake\", \"name_s\": \"plain\"}}}",
+            + ", \"id_i\": 2, \"type_s\": \"cake\", \"name_s\": \"plain\"}}}",
         null);
     assertU(commit());
 
     try (SolrQueryRequest req =
         req(
             "q",
-            "*:*",
+            "type_s:(donut OR cake)",
             "sort",
-            "id asc",
+            "id_i asc",
             "fl",
             "id,[child]",
             "fq",
@@ -295,20 +296,29 @@ public class TestChildDocTransformerHierarchy extends SolrTestCaseJ4 {
           (BasicResultContext) h.queryAndResponse("/select", req).getResponse();
       Iterator<SolrDocument> docsStreamer = res.getProcessedDocuments();
 
-      SolrDocument parent = docsStreamer.next();
-      assertEquals(String.valueOf(parentId), parent.getFirstValue("id").toString());
+      // Sample the return-fields state while each document is the one being
+      // written; that state is exactly what the response writers consult.
+      Map<String, Boolean> nameWantedByDoc = new HashMap<>();
+      Map<String, Object> nameValueByDoc = new HashMap<>();
+      while (docsStreamer.hasNext()) {
+        SolrDocument doc = docsStreamer.next();
+        String docId = doc.getFirstValue("id").toString();
+        nameWantedByDoc.put(docId, res.getReturnFields().wantsField("name_s"));
+        nameValueByDoc.put(docId, doc.getFieldValue("name_s"));
+      }
+      assertEquals(2, nameWantedByDoc.size());
+
       assertTrue(
           "parent doc should carry its nested child under name_s",
-          parent.getFieldValue("name_s") instanceof SolrDocument);
-      assertTrue(
+          nameValueByDoc.get(String.valueOf(parentId)) instanceof SolrDocument);
+      assertEquals(
           "while the parent is written, its nest-path field must pass wantsField",
-          res.getReturnFields().wantsField("name_s"));
-
-      SolrDocument plain = docsStreamer.next();
-      assertEquals(String.valueOf(plainId), plain.getFirstValue("id").toString());
-      assertFalse(
+          Boolean.TRUE,
+          nameWantedByDoc.get(String.valueOf(parentId)));
+      assertEquals(
           "nest-path names from the previous document must not widen this document's projection",
-          res.getReturnFields().wantsField("name_s"));
+          Boolean.FALSE,
+          nameWantedByDoc.get(String.valueOf(plainId)));
     }
   }
 
