@@ -249,6 +249,120 @@ public class TestReRankQParserPlugin extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testRerankMaxScoreOutsideWindowMatch() {
+    assertU(adoc("id", "1", "term_s", "YYYY", "test_ti", "5"));
+    assertU(adoc("id", "2", "term_s", "YYYY", "test_ti", "50"));
+    assertU(adoc("id", "3", "term_s", "YYYY", "test_ti", "5000"));
+    assertU(commit());
+
+    for (boolean multiThreaded : new boolean[] {false, true}) {
+      String mt = Boolean.toString(multiThreaded);
+
+      // The rerank window holds only the top two first-pass docs, and the replace
+      // rerank lowers both. The page is large enough to return every match, so the
+      // match outside the window (doc 1, final score 5.0) is returned with its
+      // untouched score, and it supplies the reported maxScore: maxScore follows the
+      // final scores of the returned documents, window membership does not matter.
+      String[] allReturned = {
+        "q",
+        "{!func}field(test_ti)",
+        "fq",
+        "term_s:YYYY",
+        "rq",
+        "{!rerank reRankQuery=$rqq reRankDocs=2 reRankOperator=replace}",
+        "rqq",
+        "{!func}0.001",
+        "rows",
+        "10",
+        "fl",
+        "id,score",
+        "multiThreaded",
+        mt
+      };
+      assertQ(
+          req(allReturned),
+          "*[count(//doc)=3]",
+          "//result[@numFound='3']",
+          "//result[@maxScore>'4.9']",
+          "//result[@maxScore<'5.1']",
+          "//doc/str[@name='id'][.='1']/../float[@name='score'][.>'4.9']");
+
+      // With a one-document page, only the head of the reranked list is returned,
+      // but maxScore is computed over the collected result window (the superset the
+      // searcher collected, rounded up to the result window size), not just the
+      // returned page: doc 2 is not on the page, but it is inside the window, so
+      // its untouched 50.0 is the reported maxScore.
+      String[] firstPageOnly = {
+        "q",
+        "{!func}field(test_ti)",
+        "fq",
+        "term_s:YYYY",
+        "rq",
+        "{!rerank reRankQuery=$rqq reRankDocs=1 reRankOperator=replace}",
+        "rqq",
+        "{!func}0.001",
+        "rows",
+        "1",
+        "fl",
+        "id,score",
+        "multiThreaded",
+        mt
+      };
+      assertQ(
+          req(firstPageOnly),
+          "*[count(//doc)=1]",
+          "//result[@numFound='3']",
+          "//result[@maxScore>'49.9']",
+          "//result[@maxScore<'50.1']",
+          "//doc/str[@name='id'][.='3']");
+    }
+  }
+
+  @Test
+  public void testRerankMaxScoreBeyondReturnedPage() {
+    // 30 matches whose first-pass scores are 1..30 (doc 100+i has score i).
+    for (int i = 1; i <= 30; i++) {
+      assertU(
+          adoc("id", String.valueOf(100 + i), "term_s", "YYYY", "test_ti", String.valueOf(i)));
+    }
+    assertU(commit());
+
+    for (boolean multiThreaded : new boolean[] {false, true}) {
+      String mt = Boolean.toString(multiThreaded);
+
+      // The page holds only the two rerank window docs, both lowered by the replace
+      // rerank. The highest final score inside the collected result window belongs
+      // to doc 128 (untouched 28.0), and it supplies the reported maxScore even
+      // though the page does not contain it. Matches beyond the collected window
+      // are the only ones the reported maxScore cannot reflect.
+      String[] params = {
+        "q",
+        "{!func}field(test_ti)",
+        "fq",
+        "term_s:YYYY",
+        "rq",
+        "{!rerank reRankQuery=$rqq reRankDocs=2 reRankOperator=replace}",
+        "rqq",
+        "{!func}0.001",
+        "rows",
+        "2",
+        "fl",
+        "id,score",
+        "multiThreaded",
+        mt
+      };
+      assertQ(
+          req(params),
+          "*[count(//doc)=2]",
+          "//result[@numFound='30']",
+          "//result[@maxScore>'27.9']",
+          "//result[@maxScore<'28.1']",
+          "//doc/str[@name='id'][.='130']",
+          "//doc/str[@name='id'][.='129']");
+    }
+  }
+
+  @Test
   public void testRerankReturnOriginalScoreNotRequested() throws Exception {
 
     assertU(delQ("*:*"));
