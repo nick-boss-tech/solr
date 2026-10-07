@@ -188,4 +188,25 @@ public class TestCollationFieldDocValues extends SolrTestCaseJ4 {
         "//result/doc/str[@name='id'][.=4]",
         "//result/doc/str[@name='id'][.=10]");
   }
+
+  /**
+   * Collation keys are not UTF-8, so they must never be returned as stored values: the docValues
+   * of a collation field do not default to useDocValuesAsStored, and {@code fl=*} skips them.
+   */
+  public void testDocValuesAreNotUsedAsStored() {
+    for (String name :
+        new String[] {
+          "sort_ar", "sort_de", "sort_tr_canon", "sort_zh_full", "sort_da", "sort_custom"
+        }) {
+      SchemaField sf = h.getCore().getLatestSchema().getField(name);
+      assertTrue(name + " should have docValues", sf.hasDocValues());
+      assertFalse(name + " must not use docValues as stored", sf.useDocValuesAsStored());
+    }
+    assertQ(
+        "fl=* must not decode collation keys: ",
+        req("fl", "*", "q", "id:4"),
+        "//*[@numFound='1']",
+        "//result/doc/str[@name='id'][.=4]",
+        "count(//result/doc/*[starts-with(@name,'sort_')])=0");
+  }
 }

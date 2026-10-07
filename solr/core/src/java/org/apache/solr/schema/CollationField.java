@@ -16,6 +16,8 @@
  */
 package org.apache.solr.schema;
 
+import static org.apache.solr.core.XmlConfigFile.assertWarnOrFail;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -80,8 +82,27 @@ import org.apache.solr.uninverting.UninvertingReader.Type;
 public class CollationField extends FieldType {
   private Analyzer analyzer;
 
+  // Collation keys are arbitrary bytes, not UTF-8, so useDocValuesAsStored is pathological. See
+  // SOLR-15712 and, for the ICU variant, SOLR-15777
+  static final String UDVAS_MESSAGE =
+      "useDocValuesAsStored is forbidden for " + CollationField.class;
+
+  @Override
+  public void checkSchemaField(final SchemaField field) {
+    if (field.useDocValuesAsStored()) {
+      // the user must have specified udvas at the level of the field, not the fieldType
+      assertWarnOrFail(UDVAS_MESSAGE, false, true);
+    }
+    super.checkSchemaField(field);
+  }
+
   @Override
   protected void init(IndexSchema schema, Map<String, String> args) {
+    if ((trueProperties & USE_DOCVALUES_AS_STORED) != 0) {
+      // fail fast at fieldType init
+      assertWarnOrFail(UDVAS_MESSAGE, false, true);
+    }
+    properties &= ~USE_DOCVALUES_AS_STORED;
     properties |= TOKENIZED; // this ensures our analyzer gets hit
     setup(schema.getResourceLoader(), args);
     super.init(schema, args);
