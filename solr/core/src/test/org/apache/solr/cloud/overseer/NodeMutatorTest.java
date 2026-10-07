@@ -77,8 +77,7 @@ public class NodeMutatorTest extends SolrTestCase {
   /** A shutdown DOWNNODE processed after the node restarted must not mark its replicas down. */
   public void testConditionalDownNodeSkippedWhenNodeIsLiveAgain() {
     NodeMutator mutator = new NodeMutator(null);
-    List<ZkWriteCommand> cmds =
-        mutator.downNode(clusterState(Set.of(NODE)), downNodeMessage(true));
+    List<ZkWriteCommand> cmds = mutator.downNode(clusterState(Set.of(NODE)), downNodeMessage(true));
     assertTrue("restarted node must not be marked down: " + cmds, cmds.isEmpty());
   }
 }
