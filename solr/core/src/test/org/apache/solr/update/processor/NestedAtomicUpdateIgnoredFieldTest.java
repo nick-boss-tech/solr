@@ -77,14 +77,19 @@ public class NestedAtomicUpdateIgnoredFieldTest extends SolrTestCase {
     client.add(parent);
     client.commit();
 
-    // Rotate the transaction log with unrelated commits, so the atomic update below
-    // cannot be served the original document from the log and must reconstruct the
-    // stored document from the index instead.
-    for (int i = 10; i < 14; i++) {
-      SolrInputDocument filler = new SolrInputDocument();
-      filler.addField("id", String.valueOf(i));
-      filler.addField("title_s", "filler");
-      client.add(filler);
+    // Evict the original add from the transaction log with unrelated updates, so the
+    // atomic update below cannot be served the original document from the log and must
+    // reconstruct the stored document from the index instead. solrconfig-tlog.xml keeps
+    // at most 100 records in at most 10 log files, so write 120 filler records over 12
+    // commits: beyond both retention limits, the original add is neither in the update
+    // log's recent records nor in any retained log file.
+    for (int batch = 0; batch < 12; batch++) {
+      for (int i = 0; i < 10; i++) {
+        SolrInputDocument filler = new SolrInputDocument();
+        filler.addField("id", String.valueOf(100 + batch * 10 + i));
+        filler.addField("title_s", "filler");
+        client.add(filler);
+      }
       client.commit();
     }
 
