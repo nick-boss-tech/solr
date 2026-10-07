@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: The Admin UI no longer replays POST, PUT, DELETE and PATCH requests when it loses the connection to the server (it shows an error instead), and replays reads at most once a second.
+type: fixed # added, changed, fixed, deprecated, removed, dependency_update, security, other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9818
+    url: https://issues.apache.org/jira/browse/SOLR-9818
