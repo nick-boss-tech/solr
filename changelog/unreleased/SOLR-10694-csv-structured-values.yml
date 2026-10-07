@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: The CSV response writer writes map, NamedList and iterator values of a document as a JSON cell instead of dropping the cell and shifting the following columns.
+type: fixed # added, changed, fixed, deprecated, removed, dependency_update, security, other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-10694
+    url: https://issues.apache.org/jira/browse/SOLR-10694
