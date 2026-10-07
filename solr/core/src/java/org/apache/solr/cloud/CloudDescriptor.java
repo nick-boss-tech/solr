@@ -51,6 +51,7 @@ public class CloudDescriptor {
     if (StrUtils.isNullOrEmpty(shardId)) this.shardId = null;
     // If no collection name is specified, we default to the core name
     this.collectionName = props.getProperty(CoreDescriptor.CORE_COLLECTION, coreName);
+    if (StrUtils.isNullOrEmpty(collectionName)) this.collectionName = coreName;
     this.nodeName = props.getProperty(CoreDescriptor.CORE_NODE_NAME);
     if (StrUtils.isNullOrEmpty(nodeName)) this.nodeName = null;
     this.replicaType = Replica.Type.get(props.getProperty(CloudDescriptor.REPLICA_TYPE));
