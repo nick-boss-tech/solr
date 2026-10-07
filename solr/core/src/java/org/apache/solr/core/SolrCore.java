@@ -853,10 +853,25 @@ public class SolrCore implements SolrInfoBean, Closeable {
     this.indexReaderFactory = indexReaderFactory;
   }
 
+  /**
+   * A directory holding nothing but the write lock has no index: it is what a crash leaves behind
+   * when the first commit of a new index was never written.
+   */
+  private boolean containsOnlyWriteLock(String indexDir) throws IOException {
+    final Directory dir = getDirectoryFactory().get(indexDir, DirContext.DEFAULT, "none");
+    try {
+      final String[] files = dir.listAll();
+      return files.length == 1 && IndexWriter.WRITE_LOCK_NAME.equals(files[0]);
+    } finally {
+      getDirectoryFactory().release(dir);
+    }
+  }
+
   /** Also fails fast (LockObtainFailedException) if an existing index directory is locked. */
   void initIndex(boolean reload) throws IOException {
     String indexDir = getNewIndexDir();
-    boolean indexExists = getDirectoryFactory().exists(indexDir);
+    boolean indexExists =
+        getDirectoryFactory().exists(indexDir) && !containsOnlyWriteLock(indexDir);
 
     initIndexReaderFactory();
 

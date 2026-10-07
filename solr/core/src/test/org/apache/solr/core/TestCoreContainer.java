@@ -43,9 +43,11 @@ import org.apache.solr.handler.admin.CollectionsHandler;
 import org.apache.solr.handler.admin.ConfigSetsHandler;
 import org.apache.solr.handler.admin.CoreAdminHandler;
 import org.apache.solr.handler.admin.InfoHandler;
+import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.servlet.CoreContainerProvider;
 import org.apache.solr.util.ErrorLogMuter;
 import org.apache.solr.util.ModuleUtils;
+import org.apache.solr.util.RefCounted;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -108,6 +110,33 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
 
     } finally {
       cores.shutdown();
+    }
+  }
+
+  public void testCreateCoreOverIndexDirWithOnlyWriteLock() throws Exception {
+    final Path home = createTempDir();
+    final CoreContainer cc = init(home, CONFIGSETS_SOLR_XML);
+    try {
+      // what a crash leaves behind when the first commit of a new index was never written
+      final Path indexDir = home.resolve("core1").resolve("data").resolve("index");
+      Files.createDirectories(indexDir);
+      Files.createFile(indexDir.resolve("write.lock"));
+
+      final SolrCore core = cc.create("core1", Map.of("configSet", "minimal"));
+      assertNotNull(core);
+      final RefCounted<SolrIndexSearcher> searcher = core.getSearcher();
+      try {
+        assertEquals(0, searcher.get().getIndexReader().numDocs());
+      } finally {
+        searcher.decref();
+      }
+      try (var files = Files.list(indexDir)) {
+        assertTrue(
+            "a new index must have been created",
+            files.anyMatch(p -> p.getFileName().toString().startsWith("segments_")));
+      }
+    } finally {
+      cc.shutdown();
     }
   }
 
