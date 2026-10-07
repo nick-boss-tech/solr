@@ -31,23 +31,22 @@ import org.w3c.dom.Document;
 public class DefaultConfigSetCzechTest extends SolrTestCase {
 
   public void testCzechLanguageCodeAlias() throws Exception {
-    Path conf = ExternalPaths.DEFAULT_CONFIGSET.resolve("conf");
+    Path conf = ExternalPaths.DEFAULT_CONFIGSET;
     Document schema =
         DocumentBuilderFactory.newInstance()
             .newDocumentBuilder()
             .parse(conf.resolve("managed-schema.xml").toFile());
     XPath xpath = XPathFactory.newInstance().newXPath();
 
-    assertEquals(
-        "text_cs",
-        xpath.evaluate("/schema/dynamicField[@name='*_txt_cs']/@type", schema));
+    assertEquals("text_cs", xpath.evaluate("/schema/dynamicField[@name='*_txt_cs']/@type", schema));
     assertEquals(
         "lang/stopwords_cs.txt",
         xpath.evaluate("/schema/fieldType[@name='text_cs']//filter[@name='stop']/@words", schema));
     assertTrue(
         "text_cz must stay for existing indexes",
         (Boolean)
-            xpath.evaluate("boolean(/schema/fieldType[@name='text_cz'])", schema, XPathConstants.BOOLEAN));
+            xpath.evaluate(
+                "boolean(/schema/fieldType[@name='text_cz'])", schema, XPathConstants.BOOLEAN));
 
     assertEquals(
         "the cs stopword list is the cz one",
