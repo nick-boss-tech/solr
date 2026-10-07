@@ -2735,6 +2735,17 @@ public class SimpleFacetsTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testFacetThreadsDefaultIsSingleThread() throws Exception {
+    try (SolrQueryRequest req = req("q", "*:*")) {
+      SimpleFacets facets = new SimpleFacets(req, null, req.getParams());
+      assertEquals(1, facets.parseParams(FacetParams.FACET_FIELD, "foo_s").threads);
+      assertEquals(1, facets.parseParams(FacetParams.FACET_FIELD, "{!key=k}foo_s").threads);
+      assertEquals(2, facets.parseParams(FacetParams.FACET_FIELD, "{!threads=2}foo_s").threads);
+      assertEquals(0, facets.parseParams(FacetParams.FACET_FIELD, "{!threads=0}foo_s").threads);
+    }
+  }
+
+  @Test
   public void testFacetExclude() {
     for (String method : new String[] {"enum", "fcs", "fc", "uif"}) {
       doFacetExclude("contains_s1", "contains_group_s1", "Astra", "facet.method", method);
