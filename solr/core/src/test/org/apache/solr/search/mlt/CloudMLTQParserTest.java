@@ -21,12 +21,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.SolrQuery;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.cloud.SolrCloudTestCase;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.cloud.Replica;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.NamedList;
@@ -175,20 +178,36 @@ public class CloudMLTQParserTest extends SolrCloudTestCase {
     CollectionAdminRequest.createAlias(alias, COLLECTION + "," + otherCollection)
         .process(cluster.getSolrClient());
 
-    // run it a few times so every collection gets to be the one handling the request
-    for (int attempt = 0; attempt < 6; attempt++) {
-      final QueryResponse queryResponse =
-          cluster
-              .getSolrClient()
-              .query(alias, new SolrQuery("{!mlt qf=lowerfilt_u mindf=0}100").setRows(100));
-      final ArrayList<String> ids = new ArrayList<>();
-      for (SolrDocument doc : queryResponse.getResults()) {
-        ids.add(String.valueOf(doc.getFieldValue("id")));
-      }
-      // similar docs from the *other* collection (13, 14, ...) are found; the source doc is not
-      assertTrue(ids.toString(), ids.contains("13"));
-      assertFalse(ids.toString(), ids.contains("100"));
+    // Send the request to one specific core of COLLECTION, which does not hold the source
+    // document. That pins the local real-time get to a miss on every run, so the cross
+    // collection fallback is the only way this query can succeed. (Going through the alias
+    // instead relies on random routing eventually picking such a core.)
+    final Replica replica =
+        cluster
+            .getZkStateReader()
+            .getClusterState()
+            .getCollection(COLLECTION)
+            .getSlices()
+            .iterator()
+            .next()
+            .getReplicas()
+            .iterator()
+            .next();
+    final ModifiableSolrParams params = new ModifiableSolrParams();
+    params.set("q", "{!mlt qf=lowerfilt_u mindf=0}100");
+    params.set("collection", alias);
+    params.set("rows", "100");
+    final QueryResponse queryResponse;
+    try (HttpSolrClient client = new HttpSolrClient.Builder(replica.getBaseUrl()).build()) {
+      queryResponse = client.query(replica.getCoreName(), params);
     }
+    final ArrayList<String> ids = new ArrayList<>();
+    for (SolrDocument doc : queryResponse.getResults()) {
+      ids.add(String.valueOf(doc.getFieldValue("id")));
+    }
+    // similar docs from the *other* collection (13, 14, ...) are found; the source doc is not
+    assertTrue(ids.toString(), ids.contains("13"));
+    assertFalse(ids.toString(), ids.contains("100"));
   }
 
   @Test
