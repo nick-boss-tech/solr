@@ -1180,8 +1180,8 @@ public class ExtendedDismaxQParser extends QParser {
       this.validateCyclicAliasing(field);
       if (a != null) {
         if (a.fields.size() > 0 && !hasValidAliasTarget(a, new HashSet<>())) {
-          // Every target in the alias definition is unusable; match nothing instead of
-          // falling back to querying the alias name as if it were a field.
+          // Every target in the alias definition is unusable; an alias with no usable
+          // target matches nothing.
           return new MatchNoDocsQuery();
         }
         List<Query> lst = getQueries(a);
@@ -1228,8 +1228,8 @@ public class ExtendedDismaxQParser extends QParser {
       this.validateCyclicAliasing(field);
       if (a != null) {
         if (a.fields.size() > 0 && !hasValidAliasTarget(a, new HashSet<>())) {
-          // Every target in the alias definition is unusable; match nothing instead of
-          // falling back to querying the alias name as if it were a field.
+          // Every target in the alias definition is unusable; an alias with no usable
+          // target matches nothing.
           return new MatchNoDocsQuery();
         }
         List<Query> lst = getMultiTermQueries(a);

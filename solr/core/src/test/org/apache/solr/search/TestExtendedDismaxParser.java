@@ -1014,8 +1014,10 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
             "name nosuchfield"),
         oner);
 
-    // An alias whose targets are all missing from the schema matches nothing; it must
-    // not fall back to searching the alias name as if it were a field.
+    // An alias whose targets are all missing from the schema matches nothing. (On the
+    // unpatched parser these two shapes also returned no documents, because the clause was
+    // silently dropped; what changes is compound queries, where the dropped clause used to
+    // leave the remaining clauses to decide the result on their own.)
     assertQ(req("defType", "edismax", "q", "myalias:Zapp", "f.myalias.qf", "nosuchfield"), nor);
     assertQ(
         req(
