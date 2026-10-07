@@ -39,7 +39,8 @@ public class TestShardMacroExpansion extends SolrCloudTestCase {
   public static void setupCluster() throws Exception {
     configureCluster(2)
         .addConfig(
-            "conf", TEST_PATH().resolve("configsets").resolve("cloud-macro-appends").resolve("conf"))
+            "conf",
+            TEST_PATH().resolve("configsets").resolve("cloud-macro-appends").resolve("conf"))
         .configure();
 
     CollectionAdminRequest.createCollection(COLLECTION, "conf", 2, 1)
