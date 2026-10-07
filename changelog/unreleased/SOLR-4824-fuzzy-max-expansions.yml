@@ -1,0 +1,7 @@
+title: "Add the fuzzy.maxExpansions parameter to the lucene query parser so fuzzy queries (term~N) can expand past Lucene's default of 50 terms."
+type: added
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-4824
+    url: https://issues.apache.org/jira/browse/SOLR-4824
