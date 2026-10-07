@@ -905,12 +905,26 @@ public class ZkController implements Closeable {
       customThreadPool.execute(() -> IOUtils.closeQuietly(internalSolrClientCache));
 
       try {
+        // Wait for the overseer close task even if this thread is interrupted: ending the
+        // ZooKeeper session first would reopen the double-processing window this ordering
+        // exists to close. The interrupt is remembered and restored once the wait completes.
+        boolean interrupted = false;
         try {
-          overseerClosed.get();
-        } catch (InterruptedException e) {
-          Thread.currentThread().interrupt();
-        } catch (ExecutionException e) {
-          log.error("Error closing overseer", e);
+          while (true) {
+            try {
+              overseerClosed.get();
+              break;
+            } catch (InterruptedException e) {
+              interrupted = true;
+            } catch (ExecutionException e) {
+              log.error("Error closing overseer", e);
+              break;
+            }
+          }
+        } finally {
+          if (interrupted) {
+            Thread.currentThread().interrupt();
+          }
         }
         try {
           zkStateReader.close();
