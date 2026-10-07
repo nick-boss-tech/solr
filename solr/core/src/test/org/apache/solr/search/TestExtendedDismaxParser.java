@@ -267,7 +267,44 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
             "qf", "phrase_sw",
             "pf2", "phrase_sw",
             "debugQuery", "true"),
+        // the phrase in the main query keeps its slop (phrase_sw stems "query" to "queri")
+        "//str[@name='parsedquery_toString'][contains(.,'\"phrase queri\"~10')]",
         "//str[@name='parsedquery_toString'][not(contains(.,'10 term'))]");
+
+    // a boost on the slop does not change that: "~10^2" is still the phrase's slop, not a term.
+    // The leak this guards against is not visible as "10^2 term": the pf analyzer tokenises the
+    // kept clause text "10^2" into "10" and "2", so the shingle built from it is "10 2 term".
+    assertQ(
+        req(
+            "defType", "edismax",
+            "q", "\"phrase query\"~10^2 term",
+            "qf", "phrase_sw",
+            "pf2", "phrase_sw",
+            "debugQuery", "true"),
+        "//str[@name='parsedquery_toString'][not(contains(.,'10 term'))]",
+        "//str[@name='parsedquery_toString'][not(contains(.,'10^2 term'))]",
+        "//str[@name='parsedquery_toString'][not(contains(.,'\"10 2 term\"'))]");
+
+    // the same holds for pf, which builds one phrase from the whole clause sequence
+    assertQ(
+        req(
+            "defType", "edismax",
+            "q", "\"phrase query\"~10 term",
+            "qf", "phrase_sw",
+            "pf", "phrase_sw",
+            "debugQuery", "true"),
+        "//str[@name='parsedquery_toString'][not(contains(.,'10 term'))]");
+
+    // positive control: pf2 still builds shingles from the actual terms of the query, so the
+    // absence checks above cannot pass merely because pf2 never ran
+    assertQ(
+        req(
+            "defType", "edismax",
+            "q", "\"x y\"~2 foo bar",
+            "qf", "phrase_sw",
+            "pf2", "phrase_sw",
+            "debugQuery", "true"),
+        "//str[@name='parsedquery_toString'][contains(.,'\"foo bar\"')]");
   }
 
   public void testCharFilter() {

@@ -299,12 +299,35 @@ public class ExtendedDismaxQParser extends QParser {
     if (val == null || val.length() < 3 || !val.startsWith("\\~")) {
       return false;
     }
-    for (int i = 2; i < val.length(); i++) {
-      if (!Character.isDigit(val.charAt(i))) {
+    int i = 2;
+    while (i < val.length() && Character.isDigit(val.charAt(i))) {
+      i++;
+    }
+    if (i == 2) {
+      return false; // no digits after the slop marker
+    }
+    if (i == val.length()) {
+      return true;
+    }
+    // A boost may follow the slop, written "\^2" in clause form ("~10^2" in the query); it
+    // belongs to the phrase clause, so the clause still carries no term of its own.
+    if (val.charAt(i) != '\\' || i + 1 >= val.length() || val.charAt(i + 1) != '^') {
+      return false;
+    }
+    i += 2;
+    boolean seenDigit = false;
+    boolean seenDot = false;
+    for (; i < val.length(); i++) {
+      char c = val.charAt(i);
+      if (Character.isDigit(c)) {
+        seenDigit = true;
+      } else if (c == '.' && !seenDot) {
+        seenDot = true;
+      } else {
         return false;
       }
     }
-    return true;
+    return seenDigit;
   }
 
   /** Adds shingled phrase queries to all the fields specified in the pf, pf2 anf pf3 parameters */
