@@ -1,6 +1,8 @@
 title: >
   The edismax query parser now applies the qf fields to regular expression clauses such as
-  /.*foo.*/ instead of leaking its internal placeholder field name into the query.
+  /.*foo.*/ instead of leaking its internal placeholder field name into the query. A bare
+  regular expression clause previously matched nothing (or errored) in this configuration;
+  it now matches documents the same way a fielded regular expression clause does.
 type: fixed
 authors:
   - name: Nick Shanin

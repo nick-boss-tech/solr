@@ -265,6 +265,70 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         "//*[@numFound='1']",
         "//str[@name='parsedquery'][contains(.,'name:/.*apper/')]",
         "//str[@name='parsedquery'][not(contains(.,'\uFFFC'))]");
+
+    // the clause fans out to every qf field, like a wildcard clause does
+    assertQ(
+        req(
+            "defType", "edismax",
+            "qf", "name title",
+            "q", "/.*apper/",
+            "debugQuery", "true"),
+        "//*[@numFound='1']",
+        "//str[@name='parsedquery'][contains(.,'name:/.*apper/')]",
+        "//str[@name='parsedquery'][contains(.,'title:/.*apper/')]",
+        "//str[@name='parsedquery'][not(contains(.,'\uFFFC'))]");
+
+    // same with sow=false, where the whole query goes through the standard parser in one pass
+    assertQ(
+        req(
+            "defType", "edismax",
+            "qf", "name",
+            "q", "/.*apper/",
+            "sow", "false",
+            "debugQuery", "true"),
+        "//*[@numFound='1']",
+        "//str[@name='parsedquery'][contains(.,'name:/.*apper/')]",
+        "//str[@name='parsedquery'][not(contains(.,'\uFFFC'))]");
+
+    // an explicitly fielded regex clause keeps using its own field
+    assertQ(
+        req("defType", "edismax", "qf", "name", "q", "name:/.*apper/", "debugQuery", "true"),
+        "//*[@numFound='1']",
+        "//str[@name='parsedquery'][contains(.,'name:/.*apper/')]",
+        "//str[@name='parsedquery'][not(contains(.,'\uFFFC'))]");
+
+    // a regex clause on an unknown field still falls back to the escaped parse and matches
+    // nothing, instead of failing the request or leaking the placeholder field name
+    assertQ(
+        req(
+            "defType", "edismax",
+            "qf", "name",
+            "q", "nosuchfield_xyz:/.*apper/",
+            "debugQuery", "true"),
+        "//*[@numFound='0']",
+        "//str[@name='parsedquery'][not(contains(.,'\uFFFC'))]");
+  }
+
+  public void testRegexQueryWithQfFieldFromDynamicField() {
+    // SOLR-6009: the field named by qf does not have to be declared in the schema; a field
+    // that only exists through a dynamic field definition must be usable as well. In the
+    // test schema t_regexprobe is only reachable through the t_* dynamic field.
+    assertU(adoc("id", "6009", "t_regexprobe", "snapper"));
+    assertU(commit());
+    try {
+      assertQ(
+          req(
+              "defType", "edismax",
+              "qf", "t_regexprobe",
+              "q", "/.*apper/",
+              "debugQuery", "true"),
+          "//*[@numFound='1']",
+          "//str[@name='parsedquery'][contains(.,'t_regexprobe:/.*apper/')]",
+          "//str[@name='parsedquery'][not(contains(.,'\uFFFC'))]");
+    } finally {
+      assertU(delI("6009"));
+      assertU(commit());
+    }
   }
 
   public void testCharFilter() {
