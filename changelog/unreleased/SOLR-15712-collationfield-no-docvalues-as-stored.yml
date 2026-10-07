@@ -1,0 +1,8 @@
+title: >
+  CollationField no longer defaults useDocValuesAsStored, so fl=* does not decode binary collation keys as UTF-8 text.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-15712
+    url: https://issues.apache.org/jira/browse/SOLR-15712
