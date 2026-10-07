@@ -36,7 +36,8 @@ public class EnvSSLCredentialProviderTest extends SolrTestCase {
             EnvSSLCredentialProvider.EnvVars.SOLR_SSL_KEY_STORE_PASSWORD, "pw" + ++cnt,
             EnvSSLCredentialProvider.EnvVars.SOLR_SSL_TRUST_STORE_PASSWORD, "pw" + ++cnt,
             EnvSSLCredentialProvider.EnvVars.SOLR_SSL_CLIENT_KEY_STORE_PASSWORD, "pw" + ++cnt,
-            EnvSSLCredentialProvider.EnvVars.SOLR_SSL_CLIENT_TRUST_STORE_PASSWORD, "pw" + ++cnt);
+            EnvSSLCredentialProvider.EnvVars.SOLR_SSL_CLIENT_TRUST_STORE_PASSWORD, "pw" + ++cnt,
+            EnvSSLCredentialProvider.EnvVars.SOLR_SSL_KEY_MANAGER_PASSWORD, "pw" + ++cnt);
     EnvSSLCredentialProvider sut = new EnvSSLCredentialProvider();
     sut.setEnvVars(envvars);
     cnt = 0;
@@ -55,5 +56,6 @@ public class EnvSSLCredentialProviderTest extends SolrTestCase {
     sut.getCredential(SSLCredentialProvider.CredentialType.SSL_CLIENT_KEY_STORE_PASSWORD);
     sut.getCredential(SSLCredentialProvider.CredentialType.SSL_TRUST_STORE_PASSWORD);
     sut.getCredential(SSLCredentialProvider.CredentialType.SSL_CLIENT_TRUST_STORE_PASSWORD);
+    sut.getCredential(SSLCredentialProvider.CredentialType.SSL_KEY_MANAGER_PASSWORD);
   }
 }

@@ -38,7 +38,8 @@ public class SysPropSSLCredentialProviderTest extends SolrTestCase {
           SSLConfigurations.SysProps.SSL_KEY_STORE_PASSWORD,
           SSLConfigurations.SysProps.SSL_TRUST_STORE_PASSWORD,
           SSLConfigurations.SysProps.SSL_CLIENT_KEY_STORE_PASSWORD,
-          SSLConfigurations.SysProps.SSL_CLIENT_TRUST_STORE_PASSWORD);
+          SSLConfigurations.SysProps.SSL_CLIENT_TRUST_STORE_PASSWORD,
+          SSLConfigurations.SysProps.SSL_KEY_MANAGER_PASSWORD);
 
   @Test
   public void testGetCredentials() {
@@ -60,5 +61,6 @@ public class SysPropSSLCredentialProviderTest extends SolrTestCase {
     sut.getCredential(SSLCredentialProvider.CredentialType.SSL_CLIENT_KEY_STORE_PASSWORD);
     sut.getCredential(SSLCredentialProvider.CredentialType.SSL_TRUST_STORE_PASSWORD);
     sut.getCredential(SSLCredentialProvider.CredentialType.SSL_CLIENT_TRUST_STORE_PASSWORD);
+    sut.getCredential(SSLCredentialProvider.CredentialType.SSL_KEY_MANAGER_PASSWORD);
   }
 }

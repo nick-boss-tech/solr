@@ -161,6 +161,8 @@
 # Be sure to update the paths to the correct keystore for your environment
 #SOLR_SSL_KEY_STORE=etc/solr-ssl.keystore.p12
 #SOLR_SSL_KEY_STORE_PASSWORD=secret
+# Only needed when the key inside the keystore has a different password than the keystore itself
+#SOLR_SSL_KEY_MANAGER_PASSWORD=secret
 #SOLR_SSL_TRUST_STORE=etc/solr-ssl.keystore.p12
 #SOLR_SSL_TRUST_STORE_PASSWORD=secret
 # Require clients to authenticate

@@ -14,9 +14,11 @@
   <Call class="org.apache.solr.util.configuration.SSLConfigurationsFactory" name="current">
     <Get name="keyStorePassword" id="keyStorePassword"/>
     <Get name="trustStorePassword" id="trustStorePassword"/>
+    <Get name="keyManagerPassword" id="keyManagerPassword"/>
   </Call>
   <Set name="KeyStorePath"><Property name="solr.jetty.keystore" default="./etc/solr-ssl.keystore.jks"/></Set>
   <Set name="KeyStorePassword"><Ref refid="keyStorePassword"/></Set>
+  <Set name="KeyManagerPassword"><Ref refid="keyManagerPassword"/></Set>
   <Set name="TrustStorePath"><Property name="solr.jetty.truststore" default="./etc/solr-ssl.keystore.jks"/></Set>
   <Set name="TrustStorePassword"><Ref refid="trustStorePassword"/></Set>
   <Set name="NeedClientAuth"><Property name="solr.jetty.ssl.need.client.auth.enabled" default="false"/></Set>

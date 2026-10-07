@@ -19,6 +19,7 @@ package org.apache.solr.util.configuration.providers;
 
 import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_CLIENT_KEY_STORE_PASSWORD;
 import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_CLIENT_TRUST_STORE_PASSWORD;
+import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_KEY_MANAGER_PASSWORD;
 import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_KEY_STORE_PASSWORD;
 import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_TRUST_STORE_PASSWORD;
 
@@ -33,6 +34,7 @@ public abstract class AbstractSSLCredentialProvider implements SSLCredentialProv
           Map.of(
               SSL_KEY_STORE_PASSWORD, "solr.jetty.keystore.password",
               SSL_TRUST_STORE_PASSWORD, "solr.jetty.truststore.password",
+              SSL_KEY_MANAGER_PASSWORD, "solr.jetty.keymanager.password",
               SSL_CLIENT_KEY_STORE_PASSWORD, "javax.net.ssl.keyStorePassword",
               SSL_CLIENT_TRUST_STORE_PASSWORD, "javax.net.ssl.trustStorePassword"));
   private final EnumMap<CredentialType, String> credentialKeyMap;

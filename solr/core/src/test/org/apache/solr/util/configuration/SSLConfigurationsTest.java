@@ -52,7 +52,8 @@ public class SSLConfigurationsTest extends SolrTestCase {
           SSLConfigurations.SysProps.SSL_KEY_STORE_PASSWORD,
           SSLConfigurations.SysProps.SSL_TRUST_STORE_PASSWORD,
           SSLConfigurations.SysProps.SSL_CLIENT_KEY_STORE_PASSWORD,
-          SSLConfigurations.SysProps.SSL_CLIENT_TRUST_STORE_PASSWORD);
+          SSLConfigurations.SysProps.SSL_CLIENT_TRUST_STORE_PASSWORD,
+          SSLConfigurations.SysProps.SSL_KEY_MANAGER_PASSWORD);
 
   @Override
   @Before
@@ -178,6 +179,23 @@ public class SSLConfigurationsTest extends SolrTestCase {
   public void testGetClientTrustStorePasswordFromEnv() {
     envs.put(EnvSSLCredentialProvider.EnvVars.SOLR_SSL_CLIENT_TRUST_STORE_PASSWORD, SAMPLE_PW2);
     assertThat(createSut().getClientTrustStorePassword(), is(SAMPLE_PW2));
+  }
+
+  @Test
+  public void testGetKeyManagerPasswordFromProperty() {
+    System.setProperty(SSLConfigurations.SysProps.SSL_KEY_MANAGER_PASSWORD, SAMPLE_PW1);
+    assertThat(createSut().getKeyManagerPassword(), is(SAMPLE_PW1));
+  }
+
+  @Test
+  public void testGetKeyManagerPasswordFromEnv() {
+    envs.put(EnvSSLCredentialProvider.EnvVars.SOLR_SSL_KEY_MANAGER_PASSWORD, SAMPLE_PW2);
+    assertThat(createSut().getKeyManagerPassword(), is(SAMPLE_PW2));
+  }
+
+  @Test
+  public void testKeyManagerPasswordDefaultsToNull() {
+    assertNull(createSut().getKeyManagerPassword());
   }
 
   @Test

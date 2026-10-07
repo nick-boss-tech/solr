@@ -34,6 +34,7 @@ public class SSLConfigurations {
   public static class SysProps {
     public static final String SSL_KEY_STORE_PASSWORD = "solr.jetty.keystore.password";
     public static final String SSL_TRUST_STORE_PASSWORD = "solr.jetty.truststore.password";
+    public static final String SSL_KEY_MANAGER_PASSWORD = "solr.jetty.keymanager.password";
     public static final String SSL_CLIENT_KEY_STORE_PASSWORD = "javax.net.ssl.keyStorePassword";
     public static final String SSL_CLIENT_TRUST_STORE_PASSWORD = "javax.net.ssl.trustStorePassword";
   }
@@ -86,6 +87,14 @@ public class SSLConfigurations {
     String keyStorePassword =
         getPassword(SSLCredentialProvider.CredentialType.SSL_KEY_STORE_PASSWORD);
     return keyStorePassword;
+  }
+
+  /**
+   * @return password for the key within the keystore (Jetty key manager password), or null to use
+   *     the keystore password
+   */
+  public String getKeyManagerPassword() {
+    return getPassword(SSLCredentialProvider.CredentialType.SSL_KEY_MANAGER_PASSWORD);
   }
 
   /**

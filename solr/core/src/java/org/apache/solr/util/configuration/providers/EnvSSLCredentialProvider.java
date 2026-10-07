@@ -19,6 +19,7 @@ package org.apache.solr.util.configuration.providers;
 
 import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_CLIENT_KEY_STORE_PASSWORD;
 import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_CLIENT_TRUST_STORE_PASSWORD;
+import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_KEY_MANAGER_PASSWORD;
 import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_KEY_STORE_PASSWORD;
 import static org.apache.solr.util.configuration.SSLCredentialProvider.CredentialType.SSL_TRUST_STORE_PASSWORD;
 
@@ -36,6 +37,7 @@ public class EnvSSLCredentialProvider extends AbstractSSLCredentialProvider {
     public static final String SOLR_SSL_CLIENT_TRUST_STORE_PASSWORD =
         "SOLR_SSL_CLIENT_TRUST_STORE_PASSWORD";
     public static final String SOLR_SSL_TRUST_STORE_PASSWORD = "SOLR_SSL_TRUST_STORE_PASSWORD";
+    public static final String SOLR_SSL_KEY_MANAGER_PASSWORD = "SOLR_SSL_KEY_MANAGER_PASSWORD";
   }
 
   private Map<String, String> envVars;
@@ -50,6 +52,7 @@ public class EnvSSLCredentialProvider extends AbstractSSLCredentialProvider {
         Map.of(
             SSL_KEY_STORE_PASSWORD, EnvVars.SOLR_SSL_KEY_STORE_PASSWORD,
             SSL_TRUST_STORE_PASSWORD, EnvVars.SOLR_SSL_TRUST_STORE_PASSWORD,
+            SSL_KEY_MANAGER_PASSWORD, EnvVars.SOLR_SSL_KEY_MANAGER_PASSWORD,
             SSL_CLIENT_KEY_STORE_PASSWORD, EnvVars.SOLR_SSL_CLIENT_KEY_STORE_PASSWORD,
             SSL_CLIENT_TRUST_STORE_PASSWORD, EnvVars.SOLR_SSL_CLIENT_TRUST_STORE_PASSWORD));
   }

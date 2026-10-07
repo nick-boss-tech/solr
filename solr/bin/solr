@@ -226,6 +226,9 @@ if [ "$SOLR_SSL_ENABLED" == "true" ]; then
   if [ -n "$SOLR_SSL_KEY_STORE_PASSWORD" ]; then
     export SOLR_SSL_KEY_STORE_PASSWORD=$SOLR_SSL_KEY_STORE_PASSWORD
   fi
+  if [ -n "${SOLR_SSL_KEY_MANAGER_PASSWORD:-}" ]; then
+    export SOLR_SSL_KEY_MANAGER_PASSWORD=$SOLR_SSL_KEY_MANAGER_PASSWORD
+  fi
   if [ -n "$SOLR_SSL_KEY_STORE_TYPE" ]; then
     SOLR_SSL_OPTS+=" -Dsolr.jetty.keystore.type=$SOLR_SSL_KEY_STORE_TYPE"
   fi
