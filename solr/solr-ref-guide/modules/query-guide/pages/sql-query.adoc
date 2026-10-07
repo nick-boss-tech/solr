@@ -449,6 +449,10 @@ Below is sample result set:
 Notice that the result set is an array of tuples with key/value pairs that match the SQL column list.
 The final tuple contains the EOF flag which signals the end of the stream.
 
+Filter queries can be supplied on the HTTP request with one or more `fq` parameters, for example `&fq={!geofilt ...}`.
+The `/sql` handler passes each one through as a filter query on every Solr query the statement is translated into.
+The JDBC driver cannot set filter queries, since it has no request parameters.
+
 == Best Practices
 
 === Separate Worker Collection
