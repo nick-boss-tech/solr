@@ -1,0 +1,8 @@
+title: "LBSolrClient: a 403 or 404 response is still retried on another server but no longer marks the server as a zombie"
+type: fixed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-5220
+    url: https://issues.apache.org/jira/browse/SOLR-5220
