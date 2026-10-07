@@ -20,11 +20,14 @@ import java.io.StringWriter;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.util.NamedList;
 import org.apache.solr.search.SolrReturnFields;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -349,6 +352,46 @@ public class TestCSVResponseWriter extends SolrTestCaseJ4 {
     w.write(buf, req, rsp);
     assertEquals("mydocid,[explain]\n" + "\"\",\n" + "\"\",\n", buf.toString());
 
+    req.close();
+  }
+
+  @Test
+  public void testStructuredValuesAreWrittenAsJsonCells() throws Exception {
+    SolrDocument d1 = new SolrDocument();
+    d1.addField("id", "1");
+    d1.addField("meta_s", new LinkedHashMap<>(Map.of("a", 1)));
+    d1.addField("foo_s", "hi");
+
+    SolrDocument d2 = new SolrDocument();
+    d2.addField("id", "2");
+    NamedList<Object> nl = new NamedList<>();
+    nl.add("x", 5);
+    d2.addField("meta_s", nl);
+    d2.addField("foo_s", "there");
+
+    SolrDocument d3 = new SolrDocument();
+    d3.addField("id", "3");
+    d3.addField("foo_s", "again");
+
+    SolrDocumentList sdl = new SolrDocumentList();
+    sdl.add(d1);
+    sdl.add(d2);
+    sdl.add(d3);
+
+    var req = req("q", "*:*");
+    var rsp = new SolrQueryResponse();
+    rsp.addResponse(sdl);
+    rsp.setReturnFields(new SolrReturnFields("id,meta_s,foo_s", req));
+    StringWriter buf = new StringWriter();
+    new CSVResponseWriter().write(buf, req, rsp);
+
+    // a map or NamedList cell must not vanish and pull foo_s into the meta_s column
+    assertEquals(
+        "id,meta_s,foo_s\n"
+            + "1,\"{\"\"a\"\":1}\",hi\n"
+            + "2,\"{\"\"x\"\":5}\",there\n"
+            + "3,,again\n",
+        buf.toString());
     req.close();
   }
 

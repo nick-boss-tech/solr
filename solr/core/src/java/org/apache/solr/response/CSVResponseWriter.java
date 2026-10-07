@@ -19,16 +19,21 @@ package org.apache.solr.response;
 import java.io.CharArrayWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.lucene.index.IndexableField;
+import org.apache.solr.common.IteratorWriter;
+import org.apache.solr.common.MapWriter;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.FastWriter;
+import org.apache.solr.common.util.Utils;
 import org.apache.solr.internal.csv.CSVPrinter;
 import org.apache.solr.internal.csv.CSVStrategy;
 import org.apache.solr.request.SolrQueryRequest;
@@ -410,7 +415,7 @@ class CSVWriter extends TabularResponseWriter {
         CSVPrinter tmp = printer;
         printer = csvField.mvPrinter;
         for (Object fval : values) {
-          writeVal(csvField.name, fval);
+          writeCellVal(csvField.name, fval);
         }
         printer = tmp; // restore the original printer
 
@@ -428,17 +433,35 @@ class CSVWriter extends TabularResponseWriter {
           csvField.mvPrinter.reset();
           CSVPrinter tmp = printer;
           printer = csvField.mvPrinter;
-          writeVal(csvField.name, val);
+          writeCellVal(csvField.name, val);
           printer = tmp;
           mvWriter.freeze();
           printer.print(mvWriter.getFrozenBuf(), 0, mvWriter.getFrozenSize(), true);
         } else {
-          writeVal(csvField.name, val);
+          writeCellVal(csvField.name, val);
         }
       }
     }
 
     printer.println();
+  }
+
+  /**
+   * Writes one cell value. Values with no flat form (maps, lists, NamedLists, {@link MapWriter},
+   * {@link IteratorWriter}, ...) are written as compact JSON; the tabular base class writes
+   * nothing for them, which would drop the cell and shift the columns after it.
+   */
+  private void writeCellVal(String name, Object val) throws IOException {
+    if (val instanceof Map
+        || val instanceof MapWriter
+        || val instanceof IteratorWriter
+        || (val instanceof Iterable && !(val instanceof Path))
+        || val instanceof Iterator
+        || val instanceof Object[]) {
+      writeStr(name, Utils.toJSONString(val, -1), true);
+    } else {
+      writeVal(name, val);
+    }
   }
 
   @Override
