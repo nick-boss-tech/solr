@@ -1,0 +1,8 @@
+title: >
+  UUIDField now rejects values that have the UUID shape but contain non-hexadecimal characters, with a 400 error.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-10131
+    url: https://issues.apache.org/jira/browse/SOLR-10131
