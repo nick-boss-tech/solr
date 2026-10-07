@@ -1,5 +1,5 @@
 # See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
-title: edismax treats an unfielded open-ended range [* TO *] as a match all docs query instead of expanding it over every qf field.
+title: edismax treats an unfielded inclusive range [* TO *] as a match all docs query instead of expanding it over every qf field. Documents with no value in any qf field now match an unfielded [* TO *], where the old per-field expansion did not match them.
 type: fixed
 authors:
   - name: Nick Shanin
