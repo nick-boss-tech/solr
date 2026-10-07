@@ -154,8 +154,7 @@ public class CopyFieldSubFieldsTest extends SolrTestCase {
     assertEquals("10.50,USD", inputDoc.getFieldValue("price"));
     assertNull(inputDoc.getFieldValue("price_c"));
     assertNull("derived amount sub-field leaked", inputDoc.getFieldValue("price_c_l_pl"));
-    assertNull(
-        "derived currency code sub-field leaked", inputDoc.getFieldValue("price_c_s_c"));
+    assertNull("derived currency code sub-field leaked", inputDoc.getFieldValue("price_c_s_c"));
   }
 
   private static SolrDocument realTimeGet(EmbeddedSolrServer client, String id, String fl)
