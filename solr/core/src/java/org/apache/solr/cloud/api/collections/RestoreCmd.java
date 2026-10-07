@@ -260,13 +260,14 @@ public class RestoreCmd implements CollApiCmds.CollectionApiCommand {
           rc.backupCollectionState);
       // note: when createCollection() returns, the collection exists (no race)
 
-      // Restore collection properties
-      rc.backupManager.uploadCollectionProperties(rc.restoreCollectionName);
-
       DocCollection restoreCollection =
           rc.zkStateReader.getClusterState().getCollection(rc.restoreCollectionName);
       List<ReplicaPosition> replicaPositions = null;
       try {
+        // Restore collection properties. This runs inside the cleanup try: the collection
+        // already exists here, so a failure must not leave it behind either.
+        rc.backupManager.uploadCollectionProperties(rc.restoreCollectionName);
+
         markAllShardsAsConstruction(restoreCollection);
 
         List<String> sliceNames = new ArrayList<>();

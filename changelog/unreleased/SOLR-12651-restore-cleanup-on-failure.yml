@@ -1,7 +1,6 @@
 title: >
-  A RESTORE collection operation that fails after the new collection has been created, while its
-  shards are being restored, now deletes the new collection instead of leaving the partially
-  restored collection behind.
+  A RESTORE collection operation that fails after the new collection has been created now deletes
+  the new collection instead of leaving the partially restored collection behind.
 type: fixed
 authors:
   - name: Nick Shanin
