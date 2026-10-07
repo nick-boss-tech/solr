@@ -1,0 +1,7 @@
+title: Use the failing beast subtask's randomization seed in its reproduce command.
+type: bugfix
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16322
+    url: https://issues.apache.org/jira/browse/SOLR-16322
