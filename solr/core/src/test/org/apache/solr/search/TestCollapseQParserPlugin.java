@@ -1024,6 +1024,34 @@ public class TestCollapseQParserPlugin extends SolrTestCaseJ4 {
     }
   }
 
+  public void testTopFcHintOnDocValuesWithoutUninversion() {
+    // uninvertible=false and docValues=true: top_fc has nothing to uninvert and must read the DVs
+    final String f = "grp_s_dv_not_uninvert";
+    assertU(adoc("id", "1", f, "a", "test_i", "5"));
+    assertU(adoc("id", "2", f, "a", "test_i", "10"));
+    assertU(adoc("id", "3", f, "b", "test_i", "7"));
+    assertU(commit());
+
+    for (String hint : Arrays.asList("", " hint=top_fc")) {
+      assertQ(
+          "collapse" + hint,
+          req("q", "*:*", "fq", "{!collapse field=" + f + " max=test_i" + hint + "}", "sort", "id asc"),
+          "*[count(//doc)=2]",
+          "//result/doc[1]/str[@name='id'][.='2']",
+          "//result/doc[2]/str[@name='id'][.='3']");
+
+      assertQ(
+          "collapse and expand" + hint,
+          req(
+              "q", "*:*",
+              "fq", "{!collapse field=" + f + " max=test_i" + hint + "}",
+              "expand", "true",
+              "sort", "id asc"),
+          "*[count(//doc)=2]",
+          "//lst[@name='expanded']/result[@name='a']/doc/str[@name='id'][.='1']");
+    }
+  }
+
   public void testNoDocsHaveGroupField() {
     // as unlikely as this test seems, it's important for the possibility that a segment exists w/o
     // any live docs that have DocValues for the group field -- ie: every doc in segment is in null

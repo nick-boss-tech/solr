@@ -618,6 +618,10 @@ public class CollapsingQParserPlugin extends QParserPlugin {
     if (f.indexed() && f.isUninvertible()) {
       type = UninvertingReader.Type.SORTED;
     }
+    if (type == null) {
+      // docValues only (or uninvertible=false): there is nothing to uninvert, read the docValues
+      return searcher.getSlowAtomicReader();
+    }
 
     return UninvertingReader.wrap(
         new ReaderWrapper(searcher.getSlowAtomicReader(), collapseField),
