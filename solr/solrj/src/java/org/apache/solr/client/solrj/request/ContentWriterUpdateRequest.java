@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.solr.client.solrj.request.RequestWriter.ContentWriter;
 import org.apache.solr.client.solrj.request.RequestWriter.NamedPart;
+import org.apache.solr.common.params.UpdateParams;
 
 /**
  * Uploads one or more content parts to Solr Cell or another handler that consumes request content
@@ -52,6 +53,21 @@ public class ContentWriterUpdateRequest extends AbstractUpdateRequest {
         return List.copyOf(parts);
       }
     };
+  }
+
+  /**
+   * Sets {@code commitWithin} (milliseconds). The content is parsed by the target handler, so the
+   * value travels as the {@code commitWithin} request parameter; a negative value removes it.
+   */
+  @Override
+  public AbstractUpdateRequest setCommitWithin(int commitWithin) {
+    super.setCommitWithin(commitWithin);
+    if (commitWithin < 0) {
+      params.remove(UpdateParams.COMMIT_WITHIN);
+    } else {
+      params.set(UpdateParams.COMMIT_WITHIN, commitWithin);
+    }
+    return this;
   }
 
   /** Adds a part written from {@code writer}, named {@code name} when sent as multipart. */
