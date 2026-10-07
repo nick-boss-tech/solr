@@ -27,6 +27,7 @@ public class MinMetric extends Metric {
 
   private long longMin = Long.MAX_VALUE;
   private double doubleMin = Double.MAX_VALUE;
+  private String stringMin;
   private String columnName;
 
   public MinMetric(String columnName) {
@@ -67,7 +68,10 @@ public class MinMetric extends Metric {
   }
 
   @Override
-  public Number getValue() {
+  public Object getValue() {
+    if (stringMin != null) {
+      return stringMin;
+    }
     if (longMin == Long.MAX_VALUE) {
       return doubleMin;
     } else {
@@ -97,6 +101,13 @@ public class MinMetric extends Metric {
       long l = (long) o;
       if (l < longMin) {
         longMin = l;
+      }
+    } else if (o instanceof String s) {
+      // Non-numeric values, such as the ISO-8601 strings a facet() min/max emits for a date
+      // field, are compared lexicographically; for same-format ISO-8601 dates that order is
+      // also chronological.
+      if (stringMin == null || s.compareTo(stringMin) < 0) {
+        stringMin = s;
       }
     }
   }

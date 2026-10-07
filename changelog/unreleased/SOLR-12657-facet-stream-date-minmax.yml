@@ -1,6 +1,8 @@
 title: >
   The facet() streaming expression no longer fails with a ClassCastException for min/max metrics on
-  date fields; the date is returned as an ISO-8601 string.
+  date fields; the date is returned as an ISO-8601 string, in both the direct and the parallel
+  (rollup) facet paths. Min/max on string fields likewise return the string values, and a bucket
+  with no value for the metric field now yields a null metric instead of failing the stream.
 type: fixed
 authors:
   - name: Nick Shanin

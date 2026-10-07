@@ -68,7 +68,11 @@ public abstract class Metric implements Expressible {
     return metricNodeId;
   }
 
-  public abstract Number getValue();
+  /**
+   * The aggregated value. Numeric metrics return a {@link Number}; a metric that aggregates
+   * non-numeric values (for example min/max over strings) may return another type.
+   */
+  public abstract Object getValue();
 
   public abstract void update(Tuple tuple);
 

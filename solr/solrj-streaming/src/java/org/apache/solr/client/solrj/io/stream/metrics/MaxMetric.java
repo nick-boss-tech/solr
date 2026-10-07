@@ -26,6 +26,7 @@ import org.apache.solr.client.solrj.io.stream.expr.StreamFactory;
 public class MaxMetric extends Metric {
   private long longMax = -Long.MIN_VALUE;
   private double doubleMax = -Double.MAX_VALUE;
+  private String stringMax;
   private String columnName;
 
   public MaxMetric(String columnName) {
@@ -61,7 +62,10 @@ public class MaxMetric extends Metric {
   }
 
   @Override
-  public Number getValue() {
+  public Object getValue() {
+    if (stringMax != null) {
+      return stringMax;
+    }
     if (longMax == Long.MIN_VALUE) {
       return doubleMax;
     } else {
@@ -96,6 +100,13 @@ public class MaxMetric extends Metric {
       long l = (long) o;
       if (l > longMax) {
         longMax = l;
+      }
+    } else if (o instanceof String s) {
+      // Non-numeric values, such as the ISO-8601 strings a facet() min/max emits for a date
+      // field, are compared lexicographically; for same-format ISO-8601 dates that order is
+      // also chronological.
+      if (stringMax == null || s.compareTo(stringMax) > 0) {
+        stringMax = s;
       }
     }
   }
