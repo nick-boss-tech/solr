@@ -90,6 +90,16 @@ public class TestNestedDocsSort extends SolrTestCaseJ4 {
   public void testRewriteableSortFieldTypeIsRejected() {
     SolrException e = expectThrows(SolrException.class, () -> parse("childfield(amount,$q) desc"));
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+    // SortSpecParsing wraps the parser's SyntaxError as the cause of its own generic error,
+    // so the field and type named by the parser are found in the cause chain.
+    StringBuilder chain = new StringBuilder();
+    for (Throwable t = e; t != null; t = t.getCause()) {
+      chain.append(t.getMessage()).append('\n');
+    }
+    assertTrue(chain.toString(), chain.toString().contains("\"amount\""));
+    assertTrue(chain.toString(), chain.toString().contains("\"currency\""));
+    assertTrue(
+        chain.toString(), chain.toString().contains("can't be used for sorting by child values"));
   }
 
   @Test(expected = SolrException.class)
