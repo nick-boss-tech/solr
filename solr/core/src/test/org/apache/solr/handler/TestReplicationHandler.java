@@ -309,9 +309,9 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
     // The full-copy cleanup runs on the fetcher thread after the new index
     // becomes active, so poll until the unpinned commit files are gone before
     // asserting on the final state of the old directory.
-    long deadline = System.currentTimeMillis() + TIMEOUT;
+    long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(TIMEOUT);
     boolean cleanedUp = false;
-    while (System.currentTimeMillis() < deadline) {
+    while (System.nanoTime() < deadline) {
       cleanedUp = true;
       for (String fileName : unpinnedCommitFiles) {
         if (Files.exists(oldIndexDir.resolve(fileName))) {

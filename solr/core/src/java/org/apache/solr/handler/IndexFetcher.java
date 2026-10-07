@@ -756,7 +756,18 @@ public class IndexFetcher {
             // The new index is now the active one, so the guard in
             // deleteNonSnapshotIndexFiles no longer treats the old directory as
             // current. Remove the old index files that no named snapshot pins.
-            solrCore.deleteNonSnapshotIndexFiles(indexDirPath);
+            // Resolve the current core first, as openNewSearcherAndUpdateCommitPoint
+            // does: after a core reload this fetcher's core reference is the closed
+            // pre-reload core, whose current index directory is still the old one,
+            // so the cleanup would be skipped as a no-op on that reference.
+            final CoreContainer coreContainer = solrCore.getCoreContainer();
+            if (!coreContainer.isShutDown()) {
+              try (SolrCore core = coreContainer.getCore(solrCore.getName())) {
+                if (core != null) {
+                  core.deleteNonSnapshotIndexFiles(indexDirPath);
+                }
+              }
+            }
           }
         }
 
