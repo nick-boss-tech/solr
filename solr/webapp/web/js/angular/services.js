@@ -362,6 +362,24 @@ solrAdminServices.factory('Metrics',
                return {data: data}
              },
              headers: {doNotIntercept: "true"}
+           },
+           // SOLR-9759: the parameters travel in the body, so a long streaming expression is not
+           // limited by the request header size
+           "post": {
+             method: "POST",
+             transformRequest: function (obj) {
+               var str = [];
+               for (var key in obj) {
+                 if (obj.hasOwnProperty(key)) {
+                   str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]));
+                 }
+               }
+               return str.join("&");
+             },
+             transformResponse: function (data) {
+               return {data: data}
+             },
+             headers: {doNotIntercept: "true", "Content-Type": "application/x-www-form-urlencoded"}
            }
        });
        resource.url = function(params) {

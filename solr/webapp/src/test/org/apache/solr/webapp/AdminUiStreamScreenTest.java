@@ -21,6 +21,7 @@ import org.apache.solr.common.SolrInputDocument;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 /** Tests the Stream screen: executing a streaming expression through the form. */
@@ -50,5 +51,24 @@ public class AdminUiStreamScreenTest extends AdminUiTestBase {
     String response = waitForTextContains(By.cssSelector("#stream #result"), "stream-doc-1");
     assertTrue("All docs should stream: " + response, response.contains("stream-doc-3"));
     assertNoSevereConsoleErrors();
+  }
+
+  /** SOLR-9759: an expression larger than the Jetty request header size (8 KiB) must still run. */
+  @Test
+  public void testLongStreamingExpressionViaUi() {
+    openPage(COLLECTION + "/stream", By.id("stream"));
+    WebElement expr = waitFor(By.id("expr"));
+    String padding = " ".repeat(10_000);
+    String longExpr =
+        "search(" + COLLECTION + "," + padding + "q=\"*:*\",fl=\"id\",sort=\"id asc\")";
+    ((JavascriptExecutor) driver)
+        .executeScript(
+            "arguments[0].value = arguments[1];"
+                + " arguments[0].dispatchEvent(new Event('input', {bubbles: true}));",
+            expr,
+            longExpr);
+    click(By.cssSelector("#stream button[type=submit]"));
+    String response = waitForTextContains(By.cssSelector("#stream #result"), "stream-doc-1");
+    assertTrue("All docs should stream: " + response, response.contains("stream-doc-3"));
   }
 }

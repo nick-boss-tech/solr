@@ -43,7 +43,12 @@ solrAdminApp.controller('StreamController',
 
       var url = Query.url(params);
 
-      Query.query(params, function(data) {
+      var body = {expr: $scope.expr, wt: 'json'};
+      if($scope.doExplanation){
+        body.explain = $scope.doExplanation
+      }
+
+      Query.post({core: params.core, handler: params.handler}, body, function(data) {
 
         var jsonData = JSON.parse(data.toJSON().data);
         if (undefined != jsonData["explanation"]) {
@@ -62,6 +67,11 @@ solrAdminApp.controller('StreamController',
         $scope.url = url;
         $scope.hostPortContext = $location.absUrl().substr(0,$location.absUrl().indexOf("#")); // For display only
 
+      }, function(error) {
+        // the request opted out of the global error handler, so report the failure here
+        $scope.showExplanation = false;
+        var detail = error.data && error.data.data ? error.data.data : "";
+        $scope.response = {data: "Request failed with HTTP " + error.status + " " + (error.statusText || "") + "\n" + detail};
       });
     };
 
