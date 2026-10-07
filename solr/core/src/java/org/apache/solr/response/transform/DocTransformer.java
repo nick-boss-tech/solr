@@ -128,10 +128,10 @@ public abstract class DocTransformer {
    *
    * <p>Implementations whose added field names are only known once documents are transformed may
    * report additional names over time; callers should consult this method when writing each
-   * document rather than caching it once per request. The returned names describe the most
-   * recently transformed document; they are not accumulated across the documents of a response,
-   * so a name reported for one document does not make {@code wantsField} accept an ordinary
-   * field of the same name on another document.
+   * document rather than caching it once per request. The returned names describe the most recently
+   * transformed document; they are not accumulated across the documents of a response, so a name
+   * reported for one document does not make {@code wantsField} accept an ordinary field of the same
+   * name on another document.
    *
    * @return field names added to response documents, or null if none
    */
