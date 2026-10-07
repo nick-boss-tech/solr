@@ -1,5 +1,9 @@
 title: >
   edismax now applies pf, pf2 and pf3 boosts on non-tokenized fields (for example string fields), as dismax does.
+  The phrase text built for pf, pf2 and pf3 is also changed on its own: words are now joined with a single
+  space instead of appending a trailing space after each word. Configurations that already list a
+  non-tokenized field in pf, pf2 or pf3 will now apply those boosts where they were silently ignored
+  before, so ranking may change for such configurations.
 type: fixed
 authors:
   - name: Nick Shanin

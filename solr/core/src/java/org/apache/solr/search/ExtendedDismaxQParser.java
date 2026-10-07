@@ -1469,7 +1469,8 @@ public class ExtendedDismaxQParser extends QParser {
             } else if (query instanceof SpanQuery) {
               return query;
             } else if (query instanceof TermQuery tq && containsWhitespace(tq.getTerm().text())) {
-              // a non-tokenized field kept the whole phrase as one term, so it does match >1 words
+              // Intended for non-tokenized fields (a StrField, or a TextField with a keyword
+              // tokenizer): the field kept the whole phrase as one term, so it does match >1 words
               return query;
             } else if (minClauseSize > 1) {
               // if it's not a type of phrase query, it doesn't meet the minClauseSize requirements

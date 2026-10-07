@@ -3412,7 +3412,8 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
           "//doc[1]/str[@name='id'][.='2988pfctl']",
           "//doc[2]/str[@name='id'][.='hard drive']");
 
-      // with pf=id the document whose id equals the phrase is boosted to the top
+      // with pf=id the document whose id equals the phrase is boosted to the top; compare
+      // scores explicitly so the assertion does not rest on docid order breaking the tie
       assertQ(
           req(
               "q", "hard drive",
@@ -3423,7 +3424,7 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
               "fl", "id,score"),
           "//result[@numFound='2']",
           "//doc[1]/str[@name='id'][.='hard drive']",
-          "//doc[2]/str[@name='id'][.='2988pfctl']");
+          "//result[doc[1]/float[@name='score'] > doc[2]/float[@name='score']]");
     } finally {
       assertU(delQ("name:pf2988marker"));
       assertU(commit());
