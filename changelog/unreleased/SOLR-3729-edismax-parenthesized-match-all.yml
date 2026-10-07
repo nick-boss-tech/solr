@@ -1,5 +1,5 @@
 title: >
-  edismax now treats a parenthesized match-all query such as (*:*) as match-all instead of a wildcard term on the default field.
+  edismax now treats a parenthesized match-all query such as (*:*), and signed or boosted forms, as match-all instead of a wildcard term on the default field.
 type: fixed
 authors:
   - name: Nick Shanin
