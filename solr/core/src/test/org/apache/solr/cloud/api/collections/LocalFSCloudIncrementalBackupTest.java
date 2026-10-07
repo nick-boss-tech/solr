@@ -181,9 +181,15 @@ public class LocalFSCloudIncrementalBackupTest extends AbstractIncrementalBackup
     for (String key : List.of("replicationFactor", "nrtReplicas", "tlogReplicas", "pullReplicas")) {
       assertNotNull("Missing source replica count: " + key, sourceStatus.get(key));
       assertNotNull("Missing restored replica count: " + key, restoredStatus.get(key));
+      // The canonical wire type is String: the source collection is an ordinary
+      // CREATE collection and the restored one must report the same type.
       assertEquals(
-          "Replica count type mismatch for " + key,
-          sourceStatus.get(key).getClass(),
+          "Source replica count for " + key + " must be reported as a string",
+          String.class,
+          sourceStatus.get(key).getClass());
+      assertEquals(
+          "Restored replica count for " + key + " must be reported as a string",
+          String.class,
           restoredStatus.get(key).getClass());
       assertEquals(
           "Replica count value mismatch for " + key,
