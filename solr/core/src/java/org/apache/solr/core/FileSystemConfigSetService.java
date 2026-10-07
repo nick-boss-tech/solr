@@ -340,7 +340,13 @@ public class FileSystemConfigSetService extends ConfigSetService {
     if (!Files.isDirectory(configSetDirectory))
       throw new SolrException(
           SolrException.ErrorCode.SERVER_ERROR,
-          "Could not load configuration from directory " + configSetDirectory);
+          "Could not load configuration from directory "
+              + configSetDirectory
+              + " (configSet '"
+              + configSet
+              + "' was not found in the configset base directory "
+              + configSetBase
+              + ", which defaults to SOLR_HOME/configsets and can be changed with 'configSetBaseDir' in solr.xml)");
     return configSetDirectory;
   }
 

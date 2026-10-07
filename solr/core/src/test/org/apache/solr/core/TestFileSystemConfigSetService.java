@@ -18,6 +18,8 @@ package org.apache.solr.core;
 
 import static org.apache.solr.core.FileSystemConfigSetService.METADATA_FILE;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -30,6 +32,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.commons.io.file.PathUtils;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.SolrException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -48,6 +51,17 @@ public class TestFileSystemConfigSetService extends SolrTestCaseJ4 {
   public static void afterClass() throws Exception {
     PathUtils.deleteDirectory(configSetBase);
     fileSystemConfigSetService = null;
+  }
+
+  @Test
+  public void testMissingConfigSetErrorNamesBaseDirectory() {
+    CoreDescriptor cd = mock(CoreDescriptor.class);
+    when(cd.getConfigSet()).thenReturn("no_such_configset");
+    SolrException e =
+        expectThrows(SolrException.class, () -> fileSystemConfigSetService.locateInstanceDir(cd));
+    assertTrue(e.getMessage(), e.getMessage().contains("no_such_configset"));
+    assertTrue(e.getMessage(), e.getMessage().contains(configSetBase.toString()));
+    assertTrue(e.getMessage(), e.getMessage().contains("configSetBaseDir"));
   }
 
   @Test
