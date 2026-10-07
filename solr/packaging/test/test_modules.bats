@@ -39,6 +39,13 @@ teardown() {
   refute_output --partial '"EXCEPTION"'
 }
 
+@test "ltr module ships its example directory" {
+  run ls "${SOLR_TIP}/modules/ltr/example"
+  assert_output --partial "config.json"
+  assert_output --partial "train_and_upload_demo_model.py"
+  assert_output --partial "exampleFeatures.json"
+}
+
 @test "icu collation in analysis-extras module" {
   local solr_include_file="${BATS_TEST_TMPDIR}/solr.include"
   echo "SOLR_MODULES=analysis-extras" > "${solr_include_file}"
