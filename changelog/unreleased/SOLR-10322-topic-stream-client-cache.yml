@@ -1,5 +1,5 @@
 title: >
-  TopicStream reads persisted checkpoints and slice checkpoints through the stream's own SolrClientCache instead of the stream context's, which may be null.
+  TopicStream no longer throws a NullPointerException when the stream context has no client cache: checkpoint reads now use the stream's own SolrClientCache instead of the stream context's.
 type: fixed
 authors:
   - name: Nick Shanin
