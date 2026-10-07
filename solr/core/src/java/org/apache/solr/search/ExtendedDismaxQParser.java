@@ -53,7 +53,6 @@ import org.apache.solr.common.util.StrUtils;
 import org.apache.solr.parser.QueryParser;
 import org.apache.solr.parser.SolrQueryParserBase.MagicFieldName;
 import org.apache.solr.request.SolrQueryRequest;
-import org.apache.solr.rest.schema.analysis.ManagedStopFilterFactory;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.search.ExtendedDismaxQParser.ExtendedSolrQueryParser.Alias;
@@ -1489,10 +1488,6 @@ public class ExtendedDismaxQParser extends QParser {
       }
     }
 
-    private static boolean isStopFilter(TokenFilterFactory tf) {
-      return tf instanceof StopFilterFactory || tf instanceof ManagedStopFilterFactory;
-    }
-
     @SuppressWarnings("ReferenceEquality") // Analyzer identity, not equality, is what matters here
     private Analyzer noStopwordFilterAnalyzer(String fieldName) {
       FieldType ft = parser.getReq().getSchema().getFieldType(fieldName);
@@ -1508,7 +1503,7 @@ public class ExtendedDismaxQParser extends QParser {
 
       // make sure that there isn't a stop filter in the indexer
       for (TokenFilterFactory tf : tci.getTokenFilterFactories()) {
-        if (isStopFilter(tf)) {
+        if (tf instanceof StopFilterFactory) {
           return qa;
         }
       }
@@ -1519,7 +1514,7 @@ public class ExtendedDismaxQParser extends QParser {
 
       for (int i = 0; i < facs.length; i++) {
         TokenFilterFactory tf = facs[i];
-        if (isStopFilter(tf)) {
+        if (tf instanceof StopFilterFactory) {
           stopIdx = i;
           break;
         }
