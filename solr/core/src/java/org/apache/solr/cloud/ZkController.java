@@ -1004,7 +1004,7 @@ public class ZkController implements Closeable {
 
   // normalize host removing any url scheme.
   // input can be null, host, or url_prefix://host
-  private String normalizeHostName(String host) {
+  static String normalizeHostName(String host) {
     if (host == null || host.length() == 0) {
       host = AddressUtils.getHostToAdvertise();
     } else {
@@ -1013,6 +1013,12 @@ public class ZkController implements Closeable {
       }
     }
 
+    if (host == null || host.isBlank()) {
+      throw new SolrException(
+          SolrException.ErrorCode.SERVER_ERROR,
+          "Could not determine the host name to register in ZooKeeper; set the 'host' property"
+              + " (e.g. -Dhost=<name>) to a non-empty host name");
+    }
     return host;
   }
 

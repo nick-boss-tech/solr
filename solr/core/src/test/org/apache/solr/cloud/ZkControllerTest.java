@@ -79,6 +79,17 @@ public class ZkControllerTest extends SolrCloudTestCase {
   static final int TIMEOUT = 10000;
 
   @Test
+  public void testNormalizeHostName() {
+    assertEquals("myhost", ZkController.normalizeHostName("myhost"));
+    assertEquals("myhost", ZkController.normalizeHostName("http://myhost"));
+    assertFalse(ZkController.normalizeHostName(null).isBlank());
+    assertFalse(ZkController.normalizeHostName("").isBlank());
+    // a scheme with nothing after it must not be registered as an empty host
+    expectThrows(SolrException.class, () -> ZkController.normalizeHostName("http://"));
+    expectThrows(SolrException.class, () -> ZkController.normalizeHostName("https://"));
+  }
+
+  @Test
   public void testNodeNameUrlConversion() throws Exception {
 
     // nodeName from parts
