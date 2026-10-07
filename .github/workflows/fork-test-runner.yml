@@ -2,6 +2,14 @@ name: Fork test runner
 
 # Manual parallel test runner for the fork. Dispatch it by hand
 # against any branch; it never runs on push or pull_request.
+#
+# The tests input takes one test class or a comma-separated list of
+# classes. A prepare job turns the list into a matrix and each class
+# runs as its own job (named for the class), so one dispatch can fan
+# out across GitHub-hosted runners and each class reports its own
+# conclusion. The optional seed input is passed to every job as the
+# same -Ptests.seed, so parallel jobs randomize identically to a
+# single run of the whole list.
 on:
   workflow_dispatch:
     inputs:
@@ -10,17 +18,50 @@ on:
         required: true
         default: ":solr:core"
       tests:
-        description: "Test class or pattern for the Gradle --tests filter"
+        description: "Test class or pattern for the Gradle --tests filter; a comma-separated list runs one job per class"
         required: true
       gradle_args:
         description: "Extra Gradle arguments (optional)"
         required: false
         default: ""
+      seed:
+        description: "Randomization seed passed to every job as -Ptests.seed (optional)"
+        required: false
+        default: ""
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.parse.outputs.matrix }}
+    steps:
+      - name: Parse the test list into a matrix
+        id: parse
+        env:
+          TESTS_INPUT: ${{ inputs.tests }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, os
+          raw = os.environ.get("TESTS_INPUT", "")
+          classes = [c.strip() for c in raw.split(",")]
+          classes = [c for c in classes if c]
+          if not classes:
+              raise SystemExit("tests input produced no test classes")
+          matrix = {"test": classes}
+          with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+              fh.write("matrix=" + json.dumps(matrix) + "\n")
+          print("matrix:", json.dumps(matrix))
+          PYEOF
+
   focused-test:
+    name: ${{ matrix.test }}
+    needs: prepare
     runs-on: ubuntu-latest
     timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     steps:
       - name: Check out the dispatched ref
         uses: actions/checkout@v4
@@ -31,17 +72,24 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Set up Gradle
+      - name: "Set up Gradle (cache-read-only: false)"
         uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
 
-      - name: Run focused tests
-        run: ./gradlew ${{ inputs.module }}:test --tests "${{ inputs.tests }}" ${{ inputs.gradle_args }}
+      - name: "Run focused tests (-Porg.gradle.caching=true)"
+        run: |
+          SEED_ARGS=()
+          if [ -n "${{ inputs.seed }}" ]; then
+            SEED_ARGS=("-Ptests.seed=${{ inputs.seed }}")
+          fi
+          ./gradlew "${{ inputs.module }}:test" --tests "${{ matrix.test }}" -Porg.gradle.caching=true "${SEED_ARGS[@]}" ${{ inputs.gradle_args }}
 
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-${{ github.run_id }}
+          name: test-results-${{ github.run_id }}-${{ strategy.job-index }}
           path: |
             **/build/test-results/test/*.xml
             **/build/reports/tests/**
