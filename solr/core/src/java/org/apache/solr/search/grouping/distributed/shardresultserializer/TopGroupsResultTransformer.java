@@ -232,7 +232,7 @@ public class TopGroupsResultTransformer
     for (GroupDocs<BytesRef> searchGroup : data.groups) {
       NamedList<Object> groupResult = new NamedList<>();
       assert searchGroup.totalHits().relation() == TotalHits.Relation.EQUAL_TO;
-      groupResult.add("totalHits", searchGroup.totalHits().value());
+      groupResult.add("totalHits", boxCount(searchGroup.totalHits().value()));
       if (!Float.isNaN(searchGroup.maxScore())) {
         groupResult.add("maxScore", searchGroup.maxScore());
       }
@@ -286,10 +286,10 @@ public class TopGroupsResultTransformer
 
   protected NamedList<Object> serializeTopDocs(QueryCommandResult result) throws IOException {
     NamedList<Object> queryResult = new NamedList<>();
-    queryResult.add("matches", result.getMatches());
+    queryResult.add("matches", boxCount(result.getMatches()));
     TopDocs topDocs = result.getTopDocs();
     assert topDocs.totalHits.relation() == TotalHits.Relation.EQUAL_TO;
-    queryResult.add("totalHits", topDocs.totalHits.value());
+    queryResult.add("totalHits", boxCount(topDocs.totalHits.value()));
     // debug: assert !Float.isNaN(result.getTopDocs().getMaxScore()) ==
     // rb.getGroupingSpec().isNeedScore();
     if (!Float.isNaN(result.getMaxScore())) {
@@ -328,6 +328,20 @@ public class TopGroupsResultTransformer
     }
 
     return queryResult;
+  }
+
+  /**
+   * Boxes a grouping count for a shard response. Counts are carried as {@link Integer} whenever
+   * the value fits and as {@link Long} only when it exceeds the int range, so that a coordinator
+   * running the previous version, which reads these values as {@code Integer}, keeps working
+   * during a rolling upgrade for every count it could represent. Only a count that overflows int
+   * arrives as {@code Long}, which the previous version could not have produced or consumed
+   * anyway.
+   */
+  public static Number boxCount(long value) {
+    return value >= Integer.MIN_VALUE && value <= Integer.MAX_VALUE
+        ? Integer.valueOf((int) value)
+        : Long.valueOf(value);
   }
 
   private Document retrieveDocument(

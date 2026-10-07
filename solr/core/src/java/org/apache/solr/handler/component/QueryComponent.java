@@ -111,6 +111,7 @@ import org.apache.solr.search.grouping.distributed.command.TopGroupsFieldCommand
 import org.apache.solr.search.grouping.distributed.requestfactory.SearchGroupsRequestFactory;
 import org.apache.solr.search.grouping.distributed.requestfactory.StoredFieldsShardRequestFactory;
 import org.apache.solr.search.grouping.distributed.requestfactory.TopGroupsShardRequestFactory;
+import org.apache.solr.search.grouping.distributed.shardresultserializer.TopGroupsResultTransformer;
 import org.apache.solr.search.grouping.distributed.responseprocessor.SearchGroupShardResponseProcessor;
 import org.apache.solr.search.grouping.distributed.responseprocessor.StoredFieldsShardResponseProcessor;
 import org.apache.solr.search.grouping.distributed.responseprocessor.TopGroupsShardResponseProcessor;
@@ -1663,7 +1664,10 @@ public class QueryComponent extends SearchComponent {
 
     var result = new QueryResult();
     rsp.add("firstPhase", commandHandler.processResult(result, serializer));
-    rsp.add("totalHitCount", commandHandler.getTotalHitCount());
+    // Boxed as Integer when it fits so a previous-version coordinator can still read it
+    // during a rolling upgrade; see TopGroupsResultTransformer.boxCount.
+    rsp.add(
+        "totalHitCount", TopGroupsResultTransformer.boxCount(commandHandler.getTotalHitCount()));
     rb.setResult(result);
   }
 
