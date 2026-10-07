@@ -1,0 +1,8 @@
+title: The error for a CoreAdmin CREATE with an unknown configSet now names the configset base directory and the solr.xml setting that controls it.
+type: changed
+authors:
+  - name: Nick Shanin
+    nick: nick-boss-tech
+links:
+  - name: SOLR-7323
+    url: https://issues.apache.org/jira/browse/SOLR-7323
