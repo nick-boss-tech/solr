@@ -1422,9 +1422,10 @@ public class StreamExpressionTest extends SolrCloudTestCase {
   @Test
   public void testFacetStreamMinMaxOnDateField() throws Exception {
     new UpdateRequest()
-        .add(id, "0", "a_s", "hello0", "d_dt", "2018-01-01T00:00:00Z")
-        .add(id, "1", "a_s", "hello0", "d_dt", "2018-03-01T00:00:00Z")
-        .add(id, "2", "a_s", "hello1", "d_dt", "2019-05-05T05:05:05Z")
+        .add(id, "0", "a_s", "hello0", "d_dt", "2018-01-01T00:00:00Z", "b_s", "banana")
+        .add(id, "1", "a_s", "hello0", "d_dt", "2018-03-01T00:00:00Z", "b_s", "apple")
+        .add(id, "2", "a_s", "hello1", "d_dt", "2019-05-05T05:05:05Z", "b_s", "cherry")
+        .add(id, "3", "a_s", "hello2", "b_s", "apricot")
         .commit(cluster.getSolrClient(), COLLECTIONORALIAS);
 
     StreamFactory factory =
@@ -1438,17 +1439,94 @@ public class StreamExpressionTest extends SolrCloudTestCase {
     TupleStream stream =
         factory.constructStream(
             "facet(collection1, q=\"*:*\", buckets=\"a_s\", bucketSorts=\"a_s asc\","
-                + " bucketSizeLimit=10, min(d_dt), max(d_dt), count(*))");
+                + " bucketSizeLimit=10, min(d_dt), max(d_dt), min(b_s), max(b_s), count(*))");
     List<Tuple> tuples = getTuples(stream);
 
-    assertEquals(2, tuples.size());
+    assertEquals(3, tuples.size());
     assertEquals("hello0", tuples.get(0).getString("a_s"));
     assertEquals("2018-01-01T00:00:00Z", tuples.get(0).get("min(d_dt)").toString());
     assertEquals("2018-03-01T00:00:00Z", tuples.get(0).get("max(d_dt)").toString());
+    // min/max on a string field pass the values through unchanged
+    assertEquals("apple", tuples.get(0).get("min(b_s)"));
+    assertEquals("banana", tuples.get(0).get("max(b_s)"));
     assertEquals(2L, tuples.get(0).getLong("count(*)").longValue());
     assertEquals("hello1", tuples.get(1).getString("a_s"));
     assertEquals("2019-05-05T05:05:05Z", tuples.get(1).get("min(d_dt)").toString());
     assertEquals("2019-05-05T05:05:05Z", tuples.get(1).get("max(d_dt)").toString());
+    assertEquals("hello2", tuples.get(2).getString("a_s"));
+    // a bucket whose documents have no value for the metric field carries a null metric
+    assertNull(tuples.get(2).get("min(d_dt)"));
+    assertNull(tuples.get(2).get("max(d_dt)"));
+    assertEquals("apricot", tuples.get(2).get("min(b_s)"));
+    assertEquals(1L, tuples.get(2).getLong("count(*)").longValue());
+  }
+
+  /**
+   * SOLR-12657: in the parallel (tiered) facet path the per-collection date min/max values are
+   * ISO-8601 strings, and the rollup metrics must aggregate them instead of dropping them.
+   */
+  @Test
+  public void testFacetStreamMinMaxOnDateFieldParallelRollup() throws Exception {
+    String coll1 = "solr12657coll1";
+    String coll2 = "solr12657coll2";
+    String alias = "solr12657alias";
+    try {
+      CollectionAdminRequest.createCollection(coll1, "conf", 1, 1).process(cluster.getSolrClient());
+      cluster.waitForActiveCollection(coll1, 1, 1);
+      CollectionAdminRequest.createCollection(coll2, "conf", 1, 1).process(cluster.getSolrClient());
+      cluster.waitForActiveCollection(coll2, 1, 1);
+      CollectionAdminRequest.createAlias(alias, coll1 + "," + coll2)
+          .process(cluster.getSolrClient());
+
+      // the same buckets appear in both collections, with the extremes split across them, so
+      // the rollup has to combine the partial values from both collections
+      new UpdateRequest()
+          .add(id, "0", "a_s", "hello0", "d_dt", "2018-03-01T00:00:00Z")
+          .add(id, "1", "a_s", "hello1", "d_dt", "2019-05-05T05:05:05Z")
+          .commit(cluster.getSolrClient(), coll1);
+      new UpdateRequest()
+          .add(id, "2", "a_s", "hello0", "d_dt", "2018-01-01T00:00:00Z")
+          .add(id, "3", "a_s", "hello1", "d_dt", "2020-06-06T00:00:00Z")
+          .commit(cluster.getSolrClient(), coll2);
+
+      StreamFactory factory =
+          new StreamFactory()
+              .withCollectionUseThisConnection(alias, solrConnection)
+              .withFunctionName("facet", FacetStream.class)
+              .withFunctionName("min", MinMetric.class)
+              .withFunctionName("max", MaxMetric.class)
+              .withFunctionName("count", CountMetric.class);
+
+      TupleStream stream =
+          factory.constructStream(
+              "facet("
+                  + alias
+                  + ", q=\"*:*\", buckets=\"a_s\", bucketSorts=\"a_s asc\","
+                  + " bucketSizeLimit=10, min(d_dt), max(d_dt), count(*))");
+      SolrClientCache cache = new SolrClientCache();
+      try {
+        StreamContext context = new StreamContext();
+        context.setSolrClientCache(cache);
+        stream.setStreamContext(context);
+        List<Tuple> tuples = getTuples(stream);
+
+        assertEquals(2, tuples.size());
+        assertEquals("hello0", tuples.get(0).getString("a_s"));
+        assertEquals("2018-01-01T00:00:00Z", tuples.get(0).get("min(d_dt)").toString());
+        assertEquals("2018-03-01T00:00:00Z", tuples.get(0).get("max(d_dt)").toString());
+        assertEquals(2L, tuples.get(0).getLong("count(*)").longValue());
+        assertEquals("hello1", tuples.get(1).getString("a_s"));
+        assertEquals("2019-05-05T05:05:05Z", tuples.get(1).get("min(d_dt)").toString());
+        assertEquals("2020-06-06T00:00:00Z", tuples.get(1).get("max(d_dt)").toString());
+        assertEquals(2L, tuples.get(1).getLong("count(*)").longValue());
+      } finally {
+        cache.close();
+      }
+    } finally {
+      CollectionAdminRequest.deleteAlias(alias).process(cluster.getSolrClient());
+      CollectionAdminRequest.deleteCollection(coll1).process(cluster.getSolrClient());
+      CollectionAdminRequest.deleteCollection(coll2).process(cluster.getSolrClient());
+    }
   }
 
   @Test
