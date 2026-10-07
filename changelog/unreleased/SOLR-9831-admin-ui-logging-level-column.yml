@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: Admin UI logging screen no longer prints an internal "false" next to each log level, and the stack trace row spans all columns.
+type: fixed # added, changed, fixed, deprecated, removed, dependency_update, security, other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9831
+    url: https://issues.apache.org/jira/browse/SOLR-9831
