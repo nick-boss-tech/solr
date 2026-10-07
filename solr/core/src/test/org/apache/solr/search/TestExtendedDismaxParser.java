@@ -173,21 +173,48 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
   }
 
   /**
-   * SOLR-3962: the modified match-all spellings (a + or - modifier, a boost, grouping parentheses)
-   * must not be run through the pf fields' analyzers either. On the base parser each of them adds a
-   * phrase clause built from the tokens of the literal text, such as name_chars:"* : *". The pf2
-   * and pf3 iterations are guards only: a single clause can never feed a shingle of size 2 or 3, so
-   * they pass on the base parser too.
+   * SOLR-3962: the modified match-all spellings (a + or - modifier, a boost, grouping parentheses,
+   * and a boost inside the parentheses) must not be run through the pf fields' analyzers either. On
+   * the base parser each of them adds a phrase clause built from the tokens of the literal text,
+   * such as name_chars:"* : *". The pf2 and pf3 iterations are guards only: a single clause can
+   * never feed a shingle of size 2 or 3, so they pass on the base parser too; the two-clause case
+   * in {@link #testMatchAllDocsShingleWithPhraseFields} is the discriminating pf2 case.
    */
   @Test
   public void testMatchAllDocsSpellingsWithPhraseFields() throws Exception {
     for (String sow : Arrays.asList("true", "false")) {
       for (String pf : Arrays.asList("pf", "pf2", "pf3")) {
-        for (String q : Arrays.asList("+*:*", "-*:*", "*:*^2", "(*:*)", "(*:*)^2", "+(*:*)")) {
+        for (String q :
+            Arrays.asList(
+                "+*:*", "-*:*", "*:*^2", "(*:*)", "(*:*)^2", "+(*:*)", "(*:*^2)", "+(*:*^2)")) {
           try (SolrQueryRequest req = req("sow", sow, "qf", "id", pf, "name_chars")) {
             Query parsed = QParser.getParser(q, "edismax", req).getQuery();
             assertFalse(
                 "phrase clause built from the match-all spelling " + q + ": " + parsed,
+                parsed.toString().contains("name_chars:\""));
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * SOLR-3962: with a second clause present, a shingle of size 2 can be built, so the pf2 iteration
+   * discriminates: on the base parser the match-all clause pairs with the term clause and the
+   * shingle is built from the tokens of the literal match-all text, while the fixed parser drops
+   * the match-all clause and a single remaining clause forms no shingle at all, so no pf phrase
+   * clause appears. The pf3 iterations are guards (two clauses cannot feed a shingle of size 3 on
+   * either parser).
+   */
+  @Test
+  public void testMatchAllDocsShingleWithPhraseFields() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      for (String pf : Arrays.asList("pf2", "pf3")) {
+        for (String q : Arrays.asList("*:* foo", "foo *:*")) {
+          try (SolrQueryRequest req = req("sow", sow, "qf", "id", pf, "name_chars")) {
+            Query parsed = QParser.getParser(q, "edismax", req).getQuery();
+            assertFalse(
+                "shingle built from the match-all clause of " + q + ": " + parsed,
                 parsed.toString().contains("name_chars:\""));
           }
         }

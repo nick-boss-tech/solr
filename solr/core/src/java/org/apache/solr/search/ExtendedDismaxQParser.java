@@ -368,31 +368,45 @@ public class ExtendedDismaxQParser extends QParser {
     }
     // splitIntoClauses escapes the colon of every clause except a bare *:*; undo that here
     s = s.replace("\\:", ":");
-    // strip a trailing boost, as in *:*^2
-    int boost = s.lastIndexOf('^');
-    if (boost > 0 && isBoostValue(s.substring(boost + 1))) {
-      s = s.substring(0, boost);
-    }
-    // strip grouping parentheses that wrap the whole clause, as in (*:*)
-    while (s.length() > 2 && s.charAt(0) == '(' && s.charAt(s.length() - 1) == ')') {
-      int depth = 0;
-      boolean wrapsWhole = true;
-      for (int i = 0; i < s.length() - 1; i++) {
-        char c = s.charAt(i);
-        if (c == '(') {
-          depth++;
-        } else if (c == ')') {
-          depth--;
-        }
-        if (depth == 0) {
-          wrapsWhole = false;
-          break;
-        }
+    // Strip a trailing boost and any grouping parentheses that wrap the whole clause, in any
+    // order and combination, until neither applies: the boost can sit inside the parentheses,
+    // as in (*:*^2), so a single pass in a fixed order does not recognise that spelling.
+    boolean changed = true;
+    while (changed) {
+      changed = false;
+      // strip a trailing boost, as in *:*^2
+      int boost = s.lastIndexOf('^');
+      if (boost > 0 && isBoostValue(s.substring(boost + 1))) {
+        s = s.substring(0, boost);
+        changed = true;
       }
-      if (!wrapsWhole) break;
-      s = s.substring(1, s.length() - 1);
+      // strip grouping parentheses that wrap the whole clause, as in (*:*)
+      if (s.length() > 2
+          && s.charAt(0) == '('
+          && s.charAt(s.length() - 1) == ')'
+          && wrapsWholeClause(s)) {
+        s = s.substring(1, s.length() - 1);
+        changed = true;
+      }
     }
     return "*:*".equals(s);
+  }
+
+  /** Whether the '(' at the start of the string is closed only by the ')' at its end. */
+  private static boolean wrapsWholeClause(String s) {
+    int depth = 0;
+    for (int i = 0; i < s.length() - 1; i++) {
+      char c = s.charAt(i);
+      if (c == '(') {
+        depth++;
+      } else if (c == ')') {
+        depth--;
+      }
+      if (depth == 0) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /** Whether the string is a plain boost number: digits with an optional decimal point. */
