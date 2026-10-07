@@ -1,0 +1,8 @@
+title: >
+  Collapse and expand with hint=top_fc no longer fail with a NullPointerException on a string field that has docValues but cannot be uninverted.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16570
+    url: https://issues.apache.org/jira/browse/SOLR-16570
