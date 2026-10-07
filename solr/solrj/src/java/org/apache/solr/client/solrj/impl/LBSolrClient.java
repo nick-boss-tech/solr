@@ -647,7 +647,9 @@ public abstract class LBSolrClient extends SolrClient {
       // we retry on 404 or 403 or 503 or 500
       // unless it's an update - then we only retry on connect exception
       if (!isNonRetryable && RETRY_CODES.contains(e.code())) {
-        ex = (!isZombie) ? makeServerAZombie(baseUrl, e) : e;
+        // a 403/404 is retried elsewhere, but it does not show that this server is down
+        boolean serverMayBeDown = e.code() != 403 && e.code() != 404;
+        ex = (!isZombie && serverMayBeDown) ? makeServerAZombie(baseUrl, e) : e;
       } else {
         // Server is alive but the request was likely malformed or invalid
         if (isZombie) {
