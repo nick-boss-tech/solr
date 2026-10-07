@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: The Admin UI Stream screen sends the streaming expression in a POST body (long expressions no longer fail with HTTP 413) and shows request failures instead of staying blank.
+type: fixed # added, changed, fixed, deprecated, removed, dependency_update, security, other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-9759
+    url: https://issues.apache.org/jira/browse/SOLR-9759
