@@ -249,6 +249,46 @@ public class TestReRankQParserPlugin extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testRerankMaxScoreOutsideWindowMatch() {
+    assertU(adoc("id", "1", "term_s", "YYYY", "test_ti", "5"));
+    assertU(adoc("id", "2", "term_s", "YYYY", "test_ti", "50"));
+    assertU(adoc("id", "3", "term_s", "YYYY", "test_ti", "5000"));
+    assertU(commit());
+
+    for (boolean multiThreaded : new boolean[] {false, true}) {
+      String mt = Boolean.toString(multiThreaded);
+
+      // The main query scores come from test_ti, so doc 1 keeps a final score of 5.0 but
+      // sits outside the reRankDocs=2 window; the replace rerank lowers both window docs
+      // to 0.001. This pins the implemented contract: the reported maxScore follows the
+      // returned (rescored) documents only, and the outside match's untouched 5.0 is not
+      // counted. Whether maxScore should instead span all matches after reranking is an
+      // open question (see SOLR-15479); this test makes the current behavior explicit so
+      // a change of contract shows up here deliberately.
+      String[] params = {
+        "q",
+        "{!func}field(test_ti)",
+        "fq",
+        "term_s:YYYY",
+        "rq",
+        "{!rerank reRankQuery=$rqq reRankDocs=2 reRankOperator=replace}",
+        "rqq",
+        "{!func}0.001",
+        "fl",
+        "id,score",
+        "multiThreaded",
+        mt
+      };
+      assertQ(
+          req(params),
+          "*[count(//doc)=2]",
+          "//result[@numFound='3']",
+          "//result[@maxScore<'0.01']",
+          "*[count(//doc/str[@name='id'][.='1'])=0]");
+    }
+  }
+
+  @Test
   public void testRerankReturnOriginalScoreNotRequested() throws Exception {
 
     assertU(delQ("*:*"));
