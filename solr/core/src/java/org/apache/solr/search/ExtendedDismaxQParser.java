@@ -745,7 +745,7 @@ public class ExtendedDismaxQParser extends QParser {
     final int end = raw.length();
     while (pos < end) {
       char ch = raw.charAt(pos);
-      if (ch == '(' || ch == '+' || ch == '-' || Character.isWhitespace(ch)) {
+      if (ch == '(' || ch == '+' || ch == '-') {
         pos++;
       } else {
         break;
@@ -758,12 +758,13 @@ public class ExtendedDismaxQParser extends QParser {
     boolean seenBoost = false;
     while (pos < end) {
       char ch = raw.charAt(pos);
-      if (ch == ')' || Character.isWhitespace(ch)) {
+      if (ch == ')') {
         pos++;
       } else if (ch == '^' && !seenBoost) {
         seenBoost = true;
         pos++;
-        // the boost value runs until a closing paren, whitespace, or the end of the clause
+        // the boost value runs until a closing paren or the end of the clause; whitespace can
+        // only appear here glued into the clause by a backslash escape, and it ends the boost too
         while (pos < end && raw.charAt(pos) != ')' && !Character.isWhitespace(raw.charAt(pos))) {
           pos++;
         }

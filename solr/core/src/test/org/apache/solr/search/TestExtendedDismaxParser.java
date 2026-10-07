@@ -163,7 +163,9 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
   @Test
   public void testMatchAllColonEscaping() throws Exception {
     // a standalone match-all keeps its colon unescaped, so it parses as a MatchAllDocsQuery,
-    // whether bare with spaces, parenthesized, signed, or boosted (SOLR-3729)
+    // whether parenthesized, signed, or boosted (SOLR-3729). ( *:* ) is a pin: it already
+    // parsed this way before the fix, because the splitter breaks it into (, *:* and )
+    // clauses and the bare *:* clause was already exempt from escaping.
     for (String q : Arrays.asList("(*:*)", "( *:* )")) {
       try (SolrQueryRequest req = req("qf", "name title subject text")) {
         QParser qParser = QParser.getParser(q, "edismax", req);
@@ -177,6 +179,22 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         assertThat(parsed.toString(), not(containsString("*\\:*")));
       }
     }
+    // the ticket's shapes with other clauses present: the helper also accepts unbalanced
+    // parentheses, which is what makes the *:* in these keep its colon unescaped
+    for (String q : Arrays.asList("(*:* -fox)", "(*:* )", "(foo *:*)")) {
+      try (SolrQueryRequest req = req("qf", "name title subject text")) {
+        Query parsed = QParser.getParser(q, "edismax", req).getQuery();
+        assertThat(parsed.toString(), containsString("*:*"));
+        assertThat(parsed.toString(), not(containsString("*\\:*")));
+      }
+    }
+    // pin, for the same reason as ( *:* ) above: the bare *:* clause in this shape was
+    // already exempt from escaping before SOLR-3729, so it does not discriminate the fix
+    try (SolrQueryRequest req = req("qf", "name title subject text")) {
+      Query parsed = QParser.getParser("( *:* -fox)", "edismax", req).getQuery();
+      assertThat(parsed.toString(), containsString("*:*"));
+      assertThat(parsed.toString(), not(containsString("*\\:*")));
+    }
     // a *:* glued to other text in the same clause is not standalone: its colon is escaped, so
     // it parses as a wildcard term on the query fields, exactly as it did before SOLR-3729
     for (String q : Arrays.asList("foo(*:*)bar", "(*:*)foo", "foo(*:*)", "((*:*)bar)")) {
@@ -184,6 +202,14 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         Query parsed = QParser.getParser(q, "edismax", req).getQuery();
         assertThat(parsed.toString(), containsString("*\\:*"));
         assertThat(parsed.toString().replace("*\\:*", ""), not(containsString("*:*")));
+      }
+    }
+    // a malformed boost or extra closing parens on a standalone match-all are accepted by the
+    // helper and then fail in the Lucene grammar, hitting the same escape-and-reparse fallback
+    // as any other malformed input; parsing must not throw
+    for (String q : Arrays.asList("*:*^abc", "*:*)))")) {
+      try (SolrQueryRequest req = req("qf", "name title subject text")) {
+        assertNotNull(QParser.getParser(q, "edismax", req).getQuery());
       }
     }
   }
