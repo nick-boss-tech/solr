@@ -47,6 +47,7 @@ import org.apache.lucene.index.IndexCommit;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.IOContext;
 import org.apache.lucene.store.IndexInput;
+import org.apache.lucene.util.Version;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
@@ -847,6 +848,11 @@ public abstract class AbstractIncrementalBackupTest extends SolrCloudTestCase {
           repository.resolve(backupURI, "backup_" + numBackup + ".properties");
       URI zkBackupFolder = repository.resolveDirectory(backupURI, "zk_backup_" + numBackup);
       assertTrue(repository.exists(backupPropertiesFile));
+      // The persisted properties carry the index version recorded for this backup; the test
+      // indexes with the running Lucene, so the recorded value is the current Lucene version.
+      BackupProperties persistedProps =
+          BackupProperties.readFromLatest(repository, backupURI).get();
+      assertEquals(Version.LATEST.toString(), persistedProps.getIndexVersion());
       assertTrue(repository.exists(zkBackupFolder));
       assertFolderAreSame(
           repository.resolveDirectory(backupURI, BackupFilePaths.getZkStateDir(prevBackupId)),
