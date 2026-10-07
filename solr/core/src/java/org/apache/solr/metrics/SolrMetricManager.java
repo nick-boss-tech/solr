@@ -56,6 +56,7 @@ import io.opentelemetry.sdk.metrics.export.MetricExporter;
 import io.opentelemetry.sdk.metrics.export.PeriodicMetricReader;
 import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.core.SolrInfoBean;
@@ -120,11 +122,15 @@ public class SolrMetricManager {
 
   public static final int DEFAULT_CLOUD_REPORTER_PERIOD = 60;
 
+  /** Comma-separated registry names (e.g. {@code jvm,jetty}) whose metrics are not collected. */
+  public static final String DISABLED_REGISTRIES_PROP = "solr.metrics.disabledRegistries";
+
   private final ConcurrentMap<String, MeterProviderAndReaders> meterProviderAndReaders =
       new ConcurrentHashMap<>();
 
   private final MetricExporter metricExporter;
   private final boolean enabled;
+  private final Set<String> disabledRegistries;
   private OtelRuntimeJvmMetrics otelRuntimeJvmMetrics;
 
   private static final List<Double> SOLR_NANOSECOND_HISTOGRAM_BOUNDARIES =
@@ -149,8 +155,20 @@ public class SolrMetricManager {
   }
 
   public SolrMetricManager(MetricExporter exporter, boolean enabled) {
+    this(exporter, enabled, List.of());
+  }
+
+  /**
+   * Creates a manager that returns no-op meter providers for the given registries.
+   *
+   * @param disabledRegistries names of registries (with or without the {@code solr.} prefix) whose
+   *     meter provider is a no-op
+   */
+  public SolrMetricManager(
+      MetricExporter exporter, boolean enabled, Collection<String> disabledRegistries) {
     metricExporter = exporter;
     this.enabled = enabled;
+    this.disabledRegistries = prefixed(disabledRegistries);
   }
 
   public SolrMetricManager(SolrResourceLoader loader) {
@@ -159,6 +177,8 @@ public class SolrMetricManager {
 
   public SolrMetricManager(SolrResourceLoader loader, boolean enabled) {
     this.enabled = enabled;
+    this.disabledRegistries =
+        prefixed(EnvUtils.getPropertyAsList(DISABLED_REGISTRIES_PROP, List.of()));
     this.metricExporter = enabled ? loadMetricExporter(loader) : null;
     if (enabled) {
       this.otelRuntimeJvmMetrics = new OtelRuntimeJvmMetrics().initialize(this, JVM_REGISTRY);
@@ -446,10 +466,10 @@ public class SolrMetricManager {
    * @return existing or newly created meter provider, or a no-op one when metrics are disabled
    */
   public MeterProvider meterProvider(String providerName) {
-    if (!enabled) {
+    providerName = enforcePrefix(providerName);
+    if (!enabled || disabledRegistries.contains(providerName)) {
       return MeterProvider.noop();
     }
-    providerName = enforcePrefix(providerName);
     return meterProviderAndReaders
         .computeIfAbsent(
             providerName,
@@ -564,6 +584,14 @@ public class SolrMetricManager {
     } else {
       return REGISTRY_NAME_PREFIX + name;
     }
+  }
+
+  private static Set<String> prefixed(Collection<String> names) {
+    return names.stream()
+        .map(String::trim)
+        .filter(n -> !n.isEmpty())
+        .map(SolrMetricManager::enforcePrefix)
+        .collect(Collectors.toUnmodifiableSet());
   }
 
   /** Get a shallow copied map of {@link FilterablePrometheusMetricReader}. */

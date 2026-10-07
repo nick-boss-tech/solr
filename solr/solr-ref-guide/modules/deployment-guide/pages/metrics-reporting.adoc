@@ -103,6 +103,9 @@ The `JVM Registry` gathers metrics from the JVM using the OpenTelemetry instrume
 
 JVM metrics are enabled by default but can be disabled by setting either the system property `-Dsolr.metrics.jvm.enabled=false` or the environment variable `SOLR_METRICS_JVM_ENABLED=false`.
 
+To stop collecting metrics for specific registries only, list them in the system property `-Dsolr.metrics.disabledRegistries=jvm,jetty` or the environment variable `SOLR_METRICS_DISABLEDREGISTRIES=jvm,jetty`.
+Names are given with or without the `solr.` prefix, and a disabled registry is not exposed by the metrics API.
+
 ==== Physical Memory Metrics
 
 Solr exposes a gauge for host or container physical memory, registered under the `solr.jvm` registry:

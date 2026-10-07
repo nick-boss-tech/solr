@@ -34,6 +34,7 @@ import io.prometheus.metrics.model.snapshots.HistogramSnapshot;
 import io.prometheus.metrics.model.snapshots.MetricSnapshot;
 import io.prometheus.metrics.model.snapshots.MetricSnapshots;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.DoubleAdder;
@@ -70,6 +71,26 @@ public class SolrMetricManagerTest extends SolrTestCaseJ4 {
   @Test
   public void testDefaultCloudReporterPeriodUnchanged() {
     assertEquals(60, SolrMetricManager.DEFAULT_CLOUD_REPORTER_PERIOD);
+  }
+
+  @Test
+  public void testDisabledRegistryUsesNoopProvider() {
+    SolrMetricManager manager =
+        new SolrMetricManager(
+            InMemoryMetricExporter.create(), true, List.of("quiet", " solr.noisy ", ""));
+    try {
+      manager.longCounter("quiet", "quiet_counter", "desc", null).add(5);
+      manager.longCounter("solr.noisy", "noisy_counter", "desc", null).add(5);
+      manager.longCounter("loud", "loud_counter", "desc", null).add(5);
+
+      assertFalse(manager.hasRegistry("quiet"));
+      assertFalse(manager.hasRegistry("noisy"));
+      assertTrue(manager.hasRegistry("loud"));
+      assertNull(manager.getPrometheusMetricReader("quiet"));
+      assertNotNull(manager.getPrometheusMetricReader("loud"));
+    } finally {
+      manager.closeAllRegistries();
+    }
   }
 
   @Test

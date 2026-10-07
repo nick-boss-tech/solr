@@ -105,13 +105,15 @@ public class CPUCircuitBreaker extends CircuitBreaker implements SolrCoreAware {
    * @return Percent CPU usage of -1 if value could not be obtained.
    */
   protected double calculateLiveCPUUsage() {
-    if (!OtelRuntimeJvmMetrics.isJvmMetricsEnabled()) {
+    var reader =
+        OtelRuntimeJvmMetrics.isJvmMetricsEnabled()
+            ? this.cc.getMetricManager().getPrometheusMetricReader("solr.jvm")
+            : null;
+    if (reader == null) {
       throw new IllegalStateException("JVM metrics disabled. Cannot calculate CPU usage");
     }
 
-    return this.cc
-        .getMetricManager()
-        .getPrometheusMetricReader("solr.jvm")
+    return reader
         .collect(name -> name.contains("jvm_system_cpu_utilization"))
         .stream()
         .filter(GaugeSnapshot.class::isInstance)
