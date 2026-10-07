@@ -1,4 +1,4 @@
-title: The Replication handler no longer shows the password from a leaderUrl that contains user-info in its follower details
+title: Replication no longer exposes the password from a leaderUrl that contains user-info in the follower details response or in IndexFetcher log and error messages
 type: fixed
 authors:
   - name: Nick Shanin

@@ -106,6 +106,13 @@ public class URLUtil {
    * <p>This is intended for display/logging only. Callers should continue to use the original URL
    * for any connection logic.
    *
+   * <p>The user-info is the text between the scheme and the last {@code @} before the first {@code
+   * /}, {@code ?}, or {@code #}, which is where the authority component ends (RFC 3986). A password
+   * therefore cannot contain a raw {@code /}, {@code ?}, or {@code #}: such a character would end
+   * the authority, so a URL containing one has no {@code @}-delimited user-info to redact.
+   * Passwords containing those characters reach a URL percent-encoded (for example {@code %2F}),
+   * and the encoded form is redacted like any other password.
+   *
    * @param url a full URL that may contain embedded credentials
    * @return the same URL with the password replaced by {@code ********}, or the original value if
    *     no user-info is present. The URL is not parsed, so unusual host names or unencoded

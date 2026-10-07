@@ -304,17 +304,33 @@ public class IndexFetcher {
             .getAllowListUrlChecker()
             .checkAllowList(List.of(leaderCoreUrl), clusterState);
       } catch (MalformedURLException e) {
+        // the leader URL can carry basic-auth credentials; never print them in an error
+        String redactedLeaderUrl = URLUtil.redactUserInfo(leaderCoreUrl);
+        MalformedURLException cause = e;
+        if (e.getMessage() != null && e.getMessage().contains(leaderCoreUrl)) {
+          cause =
+              new MalformedURLException(e.getMessage().replace(leaderCoreUrl, redactedLeaderUrl));
+          cause.setStackTrace(e.getStackTrace());
+        }
         throw new SolrException(
-            SolrException.ErrorCode.SERVER_ERROR, "Malformed 'leaderUrl' " + leaderCoreUrl, e);
+            SolrException.ErrorCode.SERVER_ERROR,
+            "Malformed 'leaderUrl' " + redactedLeaderUrl,
+            cause);
       } catch (SolrException e) {
+        String redactedLeaderUrl = URLUtil.redactUserInfo(leaderCoreUrl);
+        String detail = e.getMessage();
+        if (detail != null) {
+          // the allow-list checker's message embeds the URL it rejected
+          detail = detail.replace(leaderCoreUrl, redactedLeaderUrl);
+        }
         throw new SolrException(
             SolrException.ErrorCode.FORBIDDEN,
             "The '"
                 + LEADER_URL
                 + "' parameter value '"
-                + leaderCoreUrl
+                + redactedLeaderUrl
                 + "' is not allowed: "
-                + e.getMessage()
+                + detail
                 + ". "
                 + AllowListUrlChecker.SET_SOLR_DISABLE_URL_ALLOW_LIST_CLUE);
       }
@@ -467,7 +483,9 @@ public class IndexFetcher {
         }
         if (!replica.getCoreUrl().equals(leaderCoreUrl)) {
           setLeaderCoreUrl(replica.getCoreUrl());
-          log.info("Updated leaderUrl to {}", leaderCoreUrl);
+          if (log.isInfoEnabled()) {
+            log.info("Updated leaderUrl to {}", URLUtil.redactUserInfo(leaderCoreUrl));
+          }
           // TODO: Do we need to set forceReplication = true?
         } else {
           log.debug("leaderUrl didn't change");

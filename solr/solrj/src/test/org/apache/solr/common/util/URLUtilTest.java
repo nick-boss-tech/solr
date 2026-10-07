@@ -141,6 +141,25 @@ public class URLUtilTest extends SolrTestCase {
   }
 
   @Test
+  public void testRedactUserInfoUnusualUserInfo() {
+    // a password with a raw '@' is redacted up to the last '@' before the path
+    assertEquals(
+        "http://solr:********@localhost:8983/solr/core",
+        URLUtil.redactUserInfo("http://solr:p@ss@localhost:8983/solr/core"));
+    // characters that would end the authority appear percent-encoded in a real URL
+    // password, and the encoded form is redacted like any other password
+    assertEquals(
+        "http://solr:********@localhost:8983/solr/core",
+        URLUtil.redactUserInfo("http://solr:pa%2Fss%3Fword@localhost:8983/solr/core"));
+    // a raw '/' ends the authority (RFC 3986), so this URL has no '@'-delimited
+    // user-info in its authority and is returned unchanged; a password containing
+    // a raw '/' cannot be carried by a URL in the first place
+    assertEquals(
+        "http://solr:pa/ss@localhost:8983/solr/core",
+        URLUtil.redactUserInfo("http://solr:pa/ss@localhost:8983/solr/core"));
+  }
+
+  @Test
   public void testGetNodeNameForBaseUrl() throws MalformedURLException, URISyntaxException {
     assertEquals("node-1-url:8983_solr", getNodeNameForBaseUrl("https://node-1-url:8983/solr"));
     assertEquals("node-1-url:8983_solr", getNodeNameForBaseUrl("http://node-1-url:8983/solr"));
