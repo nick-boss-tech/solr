@@ -1,0 +1,8 @@
+title: >
+  UnifiedHighlighter falls back to re-analysis for fields with term vector offsets but without term vector positions, instead of failing with an IndexOutOfBoundsException.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16885
+    url: https://issues.apache.org/jira/browse/SOLR-16885
