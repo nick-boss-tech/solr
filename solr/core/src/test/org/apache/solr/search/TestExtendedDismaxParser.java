@@ -389,6 +389,14 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         "//str[@name='parsedquery'][contains(.,'text_sw:big~')]",
         "//str[@name='parsedquery'][not(contains(.,'text_sw:the'))]");
 
+    // the drop is per field: with a second qf field whose analyzer has no stop filter,
+    // the same fuzzy stopword clause still queries that field, and only that field (SOLR-2309)
+    assertQ(
+        req("defType", "edismax", "qf", "text_sw name", "q", "the~0.5", "debug", "query"),
+        "//str[@name='parsedquery'][contains(.,'name:the~')]",
+        "//str[@name='parsedquery'][not(contains(.,'text_sw:the'))]",
+        oner);
+
     // an all-stopword fuzzy query behaves like the plain all-stopword query above: when
     // every term is a stopword, none of them are removed, so the fuzzy terms are kept
     assertQ(
@@ -625,6 +633,17 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     //     assertQ(req("defType", "edismax", "qf", "title",
     //     "q","the big apple"), nor
     //     );
+  }
+
+  // SOLR-2309: a fuzzy term on an undefined field never reaches the per-field fuzzy path;
+  // foo is not in the schema, so the clause is escaped and reparsed as one fuzzy term over
+  // qf, exactly as on the base parser. This pins that fallback: no error, no per-field drop.
+  @Test
+  public void testFuzzyOnUndefinedField() {
+    assertQ(
+        req("defType", "edismax", "qf", "text_sw", "q", "foo:bar~", "debug", "query"),
+        "//str[@name='parsedquery'][contains(.,'text_sw:foo:bar~')]",
+        "*[count(//doc)=0]");
   }
 
   public void testBoostQuery() {
