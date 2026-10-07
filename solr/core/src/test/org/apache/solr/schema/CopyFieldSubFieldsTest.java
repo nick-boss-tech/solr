@@ -24,6 +24,11 @@ import org.apache.commons.io.file.PathUtils;
 import org.apache.lucene.tests.mockfile.FilterPath;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.util.EmbeddedSolrServerTestRule;
 import org.junit.BeforeClass;
@@ -102,6 +107,64 @@ public class CopyFieldSubFieldsTest extends SolrTestCase {
     schema = schema.deleteCopyFields(Map.of("src3", List.of("box")));
     assertSubFieldTargets(schema, box, false);
     assertFalse(schema.isCopyFieldTarget(box));
+  }
+
+  @Test
+  public void testRealTimeGetOmitsDerivedCurrencySubFields() throws Exception {
+    EmbeddedSolrServer client = solrTestRule.getSolrClient("collection1");
+    SolrInputDocument doc = new SolrInputDocument();
+    doc.addField("id", "rtg-currency-doc");
+    doc.addField("price", "10.50,USD");
+    client.add(doc);
+    client.commit();
+
+    SolrDocument fetched =
+        realTimeGet(client, "rtg-currency-doc", "id,price,price_c,price_c_l_pl,price_c_s_c");
+    assertEquals("10.50,USD", fetched.getFieldValue("price"));
+    // price_c is a copyField target, so it is filtered from the materialized document; the
+    // currency sub-fields derived from it are targets as well and must not leak either.
+    assertNull(fetched.getFieldValue("price_c"));
+    assertNull("derived amount sub-field leaked", fetched.getFieldValue("price_c_l_pl"));
+    assertNull("derived currency code sub-field leaked", fetched.getFieldValue("price_c_s_c"));
+  }
+
+  @Test
+  public void testAtomicUpdateOmitsDerivedCurrencySubFields() throws Exception {
+    EmbeddedSolrServer client = solrTestRule.getSolrClient("collection1");
+    SolrInputDocument doc = new SolrInputDocument();
+    doc.addField("id", "atomic-currency-doc");
+    doc.addField("price", "10.50,USD");
+    client.add(doc);
+    client.commit();
+
+    // A partial update of an unrelated field materializes the stored document first; that
+    // materialization must not carry the derived currency sub-fields into the re-indexed
+    // document as if they were user-supplied fields.
+    SolrInputDocument update = new SolrInputDocument();
+    update.addField("id", "atomic-currency-doc");
+    update.addField("src3", Map.of("set", "changed"));
+    client.add(update);
+    client.commit();
+
+    SolrDocument fetched =
+        realTimeGet(
+            client, "atomic-currency-doc", "id,price,src3,price_c,price_c_l_pl,price_c_s_c");
+    assertEquals("10.50,USD", fetched.getFieldValue("price"));
+    assertEquals("changed", fetched.getFieldValue("src3"));
+    assertNull(fetched.getFieldValue("price_c"));
+    assertNull("derived amount sub-field leaked", fetched.getFieldValue("price_c_l_pl"));
+    assertNull("derived currency code sub-field leaked", fetched.getFieldValue("price_c_s_c"));
+  }
+
+  private static SolrDocument realTimeGet(EmbeddedSolrServer client, String id, String fl)
+      throws Exception {
+    SolrQuery query = new SolrQuery();
+    query.setRequestHandler("/get");
+    query.set("id", id);
+    query.set("fl", fl);
+    QueryResponse rsp = client.query(query);
+    assertEquals(1, rsp.getResults().getNumFound());
+    return rsp.getResults().get(0);
   }
 
   private static void assertSubFieldTargets(IndexSchema schema, SchemaField box, boolean expected) {
