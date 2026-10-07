@@ -176,12 +176,15 @@ public class DebugComponent extends SearchComponent {
     } else {
       sreq.params.set(CommonParams.DEBUG_QUERY, "false");
       sreq.params.set(CommonParams.DEBUG, "false");
-      // shards only collect facet debug info when they are in debug mode themselves
+      // Shards only collect facet debug info when they are in debug mode themselves,
+      // so propagate the query debugging the user asked for to facet shard requests.
+      // Other debug modes keep their own semantics: timing and track are added below,
+      // and a results-only request must not gain query debugging on the shards.
       boolean facetRequest =
           (sreq.purpose
                   & (FacetModule.PURPOSE_GET_JSON_FACETS | FacetModule.PURPOSE_REFINE_JSON_FACETS))
               != 0;
-      if (facetRequest && !rb.isDebugTimings() && !rb.isDebugTrack()) {
+      if (facetRequest && rb.isDebugQuery()) {
         sreq.params.add(CommonParams.DEBUG, CommonParams.QUERY);
       }
     }

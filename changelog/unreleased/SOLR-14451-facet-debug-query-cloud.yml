@@ -1,5 +1,5 @@
 title: >
-  debug=query (without timing or track) now also returns the json.facet facet-trace in distributed requests, as debug=true already did.
+  debug=query now also returns the json.facet facet-trace in distributed requests, as debug=true already did.
 type: fixed
 authors:
   - name: Nick Shanin

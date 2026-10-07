@@ -25,6 +25,7 @@ import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
+import org.apache.solr.search.facet.FacetModule;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -191,6 +192,54 @@ public class DebugComponentTest extends SolrTestCaseJ4 {
       // close requests - this method obtains a searcher in order to access its StatsCache
       req.close();
     }
+  }
+
+  @Test
+  public void testModifyRequestFacetPurposeDebugModes() {
+    DebugComponent component = new DebugComponent();
+    List<SearchComponent> components = new ArrayList<>(1);
+    components.add(component);
+
+    // debug=query: facet shard requests must carry debug=query so the shards
+    // collect the json.facet facet-trace (SOLR-14451).
+    assertFacetShardDebug(component, components, "query", CommonParams.QUERY);
+    // debug=results only: facet shard requests must not gain query debugging
+    // the user did not ask for.
+    assertFacetShardDebug(component, components, "results", null);
+    // debug=timing only: the shards get timing (added for every shard request),
+    // but still no query debugging.
+    assertFacetShardDebug(component, components, "timing", CommonParams.TIMING);
+  }
+
+  private void assertFacetShardDebug(
+      DebugComponent component,
+      List<SearchComponent> components,
+      String mode,
+      String expectedDebugValue) {
+    SolrQueryRequest req = req("q", "test query", "distrib", "true");
+    ResponseBuilder rb = new ResponseBuilder(req, new SolrQueryResponse(), components);
+    switch (mode) {
+      case "query" -> rb.setDebugQuery(true);
+      case "results" -> rb.setDebugResults(true);
+      case "timing" -> rb.setDebugTimings(true);
+      default -> throw new IllegalArgumentException(mode);
+    }
+    ShardRequest sreq = new ShardRequest();
+    sreq.params = new ModifiableSolrParams();
+    sreq.purpose = FacetModule.PURPOSE_GET_JSON_FACETS;
+    component.modifyRequest(rb, null, sreq);
+    List<String> debugValues = Arrays.asList(sreq.params.getParams(CommonParams.DEBUG));
+    if (expectedDebugValue != null) {
+      assertTrue(
+          "debug=" + mode + " should add " + expectedDebugValue + " to facet shard requests",
+          debugValues.contains(expectedDebugValue));
+    }
+    if (!CommonParams.QUERY.equals(expectedDebugValue)) {
+      assertFalse(
+          "debug=" + mode + " must not add query debugging to facet shard requests",
+          debugValues.contains(CommonParams.QUERY));
+    }
+    req.close();
   }
 
   @Test
