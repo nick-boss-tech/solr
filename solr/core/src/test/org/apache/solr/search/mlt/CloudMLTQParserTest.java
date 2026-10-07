@@ -198,7 +198,7 @@ public class CloudMLTQParserTest extends SolrCloudTestCase {
     params.set("collection", alias);
     params.set("rows", "100");
     final QueryResponse queryResponse;
-    try (HttpSolrClient client = new HttpSolrClient.Builder(replica.getBaseUrl()).build()) {
+    try (HttpSolrClient client = HttpSolrClient.builder(replica.getBaseUrl()).build()) {
       queryResponse = client.query(replica.getCoreName(), params);
     }
     final ArrayList<String> ids = new ArrayList<>();
