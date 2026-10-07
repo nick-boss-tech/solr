@@ -57,11 +57,12 @@ teardown() {
 }
 
 @test "SOLR-9342 GC log follows SOLR_TIMEZONE" {
+  unset TZ
   export SOLR_TIMEZONE=Asia/Kolkata
   solr start
   solr assert --started http://localhost:${SOLR_PORT} --timeout 5000
 
-  assert_file_contains "${SOLR_LOGS_DIR}/solr_gc.log" '\+0530'
+  assert_file_contains "${SOLR_LOGS_DIR}/solr_gc.log" '\[[^]]*\+0530\]'
 }
 
 @test "check stop command doesn't hang" {
