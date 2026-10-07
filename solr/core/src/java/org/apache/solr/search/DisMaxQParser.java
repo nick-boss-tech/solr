@@ -195,6 +195,11 @@ public class DisMaxQParser extends QParser {
       userQuery = SolrPluginUtils.stripIllegalOperators(userQuery).toString();
 
       parsedUserQuery = getUserQuery(userQuery, up, solrParams);
+      if (ExtendedDismaxQParser.isEmpty(parsedUserQuery)) {
+        // e.g. only stopwords: report "blank" so an enclosing query drops this clause
+        // instead of requiring an empty (match nothing) MUST clause
+        return false;
+      }
       query.add(parsedUserQuery, BooleanClause.Occur.MUST);
 
       Query phrase = getPhraseQuery(userQuery, pp);

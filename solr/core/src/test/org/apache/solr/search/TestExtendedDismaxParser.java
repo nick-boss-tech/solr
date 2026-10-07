@@ -386,6 +386,18 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     // test for not ignoring stopwords when all query terms are stopwords and alwaysStopwords is set
     assertQ(req("defType", "edismax", "qf", "text_sw", "q", "the", "alwaysStopwords", "true"), nor);
 
+    // nested dismax subquery made only of stopwords must not invalidate the whole query
+    assertQ(
+        req(
+            "q",
+            "_query_:\"{!dismax qf=text_sw v=$a}\" AND _query_:\"{!dismax qf=text_sw v=$b}\"",
+            "a",
+            "big",
+            "b",
+            "the"),
+        twor);
+    assertQ(req("defType", "dismax", "qf", "text_sw", "q", "the"), nor);
+
     // searching for a literal colon value when clearly not used for a field
     assertQ(
         "expected doc is missing (using standard)",
