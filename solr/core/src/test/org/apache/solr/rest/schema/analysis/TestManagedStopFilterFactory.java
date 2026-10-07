@@ -234,4 +234,70 @@ public class TestManagedStopFilterFactory extends RestTestBase {
     // stopwords=false: "the" must be kept and required (mm=100%), which no document satisfies
     assertQ(query + "&stopwords=false", "//result[@numFound='0']");
   }
+
+  /**
+   * SOLR-12092: with a managed stop filter in the index analyzer too, the query analyzer must be
+   * left alone, so stopwords=false changes nothing. This also passes on the unpatched parser, which
+   * never stripped a managed filter in the first place; it pins the shape.
+   */
+  @Test
+  public void testEdismaxStopwordsFalseWithManagedStopFilterInBothAnalyzers() throws Exception {
+    String endpoint = "/schema/analysis/stopwords/english";
+    assertJPut(
+        endpoint, Utils.toJSONString(Arrays.asList("a", "an", "the")), "/responseHeader/status==0");
+    restTestHarness.reload(); // make the word set available
+
+    String fieldName = "managed_en_both_stop_field";
+    assertJPost(
+        "/schema/fields",
+        "{add-field : { name :" + fieldName + ", type : managed_en_both_stop}}",
+        "/responseHeader/status==0");
+
+    // the index analyzer removes "the", so "one" is the only indexed term
+    assertU(adoc(fieldName, "the one", "id", "8"));
+    assertU(commit());
+
+    String query = "/select?defType=edismax&mm=100%25&qf=" + fieldName + "&q=the%20one";
+
+    // default: "the" is removed from the query, so the document matches on "one"
+    assertQ(query, "//result[@numFound='1']");
+
+    // stopwords=false: the index analyzer has a stop filter, so the query analyzer is used
+    // unchanged and "the" is still removed; the result is the same
+    assertQ(query + "&stopwords=false", "//result[@numFound='1']");
+  }
+
+  /**
+   * SOLR-12092: the index-side half of the fix. The index analyzer removes managed stopwords and
+   * the query analyzer removes the stopwords of stopwords.txt; because the index analyzer has a
+   * stop filter, the query analyzer must be left alone. On the unpatched parser the managed filter
+   * in the index analyzer is overlooked, the query filter is stripped, and "the" is kept and
+   * required, so the stopwords=false assertion fails there.
+   */
+  @Test
+  public void testEdismaxStopwordsFalseWithManagedStopFilterInIndexAnalyzer() throws Exception {
+    String endpoint = "/schema/analysis/stopwords/english";
+    assertJPut(
+        endpoint, Utils.toJSONString(Arrays.asList("a", "an", "the")), "/responseHeader/status==0");
+    restTestHarness.reload(); // make the word set available
+
+    String fieldName = "managed_en_index_plain_query_stop_field";
+    assertJPost(
+        "/schema/fields",
+        "{add-field : { name :" + fieldName + ", type : managed_en_index_plain_query_stop}}",
+        "/responseHeader/status==0");
+
+    // the index analyzer removes stopwords, so "one" is the only indexed term
+    assertU(adoc(fieldName, "one", "id", "9"));
+    assertU(commit());
+
+    String query = "/select?defType=edismax&mm=100%25&qf=" + fieldName + "&q=the%20one";
+
+    // default: "the" is removed from the query, so the document matches on "one"
+    assertQ(query, "//result[@numFound='1']");
+
+    // stopwords=false: the query analyzer is still used unchanged, so "the" is removed and the
+    // document still matches
+    assertQ(query + "&stopwords=false", "//result[@numFound='1']");
+  }
 }
