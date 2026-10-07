@@ -32,6 +32,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.join.ScoreMode;
 import org.apache.solr.JSONTestUtil;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.MapSolrParams;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.request.SolrQueryRequest;
@@ -55,6 +56,15 @@ public class TestScoreJoinQPNoScore extends SolrTestCaseJ4 {
         "solr.index.updatelog.enabled", "false"); // schema12 doesn't support _version_
     System.setProperty("solr.filterCache.async", "true");
     initCore("solrconfig-basic.xml", "schema-docValuesJoin.xml");
+  }
+
+  @Test
+  public void testUnknownJoinMethodIsBadRequest() {
+    assertQEx(
+        "unknown method must be a client error, not an IllegalArgumentException",
+        "not supported",
+        req("q", "{!join from=dept_ss to=dept_id_s method=nosuchmethod}title_s:MTS"),
+        SolrException.ErrorCode.BAD_REQUEST);
   }
 
   @Test

@@ -217,8 +217,7 @@ public class JoinQParserPlugin extends QParserPlugin {
       @Override
       public Query parse() throws SyntaxError {
         if (localParams != null && localParams.get(METHOD) != null) {
-          // TODO Make sure 'method' is valid value here and give users a nice error
-          final Method explicitMethod = Method.valueOf(localParams.get(METHOD));
+          final Method explicitMethod = parseMethodString(localParams.get(METHOD));
           return explicitMethod.makeFilter(this, plugin);
         }
 
