@@ -42,10 +42,11 @@
       <str name="indent">true</str>
       <str name="df">text</str>
     </lst>
-    <!-- SOLR-14931: the appends value is a macro over a request parameter. The handler
-         on each shard node must expand it when the shard request is processed. -->
+    <!-- SOLR-14931: the appends value is a macro over a request parameter (written
+         $${my_term} here so config loading leaves the macro itself in the value). The
+         handler on each shard node must expand it when the shard request is processed. -->
     <lst name="appends">
-      <str name="fl">appended:'${my_term}'</str>
+      <str name="fl">appended:'$${my_term}'</str>
     </lst>
 
   </requestHandler>
