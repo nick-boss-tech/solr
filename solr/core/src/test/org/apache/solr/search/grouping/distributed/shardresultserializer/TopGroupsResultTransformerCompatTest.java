@@ -30,7 +30,7 @@ import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.handler.component.ResponseBuilder;
-import org.apache.solr.request.LocalSolrQueryRequest;
+import org.apache.solr.request.SolrQueryRequestBase;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.grouping.distributed.command.QueryCommandResult;
@@ -41,11 +41,10 @@ import org.junit.Test;
 
 /**
  * SOLR-14381 rolling-upgrade compatibility: a shard running this version must serialize grouping
- * counts as {@link Integer} whenever they fit, so a coordinator running the previous version
- * (whose {@code TopGroupsResultTransformer} reads {@code matches} and the per-group {@code
- * totalHits} with {@code (Integer)} casts) keeps working in a mixed cluster. Only counts that
- * overflow the int range may travel as {@link Long}; the previous version could not represent
- * those anyway.
+ * counts as {@link Integer} whenever they fit, so a coordinator running the previous version (whose
+ * {@code TopGroupsResultTransformer} reads {@code matches} and the per-group {@code totalHits} with
+ * {@code (Integer)} casts) keeps working in a mixed cluster. Only counts that overflow the int
+ * range may travel as {@link Long}; the previous version could not represent those anyway.
  */
 public class TopGroupsResultTransformerCompatTest extends SolrTestCase {
 
@@ -65,8 +64,7 @@ public class TopGroupsResultTransformerCompatTest extends SolrTestCase {
         .create();
   }
 
-  private TopGroupsResultTransformer newTransformer(SolrCore core) {
-    LocalSolrQueryRequest req = new LocalSolrQueryRequest(core, new ModifiableSolrParams());
+  private TopGroupsResultTransformer newTransformer(SolrQueryRequestBase req) {
     ResponseBuilder rb = new ResponseBuilder(req, new SolrQueryResponse(), List.of());
     return new TopGroupsResultTransformer(rb);
   }
@@ -74,8 +72,9 @@ public class TopGroupsResultTransformerCompatTest extends SolrTestCase {
   @Test
   public void testSerializeTopDocsCountTypes() throws Exception {
     try (SolrCore core =
-        solrTestRule.getCoreContainer().getCore(SolrTestCaseJ4.DEFAULT_TEST_CORENAME)) {
-      TopGroupsResultTransformer transformer = newTransformer(core);
+            solrTestRule.getCoreContainer().getCore(SolrTestCaseJ4.DEFAULT_TEST_CORENAME);
+        SolrQueryRequestBase req = new SolrQueryRequestBase(core, new ModifiableSolrParams())) {
+      TopGroupsResultTransformer transformer = newTransformer(req);
 
       NamedList<Object> small =
           transformer.serializeTopDocs(
@@ -103,9 +102,10 @@ public class TopGroupsResultTransformerCompatTest extends SolrTestCase {
   @Test
   public void testSerializeTopGroupsPerGroupTotalHitsType() throws Exception {
     try (SolrCore core =
-        solrTestRule.getCoreContainer().getCore(SolrTestCaseJ4.DEFAULT_TEST_CORENAME)) {
-      TopGroupsResultTransformer transformer = newTransformer(core);
-      SchemaField groupField = core.getSchema().getField("id");
+            solrTestRule.getCoreContainer().getCore(SolrTestCaseJ4.DEFAULT_TEST_CORENAME);
+        SolrQueryRequestBase req = new SolrQueryRequestBase(core, new ModifiableSolrParams())) {
+      TopGroupsResultTransformer transformer = newTransformer(req);
+      SchemaField groupField = core.getLatestSchema().getField("id");
 
       NamedList<Object> small = transformer.serializeTopGroups(topGroups(7), groupField);
       // The previous version's coordinator casts the per-group totalHits to Integer.
@@ -125,7 +125,7 @@ public class TopGroupsResultTransformerCompatTest extends SolrTestCase {
             new ScoreDoc[0],
             new BytesRef("grp"),
             null);
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     GroupDocs<BytesRef>[] groups = new GroupDocs[] {group};
     return new TopGroups<>(
         Sort.RELEVANCE.getSort(), Sort.RELEVANCE.getSort(), 7, 7, groups, Float.NaN);

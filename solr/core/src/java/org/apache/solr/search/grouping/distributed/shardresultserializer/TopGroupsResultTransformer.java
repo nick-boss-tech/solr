@@ -331,17 +331,17 @@ public class TopGroupsResultTransformer
   }
 
   /**
-   * Boxes a grouping count for a shard response. Counts are carried as {@link Integer} whenever
-   * the value fits and as {@link Long} only when it exceeds the int range, so that a coordinator
-   * running the previous version, which reads these values as {@code Integer}, keeps working
-   * during a rolling upgrade for every count it could represent. Only a count that overflows int
-   * arrives as {@code Long}, which the previous version could not have produced or consumed
-   * anyway.
+   * Boxes a grouping count for a shard response. Counts are carried as {@link Integer} whenever the
+   * value fits and as {@link Long} only when it exceeds the int range, so that a coordinator
+   * running the previous version, which reads these values as {@code Integer}, keeps working during
+   * a rolling upgrade for every count it could represent. Only a count that overflows int arrives
+   * as {@code Long}, which the previous version could not have produced or consumed anyway.
    */
   public static Number boxCount(long value) {
-    return value >= Integer.MIN_VALUE && value <= Integer.MAX_VALUE
-        ? Integer.valueOf((int) value)
-        : Long.valueOf(value);
+    if (value >= Integer.MIN_VALUE && value <= Integer.MAX_VALUE) {
+      return Integer.valueOf((int) value);
+    }
+    return Long.valueOf(value);
   }
 
   private Document retrieveDocument(
