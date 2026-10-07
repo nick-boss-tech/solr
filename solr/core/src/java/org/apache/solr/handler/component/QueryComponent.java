@@ -1454,7 +1454,7 @@ public class QueryComponent extends SearchComponent {
    * Formats a unique key value from a shard response for the {@link ShardParams#IDS} request. A
    * {@link Date} must be written in ISO-8601 (with milliseconds), not {@link Date#toString()}.
    */
-  static String idToString(Object id) {
+  public static String idToString(Object id) {
     if (id instanceof Date) {
       return ((Date) id).toInstant().toString();
     }
