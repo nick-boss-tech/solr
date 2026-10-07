@@ -35,7 +35,7 @@ def genFailInfo(def task, TestDescriptor desc) {
       output, "reproduce": repro]
 }
 
-def addFailInfo(def task, TestDescriptor desc) {
+def addFailInfo = { task, desc ->
   def failInfo = genFailInfo(task, desc)
   def taskSeed = task.systemProperties['tests.seed']
   if (taskSeed != null) {
