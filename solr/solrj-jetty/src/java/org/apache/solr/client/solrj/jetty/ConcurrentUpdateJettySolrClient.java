@@ -25,6 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import org.apache.solr.client.solrj.SolrRequest;
@@ -105,6 +106,9 @@ public class ConcurrentUpdateJettySolrClient extends ConcurrentUpdateBaseSolrCli
   private static class OutStream implements Closeable {
     private final String origCollection;
     private final SolrParams origParams;
+    private final String origUser;
+    private final String origPassword;
+    private final Map<String, String> origHeaders;
     private final OutputStreamRequestContent content;
     private final InputStreamResponseListener responseListener;
     private final boolean isXml;
@@ -113,19 +117,30 @@ public class ConcurrentUpdateJettySolrClient extends ConcurrentUpdateBaseSolrCli
     public OutStream(
         String origCollection,
         SolrParams origParams,
+        SolrRequest<?> origRequest,
         OutputStreamRequestContent content,
         InputStreamResponseListener responseListener,
         boolean isXml) {
       this.origCollection = origCollection;
       this.origParams = origParams;
+      this.origUser = origRequest.getBasicAuthUser();
+      this.origPassword = origRequest.getBasicAuthPassword();
+      this.origHeaders = origRequest.getHeaders();
       this.content = content;
       this.responseListener = responseListener;
       this.isXml = isXml;
     }
 
+    /**
+     * The HTTP request behind a stream carries the credentials and headers of the request that
+     * opened it, so only requests that would send the same ones may share it.
+     */
     boolean belongToThisStream(SolrRequest<?> solrRequest, String collection) {
       return origParams.equals(solrRequest.getParams())
-          && Objects.equals(origCollection, collection);
+          && Objects.equals(origCollection, collection)
+          && Objects.equals(origUser, solrRequest.getBasicAuthUser())
+          && Objects.equals(origPassword, solrRequest.getBasicAuthPassword())
+          && Objects.equals(origHeaders, solrRequest.getHeaders());
     }
 
     List<String> getDocIds() {
@@ -212,7 +227,8 @@ public class ConcurrentUpdateJettySolrClient extends ConcurrentUpdateBaseSolrCli
     postRequest.send(responseListener);
 
     boolean isXml = ClientUtils.TEXT_XML.equals(client.getRequestWriter().getUpdateContentType());
-    OutStream outStream = new OutStream(collection, origParams, content, responseListener, isXml);
+    OutStream outStream =
+        new OutStream(collection, origParams, updateRequest, content, responseListener, isXml);
     if (isXml) {
       outStream.write("<stream>".getBytes(FALLBACK_CHARSET));
     }

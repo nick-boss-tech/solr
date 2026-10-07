@@ -31,6 +31,8 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.SocketTimeoutException;
 import java.net.http.HttpConnectTimeoutException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +105,13 @@ public abstract class ConcurrentUpdateSolrClientTestBase extends SolrTestCaseJ4 
       errorCode = null;
       numReqsRcvd.set(0);
       numDocsRcvd.set(0);
+      docAuthorizations.clear();
     }
+
+    /** For every document received, the Authorization header of the HTTP request it arrived in. */
+    public static final List<String> docAuthorizations = new CopyOnWriteArrayList<>();
+
+    private static final ThreadLocal<String> currentAuthorization = new ThreadLocal<>();
 
     public static Integer errorCode = null;
     public static String lastMethod = null;
@@ -132,6 +140,7 @@ public abstract class ConcurrentUpdateSolrClientTestBase extends SolrTestCaseJ4 
       numReqsRcvd.incrementAndGet();
       lastMethod = "post";
       recordRequest(req, resp);
+      currentAuthorization.set(req.getHeader("Authorization"));
 
       InputStream reqIn = req.getInputStream();
       JavaBinUpdateRequestCodec javabin = new JavaBinUpdateRequestCodec();
@@ -159,6 +168,7 @@ public abstract class ConcurrentUpdateSolrClientTestBase extends SolrTestCaseJ4 
     public void update(
         SolrInputDocument document, UpdateRequest req, Integer commitWithin, Boolean override) {
       numDocsRcvd.incrementAndGet();
+      docAuthorizations.add(document.getFieldValue("id") + "|" + currentAuthorization.get());
     }
   } // end TestServlet
 
@@ -279,6 +289,46 @@ public abstract class ConcurrentUpdateSolrClientTestBase extends SolrTestCaseJ4 
           "Expected CUSS to send " + expectedDocs + " but got " + TestServlet.numDocsRcvd.get(),
           TestServlet.numDocsRcvd.get(),
           expectedDocs);
+    }
+  }
+
+  /**
+   * The Authorization header of a streaming HTTP request is fixed when it opens, so queued requests
+   * with other credentials must go out on a stream of their own.
+   */
+  @Test
+  public void testRequestsWithDifferentCredentialsAreNotSentOnOneStream() throws Exception {
+    TestServlet.clear();
+    final String[] users = {"alice", "bob"};
+    final int numDocs = 20;
+
+    try (var http2Client = solrClient(null);
+        var concurrentClient =
+            concurrentClient(
+                http2Client, solrTestRule.getBaseUrl() + "/cuss/foo", null, 100, 1, false)) {
+      for (int i = 0; i < numDocs; i++) {
+        final String user = users[i % users.length];
+        final SolrInputDocument doc = new SolrInputDocument();
+        doc.setField("id", user + "_" + i);
+        final UpdateRequest req = new UpdateRequest();
+        req.add(doc);
+        req.setBasicAuthCredentials(user, "pw-" + user);
+        concurrentClient.request(req);
+      }
+      concurrentClient.blockUntilFinished();
+    }
+
+    assertEquals(numDocs, TestServlet.docAuthorizations.size());
+    for (String received : TestServlet.docAuthorizations) {
+      final String user = received.substring(0, received.indexOf('_'));
+      final String expected =
+          "Basic "
+              + Base64.getEncoder()
+                  .encodeToString((user + ":pw-" + user).getBytes(StandardCharsets.UTF_8));
+      assertEquals(
+          "document of " + user + " sent under another identity",
+          expected,
+          received.substring(received.indexOf('|') + 1));
     }
   }
 
