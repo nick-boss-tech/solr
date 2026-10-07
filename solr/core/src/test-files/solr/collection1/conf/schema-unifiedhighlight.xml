@@ -36,12 +36,21 @@
     </analyzer>
   </fieldType>
 
+  <!-- term vectors with offsets but without positions (SOLR-16885) -->
+  <fieldType name="text_tv_offsets" class="solr.TextField" termVectors="true" termOffsets="true">
+    <analyzer>
+      <tokenizer class="solr.MockTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+  </fieldType>
+
   <field name="id" type="string" indexed="true" stored="${solr.tests.id.stored:true}" multiValued="false" docValues="${solr.tests.id.docValues:false}" required="false"/>
   <field name="text" type="text_offsets" indexed="true" stored="true"/>
   <field name="text2" type="text" indexed="true" stored="true"/>
   <copyField source="text2" dest="text2_indexed_not_stored"/>
   <field name="text2_indexed_not_stored" type="text" indexed="true" stored="false"/>
   <field name="text3" type="text_offsets" indexed="true" stored="true"         large="true"/>
+  <field name="text4" type="text_tv_offsets" indexed="true" stored="true"/>
 
   <uniqueKey>id</uniqueKey>
 </schema>

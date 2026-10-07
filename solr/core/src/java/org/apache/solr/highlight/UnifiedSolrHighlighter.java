@@ -275,9 +275,17 @@ public class UnifiedSolrHighlighter extends SolrHighlighter implements PluginInf
       String sourceStr = params.getFieldParam(field, HighlightParams.OFFSET_SOURCE);
       if (sourceStr != null) {
         return OffsetSource.valueOf(sourceStr.toUpperCase(Locale.ROOT));
-      } else {
-        return super.getOffsetSource(field);
       }
+      final OffsetSource offsetSource = super.getOffsetSource(field);
+      if (offsetSource == OffsetSource.TERM_VECTORS) {
+        // Lucene reads term vector offsets together with positions (LUCENE-12431); a field with
+        // termOffsets but without termPositions would fail with IndexOutOfBoundsException
+        final SchemaField schemaField = schema.getFieldOrNull(field);
+        if (schemaField != null && !schemaField.storeTermPositions()) {
+          return OffsetSource.ANALYSIS;
+        }
+      }
+      return offsetSource;
     }
 
     // optimization for Solr which keeps a FieldInfos on-hand

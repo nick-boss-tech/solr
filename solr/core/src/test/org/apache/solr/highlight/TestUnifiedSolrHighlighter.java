@@ -82,6 +82,20 @@ public class TestUnifiedSolrHighlighter extends SolrTestCaseJ4 {
         "//lst[@name='highlighting']/lst[@name='102']/arr[@name='text']/str='second <em>document</em>'");
   }
 
+  public void testTermVectorOffsetsWithoutPositions() {
+    // termVectors + termOffsets but no termPositions: the term vector offset source cannot be used
+    assertTrue(h.getCore().getLatestSchema().getField("text4").storeTermOffsets());
+    assertFalse(h.getCore().getLatestSchema().getField("text4").storeTermPositions());
+    assertU(adoc("id", "103", "text4", "the crappy document is a crappy document"));
+    assertU(commit());
+    assertQ(
+        "multiple terms on a term vector field without positions",
+        req("q", "text4:(crappy document)", "hl", "true", "hl.fl", "text4"),
+        "count(//lst[@name='highlighting']/lst[@name='103']/arr[@name='text4']/str)=1",
+        "//lst[@name='highlighting']/lst[@name='103']/arr[@name='text4']/str[contains(.,'<em>crappy</em>')]",
+        "//lst[@name='highlighting']/lst[@name='103']/arr[@name='text4']/str[contains(.,'<em>document</em>')]");
+  }
+
   public void testImpossibleOffsetSource() {
     IllegalArgumentException e =
         expectThrows(
