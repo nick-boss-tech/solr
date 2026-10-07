@@ -215,19 +215,34 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     }
   }
 
-  /** SOLR-3243: with pf set, the combined query is the match-all plus the usual pf phrase boost. */
+  /**
+   * SOLR-3243: with pf set, the only required clause is the match-all; any phrase clause the pf
+   * analysis derives from the range text is an optional boost, never a filter. The exact phrase
+   * text comes from feeding the literal range string to the pf analyzer (the class of problem
+   * SOLR-3962 addresses) and is deliberately not pinned here.
+   */
   @Test
   public void testUnfieldedOpenRangeWithPhraseFields() throws Exception {
     try (SolrQueryRequest req = req("qf", "name title", "pf", "name")) {
       QParser qParser = QParser.getParser("[* TO *]", "edismax", req);
-      assertEquals("+*:* (name:\"[* *]\")", qParser.getQuery().toString());
+      assertOnlyRequiredClauseIsMatchAll(qParser.getQuery());
     }
     try (SolrQueryRequest req = req("qf", "name title", "pf", "name title", "pf2", "name")) {
       QParser qParser = QParser.getParser("[* TO *]", "edismax", req);
-      assertEquals(
-          "+*:* (name:\"[* *]\" | title:\"[* *]\") (name:\"[* *]\")",
-          qParser.getQuery().toString());
+      assertOnlyRequiredClauseIsMatchAll(qParser.getQuery());
     }
+  }
+
+  private static void assertOnlyRequiredClauseIsMatchAll(Query query) {
+    assertThat(query, isA(BooleanQuery.class));
+    int required = 0;
+    for (BooleanClause clause : ((BooleanQuery) query).clauses()) {
+      if (clause.occur() == BooleanClause.Occur.MUST) {
+        required++;
+        assertThat(clause.query(), isA(MatchAllDocsQuery.class));
+      }
+    }
+    assertEquals(1, required);
   }
 
   public void testTrailingOperators() throws Exception {
