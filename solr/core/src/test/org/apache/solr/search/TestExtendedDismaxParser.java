@@ -338,6 +338,8 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
    * still falls back to the escaped form shown here; that shape is outside this ticket's scope.
    */
   public void testLowercaseOperatorBoundaryPins() throws Exception {
+    // TODO: the chained lowercase operator case below pins the escaped-fallback shape; it is
+    // a known out-of-scope case that a future fix should flip.
     // {user query, q.op, expected parsed query, identical before and after the fix}
     String[][] cases = {
       {"Zapp AND +and Brannigan", "AND", "+(+(name:Zapp) +(name:and) +(name:Brannigan))"},
@@ -349,6 +351,39 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
       for (String[] c : cases) {
         try (SolrQueryRequest req =
             req("q.op", c[1], "qf", "name", "lowercaseOperators", "true", "sow", sow)) {
+          QParser qParser = QParser.getParser(c[0], "edismax", req);
+          assertEquals("sow=" + sow + ", q=" + c[0], c[2], qParser.getQuery().toString());
+        }
+      }
+    }
+  }
+
+  /**
+   * SOLR-6320: the shapes in which a demoted lowercase "or" is the only operator-like word in the
+   * query (its neighbour is an explicit AND, which the mm logic does not count as an operator).
+   * foundOperators must agree with the demotion rule and not count the word as an operator, or it
+   * would switch off the configured mm for a query that contains no OR. In these shapes the parsed
+   * query is the same with and without that alignment: under q.op=AND every clause is required, so
+   * mm has nothing to relax, and under q.op=OR the derived mm is already 0%. The exact strings pin
+   * both rules together, so a change to either one shows up here.
+   */
+  public void testLowercaseOperatorDemotedOrShapes() throws Exception {
+    // {user query, q.op, expected parsed query}
+    String[][] cases = {
+      {"Zapp AND or Brannigan", "AND", "+(+(name:Zapp) +(name:or) +(name:Brannigan))"},
+      {"Zapp or AND Brannigan", "AND", "+(+(name:Zapp) +(name:or) +(name:Brannigan))"},
+      {"Zapp AND or Brannigan", "OR", "+(+(name:Zapp) +(name:or) (name:Brannigan))"},
+      {"Zapp or AND Brannigan", "OR", "+((name:Zapp) +(name:or) +(name:Brannigan))"},
+    };
+    for (String sow : Arrays.asList("true", "false")) {
+      for (String[] c : cases) {
+        try (SolrQueryRequest req =
+            req(
+                "q.op", c[1],
+                "qf", "name",
+                "lowercaseOperators", "true",
+                "sow", sow,
+                "defType", "edismax")) {
           QParser qParser = QParser.getParser(c[0], "edismax", req);
           assertEquals("sow=" + sow + ", q=" + c[0], c[2], qParser.getQuery().toString());
         }

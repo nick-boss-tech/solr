@@ -496,7 +496,8 @@ public class ExtendedDismaxQParser extends QParser {
 
   /** Returns true if at least one of the clauses is/has an explicit operator (except for AND) */
   private boolean foundOperators(List<Clause> clauses, boolean lowercaseOperators) {
-    for (Clause clause : clauses) {
+    for (int i = 0; i < clauses.size(); i++) {
+      Clause clause = clauses.get(i);
       if (clause.must == '+') return true;
       if (clause.must == '-') return true;
       if (clause.isBareWord()) {
@@ -505,12 +506,26 @@ public class ExtendedDismaxQParser extends QParser {
           return true;
         } else if ("NOT".equals(s)) {
           return true;
-        } else if (lowercaseOperators && "or".equals(s)) {
+        } else if (lowercaseOperators && "or".equals(s) && isPromotedOperatorWord(clauses, i)) {
+          // a lowercase "or" is an operator only when rebuildUserQuery promotes it to one;
+          // next to an explicit operator it stays a term, so it must not switch off mm either
           return true;
         }
       }
     }
     return false;
+  }
+
+  /**
+   * Whether the clause at index i is a lowercase operator word that {@link #rebuildUserQuery}
+   * promotes to an operator: it is not the first or last clause, and neither neighbour is an
+   * explicit operator (next to one, the word is a term instead, SOLR-6320).
+   */
+  private static boolean isPromotedOperatorWord(List<Clause> clauses, int i) {
+    return i > 0
+        && i + 1 < clauses.size()
+        && !isExplicitOperator(clauses.get(i - 1))
+        && !isExplicitOperator(clauses.get(i + 1));
   }
 
   /**
@@ -528,11 +543,7 @@ public class ExtendedDismaxQParser extends QParser {
       String s = clause.raw;
       // and and or won't be operators at the start or end
       // and an operator word next to an explicit operator is a term ("x AND and AND y", SOLR-6320)
-      if (lowercaseOperators
-          && i > 0
-          && i + 1 < clauses.size()
-          && !isExplicitOperator(clauses.get(i - 1))
-          && !isExplicitOperator(clauses.get(i + 1))) {
+      if (lowercaseOperators && isPromotedOperatorWord(clauses, i)) {
         if ("AND".equalsIgnoreCase(s)) {
           s = "AND";
         } else if ("OR".equalsIgnoreCase(s)) {
