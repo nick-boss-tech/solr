@@ -106,11 +106,11 @@ This is similar to `ps` but overrides the slop factor used for `pf3`.
 If not specified, `ps` is used.
 
 `stopwords`::
-A Boolean parameter indicating if the `StopFilterFactory` configured in the query analyzer should be respected when parsing the query.
-If this is set to `false`, then the `StopFilterFactory` in the query analyzer is ignored.
+A Boolean parameter indicating if the stop filter (`StopFilterFactory` or `ManagedStopFilterFactory`) configured in the query analyzer should be respected when parsing the query.
+If this is set to `false`, then the stop filter in the query analyzer is ignored.
 
 `alwaysStopwords`::
-A Boolean parameter indicating that the `StopFilterFactory` configured in the query analyzer should always be respected even if all query terms are stopwords.
+A Boolean parameter indicating that the stop filter (`StopFilterFactory` or `ManagedStopFilterFactory`) configured in the query analyzer should always be respected even if all query terms are stopwords.
 This defaults to `false`, in which case if a query consists of all stopwords, such as "to be or not to be", then all words are required.
 
 `uf`::
