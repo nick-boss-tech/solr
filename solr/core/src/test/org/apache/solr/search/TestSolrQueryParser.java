@@ -84,6 +84,39 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
     HAS_NAN_FIELDS.clear();
   }
 
+  @Test
+  public void testFuzzyMaxExpansions() throws Exception {
+    // 75 terms within one edit of "abc": one substituted letter at each of three positions
+    String base = "abc";
+    int count = 0;
+    try {
+      for (int pos = 0; pos < base.length(); pos++) {
+        for (char c = 'a'; c <= 'z'; c++) {
+          if (c == base.charAt(pos)) continue;
+          String term = base.substring(0, pos) + c + base.substring(pos + 1);
+          assertU(adoc("id", "fx" + count++, "fuzzyexp_s", term));
+        }
+      }
+      assertU(commit());
+      assertEquals(75, count);
+
+      // default: Lucene's FuzzyQuery stops expanding at 50 terms, so documents silently go missing
+      assertJQ(req("q", "fuzzyexp_s:abc~1", "rows", "0"), "/response/numFound==50");
+      assertJQ(
+          req("q", "fuzzyexp_s:abc~1", "rows", "0", "fuzzy.maxExpansions", "200"),
+          "/response/numFound==75");
+      assertJQ(
+          req("q", "{!lucene fuzzy.maxExpansions=200}fuzzyexp_s:abc~1", "rows", "0"),
+          "/response/numFound==75");
+      assertJQ(
+          req("q", "fuzzyexp_s:abc~1", "rows", "0", "fuzzy.maxExpansions", "10"),
+          "/response/numFound==10");
+    } finally {
+      assertU(delQ("id:fx*"));
+      assertU(commit());
+    }
+  }
+
   public static void createIndex() {
     String v;
     v = "how now brown cow";

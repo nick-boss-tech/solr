@@ -26,6 +26,9 @@ import org.apache.solr.request.SolrQueryRequest;
  * @see LuceneQParserPlugin
  */
 public class LuceneQParser extends QParser {
+  /** Maximum number of terms a fuzzy query ({@code term~N}) expands to; Lucene's default is 50. */
+  public static final String FUZZY_MAX_EXPANSIONS = "fuzzy.maxExpansions";
+
   SolrQueryParser lparser;
 
   public LuceneQParser(
@@ -47,6 +50,10 @@ public class LuceneQParser extends QParser {
             getParam(QueryParsing.SPLIT_ON_WHITESPACE),
             SolrQueryParser.DEFAULT_SPLIT_ON_WHITESPACE));
     lparser.setAllowSubQueryParsing(true);
+    String fuzzyMaxExpansions = getParam(FUZZY_MAX_EXPANSIONS);
+    if (fuzzyMaxExpansions != null) {
+      lparser.setFuzzyMaxExpansions(Integer.parseInt(fuzzyMaxExpansions));
+    }
 
     return lparser.parse(qstr);
   }

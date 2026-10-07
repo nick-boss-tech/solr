@@ -140,6 +140,7 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
   int phraseSlop = 0; // default slop for phrase queries
   float fuzzyMinSim = FuzzyQuery.defaultMaxEdits;
   int fuzzyPrefixLength = FuzzyQuery.defaultPrefixLength;
+  int fuzzyMaxExpansions = FuzzyQuery.defaultMaxExpansions;
 
   boolean autoGeneratePhraseQueries = false;
   boolean allowSubQueryParsing = false;
@@ -349,6 +350,19 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
    */
   public void setFuzzyPrefixLength(int fuzzyPrefixLength) {
     this.fuzzyPrefixLength = fuzzyPrefixLength;
+  }
+
+  /** Get the maximum number of terms a fuzzy query expands to. */
+  public int getFuzzyMaxExpansions() {
+    return fuzzyMaxExpansions;
+  }
+
+  /**
+   * Set the maximum number of terms a fuzzy query expands to. Default is {@link
+   * FuzzyQuery#defaultMaxExpansions}.
+   */
+  public void setFuzzyMaxExpansions(int fuzzyMaxExpansions) {
+    this.fuzzyMaxExpansions = fuzzyMaxExpansions;
   }
 
   /**
@@ -665,7 +679,7 @@ public abstract class SolrQueryParserBase extends QueryBuilder {
     String text = term.text();
     int numEdits =
         FuzzyQuery.floatToEdits(minimumSimilarity, text.codePointCount(0, text.length()));
-    return new FuzzyQuery(term, numEdits, prefixLength);
+    return new FuzzyQuery(term, numEdits, prefixLength, getFuzzyMaxExpansions(), true);
   }
 
   /**
