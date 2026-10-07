@@ -31,6 +31,7 @@ import org.apache.solr.cloud.SolrCloudTestCase;
 import org.apache.solr.cloud.ZkConfigSetService;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
+import org.apache.solr.common.cloud.ZkStateReader;
 import org.apache.solr.core.backup.repository.LocalFileSystemRepository;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -64,12 +65,18 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
             + TestLocalFSCloudBackupRestore.copyPoisoned
             + "\" class=\"org.apache.solr.cloud.api.collections.TestLocalFSCloudBackupRestore$CopyPoisonedRepository\"> \n"
             + "    </repository>\n";
+    String propsPoisoned =
+        "    <repository  name=\""
+            + TestLocalFSCloudBackupRestore.propsPoisoned
+            + "\" class=\"org.apache.solr.cloud.api.collections.TestLocalFSCloudBackupRestore$PropsPoisonedRepository\"> \n"
+            + "    </repository>\n";
     solrXml =
         solrXml.replace(
             "</solr>",
             "<backup>"
                 + (random().nextBoolean() ? poisoned + local : local + poisoned)
                 + copyPoisoned
+                + propsPoisoned
                 + "</backup>"
                 + "</solr>");
 
@@ -161,6 +168,33 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
     assertFalse(
         "Failed restore left collection " + copyRestoreCollectionName + " behind",
         CollectionAdminRequest.listCollections(solrClient).contains(copyRestoreCollectionName));
+
+    // SOLR-12651: give the source collection a property so its backup carries
+    // collectionprops.json, then fail the restore while those properties are uploaded into
+    // the new collection. That phase runs after the target collection has been created, so
+    // the new collection must be cleaned up as well.
+    CollectionAdminRequest.setCollectionProperty(getCollectionName(), "testProp", "testValue")
+        .process(solrClient);
+    String propsBackupName = backupName + "props";
+    CollectionAdminRequest.backupCollection(getCollectionName(), propsBackupName)
+        .setLocation(backupLocation)
+        .setRepositoryName("local")
+        .process(solrClient);
+
+    final String propsRestoreCollectionName = getCollectionName() + "boo3";
+    CollectionAdminRequest.Restore propsRestore =
+        CollectionAdminRequest.restoreCollection(propsRestoreCollectionName, propsBackupName)
+            .setLocation(backupLocation)
+            .setRepositoryName(propsPoisoned);
+    try {
+      propsRestore.process(solrClient);
+      fail("This request should have failed since uploading collection properties is poisoned.");
+    } catch (SolrException ex) {
+      assertEquals(ErrorCode.SERVER_ERROR.code, ex.code());
+    }
+    assertFalse(
+        "Failed restore left collection " + propsRestoreCollectionName + " behind",
+        CollectionAdminRequest.listCollections(solrClient).contains(propsRestoreCollectionName));
   }
 
   private void errorBackup(CloudSolrClient solrClient) throws SolrServerException, IOException {
@@ -182,6 +216,8 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
   private static final String poisoned = "poisoned";
 
   private static final String copyPoisoned = "copypoisoned";
+
+  private static final String propsPoisoned = "propspoisoned";
 
   // let it go through collection handler, and break only when real thing is doing:
   // Restore/BackupCore
@@ -226,6 +262,26 @@ public class TestLocalFSCloudBackupRestore extends AbstractCloudBackupRestoreTes
     public void copyIndexFileTo(
         URI sourceDir, String sourceFileName, Directory dest, String destFileName) {
       throw new UnsupportedOperationException(copyPoisoned);
+    }
+  }
+
+  /**
+   * Reads backup metadata normally and fails only when the backed-up collection properties are
+   * read, which happens after the restore target collection has been created but before any shard
+   * is restored.
+   */
+  public static class PropsPoisonedRepository extends LocalFileSystemRepository {
+
+    public PropsPoisonedRepository() {
+      super();
+    }
+
+    @Override
+    public IndexInput openInput(URI dirPath, String fileName, IOContext ctx) throws IOException {
+      if (ZkStateReader.COLLECTION_PROPS_ZKNODE.equals(fileName)) {
+        throw new UnsupportedOperationException(propsPoisoned);
+      }
+      return super.openInput(dirPath, fileName, ctx);
     }
   }
 }
