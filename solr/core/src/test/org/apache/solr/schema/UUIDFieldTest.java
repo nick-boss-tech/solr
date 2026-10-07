@@ -65,6 +65,23 @@ public class UUIDFieldTest extends SolrTestCaseJ4 {
     assertTrue("Bad UUID check failed", ok);
   }
 
+  public void testNonHexCharactersAreRejected() {
+    UUIDField uuidfield = new UUIDField();
+    for (String bad :
+        new String[] {
+          "zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz",
+          "d574fb6a-5f79-4974-b01a-fcd598a19eg5",
+          "d574fb6a-5f79-4974-b01a-fcd598a19e f",
+          "４574fb6a-5f79-4974-b01a-fcd598a19ef5"
+        }) {
+      SolrException e = expectThrows(SolrException.class, () -> uuidfield.toInternal(bad));
+      assertEquals(bad, SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+    }
+    assertEquals(
+        "d574fb6a-5f79-4974-b01a-fcd598a19ef5",
+        uuidfield.toInternal("D574FB6A-5F79-4974-B01A-FCD598A19EF5"));
+  }
+
   public void testBadRequest() {
     try {
       new UUIDField()

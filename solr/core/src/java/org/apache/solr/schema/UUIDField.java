@@ -76,17 +76,32 @@ public class UUIDField extends StrField {
       return UUID.randomUUID().toString().toLowerCase(Locale.ROOT);
     } else {
       // we do some basic validation if 'val' looks like an UUID
-      if (val.length() != 36
-          || val.charAt(8) != DASH
-          || val.charAt(13) != DASH
-          || val.charAt(18) != DASH
-          || val.charAt(23) != DASH) {
+      if (!looksLikeUuid(val)) {
         throw new SolrException(
             SolrException.ErrorCode.BAD_REQUEST, "Invalid UUID String: '" + val + "'");
       }
 
       return val.toLowerCase(Locale.ROOT);
     }
+  }
+
+  /** 36 characters, dashes at the UUID positions and hexadecimal digits everywhere else. */
+  private static boolean looksLikeUuid(String val) {
+    if (val.length() != 36) {
+      return false;
+    }
+    for (int i = 0; i < 36; i++) {
+      final char c = val.charAt(i);
+      if (i == 8 || i == 13 || i == 18 || i == 23) {
+        if (c != DASH) {
+          return false;
+        }
+      } else if (Character.digit(c, 16) < 0 || c > 'f') {
+        // digit() also accepts non-ASCII digits such as full width forms
+        return false;
+      }
+    }
+    return true;
   }
 
   public String toInternal(UUID uuid) {
