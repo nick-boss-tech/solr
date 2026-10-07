@@ -311,16 +311,18 @@ public class ExactStatsCache extends StatsCache {
 
   /**
    * The key of a shard's stats: collection and shard name when the shard reports both, so shards of
-   * different collections that share a name stay apart; the shard name alone for shards that report
-   * no collection; otherwise the shard URL(s).
+   * different collections that share a name stay apart. A shard that reports no collection (an
+   * older version, during a rolling upgrade) is keyed by its shard URL instead of the bare shard
+   * name: the URL is unique per shard, so legacy shards of different collections whose shards share
+   * a name cannot merge into one key either.
    */
-  private static String perShardKey(NamedList<Object> response, String shardUrl) {
+  static String perShardKey(NamedList<Object> response, String shardUrl) {
     String shardName = (String) response.get(ShardParams.SHARD_NAME);
     if (shardName == null) {
       return shardUrl;
     }
     String collection = (String) response.get(SHARD_COLLECTION_KEY);
-    return collection == null ? shardName : collection + "!" + shardName;
+    return collection == null ? shardUrl : collection + "!" + shardName;
   }
 
   protected Map<String, CollectionStats> getPerShardColStats(ResponseBuilder rb, String shard) {
