@@ -271,17 +271,20 @@ public class TestChildDocTransformerHierarchy extends SolrTestCaseJ4 {
     updateJ(
         "{\"add\":{\"doc\":{\"id\": "
             + parentId
-            + ", \"id_i\": 1, \"type_s\": \"donut\", \"name_s\": {\"id\": "
+            + ", \"type_s\": \"donut\", \"name_s\": {\"id\": "
             + childId
             + ", \"name_s\": \"inner\"}}}}",
         null);
     updateJ(
         "{\"add\":{\"doc\":{\"id\": "
             + plainId
-            + ", \"id_i\": 2, \"type_s\": \"cake\", \"name_s\": \"plain\"}}}",
+            + ", \"type_s\": \"cake\", \"name_s\": \"plain\"}}}",
         null);
     assertU(commit());
 
+    // Roots only: the nested child carries no type_s, so it cannot stream as a
+    // root result. Sorting on id_i (a copyField of the sequential ids) streams
+    // the parent before the plain doc on every seed.
     try (SolrQueryRequest req =
         req(
             "q",
