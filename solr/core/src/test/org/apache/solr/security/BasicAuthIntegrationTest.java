@@ -244,6 +244,20 @@ public class BasicAuthIntegrationTest extends SolrCloudAuthTestCase {
     del.setCommitWithin(10);
     del.process(cluster.getSolrClient(), COLLECTION);
 
+    // SOLR-12161: documents spread over three shards are sent from client pool threads; an update
+    // without credentials must not borrow the PKI identity of the nodes running in this JVM
+    final UpdateRequest noCredentialsBatch = new UpdateRequest();
+    for (int i = 200; i < 230; i++) {
+      final SolrInputDocument batchDoc = new SolrInputDocument();
+      batchDoc.setField("id", String.valueOf(i));
+      noCredentialsBatch.add(batchDoc);
+    }
+    RemoteSolrException batchFailure =
+        expectThrows(
+            RemoteSolrException.class,
+            () -> noCredentialsBatch.process(cluster.getSolrClient(), COLLECTION));
+    assertEquals(401, batchFailure.code());
+
     // Test for SOLR-12514. Create a new jetty . This jetty does not have the collection.
     // Make a request to that jetty and it should fail
     JettySolrRunner aNewJetty = cluster.startJettySolrRunner();
