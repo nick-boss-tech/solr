@@ -28,6 +28,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Predicate;
+import org.apache.curator.framework.api.transaction.CuratorTransactionResult;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.SolrZkClient;
 import org.apache.solr.common.cloud.ZkNodeProps;
@@ -119,6 +120,10 @@ public class OverseerTaskQueue extends ZkDistributedQueue {
     if (setResult) {
       String responsePath = dir + "/" + RESPONSE_PREFIX + path.substring(path.lastIndexOf('-') + 1);
 
+      if (setResultAndRemoveInOneTransaction(path, responsePath, event.getBytes())) {
+        return;
+      }
+
       try {
         zookeeper.setData(responsePath, event.getBytes());
       } catch (KeeperException.NoNodeException ignored) {
@@ -133,6 +138,27 @@ public class OverseerTaskQueue extends ZkDistributedQueue {
     try {
       zookeeper.delete(path, -1);
     } catch (KeeperException.NoNodeException ignored) {
+    }
+  }
+
+  /**
+   * Writes the response and deletes the request node in a single ZooKeeper round trip.
+   *
+   * @return true if both operations were applied; false if the transaction did not apply (for
+   *     example the response node is already gone), so the caller must fall back to the separate
+   *     operations
+   */
+  private boolean setResultAndRemoveInOneTransaction(
+      String requestPath, String responsePath, byte[] data)
+      throws KeeperException, InterruptedException {
+    try {
+      List<CuratorTransactionResult> results =
+          zookeeper.multi(
+              op -> op.setData().withVersion(-1).forPath(responsePath, data),
+              op -> op.delete().withVersion(-1).forPath(requestPath));
+      return results.stream().allMatch(result -> result.getError() == 0);
+    } catch (KeeperException.NoNodeException e) {
+      return false;
     }
   }
 

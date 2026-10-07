@@ -39,6 +39,41 @@ public class OverseerTaskQueueTest extends DistributedQueueTest {
   }
 
   @Test
+  public void testRemoveSetsResponseAndDeletesRequest() throws Exception {
+    OverseerTaskQueue tq = makeDistributedQueue("/taskqueue/remove-sets-response");
+    String watchID = tq.createResponseNode();
+    tq.createRequestNode("request".getBytes(StandardCharsets.UTF_8), watchID);
+
+    List<OverseerTaskQueue.QueueEvent> events = tq.peekTopN(1, s -> false, 1000);
+    assertEquals(1, events.size());
+    OverseerTaskQueue.QueueEvent event = events.get(0);
+    event.setBytes("response".getBytes(StandardCharsets.UTF_8));
+    tq.remove(event, true);
+
+    assertFalse("request node must be gone", zkClient.exists(event.getId()));
+    assertEquals(
+        "response",
+        new String(zkClient.getData(watchID, null, null), StandardCharsets.UTF_8));
+  }
+
+  @Test
+  public void testRemoveWithMissingResponseNodeStillDeletesRequest() throws Exception {
+    OverseerTaskQueue tq = makeDistributedQueue("/taskqueue/remove-missing-response");
+    String watchID = tq.createResponseNode();
+    tq.createRequestNode("request".getBytes(StandardCharsets.UTF_8), watchID);
+
+    List<OverseerTaskQueue.QueueEvent> events = tq.peekTopN(1, s -> false, 1000);
+    assertEquals(1, events.size());
+    OverseerTaskQueue.QueueEvent event = events.get(0);
+    // the requestor went away: its ephemeral response node no longer exists
+    zkClient.delete(watchID, -1);
+    event.setBytes("response".getBytes(StandardCharsets.UTF_8));
+    tq.remove(event, true);
+
+    assertFalse("request node must be gone", zkClient.exists(event.getId()));
+  }
+
+  @Test
   public void testContainsTaskWithRequestId() throws Exception {
     String tqZNode = "/taskqueue/test";
     String requestId = "foo";
