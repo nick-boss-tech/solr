@@ -1,0 +1,8 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+title: SolrJ ContentWriterUpdateRequest.setCommitWithin now sends the commitWithin parameter; it was silently ignored.
+type: fixed # added, changed, fixed, deprecated, removed, dependency_update, security, other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-3498
+    url: https://issues.apache.org/jira/browse/SOLR-3498
