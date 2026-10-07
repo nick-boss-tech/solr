@@ -71,8 +71,9 @@ class ChildDocTransformer extends DocTransformer {
   private final boolean isNestedSchema;
   private final SolrReturnFields childReturnFields;
   private final String[] extraRequestedFields;
-  // Nest-path field names added to parent docs during transform(); reported via
+  // Nest-path field names added to the document currently being transformed; reported via
   // getExtraResponseFields() so they survive ReturnFields.wantsField() filtering.
+  // Cleared at the start of every transform() call so the names stay scoped to one document.
   private final Set<String> extraResponseFields = new HashSet<>();
 
   ChildDocTransformer(
@@ -143,6 +144,13 @@ class ChildDocTransformer extends DocTransformer {
   @Override
   public void transform(SolrDocument rootDoc, int rootDocId, DocIterationInfo docInfo) {
     // note: this algorithm works if both if we have have _nest_path_  and also if we don't!
+
+    // The extra response fields are scoped to the document being transformed:
+    // ReturnFields.wantsField is consulted while this document is written, before the
+    // next document is transformed, so the set must not accumulate fields attached to
+    // other documents of the same response. Otherwise an ordinary field on another
+    // document that merely shares a nest-path name would pass the fl projection.
+    extraResponseFields.clear();
 
     try {
       // lookup what the *previous* rootDocId is, and figure which segment this is
