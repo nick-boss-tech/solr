@@ -212,6 +212,12 @@ public abstract class SolrParams
     return val == null || val.isEmpty() ? null : val;
   }
 
+  /** The field param value for a numeric getter; a blank value counts as unset. */
+  private String getFieldNumeric(String field, String param) {
+    String val = getFieldParam(field, param);
+    return val == null || val.isEmpty() ? null : val;
+  }
+
   /**
    * Returns the Integer value of the param, or null if not set Use this method only when you want
    * to be explicit about absence of a value (<code>null</code>) vs the default value for int - zero
@@ -279,7 +285,7 @@ public abstract class SolrParams
    * @see #getFieldInt(String, String, int)
    */
   public Integer getFieldInt(String field, String param) {
-    String val = getFieldParam(field, param);
+    String val = getFieldNumeric(field, param);
     try {
       return val == null ? null : Integer.valueOf(val);
     } catch (Exception ex) {
@@ -289,7 +295,7 @@ public abstract class SolrParams
 
   /** Returns the int value of the field param, or the value for param, or def if neither is set. */
   public int getFieldInt(String field, String param, int def) {
-    String val = getFieldParam(field, param);
+    String val = getFieldNumeric(field, param);
     try {
       return val == null ? def : Integer.parseInt(val);
     } catch (Exception ex) {
@@ -356,7 +362,7 @@ public abstract class SolrParams
    * @see #getFieldFloat(String, String, float)
    */
   public Float getFieldFloat(String field, String param) {
-    String val = getFieldParam(field, param);
+    String val = getFieldNumeric(field, param);
     try {
       return val == null ? null : Float.valueOf(val);
     } catch (Exception ex) {
@@ -368,7 +374,7 @@ public abstract class SolrParams
    * Returns the float value of the field param, or the value for param, or def if neither is set.
    */
   public float getFieldFloat(String field, String param, float def) {
-    String val = getFieldParam(field, param);
+    String val = getFieldNumeric(field, param);
     try {
       return val == null ? def : Float.parseFloat(val);
     } catch (Exception ex) {
@@ -383,7 +389,7 @@ public abstract class SolrParams
    * @see #getDouble(String, double)
    */
   public Double getFieldDouble(String field, String param) {
-    String val = getFieldParam(field, param);
+    String val = getFieldNumeric(field, param);
     try {
       return val == null ? null : Double.valueOf(val);
     } catch (Exception ex) {
@@ -395,7 +401,7 @@ public abstract class SolrParams
    * Returns the float value of the field param, or the value for param, or def if neither is set.
    */
   public double getFieldDouble(String field, String param, double def) {
-    String val = getFieldParam(field, param);
+    String val = getFieldNumeric(field, param);
     try {
       return val == null ? def : Double.parseDouble(val);
     } catch (Exception ex) {

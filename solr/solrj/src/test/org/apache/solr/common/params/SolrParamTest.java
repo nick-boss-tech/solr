@@ -84,6 +84,32 @@ public class SolrParamTest extends SolrTestCase {
         expectThrows(SolrException.class, () -> p.getInt("bad", 1)).code());
   }
 
+  public void testBlankFieldNumericParamIsUnset() {
+    final SolrParams p =
+        params(
+            "f.title.mincount", "",
+            "f.title.ratio", "",
+            "f.title.score", "",
+            "f.title.limit", "4",
+            "f.title.bad", "x",
+            "f.title.start", "",
+            "start", "3");
+    assertNull(p.getFieldInt("title", "mincount"));
+    assertEquals(7, p.getFieldInt("title", "mincount", 7));
+    assertNull(p.getFieldFloat("title", "ratio"));
+    assertEquals(1.5f, p.getFieldFloat("title", "ratio", 1.5f), 0f);
+    assertNull(p.getFieldDouble("title", "score"));
+    assertEquals(2.5d, p.getFieldDouble("title", "score", 2.5d), 0d);
+    // a blank field value counts as unset; it does not fall back to the plain param's value
+    assertNull(p.getFieldInt("title", "start"));
+    assertEquals(9, p.getFieldInt("title", "start", 9));
+    // a non-blank field value still parses, and a non-numeric one is still a client error
+    assertEquals(Integer.valueOf(4), p.getFieldInt("title", "limit"));
+    assertEquals(
+        SolrException.ErrorCode.BAD_REQUEST.code,
+        expectThrows(SolrException.class, () -> p.getFieldInt("title", "bad", 1)).code());
+  }
+
   public void testTrivialEquals() {
     assertEquals(params(), params());
     assertFalse(params().equals(null));
