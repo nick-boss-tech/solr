@@ -16,6 +16,12 @@
 */
 
 /* SOLR-14120: Providing a manual definition for the methods 'includes' and 'startsWith' to support Internet Explorer 11. */
+/* SOLR-9818: only requests that do not change anything on the server may be replayed after a lost connection. */
+function isRetryableRequest(config) {
+  var method = config && config.method ? String(config.method).toUpperCase() : "GET";
+  return method === "GET" || method === "HEAD";
+}
+
 if (!String.prototype.includes) {
   String.prototype.includes = function(search, start) { 'use strict';
   if (search instanceof RegExp) {
@@ -433,9 +439,17 @@ solrAdminApp.config([
       $rootScope.$broadcast('connectionStatusActive');
       if (!$rootScope.retryCount) $rootScope.retryCount=0;
       $rootScope.retryCount ++;
-      var $http = $injector.get('$http');
-      var result = $http(rejection.config);
-      return result;
+      if (isRetryableRequest(rejection.config)) {
+        // a read can be replayed safely, but not in a tight loop while the server is away
+        var $http = $injector.get('$http');
+        return $timeout(function() { return $http(rejection.config); }, 1000);
+      }
+      // SOLR-9818: a command (collection reload, add replica, ...) may have reached the server
+      // before the connection dropped, so it is never replayed; tell the user instead
+      $rootScope.exceptions[rejection.config.url] = {
+        msg: "Connection to Solr lost. The request was not repeated, and it may or may not have been processed; check the cluster state before trying again."
+      };
+      return $q.reject(rejection);
     } else if (rejection.status === 401 && !isHandledBySchemaDesigner) {
       // Authentication redirect
       var headers = rejection.headers();
