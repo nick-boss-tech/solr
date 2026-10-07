@@ -72,6 +72,16 @@ public class AdminUiLoggingScreenTest extends AdminUiTestBase {
           waitFor(By.id("viewer"));
           return driver.getPageSource().contains(probeMessage);
         });
+
+    // SOLR-9831: the level cell showed the row's internal "showTrace" flag next to the level
+    // ("WARN false")
+    WebElement levelCell =
+        driver.findElement(
+            By.xpath(
+                "//tbody[.//td[contains(@class,'message')][contains(.,'"
+                    + probeMessage
+                    + "')]]/tr[1]/td[contains(@class,'level')]"));
+    assertEquals("WARN", levelCell.getText().trim());
     assertNoSevereConsoleErrors();
   }
 
