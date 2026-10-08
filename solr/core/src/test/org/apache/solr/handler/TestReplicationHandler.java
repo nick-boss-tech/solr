@@ -226,11 +226,12 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
         buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
     assertEquals(3, numFound(rQuery(3, "*:*", followerClient)));
 
-    final Path oldIndexDir;
+    final String oldIndexDir;
     try (SolrCore core = followerCore()) {
-      oldIndexDir = Path.of(core.getIndexDir());
+      oldIndexDir = core.getIndexDir();
     }
-    assertTrue(Files.isDirectory(oldIndexDir));
+    final Path oldIndexDirPath = Path.of(oldIndexDir);
+    assertTrue(Files.isDirectory(oldIndexDirPath));
 
     // Diverge the follower so its generation passes the leader's, then add a doc
     // to the leader. The next fetch must be a full copy into a new directory.
@@ -249,11 +250,24 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
     try (SolrCore core = followerCore()) {
       assertFalse(
           "full copy must switch the follower to a new index directory",
-          oldIndexDir.toString().equals(core.getIndexDir()));
+          oldIndexDirPath.equals(Path.of(core.getIndexDir())));
     }
-    assertFalse(
+    // The full-copy cleanup runs on the fetcher thread after the new index
+    // becomes active, so poll for the old directory to disappear before
+    // asserting on it (same discipline as
+    // testFullCopyKeepsSnapshotFilesInOldIndexDir).
+    boolean removed = false;
+    long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(TIMEOUT);
+    while (System.nanoTime() < deadline) {
+      if (!Files.exists(oldIndexDirPath)) {
+        removed = true;
+        break;
+      }
+      Thread.sleep(100);
+    }
+    assertTrue(
         "old index directory should be removed when no snapshot references it: " + oldIndexDir,
-        Files.exists(oldIndexDir));
+        removed);
   }
 
   /**
@@ -269,15 +283,21 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
         buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
     assertEquals(3, numFound(rQuery(3, "*:*", followerClient)));
 
+    // Keep the raw getIndexDir() string for the snapshot calls below: the
+    // snapshot metadata stores the string as given and looks snapshots up by
+    // string equality, so a Path-normalised form (no trailing slash, platform
+    // separators) would not match what was stored.
+    final String oldIndexDirName;
     final Path oldIndexDir;
     final Set<String> snapshotFiles = new HashSet<>();
     try (SolrCore core = followerCore()) {
-      oldIndexDir = Path.of(core.getIndexDir());
+      oldIndexDirName = core.getIndexDir();
+      oldIndexDir = Path.of(oldIndexDirName);
       IndexCommit commit = core.getDeletionPolicy().getAndSaveLatestCommit();
       try {
         snapshotFiles.addAll(commit.getFileNames());
         core.getSnapshotMetaDataManager()
-            .snapshot("snap15003", core.getIndexDir(), commit.getGeneration());
+            .snapshot("snap15003", oldIndexDirName, commit.getGeneration());
       } finally {
         core.getDeletionPolicy().releaseCommitPoint(commit);
       }
@@ -337,8 +357,7 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
 
     try (SolrCore core = followerCore()) {
       assertEquals(
-          1,
-          core.getSnapshotMetaDataManager().listSnapshotsInIndexDir(oldIndexDir.toString()).size());
+          1, core.getSnapshotMetaDataManager().listSnapshotsInIndexDir(oldIndexDirName).size());
       core.deleteNamedSnapshot("snap15003");
       assertTrue(core.getSnapshotMetaDataManager().listSnapshots().isEmpty());
     }
@@ -346,6 +365,97 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
     // so its physical removal completes when the core closes; the fetch-path
     // removal with no snapshot is covered by
     // testFullCopyRemovesOldIndexDirWhenNoSnapshot.
+  }
+
+  /**
+   * SOLR-15003: when a full copy also downloads a changed configuration file, the fetcher reloads
+   * the follower core before the cleanup runs. The cleanup must run on the reloaded core: on the
+   * fetcher's stale pre-reload reference it would see the old directory as still current and skip,
+   * leaking the old index directory.
+   */
+  @Test
+  public void testFullCopyWithReloadRemovesOldIndexDir() throws Exception {
+    clearIndexWithReplication();
+    for (int i = 0; i < 3; i++) index(leaderClient, "id", i, "name", "name = " + i);
+    leaderClient.commit();
+    invokeReplicationCommand(
+        buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
+    assertEquals(3, numFound(rQuery(3, "*:*", followerClient)));
+
+    // Drive the rest of the test with explicit fetches so the schema change
+    // and the full copy land in the same fetch; the follower's 1s poller
+    // could otherwise split them into two fetches and reload without a full
+    // copy (or copy without a reload).
+    invokeReplicationCommand(
+        buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "disablepoll");
+
+    // Hold a reference to the follower core across the fetch below. A core
+    // with outstanding references is not closed when the reload swaps it out,
+    // so its main searcher (and with it the old index directory it reports)
+    // stays alive until the fetch is done. That is the state a follower
+    // under query load is in when a fetch reloads its core, and it is the
+    // state in which running the cleanup on the fetcher's stale core
+    // reference goes wrong: the stale core still reports the old directory
+    // as its current one, so the cleanup treats it as current and skips it.
+    final SolrCore heldCore = followerCore();
+    final String oldIndexDir = heldCore.getIndexDir();
+    final Path oldIndexDirPath = Path.of(oldIndexDir);
+    try {
+      assertTrue(Files.isDirectory(oldIndexDirPath));
+      final Date followerStartTime = watchCoreStartAt(followerJetty, null);
+
+      // Diverge the follower so its generation passes the leader's, then add
+      // a doc to the leader. The next fetch must be a full copy into a new
+      // directory (same setup as
+      // testFullCopyRemovesOldIndexDirWhenNoSnapshot).
+      index(followerClient, "id", 900, "name", "follower only");
+      followerClient.commit(true, true);
+      index(followerClient, "id", 901, "name", "follower only 2");
+      followerClient.commit(true, true);
+
+      // Change the leader's schema; the fetch downloads the changed conf
+      // file and the fetcher reloads the follower core as part of the same
+      // fetch.
+      leader.copyConfigFile(CONF_DIR + "schema-replication2.xml", "schema.xml");
+      index(leaderClient, "id", 3, "name", "name = " + 3);
+      leaderClient.commit();
+
+      invokeReplicationCommand(
+          buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
+      assertEquals(4, numFound(rQuery(4, "*:*", followerClient)));
+      assertEquals(0, numFound(rQuery(0, "id:900", followerClient)));
+
+      // The changed conf file must have reloaded the follower core; this
+      // call fails the test if the core start time never advances.
+      watchCoreStartAt(followerJetty, followerStartTime);
+      try (SolrCore core = followerCore()) {
+        assertFalse(
+            "full copy must switch the follower to a new index directory",
+            oldIndexDirPath.equals(Path.of(core.getIndexDir())));
+      }
+    } finally {
+      // Release the held core so it can close. DirectoryFactory.remove only
+      // marks the old directory delete-on-close; the physical removal
+      // completes once the old core has drained and closed, so it can only
+      // be observed after this reference is gone.
+      heldCore.close();
+    }
+
+    // Poll for the old directory to disappear (same discipline as
+    // testFullCopyKeepsSnapshotFilesInOldIndexDir).
+    boolean removed = false;
+    long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(TIMEOUT);
+    while (System.nanoTime() < deadline) {
+      if (!Files.exists(oldIndexDirPath)) {
+        removed = true;
+        break;
+      }
+      Thread.sleep(100);
+    }
+    assertTrue(
+        "old index directory should be removed after a full copy that reloads the core: "
+            + oldIndexDir,
+        removed);
   }
 
   /**
