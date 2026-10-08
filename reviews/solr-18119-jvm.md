@@ -88,3 +88,17 @@ Verified by reading both sides.
 - Whether the generated docs contain absolute `file:` links (finding 9).
 - build-infra's dependency list (architecture note).
 - Upstream drift: upstream/main moved to 4ae645ef0e1 during the review, 3 commits ahead of the branch. The branch was not rebased. Re-check the port's base before the PR.
+
+## Follow-up: tests added to solr-18119-jvm
+
+The owner authorized in-tree tests on the code branch. They are commit `2462288ea18` on `solr-18119-jvm`, on top of the reviewed head `525ea0c6ae1`. The code under review is unchanged.
+
+- `ChangesToHtmlTest`: release/section/item rendering, JIRA and PR references, authors (including GitHub handles and a second author), HTML escaping, linkified plain text, collapsed older releases, collapse-regex escaping, the empty-changelog `None` case, preamble links, and CRLF/LF equivalence.
+- `CheckJavadocLinksTest`: accepted links, missing files, comment and script skipping, unquoted and single-quoted hrefs, query stripping, mismatched end tags, duplicate anchors (and the serialized-form exemption), invalid characters, skipped files, external and mailto rules, and the `Changes.html` exemption.
+- `PythonCompatTest`: whitespace, `re.escape`, percent-encoding, entity decoding, `urlsplit`, `urljoin` and `normalizeUrl` cases.
+- Two `@Ignore`d tests record findings 2 and 3 as the expected behavior. They fail until those bugs are fixed.
+- `build-infra/build.gradle` gains `testImplementation libs.junit.junit`, which reuses the catalog entry and adds no version.
+
+**Not run.** Nothing was compiled or executed. The expected values were traced by hand through the Java code and the Python semantics it mirrors. Still outstanding: `gradlew tidy`, `updateLicenses resolveAndLockAll --write-locks` for the new test dependency, and the build-infra test run. The owner will run these on Linux.
+
+Finding 1 is partly addressed: the port now has in-tree tests, but they have not been executed. The other blockers (2, 3, 5, 6) are unchanged.
