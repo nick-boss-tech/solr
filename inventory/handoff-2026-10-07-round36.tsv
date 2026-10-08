@@ -1,0 +1,79 @@
+group	ticket	branch	head	note
+A	11479	solr-11479-submit	e6fdc9ed5d50e2cb0c6cccab2e27b90984cf27ef	
+A	11939	solr-11939-submit	d4cff5e76430e6deb88115d6675db537b630948e	
+A	12347	solr-12347-submit	b77acba2ad603433057e618e2fddbcb3412d736c	
+A	17055	solr-17055-submit	f0c401a290b291998e7398d39c5743e5ae7eab08	
+A	17356	solr-17356-submit	ea7fc15cade49517ab07753e65cb3862e977b869	
+A	4754	solr-4754-submit	d2e9038881f61f3fa2cc29f10279f3c5373e48b4	
+A	6973	solr-6973-submit	4c6092614e5a8985d19813007dfefcac2e80fbcc	
+A	11678	solr-11678-submit	55d8cd189d15367b6896f0ea07570d3395ce404b	
+A	7323	solr-7323-submit	fb034dc5f8771a86b901349a3201376c92a0c40e	
+A	8088	solr-8088-submit	2398c9bea08528c4ccccf255d3bd1205ff9ee79a	
+A	17987	solr-17987-submit	e8c22910f50747259e1075001bae5309163de6ab	
+A	11391	solr-11391-submit	825d7f81d12b0ecf500a97eaa857a2bd69032d38	
+A	10131	solr-10131-submit	b93cf24a9d993a9294918d6270db833a19fa7a4b	
+A	10641	solr-10641-submit	4ab4bd2040f3cadca839717842a85ea09f32dcc3	Hypothetical-reproduction handoff doc; premise unverified.
+A	15712	solr-15712-submit	555f9cab6b72d4c3fd8ac5f18bc5a3447b3c6107	
+A	16570	solr-16570-submit	5676646936d551e1309d9110ce0922d801f748a4	
+A	16885	solr-16885-submit	2b9b80119a92d787970b02b1472bfea6d2fa3613	
+A	8628	solr-8628-submit	ce8211e05e062444e7afc1c5ea33fb6eff581d8f	
+A	12161	solr-12161-submit	a40db4fdb5c479b28db4384537baf8a8961beaa5	
+A	12864	solr-12864-submit	8c5455d3d2426ec03fbc7e9c877e3276edcc839e	
+A	10667	solr-10667-submit	5cee0d5bcf17038248fd01debd5dac804a2da217	
+A	10694	solr-10694-submit	093d90c62dedd8701276dded16e740d451d3a6df	
+A	11356	solr-11356-submit	8474e5a3a26d8aacd25d9fc9838c627bc6c5b14f	
+A	9759	solr-9759-submit	31e702622dae43a36ed8d7ec8477c1547e5ebc42	
+A	9818	solr-9818-submit	63f2d7ce9267b37a131ade651654101b63f132f3	
+A	9831	solr-9831-submit	f269a70e84f0f9f8c86303959fe595e969e93710	
+A	3498	solr-3498-submit	812598302dee8e3c7679cc3f9301cdcbb17f3ad2	
+A	4502	solr-4502-submit	4491f5162c1d37fc48f1be36a72699acd48c8786	
+A	8051	solr-8051-submit	44588ce6719e1cedc126a55ccf22044cbe1f4973	
+A	9595	solr-9595-submit	7ff1350ab7b6c9985647b50e69bf12c56e6114b6	
+A	10234	solr-10234-submit	16825538a7662e5691bbc5fa4f65f2a455d9f5d4	
+A	10364	solr-10364-submit	502bdbf033faa648792372960d01c54728349ee9	
+A	10403	solr-10403-submit	1e285cd730c265947adfe9b78aad104fe81443d6	
+A	16322	solr-16322-submit	3f7c6268c5d6541d8cd1fd099ade1efe7d75194f	Tip moved once already (2026-10-07); verify the head before reviewing.
+B	18341	solr-18341-submit	458b098719d7ac988c47942eee05dbc2a83e7707	Bulk verdict Needs work. Carries a standing direction call recorded as the owner's in the design record; pose it, do not re-decide it.
+B	1877	solr-1877-submit	0d5916186797135ed0dee5f141eb1e70de080ea0	Bulk verdict Needs work.
+B	4367	solr-4367-submit	0af6087f43fa2b03a9cedb259c1b0dd62039963c	Bulk verdict Needs work. Pairs-round context: composes with SOLR-4399 and SOLR-3722 material.
+B	4399	solr-4399-submit	de6cc6b27edded2836898f6fb91b39cd11344f6a	Bulk verdict Needs work. Pairs-round context: see SOLR-4367.
+B	4424	solr-4424-submit	2e947b7f622c6c530350ecef3679b01e1b004cde	Bulk verdict Needs work. Composes with SOLR-3722; an earlier GitHub failure on this branch was classified a flake.
+B	6193	solr-6193-submit	ec94bf50c80ce75b44eaf78452e60e43972bc284	Bulk verdict Needs work.
+B	8536	solr-8536-submit	28552ddc26eb30df5c9bfcd612bbac3698372442	Bulk verdict Needs work.
+B	8767	solr-8767-submit	3b5f2d2357325ba993fe1d2716fafee55741fc1b	Bulk verdict Needs work. Carries a standing direction call recorded as the owner's; pose it, do not re-decide it.
+B	8954	solr-8954-submit	1d981abe7000bacf7cc3473059f8bf693a9c7ce9	Bulk verdict Needs work.
+B	12608	solr-12608-submit	d1dd8a1f9f0aa17c6e34f8c5e40cb9768a83aea2	Bulk verdict Not ready. Caution: the bulk review's snapshot SHA (d1dd8a1f0aa1) and the fork tip (d1dd8a1f9f0a) are a near miss; confirm the tree at the listed head is the intended one before reviewing.
+B	15478	solr-15478-submit	0478bdf0ac5cd100d5020451a6732ca5cbaa1a52	Bulk verdict Not ready. Priority: this branch's fix also closes the open P1 on the already-gated SOLR-15674 branch; the two ship together or 15674's P1 stays open.
+B	17612	solr-17612-submit	cd0426e40a72bd0649da40e26a4e89628026e06b	Bulk verdict Not ready.
+B	9060	solr-9060-submit	704ca28bf79db94d958471cbe1137fd9e10dd9fd	Bulk verdict Not ready.
+B	17393	solr-17393-submit	dd6c82924fff6b8f7cedaf020494c2f06ab502a2	Bulk verdict Not ready. SOLR-9637 is stacked on this branch; the submission strategy is an owner call. Review on the merits; do not restack.
+B	16155	solr-16155-submit	0881de1ed68b847c781abd7ccb56196cdbf15ecd	Bulk verdict Not ready. Standing owner question (no PR vs upstream #1151); review on the merits.
+B	9342	solr-9342-submit	833e11192a7ff918f7e401bde920cf63c89df063	Bulk verdict Not ready. Script-only branch (developer tooling); dispositioned as script-only on the Linux side in an earlier round.
+B	11288	solr-11288-submit	cd094c3c623fadfb08afef173312d394e4407ffb	Bulk verdict Nearly.
+B	12094	solr-12094-submit	8d957a73f4fb1e8e6e72e53df4faa14266702e53	Bulk verdict Nearly.
+B	12991	solr-12991-submit	1a86966179e1817e4572fb0008a3b82a7c14184f	Bulk verdict Nearly.
+B	14919	solr-14919-submit	84e7bcaeb57d88e1d9d519389d96ff14a66acb6e	Bulk verdict Nearly.
+B	14967	solr-14967-submit	ee76643f5b3fa1809d204b6c4953aa9d54120589	Bulk verdict Nearly.
+B	16437	solr-16437-submit	673ae584de03f774be91779c7ffb852359863465	Bulk verdict Nearly.
+B	17976	solr-17976-submit	56ea43c448ed4fea75131d34c390d11233bab5cb	Bulk verdict Nearly.
+B	8275	solr-8275-submit	e52e10fa50a374196d2c6adea26e5e55e37cdf57	Bulk verdict Nearly. Wording-level branch per the Linux-side record.
+B	3657	solr-3657-submit	14edaca577c0c1c38dc50b1ffa632c31fd1613de	Bulk verdict Nearly. Dispositioned on the Linux side 2026-10-07 at this head (test-only commit); delta aspect covered in group C notes of the handoff document.
+C	10322	solr-10322-submit	80ce9d7a3c8a61dfb5c5169a371890f11d9e17ff	Dispositioned in the test-categories round at this head. Bulk review (older snapshot) said Needs work.
+C	12245	solr-12245-submit	4a93167458b51d75d4343cc9b97e2ad4bdfb4923	Round 33 verification disposition at this head; bulk review is against the same head.
+C	15863	solr-15863-submit	4bda993525ed0e8b54fcc0535779c4bcfe0945c6	Test-categories round at this head; honestly labeled a pin on the Linux side. Bulk review was against an older snapshot.
+C	6045	solr-6045-submit	dcdef50d70061c28ffc618ea8c4d64a1caf4227d	Round 33 combined fix proposal exists on the Linux side and is an owner call (sequencing vs SOLR-12703). Review the branch; do not implement that proposal.
+C	7504	solr-7504-submit	e3fdc8eb58f2f80604bbaafdfdec556c402fca59	Owner-locked design (BAD_REQUEST rejection) verified in round 33 at this head. Do not reverse the locked choice.
+C	12092	solr-12092-submit	ca9573dabd385a38711bd60633973ae46b7a552e	Re-dispositioned in round 33 at this head.
+C	14913	solr-14913-submit	b80221f46d3ce5889c510b97a97d8748a2ea4c7c	Round 33 disposition at this head; the MatchNoDocs behavior choice awaits owner ratification.
+C	15003	solr-15003-submit	afeab98ea82cbb99f2cb92e4a8e194f5ab2ed091	Fixed after a CI root-cause analysis at this head (regression in the branch, fixed and re-gated).
+C	2309	solr-2309-submit	06f5a1c4a87eef0fed17435e8d30bbc422079119	Round 32 eDisMax disposition at this head.
+C	2988	solr-2988-submit	d2d144dfd9f4cd8208c856a7b955e6eb997da146	Round 32 eDisMax disposition at this head.
+C	3243	solr-3243-submit	1db99c13662d8f827511a5d3a51763d7e1e2ee4c	Round 32 eDisMax disposition at this head.
+C	3729	solr-3729-submit	26258a2cbab0c750a0a94faedbaa76401880aaf3	Round 32 eDisMax disposition at this head. Shares match-all grammar with SOLR-3962.
+C	3962	solr-3962-submit	e7d5f350503516dc5a01211cb28917835af64a0b	Round 32 eDisMax disposition at this head. Shares match-all grammar with SOLR-3729.
+C	4362	solr-4362-submit	e96a057439c879427bf07195fe6e18bed08a2c42	Round 32 eDisMax disposition at this head. The SOLR-6320 demotion rule is an owner call at PR time.
+C	5065	solr-5065-submit	c0a0ce1b8d9b80abf2175f7e8cfa613d80a85d4f	Round 33 disposition at this head.
+C	6009	solr-6009-submit	a41bb034a1f47c08a8f8ea6ebbe46e6d443cbb6f	Round 32 eDisMax disposition at this head.
+C	6320	solr-6320-submit	2789d80201050a740a00803384b97f7203067cb1	Round 32 eDisMax disposition at this head.
+C	8939	solr-8939-submit	a855a2d8965c8eae5df171ad9b5148b7e95f7425	Test-categories round at this head.
+C	9148	solr-9148-submit	30f0d7a42d501316bd9d5336fe564608e78bfbba	Test-categories round at this head.
