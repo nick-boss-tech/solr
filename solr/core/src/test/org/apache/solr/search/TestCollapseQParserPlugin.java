@@ -1047,7 +1047,7 @@ public class TestCollapseQParserPlugin extends SolrTestCaseJ4 {
               "fq", "{!collapse field=" + f + " max=test_i" + hint + "}",
               "expand", "true",
               "sort", "id asc"),
-          "*[count(//doc)=2]",
+          "*[count(/response/result/doc)=2]",
           "//lst[@name='expanded']/result[@name='a']/doc/str[@name='id'][.='1']");
     }
   }
