@@ -16,9 +16,12 @@
  */
 package org.apache.solr.security;
 
+import java.net.HttpURLConnection;
+import java.net.URI;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.solr.client.solrj.request.V2Request;
 import org.apache.solr.cloud.SolrCloudTestCase;
+import org.apache.solr.common.SolrException;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -55,5 +58,29 @@ public class JaxRsSingleAuthorizationTest extends SolrCloudTestCase {
 
     assertEquals(
         "a JAX-RS v2 API should be authorized exactly once per request", 1, authorizations.get());
+  }
+
+  @Test
+  public void testJaxRsApiDenialStillHolds() throws Exception {
+    final AtomicInteger authorizations = new AtomicInteger();
+    MockAuthorizationPlugin.predicate =
+        context -> {
+          if (context.getResource().endsWith("/cluster/nodes")) {
+            authorizations.incrementAndGet();
+            throw new SolrException(SolrException.ErrorCode.FORBIDDEN, "denied by test plugin");
+          }
+        };
+
+    var jetty = cluster.getJettySolrRunner(0);
+    HttpURLConnection conn =
+        (HttpURLConnection)
+            URI.create(jetty.getBaseURLV2() + "/cluster/nodes").toURL().openConnection();
+
+    assertEquals(
+        "a denied JAX-RS v2 API request must still be rejected", 403, conn.getResponseCode());
+    assertEquals(
+        "a denied JAX-RS v2 API should be authorized exactly once per request",
+        1,
+        authorizations.get());
   }
 }
