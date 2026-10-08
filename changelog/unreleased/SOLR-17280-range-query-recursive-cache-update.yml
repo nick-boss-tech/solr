@@ -1,6 +1,7 @@
 title: >
   SolrRangeQuery no longer puts its DocSet into the filterCache from inside another cache computation, which could
-  fail with "IllegalStateException: Recursive update".
+  fail with "IllegalStateException: Recursive update". A range query nested inside another filter is no longer
+  cached on its own as a side effect; a range query used directly as a filter is still cached by the searcher.
 type: fixed
 authors:
   - name: Nick Shanin
