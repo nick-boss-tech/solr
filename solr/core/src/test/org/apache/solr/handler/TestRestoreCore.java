@@ -173,13 +173,30 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
   @Test
   public void testRestoreClearsUpdateLog() throws Exception {
     // this test needs an update log (which in turn needs a schema with _version_) and RTG
+    // force an FS directory factory: the default mock factory is ephemeral, so an index
+    // would not survive the leader restart at the end of this test
+    useFactory(null);
     leaderClient.close();
     leaderJetty.stop();
     leader.copyConfigFile(
         CONF_DIR.resolve("solrconfig-leader-ulog.xml").toString(), "solrconfig.xml");
     leader.copyConfigFile(CONF_DIR.resolve("schema.xml").toString(), "schema.xml");
-    // schema.xml references this file for its enum field type; the core cannot load without it
-    leader.copyConfigFile(CONF_DIR.resolve("enumsConfig.xml").toString(), "enumsConfig.xml");
+    // schema.xml loads these files from the conf dir (the enum and currency field types'
+    // configs and the analyzer resources); the core cannot load unless every one of them is
+    // copied alongside the schema
+    for (String resource :
+        new String[] {
+          "enumsConfig.xml",
+          "currency.xml",
+          "open-exchange-rates.json",
+          "protwords.txt",
+          "stopwords.txt",
+          "synonyms.txt",
+          "old_synonyms.txt",
+          "mapping-ISOLatin1Accent.txt"
+        }) {
+      leader.copyConfigFile(CONF_DIR.resolve(resource).toString(), resource);
+    }
     leaderJetty = createAndStartJetty(leader);
     leaderClient = leaderJetty.getSolrClient();
 
@@ -187,8 +204,12 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
     final String params = "&name=" + snapshotName;
     final String baseUrl = leaderJetty.getBaseUrl().toString();
 
+    // schema.xml copies id into long and int fields, so the ids must parse as numbers
+    final String beforeId = "1"; // indexed and committed before the backup
+    final String afterId = "2"; // indexed after the backup, never committed
+
     final SolrInputDocument before = new SolrInputDocument();
-    before.addField("id", "before-backup");
+    before.addField("id", beforeId);
     leaderClient.add(DEFAULT_TEST_CORENAME, before);
     leaderClient.commit(DEFAULT_TEST_CORENAME);
 
@@ -200,11 +221,11 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
 
     // added after the backup and deliberately not committed: it lives only in the update log
     final SolrInputDocument after = new SolrInputDocument();
-    after.addField("id", "after-backup");
+    after.addField("id", afterId);
     leaderClient.add(DEFAULT_TEST_CORENAME, after);
     assertNotNull(
         "doc should be visible to realtime-get before the restore",
-        leaderClient.getById(DEFAULT_TEST_CORENAME, "after-backup"));
+        leaderClient.getById(DEFAULT_TEST_CORENAME, afterId));
 
     TestReplicationHandlerBackup.runBackupCommand(
         leaderJetty, ReplicationHandler.CMD_RESTORE, params);
@@ -214,10 +235,10 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
 
     assertNotNull(
         "doc from the backup should still be there",
-        leaderClient.getById(DEFAULT_TEST_CORENAME, "before-backup"));
+        leaderClient.getById(DEFAULT_TEST_CORENAME, beforeId));
     assertNull(
         "update log should have been cleared by the restore",
-        leaderClient.getById(DEFAULT_TEST_CORENAME, "after-backup"));
+        leaderClient.getById(DEFAULT_TEST_CORENAME, afterId));
 
     // a restart must not replay the discarded log onto the restored index either
     leaderJetty.stop();
@@ -225,10 +246,10 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
     leaderClient = leaderJetty.getSolrClient();
     assertNotNull(
         "doc from the backup should still be there after a restart",
-        leaderClient.getById(DEFAULT_TEST_CORENAME, "before-backup"));
+        leaderClient.getById(DEFAULT_TEST_CORENAME, beforeId));
     assertNull(
         "update log should not have been replayed after a restart",
-        leaderClient.getById(DEFAULT_TEST_CORENAME, "after-backup"));
+        leaderClient.getById(DEFAULT_TEST_CORENAME, afterId));
   }
 
   public void testBackupFailsMissingAllowPaths() {
