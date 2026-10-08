@@ -16,6 +16,7 @@
  */
 package org.apache.solr.core;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -34,15 +35,32 @@ public class SolrCoreCleanupOnCloseTest extends SolrTestCase {
 
   private static final List<String> cleanupThreadNames = new CopyOnWriteArrayList<>();
 
+  private static final List<String> closeEvents = new CopyOnWriteArrayList<>();
+
   private static CoreContainer coreContainer;
 
-  /** Records which thread asked the factory to clean up old index directories. */
+  /** Records which thread asked the factory to clean up old index directories, and when. */
   public static class RecordingDirectoryFactory extends MockDirectoryFactory {
     @Override
     public void cleanupOldIndexDirectories(
         String dataDirPath, String currentIndexDirPath, boolean afterCoreReload) {
       cleanupThreadNames.add(Thread.currentThread().getName());
+      closeEvents.add("cleanup-start");
+      try {
+        // Widen the window in which a backgrounded cleanup would still be running
+        // when SolrCore.close() goes on to close this factory.
+        Thread.sleep(500);
+      } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+      }
       super.cleanupOldIndexDirectories(dataDirPath, currentIndexDirPath, afterCoreReload);
+      closeEvents.add("cleanup-done");
+    }
+
+    @Override
+    public void close() throws IOException {
+      closeEvents.add("factory-close");
+      super.close();
     }
   }
 
@@ -79,6 +97,7 @@ public class SolrCoreCleanupOnCloseTest extends SolrTestCase {
     }
     System.clearProperty("solr.directoryFactory");
     cleanupThreadNames.clear();
+    closeEvents.clear();
   }
 
   @Test
@@ -90,16 +109,38 @@ public class SolrCoreCleanupOnCloseTest extends SolrTestCase {
       }
     }
     cleanupThreadNames.clear();
+    closeEvents.clear();
 
     coreContainer.unload("collection1"); // closes the core
 
-    // closing is asynchronous; wait for the close-time cleanup to be recorded
+    // closing is asynchronous; wait for the factory close and the cleanup to be recorded
     long deadlineNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(30);
-    while (cleanupThreadNames.isEmpty() && System.nanoTime() < deadlineNanos) {
+    while (!closeEvents.contains("factory-close") && System.nanoTime() < deadlineNanos) {
+      Thread.sleep(100);
+    }
+    // On a correct tree the cleanup completes before the factory closes, so its
+    // completion is already recorded; a backgrounded cleanup gets a bounded chance
+    // to finish so the recorded order shows the race instead of a missing event.
+    long doneDeadlineNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(10);
+    while (!closeEvents.contains("cleanup-done") && System.nanoTime() < doneDeadlineNanos) {
       Thread.sleep(100);
     }
 
     assertFalse("cleanup should run when the core is closed", cleanupThreadNames.isEmpty());
+
+    int cleanupDone = closeEvents.indexOf("cleanup-done");
+    int factoryClose = closeEvents.indexOf("factory-close");
+    assertTrue(
+        "the DirectoryFactory should be closed when the core is closed, events: " + closeEvents,
+        factoryClose >= 0);
+    assertTrue(
+        "cleanup should complete when the core is closed, events: " + closeEvents,
+        cleanupDone >= 0);
+    assertTrue(
+        "old index directory cleanup must complete before the DirectoryFactory is closed, events: "
+            + closeEvents,
+        cleanupDone < factoryClose);
+
     for (String threadName : cleanupThreadNames) {
       assertFalse(
           "cleanup at close must not race the DirectoryFactory close in a background thread: "
