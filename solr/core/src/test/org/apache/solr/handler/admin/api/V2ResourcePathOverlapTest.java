@@ -51,7 +51,9 @@ public class V2ResourcePathOverlapTest extends SolrCloudTestCase {
             .withMethod(SolrRequest.METHOD.GET)
             .build()
             .process(cluster.getSolrClient());
-    assertEquals(ALIAS, response.getResponse().get("alias"));
+    // GetAliasByNameResponse serializes its alias field under the wire key "name", the same
+    // convention as the other v2 by-name responses; the field is not sent as "alias".
+    assertEquals(ALIAS, response.getResponse().get("name"));
     assertEquals(List.of(COLLECTION), response.getResponse().get("collections"));
   }
 
