@@ -283,6 +283,13 @@ public class TestReplicationHandler extends SolrTestCaseJ4 {
         buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "fetchindex");
     assertEquals(3, numFound(rQuery(3, "*:*", followerClient)));
 
+    // Drive the rest of the test with explicit fetches: the follower's 1s
+    // poller could otherwise run its own full copy mid-test, deleting the
+    // divergence commit points before the listing below or consuming the
+    // old-directory cleanup this test verifies.
+    invokeReplicationCommand(
+        buildUrl(followerJetty.getLocalPort()) + "/" + DEFAULT_TEST_CORENAME, "disablepoll");
+
     // Keep the raw getIndexDir() string for the snapshot calls below: the
     // snapshot metadata stores the string as given and looks snapshots up by
     // string equality, so a Path-normalised form (no trailing slash, platform
