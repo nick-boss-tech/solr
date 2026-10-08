@@ -883,8 +883,9 @@ public class SolrDocumentFetcher {
         // a field named explicitly in fl is returned even if it is useDocValuesAsStored=false
         Set<String> requestedNames = returnFields.getRequestedFieldNames();
         if (requestedNames != null) {
+          Set<String> nonStoredDVs = getNonStoredDVs(false);
           for (String fl : requestedNames) {
-            if (getNonStoredDVs(false).contains(fl)) {
+            if (nonStoredDVs.contains(fl)) {
               result.add(fl);
             }
           }

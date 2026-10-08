@@ -124,6 +124,11 @@ public class TestUseDocValuesAsStored2 extends RestTestBase {
         "/select?q=id:myid*&fl=id,a*,a3",
         "/response/docs==[{'id':'myid1', 'a1':'1', 'a2':'2', 'a3':'3'}]");
 
+    // SOLR-11364: a1 is matched by the glob and also named explicitly, so it is selected
+    // through both paths; it must still appear only once in the response
+    RestTestBase.assertJQ(
+        "/select?q=id:myid*&fl=id,a*,a1", "/response/docs==[{'id':'myid1', 'a1':'1', 'a2':'2'}]");
+
     // Test replace-field
     // Explicitly set useDocValuesAsStored to false
     payload =
