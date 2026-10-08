@@ -14,7 +14,7 @@ Nothing here was compiled, formatted, or run. No Gradle, no spotless, no test ru
 
 1. **Owner call A (see below). Silent skip for a null response.** `ExactStatsCache.java:121-123` already skips a response with an exception in every mode, without checking `shards.tolerant`. The branch extends the same skip to a null response (`ExactStatsCache.java:122-127`). The debug log names the right shard, since `shard` is set per iteration from `r.getShard()`. Whether a null response with no exception can happen when `shards.tolerant=false` was not traced in `HttpShardHandler`. If it can, the global stats silently exclude that shard instead of failing the request.
 
-2. **MEDIUM, hypothesis. The test may not run.** `ExactStatsCacheMergeTest.java:30` declares `public void testShardWithoutResponseIsSkipped()` with no `@Test`. Every test method in the same package uses `@Test` (`TestDefaultStatsCache.java:44`, `TestDistribIDF.java:68,140,258`, `TestExactStatsCache.java:36`). Whether the Solr randomized runner picks up an unannotated `test*` method was not verified. If it does not, the test never runs and gives no proof. Proposed fix: add `import org.junit.Test;` and `@Test` on the method. Not applied (see the Patch line above).
+2. **LOW, verified convention note.** `ExactStatsCacheMergeTest.java:30` declares `public void testShardWithoutResponseIsSkipped()` with no `@Test`. Every other test method in the same package uses `@Test` (`TestDefaultStatsCache.java:44`, `TestDistribIDF.java:68,140,258`, `TestExactStatsCache.java:36`). `TestSlowCompositeReaderWrapper.java` on `main` has two unannotated `test*` methods (lines 45 and 104), so this codebase does run unannotated methods; the omission is most likely harmless. Correction: an earlier draft of this review rated it MEDIUM as a possible silent skip. Proposed fix, for consistency with the package: add `import org.junit.Test;` and `@Test` on the method. Not applied (see the Patch line above).
 
 3. **Verified (checked, no issue). The helpers used by the test exist with the signatures it uses.** `SolrQueryRequestBase(SolrCore, SolrParams)` is public and the class is concrete (`SolrQueryRequestBase.java:47,71`), so the anonymous `{}` subclass compiles. `ShardResponse` has no explicit constructor, so the default is public, and `setSolrResponse(SolrResponse)` exists (`ShardResponse.java:73`). `QueryResponse()` is public and empty (`QueryResponse.java:104`). `ExactStatsCache` has no explicit constructor. `StatsCache.mergeToGlobalStats(SolrQueryRequest, List<ShardResponse>)` is public (`StatsCache.java:174`).
 
@@ -30,6 +30,6 @@ Nothing here was compiled, formatted, or run. No Gradle, no spotless, no test ru
 
 - Nothing compiled, formatted, or run. No focused test, no fail-before run, no Spotless, no Error Prone.
 - Whether `HttpShardHandler` can produce a response with a null body and no exception when `shards.tolerant=false` (finding 1 and owner call A).
-- Whether the Solr randomized runner runs an unannotated `test*` method (finding 2).
+- Whether the Solr randomized runner runs unannotated `test*` methods. Finding 2 cites `main` evidence that it does, but the runner itself was not read.
 - Whether `QueryResponse()` leaves the response `NamedList` null (the field default was not traced in `SolrResponseBase`).
 - `SOLR-8051-TESTING.md` is treated as unverified. Left in place.
