@@ -214,6 +214,40 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
     }
   }
 
+  @Test
+  public void testMatchAllBoostGluedFieldClauseRespectsUserFields() throws Exception {
+    // uf allows only title, so a subject clause must never be parsed as a field query. A
+    // field clause glued onto the boost of a standalone *:* used to slip past that check:
+    // the clause starts with *, so no field name is read from it, and its text reached the
+    // grammar unescaped, where the field prefix after the boost digits started a new
+    // clause. In the parsed string a real subject field clause appears as a clause of its
+    // own (" subject:foo" or " +subject:foo"); in the escaped form the same text is only
+    // a term searched on the query fields, where it renders field-prefixed instead
+    // ("name:subject:foo"), so the two anchors below separate the two parses.
+    for (String q :
+        Arrays.asList(
+            "*:*^2subject:foo", "*:*^2+subject:foo", "*:*^2.5subject:foo", "(*:*^2subject:foo)")) {
+      try (SolrQueryRequest req = req("qf", "name title text", "uf", "title")) {
+        Query parsed = QParser.getParser(q, "edismax", req).getQuery();
+        assertThat(
+            "parsed query for " + q + " must not contain a subject field clause: " + parsed,
+            parsed.toString(),
+            not(containsString(" subject:foo")));
+        assertThat(
+            "parsed query for " + q + " must not contain a subject field clause: " + parsed,
+            parsed.toString(),
+            not(containsString(" +subject:foo")));
+      }
+    }
+    // control: the same field clause on its own is blocked under the same uf, so the glued
+    // forms above are the bypass, not a general uf failure
+    try (SolrQueryRequest req = req("qf", "name title text", "uf", "title")) {
+      Query parsed = QParser.getParser("subject:foo", "edismax", req).getQuery();
+      assertThat(parsed.toString(), not(containsString(" subject:foo")));
+      assertThat(parsed.toString(), not(containsString(" +subject:foo")));
+    }
+  }
+
   public void testTrailingOperators() throws Exception {
     for (String sow : Arrays.asList("true", "false")) {
       // really just test that exceptions aren't thrown by

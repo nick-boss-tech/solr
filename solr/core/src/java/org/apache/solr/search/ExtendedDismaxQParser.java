@@ -763,10 +763,32 @@ public class ExtendedDismaxQParser extends QParser {
       } else if (ch == '^' && !seenBoost) {
         seenBoost = true;
         pos++;
-        // the boost value runs until a closing paren or the end of the clause; whitespace can
-        // only appear here glued into the clause by a backslash escape, and it ends the boost too
-        while (pos < end && raw.charAt(pos) != ')' && !Character.isWhitespace(raw.charAt(pos))) {
-          pos++;
+        // the boost value is a plain number: digits with at most one dot, the shape
+        // isBoostValue accepts for this grammar. Anything else after the digits (a colon, a
+        // letter, a sign) is text glued onto the boost, so the scan stops there and the
+        // outer loop rejects the clause, leaving its colon escaped. That matters because a
+        // clause that starts with * has no field name for getFieldName to find, so the
+        // per-clause user-field check never runs for it; unescaped text would reach the
+        // grammar, where a field prefix after the boost digits starts a new clause.
+        // Whitespace can only appear here glued into the clause by a backslash escape; it
+        // is not part of a boost number either, so it ends the scan the same way, and the
+        // clause is escaped, which is the safe outcome.
+        boolean seenDigit = false;
+        boolean seenDot = false;
+        while (pos < end) {
+          char b = raw.charAt(pos);
+          if (b >= '0' && b <= '9') {
+            seenDigit = true;
+            pos++;
+          } else if (b == '.' && !seenDot) {
+            seenDot = true;
+            pos++;
+          } else {
+            break;
+          }
+        }
+        if (!seenDigit) {
+          return false;
         }
       } else {
         return false;
