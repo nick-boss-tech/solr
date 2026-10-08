@@ -17,7 +17,7 @@ ticket	branch	head	group	gate_state	note
 16570	solr-16570-submit	974c44f9608261adbdb6a2aa9d1f7d7250ccec43	A	NOT GATED; gate when the review channel shows the review complete at the current head	
 16885	solr-16885-submit	2b9b80119a92d787970b02b1472bfea6d2fa3613	A	NOT GATED; gate when the review channel shows the review complete at the current head	
 8628	solr-8628-submit	ce8211e05e062444e7afc1c5ea33fb6eff581d8f	A	NOT GATED; gate when the review channel shows the review complete at the current head	
-12161	solr-12161-submit	a40db4fdb5c479b28db4384537baf8a8961beaa5	A	NOT GATED; gate when the review channel shows the review complete at the current head	
+12161	solr-12161-submit	1725cbd8489889a1dad75279e4b2c11b0ec93d66	A	NOT GATED; gate when the review channel shows the review complete at the current head	
 12864	solr-12864-submit	8c5455d3d2426ec03fbc7e9c877e3276edcc839e	A	NOT GATED; gate when the review channel shows the review complete at the current head	
 10667	solr-10667-submit	5cee0d5bcf17038248fd01debd5dac804a2da217	A	NOT GATED; gate when the review channel shows the review complete at the current head	
 10694	solr-10694-submit	093d90c62dedd8701276dded16e740d451d3a6df	A	NOT GATED; gate when the review channel shows the review complete at the current head	
@@ -74,6 +74,6 @@ ticket	branch	head	group	gate_state	note
 4362	solr-4362-submit	e96a057439c879427bf07195fe6e18bed08a2c42	C	GATED at listed head by VM1; re-gate only if the head moves	Round 32 eDisMax disposition at this head. The SOLR-6320 demotion rule is an owner call at PR time.
 5065	solr-5065-submit	c0a0ce1b8d9b80abf2175f7e8cfa613d80a85d4f	C	GATED at listed head by VM1; re-gate only if the head moves	Round 33 disposition at this head.
 6009	solr-6009-submit	a41bb034a1f47c08a8f8ea6ebbe46e6d443cbb6f	C	GATED at listed head by VM1; re-gate only if the head moves	Round 32 eDisMax disposition at this head.
-6320	solr-6320-submit	2789d80201050a740a00803384b97f7203067cb1	C	HELD-BY-VM1 (findings lane running; joins when VM1 records ready)	Round 32 eDisMax disposition at this head.
+6320	solr-6320-submit	2789d80201050a740a00803384b97f7203067cb1	C	GATED at cb710c963531 by VM1 (round 36 gate green 2026-10-08); re-gate only if the head moves	Round 32 eDisMax disposition at this head.
 8939	solr-8939-submit	a855a2d8965c8eae5df171ad9b5148b7e95f7425	C	GATED at listed head by VM1; re-gate only if the head moves	Test-categories round at this head.
 9148	solr-9148-submit	30f0d7a42d501316bd9d5336fe564608e78bfbba	C	GATED at listed head by VM1; re-gate only if the head moves	Test-categories round at this head.
