@@ -218,15 +218,16 @@ public class CoreContainerProvider implements ServletContextListener {
           mx.getInputArguments().stream()
               .anyMatch(x -> x.startsWith("-XX:+ExitOnOutOfMemoryError"));
       if (exitOnOutOfMemoryError) {
-        log.info(
-            "Solr started with \"-XX:+ExitOnOutOfMemoryError\" that will exit on any OutOfMemoryError exception. "
-                + "The cause of the OOME will be logged to the console.");
+        String logMessage =
+            "Solr started with {} that will exit on any OutOfMemoryError exception. "
+                + "The cause of the OOME will be logged to the console.";
+        log.info(logMessage, "-XX:+ExitOnOutOfMemoryError");
       }
     } catch (Exception e) {
-      log.info(
-          "Solr typically starts with \"-XX:+ExitOnOutOfMemoryError\" that will exit on any OutOfMemoryError exception. "
-              + "Unable to check the JVM arguments due to an exception.",
-          e);
+      String logMessage =
+          "Solr typically starts with {} that will exit on any OutOfMemoryError exception. "
+              + "Unable to check the JVM arguments due to an exception.";
+      log.info(logMessage, "-XX:+ExitOnOutOfMemoryError", e);
     }
   }
 
