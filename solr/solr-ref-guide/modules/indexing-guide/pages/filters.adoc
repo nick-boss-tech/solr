@@ -3875,3 +3875,26 @@ Using a protected words list that contains "AstroBlaster" and "XL-5000" (among o
 *Tokenizer to Filter:* "FooBar", "AstroBlaster", "XL-5000", "==ES-34-"
 
 *Out:* "FooBar", "FooBar", "AstroBlaster", "XL-5000", "ES", "34"
+
+== Zero Position Increment Filter
+
+This filter sets the position increment of every token after the first to zero, so all tokens in the stream share the first token's position.
+
+Its purpose is `ancestor_path` matching with the Path Hierarchy Tokenizer.
+Lucene 10 emits each path prefix at its own position, so a query-time phrase over the prefixes cannot match a path indexed as a single keyword.
+With this filter on the query analyzer, the prefixes sit at one position again and the query parser builds a synonym-style query over them.
+The shipped `ancestor_path` field types already include it on their query analyzers.
+
+*Factory class:* `solr.ZeroPositionIncrementFilterFactory`
+
+*Arguments:* None
+
+*Example:*
+
+[source,xml]
+----
+<analyzer type="query">
+  <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/"/>
+  <filter class="solr.ZeroPositionIncrementFilterFactory"/>
+</analyzer>
+----

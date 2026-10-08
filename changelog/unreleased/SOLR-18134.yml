@@ -1,4 +1,4 @@
-title: Restore ancestor_path matching after Lucene 10 sequential PathHierarchy tokens.
+title: Add solr.ZeroPositionIncrementFilterFactory to restore ancestor_path matching after Lucene 10 sequential PathHierarchy tokens.
 type: fixed
 authors:
   - name: Nick Shanin
