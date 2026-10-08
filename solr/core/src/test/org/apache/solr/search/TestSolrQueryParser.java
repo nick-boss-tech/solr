@@ -213,7 +213,26 @@ public class TestSolrQueryParser extends SolrTestCaseJ4 {
     assertJQ(req("q", "{!term f=text v=$qq}", "qq", "now"), "/response/numFound==2");
   }
 
-
+  @Test
+  public void testLocalParamsSuffixesAreNotFurtherQueryText() throws Exception {
+    // A suffix of the local-params clause itself is not further query text: the lucene parser's
+    // local-params token appends it to the clause and hands the clause back to QParser, so the
+    // SOLR-15906 hand-off recursed on these shapes until the recursion guard fired (the same
+    // failure testNestedQueryModifiers showed). Each parses as it did before SOLR-15906, with
+    // the subquery's own modifiers in qq governing.
+    assertJQ(
+        req("q", "{!v=$qq}~1", "qq", "\"how brown\"~2", "debug", "query"),
+        "/response/docs/[0]/id=='1'");
+    assertJQ(
+        req("q", "{!v=$qq}~1^3", "qq", "\"how brown\"~2", "debug", "query"),
+        "/response/docs/[0]/id=='1'");
+    assertJQ(
+        req("q", "{!v=$qq} ~1", "qq", "\"how brown\"~2", "debug", "query"),
+        "/response/docs/[0]/id=='1'");
+    assertJQ(
+        req("q", "{!v=$qq}foo", "qq", "\"how brown\"~2", "debug", "query"),
+        "/response/docs/[0]/id=='1'");
+  }
 
   @Test
   public void testLocalParamsInQP() throws Exception {

@@ -397,6 +397,72 @@ public abstract class QParser {
   }
 
   /**
+   * Whether the text after a local-params block is further query syntax, as opposed to a suffix of
+   * the local-params clause itself. A suffix is not further syntax when the lucene parser could not
+   * treat it as a separate clause either: its local-params token appends any run of characters up
+   * to whitespace or a clause separator (a closing parenthesis, an opening brace, or a caret)
+   * directly onto the clause, which is how the "~1" in "{!v=$qq}~1" reaches {@link #getParser} when
+   * such a clause is nested in a larger query, and a suffix made only of slop ("~n") and boost
+   * ("^n") modifiers belongs to the subquery the clause produces. Handing such a string to the
+   * lucene parser would make it hand the identical clause back to {@link #getParser} until the
+   * recursion guard fires, so it stays on the normal path, where it has always been disregarded in
+   * favor of the subquery's own modifiers.
+   */
+  private static boolean isFurtherQueryText(String trailing) {
+    if (trailing.isBlank()) {
+      return false;
+    }
+    boolean hasSeparator = false;
+    for (int i = 0; i < trailing.length(); i++) {
+      char c = trailing.charAt(i);
+      if (Character.isWhitespace(c) || c == ')' || c == '{' || c == '^') {
+        hasSeparator = true;
+        break;
+      }
+    }
+    if (!hasSeparator) {
+      return false;
+    }
+    return !isModifiersOnly(trailing);
+  }
+
+  /** Whether the text consists solely of slop ("~n") and boost ("^n") modifiers. */
+  private static boolean isModifiersOnly(String trailing) {
+    int i = 0;
+    boolean sawModifier = false;
+    while (i < trailing.length()) {
+      char c = trailing.charAt(i);
+      if (Character.isWhitespace(c)) {
+        i++;
+        continue;
+      }
+      if (c != '~' && c != '^') {
+        return false;
+      }
+      i++;
+      boolean sawDigit = false;
+      boolean sawDot = false;
+      while (i < trailing.length()) {
+        char d = trailing.charAt(i);
+        if (Character.isDigit(d)) {
+          sawDigit = true;
+          i++;
+        } else if (d == '.' && !sawDot) {
+          sawDot = true;
+          i++;
+        } else {
+          break;
+        }
+      }
+      if (!sawDigit) {
+        return false; // a "~" or "^" with no number after it is not a modifier
+      }
+      sawModifier = true;
+    }
+    return sawModifier;
+  }
+
+  /**
    * Expert: Create a {@link QParser} to parse {@code qstr} using the {@code parserName} parser,
    * while allowing a toggle for whether local-params may be parsed. The query parser may be
    * overridden by local parameters in the query string itself (assuming {@code allowLocalParams}.
@@ -426,7 +492,7 @@ public abstract class QParser {
       localParamsEnd = QueryParsing.parseLocalParams(qstr, 0, localParams, globalParams);
 
       String val = localParams.get(QueryParsing.V);
-      if (val != null && !qstr.substring(localParamsEnd).isBlank()) {
+      if (val != null && isFurtherQueryText(qstr.substring(localParamsEnd))) {
         // v was given in the local-params AND there is more query text after them, e.g.
         //   {!parser v=$qq} OR other
         // Previously the trailing text was silently ignored (SOLR-15906). Hand the whole string to
