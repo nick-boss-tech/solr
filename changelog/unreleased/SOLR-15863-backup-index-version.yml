@@ -1,5 +1,5 @@
 title: >
-  backup properties now record the oldest Lucene version of the backed up segments instead of the running Lucene version.
+  incremental backup properties now record the oldest Lucene version of the backed up segments instead of the running Lucene version.
 type: fixed
 authors:
   - name: Nick Shanin

@@ -317,7 +317,7 @@ public class BackupCmd implements CollApiCmds.CollectionApiCommand {
     Optional<Integer> uploadedIndexFileCount = Optional.empty();
     Optional<Double> indexSizeMB = Optional.empty();
     Optional<Double> uploadedIndexFileMB = Optional.empty();
-    Version minIndexVersion = null;
+    List<String> shardIndexVersions = new ArrayList<>();
     NamedList<?> shards = (NamedList<?>) results.get("success");
     List<String> shardBackupIds = new ArrayList<>(shards.size());
     for (int i = 0; i < shards.size(); i++) {
@@ -342,19 +342,9 @@ public class BackupCmd implements CollApiCmds.CollectionApiCommand {
             Optional.of(uploadedIndexFileMB.orElse(0.0) + shardUploadedIndexFileMB);
       }
       Optional.ofNullable((String) shardResp.get("shardBackupId")).ifPresent(shardBackupIds::add);
-      final String shardIndexVersion = (String) shardResp.get("indexVersion");
-      if (shardIndexVersion != null) {
-        try {
-          final Version shardVersion = Version.parse(shardIndexVersion);
-          if (minIndexVersion == null || minIndexVersion.onOrAfter(shardVersion)) {
-            minIndexVersion = shardVersion;
-          }
-        } catch (ParseException e) {
-          log.warn(
-              "Ignoring unparseable indexVersion from shard response: {}", shardIndexVersion, e);
-        }
-      }
+      shardIndexVersions.add((String) shardResp.get("indexVersion"));
     }
+    final Version minIndexVersion = minIndexVersion(shardIndexVersions);
     if (minIndexVersion != null) {
       backupProps.setIndexVersion(minIndexVersion.toString());
     }
@@ -371,6 +361,31 @@ public class BackupCmd implements CollApiCmds.CollectionApiCommand {
     }
 
     return aggRsp;
+  }
+
+  /**
+   * Returns the oldest Lucene version among the index versions reported by the shards, or {@code
+   * null} when no shard reported a parseable version. Null entries (a shard whose response carried
+   * no index version) and unparseable values are ignored, so they never lower or raise the result.
+   */
+  static Version minIndexVersion(Collection<String> shardIndexVersions) {
+    Version min = null;
+    for (String shardIndexVersion : shardIndexVersions) {
+      if (shardIndexVersion == null) {
+        continue;
+      }
+      final Version shardVersion;
+      try {
+        shardVersion = Version.parse(shardIndexVersion);
+      } catch (ParseException e) {
+        log.warn("Ignoring unparseable indexVersion from shard response: {}", shardIndexVersion, e);
+        continue;
+      }
+      if (min == null || min.onOrAfter(shardVersion)) {
+        min = shardVersion;
+      }
+    }
+    return min;
   }
 
   private ModifiableSolrParams coreBackupParams(
