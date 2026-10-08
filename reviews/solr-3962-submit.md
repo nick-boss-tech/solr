@@ -4,7 +4,7 @@
 - Head: e7d5f3505035 (matches the listed head)
 - Base: upstream/main at 9d7cc2884e8a (merge-base 97d973814336, 19 commits behind)
 - Scope: 3 commits, 4 files (+196). `ExtendedDismaxQParser.java` (+75: `addPhraseFieldQueries` skips match-all clauses at line 310 and returns early at line 320; new `isMatchAllDocsClause` at line 364, `wrapsWholeClause`, `isBoostValue`), `TestExtendedDismaxParser.java` (+105, four tests), `schema12.xml` (+8: `text_chars` type and `*_chars` dynamic field), changelog `SOLR-3962-edismax-pf-match-all.yml` (+8, type `fixed`)
-- Verdict: Close (no defect found; the string-based detection and the duplicated helper are owner calls, and proof is outstanding)
+- Verdict: Close (no defect found; the string-based detection and the duplicated helper are owner calls, and proof not visible in the tree)
 - Reviewer: claude-haiku-5-5 (Claude Code), 2026-10-08
 
 Nothing here was compiled, formatted, or run. No Gradle, no `drain`, no test runs. Every claim below rests on reading the diff and the code at the listed head.
