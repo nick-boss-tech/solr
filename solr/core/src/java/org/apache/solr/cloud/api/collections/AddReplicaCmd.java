@@ -138,7 +138,9 @@ public class AddReplicaCmd implements CollApiCmds.CollectionApiCommand {
             SolrException.ErrorCode.BAD_REQUEST,
             "Cannot create " + totalReplicas + " replicas if 'name' parameter is specified");
       }
-      if (message.getStr(CoreAdminParams.CORE_NODE_NAME) != null) {
+      if (message.getStr(CoreAdminParams.CORE_NODE_NAME) != null
+          || message.getStr(CoreAdminParams.PROPERTY_PREFIX + CoreAdminParams.CORE_NODE_NAME)
+              != null) {
         throw new SolrException(
             SolrException.ErrorCode.BAD_REQUEST,
             "Cannot create "
