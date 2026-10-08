@@ -16,10 +16,19 @@
  */
 package org.apache.solr.rest.schema.analysis;
 
+import java.io.StringReader;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.apache.commons.io.file.PathUtils;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.core.WhitespaceTokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.solr.common.util.Utils;
+import org.apache.solr.core.SolrCore;
 import org.apache.solr.util.RestTestBase;
 import org.junit.After;
 import org.junit.Before;
@@ -185,6 +194,51 @@ public class TestManagedStopFilterFactory extends RestTestBase {
 
     // should fail with 404 as some/thing doesn't exist
     assertJDelete(endpoint + "/cheerful/joyful", "/error/code==404");
+  }
+
+  /**
+   * SOLR-16444: a ManagedStopFilterFactory that is created and informed after its managed resource
+   * was already loaded (what happens when a component using an already-managed handle appears while
+   * the core is running) must still be initialized by that registration. Before the fix its
+   * stopWords stayed null and create() threw the ticket's "Managed stopwords not initialized
+   * correctly!" IllegalStateException on first use.
+   */
+  @Test
+  public void testLateRegisteredStopFilterFactoryIsInitialized() throws Exception {
+    String endpoint = "/schema/analysis/stopwords/english";
+
+    // store one word, then reload so the word is part of the resource state when it loads;
+    // the final GET also guarantees the resource is loaded before the late registration below
+    assertJQ(endpoint, "/wordSet/managedList==[]");
+    assertJPut(
+        endpoint, Utils.toJSONString(Arrays.asList("zanzibar")), "/responseHeader/status==0");
+    restTestHarness.reload();
+    assertJQ(endpoint, "/wordSet/managedList==['zanzibar']");
+
+    SolrCore core = solrTestRule.getCoreContainer().getCore(collection);
+    try {
+      // a second factory for the same handle, informed only now that the resource exists
+      ManagedStopFilterFactory lateFactory =
+          new ManagedStopFilterFactory(new HashMap<>(Map.of("managed", "english")));
+      lateFactory.inform(core.getResourceLoader());
+
+      // create() is the call that throws when the late registration was never notified;
+      // the stored word must be filtered out, proving the factory got the loaded word set
+      List<String> terms = new ArrayList<>();
+      WhitespaceTokenizer tokenizer = new WhitespaceTokenizer();
+      tokenizer.setReader(new StringReader("zanzibar hello"));
+      try (TokenStream stream = lateFactory.create(tokenizer)) {
+        CharTermAttribute termAtt = stream.addAttribute(CharTermAttribute.class);
+        stream.reset();
+        while (stream.incrementToken()) {
+          terms.add(termAtt.toString());
+        }
+        stream.end();
+      }
+      assertEquals(Arrays.asList("hello"), terms);
+    } finally {
+      core.close();
+    }
   }
 
   /** Can we add and remove stopwords with umlauts */
