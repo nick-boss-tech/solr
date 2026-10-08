@@ -166,8 +166,8 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
   }
 
   /**
-   * A standalone restore replaces the whole index, so the update log must be left empty: a doc added
-   * after the backup (and only present in the tlog / realtime view) must not be visible to
+   * A standalone restore replaces the whole index, so the update log must be left empty: a doc
+   * added after the backup (and only present in the tlog / realtime view) must not be visible to
    * realtime-get after the restore, and a restart must not replay it.
    */
   @Test
@@ -178,6 +178,8 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
     leader.copyConfigFile(
         CONF_DIR.resolve("solrconfig-leader-ulog.xml").toString(), "solrconfig.xml");
     leader.copyConfigFile(CONF_DIR.resolve("schema.xml").toString(), "schema.xml");
+    // schema.xml references this file for its enum field type; the core cannot load without it
+    leader.copyConfigFile(CONF_DIR.resolve("enumsConfig.xml").toString(), "enumsConfig.xml");
     leaderJetty = createAndStartJetty(leader);
     leaderClient = leaderJetty.getSolrClient();
 
@@ -215,6 +217,17 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
         leaderClient.getById(DEFAULT_TEST_CORENAME, "before-backup"));
     assertNull(
         "update log should have been cleared by the restore",
+        leaderClient.getById(DEFAULT_TEST_CORENAME, "after-backup"));
+
+    // a restart must not replay the discarded log onto the restored index either
+    leaderJetty.stop();
+    leaderJetty = createAndStartJetty(leader);
+    leaderClient = leaderJetty.getSolrClient();
+    assertNotNull(
+        "doc from the backup should still be there after a restart",
+        leaderClient.getById(DEFAULT_TEST_CORENAME, "before-backup"));
+    assertNull(
+        "update log should not have been replayed after a restart",
         leaderClient.getById(DEFAULT_TEST_CORENAME, "after-backup"));
   }
 

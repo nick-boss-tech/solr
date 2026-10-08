@@ -2074,8 +2074,11 @@ public class UpdateLog implements PluginInfoInitialized, SolrMetricProducer {
   private void discardLog(TransactionLog theLog) {
     if (theLog != null) {
       theLog.deleteOnClose = true;
+      // Drop only the update log's own reference. Readers that already hold a reference
+      // (realtime-get, recovery, peer sync) keep the log open until they release it, and the
+      // file is deleted when the last reference goes away; force-closing here would break
+      // those readers.
       theLog.decref();
-      theLog.forceClose();
     }
   }
 

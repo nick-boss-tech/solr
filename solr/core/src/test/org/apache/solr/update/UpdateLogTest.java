@@ -21,6 +21,7 @@ import static org.hamcrest.core.StringContains.containsString;
 
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
@@ -238,6 +239,41 @@ public class UpdateLogTest extends SolrTestCaseJ4 {
     // transaction log.
     ulogAdd(
         ulog, null, sdoc("id", "1", "title_s", "title1", "val1_i_dvo", "1", "_version_", "100"));
+  }
+
+  @Test
+  public void testClearAndActivateKeepsReferencedLogsAlive() throws Exception {
+    ulogAdd(
+        ulog, null, sdoc("id", "1", "title_s", "title1", "val1_i_dvo", "1", "_version_", "100"));
+    assertNotNull(ulog.lookup(DOC_1_INDEXED_ID));
+
+    Path tlogDir = Path.of(ulog.getTlogDir());
+    Path currentLog =
+        tlogDir.resolve(
+            String.format(
+                Locale.ROOT,
+                UpdateLog.LOG_FILENAME_PATTERN,
+                UpdateLog.TLOG_NAME,
+                scanLastLogId(tlogDir)));
+    assertTrue(Files.exists(currentLog));
+
+    // realtime-get, recovery and peer sync read through a RecentUpdates snapshot, which
+    // holds a reference to each log it reads from
+    UpdateLog.RecentUpdates recentUpdates = ulog.getRecentUpdates();
+    try {
+      ulog.clearAndActivate();
+      // the reset drops the update log's own reference only: a log that a reader still
+      // references must stay on disk until that reader releases it
+      assertTrue(
+          "log file still referenced by a reader was deleted: " + currentLog,
+          Files.exists(currentLog));
+      assertNull(ulog.lookup(DOC_1_INDEXED_ID));
+    } finally {
+      recentUpdates.close();
+    }
+    assertFalse(
+        "log file should be deleted once no reader references it: " + currentLog,
+        Files.exists(currentLog));
   }
 
   /** Simulate a commit on a given updateLog */
