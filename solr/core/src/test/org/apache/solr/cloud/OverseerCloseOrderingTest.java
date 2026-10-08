@@ -46,8 +46,7 @@ public class OverseerCloseOrderingTest extends SolrCloudTestCase {
     long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(60);
     while (System.nanoTime() < deadline) {
       for (JettySolrRunner runner : cluster.getJettySolrRunners()) {
-        if (runner.getCoreContainer().getZkController().getOverseer().getUpdaterThread()
-            != null) {
+        if (runner.getCoreContainer().getZkController().getOverseer().getUpdaterThread() != null) {
           return runner;
         }
       }
