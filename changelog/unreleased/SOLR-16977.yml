@@ -1,4 +1,5 @@
 title: A KNN query with an all-zero vector against a cosine-similarity DenseVectorField now fails with a clear BAD_REQUEST error instead of an internal error while rendering results
+description: The rejection covers the query vector. An all-zero vector stored in a document is a separate case and is left for a follow-up change.
 type: fixed
 authors:
   - name: Nick Shanin
