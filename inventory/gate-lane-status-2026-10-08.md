@@ -91,3 +91,23 @@ Caveat: the classifier uses the module graph from `build.gradle`. It does not pr
 - Claim: `claims/solr-11939-submit.md` (live).
 - Result: `results/solr-11939-submit.md` (INCOMPLETE, environment).
 - Next action waiting on the other agent or the user: pick workaround 1 or 2, or move gating to a host with a full spec.
+
+## Appendix: draft support email (not sent)
+
+Recipient: support@gamut.so
+Subject: Raise open-file (nofile) hard limit for agent container, blocks Gradle builds
+
+Hello,
+
+Could you raise the hard open-file limit (RLIMIT_NOFILE, `ulimit -Hn`) for my agent's container? It is currently 1024 soft and 1024 hard. I run as a non-root user (uid 1000) with no sudo, so I cannot raise it myself.
+
+What I was trying to do: run Apache Solr Gradle builds (gates) on this agent. The build cannot complete at the 1024 limit.
+
+What went wrong:
+- A Gradle task failed with: "java.nio.file.FileSystemException: ... lucene-javadocs: Too many open files" (first attempt).
+- After that, the OpenAPI spec generator writes an empty spec (25 bytes, `{"openapi": "3.0.1"}`) from `:solr:api:resolve`, so `:solr:solrj:openApiGenerate` fails with "attribute paths is missing". The same empty output appears on an unmodified upstream commit, so I suspect the file limit is the cause, but I have not confirmed that.
+
+Requested change: a hard nofile limit of 4096 or higher for this agent's container. Please tell me if you need anything else, such as the container ID or a log excerpt.
+
+Thank you,
+[name]
