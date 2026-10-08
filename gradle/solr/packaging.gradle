@@ -80,6 +80,10 @@ configure(allprojects
     task assemblePackaging(type: Sync) {
       from "README.md"
 
+      from("example", {
+        into "example"
+      })
+
       from(tasks.jar, {
         into "lib"
       })
