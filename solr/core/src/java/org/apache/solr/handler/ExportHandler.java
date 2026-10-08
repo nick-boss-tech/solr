@@ -135,9 +135,12 @@ public class ExportHandler extends SearchHandler {
     if (rsp.getException() == null) {
       // No search error to report, so reject the requests ExportWriter would reject, before the
       // writer is added: the client then sees an HTTP 400 instead of a 200 carrying an in-body
-      // EXCEPTION document (SOLR-12543). The sort is judged from the ResponseBuilder's SortSpec,
-      // the same source ExportWriter uses: a sort supplied as a local param on q counts, while
-      // an absent sort, or one that parses to no sort, does not.
+      // EXCEPTION document (SOLR-12543). ExportWriter remains the authoritative validation: it
+      // re-checks the sort and the fl when it runs, and it is also reachable without this
+      // handler, so this pre-check only mirrors its rules and must be kept in sync with it. The
+      // sort is judged from the ResponseBuilder's SortSpec, the same source ExportWriter uses: a
+      // sort supplied as a local param on q counts, while an absent sort, or one that parses to
+      // no sort, does not.
       SolrRequestInfo info = SolrRequestInfo.getRequestInfo();
       ResponseBuilder rb = info != null ? info.getResponseBuilder() : null;
       SortSpec sortSpec = rb != null ? rb.getSortSpec() : null;
