@@ -42,6 +42,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.cloud.SolrCloudAuthTestCase;
 import org.apache.solr.cluster.placement.PlacementPluginFactory;
 import org.apache.solr.cluster.placement.plugins.MinimizeCoresPlacementFactory;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.Replica;
@@ -252,9 +253,9 @@ public class BasicAuthIntegrationTest extends SolrCloudAuthTestCase {
       batchDoc.setField("id", String.valueOf(i));
       noCredentialsBatch.add(batchDoc);
     }
-    RemoteSolrException batchFailure =
+    SolrException batchFailure =
         expectThrows(
-            RemoteSolrException.class,
+            SolrException.class,
             () -> noCredentialsBatch.process(cluster.getSolrClient(), COLLECTION));
     assertEquals(401, batchFailure.code());
 
