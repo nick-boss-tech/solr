@@ -61,4 +61,12 @@ public class GenericSolrRequestTest extends SolrTestCase {
         .process(client, "coll1");
     assertEquals(ROOT_URL + "/admin/info/system", client.url.get());
   }
+
+  public void testDirectFieldWriteFalseDoesNotOptOut() throws Exception {
+    final UrlRecordingClient client = new UrlRecordingClient();
+    GenericSolrRequest req = new GenericSolrRequest(SolrRequest.METHOD.GET, "/select");
+    req.requiresCollection = false; // direct write to the public field; not tracked
+    req.process(client, "coll1");
+    assertEquals(ROOT_URL + "/coll1/select", client.url.get());
+  }
 }

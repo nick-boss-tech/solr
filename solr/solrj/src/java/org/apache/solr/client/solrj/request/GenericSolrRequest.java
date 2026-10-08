@@ -30,7 +30,15 @@ public class GenericSolrRequest extends SolrRequest<SimpleSolrResponse> {
   private final SolrParams params; // not null
   public SimpleSolrResponse response = new SimpleSolrResponse();
   public ContentWriter contentWriter;
+
+  /**
+   * Whether this request targets a collection or core. Set it through {@link
+   * #setRequiresCollection(boolean)}: direct writes to this field are not tracked, and a direct
+   * write of {@code false} does not opt out of a collection named in {@code process(client,
+   * collection)}.
+   */
   public boolean requiresCollection;
+
   private boolean requiresCollectionSet;
 
   /**
