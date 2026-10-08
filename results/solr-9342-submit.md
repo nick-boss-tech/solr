@@ -9,16 +9,12 @@
 
 | Check | Result |
 | --- | --- |
-| Changelog YAML parse (step 0 style) | not run in this pass; see note below |
+| Changelog YAML parse (step 0) | PASS (yaml.safe_load, type: fixed) |
 | `bash -n solr/bin/solr` | PASS, rc 0 |
 | shellcheck `-S warning` on branch vs base | rc 1 on both; the same 13 finding codes with the same counts on both (pre-existing, none added) |
 | `env TZ="${TZ:-$SOLR_TIMEZONE}"` default | `SOLR_TIMEZONE` defaults to `UTC` (solr/bin/solr:1196), so the expansion never produces an empty `TZ` |
 | Operator `TZ` precedence | `env TZ=America/New_York date +%Z` prints EDT; the operator value wins as the comment says |
 | BATS test `SOLR-9342 GC log follows SOLR_TIMEZONE` | NOT RUN: it needs the packaging harness and a started Solr; no Gradle here |
-
-## Note
-
-The changelog fragment was not re-parsed in this pass. Step 0 for this branch is covered by the sweep.
 
 ## Verdict
 
