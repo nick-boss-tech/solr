@@ -1,4 +1,4 @@
-title: A core now fails to load, instead of ignoring the setting, when a DenseVectorField configures a KNN algorithm or HNSW option that the configured codec factory does not support, and an unsupported knnAlgorithm is rejected when the core is created rather than at the first segment flush
+title: A core now fails to load, instead of ignoring the setting, when a DenseVectorField configures a KNN algorithm or HNSW option that the configured codec factory does not support, and an unsupported knnAlgorithm or invalid HNSW parameters are rejected when the core is created rather than at the first segment flush
 type: fixed
 authors:
   - name: Nick Shanin

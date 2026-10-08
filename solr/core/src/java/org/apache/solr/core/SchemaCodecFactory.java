@@ -145,7 +145,28 @@ public class SchemaCodecFactory extends CodecFactory implements SolrCoreAware {
     for (FieldType fieldType : schema.getFieldTypes().values()) {
       if (fieldType instanceof DenseVectorField vectorField) {
         validateKnnAlgorithm(vectorField.getKnnAlgorithm());
+        validateKnnVectorsFormat(vectorField);
       }
+    }
+  }
+
+  /**
+   * Forces construction of the field type's KNN vectors format, so format parameters that the
+   * format itself rejects (such as out-of-range HNSW parameters) fail here instead of when the
+   * format is first looked up. The constructed format is discarded; per-field formats are still
+   * built by {@code getKnnVectorsFormatForField}.
+   */
+  private static void validateKnnVectorsFormat(DenseVectorField vectorField) {
+    try {
+      vectorField.buildKnnVectorsFormat();
+    } catch (IllegalArgumentException e) {
+      throw new SolrException(
+          ErrorCode.SERVER_ERROR,
+          "Invalid KNN vectors format parameters for field type '"
+              + vectorField.getTypeName()
+              + "': "
+              + e.getMessage(),
+          e);
     }
   }
 

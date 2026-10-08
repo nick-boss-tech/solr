@@ -141,6 +141,13 @@ public class BadIndexSchemaTest extends AbstractBadConfigTestBase {
         "typo KNN algorithm is not supported");
   }
 
+  public void testInvalidHnswParametersFailAtCoreInit() throws Exception {
+    assertConfigs(
+        "solrconfig_codec.xml",
+        "bad-schema-codec-knn-hnsw-params-invalid.xml",
+        "maxConn must be positive");
+  }
+
   public void testDocValuesUnsupported() throws Exception {
     doTest("bad-schema-unsupported-docValues.xml", "does not support doc values");
   }
