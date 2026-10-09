@@ -230,7 +230,13 @@ public class SolrSuggester implements Accountable {
     try {
       return lookupSuggestions(options);
     } catch (IllegalStateException e) {
-      // e.g. FreeTextSuggester: "Lookup not supported at this time" when nothing was built or loaded
+      if (e instanceof AlreadyClosedException
+          || e instanceof org.apache.solr.common.AlreadyClosedException) {
+        // a closed lookup or core (e.g. during a reload) is not an unbuilt suggester
+        throw e;
+      }
+      // e.g. FreeTextSuggester: "Lookup not supported at this time" when nothing was built or
+      // loaded
       throw new SolrException(
           SolrException.ErrorCode.SERVICE_UNAVAILABLE,
           "Suggester '"

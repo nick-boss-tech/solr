@@ -196,6 +196,10 @@ If this parameter is not specified, the suggester will check if the lookup data 
 Enabling this to `true` could lead to Solr taking longer to load (or reload) cores as the suggester data structure is built, which can sometimes take a long time.
 It’s usually preferred to leave this set to `false` and build suggesters manually with `suggest.build=true`.
 
+NOTE: Suggester dictionaries are not replicated between nodes.
+A suggester that was built on one node is not available on other nodes, and a suggest request sent to a node where it was never built fails with a "not built on this node" error.
+Build the suggester on every node, with `suggest.build` or `suggest.buildAll`, or enable `buildOnStartup` or `buildOnCommit` so that each node builds it on its own.
+
 === Lookup Implementations
 
 The `lookupImpl` parameter defines the algorithms used to look up terms in the suggest index.
