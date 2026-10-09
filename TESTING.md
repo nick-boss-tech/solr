@@ -305,3 +305,11 @@ SOLR-13059 question, a different ticket); or move
 it re-enables. Recommendation: the move, proven by a normal-mode
 run before the PR; if the moved test is not reliable in normal
 mode, the branch waits on SOLR-13059.
+
+Decision (Nick, 2026-10-08): option 3. Move `testDateMathInStart`
+into a class without the class-level annotation so only it
+re-enables; the SOLR-13059 annotation on the original class stays
+untouched. The move is proven by a normal-mode run (no
+`-Dtests.awaitsfix=true`) before the PR. If the moved test is not
+reliable in normal mode, the branch waits on SOLR-13059 and the
+lane reports instead of pushing.
