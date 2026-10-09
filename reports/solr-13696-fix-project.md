@@ -2,7 +2,7 @@
 
 - Branch: `solr-13696-submit` on the fork. Starting head `05ab4664dace`. Base `upstream/main` at `4b58db1a42b`, merge-base `c3cdf7b46e8`.
 - Assignment: `assignments/solr-13696-fix-project.md`. Claim: `claims/solr-13696-fix-project.md`.
-- Status: in progress. Sections 1 and 2 were written before any change to the branch. Sections 3 to 6 are added after the repair.
+- Status: repaired and pushed. Sections 1 and 2 were written before any change to the branch. Sections 3 to 6 describe the repair. New head `1deddc51958`.
 - Read-only on the main side. Nothing built, run, or posted. No Gradle. The gate runs from the main side.
 - Evidence tags: **verified** means seen in the code, the diff, the history or a record cited here. **hypothesis** means not run and not traced end to end.
 
@@ -53,16 +53,46 @@ Answer: the mechanism is still on main, the race has not been reproduced, and th
 
 ## 3. Repairs
 
-Not yet made. Added after the change.
+The repair is one commit on the branch, `1deddc51958`, on top of `05ab4664dac`. The branch's earlier change, `32dbb7a4bb2`, is kept as it was: it removes commitWithin from `addDocsAndCommit`, removes `@AwaitsFix` from the base class, and commits every alias collection explicitly.
+
+1. **Drift (test code).** `CategoryRoutedAliasUpdateProcessorTest.java:53`: `categoryField` changes from `ship_name_en` to `ship_name_s`. The server `_default` defines `*_s` (string). Routing uses the raw field value, so the field type does not change which collections are created.
+   - Rejected: defining `ship_name_en` through the schema API in `createConfigSet`. That needs a text field type and more code, and the test does no text analysis.
+   - Rejected: turning `update.autoCreateFields` back on. That changes what the helper tests, and the "no data driven" setting was deliberate in SOLR-13131.
+2. **Finding 3 guard (test code).** `RoutedAliasUpdateProcessorTest.java`: `assertNotNull("alias ... is not listed", aliasCollections)` before the commit loop. The comment above the loop now states a fact about commits, not the change.
+
+Checks done by reading, since nothing was built:
+- `queryNumDocs` removal: the only other caller is `TimeRoutedAliasUpdateProcessorTest`, which defines its own private method, so nothing breaks.
+- `AwaitsFix` and `Collectors` removal: no remaining use in the base. `assertNotNull`, `SolrServerException`, `IOException`, `ExecutorUtil` and `SolrNamedThreadFactory` are still used.
+- `CollectionAdminRequest.ListAliases().process(...).getAliasesAsLists()` exists on main with the used signature.
+- No line over 100 columns is added. Two long lines in the touched files were already on `upstream/main` and are outside the diff.
+- Formatting is not verified. The gate's spotless apply covers it.
 
 ## 4. Finding dispositions
 
-Not yet written. Added after the change.
+| Finding | Disposition | Evidence class |
+|---|---|---|
+| 1, scope of re-enabling | Confirmed as intended. Exactly two subclasses run again: Category and Dimensional. The base's `@AwaitsFix` is gone and no annotation remains in their hierarchy. `TimeRoutedAliasUpdateProcessorTest` keeps its own class-level `@AwaitsFix(SOLR-13059)` at line 75, so it stays disabled. | Verified by reading |
+| 2, commitWithin coverage | **Dropped. A decision for the owner, not a side effect.** The re-enabled tests have no commitWithin exercise left. The old commitWithin check was a poll-until-visible loop, and the race is in that loop. A deterministic version would assert the per-core commit timer, which tests commitWithin, not routed aliases. The TESTING note records that a commenter on the ticket (Gus Heck) called that part orthogonal to routed aliases. Recommendation: keep it dropped. To restore coverage, add a separate commitWithin test that waits per collection with a timeout. Not decided here. | Recommendation, owner call |
+| 3, possible NPE | **Real, not reachable in these tests, fixed.** `CollectionAdminResponse.getAliasesAsLists()` (`CollectionAdminResponse.java:72-74`) returns the alias map, and `get(alias)` returns null when the alias is absent. The old loop dereferenced that null. Every caller creates the alias before adding documents, so the normal flow never hits it. The guard turns a missing alias into a clear assertion. The same pattern in the `!aliasOnly` branch is unreachable, because nothing calls `addDocsAndCommit(false, ...)`. It is left unchanged. | Verified by reading |
+| 4, no fail-before | Partly changed. The drift repair has a deterministic fail-before: with `ship_name_en`, every Category add is rejected under `autoCreateFields=false`. The commitWithin race stays intermittent, so a revert shows it only under beasting. | Verified by reading (drift); hypothesis (race) |
+
+Items from the TESTING note's "What was guessed" list:
+- `@AwaitsFix` inheritance: no longer matters for Category and Dimensional, since the base annotation is removed. Time keeps its own class-level annotation, which does not depend on inheritance.
+- `ListAliases` and `aliasOnly`: the request has no `aliasOnly` option. `ListAliases()` returns every alias, and the alias is present when it exists. The server-side listing was traced only to the SolrJ getter.
+- Subclass stability: unknown. Only the gate can show it. Dimensional should be beasted, since its failure is the race.
+- Spotless and unused imports: `Collectors` is removed. Nothing else became unused by reading. Formatting is left to the gate.
 
 ## 5. New head
 
-Not yet made.
+- `solr-13696-submit` is at `1deddc51958`, one commit on `05ab4664dac`. Pushed fast-forward. The fork's history for this project is `32dbb7a4bb2` (the branch's change), `05ab4664dac` (handoff note), `1deddc51958` (this repair). Author Nick Shanin, no trailers.
+- The outbound patch still carries `SOLR-13696-TESTING.md` from `05ab4664dac`. It says nothing was run and lists guesses that this report answers. It is a packaging item, removed before any PR, as with the other branches' notes. It was not removed here, because the assignment did not ask for that.
 
 ## 6. Verdict
 
-Not yet given.
+**Ready for the main side to gate.**
+
+- The drift the handoff named is repaired, and the characterization covers every field reference in the re-enabled classes, by reading.
+- The premise is answered with its evidence class. Findings 1 to 3 have dispositions. Finding 2 is an owner decision that the gate does not need.
+- The change is test-only. Production code is untouched.
+
+Not verified: no build, test or beast run from this work. The gate should run `CategoryRoutedAliasUpdateProcessorTest` and `DimensionalRoutedAliasUpdateProcessorTest` with spotless, and beast Dimensional for the commitWithin race. If the gate shows failures beyond `ship_name_en`, the drift section is incomplete. It covers references read from the code, not failures observed in a run.
