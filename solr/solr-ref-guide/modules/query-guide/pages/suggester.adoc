@@ -399,8 +399,11 @@ This implementation supports <<Context Filtering>>.
 An extension of the `AnalyzingInfixSuggester` which provides additional functionality to weight prefix matches across the matched documents.
 It scores higher if a hit is closer to the start of the suggestion.
 
-The position coefficient multiplies the suggestion's weight, so the blend only reorders suggestions whose weights are not all equal.
-If the dictionary supplies no weight (for example a `DocumentDictionaryFactory` without a `weightField`), every weight is `0`, every blended score is `0`, and the order does not follow the position of the match.
+The blended score is the suggestion's weight multiplied by a coefficient that depends on the position of the first match: the earlier the match, the higher the coefficient.
+Suggestions that have the same weight are therefore still ordered by the position of their match.
+If the dictionary supplies no weight (for example a `DocumentDictionaryFactory` without a `weightField`), every weight is `0`.
+A weight of `0` counts as `1` in the blend (weights below `10` are scaled by a factor of `10` before the coefficient is applied), so the blended scores still follow the position of the match.
+What a missing `weightField` removes is any difference in importance between suggestions: every suggestion's weight counts the same, and only the position of the match separates them.
 
 This implementation uses the following additional properties:
 

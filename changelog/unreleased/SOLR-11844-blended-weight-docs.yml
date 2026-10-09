@@ -1,6 +1,6 @@
 title: >
-  Ref guide: BlendedInfixLookupFactory only orders by match position when the dictionary supplies a weight
-  (configure a weightField); with no weight every blended score is 0.
+  Ref guide: BlendedInfixLookupFactory multiplies the suggestion weight by a coefficient based on the position
+  of the match; without a weightField every weight is 0 and counts the same in the blend.
 type: other
 authors:
   - name: Nick Shanin
