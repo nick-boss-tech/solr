@@ -68,3 +68,39 @@ SOLR-9637's history contains all three SOLR-17393 commits plus two of its own. B
 - `SolrSuggester.java:93` at `942acabd26ef` hard-codes `defaultAllTermsRequired = true`.
 - SOLR-17393 diff (`c3cdf7b46e8` to `dd6c82924fff`): 4 files, +135/-12, `SuggestComponent.java` among them.
 - Not done: no gates, tests, builds, Gradle, PRs, comments, or submit-branch edits.
+
+## Draft round (2026-10-09)
+
+Claim: `claims/suggester-round-4-drafts.md` (commit `95b62c33450`), made before any draft. Source: `material/suggester-round-4-decisions.md` and `material/suggester-round-4-answers.md` at `81339a26ef6`. Live tips checked with `git ls-remote` on 2026-10-09. Two subagents drafted and checked; the lead checked their output and made the commits.
+
+Drafted (1), `pr-drafts/suggester/SOLR-9227.md`. The head is `3c23fc5cfa6`, the gate receipt's head and the live tip. The changelog path and the test name exist at that head. The draft has one bracketed HOLD line in Limits, for owner decision A.
+
+Held (7), no draft:
+
+| Ticket | Live tip | Audit pin | Hold reason |
+|---|---|---|---|
+| SOLR-9968 | `c31d2ff1a3f` | `d688e1efdf2` | Wording narrowing sits on the gated tip; its top-up gate is pending. |
+| SOLR-14171 | `faa262eedc5` | `942acabd26ef` | Packaged; first full gate is running. |
+| SOLR-17393 | `626241e647e` | `dd6c82924fff` | Packaged; baseline gate is running. |
+| SOLR-17215 | `66be01719765` | same | Catch narrowing and ref-guide note have not landed. |
+| SOLR-10937 | `7d0cd11bafd` | `9d8151c43a81` | Docs lane. New commits `363dd367b6e` and `7d0cd11bafd`. No lane report in the material. |
+| SOLR-11844 | `cbd08c20e9a` | `4e226462f3b0` | Docs lane, conditional on the Lucene check. New commits `97a97efc995` and `cbd08c20e9a`. |
+| SOLR-9637 | `c50fa4ffd93` | none | Its own PR after SOLR-17393 lands, rebased onto that tip. |
+
+Inputs recorded for the later drafts:
+
+- SOLR-9968: the setting controls how context values are tokenized. The keyword tokenizer keeps characters such as `#` inside one term. A value is still parsed as a query, so whitespace separates terms. The round 27 Choice is the configurable tokenizer as implemented, against the context field's schema analyzer.
+- SOLR-14171: the `Boolean.getBoolean` split is named in Limits, not fixed. The literal `true` stays in `SolrSuggester`, and the Choice is the literal against the lookup's own default. The unconfigured default stays `true`.
+- SOLR-17393: ship the merge-only fix. Limits say the merge orders what the shards return, a shard's own top-count cut happens first, so at count 1 with equal weights the symptom can persist, and the per-shard fix is a planned follow-up. Payload scope is the stable order over distinct suggestion text. Memory bound is count times shard count.
+- SOLR-17215: keep the clearer 503 message. Narrow the catch so `AlreadyClosedException` is not reported as "not built". The 500 to 503 change is the Choice. Add the ref-guide note that dictionaries are not replicated.
+- SOLR-10937: docs only. Keep the five-lookup list only if the Lucene check confirms WFST and TST sort in `java.io.tmpdir`; otherwise drop it.
+- SOLR-11844: docs only, conditional on the Lucene check of the weight formula and the weight-0 premise. The new tip text also asserts a scaling rule (weight 0 counts as 1; weights below 10 scaled by 10). The decisions file does not name that rule, so check it too.
+
+Owner decisions needed:
+
+- **A. SOLR-9227 store path (blocks the draft).** The material says the absolute store path appears only in the IOException rethrown from `build`, and does not reach request callers. At `3c23fc5cfa6` the WARN in `SolrSuggester.java` (L197) also logs the absolute path. `SuggestComponent.java` (L196-L199) calls `build` on `suggest.build=true` with no catch, so the IOException reaches that request. Not checked: whether the message reaches the client. Decide whether the Limits line keeps the path claim with corrected facts, or the message changes.
+- **B. Gate records disagree.** The SOLR-9968 audit pins `d688e1efdf2` and calls its gate owed. The material says that commit was gated green in the Pairs round (`g9968r1-gate.log`). The SOLR-14171 and SOLR-17393 audit headers say "gated". The material says neither was ever gated on the main side. The material's receipt list names only 9227 and 9968, so SOLR-9637's green gate at `c50fa4ffd93` has no receipt on record. Decide which record the drafts cite.
+- **C. SOLR-17393 HIGH finding.** The merge-only scope with its Limits line answers the finding only under the audit's second re-verdict option. No per-shard regression was added. Confirm that this is the intended answer.
+- **D. Audit line numbers.** The SOLR-9227 audit gives `lookup.build` at lines 172-181. At `3c23fc5cfa6` it is lines 174-182. Correct the audit, or note it.
+
+Not done: no gates, tests, builds, Gradle, PRs, comments, or submit-branch edits. Nothing was posted.
