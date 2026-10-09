@@ -30,6 +30,11 @@ says so plainly.
 
 ## Rules for this assignment
 
+- Decisions already taken for this category are recorded in
+  `TESTING.md` on this branch, including the calls flagged for
+  discussion. Audits and drafts follow them. Where an audit
+  disagrees with a recorded decision, the audit says so and why;
+  the decision stands until Nick changes it.
 - Reading work only. No builds, no Gradle, no test runs, nothing
   executed. Gates run later on Linux or on the GitHub runner.
 - Push nothing to any submit branch. All work product lands on

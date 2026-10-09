@@ -7,6 +7,9 @@ Contents:
 - `pr-formula.md`: the formula every PR description draft on this
   branch follows.
 - The inventory document is added by Nick from the Windows side.
+- `TESTING.md`: decisions taken for the batches, with the
+  recommendations adopted and the tough calls flagged for
+  discussion.
 
 How the work runs here:
 
