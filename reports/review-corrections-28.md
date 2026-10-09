@@ -21,7 +21,7 @@ Every one of the 28 drafts was edited, except SOLR-16356, which had one change t
 
 ## Held back, not changed
 
-1. **PR titles (O1).** The drafts have no title field. The titles stay as they are until the owner decides.
+1. **PR titles (O1), ruled.** The drafts have no title field. The owner ruled that titles must be accurate, whatever their source. The main side fixed four titles on the live PRs, and 24 stand. Two titles need an accuracy check: SOLR-12864 (its title says the bug exists, while the body says it does not reproduce) and SOLR-12245 (its title describes the MDC defect, which the change does not fix).
 2. **SOLR-7504 null-count defect (O7).** The fix is in progress on the branch, so the draft keeps "A null counts as 0". That sentence is false on the current branch until the fix lands. The draft should not flip until it does.
 
 ## For your confirmation
@@ -35,7 +35,7 @@ Every one of the 28 drafts was edited, except SOLR-16356, which had one change t
 
 ## Not applied to the PRs
 
-No PR body, title or label was changed. The main side applies the corrected drafts to the live PRs after the owner rules on the calls above and on the title rule.
+No PR body was changed here. The main side applies the corrected drafts to the live PRs after the owner rules on the calls above. The four title fixes on the live PRs were made by the main side under the owner's title ruling.
 
 ## Not done
 
