@@ -24,3 +24,9 @@ For each ticket:
 ## Report
 
 Write `reports/open-update-29-prs.md` with one line per ticket: the ticket, the PR number and URL, or SKIPPED with the reason (tip mismatch with both heads named, or the existing PR's number). Commit and push the report on pr-prepare when the pass is done or when you stop early.
+
+## Amendment (main side, 2026-10-09, after the preflight report)
+
+- The four receipts the preflight skipped (4841, 5754, 7022, 16673) are refreshed: each now names the live tip as its head and records the 2026-10-09 top-up verification (delta read file by file; 7022 also has an Error Prone compile and its focused test at the tip). All 28 tickets now pass the receipt rule.
+- Titles: the drafts carry no title field. Use as the PR title: `SOLR-<ticket>: <title>` where `<title>` is the title line of the changelog fragment the branch adds under `changelog/unreleased/` on `solr-<ticket>-submit`. For SOLR-16673, its draft's labelled Title line is the same text; use it.
+- Authorization: the owner approved these openings in the main chat on 2026-10-09 and will confirm in this session as well; treat the owner's word in this session as the go-ahead this amendment cannot supply on its own.
