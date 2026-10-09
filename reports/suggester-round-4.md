@@ -136,3 +136,26 @@ Owner decisions needed:
 Lead checks: live tips matched for all eight branches at `ls-remote`. Em dash count 0 in all seven drafts. No HOLD markers remain. The word "holds" in the 17393 draft is not a marker.
 
 Not done: no gates, tests, builds, Gradle, PRs, comments, or submit-branch edits. Nothing was posted.
+
+## Draft round 3: SOLR-17215 (2026-10-09)
+
+Claim: `claims/suggester-17215-draft.md` (commit `ea2510c795b`). Source: `material/suggester-17215-receipt.md` (commit `2468ded8b35`) and `material/suggester-round-4-decisions.md` item 6. The live head of `solr-17215-submit` is `04d35df186d`, the receipt's head. It matched before and after drafting.
+
+Drafted (1): `pr-drafts/suggester/SOLR-17215.md`, 3,792 bytes, over the ~3,500 guide. The required facts take the space. Trimming the Fuzzy sentence would save about 85 bytes.
+
+Independent check: a second subagent read the head code without reading the draft. All six claims verified: the branch adds two hunks to `SolrSuggester.java` against base `cabedd1d968`, and the base has no catch; the guard rethrows `AlreadyClosedException` unchanged; the ref-guide note is at `suggester.adoc` L199; `TestFreeTextSuggesterNotBuilt` has one method; both `AlreadyClosedException` classes extend `IllegalStateException` (the Solr source, and the Lucene 10.4.0 jar read with `javap`); the changelog type is `fixed`.
+
+Lead corrections to the draft:
+- "The catch is narrow" is replaced with a description of the catch. The base has no catch, so "narrow" would mislead.
+- The gate log name is dropped, because the other drafts cite no log names.
+- "The ticket title asks for replication" is replaced with the ticket title's own wording.
+- The reporter's details (Solr 8.11.2, three replicas on separate nodes, `FreeTextLookupFactory`, `suggest.buildAll`, the exception quote) were checked against the JIRA packet and match.
+
+Open points:
+1. Length, as above.
+2. The 500 status before the branch rests on decision 6 and the receipt. The checker did not verify the base status code. The Choice states it as the decisions file does.
+3. The receipt names no follow-up for SOLR-17215, so Limits offers none.
+4. The 2024-12-20 comment is cited without its author's name.
+5. A null `getMessage()` would render as "(null)" in the 503 text. Minor, and not stated in the draft.
+
+Not done: no gates, tests, builds, Gradle, PRs, comments, or submit-branch edits. Nothing was posted.
