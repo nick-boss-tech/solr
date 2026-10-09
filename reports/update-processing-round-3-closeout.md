@@ -10,7 +10,7 @@ Done 2026-10-09 by Claude Code (AI agent), working for Nick Shanin. Two subagent
   - Released or updated (5): SOLR-7022 (released), SOLR-16655, SOLR-12705, SOLR-12245, SOLR-11475.
   - New draft (1): SOLR-13696.
   - Verified, no change (3): SOLR-6045, SOLR-16673, SOLR-5941.
-  - Waiting (1): SOLR-13943. Material item 10 needs a further addendum that names the stacked head and its gate receipt. The close-out does not wait for it.
+  - Waiting (1), now drafted: SOLR-13943. Material item 10 needed a further addendum that names the stacked head and its gate receipt. That addendum has landed, and the draft is in the Addendum section below.
 - Live fork tips matched the named heads for all six submit branches when the claim was made (`git ls-remote`). The SOLR-13696 head was fetched read-only and matches.
 - No Gradle, builds, or tests were run. No submit branch was edited. Nothing was posted to GitHub or Jira. No PR was opened or changed.
 
@@ -59,3 +59,41 @@ Done 2026-10-09 by Claude Code (AI agent), working for Nick Shanin. Two subagent
 - Em dash count is 0 in all six drafts (`LC_ALL=C grep`).
 - SOLR-6045, SOLR-16673, and SOLR-5941 were checked against the material and not edited.
 - Not done: no builds, tests, Gradle runs, PR actions, comments, or submit-branch edits.
+
+## Addendum: answers and SOLR-13943
+
+Material: `material/update-processing-round-3-closeout-answers.md` (commit `e441a3a3b93`). Claim: `claims/update-processing-round-3-closeout-addendum.md` (commit `aea8e1a8afb`). The assignment says SOLR-13943 joins this close-out when that addendum lands. It has.
+
+### Answers to the owner decisions
+
+1. **SOLR-16655 receipt: confirmed.** Gate GREEN at `5e2317443f`, recorded 2026-10-09 08:03 MDT. Pre-fix head `b201a57fb3e5` is the parent of the fix commit, and the new test fails there. The draft cites the head, date, and counts (commit `582b2c70333`). The "no fail-before run" line is removed.
+2. **SOLR-13696 pre-fix heads and the create-alias fail-before: not applied, held.** The material supplies both. The SOLR-13696 live tip has moved to `da4fa6df117`, a changelog-fragment commit whose gate (r8) is pending. The assignment's rule is to hold a branch whose live tip differs from the named head. The draft stays at `1d0b8a0a73cd`, and its Limits still says no fail-before run is recorded for the create-alias fix. That line changes when the r8 addendum names the new head.
+3. **SOLR-13696 length: accepted.** No trim.
+4. **SOLR-16673 title: added.** The narrowed changelog title, verbatim from `changelog/unreleased/SOLR-16673.yml` at `d7170b12f312`, as a labelled "Title:" line under the JIRA link. I checked it byte for byte. `pr-formula.md` defines no title convention, so the label is the lead's choice.
+5. **SOLR-13696 changelog: held with the branch.** The fragment is in `da4fa6df117`, which is not yet gated. The draft says "this branch adds no changelog fragment," which is true at `1d0b8a0a73cd`.
+6. **SOLR-13943: drafted.** See below.
+
+### SOLR-13696 status
+
+The draft was written at `1d0b8a0a73cd` and stands in substance. It is held for the r8 addendum: its pre-fix heads, its create-alias citation, and its changelog line change once the new head is named.
+
+### SOLR-13943
+
+- Draft: `pr-drafts/update-processing/SOLR-13943.md`. Head `cc155cf68e1d8e79f1bcecd2e4c25ada864d8f53`, which matched the live tip. Stacked on `1d0b8a0a73cd`.
+- The test moves from `TimeRoutedAliasUpdateProcessorTest` to a new class, `TimeRoutedAliasDateMathInStartTest`, with no `@AwaitsFix`. Its second wait now polls the provider, and its first wait is unchanged. The diff is two test files, +176 and -92. No production code changes.
+- Proof: 1 of 1 in normal mode; the stack sanity counts (Category 6 of 6, Dimensional 2 of 2, CreateAliasAPITest 13 of 13); tidy, Error Prone, and `:solr:core:check -x test` exit 0. The awaitsfix result is stated plainly: `testPreemptiveCreation` fails, 5 of 6 pass, the failure is pre-existing, and this change does not fix it.
+- Limits: the original class keeps its SOLR-13059 skip, no fail-before run is on record for this change, and the stacking note is in Limits.
+- Lead checks at the head: the class-level `@AwaitsFix` at lines 69-70 of the original class, none on the new class, the poll loop at lines 135-159, the `testPreemptiveCreation` assertion at line 705, and the comment at lines 678-683. The lead removed one untied sentence ("earlier runs, 3 of 3") from the Proof, because the material gives no head for those runs.
+
+### Open points
+
+- **The 3-of-5 figure.** The material says "the round 38 spot-check on the unstacked branch failed the same test in 3 of 5 runs." The draft reads "unstacked" as the 13943 branch before it was stacked on SOLR-13696. No run at the base is on record. Confirm that reading.
+- **Stack gate date.** The material gives no date for the SOLR-13943 stack gate, so the draft gives none.
+- **Stacking note.** It names `1d0b8a0a73cd`. When the r8 addendum names a new SOLR-13696 head, re-point the note as the SOLR-13696 draft is re-pointed.
+- **Commit subject.** The SOLR-13943 branch commit `dd83fdcccb6` has a doubled prefix, "SOLR-13943: SOLR-13943: ...". It sits on a submit branch, which this round does not edit. Raise it with the owner before the PR.
+
+### Remaining decisions for the owner
+
+- The SOLR-13696 r8 addendum (new head, changelog line, pre-fix heads).
+- The 3-of-5 reading for SOLR-13943.
+- The commit subject on `dd83fdcccb6`.
