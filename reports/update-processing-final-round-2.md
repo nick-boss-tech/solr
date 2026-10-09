@@ -59,7 +59,7 @@ Proof sources are the files or records each draft names. Where a source gives no
 
 ## Outside this round
 
-- SOLR-16655 is out of scope and was not touched. Its live fork tip is now `b201a57fb3e5`. Round 1 recorded `aa7898d972a7`, so the round-1 row is stale.
+- SOLR-16655 is out of scope and was not touched. Its live fork tip is now `b201a57fb3e5`. Round 1 recorded `aa7898d972a7`, so the round-1 row is stale. The 2026-10-09 decision in `TESTING.md` gates the descent, and a fix lane is running. That will move the head again, so the round-1 draft will need a new round.
 
 ## Checks
 
