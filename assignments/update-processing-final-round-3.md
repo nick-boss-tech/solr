@@ -1,3 +1,13 @@
+# SUPERSEDED: do not claim this round
+
+The owner directed on 2026-10-09 that everything goes out as
+ONE final batch, handed off only after the main side finishes:
+gate r5 for SOLR-13696, then the SOLR-13943 stacked test move
+with its normal-mode proof. This assignment and its material
+stand as the draft of that batch; a single final assignment
+will replace this file, with final heads for every item,
+including SOLR-13943. Nothing in this round is cancelled.
+
 # Assignment: update processing, final round 3
 
 Finalize what final round 2 left lacking, on both sides. The
