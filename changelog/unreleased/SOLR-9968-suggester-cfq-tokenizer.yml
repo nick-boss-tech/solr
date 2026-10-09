@@ -1,5 +1,5 @@
 title: >
-  Suggester context filter queries (suggest.cfq) can use a configurable tokenizer (contextFilterQueryTokenizer, for example keyword), so context values with special characters match exactly. A context filter parse failure now reports the query and its cause.
+  Suggester context filter queries (suggest.cfq) can use a configurable tokenizer (contextFilterQueryTokenizer). A tokenizer such as keyword keeps special characters such as # within one term; the value is still parsed as a query, so whitespace separates terms and query syntax still applies. A context filter parse failure now reports the query and its cause.
 type: fixed
 authors:
   - name: Nick Shanin

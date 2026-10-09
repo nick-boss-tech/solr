@@ -932,12 +932,13 @@ The suggester will only bring back suggestions for products tagged with 'cat=mem
 
 The context filter query is tokenized with the standard tokenizer by default.
 To use a different tokenizer, set `contextFilterQueryTokenizer` in the suggester configuration to the name of a tokenizer factory.
-For example, `keyword` keeps the whole filter value as a single term, so context values containing special characters can match exactly:
+For example, `keyword` keeps special characters such as `#` within a single term instead of splitting on them:
 
 [source,xml]
 ----
 <str name="contextFilterQueryTokenizer">keyword</str>
 ----
 
+The filter value is still parsed as a query, so whitespace in the value still separates terms and query syntax still applies.
 Only the tokenizer can be configured this way; token filters cannot.
 The tokenizer factory is always created with an empty set of arguments, so a factory that requires arguments cannot be used here.
