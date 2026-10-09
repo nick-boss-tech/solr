@@ -382,3 +382,23 @@ the PR's "A choice to check" for maintainers to discuss.
   to 12 entries. The scope question (an alias creation fix
   inside a test repair PR) is posed in Choices. Re-gate on the
   folded tree follows; SOLR-13943 stacks after it.
+
+## SOLR-13696: second defect, fold-in approved (2026-10-09)
+
+Gate r4 at 98ad9d3fcc33 passed the premise and alias creation,
+then DimensionalRoutedAliasUpdateProcessorTest failed 0 of 2
+with a String to Date ClassCastException (seed
+FB1F0CEBAAF65F30). The investigation (main side, takeover log)
+cleared the fold-in: the alias messages carry types and fields
+aligned in both dimension orders, and Category (6 of 6) and
+CreateAliasAPITest (13 of 13) passed in the same gate. The
+failure is a second pre-existing defect: TimeRoutedAlias
+.formattedRouteValues hard-casts the document's route value to
+Date (TimeRoutedAlias.java:221, byte-identical on base), while
+a client-sent document still carries it as a String at that
+point. On base the tests die at alias creation first, so this
+defect was masked. Nick approved folding the repair into the
+13696 branch as well: parse the value through the same
+tolerant path as parseRouteKey instead of the cast. The PR's
+Choices will pose both folded-in production fixes as the scope
+question. Gate r5 follows the fix.
