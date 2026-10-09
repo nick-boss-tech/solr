@@ -244,3 +244,45 @@ DISCUSS section above. SOLR-6045's audit predates the
 option A fix: its first blocking item is done at
 `e06aa7624853`, and only the guard item keeps it out of
 the final round.
+
+## Decisions on the eight DISCUSS items (Nick, 2026-10-08, on the scoping reports)
+
+Nick reviewed the scoping index (`scopes/update-processing/INDEX.md`)
+and accepted the recommendations recorded there. The eight items move
+from DISCUSS to DECIDED as follows.
+
+- SOLR-5065: ship narrow on locale handling; the locale question stays
+  a ticket decision. Add the suggester inference pin test to this
+  branch now, with its fail-before run. This supersedes the earlier
+  "only if maintainers ask" recommendation.
+- SOLR-6065: include the cloud test the ticket asks for. It is test
+  only and contained. The branch is not final until the cloud test
+  lands and gates.
+- SOLR-7504: ship narrow on chain placement. The uncovered shape goes
+  in the draft's Limits, and the changelog title is narrowed so it no
+  longer says "fixed" for a shape the branch does not cover. The
+  separate plain-first detection fix (class (c)) still proceeds.
+- SOLR-12245: decided conditionally on one run. The main side checks
+  whether the coordinator's log line for a forward-to-leader failure
+  already names the collection and shard. If it does not, the response
+  detail stays and the duplicated host in `describe()` on the
+  streaming path is fixed first. If it does, the item returns to Nick
+  before any logs-only change.
+- SOLR-12705: option (a). Exclude counting processors from the
+  atomic-operand path in code, with a test. This reverses the earlier
+  option (b) recommendation: stating the behavior would publish
+  `{add: n}` while the merger applies it as an append, not a count.
+  The settling run (a single-valued count field with an appended
+  `{add: 1}`) is recorded as premise evidence by the fix lane.
+- SOLR-14718: ship narrow. The draft's Limits state that the reported
+  document can be the wrong one for asynchronous failures after the
+  first document in a request, and that retries are not per document.
+  The second flaw is not included. Separately, the audit's finding 1
+  timing claim is settled by a run with the clone reverted before any
+  determinism change is made to the test.
+- SOLR-16356: ship narrow. The expiration task's commit trace is a
+  follow-up, named in the draft's Limits. It is not fixed in this
+  branch.
+- SOLR-16910: ship narrow. The `SolrCore.Request` item is named in
+  the draft's Limits as not addressed; the ticket records no desired
+  behavior, so there is nothing to pin.
