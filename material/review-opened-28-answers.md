@@ -21,3 +21,7 @@ Answers to `reports/review-opened-28.md` (2026-10-09). The description and Proof
 
 - **O7 (SOLR-7504 null-count defect): verified and in progress.** The mutator loops over `src.getValues()` with no null check (CountFieldValuesUpdateProcessorFactory.java, about L78 at 22b77196e662); `getValues()` returns null for a null-valued field, and the base code's `getValueCount()` stored 0. A fix lane is running: reproduce with a new test first, guard the scan, in-lane green required before pushing, then a full re-gate (GATE PENDING). The PR stays a draft until the re-gate records green.
 - **SOLR-7022 receipt:** restored with its 2026-10-05 gate counts (2/2 and 7/7) and its grounded pre-fix proof, which the earlier refresh had dropped.
+
+## O1 ruled by the owner (2026-10-09)
+
+The owner does not care which source a title comes from; the rule is that every title is accurate. Applied the same day by the main side: the four titles that were wrong on their face are fixed on the live PRs (SOLR-5754 names StreamingSolrClients and what changed; SOLR-13943 no longer names the old location of the test; SOLR-16673 uses its draft's labelled title; SOLR-5505's spelling is corrected). The other 24 titles stand as opened, and SOLR-16356's title stands under the same rule (O6 closed). Any further title change in the corrections pass must be justified by accuracy, not by source.
