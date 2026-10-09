@@ -92,3 +92,12 @@ Other notes:
 4. Resolve the modify/delete conflict on `gradle/validation/check-broken-links.gradle` if the java port and SOLR-18523 are combined.
 
 Nothing was posted to GitHub or Jira. No changes were made to solr-18523-submit or solr-18119-jvm.
+
+## Correction (2026-10-08, after the paired review)
+
+Two statements above give the gate a wider scope than it has. The corrected scope is:
+
+- The `isCIBuild` gate covers `:solr:documentation:check` only: that project's `check` builds the `documentation` output only when `isCIBuild` is true.
+- A root `check` still builds the documentation through a different path. When the ref guide is included (`refguide.include`, on by default when a `.git` directory exists), the ref guide's `check` runs `checkSiteLinks`, which needs the documentation site, so `:solr:documentation:documentation` runs on a root `check` with or without CI.
+
+The earlier statements are superseded by this correction: the Coverage trade-off line "a local `check` no longer runs `documentation`", and the verify-session expectation that a root `check --dry-run` without CI shows no `documentation`. Both hold only for `:solr:documentation:check` itself. The paired review of the SOLR-18119 / SOLR-18523 branches records the same correction.
