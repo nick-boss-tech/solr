@@ -4,9 +4,9 @@ Refresh of the 2026-10-06 inventory against the live fork. The 2026-10-06 file i
 
 Purpose: classify every `solr-*-submit` branch on the fork by the part of the code it touches, so review rounds can be batched by focus area.
 
-Snapshot: `git ls-remote --heads origin` captured 2026-10-08 22:09 -04:00 (local time), after `git fetch origin --prune` in source. The fork moves while this is being read, so re-run the refresh before relying on a head. Population: 325 branches, every `solr-*-submit` head plus solr-18119-jvm, which was promoted to a row. Against the 2026-10-06 snapshot of 297: 197 unchanged, 100 moved (current head shown; the Since 10-06 column says how), 28 new (rows added), 0 gone.
+Snapshot: `git ls-remote --heads origin` captured 2026-10-08 22:31 -04:00 (local time), after `git fetch origin --prune` in source. The fork moves while this is being read, so re-run the refresh before relying on a head. Population: 329 branches, every `solr-*-submit` head plus 5 named non-submit branches promoted to rows. Against the 2026-10-06 snapshot of 297: 197 unchanged, 100 moved (current head shown; the Since 10-06 column says how), 32 new (rows added), 0 gone.
 
-Excluded from the population: `ci/*` scratch branches (not listed), the fork `main`, the branches that coordinate review or the Gradle queue, and the named non-submit `solr-*` branches other than solr-18119-jvm. The closing section "Branches outside the population" gives a category for each one.
+Excluded from the population: `ci/*` scratch branches (not listed), the fork `main`, the coordination branches, and the named non-submit branches that are not rows. The closing section "Branches outside the population" gives each one a code area and its reason for being outside.
 
 State labels: as in 2026-10-06, plus `candidate` (kept as a candidate by owner decision on 2026-10-08; not yet registered for the pipeline). Existing rows keep their 2026-10-06 state and topic, except solr-18119-submit, which is now retire candidate. Main files for moved rows are the 2026-10-06 values, not recomputed.
 
@@ -21,12 +21,12 @@ Focus areas: existing rows keep their 2026-10-06 area. New rows were placed by h
 | Suggester | 8 | PR-ready 2, awaiting pipeline 3, gated, no PR 2, held 1 | 9227, 9637, 9968, 10937, 11844, 14171, 17215, 17393 |
 | Spellcheck | 9 | PR-ready 3, awaiting pipeline 4, gated, no PR 2 | 1877, 3701, 4366, 4367, 4399, 9060, 10252, 10789, 17612 |
 | Highlighting | 5 | awaiting pipeline 5 | 2632, 2681, 3704, 4540, 16885 |
-| Configsets and config API | 6 | PR-ready 1, awaiting pipeline 2, gated, no PR 2, live PR 1 | 6960, 7267, 7323, 13706, 15478, 17363 |
-| Query parsing | 24 | awaiting pipeline 5, gated, no PR 17, live PR 1, retire candidate 1 | 874, 4824, 6014, 8977, 9048, 9149, 10897, 11391, 11761, 12212, 12532, 12608, 12871, 13202, 13838, 13903, 15615, 15906, 16267, 16570, 17280, 17311, 17796, 17882 |
+| Configsets and config API | 7 | PR-ready 1, awaiting pipeline 2, gated, no PR 2, live PR 2 | 6960, 7267, 7323, 13706, 15478, 17363, 18178-verify |
+| Query parsing | 25 | awaiting pipeline 5, gated, no PR 17, live PR 2, retire candidate 1 | 874, 4824, 6014, 8977, 9048, 9149, 10897, 11391, 11761, 12212, 12532, 12608, 12871, 13202, 13838, 13903, 15615, 15906, 16130-test-followup, 16267, 16570, 17280, 17311, 17796, 17882 |
 | Schema, analysis and field types | 11 | PR-ready 1, awaiting pipeline 3, gated, no PR 7 | 9349, 10131, 10403, 14199, 15357, 15358, 15712, 15945, 16977, 17047, 18134 |
 | Search components | 71 | PR-ready 11, awaiting pipeline 14, gated, no PR 36, held 3, live PR 4, retire candidate 3 | 3044, 4374, 5394, 6193, 6207, 6759, 6831, 6975, 7390, 7498, 7520, 7550, 8003, 8009, 8020, 8051, 8088, 8240, 8767, 8939, 8954, 9124, 9148, 9396, 9595, 9864, 10305, 10424, 10492, 10694, 10844, 11129, 11153, 11310, 11364, 11470, 12044, 12543, 12556, 13245, 13568, 13851, 13876, 14381, 14451, 14678, 14931, 15018, 15041, 15144, 15319, 15331, 15479, 15895, 16155, 16290, 16444, 17051, 17055, 17155, 17372, 17539, 17748, 17791, 17841, 17976, 18109, 18196, 18356, 18482, 18506 |
-| SolrCloud, overseer and cluster state | 30 | PR-ready 5, awaiting pipeline 6, gated, no PR 12, held 2, live PR 4, retire candidate 1 | 3865, 4754, 5813, 9155, 10234, 10641, 11288, 11479, 12651, 12991, 12998, 13136, 13186, 13239, 13369, 14919, 15035, 15106, 15386, 15674, 15863, 16013, 16437, 17281, 17292, 17680, 17733, 18277, 18391, 18391-graceful-create |
-| Core admin and collections API | 32 | PR-ready 3, awaiting pipeline 8, gated, no PR 17, held 1, live PR 2, retire candidate 1 | 4502, 4989, 5011, 5262, 6438, 8275, 8554, 8576, 8628, 9750, 11939, 12007, 12849, 12916, 13097, 13246, 14098, 15003, 15024, 15805, 16108, 16499, 16725, 16849, 16887, 17297, 17377, 17708, 17731, 18010, 18278, 18317-server |
+| SolrCloud, overseer and cluster state | 31 | PR-ready 5, awaiting pipeline 6, gated, no PR 12, held 2, live PR 5, retire candidate 1 | 3865, 4754, 5813, 7394-recovery, 9155, 10234, 10641, 11288, 11479, 12651, 12991, 12998, 13136, 13186, 13239, 13369, 14919, 15035, 15106, 15386, 15674, 15863, 16013, 16437, 17281, 17292, 17680, 17733, 18277, 18391, 18391-graceful-create |
+| Core admin and collections API | 33 | PR-ready 3, awaiting pipeline 8, gated, no PR 17, held 1, live PR 3, retire candidate 1 | 4502, 4989, 5011, 5262, 6438, 8275, 8554, 8576, 8628, 9750, 11431-core-init-503, 11939, 12007, 12849, 12916, 13097, 13246, 14098, 15003, 15024, 15805, 16108, 16499, 16725, 16849, 16887, 17297, 17377, 17708, 17731, 18010, 18278, 18317-server |
 | Replication and backup | 13 | PR-ready 1, awaiting pipeline 5, gated, no PR 5, live PR 2 | 5589, 6711, 8430, 9091, 9382, 9598, 9865, 11650, 12085, 12246, 17287, 18249, 18280 |
 | Streaming expressions | 11 | PR-ready 1, awaiting pipeline 2, gated, no PR 3, held 1, live PR 1, retire candidate 3 | 9852, 10322, 10882, 11922, 12505, 12657, 13524, 14200, 14231, 15326, 17433-17143 |
 | SolrJ and clients | 24 | PR-ready 8, awaiting pipeline 7, gated, no PR 5, live PR 4 | 2018, 3498, 3722, 3999, 4335, 4336, 4422, 4424, 5220, 6046, 7709, 8536, 10198, 10364, 11356, 12094, 14187, 14298, 14967, 15823, 15823-levels, 17866, 18129, 18341 |
@@ -36,7 +36,7 @@ Focus areas: existing rows keep their 2026-10-06 area. New rows were placed by h
 | Admin UI | 3 | awaiting pipeline 3 | 9759, 9818, 9831 |
 | Build, docs and misc | 20 | awaiting pipeline 6, gated, no PR 6, live PR 2, retire candidate 6 | 3684, 5821, 6430, 7119, 9039, 11700, 12743, 13705, 16322, 16914, 17252, 17356, 17722, 17752, 17825, 17842, 18119, 18119-jvm, 18317, 18523 |
 
-Total: 325 branches in 19 areas with at least one member.
+Total: 329 branches in 19 areas with at least one member.
 
 ## eDisMax and extended dismax (13)
 
@@ -127,7 +127,7 @@ Total: 325 branches in 19 areas with at least one member.
 | SOLR-4540 | solr-4540-submit | 62c06439fb0 | awaiting pipeline | High QTime when wildcards in hl.fl are used | org/apache/solr/highlight/DefaultSolrHighlighter.java<br>(4 files total) | diff | moved, not ff (+2) |
 | SOLR-16885 | solr-16885-submit | 2b9b80119a9 | awaiting pipeline | UnifiedHighlighter guard for term vectors without positions | SOLR-16885-TESTING.md<br>changelog/unreleased/SOLR-16885-unified-highlighter-tv-without-positions.yml<br>solr/core/src/java/org/apache/solr/highlight/UnifiedSolrHighlighter.java<br>(5 files total) | diff | new |
 
-## Configsets and config API (6)
+## Configsets and config API (7)
 
 | Ticket | Branch | Head | State | Topic | Main files changed | Src | Since 10-06 |
 |---|---|---|---|---|---|---|---|
@@ -137,8 +137,9 @@ Total: 325 branches in 19 areas with at least one member.
 | SOLR-13706 | solr-13706-submit | 590dd5c24d9 | live PR #5015 | Config API output is broken for "highlight" component | org/apache/solr/core/PluginInfo.java<br>org/apache/solr/core/SolrConfig.java<br>(6 files total) | diff | moved, ff +1 |
 | SOLR-15478 | solr-15478-submit | 0478bdf0ac5 | gated, no PR | Schema Changes are Not Visible after Reuse of ConfigSet | org/apache/solr/cloud/ZkConfigSetService.java<br>(3 files total) | diff |  |
 | SOLR-17363 | solr-17363-submit | b8e8e1c4846 | gated, no PR | ConfigRequest could fail when user property is updated | org/apache/solr/handler/SolrConfigHandler.java<br>(3 files total) | diff |  |
+| SOLR-18178 | solr-18178-verify | b75e7d4d3c4 | live PR #4968 | fix configset archive path handling | changelog/unreleased/SOLR-18178.yml<br>solr/core/src/java/org/apache/solr/core/FileSystemConfigSetService.java<br>solr/core/src/java/org/apache/solr/handler/configsets/DownloadConfigSet.java<br>(9 files total) | diff | new |
 
-## Query parsing (24)
+## Query parsing (25)
 
 | Ticket | Branch | Head | State | Topic | Main files changed | Src | Since 10-06 |
 |---|---|---|---|---|---|---|---|
@@ -160,6 +161,7 @@ Total: 325 branches in 19 areas with at least one member.
 | SOLR-13903 | solr-13903-submit | 73ef411dd11 | gated, no PR | Classification Model Confusion Matrix Discrepancy | org/apache/solr/search/TextLogisticRegressionQParserPlugin.java<br>(6 files total) | diff |  |
 | SOLR-15615 | solr-15615-submit | be77267bf55 | gated, no PR | SolrCloud MLT does not work with Time Routed Alias (TRA) | org/apache/solr/search/mlt/CloudMLTQParser.java<br>(4 files total) | diff | moved, ff +4 |
 | SOLR-15906 | solr-15906-submit | 50139a8e979 | gated, no PR | Query parsing ignores rest of query when 'v' local-param is used | org/apache/solr/search/QParser.java<br>(4 files total) | diff | moved, ff +3 |
+| SOLR-16130 | solr-16130-test-followup | 3c48dec4b79 | live PR #5004 | cross-collection export regression test; test-only, the export code is on solr-16130-export-join | solr/core/src/test-files/solr/configsets/ccjoin/conf/solrconfig.xml<br>solr/core/src/test/org/apache/solr/search/join/CrossCollectionJoinQueryTest.java<br>(2 files total) | diff | new |
 | SOLR-16267 | solr-16267-submit | 8f4b0c6d2fb | gated, no PR | JSON Facet Stats methods include docs with no field value when using nested function | org/apache/solr/search/ValueSourceParser.java<br>(3 files total) | diff |  |
 | SOLR-16570 | solr-16570-submit | 974c44f9608 | awaiting pipeline | expand assertion counts main results only; top_fc hint NPE on docValues-only fields | SOLR-16570-TESTING.md<br>changelog/unreleased/SOLR-16570-collapse-top-fc-docvalues-only.yml<br>solr/core/src/java/org/apache/solr/search/CollapsingQParserPlugin.java<br>(5 files total) | diff | new |
 | SOLR-17280 | solr-17280-submit | 40817c5cb7e | gated, no PR | SolrRangeQuery can trigger "IllegalStateException: Recursive update" in CaffeineCache / ConcurrentHashMap | org/apache/solr/query/SolrRangeQuery.java<br>(4 files total) | diff | moved, ff +1 |
@@ -259,13 +261,14 @@ Total: 325 branches in 19 areas with at least one member.
 | SOLR-18482 | solr-18482-submit | 49ca9099d8e | live PR #5009 | JSON range facet silently ignores `limit`, `offset`, `sort` and the refine parameters | org/apache/solr/search/facet/FacetRangeParser.java<br>(4 files total) | diff |  |
 | SOLR-18506 | solr-18506-submit | 77c019e1ff0 | live PR #5029 | TestThinCache.testSimple is flaky: a warming-phase eviction can hit the second cache's own scope | org/apache/solr/search/TestThinCache.java | diff |  |
 
-## SolrCloud, overseer and cluster state (30)
+## SolrCloud, overseer and cluster state (31)
 
 | Ticket | Branch | Head | State | Topic | Main files changed | Src | Since 10-06 |
 |---|---|---|---|---|---|---|---|
 | SOLR-3865 | solr-3865-submit | 363e8f0651e | awaiting pipeline | CloudSolrServer connection leak when using wrong zk connection string | org/apache/solr/client/solrj/impl/ZkClientClusterStateProvider.java<br>(4 files total) | diff |  |
 | SOLR-4754 | solr-4754-submit | d2e9038881f | awaiting pipeline | normalizeHostName accepts a blank host | SOLR-4754-TESTING.md<br>changelog/unreleased/SOLR-4754-fail-on-empty-host.yml<br>solr/core/src/java/org/apache/solr/cloud/ZkController.java<br>(4 files total) | diff | new |
 | SOLR-5813 | solr-5813-submit | 90b8baa08ae | awaiting pipeline | Creating a SolrCore with a collection name of empty string should fail nicely in SolrCloud mode. | org/apache/solr/cloud/CloudDescriptor.java<br>(4 files total) | diff | moved, not ff (+2) |
+| SOLR-7394 | solr-7394-recovery | 9857d9ee802 | live PR #5003 | clear recovering shard-terms entry when recovery is abandoned | changelog/unreleased/SOLR-7394.yml<br>solr/core/src/java/org/apache/solr/cloud/RecoveryStrategy.java<br>solr/core/src/java/org/apache/solr/cloud/ShardTerms.java<br>(9 files total) | diff | new |
 | SOLR-9155 | solr-9155-submit | 9f08d033023 | PR-ready | Improve ZkController::getLeader exception handling | org/apache/solr/cloud/ZkController.java<br>(3 files total) | diff |  |
 | SOLR-10234 | solr-10234-submit | 16825538a76 | awaiting pipeline | "Too many open files" in distrib tests due to fixed HandleLimitFS (regardless of num nodes in test) | org/apache/solr/BaseDistributedSearchTestCase.java<br>org/apache/solr/cloud/SolrCloudTestCase.java<br>(5 files total) | diff |  |
 | SOLR-10641 | solr-10641-submit | 4ab4bd2040f | awaiting pipeline | OverseerTaskQueue.remove does setData and delete in one multi | SOLR-10641-TESTING.md<br>changelog/unreleased/SOLR-10641-overseer-task-queue-remove-multi.yml<br>solr/core/src/java/org/apache/solr/cloud/OverseerTaskQueue.java<br>(4 files total) | diff | new |
@@ -294,7 +297,7 @@ Total: 325 branches in 19 areas with at least one member.
 | SOLR-18391 | solr-18391-submit | 3000eeede7a | live PR #4997 | Fail collection creation cleanly when the collection config already exists (graceful create split) | org/apache/solr/cluster/placement/impl/PlacementPluginAssignStrategy.java<br>(2 files total) | diff |  |
 | SOLR-18391 | solr-18391-graceful-create-submit | adcda10b501 | live PR #5027 | Clean up a collection when creation fails partway (graceful create, PR #5027 branch) | org/apache/solr/cloud/api/collections/CreateCollectionCmd.java<br>org/apache/solr/cluster/placement/impl/PlacementPluginAssignStrategy.java<br>(6 files total) | diff | moved, ff +3 |
 
-## Core admin and collections API (32)
+## Core admin and collections API (33)
 
 | Ticket | Branch | Head | State | Topic | Main files changed | Src | Since 10-06 |
 |---|---|---|---|---|---|---|---|
@@ -308,6 +311,7 @@ Total: 325 branches in 19 areas with at least one member.
 | SOLR-8576 | solr-8576-submit | 4c46f95c785 | awaiting pipeline | Add additional Collection API error testing for collection already exists and related. | SOLR-8576-TESTING.md<br>changelog/unreleased/SOLR-8576-create-collection-exists-tests.yml<br>org/apache/solr/cloud/CollectionsAPISolrJTest.java<br>also: SolrCloud, overseer and cluster state | diff | moved, ff +1 |
 | SOLR-8628 | solr-8628-submit | ce8211e05e0 | awaiting pipeline | index dir holding only write.lock fails to open | SOLR-8628-TESTING.md<br>changelog/unreleased/SOLR-8628-index-dir-with-only-write-lock.yml<br>solr/core/src/java/org/apache/solr/core/SolrCore.java<br>(4 files total) | diff | new |
 | SOLR-9750 | solr-9750-submit | f97da6da14a | gated, no PR | The paramset for the /graph implicit RequestHandler is named _ADMIN_GRAPH but should be _GRAPH | changelog/unreleased/SOLR-9750-graph-paramset-name.yml<br>solr/core/src/resources/ImplicitPlugins.json<br>org/apache/solr/core/TestImplicitPlugins.java<br>(4 files total)<br>also: Configsets and config API | diff |  |
+| SOLR-11431 | solr-11431-core-init-503 | 968fad873c4 | live PR #5002 | report 503 instead of 500 for a core that fails to initialize | changelog/unreleased/SOLR-11431.yml<br>solr/core/src/java/org/apache/solr/core/CoreContainer.java<br>solr/core/src/java/org/apache/solr/core/SolrCoreInitializationException.java<br>(4 files total) | diff | new |
 | SOLR-11939 | solr-11939-submit | d4cff5e7643 | awaiting pipeline | Collection API: property.name ignored when creating collections | SOLR-11939-TESTING.md<br>changelog/unreleased/SOLR-11939-property-name-docs.yml<br>solr/solr-ref-guide/modules/deployment-guide/pages/collection-management.adoc | diff |  |
 | SOLR-12007 | solr-12007-submit | bdeba582fd6 | gated, no PR | When a SolrCore is closed, cleanupOldIndexDirectories is called in a background thread that will race with Dir | org/apache/solr/core/SolrCore.java<br>(3 files total) | diff | moved, ff +1 |
 | SOLR-12849 | solr-12849-submit | 6b92223bc24 | live PR #5011 | collection parameter referencing an alias being handled differently when sent as GET than when sent as POST | org/apache/solr/servlet/HttpSolrCall.java<br>(4 files total) | diff | moved, ff +1 |
@@ -555,13 +559,15 @@ Coherent families first (one file or one package family, uniform state), catch-a
 
 ### Population
 
-- Population: 325 branches (live `solr-*-submit` heads plus solr-18119-jvm). 2026-10-06 snapshot: 297. Unchanged 197, moved 100, new 28, gone 0.
+- Population: 329 branches (live `solr-*-submit` heads plus 5 named non-submit branches promoted to rows). 2026-10-06 snapshot: 297. Unchanged 197, moved 100, new 32, gone 0.
 - Moved: 81 fast-forward, 19 not fast-forward (the old head is no longer an ancestor; the branch was rebased or rewritten).
 
 ### Owner decisions recorded 2026-10-08
 
 - SOLR-5939 and SOLR-5941 are kept as candidates (state candidate), not retired.
 - solr-18119-jvm (PR #5061) is a row. It supersedes solr-18119-submit, which the owner no longer needs, so that row is now retire candidate. PR #4999 on solr-18119-submit is still open; closing it is a public action and needs an explicit go-ahead.
+- Four named branches with open PRs are rows, though their names are not submit: solr-11431-core-init-503 (PR #5002), solr-7394-recovery (PR #5003), solr-16130-test-followup (PR #5004), solr-18178-verify (PR #4968). Their tickets have no submit row.
+- Code areas: every row has one. The branches outside the population have one too, except the coordination branches and main, which hold documents or the default branch.
 - Coverage: every fork head is a row or is listed in "Branches outside the population", except the ci/* heads, which are counted only. Uncovered heads: 0.
 
 ### New rows
@@ -569,13 +575,12 @@ Coherent families first (one file or one package family, uniform state), catch-a
 - awaiting pipeline (24): SOLR-10131, SOLR-10641, SOLR-10667, SOLR-10694, SOLR-11356, SOLR-11391, SOLR-11678, SOLR-12161, SOLR-12864, SOLR-14187, SOLR-15712, SOLR-16322, SOLR-16570, SOLR-16885, SOLR-17987, SOLR-3498, SOLR-4754, SOLR-6973, SOLR-7323, SOLR-8088, SOLR-8628, SOLR-9759, SOLR-9818, SOLR-9831. Each is registered as a pushed hypothetical-reproduction fix in research/pipeline/HANDOFF-task3-skiplist.md or queue.json (SOLR-14187 is implemented-hypothetical in queue.json). Tests not run.
   - Five of these have a live tip newer than the head their register records (SOLR-10667, 12161, 16322, 16570, 17987). They were pushed again after registration, and the register has not been updated.
 - candidate (2): SOLR-5939, SOLR-5941. Skip rows in research/pipeline/queue.json with audit verdict deferred (2026-10-06, not built, design call needed), and each fork branch carries a fix commit dated 2026-10-07. Kept as candidates by owner decision; this refresh does not change the register.
-- live PR (2): SOLR-18119 (solr-18119-jvm), PR #5061; SOLR-18523 (solr-18523-submit), PR #5062. The open-PR section below checks each head against its fork tip. solr-18119-jvm was promoted to a row by owner decision.
-- Judgment calls in the new rows: 12864 (JsonLoaderTest) under Update processing and atomic updates; 16570 (CollapsingQParserPlugin) under Query parsing; 11678 (SSL key manager password) under Security and authentication; 10667 (packaging.gradle) under CLI, bin scripts and packaging; 7323 (FileSystemConfigSetService) under Configsets and config API; 8628 (SolrCore.initIndex) under Core admin and collections API; 9759, 9818 and 9831 (solr/webapp) under a new Admin UI area; 17987 (SolrMetricManager) as the first Metrics and monitoring member; 18119 (changelog-to-HTML converter) under Build, docs and misc.
+- live PR (6): SOLR-11431 (solr-11431-core-init-503), PR #5002; SOLR-16130 (solr-16130-test-followup), PR #5004; SOLR-18119 (solr-18119-jvm), PR #5061; SOLR-18178 (solr-18178-verify), PR #4968; SOLR-18523 (solr-18523-submit), PR #5062; SOLR-7394 (solr-7394-recovery), PR #5003. The open-PR section below checks each head against its fork tip. Five of these branches were made rows by owner decision: solr-18119-jvm and the four named branches above.
+- Judgment calls in the new rows: 12864 (JsonLoaderTest) under Update processing and atomic updates; 16570 (CollapsingQParserPlugin) under Query parsing; 11678 (SSL key manager password) under Security and authentication; 10667 (packaging.gradle) under CLI, bin scripts and packaging; 7323 (FileSystemConfigSetService) under Configsets and config API; 8628 (SolrCore.initIndex) under Core admin and collections API; 9759, 9818 and 9831 (solr/webapp) under a new Admin UI area; 17987 (SolrMetricManager) as the first Metrics and monitoring member; 18119 (changelog-to-HTML converter) under Build, docs and misc; 11431 (CoreContainer) under Core admin and collections API; 7394 (RecoveryStrategy, ShardTerms) under SolrCloud, overseer and cluster state; 16130-test-followup (test-only, CrossCollectionJoinQueryTest) under Query parsing, though its title says export; 18178 (FileSystemConfigSetService) under Configsets and config API.
 
 ### Open PRs from the fork
 
 - Open upstream PRs whose head is on nick-boss-tech/solr: 25. Heads that differ from the fork tip: 0.
-- Named non-submit branches with an open PR, outside the population: PR #5002 on solr-11431-core-init-503; PR #5004 on solr-16130-test-followup; PR #4968 on solr-18178-verify; PR #5003 on solr-7394-recovery.
 
 ### Moved, not fast-forward (19)
 
@@ -606,25 +611,22 @@ Coherent families first (one file or one package family, uniform state), catch-a
 
 ### Branches outside the population
 
-Every non-ci fork head that is not a row, with its category. The `ci/*` heads (373) are out of scope by request and are not listed.
+Every non-ci fork head that is not a row, with its code area and why it is outside. The `ci/*` heads (373) are out of scope by request and are not listed. Coordination branches and main have no code area: they hold documents or the default branch.
 
-| Branch | Category | Open upstream PR | Note |
+| Branch | Code area | Why outside | Note |
 |---|---|---|---|
-| `main` | default branch | - | Not a submit branch. |
-| `assignment-18523-doclint` | coordination: assignment | - | Review-pack assignment branch. |
-| `assignment-pair-18119-18523` | coordination: assignment | - | Review-pack assignment branch. |
-| `code-review` | coordination: review channel | - | Message bus for reviews, claims and inventory. This inventory is published under inventory/ on this branch. |
-| `gradle-queue` | coordination: Gradle queue | - | Gradle queue coordination. |
-| `review-18119-jvm` | coordination: review | - | Review coordination; name refers to SOLR-18119. |
-| `review-18523-pr` | coordination: review | - | Review coordination; name refers to SOLR-18523. |
-| `solr-18317-ready` | companion of a submit row | - | SOLR-18317 has solr-18317-submit, retire candidate (PR #5001 merged). |
-| `solr-18339-ready` | companion of a submit row | - | SOLR-18339 has solr-18339-submit, gated, no PR. |
-| `solr-11431-core-init-503` | named non-submit, open PR | #5002 | No submit row for SOLR-11431. |
-| `solr-7394-recovery` | named non-submit, open PR | #5003 | No submit row for SOLR-7394. |
-| `solr-16130-test-followup` | named non-submit, open PR | #5004 | No submit row for SOLR-16130. |
-| `solr-18178-verify` | named non-submit, open PR | #4968 | No submit row for SOLR-18178. |
-| `solr-16130-export-join` | named non-submit, no PR | - | No submit row for SOLR-16130. |
-| `solr-18135-merge-timer` | named non-submit, no PR | - | No submit row for SOLR-18135. |
-| `solr-8291-13217` | named non-submit, no PR | - | No submit row for SOLR-8291 or SOLR-13217. |
+| `main` | none | Default branch | Not a submit branch. |
+| `assignment-18523-doclint` | Build, docs and misc | Coordination | Review assignment. Carries the SOLR-18523 change; same files as solr-18523-submit. |
+| `review-18523-pr` | Build, docs and misc | Coordination | Review coordination. Carries the SOLR-18523 change; same files as solr-18523-submit. |
+| `assignment-pair-18119-18523` | none | Coordination | Assignment, claims, reviews and PR body drafts for SOLR-18119 and SOLR-18523. No code. |
+| `review-18119-jvm` | none | Coordination | Assignment, claim and review for solr-18119-jvm. No code. |
+| `code-review` | none | Coordination | Review channel. Holds documents only. |
+| `gradle-queue` | none | Coordination | Gradle queue status documents only. |
+| `pr-prepare` | none | Coordination | PR preparation branch. Holds the PR formula and this inventory; no code. |
+| `solr-18317-ready` | Core admin and collections API | Companion of a submit row | Ready variant of SOLR-18317. solr-18317-submit is a retire candidate (PR #5001 merged). |
+| `solr-18339-ready` | CLI, bin scripts and packaging | Companion of a submit row | Ready variant of SOLR-18339. solr-18339-submit is gated, no PR. |
+| `solr-16130-export-join` | Streaming expressions | Named, no PR | No submit row for SOLR-16130. Changes the export writer. |
+| `solr-18135-merge-timer` | Update processing and atomic updates | Named, no PR | No submit row for SOLR-18135. Changes SolrIndexWriter. |
+| `solr-8291-13217` | Streaming expressions | Named, no PR | No submit row for SOLR-8291 or SOLR-13217. Changes the export writer and its useFilter test. |
 
-Named non-submit branches stay outside the population by rule (name is not `solr-*-submit`). The open PRs on them (#5002, #5003, #5004, #4968) are not decided here; say if any should become a row.
+Three named branches have no PR and no submit row for their ticket. They stay outside the population, with a code area; say if any should become rows.
