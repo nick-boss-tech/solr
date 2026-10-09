@@ -348,3 +348,37 @@ Sequencing: SOLR-13943 stacks on SOLR-13696 (apply the move after
 the 13696 repair, proof-run in normal mode there), or waits for
 the repair to reach main. The built move is preserved uncommitted
 in the main side's worktree `solr-13943-move`.
+
+## Decisions on the four remaining calls (2026-10-09)
+
+Nick accepted the recorded recommendations, with one route change
+under his no-new-ticket rule (no new Jira ticket unless someone
+asks for one; scope questions go in the PR's Limits or Choices).
+Each implemented position ships and its alternative is posed in
+the PR's "A choice to check" for maintainers to discuss.
+
+- SOLR-11475, call A: RESOLVED. Ship as implemented: PeerSync
+  steps over the sign-mismatched version and requests nothing.
+  Requesting the other side's version is posed in Choices. No
+  branch change; the GREEN gate at 0de48e492fd stands, and the
+  branch joins the next drafting batch with the choice posed.
+- SOLR-16655: RESOLVED. Gate the descent: descend into a field's
+  child documents only when the selector selects that field
+  (the probe showed the unselected-parent descent mutates the
+  child's fields). Accepting the wider descent as the semantics
+  is posed in Choices. Fix lane launched; re-gate follows.
+- SOLR-12245: RESOLVED. Keep the response detail and fix the
+  duplicated host in describe() on the streaming path. The
+  logs-only alternative is posed in Choices. Fix lane launched;
+  re-gate follows.
+- SOLR-13696, CreateAlias route: RESOLVED as fold-in. The
+  production fix goes into the 13696 branch itself: no new
+  ticket, no separate branch. In
+  CreateAlias.createRemoteMessageForRoutedAlias, the
+  multi-dimensional case also puts ROUTER_TYPE_NAME
+  ("Dimensional[" plus the comma-joined type names plus "]")
+  and ROUTER_FIELD (the comma-joined fields) into the remote
+  message, and CreateAliasAPITest's expectation goes from 10
+  to 12 entries. The scope question (an alias creation fix
+  inside a test repair PR) is posed in Choices. Re-gate on the
+  folded tree follows; SOLR-13943 stacks after it.
