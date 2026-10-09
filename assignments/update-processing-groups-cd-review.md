@@ -36,19 +36,11 @@ the Groups A and B format: last review identified, findings with
 their status at the current head, evidence status, and the
 readiness line.
 
-For every branch certified ready, a PR description draft at
-`pr-drafts/update-processing/SOLR-<ticket>.md` is REQUIRED this
-time, following `pr-formula.md`: reviewed head named at the
-top, a bold one-line summary opening each section, citations as
-blob links at that head, Proof counts from the gate receipt
-(the pointer below gives the gate's date and head; where it
-gives counts, use them exactly). In Groups A and B only one
-draft was produced for four certified branches; the batch
-opens from these drafts, so a certified branch without a draft
-is unfinished work. Where a usable draft already exists in the
-branch's records, audit it against the formula instead of
-writing a new one. SOLR-18505 is the exception: audit only, no
-draft; its description is already live.
+No PR description drafts in this round. Drafts are written in
+the final round, for the branches this round certifies,
+following `pr-formula.md`. Where a usable draft already exists
+in a branch's records, note that in its audit; do not rewrite
+it here.
 
 ## Group C: the ten recorded PR-ready
 
@@ -87,7 +79,7 @@ Notes for Group C:
 | SOLR-16655 | solr-16655-submit | aa7898d972a | Gate green at this head (2026-10-07 records). Its review finding is the branch's design position, re-raised; `TESTING.md` ADOPTED: the upgrade note goes into its draft |
 | SOLR-16673 | solr-16673-submit | d5c19e64ba1 | Round 27 DONE, hardened, at this head, 2026-10-04 |
 | SOLR-16910 | solr-16910-submit | 9fce3e9a705 | Gate green on the third run, 2026-10-07, at this head; the test's logger-level assumptions were removed during its disposition |
-| SOLR-18505 | solr-18505-submit | e28739b4069 | Live PR. Gated at 8ca33200e37; the live head adds one comment-only commit in the test file. `TESTING.md` ADOPTED: no re-gate. Audit only, no draft |
+| SOLR-18505 | solr-18505-submit | e28739b4069 | Live PR. Gated at 8ca33200e37; the live head adds one comment-only commit in the test file. `TESTING.md` ADOPTED: no re-gate. Audit only |
 
 Notes for Group D:
 
