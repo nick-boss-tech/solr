@@ -59,6 +59,115 @@ branch follow this file.
   project. Retire calls are Nick's. The branch stays untouched
   while the hold stands, whichever way the call goes.
 
+Items added by the Groups C and D reconciliation
+(`reports/update-processing-cd-reconcile.md` on this branch).
+None of these is decided; each records the audit's evidence
+and the recommendation.
+
+- **SOLR-5065, locale handling and suggester inference.**
+  Two open items from the audit. First, `normalizeExponent`
+  rewrites the exponent before `NumberFormat` runs, whatever
+  an explicit `locale` says; the audit leaves the regex
+  option versus a locale-aware parse as a maintainer choice,
+  and the ticket has no consensus. Second, the same helper
+  makes `DefaultSchemaSuggester` infer Double for `E+` and
+  lowercase samples, and no test covers that inference
+  change. Recommendation: ship the branch as it stands;
+  state the locale behavior in the draft's Limits, present
+  the suggester inference in the draft as an intended
+  consequence, and add a suggester test only if maintainers
+  ask. Tough because the inference change reaches a second
+  component that the ticket never mentions.
+- **SOLR-6065, the ticket's cloud test.** The ticket asks
+  for cloud based tests that set a lower limit and verify
+  clean error messages for a single shard. The branch has
+  one single-core test and no cloud test, and the audit
+  makes that its blocking item. Recommendation: add the
+  cloud test before the PR, since the ticket names it as
+  the acceptance shape and a maintainer can be expected to
+  ask for it. The alternative is to ship the single-core
+  coverage and record that scope as the decision here.
+  Tough because a cloud test is real work for an error-path
+  branch whose code the reviews otherwise accept.
+- **SOLR-12245, target detail in the client response.** The
+  message this branch improves now puts the target's URL,
+  collection and shard into the error the client receives.
+  The ADOPTED framing accepts the message change; it does
+  not decide whether that detail belongs in the client
+  response or only in logs. The round 36 review leaves it
+  as an owner call. Recommendation: keep the detail in the
+  client response, since naming the target replica for the
+  user who receives the error is the point of the adopted
+  framing, and state the choice in the draft. Tough because
+  node URLs in client-visible errors are the kind of detail
+  maintainers sometimes ask to keep server-side.
+- **SOLR-12705, counting processors on the atomic path.**
+  The fix sits in the shared `FieldMutatingUpdateProcessor`
+  base class, so a counting processor shares the new path:
+  a single-map `add` on a counted field becomes
+  `{add: <count of the operand>}` and `remove` becomes
+  `{remove: <count>}`, where base wrote a plain count.
+  Neither case is in the changelog or the tests. The audit
+  leaves it as exclude in code or state the behavior.
+  Recommendation: state the behavior in the draft (main
+  text and Limits) and ship; do not exclude counting
+  processors in code unless maintainers ask. Tough because
+  it is a behavior change on a component the ticket does
+  not name, discovered by reading rather than by a failing
+  test.
+- **SOLR-16356, the second close-race ERROR.** The branch
+  silences the update-log close race. The ticket transcript
+  also shows a second stack trace: the periodic task in
+  `DocExpirationUpdateProcessorFactory` commits after its
+  delete-by-query, the commit fails with `SolrCoreState
+  already closed`, and it is logged at ERROR. The branch
+  does not touch that factory, and the changelog title
+  already names only the update-log path. Recommendation:
+  split the expiration-task trace as a follow-up; state it
+  in the draft's Limits so the PR does not read as covering
+  every close-time stack trace. The alternative is to
+  suppress the second ERROR in this PR. Tough because the
+  ticket's own transcript contains both traces.
+- **SOLR-16910, scope of the logging fix.** The branch
+  fixes the slow-WARN format in `LogUpdateProcessorFactory`
+  so the WARN carries the request details. The ticket also
+  calls out `SolrCore.Request` logging behavior, and the
+  reporter says the desired behavior there is undecided;
+  the branch does not touch it. Recommendation: ship the
+  narrow fix and name the `SolrCore.Request` item in the
+  draft's Limits as not addressed. The alternative is to
+  hold the PR until that behavior is decided on the
+  ticket. Tough because the undecided half belongs to the
+  same ticket.
+- **SOLR-7504, chain placement and the "fixed" title.** A
+  separate item from the branch's code fix (the plain-first
+  silent drop, in the reconciliation report). The counter
+  runs only when the source field is in the update, so an
+  update that leaves the source field alone is not
+  covered: a trailing `DefaultValue` writes a plain 0 into
+  the partial document, which an atomic update applies as
+  a `set`, and the ticket's symptom persists for that
+  shape. The changelog title says "fixed".
+  Recommendation: document the chain-placement limit in
+  the draft's Limits and narrow the changelog title so it
+  claims only the covered shape; do not change the chain
+  in this branch. The alternative is a chain change, which
+  is a larger behavioral step. Tough because the
+  uncovered shape is arguably the ticket's own case.
+- **SOLR-14718, the second flaw in the ticket packet.**
+  A separate item from the branch's test fix (the
+  timing-dependent regression test, in the reconciliation
+  report). The ticket packet names a second flaw, the
+  per-node streaming-client association that can report
+  the first document of a batch. The branch fixes only the
+  command-reuse case, and its changelog is correctly
+  limited to that. Recommendation: record the second flaw
+  as a follow-up and state it in the draft's Limits; do
+  not include it in this branch. The alternative is to
+  include it, which widens a small, gated fix into a
+  second change. Tough because both flaws sit in the
+  same ticket.
+
 ## Added by the last-review audits (2026-10-08)
 
 The ten audits are in `audits/update-processing/` on this
@@ -115,3 +224,23 @@ below are the decisions those fixes wait on.
   construction. SOLR-13696 proceeds through the fix-project
   handoff named above; the branch stays untouched until that
   project claims it.
+
+## Groups C and D reconciliation (2026-10-08)
+
+The 19 Group C and Group D audits are reconciled against
+this file in `reports/update-processing-cd-reconcile.md`.
+Classes: (a) ready for the final round as-is: SOLR-3657,
+SOLR-12703, SOLR-13265. (b) ready with draft-level notes
+only: SOLR-7022, SOLR-11483, SOLR-14262, SOLR-16655,
+SOLR-16673, SOLR-18505. (c) needs a code fix or a settling
+run before final review: SOLR-6045 (the child-document
+guard), SOLR-7504 (the plain-first detection), SOLR-13943
+(a run to settle the class-level AwaitsFix question),
+SOLR-14718 (a deterministic regression test). (d) needs a
+decision from Nick: SOLR-5065, SOLR-6065, SOLR-12245,
+SOLR-12705, SOLR-16356, SOLR-16910, plus one item each
+inside SOLR-7504 and SOLR-14718. The (d) items are in the
+DISCUSS section above. SOLR-6045's audit predates the
+option A fix: its first blocking item is done at
+`e06aa7624853`, and only the guard item keeps it out of
+the final round.
