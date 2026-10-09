@@ -313,3 +313,22 @@ untouched. The move is proven by a normal-mode run (no
 `-Dtests.awaitsfix=true`) before the PR. If the moved test is not
 reliable in normal mode, the branch waits on SOLR-13059 and the
 lane reports instead of pushing.
+
+## Final round outcomes (2026-10-08)
+
+The final-round report (`reports/update-processing-final-round.md`)
+listed ten owner decisions. Per Nick's standing practice the
+recorded recommendations are adopted; the one item the report held
+for explicit confirmation (the SOLR-18505 sentence) Nick confirmed,
+and the edit is applied to the live pull request description.
+
+- SOLR-4841: changelog type changes from `fixed` to `added`.
+- SOLR-7022: changelog fragment reworded to the proven cause.
+- SOLR-5754: root `SOLR-5754-TESTING.md` removed (packaging).
+- SOLR-5941: autocommit doc sentence corrected; the wider
+  `commit_end_point` effect is disclosed in the PR, not narrowed.
+- SOLR-11483: ships as drafted (the default change posed in
+  Choices, retention growth in Limits).
+- SOLR-16655: changelog type changes to `changed`; the wider
+  child-document descent gets a probe run before it is accepted.
+- SOLR-13265: fail-before verdict by run before the draft posts.
