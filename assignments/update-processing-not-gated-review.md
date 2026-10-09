@@ -34,10 +34,11 @@ says so plainly.
   executed. Gates run later on Linux or on the GitHub runner.
 - Push nothing to any submit branch. All work product lands on
   this branch, `pr-prepare`.
-- Claim first, per group. Before starting a group, commit
-  `claims/update-processing-audit-group-a.md` (or
-  `claims/update-processing-audit-group-b.md`) with your name and
-  the date. A rejected push means the group is already taken.
+- Claim first, per group. Group A is already claimed, at
+  `claims/update-processing-not-gated-group-a.md`. Before starting
+  Group B, commit `claims/update-processing-not-gated-group-b.md`
+  with your name and the date. A rejected push means the group is
+  already taken.
 - Verify each branch's live head first. If it differs from the
   head the last review covered, the audit covers the delta and
   says which findings the movement affects.
