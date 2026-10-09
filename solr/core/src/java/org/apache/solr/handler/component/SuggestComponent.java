@@ -346,8 +346,8 @@ public class SuggestComponent extends SearchComponent
   /**
    * Given a list of {@link SuggesterResult} and <code>count</code> returns a {@link
    * SuggesterResult} containing <code>count</code> number of {@link LookupResult}, sorted by their
-   * associated weights (highest first), with ties broken by suggestion text so that the merged order
-   * does not depend on which shard answered first
+   * associated weights (highest first), with ties broken by suggestion text so that the merged
+   * order does not depend on which shard answered first
    */
   static SuggesterResult merge(List<SuggesterResult> suggesterResults, int count) {
     SuggesterResult result = new SuggesterResult();
