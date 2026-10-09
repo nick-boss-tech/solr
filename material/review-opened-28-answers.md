@@ -44,3 +44,9 @@ The verification of the plain-language pass (reports/review-plain-language-28.md
 4. SOLR-13943: "all in normal mode" dropped; normal mode is claimed only for the class the record supports.
 5. "Live tip" replaced in the four drafts (4841, 5754, 5939, 7022) with "current head" phrasing.
 6. SOLR-5941 and SOLR-13265: the method phrases the records do not cover are removed; the run claims stand as recorded.
+
+## Record additions and round 2 fix pass (2026-10-09, main side)
+
+Two title fixes were applied by the main side under the O1 accuracy ruling on 2026-10-09 and reported to the owner in chat, but were missing from this file: SOLR-12864 now reads "Add test coverage for echo with mapUniqueKeyOnly in JSON updates" and SOLR-12245 now reads "Name the replica in failed distributed update errors". Six title fixes in total stand: 5754, 13943, 16673, 5505, 12864, 12245.
+
+Round 2 (reports/review-28-round-2.md) verified the corrections. The record-accuracy fixes were applied directly to the drafts and the affected PR bodies, and the receipts were corrected where they carried the same errors: the merge-commit and tree wording in the SOLR-5754 and SOLR-5939 drafts and receipts (1ddbf36202d is the merge commit; its tree is f2e33340f0ea); SOLR-4841 "does not compile on base"; SOLR-5887's scoped bold line; SOLR-5941's restored base-not-run sentence; SOLR-13943's two unsupported sentences removed; the planned follow-up sentences the corrections round missed, added for SOLR-5505, SOLR-6973, SOLR-16655 and SOLR-16673; and the SOLR-7504 receipt History counts corrected to 29 and 42, as its gate receipt in the ledger records. Items round 2 marked for owner ratification (the remaining proposed titles, the SOLR-7022 Limits and Proof replacements, the SOLR-12705 follow-up sentence, the extra lengths, and the SOLR-6045 and SOLR-12703 branch changelog edits with re-gates) were put to the owner on 2026-10-09 and are not applied here.
