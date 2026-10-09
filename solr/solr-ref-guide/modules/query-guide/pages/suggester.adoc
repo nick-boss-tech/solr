@@ -201,7 +201,7 @@ It’s usually preferred to leave this set to `false` and build suggesters manua
 The `lookupImpl` parameter defines the algorithms used to look up terms in the suggest index.
 There are several possible implementations to choose from, and some require additional parameters to be configured.
 
-NOTE: Building the `AnalyzingLookupFactory`, `FuzzyLookupFactory`, and `FSTLookupFactory` data structures sorts the input in temporary files.
+NOTE: Building the `AnalyzingLookupFactory`, `FuzzyLookupFactory`, `FSTLookupFactory`, `WFSTLookupFactory`, and `TSTLookupFactory` data structures sorts the input in temporary files.
 These files are written to the JVM temporary directory (the `java.io.tmpdir` system property, `/tmp` by default on Linux), not to the core's data directory.
 For a large dictionary, a "No space left on device" error while building a suggester means that this directory is too small, even if the data volume has free space.
 Point `java.io.tmpdir` at a larger volume, for example with `SOLR_OPTS="$SOLR_OPTS -Djava.io.tmpdir=/path/to/larger/tmp"` in `solr.in.sh`.

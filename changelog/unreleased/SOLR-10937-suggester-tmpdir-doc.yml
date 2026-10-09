@@ -1,5 +1,5 @@
 title: >
-  Ref guide: building Analyzing, Fuzzy and FST suggesters sorts in java.io.tmpdir, so "No space left on device" can mean a full temp directory.
+  Ref guide: building Analyzing, Fuzzy, FST, WFST and TST suggesters sorts in java.io.tmpdir, so "No space left on device" can mean a full temp directory.
 type: other
 authors:
   - name: Nick Shanin
