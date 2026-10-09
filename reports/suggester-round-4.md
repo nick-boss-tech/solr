@@ -104,3 +104,35 @@ Owner decisions needed:
 - **D. Audit line numbers.** The SOLR-9227 audit gives `lookup.build` at lines 172-181. At `3c23fc5cfa6` it is lines 174-182. Correct the audit, or note it.
 
 Not done: no gates, tests, builds, Gradle, PRs, comments, or submit-branch edits. Nothing was posted.
+
+## Draft round 2 (2026-10-09)
+
+Claim: `claims/suggester-draft-round-2.md` (commit `b1d327d0361`). Source: `material/suggester-draft-round-answers.md` (commit `bfc53695856`) and the receipts it names. Its answers released the holds on 9968, 14171, 17393 and 9637, and confirmed the Lucene checks for 10937 and 11844. Live tips checked with `git ls-remote` on 2026-10-09; all seven matched their named heads. Two subagents drafted; the lead checked their output and made the commits.
+
+Drafted (7), all in `pr-drafts/suggester/`:
+
+| Ticket | Head | Draft state | Open points |
+|---|---|---|---|
+| SOLR-9227 | `3c23fc5cfa6` | Bracketed HOLD replaced with answer A's wording. | Decision 1. |
+| SOLR-9968 | `c31d2ff1a3f` | Narrowed wording; top-up receipt. Choice: opt-in tokenizer option against the context field's schema analyzer. | The premise line says "on the base code"; the material does not name the reverted files. |
+| SOLR-14171 | `faa262eedc5` | First full gate receipt. Choice: literal `true` fallback against the lookup's own default. | Decision 4. |
+| SOLR-17393 | `626241e647e` | Merge-only scope in Limits; no Choice section. Proof uses the visibility-only shim wording. | Decision 3. |
+| SOLR-9637 | `c50fa4ffd93` | Stacked on SOLR-17393 at `dd6c82924fff`; receipt 2026-10-05. | Decision 2. |
+| SOLR-10937 | `7d0cd11bafd` | Five-lookup NOTE; Lucene check only, no gate receipt named. | Decision 5. |
+| SOLR-11844 | `cbd08c20e9a` | Lucene check only, no gate receipt named. The "every weight is 0" sentence now carries the no-stored-value qualifier. | Decision 5. |
+
+Held (1), no draft:
+
+- **SOLR-17215**, live `04d35df186d`. Commits since the audit pin: `a14086d1f56` (removes the handoff doc) and `04d35df186d` (narrowed catch, 503 message, ref-guide note on non-replication). The material names no gate receipt for this tip, so the draft waits.
+
+Owner decisions needed:
+
+1. **SOLR-9227 reload path.** `suggest.reload` calls `lookup.load` (`SolrSuggester.java` L213), which the branch does not touch. A JDK exception from that call can name the path in the reload request. Answer A's sentence, "Suggest queries that do not request a build never see it", is about queries and does not cover reload. Narrow the sentence, or accept it as written.
+2. **SOLR-9637 design and packaging.** The material does not decide summing weights versus taking the maximum. The draft has no Choice section for it. The branch head still carries `SOLR-17393-TESTING.md` at the repo root. The rebase onto the landed SOLR-17393 should drop it, and the rebased tree needs its own gate. The draft is 3,711 characters against the ~3,500 guide: accept or trim. The What relies on the hydrated JIRA packet (`research/jira-context/SOLR-9637.json`), which gives two shards and Solr 4.9.1.
+3. **SOLR-17393 tie policy.** The code sorts by weight, highest first, then by text (L78-L82). The head Javadoc calls text a tie-break. The material does not decide the policy. The draft states the sort key as code behavior only. The What links the reporter's symptom to equal weights, but the JIRA packet has no `weight` text, so that link is an inference. Check it against the full reporter config.
+4. **SOLR-14171 `ALL_TERMS_REQUIRED`.** The new `SolrSuggester` constant (L78) is public. The factories' constant of the same name is protected. The material does not decide visibility. Both defaults agree today: Lucene 10.4.0 `DEFAULT_ALL_TERMS_REQUIRED` is `true`. Not in the draft.
+5. **SOLR-10937 and SOLR-11844 shipped text (submit-branch edits, not made this round).** The 10937 NOTE carries "/tmp by default on Linux", which only a ticket comment supports, and "means that this directory is too small", where the changelog says "can mean". The 11844 section has four problems against the verified facts: "weights below 10" should read "absolute value under 10"; the material does not say whether a promoted weight of 1 is then scaled to 10; "earlier match, higher coefficient" is not in the verified facts; and the equal-weights claim does not match the reporter's order, which was on Solr 6.5, while the check is on 10.4.0. Both drafts stay as written. Fix the shipped text on the submit branch before the PR, if you approve that edit.
+
+Lead checks: live tips matched for all eight branches at `ls-remote`. Em dash count 0 in all seven drafts. No HOLD markers remain. The word "holds" in the 17393 draft is not a marker.
+
+Not done: no gates, tests, builds, Gradle, PRs, comments, or submit-branch edits. Nothing was posted.
