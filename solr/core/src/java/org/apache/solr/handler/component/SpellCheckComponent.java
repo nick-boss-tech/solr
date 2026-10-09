@@ -168,7 +168,8 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
         int alternativeTermCount =
             params.getInt(SpellingParams.SPELLCHECK_ALTERNATIVE_TERM_COUNT, 0);
         // If specified, this can be a discrete # of results, or a percentage of fq results.
-        // A fractional maxResultsForSuggest is a share of the filtered doc count across *all* shards,
+        // A fractional maxResultsForSuggest is a share of the filtered doc count across *all*
+        // shards,
         // which a single shard cannot know. The coordinator computes it in finishStage from the
         // per-shard counts that each shard reports back (see "maxResultsByFilters" below).
         final boolean deferToCoordinator = shardRequest && isFractionalMaxResultsForSuggest(params);
@@ -352,6 +353,7 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
     }
     return total == null ? null : (int) Math.min(total, Integer.MAX_VALUE);
   }
+
   protected void addCollationsToResponse(
       SolrParams params,
       SpellingResult spellingResult,
@@ -465,9 +467,7 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
     final Integer maxResultsForSuggest =
         maxResultsForSuggest(
             rb,
-            isFractionalMaxResultsForSuggest(params)
-                ? sumMaxResultsByFiltersFromShards(rb)
-                : null);
+            isFractionalMaxResultsForSuggest(params) ? sumMaxResultsByFiltersFromShards(rb) : null);
     int count = rb.req.getParams().getInt(SPELLCHECK_COUNT, 1);
     int numSug = Math.max(count, AbstractLuceneSpellChecker.DEFAULT_SUGGESTION_COUNT);
 
