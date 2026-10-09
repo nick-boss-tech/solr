@@ -332,3 +332,19 @@ and the edit is applied to the live pull request description.
 - SOLR-16655: changelog type changes to `changed`; the wider
   child-document descent gets a probe run before it is accepted.
 - SOLR-13265: fail-before verdict by run before the draft posts.
+
+Outcome of the SOLR-13943 move proof (2026-10-08): the move was
+built as decided and the proof stopped it. The new class still
+skipped in normal mode, because the abstract base
+`RoutedAliasUpdateProcessorTest` itself carries
+`@AwaitsFix(SOLR-13696)` on this branch's base, and the framework
+applies a superclass annotation to every subclass. Verified on the
+main side: the SOLR-13696 repaired branch removes that base
+annotation (its Category tests execute in normal mode), while
+`TimeRoutedAliasUpdateProcessorTest` keeps its own
+`@AwaitsFix(SOLR-13059)` there. So the move works exactly as
+designed on any base that includes the SOLR-13696 repair.
+Sequencing: SOLR-13943 stacks on SOLR-13696 (apply the move after
+the 13696 repair, proof-run in normal mode there), or waits for
+the repair to reach main. The built move is preserved uncommitted
+in the main side's worktree `solr-13943-move`.
