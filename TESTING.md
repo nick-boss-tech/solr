@@ -286,3 +286,22 @@ from DISCUSS to DECIDED as follows.
 - SOLR-16910: ship narrow. The `SolrCore.Request` item is named in
   the draft's Limits as not addressed; the ticket records no desired
   behavior, so there is nothing to pin.
+
+## SOLR-13943: new decision item (2026-10-08, from the settling run)
+
+The settling run settled the fact and opened a call. At the branch
+head `b37d7abfa2e`, the class `TimeRoutedAliasUpdateProcessorTest`
+carries a class-level `@AwaitsFix(SOLR-13059)`. The branch removed
+the method-level `@AwaitsFix(SOLR-13943)` from `testDateMathInStart`
+and nothing else. A normal run at the head executes none of the
+class: 7 tests, 7 skipped as assumption-failed (the awaitsfix group
+is not enabled). The branch's earlier gates ran with
+`-Dtests.awaitsfix=true`, so its coverage exists only in that mode.
+DISCUSS: what to do about the class-level annotation. Options:
+leave it (the branch then re-enables nothing in default CI and is
+close to empty); remove it (re-enables all 7 tests, which is the
+SOLR-13059 question, a different ticket); or move
+`testDateMathInStart` into a class without the annotation so only
+it re-enables. Recommendation: the move, proven by a normal-mode
+run before the PR; if the moved test is not reliable in normal
+mode, the branch waits on SOLR-13059.
