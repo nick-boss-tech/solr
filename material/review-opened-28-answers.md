@@ -29,3 +29,7 @@ The owner does not care which source a title comes from; the rule is that every 
 ## Confirmation item 4 ruled by the owner (2026-10-09): strike the internal jargon
 
 The owner ruled against accepting the process phrases: a "gate entry" is internal record-keeping that Solr maintainers do not know about, and "fresh JUnit XML" is the same kind of internal shorthand. Both come out, and the ruling generalizes: public PR text states results plainly and never uses the internal vocabulary (gate, receipt, ledger, fresh JUnit XML, rc=0, pre-fix proof as a label). A plain-language pass over all 28 drafts' Proof sections is running on the main side under this rule, preserving every count, head, and date. Items 1, 2, 3, 5, and 6 still carry the main side's recorded recommendations.
+
+## Confirmations ratified by the owner (2026-10-09)
+
+The owner ratified the five remaining items from `reports/review-corrections-28.md`: (1) the planned follow-up commitments in the 22 drafts stand; (2) the five gaps without a plan sentence (5065, 12705, 14718, 14262, 7022) stay as stated limitations; (3) the SOLR-7022 Proof line about DirectUpdateHandler2CommitWaitTest is dropped (done in the drafts with this entry); (4) the seven long drafts are accepted as the complex cases; (5) the receipts addendum is an accepted source for SOLR-16673's earlier-head facts. With item 4 ruled earlier (plain language) and the plain-language pass pushed at 78ce00d90af, the corrected drafts are final and the main side applies them to the 28 live PR bodies.
