@@ -1,12 +1,15 @@
-# SUPERSEDED: do not claim this round
+# READY: claim this round
 
-The owner directed on 2026-10-09 that everything goes out as
-ONE final batch, handed off only after the main side finishes:
-gate r5 for SOLR-13696, then the SOLR-13943 stacked test move
-with its normal-mode proof. This assignment and its material
-stand as the draft of that batch; a single final assignment
-will replace this file, with final heads for every item,
-including SOLR-13943. Nothing in this round is cancelled.
+Status change 2026-10-09: this round was held as superseded
+pending a single final batch after the remaining main-side
+gate work. The owner directed later the same morning that
+review proceed now instead of waiting. This assignment is
+active and claimable as written, with two status notes:
+SOLR-16655 and SOLR-12245 gates have recorded GREEN since the
+text was written (see Part C); SOLR-13696 is NOT ready and
+must not be drafted (gate r6 failed, see Part C); its draft
+and SOLR-13943's join a later batch once the 13696 gate
+records GREEN and a material addendum names the final head.
 
 # Assignment: update processing, final round 3
 
@@ -78,24 +81,28 @@ holding the round.
   proof was inconclusive because the old code does not
   terminate.
 - SOLR-16655 at 5e2317443f4116a9e97330b0d6ce175cf44b54df:
-  update the round 1 draft to this head once its gate records
-  GREEN. The change now gates the child-document descent on
+  update the round 1 draft to this head; its gate recorded
+  GREEN on 2026-10-09. The change now gates the child-document descent on
   the parent field being selected; the Choice poses accepting
   the wider descent as the semantics. State the sequencing
   with SOLR-12705 (same production file).
 - SOLR-12245 at f325d5d0576e582d4488570eabdeabc7410a8a0f:
-  new draft once its gate records GREEN. The describe()
+  new draft; its gate recorded GREEN on 2026-10-09. The describe()
   duplicated host is fixed and the response detail stays; the
   Choice poses the logs-only alternative.
-- SOLR-13696: new draft once its gate records GREEN at the
-  head the ledger names (gate r4 failed and an investigation
-  is running on the main side; the head may move). The Choice
-  poses the scope question: the CreateAlias remote-message
-  fix is folded into this branch because the repaired
-  Dimensional suite cannot pass without it (a pre-existing
-  defect on base; no new ticket, per the owner's rule).
-  Finding 2 (routed-alias commitWithin coverage) stays
-  dropped, in Limits.
+- SOLR-13696: NOT READY, do not draft in this round. Gate r6
+  at 08f9384e47c016df903b1899d4bf136a5b7149e8 FAILED step 4
+  (Category 6 of 6 and CreateAliasAPITest 13 of 13 pass;
+  DimensionalRoutedAliasUpdateProcessorTest fails its final
+  shard assertions in both tests, a new shape under
+  investigation on the main side). The branch now also carries
+  a second folded-in production fix (the TimeRoutedAlias
+  String to Date cast) and a test repair (the hard-coded 2020
+  future date now computed relative to now), so the scope
+  question in the eventual draft covers all of it; a material
+  addendum will name the final head and counts when a gate
+  records GREEN. Finding 2 (routed-alias commitWithin
+  coverage) stays dropped, in Limits.
 
 ## Out of scope
 

@@ -103,11 +103,20 @@ recommendation was adopted under the owner's standing practice
   source; the gate receipt in the ledger is.
 - SOLR-12245: the fix commit on f325d5d057 fixes the
   duplicated host in describe() on the streaming path; the
-  gate receipt in the ledger is the Proof source.
-- SOLR-13696: gate r4 at 98ad9d3fcc33 FAILED step 4 after the
-  premise passed (DimensionalRoutedAliasUpdateProcessorTest
-  0 of 2, String to Date ClassCastException, seed
-  FB1F0CEBAAF65F30). An investigation is running on the main
-  side. The item joins this round only when a later gate
-  records GREEN; the material addendum for that gate will name
-  the head and the counts.
+  gate receipt in the ledger is the Proof source (gate GREEN
+  recorded 2026-10-09: pre-fix proof PASS,
+  DistributedUpdateProcessorTest 6 of 6).
+- SOLR-13696: NOT READY. Gate r5 at a4e0da422327 failed on a
+  timeout shape that the investigation classified as a
+  wall-clock-rotted test expectation (the hard-coded
+  2020-10-23 future document is in the past; the router
+  created daily collections toward it until the client timed
+  out); the repair computes that document relative to now,
+  at head 08f9384e47c016df903b1899d4bf136a5b7149e8. Gate r6 at
+  that head FAILED step 4: Category 6 of 6 and
+  CreateAliasAPITest 13 of 13 pass, and the too far in the
+  future rejection now fires, but both Dimensional tests fail
+  their final shard assertions (test lines 297 and 521).
+  Under investigation on the main side; the item joins only
+  when a later gate records GREEN, with an addendum naming
+  the head and counts.
