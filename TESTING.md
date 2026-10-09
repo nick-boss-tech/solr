@@ -51,3 +51,55 @@ branch follow this file.
   stands; funding the routed-alias test-drift fix is a separate
   project. Retire calls are Nick's. The branch stays untouched
   while the hold stands, whichever way the call goes.
+
+## Added by the last-review audits (2026-10-08)
+
+The ten audits are in `audits/update-processing/` on this
+branch. Four branches are certified ready for the final round:
+SOLR-4841, SOLR-5505, SOLR-5887 and SOLR-6973. The other six are
+not ready. Their code fixes are main-side dev work; the items
+below are the decisions those fixes wait on.
+
+### ADOPTED (recommendations, under Nick's standing agreement)
+
+- **SOLR-5939, items 3 and 4.** The client-visible error text
+  change and the marking of every request in a non-retriable
+  failed stream as failed are stated in the PR draft's Limits,
+  not redesigned. The per-request attribution design goes to
+  the PR's Choices section for maintainer judgment; no separate
+  Jira design round first.
+- **SOLR-5941, design choices.** The branch's choices (which
+  chain, the buffering skip, the extra version stamp, the
+  replica update lock) stand as implemented. Items 4 and 5 are
+  stated in the draft's main text, not removed.
+- **SOLR-5754, hardening framing.** The change is kept and
+  claimed as hardening: the changelog title and the TESTING note
+  are reworded so they do not claim a fixed bug, and the
+  fail-before result is stated as inconclusive by construction.
+
+### What the dev fixes are (main side, before the queue)
+
+- **SOLR-5939:** remove the registry leak (successful requests
+  stay reachable until the update request ends); count each
+  shared remote error once in the tolerant path; clear the test
+  system property in `@AfterClass`. Then gate the combined
+  SOLR-5754 + SOLR-5939 tree with the tolerant-update cloud
+  tests in the run list.
+- **SOLR-5941:** fix the `getBool(COMMIT_END_POINT, ...)`
+  defect in `DistributedZkUpdateProcessor.processCommit` and
+  `RoutedAliasUpdateProcessor.wrap()` (the string values are
+  not accepted, so the distributed path misreads the flag);
+  add a SolrCloud commit test; run
+  `ParallelCommitExecutionTest` and `HttpPartitionOnCommitTest`;
+  correct the round 30 report's claims and rewrite the draft
+  to the formula.
+- **SOLR-5754:** the changelog and TESTING-note rewording
+  above, and correct the skip-list record, which says
+  "synchronizedList gone" about main. That is wrong for the
+  error list.
+- **SOLR-11475:** correct the wrong test comment, fix the
+  queue record's file pointer, then resume and complete the
+  gate at the current head, with the fail-before behavior
+  confirmed by a run and reported as it lands.
+- **SOLR-12864 and SOLR-13696:** no dev fixes. Both wait on
+  the DISCUSS calls above.
