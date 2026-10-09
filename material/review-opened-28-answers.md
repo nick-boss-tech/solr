@@ -25,3 +25,7 @@ Answers to `reports/review-opened-28.md` (2026-10-09). The description and Proof
 ## O1 ruled by the owner (2026-10-09)
 
 The owner does not care which source a title comes from; the rule is that every title is accurate. Applied the same day by the main side: the four titles that were wrong on their face are fixed on the live PRs (SOLR-5754 names StreamingSolrClients and what changed; SOLR-13943 no longer names the old location of the test; SOLR-16673 uses its draft's labelled title; SOLR-5505's spelling is corrected). The other 24 titles stand as opened, and SOLR-16356's title stands under the same rule (O6 closed). Any further title change in the corrections pass must be justified by accuracy, not by source.
+
+## Confirmation item 4 ruled by the owner (2026-10-09): strike the internal jargon
+
+The owner ruled against accepting the process phrases: a "gate entry" is internal record-keeping that Solr maintainers do not know about, and "fresh JUnit XML" is the same kind of internal shorthand. Both come out, and the ruling generalizes: public PR text states results plainly and never uses the internal vocabulary (gate, receipt, ledger, fresh JUnit XML, rc=0, pre-fix proof as a label). A plain-language pass over all 28 drafts' Proof sections is running on the main side under this rule, preserving every count, head, and date. Items 1, 2, 3, 5, and 6 still carry the main side's recorded recommendations.
