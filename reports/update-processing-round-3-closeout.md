@@ -77,6 +77,8 @@ Material: `material/update-processing-round-3-closeout-answers.md` (commit `e441
 
 The draft was written at `1d0b8a0a73cd` and stands in substance. It is held for the r8 addendum: its pre-fix heads, its create-alias citation, and its changelog line change once the new head is named.
 
+Superseded by Addendum 2 for the head and the create-alias citation.
+
 ### SOLR-13943
 
 - Draft: `pr-drafts/update-processing/SOLR-13943.md`. Head `cc155cf68e1d8e79f1bcecd2e4c25ada864d8f53`, which matched the live tip. Stacked on `1d0b8a0a73cd`.
@@ -97,3 +99,16 @@ The draft was written at `1d0b8a0a73cd` and stands in substance. It is held for 
 - The SOLR-13696 r8 addendum (new head, changelog line, pre-fix heads).
 - The 3-of-5 reading for SOLR-13943.
 - The commit subject on `dd83fdcccb6`.
+
+## Addendum 2: SOLR-13696 r8
+
+- Source: `material/update-processing-13696-r8-addendum.md` at commit `81339a26ef6`.
+- Live checks on 2026-10-09: `solr-13696-submit` is at `da4fa6df117`, the named head, so it matches. `solr-13943-submit` is at `cc155cf68e1d`, unchanged.
+- SOLR-13696 draft: now at `da4fa6df117`.
+  - Item 1: every citation is re-pointed to `da4fa6df11784ce5a83bc7e74ec7b6aa78f689b9`. Each cited line was checked at the new head, and all still hold the same code.
+  - Item 2: the Limits line that said no fail-before run is recorded now cites the investigation run on base `c3cdf7b46e8`, with the awaitsfix group enabled (seed `54689CC480DC14B0`).
+  - Item 3: pre-fix heads are named where each fix is proved. Time-route cast: `98ad9d3fcc33`. Future-date repair: `a4e0da422327`. `[shard]` repair: `08f9384e47c0`.
+  - Item 4: the changelog line names `changelog/unreleased/SOLR-13696-dimensional-routed-alias.yml` (type `fixed`), one entry covering both production fixes.
+  - Item 5: nothing else changed. Both Choices, the length, and the other Limits items stand. The Proof heading now names the r8 head.
+- SOLR-13943 stacking note: base kept at `1d0b8a0a73cd`. The stacked branch does not contain `da4fa6df117`, so the base must stay. The note now says the SOLR-13696 branch gained that commit, which touches no file this branch changes.
+- Open after this addendum: the 3-of-5 reading on SOLR-13943, and the commit subject on `dd83fdcccb6`. The SOLR-13696 r8 item is closed.
