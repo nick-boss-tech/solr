@@ -28,7 +28,9 @@ branch follow this file.
 
 ### DISCUSS (recommendation recorded, call not taken)
 
-- **SOLR-6045, the factory defect.** The branch's premise work
+- **SOLR-6045, the factory defect. DECIDED by Nick,
+  2026-10-08: option A, fix it in this branch before the PR,
+  with a re-gate.** The branch's premise work
   found a real pre-existing defect on the opt-in atomic path:
   the factory returns the list of maps, the instanceof Map skip
   misses, and the maps are stored as values. Recommendation:
@@ -38,13 +40,18 @@ branch follow this file.
   the defect named in Limits and a follow-up offer. Tough
   because it trades scope discipline against shipping a known
   defect.
-- **SOLR-12864, the passing pin.** The review's owner call:
+- **SOLR-12864, the passing pin. DECIDED by Nick, 2026-10-08:
+  option B, keep it as a test-only coverage PR guarding the
+  SOLR-16811 fix for the echo plus mapUniqueKeyOnly combination,
+  framed as coverage and never as a bug fix.** The review's owner call:
   accept a test that pins working behavior (its fail-before
   stage reports NOT_PROVEN), or drop the branch. The ticket's
   symptom does not reproduce on the current base. Recommendation:
   drop the standalone pin. The alternative is to accept it as
   coverage. This is the same open question as SOLR-10641.
-- **SOLR-13696, fix or retire.** The branch's re-enabled tests
+- **SOLR-13696, fix or retire. DECIDED by Nick, 2026-10-08:
+  option B, fund the fix as its own project, handed off in
+  `assignments/solr-13696-fix-project.md` on this branch.** The branch's re-enabled tests
   fail on current main for schema and config drift beyond the
   commitWithin race the ticket names, so its premise does not
   hold as shipped. Recommendation: retire the branch as it
@@ -101,5 +108,10 @@ below are the decisions those fixes wait on.
   queue record's file pointer, then resume and complete the
   gate at the current head, with the fail-before behavior
   confirmed by a run and reported as it lands.
-- **SOLR-12864 and SOLR-13696:** no dev fixes. Both wait on
-  the DISCUSS calls above.
+- **SOLR-12864 and SOLR-13696:** decided by Nick on
+  2026-10-08 (see the DISCUSS section). SOLR-12864 proceeds as
+  a test-only coverage PR: package it and gate it at the
+  packaged head, with the pin's proof stated as inconclusive by
+  construction. SOLR-13696 proceeds through the fix-project
+  handoff named above; the branch stays untouched until that
+  project claims it.
