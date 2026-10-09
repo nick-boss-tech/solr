@@ -33,3 +33,14 @@ The owner ruled against accepting the process phrases: a "gate entry" is interna
 ## Confirmations ratified by the owner (2026-10-09)
 
 The owner ratified the five remaining items from `reports/review-corrections-28.md`: (1) the planned follow-up commitments in the 22 drafts stand; (2) the five gaps without a plan sentence (5065, 12705, 14718, 14262, 7022) stay as stated limitations; (3) the SOLR-7022 Proof line about DirectUpdateHandler2CommitWaitTest is dropped (done in the drafts with this entry); (4) the seven long drafts are accepted as the complex cases; (5) the receipts addendum is an accepted source for SOLR-16673's earlier-head facts. With item 4 ruled earlier (plain language) and the plain-language pass pushed at 78ce00d90af, the corrected drafts are final and the main side applies them to the 28 live PR bodies.
+
+## Six verification findings dispositioned by the main side (2026-10-09)
+
+The verification of the plain-language pass (reports/review-plain-language-28.md) raised six findings. The owner asked why they were folded into round 2 instead of fixed; five are record-accuracy fixes and were made directly, and the sixth is covered by an earlier ruling:
+
+1. SOLR-7022 receipt: corrected. The commits after the original gate change no production code, but 6a233ab2fdb adds a test file; the receipt now says so, and notes the top-up did not run that class.
+2. SOLR-6973: the "(by reading)" framing is gone. Proof states the base run (7 tests, 1 failure) and identifies the failure as the new test because the base code sets both values it checks for absence.
+3. SOLR-13696 pre-fix heads: accepted as sourced from the round 3 close-out answers and the round 8 addendum, on the same basis as the ratified SOLR-16673 addendum ruling.
+4. SOLR-13943: "all in normal mode" dropped; normal mode is claimed only for the class the record supports.
+5. "Live tip" replaced in the four drafts (4841, 5754, 5939, 7022) with "current head" phrasing.
+6. SOLR-5941 and SOLR-13265: the method phrases the records do not cover are removed; the run claims stand as recorded.

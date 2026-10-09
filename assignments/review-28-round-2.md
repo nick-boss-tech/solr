@@ -20,16 +20,9 @@ For every accepted finding in `reports/review-opened-28.md` and every edit recor
 - The six corrected titles (SOLR-5754, 13943, 16673, 5505, 12864, 12245): each title against the change it names.
 - No internal process vocabulary anywhere in any draft, all sections, not only Proof: gate, receipt, ledger, "JUnit XML", "rc=", takeover, "live tip" (see part 2, item 5). The ordinary verb "delegate" in SOLR-5939 is not a hit.
 
-## Part 2: disposition of the six findings from the plain-language verification
+## Part 2: verify the six dispositions
 
-For each finding in `reports/review-plain-language-28.md`, verify it against the receipts and the drafts and give a recommended disposition with the exact replacement text where a change is proposed:
-
-1. SOLR-7022 receipt wording: the receipt says the commits from the gate to the live tip change only text; commit `6a233ab2fdb` adds a test file. State what the receipt should say, and confirm the public draft makes no claim the corrected receipt would not support (the Proof line about that class is already dropped by the owner's ruling).
-2. SOLR-6973 "by reading": the receipt records a base run of 7 tests with 1 failure and does not name the failing test. Judge the proposed replacement in the verification report.
-3. SOLR-13696 pre-fix heads: the four heads come from the round 3 close-out answers and the round 8 addendum rather than the receipt. Note the precedent: the owner accepted the receipts addendum as the source for SOLR-16673's earlier-head facts. State whether the same acceptance covers these, or what is missing.
-4. SOLR-13943 "all in normal mode": the receipt gives normal mode for one class only. Say what the draft may claim.
-5. "Live tip" in four drafts: name the four and propose the replacement wording in each context.
-6. SOLR-5941 and SOLR-13265 method claims ("checked by reading the base code", "with only this test file applied"): propose receipt-supported wording or state that the claim should stand as drafting knowledge, with reasons.
+The six findings from `reports/review-plain-language-28.md` have been dispositioned by the main side (recorded at the end of `material/review-opened-28-answers.md`): five fixed directly in the drafts and the SOLR-7022 receipt, one (the SOLR-13696 pre-fix heads) accepted under the SOLR-16673 addendum precedent. Verify each landed as recorded, and that no public claim exceeds what the corrected records support.
 
 ## Part 3: verdict
 
