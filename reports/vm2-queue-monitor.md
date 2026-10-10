@@ -329,3 +329,13 @@ Gates. No gate file changed in this range. No gate is RUNNING. The FAILED text i
 Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE (2026-10-10).
 
 No action taken by vm2.
+
+## 2026-10-10 21:37 UTC
+
+What changed. vm2 claimed and finished round 1 job 3, SOLR-4502 (gates/SOLR-4502.md, claims/pool-vm2-gate-backlog-4502.md). Premise run on base cabedd1d96 failed as predicted: create on the unloaded container throws a create-time NPE, not the load() message. Packaging commit removed SOLR-4502-TESTING.md locally (not pushed to the fork). Gate green at packaged head 0ee4c644ee63: changelog OK, tidy clean, Error Prone compile OK, TestCoreContainer 26 run, 0 failed, 3 skipped (Windows-only), new test passed, module check rc 0. Receipt receipts/SOLR-4502.md. Job and claim DONE.
+
+Claims. No vm2 claim is active. Round 1 jobs 1 and 2 were already BLOCKED or DONE; job 4, SOLR-5011, is next and unclaimed.
+
+Caveats. The search-time NPE named in the ticket was not run separately; the premise was shown at create time. Guard placement remains the owner's call.
+
+No action taken beyond this job.
