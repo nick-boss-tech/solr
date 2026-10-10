@@ -679,6 +679,10 @@ public class QueryComponent extends SearchComponent {
   }
 
   protected void handleGroupedResponses(ResponseBuilder rb, ShardRequest sreq) {
+    if ((sreq.purpose & ShardRequest.PURPOSE_GET_TERM_STATS) != 0) {
+      updateStats(rb, sreq);
+    }
+
     ShardResponseProcessor responseProcessor = null;
     if ((sreq.purpose & ShardRequest.PURPOSE_GET_TOP_GROUPS) != 0) {
       responseProcessor = new SearchGroupShardResponseProcessor();
