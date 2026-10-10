@@ -22,6 +22,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 /** A distributed {@code {!knn topK=N}} query returns N hits overall, not N per shard. */
 public class DistributedKnnTopKTest extends BaseDistributedSearchTestCase {
@@ -39,7 +40,7 @@ public class DistributedKnnTopKTest extends BaseDistributedSearchTestCase {
     schemaString = "schema-vector-catchall.xml";
   }
 
-  @Override
+  @Test
   public void test() throws Exception {
     del("*:*");
     for (int i = 1; i <= NUM_DOCS; i++) {
