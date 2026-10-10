@@ -251,3 +251,19 @@ Unclaimed assignments (no claims file with the same slug): open-update-29-prs, p
 Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE and the host file records the checks as confirmed on 2026-10-10.
 
 No action taken by vm2.
+
+## 2026-10-10 20:20 UTC
+
+What changed since the last monitor run (last seen b9bd979e08, now 63b308e080). Two new commits by Nick Shanin: 42173b9b46 (SOLR-18391 proof decision recorded; SOLR-16630 base runs and title fix assigned) and 63b308e080 (flaky-fix post-PR review fixes: corrected drafts, receipts and gate job head). The first adds assignments/pool-solr-16630-base-runs.md. The second edits drafts for SOLR-18530, SOLR-18531 and SOLR-18532, receipts for SOLR-18391, SOLR-18530 and SOLR-18531, and gates/SOLR-18531.md. No new claim files were added.
+
+Claims. No claim was added or changed in this range. No claim is active: every claim with a heartbeat line is marked DONE.
+
+Gates. No gate is RUNNING or FAILED. SOLR-18531 and SOLR-16630 are DONE with gate green. SOLR-12998 remains DONE with outcome BLOCKED ON PROOF LEG, as recorded before.
+
+Stale claims. Flagged, none taken over. These claims have no heartbeat line and no DONE mark, and their dates (2026-10-08 or 2026-10-09) are well past the 2-hour cutoff of 18:20 UTC: review-28-round-2, review-corrections-28, review-plain-language-28, round-4-answers-and-13696-r8, solr-13696-fix-project, update-processing-audit-group-a, update-processing-audit-group-c, update-processing-audit-group-d, update-processing-not-gated-group-a, update-processing-not-gated-group-b, update-processing-round-3-closeout-addendum, update-processing-scope-the-eight.
+
+Unclaimed assignments (no claims file with the same slug): open-update-29-prs, pool-admin-ui-premise-runs, pool-solr-16630-base-runs (new in 42173b9b46), pool-vm2-gate-backlog-round-1, pool-vm2-gate-backlog-round-2, update-processing-groups-cd-review, update-processing-not-gated-review. The vm2 gate-backlog jobs are claimed under ticket-named claim files.
+
+Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE.
+
+No action taken by vm2.
