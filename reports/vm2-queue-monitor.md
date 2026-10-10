@@ -357,3 +357,11 @@ Caveats. No Config API round trip was run; the stated limit from the TESTING.md 
 Claims. No vm2 claim is active. Round 1 job 6 (SOLR-16499) is next and unclaimed.
 
 No action taken beyond this job.
+
+## 2026-10-10 23:01 UTC
+
+What changed. vm2 finished round 1 job 6, SOLR-16499 (gates/SOLR-16499.md, claims/pool-vm2-gate-backlog-16499.md). The gate run had completed at 22:53:44Z, but its records were never closed out. Premise held on base: testParallelAndTimeoutAreForwardedToTheOverseerMessage failed with "expected:<4> but was:<2>". Gate green at packaged head 51b7addddd45 (packaging removes SOLR-16499-TESTING.md; local only, not pushed): changelog OK, tidy clean, compile OK, ReplaceNodeAPITest tests=4 failures=0 from fresh XML, module check rc 0. Receipt receipts/SOLR-16499.md rewritten at the gated head (it previously recorded NO GATE). Job and claim DONE.
+
+Caveats. The reference-guide and OpenAPI or SolrJ regeneration checks are not part of this gate and remain owed for the draft stage. The DISCUSS call on the route is not taken here.
+
+Claims. No vm2 claim is active. Round 1 job 7 (SOLR-5262 premise run) is next and unclaimed.
