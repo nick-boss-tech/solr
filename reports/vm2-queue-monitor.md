@@ -216,3 +216,22 @@ Unclaimed assignments (no claims file with the same slug): open-update-29-prs, p
 Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE, and the host file records the checks as confirmed.
 
 No action taken by vm2.
+
+## 2026-10-10 20:00 UTC
+
+What changed since the last monitor run (last seen 5cccba9c97, now a6dc93351d). Two new commits by Nick Shanin:
+
+- 5b5eb64a5d Flaky-fix review round 1: slice 4 reviewed, draft written, proof held.
+- a6dc93351d Claim: flaky-fix post-PR review round 1, slice 2.
+
+Claims. pool-flaky-fix-review-round-1-slice-4 (SOLR-16630) is DONE. Its draft is ready, and the proof claim is held for owner decision O1. New claim pool-flaky-fix-post-pr-review-round-1-slice-2 (SOLR-18531) is active on windows, review tag only, with the last heartbeat at 19:53 UTC.
+
+Gates. No gate is RUNNING or FAILED. gates/SOLR-12998.md remains BLOCKED ON PROOF LEG: the gate steps are green at head 62a17a116b5, but the proof leg did not run because the branch tests do not compile against merge-base production. The main agent decides. No new receipts in this range.
+
+Stale claims. None. No active claim has a heartbeat older than two hours (cutoff 18:00 UTC). These claims have no heartbeat line and no DONE mark, and their dates are 2026-10-08 or 2026-10-09 (round-4-answers-and-13696-r8 has no date): review-28-round-2, review-corrections-28, review-plain-language-28, round-4-answers-and-13696-r8, solr-13696-fix-project, update-processing-audit-group-a, update-processing-audit-group-c, update-processing-audit-group-d, update-processing-not-gated-group-a, update-processing-not-gated-group-b, update-processing-round-3-closeout-addendum, and update-processing-scope-the-eight. They are stale under the two-hour rule and are flagged only.
+
+Unclaimed assignments (no claims file with the same slug): open-update-29-prs, pool-admin-ui-premise-runs, pool-vm2-gate-backlog-round-1 (jobs 1 and 2 are claimed under ticket-named files), pool-vm2-gate-backlog-round-2, update-processing-groups-cd-review, and update-processing-not-gated-review.
+
+Hosts. hosts/vm2.md records the onboarding checks as confirmed on 2026-10-10. They are not pending. The onboarding claim is DONE.
+
+No action taken by vm2.
