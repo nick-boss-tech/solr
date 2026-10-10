@@ -43,6 +43,7 @@ public class TestFileSystemConfigSetService extends SolrTestCaseJ4 {
 
   @BeforeClass
   public static void beforeClass() throws Exception {
+    assumeWorkingMockito();
     configSetBase = createTempDir();
     fileSystemConfigSetService = new FileSystemConfigSetService(configSetBase);
   }
