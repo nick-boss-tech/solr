@@ -3055,13 +3055,17 @@ public class ZkController implements Closeable {
           if (collName != null
               && (coll = zkStateReader.getCollection(collName)) != null
               && coll.isPerReplicaState()) {
-            PerReplicaStatesOps.downReplicas(
-                    replicasPerCollectionOnNode.get(collName).stream()
-                        .map(Replica::getName)
-                        .collect(Collectors.toList()),
-                    PerReplicaStatesOps.fetch(
-                        coll.getZNode(), zkClient, coll.getPerReplicaStates()))
-                .persist(coll.getZNode(), zkClient);
+            try {
+              PerReplicaStatesOps.downReplicas(
+                      replicasPerCollectionOnNode.get(collName).stream()
+                          .map(Replica::getName)
+                          .collect(Collectors.toList()),
+                      PerReplicaStatesOps.fetch(
+                          coll.getZNode(), zkClient, coll.getPerReplicaStates()))
+                  .persist(coll.getZNode(), zkClient);
+            } catch (KeeperException e) {
+              log.warn("Could not mark replicas down in per replica states for {}", collName, e);
+            }
           }
         }
 
