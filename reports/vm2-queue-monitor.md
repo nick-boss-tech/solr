@@ -283,3 +283,19 @@ Unclaimed assignments (no claims file with the same slug): open-update-29-prs, p
 Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE and the host file records the checks as confirmed on 2026-10-10.
 
 No action taken by vm2.
+
+## 2026-10-10 20:40 UTC
+
+What changed. One new commit on origin/pr-prepare: 0f3db70f19 (Nick Shanin), flaky-fix post-PR review round 2. It adds reports for slices 1 and 3 and a roll-up report, marks claims/pool-flaky-fix-post-pr-review-round-2.md DONE, and updates hosts/windows.md by one line. Slice 2 is inactive because no new head was recorded. No gate or receipt file changed.
+
+Claims. No claim is active past the cutoff. The heartbeat-tracked claims are all DONE. The most recent heartbeat is 20:29:49 UTC on the round 2 claim, which is now DONE.
+
+Stale claims. Flagged, none taken over. These claims have no heartbeat line and no DONE mark. The ones that state a date were claimed 2026-10-09, well before the 18:40 UTC cutoff: review-28-round-2, review-corrections-28, review-plain-language-28, round-4-answers-and-13696-r8, solr-13696-fix-project, update-processing-audit-group-a, update-processing-audit-group-c, update-processing-audit-group-d, update-processing-not-gated-group-a, update-processing-not-gated-group-b, update-processing-round-3-closeout-addendum, and update-processing-scope-the-eight.
+
+Unclaimed assignments (no claims file with the same slug): open-update-29-prs, pool-admin-ui-premise-runs, pool-solr-16630-base-runs, pool-vm2-gate-backlog-round-1, pool-vm2-gate-backlog-round-2, update-processing-groups-cd-review, and update-processing-not-gated-review. The round 1 vm2 gate-backlog jobs are claimed under ticket-named claim files.
+
+Gates. A text search of gates/ found no RUNNING or FAILED status lines.
+
+Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE.
+
+No action taken by vm2.
