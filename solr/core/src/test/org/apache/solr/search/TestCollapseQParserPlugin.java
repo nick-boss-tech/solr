@@ -1035,7 +1035,13 @@ public class TestCollapseQParserPlugin extends SolrTestCaseJ4 {
     for (String hint : Arrays.asList("", " hint=top_fc")) {
       assertQ(
           "collapse" + hint,
-          req("q", "*:*", "fq", "{!collapse field=" + f + " max=test_i" + hint + "}", "sort", "id asc"),
+          req(
+              "q",
+              "*:*",
+              "fq",
+              "{!collapse field=" + f + " max=test_i" + hint + "}",
+              "sort",
+              "id asc"),
           "*[count(//doc)=2]",
           "//result/doc[1]/str[@name='id'][.='2']",
           "//result/doc[2]/str[@name='id'][.='3']");
