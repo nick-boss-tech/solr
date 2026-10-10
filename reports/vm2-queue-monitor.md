@@ -193,3 +193,26 @@ Unclaimed assignments (no claims file with the same slug): open-update-29-prs, p
 Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE on 2026-10-10.
 
 No action taken by vm2.
+
+## 2026-10-10 19:50 UTC
+
+Changed since the 19:30 section. Origin moved from 80ed2a7882 to 4f488e98de. Six new commits, all by Nick Shanin:
+
+- e4889be53e Flaky-fix post-PR review round 1: two open PRs reviewed, findings reported.
+- af7d707503 Claim: flaky-fix review round 1, slice 4.
+- 50ef5ea2a5 SOLR-18531 draft cleared at the re-gated head; receipt refreshed; post-PR slice active.
+- 9224143a7a SOLR-18391 gate on vm2: green at head, proof leg mismatch recorded.
+- 7f7caf8bc1 SOLR-18391 claim result on vm2.
+- 4f488e98de Slice B drifts applied to live PR bodies; drafts synced and SOLR-16673 receipt refreshed.
+
+Gates. gates/SOLR-18391.md is DONE: green at head adcda10b501, with the proof leg recorded as a mismatch. At base, CreateCollectionCleanupTest has 2 failures, not the 1 the receipt predicted (testCreateDoesNotDeleteExistingCollectionOnStaleView also fails, with 500 where 400 was expected). PlacementPluginIntegrationTest.testAssignForMissingCollection fails as predicted. The main agent decides. receipts/SOLR-18391.md, receipts/SOLR-18531.md and receipts/SOLR-16673.md were refreshed. No gate is RUNNING or FAILED.
+
+Claims. Done since the last section: pool-vm2-gate-backlog-18391 (DONE 19:45 UTC) and pool-flaky-fix-post-pr-review-round-1 (DONE, windows, slices 1 and 3). New claim: pool-flaky-fix-review-round-1-slice-4 (SOLR-16630, windows, review and draft, active, heartbeat 19:42 UTC). Active claims with heartbeats in the last two hours: pool-flaky-fix-review-round-1-slice-4.
+
+Stale claims: none active with a heartbeat older than two hours. The unmarked claims with no heartbeat line, dated 2026-10-08 or 2026-10-09, are unchanged from the previous section: review-28-round-2, review-corrections-28, review-plain-language-28, round-4-answers-and-13696-r8, solr-13696-fix-project, update-processing-audit-group-a, update-processing-audit-group-c, update-processing-audit-group-d, update-processing-not-gated-group-a, update-processing-not-gated-group-b, update-processing-round-3-closeout-addendum (last heartbeat 2026-10-09 08:03 UTC), and update-processing-scope-the-eight. Under the two-hour rule they are stale. They are flagged only; vm2 does not take them over.
+
+Unclaimed assignments (no claims file with the same slug): open-update-29-prs, pool-admin-ui-premise-runs, pool-vm2-gate-backlog-round-1 (jobs 1 and 2 are claimed under ticket-named files; the others have no claim), pool-vm2-gate-backlog-round-2, update-processing-groups-cd-review, and update-processing-not-gated-review.
+
+Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE, and the host file records the checks as confirmed.
+
+No action taken by vm2.
