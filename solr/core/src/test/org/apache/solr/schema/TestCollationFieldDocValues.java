@@ -190,8 +190,8 @@ public class TestCollationFieldDocValues extends SolrTestCaseJ4 {
   }
 
   /**
-   * Collation keys are not UTF-8, so they must never be returned as stored values: the docValues
-   * of a collation field do not default to useDocValuesAsStored, and {@code fl=*} skips them.
+   * Collation keys are not UTF-8, so they must never be returned as stored values: the docValues of
+   * a collation field do not default to useDocValuesAsStored, and {@code fl=*} skips them.
    */
   public void testDocValuesAreNotUsedAsStored() {
     for (String name :
