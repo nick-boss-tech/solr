@@ -1,0 +1,118 @@
+# Review confidence round 2, slice A1: draft verification against adopted answers
+
+Scope: the 26 drafts in pr-drafts/solrcloud/ (17), pr-drafts/replication-backup/ (7), and pr-drafts/spellcheck/ (2), checked against material/solrcloud-round-1-answers.md, material/replication-backup-round-1-answers.md, and material/spellcheck-round-5-answers.md.
+
+Method: live tips read with `git ls-remote origin refs/heads/solr-<ticket>-submit` (read-only). Every cited link was read with `git show <sha>:<path>` and sed at the cited range. Base SHAs were compared with `git merge-base <head> upstream/main`. Receipts were read from receipts/. No builds, tests, Gradle, Selenium, gate or test-queue runs, fetches that change remote state, pushes, PR or Jira actions, or claim changes.
+
+Live tips: all 26 branch tips equal the head in the matching receipt (no moved-branch flags). Receipts for SOLR-12651 (live-tip gate, 2026-10-10) and SOLR-17292 (re-gate at f614a42, 2026-10-10) are newer than the answers' entries, and the drafts follow the receipts.
+
+## Verdicts
+
+Totals: PASS 6, FIXED 3, FLAGGED 17. Four FLAGGED drafts also carry edits (SOLR-15674, SOLR-16437, spellcheck SOLR-3701, spellcheck SOLR-4367).
+
+| Draft file | Verdict | Notes |
+|---|---|---|
+| solrcloud/SOLR-5813.md | FIXED | Citation for the "today" line pointed at apache/solr base SHA cabedd1d; re-pointed to head 90b8baa0 (head L53 is the same line). Limits bullet on setCollectionName is not in the answers; code claim verified (only caller in solr/core/src/java is reload, L128). Kept. Edit E1. |
+| solrcloud/SOLR-9155.md | FLAGGED | Proof numbers, date, Choice and Limits match. "Today" links show post-change code; see F1. |
+| solrcloud/SOLR-11288.md | FLAGGED | Choice poses blank nodes only; the recorded call covers blank-only input in all three APIs. See F2. Limits claim on missing BALANCE/MIGRATE tests checked against head test files: holds. |
+| solrcloud/SOLR-12651.md | PASS | Receipt head f3131d1 = live tip, 2 of 2, 2026-10-10. Lines verified. Choice opener present, bracketed Proof line gone. Note: head changelog title still carries the overstated wording the answers ask to replace (branch lane). |
+| solrcloud/SOLR-12991.md | FLAGGED | "Today" link is apache/solr base SHA 97d9738 (see F3); Proof "60 seconds" not in receipt (F4). Choice (WARN) and Limits match. |
+| solrcloud/SOLR-13186.md | PASS | Receipt 1 of 1 at b436d90d2a8 (2026-10-06). All links at head and lines verified. Limits only, no Choice, as answers record. |
+| solrcloud/SOLR-13369.md | FIXED | Summary said "proven by construction only"; changed to the formula phrase "inconclusive by construction" (E2). Counts (1 of 1, six extra seeds) match receipt. Diff vs merge-base touches only the test and changelog (verified). |
+| solrcloud/SOLR-14919.md | FIXED | Two citation ranges widened: "replicas" literal is at L235, not L218 (E3); own-shard forwarding branch at L235-237 added to the L215-L237 range (E4). DISCUSS (RecoveryStrategy marker) posed as recorded. Branch test comment at L63-66 still owed per answers (inside the Proof link range). |
+| solrcloud/SOLR-15035.md | FLAGGED | Proof placeholder was reworded per the answers and is fine. Unconfirmed sentence about the ticket summary; see F5. |
+| solrcloud/SOLR-15106.md | FLAGGED | Minor: Proof "60 seconds" not in receipt (F6). Otherwise matches (1 of 1, 2026-10-07, head 40b7e5d0efa7). |
+| solrcloud/SOLR-15386.md | PASS | Receipt 3 of 3 at ca8cb61ee95 (2026-10-07). Inconclusive-by-construction phrasing matches formula. All links at head and lines verified. Choice matches answers. |
+| solrcloud/SOLR-15674.md | FLAGGED | One link target fixed (E5). Flags: "today" links at base SHA b5c71bc5 (F7); Limits bullets lack the follow-up offer the answers record (F8). Proof 1 of 1 and date match. |
+| solrcloud/SOLR-15863.md | PASS | Receipt head f381fd8d = live tip; counts 4, 6, 7 match; date 2026-10-08 matches answers. Choice opener present. Limits match. All links verified. Note: branch changelog title case still owed per answers. |
+| solrcloud/SOLR-16437.md | FLAGGED | Six base-SHA link occurrences re-pointed to head aa2a6b8 (E6, E7; the four files are unchanged on the branch). Flags: wrong-shard behavior sentence differs from the answers (F9); Choice not recorded in answers (F10); Proof lacks run counts (F11). |
+| solrcloud/SOLR-17292.md | FLAGGED | Remedy text, Choice removal, call sites, and head f614a42 (= receipt re-gate) all match. "Today" link is base SHA 14c7aac0 (F12). |
+| solrcloud/SOLR-17680.md | FLAGGED | Counts 15 of 15 and 13 of 13, date 2026-10-04, Choice and Limits match. Proof numbers "10 before, 11 now" not in receipt (F13). "Today" citation shows the post-change command check (F14). |
+| solrcloud/SOLR-17733.md | PASS | Receipt head 636196b7 = live tip; 1 test; 500 to 200 premise matches. "Today" citation at checkInZk is unchanged code called from deleteLocal (verified). Contract statement and sync-complaint note present. |
+| replication-backup/SOLR-8430.md | FLAGGED | HOLD note and pre-cap Limits bullet are as the answers direct (not defects). Proof 3 of 3, probe 1 of 1, 2026-10-07 match. "Today" link is non-head base SHA 8e62c268 (F15). |
+| replication-backup/SOLR-9598.md | FLAGGED | HOLD note as directed. Counts 2/7/4 and date match; CREATE deprecation claim verified. "Today" link is non-head base SHA 8e62c268 and head L308 shows the new wait (F16). |
+| replication-backup/SOLR-9865.md | FLAGGED | Proof 70/0 and head c. 4937608b match receipt. Open "[CONFIRM: count]" placeholder (F17). Limits bullet on SolrCloud restore not in answers and imprecise (F18). |
+| replication-backup/SOLR-11650.md | FLAGGED | Head e4f5e941 = receipt head. Two "today" links show post-change code (F20); "Three of those tests" not in receipt (F21). Re-point owed after the branch title and comment commits, per answers. |
+| replication-backup/SOLR-12085.md | PASS | Receipt head c8dba502 = live tip. Counts 1, 18, 25 skipped; 2026-10-05; loop lines unchanged at head. Changelog title fix owed on branch (answers). |
+| replication-backup/SOLR-12246.md | FLAGGED | Counts, receipt message text, date and Choice match. "Today" WARN claim is cited to head lines that log at INFO (F22). |
+| replication-backup/SOLR-17287.md | FLAGGED | Head 6957daf8 = receipt head; UpdateLog diff is 56 additions and 0 deletions, as the draft says. Open "[CONFIRM: count]" placeholder (F19). |
+| spellcheck/SOLR-3701.md | FLAGGED | Decision 2 (apostrophe rule, ASCII-only test, tokens not collation) matches answers; Limits regex examples verified. Process wording fixed (E8, E9). Flags: no pass count at head (F23); "today" link at base SHA cabedd1d (F24). |
+| spellcheck/SOLR-4367.md | FLAGGED | Decision 5 (classname-only check, single-trigger Limit, follow-up offer) matches. Process wording fixed (E10); changelog citation linked (E11). Flag: Proof placeholder unresolved (F25). |
+
+## Edits made
+
+Only the draft files below were changed. No receipt, answers file, PR, or claim was touched.
+
+- E1, solrcloud/SOLR-5813.md. Old: `[CloudDescriptor.java L53](https://github.com/apache/solr/blob/cabedd1d968059215188f4e7563fb303241899ed/solr/core/src/java/org/apache/solr/cloud/CloudDescriptor.java#L53)`. New: `[CloudDescriptor.java L53](https://github.com/nick-boss-tech/solr/blob/90b8baa08aefd83cbee7e6e17ca9c59fcc93b30f/solr/core/src/java/org/apache/solr/cloud/CloudDescriptor.java#L53)`. Why: the rule is a branch-head link; head L53 is the same line as base L53 (verified).
+- E2, solrcloud/SOLR-13369.md. Old: "The check is proven by construction only." New: "The proof is inconclusive by construction." Why: formula phrasing for an inconclusive proof; the sentence after it already says no run showed the failure. No claim about a run changed.
+- E3, solrcloud/SOLR-14919.md. Old: `...DistributedZkUpdateProcessor.java#L218))` New: `...DistributedZkUpdateProcessor.java#L218-L235))`. Why: the sentence cites both "leaders" and "replicas"; "replicas" is at L235 (head), and L218 holds only "leaders".
+- E4, solrcloud/SOLR-14919.md. Old: `...DistributedZkUpdateProcessor.java#L215-L219))` New: `...DistributedZkUpdateProcessor.java#L215-L237))`. Why: the sentence says the leader now forwards only to its own shard's replicas; that branch (L235-237) was outside the cited range.
+- E5, solrcloud/SOLR-15674.md. Old: `[SolrConfig.java L161, L170, L387-L389](.../solr/core/src/java/org/apache/solr/core/SolrConfig.java#L161-L170)`. New: `[SolrConfig.java L161, L170](.../SolrConfig.java#L161-L170), [L387-L389](.../SolrConfig.java#L387-L389)` (both at head ba01c83d4c5ad03c7af63fd4061df119a8146d49). Why: the link text listed L387-L389 but its target covered only L161-170; head L387-389 hold `rp.zkMzxid`.
+- E6, solrcloud/SOLR-16437.md. Six link occurrences (five distinct targets) changed from base SHA e2cdb2d7e8ae0be4cf6cf0606206c67d89e7278f to branch head aa2a6b8afb6f1720c0a04b7869f331ab47bf554d: ReplicaMutator.java L162-L175, Overseer.java L436-L439, DistributedClusterStateUpdater.java L819-L830, ReplicaMutator.java L184-L195 (twice), DocCollection.java L382-L391. Why: the rule is head-only. Verified with git diff that the four files have zero changed lines between base and head, so the cited lines are identical.
+- E7, solrcloud/SOLR-16437.md. Labels: "(base, e2cdb2d7e8ae)" becomes "(unchanged on this branch)"; three "(base)" labels become "(unchanged on this branch)"; two ", base)" labels become ", unchanged on this branch)". Why: the links now point at head, where the code is unchanged; "base" would mislead.
+- E8, spellcheck/SOLR-3701.md. Old: "...and this head was gated.**" New: "...and this head was checked.**" Why: "gated" is gate-process wording (pr-formula.md, plain language).
+- E9, spellcheck/SOLR-3701.md. Old: "- Gate receipt: head `aabd678dec7`, recorded as gated on 2026-10-06." New: "- Checked at head `aabd678dec7` on 2026-10-06." Why: "Gate receipt" and "recorded as gated" are internal record wording. Same date and head.
+- E10, spellcheck/SOLR-4367.md. Old: "Recorded 2026-10-06 at head `0af6087f43fa` in the takeover log: gated and pushed. A second round at the same head checked the proof breadth and the description wording, with no code change." New: "Checked 2026-10-06 at head `0af6087f43fa`. A second check at the same head reviewed the proof and the description wording; the code did not change." Why: takeover log, gated and round are internal process wording. Same date, head and substance.
+- E11, spellcheck/SOLR-4367.md. Old: "Changelog: `changelog/unreleased/SOLR-4367-spellcheck-misplaced-config.yml`" New: the same path as a link to the blob at head 0af6087f43fa2b03a9cedb259c1b0dd62039963c. Why: file citations are links at the head SHA (the file exists at head).
+
+## FLAGGED items
+
+F1. solrcloud/SOLR-9155.md, "What happens today". Draft: "getLeader catches every exception. It logs the failure at ERROR and throws a SolrException that says only that the leader lookup failed for a shard ([generic catch](https://github.com/nick-boss-tech/solr/blob/9f08d033023331dedfd555e8f014e6f0c5a384db/solr/core/src/java/org/apache/solr/cloud/ZkController.java#L1731-L1739))." Conflict: the cited head lines 1731-1739 contain no logging call and show the new message ("...check that ZooKeeper is reachable and that the shard has an elected leader"). The ERROR log and the old message are in the merge-base 97d973814336 ZkController.java L1725-L1731 (log.error at L1726). The rule (head links) cannot show the old behavior. Decision for the lead: allow a labelled base-SHA link in the symptom section, or drop the ERROR and message clauses.
+
+F2. solrcloud/SOLR-11288.md, Choice. Draft: "A blank node list now starts a rebalance across every live node, where it used to fail... Was it right to let a blank nodes value mean all live nodes?" Also "What this change does" states "Blank-only input now behaves like an omitted value" and gives the CLUSTERSTATUS (blank shard returns all shards) and MIGRATE_REPLICAS (blank targetNodes uses all other live nodes) cases. Conflict: solrcloud-round-1-answers.md, SOLR-11288 entry, DISCUSS: "blank-only input. A blank-only value now behaves like an omitted one in all three APIs... the draft's Choice poses it"; DISCUSS list item 3 is the same call. The Choice poses only the BALANCE_REPLICAS case. Decision for the lead: widen the Choice to the three APIs or accept the narrower question.
+
+F3. solrcloud/SOLR-12991.md, "What happens today". Draft: "In [pingLeader](https://github.com/apache/solr/blob/97d973814336101e12475558d7419321c743de79/solr/core/src/java/org/apache/solr/cloud/RecoveryStrategy.java#L829-L836), both connect-failure catches log ... at ERROR. The exception is not passed to the logger." Conflict: the base lines confirm the claim (log.error, no exception argument), but the link is an apache/solr base SHA, not the branch head, and head 1a86966179e1 at L829-837 shows log.warn with the exception. No head link can show the claim. Decision for the lead (same as F1).
+
+F4. solrcloud/SOLR-12991.md, Proof. Draft: "It waits up to 60 seconds for a WARN from RecoveryStrategy". Conflict: receipts/SOLR-12991.md records no 60-second value. The source confirms it (test file L77, `poll(60, TimeUnit.SECONDS)`). Decision for the lead: keep the timeout detail or drop it.
+
+F5. solrcloud/SOLR-15035.md, "What happens today". Draft: "The ticket summary describes this difference." Conflict: solrcloud-round-1-answers.md, SOLR-15035 entry: "Also confirm the ticket summary before opening; no Jira packet for this ticket is on disk." The record does not confirm the sentence. Decision for the lead: confirm the summary or hold the sentence.
+
+F6. solrcloud/SOLR-15106.md, Proof. Draft: "waits up to 60 seconds for a new live processor thread". Conflict: receipts/SOLR-15106.md has no 60-second value. Source: test L42, `new TimeOut(60, TimeUnit.SECONDS, ...)`. Minor, same as F4.
+
+F7. solrcloud/SOLR-15674.md, "What happens today". Draft links `IndexSchemaFactory.java` at apache/solr b5c71bc5573c4e31b4cee5a7965d73587fc0ae58 L178-L182 and `SolrConfig.java` at the same base SHA L199-L209 for "checked against the data version". b5c71bc5 is the branch merge-base, not the head. At head ba01c83d4c5a the L178-L182 lines are the new cache lookup; the version compare is at L187 (mzxid). Decision for the lead (same class as F1).
+
+F8. solrcloud/SOLR-15674.md, Limits. Bullets "The config watcher in SolrCore decides to reload..." and "One fallback path in ManagedIndexSchemaFactory..." have no follow-up offer. Conflict: solrcloud answers, SOLR-15674 entry: the managed-schema fallback and the SolrCore config watcher "stay as Limits lines in the draft, with the follow-up offer." Adding the offer changes a Limits line, so it is flagged, not edited.
+
+F9. solrcloud/SOLR-16437.md, "What this change does". Draft: "Before this change, that request returned 200 and set the property on no replica. For preferredleader, the old update could also clear the property on the replicas of the named shard." Conflict: solrcloud answers, SOLR-16437 entry (adopted): "a valid replica name given with the wrong shard is now a 400, where before it changed the replica in the other shard (part p5, finding 13)." The base code (ReplicaMutator.java L184-L195, unchanged on this branch) updates only the named shard's replicas, so the draft matches the code and the answers' wording does not. Decision for the lead: reconcile the answers wording with the code.
+
+F10. solrcloud/SOLR-16437.md, Choice ("A choice to check: A maintainer could reasonably prefer the other route for a replica name given with the wrong shard."). Conflict: the SOLR-16437 entry records scope (ADDREPLICAPROP only) and the behavior change, not a Choice. Decision for the lead: keep or drop the Choice.
+
+F11. solrcloud/SOLR-16437.md, Proof. The class-run line has no counts. Receipt: at head, CollectionsAPISolrJTest 25 tests, 1 skipped, 0 failures; with CollApiCmds.java at merge-base, 25 tests, 1 skipped, exactly 1 failure. pr-formula.md section 3 asks for run counts inline. Main-side fill-in from the receipt (adds numbers, so flagged, not edited).
+
+F12. solrcloud/SOLR-17292.md, "What happens today". Draft links `PerReplicaStatesOps.java` at apache/solr base 14c7aac0d151402b00259e2fb9bf5eed7049ec5d L131-L147 for "retries while the state is stale... the loop ends and the method returns." 14c7aac0 is the merge-base. At head f614a42 those lines show the new loop (refresh only before the last attempt); the new throw is at L151-L157. Decision for the lead (same class as F1).
+
+F13. solrcloud/SOLR-17680.md, Proof. Draft: "the API test fails on the expected message size (10 before, 11 now)." Conflict: receipts/SOLR-17680.md has no 10 or 11. Source confirms: merge-base 56ec140e CreateAliasAPITest.java L308 `assertEquals(10, message.size())`; head f4b8ce83 L308 `assertEquals(11, message.size())`. Decision for the lead: add the source-based numbers to the receipt or drop them.
+
+F14. solrcloud/SOLR-17680.md, "What happens today". Draft: "The create command requires top-level router.name and router.field before it reads the dimensions" with the link to CreateAliasCmd.java L119-L124 at head. At head, L120 checks router.name only; the router.field check moved to RoutedAlias.fromProps (head CreateAliasCmd.java L132-L134). The cited head lines show the post-change command. Decision for the lead (same class as F1).
+
+F15. replication-backup/SOLR-8430.md, "What happens today". Draft links `ReplicationAPIBase.java` at apache/solr base 8e62c2686882aa704480ab13b6a60ee8f7b5c8af L308-L313 ("builds a new rate limiter for every file stream"). 8e62c268 is not the head (49af21be) and is not the merge-base (cabedd1d). At base L308-L313 the code is `new RateLimiter.SimpleRateLimiter(...)`; at head L308-L313 is different code. Decision for the lead (same class as F1). The draft is on HOLD per its OWNER NOTE; not to be posted.
+
+F16. replication-backup/SOLR-9598.md, "What happens today". Draft links `RestoreCmd.java` at apache/solr base 8e62c268 L301-L306 ("without waiting for those replicas to become active"). Non-head SHA. At head L301-L306 are markAllShardsAsActive and the addReplicasToShards call; the new waitForReplicasToBeActive call is at head L308. Decision for the lead (same class as F1). HOLD note as directed.
+
+F17. replication-backup/SOLR-9865.md, Proof. Draft: "Counts, run 2026-10-05 at head `4937608bb181`: TestRestoreCore [CONFIRM: count]". Conflict: replication-backup-round-1-answers.md keeps this placeholder until the main side confirms the count; receipts/SOLR-9865.md says TestRestoreCore 4; the head file has 3 `@Test` methods. The draft cannot be final until the main side confirms.
+
+F18. replication-backup/SOLR-9865.md, Limits. Draft: "The SolrCloud restore calls the same method." Not in the answers. At head, the cloud RestoreCmd sends shard requests with `CoreAdminParams.ACTION` set to `INSTALLSHARDDATA` (RestoreCmd.java around L127), not RESTORECORE; the rollback in the draft is in RestoreCore. Decision for the lead: confirm or reword the bullet.
+
+F19. replication-backup/SOLR-17287.md, Proof. Draft: "Counts, run 2026-10-08 at head `6957daf8261`: TestRestoreCore [CONFIRM: count]". Same as F17: the answers keep the placeholder; head has 3 `@Test` methods and the receipt says 4.
+
+F20. replication-backup/SOLR-11650.md, "What happens today". Two problems. (a) Draft: "The replication details response returns that value as configured" with the link to ReplicationHandler.java L1041 at head. Head L1041 is `follower.add(LEADER_URL, URLUtil.redactUserInfo(...))`. (b) Draft: "IndexFetcher also prints the same URL ..." with the link to IndexFetcher.java L306-L336 at head; those head lines apply URLUtil.redactUserInfo in the malformed and not-allowed errors. Both claims describe base only. Decision for the lead (same class as F1).
+
+F21. replication-backup/SOLR-11650.md, Proof. Draft: "Three of those tests call the new helper." Not in receipts/SOLR-11650.md. Source confirms: head URLUtilTest.java has @Test methods at L106, L120 and L143 that call redactUserInfo. Minor.
+
+F22. replication-backup/SOLR-12246.md, "What happens today". Draft: "A file whose checksum differs ... is logged at WARN as 'File _0_1.liv did not match'" with the link to IndexFetcher.java L1264-L1274 at head. Head L1264-L1274 log that message at INFO (L1266). The WARN claim is base-only; base SHA not used. Decision for the lead (same class as F1).
+
+F23. spellcheck/SOLR-3701.md, Proof. Draft: "Checked at head aabd678dec7 on 2026-10-06." with "On the base code, SpellingQueryConverterTest has exactly one failure." Conflict: receipts/SOLR-3701.md records gated head and date and the base failure count, but no count of what passed at head. pr-formula.md requires what passed at the head. Main-side count needed.
+
+F24. spellcheck/SOLR-3701.md, "What happens today". Draft: "The base pattern has no rule that keeps an apostrophe inside a word ([base code](https://github.com/nick-boss-tech/solr/blob/cabedd1d968059215188f4e7563fb303241899ed/solr/core/src/java/org/apache/solr/spelling/SpellingQueryConverter.java#L86))." Non-head SHA. At head L86 the comment reads "an apostrophe followed by letters stays inside the word" (the new rule). Decision for the lead (same class as F1).
+
+F25. spellcheck/SOLR-4367.md, Proof. Draft: "[Owner to supply before posting: the run counts, and the failure on base code. The answers file names the receipt but gives neither.]" Conflict: receipts/SOLR-4367.md records the head, the date and the takeover-log entry, but no run counts and no base failure. The placeholder cannot be resolved from the record; either a main-side run record supplies both, or the Proof sentence is cut to what the record shows.
+
+## Notes for the main agent
+
+- Symptom ("What happens today") citations are the systemic issue. pr-formula.md and the assignment require head links, but the symptom describes base behavior, and the branch has changed the cited lines in the affected drafts (F1, F3, F7, F12, F14, F15, F16, F20, F22, F24). Lead decision needed: allow labelled base-SHA links in that section, drop the cited detail, or decide per draft. I did not choose. Where the cited lines are identical at head (E1, E6), the re-point was made.
+- Head comments that the answers say to correct sit inside cited Proof ranges: IgnoreCommitOptimizeUpdateProcessorFactoryTest L63-L66 (SOLR-14919, inside the L63-L76 link), and TestRestoreCore L237-L238 (SOLR-9865, inside the L182-L243 link). These are branch-lane items, not draft edits.
+- Changelog titles and other branch corrections listed in the answers were not applied (out of scope). The head changelog for SOLR-12651 still carries the overstated title.
+- Held drafts: SOLR-8430 and SOLR-9598 (OWNER NOTE), SOLR-9865 and SOLR-17287 (count placeholders), SOLR-11650 (re-point to the new head after the branch commits, per answers). Their current text matches the current head.
+- The solrcloud answers' statement that process words were checked and clean was not correct for spellcheck SOLR-3701 and SOLR-4367; both are fixed (E8 to E10).
+- SOLR-15478 (configsets) is not in this slice. SOLR-15674 requires its version-reset wording to match that draft. I did not edit the version-reset wording, so that check was not triggered, but SOLR-15478 was not reviewed.
+- Limits bullets that the answers do not name, kept and not flagged: SOLR-5813 setCollectionName bullet (code checked at head, true); SOLR-13186 election-sequence-node bullet (not checked); SOLR-12991 test-simulation bullet (not checked). The SOLR-9155 flow-control and pre-interrupt bullets are recorded in receipts/SOLR-9155.md, so they are not extra.
