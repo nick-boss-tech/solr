@@ -9,3 +9,4 @@
 - Deliverables: `reports/flaky-fix-review-round-1.md` (the slice 3 section, replacing the "not reviewed" line), `reports/flaky-fix-review-round-1-s3a.md`, `reports/flaky-fix-review-round-1-s3b.md`, `pr-drafts/flaky-fixes/SOLR-18532.md`.
 - Scope: read-only audit against the branch and `reports/flaky-tests-root-cause-round-1-t1.md`, then a PR draft. Proof numbers come only from `receipts/SOLR-18532.md`. No builds, Gradle, tests, Selenium or gate runs. No PR, comment, Jira write, submit-branch edit or live PR description edit.
 - Heartbeat: 2026-10-10T18:48:05Z (claim taken).
+- Status: DONE, 2026-10-10. Deliverables: `reports/flaky-fix-review-round-1.md` (slice 3 section), `reports/flaky-fix-review-round-1-s3a.md`, `reports/flaky-fix-review-round-1-s3b.md`, `pr-drafts/flaky-fixes/SOLR-18532.md` (hold draft, not for posting). Verdict: ready for draft with conditions; the draft is held for two owner decisions (overlap with SOLR-9865, framing against the flake).

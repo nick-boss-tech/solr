@@ -1,6 +1,6 @@
 # Flaky-fix review round 1: verdicts
 
-Assignment: `assignments/pool-flaky-fix-review-round-1.md`. Claim: `claims/pool-flaky-fix-review-round-1.md` (slices 1 and 2, this host). Part reports, one subagent per slice: `reports/flaky-fix-review-round-1-s1.md` (SOLR-18530) and `reports/flaky-fix-review-round-1-s2.md` (SOLR-18531). The lead checked each head against the assignment, read the draft files, and re-read the SOLR-18531 blocking finding F1 against the branch code.
+Assignment: `assignments/pool-flaky-fix-review-round-1.md`. Claims: `claims/pool-flaky-fix-review-round-1.md` (slices 1 and 2) and `claims/pool-flaky-fix-review-round-1-slice-3.md` (slice 3), both this host. Part reports, one subagent per slice: `reports/flaky-fix-review-round-1-s1.md` (SOLR-18530) and `reports/flaky-fix-review-round-1-s2.md` (SOLR-18531). The lead checked each head against the assignment, read the draft files, and re-read the SOLR-18531 blocking finding F1 against the branch code.
 
 ## Verdicts
 
@@ -8,7 +8,7 @@ Assignment: `assignments/pool-flaky-fix-review-round-1.md`. Claim: `claims/pool-
 |---|---|---|---|---|
 | SOLR-18530 | `98e5368d996518b9f4a94f85d7c2fcd933d3f485` | GATE GREEN | Ready for draft. Hold the opening for owner decisions D1 to D4. | `pr-drafts/flaky-fixes/SOLR-18530.md` |
 | SOLR-18531 | `a0150bf71e8e4d630fe55ae04482951a5ca3e179` | GATE GREEN | HOLD. Three items must clear before opening (F1, F2, F4). | `pr-drafts/flaky-fixes/SOLR-18531.md` (hold draft, not for posting) |
-| SOLR-18532 | `07a7ead478337498f2dd8bce08507c683e61517f` | QUEUED on vm1, no receipt | Not reviewed. Held until `receipts/SOLR-18532.md` records GATE GREEN at this head. | none |
+| SOLR-18532 | `348dd63d85a563c77e0a20b5742b2a0c845dc191` | GATE GREEN at the corrected head | Ready for draft with conditions. Draft held for two owner decisions (overlap with SOLR-9865; framing against the flake). | `pr-drafts/flaky-fixes/SOLR-18532.md` (hold draft, not for posting) |
 
 ## SOLR-18530
 
@@ -52,10 +52,33 @@ Owner decisions, not taken:
 
 ## SOLR-18532
 
-Not reviewed in this round. Its gate is still queued on vm1 (`gates/SOLR-18532.md`, no receipt). Slice 3 is held and is not claimed. A later round claims it once `receipts/SOLR-18532.md` records GATE GREEN at `07a7ead478337498f2dd8bce08507c683e61517f`, and checks that head again before reviewing.
+Ready for a draft with conditions. The draft is held until two owner decisions are taken. Claim: `claims/pool-flaky-fix-review-round-1-slice-3.md`. Part reports: `reports/flaky-fix-review-round-1-s3a.md` (production change) and `reports/flaky-fix-review-round-1-s3b.md` (test, history and proof wording). The head was checked against the fork's tip before any work.
+
+The change is a product fix in `RestoreCore`, not a fix for the flake. On a failed restore or install, the rollback writes back the core's previous `index.properties` bytes. It deletes the file only when the core had none before. The root-cause report (`reports/flaky-tests-root-cause-round-1.md` line 34) and t1 (line 95) both name this a separate product defect, not the flake's fix, so the draft must not say the flake is fixed. The lead re-read both framing lines and the rollback block at the head. They match.
+
+Owner decisions, not taken:
+
+- **D-a. Overlap with SOLR-9865 (verified).** The SOLR-9865 branch head `4937608bb181` is gate green. Its commit `cd46e4a3521` changes the same rollback lines in `RestoreCore.java`, but it writes the previous directory name back instead of the bytes. The two cannot both land as written. Nick decides which branch carries the change, or whether to sequence them (s3b-D1).
+- **D-b. Framing.** Ship as a standalone product fix with no flake claim, or wait (s3a-D1, s3b-D2). The ticket text is not in the workspace, so the framing could not be checked against it.
+
+Hardening and disclosure (owner decisions, not taken; a code or test change needs a new head and a new gate):
+
+- **s3a-F1. Guard the restore.** If writing the bytes back throws, the rest of the rollback is skipped. The writer is not reopened and the restore directory is not removed. The base code has the same exposure around its delete. Fix: s3a-D2.
+- **s3a-F2. Temp file leftover.** A failed write leaves `index.properties.<nanoTime>` in the data directory. It is inherited from `SolrCore.writeNewIndexProps`.
+- **s3a-F3. Non-atomic fallback.** On a factory that deletes and then renames, a failure between the two can leave no pointer. Only the in-memory factories use that fallback. The draft names it in Limits.
+- **s3a-F4 and s3a-D5. Read errors now abort.** A read error other than file-not-found stops the restore before the switch. The base read ignored it. The new behavior is safer, but the changelog does not mention it. Recommendation: keep it and state it. The draft does, behind a HOLD.
+- **s3a-F5 and s3a-D3. Failure wait.** The new test's failure wait is a short poll loop copied from `testFailedRestore`. A slow failure makes the test fail rather than pass. Widening it is a test-only change and needs a new gate.
+- **s3a-F6. In-memory factory only.** The proof does not run the atomic move path. The draft names it in Limits.
+- **s3b-D3 and s3a-D4. Commit history.** Commit `348dd63d85a` narrates the failed first gate and uses internal words. Squash or reword before any PR (Nick decides).
+- **s3b-D4. Test count.** The receipt's "4 tests" comes from JUnit XML that is not on disk. The file has three `@Test` annotations and four `test*` methods. Confirm before the draft says "4 of 4". The draft has a HOLD.
+- **s3b-D5. Gate record.** `gates/SOLR-18532.md` still names `07a7ead` on line 3, and it has no record of the failed first gate. The main side should correct it. This review did not edit it.
+- **s3b-D6. Coverage.** No assertion that the file is absent when the core had no earlier file. Add it, or keep the Limits line. The draft has a HOLD.
+- **s3b-D7. Changelog wording.** "instead of deleting it" reads as never deleting. Optional rewording.
+
+The receipt's "final assertion" is inaccurate: the pointer check comes before the document check. The draft says "the pointer check".
 
 ## Not done
 
 No build, Gradle, test, Selenium or gate run. No PR, comment, Jira write, submit-branch edit or live PR description edit. No ticket text was available in the workspace, so both verdicts rest on the assignment and the root-cause reports.
 
-The claim for slices 1 and 2 is marked DONE in the same push as these deliverables. The verdicts are review results. They are not approval to open either PR.
+The claims for slices 1 and 2 and for slice 3 are marked DONE in the same push as these deliverables. The verdicts are review results. None of them is approval to open a PR. Openings and the owner decisions above stay with Nick and the main agent.
