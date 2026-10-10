@@ -11,3 +11,5 @@ Packaged head: 51b7addddd45dfbb8e18e4f80982a3793206bdcd (local, not pushed). Gat
 Heartbeat: 2026-10-10T22:33:46Z.
 
 Heartbeat: 2026-10-10T22:36:00Z. Runner in progress: changelog parse rc=0, tidy running (log /workspace/gates/logs/vm2/16499-tidy.log).
+
+Heartbeat: 2026-10-10T22:41:03Z. Gate still running (tidy rc=0, tree unchanged; compileTestJava in progress, log /workspace/gates/logs/vm2/16499-compile.log).
