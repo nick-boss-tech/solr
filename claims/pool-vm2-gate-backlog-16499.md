@@ -13,3 +13,5 @@ Heartbeat: 2026-10-10T22:33:46Z.
 Heartbeat: 2026-10-10T22:36:00Z. Runner in progress: changelog parse rc=0, tidy running (log /workspace/gates/logs/vm2/16499-tidy.log).
 
 Heartbeat: 2026-10-10T22:41:03Z. Gate still running (tidy rc=0, tree unchanged; compileTestJava in progress, log /workspace/gates/logs/vm2/16499-compile.log).
+
+Heartbeat: 2026-10-10T22:51:21Z. Compile BUILD SUCCESSFUL (16499-compile.log). Proof leg ran (16499-proof.log): testParallelAndTimeoutAreForwardedToTheOverseerMessage failed with "expected:<4> but was:<2>" on the message size, as the job predicts; premise held. Focused head run (16499-head.log) shows ReplaceNodeAPITest tests=4 failures=0. Module check running (16499-check.log).
