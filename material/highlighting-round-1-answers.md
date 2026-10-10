@@ -24,3 +24,8 @@ Options (a) test-only pin PR, (b) Jira comment and no PR, (c) bank as received. 
 ## SOLR-16885
 
 - The premise run is funded on the main side (queued, GATE PENDING in the takeover log): base production plus the branch test file, expecting the IndexOutOfBoundsException the branch note claims. Whether a Solr-side change is wanted at all stays open until that result is in; the branch's TESTING.md does not ship either way.
+
+## Results recorded 2026-10-09 (main side)
+
+- SOLR-2681 recount: DONE. HighlighterTest at head 4cb25b1691b ran 36 tests, 0 skipped, 0 failures, 0 errors, counted from fresh JUnit XML (log g2681-recount.log). The receipt's 36 of 36 stands; the draft needs no change. (The class declares 31 @Test methods; the run executes 36.)
+- SOLR-16885 premise: NOT grounded. On base production with the branch test files, TestUnifiedSolrHighlighter passed 34 of 34 and the new test passed; the claimed IndexOutOfBoundsException does not reproduce on current main (log g16885-premise.log). Its disposition joins SOLR-2632 as an owner call.
