@@ -13,3 +13,7 @@ Slices:
 Deliverables: one report at reports/flaky-fix-review-round-1.md (a verdict and findings per ticket, owner decisions flagged rather than taken) and one draft per ticket in pr-drafts/flaky-fixes/, following pr-formula.md: plain language, no internal process vocabulary, Proof numbers only from the receipts.
 
 Rules: the standing limits in WORKFLOW.md bind (subagent cap across hosts, claim before work, mark the claim DONE in the same push as the deliverables). No builds or gate runs under this assignment.
+
+## Added slice 4 (2026-10-10, main side): SOLR-16630
+
+VM2 built and gated this fix under the pool (branch solr-16630-submit at 9bea59741ac30ffd11ed11be5269ea025cf17f68, GATE GREEN per receipts/SOLR-16630.md: TestCoordinatorRole.testNRTRestart passed on each of six seeds). Slice 4: audit the change against reports/flaky-tests-root-cause-round-1-t3.md (the coordinator-endpoint race: the test read cluster state before the coordinator role finished registering), then write the draft at pr-drafts/flaky-fixes/SOLR-16630.md following pr-formula.md, Proof numbers only from the receipt. Verdict and any owner decisions go in reports/flaky-fix-review-round-1.md as a slice 4 section. Claim path: claims/pool-flaky-fix-review-round-1-slice-4.md. The ticket SOLR-16630 is an existing reopened ticket, not a new one; the draft frames it that way.
