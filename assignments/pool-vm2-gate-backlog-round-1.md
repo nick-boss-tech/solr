@@ -12,7 +12,7 @@ GRADLE_USER_HOME must point under /workspace on vm2. Its home directory lives on
 
 Work the jobs in this order. Each line names the job file, which carries the branch, head, focused classes, proof shape and step checklist. Items 1 and 2 are finished and are not claimable; they stay in the list so the numbering is stable.
 
-1. SOLR-12998 live-tip gate: `gates/SOLR-12998.md`. Run finished 2026-10-10T19:17Z; gate steps green at 62a17a116b5; proof leg blocked (the branch test sources do not compile at merge-base); main agent decision pending; not claimable. Do not re-run.
+1. SOLR-12998 live-tip gate: `gates/SOLR-12998.md`. Run finished 2026-10-10T19:17Z; gate steps green at 62a17a116b5; proof leg blocked (the branch test sources do not compile at merge-base); main agent decision recorded 2026-10-10: gate stands GREEN, proof inconclusive by construction; not claimable. Do not re-run.
 2. SOLR-18391 graceful-create gate: `gates/SOLR-18391.md`. DONE 2026-10-10T19:45Z; gate green at adcda10b501; proof leg mismatch resolved by the main agent decision recorded in receipts/SOLR-18391.md (ACCEPTED). Do not re-run; not claimable.
 3. SOLR-4502 first gate with premise run: `gates/SOLR-4502.md`. Head 4491f5162c1; premise run first (create on an unloaded container, search fails with the NPE), packaging removes the TESTING.md the tip adds, focused list is the new test plus the rest of TestCoreContainer.
 4. SOLR-5011 first gate with premise run: `gates/SOLR-5011.md`. Head f20ffe48078 (ticket 5011). Per the audit correction in gates/SOLR-5011.md, no branch test covers the shared-schema scenario; the job file's corrected proof shape and record-only path govern.
