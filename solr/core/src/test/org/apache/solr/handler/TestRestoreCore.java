@@ -292,7 +292,7 @@ public class TestRestoreCore extends SolrTestCaseJ4 {
           // if we never got an assertion let expectThrows complain
         });
 
-    // the failed restore rolled back to the live index
+    // the failed restore left the live index in place
     BackupRestoreUtils.verifyDocs(nDocs, leaderClient, DEFAULT_TEST_CORENAME);
   }
 }
