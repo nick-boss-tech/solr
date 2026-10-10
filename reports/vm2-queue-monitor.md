@@ -339,3 +339,11 @@ Claims. No vm2 claim is active. Round 1 jobs 1 and 2 were already BLOCKED or DON
 Caveats. The search-time NPE named in the ticket was not run separately; the premise was shown at create time. Guard placement remains the owner's call.
 
 No action taken beyond this job.
+
+## 2026-10-10 22:01 UTC
+
+What changed. vm2 claimed round 1 job 4, SOLR-5011 (gates/SOLR-5011.md, claims/pool-vm2-gate-backlog-5011.md), and finished it BLOCKED ON PROOF LEG. Gate steps are green at the local packaged head 5b2cfdfe4709 (packaging removes SOLR-5011-TESTING.md; not pushed): changelog OK, tidy clean, compileTestJava OK. The proof leg did not show the premise. At cabedd1d96 with the branch's SolrResourceLoader.java and test, CoreCloseResourceLoaderTest fails at line 44 (oldCore.close()) with "Too many closes on SolrCore" because the refcount was already zero, so the line 45 assertTrue(oldLoader.isClosed()) was never reached. Focused tests at head and the module check were not run; the job stopped per protocol. No receipt written.
+
+Decision for the main agent. Whether the test's premise (h.reload() keeps the old core open while the test holds a reference) holds on base and on head is not established by this run. The head focused run is the next thing to check, and it was not run. The shared-schema scenario from part k3 is not covered by any branch test; recorded as the finding in the job file.
+
+Claims. No vm2 claim is active. Round 1 job 5 (SOLR-12916) is next and unclaimed.
