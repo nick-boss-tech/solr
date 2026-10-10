@@ -448,8 +448,8 @@ class CSVWriter extends TabularResponseWriter {
 
   /**
    * Writes one cell value. Values with no flat form (maps, lists, NamedLists, {@link MapWriter},
-   * {@link IteratorWriter}, ...) are written as compact JSON; the tabular base class writes
-   * nothing for them, which would drop the cell and shift the columns after it.
+   * {@link IteratorWriter}, ...) are written as compact JSON; the tabular base class writes nothing
+   * for them, which would drop the cell and shift the columns after it.
    */
   private void writeCellVal(String name, Object val) throws IOException {
     if (val instanceof Map
