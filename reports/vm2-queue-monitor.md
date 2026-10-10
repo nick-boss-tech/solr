@@ -85,3 +85,23 @@ Unclaimed assignments (no claims file with the same slug): open-update-29-prs, p
 Hosts. hosts/vm2.md no longer says the onboarding checks are pending. It records them as done on 2026-10-10. Full gate capability is still unproven, since the smoke test covered changelog parse and tidy only.
 
 No action taken by vm2.
+
+## 2026-10-10 18:10 UTC
+
+Changed since the 18:00 snapshot. Origin moved from 1c5c9785db to 30a6d1bfc2. Three new commits, all by Nick Shanin:
+
+- e1d13c50ea Flaky-fix review round 1: two slices reviewed, one held.
+- 30a6d1bfc2 Windows pool pass: no assignment for this host, heartbeat.
+- c46ade72a9 vm2 queue monitor entry for the 18:00 snapshot.
+
+Gates. No gate file changed. SOLR-16630 is still RUNNING on vm2. SOLR-18532 is still QUEUED on vm1 with no receipt. SOLR-18530 and SOLR-18531 remain DONE (GREEN). No gate is FAILED.
+
+Claims. pool-flaky-fix-review-round-1 gained a status line marking slices 1 and 2 DONE (windows). Slice 3, SOLR-18532, is still not claimed. Active claim: pool-solr-16630-testcoordinatorrole-fix (vm2, heartbeat 17:40 UTC). It is not stale, but its next hourly heartbeat is due by 18:40 UTC.
+
+Stale claims: none by the two-hour heartbeat rule. Twelve older claims still have neither a DONE mark nor a heartbeat line: review-28-round-2, review-corrections-28, review-plain-language-28, round-4-answers-and-13696-r8, solr-13696-fix-project, update-processing-audit-group-a, update-processing-audit-group-c, update-processing-audit-group-d, update-processing-not-gated-group-a, update-processing-not-gated-group-b, update-processing-round-3-closeout-addendum, and update-processing-scope-the-eight. They have no timestamp to measure, so they are flagged for the main agent to mark, not taken over.
+
+Unclaimed assignments (no claims file with the same slug): open-update-29-prs, pool-admin-ui-premise-runs, pool-vm2-gate-backlog-round-1, update-processing-groups-cd-review, and update-processing-not-gated-review.
+
+Hosts. hosts/vm2.md does not say the onboarding checks are pending. It records them as done on 2026-10-10. Full gate capability is still unproven, since the smoke test covered changelog parse and tidy only. hosts/windows.md heartbeat moved to 18:06 UTC.
+
+No action taken by vm2.
