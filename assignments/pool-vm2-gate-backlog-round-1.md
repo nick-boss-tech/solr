@@ -10,10 +10,10 @@ GRADLE_USER_HOME must point under /workspace on vm2. Its home directory lives on
 
 ## Tranche 1: claimable now
 
-Work the jobs in this order. Each line names the job file, which carries the branch, head, focused classes, proof shape and step checklist.
+Work the jobs in this order. Each line names the job file, which carries the branch, head, focused classes, proof shape and step checklist. Items 1 and 2 are finished and are not claimable; they stay in the list so the numbering is stable.
 
-1. SOLR-12998 live-tip gate: `gates/SOLR-12998.md`. Gate at 62a17a116b5; the branch was gated at an older head that was rewritten, and one code commit followed it.
-2. SOLR-18391 graceful-create gate: `gates/SOLR-18391.md`. Gate at adcda10b501, eight commits past its gate at 3a0ff1262bf. The graceful-create branch only; the submit branch is not gated here.
+1. SOLR-12998 live-tip gate: `gates/SOLR-12998.md`. Run finished 2026-10-10T19:17Z; gate steps green at 62a17a116b5; proof leg blocked (the branch test sources do not compile at merge-base); main agent decision pending; not claimable. Do not re-run.
+2. SOLR-18391 graceful-create gate: `gates/SOLR-18391.md`. DONE 2026-10-10T19:45Z; gate green at adcda10b501; proof leg mismatch resolved by the main agent decision recorded in receipts/SOLR-18391.md (ACCEPTED). Do not re-run; not claimable.
 3. SOLR-4502 first gate with premise run: `gates/SOLR-4502.md`. Head 4491f5162c1; premise run first (create on an unloaded container, search fails with the NPE), packaging removes the TESTING.md the tip adds, focused list is the new test plus the rest of TestCoreContainer.
 4. SOLR-5011 first gate with premise run: `gates/SOLR-5011.md`. Head f20ffe48078 (ticket 5011). The run list must cover the shared-schema scenario (two cores, one config set, shareSchema on; unload one, the other still loads a lazy lib class).
 5. SOLR-12916 first gate with premise run: `gates/SOLR-12916.md`. Head ebe5db37433; premise is the Config API round trip base drops; gate at the cleaned head after packaging.
