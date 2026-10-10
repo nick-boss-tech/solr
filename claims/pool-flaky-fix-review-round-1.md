@@ -12,3 +12,4 @@
 - Split: two subagents, one per slice, both running at once (the cap is six).
 - Scope: read-only audit of each branch diff against its ticket and its root-cause part report, then a PR draft. Proof numbers come only from the receipts. No builds, Gradle, tests, Selenium or gate runs. No PR, comment, Jira write, submit-branch edit or live PR description edit.
 - Heartbeat: 2026-10-10T17:50:48Z (claim taken).
+- Status: DONE for slices 1 and 2, 2026-10-10. Deliverables: `reports/flaky-fix-review-round-1.md`, `reports/flaky-fix-review-round-1-s1.md`, `reports/flaky-fix-review-round-1-s2.md`, `pr-drafts/flaky-fixes/SOLR-18530.md` (ready for draft, opening held), `pr-drafts/flaky-fixes/SOLR-18531.md` (HOLD, not for posting). Slice 3 (SOLR-18532) is still not claimed; it stays open until its gate is green.
