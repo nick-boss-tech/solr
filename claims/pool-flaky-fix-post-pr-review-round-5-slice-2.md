@@ -9,3 +9,4 @@
 - Deliverables: a slice 2 section in `reports/flaky-fix-post-pr-review-round-5.md`, with part reports `reports/flaky-fix-post-pr-review-round-5-s2a.md` and `-s2b.md`.
 - Scope: read-only. Live PR read with the read-only GitHub wrapper only. No PR body edit, comment, close, branch edit or Jira write. No builds, Gradle, tests or gate runs.
 - Heartbeat: 2026-10-10T22:46:30Z (claim taken).
+- Status: DONE, 2026-10-10. Deliverables: the slice 2 section of `reports/flaky-fix-post-pr-review-round-5.md` (STILL OPEN, 3 items), `reports/flaky-fix-post-pr-review-round-5-s2a.md` (live body) and `-s2b.md` (code at the head). Nothing posted, edited on a PR, or pushed to a submit branch.

@@ -9,7 +9,7 @@ Read-only throughout. Nothing was posted, edited on a PR, or pushed to a submit 
 | Slice | PR | Head | Verdict |
 |---|---|---|---|
 | 1, SOLR-18530 | #5098 (draft) | `14868bc7a7f5ec5c4fa1ade5f894cbda9533307d`, equals the fork tip | STILL OPEN: 1 item |
-| 2, SOLR-18531 | #5101 (draft) | `c8a67c7267d00e33ad8323c683c040b539989b0d` | INACTIVE: the receipt does not yet record a green re-gate at this head |
+| 2, SOLR-18531 | #5101 (draft) | `c8a67c7267d00e33ad8323c683c040b539989b0d`, equals the fork tip | STILL OPEN: 3 items |
 | 3, SOLR-18532 | #5100 (draft) | `7dfd3d98d0a2f016c520139cbca96ea4a49f6689`, equals the fork tip | STILL OPEN: 2 items |
 
 Nick marks the draft PRs ready only when all three slices are SATISFIED. None is yet.
@@ -26,7 +26,21 @@ Non-blocking notes from the subagent, not verdict items: the Proof says "at 1486
 
 ## Slice 2: SOLR-18531 (PR #5101)
 
-Inactive. The fork branch and PR #5101 are at `c8a67c7267d00e33ad8323c683c040b539989b0d`. `receipts/SOLR-18531.md` still records GATE GREEN at `351914f52c99180f0582d45c5bea1bd800194d29`. The assignment starts this slice only when the receipt records a green re-gate at the new head.
+Verdict: STILL OPEN, three items. `receipts/SOLR-18531.md` now records GATE GREEN at `c8a67c7267d00e33ad8323c683c040b539989b0d` (re-gate 3), so the assignment's start condition holds. The fork branch and PR #5101 are at that head.
+
+Satisfied: the round 4 items 1 to 3 (no seed in the Proof, a bold summary on every section, and the release routes in Limits), the N1 platform Limits line, the N2 guard, the served-traffic test, and the Proof numbers against the receipt.
+
+Code check (part 2b): every release-route statement in Limits matches the head code. Runners removed by `stopJettySolrRunner` are not released at shutdown (`MiniSolrCloudCluster.java` lines 514 to 519 and 528 to 532; the shutdown snapshot at 627; the release at 644 to 646). A restart on a fresh port leaves the old port reserved (`JettySolrRunner.java` lines 512 and 517). The proxy port has no reservation. A standalone runner that is stopped and never closed keeps its port. The bind uses address reuse on the head (line 721). That is a code reading. No Linux run was made, so the Linux behaviour is not verified here.
+
+Still open:
+
+1. **Body, line 19.** "so nothing else can bind that port" must say "on Linux", because the claim depends on the Linux result.
+2. **Body, line 13 (summary).** "or its cluster shuts down" overstates for a runner removed by `stopJettySolrRunner`, which is not released at shutdown. Qualify it to "while it is still in its cluster".
+3. **Body, line 53 (changelog).** The changelog citation is a plain code span. It should be a head-SHA blob link, as slice 1 has it.
+
+Fixes go to the live body and the draft together.
+
+Non-blocking notes: `gates/SOLR-18531.md` still says RUNNING while the receipt says GREEN. Round 1 F6 (a failed start) and F8 (`close()` can release another runner's entry on the same port) are not named in Limits.
 
 ## Slice 3: SOLR-18532 (PR #5100)
 
