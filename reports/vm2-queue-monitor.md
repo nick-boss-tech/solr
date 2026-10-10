@@ -371,3 +371,11 @@ Claims. No vm2 claim is active. Round 1 job 7 (SOLR-5262 premise run) is next an
 What changed. vm2 claimed and finished round 1 job 7, SOLR-5262 premise run (gates/SOLR-5262-premise.md, claims/pool-vm2-gate-backlog-5262.md). No gate steps were run. Base cabedd1d96 with the branch test as the vehicle: testUlogDirDefaultsToDataDir fails (expected:<data/> but was:<null>); a scratch ${solr.core.ulogDir} substitution probe fails with "No system property or default value specified for solr.core.ulogDir". Head ade8b80264: TestCoreDescriptorImplicitProperties 3/3 and the probe pass. Receipt receipts/SOLR-5262.md updated; still NO GATE. The probe covers substitution only, not a full core load, and that limit is recorded in the receipt. Job and claim DONE.
 
 Claims. No vm2 claim is active. Round 1 job 8 (SOLR-9091 first gate) is next and unclaimed.
+
+## 2026-10-10 23:34 UTC
+
+What changed. vm2 claimed round 1 job 8, SOLR-9091 first gate (gates/SOLR-9091.md, claims/pool-vm2-gate-backlog-9091.md), commit 958f272219 on this branch. Packaging is local only, not pushed: packaged head e6bfa5c626 removes SOLR-9091-TESTING.md and corrects the TestRestoreCore comment. Gate launched 23:33:35Z; proof leg is base RestoreCore.java (cabedd1d96) with the branch test kept. The gate was started once by mistake and killed before any test ran; the rerun is the only run.
+
+Claims. The vm2 claim is active with a heartbeat at 23:34 UTC. The next run should read /workspace/gates/logs/vm2/9091-gate.out and finish the job if the gate has ended.
+
+No action taken beyond this job.
