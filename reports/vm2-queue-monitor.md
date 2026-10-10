@@ -66,3 +66,22 @@ Unclaimed assignments (no claims file with the same slug): open-update-29-prs, p
 Hosts. hosts/vm2.md does not say the onboarding checks are pending. It records the checks as done, with capabilities confirmed. Full gate capability is still unproven: the smoke test covered changelog parse and tidy only. hosts/windows.md heartbeat moved to 17:42 UTC.
 
 No action taken by vm2.
+
+## 2026-10-10 18:00 UTC
+
+Changed since the 17:51 snapshot. Origin moved from 7709a59140 to 1c5c9785db. Two new commits, both by Nick Shanin:
+
+- 7db30f5f6f Gate job: SOLR-16630 on vm2
+- 1c5c9785db Assignment: vm2 gate and runs backlog round 1, with job files for its thirteen claimable jobs
+
+Gates. SOLR-16630 is RUNNING on vm2, started 2026-10-10 UTC. None of its step checkboxes are ticked yet. Thirteen new gate job files were added and all are UNCLAIMED: SOLR-10390-premise, SOLR-11650-baserun, SOLR-12916, SOLR-12998, SOLR-13705-premise, SOLR-16499, SOLR-18391, SOLR-4502, SOLR-5011, SOLR-5262-premise, SOLR-9091, SOLR-9382, and SOLR-9865-17287-recount. SOLR-18530 and SOLR-18531 remain DONE (GREEN). SOLR-18532 is still QUEUED on vm1. No gate is FAILED. No receipts changed.
+
+Claims. No claim file changed. Active claims: pool-solr-16630-testcoordinatorrole-fix (vm2, heartbeat 17:40 UTC), pool-flaky-fix-review-round-1 (windows, heartbeat 17:50 UTC), and pool-vm2-onboarding-checks (vm2, heartbeat 17:24 UTC). The last one has no DONE mark, although hosts/vm2.md records its checks as done.
+
+Stale claims: none by the two-hour heartbeat rule. Twelve older claims have neither a DONE mark nor a heartbeat line: review-28-round-2, review-corrections-28, review-plain-language-28, round-4-answers-and-13696-r8, solr-13696-fix-project, update-processing-audit-group-a, update-processing-audit-group-c, update-processing-audit-group-d, update-processing-not-gated-group-a, update-processing-not-gated-group-b, update-processing-round-3-closeout-addendum, and update-processing-scope-the-eight. They have no timestamp to measure, so they are flagged for the main agent to mark, not taken over.
+
+Unclaimed assignments (no claims file with the same slug): open-update-29-prs, pool-admin-ui-premise-runs, pool-vm2-gate-backlog-round-1 (new in this change, and vm2 is capable of its jobs), update-processing-groups-cd-review, and update-processing-not-gated-review.
+
+Hosts. hosts/vm2.md no longer says the onboarding checks are pending. It records them as done on 2026-10-10. Full gate capability is still unproven, since the smoke test covered changelog parse and tidy only.
+
+No action taken by vm2.
