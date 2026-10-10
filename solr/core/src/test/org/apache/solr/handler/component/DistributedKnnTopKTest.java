@@ -62,7 +62,7 @@ public class DistributedKnnTopKTest extends BaseDistributedSearchTestCase {
       assertEquals("closest vectors first", Integer.toString(i + 1), results.get(i).get("id"));
     }
 
-    rsp = query("q", knn, "fl", "id", "rows", "2", "start", "2");
+    rsp = query("q", knn, "fl", "id,score", "rows", "2", "start", "2");
     assertEquals(TOP_K, rsp.getResults().getNumFound());
     assertEquals("start+rows past topK leaves the last hit", 1, rsp.getResults().size());
   }
