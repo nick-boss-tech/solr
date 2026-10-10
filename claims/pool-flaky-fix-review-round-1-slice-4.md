@@ -9,3 +9,4 @@
 - Deliverables: `reports/flaky-fix-review-round-1.md` (a slice 4 section), `reports/flaky-fix-review-round-1-s4a.md`, `reports/flaky-fix-review-round-1-s4b.md`, `pr-drafts/flaky-fixes/SOLR-16630.md`.
 - Scope: read-only audit, then a PR draft. Proof numbers come only from `receipts/SOLR-16630.md`. No builds, Gradle, tests or gate runs. No PR, comment, Jira write, submit-branch edit or live PR description edit.
 - Heartbeat: 2026-10-10T19:42:15Z (claim taken).
+- Status: DONE, 2026-10-10. Deliverables: `reports/flaky-fix-review-round-1.md` (slice 4 section), `reports/flaky-fix-review-round-1-s4a.md`, `reports/flaky-fix-review-round-1-s4b.md`, `pr-drafts/flaky-fixes/SOLR-16630.md` (ready for draft; proof claim held for owner decision O1).

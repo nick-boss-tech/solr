@@ -82,3 +82,24 @@ The receipt's "final assertion" is inaccurate: the pointer check comes before th
 No build, Gradle, test, Selenium or gate run. No PR, comment, Jira write, submit-branch edit or live PR description edit. No ticket text was available in the workspace, so both verdicts rest on the assignment and the root-cause reports.
 
 The claims for slices 1 and 2 and for slice 3 are marked DONE in the same push as these deliverables. The verdicts are review results. None of them is approval to open a PR. Openings and the owner decisions above stay with Nick and the main agent.
+
+## Slice 4: SOLR-16630 (fork branch solr-16630-submit)
+
+Added to the assignment by the main side after the round 1 verdicts. Head `9bea59741ac30ffd11ed11be5269ea025cf17f68`, which equals the fork tip and the head in `receipts/SOLR-16630.md` (GATE GREEN, run on vm2). The change is test-only: a changelog entry and `TestCoordinatorRole.java` (+6 lines). Part reports: `reports/flaky-fix-review-round-1-s4a.md` (code audit) and `reports/flaky-fix-review-round-1-s4b.md` (receipt check and draft). Draft: `pr-drafts/flaky-fixes/SOLR-16630.md`.
+
+**Verdict: ready for draft. The proof claim is held until owner decision O1 is taken.**
+
+- The change matches the primary fix in the t3 report. The test's fixed-delay stop of the PULL node no longer runs before the add loop's first successful add. The lead checked the wait at the head: `TestCoordinatorRole.java` line 262, `addDone.await(2, TimeUnit.MINUTES)`.
+- No hang. If no add succeeds within two minutes, the test logs a warning and stops the node anyway. The failure then comes up to two minutes later than before. The draft states this as a behavior change.
+- Evidence gap: no run of this test on the base code is on record. The test has not been shown to fail without the change. The draft says so plainly. The receipt's six focused runs (CI seed `681E2A715B2CE1D3` plus five random seeds, 1 test and 0 failures each) are the only proof numbers.
+- Not addressed: the stale pooled connection from the test client to the PULL node (H2 in t3), and the add loop's `SolrException`-only catch.
+
+Owner decisions and main-side items, not taken:
+
+- **O1.** Run `testNRTRestart` on the base code on vm2 with seed `681E2A715B2CE1D3`, which is a verify run this review does not do. Or publish with the "not shown to fail" wording the draft already has (s4a).
+- **O2.** Check the six vm2 logs for the order of events and for the absence of the fallback warning (s4a).
+- **Changelog title.** The title says the test "no longer stops the PULL node while an add through it is still in flight". Only the first add is waited for, so later adds can still be in flight. Fixing it needs a submit-branch edit, which moves the head. Main side (s4b item 3).
+- **"Likely cause" wording.** Keep "the likely cause ... not proven" in What happens today, or move it to Limits (s4b item 2).
+- **Choice section.** The draft has none. The catch-widening trade-off is in Limits. Owner may want it as a choice (s4b item 4).
+- **Assignment text.** The slice 4 text names a coordinator-endpoint race, which conflicts with the t3 mechanism (a fixed-delay stop of the PULL node). The draft follows t3. Main side should correct the assignment text (s4a O8, s4b item 5).
+- **Unverified in the draft.** "Reopened" status against Jira (s4b item 7). The failing CI run `38009158573` is not linked (s4b item 6). The two-minute constant is from the code, not the receipt (s4b item 8).
