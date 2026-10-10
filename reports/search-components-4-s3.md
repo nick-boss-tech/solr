@@ -58,7 +58,7 @@ Scope: read only. No builds, tests, or gh calls. Nothing posted, committed, push
 ## Not checked
 
 - No builds, tests, or gate runs. The proof counts and fail-before results are from receipts only. I could not confirm them from the logs.
-- The round 35 goal files named in the receipts (`goal files/reviews-2026-10-07-round35-bulk/11310.md` and `15479.md`) and the takeover log entries. I did not finish a full-tree search, so I cannot say whether they exist.
+- The round 35 goal files named in the receipts (`goal files/reviews-2026-10-07-round35-bulk/11310.md` and `15479.md`) and the takeover log entries. A full-tree search for the gate log names and the round 35 file names under the Solr-issues root returned no matches. The takeover log entries were not searched for.
 - The GitHub run 37688766357 cited in the 15479 receipt. No gh calls were made in this part.
 - Live PR state for 11310 and 15479. No gh calls were made. The claim lists no live PR for either.
 - Whether any caller wraps a rank query so that `cmd.getQuery()` is not a `RankQuery`. The head check is on `cmd.getQuery()` only.
