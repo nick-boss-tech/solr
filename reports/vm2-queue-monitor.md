@@ -347,3 +347,13 @@ What changed. vm2 claimed round 1 job 4, SOLR-5011 (gates/SOLR-5011.md, claims/p
 Decision for the main agent. Whether the test's premise (h.reload() keeps the old core open while the test holds a reference) holds on base and on head is not established by this run. The head focused run is the next thing to check, and it was not run. The shared-schema scenario from part k3 is not covered by any branch test; recorded as the finding in the job file.
 
 Claims. No vm2 claim is active. Round 1 job 5 (SOLR-12916) is next and unclaimed.
+
+## 2026-10-10 22:27 UTC
+
+What changed. vm2 claimed round 1 job 5, SOLR-12916 (gates/SOLR-12916.md, claims/pool-vm2-gate-backlog-12916.md), at 22:02Z and finished it GREEN at packaged head 50b1f4bcab03 (packaging removes SOLR-12916-TESTING.md; local only, not pushed). Premise run on base cabedd1d96 failed as predicted: testFlatNameValueQueryFromConfigApi "expected:<2> but was:<0>". Gate steps green at head: changelog OK, tidy clean, Error Prone compile OK, QuerySenderListenerTest 2 of 2 passed, module check rc 0. Receipt receipts/SOLR-12916.md. Job and claim DONE.
+
+Caveats. No Config API round trip was run; the stated limit from the TESTING.md stands. The XML path change is the owner's call.
+
+Claims. No vm2 claim is active. Round 1 job 6 (SOLR-16499) is next and unclaimed.
+
+No action taken beyond this job.
