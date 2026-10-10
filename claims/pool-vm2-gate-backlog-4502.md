@@ -7,3 +7,6 @@ Started: 2026-10-10T21:11:08Z (UTC).
 Heartbeat: 2026-10-10T21:11:08Z.
 
 Heartbeat: 2026-10-10T21:23:56Z. Premise run failed as predicted on base (create NPE, no load() message); gate running on packaged head 0ee4c644ee63.
+
+Result 2026-10-10T21:37:39Z: premise held (base run failed as predicted). Gate green at packaged head 0ee4c644ee63: changelog OK, tidy clean, compile OK, TestCoreContainer 26 run, 0 failed, 3 skipped (Windows-only), new test passed, module check rc 0. Receipt receipts/SOLR-4502.md. Packaging commit is local only, not pushed.
+DONE: 2026-10-10T21:37:39Z (UTC), outcome GREEN.
