@@ -2,7 +2,7 @@
 
 Claim first: add `claims/edismax-round-3.md`, then work. Report: `reports/edismax-round-3.md`. Drafts, for the tickets this round finds draftable, go in `pr-drafts/edismax/` following `pr-formula.md`.
 
-Staffing: run this round with 5 subagents in parallel, split by ticket cluster, with the lead writing the roll-up report. Suggested clusters: (2309, 2988, 4362), (3243, 3729, 3962), (6009, 6320), (12092, 14913), (3923, 7120, 14638).
+Staffing: run this round with 5 subagents in parallel, split by ticket cluster, with the lead writing the roll-up report. Hard cap from Nick (2026-10-09): never more than 6 subagents running at once across ALL assignments combined; subagents slow each other down past that. Run rounds one after another, not together. Suggested clusters: (2309, 2988, 4362), (3243, 3729, 3962), (6009, 6320), (12092, 14913), (3923, 7120, 14638).
 
 ## Scope
 

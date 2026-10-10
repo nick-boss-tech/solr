@@ -2,7 +2,7 @@
 
 Claim first: add `claims/search-components-1.md`, then work. Report: `reports/search-components-1.md`. Drafts, for the tickets the audit finds draftable, go in `pr-drafts/search-components/` following `pr-formula.md`.
 
-Staffing: run this round with 6 subagents in parallel, split by ticket cluster, with the lead writing the roll-up report.
+Staffing: run this round with 6 subagents in parallel, split by ticket cluster, with the lead writing the roll-up report. Hard cap from Nick (2026-10-09): never more than 6 subagents running at once across ALL assignments combined; subagents slow each other down past that. Run rounds one after another, not together.
 
 ## Scope
 

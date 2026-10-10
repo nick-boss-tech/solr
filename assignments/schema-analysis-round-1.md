@@ -2,7 +2,7 @@
 
 Claim first: add `claims/schema-analysis-round-1.md`, then work. Report: `reports/schema-analysis-round-1.md`. Drafts, for the tickets the audit finds draftable, go in `pr-drafts/schema-analysis/` following `pr-formula.md`.
 
-Staffing: run this round with 4 subagents in parallel, split by ticket cluster, with the lead writing the roll-up report. Suggested clusters: 9349 and 14199; 15357, 15358 and 10403 (the currency and sub-field family); 10131, 15712 and 15945; 16977, 17047 and 18134 (vectors and analysis). The lead verifies live tips, checks the interaction section across clusters, and writes the roll-up.
+Staffing: run this round with 4 subagents in parallel, split by ticket cluster, with the lead writing the roll-up report. Hard cap from Nick (2026-10-09): never more than 6 subagents running at once across ALL assignments combined; subagents slow each other down past that. Run rounds one after another, not together. Suggested clusters: 9349 and 14199; 15357, 15358 and 10403 (the currency and sub-field family); 10131, 15712 and 15945; 16977, 17047 and 18134 (vectors and analysis). The lead verifies live tips, checks the interaction section across clusters, and writes the roll-up.
 
 ## Scope
 
