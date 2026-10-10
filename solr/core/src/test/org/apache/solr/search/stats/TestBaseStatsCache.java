@@ -82,7 +82,7 @@ public abstract class TestBaseStatsCache extends TestDefaultStatsCache {
     params.set("q", "a_t:one a_t:four");
     params.set("fl", "id,score");
     params.set("group", "true");
-    params.set("group.field", "shard_i");
+    params.set("group.field", "id");
     params.set("group.limit", "1");
 
     Map<String, Object> controlScores = topScorePerGroup(controlClient.query(params));
