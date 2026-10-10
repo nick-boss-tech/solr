@@ -30,3 +30,6 @@ The work is split across two subagents:
 The lead agent writes the report and makes the commits. Subagents write draft files only.
 
 Not in scope: opening or commenting on pull requests, edits to any `solr-*-submit` branch or any live pull request description, builds or test runs, and the out-of-scope branches named above.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: material/update-processing-final-round-3.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

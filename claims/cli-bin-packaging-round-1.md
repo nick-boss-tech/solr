@@ -57,3 +57,6 @@ Six subagents in parallel, split by ticket cluster. The cap of six at once is me
 
 - SOLR-11678 (filed under Security; its audit home is the Security round). Its `bin/solr` overlap is named from this round's side only.
 - Opening PRs, posting comments, editing submit branches or live PR descriptions, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/cli-bin-packaging-round-1.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

@@ -24,3 +24,6 @@ Split:
 - Lead agent: claim commit, head checks, the report, the commits, and the push. Subagents write draft files only.
 
 Not in scope: opening or commenting on pull requests, edits to any `solr-*-submit` branch or live pull request description, builds or test runs, SOLR-13943, SOLR-9637, SOLR-18505 (closed in round 1; its description edit is not authorized and is not applied), and the suggester round 4 assignment (`assignments/suggester-round-4.md`), which is a separate assignment and is not started here.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: material/update-processing-round-3-closeout.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

@@ -9,3 +9,6 @@ Heads were checked against the live fork tips on this claim's date. Sixteen matc
 The work is split across three subagents. The lead agent writes the report and makes the commits.
 
 Not in scope: opening or commenting on pull requests, edits to any `solr-*-submit` branch, builds or test runs, and the out-of-scope branches named in the assignment (SOLR-5065, SOLR-6065, SOLR-7504, SOLR-12245, SOLR-12705, SOLR-12703, SOLR-14718, SOLR-6045, SOLR-13943, SOLR-13696, SOLR-11475).
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: material/update-processing-final-round.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

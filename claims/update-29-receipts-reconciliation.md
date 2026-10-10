@@ -21,3 +21,6 @@ Tickets, split into seven groups of about four:
 SOLR-18505 has a receipt and no draft in `pr-drafts/update-processing/`. The reconciliation says so.
 
 Not in scope: gate claims beyond what a receipt states, edits to any draft, branch, or PR description, opening or commenting on pull requests, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/update-29-receipts-reconciliation.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

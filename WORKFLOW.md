@@ -32,7 +32,8 @@ The Windows host never claims `gate`, `implementation`, `premise-run`, `settling
 2. First push wins. If a push race shows another claim for the same slice landed first, the later claimant stands down and picks other work.
 3. Heartbeat. While a claim is active the holder appends a heartbeat line with a fresh UTC timestamp to the claim file at least once an hour and pushes it. Long silent work is indistinguishable from dead work.
 4. Staleness. A claim with no heartbeat for 2 hours is stale. Any capable agent may take the slice over by appending a takeover line to the claim file (old holder, time, reason) and pushing. For a `gate` claim there is one more condition: the recorded gate log must have stopped growing, checked by the taking-over host's own reading of the log state recorded in `gates/<TICKET>.md`; a gate never runs on two hosts at once.
-5. Done. The holder marks the claim DONE with the deliverable paths when the work lands. A claim that ends in failure or a blocker says so in the claim file, with the reason; it does not just go quiet.
+5. Done. The holder marks the claim DONE with the deliverable paths when the work lands, in the same push sequence as the deliverable itself; an unmarked completed claim reads as open work to every other host and risks duplicated effort. A claim that ends in failure or a blocker says so in the claim file, with the reason; it does not just go quiet.
+6. Missed marks. If a deliverable has landed but its claim was never marked, any agent that verifies the deliverable on this branch may append the DONE mark, stating that it marked on verification and naming the deliverable. The mark is a record correction, not a claim transfer.
 
 ## Gates
 

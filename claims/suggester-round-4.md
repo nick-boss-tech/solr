@@ -22,3 +22,6 @@ Sequencing: SOLR-9227 is audited before SOLR-9968, because both edit the same su
 Split: one subagent audits the seven branches in the order above. The lead agent writes the report and makes the commits.
 
 Review sources: the main side's review files under `research/branch-reviews/round-28/` (workspace, not on this branch) and the receipts ledger named in the assignment. Each audit cites what it used.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/suggester-round-4.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

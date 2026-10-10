@@ -64,3 +64,6 @@ Six subagents. Reports go to `reports/search-components-3-<part>.md`. Drafts go 
 2. Drafts in `pr-drafts/search-components/` for the draftable tickets, each naming its head.
 
 Not in scope: opening PRs, posting comments, editing branches or live PR descriptions, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/search-components-3.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

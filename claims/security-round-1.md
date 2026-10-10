@@ -48,3 +48,6 @@ Four subagents in parallel, one per ticket. This is within the cap of six at onc
 
 - SOLR-18010, SOLR-13097, SOLR-17708 (Core admin round 1), SOLR-18132 (CLI round 1), SOLR-11650 (Replication and backup round 1), SOLR-10322 (Streaming expressions round 1), SOLR-9039 and SOLR-13705 (Build, docs and misc round, not yet assigned).
 - Opening PRs, posting comments, editing submit branches or live PR descriptions, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/security-round-1.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

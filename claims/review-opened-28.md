@@ -18,3 +18,6 @@ Method: each pull request is read with `gh pr view` (read only). The head SHA is
 Deviation from the assignment, stated here: the subagents write their group files and do not commit or push them. The lead commits and pushes all seven group files together and then writes the roll-up. Seven concurrent pushes to one worktree would race. The content and the file names are as the assignment says.
 
 Not in scope: flipping any draft, editing any pull request, description, comment, or submit branch, builds, Gradle, and test runs. Gate state comes from `receipts/`.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: material/review-opened-28-answers.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

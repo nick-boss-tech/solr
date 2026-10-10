@@ -22,3 +22,6 @@ DISCUSS items are recommendations only, not taken, per the answers file.
 Gate receipts and logs are main-side records. Drafts cite the answers file's record of them, as in earlier rounds.
 
 Not in scope: edits to any `solr-*-submit` branch or PR description, opening or commenting on pull requests, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/spellcheck-draft-round.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

@@ -9,3 +9,6 @@ Head checked live with `git ls-remote` on 2026-10-09: `solr-17215-submit` at `04
 Output: `pr-drafts/suggester/SOLR-17215.md`. A second subagent checks the draft's code facts at the head independently before the lead commits.
 
 Not in scope: edits to any `solr-*-submit` branch or PR description, opening or commenting on pull requests, builds, Gradle, and test runs, and the remaining holds in the draft round report.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: material/suggester-17215-receipt.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

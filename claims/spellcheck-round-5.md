@@ -23,3 +23,6 @@ Split: two subagents. One takes SOLR-1877, 3701, 4366, 4367, and 4399. The other
 Gate receipts live on the main side. Where an audit finds none, it says "no receipt visible".
 
 Not in scope: edits to any `solr-*-submit` branch or PR description, opening or commenting on pull requests, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/spellcheck-round-5.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

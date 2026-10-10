@@ -18,3 +18,6 @@ Landing order from the ruling: 7504 before 12705. SOLR-16655 still lands before 
 Split: two subagents. The first takes SOLR-6045 and SOLR-12705. The second takes SOLR-7504, SOLR-14718, and a cross-draft check for other drafts that describe the changed behavior.
 
 Not in scope: edits to any `solr-*-submit` branch or PR description, opening or commenting on pull requests, builds, Gradle, and test runs. The owner's rulings are executed by the main side, not here.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/update-29-rulings-execution.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

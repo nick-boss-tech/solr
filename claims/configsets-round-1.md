@@ -28,3 +28,6 @@ Read-only GitHub calls for the consistency passes: `research\gh.ps1 pr view` on 
 Output: each part writes `reports/configsets-round-1-a.md`, `reports/configsets-round-1-b.md`, and `reports/configsets-round-1-c.md`. The lead writes the round roll-up `reports/configsets-round-1.md`, with per-ticket verdicts and owner decisions.
 
 Not in scope: opening PRs, posting comments, editing submit branches or live PR descriptions, builds, Gradle, and test runs. Reading files, `git show`, `git log`, `git diff`, `git rev-parse`, `git cat-file -e`, `git grep`, and read-only `gh pr view` are allowed. SOLR-15674 and SOLR-18129 are not audited; they are only noted where a diff shows an interaction.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/configsets-round-1.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

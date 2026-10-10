@@ -39,3 +39,6 @@ Scope, two parts:
 2. Edits to `pr-drafts/replication-backup/SOLR-9865.md` and `SOLR-17287.md`; and any new draft under `pr-drafts/core-admin/` for 15003 or 18010 if draftable.
 
 Not in scope: opening PRs, posting comments, editing branches or live PR descriptions, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/answers-and-receipts-round-2.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

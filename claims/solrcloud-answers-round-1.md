@@ -55,3 +55,6 @@ Cap: four subagents at once, within the cap of six.
 2. Draft edits in place under `pr-drafts/solrcloud/`, and new drafts under `pr-drafts/search-components/` only where draftable.
 
 Not in scope: opening PRs, posting comments, editing branches or live PR descriptions, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: material/solrcloud-round-1-answers.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

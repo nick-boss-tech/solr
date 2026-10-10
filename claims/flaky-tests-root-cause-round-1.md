@@ -42,3 +42,6 @@ Tests 2 and 3 are read by their own subagents. The pattern question (one mechani
 ## Not in scope
 
 Opening or editing PRs, posting comments, editing submit branches or live PR descriptions, builds, Gradle, test runs, and any change to production or test code.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/flaky-tests-root-cause-round-1.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

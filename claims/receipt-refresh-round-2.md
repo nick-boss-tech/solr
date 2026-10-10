@@ -42,3 +42,6 @@ Both heads were fetched explicitly on this round (`git fetch origin solr-12651-s
 ## Not in scope
 
 Opening or editing PRs, posting comments, editing submit branches or live PR descriptions, builds, Gradle, and test runs. Changes to the receipts are the main side's, not ours.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: receipts/. The work was performed by the original claimant; this mark is a record correction, not a new claim.

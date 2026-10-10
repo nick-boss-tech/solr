@@ -14,3 +14,6 @@ Tips, checked live with `git ls-remote origin refs/heads/solr-<ticket>-submit` o
 Split: two subagents. The first takes SOLR-2681 and SOLR-2632. The second takes SOLR-3704, SOLR-4540 and SOLR-16885. Each drafts its gated tickets and audits its ungated one. The lead writes the report.
 
 Not in scope: opening PRs, posting comments, editing branches, builds, Gradle, and test runs. Gate work for the ungated tickets is main-side work and is not started here.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/highlighting-round-1.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

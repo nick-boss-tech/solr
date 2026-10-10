@@ -9,3 +9,6 @@ Tickets: 3657, 4841, 5065, 5505, 5754, 5887, 5939, 5941, 6045, 6065, 6973, 7022,
 Split: two subagents. The first takes check 1 (landing order) and check 2 (contradictory behavior claims). The second takes check 3 (philosophy consistency) and check 4 (follow-up promises).
 
 Not in scope: gate claims, new owner decisions, edits to any draft, branch, or PR description, opening or commenting on pull requests, builds, Gradle, and test runs. Contradictions are reported, not resolved.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/update-29-consistency-pass.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

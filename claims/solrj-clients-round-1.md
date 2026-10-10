@@ -70,3 +70,6 @@ Six subagents in parallel, split by ticket cluster. The cap of six at once is me
 
 - SOLR-18196 (merged, audit home Search components), SOLR-16499 and SOLR-17731 (audit home Core admin), SOLR-11650 (audit home Replication and backup), SOLR-17433 and SOLR-17143 (audit home Streaming expressions), SOLR-9864, SOLR-15331, SOLR-3865 and SOLR-8576.
 - Opening PRs, posting comments, editing submit branches or live PR descriptions, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/solrj-clients-round-1.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

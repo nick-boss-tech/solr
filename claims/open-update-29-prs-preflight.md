@@ -11,3 +11,6 @@ No pull request is opened, commented on, or changed by this claim. The assignmen
 Split: two subagents, 14 tickets each. Existing pull requests are read once, with a read-only listing, by the lead.
 
 Not in scope: opening, commenting on, or changing any pull request; editing or pushing any `solr-*-submit` branch; builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/open-update-29-prs-preflight.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

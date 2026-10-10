@@ -19,3 +19,6 @@ Held, no draft this round. Live tips checked 2026-10-09 with `git ls-remote`:
 Gate receipts and gate logs are main-side records. The drafts cite the material's record of them, as in earlier rounds.
 
 Not in scope: edits to any `solr-*-submit` branch or PR description, opening or commenting on pull requests, builds, Gradle, and test runs, SOLR-18505, and the SOLR-13696 and SOLR-13943 drafts (their own claim, `claims/update-processing-13696-r8.md`).
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: pr-drafts/suggester/. The work was performed by the original claimant; this mark is a record correction, not a new claim.

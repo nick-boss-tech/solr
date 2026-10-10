@@ -47,3 +47,6 @@ The lead writes the report, the answers to the handoff note's guesses, and the i
 
 - SOLR-13265 (Update processing) and SOLR-18317 (Core admin) are metric-adjacent only and are not re-audited.
 - Opening PRs, posting comments, editing submit branches or live PR descriptions, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/metrics-round-1.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

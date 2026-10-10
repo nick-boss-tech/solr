@@ -14,3 +14,6 @@ Drafts to update in `pr-drafts/update-processing/`:
 Split: two subagents, one per draft. A third check, of other drafts that cite the 7504 head, is in the second subagent's report.
 
 Not in scope: edits to any PR, comment, PR title, submit branch, or live PR description; builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/update-7504-nullfix.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

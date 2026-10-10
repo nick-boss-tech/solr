@@ -24,3 +24,6 @@ Audit notes:
 - 7504: correct the combined-tree note to the current 12705 draft, which names `mutateAtomicOperands()`.
 
 Not in scope: changing any owner decision, R1 to R3 (recommendations only, not taken), SOLR-6045 or SOLR-7504 drafts, the spellcheck holds, edits to any solr-*-submit branch or PR description, opening or commenting on pull requests, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/update-29-reconciliation-corrections.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

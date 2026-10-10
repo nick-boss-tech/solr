@@ -19,3 +19,6 @@ Split: two subagents, read only, four tasks each.
 Output: each subagent writes `reports/update-11475-citations.md` and `reports/update-11475-wording.md`. The lead writes the round roll-up `reports/update-11475-cleaned-head.md`.
 
 Not in scope: edits to any draft or receipt, submit branch, live PR description, PR, or comment; builds, Gradle, and test runs. Reading files, `git show`, `git log`, `git diff`, `git rev-parse`, `git cat-file -e`, and `git grep` are allowed.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/update-11475-cleaned-head.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

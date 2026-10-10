@@ -45,3 +45,6 @@ Three subagents in parallel, one per ticket. This is within the cap of six at on
 
 - SOLR-15024 (Core admin; cross-filed) and SOLR-18317 (its Admin UI half has merged).
 - Opening PRs, posting comments, editing submit branches or live PR descriptions, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/admin-ui-round-1.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

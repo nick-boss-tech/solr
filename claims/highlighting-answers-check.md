@@ -15,3 +15,6 @@ Heads, checked live with `git ls-remote` on 2026-10-09:
 Split: two subagents, one per draft. Each is read only: it reports whether the draft matches the answers and the receipt, and any text that is internal or unsupported, with exact replacement text. The lead applies any change.
 
 Not in scope: opening PRs, posting comments, editing branches or PR descriptions, builds, Gradle, and test runs. The premise run and the recount are main-side work.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/highlighting-answers-check.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

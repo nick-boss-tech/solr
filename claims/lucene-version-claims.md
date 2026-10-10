@@ -18,3 +18,6 @@ Split: two subagents, read only.
 Output: `reports/lucene-version-claims-6065.md` and `reports/lucene-version-claims-suggest-highlight.md`. The lead writes the roll-up.
 
 Not in scope: edits to any draft or receipt, PR, comment, or branch; builds, Gradle, and test runs. Reading class files with `javap -c -p` is allowed, and so is reading a jar's contents with a zip listing. No Gradle task runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/lucene-version-claims.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

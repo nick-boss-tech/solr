@@ -52,3 +52,6 @@ Each subagent takes one part. Reports go to `reports/schema-analysis-round-1-<pa
 2. Drafts in `pr-drafts/schema-analysis/` for the draftable tickets, each naming its head.
 
 Not in scope: opening PRs, posting comments, editing branches or live PR descriptions, builds, Gradle, and test runs. Owner decisions go in each part's report as a short list at the end.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/schema-analysis-round-1.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

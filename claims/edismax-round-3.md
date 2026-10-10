@@ -78,3 +78,6 @@ All thirteen branches change `ExtendedDismaxQParser.java` and share `TestExtende
 - Every finding: file and line, evidence (SHA and line, receipt line, or command output), and exact replacement wording. Mark FIX or NOTE. If you cannot check something, say so under "Not checked". Do not guess.
 
 Not in scope: opening PRs, posting comments, editing branches or live PR descriptions, builds, Gradle, and test runs. Owner decisions go in each part's report as a short list at the end. The decisions already on record above go in as recorded, not as new questions.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: reports/edismax-round-3.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

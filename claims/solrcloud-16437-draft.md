@@ -57,3 +57,6 @@ The head was fetched explicitly (`git fetch origin refs/heads/solr-16437-submit:
 ## Not in scope
 
 Opening or editing PRs, posting comments, editing submit branches or live PR descriptions (including the commit-history rewrite and the changelog author rule, which are owner decisions), builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: pr-drafts/solrcloud/SOLR-16437.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

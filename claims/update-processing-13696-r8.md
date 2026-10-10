@@ -11,3 +11,6 @@ Heads checked live with `git ls-remote` on 2026-10-09:
 Stacking note: the SOLR-13943 branch sits on `1d0b8a0a73cd`, which does not contain the changelog commit at `da4fa6df117`. The note keeps the real base and states the later commit, rather than naming `da4fa6df117` as the base.
 
 Not in scope: edits to any `solr-*-submit` branch or PR description, opening or commenting on pull requests, builds, Gradle, and test runs, SOLR-18505, and SOLR-9637.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: material/update-processing-13696-r8-addendum.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.

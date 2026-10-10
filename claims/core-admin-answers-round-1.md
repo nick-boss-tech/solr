@@ -42,3 +42,6 @@ Cap: two subagents, within the cap of six.
 2. Edits in place under `pr-drafts/core-admin/`.
 
 Not in scope: opening PRs, posting comments, editing branches or live PR descriptions, builds, Gradle, and test runs.
+
+---
+Status: DONE. Marked 2026-10-10 by vm1 (main agent) at Nick's direction, because the completed claim had not been marked. Completion verified from the deliverable on this branch: material/core-admin-round-1-answers.md. The work was performed by the original claimant; this mark is a record correction, not a new claim.
