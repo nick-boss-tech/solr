@@ -365,3 +365,9 @@ What changed. vm2 finished round 1 job 6, SOLR-16499 (gates/SOLR-16499.md, claim
 Caveats. The reference-guide and OpenAPI or SolrJ regeneration checks are not part of this gate and remain owed for the draft stage. The DISCUSS call on the route is not taken here.
 
 Claims. No vm2 claim is active. Round 1 job 7 (SOLR-5262 premise run) is next and unclaimed.
+
+## 2026-10-10 23:26 UTC
+
+What changed. vm2 claimed and finished round 1 job 7, SOLR-5262 premise run (gates/SOLR-5262-premise.md, claims/pool-vm2-gate-backlog-5262.md). No gate steps were run. Base cabedd1d96 with the branch test as the vehicle: testUlogDirDefaultsToDataDir fails (expected:<data/> but was:<null>); a scratch ${solr.core.ulogDir} substitution probe fails with "No system property or default value specified for solr.core.ulogDir". Head ade8b80264: TestCoreDescriptorImplicitProperties 3/3 and the probe pass. Receipt receipts/SOLR-5262.md updated; still NO GATE. The probe covers substitution only, not a full core load, and that limit is recorded in the receipt. Job and claim DONE.
+
+Claims. No vm2 claim is active. Round 1 job 8 (SOLR-9091 first gate) is next and unclaimed.
