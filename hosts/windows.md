@@ -2,4 +2,4 @@
 
 - Capabilities: review, draft, selenium, windows-check.
 - Never claims build work of any kind (gate, implementation, premise-run, settling-run, sweep): builds stay off this machine by Nick's standing rule.
-- Heartbeat: 2026-10-10 19:41 UTC, flaky-fix post-PR review round 1 DONE for the two open PRs (claims/pool-flaky-fix-post-pr-review-round-1.md; roll-up reports/flaky-fix-post-pr-review-round-1.md). Earlier: review-confidence round 2 DONE (reports/review-confidence-round-2.md) and flaky-fix review round 1 DONE for all three slices.
+- Heartbeat: 2026-10-10 20:02 UTC, flaky-fix post-PR review round 1 DONE for slices 1, 2 and 3 (claims/pool-flaky-fix-post-pr-review-round-1*.md; roll-up reports/flaky-fix-post-pr-review-round-1.md). Flaky-fix review round 1 slice 4 (SOLR-16630) DONE earlier (claims/pool-flaky-fix-review-round-1-slice-4.md). Review-confidence round 2 DONE (reports/review-confidence-round-2.md).

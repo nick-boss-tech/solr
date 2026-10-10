@@ -58,3 +58,38 @@ Round 1 item status: the overlap with SOLR-9865 and the framing are settled in t
 ## Not done
 
 No PR body edit, comment, review, close, submit-branch edit or Jira write. No build, Gradle, test, Selenium or gate run. The only git action with a side effect was a read-only fetch of the two fork branches. That moved the local remote-tracking refs for `solr-18530-submit` and `solr-18532-submit` to the heads above.
+
+## Slice 2: SOLR-18531 (PR #5101, draft)
+
+Head `5ba914ca745933251958412a4ccb226ecbaf0ad8`, which equals the fork tip. The live body equals `pr-drafts/flaky-fixes/SOLR-18531.md` after line-ending normalization. Part reports: `reports/flaky-fix-post-pr-review-round-1-s2a.md` (PR body and checks) and `reports/flaky-fix-post-pr-review-round-1-s2b.md` (receipt and head code).
+
+**Verdict: DRIFT.** Four sentences in the body do not match the head code or the receipt. The lead checked the disputed point directly.
+
+Body drift:
+
+1. **Limits, fresh-port restart (draft line 37).** The body says the old port stays reserved "until the old runner is closed or the JVM exits". The lead read `JettySolrRunner.close()` at the head (line 955): it calls `releasePortReservation()` with no argument, so it releases only the port the runner currently holds. After a restart on a fresh port, the old port stays reserved until a later start on that port or the JVM exits. The sentence is wrong for that case.
+2. **Behavior sentence (draft line 11).** It omits that `close()` now releases the port, and it overstates the cluster shutdown release. Round 1 F1 is still open: a runner removed with `stopJettySolrRunner` is not released at shutdown.
+3. **Standalone wording (draft line 38).** It says "stopped and never restarted". It should say "stopped and never restarted or closed", because `close()` now releases.
+4. **Linux variant (draft line 25).** The body describes what the variant showed: the port stayed reserved, outside binds were refused with address reuse allowed, and the restart worked both times. The receipt records only that the two-seed variant did not reproduce the TIME_WAIT failure. The body's detail is not in the receipt.
+
+Receipt issues (main side, not the body):
+
+- Lines 5 to 9 of `receipts/SOLR-18531.md` still hold the first-gate numbers under the new head header. The re-gate paragraph names no SHA.
+- `gates/SOLR-18531.md` still names the earlier head `a0150bf`.
+- Line 8 still says "TestPullReplica 39 tests skipped". The re-gate paragraph says the class ran under `tests.nightly=true` with 39 tests, 1 skipped, 0 failures. The round 1 O3 item is settled by the re-gate, so the stale line should be replaced.
+
+Round 1 blocking and disclosure items at the head (state in the live body in brackets):
+
+| Item | State at head | Open or settled |
+|---|---|---|
+| F1 runners removed by `stopJettySolrRunner` not released at shutdown | Not changed (`MiniSolrCloudCluster.java` 514-532, 644-646) [disclosed] | Open, disclosed |
+| F2 Linux bind may fail after traffic (TIME_WAIT) | Code unchanged (`JettySolrRunner.java` 707-716); reading only [not in Limits; the body's Linux detail is not in the receipt] | Open, not named in Limits |
+| F3 proxy port not reserved; failed rebind silent | Not changed (`SocketProxy.java` 204-225) [disclosed in Limits] | Open, disclosed |
+| F4 restart on a fresh port leaves the old port reserved | Not changed (`JettySolrRunner.java` 512-517); `close()` does not release it [disclosed, wrong release rule, item 1] | Open, disclosed with a wrong rule |
+| F5 standalone runners hold their port until the JVM exits | Changed: `close()` releases the current port (line 955) [Limits line 38; wording, item 3] | Settled in code; wording to fix |
+| F10 changelog title overstates | Fixed: the changelog title no longer claims a BindException | Settled |
+| O3 `TestPullReplica` skipped, none ran | Settled by the re-gate (39 tests, 1 skipped, 0 failures under nightly) | Settled; receipt line 8 stale |
+
+Lead check: the reviewers' reading of `close()` and of the fresh-port release rule matches the code. The re-gate paragraph is the only record for the head's proof numbers. The lead did not run or re-verify any test.
+
+Main-side actions (none taken here): correct draft lines 11, 25, 37 and 38; name F2 in Limits, or record why not; replace the stale `TestPullReplica` line in the receipt; update the receipt header and `gates/SOLR-18531.md` to the head. Body edits go through the main side.
