@@ -113,9 +113,7 @@ public class CPUCircuitBreaker extends CircuitBreaker implements SolrCoreAware {
       throw new IllegalStateException("JVM metrics disabled. Cannot calculate CPU usage");
     }
 
-    return reader
-        .collect(name -> name.contains("jvm_system_cpu_utilization"))
-        .stream()
+    return reader.collect(name -> name.contains("jvm_system_cpu_utilization")).stream()
         .filter(GaugeSnapshot.class::isInstance)
         .map(GaugeSnapshot.class::cast)
         .map(GaugeSnapshot::getDataPoints)
