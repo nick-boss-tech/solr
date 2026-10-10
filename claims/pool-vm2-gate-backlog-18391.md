@@ -5,3 +5,6 @@ Capability tags: gate. Staffing: 1.
 Started: 2026-10-10T19:18:26Z (UTC).
 
 Heartbeat: 2026-10-10T19:18:26Z.
+
+Result 2026-10-10T19:45:03Z: gate green at head adcda10b501. Proof leg has a mismatch (second base failure in CreateCollectionCleanupTest, testCreateDoesNotDeleteExistingCollectionOnStaleView). Job stopped per protocol; main agent decides. Claim DONE.
+DONE: 2026-10-10T19:45:03Z (UTC).
