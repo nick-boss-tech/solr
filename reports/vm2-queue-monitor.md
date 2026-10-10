@@ -267,3 +267,19 @@ Unclaimed assignments (no claims file with the same slug): open-update-29-prs, p
 Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE.
 
 No action taken by vm2.
+
+## 2026-10-10 20:30 UTC
+
+What changed since the last monitor run (last seen 63b308e080, now 12b80c539a). Two new commits by Nick Shanin: b1dfd670f9 (assignment for post-PR review round 2 of the flaky-fix PRs, SOLR-18530, SOLR-18531 and SOLR-18532) and 12b80c539a (claim for that round, slices 1 and 3). The only new files are assignments/pool-flaky-fix-post-pr-review-round-2.md and claims/pool-flaky-fix-post-pr-review-round-2.md. No gate or receipt file changed in this range.
+
+Claims. The new claim is active. Its claimant is windows (review tag), with a heartbeat at 20:29:49 UTC. Slice 2 (SOLR-18531) is not claimed, because the assignment waits for a new branch head to be recorded. No other claim changed.
+
+Gates. No gate file changed in this range.
+
+Stale claims. Flagged, none taken over. These claims have no heartbeat line and no DONE mark. Their last commits are from 2026-10-08 or 2026-10-09, well past the 2-hour cutoff of 18:30 UTC: review-28-round-2, review-corrections-28, review-plain-language-28, round-4-answers-and-13696-r8, solr-13696-fix-project, update-processing-audit-group-a, update-processing-audit-group-c, update-processing-audit-group-d, update-processing-not-gated-group-a, update-processing-not-gated-group-b, update-processing-round-3-closeout-addendum, and update-processing-scope-the-eight.
+
+Unclaimed assignments (no claims file with the same slug): open-update-29-prs, pool-admin-ui-premise-runs, pool-solr-16630-base-runs, pool-vm2-gate-backlog-round-1, pool-vm2-gate-backlog-round-2, update-processing-groups-cd-review, and update-processing-not-gated-review. The vm2 gate-backlog jobs are claimed under ticket-named claim files.
+
+Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE and the host file records the checks as confirmed on 2026-10-10.
+
+No action taken by vm2.
