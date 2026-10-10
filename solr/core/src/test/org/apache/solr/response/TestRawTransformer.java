@@ -327,7 +327,9 @@ public class TestRawTransformer extends SolrCloudTestCase {
         Pattern.compile("\"links\":\\[\\{an_array:\\[1,2,3]},\\s*\\{an_array:\\[4,5,6]}]")
             .matcher(strResponse)
             .find());
-    assertFalse("field not matching the globs was returned: " + strResponse, strResponse.contains("\"author\""));
+    assertFalse(
+        "field not matching the globs was returned: " + strResponse,
+        strResponse.contains("\"author\""));
 
     // [xml] does not apply to a json response: the matching fields are returned, not raw
     req =
