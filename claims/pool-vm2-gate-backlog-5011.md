@@ -5,3 +5,5 @@ Capability tags: gate, premise-run. Staffing: 1.
 Started: 2026-10-10T21:39:07Z (UTC).
 
 Heartbeat: 2026-10-10T21:39:07Z.
+
+Heartbeat: 2026-10-10T21:47:10Z. Gate running at packaged head 5b2cfdfe4709 (proof shape corrected to revert SolrCore.java only).
