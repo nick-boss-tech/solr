@@ -27,6 +27,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -239,6 +240,7 @@ public class TestCoordinatorRole extends SolrCloudTestCase {
       // indexing code,
       // based on the fact that our indexing is based on a PULL-node client.
       final long pullServiceTimeMs = 1000 + (long) r.nextInt(9000);
+      CountDownLatch addDone = new CountDownLatch(1);
       Future<?> jettyManipulationFuture =
           executor.submit(
               () -> {
@@ -257,6 +259,9 @@ public class TestCoordinatorRole extends SolrCloudTestCase {
                   // state used for query request routing has expired (60s). But here we force a
                   // return to NRT by stopping the PULL replica after a brief delay ...
                   Thread.sleep(pullServiceTimeMs);
+                  if (!addDone.await(2, TimeUnit.MINUTES)) {
+                    log.warn("NRT add did not succeed in time; stopping PULL anyway");
+                  }
                   log.info("stopping PULL jetty ...");
                   pullJettyF.stop();
                   log.info("PULL jetty stopped.");
@@ -305,6 +310,7 @@ public class TestCoordinatorRole extends SolrCloudTestCase {
         try {
           client.add(COLL, d);
           client.commit(COLL);
+          addDone.countDown();
           break;
         } catch (SolrException ex) {
           // we expect these until nrtJetty is back up.
