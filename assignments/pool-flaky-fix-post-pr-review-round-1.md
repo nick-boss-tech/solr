@@ -8,7 +8,7 @@ Slices:
 
 1. SOLR-18530: OPEN as a draft PR (apache/solr, opened 2026-10-10; head 14868bc7a7f5ec5c4fa1ade5f894cbda9533307d, which is the gated head plus the changelog-removal commit). Verify the live PR body equals pr-drafts/flaky-fixes/SOLR-18530.md, the title is accurate, the head matches, and the CI checks' state; re-check the body's claims against the branch at that head.
 2. SOLR-18531: not yet open. A fix lane is clearing the round 1 HOLD (F1 close-release, F2 Linux check, F4 disclosure, F10 changelog title) and re-gating. This slice activates when the main side records the opening here.
-3. SOLR-18532: not yet open; held for Nick's call on the SOLR-9865 overlap (see the round 1 report). This slice activates when the main side records the opening here.
+3. SOLR-18532: OPEN as a draft PR (apache/solr, opened 2026-10-10; head f1e5031fc3a9624b03daf353f26c977891d7d876, the gated tree squashed to one commit). Nick took the overlap call: this branch carries the rollback change, and the SOLR-9865 branch drops its overlapping hunk when it is prepared. This slice is active.
 
 Per-slice work: read the live PR (body, title, head, checks, any reviewer comments including automated ones), compare the body line by line with the pr-drafts/flaky-fixes/ draft, verify every Proof statement against receipts/<TICKET>.md and the branch at the live head, and check that nothing in the round 1 report's open items was silently dropped. Automated reviewer findings are verified against the code before being reported as real. Deliverable: reports/flaky-fix-post-pr-review-round-1.md, one section per activated slice (verdict: CONSISTENT, or the exact drift or finding). Edits to PR bodies are NOT made under this assignment; drift is reported and the main side applies it.
 
