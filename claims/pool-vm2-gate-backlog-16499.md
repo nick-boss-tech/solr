@@ -9,3 +9,5 @@ Heartbeat: 2026-10-10T22:30:05Z.
 Packaged head: 51b7addddd45dfbb8e18e4f80982a3793206bdcd (local, not pushed). Gate running on runner /workspace/gates/solr-16499; logs /workspace/gates/logs/vm2/16499-*.
 
 Heartbeat: 2026-10-10T22:33:46Z.
+
+Heartbeat: 2026-10-10T22:36:00Z. Runner in progress: changelog parse rc=0, tidy running (log /workspace/gates/logs/vm2/16499-tidy.log).
