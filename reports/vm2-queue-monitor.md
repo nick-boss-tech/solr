@@ -299,3 +299,17 @@ Gates. A text search of gates/ found no RUNNING or FAILED status lines.
 Hosts. hosts/vm2.md does not say the onboarding checks are pending. The onboarding claim is DONE.
 
 No action taken by vm2.
+
+## 2026-10-10 20:50 UTC
+
+What changed. Four new commits by Nick Shanin, up to ae3bb783d7. Round 3 of the flaky-fix post-PR review was assigned (pool-flaky-fix-post-pr-review-round-3) and claimed by windows for slices 1 and 3 (SOLR-18530, SOLR-18532). The round 3 claim heartbeat is 20:47:50 UTC. Slice 2 (SOLR-18531) stays inactive because its receipt records GREEN at an older head than the new one. Gate-related edits: gates/SOLR-18532.md and receipts/SOLR-18530.md and receipts/SOLR-18532.md were updated, and the pr-drafts for SOLR-18530 and SOLR-18532 changed. No gate is RUNNING or FAILED now. SOLR-18530 and SOLR-18532 are recorded GREEN.
+
+Claims. The round 3 claim is active and within the heartbeat window. All other claims are either DONE or unchanged.
+
+Stale claims. Flagged, none taken over. These claims have no heartbeat line and no DONE mark, and their last recorded dates are 2026-10-08 or 2026-10-09, well past the 2-hour cutoff: review-28-round-2, review-corrections-28, review-plain-language-28, round-4-answers-and-13696-r8, solr-13696-fix-project, update-processing-audit-group-a, update-processing-audit-group-c, update-processing-audit-group-d, update-processing-not-gated-group-a, update-processing-not-gated-group-b, update-processing-round-3-closeout-addendum, and update-processing-scope-the-eight.
+
+Unclaimed assignments (no claims file with the same slug): open-update-29-prs, pool-admin-ui-premise-runs, pool-solr-16630-base-runs, pool-vm2-gate-backlog-round-1, pool-vm2-gate-backlog-round-2, update-processing-groups-cd-review, and update-processing-not-gated-review.
+
+Hosts. hosts/vm2.md does not say the onboarding checks are pending. It records them as confirmed on 2026-10-10, with full gate capability not yet proven by the smoke test.
+
+No action taken by vm2.
