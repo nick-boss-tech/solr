@@ -10,5 +10,5 @@
 - Base for both runs: merge-base `cabedd1d968059215188f4e7563fb303241899ed`, with the head's `solr/webapp/src/test` overlaid (the fail-before shape).
 - Deliverables: `reports/admin-ui-premise-runs.md` (command shape, seed, outcome on base and at head, corrected premises) and updates to `receipts/SOLR-9831.md` and `receipts/SOLR-9818.md`. SOLR-9759 runs only if Nick asks.
 - Scope: no branch edits. No PR, comment or Jira write. No builds run by this agent.
-- Heartbeat: 2026-10-11T03:37Z (claim taken; handoff commands prepared).
-- Status: ACTIVE, waiting on Nick's runs.
+- Heartbeat: 2026-10-11T03:37Z (claim taken; handoff commands prepared); the head run was retried at 06:30 UTC.
+- Status: ACTIVE, blocked. The SOLR-9831 head run (run 1) did not execute the test: Gradle reported no tests found and the class wrote no JUnit result (the gradlew wrapper bug was worked around with the Windows wrapper). The cause is posted as `assignments/pool-admin-ui-test-selection.md`. Runs 2 to 4 wait on that investigation or on Nick's direction.
