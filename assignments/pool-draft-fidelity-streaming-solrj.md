@@ -1,0 +1,9 @@
+# Pool assignment: draft fidelity review, Streaming expressions and SolrJ drafts
+
+Capability tags: `review`. Staffing: up to 4. Claim path: claims/pool-draft-fidelity-streaming-solrj.md (slice-level claims by category or by draft group are fine).
+
+Purpose: these drafts were written from round 1 reports and have never had an independent fidelity pass. Before any of them opens, each draft gets checked against its receipt and its live fork head, the same checks the post-PR rounds applied to the flaky-fix and Highlighting sets (those rounds found real errors in every set, including in text the main side had already fixed once).
+
+Scope: pr-drafts/streaming/ (SOLR-10322, 12505, 12657, 14231) and pr-drafts/solrj/ (SOLR-2018, 3722, 3999, 4335, 4336, 4422, 4424, 5220, 6046, 7709, 8536, 12094, 14298, 14967, 17866, 18341). For each draft: verify the head it names against the fork tip (git ls-remote), every Proof number and date against receipts/<ticket>.md, every citation anchor against the code at the named SHA (code the change produces links the head; the pre-change symptom links the merge-base and says so, per pr-formula.md), the title against the branch changelog fragment, and the Limits and Choice content against the round 1 report and any answers material for the category. Flag internal process vocabulary in public text, missing verification dates, and any claim the receipt does not support. Live-PR consistency drafts are out of scope here (SOLR-13524, 10198, 15823, 18129).
+
+Deliverable: reports/draft-fidelity-streaming-solrj.md with one verdict per draft (CONSISTENT, or DRIFT with the exact replacement text for each item). No edits under this assignment; the main side applies fixes. Rules: WORKFLOW.md binds (claim before work, subagent cap across hosts, mark the claim DONE in the same push as the deliverable). No builds or test runs.
