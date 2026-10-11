@@ -9,3 +9,5 @@ Packaged head: e4ea4bfde80ea027f005fe138b0285f6c2e5a689 (SOLR-4754-TESTING.md re
 
 Heartbeat: 2026-10-11T22:02Z.
 Heartbeat: 2026-10-11T22:04Z. Gate started (runner /workspace/gates/g4754-gate.sh, log /workspace/gates/logs/vm2/4754-gate.out).
+Heartbeat: 2026-10-11T22:30Z. Gate GREEN (GATE END 22:29:30Z). Receipt receipts/SOLR-4754.md written at e4ea4bfde80ea027f005fe138b0285f6c2e5a689.
+DONE: 2026-10-11T22:31Z. Deliverables: receipts/SOLR-4754.md, gates/SOLR-4754.md, packaged head e4ea4bfde80ea027f005fe138b0285f6c2e5a689.
