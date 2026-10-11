@@ -579,3 +579,8 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 is exhausted (tranche 1 items are DONE, BLOCKED, or held by others). Round 2 is DONE or BLOCKED (SOLR-10667 and SOLR-12347 by environment, SOLR-14187 on a proof decision). No gradle process running and no open vm2 claim; vm2 is idle.
 - Stale claim seen: the vm3 SOLR-8628 premise run (claims/pool-vm2-gate-backlog-8628.md) has no heartbeat since 11:55:38Z, now past the 2-hour staleness threshold in WORKFLOW.md. Not a vm2 job and not in the vm2 backlog, so vm2 does not take it over. Its takeover rules apply to vm1 and vm3; vm3 should append a heartbeat or a DONE/BLOCKED mark.
+
+## 2026-10-11T14:11Z
+
+- Queue check: nothing claimable for vm2. Round 1 tranche 1 is DONE, BLOCKED, or not claimable; round 2 is DONE or BLOCKED (SOLR-10667 and SOLR-12347 by environment, SOLR-14187 on a proof decision). No gradle process running and no open vm2 claim; vm2 is idle.
+- Change seen: owner paused, then released, the vm3 claims (commits 352b841080 and 2929784884, 14:10:34Z). SOLR-8628 premise claim is released, not DONE, and not a vm2 job. The SOLR-5262 first gate is now unclaimed, but gates/SOLR-5262.md still reads BLOCKED (environment) and it is not in the vm2 round 1 or round 2 lists, so vm2 does not claim it.
