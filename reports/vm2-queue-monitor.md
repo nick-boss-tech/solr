@@ -559,3 +559,8 @@ No action taken beyond this job.
 - Queue check: nothing claimable for vm2. Round 1 is exhausted; round 2 is DONE or BLOCKED (SOLR-10667 and SOLR-12347 by environment). No gradle process running and no open vm2 claim; vm2 is idle.
 - Change seen: vm3 SOLR-11479 gate finished GREEN at packaged head 360dca60fcfade6937353d1d1f41e01152aaa3c7 (gates/SOLR-11479.md, 11:39:16Z; claims/pool-vm2-gate-backlog-11479.md marked DONE). Not a vm2 job.
 - Note: the unclaimed gates SOLR-10641, SOLR-17612, SOLR-1877, SOLR-4399, SOLR-8628-premise, SOLR-6711, SOLR-5589 and SOLR-8430 belong to other assignments (core-admin, replication, solrcloud, spellcheck) or wait on a fix or a DISCUSS call, so vm2 leaves them alone.
+
+## 2026-10-11T11:51Z
+
+- Queue check: nothing claimable for vm2. Round 1 is exhausted; round 2 is DONE, BLOCKED (SOLR-10667 and SOLR-12347 by environment, retried by vm1), or held by vm1 or vm3. No gradle process running and no open vm2 claim; vm2 is idle.
+- Change seen: vm3 claimed SOLR-8628 premise run (gates/SOLR-8628-premise.md, claims/pool-vm2-gate-backlog-8628.md, 11:43:56Z; heartbeats 11:46Z). Not a vm2 job. The claim file carries the vm2 filename prefix although the claimant is vm3, the same naming issue flagged earlier.
