@@ -14,3 +14,4 @@ Local implementation commit 82c0c11373d (on solr-4399-gate, worktree /workspace/
 Heartbeat: 2026-10-11T19:37Z.
 
 Heartbeat: 2026-10-11T19:42Z (UTC), queue monitor: gate still running (compile step, log growing), no action taken.
+- Heartbeat: 2026-10-11T19:51Z (queue monitor): gate still running, log growing; proof leg failed as predicted (FileBasedSpellCheckerTest, sourceLocation message), now at focused-head. No action taken.
