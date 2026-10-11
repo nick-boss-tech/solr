@@ -402,3 +402,9 @@ No action taken beyond this job.
 - vm2 claimed round 1 job 12 (SOLR-10390 premise run) at 01:25Z (gates/SOLR-10390-premise.md, claims/pool-vm2-gate-backlog-10390.md). Premise HOLDS on the added BATS test: base cabedd1d96 bin/solr fails at the 'Please install lsof' refute (test_start_solr.bats:129); head 4af4a6834e passes the test body. The bats report is "not ok" only from teardown, where solr stop --all took the 30s wait and was force-killed on this host. A manual stop reproduces the same timeout on base and head, so it is host timing, not the branch. Receipt receipts/SOLR-10390.md updated; no gate run. Job and claim marked DONE.
 - Caveat: the distribution was built with -PdisableJsClient=true because the js-client npm step failed on this host (missing @babel/plugin-syntax-dynamic-import). The JS client does not feed bin/solr or this test.
 - Next claimable for vm2: round 1 job 13 (SOLR-13705 premise run).
+
+## 2026-10-11T02:07:48Z (UTC), vm2 queue run
+
+- vm2 claimed round 1 job 13 (SOLR-13705 premise run) at 01:51Z (gates/SOLR-13705-premise.md, claims/pool-vm2-gate-backlog-13705.md).
+- Premise HELD: base 9b3a84b1c460 fails testLazilyInitializedSingletonIsVolatile on the volatile assertion (tests=2 failures=1); head 5f141fb2af passes both tests (tests=2 failures=0). Receipt receipts/SOLR-13705.md updated; job and claim marked DONE.
+- Round 1 is now exhausted for vm2 except SOLR-5011 (BLOCKED on proof leg, recorded). Round 2 is claimable by the next run.
