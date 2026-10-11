@@ -19,5 +19,5 @@
   - C12: edismax SOLR-3729, 3962, 4362, 6009, 6320, 7120.
 - Scope: read-only on `pr-drafts/`, `receipts/` and the fork. No edits to drafts. No PR, comment, submit-branch or PR-description write. No builds, Gradle, tests or gate runs.
 - Deliverable: `reports/draft-fidelity-searchcomponents-edismax.md` (one verdict per draft), with part reports `reports/draft-fidelity-searchcomponents-edismax-s1.md` to `-s12.md`.
-- Heartbeat: 2026-10-11T04:12Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T04:12Z (claim taken); all twelve slices reported.
+- Status: DONE, 2026-10-11. Deliverables: `reports/draft-fidelity-searchcomponents-edismax.md` (verdicts: 47 DRIFT, 12 CONSISTENT) and the part reports `reports/draft-fidelity-searchcomponents-edismax-s1.md` to `-s12.md`. No draft was edited. The main side applies the fixes; the holds and open items are in the roll-up.

@@ -13,5 +13,5 @@
   - A6: schema SOLR-15358, 15945, 16977, 17047, 18134, 9349.
 - Scope: read-only on `pr-drafts/`, `receipts/` and the fork. No edits to drafts. No PR, comment, submit-branch or PR-description write. No builds, Gradle, tests or gate runs.
 - Deliverable: `reports/draft-fidelity-configsets-query-schema.md` (one verdict per draft), with part reports `reports/draft-fidelity-configsets-query-schema-s1.md` to `-s6.md`.
-- Heartbeat: 2026-10-11T04:12Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T04:12Z (claim taken); all six slices reported.
+- Status: DONE, 2026-10-11. Deliverables: `reports/draft-fidelity-configsets-query-schema.md` (verdicts: 28 DRIFT, 2 CONSISTENT) and the part reports `reports/draft-fidelity-configsets-query-schema-s1.md` to `-s6.md`. No draft was edited. The main side applies the fixes; the holds and open items are in the roll-up.

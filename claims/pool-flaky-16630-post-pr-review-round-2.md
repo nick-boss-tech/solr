@@ -10,4 +10,4 @@
 - Scope: read-only. Live PR read with the read-only GitHub wrapper only. No PR body edit, comment, review, close or branch edit. No builds, Gradle, tests or gate runs.
 - Deliverable: `reports/flaky-16630-post-pr-review-round-2.md`, one verdict, SATISFIED or STILL OPEN, with the exact item for each open finding. Part reports `reports/flaky-16630-post-pr-review-round-2-s1.md` and `-s2.md`.
 - Heartbeat: 2026-10-11T03:48Z (claim taken).
-- Status: ACTIVE.
+- Status: PARKED. Both subagents were stopped by Nick before they reported, so no part report or deliverable exists. Not re-dispatched; the claim stays on the record until Nick asks for it to be run again or released.

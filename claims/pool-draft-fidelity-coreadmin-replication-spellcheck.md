@@ -12,5 +12,5 @@
   - B5: replication SOLR-17287, 8430, 9598, 9865; spellcheck SOLR-3701, 4367.
 - Scope: read-only on `pr-drafts/`, `receipts/` and the fork. No edits to drafts. No PR, comment, submit-branch or PR-description write. No builds, Gradle, tests or gate runs.
 - Deliverable: `reports/draft-fidelity-coreadmin-replication-spellcheck.md` (one verdict per draft), with part reports `reports/draft-fidelity-coreadmin-replication-spellcheck-s1.md` to `-s5.md`.
-- Heartbeat: 2026-10-11T04:12Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T04:12Z (claim taken); all five slices reported.
+- Status: DONE, 2026-10-11. Deliverables: `reports/draft-fidelity-coreadmin-replication-spellcheck.md` (verdicts: 24 DRIFT, 2 CONSISTENT) and the part reports `reports/draft-fidelity-coreadmin-replication-spellcheck-s1.md` to `-s5.md`. No draft was edited. The main side applies the fixes; the holds and open items are in the roll-up.
