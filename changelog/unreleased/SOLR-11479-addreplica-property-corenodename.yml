@@ -1,4 +1,4 @@
-title: "ADDREPLICA: accept property.coreNodeName as an alias of coreNodeName instead of failing core creation"
+title: "ADDREPLICA: accept property.coreNodeName as an alias of coreNodeName for one replica, and reject it when several replicas are requested."
 type: fixed
 authors:
   - name: Nick Shanin

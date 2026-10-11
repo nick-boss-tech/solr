@@ -145,7 +145,7 @@ public class AddReplicaCmd implements CollApiCmds.CollectionApiCommand {
             SolrException.ErrorCode.BAD_REQUEST,
             "Cannot create "
                 + totalReplicas
-                + " replicas if 'coreNodeName' parameter is specified");
+                + " replicas if 'coreNodeName' or 'property.coreNodeName' parameter is specified");
       }
     }
 

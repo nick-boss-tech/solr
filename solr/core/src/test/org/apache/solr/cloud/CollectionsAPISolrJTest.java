@@ -514,6 +514,24 @@ public class CollectionsAPISolrJTest extends SolrCloudTestCase {
     assertNotNull("replica named by property.coreNodeName not found", newReplica);
   }
 
+  @Test
+  public void testAddReplicaWithCoreNodeNamePropertyRejectsMultipleReplicas() throws Exception {
+    String collectionName = getSaferTestName();
+    CollectionAdminRequest.createCollection(collectionName, "conf", 1, 1)
+        .process(cluster.getSolrClient());
+    cluster.waitForActiveCollection(collectionName, 1, 1);
+
+    final RemoteSolrException ex =
+        expectThrows(
+            RemoteSolrException.class,
+            () ->
+                CollectionAdminRequest.addReplicaToShard(collectionName, "shard1")
+                    .setNrtReplicas(2)
+                    .withProperty("coreNodeName", "user_assigned_node_name")
+                    .process(cluster.getSolrClient()));
+    assertEquals(400, ex.code());
+  }
+
   private Replica grabNewReplica(CollectionAdminResponse response, DocCollection docCollection) {
     String replicaName = response.getCollectionCoresStatus().keySet().iterator().next();
     Optional<Replica> optional =
