@@ -158,7 +158,7 @@ Ends with the pointed question: Was this the right call?>
 <What is not covered, not tested, or deliberately out of scope.
 Named, not omitted.>
 
-Changelog: `changelog/unreleased/SOLR-<ticket>.yml`
+Changelog: [changelog/unreleased/SOLR-<ticket>.yml](https://github.com/nick-boss-tech/solr/blob/<head-sha>/changelog/unreleased/SOLR-<ticket>.yml)
 
 ### AI assistance
 
@@ -171,6 +171,8 @@ Rules for filling it in:
 
 - The Jira link line stays (David Smiley asked for it on #4965; the
   Apache template wants it kept).
+- The changelog line is a link to the fragment at the head SHA, like
+  every other file citation (main-side decision, 2026-10-10).
 - "A choice to check" appears only for a real decision with a live
   alternative. A section that merely restates what the code does is
   not a design choice (Nick's #4959 parking call) and is left out.
