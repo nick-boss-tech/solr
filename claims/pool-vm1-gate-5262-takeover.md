@@ -15,3 +15,6 @@ Worktree: ~/workspace/solr-worktrees/solr-5262-gate. Runner: ~/workspace/tools/g
 On green: vm1 writes receipts/SOLR-5262.md at the gated head, marks gates/SOLR-5262.md DONE, and marks this claim DONE. On failure: record the step, the log evidence, and the classification in the takeover log; a gate that executed tests and failed is not relaunched until the main agent investigates.
 
 Heartbeat: 2026-10-11T14:58:00Z (UTC) (claim; runner starts detached on vm1).
+
+- Status: DONE, 2026-10-11T15:34:28Z (UTC). GATE GREEN at 616efd008b (re-gate after the test-only forbiddenApis fix; first run at the packaged head failed step 5). Receipt: receipts/SOLR-5262.md. The gated head was pushed fast-forward to solr-5262-submit.
+- Heartbeat: 2026-10-11T16:20Z (UTC) (gate green recorded; claim DONE).

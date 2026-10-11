@@ -2,7 +2,7 @@
 
 - Branch: solr-8628-submit. Head: ce8211e05e062444e7afc1c5ea33fb6eff581d8f (live tip, verified by ls-remote 2026-10-11; matches receipts/SOLR-8628.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules.
-- Status: PAUSED BY OWNER at 2026-10-11T14:06:20Z and RELEASED at 2026-10-11T14:10:34Z (UTC) by owner direction that no claim remain held. No active vm3 claim. Premise parts 1 and 2 and the expected merge-base proof are complete; the branch-head leg has NOT RUN. Do not mark DONE; any resumption requires a fresh claim.
+- Status: DONE 2026-10-11, outcome NO GATE by finding. Premise parts 1 and 2 and the expected merge-base proof are complete (vm3). The branch-head leg RAN on vm1 at 2026-10-11T15:10:22Z to 15:12:59Z under claims/pool-vm1-premise-8628-part3.md (runner `~/workspace/tools/g8628-premise.sh`, log `~/workspace/tools/g8628-premise.log`) and FAILED with the identical AssertionError as the base leg (1 test, 1 failure, seed `8628C0FFEE8628A1`), so part 3 does not discriminate. The windows investigation (`reports/solr-8628-head-failure-investigation.md`) classifies it as a test-shape problem (the minimal configset selects the ephemeral MockDirectoryFactory). Receipt: receipts/SOLR-8628.md. Earlier status: PAUSED BY OWNER at 2026-10-11T14:06:20Z and the vm3 claim RELEASED at 2026-10-11T14:10:34Z (UTC).
 - Runner: vm3 (Linux, JDK 21, Gradle 9.7.0).
 - Worktree: `/workspace/gates/solr-8628-premise-build`.
 - Logs: `/workspace/gates/logs/vm3/8628-premise-*.log`.
@@ -20,5 +20,5 @@
 - [x] part 1: empty-directory scope verified on current upstream main `d76fc14b9857e77b830d7a82514b28c523a239c2`; empty directory yields `hasNext() == false`. Evidence: `/workspace/gates/logs/vm3/8628-premise-scope.log`.
 - [x] part 2: reachability probe on Lucene 10.4.0; close variant left `segments_1` and `write.lock`, abrupt halt left only `write.lock`. Evidence paths recorded above.
 - [x] part 3: merge-base production proof with branch test retained; 1 test, 1 expected AssertionError (`a new index must have been created`), 0 errors/skips, seed `8628C0FFEE8628A1`. Fresh JUnit, test output, and Gradle log preserved. The branch-head leg remains pending.
-- [ ] part 3: branch test at the branch head (pass recorded)
-- [ ] receipt updated with the premise outcome, job and claim marked DONE
+- [x] part 3: branch test at the branch head (ran on vm1 2026-10-11T15:10Z; FAILED with the identical AssertionError as base, so the leg does not discriminate; recorded in receipts/SOLR-8628.md)
+- [x] receipt updated with the premise outcome (NO GATE by finding), job and claim marked DONE

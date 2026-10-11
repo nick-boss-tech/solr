@@ -16,3 +16,6 @@ Worktree: ~/workspace/solr-worktrees/solr-8628-premise. Runner: ~/workspace/tool
 On completion: the verdict is recorded in gates/SOLR-8628-premise.md and receipts/SOLR-8628.md and this claim is marked DONE. If the head leg passes, the premise holds and a separate first-gate job follows (posted by the main side, not part of this run). If it does not discriminate, the receipt records NO GATE by finding with the run evidence.
 
 Heartbeat: 2026-10-11T14:58:00Z (UTC) (claim; runner starts detached on vm1).
+
+- Status: DONE, 2026-10-11T15:12:59Z (UTC). The head leg ran and FAILED with the identical AssertionError as the base leg (1 test, 1 failure, seed 8628C0FFEE8628A1); the premise does not discriminate as the test is written. Verdict recorded in gates/SOLR-8628-premise.md and receipts/SOLR-8628.md (NO GATE by finding).
+- Heartbeat: 2026-10-11T16:20Z (UTC) (outcome recorded; claim DONE).
