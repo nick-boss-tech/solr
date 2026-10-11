@@ -514,3 +514,9 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 and round 2 are still exhausted; no gradle process running and no open vm2 claim. vm2 is idle.
 - Change seen: SOLR-5262 is claimed by vm3 (gates/SOLR-5262.md, 07:12:31Z). It comes from the shared buffer, not this backlog. Its claim file is named claims/pool-vm2-gate-backlog-5262.md, which uses the vm2 prefix, so that name may be misread as a vm2 claim. Flagged for main-side tidy-up; vm2 did not take it.
+
+## 2026-10-11T07:31Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 are still exhausted; no gradle process running and no open vm2 claim. vm2 is idle.
+- Change seen: SOLR-5262 is BLOCKED on vm3 (gates/SOLR-5262.md, 07:25:52Z). The Develocity Gradle plugin download was truncated on both attempts, so the root tidy never started and no tests ran. Not a vm2 job.
+- Change seen: vm3 claimed the full gate for SOLR-13705 (gates/SOLR-13705.md, 07:28:08Z) on solr-13705-submit at 5f141fb2af3. Not a vm2 job.
