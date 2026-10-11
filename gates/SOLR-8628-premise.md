@@ -2,7 +2,7 @@
 
 - Branch: solr-8628-submit. Head: ce8211e05e062444e7afc1c5ea33fb6eff581d8f (live tip, verified by ls-remote 2026-10-11; matches receipts/SOLR-8628.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules.
-- Status: CLAIMED by vm3 at 2026-10-11T11:43:56Z (UTC); premise run only.
+- Status: PAUSED BY OWNER at 2026-10-11T14:06:20Z (UTC). Claim remains retained by vm3. Premise parts 1 and 2 and the expected merge-base proof are complete; the branch-head leg has NOT RUN. Do not mark DONE or release the claim pending owner direction.
 - Runner: vm3 (Linux, JDK 21, Gradle 9.7.0).
 - Worktree: `/workspace/gates/solr-8628-premise-build`.
 - Logs: `/workspace/gates/logs/vm3/8628-premise-*.log`.
