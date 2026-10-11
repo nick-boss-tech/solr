@@ -1,0 +1,33 @@
+# Response: mergeIds fix review round 3 settlement (main side, 2026-10-11)
+
+Review: reports/mergeids-fix-review-round3.md, verdict STILL OPEN, findings on items 2, 4, 5 and 6; items 1 and 3 confirmed; the branch needs no change. Branch `mergeids-skipped-shard-totals` stays at head `9e85ce5c162086ae806f617419c4405512792dde`; nothing in this settlement touches the branch. All four findings were checked against the code and the records before settling; the reviewer is right on each, and each is applied as below.
+
+## Item 2 (sort_values decline wording; scope note)
+
+**Reviewer right; APPLIED in both response records.** Verified on the branch tree: MockSortSpecBuilder stubs `getSort()` in `withSortFields` (builder line 38) and stubs nothing for `getSchemaFields()`; `unmarshalSortValues` reads the schema fields at QueryComponent.java 1379 and calls `schemaFields.get` at 1398 with the null case handled at 1399. So only `getSchemaFields` is never stubbed, Mockito's empty list for it would fail first with an IndexOutOfBoundsException at 1398 (not a null), and a stub returning a list with a null entry avoids it. The decline paragraph in reports/mergeids-fix-review-response.md and item 2 of reports/mergeids-fix-review-round2-response.md (which repeated the "neither stubbed" wording) now say so, with the remaining harness cost stated as one stub plus a sort_values subsection. The decline itself stands, for the reason the reviewer gives: the totals block does not read sort values.
+
+**Scope note added in both records, as the reviewer asked.** The decline covers the totals block only. Sort values feed the unmarshal and the queue push, and a rejected push decrements numFound (verified in the branch code: `if (!shardDocQueue.push(shardDoc)) { numFound--; }`), so sort values can change the count when the queue overflows. No applied test fills the queue (the count is 10 and the cases carry at most 5 documents), so that path is not pinned for any shard.
+
+## Item 4 (ticket draft: all-skipped sentence; fix option 1 and the guard)
+
+**Reviewer right; APPLIED.** The Mechanism sentence in material/mergeids-ticket-draft.md now separates the two behaviours: on main the all-skipped merged count is the skipped shards' sum (5 for shards reporting 2 and 3) and is reported exact; after the fix the count is zero, and that zero must not be reported exact when a skipped shard reported hits. Item 4 of the round 2 response, which quoted the mixed sentence as the applied fix, is corrected to describe the corrected sentence. Fix option 1 in the draft now names the guard: the reorder alone leaves the flag at its initial true when no shard is merged, so the all-skipped case needs the second option's move as a guard on that case only (clear the flag when no shard was merged and a skipped shard reported hits), which is what the branch's guard at lines 1241 to 1243 does.
+
+The same mixed sentence also stood in the PR draft's first section ("when every shard is skipped, the merged count is zero and is still reported exact"); pr-drafts/search-components/mergeids-skipped-shard-totals.md now gives main's behaviour (the count is the skipped shards' sum, reported exact). That correction is the main side's own catch during this settlement, on the reviewer's reasoning.
+
+## Item 5 (arrival-order qualifier; the Related line omission)
+
+**Reviewer right on the qualifier; APPLIED.** The fallback totals depend on arrival order in both components (QueryComponent fallback: A then B gives 2, B then A gives 3; CombinedQueryComponent fallback: A then B accumulates 2 then 7, B then A accumulates 3 then 8; A is the 2-document shard, B the 3-document shard in both). The qualifier is added in the ticket draft at the Symptom second-defect passage, at the Reproduction fallback passage, and in the Related line, and, for consistency, in the PR draft (first section and Limits) and in the Area 4 paragraph of the round 1 response.
+
+**The omission: DECIDED, the Related line now names the exactness fold.** The premise report (reports/combinedquerycomponent-premise.md, section 3) confirms the inverted fold at CombinedQueryComponent line 343 by code, and its scope recommendation is one follow-up covering all three defects in that component. The Related line is the pointer to that follow-up, so it now names all three: the pre-skip fold, the fallback double count, and the inverted exactness fold (an all-exact merge reports inexact and an all-inexact merge reports exact). Also corrected with it: the round 1 response's Area 4 paragraph now gives the CombinedQueryComponent partial skip as lines 399 to 400, not "continue at 399".
+
+## Item 6 (stale gate annotation)
+
+**Reviewer right; APPLIED.** The round 1 response said in two places that the re-gate at 73d20a0f93 was GATE PENDING (its opening paragraph and its closing verification section). Both are annotated: the re-gate finished GATE GREEN, GATE RUNNER DONE 2026-10-11T20:36:48Z (receipts/mergeids-fix.md). The round 2 response's gate-status lines for 9e85ce5c16 are annotated the same way.
+
+## Gate state at 9e85ce5c16 (receipt completed)
+
+The receipt had no entry for the current head. receipts/mergeids-fix.md now records the re-gate at `9e85ce5c162086ae806f617419c4405512792dde` from the runner log (~/workspace/tools/gmergeids-regate2.log on vm1) and the fresh JUnit XML copies: GATE GREEN, GATE RUNNER DONE 2026-10-11T21:46:01Z; tidy and Error Prone compile rc=0; proof leg 17 tests, 7 failures, each with the premise contents (numFound 5 vs 3 twice, maxScore 99.0 vs 3.0, approximateTotalHits 11 vs 4, fallback 2 vs 5, mixed headers 13 vs 14, all-skipped 5 vs 0), the four new pin tests passing on base production; head 17 tests, 0 failures; `:solr:core:check -x test` rc=0; final tree clean. The PR draft's Proof is refreshed to that head and that receipt, and its head-SHA citation links now point at 9e85ce5c16 (production code is identical to 73d20a0f93, so the cited lines are unchanged).
+
+## Items 1 and 3, and the item 3 notes
+
+Items 1 (exactness fold pin) and 3 (guard as a hybrid, hits condition pinned) are CONFIRMED by the reviewer; no action. The two item 3 notes (the guard comment at 1238 to 1240 says "every shard was skipped" where the condition is "no shard merged", and "reported hits" means numFound above zero, not the approximate header) are comment-wording notes on production code. The verdict states the branch needs no change; moving the head for a comment would cost a full re-gate and change no behaviour, so the notes are recorded here and stand as the accurate phrasing ("no shard merged at all"; numFound above zero) if the branch is touched again at packaging.

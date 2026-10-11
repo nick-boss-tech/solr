@@ -39,6 +39,18 @@ Branch `mergeids-skipped-shard-totals` on the fork (no ticket number yet; Nick f
 - Step 5: `:solr:core:check -x test` rc=0. Final git status clean in the gate worktree.
 - Note: the round 2 confirmation review (reports/mergeids-fix-review-round2.md) returned STILL OPEN with six should-fix items, mostly in the response record and the ticket draft, plus two test gaps in the branch. Those items are for the main side; they do not change this gate result, and the branch head may move again if the main side applies them.
 
+## Re-gate at head 9e85ce5c16: GREEN
+
+- Head: `9e85ce5c162086ae806f617419c4405512792dde`. Merge-base: `d76fc14b9857e77b830d7a82514b28c523a239c2`. Seed: `F2C2B3B7EFFDB021`.
+- The change since 73d20a0f93 is the test file only: the four pin tests from the round 2 adjudication (reports/mergeids-fix-review-round2-response.md), 17 tests in the class. Production code is identical to the GREEN 73d20a0f93 head.
+- Status: GATE GREEN on vm1, GATE RUNNER DONE 2026-10-11T21:46:01Z (runner ~/workspace/tools/gmergeids-regate2.sh, log ~/workspace/tools/gmergeids-regate2.log).
+- Step 0: changelog YAML parse rc=0 (no fragment on this branch; owed at packaging).
+- Step 1: tidy rc=0.
+- Step 2: Error Prone compile rc=0.
+- Step 3: pre-fix proof, QueryComponent.java reverted to the merge-base with the branch tests kept: QueryComponentPartialResultsTest 17 tests, 0 skipped, 7 failures, 0 errors (JUnit XML copy gmergeids-regate2-proof-TEST-org.apache.solr.handler.component.QueryComponentPartialResultsTest.xml, timestamp 2026-10-11T21:42Z). The failures are the same seven premise contents as at 73d20a0f93: numFound expected 3 but was 5 (mergedNumFoundCountsOnlyMergedShards and skippedShardNumFoundExactDoesNotFoldIntoMergedFlag), maxScore expected 3.0 but was 99.0, approximateTotalHits expected 4 but was 11, fallback expected 5 but was 2, mixed headers expected 14 but was 13, all-shards-skipped expected 0 but was 5. The four new pin tests pass on base production, as pins.
+- Step 4: focused tests at head: QueryComponentPartialResultsTest 17 tests, 0 skipped, 0 failures, 0 errors, rc=0 (JUnit XML copy gmergeids-regate2-head-TEST-org.apache.solr.handler.component.QueryComponentPartialResultsTest.xml, timestamp 2026-10-11T21:43Z).
+- Step 5: `:solr:core:check -x test` rc=0. Final git status clean in the gate worktree.
+
 ## Not run
 
 - No end-to-end MiniSolrCloud reproduction of a timed-out shard emitting the skip shape; the evidence is merge-level, as in the verification report. The review's call was that merge-level tests plus the SOLR-14758 scenario are enough for the arithmetic.
