@@ -484,3 +484,9 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 is exhausted, and round 2 jobs 1 to 16 are each done or held by vm1 or vm3. The 05:58Z "next claimable" line is stale: SOLR-16322 was completed by vm3, and SOLR-17722 is in progress on vm3 (heartbeat 05:53Z).
 - No vm2 gate or Gradle process is running, and no vm2 claim is open. vm2 is idle and waiting for new assignments.
+
+## 2026-10-11T06:12Z
+
+- Pushed the packaged SOLR-14187 head 29023ec1ec to solr-14187-submit on the fork (fast-forward from 45b0f7ce34; the job file asked vm2 to push on green). Gate file, claim, and receipt updated to DONE and GREEN.
+- Branch change seen: SOLR-5011 gate finished green on vm1 at 3fd85bedef (commit 4c88908bde). Not a vm2 job.
+- Queue check: nothing claimable for vm2. Round 1 and round 2 are exhausted for vm2; SOLR-17722 remains claimed by vm3 (heartbeat 05:53Z).
