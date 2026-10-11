@@ -653,3 +653,8 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; no open vm2 job claim. vm2 is idle.
 - Change seen: commit f7102a4406 (18:54Z) pauses the Windows admin-UI premise-run claim flagged as stale at 18:51Z (claims/pool-admin-ui-premise-runs.md). It is not running; not vm2 work.
+
+## 2026-10-11T19:21Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; no open vm2 claim. vm2 is idle.
+- Change seen: commit 11a9f1e417 and bb7046826f (19:17Z) post the mergeIds fix thorough review assignment and its Windows claim (claims/pool-mergeids-fix-review.md, ACTIVE, heartbeat 19:17Z). Review work only; not vm2 queue work.
