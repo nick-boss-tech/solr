@@ -6,3 +6,4 @@ Started: 2026-10-11T20:56:58Z (UTC).
 Branch: solr-10641-submit at 4ab4bd2040f3cadca839717842a85ea09f32dcc3 (live tip, verified by ls-remote at claim time).
 
 Heartbeat: 2026-10-11T20:56:58Z.
+Heartbeat: 2026-10-11T21:01:30Z (queue monitor check; tidy step still running, log growing).
