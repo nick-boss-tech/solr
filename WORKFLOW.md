@@ -54,3 +54,7 @@ The Windows host never claims `gate`, `implementation`, `premise-run`, `settling
 - Public text follows `pr-formula.md`: plain language, no internal process vocabulary, proof numbers only from receipts or gate files.
 - No builds on the Windows host (above). No new Jira ticket unless a maintainer asks or Nick directs it.
 - Commit identity is Nick Shanin; no other name in authors, committers or trailers; no em dashes in authored text.
+
+## Queue buffer
+
+Each queue keeps unclaimed work available so a host finishing a task finds the next one waiting (owner direction, 2026-10-10). Targets: at least 2 unclaimed review or draft assignments, and at least 3 unclaimed gate jobs from the shared backlog (assignments/pool-shared-gate-backlog-buffer.md). The main side tops the buffer up when it posts assignments or finishes review rounds; the queue check counts unclaimed items and reports when either queue runs dry.
