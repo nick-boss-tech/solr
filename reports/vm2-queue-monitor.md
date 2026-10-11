@@ -416,3 +416,12 @@ No action taken beyond this job.
 - Packaging commit 5d7d07a5b1 (removes SOLR-10882-TESTING.md) is local only. Gate GREEN at that head: changelog OK, tidy clean, compile rc 0, proof leg as above, focused 7/7, module check rc 0.
 - Receipt receipts/SOLR-10882.md written; job and claim marked DONE.
 - Next claimable for vm2: round 2 job 3 (SOLR-3498 premise run, then first gate).
+
+## 2026-10-11T02:57Z
+
+- Round 1 has no claimable job for vm2: SOLR-5011 is BLOCKED on the proof leg, the rest are DONE or not claimable.
+- Claimed round 2 job 3, SOLR-3498 (premise run, then first gate), 02:34Z.
+- Premise holds: base fails on the commitWithin request parameter (TestContentWriterUpdateRequest.java:32, expected 1234 but was null); head passes 2/2.
+- Gate GREEN at packaged head 2ca0b3743427 (local, TESTING.md removed, not pushed). Changelog OK, tidy clean, compile rc 0, focused 2/0, 6/0, 18/0, module check rc 0.
+- Receipt receipts/SOLR-3498.md written; job and claim marked DONE.
+- Next claimable for vm2: round 2 job 4, SOLR-10364.
