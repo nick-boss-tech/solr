@@ -184,7 +184,10 @@ public class ForceLeader extends AdminAPIBase implements ForceLeaderApi {
       waitForActiveLeader(
           () -> {
             DocCollection current =
-                coreContainer.getZkController().getClusterState().getCollectionOrNull(collectionName);
+                coreContainer
+                    .getZkController()
+                    .getClusterState()
+                    .getCollectionOrNull(collectionName);
             return current == null ? null : current.getSlice(shardName);
           },
           WAIT_ATTEMPTS,
