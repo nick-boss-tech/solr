@@ -9,5 +9,5 @@
   - RR2: SOLR-10198 branch; SOLR-18119-submit PR branch; SOLR-18277 branches (three); SOLR-9759.
 - Scope: read-only apart from the claim and the report. No branch deletion or push, no PR close, no receipt edit, no build, test or gate.
 - Deliverable: `reports/retire-candidates-review-round.md` with verdict counts up front, one section per item in the assignment's order.
-- Heartbeat: 2026-10-11T14:53Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T14:53Z (claim taken); both slices reported.
+- Status: DONE, 2026-10-11. Deliverable: `reports/retire-candidates-review-round.md` (7 RETIRE CLEAN, 2 SALVAGE FIRST) with part reports `reports/retire-candidates-review-round-rr1.md` and `-rr2.md`. No branch, PR, receipt, build, test or gate was touched.
