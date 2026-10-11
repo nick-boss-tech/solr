@@ -10,3 +10,8 @@
 ## Heartbeats
 
 - 2026-10-11T02:06:01Z vm1: claim written; runner being prepared.
+- 2026-10-11T02:14:38Z vm1: base runs finished; run 1 at the CI seed on the merge-base failed premise-shaped and the job stopped early per the assignment.
+
+## Status
+
+- DONE, 2026-10-11. Base run 1 reproduced the premise on the merge-base at the CI seed (SolrServerException caused by ClosedChannelException at the add, PULL stopped before the first successful add; XML g16630-baseruns-run1.xml on vm1). Changelog title corrected in branch commit 9c77a4db09d7a890f62dc9a9ffb2bf5613245da7, pushed to fork solr-16630-submit (fast-forward). Receipts: receipts/SOLR-16630.md carries the base-run outcome and the new head; draft pr-drafts/flaky-fixes/SOLR-16630.md re-headed with the Proof stating the base failure.
