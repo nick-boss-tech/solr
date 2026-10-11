@@ -732,3 +732,11 @@ No action taken beyond this job.
 
 - Busy: SOLR-8554 re-gate at 654c1a7c35 still running (step focused-head, Gradle live, log 8554-gate2.out, no GATE END). Claim heartbeat 23:20Z, under 50 minutes; no refresh due. Nothing finished or claimed this run.
 - Next claimable once the gate ends: SOLR-10234 (premise run first), then SOLR-11939. Buffer still short of the 3-job target.
+
+## 2026-10-11T24:00Z (vm2 cron, gate coordinator run)
+
+- Finished: SOLR-8554 re-gate at 654c1a7c3570 GREEN (GATE END 23:35:03Z). Compile rc 0, tidy clean, proof leg rc 1 by content (three "cannot find symbol" for waitForActiveLeader, lines 52, 63, 73), focused ForceLeaderWaitTest 3 run, 0 failures; ForceLeaderTest not run. Receipt receipts/SOLR-8554.md, job and claim DONE pushed (81e8681953).
+- Claimed: SOLR-10234 (premise, packaging, first gate). Premise holds: base run fails at "SolrCloudTestCase [ExtrasFS]" (HandleLimitFS assertion). Lucene 10.4.0 matches the provider's simple class name, so the branch's open name question is answered yes. Packaged head f5ded23ffb pushed to the fork as a fast-forward from 16825538a7, verified by ls-remote. Gate running from 23:58:36Z, log /workspace/gates/logs/vm2/10234-gate.out, in tidy at this entry. Claim heartbeat 23:58Z.
+- Restock: after the 10234 claim, unclaimed buffer jobs are SOLR-11939 only (target 3). A sweep of blank-status receipts found no new first gate, re-gate or top-up candidate. SOLR-5589 and SOLR-6711 are first-gate shaped but on the blocked list. Shortfall for the main agent.
+- Flag: SOLR-4399 is green at local head 82c0c11373d0, but the fork push is held for a main-side go (receipts/SOLR-4399.md). The fork tip has not moved.
+- Next claimable: SOLR-11939 (rebase with force-with-lease pinned to the fork tip at claim time), once the SOLR-10234 gate ends.
