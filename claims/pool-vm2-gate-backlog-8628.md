@@ -9,7 +9,7 @@
 - Branch: `solr-8628-submit`, live head `ce8211e05e062444e7afc1c5ea33fb6eff581d8f`, verified with `ls-remote` at claim time.
 - Worktree: `/workspace/gates/solr-8628-premise-build`, prepared after claim publication and clean at the branch head.
 - Logs: `/workspace/gates/logs/vm3/8628-premise-*.log` plus the exact evidence files named below.
-- Status: PAUSED BY OWNER at 2026-10-11T14:06:20Z (UTC), retained by vm3. Premise parts 1 and 2 and the expected merge-base proof are complete; the branch-head test has NOT RUN. No DONE or claim release.
+- Status at 2026-10-11T14:06:20Z (UTC): PAUSED BY OWNER, then RELEASED at 2026-10-11T14:10:34Z (UTC) by owner direction that no claim remain held. No active vm3 claim. Premise parts 1 and 2 and the expected merge-base proof are complete; the branch-head test has NOT RUN. Not DONE; any resumption requires a fresh claim.
 - Heartbeat: 2026-10-11T11:43:56Z (UTC), live claims refreshed and branch tip verified; next step was prepare the isolated premise worktree and inspect the exact source/test context.
 - Heartbeat: 2026-10-11T11:46:02Z (UTC), restored the missing assignment, job, capability, branch, worktree, and log fields in the initial claim record; no probe or test had started.
 - Heartbeat: 2026-10-11T11:46:26Z (UTC), premise part 1 confirmed against current upstream main `d76fc14b9857e77b830d7a82514b28c523a239c2`: an empty directory is absent by `exists()` semantics; write.lock-only remains in scope. Evidence: `/workspace/gates/logs/vm3/8628-premise-scope.log`.
