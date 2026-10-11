@@ -7,5 +7,5 @@
 - Staffing: 1, the assignment's limit. One subagent covers the eight drafts.
 - Scope: the eight draft files under `pr-drafts/suggester/` are the only branch files that may be edited, and only for mechanical fixes recorded in the report. Receipts, material, branch code and live PR text are read only. No builds or tests.
 - Deliverable: `reports/draft-fidelity-suggester.md`, one verdict per draft (CONSISTENT, FIXED or FLAGGED), every direct edit listed.
-- Heartbeat: 2026-10-11T07:20Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T07:20Z (claim taken); the pass reported.
+- Status: DONE, 2026-10-11. Deliverable: `reports/draft-fidelity-suggester.md` (verdicts: 7 FLAGGED, 1 FIXED; 23 direct wording and link edits in the eight `pr-drafts/suggester/` files, each recorded in the report with old text, new text and evidence). Flags include a Lucene 9.12.3 claim the records do not support, and a ref-guide sentence in SOLR-11844 that differs from its verified rule. The lead decides the flagged items.

@@ -10,5 +10,5 @@
   - RC4C: SOLR-18506; SOLR-18119; SOLR-18523.
 - Scope: read-only apart from the claim and the report. No live body edit, comment, review, branch edit, draft edit, build, test or gate.
 - Deliverable: `reports/review-confidence-round-4.md` with counts up front, one section per body, and the exact replacement text for each drift item. Part reports `reports/review-confidence-round-4-a.md` to `-c.md`.
-- Heartbeat: 2026-10-11T07:20Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T07:20Z (claim taken); all three slices reported.
+- Status: DONE, 2026-10-11. Deliverables: `reports/review-confidence-round-4.md` (roll-up: 14 DRIFT, 0 CONSISTENT) and the part reports `reports/review-confidence-round-4-a.md`, `-b.md` and `-c.md`. Nothing was edited on a live PR, commented, reviewed or pushed to a branch.

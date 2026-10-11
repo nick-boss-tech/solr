@@ -25,6 +25,8 @@ Six draft files, text only. Nothing was committed, pushed, posted or built, and 
 3. **SOLR-16322, the word "seed".** The draft uses "seed" as the product term for `-Ptests.seed`. It states no seed values. The brief lists "seeds" as process vocabulary. The lead decides whether the flag name stays or the draft says "random seed" without the flag. Nothing was changed.
 4. **SOLR-12347, the merge-base.** The branch's true base is `b6b2b8f10e`, not `cabedd1d968`. The draft says the run base `cabedd1d968` has identical script and test files. The lead confirms that wording.
 
+5. **SOLR-5011, hold.** The shared-schema analysis (`reports/solr-5011-shared-schema-analysis.md`) returns UNSAFE. With `shareSchema` on, two cores on one config set can leave the surviving core's cached schema using a closed loader, so a later schema-API call that names a lib-only class fails. The draft's Limits treat this as undecided, and it is no longer undecided. Hold the SOLR-5011 draft until the narrowing the analysis recommends lands on the branch and the draft is re-cut.
+
 ## Receipt gaps
 
 - **SOLR-16322.** The receipt has no date, so the Proof omits it. The receipt records only beast runs; non-beast, passing build and user-seed runs are named as not run in Limits.
