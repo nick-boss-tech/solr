@@ -696,3 +696,8 @@ No action taken beyond this job.
 - Restocked: SOLR-10234 (premise run, then first gate) and SOLR-11939 (rebase onto current main, premise check, docs-shaped gate). Buffer now has SOLR-8554, SOLR-10234, SOLR-11939 unclaimed.
 - Skipped: SOLR-8628 (owner pause recorded 14:06Z, not resumed). Blocked and skipped: SOLR-5589, 6711, 1877, 17612, 8430, 13097, plus 10667, 12347 (environment).
 - Next claimable: SOLR-8554 (premise run first), then SOLR-10234, SOLR-11939.
+
+## 2026-10-11T22:16Z (vm2 cron, busy check)
+
+- Busy: SOLR-4754 gate running (proof leg, production at merge-base), started 22:04:31Z, no GATE END yet; Gradle process live. Claim heartbeat 22:04Z is current. Nothing finished or claimed this run.
+- Next claimable after SOLR-4754: SOLR-8554 (premise run first), then SOLR-10234, SOLR-11939.
