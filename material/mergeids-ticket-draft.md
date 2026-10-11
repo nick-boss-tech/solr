@@ -11,9 +11,11 @@ The ticket text below the line is Jira wiki markup: the Title line is the ticket
 Type: Bug
 Title: QueryComponent.mergeIds counts numFound and maxScore for a partial shard whose documents are skipped, and still reports numFoundExact=true
 
+🤖 _AI text below_ 🤖 _(posted on behalf of Nick Shanin)_
+
 h2. Symptom
 
-In a distributed search sorted on a field (so sort values need unmarshalling at merge time), when one shard answers with partial results and no {{sort_values}} (the {{timeAllowed}} / query-limit case fixed against an NPE by SOLR-14758 and narrowed by SOLR-15595), the merging node drops that shard's documents but still counts the shard in the merged totals. The response shows:
+In a distributed search sorted on a field (so sort values need unmarshalling at merge time), when one shard answers with partial results and no {{sort_values}} (the {{timeAllowed}} / query-limit case that SOLR-14758 fixed for an NPE and SOLR-15595 narrowed), the merging node drops that shard's documents but still counts the shard in the merged totals. The response shows:
 
  * {{numFound}} larger than the number of documents reachable by paging, because it includes the skipped shard's hits
  * {{numFoundExact=true}} on that same response, even though the count includes a shard that contributed no documents
@@ -36,7 +38,7 @@ The skipped shard does not rescue the exactness flag: in the SOLR-14758 scenario
 
 h2. Reproduction
 
-At the merge level, using the mock harness from {{QueryComponentPartialResultsTest}} (added by SOLR-15595) with realistic totals set on the fabricated shard lists (that test never sets {{numFound}}, which is why this was not visible): shard1 partial with no {{sort_values}}, 2 documents, {{numFound=2}}, {{numFoundExact=true}}, {{maxScore=99.0}}; shard2 normal, 3 documents, {{numFound=3}}, {{maxScore=3.0}}; sort on a field requiring unmarshalling. On main the merged list holds 3 documents (correct) with {{numFound=5}}, {{numFoundExact=true}} and {{maxScore=99.0}}.
+At the merge level, using the mock harness from {{QueryComponentPartialResultsTest}} (added by SOLR-15595) with realistic totals set on the fabricated shard lists (that test never sets {{numFound}}, which is why this was not visible): shard1 partial with no {{sort_values}}, 2 documents, {{numFound=2}}, {{numFoundExact=true}}, {{maxScore=99.0}}; shard2 normal, 3 documents, {{numFound=3}}, {{numFoundExact=true}}, {{maxScore=3.0}}; sort on a field requiring unmarshalling. On main the merged list holds 3 documents (correct) with {{numFound=5}}, {{numFoundExact=true}} and {{maxScore=99.0}}.
 
 End to end, the ingredients are the SOLR-14758 ones: a multi-shard collection, a sorted query, and a {{timeAllowed}} (or another query limit) that trips on one shard while its sort values are being derived.
 
@@ -45,7 +47,7 @@ h2. Fix options
 Two smallest changes present themselves:
 
  * Test the skip condition before accumulating the shard's totals (equivalently, move the {{numFound}} / {{maxScore}} / {{hitCountIsExact}} accumulation below the skip), so a skipped shard never enters the merged totals and the totals describe exactly the shards whose documents are merged.
- * Keep the totals, but set {{hitCountIsExact = false}} when a shard is skipped, so the response stops asserting the count is exact.
+ * Keep the totals, but set {{hitCountIsExact = false}} when a shard is skipped, so the response stops asserting the count is exact. That leaves {{numFound}} and {{maxScore}} counting the skipped shard, so it corrects only one of the three symptoms above.
 
 The first change is the recommended one. Correcting the totals when the skip fires instead means subtracting the skipped shard's contribution after the fact. That can repair the counts, but it cannot correctly undo {{maxScore}}: a maximum cannot be decremented, so recovering the merged maximum without the skipped shard would need per-shard tracking and a recomputation, and {{hitCountIsExact}} would need recomputation as well. Testing the skip before accumulating leaves every total describing the same set of shards, so the reorder is the sound fix.
 
