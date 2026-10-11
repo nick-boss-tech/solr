@@ -690,3 +690,4 @@ No action taken beyond this job.
 - Restocked: SOLR-3865, SOLR-4754, SOLR-8554 job files added to the buffer (1683e01133). No other candidate qualified: the remaining NO GATE tickets are retired, parked, held, blocked, or already gated.
 - Claimed: SOLR-3865 (packaging plus first gate). Packaged head f483bc4c32 pushed to the fork as a fast-forward and verified. Gate running from 21:37:20Z, log /workspace/gates/logs/vm2/3865-gate.out, still in tidy at this entry.
 - Next claimable after SOLR-3865: SOLR-4754 (compile-level proof), then SOLR-8554 (premise run first). Blocked and skipped: SOLR-5589, 6711, 1877, 17612, 8430, 13097, plus 10667 and 12347 (environment).
+- 21:46Z UTC (vm2 cron, busy check): gate for SOLR-3865 still running (proof leg, production at merge-base), started 21:37:20Z, no GATE END yet; claim heartbeat is current. Nothing finished or claimed this run. Next claimable after SOLR-3865: SOLR-4754, then SOLR-8554 (premise run first).
