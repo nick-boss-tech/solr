@@ -564,3 +564,8 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 is exhausted; round 2 is DONE, BLOCKED (SOLR-10667 and SOLR-12347 by environment, retried by vm1), or held by vm1 or vm3. No gradle process running and no open vm2 claim; vm2 is idle.
 - Change seen: vm3 claimed SOLR-8628 premise run (gates/SOLR-8628-premise.md, claims/pool-vm2-gate-backlog-8628.md, 11:43:56Z; heartbeats 11:46Z). Not a vm2 job. The claim file carries the vm2 filename prefix although the claimant is vm3, the same naming issue flagged earlier.
+
+## 2026-10-11T12:30Z
+
+- Queue check: nothing claimable for vm2. Round 1 is exhausted; round 2 is DONE, BLOCKED (SOLR-10667 and SOLR-12347 by environment, retried by vm1), or held by vm1 or vm3. No gradle process running and no open vm2 claim; vm2 is idle.
+- Change seen: vm3 SOLR-8628 premise run progressed after the 11:51Z entry (commits 03287020b8 through a9c2b00ad0; heartbeats 11:53Z to 11:55Z). Premise run only, not a vm2 job. Its last heartbeat is under 2 hours old.
