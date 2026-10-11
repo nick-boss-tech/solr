@@ -691,3 +691,8 @@ No action taken beyond this job.
 - Claimed: SOLR-3865 (packaging plus first gate). Packaged head f483bc4c32 pushed to the fork as a fast-forward and verified. Gate running from 21:37:20Z, log /workspace/gates/logs/vm2/3865-gate.out, still in tidy at this entry.
 - Next claimable after SOLR-3865: SOLR-4754 (compile-level proof), then SOLR-8554 (premise run first). Blocked and skipped: SOLR-5589, 6711, 1877, 17612, 8430, 13097, plus 10667 and 12347 (environment).
 - 21:46Z UTC (vm2 cron, busy check): gate for SOLR-3865 still running (proof leg, production at merge-base), started 21:37:20Z, no GATE END yet; claim heartbeat is current. Nothing finished or claimed this run. Next claimable after SOLR-3865: SOLR-4754, then SOLR-8554 (premise run first).
+- 22:07Z UTC (vm2 gate coordinator run): Finished SOLR-3865 gate GREEN at f483bc4c32 (gate 21:37Z to 21:53Z; proof leg 2/2 fail by content, AlreadyClosedException not thrown). Receipt, job DONE and claim DONE pushed (76dd095a4d).
+- Claimed SOLR-4754 (packaging plus compile-level first gate). Packaged head e4ea4bfde8 pushed as a fast-forward from d2e9038881 and verified. Gate running from 22:04Z, log /workspace/gates/logs/vm2/4754-gate.out, still in tidy at this entry.
+- Restocked: SOLR-10234 (premise run, then first gate) and SOLR-11939 (rebase onto current main, premise check, docs-shaped gate). Buffer now has SOLR-8554, SOLR-10234, SOLR-11939 unclaimed.
+- Skipped: SOLR-8628 (owner pause recorded 14:06Z, not resumed). Blocked and skipped: SOLR-5589, 6711, 1877, 17612, 8430, 13097, plus 10667, 12347 (environment).
+- Next claimable: SOLR-8554 (premise run first), then SOLR-10234, SOLR-11939.
