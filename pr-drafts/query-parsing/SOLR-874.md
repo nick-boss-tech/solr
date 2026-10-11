@@ -4,11 +4,11 @@ https://issues.apache.org/jira/browse/SOLR-874
 
 ## What happens today
 
-**A trailing or leading AND, OR, NOT, && or || makes the dismax parser fail with a parse error.**
+**A trailing AND, OR, NOT, && or || and a leading AND, OR, && or || makes the dismax parser fail with a parse error.**
 
 With `defType=dismax`, the query `q=ipod AND` fails to parse. The same happens for `q=ipod &&`, `q=OR ipod` and `q=AND cool`. The ticket reports the first case, and a comment on the ticket reports a query that starts with OR. The ticket expects dismax not to raise parse errors for user input.
 
-The cleanup step in [SolrPluginUtils.java lines 658-663](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/solr/core/src/java/org/apache/solr/util/SolrPluginUtils.java#L658-L663) removes dangling `+` and `-` signs. It passes boolean words through to the query grammar. The grammar rejects a boolean word that has no term on one side.
+The cleanup step in [SolrPluginUtils.java lines 651-654 at the merge-base](https://github.com/nick-boss-tech/solr/blob/cabedd1d968059215188f4e7563fb303241899ed/solr/core/src/java/org/apache/solr/util/SolrPluginUtils.java#L651-L654) removes dangling `+` and `-` signs. It passes boolean words through to the query grammar. The grammar rejects a boolean word that has no term on one side.
 
 ## What this change does
 
