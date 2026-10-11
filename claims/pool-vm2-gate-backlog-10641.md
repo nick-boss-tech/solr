@@ -13,3 +13,5 @@ Packaged head: fbc1f47b280843278a6c9ddbc8d6dbd1fe37cdc0 (on the fork as solr-106
 Heartbeat: 2026-10-11T21:04:29Z.
 
 Heartbeat: 2026-10-11T21:11:22Z (queue monitor check; proof-prod-at-merge-base leg running, compile rc=0, tidy clean).
+
+DONE: 2026-10-11T21:30Z (UTC), outcome GREEN at packaged head fbc1f47b280843278a6c9ddbc8d6dbd1fe37cdc0 (gate end 21:22:04Z). Deliverables: receipts/SOLR-10641.md, gates/SOLR-10641.md. Proof leg inconclusive by construction (9/0 at merge-base).
