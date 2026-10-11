@@ -8,3 +8,7 @@ Branch: solr-3865-submit at 363e8f0651e9df89b09af0015f0d96a0005abebe (live tip, 
 Packaged head: f483bc4c32e033ef797e16528b9e021dca56770a (SOLR-3865-TESTING.md removed; fast-forward from 363e8f0651, verified by ls-remote 2026-10-11T21:36Z). Gate started 2026-10-11T21:37:20Z (runner /workspace/gates/g3865-gate.sh, log /workspace/gates/logs/vm2/3865-gate.out).
 
 Heartbeat: 2026-10-11T21:37:20Z.
+
+DONE: 2026-10-11T22:05Z (UTC), outcome GATE GREEN at packaged head f483bc4c32e033ef797e16528b9e021dca56770a (gate end 21:53:32Z). Deliverables: receipts/SOLR-3865.md, gates/SOLR-3865.md.
+
+Status: DONE.
