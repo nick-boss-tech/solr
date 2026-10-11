@@ -609,3 +609,9 @@ No action taken beyond this job.
 - Change seen: commit 7f4af152c1 (Nick Shanin) extends coordinator authorization: coordinators may update Nick's PR descriptions against receipts, implement review-identified changes through the full gate, and decide scope questions under the decision default, each recorded in the category file. Gate failures where tests executed are now investigated and recorded before any relaunch, not escalated outright. No effect on the vm2 queue today.
 - Record gap: claims/pool-vm2-gate-backlog-14187.md ends on a follow-up line, not a DONE mark, although gates/SOLR-14187.md reads DONE (GREEN by main-side proof decision). The vm2 coordinator should add the DONE mark on its next push.
 - Open for the main side: SOLR-10667 and SOLR-12347 are BLOCKED by environment with no test run. The round 2 rules allow one relaunch of a run that never executed tests, but BLOCKED jobs are skipped, so vm2 has not relaunched them.
+
+## 2026-10-11T15:35Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; no vm2 claim open. vm2 is idle.
+- Record fix: claims/pool-vm2-gate-backlog-14187.md now carries its DONE mark, verified against gates/SOLR-14187.md and receipts/SOLR-14187.md (rule 6 correction).
+- Seen: windows review agent claimed claims/pool-solr-8628-head-failure-investigation.md (review only, heartbeat 15:25Z). vm3's SOLR-8628 claim has a last heartbeat at 14:06Z, not yet stale (stale after 16:06Z if it does not refresh).
