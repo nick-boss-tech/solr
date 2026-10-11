@@ -67,15 +67,16 @@ public class FileBasedSpellCheckerTest extends SolrTestCaseJ4 {
   }
 
   @Test
-  public void testMissingSourceLocationIsRejected() {
+  public void testMissingSourceLocationIsRejectedAtBuild() {
     FileBasedSpellChecker checker = new FileBasedSpellChecker();
     NamedList<Object> spellchecker = new NamedList<>();
     spellchecker.add("classname", FileBasedSpellChecker.class.getName());
     spellchecker.add(SolrSpellChecker.DICTIONARY_NAME, "nolocation");
     spellchecker.add(AbstractLuceneSpellChecker.FIELD, "teststop");
 
-    SolrException e =
-        expectThrows(SolrException.class, () -> checker.init(spellchecker, h.getCore()));
+    SolrCore core = h.getCore();
+    assertEquals("nolocation", checker.init(spellchecker, core));
+    SolrException e = expectThrows(SolrException.class, () -> checker.build(core, null));
     assertTrue(e.getMessage(), e.getMessage().contains(AbstractLuceneSpellChecker.LOCATION));
     assertTrue(e.getMessage(), e.getMessage().contains("nolocation"));
   }

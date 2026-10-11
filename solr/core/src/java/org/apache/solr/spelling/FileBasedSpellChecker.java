@@ -60,6 +60,12 @@ public class FileBasedSpellChecker extends AbstractLuceneSpellChecker {
   @Override
   public String init(NamedList<?> config, SolrCore core) {
     super.init(config, core);
+    characterEncoding = (String) config.get(SOURCE_FILE_CHAR_ENCODING);
+    return name;
+  }
+
+  @Override
+  public void build(SolrCore core, SolrIndexSearcher searcher) throws IOException {
     if (sourceLocation == null) {
       throw new SolrException(
           SolrException.ErrorCode.SERVER_ERROR,
@@ -69,12 +75,6 @@ public class FileBasedSpellChecker extends AbstractLuceneSpellChecker {
               + LOCATION
               + "' parameter naming the dictionary file");
     }
-    characterEncoding = (String) config.get(SOURCE_FILE_CHAR_ENCODING);
-    return name;
-  }
-
-  @Override
-  public void build(SolrCore core, SolrIndexSearcher searcher) throws IOException {
     loadExternalFileDictionary(core, searcher);
     spellChecker.clearIndex();
     // TODO: you should be able to specify the IWC params?

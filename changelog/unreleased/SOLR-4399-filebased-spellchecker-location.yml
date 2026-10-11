@@ -1,5 +1,5 @@
 # See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
-title: A FileBasedSpellChecker configured without sourceLocation now fails at startup with a message naming the missing parameter instead of throwing a NullPointerException on spellcheck.build.
+title: A FileBasedSpellChecker configured without sourceLocation now fails on its first build with a message naming the missing parameter instead of throwing a NullPointerException.
 type: fixed
 authors:
   - name: Nick Shanin
