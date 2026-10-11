@@ -471,3 +471,11 @@ No action taken beyond this job.
 - Proof leg INCONCLUSIVE by compile at merge-base: all three branch test files use the new API. No rerun.
 - Receipt receipts/SOLR-11678.md written; job and claim marked DONE.
 - Next for vm2: round 2 job 10, SOLR-12161, if not claimed.
+
+## 2026-10-11T05:58Z
+
+- Claimed round 2 job 10, SOLR-12161 (pin verification, then first gate), 05:30Z. Round 1 and round 2 jobs 1 to 9 had no claimable vm2 job left.
+- Pin verdict: PIN, not a fix. BasicAuthIntegrationTest.testBasicAuth passes at head 1725cbd8489 and against base production cabedd1d968 (head test copied into the proof worktree only). Both from fresh JUnit XML, 1 run, 0 failures each.
+- Gate GREEN at packaged head cdd265168a2a (local, not pushed): no changelog file for this ticket, tidy clean, compile rc 0, focused 1/0, module check rc 0.
+- Receipt receipts/SOLR-12161.md rewritten from NO GATE; job and claim marked DONE.
+- Next claimable for vm2: round 2 job 15, SOLR-16322 (Gradle script premise exercise), if not claimed.
