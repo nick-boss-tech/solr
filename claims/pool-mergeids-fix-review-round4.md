@@ -8,5 +8,5 @@
 - Subject: branch `mergeids-skipped-shard-totals`, head `9e85ce5c162086ae806f617419c4405512792dde`. Gate state to be stated from `receipts/mergeids-fix.md`, which records the re-gate at 9e85ce5c16 as GREEN.
 - Scope: confirmation of the settlements only. The branch, the drafts and the records are not edited; any wrong passage is flagged. No build, test or gate on this host. No Jira, GitHub, email or comment write.
 - Deliverable: `reports/mergeids-fix-review-round4.md`, one line per settlement, then the verdict, SATISFIED or STILL OPEN.
-- Heartbeat: 2026-10-11T23:10Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T23:10Z (claim taken); both slices reported and checked.
+- Status: DONE, 2026-10-11. Deliverable: `reports/mergeids-fix-review-round4.md`, verdict STILL OPEN. The branch needs no change. The open items are record corrections: a wrong mechanism in the sort-values scope note (overflow, where the decrement is on a duplicate id), a PR draft changelog link and a "green" overstatement, and two stale lines in our round 3 report. Nothing was edited, filed or posted.
