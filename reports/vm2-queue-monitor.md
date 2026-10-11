@@ -727,3 +727,8 @@ No action taken beyond this job.
 - Claimed: none this run (one gate at a time).
 - Queue: unclaimed and claimable are SOLR-10234 and SOLR-11939 only (2, below the 3 target). Blocked and skipped: SOLR-5589, 6711, 1877, 17612, 8430, 13097. No new candidate qualifies in the receipts this run; shortfall for the main agent.
 - Next claimable: SOLR-10234 (premise run first), then SOLR-11939.
+
+## 2026-10-11T23:31Z (vm2 cron, busy check)
+
+- Busy: SOLR-8554 re-gate at 654c1a7c35 still running (step focused-head, Gradle live, log 8554-gate2.out, no GATE END). Claim heartbeat 23:20Z, under 50 minutes; no refresh due. Nothing finished or claimed this run.
+- Next claimable once the gate ends: SOLR-10234 (premise run first), then SOLR-11939. Buffer still short of the 3-job target.
