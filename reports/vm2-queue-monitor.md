@@ -589,3 +589,10 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 and round 2 have no open job for vm2; every item is DONE, BLOCKED, or held by vm1 or vm3. No gradle process running and no open vm2 claim; vm2 is idle.
 - Change seen: commit 93df91255c (Nick Shanin) records vm3 as DOWN in hosts/vm3.md, with no new claims on vm3 until Nick says it is back. Its earlier releases of SOLR-8628 (premise) and SOLR-5262 (gate) stand. Neither is in the vm2 backlog lists, so vm2 does not take them.
+
+## 2026-10-11T14:50Z
+
+- Queue check: nothing claimable for vm2 under the round 1 and round 2 backlog. Every item is DONE, BLOCKED (SOLR-10667 and SOLR-12347 by environment, SOLR-14187 on a proof decision), or held by vm1 or vm3. No gradle process running and no open vm2 claim; vm2 is idle.
+- Change seen: commit 23b39c570b adds material/coordinator-handoff.md and makes VM2 the gate backlog coordinator. The handoff asks each coordinator to claim its role in claims/ on its next pass. This monitor has not written that claim, because the monitor's scope is the round 1 and round 2 backlog. The main side should confirm whether the coordinator claim is wanted from this monitor.
+- Change seen: commit 01001a0faa adds SOLR-13097 to the shared buffer (gates/SOLR-13097.md, UNCLAIMED, claimable by vm1 or vm2). It is a full rebase of a live PR branch with a force-with-lease push pinned to the fork tip read at claim time. Not claimed here: it is outside the round 1 and round 2 lists, and the push goes to a PR branch. Needs a go from the main side or Nick.
+- Also seen: SOLR-18368 still-an-issue check and retire-candidates review round (assignments/pool-solr-18368-still-an-issue.md, assignments/pool-retire-candidates-review-round.md). Not vm2 gate work.
