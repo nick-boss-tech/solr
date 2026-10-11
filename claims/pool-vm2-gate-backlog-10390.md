@@ -37,3 +37,8 @@ Heartbeat: 2026-10-11T10:19:18Z (UTC).
 
 SOLR-10390 BATS preparation: removed 33 verified ignored/untracked task build directories outside `solr/packaging/build` (8,390 entries; 559,663,571 bytes), retaining the archives, extracted distribution, BATS libraries, caches, source, `.git`, and logs. The task-local PATH without lsof is verified; project BATS 1.8.2 and host BATS 1.10.0 are distinguished in the gate file. The unsupported `--list-tests` option check executed no tests; supported `--count --filter` selected exactly one case. Pre-selection resource snapshot: 22 GB available and 65,056 inodes free (93% reported use); only sleeping Gradle daemon PID 221714, 1 CPU tick in 4 seconds, no client or worker. Logs are recorded in `gates/SOLR-10390.md`.
 Status: CLAIMED. Proof leg at the base and focused BATS test at packaged head remain; Java checks are not applicable.
+
+Heartbeat: 2026-10-11T10:23:02Z (UTC).
+
+Proof leg complete as expected: one BATS case at base `cabedd1d968059215188f4e7563fb303241899ed` exited 1 at `refute_output` line 129 because its output included the `Please install lsof` note; JUnit failure content confirms the marker. Solr started on port 57149 and no Solr process remained after teardown. Evidence and exact pre/post resource snapshots are in `gates/SOLR-10390.md`. The extracted distribution was restored to packaged-head `bin/solr`, SHA-256 `6eddf7f7eaa2f599410db6accaaa56dcbc93663d4c952697a3d96a360b8b3899`; source worktree clean.
+Status: CLAIMED. Focused BATS test at packaged head and receipt remain; Java checks are not applicable.
