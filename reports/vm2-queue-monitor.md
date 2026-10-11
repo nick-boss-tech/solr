@@ -643,3 +643,8 @@ No action taken beyond this job.
 - Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; no vm2 job claim open. vm2 is idle.
 - Change: refreshed the vm2 coordinator heartbeat in claims/coordinator-gate-backlog.md; the last one was 15:01Z, past the hourly rule.
 - Not taken: unclaimed shared-buffer gates (SOLR-1877, SOLR-4399, SOLR-17612, SOLR-6711, SOLR-8430, SOLR-5589 need branch implementation first; SOLR-10641 needs a tidy fold-in and a fork push; SOLR-13097 is a force-with-lease rebase of a live PR). They sit outside the round order this lane runs, so they wait for a main-side go.
+
+## 2026-10-11T18:51Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; no open vm2 claim. vm2 is idle.
+- Stale claim seen: claims/pool-admin-ui-premise-runs.md (Windows host, Selenium premise runs for SOLR-9831 and SOLR-9818) is ACTIVE, blocked, with its last heartbeat at 2026-10-11T03:37Z, past the 2-hour rule. Not vm2's claim; not taken. Main agent or the Windows host should refresh or release it.
