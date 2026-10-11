@@ -20,3 +20,5 @@
 - SOLR-10390 gate completion heartbeat, 2026-10-11T10:26:00Z: GATE GREEN at `5a86f908052f031b6ce0f0004c0bdf3e825a12c5`. The filtered head BATS test passed one case in 11.764 seconds, exit 0; JUnit has no failure/error and no teardown timeout recurred. Post-run resources: 22 GB available, 64,957 inodes free (93% reported use); no Solr/test process or Gradle client/worker remained. Receipt and gate evidence are recorded on `pr-prepare`.
 
 - SOLR-17708 claim heartbeat, 2026-10-11T10:29:41Z (UTC): vm3 claimed the live-unclaimed top-up gate at branch head `10a7fa07a79ac4b4b52a83d307ee65349d015a23`. Scope is only the gate-prescribed changelog title correction and subsequent top-up gate; no build or test has started.
+
+- SOLR-17708 packaging heartbeat, 2026-10-11T10:32:31Z (UTC): the exact single-file changelog title correction was committed as `2eceb54730373475e9adfe55bfe555744fb3724a` and fast-forward pushed; the live fork tip and merge-base match the recorded task checkout. No build or test has started; next is YAML changelog validation.
