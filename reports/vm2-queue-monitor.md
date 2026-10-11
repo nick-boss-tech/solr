@@ -526,3 +526,8 @@ No action taken beyond this job.
 - Queue check: nothing claimable for vm2. Round 1 and round 2 are still exhausted; no gradle process running and no open vm2 claim. vm2 is idle.
 - Change seen: SOLR-13705 full gate is GREEN on vm3 (gates/SOLR-13705.md, 07:49:43Z, packaged head 73504e7a8dcb). Not a vm2 job.
 - Change seen: vm3 claimed the full gate for SOLR-10390 (claims/pool-vm2-gate-backlog-10390.md, 07:54:04Z) and recorded its packaged head. Heartbeat is fresh. Not a vm2 job. Same misleading vm2 prefix on the claim file as SOLR-5262, already flagged above.
+
+## 2026-10-11T09:11Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 are still exhausted (round 2 jobs are DONE, BLOCKED by environment for 10667 and 12347, or held by vm1 or vm3). No gradle process running and no open vm2 claim; vm2 is idle.
+- Change seen: 6186272a32 records vm3's changelog validation for SOLR-10390 (gates/SOLR-10390.md, 08:00:01Z; 223/223 fragments valid). The full proof leg and focused BATS run remain on vm3. Not a vm2 job. Its claim heartbeat is from 08:00Z, so it goes stale after about 10:00Z if not refreshed.
