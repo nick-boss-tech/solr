@@ -23,7 +23,7 @@ Running {{./gradlew}} from Git Bash (MSYS or MINGW) on Windows fails before the 
 Error: Could not find or load main class org.gradle.wrapper.GradleWrapperMain
 {noformat}
 
-The same checkout works from {{gradlew.bat}} and on Linux and macOS; only the Cygwin and MSYS path through the shell script is broken.
+Only the Cygwin and MSYS path through the shell script is broken: {{gradlew.bat}} contains no {{cygpath}} conversion, and on Linux and macOS the block at line 215 never runs because neither {{cygwin}} nor {{msys}} is set there.
 
 h2. Mechanism
 
@@ -35,17 +35,17 @@ In {{gradlew}} (main, {{d76fc14b9857}}), the paths are converted to Windows form
 
 {{cygpath --path}} treats its input as a colon-separated list of paths. Given {{C:/Users/...}}, it splits at the drive-letter colon: the {{C}} part stays relative and the remainder resolves against the MSYS root, and the parts are joined back with {{";"}}. The result is {{C;C:/Users/...}}, which is the classpath the final {{java}} call at line 256 receives, and the wrapper main class is not on it.
 
-Probes on a Git Bash host show the same strings: {{cygpath --path --mixed "/c/Users/..."}} prints {{C:/Users/...}}, and running the same command on that output prints {{C;C:/Users/...}}.
+Probes on a Git Bash host show the same shape: {{cygpath --path --mixed "/c/Users/..."}} prints {{C:/Users/...}}, and running the same command on that output prints {{C;C:/Users/...}}.
 
 {{JAVACMD}} is converted once, at line 219 with {{cygpath --unix}}, and is not affected.
 
 h2. Reproduction
 
-Environment: Git for Windows Bash (MINGW64), JDK 21 with {{JAVA_HOME}} set, a Solr checkout at the cited main snapshot. Command: {{bash -x ./gradlew -version}}. The trace shows {{APP_HOME=C;C:/Users/...}}, a {{CLASSPATH}} with the same {{C;}} prefix, and the error above.
+The reported failing trace comes from a Git Bash run: {{APP_HOME=C;C:/Users/...}}, a {{CLASSPATH}} with the same {{C;}} prefix, the final {{java}} call at line 256 with that classpath, and the error above.
 
-Stated plainly: this defect is confirmed by reading the script at the cited snapshot and by the cygpath probes above, which reproduce the failing strings. The end-to-end run is the remaining verification step. Linux and macOS cannot reproduce it: the block at line 215 runs only when {{cygwin}} or {{msys}} is true. Cygwin (non-MSYS) takes the same block but was not checked separately.
+Stated plainly: this defect is confirmed by reading the script at the cited snapshot and by the cygpath probes above, which reproduce the failing shape. The end-to-end run is the remaining verification step: on a Git for Windows Bash (MINGW64) host with JDK 21 and {{JAVA_HOME}} set, in the SOLR-9831 worktree at {{f269a70e84f}} (its {{gradlew}} is identical to the cited snapshot), run {{timeout 30 bash -x ./gradlew -version}} and judge the trace, not the exit code; a fixed script may start the Gradle distribution download and be killed by the timeout. Linux and macOS cannot reproduce it: the block at line 215 runs only when {{cygwin}} or {{msys}} is true. Cygwin (non-MSYS) takes the same block but was not checked separately.
 
-With the fix below, the same trace should show {{APP_HOME=C:/Users/...}} from the single conversion at line 159, a {{CLASSPATH}} with no {{C;}} prefix, and no "Could not find or load main class" line.
+With the fix below, the same run should show {{APP_HOME=C:/Users/...}} from the single conversion at line 159, a {{CLASSPATH}} with no {{C;}} prefix, and no "Could not find or load main class" line.
 
 h2. Fix
 
@@ -60,13 +60,13 @@ Delete lines 216 to 218 of {{gradlew}} (the two {{cygpath}} assignments and the 
      JAVACMD=$( cygpath --unix "$JAVACMD" )
 {noformat}
 
-Nothing else needs to change: {{APP_HOME}} is already in Windows form from line 159, {{CLASSPATH}} is built from it at line 174, and the steps between them (the WrapperDownloader at line 164 and the GradlePropertiesGenerator at line 179) receive the same paths they receive today. A comment at line 214 noting that {{APP_HOME}} and {{CLASSPATH}} are converted at lines 159 and 174 would prevent a recurrence.
+Nothing else needs to change: {{APP_HOME}} is already in Windows form from line 159, {{CLASSPATH}} is built from it at line 174, and the steps between them (the WrapperDownloader at line 164 and the GradlePropertiesGenerator at line 179) receive the same paths they receive today. A comment at line 214 noting that {{APP_HOME}} is converted at line 159 and {{CLASSPATH}} is built from it at line 174 would prevent a recurrence.
 
 Two checks that come with the fix:
 
  * The SOLR-16641 validation still passes: {{gradle/validation/gradlew-scripts-tweaked.gradle}} requires the text {{GradlePropertiesGenerator}} in {{gradlew}} and {{gradlew.bat}}, and its only occurrence in {{gradlew}} is line 179, which the deletion does not touch.
  * {{gradlew.bat}} has no equivalent defect: it contains no {{cygpath}} conversion; it sets {{APP_HOME}} from {{%DIRNAME%}} and normalizes it once.
 
-One related item is not part of this fix: the argument conversion loop at lines 220 to 235 also runs {{cygpath --path}} on arguments that look like POSIX paths, and a colon inside such an argument would split the same way. It is outside the reported failure and is named here only so it is not lost.
+One related item is not part of this fix: the argument conversion loop at lines 222 to 242 also runs {{cygpath --path}} (at line 231) on arguments that look like POSIX paths, and a colon inside such an argument would split the same way. It is outside the reported failure and is named here only so it is not lost.
 
 AI agents assisted with research, implementation, review, and drafting. Nick Shanin directed the work and takes responsibility for this contribution.

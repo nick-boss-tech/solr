@@ -33,3 +33,23 @@ Scope: read against `reports/gradlew-git-bash-path-bug.md` and the script at mai
 ## Next step
 
 Once F1 and F3 are fixed in `material/gradlew-ticket-draft.md` by the main side, the review can be re-run on the changed lines. F2, F4, F5 and F6 are wording and citation fixes. F7 is a report correction.
+
+## Main-side adjudication (2026-10-11)
+
+All seven items were settled against the script at main `d76fc14b9857e77b830d7a82514b28c523a239c2`, read line by line for this adjudication. All seven settle for the reviewer; the draft stands on none of them. Corrections are in `material/gradlew-ticket-draft.md` and, where the same error sits in the ground-truth record, in `reports/gradlew-git-bash-path-bug.md`.
+
+**F1: reviewer right; draft and report corrected.** Line 174 is `CLASSPATH=$GRADLE_WRAPPER_JAR`, a plain assignment with no `cygpath` call. The only conversion before the block is line 159 (`APP_HOME`); line 162 builds `GRADLE_WRAPPER_JAR` from the converted value and line 174 assigns it. The draft's suggested comment now reads with the reviewer's suggested text: `APP_HOME` is converted at line 159 and `CLASSPATH` is built from it at line 174. The same error in the report's optional-comment line is corrected the same way. The draft's Mechanism section already stated this correctly; only the Fix section sentence and the report line were wrong.
+
+**F2: reviewer right; draft corrected.** The report's probe output is `C;C:/Users/shaninna/AppData/Local/Programs/Git/Users/shaninna/dev/Solr-issues/wt/pr-prepare-suggester`, which carries the MSYS root segment after `C;`; the reported trace is `C;C:/Users/.../gradle/wrapper/gradle-wrapper.jar`. Same shape, not the same string. The draft's Mechanism probes sentence now says "the same shape", and the identical wording in the Reproduction section ("which reproduce the failing strings") now says "the failing shape", as part of the same item. The report's Not verified bullet carried the same overstatement ("reproduce the trace's strings") and now says "the trace's shape" as well.
+
+**F3: reviewer right; draft corrected, one sub-point already resolved.** The report states three times that `gradlew` was not run (its lines 3, 72 and the Not verified section) and that the trace lines come from the assignment because the trace file was not available to the investigator. The draft's Reproduction presented the trace as the output of a stated command, which conflicts with the run being the remaining verification step. The section is rewritten: the trace is attributed to the reported Git Bash failure, and the command appears as the verification spec (see F5), not as a run that produced the quoted lines. The sub-point about "on the host that reported it" needed no action: that phrase is not in the current draft (it was removed in the earlier wording scrub), and the host is named consistently as the Windows Git Bash host, matching the preface.
+
+**F4: reviewer right; draft corrected.** No run of `gradlew.bat`, Linux or macOS exists in the evidence; the report's check 1 is static reading only. The Symptom sentence no longer claims the same checkout "works" from those paths. It now states what the reading supports: `gradlew.bat` contains no `cygpath` conversion, and on Linux and macOS the block at line 215 never runs because neither `cygwin` nor `msys` is set there (defaults at lines 107 to 110, the `case` at lines 111 to 116).
+
+**F5: reviewer right; applied inside the F3 rewrite.** The Reproduction now names the report's spec: the SOLR-9831 worktree at `f269a70e84f` (its `gradlew` is identical to the cited snapshot, per the report's refs read), and `timeout 30 bash -x ./gradlew -version`, judging the trace rather than the exit code because a fixed script may start the Gradle distribution download and be killed by the timeout.
+
+**F6: reviewer right; draft and report corrected.** In the script the argument loop's `for` is at line 222 and its `done` at line 242; the `cygpath` call is at line 231 and the POSIX-path test is at lines 226 to 227, inside the `case` at lines 224 to 229. The draft's related-item sentence now cites lines 222 to 242 with the call at line 231. The report's Not verified section carried the same 220 to 235 range and is corrected the same way.
+
+**F7: reviewer right; report corrected, no draft change.** The defaults are at lines 107 to 110 (`cygwin`, `msys`, `darwin`, `nonstop`) and the `case` statement is at lines 111 to 116. The report's check 1 now says so. The draft cites neither range.
+
+With F1 to F7 settled, the draft is final. Round 2 is posted as `assignments/pool-gradlew-ticket-review-round2.md`, scoped to these seven items only.

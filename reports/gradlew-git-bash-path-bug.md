@@ -58,11 +58,11 @@ Delete lines 216 to 218 (the two `cygpath` assignments and the blank line after 
 
 Why this is enough: `APP_HOME` is already in mixed form from line 159, and `CLASSPATH` is built from it at line 174. Both already have the form the final exec needs. Nothing above line 216 changes, so the WrapperDownloader (164) and GradlePropertiesGenerator (179) steps receive the same paths they receive today.
 
-Optional: a comment at line 214 saying that `APP_HOME` and `CLASSPATH` are converted at lines 159 and 174.
+Optional: a comment at line 214 saying that `APP_HOME` is converted at line 159 and `CLASSPATH` is built from it at line 174.
 
 ## Checks
 
-1. **Linux and macOS are unchanged.** Lines 107 to 109 default `cygwin`, `msys` and `darwin` to false. The case at 110 to 115 sets `cygwin` only for `CYGWIN*` and `msys` only for `MSYS*` or `MINGW*`. On Linux and macOS the test at 215 is false, so lines 216 to 218 never run. Static reading only; no Linux or macOS host was run.
+1. **Linux and macOS are unchanged.** Lines 107 to 110 default `cygwin`, `msys`, `darwin` and `nonstop` to false. The case at 111 to 116 sets `cygwin` only for `CYGWIN*` and `msys` only for `MSYS*` or `MINGW*`. On Linux and macOS the test at 215 is false, so lines 216 to 218 never run. Static reading only; no Linux or macOS host was run.
 2. **Validation script still passes.** `gradle/validation/gradlew-scripts-tweaked.gradle` line 35 requires the text `GradlePropertiesGenerator` in `gradlew` and `gradlew.bat` (SOLR-16641). In `gradlew` the only occurrence is line 179, which the diff leaves alone.
 3. **`gradlew.bat` has no equivalent defect.** It has no `cygpath`, `cygwin` or `msys` text. `APP_HOME` is set from `%DIRNAME%` (line 33) and normalised once (line 36). `GRADLE_WRAPPER_JAR` (79) and `CLASSPATH` (87) are plain assignments, and `-classpath "%CLASSPATH%"` is at line 104. No path is converted twice.
 4. **The syntax of the edited script.** `sed` removed lines 216 to 218 from `f269a70e84f:gradlew` and `bash -n` passed with no output. `git apply --check` could not run, because the worktree does not track `gradlew`.
@@ -78,8 +78,8 @@ For the Windows host only, and only when Nick asks; the end-to-end run is the re
 
 ## Not verified
 
-- `gradlew` was not run. The verdict rests on the line reads and the cygpath probes, which reproduce the trace's strings.
+- `gradlew` was not run. The verdict rests on the line reads and the cygpath probes, which reproduce the trace's shape.
 - The POSIX form of `APP_HOME` at line 89 is inferred from the code and the trace, not observed.
 - Cygwin (non-MSYS) was not checked.
-- The argument loop at lines 220 to 235 runs `cygpath --path` on arguments that look like POSIX paths (line 231). A colon in such an argument would be split the same way. That is outside the reported trace, so it is not part of this fix.
+- The argument loop at lines 222 to 242 runs `cygpath --path` on arguments that look like POSIX paths (line 231). A colon in such an argument would be split the same way. That is outside the reported trace, so it is not part of this fix.
 - The scratchpad trace file the assignment cites was not available to the investigator; the trace lines come from the assignment.
