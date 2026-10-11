@@ -19,3 +19,6 @@ Runner: Linux; BATS 1.10.0 at `/usr/bin/bats`. Worktree: `/workspace/gates/solr-
 Started: 2026-10-11T07:54:04Z (UTC).
 Heartbeat: 2026-10-11T07:54:04Z (UTC).
 Status: CLAIMED. Packaging, changelog parse, proof, and focused BATS run remain; Java checks are not applicable per the gate file.
+
+Packaging result 2026-10-11T07:57:40Z: removed only `SOLR-10390-TESTING.md`; commit `5a86f908052f031b6ce0f0004c0bdf3e825a12c5` pushed fast-forward and verified as the live `solr-10390-submit` tip.
+Status: CLAIMED. Changelog parse, proof, and focused BATS run remain; Java checks are recorded not applicable.
