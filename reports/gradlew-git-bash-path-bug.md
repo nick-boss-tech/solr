@@ -1,6 +1,6 @@
 # Report: gradlew converts paths twice under Git Bash
 
-Verdict: **CAUSE CONFIRMED** by reading the script at three refs and by cygpath probes on the Windows Git Bash host. `gradlew` was not executed (no Gradle is allowed on this host), so the failing run itself is not reproduced here. The reproduction spec is at the end.
+Verdict: **CAUSE CONFIRMED** by reading the script at three refs and by cygpath probes on the Windows Git Bash host. `gradlew` was not executed in this investigation, so the failing run itself is not reproduced here. The reproduction spec is at the end.
 
 **Annotation (2026-10-11), superseding the verification level stated in this report:** the end-to-end run has since been executed by Nick on the Windows Git Bash host and is recorded in `reports/gradlew-end-to-end-run.md`, with its trace files. On main `498a09aea97` the trace shows `APP_HOME` becoming `'C;C:/...'` after the second conversion and the run ends with `Error: Could not find or load main class org.gradle.wrapper.GradleWrapperMain`, exit 1; on branch `gradlew-msys-double-conversion` at `192aacaaf89`, `gradlew -version` prints Gradle 9.7.0, exit 0. Statements in this report that the run had not been executed (the verdict above, the reproduction spec, and the first Not verified bullet) record the state when this report was written and are superseded by that record. The run's scope is `-version` only; what it does not cover is listed in the run report.
 
@@ -28,7 +28,7 @@ In `gradlew`, `APP_HOME` and `CLASSPATH` are converted by `cygpath --path --mixe
 | 219 | `JAVACMD=$( cygpath --unix "$JAVACMD" )`. Single conversion, correct. |
 | 256 | `-classpath "$CLASSPATH"` in the final exec. |
 
-Why the second call breaks: `cygpath --path` splits its input on `:`. Given `C:/Users/...`, the drive letter `C` stays relative and the rest resolves against the MSYS root. The two parts are joined with `;`, which gives `C;C:/Users/...`. That is exactly the string in the failing trace.
+Why the second call breaks: `cygpath --path` splits its input on `:`. Given `C:/Users/...`, the drive letter `C` stays relative and the rest resolves against the MSYS root. The two parts are joined with `;`, which gives `C;C:/Users/...`. That is the same shape as the failing trace.
 
 Probes on this host, run through the Bash tool:
 
