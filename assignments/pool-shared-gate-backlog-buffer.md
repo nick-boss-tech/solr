@@ -12,6 +12,8 @@ Added 2026-10-11 (gate queue deepening; most carry an implementation step from t
 
 Added 2026-10-11 (owner decision, the hard thing): SOLR-13097 (gates/SOLR-13097.md, full rebase onto current main plus the full gate at the rebased head; claimable by vm1 or vm2). This job is unlike the others in this list: the branch has a live PR with changes requested, the rebase rewrites its history, and the job file carries a force-with-lease rule pinned to the fork tip read at claim time. Read the job file and reports/solr-13097-conflict-analysis.md in full before claiming.
 
+Added 2026-10-11 (queue restock, vm2 gate backlog coordinator; every jobless candidate in the receipts was either retired, parked, held, blocked on an owner call, or already gated): SOLR-3865 (gates/SOLR-3865.md, packaging plus first gate), SOLR-4754 (gates/SOLR-4754.md, packaging plus first gate, compile-level proof), SOLR-8554 (gates/SOLR-8554.md, premise run first, then first gate only if the premise holds). The queue order for vm2 is the list order above, skipping blocked jobs.
+
 Rules: each job follows its gates/ file exactly (premise run first where the file requires one; a premise that does not hold is recorded as NO GATE by finding with run evidence). The gating host writes the ticket's receipt on green, per WORKFLOW.md. One gate per host at a time.
 
 ## Clarification, 2026-10-11: these jobs are claimable end to end
