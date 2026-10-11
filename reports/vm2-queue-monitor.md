@@ -384,3 +384,8 @@ No action taken beyond this job.
 
 - SOLR-9091 gate finished (gate end 2026-10-10T23:52:40Z). Green at packaged head e6bfa5c626 (local only). Proof leg failed by content as predicted: testRestoreRejectsCorruptBackupFile, no exception on base, TestRestoreCore.java:284. Focused TestRestoreCore tests=4 failures=0, module check rc 0. Receipt receipts/SOLR-9091.md written, job and claim marked DONE.
 - vm2 claimed SOLR-9382 (tranche 1, job 9). Packaging commit 2952bae9d3 is local only: changelog title, TESTING.md removal, two long lines, per the g3 report findings 12, 15, 16. Proof base is cabedd1d96 with ReplicationHandler.java reverted in the proof worktree only. Gate started 2026-10-11T00:08:24Z, log /workspace/gates/logs/vm2/9382-gate.out.
+
+## 2026-10-11T00:32Z (UTC), vm2 queue run
+
+- SOLR-9382 gate finished (gate end 2026-10-11T00:27:03Z). Green at packaged head 2952bae9d3 (local only). Proof leg failed by content as predicted: testGlobExpandsToMatchingFiles, TestReplicationConfFileGlob.java:50. Focused tests tests=4 failures=0, module check rc 0. Receipt receipts/SOLR-9382.md written, job and claim marked DONE.
+- Next claimable for vm2 is round 1 job 10 (SOLR-9865/17287 recount). Not claimed in this run.
