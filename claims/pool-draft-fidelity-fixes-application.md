@@ -7,5 +7,5 @@
 - Staffing: 2, as the assignment says, split by report. Slice A: the CLI, Security, Build/docs and Metrics report and the Configsets, Query parsing and Schema and analysis report. Slice B: the Core admin, Replication and backup and Spellcheck report and the Search components and eDisMax report. Slice-level claims by fidelity round are fine, as the assignment allows.
 - Scope: direct wording and citation fixes only under `pr-drafts/`, as the assignment's method says. Claims, numbers, dates, heads, scope statements and decisions are flagged, not applied. No edit to receipts, material, other reports, branch code or live PR text. No build or test run.
 - Deliverable: `reports/draft-fidelity-fixes-application.md`, with the counts per round, every direct edit and every flagged item.
-- Heartbeat: 2026-10-11T21:04Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T21:04Z (claim taken); both slices reported and the diff was checked.
+- Status: DONE, 2026-10-11. Deliverable: `reports/draft-fidelity-fixes-application.md`. 239 items: 123 applied (+1 split), 17 already settled, 98 flagged. Some applied edits touch claims beyond the assignment's rule; they are listed in the report for the main side to confirm or revert. Nothing was posted, filed, built or pushed to a submit branch.
