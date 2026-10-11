@@ -1,0 +1,86 @@
++ app_path=./gradlew
++ APP_HOME=./
++ '[' -h ./gradlew ']'
++ APP_BASE_NAME=gradlew
+++ cd -P ./
+++ printf $'%s\n' /c/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix
++ APP_HOME=/c/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix
++ MAX_FD=maximum
++ cygwin=false
++ msys=false
++ darwin=false
++ nonstop=false
++ case "$(uname)" in
+++ uname
++ msys=true
++ CLASSPATH=/c/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle/wrapper/gradle-wrapper.jar
++ '[' -n '/c/Users/shaninna/AppData/Local/Programs/Eclipse Adoptium/jdk-21.0.11.10-hotspot' ']'
++ '[' -x '/c/Users/shaninna/AppData/Local/Programs/Eclipse Adoptium/jdk-21.0.11.10-hotspot/jre/sh/java' ']'
++ JAVACMD='/c/Users/shaninna/AppData/Local/Programs/Eclipse Adoptium/jdk-21.0.11.10-hotspot/bin/java'
++ '[' '!' -x '/c/Users/shaninna/AppData/Local/Programs/Eclipse Adoptium/jdk-21.0.11.10-hotspot/bin/java' ']'
++ DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
++ GRADLE_TEMPDIR=/c/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/.gradle/tmp
++ mkdir -p /c/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/.gradle/tmp
++ '[' false = true -o true = true ']'
+++ cygpath --path --mixed /c/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/.gradle/tmp
++ GRADLE_TEMPDIR=C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/.gradle/tmp
++ DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m" "-Djava.io.tmpdir=C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/.gradle/tmp"'
++ '[' false = true -o true = true ']'
+++ cygpath --path --mixed /c/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix
++ APP_HOME=C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix
++ GRADLE_WRAPPER_JAR=C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle/wrapper/gradle-wrapper.jar
++ '[' '!' -e C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle/wrapper/gradle-wrapper.jar ']'
++ '/c/Users/shaninna/AppData/Local/Programs/Eclipse Adoptium/jdk-21.0.11.10-hotspot/bin/java' C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/build-tools/build-infra/src/main/java/org/apache/lucene/gradle/WrapperDownloader.java C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle/wrapper/gradle-wrapper.jar
+Downloading gradle-wrapper.jar from https://raw.githubusercontent.com/gradle/gradle/v8.10.2/gradle/wrapper/gradle-wrapper.jar
++ WRAPPER_STATUS=0
++ '[' 0 -eq 1 ']'
++ '[' 0 -ne 0 ']'
++ CLASSPATH=C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle/wrapper/gradle-wrapper.jar
++ '[' '!' -e C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle.properties ']'
++ '/c/Users/shaninna/AppData/Local/Programs/Eclipse Adoptium/jdk-21.0.11.10-hotspot/bin/java' C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/build-tools/build-infra/src/main/java/org/apache/lucene/gradle/GradlePropertiesGenerator.java C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle/template.gradle.properties C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle.properties
+Generating gradle.properties
++ GENERATOR_STATUS=0
++ '[' 0 -ne 0 ']'
++ false
++ false
++ false
++ case $MAX_FD in
+++ ulimit -H -n
++ MAX_FD=3200
++ case $MAX_FD in
++ ulimit -n 3200
++ false
++ true
+++ cygpath --unix '/c/Users/shaninna/AppData/Local/Programs/Eclipse Adoptium/jdk-21.0.11.10-hotspot/bin/java'
++ JAVACMD='/c/Users/shaninna/AppData/Local/Programs/Eclipse Adoptium/jdk-21.0.11.10-hotspot/bin/java'
++ for arg in "$@"
++ case $arg in
++ false
++ shift
++ set -- -version
++ export GIT_CONFIG_NOSYSTEM=1
++ GIT_CONFIG_NOSYSTEM=1
++ set -- -Dorg.gradle.appname=gradlew -classpath C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain -version
++ command -v xargs
+++ printf '%s\n' '"-Xmx64m" "-Xms64m" "-Djava.io.tmpdir=C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/.gradle/tmp"  '
+++ xargs -n1
+++ sed ' s~[^-[:alnum:]+,./:=@_]~\\&~g; '
+++ tr '\n' ' '
++ eval 'set -- -Xmx64m -Xms64m -Djava.io.tmpdir=C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/.gradle/tmp ' '"$@"'
+++ set -- -Xmx64m -Xms64m -Djava.io.tmpdir=C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/.gradle/tmp -Dorg.gradle.appname=gradlew -classpath C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain -version
++ exec '/c/Users/shaninna/AppData/Local/Programs/Eclipse Adoptium/jdk-21.0.11.10-hotspot/bin/java' -Xmx64m -Xms64m -Djava.io.tmpdir=C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/.gradle/tmp -Dorg.gradle.appname=gradlew -classpath C:/Users/shaninna/dev/Solr-issues/worktrees/gradlew-fix/gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain -version
+
+------------------------------------------------------------
+Gradle 9.7.0
+------------------------------------------------------------
+
+Build time:    2026-08-06 14:07:35 UTC
+Revision:      3defbfc59d757b873d787b2261de5c7f8a00970a
+
+Kotlin:        2.4.0
+Groovy:        4.0.32
+Ant:           Apache Ant(TM) version 1.10.17 compiled on April 6 2026
+Launcher JVM:  21.0.11 (Eclipse Adoptium 21.0.11+10-LTS)
+Daemon JVM:    C:\Users\shaninna\AppData\Local\Programs\Eclipse Adoptium\jdk-21.0.11.10-hotspot (no Daemon JVM specified, using current Java home)
+OS:            Windows 11 10.0 amd64
+
