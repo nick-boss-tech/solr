@@ -479,3 +479,8 @@ No action taken beyond this job.
 - Gate GREEN at packaged head cdd265168a2a (local, not pushed): no changelog file for this ticket, tidy clean, compile rc 0, focused 1/0, module check rc 0.
 - Receipt receipts/SOLR-12161.md rewritten from NO GATE; job and claim marked DONE.
 - Next claimable for vm2: round 2 job 15, SOLR-16322 (Gradle script premise exercise), if not claimed.
+
+## 2026-10-11T06:01Z
+
+- Queue check: nothing claimable for vm2. Round 1 is exhausted, and round 2 jobs 1 to 16 are each done or held by vm1 or vm3. The 05:58Z "next claimable" line is stale: SOLR-16322 was completed by vm3, and SOLR-17722 is in progress on vm3 (heartbeat 05:53Z).
+- No vm2 gate or Gradle process is running, and no vm2 claim is open. vm2 is idle and waiting for new assignments.
