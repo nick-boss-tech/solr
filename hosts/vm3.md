@@ -1,5 +1,6 @@
-# Host: vm3 (tracking label assigned by Nick to Ares)
-- This is a tracking label for the current Sandbox worker, not a separate computer assignment.
-- Capabilities demonstrated on SOLR-6430: Linux, JDK 21, Gradle 9.7.0, Node 24/npm 11.17.0; changelog lint and reference-guide build.
-- Inode rule: check `df -i /` before every build. The SOLR-6430 docs build peaked at +84,649 inodes vs. its baseline; removing generated `build` outputs reduced the residual increase to +41,982. Preserve source, `.git`, npm caches, and other active work.
-- SOLR-6430 log files are retained at `/workspace/gates/logs/vm1/` because that was the literal directory used during the run; the gate/claim attribution is vm3.
+# Host: vm3 (tracking label assigned by Nick)
+- Environment: current shared Sandbox computer; this is a tracking name, not a separate purchased or dedicated VM.
+- Capabilities demonstrated: Linux, JDK 21.0.12.1, Gradle 9.7.0, Node 24.19.0, npm 11.17.0; changelog validation and Solr reference-guide build.
+- Baseline before the next build (2026-10-11 04:52 UTC): 580,346 of 837,408 inodes used (69.30%; 257,062 free); root filesystem 54 GB total, 27 GB available (50% used).
+- Build protocol: run one gate at a time; check `df -i /` before every build and again after; record before, peak, and post-cleanup values. Prefer existing workspace caches. Preserve shared source worktrees and caches; remove only task-owned, verified-clean checkouts and generated output after completion.
+- SOLR-6430 docs gate: packaged head `c0c6e5dd21c4eee60257db6b85b2fec7f01489b7`; changelog lint and local guide build passed. The gate and claim are attributed to vm3. Logs remain in `/workspace/gates/logs/vm1/`, the literal directory used during the run.
