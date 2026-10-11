@@ -7,5 +7,5 @@
 - Staffing: 1, as the assignment says. One read-only subagent, started when a slot is free.
 - Scope: read-only on code and branches. The ticket draft is not edited; its bracketed open item stays until Nick rules. The only writes are the claim, the report and heartbeats.
 - Deliverable: `reports/combinedquerycomponent-maximum-fold-intent.md`: the evidence for each of the five questions, then a RECOMMENDATION with one of the three outcomes the assignment names, the confidence, and what evidence would change it.
-- Heartbeat: 2026-10-11T23:55Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T23:55Z (claim taken); subagent reported.
+- Status: DONE, 2026-10-11. Deliverable: `reports/combinedquerycomponent-maximum-fold-intent.md`. Recommendation: pose the maximum as an open question for the maintainer (the third outcome), with confidence about 85% that the repository cannot settle it. The ticket draft was not edited; its bracketed item stays until Nick rules.
