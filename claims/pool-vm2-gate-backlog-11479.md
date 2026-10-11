@@ -11,3 +11,4 @@
 - Logs: `/workspace/gates/logs/vm3/11479-*.log`.
 - Status: CLAIMED. No SOLR-11479 build or test has started; the preceding SOLR-17708 module check is verified complete and its gate, receipt, and claim are DONE.
 - Heartbeat: 2026-10-11T11:09:02Z (UTC), branch tip verified and live claims refreshed; next step is to publish this claim before topic-branch work.
+- Heartbeat: 2026-10-11T11:10:16Z (UTC), claim and gate status published by coordination commit `14c8eaa54bfed7c4ee64bd405cad5ffb5626d58a`; live `pr-prepare` verified at the same commit. No SOLR-11479 build or test has started. Next: prepare the isolated source worktree and inspect the branch diff against the recorded merge-base.
