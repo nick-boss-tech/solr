@@ -19,4 +19,5 @@ Branch: `solr-13705-submit` at packaged head `73504e7a8dcb58e8f77c976d98db600af6
 Merge-base: `9b3a84b1c460981eab09d8ffaef776acc4a184f8`.
 Started: 2026-10-11T07:28:08Z (UTC).
 Heartbeat: 2026-10-11T07:28:08Z (UTC).
-Status: CLAIMED. Packaging, changelog parse, tidy, Error Prone compile, proof leg, and focused head tests are complete; module check and receipt remain.
+Status: DONE, GATE GREEN at 2026-10-11T07:49:43Z (UTC), packaged head `73504e7a8dcb58e8f77c976d98db600af6fc5ced`; receipt: `receipts/SOLR-13705.md`.
+DONE: 2026-10-11T07:49:43Z (UTC), outcome GATE GREEN; topic head verified live after validation.
