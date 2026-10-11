@@ -584,3 +584,8 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 tranche 1 is DONE, BLOCKED, or not claimable; round 2 is DONE or BLOCKED (SOLR-10667 and SOLR-12347 by environment, SOLR-14187 on a proof decision). No gradle process running and no open vm2 claim; vm2 is idle.
 - Change seen: owner paused, then released, the vm3 claims (commits 352b841080 and 2929784884, 14:10:34Z). SOLR-8628 premise claim is released, not DONE, and not a vm2 job. The SOLR-5262 first gate is now unclaimed, but gates/SOLR-5262.md still reads BLOCKED (environment) and it is not in the vm2 round 1 or round 2 lists, so vm2 does not claim it.
+
+## 2026-10-11T14:40Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 have no open job for vm2; every item is DONE, BLOCKED, or held by vm1 or vm3. No gradle process running and no open vm2 claim; vm2 is idle.
+- Change seen: commit 93df91255c (Nick Shanin) records vm3 as DOWN in hosts/vm3.md, with no new claims on vm3 until Nick says it is back. Its earlier releases of SOLR-8628 (premise) and SOLR-5262 (gate) stand. Neither is in the vm2 backlog lists, so vm2 does not take them.
