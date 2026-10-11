@@ -15,8 +15,8 @@ DONE: 2026-10-11T02:07:48Z (UTC), outcome PREMISE HELD.
 
 Claimant host: vm3. Assignment: assignments/pool-shared-gate-backlog-buffer.md. Job: gates/SOLR-13705.md.
 Capability tags: gate. Staffing: 1.
-Branch: `solr-13705-submit` at `5f141fb2af381801f58139d4f5739ff0354a244f` (live tip verified 2026-10-11T07:28:08Z).
+Branch: `solr-13705-submit` at packaged head `73504e7a8dcb58e8f77c976d98db600af6fc5ced` (pushed and verified live).
 Merge-base: `9b3a84b1c460981eab09d8ffaef776acc4a184f8`.
 Started: 2026-10-11T07:28:08Z (UTC).
 Heartbeat: 2026-10-11T07:28:08Z (UTC).
-Status: CLAIMED. The prior premise run is complete and holds; packaging and full-gate validation remain.
+Status: CLAIMED. Packaging is complete at the live head; changelog parse and full-gate validation remain.
