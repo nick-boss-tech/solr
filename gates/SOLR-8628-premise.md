@@ -2,7 +2,10 @@
 
 - Branch: solr-8628-submit. Head: ce8211e05e062444e7afc1c5ea33fb6eff581d8f (live tip, verified by ls-remote 2026-10-11; matches receipts/SOLR-8628.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules.
-- Status: UNCLAIMED.
+- Status: CLAIMED by vm3 at 2026-10-11T11:43:56Z (UTC); premise run only.
+- Runner: vm3 (Linux, JDK 21, Gradle 9.7.0).
+- Worktree: `/workspace/gates/solr-8628-premise-build`.
+- Logs: `/workspace/gates/logs/vm3/8628-premise-*.log`.
 - Capability tags: premise-run.
 - Job type: premise run only. Receipt status is NO GATE, premise unverified. This job settles the premise; it runs no gate steps and removes nothing from the branch. A separate first gate job follows only if the premise holds, as stated below.
 - What the branch does: in solr/core/src/java/org/apache/solr/core/SolrCore.java (`initIndex`, branch lines 856-874), a directory holding only `write.lock` counts as no index, so a core creates a fresh index over it. The branch's scenario test is `testCreateCoreOverIndexDirWithOnlyWriteLock` in solr/core/src/test/org/apache/solr/core/TestCoreContainer.java (org.apache.solr.core.TestCoreContainer in :solr:core; package read from the branch's test file by grep, per the FQCN rule). The branch still carries SOLR-8628-TESTING.md; this run does not remove it.
