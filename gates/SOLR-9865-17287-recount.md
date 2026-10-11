@@ -2,7 +2,7 @@
 
 - Branches and heads: solr-9865-submit at 4937608bb181efae104c0d6f0257f445af50bf52; solr-17287-submit at 6957daf82610d6f09c533297cceec173a46e82a7 (both live tips, verified by ls-remote 2026-10-10).
 - Intended host: vm2. Any capable Linux host may claim if vm2 is busy (WORKFLOW.md).
-- Status: CLAIMED by vm2 at 2026-10-11T00:51:26Z (UTC).
+- Status: DONE 2026-10-11T01:12:30Z (UTC), vm2. Outcome: count confirmed at 4 for TestRestoreCore at both heads (4937608bb18: 4 tests, 0 failures; 6957daf8261: 4 tests, 0 failures; fresh JUnit XML in /workspace/gates/logs/vm2/recount-9865.log and recount-17287.log).
 - Job type: focused settling run (one run at each head). Not a gate: no tidy, compile, proof or module-check steps.
 - Question to settle: both receipts record TestRestoreCore at 4 tests, and the total of 11 in the SOLR-9865 receipt depends on that count; the head files on both branches declare 3 @Test methods. The drafts for both tickets carry a [CONFIRM: count] placeholder that stays until this count is confirmed (Replication and backup round 1 answers, main-side work owed, item 1). One confirmation settles both.
 - Run shape: at each head, run TestRestoreCore alone in :solr:core and count the tests from the fresh JUnit XML the run produces (claimant confirms the class's exact package by grep; it is the TestRestoreCore class both branches' gates ran). Record per head: the XML test count, the testcase names, and whether any name carries a parameter suffix or a repeated invocation that explains 4 from 3 declared methods.
@@ -11,6 +11,6 @@
 
 ## Step checklist
 
-- [ ] TestRestoreCore at the SOLR-9865 head, count from fresh JUnit XML
-- [ ] TestRestoreCore at the SOLR-17287 head, count from fresh JUnit XML
-- [ ] both receipts corrected or confirmed, job and claim marked DONE
+- [x] TestRestoreCore at the SOLR-9865 head, count from fresh JUnit XML
+- [x] TestRestoreCore at the SOLR-17287 head, count from fresh JUnit XML
+- [x] both receipts corrected or confirmed, job and claim marked DONE

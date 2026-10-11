@@ -389,3 +389,5 @@ No action taken beyond this job.
 
 - SOLR-9382 gate finished (gate end 2026-10-11T00:27:03Z). Green at packaged head 2952bae9d3 (local only). Proof leg failed by content as predicted: testGlobExpandsToMatchingFiles, TestReplicationConfFileGlob.java:50. Focused tests tests=4 failures=0, module check rc 0. Receipt receipts/SOLR-9382.md written, job and claim marked DONE.
 - Next claimable for vm2 is round 1 job 10 (SOLR-9865/17287 recount). Not claimed in this run.
+
+- 2026-10-11T01:12Z: vm2 claimed and finished round 1 job 10 (TestRestoreCore recount, SOLR-9865 and SOLR-17287). Count confirmed at 4 at both heads, 0 failures from fresh JUnit XML; receipts updated. Next claimable for vm2: round 1 job 11 (SOLR-11650 base run), then jobs 12 and 13.
