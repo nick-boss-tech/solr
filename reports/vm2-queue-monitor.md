@@ -682,3 +682,11 @@ No action taken beyond this job.
 
 - Push: SOLR-4399 fast-forward de6cc6b27e..82c0c11373 to solr-4399-submit, under the main-side go in gates/SOLR-4399.md. Remote confirmed at 82c0c11373d. Job and claim records updated.
 - Queue check: round 1 items are all DONE or claimed by another host; round 2 has no unclaimed, unblocked item for vm2 (SOLR-10667, SOLR-12347 BLOCKED). Shared-buffer items remain unclaimed and are not in vm2 round order, so not taken. No gradle process; vm2 is idle after this push.
+
+## 2026-10-11T21:37Z (gate backlog coordinator run)
+
+- Finished: SOLR-10641 gate GREEN at fbc1f47b2808 (gate 21:04Z to 21:22Z). Receipt, job DONE and claim DONE pushed (becf6d9a61). Proof leg inconclusive by construction, 9/0 at merge base.
+- Verified: SOLR-4399 receipt, job DONE and claim DONE on origin; fork tip 82c0c11373 matches. SOLR-10390 gate green at 5a86f908 by vm3, but its receipt had not landed; vm2 wrote it on verification.
+- Restocked: SOLR-3865, SOLR-4754, SOLR-8554 job files added to the buffer (1683e01133). No other candidate qualified: the remaining NO GATE tickets are retired, parked, held, blocked, or already gated.
+- Claimed: SOLR-3865 (packaging plus first gate). Packaged head f483bc4c32 pushed to the fork as a fast-forward and verified. Gate running from 21:37:20Z, log /workspace/gates/logs/vm2/3865-gate.out, still in tidy at this entry.
+- Next claimable after SOLR-3865: SOLR-4754 (compile-level proof), then SOLR-8554 (premise run first). Blocked and skipped: SOLR-5589, 6711, 1877, 17612, 8430, 13097, plus 10667 and 12347 (environment).
