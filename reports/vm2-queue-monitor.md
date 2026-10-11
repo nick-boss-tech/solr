@@ -713,3 +713,8 @@ No action taken beyond this job.
 ## 2026-10-11T22:49:15Z (vm2 cron, busy check)
 
 - Busy: SOLR-8554 gate running (tidy rc 0, changelog parse OK, now in Error Prone compile); claim heartbeat 2026-10-11T22:32Z, under 60 minutes. No new claim, no gate launched. Next run resumes at GATE END.
+
+## 2026-10-11T23:00Z (vm2 cron, busy check)
+
+- Busy: SOLR-8554 gate running from 22:47:19Z (changelog parse OK, tidy rc 0 with 1 changed, compile rc 0, proof leg rc 1 by content: three "cannot find symbol" at ForceLeaderWaitTest lines 52, 63, 73); focused-head step in progress, GATE END not yet written. Gradle process live; claim heartbeat 22:32Z, under 50 minutes.
+- Nothing finished or claimed this run. Buffer unclaimed: SOLR-10234 and SOLR-11939 only (2, below the 3 target); restock due on the next idle run.
