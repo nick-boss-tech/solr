@@ -6,3 +6,5 @@ Started: 2026-10-11T02:09:11Z (UTC).
 Branch: solr-10882-submit at 83fc3dfeb24b875639150579a2f8aeb35b7d6a9c (live tip, verified by ls-remote at claim time). Merge-base with origin/main: e044bf20b405b8ca985730be3553d77d1fc8ff31.
 
 Heartbeat: 2026-10-11T02:09:11Z.
+
+Heartbeat: 2026-10-11T02:23:40Z. Premise HOLDS (base fails arrayMixedTypesSortTest with ClassCastException at ArrayEvaluatorTest.java:148; head passes 7/7). Packaged head 5d7d07a5b1 local. Gate running, log /workspace/gates/logs/vm2/10882-gate.out.
