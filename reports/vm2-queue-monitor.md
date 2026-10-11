@@ -701,3 +701,11 @@ No action taken beyond this job.
 
 - Busy: SOLR-4754 gate running (proof leg, production at merge-base), started 22:04:31Z, no GATE END yet; Gradle process live. Claim heartbeat 22:04Z is current. Nothing finished or claimed this run.
 - Next claimable after SOLR-4754: SOLR-8554 (premise run first), then SOLR-10234, SOLR-11939.
+
+## 2026-10-11T22:50Z (vm2 cron, gate coordinator run)
+
+- Finished: SOLR-4754 gate GREEN at e4ea4bfde80e (compile-level proof: six "normalizeHostName has private access" errors at the merge base; focused 1 run, 0 failures; module check green). Receipt receipts/SOLR-4754.md, job DONE and claim DONE pushed (95a49ad808).
+- Claimed: SOLR-8554 (premise run, packaging, first gate). Premise held: head 3 run, 0 failures; base "cannot find symbol waitForActiveLeader" at three lines. Packaged head f16c7fba78cd pushed to the fork as a fast-forward from 32697b6c3f82 and verified. Premise record pushed (7b40d81840).
+- Gate state: SOLR-8554 gate running from 22:47:19Z, log /workspace/gates/logs/vm2/8554-gate.out, in tidy at this entry. Claim heartbeat current.
+- Queue: after SOLR-8554, unclaimed and claimable are SOLR-10234 and SOLR-11939 only (2, below the 3 target). Top-up check: NO GATE receipts 9039, 9759, 9831, 9818 are Selenium or OSX review-lane items routed to the review side; 17281 is parked; no new candidate qualifies. Shortfall recorded for the main agent.
+- Next claimable: SOLR-10234 (premise run first), then SOLR-11939.
