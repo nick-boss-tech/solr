@@ -88,7 +88,7 @@ Test coverage: none of `CombinedQueryComponentTest`, `DistributedCombinedQueryCo
 
 ### Fix spec (spec only, not implemented)
 
-1. **Move the blocks.** Move the folds at 342 and 343, and the approximate block at 383 to 387, to after the skip at 399. Then the skip decides for both.
+1. **Move the blocks.** Move the folds at 342 and 343, and the approximate block at 381 to 387, to after the skip at 399. Then the skip decides for both. (Range corrected from 383 to 387 by the main-side adjudication of the ticket review, 2026-10-11: lines 381 and 382 declare the ath variable, so the block the fix must move starts at 381. The Evidence section above already stated 381 to 387.)
 2. **Change the fallback operand.** The fallback must use the shard's own count, `docs.getNumFound()`, not the running total. This is required, not optional: a reorder alone leaves the double count. `docs` can be null, so the fallback needs a null guard that gives 0.
 3. **Exactness fold.** Replace the write at 343 with `hitCountIsExact = hitCountIsExact && !Boolean.FALSE.equals(docs.getNumFoundExact());`, which is equivalent to the `QueryComponent` `if` form.
 4. **Per-query zero-count rule (optional).** The fixed `QueryComponent` marks the merged response inexact when no shard was merged and a skipped shard reported hits (1242). A per-query form needs an any-merged flag and a skipped-reported flag per query, plus a decision on whether a skipped query marks the shared flag inexact.
