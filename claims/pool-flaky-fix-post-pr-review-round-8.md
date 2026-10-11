@@ -12,3 +12,4 @@
 - Deliverables: `reports/flaky-fix-post-pr-review-round-8.md` (one verdict per slice), with part reports `reports/flaky-fix-post-pr-review-round-8-s1.md` and `-s2.md`.
 - Scope: read-only. Live PRs are read with the read-only GitHub wrapper only. No PR body edit, comment, close, branch edit or Jira write. No builds, Gradle, tests or gate runs.
 - Heartbeat: 2026-10-11T00:17:39Z (claim taken).
+- Status: DONE, 2026-10-11. Deliverables: `reports/flaky-fix-post-pr-review-round-8.md` (verdicts) and the part reports `reports/flaky-fix-post-pr-review-round-8-s1.md` (SOLR-18530: STILL OPEN, 2 items), `-s2.md` (SOLR-18532: STILL OPEN, 1 item). Nothing posted, edited on a PR, or pushed to a submit branch.
