@@ -433,3 +433,11 @@ No action taken beyond this job.
 - Gate GREEN at packaged head efb1e6717f9 (local, TESTING.md removed, not pushed). Changelog OK, tidy clean, compile rc 0, focused TestDocumentObjectBinder 6/0, module check rc 0.
 - Receipt receipts/SOLR-10364.md written; job and claim marked DONE. Interaction with SOLR-4422 noted (import-block textual conflict only).
 - Next claimable for vm2: round 2 job 5, SOLR-11356.
+
+## 2026-10-11T03:51Z
+
+- Claimed round 2 job 5, SOLR-11356 (premise run, then first gate), 03:25Z. Proof base is cabedd1d96 (the branch sits on it), not the origin/main merge-base e044bf20b405.
+- Premise holds: base (ConcurrentUpdateJettySolrClient at cabedd1d96, branch test kept) fails testRequestsWithDifferentCredentialsAreNotSentOnOneStream with bob's document sent under alice's identity; head passes 12/0.
+- Gate GREEN at packaged head 6120dae28d04 (local, handoff note removed, not pushed). Changelog OK, tidy clean, compile rc 0, focused ConcurrentUpdateJettySolrClientTest 12/0, module check rc 0.
+- Receipt receipts/SOLR-11356.md rewritten from NO GATE to GREEN, with the registration provenance kept; job and claim marked DONE.
+- Next claimable for vm2: round 2 job 6, SOLR-14187.
