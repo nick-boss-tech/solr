@@ -16,7 +16,7 @@
  */
 package org.apache.solr.core;
 
-import java.io.File;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Properties;
@@ -33,7 +33,8 @@ public class TestCoreDescriptorImplicitProperties extends SolrTestCase {
   public void testUlogDirDefaultsToDataDir() {
     Properties props = descriptor(Map.of()).getSubstitutableProperties();
     assertEquals("c1", props.getProperty("solr.core.name"));
-    assertEquals("data" + File.separator, props.getProperty("solr.core.dataDir"));
+    assertEquals(
+        "data" + FileSystems.getDefault().getSeparator(), props.getProperty("solr.core.dataDir"));
     assertEquals(props.getProperty("solr.core.dataDir"), props.getProperty("solr.core.ulogDir"));
   }
 
