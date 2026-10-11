@@ -9,7 +9,7 @@ Verdicts, one per defect (they do not all have to agree):
 
 CONFIRMED BY RUN: none. No run exists for this component. The run spec below is for a Linux host and was not executed here.
 
-Ref read: main `d76fc14b9857e77b830d7a82514b28c523a239c2`. The merge-base `cabedd1d968059215188f4e7563fb303241899ed` and the fixed branch head `73d20a0f939f0ddbaea89a9bd590ce9527f7dd29` have the identical `CombinedQueryComponent.java`, so the verdicts hold on both sides.
+Ref read: main `d76fc14b9857e77b830d7a82514b28c523a239c2`. The older main snapshot `cabedd1d968059215188f4e7563fb303241899ed` (an ancestor of the branch base, not the merge-base) and the fixed branch head `73d20a0f939f0ddbaea89a9bd590ce9527f7dd29` have the identical `CombinedQueryComponent.java`, so the verdicts hold on both sides.
 
 ## Evidence
 

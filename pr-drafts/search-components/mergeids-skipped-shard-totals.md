@@ -1,7 +1,7 @@
 # Staging notes (not part of the PR text)
 
 - Ticket number pending: Nick files the Jira ticket himself. The title below is a placeholder without a ticket number, and the Jira link line and the changelog line in the body carry a SOLR-XXXXX placeholder until he files it. The branch is `mergeids-skipped-shard-totals` on the fork; it renames to solr-<number>-submit at packaging, and the changelog fragment is created then.
-- Proof is written at gated head 9e85ce5c162086ae806f617419c4405512792dde (full checks green there on 2026-10-11; receipts/mergeids-fix.md). The change from 73d20a0f939 is the test file only (four pin tests, no production change), so the production line citations are the same lines at the new head.
+- Proof is written at gated head 9e85ce5c162086ae806f617419c4405512792dde (gated GREEN there on 2026-10-11: `:solr:core:check -x test` passed with tests excluded, and the focused test class ran 17 of 17 in the gate's test step; receipts/mergeids-fix.md). The change from 73d20a0f939 is the test file only (four pin tests, no production change), so the production line citations are the same lines at the new head.
 - Title placeholder: "Fix mergeIds counting a skipped partial shard in the merged totals, and the approximateTotalHits fallback adding the running total"
 
 ---
@@ -41,7 +41,7 @@ The fallback change is one line (commit d211794596b) with its own tests, and the
 - The tests work at the merge level with fabricated shard responses, the project's own harness from SOLR-15595; no end-to-end MiniSolrCloud run reproduces a timed-out shard producing this shape. The arithmetic is pinned at the merge level, as in the ticket.
 - `CombinedQueryComponent.mergeIds` folds its per-query totals in before the same partial skip, its approximateTotalHits fallback adds the running per-query total in the other direction (2 then 7 where 5 is correct, in arrival order; the other order gives 3 then 8), and its exactness fold is inverted. It is not changed here; I am happy to open a follow-up ticket and PR for it on request.
 
-Changelog: [changelog/unreleased/SOLR-XXXXX.yml](https://github.com/nick-boss-tech/solr/blob/9e85ce5c162086ae806f617419c4405512792dde/changelog/unreleased/SOLR-XXXXX.yml)
+Changelog: changelog/unreleased/SOLR-XXXXX.yml (no fragment exists on the branch yet; it is created at packaging, once the ticket is filed and has its number)
 
 ### AI assistance
 

@@ -7,7 +7,7 @@ Subject: branch `mergeids-skipped-shard-totals`, head `73d20a0f939f0ddbaea89a9bd
 ## Gate state this round relied on
 
 - **`d211794596b`: GREEN**, per `receipts/mergeids-fix.md` (gate runner done 2026-10-11T19:22:52Z; focused class 9 tests, 0 failures; `:solr:core:check -x test` rc=0). The gate logs are on vm1 and were not readable here, so this rests on the receipt's record.
-- **`73d20a0f939`: no green gate on record.** It is GATE PENDING (`reports/mergeids-fix-review-response.md` line 3; `receipts/mergeids-fix.md` line 29). Its only pass evidence is the receipt's local focused run (13 tests, 0 failures, from vm1 logs). That is not a gate.
+- **`73d20a0f939`: no green gate on record.** It is GATE PENDING (`reports/mergeids-fix-review-response.md` line 3; `receipts/mergeids-fix.md` line 29). (Annotation, 2026-10-11, round 4 settlement: the re-gate at this head finished GREEN, GATE RUNNER DONE 2026-10-11T20:36:48Z, as receipts/mergeids-fix.md line 29 now records; the GATE PENDING statement was true when this report was written.) Its only pass evidence is the receipt's local focused run (13 tests, 0 failures, from vm1 logs). That is not a gate.
 - The receipt's heading "Gate at head d211794596: GREEN" and "head 9 of 9" refer to the old head. The response's opening paragraph should say so.
 
 ## One line per item

@@ -36,7 +36,7 @@ h2. Mechanism
  * {{numFound += docs.getNumFound()}} at line 1171
  * the {{hitCountIsExact}} fold is at line 1174
 
-The skip itself is at line 1193: {{if (thisResponseIsPartial && sortFieldValues.size() == 0 && needsUnmarshalling) continue;}}. The only downward adjustment, {{numFound--}} at line 1225, runs per document when the merge queue rejects one, so it never compensates for a shard that was skipped wholesale. {{setResultIdsAndResponseDocs}} then writes the accumulated values into the response, including {{setNumFoundExact(hitCountIsExact)}}.
+The skip itself is at line 1193: {{if (thisResponseIsPartial && sortFieldValues.size() == 0 && needsUnmarshalling) continue;}}. The only downward adjustment, {{numFound--}} at line 1225, runs per document when the queue push returns false, which happens only for a document id already pushed (from any shard), so it never compensates for a shard that was skipped wholesale. {{setResultIdsAndResponseDocs}} then writes the accumulated values into the response, including {{setNumFoundExact(hitCountIsExact)}}.
 
 The skipped shard does not rescue the exactness flag: in the SOLR-14758 scenario the timeout lands in {{doFieldSortValues}} after the shard's search has completed, so the shard's own count is exact and it sends {{numFoundExact=true}}; more generally the shard's exact flag comes from the DocList hit-count relation, which the partial-results state does not downgrade. So {{hitCountIsExact}} survives the merge. The extreme case is every shard skipped: on main the merged count is then the skipped shards' sum (5 for shards reporting 2 and 3) and is reported exact. After the fix the count is zero, and that zero must not be reported exact when a skipped shard reported hits.
 
