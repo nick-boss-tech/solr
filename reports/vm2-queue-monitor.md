@@ -490,3 +490,10 @@ No action taken beyond this job.
 - Pushed the packaged SOLR-14187 head 29023ec1ec to solr-14187-submit on the fork (fast-forward from 45b0f7ce34; the job file asked vm2 to push on green). Gate file, claim, and receipt updated to DONE and GREEN.
 - Branch change seen: SOLR-5011 gate finished green on vm1 at 3fd85bedef (commit 4c88908bde). Not a vm2 job.
 - Queue check: nothing claimable for vm2. Round 1 and round 2 are exhausted for vm2; SOLR-17722 remains claimed by vm3 (heartbeat 05:53Z).
+
+## 2026-10-11T06:41Z
+
+- Queue check: nothing claimable for vm2. No gradle process running and no open vm2 claim.
+- Change seen: SOLR-17722 is now BLOCKED (vm3, 06:29Z). Its base-only premise test task ended with 6 NPE failures in inherited HttpSolrClientTestBase.testQuery* methods, a harness problem with the scratch subclass, not premise evidence. It needs main-agent investigation before any relaunch.
+- Still blocked by environment, not claimable: SOLR-10667 and SOLR-12347 (npm step @babel/plugin-syntax-dynamic-import fails in jsClientDownloadDeps on every fresh dist; relaunch already used on each).
+- New assignments on the branch (pool-admin-ui-test-selection, pool-flaky-16630 round 2) are not in the vm2 backlog and are left to their tagged hosts.
