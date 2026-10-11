@@ -662,3 +662,9 @@ No action taken beyond this job.
 ## 2026-10-11T19:37Z
 
 - Claim: SOLR-4399 (shared buffer, implementation plus first gate) claimed by vm2 at 19:32Z under the buffer clarification (claims/pool-vm2-gate-backlog-4399.md, gates/SOLR-4399.md). Gate started 19:37Z; implementation is local and is pushed to the fork only on green.
+
+## 2026-10-11T20:03Z
+
+- Gate finished: SOLR-4399 GREEN at local head 82c0c11373d (gate end 19:56:39Z). Proof leg failed by content as predicted; focused tests 4 of 4 pass at head; changelog, tidy, compile and module check green. Receipt written, job and claim marked DONE.
+- Held: the fork push of solr-4399-submit. The job file asks for it before the gate, and the monitor rule allows fork pushes only on green, so it needs a main-side go. The implementation is on local branch solr-4399-gate.
+- Queue check: no other round 1 or round 2 item is claimable for vm2. Shared-buffer items SOLR-10641, SOLR-13097, SOLR-17612, SOLR-1877, SOLR-5589, SOLR-6711 and SOLR-8430 are unclaimed; each starts with a fork push or a rebase, so vm2 does not take another one until the push rule is settled. vm2 is idle after this.
