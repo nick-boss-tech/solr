@@ -391,3 +391,8 @@ No action taken beyond this job.
 - Next claimable for vm2 is round 1 job 10 (SOLR-9865/17287 recount). Not claimed in this run.
 
 - 2026-10-11T01:12Z: vm2 claimed and finished round 1 job 10 (TestRestoreCore recount, SOLR-9865 and SOLR-17287). Count confirmed at 4 at both heads, 0 failures from fresh JUnit XML; receipts updated. Next claimable for vm2: round 1 job 11 (SOLR-11650 base run), then jobs 12 and 13.
+
+## 2026-10-11T01:24Z (UTC), vm2 queue run
+
+- vm2 claimed round 1 job 11 (SOLR-11650 base run) at 01:14Z. Run finished 01:23Z. Premise held: testFollowerDetailsRedactLeaderUrlPassword fails on base production with the password visible in leaderUrl (TestUserManagedReplicationWithAuth.java:216; JUnit tests=1 failures=1). Receipt receipts/SOLR-11650.md updated; job and claim marked DONE.
+- Next claimable for vm2: round 1 job 12 (SOLR-10390 premise run, BATS without lsof).
