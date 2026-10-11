@@ -17,6 +17,8 @@
 package org.apache.solr.client.solrj.io.stream.metrics;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.format.DateTimeParseException;
 import java.util.UUID;
 import org.apache.solr.client.solrj.io.Tuple;
 import org.apache.solr.client.solrj.io.stream.expr.Explanation;
@@ -72,6 +74,21 @@ public abstract class Metric implements Expressible {
    * The aggregated value. Numeric metrics return a {@link Number}; a metric that aggregates
    * non-numeric values (for example min/max over strings) may return another type.
    */
+  /**
+   * Compares two string metric values. When both values parse as ISO-8601 instants, they are
+   * compared as instants: the text order of two instants in the same second differs from the time
+   * order when one of them is printed without fractional digits ({@code 2018-03-01T10:00:00Z} sorts
+   * after {@code 2018-03-01T10:00:00.250Z} as text, though it is the earlier time). When either
+   * value does not parse as an instant, the plain text order is used.
+   */
+  protected static int compareStringValues(String a, String b) {
+    try {
+      return Instant.parse(a).compareTo(Instant.parse(b));
+    } catch (DateTimeParseException e) {
+      return a.compareTo(b);
+    }
+  }
+
   public abstract Object getValue();
 
   public abstract void update(Tuple tuple);

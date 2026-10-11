@@ -104,9 +104,9 @@ public class MinMetric extends Metric {
       }
     } else if (o instanceof String s) {
       // Non-numeric values, such as the ISO-8601 strings a facet() min/max emits for a date
-      // field, are compared lexicographically; for same-format ISO-8601 dates that order is
-      // also chronological.
-      if (stringMin == null || s.compareTo(stringMin) < 0) {
+      // field. Two values that both parse as instants are compared as instants; any other
+      // pair is compared as text. See Metric.compareStringValues.
+      if (stringMin == null || compareStringValues(s, stringMin) < 0) {
         stringMin = s;
       }
     }
