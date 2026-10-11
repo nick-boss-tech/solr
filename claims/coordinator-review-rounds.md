@@ -8,4 +8,5 @@
 - Standing limits: subagent cap of 6 to 7 across all hosts; queue buffer target of at least two unclaimed review or draft assignments; VM3 is down, so nothing is assigned to it; GitHub Actions is unavailable.
 - Date: 2026-10-11.
 - Heartbeat: 2026-10-11T14:53Z (coordinator claim taken).
+- Heartbeat: 2026-10-11T20:17Z (refreshed; coordination is ongoing in this session: the mergeIds round 3 closed SATISFIED, the mergeIds fix review closed STILL OPEN, and scheduled checks run each cycle; vm2 had flagged the 14:53Z heartbeat as stale).
 - Status: ACTIVE.
