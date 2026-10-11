@@ -425,3 +425,11 @@ No action taken beyond this job.
 - Gate GREEN at packaged head 2ca0b3743427 (local, TESTING.md removed, not pushed). Changelog OK, tidy clean, compile rc 0, focused 2/0, 6/0, 18/0, module check rc 0.
 - Receipt receipts/SOLR-3498.md written; job and claim marked DONE.
 - Next claimable for vm2: round 2 job 4, SOLR-10364.
+
+## 2026-10-11T03:23Z
+
+- Claimed round 2 job 4, SOLR-10364 (premise run, then first gate), 02:58Z. Round 1 had no claimable vm2 job left.
+- Premise holds: base (DocumentObjectBinder at cabedd1d96, branch test kept) fails testSetFields with "Can not set java.util.Set field ... to ImmutableCollections$ListN"; head passes 6/0.
+- Gate GREEN at packaged head efb1e6717f9 (local, TESTING.md removed, not pushed). Changelog OK, tidy clean, compile rc 0, focused TestDocumentObjectBinder 6/0, module check rc 0.
+- Receipt receipts/SOLR-10364.md written; job and claim marked DONE. Interaction with SOLR-4422 noted (import-block textual conflict only).
+- Next claimable for vm2: round 2 job 5, SOLR-11356.
