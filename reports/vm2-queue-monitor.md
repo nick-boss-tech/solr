@@ -718,3 +718,12 @@ No action taken beyond this job.
 
 - Busy: SOLR-8554 gate running from 22:47:19Z (changelog parse OK, tidy rc 0 with 1 changed, compile rc 0, proof leg rc 1 by content: three "cannot find symbol" at ForceLeaderWaitTest lines 52, 63, 73); focused-head step in progress, GATE END not yet written. Gradle process live; claim heartbeat 22:32Z, under 50 minutes.
 - Nothing finished or claimed this run. Buffer unclaimed: SOLR-10234 and SOLR-11939 only (2, below the 3 target); restock due on the next idle run.
+
+## 2026-10-11T23:17Z (vm2 cron, gate coordinator run)
+
+- Finished: SOLR-8554 first gate ended 23:07:29Z, NOT GREEN at f16c7fba78. Changelog, compile, focused tests (3 run, 0 failures) and module check passed. Tidy left one formatting reflow in ForceLeader.java, so the tidy-clean step failed. Recorded in gates/SOLR-8554.md as a formatting-only finding. No receipt written from that run.
+- Fix: tidy fold-in 654c1a7c35 pushed to the fork as a fast-forward from f16c7fba78 (verified by ls-remote).
+- Gate state: re-gate at 654c1a7c35 running from 23:17:10Z, log /workspace/gates/logs/vm2/8554-gate2.out. Claim heartbeat 23:20Z.
+- Claimed: none this run (one gate at a time).
+- Queue: unclaimed and claimable are SOLR-10234 and SOLR-11939 only (2, below the 3 target). Blocked and skipped: SOLR-5589, 6711, 1877, 17612, 8430, 13097. No new candidate qualifies in the receipts this run; shortfall for the main agent.
+- Next claimable: SOLR-10234 (premise run first), then SOLR-11939.
