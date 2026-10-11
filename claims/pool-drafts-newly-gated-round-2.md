@@ -10,5 +10,5 @@
   - SOLR-6430 (build-docs): docs-only; the receipt is green on a docs-shaped gate. The Proof says exactly that.
 - Deliverables: `pr-drafts/solrj/SOLR-14187.md`, `pr-drafts/solrj/SOLR-11356.md`, `pr-drafts/build-docs/SOLR-6430.md`, and the part report `reports/drafts-newly-gated-round-2.md`.
 - Scope: draft text only. No PR, comment, Jira write or submit-branch edit. No builds, Gradle, tests or gate runs.
-- Heartbeat: 2026-10-11T05:47Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T05:47Z (claim taken); drafts reported (restarted after a stop).
+- Status: DONE, 2026-10-11, with holds. Deliverables: `pr-drafts/solrj/SOLR-14187.md`, `pr-drafts/solrj/SOLR-11356.md`, `pr-drafts/build-docs/SOLR-6430.md` and `reports/drafts-newly-gated-round-2.md`. Holds before posting: SOLR-14187 (no run date for the head test; packaged head not on the fork; changelog type), SOLR-11356 (packaged head not on the fork; the copy-the-headers Limit), SOLR-6430 (the changelog fragment the round report recommends dropping). Nothing was posted.
