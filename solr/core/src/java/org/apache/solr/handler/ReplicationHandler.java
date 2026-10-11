@@ -820,7 +820,8 @@ public class ReplicationHandler extends RequestHandlerBase
       }
       Path dir = slash < 0 ? configPath : configPath.resolve(name.substring(0, slash)).normalize();
       if (!dir.startsWith(configPath) || !Files.isDirectory(dir)) {
-        log.warn("Ignoring replication confFiles pattern '{}': not a directory in the config dir", name);
+        log.warn(
+            "Ignoring replication confFiles pattern '{}': not a directory in the config dir", name);
         continue;
       }
       List<String> matches = new ArrayList<>();

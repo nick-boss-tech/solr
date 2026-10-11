@@ -23,7 +23,7 @@ import org.apache.solr.client.api.model.FileMetaData;
 import org.apache.solr.common.util.NamedList;
 import org.junit.BeforeClass;
 
-/** Wildcards in the leader's replication {@code confFiles} (managed resources, language variants). */
+/** Wildcards in the leader's {@code confFiles}, such as managed resource variants. */
 public class TestReplicationConfFileGlob extends SolrTestCaseJ4 {
 
   @BeforeClass
