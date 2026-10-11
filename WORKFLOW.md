@@ -58,3 +58,7 @@ The Windows host never claims `gate`, `implementation`, `premise-run`, `settling
 ## Queue buffer
 
 Each queue keeps unclaimed work available so a host finishing a task finds the next one waiting (owner direction, 2026-10-10). Targets: at least 2 unclaimed review or draft assignments, and at least 3 unclaimed gate jobs from the shared backlog (assignments/pool-shared-gate-backlog-buffer.md). The main side tops the buffer up when it posts assignments or finishes review rounds; the queue check counts unclaimed items and reports when either queue runs dry.
+
+## Lane coordinators
+
+Since 2026-10-11 the pool has two lane coordinators (Nick approved): VM2 coordinates the gate backlog end to end, and the Windows agent coordinates the review rounds end to end. They hand work to each other through claims, gate job files and reports on this branch and keep the loop running without waiting for the main agent. PR openings and flips, new comment posts, the private records, and anything needing Nick's decision stay with the main agent; gate failures where tests executed are escalated, never relaunched by a coordinator. The full handoff, with roles, escalation rules, inherited standing rules and the state each coordinator picks up first, is at `material/coordinator-handoff.md`.
