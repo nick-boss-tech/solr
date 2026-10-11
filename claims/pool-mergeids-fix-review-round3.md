@@ -9,5 +9,5 @@
 - Gate state: `receipts/mergeids-fix.md` records GREEN at `d211794596b` and at `73d20a0f939`. The new head `9e85ce5c16` has its gate pending. The confirmation will say which state it relied on.
 - Scope: confirmation only. The branch, the ticket draft and the records are not edited. No build, test or gate on this host. No Jira, GitHub, email or comment write.
 - Deliverable: `reports/mergeids-fix-review-round3.md`, one line per item, then the verdict, SATISFIED or STILL OPEN.
-- Heartbeat: 2026-10-11T22:20Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T22:20Z (claim taken); both slices reported and checked.
+- Status: DONE, 2026-10-11. Deliverable: `reports/mergeids-fix-review-round3.md`, verdict STILL OPEN. Items 1 and 3 confirmed; findings on items 2, 4, 5 and 6 are for the main side (draft wording, the sort_values decline's stub wording, an arrival-order qualifier, and a stale gate annotation). The branch needs no change. Gate state: 73d20a0f939 GREEN; 9e85ce5c162 has no receipt entry. Nothing was edited, filed or posted.
