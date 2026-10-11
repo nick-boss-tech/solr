@@ -139,3 +139,22 @@ Existing classes do not fabricate shard responses. `CombinedQueryComponentTest` 
 - The seed format accepted by the runner.
 - The Mockito stub details and the exact `intDefault` value shape for `unmarshalSortValues`, to be checked when the test is written.
 - `populateNextCursorMarkFromMergedShards`, assumed a no-op without a cursor mark.
+
+---
+
+## Main-side run addendum (2026-10-11): all three defects CONFIRMED BY RUN
+
+The run spec above was executed on vm1 against unmodified main `d76fc14b9857e77b830d7a82514b28c523a239c2`, seed `C0FFEE42C0FFEE42`, with the probe class `org.apache.solr.handler.component.CombinedQueryComponentMergeTotalsTest` (kept in the vm1 worktree `~/workspace/solr-worktrees/cqc-premise`). Final run: 7 tests, 7 failures, 0 errors, every failure an assertion carrying the predicted wrong value. Evidence: log `~/workspace/tools/gcqc-premise3.log`; fresh JUnit XML copied to `~/workspace/tools/gcqc-premise-TEST-org.apache.solr.handler.component.CombinedQueryComponentMergeTotalsTest.xml`.
+
+Per defect:
+
+- **Skip ordering: CONFIRMED BY RUN.** Case P (partial shard, header approximateTotalHits 10, numFound 4, no sort_values_0; complete shard header 5, numFound 3): merged numFound expected 3, was **7**. Case P2 (same setup, approximate assertion): merged approximateTotalHits expected 5, was **15** (the skipped shard's 10 plus the merged shard's 5). The response-size assertion (3) sits after the totals assertions in both cases and was not reached; it is not needed for this verdict.
+- **Fallback: CONFIRMED BY RUN.** Case F (two complete shards, numFound 2 and 3, no approximateTotalHits headers, first shard flags maxHitsTerminatedEarly): merged numFound 5 (passed), merged approximateTotalHits expected 5, was **7** (2, then 2 + 3 folded again as the running total).
+- **Exactness fold: CONFIRMED BY RUN, inverted, both directions.** Case X1 (both per-query lists numFoundExact TRUE): merged flag expected TRUE, was **FALSE**. Case X2 (both FALSE): expected FALSE, was **TRUE**.
+
+**Maximum fold evidence (question left open by the report; not decided here).** Two extra cases ran the fallback scenario under two combiner queries, so each query's per-query total is wrong by a known amount, and the merged value was observed under both winners:
+- M1: q0 totals (correct 5, base 7), q1 totals (correct 11, base 21). Merged approximateTotalHits on base was **21**: exactly q1's own inflated per-query total. Merged numFound 11, as the maximum rule gives on both base and fixed code.
+- M2: q0 as in M1 (correct 5, base 7), q1 small (correct 2, base 3). Merged approximateTotalHits on base was **7**: exactly q0's inflated total.
+So in the run, the maximum fold **passes the winning query's error through unchanged, masks the losing query's error entirely, and never amplifies**: the merged value never exceeded the largest per-query wrong total, and was never a sum or product of the two errors. That matches the report's section 4 trace. Whether the maximum is the intended combined count stays open for Nick, as the report left it.
+
+**Harness adaptations from the spec, recorded:** (1) the response header map must be installed on the SolrQueryResponse (`addResponseHeader`) before mergeIds runs, as the request pipeline does; the spec's shape left it null. (2) `sort_values_0` is keyed by field name with the per-doc values in doc order (the unmarshal assert requires the field name), not keyed by doc id. (3) A real SortSpec replaces the mocked one (the mock's schema-fields stub cannot serve the merged shard's unmarshal), with a null schema-field slot for the score sort, as production builds it. (4) The probe closes its request after each test. No adaptation changed a case's setup numbers or expected values.
