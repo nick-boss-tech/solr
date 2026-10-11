@@ -88,8 +88,11 @@ because each restatement drifts a little wider than the evidence.
 Citations are real links, not bare text (Nick, 2026-10-08: he
 checked and the plain file:line citations do not render as links):
 link each file citation to the blob at the PR head SHA
-(github.com/nick-boss-tech/solr/blob/<head-sha>/<path>#L<a>-L<b>),
-and cross-repo PR references as full markdown links, never bare
+(github.com/nick-boss-tech/solr/blob/<head-sha>/<path>#L<a>-L<b>).
+Citations to code the change produces link the PR head SHA;
+citations to the pre-change symptom link the merge-base commit,
+and the text says so.
+Cross-repo PR references go as full markdown links, never bare
 #NNNN, which GitHub resolves against the wrong repo.
 
 Simple language (Nick, 2026-10-08: "Even AI does much better with
