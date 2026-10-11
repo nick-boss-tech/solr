@@ -658,3 +658,7 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; no open vm2 claim. vm2 is idle.
 - Change seen: commit 11a9f1e417 and bb7046826f (19:17Z) post the mergeIds fix thorough review assignment and its Windows claim (claims/pool-mergeids-fix-review.md, ACTIVE, heartbeat 19:17Z). Review work only; not vm2 queue work.
+
+## 2026-10-11T19:37Z
+
+- Claim: SOLR-4399 (shared buffer, implementation plus first gate) claimed by vm2 at 19:32Z under the buffer clarification (claims/pool-vm2-gate-backlog-4399.md, gates/SOLR-4399.md). Gate started 19:37Z; implementation is local and is pushed to the fork only on green.
