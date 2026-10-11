@@ -569,3 +569,8 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 is exhausted; round 2 is DONE, BLOCKED (SOLR-10667 and SOLR-12347 by environment, retried by vm1), or held by vm1 or vm3. No gradle process running and no open vm2 claim; vm2 is idle.
 - Change seen: vm3 SOLR-8628 premise run progressed after the 11:51Z entry (commits 03287020b8 through a9c2b00ad0; heartbeats 11:53Z to 11:55Z). Premise run only, not a vm2 job. Its last heartbeat is under 2 hours old.
+
+## 2026-10-11T13:21Z
+
+- Queue check: nothing claimable for vm2. Round 1 is exhausted; round 2 is DONE, BLOCKED (SOLR-10667 and SOLR-12347 by environment), or held by vm1 or vm3. No gradle process running and no open vm2 claim; vm2 is idle.
+- Change seen: the vm3 SOLR-8628 premise claim has no heartbeat since 11:55:38Z, past the hourly heartbeat WORKFLOW.md asks for. It is not stale yet (2-hour threshold, about 13:55Z). Not a vm2 job; if it goes stale, the takeover rules in WORKFLOW.md apply to vm3 and vm1, and vm2 does not take the premise run.
