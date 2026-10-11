@@ -462,3 +462,12 @@ No action taken beyond this job.
 - BLOCKED, environment: base and head assembleDist both fail in the js-client npm step ("Cannot find package '@babel/plugin-syntax-dynamic-import'"), same as SOLR-10667. One relaunch used. No BATS run.
 - Pattern: the js-client npm step failed on every fresh dist this session except one retry of solr 10390. Main agent: decide whether to clear the npm cache for this host or approve a build flag for premise runs (the build offers -PdisableJsClient=true). Not taken here.
 - vm2 is idle. Next for vm2: round 2 job 9, SOLR-11678, if its gate does not need the same dist build.
+
+## 2026-10-11T05:28Z
+
+- Claimed round 2 job 9, SOLR-11678 (premise run, then first gate), 05:02Z. Round 1 and round 2 jobs 1 to 8 had no claimable vm2 job left.
+- Premise HELD: standalone Jetty 12.1.12 keystore check, base fails "Cannot recover key", with the key-manager password it loads. Mechanism only; the env-var path is covered by the focused tests.
+- Gate GREEN at packaged head 611eae2464 (local, not pushed): changelog OK, tidy clean, compile rc 0, focused 20/0, 2/0, 2/0, module check rc 0.
+- Proof leg INCONCLUSIVE by compile at merge-base: all three branch test files use the new API. No rerun.
+- Receipt receipts/SOLR-11678.md written; job and claim marked DONE.
+- Next for vm2: round 2 job 10, SOLR-12161, if not claimed.
