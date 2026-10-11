@@ -677,3 +677,8 @@ No action taken beyond this job.
 ## 2026-10-11T20:21Z
 
 - Queue check: nothing claimable for vm2. Round 1 and round 2 have no unclaimed, unblocked item; BLOCKED items (SOLR-10667, SOLR-12347) are skipped. No gradle process; no open vm2 job claim. The coordinator claim heartbeat was past one hour and is refreshed. vm2 is idle.
+
+## 2026-10-11T20:35Z
+
+- Push: SOLR-4399 fast-forward de6cc6b27e..82c0c11373 to solr-4399-submit, under the main-side go in gates/SOLR-4399.md. Remote confirmed at 82c0c11373d. Job and claim records updated.
+- Queue check: round 1 items are all DONE or claimed by another host; round 2 has no unclaimed, unblocked item for vm2 (SOLR-10667, SOLR-12347 BLOCKED). Shared-buffer items remain unclaimed and are not in vm2 round order, so not taken. No gradle process; vm2 is idle after this push.
