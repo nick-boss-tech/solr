@@ -61,6 +61,16 @@ Order (not confirmed): code order is approximateTotalHits (1160), maxScore (1168
 - Pre-skip flags: thereArePartialResults (1142, which must stay before the skip so partialResults=true still appears), segmentTerminatedEarly (1144-1152) and maxHitsTerminatedEarly (1154-1159, whose header is written at 1264-1267) are also folded before the skip. Option 1's "merged totals" wording covers the four totals only. If the reorder moves only those four, these flags still reflect a skipped shard. The ticket does not claim otherwise.
 - The adjudication's paraphrase of line 762 omits the `rb.getResponseDocs().` prefix. It is the same call and needs no change.
 
+## Main-side settlement (2026-10-11)
+
+Item 1 settles for the reviewer: the reviewer is right, and the draft is corrected.
+
+- Code order at cabedd1d968059215188f4e7563fb303241899ed: approximateTotalHits accumulated at 1160-1165, maxScore at 1168-1170, numFound at 1171, hitCountIsExact fold at 1173-1175.
+- The verification evidence states the same order in the same words: its section 1 lists the accumulation "in this order" as approximateTotalHits (1160-1165), maxScore (1168-1170), numFound (1171), hitCountIsExact fold (1173-1175).
+- The draft's own Mechanism bullets already follow that order. Only the fix option 1 parenthetical had numFound before maxScore, and the round 1 adjudication's "in code order" description was wrong about that one list.
+- Correction, draft line 49: before `{{approximateTotalHits}} / {{numFound}} / {{maxScore}} / {{hitCountIsExact}}`; after `{{approximateTotalHits}} / {{maxScore}} / {{numFound}} / {{hitCountIsExact}}`. No other draft text changed.
+- Round 3 (assignments/pool-mergeids-ticket-review-round3.md) confirms this single correction only. Items 2 to 4 stand confirmed and are not re-opened.
+
 ## Process
 
 - The claim `claims/pool-mergeids-ticket-review-round2.md` stays ACTIVE. The main side marks it DONE with the push, as in round 1. Not edited under the one-new-file limit.

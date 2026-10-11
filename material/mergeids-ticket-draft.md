@@ -46,7 +46,7 @@ h2. Fix options
 
 Two smallest changes present themselves:
 
- * Test the skip condition before accumulating the shard's totals (equivalently, move the {{approximateTotalHits}} / {{numFound}} / {{maxScore}} / {{hitCountIsExact}} accumulation below the skip), so a skipped shard never enters the merged totals and the totals describe exactly the shards whose documents are merged.
+ * Test the skip condition before accumulating the shard's totals (equivalently, move the {{approximateTotalHits}} / {{maxScore}} / {{numFound}} / {{hitCountIsExact}} accumulation below the skip), so a skipped shard never enters the merged totals and the totals describe exactly the shards whose documents are merged.
  * Keep the totals, but set {{hitCountIsExact = false}} when a shard is skipped, so the response stops asserting the count is exact. That leaves {{numFound}} and {{maxScore}} counting the skipped shard, so it corrects only one of the three symptoms above.
 
 The first change is the recommended one. Correcting the totals when the skip fires instead means subtracting the skipped shard's contribution after the fact. That can repair the counts, but it cannot correctly undo {{maxScore}}: a maximum cannot be decremented, so recovering the merged maximum without the skipped shard would need per-shard tracking and a recomputation, and {{hitCountIsExact}} would need recomputation as well. Testing the skip before accumulating leaves every total describing the same set of shards, so the reorder is the sound fix.
