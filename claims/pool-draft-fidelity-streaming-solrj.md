@@ -12,5 +12,5 @@
 - Split: four subagents in one wave. This claim is taken now and runs in the wave after the CLI, Security, Build/docs and Metrics claim, so no more than six subagents run at once.
 - Deliverables: `reports/draft-fidelity-streaming-solrj.md` (one verdict per draft: CONSISTENT, or DRIFT with the exact replacement text per item), with part reports `reports/draft-fidelity-streaming-solrj-s1.md` to `-s4.md`.
 - Scope: read-only on `pr-drafts/`, `receipts/` and the fork. No edits to drafts (the main side applies fixes). No PR, comment, submit-branch or PR-description write. No builds, Gradle, tests or gate runs.
-- Heartbeat: 2026-10-11T02:36Z (claim taken).
-- Status: ACTIVE, queued behind the first wave.
+- Heartbeat: 2026-10-11T03:33Z (all four slices reported).
+- Status: DONE, 2026-10-11. Deliverables: `reports/draft-fidelity-streaming-solrj.md` (verdicts: 13 DRIFT, 7 CONSISTENT) and the part reports `reports/draft-fidelity-streaming-solrj-s1.md` to `-s4.md`. No draft was edited. SOLR-12657 is held for an owner ruling; the open items are listed in the roll-up.
