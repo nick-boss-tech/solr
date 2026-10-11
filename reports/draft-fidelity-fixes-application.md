@@ -31,7 +31,7 @@ The assignment's rule is that anything changing a claim, number, date, head, sco
 - `search-components/SOLR-17748`: coverage sentence applied (judgment call); the "no longer fails with" wording is flagged, not applied.
 - `search-components/SOLR-10492`: Limits changed from "still returns BAD_REQUEST" to local-only group.field wording.
 - `search-components/SOLR-3962`: sign wording, "in any combination" replaced with the one-leading-sign rule.
-- `search-components/SOLR-6193` and `SOLR-9396`: bold summary rewritten.
+- `search-components/SOLR-6193`: bold summary rewritten. `search-components/SOLR-9396`: a bold Limits summary line added; the bold summary in "What this change does" was not changed.
 - `replication-backup/SOLR-17287`: "one caller" replaced with "one production caller ... The unit test also calls it."
 
 ## Direct edits, by draft (full old and new text in the commit diff)

@@ -72,7 +72,7 @@ Counts: the application counts 98 flagged (it nets the one split item, SOLR-1535
 
 ### Group D: covered by the decision default; the recorded recommendation is named (9)
 
-- F14 `metrics/SOLR-17987`: the environment variable name. Recorded recommendation: rename to `SOLR_METRICS_DISABLED_REGISTRIES` (the reference guide already uses that form); the draft's wording follows the rename.
+- F14 `metrics/SOLR-17987`: the environment variable name. Recorded recommendation: rename to `SOLR_METRICS_DISABLED_REGISTRIES`; the draft's wording follows the rename. Correction (confirmation round): the reference guide does not already use that form for this setting; at the head the guide text and the environment mapping use `SOLR_METRICS_DISABLEDREGISTRIES`, so the rename is branch work that has not landed.
 - F18 `query-parsing/SOLR-11761`: reorder the two "What happens today" sentences to match the research record, which starts with the call that works.
 - F35 `schema-analysis/SOLR-18134`: narrow "Lucene 9.x" to "9.12"; only 9.12.0 and 9.12.3 were checked, and the round report gives that replacement.
 - Item 10 `replication-backup/SOLR-11650`: drop "Three of those tests call the new helper"; the round replacement is "Its new redaction tests call the new helper, so they do not apply to the base code." (the receipt gives 18 of 18 with no split).
@@ -121,7 +121,7 @@ This pass worked the groups above: the 9 Group D items, the SOLR-6014 receipt co
 
 ### Group D: all 9 applied (8 draft edits, 1 verified standing)
 
-- F14 `metrics/SOLR-17987`: the draft now names the environment variable `SOLR_METRICS_DISABLED_REGISTRIES`, the recorded rename (the reference guide's own conversion rule gives that form). The branch-side rename (mapping line and guide text) is packaging work, as F13 already records.
+- F14 `metrics/SOLR-17987`: the draft now names the environment variable `SOLR_METRICS_DISABLED_REGISTRIES`, the recorded rename. Correction (confirmation round): that form is not the form the head reads; at the head the guide text and the environment mapping use `SOLR_METRICS_DISABLEDREGISTRIES`. The branch-side rename (mapping line and guide text) is packaging work, as F13 already records.
 - F18 `query-parsing/SOLR-11761`: the "What happens today" repro sentence now follows the research record's order, starting with the call that works: `/* foo */ bar` (accepted), `/*` (correctly rejected), `/* foo */ bar` (wrongly rejected), `bar` (accepted), `/* foo */ bar` (still rejected). Replacement text is the round report's item 1.
 - F35 `schema-analysis/SOLR-18134`: "Lucene 9.x" narrowed to "Lucene 9.12" (only 9.12.0 and 9.12.3 were checked; round report item 3 replacement).
 - Item 10 `replication-backup/SOLR-11650`: "Three of those tests call the new helper" replaced with "Its new redaction tests call the new helper, so they do not apply to the base code." (`receipts/SOLR-11650.md` gives 18 of 18 with no split).
