@@ -9,5 +9,5 @@
   - Slice 2: a final whole-body read of the live body against the head and the receipt, the title against the changelog fragment at the head, and every citation anchor at the SHA it links.
 - Scope: read-only. Live PR read with the read-only GitHub wrapper only. No PR body edit, comment, review, close or branch edit. No builds, Gradle, tests or gate runs.
 - Deliverable: `reports/flaky-16630-post-pr-review-round-2.md`, one verdict, SATISFIED or STILL OPEN, with the exact item for each open finding. Part reports `reports/flaky-16630-post-pr-review-round-2-s1.md` and `-s2.md`.
-- Heartbeat: 2026-10-11T06:28Z (restarted at Nick's direction; the earlier subagents were stopped before they reported).
-- Status: ACTIVE. Two fresh subagents, one per slice, running from the current origin tip.
+- Heartbeat: 2026-10-11T06:28Z (restarted at Nick's direction; the earlier subagents were stopped before they reported); both slices reported.
+- Status: DONE, 2026-10-11. Deliverable: `reports/flaky-16630-post-pr-review-round-2.md`, verdict STILL OPEN with three wording findings (the round 1 findings are all fixed). Part reports `reports/flaky-16630-post-pr-review-round-2-s1.md` and `-s2.md`. Nothing was edited or posted.
