@@ -129,7 +129,7 @@ Existing classes do not fabricate shard responses. `CombinedQueryComponentTest` 
 - `JavaBinCodec` lines 738 to 765, and `ResponseCanonicalizer` lines 115 to 125.
 - `ResponseBuilder` lines 496 to 510.
 - `json-combined-query-dsl.adoc` (no numFound definition).
-- Diffs for this file between the merge-base, main and the fixed branch: empty.
+- Diffs for this file between cabedd1d968, d76fc14b98 and the fixed branch (73d20a0f939): empty.
 
 ## Not verified
 

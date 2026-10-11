@@ -4,7 +4,7 @@ Round 4 (reports/mergeids-fix-review-round4.md) returned STILL OPEN on record it
 
 ## Item 1: the wrong mechanism, corrected everywhere it stood
 
-The scope sentence in all three response records now reads, in substance: the decline covers the totals block only; sort values gate the skip at QueryComponent.java 1180, which the existing tests pin; the declined case, sort_values on a merged partial shard, is not skipped, and its totals do not depend on sort values; numFound is decremented when the queue push returns false, which happens only for a document id already pushed (930 to 936, 1233); overflow does not change numFound; no applied test sends a duplicate id. Locations:
+The scope sentence in all three response records now reads, in substance: the decline covers the totals block only; sort values gate the skip at QueryComponent.java 1180; the existing tests pin the skip when sort values are absent; no test sends sort values; the declined case, sort_values on a merged partial shard, is not skipped, and its totals do not depend on sort values; numFound is decremented when the queue push returns false, which happens only for a document id already pushed (930 to 936, 1233); overflow does not change numFound; no applied test sends a duplicate id. Locations:
 
 - reports/mergeids-fix-review-response.md, the scope note in the maximum-aggregation paragraph (was line 25).
 - reports/mergeids-fix-review-round2-response.md, item 2, the closing scope sentence (was line 11).
