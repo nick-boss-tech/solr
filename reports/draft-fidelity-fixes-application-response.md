@@ -115,8 +115,64 @@ Carried from the application's branch-side list (the draft text is already right
 - Item 17 `replication-backup/SOLR-8430`: the "Limiters stay in memory" bullet is replaced in the same work that lands the adopted cap; the cap gate job is still open at this tip, and a focused re-run at the new head is owed before the Proof names it. The replacement text is in the round report (item 3 of its SOLR-8430 section).
 - Item 40 `search-components/SOLR-15041`: the Limits bullets on blank lines and split values stay held until the blank-line fix and a focused test land.
 
+## Flagged-items application pass (main side, 2026-10-11)
+
+This pass worked the groups above: the 9 Group D items, the SOLR-6014 receipt correction the F26 note called for, and the 26 Group R items. Each Group D item was verified against its receipt or round record before applying; each Group R item was refreshed only where the correct record already exists in the main side's receipts ledger or takeover log (or, for items 15, 18, 33 and 34, in the ticket's own receipt and the branch file at the gated head), copied exactly with its source named. Nothing was invented: items with no copyable record stay flagged below with the reason.
+
+### Group D: all 9 applied (8 draft edits, 1 verified standing)
+
+- F14 `metrics/SOLR-17987`: the draft now names the environment variable `SOLR_METRICS_DISABLED_REGISTRIES`, the recorded rename (the reference guide's own conversion rule gives that form). The branch-side rename (mapping line and guide text) is packaging work, as F13 already records.
+- F18 `query-parsing/SOLR-11761`: the "What happens today" repro sentence now follows the research record's order, starting with the call that works: `/* foo */ bar` (accepted), `/*` (correctly rejected), `/* foo */ bar` (wrongly rejected), `bar` (accepted), `/* foo */ bar` (still rejected). Replacement text is the round report's item 1.
+- F35 `schema-analysis/SOLR-18134`: "Lucene 9.x" narrowed to "Lucene 9.12" (only 9.12.0 and 9.12.3 were checked; round report item 3 replacement).
+- Item 10 `replication-backup/SOLR-11650`: "Three of those tests call the new helper" replaced with "Its new redaction tests call the new helper, so they do not apply to the base code." (`receipts/SOLR-11650.md` gives 18 of 18 with no split).
+- Item 21 `search-components/SOLR-10424`: the Limits bullet now ends "so this change should land before, or together with, SOLR-8240" (the recorded decision, round w3 FIX 3 and owner decision 1).
+- Item 22 `search-components/SOLR-10694`: JSON added to the writers not changed and not checked (round s6 items 21 and 99).
+- Item 45 `search-components/SOLR-17748`: "two-node cluster" corrected to "three-node cluster" (the head test uses `configureCluster(3)`, creates 3 shards and stops 2 nodes).
+- Item 46 `search-components/SOLR-17748`: the round's replacement behavior-change bullet adopted (the 500 becomes a returned result only with `shards.tolerant=true`; without it a shard with no live replica still fails with 503; a cause-less shard error is now listed as itself instead of raising a NullPointerException).
+- Item 54 `search-components/SOLR-8240`: no edit. The Limits sentence "Updating it is a planned follow-up pull request" stands under the standing follow-up rule, as this response's Group D entry records; verified present in the draft as written.
+
+### Receipt correction called for by F26
+
+- `receipts/SOLR-6014.md` line 8 no longer says GitHub run 37639870647 "succeeded at this head". Per the round 6 C2 convention it now names the CI commit the run actually executed: 8a631ed70f0b433f25b2073964680ae98590a02f (branch ci/6014-dismax-stopword-r28), one commit past the gated head 505849d2d4e7, differing only by the fork test runner workflow file (verified against the GitHub API's run record and the local object graph).
+
+### Group R: 17 refreshed in full, 2 in part, 7 still owed
+
+Refreshed in full (record copied, source named in the receipt or draft):
+
+- F2 `cli/SOLR-9342`: `receipts/SOLR-9342.md` now dates the re-validation runs at the live tip from the takeover log (entry timestamped 2026-10-07 02:07 UTC; logs g9342-tc-premise.log, g9342-tc-full.log).
+- F9 `build-docs/SOLR-16914`: the Kuromoji comparison is copied into `receipts/SOLR-16914.md` from the takeover log (2026-10-05 round 13 entry: JapaneseTokenizerFactory default read from the Lucene 10.4.0 kuromoji jar; probe against the same jars).
+- F11 `build-docs/SOLR-17752`: `receipts/SOLR-17752.md` now confirms the run covers the gated head e5c0a64f993 (commit timestamp 2026-10-05T04:34:08Z is 2026-10-04 MDT; the ledger DONE entry for the gate is dated 2026-10-04).
+- F19 `query-parsing/SOLR-12212`: per-class counts copied into `receipts/SOLR-12212.md` from the takeover log gate entry (TestSolrQueryParser 39, TestExtendedDismaxParser 39, TestStandardQParsers 2; 80 in total).
+- F20 and F21 `query-parsing/SOLR-12608`: the head record is reconciled in `receipts/SOLR-12608.md` (gated head d1dd8a1f9f0 is one commit, the handoff-file removal, past the received fork head f45d5eb49; gate 2026-10-05), and the draft's 38 of 38 line now carries "verified 2026-10-05". The line 1 HOLD banner stays; it waits on the owner submit decision and the changelog title, not on this record.
+- F33 `schema-analysis/SOLR-15357`: verified, no edit. `receipts/SOLR-15357.md` already carries the ledger's settled record (proof inconclusive by construction; the test calls the getSubFields API the change adds), so the receipt side of the framing is settled; the draft's wording is a draft-side item for a later pass.
+- F36 `schema-analysis/SOLR-18134`: `receipts/SOLR-18134.md` now names the failing base test, testAncestors, with the premise counts (tests=2, failures=1), from the takeover log round 35 DONE entry. The same receipt notes the premise overlay of src/test-files is not separately recorded.
+- Item 2 `core-admin/SOLR-12007`: the gate date (2026-10-08, takeover log round 38 DONE entry) is copied into the Counts line of `receipts/SOLR-12007.md`.
+- Item 3 `core-admin/SOLR-13246`: the gate date (2026-10-06, receipts ledger round 27 entry) is copied into the Counts line of `receipts/SOLR-13246.md`.
+- Item 15 `replication-backup/SOLR-17287`: the draft's "[CONFIRM: count]" is filled with the round report's replacement line (TestRestoreCore 4 of 4, run 2026-10-08 and again 2026-10-11 at the head; the receipt and the recount record both say 4).
+- Item 18 `replication-backup/SOLR-9865`: same fill (TestRestoreCore 4 of 4, run 2026-10-05 and again 2026-10-11 at the head).
+- Item 20 `spellcheck/SOLR-4367`: counts and proof copied into `receipts/SOLR-4367.md` from the receipts ledger (SpellCheckComponentTest 15 of 15 at the head; base run 15 tests, exactly 1 failure, testSpellcheckerOutsideSpellcheckerListIsRejected; seed 4367C0FFEE4367).
+- Item 33 `search-components/SOLR-12556`: the draft's count CONFIRM is filled: 13 tests, 0 failures, 0 errors, 1 skipped. The file at the gated head declares 12 `@Test` methods; the thirteenth testcase, `testIndexAscRefineConsistency`, carries no annotation and runs by its test-name prefix (verified in the branch file at 033ec65a0e1).
+- Item 34 `search-components/SOLR-12556`: the failing test from the base run is named in the draft and in `receipts/SOLR-12556.md`: testProcessEmptyRefinement (mismatch 'Ax' != 'By' at facets/top/buckets/[0]/val; the receipts ledger's deciding-run record).
+- Item 37 `search-components/SOLR-14381`: `receipts/SOLR-14381.md` now names the proof leg's base, merge-base b5c71bc5573c4e31b4cee5a7965d73587fc0ae58 (the branch's base per the round 35 report and the takeover log).
+- Item 49 `search-components/SOLR-7390`: the draft's Limits bullet corrected from "three test classes" to "four test classes" (the Proof and `receipts/SOLR-7390.md` both record ReturnFieldsTest plus the three neighbor classes at the head).
+
+Refreshed in part (the record half is copied; the rest still needs a run):
+
+- F24 `query-parsing/SOLR-16267`: the head disagreement is reconciled in `receipts/SOLR-16267.md` from the ledger (rebuilt on main 14c7aac0d15, force-pushed over the received tip 67ffcb2b63f; gated head 8f4b0c6d2fb). The def() claim's Lucene 9.x check is still owed; no such run is on record.
+- F31 `schema-analysis/SOLR-14199`: the two Limits lines the description owes are copied into `receipts/SOLR-14199.md` from the ledger (non-indexed explicit omitNorms=false not rejected and not distinguishable; no TEST_HACK exemption). The draft's OWNER note can now be worked from the receipt, but the HOLD stands: the SchemaVersionSpecificBehaviorTest run is still not on record.
+
+Still owed (no copyable record in the ledger or the takeover log; nothing invented):
+
+- F12 `build-docs/SOLR-17842`: the per-area benchmark-class count needs the guide reading confirmed; no ledger or log record carries it.
+- F23 `query-parsing/SOLR-15615`: the fallback authorization path has to be traced end to end; that is code work, not a record.
+- F30 `schema-analysis/SOLR-14199`: the ledger confirms TestSolrQueryParser 37 of 37 from fresh JUnit XML at the gated head, but no record identifies the 37th test or a recount, so the draft's CONFIRM stands.
+- F34 `schema-analysis/SOLR-15358`: the ledger records only "pre-fix proof PASS" for the base leg; the failing tests and assertion the draft's TO FILL asks for are not in the ledger or the log.
+- Item 1 `core-admin/SOLR-11939`: no verification record exists for the proposed 2026-10-11 date; the receipt stands at NO GATE with the 2026-10-06 arrival record only.
+- Item 53 `search-components/SOLR-8009`: the gate record (takeover log and receipt) says FullSolrCloudDistribCmdsTest ran 10 tests; the file at the gated head declares 9 test methods, and no record explains the tenth.
+- Item 59 `search-components/SOLR-12092`: the record was checked at the gated head ca9573dabd38: neither the changelog fragment's title nor the reference guide's stopwords entries state the "index never stores those words" consequence, so there is no record to copy and the draft sentence stays flagged.
+
 ## Notes
 
-- Holds the application left in place are undisturbed: the line 1 banners, the reviewer and owner blocks, the CONFIRM markers in SOLR-12556, and the holds in SOLR-17791, SOLR-4362, SOLR-8576, SOLR-11129, SOLR-15041 and SOLR-14931.
+- Holds the application left in place are undisturbed: the line 1 banners, the reviewer and owner blocks, and the holds in SOLR-17791, SOLR-4362, SOLR-8576, SOLR-11129, SOLR-15041 and SOLR-14931. Exception from the flagged-items pass above: the two CONFIRM markers in SOLR-12556 are filled (items 33 and 34), and the TestRestoreCore CONFIRM markers in SOLR-17287 and SOLR-9865 are filled (items 15 and 18).
 - The application's caution on computed merge-bases stands for the rest of the set: they were computed from the review side's local `upstream/main` (`3f5d4c5bf8a`) and are re-verified before posting. The one base this pass needed (SOLR-9148) was re-verified against the object graph, as item 55 records.
 - Nothing was posted, filed or pushed to a submit branch in this pass; the only changes are the draft edits above and this file, on pr-prepare.
