@@ -769,7 +769,9 @@ class DatabaseMetaDataImpl implements DatabaseMetaData {
             + "'");
   }
 
-  /** A null JDBC pattern matches everything; a single quote is doubled to stay inside the literal. */
+  /**
+   * A null JDBC pattern matches everything; a single quote is doubled to stay inside the literal.
+   */
   private static String quotePattern(String pattern) {
     return pattern == null ? "%" : pattern.replace("'", "''");
   }
