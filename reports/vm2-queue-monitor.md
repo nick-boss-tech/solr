@@ -536,3 +536,8 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 and round 2 are still exhausted; no gradle or bats process running and no open vm2 claim. vm2 is idle.
 - Stale claim seen: the vm3 full gate claim for SOLR-10390 (claims/pool-vm2-gate-backlog-10390.md, gates/SOLR-10390.md) has had no heartbeat since 08:00:01Z, now over 2 hours. Its gate log is on vm3 and is not readable from vm2, so the stopped-log condition for a takeover cannot be checked here. vm2 did not take over. Not a vm2 job; flagged for vm3 to refresh or for main-side takeover.
+
+## 2026-10-11T10:21Z
+
+- Queue check: nothing claimable for vm2. Round 1 is exhausted; round 2 is DONE or BLOCKED (SOLR-10667 and SOLR-12347 are BLOCKED by environment, per their gate files, so they are skipped). No gradle process running and no open vm2 claim; vm2 is idle.
+- Change seen: the vm3 SOLR-10390 full gate claim is no longer stale. Heartbeats at 10:06:48Z and 10:19:18Z (claims/pool-vm2-gate-backlog-10390.md, gates/SOLR-10390.md); the BATS preparation is recorded and the proof leg and focused run remain on vm3. This clears the stale flag from the 10:01Z entry. Not a vm2 job.
