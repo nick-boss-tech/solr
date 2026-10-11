@@ -11,6 +11,7 @@ Report: `reports/highlighting-round-1.md`. The owner cannot make calls now; reco
 ## SOLR-3704
 
 - Limits confirmed as the reviewers derived them from the diff: the docValues-only Date branch is fixed by the same reasoning and is not separately discriminated, and date unique keys are untested. That matches the main-side ledger review (the stored path is the observed one; the docValues branch was not separately discriminated).
+- Correction recorded 2026-10-10 (Highlighting post-PR review round 1, slice 1): the "docValues-only" scope above is narrower than the code. Date values read from docValues take the Date branch, and that includes a stored, single-valued date field when the request's `fl` names only such fields, because RetrieveFieldsOptimizer then reads it from docValues (SolrDocumentFetcher.java lines 793 to 796 at the head). The PR body and draft carry the widened wording: tested is a stored date field read from its stored value; not tested is any date value read from docValues, and date unique keys.
 
 ## SOLR-4540
 
