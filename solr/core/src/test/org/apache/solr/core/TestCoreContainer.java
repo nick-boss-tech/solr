@@ -114,6 +114,10 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
   }
 
   public void testCreateCoreOverIndexDirWithOnlyWriteLock() throws Exception {
+    // the minimal configset defaults to an ephemeral directory factory whose exists()
+    // never sees files on disk; this scenario is about an on-disk directory, so select
+    // the on-disk factory before the core loads its config
+    useFactory("solr.StandardDirectoryFactory");
     final Path home = createTempDir();
     final CoreContainer cc = init(home, CONFIGSETS_SOLR_XML);
     try {
@@ -124,6 +128,7 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
 
       final SolrCore core = cc.create("core1", Map.of("configSet", "minimal"));
       assertNotNull(core);
+      assertTrue(core.getDirectoryFactory() instanceof StandardDirectoryFactory);
       final RefCounted<SolrIndexSearcher> searcher = core.getSearcher();
       try {
         assertEquals(0, searcher.get().getIndexReader().numDocs());
