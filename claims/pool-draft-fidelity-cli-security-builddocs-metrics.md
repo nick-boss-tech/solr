@@ -12,5 +12,5 @@
 - Split: four subagents in one wave. The wave runs alongside the Highlighting leftovers claim (`claims/pool-highlighting-leftovers-2632-16885.md`), six subagents in total, which is the standing cap. The Streaming and SolrJ claim runs in the next wave.
 - Deliverables: `reports/draft-fidelity-cli-security-builddocs-metrics.md` (one verdict per draft: CONSISTENT, or DRIFT with the exact replacement text per item), with part reports `reports/draft-fidelity-cli-security-builddocs-metrics-s1.md` to `-s4.md`.
 - Scope: read-only on `pr-drafts/`, `receipts/` and the fork. No edits to drafts (the main side applies fixes). No PR, comment, submit-branch or PR-description write. No builds, Gradle, tests or gate runs. Live PRs are read with the read-only GitHub wrapper only.
-- Heartbeat: 2026-10-11T02:36Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T02:58Z (all four slices reported).
+- Status: DONE, 2026-10-11. Deliverables: `reports/draft-fidelity-cli-security-builddocs-metrics.md` (verdicts: 13 DRIFT, 3 CONSISTENT) and the part reports `reports/draft-fidelity-cli-security-builddocs-metrics-s1.md` to `-s4.md`. No draft was edited; the main side applies the fixes. Open owner decisions are listed in the roll-up.

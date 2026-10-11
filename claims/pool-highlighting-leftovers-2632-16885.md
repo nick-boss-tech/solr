@@ -10,5 +10,5 @@
 - Split: two subagents, in the first wave with the CLI, Security, Build/docs and Metrics claim. Six subagents in total, the standing cap.
 - Deliverables: the two files above, plus part reports `reports/highlighting-leftovers-2632-16885-s1.md` (SOLR-2632) and `-s2.md` (SOLR-16885) recording the checks made.
 - Scope: draft text only. No PR, comment, Jira write, submit-branch edit or PR-description edit. No builds, Gradle, tests or gate runs.
-- Heartbeat: 2026-10-11T02:36Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-11T02:58Z (both slices reported).
+- Status: DONE, 2026-10-11, with holds. Deliverables: `pr-drafts/highlighting/SOLR-2632.md` (not ready to open; the owner must confirm the items in `reports/highlighting-leftovers-2632-16885-s1.md`: the changelog fragment at the head is under a different name and its title claims a behavior change, the head still carries the production hunks, and the 9.12.3 claim is disputed); `material/SOLR-16885-jira-comment.md` (checked, nothing posted; the owner posts it); part reports `reports/highlighting-leftovers-2632-16885-s1.md` and `-s2.md`.
