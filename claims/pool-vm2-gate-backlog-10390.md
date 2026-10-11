@@ -42,3 +42,7 @@ Heartbeat: 2026-10-11T10:23:02Z (UTC).
 
 Proof leg complete as expected: one BATS case at base `cabedd1d968059215188f4e7563fb303241899ed` exited 1 at `refute_output` line 129 because its output included the `Please install lsof` note; JUnit failure content confirms the marker. Solr started on port 57149 and no Solr process remained after teardown. Evidence and exact pre/post resource snapshots are in `gates/SOLR-10390.md`. The extracted distribution was restored to packaged-head `bin/solr`, SHA-256 `6eddf7f7eaa2f599410db6accaaa56dcbc93663d4c952697a3d96a360b8b3899`; source worktree clean.
 Status: CLAIMED. Focused BATS test at packaged head and receipt remain; Java checks are not applicable.
+
+DONE: 2026-10-11T10:26:00Z (UTC), outcome GATE GREEN at packaged head `5a86f908052f031b6ce0f0004c0bdf3e825a12c5`.
+Receipt: `receipts/SOLR-10390.md`; gate record: `gates/SOLR-10390.md`.
+Status: DONE. Full-gate claim completed by vm3; prior vm2 premise claim remains historical and unchanged.
