@@ -19,4 +19,4 @@ Branch: `solr-13705-submit` at packaged head `73504e7a8dcb58e8f77c976d98db600af6
 Merge-base: `9b3a84b1c460981eab09d8ffaef776acc4a184f8`.
 Started: 2026-10-11T07:28:08Z (UTC).
 Heartbeat: 2026-10-11T07:28:08Z (UTC).
-Status: CLAIMED. Packaging is complete at the live head; changelog parse and full-gate validation remain.
+Status: CLAIMED. Packaging, changelog parse, and tidy are complete; Error Prone compile and remaining gate steps are in progress.
