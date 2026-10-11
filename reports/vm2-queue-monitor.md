@@ -620,3 +620,8 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; no vm2 claim open. vm2 is idle.
 - Stale-threshold note: the vm3 SOLR-8628 claim (claims/pool-vm2-gate-backlog-8628.md) passed its 16:06Z staleness mark with no heartbeat. It was released by owner direction at 14:10:34Z, as recorded in gates/SOLR-8628-premise.md, so there is no active claim to take over. The claim file has no release line of its own; vm3 or the main side may add one.
+
+## 2026-10-11T16:20Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; no open vm2 claim. vm2 is idle.
+- Change seen: commit 238ae201a7 records vm1's SOLR-5262 gate GREEN at 616efd008b (claim DONE, receipt written), and the SOLR-8628 premise head leg as NO GATE by finding (the test fails identically at base and head, so it does not discriminate).
