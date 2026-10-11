@@ -455,3 +455,10 @@ No action taken beyond this job.
 - Claimed round 2 job 7, SOLR-10667 (premise run, then first gate), 04:21Z. Round 1 had no claimable vm2 job left.
 - BLOCKED, environment, no test executed: both `:solr:packaging:assembleDist` runs (base cabedd1d9680 and head 32b594f280c5) fail in `:solr:webapp:js-client:jsClientDownloadDeps` with "Cannot find package '@babel/plugin-syntax-dynamic-import'". One relaunch used. No premise outcome, no receipt. Main agent to decide retry on a clean npm cache or a build-flag change.
 - Gate file and claim marked BLOCKED (environment). Next for vm2: round 2 job 8, SOLR-12347, if it is not blocked by the same npm step.
+
+## 2026-10-11T05:06Z
+
+- Claimed round 2 job 8, SOLR-12347 (premise verification, then first gate), 04:39Z. Premise part 1 from the code: default is 180 on base and merge-base; the branch's BATS test expects 600.
+- BLOCKED, environment: base and head assembleDist both fail in the js-client npm step ("Cannot find package '@babel/plugin-syntax-dynamic-import'"), same as SOLR-10667. One relaunch used. No BATS run.
+- Pattern: the js-client npm step failed on every fresh dist this session except one retry of solr 10390. Main agent: decide whether to clear the npm cache for this host or approve a build flag for premise runs (the build offers -PdisableJsClient=true). Not taken here.
+- vm2 is idle. Next for vm2: round 2 job 9, SOLR-11678, if its gate does not need the same dist build.
