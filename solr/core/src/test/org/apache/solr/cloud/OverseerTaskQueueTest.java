@@ -52,8 +52,7 @@ public class OverseerTaskQueueTest extends DistributedQueueTest {
 
     assertFalse("request node must be gone", zkClient.exists(event.getId()));
     assertEquals(
-        "response",
-        new String(zkClient.getData(watchID, null, null), StandardCharsets.UTF_8));
+        "response", new String(zkClient.getData(watchID, null, null), StandardCharsets.UTF_8));
   }
 
   @Test
