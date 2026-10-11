@@ -1,14 +1,1 @@
-# Claim: SOLR-8628 premise-only run
-
-- Claimant host: vm3.
-- Assignment: `assignments/pool-shared-gate-backlog-buffer.md`.
-- Job: `gates/SOLR-8628-premise.md`.
-- Capability tags: `premise-run`.
-- Started at: 2026-10-11T11:43:56Z (UTC).
-- Slice: run only premise parts 1-3 in the gate; no branch source edits, handoff-file removal, packaging, or first hardening gate.
-- Branch: `solr-8628-submit`, live head `ce8211e05e062444e7afc1c5ea33fb6eff581d8f`, verified with `ls-remote` at claim time.
-- Worktree: `/workspace/gates/solr-8628-premise-build` (prepared after claim publication).
-- Logs: `/workspace/gates/logs/vm3/8628-premise-*.log`.
-- Status: CLAIMED. No probe or test has started.
-- Heartbeat: 2026-10-11T11:46:02Z (UTC), claim remains live, branch tip verified, and missing metadata restored in this record. No probe or test has started; next step is record the current-main scope finding, then run the Lucene reachability probe.
-- Heartbeat: 2026-10-11T11:46:26Z (UTC), premise part 1 confirmed against current upstream main `d76fc14b9857e77b830d7a82514b28c523a239c2`: empty directory is absent by `exists()` semantics; write.lock-only remains in scope. Evidence: `/workspace/gates/logs/vm3/8628-premise-scope.log`. Next: Lucene 10.4.0 reachability probe.
+- Heartbeat: 2026-10-11T11:50:22Z (UTC), the first scratch-probe `javac` invocation exited 1 because the public class name did not match the evidence filename; no Lucene probe or test ran. Evidence: `/workspace/gates/logs/vm3/8628-lucene-probe-compile.log` and `8628-lucene-probe-compile-headroom.log` (21 GB available; 8,807 free inodes before and after; no active Gradle client or test, only sleeping daemon/workers). Before proceeding, removed only 29 verified ignored, untracked generated `build/` directories from completed SOLR-11479 checkout after verifying its GREEN receipt and central evidence; preserved source, `.git`, Gradle caches and logs. Restored the missing focused-head output from the matching JUnit `system-err` (fresh XML SHA matched the worktree copy); cleanup evidence: `/workspace/gates/logs/vm3/8628-prereq-cleanup.log`. Free inodes rose to 17,346; disk remains 21 GB available. No source or test changed. Next: compile a matching-name scratch copy after a new preflight.
