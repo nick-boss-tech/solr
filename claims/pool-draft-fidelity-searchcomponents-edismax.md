@@ -1,0 +1,23 @@
+# Claim: draft fidelity review, Search components and eDisMax drafts (59 drafts)
+
+- Claimed by: windows (review agent), Claude Code on this host, working for Nick Shanin
+- Capability tags: review
+- Assignment: `assignments/pool-draft-fidelity-searchcomponents-edismax.md`
+- Date: 2026-10-11
+- Slices, one subagent each, twelve in all, run in waves of at most six at once:
+  - C1: search components SOLR-10424, 10492, 10694, 10844, 11129.
+  - C2: search components SOLR-11153, 11310, 11364, 11470, 12044.
+  - C3: search components SOLR-12543, 12556, 13245, 13876, 14381.
+  - C4: search components SOLR-14451, 14678, 14931, 15018, 15041.
+  - C5: search components SOLR-15319, 15331, 15479, 15895, 16444.
+  - C6: search components SOLR-17051, 17155, 17748, 17791, 17976.
+  - C7: search components SOLR-18109, 4374, 5394, 6193, 6207.
+  - C8: search components SOLR-6831, 6975, 7390, 7498, 7520.
+  - C9: search components SOLR-7550, 8009, 8020, 8240, 8939.
+  - C10: search components SOLR-9148, 9396, 9864.
+  - C11: edismax SOLR-12092, 14913, 2309, 2988, 3243.
+  - C12: edismax SOLR-3729, 3962, 4362, 6009, 6320, 7120.
+- Scope: read-only on `pr-drafts/`, `receipts/` and the fork. No edits to drafts. No PR, comment, submit-branch or PR-description write. No builds, Gradle, tests or gate runs.
+- Deliverable: `reports/draft-fidelity-searchcomponents-edismax.md` (one verdict per draft), with part reports `reports/draft-fidelity-searchcomponents-edismax-s1.md` to `-s12.md`.
+- Heartbeat: 2026-10-11T04:12Z (claim taken).
+- Status: ACTIVE.
