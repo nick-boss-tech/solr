@@ -625,3 +625,9 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; no open vm2 claim. vm2 is idle.
 - Change seen: commit 238ae201a7 records vm1's SOLR-5262 gate GREEN at 616efd008b (claim DONE, receipt written), and the SOLR-8628 premise head leg as NO GATE by finding (the test fails identically at base and head, so it does not discriminate).
+
+## 2026-10-11T16:31Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 items are all DONE, BLOCKED (SOLR-10667, SOLR-12347, environment), or claimed by another host. No gradle process; the vm2 coordinator claim (claims/coordinator-gate-backlog.md) was last refreshed 15:01Z. vm2 is idle.
+- Change seen: commit 1d4fad131d adds the Windows review round 2 for the mergeIds ticket (assignments/pool-mergeids-ticket-review-round2.md, claims/pool-mergeids-ticket-review-round2.md, ACTIVE, heartbeat 16:29Z). Review work only; not vm2 queue work.
+- Unclaimed shared-buffer gate jobs outside rounds 1 and 2 are unchanged (SOLR-10641, SOLR-13097, SOLR-17612, SOLR-4399, SOLR-1877, SOLR-6711, SOLR-8430, SOLR-5589). Each needs a branch fix or a main-side decision first, so vm2 does not take them.
