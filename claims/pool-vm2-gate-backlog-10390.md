@@ -22,3 +22,6 @@ Status: CLAIMED. Packaging, changelog parse, proof, and focused BATS run remain;
 
 Packaging result 2026-10-11T07:57:40Z: removed only `SOLR-10390-TESTING.md`; commit `5a86f908052f031b6ce0f0004c0bdf3e825a12c5` pushed fast-forward and verified as the live `solr-10390-submit` tip.
 Status: CLAIMED. Changelog parse, proof, and focused BATS run remain; Java checks are recorded not applicable.
+
+Changelog result 2026-10-11T08:00:01Z: repository YAML validator exited 0; 223/223 unreleased fragments valid, including `changelog/unreleased/SOLR-10390-start-without-lsof.yml`. Logs: `/workspace/gates/logs/vm3/10390-changelog.log` and `/workspace/gates/logs/vm3/10390-changelog-headroom.log`.
+Status: CLAIMED. Proof leg, focused BATS test and receipt remain; Java checks are not applicable.
