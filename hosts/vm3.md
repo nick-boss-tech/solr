@@ -24,3 +24,5 @@
 - SOLR-17708 packaging heartbeat, 2026-10-11T10:32:31Z (UTC): the exact single-file changelog title correction was committed as `2eceb54730373475e9adfe55bfe555744fb3724a` and fast-forward pushed; the live fork tip and merge-base match the recorded task checkout. No build or test has started; next is YAML changelog validation.
 
 - SOLR-17708 changelog heartbeat, 2026-10-11T10:33:58Z (UTC): repository validator passed all 315 fragments at `2eceb54730373475e9adfe55bfe555744fb3724a`, including the corrected title. Pre/post parser snapshots: 21 GB available; 54,741 then 54,740 free inodes; only sleeping Gradle daemon PID 221714, no client or worker. Evidence is in `/workspace/gates/logs/vm3/17708-changelog*.log`.
+
+- SOLR-17708 tidy heartbeat, 2026-10-11T10:38:31Z (UTC): root `tidy` passed in 1m24s with 62 tasks; no tests ran and task checkout remained clean. Disk space stayed at 21 GB available; free inodes decreased from 54,721 to 52,130. Afterward two Gradle daemons were sleeping with periodic health checks only; no client or worker was active. Logs: `/workspace/gates/logs/vm3/17708-tidy.log` and `17708-tidy-headroom.log`.
