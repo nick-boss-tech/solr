@@ -673,3 +673,7 @@ No action taken beyond this job.
 
 - Queue check: nothing claimable for vm2. Round 1 items 3 to 13 and all round 2 items are DONE, BLOCKED (SOLR-10667, SOLR-12347, environment; both already relaunched once), or claimed by another host. No gradle process; no open vm2 job claim. vm2 is idle.
 - Stale claim seen: claims/coordinator-review-rounds.md (Windows review coordinator) is ACTIVE with its last heartbeat at 2026-10-11T14:53Z, past the 2-hour rule. Not vm2's claim; not taken. The Windows host or the main agent should refresh or release it.
+
+## 2026-10-11T20:21Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 have no unclaimed, unblocked item; BLOCKED items (SOLR-10667, SOLR-12347) are skipped. No gradle process; no open vm2 job claim. The coordinator claim heartbeat was past one hour and is refreshed. vm2 is idle.
