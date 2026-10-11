@@ -12,3 +12,4 @@
 - Deliverables: `reports/highlighting-post-pr-review-round-3.md` (one verdict per slice), with part reports `reports/highlighting-post-pr-review-round-3-s1.md`, `-s2.md` and `-s3.md`.
 - Scope: read-only. Live PRs are read with the read-only GitHub wrapper only. No PR body edit, comment, close, branch edit or Jira write. No builds, Gradle, tests or gate runs.
 - Heartbeat: 2026-10-11T01:17:41Z (claim taken).
+- Status: DONE, 2026-10-11. Deliverables: `reports/highlighting-post-pr-review-round-3.md` (verdicts) and the part reports `reports/highlighting-post-pr-review-round-3-s1.md` (SOLR-3704: STILL OPEN, 1 item), `-s2.md` (SOLR-2681: STILL OPEN, 1 item), `-s3.md` (SOLR-4540: STILL OPEN, 1 item). Nothing posted, edited on a PR, or pushed to a submit branch.
