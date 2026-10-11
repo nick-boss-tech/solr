@@ -709,3 +709,7 @@ No action taken beyond this job.
 - Gate state: SOLR-8554 gate running from 22:47:19Z, log /workspace/gates/logs/vm2/8554-gate.out, in tidy at this entry. Claim heartbeat current.
 - Queue: after SOLR-8554, unclaimed and claimable are SOLR-10234 and SOLR-11939 only (2, below the 3 target). Top-up check: NO GATE receipts 9039, 9759, 9831, 9818 are Selenium or OSX review-lane items routed to the review side; 17281 is parked; no new candidate qualifies. Shortfall recorded for the main agent.
 - Next claimable: SOLR-10234 (premise run first), then SOLR-11939.
+
+## 2026-10-11T22:49:15Z (vm2 cron, busy check)
+
+- Busy: SOLR-8554 gate running (tidy rc 0, changelog parse OK, now in Error Prone compile); claim heartbeat 2026-10-11T22:32Z, under 60 minutes. No new claim, no gate launched. Next run resumes at GATE END.
