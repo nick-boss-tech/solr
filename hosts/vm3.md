@@ -10,3 +10,5 @@
 - SOLR-11700 logs are retained under `/workspace/gates/logs/vm3/`.
 
 - SOLR-11700 post-record cleanup, 2026-10-11T05:16:26Z: removed only 30 ignored Gradle `build` output directories from the isolated task checkout; preserved source, `.git`, `.gradle` and npm caches, shared checkouts, and logs. Root filesystem: 54 GB total, 26 GB available (52% used); 633,968 of 837,408 inodes used (76% reported), 203,440 free. The rendered page was checked before its generated output was removed.
+
+- SOLR-10390 resume heartbeat, 2026-10-11T10:06:48Z: same vm3 holder resumed after the monitoring-shell wait limit; remote claim remained vm3 and the Gradle build log remained stable at 15,029 bytes (mtime 2026-10-11T08:10:54Z). The project BATS runner is 1.8.2 with its helper libraries present; the host package runner remains 1.10.0. Recovery snapshot: 22 GB available, 59,803 inodes free (93% reported use). No Gradle client or worker was active.

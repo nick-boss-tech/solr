@@ -25,3 +25,7 @@ Status: CLAIMED. Changelog parse, proof, and focused BATS run remain; Java check
 
 Changelog result 2026-10-11T08:00:01Z: repository YAML validator exited 0; 223/223 unreleased fragments valid, including `changelog/unreleased/SOLR-10390-start-without-lsof.yml`. Logs: `/workspace/gates/logs/vm3/10390-changelog.log` and `/workspace/gates/logs/vm3/10390-changelog-headroom.log`.
 Status: CLAIMED. Proof leg, focused BATS test and receipt remain; Java checks are not applicable.
+
+Heartbeat/resume 2026-10-11T10:06:48Z: the same vm3 holder resumed after the two-hour monitoring-shell wait limit. Verified no competing claim, topic live at `5a86f908052f031b6ce0f0004c0bdf3e825a12c5`, and build log stable at 15,029 bytes with mtime 2026-10-11T08:10:54Z. The only Gradle process was a sleeping daemon (1 CPU tick over 4 seconds); no Gradle client or worker was active.
+Distribution result: final Gradle output says `BUILD SUCCESSFUL in 7m 45s` (85 actionable tasks, no tests), including `:solr:packaging:downloadBats` and `:solr:packaging:assembleDist`. Project BATS 1.8.2 and its three helper libraries are present; full and slim archives are 270,412,436 and 83,747,538 bytes. Logs: `/workspace/gates/logs/vm3/10390-dist-build.log`, `/workspace/gates/logs/vm3/10390-dist-build-headroom.log`, `/workspace/gates/logs/vm3/10390-dist-build-post-recovery.log`.
+Status: CLAIMED. Expand the full archive to `SOLR_TIP`, then run the proof and focused head BATS tests; Java checks remain not applicable.
