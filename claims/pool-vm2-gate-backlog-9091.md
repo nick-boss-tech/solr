@@ -13,3 +13,6 @@ Heartbeat: 2026-10-10T23:35:08Z. Gate still running (gradlew pid 105061 active),
 Heartbeat: 2026-10-10T23:41:04Z. Gate still running, log at STEP proof-base-prod (changelog, tidy clean, compile rc=0 so far).
 
 Heartbeat: 2026-10-10T23:51:02Z. Gate still running, log at STEP module-check (focused-head TestRestoreCore tests=4 failures=0 from fresh XML; proof leg earlier failed as predicted).
+
+Result 2026-10-10T23:52:40Z: gate green at packaged head e6bfa5c626812f1452ed8c0158697ab8653a40d2. Proof leg failed by content as predicted (testRestoreRejectsCorruptBackupFile, expected AssertionError, none thrown, TestRestoreCore.java:284). Focused TestRestoreCore tests=4 failures=0; module check rc 0. Receipt receipts/SOLR-9091.md. Packaging commit is local only, not pushed.
+DONE: 2026-10-11T00:02:32Z (UTC) recorded on verification of the gate logs, outcome GREEN.
