@@ -69,7 +69,7 @@ Optional: a comment at line 214 saying that `APP_HOME` and `CLASSPATH` are conve
 
 ## Reproduction spec
 
-For the Windows host only, and only when Nick asks. Gradle is blocked on that host. Linux and macOS cannot reproduce this defect.
+For the Windows host only, and only when Nick asks; the end-to-end run is the remaining verification step and Nick runs it himself. Linux and macOS cannot reproduce this defect.
 
 - Environment: Git for Windows Bash (MINGW64), JDK 21 with `JAVA_HOME` set, working directory the SOLR-9831 worktree at `f269a70e84f`.
 - Command: `timeout 30 bash -x ./gradlew -version`. A fixed script may start the Gradle distribution download, and `timeout` kills it. Judge the trace, not the exit code.
