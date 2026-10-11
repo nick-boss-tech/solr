@@ -26,6 +26,37 @@ Written by the main agent, 2026-10-11. Nick approved lane coordinators on 2026-1
 - A coordinator that finishes a piece of work leaves the next step written down where the other coordinator will find it: a DONE claim naming the deliverable, a report naming the follow-up, or a new assignment or gate job file.
 - Neither coordinator waits for the main agent to keep the loop moving. The main agent reads the same files and steps in only on the escalation items below, or when Nick directs it.
 
+## Coordinator authorization
+
+Extended by Nick on 2026-10-11. Either coordinator (VM2 for the gate lane, the Windows agent for the review lane) may do the following in its own lane without asking the main agent first.
+
+### Updating PR descriptions
+
+- Either coordinator may update the description of one of Nick's own PRs on apache/solr, following `pr-formula.md`.
+- Every factual claim in an edit is grounded in a receipt or a gate log at the branch's live tip. A claim with no receipt or log behind it does not go in.
+- Each edit is verified by re-reading the body after the change and comparing it against the intended text.
+
+### Implementing changes identified in review
+
+- Either coordinator may implement a change a review round identifies, in the branch the round names.
+- The change goes through the full hardening gate: changelog YAML parse, tidy, Error Prone compile, pre-fix proof against the base, counted focused tests from fresh JUnit XML, and the module check.
+- The agent that patches a branch pushes it. Live PR branches push plainly; rebuilds push with `--force-with-lease` pinned to the fork tip read in the same session.
+- On green, the gating host refreshes the ticket's receipt in `receipts/` itself, as with any gate.
+- Build and gate runs inside the hardening gate still follow the capability tags in WORKFLOW.md. An implementation by the Windows coordinator is gated on a Linux host; the Windows host itself never claims build work.
+
+### Deciding scope questions
+
+- Either coordinator may decide a scope question under the decision default: a recorded recommendation is adopted; where no recommendation is on record, the harder and more thorough option is taken.
+- Each decision is recorded in the category's TESTING.md or answers file, in the same push that acts on it.
+
+### What stays reserved
+
+- PR openings and draft-to-ready flips need Nick's approval each time.
+- New comment posts are drafted for Nick's approval first, through the main chat. Coordinators draft; they do not post.
+- Branch deletions stay with Nick.
+- The private records (the takeover log, the master receipts ledger, and all security material) stay with the main agent.
+- Gmail traffic and Jira text go through Nick.
+
 ## What stays with the main agent
 
 - PR openings and ready flips. Every opening needs Nick's explicit approval, given in the main chat; coordinators prepare drafts and evidence but never open, flip or close a PR.
@@ -36,11 +67,13 @@ Written by the main agent, 2026-10-11. Nick approved lane coordinators on 2026-1
 
 ## Escalation: what goes to the main agent
 
-- Anything that needs Nick's decision: scope calls with no recorded recommendation, retire calls, opening slates, sends and filings.
-- Any new PR, comment post, or Jira text leaving this branch.
+- Anything that needs Nick's decision beyond the authorization above: retire calls, opening slates, sends and filings. Scope questions are not escalated; coordinators decide them under the decision default and record the decision.
+- Any new PR, ready flip, comment post, or Jira text leaving this branch.
 - Any record conflict the receipts cannot settle: a receipt, a gate file and a branch tip that disagree in a way the files themselves do not resolve.
-- Any gate failure where tests executed. Coordinators record the failure in the gate file (failing test, seed, reproduce line) and report it; they never relaunch a gate that executed tests and failed, and never open a PR.
+- A gate failure the lane coordinator cannot classify after investigating it (see the gate failure rule below).
 - Anything touching the private security material. It is never named, copied or summarized on this branch.
+
+Gate failure rule: a gate that executed tests and failed is investigated by the coordinating agent for that lane first. The investigation root-causes the failure from the gate log and the fresh JUnit XML and is recorded in the gate file (failing test, seed, reproduce line, classification). The gate is never relaunched until that investigation is recorded. A failure the coordinator cannot classify escalates to the main agent.
 
 ## Standing rules the coordinators inherit
 
