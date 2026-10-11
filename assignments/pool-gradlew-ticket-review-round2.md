@@ -8,6 +8,16 @@ Round 1 (`reports/gradlew-ticket-review.md`) returned STILL OPEN with seven evid
 
 Confirm each item below against the corrected passages and the script. Nothing else is in scope; do not re-open criteria round 1 checked clean, and do not edit the draft or the reports; flag instead.
 
+## Annotation (2026-10-11): verification upgraded, confirmation scope extended
+
+Since this assignment was posted, Nick ran the end-to-end verification himself on the Windows Git Bash host; the record is `reports/gradlew-end-to-end-run.md`. On main `498a09aea97` the trace shows `APP_HOME` becoming `'C;C:/...'` after the second conversion, ending with `Error: Could not find or load main class org.gradle.wrapper.GradleWrapperMain`, exit 1; on branch `gradlew-msys-double-conversion` at `192aacaaf89`, `gradlew -version` prints Gradle 9.7.0, exit 0. The run's scope is `-version` only. The main side has upgraded the draft's verification passages to match: the reproduction is now stated as confirmed by run, and the fix as verified for wrapper startup.
+
+The confirmation scope of this assignment therefore explicitly includes the upgraded verification passages, checked against `reports/gradlew-end-to-end-run.md`:
+
+8. **Verification upgrade.** Every passage in `material/gradlew-ticket-draft.md` that states the verification level (the source note and the Reproduction section) matches the run report exactly: the command (`timeout 30 bash -x ./gradlew -version`), the two refs (`498a09aea97` and `192aacaaf89`), the traced `APP_HOME` and `CLASSPATH` values, the error line, exit codes 1 and 0, Gradle 9.7.0 on the fixed leg, and the not-run list (check, build and any test task; Cygwin; `gradlew.bat`; Linux and macOS; the argument conversion loop). Item 3 (F3) is read against the upgraded text: the draft now presents the trace as the output of the recorded run, and no passage may present the run as broader than `-version`. The verification-level summary in the standing check paragraph after the items is superseded by this annotation.
+
+Two consequences for the closing section: step (1), emailing Nick the run instructions, no longer applies, because the run has already been made at Nick's own direction, and its deliverable line for item 3 is judged under the upgraded wording above. Step (2), the consolidated ticket email, stands unchanged.
+
 ## Items to confirm
 
 1. **F1 (fix comment text).** The draft's Fix section now says `APP_HOME` is converted at line 159 and `CLASSPATH` is built from it at line 174; the report's optional-comment line says the same. Confirm against the script: line 174 is `CLASSPATH=$GRADLE_WRAPPER_JAR`, a plain assignment, and line 159 is the only conversion before the block.

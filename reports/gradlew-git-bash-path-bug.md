@@ -2,6 +2,8 @@
 
 Verdict: **CAUSE CONFIRMED** by reading the script at three refs and by cygpath probes on the Windows Git Bash host. `gradlew` was not executed (no Gradle is allowed on this host), so the failing run itself is not reproduced here. The reproduction spec is at the end.
 
+**Annotation (2026-10-11), superseding the verification level stated in this report:** the end-to-end run has since been executed by Nick on the Windows Git Bash host and is recorded in `reports/gradlew-end-to-end-run.md`, with its trace files. On main `498a09aea97` the trace shows `APP_HOME` becoming `'C;C:/...'` after the second conversion and the run ends with `Error: Could not find or load main class org.gradle.wrapper.GradleWrapperMain`, exit 1; on branch `gradlew-msys-double-conversion` at `192aacaaf89`, `gradlew -version` prints Gradle 9.7.0, exit 0. Statements in this report that the run had not been executed (the verdict above, the reproduction spec, and the first Not verified bullet) record the state when this report was written and are superseded by that record. The run's scope is `-version` only; what it does not cover is listed in the run report.
+
 ## Refs read
 
 - `upstream/main` resolves to `d76fc14b98`, two commits ahead of `3f5d4c5bf8a` (the assignment's ref). The defect lines are the same at both.
@@ -71,12 +73,16 @@ Optional: a comment at line 214 saying that `APP_HOME` is converted at line 159 
 
 For the Windows host only, and only when Nick asks; the end-to-end run is the remaining verification step and Nick runs it himself. Linux and macOS cannot reproduce this defect.
 
+(Annotation, 2026-10-11: the run has been made, on main `498a09aea97` rather than the SOLR-9831 worktree named below; see `reports/gradlew-end-to-end-run.md`. This spec is kept as written.)
+
 - Environment: Git for Windows Bash (MINGW64), JDK 21 with `JAVA_HOME` set, working directory the SOLR-9831 worktree at `f269a70e84f`.
 - Command: `timeout 30 bash -x ./gradlew -version`. A fixed script may start the Gradle distribution download, and `timeout` kills it. Judge the trace, not the exit code.
 - Failing trace (from the assignment): `APP_HOME=C;C:/Users/.../wt/SOLR-9831`, `CLASSPATH='C;C:/.../gradle/wrapper/gradle-wrapper.jar'`, the final exec with `-classpath 'C;C:/...'`, then `Error: Could not find or load main class org.gradle.wrapper.GradleWrapperMain`.
 - A fixed script should show `APP_HOME=C:/Users/.../wt/SOLR-9831` with one conversion (line 159), `CLASSPATH` with no `C;` prefix, the final exec with `-classpath C:/.../gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain -version`, one remaining `cygpath --unix` call (line 219), and no `Could not find or load main class` line.
 
 ## Not verified
+
+Annotation (2026-10-11): the first bullet below is superseded by `reports/gradlew-end-to-end-run.md`; the failing run has been executed and its trace files are recorded there, which also answers the last bullet. The Cygwin bullet and the argument-loop bullet stand: the run exercised `-version` only, which covers neither.
 
 - `gradlew` was not run. The verdict rests on the line reads and the cygpath probes, which reproduce the trace's shape.
 - The POSIX form of `APP_HOME` at line 89 is inferred from the code and the trace, not observed.

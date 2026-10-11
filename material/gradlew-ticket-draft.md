@@ -2,7 +2,7 @@
 
 Status: NOT filed. Draft for Nick to file. Nick's rule (2026-10-11): new-ticket texts go to him in one consolidated email, sent only once every included ticket has been completely reviewed; this text joins that email when its review returns SATISFIED.
 
-Source: reports/gradlew-git-bash-path-bug.md on this branch (verdict CAUSE CONFIRMED by reading the script at main d76fc14b9857e77b830d7a82514b28c523a239c2 and by cygpath probes on a Windows Git Bash host; the end-to-end run is the remaining verification step).
+Source: reports/gradlew-git-bash-path-bug.md on this branch (verdict CAUSE CONFIRMED by reading the script at main d76fc14b9857e77b830d7a82514b28c523a239c2 and by cygpath probes on a Windows Git Bash host), and reports/gradlew-end-to-end-run.md on this branch (the end-to-end run, executed 2026-10-11: the failing trace observed on main 498a09aea97, and the fix verified for wrapper startup on branch gradlew-msys-double-conversion at 192aacaaf89).
 
 Duplicate check (2026-10-11, read-only Jira search): no existing ticket covers this defect. Searches covered gradlew with cygpath, Git Bash, MSYS or MINGW, GradleWrapperMain, and "Could not find or load main class". The only cygpath hit, SOLR-14955, covers the Prometheus Exporter bin scripts. The only GradleWrapperMain hit, SOLR-16641, is a circular task dependency in localSettings, a different defect.
 
@@ -41,11 +41,14 @@ Probes on a Git Bash host show the same shape: {{cygpath --path --mixed "/c/User
 
 h2. Reproduction
 
-The reported failing trace comes from a Git Bash run: {{APP_HOME=C;C:/Users/...}}, a {{CLASSPATH}} with the same {{C;}} prefix, the final {{java}} call at line 256 with that classpath, and the error above.
+Confirmed by run. On a Windows Git Bash (MINGW64) host with JDK 21 ({{JAVA_HOME}} set to Eclipse Adoptium jdk-21.0.11.10-hotspot), the command {{timeout 30 bash -x ./gradlew -version}} ran on two trees:
 
-Stated plainly: this defect is confirmed by reading the script at the cited snapshot and by the cygpath probes above, which reproduce the failing shape. The end-to-end run is the remaining verification step: on a Git for Windows Bash (MINGW64) host with JDK 21 and {{JAVA_HOME}} set, in the SOLR-9831 worktree at {{f269a70e84f}} (its {{gradlew}} is identical to the cited snapshot), run {{timeout 30 bash -x ./gradlew -version}} and judge the trace, not the exit code; a fixed script may start the Gradle distribution download and be killed by the timeout. Linux and macOS cannot reproduce it: the block at line 215 runs only when {{cygwin}} or {{msys}} is true. Cygwin (non-MSYS) takes the same block but was not checked separately.
+ * On main at {{498a09aea97}}: after the first conversion the trace shows {{APP_HOME}} as {{C:/Users/...}}; after the second conversion it shows {{APP_HOME}} as {{'C;C:/Users/...'}} and {{CLASSPATH}} as {{'C;C:/.../gradle/wrapper/gradle-wrapper.jar'}}; the final {{java}} call runs with that classpath and the JVM answers "Error: Could not find or load main class org.gradle.wrapper.GradleWrapperMain". Exit code 1.
+ * On branch {{gradlew-msys-double-conversion}} at {{192aacaaf89}}, whose {{gradlew}} differs from main's only by the deletion of lines 216 to 218 below: the second conversion does not happen, {{APP_HOME}} stays {{C:/Users/...}}, {{CLASSPATH}} has no {{C;}} prefix, and {{gradlew -version}} prints Gradle 9.7.0. Exit code 0.
 
-With the fix below, the same run should show {{APP_HOME=C:/Users/...}} from the single conversion at line 159, a {{CLASSPATH}} with no {{C;}} prefix, and no "Could not find or load main class" line.
+The reading of the script at the cited snapshot ({{d76fc14b9857}}) and the cygpath probes in the Mechanism section came first; the run confirms them.
+
+Stated plainly, the scope of the run: only {{gradlew -version}} ran, so the fix is verified for wrapper startup. {{gradlew check}}, {{gradlew build}} and any test task were not run. Cygwin (non-MSYS) was not run; it takes the same block at line 215. {{gradlew.bat}}, Linux and macOS were not run; on Linux and macOS the block at line 215 never runs because neither {{cygwin}} nor {{msys}} is set there. The argument conversion loop at lines 222 to 242 is not exercised by {{-version}}.
 
 h2. Fix
 
