@@ -497,3 +497,9 @@ No action taken beyond this job.
 - Change seen: SOLR-17722 is now BLOCKED (vm3, 06:29Z). Its base-only premise test task ended with 6 NPE failures in inherited HttpSolrClientTestBase.testQuery* methods, a harness problem with the scratch subclass, not premise evidence. It needs main-agent investigation before any relaunch.
 - Still blocked by environment, not claimable: SOLR-10667 and SOLR-12347 (npm step @babel/plugin-syntax-dynamic-import fails in jsClientDownloadDeps on every fresh dist; relaunch already used on each).
 - New assignments on the branch (pool-admin-ui-test-selection, pool-flaky-16630 round 2) are not in the vm2 backlog and are left to their tagged hosts.
+
+## 2026-10-11T06:50Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 are still exhausted; vm2 is idle. No gradle process and no open vm2 claim.
+- Change seen: SOLR-17722 is now DONE, NO GATE by finding (vm3, 06:43:41Z). The base-only wire probe showed the captured request uses wt=javabin, so the premise is false. A vm1 claim for the same slice (claims/pool-vm1-17722-probe-retry.md) was recorded as a duplicate and closed. No head leg or gate runs.
+- SOLR-10667 and SOLR-12347 remain BLOCKED by environment; not claimable.
