@@ -1,0 +1,122 @@
+# Response: draft fidelity fixes application, confirm or revert pass
+
+Scope: the main side checked every applied edit that `reports/draft-fidelity-fixes-application.md` lists as beyond its assignment's rule, against the receipts in `receipts/`, the fidelity round reports, the category answers files and the branch code where a report cites it. It then worked the flagged list: receipt-grounded wording and factual corrections are applied in this push; claim, number and decision items stay flagged, grouped by what they need.
+
+## Judgment calls: all confirmed, none reverted
+
+Each edit below is the fidelity round's own prescribed replacement, and the record supports it. Per file:
+
+- `query-parsing/SOLR-874.md` bold summary (leading AND, OR, && or ||; a leading NOT stays valid): confirmed. At merge-base `cabedd1d968`, `SolrPluginUtils.java` lines 651-654 holds no leading-boolean pattern, so the old summary's claim that a leading NOT fails was the misstatement. The citation re-point to the merge-base lines is the same round item.
+- `metrics/SOLR-17987.md` Choice cost sentence (the on-off flag stays in `solr.xml` while the list is a system property): confirmed. `SolrXmlConfig.java` lines 701-706 at head `38abf6423126` reads `<metrics enabled>` from `solr.xml`; the sentence it replaced claimed the opposite.
+- `core-admin/SOLR-15024.md` OWED line deleted: confirmed. The round prescribes the deletion; the open check (confirm the ticket text describes duplicate char filter keys) is recorded in `material/core-admin-round-1-answers.md`, so nothing is lost with the line.
+- `core-admin/SOLR-17708.md` OWED line deleted: confirmed. The round prescribes the deletion, and the owed work is since done: `receipts/SOLR-17708.md` records the changelog title correction and a top-up gate green at `2eceb5473037` with the same focused counts (12 cases). One leftover for packaging: the draft's Proof still names the pre-top-up head `10a7fa07a79` and its 2026-10-08 run; the counts are identical at the new head, so the line is true as written, and the head references re-point when the branch is packaged.
+- `core-admin/SOLR-17731.md` OWED line deleted: confirmed as the round's prescribed replacement, with a condition recorded here. The owed branch fixes are still open at head `f2b4ba164f56`: the malformed license header in the two new files, the two comments that state the Jersey routing rule as fact, the changelog title that says "reachable again", and the `ListAliasesAPITest` run. They are recorded in `material/core-admin-round-1-answers.md` ("Owed before opening") and in the round report, so the record survives the deletion; the draft must not be used until that work lands.
+- `search-components/SOLR-12556.md` Proof narrowed to `FacetRequestSortedMerger.java` at base `14c7aac0d151`, and the NOT FOR POSTING block deleted: confirmed. `receipts/SOLR-12556.md` states the proof scope as that one file at base, not the production tree; the deleted block was reviewer notes with internal vocabulary. The two CONFIRM markers inside the kept text stay; they are flagged items 33 and 34 below.
+- `replication-backup/SOLR-11650.md` "A unit test checks the raw slash case", link to `URLUtilTest.java` L157-L159 at head: confirmed. `testRedactUserInfoUnusualUserInfo` asserts only the raw `/` case; no assertion covers a raw `?`, so the old sentence overstated the coverage.
+- `search-components/SOLR-17051.md` mincount 4 sentence ("expects the `missing` key to stay, with a count of 4"): confirmed. `receipts/SOLR-17051.md` records no per-check base result, so the old claim that the check "passes on the base code too" had no source; the replacement states only what the head test expects (`TestJsonFacets.java` L2573-L2574).
+- `search-components/SOLR-17748.md` coverage sentence ("a shard whose existing entry has no error when an error with no cause arrives"): confirmed. `testExistingErrorEntryIsKept` (`TestShardsInfoErrorRecording.java` lines 92-108) passes a cause-less error to a shard that already has an entry, so the old sentence was wrong as written; the replacement names the route with no test.
+- `search-components/SOLR-10492.md` Limits bullet (local-only `group.field` returns BAD_REQUEST for facet.field and facet.query): confirmed. Traced in `SimpleFacets` (request parameters at L316-L317 and L330; the facet.field fallback at L796 reads request parameters only), and the Jira description matches the grouped-count behavior for a request-level `group.field`. This also settles the earlier round's owner decision 3 (make facet.query symmetric): it rested on the same misreading and is not needed.
+- `edismax/SOLR-3962.md` check sentence (one leading sign, then parentheses and a plain-number boost in any order; a sign inside the parentheses is not accepted): confirmed against `ExtendedDismaxQParser.java` L364-L393 at head `e7d5f3505035`: the method strips one leading sign only, so `(+*:*)` reduces to `+*:*` and returns false.
+- `search-components/SOLR-6193.md` Proof line ("The test fails on the base code at the first of them") and the citation re-points (base L64-L69 with "Before this change"; head L67-L76; `PivotFacet.java` L154): confirmed. `receipts/SOLR-6193.md` records the base run failing at the first re-enabled case; the test stops at its first failing assertion, so the old text claimed more than the record shows.
+- `search-components/SOLR-9396.md` symptom citation re-pointed to `SubQueryAugmenterFactory.java` L344-L365 at base `c3cdf7b46e8`, and the bold Limits summary added: confirmed. The added line summarizes the two bullets under it and adds no claim of its own.
+- `replication-backup/SOLR-17287.md` "one production caller ... The unit test also calls it": confirmed. At head `6957daf8261`, `clearAndActivate` is called from `RestoreCore.java` line 253 (production) and `UpdateLogTest.java` line 264 (the new unit test).
+
+## Flagged items applied in this push (11)
+
+Each is a wording or factual correction grounded in the ticket's receipt or, where noted, in the run record the round report checked. Replacement text is the round report's where it gives one.
+
+- F6 `cli/SOLR-17598`: Proof now reads "verified by construction, checked against this head on 2026-10-07" (`receipts/SOLR-17598.md` line 5: the construction proof recorded 2026-10-06 and re-verified against this exact head 2026-10-07). The Windows limit stays visible in the same sentence.
+- F8 `build-docs/SOLR-16914`: "Verified 2026-10-08 at this head." appended to the Proof paragraph (`receipts/SOLR-16914.md` lines 3-6: light gate finished 2026-10-08). Item F9 (the Kuromoji comparison sentence in the same paragraph) is not touched; see group R.
+- F26 `query-parsing/SOLR-6014`: the sentence "A CI run of the same class also passed at this head (run 37639870647)" is deleted. The run's head was a child of the branch head that differs only by a workflow file, so the sentence misstated where the run ran. Note: `receipts/SOLR-6014.md` line 8 carries the same claim and needs the same correction on the main side.
+- F27 `query-parsing/SOLR-6014`: "verified 2026-10-07" added to the 39 of 39 line (`receipts/SOLR-6014.md` lines 4 and 10).
+- Item 12 `replication-backup/SOLR-12085`: "No replication test ran at this head." deleted. The same paragraph and `receipts/SOLR-12085.md` record `IndexFetcherPacketProtocolTest` running 18 tests at the head with no failures.
+- Item 14 `replication-backup/SOLR-12246`: "so no replication test ran at this head" deleted, same ground (`receipts/SOLR-12246.md`: 44 tests at the head, `IndexFetcherPacketProtocolTest` 18 of them).
+- Item 44 `search-components/SOLR-17051`: the mincount 5 bullet now reads only "The `mincount` 5 check expects no `missing` key." The deleted text asserted the check should fail on the base code and carried an OWNER bracket; `receipts/SOLR-17051.md` gives the fail-before verdict as PASS with no failure shape recorded, and the earlier round's fix note says not to claim the check fails on base.
+- Item 50 `search-components/SOLR-7498`: "[run date to confirm]" replaced with 2026-10-05 (`receipts/SOLR-7498.md` line 2, the gated head's date).
+- Item 55 `search-components/SOLR-9148`: the `SQLHandler.java` L121-L127 citation re-pointed to the merge-base `97d973814336` and labeled "before this change". The merge-base was re-verified in this pass against the object graph (merge-base of head `30f0d7a42d50` with `3f5d4c5bf8a` is `97d973814336`), and lines 121-127 are identical at the base and the head.
+- Item 56 `search-components/SOLR-9148`: "Run date: [run date to confirm]." replaced with "Verified 2026-10-06 at `30f0d7a42d501316bd9d5336fe564608e78bfbba`." (`receipts/SOLR-9148.md` lines 4 and 9).
+- Item 58 `search-components/SOLR-9864`: "Run date: [run date to confirm]." replaced with "Verified 2026-10-05 at `b5826e466b9a8664adf11e0f247cff220f2f5953`." (`receipts/SOLR-9864.md` lines 4 and 9).
+
+Settled by work that landed after the application (1): item 5, the `SOLR-17708` changelog title. The top-up gate recorded in `receipts/SOLR-17708.md` applied the corrected title and re-gated at `2eceb5473037`; no draft edit was needed.
+
+## Still flagged, grouped by what they need
+
+Counts: the application counts 98 flagged (it nets the one split item, SOLR-15357 item 1, whose Proof half was applied in the application and whose banner half stays flagged). Enumerated by item, 87 stay flagged after the 11 applied above and the 1 settled.
+
+### Group R: a receipt refresh or a run record (main side; no decision needed) (26)
+
+- F2 `cli/SOLR-9342` "(verified 2026-10-07)": the receipt gives counts with no run date and the log is not on disk; the date stands unverified until the receipt carries it.
+- F9 `build-docs/SOLR-16914`: the Kuromoji source comparison is in the round record, not the receipt; the main side records it in the receipt or the Proof sentence goes.
+- F11 `build-docs/SOLR-17752`: the receipt dates the run 2026-10-04, before the head commit (2026-10-05); confirm which head ran.
+- F12 `build-docs/SOLR-17842`: "one or two existing benchmark classes per area" against the reference guide's three named for search; a count correction that follows the guide once the main side confirms the per-area reading.
+- F19 `query-parsing/SOLR-12212`: the per-class count placeholder; the receipt gives 80 focused tests in total and the log is not on disk.
+- F20 and F21 `query-parsing/SOLR-12608`: the 38 of 38 line has no verification date (receipt gate date 2026-10-05), and the line 1 HOLD banner stays; the receipt's gated head is a child of the head the draft names, so the date is added only when that record is reconciled.
+- F23 `query-parsing/SOLR-15615`: the fallback authorization sentence cannot be written until the fallback path is traced end to end.
+- F24 `query-parsing/SOLR-16267`: the def() claim needs the Lucene 9.x check; the receipt head and the queue head also disagree and need reconciling.
+- F30 `schema-analysis/SOLR-14199`: "[CONFIRM COUNT BEFORE POSTING ...]"; the receipt says 37 of 37, the source has 36 test methods.
+- F31 `schema-analysis/SOLR-14199`: the HOLD and OWNER note depend on a run and a ledger file that are not on disk.
+- F33 `schema-analysis/SOLR-15357`: the draft's "passes 4 of 4 ... shows no failure on the base code" against the receipt's "inconclusive by construction"; the framing is settled when the receipt record is.
+- F34 `schema-analysis/SOLR-15358`: "[TO FILL before posting ...]"; no base run on disk, and the proposed text asserts a failure without one.
+- F36 `schema-analysis/SOLR-18134`: "one of its two tests fails"; the overlay is not on record.
+- Item 1 `core-admin/SOLR-11939`: the Proof has no verification date and the proposed 2026-10-11 is not in the receipt (the receipt records NO GATE for this docs-only branch).
+- Items 2 and 3 `core-admin/SOLR-12007` and `SOLR-13246`: the dates in the drafts stand as written; their sources are a takeover-log record and a ledger record rather than the receipts, and a receipt refresh can absorb both.
+- Item 15 `replication-backup/SOLR-17287`: "TestRestoreCore [CONFIRM: count]"; the receipt (line 6) and the focused recount at the head (2026-10-11) both say 4 of 4, and the round report gives the full replacement line; the main side fills it.
+- Item 18 `replication-backup/SOLR-9865`: "TestRestoreCore [CONFIRM: count]"; the receipt says 4.
+- Item 20 `spellcheck/SOLR-4367`: the Proof's owner-fill placeholder; the receipt has no counts and no base failure, so the counts come from the run record or not at all.
+- Item 33 `search-components/SOLR-12556`: the test-count CONFIRM; the receipt says 13 tests and the file has 12 `@Test` methods (the 13th test method carries no annotation).
+- Item 34 `search-components/SOLR-12556`: the failing-test name CONFIRM; the fail-before log is not on disk.
+- Item 37 `search-components/SOLR-14381`: the Proof's "production code from before the boxing change" needs the base SHA named in the record.
+- Item 49 `search-components/SOLR-7390`: "Only the three test classes above were run" against the receipt's four classes.
+- Item 53 `search-components/SOLR-8009`: "10 of 10" against 9 test methods at the head; the gate log is not on disk.
+- Item 59 `search-components/SOLR-12092`: "The reference guide and the changelog both state this" is not supported by the branch title or the guide line cited; held, not deleted, until the record is checked.
+
+### Group D: covered by the decision default; the recorded recommendation is named (9)
+
+- F14 `metrics/SOLR-17987`: the environment variable name. Recorded recommendation: rename to `SOLR_METRICS_DISABLED_REGISTRIES` (the reference guide already uses that form); the draft's wording follows the rename.
+- F18 `query-parsing/SOLR-11761`: reorder the two "What happens today" sentences to match the research record, which starts with the call that works.
+- F35 `schema-analysis/SOLR-18134`: narrow "Lucene 9.x" to "9.12"; only 9.12.0 and 9.12.3 were checked, and the round report gives that replacement.
+- Item 10 `replication-backup/SOLR-11650`: drop "Three of those tests call the new helper"; the round replacement is "Its new redaction tests call the new helper, so they do not apply to the base code." (the receipt gives 18 of 18 with no split).
+- Item 21 `search-components/SOLR-10424`: name the landing order; the recorded decision (round w3 FIX 3 and owner decision 1) is "this change should land before, or together with, SOLR-8240".
+- Item 22 `search-components/SOLR-10694`: add JSON to the writers not changed and not checked (round s6 items 21 and 99 list it there).
+- Item 45 `search-components/SOLR-17748`: "two-node cluster" becomes "three-node cluster"; the head test uses `configureCluster(3)`, creates 3 shards and stops 2 nodes.
+- Item 46 `search-components/SOLR-17748`: adopt the round's replacement behavior-change bullet (the 500 becomes a returned result only with `shards.tolerant=true`; without it a shard with no live replica still fails with 503; a cause-less shard error is now listed as itself instead of raising a NullPointerException).
+- Item 54 `search-components/SOLR-8240`: the Limits sentence "Updating it is a planned follow-up pull request" stands under the standing follow-up rule (a known gap is named in Limits with a stated plan to submit the follow-up); no separate agreement is needed.
+
+### Group O: genuine owner calls (21)
+
+- F3 `cli/SOLR-9342`: "run by hand against the distribution built from this head" (the receipt says "Gradle-built distribution" with no head).
+- F4 `cli/SOLR-9342`: "The Windows JVM does not read TZ for GC log timestamps" (no Windows run).
+- F5 `cli/SOLR-17029`: Proof test 5; the 2026-10-08 run records it failing and the packaging round leaves it open.
+- F7 `security/SOLR-18368`: the opener's status against the records (receipt "RESOLVED/Fixed", Jira "Open"); owner options first.
+- F10 `build-docs/SOLR-17252`: the Q3 Choice; two recorded decisions conflict (the receipt's Q3 keeps the check at startup, the build-docs decisions recommend an earlier check), so the decision default cannot pick between them.
+- F15, F16, F17 `metrics/SOLR-17987`: three missing Limits (the "jetty" value creates no `solr.jetty` registry; the new test does not read the property or the environment path; with "jvm" listed the JVM metrics still run against a no-op provider). New claims; owner wording.
+- F25 `query-parsing/SOLR-17796`: "may still occur there" is a claim addition.
+- F28 `query-parsing/SOLR-6014`: "likely to fail at search time" is traced, not run.
+- Item 4 `core-admin/SOLR-17297`: the Choice's shape and the held draft; the answers record the draft as held pending the owner's ruling.
+- Items 26, 27, 28 `search-components/SOLR-11129`: owner decision 4 (a one-line fix or a Limit for the double offset), owner decision 2 (the local-params precedence), and the HOLD comment that follows both.
+- Item 32 `search-components/SOLR-12556`: the draft's "Buckets known before refinement follow the processEmpty rule" against the gated changelog, which drops all buckets not refined against every shard; the changelog fix needs owner approval first.
+- Item 38 `search-components/SOLR-14678`: the follow-up plan in Limits; owner decision 1 is not decided.
+- Item 41 `search-components/SOLR-15319`: "It is the case in SOLR-8051" was not reproduced; owner decision 2 (fix or close).
+- Item 43 `search-components/SOLR-15895`: "The Windows branch of the test is the one that covers this bug"; owner decision 4, and the record does not say which branch ran.
+- Item 52 `edismax/SOLR-7550`: the optional sentence "A 500 had no such case." stays unadded unless the owner wants the new claim.
+- Item 57 `search-components/SOLR-9396`: Limits bullet 1 ("Only a $row.field reference ...") stands or changes with the owner's regex decision (round w2 owner decision 4).
+- Item 62 `edismax/SOLR-4362`: the decimal-slop bullet ("A decimal slop such as ~2.5 counts too") does not hold at the head; a claim and a scope call.
+
+### Group B: branch-side edits (move the head; packaging time; replacement text in the round reports) (26)
+
+Draft-side flags whose fix is a branch edit: F1 `cli/SOLR-9342` title; F13 `metrics/SOLR-17987` title line (needs the fragment change first); F22 `query-parsing/SOLR-12608` memory claim (depends on the branch title); F32 `schema-analysis/SOLR-15357` INTERNAL comment in the branch test file (removed after the fix commits land).
+Changelog titles and branch comments: item 6 `core-admin/SOLR-17731` ("reachable again"), item 7 `core-admin/SOLR-18010` (also needs a settling run that is not on disk), item 11 `replication-backup/SOLR-11650`, item 13 `replication-backup/SOLR-12085` ("on every replication"), item 16 `replication-backup/SOLR-8430`, item 19 `spellcheck/SOLR-3701`, item 23 `search-components/SOLR-10694`, item 24 `search-components/SOLR-10844` ("empty counts"), item 25 `search-components/SOLR-10844` (the `SimpleFacets` comment at branch lines 799-804), item 29 `search-components/SOLR-11153`, item 30 `search-components/SOLR-11310`, item 31 `search-components/SOLR-11364`, item 35 `search-components/SOLR-13245`, item 36 `search-components/SOLR-14381`, item 39 `search-components/SOLR-14678`, item 42 `search-components/SOLR-15479`, item 47 `search-components/SOLR-6193`, item 48 `search-components/SOLR-6831`, item 51 `edismax/SOLR-7550`, item 60 `search-components/SOLR-14913`, item 61 `search-components/SOLR-3243`, item 63 `search-components/SOLR-6009`.
+Carried from the application's branch-side list (the draft text is already right; the fragment differs): SOLR-16272, SOLR-16813, SOLR-6960, SOLR-12871, SOLR-16267, SOLR-17280, SOLR-874, SOLR-8977, SOLR-9048, SOLR-14199, SOLR-15357, SOLR-15945, SOLR-16977, SOLR-17047, SOLR-18134, SOLR-9349 changelog titles or lines; the SOLR-17987 fragment line 2 (remove `=jvm,jetty`, needed for F13); the SOLR-17598 fragment title (an optional owner decision). Each edit moves its head, so the draft's links to that fragment re-point afterwards.
+
+### Group W: branch code work lands first; the draft text follows (5)
+
+- F29 `query-parsing/SOLR-874`: two Limits bullets depend on branch changes (round q6 FIX 1-3) that are not on the branch yet.
+- Items 8 and 9 `core-admin/SOLR-8576`: the alias claims in the text and the OWED line stay until the alias-assertion fix lands and runs (round k6 FIX 1).
+- Item 17 `replication-backup/SOLR-8430`: the "Limiters stay in memory" bullet is replaced in the same work that lands the adopted cap; the cap gate job is still open at this tip, and a focused re-run at the new head is owed before the Proof names it. The replacement text is in the round report (item 3 of its SOLR-8430 section).
+- Item 40 `search-components/SOLR-15041`: the Limits bullets on blank lines and split values stay held until the blank-line fix and a focused test land.
+
+## Notes
+
+- Holds the application left in place are undisturbed: the line 1 banners, the reviewer and owner blocks, the CONFIRM markers in SOLR-12556, and the holds in SOLR-17791, SOLR-4362, SOLR-8576, SOLR-11129, SOLR-15041 and SOLR-14931.
+- The application's caution on computed merge-bases stands for the rest of the set: they were computed from the review side's local `upstream/main` (`3f5d4c5bf8a`) and are re-verified before posting. The one base this pass needed (SOLR-9148) was re-verified against the object graph, as item 55 records.
+- Nothing was posted, filed or pushed to a submit branch in this pass; the only changes are the draft edits above and this file, on pr-prepare.
