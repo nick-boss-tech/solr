@@ -36,6 +36,7 @@ public class ZkClientClusterStateProviderCloseTest extends SolrTestCase {
   @Test
   public void testCloseIsIdempotent() throws Exception {
     ZkClientClusterStateProvider provider = new ZkClientClusterStateProvider("127.0.0.1:1");
+    provider.setZkConnectTimeout(200);
     provider.close();
     provider.close();
 
