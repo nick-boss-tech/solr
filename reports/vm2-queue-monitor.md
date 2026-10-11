@@ -668,3 +668,8 @@ No action taken beyond this job.
 - Gate finished: SOLR-4399 GREEN at local head 82c0c11373d (gate end 19:56:39Z). Proof leg failed by content as predicted; focused tests 4 of 4 pass at head; changelog, tidy, compile and module check green. Receipt written, job and claim marked DONE.
 - Held: the fork push of solr-4399-submit. The job file asks for it before the gate, and the monitor rule allows fork pushes only on green, so it needs a main-side go. The implementation is on local branch solr-4399-gate.
 - Queue check: no other round 1 or round 2 item is claimable for vm2. Shared-buffer items SOLR-10641, SOLR-13097, SOLR-17612, SOLR-1877, SOLR-5589, SOLR-6711 and SOLR-8430 are unclaimed; each starts with a fork push or a rebase, so vm2 does not take another one until the push rule is settled. vm2 is idle after this.
+
+## 2026-10-11T20:10Z
+
+- Queue check: nothing claimable for vm2. Round 1 items 3 to 13 and all round 2 items are DONE, BLOCKED (SOLR-10667, SOLR-12347, environment; both already relaunched once), or claimed by another host. No gradle process; no open vm2 job claim. vm2 is idle.
+- Stale claim seen: claims/coordinator-review-rounds.md (Windows review coordinator) is ACTIVE with its last heartbeat at 2026-10-11T14:53Z, past the 2-hour rule. Not vm2's claim; not taken. The Windows host or the main agent should refresh or release it.
