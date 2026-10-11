@@ -2,7 +2,7 @@
 
 Status: NOT filed. Draft for Nick to file. Nick's rule (2026-10-11): new-ticket texts go to him in one consolidated email, sent only once every included ticket has been completely reviewed; this text joins that email when its review returns SATISFIED.
 
-Source: reports/gradlew-git-bash-path-bug.md on this branch (verdict CAUSE CONFIRMED by reading the script at main d76fc14b9857e77b830d7a82514b28c523a239c2 and by cygpath probes on a Windows Git Bash host; the failing run itself was not executed, because Gradle is blocked on that host).
+Source: reports/gradlew-git-bash-path-bug.md on this branch (verdict CAUSE CONFIRMED by reading the script at main d76fc14b9857e77b830d7a82514b28c523a239c2 and by cygpath probes on a Windows Git Bash host; the end-to-end run is the remaining verification step).
 
 Duplicate check (2026-10-11, read-only Jira search): no existing ticket covers this defect. Searches covered gradlew with cygpath, Git Bash, MSYS or MINGW, GradleWrapperMain, and "Could not find or load main class". The only cygpath hit, SOLR-14955, covers the Prometheus Exporter bin scripts. The only GradleWrapperMain hit, SOLR-16641, is a circular task dependency in localSettings, a different defect.
 
@@ -43,7 +43,7 @@ h2. Reproduction
 
 Environment: Git for Windows Bash (MINGW64), JDK 21 with {{JAVA_HOME}} set, a Solr checkout at the cited main snapshot. Command: {{bash -x ./gradlew -version}}. The trace shows {{APP_HOME=C;C:/Users/...}}, a {{CLASSPATH}} with the same {{C;}} prefix, and the error above.
 
-Stated plainly: this defect is confirmed by reading the script at the cited snapshot and by the cygpath probes above, which reproduce the failing strings. The failing run itself has not been executed on the host that reported it, because Gradle is blocked there. Linux and macOS cannot reproduce it: the block at line 215 runs only when {{cygwin}} or {{msys}} is true. Cygwin (non-MSYS) takes the same block but was not checked separately.
+Stated plainly: this defect is confirmed by reading the script at the cited snapshot and by the cygpath probes above, which reproduce the failing strings. The end-to-end run is the remaining verification step. Linux and macOS cannot reproduce it: the block at line 215 runs only when {{cygwin}} or {{msys}} is true. Cygwin (non-MSYS) takes the same block but was not checked separately.
 
 With the fix below, the same trace should show {{APP_HOME=C:/Users/...}} from the single conversion at line 159, a {{CLASSPATH}} with no {{C;}} prefix, and no "Could not find or load main class" line.
 
