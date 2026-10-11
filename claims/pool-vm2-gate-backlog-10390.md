@@ -31,3 +31,9 @@ Distribution result: final Gradle output says `BUILD SUCCESSFUL in 7m 45s` (85 a
 Status: CLAIMED. Full archive expanded to `SOLR_TIP`; proof and focused head BATS tests remain; Java checks remain not applicable.
 
 Expansion result 2026-10-11T10:13:34Z: extracted the already-built full archive to `/workspace/gates/solr-10390-build/solr/packaging/build/solr-11.0.0-SNAPSHOT`; no Gradle rerun. Its executable `bin/solr` is byte-identical to the packaged branch source (SHA-256 `6eddf7f7eaa2f599410db6accaaa56dcbc93663d4c952697a3d96a360b8b3899`); 1,626 regular files. Logs: `/workspace/gates/logs/vm3/10390-dist-extract.log`, `/workspace/gates/logs/vm3/10390-dist-extract-headroom.log`. Pre/post: 21 GB free, 59,763 to 58,044 inodes free (93% to 94%); only sleeping Gradle daemon PID 221714, zero CPU ticks in the pre-check sample. Host `/usr/bin/lsof` is present; next create and verify a no-lsof PATH for both BATS runs.
+
+
+Heartbeat: 2026-10-11T10:19:18Z (UTC).
+
+SOLR-10390 BATS preparation: removed 33 verified ignored/untracked task build directories outside `solr/packaging/build` (8,390 entries; 559,663,571 bytes), retaining the archives, extracted distribution, BATS libraries, caches, source, `.git`, and logs. The task-local PATH without lsof is verified; project BATS 1.8.2 and host BATS 1.10.0 are distinguished in the gate file. The unsupported `--list-tests` option check executed no tests; supported `--count --filter` selected exactly one case. Pre-selection resource snapshot: 22 GB available and 65,056 inodes free (93% reported use); only sleeping Gradle daemon PID 221714, 1 CPU tick in 4 seconds, no client or worker. Logs are recorded in `gates/SOLR-10390.md`.
+Status: CLAIMED. Proof leg at the base and focused BATS test at packaged head remain; Java checks are not applicable.
