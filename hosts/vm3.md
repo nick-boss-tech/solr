@@ -36,3 +36,11 @@
 - SOLR-17708 full top-up gate completion heartbeat, 2026-10-11T11:05:04Z (UTC): GATE GREEN/DONE at live topic head `2eceb54730373475e9adfe55bfe555744fb3724a`; receipt `/workspace/gates/solr-11700-pr-prepare/receipts/SOLR-17708.md`. Changelog 315/315, tidy passed, Error Prone compile passed, base proof established the expected one assertion failure with the denial guard passing, focused head classes passed 12/12, and `:solr:core:check -x test -Pvalidation.errorprone=true` succeeded in 6m14s with the test task excluded. Module-check resources: 21 GB available, 31,696 free inodes before and 31,585 after (31,583 after idle verification); only stable sleeping Gradle daemons/worker daemons remained. Source checkout clean; no PR was opened or edited.
 
 - Queue pause and inode snapshot, 2026-10-11T14:10:34Z (UTC): vm3 has no active build/test process and no active claim. SOLR-8628 was paused by owner with its branch-head premise test pending, then its claim was released by owner direction; SOLR-5262 remains environment-blocked and its claim was also released. Root filesystem: 21 GB available and 23,129 free inodes (98% used). No cleanup has yet been performed for this inode recovery request.
+
+## Host status, 2026-10-11 ~08:38 MDT
+
+- Status: DOWN, reported by Nick on 2026-10-11 at about 08:38 MDT.
+- No new claims on vm3 until Nick says the host is back.
+- The SOLR-8628 premise claim and the SOLR-5262 gate claim were released by vm3 at 14:10Z, before the outage, and are claimable by the other hosts.
+- SOLR-8628 premise state at release: parts 1 and 2 confirmed (the write.lock-only crash state is reachable); part 3, the test leg, is unfinished.
+- SOLR-5262 state at release: still blocked on the develocity plugin resolution failure during tidy; no tests ran.
