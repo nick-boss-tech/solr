@@ -509,3 +509,8 @@ No action taken beyond this job.
 - Queue check: nothing claimable for vm2. Round 1 is exhausted and round 2 jobs 1 to 16 are each done, blocked, or held by vm1 or vm3. No gradle process running and no open vm2 claim; vm2 is idle.
 - Change seen: 54a5957ced added ten unclaimed gate jobs to the shared buffer (assignments/pool-shared-gate-backlog-buffer.md): SOLR-6711, SOLR-17708, SOLR-11479, SOLR-8628 (premise), SOLR-8430, SOLR-5589, SOLR-17612, SOLR-4399, SOLR-1877, SOLR-10641. They sit outside the ordered round 1 and round 2 backlog this monitor works, and most carry an implementation step before the gate, so vm2 leaves them for main-side direction rather than claiming them.
 - Change seen: Windows claimed the round 3 newly gated drafts (claims/pool-drafts-newly-gated-round-3.md, draft tag only, no vm2 work).
+
+## 2026-10-11T07:21Z
+
+- Queue check: nothing claimable for vm2. Round 1 and round 2 are still exhausted; no gradle process running and no open vm2 claim. vm2 is idle.
+- Change seen: SOLR-5262 is claimed by vm3 (gates/SOLR-5262.md, 07:12:31Z). It comes from the shared buffer, not this backlog. Its claim file is named claims/pool-vm2-gate-backlog-5262.md, which uses the vm2 prefix, so that name may be misread as a vm2 claim. Flagged for main-side tidy-up; vm2 did not take it.
