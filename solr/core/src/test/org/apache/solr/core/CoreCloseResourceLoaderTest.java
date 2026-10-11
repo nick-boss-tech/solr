@@ -34,17 +34,21 @@ public class CoreCloseResourceLoaderTest extends SolrTestCaseJ4 {
   }
 
   public void testReloadClosesTheOldLoaderOnly() throws Exception {
-    SolrCore oldCore = h.getCore();
+    SolrCore oldCore = h.getCoreInc();
     SolrResourceLoader oldLoader = oldCore.getResourceLoader();
+    assertEquals(2, oldCore.getOpenCount());
     assertFalse(oldLoader.isClosed());
 
     h.reload();
-    // the reference held here keeps the old core open
+    // the owned reference keeps the old core open after reload releases the registration
+    // reference
+    assertEquals(1, oldCore.getOpenCount());
     assertFalse(oldLoader.isClosed());
     oldCore.close();
+    assertEquals(0, oldCore.getOpenCount());
     assertTrue(oldLoader.isClosed());
 
-    try (SolrCore newCore = h.getCore()) {
+    try (SolrCore newCore = h.getCoreInc()) {
       SolrResourceLoader newLoader = newCore.getResourceLoader();
       assertNotSame(oldLoader, newLoader);
       assertFalse(newLoader.isClosed());
