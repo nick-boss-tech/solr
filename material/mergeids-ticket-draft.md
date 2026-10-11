@@ -42,10 +42,12 @@ End to end, the ingredients are the SOLR-14758 ones: a multi-shard collection, a
 
 h2. Fix options
 
-Two smallest changes, either or both:
+Two smallest changes present themselves:
 
- * Move the {{numFound}} / {{maxScore}} / {{hitCountIsExact}} accumulation below the skip, so totals describe the shards actually merged.
+ * Test the skip condition before accumulating the shard's totals (equivalently, move the {{numFound}} / {{maxScore}} / {{hitCountIsExact}} accumulation below the skip), so a skipped shard never enters the merged totals and the totals describe exactly the shards whose documents are merged.
  * Keep the totals, but set {{hitCountIsExact = false}} when a shard is skipped, so the response stops asserting the count is exact.
+
+The first change is the recommended one. Correcting the totals when the skip fires instead means subtracting the skipped shard's contribution after the fact. That can repair the counts, but it cannot correctly undo {{maxScore}}: a maximum cannot be decremented, so recovering the merged maximum without the skipped shard would need per-shard tracking and a recomputation, and {{hitCountIsExact}} would need recomputation as well. Testing the skip before accumulating leaves every total describing the same set of shards, so the reorder is the sound fix.
 
 Related: SOLR-14758, SOLR-15595. SOLR-15144 reports a different symptom in the same area (empty document list under {{timeAllowed}}) and does not appear to be the same mechanism.
 
