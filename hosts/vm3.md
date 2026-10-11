@@ -22,3 +22,5 @@
 - SOLR-17708 claim heartbeat, 2026-10-11T10:29:41Z (UTC): vm3 claimed the live-unclaimed top-up gate at branch head `10a7fa07a79ac4b4b52a83d307ee65349d015a23`. Scope is only the gate-prescribed changelog title correction and subsequent top-up gate; no build or test has started.
 
 - SOLR-17708 packaging heartbeat, 2026-10-11T10:32:31Z (UTC): the exact single-file changelog title correction was committed as `2eceb54730373475e9adfe55bfe555744fb3724a` and fast-forward pushed; the live fork tip and merge-base match the recorded task checkout. No build or test has started; next is YAML changelog validation.
+
+- SOLR-17708 changelog heartbeat, 2026-10-11T10:33:58Z (UTC): repository validator passed all 315 fragments at `2eceb54730373475e9adfe55bfe555744fb3724a`, including the corrected title. Pre/post parser snapshots: 21 GB available; 54,741 then 54,740 free inodes; only sleeping Gradle daemon PID 221714, no client or worker. Evidence is in `/workspace/gates/logs/vm3/17708-changelog*.log`.

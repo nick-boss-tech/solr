@@ -11,3 +11,4 @@
 - Logs: `/workspace/gates/logs/vm3/17708-*.log`.
 - Status: CLAIMED. The single-file title correction `2eceb54730373475e9adfe55bfe555744fb3724a` is live; no build or test has started.
 - Heartbeat: 2026-10-11T10:32:31Z (UTC), packaged head verified live; next step is changelog YAML parse.
+- Heartbeat: 2026-10-11T10:33:58Z (UTC), changelog validator passed 315/315 fragments at live head `2eceb54730373475e9adfe55bfe555744fb3724a`, including the corrected SOLR-17708 entry; logs retained. Next: tidy and confirm clean tree before compile.
