@@ -6,3 +6,6 @@ Branch: solr-14187-submit at 45b0f7ce34f802d0568c499bb3e5357f41be77ec (live tip,
 Heartbeat: 2026-10-11T03:53:23Z.
 
 Heartbeat: 2026-10-11T03:59:14Z. Premise run starting: worktrees /workspace/gates/solr-14187 (head) and /workspace/gates/solr-14187-proof (merge-base production, scratch vehicle ScratchSolr14187BaseDropTest named in gates/SOLR-14187.md). Runner /workspace/gates/g14187-premise.sh, logs /workspace/gates/logs/vm2/14187-premise-*.log.
+
+Result 2026-10-11T04:19:06Z: premise HOLDS (base scratch vehicle shows the static helper dropping the user; head branch test carries alice on poll and delete). Gate steps green at packaged head 29023ec1ecabc2cd0a87675bdcdccf5d71e719b8 (changelog OK, tidy clean, compileTestJava rc 0, focused CollectionAdminRequestAsyncAuthTest tests=2 failures=0 from fresh XML, solrj check rc 0).
+BLOCKED ON PROOF LEG: the branch test does not compile against merge-base production, so no branch test fails there. Job stopped per protocol; main agent decides. Receipt receipts/SOLR-14187.md. Claim DONE with outcome BLOCKED.

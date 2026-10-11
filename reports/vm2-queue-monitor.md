@@ -441,3 +441,11 @@ No action taken beyond this job.
 - Gate GREEN at packaged head 6120dae28d04 (local, handoff note removed, not pushed). Changelog OK, tidy clean, compile rc 0, focused ConcurrentUpdateJettySolrClientTest 12/0, module check rc 0.
 - Receipt receipts/SOLR-11356.md rewritten from NO GATE to GREEN, with the registration provenance kept; job and claim marked DONE.
 - Next claimable for vm2: round 2 job 6, SOLR-14187.
+
+## 2026-10-11T04:19Z
+
+- Claimed round 2 job 6, SOLR-14187 (premise run, then first gate), 03:53Z. Round 1 had no claimable vm2 job left (SOLR-5011 BLOCKED on proof leg, SOLR-12998 not claimable).
+- Premise holds: base scratch vehicle (ScratchSolr14187BaseDropTest, proof worktree only) shows the three-argument waitForAsyncRequest sending no credentials on poll or DELETESTATUS, and a manual requestStatus with credentials carrying them. The branch's own test does not compile at merge-base (INCONCLUSIVE by compile). Head: branch test carries alice on both requests, 2/0.
+- Gate steps green at packaged head 29023ec1ecab (local, handoff doc removed, not pushed). Changelog OK, tidy clean, compile rc 0, focused CollectionAdminRequestAsyncAuthTest 2/0, solrj check rc 0.
+- BLOCKED ON PROOF LEG: no branch test can fail at merge-base. Receipt receipts/SOLR-14187.md written as BLOCKED; job and claim marked BLOCKED, not DONE. Needs a main-agent decision on the proof shape.
+- Next claimable for vm2: round 2 job 7, SOLR-10667, not yet claimed.
