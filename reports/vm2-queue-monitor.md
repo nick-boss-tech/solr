@@ -408,3 +408,11 @@ No action taken beyond this job.
 - vm2 claimed round 1 job 13 (SOLR-13705 premise run) at 01:51Z (gates/SOLR-13705-premise.md, claims/pool-vm2-gate-backlog-13705.md).
 - Premise HELD: base 9b3a84b1c460 fails testLazilyInitializedSingletonIsVolatile on the volatile assertion (tests=2 failures=1); head 5f141fb2af passes both tests (tests=2 failures=0). Receipt receipts/SOLR-13705.md updated; job and claim marked DONE.
 - Round 1 is now exhausted for vm2 except SOLR-5011 (BLOCKED on proof leg, recorded). Round 2 is claimable by the next run.
+
+## 2026-10-11T02:32Z (UTC), vm2 queue run
+
+- vm2 claimed round 2 job 2 (SOLR-10882 premise run, then first gate) at 02:09Z; round 1 was exhausted. Round 2 job 1 (SOLR-9852) is held by vm1 and was not touched.
+- Premise HELD: on base e044bf20b4 production with the branch test kept, arrayMixedTypesSortTest fails with the ClassCastException the handoff predicted (ArrayEvaluatorTest.java:148); head 83fc3dfeb2 passes 7/7 from fresh XML.
+- Packaging commit 5d7d07a5b1 (removes SOLR-10882-TESTING.md) is local only. Gate GREEN at that head: changelog OK, tidy clean, compile rc 0, proof leg as above, focused 7/7, module check rc 0.
+- Receipt receipts/SOLR-10882.md written; job and claim marked DONE.
+- Next claimable for vm2: round 2 job 3 (SOLR-3498 premise run, then first gate).

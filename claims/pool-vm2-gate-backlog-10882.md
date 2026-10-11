@@ -8,3 +8,6 @@ Branch: solr-10882-submit at 83fc3dfeb24b875639150579a2f8aeb35b7d6a9c (live tip,
 Heartbeat: 2026-10-11T02:09:11Z.
 
 Heartbeat: 2026-10-11T02:23:40Z. Premise HOLDS (base fails arrayMixedTypesSortTest with ClassCastException at ArrayEvaluatorTest.java:148; head passes 7/7). Packaged head 5d7d07a5b1 local. Gate running, log /workspace/gates/logs/vm2/10882-gate.out.
+
+Result 2026-10-11T02:32:06Z: GREEN at packaged head 5d7d07a5b17bfbf9370fe8562ce7b5d9909118ee. Proof leg (base production, branch test kept) ArrayEvaluatorTest tests=7 failures=1, arrayMixedTypesSortTest ClassCastException as premised; focused head tests=7 failures=0; tidy clean, compile rc 0, module check rc 0. Receipt receipts/SOLR-10882.md. Packaging commit local only.
+DONE: 2026-10-11T02:32:06Z (UTC), outcome GREEN.
