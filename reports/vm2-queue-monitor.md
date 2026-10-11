@@ -602,3 +602,10 @@ No action taken beyond this job.
 - Queue check: nothing claimable for vm2 under the round 1 and round 2 backlog; every item is DONE, BLOCKED, or claimed by vm1. No gradle process and no open vm2 claim; vm2 is idle.
 - Change: claimed the gate backlog coordinator role in claims/coordinator-gate-backlog.md, as the handoff asks on the next pass.
 - Not taken: unclaimed shared-buffer gate jobs beyond round 2 (SOLR-6711, SOLR-8430, SOLR-5589, SOLR-17612, SOLR-4399, SOLR-1877, SOLR-10641, SOLR-13097). Their job files name a branch fix or a DISCUSS or owner call first (SOLR-13097 is a force-with-lease rebase of a live PR branch), and they sit outside the stated round order. Needs a main-side decision on whether vm2 takes them.
+
+## 2026-10-11T15:11Z
+
+- Queue check: nothing claimable for vm2. Round 1 has no open job (tranche 1 items are DONE or not claimable). Round 2 items are DONE, or BLOCKED by environment (SOLR-10667, SOLR-12347), which the claim protocol does not pick up. No gradle process and no vm2 claim with a heartbeat under 60 minutes; vm2 is idle.
+- Change seen: commit 7f4af152c1 (Nick Shanin) extends coordinator authorization: coordinators may update Nick's PR descriptions against receipts, implement review-identified changes through the full gate, and decide scope questions under the decision default, each recorded in the category file. Gate failures where tests executed are now investigated and recorded before any relaunch, not escalated outright. No effect on the vm2 queue today.
+- Record gap: claims/pool-vm2-gate-backlog-14187.md ends on a follow-up line, not a DONE mark, although gates/SOLR-14187.md reads DONE (GREEN by main-side proof decision). The vm2 coordinator should add the DONE mark on its next push.
+- Open for the main side: SOLR-10667 and SOLR-12347 are BLOCKED by environment with no test run. The round 2 rules allow one relaunch of a run that never executed tests, but BLOCKED jobs are skipped, so vm2 has not relaunched them.
