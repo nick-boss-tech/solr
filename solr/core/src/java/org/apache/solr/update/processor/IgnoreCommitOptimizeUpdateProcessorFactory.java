@@ -114,10 +114,10 @@ public class IgnoreCommitOptimizeUpdateProcessorFactory extends UpdateRequestPro
     }
 
     /**
-     * The COMMIT_END_POINT param marks commits Solr sends internally: "true" from a recovering
-     * replica to its leader, and the "leaders" / "replicas" endpoint names the distributed update
-     * processor substitutes when it forwards a commit. The endpoint names are not booleans, so
-     * parsing the value with getBool would reject forwarded recovery commits with a 400.
+     * The COMMIT_END_POINT param marks commits Solr sends internally: "true", and the "leaders"
+     * or "replicas" endpoint names that the distributed update processor sets when it forwards a
+     * commit. The endpoint names are not booleans, so parsing the value with getBool would reject
+     * forwarded commits with a 400.
      */
     private static boolean isInternalEndpointCommit(SolrParams params) {
       String endPoint = params.get(DistributedUpdateProcessor.COMMIT_END_POINT);
