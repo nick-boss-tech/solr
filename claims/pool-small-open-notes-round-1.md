@@ -8,4 +8,4 @@
 - Deliverable: `reports/small-open-notes-round-1.md`, verdict per note.
 - Heartbeat: 2026-10-12T19:35Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/small-open-notes-round-1.md`. SOLR-12864 Limits bullet deleted; SOLR-5939 and SOLR-6065 unchanged-content links moved to the merge-base form, as the round notes recommend.
