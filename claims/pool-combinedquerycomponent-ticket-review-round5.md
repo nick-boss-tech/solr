@@ -8,4 +8,4 @@
 - Scope: confirmation only. The draft and the gate job are not edited; any passage that disagrees is flagged. No build, gate, Jira, email or comment write.
 - Deliverable: `reports/combinedquerycomponent-ticket-review-round5.md`, verdict first (SATISFIED or STILL OPEN).
 - Heartbeat: 2026-10-12T05:35Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-12. Deliverable: see the report named above, verdict STILL OPEN.
