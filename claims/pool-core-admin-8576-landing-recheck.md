@@ -8,4 +8,4 @@
 - Deliverable: `reports/core-admin-8576-landing-recheck-round-1.md`, verdict first (CONVERGED or NOT CONVERGED).
 - Not in scope: SOLR-4502, SOLR-9750, SOLR-12916 and the rest of the core admin set; the branch, PR, comments and posts.
 - Heartbeat: 2026-10-12T08:24Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/core-admin-8576-landing-recheck-round-1.md`, verdict NOT CONVERGED: head, links, anchors and the round 1 replacements hold; two should-fix items remain (CA-LR-01 inconclusive-by-construction wording, CA-LR-02 "unchanged" overstates the assertion) for the main side to apply.
