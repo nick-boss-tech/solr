@@ -1,5 +1,5 @@
 title: >
-  Spell checkers are now closed when the core closes, and IndexBasedSpellChecker closes the previous source index reader on reload, so their index readers and directories are no longer leaked.
+  Lucene-based spell checkers are now closed when the core closes, and IndexBasedSpellChecker closes the previous source index reader on reload, so their index readers and directories are no longer leaked.
 type: fixed
 authors:
   - name: Nick Shanin

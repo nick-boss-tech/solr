@@ -18,6 +18,7 @@ package org.apache.solr.spelling;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -47,6 +48,8 @@ public class IndexBasedSpellChecker extends AbstractLuceneSpellChecker {
   // the directory behind the reader opened from the configured sourceLocation, if any
   private FSDirectory sourceDir;
 
+  private final ReentrantReadWriteLock readerLock = new ReentrantReadWriteLock();
+
   @Override
   public String init(NamedList<?> config, SolrCore core) {
     super.init(config, core);
@@ -60,19 +63,38 @@ public class IndexBasedSpellChecker extends AbstractLuceneSpellChecker {
 
   private void initSourceReader() {
     if (sourceLocation != null) {
-      final IndexReader previousReader = this.reader;
-      final FSDirectory previousDir = this.sourceDir;
       FSDirectory luceneIndexDir = null;
+      IndexReader newReader;
       try {
         luceneIndexDir = FSDirectory.open(Path.of(sourceLocation));
-        this.reader = DirectoryReader.open(luceneIndexDir);
-        this.sourceDir = luceneIndexDir;
+        newReader = DirectoryReader.open(luceneIndexDir);
       } catch (IOException e) {
         IOUtils.closeQuietly(luceneIndexDir);
         throw new RuntimeException(e);
       }
+      IndexReader previousReader;
+      FSDirectory previousDir;
+      readerLock.writeLock().lock();
+      try {
+        previousReader = this.reader;
+        previousDir = this.sourceDir;
+        this.reader = newReader;
+        this.sourceDir = luceneIndexDir;
+      } finally {
+        readerLock.writeLock().unlock();
+      }
       IOUtils.closeQuietly(previousReader);
       IOUtils.closeQuietly(previousDir);
+    }
+  }
+
+  @Override
+  public SpellingResult getSuggestions(SpellingOptions options) throws IOException {
+    readerLock.readLock().lock();
+    try {
+      return super.getSuggestions(options);
+    } finally {
+      readerLock.readLock().unlock();
     }
   }
 
@@ -88,25 +110,30 @@ public class IndexBasedSpellChecker extends AbstractLuceneSpellChecker {
 
   @Override
   public void build(SolrCore core, SolrIndexSearcher searcher) throws IOException {
-    IndexReader reader = null;
-    if (sourceLocation == null) {
-      // Load from Solr's index
-      reader = searcher.getIndexReader();
-    } else {
-      // Load from Lucene index at given sourceLocation
-      reader = this.reader;
-    }
+    readerLock.readLock().lock();
+    try {
+      IndexReader reader = null;
+      if (sourceLocation == null) {
+        // Load from Solr's index
+        reader = searcher.getIndexReader();
+      } else {
+        // Load from Lucene index at given sourceLocation
+        reader = this.reader;
+      }
 
-    // Create the dictionary
-    dictionary = new HighFrequencyDictionary(reader, field, threshold);
-    // TODO: maybe whether or not to clear the index should be configurable?
-    // an incremental update is faster (just adds new terms), but if you 'expunged'
-    // old terms I think they might hang around.
-    spellChecker.clearIndex();
-    // TODO: you should be able to specify the IWC params?
-    // TODO: if we enable this, codec gets angry since field won't exist in the schema
-    // config.setCodec(core.getCodec());
-    spellChecker.indexDictionary(dictionary, new IndexWriterConfig(null), false);
+      // Create the dictionary
+      dictionary = new HighFrequencyDictionary(reader, field, threshold);
+      // TODO: maybe whether or not to clear the index should be configurable?
+      // an incremental update is faster (just adds new terms), but if you 'expunged'
+      // old terms I think they might hang around.
+      spellChecker.clearIndex();
+      // TODO: you should be able to specify the IWC params?
+      // TODO: if we enable this, codec gets angry since field won't exist in the schema
+      // config.setCodec(core.getCodec());
+      spellChecker.indexDictionary(dictionary, new IndexWriterConfig(null), false);
+    } finally {
+      readerLock.readLock().unlock();
+    }
   }
 
   @Override
