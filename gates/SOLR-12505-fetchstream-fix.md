@@ -2,7 +2,7 @@
 
 - Branch: solr-12505-submit. Head: 5f20e1171bc890509d76e4f5f7defcc4fc8c102c (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-12505.md). Merge-base with main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: FAILED at d81a77311773 (vm2 gate backlog coordinator; GATE END 2026-10-12T21:45:47Z; log logs/vm2/queue-g12505-gate-20261012T213052Z.out). Not relaunched; left for the main agent. Compile leg (`compileTestJava` with Error Prone, -Werror): rc=1, the new test at StreamDecoratorTest.java:1033 trips AssertThrowsMultipleStatements ("lambda passed to assertThrows should contain exactly one statement"). Proof leg: rc=1, but the new test fails at the pre-fix production with "Unable to construct instance of FetchStream", the same construction error as the head run, so the failure is not shown to be the corrupted-batch premise; the proof is not established. Focused head leg: rc=1, 57 tests, 1 failed (testFetchStreamRejectsJoinFieldNameThatBreaksLocalParams, "Unable to construct instance of FetchStream"). Changelog, tidy and module check passed (rc=0).
+- Status: IN PROGRESS under amendment 1 (gates/SOLR-12505-fetchstream-fix-amendment-1.md). Fix commits: d81a773117 (validation) and ee67d37421 (test restructure, queued for the full gate at that head). The gate at d81a773117 failed as recorded in the amendment; not relaunched at that head.
 - Capability tags: gate.
 - Job type: branch-side fix on a gated branch, then the full hardening gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/streaming-convergence-round-1-response.md, item ST-R1-23 (verified there against the head code), with the register text in reports/streaming-convergence-round-1.md. The draft pr-drafts/streaming/SOLR-12505.md stays NOT CONVERGED until this job lands; the streaming convergence round 2 assignment re-checks the draft against the new head.
@@ -24,3 +24,10 @@
 - [ ] focused tests at the new head: StreamDecoratorTest, counted from fresh JUnit XML
 - [ ] module check (:solr:solrj-streaming)
 - [ ] pushed plainly to solr-12505-submit; receipt refreshed; draft updated to the new head; job and claim DONE
+
+## Amendment 1 record (vm2)
+
+- Route: validate. FetchStream (commit d81a773117) rejects an `on=` join field name containing whitespace, braces, `!`, quotes or backslashes, and fails with an IOException naming the field. Reason: escaping would let the batch query accept a field name that is almost certainly not in the schema, while validating fails at construction with a message that says what is wrong.
+- Construction error cause: StreamFactory.constructStream (solrj-streaming expr/StreamFactory.java, the ctor.newInstance wrap around lines 593 to 611) wraps a constructor's IOException in an InvocationTargetException with no message, so the outer message is "Unable to construct instance of ...FetchStream" and the validation text sits on the cause chain. The head run failed because the test checked only the outer message. The test now checks the cause chain (causeChainContains). StreamFactory is unchanged. This is production behaviour outside the FetchStream fix; it loses the reason for every stream constructor and is recorded here for the owner, not fixed in this job.
+- Compile leg cause: the assertThrows lambda held several statements (AssertThrowsMultipleStatements). The stream setup and drain now sit in drainFetchStream, so each lambda is one call.
+- Proof leg, seed, counts: recorded when the gate at ee67d37421 completes.
