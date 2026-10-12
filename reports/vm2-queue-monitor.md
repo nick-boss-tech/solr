@@ -807,3 +807,10 @@ No action taken beyond this job.
 - Claimed: SOLR-8430 (claim claims/pool-vm2-gate-backlog-8430.md). Implementation pushed as 094f0716a8 (finding 1 cap, finding 2 retitle, cap test), fast-forward from 49af21be589, tidy folded in.
 - Gate state: busy. SOLR-8430 gate at 094f0716a8 running from 03:49:46Z (runner /workspace/gates/g8430-gate.sh, log /workspace/gates/logs/vm2/8430-gate.out). No GATE END yet. Next run resumes at GATE END for SOLR-8430: receipt, job DONE, claim DONE.
 - Next claimable after SOLR-8430: SOLR-13097 (rebase, force-with-lease pinned to the fork tip read at claim time), then SOLR-11939. Unclaimed buffer depth is above target (the main-side additions SOLR-5011-narrowing, SOLR-17731, SOLR-16437, SOLR-17372-premise, SOLR-15358-proof-record have no claim), so no restock this run.
+
+## 2026-10-12T04:01Z (vm2 cron, busy check)
+
+- Finished: nothing new this run.
+- Claimed: nothing new this run.
+- Gate state: busy. SOLR-8430 gate at 094f0716a8 running from 03:49:46Z (runner /workspace/gates/g8430-gate.sh, log /workspace/gates/logs/vm2/8430-gate.out). Changelog parse, tidy (clean after fold-in) and Error Prone compile passed; cap proof leg (production at 49af21be58) in progress. Gradle process running. No GATE END yet. Claim heartbeat 03:50Z, under 50 minutes; no refresh due.
+- Next claimable after SOLR-8430: SOLR-13097 (rebase, force-with-lease pinned to the fork tip read at claim time), then SOLR-11939.
