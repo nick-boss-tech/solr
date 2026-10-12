@@ -9,4 +9,4 @@
 - Hold: SEC-R1-07 and SEC-R1-08 are out of scope for this round, as the assignment says.
 - Heartbeat: 2026-10-12T21:37Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/landing-recheck-10364-11678-round-1.md`. SOLR-10364 converged at the live head; SOLR-11678 patched for SEC-R1-03 and SEC-R1-04, still held for SEC-R1-05.
