@@ -766,3 +766,7 @@ No action taken beyond this job.
 ## 2026-10-12T01:45Z (vm2 cron, busy check)
 
 - Busy: SOLR-6711 gate at 7ddf5dc6f4 running from 01:43:55Z (changelog parse passed, tidy in progress, no GATE END). Claim heartbeat 01:37Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END for SOLR-6711, then the next unclaimed buffer job (SOLR-1877 or the next in order, claims/ governs).
+
+## 2026-10-12T01:46Z (vm2 cron, busy check)
+
+- Busy: SOLR-6711 gate at 7ddf5dc6f4 still running (started 01:43:55Z, tidy step, no GATE END). Claim heartbeat 01:37Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END for SOLR-6711.
