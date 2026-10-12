@@ -128,3 +128,10 @@ Two directions from Nick, recorded by the main agent on 2026-10-12.
 
 - When the unclaimed gate queue is large, the main host (vm1) also claims and runs pool gate jobs from `gates/`; it does not sit idle while the queue is deep. Hosts should expect gate claims from vm1 alongside vm2's. The claim rules in WORKFLOW.md apply unchanged: claim before work, hourly heartbeats, and no gate runs on two hosts at once.
 - Review assignments may direct the review coordinator's side to write the patch for a finding it raises, and then to re-review its own patch in a following round. That closes the loop on the review side instead of sending the work back to the main agent. This sits inside the extended coordinator authorization above: a branch change goes through the full hardening gate, the patching agent pushes it, and the gating host refreshes the ticket's receipt. The main side verifies the result rather than duplicating the work.
+
+## Owner directives (2026-10-12, later): vm2 patch authority and main-side offload to the review side
+
+Two more directions from Nick, recorded by the main agent on 2026-10-12.
+
+- The gate coordinator (vm2) has the same patch authority the review side has. A gate job file may direct vm2 to patch the branch itself so the build succeeds or so the premise is validated, instead of sending the fix back to the main side. The ticket and branch status vm2 needs is on pr-prepare, in `receipts/`, `gates/` and `claims/`. The rules around a patch are unchanged: the full hardening gate, the patching agent pushes, and the gating host refreshes the ticket's receipt.
+- While the review side has spare capacity, the main side will hand it settlement and application work as assignments, not just fresh review rounds. Where it fits, that work is framed as an apply-and-re-review loop under the patch-loop directive above. The main side keeps the local queue and the vm1 gates.
