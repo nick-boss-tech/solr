@@ -8,4 +8,4 @@
 - Deliverable: `reports/solr-10882-proof-date-round-1.md`, with the date search, the ladder rung and the before and after text.
 - Heartbeat: 2026-10-12T19:35Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/solr-10882-proof-date-round-1.md`. The Proof date is corrected to the recorded gate completion for the head, 2026-10-11 (UTC).
