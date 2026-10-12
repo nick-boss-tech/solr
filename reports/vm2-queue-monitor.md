@@ -749,3 +749,11 @@ No action taken beyond this job.
 
 - Busy: SOLR-10234 gate running from 23:58:36Z, now in module-check (changelog OK, tidy clean, compile rc 0, proof rc 1 by content "SolrCloudTestCase [ExtrasFS]", focused-head 1 run 0 failures); Gradle live, no GATE END yet. Claim heartbeat 23:58Z, under 50 minutes; no refresh due.
 - Nothing finished or claimed this run. Next run resumes at GATE END: record receipt, job DONE and claim DONE for SOLR-10234. Next claimable after that: SOLR-11939 (rebase with force-with-lease pinned at claim time). Buffer still short of the 3-job target.
+
+## 2026-10-12T00:35Z (vm2 coordinator run, gate ended, relaunched)
+
+- Finished: SOLR-10234 gate run 1 at f5ded23ffb ENDED 00:18:04Z with module check rc 1. Cause: ecjLintTest, unused import in CloudTestBaseFileSystemsTest.java (no tests run). Premise, proof leg (by content) and focused test all as expected. Recorded in gates/SOLR-10234.md.
+- Fix: import removed, commit eb8c4060d9 pushed to solr-10234-submit as a fast-forward from f5ded23ffb (ls-remote verified). Coordination record pushed as 4d4f54caf9.
+- Gate state: full gate run 2 at eb8c4060d9 running from 00:32:33Z, log /workspace/gates/logs/vm2/10234-gate.out. No receipt yet.
+- Not claimed this run (busy). Buffer check: unclaimed jobs are SOLR-5589, 6711, 1877, 17612, 8430, 13097 and 11939, so the 3-job target holds.
+- Next claimable after run 2 ends: SOLR-5589 (first gate after the disable-rule fix), then SOLR-6711, SOLR-1877, SOLR-17612, SOLR-8430, SOLR-13097, SOLR-11939.
