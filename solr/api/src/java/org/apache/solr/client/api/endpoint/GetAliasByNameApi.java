@@ -26,8 +26,8 @@ import org.apache.solr.client.api.model.GetAliasByNameResponse;
 /**
  * V2 API definition for inspecting a single collection alias.
  *
- * <p>This shares its class-level path with {@link DeleteAliasApi}. Before that, the delete
- * resource answered {@code GET /aliases/{aliasName}} with a 405 (see V2ResourcePathOverlapTest).
+ * <p>This shares its class-level path with {@link DeleteAliasApi}. Before that, the delete resource
+ * answered {@code GET /aliases/{aliasName}} with a 405 (see V2ResourcePathOverlapTest).
  */
 @Path("/aliases/{aliasName}")
 public interface GetAliasByNameApi {
