@@ -58,9 +58,12 @@ public class SchemaVersionSpecificBehaviorTest extends SolrTestCaseJ4 {
           }
 
           // 1.5: omitNorms default changed to true for non TextField
+          // SOLR-14199: point fields always omit norms, regardless of version
           assertEquals(
               f + " field's type has wrong omitNorm for ver=" + ver,
-              (v < 1.5F ? false : !(field.getType() instanceof TextField)),
+              (v < 1.5F && !(field.getType() instanceof PointField))
+                  ? false
+                  : !(field.getType() instanceof TextField),
               field.omitNorms());
 
           // 1.6: useDocValuesAsStored defaults to true
