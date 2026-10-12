@@ -8,4 +8,4 @@
 - Deliverable: `reports/recheck-13943-landing-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T17:47Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/recheck-13943-landing-round-1.md`. Links, anchors, changelog and dates hold at `ca443f6f68`; two count sentences re-pointed to the head they were run at, and the earlier head named.
