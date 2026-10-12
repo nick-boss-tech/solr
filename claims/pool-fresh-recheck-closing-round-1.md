@@ -8,4 +8,4 @@
 - Deliverable: `reports/fresh-recheck-closing-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T19:05Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/fresh-recheck-closing-round-1.md`. CONFIRMED for SOLR-6711, SOLR-16013 and SOLR-17612; the edited text holds against its receipt and head code.
