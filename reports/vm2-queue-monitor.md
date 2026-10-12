@@ -878,3 +878,13 @@ No action taken beyond this job.
 - Claimed: SOLR-15358-proof-record at 2f8402839d (claims/pool-vm2-gate-backlog-15358.md).
 - Queue stock: below minimum. Unclaimed gate jobs in the buffer: SOLR-16013 and SOLR-13136 (two; target is three). Restock is the next action for the next run, from receipts with no duplicate heads.
 - Gate state: idle.
+
+## 2026-10-12T09:43Z vm2 gate backlog coordinator
+
+- Busy check: no Gradle process at 09:38Z; no open vm2 claim. The SOLR-15358 proof run ended 09:37Z and is already recorded.
+- Finished: none new this run. The 15358 record was confirmed DONE.
+- Failed: none.
+- Claimed: SOLR-16013 re-gate at ba26b70289 (claims/pool-vm2-gate-backlog-16013.md). Gate started 09:41:48Z, log /workspace/gates/logs/vm2/16013-gate.out, runner /workspace/gates/g16013-gate.sh. The gate is at tidy; changelog parse passed.
+- Restock: SOLR-13943 (gates/SOLR-13943.md, re-gate at ca443f6f68) and SOLR-15805 (gates/SOLR-15805.md, re-gate at 6d78603d82, identical tree to the receipt's 3432f950f0). Buffer now has three unclaimed gate jobs: SOLR-13136, SOLR-13943, SOLR-15805.
+- Not stocked: SOLR-10252 (docs only, held on the round 5 owner decision).
+- Next claimable in buffer order: SOLR-13136 (re-gate at 486b387755, after SOLR-16013 finishes).
