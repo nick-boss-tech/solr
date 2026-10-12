@@ -6,3 +6,4 @@
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED by vm1.
 - Heartbeat 2026-10-12T14:24Z: claim filed, work starting.
+- Heartbeat 2026-10-12T14:47Z: fix committed at dc82676b8096 (pre-fix proof leg failed as designed, premise message on record); full gate queued behind the vm1 build lock.
