@@ -13,6 +13,8 @@ The finding holds that the sentence "A follow-up submission for that flaw is pla
 
 The sentence stays as written. Round 6 is asked to judge this rebuttal against the two records.
 
+Correction (2026-10-12, from round 6, UP-R6-03 and UP-R6-04): two points of framing in this section are corrected, and the conclusion is unchanged. The sentence rests on the owner's 2026-10-09 ratification of planned follow-up commitments in the 22 drafts (`material/review-opened-28-answers.md`, "Confirmations ratified by the owner", item 1; `reports/review-corrections-28.md` item 1 lists SOLR-14718 among the drafts stating such a commitment). `TESTING.md` recommends recording the second flaw as a follow-up and records the ship-narrow decision; it makes no commitment itself, so it is not cited here as the commitment's source. There is also no conflict between records to resolve: the gap the ratification lists for SOLR-14718 (its item 2) is the corrections report's item 2 gap, draft line 33 ("Two paths still name one request"), a different limitation from the line 36 sentence; and the "planned follow-up sentences stay" entry quoted above sits in a main-side record of calls adopted under the standing decision practice, not in an owner decision. The rebuttal stands on the ratification alone.
+
 ## 2. UP-R5-02, SOLR-3657 draft line 25 (should-fix): applied verbatim
 
 The parenthesis now reads "(verified 2026-10-07)" in place of "(gate of 2026-10-07)". The rest of the bullet is unchanged.
