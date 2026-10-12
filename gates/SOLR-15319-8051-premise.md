@@ -3,7 +3,7 @@
 - Branch under test: solr-15319-submit. Head: 4bda91f46fc18142809c919d7c563129fdf7fb96 (live tip, matches receipts/SOLR-15319.md).
 - Reference branch: solr-8051-submit at e50a2aa3437cb14ce4310a5025ad783fc93a97b1 (gated green, receipts/SOLR-8051.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (2026-10-12T23:20Z, claims/pool-vm2-gate-backlog-15319.md).
 - Capability tags: gate.
 - Job type: premise run only. No branch edit, no gate. Posted by the Group O settlement (2026-10-11): pr-drafts/search-components/SOLR-15319.md states in Limits that a shard response with no body still throws at the exception check in ExactStatsCache.java, and that "it is the case in SOLR-8051". That sameness was traced by reading, never reproduced; this job settles it by run, and the draft's disposition follows the result.
 
