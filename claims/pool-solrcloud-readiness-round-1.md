@@ -9,4 +9,4 @@
 - Hold: nothing is opened. Opening stays with Nick.
 - Heartbeat: 2026-10-12T22:57Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/solrcloud-readiness-round-1.md`. Five READY TO OPEN, six DECISION, eight HOLD across the 19 drafts. Nothing opened or posted.
