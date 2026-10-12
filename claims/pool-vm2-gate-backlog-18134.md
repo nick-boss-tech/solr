@@ -5,4 +5,4 @@
 - Capability tags: gate.
 - Runner: gates/g18134-gate.sh, worktree /workspace/gates/solr-18134-gate (detached).
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Status: DONE by vm2. Gate green at 78134dde678d (2026-10-12); fast-forward pushed to solr-18134-submit.

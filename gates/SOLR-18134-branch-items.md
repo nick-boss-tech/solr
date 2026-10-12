@@ -2,7 +2,7 @@
 
 - Branch: solr-18134-submit. Head: c5a0bdb21e862ec403b37c51c39070d952b972d8 (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-18134.md). Merge-base with main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm2 (gate backlog coordinator) at 2026-10-12T21:50Z; claims/pool-vm2-gate-backlog-18134.md.
+- Status: DONE by vm2. Gate green at 78134dde678d (2026-10-12); fast-forward pushed to solr-18134-submit.
 - Capability tags: gate.
 - Job type: changelog title correction, two upgrade-note sentence corrections, one guide sentence correction, and a test comment correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/schema-convergence-round-1-response.md, items SCH-R1-34, SCH-R1-35 and SCH-R1-36 (all held branch-side there, replacements recorded verbatim; register text in reports/schema-convergence-round-1.md lines 74, 76 and 78).
