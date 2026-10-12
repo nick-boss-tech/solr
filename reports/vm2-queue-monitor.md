@@ -837,3 +837,13 @@ No action taken beyond this job.
 - Incident: at 05:00Z a command in /workspace/solr (a separate checkout on main, not the coordination worktree) ran git reset --hard origin/pr-prepare; local main was restored to 498a09aea9 by reset to the pre-command reflog entry. Any uncommitted tracked edits in that checkout at 05:00Z were discarded and cannot be recovered from git.
 - Next claimable: SOLR-13097 (rebase, force-with-lease pinned to the fork tip read at claim time), then SOLR-11939, once the 6711 and 17612 chain ends.
 - 2026-10-12T05:16Z busy check: SOLR-17612 re-gate at 3a456c27dd running since 05:00:14Z (changelog, tidy, compile, focused head rc 0; proof leg rc 1 failed by content at line 450, control passed). No GATE END yet; module check in progress. Heartbeat refreshed (prior 04:22:56Z). Finished: none. Failed: none new. Claimed: none new. Next claimable after 17612 and 6711: SOLR-13097, then SOLR-11939.
+
+## 2026-10-12T06:20Z vm2 gate backlog coordinator
+- Finished: SOLR-13097 at 1cf59fe6a9, GATE GREEN (gate end 06:09:55Z). Receipt receipts/SOLR-13097.md (section for 1cf59fe6a9), job and claim marked DONE, pushed to pr-prepare (16d3300b67). Fork force-pushed with lease pinned to f0e7395f58; ls-remote shows 1cf59fe6a9.
+- Earlier this run, finished: SOLR-6711 at 73c5e6e0d2 and SOLR-17612 at 3a456c27dd were GREEN (receipts and claims already DONE on pr-prepare).
+- Premise label discrepancy for the main side: the SOLR-13097 proof's failing set (deny, wildcard, v2) does not match the round-29 receipt's label (allow, wildcard, v2). Recorded in receipts/SOLR-13097.md; the test was not altered.
+- Incident: at about 05:00Z a command ran git reset --hard origin/pr-prepare in /workspace/solr (branch main, not a worktree), moving main from 498a09aea9 to f1f2a5cce8. Restored to 498a09aea9 with git reset --hard 498a09aea9 at 05:32Z to 05:38Z. Uncommitted tracked edits in that checkout, if any, were discarded and cannot be recovered from git.
+- Failed: none new.
+- Claimed: SOLR-11939 at 468c1a520c (claims/pool-vm2-gate-backlog-11939.md). Fork tip read at claim time d4cff5e764. Rebase onto cabedd1d96 started in /workspace/gates/solr-11939-rebase.
+- Queue stock: below minimum. Unclaimed gate jobs in the buffer: 1 (SOLR-11939, now claimed). SOLR-10667 and SOLR-12347 have vm1 retry claims with no DONE line; treated as held. Top-up gate job files are still to be written this run.
+- Gate state: busy with SOLR-11939 rebase; no Gradle gate running yet.
