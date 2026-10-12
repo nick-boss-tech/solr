@@ -5,4 +5,4 @@
 - Capability tags: implementation (text only), gate.
 - Runner: gates/g5821-gate.sh, worktree /workspace/gates/solr-5821-gate (detached). The Antora build runs from a temp branch in the main checkout /workspace/solr, which the runner restores to main afterwards.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Status: DONE (2026-10-12T23:23Z). Gate GREEN at 327547d693e098447ff70c536b794aa364508670; wording pushed as a fast-forward to solr-5821-submit. Draft re-point left for the main side.
