@@ -11,3 +11,9 @@ Heartbeat: 2026-10-12T03:48Z. Code read next (ReplicationAPIBase.java lines 99-1
 ## 2026-10-12T03:50Z heartbeat (vm2 coordinator)
 
 Implementation pushed to the fork as a fast-forward: solr-8430-submit at 094f0716a8a3673fa9e2e0e9e8e4ad40cb2db122 (from 49af21be589). Gate running (runner /workspace/gates/g8430-gate.sh, log /workspace/gates/logs/vm2/8430-gate.out).
+
+## 2026-10-12T04:19Z FAILED at 094f0716a8 (vm2 coordinator)
+
+Gate ended 04:12:44Z: FAILED, not green. Failing test: ReplicationRateLimiterTest.testZeroMeansUnthrottled (test fixture order dependence on the static limiter map, seed 8430C0FFEE008430). Classification and evidence in gates/SOLR-8430.md, "Gate run at 094f0716a8". Claim not DONE. Not relaunched.
+
+Next step recorded: a narrow test-fixture fix on solr-8430-submit. At 04:18Z a Gradle build started in /workspace/gates/solr-8430 from a session other than this coordinator run, with an uncommitted fix there: a production hook `clearSharedRateLimitersForTest()` in ReplicationAPIBase.java plus a @Before in the test. This coordinator did not start that build and has not touched that worktree. Note for its owner: the hook does not exist at the pre-cap production file 49af21be58, so the cap leg would fail at compile, not by content. Clearing the field by reflection in the test keeps the cap leg valid. vm2 stays busy until that build ends.
