@@ -6,4 +6,4 @@
 - Scope: pr-drafts/core-admin/SOLR-11939.md only. Report: reports/core-admin-11939-repoint-round-1.md.
 - Not in scope: the branch, the PR, comments, the live PR description, builds, Gradle, tests.
 - Heartbeat: 2026-10-12T06:55Z (refresh hourly; staleness rule 2 hours).
-- Status: CLAIMED.
+- Status: DONE. Draft re-pointed to cdb9903506e9 and CONVERGED with one note; report reports/core-admin-11939-repoint-round-1.md.
