@@ -2,7 +2,7 @@
 
 - Branch: solr-17796-submit. Head: 661165d2673de9211846e276c05daf1fd0e879d6 (live tip, matches the draft in pr-drafts/query-parsing/SOLR-17796.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (2026-10-12T23:30Z, claims/pool-vm2-gate-backlog-17796.md).
 - Capability tags: gate.
 - Job type: premise run only. No branch edit, no gate. Posted by the Group O settlement (2026-10-11): the draft's Limits now state that a negated collapse "may still occur there" for the ticket's UnsupportedOperationException, verified by code reading (the branch unwraps only a lone required PostFilter; a negated one stays wrapped, and a wrapped CollapsingPostFilter has no createWeight). The fidelity round asked for the case to be run before posting; this job is that run.
 
