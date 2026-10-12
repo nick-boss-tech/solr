@@ -8,4 +8,4 @@
 - Scope: convergence pass over the 6 drafts in pr-drafts/streaming/. Read-only apart from this claim and the report. No draft edit this round; the main side applies the replacement text.
 - Deliverable: `reports/streaming-convergence-round-1.md`, with counts, a verdict per draft, the register (ST-R1-nn) and the convergence line.
 - Heartbeat: 2026-10-12T04:18Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-12. Deliverable: see the report named above.
