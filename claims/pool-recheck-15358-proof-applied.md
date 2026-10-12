@@ -7,4 +7,4 @@
 - Staffing: 2 read-only subagents.
 - Deliverable: `reports/schema-recheck-15358-proof-applied-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T11:23Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/schema-recheck-15358-proof-applied-round-1.md`, verdict: the draft items SCH-R3-01 and SCH-R3-02 are CONFIRMED; the record is not yet closed (RC-S1 response wording, RC-S3 stale schema round 2 line 34 with no decision recorded).
