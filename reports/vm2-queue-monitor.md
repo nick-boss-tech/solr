@@ -829,3 +829,10 @@ No action taken beyond this job.
 - Claimed: none new. vm2 is busy.
 - Gate state: busy. the SOLR-6711 re-gate at 73c5e6e0d2 (the patched head; runner /workspace/gates/g6711-gate.sh, log /workspace/gates/logs/vm2/6711-gate.out), started 04:43:19Z, at the compile step. A chained SOLR-17612 gate (g17612-gate.sh) runs after it. Claim heartbeat 04:21:48Z, under 50 minutes; no refresh due.
 - Next claimable: SOLR-13097 (rebase, force-with-lease pinned to the fork tip read at claim time), then SOLR-11939. Both wait for the 6711 and 17612 chain to end.
+
+## 2026-10-12T05:05Z vm2 gate backlog coordinator
+- Busy check: GradleWrapperMain running (g17612-gate.sh, pid 48615, compile step since 05:04:47Z); vm2 is busy, no gate launched. Gate log /workspace/gates/logs/vm2/17612-gate.out has no GATE END yet.
+- Finished: none this run. Failed: none new. Parked: SOLR-6711 (re-gate chain ahead of 17612, in progress), SOLR-17612 (re-gate at 3a456c27dd running).
+- Claimed: none new. Claim heartbeat for 17612 at 04:22:56Z (under 50 minutes at 05:05Z, no refresh due; refresh by about 05:12Z).
+- Incident: at 05:00Z a command in /workspace/solr (a separate checkout on main, not the coordination worktree) ran git reset --hard origin/pr-prepare; local main was restored to 498a09aea9 by reset to the pre-command reflog entry. Any uncommitted tracked edits in that checkout at 05:00Z were discarded and cannot be recovered from git.
+- Next claimable: SOLR-13097 (rebase, force-with-lease pinned to the fork tip read at claim time), then SOLR-11939, once the 6711 and 17612 chain ends.
