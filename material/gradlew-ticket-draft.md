@@ -2,7 +2,7 @@
 
 Status: NOT filed. Draft for Nick to file. Nick's rule (2026-10-11): new-ticket texts go to him in one consolidated email, sent only once every included ticket has been completely reviewed; this text joins that email when its review returns SATISFIED.
 
-Source: reports/gradlew-git-bash-path-bug.md on this branch (verdict CAUSE CONFIRMED by reading the script at main d76fc14b9857e77b830d7a82514b28c523a239c2 and by cygpath probes on a Windows Git Bash host), and reports/gradlew-end-to-end-run.md on this branch (the end-to-end run, executed 2026-10-11: the failing trace observed on main 498a09aea97, and the fix verified for wrapper startup on branch gradlew-msys-double-conversion at 192aacaaf89).
+Source: reports/gradlew-git-bash-path-bug.md on this branch (verdict CAUSE CONFIRMED by reading the script at main d76fc14b9857e77b830d7a82514b28c523a239c2 and by cygpath probes on a Windows Git Bash host), and reports/gradlew-end-to-end-run.md on this branch (the end-to-end run: the failing trace observed on main 498a09aea97, and the fix verified for wrapper startup on branch gradlew-msys-double-conversion at 192aacaaf89).
 
 Duplicate check (2026-10-11, read-only Jira search): no existing ticket covers this defect. Searches covered gradlew with cygpath, Git Bash, MSYS or MINGW, GradleWrapperMain, and "Could not find or load main class". The only cygpath hit, SOLR-14955, covers the Prometheus Exporter bin scripts. The only GradleWrapperMain hit, SOLR-16641, is a circular task dependency in localSettings, a different defect.
 
@@ -48,7 +48,7 @@ Confirmed by run. On a Windows Git Bash (MINGW64) host with JDK 21 ({{JAVA_HOME}
 
 The reading of the script at the cited snapshot ({{d76fc14b9857}}) and the cygpath probes in the Mechanism section came first; the run confirms them.
 
-Stated plainly, the scope of the run: only {{gradlew -version}} ran, so the fix is verified for wrapper startup. {{gradlew check}}, {{gradlew build}} and any test task were not run. Cygwin (non-MSYS) was not run; it takes the same block at line 215. {{gradlew.bat}}, Linux and macOS were not run; on Linux and macOS the block at line 215 never runs because neither {{cygwin}} nor {{msys}} is set there. The argument conversion loop at lines 222 to 242 is not exercised by {{-version}}.
+Stated plainly, the scope of the run: only {{gradlew -version}} ran, so the fix is verified for wrapper startup. {{gradlew check}}, {{gradlew build}} and any test task were not run. Cygwin (non-MSYS) was not run; it takes the same block at line 215. {{gradlew.bat}}, Linux and macOS were not run; on Linux and macOS the block at line 215 never runs because neither {{cygwin}} nor {{msys}} is set there. The argument conversion loop at lines 222 to 242 runs once over {{-version}} without converting it; its {{cygpath}} call at line 231 is not reached.
 
 h2. Fix
 
