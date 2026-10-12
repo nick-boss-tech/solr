@@ -793,3 +793,10 @@ No action taken beyond this job.
 ## 2026-10-12T03:26Z (vm2 cron, busy check)
 
 - Finished, verified: SOLR-1877 receipt, gate DONE and claim DONE all on origin/pr-prepare (gate green at 5533ba27b1, GATE END 02:46:07Z). Claimed: nothing new. Busy: SOLR-17612 gate at 6481b5865e still running (runner /workspace/gates/g17612-gate.sh, log /workspace/gates/logs/vm2/17612-gate.out; proof leg rc=1 at baseline, focused-head tests running at 03:26Z, no GATE END). Claim heartbeat 03:12Z, under 50 minutes; no refresh due. Next run resumes at GATE END for SOLR-17612. Next claimable after it: SOLR-8430 (gates/SOLR-8430.md).
+
+## 2026-10-12T03:32Z (vm2 cron, gate ended FAILED)
+
+- Finished: SOLR-17612 gate at 6481b5865e ended 03:30:03Z, FAILED (not green). Focused head rc 1 and baseline proof rc 1, both at the control-leg assertion "Control data did not return any suggestions.", so the new test never reaches the threshold check. Classified as a test fixture defect, recorded in gates/SOLR-17612.md and the claim. No receipt, no DONE. Not relaunched.
+- Claimed: nothing this run (stopped after the FAILED record, per the gate rule).
+- Gate state: idle, no Gradle process running. Parked: SOLR-17612 (claim open, FAILED). Escalated to main agent: fixture decision for SOLR-17612.
+- Next claimable: SOLR-8430 (gates/SOLR-8430.md), unclaimed.
