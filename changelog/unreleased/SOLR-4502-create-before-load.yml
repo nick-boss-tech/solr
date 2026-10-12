@@ -1,6 +1,6 @@
 title: >
-  CoreContainer.create now fails with a clear message when the container has not been loaded,
-  instead of creating a core that later hits a NullPointerException on search.
+  CoreContainer.create now fails with a message that names load() when the container has not been loaded,
+  instead of a NullPointerException message.
 type: fixed
 authors:
   - name: Nick Shanin
