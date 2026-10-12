@@ -8,4 +8,4 @@
 - Deliverable: `reports/regate-review-17047-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T22:47Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/regate-review-17047-round-1.md`. SOLR-17047 is current at the re-gate head `79fc289bfc1a`; no draft edit needed.
