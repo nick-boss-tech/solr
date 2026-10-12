@@ -4,9 +4,9 @@ Report: `reports/solrcloud-round-1.md`, with parts `reports/solrcloud-round-1-p1
 
 ## Gate states settled by the receipts
 
-- Gated green at the live tip, per the receipts: SOLR-5813 (`90b8baa08ae`), SOLR-7394 (`9857d9ee802`, live PR, consistency only), SOLR-9155 (`9f08d033023`), SOLR-11288 (`cd094c3c623`), SOLR-12991 (`1a86966179e`), SOLR-13186 (`b436d90d2a8`), SOLR-13239 (`699a1fce368`, submission-held), SOLR-13369 (`dfa0db5bdf9`, proof by construction), SOLR-14919 (`84e7bcaeb57`), SOLR-15035 (`12d7491e82c`), SOLR-15106 (`40b7e5d0efa`), SOLR-15386 (`ca8cb61ee95`, proof inconclusive by construction), SOLR-15674 (`ba01c83d4c5`, proof inconclusive by construction), SOLR-15863 (`f381fd8d4dd`), SOLR-17292 (`e43200b0fb6`), SOLR-17680 (`f4b8ce83365`), SOLR-17733 (`636196b7954`), SOLR-18277 (`17c0e644812`, merged).
+- Gated green at the live tip, per the receipts: SOLR-5813 (`90b8baa08ae`), SOLR-7394 (`9857d9ee802`, live PR, consistency only), SOLR-9155 (`9f08d033023`), SOLR-11288 (`cd094c3c623`), SOLR-12991 (`1a86966179e`), SOLR-13186 (`b436d90d2a8`), SOLR-13239 (`699a1fce368`, submission-held), SOLR-13369 (`dfa0db5bdf9`, proof by construction), SOLR-14919 (`84e7bcaeb57`), SOLR-15035 (`12d7491e82c`), SOLR-15106 (`40b7e5d0efa`), SOLR-15386 (`ca8cb61ee95`, proof inconclusive by construction), SOLR-15674 (`ba01c83d4c5`, proof inconclusive by construction), SOLR-15863 (`f381fd8d4dd`), SOLR-17292 (`e43200b0fb6`), SOLR-17680 (`f4b8ce83365`), SOLR-17733 (`636196b7954`), SOLR-18277 (`17c0e644812`, merged), SOLR-16437 (`aa2a6b8afb6f`, first gate 2026-10-10; moved here by the 2026-10-11 correction in its entry below).
 - Gated at an older head; the live tip is not gated: SOLR-12651 (gated `90032e274b7`, tip `f3131d1ee84`), SOLR-12998 (gated `25520806c26`, tip `62a17a116b5`), SOLR-13136 (gated `2ad44409ffe`, tip `486b3877556`), SOLR-16013 (gated `e1bd21fd11a`, tip `ba26b702891`), SOLR-18391 graceful-create (gated `3a0ff1262bf`, tip `adcda10b501`).
-- No gate recorded: SOLR-3865, SOLR-4754, SOLR-10234, SOLR-10641, SOLR-11479, SOLR-16437, SOLR-17281 (parked), and SOLR-18391 submit (tip `3000eeede7a`). The GitHub corroboration run recorded for SOLR-16437 does not settle gate state; the receipt and the report agree on that.
+- No gate recorded: SOLR-3865, SOLR-4754, SOLR-10234, SOLR-10641, SOLR-11479, SOLR-17281 (parked), and SOLR-18391 submit (tip `3000eeede7a`). The GitHub corroboration run recorded for SOLR-16437 does not settle gate state; the receipt and the report agree on that.
 
 ## Per-ticket answers
 
@@ -163,9 +163,9 @@ Report: `reports/solrcloud-round-1.md`, with parts `reports/solrcloud-round-1-p1
 
 ### SOLR-16437 (audit only; draftable after a first gate)
 
-- Gate state: NO GATE per the receipt; the 2026-10-07 GitHub corroboration run at the head does not settle gate state. The audit finds the premise holds in both modes by reading, and the new test fails on base at its first assertion (part p5, finding 11). A first gate is main-side work owed (below); the branch is draftable once it lands.
+- Gate state: GATE GREEN at the live tip per the receipt (first gate finished 2026-10-10 at `aa2a6b8afb6f`; CollectionsAPISolrJTest 25 tests, 1 skipped, 0 failures; the proof discriminates). Correction, 2026-10-11: this entry and the summary list above said no gate was recorded. That was the state when these answers were written (2026-10-09); the first gate landed the next day, and the receipt records it. The audit's premise reading (part p5, finding 11) stands.
 - ADOPTED: scope stays ADDREPLICAPROP only, as implemented. DELETEREPLICAPROP and the other APIs the ticket names go in the draft's Limits with the follow-up offer (part p5, finding 12), per the standing follow-up rule.
-- ADOPTED: the wrong-shard behavior change is stated in the draft: a valid replica name with the wrong shard is now a 400, where before it changed the replica in the other shard (part p5, finding 13).
+- ADOPTED: the wrong-shard behavior change is stated in the draft: a valid replica name with the wrong shard is now a 400, where before it set the property on no replica, and for preferredleader could clear the property on the named shard's replicas (part p5, finding 13). Correction, 2026-10-11: this entry first said the old code changed the replica in the other shard. The merge-base code looks the replica up in any shard (DocCollection.java L382-L391) but writes only to the named shard (ReplicaMutator.java L184-L195), so the draft's wording is the correct one.
 
 ### SOLR-17281 (parked, not ready): DISCUSS on revert or replace
 
@@ -239,7 +239,7 @@ Report: `reports/solrcloud-round-1.md`, with parts `reports/solrcloud-round-1-p1
 
 1. SOLR-12651: gate at the live tip `f3131d1ee84` before opening.
 2. SOLR-17292: re-gate after the adopted node-down remedy lands in-branch.
-3. SOLR-16437: first gate (the new test passes with the change and fails without it). The branch is draftable once it lands.
+3. SOLR-16437: first gate. DONE 2026-10-10 (see the ticket entry above).
 4. SOLR-11479: first gate, after the branch corrections above and with the adopted several-replica test added during packaging.
 5. SOLR-12998: gate at the live tip `62a17a116b5`.
 6. SOLR-13136: gate at the live tip `486b3877556`, after the owner's behavior call.
