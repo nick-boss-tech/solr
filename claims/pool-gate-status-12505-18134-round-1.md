@@ -9,4 +9,4 @@
 - Hold: SOLR-12505 stays held (its gate failed and the failing commit is not on the fork). SOLR-18134 stays held until its re-gate reports.
 - Heartbeat: 2026-10-12T21:53Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/gate-status-12505-18134-round-1.md`. SOLR-12505 needs a route decision from the main side; SOLR-18134 is ready to patch after its re-gate. No draft changed.
