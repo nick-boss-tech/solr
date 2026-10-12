@@ -1,0 +1,27 @@
+# Gate job: SOLR-15357 fix the sub-field names in CopyFieldSubFieldsTest, retitle the fragment, re-gate
+
+- Branch: solr-15357-submit. Head: d717899b8736309bd72f54b11230f198ae226e7d (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-15357.md). Merge-base with main: b5c71bc5573c4e31b4cee5a7965d73587fc0ae58.
+- Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
+- Status: OPEN, unclaimed.
+- Capability tags: gate.
+- Job type: test correction and changelog title correction on a gated branch, then a re-gate at the fixed head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization. This is the held item the schema convergence round 2 scope names for SOLR-15357 (the draft's internal hold block, items 1 and 2); hold item 3, the owner decision on the real-time get and fl=* docValues path, is NOT part of this job and stays open.
+- Spec: reports/schema-analysis-round-1-s2.md findings 1 and 2 (FIX items, replacements recorded verbatim there), carried as the hold block in pr-drafts/schema-analysis/SOLR-15357.md. Finding 3 of the same report is the receipt wording correction the receipt refresh below applies.
+- The fixes:
+  1. FIX 1, in `solr/core/src/test/org/apache/solr/schema/CopyFieldSubFieldsTest.java`: the test reads the sub-field names `price_c_l_pl` and `price_c_s_c`, which match the dynamic fields `*_l_pl` and `*_s_c` but are names the currency type never writes (it builds sub-field names with the `___` separator, `POLY_FIELD_SEPARATOR`), so the two /get tests pass vacuously. Replace, anchoring on content at claim time (line numbers at the head above are 122, 127, 128, 156, 157): the field list becomes `"id,price,price_c,price_c___l_pl,price_c___s_c"`; the fetched reads become `fetched.getFieldValue("price_c___l_pl")` and `fetched.getFieldValue("price_c___s_c")`; the input-document reads become `inputDoc.getFieldValue("price_c___l_pl")` and `inputDoc.getFieldValue("price_c___s_c")`. Test-only: no production change is part of this job. If a corrected assertion fails at the head, stop and record it here; the premise would have changed.
+  2. FIX 2, in `changelog/unreleased/SOLR-15357.yml`: the title now ends "...so real-time get no longer returns them in documents", an effect not present for currency on this branch (base writes no docValues for currency sub-fields) and untested for PointType and BBoxField. Replace the title with exactly: "The sub-fields of CurrencyFieldType, PointType and BBoxField copyField destinations are now recorded as copyField targets"
+  No other file changes: verify with `git diff` against d717899b873 that the delta is these two files only, and stop and record here if anything else differs.
+- Proof shape: classified, not a base-failure proof (unchanged by this job). CopyFieldSubFieldsTest does not compile on base, because two of its four methods call `FieldType.getSubFields`; the other two read /get output and would not fail on base either, because base writes no docValues for currency sub-fields. No proof leg runs; the focused run at the fixed head is the evidence, and the receipt refresh states this classification in the finding 3 form.
+- Modules: :solr:core. Focused class at the fixed head: org.apache.solr.schema.CopyFieldSubFieldsTest (the full class, counted from fresh JUnit XML; the receipt's count at the pre-fix head is 4 of 4, and the fix edits strings inside the existing tests, so the count should not change).
+- Gate steps: changelog YAML parse of the edited fragment with a real YAML parser; tidy with the GATE INVALID guard (restore gradle/libs.versions.toml afterward; re-run tidy on the final tree after the last edit, before committing); Error Prone compile for :solr:core with `-Pvalidation.errorprone=true`; focused tests; module check `:solr:core:check -x test`. Landing order note: SOLR-15357 lands before SOLR-15358 (the schema record); nothing in this job changes that.
+- Push: the commits push plainly (fast-forward) to solr-15357-submit after the gate is green at the committed tree.
+- On green: refresh receipts/SOLR-15357.md at the fixed head (the name fix and the retitle described, the new counts from fresh JUnit XML, and the Proof line replaced with finding 3's recorded text: "Proof: classified, not a base-failure proof. CopyFieldSubFieldsTest does not compile on base, because two of its four methods call FieldType.getSubFields. The other two read /get output and would not fail on base either, because base writes no docValues for currency sub-fields."). Update pr-drafts/schema-analysis/SOLR-15357.md: hold items 1 and 2 come out of the internal hold block (item 3, the owner decision, stays), and the head, the Proof and the links re-point at the fixed head. Mark this job DONE and the claim DONE.
+
+## Step checklist
+
+- [ ] sub-field names corrected in CopyFieldSubFieldsTest (FIX 1) and fragment title replaced verbatim (FIX 2); delta against d717899b873 is those two files only
+- [ ] changelog YAML parse
+- [ ] tidy on the final tree; tree clean (GATE INVALID guard)
+- [ ] Error Prone compile (:solr:core)
+- [ ] focused tests at the fixed head: CopyFieldSubFieldsTest, counted from fresh JUnit XML
+- [ ] module check (:solr:core)
+- [ ] pushed plainly to solr-15357-submit; receipt refreshed with the finding 3 Proof wording; draft hold block items 1 and 2 removed and its head, Proof and links re-pointed; job and claim DONE
