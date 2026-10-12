@@ -1,4 +1,4 @@
-title: scoreNodes streaming expression no longer fails when it receives a single node or no nodes, and sends its /terms request as a POST
+title: scoreNodes streaming expression now sets its field and collection from every node, returns no tuples when there are no nodes, and sends its /terms request as a POST.
 type: fixed
 authors:
   - name: Nick Shanin
