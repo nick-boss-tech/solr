@@ -7,4 +7,4 @@
 - Staffing: 2 read-only subagents, four tasks each.
 - Deliverable: `reports/recheck-applied-8576-up6-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T09:23Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/recheck-applied-8576-up6-round-1.md`, verdict CONFIRMED: the SOLR-8576 draft converges at `883bb522caf9` (lines 15, 19 and 22 applied; line 22 deviation acceptable), and the update processing round 6 items UP-R6-01 and UP-R6-02 are closed. Notes RC-01 and RC-02 recorded for the main side.
