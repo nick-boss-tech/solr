@@ -4,4 +4,4 @@
 - Fork tip read at claim time: f2b4ba164f565274286708d15989f1b1807b84c6 (solr-17731-submit, ls-remote). Implementation is plain fast-forward on this tip.
 - Capability tags: gate, implementation.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2 (coordinator). No code changes yet.
+- Status: DONE at 2026-10-12T07:23:00Z, GATE GREEN at 18165d35a7e3 (receipt receipts/SOLR-17731.md, job gates/SOLR-17731.md).
