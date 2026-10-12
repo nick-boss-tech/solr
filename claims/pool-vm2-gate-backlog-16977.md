@@ -5,4 +5,5 @@
 - Capability tags: implementation (title only), gate.
 - Runner: gates/g16977-gate.sh, worktree /workspace/gates/solr-16977-gate (detached), log gates/logs/vm2/16977-*.log.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Gate run: head c65d242718e7953e81016526372421d7a47a7db0, GATE END 2026-10-12T22:04:40Z, all rc=0. Pushed fast-forward to solr-16977-submit.
+- Status: DONE.
