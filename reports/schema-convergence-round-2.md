@@ -11,7 +11,7 @@ Note on the basis: `pr-prepare` moved during the review, on an unrelated commit.
 ## Verdicts
 
 - **SOLR-14199: NOT CONVERGED.** The head `e743c90da79a` matches the draft. The count confirmation, the `SchemaVersionSpecificBehaviorTest` run and the owed Limits lines are all still owed.
-- **SOLR-15358: NOT CONVERGED.** The head `cbb345f2e7df` matches the draft. The Proof placeholder is unfilled, and the owner call and the land-after-SOLR-15357 hold stand.
+- **SOLR-15358: NOT CONVERGED.** The head `cbb345f2e7df` matches the draft. The Proof placeholder closed on 2026-10-12 (see Item 3), and the owner call and the land-after-SOLR-15357 hold stand.
 - **SOLR-15357: converged on register text, hold stands.** Its internal hold block is still in place, so the draft is not yet postable.
 - **Branch-side rows (SOLR-15945, 16977, 17047, 18134): open.** No branch commit has landed. The other heads equal the round 1 record.
 
