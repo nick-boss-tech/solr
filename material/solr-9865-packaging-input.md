@@ -28,3 +28,16 @@ Consistency: the PR's stated follow-up (drop the rollback edit once it lands) an
 
 - Whether PR #5100 has merged since 2026-10-11 14:52Z. The read was at that state.
 - The PR's gate or CI results.
+
+## Main-side record (2026-10-12)
+
+Judged against the recorded decision (Nick, 2026-10-10): SOLR-18532 lands first; when the SOLR-9865 branch is prepared for opening, it drops its overlapping RestoreCore rollback hunk; the SOLR-18532 PR's Limits already name that follow-up.
+
+The input matches the recorded decision and raises nothing the decision does not cover:
+
+- Item 1 above (keep the rollback write-back or drop it once the SOLR-18532 change lands) is the question the decision already answers: the branch drops the write-back at packaging. No new call is needed, and none is taken here.
+- Item 2 (re-derive What-this-change and Proof at the packaged head) is a consequence of that drop: packaging-time work under the same decision, at the test-only head on top of the landed SOLR-18532 change.
+- Item 3 (the draft stays on its OWNER NOTE hold until item 1 is recorded) is satisfied by the recorded decision. The hold now stands until the packaging itself is done, not until a further call.
+- The consistency section above agrees with the decision: the SOLR-18532 PR body states the same follow-up (drop the rollback edit on the SOLR-9865 branch once it lands), and no text change is needed for consistency.
+
+Settled as packaging-time work. The two not-checked items above are state checks for the packaging pass, not gaps in the decision: the landing order the decision sets (SOLR-18532 first) is verified when the packaging is done.

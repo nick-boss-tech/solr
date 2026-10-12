@@ -52,7 +52,7 @@ Report: `reports/solrcloud-round-1.md`, with parts `reports/solrcloud-round-1-p1
 
 ### SOLR-12651 (draftable, held for a run at the live tip)
 
-- Gate state, receipt wins: gated at `90032e274b7` (TestLocalFSCloudBackupRestore 2 tests, proof discriminates). The live tip `f3131d1ee84` is two commits past the gate; the property-upload leg and its move into the cleanup try are in those commits and have no run. A gate at the live tip is main-side work owed before opening.
+- Gate state: GATE GREEN at the live tip per the receipt (`f3131d1ee846`; TestLocalFSCloudBackupRestore 2 of 2 at the head; the proof discriminates). Correction, 2026-10-12: the live-tip gate is recorded and supersedes the older gate at `90032e274b7` (SC-R2-02).
 - ADOPTED: delete-on-failure stays the implemented position, and the ticket thread's retry-and-resume question (whether cleanup should be optional) stays in the draft's Choice, as drafted.
 - ADOPTED: the async gap ships as the draft's Limits bullet, with the corrected changelog wording below; the shard-failure check sketched in part p2, finding 10 is named there as the follow-up, not added in this branch.
 - Corrections owed (branch): the changelog title overstates the cleanup; the replacement text is in part p2, finding 9 (cleanup covers failures before the shards become active, and not async restores). Corrections owed (draft): the bracketed Proof line is replaced with the live-tip run result once the gate lands, and the Choice section gets a bold one-line summary opener (see the draft corrections list).
@@ -132,7 +132,7 @@ Report: `reports/solrcloud-round-1.md`, with parts `reports/solrcloud-round-1-p1
 
 ### SOLR-11479 (audit only, held)
 
-- Gate state: NO GATE per the receipt; the live tip `7e538e844c4` is the code commit. A first gate is main-side work owed.
+- Gate state: GATE GREEN at the live tip per the receipt (`360dca60fcfa`; focused CollectionsAPISolrJTest 26 tests, 0 failures, 1 conditional skip; both SOLR-11479 tests pass; the base proof gives the expected 2 failures). Correction, 2026-10-12: this bullet said NO GATE, the state when the answers were written; the receipt records the first gate (SC-R2-02).
 - Corrections owed before the first gate (branch): delete `SOLR-11479-TESTING.md` from the branch diff (part p2, finding 1), and correct the changelog title, which claims the alias behavior without the one-replica limit (replacement in finding 2). The 400 message naming only `coreNodeName` (finding 3) is a wording fix that can ride the same commit.
 - ADOPTED: add a test for the several-replica rejection before the first gate (part p2, finding 4 and decision 7). The rejection is half the change; a gate that proves only the alias half is not enough. This directs the main-side lane that packages the branch; it is not done here.
 - ADOPTED: lands after SOLR-15035 (see its entry).
@@ -237,10 +237,10 @@ Report: `reports/solrcloud-round-1.md`, with parts `reports/solrcloud-round-1-p1
 
 ## Main-side work owed (gates first)
 
-1. SOLR-12651: gate at the live tip `f3131d1ee84` before opening.
+1. SOLR-12651: DONE, live-tip gate recorded 2026-10-10 (see the ticket entry above).
 2. SOLR-17292: re-gate after the adopted node-down remedy lands in-branch.
 3. SOLR-16437: first gate. DONE 2026-10-10 (see the ticket entry above).
-4. SOLR-11479: first gate, after the branch corrections above and with the adopted several-replica test added during packaging.
+4. SOLR-11479: DONE, first gate recorded (receipt verified 2026-10-11; see the ticket entry above).
 5. SOLR-12998: gate at the live tip `62a17a116b5`.
 6. SOLR-13136: gate at the live tip `486b3877556`, after the owner's behavior call.
 7. SOLR-16013: re-gate at the rewritten head, after the owner's rewrite call.
