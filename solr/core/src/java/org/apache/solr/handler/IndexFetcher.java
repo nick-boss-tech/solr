@@ -899,7 +899,8 @@ public class IndexFetcher {
   static void storeReplicationProperties(SolrCore core, Properties props) throws IOException {
     Directory dir =
         core.getDirectoryFactory()
-            .get(core.getDataDir(), DirContext.META_DATA, core.getSolrConfig().indexConfig.lockType);
+            .get(
+                core.getDataDir(), DirContext.META_DATA, core.getSolrConfig().indexConfig.lockType);
     try {
       String tmpFileName = REPLICATION_PROPERTIES + "." + System.nanoTime();
       final IndexOutput out = dir.createOutput(tmpFileName, DirectoryFactory.IOCONTEXT_NO_CACHE);
@@ -981,7 +982,9 @@ public class IndexFetcher {
           dir.sync(Set.of(tmpFileName));
         }
 
-        solrCore.getDirectoryFactory().renameWithOverwrite(dir, tmpFileName, REPLICATION_PROPERTIES);
+        solrCore
+            .getDirectoryFactory()
+            .renameWithOverwrite(dir, tmpFileName, REPLICATION_PROPERTIES);
       } catch (Exception e) {
         log.warn("Exception while updating statistics", e);
       } finally {

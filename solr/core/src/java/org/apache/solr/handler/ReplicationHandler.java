@@ -837,8 +837,8 @@ public class ReplicationHandler extends RequestHandlerBase
   }
 
   /**
-   * Records (or clears) {@link #POLL_DISABLED} in {@code replication.properties} so a disabled
-   * poll survives a restart or core reload. Writes only when the stored value has to change.
+   * Records (or clears) {@link #POLL_DISABLED} in {@code replication.properties} so a disabled poll
+   * survives a restart or core reload. Writes only when the stored value has to change.
    *
    * @return false if the file could not be written (an error is already on the response)
    */

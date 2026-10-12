@@ -18,6 +18,7 @@ package org.apache.solr.handler;
 
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.response.SolrQueryResponse;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,7 +27,13 @@ public class TestPersistedPollDisabled extends SolrTestCaseJ4 {
 
   @BeforeClass
   public static void beforeClass() throws Exception {
+    System.setProperty("solr.security.allow.urls.enabled", "false");
     initCore("solrconfig-follower-nopoll.xml", "schema.xml");
+  }
+
+  @AfterClass
+  public static void afterClass() throws Exception {
+    System.clearProperty("solr.security.allow.urls.enabled");
   }
 
   private static ReplicationHandler handler() {
