@@ -36,3 +36,12 @@ Added 2026-10-11 (gate queue supply, second pass, main side): gates/SOLR-4502-ti
 Added 2026-10-12 (queue restock, vm2 gate backlog coordinator): SOLR-8576-alias-fix (gates/SOLR-8576-alias-fix.md, the alias assertion fix in the new SOLR-8576 test and its re-gate; posted by the main side and not previously listed here). Claimable by vm1 or vm2; claims/ governs. Restock note: SOLR-17731 and SOLR-16437 gated green on vm2 today and are DONE; SOLR-15003 already has a live-tip receipt, so it needs no job.
 
 Added 2026-10-12 (queue restock, vm2 gate backlog coordinator): SOLR-16013 (gates/SOLR-16013.md, re-gate at the live tip ba26b70289, focused OverseerCloseOrderingTest; the gated head e1bd21fd11 is older) and SOLR-13136 (gates/SOLR-13136.md, consistency re-gate at the live tip 486b387755 with focused CreateShardCmdTest and CreateShardConstructionTest; the live PR is not touched). Both claimable by vm1 or vm2; claims/ governs.
+
+## Restock, 2026-10-12 (vm2 gate backlog coordinator)
+
+Added after the SOLR-16013 claim left one unclaimed job in the buffer. Each is a re-gate of a branch whose receipt names an older gated head, checked against the fork tip by ls-remote; none duplicates a gated head at its live tip.
+
+- SOLR-13943 (gates/SOLR-13943.md): re-gate at ca443f6f68; the tip adds a changelog restore over cc155cf68e.
+- SOLR-15805 (gates/SOLR-15805.md): re-gate at 6d78603d82; same tree as the receipt's 3432f950f0, re-run so the receipt names the live commit.
+
+Not stocked: SOLR-10252 (docs only, held on the round 5 owner decision).
