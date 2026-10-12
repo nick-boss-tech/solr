@@ -8,4 +8,4 @@
 - Deliverable: `reports/fresh-recheck-new-drafts-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T18:00Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/fresh-recheck-new-drafts-round-1.md`. All three drafts needed edits, applied: SOLR-6711 (4), SOLR-16013 (1), SOLR-17612 (6). A closing check of the edited lines is the next round.
