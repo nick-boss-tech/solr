@@ -5,4 +5,4 @@
 - Capability tags: gate (record run only).
 - Runner: gates/g8009-gate.sh, worktree /workspace/gates/solr-8009-gate (detached), log gates/logs/vm2/queue-g8009-gate-*.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Status: DONE (2026-10-12T23:15Z).
