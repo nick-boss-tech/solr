@@ -8,4 +8,4 @@
 - Scope: confirmation pass over the open drafts only, with the branch and gate state the assignment names. Read-only apart from this claim and the report. No draft edit this round; the main side applies the replacement text.
 - Deliverable: `reports/replication-backup-convergence-round-3.md`, with counts, a verdict per draft, the register and the convergence line.
 - Heartbeat: 2026-10-12T05:00Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-12. Deliverable: see the report named above.
