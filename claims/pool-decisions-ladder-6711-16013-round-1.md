@@ -8,4 +8,4 @@
 - Deliverable: `reports/decisions-ladder-6711-16013-round-1.md`, with each decision, its evidence, its rung and any text change. Nick is asked only where the ladder cannot settle an item, and the report says so explicitly if that happens.
 - Heartbeat: 2026-10-12T18:30Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/decisions-ladder-6711-16013-round-1.md`. All four items settled without asking Nick; no draft change; one record line proposed for the main side.
