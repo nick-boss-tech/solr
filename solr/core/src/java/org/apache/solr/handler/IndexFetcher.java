@@ -928,64 +928,66 @@ public class IndexFetcher {
     if (modifiedConfFiles != null && !modifiedConfFiles.isEmpty())
       for (Map<String, Object> map1 : modifiedConfFiles) confFiles.add((String) map1.get(NAME));
 
-    Properties props = replicationHandler.loadReplicationProperties();
-    long replicationTime = System.currentTimeMillis();
-    long replicationTimeTaken = getReplicationTimeElapsed();
-    Directory dir = null;
-    try {
-      dir =
-          solrCore
-              .getDirectoryFactory()
-              .get(
-                  solrCore.getDataDir(),
-                  DirContext.META_DATA,
-                  solrCore.getSolrConfig().indexConfig.lockType);
+    synchronized (REPLICATION_PROPERTIES_LOCK) {
+      Properties props = replicationHandler.loadReplicationProperties();
+      long replicationTime = System.currentTimeMillis();
+      long replicationTimeTaken = getReplicationTimeElapsed();
+      Directory dir = null;
+      try {
+        dir =
+            solrCore
+                .getDirectoryFactory()
+                .get(
+                    solrCore.getDataDir(),
+                    DirContext.META_DATA,
+                    solrCore.getSolrConfig().indexConfig.lockType);
 
-      int indexCount = 1, confFilesCount = 1;
-      if (props.containsKey(TIMES_INDEX_REPLICATED)) {
-        indexCount = Integer.parseInt(props.getProperty(TIMES_INDEX_REPLICATED)) + 1;
-      }
-      StringBuilder sb =
-          readToStringBuilder(replicationTime, props.getProperty(INDEX_REPLICATED_AT_LIST));
-      props.setProperty(INDEX_REPLICATED_AT_LIST, sb.toString());
-      props.setProperty(INDEX_REPLICATED_AT, String.valueOf(replicationTime));
-      props.setProperty(PREVIOUS_CYCLE_TIME_TAKEN, String.valueOf(replicationTimeTaken));
-      props.setProperty(TIMES_INDEX_REPLICATED, String.valueOf(indexCount));
-      if (modifiedConfFiles != null && !modifiedConfFiles.isEmpty()) {
-        props.setProperty(CONF_FILES_REPLICATED, confFiles.toString());
-        props.setProperty(CONF_FILES_REPLICATED_AT, String.valueOf(replicationTime));
-        if (props.containsKey(TIMES_CONFIG_REPLICATED)) {
-          confFilesCount = Integer.parseInt(props.getProperty(TIMES_CONFIG_REPLICATED)) + 1;
+        int indexCount = 1, confFilesCount = 1;
+        if (props.containsKey(TIMES_INDEX_REPLICATED)) {
+          indexCount = Integer.parseInt(props.getProperty(TIMES_INDEX_REPLICATED)) + 1;
         }
-        props.setProperty(TIMES_CONFIG_REPLICATED, String.valueOf(confFilesCount));
-      }
-
-      props.setProperty(LAST_CYCLE_BYTES_DOWNLOADED, String.valueOf(getTotalBytesDownloaded()));
-      if (!successfulInstall) {
-        int numFailures = 1;
-        if (props.containsKey(TIMES_FAILED)) {
-          numFailures = Integer.parseInt(props.getProperty(TIMES_FAILED)) + 1;
+        StringBuilder sb =
+            readToStringBuilder(replicationTime, props.getProperty(INDEX_REPLICATED_AT_LIST));
+        props.setProperty(INDEX_REPLICATED_AT_LIST, sb.toString());
+        props.setProperty(INDEX_REPLICATED_AT, String.valueOf(replicationTime));
+        props.setProperty(PREVIOUS_CYCLE_TIME_TAKEN, String.valueOf(replicationTimeTaken));
+        props.setProperty(TIMES_INDEX_REPLICATED, String.valueOf(indexCount));
+        if (modifiedConfFiles != null && !modifiedConfFiles.isEmpty()) {
+          props.setProperty(CONF_FILES_REPLICATED, confFiles.toString());
+          props.setProperty(CONF_FILES_REPLICATED_AT, String.valueOf(replicationTime));
+          if (props.containsKey(TIMES_CONFIG_REPLICATED)) {
+            confFilesCount = Integer.parseInt(props.getProperty(TIMES_CONFIG_REPLICATED)) + 1;
+          }
+          props.setProperty(TIMES_CONFIG_REPLICATED, String.valueOf(confFilesCount));
         }
-        props.setProperty(TIMES_FAILED, String.valueOf(numFailures));
-        props.setProperty(REPLICATION_FAILED_AT, String.valueOf(replicationTime));
-        sb = readToStringBuilder(replicationTime, props.getProperty(REPLICATION_FAILED_AT_LIST));
-        props.setProperty(REPLICATION_FAILED_AT_LIST, sb.toString());
-      }
 
-      String tmpFileName = REPLICATION_PROPERTIES + "." + System.nanoTime();
-      final IndexOutput out = dir.createOutput(tmpFileName, DirectoryFactory.IOCONTEXT_NO_CACHE);
-      try (Writer outFile =
-          new OutputStreamWriter(new IndexOutputOutputStream(out), StandardCharsets.UTF_8)) {
-        props.store(outFile, "Replication details");
-        dir.sync(Set.of(tmpFileName));
-      }
+        props.setProperty(LAST_CYCLE_BYTES_DOWNLOADED, String.valueOf(getTotalBytesDownloaded()));
+        if (!successfulInstall) {
+          int numFailures = 1;
+          if (props.containsKey(TIMES_FAILED)) {
+            numFailures = Integer.parseInt(props.getProperty(TIMES_FAILED)) + 1;
+          }
+          props.setProperty(TIMES_FAILED, String.valueOf(numFailures));
+          props.setProperty(REPLICATION_FAILED_AT, String.valueOf(replicationTime));
+          sb = readToStringBuilder(replicationTime, props.getProperty(REPLICATION_FAILED_AT_LIST));
+          props.setProperty(REPLICATION_FAILED_AT_LIST, sb.toString());
+        }
 
-      solrCore.getDirectoryFactory().renameWithOverwrite(dir, tmpFileName, REPLICATION_PROPERTIES);
-    } catch (Exception e) {
-      log.warn("Exception while updating statistics", e);
-    } finally {
-      if (dir != null) {
-        solrCore.getDirectoryFactory().release(dir);
+        String tmpFileName = REPLICATION_PROPERTIES + "." + System.nanoTime();
+        final IndexOutput out = dir.createOutput(tmpFileName, DirectoryFactory.IOCONTEXT_NO_CACHE);
+        try (Writer outFile =
+            new OutputStreamWriter(new IndexOutputOutputStream(out), StandardCharsets.UTF_8)) {
+          props.store(outFile, "Replication details");
+          dir.sync(Set.of(tmpFileName));
+        }
+
+        solrCore.getDirectoryFactory().renameWithOverwrite(dir, tmpFileName, REPLICATION_PROPERTIES);
+      } catch (Exception e) {
+        log.warn("Exception while updating statistics", e);
+      } finally {
+        if (dir != null) {
+          solrCore.getDirectoryFactory().release(dir);
+        }
       }
     }
   }
@@ -2022,6 +2024,7 @@ public class IndexFetcher {
   private static final int ERR = 2;
 
   public static final String REPLICATION_PROPERTIES = "replication.properties";
+  static final Object REPLICATION_PROPERTIES_LOCK = new Object();
 
   static final String INDEX_REPLICATED_AT = "indexReplicatedAt";
 

@@ -812,11 +812,11 @@ public class ReplicationHandler extends RequestHandlerBase
 
   private void disablePoll(boolean persist, SolrQueryResponse rsp) {
     if (pollingIndexFetcher != null) {
-      pollDisabled.set(true);
-      log.info("inside disable poll, value of pollDisabled = {}", pollDisabled);
       if (persist && !updatePersistedPollDisabled(true, rsp)) {
         return;
       }
+      pollDisabled.set(true);
+      log.info("inside disable poll, value of pollDisabled = {}", pollDisabled);
       rsp.add(STATUS, OK_STATUS);
     } else {
       reportErrorOnResponse(rsp, "No follower configured", null);
@@ -825,11 +825,11 @@ public class ReplicationHandler extends RequestHandlerBase
 
   private void enablePoll(SolrQueryResponse rsp) {
     if (pollingIndexFetcher != null) {
-      pollDisabled.set(false);
-      log.info("inside enable poll, value of pollDisabled = {}", pollDisabled);
       if (!updatePersistedPollDisabled(false, rsp)) {
         return;
       }
+      pollDisabled.set(false);
+      log.info("inside enable poll, value of pollDisabled = {}", pollDisabled);
       rsp.add(STATUS, OK_STATUS);
     } else {
       reportErrorOnResponse(rsp, "No follower configured", null);
@@ -843,21 +843,23 @@ public class ReplicationHandler extends RequestHandlerBase
    * @return false if the file could not be written (an error is already on the response)
    */
   private boolean updatePersistedPollDisabled(boolean disabled, SolrQueryResponse rsp) {
-    Properties props = loadReplicationProperties();
-    if (disabled == Boolean.parseBoolean(props.getProperty(POLL_DISABLED))) {
-      return true;
-    }
-    if (disabled) {
-      props.setProperty(POLL_DISABLED, "true");
-    } else {
-      props.remove(POLL_DISABLED);
-    }
-    try {
-      IndexFetcher.storeReplicationProperties(core, props);
-      return true;
-    } catch (IOException e) {
-      reportErrorOnResponse(rsp, "Could not persist the poll setting", e);
-      return false;
+    synchronized (IndexFetcher.REPLICATION_PROPERTIES_LOCK) {
+      Properties props = loadReplicationProperties();
+      if (disabled == Boolean.parseBoolean(props.getProperty(POLL_DISABLED))) {
+        return true;
+      }
+      if (disabled) {
+        props.setProperty(POLL_DISABLED, "true");
+      } else {
+        props.remove(POLL_DISABLED);
+      }
+      try {
+        IndexFetcher.storeReplicationProperties(core, props);
+        return true;
+      } catch (IOException e) {
+        reportErrorOnResponse(rsp, "Could not persist the poll setting", e);
+        return false;
+      }
     }
   }
 
@@ -1342,7 +1344,8 @@ public class ReplicationHandler extends RequestHandlerBase
     boolean enableFollower = isEnabled(follower);
     if (enableFollower) {
       currentIndexFetcher = pollingIndexFetcher = new IndexFetcher(follower, this, core);
-      pollDisabled.set(Boolean.parseBoolean(loadReplicationProperties().getProperty(POLL_DISABLED)));
+      pollDisabled.set(
+          Boolean.parseBoolean(loadReplicationProperties().getProperty(POLL_DISABLED)));
       setupPolling((String) follower.get(ReplicationAPIBase.POLL_INTERVAL));
       isFollower = true;
     }
