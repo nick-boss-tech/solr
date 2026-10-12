@@ -2,7 +2,7 @@
 
 - Branch: solr-8576-submit. Head: 4c46f95c7851f2adbf3377d746aadc9c2249cdb4 (live tip, verified by ls-remote at posting, 2026-10-11; matches receipts/SOLR-8576.md, GATE GREEN at this head for the branch as it stands). Merge-base with main: b6b2b8f10e9827e3b86e44649fb7966ce646c185.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (coordinator) at 2026-10-12T08:00Z, fork tip 4c46f95c7851f2adbf3377d746aadc9c2249cdb4.
 - Capability tags: gate.
 - Job type: test fix on a gated test-only branch, then a re-gate at the fixed head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: the [OWED BEFORE POSTING] marker in pr-drafts/core-admin/SOLR-8576.md, with reports/core-admin-convergence-round-1-response.md (CA-R1-21, CA-R1-24) and the register text in reports/core-admin-convergence-round-1.md. The green gate at the head above covers the test as it stands; the draft stays held until the fix and the run below land.
