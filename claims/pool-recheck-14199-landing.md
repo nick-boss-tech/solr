@@ -7,4 +7,4 @@
 - Staffing: 2 read-only subagents.
 - Deliverable: `reports/schema-recheck-14199-landing-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T15:29Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/schema-recheck-14199-landing-round-1.md`. The landed draft's heads, anchors, counts and placeholders hold; three unsupported sentences were removed (lines 26, 32, 48) and a blank line before the Choice heading was restored.
