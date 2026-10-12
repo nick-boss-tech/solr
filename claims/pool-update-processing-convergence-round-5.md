@@ -9,4 +9,4 @@
 - Deliverable: `reports/update-processing-convergence-round-5.md`, verdict first.
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
 - Heartbeat: 2026-10-12T07:24Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/update-processing-convergence-round-5.md`, verdict NOT CONVERGED: SOLR-5065 and SOLR-7022 converge; SOLR-14718 (UP-R5-01, should-fix at line 36) and SOLR-3657 (UP-R5-02, should-fix at line 25) each have a replacement for the main side. Round 4 finding 3 withdrawn (UP-R5-05).
