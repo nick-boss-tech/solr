@@ -21,3 +21,7 @@ Next step recorded: a narrow test-fixture fix on solr-8430-submit. At 04:18Z a G
 ## 2026-10-12T04:21:48Z heartbeat (vm2 coordinator)
 
 The 04:18Z build recorded above was the tidy run started by the vm2 session that committed 0d64c35c5a. The note about a foreign build is withdrawn. Patch pushed at 0d64c35c5a (test-only seam plus @Before; see gates/SOLR-8430.md, "Patch at 0d64c35c5a"). Re-gate running; the cap leg uses the seam appended by the gate runner. Claim still open until the gate ends.
+
+## 2026-10-12T04:47Z DONE (vm2 coordinator)
+
+Gate GREEN at 0d64c35c5a (gate ended 04:41:31Z; record in gates/SOLR-8430.md, "Gate run at 0d64c35c5a"). Deliverables: receipts/SOLR-8430.md refreshed at 0d64c35c5a, gates/SOLR-8430.md marked DONE. Branch unchanged on the fork at 0d64c35c5a.
