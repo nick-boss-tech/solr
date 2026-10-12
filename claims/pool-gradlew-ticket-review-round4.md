@@ -8,4 +8,4 @@
 - Scope: confirmation of the round 3 item 4 fixes only. The draft and the reports are not edited; any passage that disagrees is flagged. No Jira, email or comment write.
 - Deliverable: `reports/gradlew-ticket-review-round4.md`, verdict first (SATISFIED or STILL OPEN).
 - Heartbeat: 2026-10-12T01:25Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-12. Deliverable: `reports/gradlew-ticket-review-round4.md`, verdict SATISFIED. Items 1 to 3 confirmed. The draft is final for Nick's consolidated email; nothing filed or sent.

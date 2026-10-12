@@ -68,6 +68,6 @@ These are in the round 3 record but were not should-fix. Left for the main side.
 
 - **SOLR-9396 Choice (line 26 and line 28):** the record names both spellings and cites `reports/draft-fidelity-searchcomponents-edismax-s10.md` lines 51 and 52, but gives no verbatim Choice text. The lane composed it. Confirm the wording, or paste the verbatim text.
 - **gradlew line 51:** the record's replacement uses backticks. The draft uses Jira `{{ }}` markup, so the lane converted the markup. Confirm, or restore the backtick form.
-- **CombinedQueryComponent line 20:** both real-exit sentences carry "(from code reading, not run)". If one label is wanted on the line, drop the second.
+- **CombinedQueryComponent line 20:** both labels are needed. Each sentence makes a different real-exit claim (the missing fold, then the header value), and the first label does not reach the second sentence. Answered in the round 4 re-check (slice R4-B, Q2); this corrects the earlier suggestion to drop the second label.
 
 The excluded items stay with the main side.
