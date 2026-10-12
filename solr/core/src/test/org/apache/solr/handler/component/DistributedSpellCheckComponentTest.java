@@ -445,6 +445,7 @@ public class DistributedSpellCheckComponentTest extends BaseDistributedSearchTes
       index_specific(1, id, Integer.toString(i), "lowerfilt", "zqxfilterone zqxfiltertwo");
     }
     commit();
+    q("/spellCheckCompRH", buildRequest("*:*", false, "/spellCheckCompRH", false, build, "true"));
 
     query(
         requestHandlerName,
