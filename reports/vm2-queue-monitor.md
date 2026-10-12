@@ -821,3 +821,4 @@ No action taken beyond this job.
 - Action: the fixture fix is in progress in the 8430 worktree by the other session, with an uncommitted production hook that is absent at the pre-cap proof base. Noted in the claim for its owner; the reflection-based clear keeps the cap leg valid.
 - Parked, unchanged: SOLR-17612 (fixture change escalated to the main agent), SOLR-6711 (failed at 7ddf5dc6f4, parked for the fix).
 - Claimed: none new. Next claimable after SOLR-8430 clears: check claims/ and the buffer list in order (SOLR-11939 first among unclaimed).
+- 04:31Z busy check: SOLR-8430 re-gate at 0d64c35c5a running since 04:20:52Z (changelog, tidy, compile rc 0; proof cap leg in progress). No GATE END yet; claim heartbeat 04:21:48Z is current. Nothing finished or claimed this run; next claimable after SOLR-8430 is SOLR-11939.
