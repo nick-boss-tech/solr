@@ -39,9 +39,9 @@ The two held should-fix items are inside the SOLR-14199 and SOLR-15358 drafts (t
 
 ### SOLR-14199
 
-- SCH-R1-05 (should-fix) APPLIED: the Proof lead and the Choice now carry the register's forms (the Choice's first sentence is the "proceeds as if" wording; the Limits carry the version-1.5 bullet).
+- SCH-R1-05 (should-fix) APPLIED: the Proof, Choice and Limits now carry the register's bold leads (Proof: "The new test fails on the base code and passes with this change."; Choice: "Point types now report `omitNorms` as true on schema versions 1.4 and older too."; Limits: "Field checks cover indexed fields only. The Schema API path and stored-only point fields have no test."). Correction (2026-10-12, SCH-R2-02): this entry first described the Choice's first sentence as a "proceeds as if" wording and the Limits as carrying a version-1.5 bullet. Neither wording is in the register or the live draft; the register's three bold leads quoted here are what the draft carries.
 - SCH-R1-06 (should-fix) APPLIED: both citation fixes are in (the `PointField.checkSchemaField` link at lines 96-110 and the upgrade-note blob link at lines 30-35 of `major-changes-in-solr-11.adoc`).
-- SCH-R1-07 (note) STANDS as the draft's partial hold: the [CONFIRM COUNT BEFORE POSTING] item (the receipt says TestSolrQueryParser 37 of 37 from fresh XML; the source declares 36 test methods) and the [HOLD: SchemaVersionSpecificBehaviorTest was not in this run] item both ride `gates/SOLR-14199-record.md`. The two owed Limits lines are named in `receipts/SOLR-14199.md` ("non-indexed explicit omitNorms=false not rejected and not distinguishable; no TEST_HACK exemption"); composing their public wording stays owner and record-run work, so the draft's [OWNER] marker is left untouched and the pointer is recorded here. The draft stays NOT CONVERGED (held in part).
+- SCH-R1-07 (note) STANDS as the draft's partial hold: the [CONFIRM COUNT BEFORE POSTING] item (the receipt says TestSolrQueryParser 37 of 37 from fresh XML; the source declares 36 test methods) and the [HOLD: SchemaVersionSpecificBehaviorTest was not in this run] item both ride `gates/SOLR-14199-record.md`. The two owed Limits lines are named in `receipts/SOLR-14199.md` ("non-indexed explicit omitNorms=false not rejected and not distinguishable; no TEST_HACK exemption"); composing their public wording stays owner and record-run work, so the draft's [OWNER] marker is left untouched and the pointer is recorded here. (Pointer, 2026-10-12: the line (a) wording quoted in this entry is the receipt's original text; the receipt's line (a) was corrected on 2026-10-12 under SCH-R2-01, and the corrected owed text in the receipt governs.) The draft stays NOT CONVERGED (held in part).
 
 ### SOLR-15357
 
@@ -53,15 +53,15 @@ The two held should-fix items are inside the SOLR-14199 and SOLR-15358 drafts (t
 
 ### SOLR-15358
 
-- SCH-R1-14 (should-fix) APPLIED: the Choice bullet now carries the register's form (schema version 1.5 or earlier with docValues as stored on, and the base-commit anchor).
-- SCH-R1-15 (should-fix) APPLIED: the landing-order bullet is in ("Land SOLR-15357 first. Its copy-target skip is what the atomic update path needs to keep these new sub-fields out. Without it, an atomic update can merge and store them."), placed before the last Limits bullet. The owner-confirmation condition is met by the record (see fact checks).
+- SCH-R1-14 (should-fix) APPLIED: lines 19 and 31 now carry the register's form (the docValues as stored default on schema version 1.6 and later). Correction (2026-10-12, SCH-R2-03): this entry first described the applied form as "schema version 1.5 or earlier with docValues as stored on, and the base-commit anchor". The register and the live draft say 1.6 and later, as base `FieldType.java` line 190 requires (`schemaVersion >= 1.6f` sets USE_DOCVALUES_AS_STORED), and neither line carries a base-commit anchor.
+- SCH-R1-15 (should-fix) APPLIED: the landing-order bullet is in ("Land SOLR-15357 first. Without its copy target change, an atomic update could carry the derived currency values into the document it sends back."), placed before the last Limits bullet. The owner-confirmation condition is met by the record (see fact checks). Correction (2026-10-12, SCH-R2-04): this entry first quoted the bullet in a different form ("Its copy-target skip is what the atomic update path needs to keep these new sub-fields out. Without it, an atomic update can merge and store them."). The live draft carries the register's text quoted here; the earlier quote was wrong.
 - SCH-R1-13, SCH-R1-16, SCH-R1-17 (notes) STAND: SCH-R1-16 confirms the Proof placeholder rides the posted record run (`gates/SOLR-15358-proof-record.md`); no text the run has not produced was forced into the Proof. The draft stays NOT CONVERGED on the placeholder alone.
 
 ### SOLR-15945
 
 - SCH-R1-22 (should-fix) APPLIED: the Related bullet now states that SOLR-15403's duplicate status is not established.
 - SCH-R1-30 (should-fix) HELD, branch-side. Recorded verbatim for the branch commit: the fragment title becomes "Stored-only DateRangeField and SpatialRecursivePrefixTreeFieldType fields (indexed=\"false\") no longer fail to load because of the norms and index-options checks."
-- SCH-R1-37 (should-fix) HELD, branch-side. Recorded verbatim: the XML comment in `managed-schema.xml` becomes "<!-- stored-only: the norms and index-options checks do not apply to these fields, so the type skips them -->"
+- SCH-R1-37 (should-fix) HELD, branch-side. Recorded verbatim: the XML comment in `schema-nonindexed-spatial.xml` (`solr/core/src/test-files/solr/collection1/conf/schema-nonindexed-spatial.xml`, line 26) becomes "<!-- stored-only: the norms and index-options checks do not apply to these fields, so the type skips them -->". Correction (2026-10-12, SCH-R2-05): this entry first named the file as `managed-schema.xml`. The comment is in the test schema named here; the replacement text is unchanged. The gate job `gates/SOLR-15945-branch-items.md` already names the right file, so no job change is needed.
 
 ### SOLR-16977
 
