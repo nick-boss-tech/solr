@@ -1182,9 +1182,12 @@ public class CollectionsAPISolrJTest extends SolrCloudTestCase {
     assertTrue(
         e.toString(), e.toString().contains("collection alias already exists: " + aliasName));
 
-    // the failed attempts must not have disturbed the original collection or the alias
+    // the rejected creates must not have changed the collection or the alias
     assertEquals(
         collectionName, solrClient.getClusterState().getCollection(collectionName).getName());
+    cluster.getZkStateReader().aliasesManager.update();
+    assertEquals(
+        collectionName, cluster.getZkStateReader().getAliases().resolveSimpleAlias(aliasName));
     assertFalse(solrClient.getClusterState().hasCollection(aliasName));
   }
 
