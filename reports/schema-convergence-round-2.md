@@ -31,7 +31,7 @@ Note on the basis: `pr-prepare` moved during the review, on an unrelated commit.
 - **Owner decision 2 (the real-time get and `fl=*` ruling): OPEN,** no ruling recorded.
 - **SCH-R1-09 to 12: CONFIRMED.**
 
-**Item 3, SOLR-15358 Proof: placeholder OPEN.** Line 27 still reads "[TO FILL before posting ...]". `gates/SOLR-15358-proof-record.md` is OPEN and unclaimed, and the receipt still says only "passed at this head". SCH-R1-14 and 15 are confirmed in the live text (lines 19, 31 and 41), but the response's descriptions of them are wrong (SCH-R2-03 and 04). SCH-R1-16 is still open. The three holds are all open: the placeholder, the docValues-as-stored owner call, and landing after SOLR-15357.
+**Item 3, SOLR-15358 Proof: placeholder (corrected 2026-10-12).** At round 2, line 27 still read "[TO FILL before posting ...]", `gates/SOLR-15358-proof-record.md` was OPEN and unclaimed, and the receipt said only "passed at this head". The proof record has since landed (gate DONE by vm2, 2026-10-12T09:37Z, with the proof section in the receipt), and the Proof is filled. SCH-R1-14 and 15 are confirmed in the live text (lines 19, 31 and 41), but the response's descriptions of them are wrong (SCH-R2-03 and 04). SCH-R1-16 is still open. The placeholder hold closed on 2026-10-12, when the Proof was filled from the proof record (`a940d43d7c9`). The holds that remain are the owner call on the default docValues as stored setting and landing after SOLR-15357.
 
 **Item 4, branch-side: all OPEN.**
 
