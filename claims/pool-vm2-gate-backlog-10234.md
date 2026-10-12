@@ -14,3 +14,7 @@ Premise holds at the merge base (fails by assertion content, recorded in gates/S
 ## 2026-10-12T00:35Z heartbeat (vm2 coordinator)
 
 Gate run 1 at f5ded23ffb ended 00:18:04Z: every step green or failing by content except module check, which failed in ecjLintTest on an unused import in CloudTestBaseFileSystemsTest.java (no tests run). Investigation recorded in gates/SOLR-10234.md. Fix commit eb8c4060d9 pushed to solr-10234-submit as a fast-forward from f5ded23ffb. Full gate run 2 at eb8c4060d9 starting now, log /workspace/gates/logs/vm2/10234-gate.out.
+
+## 2026-10-12T01:06Z DONE (vm2 coordinator)
+
+DONE: gate run 2 at eb8c4060d9 green (GATE END 00:51:20Z). Deliverables: receipts/SOLR-10234.md at eb8c4060d9436d7abfdcfdd0ba231a5b31debc01, gates/SOLR-10234.md marked DONE. Fork tip verified at eb8c4060d9.
