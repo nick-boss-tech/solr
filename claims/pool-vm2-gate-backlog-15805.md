@@ -6,3 +6,7 @@
 - Runner: gates/g15805-gate.sh, worktree /workspace/gates/solr-15805-gate (detached), log gates/logs/vm2/15805-run.out. Starts after the SOLR-13943 run in the same detached process.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED by vm2 (coordinator).
+
+## 2026-10-12T18:06Z DONE (vm2 coordinator)
+
+DONE: gate GREEN at 6d78603d82 (GATE END 18:05:22Z). CoreContainerProviderTest 1 run, 0 failed. Receipt section at the top of receipts/SOLR-15805.md; job marked DONE.
