@@ -1,6 +1,6 @@
 title: >
-  The v2 APIs POST /collections/{name}/snapshots/{snapshotName} and GET /aliases/{aliasName} are reachable again instead
-  of returning HTTP 405 because a sibling resource with the same path claimed the request.
+  The v2 APIs POST /collections/{name}/snapshots/{snapshotName} and GET /aliases/{aliasName} now answer instead of
+  returning HTTP 405, because another resource with the same path was answering first.
 type: fixed
 authors:
   - name: Nick Shanin
