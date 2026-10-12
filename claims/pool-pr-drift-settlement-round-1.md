@@ -9,4 +9,4 @@
 - Hold: any title that does not match the branch's change at its head is not applied.
 - Heartbeat: 2026-10-12T22:23Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/pr-drift-round-1-settlement.md`. Items 1 and 2 settled: four module-check rewordings and three titles applied, with read-backs; the SOLR-14262 cloud follow-up sentence removed.
