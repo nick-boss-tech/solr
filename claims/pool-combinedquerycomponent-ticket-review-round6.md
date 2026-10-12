@@ -8,4 +8,4 @@
 - Scope: confirmation of the four round 5 edits and the carry-through sweep. Read-only apart from this claim and the report. No draft edit this round.
 - Deliverable: `reports/combinedquerycomponent-ticket-review-round6.md`, verdict first (SATISFIED or STILL OPEN).
 - Heartbeat: 2026-10-12T05:42Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-12. Deliverable: see the report named above, verdict STILL OPEN; five sweep items applied for round 7.
