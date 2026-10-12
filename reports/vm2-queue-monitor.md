@@ -740,3 +740,7 @@ No action taken beyond this job.
 - Restock: after the 10234 claim, unclaimed buffer jobs are SOLR-11939 only (target 3). A sweep of blank-status receipts found no new first gate, re-gate or top-up candidate. SOLR-5589 and SOLR-6711 are first-gate shaped but on the blocked list. Shortfall for the main agent.
 - Flag: SOLR-4399 is green at local head 82c0c11373d0, but the fork push is held for a main-side go (receipts/SOLR-4399.md). The fork tip has not moved.
 - Next claimable: SOLR-11939 (rebase with force-with-lease pinned to the fork tip at claim time), once the SOLR-10234 gate ends.
+
+## 2026-10-12T00:01Z (vm2 cron, busy check)
+
+- Busy: SOLR-10234 gate running from 23:58:36Z (changelog parse OK, in tidy; Gradle live, no GATE END). Claim heartbeat 23:58Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END; buffer still has SOLR-11939 as the next claimable job.
