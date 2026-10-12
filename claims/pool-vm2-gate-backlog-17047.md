@@ -5,4 +5,4 @@
 - Capability tags: implementation (text only), gate.
 - Runner: gates/g17047-gate.sh, worktree /workspace/gates/solr-17047-gate (detached), log gates/logs/vm2/17047-run.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Status: DONE. Gate green at 79fc289bfc1af703ad0ece18d5ca9df253f31556 (2026-10-12T22:34:55Z); receipts/SOLR-17047.md refreshed.

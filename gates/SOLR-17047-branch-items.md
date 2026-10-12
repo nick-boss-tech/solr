@@ -2,7 +2,7 @@
 
 - Branch: solr-17047-submit. Head: 1ba7e33bfe7b86c147f2cd22d6ba517aaa5cbb00 (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-17047.md). Merge-base with main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm2 (2026-10-12T21:35Z, claims/pool-vm2-gate-backlog-17047.md).
+- Status: DONE. Gate green at 79fc289bfc1af703ad0ece18d5ca9df253f31556, pushed as a fast-forward to solr-17047-submit; receipt refreshed (claims/pool-vm2-gate-backlog-17047.md).
 - Capability tags: gate.
 - Job type: changelog title correction and a javadoc correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/schema-convergence-round-1-response.md, items SCH-R1-32 and SCH-R1-33 (both held branch-side there, replacements recorded verbatim; register text in reports/schema-convergence-round-1.md lines 66 and 68).
