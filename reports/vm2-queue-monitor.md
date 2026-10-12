@@ -770,3 +770,7 @@ No action taken beyond this job.
 ## 2026-10-12T01:46Z (vm2 cron, busy check)
 
 - Busy: SOLR-6711 gate at 7ddf5dc6f4 still running (started 01:43:55Z, tidy step, no GATE END). Claim heartbeat 01:37Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END for SOLR-6711.
+
+## 2026-10-12T02:01Z (vm2 cron, busy check)
+
+- Busy: SOLR-6711 gate at 7ddf5dc6f4 still running (started 01:43:55Z, focused-head step, no GATE END). Claim heartbeat 01:37Z, under 50 minutes; no refresh due. Proof leg log (6711-proof.log) fails with SolrCoreInitializationException on allowUrls (leaderUrl 127.0.0.1:1 not allowed), not the expected persist-does-not-survive-restart assertion; the proof is not valid by content until the GATE END review. Nothing finished or claimed this run.
