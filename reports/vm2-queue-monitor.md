@@ -800,3 +800,10 @@ No action taken beyond this job.
 - Claimed: nothing this run (stopped after the FAILED record, per the gate rule).
 - Gate state: idle, no Gradle process running. Parked: SOLR-17612 (claim open, FAILED). Escalated to main agent: fixture decision for SOLR-17612.
 - Next claimable: SOLR-8430 (gates/SOLR-8430.md), unclaimed.
+
+## 2026-10-12T03:50Z (vm2 cron, claim and gate start)
+
+- Finished: nothing new this run. Confirmed on origin: SOLR-1877, SOLR-5589, SOLR-10234, SOLR-8554 DONE. SOLR-17612 FAILED at 6481b5865e, parked and not relaunched (fixture decision with the main agent). SOLR-6711 FAILED at 7ddf5dc6f4, parked.
+- Claimed: SOLR-8430 (claim claims/pool-vm2-gate-backlog-8430.md). Implementation pushed as 094f0716a8 (finding 1 cap, finding 2 retitle, cap test), fast-forward from 49af21be589, tidy folded in.
+- Gate state: busy. SOLR-8430 gate at 094f0716a8 running from 03:49:46Z (runner /workspace/gates/g8430-gate.sh, log /workspace/gates/logs/vm2/8430-gate.out). No GATE END yet. Next run resumes at GATE END for SOLR-8430: receipt, job DONE, claim DONE.
+- Next claimable after SOLR-8430: SOLR-13097 (rebase, force-with-lease pinned to the fork tip read at claim time), then SOLR-11939. Unclaimed buffer depth is above target (the main-side additions SOLR-5011-narrowing, SOLR-17731, SOLR-16437, SOLR-17372-premise, SOLR-15358-proof-record have no claim), so no restock this run.
