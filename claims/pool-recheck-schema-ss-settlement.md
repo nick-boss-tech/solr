@@ -7,4 +7,4 @@
 - Staffing: 2 read-only subagents.
 - Deliverable: `reports/schema-recheck-ss-settlement-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T14:35Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/schema-recheck-ss-settlement-round-1.md`, verdict: SS-01, SS-02 and SS-04 CLOSED; SS-03 OPEN (the stale "live line 41" is in `reports/schema-convergence-round-2.md` line 57, not in the round 1 response, so the settlement located it in the wrong file).
