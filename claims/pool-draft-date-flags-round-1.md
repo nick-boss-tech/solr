@@ -8,4 +8,4 @@
 - Deliverable: `reports/draft-date-flags-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T19:35Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/draft-date-flags-round-1.md`. Edits applied in commits `4bbd2f42061`, `fc13f4f8103`, `62c03172033` and the round's final commit. Open items for the main side are listed in the report (SOLR-15358 record conflict, SOLR-11939 note, SOLR-12657 UTC convention).
