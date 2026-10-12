@@ -8,4 +8,4 @@
 - Deliverable: `reports/fresh-check-policy-proposal-round-1.md`, with the counts, the examples, the proposal text and an explicit line that the decision belongs to the main side.
 - Heartbeat: 2026-10-12T18:50Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/fresh-check-policy-proposal-round-1.md`. The proposal is written and not adopted; the decision belongs to the main side.
