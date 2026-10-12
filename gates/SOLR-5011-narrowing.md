@@ -1,0 +1,27 @@
+# Gate job: SOLR-5011 narrowing (shared-schema analysis implementation plus gate)
+
+- Branch: solr-5011-submit. Head: 3fd85bedef646b5b73c26e26a86a6130b5fc209f (live tip, verified by ls-remote at posting, 2026-10-11; this is the gated head in receipts/SOLR-5011.md). Merge-base: cabedd1d968059215188f4e7563fb303241899ed.
+- Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
+- Status: OPEN, unclaimed.
+- Capability tags: gate.
+- Job type: implementation from an adopted analysis, then the full hardening gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization: one claim covers the implementation, the push, and the gate.
+- Spec: reports/solr-5011-shared-schema-analysis.md. Its verdict is UNSAFE: on the gated branch, when two cores share one config set with shareSchema on and the core that first built the cached schema unloads, that core's SolrResourceLoader closes while the surviving core's shared schema still uses it, so a later schema-scoped load of a lib-only class on the survivor fails. The analysis's "Recommended narrowing" section is the implementation spec, and its "Settling and narrowing test" is the proving test spec. The original gate (gates/SOLR-5011.md, DONE, GATE GREEN at the head above) does not cover any of this; its run-list finding recorded that no branch test covers the shared-schema scenario.
+- Implementation (smallest narrowing, per the analysis): in `SolrCore.doClose` (SolrCore.java lines 1892-1903 at the gated head), skip `resourceLoader.close()` when the node uses a schema cache. Add a method to `ConfigSetService` that returns `schemaCache != null` (ConfigSetService.java lines 259, 267-270 at the gated head), checked with a null guard on `coreContainer.getConfigSetService()`. Nothing else changes. The trade-off is part of the change and is recorded at the gate: with shareSchema on, the loader leaks again, which is the pre-branch behaviour for that config; with shareSchema off (the default) the close stays.
+- Proving test (new; follows the standing base-class rule, extends SolrTestCase or SolrCloudTestCase, never SolrTestCaseJ4): the analysis's settling test. Setup: solr.xml with shareSchema=true, two cores on one config set S with a managed schema whose solrconfig points a `<lib dir=...>` at a test jar holding a custom FieldType or TokenFilterFactory class the schema does not reference. Create core A first (origin), then core B (cache hit); assert B's latest schema is A's schema with A's loader. Unload A through the container API while B stays open; assert B still answers a query; then POST /schema add-field-type on B naming the jar class. Include the reload case (B live, schema file unchanged, reload A) and the shareSchema-off control from the analysis. The claimant names the test class, records it here when claimed, and adds it to the branch.
+- Module: :solr:core. Focused classes at the narrowed head: the new proving test; CoreCloseResourceLoaderTest (must still pass: the single-core default-config close is unchanged); SolrCoreTest; TestCoreContainer. Claimant confirms exact packages by grep before composing any run (FQCN rule).
+- Proof shape: the new proving test, with production at the pre-narrowing head 3fd85bedef646b5b73c26e26a86a6130b5fc209f and the test added, must fail the way the analysis predicts for the gated head: the add-field-type op fails with an error whose text carries the class-not-found load failure, and A's loader isClosed() is true. Checked by failure content, not count alone. At the narrowed head the same test passes (op succeeds, A's loader isClosed() is false while shareSchema is on).
+- Gate steps: changelog YAML parse (the branch fragment is unchanged by this job; parse still runs); tidy with the GATE INVALID guard (restore gradle/libs.versions.toml afterward; re-run tidy on the final tree after the last edit, before committing); Error Prone compile (-Pvalidation.errorprone=true); proof leg as above; focused tests counted from fresh JUnit XML; module check `:solr:core:check -x test`.
+- Push: the implementation and test commits push plainly (fast-forward) to solr-5011-submit after the gate is green at the committed tree.
+- On green: refresh receipts/SOLR-5011.md with a narrowing section at the new head (implementation, proving test counts at both heads, the shareSchema residual above, and the per-loader count fix in ConfigSetService named as the follow-up, per the analysis); update pr-drafts/core-admin/SOLR-5011.md (the Limits shared-schema lines no longer read "the result is unknown": state the narrowed behaviour and the residual, and remove the draft's hold, which stood only until this narrowing landed and re-gated); mark this job DONE and the claim DONE.
+
+## Step checklist
+
+- [ ] implementation: doClose skip plus the ConfigSetService schema-cache check, per the analysis
+- [ ] proving test added per the analysis's settling test (class named here at claim time)
+- [ ] tidy on the final tree; tree clean
+- [ ] changelog parse
+- [ ] Error Prone compile
+- [ ] proof leg: proving test fails on pre-narrowing production by the predicted content
+- [ ] focused tests at the narrowed head (proving test, CoreCloseResourceLoaderTest, SolrCoreTest, TestCoreContainer)
+- [ ] module check
+- [ ] pushed plainly to solr-5011-submit; receipt refreshed; draft unheld; job and claim DONE
