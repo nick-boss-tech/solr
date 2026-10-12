@@ -847,3 +847,6 @@ No action taken beyond this job.
 - Claimed: SOLR-11939 at 468c1a520c (claims/pool-vm2-gate-backlog-11939.md). Fork tip read at claim time d4cff5e764. Rebase onto cabedd1d96 started in /workspace/gates/solr-11939-rebase.
 - Queue stock: below minimum. Unclaimed gate jobs in the buffer: 1 (SOLR-11939, now claimed). SOLR-10667 and SOLR-12347 have vm1 retry claims with no DONE line; treated as held. Top-up gate job files are still to be written this run.
 - Gate state: busy with SOLR-11939 rebase; no Gradle gate running yet.
+- 2026-10-12T06:55Z follow-up: SOLR-11939 at packaged head cdb9903506e9 GATE GREEN (rebase clean onto cabedd1d96; premise: CREATE does not use property.name, ADDREPLICA does fall back to it, flagged for the main side). Receipt receipts/SOLR-11939.md, job and claim DONE, pushed to pr-prepare (995b925edb). Fork solr-11939-submit verified at cdb9903506e9. Two gate-host environment failures recorded in the receipt (NODE_ENV=production omitting devDependencies; Antora refusing a worktree .git file); not branch defects.
+- Queue after this run: unclaimed gate jobs in the buffer are SOLR-17731, SOLR-16437, SOLR-17372-premise, SOLR-15358-proof-record (four, meets the minimum of three). Next claimable in buffer order: SOLR-17731.
+- Gate state: idle.
