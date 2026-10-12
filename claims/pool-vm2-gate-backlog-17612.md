@@ -23,3 +23,7 @@ Fixture patch pushed at 3a456c27dd (see gates/SOLR-17612.md, "Patch at 3a456c27d
 ## 2026-10-12T05:16Z heartbeat (vm2 coordinator)
 
 Re-gate at 3a456c27dd still running (g17612-gate.sh, GATE START 05:00:14Z, module-check step, no GATE END). Proof leg rc 1 failed by content at DistributedSpellCheckComponentTest line 450: `.spellcheck.suggestions.null!=zqxfilterne`, the expected suppression; control leg passed. Focused head rc 0, 1 test, 0 failures. Claim open.
+
+## 2026-10-12T05:37Z DONE (vm2 coordinator)
+
+DONE: gate green at 3a456c27dd (GATE END 2026-10-12T05:18:52Z; record in gates/SOLR-17612.md, "Gate run at 3a456c27dd"). Deliverables: receipts/SOLR-17612.md refreshed at 3a456c27dda52061e95eeabf9bd228cc48e1ea47 (baseline kept), gates/SOLR-17612.md marked DONE. Fork tip verified at 3a456c27dd by ls-remote.

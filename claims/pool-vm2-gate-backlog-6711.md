@@ -15,3 +15,7 @@ Gate FAILED at 7ddf5dc6f4 (2026-10-12T02:09:22Z): see the run record above. Clai
 ## 2026-10-12T04:21:48Z heartbeat (vm2 coordinator)
 
 Patch pushed at 73c5e6e0d2 (test allow-list property plus tidy fold-in; see gates/SOLR-6711.md, "Patch at 73c5e6e0d2"). Re-gate queued behind SOLR-8430. Claim open.
+
+## 2026-10-12T05:37Z DONE (vm2 coordinator)
+
+DONE: gate green at 73c5e6e0d2 (GATE END 2026-10-12T05:00:14Z; record in gates/SOLR-6711.md, "Gate run at 73c5e6e0d2"). Deliverables: receipts/SOLR-6711.md at 73c5e6e0d243a9886da0a25efe0acc7f1bbf7ec2, gates/SOLR-6711.md marked DONE. Fork tip verified at 73c5e6e0d2 by ls-remote.
