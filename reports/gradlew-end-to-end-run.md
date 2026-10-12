@@ -30,7 +30,7 @@ The fix run reports Launcher JVM 21.0.11 (Eclipse Adoptium 21.0.11+10-LTS), Daem
 
 - `gradlew check`, `gradlew build`, or any test task. Only the wrapper startup ran.
 - Cygwin (non-MSYS). Not checked.
-- The argument loop at lines 222 to 242, which runs `cygpath` on the arguments. The fix does not touch it, and `-version` does not exercise it.
+- The argument conversion loop at lines 222 to 242 runs once over `-version` without converting it; its `cygpath` call at line 231 is not reached. The fix does not touch the loop.
 - `gradlew.bat`, Linux and macOS. Not run.
 - One run per tree, on this host.
 

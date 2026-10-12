@@ -42,3 +42,13 @@ With item 4 open, the draft does not yet join the consolidated email. The record
 ## Scope
 
 Read-only. The draft, the reports and the run record were not edited. Nothing was built, run, posted or filed.
+
+## Main-side settlement (2026-10-11)
+
+Items 1 to 3 stand as confirmed above; nothing in them changed. Item 4 settles as follows.
+
+- **(a) Source note date (draft line 5): FIXED.** The claim "the end-to-end run, executed 2026-10-11" is gone. The fix took the report's first option, dropping the date: the source note now reads "(the end-to-end run: the failing trace observed on main 498a09aea97, and the fix verified for wrapper startup on branch gradlew-msys-double-conversion at 192aacaaf89)". Applied by the review side's open fixes lane in commit `181818be5a` and verified in the current draft on this pass; no run date is claimed anywhere in the draft (the remaining 2026-10-11 dates at lines 3 and 7 are Nick's consolidated-email rule and the duplicate check, not the run).
+- **(b) Loop claim (draft line 51 and run report line 33): FIXED in both places.** Draft line 51 now reads: "The argument conversion loop at lines 222 to 242 runs once over {{-version}} without converting it; its {{cygpath}} call at line 231 is not reached." That is this report's replacement sentence word for word, with the code spans in the draft's Jira `{{ }}` markup; the conversion the fixes lane flagged for confirmation is CONFIRMED, because the ticket text is Jira wiki markup throughout and `{{...}}` is its code-span form. The draft half was applied in commit `181818be5a`. The run report half was still open and is applied in the same push as this settlement: `reports/gradlew-end-to-end-run.md` line 33 now reads "The argument conversion loop at lines 222 to 242 runs once over `-version` without converting it; its `cygpath` call at line 231 is not reached. The fix does not touch the loop." (backtick form, matching that file's markup).
+- **(c) Minor precision point (same passage): SETTLED, no further text change.** Per this report, the rest of the line 51 scope sentence was already accurate and only the loop claim needed the change; the applied diff confirms the edit was confined to the loop sentence. The loop is entered once over `-version` and its `cygpath` call at line 231 is not reached, which is what both texts now say.
+
+The confirmation pass is assignments/pool-gradlew-ticket-review-round4.md, scoped to item 4's fixes only.
