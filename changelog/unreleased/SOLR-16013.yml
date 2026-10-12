@@ -1,4 +1,4 @@
-title: Stopping a node now waits for its Overseer to finish before releasing the Overseer leader node, so a newly elected Overseer cannot process the same queue items concurrently
+title: Stopping a node now closes its Overseer before the ZooKeeper session ends, so the old Overseer finishes before a new one can start.
 type: fixed
 authors:
   - name: Nick Shanin
