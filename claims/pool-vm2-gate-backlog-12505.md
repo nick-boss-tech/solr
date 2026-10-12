@@ -5,4 +5,5 @@
 - Capability tags: implementation (FetchStream and test), gate.
 - Runner: gates/g12505-gate.sh, worktree /workspace/gates/solr-12505-gate (detached), log gates/logs/vm2/12505-run.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Gate run: head d81a77311773 (the claimant's implementation head), GATE END 2026-10-12T21:45:47Z, log logs/vm2/queue-g12505-gate-20261012T213052Z.out. FAILED: compile leg rc=1 (Error Prone AssertThrowsMultipleStatements at StreamDecoratorTest.java:1033 under -Werror); focused head leg rc=1 (testFetchStreamRejectsJoinFieldNameThatBreaksLocalParams: "Unable to construct instance of FetchStream"); proof leg rc=1 with the same construction error, so the premise is not established. Not relaunched; left for the main agent. Details in gates/SOLR-12505-fetchstream-fix.md.
+- Status: FAILED (gate at d81a77311773), not DONE.
