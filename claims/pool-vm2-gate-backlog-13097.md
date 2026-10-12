@@ -14,3 +14,7 @@ Claim taken. Next: read reports/solr-13097-conflict-analysis.md in full, then re
 ## 2026-10-12T05:50Z heartbeat (vm2 coordinator)
 
 Rebase done: 11 commits onto d76fc14b98, both predicted stops resolved, head 1cf59fe6a9f1e4b5586a358653facd916e7518a5 (local). Gate running from 05:45:09Z (log /workspace/gates/logs/vm2/13097-gate.out). Push to the fork is held until the receipt exists; then force-with-lease pinned to f0e7395f58f3c8d8c9066cd88baa6931d8b6f425.
+
+## 2026-10-12T06:16Z DONE (vm2 coordinator)
+
+DONE: gate green at 1cf59fe6a9f1e4b5586a358653facd916e7518a5 (GATE END 2026-10-12T06:09:55Z). Fork pushed with force-with-lease pinned to f0e7395f58f3c8d8c9066cd88baa6931d8b6f425; ls-remote shows 1cf59fe6a9. Deliverables: receipts/SOLR-13097.md (section for 1cf59fe6a9), gates/SOLR-13097.md marked DONE.
