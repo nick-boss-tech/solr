@@ -781,3 +781,7 @@ No action taken beyond this job.
 - Parked: SOLR-6711 FAILED at 7ddf5dc6f4 (classification and scope call recorded in gates/SOLR-6711.md). Not relaunched.
 - Claimed: SOLR-1877 (claim ed0dc64358). Implementation pushed as 5533ba27b1 (read-write lock around the source reader swap and reads in IndexBasedSpellChecker; changelog title narrowed). Gate running; the race fix is verified by code read only, and the proof leg compiles against base only if the branch test compiles there (to check at GATE END).
 - Next claimable job: SOLR-17612 (gates/SOLR-17612.md), then SOLR-8430, SOLR-13097, SOLR-11939.
+
+## 2026-10-12T02:31Z (vm2 cron, busy check)
+
+- Busy: SOLR-1877 gate at 5533ba27b1 still running (started 02:22:26Z, compile step, compile log growing at 02:30Z, no GATE END). Claim heartbeat 02:23Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END for SOLR-1877.
