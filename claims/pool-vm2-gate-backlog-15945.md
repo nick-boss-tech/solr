@@ -5,4 +5,4 @@
 - Capability tags: implementation (text only), gate.
 - Runner: gates/g15945-gate.sh, worktree /workspace/gates/solr-15945-gate (detached), log gates/logs/vm2/15945-run.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Status: DONE by vm2. Fix commit 793765c927 pushed to solr-15945-submit; gate green (see receipts/SOLR-15945.md).
