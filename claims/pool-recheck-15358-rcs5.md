@@ -7,4 +7,4 @@
 - Staffing: 2 read-only subagents.
 - Deliverable: `reports/schema-recheck-15358-rcs5-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T13:29Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/schema-recheck-15358-rcs5-round-1.md`, verdict: RC-S5 CLOSED; the "fully closed" settlement claim is not supported, since SCH-R1-16 and the SCH-R2-03 and SCH-R2-04 response corrections remain open.
