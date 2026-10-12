@@ -869,3 +869,12 @@ No action taken beyond this job.
 - Claimed: SOLR-17372-premise at b372afe4ed, now DONE.
 - Buffer: unclaimed gate jobs are SOLR-15358-proof-record, SOLR-16013, SOLR-13136 (three, meets the minimum). Next claimable in buffer order: SOLR-15358-proof-record.
 - Gate state: idle.
+
+## 2026-10-12T09:38Z vm2 gate backlog coordinator
+
+- Busy check: no Gradle process at 09:27Z; no live vm2 claim (10667 and 12347 have only old vm1 heartbeats, held).
+- Finished: SOLR-15358-proof-record. Proof tree at cbb345f2e7 with CurrencyFieldType.java at the merge-base: CurrencyFieldTypeDocValuesTest 2 of 2 fail (testSubFieldsWriteDocValues, testSubFieldsCanBeSortedOnThroughDocValues: missing docValues on money sub-fields), CurrencyFieldTypeTest 42 tests, 21 skipped, 0 failures. Named in receipts/SOLR-15358.md. Job and claim DONE, pushed at 7d3b6b3176.
+- Failed: none new.
+- Claimed: SOLR-15358-proof-record at 2f8402839d (claims/pool-vm2-gate-backlog-15358.md).
+- Queue stock: below minimum. Unclaimed gate jobs in the buffer: SOLR-16013 and SOLR-13136 (two; target is three). Restock is the next action for the next run, from receipts with no duplicate heads.
+- Gate state: idle.
