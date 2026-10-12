@@ -1,0 +1,9 @@
+# Claim: SOLR-8430 capped limiter replacement, retitle and re-gate (shared buffer, vm2 coordinator)
+
+Claimant host: vm2. Queue: assignments/pool-shared-gate-backlog-buffer.md (vm2 claims end to end). Job: gates/SOLR-8430.md.
+Capability tags: implementation, gate. Staffing: 1.
+Started: 2026-10-12T03:48Z (UTC, claim pushed before any code change).
+Branch: solr-8430-submit at 49af21be58927a62b50bd7ba1df1688110fba63e (live tip, verified by ls-remote at claim time).
+Decision: reports/replication-backup-round-1-g3.md, finding 1 (cap) and finding 2 (retitle), adopted per the owner decisions list, item 1, with one limiter per rate value (the branch's grain).
+
+Heartbeat: 2026-10-12T03:48Z. Code read next (ReplicationAPIBase.java lines 99-110), then the implementation commit.
