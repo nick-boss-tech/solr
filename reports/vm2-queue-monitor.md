@@ -762,3 +762,7 @@ No action taken beyond this job.
 
 - Busy: SOLR-10234 gate run 2 at eb8c4060d9 running from 00:32:33Z (Gradle live, last step focused-head, no GATE END). Claim heartbeat 00:35Z, under 50 minutes; no refresh due.
 - Nothing finished or claimed this run. Next run resumes at GATE END: receipt, job DONE and claim DONE for SOLR-10234, then claim SOLR-5589 (first gate after the disable-rule fix). Unclaimed buffer depth is 7, above the 3-job target.
+
+## 2026-10-12T01:45Z (vm2 cron, busy check)
+
+- Busy: SOLR-6711 gate at 7ddf5dc6f4 running from 01:43:55Z (changelog parse passed, tidy in progress, no GATE END). Claim heartbeat 01:37Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END for SOLR-6711, then the next unclaimed buffer job (SOLR-1877 or the next in order, claims/ governs).
