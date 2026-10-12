@@ -814,3 +814,10 @@ No action taken beyond this job.
 - Claimed: nothing new this run.
 - Gate state: busy. SOLR-8430 gate at 094f0716a8 running from 03:49:46Z (runner /workspace/gates/g8430-gate.sh, log /workspace/gates/logs/vm2/8430-gate.out). Changelog parse, tidy (clean after fold-in) and Error Prone compile passed; cap proof leg (production at 49af21be58) in progress. Gradle process running. No GATE END yet. Claim heartbeat 03:50Z, under 50 minutes; no refresh due.
 - Next claimable after SOLR-8430: SOLR-13097 (rebase, force-with-lease pinned to the fork tip read at claim time), then SOLR-11939.
+
+## 2026-10-12T04:20Z vm2 gate backlog coordinator
+- Busy check: a Gradle build is running in /workspace/gates/solr-8430 (started 04:18:12Z) from a session other than this coordinator run; vm2 is busy and no gate was launched.
+- Finished: none. Failed: SOLR-8430 at 094f0716a8 (gate ended 04:12:44Z). Failing test ReplicationRateLimiterTest.testZeroMeansUnthrottled, a test-fixture order dependence on the static limiter map. Classified in gates/SOLR-8430.md; claim marked FAILED.
+- Action: the fixture fix is in progress in the 8430 worktree by the other session, with an uncommitted production hook that is absent at the pre-cap proof base. Noted in the claim for its owner; the reflection-based clear keeps the cap leg valid.
+- Parked, unchanged: SOLR-17612 (fixture change escalated to the main agent), SOLR-6711 (failed at 7ddf5dc6f4, parked for the fix).
+- Claimed: none new. Next claimable after SOLR-8430 clears: check claims/ and the buffer list in order (SOLR-11939 first among unclaimed).
