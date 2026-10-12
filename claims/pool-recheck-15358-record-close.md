@@ -7,4 +7,4 @@
 - Staffing: 2 read-only subagents.
 - Deliverable: `reports/schema-recheck-15358-record-close-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T12:23Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/schema-recheck-15358-record-close-round-1.md`, verdict: RC-S1 and RC-S3 CLOSED; RC-S5 (schema round 2 line 14 still says the placeholder is unfilled) is a new should-fix on the same record.
