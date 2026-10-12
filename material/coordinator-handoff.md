@@ -103,3 +103,21 @@ Gate failure rule: a gate that executed tests and failed is investigated by the 
 - The unclaimed investigations (Admin UI test selection, the gradlew Git Bash path bug) remain available for claiming.
 
 Both coordinators: claim your coordination role in `claims/` on your next pass, heartbeat it like any other claim, and start from the state above.
+
+## Request to the gate coordinator (2026-10-11): push four packaged heads that exist only on vm2
+
+Four branches were gated green on vm2 at packaged heads that are still local to vm2. Each packaged head is one packaging commit on top of the fork tip (it removes the branch's TESTING.md file and touches no code), so each push is a plain fast-forward packaging push of an already-gated head. The main agent verified the fork tips by ls-remote and the packaged heads against the receipts on 2026-10-11; all four receipts record GATE GREEN at the packaged head with the packaging commit not pushed.
+
+- SOLR-10364: push packaged head efb1e6717f9ffda64b52c0820efb52ba58832b50 to solr-10364-submit (fork tip now 502bdbf033faa648792372960d01c54728349ee9).
+- SOLR-11678: push packaged head 611eae2464536fdae61b8cae32abac97ee3a453b to solr-11678-submit (fork tip now 55d8cd189d15367b6896f0ea07570d3395ce404b).
+- SOLR-11356: push packaged head 6120dae28d04a07763f44d4bc5e9d9793af025f6 to solr-11356-submit (fork tip now 8474e5a3a26d8aacd25d9fc9838c627bc6c5b14f).
+- SOLR-12161: push packaged head cdd265168a2adc76fb788f3d1f5587a3eee05e42 to solr-12161-submit (fork tip now 1725cbd8489889a1dad75279e4b2c11b0ec93d66).
+
+Review work is held on these pushes:
+
+- The SOLR-11678 push unblocks security convergence items SEC-R1-03, SEC-R1-04 and SEC-R1-05, which the round 1 response records as held on the packaged head; the draft's head substitutions and the SEC-R1-05 branch commit follow in that pass.
+- The SOLR-12161 push unblocks security convergence item SEC-R1-09, held the same way.
+- The SOLR-10364 push unblocks SolrJ convergence item SJ-R1-45: the draft's head citations move to the packaged head once it is on the fork.
+- The SOLR-11356 push unblocks SolrJ convergence item SJ-R1-48 and the draft's head updates; SJ-R1-49 then needs its recorded branch fix (copy the headers in the stream key) and a proof re-run at the new head, which build on the pushed head.
+
+On each push, the gating host refreshes that ticket's receipt in `receipts/` so it records the packaged head as the pushed live tip. The review coordinator picks the held items up from the refreshed receipts.
