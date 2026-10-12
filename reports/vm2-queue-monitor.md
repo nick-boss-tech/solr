@@ -757,3 +757,8 @@ No action taken beyond this job.
 - Gate state: full gate run 2 at eb8c4060d9 running from 00:32:33Z, log /workspace/gates/logs/vm2/10234-gate.out. No receipt yet.
 - Not claimed this run (busy). Buffer check: unclaimed jobs are SOLR-5589, 6711, 1877, 17612, 8430, 13097 and 11939, so the 3-job target holds.
 - Next claimable after run 2 ends: SOLR-5589 (first gate after the disable-rule fix), then SOLR-6711, SOLR-1877, SOLR-17612, SOLR-8430, SOLR-13097, SOLR-11939.
+
+## 2026-10-12T00:46Z (vm2 cron, busy check)
+
+- Busy: SOLR-10234 gate run 2 at eb8c4060d9 running from 00:32:33Z (Gradle live, last step focused-head, no GATE END). Claim heartbeat 00:35Z, under 50 minutes; no refresh due.
+- Nothing finished or claimed this run. Next run resumes at GATE END: receipt, job DONE and claim DONE for SOLR-10234, then claim SOLR-5589 (first gate after the disable-rule fix). Unclaimed buffer depth is 7, above the 3-job target.
