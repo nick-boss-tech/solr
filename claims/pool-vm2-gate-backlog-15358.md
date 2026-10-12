@@ -5,3 +5,4 @@
 - Capability tags: gate (record only, no branch edit).
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED by vm2 (coordinator).
+- Status: DONE by vm2 (coordinator) at 2026-10-12T09:37Z. Proof recorded in receipts/SOLR-15358.md (2 failures on the proof tree, named).
