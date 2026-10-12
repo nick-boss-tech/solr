@@ -822,3 +822,10 @@ No action taken beyond this job.
 - Parked, unchanged: SOLR-17612 (fixture change escalated to the main agent), SOLR-6711 (failed at 7ddf5dc6f4, parked for the fix).
 - Claimed: none new. Next claimable after SOLR-8430 clears: check claims/ and the buffer list in order (SOLR-11939 first among unclaimed).
 - 04:31Z busy check: SOLR-8430 re-gate at 0d64c35c5a running since 04:20:52Z (changelog, tidy, compile rc 0; proof cap leg in progress). No GATE END yet; claim heartbeat 04:21:48Z is current. Nothing finished or claimed this run; next claimable after SOLR-8430 is SOLR-11939.
+
+## 2026-10-12T04:48Z vm2 gate backlog coordinator
+- Finished: SOLR-8430 at 0d64c35c5a, GATE GREEN (gate ended 04:41:31Z). Receipt refreshed at 0d64c35c5a, gate file and claim marked DONE, pushed to pr-prepare (f804f53e40). Fork branch unchanged; no packaging step needed.
+- Failed: none new. SOLR-8430 failure at 094f0716a8 was a test-fixture order dependence, fixed at 0d64c35c5a and re-gated green.
+- Claimed: none new. vm2 is busy.
+- Gate state: busy. SOLR-6711 re-gate at 7ddf5dc6f4 is not it; the live gate is at 73c5e6e0d2 (runner /workspace/gates/g6711-gate.sh, log /workspace/gates/logs/vm2/6711-gate.out), started 04:43:19Z, at the compile step. A chained SOLR-17612 gate (g17612-gate.sh) runs after it. Claim heartbeat 04:21:48Z, under 50 minutes; no refresh due.
+- Next claimable: SOLR-13097 (rebase, force-with-lease pinned to the fork tip read at claim time), then SOLR-11939. Both wait for the 6711 and 17612 chain to end.
