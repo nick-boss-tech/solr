@@ -861,3 +861,11 @@ No action taken beyond this job.
 - Gate state: idle. Next claimable in buffer order: SOLR-17372-premise.
 - Owed on the main side, not run by vm2: nightly-group runs of TestPullReplica and TestTlogReplica for SOLR-16437.
 - Held, no action this run: SOLR-10667 and SOLR-12347 (vm1 retry claims with no DONE line).
+
+## 2026-10-12T09:26Z vm2 gate backlog coordinator (after runtime restart)
+- Busy check: no Gradle or runner process live at 09:12Z. The 8576 gate (GATE END 08:20Z) and the earlier runners had all ended.
+- Finished: SOLR-17372-premise, verdict NOT SUPPORTED. Leg A (current main d76fc14b98, seed 2074D8EC40F42163) passes testPercentiles, 1 test, 0 failures. Receipt section added to receipts/SOLR-17372.md; job and claim DONE. Pushed to pr-prepare at 1f86ab22b0.
+- Failed: none new as a verdict. Leg B (branch head 048862fda8) stopped at a worktree build-directory delete error before any test result; not needed for the verdict. Logged in receipts/SOLR-17372.md.
+- Claimed: SOLR-17372-premise at b372afe4ed, now DONE.
+- Buffer: unclaimed gate jobs are SOLR-15358-proof-record, SOLR-16013, SOLR-13136 (three, meets the minimum). Next claimable in buffer order: SOLR-15358-proof-record.
+- Gate state: idle.
