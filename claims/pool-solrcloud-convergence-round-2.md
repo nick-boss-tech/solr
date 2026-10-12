@@ -8,4 +8,4 @@
 - Scope: confirmation of the 12 round 1 NOT CONVERGED drafts, the two judged items, and the two limited re-checks. Read-only apart from this claim and the report. No draft edit this round.
 - Deliverable: `reports/solrcloud-convergence-round-2.md`, verdict first, one line per draft, the judged items, the re-checks and the register (SC-R1 carried, SC-R2 new).
 - Heartbeat: 2026-10-12T03:36Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-12. Deliverable: see the report named above.

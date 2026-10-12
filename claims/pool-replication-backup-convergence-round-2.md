@@ -8,4 +8,4 @@
 - Scope: confirmation of the 8 round 1 NOT CONVERGED drafts, with the state checks the assignment names (limiter cap, changelog fragments, packaging, receipt). Read-only apart from this claim and the report. No draft edit this round.
 - Deliverable: `reports/replication-backup-convergence-round-2.md`, with counts, a verdict per draft, the register (carried RB-R1 IDs, new RB-R2 IDs) and the convergence line.
 - Heartbeat: 2026-10-12T03:36Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-12. Deliverable: see the report named above.

@@ -8,4 +8,4 @@
 - Scope: confirmation of the 18 round 1 NOT CONVERGED drafts, with the branch-side and head checks the assignment names. Read-only apart from this claim and the report. No draft edit this round; no PR, comment, branch or live PR text edit.
 - Deliverable: `reports/core-admin-convergence-round-2.md`, with counts, a verdict per draft, the register (carried CA-R1 IDs, new CA-R2 IDs) and the convergence line.
 - Heartbeat: 2026-10-12T03:36Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-12. Deliverable: see the report named above.
