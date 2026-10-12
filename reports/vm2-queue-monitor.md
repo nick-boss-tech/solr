@@ -785,3 +785,7 @@ No action taken beyond this job.
 ## 2026-10-12T02:31Z (vm2 cron, busy check)
 
 - Busy: SOLR-1877 gate at 5533ba27b1 still running (started 02:22:26Z, compile step, compile log growing at 02:30Z, no GATE END). Claim heartbeat 02:23Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END for SOLR-1877.
+
+## 2026-10-12T02:46Z (vm2 cron, busy check)
+
+- Busy: SOLR-1877 gate at 5533ba27b1 still running (runner /workspace/gates/g1877-gate.sh, log /workspace/gates/logs/vm2/1877-gate.out; focused-head tests green at 14 and 6, module-check step in progress, no GATE END). Claim heartbeat 02:23Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END for SOLR-1877.
