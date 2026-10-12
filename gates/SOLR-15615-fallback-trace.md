@@ -2,7 +2,7 @@
 
 - Branch: solr-15615-submit. Head: be77267bf5549ae6bdc91bc4122b5bf5256f41e1 (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-15615.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: DONE by vm1, 2026-10-12. Trace and verdict in receipts/SOLR-15615.md (Fallback path trace, 2026-10-12): the fallback carries the original requester's identity via the PKI-signed header, so the receiving collection authorizes against the original user; the verdict quotes the exact Limits sentence the trace supports. Claim: claims/pool-vm1-SOLR-15615-fallback-trace.md.
 - Capability tags: investigation, record.
 - Job type: code investigation, recorded in receipts/SOLR-15615.md. No code change, no branch commit, no push, no gate run.
 - Why: the draft's Limits (pr-drafts/query-parsing/SOLR-15615.md) owes a sentence on the fallback's authorization, and it cannot be written until the fallback path is traced end to end (reports/draft-fidelity-fixes-application-response.md, item F23: that is code work, not a record). This job is that trace.
@@ -17,8 +17,8 @@
 
 ## Step checklist
 
-- [ ] fallback entry point and per-collection sequence traced at be77267bf554, with file and line citations
-- [ ] client, credentials and the authorization path for fallback requests established, or the gap named
-- [ ] the final-error exit and mid-sequence error behavior traced
-- [ ] trace and verdict written to receipts/SOLR-15615.md (the exact Limits sentence the trace supports, or the named gap)
-- [ ] job and claim marked DONE
+- [x] fallback entry point and per-collection sequence traced at be77267bf554, with file and line citations
+- [x] client, credentials and the authorization path for fallback requests established, or the gap named
+- [x] the final-error exit and mid-sequence error behavior traced
+- [x] trace and verdict written to receipts/SOLR-15615.md (the exact Limits sentence the trace supports, or the named gap)
+- [x] job and claim marked DONE
