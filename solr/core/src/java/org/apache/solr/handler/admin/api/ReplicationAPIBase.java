@@ -97,13 +97,14 @@ public abstract class ReplicationAPIBase extends JerseyResource {
 
   /** Caps the shared limiters. The rate comes from the request, so the map must stay small. */
   private static final int MAX_SHARED_RATE_LIMITERS = 64;
+
   private static final ConcurrentMap<Double, RateLimiter> SHARED_RATE_LIMITERS =
       new ConcurrentHashMap<>();
 
   /**
    * Returns the limiter that throttles file streams to {@code maxWriteMBPerSec}. Streams with the
-   * same rate share one limiter. A rate of 0 means no throttle. Past the cap, a stream gets its
-   * own limiter.
+   * same rate share one limiter. A rate of 0 means no throttle. Past the cap, a stream gets its own
+   * limiter.
    */
   static RateLimiter rateLimiterFor(double maxWriteMBPerSec) {
     final double mbPerSec = maxWriteMBPerSec == 0 ? Double.MAX_VALUE : maxWriteMBPerSec;
@@ -115,6 +116,10 @@ public abstract class ReplicationAPIBase extends JerseyResource {
       return new RateLimiter.SimpleRateLimiter(mbPerSec);
     }
     return SHARED_RATE_LIMITERS.computeIfAbsent(mbPerSec, RateLimiter.SimpleRateLimiter::new);
+  }
+
+  static void clearSharedRateLimitersForTest() {
+    SHARED_RATE_LIMITERS.clear();
   }
 
   protected IndexVersionResponse doFetchIndexVersion() throws IOException {

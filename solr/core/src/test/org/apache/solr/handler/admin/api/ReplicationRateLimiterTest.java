@@ -18,8 +18,14 @@ package org.apache.solr.handler.admin.api;
 
 import org.apache.lucene.store.RateLimiter;
 import org.apache.solr.SolrTestCase;
+import org.junit.Before;
 
 public class ReplicationRateLimiterTest extends SolrTestCase {
+
+  @Before
+  public void clearSharedLimiters() {
+    ReplicationAPIBase.clearSharedRateLimitersForTest();
+  }
 
   public void testConcurrentStreamsShareOneLimiterPerRate() {
     RateLimiter first = ReplicationAPIBase.rateLimiterFor(0.25);
