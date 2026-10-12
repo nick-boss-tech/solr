@@ -2,7 +2,7 @@
 
 - Branch: solr-8576-submit. Head: 4c46f95c7851f2adbf3377d746aadc9c2249cdb4 (live tip, verified by ls-remote at posting, 2026-10-11; matches receipts/SOLR-8576.md, GATE GREEN at this head for the branch as it stands). Merge-base with main: b6b2b8f10e9827e3b86e44649fb7966ce646c185.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm2 (coordinator) at 2026-10-12T08:00Z, fork tip 4c46f95c7851f2adbf3377d746aadc9c2249cdb4.
+- Status: DONE by vm2 (coordinator). GATE GREEN at 883bb522caf97ca59f5303117efa81d1ec12dbfe, 2026-10-12.
 - Capability tags: gate.
 - Job type: test fix on a gated test-only branch, then a re-gate at the fixed head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: the [OWED BEFORE POSTING] marker in pr-drafts/core-admin/SOLR-8576.md, with reports/core-admin-convergence-round-1-response.md (CA-R1-21, CA-R1-24) and the register text in reports/core-admin-convergence-round-1.md. The green gate at the head above covers the test as it stands; the draft stays held until the fix and the run below land.
@@ -15,11 +15,11 @@
 
 ## Step checklist
 
-- [ ] alias resolution assertion added to testCreateCollectionNameAlreadyTaken; test-only delta verified against 4c46f95c7851
-- [ ] tidy on the final tree; tree clean
-- [ ] changelog parse
-- [ ] Error Prone compile (:solr:core)
-- [ ] proof leg: the single new test on merge-base production passes (pin confirmed)
-- [ ] focused tests at the fixed head: CollectionsAPISolrJTest
-- [ ] module check (:solr:core)
-- [ ] pushed plainly to solr-8576-submit; receipt refreshed; draft updated (marker deleted, head, counts and links at the fixed head, CA-R1-21 post-fix sentence applied); job and claim DONE
+- [x] alias resolution assertion added to testCreateCollectionNameAlreadyTaken; test-only delta verified against 4c46f95c7851
+- [x] tidy on the final tree; tree clean
+- [x] changelog parse
+- [x] Error Prone compile (:solr:core)
+- [x] proof leg: the single new test on merge-base production passes (pin confirmed)
+- [x] focused tests at the fixed head: CollectionsAPISolrJTest
+- [x] module check (:solr:core)
+- [x] pushed plainly to solr-8576-submit; receipt refreshed; draft updated (marker deleted, head, counts and links at the fixed head, CA-R1-21 post-fix sentence applied); job and claim DONE

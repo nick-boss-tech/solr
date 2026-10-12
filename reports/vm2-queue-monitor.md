@@ -850,3 +850,14 @@ No action taken beyond this job.
 - 2026-10-12T06:55Z follow-up: SOLR-11939 at packaged head cdb9903506e9 GATE GREEN (rebase clean onto cabedd1d96; premise: CREATE does not use property.name, ADDREPLICA does fall back to it, flagged for the main side). Receipt receipts/SOLR-11939.md, job and claim DONE, pushed to pr-prepare (995b925edb). Fork solr-11939-submit verified at cdb9903506e9. Two gate-host environment failures recorded in the receipt (NODE_ENV=production omitting devDependencies; Antora refusing a worktree .git file); not branch defects.
 - Queue after this run: unclaimed gate jobs in the buffer are SOLR-17731, SOLR-16437, SOLR-17372-premise, SOLR-15358-proof-record (four, meets the minimum of three). Next claimable in buffer order: SOLR-17731.
 - Gate state: idle.
+
+## 2026-10-12T08:21Z vm2 gate backlog coordinator
+- Busy check: no Gradle process and no gate runner live at 07:56Z; the SOLR-17731 and SOLR-16437 runners had exited (logs end in GATE END at 07:23Z and 07:52Z).
+- Finished: SOLR-17731 at 18165d35a7 GREEN and SOLR-16437 at f72a9edd0a GREEN, both earlier this session (receipts, drafts and DONE marks on pr-prepare). SOLR-8576 at 883bb522ca GREEN this run (gate 07:58Z to 08:20Z).
+- Failed: none new. The SOLR-17731 run 1 at 1baea8f9b8 was GATE INVALID (tidy rewrap), fixed at 18165d35a7 and re-gated green earlier.
+- Claimed and done: SOLR-8576 (claim at 4c46f95c78). FIX 1 applied to testCreateCollectionNameAlreadyTaken (test-only). Fork fast-forward pushed to solr-8576-submit at 883bb522ca. Proof pin on base b6b2b8f10e: 1 test, 0 failures. Focused CollectionsAPISolrJTest at the new head: 25 tests, 1 skipped, 0 failures. Receipt refreshed; draft at 883bb522ca with the OWED marker removed and the CA-R1-21 sentence applied. Job and claim DONE.
+- Restock: SOLR-16013 (gates/SOLR-16013.md, re-gate at live tip ba26b70289) and SOLR-13136 (gates/SOLR-13136.md, consistency re-gate at live tip 486b387755, no PR touch) written and buffered.
+- Buffer: unclaimed gate jobs are SOLR-17372-premise, SOLR-15358-proof-record, SOLR-16013, SOLR-13136 (four, meets the minimum of three).
+- Gate state: idle. Next claimable in buffer order: SOLR-17372-premise.
+- Owed on the main side, not run by vm2: nightly-group runs of TestPullReplica and TestTlogReplica for SOLR-16437.
+- Held, no action this run: SOLR-10667 and SOLR-12347 (vm1 retry claims with no DONE line).
