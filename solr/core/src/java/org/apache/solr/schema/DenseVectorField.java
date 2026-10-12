@@ -267,11 +267,9 @@ public class DenseVectorField extends FloatPointField {
   }
 
   /**
-   * Returns true if any option that is applied through the codec's KNN vectors format (the
-   * algorithm, the HNSW parameters or the cuVS parameters) is configured to a non-default value.
-   * Such options are only honored by a codec factory that supports them, such as {@code
-   * SchemaCodecFactory}; with any other codec factory they are silently ignored. Options the field
-   * type applies itself ({@code vectorEncoding}, {@code similarityFunction}) are not included.
+   * Returns true if the algorithm, the HNSW parameters, or the cuVS parameters are set to a
+   * non-default value. SolrCore uses this for codec factories that are not SolrCoreAware.
+   * SchemaCodecFactory does not apply the cuVS parameters, and the cuVS codec factory does.
    */
   public boolean hasNonDefaultKnnOptions() {
     return !DEFAULT_KNN_ALGORITHM.equals(knnAlgorithm)
