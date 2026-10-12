@@ -9,4 +9,4 @@
 - Hold: any PR whose drift needs an owner decision is not edited.
 - Heartbeat: 2026-10-12T21:01Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/pr-drift-round-1.md`. Fifteen descriptions corrected by targeted replacement and read back; owner decisions listed in the report and not made here.
