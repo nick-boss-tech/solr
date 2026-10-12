@@ -2,7 +2,7 @@
 
 - Branch: solr-4502-submit. Head: 0ee4c644ee63c65cbda5752bb4e4e9fcdb70b4bf (live tip, verified by ls-remote at posting, 2026-10-11; this is the packaged head, GATE GREEN per receipts/SOLR-4502.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm2 (coordinator) at 2026-10-12T10:04Z; claims/pool-vm2-gate-backlog-4502-title-fix.md. Fork tip pinned at claim time: 0ee4c644ee63. TAKEN OVER by vm1 at 2026-10-12T14:24Z under the staleness rule (no heartbeat since the claim; no gate log recorded, so no log is running per the records). Runner on vm1: ~/workspace/tools/g4502-title-gate.sh; log: ~/workspace/tools/g4502-title-gate.log.
+- Status: DONE by vm1 at 2026-10-12T14:45Z. GATE GREEN at new head 3695620b22ab4dea09f236faeb297ba64423ea86, pushed plainly to solr-4502-submit; receipt refreshed; draft changelog link re-pointed. Focused TestCoreContainer from fresh JUnit XML: tests=26 failures=0 errors=0 skipped=3, seed 4502C0FFEE4502. Log: ~/workspace/tools/g4502-title-gate.log (on vm1). Originally CLAIMED by vm2 (coordinator) at 2026-10-12T10:04Z; claims/pool-vm2-gate-backlog-4502-title-fix.md. Fork tip pinned at claim time: 0ee4c644ee63. TAKEN OVER by vm1 at 2026-10-12T14:24Z under the staleness rule (no heartbeat since the claim; no gate log recorded, so no log is running per the records). Runner on vm1: ~/workspace/tools/g4502-title-gate.sh.
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/core-admin-convergence-round-1-response.md, item CA-R1-01 (verified there against the premise run in receipts/SOLR-4502.md: the base failure is at create time, so the current title's search-time NullPointerException state is never reached on base).
@@ -15,10 +15,10 @@
 
 ## Step checklist
 
-- [ ] title replaced verbatim in SOLR-4502-create-before-load.yml; delta against 0ee4c644ee63 is that fragment only
-- [ ] changelog YAML parse
-- [ ] tidy on the final tree; tree clean (GATE INVALID guard)
-- [ ] Error Prone compile (:solr:core)
-- [ ] focused tests at the new head: TestCoreContainer, counted from fresh JUnit XML
-- [ ] module check (:solr:core)
-- [ ] pushed plainly to solr-4502-submit; receipt refreshed; draft changelog link re-pointed; job and claim DONE
+- [x] title replaced verbatim in SOLR-4502-create-before-load.yml; delta against 0ee4c644ee63 is that fragment only
+- [x] changelog YAML parse
+- [x] tidy on the final tree; tree clean (GATE INVALID guard)
+- [x] Error Prone compile (:solr:core)
+- [x] focused tests at the new head: TestCoreContainer, counted from fresh JUnit XML
+- [x] module check (:solr:core)
+- [x] pushed plainly to solr-4502-submit; receipt refreshed; draft changelog link re-pointed; job and claim DONE
