@@ -2,7 +2,7 @@
 
 - Branch: solr-11129-submit. Head: 6c1356bdff706328a8b78d39782f9e94845827d4 (live tip, matches receipts/SOLR-11129.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: DONE 2026-10-12 by vm1 (claim claims/pool-vm1-gate-11129-offset-fix.md). GATE GREEN at the fixed head dc82676b8096ed85cb018d4e5b80f6855e5d26d2, pushed as a plain fast-forward (6c1356bdff..dc82676b80). Gate log: g11129-offset-gate.log on vm1 (harden-branch.sh, proof-leg base the pre-fix head); proof logs g11129-offset-prefix.log and g11129-offset-harden-prefix.log. Focused tests 4 of 4 at the fixed head; the new offset test fails at the pre-fix head with the premise comparison (the distributed page starts at C where the single-node response starts at B) and passes at the fixed head.
 - Capability tags: gate.
 - Job type: one-line branch fix plus a comment correction, then the full hardening gate at the new head. Posted by the Group O settlement (2026-10-11): the category record (reports/search-components-1.md, owner decision 4) requires the offset double-apply fixed before the draft posts, and part f2 owner decision 1 names the one-line replacement as the recommended route, adopted under the owner's decision default. The draft side is already applied in pr-drafts/search-components/SOLR-11129.md (offset stated as a Limit, precedence bullet corrected); this job does the branch side.
 
@@ -26,8 +26,8 @@
 
 ## Step checklist
 
-- [ ] fix hunks applied on a worktree of the live tip
-- [ ] focused offset test fails at the pre-fix head, passes at the fixed head (fresh JUnit XML both legs)
-- [ ] regression classes pass at the fixed head
-- [ ] hardening gate green at the fixed head (changelog parse, tidy guard, Error Prone compile, module check)
-- [ ] branch pushed; receipt refreshed; draft updated and HOLD comment removed; job and claim DONE
+- [x] fix hunks applied on a worktree of the live tip
+- [x] focused offset test fails at the pre-fix head, passes at the fixed head (fresh JUnit XML both legs)
+- [x] regression classes pass at the fixed head
+- [x] hardening gate green at the fixed head (changelog parse, tidy guard, Error Prone compile, module check)
+- [x] branch pushed; receipt refreshed; draft updated and HOLD comment removed; job and claim DONE
