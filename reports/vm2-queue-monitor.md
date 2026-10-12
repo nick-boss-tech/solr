@@ -774,3 +774,10 @@ No action taken beyond this job.
 ## 2026-10-12T02:01Z (vm2 cron, busy check)
 
 - Busy: SOLR-6711 gate at 7ddf5dc6f4 still running (started 01:43:55Z, focused-head step, no GATE END). Claim heartbeat 01:37Z, under 50 minutes; no refresh due. Proof leg log (6711-proof.log) fails with SolrCoreInitializationException on allowUrls (leaderUrl 127.0.0.1:1 not allowed), not the expected persist-does-not-survive-restart assertion; the proof is not valid by content until the GATE END review. Nothing finished or claimed this run.
+
+## 2026-10-12T02:24Z (vm2 cron, claim and gate start)
+
+- Finished, verified on origin: SOLR-5589 (receipt, job and claim DONE, fork ddcd75020e), SOLR-10234 (eb8c4060d9), SOLR-8554 (654c1a7c35). No record gaps.
+- Parked: SOLR-6711 FAILED at 7ddf5dc6f4 (classification and scope call recorded in gates/SOLR-6711.md). Not relaunched.
+- Claimed: SOLR-1877 (claim ed0dc64358). Implementation pushed as 5533ba27b1 (read-write lock around the source reader swap and reads in IndexBasedSpellChecker; changelog title narrowed). Gate running; the race fix is verified by code read only, and the proof leg compiles against base only if the branch test compiles there (to check at GATE END).
+- Next claimable job: SOLR-17612 (gates/SOLR-17612.md), then SOLR-8430, SOLR-13097, SOLR-11939.
