@@ -9,4 +9,4 @@
 - Deliverable: `reports/moved-heads-draft-recheck-round-1.md`, verdict first, with one section per ticket.
 - Heartbeat: 2026-10-12T14:38Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/moved-heads-draft-recheck-round-1.md`. Patched and re-checked: SOLR-11939, SOLR-17731, SOLR-16437 (each CONVERGED UNCHANGED on pass 2). No draft on record: SOLR-6711, SOLR-17612, SOLR-16013.
