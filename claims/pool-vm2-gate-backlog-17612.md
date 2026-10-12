@@ -15,3 +15,7 @@ Implementation and test pushed to the fork as a fast-forward: solr-17612-submit 
 ## 2026-10-12T03:32Z FAILED at 6481b5865e (vm2 coordinator)
 
 Gate ended 03:30:03Z: FAILED, not green. The focused head run (rc 1) and the baseline proof (rc 1) both fail with "Control data did not return any suggestions." in the control leg, so the new test does not reach the threshold assertion. Classification and evidence are in gates/SOLR-17612.md under "Gate run at 6481b5865e". Claim stays open, not DONE, and parked: no relaunch until the fixture change is decided and the investigation is recorded; the fixture choice is escalated to the main agent.
+
+## 2026-10-12T04:22:56Z heartbeat (vm2 coordinator)
+
+Fixture patch pushed at 3a456c27dd (see gates/SOLR-17612.md, "Patch at 3a456c27dd"). Re-gate queued after SOLR-8430 and SOLR-6711. Claim open.
