@@ -50,7 +50,6 @@ import org.apache.solr.core.SolrEventListener;
 import org.apache.solr.core.SolrResourceLoader;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.IndexSchema;
-import org.apache.solr.search.DocSet;
 import org.apache.solr.search.QParser;
 import org.apache.solr.search.QueryLimits;
 import org.apache.solr.search.SolrIndexSearcher;
@@ -92,8 +91,8 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
   public static final String COMPONENT_NAME = "spellcheck";
 
   /**
-   * Key under which a shard reports its filtered doc count to the coordinator, so a fractional
-   * {@code spellcheck.maxResultsForSuggest} can be applied to the total across shards.
+   * Key under which a shard reports its per-filter doc counts to the coordinator, so a fractional
+   * {@code spellcheck.maxResultsForSuggest} can be applied to the totals across shards.
    */
   static final String MAX_RESULTS_BY_FILTERS = "maxResultsByFilters";
 
@@ -233,9 +232,9 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
           response.add("correctlySpelled", isCorrectlySpelled);
         }
         if (deferToCoordinator) {
-          final Integer maxResultsByFilters = maxResultsByFilters(rb);
-          if (maxResultsByFilters != null) {
-            response.add(MAX_RESULTS_BY_FILTERS, maxResultsByFilters);
+          final List<Integer> filterCounts = filterCounts(rb);
+          if (filterCounts != null) {
+            response.add(MAX_RESULTS_BY_FILTERS, filterCounts);
           }
         }
         if (collate) {
@@ -298,60 +297,70 @@ public class SpellCheckComponent extends SearchComponent implements SolrCoreAwar
   }
 
   /**
-   * The number of documents matching the most restrictive filter (or the explicit {@code
+   * The number of documents matching each filter (or the explicit {@code
    * spellcheck.maxResultsForSuggest.fq}), evaluated against this core's searcher; null if there is
    * no filter or it can't be evaluated.
    */
-  private Integer maxResultsByFilters(ResponseBuilder rb) {
+  private List<Integer> filterCounts(ResponseBuilder rb) {
     SolrParams params = rb.req.getParams();
     String maxResultsFilterQueryString =
         params.get(SpellingParams.SPELLCHECK_MAX_RESULTS_FOR_SUGGEST_FQ);
-
-    int maxResultsByFilters = Integer.MAX_VALUE;
     SolrIndexSearcher searcher = rb.req.getSearcher();
 
     try {
       if (maxResultsFilterQueryString != null) {
-        // Get the default Lucene query parser
         QParser parser = QParser.getParser(maxResultsFilterQueryString, rb.req);
-        DocSet s = searcher.getDocSet(parser.getQuery());
-        maxResultsByFilters = s.size();
-      } else {
-        List<Query> filters = rb.getFilters();
-
-        // Get the maximum possible hits within these filters (size of most restrictive filter).
-        if (filters != null) {
-          for (Query query : filters) {
-            DocSet s = searcher.getDocSet(query);
-            if (s != null) {
-              maxResultsByFilters = Math.min(s.size(), maxResultsByFilters);
-            }
-          }
-        }
+        return List.of(searcher.getDocSet(parser.getQuery()).size());
       }
+      List<Query> filters = rb.getFilters();
+      if (filters == null || filters.isEmpty()) {
+        return null;
+      }
+      List<Integer> counts = new ArrayList<>(filters.size());
+      for (Query query : filters) {
+        counts.add(searcher.getDocSet(query).size());
+      }
+      return counts;
     } catch (IOException | SyntaxError e) {
       log.error("Error", e);
       return null;
     }
-    return maxResultsByFilters == Integer.MAX_VALUE ? null : maxResultsByFilters;
+  }
+
+  private Integer maxResultsByFilters(ResponseBuilder rb) {
+    List<Integer> counts = filterCounts(rb);
+    return counts == null ? null : Collections.min(counts);
   }
 
   /**
-   * Sums the per-shard filtered doc counts reported by shards, or null if no shard reported one.
+   * Sums the per-filter doc counts reported by shards, filter by filter, and returns the smallest
+   * sum (the cross-shard size of the most restrictive filter); null if no shard reported counts.
    */
   private Integer sumMaxResultsByFiltersFromShards(ResponseBuilder rb) {
-    Long total = null;
+    long[] totals = null;
     for (ShardRequest sreq : rb.finished) {
       for (ShardResponse srsp : sreq.responses) {
         NamedList<?> nl =
             (NamedList<?>)
                 SolrResponseUtil.getSubsectionFromShardResponse(rb, srsp, "spellcheck", true);
-        if (nl != null && nl.get(MAX_RESULTS_BY_FILTERS) instanceof Number n) {
-          total = (total == null ? 0L : total) + n.longValue();
+        if (nl != null && nl.get(MAX_RESULTS_BY_FILTERS) instanceof List<?> counts) {
+          if (totals == null) {
+            totals = new long[counts.size()];
+          }
+          for (int i = 0; i < totals.length; i++) {
+            totals[i] += ((Number) counts.get(i)).longValue();
+          }
         }
       }
     }
-    return total == null ? null : (int) Math.min(total, Integer.MAX_VALUE);
+    if (totals == null) {
+      return null;
+    }
+    long min = Long.MAX_VALUE;
+    for (long total : totals) {
+      min = Math.min(min, total);
+    }
+    return (int) Math.min(min, Integer.MAX_VALUE);
   }
 
   protected void addCollationsToResponse(

@@ -420,6 +420,47 @@ public class DistributedSpellCheckComponentTest extends BaseDistributedSearchTes
             // test.expected.suggestions
             "echoParams",
             "all"));
+
+    // Two filters, fixed per-shard counts: shard 0 holds 10 docs matching only the first filter, 2
+    // matching only the second, and 4 matching both; shard 1 is the mirror image. The per-shard
+    // minima sum to 12, but the cross-shard size of the most restrictive filter is 20, so with a
+    // fraction of 0.5 the threshold is 10 and the 8 matching docs are not treated as correctly
+    // spelled. Summing per-shard minima would give 6 and suppress the suggestions (SOLR-17612).
+    for (int i = 60; i < 70; i++) {
+      index_specific(0, id, Integer.toString(i), "lowerfilt", "zqxfilterone");
+    }
+    for (int i = 70; i < 72; i++) {
+      index_specific(0, id, Integer.toString(i), "lowerfilt", "zqxfiltertwo");
+    }
+    for (int i = 72; i < 76; i++) {
+      index_specific(0, id, Integer.toString(i), "lowerfilt", "zqxfilterone zqxfiltertwo");
+    }
+    for (int i = 80; i < 82; i++) {
+      index_specific(1, id, Integer.toString(i), "lowerfilt", "zqxfilterone");
+    }
+    for (int i = 82; i < 92; i++) {
+      index_specific(1, id, Integer.toString(i), "lowerfilt", "zqxfiltertwo");
+    }
+    for (int i = 92; i < 96; i++) {
+      index_specific(1, id, Integer.toString(i), "lowerfilt", "zqxfilterone zqxfiltertwo");
+    }
+    commit();
+
+    query(
+        requestHandlerName,
+        buildRequest(
+            "zqxfilterne",
+            true,
+            requestHandlerName,
+            false,
+            extended,
+            "true",
+            maxResults,
+            "0.5",
+            "fq",
+            "lowerfilt:zqxfilterone",
+            "fq",
+            "lowerfilt:zqxfiltertwo"));
   }
 
   private SolrParams buildRequest(
