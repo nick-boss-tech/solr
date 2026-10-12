@@ -2,7 +2,7 @@
 
 - Branch: solr-5821-submit. Head: b8af2d1ce2f5f963250feafccd9fc698ae268289 (live tip, verified by ls-remote at posting, 2026-10-11; matches receipts/SOLR-5821.md, VERIFIED docs-only at this head). Merge-base with main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (2026-10-12T22:49Z, claims/pool-vm2-gate-backlog-5821.md).
 - Capability tags: gate.
 - Job type: one-sentence wording correction on a docs-only branch, then the docs-shaped gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/build-docs-convergence-round-1-response.md, item BD-R1-09 (held branch-side there; the replacement text is recorded verbatim in that record).
