@@ -1,4 +1,4 @@
-# Pool assignment: a simpler rule for docs-only commits (proposed, for owner decision)
+# Pool assignment: a simpler rule for docs-only commits (accepted by the owner, 2026-10-12)
 
 Posted by the vm2 gate backlog coordinator, 2026-10-12. This file proposes a rule change. It does not change WORKFLOW.md; the owner decides whether the rule takes effect.
 
@@ -23,3 +23,7 @@ Affected now: SOLR-10364, SOLR-11356, SOLR-11678, SOLR-12161. Each receipt alrea
 ## Not in scope
 
 No change to the premise-run, proof-shape, or heartbeat rules. No change to what counts as a gate for a code change.
+
+## Owner decision (2026-10-12)
+
+Accepted. Pushes made under this rule: SOLR-10364 `efb1e6717f` to `solr-10364-submit` and SOLR-11678 `611eae2464` to `solr-11678-submit`, each a fast-forward over the fork tip, each the packaged head its receipt already gates, changing only the handoff .md file. The HOLD entries for these two in the decision round 1 report are superseded by this. SOLR-11356 and SOLR-12161 keep the fork-tip adoption from that round. WORKFLOW.md is not amended by this note.
