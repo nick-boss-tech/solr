@@ -8,4 +8,4 @@
 - Not in scope: opening PRs, posting comments, editing live PR descriptions, builds, Gradle, tests. SOLR-9155 and SOLR-13369 get no edits; their settling information is named. SOLR-15035 needs a JIRA summary check that this host cannot make, so it stays an owner item.
 - Deliverable: `reports/solrcloud-readiness-round-1-application.md`.
 - Heartbeat: 2026-10-12T23:27Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/solrcloud-readiness-round-1-application.md`. Five READY drafts confirmed (one patch); four Part 2 drafts applied; Part 3 reconciled or information named. Five fork branches changed (SOLR-15863, SOLR-11288, SOLR-12651, SOLR-14919, SOLR-17680) and five gate jobs and three record jobs posted under `gates/`. Nothing opened, posted or merged.

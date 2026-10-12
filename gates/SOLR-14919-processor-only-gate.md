@@ -1,0 +1,21 @@
+# Gate job: SOLR-14919 processor-only route, re-gate at the new head
+
+- Branch: solr-14919-submit. Head: c1fa37e33c1e00ab06ed59646b6a739facf50017 (fork tip at posting, 2026-10-12). Prior gated head: 84e7bcaeb57d88e1d9d519389d96ff14a66acb6e (receipts/SOLR-14919.md). Merge-base: b5c71bc5573c4e31b4cee5a7965d73587fc0ae58.
+- Posted by: windows (review agent), for Nick Shanin, 2026-10-12. Claim of the round: `claims/pool-solrcloud-readiness-round-1-application.md`.
+- Change since the prior gated head: the recovery marker is removed (RecoveryStrategy.java back to the merge-base), the test comment is corrected, the processor javadoc is corrected, and the changelog title is replaced. The processor code is unchanged.
+- Capability tags: gate. Intended host: any capable Linux host under the WORKFLOW.md claim rules. Windows never claims build work.
+- Status: OPEN, unclaimed.
+- Module: :solr:core. Focused class: org.apache.solr.update.processor.IgnoreCommitOptimizeUpdateProcessorFactoryTest (confirm the package by grep before composing the run).
+- Proof shape: with IgnoreCommitOptimizeUpdateProcessorFactory.java at the merge-base, the focused class must fail with "invalid boolean value: leaders". At the head it must pass.
+- Steps: changelog YAML parse of changelog/unreleased/SOLR-14919.yml; tidy with the GATE INVALID guard (restore gradle/libs.versions.toml afterward); Error Prone compile; proof leg; focused test at the head (fresh JUnit XML, record the seed); module check `:solr:core:check -x test`.
+- On green: refresh receipts/SOLR-14919.md with the new head and the dated run, update the draft's head citations in pr-drafts/solrcloud/SOLR-14919.md (they already name c1fa37e33c1), mark this job DONE and the claim line for SOLR-14919 DONE.
+
+## Step checklist
+
+- [ ] changelog parse
+- [ ] tidy with the GATE INVALID guard
+- [ ] Error Prone compile
+- [ ] proof leg at the merge-base processor
+- [ ] focused test at the head
+- [ ] module check
+- [ ] receipt refreshed; draft citations confirmed; job DONE
