@@ -24,7 +24,7 @@ Scope: `f9057e454cc` (the prescribed fix, the receipt refresh and the draft upda
 ## Fresh check
 
 - The three edits changed only lines 26, 32 and 48, and the fresh check confirmed lines 26 and 48 against the receipt and the prior head's code.
-- The fresh check failed line 32 as worded, which the removal above resolves.
+- The fresh check failed line 32 as worded. Line 32 was then removed, and that removal was checked by reading the diff, not by a further subagent.
 
 ## Notes for the main side
 
