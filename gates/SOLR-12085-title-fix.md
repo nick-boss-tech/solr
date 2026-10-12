@@ -2,7 +2,7 @@
 
 - Branch: solr-12085-submit. Head: c8dba502339631218190b3b08115f64047d2551c (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-12085.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (coordinator) at 2026-10-12T17:14Z; claims/pool-vm2-gate-backlog-12085-title-fix.md. Fork tip pinned at claim time: c8dba50233.
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/replication-backup-round-1-g2.md, finding 14, adopted in material/replication-backup-round-1-answers.md (SOLR-12085 entry) and carried as a status item in reports/replication-backup-convergence-round-1-response.md. The current title says "on every replication"; the wait runs only on the path at IndexFetcher.java line 622 at the head (`!isFullCopyNeeded && !fetchFromLeader`), so the title overstates the change.
