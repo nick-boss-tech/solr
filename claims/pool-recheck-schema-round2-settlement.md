@@ -7,4 +7,4 @@
 - Staffing: 2 read-only subagents.
 - Deliverable: `reports/schema-recheck-round2-settlement-round-1.md`, verdict first.
 - Heartbeat: 2026-10-12T13:47Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/schema-recheck-round2-settlement-round-1.md`, verdict: SCH-R2-01 to SCH-R2-05 CLOSED; SS-01 (round 2 response line 17 record-set overclaim) is a should-fix; SS-02 to SS-04 are notes.
