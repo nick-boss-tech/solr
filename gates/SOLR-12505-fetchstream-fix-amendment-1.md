@@ -21,6 +21,12 @@
 4. Re-run the full gate from gates/SOLR-12505-fetchstream-fix.md at the new head: changelog YAML parse; tidy with the GATE INVALID guard (restore gradle/libs.versions.toml afterward; re-run tidy on the final tree after the last edit, before committing); Error Prone compile for `:solr:solrj-streaming` with `-Pvalidation.errorprone=true`; the proof leg (FetchStream.java reverted to 5f20e1171bc, the branch tests kept; the new test must fail there by content, the corrupted batch, not by a construction error); focused StreamDecoratorTest counted from fresh JUnit XML; module check `:solr:solrj-streaming:check -x test`. Record the seed used in the original job file.
 5. On green: push the fix commits plainly (fast-forward) to solr-12505-submit, refresh receipts/SOLR-12505.md at the new head, do the draft update the original job's on-green section names, and mark the original job, the claim, and this amendment DONE.
 
+## Gate run at ee67d37421 (queue, 2026-10-12)
+
+- Log: logs/vm2/queue-g12505-gate-20261012T232607Z.out (GATE START 23:26:07Z, GATE END 23:41:00Z). Head ee67d374219275907ef1b78e3d2b455b6a15e43f.
+- rc: changelog 0, tidy 0, Error Prone compile 0, focused head 0, module check 0. Proof leg rc=1, failing by content as the script expects: "expected java.io.IOException to be thrown, but nothing was thrown" (logs/vm2/12505-proof.log).
+- Not GREEN under the all-rc-0 rule; not marked DONE. Left for the main side to rule on the proof leg and on the fork push. Fork not pushed.
+
 ## Step checklist
 
 - [ ] new test restructured to one statement per `assertThrows` lambda; assertion intent unchanged
