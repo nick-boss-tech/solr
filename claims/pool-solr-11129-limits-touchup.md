@@ -9,4 +9,4 @@
 - Deliverable: `reports/solr-11129-draft-limits-touchup-round-1.md`, with the before and after text of each correction, a verdict and the commit that carries the edit.
 - Heartbeat: 2026-10-12T15:11Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/solr-11129-draft-limits-touchup-round-1.md`, verdict APPLIED AND VERIFIED (both corrections in `pr-drafts/search-components/SOLR-11129.md`).
