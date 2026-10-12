@@ -888,3 +888,8 @@ No action taken beyond this job.
 - Restock: SOLR-13943 (gates/SOLR-13943.md, re-gate at ca443f6f68) and SOLR-15805 (gates/SOLR-15805.md, re-gate at 6d78603d82, identical tree to the receipt's 3432f950f0). Buffer now has three unclaimed gate jobs: SOLR-13136, SOLR-13943, SOLR-15805.
 - Not stocked: SOLR-10252 (docs only, held on the round 5 owner decision).
 - Next claimable in buffer order: SOLR-13136 (re-gate at 486b387755, after SOLR-16013 finishes).
+
+## 2026-10-12T09:46Z vm2 gate backlog coordinator
+
+- Busy: SOLR-16013 re-gate running (started 09:41:48Z, log /workspace/gates/logs/vm2/16013-gate.out, at tidy, no GATE END). Claim heartbeat 09:39Z, under 50 minutes, no refresh needed. No finish or failure to record.
+- Next claimable in buffer order after 16013: SOLR-13136, then SOLR-13943, SOLR-15805.
