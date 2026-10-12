@@ -27,7 +27,7 @@ Effect: `q=ipod AND` returns the same results as `q=ipod`.
 - [SolrPluginUtilsTest](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/solr/core/src/test/org/apache/solr/util/SolrPluginUtilsTest.java#L99): 10 of 10 pass at head `ac9ab33753751a6fef05b5f100f5c1c5683510b2`. `testStripDanglingBooleanOperators` fails on the base code, and the other nine pass there.
 - [DisMaxRequestHandlerTest](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/solr/core/src/test/org/apache/solr/DisMaxRequestHandlerTest.java#L193): 4 of 4 pass at the same head. `testDanglingBooleanOperator` fails on the base code.
 
-The base-code run used the new test files on top of the base source. The counts are from a focused run recorded 2026-10-06.
+The base-code run used the new test files on top of the base source. The counts are from a focused run.
 
 ## A choice to check
 
