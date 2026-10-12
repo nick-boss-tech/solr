@@ -1393,14 +1393,17 @@ public class FacetComponent extends SearchComponent {
 
     public FieldFacet(ResponseBuilder rb, String facetStr) {
       super(rb, FacetParams.FACET_FIELD, facetStr);
-      // local params (e.g. {!facet.mincount=1}fld) take precedence, as they do on the shards
+      // local params (e.g. {!facet.mincount=1}fld) take precedence over plain request params, as
+      // they do on the shards; per-field request params (f.fld.facet.mincount) still win
       fillParams(rb, SolrParams.wrapDefaults(localParams, rb.req.getParams()), facetOn);
     }
 
     protected void fillParams(ResponseBuilder rb, SolrParams params, String field) {
       this.field = field;
       this.ftype = rb.req.getSchema().getFieldTypeNoEx(this.field);
-      this.offset = params.getFieldInt(field, FacetParams.FACET_OFFSET, 0);
+      // a local facet.offset is applied by the shards, so the coordinator keeps the request value
+      // here
+      this.offset = rb.req.getParams().getFieldInt(field, FacetParams.FACET_OFFSET, 0);
       this.limit = params.getFieldInt(field, FacetParams.FACET_LIMIT, 100);
       Integer mincount = params.getFieldInt(field, FacetParams.FACET_MINCOUNT);
       if (mincount == null) {
