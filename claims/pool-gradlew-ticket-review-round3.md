@@ -7,5 +7,5 @@
 - Staffing: 1, as the assignment says. One read-only subagent confirms items 1 to 4.
 - Scope: confirmation only. The draft and the reports are not edited; any disagreement is flagged. No build, Gradle, test or gate. No Jira, email, GitHub or comment write.
 - Deliverable: `reports/gradlew-ticket-review-round3.md`, verdict first (SATISFIED or STILL OPEN), one line per item.
-- Heartbeat: 2026-10-12T01:10Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-12T01:10Z (claim taken); subagent reported.
+- Status: DONE, 2026-10-12. Deliverable: `reports/gradlew-ticket-review-round3.md`, verdict STILL OPEN. Items 1 to 3 confirmed. Item 4 needs two draft fixes for the main side: an unsourced execution date in the source note, and a loop claim the trace contradicts. Nothing was edited, built, posted or filed.
