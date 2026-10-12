@@ -2,6 +2,8 @@
 
 Verdict: **UNDECIDED from reading.** The failure is not established as a test-only defect. Reading the code points to a candidate production mechanism in the branch's own new close path in `ZkController`. Per the assignment's step 1, that is a stop-and-report result, so this round writes no test-only patch request (step 2 is withheld). The question needs a run, which this Windows host does not do.
 
+Update, after this report was written: `receipts/SOLR-16013.md` (commit `4b30c483a90`) records the main side's vm1 runs, which classify the failure as branch-caused. The runs show the interrupt-restoring close path at the head as the cause, the case this report flagged as the production candidate. The test-only fixture patch does not settle the failure, and the next step the receipt names is a production fix followed by a re-gate. This report's step 1 result is therefore a stop-and-report, and step 2 is not owed.
+
 Assignment: `assignments/solr-16013-overseer-fixture.md`. Claim: `claims/pool-review-16013-overseer-fixture.md`. Branch head `ba26b7028917ef29d5b5e1cfe75ee83862cccf63` (ls-remote confirmed), base `14c7aac0d151402b00259e2fb9bf5eed7049ec5d` (merge-base with upstream/main). One read-only subagent, as the assignment names. Nothing was edited, built, run or posted.
 
 ## What the reading shows
