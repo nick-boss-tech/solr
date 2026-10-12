@@ -19,3 +19,7 @@ Gate ended 03:30:03Z: FAILED, not green. The focused head run (rc 1) and the bas
 ## 2026-10-12T04:22:56Z heartbeat (vm2 coordinator)
 
 Fixture patch pushed at 3a456c27dd (see gates/SOLR-17612.md, "Patch at 3a456c27dd"). Re-gate queued after SOLR-8430 and SOLR-6711. Claim open.
+
+## 2026-10-12T05:16Z heartbeat (vm2 coordinator)
+
+Re-gate at 3a456c27dd still running (g17612-gate.sh, GATE START 05:00:14Z, module-check step, no GATE END). Proof leg rc 1 failed by content at DistributedSpellCheckComponentTest line 450: `.spellcheck.suggestions.null!=zqxfilterne`, the expected suppression; control leg passed. Focused head rc 0, 1 test, 0 failures. Claim open.
