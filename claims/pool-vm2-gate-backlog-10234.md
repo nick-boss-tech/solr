@@ -10,3 +10,7 @@ Heartbeat: 2026-10-11T23:47Z. Premise run next (runner /workspace/gates/g10234-g
 ## 2026-10-11T23:58Z heartbeat (vm2 coordinator)
 
 Premise holds at the merge base (fails by assertion content, recorded in gates/SOLR-10234.md). Packaged head f5ded23ffb pushed to the fork as a fast-forward from 16825538a7. Hardening gate running from 23:58:36Z, log /workspace/gates/logs/vm2/10234-gate.out.
+
+## 2026-10-12T00:35Z heartbeat (vm2 coordinator)
+
+Gate run 1 at f5ded23ffb ended 00:18:04Z: every step green or failing by content except module check, which failed in ecjLintTest on an unused import in CloudTestBaseFileSystemsTest.java (no tests run). Investigation recorded in gates/SOLR-10234.md. Fix commit eb8c4060d9 pushed to solr-10234-submit as a fast-forward from f5ded23ffb. Full gate run 2 at eb8c4060d9 starting now, log /workspace/gates/logs/vm2/10234-gate.out.
