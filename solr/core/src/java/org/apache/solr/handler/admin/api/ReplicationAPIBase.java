@@ -95,17 +95,25 @@ public abstract class ReplicationAPIBase extends JerseyResource {
     this.solrQueryResponse = solrQueryResponse;
   }
 
-  /** One limiter per configured rate, shared by all concurrent file streams on this node. */
+  /** Caps the shared limiters. The rate comes from the request, so the map must stay small. */
+  private static final int MAX_SHARED_RATE_LIMITERS = 64;
   private static final ConcurrentMap<Double, RateLimiter> SHARED_RATE_LIMITERS =
       new ConcurrentHashMap<>();
 
   /**
-   * Returns the limiter that throttles file streams to {@code maxWriteMBPerSec}, so that N
-   * concurrent replicas fetching at the same configured rate share it instead of each getting the
-   * full rate. A rate of 0 means no throttle.
+   * Returns the limiter that throttles file streams to {@code maxWriteMBPerSec}. Streams with the
+   * same rate share one limiter. A rate of 0 means no throttle. Past the cap, a stream gets its
+   * own limiter.
    */
   static RateLimiter rateLimiterFor(double maxWriteMBPerSec) {
     final double mbPerSec = maxWriteMBPerSec == 0 ? Double.MAX_VALUE : maxWriteMBPerSec;
+    RateLimiter shared = SHARED_RATE_LIMITERS.get(mbPerSec);
+    if (shared != null) {
+      return shared;
+    }
+    if (SHARED_RATE_LIMITERS.size() >= MAX_SHARED_RATE_LIMITERS) {
+      return new RateLimiter.SimpleRateLimiter(mbPerSec);
+    }
     return SHARED_RATE_LIMITERS.computeIfAbsent(mbPerSec, RateLimiter.SimpleRateLimiter::new);
   }
 

@@ -1,4 +1,4 @@
-title: "Replication maxWriteMBPerSec throttling is shared by all concurrent file requests on a node instead of being applied separately to each request"
+title: "Replication maxWriteMBPerSec throttling is shared by concurrent file requests on a node that use the same rate, instead of each request getting its own limiter"
 type: fixed
 authors:
   - name: Nick Shanin

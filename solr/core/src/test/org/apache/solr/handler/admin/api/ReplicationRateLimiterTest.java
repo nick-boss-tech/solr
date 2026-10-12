@@ -41,4 +41,15 @@ public class ReplicationRateLimiterTest extends SolrTestCase {
     assertSame(unlimited, ReplicationAPIBase.rateLimiterFor(0));
     assertEquals(Double.MAX_VALUE, unlimited.getMBPerSec(), 0.0);
   }
+
+  public void testRatesPastTheCapGetPrivateLimiters() {
+    RateLimiter belowCap = ReplicationAPIBase.rateLimiterFor(4000.25);
+    assertSame(belowCap, ReplicationAPIBase.rateLimiterFor(4000.25));
+    for (int i = 0; i < 100; i++) {
+      ReplicationAPIBase.rateLimiterFor(10000 + i);
+    }
+    RateLimiter past = ReplicationAPIBase.rateLimiterFor(20000.5);
+    assertNotSame(past, ReplicationAPIBase.rateLimiterFor(20000.5));
+    assertEquals(20000.5, past.getMBPerSec(), 0.0);
+  }
 }
