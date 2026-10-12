@@ -9,4 +9,4 @@
 - Deliverable: `reports/update-processing-convergence-round-6.md`, verdict first.
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
 - Heartbeat: 2026-10-12T08:24Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/update-processing-convergence-round-6.md`, verdict NOT CONVERGED overall: the SOLR-3657, SOLR-14718 and SOLR-5065 drafts converge on their text, the rebuttal of UP-R5-01 stands, and the SOLR-14718 audit waits on two should-fix wording items (UP-R6-01, UP-R6-02).
