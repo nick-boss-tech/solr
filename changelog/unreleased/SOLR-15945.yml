@@ -1,4 +1,4 @@
-title: DateRangeField and SpatialRecursivePrefixTreeFieldType fields declared with indexed="false" no longer fail to load because of the norms and index-options checks
+title: Stored-only DateRangeField and SpatialRecursivePrefixTreeFieldType fields (indexed="false") no longer fail to load because of the norms and index-options checks.
 type: fixed
 authors:
   - name: Nick Shanin

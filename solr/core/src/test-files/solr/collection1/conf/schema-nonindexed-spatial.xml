@@ -23,7 +23,7 @@
              distanceUnits="degrees"/>
 
   <field name="id" type="string" indexed="true" stored="true" multiValued="false" required="true"/>
-  <!-- stored-only: no norms or index options exist for these, so the type's invariants hold -->
+  <!-- stored-only: the norms and index-options checks do not apply to these fields, so the type skips them -->
   <field name="daterange_stored" type="daterange" indexed="false" stored="true"/>
   <field name="srpt_stored" type="srpt" indexed="false" stored="true"/>
 
