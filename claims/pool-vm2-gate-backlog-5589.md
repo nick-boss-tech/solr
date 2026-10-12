@@ -10,3 +10,7 @@ Heartbeat: 2026-10-12T01:08Z. Implementation next (fix at ReplicationHandler.jav
 ## 2026-10-12T01:12Z heartbeat (vm2 coordinator)
 
 Gate run 1 at ddcd75020e: changelog parse OK and tidy rc 0 with clean tree; the compile step was cut off when the session ended (log kept at /workspace/gates/logs/vm2/5589-gate-run1-interrupted.out). No tests ran, so this is an interrupted run, not a test failure. Relaunched once at ddcd75020e from 01:12:10Z, log /workspace/gates/logs/vm2/5589-gate.out.
+
+## 2026-10-12T01:37Z DONE (vm2 coordinator)
+
+DONE: gate run at ddcd75020e green (GATE END 01:36:21Z). Deliverables: receipts/SOLR-5589.md at ddcd75020eea11cb82cbb7ec99b221553794939a, gates/SOLR-5589.md marked DONE. Fork tip verified at ddcd75020e.
