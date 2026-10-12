@@ -1,0 +1,19 @@
+# Record job: SOLR-14199 counted-set identification and the SchemaVersionSpecificBehaviorTest run
+
+- Branch: solr-14199-submit. Head: e743c90da79a155fd6e6161233af5d924dc9dad1 (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-14199.md; the draft stays HELD, see below).
+- Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
+- Status: OPEN, unclaimed.
+- Capability tags: gate (record runs only).
+- Job type: record only. Two runs at the head, both recorded in receipts/SOLR-14199.md. No branch commit, no push, no test edit under this job.
+- Why: receipts/SOLR-14199.md counts TestSolrQueryParser 37 of 37 from fresh JUnit XML, but the head's TestSolrQueryParser.java declares 36 test methods (reports/schema-analysis-round-1.md), and no record names the 37th test. Separately, the draft's HOLD (pr-drafts/schema-analysis/SOLR-14199.md) stands in part because SchemaVersionSpecificBehaviorTest was not in the gate run and is not on record; reports/schema-analysis-round-1-s1.md finding 1 predicts it fails at this head (the test expects the old omitNorms default for point types on schema versions 1.0 to 1.4, and the branch sets it for all versions) and gives an exact replacement assertion. Whether it fails is settled by running it, which is this job's second run.
+- Run 1: org.apache.solr.search.TestSolrQueryParser in :solr:core at the head (package read from the branch's test file by grep, per the FQCN rule). From the fresh JUnit XML, enumerate every testcase that ran. Compare the list against the test methods declared in the head's TestSolrQueryParser.java. Identify the 37th test: the testcase in the XML with no declared method of the same name in the file, and state where it comes from (inherited from a base class, a parameterized or renamed variant, or another origin the XML and the file establish). Record the identified test and its origin in receipts/SOLR-14199.md. If the XML count is not 37, record the actual count and the full comparison instead.
+- Run 2: org.apache.solr.schema.SchemaVersionSpecificBehaviorTest in :solr:core at the head (package by grep, per the FQCN rule). Record the outcome in receipts/SOLR-14199.md either way: on a pass, the counts and the log name; on a failure, the counts, the failing test method, and the failure text verbatim. This job does not fix the test: if it fails, the HOLD stands and the fix the s1 report prescribes is separate work for the main side to schedule.
+- Method rules: counts stand only on the fresh JUnit XML from these runs, not on console output; one Gradle build at a time on the host; use the host's standard gate tooling for the runs (no tidy or packaging step applies: the branch tree is not modified).
+- On completion: receipts/SOLR-14199.md carries both records, this job is marked DONE, and the claim is marked DONE. The draft and its HOLD markers are not edited by this job.
+
+## Step checklist
+
+- [ ] TestSolrQueryParser run at e743c90da79; testcases enumerated from fresh JUnit XML
+- [ ] the 37th test identified against the methods declared in the head file, or the actual count recorded; receipt updated
+- [ ] SchemaVersionSpecificBehaviorTest run at e743c90da79; outcome recorded in the receipt (counts; failing method and failure text verbatim on a failure)
+- [ ] job and claim marked DONE
