@@ -107,8 +107,7 @@ public class PathHierarchyTokenizerFactoryTest extends SolrTestCaseJ4 {
         "//str[@name='id' and .='40']",
         "//str[@name='id' and .='42']",
         "//str[@name='id' and .='43']");
-
-    // A short path must not match longer descendants (the both-sides Lucene 10 config would).
+    // A short path must not match longer descendants.
     assertQ(
         req("{!field f=cat_ancestor}Books/NonFic"),
         "//*[@numFound='1']",

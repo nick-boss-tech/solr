@@ -376,11 +376,11 @@ Solr logs no longer include `webapp=/solr` and there's no longer a `webapp` key-
 Lucene 10 (https://github.com/apache/lucene/pull/12875) changed `PathHierarchyTokenizer` to emit sequential tokens (`positionIncrement = 1`) instead of overlapping synonyms (`positionIncrement = 0` after the first token).
 
 The documented `ancestor_path` configuration is Keyword at index time and PathHierarchy at query time.
-The field query parser and other parsers then build a phrase from those query tokens.
+The field query parser, and quoted text, build a phrase from those query tokens. The standard parser does not build a phrase for unquoted text on schema version 1.4 and later.
 On Lucene 10 that phrase cannot match a single keyword-indexed path, so ancestor matching stopped working.
 
 Do not put PathHierarchy on both the index and query analyzers.
-That configuration produces descendant matching, not ancestor matching.
+On the phrase path (the field query parser and quoted text), that configuration matches descendant paths, not ancestors.
 Solr 10.0 upgrade notes briefly recommended that change; it is incorrect.
 Collections that already reindexed with PathHierarchy on both sides now have a descendant index under an ancestor field name and must reindex with Keyword at index time to restore ancestors.
 

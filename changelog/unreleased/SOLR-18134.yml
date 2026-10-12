@@ -1,4 +1,4 @@
-title: Add solr.ZeroPositionIncrementFilterFactory to restore ancestor_path matching after Lucene 10 sequential PathHierarchy tokens.
+title: Add solr.ZeroPositionIncrementFilterFactory so ancestor_path phrase queries match ancestor paths after Lucene 10 made PathHierarchyTokenizer emit sequential tokens.
 type: fixed
 authors:
   - name: Nick Shanin
