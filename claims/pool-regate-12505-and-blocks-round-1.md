@@ -9,4 +9,4 @@
 - Hold: SOLR-12505 is held at its current head until the vm2 gate reports.
 - Heartbeat: 2026-10-12T20:38Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/regate-12505-and-blocks-round-1.md`. SOLR-12505 held at `5f20e1171bc8`; seven owner-note blocks moved to `reports/internal-blocks-round-1.md` and removed.
