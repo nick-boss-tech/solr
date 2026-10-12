@@ -11,3 +11,7 @@ Scope decision recorded under the decision default: the answers file lists the o
 Heartbeat: 2026-10-12T01:37Z. Gate next at 7ddf5dc6f4 (runner /workspace/gates/g6711-gate.sh, log /workspace/gates/logs/vm2/6711-gate.out).
 
 Gate FAILED at 7ddf5dc6f4 (2026-10-12T02:09:22Z): see the run record above. Claim left open for the fix, not DONE. Heartbeat: 2026-10-12T02:09:22Z.
+
+## 2026-10-12T04:21:48Z heartbeat (vm2 coordinator)
+
+Patch pushed at 73c5e6e0d2 (test allow-list property plus tidy fold-in; see gates/SOLR-6711.md, "Patch at 73c5e6e0d2"). Re-gate queued behind SOLR-8430. Claim open.
