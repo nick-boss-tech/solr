@@ -4,11 +4,11 @@ Verdict. All three drafts are on HOLD at the head their Proof names. None is cha
 
 Inputs: `assignments/pool-regate-watch-round-1.md`, claim `claims/pool-regate-watch-round-1.md`. Two read-only subagents checked the drafts, the claims and the gate jobs. The fork branch for SOLR-14231 was fetched read-only to resolve a head change.
 
-## SOLR-14231 (`pr-drafts/streaming/SOLR-14231.md`): HOLD at `2f73d00a3996`
+## SOLR-14231 (`pr-drafts/streaming/SOLR-14231.md`): CURRENT at `593463f398cb`
 
-- The fork tip moved to `593463f398cb`. That commit is a one-line changelog title correction, `changelog/unreleased/SOLR-14231.yml`, pushed ahead of the gate. Its parent is the claimed head `2f73d00a3996`, and no code changed.
-- The draft's Proof names `2f73d00a3996` and was run there, so it stays HOLD at that head. Its code links still resolve at `593463f`, because no code changed.
-- Post-gate text. The job gives the replacement changelog title: "scoreNodes streaming expression now sets its field and collection from every node, returns no tuples when there are no nodes, and sends its /terms request as a POST." The draft has no title text, so no sentence changes. Its changelog link (line 34) re-points to the gated head.
+- The fork tip moved to `593463f398cb`, a one-line changelog title correction on top of the claimed head `2f73d00a3996`. The gate re-ran green there, with fresh JUnit counts (GraphExpressionTest 8 of 8, ScoreNodesStreamTest 1 of 1), as recorded in `receipts/SOLR-14231.md` (commit `4068ae9bece`).
+- The draft's Proof and code links now name `593463f398cb`, the live tip. The head swap is mechanical, and every cited path exists at the new head. The changelog link already named it.
+- Post-gate text. The job's replacement changelog title is "scoreNodes streaming expression now sets its field and collection from every node, returns no tuples when there are no nodes, and sends its /terms request as a POST." The draft has no title text, so no sentence changes.
 - Test names are unchanged by the job.
 
 ## SOLR-15357 (`pr-drafts/schema-analysis/SOLR-15357.md`): HOLD at `d717899b8736`
