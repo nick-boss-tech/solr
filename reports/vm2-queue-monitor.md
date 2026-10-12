@@ -744,3 +744,8 @@ No action taken beyond this job.
 ## 2026-10-12T00:01Z (vm2 cron, busy check)
 
 - Busy: SOLR-10234 gate running from 23:58:36Z (changelog parse OK, in tidy; Gradle live, no GATE END). Claim heartbeat 23:58Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END; buffer still has SOLR-11939 as the next claimable job.
+
+## 2026-10-12T00:16Z (vm2 cron, busy check)
+
+- Busy: SOLR-10234 gate running from 23:58:36Z, now in module-check (changelog OK, tidy clean, compile rc 0, proof rc 1 by content "SolrCloudTestCase [ExtrasFS]", focused-head 1 run 0 failures); Gradle live, no GATE END yet. Claim heartbeat 23:58Z, under 50 minutes; no refresh due.
+- Nothing finished or claimed this run. Next run resumes at GATE END: record receipt, job DONE and claim DONE for SOLR-10234. Next claimable after that: SOLR-11939 (rebase with force-with-lease pinned at claim time). Buffer still short of the 3-job target.
