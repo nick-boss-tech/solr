@@ -8,4 +8,4 @@
 - Deliverable: `reports/schema-scr1-16-round-1.md`, with the register text, the check, the verdict and the ladder rung used.
 - Heartbeat: 2026-10-12T18:30Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/schema-scr1-16-round-1.md`. SCH-R1-16 CLOSED: the live Proof already states the base run correctly; two record notes proposed for the main side.
