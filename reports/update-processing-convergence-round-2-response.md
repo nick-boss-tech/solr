@@ -30,7 +30,7 @@ The entry is produced on this host. The takeover log's Review1 entry (2026-10-06
 - **UPC-R2-404 (SOLR-16673):** receipts/SOLR-16673.md records the gate at `d5c19e64ba1b` (2026-10-04), `ParsingFieldUpdateProcessorsTest` 43 of 43, and the 2026-10-09 top-up at `d7170b12f312` changing only the changelog fragment title. The replacement matches, including the dates.
 - **UPC-R2-405 (SOLR-3657):** receipts/SOLR-3657.md records the pre-fix proof: on base production, `DocumentBuilderTest` runs 17 tests with exactly 2 failures, both at the destination-prefix assertions; the gate date is 2026-10-07. The replacement matches.
 - **UPC-R2-306 (SOLR-13943):** receipts/SOLR-13943.md records the counts at `cc155cf68e1d` on 2026-10-09. The replacement only removes the process word and matches the receipt.
-- **UPC-R2-505 (SOLR-7504):** the replacement names SOLR-12705's head as `aa56b7b1be4`, the head the SOLR-12705 draft itself cites as verified 2026-10-09. Recorded here, as the round 2 report asks: the SOLR-12705 head moved after round 3; the round 3-era combined run used the earlier head `22b77196e662`.
+- **UPC-R2-505 (SOLR-7504):** the replacement names SOLR-12705's head as `aa56b7b1be4`, the head the SOLR-12705 draft itself cites as verified 2026-10-09. Recorded here, as the round 2 report asks: the SOLR-12705 head moved after round 3; the combined run used SOLR-7504 at its earlier head `22b77196e662`. (Correction, round 3 application, 2026-10-11: `22b77196e662` is SOLR-7504's head, not SOLR-12705's; the combined tree's SOLR-12705-side head is not named in any surviving record.)
 
 No other replacement was held back for contradicting a receipt.
 
