@@ -1,5 +1,5 @@
 title: >
-  ReplicationHandler configured with leader and follower sections that are all enable=false now starts with replication disabled instead of falling back to the default leader.
+  ReplicationHandler configured with a leader section that has enable=false now starts with replication disabled instead of falling back to the default leader.
 type: fixed
 authors:
   - name: Nick Shanin
