@@ -1,7 +1,6 @@
 title: >
   The array stream evaluator with sort=asc|desc now fails with a clear error when the values mix incomparable
-  types (for example text and numbers) instead of a ClassCastException, and no longer hits a
-  NullPointerException when reporting a null value.
+  types (for example text and numbers) instead of a ClassCastException.
 type: fixed
 authors:
   - name: Nick Shanin
