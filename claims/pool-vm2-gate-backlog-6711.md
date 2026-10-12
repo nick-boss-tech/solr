@@ -9,3 +9,5 @@ Ordering note: the implementation commits (71da5cf111 code, 7ddf5dc6f4 packaging
 Scope decision recorded under the decision default: the answers file lists the opt-in versus default persistence call as DISCUSS with the recommendation "keep opt-in, as implemented". The recommendation is adopted: persistence stays opt-in via persist=true, which is what the branch implements. The coordinator authorization covers this (material/coordinator-handoff.md, Deciding scope questions).
 
 Heartbeat: 2026-10-12T01:37Z. Gate next at 7ddf5dc6f4 (runner /workspace/gates/g6711-gate.sh, log /workspace/gates/logs/vm2/6711-gate.out).
+
+Gate FAILED at 7ddf5dc6f4 (2026-10-12T02:09:22Z): see the run record above. Claim left open for the fix, not DONE. Heartbeat: 2026-10-12T02:09:22Z.
