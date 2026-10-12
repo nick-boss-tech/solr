@@ -7,4 +7,4 @@
 - Scope: read `solr-16013-submit` at `ba26b7028917ef29d5b5e1cfe75ee83862cccf63` (the live tip, confirmed by ls-remote), the base code at `14c7aac0d151` (the merge-base with upstream/main), `OverseerElectionContext` and the close path in `ZkController`. No edits to the branch, no build, no test run, no gate.
 - Deliverable: `reports/solr-16013-overseer-fixture-review-round-1.md`, verdict first (test-only, production, or undecided), with the patch request if test-only.
 - Heartbeat: 2026-10-12T10:05Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/solr-16013-overseer-fixture-review-round-1.md`, verdict UNDECIDED from reading. A production candidate sits in the branch's ZkController close path (head lines 913 to 936); the test-only patch request is withheld until a run settles it. Reported to the main agent for the gate hold.
