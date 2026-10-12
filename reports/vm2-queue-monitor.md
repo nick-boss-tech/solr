@@ -789,3 +789,7 @@ No action taken beyond this job.
 ## 2026-10-12T02:46Z (vm2 cron, busy check)
 
 - Busy: SOLR-1877 gate at 5533ba27b1 still running (runner /workspace/gates/g1877-gate.sh, log /workspace/gates/logs/vm2/1877-gate.out; focused-head tests green at 14 and 6, module-check step in progress, no GATE END). Claim heartbeat 02:23Z, under 50 minutes; no refresh due. Nothing finished or claimed this run. Next run resumes at GATE END for SOLR-1877.
+
+## 2026-10-12T03:26Z (vm2 cron, busy check)
+
+- Finished, verified: SOLR-1877 receipt, gate DONE and claim DONE all on origin/pr-prepare (gate green at 5533ba27b1, GATE END 02:46:07Z). Claimed: nothing new. Busy: SOLR-17612 gate at 6481b5865e still running (runner /workspace/gates/g17612-gate.sh, log /workspace/gates/logs/vm2/17612-gate.out; proof leg rc=1 at baseline, focused-head tests running at 03:26Z, no GATE END). Claim heartbeat 03:12Z, under 50 minutes; no refresh due. Next run resumes at GATE END for SOLR-17612. Next claimable after it: SOLR-8430 (gates/SOLR-8430.md).
