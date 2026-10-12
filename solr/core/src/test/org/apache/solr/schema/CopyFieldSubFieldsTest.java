@@ -119,13 +119,13 @@ public class CopyFieldSubFieldsTest extends SolrTestCase {
     client.commit();
 
     SolrDocument fetched =
-        realTimeGet(client, "rtg-currency-doc", "id,price,price_c,price_c_l_pl,price_c_s_c");
+        realTimeGet(client, "rtg-currency-doc", "id,price,price_c,price_c___l_pl,price_c___s_c");
     assertEquals("10.50,USD", fetched.getFieldValue("price"));
     // price_c is a copyField target, so it is filtered from the materialized document; the
     // currency sub-fields derived from it are targets as well and must not leak either.
     assertNull(fetched.getFieldValue("price_c"));
-    assertNull("derived amount sub-field leaked", fetched.getFieldValue("price_c_l_pl"));
-    assertNull("derived currency code sub-field leaked", fetched.getFieldValue("price_c_s_c"));
+    assertNull("derived amount sub-field leaked", fetched.getFieldValue("price_c___l_pl"));
+    assertNull("derived currency code sub-field leaked", fetched.getFieldValue("price_c___s_c"));
   }
 
   @Test
@@ -153,8 +153,8 @@ public class CopyFieldSubFieldsTest extends SolrTestCase {
     SolrInputDocument inputDoc = (SolrInputDocument) materialized;
     assertEquals("10.50,USD", inputDoc.getFieldValue("price"));
     assertNull(inputDoc.getFieldValue("price_c"));
-    assertNull("derived amount sub-field leaked", inputDoc.getFieldValue("price_c_l_pl"));
-    assertNull("derived currency code sub-field leaked", inputDoc.getFieldValue("price_c_s_c"));
+    assertNull("derived amount sub-field leaked", inputDoc.getFieldValue("price_c___l_pl"));
+    assertNull("derived currency code sub-field leaked", inputDoc.getFieldValue("price_c___s_c"));
   }
 
   private static SolrDocument realTimeGet(EmbeddedSolrServer client, String id, String fl)

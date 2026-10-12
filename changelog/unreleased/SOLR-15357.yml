@@ -1,4 +1,4 @@
-title: The sub-fields of CurrencyFieldType, PointType and BBoxField copyField destinations are now recorded as copyField targets, so real-time get no longer returns them in documents
+title: The sub-fields of CurrencyFieldType, PointType and BBoxField copyField destinations are now recorded as copyField targets
 type: fixed
 authors:
   - name: Nick Shanin
