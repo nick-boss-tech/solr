@@ -10,7 +10,7 @@ From `reports/update-processing-convergence-round-3.md`.
 
 - **SOLR-12705 line 17:** "Two existing processors change output." becomes "Three existing processors change output."
 - **SOLR-7022 line 24:** "tidy" becomes "the formatting check".
-- **SOLR-7022 line 26, last sentence:** now reads "On the merge-base production code, with this branch's commit-level test added, `DirectUpdateHandler2CommitWaitTest` fails 1 of 1 at the interrupt-restored assertion (2026-10-06)."
+- **SOLR-7022 line 26, last sentence:** the round 3 replacement ("fails 1 of 1 at the interrupt-restored assertion (2026-10-06)") asserted a run no record holds. **Corrected in the round 4 re-check** (`reports/review-recheck-round-4.md`): it now reads "is read to fail at the interrupt-restored assertion; this was not run." The line 24 run clause, which the lane did not change, is corrected in the same push.
 - **SOLR-14718 line 24:** now reads "At head `29c09959791a`, SolrCmdDistributorTest passes 1 of 1 (verified 2026-10-07)."
 - **SOLR-16673 line 23:** the parse claim is removed from the sentence, and "The new test fails without the fix." becomes "Before the fix, at `d5c19e64ba1b`, the new test fails; the gate record gives PASS only, and the observed failure is not recorded."
 - **SOLR-6973 line 7 (bold):** now names the `fields` list condition.
