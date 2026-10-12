@@ -6,3 +6,7 @@
 - Runner: gates/g13943-gate.sh, worktree /workspace/gates/solr-13943-gate (detached), log gates/logs/vm2/13943-run.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED by vm2 (coordinator).
+
+## 2026-10-12T17:47Z DONE (vm2 coordinator)
+
+DONE: gate GREEN at ca443f6f68 (GATE END 17:46:51Z). Focused classes 22 run, 0 failed, 0 skipped. Receipt section at the top of receipts/SOLR-13943.md; job marked DONE.
