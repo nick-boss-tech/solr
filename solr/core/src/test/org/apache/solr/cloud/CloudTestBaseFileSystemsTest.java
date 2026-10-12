@@ -18,7 +18,6 @@ package org.apache.solr.cloud;
 
 import java.util.Arrays;
 import java.util.List;
-import org.apache.lucene.tests.util.LuceneTestCase.SuppressFileSystems;
 import org.apache.solr.BaseDistributedSearchTestCase;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.SolrTestCaseJ4;
