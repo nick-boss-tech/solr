@@ -49,6 +49,8 @@ Replacement for line 9: "(at base `0cc328310f8f`)".
 
 Note, not a finding: the class link at line 25 (`#L31-L49`) runs past the end of the file, which is 48 lines at `ab894a996c8a`. Use `L31-L48`. The test link `L33-L41` is correct.
 
+Correction of record (main side, 2026-10-12, from round 5 item UP-R5-05): Round 4 finding 3 is withdrawn. `0cc328310f8f` is the merge-base of `ab894a996c8a` with upstream/main, so the original label was accurate. The class link stays at L31-L49. The replacement clauses above were applied in round 4 and stand: the applied wording asserts nothing false and matches the receipt. The file count in the note above is also corrected by this withdrawal: `DefaultSchemaSuggesterTest.java` has 49 lines at `ab894a996c8a`. Verified again on 2026-10-12 against a fresh fetch of upstream main: `git merge-base` returns `0cc328310f8f`, and `97d973814336` is not an ancestor of the head. The full record is in `reports/update-processing-convergence-round-5-response.md`.
+
 ## SOLR-6973 judgment (the blocking item from round 3)
 
 The line 17 statement is accurate for both new and existing documents. Group A traced the code:
