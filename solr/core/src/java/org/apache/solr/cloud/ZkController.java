@@ -904,26 +904,22 @@ public class ZkController implements Closeable {
       customThreadPool.execute(() -> IOUtils.closeQuietly(cloudSolrClient));
       customThreadPool.execute(() -> IOUtils.closeQuietly(internalSolrClientCache));
 
+      // Wait for the overseer close task even if this thread is interrupted: ending the
+      // ZooKeeper session first would reopen the double-processing window this ordering
+      // exists to close. The interrupt is remembered and restored only after the state
+      // reader and the ZooKeeper client have closed, so those closes never run on an
+      // interrupted thread; the caller still gets its interrupt status back on return.
+      boolean interrupted = false;
       try {
-        // Wait for the overseer close task even if this thread is interrupted: ending the
-        // ZooKeeper session first would reopen the double-processing window this ordering
-        // exists to close. The interrupt is remembered and restored once the wait completes.
-        boolean interrupted = false;
-        try {
-          while (true) {
-            try {
-              overseerClosed.get();
-              break;
-            } catch (InterruptedException e) {
-              interrupted = true;
-            } catch (ExecutionException e) {
-              log.error("Error closing overseer", e);
-              break;
-            }
-          }
-        } finally {
-          if (interrupted) {
-            Thread.currentThread().interrupt();
+        while (true) {
+          try {
+            overseerClosed.get();
+            break;
+          } catch (InterruptedException e) {
+            interrupted = true;
+          } catch (ExecutionException e) {
+            log.error("Error closing overseer", e);
+            break;
           }
         }
         try {
@@ -942,6 +938,10 @@ public class ZkController implements Closeable {
           IOUtils.closeQuietly(overseer);
 
           ExecutorUtil.shutdownAndAwaitTermination(customThreadPool);
+
+          if (interrupted) {
+            Thread.currentThread().interrupt();
+          }
         }
       }
     }
