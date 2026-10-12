@@ -8,4 +8,4 @@
 - Scope: convergence pass over the 9 drafts in `pr-drafts/replication-backup/`. Read-only apart from this claim and the report. No draft edit this round.
 - Deliverable: `reports/replication-backup-convergence-round-1.md`, with counts, a verdict per draft, the register (RB-R1-nn) and the convergence line.
 - Heartbeat: 2026-10-12T02:00Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-12. Deliverable: see the report named above.
