@@ -8,4 +8,4 @@
 - Deliverable: `reports/record-cleanups-11129-update-processing-round-1.md`, with the verdict, the code lines read, the exact before and after text and the ladder rung.
 - Heartbeat: 2026-10-12T18:40Z (claim taken).
 - Standing coordinator claim: `claims/coordinator-review-rounds.md`.
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/record-cleanups-11129-update-processing-round-1.md`. Item 1: the draft sentence stays and the receipt should carry the residual (proposed text). Item 2: the update-processing summary should be reworded (proposed text).
