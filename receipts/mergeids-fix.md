@@ -67,3 +67,9 @@ Branch `mergeids-skipped-shard-totals` on the fork. Ticket: SOLR-18539, filed by
 - Step 4: focused tests at head: QueryComponentPartialResultsTest 17 tests, 0 skipped, 0 failures, 0 errors, rc=0.
 - Step 5: `:solr:core:check -x test` rc=0. Final git status clean.
 - The branch was pushed plainly to the fork at this head (fast-forward 9e85ce5c162 to 4eb9961218, verified by ls-remote). The branch is packaged and ready for the PR opening slate; the PR draft pr-drafts/search-components/mergeids-skipped-shard-totals.md carries SOLR-18539 and the fragment link at this head.
+
+## Draft PR opened
+
+- PR: apache/solr #5115, https://github.com/apache/solr/pull/5115, opened as a draft on 2026-10-12 MDT at Nick's direction, from the packaged head with the text of pr-drafts/search-components/mergeids-skipped-shard-totals.md.
+- Verified after opening by a fresh read of the PR: state open, draft true, head `4eb996121804b043f1ee53f5bb7e22b9c3021b0a`, title and body match the draft (normalized line endings and trailing whitespace).
+- The PR stays a draft until the review flow clears it; the ready flip is a later step, not part of the opening.
