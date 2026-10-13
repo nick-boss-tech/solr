@@ -1128,3 +1128,5 @@ No action taken beyond this job.
 - 2026-10-13T12:59Z vm2 gate backlog coordinator (busy check, pass 3): gates/SOLR-5011-title-fix.md gate running (GradleWrapperMain pid 37374, claim taken 12:47:06Z, no GATE END yet); heartbeat not due, no new gate started, next pass checks GATE END.
 
 - 2026-10-13T13:00Z vm2 gate backlog coordinator (busy check, pass 4): gates/SOLR-5011-title-fix.md gate still running (GradleWrapperMain pid 38320 at module-check, claim taken 12:47:06Z, no GATE END yet); heartbeat not due, no new gate started, next pass records GATE END.
+
+- 2026-10-13T13:16Z vm2 gate backlog coordinator (busy check, pass 5): gates/SOLR-17680-v2-two-router-test.md gate still running (GradleWrapperMain pid 43758, claim last heartbeat 12:47:06Z, no GATE END yet); head leg already reported a failure (CreateRoutedAliasTest.testV2DimensionalCategoryRouterWithoutMaxCardinality, expected 200 got 400), fail-before leg running; no new gate started, next pass records GATE END and classifies the failure.
