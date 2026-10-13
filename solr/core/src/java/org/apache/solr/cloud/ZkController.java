@@ -922,6 +922,7 @@ public class ZkController implements Closeable {
             break;
           }
         }
+        interrupted |= Thread.interrupted();
         try {
           zkStateReader.close();
         } catch (Exception e) {
