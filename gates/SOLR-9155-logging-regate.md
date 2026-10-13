@@ -1,7 +1,7 @@
 # Gate job: SOLR-9155 re-gate after the ERROR log restore
 
 - Branch: solr-9155-submit. Head: `29bf373828994c622ac478a968d6cff4f4c45fa5` (fork tip after the fast-forward push). Previous gated head: `dbd88c84ff246631875afc010c1c4dff4e50c28a`.
-- Status: OPEN, unclaimed.
+- Status: DONE (GREEN at 29bf373828, recorded 2026-10-13T05:55Z; see receipts/SOLR-9155.md).
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: full hardening gate at the new head. The change is one restored log line and a changelog title.

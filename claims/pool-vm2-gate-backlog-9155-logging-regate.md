@@ -6,4 +6,5 @@
 - Runner path: /workspace/gates/solr-9155-logging-regate (detached worktree); gate script /workspace/gates/g9155-logging-regate-gate.sh.
 - Capability tags: gate. Staffing: 1.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED.
+- Status: DONE.
+- DONE: 2026-10-13T05:58Z. Gate GREEN at 29bf373828994c622ac478a968d6cff4f4c45fa5 (changelog rc=0, tidy rc=0 clean, compile rc=0, focused ZkControllerGetLeaderTest tests=1 failures=0 errors=0, core check rc=0). Log logs/vm2/queue-g9155-logging-regate-gate-20261013T053718Z.out. Receipt receipts/SOLR-9155.md.
