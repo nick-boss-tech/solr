@@ -1041,3 +1041,13 @@ No action taken beyond this job.
 - Claimed: none (vm2 busy).
 - Gate state: busy with the SOLR-12651 history-scrub gate at de3f3604f0 (started 07:09:06Z, at compile-errorprone when checked at 07:15Z; claim heartbeat 07:06Z). The SOLR-16437 changelog claim is live (heartbeat 07:05Z); its focused recount is still owed and needs an idle vm2 with the worktree at a23f770e4b9.
 - Next claimable once idle: the SOLR-16437 focused recount (live claim), then gates/SOLR-11479-identity-carry.md (gate file OPEN; its claim file's last heartbeat is 2026-10-11, so the claim is stale; verify at claim time).
+
+## 2026-10-13 07:39Z vm2 gate backlog coordinator
+
+- Finished: SOLR-12651 history-scrub GREEN at de3f3604f0 (gate 07:09:06Z to 07:28:43Z). Scrub checked before the gate: the rewritten tip's tree equals the old tip's, each of the nine rebuilt commits has its source's tree, no Claude trailer. Focused TestLocalFSCloudBackupRestore 2 of 2 from fresh XML. Receipt written; job, claim and base-run job DONE. Pushed as 07184cd4b1.
+- Finished: SOLR-16437 changelog re-gate GREEN at a23f770e4b9 (gate 06:37:15Z to 06:58:31Z). Focused recount from fresh XML at 07:35Z: CollectionsAPISolrJTest 25 tests, 1 skipped, 0 failures. Receipt top section written; draft re-pointed (Proof and Limits now name a23f770e4b9 and 2026-10-13); job and claim DONE. Pushed as 1446a8e040.
+- Pushed: packaged heads solr-11356-submit at 6120dae28d and solr-12161-submit at cdd265168a, fast-forwards from the fork tips, each removing only its TESTING.md. Verified by ls-remote; receipts updated. Pushed as 881e151c1a.
+- Failed: none new. The SOLR-14919 interrupted run still waits on the main agent's re-run decision, as recorded in its claim.
+- Claimed: none this run. Another session on this host claimed SOLR-11288 base run at 07:37:27Z (claims/pool-vm2-gate-backlog-11288-baserun.md, commit 28489995b7) and was setting up its worktree at 07:38Z. vm2 is busy with that claim, so no gate was launched here.
+- Gate state: no unrecorded GATE END left on vm2 claims. One live vm2 claim (11288 base run, other session).
+- Next claimable once idle: gates/SOLR-11479-identity-carry.md (the carry-over job has no live claim; the 2026-10-11 DONE claim is for the earlier job). Other open supply: SOLR-5011-narrowing, SOLR-6430-fragment-drop, combinedquerycomponent-real-exit-premise, pr-drift-round-1-run-records. Check claims/ at claim time.
