@@ -14,7 +14,7 @@ When a replica recovers, its recovery commit carries no commit_end_point marker.
 
 The processor PR for SOLR-14919 fixes forwarded commits only. It does not change this path.
 
-Upstream commit 75b183196798 (SOLR-12933) changed the forwarded values to leaders and replicas, and commented out one test's use of the recovery marker. Its message gives no reason for that.
+Upstream commit 75b183196798 (SOLR-12933) changed the forwarded values to leaders and replicas, and commented out the line in RecoveryStrategy that set the marker on recovery commits. Its message gives no reason for that.
 
 Open questions:
 
