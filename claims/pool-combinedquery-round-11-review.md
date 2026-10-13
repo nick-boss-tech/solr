@@ -7,5 +7,5 @@
 - Scope: confirm the settlement's applied edits; judge the Q1 hold; apply A1 (line 40) under the patch loop; sweep for factual claims under the settled labelling scope.
 - Limits: the A3 and A4 probe answers come from the probe source in the vm1 worktree, which is outside this repository. This round checks the draft against the settlement, not against the probe. No PR, comment, Jira write, or email. No build, test, or gate.
 - Deliverable: `reports/combinedquerycomponent-ticket-review-round11.md`, verdict first.
-- Heartbeat: 2026-10-13T01:45Z (claim taken).
-- Status: CLAIMED.
+- Heartbeat: 2026-10-13T01:35Z (claim taken).
+- Status: DONE. Deliverable: `reports/combinedquerycomponent-ticket-review-round11.md`. Verdict STILL OPEN. A1 applied on line 40; Q1 accepted. Items O1 to O3 and S1 to S7 are open with replacement text.
