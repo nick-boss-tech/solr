@@ -8,4 +8,4 @@
 - Staffing: three subagents. S1 enumerates the merged set from the GitHub API and reads the bodies of the first half, by number. S2 does the same for the second half. S3 checks the discharge evidence for the named follow-ups on the fork branches and on this branch.
 - Limits: read-only against GitHub (search and read calls only); no comments, no PR edits, no PR state changes, no tickets; no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T17:22Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T18:00Z. Deliverable: `reports/merged-pr-followup-promises-round-1.md`, the first ledger pass. Eight merged PRs read; three open promises from merged PRs (#4953, #5001, #5070), each waiting on Nick's call; five named shapes sit in open PRs or in no merged PR, none discharged. The round 2 four-PR review stayed on hold, as its own rule requires. No live body, PR, comment or ticket touched.
