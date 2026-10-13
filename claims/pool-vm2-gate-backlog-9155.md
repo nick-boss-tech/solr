@@ -6,3 +6,6 @@
 - Runner: gates/g9155-gate.sh, worktree /workspace/gates/solr-9155-gate (detached), log gates/logs/vm2/9155-*.log.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED by vm2.
+
+- 2026-10-13T03:37Z vm2 gate backlog coordinator heartbeat: gate running under the vm2 serial queue (pid 4757, started 03:16Z, log logs/vm2/queue-g9155-gate-20261013T031600Z.out, no GATE END yet). Changelog parse, tidy, Error Prone compile and focused head run (ZkControllerGetLeaderTest, log logs/vm2/9155-head.log, BUILD SUCCESSFUL) have passed; the module check is next.
+- Premise-base leg defect (recorded 03:37Z): the runner's checkout path `solr/core/src/main/java/...` does not exist in the tree (the path is `solr/core/src/java/...`). The base swap failed with a pathspec error, so logs/vm2/9155-premise-base.log compiled the head and reports BUILD SUCCESSFUL. That log is not a premise record. The premise compile is re-run with the correct path as a separate step after GATE END; the gate is not GREEN until that is recorded.

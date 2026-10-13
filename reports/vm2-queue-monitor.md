@@ -953,3 +953,12 @@ No action taken beyond this job.
 - Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
 
 - 2026-10-13T03:15Z vm2 gate backlog coordinator: busy. SOLR-10667-exclusion gate (claim 02:33:47Z, heartbeat 02:37Z, Gradle running, tidy log passed, bats-libs step at 03:15Z, no GATE END in logs/vm2/queue-g10667-exclusion-gate-20261013T030018Z.out). Heartbeat under 50 min, no refresh. Nothing launched. Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate; buffer still below target of 3.
+
+## 2026-10-13T03:38Z vm2 gate backlog coordinator
+
+- Finished: SOLR-10667-exclusion, GATE GREEN at 9ce9ef1db5 (GATE END 03:16Z). One check correction recorded: the job's expected-file list named `.gitignore`, which the distribution does not carry; the exclusion cannot remove it, so the row is a job-spec defect. Pushed 1e3f022552 to 9ce9ef1db5 on solr-10667-submit (fast-forward, ls-remote verified). Receipt refreshed; draft pr-drafts/cli/SOLR-10667.md rewritten at the new head (its Change and Proof text said `.gitignore` ships, now corrected). Job and claim DONE. Pool commit 8d389ea9ab on pr-prepare.
+- Failed and action taken: none new. Existing FAILED records checked; each has a later green or a recorded next step (SOLR-16013 next step in assignments/solr-16013-overseer-fixture.md).
+- Claimed: none new this run (busy). SOLR-17680 (claimed 03:04Z) and SOLR-17733 (claimed 03:33Z) are queued behind the running gate in gates/queue/queue.txt.
+- Gate state: busy with SOLR-9155 (queue runner pid 4757, started 03:16Z, log logs/vm2/queue-g9155-gate-20261013T031600Z.out). Focused head run BUILD SUCCESSFUL; module check next; no GATE END. Heartbeat refreshed 03:37Z. Defect found: its premise-base leg checked out `solr/core/src/main/java/...`, a path that does not exist, so it compiled the head. The premise compile is re-run with the correct path after GATE END; the gate is not GREEN until that is recorded.
+- Buffer: 9 gate job files show OPEN, unclaimed (SOLR-11678-sec-r1-05, SOLR-12916-title-fix, SOLR-15106-premise-base, SOLR-15674-history-scrub, SOLR-5011-narrowing, SOLR-6014-searchtime-premise, SOLR-6430-fragment-drop, SOLR-9091-title-fix, combinedquerycomponent-real-exit-premise). Target of 3 met; no restock this run.
+- Next claimable once the queue clears: SOLR-12916-title-fix, then SOLR-9091-title-fix.
