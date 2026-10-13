@@ -1,7 +1,7 @@
 # Gate job: SOLR-18010 changelog title re-gate
 
 - Branch: solr-18010-submit. Head: `9e3ccafe39098bdc23cc8ea3313918071150e148` (fork tip after the fast-forward push). Previous gated head: `c3685bb37d9d74e4ed538d6d1b65bb1b60970677`.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T14:17Z; claim claims/pool-vm2-gate-backlog-18010.md. Queued as /workspace/gates/g18010-gate.sh.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: changelog check at the new head. No code change.
