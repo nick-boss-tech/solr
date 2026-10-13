@@ -73,3 +73,15 @@ Branch `mergeids-skipped-shard-totals` on the fork. Ticket: SOLR-18539, filed by
 - PR: apache/solr #5115, https://github.com/apache/solr/pull/5115, opened as a draft on 2026-10-12 MDT at Nick's direction, from the packaged head with the text of pr-drafts/search-components/mergeids-skipped-shard-totals.md.
 - Verified after opening by a fresh read of the PR: state open, draft true, head `4eb996121804b043f1ee53f5bb7e22b9c3021b0a`, title and body match the draft (normalized line endings and trailing whitespace).
 - The PR stays a draft until the review flow clears it; the ready flip is a later step, not part of the opening.
+
+## Review patch gate at head fbf7610644: GREEN
+
+- Head: `fbf7610644d178049e1110ffc0ec34dad8c5b32f` (branch `review-r1-solr-18539`, two commits on the PR #5115 head `4eb996121804b043f1ee53f5bb7e22b9c3021b0a`). Merge-base: `d76fc14b9857e77b830d7a82514b28c523a239c2`. Fork branch verified by ls-remote at this head. Not the PR branch: no push, PR #5115 untouched.
+- Scope: `QueryComponent.java` and `QueryComponentPartialResultsTest.java` only (delta-only rc=0).
+- Tidy rc=0 with the tree clean after tidy; spotless rc=0; Error Prone compile rc=0.
+- Focused run at head: `QueryComponentPartialResultsTest`, BUILD SUCCESSFUL, seed `B21017F9ACC7AF8E` (log `logs/vm2/18539-review-r1-head.log`). The class has 18 test methods (JUnit XML of the same class at 2026-10-13T18:01:02Z reports `tests="18"`); the head XML was overwritten by the later fail-before run, so the 0 failures count rests on the BUILD SUCCESSFUL line.
+- Fail-before at the merge-base (production `QueryComponent.java` reverted, branch tests kept): rc=1, 18 tests, 9 failed, seed `5FDB7D60C3EFB7CB` (log `logs/vm2/18539-review-r1-failbefore-base.log`). Failing: `mergedNumFoundCountsOnlyMergedShards`, `skippedShardWithHitsMakesMergedCountInexact`, `skippedShardWithNoHitsMakesMergedCountInexact`, `allShardsSkippedDoesNotClaimExactZero`, `allShardsSkippedWithNoHitsDoesNotClaimExactZero`, `mergedMaxScoreComesFromMergedShards`, `mergedApproximateTotalHitsExcludesSkippedShard`, `approximateTotalHitsFallsBackToEachShardsNumFound`, `approximateTotalHitsMixesHeaderAndFallbackShards`.
+- Fail-before at the PR head `4eb9961218` (production reverted to the parent, branch tests kept): rc=1, 18 tests, exactly four failed, seed `B69AF26191F29EA6`, fresh JUnit XML at 2026-10-13T18:01:02Z: `mergedNumFoundCountsOnlyMergedShards`, `skippedShardWithNoHitsMakesMergedCountInexact`, `skippedShardWithHitsMakesMergedCountInexact`, `allShardsSkippedWithNoHitsDoesNotClaimExactZero`, each `numFoundExact expected:<false> but was:<true>`. No other failure.
+- Both fail-before exits are nonzero by design: the job expects those failure sets. The runner's rc rule does not special-case them, so the coordinator classified the legs by content (classification recorded in `gates/SOLR-18539-review-r1-patch.md`).
+- Module check `:solr:core:check -x test` rc=0 (log `logs/vm2/18539-review-r1-check.log`).
+- Gate ran 2026-10-13T17:38:49Z to 18:05:35Z on vm2 (runner `/workspace/gates/g18539-review-r1-gate.sh`, queue log `logs/vm2/queue-g18539-review-r1-gate-20261013T173849Z.out`).
