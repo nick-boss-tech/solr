@@ -13,3 +13,7 @@ Heartbeat: 2026-10-11T04:56:15Z (relaunch after first environment failure).
 
 Result 2026-10-11T05:05Z: BLOCKED, environment, no BATS run. Both assembleDist runs fail in :solr:webapp:js-client:jsClientDownloadDeps ("Cannot find package '@babel/plugin-syntax-dynamic-import'"), same as SOLR-10667. Premise part 2 not shown. No packaging commit, no receipt.
 BLOCKED: 2026-10-11T05:05Z (UTC), outcome BLOCKED (environment).
+
+## 2026-10-13T19:18Z DONE (marked on verification by vm2 gate backlog coordinator)
+
+Deliverable receipts/SOLR-12347.md names GATE GREEN at the packaged head, and the job file carries vm1's status correction (2026-10-13T16:28Z). This is a record correction for the missed claim mark, not a claim transfer.

@@ -1261,3 +1261,12 @@ No action taken beyond this job.
 - Gate state: vm2 idle.
 - Next claimable job: none for vm2. Buffer unclaimed gate jobs: 0 against a target of 3. SOLR-18541-score-only-exit-input is claimed by vm1 (heartbeat 17:10Z). Held, not stocked: SOLR-18391 solr-18391-submit (main-side call), SOLR-18010 G3 and SOLR-16013 interrupt fix (waiting on Nick's go-ahead and the review patch), SOLR-10252 (held), SOLR-15823 (main-side decision), pr-drift round 1 records (parked for the main side). Restock audit at 18:49Z found no new first, re-gate or top-up candidates; main side needs to confirm holds or post jobs.
 - Housekeeping: the coordination worktree was reset to origin/pr-prepare at the start of this pass.
+
+## 2026-10-13T19:18Z vm2 gate backlog coordinator, queue pass
+
+- Finished: none new. Record corrections on verification: SOLR-5011-narrowing gate file status line set to DONE (claim DONE at 10:33Z, gate GREEN at 00060d2ed9; the fork tip has since moved to db801dbd3b, the title-fix re-gated GREEN at 13:07Z and recorded in receipts/SOLR-5011.md). The vm2 claims for SOLR-10667 and SOLR-12347 were never marked DONE; both receipts name GATE GREEN, so their claims are marked DONE on verification.
+- Failed, action taken: none new. Parked FAILED records keep their next steps: SOLR-16013 (ecda7b862b, fixture patch with the review coordinator, assignments/pool-vm2-16013-head-failure-fixture-patch.md) and SOLR-18010 review-r1 (e99be67c9a, assignments/pool-vm2-18010-review-r1-fail-before-patch.md). Neither is relaunched; both pushes wait on Nick's go-ahead.
+- Claimed: none. No Gradle or runner process on vm2; no open vm2 claim has a live heartbeat.
+- Gate state: vm2 idle.
+- Next claimable job: none for vm2. Unclaimed gate jobs in the buffer: 0 against a target of 3. Restock audit: all 328 fork submit tips checked against receipts and gate files. Nine tips have no receipt in receipts/: SOLR-10252 (held on the round 5 owner decision) and the eight suggester branches (9227, 9637, 9968, 10937, 11844, 14171, 17215, 17393), gated or documented in the suggester lane. SOLR-16013 is the parked FAILED head. Stocked: none. Main side: confirm holds or post new gate jobs to refill the buffer.
+- Housekeeping: /workspace/gates/vm2-coord-wt still has the stale interactive rebase from 14:32 (rebase-merge state; its tree was reset to origin/pr-prepare at the start of this pass, the rebase state was left in place). This pass committed from a fresh worktree, /workspace/gates/vm2-coord-r19z.
