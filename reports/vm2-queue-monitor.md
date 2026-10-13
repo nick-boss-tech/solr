@@ -1242,3 +1242,13 @@ No action taken beyond this job.
 - Claimed: none. No open job is claimable by vm2.
 - Next claimable job: none. Buffer at 0 unclaimed gate jobs against a target of 3; reasons are in assignments/pool-shared-gate-backlog-buffer.md under the 2026-10-13 restock pass. The shortfall needs a main-side decision on SOLR-18391 solr-18391-submit and on the held items; no Nick decision is needed for the shortfall itself.
 - Housekeeping: /workspace/gates/vm2-coord-wt still has a stale interactive rebase (rebase-merge, from 14:32); left untouched. This pass used /workspace/gates/vm2-coord-push2.
+
+## 2026-10-13T18:58Z vm2 gate backlog coordinator, queue pass
+
+- Finished: none new this pass. Closed on verification, records only: SOLR-13097 (DONE at 1cf59fe6a9, receipt and claim DONE); SOLR-11939 (DONE at cdb9903506e9, receipt and claim DONE). The SOLR-12505 amendment 2 file still reads "RULED"; its claim and the job DONE at 1a1875d95f stand, and the amendment status line is stale.
+- Owed pushes checked: solr-11356-submit and solr-12161-submit fork tips (ls-remote) equal the packaged heads 6120dae28d and cdd265168a. Nothing owed.
+- Failed, action taken: none new. Parked FAILED records keep their next steps: SOLR-16013 (fixture patch with the review coordinator, assignments/pool-vm2-16013-head-failure-fixture-patch.md) and SOLR-18010 review-r1 (test premise patch, assignments/pool-vm2-18010-review-r1-fail-before-patch.md). Nothing relaunched.
+- Claimed: none. vm2 idle: no Gradle or runner process (PID 121735 is a defunct zombie). SOLR-10667 and SOLR-12347 stay BLOCKED on environment and stay with vm1 per the handoff.
+- Gate state: no gate running on vm2. SOLR-18541-score-only-exit-input is claimed by vm1 (heartbeat 17:10Z, live until about 19:10Z).
+- Next claimable job: none for vm2. Buffer unclaimed gate jobs: 0 against a target of 3. Held or waiting, not stocked: SOLR-18391 solr-18391-submit at 3000eeede7 (main-side call on whether the branch is still wanted); SOLR-18010 G3 and SOLR-16013 interrupt fix (waiting on the review patch and Nick's go-ahead); pr-drift round 1 records (parked for the main side). Main side: confirm these holds or post new gate jobs to refill the buffer.
+- Housekeeping: /workspace/gates/vm2-coord-wt still has a stale interactive rebase (rebase-merge under .git/worktrees/vm2-coord-wt, untouched). This pass used /workspace/gates/vm2-coord-push2.
