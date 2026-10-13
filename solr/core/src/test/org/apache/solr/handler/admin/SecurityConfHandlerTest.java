@@ -23,6 +23,8 @@ import static org.mockito.Mockito.when;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -353,8 +355,11 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
         Files.getPosixFilePermissions(securityJson));
   }
 
-  /** A write that fails after the temporary file exists keeps the previous security.json intact. */
-  public void testFailedWriteKeepsPreviousFileAndLeavesNoTemporaryFile() throws Exception {
+  /**
+   * A write that fails after the temporary file exists reports the write error, and the failure to
+   * delete that file does not replace it. The previous security.json stays intact.
+   */
+  public void testFailedWriteReportsWriteErrorWhenTemporaryFileCannotBeDeleted() throws Exception {
     assumeWorkingMockito();
     Path solrHome = createTempDir("securityConfHandlerLocalFailedWrite");
     Path securityJson = solrHome.resolve("security.json");
@@ -364,27 +369,30 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
     byte[] previous = Utils.toJSON(shortSecurityData("seed"));
     Files.write(securityJson, previous);
 
-    // serialization evaluates the value, which happens after the temporary file is created
+    // Serialization evaluates the value, which happens after the temporary file is created. The
+    // first evaluation replaces that file with a non-empty directory of the same name, so the
+    // delete in the finally block of persistConf fails on every platform. No permissions change.
+    AtomicReference<Path> blocked = new AtomicReference<>();
     CharSequence failing =
         new CharSequence() {
           @Override
           public int length() {
-            throw new IllegalStateException("injected failure");
+            throw injectedFailure(solrHome, blocked);
           }
 
           @Override
           public char charAt(int index) {
-            throw new IllegalStateException("injected failure");
+            throw injectedFailure(solrHome, blocked);
           }
 
           @Override
           public CharSequence subSequence(int start, int end) {
-            throw new IllegalStateException("injected failure");
+            throw injectedFailure(solrHome, blocked);
           }
 
           @Override
           public String toString() {
-            throw new IllegalStateException("injected failure");
+            throw injectedFailure(solrHome, blocked);
           }
         };
     SolrException e =
@@ -392,19 +400,49 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
             SolrException.class,
             () -> handler.persistConf(new SecurityConfig().setData(shortSecurityData(failing))));
     assertTrue(e.getMessage(), e.getMessage().contains("Failed persisting security.json"));
+    assertNotNull("the temporary file was not blocked during serialization", blocked.get());
 
     assertArrayEquals(
         "the previous security.json was changed", previous, Files.readAllBytes(securityJson));
     try (Stream<Path> files = Files.list(solrHome)) {
+      // the blocked entry is the leftover of the failed delete; no other file may remain
       assertEquals(
-          "a temporary file was left behind",
-          List.of("security.json"),
+          "unexpected files left behind",
+          List.of("security.json", blocked.get().getFileName().toString()),
           files
               .map(path -> path.getFileName().toString())
               .filter(name -> name.startsWith("security.json"))
               .sorted()
               .toList());
     }
+  }
+
+  /**
+   * Called from the serialization of the value while the temporary file exists. The first call
+   * replaces that file with a non-empty directory of the same name, which the finally block of
+   * persistConf cannot delete, and records it in {@code blocked}. Every call returns the failure to
+   * throw.
+   */
+  private static RuntimeException injectedFailure(Path solrHome, AtomicReference<Path> blocked) {
+    if (blocked.get() == null) {
+      try (Stream<Path> files = Files.list(solrHome)) {
+        Path tmp =
+            files
+                .filter(
+                    path ->
+                        path.getFileName().toString().startsWith("security.json")
+                            && path.getFileName().toString().endsWith(".tmp"))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("no temporary file exists"));
+        Files.delete(tmp);
+        Files.createDirectory(tmp);
+        Files.createFile(tmp.resolve("blocked"));
+        blocked.set(tmp);
+      } catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
+    }
+    return new IllegalStateException("injected failure");
   }
 
   private static void postAuthorizationEdit(SecurityConfHandler handler, String command)
