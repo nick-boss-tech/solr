@@ -7,4 +7,4 @@
 - Staffing: two subagents. S1 takes the QueryComponent premise. S2 takes the SOLR-18010 G1 and G2 closure.
 - Limits: no gate relaunched; no status line changed by this round; no PR opened, closed, flipped or commented on; no live PR body edited; no fork branch changed; no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T19:20Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T19:45Z. Deliverable: `reports/querycomponent-premise-and-18010-g1g2-round-1.md`. QueryComponent real-exit premise: does not settle the SOLR-18539 width (the run was CombinedQueryComponent; the plain run is still queued). SOLR-18010 G1 record supports 0644 (cause unexplained); G2 six of six; input 6 OPEN (G4b and G3 owed). One draft sentence updated in the 18010 draft from the G1 record. No gate relaunched, no status line changed, no PR touched.
