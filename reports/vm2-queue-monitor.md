@@ -1218,3 +1218,4 @@ No action taken beyond this job.
 - Busy: SOLR-18539-review-r1 gate running (Gradle pid 157849, started about 17:43Z, at the compile step, no GATE END). Claim heartbeat 17:01Z; refresh due after 17:51Z. Not relaunched.
 - Claimed: none. Gate state: one gate running on vm2.
 - Next claimable job once the 18539 gate ends: SOLR-18541-score-only-exit-input (premise run; overlap with the vm1 real-exit record is noted in its job file).
+- 2026-10-13T18:01Z vm2 gate backlog coordinator, busy pass: SOLR-18539-review-r1 gate still running (Gradle pid 164371, at fail-before-pr-head, no GATE END); claim heartbeat refreshed (was 17:01Z); not relaunched; claimed none; next claimable after the 18539 gate ends: SOLR-18541-score-only-exit-input.

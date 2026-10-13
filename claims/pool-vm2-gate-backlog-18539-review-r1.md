@@ -6,3 +6,4 @@
 - Runner path: /workspace/gates/g18539-review-r1-gate.sh, worktree /workspace/gates/solr-18539-review-r1 (detached).
 - No fork push, no PR touched. The job's tidy step may leave a formatting-only change; it stays local and is not pushed.
 - Status: CLAIMED by vm2 at fbf7610644, queued on the vm2 serial gate queue.
+- Heartbeat: 2026-10-13T18:01Z by vm2 (gate backlog coordinator), gate running at fail-before-pr-head, no GATE END yet; not relaunched.
