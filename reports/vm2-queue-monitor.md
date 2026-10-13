@@ -1204,3 +1204,7 @@ No action taken beyond this job.
 - Buffer supply: 1 unclaimed gate job, SOLR-18541-score-only-exit-input (premise, overlaps the vm1 real-exit record; not claimed this pass). Target of 3 not met. Review-r1 patch jobs not stocked while owner-patch round 3 is active.
 - Next claimable: SOLR-18541-score-only-exit-input, reading the vm1 real-exit verdicts first. Then re-claim SOLR-16013 at its patched head once the review side lands the fixture patch.
 - Repo note: /workspace/gates/vm2-coord-wt still holds an interactive rebase state from an earlier pass. Not cleared. This pass worked from temporary worktrees.
+
+## 2026-10-13T17:13Z vm2 gate backlog coordinator (busy pass, no claim)
+
+- Busy: claims 18010-review-r1 and 18539-review-r1 are open with a 17:01Z claim (under 60 minutes); both are queued in /workspace/gates/queue/queue.txt, no runner active, no Gradle running. Queue not ticked since the 17:07Z cadence entry; no new claim or start this pass. Record conflict to settle: the 17:15Z line says review-r1 patch jobs are not stocked while owner-patch round 3 is active, but the two queued review-r1 gates were claimed at 17:01Z. Main side to say whether they run.
