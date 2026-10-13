@@ -1,6 +1,6 @@
 # Job: SOLR-18280 seed and reproduce line for the failing nightly head run (read-only)
 
-- Branch: solr-18280-submit at `0da92abd9e96` (no branch change). Status: OPEN.
+- Branch: solr-18280-submit at `0da92abd9e96` (no branch change). Status: DONE 18:28Z by vm2 (gate backlog coordinator). Seed, failure and reproduce line recorded in receipts/SOLR-18280.md, section "Failing nightly head run: seed and reproduce line".
 - Intended host: vm2, because the logs are there. Windows cannot read them.
 - Not a gate run. Do not relaunch any test. The head rerun already ran and passed (2026-10-13, 14:11Z to 14:23Z, 25 of 25, seed `18280C0FFEE18280`).
 
