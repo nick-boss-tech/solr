@@ -7,4 +7,4 @@
 - Staffing: two subagents. S1 takes (1). S2 takes (2).
 - Limits: read-only; no PR, comment or GitHub write; no gate relaunched; no fork branch moved; no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T21:20Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T21:50Z. Deliverable: `reports/route1-pushed-review-round-1.md`. The pushed route 1 commit matches the prepared diff, is a fast-forward from the gated head, and touches only the test. The reading supports it on Windows (confirmed in JDK source); Linux is not checkable on this host and needs the vm2 gate at the parent and at the new head. No PR, comment, branch or gate touched.
