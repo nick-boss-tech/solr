@@ -269,6 +269,11 @@ public abstract class ConfigSetService {
     this.schemaCache = shareSchema ? Caffeine.newBuilder().weakValues().build() : null;
   }
 
+  /** Whether IndexSchema instances are cached and shared among cores of the same config set. */
+  public boolean isSchemaCacheEnabled() {
+    return schemaCache != null;
+  }
+
   /**
    * Create a SolrConfig object for a core
    *

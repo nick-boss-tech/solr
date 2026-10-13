@@ -1892,7 +1892,10 @@ public class SolrCore implements SolrInfoBean, Closeable {
     // each core has its own loader (the config set is loaded again on reload), and its class loader
     // holds the jars of the lib directories open
     try {
-      if (resourceLoader != null) {
+      ConfigSetService configSetService = coreContainer.getConfigSetService();
+      boolean schemaCached = configSetService != null && configSetService.isSchemaCacheEnabled();
+      // a cached schema can still reference this loader after this core closes
+      if (resourceLoader != null && !schemaCached) {
         resourceLoader.close();
       }
     } catch (Throwable e) {
