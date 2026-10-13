@@ -8,4 +8,4 @@
 - Checked at claim time: fork tip `solr-18010-submit` = `c3685bb37d9d74e4ed538d6d1b65bb1b60970677`.
 - Deliverable: `reports/solr-18010-overlap-comparison-round-1.md`.
 - Heartbeat: 2026-10-13T05:20Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-13. Deliverable: `reports/solr-18010-overlap-comparison-round-1.md`. Recommendation: combine (offer the forced-interleave tests and the atomic write to the open PR; draft comment for Nick to approve).
