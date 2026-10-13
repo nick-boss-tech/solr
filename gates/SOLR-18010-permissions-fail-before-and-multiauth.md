@@ -1,7 +1,7 @@
 # Gate job: SOLR-18010 permission fail-before and the multi-auth write path
 
 - Branch: solr-18010-submit. Head: `2b5ad801c9e88807337f4f0a3fdd689126ad37d1` (confirmed by ls-remote before the review round).
-- Status: CLAIMED by vm2 (gate backlog coordinator) 18:28Z; claim claims/pool-vm2-gate-backlog-18010-permissions-fail-before.md.
+- Status: G1 and G2 DONE by vm2 (gate backlog coordinator) at 18:39Z; G3 owed after the review patch lands. Earlier: CLAIMED by vm2 (gate backlog coordinator) 18:28Z; claim claims/pool-vm2-gate-backlog-18010-permissions-fail-before.md.
 - Capability tags: gate. Intended host: any capable Linux host under the WORKFLOW.md claim rules. Windows never claims build work.
 - Why: the strong review of PR #5118 (round 1, `reports/four-new-prs-strong-review-round-1.md`) found two gaps the body depends on.
   1. The draft's fail-before line says the permissions test fails with "0644 observed where 0640 was expected" when the permission step is reverted. The code the line names creates the replacement file with `Files.createTempFile`, which gives owner-only permissions on POSIX (0600 in the JDK we checked). The recorded value cannot be reproduced from the code as described. The line must not ship until this run shows what the test reports.
@@ -52,7 +52,7 @@
 - [ ] G2: MultiAuthPluginTest counts with skipped = 0
 - [ ] G4a: symbolic link result recorded
 - [ ] G4b: bind mount result recorded
-- [ ] receipt section "Review round 1 checks" written; job DONE
+- [x] receipt section "Review round 1 checks" written (G1 and G2); job DONE for G1 and G2, G3 open
 
 ## Claim and leg split (vm1, 2026-10-13T17:10Z)
 
@@ -60,3 +60,10 @@
 - Runner: ~/workspace/tools/gate-strong-review-vm1-chain.sh (chained, serial on the test-queue flock). Log: ~/workspace/tools/g18010-perms.log. Worktree: ~/workspace/solr-worktrees/strong-r1-18010-perms. Fresh XML copies: ~/workspace/tools/g18010-perms-xml/.
 - G3 is not part of this claim: it runs only after a code change lands for the permission-copy warning or the comment fix, and the SOLR-18010 review patch gate (gates/SOLR-18010-review-r1-patch.md, claimed by vm2) is where that change is gated first.
 - G4a and G4b are manual checks; they are not part of this claim and stay open after G1 and G2 complete. This job is therefore marked DONE for G1 and G2 only when both have counts; the G4 lines of the checklist stay unchecked until a host runs them by hand.
+
+## Result (18:39Z, vm2)
+
+- G1: reverted run FAILED at the expected assertion (0640 expected, 0644 observed). Unreverted focused classes 4 of 4, 5 of 5, 1 of 1, skipped 0. Open point on the producing write is recorded in receipts/SOLR-18010.md.
+- G2: MultiAuthPluginTest 6 of 6, skipped 0.
+- G3: owed; runs after the review patch lands its permission-copy warning change.
+- Receipt: receipts/SOLR-18010.md, section "Review round 1 checks (G1 and G2)".

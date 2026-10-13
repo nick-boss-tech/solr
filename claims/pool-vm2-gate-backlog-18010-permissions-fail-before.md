@@ -6,3 +6,4 @@
 - Runner: /workspace/gates/g18010-perms-g1g2.sh, worktree /workspace/gates/solr-18010-head. Log: logs/vm2/18010-perms-g1g2-*.log.
 - Heartbeat: 18:28Z by vm2.
 - Status: CLAIMED.
+- 18:39Z by vm2 (gate backlog coordinator): G1 and G2 DONE (receipts/SOLR-18010.md, section "Review round 1 checks (G1 and G2)"; gate file updated). G3 remains owed after the review patch lands and is not claimed here. Status: DONE for G1 and G2.
