@@ -1270,3 +1270,12 @@ No action taken beyond this job.
 - Gate state: vm2 idle.
 - Next claimable job: none for vm2. Unclaimed gate jobs in the buffer: 0 against a target of 3. Restock audit: all 328 fork submit tips checked against receipts and gate files. Nine tips have no receipt in receipts/: SOLR-10252 (held on the round 5 owner decision) and the eight suggester branches (9227, 9637, 9968, 10937, 11844, 14171, 17215, 17393), gated or documented in the suggester lane. SOLR-16013 is the parked FAILED head. Stocked: none. Main side: confirm holds or post new gate jobs to refill the buffer.
 - Housekeeping: /workspace/gates/vm2-coord-wt still has the stale interactive rebase from 14:32 (rebase-merge state; its tree was reset to origin/pr-prepare at the start of this pass, the rebase state was left in place). This pass committed from a fresh worktree, /workspace/gates/vm2-coord-r19z.
+
+## 2026-10-13T19:37Z vm2 gate backlog coordinator, queue pass
+
+- Finished: none new. SOLR-18010 G1 and G2 ended 18:38Z and are already recorded. No Gradle process was live at the check.
+- Failed, action taken: none new. SOLR-18010 review round 1 (head e99be67c9a6f) stays FAILED with the review coordinator, who owns the test-premise patch (assignments/pool-vm2-18010-review-r1-fail-before-patch.md). The review branch has not moved. SOLR-16013 stays parked with its fixture patch. The pr-drift round 1 records claim has no runner and no DONE or FAILED line; its last heartbeat was 18:49Z, so this pass treated it as parked, not busy, as the 19:02Z and 19:18Z passes did.
+- Claimed: SOLR-18010 review round 1 leg G3 (gates/SOLR-18010-review-r1-g3.md) at e99be67c9a6f, claim claims/pool-vm2-gate-backlog-18010-review-r1-g3.md, pushed to pr-prepare at 10bf552ca6. Runner /workspace/gates/g18010-review-r1-g3.sh, log logs/vm2/queue-g18010-review-r1-g3-20261013T193624Z.out.
+- Gate state: G3 running on vm2 since 19:36Z, no GATE END yet. Counts are owed from fresh JUnit XML (expected 17 across four classes).
+- Next claimable job: none after G3. Unclaimed buffer gate jobs: 0 against a target of 3, the 19:18Z audit still holds. Main side: post refill jobs or confirm the holds. If the review side pushes a new review-r1 head, G3 and the review-r1 gate must be re-pointed to it.
+- Housekeeping: the earlier interactive rebase in the vm2-coord-wt worktree is untouched. This pass cleared a rebase that stuck in vm2-coord-push2 (a claim cherry-pick) and used a clean reset to origin/pr-prepare.
