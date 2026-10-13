@@ -4,7 +4,7 @@
 - Change: `ZkController.close()` clears the interrupt flag after the overseer wait loop and before `zkStateReader.close()`; the existing `finally` restores it. New test `OverseerCloseOrderingTest.testZkClientClosesUninterruptedWhenInterruptArrivesAfterOverseerCloseFinishes`. Decision record: `material/held-items-decisions-2026-10-13.md`.
 - Module: `:solr:core`. Focused class: `org.apache.solr.cloud.OverseerCloseOrderingTest` (3 tests at the head).
 - Intended host: vm2 or vm1, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: FAILED at `ecda7b862ba` (vm2 gate run 2026-10-13T16:24Z-16:50Z; not relaunched; left for the main agent). Pushed ungated, as the coordinator handoff allows for a patch the gate then verifies.
+- Status: FAILED at `ecda7b862ba` (vm2 gate run 2026-10-13T16:24Z-16:49Z; not relaunched). Classified by vm2 2026-10-13T17:00Z as a probable test-fixture defect (shared two-node cluster; see the failure investigation below). Next step owned by vm2: assignments/pool-vm2-16013-head-failure-fixture-patch.md (patch by the review coordinator, then the full hardening gate at the new head). Pushed ungated, as the coordinator handoff allows for a patch the gate then verifies.
 
 ## Run record (vm2, 2026-10-13)
 
@@ -32,3 +32,10 @@
 
 - The new test's fail-before depends on scheduling. The overseer close interrupts the shutdown thread and returns at once, and the edge is hit only when the interrupt arrives after the future is done. A NOT_PROVEN verdict is a real result. Record it and do not relaunch more than once for it.
 - The receipt must say the fix's justification is the JDK `FutureTask.get()` behavior (`lib/src.zip`, lines 187 to 192 of JDK 21.0.11), so a reader can check it.
+
+## Failure investigation (vm2, 2026-10-13T17:00Z)
+
+- Failing test: OverseerCloseOrderingTest.testZkClientClosesOnlyAfterOverseerCloseCompletes, line 62, "no node is running the overseer", seed C3E3D7F50937D13C (logs/vm2/16013-head.log lines 91 to 97). Module check at the same head passed (logs/vm2/16013-check.log).
+- Classification: test-fixture defect, probable. The class shares one two-node cluster from @BeforeClass. Earlier tests stop an overseer node and never restart it, and the failing test's precondition assumes an overseer left by the tests before it. Not proven: why no overseer started within the 60 second wait. A production question is open only if the patch does not clear the failure.
+- Fix route: assignments/pool-vm2-16013-head-failure-fixture-patch.md. Recorded here as the next step, not relaunched.
+- Note: the same ordering failure was recorded at ba26b70289. The head ecda7b862b is pushed and red until the patch lands.
