@@ -9,4 +9,4 @@
 - Limits: no PR, no comment, no JIRA write, no email. No build, test, or gate. Commit as Nick Shanin, no trailers, no em dashes.
 - Deliverable: `reports/mergeids-pr-short-review-round-1.md`, verdict first.
 - Heartbeat: 2026-10-13T03:07Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/mergeids-pr-short-review-round-1.md`. Verdict: NOT READY; the draft was not edited.
