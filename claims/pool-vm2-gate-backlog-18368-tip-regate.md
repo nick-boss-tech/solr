@@ -5,6 +5,8 @@
 - Capability tags: gate. No code change, no fork push.
 - Runner: gates/g18368-tip-gate.sh, worktree /workspace/gates/solr-18368-tip (detached), log gates/logs/vm2/18368-*.log.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2 at a7ec9a1b65.
+- Status: CLAIMED by vm2 at a7ec9a1b65 (before the cut).
 
-- 2026-10-13T11:01Z heartbeat (vm2 gate backlog coordinator): the earlier run ended at 10:59Z with its log stopped at the focused-tip step and no GATE END; no test had executed. Relaunched once, after the SOLR-17539 gate is not running, under the same runner. The 17539 run follows it in one chain, so only one gate runs on vm2.
+- 2026-10-13T11:01Z heartbeat (vm2 gate backlog coordinator): the earlier run ended at 10:59Z with its log stopped at the focused-tip step and no GATE END; no test had executed. Relaunched once under the same runner, in one chain followed by the SOLR-17539 gate, so only one gate runs on vm2.
+
+- 2026-10-13T11:13Z DONE (vm2 gate backlog coordinator): GATE GREEN at a7ec9a1b65 (GATE END 11:12:52Z). Deliverables: receipts/SOLR-18368.md (live-tip section), gates/SOLR-18368-tip-regate.md marked DONE.
