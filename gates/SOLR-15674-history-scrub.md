@@ -2,7 +2,7 @@
 
 - Branch: solr-15674-submit. Fork tip at posting: ba01c83d4c5ad03c7af63fd4061df119a8146d49 (verified by ls-remote 2026-10-12; matches receipts/SOLR-15674.md).
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: DONE. Claimed by vm2 06:04Z. Scrubbed head 75ddf9ba518a370278c8171aecce3e80d055a78c; gate GREEN 2026-10-13 (06:19:20Z to 06:37:15Z). Receipt refreshed in receipts/SOLR-15674.md.
 - Capability tags: gate.
 - Job type: history scrub (trailer removal only, no code change), then the full hardening gate at the scrubbed head.
 - Source: reports/solrcloud-pr-critical-review-round-1.md marks the SOLR-15674 draft NOT READY for two reasons: a Claude co-author trailer in the branch history, and draft length. This job covers the trailer only. The draft text is a separate review-side item.
@@ -49,11 +49,11 @@ If the gate fails on tests it executed, stop. Record the failing test, seed and 
 
 ## Step checklist
 
-- [ ] claim filed under WORKFLOW.md
-- [ ] trailer census re-checked against the live fork tip
-- [ ] history rebuilt with the trailer line removed and nothing else changed
-- [ ] tree-identical verification passed (tip tree and per-commit trees)
-- [ ] force-with-lease push pinned to the tip read in the same run
-- [ ] full hardening gate green at the scrubbed head (counts from fresh JUnit XML)
-- [ ] receipts/SOLR-15674.md refreshed at the scrubbed head
-- [ ] job and claim marked DONE
+- [x] claim filed under WORKFLOW.md
+- [x] trailer census re-checked against the live fork tip
+- [x] history rebuilt with the trailer line removed and nothing else changed
+- [x] tree-identical verification passed (tip tree and per-commit trees)
+- [x] force-with-lease push pinned to the tip read in the same run
+- [x] full hardening gate green at the scrubbed head (counts from fresh JUnit XML)
+- [x] receipts/SOLR-15674.md refreshed at the scrubbed head
+- [x] job and claim marked DONE

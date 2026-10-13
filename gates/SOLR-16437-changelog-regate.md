@@ -28,14 +28,22 @@
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote (`a23f770e4b9`); if the tip moved, stop and record the new tip
-- [ ] diff scope confirmed (changelog title only vs `f72a9edd0a8b`)
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean (GATE INVALID guard)
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg: exactly the one expected failure, by content
-- [ ] step 4 focused run counted from fresh JUnit XML
-- [ ] step 5 module check
-- [ ] receipt refreshed at the new head
-- [ ] draft re-pointed; both suspects settled
-- [ ] job DONE
+- [x] head confirmed by ls-remote (`a23f770e4b9`); if the tip moved, stop and record the new tip
+- [x] diff scope confirmed (changelog title only vs `f72a9edd0a8b`)
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean (GATE INVALID guard)
+- [x] step 2 Error Prone compile
+- [x] step 3 proof leg: exactly the one expected failure, by content
+- [ ] step 4 focused run counted from fresh JUnit XML (owed: see Gate end below)
+- [x] step 5 module check
+- [ ] receipt refreshed at the new head (waits for step 4)
+- [ ] draft re-pointed; both suspects settled (waits for step 4)
+- [ ] job DONE (waits for step 4)
+
+## Gate end, 2026-10-13 (vm2)
+
+- Runner: /workspace/gates/g16437-gate.sh; log /workspace/gates/logs/vm2/queue-g16437-gate-20261013T063715Z.out (GATE START 06:37:15Z at a23f770e4b9, GATE END 06:58:31Z). Step logs under /workspace/gates/logs/vm2/16437-*.log.
+- Live tip checked by ls-remote at the record time: `a23f770e4b9587acbd14fcdbaae2047bd5c727c4`, unchanged from the gated head. (The runner's own head-check line printed live=[] because its ls-remote ran outside the worktree; the tip was re-read here.)
+- Steps: changelog YAML parse OK, rc 0. Tidy rc 0, status clean afterward. Error Prone compile of :solr:core:compileJava :solr:core:compileTestJava, rc 0. Proof leg rc 1 as expected: 25 tests, 1 failed, 1 skipped; the failure is testAddReplicaPropRejectsUnknownReplica, "Expected exception RemoteSolrException but no exception was thrown" (CollectionsAPISolrJTest.java:1301), so it fails by content. Proof-restore status clean. Focused head run rc 0, Gradle summary `:solr:core:test (SUCCESS): 25 test(s), 1 skipped`, BUILD SUCCESSFUL (log 16437-head.log). Module check :solr:core:check -x test rc 0.
+- Step 4 gap: the focused head run's JUnit XML was not counted. The nightly run on the same worktree started at 06:58:31Z with `:solr:core:cleanTest`, which removed the XML before it was read. Counts for this gate are therefore the Gradle summary of the same run, not fresh XML. The receipt and the draft re-point wait for a focused recount.
+- Owed next: on the next idle pass, after the nightly run (claim pool-vm2-gate-backlog-16437-nightly) has GATE END, rerun `:solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.CollectionsAPISolrJTest` at `a23f770e4b9587acbd14fcdbaae2047bd5c727c4` with seed `16437C0FFEE16437`, count from the fresh XML, then do the On green steps above. The worktree must be checked out to a23f770e4b9 first (it is at f72a9edd0a8b now, for the nightly run).
