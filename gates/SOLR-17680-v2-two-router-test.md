@@ -1,7 +1,7 @@
 # Gate job: SOLR-17680 end-to-end test for the v2 two-router path
 
 - Branch: solr-17680-submit. Head: `ce59bbe112d063e3d3c93b3be6a1a5269a38fc37` (fork tip). Merge-base: `56ec140e3636d5f4150fa87fbf7103529536ac99`.
-- Status: OPEN, claimable by vm2. The block recorded below was settled by the main side on 2026-10-13 and the job is re-issued on that basis; the decision and its reason are recorded at the top of the section "Blocked at claim".
+- Status: FAILED at 766dd13e9e on the vm2 gate (2026-10-13, GATE END 13:17:01Z; focused head leg rc=1). Not relaunched; not DONE. See "Gate run 2026-10-13" below. The block recorded in "Blocked at claim" was settled by the main side on 2026-10-13.
 - Capability tags: gate.
 - Intended host: vm2 (Linux). Windows never claims build work.
 - Job type: a new focused test, then the focused run and the fail-before run. vm2 may patch the branch to add the test, under the patch-loop rule: the patching agent pushes with a plain fast-forward push, and the gating host refreshes the receipt.
@@ -43,3 +43,13 @@ In `solr/core/src/test/org/apache/solr/cloud/CreateRoutedAliasTest.java`, after 
 - The negative case cannot pass as written. Step 3 asks for a category router with no maxCardinality to return 400 naming router.1.maxCardinality. At this head the category router's maxCardinality is optional: solr/api/src/java/org/apache/solr/client/api/model/CategoryRoutedAliasProperties.java has no required annotation, solr/core/src/java/org/apache/solr/handler/admin/api/CreateAlias.java (category validate() checks only field) and CategoryRoutedAlias.java accept a missing value, and the string "router.1.maxCardinality" appears in no error message in solr/core/src/java.
 - So the test as specified would get 200 and fail. Making it pass needs a production change (requiring maxCardinality for v2 dimensional category routers), which is outside the test-only scope of this job.
 - Owner decision needed: either (a) approve a production change to require maxCardinality for category routers in the v2 path, with its own job, or (b) change the negative case to the behaviour the code has (200 without maxCardinality) and re-issue this job. No test, commit, gate, or fork push has been made.
+
+## Gate run 2026-10-13 (FAILED, not relaunched)
+
+- Log: logs/vm2/queue-g17680-v2-gate-20261013T130656Z.out. GATE START 13:06:56Z, GATE END 13:17:01Z. Runner: gates/g17680-v2-gate.sh, worktree gates/solr-17680-v2.
+- Head run: 766dd13e9e9675a5ced323c29d677eed9b9f20a7, one commit above the fork tip ce59bbe112d. That commit exists only in the gate worktree; the fork tip is unchanged, so this run did not test the pushed branch. Step 1 of this job (fork tip must be ce59bbe112d) was not re-recorded at the run. Delta against the merge-base: CreateRoutedAliasTest.java +161, CreateAliasCmd.java, CreateAlias.java, CreateAliasAPITest.java, changelog/unreleased/SOLR-17680.yml.
+- rc lines: tidy 0, tidy-clean empty status, focused head 1, fail-before 1 (the script expects nonzero), restore status empty.
+- Focused head, JUnit XML: CreateRoutedAliasTest tests=17 failures=1; CreateAliasAPITest tests=13 failures=0; gradle reported 30 tests completed, 1 failed. Failing test: testV2DimensionalCategoryRouterWithoutMaxCardinality, "Unexpected status: 400 expected:<200> but was:<400>" at CreateRoutedAliasTest.java:232. Seed 1D2AFF88101521D3:5F496A954451627D. Passing in the same batch: testV2DimensionalTwoRouters, testDimensionalRoutedAliasWithoutTopLevelFieldV1, testDimensionalRoutedAliasMissingDimensionFieldFails.
+- Fail-before at the merge-base (test file kept, CreateAliasCmd.java and CreateAlias.java reverted): testV2DimensionalTwoRouters failed with "Unexpected status: 400 expected:<200> but was:<400>". This is not the text "A routed alias requires these params" that step 5 expects.
+- Open question for the main side: the negative case is 200 by decision (option b), but the head returns 400 for a category router without maxCardinality. Either the head's CreateAlias.java change makes maxCardinality required (which the decision excluded), or the test expectation is wrong. The positive case at merge-base also returns 400, so the fail-before result does not isolate the test change.
+- Nothing pushed, no receipt refreshed, no fork push. The gate worktree gates/solr-17680-v2 is left in place for the main side.
