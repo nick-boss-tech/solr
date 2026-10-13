@@ -13,9 +13,11 @@
 
 ## Step checklist
 
-- [ ] changelog parse
-- [ ] tidy with the GATE INVALID guard
-- [ ] Error Prone compile
-- [ ] focused tests at the head
-- [ ] module check
-- [ ] receipt refreshed; job DONE
+- [x] changelog parse
+- [x] tidy with the GATE INVALID guard
+- [x] Error Prone compile
+- [x] focused tests at the head
+- [x] module check
+- [x] receipt refreshed; job DONE
+
+DONE: GATE GREEN at 404f13b501c97d6c6b65743a27f54f4f38363afa (vm2, 2026-10-13, logs/vm2/queue-g12651-gate-20261013T003052Z.out). Receipt: receipts/SOLR-12651.md.
