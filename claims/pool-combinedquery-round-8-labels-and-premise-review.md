@@ -8,4 +8,4 @@
 - Hold: no PR, no comment, no branch edit, no build, no test, no Gradle run. The 15319 gate was not relaunched and will not be relaunched by this round.
 - Deliverable: `reports/combinedquerycomponent-round-8-labels-round-9-prep.md`.
 - Heartbeat: 2026-10-13T00:18Z (claim taken).
-- Status: CLAIMED.
+- Status: DONE. Deliverable: `reports/combinedquerycomponent-round-8-labels-round-9-prep.md`. Fourteen items applied to the draft; C12 not applied (needs a structural tag for round 9). The SOLR-15319 verdict is left for the main side to record.
