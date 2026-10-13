@@ -43,6 +43,7 @@
 - Item (b) SOLR-7394: ZkShardTermsRecoveryFailureTest fail-before recorded / RecoveryStrategyTest fail-before recorded / sentences named for cutting:
   - Run failure, 2026-10-13T09:45Z: the base leg `7394-base` returned rc=1 at `:solr:core:compileTestJava`, before any test ran (log `logs/vm2/prdrift-7394-base.log`, 18 errors, e.g. `ShardTermsTest.java:98` cannot find `recoveryFailed(String)` on base `ShardTerms`). The head test tree does not compile against base production, so neither fail-before result exists. Not relaunched; left for the main side to rule on the fail-before sentences.
 - Item (c) SOLR-18178: base run recorded / sentence named for cutting:
+  - Run failure, 2026-10-13T09:50Z (log `logs/vm2/prdrift-18178-base.log`, rc=1): the base leg `18178-base` failed at `:solr:core:compileTestJava` with 24 errors (e.g. `UploadConfigSetAPITest.java:339` cannot find symbol on base production). No test task ran, so no DeleteBackupCmdTest base result exists. Not relaunched; left for the main side to rule on the sentence.
 - Item (d) SOLR-11431: true TestCoreContainer total:
 
 ## Step checklist
