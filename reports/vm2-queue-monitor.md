@@ -1016,3 +1016,4 @@ No action taken beyond this job.
 - Claimed: none new (busy). Gate SOLR-9091-title-fix is running on vm2 (queue started 05:19:08Z, head a596a39d2e, at focused-head; claim 05:00Z; no GATE END).
 - Gate state: busy with one gate, one at a time. Claim heartbeat under 50 min; no refresh due.
 - Next claimable once idle: SOLR-13097 (rebase, force-with-lease at claim time), then SOLR-11939, per the buffer order.
+- 2026-10-13T05:45Z busy: SOLR-9155-logging-regate running on vm2 (GradleWrapperMain pid 50315, started 05:37:18Z, at compile-errorprone, no GATE END); claim heartbeat 05:07Z, 38 min old, no refresh due; no new claim.
