@@ -6,4 +6,5 @@
 - Runner paths: /workspace/gates/solr-5813-dated and /workspace/gates/solr-12991-dated (detached worktrees); gate script /workspace/gates/g5813-12991-dated-gate.sh.
 - No code change. Capability tags: gate. Staffing: 1.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED.
+- Status: DONE.
+- DONE: 2026-10-13T06:12Z. Item 1 SOLR-5813 GREEN at 90b8baa08a (CloudDescriptorTest 3 of 3, seed 9131063B4B318158). Item 2 SOLR-12991 GREEN at 1a86966179 (RecoveryStrategyLeaderUnreachableLogTest 1 of 1, seed 89E7FC232747D3AC). Item 3 skipped as covered by the 15106 claim. Receipts receipts/SOLR-5813.md and receipts/SOLR-12991.md.
