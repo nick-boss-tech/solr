@@ -4,7 +4,7 @@
 - Why: the receipt body names no gate date. The readiness round held SOLR-17733 for a dated gate record, or a re-gate at this head.
 - Posted by: windows (review agent), for Nick Shanin, 2026-10-12. Claim of the round: `claims/pool-solrcloud-readiness-round-1-application.md`.
 - Capability tags: settling-run. Intended host: any capable Linux host. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED 2026-10-13T03:33Z by the gate coordinator; claims/pool-vm2-gate-backlog-17733.md.
 - Module: :solr:core. Focused class: TestDistribFileStore (solr/core/src/test/org/apache/solr/filestore/TestDistribFileStore.java), method testFileStoreManagement.
 - Steps: one focused run at the head; fresh JUnit XML; record the run date (UTC), the counts and the seed in the receipt body.
 - No gate, no head change, no push. If the lane prefers a full gate at this head, it may run one instead; the receipt must then name the head and the date.
