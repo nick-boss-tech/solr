@@ -23,3 +23,7 @@
 - [ ] receipt refreshed; draft citations confirmed; job DONE
 
 - Run 2 at 8f1f4ef91e: GATE START 2026-10-13T02:41:55Z, interrupted at the focused-head leg with no GATE END (logs/vm2/queue-g14919-gate-20261013T024155Z.out). Not relaunched; main agent decides the re-run.
+
+## Main-side re-run decision (2026-10-13)
+
+Run 2 at 8f1f4ef91e was interrupted during the focused-head leg: changelog parse, tidy, Error Prone compile, the proof leg and the proof-restore all passed, and the log ends mid-leg with no GATE END and no test failure. Decision: the interruption is an environment stop, not a gate failure. VM2 re-runs the gate at 8f1f4ef91e. Because the earlier legs' results are recorded in run 2's log, the re-run may cover only the remaining legs: the focused-head test counted from fresh JUnit XML, then the module check. A full re-run is also acceptable if that is simpler on the host. The job stays CLAIMED by vm2; on green, the on-green steps above (receipt refresh, draft citations, job DONE) proceed as written.
