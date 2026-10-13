@@ -8,4 +8,4 @@
 - Scope: `pr-drafts/core-admin/SOLR-18010.md` and the live PR description of the SOLR-18010 PR, read back and compared after the edit.
 - Limits: no PR opened, closed, flipped, or commented on; no Jira text; no build, test, or Gradle on this host. Commit as Nick Shanin, no trailers, no em dashes.
 - Heartbeat: 2026-10-13T15:06Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-13. Deliverable: `reports/solr-18010-perms-body-round-1.md`. The live body and the draft match, at head 2b5ad801c9e.
