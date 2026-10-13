@@ -8,5 +8,5 @@
 - Not in this batch: SOLR-15106 and SOLR-15386 were READY in the round 5 decisions and are in neither batch. They need a check of which assignment covers them. Noted in the round report.
 - Limits: no PR opened, closed, flipped or commented on. No Jira text. Gate jobs only as files under `gates/`. No build, test or Gradle on this host. Commit as Nick Shanin, no trailers, no em dashes.
 - Deliverable: `reports/solrcloud-ready-review-batch-b-round-1.md`.
-- Heartbeat: 2026-10-13T14:55Z (claim taken).
-- Status: ACTIVE.
+- Heartbeat: 2026-10-13T14:42Z (claim taken).
+- Status: DONE, 2026-10-13. Deliverable: `reports/solrcloud-ready-review-batch-b-round-1.md`. SATISFIED: SOLR-17680, SOLR-17733, SOLR-9155. Held: SOLR-16013, SOLR-17292 (owner items), SOLR-14919 (gate).
