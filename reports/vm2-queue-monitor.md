@@ -1252,3 +1252,12 @@ No action taken beyond this job.
 - Gate state: no gate running on vm2. SOLR-18541-score-only-exit-input is claimed by vm1 (heartbeat 17:10Z, live until about 19:10Z).
 - Next claimable job: none for vm2. Buffer unclaimed gate jobs: 0 against a target of 3. Held or waiting, not stocked: SOLR-18391 solr-18391-submit at 3000eeede7 (main-side call on whether the branch is still wanted); SOLR-18010 G3 and SOLR-16013 interrupt fix (waiting on the review patch and Nick's go-ahead); pr-drift round 1 records (parked for the main side). Main side: confirm these holds or post new gate jobs to refill the buffer.
 - Housekeeping: /workspace/gates/vm2-coord-wt still has a stale interactive rebase (rebase-merge under .git/worktrees/vm2-coord-wt, untouched). This pass used /workspace/gates/vm2-coord-push2.
+
+## 2026-10-13T19:02Z vm2 gate backlog coordinator, queue pass (resumed after session restart)
+
+- Finished: none new. No Gradle or runner process on vm2; last gate (SOLR-18010 G1 and G2) ended 18:39Z, already recorded.
+- Failed, action taken: none new. Parked FAILED records keep their next steps: SOLR-16013 (fixture patch with the review coordinator, assignments/pool-vm2-16013-head-failure-fixture-patch.md) and SOLR-18010 review-r1 (test premise patch, assignments/pool-vm2-18010-review-r1-fail-before-patch.md). The review side prepared route 1 at 19:00Z (gates/SOLR-18010-fail-before-route1.patch, reports/18010-fail-before-route-round-1.md) and has not pushed it; the push waits for Nick's go-ahead, and vm2 gates after the push. Nothing relaunched.
+- Claimed: none. Open pool-vm2 claims with no DONE or FAILED line are stale (SOLR-10667 and SOLR-12347, last heartbeat 2026-10-11, blocked on environment, vm1 takes them per the handoff).
+- Gate state: vm2 idle.
+- Next claimable job: none for vm2. Buffer unclaimed gate jobs: 0 against a target of 3. SOLR-18541-score-only-exit-input is claimed by vm1 (heartbeat 17:10Z). Held, not stocked: SOLR-18391 solr-18391-submit (main-side call), SOLR-18010 G3 and SOLR-16013 interrupt fix (waiting on Nick's go-ahead and the review patch), SOLR-10252 (held), SOLR-15823 (main-side decision), pr-drift round 1 records (parked for the main side). Restock audit at 18:49Z found no new first, re-gate or top-up candidates; main side needs to confirm holds or post jobs.
+- Housekeeping: the coordination worktree was reset to origin/pr-prepare at the start of this pass.
