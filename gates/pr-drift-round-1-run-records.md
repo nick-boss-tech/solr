@@ -2,7 +2,7 @@
 
 - Spec: reports/pr-drift-round-1.md, owner decisions section. Four live PR bodies carry run claims that no record backs. This job makes the runs and records them; it does not edit any PR body. Where a run cannot back a claim, the completion note at the end of this file names the sentence for cutting, and the cutting happens in the drift settlement, not in this job.
 - Intended host: vm2 or vm1, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN (posted 2026-10-12 by the main side).
+- Status: CLAIMED, not DONE. Run of 2026-10-13T12:20Z to 12:55Z: item (a) head leg failed (see the coordinator run record at the end); not relaunched, left for the main agent.
 - Capability tags: gate.
 - Job type: record runs only. The four items are independent: a claimant may take one item or all four, and records per-item status in this file. No branch changes, no pushes to a submit branch.
 - Common rules: every run goes through the claiming host's normal gate route (on vm1, ~/workspace/tools/solr-gradle.sh; never ./gradlew), counts come from fresh JUnit XML, and the seed used is recorded with the result. A base run means the branch's test tree against the branch's merge-base production; compute the merge-base with upstream main at claim time and record it. Each item's result is written into the ticket's receipt on pr-prepare.
@@ -56,3 +56,11 @@
 - [ ] item (c): DeleteBackupCmdTest base run; result in receipts/SOLR-18178.md, or the sentence named for cutting; completion note filled
 - [ ] item (d): TestCoreContainer rerun at the live tip; XML testcase count and source `@Test` count reconciled in receipts/SOLR-11431.md; completion note filled
 - [ ] job and claim DONE
+
+## Coordinator run record, 2026-10-13T12:55Z (gate g-prdrift2-gate, log logs/vm2/queue-g-prdrift2-gate-20261013T122045Z.out)
+
+- Item (a) SOLR-18280: head nightly rc=1. TestReplicationHandler 25 tests, 1 failure: doTestIndexAndConfigAliasReplication, "timed out waiting for collection1 startAt time to exceed" (TestReplicationHandler.java:1770). Base nightly rc=0, 25 tests, 0 failures. The head failure is recorded as is, not relaunched; the main agent decides what happens next.
+- Item (b) SOLR-7394: base rescoped compile rc=1; solr/core/src/test/org/apache/solr/cloud/RecoveryStrategyTest.java does not compile at base; rescope rc=2. No base test count. Head leg not run in this run.
+- Item (c) SOLR-18178: base rescoped compile round 1 rc=1 (DownloadConfigSetAPITest and UploadConfigSetAPITest reverted to merge-base), round 2 rc=0; DeleteBackupCmdTest 3 tests, 0 failures. Head leg not run in this run.
+- Item (d) SOLR-11431: not run in this run.
+- Status: CLAIMED, not DONE. Items (b), (c) and (d) still owe runs; item (a) has a failed head leg for the main agent.
