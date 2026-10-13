@@ -85,3 +85,13 @@ Unclaimed gate jobs in the buffer after this pass, claimable by vm1 or vm2: SOLR
 Unclaimed after the 11:17Z claims by the other vm2 pass (SOLR-10322, SOLR-14913), the SOLR-17539 and SOLR-18368 completions, and the reclaim of SOLR-17680 v2 (settled by the main side in commit cf450d8324): the buffer had no unclaimed gate job. Stocked: SOLR-5011-title-fix (gates/SOLR-5011-title-fix.md, the changelog title correction the narrowing receipt owes, then a docs-shaped re-gate at the new head). Still short of the target of 3; the next pass audits receipts for further first, re-gate or top-up candidates.
 
 Added 2026-10-13 (buffer top-up, main side; both join the current supply above): gates/SOLR-18280-nightly-record-run.md (record run only: TestReplicationHandler at the live tip `0da92abd9e96` with the nightly group on, so the live PR's run claims get a recorded count or named corrections) and gates/SOLR-18178-base-leg-run.md (base-leg record run: the receipt's focused set against merge-base production in a scratch tree, with the two branch-added configset test files reverted in that tree only). Both OPEN, unclaimed, claimable by vm1 or vm2 end to end; claims/ governs as always.
+
+## Round 3 top-up, 2026-10-13 (main side, 15:30Z)
+
+The unclaimed gate supply was short of the buffer target of 3, and two vm2 gate claims had stopped heartbeating (SOLR-12505 since 01:12Z, SOLR-14919 since 04:22Z). The order and the holds are in `assignments/pool-vm2-gate-backlog-round-3.md`:
+
+1. SOLR-12505, proof leg only, per `gates/SOLR-12505-fetchstream-fix-amendment-2.md`.
+2. SOLR-14919, re-run at `8f1f4ef91e`, per the main-side re-run decision in its gate file.
+3. SOLR-17292, dated run of record, `gates/SOLR-17292-run-date.md` (new).
+
+Holds stay out of the supply: SOLR-16013, SOLR-12998, SOLR-7394, SOLR-18280, SOLR-10667, SOLR-12347, SOLR-18532. Claims in `claims/` govern.
