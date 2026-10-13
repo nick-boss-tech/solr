@@ -1151,3 +1151,5 @@ No action taken beyond this job.
 - Gate state: one gate running on vm2, SOLR-18280 nightly record run at 0da92abd9e96 (GATE START 14:11:36Z, log logs/vm2/queue-g18280-gate-20261013T141136Z.out, STEP nightly-head, no GATE END yet). Claim refreshed 13:48Z.
 - Stale claim for the main side: SOLR-14919 (claims/pool-vm2-gate-backlog-14919.md), last entry 04:22Z, gate interrupted at focused-head with no GATE END, not relaunched.
 - Next claimable: gates/SOLR-18010-changelog-regate.md (OPEN, unclaimed per its gate file).
+
+- 2026-10-13T14:15Z vm2 gate backlog coordinator (busy check): gates/SOLR-18280-nightly-record-run.md gate running (GradleWrapperMain pid 68296, GATE START 14:11:36Z, step nightly-head, no GATE END yet); claim last heartbeat 13:48Z, heartbeat not due; no new gate started; next pass checks GATE END.
