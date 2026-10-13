@@ -94,4 +94,4 @@ The unclaimed gate supply was short of the buffer target of 3, and two vm2 gate 
 2. SOLR-14919, re-run at `8f1f4ef91e`, per the main-side re-run decision in its gate file.
 3. SOLR-17292, dated run of record, `gates/SOLR-17292-run-date.md` (new).
 
-Holds stay out of the supply: SOLR-16013, SOLR-12998, SOLR-7394, SOLR-18280, SOLR-10667, SOLR-12347, SOLR-18532. Claims in `claims/` govern.
+Holds stay out of the supply: SOLR-18280, SOLR-10667, SOLR-12347, SOLR-18532. Claims in `claims/` govern. Updated 2026-10-13: SOLR-16013 (`gates/SOLR-16013-interrupt-fix.md`) and SOLR-7394 (`gates/SOLR-7394-changelog-title.md`) are now open jobs in supply; SOLR-12998 is decided and is not a hold (see `material/held-items-decisions-2026-10-13.md`).

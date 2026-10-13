@@ -31,11 +31,13 @@ Each job is already written up in its gate file. This assignment only sets vm2's
 
 ## Holds (do not claim)
 
-- **SOLR-16013**: the interrupt edge needs an owner choice, a code fix or a Limits line. Not for vm2.
-- **SOLR-12998**: the proof leg is blocked because the branch tests do not compile against merge-base production. The main side decides.
-- **SOLR-7394**: the base rescope does not compile (`RecoveryStrategyTest.java`). The main side decides how to rescope.
-- **SOLR-18280**: the head nightly failed once (`TestReplicationHandler`, timed out). The main side investigates before any relaunch. Do not relaunch.
-- **SOLR-10667 and SOLR-12347**: blocked by the vm2 npm cache. The main side takes them on vm1 under the workaround. vm2 leaves both alone.
+Updated 2026-10-13 after the held-item decisions. Record: `material/held-items-decisions-2026-10-13.md`.
+
+- **SOLR-16013**: decided as a code fix, pushed at `ecda7b862ba`. The hardening gate is `gates/SOLR-16013-interrupt-fix.md`, OPEN and claimable by vm2 or vm1. The earlier hold is lifted.
+- **SOLR-12998**: decided 2026-10-10 (gate GREEN, proof inconclusive by construction). No proof run is owed. The hold is cleared.
+- **SOLR-7394**: decided. The fail-before clauses are cut and named as a follow-up. The changelog title is pushed at `a92a0d89b20`, and its check is `gates/SOLR-7394-changelog-title.md`, OPEN.
+- **SOLR-18280**: the head rerun already ran and passed (25 of 25, 2026-10-13 14:23Z). The seed and reproduce line for the failing 12:55Z run are owed from vm2: `gates/SOLR-18280-failing-run-seed.md`. Do not relaunch.
+- **SOLR-10667 and SOLR-12347**: blocked by the vm2 npm cache. vm1 takes them under the workaround, but its retry claims have had no heartbeat since 2026-10-11 and must be refreshed first. vm2 leaves both alone.
 - **SOLR-18532**: queued on vm1 behind SOLR-18530.
 - **pr-drift round 1, item (d), SOLR-11431**: already recorded in `receipts/SOLR-11431.md` at 2026-10-13T10:55Z. No run owed.
 
