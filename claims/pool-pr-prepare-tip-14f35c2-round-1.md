@@ -1,0 +1,10 @@
+# Claim: scheduled check round for the pr-prepare tip 14f35c2d871 (round 1)
+
+- Claimed by: windows (review coordinator), Claude Code on this host, working for Nick Shanin
+- Capability tags: review, draft
+- Trigger: the scheduled check found pr-prepare at 14f35c2d871, recorded tip a984dbf. The new commits are vm1's gate claims for four strong-review jobs (the SOLR-18541 review patch gate, the QueryComponent real-exit shape premise, the SOLR-18010 permission legs G1 and G2, and the SOLR-18541 score-only exit input), vm2's SOLR-18010 symlink premise record at the PR head and at the merge-base, vm2's queue monitor, a SOLR-18540 ready-flip note in its receipt, and an addendum to my canonical four-PR report. No new assignment or material file.
+- Scope: (1) `pr-drafts/core-admin/SOLR-18010.md` against the symlink premise record and the G1 and G2 claims, and the owner's file-replacement item (E11 in the round report), with the premise result stated only as recorded. (2) `receipts/SOLR-18540.md` ready-flip note against `pr-drafts/build-docs/SOLR-18540.md`. (3) The four vm1 gate files against their claims and against the review they test (the heads named, the steps, and whether a claim names a head the gate file does not).
+- Staffing: three subagents. S1 takes the SOLR-18010 draft and premise. S2 takes the SOLR-18540 receipt and draft, and the addendum to the canonical report. S3 takes the four vm1 gate files and claims.
+- Limits: no PR opened, closed, flipped or commented on; no live PR body edited; no fork branch changed; no build, test or Gradle on this host; nothing posted.
+- Heartbeat: 2026-10-13T17:12Z (claim taken).
+- Status: IN PROGRESS.
