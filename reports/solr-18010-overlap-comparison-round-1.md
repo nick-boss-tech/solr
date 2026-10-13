@@ -55,9 +55,9 @@ The two fixes are equivalent for one-process ordering. Only this side changes ho
 - The one real risk: the author has already rejected the rename. The offer has to ask, not insist.
 - If the author declines both elements, the fallback is to open ours, and the report should be reopened then.
 
-## Draft comment, for Nick to approve. Not posted.
+## Draft comment, kept as a draft. The posted version is on GitHub and was edited 2 minutes after posting. This draft is not the GitHub comment and is not to be posted again.
 
-> Thanks for the fix. Two things we tested here, offered as options and not as a change request. First, a forced interleave test at the `persistConf` level: one edit is parked inside the serializer, and both users must survive as one JSON document. The 20-POST test catches the race only by chance. Second, writing the new contents to a temp file and then moving it into place, so a failed write keeps the old file. Your PR still truncates first, so a failure mid-write can leave a short file. We understand you chose not to do the rename here. Would you like either as a follow-up commit, or would you rather keep this change to the lock?
+> Thanks for the fix. Two things I tested here, offered as options and not as a change request. First, a forced interleave test at the `persistConf` level: one edit is parked inside the serializer, and both users must survive as one JSON document. The 20-POST test catches the race only by chance. Second, writing the new contents to a temp file and then moving it into place, so a failed write keeps the old file. Your PR still truncates first, so a failure mid-write can leave a short file. I understand you chose not to do the rename here. I have put the version with both elements up as a draft in #5118 so you can see them worked out. Would you like either as a follow-up commit, or would you rather keep this change to the lock?
 
 ## Not done
 
