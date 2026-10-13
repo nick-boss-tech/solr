@@ -16,3 +16,5 @@
 - [ ] tidy on a clean tree
 - [ ] module check :solr:solrj-streaming
 - [ ] receipt refreshed; job and claim DONE
+
+- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T11:17Z at 80ce9d7a3c8; claim claims/pool-vm2-gate-backlog-10322-tip-regate.md.
