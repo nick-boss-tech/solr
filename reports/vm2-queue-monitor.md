@@ -1178,3 +1178,4 @@ No action taken beyond this job.
 - Failed and action taken: none this pass.
 - Claimed: none. vm2 busy with the batch-A base dated runs (SOLR-5813, SOLR-12991, SOLR-13186, SOLR-15863; claim 15:19Z, run started 15:26Z, no GATE END yet, heartbeat not due).
 - Next claimable: the round 3 order in assignments/pool-vm2-gate-backlog-round-3.md, once batch-A ends: SOLR-12505 proof leg, SOLR-14919 re-run at 8f1f4ef91e, SOLR-17292 dated record. Buffer job gates/SOLR-16437-changelog-regate.md stays OPEN and unclaimed behind them.
+- Buffer supply: 1 unclaimed gate job (SOLR-17292, round 3 item 3), below the target of 3. Restock not done this pass; the main side's 15:30Z census and round 3 top-up set vm2's order. The next idle pass audits receipts for first, re-gate or top-up candidates.
