@@ -1,7 +1,7 @@
 # Gate job: SOLR-18010 review patch, round 1 (strong review of the four new draft PRs)
 
 - Branch: `review-r1-solr-18010` on the fork. Head: `e99be67c9a6fe15f86306104843a30b35196f159`. Parent: `2b5ad801c9e88807337f4f0a3fdd689126ad37d1` (the head of draft PR #5118). Not the PR branch.
-- Status: OPEN, unclaimed.
+- Status: GATE RUN, NOT GREEN, left for the main agent (not relaunched). Run 2026-10-13T17:15:13Z to 17:38:49Z at e99be67c9a6f, log logs/vm2/queue-g18010-review-r1-gate-20261013T171513Z.out. Delta scope, tidy, spotless, Error Prone compile, focused head run (rc=0) and module check (rc=0) passed. Fail-before (production at 14c7aac0d151) exited rc=1: 4 of 11 focused tests failed, including testFailedWriteKeepsPreviousFileAndLeavesNoTemporaryFile. The new test failed as step 6 expects, but the every-rc-zero rule is unmet, so no receipt is written and the job is not DONE.
 - Capability tags: gate.
 - Intended host: Linux only (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Source: `reports/four-new-prs-strong-review-round-1.md`, section SOLR-18010.
