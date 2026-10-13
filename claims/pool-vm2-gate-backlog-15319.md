@@ -5,4 +5,4 @@
 - Capability tags: gate.
 - Runner: gates/g15319-gate.sh, worktree /workspace/gates/solr-15319-gate (detached).
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: FAILED. Run head rc=1 at 4bda91f46fc18142809c919d7c563129fdf7fb96: testShardWithoutResponseIsSkipped threw NullPointerException at ExactStatsCache.java:120 (null response in SolrResponse.getException). Log: logs/vm2/15319-head.log. Verdict left for the main agent; not relaunched.
+- Status: DONE. Run head rc=1 at 4bda91f46fc18142809c919d7c563129fdf7fb96: testShardWithoutResponseIsSkipped threw NullPointerException at ExactStatsCache.java:120 (null response in SolrResponse.getException). Log: logs/vm2/15319-head.log. The rc=1 is the predicted premise failure. Verdict SAME CASE recorded by the main side 2026-10-12 in gates/SOLR-15319-8051-premise.md and receipts/SOLR-15319.md. Not relaunched.
