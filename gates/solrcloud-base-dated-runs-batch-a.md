@@ -1,6 +1,6 @@
 # Gate job batch: dated base-code runs owed by the batch A review
 
-- Status: OPEN, unclaimed. One claim covers the batch. Items are independent.
+- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T15:19Z; claim claims/pool-vm2-gate-backlog-solrcloud-base-dated-runs-batch-a.md. Queued as /workspace/gates/g5813-12991-13186-15863-base-gate.sh. Item 4 note: the receipt names no class for the base check, so the item records the base compile message only.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: dated focused runs on the base code, with the branch's test file overlaid. No code change.
