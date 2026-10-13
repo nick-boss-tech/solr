@@ -4,7 +4,7 @@
 - Change since the prior gated head: the changelog title in changelog/unreleased/SOLR-11288-set-of-split-duplicates.yml now names the blank-only behavior (replacement recorded in reports/solrcloud-round-1-p4.md, finding 1). No Java change.
 - Posted by: windows (review agent), for Nick Shanin, 2026-10-12. Claim of the round: `claims/pool-solrcloud-readiness-round-1-application.md`.
 - Capability tags: gate. Intended host: any capable Linux host. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: DONE. GATE GREEN at cbf0c678f277d6f50d75408d4889d3b664469905 (GATE END 2026-10-13T01:37:18Z).
 - Module: :solr:core. Focused class: TestCollectionAPI (seed from the receipt: 11288C0FFEE11288). Confirm the package by grep before composing the run.
 - Steps: changelog YAML parse; tidy with the GATE INVALID guard; Error Prone compile; focused tests at the head (fresh JUnit XML); module check `:solr:core:check -x test`.
 - The lane may use a changelog-only carry-over if its rule allows one. The receipt must name the new head and say which route was taken.

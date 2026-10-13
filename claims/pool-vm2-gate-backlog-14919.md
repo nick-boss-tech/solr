@@ -5,6 +5,6 @@
 - Capability tags: gate.
 - Runner: gates/g14919-gate.sh, worktree /workspace/gates/solr-14919-gate (detached), log gates/logs/vm2/14919-run.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Status: FAILED at c1fa37e33c (GATE END 2026-10-13T02:05:17Z). Module check rc=1: spotlessJavaCheck format violation in IgnoreCommitOptimizeUpdateProcessorFactory.java javadoc (lines 114-122). Left for the main agent; no relaunch, no fork push.
 
 - 2026-10-13T02:01Z vm2 gate backlog coordinator heartbeat: SOLR-14919 claim refreshed. Gate still running (log /workspace/gates/logs/vm2/14919-head.log growing at 02:01Z, focused-head leg, no GATE END). Busy; nothing launched or recorded.
