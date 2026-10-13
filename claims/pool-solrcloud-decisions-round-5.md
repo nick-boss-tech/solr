@@ -12,4 +12,4 @@
 - Staffing: two subagents. One reads the SOLR-17680 v2 path and its tests. One reads what `collection=` returns for SOLR-5813. Both are read-only; the lead makes the draft edits.
 - Limits: no PR, no comment, no JIRA write, no email. No build, test or Gradle on this host. Gate runs go to vm2 as job files. Commit as Nick Shanin, no trailers, no em dashes.
 - Heartbeat: 2026-10-13T05:08Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-13. Deliverable: `reports/solrcloud-decisions-round-5.md`. Verdicts: 8 READY, 9 HOLD, 2 NOT READY.
