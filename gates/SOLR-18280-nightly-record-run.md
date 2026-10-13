@@ -1,7 +1,7 @@
 # Gate job: SOLR-18280 nightly record run at the live tip
 
 - Branch: solr-18280-submit. Head: `0da92abd9e96616ed817a25da47078c753766119` (live tip, verified by ls-remote at posting, 2026-10-13).
-- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T13:48Z; claim claims/pool-vm2-gate-backlog-18280-nightly-record-run. Queued as /workspace/gates/g18280-gate.sh.
+- Status: DONE 2026-10-13T14:23Z (vm2, gate backlog coordinator). Head run 25 of 25, 0 failures, seed 18280C0FFEE18280; see receipts/SOLR-18280.md. Claim claims/pool-vm2-gate-backlog-18280-nightly-record-run.md DONE. Queued as /workspace/gates/g18280-gate.sh.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: record run only. No branch changes, no pushes to the submit branch.
@@ -25,14 +25,14 @@ A separate dated run today (2026-10-13) recorded one clock-based startAt timing 
 
 ## Completion note (the claimant fills this in)
 
-- Head run at: / seed: / tests, failures, skipped:
-- Body claims now backed by a record:
-- Claims named for correction, with the recorded counts that replace them:
+- Head run at: 0da92abd9e96616ed817a25da47078c753766119 / seed: 18280C0FFEE18280 / tests 25, failures 0, errors 0, skipped 0 (fresh JUnit XML, logs/vm2/18280-head-xml).
+- Body claims now backed by a record: the head count of 25 of 25 with the nightly group on at 0da92abd9e96 (no failure names). The base comparison is backed by the 25 of 25 base leg at 0d2a4649c79a recorded in receipts/SOLR-18280.md, on identical production.
+- Claims named for correction, with the recorded counts that replace them: the "24 of 25" counts (twice) are replaced by 25 of 25 at this head (seed 18280C0FFEE18280). The 2026-10-04 run and the "2 of 2" have no record at 0da92abd9e96 and are not backed by this run; the main side decides whether to cut them or record them.
 
 ## Checklist
 
-- [ ] claimed; live tip verified by ls-remote
-- [ ] nightly head run executed, counts from fresh JUnit XML
-- [ ] seed and failure names recorded
-- [ ] receipts/SOLR-18280.md updated; completion note filled
-- [ ] job and claim DONE
+- [x] claimed; live tip verified by ls-remote
+- [x] nightly head run executed, counts from fresh JUnit XML
+- [x] seed and failure names recorded
+- [x] receipts/SOLR-18280.md updated; completion note filled
+- [x] job and claim DONE
