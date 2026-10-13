@@ -1,6 +1,6 @@
 # Gate job batch: dated base-code runs owed by the batch A review
 
-- Status: RUN 2026-10-13T15:26Z to 15:45Z; base results recorded below, all four rc=1 as the items expect. Not marked DONE: the runs returned nonzero rc, so the batch is left for the main agent to settle the receipts and close the batch. Claim claims/pool-vm2-gate-backlog-solrcloud-base-dated-runs-batch-a.md. Runner /workspace/gates/g5813-12991-13186-15863-base-gate.sh. Item 4 note: the receipt names no class for the base check, so the item records the base compile message only.
+- Status: DONE 2026-10-13. Runs 15:26Z to 15:45Z; all four base results match the expected outcomes and are recorded in the base-run sections of receipts/SOLR-5813.md, SOLR-12991.md, SOLR-13186.md and SOLR-15863.md. Claim closed DONE.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: dated focused runs on the base code, with the branch's test file overlaid. No code change.
@@ -22,8 +22,8 @@ For each item:
 
 ## Checklist
 
-- [ ] item 1: head confirmed; base run with JUnit XML; receipt base-run section
-- [ ] item 2: head confirmed; base run with JUnit XML; receipt base-run section
-- [ ] item 3: head confirmed; base run with JUnit XML; receipt base-run section
-- [ ] item 4: head confirmed; base compile or run recorded; receipt base-run section
-- [ ] batch job DONE
+- [x] item 1: head confirmed; base run with JUnit XML; receipt base-run section
+- [x] item 2: head confirmed; base run with JUnit XML; receipt base-run section
+- [x] item 3: head confirmed; base run with JUnit XML; receipt base-run section
+- [x] item 4: head confirmed; base compile or run recorded; receipt base-run section
+- [x] batch job DONE

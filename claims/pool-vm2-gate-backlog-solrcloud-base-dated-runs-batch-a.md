@@ -13,4 +13,4 @@
   - Item 2, SOLR-12991 on base 97d9738143: rc=1; RecoveryStrategyLeaderUnreachableLogTest tests=1 failures=1; testLeaderConnectFailureLogsRootCause; seed 1D24E02231DFF0EA; run 15:39Z.
   - Item 3, SOLR-13186 on base 97d9738143: rc=1; OverseerElectionContextTest tests=1 failures=1; testLeaderNodeRemovedWhenOverseerIsNotStarted ("leader registration must not outlive a skipped Overseer start"); seed 4CF3601BF5D59D9B; run 15:43Z.
   - Item 4, SOLR-15863 on base 97d9738143: compile rc=1; BackupCmdTest uses minIndexVersion(List<String>), which does not exist on base (cannot find symbol); run 15:45Z.
-- Status: RUN, results recorded, not DONE. All four match the job's expected base outcomes. Left for the main agent to settle the receipts and close the batch.
+- Status: DONE 2026-10-13T15:50Z. Deliverables: receipts/SOLR-5813.md, receipts/SOLR-12991.md, receipts/SOLR-13186.md, receipts/SOLR-15863.md (base-run sections), gates/solrcloud-base-dated-runs-batch-a.md. All four base results match the job's expected outcomes.
