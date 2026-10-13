@@ -37,3 +37,8 @@ Verdicts per question in this file (CONFIRMED BY RUN matching the reading, or th
 - [ ] Q2 shape captured (exit during sort value preparation)
 - [ ] Q3 merges driven unedited; totals recorded
 - [ ] verdicts recorded here and in the report; job DONE
+
+## Claim (vm1, 2026-10-13T17:10Z)
+
+- Claimed by vm1: claims/pool-vm1-querycomponent-real-exit-shape-premise.md.
+- Runner: ~/workspace/tools/gate-strong-review-vm1-chain.sh (chained, serial on the test-queue flock). Log: ~/workspace/tools/gqc-real-exit-shape.log. Worktree: ~/workspace/solr-worktrees/qc-real-exit-shape. Probe: QueryComponentRealExitShapePremiseTest (throwaway, in the worktree only; source kept at ~/workspace/tools/probes/QueryComponentRealExitShapePremiseTest.java).

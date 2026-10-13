@@ -29,3 +29,9 @@
 - [ ] question 2: NullPointerException present or absent, with the frame
 - [ ] question 3: per-query entries dumped
 - [ ] result section written to the ticket's receipt; job DONE
+
+## Claim (vm1, 2026-10-13T17:10Z) and a spec note
+
+- Claimed by vm1: claims/pool-vm1-gate-18541-score-only-exit-input.md.
+- Runner: ~/workspace/tools/gate-strong-review-vm1-chain.sh (chained, serial on the test-queue flock). Log: ~/workspace/tools/g18541-score-only.log. Worktree: ~/workspace/solr-worktrees/cqc-score-only-exit.
+- Spec note (ambiguity, recorded rather than guessed): the class named above, org.apache.solr.handler.component.CombinedQueryComponentRealExitPremiseTest, is not on the merge-base; the runner greps the merge-base tree as step 1 and records the result in the log. The class is the scratch probe written for gates/combinedquerycomponent-real-exit-premise.md and held uncommitted in the vm1 worktree ~/workspace/solr-worktrees/cqc-real-exit. This run uses a score-only variant of that same fixture (CombinedQueryComponentScoreOnlyExitPremiseTest, uncommitted in the job worktree; source at ~/workspace/tools/probes/), which is what "the branch's test fixture" is read to mean. No test is added to any branch, matching the job type.

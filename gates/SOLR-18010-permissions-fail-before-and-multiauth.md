@@ -53,3 +53,10 @@
 - [ ] G4a: symbolic link result recorded
 - [ ] G4b: bind mount result recorded
 - [ ] receipt section "Review round 1 checks" written; job DONE
+
+## Claim and leg split (vm1, 2026-10-13T17:10Z)
+
+- Claimed by vm1 for legs G1 and G2 only: claims/pool-vm1-gate-18010-permissions-fail-before.md.
+- Runner: ~/workspace/tools/gate-strong-review-vm1-chain.sh (chained, serial on the test-queue flock). Log: ~/workspace/tools/g18010-perms.log. Worktree: ~/workspace/solr-worktrees/strong-r1-18010-perms. Fresh XML copies: ~/workspace/tools/g18010-perms-xml/.
+- G3 is not part of this claim: it runs only after a code change lands for the permission-copy warning or the comment fix, and the SOLR-18010 review patch gate (gates/SOLR-18010-review-r1-patch.md, claimed by vm2) is where that change is gated first.
+- G4a and G4b are manual checks; they are not part of this claim and stay open after G1 and G2 complete. This job is therefore marked DONE for G1 and G2 only when both have counts; the G4 lines of the checklist stay unchecked until a host runs them by hand.

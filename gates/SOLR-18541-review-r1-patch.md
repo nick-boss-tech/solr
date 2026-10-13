@@ -39,3 +39,9 @@
 - [ ] fail-before against the side branch, the two named tests only
 - [ ] module check
 - [ ] receipt section; job DONE
+
+## Claim (vm1, 2026-10-13T17:10Z)
+
+- Claimed by vm1: claims/pool-vm1-gate-18541-review-r1-patch.md.
+- Runner: ~/workspace/tools/gate-strong-review-vm1-chain.sh (one chained runner for the four strong-review jobs vm1 claimed in this batch, serial on the test-queue flock). Log: ~/workspace/tools/g18541-r1-gate.log. Worktree: ~/workspace/solr-worktrees/strong-r1-18541-gate.
+- The focused run uses seed C0FFEE42C0FFEE42 (the seed this test class was gated with at the side branch head); the job names no seed, so the runner records the one it uses here in the checklist when it runs.
