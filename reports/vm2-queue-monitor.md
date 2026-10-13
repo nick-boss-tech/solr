@@ -922,3 +922,13 @@ No action taken beyond this job.
 - Finished: none. Busy: SOLR-14919 processor-only re-gate running (claim 01:02Z; log 14919-head.log at focused-head leg, no GATE END). Heartbeat refreshed at 02:01Z.
 - Claimed: none this run. Nothing launched. Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate (buffer at 2 unclaimed plus SOLR-15863 and SOLR-13186 claims still live, below the minimum of three; restock after the busy claims clear).
 - Gate state: busy.
+
+## 2026-10-13T02:18Z vm2 gate backlog coordinator
+
+- Finished: none this run. The SOLR-14919 gate run 1 (c1fa37e33c) ended GATE END 02:05:17Z with the module check failing on spotlessJavaCheck only. Compile, proof leg and focused head had passed.
+- Failed and action taken: SOLR-14919 classified as a tidy defect (a javadoc line wrap in IgnoreCommitOptimizeUpdateProcessorFactory.java, lines 117-120), not a test or environment failure. Fixed on the branch with the spotless-expected rewrap, committed as "SOLR-14919: tidy the processor javadoc wrap", pushed as a fast-forward: solr-14919-submit c1fa37e33c to 8f1f4ef91e. Classification and fix recorded in gates/SOLR-14919-processor-only-gate.md. Re-claimed at 8f1f4ef91e; re-gate queued on the vm2 serial queue behind SOLR-15863.
+- Claimed: none new. Re-claimed SOLR-14919 (pushed as 0c89f489d4 on pr-prepare).
+- Gate state: busy. SOLR-13186 settling run running since 02:15:52Z at b436d90d2a (log logs/vm2/13186-head.log, focused-head leg, no GATE END). Heartbeats refreshed for SOLR-13186 and SOLR-15863 (both last written 01:17Z, over 50 minutes old).
+- Queue: serial runner queue holds g15863-gate.sh then g14919-gate.sh.
+- Buffer below target: 2 unclaimed gate jobs (SOLR-12916-title-fix, SOLR-17680-message-regate), target 3. Restock not done this run: it needs a receipt-by-receipt check of gated heads against fork tips. Next run does this first.
+- Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
