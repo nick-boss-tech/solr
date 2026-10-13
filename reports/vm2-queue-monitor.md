@@ -1126,3 +1126,5 @@ No action taken beyond this job.
 - Concurrency: two vm2 coordinator sessions are still writing claims and queue entries. Please confirm one session drives vm2.
 - Restock: unclaimed claimable buffer jobs are short of the target of 3; the next pass audits receipts.
 - 2026-10-13T12:59Z vm2 gate backlog coordinator (busy check, pass 3): gates/SOLR-5011-title-fix.md gate running (GradleWrapperMain pid 37374, claim taken 12:47:06Z, no GATE END yet); heartbeat not due, no new gate started, next pass checks GATE END.
+
+- 2026-10-13T13:00Z vm2 gate backlog coordinator (busy check, pass 4): gates/SOLR-5011-title-fix.md gate still running (GradleWrapperMain pid 38320 at module-check, claim taken 12:47:06Z, no GATE END yet); heartbeat not due, no new gate started, next pass records GATE END.
