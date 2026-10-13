@@ -1051,3 +1051,5 @@ No action taken beyond this job.
 - Claimed: none this run. Another session on this host claimed SOLR-11288 base run at 07:37:27Z (claims/pool-vm2-gate-backlog-11288-baserun.md, commit 28489995b7) and was setting up its worktree at 07:38Z. vm2 is busy with that claim, so no gate was launched here.
 - Gate state: no unrecorded GATE END left on vm2 claims. One live vm2 claim (11288 base run, other session).
 - Next claimable once idle: gates/SOLR-11479-identity-carry.md (the carry-over job has no live claim; the 2026-10-11 DONE claim is for the earlier job). Other open supply: SOLR-5011-narrowing, SOLR-6430-fragment-drop, combinedquerycomponent-real-exit-premise, pr-drift-round-1-run-records. Check claims/ at claim time.
+
+- 2026-10-13T07:45Z busy: SOLR-11288 base run live (runner started 07:45:13Z, claim 07:37:27Z, at focused-base, no GATE END), no new claim. Next claimable once idle: gates/SOLR-11479-identity-carry.md, claim state checked at claim time.
