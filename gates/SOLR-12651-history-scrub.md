@@ -1,7 +1,7 @@
 # Gate job: SOLR-12651 history scrub (remove the Claude trailers), then the full gate
 
 - Branch: solr-12651-submit. Fork tip at posting: `404f13b501c97d6c6b65743a27f54f4f38363afa` (verified by ls-remote 2026-10-13).
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (coordinator) 2026-10-13T07:06Z. Rewritten head de3f3604f0ee12935080c8f3d418b6bd1be3013e pushed to solr-12651-submit (force-with-lease from 404f13b501c9); gate queued at gates/g12651-scrub-gate.sh. Claim: claims/pool-vm2-gate-backlog-12651-history-scrub.md.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: history rewrite (trailer removal and two message fixes, no code change), then the full hardening gate at the rewritten head.
