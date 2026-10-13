@@ -1,6 +1,6 @@
 # MergeIds fix gate receipt
 
-Branch `mergeids-skipped-shard-totals` on the fork (no ticket number yet; Nick files the ticket himself, so the branch is not named for one and carries no changelog fragment, which is owed at packaging). This receipt exists so the gate state is visible to every host; the gate logs themselves live on vm1.
+Branch `mergeids-skipped-shard-totals` on the fork. Ticket: SOLR-18539, filed by Nick and verified against live Jira on 2026-10-12 (the branch is not named for the ticket, at Nick's filing setup; the changelog fragment carrying the number was added at packaging, see the packaging gate section at the end of this receipt). This receipt exists so the gate state is visible to every host; the gate logs themselves live on vm1.
 
 ## Gate at head d211794596: GREEN
 
@@ -54,3 +54,16 @@ Branch `mergeids-skipped-shard-totals` on the fork (no ticket number yet; Nick f
 ## Not run
 
 - No end-to-end MiniSolrCloud reproduction of a timed-out shard emitting the skip shape; the evidence is merge-level, as in the verification report. The review's call was that merge-level tests plus the SOLR-14758 scenario are enough for the arithmetic.
+
+## Packaging gate at head 4eb9961218: GREEN
+
+- Head: `4eb996121804b043f1ee53f5bb7e22b9c3021b0a`. Merge-base: `d76fc14b9857e77b830d7a82514b28c523a239c2`. Seed: `F2C2B3B7EFFDB021`.
+- The only change since the GREEN 9e85ce5c162 head is the packaging commit `4eb9961218` adding the changelog fragment `changelog/unreleased/SOLR-18539-mergeids-skipped-shard-totals.yml` for the filed ticket SOLR-18539 (title states the fix plainly; type `fixed`, the project's vocabulary for a bug fix). No production or test code changed.
+- Status: GATE GREEN on vm1, GATE RUNNER DONE 2026-10-13T02:51:05Z (runner ~/workspace/tools/gmergeids-package.sh, log ~/workspace/tools/gmergeids-package.log; step logs gmergeids-package-proof.log and gmergeids-package-head-tests.log; JUnit XML copies gmergeids-package-proof-TEST-org.apache.solr.handler.component.QueryComponentPartialResultsTest.xml and gmergeids-package-head-TEST-org.apache.solr.handler.component.QueryComponentPartialResultsTest.xml).
+- Step 0: changelog YAML parse of the new fragment rc=0 (~/workspace/tools/check-changelog-yaml.sh: 1 file parses OK).
+- Step 1: tidy rc=0, tree clean after tidy (no GATE INVALID).
+- Step 2: Error Prone compile rc=0.
+- Step 3: pre-fix proof, QueryComponent.java reverted to the merge-base with the branch tests kept: QueryComponentPartialResultsTest 17 tests, 0 skipped, 7 failures, 0 errors. The failures are the same seven premise contents as at 9e85ce5c162: numFound expected 3 but was 5 (twice), maxScore expected 3.0 but was 99.0, approximateTotalHits expected 4 but was 11, fallback expected 5 but was 2, mixed headers expected 14 but was 13, all-shards-skipped expected 0 but was 5 (verified by content from the parsed JUnit XML; the runner's literal grep chain printed its known warning because the XML escapes the angle brackets). Head tree restored and hash verified.
+- Step 4: focused tests at head: QueryComponentPartialResultsTest 17 tests, 0 skipped, 0 failures, 0 errors, rc=0.
+- Step 5: `:solr:core:check -x test` rc=0. Final git status clean.
+- The branch was pushed plainly to the fork at this head (fast-forward 9e85ce5c162 to 4eb9961218, verified by ls-remote). The branch is packaged and ready for the PR opening slate; the PR draft pr-drafts/search-components/mergeids-skipped-shard-totals.md carries SOLR-18539 and the fragment link at this head.
