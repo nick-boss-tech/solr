@@ -7,5 +7,5 @@
 - Scope: the description text of each ticket, as fetched read-only from JIRA into the scratchpad. Each finding is a passage, the problem, and a suggested replacement.
 - Limits: nothing is edited in JIRA or in the repository's ticket drafts. No comment, no JIRA write, no email, nothing posted. No build, test, or gate.
 - Deliverable: `reports/jira-18539-18541-plain-language-review.md`.
-- Heartbeat: 2026-10-13T03:00Z (claim taken).
-- Status: CLAIMED.
+- Heartbeat: 2026-10-13T02:39Z (claim taken).
+- Status: DONE. Deliverable: `reports/jira-18539-18541-plain-language-review.md`. Verdict: none of the three is ready as written.
