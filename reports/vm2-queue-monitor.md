@@ -1008,3 +1008,11 @@ No action taken beyond this job.
 - Next claimable once idle: SOLR-13097 (rebase, force-with-lease at claim time), then SOLR-11939, per the buffer order.
 - 2026-10-13T05:00Z busy: SOLR-15386-dated-run running on vm2 (GradleWrapperMain pid 34738, claim 04:52Z, log still growing, no GATE END); no new claim, no heartbeat refresh due.
 - 2026-10-13T05:16Z busy: SOLR-12916-title-fix gate running on vm2 (queue tick, head d62ddfc246 on fork tip 50b1f4bcab, claim 04:55Z, at module-check, no GATE END yet); no new claim, no heartbeat refresh due.
+
+## 2026-10-13T05:32Z vm2 gate backlog coordinator
+
+- Finished: SOLR-12916-title-fix GREEN at d62ddfc246160c90f0f74a27bf6befff7664b684 (gate 05:01:11Z to 05:19:08Z; CA-R1-34 title only, focused QuerySenderListenerTest tests=2 failures=0 from fresh XML, module check rc 0). Receipt refreshed in receipts/SOLR-12916.md, draft changelog link re-pointed, job and claim DONE. Record on pr-prepare e05da95c40; fork solr-12916-submit verified at d62ddfc246 by ls-remote (the push itself reported up-to-date, so the fork tip already held that commit when the push ran).
+- Failed and action taken: none. No gate ended FAILED this pass.
+- Claimed: none new (busy). Gate SOLR-9091-title-fix is running on vm2 (queue started 05:19:08Z, head a596a39d2e, at focused-head; claim 05:00Z; no GATE END).
+- Gate state: busy with one gate, one at a time. Claim heartbeat under 50 min; no refresh due.
+- Next claimable once idle: SOLR-13097 (rebase, force-with-lease at claim time), then SOLR-11939, per the buffer order.
