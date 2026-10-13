@@ -9,3 +9,5 @@
 - Status: FAILED (gate at d81a77311773), not DONE.
 - Later run: head ee67d374219275907ef1b78e3d2b455b6a15e43f, GATE END 2026-10-12T23:41:00Z, log logs/vm2/queue-g12505-gate-20261012T232607Z.out. All legs rc=0 except the proof leg, rc=1 by content (expected IOException not thrown on pre-fix FetchStream). Not GREEN under the all-rc-0 rule; left for the main side. Fork not pushed.
 - Interrupted run: head ee67d37421, GATE START 2026-10-13T01:00:51Z, log logs/vm2/queue-g12505-gate-20261013T010051Z.out. Compile leg and proof leg completed (proof rc=1 by content, as above); the focused-head leg started 01:12Z and no further output was written, no Gradle process was alive at 01:38Z, and there is no GATE END. Not relaunched: the run executed tests, so the rule requires investigation before any relaunch. Next step for the main agent: decide whether the focused head leg should be re-run at ee67d37421 (vm2 would run it on the main agent's go-ahead).
+
+- 2026-10-13T16Z vm2 gate backlog coordinator: heartbeat at pickup of round 3 (assignments/pool-vm2-gate-backlog-round-3.md, item 1). Proof leg only per amendment 2; run queued as gates/g12505-proof-gate.sh.
