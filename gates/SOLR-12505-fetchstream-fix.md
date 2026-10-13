@@ -2,7 +2,7 @@
 
 - Branch: solr-12505-submit. Head: 5f20e1171bc890509d76e4f5f7defcc4fc8c102c (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-12505.md). Merge-base with main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm2 (gate backlog coordinator) at 1a1875d95f, 2026-10-13T16:33Z, for a full hardening gate at the new head. The round 3 proof-leg failure is classified as a test-fixture defect and fixed on the branch (see the 'Round 3 investigation' record below). Previous status: FAILED at the proof leg of round 3 (GATE END 2026-10-13T15:47:27Z).
+- Status: DONE 2026-10-13T16:49Z by vm2 (gate backlog coordinator). GATE GREEN at 1a1875d95f3680c20447006efc3c949c57f5135f (GATE END 2026-10-13T16:48:06Z; logs/vm2/queue-g12505-full-gate-*.out). Route validate. Receipt: receipts/SOLR-12505.md, section 'Gate at 1a1875d95f'. Draft: pr-drafts/streaming/SOLR-12505.md at the new head. Claim: claims/pool-vm2-gate-backlog-12505.md. Previous status: CLAIMED at 1a1875d95f after the round 3 proof-leg classification as a test-fixture defect.
 - Capability tags: gate.
 - Job type: branch-side fix on a gated branch, then the full hardening gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/streaming-convergence-round-1-response.md, item ST-R1-23 (verified there against the head code), with the register text in reports/streaming-convergence-round-1.md. The draft pr-drafts/streaming/SOLR-12505.md stays NOT CONVERGED until this job lands; the streaming convergence round 2 assignment re-checks the draft against the new head.
@@ -16,14 +16,14 @@
 
 ## Step checklist
 
-- [ ] fix implemented in FetchStream (escape or validate the `on=` field name; route and reason recorded here); test added to StreamDecoratorTest
-- [ ] tidy on the final tree; tree clean (GATE INVALID guard)
-- [ ] changelog parse
-- [ ] Error Prone compile (:solr:solrj-streaming)
-- [ ] proof leg: the new test on pre-fix head production (5f20e1171bc) fails for the premise reason, checked by content
-- [ ] focused tests at the new head: StreamDecoratorTest, counted from fresh JUnit XML
-- [ ] module check (:solr:solrj-streaming)
-- [ ] pushed plainly to solr-12505-submit; receipt refreshed; draft updated to the new head; job and claim DONE
+- [x] fix implemented in FetchStream (escape or validate the `on=` field name; route and reason recorded here); test added to StreamDecoratorTest
+- [x] tidy on the final tree; tree clean (GATE INVALID guard)
+- [x] changelog parse
+- [x] Error Prone compile (:solr:solrj-streaming)
+- [x] proof leg: the new test on pre-fix head production (5f20e1171bc) fails for the premise reason, checked by content
+- [x] focused tests at the new head: StreamDecoratorTest, counted from fresh JUnit XML
+- [x] module check (:solr:solrj-streaming)
+- [x] pushed plainly to solr-12505-submit; receipt refreshed; draft updated to the new head; job and claim DONE
 
 ## Amendment 1 record (vm2)
 
@@ -66,3 +66,8 @@
 - Fork push: solr-12505-submit fast-forwarded from 5f20e1171b to 1a1875d95f, carrying the three branch commits d81a773117 (validate route), ee67d37421 (cause-chain test) and 1a1875d95f (fixture). Push done under step 2(a) of the coordinator run, before the full gate at the new head.
 - Base check of the fixed test (FetchStream reverted to 5f20e1171bc, seed 12505C0FFEE12505, logs/vm2/queue-g12505-basecheck-20261013T162852Z.out): the test fails with the drain throwing java.io.IOException "--> ...solr: invalid query parser 'i' for query '{! df=a i q.op=OR cache=false } 0 1'", and the failing assertion is the cause-chain check for "invalid join field name [a i]". That is Content 1 of amendment 2: the pre-fix drain throws a server parser error without the validation text. The premise holds at base for the premise reason.
 - Route and reason are unchanged from amendment 1 (validate). Next: full hardening gate at 1a1875d95f, with the proof leg as amendment 2 specifies (reverted FetchStream, branch tests kept).
+
+## Full gate at 1a1875d95f3680c20447006efc3c949c57f5135f, 2026-10-13 (vm2)
+
+- changelog YAML parse rc=0; tidy rc=0, status clean afterward; Error Prone compile rc=0; proof leg rc=1 (Content 1, fresh XML at 16:43:29Z); focused StreamDecoratorTest 57 tests, 5 skipped, 0 failures (fresh XML at 16:45:27Z, seed 12505C0FFEE12505); module check rc=0.
+- Fork push: solr-12505-submit fast-forwarded from 5f20e1171b to 1a1875d95f3680c20447006efc3c949c57f5135f before the gate, under the coordinator's step 2(a) rule for a test-fixture defect. The gate ran at the pushed head.

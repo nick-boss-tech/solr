@@ -17,3 +17,5 @@
 - 2026-10-13T15:53ZZ vm2 gate backlog coordinator: proof leg re-run per amendment 2 (queue log logs/vm2/queue-g12505-proof-gate-20261013T154518Z.out). Failure "expected java.io.IOException to be thrown, but nothing was thrown" matches neither Content 1 nor Content 2. Stopped and recorded in gates/SOLR-12505-fetchstream-fix.md; not relaunched. Status: STOPPED, not DONE.
 
 - 2026-10-13T16:33Z vm2 gate backlog coordinator: re-claimed at 1a1875d95f. Round 3 proof-leg failure classified as a test-fixture defect (empty fixture, no batch sent); probe and base check recorded in gates/SOLR-12505-fetchstream-fix.md. Fix commit 1a1875d95f pushed as a fast-forward from 5f20e1171b (fork tip). Full hardening gate at the new head next. Status: CLAIMED by vm2 at 1a1875d95f.
+
+- 2026-10-13T16:49Z vm2 gate backlog coordinator: GATE GREEN at 1a1875d95f3680c20447006efc3c949c57f5135f (GATE END 16:48:06Z). Receipt refreshed (receipts/SOLR-12505.md, section 'Gate at 1a1875d95f'); job gates/SOLR-12505-fetchstream-fix.md DONE. Status: DONE by vm2 at 1a1875d95f3680c20447006efc3c949c57f5135f. Draft pr-drafts/streaming/SOLR-12505.md re-pointed in the same push.
