@@ -178,6 +178,67 @@ public class CreateRoutedAliasTest extends SolrCloudTestCase {
   }
 
   @Test
+  public void testV2DimensionalTwoRouters() throws Exception {
+    final String aliasName = getSaferTestName();
+    assertSuccess(
+        postDimensionalAliasV2(
+            aliasName,
+            "{\n"
+                + "      \"type\": \"category\",\n"
+                + "      \"field\": \"cat_s\",\n"
+                + "      \"maxCardinality\": 20\n"
+                + "    }"));
+
+    assertTrue(cluster.getZkStateReader().getAliases().hasAlias(aliasName));
+    Map<String, String> meta =
+        cluster.getZkStateReader().getAliases().getCollectionAliasProperties(aliasName);
+    assertEquals("Dimensional[time,category]", meta.get("router.name"));
+    assertEquals("evt_dt", meta.get("router.0.field"));
+    assertEquals("cat_s", meta.get("router.1.field"));
+  }
+
+  @Test
+  public void testV2DimensionalCategoryRouterWithoutMaxCardinality() throws Exception {
+    final String aliasName = getSaferTestName();
+    assertFailure(
+        postDimensionalAliasV2(
+            aliasName,
+            "{\n" + "      \"type\": \"category\",\n" + "      \"field\": \"cat_s\"\n" + "    }"),
+        "router.maxCardinality must be a valid Integer");
+
+    assertFalse(cluster.getZkStateReader().getAliases().hasAlias(aliasName));
+  }
+
+  private Request postDimensionalAliasV2(String aliasName, String categoryRouterJson) {
+    final var jetty = cluster.getRandomJetty(random());
+    final String baseUrl = jetty.getBaseUrl().toString();
+    final String aliasJson =
+        "{\n"
+            + "    \"name\": \""
+            + aliasName
+            + "\",\n"
+            + "    \"routers\" : [{\n"
+            + "      \"type\": \"time\",\n"
+            + "      \"field\": \"evt_dt\",\n"
+            + "      \"start\":\"NOW/DAY\",\n"
+            + "      \"interval\":\"+2HOUR\",\n"
+            + "      \"maxFutureMs\":\"14400000\"\n"
+            + "    }, "
+            + categoryRouterJson
+            + "],\n"
+            + "    \"create-collection\" : {\n"
+            + "      \"config\":\"_default\",\n"
+            + "      \"numShards\": 1\n"
+            + "    }\n"
+            + "  }\n";
+    return jetty
+        .getSolrClient()
+        .getHttpClient()
+        .POST(baseUrl + "/____v2/aliases")
+        .body(new StringRequestContent("application/json", aliasJson, StandardCharsets.UTF_8));
+  }
+
+  @Test
   public void testV1() throws Exception {
     final String aliasName = getSaferTestName();
     Instant start = Instant.now().truncatedTo(ChronoUnit.HOURS); // mostly make sure no millis
