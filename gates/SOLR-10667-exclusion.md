@@ -2,7 +2,7 @@
 
 - Branch: solr-10667-submit. Head: 1e3f022552be4d281a020e015f4c8c05ce4eec6c (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-10667.md). Merge-base with main: cabedd1d968059215188f4e7563fb303241899ed.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (gate backlog coordinator) at 2026-10-13T02:33:47Z; claims/pool-vm2-gate-backlog-10667-exclusion.md.
 - Capability tags: gate.
 - Job type: branch change on a gated branch (adopted decision), then a full gate at the new head, push, receipt refresh, and the draft rewrite the change makes possible. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/cli-bin-packaging-round-1.md owner decision 10 (line 129: exclude `solrclient/**`, recommended), corroborated in reports/cli-bin-packaging-round-1-s5.md (lines 52, 58, 110), adopted under the decision default and recorded in reports/cli-convergence-round-1-response.md (CLI-R1-04, with CLI-R1-05 riding the same branch work). The current head copies each module's `example` directory wholesale, so the `solrclient/` folder the Learning To Rank build writes into `solr/modules/ltr/example` (its `.gitignore` names it; the LTR build's copyPythonClientToExample writes it) would ship whenever it exists in the working tree, and the distribution would depend on local working-tree state.
