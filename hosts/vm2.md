@@ -10,4 +10,4 @@
   - Tidy: root `tidy` on the same tip, BUILD SUCCESSFUL in 3m 15s, exit 0, tree left clean (no drift). Log on this host: /workspace/gates/logs/vm2/solr-17987-tidy.log.
   - Disk effect: the run pulled Gradle's caches into `/` (free space fell from 4.5G to 3.8G). Gate runs must set GRADLE_USER_HOME to a path under /workspace.
 - Known history: on 2026-10-08 this host's open-file limit was 1024, which blocked full gates. That is resolved on 2026-10-10.
-- Heartbeat: 2026-10-10 17:24 UTC (claim of pool-vm2-onboarding-checks).
+- Heartbeat: 2026-10-13 18:50 UTC (gate backlog coordinator queue pass). Onboarding claim of pool-vm2-onboarding-checks: 2026-10-10 17:24 UTC.

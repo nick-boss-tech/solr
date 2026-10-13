@@ -1232,3 +1232,13 @@ No action taken beyond this job.
 - Housekeeping: /workspace/gates/vm2-coord-wt has a stale interactive rebase from 14:32 (rebase-merge directory, no git process). Left untouched; the coordinator works from /workspace/gates/vm2-coord-push2 until that state is cleared by its owner.
 
 - 2026-10-13T18:40Z vm2 gate backlog coordinator, update: SOLR-18010 permission fail-before and multi-auth G1 and G2 DONE at 2b5ad801c9 (receipts/SOLR-18010.md, section "Review round 1 checks (G1 and G2)"; G2 MultiAuthPluginTest 6 of 6; G1 reverted run reproduces the 0640 expected and 0644 observed). Claim closed for G1 and G2. No gate running on vm2 now. Next claimable job: none open for vm2; G3 waits for the review patch. Buffer still below target of 3; restock needs the main side.
+
+## 2026-10-13T18:49Z vm2 gate backlog coordinator, queue pass
+
+- Finished: none new. Gate state: no gate running on vm2 (no Gradle or runner process). The last gate, SOLR-18010 G1 and G2, ended 18:39Z.
+- Closed on verification, records only, no runs: SOLR-18010 permission fail-before claim marked DONE for G1 and G2; SOLR-12998 job status set to DONE per the 2026-10-10 main decision (GREEN at 62a17a116b5); queryComponent-real-exit-shape-premise closed as superseded by the vm1 real-exit run.
+- Failed, action taken: SOLR-16013 interrupt fix (ecda7b862b, test-fixture defect) and SOLR-18010 review-r1 patch (e99be67c9a, test-premise defect) each have a next step recorded with the review coordinator (assignments/pool-vm2-16013-head-failure-fixture-patch.md and assignments/pool-vm2-18010-review-r1-fail-before-patch.md). The review side's routes wait on Nick's go-ahead before any push; vm2 re-gates after the push. Nothing relaunched.
+- pr-drift round 1 records: parked for the main agent. Item (a) passed on the SOLR-18280 head rerun (25 of 25); items (b) and (c) need the main side to quote the sentences named for cutting.
+- Claimed: none. No open job is claimable by vm2.
+- Next claimable job: none. Buffer at 0 unclaimed gate jobs against a target of 3; reasons are in assignments/pool-shared-gate-backlog-buffer.md under the 2026-10-13 restock pass. The shortfall needs a main-side decision on SOLR-18391 solr-18391-submit and on the held items; no Nick decision is needed for the shortfall itself.
+- Housekeeping: /workspace/gates/vm2-coord-wt still has a stale interactive rebase (rebase-merge, from 14:32); left untouched. This pass used /workspace/gates/vm2-coord-push2.

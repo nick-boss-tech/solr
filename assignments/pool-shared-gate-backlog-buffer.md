@@ -104,3 +104,14 @@ After the SOLR-16013 head failure (parked, with its fixture patch assigned in as
 - SOLR-18541-score-only-exit-input (gates/SOLR-18541-score-only-exit-input.md): premise run on the merge-base, no push. Unclaimed. Overlap noted: the vm1 real-exit premise (claims/pool-vm1-combinedquerycomponent-real-exit-premise.md) answered related questions on the same seed; the claimant reads that record first and records any overlap in the job.
 
 Not stocked, with the reason: the three review-r1 patch jobs (gates/SOLR-18010-review-r1-patch.md, SOLR-18539-review-r1-patch.md, SOLR-18541-review-r1-patch.md) are awaiting the owner-patch round 3 (claims/pool-new-prs-owner-patch-round-3.md, ACTIVE), which moves the SOLR-18541 and SOLR-18010 submit branches and posts its own gate jobs at the new heads. Gating the review-r1 heads now would gate superseded commits. queryComponent-real-exit-shape-premise is DONE by vm1 (claims/pool-vm1-combinedquerycomponent-real-exit-premise.md), so its job file is stale.
+
+## Restock pass, 2026-10-13 (vm2 gate backlog coordinator, 2026-10-13T18:49Z)
+
+Unclaimed gate jobs in the buffer: 0 against a target of 3. Audit: all 328 fork `solr-*-submit` tips (ls-remote) were checked against receipts/ and gates/, and each DONE gate head against its fork tip. Stocked: none. Considered and not stocked, with the reason:
+
+- SOLR-18391 `solr-18391-submit` at 3000eeede7 (PR #4997 draft branch): tidy, compile and check recorded 2026-10-04, no focused tests, no gate at this head. A main-side call is needed on whether that branch is still wanted; the live SOLR-18391 gate is at 327ca7b722 (solr-18391-graceful-create-submit).
+- Suggester branches 9227, 9968, 10937, 11844, 14171, 17215, 17393 and 9637: gated or held in the main-side ledger (test-receipts-63-branches.md), outside this buffer.
+- SOLR-10252 (held); SOLR-15823 (main-side decision); SOLR-18541-review-r1-patch and SOLR-18010 G3 (waiting on the review patch round); SOLR-16013-interrupt-fix (waiting on the review patch and Nick's go-ahead).
+- SOLR-18541-score-only-exit-input is claimed by vm1 (claims/pool-vm1-gate-18541-score-only-exit-input.md).
+
+Closed on verification in this pass: SOLR-12998 (the 2026-10-10 decision cleared the proof-leg block; GREEN at 62a17a116b5) and queryComponent-real-exit-shape-premise (superseded by the vm1 real-exit run). The shortfall is recorded here and in reports/vm2-queue-monitor.md for the main side.

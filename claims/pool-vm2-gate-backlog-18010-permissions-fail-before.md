@@ -7,3 +7,4 @@
 - Heartbeat: 18:28Z by vm2.
 - Status: CLAIMED.
 - 18:39Z by vm2 (gate backlog coordinator): G1 and G2 DONE (receipts/SOLR-18010.md, section "Review round 1 checks (G1 and G2)"; gate file updated). G3 remains owed after the review patch lands and is not claimed here. Status: DONE for G1 and G2.
+DONE for G1 and G2 at 2b5ad801c9 (2026-10-13T18:50Z, vm2 on verification of receipts/SOLR-18010.md, section "Review round 1 checks (G1 and G2): head 2b5ad801c9"). G3 stays owed after the review patch lands; it is not claimed here.

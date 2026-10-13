@@ -1,7 +1,7 @@
 # Premise job: what does a real timeAllowed exit send from a plain QueryComponent shard?
 
 - Code under test: unmodified main `d76fc14b9857e77b830d7a82514b28c523a239c2`, `QueryComponent`, `SearchHandler.shortCircuitedResults`, and `QueryComponent.mergeIds`. No branch, no production edit.
-- Status: OPEN, unclaimed.
+- Status: CLOSED as superseded (2026-10-13, vm2 on verification): the real timeAllowed exit question is covered by the vm1 run in claims/pool-vm1-combinedquerycomponent-real-exit-premise.md (DONE 2026-10-13, seed C0FFEE42C0FFEE42). Not claimable.
 - Capability tags: premise-run.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
 - Source: `reports/four-new-prs-strong-review-round-1.md`, section SOLR-18539, the case analysis for the exactness rule. The rule in `review-r1-solr-18539` (any skipped shard clears numFoundExact) rests on the shard shapes below, read from the code. This job turns the reading into a run, the way `gates/combinedquerycomponent-real-exit-premise.md` did for the combined component.
