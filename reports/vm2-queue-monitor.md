@@ -942,3 +942,12 @@ No action taken beyond this job.
 - Buffer: 2 unclaimed gate jobs (SOLR-12916-title-fix, SOLR-17680-message-regate), below the target of 3. Restock still owed; next run checks receipts against fork tips first.
 - Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
 - 2026-10-13T02:46Z vm2 gate backlog coordinator: busy. SOLR-14919 re-gate at 8f1f4ef91e running (started 02:41:55Z, at compile-errorprone, no GATE END; log logs/vm2/queue-g14919-gate-20261013T024155Z.out). Claim heartbeat 02:20Z, under 50 min, no refresh. Nothing launched or recorded; next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
+
+## 2026-10-13T03:01Z vm2 gate backlog coordinator
+
+- Finished: none this run.
+- Failed and action taken: none; no GATE END in logs/vm2/10667-excl-*.log.
+- Claimed: none new. Busy with the SOLR-10667-exclusion gate (claim 02:33:47Z, heartbeat 02:37Z, Gradle pid 371 started 03:00Z, proof-assemble step writing logs/vm2/10667-excl-proof.log). Claim heartbeat under 50 min, no refresh.
+- Gate state: busy, one gate at a time on vm2.
+- Buffer: 2 unclaimed gate jobs (SOLR-12916-title-fix, SOLR-17680-message-regate), below the target of 3. Restock still owed; next run checks receipts against fork tips first.
+- Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
