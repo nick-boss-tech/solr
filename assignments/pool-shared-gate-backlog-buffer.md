@@ -123,3 +123,7 @@ Unclaimed gate jobs in the buffer: 0 against a target of 3. Checked: every vm2 g
 Stocked: none. Not stocked, with the reason:
 - SOLR-18541-score-only-exit-input: vm1 holds claims/pool-vm1-gate-18541-score-only-exit-input.md, last heartbeat 17:10Z and not DONE. Not taken over: a gate takeover needs the log state read on vm1, which vm2 cannot read. vm1 to confirm or release.
 - pr-drift round 1 records: parked for the main agent on items (b) and (c).
+
+## Restock pass, 2026-10-13T20:03Z (vm2 gate backlog coordinator)
+
+Unclaimed gate jobs in the buffer: 0 against a target of 3. Gate files re-read against the 2026-10-13 build queue: every job on that list is DONE in its gate file, so there is no open job to claim. Stocked: none. Held, not claimable by vm2: SOLR-18541-review-r1-patch and SOLR-18541-score-only-exit-input (vm1 claims at 17:10Z with no heartbeat since; the log is on vm1, so the takeover check cannot be made from vm2; vm1 to confirm or release); pr-drift round 1 records (parked for the main agent); SOLR-16013-interrupt-fix (push waits for Nick's go-ahead); SOLR-18010 review round 1 patch (review coordinator owns the test-premise patch).

@@ -13,3 +13,4 @@
 - Status: ACTIVE.
 - Heartbeat: 2026-10-11T20:21Z (UTC) (queue check: round 1 and round 2 have no claimable vm2 job; no gradle process; no open vm2 job claim; coordinator heartbeat refreshed, last one was overdue).
 - Heartbeat: 2026-10-12T02:16Z (UTC) (queue check: vm2 idle, no Gradle process; SOLR-6711 FAILED and parked; SOLR-5589, SOLR-10234, SOLR-8554 verified DONE with receipts and fork tips. Claimed SOLR-1877 next.)
+- Heartbeat: 2026-10-13T20:03Z (queue check: vm2 idle, no Gradle process; SOLR-18010 review round 1 G3 DONE at 19:52Z; buffer unclaimed gate jobs 0 against target 3, no stockable candidate; vm1 SOLR-18541 claims stale since 17:10Z and left to vm1; coordinator heartbeat refreshed, last one was 2026-10-12T02:16Z).

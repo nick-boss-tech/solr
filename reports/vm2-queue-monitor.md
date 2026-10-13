@@ -1296,3 +1296,13 @@ No action taken beyond this job.
 - Gate state: idle.
 - Next claimable job: none. Unclaimed buffer gate jobs: 0 against a target of 3. The restock audit of 729 fork refs found no stockable candidate (recorded in the buffer assignment). Main side: decide pr-drift items (b) and (c), the SOLR-16013 push go-ahead, and the holds (SOLR-15823, SOLR-10252), or post refill jobs.
 - Housekeeping: an interactive rebase left in /workspace/gates/vm2-coord-wt (pick 9745a20088, content already on origin as 34675b1475) was left in place; this pass wrote from /workspace/gates/vm2-coord-pass.
+
+## 2026-10-13T20:03Z vm2 gate backlog coordinator, queue pass
+
+- Finished: none new. SOLR-18010 review round 1 leg G3 GREEN at e99be67c9a6f was already recorded DONE at 19:52Z (receipt, gate file, claim) and is on origin/pr-prepare at d5b9886379. The SOLR-18280 head failure from the 12:55Z pr-drift run is recorded as a flake: the 18:49Z record run passed 25 of 25.
+- Failed, action taken: none new. Still FAILED with a next step recorded: SOLR-16013-interrupt-fix (fixture patch prepared; push waits for Nick's go-ahead; not relaunched) and SOLR-18010 review round 1 patch (review coordinator owns the test-premise patch).
+- Claimed: none. vm2 idle: no GradleWrapperMain process and no open vm2 gate claim with a heartbeat under 60 minutes. Coordinator role heartbeat refreshed.
+- Gate state: idle.
+- Next claimable job: none. Buffer unclaimed gate jobs: 0 against a target of 3. The 2026-10-13 build queue in material/coordinator-handoff.md is out of date: every job on it is DONE in its gate file (checked this pass). Main side: confirm that and refresh the list. Decisions waiting on the main side: pr-drift round 1 records items (a) to (c), the SOLR-16013 push go-ahead, SOLR-15823 and SOLR-10252 holds, the SOLR-18391 branch 3000eeede7 call, and a vm1 confirm or release of the two SOLR-18541 claims. Or post refill jobs.
+- Flag for the main side: the pool-pr-prepare-tip-* and pool-openings-slate claims carry heartbeat stamps of 20:10Z and 20:45Z, ahead of the clock at this pass. Not acted on.
+- Housekeeping: a stale interactive rebase state (dated 14:32Z, empty todo) remains in the coordination worktree. Left in place; the worktree was reset to origin/pr-prepare for this pass.
