@@ -1,7 +1,7 @@
 title: >
   IndexFetcher no longer treats the files of commits kept by the deletion policy
-  (maxCommitsToKeep > 1) as unused, which made replicas wait 30 seconds and then fall back to a
-  full index copy on every replication.
+  (maxCommitsToKeep > 1) as unused, which made a replica wait 30 seconds and then fall back to a
+  full index copy on each replication that reaches the check.
 type: fixed
 authors:
   - name: Nick Shanin
