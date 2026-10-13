@@ -115,3 +115,11 @@ Unclaimed gate jobs in the buffer: 0 against a target of 3. Audit: all 328 fork 
 - SOLR-18541-score-only-exit-input is claimed by vm1 (claims/pool-vm1-gate-18541-score-only-exit-input.md).
 
 Closed on verification in this pass: SOLR-12998 (the 2026-10-10 decision cleared the proof-leg block; GREEN at 62a17a116b5) and queryComponent-real-exit-shape-premise (superseded by the vm1 real-exit run). The shortfall is recorded here and in reports/vm2-queue-monitor.md for the main side.
+
+## Restock pass, 2026-10-13 19:57Z (vm2 gate backlog coordinator)
+
+Unclaimed gate jobs in the buffer: 0 against a target of 3. Checked: every vm2 gate claim under claims/ (none live; SOLR-18010 review round 1 leg G3 DONE 19:52Z), SOLR-12505 (DONE, GREEN at 1a1875d95f), and every fork ref that no receipt names (ls-remote, 729 refs). The ungated submit tips are all held, parked, decided, or outside this buffer: SOLR-10252 (held), SOLR-16013 (parked, fixture patch waits for Nick's go-ahead), and the suggester branches 9227, 9637, 9968, 10937, 11844, 14171, 17215, 17393 (main-side ledger).
+
+Stocked: none. Not stocked, with the reason:
+- SOLR-18541-score-only-exit-input: vm1 holds claims/pool-vm1-gate-18541-score-only-exit-input.md, last heartbeat 17:10Z and not DONE. Not taken over: a gate takeover needs the log state read on vm1, which vm2 cannot read. vm1 to confirm or release.
+- pr-drift round 1 records: parked for the main agent on items (b) and (c).

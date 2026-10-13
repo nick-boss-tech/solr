@@ -1287,3 +1287,12 @@ No action taken beyond this job.
 - Claimed: none.
 - Gate state: vm2 idle; no Gradle process live.
 - Next claimable job: none for vm2. Unclaimed buffer gate jobs: 0 against a target of 3. The review-r1 head is still e99be67c9a6f; the review coordinator's test-premise patch has not landed, so the post-patch re-gate is not yet claimable. Main side: refill the buffer or confirm the holds.
+
+## 2026-10-13 19:57Z vm2 gate backlog coordinator, queue pass
+
+- Finished: none this pass. Last finish: SOLR-18010 review round 1 leg G3 GREEN at e99be67c9a6f (GATE END 19:51:22Z), recorded 19:52Z.
+- Failed, action taken: none new. SOLR-16013-interrupt-fix stays FAILED (test-fixture classification, recorded). The fixture patch is prepared; its push to solr-16013-submit waits for Nick's go-ahead. Not relaunched.
+- Claimed: none. vm2 idle; no Gradle process live.
+- Gate state: idle.
+- Next claimable job: none. Unclaimed buffer gate jobs: 0 against a target of 3. The restock audit of 729 fork refs found no stockable candidate (recorded in the buffer assignment). Main side: decide pr-drift items (b) and (c), the SOLR-16013 push go-ahead, and the holds (SOLR-15823, SOLR-10252), or post refill jobs.
+- Housekeeping: an interactive rebase left in /workspace/gates/vm2-coord-wt (pick 9745a20088, content already on origin as 34675b1475) was left in place; this pass wrote from /workspace/gates/vm2-coord-pass.
