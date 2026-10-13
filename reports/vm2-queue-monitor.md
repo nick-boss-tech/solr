@@ -1018,3 +1018,5 @@ No action taken beyond this job.
 - Next claimable once idle: SOLR-13097 (rebase, force-with-lease at claim time), then SOLR-11939, per the buffer order.
 - 2026-10-13T05:45Z busy: SOLR-9155-logging-regate running on vm2 (GradleWrapperMain pid 50315, started 05:37:18Z, at compile-errorprone, no GATE END); claim heartbeat 05:07Z, 38 min old, no refresh due; no new claim.
 - 2026-10-13T06:00Z busy: SOLR-5813/12991 dated focused runs running on vm2 (queue pid 54544, started 05:55:38Z, at focused-head, no GATE END; claim solrcloud-dated-round-2 05:36Z, 24 min old, no refresh due); SOLR-15035 base run queued behind it (claim 05:48Z); no new claim.
+
+- 2026-10-13T06:16Z busy: SOLR-15035-base-run running on vm2 (GradleWrapperMain, queue started 06:07:52Z; base focused leg already BUILD FAILED as the premise expects, now at focused-banked). Claim 05:48Z, 28 min old, no refresh due. No GATE END awaiting recording: SOLR-5813 and SOLR-12991 batch recorded at 57b8b6b200. No new claim.
