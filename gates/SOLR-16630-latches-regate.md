@@ -1,7 +1,7 @@
 # Gate job: SOLR-16630 re-gate after the latch change
 
 - Branch: solr-16630-submit. Head: `a31707acfdb7f0f83eb47e17435c1fe4ccf2ffda` (fork tip). Previous gated head: `9c77a4db09d7a890f62dc9a9ffb2bf5613245da7`.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T14:37Z; claim claims/pool-vm2-gate-backlog-16630.md. Queued as /workspace/gates/g16630-latches-gate.sh.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: full focused gate at the new head. The change is one file in the test: one `Thread.sleep` in `testNRTRestart` is replaced by a bounded wait on the existing `addDone` latch (`addDone.await(2, MINUTES)`).
