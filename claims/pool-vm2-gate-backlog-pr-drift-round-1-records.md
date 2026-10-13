@@ -10,3 +10,4 @@
 - Capability tags: gate (record runs only).
 - Runner: gates/g-prdrift-gate.sh, worktree /workspace/gates/prdrift-records (detached), logs gates/logs/vm2/prdrift-*.log and XML copies under gates/logs/vm2/prdrift-xml/.
 - Status: CLAIMED, not DONE. Base-leg failures are expected by content and are recorded, not relaunched.
+- Failure, 2026-10-13T09:45Z: item (b) base leg `7394-base` rc=1 at compileTestJava (head test tree does not compile against base production; no tests ran). Recorded in the job file; not relaunched; left for the main side.
