@@ -2,7 +2,7 @@
 
 - Branch: solr-6430-submit. Head: c0c6e5dd21c4eee60257db6b85b2fec7f01489b7 (live tip, verified by ls-remote at posting, 2026-10-11; this is the packaged head, GREEN for the docs-shaped gate per receipts/SOLR-6430.md). Merge-base with main: cabedd1d968059215188f4e7563fb303241899ed.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: DONE 2026-10-13 (vm2, gate backlog coordinator). Gate GREEN at 78cddfb520d63069353dc95d42853cec779057ce; pushed to solr-6430-submit as a fast-forward from c0c6e5dd21c4.
 - Capability tags: gate.
 - Job type: branch commit deleting the changelog fragment (an adopted owner decision), then the docs-shaped gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/build-docs-convergence-round-1-response.md, item BD-R1-13, carrying the build-docs round 1 owner decision (drop the fragment, recommended; recorded in reports/build-docs-convergence-round-1.md at BD-R1-13). The response record names the file `changelog/unreleased/SOLR-6430.yml`; the fragment actually on the branch at the head above is `changelog/unreleased/SOLR-6430-doc-numeric-missing-sort.yml`, and that is the file this job deletes.
@@ -14,7 +14,7 @@
 
 ## Step checklist
 
-- [ ] changelog/unreleased/SOLR-6430-doc-numeric-missing-sort.yml deleted; delta against c0c6e5dd21c4 is that deletion only
-- [ ] changelog validation (logchangeLint) at the new head, exit 0
-- [ ] reference guide local build at the new head passes; generated field-type page still contains the missing-value explanation
-- [ ] pushed plainly to solr-6430-submit; receipt refreshed noting the drop; draft Changelog line deleted and its lint sentence re-verified; job and claim DONE
+- [x] changelog/unreleased/SOLR-6430-doc-numeric-missing-sort.yml deleted; delta against c0c6e5dd21c4 is that deletion only
+- [x] changelog validation (logchangeLint) at the new head, exit 0
+- [x] reference guide local build at the new head passes; generated field-type page still contains the missing-value explanation
+- [x] pushed plainly to solr-6430-submit; receipt refreshed noting the drop; draft Changelog line deleted and its lint sentence re-verified; job and claim DONE

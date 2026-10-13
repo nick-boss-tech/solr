@@ -6,4 +6,6 @@
 - Clone rather than linked worktree: Antora rejects a linked worktree's .git pointer (see receipts/SOLR-6430.md), so the docs build runs in a shared clone.
 - Capability tags: implementation (one deletion), gate (docs shape).
 - Runner: gates/g6430-gate.sh, log gates/logs/vm2/6430-*.log.
-- Status: CLAIMED, not DONE.
+- Status: DONE (see the line above).
+
+- 2026-10-13T09:31Z DONE by vm2 (gate backlog coordinator): gate GREEN at 78cddfb520d63069353dc95d42853cec779057ce (docs shape, no Java tests). Deliverables: gates/SOLR-6430-fragment-drop.md, receipts/SOLR-6430.md (new section), pr-drafts/build-docs/SOLR-6430.md (Changelog line deleted, lint sentence re-pointed). Fork push c0c6e5dd21c4 to 78cddfb520d6 follows this commit.
