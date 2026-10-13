@@ -1066,3 +1066,4 @@ No action taken beyond this job.
 - Gate state: no Gradle process running; no gate open on vm2 claims with a GATE END unrecorded. /workspace/gates/solr-18391 is shown as prunable by git; left in place.
 - Queue: 4 unclaimed gate jobs (SOLR-5011-narrowing, SOLR-6430-fragment-drop, combinedquerycomponent-real-exit-premise, pr-drift-round-1-run-records). Buffer target of 3 is met; no restock.
 - Next claimable once vm2 is idle: gates/SOLR-5011-narrowing.md, then gates/SOLR-6430-fragment-drop.md. Check claims/ at claim time.
+- 2026-10-13T08:36Z busy: SOLR-17680 claim BLOCKED at 08:19Z (no Gradle process, no gate open, no unrecorded GATE END), so vm2 reads busy until 09:19Z. The owner decision on the maxCardinality negative case is still open; no claim taken. Next claimable once idle: gates/SOLR-5011-narrowing.md (claim DONE on 2026-10-10 was for the earlier job), then gates/SOLR-6430-fragment-drop.md; check claims/ at claim time.
