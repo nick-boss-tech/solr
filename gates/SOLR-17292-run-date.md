@@ -1,7 +1,7 @@
 # Gate job: SOLR-17292 dated run for the record
 
 - Branch: solr-17292-submit. Head: `f614a42fbc8046e47cb7ed216f6b52b8a01f594c` (receipts/SOLR-17292.md, GATE GREEN at the live tip).
-- Status: OPEN, unclaimed. Claim before work: `claims/pool-vm2-gate-backlog-17292-run-date.md`.
+- Status: DONE 2026-10-13T16:13Z by vm2 (gate backlog coordinator). Outcome B: focused run at the head, TestPerReplicaStates 4 of 4 from fresh JUnit XML, recorded in the "Dated run of record" section of receipts/SOLR-17292.md. Claim: claims/pool-vm2-gate-backlog-17292-run-date.md.
 - Capability tags: gate. Intended host: vm2, or vm1 if vm2 is busy. Windows never claims build work.
 - Why: the receipt records the re-gate as finished 2026-10-10, taken from the main side's receipts ledger and takeover log. It gives no run date of its own. The batch B review (`reports/solrcloud-ready-review-batch-b-round-1.md`, SOLR-17292 section) held the ticket on that gap. The draft's Proof cannot cite a run date until a dated run is recorded.
 - Job type: record only. No branch change, no fork push, no PR touched.
@@ -20,8 +20,8 @@ TestPerReplicaStates 4 of 4 at `f614a42fbc8`, with a dated run. A count other th
 
 ## Step checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] gate log located, with its path recorded
-- [ ] outcome A (dated log copied) or outcome B (focused run with fresh JUnit XML)
-- [ ] receipt section "Dated run of record" written in receipts/SOLR-17292.md
-- [ ] job and claim DONE
+- [x] head confirmed by ls-remote
+- [x] gate log located, with its path recorded (no g17292-regate log on vm2)
+- [x] outcome A (dated log copied) or outcome B (focused run with fresh JUnit XML): outcome B
+- [x] receipt section "Dated run of record" written in receipts/SOLR-17292.md
+- [x] job and claim DONE
