@@ -1,10 +1,10 @@
 # Pool assignment: strong review of the four draft PRs, round 2 (re-review after the gates)
 
-Capability tags: `review`. Intended host: Windows. Do not start until the gate jobs below are DONE or the owner says to proceed on a subset. This assignment is self-contained for a reviewer joining cold; read `reports/four-new-prs-strong-review-round-1.md` first.
+Capability tags: `review`. Intended host: Windows. Do not start until the gate jobs below are DONE or the owner says to proceed on a subset. This assignment is self-contained for a reviewer joining cold; read `reports/four-new-prs-strong-review-round-1.md` (the canonical round 1 report) and then `reports/four-new-prs-strong-review-round-1-windows-addendum.md` (a second, independent review of the same PRs, with a table of where the two differ).
 
 ## Context
 
-Round 1 returned SATISFIED for #5116 (SOLR-18540) and NOT SATISFIED for #5115 (SOLR-18539), #5117 (SOLR-18541) and #5118 (SOLR-18010). Code findings were written as patches on three review branches and posted as gate jobs. Wording findings were applied to the four live PR bodies and the drafts in `pr-drafts/`.
+Round 1 returned SATISFIED for #5116 (SOLR-18540) and NOT SATISFIED for #5115 (SOLR-18539), #5117 (SOLR-18541) and #5118 (SOLR-18010), in both reviews. The addendum wrote the code findings as patches on three review branches and posted them as gate jobs. Wording findings were applied to the drafts in `pr-drafts/` by both reviews and to the four live PR bodies by the addendum. The two reviews disagree on one rule: whether a skipped shard that reports an exact zero clears `numFoundExact` (canonical report: no; addendum: yes). The `QueryComponent` settling run below decides it; the patch branches follow whichever the run supports.
 
 ## Inputs to wait for
 
@@ -15,6 +15,8 @@ Round 1 returned SATISFIED for #5116 (SOLR-18540) and NOT SATISFIED for #5115 (S
 | #5118 patch gate | `gates/SOLR-18010-review-r1-patch.md` | `review-r1-solr-18010` at `e99be67c9a6fe15f86306104843a30b35196f159` |
 | Plain `QueryComponent` real-exit shape | `gates/queryComponent-real-exit-shape-premise.md` | none |
 | #5118 symlink and bind-mount semantics | `gates/SOLR-18010-replace-semantics-premise.md` | none |
+| #5118 fail-before value, `MultiAuthPluginTest`, copy-failure log level, bind mount (G1 to G4b) | `gates/SOLR-18010-permissions-fail-before-and-multiauth.md` (canonical report) | none, or `review-r1-solr-18010` for G3 |
+| #5117 score-only exit input | `gates/SOLR-18541-score-only-exit-input.md` (canonical report) | none |
 
 ## Work
 

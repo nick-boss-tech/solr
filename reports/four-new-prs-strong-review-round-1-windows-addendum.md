@@ -1,4 +1,27 @@
-# Strong review of the four new draft PRs, round 1
+# Strong review of the four new draft PRs, round 1: Windows host addendum
+
+**Read `reports/four-new-prs-strong-review-round-1.md` first.** That is the canonical report for this assignment. Its claim (`claims/pool-pr-prepare-tip-39efc73-round-1.md`, pushed at `46ff7895f10`) landed before mine, so under first-push-wins mine stands down. I did not check the claims folder before starting, and the two reviews ran at the same time without knowing about each other. This file is the second, independent review of the same four PRs, kept whole instead of discarded, because it adds work the canonical report does not have: three patches on review branches with gate jobs, two settling-run jobs, test-by-test tables, and edits that were applied to the live PR bodies.
+
+The two reviews agree on every verdict: #5116 SATISFIED; #5115, #5117 and #5118 NOT SATISFIED. They agree on the main findings: the exactness flag next to a skipped shard, the missing-entry crash in #5117 as a separate follow-up, keeping the union for `maxHitsTerminatedEarly`, the permission-copy log level, the undisclosed file replacement in #5118, and the 0644 fail-before value.
+
+## Where the two reviews differ
+
+| Point | Canonical report | This addendum | What settles it |
+|-------|------------------|---------------|-----------------|
+| Exactness rule for a skipped shard (#5115) | Option B: clear when the skipped shard reported hits **or an inexact count**; a skipped shard with an **exact zero** leaves the flag alone. | Clear on **any** skipped shard. `SearchHandler.shortCircuitedResults` sends an empty list (numFound 0, exact by default) for a shard that stopped before collecting anything, so a zero with an exact flag is the common timeout shape and carries no information. | `gates/queryComponent-real-exit-shape-premise.md` (plain `QueryComponent`, not yet run). The combined component's run already shows the analogous shape. |
+| Exactness rule (#5117) | Clear on `docs == null`, hits, or an inexact count. | Clear on any skipped shard. | Same job, plus `gates/SOLR-18541-score-only-exit-input.md` from the canonical report. |
+| What a patch is | Described, not written. | Written and pushed on three review branches, with gate jobs. | Gates. |
+| #5118 `0644` | Blocking: the value cannot come from the code; gate G1. | Same observation (stated as a contradiction in the body); the Choice no longer repeats the number. The Proof line that carries it is unchanged and, per the canonical report, must not ship as written. | `gates/SOLR-18010-permissions-fail-before-and-multiauth.md` G1. |
+| #5118 `MultiAuthPluginTest` | Found: runs the changed write path on every edit and is not in the focused run (G2). | **Missed.** Adopt G2. | G2. |
+| Live bodies | Not edited (its round forbade it). | Edited and read back (see below). | Owner. |
+
+If the settling run for `QueryComponent` shows that a real early-exit shard reports a non-zero hit count, the canonical report's Option B is enough and my patch is wider than needed (the zero-hit test flips back). If it shows zero hits with an exact flag, Option B misses the common shape.
+
+## What I changed on GitHub
+
+Four live PR bodies were edited with the REST endpoint (`gh pr edit` fails on this token's scopes) and each was read back and compared with the draft on this branch. The four edits were small: #5115 one Proof sentence; #5116 three sentences; #5117 the skip sentence, a Choice sentence and the Limits paragraph; #5118 the marker explanation, the Choice section and Limits. After the merge of the two reviews' draft edits, the live bodies of #5115, #5116 and #5118 were synced again from the merged drafts (the canonical report's draft edits had not reached the live bodies). One deviation from the canonical report's holds: the #5118 Limits now carries a hedged bullet on the symlink and bind-mount cases ("Neither case was run"), which its E11 would have held until the settling runs.
+
+The rest of this file is the review as I wrote it. Where it says "report" for the round 1 report of this assignment, read "this addendum"; where it quotes verdicts, they match the canonical report.
 
 Assignment: `assignments/pool-four-new-prs-strong-review-round-1.md`. Claim: `claims/pool-four-new-prs-strong-review-round-1.md`. Reviewer: windows host (Claude Code), 2026-10-13. Read-only against the code at the stated heads; no build and no Gradle ran on this host.
 
