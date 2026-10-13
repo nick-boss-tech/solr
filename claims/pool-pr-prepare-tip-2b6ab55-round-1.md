@@ -7,4 +7,4 @@
 - Staffing: three subagents. S1 takes the SOLR-12505 draft. S2 takes the SOLR-16013 patch preparation. S3 takes the SOLR-7394 check.
 - Limits: no PR opened, closed, flipped or commented on; no live PR body edited; no fork branch changed (the 16013 patch is prepared, not pushed, because this job's rules forbid edits to submit branches); no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T17:05Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T17:40Z. Deliverable: `reports/12505-16013-7394-17292-recheck-round-1.md`. Verdicts: SOLR-12505 NOT SATISFIED (draft corrections applied; Choice and the whitespace decision wait for the owner); SOLR-16013 READY FOR GATE (patch saved as `gates/SOLR-16013-fixture-patch-round-1.patch`, not pushed); SOLR-7394 nothing to check, record errors listed; SOLR-17292 consistent. No live body edited, no fork branch changed.
