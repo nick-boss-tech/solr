@@ -7,4 +7,4 @@
 - Scope: production `QueryComponent.mergeIds` and `QueryComponentPartialResultsTest`, as the task lists. Prepared as a patch file under `gates/`, checked by reading, then pushed to the fork branch as a plain fast-forward (owner allowed fork pushes on 2026-10-13). The gate runs on a Linux host, not here.
 - Limits: no build, test or Gradle on this host; no PR opened, closed, flipped or commented on; no PR branch moved; the branch move onto the PR branch is NOT proposed until the re-gate is green.
 - Heartbeat: 2026-10-14T00:10Z (claim taken).
-- Status: IN PROGRESS.
+- Status: PATCH PREPARED 2026-10-14T00:40Z. `gates/SOLR-18539-narrowing-round-1.patch` (dry-run clean against `fbf7610644d1`) and its gate job `gates/SOLR-18539-narrowing-round-1-gate.md` (OPEN for vm2). Not pushed: the fork push wrapper does not accept the branch name `review-r1-solr-18539`, and the route for that push is an owner decision. Not claimed as done until the push and the gate.

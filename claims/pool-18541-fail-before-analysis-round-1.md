@@ -6,4 +6,4 @@
 - Scope: read why the two tests pass at the merge-base, state whether they pin the side-branch rule at all, and propose the test change that would make each discriminate. Written as a report and a proposed test patch under `gates/`. Not pushed, not gated, not moved onto any branch. The main side decides which expectation stands.
 - Limits: no build, test or Gradle on this host; no PR, comment or branch change; nothing posted.
 - Heartbeat: 2026-10-14T00:10Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-14T00:40Z. Finding: the two new tests are not a valid fail-before at the merge-base (they pass there because of the inverted fold at merge-base line 343); they are valid against their real parents. Decisions for the main side are listed in `reports/narrowing-and-fail-before-round-1.md`. No test change recommended.
