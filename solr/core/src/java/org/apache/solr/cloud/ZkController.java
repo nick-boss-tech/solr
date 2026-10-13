@@ -1725,6 +1725,7 @@ public class ZkController implements Closeable {
     } catch (InterruptedException e) {
       throw e;
     } catch (Exception e) {
+      log.error("Error getting leader from zk", e);
       throw new SolrException(
           SolrException.ErrorCode.SERVER_ERROR,
           "Error getting leader from zk for shard "

@@ -1,5 +1,5 @@
 title: >
-  ZkController.getLeader declares and throws InterruptedException instead of wrapping it in a SolrException, no longer logs and rethrows, and names the collection and a remedy in its error.
+  ZkController.getLeader declares and throws InterruptedException instead of wrapping it in a SolrException, and names the collection and a remedy in its error.
 type: fixed
 authors:
   - name: Nick Shanin
