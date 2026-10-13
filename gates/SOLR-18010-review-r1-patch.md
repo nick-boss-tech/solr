@@ -57,3 +57,9 @@
 
 - The review coordinator's route 1 patch (`gates/SOLR-18010-fail-before-route1.patch`, test-only: the failed-write test now replaces the temporary file with a non-empty directory of the same name during serialization, so the parent production's `finally` delete throws `DirectoryNotEmptyException` and masks the write error; the test is renamed `testFailedWriteReportsWriteErrorWhenTemporaryFileCannotBeDeleted`) is pushed to `review-r1-solr-18010` as `00cf8148c3218925994c43d3dea6bb8a4099a62e`, a plain fast-forward from `e99be67c9a6f`, with the owner's go-ahead. On vm1 it applied cleanly, matched the patch file exactly after tidy, and `:solr:core:compileTestJava -Pvalidation.errorprone=true` returned BUILD SUCCESSFUL. No test run on vm1.
 - Next step: vm2 runs the corrected gate at the new head `00cf8148c3`, with the fail-before leg at the parent baseline `2b5ad801c9` per the classification above (expected at the parent: the renamed test fails with `expected:<SolrException> but was:<DirectoryNotEmptyException>`; at the new head it passes). The gate records a seed and the head SHA with its runs, per the round 1 report's gaps.
+
+## Re-gate at the route 1 head (vm2, 2026-10-13T20:19Z)
+
+- Head: `00cf8148c3218925994c43d3dea6bb8a4099a62e`, confirmed by ls-remote at claim time. Claim: `claims/pool-vm2-gate-backlog-18010-review-r1-g4.md`. Runner: `/workspace/gates/g18010-review-r1-g4.sh`. Logs: `logs/vm2/18010-review-r1-g4-*.log`.
+- Gate shape: tidy with the clean-tree guard, Error Prone compile, focused `SecurityConfHandlerTest` at the head (5 expected, including `testFailedWriteReportsWriteErrorWhenTemporaryFileCannotBeDeleted`), fail-before at the parent `2b5ad801c9e8` with the branch test kept (expected: the renamed test fails with `java.nio.file.DirectoryNotEmptyException` at its `assertThrows` line), production restored, module check `:solr:core:check -x test`.
+- Status: RUNNING. Not yet GREEN; no receipt written until the run ends.
