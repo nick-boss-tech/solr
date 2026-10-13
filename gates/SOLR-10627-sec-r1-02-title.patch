@@ -1,0 +1,14 @@
+diff --git a/changelog/unreleased/SOLR-10627-reject-null-collection-permission.yml b/changelog/unreleased/SOLR-10627-reject-null-collection-permission.yml
+index 7273af2..21f9a86 100644
+--- a/changelog/unreleased/SOLR-10627-reject-null-collection-permission.yml
++++ b/changelog/unreleased/SOLR-10627-reject-null-collection-permission.yml
+@@ -1,6 +1,7 @@
+ title: >
+-  The authorization set-permission command now rejects "collection": null on per-collection
+-  permissions such as read and update, which previously protected nothing.
++  The authorization set-permission and update-permission commands now reject "collection": null
++  on the per-collection permissions read, update, schema-read and schema-edit, because a null
++  collection never applies to a request routed to a collection.
+ type: fixed
+ authors:
+   - name: Nick Shanin
