@@ -1,6 +1,7 @@
 # Gate job: SOLR-5011 changelog title correction, re-gate at the new head
 
 - Branch: solr-5011-submit. Fork tip: 00060d2ed92bc6414fb420d7c52558c14c49f75a (the narrowing, GATE GREEN 2026-10-13, receipts/SOLR-5011.md). Merge-base: cabedd1d968059215188f4e7563fb303241899ed.
+- Status: CLAIMED 2026-10-13T12:47:06Z by vm2 (gate backlog coordinator); claim claims/pool-vm2-gate-backlog-5011-title-fix.md.
 - Why: the fragment title changelog/unreleased/SOLR-5011-close-core-resource-loader.yml says a SolrCore now closes its SolrResourceLoader on every close. After the narrowing, with shareSchema on, the loader is deliberately left open (SolrCore.doClose skips the close when the node uses a schema cache). The receipt names this title correction as owed before the next re-gate.
 - Intended host: any capable Linux host (vm2 or vm1), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Capability tags: implementation, gate. One claim covers the title commit, the gate and the push.
