@@ -1130,3 +1130,15 @@ No action taken beyond this job.
 - 2026-10-13T13:00Z vm2 gate backlog coordinator (busy check, pass 4): gates/SOLR-5011-title-fix.md gate still running (GradleWrapperMain pid 38320 at module-check, claim taken 12:47:06Z, no GATE END yet); heartbeat not due, no new gate started, next pass records GATE END.
 
 - 2026-10-13T13:16Z vm2 gate backlog coordinator (busy check, pass 5): gates/SOLR-17680-v2-two-router-test.md gate still running (GradleWrapperMain pid 43758, claim last heartbeat 12:47:06Z, no GATE END yet); head leg already reported a failure (CreateRoutedAliasTest.testV2DimensionalCategoryRouterWithoutMaxCardinality, expected 200 got 400), fail-before leg running; no new gate started, next pass records GATE END and classifies the failure.
+
+## 2026-10-13T14:15Z vm2 gate backlog coordinator (gate finish and busy-check pass)
+
+- Finished: SOLR-17680 v2 two-router test GREEN at 52b641ca1a263589afa4f1ef0ec7b68f53c84565 (tidy, Error Prone compile rc=0, focused 17 and 13 tests with 0 failures, fail-before and proof legs as designed, module check rc=0). Fork push ce59bbe112..52b641ca1a at 13:40Z; receipts/SOLR-17680.md, the job and the claim are DONE in 6aa25d83f8.
+- Failed and action taken: the 13:17Z run at 766dd13e9e FAILED on the negative case (a category router without maxCardinality expected 200; the server returns 400 "router.maxCardinality must be a valid Integer"). Classified as a test-fixture defect. Fixed on the branch (test file only), fail-before checked at the merge-base, re-gated, pushed. No production change.
+- Corrected: the 13:48Z record from the other vm2 pass said NOT GREEN and "no fork push". Both were wrong: that pass ran before the Error Prone leg, and the push had happened at 13:40Z. Corrected in the job and claim files.
+- Claimed: none by this pass. vm2 is busy: GradleWrapperMain (pid 59019) runs gates/g18178-gate.sh for SOLR-18178 (base-leg run, started 14:04Z by the serial tick, claimed by vm2 at 13:48Z). Not this pass's gate; not touched.
+- Stale claim for the main side: SOLR-14919 (claims/pool-vm2-gate-backlog-14919.md) has its last heartbeat at 02:41Z. Its gate was interrupted at focused-head with no GATE END and has not been relaunched; the main side decides.
+- Parked FAILED jobs: SOLR-6711 and SOLR-17612 are DONE (GATE GREEN at 73c5e6e0d2 and 3a456c27dd); their earlier FAILED records are superseded.
+- Gate state: one gate running on vm2 (SOLR-18178, since 14:04Z). No other gate in flight.
+- Next claimable: gates/SOLR-18010-changelog-regate.md (OPEN, unclaimed), the only unclaimed open gate job. The buffer is below the target of 3. Restock is the first action of the next pass, from a receipts-to-fork-tip audit whose candidates still need checking.
+- For the main agent: two vm2 coordinator passes have been writing claims, records and gate runs to pr-prepare and to the shared worktree (this pass found commits a99a7a2b3b and 513836936c from the other pass). Please confirm that one pass drives vm2.
