@@ -6,3 +6,5 @@
 - Head at claim: cbf0c678f277d6f50d75408d4889d3b664469905 (solr-11288-submit). Merge-base: 97d973814336101e12475558d7419321c743de79.
 - Runner: gates/g11288-baserun-gate.sh, worktree /workspace/gates/solr-11288-baserun (detached at the merge-base, branch TestCollectionAPI.java overlaid, no production change). The runner waits for the in-progress 16437 recount to finish before starting Gradle.
 - Status: CLAIMED.
+
+- 2026-10-13T08:02Z DONE: base run finished (GATE END 07:52:09Z). Base fails TestCollectionAPI.test with "duplicate element: shard1" at line 321 (1 of 4 tests). Deliverable: receipts/SOLR-11288.md, base-run section. Job gates/SOLR-11288-base-run.md DONE.
