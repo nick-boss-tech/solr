@@ -1,7 +1,7 @@
 # Gate job: SOLR-18010 re-gate after the permission patch
 
 - Branch: solr-18010-submit. Head: `2b5ad801c9e88807337f4f0a3fdd689126ad37d1` (fork tip). Previous heads: `9e3ccafe39098bdc23cc8ea3313918071150e148` (changelog title) and `c3685bb37d9d74e4ed538d6d1b65bb1b60970677` (gated code).
-- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T14:35Z; claim claims/pool-vm2-gate-backlog-18010-perms.md. Runner /workspace/gates/g18010-perms-gate.sh.
+- Status: DONE. GATE GREEN at 2b5ad801c9e88807337f4f0a3fdd689126ad37d1 (claimed by vm2 at 2026-10-13T14:35Z; GATE START 14:34:45Z, GATE END 14:56:12Z; log logs/vm2/queue-g18010-perms-gate-20261013T143445Z.out). Claim claims/pool-vm2-gate-backlog-18010-perms.md marked DONE. Runner /workspace/gates/g18010-perms-gate.sh.
 - Capability tags: gate.
 - Intended host: Linux only (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: full focused gate at the new head, with a fail-before run. The change keeps the existing security.json permissions when the file is replaced.
@@ -28,12 +28,21 @@
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed (two files)
-- [ ] changelog parse
-- [ ] tidy clean with the guard; spotless check
-- [ ] Error Prone compile
-- [ ] focused run with JUnit XML; new test passes
-- [ ] fail-before recorded (0600 against 0640)
-- [ ] module check
-- [ ] receipt refreshed at the new head; job DONE
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed (two files)
+- [x] changelog parse
+- [x] tidy clean with the guard; spotless check
+- [x] Error Prone compile
+- [x] focused run with JUnit XML; new test passes
+- [x] fail-before recorded (0600 against 0640)
+- [x] module check
+- [x] receipt refreshed at the new head; job DONE
+
+## Result, 2026-10-13 (vm2)
+
+- head: ls-remote 2b5ad801c9e88807337f4f0a3fdd689126ad37d1, matches the job.
+- Changelog YAML parse: rc=0.
+- Tidy: rc=0, tree clean after tidy. Spotless check: rc=0. Error Prone compile: rc=0.
+- Focused, seed 18010C0FFEE18010, fresh JUnit XML (logs/vm2/18010-perms-xml): SecurityConfHandlerTest 4 tests, 0 failures (includes testEditKeepsExistingSecurityJsonPermissions); V2SecurityAPIMappingTest 5 tests, 0 failures; BasicAuthStandaloneTest 1 test, 0 failures.
+- Fail-before: production reverted to 9e3ccafe39098bdc23cc8ea3313918071150e148, new test kept. rc=1 as expected. The new test fails on the permissions assertion: `security.json lost its permissions in the edit expected:<[OWNER_READ, OWNER_WRITE, GROUP_READ]> but was:<[OWNER_WRITE, OWNER_READ, OTHERS_READ, GROUP_READ]>` (0640 expected, 0644 observed). The job text above says "0600 against 0640"; the observed value is 0644, so the job wording was wrong and the observed failure is the premise. Fail-before XML: logs/vm2/18010-perms-failbefore-xml (1 test, 1 failure).
+- Module check: `:solr:core` check rc=0. Tree restored to head after the fail-before run.

@@ -1155,3 +1155,11 @@ No action taken beyond this job.
 - 2026-10-13T14:15Z vm2 gate backlog coordinator (busy check): gates/SOLR-18280-nightly-record-run.md gate running (GradleWrapperMain pid 68296, GATE START 14:11:36Z, step nightly-head, no GATE END yet); claim last heartbeat 13:48Z, heartbeat not due; no new gate started; next pass checks GATE END.
 
 - 2026-10-13T14:45Z vm2 gate backlog coordinator (busy check): two gate runs are live on vm2 with no GATE END. gates/SOLR-18010-perms-regate.md (g18010-perms-gate.sh, started 14:34:45Z, claim 14:35Z) and gates/SOLR-16630-latches-regate.md (serial queue runner g16630-latches-gate.sh, started 14:43:24Z, claim 14:37Z). Both heartbeats are under 50 minutes old, so no refresh; nothing finished, failed or claimed; no new gate started. Concurrency flag: the 18010-perms run was started outside the serial queue (queue/active.pid names only the 16630 runner), so vm2 is running two gates at once against the one-gate rule. Neither run was stopped. Main side to confirm which pass drives vm2 and whether one run should stop. Next claimable: gates/SOLR-18010-changelog-regate.md is DONE; next open job per buffer is gates/SOLR-16437-changelog-regate.md, claimed on the next idle pass.
+
+## 2026-10-13T15:02Z vm2 gate backlog coordinator (gate finish and busy-check pass)
+
+- Finished: SOLR-18010 permission re-gate GREEN at 2b5ad801c9e8 (GATE END 14:56:12Z, focused 4 and 5 and 1 tests with 0 failures, fail-before rc=1 on the new permissions test). Receipts/SOLR-18010.md refreshed, job and claim DONE. No fork push, since the branch is unchanged by the gate.
+- Failed and action taken: none. The job file's fail-before wording "0600 against 0640" was wrong; the observed failure is 0644 against 0640. Corrected in the gate file.
+- Claimed: none this pass. vm2 busy.
+- Gate state: one gate running, SOLR-16630 re-gate at a31707acfd (GATE START 14:43:24Z, log logs/vm2/queue-g16630-latches-gate-20261013T144324Z.out, at module-check at 15:00Z, no GATE END). Claim last heartbeat 14:37Z, not due.
+- Next claimable: gates/SOLR-16437-changelog-regate.md, OPEN and unclaimed in the shared buffer; claimed on the next idle pass after a claims/ check.
