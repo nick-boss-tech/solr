@@ -13,3 +13,5 @@
 - 2026-10-13T16Z vm2 gate backlog coordinator: heartbeat at pickup of round 3 (assignments/pool-vm2-gate-backlog-round-3.md, item 1). Proof leg only per amendment 2; run queued as gates/g12505-proof-gate.sh.
 
 - 2026-10-13T15:47Z vm2 gate backlog coordinator: round 3 item 1 proof leg ended (GATE END 15:47:27Z). Not established: "expected java.io.IOException to be thrown, but nothing was thrown", which matches neither amendment 2 content. Status: FAILED at the proof leg, not DONE; no fork push, no receipt refresh. Next step recorded in gates/SOLR-12505-fetchstream-fix.md (Round 3 proof-leg record): vm2 runs the pre-fix probe on its next idle pass, then a narrow trigger fix and re-claim, or escalation if it fits neither content.
+
+- 2026-10-13T15:53ZZ vm2 gate backlog coordinator: proof leg re-run per amendment 2 (queue log logs/vm2/queue-g12505-proof-gate-20261013T154518Z.out). Failure "expected java.io.IOException to be thrown, but nothing was thrown" matches neither Content 1 nor Content 2. Stopped and recorded in gates/SOLR-12505-fetchstream-fix.md; not relaunched. Status: STOPPED, not DONE.

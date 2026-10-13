@@ -48,3 +48,12 @@
 - Premise note for the ruling: the gate test's trigger is on="id=a i" (join field name `a i`). The amendment 2 probe's breakout inputs (on=<id=a_i a_s> and the brace and bang inputs) each threw on pre-fix code. The gate test's exact input did not throw on pre-fix code. The difference between the test's trigger and the probe's inputs is the first thing to settle.
 - Not done, per amendment 2 item 2: no fork push (solr-12505-submit untouched), no receipt refresh, no draft update. Job and claim are not DONE.
 - Next step (owned by vm2 as gate coordinator, on its next idle pass): run a scratch probe at the pre-fix head 5f20e1171bc with the gate test's exact expression and fixture, and classify the result as Content 1 or Content 2. If the probe shows the test trigger does not reach the batch (a test-fixture defect), make the narrow trigger fix on the branch, confirm the fixed test fails at base for the premise reason, and re-claim the proof leg at the new head. Escalate to the main side only if the probe result still fits neither content. vm2 does not relaunch this proof leg until the probe is recorded here.
+
+## Proof-leg re-run result (round 3, amendment 2)
+
+- Run: GATE START 2026-10-13T15:45:18Z, log logs/vm2/queue-g12505-proof-gate-20261013T154518Z.out (Gradle log logs/vm2/12505-proof-amend2.log). Head ee67d374219275907ef1b78e3d2b455b6a15e43f, FetchStream.java reverted to 5f20e1171bc890509d76e4f5f7defcc4fc8c102c, branch tests kept, seed 12505C0FFEE12505.
+- Result: the proof leg failed with "java.lang.AssertionError: expected java.io.IOException to be thrown, but nothing was thrown" at StreamDecoratorTest.java line 1026 (assertThrows). Counts: the one test failed, 0 passed for the test; no other test in the class ran.
+- Classification: matches neither Content 1 (a server error without the validation text) nor Content 2 (a corrupted batch with a wrong tuple field). It is the same failure content as the earlier gate at ee67d37421, which amendment 2 says cannot prove the premise.
+- Stopped per amendment 2 ("If it matches neither, record that and stop"). Not relaunched. No fork push. Gate not GREEN; receipt, draft and DONE marks not written.
+- Runner note: the head check in g12505-proof-gate.sh failed (ls-remote origin is not valid inside the gate worktree), so the live head was not confirmed by that run; the head was checked before the run.
+- Left for the main side: the premise check needs a trigger that throws on pre-fix FetchStream, or a different proof shape.
