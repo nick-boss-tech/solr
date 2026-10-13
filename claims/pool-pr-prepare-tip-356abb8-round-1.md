@@ -7,4 +7,4 @@
 - Staffing: two subagents. S1 checks the SOLR-14919 draft against the receipt and the head, and audits the diff from `84e7bcaeb57` to `8f1f4ef91e` with the changelog fragment. S2 checks the SOLR-17292 draft against the dated run of record at `f614a42fbc8`.
 - Limits: no PR opened, closed, flipped or commented on; no live PR body edited this round; no fork branch changed; no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T16:17Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T16:45Z. Deliverable: `reports/solrcloud-14919-17292-recheck-round-1.md`. Verdicts: SOLR-14919 NOT SATISFIED, SOLR-17292 NOT SATISFIED, both with the blocking items named in the report. Draft edits applied to the two drafts; no live body edited this round. The two reviewers' sections are in the scratchpad and summarized in the report.
