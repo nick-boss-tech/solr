@@ -6,4 +6,5 @@
 - Capability tags: gate.
 - Runner: /workspace/gates/g18010-review-r1-g4.sh, worktree /workspace/gates/solr-18010-review-r1-g4 (detached). Log: logs/vm2/18010-review-r1-g4-*.log.
 - Heartbeat: 2026-10-13T20:19Z by vm2.
-- Status: CLAIMED.
+- Status: DONE. 2026-10-13T20:40Z (vm2 coordinator): GATE GREEN at 00cf8148c3 (GATE END 20:40:22Z). Focused 11 of 11 from fresh JUnit XML; parent fail-before fails the renamed test with `DirectoryNotEmptyException` at its `assertThrows` line; module check rc=0. Deliverables: receipts/SOLR-18010.md (section "Review round 1 re-gate (route 1 test)"), gates/SOLR-18010-review-r1-patch.md (re-gate section DONE).
+- No fork push and no PR touched: the review branch `review-r1-solr-18010` is the only branch gated.

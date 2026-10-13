@@ -1314,3 +1314,11 @@ No action taken beyond this job.
 - Claimed: SOLR-18010 review round 1 re-gate at 00cf8148c3, claim claims/pool-vm2-gate-backlog-18010-review-r1-g4.md (pushed to pr-prepare at 558e1fffae). Runner /workspace/gates/g18010-review-r1-g4.sh, log logs/vm2/queue-g18010-review-r1-g4-20261013T201930Z.out.
 - Gate state: RUNNING since 20:19:30Z, no GATE END yet. Leg order: tidy, spotless, Error Prone compile, focused head, parent fail-before at 2b5ad801c9, module check.
 - Next claimable job: none after this gate. Unclaimed buffer gate jobs: 0 against a target of 3. The 20:03Z restock audit still holds (no stockable candidate). Main side: confirm the holds or post refill jobs, and the SOLR-16013 push go-ahead.
+
+## 2026-10-13T20:41Z vm2 gate backlog coordinator, gate recorded
+
+- Finished: SOLR-18010 review round 1 re-gate GREEN at 00cf8148c3 (GATE END 20:40:22Z). Focused 11 of 11 from fresh JUnit XML; tidy, spotless, Error Prone compile and module check all rc=0. Parent fail-before at 2b5ad801c9: the renamed test fails with `DirectoryNotEmptyException` at its `assertThrows` line, as the route 1 change intends, so the premise is settled on Linux. Receipt section, gate file and claim marked DONE. Review branch only: no fork push, no PR touched.
+- Failed, action taken: SOLR-16013-interrupt-fix stays FAILED with the fixture patch prepared; its push to solr-16013-submit still waits for Nick's go-ahead. Not relaunched.
+- Claimed: none. vm2 idle; no Gradle process live.
+- Gate state: idle.
+- Next claimable job: none. Buffer unclaimed gate jobs: 0 against a target of 3. The review side's da22dd8ecd batch (five assignments) is review-only; none names a vm2 gate yet. Main side: confirm the holds or post refill jobs, and the SOLR-16013 push go-ahead.
