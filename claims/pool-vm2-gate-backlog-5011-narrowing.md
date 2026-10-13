@@ -8,4 +8,6 @@
 - Runner: gates/g5011-narrowing-gate.sh.
 - Proving test class: org.apache.solr.core.CoreUnloadSharedSchemaTest.
 - Scope: SolrCore.doClose skip plus a ConfigSetService schema-cache check, and the proving test; the fork push is a plain fast-forward to solr-5011-submit after the gate is green on the committed tree.
-- Status: CLAIMED 2026-10-13T09:17Z (UTC).
+- Status: CLAIMED 2026-10-13T09:17Z (UTC); implementation committed locally, gate queued.
+- Implementation (local commits in /workspace/gates/solr-5011-narrowing, not yet pushed to the fork): 7fa066e08e (SolrCore.doClose skips the loader close when a schema cache is enabled; ConfigSetService.isSchemaCacheEnabled) and 00060d2ed9 (CoreUnloadSharedSchemaTest). Delta against 3fd85bedef is those three files only.
+- Gate queued: gates/g5011-narrowing-gate.sh at 2026-10-13T09:36:36Z. Proof leg reverts SolrCore.java and ConfigSetService.java to 3fd85bedef; the proving test must fail there by the class-loading content, and the control test must pass there.
