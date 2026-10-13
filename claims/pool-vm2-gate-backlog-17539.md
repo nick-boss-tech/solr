@@ -6,3 +6,5 @@
 - Capability tags: gate (docs only, no focused Java tests, no fix commit, no fork push).
 - Runner: gates/g17539-gate.sh, worktree /workspace/gates/solr-17539-gate (detached).
 - Status: CLAIMED, runner queued.
+
+- 2026-10-13T11:01Z heartbeat (vm2 gate backlog coordinator): the earlier run stopped at its tidy step at 10:59Z with no GATE END and no test executed. Relaunched once, after the SOLR-18368 gate in one chain.
