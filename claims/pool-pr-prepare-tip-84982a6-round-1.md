@@ -7,4 +7,4 @@
 - Staffing: two subagents. S1 takes (1). S2 takes (2).
 - Limits: read-only; no PR, comment or GitHub write; no gate relaunched; no branch moved; no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T20:30Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T21:00Z. Deliverable: `reports/g3-green-and-18010-receipt-round-1.md`. G3 is supported as a regression check at `e99be67c9a6f` (17 of 17) and not as the fail-before. The stop rule was triggered by the 18:24Z record and no record decides it. No draft or receipt edited; corrections listed for the owner. No PR, comment, branch or gate touched.
