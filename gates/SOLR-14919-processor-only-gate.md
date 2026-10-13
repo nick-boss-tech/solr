@@ -21,3 +21,5 @@
 - [ ] focused test at the head
 - [ ] module check
 - [ ] receipt refreshed; draft citations confirmed; job DONE
+
+- Run 2 at 8f1f4ef91e: GATE START 2026-10-13T02:41:55Z, interrupted at the focused-head leg with no GATE END (logs/vm2/queue-g14919-gate-20261013T024155Z.out). Not relaunched; main agent decides the re-run.
