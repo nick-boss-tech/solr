@@ -1,7 +1,7 @@
 # Gate job: SOLR-17680 end-to-end test for the v2 two-router path
 
 - Branch: solr-17680-submit. Head: `ce59bbe112d063e3d3c93b3be6a1a5269a38fc37` (fork tip). Merge-base: `56ec140e3636d5f4150fa87fbf7103529536ac99`.
-- Status: FAILED at 766dd13e9e on the vm2 gate (2026-10-13, GATE END 13:17:01Z; focused head leg rc=1). Not relaunched; not DONE. See "Gate run 2026-10-13" below. The block recorded in "Blocked at claim" was settled by the main side on 2026-10-13.
+- Status: CLAIMED by vm2 at the re-gate head 52b641ca1a26 (2026-10-13). The 766dd13e9e run FAILED on a test-fixture defect; the negative case was corrected on the branch (commit amended, unpushed until the gate is green). See "Gate run 2026-10-13" and "Classification and fix, 2026-10-13" below. The block recorded in "Blocked at claim" was settled by the main side on 2026-10-13.
 - Capability tags: gate.
 - Intended host: vm2 (Linux). Windows never claims build work.
 - Job type: a new focused test, then the focused run and the fail-before run. vm2 may patch the branch to add the test, under the patch-loop rule: the patching agent pushes with a plain fast-forward push, and the gating host refreshes the receipt.
@@ -53,3 +53,12 @@ In `solr/core/src/test/org/apache/solr/cloud/CreateRoutedAliasTest.java`, after 
 - Fail-before at the merge-base (test file kept, CreateAliasCmd.java and CreateAlias.java reverted): testV2DimensionalTwoRouters failed with "Unexpected status: 400 expected:<200> but was:<400>". This is not the text "A routed alias requires these params" that step 5 expects.
 - Open question for the main side: the negative case is 200 by decision (option b), but the head returns 400 for a category router without maxCardinality. Either the head's CreateAlias.java change makes maxCardinality required (which the decision excluded), or the test expectation is wrong. The positive case at merge-base also returns 400, so the fail-before result does not isolate the test change.
 - Nothing pushed, no receipt refreshed, no fork push. The gate worktree gates/solr-17680-v2 is left in place for the main side.
+
+## Classification and fix, 2026-10-13 (vm2, after the FAILED run)
+
+- Failing test: testV2DimensionalCategoryRouterWithoutMaxCardinality (CreateRoutedAliasTest.java:232 at 766dd13e9e; seed 1D2AFF88101521D3:5F496A954451627D). Assertion: "Unexpected status: 400 expected:<200> but was:<400>".
+- Server message, from the same run's log: 400 "router.maxCardinality must be a valid Integer, instead got: null", raised by CategoryRoutedAlias.parseMaxCardinality, unchanged from the merge-base. The decision's premise (maxCardinality optional at this head, so the request succeeds) does not hold; the current behaviour is a 400 that names router.maxCardinality.
+- Classification: test-fixture defect. The expectation of 200 is wrong about the code. Production is consistent and no production change is made.
+- Premise check at the merge-base: the positive case's server message at the merge-base is "A routed alias requires these params: [router.field, router.name] plus some create-collection prefixed ones" (logs/vm2/17680-v2-failbefore.log). The earlier note that the fail-before showed "the same 400" only described the assertion line; the server text is the premise reason.
+- Fix, under the decision's option (b) as pinned to the current behaviour: the negative case asserts 400 and the message "router.maxCardinality must be a valid Integer". The helper now returns the request and each test chooses assertSuccess or assertFailure. Test file only. Commit amended on the unpushed test commit, now 52b641ca1a26; no production file changed.
+- Re-gate: runner gates/g17680-v2-fix-gate.sh, logs logs/vm2/queue-g17680-v2-fix-gate-*.out and logs/vm2/17680-v2-fix-*.log/.xml. Tidy with a clean tree, focused run of CreateRoutedAliasTest and CreateAliasAPITest with JUnit XML, fail-before of testV2DimensionalTwoRouters and testV2DimensionalCategoryRouterWithoutMaxCardinality at the merge-base production. The push of 52b641ca1a26 to solr-17680-submit is a plain fast-forward from ce59bbe112d and happens only if the re-gate is green.
