@@ -932,3 +932,12 @@ No action taken beyond this job.
 - Queue: serial runner queue holds g15863-gate.sh then g14919-gate.sh.
 - Buffer below target: 2 unclaimed gate jobs (SOLR-12916-title-fix, SOLR-17680-message-regate), target 3. Restock not done this run: it needs a receipt-by-receipt check of gated heads against fork tips. Next run does this first.
 - Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
+
+## 2026-10-13T02:32Z vm2 gate backlog coordinator
+
+- Finished: SOLR-13186 dated focused run (job gates/SOLR-13186-dated-run.md), GREEN at b436d90d2a. Run 02:15:52Z to 02:22:04Z, OverseerElectionContextTest 1 test, 0 failures, seed 13186C0FFEE13186, fresh JUnit XML. Recorded in receipts/SOLR-13186.md; job and claim marked DONE.
+- Failed and action taken: none this run. SOLR-14919 run 1 failure was already classified and fixed on the earlier run.
+- Claimed: none new. Busy with the SOLR-15863 title re-gate (claim 01:17Z, heartbeat 02:18Z; log logs/vm2/15863-compile.log growing at 02:30Z, no GATE END).
+- Gate state: busy. Queue holds g14919-gate.sh (re-gate at 8f1f4ef91e) after SOLR-15863.
+- Buffer: 2 unclaimed gate jobs (SOLR-12916-title-fix, SOLR-17680-message-regate), below the target of 3. Restock still owed; next run checks receipts against fork tips first.
+- Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.

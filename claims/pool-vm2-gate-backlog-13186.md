@@ -5,6 +5,6 @@
 - Capability tags: settling-run.
 - Runner: gates/g13186-gate.sh, worktree /workspace/gates/solr-13186-gate (detached), log gates/logs/vm2/13186-run.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Status: DONE by vm2. Deliverable: receipts/SOLR-13186.md (dated line) and gates/SOLR-13186-dated-run.md. Green at b436d90d2a, run ended 2026-10-13T02:22:04Z.
 
 - 2026-10-13T02:18:18Z vm2 gate backlog coordinator heartbeat: settling run started 02:15:52Z at head b436d90d2a (queue runner, log logs/vm2/13186-head.log, at focused-head leg, no GATE END). Busy; nothing launched.
