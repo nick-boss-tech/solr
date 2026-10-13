@@ -126,10 +126,15 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
       if (Files.exists(securityJsonPath)) {
         try {
           Files.setPosixFilePermissions(tmpPath, Files.getPosixFilePermissions(securityJsonPath));
-        } catch (UnsupportedOperationException | IOException e) {
+        } catch (UnsupportedOperationException e) {
           if (log.isDebugEnabled()) {
-            log.debug("Could not keep the permissions of {}", securityJsonPath, e);
+            log.debug("POSIX permissions are not available for {}", securityJsonPath, e);
           }
+        } catch (IOException e) {
+          log.warn(
+              "Could not keep the permissions of {}; the edited file has the default permissions",
+              securityJsonPath,
+              e);
         }
       }
       try {
@@ -151,7 +156,11 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
           "Failed persisting security.json to " + securityJsonPath,
           e);
     } finally {
-      Files.deleteIfExists(tmpPath);
+      try {
+        Files.deleteIfExists(tmpPath);
+      } catch (IOException e) {
+        log.warn("Could not delete the temporary file {}", tmpPath, e);
+      }
     }
   }
 

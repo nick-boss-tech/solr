@@ -37,6 +37,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Stream;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.common.SolrErrorWrappingException;
@@ -350,6 +351,60 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
         "security.json lost its permissions in the edit",
         expected,
         Files.getPosixFilePermissions(securityJson));
+  }
+
+  /** A write that fails after the temporary file exists keeps the previous security.json intact. */
+  public void testFailedWriteKeepsPreviousFileAndLeavesNoTemporaryFile() throws Exception {
+    assumeWorkingMockito();
+    Path solrHome = createTempDir("securityConfHandlerLocalFailedWrite");
+    Path securityJson = solrHome.resolve("security.json");
+    CoreContainer cc = mock(CoreContainer.class);
+    when(cc.getSolrHome()).thenReturn(solrHome);
+    SecurityConfHandlerLocalForTesting handler = new SecurityConfHandlerLocalForTesting(cc);
+    byte[] previous = Utils.toJSON(shortSecurityData("seed"));
+    Files.write(securityJson, previous);
+
+    // serialization evaluates the value, which happens after the temporary file is created
+    CharSequence failing =
+        new CharSequence() {
+          @Override
+          public int length() {
+            throw new IllegalStateException("injected failure");
+          }
+
+          @Override
+          public char charAt(int index) {
+            throw new IllegalStateException("injected failure");
+          }
+
+          @Override
+          public CharSequence subSequence(int start, int end) {
+            throw new IllegalStateException("injected failure");
+          }
+
+          @Override
+          public String toString() {
+            throw new IllegalStateException("injected failure");
+          }
+        };
+    SolrException e =
+        assertThrows(
+            SolrException.class,
+            () -> handler.persistConf(new SecurityConfig().setData(shortSecurityData(failing))));
+    assertTrue(e.getMessage(), e.getMessage().contains("Failed persisting security.json"));
+
+    assertArrayEquals(
+        "the previous security.json was changed", previous, Files.readAllBytes(securityJson));
+    try (Stream<Path> files = Files.list(solrHome)) {
+      assertEquals(
+          "a temporary file was left behind",
+          List.of("security.json"),
+          files
+              .map(path -> path.getFileName().toString())
+              .filter(name -> name.startsWith("security.json"))
+              .sorted()
+              .toList());
+    }
   }
 
   private static void postAuthorizationEdit(SecurityConfHandler handler, String command)
