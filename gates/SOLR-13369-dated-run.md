@@ -1,7 +1,7 @@
 # Gate job: SOLR-13369 dated focused run at the live head
 
 - Branch: solr-13369-submit. Head: `dfa0db5bdf96` (live tip, ls-remote).
-- Status: OPEN, unclaimed.
+- Status: DONE 2026-10-13T04:48Z by the gate coordinator. Focused run GREEN at dfa0db5bdf96d119d985a8b895ff90c4d783ad47 (XML 2026-10-13T04:47:49Z, 1 of 1); receipts/SOLR-13369.md; claims/pool-vm2-gate-backlog-13369.md.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: dated focused run. No code change.
