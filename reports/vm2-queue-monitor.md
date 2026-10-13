@@ -1033,3 +1033,11 @@ No action taken beyond this job.
 - Claimed: none new (busy). SOLR-6014-searchtime-premise is running on vm2 (queue started 07:02:30Z, claim 06:46Z, probe leg). The SOLR-16437 changelog claim is live (heartbeat 07:05Z) until the recount lands.
 - Gate state: one gate at a time, vm2 busy with the SOLR-6014 premise run. Records pushed to pr-prepare (4dc8eeab94 plus the nightly and monitor commit).
 - Next claimable once idle: the SOLR-16437 focused recount (owned by the live claim), then the first open buffer job whose claim is absent. SOLR-13097 and SOLR-11939 are already DONE, so the next supply candidates are gates/SOLR-11479-identity-carry.md and gates/SOLR-11288-base-run.md; check claims/ at claim time.
+
+## 2026-10-13 07:20 UTC (vm2 gate backlog coordinator)
+
+- Finished: SOLR-6014 premise run (gate 07:02:30Z to 07:09:06Z, head 505849d2d4e7). Verdicts recorded in gates/SOLR-6014-searchtime-premise.md and receipts/SOLR-6014.md; job and claim DONE; pushed as 840fe9ec51. The cost case and both filter-query cases fail at search time with NullPointerException; the cache case returns the whole corpus (numFound=2) with no failure. The main side writes the draft's Limits wording from these verdicts.
+- Failed and action taken: none new. SOLR-14919 interrupted run (no GATE END) still waits on the main agent's re-run decision, as recorded in its claim.
+- Claimed: none (vm2 busy).
+- Gate state: busy with the SOLR-12651 history-scrub gate at de3f3604f0 (started 07:09:06Z, at compile-errorprone when checked at 07:15Z; claim heartbeat 07:06Z). The SOLR-16437 changelog claim is live (heartbeat 07:05Z); its focused recount is still owed and needs an idle vm2 with the worktree at a23f770e4b9.
+- Next claimable once idle: the SOLR-16437 focused recount (live claim), then gates/SOLR-11479-identity-carry.md (gate file OPEN; its claim file's last heartbeat is 2026-10-11, so the claim is stale; verify at claim time).
