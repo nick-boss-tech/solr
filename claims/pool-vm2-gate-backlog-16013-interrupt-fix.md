@@ -6,4 +6,4 @@
 - Capability tags: gate.
 - Runner: gates/g16013-interrupt-fix-gate.sh, worktree /workspace/gates/solr-16013-interrupt-gate (detached), log under logs/vm2/.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2 at ecda7b862ba, queued on the vm2 serial queue (see gates/SOLR-16013-interrupt-fix.md).
+- Status: FAILED at ecda7b862ba (vm2, 2026-10-13T16:50Z). Focused run rc=1: `testZkClientClosesOnlyAfterOverseerCloseCompletes` failed with "no node is running the overseer" (seed C3E3D7F50937D13C). Pre-fix proof NOT_PROVEN. Not relaunched; left for the main agent. Not closed as DONE; no receipt.

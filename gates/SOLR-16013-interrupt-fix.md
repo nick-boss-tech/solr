@@ -4,7 +4,15 @@
 - Change: `ZkController.close()` clears the interrupt flag after the overseer wait loop and before `zkStateReader.close()`; the existing `finally` restores it. New test `OverseerCloseOrderingTest.testZkClientClosesUninterruptedWhenInterruptArrivesAfterOverseerCloseFinishes`. Decision record: `material/held-items-decisions-2026-10-13.md`.
 - Module: `:solr:core`. Focused class: `org.apache.solr.cloud.OverseerCloseOrderingTest` (3 tests at the head).
 - Intended host: vm2 or vm1, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN. Not yet run. Pushed ungated, as the coordinator handoff allows for a patch the gate then verifies.
+- Status: FAILED at `ecda7b862ba` (vm2 gate run 2026-10-13T16:24Z-16:50Z; not relaunched; left for the main agent). Pushed ungated, as the coordinator handoff allows for a patch the gate then verifies.
+
+## Run record (vm2, 2026-10-13)
+
+- Changelog YAML OK, rc=0. Tidy rc=0, status clean. Error Prone compile rc=0.
+- Pre-fix proof (step 5): NOT_PROVEN. With `ZkController.java` reverted to `14c7aac0d151`, `testZkClientClosesUninterruptedWhenInterruptArrivesAfterOverseerCloseFinishes` passed (BUILD SUCCESSFUL, `logs/vm2/16013-proof.log`).
+- Focused run at head (step 4): rc=1. JUnit XML: 3 tests, 1 failure. `testZkClientClosesOnlyAfterOverseerCloseCompletes` failed with `java.lang.AssertionError: no node is running the overseer`, seed `C3E3D7F50937D13C` (`logs/vm2/16013-head.log`). This is the same shared-cluster ordering failure recorded for `ba26b70289`.
+- Module check (step 6): still running when this record was written. Its rc is in `logs/vm2/16013-check.log` and the gate's GATE END line.
+- The job is not GREEN, so no receipt is written and no fork push is made.
 
 ## Steps (full hardening gate)
 
