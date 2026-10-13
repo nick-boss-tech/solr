@@ -962,3 +962,12 @@ No action taken beyond this job.
 - Gate state: busy with SOLR-9155 (queue runner pid 4757, started 03:16Z, log logs/vm2/queue-g9155-gate-20261013T031600Z.out). Focused head run BUILD SUCCESSFUL; module check next; no GATE END. Heartbeat refreshed 03:37Z. Defect found: its premise-base leg checked out `solr/core/src/main/java/...`, a path that does not exist, so it compiled the head. The premise compile is re-run with the correct path after GATE END; the gate is not GREEN until that is recorded.
 - Buffer: 9 gate job files show OPEN, unclaimed (SOLR-11678-sec-r1-05, SOLR-12916-title-fix, SOLR-15106-premise-base, SOLR-15674-history-scrub, SOLR-5011-narrowing, SOLR-6014-searchtime-premise, SOLR-6430-fragment-drop, SOLR-9091-title-fix, combinedquerycomponent-real-exit-premise). Target of 3 met; no restock this run.
 - Next claimable once the queue clears: SOLR-12916-title-fix, then SOLR-9091-title-fix.
+
+## 2026-10-13T03:47Z vm2 gate backlog coordinator
+
+- Finished: none green this run.
+- Failed and action taken: SOLR-9155 GATE END at 03:36:27Z was found unrecorded (all steps rc=0, the premise-base leg checked a non-existent path and is void). Not GREEN. Premise-only re-run written (gates/g9155-premise-rerun.sh) and queued at the front of gates/queue, to start after SOLR-17680. Gate file and claim updated; pushed 3b52bcfd2e.
+- Claimed: none new (busy).
+- Gate state: busy. SOLR-17680 re-gate at ce59bbe112 running (queue pid 11525, started 03:36:27Z; changelog, tidy, Error Prone compile done; proof leg next, path checked). Claim heartbeat 03:04Z, under 50 min; refresh due by about 03:55Z if it is still running.
+- Buffer: 9 OPEN unclaimed gate jobs in gates/ (target 3 met), plus SOLR-17733 queued behind the premise re-run.
+- Next claimable once idle: SOLR-12916-title-fix, then SOLR-9091-title-fix.
