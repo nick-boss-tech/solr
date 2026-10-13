@@ -1,7 +1,7 @@
 # Gate job: SOLR-16630 re-gate after the latch change
 
 - Branch: solr-16630-submit. Head: `a31707acfdb7f0f83eb47e17435c1fe4ccf2ffda` (fork tip). Previous gated head: `9c77a4db09d7a890f62dc9a9ffb2bf5613245da7`.
-- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T14:37Z; claim claims/pool-vm2-gate-backlog-16630.md. Queued as /workspace/gates/g16630-latches-gate.sh.
+- Status: DONE 2026-10-13T15:16Z. GATE GREEN at a31707acfdb7f0f83eb47e17435c1fe4ccf2ffda (claimed by vm2 at 14:37Z; GATE START 14:43:24Z, GATE END 15:02:12Z; log logs/vm2/queue-g16630-latches-gate-20261013T144324Z.out). Deliverables: receipts/SOLR-16630.md (refreshed at the live tip), claim claims/pool-vm2-gate-backlog-16630.md (DONE). No fork push, since the gate changed no code.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: full focused gate at the new head. The change is one file in the test: one `Thread.sleep` in `testNRTRestart` is replaced by a bounded wait on the existing `addDone` latch (`addDone.await(2, MINUTES)`).
@@ -25,10 +25,10 @@
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed (one test file)
-- [ ] tidy clean with the guard
-- [ ] spotless check on :solr:core
-- [ ] focused run with JUnit XML; testNRTRestart result recorded
-- [ ] doubts 1 to 3 recorded
-- [ ] receipt refreshed at the new head; job DONE
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed (one test file)
+- [x] tidy clean with the guard
+- [x] spotless check on :solr:core
+- [x] focused run with JUnit XML; testNRTRestart result recorded
+- [x] doubts 1 to 3 recorded
+- [x] receipt refreshed at the new head; job DONE
