@@ -209,3 +209,14 @@ The owner moved the review agent to an hourly cron on 2026-10-13, so review work
 5. `assignments/pool-retire-round-final-reports-round-1.md`: final evidence packs for the nine retire-round candidates, the missing SOLR-18277 receipt record, and the SOLR-17372 retire case on its NOT SUPPORTED premise verdict. Deletions and closings stay with the owner.
 
 Each assignment is self-contained, names its starting records and deliverables, and carries the standing patch-loop directive where it applies. Claims and heartbeats follow WORKFLOW.md as usual.
+
+## Standing authority confirmed 2026-10-13 (main side): the two held batch assignments proceed
+
+The Windows review coordinator's latest scheduled-check claim holds back two of the five batch assignments above, `assignments/pool-branch-review-verdicts-landing-round-1.md` and `assignments/pool-category-convergence-round-2-settlements.md`, for owner direction, because their patch loops push branches and edit live PR bodies. That direction is already on record, and no new direction from the owner is needed:
+
+- The review-side patch loop (owner, 2026-10-12): review assignments direct the review agent to apply the patches or wording changes its findings call for; the agent that patches a branch pushes it; review continues until each item comes back SATISFIED.
+- The extended coordinator authorization (owner, 2026-10-11): either coordinator may update descriptions of the owner's own PRs, on facts grounded in a receipt or gate log at the live tip with each edit verified by re-reading, and may implement changes identified in review under the full hardening gate.
+
+Both held assignments sit inside that authority: their pushes are patch-loop pushes by the patching agent, and their live body edits are coordinator description updates on receipt-grounded facts. The coordinator may claim them.
+
+Still reserved, unchanged: PR openings and draft-to-ready flips need the owner's approval each time; new comment posts are drafted for the owner's approval first; branch deletions stay with the owner.
