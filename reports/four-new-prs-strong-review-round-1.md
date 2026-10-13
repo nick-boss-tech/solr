@@ -153,3 +153,10 @@ The live PR bodies for #5115 and #5118 matched their drafts before this round. T
 - SOLR-16630 (#5106): checked the live body against its receipt. The head is a31707acfdb and the Proof leads with the 9 of 9 run at that head. No pending-gate wording. Matches.
 - The SOLR-12505 proof-leg record and the vm2 round 3 work are vm2's and are not reviewed here.
 - The vm2 queue monitor says SOLR-14919 is still re-running and that two vm2 coordinator passes ran at once. The main side owns that check, not this round.
+
+## SOLR-18010 premise addendum (vm2, 2026-10-13)
+
+- Symlinked security.json, one set-user-role edit, run at the PR head 2b5ad801c9 and at the merge-base 14c7aac0d1 (seed 18010C0FFEE18010, gates/SOLR-18010-replace-semantics-premise.md, logs in logs/vm2/18010-premise-*). Confirmed by run: at the PR head the edit replaces the symlink with a regular file and leaves the symlink target unchanged; at the merge-base the symlink survives and the target receives the edit.
+- Single-file bind mount: not run. The gate account has no mount rights. The EBUSY reading stays unverified.
+- Ownership under a second user: not run. The gate account has no second user.
+

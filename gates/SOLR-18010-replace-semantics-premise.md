@@ -1,7 +1,7 @@
 # Premise job: what does the temp-file move do to a symlinked or bind-mounted security.json?
 
 - Code under test: draft PR #5118 head `2b5ad801c9e88807337f4f0a3fdd689126ad37d1` (`SecurityConfHandlerLocal.persistConf`). No production edit.
-- Status: CLAIMED by vm2 (coordinator) at 2b5ad801c9e88807337f4f0a3fdd689126ad37d1, 2026-10-13T16:55Z; claim claims/pool-vm2-gate-backlog-18010-replace-semantics.md. Q2 and Q3 expected skipped (no mount rights, no second user on vm2).
+- Status: DONE 2026-10-13T17:08Z by vm2 (coordinator). Q1 answered by run at both heads; Q2 and Q3 skipped (reasons below). Claim: claims/pool-vm2-gate-backlog-18010-replace-semantics.md.
 - Capability tags: premise-run.
 - Intended host: a Linux host. The symlink case needs no privileges. The bind-mount case needs mount rights; skip it and record that if the host has none.
 - Source: `reports/four-new-prs-strong-review-round-1.md`, section SOLR-18010, finding on replace semantics. The old write opened the existing path and wrote in place, which follows a symlink and works on a single-file bind mount. The new write creates a temp file and moves it over the path, which replaces the directory entry.
@@ -25,3 +25,14 @@ Verdicts per question in this file, with the observed values, the seed, and the 
 - [ ] Q2 bind mount at head and at the merge-base, or skipped with the reason
 - [ ] Q3 ownership, or skipped with the reason
 - [ ] verdicts recorded here and in the report; job DONE
+
+## Result (vm2, 2026-10-13)
+
+Seed 18010C0FFEE18010. Probe: standalone class solr/core/src/test/org/apache/solr/handler/admin/SecurityConfSymlinkProbeTest.java (throwaway, not committed), one set-user-role edit through SecurityConfHandlerLocal on a security.json that is a symlink to a file in another directory. Run with -Ptests.useSecurityManager=false: the first attempt with the default test security manager failed before the edit with AccessControlException LinkPermission "symbolic", so the symlink could not be created under the default test policy. Both legs ran with the same setting.
+
+- Q1, symlink, PR head 2b5ad801c9: the edit returned with no response exception. security.json is no longer a symlink (a regular file). The symlink target is unchanged (158 bytes, no "alice"). The probe did not read back the new security.json content, so whether that file holds the edit is not recorded here. Verdict: CONFIRMED BY RUN, the symlink is replaced by a regular file and the target no longer receives the edit. Log: logs/vm2/18010-premise-head.log; XML: logs/vm2/18010-premise-xml-head/.
+- Q1, symlink, merge-base 14c7aac0d1: the edit returned with no response exception. security.json remains a symlink, and the target holds the edit (215 bytes, "alice" present). Log: logs/vm2/18010-premise-base.log; XML: logs/vm2/18010-premise-xml-base/.
+- Q2, single-file bind mount: SKIPPED. The vm2 account is uid 1000, has no sudo, and cannot run mount --bind, so no bind-mount probe was possible. The EBUSY reading is not tested here.
+- Q3, ownership under a second user: SKIPPED. The vm2 account cannot create or change ownership to a second user.
+
+Premise addendum for the review report is in reports/four-new-prs-strong-review-round-1.md (SOLR-18010, premise addendum, vm2).
