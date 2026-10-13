@@ -135,3 +135,35 @@ Two more directions from Nick, recorded by the main agent on 2026-10-12.
 
 - The gate coordinator (vm2) has the same patch authority the review side has. A gate job file may direct vm2 to patch the branch itself so the build succeeds or so the premise is validated, instead of sending the fix back to the main side. The ticket and branch status vm2 needs is on pr-prepare, in `receipts/`, `gates/` and `claims/`. The rules around a patch are unchanged: the full hardening gate, the patching agent pushes, and the gating host refreshes the ticket's receipt.
 - While the review side has spare capacity, the main side will hand it settlement and application work as assignments, not just fresh review rounds. Where it fits, that work is framed as an apply-and-re-review loop under the patch-loop directive above. The main side keeps the local queue and the vm1 gates.
+
+## Gate census for vm2, 2026-10-12 evening (main side)
+
+The gate coordinator reported running out of work. The main side checked `gates/` and `claims/` at the pr-prepare tip on the evening of 2026-10-12 and records the true census here, because the gate queue is not empty: it holds more unclaimed jobs than the standing buffer target of 3. Receipts are not the constraint; no new gate jobs need to be created for vm2 to have work. The jobs below are OPEN and unclaimed at this tip, each verified against its job file's status line and against `claims/`, and each is claimable by vm2 under the pool rules (claim before work, hourly heartbeats).
+
+- SOLR-11678-sec-r1-05 (`gates/SOLR-11678-sec-r1-05.md`): the SEC-R1-05 branch fix, written by the claiming host under the patch-loop directive, then the full hardening gate at the new head.
+- SOLR-12916-title-fix (`gates/SOLR-12916-title-fix.md`): the CA-R1-34 changelog title correction, then a re-gate at the new head.
+- SOLR-15106-premise-base (`gates/SOLR-15106-premise-base.md`): premise and settling run for the SOLR-15106 draft's base claim.
+- SOLR-15674-history-scrub (`gates/SOLR-15674-history-scrub.md`): rebuild the branch history without the one trailer line, then the full hardening gate at the scrubbed head.
+- SOLR-17733-dated-run (`gates/SOLR-17733-dated-run.md`): dated settling run, then the receipt line.
+- SOLR-18391-changelog-wording (`gates/SOLR-18391-changelog-wording.md`): the changelog fragment wording correction, written by the claiming host under the patch-loop directive, then the full hardening gate at the new head.
+- SOLR-5011-narrowing (`gates/SOLR-5011-narrowing.md`): implement the adopted narrowing from the shared-schema analysis, add its proving test, then the full hardening gate at the new head.
+- SOLR-6014-searchtime-premise (`gates/SOLR-6014-searchtime-premise.md`): premise run only; the SOLR-6014 draft's final Limits wording follows the verdicts.
+- SOLR-6430-fragment-drop (`gates/SOLR-6430-fragment-drop.md`): delete the changelog fragment under BD-R1-13, then the docs-shaped gate at the new head.
+- SOLR-9091-title-fix (`gates/SOLR-9091-title-fix.md`): the RB-R1-04 changelog title correction, then a re-gate at the new head.
+- combinedquerycomponent-real-exit-premise (`gates/combinedquerycomponent-real-exit-premise.md`): premise run only; it settles the real timeAllowed exit questions the ticket draft leaves open.
+- pr-drift-round-1-run-records (`gates/pr-drift-round-1-run-records.md`): four record runs behind live description claims; a claimant may take one item or all four.
+
+Already in vm2's hands, so none of these needs a new claim from the list above:
+
+- SOLR-12505, under amendment 1 (`gates/SOLR-12505-fetchstream-fix-amendment-1.md`): the amendment's restructure of the fix gate, after the gate at d81a77311773 failed at compile.
+- The SOLR-14919 re-gate at 8f1f4ef91e (`gates/SOLR-14919-processor-only-gate.md`), claimed and running.
+- SOLR-17680 (`gates/SOLR-17680-message-regate.md`), claimed by vm2 at 2026-10-13T03:04Z.
+- SOLR-10667-exclusion (`gates/SOLR-10667-exclusion.md`), claimed by vm2; its fix commit is recorded and its gate is queued on vm2's serial queue.
+- SOLR-9155-declared-route-gate (`gates/SOLR-9155-declared-route-gate.md`), claimed by vm2 at 2026-10-13T02:46Z, so it is already taken and does not belong on the unclaimed list.
+
+Two standing vm2-local items from the 2026-10-11 push request above are still owed. The SOLR-10364 and SOLR-11678 packaged pushes were completed on 2026-10-12, but two packaged heads are still local to vm2 and have not reached the fork:
+
+- SOLR-11356: push packaged head 6120dae28d04a07763f44d4bc5e9d9793af025f6 to solr-11356-submit (fork tip 8474e5a3a26d8aacd25d9fc9838c627bc6c5b14f), and refresh receipts/SOLR-11356.md on the push. After the push, SJ-R1-49 still needs its recorded branch fix (copy the headers in the stream key) and a proof re-run at the new head.
+- SOLR-12161: push packaged head cdd265168a2adc76fb788f3d1f5587a3eee05e42 to solr-12161-submit (fork tip 1725cbd8489889a1dad75279e4b2c11b0ec93d66), and refresh receipts/SOLR-12161.md on the push.
+
+One exclusion: the SOLR-10667 and SOLR-12347 gate jobs (`gates/SOLR-10667.md` and `gates/SOLR-12347.md`) are blocked on vm2 by its npm cache failure (the @babel/plugin-syntax-dynamic-import resolution failure). The main side takes those two on vm1 under the established workaround (a fresh NPM_CONFIG_CACHE clears them), so vm2 should leave both jobs alone.
