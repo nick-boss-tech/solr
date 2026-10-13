@@ -1017,3 +1017,4 @@ No action taken beyond this job.
 - Gate state: busy with one gate, one at a time. Claim heartbeat under 50 min; no refresh due.
 - Next claimable once idle: SOLR-13097 (rebase, force-with-lease at claim time), then SOLR-11939, per the buffer order.
 - 2026-10-13T05:45Z busy: SOLR-9155-logging-regate running on vm2 (GradleWrapperMain pid 50315, started 05:37:18Z, at compile-errorprone, no GATE END); claim heartbeat 05:07Z, 38 min old, no refresh due; no new claim.
+- 2026-10-13T06:00Z busy: SOLR-5813/12991 dated focused runs running on vm2 (queue pid 54544, started 05:55:38Z, at focused-head, no GATE END; claim solrcloud-dated-round-2 05:36Z, 24 min old, no refresh due); SOLR-15035 base run queued behind it (claim 05:48Z); no new claim.
