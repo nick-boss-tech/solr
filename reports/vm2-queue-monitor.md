@@ -1190,3 +1190,4 @@ No action taken beyond this job.
 - Gate state: one gate running (SOLR-14919 at 8f1f4ef91e). SOLR-17292 is claimed by an earlier pass (89a18669ad) and not started here.
 - Next claimable: none in round 3 until SOLR-14919 ends and the SOLR-12505 ruling lands. Then the buffer's first unclaimed job in order (SOLR-16437-changelog-regate per the 2026-10-13 census), claimed on the next idle pass after a claims/ check.
 - Repo note: the shared worktree /workspace/gates/vm2-coord-wt still carries a stale interactive rebase (rebase-merge, no process). Not cleared; this pass committed from a temporary worktree at /tmp/vm2-r3-wt.
+- 2026-10-13T16:00Z vm2 busy pass: SOLR-14919 re-run at 8f1f4ef91e still running (Gradle pid 112461, started 15:47:27Z, focused-head leg, no GATE END), not relaunched. Failed this pass: none. Claimed: none. Next claimable: none until SOLR-14919 ends and the SOLR-12505 pre-fix probe lands; SOLR-17292 is claimed (heartbeat 16Z).
