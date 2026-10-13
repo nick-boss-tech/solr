@@ -6,4 +6,4 @@
 - Job: `gates/SOLR-18541-exactness-gate.md`
 - Head: `fcd92f23ba65f304ee542c6fe0fec73d5d9e8ce2` (solr-18541-combined-query-merge-totals, fork tip read by ls-remote at claim time)
 - Runner path: `/workspace/gates/g18541-gate.sh`, worktree `/workspace/gates/solr-18541`
-- Status: CLAIMED. Full focused gate with fail-before. No fork push, no PR touched.
+- Status: DONE. GATE GREEN at fcd92f23ba (GATE END 2026-10-13T15:26:16Z), receipt receipts/SOLR-18541.md refreshed, job gates/SOLR-18541-exactness-gate.md marked DONE. No fork push, no PR touched.

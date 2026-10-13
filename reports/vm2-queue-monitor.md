@@ -1171,3 +1171,10 @@ No action taken beyond this job.
 - Claimed: none. vm2 busy with the SOLR-18541 gate (queue runner started 15:02Z, focused-head leg, no GATE END, claim 14:45Z so no heartbeat due).
 - Gate state: one gate running, SOLR-18541 at fcd92f23ba (logs/vm2/queue-g18541-gate-20261013T150212Z.out). Open claims left for the main side: SOLR-10667, SOLR-12347 (vm1 workaround per the handoff), SOLR-14919 (run 2 interrupted at focused-head, awaiting main-side re-run decision).
 - Next claimable: gates/SOLR-16437-changelog-regate.md, OPEN and unclaimed in the shared buffer; claimed on the next idle pass after a claims/ check.
+
+## 2026-10-13T15:32Z vm2 gate backlog coordinator (gate finish and busy-check pass)
+
+- Finished: SOLR-18541 exactness gate GREEN at fcd92f23ba (GATE END 15:26:16Z). Focused CombinedQueryComponentMergeTotalsTest 8 of 8 from fresh JUnit XML, 0 failures, new test passes. Fail-before at d5ed34125db9 fails the new test with numFoundExact expected:<false> but was:<true>. Receipt section added to receipts/SOLR-18541.md, gate file and claim DONE. No fork push, no PR touched.
+- Failed and action taken: none this pass.
+- Claimed: none. vm2 busy with the batch-A base dated runs (SOLR-5813, SOLR-12991, SOLR-13186, SOLR-15863; claim 15:19Z, run started 15:26Z, no GATE END yet, heartbeat not due).
+- Next claimable: the round 3 order in assignments/pool-vm2-gate-backlog-round-3.md, once batch-A ends: SOLR-12505 proof leg, SOLR-14919 re-run at 8f1f4ef91e, SOLR-17292 dated record. Buffer job gates/SOLR-16437-changelog-regate.md stays OPEN and unclaimed behind them.
