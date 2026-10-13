@@ -1,7 +1,7 @@
 # Gate job: SOLR-18178 base-leg run for the receipt's focused set
 
 - Branch: solr-18178-verify. Head: `b75e7d4d3c464ceeb9f14fdaf7711212adcccac2` (live tip, verified by ls-remote at posting, 2026-10-13; GATE GREEN per receipts/SOLR-18178.md; a live PR at this head is already ready).
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T13:48Z; claim claims/pool-vm2-gate-backlog-18178-base-leg-run. Queued as /workspace/gates/g18178-gate.sh.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: base-leg record run only. The base-leg tree is a scratch worktree: never committed, never pushed.
