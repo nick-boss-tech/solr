@@ -130,7 +130,7 @@ Held (not applied), with the reason:
 
 Owner items:
 - O1 permission-copy failure: warn and proceed (recommended), or fail the edit.
-- O2 file replacement: keep replace-by-move and disclose (E11), resolve symlink targets before the move, or fall back to an in-place write where a move is refused (gives back base behavior and loses atomicity there). Decide after G4a and G4b.
+- O2 file replacement: keep replace-by-move and disclose (E11), resolve symlink targets before the move, or fall back to an in-place write where a move is refused (gives back base behavior and loses atomicity there). The symlink half is confirmed by run; decide the bind-mount half after G4a and G4b.
 - O3 Windows read and replace: accept and disclose (E10), retry the move briefly, or take the edit lock on the read path. Needs a Windows check that this host cannot run.
 - O4 records: the receipt cites `g18010-gate.log`, `g18010-premise.log` and `g18010-settle.log`. None is on this branch or on this host. The permissions re-gate XML sits on vm2. The base-fail claims stand on the receipt's narration until the logs are archived.
 - O5 the other contributor's PR (per the overlap report only; not read or acted on in this round): the forced-interleave test cannot be adopted without the atomic write, and the lock test can be adopted alone. The draft stays a draft under every answer the other contributor might give. No answer moves the PR out of draft; that stays with the owner while the offer is outstanding.

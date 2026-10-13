@@ -7,4 +7,4 @@
 - Staffing: three subagents. S1 takes the SOLR-18010 draft and premise. S2 takes the SOLR-18540 receipt and draft, and the addendum to the canonical report. S3 takes the four vm1 gate files and claims.
 - Limits: no PR opened, closed, flipped or commented on; no live PR body edited; no fork branch changed; no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T17:12Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T17:40Z. Deliverable: `reports/vm1-gates-and-18010-18540-recheck-round-1.md`. Verdicts: SOLR-18010 draft NOT SATISFIED until G1 and G2 are recorded; SOLR-18540 SATISFIED (flip actor is an owner item); the 18541 review-patch gate and score-only input NOT READY (width and fixture); the QueryComponent real-exit premise READY; 18010 G2 READY. Draft edits applied to the 18010 draft and one line of the canonical report; no live body edited.
