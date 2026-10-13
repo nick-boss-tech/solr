@@ -904,3 +904,14 @@ No action taken beyond this job.
 - Buffer: six OPEN, unclaimed gate jobs, above the minimum of three: SOLR-11288-title-regate, SOLR-12651-title-regate, SOLR-12916-title-fix, SOLR-14919-processor-only-gate, SOLR-15863-title-regate, SOLR-17680-message-regate. SOLR-10667 and SOLR-12347 are environment-blocked and not claimable without a host change.
 - Next claimable in the order checked: SOLR-11288-title-regate (fork head cbf0c678f2, focused TestCollectionAPI). Not yet claimed.
 - Gate state: idle.
+
+## 2026-10-13T01:42Z vm2 gate backlog coordinator
+
+- Finished: SOLR-11288-title-regate GREEN at cbf0c678f2 (GATE END 01:37:18Z; TestCollectionAPI 4 of 4 from fresh JUnit XML). Receipt receipts/SOLR-11288.md, job and claim DONE. SOLR-12651-title-regate GREEN at 404f13b501 (GATE END 00:51:09Z; TestLocalFSCloudBackupRestore 2 of 2). Receipt receipts/SOLR-12651.md, job and claim DONE. Pushed to pr-prepare at 029884d601. No fork push: both were changelog-only heads already on the fork.
+- Failed: none new. SOLR-12505 has an interrupted run (head ee67d37421, started 01:00:51Z, last output 01:12Z, no GATE END). Proof leg failed by content as expected; focused-head leg never finished. Recorded in claims/pool-vm2-gate-backlog-12505.md. Not relaunched; main agent decision.
+- Claims with live-looking heartbeats but no runner launched: SOLR-13186 (01:17Z), SOLR-15863 (01:17Z), SOLR-14919 (01:02Z). Their runners exist (gates/g13186-gate.sh, g15863-gate.sh, g14919-gate.sh) but there are no logs in logs/vm2 and no process. Counted as busy under the 60-minute rule, so nothing was launched. If no log appears by about 02:20Z, these claims are dead and the next run should release them.
+- Overlap: SOLR-12085 (01:13Z to 01:34Z), SOLR-11288 (01:15Z to 01:37Z) and the 12505 run (01:00Z to 01:12Z) ran at the same time on vm2, against the one-gate-at-a-time rule. All three finished or stopped. Flagged for the main agent.
+- Coordination worktree: the stale interactive rebase noted above (db4d9ca6f0, SOLR-13136 claim) was superseded by origin's newer DONE version of that claim; it was cleared and the pending commit was replayed onto origin/pr-prepare. The earlier note asking a human to decide is resolved.
+- Claimed: none this run. Busy.
+- Unclaimed gate jobs left in the buffer: SOLR-12916-title-fix and SOLR-17680-message-regate. That is below the minimum of three; restock on the next run once the busy claims clear.
+- Gate state: busy (claims above, no live process). Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
