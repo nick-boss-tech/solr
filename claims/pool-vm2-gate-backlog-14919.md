@@ -6,3 +6,5 @@
 - Runner: gates/g14919-gate.sh, worktree /workspace/gates/solr-14919-gate (detached), log gates/logs/vm2/14919-run.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED by vm2.
+
+- 2026-10-13T02:01Z vm2 gate backlog coordinator heartbeat: SOLR-14919 claim refreshed. Gate still running (log /workspace/gates/logs/vm2/14919-head.log growing at 02:01Z, focused-head leg, no GATE END). Busy; nothing launched or recorded.

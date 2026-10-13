@@ -916,3 +916,9 @@ No action taken beyond this job.
 - Unclaimed gate jobs left in the buffer: SOLR-12916-title-fix and SOLR-17680-message-regate. That is below the minimum of three; restock on the next run once the busy claims clear.
 - Gate state: busy (claims above, no live process). Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
 - 2026-10-13T01:46Z vm2 gate backlog coordinator: busy. SOLR-14919 processor-only re-gate running (claim 01:02Z, gate started 01:43Z, log /workspace/gates/logs/vm2/14919-tidy.log, at tidy, no GATE END). Heartbeat 44 min old, no refresh needed. Nothing launched or recorded this run.
+
+## 2026-10-13T02:01Z vm2 gate backlog coordinator
+
+- Finished: none. Busy: SOLR-14919 processor-only re-gate running (claim 01:02Z; log 14919-head.log at focused-head leg, no GATE END). Heartbeat refreshed at 02:01Z.
+- Claimed: none this run. Nothing launched. Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate (buffer at 2 unclaimed plus SOLR-15863 and SOLR-13186 claims still live, below the minimum of three; restock after the busy claims clear).
+- Gate state: busy.
