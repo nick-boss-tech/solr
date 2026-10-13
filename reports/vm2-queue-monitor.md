@@ -1053,3 +1053,16 @@ No action taken beyond this job.
 - Next claimable once idle: gates/SOLR-11479-identity-carry.md (the carry-over job has no live claim; the 2026-10-11 DONE claim is for the earlier job). Other open supply: SOLR-5011-narrowing, SOLR-6430-fragment-drop, combinedquerycomponent-real-exit-premise, pr-drift-round-1-run-records. Check claims/ at claim time.
 
 - 2026-10-13T07:45Z busy: SOLR-11288 base run live (runner started 07:45:13Z, claim 07:37:27Z, at focused-base, no GATE END), no new claim. Next claimable once idle: gates/SOLR-11479-identity-carry.md, claim state checked at claim time.
+
+## 2026-10-13 08:35Z vm2 gate backlog coordinator
+
+- Finished: SOLR-11288 base run (GATE END 07:52:09Z). At the merge-base, TestCollectionAPI.test fails at line 321 with "duplicate element: shard1" (1 of 4 tests), so the premise holds. Base-run section in receipts/SOLR-11288.md; job and claim DONE; pushed 6f36ad3185.
+- Finished: SOLR-15035 base and banked-patch runs (GATE END 06:19:20Z), recorded in receipts/SOLR-15035.md (base 1 of 1 failing on expected:<2> but was:<null>; banked-patch alone 3 of 3). The claim had left the receipt for the main agent; the GATE END log was recorded here instead. Pushed 0422f6b81b.
+- Finished: SOLR-11479 carry-over at 6f739cfbbd. Tree eb90a93c identical to the gated head 360dca60fc; all five commits by Nick Shanin with no trailers; changelog parses. Receipt refreshed at the live tip; job and claim DONE; pushed d47d96efda.
+- Finished: SOLR-18391 changelog wording, fix commit 327ca7b722, gate GREEN at that head: tidy clean, Error Prone compile, focused 5/5, 5/5, 26/26, 4/4, 8/8 from fresh XML, check rc=0. Scope decision under the decision default: the alias clause names the refused delete for an alias with a different name. Live PR #5027 choice 1 is consistent with it; no body edit. The fork push (327ca7b722) and the receipt and job completion were recorded by a second session on this host in cb23bda3e4; checked against the gate log, they match.
+- Failed and action taken: none new. SOLR-14919 re-gate (run 2 at 8f1f4ef91e) was interrupted at focused-head with no GATE END; it executed tests, so it is not relaunched and still waits on the main agent's re-run decision.
+- Concurrency: a second session on this host committed in the coordination worktree. SOLR-17680 was claimed at 08:16Z and BLOCKED at 08:19Z (the negative case asserts a 400 for a category router with no maxCardinality; owner decision needed; no gate, no code). Its claim has no DONE or FAILED line, so vm2 reads busy until 09:19Z or until that claim is closed. Main agent: please confirm only one coordinator session drives vm2 at a time.
+- Claimed: none this run (busy with the open SOLR-17680 claim).
+- Gate state: no Gradle process running; no gate open on vm2 claims with a GATE END unrecorded. /workspace/gates/solr-18391 is shown as prunable by git; left in place.
+- Queue: 4 unclaimed gate jobs (SOLR-5011-narrowing, SOLR-6430-fragment-drop, combinedquerycomponent-real-exit-premise, pr-drift-round-1-run-records). Buffer target of 3 is met; no restock.
+- Next claimable once vm2 is idle: gates/SOLR-5011-narrowing.md, then gates/SOLR-6430-fragment-drop.md. Check claims/ at claim time.
