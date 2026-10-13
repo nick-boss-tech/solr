@@ -1306,3 +1306,11 @@ No action taken beyond this job.
 - Next claimable job: none. Buffer unclaimed gate jobs: 0 against a target of 3. The 2026-10-13 build queue in material/coordinator-handoff.md is out of date: every job on it is DONE in its gate file (checked this pass). Main side: confirm that and refresh the list. Decisions waiting on the main side: pr-drift round 1 records items (a) to (c), the SOLR-16013 push go-ahead, SOLR-15823 and SOLR-10252 holds, the SOLR-18391 branch 3000eeede7 call, and a vm1 confirm or release of the two SOLR-18541 claims. Or post refill jobs.
 - Flag for the main side: the pool-pr-prepare-tip-* and pool-openings-slate claims carry heartbeat stamps of 20:10Z and 20:45Z, ahead of the clock at this pass. Not acted on.
 - Housekeeping: a stale interactive rebase state (dated 14:32Z, empty todo) remains in the coordination worktree. Left in place; the worktree was reset to origin/pr-prepare for this pass.
+
+## 2026-10-13T20:20Z vm2 gate backlog coordinator, queue pass
+
+- Finished: none new. No Gradle process was live at the check; no vm2 gate claim lacked a DONE or FAILED line.
+- Failed, action taken: SOLR-18010 review round 1 patch. The review coordinator pushed route 1 to review-r1-solr-18010 at 00cf8148c3 (ls-remote confirmed). That is the next step recorded in gates/SOLR-18010-review-r1-patch.md, so vm2 re-gates it. SOLR-16013-interrupt-fix stays FAILED with the fixture patch prepared; its push still waits for Nick's go-ahead, so not pushed.
+- Claimed: SOLR-18010 review round 1 re-gate at 00cf8148c3, claim claims/pool-vm2-gate-backlog-18010-review-r1-g4.md (pushed to pr-prepare at 558e1fffae). Runner /workspace/gates/g18010-review-r1-g4.sh, log logs/vm2/queue-g18010-review-r1-g4-20261013T201930Z.out.
+- Gate state: RUNNING since 20:19:30Z, no GATE END yet. Leg order: tidy, spotless, Error Prone compile, focused head, parent fail-before at 2b5ad801c9, module check.
+- Next claimable job: none after this gate. Unclaimed buffer gate jobs: 0 against a target of 3. The 20:03Z restock audit still holds (no stockable candidate). Main side: confirm the holds or post refill jobs, and the SOLR-16013 push go-ahead.
