@@ -31,3 +31,10 @@
 - Construction error cause: StreamFactory.constructStream (solrj-streaming expr/StreamFactory.java, the ctor.newInstance wrap around lines 593 to 611) wraps a constructor's IOException in an InvocationTargetException with no message, so the outer message is "Unable to construct instance of ...FetchStream" and the validation text sits on the cause chain. The head run failed because the test checked only the outer message. The test now checks the cause chain (causeChainContains). StreamFactory is unchanged. This is production behaviour outside the FetchStream fix; it loses the reason for every stream constructor and is recorded here for the owner, not fixed in this job.
 - Compile leg cause: the assertThrows lambda held several statements (AssertThrowsMultipleStatements). The stream setup and drain now sit in drainFetchStream, so each lambda is one call.
 - Proof leg, seed, counts: recorded when the gate at ee67d37421 completes.
+
+## Trigger input for the re-run proof leg (round 3, amendment 2)
+
+- Test: StreamDecoratorTest.testFetchStreamRejectsJoinFieldNameThatBreaksLocalParams at ee67d374219275907ef1b78e3d2b455b6a15e43f (StreamDecoratorTest.java lines 1009 to 1030).
+- Exact trigger: the expression `fetch(COLLECTION, search(COLLECTION, q=*:*, fl="id,a_s,a_i", sort="a_i asc"), on="id=a i", batchSize="2", fl="subject")`, so the join field name is the two-character-plus-space value `a i` (on= value `id=a i`).
+- Assertion: assertThrows(IOException) on drain, then causeChainContains(e, "invalid join field name [a i]").
+- Proof seed: 12505C0FFEE12505. Runner: gates/g12505-proof-gate.sh (proof leg only; FetchStream.java reverted to 5f20e1171bc890509d76e4f5f7defcc4fc8c102c).
