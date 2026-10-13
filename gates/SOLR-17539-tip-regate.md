@@ -9,11 +9,20 @@
 - Gate steps: changelog YAML parse and changelog lint; tidy with a clean tree afterward; reference guide local build at the tip; module check for the module named in the gate log, `-x test`.
 - On green: refresh receipts/SOLR-17539.md with a live-tip section (tip sha, steps, the module named); mark this job DONE and the claim DONE. No fork push: the tip is already on the fork.
 - On failure: record the failing step and message in this file; do not relaunch unchanged.
+- Status: FAILED 2026-10-13T11:31Z at a step the gate could not pass (reference guide build). Not relaunched; left for the main agent.
+
+## Failure record
+
+- Run: gates/g17539-gate.sh, GATE START 2026-10-13T11:14:30Z, head f9d201a278b9418ae71d8123ff9269edccd7776a, worktree /workspace/gates/solr-17539-gate.
+- Passed at the tip: delta is one file (configuration-guide caches-warming.adoc, 1 insertion, 1 deletion); changelog YAML parse rc=0; changelog lint rc=0; tidy rc=0; tidy-clean status empty.
+- Failed: reference guide build `:solr:solr-ref-guide:buildLocalSite` rc=1 in `buildLocalAntoraSite`, message: "Local content source must be a git repository: /workspace/gates/solr-17539-gate". The gate worktree's `.git` is a gitfile, which Antora rejects. Environment cause, not a content cause, as far as the log shows; the page itself was not checked (page-check found no built caches-warming.html).
+- Not run: module check `:solr:core:check -x test`. The log stops at its start (logs/vm2/17539-check.log, no rc line, no GATE END); no tests executed.
+- No green at the tip. Receipt not refreshed.
 
 ## Step checklist
 
-- [ ] changelog parse and lint at the tip
-- [ ] tidy on a clean tree
-- [ ] reference guide build at the tip
-- [ ] module check
+- [x] changelog parse and lint at the tip
+- [x] tidy on a clean tree
+- [ ] reference guide build at the tip (FAILED, see failure record)
+- [ ] module check (not completed)
 - [ ] receipt refreshed; job and claim DONE
