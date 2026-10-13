@@ -893,3 +893,14 @@ No action taken beyond this job.
 
 - Busy: SOLR-16013 re-gate running (started 09:41:48Z, log /workspace/gates/logs/vm2/16013-gate.out, at tidy, no GATE END). Claim heartbeat 09:39Z, under 50 minutes, no refresh needed. No finish or failure to record.
 - Next claimable in buffer order after 16013: SOLR-13136, then SOLR-13943, SOLR-15805.
+
+## 2026-10-13T01:37Z vm2 gate backlog coordinator
+
+- Busy check: no Gradle or runner process started by vm2; no live vm2 gate.
+- Finished: SOLR-12085-title-fix, GATE GREEN at a220b0728d (GATE END 01:34:41Z). Receipt section "Title-fix head a220b0728d", fork solr-12085-submit at a220b0728d (ls-remote). Job and claim DONE, pushed to pr-prepare at e350a5ab67.
+- Failed: none new. SOLR-16013 is closed: the FAILED run at ba26b70289 is superseded by the green receipt at 408317d7e2 (vm1). Claim file set to CLOSED.
+- Claimed: none this run.
+- Coordination worktree: /workspace/gates/vm2-coord-wt has an interactive rebase in progress (onto 28a49b849d, one pending pick db4d9ca6f0, SOLR-13136 consistency-pass claim). Not touched; its state predates this coordinator's runs and needs a human to decide whether to resume or abort. Plumbing commits avoid it.
+- Buffer: six OPEN, unclaimed gate jobs, above the minimum of three: SOLR-11288-title-regate, SOLR-12651-title-regate, SOLR-12916-title-fix, SOLR-14919-processor-only-gate, SOLR-15863-title-regate, SOLR-17680-message-regate. SOLR-10667 and SOLR-12347 are environment-blocked and not claimable without a host change.
+- Next claimable in the order checked: SOLR-11288-title-regate (fork head cbf0c678f2, focused TestCollectionAPI). Not yet claimed.
+- Gate state: idle.
