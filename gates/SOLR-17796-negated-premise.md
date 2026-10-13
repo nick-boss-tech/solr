@@ -2,7 +2,7 @@
 
 - Branch: solr-17796-submit. Head: 661165d2673de9211846e276c05daf1fd0e879d6 (live tip, matches the draft in pr-drafts/query-parsing/SOLR-17796.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm2 (2026-10-12T23:30Z, claims/pool-vm2-gate-backlog-17796.md).
+- Status: DONE. Verdict: EXCEPTION OCCURS at head 661165d2673de9211846e276c05daf1fd0e879d6 (run 2026-10-13T00:00Z, runner gates/g17796-gate.sh, log logs/vm2/17796-probe.log, probe diff logs/vm2/17796-probe.diff).
 - Capability tags: gate.
 - Job type: premise run only. No branch edit, no gate. Posted by the Group O settlement (2026-10-11): the draft's Limits now state that a negated collapse "may still occur there" for the ticket's UnsupportedOperationException, verified by code reading (the branch unwraps only a lone required PostFilter; a negated one stays wrapped, and a wrapped CollapsingPostFilter has no createWeight). The fidelity round asked for the case to be run before posting; this job is that run.
 
@@ -19,6 +19,14 @@ A probe test written for this job lives in the job's worktree only; do not commi
 
 ## Step checklist
 
-- [ ] probe test written for the negated collapse case
-- [ ] run executed; outcome read from fresh JUnit XML
-- [ ] verdict recorded here and in receipts/SOLR-17796.md; job and claim DONE
+- [x] probe test written for the negated collapse case
+- [x] run executed; outcome read from fresh JUnit XML
+- [x] verdict recorded here and in receipts/SOLR-17796.md; job and claim DONE
+
+## Verdict
+
+- EXCEPTION OCCURS. Probe query: `q=*:*`, `q.op=AND`, `fq=-{!collapse field=group_s}`, `sort=id asc`, on 3 docs (two in group1, one in group2), committed.
+- Exception text: `java.lang.UnsupportedOperationException: Query CollapsingPostFilter(field=group_s, nullPolicy=ignore, GroupHeadSelector[type=SCORE, selectorText=score], size=100000) does not implement createWeight`.
+- JUnit XML (solr/core/build/test-results/test/TEST-org.apache.solr.search.TestCollapseQParserPlugin.xml, fresh at 2026-10-13T00:06:46Z): tests=1 skipped=0 failures=0 errors=0; the probe catches the throwable and prints it, so the test passes and the verdict is read from the printed PROBE-17796 line.
+- Seed: 17796C0FFEE17796. Log: logs/vm2/17796-probe.log.
+- The probe was not committed to the branch; its diff is kept at logs/vm2/17796-probe.diff.

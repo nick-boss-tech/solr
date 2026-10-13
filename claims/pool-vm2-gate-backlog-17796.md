@@ -5,4 +5,4 @@
 - Capability tags: gate.
 - Runner: gates/g17796-gate.sh, worktree /workspace/gates/solr-17796-gate (detached).
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED by vm2.
+- Status: DONE. Verdict EXCEPTION OCCURS (UnsupportedOperationException from CollapsingPostFilter.createWeight) at 661165d2673de9211846e276c05daf1fd0e879d6; recorded in gates/SOLR-17796-negated-premise.md and receipts/SOLR-17796.md.
