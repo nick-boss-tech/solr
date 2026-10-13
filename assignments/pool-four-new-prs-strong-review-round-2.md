@@ -36,3 +36,10 @@ Round 1 returned SATISFIED for #5116 (SOLR-18540) and NOT SATISFIED for #5115 (S
 ## Deliverable
 
 `reports/four-new-prs-strong-review-round-2.md`, one section per PR with the verdict line. The loop ends when all four read SATISFIED, or when a finding is recorded as an owner item with the reason it cannot be settled.
+
+## Owner decisions, 2026-10-13
+
+1. SOLR-18541, multi-query `numFoundExact`: the question stays posed as the PR's Choice. Do not add the reviewer's recommended change (report `numFoundExact` false whenever more than one sub-query contributes) to any patch. The current behavior and the posed Choice stand, and the maintainers answer it.
+2. SOLR-18541, the missing per-query entry crash (the Q2 `IndexOutOfBoundsException` and its family): this stays a named follow-up in the PR's Limits. No follow-up ticket is filed for it until after the PR merges.
+
+Both rulings are recorded on the main side as examples under the decision ladder: where a genuine choice exists, the PR poses it as a Choice rather than settling it silently in code; and an item listed as a follow-up does not get its own ticket until after the PR that names it has merged.
