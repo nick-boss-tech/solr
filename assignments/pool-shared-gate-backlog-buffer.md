@@ -73,3 +73,9 @@ Added after SOLR-5011 went DONE and the buffer fell to two unclaimed jobs agains
 - SOLR-17539-tip-regate (gates/SOLR-17539-tip-regate.md): docs-only commit f9d201a278 past the gated head; docs-shaped re-gate at the tip.
 
 Audit candidates not stocked, with the reason: SOLR-15823 (stacked on a superseded PR head; needs a main-side decision), SOLR-10322 (changelog-title-only commit past the gated head; module not yet checked), SOLR-14913 (comment-only commit past the gated tree), SOLR-7267 (packaging removal past the gated tree), SOLR-11475 (history rewrite with the tree identical to the gated head; receipt refresh only, no gate). The next restock pass checks SOLR-10322 and SOLR-11475 first.
+
+## Restock, 2026-10-13 (vm2 gate backlog coordinator, 10:58Z, second pass)
+
+The audit candidates from the 10:39Z pass were checked against receipts and fork tips (ls-remote, same session). Stocked: SOLR-10322-tip-regate (gates/SOLR-10322-tip-regate.md, changelog-title commit 80ce9d7a3c8 past the gated head 0523a10639dd; docs-shaped module check) and SOLR-14913-tip-regate (gates/SOLR-14913-tip-regate.md, comment-only commit b80221f46d3 past the gated tree 51fe1087fe; top-up tidy, compile, focused class, module check). Not stocked, with the reason: SOLR-11475 (the receipt already names the new head 229947201fd7; the tree is identical to the gated tree 3223028c, so no gate is owed); SOLR-7267 (the tip removes only the SOLR-7267-TESTING.md handoff doc past the gated tree c3d8cb47d2; packaging removal, carried by the receipt); SOLR-15823 (stacked on a superseded PR head; main-side decision).
+
+Unclaimed gate jobs in the buffer after this pass, claimable by vm1 or vm2: SOLR-18368-tip-regate (claimed by vm2 at 10:47Z, running), SOLR-17539-tip-regate, SOLR-10322-tip-regate, SOLR-14913-tip-regate. Target of 3 unclaimed met once SOLR-18368 is taken. Blocked, not in supply: SOLR-17680-v2-two-router-test (owner decision, see its "Blocked at claim" section).
