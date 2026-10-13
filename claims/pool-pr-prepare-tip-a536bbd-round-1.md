@@ -7,4 +7,4 @@
 - Staffing: two subagents. S1 takes the SOLR-18010 failure analysis. S2 takes the status board.
 - Limits: no gate relaunched; no status line changed; no PR opened, closed, flipped or commented on; no live PR body edited; no fork branch changed; no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T17:55Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T18:10Z. Deliverable: `reports/round-2-inputs-and-18010-gate-round-1.md`. The SOLR-18010 review-patch gate record: head confirmed; the rc checks and the truncation mechanism are supported; a green fail-before is not established under the gate file's own wording (one of four failing names recorded; the rule for green is undefined). The round 2 status board: no input DONE GREEN. No gate relaunched, no status line changed.
