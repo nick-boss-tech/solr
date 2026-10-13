@@ -6,4 +6,4 @@
 - Runner path: /workspace/gates/solr-9091-titlefix (detached worktree); gate script /workspace/gates/g9091-titlefix-gate.sh.
 - Capability tags: implementation, gate. Staffing: 1.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED.
+- Status: DONE: 2026-10-13T05:41Z by vm2 (coordinator), recorded on the gate's own GATE END at 05:37:18Z. GREEN at a596a39d2e1eb3dcc9d2360c2b13c81925dfbfcc. Deliverables: receipts/SOLR-9091.md, gates/SOLR-9091-title-fix.md, pr-drafts/replication-backup/SOLR-9091.md.

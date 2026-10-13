@@ -2,7 +2,7 @@
 
 - Branch: solr-9091-submit. Head: e6bfa5c626812f1452ed8c0158697ab8653a40d2 (live tip, verified by ls-remote at posting, 2026-10-11; this is the packaged head, GATE GREEN per receipts/SOLR-9091.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: DONE by vm2 (gate GREEN at a596a39d2e1eb3dcc9d2360c2b13c81925dfbfcc, gate 2026-10-13T05:19:08Z to 05:37:18Z; pushed as a fast-forward from e6bfa5c626; receipt receipts/SOLR-9091.md refreshed; draft changelog link re-pointed in pr-drafts/replication-backup/SOLR-9091.md).
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/replication-backup-convergence-round-1-response.md, item RB-R1-04 (verified there against the head code: `verifyRestoredFile` runs inside the download copy in RestoreCore.java and the throw comes before the switch, so no rollback is involved in the failure the title describes).
