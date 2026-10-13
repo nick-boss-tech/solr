@@ -7,4 +7,4 @@
 - Staffing: two subagents. S1 takes (1). S2 takes (2).
 - Limits: read-only; no PR, comment or GitHub write; no gate relaunched; no branch moved; no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T20:20Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T20:45Z. Deliverable: `reports/overlap-reply-and-g3-claim-round-1.md`. The posted reply: the "600 permissions" statement is not supported by the record (0644 observed, 0640 expected); the symlink statement is supported; the mount statement is unresolved; the sent body is not stored on the branch. The G3 claim names the right fork head but cannot show the fail-before and conflicts with the job's stop rule; no go-ahead for the route 1 push is recorded. No PR, comment, branch or gate touched.
