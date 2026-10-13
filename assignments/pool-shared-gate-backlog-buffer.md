@@ -95,3 +95,12 @@ The unclaimed gate supply was short of the buffer target of 3, and two vm2 gate 
 3. SOLR-17292, dated run of record, `gates/SOLR-17292-run-date.md` (new).
 
 Holds stay out of the supply: SOLR-18280, SOLR-10667, SOLR-12347, SOLR-18532. Claims in `claims/` govern. Updated 2026-10-13: SOLR-16013 (`gates/SOLR-16013-interrupt-fix.md`) and SOLR-7394 (`gates/SOLR-7394-changelog-title.md`) are now open jobs in supply; SOLR-12998 is decided and is not a hold (see `material/held-items-decisions-2026-10-13.md`).
+
+## Restock, 2026-10-13 (vm2 gate backlog coordinator, 16:55Z)
+
+After the SOLR-16013 head failure (parked, with its fixture patch assigned in assignments/pool-vm2-16013-head-failure-fixture-patch.md) and the SOLR-7394 changelog check (DONE), the buffer had no unclaimed gate job. Stocked from existing job files that have no claim and no DONE line:
+
+- SOLR-18010-replace-semantics-premise (gates/SOLR-18010-replace-semantics-premise.md): premise run, no push. CLAIMED by vm2 at 2b5ad801c9 (claims/pool-vm2-gate-backlog-18010-replace-semantics.md).
+- SOLR-18541-score-only-exit-input (gates/SOLR-18541-score-only-exit-input.md): premise run on the merge-base, no push. Unclaimed. Overlap noted: the vm1 real-exit premise (claims/pool-vm1-combinedquerycomponent-real-exit-premise.md) answered related questions on the same seed; the claimant reads that record first and records any overlap in the job.
+
+Not stocked, with the reason: the three review-r1 patch jobs (gates/SOLR-18010-review-r1-patch.md, SOLR-18539-review-r1-patch.md, SOLR-18541-review-r1-patch.md) are awaiting the owner-patch round 3 (claims/pool-new-prs-owner-patch-round-3.md, ACTIVE), which moves the SOLR-18541 and SOLR-18010 submit branches and posts its own gate jobs at the new heads. Gating the review-r1 heads now would gate superseded commits. queryComponent-real-exit-shape-premise is DONE by vm1 (claims/pool-vm1-combinedquerycomponent-real-exit-premise.md), so its job file is stale.
