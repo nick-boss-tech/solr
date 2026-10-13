@@ -7,4 +7,4 @@
 - Scope: read-only. Reads of the GitHub API only, no writes. No branch edit, no gate, no build, no test, no PR or comment change, no JIRA write.
 - Deliverable: `reports/pr-record-check-round-6.md`.
 - Heartbeat: 2026-10-13T05:42Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-13. Deliverable: `reports/pr-record-check-round-6.md`. Both draft PRs match their drafts and heads. Decision for Nick: draft PR #5118 was opened after the combine recommendation.
