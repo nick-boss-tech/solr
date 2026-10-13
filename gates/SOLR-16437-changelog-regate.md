@@ -1,7 +1,7 @@
 # Gate job: SOLR-16437 re-gate at the moved head
 
 - Branch: solr-16437-submit. Head: `a23f770e4b9587acbd14fcdbaae2047bd5c727c4` (fork tip). Previous gated head: `f72a9edd0a8b1aa1dded6af6c0c792fbb6179aa2`. Merge-base: `e2cdb2d7e8ae0be4cf6cf0606206c67d89e7278f`.
-- Status: OPEN, unclaimed.
+- Status: DONE 2026-10-13 by vm2 (gate backlog coordinator). Full gate GREEN at a23f770e4b9 (focused count from fresh JUnit XML, 07:35Z). Receipt refreshed at receipts/SOLR-16437.md; draft re-pointed. Claim: claims/pool-vm2-gate-backlog-16437-changelog.md.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: full hardening gate at the new head, then the receipt refresh and the draft re-point. Amended by the main side 2026-10-13: the first version of this job was a changelog check only; the head complaint stands until the receipt and the draft name the live head, so the full gate and both record fixes are part of this job.
@@ -34,11 +34,11 @@
 - [x] step 1 tidy clean (GATE INVALID guard)
 - [x] step 2 Error Prone compile
 - [x] step 3 proof leg: exactly the one expected failure, by content
-- [ ] step 4 focused run counted from fresh JUnit XML (owed: see Gate end below)
+- [x] step 4 focused run counted from fresh JUnit XML (recount 07:33Z to 07:36Z: 25 tests, 1 skipped, 0 failures)
 - [x] step 5 module check
-- [ ] receipt refreshed at the new head (waits for step 4)
-- [ ] draft re-pointed; both suspects settled (waits for step 4)
-- [ ] job DONE (waits for step 4)
+- [x] receipt refreshed at the new head
+- [x] draft re-pointed; both suspects settled (no f72a9edd0a6f or 2026-10-10 remains; the Proof and Limits lines now carry a23f770e4b9 and 2026-10-13)
+- [x] job DONE
 
 ## Gate end, 2026-10-13 (vm2)
 
