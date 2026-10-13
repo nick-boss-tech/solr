@@ -64,3 +64,12 @@ The lists above are the queue's history and are stale as a supply list: most job
 - gates/pr-drift-round-1-run-records.md (per-item claims allowed)
 
 Also OPEN and assigned to vm2 by Nick (2026-10-13), claimed by vm2 before running: gates/SOLR-16437-nightly-run.md and gates/SOLR-17680-v2-two-router-test.md. The same census, with one-line descriptions, is in material/coordinator-handoff.md under "Build queue loaded for vm2, 2026-10-13 (main side)". Claims/ governs as always: a ticket with a live claim is taken, whatever any list says.
+
+## Restock, 2026-10-13 (vm2 gate backlog coordinator, 10:39Z)
+
+Added after SOLR-5011 went DONE and the buffer fell to two unclaimed jobs against a target of three. Each is a re-gate at a live tip with no green gate recorded there; the audit checked receipts against fork tips and excluded parked, blocked and claimed tickets.
+
+- SOLR-18368-tip-regate (gates/SOLR-18368-tip-regate.md): the live tip a7ec9a1b65 drops the pin test the last green gate (1acaced80b2) covered; re-gate at the tip, record the count the tip actually gives.
+- SOLR-17539-tip-regate (gates/SOLR-17539-tip-regate.md): docs-only commit f9d201a278 past the gated head; docs-shaped re-gate at the tip.
+
+Audit candidates not stocked, with the reason: SOLR-15823 (stacked on a superseded PR head; needs a main-side decision), SOLR-10322 (changelog-title-only commit past the gated head; module not yet checked), SOLR-14913 (comment-only commit past the gated tree), SOLR-7267 (packaging removal past the gated tree), SOLR-11475 (history rewrite with the tree identical to the gated head; receipt refresh only, no gate). The next restock pass checks SOLR-10322 and SOLR-11475 first.

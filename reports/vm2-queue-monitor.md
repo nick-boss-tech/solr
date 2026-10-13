@@ -1092,3 +1092,14 @@ No action taken beyond this job.
 - Next claimable once vm2 is idle: the prdrift reruns (item a with nightly enabled; item c with the base-leg revert), gates/combinedquerycomponent-real-exit-premise.md, gates/SOLR-6014-searchtime-premise.md. Check claims/ at claim time.
 
 - 2026-10-13T10:16Z busy: SOLR-5011-narrowing gate still running (claim 09:17Z, heartbeat refreshed 10:16Z; GATE START 09:55:22Z; at focused-head; log growing; no GATE END). No claim taken, no relaunch. Next claimable once idle: gates/combinedquerycomponent-real-exit-premise.md, gates/SOLR-6014-searchtime-premise.md, gates/SOLR-6430 is DONE, check claims/ at claim time.
+
+## 2026-10-13T10:39Z vm2 gate backlog coordinator
+
+- Finished: SOLR-5011 narrowing gate GREEN at 00060d2ed9. Fork solr-5011-submit fast-forwarded from 3fd85bedef to 00060d2ed9, verified by ls-remote. Receipt, draft (unheld), job and claim DONE on pr-prepare (780be7500d, a12e2a28fb).
+- Failed and action taken: none new. The 10:21Z gate end had been recorded as "NOT GREEN under the all-rc-0 rule" (228db9f3a7). Reclassified GREEN: the job's proof shape passes the proof leg by failure content, as the original 3fd85bedef gate did.
+- Claimed: none this run. vm2 is idle (no Gradle process, no open gate). The one open buffer job, pr-drift-round-1-run-records, is held by vm2's claim from 09:05Z with its base-leg failures recorded; the completion note is being filled by another session.
+- Restock: buffer had 2 unclaimed gate jobs against a target of 3. Added SOLR-18368-tip-regate and SOLR-17539-tip-regate (both re-gates at live tips with no green gate there). Audit candidates not stocked are listed in the buffer file.
+- Gate state: no gate running on vm2.
+- Concurrency: a second session wrote to the vm2 coordination worktree at 10:31Z (228db9f3a7). Main agent: please confirm only one coordinator session drives vm2 at a time.
+- Follow-up: the SOLR-5011 changelog fragment title overstates the change with shareSchema on; needs a title correction before the next re-gate. Recorded in receipts/SOLR-5011.md.
+- Next claimable once vm2 is idle: gates/SOLR-18368-tip-regate.md, then gates/SOLR-17539-tip-regate.md. Check claims/ at claim time.
