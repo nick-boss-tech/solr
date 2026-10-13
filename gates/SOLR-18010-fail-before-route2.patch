@@ -1,0 +1,16 @@
+--- a/solr/core/src/test/org/apache/solr/handler/admin/SecurityConfHandlerTest.java
++++ b/solr/core/src/test/org/apache/solr/handler/admin/SecurityConfHandlerTest.java
+@@ -353,8 +353,11 @@
+         Files.getPosixFilePermissions(securityJson));
+   }
+ 
+-  /** A write that fails after the temporary file exists keeps the previous security.json intact. */
+-  public void testFailedWriteKeepsPreviousFileAndLeavesNoTemporaryFile() throws Exception {
++  /**
++   * A failure while the value is serialized, after the temporary file exists, keeps the previous
++   * security.json intact and removes the temporary file. The move to security.json is not reached.
++   */
++  public void testFailedSerializationKeepsPreviousFileAndRemovesTemporaryFile() throws Exception {
+     assumeWorkingMockito();
+     Path solrHome = createTempDir("securityConfHandlerLocalFailedWrite");
+     Path securityJson = solrHome.resolve("security.json");

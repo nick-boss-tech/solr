@@ -7,4 +7,4 @@
 - Choice to record: route 1 (force the temporary-file delete failure inside the test, portably) or route 2 (rename the test to what it pins and drop the claim about the `finally` change). The recommendation is recorded in the round report.
 - Limits: no build, test or Gradle on this host. A patch counts as reviewed only after vm2 gates the pushed head. No change to `solr-18010-submit`, and no edit to PR #5118.
 - Heartbeat: 2026-10-13T18:35Z (claim taken).
-- Status: IN PROGRESS, prepared as part of the round claimed in `claims/pool-pr-prepare-tip-1173a1e-round-1.md`.
+- Status: PREPARED 2026-10-13T19:00Z. Route 1 is recommended and saved as `gates/SOLR-18010-fail-before-route1.patch`; route 2 is the fallback, saved as `gates/SOLR-18010-fail-before-route2.patch`. Neither is pushed. The push to `review-r1-solr-18010` (a plain fast-forward from `e99be67c9a6f`) waits for Nick's go-ahead, and the vm2 gate waits for the push. Summary in `reports/18010-fail-before-route-round-1.md`.
