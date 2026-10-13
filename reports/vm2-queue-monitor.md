@@ -1077,3 +1077,16 @@ No action taken beyond this job.
 - Concurrency: vm2 claims from more than one session today (09:05Z and 09:17Z). Main agent: please confirm only one coordinator session drives vm2 at a time.
 - Queue: buffer not fully re-counted this run; no restock written. Next claimable once idle, checking claims/ at claim time: gates/SOLR-15035-base-run.md, gates/SOLR-11288-base-run.md, gates/SOLR-12651-history-scrub.md, gates/SOLR-15674-history-scrub.md, gates/SOLR-6014-searchtime-premise.md, gates/combinedquerycomponent-real-exit-premise.md.
 - 2026-10-13T09:46Z busy: prdrift run-records gate running (claim 09:05Z, Gradle pid 139489 live, log growing, no GATE END; claim heartbeat 41 min old, refresh due after 10:05Z). SOLR-5011-narrowing gate is queued behind it on the serial queue (claim 09:17Z, no runner yet). No claim taken, no relaunch. Next claimable once idle: gates/combinedquerycomponent-real-exit-premise.md, gates/SOLR-6014-searchtime-premise.md; check claims/ at claim time.
+
+## 2026-10-13 10:04Z vm2 gate backlog coordinator
+
+- Busy: SOLR-5011-narrowing gate running (claim 09:17Z; Gradle pid 143667 live; GATE START 09:55:22Z; at compile-errorprone; no GATE END). No claim taken, no relaunch. Claim heartbeat 09:17Z; refresh due after 10:07Z.
+- Finished, not recorded by this session: prdrift run-records gate reached GATE END 09:55:22Z. Facts from its logs and fresh XML, for the completion note:
+  - (a) SOLR-18280: head and base both 25 of 25 skipped. The runner does not pass `-Ptests.nightly=true`, so the nightly group is off and no pass count exists. The "2 of 2" and "24 of 25" claims are not backed by this run.
+  - (b) SOLR-7394: base leg does not compile. The focused RecoveryStrategyTest (recoveryFailed private at base) and ZkShardTermsRecoveryFailureTest (cannot find symbol) use APIs the branch adds, so no fail-before run is possible; the fail-before sentences go to the main side for cutting.
+  - (c) SOLR-18178: base leg does not compile in the branch-added UploadConfigSetAPITest and DownloadConfigSetAPITest. DeleteBackupCmdTest itself is not the failing file, so the base run is possible once those two files are reverted to merge-base in the base-leg tree only.
+  - (d) SOLR-11431: reconciles. 25 testcases = 24 `@Test` methods plus testSolrHomeAndResourceLoader (no annotation; JUnit 3 naming). 22 run, 3 skipped (assertAllowPathNormalizationWin, assertAllowPathFromSolrXmlWin, assertAllowPathWindows, skipped by assumption), 0 failures.
+- Concurrency: another session on this host (commits 8814247236 at 09:46Z and 2b090f45a4 at 10:01Z) is writing the prdrift completion note. This session left that note to it to avoid two writers. Main agent: please confirm one coordinator session drives vm2 at a time.
+- Failed and action taken: none new by this session.
+- Claimed: none (vm2 busy).
+- Next claimable once vm2 is idle: the prdrift reruns (item a with nightly enabled; item c with the base-leg revert), gates/combinedquerycomponent-real-exit-premise.md, gates/SOLR-6014-searchtime-premise.md. Check claims/ at claim time.
