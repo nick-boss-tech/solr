@@ -7,4 +7,4 @@
 - Staffing: two subagents, about four items each.
 - Limits: no PR opened, closed, flipped or commented on; no live PR body edited this round; no fork branch changed; no build, test or Gradle on this host; nothing posted.
 - Heartbeat: 2026-10-13T15:39Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-13T16:20Z. Deliverable: `reports/four-new-prs-strong-review-round-1.md`. Verdicts: SOLR-18540 SATISFIED; SOLR-18539, SOLR-18541 and SOLR-18010 NOT SATISFIED, with blocking items named in the report. Draft edits applied to the drafts only; the live bodies were not edited this round. Gate jobs written as files under `gates/`, not run. A second claim for the same deliverable (`claims/pool-four-new-prs-strong-review-round-1.md`, pushed after this one) stands down under first-push-wins.

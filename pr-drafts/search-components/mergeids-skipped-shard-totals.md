@@ -18,7 +18,7 @@ https://issues.apache.org/jira/browse/SOLR-18539
 
 In a search sorted on a field, `QueryComponent.mergeIds` adds each shard's totals before it tests for the partial-results skip. A shard is skipped only when its response is partial, it sent no sort values, and the sort uses a field other than score or doc. The links below point to upstream/main, `d76fc14b9857`. The totals are added at [L1160-L1175](https://github.com/nick-boss-tech/solr/blob/d76fc14b9857e77b830d7a82514b28c523a239c2/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1160-L1175), and the skip is at [L1193-L1195](https://github.com/nick-boss-tech/solr/blob/d76fc14b9857e77b830d7a82514b28c523a239c2/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1193-L1195).
 
-In `mergedNumFoundCountsOnlyMergedShards`, the skipped shard holds 2 documents and the other shard holds 3. On unmodified main, the merged response has 3 documents, but numFound is 5 and numFoundExact is true. The skipped shard's maxScore, 99.0, also comes through. approximateTotalHits was 11, not 4.
+In `mergedNumFoundCountsOnlyMergedShards`, the skipped shard holds 2 documents and the other shard holds 3. On unmodified main, the merged response has 3 documents, but numFound is 5 and numFoundExact is true. The same skipped shard's maxScore (99.0) also comes through, and its approximateTotalHits (11, not 4) does too. `mergedMaxScoreComesFromMergedShards` and `mergedApproximateTotalHitsExcludesSkippedShard` pin those two values.
 
 A shard with no `approximateTotalHits` header also adds the running total, not its own count. In `approximateTotalHitsFallsBackToEachShardsNumFound`, two shards with no approximateTotalHits header, holding 2 and 3 documents, give 2 instead of 5.
 
@@ -34,7 +34,7 @@ Behavior change: merged numFound, maxScore and approximateTotalHits now cover on
 
 **QueryComponentPartialResultsTest: 17 of 17 pass at head `4eb996121804`, verified 2026-10-12 20:51 MDT (2026-10-13 02:51 UTC).** The same 17 pass at `9e85ce5c16`, verified 2026-10-11 15:43 MDT (21:43 UTC).
 
-At `4eb996121804`, with `QueryComponent.java` reverted to the base commit and the new tests kept, 7 of the 17 fail. Five are the values under What happens today. The other two are a mixed-header total of 13 instead of 14, and an all-skipped total of 5 instead of 0. The other 10 pass on the base too, so they check that existing merge results stay the same. The same 7 failed at `9e85ce5c16`.
+At `4eb996121804`, with `QueryComponent.java` reverted to the base commit and the new tests kept, 7 of the 17 fail. Five of them fail on the values described under What happens today (numFound in two tests, maxScore, approximateTotalHits, and the fallback). The other two are a mixed-header total of 13 instead of 14, and an all-skipped total of 5 instead of 0. The other 10 pass on the base too, so they check that existing merge results stay the same. The same 7 failed at `9e85ce5c16`.
 
 The tests are in [QueryComponentPartialResultsTest.java](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/test/org/apache/solr/handler/component/QueryComponentPartialResultsTest.java).
 
