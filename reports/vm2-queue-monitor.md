@@ -1006,3 +1006,4 @@ No action taken beyond this job.
 - Claimed: none new (busy). Gate SOLR-13369-dated-run is running on vm2 (started 04:41:34Z, claim 04:33Z, focused head step).
 - Gate state: busy with one settling run, one gate at a time. Queued behind it: gates/g12651-base-gate.sh.
 - Next claimable once idle: SOLR-13097 (rebase, force-with-lease at claim time), then SOLR-11939, per the buffer order.
+- 2026-10-13T05:00Z busy: SOLR-15386-dated-run running on vm2 (GradleWrapperMain pid 34738, claim 04:52Z, log still growing, no GATE END); no new claim, no heartbeat refresh due.
