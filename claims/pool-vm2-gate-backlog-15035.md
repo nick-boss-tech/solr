@@ -5,4 +5,4 @@
 - Merge-base: b5c71bc5573c4e31b4cee5a7965d73587fc0ae58 (`git merge-base upstream/main 12d7491e82c`).
 - Capability tags: gate.
 - Runner: gates/g15035-gate.sh, worktree /workspace/gates/solr-15035-base (detached at the merge-base). The worktree's production and test files are swapped between the two runs; no code commit, no fork push.
-- Status: CLAIMED, queued behind the running SOLR-9155 gate.
+- Status: RUN ENDED 2026-10-13T06:30Z, gate log logs/vm2/queue-g15035-gate-20261013T060752Z.out. Base run rc=1 (expected premise failure: `expected:<2> but was:<null>`, tests=1 failures=1). Banked-patch-alone run rc=0 (tests=3 failures=0). Left for the main agent to write the receipt and mark the job DONE.
