@@ -6,3 +6,5 @@
 - Runner: gates/g14913-gate.sh, worktree /workspace/gates/solr-14913-tip (detached), log gates/logs/vm2/14913-*.log.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED by vm2 at b80221f46d3 (queued behind SOLR-10322).
+
+- 2026-10-13T12:20Z DONE (vm2 gate backlog coordinator): GATE GREEN at b80221f46d3 (GATE END 12:20:45Z). Deliverables: receipts/SOLR-14913.md (live-tip section), gates/SOLR-14913-tip-regate.md marked DONE.

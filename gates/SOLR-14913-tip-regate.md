@@ -12,10 +12,10 @@
 
 ## Step checklist
 
-- [ ] tidy on a clean tree
-- [ ] Error Prone compile
-- [ ] focused test counted from fresh JUnit XML
-- [ ] module check :solr:core:check -x test
-- [ ] receipt refreshed; job and claim DONE
+- [x] tidy on a clean tree
+- [x] Error Prone compile
+- [x] focused test counted from fresh JUnit XML
+- [x] module check :solr:core:check -x test
+- [x] receipt refreshed; job and claim DONE
 
-- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T11:17Z at b80221f46d3; claim claims/pool-vm2-gate-backlog-14913-tip-regate.md.
+- Status: DONE 2026-10-13T12:20Z by vm2 (gate backlog coordinator). Gate GREEN at b80221f46d3 (focused TestExtendedDismaxParser 40 of 40 from fresh XML). Receipt: receipts/SOLR-14913.md, live-tip section. Claim: claims/pool-vm2-gate-backlog-14913-tip-regate.md.
