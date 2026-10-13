@@ -1125,3 +1125,4 @@ No action taken beyond this job.
 - For the main agent: the pr-drift item (b) and (c) sentences must be quoted from the live PR bodies for the cut; neither text is in pr-prepare. The pr-drift round is not DONE until those and item (a) are decided.
 - Concurrency: two vm2 coordinator sessions are still writing claims and queue entries. Please confirm one session drives vm2.
 - Restock: unclaimed claimable buffer jobs are short of the target of 3; the next pass audits receipts.
+- 2026-10-13T12:59Z vm2 gate backlog coordinator (busy check, pass 3): gates/SOLR-5011-title-fix.md gate running (GradleWrapperMain pid 37374, claim taken 12:47:06Z, no GATE END yet); heartbeat not due, no new gate started, next pass checks GATE END.
