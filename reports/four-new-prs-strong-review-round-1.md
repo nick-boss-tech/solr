@@ -52,11 +52,11 @@ Draft edits applied: `pr-drafts/search-components/mergeids-skipped-shard-totals.
 
 ## PR #5116, SOLR-18540 (gradlew under Git Bash)
 
-Verdict: SATISFIED.
+Verdict: SATISFIED, reported as READY TO FLIP (marked ready 2026-10-13; actor not named).
 
 Checks:
 - Head 58e07b4571 matches. The deletion is three lines in the Cygwin and MSYS block. The first APP_HOME conversion at line 159 is needed before the WrapperDownloader call, and CLASSPATH is built from the converted APP_HOME, so the deletion is minimal and correct.
-- The traces in `reports/gradlew-end-to-end-run/` match the run-record table in the receipt.
+- The traces in `reports/gradlew-end-to-end-run/` match the run-record table in `reports/gradlew-end-to-end-run.md`.
 - The body claims only wrapper startup, not a full build. That is correct.
 
 Owner items (none blocks the verdict):
