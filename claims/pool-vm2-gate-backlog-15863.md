@@ -6,3 +6,5 @@
 - Runner: gates/g15863-gate.sh, worktree /workspace/gates/solr-15863-gate (detached), log gates/logs/vm2/15863-run.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED by vm2.
+
+- 2026-10-13T02:18:18Z vm2 gate backlog coordinator heartbeat: queued behind SOLR-13186 on the vm2 serial queue (runner gates/g15863-gate.sh). Not started; claim still live.
