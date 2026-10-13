@@ -1021,3 +1021,5 @@ No action taken beyond this job.
 
 - 2026-10-13T06:16Z busy: SOLR-15035-base-run running on vm2 (GradleWrapperMain, queue started 06:07:52Z; base focused leg already BUILD FAILED as the premise expects, now at focused-banked). Claim 05:48Z, 28 min old, no refresh due. No GATE END awaiting recording: SOLR-5813 and SOLR-12991 batch recorded at 57b8b6b200. No new claim.
 - 2026-10-13T06:31Z busy: SOLR-15674-history-scrub gate running on vm2 (GradleWrapperMain pid 74021, queue g15674-gate started 06:19:20Z at scrubbed head 75ddf9ba518a, tidy and compile green, at focused-head, no GATE END); claim 06:04Z, 27 min old, no refresh due; no new claim. Claim file still says the scrubbed head is to be recorded: record it when the gate finishes.
+
+- 2026-10-13T06:46Z busy: SOLR-16437 changelog re-gate running (queue g16437-gate, started 06:37:15Z, at compile-errorprone, no GATE END), claim 06:20Z re-scoped 06:40Z, 26 min old, no refresh due; nightly-group claim queued behind it; no new claim. Next claimable once idle: SOLR-6014-searchtime-premise (no claim file, re-check buffer order at claim time).
