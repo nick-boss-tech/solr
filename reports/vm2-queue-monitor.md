@@ -980,3 +980,12 @@ No action taken beyond this job.
 - Gate state: busy, one gate at a time. Gradle pid 17085 (SOLR-9155 premise re-run). SOLR-9155 claim heartbeat 03:47Z, under 50 min, no refresh. Queued behind it in gates/queue/queue.txt: g17733-gate.sh and g11678-sec-r1-05-gate.sh.
 - Buffer: target met (at least 3 OPEN gate jobs in gates/, including SOLR-12916-title-fix and SOLR-9091-title-fix).
 - Next claimable once idle: SOLR-12916-title-fix (OPEN, unclaimed), then SOLR-9091-title-fix. SOLR-13097 and SOLR-11939 are DONE.
+
+## 2026-10-13T04:21Z vm2 gate backlog coordinator
+
+- Finished: SOLR-17733 dated focused run GREEN at 636196b7954af6b34efad54bd0cda2330ef8c7a4 (run ended 04:07:58Z; dated line in receipts/SOLR-17733.md, seed 916E935A5C160693; job and claim DONE). SOLR-9155 GREEN at dbd88c84ff246631875afc010c1c4dff4e50c28a (gate END 03:36:27Z; premise re-run at the merge-base gave the private-access compile error at ZkControllerGetLeaderTest.java:54; receipts/SOLR-9155.md written; draft Proof filled in pr-drafts/solrcloud/SOLR-9155.md; job and claim DONE).
+- Failed and action taken: none new. No gate ended FAILED this run.
+- Claimed: none new (busy).
+- Gate state: busy with SOLR-11678-sec-r1-05 (queue pid 20396, started 04:07:58Z, log logs/vm2/queue-g11678-sec-r1-05-gate-20261013T040758Z.out, at compile-errorprone, no GATE END). Claim heartbeat 03:47Z, under 50 min, no refresh.
+- Buffer: at least 3 OPEN unclaimed gate jobs (SOLR-12916-title-fix, SOLR-9091-title-fix, SOLR-15106-premise-base, SOLR-15674-history-scrub and others); no restock needed.
+- Next claimable once idle: SOLR-12916-title-fix, then SOLR-9091-title-fix.

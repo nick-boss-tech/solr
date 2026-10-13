@@ -4,7 +4,7 @@
 - Change since the prior head: getLeader declares `throws InterruptedException` and rethrows it, instead of wrapping it in a SolrException with the flag restored. The test expects InterruptedException. The changelog title is updated to match.
 - Posted by: windows (review agent), for Nick Shanin, 2026-10-12. Claim of the round: `claims/pool-solrcloud-application-round-2.md`. Work item: `assignments/pool-solrcloud-vm2-round-2.md`.
 - Capability tags: gate. Intended host: vm2 (Linux). Windows never claims build work.
-- Status: CLAIMED by vm2 at 2026-10-13T02:46Z (claims/pool-vm2-gate-backlog-9155.md). GATE END 2026-10-13T03:36:27Z (log logs/vm2/queue-g9155-gate-20261013T031600Z.out): every step rc=0 except that the premise-base leg was defective (wrong path, see the claim file). Not GREEN until the premise re-run is recorded. Premise-only re-run queued at the front of gates/queue (gates/g9155-premise-rerun.sh, log logs/vm2/9155-premise-base-rerun.log), run after SOLR-17680 ends. Next step: record the compiler message from that log here, then write the receipt and mark DONE.
+- Status: DONE 2026-10-13 by vm2 (claims/pool-vm2-gate-backlog-9155.md). GATE GREEN at the head dbd88c84ff: all steps rc=0 at GATE END 2026-10-13T03:36:27Z (log logs/vm2/queue-g9155-gate-20261013T031600Z.out). The premise-base leg of that run was void (wrong path); the premise re-run at the merge-base (logs/vm2/9155-premise-base-rerun.log, 03:57Z to 04:01Z) gives the compiler message: `ZkControllerGetLeaderTest.java:54: error: getLeader(CloudDescriptor,int) has private access in ZkController`. Receipt: receipts/SOLR-9155.md.
 - Module: :solr:core. Focused class: org.apache.solr.cloud.ZkControllerGetLeaderTest (confirm the package by grep).
 - Compile check the gate must confirm: the register path (ZkController.java line 1485, inside a method that declares `throws Exception`) and the rejoin path (line 2604, inside a `catch (Exception e)`) compile unchanged. No other callers exist in solr/core/src.
 - Proof shape: on the merge-base, getLeader is private, so the test does not compile there. Record the compiler message. That is the premise; it is inconclusive by construction, and the receipt must say so.
@@ -16,7 +16,7 @@
 - [x] changelog parse (rc=0, 2026-10-13 03:16Z run)
 - [x] tidy with the GATE INVALID guard (rc=0, tidy-clean status empty)
 - [x] Error Prone compile, with the caller compile check (rc=0)
-- [ ] premise compile message recorded at the merge-base (re-run queued; the 03:16Z premise leg is void)
+- [x] premise compile message recorded at the merge-base (premise re-run 04:01Z; private-access compile error at ZkControllerGetLeaderTest.java:54)
 - [x] focused test at the head (ZkControllerGetLeaderTest, rc=0, log logs/vm2/9155-head.log)
 - [x] module check (core check rc=0)
-- [ ] receipt written; draft Proof filled; job DONE
+- [x] receipt written; draft Proof filled; job DONE
