@@ -1,7 +1,7 @@
 # Gate job: SOLR-15386 dated focused run at the live head
 
 - Branch: solr-15386-submit. Head: `ca8cb61ee957` (live tip, ls-remote).
-- Status: OPEN, unclaimed.
+- Status: DONE 2026-10-13T05:01Z by vm2 (gate backlog coordinator). Dated focused run GREEN at ca8cb61ee957: NodeMutatorTest 3 of 3, 0 failures, XML 2026-10-13T05:01:08Z; receipts/SOLR-15386.md, top section.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: dated focused run. No code change.
