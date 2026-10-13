@@ -3,7 +3,7 @@
 - Branch: solr-18391-graceful-create-submit. Head: adcda10b501cbea9f92119bae8e91187da77d9da (live tip, GATE GREEN per receipts/SOLR-18391.md). Merge-base with upstream main: c3cdf7b46e8cfff3673f76d881f32cf8e7b00622 (per the receipt).
 - Branch note: solr-18391-submit (3000eeede7ad) is a different, held branch. Its fragment, changelog/unreleased/SOLR-18391.yml, does not carry the sentence below and is not part of this job.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN (posted 2026-10-12 by the main side).
+- Status: CLAIMED by vm2 (gate backlog coordinator) 2026-10-13T08:05Z. Claim: claims/pool-vm2-gate-backlog-18391-wording.md.
 - Capability tags: implementation, gate.
 - Job type: a changelog wording correction on a gated branch, then the full hardening gate at the new head. The claiming host writes the patch under the patch-loop directive (2026-10-12).
 - Spec: reports/pr-drift-round-1.md, owner decisions: the changelog says a failed alias write "removes the completed collection", but `DeleteCollectionCmd.java` lines 237 to 244 refuse that delete when an alias was applied. The wording needs a branch commit.
