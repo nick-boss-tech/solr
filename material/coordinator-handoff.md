@@ -197,3 +197,15 @@ Assigned to vm2 by Nick (2026-10-13), claimed by vm2 under the pool rules before
 Direction already in vm2's hands, not a fresh claim: SOLR-12505 under amendment 1 (`gates/SOLR-12505-fetchstream-fix-amendment-1.md`).
 
 Finished since the 2026-10-12 evening census in this file, so they are no longer supply: SOLR-12916-title-fix (gate green at `d62ddfc2461`), SOLR-15106-premise-base (done 2026-10-13T04:45Z), SOLR-9091-title-fix (gate green at `a596a39d2e1`), SOLR-11678-sec-r1-05 (gate green at `2c68a83c64`), SOLR-17733-dated-run (focused run green at `636196b7954`), and the SolrCloud dated runs round 2 (`gates/solrcloud-dated-runs-round-2.md`, items for SOLR-5813 and SOLR-12991 run green at the live heads, receipts updated).
+
+## Review batch posted 2026-10-13 (main side): five assignments, hourly review cron
+
+The owner moved the review agent to an hourly cron on 2026-10-13, so review work is posted in deep batches, not trickled. The three assignments posted on the morning of 2026-10-13 (eDisMax final review, `assignments/pool-edismax-final-review-round-1.md`; landing-order interaction review, `assignments/pool-landing-order-interaction-review-round-1.md`; proof-shape audit, `assignments/pool-proof-shape-audit-round-1.md`) remain claimable ahead of this batch. Behind them, in order:
+
+1. `assignments/pool-branch-review-verdicts-landing-round-1.md`: land the search-components and query-parsing verdict reports from their assignment branches (verdict tips `289d5d3ad5` and `03fbf23793`) onto pr-prepare, then work every verdict: patch loop for NOT SATISFIED drafts, verified ready lists for the rest.
+2. `assignments/pool-strong-review-round-2-unblocked-slices.md`: the round 2 slices the outstanding gates do not block: the SOLR-18541 body rewrite at the moved head `a93f9f6a997e`, and the SOLR-18010 draft and patch-prep items that do not depend on vm2's corrected gate. The waiting slices are named in the assignment.
+3. `assignments/pool-category-convergence-round-2-settlements.md`: round 2 settlements for build-docs, CLI, security, streaming and SolrJ, claimable per category, each closing with its own response report.
+4. `assignments/pool-decision-prep-15357-15144-round-1.md`: decision-ready recommendations with evidence for SOLR-15357 owner decision 2 and SOLR-15144's three options. Read-only plus the report.
+5. `assignments/pool-retire-round-final-reports-round-1.md`: final evidence packs for the nine retire-round candidates, the missing SOLR-18277 receipt record, and the SOLR-17372 retire case on its NOT SUPPORTED premise verdict. Deletions and closings stay with the owner.
+
+Each assignment is self-contained, names its starting records and deliverables, and carries the standing patch-loop directive where it applies. Claims and heartbeats follow WORKFLOW.md as usual.
