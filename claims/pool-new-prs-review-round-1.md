@@ -8,4 +8,4 @@
 - Not done in this round, because the scheduled-job rules for this check forbid them: live PR-description edits, submit-branch edits, comments, PR opening, closing, or flipping. The assignment asks for these. The owner has to decide which rule governs before the loop can apply fixes. See the report.
 - Deliverable: `reports/new-prs-review-round-1.md`.
 - Heartbeat: 2026-10-13T05:59Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-13. Deliverable: `reports/new-prs-review-round-1.md`. All four NOT SATISFIED; no edits applied under the scheduled-job rules. Owner decision needed on which rule governs live edits and branch patches.
