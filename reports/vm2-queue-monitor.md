@@ -941,3 +941,4 @@ No action taken beyond this job.
 - Gate state: busy. Queue holds g14919-gate.sh (re-gate at 8f1f4ef91e) after SOLR-15863.
 - Buffer: 2 unclaimed gate jobs (SOLR-12916-title-fix, SOLR-17680-message-regate), below the target of 3. Restock still owed; next run checks receipts against fork tips first.
 - Next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
+- 2026-10-13T02:46Z vm2 gate backlog coordinator: busy. SOLR-14919 re-gate at 8f1f4ef91e running (started 02:41:55Z, at compile-errorprone, no GATE END; log logs/vm2/queue-g14919-gate-20261013T024155Z.out). Claim heartbeat 02:20Z, under 50 min, no refresh. Nothing launched or recorded; next claimable once idle: SOLR-12916-title-fix, then SOLR-17680-message-regate.
