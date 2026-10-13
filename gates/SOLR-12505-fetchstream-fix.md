@@ -2,7 +2,7 @@
 
 - Branch: solr-12505-submit. Head: 5f20e1171bc890509d76e4f5f7defcc4fc8c102c (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-12505.md). Merge-base with main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: FAILED at the proof leg of round 3 (GATE END 2026-10-13T15:47:27Z). The proof is not established: the failure matches neither amendment 2 content. Not DONE. Next step owned by vm2 (probe, then narrow fix or escalation); see the round 3 proof-leg record below.
+- Status: CLAIMED by vm2 (gate backlog coordinator) at 1a1875d95f, 2026-10-13T16:33Z, for a full hardening gate at the new head. The round 3 proof-leg failure is classified as a test-fixture defect and fixed on the branch (see the 'Round 3 investigation' record below). Previous status: FAILED at the proof leg of round 3 (GATE END 2026-10-13T15:47:27Z).
 - Capability tags: gate.
 - Job type: branch-side fix on a gated branch, then the full hardening gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/streaming-convergence-round-1-response.md, item ST-R1-23 (verified there against the head code), with the register text in reports/streaming-convergence-round-1.md. The draft pr-drafts/streaming/SOLR-12505.md stays NOT CONVERGED until this job lands; the streaming convergence round 2 assignment re-checks the draft against the new head.
@@ -57,3 +57,12 @@
 - Stopped per amendment 2 ("If it matches neither, record that and stop"). Not relaunched. No fork push. Gate not GREEN; receipt, draft and DONE marks not written.
 - Runner note: the head check in g12505-proof-gate.sh failed (ls-remote origin is not valid inside the gate worktree), so the live head was not confirmed by that run; the head was checked before the run.
 - Left for the main side: the premise check needs a trigger that throws on pre-fix FetchStream, or a different proof shape.
+
+## Round 3 investigation and fixture fix (vm2, 2026-10-13)
+
+- Classification: test-fixture defect. The new test testFetchStreamRejectsJoinFieldNameThatBreaksLocalParams indexed no documents (the class's @Before only deletes them), so the wrapped search returned zero tuples, no batch was sent, and the drain completed. That is the empty-batch ending from amendment 2, not a production result.
+- Probe (scratch worktree at ee67d37421 with FetchStream reverted to 5f20e1171bc, not committed): the exact expression with on="id=a i" drained to tuples=[] with the wrapped search also empty (PROBE wrapped tuples=[]). Log: logs/vm2/queue-g12505-probe-20261013T162147Z.out; XML system-out in the probe worktree's module build dir.
+- Fix (narrow, test-only): seed two documents (ids 0 and 1, with a_s and a_i) at the start of the new test, commit 1a1875d95f. No production change.
+- Fork push: solr-12505-submit fast-forwarded from 5f20e1171b to 1a1875d95f, carrying the three branch commits d81a773117 (validate route), ee67d37421 (cause-chain test) and 1a1875d95f (fixture). Push done under step 2(a) of the coordinator run, before the full gate at the new head.
+- Base check of the fixed test (FetchStream reverted to 5f20e1171bc, seed 12505C0FFEE12505, logs/vm2/queue-g12505-basecheck-20261013T162852Z.out): the test fails with the drain throwing java.io.IOException "--> ...solr: invalid query parser 'i' for query '{! df=a i q.op=OR cache=false } 0 1'", and the failing assertion is the cause-chain check for "invalid join field name [a i]". That is Content 1 of amendment 2: the pre-fix drain throws a server parser error without the validation text. The premise holds at base for the premise reason.
+- Route and reason are unchanged from amendment 1 (validate). Next: full hardening gate at 1a1875d95f, with the proof leg as amendment 2 specifies (reverted FetchStream, branch tests kept).
