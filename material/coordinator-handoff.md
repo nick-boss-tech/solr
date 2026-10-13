@@ -167,3 +167,33 @@ Two standing vm2-local items from the 2026-10-11 push request above are still ow
 - SOLR-12161: push packaged head cdd265168a2adc76fb788f3d1f5587a3eee05e42 to solr-12161-submit (fork tip 1725cbd8489889a1dad75279e4b2c11b0ec93d66), and refresh receipts/SOLR-12161.md on the push.
 
 One exclusion: the SOLR-10667 and SOLR-12347 gate jobs (`gates/SOLR-10667.md` and `gates/SOLR-12347.md`) are blocked on vm2 by its npm cache failure (the @babel/plugin-syntax-dynamic-import resolution failure). The main side takes those two on vm1 under the established workaround (a fresh NPM_CONFIG_CACHE clears them), so vm2 should leave both jobs alone.
+
+## Build queue loaded for vm2, 2026-10-13 (main side)
+
+The main side audited `gates/` at the pr-prepare tip on 2026-10-13 and loaded the build queue. Every job below is OPEN at this tip, verified against its job file's status line and against `claims/`, and claimable by vm2 (most also by vm1) under the pool rules: claim before work, hourly heartbeats, a gate claim also requires its recorded log stopped before any takeover. The shared list in `assignments/pool-shared-gate-backlog-buffer.md` carries the same census as a dated section.
+
+SOLR-16437 first, because vm2's complaint about it is correct: solr-16437-submit's live tip is `a23f770e4b9587acbd14fcdbaae2047bd5c727c4`, one changelog-title commit past the gated head `f72a9edd0a8b`. The receipt (`receipts/SOLR-16437.md`) and the draft (`pr-drafts/solrcloud/SOLR-16437.md`) still name the old head, so neither record settles the live tip. The job `gates/SOLR-16437-changelog-regate.md` was amended by the main side on 2026-10-13 to carry the full hardening gate at the new head (focused class `org.apache.solr.cloud.CollectionsAPISolrJTest`, seed `16437C0FFEE16437`, proof leg against merge-base `e2cdb2d7e8ae`), the receipt refresh, and the draft re-point including the two suspects the moved-heads re-check named (the draft's printed short head `f72a9edd0a6f` vs the true `f72a9edd0a8b`, and a 2026-10-10 date vs the receipt's 2026-10-12 run).
+
+The loaded queue:
+
+- SOLR-16437-changelog-regate (`gates/SOLR-16437-changelog-regate.md`): full re-gate at the moved head `a23f770e4b9`, receipt refresh, draft re-point with both suspects settled.
+- SOLR-11479-identity-carry (`gates/SOLR-11479-identity-carry.md`): carry-over check for the identity rewrite at `6f739cfbbd38`; tree identity against the gated head, author and committer check, changelog parse, receipt refreshed at the live tip.
+- SOLR-15035-base-run (`gates/SOLR-15035-base-run.md`): the owed base run for SOLR-15035; its landing also clears the SOLR-11479 opening dependency.
+- SOLR-11288-base-run (`gates/SOLR-11288-base-run.md`): base run owed for SOLR-11288.
+- SOLR-12651-history-scrub (`gates/SOLR-12651-history-scrub.md`): history scrub and re-gate for SOLR-12651, including the overstated changelog title correction the HOLD round assigned.
+- SOLR-15674-history-scrub (`gates/SOLR-15674-history-scrub.md`): rebuild the branch history without the one trailer line, then the full hardening gate at the scrubbed head.
+- SOLR-18391-changelog-wording (`gates/SOLR-18391-changelog-wording.md`): the changelog fragment wording correction, written by the claiming host under the patch-loop directive, then the full hardening gate at the new head.
+- SOLR-5011-narrowing (`gates/SOLR-5011-narrowing.md`): implement the adopted narrowing from the shared-schema analysis, add its proving test, then the full hardening gate at the new head.
+- SOLR-6014-searchtime-premise (`gates/SOLR-6014-searchtime-premise.md`): premise run only; the SOLR-6014 draft's final Limits wording follows the verdicts.
+- SOLR-6430-fragment-drop (`gates/SOLR-6430-fragment-drop.md`): delete the changelog fragment under BD-R1-13, then the docs-shaped gate at the new head.
+- combinedquerycomponent-real-exit-premise (`gates/combinedquerycomponent-real-exit-premise.md`): premise run only; it settles the real timeAllowed exit questions the ticket draft leaves open.
+- pr-drift-round-1-run-records (`gates/pr-drift-round-1-run-records.md`): four record runs behind live description claims; a claimant may take one item or all four.
+
+Assigned to vm2 by Nick (2026-10-13), claimed by vm2 under the pool rules before running:
+
+- SOLR-16437-nightly-run (`gates/SOLR-16437-nightly-run.md`): the owed nightly-group run for SOLR-16437's caller classes.
+- SOLR-17680-v2-two-router-test (`gates/SOLR-17680-v2-two-router-test.md`): the two-router test run SOLR-17680's round 5 hold names.
+
+Direction already in vm2's hands, not a fresh claim: SOLR-12505 under amendment 1 (`gates/SOLR-12505-fetchstream-fix-amendment-1.md`).
+
+Finished since the 2026-10-12 evening census in this file, so they are no longer supply: SOLR-12916-title-fix (gate green at `d62ddfc2461`), SOLR-15106-premise-base (done 2026-10-13T04:45Z), SOLR-9091-title-fix (gate green at `a596a39d2e1`), SOLR-11678-sec-r1-05 (gate green at `2c68a83c64`), SOLR-17733-dated-run (focused run green at `636196b7954`), and the SolrCloud dated runs round 2 (`gates/solrcloud-dated-runs-round-2.md`, items for SOLR-5813 and SOLR-12991 run green at the live heads, receipts updated).

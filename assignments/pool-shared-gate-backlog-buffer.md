@@ -45,3 +45,22 @@ Added after the SOLR-16013 claim left one unclaimed job in the buffer. Each is a
 - SOLR-15805 (gates/SOLR-15805.md): re-gate at 6d78603d82; same tree as the receipt's 3432f950f0, re-run so the receipt names the live commit.
 
 Not stocked: SOLR-10252 (docs only, held on the round 5 owner decision).
+
+## Current supply, 2026-10-13 (main side census)
+
+The lists above are the queue's history and are stale as a supply list: most jobs named there are DONE. The verified OPEN, unclaimed, claimable gate jobs at the 2026-10-13 pr-prepare tip are:
+
+- gates/SOLR-16437-changelog-regate.md (full re-gate at `a23f770e4b9`, receipt refresh, draft re-point; amended 2026-10-13)
+- gates/SOLR-11479-identity-carry.md (carry-over check at `6f739cfbbd38`)
+- gates/SOLR-15035-base-run.md
+- gates/SOLR-11288-base-run.md
+- gates/SOLR-12651-history-scrub.md
+- gates/SOLR-15674-history-scrub.md
+- gates/SOLR-18391-changelog-wording.md
+- gates/SOLR-5011-narrowing.md
+- gates/SOLR-6014-searchtime-premise.md
+- gates/SOLR-6430-fragment-drop.md
+- gates/combinedquerycomponent-real-exit-premise.md
+- gates/pr-drift-round-1-run-records.md (per-item claims allowed)
+
+Also OPEN and assigned to vm2 by Nick (2026-10-13), claimed by vm2 before running: gates/SOLR-16437-nightly-run.md and gates/SOLR-17680-v2-two-router-test.md. The same census, with one-line descriptions, is in material/coordinator-handoff.md under "Build queue loaded for vm2, 2026-10-13 (main side)". Claims/ governs as always: a ticket with a live claim is taken, whatever any list says.
