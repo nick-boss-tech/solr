@@ -17,7 +17,6 @@
 package org.apache.solr.cloud;
 
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
-import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.embedded.JettySolrRunner;
@@ -51,12 +50,8 @@ public class ZkControllerGetLeaderTest extends SolrCloudTestCase {
 
       Thread.currentThread().interrupt();
       try {
-        SolrException e =
-            expectThrows(SolrException.class, () -> zkController.getLeader(cloudDescriptor, 10000));
-        assertTrue(e.getMessage(), e.getMessage().contains("Interrupted"));
-        assertTrue(
-            "the interrupt status must be restored for the caller",
-            Thread.currentThread().isInterrupted());
+        expectThrows(
+            InterruptedException.class, () -> zkController.getLeader(cloudDescriptor, 10000));
       } finally {
         Thread.interrupted(); // clear, so that the test framework is not disturbed
       }
