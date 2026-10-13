@@ -114,8 +114,8 @@ public class IgnoreCommitOptimizeUpdateProcessorFactory extends UpdateRequestPro
     }
 
     /**
-     * The COMMIT_END_POINT param marks commits Solr sends internally: "true", and the "leaders"
-     * or "replicas" endpoint names that the distributed update processor sets when it forwards a
+     * The COMMIT_END_POINT param marks commits Solr sends internally: "true", and the "leaders" or
+     * "replicas" endpoint names that the distributed update processor sets when it forwards a
      * commit. The endpoint names are not booleans, so parsing the value with getBool would reject
      * forwarded commits with a 400.
      */
