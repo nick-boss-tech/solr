@@ -25,3 +25,8 @@ TestPerReplicaStates 4 of 4 at `f614a42fbc8`, with a dated run. A count other th
 - [x] outcome A (dated log copied) or outcome B (focused run with fresh JUnit XML): outcome B
 - [x] receipt section "Dated run of record" written in receipts/SOLR-17292.md
 - [x] job and claim DONE
+
+
+## Status
+
+DONE 2026-10-13T16:13Z (vm2): outcome B, 4 of 4 at f614a42fbc. Receipt section "Dated run of record" in receipts/SOLR-17292.md.
