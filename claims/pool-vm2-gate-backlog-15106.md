@@ -5,4 +5,4 @@
 - Capability tags: premise-run, settling-run. No fix commit, no fork push.
 - Runner: gates/g15106-gate.sh, worktree /workspace/gates/solr-15106-gate (detached). Log: logs/vm2/queue-g15106-gate-*.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED.
+- Status: DONE 2026-10-13T04:45Z. Base compile failure text and head run (rc=0, 1 of 1 at 2026-10-13T04:41:12Z) recorded in receipts/SOLR-15106.md; job gates/SOLR-15106-premise-base.md DONE; draft pr-drafts/solrcloud/SOLR-15106.md Proof date aligned to the run.
