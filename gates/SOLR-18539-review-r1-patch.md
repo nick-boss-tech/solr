@@ -1,7 +1,7 @@
 # Gate job: SOLR-18539 review patch, round 1 (strong review of the four new draft PRs)
 
 - Branch: `review-r1-solr-18539` on the fork. Head: `fbf7610644d178049e1110ffc0ec34dad8c5b32f`. Parent: `4eb996121804b043f1ee53f5bb7e22b9c3021b0a` (the head of draft PR #5115), two commits. Not the PR branch: this patch is gated first and moved onto the PR branch only after it is green and the owner or the main side agrees.
-- Status: OPEN, unclaimed.
+- Status: GATE ENDED 2026-10-13T18:05:35Z at fbf7610644d1 (run 17:38:49Z). Delta-only, tidy (tree clean after), spotless, Error Prone compile, focused head (BUILD SUCCESSFUL), module check: all rc=0. Fail-before against the merge-base: rc=1, 9 of 18 tests failed. Fail-before against the PR head: rc=1, exactly the four named tests failed, each numFoundExact expected:<false> but was:<true>. Both fail-before legs are expected nonzero, but the coordinator rule requires every rc=0 for GREEN, so this is not recorded GREEN. Left for the main agent to decide. Logs: logs/vm2/queue-g18539-review-r1-gate-20261013T173849Z.out. Receipt not refreshed; job not DONE.
 - Capability tags: gate.
 - Intended host: Linux only (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Source: `reports/four-new-prs-strong-review-round-1.md`, section SOLR-18539.

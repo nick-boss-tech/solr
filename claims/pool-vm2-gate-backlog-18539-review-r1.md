@@ -5,5 +5,5 @@
 - Capability tags: gate.
 - Runner path: /workspace/gates/g18539-review-r1-gate.sh, worktree /workspace/gates/solr-18539-review-r1 (detached).
 - No fork push, no PR touched. The job's tidy step may leave a formatting-only change; it stays local and is not pushed.
-- Status: CLAIMED by vm2 at fbf7610644, queued on the vm2 serial gate queue.
 - Heartbeat: 2026-10-13T18:01Z by vm2 (gate backlog coordinator), gate running at fail-before-pr-head, no GATE END yet; not relaunched.
+- 2026-10-13T18:15Z by vm2 (gate backlog coordinator): GATE END 2026-10-13T18:05:35Z at fbf7610644d1. Fail-before rc=1 on both legs (expected per job steps 6 and 7; failure sets in the job file). Not GREEN under the coordinator rule. Status: GATE ENDED, awaiting main-agent decision; no fork push, no PR touched.
