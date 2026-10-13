@@ -1,6 +1,6 @@
 title: >
-  The ADDREPLICAPROP collection API now returns HTTP 400 when the collection, shard or replica does not exist instead of
-  silently returning 200.
+  The ADDREPLICAPROP collection API now returns HTTP 400 when the collection or shard does not exist, or the replica is not
+  in that shard, instead of silently returning 200.
 type: fixed
 authors:
   - name: Nick Shanin
