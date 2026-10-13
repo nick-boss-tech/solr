@@ -7,4 +7,4 @@
 - Scope: the nineteen drafts in `pr-drafts/solrcloud/`, against `reports/solrcloud-pr-critical-review-round-1.md`.
 - Limits: no PR opened, no comment, no JIRA write, no email. No build, test or Gradle run on this host. Gate needs are written as gate job files for vm2, not run here. Commit as Nick Shanin, no trailers, no em dashes.
 - Heartbeat: 2026-10-13T03:55Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-13. Deliverables: the nineteen drafts in `pr-drafts/solrcloud/`, the report `reports/solrcloud-pr-fix-round-2.md`, and the gate jobs it names. Posting stays with Nick.
