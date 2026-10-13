@@ -7,4 +7,4 @@
 - Scope: read-only. GitHub GET calls only. No comment, no edit, no PR change, no JIRA write.
 - Deliverable: `reports/public-record-check-round-7.md`.
 - Heartbeat: 2026-10-13T05:50Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-13. Deliverable: `reports/public-record-check-round-7.md`. The posted comment differs from the round 1 draft; #5118 is now referenced publicly. Decisions for Nick listed in the report.
