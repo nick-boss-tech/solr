@@ -1,5 +1,6 @@
 # Gate job: SOLR-12916 changelog title correction, re-gate at the new head
 
+- Status: DONE by vm2 (gate GREEN at d62ddfc246160c90f0f74a27bf6befff7664b684, gate 2026-10-13T05:01:11Z to 05:19:08Z; pushed as a fast-forward from 50b1f4bcab; receipt receipts/SOLR-12916.md refreshed; draft changelog link re-pointed in pr-drafts/core-admin/SOLR-12916.md).
 - Branch: solr-12916-submit. Head: 50b1f4bcab039f8d25a729a8d02a1e8a16defd3e (live tip, verified by ls-remote at posting, 2026-10-11; this is the packaged head, GATE GREEN per receipts/SOLR-12916.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
 - Status: OPEN, unclaimed.
@@ -15,10 +16,10 @@
 
 ## Step checklist
 
-- [ ] title replaced verbatim in SOLR-12916-query-sender-flat-queries.yml; delta against 50b1f4bcab03 is that fragment only
-- [ ] changelog YAML parse
-- [ ] tidy on the final tree; tree clean (GATE INVALID guard)
-- [ ] Error Prone compile (:solr:core)
-- [ ] focused tests at the new head: QuerySenderListenerTest, counted from fresh JUnit XML
-- [ ] module check (:solr:core)
-- [ ] pushed plainly to solr-12916-submit; receipt refreshed; draft changelog link re-pointed; job and claim DONE
+- [x] title replaced verbatim in SOLR-12916-query-sender-flat-queries.yml; delta against 50b1f4bcab03 is that fragment only
+- [x] changelog YAML parse
+- [x] tidy on the final tree; tree clean (GATE INVALID guard)
+- [x] Error Prone compile (:solr:core)
+- [x] focused tests at the new head: QuerySenderListenerTest, counted from fresh JUnit XML
+- [x] module check (:solr:core)
+- [x] pushed plainly to solr-12916-submit; receipt refreshed; draft changelog link re-pointed; job and claim DONE
