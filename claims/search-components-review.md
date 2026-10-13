@@ -18,7 +18,8 @@ The category summary is `reports/search-components-review-summary.md`. The lane 
 ## Heartbeat
 
 - 2026-10-13T15:18Z: claim recorded (first commit on this branch). Pushed through `research\push-pr-prepare.ps1 -Branch assignment-search-components-review`, after the wrapper's allowlist was given this branch name at the user's direction.
+- 2026-10-13T15:51Z: all 48 in-scope drafts checked against receipts, live tips, citations at the SHAs they name, merge-bases, and the no-draft receipts. Verdicts in `reports/search-components-review-1.md` to `-4.md`; the category summary is `reports/search-components-review-summary.md`. Forty-seven SATISFIED and ready to open (opening needs Nick's approval). SOLR-6193 OPEN (gate): gate requests SC-G1 to SC-G3 for the gate coordinator to stock. Ten drafts edited (twelve edits).
 
 ## DONE status
 
-Not done. The claim stays active until the summary names a verdict for every in-scope draft.
+Not done. The assignment is open on SOLR-6193 (its gate requests SC-G1 to SC-G3 have not reached a gated head) and on the record items in the summary. The claim stays active on the review lane until SOLR-6193 reaches a gated head, or the summary's owner item for it is settled.
