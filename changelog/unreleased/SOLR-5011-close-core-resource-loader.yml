@@ -1,4 +1,4 @@
-title: "A SolrCore now closes its SolrResourceLoader when the core is closed (unload, reload, shutdown), releasing the class loader and the jars of the core's lib directories"
+title: "A SolrCore now closes its SolrResourceLoader when the core is closed (unload, reload, shutdown), releasing the class loader and the jars of the core's lib directories; with shareSchema on, the loader stays open because the shared schema may still use it"
 type: fixed
 authors:
   - name: Nick Shanin
