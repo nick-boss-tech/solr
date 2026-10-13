@@ -1,5 +1,5 @@
 title: >
-  QuerySenderListener accepts warming queries given to the Config API as flat name/value lists, e.g. "queries": [ ["q", "*:*", "rows", 1] ], instead of ignoring them.
+  QuerySenderListener accepts warming queries given as flat name and value lists, from the Config API and from XML, instead of ignoring them.
 type: fixed
 authors:
   - name: Nick Shanin
