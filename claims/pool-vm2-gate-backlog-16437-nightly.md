@@ -4,5 +4,5 @@
 - Head: f72a9edd0a8b1aa1dded6af6c0c792fbb6179aa2, the previous gated head. The live head a23f770e4b differs by one changelog title, a docs-only change, so the owner allowed running the previous head.
 - Capability tags: gate.
 - Runner: gates/g16437-nightly-gate.sh (queue), worktree /workspace/gates/solr-16437-gate (detached).
-- Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED.
+- Heartbeat: 2026-10-13T07:06Z; refresh hourly; staleness rule 2 hours.
+- Status: DONE 2026-10-13. Gate GREEN at f72a9edd0a8b (GATE END 07:02:30Z). Deliverables: receipts/SOLR-16437.md, gates/SOLR-16437-nightly-run.md.
