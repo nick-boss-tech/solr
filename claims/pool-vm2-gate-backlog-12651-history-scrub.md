@@ -6,4 +6,4 @@
 - Runner path: /workspace/gates/solr-12651-scrub (detached worktree); gate script /workspace/gates/g12651-scrub-gate.sh.
 - Capability tags: gate. Staffing: 1.
 - Heartbeat: 2026-10-13T07:06Z.
-- Status: CLAIMED.
+- Status: DONE 2026-10-13 by vm2 (coordinator), outcome GREEN at de3f3604f0ee12935080c8f3d418b6bd1be3013e (GATE END 07:28:43Z). Deliverables: receipts/SOLR-12651.md, gates/SOLR-12651-history-scrub.md.

@@ -1,7 +1,7 @@
 # Gate job: SOLR-12651 base-code run at the live head
 
-- Branch: solr-12651-submit. Head: `404f13b501c97d6c6b65743a27f54f4f38363afa` (live tip, ls-remote).
-- Status: RUN ENDED 2026-10-13T04:55Z (vm2, gate backlog coordinator): base rc=1, 1 of 2 tests failed, as predicted. Merge-base 14c7aac0d151. Failure: "Failed restore left collection backuprestore_testokboo2 behind" (seed C039DD4A67379E23). Log logs/vm2/queue-g12651-base-gate-20261013T044827Z.out, XML solr/core/build/test-results/test/TEST-org.apache.solr.cloud.api.collections.TestLocalFSCloudBackupRestore.xml in /workspace/gates/solr-12651-base. Receipt base-run section and DONE left for the main agent.
+- Branch: solr-12651-submit. Head: `de3f3604f0ee12935080c8f3d418b6bd1be3013e` (live tip, ls-remote; same tree as the prior head 404f13b501c9, so this run covers both).
+- Status: DONE 2026-10-13 (vm2, gate backlog coordinator). Run ended 2026-10-13T04:55Z: base rc=1, 1 of 2 tests failed, as predicted. Base-run section written to receipts/SOLR-12651.md. Merge-base 14c7aac0d151. Failure: "Failed restore left collection backuprestore_testokboo2 behind" (seed C039DD4A67379E23). Log logs/vm2/queue-g12651-base-gate-20261013T044827Z.out, XML solr/core/build/test-results/test/TEST-org.apache.solr.cloud.api.collections.TestLocalFSCloudBackupRestore.xml in /workspace/gates/solr-12651-base. Receipt base-run section and DONE left for the main agent.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: premise run. No code change.
