@@ -989,3 +989,12 @@ No action taken beyond this job.
 - Gate state: busy with SOLR-11678-sec-r1-05 (queue pid 20396, started 04:07:58Z, log logs/vm2/queue-g11678-sec-r1-05-gate-20261013T040758Z.out, at compile-errorprone, no GATE END). Claim heartbeat 03:47Z, under 50 min, no refresh.
 - Buffer: at least 3 OPEN unclaimed gate jobs (SOLR-12916-title-fix, SOLR-9091-title-fix, SOLR-15106-premise-base, SOLR-15674-history-scrub and others); no restock needed.
 - Next claimable once idle: SOLR-12916-title-fix, then SOLR-9091-title-fix.
+
+## 2026-10-13T04:31Z vm2 gate backlog coordinator
+
+- Finished: SOLR-11678-sec-r1-05 GREEN at 2c68a83c64ee8d4e8bece83392ad4cf28eb5b55b (gate 04:07:58Z to 04:30:36Z). Pre-fix proof failed by content at the merge-base (sslKeyManagerPasswordMapsToNothing, expected:<> but was:<null>). Focused tests at head: EnvUtilsTest 13/0, SSLConfigurationsTest 20/0, EnvSSLCredentialProviderTest 2/0, SysPropSSLCredentialProviderTest 2/0. Module check rc 0. Receipt at receipts/SOLR-11678.md; fork solr-11678-submit fast-forwarded to 2c68a83c64 and verified by ls-remote; job and claim DONE.
+- Failed and action taken: none. No gate ended FAILED this pass.
+- Claimed: none new (busy). Gate SOLR-15106-premise-base is running on vm2 (queue started 04:30:43Z, claim 04:19Z).
+- Gate state: busy with SOLR-15106 premise run, one gate at a time.
+- Pending on the main side: the SEC-R1-05 draft sentence for pr-drafts/security/SOLR-11678.md. vm2 did not edit it (security-material boundary).
+- Next claimable once idle: SOLR-12916-title-fix, then SOLR-9091-title-fix.

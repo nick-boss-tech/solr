@@ -5,3 +5,5 @@
 - Capability tags: gate.
 - Runner: gates/g11678-sec-r1-05-gate.sh. Worktrees: /workspace/gates/solr-11678-sec-r1-05 (fix head) and /workspace/gates/solr-11678-sec-r1-05-proof (merge-base).
 - Status: CLAIMED.
+
+- 2026-10-13T04:31Z vm2 gate backlog coordinator: DONE. GATE GREEN at 2c68a83c64ee8d4e8bece83392ad4cf28eb5b55b (GATE END 04:30:36Z). Receipt: receipts/SOLR-11678.md (on pr-prepare d4633d8b61). Fork push: solr-11678-submit fast-forward 611eae2464 to 2c68a83c64, verified by ls-remote 2026-10-13. Gate file: gates/SOLR-11678-sec-r1-05.md DONE. Pending on the main side: the SEC-R1-05 draft sentence in pr-drafts/security/SOLR-11678.md (not applied by vm2; security-material boundary).
