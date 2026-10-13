@@ -7,3 +7,5 @@
 - Fork push: plain fast-forward to solr-10667-submit only after the gate is green at the committed tree.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED by vm2.
+
+- 2026-10-13T02:37:38Z vm2 gate backlog coordinator heartbeat: fix commit 9ce9ef1db5 at /workspace/gates/solr-10667-exclusion (local, not pushed; fork push only after green). Runner gates/g10667-exclusion-gate.sh queued behind SOLR-14919 on the vm2 serial queue. Not started.
