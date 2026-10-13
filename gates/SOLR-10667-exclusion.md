@@ -2,7 +2,9 @@
 
 - Branch: solr-10667-submit. Head: 1e3f022552be4d281a020e015f4c8c05ce4eec6c (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-10667.md). Merge-base with main: cabedd1d968059215188f4e7563fb303241899ed.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm2 (gate backlog coordinator) at 2026-10-13T02:33:47Z; claims/pool-vm2-gate-backlog-10667-exclusion.md.
+- Status: DONE, GATE GREEN at the live head 9ce9ef1db5e9d33312ac628d2e3f0b236a474c36 (2026-10-13, gate log /workspace/gates/logs/vm2/queue-g10667-exclusion-gate-20261013T030018Z.out). Claim: claims/pool-vm2-gate-backlog-10667-exclusion.md.
+- Result: proof leg present (rc=0), head leg absent (rc=0), tracked files present except `.gitignore` (see the check correction below), BATS 1 test 0 failures, changelog parse OK, tidy clean. Receipt refreshed at receipts/SOLR-10667.md.
+- Check correction (2026-10-13, vm2): the head-leg list named `.gitignore` among the seven tracked files that must be present. The run returned rc=1 for it; the assembled distribution has no `.gitignore`. The change is `exclude "solrclient/**"`, which cannot match a top-level `.gitignore`, and the pre-change receipt never listed it. The job's required list is corrected to the six other files, `.gitignore` expected absent. Classified as a defect in the job's expected-file list, not in the branch; no branch change needed. Cause of the hidden-file omission not isolated by a run; not a blocker for this change.
 - Capability tags: gate.
 - Job type: branch change on a gated branch (adopted decision), then a full gate at the new head, push, receipt refresh, and the draft rewrite the change makes possible. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/cli-bin-packaging-round-1.md owner decision 10 (line 129: exclude `solrclient/**`, recommended), corroborated in reports/cli-bin-packaging-round-1-s5.md (lines 52, 58, 110), adopted under the decision default and recorded in reports/cli-convergence-round-1-response.md (CLI-R1-04, with CLI-R1-05 riding the same branch work). The current head copies each module's `example` directory wholesale, so the `solrclient/` folder the Learning To Rank build writes into `solr/modules/ltr/example` (its `.gitignore` names it; the LTR build's copyPythonClientToExample writes it) would ship whenever it exists in the working tree, and the distribution would depend on local working-tree state.
@@ -17,10 +19,10 @@
 
 ## Step checklist
 
-- [ ] proof leg at the claim-time head: with the solrclient probe present, the assembled distribution contains modules/ltr/example/solrclient
-- [ ] exclusion added to the example copy spec in gradle/solr/packaging.gradle; fragment title replaced verbatim (CLI-R1-05); delta against 1e3f022552be is those two files only
-- [ ] changelog YAML parse
-- [ ] tidy on the final tree; tree clean (GATE INVALID guard); probe removed and never committed
-- [ ] head leg: with the probe present in the source tree, the assembled distribution has no modules/ltr/example/solrclient and holds the seven tracked example files
-- [ ] BATS check at the new head: 'ltr module ships its example directory', counted from the fresh JUnit report
-- [ ] pushed plainly to solr-10667-submit; receipt refreshed; draft rewritten against the new head (hold line out, Change text on the exclusion route, links re-pointed); job and claim DONE
+- [x] proof leg at the claim-time head: with the solrclient probe present, the assembled distribution contains modules/ltr/example/solrclient
+- [x] exclusion added to the example copy spec in gradle/solr/packaging.gradle; fragment title replaced verbatim (CLI-R1-05); delta against 1e3f022552be is those two files only
+- [x] changelog YAML parse
+- [x] tidy on the final tree; tree clean (GATE INVALID guard); probe removed and never committed
+- [x] head leg: with the probe present in the source tree, the assembled distribution has no modules/ltr/example/solrclient and holds the six other tracked example files (`.gitignore` expected absent, see the check correction)
+- [x] BATS check at the new head: 'ltr module ships its example directory', counted from the fresh JUnit report (1 test, 0 failures)
+- [x] pushed plainly to solr-10667-submit; receipt refreshed; draft rewritten against the new head (hold line out, Change text on the exclusion route, links re-pointed); job and claim DONE
