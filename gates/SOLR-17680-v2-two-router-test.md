@@ -1,7 +1,7 @@
 # Gate job: SOLR-17680 end-to-end test for the v2 two-router path
 
 - Branch: solr-17680-submit. Head: `ce59bbe112d063e3d3c93b3be6a1a5269a38fc37` (fork tip). Merge-base: `56ec140e3636d5f4150fa87fbf7103529536ac99`.
-- Status: CLAIMED by vm2 (gate backlog coordinator) 2026-10-13T08:16:46Z. Claim: claims/pool-vm2-gate-backlog-17680-v2-two-router-test.md. Was: OPEN. ASSIGNED to vm2 by Nick (2026-10-13). vm2 claims it under the WORKFLOW.md rules before running.
+- Status: BLOCKED by vm2 (gate backlog coordinator) 2026-10-13T08:19:49Z: premise mismatch, no code change, no fork push. Reason and owner decision needed are in the section "Blocked at claim" below.
 - Capability tags: gate.
 - Intended host: vm2 (Linux). Windows never claims build work.
 - Job type: a new focused test, then the focused run and the fail-before run. vm2 may patch the branch to add the test, under the patch-loop rule: the patching agent pushes with a plain fast-forward push, and the gating host refreshes the receipt.
@@ -35,3 +35,10 @@ In `solr/core/src/test/org/apache/solr/cloud/CreateRoutedAliasTest.java`, after 
 - [ ] focused run with JUnit XML; v1 tests in the same batch; counts and date recorded
 - [ ] fail-before text recorded at the merge-base
 - [ ] commit pushed plainly; receipt refreshed; job DONE
+
+## Blocked at claim
+
+- Checked at the fork tip ce59bbe112d063e3d3c93b3be6a1a5269a38fc37 (merge-base 56ec140e3636): the tip matches the job and the package is org.apache.solr.cloud.
+- The negative case cannot pass as written. Step 3 asks for a category router with no maxCardinality to return 400 naming router.1.maxCardinality. At this head the category router's maxCardinality is optional: solr/api/src/java/org/apache/solr/client/api/model/CategoryRoutedAliasProperties.java has no required annotation, solr/core/src/java/org/apache/solr/handler/admin/api/CreateAlias.java (category validate() checks only field) and CategoryRoutedAlias.java accept a missing value, and the string "router.1.maxCardinality" appears in no error message in solr/core/src/java.
+- So the test as specified would get 200 and fail. Making it pass needs a production change (requiring maxCardinality for v2 dimensional category routers), which is outside the test-only scope of this job.
+- Owner decision needed: either (a) approve a production change to require maxCardinality for category routers in the v2 path, with its own job, or (b) change the negative case to the behaviour the code has (200 without maxCardinality) and re-issue this job. No test, commit, gate, or fork push has been made.
