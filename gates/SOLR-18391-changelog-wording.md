@@ -3,7 +3,7 @@
 - Branch: solr-18391-graceful-create-submit. Head: adcda10b501cbea9f92119bae8e91187da77d9da (live tip, GATE GREEN per receipts/SOLR-18391.md). Merge-base with upstream main: c3cdf7b46e8cfff3673f76d881f32cf8e7b00622 (per the receipt).
 - Branch note: solr-18391-submit (3000eeede7ad) is a different, held branch. Its fragment, changelog/unreleased/SOLR-18391.yml, does not carry the sentence below and is not part of this job.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm2 (gate backlog coordinator) 2026-10-13T08:05Z. Claim: claims/pool-vm2-gate-backlog-18391-wording.md.
+- Status: DONE 2026-10-13 by vm2 (gate backlog coordinator). Claimed 2026-10-13T08:05Z. Fix commit 327ca7b722 pushed plainly to solr-18391-graceful-create-submit (adcda10b50..327ca7b722); gate GREEN at 327ca7b722. Receipt: receipts/SOLR-18391.md. Claim: claims/pool-vm2-gate-backlog-18391-wording.md.
 - Capability tags: implementation, gate.
 - Job type: a changelog wording correction on a gated branch, then the full hardening gate at the new head. The claiming host writes the patch under the patch-loop directive (2026-10-12).
 - Spec: reports/pr-drift-round-1.md, owner decisions: the changelog says a failed alias write "removes the completed collection", but `DeleteCollectionCmd.java` lines 237 to 244 refuse that delete when an alias was applied. The wording needs a branch commit.
@@ -18,16 +18,16 @@
 
 ## Completion note (the claimant fills this in)
 
-- Replacement fragment title:
-- Body sentence named for the drift settlement (quoted), or none found:
+- Replacement fragment title: "... ; a create whose final alias write fails now removes the completed collection instead of leaving it behind, unless an alias with a different name still refers to it, in which case the removal is refused and the collection stays"
+- Body sentence named for the drift settlement (quoted), or none found: the live PR body (apache/solr #5027) does not claim removal in the alias-applied case. Its Choice 1 reads "If the alias write ... still fails after the bounded retry, the cleanup ... deletes a collection that was created successfully and is otherwise working", and the next sentence says "One case differs: if an alias attempt was applied and the retries still end in an error, the cleanup's delete is refused ... so the collection and the alias both stay". No body edit is owed.
 
 ## Step checklist
 
-- [ ] fragment alias clause rewritten to match DeleteCollectionCmd.java lines 237 to 244; delta against adcda10b501 is the fragment only
-- [ ] live PR body and drafts checked; any matching sentence quoted in the completion note
-- [ ] changelog YAML parse
-- [ ] tidy on the final tree; tree clean (GATE INVALID guard)
-- [ ] Error Prone compile (`:solr:core`)
-- [ ] focused tests at the new head, counted from fresh JUnit XML
-- [ ] module check (`:solr:core`)
-- [ ] pushed plainly to solr-18391-graceful-create-submit; receipt refreshed; completion note filled; job and claim DONE
+- [x] fragment alias clause rewritten to match DeleteCollectionCmd.java lines 237 to 244; delta against adcda10b501 is the fragment only
+- [x] live PR body and drafts checked; any matching sentence quoted in the completion note
+- [x] changelog YAML parse
+- [x] tidy on the final tree; tree clean (GATE INVALID guard)
+- [x] Error Prone compile (`:solr:core`)
+- [x] focused tests at the new head, counted from fresh JUnit XML
+- [x] module check (`:solr:core`)
+- [x] pushed plainly to solr-18391-graceful-create-submit; receipt refreshed; completion note filled; job and claim DONE
