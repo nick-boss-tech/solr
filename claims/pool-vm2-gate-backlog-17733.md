@@ -4,4 +4,4 @@
 - Head at claim: 636196b7954af6b34efad54bd0cda2330ef8c7a4 (solr-17733-submit, verified by ls-remote at claim time). No code change, no fork push.
 - Capability tags: settling-run.
 - Runner: gates/g17733-gate.sh, worktree /workspace/gates/solr-17733-gate (detached).
-- Status: CLAIMED.
+- Status: DONE 2026-10-13T04:10Z. Focused run GREEN at 636196b7954af6b34efad54bd0cda2330ef8c7a4; dated line in receipts/SOLR-17733.md. Deliverables: receipts/SOLR-17733.md, gates/SOLR-17733-dated-run.md.
