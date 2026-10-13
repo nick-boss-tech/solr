@@ -1,7 +1,7 @@
 # Gate job: SOLR-18178 base-leg run for the receipt's focused set
 
 - Branch: solr-18178-verify. Head: `b75e7d4d3c464ceeb9f14fdaf7711212adcccac2` (live tip, verified by ls-remote at posting, 2026-10-13; GATE GREEN per receipts/SOLR-18178.md; a live PR at this head is already ready).
-- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T13:48Z; claim claims/pool-vm2-gate-backlog-18178-base-leg-run. Queued as /workspace/gates/g18178-gate.sh.
+- Status: DONE by vm2 (gate backlog coordinator), GATE END 2026-10-13T14:11:36Z; claimed 2026-10-13T13:48Z; claim claims/pool-vm2-gate-backlog-18178-base-leg-run marked DONE. Runner /workspace/gates/g18178-gate.sh.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: base-leg record run only. The base-leg tree is a scratch worktree: never committed, never pushed.
@@ -29,16 +29,16 @@ The recorded fail-before result settles the fail-before sentences for the live P
 
 ## Completion note (the claimant fills this in)
 
-- Merge-base: / seed: / date:
-- DeleteBackupCmdTest at base: tests, failures (confirms or supersedes the 2026-10-13 record):
-- TestFileSystemConfigSetService at base: tests, failures:
-- TestSchemaDesignerConfigSetHelper at base: tests, failures:
-- Sentences named for cutting or rewording, if any:
+- Merge-base: 0d2a4649c79a / seed: 18178C0FFEE18178 / date: 2026-10-13 (GATE END 14:11:36Z)
+- DeleteBackupCmdTest at base: 3 tests, 0 failures (confirms the 2026-10-13 record)
+- TestFileSystemConfigSetService at base: 3 tests, 0 failures
+- TestSchemaDesignerConfigSetHelper at base: 8 tests, 0 failures
+- Sentences named for cutting or rewording: the DeleteBackupCmdTest fail-before sentence (cut, or reword to the code reading). The two other classes show no Linux fail-before; any sentence that presents them as failing at base should cite the 2026-10-04 Windows overlay runs in the receipt.
 
 ## Checklist
 
-- [ ] claimed; merge-base computed and recorded
-- [ ] scratch worktree at the merge-base, branch tests overlaid, exactly two files reverted
-- [ ] focused set run, counts from fresh JUnit XML
-- [ ] receipt base-leg section written, deviation stated plainly
-- [ ] completion note filled; job and claim DONE
+- [x] claimed; merge-base computed and recorded
+- [x] scratch worktree at the merge-base, branch tests overlaid, exactly two files reverted
+- [x] focused set run, counts from fresh JUnit XML
+- [x] receipt base-leg section written, deviation stated plainly
+- [x] completion note filled; job and claim DONE

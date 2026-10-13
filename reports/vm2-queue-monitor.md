@@ -1142,3 +1142,12 @@ No action taken beyond this job.
 - Gate state: one gate running on vm2 (SOLR-18178, since 14:04Z). No other gate in flight.
 - Next claimable: gates/SOLR-18010-changelog-regate.md (OPEN, unclaimed), the only unclaimed open gate job. The buffer is below the target of 3. Restock is the first action of the next pass, from a receipts-to-fork-tip audit whose candidates still need checking.
 - For the main agent: two vm2 coordinator passes have been writing claims, records and gate runs to pr-prepare and to the shared worktree (this pass found commits a99a7a2b3b and 513836936c from the other pass). Please confirm that one pass drives vm2.
+
+## 2026-10-13T14:14Z vm2 gate backlog coordinator (gate finish and busy-check pass)
+
+- Finished: SOLR-18178 base-leg record run (GATE END 14:11:36Z). At base 0d2a4649c79a: DeleteBackupCmdTest 3 tests, 0 failures; TestFileSystemConfigSetService 3 tests, 0 failures; TestSchemaDesignerConfigSetHelper 8 tests, 0 failures. Receipt base-leg section, job and claim DONE. No branch change, no fork push, no PR touched.
+- Failed and action taken: none this pass. The two classes with backslash-separator fail-before sentences show no Linux fail-before; the record names them for rewording to cite the 2026-10-04 Windows overlay runs.
+- Claimed: none. vm2 busy.
+- Gate state: one gate running on vm2, SOLR-18280 nightly record run at 0da92abd9e96 (GATE START 14:11:36Z, log logs/vm2/queue-g18280-gate-20261013T141136Z.out, STEP nightly-head, no GATE END yet). Claim refreshed 13:48Z.
+- Stale claim for the main side: SOLR-14919 (claims/pool-vm2-gate-backlog-14919.md), last entry 04:22Z, gate interrupted at focused-head with no GATE END, not relaunched.
+- Next claimable: gates/SOLR-18010-changelog-regate.md (OPEN, unclaimed per its gate file).
