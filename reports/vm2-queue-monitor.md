@@ -1115,3 +1115,13 @@ No action taken beyond this job.
 - Concurrency, for the main agent: more than one vm2 coordinator session wrote claims between 10:49Z and 11:17Z (a duplicate SOLR-18368 claim was withdrawn in 25ba1211c6; SOLR-10322 and SOLR-14913 were claimed by a second pass). One gate overlap happened at 11:30Z: a pr-drift run started through the serial queue while SOLR-17539 ran; it was stopped within a minute, and it executed no tests. The queue tick did not fire between 11:45Z and 11:54Z; the tick was run by hand. Please confirm one coordinator session drives vm2 and that the tick cron is active.
 - Restock: unclaimed claimable buffer jobs now 1 (gates/SOLR-5011-title-fix.md), target 3 not met. Next pass audits receipts for more first, re-gate or top-up candidates.
 - Next claimable: gates/SOLR-5011-title-fix.md; gates/SOLR-17680-v2-two-router-test.md (claimed by vm2, implementation first).
+
+## 2026-10-13T13:00Z vm2 gate backlog coordinator (second pass of the day)
+
+- Finished: SOLR-14913 top-up gate GREEN at b80221f46d3 (focused 40 of 40; receipt, job and claim DONE, 3c8e0d6ca1). Pr-drift round 1 record runs (claim still open): item (d) total 25 recorded; item (c) DeleteBackupCmdTest passes at the merge-base (3 of 3), so its fail-before sentence is named for cutting; item (b) both target classes do not compile at the merge-base, so their fail-before sentences are named for cutting; item (a) head failed once (a clock-based startAt wait, 36 seconds) and the base leg passed 25 of 25 on identical production. Classification in gates/pr-drift-round-1-run-records.md and receipts/SOLR-18280.md, SOLR-7394.md, SOLR-18178.md (pushed as 44ee5b6bd0 and 51595e683c).
+- Failed and action taken: the SOLR-18280 head failure is not relaunched; main agent decides on one rerun. The SOLR-14919 interrupted run remains for the main agent.
+- Claimed: none new by this pass. The other vm2 pass is running gates/g5011-title-fix-gate.sh (claimed 12:47Z) and has queued g17680-v2-gate.sh.
+- Gate state: one gate running on vm2 (SOLR-5011 title correction, serial queue).
+- For the main agent: the pr-drift item (b) and (c) sentences must be quoted from the live PR bodies for the cut; neither text is in pr-prepare. The pr-drift round is not DONE until those and item (a) are decided.
+- Concurrency: two vm2 coordinator sessions are still writing claims and queue entries. Please confirm one session drives vm2.
+- Restock: unclaimed claimable buffer jobs are short of the target of 3; the next pass audits receipts.
