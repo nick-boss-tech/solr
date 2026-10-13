@@ -4,7 +4,7 @@
 - Rewrite: message only. The body of the head commit "SOLR-17680: remove the testing handoff doc" was replaced. The tree is identical: `git diff f4b8ce83365 ce59bbe112d` is empty. Pushed with --force-with-lease pinned to f4b8ce83365 (AGENTS.md, Nick, 2026-10-12).
 - Posted by: windows (review agent), for Nick Shanin, 2026-10-12. Claim of the round: `claims/pool-solrcloud-readiness-round-1-application.md`.
 - Capability tags: gate. Intended host: any capable Linux host. Windows never claims build work.
-- Status: CLAIMED by vm2 (gate backlog coordinator) at 2026-10-13T03:04:10Z; claims/pool-vm2-gate-backlog-17680.md.
+- Status: DONE. GATE GREEN at ce59bbe112 (GATE END 2026-10-13T03:57:21Z) by vm2 (gate backlog coordinator); claimed at 2026-10-13T03:04:10Z; claims/pool-vm2-gate-backlog-17680.md.
 - Module: :solr:core. Focused classes: org.apache.solr.cloud.CreateRoutedAliasTest and org.apache.solr.handler.admin.api.CreateAliasAPITest (confirm the packages by grep before composing the run). Expected counts from the receipt: CreateRoutedAliasTest 15 of 15, CreateAliasAPITest 13 of 13.
 - Proof shape: with both production files at the merge-base 56ec140e3636d5f4150fa87fbf7103529536ac99 and the final tests in place, CreateRoutedAliasTest must show exactly 1 failure and CreateAliasAPITest exactly 1 failure. At the head both pass.
 - Steps: changelog parse; tidy with the GATE INVALID guard; Error Prone compile; proof leg; focused tests at the head (fresh JUnit XML, record the seeds); module check `:solr:core:check -x test`.
@@ -13,10 +13,12 @@
 
 ## Step checklist
 
-- [ ] changelog parse
-- [ ] tidy with the GATE INVALID guard
-- [ ] Error Prone compile
-- [ ] proof leg at the merge-base production files
-- [ ] focused tests at the head
-- [ ] module check
-- [ ] receipt refreshed; job DONE
+- [x] changelog parse (YAML OK, 2026-10-13 03:36Z run)
+- [x] tidy with the GATE INVALID guard (rc=0, tidy-clean status empty)
+- [x] Error Prone compile (rc=0)
+- [x] proof leg at the merge-base production files (1 failure in each class, by content; log 17680-proof.log)
+- [x] focused tests at the head (15/15 and 13/13, fresh JUnit XML, seed 1D2FD5F39FEA343C)
+- [x] module check (core check rc=0)
+- [x] receipt refreshed; job DONE
+
+Result 2026-10-13T03:57:21Z: GATE GREEN at ce59bbe112d063e3d3c93b3be6a1a5269a38fc37. Receipt: receipts/SOLR-17680.md.

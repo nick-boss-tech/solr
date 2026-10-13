@@ -971,3 +971,12 @@ No action taken beyond this job.
 - Gate state: busy. SOLR-17680 re-gate at ce59bbe112 running (queue pid 11525, started 03:36:27Z; changelog, tidy, Error Prone compile done; proof leg next, path checked). Claim heartbeat 03:04Z, under 50 min; refresh due by about 03:55Z if it is still running.
 - Buffer: 9 OPEN unclaimed gate jobs in gates/ (target 3 met), plus SOLR-17733 queued behind the premise re-run.
 - Next claimable once idle: SOLR-12916-title-fix, then SOLR-9091-title-fix.
+
+## 2026-10-13T04:02Z vm2 gate backlog coordinator
+
+- Finished: SOLR-17680 message-only re-gate, GATE GREEN at ce59bbe112d063e3d3c93b3be6a1a5269a38fc37 (GATE END 03:57:21Z). Receipt refreshed at receipts/SOLR-17680.md; gate file and claim DONE. The tree is identical to the earlier gated head f4b8ce83365, so no fork push. Draft pr-drafts/solrcloud/SOLR-17680.md already cites ce59bbe112.
+- Failed and action taken: none new. SOLR-9155 GATE END 03:36:27Z (recorded 03:47Z) is not green: its premise-base leg was void. The premise-only re-run (logs/vm2/queue-g9155-premise-rerun-20261013T035721Z.out) started 03:57:21Z and is in the premise-base-compile step. Once it ends, the compiler message goes into gates/SOLR-9155-declared-route-gate.md, then receipts/SOLR-9155.md is written at dbd88c84ff and the job and claim are marked DONE.
+- Claimed: none new (busy).
+- Gate state: busy, one gate at a time. Gradle pid 17085 (SOLR-9155 premise re-run). SOLR-9155 claim heartbeat 03:47Z, under 50 min, no refresh. Queued behind it in gates/queue/queue.txt: g17733-gate.sh and g11678-sec-r1-05-gate.sh.
+- Buffer: target met (at least 3 OPEN gate jobs in gates/, including SOLR-12916-title-fix and SOLR-9091-title-fix).
+- Next claimable once idle: SOLR-12916-title-fix (OPEN, unclaimed), then SOLR-9091-title-fix. SOLR-13097 and SOLR-11939 are DONE.
