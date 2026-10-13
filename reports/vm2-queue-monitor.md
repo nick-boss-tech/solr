@@ -998,3 +998,11 @@ No action taken beyond this job.
 - Gate state: busy with SOLR-15106 premise run, one gate at a time.
 - Pending on the main side: the SEC-R1-05 draft sentence for pr-drafts/security/SOLR-11678.md. vm2 did not edit it (security-material boundary).
 - Next claimable once idle: SOLR-12916-title-fix, then SOLR-9091-title-fix.
+
+## 2026-10-13T04:47:08Z vm2 queue monitor
+
+- Finished: SOLR-15106-premise-base recording already on pr-prepare (c4360cb1ad, 04:46Z): premise base compile failure recorded verbatim, dated head run rc=0 (OverseerProcessorExitTest 1 of 1, fresh XML at 04:41:12Z). This pass aligned draft line 21 of pr-drafts/solrcloud/SOLR-15106.md with the recorded base compile failure and ticked the job's checklist.
+- Failed and action taken: none. No gate ended FAILED this pass.
+- Claimed: none new (busy). Gate SOLR-13369-dated-run is running on vm2 (started 04:41:34Z, claim 04:33Z, focused head step).
+- Gate state: busy with one settling run, one gate at a time. Queued behind it: gates/g12651-base-gate.sh.
+- Next claimable once idle: SOLR-13097 (rebase, force-with-lease at claim time), then SOLR-11939, per the buffer order.

@@ -13,8 +13,8 @@
 
 ## Step checklist
 
-- [ ] step 1: base compile failure text recorded verbatim
-- [ ] step 2: dated focused run at the head
-- [ ] receipt body updated
-- [ ] draft line 21 aligned
-- [ ] job DONE
+- [x] step 1: base compile failure text recorded verbatim
+- [x] step 2: dated focused run at the head
+- [x] receipt body updated
+- [x] draft line 21 aligned
+- [x] job DONE
