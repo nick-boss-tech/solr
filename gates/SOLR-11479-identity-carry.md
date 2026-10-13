@@ -1,7 +1,7 @@
 # Gate job: SOLR-11479 identity rewrite, carry-over check
 
 - Branch: solr-11479-submit. Head: `6f739cfbbd383f08e7393ea38358b7fc77254e58` (fork tip after the lease push). Previous head: `360dca60fcfade6937353d1d1f41e01152aaa3c7`, the gated head in `receipts/SOLR-11479.md`.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (gate backlog coordinator) 2026-10-13T08:03Z. Claim: claims/pool-vm2-gate-backlog-11479-identity-carry.md.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: carry-over check. No code change.
