@@ -2,7 +2,7 @@
 
 - Code under test: unmodified main d76fc14b9857e77b830d7a82514b28c523a239c2, file solr/core/src/java/org/apache/solr/handler/component/CombinedQueryComponent.java. No branch; no production edit.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm1, 2026-10-13T10:31Z. Claim: claims/pool-vm1-combinedquerycomponent-real-exit-premise.md. Runner on vm1: ~/workspace/tools/gate-cqc-real-exit.sh; log ~/workspace/tools/gcqc-real-exit.log.
+- Status: DONE by vm1, 2026-10-13. Claim: claims/pool-vm1-combinedquerycomponent-real-exit-premise.md. Runner on vm1: ~/workspace/tools/gate-cqc-real-exit.sh; log ~/workspace/tools/gcqc-real-exit.log. Verdicts in the completion record at the end of this file.
 - Capability tags: premise-run.
 - Job type: premise run only. No branch edit, no gate, no draft edit. Posted by the main side's adjudication of the CombinedQueryComponent ticket review (2026-10-11), appended to reports/combinedquerycomponent-ticket-review.md. The ticket draft (material/combinedquerycomponent-ticket-draft.md) states the code-reading account of the real exit and claims neither outcome this job settles; the main side settles the draft from the verdict when this job lands.
 
@@ -37,8 +37,26 @@
 
 ## Step checklist
 
-- [ ] real exit produced on query index 0; shard shape captured
-- [ ] real exit produced on a query index above zero; shard shape captured
-- [ ] real exit produced on query index 0 under a score-only sort; shard shape captured
-- [ ] captured responses driven through mergeIds unedited; totals and any exception recorded per exit position
-- [ ] verdicts recorded here and appended to reports/combinedquerycomponent-premise.md; job and claim DONE
+- [x] real exit produced on query index 0; shard shape captured
+- [x] real exit produced on a query index above zero; shard shape captured
+- [ ] real exit produced on query index 0 under a score-only sort; shard shape captured (a partial score-sort shape was captured, but it carried both per-query entries; the exit did not land inside the first query's search at any ladder step, see Q3)
+- [x] captured responses driven through mergeIds unedited; totals and any exception recorded per exit position
+- [x] verdicts recorded here and appended to reports/combinedquerycomponent-premise.md; job and claim DONE
+
+## Completion record (vm1, 2026-10-13)
+
+Probe: `org.apache.solr.handler.component.CombinedQueryComponentRealExitPremiseTest`, worktree-only in ~/workspace/solr-worktrees/cqc-real-exit (detached at unmodified main d76fc14b9857e77b830d7a82514b28c523a239c2), :solr:core, seed C0FFEE42C0FFEE42. Shard shapes come from the shard-side combined process itself (CombinedQuerySearchHandler, distrib=false, isShard=true, shards.purpose GET_TOP_IDS, fsv=true as the coordinator sets) on a real core, with the deadline expiring through the ExitableDirectoryReader path; captures were driven unedited through CombinedQueryComponent.mergeIds alongside a complete second shard. Corpus: shard A 20,000 docs (q0 sind:alpha matches 20,000; q1 sindsto:beta matches 6,667), shard B 1,500 docs (500). Controls: B-only merge completed with numFound 1500; A+B merge completed with numFound 21,500, numFoundExact false, no merged approximateTotalHits.
+
+Operative run: runner ~/workspace/tools/gate-cqc-real-exit.sh, run ending 2026-10-13T12:41:50Z; 1 test, 1 failure, 0 errors. The one failure is the Q3 assertion carrying its observed values (the premise-finding mechanism), not a harness failure. Log: ~/workspace/tools/gcqc-real-exit.log (vm1). JUnit XML: ~/workspace/solr-worktrees/cqc-real-exit/solr/core/build/test-results/test/TEST-org.apache.solr.handler.component.CombinedQueryComponentRealExitPremiseTest.xml; test output in the outputs directory alongside it. Earlier rc=1 runs were probe setup defects (a hand-built handler missing its initializeMetrics call, a shard response missing the header the pipeline installs, a shard request missing fsv=true, merge requests left unclosed), each fixed in the probe; they produced no premise evidence and are superseded by this run.
+
+Produced shapes (field sort, descending timeAllowed ladder on shard A):
+
+- Exit above query index zero (timeAllowed 275): partial=true, 1 per-query entry (q0 numFound 20,000), sort_values_0 present, sort_values_1 absent, combined response present with numFound 0, header carries no approximateTotalHits and no maxHitsTerminatedEarly, no exception attached.
+- Exit on query index zero (timeAllowed 180): partial=true, 0 per-query entries, no sort_values keys, combined response present with numFound 0, header as above, no exception attached.
+- Score-only sort (ladder 300 down to 5): every attempt either completed (2 entries, partial=false) or, at timeAllowed 5, produced a partial response still carrying both per-query entries (numFound 20,000 and 6,667) and the full combined response (numFound 20,000).
+
+Verdicts:
+
+- **Q1: CONFIRMED BY RUN, no inflation.** The exit-at-index-zero merge completed with numFound 1,500, exactly the fold of the complete shard's entries alone, and numFoundExact false as in the control; the exiting shard folded no numFound and no exactness for either query. No merged approximateTotalHits was emitted, exactly as in the B-only control: no captured header set maxHitsTerminatedEarly, and mergeIds writes the merged value only on that path. The reading's line 386 header-add did not come into play, because the produced exit header carried no approximateTotalHits value to add.
+- **Q2: CONFIRMED BY RUN.** The exit-above-index-zero merge threw IndexOutOfBoundsException, message "Index 1 out of bounds for length 1": the unchecked per-query list access at lines 339 to 340. The merge fails; it does not skip the shard or fold anything for the missing entry.
+- **Q3: NOT CONFIRMED; the predicted shape was not produced.** The only partial score-sort shape the ladder produced carried both per-query entries, and its merge with the complete shard completed with numFound 21,500 and no exception. The exit under a score-only sort landed after both sub-queries' entries existed (in the combined stage), not inside the first query's search, at every ladder step down to 5 ms. The predicted NullPointerException at line 411 needs a score-sort exit that leaves the first query with no per-query entry; this run could not force that shape, so the prediction is neither confirmed nor refuted by this evidence.
