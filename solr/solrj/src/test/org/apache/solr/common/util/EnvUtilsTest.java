@@ -229,6 +229,12 @@ public class EnvUtilsTest extends SolrTestCase {
     }
   }
 
+  @Test
+  public void sslKeyManagerPasswordMapsToNothing() throws IOException {
+    Properties envMappings = loadProperties("EnvToSyspropMappings.properties");
+    assertEquals("", envMappings.getProperty("SOLR_SSL_KEY_MANAGER_PASSWORD"));
+  }
+
   private static Properties loadProperties(String resourceName) throws IOException {
     Properties properties = new Properties();
     try (var resource =
