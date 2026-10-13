@@ -7,4 +7,4 @@
 - Scope: `pr-drafts/solrcloud/SOLR-15386.md`, `SOLR-12651.md`, `SOLR-13369.md`, `SOLR-15106.md`. The SOLR-18540 draft (another lane, build-docs) is outside this round.
 - Limits: no PR, no comment, no JIRA write, no email. No branch change, no gate, no build, no test, no Gradle on this host. Receipts and gate files are not edited here. Commit as Nick Shanin, no trailers, no em dashes.
 - Heartbeat: 2026-10-13T05:05Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE, 2026-10-13. Deliverable: edits to SOLR-15386, SOLR-12651, SOLR-13369 and SOLR-15106 Proofs, and SOLR-11479 links. Verdicts: 15386 READY; 15106 READY; 12651 HOLD (scrub); 13369 HOLD (base run).

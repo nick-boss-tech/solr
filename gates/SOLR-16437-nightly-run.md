@@ -1,7 +1,7 @@
 # Gate job: SOLR-16437 nightly-group run at the live head
 
 - Branch: solr-16437-submit. Head: `f72a9edd0a8b` (fork tip, per the receipt; confirm by ls-remote).
-- Status: OPEN, unclaimed.
+- Status: OPEN, ASSIGNED to vm2 by Nick (2026-10-13). vm2 claims it under the WORKFLOW.md rules before running.
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: focused run with the nightly group enabled. No code change.
