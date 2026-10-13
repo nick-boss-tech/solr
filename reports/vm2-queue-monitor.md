@@ -1090,3 +1090,5 @@ No action taken beyond this job.
 - Failed and action taken: none new by this session.
 - Claimed: none (vm2 busy).
 - Next claimable once vm2 is idle: the prdrift reruns (item a with nightly enabled; item c with the base-leg revert), gates/combinedquerycomponent-real-exit-premise.md, gates/SOLR-6014-searchtime-premise.md. Check claims/ at claim time.
+
+- 2026-10-13T10:16Z busy: SOLR-5011-narrowing gate still running (claim 09:17Z, heartbeat refreshed 10:16Z; GATE START 09:55:22Z; at focused-head; log growing; no GATE END). No claim taken, no relaunch. Next claimable once idle: gates/combinedquerycomponent-real-exit-premise.md, gates/SOLR-6014-searchtime-premise.md, gates/SOLR-6430 is DONE, check claims/ at claim time.

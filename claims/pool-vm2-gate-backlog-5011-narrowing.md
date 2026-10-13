@@ -11,3 +11,4 @@
 - Status: CLAIMED 2026-10-13T09:17Z (UTC); implementation committed locally, gate queued.
 - Implementation (local commits in /workspace/gates/solr-5011-narrowing, not yet pushed to the fork): 7fa066e08e (SolrCore.doClose skips the loader close when a schema cache is enabled; ConfigSetService.isSchemaCacheEnabled) and 00060d2ed9 (CoreUnloadSharedSchemaTest). Delta against 3fd85bedef is those three files only.
 - Gate queued: gates/g5011-narrowing-gate.sh at 2026-10-13T09:36:36Z. Proof leg reverts SolrCore.java and ConfigSetService.java to 3fd85bedef; the proving test must fail there by the class-loading content, and the control test must pass there.
+- Heartbeat 2026-10-13T10:16Z: gate running (GATE START 09:55:22Z, at focused-head step; compile-errorprone rc=0; proof leg rc=1 nonzero as expected, content check pending at GATE END). No GATE END yet; no relaunch.
