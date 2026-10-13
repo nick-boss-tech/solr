@@ -17,4 +17,4 @@
 - [ ] module check :solr:solrj-streaming
 - [ ] receipt refreshed; job and claim DONE
 
-- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T11:17Z at 80ce9d7a3c8; claim claims/pool-vm2-gate-backlog-10322-tip-regate.md.
+- Status: DONE 2026-10-13T12:01Z by vm2 (gate backlog coordinator). Gate GREEN at 80ce9d7a3c8 (changelog-parse rc=0, tidy rc=0 with clean status, module check rc=0). Receipt: receipts/SOLR-10322.md, live-tip section. Claim: claims/pool-vm2-gate-backlog-10322-tip-regate.md.
