@@ -2,7 +2,7 @@
 
 - Branch: solr-5011-submit. Head: 3fd85bedef646b5b73c26e26a86a6130b5fc209f (live tip, verified by ls-remote at posting, 2026-10-11; this is the gated head in receipts/SOLR-5011.md). Merge-base: cabedd1d968059215188f4e7563fb303241899ed.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED by vm2 (gate backlog coordinator), 2026-10-13T09:17Z; claim claims/pool-vm2-gate-backlog-5011-narrowing.md. Proving test class: org.apache.solr.core.CoreUnloadSharedSchemaTest (in :solr:core test sources).
 - Capability tags: gate.
 - Job type: implementation from an adopted analysis, then the full hardening gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization: one claim covers the implementation, the push, and the gate.
 - Spec: reports/solr-5011-shared-schema-analysis.md. Its verdict is UNSAFE: on the gated branch, when two cores share one config set with shareSchema on and the core that first built the cached schema unloads, that core's SolrResourceLoader closes while the surviving core's shared schema still uses it, so a later schema-scoped load of a lib-only class on the survivor fails. The analysis's "Recommended narrowing" section is the implementation spec, and its "Settling and narrowing test" is the proving test spec. The original gate (gates/SOLR-5011.md, DONE, GATE GREEN at the head above) does not cover any of this; its run-list finding recorded that no branch test covers the shared-schema scenario.
