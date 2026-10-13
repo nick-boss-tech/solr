@@ -24,11 +24,11 @@ A shard with no `approximateTotalHits` header also adds the running total, not i
 
 ## What this change does
 
-**The skip runs first, so a skipped shard adds nothing to the totals. The fallback adds the shard's own count.**
+**The skip runs first, so a skipped shard adds nothing to the counts or the max score. The fallback adds the shard's own count.**
 
 The skip and the totals are at [L1180-L1203](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1180-L1203). The fallback is at [L1188-L1193](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1188-L1193). If every shard is skipped, the merged total is 0. That 0 is marked exact only when no skipped shard reported hits ([L1238-L1243](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1238-L1243)).
 
-Behavior change: merged numFound, maxScore, approximateTotalHits and numFoundExact now cover only the shards whose documents are merged. `partialResults` and `maxHitsTerminatedEarly` still fold in from every shard ([L1144](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1144), [L1156-L1161](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1156-L1161)). The per-shard numbers in `shards.info` are unchanged.
+Behavior change: merged numFound, maxScore and approximateTotalHits now cover only the shards whose documents are merged. numFoundExact follows the merged shards too, except when every shard is skipped (see the choice below). `partialResults`, `segmentTerminatedEarly` and `maxHitsTerminatedEarly` still fold in from every shard ([L1144](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1144), [L1156-L1161](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1156-L1161)). The per-shard numbers in `shards.info` are unchanged.
 
 ## Proof
 
@@ -40,7 +40,7 @@ The tests are in [QueryComponentPartialResultsTest.java](https://github.com/nick
 
 ## A choice to check
 
-**Merged numFound, maxScore, approximateTotalHits and numFoundExact now cover only the merged shards.** A skipped shard contributes to none of the four. Setting numFoundExact false alone would leave the counts wrong, so the change excludes the shard instead. Subtracting the shard afterwards cannot work, because maxScore cannot be decremented. Should numFoundExact also go false when a skipped shard reported hits, as the all-skipped zero rule does?
+**Merged numFound, maxScore and approximateTotalHits now cover only the merged shards.** A skipped shard adds nothing to those three. numFoundExact ignores skipped shards too, except when every shard is skipped and a skipped shard reported hits, which clears it ([L1241-L1243](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1241-L1243)). Setting numFoundExact false alone would leave the counts wrong, so the change excludes the shard instead. Subtracting the shard afterwards cannot work, because maxScore cannot be decremented. Should numFoundExact also go false when a skipped shard reported hits and other shards were merged, as it does when every shard is skipped?
 
 ## Limits
 
