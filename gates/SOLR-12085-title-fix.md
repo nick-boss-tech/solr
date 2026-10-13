@@ -2,7 +2,7 @@
 
 - Branch: solr-12085-submit. Head: c8dba502339631218190b3b08115f64047d2551c (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-12085.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED by vm2 (coordinator) at 2026-10-12T17:14Z; claims/pool-vm2-gate-backlog-12085-title-fix.md. Fork tip pinned at claim time: c8dba50233.
+- Status: DONE at a220b0728dc80fe07a6a77e317e2277fd4696f0b (gate GREEN, GATE END 2026-10-13T01:34:41Z; receipts/SOLR-12085.md, section "Title-fix head a220b0728d"). Earlier: CLAIMED by vm2 (coordinator) at 2026-10-12T17:14Z; claims/pool-vm2-gate-backlog-12085-title-fix.md.
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/replication-backup-round-1-g2.md, finding 14, adopted in material/replication-backup-round-1-answers.md (SOLR-12085 entry) and carried as a status item in reports/replication-backup-convergence-round-1-response.md. The current title says "on every replication"; the wait runs only on the path at IndexFetcher.java line 622 at the head (`!isFullCopyNeeded && !fetchFromLeader`), so the title overstates the change.
@@ -16,10 +16,10 @@
 
 ## Step checklist
 
-- [ ] title replaced verbatim in SOLR-12085-index-fetcher-retained-commits.yml; delta against c8dba502339 is that fragment only
-- [ ] changelog YAML parse
-- [ ] tidy on the final tree; tree clean (GATE INVALID guard)
-- [ ] Error Prone compile (:solr:core)
-- [ ] focused tests at the new head: IndexFetcherUnusedFilesTest and IndexFetcherPacketProtocolTest, counted from fresh JUnit XML
-- [ ] module check (:solr:core)
-- [ ] pushed plainly to solr-12085-submit; receipt refreshed; draft Proof and changelog link re-pointed; job and claim DONE
+- [x] title replaced verbatim in SOLR-12085-index-fetcher-retained-commits.yml; delta against c8dba502339 is that fragment only
+- [x] changelog YAML parse
+- [x] tidy on the final tree; tree clean (GATE INVALID guard)
+- [x] Error Prone compile (:solr:core)
+- [x] focused tests at the new head: IndexFetcherUnusedFilesTest and IndexFetcherPacketProtocolTest, counted from fresh JUnit XML
+- [x] module check (:solr:core)
+- [x] pushed plainly to solr-12085-submit; receipt refreshed; draft Proof and changelog link re-pointed; job and claim DONE
