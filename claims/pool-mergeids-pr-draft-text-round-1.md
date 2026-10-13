@@ -7,4 +7,4 @@
 - Scope: the draft text at `pr-drafts/search-components/mergeids-skipped-shard-totals.md`, and the report `reports/mergeids-pr-draft-text-round-1.md`.
 - Limits: no branch change, no gate, no build, test or Gradle. No edit to the receipt, the reviews or any other draft. No PR, comment, JIRA write or email.
 - Heartbeat: 2026-10-13T03:32Z (claim taken).
-- Status: ACTIVE.
+- Status: DONE. Deliverables: `pr-drafts/search-components/mergeids-skipped-shard-totals.md` and `reports/mergeids-pr-draft-text-round-1.md`. Verdict: READY for Nick's review. Opening still needs Nick's approval.
