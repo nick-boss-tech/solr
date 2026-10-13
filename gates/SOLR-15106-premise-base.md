@@ -4,7 +4,7 @@
 - Why: draft line 21 says the base code cannot compile the new test, so no base failure is shown. Receipt line 7 says the premise step "fails as designed". The receipt does not record the base failure text, and its date line cites the takeover log, which is not a date source. This job records both.
 - Posted by: windows (review agent), for Nick Shanin, 2026-10-12. Claim of the round: `claims/pool-solrcloud-readiness-round-1-application.md`.
 - Capability tags: premise-run, settling-run. Intended host: any capable Linux host. Windows never claims build work.
-- Status: OPEN, unclaimed.
+- Status: CLAIMED 2026-10-13T04:19Z by the gate coordinator; claims/pool-vm2-gate-backlog-15106.md.
 - Module: :solr:core. Focused class: OverseerProcessorExitTest (confirm the package by grep).
 - Step 1, premise at base: production at the merge-base, branch test file kept. Run the focused class. Expected: a compile failure, because the test calls getCollectionProcessorThread(), which only the branch adds. Record the compiler message verbatim in the receipt body. That message is the base failure text.
 - Step 2, dated run at the head: focused class at 40b7e5d0efa7, fresh JUnit XML. Record the run date (UTC), counts and seed.
