@@ -43,3 +43,7 @@ Round 1 returned SATISFIED for #5116 (SOLR-18540) and NOT SATISFIED for #5115 (S
 2. SOLR-18541, the missing per-query entry crash (the Q2 `IndexOutOfBoundsException` and its family): this stays a named follow-up in the PR's Limits. No follow-up ticket is filed for it until after the PR merges.
 
 Both rulings are recorded on the main side as examples under the decision ladder: where a genuine choice exists, the PR poses it as a Choice rather than settling it silently in code; and an item listed as a follow-up does not get its own ticket until after the PR that names it has merged.
+
+## Settling outcome recorded 2026-10-13 (main side)
+
+The plain `QueryComponent` real-exit shape input is in. The run (unmodified main `d76fc14b9857`, seed `C0FFEE42C0FFEE42`, verdicts in `gates/queryComponent-real-exit-shape-premise.md` and in the premise addendum at the end of `reports/four-new-prs-strong-review-round-1.md`) produced no short-circuited shape and no partial response carrying a `sort_values` key; the only partial shape a real exit produced reported hits (numFound 20000, exact flag set) and was skipped by the merge. Verdict: the run supports canonical Option B. For #5115, do not move `mergeids-skipped-shard-totals` onto the gated any-skip patch. The patch on `review-r1-solr-18539` narrows first, under the patch-loop task written in the premise addendum (the zero-hit assertions flip back, the inexact-zero pin is added, the narrowed head re-gates), and the #5115 body rewrite waits for the narrowed gate.

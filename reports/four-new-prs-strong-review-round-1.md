@@ -160,3 +160,27 @@ The live PR bodies for #5115 and #5118 matched their drafts before this round. T
 - Single-file bind mount: not run. The gate account has no mount rights. The EBUSY reading stays unverified.
 - Ownership under a second user: not run. The gate account has no second user.
 
+## Premise addendum for SOLR-18539: the QueryComponent real-exit settling run (2026-10-13)
+
+This addendum records the settling run the round 2 assignment waits for (`gates/queryComponent-real-exit-shape-premise.md`, claim `claims/pool-vm1-querycomponent-real-exit-shape-premise.md`). Full verdicts, the run record and the quoted probe lines are in the job file; the same verdict is summarized in `receipts/mergeids-fix.md`.
+
+Run: unmodified main `d76fc14b9857e77b830d7a82514b28c523a239c2`, probe `QueryComponentRealExitShapePremiseTest`, seed `C0FFEE42C0FFEE42`, shard A 20,000 documents and shard B 1,500, a timeAllowed ladder from 4000 down to 1. JUnit XML timestamp 2026-10-13T18:51:02Z: 1 test, 0 failures, 0 errors. Observed:
+
+- Q1, the short-circuited shape (an empty `SolrDocumentList`, numFound 0, exact by default, produced when a shard stops before it has a response section): "QC-EXIT Q1 SHAPE NOT CAPTURED: no attempt produced the short-circuited shape".
+- Q2, a partial response carrying a `sort_values` key: "QC-EXIT Q2 SHAPE NOT CAPTURED: no attempt produced a partial response carrying a sort_values key".
+- The only partial shape captured carries the shard's full totals: "QC-EXIT OTHER PARTIAL SHAPE CAPTURED: shard=shardA partial=true responseKind=ResultContext numFound=20000 numFoundExact=true ... size=20000 sortValues=ABSENT ...". Driven through `mergeIds` with the complete shard B it completed at "numFound=21500 numFoundExact=true size=1500": the exiting shard's documents stayed out of the merged list (it was skipped), and on unmodified main its totals were folded in anyway, which is the defect this PR fixes, not evidence about the rule width.
+
+Verdict: the run supports Option B, the rule this report decided under the decision default. The two reviews differ only on a skipped shard that reports an exact zero. Every skipped shape the run produced reported hits, where Option B and the any-skip rule agree (exactness clears). The exact-zero skip, the one shape where they differ, was not produced by a real exit although the ladder was built to force it. The patch on `review-r1-solr-18539` at `fbf7610644d178049e1110ffc0ec34dad8c5b32f` is therefore wider than the run supports. It narrows under the task below and re-gates; `mergeids-skipped-shard-totals` is not moved.
+
+### Narrowing task for the review patch loop (SOLR-18539)
+
+Branch: `review-r1-solr-18539` at `fbf7610644d178049e1110ffc0ec34dad8c5b32f`. Target rule (canonical Option B): a skipped shard that reported hits or an inexact count clears the merged `numFoundExact`, whether or not other shards merged; a skipped shard that reported an exact zero does not change it.
+
+1. Production, `QueryComponent.mergeIds`: replace the unconditional `anyShardSkipped` guard with the Option B condition, in the shape this report describes for the decided patch. In the skip branch (partial, no sort values, the sort needs unmarshalling), record `skippedShardMayHoldMatches` when `docs.getNumFound() > 0` or `docs.getNumFoundExact()` is not TRUE. The post-loop guard becomes `if (skippedShardMayHoldMatches) hitCountIsExact = false;`. The comment states the rule plainly: a skipped shard that reported hits or an inexact count makes the merged count inexact; a skipped shard that reported an exact zero does not change the merged flag.
+2. Tests, `QueryComponentPartialResultsTest`:
+   - `skippedShardWithNoHitsMakesMergedCountInexact` flips back: the skipped shard reports numFound 0 with an exact flag and the merged shard is exact, so the merged count (3) keeps `numFoundExact` TRUE. Rename the test so its name says the exact-zero skip leaves the merged flag unchanged.
+   - `allShardsSkippedWithNoHitsDoesNotClaimExactZero` flips back to `allShardsSkippedWithNoHitsKeepsExactZero`: every shard skipped, each reporting an exact zero, merged numFound 0 with `numFoundExact` TRUE.
+   - Keep at FALSE: `skippedShardWithHitsMakesMergedCountInexact` (hits clear under Option B), `mergedNumFoundCountsOnlyMergedShards` (its skipped shard reports hits) and `allShardsSkippedDoesNotClaimExactZero` (its skipped shards report hits).
+   - Add the all-skipped inexact-zero pin (this report's T3 for the decided patch): every shard skipped and one of them reporting numFound 0 with `numFoundExact` false, so the merged numFound 0 has `numFoundExact` FALSE. No current test pins a skipped inexact zero; `mergedShardInexactCountMakesMergedFlagInexact` covers a merged shard, not a skipped one.
+   - The `approximateTotalHitsFallsBackToEachShardsNumFound` pin change (the second shard reporting numFound 8 with 3 returned documents) is unrelated to the rule width and stays.
+3. Re-gate the narrowed head in the shape of `gates/SOLR-18539-review-r1-patch.md`: tidy, Error Prone compile, the focused `QueryComponentPartialResultsTest` run, fail-before against the merge-base and against the PR head with the expected failure sets rewritten for the flipped assertions, and the module check. The branch move onto `mergeids-skipped-shard-totals` is proposed again only after that gate is green, and it still needs the owner or the main side to agree.
