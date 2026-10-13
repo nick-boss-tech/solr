@@ -7,3 +7,4 @@
 - Runner: /workspace/gates/g18010-review-r1-g3.sh, worktree /workspace/gates/solr-18010-review-r1 (detached). Log: logs/vm2/18010-review-r1-g3-*.log.
 - Heartbeat: 2026-10-13T19:35:37Z by vm2.
 - Status: CLAIMED.
+- 2026-10-13T19:52Z DONE (vm2 coordinator): GATE GREEN at e99be67c9a6f (GATE END 19:51:22Z). Focused 17 of 17 from fresh JUnit XML, module check rc=0. Deliverables: receipts/SOLR-18010.md (section "Review round 1 check (G3)"), gates/SOLR-18010-review-r1-g3.md (DONE).
