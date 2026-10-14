@@ -2,7 +2,7 @@
 
 - Branch: solr-14231-submit. Head: 593463f398cb96a50ea9ab4a70b26c0b9a5b1599 (live tip, verified by `git ls-remote origin refs/heads/solr-14231-submit` on 2026-10-13; receipt `receipts/SOLR-14231.md`, section "Re-gate at 593463f398", GATE GREEN at this head).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: RUN, not DONE. The focused step returned rc=1 at the fail-before run, the expected outcome per the claim; the result is recorded below and the run is left for the main agent to confirm. Posted 2026-10-13 by the review coordinator (W2 streaming, `reports/streaming-convergence-round-2-response.md`).
+- Status: DONE, 2026-10-14. The focused step returned rc=1 at the fail-before run; the main agent confirmed that rc as the expected fail-before outcome (see "Main-side confirmation, 2026-10-14" below). Posted 2026-10-13 by the review coordinator (W2 streaming, `reports/streaming-convergence-round-2-response.md`).
 - Capability tags: gate.
 - Job type: fail-before proof, a run only. No push, no branch change, no receipt "green" line. The gate records each new test's outcome on the proof base.
 - Why owed: the branch adds tests, and WORKFLOW's fail-before rule asks that a new test fail without its fix. `pr-drafts/streaming/SOLR-14231.md` states "Fail without the fix: not run for these tests." That sentence stays true until this job reports.
@@ -35,11 +35,18 @@
 - ScoreNodesStreamTest, same seed: tests 1, failures 1, errors 0, skipped 0. testSingleNodeTermsRequest FAILED: "expected:<collection1> but was:<null>" (new test).
 - All three new tests fail on the proof base. Per the claim, the rc=1 is the expected fail-before result. Not relaunched. The throwaway worktree /workspace/gates/solr-14231-failbefore is left in place with ScoreNodesStream.java reverted and staged, for the main agent.
 
+## Main-side confirmation, 2026-10-14
+
+- Confirmed by the main agent on 2026-10-14 (MDT) from the run record above, the claim, `receipts/SOLR-14231.md`, the review side's HOLD record in `reports/census-followup-scheduled-round-2.md`, and the takeover log. Verdict: the rc=1 is the fail-before outcome this job exists to produce. Job DONE.
+- Evidence: the proof shape ran as specified. `ScoreNodesStream.java`, the branch's only production file, was reverted alone to the proof base `b5c71bc5573c` (delta 1 file, recorded in the run record) and compile rc=0, so the branch tests compiled and executed against base production. All three new tests failed on the proof base with the designed messages: `testScoreNodesStreamSingleNode` and `testScoreNodesNoNodes` with "No collection param specified on request and no default collection has been set: []" (the base sets the collection only from the second node, so a single-node or no-node walk sends none), and `testSingleNodeTermsRequest` with "expected:<collection1> but was:<null>". The same tests pass at the head: `receipts/SOLR-14231.md` records GraphExpressionTest 8 of 8 and ScoreNodesStreamTest 1 of 1 from fresh JUnit XML at `593463f398`, whose code delta from the gated `2f73d00a399` is the changelog title line only. The branch tip was re-verified unchanged at `593463f398cb96a50ea9ab4a70b26c0b9a5b1599` by `git ls-remote` on 2026-10-14.
+- Two record defects stay open and are not explained away by this confirmation: (1) the GraphExpressionTest XML attributes (tests 10, failures 4) do not reconcile with the 3 failure elements in the file, and the raw XML and run log sit on vm2 (`/workspace/gates/logs/vm2/queue-g14231-fail-before-gate-20261014T061650Z.out`), which is not reachable from the main host, so vm2's restatement of the counts remains owed; the per-test outcomes above are individually recorded and do not depend on the aggregate count. (2) The base leg's class-level `classMethod` failure ("ObjectTracker found 6 object(s) that were not released!!!") is unexplained in the record; it does not change the three per-test verdicts, and no cause is asserted here.
+- The throwaway worktree `/workspace/gates/solr-14231-failbefore` remains on vm2 as vm2 left it; discarding it is vm2-side housekeeping. The receipt line this job owed is added by this confirmation. The draft's Proof sentence and HOLD comment in `pr-drafts/streaming/SOLR-14231.md` stay with the review coordinator, as the job text assigns them; the HOLD item on the count restatement and the ObjectTracker explanation remains open with vm2.
+
 ## Step checklist
 
-- [ ] head and proof base confirmed by ls-remote and git merge-base, recorded here
+- [x] head and proof base confirmed by ls-remote and git merge-base, recorded here (header, 2026-10-13)
 - [x] throwaway worktree; only `ScoreNodesStream.java` reverted; diff checked
 - [x] focused run: GraphExpressionTest and ScoreNodesStreamTest, seed 14231C0FFEE14231
 - [x] per-test outcomes counted from fresh JUnit XML; failure lines quoted for failing new tests
-- [ ] receipt line added to receipts/SOLR-14231.md; draft Proof sentence updated from the outcomes
-- [ ] throwaway worktree removed; branch unchanged; job DONE
+- [x] receipt line added to receipts/SOLR-14231.md (2026-10-14, with this confirmation); draft Proof sentence updated from the outcomes (still the review coordinator's step, per the job text)
+- [x] branch unchanged (ls-remote re-verified 2026-10-14); job DONE. Throwaway worktree removal outstanding on vm2 (see confirmation)
