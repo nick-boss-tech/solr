@@ -6,3 +6,5 @@
 - Runner: gates/g15003-proof-gate.sh, worktree /workspace/gates/solr-15003-proof (detached). Seed 15003C0FFEE15003, nightly tests enabled.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: FAILED 2026-10-14T09:25Z, handed to the main agent. Gate run finished rc=1 at the merge base (one of four new tests fails there; three pass) and rc=0 at 8f5b6f8360a where the receipt expects the reload test to fail. Not relaunched. Details in gates/SOLR-15003-proof-recount.md under the gate run record.
+
+- 2026-10-14T09:41ZZ vm2 gate backlog coordinator: DONE. Record run: head 4 of 4; merge base 1 failure (testFullCopyKeepsSnapshotFilesInOldIndexDir); pre-fix 8f5b6f8360a reload test passed, which contradicts the receipt. See gates/SOLR-15003-proof-recount.md.

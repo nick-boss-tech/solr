@@ -54,3 +54,12 @@ Run: gates/g15003-proof-gate.sh at head 1004abee39ab, log logs/vm2/queue-g15003-
 - Step 4, changelog YAML parse at the head: rc=0, YAML OK.
 
 Classification: not GREEN. Step 2 gives a partial fail-before, and step 3 contradicts the receipt. Not relaunched. The main agent decides whether receipts/SOLR-15003.md line 7 can stand and whether the other three new tests need a fail-before proof.
+
+
+## Result (vm2, 2026-10-14T09:41ZZ)
+
+- Step 1, head 1004abee39ab, filter of the four named tests, nightly on, seed 15003C0FFEE15003: 4 run, 0 failures, 0 errors. Class `@Test` count 28.
+- Step 2, merge base b5c71bc5573 with the head test file overlaid: testFullCopyKeepsSnapshotFilesInOldIndexDir FAILED ("old index directory must be retained while a snapshot references it"); testFullCopyWithReloadRemovesOldIndexDir, testFullCopyRemovesOldIndexDirWhenNoSnapshot, testDeleteNamedSnapshotWithMissingIndexDir PASS. Verdicts: testFullCopyKeepsSnapshotFilesInOldIndexDir PASS (failed without the fix); the other three NOT_PROVEN (passed without the fix).
+- Step 3, pre-fix 8f5b6f8360a with the head test file overlaid, testFullCopyWithReloadRemovesOldIndexDir alone: PASSED. The receipt recorded a failure of this test at this commit; this run does not reproduce it. Finding for the main side.
+- Step 4, changelog parse at head: OK.
+- No relaunch. No push. Logs: logs/vm2/15003-head.log, 15003-mb.log, 15003-pre.log, queue log queue-g15003-proof-gate-20261014T090951Z.out.
