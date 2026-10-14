@@ -5,4 +5,4 @@
 - Capability tags: gate.
 - Runner: gates/g11356-header-copy-gate.sh, worktree /workspace/gates/solr-11356-header-copy (detached at the head). Fork push only as the fast-forward the job names after the patched gate is green.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: GATE QUEUED at head 8b2e826154 (fix and test committed; runner gates/g11356-header-copy-gate.sh; worktree /workspace/gates/solr-11356-header-copy). Not yet run.
+- Status: DONE 2026-10-14T13:33Z. GATE GREEN at patched head 8b2e826154afb883cfbbe32b3247b53811991939; pushed to solr-11356-submit as a fast-forward from 6120dae28d04. Receipt receipts/SOLR-11356.md. Runner gates/g11356-header-copy-gate.sh.
