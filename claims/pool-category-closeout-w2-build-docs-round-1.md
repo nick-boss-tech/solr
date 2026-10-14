@@ -7,4 +7,4 @@
 - Decision rule: scope questions settle here under the decision default; each decision is recorded in the response report.
 - Limits: fork pushes and live body edits are allowed under the owner's direction of 2026-10-13; no PR opened, closed or flipped; no comment posted; no build, test or Gradle on this host; code items as patch or gate job files.
 - Heartbeat: 2026-10-14T04:00Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE (2026-10-14). Report: `reports/build-docs-convergence-round-2-response.md`. SOLR-5821 and SOLR-6430 CONVERGED. SOLR-17842 HOLD on the placeholder fix gate and landing order, with published results as a named follow-up. SOLR-17752 HOLD on the owner's direction for the rebase of a published branch.

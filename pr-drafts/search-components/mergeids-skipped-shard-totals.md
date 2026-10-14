@@ -1,10 +1,10 @@
 # Staging notes (not part of the PR text)
 
 - Short version of the PR text, written after the JIRA text of SOLR-18539 was shortened. The long version is saved at material/mergeids-skipped-shard-totals-v1-long.md.
-- Draft text round 1 (reports/mergeids-pr-draft-text-round-1.md) applied the two reviews' findings that held, and the confirmation pass. Verdict there: READY for Nick's review. Opening still needs Nick's approval.
-- Branch: `mergeids-skipped-shard-totals` on the fork. Packaged head 4eb996121804b043f1ee53f5bb7e22b9c3021b0a. Gate record: receipts/mergeids-fix.md.
-- Proof: 17 of 17 at 4eb996121804 (2026-10-13 02:51 UTC) and at 9e85ce5c16 (2026-10-11 21:43 UTC).
+- Rewritten for the narrowed head f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff (fast-forward from 4eb996121804b043f1ee53f5bb7e22b9c3021b0a, the head the PR was opened on). The changelog fragment is unchanged at both heads. Gate record: receipts/mergeids-fix.md.
+- Proof at f9b0e5d722: 19 of 19 (seed 18539C0FFEE18539, 2026-10-14 00:31 UTC). Fail-before legs: 7 at d76fc14b9857, 3 at 4eb996121804, 2 at fbf7610644d1.
 - Title: "SOLR-18539: Skip partial shards before adding their totals in QueryComponent.mergeIds"
+- Live body of PR #5115 is not yet edited. The rewrite brief bars AI wording in the body, but the PR formula (section 6, Nick, 2026-10-04) keeps the AI header and footer on every PR description. The two AI lines below stay until that call is made.
 
 ---
 
@@ -16,40 +16,42 @@ https://issues.apache.org/jira/browse/SOLR-18539
 
 **A skipped partial shard's counts still reach the merged totals.**
 
-In a search sorted on a field, `QueryComponent.mergeIds` adds each shard's totals before it tests for the partial-results skip. A shard is skipped only when its response is partial, it sent no sort values, and the sort uses a field other than score or doc. The links below point to upstream/main, `d76fc14b9857`. The totals are added at [L1160-L1175](https://github.com/nick-boss-tech/solr/blob/d76fc14b9857e77b830d7a82514b28c523a239c2/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1160-L1175), and the skip is at [L1193-L1195](https://github.com/nick-boss-tech/solr/blob/d76fc14b9857e77b830d7a82514b28c523a239c2/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1193-L1195).
+In a search sorted on a field, `QueryComponent.mergeIds` adds each shard's totals before it tests for the partial-results skip. A shard is skipped when its response is partial, it sent no sort values, and the sort uses a field other than score or doc. The links point to upstream/main, `d76fc14b9857`: the totals are added at [L1160-L1175](https://github.com/nick-boss-tech/solr/blob/d76fc14b9857e77b830d7a82514b28c523a239c2/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1160-L1175), and the skip is at [L1193-L1195](https://github.com/nick-boss-tech/solr/blob/d76fc14b9857e77b830d7a82514b28c523a239c2/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1193-L1195).
 
-In `mergedNumFoundCountsOnlyMergedShards`, the skipped shard holds 2 documents and the other shard holds 3. On unmodified main, the merged response has 3 documents, but numFound is 5 and numFoundExact is true. The same skipped shard's maxScore (99.0) also comes through, and its approximateTotalHits (11, not 4) does too. `mergedMaxScoreComesFromMergedShards` and `mergedApproximateTotalHitsExcludesSkippedShard` pin those two values.
+In `mergedNumFoundCountsOnlyMergedShards`, the skipped shard holds 2 documents and the other holds 3. On unmodified main the merged response has 3 documents, but numFound is 5 and numFoundExact is true. The skipped shard's maxScore (99.0) and approximateTotalHits (11, not 4) also come through. `mergedMaxScoreComesFromMergedShards` and `mergedApproximateTotalHitsExcludesSkippedShard` pin those values.
 
-A shard with no `approximateTotalHits` header also adds the running total, not its own count. In `approximateTotalHitsFallsBackToEachShardsNumFound`, two shards with no approximateTotalHits header, holding 2 and 3 documents, give 2 instead of 5.
+A shard with no `approximateTotalHits` header also adds the running total, not its own count. In `approximateTotalHitsFallsBackToEachShardsNumFound`, two such shards holding 2 and 3 documents give 2 instead of 5.
 
 ## What this change does
 
-**The skip runs first, so a skipped shard adds nothing to the counts or the max score. The fallback adds the shard's own count.**
+**A skipped shard adds nothing to the counts or the max score, and the fallback adds the shard's own count.**
 
-The skip and the totals are at [L1180-L1203](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1180-L1203). The fallback is at [L1188-L1193](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1188-L1193). If every shard is skipped, the merged total is 0. That 0 is marked exact only when no skipped shard reported hits ([L1238-L1243](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1238-L1243)).
+The skip is at [L1179-L1186](https://github.com/nick-boss-tech/solr/blob/f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1179-L1186), before the totals and the fallback at [L1188-L1203](https://github.com/nick-boss-tech/solr/blob/f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1188-L1203). If every shard is skipped, the merged total is 0. The merged count is marked inexact when a skipped shard reported hits or an inexact count, whether or not other shards were merged ([L1180-L1184](https://github.com/nick-boss-tech/solr/blob/f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1180-L1184), [L1238-L1243](https://github.com/nick-boss-tech/solr/blob/f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1238-L1243)). A skipped shard that reported an exact zero leaves the flag alone.
 
-Behavior change: merged numFound, maxScore and approximateTotalHits now cover only the shards whose documents are merged. numFoundExact follows the merged shards too, except when every shard is skipped (see the choice below). `partialResults`, `segmentTerminatedEarly` and `maxHitsTerminatedEarly` still fold in from every shard ([L1144](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1144), [L1156-L1161](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1156-L1161)). The per-shard numbers in `shards.info` are unchanged.
+Behavior change: merged numFound, maxScore and approximateTotalHits now cover only the merged shards. `partialResults` ([L1143](https://github.com/nick-boss-tech/solr/blob/f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1143)), `segmentTerminatedEarly` and `maxHitsTerminatedEarly` ([L1145-L1160](https://github.com/nick-boss-tech/solr/blob/f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1145-L1160)) still fold in from every shard. The per-shard numbers in `shards.info` are unchanged.
 
 ## Proof
 
-**QueryComponentPartialResultsTest: 17 of 17 pass at head `4eb996121804`, verified 2026-10-12 20:51 MDT (2026-10-13 02:51 UTC).** The same 17 pass at `9e85ce5c16`, verified 2026-10-11 15:43 MDT (21:43 UTC).
+**QueryComponentPartialResultsTest: 19 of 19 pass at head `f9b0e5d722`, verified 2026-10-13 18:31 MDT (2026-10-14 00:31 UTC), random seed `18539C0FFEE18539`.** The core module's check task, run without tests, also passes. The tests are in [QueryComponentPartialResultsTest.java](https://github.com/nick-boss-tech/solr/blob/f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff/solr/core/src/test/org/apache/solr/handler/component/QueryComponentPartialResultsTest.java).
 
-At `4eb996121804`, with `QueryComponent.java` reverted to the base commit and the new tests kept, 7 of the 17 fail. Five of them fail on the values described under What happens today (numFound in two tests, maxScore, approximateTotalHits, and the fallback). The other two are a mixed-header total of 13 instead of 14, and an all-skipped total of 5 instead of 0. The other 10 pass on the base too, so they check that existing merge results stay the same. The same 7 failed at `9e85ce5c16`.
+With `QueryComponent.java` reverted to the base commit and the new tests kept, 7 of the 19 fail. Four fail on the values under What happens today. The other three are `skippedShardWithHitsMakesMergedCountInexact`, `allShardsSkippedDoesNotClaimExactZero` (a total of 5 instead of 0) and `approximateTotalHitsMixesHeaderAndFallbackShards` (13 instead of 14). The other 12 pass on the base too.
 
-The tests are in [QueryComponentPartialResultsTest.java](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/test/org/apache/solr/handler/component/QueryComponentPartialResultsTest.java).
+With the production code from the previous head, `4eb996121804`, 3 fail: `mergedNumFoundCountsOnlyMergedShards`, `skippedShardWithHitsMakesMergedCountInexact` and `allShardsSkippedWithInexactZeroDoesNotClaimExactZero`. With the code from `fbf7610644d1`, an earlier commit that cleared numFoundExact for any skipped shard, 2 fail: `skippedShardWithExactZeroLeavesMergedCountExact` and `allShardsSkippedWithNoHitsKeepsExactZero`.
 
 ## A choice to check
 
-**Merged numFound, maxScore and approximateTotalHits now cover only the merged shards.** A skipped shard adds nothing to those three. numFoundExact ignores skipped shards too, except when every shard is skipped and a skipped shard reported hits, which clears it ([L1241-L1243](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1241-L1243)). Setting numFoundExact false alone would leave the counts wrong, so the change excludes the shard instead. Subtracting the shard afterwards cannot work, because maxScore cannot be decremented. Should numFoundExact also go false when a skipped shard reported hits and other shards were merged, as it does when every shard is skipped?
+**A skipped shard clears the exact flag only when it reported hits or an inexact count.**
+
+The other option clears the flag for any skipped shard. That is simpler and stricter, but it would also mark the count inexact when a skipped shard reported an exact zero, which adds no hits. The cost of the chosen rule is that it trusts a skipped shard's exact zero to be a true zero. No timeout run we made produced a skipped shard with an exact zero, so that case is not tested end to end. Was the narrower rule the right call?
 
 ## Limits
 
 **Not covered: multi-node runs and CombinedQueryComponent.**
 
 - The tests stop at the merge step. No multi-node run covers a shard that timed out and returned a partial response.
-- `CombinedQueryComponent.mergeIds` has the same ordering: it adds totals and the running-total fallback before its skip. It is not changed here. It is tracked in [SOLR-18541](https://issues.apache.org/jira/browse/SOLR-18541).
+- `CombinedQueryComponent.mergeIds` has the same ordering and is not changed here. It is tracked in [SOLR-18541](https://issues.apache.org/jira/browse/SOLR-18541).
 
-Changelog: [changelog/unreleased/SOLR-18539-mergeids-skipped-shard-totals.yml](https://github.com/nick-boss-tech/solr/blob/4eb996121804b043f1ee53f5bb7e22b9c3021b0a/changelog/unreleased/SOLR-18539-mergeids-skipped-shard-totals.yml)
+Changelog: [changelog/unreleased/SOLR-18539-mergeids-skipped-shard-totals.yml](https://github.com/nick-boss-tech/solr/blob/f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff/changelog/unreleased/SOLR-18539-mergeids-skipped-shard-totals.yml)
 
 ### AI assistance
 

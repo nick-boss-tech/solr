@@ -1,0 +1,15 @@
+--- a/solr/benchmark/docs/release-benchmarking.md
++++ b/solr/benchmark/docs/release-benchmarking.md
+@@ -63,10 +63,10 @@
+ For release comparisons, prefer machine-readable output such as CSV or JSON so
+ results can be archived and diffed later. For example, from the `solr/benchmark`
+ directory, with one fork, five warmup and five measurement iterations, and the
+-result written to a file named for the build under test:
++result written to a file named for the build under test, where `BUILD` stands for the build's name:
+ 
+ ```zsh
+-./jmh.sh SimpleSearch JsonFaceting FilterCache -f 1 -wi 5 -i 5 -rf json -rff work/jmh-<build>.json
++./jmh.sh SimpleSearch JsonFaceting FilterCache -f 1 -wi 5 -i 5 -rf json -rff work/jmh-BUILD.json
+ ```
+ 
+ Run the same command on each build and compare the `primaryMetric.score` of the
