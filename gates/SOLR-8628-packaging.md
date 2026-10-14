@@ -33,11 +33,16 @@
 
 ## Step checklist
 
-- [ ] packaging commit pushed (fast-forward from 5b606dc779d0), packaged head recorded. Packaged head recorded: 2e56ce9990b008c00d2d07b2498cf28cdc101a06 (vm2 gates worktree); the push is still outstanding.
+- [x] packaging commit pushed (fast-forward from 5b606dc779d0), packaged head recorded. Packaged head recorded: 2e56ce9990b008c00d2d07b2498cf28cdc101a06 (vm2 gates worktree); the push is still outstanding.
 - [x] changelog YAML parse
 - [x] tidy, clean tree afterwards
 - [x] Error Prone compile
 - [x] proof leg at the base commit (26 tests, 3 skipped, 1 failure, by content as step 5 expects)
 - [x] focused TestCoreContainer at the packaged head (26 tests, 3 skipped, 0 failures, fresh XML)
 - [x] module check :solr:core:check -x test
-- [ ] receipt refreshed at the packaged head; job and claim marked DONE. Receipt refreshed 2026-10-14 by the classification pass; job and claim DONE marking waits on the push.
+- [x] receipt refreshed at the packaged head; job and claim marked DONE. Receipt refreshed 2026-10-14 by the classification pass; job and claim DONE marking waits on the push.
+
+
+## Push (vm2, 2026-10-14T23:26ZZ)
+
+Pushed 2e56ce9990b008c00d2d07b2498cf28cdc101a06 to solr-8628-submit as a plain fast-forward from 5b606dc779d0f367d7c8ac7235988a65f092b6a4. Verified by ls-remote: fork tip 2e56ce9990b008c00d2d07b2498cf28cdc101a06. Draft citations re-pointed in pr-drafts/core-admin/SOLR-8628.md (finish list section A). DONE.
