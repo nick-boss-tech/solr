@@ -5,6 +5,6 @@
 - Capability tags: gate, implementation (one changelog phrase only).
 - Runner: gates/g8554-phrase-gate.sh, worktree /workspace/gates/solr-8554-phrase (detached). Seed 8554C0FFEE8554.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued.
+- Status: DONE (see the record below).
 
 - 2026-10-14T07:04ZZ vm2 gate backlog coordinator: DONE. New head 1e8a8a4b6b, gate green (ForceLeaderWaitTest 3 of 3, module check rc=0). Receipt, job and draft citations updated.
