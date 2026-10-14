@@ -53,3 +53,12 @@ Changelog: keep the sentence in `changelog/unreleased/SOLR-17055-knn-topk-distri
 - Run: logs/vm2/queue-g17055-premise-gate-20261014T101544Z.out at head `c2396f425fa2a67a40fea7afee341840c3896358`, seed `17055C0FFEE17055`, ended 2026-10-14T10:24:36Z.
 - Observed: the sort-case query (`rows=20`, `sort=id asc`) failed at the control-versus-distributed comparison with `.response.size():9!=3`. The distributed response holds 9 documents; the single-node control holds 3. The comparison fails before the `numFound` assertion, so `numFound` was not captured in this run.
 - Premise rc=1, the expected outcome if the gap is real. The list holds more than 3 documents, so the gap is real and the fix stage proceeds.
+
+
+## Premise run result (vm2, 2026-10-14T10:44ZZ): the gap is real
+
+- Head c2396f425fa2 (no branch change). Scratch sort case added to `DistributedKnnTopKTest` (`{!knn f=vector topK=3}[1.0, 0.0, 0.1, 0.1]`, `sort=id asc`, `rows=20`, `fl=id,score`), not committed; the file was restored and the worktree is clean.
+- Result: `DistributedKnnTopKTest` 1 test, 1 failure, seed 17055C0FFEE17055 (JUnit XML 2026-10-14T10:24:03Z). The failure comes from `BaseDistributedSearchTestCase.query`, which compares the distributed response with the single-node control. `compareResponses(rsp, controlRsp)` reports `.response.size():9!=3`: the distributed response holds 9 documents (3 shards times topK 3), the control holds 3.
+- Step 3 therefore does not apply: the list holds more than 3 documents with a sort, so the gap shows in practice. The premise assertions I added after the helper call were not reached, because the helper failed first; the evidence is the helper's comparison.
+- Log: logs/vm2/17055-premise.log; queue log logs/vm2/queue-g17055-premise-gate-*.out.
+- Fix (steps 2 and 3 onward): not started. Waiting on a decision to proceed.

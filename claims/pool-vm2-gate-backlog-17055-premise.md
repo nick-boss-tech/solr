@@ -7,3 +7,5 @@
 - The fix (job steps 2 onward) is not claimed here; it waits on the premise result.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED, runner queued.
+
+- 2026-10-14T10:44ZZ vm2 gate backlog coordinator: premise step DONE (not the whole job). Distributed 9 documents vs control 3 with sort=id asc at c2396f425f. Recorded in gates/SOLR-17055-sort-path.md. Fix not started.
