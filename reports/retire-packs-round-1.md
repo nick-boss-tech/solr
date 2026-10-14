@@ -57,7 +57,7 @@ Live upstream main (ls-remote) is d38e0f1623728bdd305e76a598f013f1bf32e449. The 
 | SOLR-10198 | RETIRE CLEAN (merged) | 5 | Delete solr-10198-submit |
 | SOLR-18119-submit | RETIRE CLEAN, conditional | 6 | Close PR #4999, delete solr-18119-submit, once PR #5061 lands or is accepted |
 | SOLR-9759 | RETIRE CLEAN (superseded by #5048) | 7 | Delete solr-9759-submit |
-| SOLR-17372 | RETIRE, premise NOT SUPPORTED (current receipt, 2026-10-12) | 8 | Owner word; delete solr-17372-submit |
+| SOLR-17372 | RETIRED (owner ruling 2026-10-14), premise NOT SUPPORTED | 8 | Done: retired and labeled 2026-10-14; solr-17372-submit left in place, no deletion |
 | SOLR-18277 | RETIRED (owner ruling 2026-10-13) | 9 | Done: receipt written 2026-10-13; branches left in place, no deletion |
 
 ---
@@ -200,7 +200,7 @@ Owner step. Delete `solr-9759-submit`. No PR (none under apache/solr with that h
 
 Gap. No run of the branch test exists, and no run of main's test is in these records. Neither blocks deletion, because the branch carries no fix that main lacks.
 
-## 8. SOLR-17372 (solr-17372-submit): RETIRE, premise NOT SUPPORTED
+## 8. SOLR-17372 (solr-17372-submit): RETIRED (owner ruling 2026-10-14), premise NOT SUPPORTED; branch left in place, no deletion
 
 Head checked: 048862fda8ab76f36f259c6849ec5c5a8cfafabe.
 
@@ -217,6 +217,8 @@ Owner step. Delete `solr-17372-submit` after the owner's word. There is no PR (n
 The receipt's owner options: (i) ship as stabilization with a rewritten Proof, (ii) hold as moot, (iii) re-aim at a distributed-path premise. NOT SUPPORTED closes the premise-based salvage only. Option (i) is a stabilization choice with no failure behind it. The owner should pick (ii) or deletion knowingly.
 
 Gaps, not required for retire. Leg B (the branch head with the hunk) did not reach a result; the receipt says it is not required. Leg C was not run. The premise is one run at one seed on d76fc14b. Live main has moved five commits, and none touches StatsComponentTest.
+
+Owner ruling (2026-10-14): RETIRED. The owner retired the ticket under the general retire rule stated the same morning: a retired branch is labeled retired in the records and left in place, never deleted. The "Owner step. Delete" line above is superseded: `solr-17372-submit` stays at 048862fda8ab, not deleted and not renamed. The receipt's option (i) is closed by this ruling. The ruling is recorded in `receipts/SOLR-17372.md`.
 
 ## 9. SOLR-18277 (three branches): RETIRED (owner ruling 2026-10-13; branches left in place, no deletion)
 
@@ -275,7 +277,7 @@ Gaps. Jira status is not checked here. receipt-cited log g4959-harden2.log is no
 ## Verdict counts and open decisions for the owner
 
 - RETIRE CLEAN: SOLR-17722, SOLR-17882 (premise-dead; retire or re-aim), SOLR-12743, SOLR-17825, SOLR-10198, SOLR-18119-submit (conditional on PR #5061), SOLR-9759.
-- SOLR-17372: retire on NOT SUPPORTED, pending the owner's word. Option (i) in the receipt is not closed by it.
+- SOLR-17372: retire on NOT SUPPORTED, pending the owner's word. Option (i) in the receipt is not closed by it. Owner word given 2026-10-14: retired, labeled in the records, branch left in place and not deleted; option (i) is closed by the ruling.
 - SOLR-18277: RETIRED, owner ruling 2026-10-13. The receipt is written; the branches are left in place and none is deleted.
 - Owner-only actions: close PR #4999; delete the branches named in each pack; any Jira note. Nothing was posted, deleted, closed or pushed.
 

@@ -44,6 +44,11 @@ Extended by Nick on 2026-10-11. Either coordinator (VM2 for the gate lane, the W
 - On green, the gating host refreshes the ticket's receipt in `receipts/` itself, as with any gate.
 - Build and gate runs inside the hardening gate still follow the capability tags in WORKFLOW.md. An implementation by the Windows coordinator is gated on a Linux host; the Windows host itself never claims build work.
 
+### Pushing to Nick's own open PRs
+
+- Standing authorization from Nick (2026-10-14): pushes to Nick's own open PRs are always fine. No per-push owner yes is needed for a push to a branch that heads one of his open PRs, including packaged heads and patch-loop heads, under the push forms in the section above (plain for live PR branches, `--force-with-lease` for rebuilds).
+- This discharges the SOLR-11356 escalation recorded as E1 in `reports/solrj-convergence-round-2-response.md`: the packaged push to `6120dae28d04` stands confirmed by this rule, with no reversal.
+
 ### Deciding scope questions
 
 - Either coordinator may decide a scope question under the decision default: a recorded recommendation is adopted; where no recommendation is on record, the harder and more thorough option is taken.

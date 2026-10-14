@@ -40,7 +40,7 @@
 ## Judgment calls for the owner
 
 - Bold rule read strictly: a bullet list or plain sentence under a heading fails, and so does a bold summary sharing its line with evidence (QP SOLR-15615).
-- Date rule: `pr-formula.md` section 3 requires "the verification date and head" in Proof. Applied as a hold. If advisory instead, these 13 move to READY: SC SOLR-6207, 6831, 6975, 7550, 10694; QP SOLR-4824, 8977, 9048, 9149, 10897, 11761, 17280, 17311.
+- Date rule: `pr-formula.md` section 3 requires "the verification date and head" in Proof. Applied as a hold. If advisory instead, these 13 move to READY: SC SOLR-6207, 6831, 6975, 7550, 10694; QP SOLR-4824, 8977, 9048, 9149, 10897, 11761, 17280, 17311. Ruled by the owner on 2026-10-14: advisory. The 13 stand as READY; see the rulings section at the top of this file.
 - Length limit 3,850 visible characters (about 10 percent over the 3,500 guide). Only SOLR-15319 exceeds it.
 - SOLR-18109 is READY on its own "not needed" changelog note. Owner to confirm.
 

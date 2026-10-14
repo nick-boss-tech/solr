@@ -7,3 +7,4 @@
 - Limits: read-only on branches; no PR, comment, live body, or fork branch change in this workstream; no build, test or Gradle on this host.
 - Heartbeat: 2026-10-14T04:00Z (claim taken).
 - Status: DONE (2026-10-14). Report: `reports/category-ready-lists-round-1.md`. Search components READY 14 of 47; query parsing READY 3 of 15. The most common hold is a missing bold one-line summary (29 drafts). Thirteen drafts hold only on the Proof verification date, which the owner must rule on as mandatory or advisory.
+- Owner ruling (2026-10-14): the Proof verification date is advisory. The 13 drafts that held only on it stand as READY; see the rulings section at the top of `reports/category-ready-lists-round-1.md`. This claim is fully discharged.
