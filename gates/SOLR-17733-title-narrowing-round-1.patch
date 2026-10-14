@@ -1,0 +1,10 @@
+diff --git a/changelog/unreleased/SOLR-17733.yml b/changelog/unreleased/SOLR-17733.yml
+index 3d7be92..d2edd68 100644
+--- a/changelog/unreleased/SOLR-17733.yml
++++ b/changelog/unreleased/SOLR-17733.yml
+@@ -1,4 +1,4 @@
+-title: DELETE /cluster/filestore/files/{file} no longer fails with "The path exist ZK, delete and retry"; the file store entry in ZooKeeper is removed together with the file
++title: DELETE /cluster/filestore/files/{file} without localDelete=true no longer fails with "The path exist ZK, delete and retry"; the file store entry in ZooKeeper is removed together with the file
+ type: fixed
+ authors:
+   - name: Nick Shanin

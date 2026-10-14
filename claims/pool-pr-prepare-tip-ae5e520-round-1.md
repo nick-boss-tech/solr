@@ -8,4 +8,4 @@
 - Decision rule: scope questions decided under the decision default and recorded in the deliverables.
 - Limits: as in the workstream claims.
 - Heartbeat: 2026-10-14T01:30Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-14T02:30Z. Deliverable: `reports/category-closeout-w3-w5-round-1.md`. Workstreams W3 and W5 are closed for this round; W1, W2 and W4 are not started.

@@ -1,0 +1,26 @@
+diff --git a/changelog/unreleased/SOLR-14919.yml b/changelog/unreleased/SOLR-14919.yml
+index de48d1a..f6dc602 100644
+--- a/changelog/unreleased/SOLR-14919.yml
++++ b/changelog/unreleased/SOLR-14919.yml
+@@ -1,4 +1,4 @@
+-title: IgnoreCommitOptimizeUpdateProcessor no longer rejects commits that a leader forwards with the internal endpoint values leaders or replicas; those commits failed with a 400 before
++title: IgnoreCommitOptimizeUpdateProcessor no longer rejects commits that a node forwards with the internal endpoint values leaders or replicas; those commits failed with a 400 before
+ type: fixed
+ authors:
+   - name: Nick Shanin
+diff --git a/solr/core/src/test/org/apache/solr/update/processor/IgnoreCommitOptimizeUpdateProcessorFactoryTest.java b/solr/core/src/test/org/apache/solr/update/processor/IgnoreCommitOptimizeUpdateProcessorFactoryTest.java
+index e9381ab..c3af7f2 100644
+--- a/solr/core/src/test/org/apache/solr/update/processor/IgnoreCommitOptimizeUpdateProcessorFactoryTest.java
++++ b/solr/core/src/test/org/apache/solr/update/processor/IgnoreCommitOptimizeUpdateProcessorFactoryTest.java
+@@ -61,8 +61,9 @@ public class IgnoreCommitOptimizeUpdateProcessorFactoryTest extends SolrTestCase
+         shouldBeNull);
+ 
+     // The distributed update processor replaces the marker when it forwards a commit:
+-    // "leaders" on a leader's fan-out to other shard leaders, and "replicas" on the hop to the
+-    // leader's own replicas. Those internal commits must pass, and must not fail boolean parsing.
++    // "leaders" on the fan-out from the receiving node to the shard leaders, and "replicas" on the
++    // hop from a leader to its own replicas. Those internal commits must pass, and must not fail
++    // boolean parsing.
+     for (String endPoint : new String[] {"leaders", "replicas"}) {
+       rsp = processCommit("ignore-commit-from-client-403", false, endPoint);
+       shouldBeNull = rsp.getException();

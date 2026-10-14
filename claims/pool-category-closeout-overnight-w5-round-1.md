@@ -6,4 +6,4 @@
 - Scope: reconstruct the held reply to the reviewer on PR #5106 (SOLR-16630) from the PR's live body at head `7ab3c03a1c` and the follow-up gate record in `receipts/SOLR-16630.md`. Mark the reconstruction as reconstructed. Deliverable: the draft under `material/` and a note in the claim. The reply is not posted: posting stays with the main agent after Nick sees the draft.
 - Limits: read-only GitHub; no comment, no PR edit, no state change; no build, test or Gradle on this host.
 - Heartbeat: 2026-10-14T01:30Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE 2026-10-14T02:30Z. Reconstructed reply draft at `material/pr-5106-reply-draft-reconstructed.md`, marked RECONSTRUCTED. Not posted; the PR is not edited. Gaps are listed in `reports/category-closeout-w3-w5-round-1.md`.
