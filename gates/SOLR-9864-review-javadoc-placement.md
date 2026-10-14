@@ -29,3 +29,9 @@ Nothing else changes: the test body, the imports, and the production change in `
 - Refresh `receipts/SOLR-9864.md` with the new head and the gate lines.
 - Point the PR body's links at the new head. The body cites only `SolrQuery.java`, which does not change, so only the head SHA in the links moves.
 - Re-review PR #5150 against the new head before any description edit.
+
+## Completion (vm1, 2026-10-14)
+
+- Status: DONE. GATE GREEN at 176ed67491b50fef0669d629341ed05db4b2e700, pushed as a plain fast-forward and verified by ls-remote.
+- Steps: changelog fragment parses (unchanged file); tidy rc=0 with a clean tree after the versions-file restore (post-tidy diff against the head holds only the moved method); Error Prone compile rc=0; proof leg: moved test file on base 14c7aac0d151 runs 17 with exactly 1 failure, testGetCopyKeepsSortClauses, verified by content; focused at the head: SolrQueryTest 17 of 17, QueryRequestTest 5 of 5, TestUpdateRequest 5 of 5 from fresh JUnit XML (seed 9864C0FFEE9864); module check rc=0 (run as :solr:solrj:check -x test, the standing module-check form; this file wrote :solr:solrj:check).
+- PR #5150 re-reviewed at the new head, then its body links re-pointed to the new head and read back. Receipt: receipts/SOLR-9864.md (new top section). Claim: claims/pool-vm1-gate-9864-review-javadoc-placement.md, DONE.
