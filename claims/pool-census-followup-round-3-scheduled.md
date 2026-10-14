@@ -16,4 +16,4 @@
 - Decision rule: scope questions under the decision default and the three-rung ladder; each decision recorded in the round report.
 - Deliverable: `reports/census-followup-scheduled-round-3.md`, one line per ticket, with each fix, each draft written and each gate job posted.
 - Heartbeat: 2026-10-14T08:37Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE (2026-10-14). Deliverable: `reports/census-followup-scheduled-round-3.md`. 17 SATISFIED; 6 HOLD with gate jobs filed (SOLR-8954, 9124, 10305, 17055, 15003, 16887); 1 owner item (SOLR-18278).
