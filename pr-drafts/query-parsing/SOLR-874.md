@@ -14,7 +14,7 @@ The cleanup step in [SolrPluginUtils.java lines 651-654 at the merge-base](https
 
 **Trailing AND, OR, NOT, && and || are removed. Leading AND, OR, && and || are removed.**
 
-The change is in [`stripIllegalOperators`](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/solr/core/src/java/org/apache/solr/util/SolrPluginUtils.java#L658-L663). [`DisMaxQParser`](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/solr/core/src/java/org/apache/solr/search/DisMaxQParser.java#L195) calls it on the user query. Operators between two terms stay for the parser, so `ipod AND nano` is unchanged. Lowercase `and` and `or` are plain words.
+The change is in [`stripIllegalOperators`](https://github.com/nick-boss-tech/solr/blob/a283e050904a5d323bfd5a6016c799f434d229e4/solr/core/src/java/org/apache/solr/util/SolrPluginUtils.java#L658-L663). [`DisMaxQParser`](https://github.com/nick-boss-tech/solr/blob/a283e050904a5d323bfd5a6016c799f434d229e4/solr/core/src/java/org/apache/solr/search/DisMaxQParser.java#L195) calls it on the user query. Operators between two terms stay for the parser, so `ipod AND nano` is unchanged. Lowercase `and` and `or` are plain words.
 
 A leading NOT is kept, because `NOT ipod` is a valid query. A trailing NOT is removed, because `ipod NOT` is not.
 
@@ -24,10 +24,10 @@ Effect: `q=ipod AND` returns the same results as `q=ipod`.
 
 **Both test classes fail on the base code and pass with this change.**
 
-- [SolrPluginUtilsTest](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/solr/core/src/test/org/apache/solr/util/SolrPluginUtilsTest.java#L99): 10 of 10 pass at head `ac9ab33753751a6fef05b5f100f5c1c5683510b2`. `testStripDanglingBooleanOperators` fails on the base code, and the other nine pass there.
-- [DisMaxRequestHandlerTest](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/solr/core/src/test/org/apache/solr/DisMaxRequestHandlerTest.java#L193): 4 of 4 pass at the same head. `testDanglingBooleanOperator` fails on the base code.
+- [SolrPluginUtilsTest](https://github.com/nick-boss-tech/solr/blob/a283e050904a5d323bfd5a6016c799f434d229e4/solr/core/src/test/org/apache/solr/util/SolrPluginUtilsTest.java#L99): 10 of 10 pass at head `a283e050904a5d323bfd5a6016c799f434d229e4`, verified 2026-10-14. `testStripDanglingBooleanOperators` fails on the base code, and the other nine pass there.
+- [DisMaxRequestHandlerTest](https://github.com/nick-boss-tech/solr/blob/a283e050904a5d323bfd5a6016c799f434d229e4/solr/core/src/test/org/apache/solr/DisMaxRequestHandlerTest.java#L193): 4 of 4 pass at the same head, verified 2026-10-14. `testDanglingBooleanOperator` fails on the base code.
 
-The base-code run used the new test files on top of the base source. The counts are from a focused run.
+The base-code run used the new test files on top of the base source, at head `ac9ab33753751a6fef05b5f100f5c1c5683510b2`, recorded 2026-10-06. Those test files are unchanged at the head above, so the base result holds there. The counts are from a focused run.
 
 ## A choice to check
 
@@ -41,9 +41,9 @@ The base-code run used the new test files on top of the base source. The counts 
 **Only the dismax parser changes, and a query that is only an operator still fails.**
 
 - `q=AND` is the example. The cleanup leaves a lone operator in place, so the parser still rejects it (see the second choice above).
-- The only caller of the cleanup is [`DisMaxQParser`](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/solr/core/src/java/org/apache/solr/search/DisMaxQParser.java#L195). The edismax parser does not call it.
+- The only caller of the cleanup is [`DisMaxQParser`](https://github.com/nick-boss-tech/solr/blob/a283e050904a5d323bfd5a6016c799f434d229e4/solr/core/src/java/org/apache/solr/search/DisMaxQParser.java#L195). The edismax parser does not call it.
 
-Changelog: [changelog/unreleased/SOLR-874-dismax-dangling-boolean-operator.yml](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/changelog/unreleased/SOLR-874-dismax-dangling-boolean-operator.yml#L1-L8)
+Changelog: [changelog/unreleased/SOLR-874-dismax-dangling-boolean-operator.yml](https://github.com/nick-boss-tech/solr/blob/a283e050904a5d323bfd5a6016c799f434d229e4/changelog/unreleased/SOLR-874-dismax-dangling-boolean-operator.yml#L1-L8)
 
 ### AI assistance
 
