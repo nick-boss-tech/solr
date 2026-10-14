@@ -5,6 +5,16 @@
 - Read only: no build, test, Gradle or gate run; no commit, push, checkout, stash or reset; no GitHub write; no live PR body; no draft edited.
 - Written by the parent from the subagent's returned text. The subagent could not write `.md` report files.
 
+## Owner rulings (2026-10-14), applied
+
+- Proof verification date is advisory, not a hold. The 13 drafts that held only on it move to READY: search components SOLR-6207, 6831, 6975, 7550, 10694; query parsing SOLR-4824, 8977, 9048, 9149, 10897, 11761, 17280, 17311. Gate dates can still go into Proof where the author wants them.
+- Changelog: a missing fragment is fine for a tests-only change. SOLR-18109 stays READY on that basis.
+- Length: one branch over 3,850 visible characters is acceptable. SOLR-15319 (3,945) is the only one. Its length no longer holds it; its S1 and S3 holds remain.
+- Counts after these rulings: READY 30 (search components 19, query parsing 11); HOLD 32 (search components 28, query parsing 4). Total 62.
+- The per-draft lists below are the round 1 record. Apply these rulings to them.
+- Still open, unchanged by these rulings: the SOLR-17051 receipt sentence (correct the receipt, not the draft), SOLR-11391 D4, the SOLR-9148 changelog type, and the SOLR-874, SOLR-14381 and SOLR-15319 title and wording items.
+- PR #5115: the body was trimmed to about 3,200 visible characters and PATCHed. The read-back matches the trimmed text; the only difference is a byte-order mark that the read-back adds. The draft `pr-drafts/search-components/mergeids-skipped-shard-totals.md` carries the same text.
+
 ## Summary
 
 - Candidates: 62 drafts (47 search components, 15 query parsing, all SATISFIED). The 20 round 2 landings are inside these 62; all 20 match their verdict-branch blobs (20 of 20).
