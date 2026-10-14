@@ -1,6 +1,6 @@
 title: >
   FORCELEADER now returns an error when no active leader appears within the wait (it used to log at INFO
-  and report success), when the shard is removed meanwhile (it used to throw a NullPointerException), and
+  and report success), when the shard is removed meanwhile (it used to fail with a generic error that wrapped a NullPointerException), and
   restores the interrupt flag when interrupted.
 type: fixed
 authors:
