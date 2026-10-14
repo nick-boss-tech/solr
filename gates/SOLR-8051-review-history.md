@@ -2,7 +2,7 @@
 
 - Branch: solr-8051-submit (fork). Live PR: apache/solr #5143, draft.
 - Applies to head: e50a2aa3437cb14ce4310a5025ad783fc93a97b1
-- Status: OPEN, optional hygiene item, non-blocking for the description. Not run.
+- Status: DONE 2026-10-14. The rewrite was executed under Nick's direction; see the Outcome section below. No further action in this job; a replacement draft opening awaits Nick's approval.
 
 ## Finding answered
 
