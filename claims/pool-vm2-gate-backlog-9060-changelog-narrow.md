@@ -6,3 +6,5 @@
 - Runner: gates/g9060-gate.sh, worktree /workspace/gates/solr-9060-title (detached). Seed 9060C0FFEE9060. The runner sources /workspace/.env for the push.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED, runner queued.
+
+- 2026-10-14T12:18ZZ vm2 gate backlog coordinator: DONE. Landed head 49040cb7b8; head test 1 of 1; fail-before fails by content (PASS). Receipt and job recorded.

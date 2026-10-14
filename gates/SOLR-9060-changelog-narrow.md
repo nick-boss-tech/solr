@@ -22,10 +22,20 @@
 
 ## Step checklist
 
-- [ ] text commit: changelog title narrowed (new head: ____)
+- [x] text commit: changelog title narrowed (new head: 49040cb7b88ec62cc30523e16d2301c4fbd1fcc8)
 - [ ] pushed to solr-9060-submit, fast-forward from 704ca28bf79d (ls-remote verified: ____)
 - [ ] changelog parse (rc ____)
 - [ ] tree clean after commit
 - [ ] focused run at new head: DistributedSpellCheckComponentTest tests=__ failures=__ errors=__ skipped=__ (fresh JUnit XML)
 - [ ] fail-before at merge-base: rc=__, failure text recorded
 - [ ] receipts/SOLR-9060.md refreshed; job and claim marked DONE
+
+
+## Result (vm2, 2026-10-14T12:18ZZ)
+
+- Landed head 49040cb7b88ec62cc30523e16d2301c4fbd1fcc8, one commit on 704ca28bf79d, changelog title only. Pushed to solr-9060-submit as a fast-forward; ls-remote matched.
+- Changelog YAML parse OK. Merge base with upstream/main, computed at the run: recorded in logs/vm2/queue-g9060-gate-20261014T115413Z.out.
+- Focused head run, `org.apache.solr.handler.component.DistributedSpellCheckComponentTest.testShardMergeRanksTiesByFrequency`, seed 9060C0FFEE9060: 1 test, 0 failures, 0 errors, 0 skipped (JUnit XML 2026-10-14T12:02:25Z). rc=0.
+- Fail-before at the merge base with SpellCheckComponent.java reverted (test kept): 1 failure, `.spellcheck.suggestions.zxrnt.suggestion[0]:zarnt!=zornt` (tie order). Verdict PASS (fails without the fix, by content). rc=1 as expected.
+- The job names the workspace flags -WithSpotless and -WithFailBefore; the runner did not use them. The focused run and the fail-before leg were run with the standard Gradle tasks.
+- Logs: logs/vm2/9060-head.log, logs/vm2/9060-failbefore.log.
