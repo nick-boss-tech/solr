@@ -8,4 +8,5 @@
 - Staffing: this host alone. Code reading only; no subagents needed for five items.
 - Limits: no Jira ticket, no PR, no comment, no branch edit (including solr-18317-server-submit). No builds on this host. Any verdict that turns on runtime behavior goes to gates/SOLR-18317-server-coverage-premise.md for a Linux host.
 - Heartbeat: 2026-10-14T23:25Z (claim taken).
-- Status: IN PROGRESS.
+- Heartbeat: 2026-10-14 (read complete; report written).
+- Status: DONE 2026-10-14. Deliverable: reports/solr-18317-server-coverage-round-1.md, with the drafted NOT COVERED ticket text for Nick's decision. Nothing filed, posted, opened or edited. No gate file filed: every verdict is settled by code reading.
