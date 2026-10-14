@@ -5,4 +5,5 @@
 - Capability tags: gate, implementation (changelog title line only).
 - Runner: gates/g14381-gate.sh, worktree /workspace/gates/solr-14381-title (detached). Pushes the title commit as a fast-forward to solr-14381-submit after green.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued.
+- Result: GREEN. Title commit 7caf8d33d3bf29d38e3f16c38a01282982329e90 pushed to solr-14381-submit as a fast-forward; receipt refreshed.
+- Status: DONE.
