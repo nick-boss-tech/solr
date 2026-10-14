@@ -8,4 +8,4 @@
 - Staffing: two subagents, one per category.
 - Limits: no PR, comment, live body, or fork branch change this round; no build, test or Gradle; the drafts are committed only after each is re-read.
 - Heartbeat: 2026-10-14T02:50Z (claim taken).
-- Status: IN PROGRESS.
+- Status: PARTLY DONE 2026-10-14T03:30Z. The 20 "No" drafts are landed from their verdict branches, byte-identical (`reports/w1-review-tip-landing-round-2.md`). Not done: the ready lists (step 4) and the live body edits for those drafts. The three query-parsing OPEN (gate) drafts keep their patch-loop state.
