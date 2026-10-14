@@ -1,6 +1,4 @@
-title: >
-  Runs of unescaped * in a wildcard query term are collapsed into a single *, which avoids the
-  excessive memory use seen with edismax queries made of thousands of * characters.
+title: Runs of unescaped * in a wildcard query term are collapsed into a single *.
 type: fixed
 authors:
   - name: Nick Shanin
