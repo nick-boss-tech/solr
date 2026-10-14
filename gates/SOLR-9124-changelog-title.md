@@ -4,7 +4,7 @@
 - Change: `changelog/unreleased/SOLR-9124-grouped-exact-stats.yml`, title only. Nothing else in the tree changes.
 - Intended host: any Linux host with the `implementation` tag. Windows never claims this.
 - Filed by the review lane on 2026-10-14 from the census round 1 follow-up (search components drafts). The review lane does not commit or push.
-- Status: OPEN.
+- Status: DONE 2026-10-14T09:42ZZ by vm2. New tip 64b8256cde72 (fast-forward from 17a279d4dc); changelog title only; no Gradle run needed for a changelog-only change.
 
 ## Why the title changes
 
@@ -31,4 +31,4 @@ The title also names two cache classes. The recorded proof shows a failure only 
 
 ## Result
 
-(empty until the change lands)
+Landed at 64b8256cde72665c7053d741e9bb572955afbaa7 (2026-10-14T09:42ZZ, vm2). Changelog YAML parsed OK; diff from 17a279d4dce1 is the changelog file only (1 line). The code proof is the one recorded at 17a279d4dce1.
