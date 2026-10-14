@@ -1,7 +1,7 @@
 # Gate job: SOLR-5394 review finding, changelog type (round 1, slice 1)
 
 - Branch: `solr-5394-submit` on the fork (`origin`). Head: `967445622f9294e26e425ec494d37e5ca13d4fe4` (draft PR #5131). Base: `b6b2b8f10e9827e3b86e44649fb7966ce646c185` (merge-base with `upstream/main`).
-- Status: HOLD. Owner word needed first (Nick): the fragment says `type: fixed`. The slate owner item for SOLR-5394 asks for the same call (`reports/morning-openings-slates-2026-10-14.md`, "Further owner items", SOLR-5394). Do not run this job until Nick picks. If he keeps `fixed`, mark this job NO-CHANGE and record the reason here.
+- Status: OPEN. Owner ruling (Nick, 2026-10-14): the changelog type `changed` is approved for SOLR-5394, per the review round's recommendation (dev-docs defines `changed` as modifying the behavior of existing requests, which fits this change). The approved target type is `changed`; apply the proposed patch below (`type: fixed` to `type: changed` in the branch's changelog fragment) and run the gate shape as written.
 - Filed by: review slice 1 (Windows review agent, `claims/search-components-opened-review-round-1.md`). Finding answered: the changelog type for PR #5131. `dev-docs/changelog.adoc` defines `changed` as "Modifying behavior or performance of existing requests/configuration", and this change modifies the default behavior of `facet.method=fcs` requests that set no `threads` local param. `fixed` is defensible because the ticket reports a bug, so the choice is the owner's.
 - Capability tags: gate. Linux only (vm1 or vm2). Windows never runs this job.
 - Proposed patch: in `changelog/unreleased/SOLR-5394-fcs-default-threads.yml`, change line 3 from `type: fixed` to `type: changed`. No other file changes.
@@ -20,7 +20,7 @@
 
 ## Checklist
 
-- [ ] owner word on fixed or changed (Nick)
+- [x] owner word on fixed or changed (Nick): `changed`, ruled 2026-10-14
 - [ ] head confirmed
 - [ ] changelog YAML parse
 - [ ] tidy, versions file restored
