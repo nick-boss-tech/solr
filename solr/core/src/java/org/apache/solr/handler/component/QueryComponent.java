@@ -27,6 +27,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -851,7 +852,8 @@ public class QueryComponent extends SearchComponent {
 
     boolean shardQueryIncludeScore =
         (rb.getFieldFlags() & SolrIndexSearcher.GET_SCORES) != 0
-            || (shardRows != 0 && rb.getSortSpec().includesScore());
+            || (shardRows != 0
+                && (rb.getSortSpec().includesScore() || getKnnTopK(rb.getQuery()) > 0));
     StringBuilder additionalFL = new StringBuilder();
     boolean additionalAdded = false;
     if (rb.onePassDistributedQuery) {
@@ -1016,12 +1018,16 @@ public class QueryComponent extends SearchComponent {
     // documents... we only need to order the top (rows+start)
     // A knn query returns up to topK hits from every shard, but the user asked for topK overall
     final int knnTopK = getKnnTopK(rb.getQuery());
+    final boolean knnSortedMerge = knnTopK > 0 && sort != null;
+    final boolean maxScoreRequested =
+        (rb.getFieldFlags() & SolrIndexSearcher.GET_SCORES) != 0 || ss.includesScore();
     int queueSize = ss.getOffset() + ss.getCount();
     if (knnTopK > 0 && sort == null) {
       queueSize = Math.min(queueSize, knnTopK);
     }
     final ShardDocQueue shardDocQueue =
         newShardDocQueue(rb.req.getSearcher(), sortFields, queueSize);
+    final List<ShardDoc> knnCandidates = new ArrayList<>();
 
     NamedList<Object> shardInfo = null;
     if (rb.req.getParams().getBool(ShardParams.SHARDS_INFO, false)) {
@@ -1173,7 +1179,7 @@ public class QueryComponent extends SearchComponent {
       }
 
       // calculate global maxScore and numDocsFound
-      if (docs.getMaxScore() != null) {
+      if (docs.getMaxScore() != null && (maxScoreRequested || !knnSortedMerge)) {
         maxScore = maxScore == null ? docs.getMaxScore() : Math.max(maxScore, docs.getMaxScore());
       }
       numFound += docs.getNumFound();
@@ -1229,11 +1235,25 @@ public class QueryComponent extends SearchComponent {
 
         shardDoc.sortFieldValues = unmarshalledSortFieldValues;
 
-        if (!shardDocQueue.push(shardDoc)) {
+        if (knnSortedMerge) {
+          knnCandidates.add(shardDoc);
+        } else if (!shardDocQueue.push(shardDoc)) {
           numFound--;
         }
       } // end for-each-doc-in-response
     } // end for-each-response
+
+    if (knnSortedMerge) {
+      knnCandidates.sort((a, b) -> Float.compare(b.score, a.score));
+      final Set<Object> knnTopKIds = new HashSet<>();
+      for (ShardDoc shardDoc : knnCandidates) {
+        if (knnTopKIds.size() < knnTopK && knnTopKIds.add(shardDoc.id)) {
+          shardDocQueue.push(shardDoc);
+        } else {
+          numFound--;
+        }
+      }
+    }
 
     if (knnTopK > 0) {
       numFound = Math.min(numFound, knnTopK);

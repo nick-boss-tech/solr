@@ -65,5 +65,31 @@ public class DistributedKnnTopKTest extends BaseDistributedSearchTestCase {
     rsp = query("q", knn, "fl", "id,score", "rows", "2", "start", "2");
     assertEquals(TOP_K, rsp.getResults().getNumFound());
     assertEquals("start+rows past topK leaves the last hit", 1, rsp.getResults().size());
+
+    rsp = query("q", knn, "fl", "id,score", "rows", "20", "sort", "id asc");
+    assertEquals("sorted request keeps numFound at topK", TOP_K, rsp.getResults().getNumFound());
+    assertEquals("sorted request holds topK docs", TOP_K, rsp.getResults().size());
+    for (int i = 0; i < TOP_K; i++) {
+      assertEquals(
+          "topK docs in sort order", Integer.toString(i + 1), rsp.getResults().get(i).get("id"));
+    }
+
+    rsp = query("q", knn, "fl", "id", "rows", "20", "sort", "id asc");
+    assertEquals("sorted request without score holds topK docs", TOP_K, rsp.getResults().size());
+    for (int i = 0; i < TOP_K; i++) {
+      assertEquals(
+          "score-free sorted request keeps the top hits",
+          Integer.toString(i + 1),
+          rsp.getResults().get(i).get("id"));
+    }
+
+    rsp = query("q", knn, "fl", "id,score", "rows", "20", "sort", "id desc");
+    assertEquals("descending sort holds topK docs", TOP_K, rsp.getResults().size());
+    for (int i = 0; i < TOP_K; i++) {
+      assertEquals(
+          "topK docs in descending sort order",
+          Integer.toString(TOP_K - i),
+          rsp.getResults().get(i).get("id"));
+    }
   }
 }
