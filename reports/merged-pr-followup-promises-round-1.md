@@ -89,3 +89,43 @@ No discharge in this ledger has been executed. No PR was opened, closed or chang
 ## Round 2 hold
 
 `assignments/pool-four-new-prs-strong-review-round-2.md` did not start in this round. Its own rule waits for its seven gate inputs to be DONE or for the owner to direct a subset. At this pass, six of the seven are OPEN. The symlink premise is DONE. Its two owner rulings are recorded in the assignment and are not reopened here.
+
+## Round 2, 2026-10-14
+
+Pass dated 2026-10-14 (pr-prepare tip at pass start `72d4f126d0`). The standing rule (Nick, 2026-10-13) re-runs this audit whenever one of our PRs merges; this pass also re-checks every round 1 state.
+
+Merged set, re-derived from the GitHub search API with round 1's query: total still 8, identical to round 1's set. The latest merge is #5070 on 2026-10-10, which round 1 already covered. No PR has merged since round 1, so round 2 newly covers no merged PR and extracts no new promises.
+
+### State re-checks of round 1 items (all read live on 2026-10-14)
+
+#### #4953 promise (SOLR-16130 test-only PR): candidate verified, promise still open
+
+Promise, verbatim from round 1: "This also fixes SOLR-16130, I plan to submit a separate, test-only PR for that."
+
+Round 1 left the candidate #5004 unverified. Verified now, from three independent reads: #5004's head branch is `solr-16130-test-followup` at `3c48dec4b79f`; its file list is test-only (`CrossCollectionJoinQueryTest.java` and the ccjoin test configset's `solrconfig.xml`); and its body states the root cause "was fixed and merged in #4953 (SOLR-8291)" and "This PR contains no production change; it adds the regression test for the reported scenario." Its receipt (`receipts/SOLR-16130.md`) records GATE GREEN at that head. State: OPEN, now resting on a verified PR; the promise discharges when #5004 merges. #5004 is open and unmerged at this pass. The verification item round 1 left open is discharged; the promise itself is not.
+
+#### #5001 promise (server-side SOLR-18317 PR): no change
+
+Promise, verbatim from round 1: "The server-side hardening that degraded such calls to the local node was split out at reviewer request and is preserved intact on the fork branch `solr-18317-server-submit`, to be opened as its own PR."
+
+The branch is still at `ae918a03fa7b`, the round 1 head, and the API lists no PR from that branch in any state. State: OPEN, unchanged. Opening it remains Nick's call.
+
+#### #5070 promise (detection-running test): no change; round 1's open inspection item resolved
+
+Promise, verbatim from round 1: "A follow-up submission is planned for a test that runs language detection through a custom identifier."
+
+Round 1 left the branch `ci/4841-langid-r28` uninspected. Inspected now: its tip is `41c0087c8a29` and it is the CI copy of the merged change, carrying the same `CustomLanguageIdentifierTest` that merged in #5070. That test builds a `DetectedLanguage` from another package and checks the two getters; #5070's own Limits says of it, "It does not run language detection." No fork branch carries a test that runs language detection through a custom identifier. State: OPEN, unchanged, still owed. Whether to submit it is Nick's call.
+
+#### Named shapes: no state changes
+
+- #5100 (SOLR-18532): still open at `7dfd3d98d0a2`; `solr-9865-submit` still at `4937608b`, so the rollback hunk has not been dropped. PENDING MERGE, unchanged.
+- SOLR-17393 and SOLR-9637: branches unchanged (`solr-17393-submit` at `626241e6`, `solr-9637-submit` at `c50fa4ff`); neither has an open PR yet. NOT YET DUE, unchanged.
+- #5104 (SOLR-2681): still open at `a3b1ea7994d9`. PENDING MERGE, unchanged.
+- #5061 (SOLR-18119): still open at `660faedd026e`. PENDING MERGE, unchanged.
+- #5089 (SOLR-13943) and SOLR-13059: #5089 still open at `ca443f6f6806`; the SOLR-13059 follow-up still has no fork branch and no PR. PENDING MERGE, unchanged.
+
+### Round 2 summary
+
+Newly covered merged PRs: none (no merges since round 1). Open promises from merged PRs: still three (#4953, #5001, #5070). One state change since round 1: the #4953 candidate is verified as the planned test-only PR, so that promise now rests on #5004 and discharges at its merge. One open item resolved with no state change: `ci/4841-langid-r28` is not the #5070 follow-up test. Every discharge remains Nick's call.
+
+No discharge in this ledger has been executed. No PR was opened, closed or changed, no comment was posted, and no ticket was filed.
