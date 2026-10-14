@@ -13,4 +13,4 @@
 - Other limits: no PR opened, closed, flipped or commented on; no `solr-*-submit` branch touched; no live PR body edited; no gate job run; no build, test or Gradle on this host; nothing posted.
 - Deliverable: `reports/census-followup-scheduled-round-7.md`, one line per ticket, plus the SOLR-16630 review.
 - Heartbeat: 2026-10-14T16:37Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE (2026-10-14). Deliverable: `reports/census-followup-scheduled-round-7.md`. SOLR-17215 and 17393 SATISFIED; SOLR-15712 and 16887 HOLD; SOLR-17372 has no draft. The SOLR-16630 review found the failed conversion gate at `136145b598d` (a null node name from `getNodeName()` is the strongest candidate) and a green account committed before the runs it cites. Three owner-brief mismatches are reported, not decided. No gate jobs filed.
