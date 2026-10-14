@@ -48,3 +48,15 @@ Both rulings are recorded on the main side as examples under the decision ladder
 ## Settling outcome recorded 2026-10-13 (main side)
 
 The plain `QueryComponent` real-exit shape input is in. The run (unmodified main `d76fc14b9857`, seed `C0FFEE42C0FFEE42`, verdicts in `gates/queryComponent-real-exit-shape-premise.md` and in the premise addendum at the end of `reports/four-new-prs-strong-review-round-1.md`) produced no short-circuited shape and no partial response carrying a `sort_values` key; the only partial shape a real exit produced reported hits (numFound 20000, exact flag set) and was skipped by the merge. Verdict: the run supports canonical Option B. For #5115, do not move `mergeids-skipped-shard-totals` onto the gated any-skip patch. The patch on `review-r1-solr-18539` narrows first, under the patch-loop task written in the premise addendum (the zero-hit assertions flip back, the inexact-zero pin is added, the narrowed head re-gates), and the #5115 body rewrite waits for the narrowed gate.
+
+## SOLR-18539 branch move recorded 2026-10-13 (main side)
+
+The narrowed gate returned GREEN at `f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff` (receipt: the narrowing section in `receipts/mergeids-fix.md`; gate job `gates/SOLR-18539-narrowing-round-1-gate.md`). The main side verified the narrowed diff against the narrowing task in the round 1 report and the ancestry (the previous PR head `4eb996121804b043f1ee53f5bb7e22b9c3021b0a` is the merge-base of the narrowed head), then moved the PR branch: `mergeids-skipped-shard-totals` fast-forwarded from `4eb996121804` to `f9b0e5d722`, plain push, verified by ls-remote and by the API (PR #5115 head is `f9b0e5d722`; the PR remains a draft). The branch move for this slice is DONE.
+
+Remaining step for this slice, the review coordinator's next slice under this assignment: rewrite the #5115 body against the new head, following step 4 and the round 1 report's body lists for this PR.
+
+- Proof counts from the narrowing gate: focused `QueryComponentPartialResultsTest` 19 of 19 at the new head, seed `18539C0FFEE18539`, fresh JUnit XML; fail-before legs of 7 failures at the merge-base `d76fc14b9857`, 3 at the previous PR head `4eb996121804` and 2 at the pre-narrowing review head `fbf7610644d1`, each matching the gate job file by name and text; module check rc=0.
+- The behavior paragraph states the narrowed Option B rule: a skipped shard that reported hits, or an inexact count, clears the merged `numFoundExact` whether or not other shards merged; a skipped shard that reported an exact zero leaves the merged flag unchanged.
+- The Choice from the any-skip draft is dropped, or reduced to what the narrowed rule still leaves open; nothing in the body presents the settled rule width as an open question.
+- Every link re-points to the new head `f9b0e5d722` for changed code; pre-change behavior links stay at the merge-base and say so.
+- Check the PR's comments and reviews before editing (a maintainer actively commenting means the description is left alone and the owner is asked first). Read the body back and compare. No ready flip; that stays with the owner.

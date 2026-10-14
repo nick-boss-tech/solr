@@ -1,3 +1,10 @@
+## PR branch move onto the narrowed head (main side, 2026-10-14)
+
+- The narrowing gate below is green at f9b0e5d722. Before moving, the main side verified the narrowed diff (fbf7610644 to f9b0e5d722) against the narrowing task in reports/four-new-prs-strong-review-round-1.md: the Option B condition `skippedShardMayHoldMatches` (set when the skipped shard reported hits or an inexact count), the two zero-hit tests renamed and flipped back to exact, the hits cases kept at FALSE, and the all-skipped inexact-zero pin added; 19 tests. Ancestry verified: 4eb996121804 is the merge-base of f9b0e5d722, so the move is a plain fast-forward.
+- Move executed: `mergeids-skipped-shard-totals` pushed 4eb996121804b043f1ee53f5bb7e22b9c3021b0a to f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff, plain push, no force, verified by ls-remote. The PR head is f9b0e5d722 per the GitHub API and the PR remains a draft.
+- The PR branch head is now the gated narrowed head: focused 19 of 19 (seed 18539C0FFEE18539), fail-before legs 7 at the merge-base, 3 at the previous PR head and 2 at the pre-narrowing review head, module check rc=0 (narrowing section below).
+- Remaining step: the PR body rewrite against the new head, the review coordinator's next slice under assignments/pool-four-new-prs-strong-review-round-2.md. The superseded line in the narrowing section below ("Not pushed to mergeids-skipped-shard-totals") described the state before this move.
+
 ## Narrowing patch, review round 1 (vm2, 2026-10-14)
 
 - Patch: gates/SOLR-18539-narrowing-round-1.patch, applied to fbf7610644d178049e1110ffc0ec34dad8c5b32f. Pushed as a fast-forward to review-r1-solr-18539: old fbf7610644d1, new f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff. Not pushed to mergeids-skipped-shard-totals; PR #5115 untouched.
