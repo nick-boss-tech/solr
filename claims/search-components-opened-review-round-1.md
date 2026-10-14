@@ -10,4 +10,4 @@
 - Code findings: recorded in the slice report with a proposed patch, and a gate job filed under `gates/` naming the branch, the head, the finding it answers, and the full gate shape.
 - Deliverables: `reports/search-components-opened-review-round-1-slice-<n>.md` for n = 1 to 6. The parent writes these from the subagent replies, since subagents cannot write report files.
 - Heartbeat: 2026-10-14T20:07Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE (2026-10-14). Deliverables: `reports/search-components-opened-review-round-1-slice-1.md` to `slice-6.md`. Verdicts: 17 SATISFIED (some after body edits); 7 BLOCKED. Blocks: PR 5131 (owner: changelog type); 5134 (code: changelog title); 5144 (changelog gate, then the head move); 5150 (code: javadoc placement); and history rewrites on 5151, 5152 and 5153, which need Nick's direction per PR. Body and title edits made live: 15 PRs, 32 edits, each read back. Gate jobs filed: 10.
