@@ -37,3 +37,55 @@
 
 - The change does not cover the backup path named in SOLR-15712, nor explicit `fl` requests for collation fields.
 - The duplicate question (whether SOLR-15712 should close against SOLR-15777) is not decided by this job. The default is to keep it as a separate core change, with SOLR-15777 named as the precedent.
+
+## Gate failure investigation (main side, 2026-10-14)
+
+Classification: (b). The defect is in the new test class's schema, not in the
+production implementation and not in the vm2 environment. The fix is a corrected
+test class, filed as `gates/SOLR-15712-udvas-test-fix.md` for the patch loop. This
+job stays FAILED at `2d65ed6329` until the corrected test is dropped into the gate
+worktree and steps 5 to 7 of this job are re-run there. Do not relaunch the failed
+run as it stands.
+
+What the pattern shows:
+
+- Four of the five new tests fail with the same text: "Can't load schema ...
+  Plugin Initializing failure for [schema.xml] fieldType". That wrapper is
+  `AbstractPluginLoader` (line 192 at the merge-base `cabedd1d968`), thrown when a
+  field type's `init` throws. So every failing test died during field type
+  initialization, before any field-level check ran.
+- The failing four include `testNoUdvasNoWarning`, the control with the flag set
+  nowhere. A defect in the version rule cannot fail the control: with no flag,
+  neither the type-level check in `init` nor `checkSchemaField` fires. The load
+  itself is broken in the test's schema.
+- The one passing test, `testTypeUdvasFailsFrom90`, is the one case where the new
+  code acts before the break point: in `CollationField.init` the type-level
+  `useDocValuesAsStored` check runs before `setup(...)` (same order as the branch
+  head `cb988a2ff4c` and as `ICUCollationField`), so at 9.0 it throws the refusal
+  and the load fails as the test expects. Every other variant reaches `setup(...)`
+  and dies there.
+- Core `CollationField.setup` (merge-base) requires a `language` or `custom`
+  argument and throws "Either custom or language is required." otherwise. The ICU
+  field it was modeled on takes `locale` instead. A generated schema carrying the
+  ICU-style attributes, or no collator argument at all, fails core field type init
+  in exactly this shape. The gate job limited the implementation commit to the
+  production file, one test class and the changelog title, so the new test had to
+  generate its schema in code; that generated schema does not meet the core
+  field's init contract.
+- The production side is cleared by the code: the prescribed implementation is
+  the ICU one verbatim, and `IndexSchema.getDefaultLuceneMatchVersion()` returns
+  a constructor-injected value that is `Objects.requireNonNull` (IndexSchema
+  line 202 at the merge-base), set before field types load, so it cannot fail at
+  init. The same focused run's two pre-existing classes, which load valid
+  collation schemas (`language=` attributes in `schema-collate-dv.xml`), have no
+  recorded failures.
+- Caveat, recorded plainly: the implementation commit `2d65ed6329` and the test
+  source are local to the vm2 gate worktree and are not pushed, so the exact
+  schema defect is identified by elimination from the failure pattern and the
+  code, not read from the test source. The re-gate with the corrected test
+  confirms this classification; if a valid schema still fails at init, the
+  classification reopens as (a) against the implementation.
+- The draft banner's clause "where the test expected a failure or warning and
+  got OK" does not match the exception text it quotes and is treated as a
+  recording error. The quoted exception text and the test names are the reliable
+  parts of the record.
