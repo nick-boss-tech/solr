@@ -34,3 +34,9 @@ No other line changes. The title stays a plain scalar with no colon followed by 
 ## After the gate passes
 
 Move the live head only through the gate lane. Then update the PR body's Changelog link and its Proof head line to the new head, and re-review PR #5144.
+
+## Completion (vm1, 2026-10-14)
+
+- Status: DONE. GATE GREEN at new head c36cfc094af45ef3209f2eefa0aab7621407fae0, pushed to solr-8088-submit as a fast-forward from 567efa9b78c3 and verified by ls-remote.
+- Steps: changelog YAML parse rc=0; tidy rc=0, tree clean after the versions-file restore; Error Prone compile rc=0; focused SearchGroupsFieldCommandTest 2 of 2 from fresh JUnit XML (seed 8088C0FFEE8088); module check rc=0. Proof leg: base cabedd1d968 with the branch test in place runs 2 tests with exactly 1 failure, testMultiValuedFieldIsRejected, by content from fresh XML (the leg's first attempt never executed tests because of a runner copy defect, the new test directory not existing on the base; re-run once with the directory created).
+- PR #5144 body: changelog link and Proof head line updated to the new head and re-read. Receipt: receipts/SOLR-8088.md (new top section). Claim: claims/pool-vm1-gate-8088-review-changelog-scope.md, DONE.
