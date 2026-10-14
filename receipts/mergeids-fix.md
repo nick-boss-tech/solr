@@ -1,3 +1,13 @@
+## Narrowing patch, review round 1 (vm2, 2026-10-14)
+
+- Patch: gates/SOLR-18539-narrowing-round-1.patch, applied to fbf7610644d178049e1110ffc0ec34dad8c5b32f. Pushed as a fast-forward to review-r1-solr-18539: old fbf7610644d1, new f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff. Not pushed to mergeids-skipped-shard-totals; PR #5115 untouched.
+- Run: GATE START 2026-10-14T00:14:38Z, GATE END 2026-10-14T00:42:37Z. Log logs/vm2/queue-g18539-narrow-gate-20261014T001438Z.out. Seed 18539C0FFEE18539. Tidy changed nothing; Error Prone compile rc=0.
+- Focused, patched head (QueryComponentPartialResultsTest, fresh JUnit XML, 00:31:54Z): 19 tests, 0 failures, 0 errors, 0 skipped.
+- Fail-before leg 1, merge-base d76fc14b9857 (7 expected): 7 failures, by name: approximateTotalHitsFallsBackToEachShardsNumFound, allShardsSkippedDoesNotClaimExactZero, skippedShardWithHitsMakesMergedCountInexact, mergedNumFoundCountsOnlyMergedShards, mergedApproximateTotalHitsExcludesSkippedShard, mergedMaxScoreComesFromMergedShards, approximateTotalHitsMixesHeaderAndFallbackShards. Each text matches the job file.
+- Fail-before leg 2, PR head 4eb9961218 (3 expected): 3 failures, mergedNumFoundCountsOnlyMergedShards, skippedShardWithHitsMakesMergedCountInexact, allShardsSkippedWithInexactZeroDoesNotClaimExactZero. Each text matches.
+- Fail-before leg 3, fbf7610 (2 expected): 2 failures, skippedShardWithExactZeroLeavesMergedCountExact and allShardsSkippedWithNoHitsKeepsExactZero. Each text matches.
+- Module check (:solr:core:check -x test): rc=0. Restore of QueryComponent.java verified clean.
+
 # MergeIds fix gate receipt
 
 Branch `mergeids-skipped-shard-totals` on the fork. Ticket: SOLR-18539, filed by Nick and verified against live Jira on 2026-10-12 (the branch is not named for the ticket, at Nick's filing setup; the changelog fragment carrying the number was added at packaging, see the packaging gate section at the end of this receipt). This receipt exists so the gate state is visible to every host; the gate logs themselves live on vm1.

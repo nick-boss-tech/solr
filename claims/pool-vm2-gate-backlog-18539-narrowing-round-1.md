@@ -7,3 +7,5 @@
 - The runner stops before the fork push. The push and the receipt are a separate step after the counts are read.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED.
+
+- 2026-10-14T00:45ZZ vm2 gate backlog coordinator: DONE. Patch pushed as f9b0e5d722 (fast-forward from fbf7610644); focused 19 of 19, fail-before legs 7, 3 and 2 by name, module check rc=0. Receipt: receipts/mergeids-fix.md.
