@@ -11,3 +11,4 @@
 ## Heartbeats
 
 - 2026-10-14T21:08:00Z claim recorded; batch jobs 1 and 2 ahead of it.
+- 2026-10-14T21:56:00Z heartbeat: patch committed in worktree g9864-review (move-only diff, 17 test methods). Runner g9864-review-gate.sh launched.
