@@ -5,4 +5,4 @@
 - Capability tags: gate, implementation (changelog title line only).
 - Runner: gates/g874-gate.sh, worktree /workspace/gates/solr-874-title (detached). Seed 874C0FFEE874. Focused: SolrPluginUtilsTest, DisMaxRequestHandlerTest.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued.
+- Status: DONE 2026-10-14T05:58:37Z. GATE GREEN at a283e050904a5d323bfd5a6016c799f434d229e4; title commit pushed to solr-874-submit; receipt refreshed.

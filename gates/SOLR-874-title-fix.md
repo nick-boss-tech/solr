@@ -2,7 +2,7 @@
 
 - Branch: solr-874-submit. Head: ac9ab33753751a6fef05b5f100f5c1c5683510b2 (live tip, verified by `git ls-remote origin refs/heads/solr-874-submit` on 2026-10-14; receipt `receipts/SOLR-874.md`, GATE GREEN at this head).
 - Intended host: vm2 (gate backlog coordinator), under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed. Written by the review side (Windows) on 2026-10-14. Not run by the review side.
+- Status: DONE 2026-10-14T05:58:37Z by vm2 (gate backlog coordinator). GATE GREEN at a283e050904a5d323bfd5a6016c799f434d229e4; title commit pushed plainly to solr-874-submit from ac9ab33753751a6fef05b5f100f5c1c5683510b2. Receipt receipts/SOLR-874.md refreshed. The draft citations in pr-drafts/query-parsing/SOLR-874.md are not re-pointed here; the review side owns that step.
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head. Same pattern as `gates/SOLR-12916-title-fix.md` and `gates/SOLR-10882-title-fix.md`.
 - Why owed: the query-parsing census follow-up (`reports/category-ready-lists-round-1.md`, HOLD on SOLR-874, step S4) found that the changelog title says a leading NOT is dropped. The draft says the opposite, and the code agrees with the draft: at the tip, `LEADING_BOOL_PATTERN` (`solr/core/src/java/org/apache/solr/util/SolrPluginUtils.java` lines 649-650) strips a leading AND, OR, && and || only, so `NOT ipod` is kept. The trailing pattern (`DANGLING_BOOL_PATTERN`, lines 646-647) does strip a trailing NOT.
@@ -24,11 +24,12 @@
 
 ## Step checklist
 
-- [ ] head confirmed by `git ls-remote` equals `ac9ab33753751a6fef05b5f100f5c1c5683510b2`; recorded here
-- [ ] title replaced in `SOLR-874-dismax-dangling-boolean-operator.yml`; delta against `ac9ab33753751a6fef05b5f100f5c1c5683510b2` is that fragment only
-- [ ] changelog YAML parse
-- [ ] tidy on the final tree; tree clean (GATE INVALID guard)
-- [ ] Error Prone compile (`:solr:core`)
-- [ ] focused tests at the new head: SolrPluginUtilsTest and DisMaxRequestHandlerTest, counted from fresh JUnit XML, seed 874C0FFEE874
-- [ ] module check (`:solr:core:check -x test`)
-- [ ] pushed plainly to `solr-874-submit`; receipt refreshed; draft citations re-pointed; job and claim DONE
+- [x] head confirmed by `git ls-remote` equals `ac9ab33753751a6fef05b5f100f5c1c5683510b2`; recorded here
+- [x] title replaced in `SOLR-874-dismax-dangling-boolean-operator.yml`; delta against `ac9ab33753751a6fef05b5f100f5c1c5683510b2` is that fragment only
+- [x] changelog YAML parse
+- [x] tidy on the final tree; tree clean (GATE INVALID guard)
+- [x] Error Prone compile (`:solr:core`)
+- [x] focused tests at the new head: SolrPluginUtilsTest and DisMaxRequestHandlerTest, counted from fresh JUnit XML, seed 874C0FFEE874
+- [x] module check (`:solr:core:check -x test`)
+- [x] pushed plainly to `solr-874-submit`; receipt refreshed; job and claim DONE
+- [ ] draft citations re-pointed (review side)
