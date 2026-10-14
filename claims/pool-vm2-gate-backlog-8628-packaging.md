@@ -5,4 +5,4 @@
 - Capability tags: gate.
 - Runner: gates/g8628-packaging-gate.sh, worktree /workspace/gates/solr-8628-packaging (detached). The packaging commit is pushed as a plain fast-forward only after the gate is green.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued.
+- Status: CLAIMED. Run finished 2026-10-14T22:48:07Z with a nonzero rc at the proof leg (rc 1; the revert-to-base run failed testCreateCoreOverIndexDirWithOnlyWriteLock, as the job expects). Other rc lines 0. Not promoted to GREEN, not relaunched, no fork push; left for the main agent. See gates/SOLR-8628-packaging.md, Gate run record.
