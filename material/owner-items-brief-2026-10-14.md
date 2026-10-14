@@ -28,6 +28,8 @@ On each option: widen and the check uses the reader's own whitespace definition,
 
 Recommendation: widen the join-name check to the same whitespace definition the local-params reader uses (Character.isWhitespace), add one test with a non-ASCII space, and re-gate before opening; the cost is one small branch commit and one gate.
 
+**Ruling (2026-10-14, under Nick's decision-routing instruction): DECIDED as recommended, and EXECUTED.** The check now scans with `Character.isWhitespace`, a new test covers an em space (U+2003) name, and the full gate is GREEN at the new head 248a9715b1 (see `receipts/SOLR-12505.md`); the branch is pushed and the draft is refreshed at that head, with the ASCII-only Limits admission removed. The changelog title recorded in `gates/SOLR-12505-changelog-title.md` was applied in the same commit, since the widening superseded that title-only job and its Choice hold closed with ruling 1a. Staged ready to open; the opening itself still needs Nick's explicit approval.
+
 ### 1c. The JIRA attributions
 
 The decision: whether the draft's three attributions can stand. This hold existed because the review host had no Jira access. Checked against live Jira on 2026-10-14: the assignee is Eric Pugh, and his comment of 2021-10-14 says removing `defType=edismax` from his setup "worked like a champ". Comment 16519637 is David Smiley's, quoting Joel Bernstein's proposal to set the defType parameter and agreeing with it ("+1 great idea"). Smiley's suggestion of the terms parser is his comment 16519475. All three attributions in the draft match.
