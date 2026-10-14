@@ -1,7 +1,7 @@
 # Gate job: SOLR-7119, drop the changelog fragment (branch packaging, then changelog lint)
 
 - Branch: solr-7119-submit. Gated head: 4c652c93b99c0eed496d70a69043e8bcd9760e21 (live tip, verified by ls-remote 2026-10-14; matches receipts/SOLR-7119.md and the docs-shaped gate at that head).
-- Status: OPEN, filed 2026-10-14 by the Windows review coordinator (round 5, slice S6). No claim yet.
+- Status: DONE. Packaged head af336af5ab8aa03b95cc6ecf0fde565ef305ca12; lint rc=0; see receipts/SOLR-7119.md.
 - Intended host: any capable Linux host (vm2 or vm1; VM3 is down per material/coordinator-handoff.md). Capability tag: `gate`.
 - Windows does not claim, build, push or commit this job.
 

@@ -5,4 +5,4 @@
 - Capability tags: gate.
 - Runner: gates/g7119-gate.sh, worktree /workspace/gates/solr-7119-pack (detached). The runner sources /workspace/.env for the push.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued.
+- Status: DONE. Packaged head af336af5ab8aa03b95cc6ecf0fde565ef305ca12 pushed fast-forward; push rc=0, lint rc=0.
