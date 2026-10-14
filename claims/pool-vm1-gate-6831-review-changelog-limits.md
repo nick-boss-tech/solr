@@ -11,3 +11,4 @@
 ## Heartbeats
 
 - 2026-10-14T21:08:00Z claim recorded; batch job 1 (SOLR-8088) in prep.
+- 2026-10-14T21:32:00Z heartbeat: patch committed at 24bd15ebb8 on 96b33ba5f6 (fragment parses). Runner g6831-review-gate.sh launched and waiting for the test-queue flock.
