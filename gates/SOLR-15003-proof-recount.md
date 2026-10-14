@@ -63,3 +63,18 @@ Classification: not GREEN. Step 2 gives a partial fail-before, and step 3 contra
 - Step 3, pre-fix 8f5b6f8360a with the head test file overlaid, testFullCopyWithReloadRemovesOldIndexDir alone: PASSED. The receipt recorded a failure of this test at this commit; this run does not reproduce it. Finding for the main side.
 - Step 4, changelog parse at head: OK.
 - No relaunch. No push. Logs: logs/vm2/15003-head.log, 15003-mb.log, 15003-pre.log, queue log queue-g15003-proof-gate-20261014T090951Z.out.
+
+## Main-side classification (2026-10-14)
+
+The handoff question is decided. The recount stands as run: correct merge base (b5c71bc5573, the git merge-base of the head against upstream main), head test file overlaid, fixed seed, nightly tests on, per-test verdicts from the run logs. No part of the recount is classified flawed.
+
+Per-test classification, from the branch diff and the test code (full text in `receipts/SOLR-15003.md`, "Proof classification" entry):
+
+- `testFullCopyKeepsSnapshotFilesInOldIndexDir`: PROVEN (fails on the merge base with the premise assertion).
+- `testFullCopyRemovesOldIndexDirWhenNoSnapshot`: NOT_PROVEN, class (b). A pin: the merge base already removed the old directory unconditionally after a full-copy install, snapshot or not.
+- `testFullCopyWithReloadRemovesOldIndexDir`: NOT_PROVEN, class (b). A pin: the stale-core cleanup skip it guards against exists only in the branch's own cleanup design; the merge-base removal is a DirectoryFactory operation that consults no core.
+- `testDeleteNamedSnapshotWithMissingIndexDir`: NOT_PROVEN, class (b). A pin: the merge-base `DirectoryFactory.get` creates the missing directory, so the delete completes there too. A discriminating redesign is named in the receipt; it is owed only if a fail-before for that hunk is ever required.
+
+Step 3 discrepancy resolved against the old receipt: 8f5b6f8360a is a test-only commit whose production tree already contains the production fix commits a97a03a340 and 45ac3add52, so it was never a pre-fix state, and the recount's pass there is the expected outcome. The old receipt's step 3a failure statement is withdrawn in the receipt.
+
+State after this classification: the branch stays GATE GREEN at 1004abee39ab with one proven fail-before and three pins. The draft's Proof and Limits already state exactly this. No test redesign is owed and nothing blocks the ticket on proof grounds.
