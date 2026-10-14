@@ -28,3 +28,7 @@
 - [ ] receipt written at the head; job DONE
 
 On DONE, the review coordinator restores the verification date in `pr-drafts/suggester/SOLR-17393.md` from the receipt.
+
+## Coordinator run record (2026-10-14)
+
+- Gate run at 626241e647e5 ended 14:09:14Z. Pre-fix leg rc=1 as expected (merge-order assertion fails on base); head leg rc=0 with 15 tests, 0 failures; all other rc lines 0. Not GREEN under the all-rc-zero rule; left for the main agent, not relaunched. Status line unchanged.

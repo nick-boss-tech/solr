@@ -5,3 +5,9 @@
 - Capability tags: gate.
 - Runner: /workspace/gates/g17393-gate.sh. Worktree: /workspace/gates/solr-17393-gate (detached at the head).
 - Status: CLAIMED, runner queued. Not yet run.
+
+## Gate run record (gate backlog coordinator, 2026-10-14)
+
+- Run: GATE START 13:47:14Z, GATE END 14:09:14Z at head 626241e647e5 (log logs/vm2/queue-g17393-gate-20261014T134714Z.out).
+- rc: changelog 0, tidy 0 (tree clean), compile 0, pre-fix 1 (expected nonzero: SuggestComponentMergeTest testEqualWeightsDoNotDependOnShardResponseOrder fails on base, 1 failure), head 0 (DistributedSuggestComponentTest 1, SuggestComponentMergeTest 2, SuggestComponentTest 12, 0 failures), core check 0.
+- Not GREEN under the all-rc-zero rule because of the expected-nonzero pre-fix leg. Not pushed, not marked DONE, not relaunched. Left for the main agent.
