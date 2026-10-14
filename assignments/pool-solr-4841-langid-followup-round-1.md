@@ -59,3 +59,11 @@ File `gates/SOLR-4841-langid-followup.md` for a Linux host (any capable Linux ho
 ## Deliverable
 
 `reports/solr-4841-langid-followup-round-1.md`: the design in brief (how the document flows through the custom identifier and what is asserted), the branch name and base SHA, the head after each round, each round's verdict and what it changed, the pre-fix legs as recorded for the gate job, the gate job file name, and the final state (SATISFIED or the named surviving hold).
+
+## Amendment (2026-10-14): the follow-up opens under a new ticket of its own
+
+Jan Høydahl directed on the SOLR-4841 ticket that this follow-up get a NEW ticket of its own (reported by Nick, 2026-10-14). The build proceeds exactly as assigned above: branch `solr-4841-langid-followup-submit`, the gate job for a Linux host, and the self-review rounds to SATISFIED are unchanged, and the work is still described against SOLR-4841 in the deliverable while it is being built. What changes is the packaging target:
+
+- The eventual PR opens under the NEW ticket's number, once Nick files that ticket. No opening happens before the ticket exists.
+- At packaging time, the draft's title, its citations, and any changelog references are re-pointed from SOLR-4841 to the new ticket number. (The gate job's changelog decision already stands: the change is test-only and adds no fragment, so there is no fragment to re-point unless packaging decides otherwise under the new ticket.)
+- The "What this assignment does not authorize" section stands in full: no PR is opened by this assignment, and the opening still needs Nick's approval on an openings slate, now under the new ticket.
