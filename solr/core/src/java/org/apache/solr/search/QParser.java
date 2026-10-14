@@ -409,7 +409,8 @@ public abstract class QParser {
    * favor of the subquery's own modifiers.
    */
   private static boolean isFurtherQueryText(String trailing) {
-    if (trailing.isBlank()) {
+    if (trailing.isBlank() || trailing.strip().chars().allMatch(c -> c == ')')) {
+      // only closing parentheses: not query text, stays ignored as before
       return false;
     }
     boolean hasSeparator = false;
@@ -492,7 +493,9 @@ public abstract class QParser {
       localParamsEnd = QueryParsing.parseLocalParams(qstr, 0, localParams, globalParams);
 
       String val = localParams.get(QueryParsing.V);
-      if (val != null && isFurtherQueryText(qstr.substring(localParamsEnd))) {
+      if (val != null
+          && !FunctionQParserPlugin.NAME.equals(parserName)
+          && isFurtherQueryText(qstr.substring(localParamsEnd))) {
         // v was given in the local-params AND there is more query text after them, e.g.
         //   {!parser v=$qq} OR other
         // Previously the trailing text was silently ignored (SOLR-15906). Hand the whole string to
