@@ -57,7 +57,7 @@ Rows marked * are the after-one-step rows; their step is listed under the slate.
 | SOLR-4374 | solr-4374-submit | 801c62290f79 | A top-level item that starts with a digit is read as a field when the schema has a field with that name Opened as draft PR #5130 on 2026-10-14. |
 | SOLR-5394 | solr-5394-submit | 967445622f92 | The default per-field thread count changes from -1 (no limit) to 1 Opened as draft PR #5131 on 2026-10-14. |
 | SOLR-6207 | solr-6207-submit | b099a9f1be5a | The javadoc now states what the method returns and what it leaves out Opened as draft PR #5132 on 2026-10-14. |
-| SOLR-6759 | solr-6759-submit | 42f03eb52376 | The expand search now calls `complete()` on its collector chain after the search Opened as draft PR #5133 on 2026-10-14. |
+| SOLR-6759 | solr-6759-submit | 7f8d08e34b11 | The expand search now calls `complete()` on its collector chain after the search Opened as draft PR #5133 on 2026-10-14. PR #5133 was closed permanently when the history rewrite briefly deleted the branch; replaced by draft PR #5154 at the rewritten head on 2026-10-14. |
 | SOLR-6831 | solr-6831-submit | 96b33ba5f6f8 | The pivot loop checks the query limits before each value and stops at the first limit that has tripped Opened as draft PR #5134 on 2026-10-14. |
 | SOLR-6975 | solr-6975-submit | 761aa629bb83 | A `_docid_` sort no longer reads a sort value from the shards. Results from different shards are grouped by shard Opened as draft PR #5135 on 2026-10-14. |
 | SOLR-7390 | solr-7390-submit | 7463dd006a78 | An unregistered bracket transformer in `fl` now fails with 400 Bad Request Opened as draft PR #5136 on 2026-10-14. |
@@ -67,17 +67,17 @@ Rows marked * are the after-one-step rows; their step is listed under the slate.
 | SOLR-8003 | solr-8003-submit | 17c516a607a8 | A glob followed by a raw value transformer now writes each matching field raw Opened as draft PR #5140 on 2026-10-14. |
 | SOLR-8009 | solr-8009-submit | 8795661ddc98 | An unrouted id on an implicit-router collection is now sent to every shard Opened as draft PR #5141 on 2026-10-14. |
 | SOLR-8020 | solr-8020-submit | 79f790523d2f | `SearchHandler` adds its empty debug section only when the response has no debug entry yet Opened as draft PR #5142 on 2026-10-14. |
-| SOLR-8051 | solr-8051-submit | e50a2aa3437c | A shard with no response is now skipped in the global stats merge Opened as draft PR #5143 on 2026-10-14. Landing order: SOLR-15319 (this slate) lands after this change. |
+| SOLR-8051 | solr-8051-submit | 65d0c968d8a4 | A shard with no response is now skipped in the global stats merge Opened as draft PR #5143 on 2026-10-14. Landing order: SOLR-15319 (this slate) lands after this change. PR #5143 was closed permanently when the history rewrite briefly deleted the branch; replaced by draft PR #5155 at the rewritten head on 2026-10-14. |
 | SOLR-8088 | solr-8088-submit | 567efa9b78c3 | Grouping on a multiValued non-numeric field is rejected up front with a 400 error Opened as draft PR #5144 on 2026-10-14. |
 | SOLR-8240 | solr-8240-submit | fad7a1dd8e23 | A request that sends `f` with `mapUniqueKeyOnly=true` now fails with a 400 error Opened as draft PR #5145 on 2026-10-14. Landing order: SOLR-10424 lands before, or together with, this change. |
 | SOLR-8939 | solr-8939-submit | a855a2d8965c | Date keys are sent as ISO-8601 text with milliseconds, on the plain and the grouping stored-fields paths Opened as draft PR #5146 on 2026-10-14. |
 | SOLR-9124 | solr-9124-submit | 64b8256cde72 | Grouped distributed queries that score now send the merged term statistics in the group stages, and they read the statistics the shards return Opened as draft PR #5147 on 2026-10-14. |
-| SOLR-9396 | solr-9396-submit | a5ab2eda4e6a | The transformer asks the index for the fields its subquery references Opened as draft PR #5148 on 2026-10-14. |
-| SOLR-9595 | solr-9595-submit | bf99cd0e89c2 | Terms are cached per field. The live-docs view is built once, when the wrapper is created Opened as draft PR #5149 on 2026-10-14. |
+| SOLR-9396 | solr-9396-submit | dc862ccfd375 | The transformer asks the index for the fields its subquery references Opened as draft PR #5148 on 2026-10-14. PR #5148 was closed permanently when the history rewrite briefly deleted the branch; replaced by draft PR #5156 at the rewritten head on 2026-10-14. |
+| SOLR-9595 | solr-9595-submit | e18a8063e6af | Terms are cached per field. The live-docs view is built once, when the wrapper is created Opened as draft PR #5149 on 2026-10-14. PR #5149 was closed permanently when the history rewrite briefly deleted the branch; replaced by draft PR #5157 at the rewritten head on 2026-10-14. |
 | SOLR-9864 | solr-9864-submit | b5826e466b9a | `getCopy()` also copies the sort clause list Opened as draft PR #5150 on 2026-10-14. |
-| SOLR-10305 | solr-10305-submit | f55912697215 | A distributed request on a schema with no uniqueKey field now gets a 400 error with a clear message Opened as draft PR #5151 on 2026-10-14. |
-| SOLR-10424 | solr-10424-submit | e629ab8bb293 | The sample no longer sets `mapUniqueKeyOnly` for `/update/json/docs`, so each posted field is indexed under its own name Opened as draft PR #5152 on 2026-10-14. Landing order: this change lands before, or together with, SOLR-8240. |
-| SOLR-10492 | solr-10492-submit | ecf21e2192cb | Refinement counts are grouped counts when group.facet=true Opened as draft PR #5153 on 2026-10-14. |
+| SOLR-10305 | solr-10305-submit | 86ddbd433dba | A distributed request on a schema with no uniqueKey field now gets a 400 error with a clear message Opened as draft PR #5151 on 2026-10-14. PR #5151 was closed permanently when the history rewrite briefly deleted the branch; replaced by draft PR #5158 at the rewritten head on 2026-10-14, with the full gate green at that head. |
+| SOLR-10424 | solr-10424-submit | 0072435a9d12 | The sample no longer sets `mapUniqueKeyOnly` for `/update/json/docs`, so each posted field is indexed under its own name Opened as draft PR #5152 on 2026-10-14. Landing order: this change lands before, or together with, SOLR-8240. PR #5152 was closed permanently when the history rewrite briefly deleted the branch; replaced by draft PR #5159 at the rewritten head on 2026-10-14. |
+| SOLR-10492 | solr-10492-submit | ba2ee092aafc | Refinement counts are grouped counts when group.facet=true Opened as draft PR #5153 on 2026-10-14. PR #5153 was closed permanently when the history rewrite briefly deleted the branch; replaced by draft PR #5160 at the rewritten head on 2026-10-14. |
 | SOLR-10694 | solr-10694-submit | 64e86811548b | The CSV writer writes a map, NamedList, iterator or array value as one JSON cell |
 | SOLR-10844 | solr-10844-submit | e87515c56d04 | Grouped faceting now rejects these numeric fields with a 400 error that names the field |
 | SOLR-11129 | solr-11129-submit | dc82676b8096 | The coordinator now reads the per-field local params of field facets, as the shards already do |
@@ -123,6 +123,7 @@ Packaging and opening steps for this slate:
 - TESTING.md: the W1 verification confirmed no TESTING file stands at any of the 62 W1 submit tips; nothing to remove on those rows.
 
 - Openings run, 2026-10-14: the first 24 as-is rows of this slate (SOLR-4374 through SOLR-10492, in table order) were opened as draft PRs and are annotated inline on their rows. No holds: every branch tip matched the tip recorded here, and every prepared draft stood as written.
+- Replacement openings, 2026-10-14: seven of the 24 (SOLR-6759, SOLR-8051, SOLR-9396, SOLR-9595, SOLR-10305, SOLR-10424, SOLR-10492) were closed permanently when the history rewrites briefly deleted their branches. The branches stand restored at the rewritten heads; on Nick's approval the replacements were opened as drafts the same day, and each row above carries its old and new numbers. SOLR-10305's replacement stands on the full gate run green at its rewritten head on 2026-10-14.
 
 ### Query parsing (16 rows)
 
