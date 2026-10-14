@@ -27,3 +27,8 @@
 - [ ] receipt written at the head; job DONE
 
 On DONE, the review coordinator restores the verification date in `pr-drafts/suggester/SOLR-17215.md` from the receipt.
+
+## Coordinator run record (2026-10-14)
+
+- Gate run at 04d35df186dd ended 14:30:50Z (log logs/vm2/queue-g17215-gate-20261014T140914Z.out). Pre-fix leg rc=1 as expected: TestFreeTextSuggesterNotBuilt testQueryBeforeAndAfterBuild fails on base with `java.lang.RuntimeException: Exception during query` (1 failure, 0 errors). Head leg rc=0: SuggestComponentContextFilterQueryTest 10 tests, 0 failures, 1 skipped; SuggestComponentTest 12 tests, 0 failures; TestFreeTextSuggesterNotBuilt 1 test, 0 failures. Changelog rc=0, tidy rc=0 (tree clean), compile rc=0, core check rc=0.
+- Not GREEN under the all-rc-zero rule because of the expected-nonzero pre-fix leg. Not pushed, not marked DONE, not relaunched. Left for the main agent.
