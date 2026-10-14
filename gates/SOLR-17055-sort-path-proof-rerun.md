@@ -1,0 +1,30 @@
+# Gate job: SOLR-17055 sort path, fail-before rerun at the decided proof base
+
+- Branch: solr-17055-submit. Fork tip: `c2396f425fa2a67a40fea7afee341840c3896358` (verified by ls-remote on the main side, 2026-10-14; equals the gated head in receipts/SOLR-17055.md).
+- Head to gate: the fix commit `2fe0986158391908ac89564090eb97e245788023`, held on vm2 in the detached worktree /workspace/gates/solr-17055-fix (parent `c2396f425fa2`). It is not on the fork. Gate that exact commit; do not rebuild or amend it.
+- Module: `:solr:core`. Focused test class: `org.apache.solr.handler.component.DistributedKnnTopKTest` (file `solr/core/src/test/org/apache/solr/handler/component/DistributedKnnTopKTest.java`), single method `test()`, which asserts the score-order case first and the sort case after it. Seed: `17055C0FFEE17055`.
+- Posted by: the main agent, 2026-10-14, re-issuing step 5 of gates/SOLR-17055-sort-path.md after the proof-base ruling recorded at the end of that file and in receipts/SOLR-17055.md.
+- Capability tags: gate. Intended host: vm2 (the fix commit and the gate worktree live there). Windows never claims build work.
+- Status: OPEN.
+
+## Why this rerun exists
+
+The first gate of the fix commit (log logs/vm2/queue-g17055-gate-20261014T113414Z.out) ran every head leg green: changelog rc 0, spotless rc 0, tree clean, Error Prone compile rc 0, DistributedKnnTopKTest 1 of 1, module check rc 0. Its fail-before leg used the branch merge-base `97d973814336` and failed at the score-only assertion (`.response.numFound:9!=3`, test line 57): that base has no knn topK handling in QueryComponent at all, and the test asserts the score-order case first, so the sort assertion was never reached. That leg measured the branch's original score-path cap, not this fix.
+
+## Decided proof base and overlay shape
+
+- Proof base: production code at `c2396f425fa2a67a40fea7afee341840c3896358` (the fix commit's parent), with the test files from the fix commit `2fe0986158391908ac89564090eb97e245788023` overlaid. The only production difference between the proof base and the gate head is the fix commit itself.
+- Expected result at the proof base: `DistributedKnnTopKTest` fails at the sort assertion, `.response.size():9!=3` from the control-versus-distributed comparison in the sort case (`{!knn f=vector topK=3}`, `sort=id asc`, `rows=20`, `fl=id,score`), and the score-order case passes. The premise run at this base already produced exactly that failure (recorded in gates/SOLR-17055-sort-path.md). If the score-order case fails at the proof base, the overlay is wrong; stop and record that instead of counting the run.
+
+## Steps
+
+1. [ ] In the fix worktree (or a fresh detached checkout of `2fe0986158391908ac89564090eb97e245788023`), confirm the head legs still stand as recorded: changelog YAML parse, spotless, tidy guard with `gradle/libs.versions.toml` restored and the tree clean afterward, Error Prone compile, `DistributedKnnTopKTest` 1 of 1 from fresh JUnit XML at seed `17055C0FFEE17055`, module check `:solr:core:check -x test` rc 0. Re-running a leg that no longer stands is in scope; record each result.
+2. [ ] Fail-before leg: check out production code at `c2396f425fa2` with the fix commit's test files overlaid (test tree identical to `2fe0986158391908ac89564090eb97e245788023`), run `DistributedKnnTopKTest` at seed `17055C0FFEE17055`, and record the failure from the fresh JUnit XML. It must fail at the sort assertion (`.response.size():9!=3`) with the score-order case passing. Restore the tree to the fix commit afterward and confirm it is clean.
+3. [ ] Record both legs in this file and in gates/SOLR-17055-sort-path.md (step 5 result), then proceed to the on-green steps.
+
+## On green
+
+- Push the fix commit plainly to `solr-17055-submit` as a fast-forward (`c2396f425fa2` to `2fe0986158391908ac89564090eb97e245788023`; ancestry allows it, since the fix commit's parent is the fork tip). Verify with ls-remote. No force, no history rewrite, Nick Shanin identity, no co-author trailer.
+- Refresh `receipts/SOLR-17055.md`: new head `2fe0986158391908ac89564090eb97e245788023`, the score-order and sort-order counts, the fail-before result at the decided proof base (base, overlay shape, failing assertion), and the module check.
+- Re-point every link in `pr-drafts/search-components/SOLR-17055.md` to the new head, rewrite its Limits (the sort gap is closed, so that paragraph goes), delete the OWED BEFORE POSTING hold comment at its top, and re-read the draft against the diff.
+- Mark gates/SOLR-17055-sort-path.md DONE and this job DONE with the new head recorded.

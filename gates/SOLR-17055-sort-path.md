@@ -29,7 +29,7 @@ Changelog: keep the sentence in `changelog/unreleased/SOLR-17055-knn-topk-distri
 2. Implement the fix in `QueryComponent.mergeIds` (and the knn query classes only if needed). Add the sort case to `DistributedKnnTopKTest`.
 3. Formatting and compile: `:solr:core:spotlessApply`, then `:solr:core:spotlessJavaCheck`, the Error Prone compile, and `:solr:core:compileTestJava`.
 4. Focused test run: `DistributedKnnTopKTest`. Both cases must pass.
-5. Fail-before check: the new sort assertion must fail against the base production code at `97d973814336`, with the test file in place.
+5. Fail-before check: the new sort assertion must fail against the proof base production code, with the test file in place. The base first written here was `97d973814336`; the main agent ruling at the end of this file supersedes it: the proof base is `c2396f425fa2` with the fix commit's test files overlaid, run under gates/SOLR-17055-sort-path-proof-rerun.md.
 6. Module check for `:solr:core`.
 
 ## On green
@@ -44,7 +44,7 @@ Changelog: keep the sentence in `changelog/unreleased/SOLR-17055-knn-topk-distri
 - [ ] premise run at c2396f425fa2 recorded (observed list size and numFound)
 - [ ] fix and sort case committed; spotless, Error Prone and test compile recorded
 - [ ] DistributedKnnTopKTest 1 of 1 at the new head, with the score and sort cases both passing inside it
-- [ ] fail-before result at 97d973814336 recorded
+- [ ] fail-before result recorded (at 97d973814336 it hit the score-only assertion; superseded by the ruling below, rerun at the decided proof base c2396f425fa2 under gates/SOLR-17055-sort-path-proof-rerun.md)
 - [ ] module check recorded
 - [ ] pushed plainly; receipt refreshed; draft links re-pointed and Limits rewritten; job DONE
 
@@ -72,3 +72,11 @@ Changelog: keep the sentence in `changelog/unreleased/SOLR-17055-knn-topk-distri
 - Fail-before at the job's base 97d973814336: rc 1, failing at the score-only assertion (`.response.numFound:9!=3`, test line 57). The base has no knn topK handling in QueryComponent, so the sort assertion is not reached there. The fail-before is therefore not established for the sort assertion at this base.
 - Not GREEN by the coordinator rule (a run has a nonzero rc). No fork push. Left for the main agent: choose a proof base for the fail-before, for example the parent `c2396f425fa2`, where the premise run already showed the sort assertion failing (list 9, expected 3).
 - Status: OPEN until the main agent rules on the fail-before base. Not DONE.
+
+## Main agent ruling on the fail-before base (2026-10-14)
+
+- Decision: the proof base for the sort-path fix is `c2396f425fa2a67a40fea7afee341840c3896358`, the fix commit's parent and the current fork tip, with the test files from the fix commit `2fe0986158391908ac89564090eb97e245788023` overlaid. The only production difference between that proof base and the gate head is the fix commit itself.
+- Why the job's original base `97d973814336` cannot measure the sort premise: that commit is the branch's merge-base, where QueryComponent has no knn topK handling at all. The test class asserts both paths in its single `test()` method, score order first. At the merge-base the score-order case fails first (`.response.numFound:9!=3`, test line 57 in the fix worktree), so the run never reaches the sort case; the fail-before leg measured the branch's original score-path cap, not this fix. Between the merge-base and the fix commit's parent, the branch's own commits added the score-path cap (merge queue trimmed when `sort == null`, `numFound` capped for every knn request), so at the parent the score-order case passes and only the sort case fails.
+- Evidence the parent base discriminates: the premise run at `c2396f425fa2` (recorded above, seed 17055C0FFEE17055) failed at the sort assertion, `.response.size():9!=3` from the control-versus-distributed comparison, with the score-order case passing.
+- Expected fail-before at the decided base: `DistributedKnnTopKTest` fails at the sort assertion (`.response.size():9!=3`) and the score-order case passes. If the score-order case also fails there, the overlay is wrong and the run does not count.
+- The re-run is issued as a separate job: gates/SOLR-17055-sort-path-proof-rerun.md (OPEN, for vm2). This job stays OPEN until that rerun records the fail-before at the decided base and the on-green steps complete.
