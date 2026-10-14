@@ -1,5 +1,5 @@
 title: >
-  bin/solr now exports TZ from SOLR_TIMEZONE (default UTC) so the GC log uses the same timezone as the Solr log, unless TZ is already set.
+  The Unix start script (bin/solr) sets TZ from SOLR_TIMEZONE (default UTC) for the server JVM, so its GC log uses that zone unless TZ is already set. solr.cmd is not changed.
 type: fixed
 authors:
   - name: Nick Shanin
