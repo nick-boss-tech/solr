@@ -1,6 +1,6 @@
 # Gate job: SOLR-15003 proof recount and fail-before at the merge base
 
-- Status: OPEN, unclaimed. Posted by the review lane (round 3, census follow-up S5, 2026-10-14).
+- Status: FAILED 2026-10-14, handed to the main agent (see the gate run record at the end). Not DONE, receipt not changed.
 - Branch: solr-15003-submit. Live head: 1004abee39ab07d5eae1a5ea6327572997ff50d2 (verified by `git ls-remote origin refs/heads/solr-15003-submit` on 2026-10-14; matches the gated head in `receipts/SOLR-15003.md`).
 - Merge base for the fail-before leg: b5c71bc5573c4e31b4cee5a7965d73587fc0ae58 (`git merge-base upstream/main 1004abee39ab`).
 - Module: `:solr:core`. Focused class: `org.apache.solr.handler.TestReplicationHandler` (nightly; run with nightly tests enabled, as the original gate did).
@@ -43,3 +43,14 @@ If step 1 records a failing test at the head, do not relaunch. Record the failin
 - [ ] step 3: intermediate check at `8f5b6f8360a`, reload test assertion text
 - [ ] step 4: changelog YAML parse at the head
 - [ ] receipt lines 6 and 7 replaced; this job DONE; claim DONE
+
+## Gate run record (coordinator, 2026-10-14T09:25Z)
+
+Run: gates/g15003-proof-gate.sh at head 1004abee39ab, log logs/vm2/queue-g15003-proof-gate-20261014T090951Z.out, finished 2026-10-14T09:24Z.
+
+- Step 1, head focused run: rc=0, BUILD SUCCESSFUL (15003-head.log). The filter, test counts and names were not extracted from the XML in this record.
+- Step 2, fail-before at b5c71bc5573 with the head test file overlaid: rc=1 (15003-mb.log). "4 tests completed, 1 failed." FAILED: testFullCopyKeepsSnapshotFilesInOldIndexDir, AssertionError "old index directory must be retained while a snapshot references it". The other three new tests passed at the merge base, so their verdict is NOT_PROVEN.
+- Step 3, intermediate at 8f5b6f8360a, testFullCopyWithReloadRemovesOldIndexDir alone: rc=0, BUILD SUCCESSFUL (15003-pre.log). The receipt's step 3a says this test fails there. It passed.
+- Step 4, changelog YAML parse at the head: rc=0, YAML OK.
+
+Classification: not GREEN. Step 2 gives a partial fail-before, and step 3 contradicts the receipt. Not relaunched. The main agent decides whether receipts/SOLR-15003.md line 7 can stand and whether the other three new tests need a fail-before proof.
