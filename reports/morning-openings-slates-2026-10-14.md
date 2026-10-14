@@ -54,30 +54,30 @@ Rows marked * are the after-one-step rows; their step is listed under the slate.
 
 | Ticket | Branch | Live tip | Change, one line (from the draft) |
 |---|---|---|---|
-| SOLR-4374 | solr-4374-submit | 801c62290f79 | A top-level item that starts with a digit is read as a field when the schema has a field with that name |
-| SOLR-5394 | solr-5394-submit | 967445622f92 | The default per-field thread count changes from -1 (no limit) to 1 |
-| SOLR-6207 | solr-6207-submit | b099a9f1be5a | The javadoc now states what the method returns and what it leaves out |
-| SOLR-6759 | solr-6759-submit | 42f03eb52376 | The expand search now calls `complete()` on its collector chain after the search |
-| SOLR-6831 | solr-6831-submit | 96b33ba5f6f8 | The pivot loop checks the query limits before each value and stops at the first limit that has tripped |
-| SOLR-6975 | solr-6975-submit | 761aa629bb83 | A `_docid_` sort no longer reads a sort value from the shards. Results from different shards are grouped by shard |
-| SOLR-7390 | solr-7390-submit | 7463dd006a78 | An unregistered bracket transformer in `fl` now fails with 400 Bad Request |
-| SOLR-7498 | solr-7498-submit | 2050d8e447a7 | A stream with an unknown size gets no `stream_size` value. A known size is still recorded |
-| SOLR-7520 | solr-7520-submit | 10b6931e1c05 | The grouped path now calls `complete()` on the post filter after each shard search, as the non-grouped path does |
-| SOLR-7550 | solr-7550-submit | 687165651f92 | A 500 for the versions request now counts as success when `cantReachIsSuccess` is set, the same as a 503 |
-| SOLR-8003 | solr-8003-submit | 17c516a607a8 | A glob followed by a raw value transformer now writes each matching field raw |
-| SOLR-8009 | solr-8009-submit | 8795661ddc98 | An unrouted id on an implicit-router collection is now sent to every shard |
-| SOLR-8020 | solr-8020-submit | 79f790523d2f | `SearchHandler` adds its empty debug section only when the response has no debug entry yet |
-| SOLR-8051 | solr-8051-submit | e50a2aa3437c | A shard with no response is now skipped in the global stats merge |
-| SOLR-8088 | solr-8088-submit | 567efa9b78c3 | Grouping on a multiValued field is rejected up front with a 400 error |
-| SOLR-8240 | solr-8240-submit | fad7a1dd8e23 | A request that sends `f` with `mapUniqueKeyOnly=true` now fails with a 400 error |
-| SOLR-8939 | solr-8939-submit | a855a2d8965c | Date keys are sent as ISO-8601 text with milliseconds, on the plain and the grouping stored-fields paths |
-| SOLR-9124 | solr-9124-submit | 64b8256cde72 | Grouped distributed queries that score now send the merged term statistics in the group stages, and they read the statistics the shards return |
-| SOLR-9396 | solr-9396-submit | a5ab2eda4e6a | The transformer asks the index for the fields its subquery references |
-| SOLR-9595 | solr-9595-submit | bf99cd0e89c2 | Terms are cached per field. The live-docs view is built once, when the wrapper is created |
-| SOLR-9864 | solr-9864-submit | b5826e466b9a | `getCopy()` also copies the sort clause list |
-| SOLR-10305 | solr-10305-submit | f55912697215 | A distributed request on a schema with no uniqueKey field now gets a 400 error with a clear message |
-| SOLR-10424 | solr-10424-submit | e629ab8bb293 | The sample no longer sets `mapUniqueKeyOnly` for `/update/json/docs`, so each posted field is indexed under its own name |
-| SOLR-10492 | solr-10492-submit | ecf21e2192cb | Refinement counts are grouped counts when group.facet=true |
+| SOLR-4374 | solr-4374-submit | 801c62290f79 | A top-level item that starts with a digit is read as a field when the schema has a field with that name Opened as draft PR #5130 on 2026-10-14. |
+| SOLR-5394 | solr-5394-submit | 967445622f92 | The default per-field thread count changes from -1 (no limit) to 1 Opened as draft PR #5131 on 2026-10-14. |
+| SOLR-6207 | solr-6207-submit | b099a9f1be5a | The javadoc now states what the method returns and what it leaves out Opened as draft PR #5132 on 2026-10-14. |
+| SOLR-6759 | solr-6759-submit | 42f03eb52376 | The expand search now calls `complete()` on its collector chain after the search Opened as draft PR #5133 on 2026-10-14. |
+| SOLR-6831 | solr-6831-submit | 96b33ba5f6f8 | The pivot loop checks the query limits before each value and stops at the first limit that has tripped Opened as draft PR #5134 on 2026-10-14. |
+| SOLR-6975 | solr-6975-submit | 761aa629bb83 | A `_docid_` sort no longer reads a sort value from the shards. Results from different shards are grouped by shard Opened as draft PR #5135 on 2026-10-14. |
+| SOLR-7390 | solr-7390-submit | 7463dd006a78 | An unregistered bracket transformer in `fl` now fails with 400 Bad Request Opened as draft PR #5136 on 2026-10-14. |
+| SOLR-7498 | solr-7498-submit | 2050d8e447a7 | A stream with an unknown size gets no `stream_size` value. A known size is still recorded Opened as draft PR #5137 on 2026-10-14. |
+| SOLR-7520 | solr-7520-submit | 10b6931e1c05 | The grouped path now calls `complete()` on the post filter after each shard search, as the non-grouped path does Opened as draft PR #5138 on 2026-10-14. |
+| SOLR-7550 | solr-7550-submit | 687165651f92 | A 500 for the versions request now counts as success when `cantReachIsSuccess` is set, the same as a 503 Opened as draft PR #5139 on 2026-10-14. |
+| SOLR-8003 | solr-8003-submit | 17c516a607a8 | A glob followed by a raw value transformer now writes each matching field raw Opened as draft PR #5140 on 2026-10-14. |
+| SOLR-8009 | solr-8009-submit | 8795661ddc98 | An unrouted id on an implicit-router collection is now sent to every shard Opened as draft PR #5141 on 2026-10-14. |
+| SOLR-8020 | solr-8020-submit | 79f790523d2f | `SearchHandler` adds its empty debug section only when the response has no debug entry yet Opened as draft PR #5142 on 2026-10-14. |
+| SOLR-8051 | solr-8051-submit | e50a2aa3437c | A shard with no response is now skipped in the global stats merge Opened as draft PR #5143 on 2026-10-14. |
+| SOLR-8088 | solr-8088-submit | 567efa9b78c3 | Grouping on a multiValued field is rejected up front with a 400 error Opened as draft PR #5144 on 2026-10-14. |
+| SOLR-8240 | solr-8240-submit | fad7a1dd8e23 | A request that sends `f` with `mapUniqueKeyOnly=true` now fails with a 400 error Opened as draft PR #5145 on 2026-10-14. |
+| SOLR-8939 | solr-8939-submit | a855a2d8965c | Date keys are sent as ISO-8601 text with milliseconds, on the plain and the grouping stored-fields paths Opened as draft PR #5146 on 2026-10-14. |
+| SOLR-9124 | solr-9124-submit | 64b8256cde72 | Grouped distributed queries that score now send the merged term statistics in the group stages, and they read the statistics the shards return Opened as draft PR #5147 on 2026-10-14. |
+| SOLR-9396 | solr-9396-submit | a5ab2eda4e6a | The transformer asks the index for the fields its subquery references Opened as draft PR #5148 on 2026-10-14. |
+| SOLR-9595 | solr-9595-submit | bf99cd0e89c2 | Terms are cached per field. The live-docs view is built once, when the wrapper is created Opened as draft PR #5149 on 2026-10-14. |
+| SOLR-9864 | solr-9864-submit | b5826e466b9a | `getCopy()` also copies the sort clause list Opened as draft PR #5150 on 2026-10-14. |
+| SOLR-10305 | solr-10305-submit | f55912697215 | A distributed request on a schema with no uniqueKey field now gets a 400 error with a clear message Opened as draft PR #5151 on 2026-10-14. |
+| SOLR-10424 | solr-10424-submit | e629ab8bb293 | The sample no longer sets `mapUniqueKeyOnly` for `/update/json/docs`, so each posted field is indexed under its own name Opened as draft PR #5152 on 2026-10-14. |
+| SOLR-10492 | solr-10492-submit | ecf21e2192cb | Refinement counts are grouped counts when group.facet=true Opened as draft PR #5153 on 2026-10-14. |
 | SOLR-10694 | solr-10694-submit | 64e86811548b | The CSV writer writes a map, NamedList, iterator or array value as one JSON cell |
 | SOLR-10844 | solr-10844-submit | e87515c56d04 | Grouped faceting now rejects these numeric fields with a 400 error that names the field |
 | SOLR-11129 | solr-11129-submit | dc82676b8096 | The coordinator now reads the per-field local params of field facets, as the shards already do |
@@ -121,6 +121,8 @@ Packaging and opening steps for this slate:
 - SOLR-12556 (marked *): narrow the changelog title as recorded in receipts/SOLR-12556.md, line 9.
 - Bold one-line summaries: the W1 verification flagged missing summaries on 29 drafts; every slate row here had its fix applied and re-reviewed SATISFIED in the census follow-up rounds, so no summary fix is outstanding on a slate row.
 - TESTING.md: the W1 verification confirmed no TESTING file stands at any of the 62 W1 submit tips; nothing to remove on those rows.
+
+- Openings run, 2026-10-14: the first 24 as-is rows of this slate (SOLR-4374 through SOLR-10492, in table order) were opened as draft PRs and are annotated inline on their rows. No holds: every branch tip matched the tip recorded here, and every prepared draft stood as written.
 
 ### Query parsing (16 rows)
 
