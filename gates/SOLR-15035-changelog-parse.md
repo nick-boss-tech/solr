@@ -18,3 +18,5 @@
 - [ ] changelog fragment parsed with a real YAML parser; result and title recorded here
 - [ ] logchangeLint run and recorded, or recorded as not run with the reason
 - [ ] receipt line added to receipts/SOLR-15035.md; job DONE
+
+- 2026-10-14T04:03ZZ vm2 gate backlog coordinator: DONE. Head 12d7491e82cd confirmed by ls-remote. Changelog YAML parsed with pyyaml (safe_load) OK; title: "Replicas created with ADDREPLICA now record numShards in core.properties, matching replicas created with the collection CREATE command." logchangeLint not run (parse only, as the job allows).
