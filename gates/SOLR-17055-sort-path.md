@@ -62,3 +62,13 @@ Changelog: keep the sentence in `changelog/unreleased/SOLR-17055-knn-topk-distri
 - Step 3 therefore does not apply: the list holds more than 3 documents with a sort, so the gap shows in practice. The premise assertions I added after the helper call were not reached, because the helper failed first; the evidence is the helper's comparison.
 - Log: logs/vm2/17055-premise.log; queue log logs/vm2/queue-g17055-premise-gate-*.out.
 - Fix (steps 2 and 3 onward): not started. Waiting on a decision to proceed.
+
+## Fix gate result (2026-10-14T11:55:19Z)
+
+- Fix commit: `2fe0986158391908ac89564090eb97e245788023` on `c2396f425fa2a67a40fea7afee341840c3896358`, in the detached worktree /workspace/gates/solr-17055-fix. Not pushed to the fork.
+- Gate log: logs/vm2/queue-g17055-gate-20261014T113414Z.out (GATE END 11:54:13Z).
+- Fix: score-only merge unchanged. For a knn request with a sort, shard docs are collected, sorted by score, the top topK are kept, and only those are ordered by the requested sort and windowed by start and rows. The shard request also asks for scores for a knn query, and the merged max score is suppressed when the request did not ask for scores.
+- Results: changelog rc 0, spotless rc 0, tree clean, compile with Error Prone rc 0, DistributedKnnTopKTest 1 of 1, 0 failures at the head, module check `:solr:core:check -x test` rc 0.
+- Fail-before at the job's base 97d973814336: rc 1, failing at the score-only assertion (`.response.numFound:9!=3`, test line 57). The base has no knn topK handling in QueryComponent, so the sort assertion is not reached there. The fail-before is therefore not established for the sort assertion at this base.
+- Not GREEN by the coordinator rule (a run has a nonzero rc). No fork push. Left for the main agent: choose a proof base for the fail-before, for example the parent `c2396f425fa2`, where the premise run already showed the sort assertion failing (list 9, expected 3).
+- Status: OPEN until the main agent rules on the fail-before base. Not DONE.
