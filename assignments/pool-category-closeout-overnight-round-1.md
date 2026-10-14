@@ -64,3 +64,14 @@ Tomas's own words, for the check: 2026-10-13T09:16:49Z, the latch changes are an
 Work: read `TestCoordinatorRole` at head `7ab3c03a1c` in full. For each dwell duration, name what event could end it and whether ending it on a signal keeps the test's meaning (the dwell exists so a replica experiences downtime and a phase completes; a latch fired by the phase's own last action is a different claim than a latch fired by a timer). For each poll-loop sleep, check whether it is pacing on an observed value or is a fixed wait in disguise. Then judge the draft's two reasons against those findings: a reason that does not survive is cut or rewritten, not defended.
 
 Deliverable: `reports/pr5106-reply-review-round-2.md`, ending with either a revised reply draft in full text or a patch plan that converts more sleeps plus a shorter reply draft. Reply text follows the owner's voice rules: the AI header at the top, plain language, no internal process vocabulary, no em dashes, and never "we" for the owner plus agent. No posting; the owner approves the post himself.
+
+## Addendum (2026-10-13, census): W4 covers the full openings census
+
+The W4 starting records above name the close-out batch's categories. The openings census (`reports/openings-census-round-1.md`, posted with this addendum) has since classified every prepared branch on the fork: 263 branches not already open as PRs and not retired, of which 91 stand READY TO OPEN. The W1 lists' 30 READY drafts are inside that count, not the whole of it.
+
+W4 assembles the morning slates from the census, on these terms:
+
+- Every category in the census with READY TO OPEN rows gets a slate section: search components (19), query parsing (11), core admin (15), SolrJ (8), schema (7), replication and backup (6), build and docs (5), SolrCloud (4: SOLR-17680, SOLR-9155, SOLR-12651, SOLR-16437), streaming (4), configsets (4), CLI (7), security (1: SOLR-12161). Live tips are re-verified by ls-remote during assembly, per the W4 work above; where a tip has moved since the census, the row is re-checked against its receipt before it enters a slate.
+- Each slate also lists its category's non-ready rows in one line each (disposition and the named next step from the census), so the owner sees what is not proposed and why: the GATE OWED rows with their posted jobs, the REVIEW OWED rows with the census follow-up assignment that carries them (`assignments/pool-census-followup-*-round-1.md`), the HOLD rows with their holds, and the OWNER ITEM rows collected for his calls.
+- The packaging items named in the W4 work above stand, and the census adds none. The SOLR-18368 key choice is flagged at approval, as above.
+- Nothing in this addendum opens anything; it widens what the morning file assembles.
