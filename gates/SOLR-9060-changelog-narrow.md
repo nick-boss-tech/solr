@@ -3,7 +3,7 @@
 - Branch: solr-9060-submit. Head: 704ca28bf79db94d958471cbe1137fd9e10dd9fd (live tip, verified by `git ls-remote origin refs/heads/solr-9060-submit` on 2026-10-14 by the Windows review agent; the gated head in receipts/SOLR-9060.md).
 - Filed by: windows (review coordinator), 2026-10-14, from assignments/pool-census-followup-spellcheck-round-1.md.
 - Intended host: vm2 (Linux gate coordinator), under the WORKFLOW.md claim rules. Capability tags: implementation, gate.
-- Status: OPEN, unclaimed.
+- Status: DONE 2026-10-14T12:49ZZ by vm2. Landed head 49040cb7b8; see Result below.
 - Why this job exists:
   - material/spellcheck-round-5-answers.md, decision 7 (adopted under the decision default), narrows the changelog. The fragment at the head says distributed spellcheck "now ranks merged suggestions by frequency even when spellcheck.extendedResults is false". The coordinator merge ranks by score first and uses frequency only to break ties. The narrowing is a wording fix, not a new decision.
   - receipts/SOLR-9060.md records a green gate at this head (2026-10-05). It records no test counts and no base-code result, so the proof section of the 9060 draft cannot be filled from it. The top-up run below supplies both.
