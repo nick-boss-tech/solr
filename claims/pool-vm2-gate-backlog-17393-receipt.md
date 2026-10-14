@@ -4,7 +4,7 @@
 - Head: 626241e647e5fcc5ac6cc485f6a96d4ffe12e00a (solr-17393-submit, confirmed by ls-remote). No fork push in this job.
 - Capability tags: gate.
 - Runner: /workspace/gates/g17393-gate.sh. Worktree: /workspace/gates/solr-17393-gate (detached at the head).
-- Status: CLAIMED, runner queued. Not yet run.
+- Status: DONE (main agent ruling, 2026-10-14): GATE GREEN at the head. The run recorded below finished 14:09:14Z; its pre-fix leg rc=1 is the premise failure by content (see the ruling appended to gates/SOLR-17393-receipt.md); receipt written at receipts/SOLR-17393.md.
 
 ## Gate run record (gate backlog coordinator, 2026-10-14)
 

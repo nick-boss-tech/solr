@@ -1,7 +1,7 @@
 # Gate job: SOLR-17393 receipt at the reviewed head
 
 - Branch: solr-17393-submit. Head: `626241e647e5fcc5ac6cc485f6a96d4ffe12e00a` (live tip, `git ls-remote origin refs/heads/solr-17393-submit`, checked 2026-10-14).
-- Status: OPEN, unclaimed. Written by the windows review coordinator (round 5, slice S3).
+- Status: DONE (main agent ruling, 2026-10-14): GATE GREEN at the head; receipt written at receipts/SOLR-17393.md. Written by the windows review coordinator (round 5, slice S3).
 - Capability tags: gate.
 - Intended host: a Linux host with the gate toolchain (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Why: the baseline result at this head is recorded on the main side (`material/suggester-draft-round-answers.md`, item B, 2026-10-09; log `g17393-gate.log`), but `receipts/SOLR-17393.md` is not on this branch. Under the date rule in `reports/draft-date-flags-round-1.md`, the draft's Proof carries counts and head but no verification date until a receipt file exists.
@@ -21,14 +21,18 @@
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] record written from `g17393-gate.log`, or steps 3 to 8 run
-- [ ] pre-fix observed failure recorded (step 5)
-- [ ] focused counts and date recorded (step 6)
-- [ ] receipt written at the head; job DONE
+- [x] head confirmed by ls-remote
+- [x] record written from `g17393-gate.log`, or steps 3 to 8 run
+- [x] pre-fix observed failure recorded (step 5)
+- [x] focused counts and date recorded (step 6)
+- [x] receipt written at the head; job DONE
 
 On DONE, the review coordinator restores the verification date in `pr-drafts/suggester/SOLR-17393.md` from the receipt.
 
 ## Coordinator run record (2026-10-14)
 
 - Gate run at 626241e647e5 ended 14:09:14Z. Pre-fix leg rc=1 as expected (merge-order assertion fails on base); head leg rc=0 with 15 tests, 0 failures; all other rc lines 0. Not GREEN under the all-rc-zero rule; left for the main agent, not relaunched. Status line unchanged.
+
+## Main agent ruling (2026-10-14)
+
+The hold vm2 left on this job is discharged. The pre-fix leg's rc=1 is the expected proof shape, not a gate failure: against base c3cdf7b46e8 with only the visibility of `merge` shimmed, SuggestComponentMergeTest.testEqualWeightsDoNotDependOnShardResponseOrder fails (1 failure) on the merge-order assertion, because base code keeps the first equal-weight candidate that arrives and so the kept set follows shard response order. The failure matches the premise by content; every head leg returned rc=0 (changelog, tidy, compile, focused runs at 15 tests with 0 failures, core check). An all-rc-zero rule misreads the gate, since the pre-fix leg runs on reverted production where failures are the pass condition. Gate stands GREEN at 626241e647e5fcc5ac6cc485f6a96d4ffe12e00a; the receipt is receipts/SOLR-17393.md.
