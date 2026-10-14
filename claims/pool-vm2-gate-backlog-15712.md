@@ -8,3 +8,5 @@ Runner path: /workspace/gates/g15712-gate.sh. Worktree: /workspace/gates/solr-15
 Started: 2026-10-14T13:03:00Z (UTC).
 
 Heartbeat: 2026-10-14T13:03:00Z.
+
+Status: GATE FAILED at head 2d65ed6329 (focused-head rc=1, 4 of 5 TestCollationFieldUDVAS tests failed). Recorded 2026-10-14T13:37Z in gates/SOLR-15712-udvas-version-gate.md. Not relaunched; left for the main agent.
