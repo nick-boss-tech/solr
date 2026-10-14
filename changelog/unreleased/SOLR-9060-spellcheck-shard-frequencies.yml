@@ -1,5 +1,5 @@
 title: >
-  Distributed spellcheck now ranks merged suggestions by frequency even when spellcheck.extendedResults is false, because shards always report frequencies to the coordinator.
+  Distributed spellcheck now uses frequency to break ties between equally close suggestions when spellcheck.extendedResults is false, because shards always report frequencies to the coordinator.
 type: fixed
 authors:
   - name: Nick Shanin
