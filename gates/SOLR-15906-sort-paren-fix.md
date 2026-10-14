@@ -4,7 +4,7 @@
 - Merge-base with upstream/main, as read on the review host: `e2cdb2d7e8ae0be4cf6cf0606206c67d89e7278f`. Confirm on the gate host before the run.
 - Intended host: a Linux gate host under the WORKFLOW.md claim rules. Windows never claims build work.
 - Capability tags: gate.
-- Status: OPEN, unclaimed. Reassigned to the Linux gate lane by the main side on 2026-10-14 (see the reassignment note below).
+- Status: DONE 2026-10-14T21:39Z by vm2. Fix head c23ee8912eb1442b90ff915673a79ad5ee49db66 (fast-forward from 50139a8e979cd33319a30317d9371ac0b9198e73); gate GREEN, all rc 0. Receipt section "Fix head gate" in receipts/SOLR-15906.md. The pr-drafts/query-parsing/SOLR-15906.md refresh is left for the main side.
 - Origin: query parsing review round, report `reports/query-parsing-round-1-q7.md`, findings 1 to 3. Re-read on the review host on 2026-10-14 against the live head by reading only. Nothing was built or run.
 - Timing: q7 note 5 left the run's timing to the owner. That hold is discharged by the reassignment note below: the run goes when a Linux gate lane claims this job.
 
