@@ -5,4 +5,4 @@
 - Capability tags: gate, implementation (title line only).
 - Runner: gates/g12608-title-gate.sh, worktree /workspace/gates/solr-12608-title (detached). Seed 12608C0FFEE12608.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED.
+- Status: DONE. Landed head c16d49d8417396a396c0bcedbe4305d406f98deb, gate GREEN 2026-10-14T04:26Z.

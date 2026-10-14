@@ -2,7 +2,7 @@
 
 - Branch: solr-12608-submit. Head: d1dd8a1f9f0aa17c6e34f8c5e40cb9768a83aea2 (live tip, verified by `git ls-remote` on 2026-10-13; receipt `receipts/SOLR-12608.md`, GATE GREEN at this head).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed. Posted 2026-10-13 by the main side (openings census, `reports/openings-census-round-1.md`).
+- Status: DONE. Landed head c16d49d8417396a396c0bcedbe4305d406f98deb (fast-forward from d1dd8a1f9f0aa17c6e34f8c5e40cb9768a83aea2), title is the G2 replacement wording, gate GREEN 2026-10-14T04:26Z. Receipt refreshed in `receipts/SOLR-12608.md`. Posted 2026-10-13 by the main side (openings census, `reports/openings-census-round-1.md`).
 - Capability tags: gate.
 - Job type: branch commit under the patch loop, then the full gate steps at the landed head. The claiming host makes the title commit and pushes it (the patching agent pushes), then gates the head it created.
 - Why owed: the query-parsing review (finding G2, decision D3 in `reports/query-parsing-review-summary.md`) found the branch changelog title claims a memory benefit the record does not show ("avoids the excessive memory use seen with edismax queries"). The draft's Limits already says the change claims no memory benefit, so the title and the draft disagree until the title is corrected on the branch. `reports/branch-review-verdicts-landing-round-1.md` records this as the item that keeps the ticket from opening.
@@ -22,11 +22,11 @@
 
 ## Step checklist
 
-- [ ] head confirmed by ls-remote and recorded here
-- [ ] title correction committed on solr-12608-submit and pushed; landed head recorded here
-- [ ] changelog YAML parse at the landed head
-- [ ] tidy clean on the landed tree
-- [ ] Error Prone compile passes
-- [ ] focused TestSolrQueryParser run counted from fresh JUnit XML, seed 12608C0FFEE12608
-- [ ] module check `:solr:core:check -x test` passes
-- [ ] receipt refreshed in receipts/SOLR-12608.md; job DONE
+- [x] head confirmed by ls-remote and recorded here
+- [x] title correction committed on solr-12608-submit and pushed; landed head recorded here
+- [x] changelog YAML parse at the landed head
+- [x] tidy clean on the landed tree
+- [x] Error Prone compile passes
+- [x] focused TestSolrQueryParser run counted from fresh JUnit XML, seed 12608C0FFEE12608
+- [x] module check `:solr:core:check -x test` passes
+- [x] receipt refreshed in receipts/SOLR-12608.md; job DONE
