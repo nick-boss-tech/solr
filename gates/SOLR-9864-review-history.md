@@ -3,7 +3,7 @@
 - Branch: solr-9864-submit. Head: `b5826e466b9a8664adf11e0f247cff220f2f5953` (live head of PR #5150, read 2026-10-14). The job applies to that head only.
 - Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
 - Filed by: the slice 6 review. The review did not push and did not commit.
-- Status: OPEN. Needs Nick's direction before any push.
+- Status: CLOSED 2026-10-14 by owner ruling (see Closure at the end of this file). Nick's direction arrived and it is the other way: the rewrite is cancelled and the branch stays as it stands. Not run, and not to be run.
 
 ## Finding answered
 
@@ -39,4 +39,8 @@ Because the tree is identical, the old-head results carry over only if the ident
 
 ## Note
 
-Combine this rewrite with the javadoc move in `gates/SOLR-9864-review-javadoc-placement.md` if Nick directs both, so the PR moves once.
+Combine this rewrite with the javadoc move in `gates/SOLR-9864-review-javadoc-placement.md` if Nick directs both, so the PR moves once. (The javadoc move landed on its own at 176ed67491b5; the rewrite half is cancelled under the Closure below.)
+
+## Closure (owner ruling, 2026-10-14)
+
+CLOSED. Nick ruled on 2026-10-14 (~17:21 MDT) that this rewrite does not happen: "it seems like we should just keep what we have next time instead of rewriting, I guess the commits are not what matters but the final PR is." The branch keeps the add and remove pair (f7d6028ddde and b5826e466b9) in its history exactly as it stands; the javadoc-placement commit 176ed67491b50fef0669d629341ed05db4b2e700 that landed on top stays too, so the live head is 176ed67491b5 (verified by ls-remote 2026-10-14). No force push, no rebuild, no re-gate for history reasons. Standing form of the ruling: do not rewrite a branch's history for cosmetic commit-message defects; keep the branch and let the PR carry the content.
