@@ -30,3 +30,8 @@
 - [x] focused TestSolrQueryParser run counted from fresh JUnit XML, seed 12608C0FFEE12608
 - [x] module check `:solr:core:check -x test` passes
 - [x] receipt refreshed in receipts/SOLR-12608.md; job DONE
+
+
+## Landed head and result (vm2, 2026-10-14T04:51ZZ)
+
+Landed head c16d49d8417396a396c0bcedbe4305d406f98deb. Parse OK, tidy clean, compile rc=0, focused 38 of 38, module check rc=0. DONE.
