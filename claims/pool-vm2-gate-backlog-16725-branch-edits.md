@@ -7,4 +7,4 @@
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED, runner queued.
 
-- 2026-10-14T21:24ZZ vm2 gate backlog coordinator: DONE. Top-up gate green at  (7 of 7, 1 pre-existing skip).
+- 2026-10-14T21:24ZZ vm2 gate backlog coordinator: DONE. Top-up gate green at 550af283134e (7 of 7, 1 pre-existing skip).

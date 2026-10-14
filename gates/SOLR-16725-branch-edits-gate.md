@@ -3,7 +3,7 @@
 - Branch: solr-16725-submit. Head: fc5c54770cb8c22c968c0ab6234ff0e1286190cb (live tip, verified by `git ls-remote origin refs/heads/solr-16725-submit` on 2026-10-14 after the push).
 - Previous head: be1838ef8ccf21a21938a9669d418abeec66e29d (receipt `receipts/SOLR-16725.md`, GATE GREEN at this head).
 - Base: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d (merge-base with `upstream/main`, unchanged by the edit commit; confirm with `git merge-base` at claim time).
-- Status: DONE 2026-10-14T21:24ZZ by vm2 (gate green at fc5c54770cb8). Filed 2026-10-14 by the windows review coordinator (assignment `assignments/pool-vm2-open-items-handoff-round-1.md`, item 4). Windows runs no builds or tests; this job is for vm2 or any capable Linux host under the WORKFLOW.md claim rules.
+- Status: DONE 2026-10-14T21:24ZZ by vm2 (gate green at 550af283134e). Filed 2026-10-14 by the windows review coordinator (assignment `assignments/pool-vm2-open-items-handoff-round-1.md`, item 4). Windows runs no builds or tests; this job is for vm2 or any capable Linux host under the WORKFLOW.md claim rules.
 - Capability tags: gate.
 - Job type: top-up gate at the moved head. The two recorded branch edits are already committed and pushed; this job does not edit the branch unless the tidy step in gate step 2 changes a file (see step 2).
 - Parent job: `gates/SOLR-16725-branch-edits-topup-gate.md`, which records the wording before and after. That file's step 2 (edits applied and pushed) is done at this head; its tidy run is not.
