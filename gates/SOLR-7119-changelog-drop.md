@@ -24,3 +24,8 @@
 
 - The reviewer re-reads pr-drafts/build-docs/SOLR-7119.md against the new head: remove the Changelog line, and confirm the Proof and the Limits still match the receipt.
 - Nothing here opens, flips, posts, comments on or edits a PR.
+
+
+## Result (vm2, 2026-10-14T14:42ZZ)
+
+Packaged head af336af5ab8aa03b95cc6ecf0fde565ef305ca12 (fragment deleted, one commit on 4c652c93b9). Push fast-forward rc 0. logchangeLint rc 0 (logs/vm2/7119-lint.log, GATE END 2026-10-14T13:47:14Z). Docs build inherited from 4c652c93 (not rerun), per step 4.
