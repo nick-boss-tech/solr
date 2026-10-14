@@ -4,7 +4,7 @@
 - Module: `:solr:core`. Test: `org.apache.solr.cloud.FullSolrCloudDistribCmdsTest#testRTGCompositeRouterWithRouterField`. Run this one method only.
 - Intended host: any Linux host with the `premise-run` tag (WORKFLOW.md). Windows never claims this.
 - Filed by the review lane on 2026-10-14 from the census round 1 follow-up (search components drafts). No code change, no commit, no push, no receipt write.
-- Status: OPEN.
+- Status: RUN, head failed (rc=1); result left for the main agent, not relaunched, not DONE.
 
 ## Why this run is owed
 
@@ -35,4 +35,9 @@ The owner decision recorded in `reports/search-components-2.md` (decision 1) say
 
 ## Result
 
-(empty until the run)
+Run 2026-10-14 (log `gates/logs/vm2/queue-g8954-gate-20261014T100614Z.out`, runner `gates/g8954-gate.sh`), one method per run, worktree tree clean after each run.
+
+- Head `1d981abe7000`: rc=1. `FullSolrCloudDistribCmdsTest` tests=1 failures=1 errors=0. Failure message `java.lang.AssertionError: expected:<0> but was:<1>`. Seed `15942F994B64B75C`. The stack line was not captured: the base run overwrote the JUnit XML before it was read, so the line is open. The job's expected line is 300-301.
+- Base `e432df19c4a5`: rc=0. tests=1 failures=0 errors=0 (passes, as expected).
+
+Reading: the head fails the assertion that the real-time get returns 0 documents, and the base passes it. The failing assertion matches the job's reading of the head. The owner decision for this ticket (`reports/search-components-2.md`, decision 1) is unchanged by this run. Not relaunched; the failure is for the main agent to decide on.
