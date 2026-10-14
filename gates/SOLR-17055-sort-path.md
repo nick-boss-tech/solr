@@ -47,3 +47,9 @@ Changelog: keep the sentence in `changelog/unreleased/SOLR-17055-knn-topk-distri
 - [ ] fail-before result at 97d973814336 recorded
 - [ ] module check recorded
 - [ ] pushed plainly; receipt refreshed; draft links re-pointed and Limits rewritten; job DONE
+
+## Premise run result (2026-10-14)
+
+- Run: logs/vm2/queue-g17055-premise-gate-20261014T101544Z.out at head `c2396f425fa2a67a40fea7afee341840c3896358`, seed `17055C0FFEE17055`, ended 2026-10-14T10:24:36Z.
+- Observed: the sort-case query (`rows=20`, `sort=id asc`) failed at the control-versus-distributed comparison with `.response.size():9!=3`. The distributed response holds 9 documents; the single-node control holds 3. The comparison fails before the `numFound` assertion, so `numFound` was not captured in this run.
+- Premise rc=1, the expected outcome if the gap is real. The list holds more than 3 documents, so the gap is real and the fix stage proceeds.
