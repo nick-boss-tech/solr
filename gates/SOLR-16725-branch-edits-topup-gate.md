@@ -19,10 +19,23 @@
   6. Module check: `:solr:core:check -x test`. After the gate, check `git status` on the gate tree (with `gradle/libs.versions.toml` restored): if tidy modified anything, the run is GATE INVALID; record it as such and stop.
 - On completion: this file gets the moved head, the gate results and a DONE mark. The gating host refreshes `receipts/SOLR-16725.md` with the moved head, the counts, the seed and the date, and notes that the two round 2 edits have landed. The review side then re-points the draft's head citations in `pr-drafts/core-admin/SOLR-16725.md` in its next round.
 
+## Edits landed (review round 1 handoff, 2026-10-14)
+
+- Moved head: `fc5c54770cb8c22c968c0ab6234ff0e1286190cb` (one commit, author Nick Shanin, no trailers), a plain fast-forward from `be1838ef8ccf21a21938a9669d418abeec66e29d` via `research/push-fork-ff.ps1`. Verified by `git ls-remote` after the push.
+- Edit 1, raw-request test comment (`LocalFSCloudIncrementalBackupTest.java`, above the raw `GenericSolrRequest` at line 124).
+  - Before: no comment.
+  - After: `// Raw request so replicationFactor is sent; the SolrJ create helper sends nrtReplicas.`
+- Edit 2, ClusterStatus javadoc (`ClusterStatus.java`, lines 337 to 340, the `normalizeCollectionCountTypes` javadoc; four lines before and after).
+  - Before: "Reports the replica count properties as strings. Collections created through CREATE store them as strings and restored collections as numbers, so without this a client sees both types."
+  - After: "Reports the replica count properties as strings. Some collections, such as restored ones, store them as numbers, so without this a client can see both types."
+- Code basis is in the new job file, `gates/SOLR-16725-branch-edits-gate.md`, which is the top-up gate at this head. Tidy was not run on Windows; that gate's step 2 runs it.
+- Wording source: the k6 report (`reports/core-admin-round-1-k6.md`, NOTE 3 and NOTE 4) and the round 1 answers (`material/core-admin-round-1-answers.md`) record the two edits as owed. The NOTE 4 replacement text is quoted there; the NOTE 3 text is drafted from the code.
+- Correction to this job: the focused class line and gate step 5 name `org.apache.solr.handler.admin.LocalFSCloudIncrementalBackupTest`, but the test lives in package `org.apache.solr.cloud.api.collections`. The FQCN is `org.apache.solr.cloud.api.collections.LocalFSCloudIncrementalBackupTest`.
+
 ## Step checklist
 
 - [ ] head confirmed by ls-remote and recorded here
-- [ ] both recorded edits applied, tidy run on the final tree, commits pushed; moved head recorded here
+- [ ] both recorded edits applied, tidy run on the final tree, commits pushed; moved head recorded here (edits and push done at `fc5c54770cb8`; tidy still owed, see the section below)
 - [ ] changelog YAML parse at the moved head
 - [ ] Error Prone compile passes
 - [ ] focused LocalFSCloudIncrementalBackupTest run counted from fresh JUnit XML, seed 16725C0FFEE16725

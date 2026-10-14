@@ -14,4 +14,4 @@
 - Limits: no PR opened, closed, flipped or commented on; no live PR body edited; no Jira or email; no force-push; fork pushes only where the assignment names one, as plain fast-forwards through `push-fork-ff.ps1`; nothing posted.
 - Staffing: three subagents. Each may write only the files its items name, and gate job files under `gates/`.
 - Heartbeat: 2026-10-14T20:37Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE (2026-10-14), partially. Deliverable: `reports/vm2-open-items-handoff-round-1.md`. Pushed: item 1 (SOLR-17055, `2d154d1a402`, owner choice needed against vm2's `2fe0986158`) and item 4 (SOLR-16725, `fc5c54770cb`, untidied). Verified, nothing pushed: item 5. Read only: item 6 (SOLR-8628 claim stale). Not done: items 2 and 3 (refused by the classifier; no patch applied, nothing pushed).
