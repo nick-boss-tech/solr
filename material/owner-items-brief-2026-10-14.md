@@ -16,6 +16,8 @@ On each option: pose it (open as drafted) and the code, tests and gate stand unt
 
 Recommendation: open SOLR-12505 with the Choice posed exactly as drafted; the change keeps defType=lucene, and the terms parser stays a live alternative for the maintainer to pick in review.
 
+**Ruling (2026-10-14, under Nick's decision-routing instruction): DECIDED as recommended.** The draft's Choice section was verified on 2026-10-14: it poses defType=lucene as the implemented position against the terms parser. Staged ready to open; the opening itself still needs Nick's explicit approval.
+
 ### 1b. The Unicode whitespace decision
 
 The decision: how wide the join-name check is. Today the check rejects ASCII whitespace only (a Java `\s` pattern in `FetchStream`). The local-params reader it defends against splits on `Character.isWhitespace` (QueryParsing line 136), which also covers Unicode spaces such as U+2003 and U+3000. A join field name containing one of those passes the check and still breaks the batch the same way an ASCII space does; the draft's Limits admit this.
@@ -36,6 +38,8 @@ On each option: close the hold and the draft stands unchanged. Keep the hold and
 
 Recommendation: close this hold; the attributions verify against live Jira (assignee Eric Pugh; Bernstein proposed setting defType and Smiley agreed in comment 16519637; Smiley suggested the terms parser), so the draft stands as written.
 
+**Ruling (2026-10-14, under Nick's decision-routing instruction): DECIDED as recommended.** The attributions hold is CLOSED; no action, the draft stands as written.
+
 ## 2. SOLR-18368: the key choice
 
 The decision: under what Jira key the PR opens. The ticket is Resolved/Fixed in Jira (verified 2026-10-14): the removal it asked for (`CloudSolrClient.Builder.withInternalClientBuilder`) already landed upstream in PR #4782. What remains is only a reference-guide page whose example cannot compile; the branch fixes three lines in that one page and changes no code. Records: `receipts/SOLR-18368.md`, `reports/security-round-1.md` (owner options), `pr-drafts/security/SOLR-18368.md`.
@@ -48,6 +52,8 @@ On each option: (a) the PR stands on its own with the upstream change cited; if 
 
 Recommendation: open under option (a): no SOLR-18368 key in the title, the Jira link line deleted from the body, and upstream PR #4782 cited as the change that made the page wrong; the ticket is Resolved/Fixed and the fix is documentation only.
 
+**Ruling (2026-10-14, under Nick's decision-routing instruction): DECIDED as recommended, option (a).** The draft was verified against option (a)'s shape on 2026-10-14: it cites PR #4782 and commit 3ef3d093c06, and the Jira link line at the top of the body was deleted (the one fix the draft needed). At opening, the PR title carries no SOLR-18368 key. Staged ready to open; the opening itself still needs Nick's explicit approval.
+
 ## 3. SOLR-18339: opening timing
 
 The decision: open the gated branch now, or wait. The branch (gated green at `47e53884609c`, BATS 11 of 11 with both new tests failing on base) ports the bin/solr start wait to StatusTool. The ticket's own text sets a precondition: port bin/solr "once that has been live in 10.1 for some time", meaning SOLR-18336's StatusTool improvement for solr.cmd. Checked on 2026-10-14: SOLR-18336 is still Open in Jira, has no fix version, and no commit on main carries its key. The precondition is not met on its face. The draft's secured-node Choice (the status wait sends no credentials, so a secured node answering 401 reads as a failed start) is already posed in the draft and needs no ruling to open. Records: `receipts/SOLR-18339.md`, `pr-drafts/cli/SOLR-18339.md`.
@@ -57,6 +63,8 @@ Standing rules: openings come to you as slates and open as drafts; nothing in th
 On each option: open now (as a draft) and review can start, but a maintainer can reasonably park or close it as premature against the ticket's own words, and a long-open draft will need rebasing later. Wait, and nothing is lost: the branch stays gated and banked, and it opens when SOLR-18336 has shipped and been live for a while, as the ticket asks.
 
 Recommendation: hold the opening until SOLR-18336 has actually landed and been in a release for a while, exactly as the ticket's own text preconditions it; the branch stays gated and banked, and the secured-node Choice is already posed in the draft for whenever it opens.
+
+**Ruling (2026-10-14, under Nick's decision-routing instruction): DECIDED as recommended.** The opening is HELD until SOLR-18336 has landed and been in a release for a while. No lane opens this branch before that condition is met; the branch stays gated and banked. The hold is also recorded on the branch's row in `reports/morning-openings-slates-2026-10-14.md`.
 
 ## 4. SOLR-17752: rebase direction
 
@@ -68,6 +76,8 @@ On each option: open as-is and the PR shows the same three-file diff it would sh
 
 Recommendation: open against the current head as-is, with no rebase; the PR diff against current main is the same three files either way, no upstream commit has touched them since the branch base, and a rebase would rewrite a published, gated branch and force a full re-gate for no visible gain. Rebase later only if a maintainer asks.
 
+**Ruling (2026-10-14, under Nick's decision-routing instruction): DECIDED as recommended.** The branch opens as-is at e5c0a64f993c, no rebase. This ruling supersedes the earlier adopted rebase recommendation in the build-docs records: `gates/SOLR-17752-base-rebase-rerun.md` is superseded and must not run. Staged ready to open; the opening itself still needs Nick's explicit approval.
+
 ## 5. SOLR-9598: the standing owner hold
 
 The decision: lift the hold and let the branch open, or keep holding it. The branch (gated green at `c8407773f76c`) makes RESTORE wait until the restored collection's replicas are active before returning, controlled by `waitForFinalState`, defaulting to true with an opt-out. The hold guards one call: that default. The draft already poses it as a three-way Choice (wait by default with opt-out, as implemented; always wait, the direction SOLR-17712 is taking other commands; or no default wait, as CREATE does today), and the recorded recommendation in the replication answers is option 1, the implemented one. The draft's proof is timing-dependent and says so plainly (the base failure showed in one of five runs). Records: `receipts/SOLR-9598.md`, `material/replication-backup-round-1-answers.md`, `pr-drafts/replication-backup/SOLR-9598.md`.
@@ -77,6 +87,8 @@ Standing rules: a genuine choice between defensible behaviors is posed in the PR
 On each option: lift the hold and the OWNER NOTE header comes off the draft, the branch joins the replication slate and opens as a draft with the Choice posed, and the adopted landing order (9598 before SOLR-12651; both change RestoreCmd.java and trial-merge cleanly) can proceed. Keep the hold and the branch stays banked; the default question stays unanswered in the one place designed to answer it, in front of maintainers, and 12651's landing order stays blocked behind it.
 
 Recommendation: lift the hold and open with the default posed as the draft's Choice; wait-by-default with an opt-out is implemented and recommended in the records, the Choice structure is exactly how your rules handle a genuine behavior default, and lifting it also unblocks the adopted landing order (9598 before SOLR-12651).
+
+**Ruling (2026-10-14, under Nick's decision-routing instruction): DECIDED as recommended.** The hold is LIFTED. The draft was verified on 2026-10-14: it carries the three-way Choice with wait-by-default (option 1) as the implemented position, and it carries no OWNER NOTE header in its current text. Staged ready to open; the opening itself still needs Nick's explicit approval. The adopted landing order (9598 before SOLR-12651) can proceed once it opens.
 
 ## 6. PR #5010 (SOLR-12998): the CI paragraph, keep or cut
 
@@ -89,3 +101,5 @@ Does the paragraph overclaim? No. It is about a CI failure on the PR, a differen
 On each option: keep it and a reviewer who sees the red CI result finds the explanation and its evidence in the body. Cut it and the PR carries an unexplained CI failure that reviewers will ask about, with the answer only in internal records.
 
 Recommendation: keep the CI paragraph; every claim in it is backed by the round 29 record (seed-pinned runs on both trees and the code check that user-managed replication never sends REQUESTRECOVERY), it does not touch the settled proof question, and cutting it would leave a red CI result on the PR with no explanation.
+
+**Ruling (2026-10-14, under Nick's decision-routing instruction): DECIDED as recommended.** The CI paragraph in PR #5010's body is KEPT; no edit is made.

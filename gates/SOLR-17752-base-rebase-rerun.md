@@ -1,4 +1,6 @@
-# Gate job: SOLR-17752 rebase onto current upstream main and focused rerun (HELD: owner item)
+# Gate job: SOLR-17752 rebase onto current upstream main and focused rerun (SUPERSEDED 2026-10-14: do not run)
+
+- SUPERSEDED by the owner brief ruling of 2026-10-14 (Nick's decision-routing instruction; `material/owner-items-brief-2026-10-14.md`, item 4): SOLR-17752 opens as-is at e5c0a64f993c with NO rebase. The rebase direction this job waits on was ruled the other way. Do not claim or run this job.
 
 - Branch: solr-17752-submit. Head: e5c0a64f993c7ce5e9a594f5a6eb0679925e9de9 (live tip, verified by `git ls-remote origin refs/heads/solr-17752-submit` on 2026-10-13; the gated head in receipts/SOLR-17752.md, gate green at this head on 2026-10-04).
 - Current merge-base with upstream main: 56ec140e3636d5f4150fa87fbf7103529536ac99. The receipt's proof leg ran at 14c7aac0d151402b00259e2fb9bf5eed7049ec5d, which is neither the merge-base nor current main. That is why the rerun is owed.
