@@ -2,7 +2,7 @@
 
 - Branch: solr-3923-submit. Head: `723f61ee4ab7438220193db0c39dad32601dfe07` (live tip per the reviewer's ls-remote on 2026-10-14; matches `receipts/SOLR-3923.md`).
 - Base: `cabedd1d968059215188f4e7563fb303241899ed` (merge-base with `upstream/main`, computed by the reviewer from the local `upstream/main` ref on 2026-10-14). The claiming host confirms it after a fresh fetch.
-- Status: OPEN. Not run. Filed 2026-10-14 by the review lane (windows), for vm2. Anyone with the premise-run capability may claim it under the WORKFLOW.md rules.
+- Status: OPEN. Run executed 2026-10-14 (13:36:44Z to 13:43:04Z); result recorded in the run record below. Receipt base-run section and DONE are left for the main agent. Filed 2026-10-14 by the review lane (windows), for vm2. Anyone with the premise-run capability may claim it under the WORKFLOW.md rules.
 - Capability tags: `premise-run`. Intended host: vm2. Any capable Linux host may claim it if vm2 is busy.
 - Job type: one focused run on the base production code, with the branch's test file overlaid. No code change, no push.
 
@@ -36,8 +36,16 @@ If the failure is in any other test or check, record the test, check, seed and m
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] base confirmed by merge-base
-- [ ] base run with the head test file overlaid: JUnit XML counts, seed and date recorded
-- [ ] failing check and message recorded
+- [ ] head confirmed by ls-remote (not confirmed by the run; main agent to confirm)
+- [ ] base confirmed by merge-base (not confirmed by the run; main agent to confirm)
+- [x] base run with the head test file overlaid: JUnit XML counts, seed and date recorded
+- [x] failing check and message recorded
 - [ ] receipt base-run section added; job DONE
+
+## Run record (2026-10-14)
+
+- Overlay: `TestExtendedDismaxParser.java` only, 12 insertions, per step 3.
+- Command: focused `:solr:core:test --tests org.apache.solr.search.TestExtendedDismaxParser` with seed `3923C0FFEE3923`, base `cabedd1d968059215188f4e7563fb303241899ed`, log `/workspace/gates/logs/vm2/3923-base.log`.
+- Counts from the JUnit XML: tests 39, failures 1, errors 0, skipped 0.
+- Failing test: `testPfPs`. Check (a) failed: `//str[@name='parsedquery'][contains(.,'phrase_sw:"zzzz xxxx"')]`. The base parsed query for `q=(+id:s0+)+(zzzz+xxxx)&qf=phrase_sw&pf=phrase_sw^10&defType=edismax` is `DisjunctionMaxQuery(((phrase_sw:"? ? zzzz xxxx")^10.0))`, so the lone parenthesis reaches the phrase text as `?` characters. Check (b) was not reached.
+- This matches the expected result above. Not rerun.
