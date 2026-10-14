@@ -18,20 +18,24 @@ Evidence: solr/core/src/java/org/apache/solr/search/QueryLimits.java shouldExit(
 
 ## Gate steps
 
-- [ ] claim recorded under claims/ (WORKFLOW.md)
-- [ ] changelog YAML parse with a real YAML parser on the gate host (the file is a folded scalar title, type fixed, one author, one link)
-- [ ] tidy with a clean tree afterwards (restore the versions file if tidy touches it)
-- [ ] Error Prone compile: :solr:core:compileJava and :solr:core:compileTestJava
-- [ ] pre-fix proof legs, counted from fresh JUnit XML after cleanTest:
-  - premise leg at 97d973814336 with the branch test file: TestQueryLimits runs 4, exactly 1 failure, testPivotFacetTruncatesWhenLimitsTrip
+- [x] claim recorded under claims/ (WORKFLOW.md): claims/pool-vm1-gate-6831-review-changelog-limits.md (vm1)
+- [x] changelog YAML parse with a real YAML parser on the gate host: passes
+- [x] tidy with a clean tree afterwards: rc=0, tree unchanged, versions file restored
+- [x] Error Prone compile: :solr:core:compileJava and :solr:core:compileTestJava, rc=0
+- [x] pre-fix proof legs, counted from fresh JUnit XML after cleanTest:
+  - premise leg at 97d973814336 with the branch test file: TestQueryLimits runs 4, exactly 1 failure, testPivotFacetTruncatesWhenLimitsTrip (verified by content)
   - head leg at the new head: TestQueryLimits runs 4, 0 failures
-  (No Java changes, so the premise leg should match the existing receipt; run it anyway, the gate shape requires it.)
-- [ ] focused test class at the new head: org.apache.solr.search.TestQueryLimits
-- [ ] module check: :solr:core:check -x test
-- [ ] push with the fork lease, pinned to the old tip: .\research\push-fork-lease.ps1 -Worktree '<ticket worktree>' -Branch 'solr-6831-submit' -ExpectedSha '96b33ba5f6f834038e570d0b93f8684dc887fbe8'; verify with ls-remote. Never push to apache/solr.
+- [x] focused test class at the new head: org.apache.solr.search.TestQueryLimits, 4 of 4 (seed 6831C0FFEE6831)
+- [x] module check: :solr:core:check -x test, rc=0
+- [x] push with the fork lease, pinned to the old tip (Linux equivalent run by vm1: git push --force-with-lease=solr-6831-submit:96b33ba5f6f8...): pushed 24bd15ebb84e6ae4ecd97dd62f07e86250d694ed, verified with ls-remote.
 
 ## On green
 
 - Record the new head SHA here and in receipts/SOLR-6831.md (new top section).
 - The head moves, so every blob link in the PR #5134 body that points at 96b33ba5f6f8 (including the changelog link and the TestQueryLimits link) must be re-pointed to the new head SHA, then read back. The PR body is not changed by the gate lane; the description edit is a separate step.
 - Re-review PR #5134 at the new head. No ready flip; the PR stays a draft.
+
+## Completion (vm1, 2026-10-14)
+
+- Status: DONE. GATE GREEN at 24bd15ebb84e6ae4ecd97dd62f07e86250d694ed. Receipt: receipts/SOLR-6831.md (new top section). Claim: claims/pool-vm1-gate-6831-review-changelog-limits.md, DONE.
+- Re-review at the new head done as a verification read (head, draft state, three-file diff, title). Still OWED as the separate step this file names: re-point the PR #5134 body's blob links from 96b33ba5f6f8 to 24bd15ebb84e6ae4ecd97dd62f07e86250d694ed (changelog link and TestQueryLimits link included) and read the body back.
