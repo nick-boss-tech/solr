@@ -1,4 +1,4 @@
-title: A failed bin/solr package install, for example because of a signature error, now removes the files it already uploaded to the package store, so the install can be retried and uninstall no longer refuses
+title: A failed bin/solr package install now removes the files it posted, unless the version may already be registered, so a retry is not blocked by leftover files.
 type: fixed
 authors:
   - name: Nick Shanin
