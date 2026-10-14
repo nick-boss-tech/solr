@@ -1,4 +1,4 @@
-title: Grouping counts (matches, ngroups and the simple-format numFound) are now long values, so distributed grouping over more than Integer.MAX_VALUE documents no longer overflows. Shard responses carry the counts as Integer whenever they fit, so a previous-version coordinator keeps working during a rolling upgrade; SolrJ GroupCommand getMatches and getNGroups now return long and Long
+title: Distributed grouped counts are now long values, so grouped searches over more than Integer.MAX_VALUE matching documents no longer overflow. Shards send an Integer whenever a count fits, so an older coordinator keeps working for those counts. SolrJ GroupCommand getMatches() now returns long and getNGroups() returns Long.
 type: fixed
 authors:
   - name: Nick Shanin
