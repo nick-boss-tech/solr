@@ -335,8 +335,8 @@ public class ClusterStatus {
   }
 
   /**
-   * Reports the replica count properties as strings. Some collections, such as restored ones,
-   * store them as numbers, so without this a client can see both types.
+   * Reports the replica count properties as strings. Some collections, such as restored ones, store
+   * them as numbers, so without this a client can see both types.
    */
   private static void normalizeCollectionCountTypes(Map<String, Object> collectionStatus) {
     for (String prop :
