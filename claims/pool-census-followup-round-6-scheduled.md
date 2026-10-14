@@ -14,4 +14,4 @@
 - Decision rule: scope questions under the decision default and the three-rung ladder; each decision recorded in the round report.
 - Deliverable: `reports/census-followup-scheduled-round-6.md`, one line per ticket, plus the slate spot-check discrepancies.
 - Heartbeat: 2026-10-14T14:37Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE (2026-10-14). Deliverable: `reports/census-followup-scheduled-round-6.md`. Settlements: SOLR-7119 and 11356 SATISFIED; SOLR-17215, 17393, 15712 and 17055 HOLD. Slate spot-check: 7 of 8 rows match; SOLR-6759 is a discrepancy (held by the receipt-refresh round 2) and SOLR-7390 has a Proof-date discrepancy. No gate jobs filed.
