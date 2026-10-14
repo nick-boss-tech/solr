@@ -929,6 +929,9 @@ public class ZkController implements Closeable {
           log.error("Error closing zkStateReader", e);
         }
       } finally {
+        // Fold in an interrupt that landed during the state reader close as well, so the
+        // client close below also never runs on an interrupted thread.
+        interrupted |= Thread.interrupted();
         try {
           zkClient.close();
         } catch (Exception e) {
