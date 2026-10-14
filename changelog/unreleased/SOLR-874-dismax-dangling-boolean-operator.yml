@@ -1,4 +1,4 @@
-title: "dismax: a trailing or leading AND/OR/NOT/&&/|| in the user query (for example q=ipod AND) is dropped instead of causing a parse error"
+title: "dismax: a trailing AND, OR, NOT, && or || and a leading AND, OR, && or || in the user query (for example q=ipod AND) is dropped instead of causing a parse error"
 type: fixed
 authors:
   - name: Nick Shanin
