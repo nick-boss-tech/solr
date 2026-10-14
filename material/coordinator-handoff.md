@@ -49,6 +49,16 @@ Extended by Nick on 2026-10-11. Either coordinator (VM2 for the gate lane, the W
 - Standing authorization from Nick (2026-10-14): pushes to Nick's own open PRs are always fine. No per-push owner yes is needed for a push to a branch that heads one of his open PRs, including packaged heads and patch-loop heads, under the push forms in the section above (plain for live PR branches, `--force-with-lease` for rebuilds).
 - This discharges the SOLR-11356 escalation recorded as E1 in `reports/solrj-convergence-round-2-response.md`: the packaged push to `6120dae28d04` stands confirmed by this rule, with no reversal.
 
+### Maintainer requests on our PRs
+
+Owner ruling (Nick, 2026-10-14). When a maintainer asks for a change on one of Nick's own PRs, the default is to implement it as asked, at the scope the request is written at.
+
+- Attempt the design before saying anything about whether it can be done. Feasibility is established by the attempt, never asserted in advance from a reading of the code.
+- A request is not narrowed or partially applied on the lane's own judgment. If the attempt shows the request is costly or inadvisable, that finding goes to Nick first, through the main agent, with the design and the cost in front of him. Whether to push back is Nick's call, not the lane's.
+- No reply that declines or narrows part of a request is drafted before the design exists, and no reply argues the reviewer out of a feasible request on our own initiative. Objections travel to the owner, not to the reviewer.
+
+The failure this corrects: a reviewer asked twice for all the sleeps in a test to be replaced with latches. The lane converted one sleep, replied with reasons the rest had to stay, and produced the full conversion design only when Nick pressed. The reasons given were the lane's preference presented as a constraint.
+
 ### Deciding scope questions
 
 - Either coordinator may decide a scope question under the decision default: a recorded recommendation is adopted; where no recommendation is on record, the harder and more thorough option is taken.

@@ -52,6 +52,7 @@ The Windows host never claims `gate`, `implementation`, `premise-run`, `settling
 
 - At most 6 to 7 subagents running at once in total, across all hosts combined. An assignment names its staffing; slices taken in parallel count toward the same total.
 - Public text follows `pr-formula.md`: plain language, no internal process vocabulary, proof numbers only from receipts or gate files.
+- Maintainer requests on our PRs are implemented at the scope written; feasibility is settled by attempting the design, and any objection goes to the owner before a reply is drafted (the maintainer requests section of `material/coordinator-handoff.md`).
 - No builds on the Windows host (above). No new Jira ticket unless a maintainer asks or Nick directs it.
 - Commit identity is Nick Shanin; no other name in authors, committers or trailers; no em dashes in authored text.
 
