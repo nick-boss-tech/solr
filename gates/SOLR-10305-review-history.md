@@ -36,3 +36,7 @@ Record the old and new SHA in the gate file. After the push, re-point the PR bod
 6. Module check: `:solr:core:check` for the test file's module passes, as the receipt's module check does.
 
 Because the tree is identical, the old-head results carry over only if the identity check passes. Record that check in the gate file.
+
+## Outcome, 2026-10-14
+
+The rewrite was executed under Nick's direction: branch rebuilt from the merge-base with the handoff doc pair dropped, tree byte-identical to the old head (see the ticket receipt for both heads and the tree hash), and the branch now stands at the rewritten head. During the run a malformed push deleted the fork branch and GitHub closed the PR; it refuses to reopen a PR whose head branch was recreated, so the PR stays closed and a replacement draft opening from the same branch awaits Nick's approval. This job's push and body steps are therefore complete in substance on a closed PR; no further action here.

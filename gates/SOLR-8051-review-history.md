@@ -24,3 +24,7 @@ The commit e50a2aa3437c is the final commit; the rebuild keeps its message and t
 ## Gate shape
 
 If the tree is identical, the re-gate record at e50a2aa3 still describes the content. Otherwise run the full shape: changelog YAML parse; tidy with the versions-file restore; Error Prone compile; pre-fix proof legs; focused ExactStatsCacheMergeTest counted from fresh JUnit XML; module check :solr:core.
+
+## Outcome, 2026-10-14
+
+The rewrite was executed under Nick's direction: branch rebuilt from the merge-base with the handoff doc pair dropped, tree byte-identical to the old head (see the ticket receipt for both heads and the tree hash), and the branch now stands at the rewritten head. During the run a malformed push deleted the fork branch and GitHub closed the PR; it refuses to reopen a PR whose head branch was recreated, so the PR stays closed and a replacement draft opening from the same branch awaits Nick's approval. This job's push and body steps are therefore complete in substance on a closed PR; no further action here.
