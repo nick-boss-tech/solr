@@ -11,4 +11,4 @@
 - Staffing: two subagents. Each may write only the draft file named above under `pr-drafts/`, and gate job files under `gates/` if needed. None pushes, opens a PR, moves a branch, or edits a receipt, a claim or a gate record.
 - Deliverable: `reports/census-followup-scheduled-round-8.md`, with one line per ticket and the SOLR-16630 chain review.
 - Heartbeat: 2026-10-14T18:37Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE (2026-10-14). Deliverable: `reports/census-followup-scheduled-round-8.md`. SOLR-16630 review: the live head `c9caf1e4b8` matches the fork, the live body names it, and the record still has four contradictions; the draft is stale. SOLR-3923: the premise check and parsed query are now in the draft, and the HOLD stays for the branch fix. No gate jobs filed.
