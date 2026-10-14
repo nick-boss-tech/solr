@@ -12,3 +12,4 @@
 ## Heartbeats
 
 - 2026-10-14T21:06:00Z claim recorded; worktree and patch prep under way.
+- 2026-10-14T21:22:00Z heartbeat: patch committed at c36cfc094af45ef3209f2eefa0aab7621407fae0 on 567efa9b78c3. Gate runner g8088-review-gate.sh finished: changelog parse rc=0, tidy rc=0 with a clean tree, Error Prone compile rc=0, focused run 2 of 2 from fresh XML (seed 8088C0FFEE8088), module check rc=0. The proof leg as first run never executed tests (runner setup defect: the cp into the base worktree failed because the test directory is new on the branch); a corrected proof leg (g8088-proof-fix.sh) is running once, per the rule for runs that never executed tests.
