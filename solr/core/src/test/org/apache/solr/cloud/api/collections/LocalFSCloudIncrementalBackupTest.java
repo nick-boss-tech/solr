@@ -121,6 +121,7 @@ public class LocalFSCloudIncrementalBackupTest extends AbstractIncrementalBackup
     createParams.set("collection.configName", "conf1");
     createParams.set("numShards", NUM_SHARDS);
     createParams.set("replicationFactor", 1);
+    // Raw request so replicationFactor is sent; the SolrJ create helper sends nrtReplicas.
     new GenericSolrRequest(METHOD.GET, "/admin/collections", SolrRequestType.ADMIN, createParams)
         .process(solrClient);
     AbstractFullDistribZkTestBase.waitForRecoveriesToFinish(
