@@ -6,3 +6,5 @@
 - Runner: gates/g13369-base-gate.sh, worktree /workspace/gates/solr-13369-base (detached). Seed 13369C0FFEE13369.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: CLAIMED, runner queued.
+
+- 2026-10-14T11:47ZZ vm2 gate backlog coordinator: DONE. Base run 1 of 1 green at c3cdf7b46e8c.

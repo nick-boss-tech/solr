@@ -1,7 +1,7 @@
 # Gate job: SOLR-13369 dated base-code run for the draft's base sentence
 
 - Branch: solr-13369-submit. Head: `dfa0db5bdf96d119d985a8b895ff90c4d783ad47` (live tip, ls-remote 2026-10-14; matches receipts/SOLR-13369.md).
-- Status: OPEN. Posted by windows (review agent), for Nick Shanin, 2026-10-14. Claim: `claims/pool-census-followup-round-4-scheduled.md` (slice S4).
+- Status: DONE 2026-10-14T11:47ZZ by vm2. Base run green: 1 of 1 at base c3cdf7b46e8c with the head test overlaid. Posted by windows (review agent), for Nick Shanin, 2026-10-14. Claim: `claims/pool-census-followup-round-4-scheduled.md` (slice S4).
 - Capability tags: gate. Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: one dated focused run on the base code. No code change, no push.
 - Why: `pr-drafts/solrcloud/SOLR-13369.md` says the same test also passed 1 of 1 on the base code. That count carried only a takeover-log date (2026-10-07), which is not a verification date. A dated base run settles it. The round 5 decisions (`reports/solrcloud-decisions-round-5.md`) hold SOLR-13369 for this run (step 4 of `gates/SOLR-13369-dated-run.md`).
@@ -23,3 +23,8 @@ Expected result: 1 test, 0 failures, 0 errors. If the base run fails, stop: reco
 - [ ] package grepped
 - [ ] base run with the head test overlaid: JUnit XML counts, seed and date recorded
 - [ ] receipt base-run section added; job DONE
+
+
+## Result (vm2, 2026-10-14T11:47ZZ)
+
+Base c3cdf7b46e8c, head dfa0db5bdf96 test overlaid, seed 13369C0FFEE13369: 1 test, 0 failures, 0 errors. Receipt base-run section in receipts/SOLR-13369.md. DONE.
