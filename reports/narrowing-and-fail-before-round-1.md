@@ -4,7 +4,9 @@ Trigger: pr-prepare tip `db023359b1e`. Two new records: the SOLR-18539 settling 
 
 Scope: patch and report files only. Nothing built, run or gated here. The owner allowed fork pushes; the one push this round needed was blocked by the push wrapper's branch rule (see section 1). No PR, comment or live body touched.
 
-## 1. SOLR-18539: the review patch narrowed to Option B (prepared, not pushed)
+## 1. SOLR-18539: the review patch narrowed to Option B (pushed, gated GREEN at the narrowed head)
+
+Update (2026-10-14, from `receipts/mergeids-fix.md`): the narrowed head `f9b0e5d722bed21ed99d453e6c7d1bf448bb07ff` is on `review-r1-solr-18539` (plain fast-forward from `fbf7610644d1`). vm2 gated it: focused `QueryComponentPartialResultsTest` 19 of 19, seed `18539C0FFEE18539`; fail-before legs 7 at the merge-base, 3 at the previous PR head, 2 at the pre-narrowing review head; module check rc=0. The PR #5115 branch `mergeids-skipped-shard-totals` was then moved to `f9b0e5d722` by plain push, verified by ls-remote; the PR stays a draft. The "unpushed" text below is the state before that update.
 
 - Patch: `gates/SOLR-18539-narrowing-round-1.patch`, against `review-r1-solr-18539` at `fbf7610644d178049e1110ffc0ec34dad8c5b32f`. It touches only `QueryComponent.java` and `QueryComponentPartialResultsTest.java`. A dry-run apply passes against a temporary index read from `fbf7610`. Read by hand: 68 changed lines.
 - Production: the unconditional `anyShardSkipped` guard becomes the Option B condition. A skipped shard that reported hits or an inexact count clears the merged `numFoundExact`. A skipped shard that reported an exact zero does not change it.
@@ -15,9 +17,7 @@ Scope: patch and report files only. Nothing built, run or gated here. The owner 
   - Kept at FALSE: `mergedNumFoundCountsOnlyMergedShards`, `skippedShardWithHitsMakesMergedCountInexact`, `allShardsSkippedDoesNotClaimExactZero`.
 - Gate job: `gates/SOLR-18539-narrowing-round-1-gate.md`, OPEN for vm2, nothing ticked. Expected by reading, not run: the merge-base fail-before fails 7 tests; the PR-head fail-before fails 3; the pre-narrowing head fails the 2 flipped TRUE tests; the focused run expects 19 tests and 0 failures.
 
-Blocked push: the fork push wrapper accepts only `review-<digits>-…` and `solr-<digits>-…` branch names. `review-r1-solr-18539` does not match. The earlier route 1 change on `review-r1-solr-18010` reached the fork by a route this round cannot see. I did not change the wrapper or use another route around its rule.
-
-Owner decision: how this branch should be pushed (a wrapper change, a different push, or a rename of the review branch), and then vm2 gates the head.
+Push route: at the time of this round, the fork push wrapper (`research\push-fork-ff.ps1`) accepted only `review-<digits>-…` and `solr-<digits>-…` branch names, so `review-r1-solr-18539` did not match. The owner's 2026-10-13 direction is that pushing is not blocked, and the push above was made as a plain fast-forward. The wrapper's branch rule is unchanged and still rejects `review-r<digits>-…` names. Whether to widen it is an owner call.
 
 ## 2. SOLR-18541: the two new tests are not a valid fail-before as the gate ran them
 
@@ -34,6 +34,6 @@ Test change: none recommended. The only fixture alternative (per-query flags set
 
 ## 3. Owner items
 
-1. The push route for `review-r1-solr-18539` (section 1).
-2. vm2 gates the narrowed head once it is pushed.
+1. The PR #5115 body rewrite against `f9b0e5d722` (section 1). Live body edits are allowed under the 2026-10-13 direction; the review coordinator's next slice carries it.
+2. The wrapper's branch rule (section 1): widen it to `review-r<digits>-solr-…`, or keep plain pushes for those names. Owner call.
 3. The fail-before re-run point and the WithoutHits expectation (section 2).

@@ -14,5 +14,5 @@ Scope: record housekeeping and a reading of the rulings against the review items
 
 ## Still open for the review lane
 
-- The SOLR-18539 narrowing patch: its push route is still the owner's call (the push wrapper's branch rule), and the gate is vm2's.
+- The SOLR-18539 narrowing patch: pushed to `review-r1-solr-18539` at `f9b0e5d722` and gated GREEN at that head by vm2 (`receipts/mergeids-fix.md`). The push route is no longer a blocker under the owner's 2026-10-13 direction. The PR body rewrite against the new head is the open step.
 - The SOLR-18541 fail-before decisions from `reports/narrowing-and-fail-before-round-1.md`: the re-run point and the WithoutHits expectation.
