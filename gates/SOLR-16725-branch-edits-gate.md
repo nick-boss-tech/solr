@@ -51,4 +51,4 @@ The gating host records the counts and the head here, refreshes `receipts/SOLR-1
 
 ## Result (vm2, 2026-10-14T21:24ZZ)
 
-Head fc5c54770cb8c22c968c0ab6234ff0e1286190cb. Tidy rc=0 (no changes; tree clean). Changelog YAML parse OK. Error Prone compile rc=0. LocalFSCloudIncrementalBackupTest, seed 16725C0FFEE16725: 7 tests, 0 failures, 0 errors, 1 skipped (the pre-existing skip). Module check rc=0. GATE END 2026-10-14T21:18:31Z. Log logs/vm2/queue-g16725-gate-20261014T205517Z.out.
+Tidy rc=0 changed one file, solr/core/src/java/org/apache/solr/handler/admin/ClusterStatus.java. The tidy output was committed as one plain fast-forward commit, 550af283134e (from fc5c54770c), pushed to solr-16725-submit, and the gate ran at 550af283134e: all steps below are at that head. Changelog YAML parse OK. Error Prone compile rc=0. LocalFSCloudIncrementalBackupTest, seed 16725C0FFEE16725: 7 tests, 0 failures, 0 errors, 1 skipped (the pre-existing skip). Module check rc=0. GATE END 2026-10-14T21:18:31Z. Log logs/vm2/queue-g16725-gate-20261014T205517Z.out.
