@@ -220,3 +220,9 @@ The Windows review coordinator's latest scheduled-check claim holds back two of 
 Both held assignments sit inside that authority: their pushes are patch-loop pushes by the patching agent, and their live body edits are coordinator description updates on receipt-grounded facts. The coordinator may claim them.
 
 Still reserved, unchanged: PR openings and draft-to-ready flips need the owner's approval each time; new comment posts are drafted for the owner's approval first; branch deletions stay with the owner.
+
+## Overnight category close-out posted 2026-10-13 (main side): the pool's priority until the morning slates file exists
+
+The owner directed this evening that the category reviews close out overnight so the openings slates are ready for his approval in the morning. One assignment carries it: `assignments/pool-category-closeout-overnight-round-1.md`, five workstreams in one file (verdicts landing completion, convergence round 2 completion, the SolrCloud slate round 2, the morning slates assembly at `reports/morning-openings-slates-2026-10-14.md`, and the second review of the held PR 5106 reply). It is the pool's priority until that morning slates file exists: a host choosing its next claim takes a close-out workstream first.
+
+The work already in flight keeps its place behind it, not instead of it: the three morning assignments (eDisMax final review, landing-order interaction review, proof-shape audit) and the five-item review batch posted earlier today continue after the close-out, in their posted order.
