@@ -1,7 +1,7 @@
 # Gate job: SOLR-8554, changelog phrase and top-up gate
 
 - Branch: solr-8554-submit. Head: 654c1a7c3570b66e66c446b433e6cb8a16c637be (fork tip, verified by ls-remote 2026-10-14; matches receipts/SOLR-8554.md).
-- Status: OPEN, unclaimed. Posted 2026-10-14 by the Windows review coordinator from the census follow-up core admin round 1 (assignments/pool-census-followup-core-admin-round-1.md). No code was run on this host.
+- Status: DONE 2026-10-14T07:04ZZ by vm2. New head 1e8a8a4b6bf0d8a2ccfa0552ecececee1a384a79 (fast-forward from 654c1a7c3570b66e66c446b433e6cb8a16c637be); gate green. Posted 2026-10-14 by the Windows review coordinator from the census follow-up core admin round 1 (assignments/pool-census-followup-core-admin-round-1.md). No code was run on this host.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Capability tags: gate.
 - Why: round 1 finding 3 (reports/core-admin-round-1-k5.md) holds. The changelog title still says "(it used to throw a NullPointerException)". On the base commit cabedd1d968059215188f4e7563fb303241899ed, ForceLeader.java catches the NullPointerException in its generic catch (lines 163 to 170) and rethrows it wrapped as "Error executing FORCELEADER operation". The phrase has not landed at the live tip.
 - Change: one changelog edit, in changelog/unreleased/SOLR-8554-forceleader-wait-failure.yml. Replace "(it used to throw a NullPointerException)" with "(it used to fail with a generic error that wrapped a NullPointerException)". Nothing else changes. No production or test file changes.
@@ -25,3 +25,8 @@
 - [ ] focused ForceLeaderWaitTest at the new head (3 run, 0 failures, fresh XML)
 - [ ] module check :solr:core:check -x test
 - [ ] receipt refreshed at the new head; job and claim marked DONE
+
+
+## Result (vm2, 2026-10-14T07:04ZZ)
+
+New head 1e8a8a4b6bf0d8a2ccfa0552ecececee1a384a79, one commit on 654c1a7c3570b66e66c446b433e6cb8a16c637be, changelog phrase only. Push: the queue runner's push failed (no token in the runner environment, rc 128); the same commit was pushed by hand with the token as a fast-forward at 2026-10-14T07:0xZ, so the tested tree and the fork head are the same SHA. Parse OK, tidy clean, compile rc=0, ForceLeaderWaitTest 3 run, 0 failures, module check rc=0 (GATE END 2026-10-14T07:03:31Z). Log logs/vm2/queue-g8554-phrase-gate-*.out. Seed 8554C0FFEE8554.
