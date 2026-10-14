@@ -122,6 +122,7 @@ Report: `reports/solrcloud-round-1.md`, with parts `reports/solrcloud-round-1-p1
 
 - The audit confirms the merged state: its PR merged on apache/solr on 2026-10-05, the head `17c0e644812` matches the live fork head, and the merged files match the branch. Nothing to open; no draft, correctly. Gate state per the receipt: green (hardened) at the tip, proof inconclusive, recorded as such.
 - DISCUSS: delete the retired fork branch `solr-18277-submit`, and the two CI branches `ci/solr-18277` and `ci/solr-18277-proof`. Recommendation: delete all three; the work is merged and nothing else references them on the record. Not executed; branch deletion is the owner's call.
+- Owner ruling, 2026-10-13: the recommendation is not taken. SOLR-18277 is RETIRED and all three branches are left in place; none is deleted. The completed receipt record, with the two CI commit SHAs, is in `receipts/SOLR-18277.md`.
 
 ### SOLR-16013 (held; no draft): DISCUSS on the history rewrite
 
@@ -256,7 +257,7 @@ Report: `reports/solrcloud-round-1.md`, with parts `reports/solrcloud-round-1-p1
 3. SOLR-11288: blank-only input means "all", or keeps failing. Recommendation: keep blank-only equals omitted.
 4. SOLR-16013: approve the history rewrite dropping the co-author trailer from `3059f9be884`. Recommendation: approve, no squash.
 5. SOLR-18391 submit PR: close as superseded by the graceful-create PR, or keep as a draft. Recommendation: close.
-6. SOLR-18277: delete `solr-18277-submit` and the two CI branches. Recommendation: delete all three.
+6. SOLR-18277: delete `solr-18277-submit` and the two CI branches. Recommendation: delete all three. (Owner ruling 2026-10-13: not taken; retired, branches left in place, no deletion.)
 7. SOLR-17281: revert the one-line change and ask the reporter for logs, or replace it later. Recommendation: revert; parked either way.
 8. SOLR-3865: keep the ticket link with the disclosure that the reported path is already closed on main, or drop the link. Recommendation: keep with disclosure.
 9. SOLR-4754: keep the scheme-only guard with its text fixes, or drop it. Recommendation: keep with fixes and disclosure.

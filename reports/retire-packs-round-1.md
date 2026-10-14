@@ -11,6 +11,7 @@ Starting record: reports/retire-candidates-review-round.md with rr1 and rr2.
 - PR states and fork run status came from the public GitHub REST API, unauthenticated. gh is not logged in on this host, and gh_token.env was not opened.
 - Nothing was written to the repository. The nine packs and the index are in this file, not at reports/retire-final-*.md. No claim was written under claims/ either. The coordinator should record the claim and the DONE mark.
 - The receipt for SOLR-18277 is HELD. Its text is in section "SOLR-18277 receipt (held)" below. It was not written to receipts/.
+- Update, 2026-10-13 (main side): the owner ruled on SOLR-18277 the same day. The receipt is written (receipts/SOLR-18277.md, with the CI commit SHAs recorded there). The disposition is RETIRED and the three branches are left in place; none is deleted. The owner's general lean is to retire and leave, or rename, rather than delete. Owner steps 1 and 2 in pack 9 are done; step 4 (deletion) is superseded by this ruling and does not happen.
 
 ## Main moved after the round
 
@@ -57,7 +58,7 @@ Live upstream main (ls-remote) is d38e0f1623728bdd305e76a598f013f1bf32e449. The 
 | SOLR-18119-submit | RETIRE CLEAN, conditional | 6 | Close PR #4999, delete solr-18119-submit, once PR #5061 lands or is accepted |
 | SOLR-9759 | RETIRE CLEAN (superseded by #5048) | 7 | Delete solr-9759-submit |
 | SOLR-17372 | RETIRE, premise NOT SUPPORTED (current receipt, 2026-10-12) | 8 | Owner word; delete solr-17372-submit |
-| SOLR-18277 | RETIRE once the receipt is written (text held here) | 9 | Main side writes receipt; then delete solr-18277-submit, ci/solr-18277, ci/solr-18277-proof |
+| SOLR-18277 | RETIRED (owner ruling 2026-10-13) | 9 | Done: receipt written 2026-10-13; branches left in place, no deletion |
 
 ---
 
@@ -217,7 +218,7 @@ The receipt's owner options: (i) ship as stabilization with a rewritten Proof, (
 
 Gaps, not required for retire. Leg B (the branch head with the hunk) did not reach a result; the receipt says it is not required. Leg C was not run. The premise is one run at one seed on d76fc14b. Live main has moved five commits, and none touches StatsComponentTest.
 
-## 9. SOLR-18277 (three branches): RETIRE once the receipt is written
+## 9. SOLR-18277 (three branches): RETIRED (owner ruling 2026-10-13; branches left in place, no deletion)
 
 Heads checked: solr-18277-submit 17c0e644812, ci/solr-18277 35c9e995228, ci/solr-18277-proof 44c35a3deaf.
 
@@ -237,16 +238,16 @@ Gainable. Nothing in code. The evidence and the workflow file are the only thing
 Taken from it. Merged as 0cc328310f8.
 
 Owner steps:
-1. Write the receipt text below on the main side (held here).
-2. Record 35c9e995228 and 44c35a3deaf in that receipt, so fork-test-runner.yml can be recovered.
+1. Write the receipt text below on the main side (held here). DONE 2026-10-13: receipts/SOLR-18277.md carries the completed record.
+2. Record 35c9e995228 and 44c35a3deaf in that receipt, so fork-test-runner.yml can be recovered. DONE 2026-10-13, in the receipt.
 3. Confirm the Jira status is Fixed. I did not check it, because I have no Jira access. rr2 flagged it as open.
-4. Delete `solr-18277-submit`, `ci/solr-18277` and `ci/solr-18277-proof` on origin.
+4. Delete `solr-18277-submit`, `ci/solr-18277` and `ci/solr-18277-proof` on origin. SUPERSEDED by the owner's ruling of 2026-10-13: retire, do not delete. The branches are left in place.
 
 No PR needs closing, because #4959 is merged. No Jira note is needed for the deletion.
 
 Gaps. Jira status is not checked here. receipt-cited log g4959-harden2.log is not in this tree, so the gate detail is cited, not checked. The fork run logs were not opened here; conclusions and heads were checked through the API, and the test counts are rr2's. None of these blocks deletion once the receipt is written, but the Jira check should come first.
 
-### SOLR-18277 receipt (held, not written)
+### SOLR-18277 receipt (held at pack time; written to receipts/SOLR-18277.md on 2026-10-13 with the retired disposition and the CI SHAs recorded)
 
 ```
 # SOLR-18277 gate receipt
@@ -275,7 +276,7 @@ Gaps. Jira status is not checked here. receipt-cited log g4959-harden2.log is no
 
 - RETIRE CLEAN: SOLR-17722, SOLR-17882 (premise-dead; retire or re-aim), SOLR-12743, SOLR-17825, SOLR-10198, SOLR-18119-submit (conditional on PR #5061), SOLR-9759.
 - SOLR-17372: retire on NOT SUPPORTED, pending the owner's word. Option (i) in the receipt is not closed by it.
-- SOLR-18277: retire after the receipt is written and Jira status is confirmed.
+- SOLR-18277: RETIRED, owner ruling 2026-10-13. The receipt is written; the branches are left in place and none is deleted.
 - Owner-only actions: close PR #4999; delete the branches named in each pack; any Jira note. Nothing was posted, deleted, closed or pushed.
 
 ## Not done

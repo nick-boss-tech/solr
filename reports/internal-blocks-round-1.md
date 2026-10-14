@@ -30,6 +30,8 @@ Convention adopted in this round: owner notes, hold headers and staging notes li
 ```
 [WAITING ON OWNER CALL, DO NOT POST YET: keep SOLR-17842 open for published results, or narrow it to instructions only. The guide's example also has an unquoted `<build>` placeholder that bash reads as a redirect. Fixing that needs a new commit on the submit branch, which this round does not make. Rewrite this text against the new head, then delete this note before posting.]
 
+OWNER RULING UPDATE, 2026-10-13: this banner is discharged. The owner ruled that the call is closed; whether the ticket itself stays open or closes is not this side's decision in any case. The banner no longer blocks posting. The draft text settles under the decision default and the ladder in the build-docs convergence round 2 settlement, with the published-results question carried as a named follow-up in the draft rather than as a blocker. The `<build>` placeholder fix still needs its branch commit and a rewrite of the draft against the new head before posting.
+
 ```
 
 ## build-docs/SOLR-3684.md (lines 1-2)
@@ -89,7 +91,7 @@ Posting waits on the packaging call for the overlap with the SOLR-18532 change (
 - `search-components/mergeids-skipped-shard-totals.md`: a staging draft with no ticket number. The title exists only in its staging block, and `SOLR-XXXXX` still appears in the body. It waits for the ticket number, and the staging block moves to the report then.
 - `schema-analysis/SOLR-15357.md` and `schema-analysis/SOLR-15358.md`: each carries an "INTERNAL" comment at line 1. SOLR-15357 is a re-gate draft, so it waits for the regate-watch report. SOLR-15358 has the record-conflict hold, which the decisions round settled, so its block goes next.
 - Broader matches the pattern list did not cover, found by a read-only scan: `query-parsing/SOLR-11391.md` and `query-parsing/SOLR-12608.md` (line 1, "HOLD: not for posting"), `search-components/SOLR-15319.md` (lines 50 to 59, "REVIEWER NOTES"), `search-components/SOLR-15331.md` (line 41, "Owner notes"), `search-components/SOLR-17051.md` (lines 56 to 63, "Owner notes"), `search-components/SOLR-17155.md` (line 21, "Owner to confirm"), `search-components/SOLR-6831.md` (lines 43 to 48, "NOT FOR POSTING"). These go in the next cleanup round, with the same copy-first step.
-- `build-docs/SOLR-17842.md` and `build-docs/SOLR-17752.md`: their Proof heads still name the pre-decision heads. The text stays until the owner decides the branch base and the guide placeholder fix.
+- `build-docs/SOLR-17842.md` and `build-docs/SOLR-17752.md`: their Proof heads still name the pre-decision heads. The text stays until the owner decides the branch base and the guide placeholder fix. (2026-10-13: for SOLR-17842 the owner call is discharged; its text settles in the build-docs round 2 settlement. SOLR-17752's branch-base call is unchanged.)
 
 ## Added later in this round
 

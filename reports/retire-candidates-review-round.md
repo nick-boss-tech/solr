@@ -29,6 +29,7 @@ Nine items: **7 RETIRE CLEAN, 2 SALVAGE FIRST.**
 
 1. **SOLR-17372, salvage first.** The `StatsComponentTest` tolerance hunk (`3257831180f`) is the ticket's own suggested fix. The Jira reproducing seed was never run on base or on main, per the record. The salvage is one premise run: leg A on `upstream/main` without the hunk, leg B on the branch head with it. The run is specified, not started. CI run `37639175484` ran with the hunk included, so it does not test the premise.
 2. **SOLR-18277, salvage first.** There is no test or fix gap. Fork runs `37237885304`, `37238381991` and `37238383951` show `ShardSplitTest` passing on base production, so it does not pin the fix. The receipt records only an inconclusive result. The salvage is a documentation-only receipt record. The `fork-test-runner.yml` workflow exists only on `ci/solr-18277` and `ci/solr-18277-proof`.
+   - Update, 2026-10-13: the salvage is done and the owner has ruled. The completed receipt record is in `receipts/SOLR-18277.md` (run by run, with the two CI commit SHAs recorded). Disposition: RETIRED, branches left in place, no deletion.
 
 ## Retire-clean items, with what was checked
 
@@ -41,7 +42,7 @@ Nine items: **7 RETIRE CLEAN, 2 SALVAGE FIRST.**
 
 - **Branch deletions and PR closings** stay with Nick. None was done.
 - **PR #4999** (the python3 route): its review decision is open. The retire call on SOLR-18119-submit waits on it.
-- **SOLR-18277 Jira status.** Not settled by the reading. The record says Fixed; confirm it before the branches go.
+- **SOLR-18277 Jira status.** Not settled by the reading. The record says Fixed; confirm it before the branches go. Update, 2026-10-13: the branches do not go; the owner retired the item and left the branches in place, so this point no longer gates anything.
 - **PR #5034 head ancestry.** Closed unmerged on 2026-10-09; the object is not local, so ancestry was not checked.
 - **Related finding.** The SOLR-18368 reading (`reports/solr-18368-still-an-issue.md`) returned STILL AN ISSUE on the same review day: all three ref-guide defects remain on current main. Its consequence (a PR or a new ticket) is Nick's call; it is not part of this retire round.
 

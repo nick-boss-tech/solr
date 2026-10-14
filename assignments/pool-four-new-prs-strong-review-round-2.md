@@ -41,6 +41,7 @@ Round 1 returned SATISFIED for #5116 (SOLR-18540) and NOT SATISFIED for #5115 (S
 
 1. SOLR-18541, multi-query `numFoundExact`: the question stays posed as the PR's Choice. Do not add the reviewer's recommended change (report `numFoundExact` false whenever more than one sub-query contributes) to any patch. The current behavior and the posed Choice stand, and the maintainers answer it.
 2. SOLR-18541, the missing per-query entry crash (the Q2 `IndexOutOfBoundsException` and its family): this stays a named follow-up in the PR's Limits. No follow-up ticket is filed for it until after the PR merges.
+3. SOLR-18010, permission copy: CLOSED BY OWNER 2026-10-13. The decision is the wait: the PR stays a draft until the other contributor's PR merges, and the permission-copy disposition is settled in the post-merge rework (where the permissions, symlink and mount behavior get spelled out), not before. No ruling on keep-or-drop is pending, and no code or draft change follows from this item now.
 
 Both rulings are recorded on the main side as examples under the decision ladder: where a genuine choice exists, the PR poses it as a Choice rather than settling it silently in code; and an item listed as a follow-up does not get its own ticket until after the PR that names it has merged.
 

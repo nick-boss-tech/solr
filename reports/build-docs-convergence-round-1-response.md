@@ -83,6 +83,7 @@ Round 1 (`reports/build-docs-convergence-round-1.md`) returned NOT CONVERGED: 2 
 - BD-R1-35 (should-fix) APPLIED with the date filled by this pass's own re-check (see fact checks).
 - BD-R1-36 (should-fix) APPLIED: the verified line and the WAITING note now carry the JDK 21.0.12.1 and Gradle 9.7.0 toolchain pins.
 - BD-R1-37 (note) STANDS as a record item: the benchmark-count record run itself sits with the main side and is not decided by this response.
+- Update, 2026-10-13: the owner call flagged for this ticket is DISCHARGED. The owner ruled the published-results versus instructions-only call closed; ticket closure is not this side's decision in any case. The draft text settles under the decision default and the ladder in the build-docs convergence round 2 settlement, with the published-results question carried as a named follow-up rather than a blocker.
 
 ## Verdicts after application
 
@@ -93,7 +94,7 @@ Round 1 (`reports/build-docs-convergence-round-1.md`) returned NOT CONVERGED: 2 
 - SOLR-16914: CONVERGED on text.
 - SOLR-17252: CONVERGED on text. The draft's HOLD (owner decisions 1 to 3) stands; it was not a finding.
 - SOLR-17752: NOT CONVERGED. BD-R1-31 is held as an owner item (branch base decision).
-- SOLR-17842: CONVERGED on text. The WAITING note for the owner's published-results call and the `<build>` fix stands, per BD-R1-37's record.
+- SOLR-17842: CONVERGED on text. The WAITING note for the owner's published-results call and the `<build>` fix stands, per BD-R1-37's record. Update, 2026-10-13: the owner call is DISCHARGED (see the BD-R1-37 update above); the published-results question is a named follow-up for the round 2 settlement, and the `<build>` fix still stands as a packaging item.
 
 ## What round 2 must settle
 
