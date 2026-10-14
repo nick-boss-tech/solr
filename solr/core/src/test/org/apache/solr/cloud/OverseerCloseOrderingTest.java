@@ -114,6 +114,11 @@ public class OverseerCloseOrderingTest extends SolrCloudTestCase {
     } finally {
       finishOverseerClose.countDown();
       stopper.join(TimeUnit.SECONDS.toMillis(120));
+      // Start the node again so the next test finds two running nodes. Skipped while the stop is
+      // still running: start() and stop() are both synchronized on the runner.
+      if (!stopper.isAlive()) {
+        cluster.startJettySolrRunner(nodeToStop);
+      }
     }
 
     assertNull("stopping the overseer node failed", stopError.get());
@@ -189,6 +194,9 @@ public class OverseerCloseOrderingTest extends SolrCloudTestCase {
     } finally {
       finishOverseerClose.countDown();
       stopper.join(TimeUnit.SECONDS.toMillis(120));
+      if (!stopper.isAlive()) {
+        cluster.startJettySolrRunner(nodeToStop);
+      }
     }
 
     assertNull("stopping the overseer node failed", stopError.get());
@@ -245,8 +253,14 @@ public class OverseerCloseOrderingTest extends SolrCloudTestCase {
             },
             "overseer-node-stopper-after-close");
     stopperRef.set(stopper);
-    stopper.start();
-    stopper.join(TimeUnit.SECONDS.toMillis(120));
+    try {
+      stopper.start();
+      stopper.join(TimeUnit.SECONDS.toMillis(120));
+    } finally {
+      if (!stopper.isAlive()) {
+        cluster.startJettySolrRunner(overseerNode);
+      }
+    }
 
     assertNull("stopping the overseer node failed", stopError.get());
     assertFalse("stopper thread is still running", stopper.isAlive());
