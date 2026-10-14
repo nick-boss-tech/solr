@@ -1,7 +1,7 @@
 title: >
   SolrIndexSearcher.getDocSet(Query, DocSet) answers a MatchAllDocsQuery with the supplied filter
   (or the live docs) without intersecting bitsets or computing a DocSet, with or without the filter cache.
-type: optimized
+type: changed
 authors:
   - name: Nick Shanin
 links:
