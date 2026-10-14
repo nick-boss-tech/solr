@@ -104,11 +104,11 @@ Promise, verbatim from round 1: "This also fixes SOLR-16130, I plan to submit a 
 
 Round 1 left the candidate #5004 unverified. Verified now, from three independent reads: #5004's head branch is `solr-16130-test-followup` at `3c48dec4b79f`; its file list is test-only (`CrossCollectionJoinQueryTest.java` and the ccjoin test configset's `solrconfig.xml`); and its body states the root cause "was fixed and merged in #4953 (SOLR-8291)" and "This PR contains no production change; it adds the regression test for the reported scenario." Its receipt (`receipts/SOLR-16130.md`) records GATE GREEN at that head. State: OPEN, now resting on a verified PR; the promise discharges when #5004 merges. #5004 is open and unmerged at this pass. The verification item round 1 left open is discharged; the promise itself is not.
 
-#### #5001 promise (server-side SOLR-18317 PR): no change
+#### #5001 promise (server-side SOLR-18317 PR): owner ruled kept, 2026-10-14
 
 Promise, verbatim from round 1: "The server-side hardening that degraded such calls to the local node was split out at reviewer request and is preserved intact on the fork branch `solr-18317-server-submit`, to be opened as its own PR."
 
-The branch is still at `ae918a03fa7b`, the round 1 head, and the API lists no PR from that branch in any state. State: OPEN, unchanged. Opening it remains Nick's call.
+Disposition: OWNER RULED KEPT (Nick, 2026-10-14). Nick considers the promise kept: the paired follow-up work for the GET/PUT side was built and awaits Pugh's review. Factual note, recorded alongside the ruling so the ledger stays honest: the server-side branch `solr-18317-server-submit` stands built at `ae918a03fa7b`, the round 1 head, and no separate PR has been opened from it as of this round 2 audit; a main-side API check on 2026-10-14 confirms only #5001 names SOLR-18317. If that branch is ever to open as its own PR, it needs Nick's word like any opening.
 
 #### #5070 promise (detection-running test): no change; round 1's open inspection item resolved
 
@@ -126,6 +126,6 @@ Round 1 left the branch `ci/4841-langid-r28` uninspected. Inspected now: its tip
 
 ### Round 2 summary
 
-Newly covered merged PRs: none (no merges since round 1). Open promises from merged PRs: still three (#4953, #5001, #5070). One state change since round 1: the #4953 candidate is verified as the planned test-only PR, so that promise now rests on #5004 and discharges at its merge. One open item resolved with no state change: `ci/4841-langid-r28` is not the #5070 follow-up test. Every discharge remains Nick's call.
+Newly covered merged PRs: none (no merges since round 1). Open promises from merged PRs: three recorded (#4953, #5001, #5070), of which #5001 was ruled KEPT by the owner on 2026-10-14 (see its item above), leaving #4953 and #5070 still owed. One state change since round 1: the #4953 candidate is verified as the planned test-only PR, so that promise now rests on #5004 and discharges at its merge. One open item resolved with no state change: `ci/4841-langid-r28` is not the #5070 follow-up test. Every discharge remains Nick's call.
 
 No discharge in this ledger has been executed. No PR was opened, closed or changed, no comment was posted, and no ticket was filed.
