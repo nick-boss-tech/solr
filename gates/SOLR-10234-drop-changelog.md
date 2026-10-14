@@ -1,7 +1,7 @@
 # Gate job: SOLR-10234 drop the test-only changelog fragment
 
 - Branch: solr-10234-submit. Live tip: eb8c4060d9436d7abfdcfdd0ba231a5b31debc01 (ls-remote, 2026-10-14). Gated head: the same (receipts/SOLR-10234.md, GATE GREEN 2026-10-12).
-- Filed by: the Windows review lane, 2026-10-14. Status: OPEN, not claimed.
+- Filed by: the Windows review lane, 2026-10-14. Status: DONE. GREEN at 8745afd00cf99597c24ee12764fc7b3d7dc7870e; fork force-with-lease pushed from eb8c4060d9436d7abfdcfdd0ba231a5b31debc01 and verified by ls-remote; receipts/SOLR-10234.md refreshed.
 - Intended host: a Linux host with the Gradle toolchain (capability tag: gate), under the WORKFLOW.md claim rules. Windows does not build.
 - Decision recorded: drop the fragment. Recommendation in material/solrcloud-round-1-answers.md (SOLR-10234 section, second call), adopted under the decision default. Basis: part p5 finding 16 (type `other` for a test-only change; dev-docs/changelog.adoc line 88 says most such changes are too minor for an entry).
 - Keep: the suppression on the base classes (the recorded recommendation, same section).
@@ -19,13 +19,13 @@ Unchanged from receipts/SOLR-10234.md: the premise leg at the merge base (1 run,
 
 ## Gate steps
 
-- [ ] claim recorded under claims/ (WORKFLOW.md)
-- [ ] branch changes 1 and 2 applied; tree diff against eb8c4060d9 recorded (expect the fragment only)
-- [ ] tidy with clean tree afterwards (GATE INVALID guard)
-- [ ] Error Prone compile of :solr:core:compileTestJava
-- [ ] focused test CloudTestBaseFileSystemsTest at the new head
-- [ ] module check :solr:core:check -x test
-- [ ] push (fork lease, pinned as above) and ls-remote verification
+- [x] claim recorded under claims/ (WORKFLOW.md)
+- [x] branch changes 1 and 2 applied; tree diff against eb8c4060d9 recorded (expect the fragment only)
+- [x] tidy with clean tree afterwards (GATE INVALID guard)
+- [x] Error Prone compile of :solr:core:compileTestJava
+- [x] focused test CloudTestBaseFileSystemsTest at the new head
+- [x] module check :solr:core:check -x test
+- [x] push (fork lease, pinned as above) and ls-remote verification
 
 ## On green
 
