@@ -7,6 +7,11 @@
 - Capability tags: gate. Intended host: vm2 (the fix commit and the gate worktree live there). Windows never claims build work.
 - Status: OPEN.
 
+## Fork resolution (2026-10-14)
+
+- After this job was issued, the review side pushed its own implementation of the same fix to `solr-17055-submit` (commit `2d154d1a402ed9c1705d187773e7a3009ed0645d`), so the fork tip is no longer the `c2396f425fa2` recorded above. The implementation choice is recorded in `reports/solr-17055-implementation-choice-round-1.md`: this job's target is unchanged, and `gates/SOLR-17055-fix-gate.md` is superseded.
+- The on-green push below assumes the tip is `c2396f425fa2`. Before it can run, the main side restores `solr-17055-submit` to `c2396f425fa2` (a main-side branch move; the pushed commit stays on record, nothing is deleted). If the tip is not `c2396f425fa2` when this job is picked up, do not force anything: stop, record the observed tip here, and report back.
+
 ## Why this rerun exists
 
 The first gate of the fix commit (log logs/vm2/queue-g17055-gate-20261014T113414Z.out) ran every head leg green: changelog rc 0, spotless rc 0, tree clean, Error Prone compile rc 0, DistributedKnnTopKTest 1 of 1, module check rc 0. Its fail-before leg used the branch merge-base `97d973814336` and failed at the score-only assertion (`.response.numFound:9!=3`, test line 57): that base has no knn topK handling in QueryComponent at all, and the test asserts the score-order case first, so the sort assertion was never reached. That leg measured the branch's original score-path cap, not this fix.
