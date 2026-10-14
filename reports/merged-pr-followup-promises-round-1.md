@@ -116,6 +116,8 @@ Promise, verbatim from round 1: "A follow-up submission is planned for a test th
 
 Round 1 left the branch `ci/4841-langid-r28` uninspected. Inspected now: its tip is `41c0087c8a29` and it is the CI copy of the merged change, carrying the same `CustomLanguageIdentifierTest` that merged in #5070. That test builds a `DetectedLanguage` from another package and checks the two getters; #5070's own Limits says of it, "It does not run language detection." No fork branch carries a test that runs language detection through a custom identifier. State: OPEN, unchanged, still owed. Whether to submit it is Nick's call.
 
+Addendum (2026-10-14, later): Nick ruled the promise is to be executed: the SOLR-4841 ticket is still open and the follow-up was never built. State: OPEN, assigned to the review agent on 2026-10-14 under `assignments/pool-solr-4841-langid-followup-round-1.md`, which directs building the detection-running test on branch `solr-4841-langid-followup-submit`, review rounds to SATISFIED, and a gate job (`gates/SOLR-4841-langid-followup.md`) for a Linux host. The assignment does not authorize an opening; the branch joins an openings slate for Nick's approval once gated and satisfied.
+
 #### Named shapes: no state changes
 
 - #5100 (SOLR-18532): still open at `7dfd3d98d0a2`; `solr-9865-submit` still at `4937608b`, so the rollback hunk has not been dropped. PENDING MERGE, unchanged.
@@ -126,6 +128,6 @@ Round 1 left the branch `ci/4841-langid-r28` uninspected. Inspected now: its tip
 
 ### Round 2 summary
 
-Newly covered merged PRs: none (no merges since round 1). Open promises from merged PRs: three recorded (#4953, #5001, #5070), of which #5001 was ruled KEPT by the owner on 2026-10-14 (see its item above), leaving #4953 and #5070 still owed. One state change since round 1: the #4953 candidate is verified as the planned test-only PR, so that promise now rests on #5004 and discharges at its merge. One open item resolved with no state change: `ci/4841-langid-r28` is not the #5070 follow-up test. Every discharge remains Nick's call.
+Newly covered merged PRs: none (no merges since round 1). Open promises from merged PRs: three recorded (#4953, #5001, #5070), of which #5001 was ruled KEPT by the owner on 2026-10-14 (see its item above), leaving #4953 and #5070 still owed. One state change since round 1: the #4953 candidate is verified as the planned test-only PR, so that promise now rests on #5004 and discharges at its merge. One open item resolved with no state change: `ci/4841-langid-r28` is not the #5070 follow-up test. Every discharge remains Nick's call. Addendum (2026-10-14, later): the #5070 promise is now assigned to the review agent for execution (see its subsection above); the #4953 promise is unchanged.
 
 No discharge in this ledger has been executed. No PR was opened, closed or changed, no comment was posted, and no ticket was filed.
