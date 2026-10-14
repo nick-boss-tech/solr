@@ -2,7 +2,7 @@
 
 - Branch: solr-9342-submit. Head: 833e11192a7ff918f7e401bde920cf63c89df063 (live tip, verified by ls-remote at posting, 2026-10-14T02:10Z).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed. Posted by the CLI convergence round 2 review (claims/pool-category-closeout-w2-cli-round-1.md).
+- Status: DONE. Fork push to solr-9342-submit at 3e5d46d2c8625c3a6db0ff188e6dc14442b67ce4 after the gate was green; receipt refreshed, draft links re-pointed. Posted by the CLI convergence round 2 review (claims/pool-category-closeout-w2-cli-round-1.md).
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch. A title-only commit on top of the head, then the gate evidence check at the new head.
 - Spec: reports/cli-convergence-round-1-response.md, item CLI-R1-03 (replacement text recorded there verbatim). Owner decision 1 in reports/cli-bin-packaging-round-1.md lists the changelog title as an owner item; the round 1 replacement is the adopted text.
@@ -18,6 +18,6 @@
 
 ## Step checklist
 
-- [ ] title replaced verbatim in SOLR-9342-gc-log-timezone.yml (block scalar shape kept); delta against 833e11192a7 is that fragment only
-- [ ] changelog YAML parse with a real parser
-- [ ] pushed plainly to solr-9342-submit; receipt refreshed; draft links re-pointed to the new head; job and claim DONE
+- [x] title replaced verbatim in SOLR-9342-gc-log-timezone.yml (block scalar shape kept); delta against 833e11192a7 is that fragment only
+- [x] changelog YAML parse with a real parser
+- [x] pushed plainly to solr-9342-submit; receipt refreshed; draft links re-pointed to the new head; job and claim DONE

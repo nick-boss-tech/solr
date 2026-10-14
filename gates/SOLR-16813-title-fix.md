@@ -2,7 +2,7 @@
 
 - Branch: solr-16813-submit. Head: 1b288170e8aa9c3b1ea9bce418e26bd61f08498e (live tip, verified by ls-remote at posting, 2026-10-14T02:10Z; GATE GREEN per receipts/SOLR-16813.md at this head).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed. Posted by the CLI convergence round 2 review (claims/pool-category-closeout-w2-cli-round-1.md).
+- Status: DONE. Fork push to solr-16813-submit at 0ab6087cf43723873d83e5547ef8227e85e93653 after the gate was green; receipt refreshed, draft links re-pointed. Posted by the CLI convergence round 2 review (claims/pool-category-closeout-w2-cli-round-1.md).
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head.
 - Spec: reports/cli-convergence-round-1-response.md, item CLI-R1-17 (replacement text recorded there verbatim). Owner decision 3 in reports/cli-bin-packaging-round-1.md: amend the changelog title to "when a version loads".
@@ -20,10 +20,10 @@
 
 ## Step checklist
 
-- [ ] title replaced verbatim in SOLR-16813.yml; delta against 1b288170e8aa is that fragment only
-- [ ] changelog YAML parse with a real parser
-- [ ] tidy on the final tree; tree clean (GATE INVALID guard)
-- [ ] Error Prone compile (:solr:core)
-- [ ] focused tests at the new head: TestPackages, counted from fresh JUnit XML
-- [ ] module check (:solr:core)
-- [ ] pushed plainly to solr-16813-submit; receipt refreshed; draft links re-pointed; job and claim DONE
+- [x] title replaced verbatim in SOLR-16813.yml; delta against 1b288170e8aa is that fragment only
+- [x] changelog YAML parse with a real parser
+- [x] tidy on the final tree; tree clean (GATE INVALID guard)
+- [x] Error Prone compile (:solr:core)
+- [x] focused tests at the new head: TestPackages, counted from fresh JUnit XML
+- [x] module check (:solr:core)
+- [x] pushed plainly to solr-16813-submit; receipt refreshed; draft links re-pointed; job and claim DONE

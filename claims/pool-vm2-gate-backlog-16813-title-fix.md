@@ -5,4 +5,4 @@
 - Runner path: /workspace/gates/solr-16813-titlefix (detached worktree); gate script /workspace/gates/g16813-titlefix-gate.sh. Focused class org.apache.solr.pkg.TestPackages in :solr:core.
 - Capability tags: implementation (title only), gate. Staffing: 1.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED.
+- Status: DONE. Fork push at 0ab6087cf43723873d83e5547ef8227e85e93653 and receipt refreshed.

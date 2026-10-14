@@ -5,4 +5,4 @@
 - Runner path: /workspace/gates/solr-9342-titlefix (detached worktree); gate script /workspace/gates/g9342-gate.sh. Gate steps: changelog YAML parse and delta check only (no Java change, so no tidy, Error Prone or focused tests).
 - Capability tags: implementation (title only), gate. Staffing: 1.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED.
+- Status: DONE. Fork push at 3e5d46d2c8625c3a6db0ff188e6dc14442b67ce4 and receipt refreshed.
