@@ -61,8 +61,9 @@ public class IgnoreCommitOptimizeUpdateProcessorFactoryTest extends SolrTestCase
         shouldBeNull);
 
     // The distributed update processor replaces the marker when it forwards a commit:
-    // "leaders" on a leader's fan-out to other shard leaders, and "replicas" on the hop to the
-    // leader's own replicas. Those internal commits must pass, and must not fail boolean parsing.
+    // "leaders" on the fan-out from the receiving node to the shard leaders, and "replicas" on the
+    // hop from a leader to its own replicas. Those internal commits must pass, and must not fail
+    // boolean parsing.
     for (String endPoint : new String[] {"leaders", "replicas"}) {
       rsp = processCommit("ignore-commit-from-client-403", false, endPoint);
       shouldBeNull = rsp.getException();

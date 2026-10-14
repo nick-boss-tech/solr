@@ -1,4 +1,4 @@
-title: IgnoreCommitOptimizeUpdateProcessor no longer rejects commits that a leader forwards with the internal endpoint values leaders or replicas; those commits failed with a 400 before
+title: IgnoreCommitOptimizeUpdateProcessor no longer rejects commits that a node forwards with the internal endpoint values leaders or replicas; those commits failed with a 400 before
 type: fixed
 authors:
   - name: Nick Shanin
