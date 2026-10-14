@@ -1,7 +1,7 @@
 # Gate job: SOLR-3865 connect timeout and commit-message cleanup
 
 - Branch: solr-3865-submit. Live tip: f483bc4c32e033ef797e16528b9e021dca56770a (ls-remote, 2026-10-14). Gated head: the same (receipts/SOLR-3865.md, GATE GREEN 2026-10-11).
-- Filed by: the Windows review lane, 2026-10-14. Status: OPEN, not claimed.
+- Filed by: the Windows review lane, 2026-10-14. Status: DONE. GATE GREEN at 1ca7bf9ad0e6efb442cb55cf95b455a8a721bd27 (vm2, 2026-10-14); receipts/SOLR-3865.md.
 - Intended host: a Linux host with the Gradle toolchain (capability tag: gate), under the WORKFLOW.md claim rules. Windows does not build.
 - Why: owed before first gate per material/solrcloud-round-1-answers.md (SOLR-3865 section), part p5 findings 1 and 7. The gate ran without these items, so the gated head does not carry them.
 - Module: :solr:solrj-zookeeper. Focused class: org.apache.solr.client.solrj.impl.ZkClientClusterStateProviderCloseTest (2 tests).
@@ -19,15 +19,15 @@
 
 ## Gate steps
 
-- [ ] claim recorded under claims/ (WORKFLOW.md)
-- [ ] message-only rebuild and test line; tree diff against f483bc4c32e0 recorded (expect one test line)
-- [ ] changelog YAML parse (changelog/unreleased/SOLR-3865-zk-provider-close-before-use.yml)
-- [ ] tidy with clean tree afterwards (GATE INVALID guard)
-- [ ] Error Prone compile of :solr:solrj-zookeeper:compileTestJava
-- [ ] premise leg at the merge base (above)
-- [ ] focused tests at the new head, fresh JUnit XML
-- [ ] module check :solr:solrj-zookeeper:check -x test
-- [ ] push (fork lease, pinned as above) and ls-remote verification
+- [x] claim recorded under claims/ (WORKFLOW.md)
+- [x] message-only rebuild and test line; tree diff against f483bc4c32e0 recorded (expect one test line)
+- [x] changelog YAML parse (changelog/unreleased/SOLR-3865-zk-provider-close-before-use.yml)
+- [x] tidy with clean tree afterwards (GATE INVALID guard)
+- [x] Error Prone compile of :solr:solrj-zookeeper:compileTestJava
+- [x] premise leg at the merge base (above)
+- [x] focused tests at the new head, fresh JUnit XML
+- [x] module check :solr:solrj-zookeeper:check -x test
+- [x] push (fork lease, pinned as above) and ls-remote verification
 
 ## On green
 
