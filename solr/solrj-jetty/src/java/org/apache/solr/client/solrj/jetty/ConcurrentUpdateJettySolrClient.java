@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -125,7 +126,10 @@ public class ConcurrentUpdateJettySolrClient extends ConcurrentUpdateBaseSolrCli
       this.origParams = origParams;
       this.origUser = origRequest.getBasicAuthUser();
       this.origPassword = origRequest.getBasicAuthPassword();
-      this.origHeaders = origRequest.getHeaders();
+      // A copy: SolrRequest.getHeaders() is a live view of the request's own map, and a
+      // later change to that map must not change which stream the request matches.
+      Map<String, String> headers = origRequest.getHeaders();
+      this.origHeaders = headers == null ? null : new HashMap<>(headers);
       this.content = content;
       this.responseListener = responseListener;
       this.isXml = isXml;

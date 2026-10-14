@@ -106,12 +106,17 @@ public abstract class ConcurrentUpdateSolrClientTestBase extends SolrTestCaseJ4 
       numReqsRcvd.set(0);
       numDocsRcvd.set(0);
       docAuthorizations.clear();
+      docGateTags.clear();
     }
 
     /** For every document received, the Authorization header of the HTTP request it arrived in. */
     public static final List<String> docAuthorizations = new CopyOnWriteArrayList<>();
 
+    /** For every document received, the X-Gate-Tag header of the HTTP request it arrived in. */
+    public static final List<String> docGateTags = new CopyOnWriteArrayList<>();
+
     private static final ThreadLocal<String> currentAuthorization = new ThreadLocal<>();
+    private static final ThreadLocal<String> currentGateTag = new ThreadLocal<>();
 
     public static Integer errorCode = null;
     public static String lastMethod = null;
@@ -141,6 +146,7 @@ public abstract class ConcurrentUpdateSolrClientTestBase extends SolrTestCaseJ4 
       lastMethod = "post";
       recordRequest(req, resp);
       currentAuthorization.set(req.getHeader("Authorization"));
+      currentGateTag.set(req.getHeader("X-Gate-Tag"));
 
       InputStream reqIn = req.getInputStream();
       JavaBinUpdateRequestCodec javabin = new JavaBinUpdateRequestCodec();
@@ -169,6 +175,7 @@ public abstract class ConcurrentUpdateSolrClientTestBase extends SolrTestCaseJ4 
         SolrInputDocument document, UpdateRequest req, Integer commitWithin, Boolean override) {
       numDocsRcvd.incrementAndGet();
       docAuthorizations.add(document.getFieldValue("id") + "|" + currentAuthorization.get());
+      docGateTags.add(document.getFieldValue("id") + "|" + currentGateTag.get());
     }
   } // end TestServlet
 
@@ -328,6 +335,38 @@ public abstract class ConcurrentUpdateSolrClientTestBase extends SolrTestCaseJ4 
       assertEquals(
           "document of " + user + " sent under another identity",
           expected,
+          received.substring(received.indexOf('|') + 1));
+    }
+  }
+
+  @Test
+  public void testRequestsWithDifferentHeadersAreNotSentOnOneStream() throws Exception {
+    TestServlet.clear();
+    final String[] tags = {"alpha", "beta"};
+    final int numDocs = 20;
+
+    try (var http2Client = solrClient(null);
+        var concurrentClient =
+            concurrentClient(
+                http2Client, solrTestRule.getBaseUrl() + "/cuss/foo", null, 100, 1, false)) {
+      for (int i = 0; i < numDocs; i++) {
+        final String tag = tags[i % tags.length];
+        final SolrInputDocument doc = new SolrInputDocument();
+        doc.setField("id", tag + "_" + i);
+        final UpdateRequest req = new UpdateRequest();
+        req.add(doc);
+        req.addHeader("X-Gate-Tag", tag);
+        concurrentClient.request(req);
+      }
+      concurrentClient.blockUntilFinished();
+    }
+
+    assertEquals(numDocs, TestServlet.docGateTags.size());
+    for (String received : TestServlet.docGateTags) {
+      final String tag = received.substring(0, received.indexOf('_'));
+      assertEquals(
+          "document of " + tag + " sent under another header",
+          tag,
           received.substring(received.indexOf('|') + 1));
     }
   }
