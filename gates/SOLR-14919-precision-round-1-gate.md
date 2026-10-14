@@ -3,7 +3,7 @@
 - Branch: solr-14919-submit. Gated head before this job: 8f1f4ef91e798f736eb91c9625223a654b59794a (ls-remote on origin, 2026-10-13: equal). Prior gate: GATE GREEN at 8f1f4ef91e (run 3, GATE END 2026-10-13T16:07:45Z) and the focused count at 8f1f4ef91e (COUNT END 2026-10-13T18:13:49Z), both in `receipts/SOLR-14919.md`.
 - Posted by: windows (review coordinator, workstream W3 of `assignments/pool-category-closeout-overnight-round-1.md`), for Nick Shanin, 2026-10-13. Claim: `claims/pool-category-closeout-overnight-w3-round-1.md`.
 - Capability tags: gate. Intended host: vm2. Windows never claims build work; this job was prepared with no build, test, Gradle or gate run.
-- Status: OPEN. Landed head recorded 2026-10-14 (step 0, verified against the live tip). Steps 1 to 9 are not run.
+- Status: OPEN. Gate run finished with a nonzero rc at the proof leg (see Gate run record); not relaunched, left for the main agent. Landed head recorded 2026-10-14 (step 0, verified against the live tip). Steps 1 to 9 are not ticked.
 - Landed head (windows review round 1, 2026-10-14): `483b3885f6439391a3128e6c61be34fc47122514`, verified by `git ls-remote origin refs/heads/solr-14919-submit`. Its parent is `8f1f4ef91e798f736eb91c9625223a654b59794a`, and it is a single commit ("SOLR-14919: say the receiving node forwards the commit, not a leader", author Nick Shanin). `git diff --stat 8f1f4ef91e..483b3885` shows only `changelog/unreleased/SOLR-14919.yml` and `IgnoreCommitOptimizeUpdateProcessorFactoryTest.java`, and its added and removed lines match `gates/SOLR-14919-precision-round-1.patch` line for line. The patch was already on the live tip when checked, so this round pushed nothing.
 - Patch: `gates/SOLR-14919-precision-round-1.patch`. Two files: (a) the `title:` line of `changelog/unreleased/SOLR-14919.yml`; (b) the comment at lines 63 to 65 of `solr/core/src/test/org/apache/solr/update/processor/IgnoreCommitOptimizeUpdateProcessorFactoryTest.java`, reflowed to lines 63 to 66. It applies cleanly to 8f1f4ef91e (checked on the review host with `git apply --cached --check` against a temporary index file outside the repo; no repo state changed). No production file changes.
 - Title before: `IgnoreCommitOptimizeUpdateProcessor no longer rejects commits that a leader forwards with the internal endpoint values leaders or replicas; those commits failed with a 400 before`
@@ -19,6 +19,13 @@
 - Shard leaders: `getCollectionUrls` returns each shard's leader. The receiving node removes only itself (lines 197 to 200), so for a replica receiver its own shard leader stays in the list. "The shard leaders" is therefore the accurate phrase, and "the other shard leaders" is not.
 - Superseded text: `reports/solrcloud-round-1-p4.md` note 5 proposes a replacement comment that repeats "a leader's fan-out" and says `leaders` is set "only on a leader's fan-out". Do not paste that text; the comment above replaces it.
 - Out of scope, not changed here: item (c) in the slate report, the draft headline's scope against `ignoreOptimizeOnly=true` (a plain commit returns before the parse at lines 135 to 140 of `IgnoreCommitOptimizeUpdateProcessorFactory.java`). That is the owner's call.
+
+## Gate run record
+
+- Run: GATE START 2026-10-14T22:02:37Z, GATE END 2026-10-14T22:24:18Z, head 483b3885f6439391a3128e6c61be34fc47122514. Log: logs/vm2/queue-g14919-precision-gate-20261014T220237Z.out.
+- rc lines: changelog 0, tidy 0, tidy-clean (tree clean), compile 0, proof 1, head 0, module check 0.
+- The one nonzero rc is the proof leg. The revert to the merge-base ran the focused class, which failed; the log holds 2 hits for `invalid boolean value: leaders` (logs/vm2/14919-proof.log). The proof file was restored and the tree was clean afterward. The run was not promoted to GREEN and was not relaunched; the main agent classifies whether this proof rc 1 is the intended result.
+- The focused head leg (logs/vm2/14919-head.log) and the module check (logs/vm2/14919-check.log) are rc 0. Fresh JUnit counts were not taken for this run. No push, no receipt, no DONE.
 
 ## Steps, in order, at the landed head
 

@@ -5,4 +5,4 @@
 - Capability tags: gate.
 - Runner: gates/g14919-precision-gate.sh, worktree /workspace/gates/solr-14919-precision (detached). No fork push.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued.
+- Status: CLAIMED, run finished 2026-10-14T22:24:18Z with a nonzero rc at the proof leg (rc 1, 2 marker hits; other rc 0). Not promoted to GREEN, not relaunched; left for the main agent. See gates/SOLR-14919-precision-round-1-gate.md, Gate run record.
