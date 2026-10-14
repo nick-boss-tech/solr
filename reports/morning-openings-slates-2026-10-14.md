@@ -2,14 +2,14 @@
 
 Workstream W4 of `assignments/pool-category-closeout-overnight-round-1.md`, as widened by its census addendum. Sources: `reports/openings-census-round-1.md` (263 rows), the census follow-up rounds 1 to 5 (`reports/census-followup-scheduled-round-*.md`), `reports/category-ready-lists-round-1.md`, `reports/solrcloud-openings-slate-round-2.md`, the round 2 settlement responses (`reports/*-convergence-round-2-response.md`), and the receipts for the heads cited.
 
-Verification during assembly: every one of the 263 census branch tips was re-checked against `git ls-remote` on the fork on 2026-10-14. Twelve tips had moved since the census; each moved tip was re-checked against its gate record before its row was placed (SOLR-874, 9124, 10234, 10305, 12044, 12608, 14381, 16813, 3865, 8554, 9060, 9342; the SOLR-16272 and SOLR-16813 title gates and the SOLR-9342 title check were read in their gate files and receipts directly). Receipts spot-checked at the live tip for the slate heads named in the SolrCloud round 2 slate and the CLI title gates. Nothing in this file opens anything; each slate is approved per category.
+Verification during assembly: every one of the 263 census branch tips was re-checked against `git ls-remote` on the fork on 2026-10-14. Twelve tips had moved since the census; each moved tip was re-checked against its gate record before its row was placed (SOLR-874, 9124, 10234, 10305, 12044, 12608, 14381, 16813, 3865, 8554, 9060, 9342; the SOLR-16272 and SOLR-16813 title gates and the SOLR-9342 title check were read in their gate files and receipts directly). Receipts spot-checked at the live tip for the slate heads named in the SolrCloud round 2 slate and the CLI title gates. One further tip moved while this file was being assembled: solr-11356-submit, whose header-copy gate landed green at 8b2e826154af; its row was updated to the new head before this file was pushed. Nothing in this file opens anything; each slate is approved per category.
 
 ## Headline totals
 
 - **Openable as-is: 159**
-- **Openable after one named step: 25** (a packaging fix, a posted gate job, or one owner word; the step is named under its slate)
-- **Slate total proposed today: 184**
-- **Not ready: 79** of the 263 census rows, each with its named next step in the last slate section
+- **Openable after one named step: 26** (a packaging fix, a posted gate job, or one owner word; the step is named under its slate)
+- **Slate total proposed today: 185**
+- **Not ready: 78** of the 263 census rows, each with its named next step in the last slate section
 
 | Category | Slate rows | Openable as-is | After one named step | Not ready |
 |---|---|---|---|---|
@@ -17,7 +17,7 @@ Verification during assembly: every one of the 263 census branch tips was re-che
 | Query parsing | 16 | 14 | 2 | 6 |
 | SolrCloud | 15 | 12 | 3 | 10 |
 | Core admin | 21 | 20 | 1 | 7 |
-| SolrJ | 17 | 11 | 6 | 3 |
+| SolrJ | 18 | 11 | 7 | 2 |
 | Schema | 10 | 9 | 1 | 1 |
 | Replication and backup | 6 | 6 | 0 | 5 |
 | Streaming | 5 | 4 | 1 | 5 |
@@ -32,7 +32,7 @@ Verification during assembly: every one of the 263 census branch tips was re-che
 | Highlighting | 0 | 0 | 0 | 2 |
 | Admin UI | 0 | 0 | 0 | 2 |
 | Update processing | 0 | 0 | 0 | 1 |
-| **Total** | **184** | **159** | **25** | **79** |
+| **Total** | **185** | **159** | **26** | **78** |
 
 ## How the three readiness bars reconcile
 
@@ -42,7 +42,7 @@ The records use three different bars, and they do not count the same thing:
 - **Ready-lists READY (30 of 62)** is the strictest bar: full packaging verification at the live tip (head citations, Proof counts against the receipt, changelog YAML and type, bold one-line summaries, length, no TESTING file). It covers only search components and query parsing.
 - **Follow-up SATISFIED (rounds 1 to 5)** is a draft bar: the draft text was fixed and re-reviewed until SATISFIED, read against the receipt at the live tip. It is not a fresh gate; where a follow-up fix moved a branch head, the row stands only where a gate record covers the moved head.
 
-The split this file uses: a row is **openable as-is** when its gate record covers the live tip and its draft stands converged or SATISFIED with no packaging item outstanding. A row is **openable after one named step** when exactly one thing stands between it and that state, and that thing is named under its slate: a packaging title or fragment fix (9 rows), a posted gate job (4 rows), the missing-receipt jobs (2 rows), a draft confirmation against a landed head (1 row), or one owner word at approval (9 rows). Everything else is **not ready** and carries its next step below.
+The split this file uses: a row is **openable as-is** when its gate record covers the live tip and its draft stands converged or SATISFIED with no packaging item outstanding. A row is **openable after one named step** when exactly one thing stands between it and that state, and that thing is named under its slate: a packaging title or fragment fix (9 rows), a posted gate job (4 rows), the missing-receipt jobs (2 rows), a draft confirmation against a landed head (1 row), a staged draft-text application against a gate that landed during assembly (1 row), or one owner word at approval (9 rows). Everything else is **not ready** and carries its next step below.
 
 Two honest caveats inside the as-is count. First, the W1 ready lists applied the ruling that a Proof verification date is advisory; 13 slate rows (search components SOLR-6207, 6831, 6975, 7550, 10694; query parsing SOLR-4824, 8977, 9048, 9149, 10897, 11761, 17280, 17311) stand as-is only under that reading. If the date is ruled mandatory, those 13 move to the after-one-step column (the step is adding the date from the receipt) and the as-is total becomes 146. The ruling is owner item 4. Second, SOLR-18109 stands as-is on the ruling that a tests-only change needs no changelog fragment.
 
@@ -211,7 +211,7 @@ Packaging and opening steps for this slate:
 - SOLR-8628 (*): Gate job gates/SOLR-8628-packaging.md (OPEN): remove the root TESTING file, then the top-up check at the moved head. Gate host (vm1 or vm2).
 - SOLR-8628 (marked *): the root TESTING file removal is the one packaging step in this category, and it runs as its gate job, not at the opening desk.
 
-### SolrJ (17 rows)
+### SolrJ (18 rows)
 
 SOLR-4424 (about 4,116 characters) and SOLR-12094 (about 4,390) run over the 3,850 length guide the follow-up round applied; both are SATISFIED and are listed as-is, with the length noted here rather than held.
 
@@ -234,6 +234,7 @@ SOLR-4424 (about 4,116 characters) and SOLR-12094 (about 4,390) run over the 3,8
 | SOLR-6046 * | solr-6046-submit | 3b833e369a0b | The XML writer expands an `Object[]` operand into one field element per element, the same way it already expands a `Collection` |
 | SOLR-8536 * | solr-8536-submit | 28552ddc26eb | ASCII control characters are replaced with spaces in the joined string, before the thread name is built |
 | SOLR-18341 * | solr-18341-submit | 458b098719d7 | Each request says whether it may be retried, and both clients ask it |
+| SOLR-11356 * | solr-11356-submit | 8b2e826154af | Each stream keeps a copy of the credentials and headers of the request that opened it, and only matching requests join it |
 
 Packaging and opening steps for this slate:
 
@@ -243,6 +244,7 @@ Packaging and opening steps for this slate:
 - SOLR-6046 (*): Packaging PK-4: land the replacement changelog title (SolrJ round 2 response, packaging table), then refresh the receipt head line. Main side, at opening.
 - SOLR-8536 (*): Packaging PK-5: land the replacement changelog title (SolrJ round 2 response, packaging table), then refresh the receipt head line. Main side, at opening.
 - SOLR-18341 (*): Packaging: the changelog title must name the load balancer change and the new public method SolrRequest.isRetriable(); the SOLR-18368 hunk at CloudSolrClient.java line 1550 is settled in the same pass. Main side, at opening.
+- SOLR-11356 (*): The header-copy gate landed green during assembly (2026-10-14T13:33Z) at the patched head 8b2e826154af, pushed and receipted. The one step left is applying the staged post-gate draft text staged in reports/solrj-convergence-round-2-response.md (summary line, Limits bullets, Proof bullet from the new receipt, head re-points, JDK suite line). Review coordinator.
 - SOLR-3999, SOLR-4335, SOLR-4336, SOLR-6046, SOLR-8536 (marked *, items PK-1 to PK-5): land the replacement changelog title recorded verbatim in reports/solrj-convergence-round-2-response.md (packaging table), with a changelog YAML parse, then refresh the receipt head line. Main side, at opening.
 - SOLR-18341 (marked *): the title must name the load balancer change and the new public method SolrRequest.isRetriable(); the SOLR-18368 hunk at CloudSolrClient.java line 1550 is settled in the same pass.
 - Title note carried for SOLR-17866 (not ready, below): its title says setRequiresCollection(false); the code opts out on any explicit call.
@@ -463,7 +465,6 @@ One line per row: what blocks it, the named next step, and who owns that step.
 
 ### SolrJ
 
-- **SOLR-11356** (solr-11356-submit, tip 6120dae28d04): Gate owed: the header-copy patch (SJ-R1-49) is written and checked, and its gate job is posted; after the gate, the patching agent pushes, the receipt refreshes, and the staged draft text applies. The packaged push to this head is also an owner item (see the owner section). Next step owner: Gate: gates/SOLR-11356-sj-r1-49-header-copy.md (vm1 or vm2); owner item on the push.
 - **SOLR-14187** (solr-14187-submit, tip 29023ec1ecab): Draft written; no convergence verdict on record. Next step owner: Review: assignments/pool-census-followup-solrj-round-1.md.
 - **SOLR-17866** (solr-17866-submit, tip 3f9367d796a6): Owner item: the submit-ahead-of-the-design-conversation flag stands. Its changelog title also needs correcting at packaging (it says setRequiresCollection(false); the code opts out on any explicit call). Next step owner: Owner item.
 
@@ -556,7 +557,7 @@ Each item needs the owner's word. The first set is the one the close-out records
 2. **SOLR-17372 retire word.** The retire round's premise check returned NOT SUPPORTED and the gate failed at the live tip; the branch waits on the retire word.
 3. **The PR #5106 reply post (SOLR-16630).** The reply to Tomas Lobbe is drafted and held; nothing from the owner is posted on that PR. The reconstructed draft stands at `material/pr-5106-reply-draft-reconstructed.md` (marked reconstructed; the W5 second review checked its two reasons against the code). Posting needs its own explicit go.
 4. **Proof verification date: mandatory or advisory.** The W1 ready lists flagged 13 drafts whose only hold was a missing verification date in Proof and applied the advisory reading. Rule it mandatory and those 13 rows move to after-one-step; rule it advisory and the slate totals stand as printed.
-5. **SOLR-11356's packaged push.** The SolrJ settlement escalates this: the packaged head 6120dae28d04 was pushed to solr-11356-submit and the receipt records it, but the settlement found no owner yes for that push on record (a round 1 record says pushing waits for the owner's yes). Confirm the push, or direct a reversal. The header-copy gate is separately owed (not ready list).
+5. **SOLR-11356's packaged push.** The SolrJ settlement escalates this: the packaged head 6120dae28d04 was pushed to solr-11356-submit and the receipt records it, but the settlement found no owner yes for that push on record (a round 1 record says pushing waits for the owner's yes). Confirm the push, or direct a reversal. The header-copy gate has since landed green at the patched head 8b2e826154af (2026-10-14), so SOLR-11356 sits in the SolrJ slate as a marked row; the push question here is unchanged.
 6. **SOLR-12505's three holds.** (a) The Choice: defType versus terms parser routing. (b) The Unicode whitespace decision: keep the ASCII whitespace check as drafted, or widen it with \p{javaWhitespace} (the harder option; a code change with its own gate). (c) The JIRA attributions in the draft (Bernstein, Smiley, Pugh), which the review host could not verify against JIRA. The changelog title gate (gates/SOLR-12505-changelog-title.md, HOLD) waits on the Choice.
 7. **SOLR-18368's key choice.** The PR carries the SOLR-18368 key or opens as a follow-up reference. Security round 2 also flags banner option (a), "no key, Jira line deleted", as a shape the receipt does not name; confirm (a) before opening.
 8. **SOLR-18339's opening timing.** The receipt's last bullet names the SOLR-18336 precondition; the draft also poses the secured-node Choice. The CLI landing order puts SOLR-7924 after it.
