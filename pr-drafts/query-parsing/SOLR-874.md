@@ -34,12 +34,14 @@ The base-code run used the new test files on top of the base source. The counts 
 **Two choices came up. Each has a live alternative.**
 
 1. Drop the word, or search for it as a plain term. This change drops it. Earlier patches on the ticket escaped the words so the parser read them as terms. Cost of dropping: `Portland, OR` becomes `Portland,`, and the OR is lost. Cost of keeping the word: `ipod AND` searches for the word AND and usually matches nothing. Was dropping the right call?
-2. A query that is only a boolean word, such as `q=AND`, still returns a parse error, because nothing is left after the cleanup. The other option is to treat it as an empty query, the way dismax already treats blank input. Should an operator-only query be treated as empty?
+2. A query that is only a boolean word, such as `q=AND`, still returns a parse error, because the cleanup leaves a lone boolean word in place. The other option is to treat it as an empty query, the way dismax already treats blank input. Should an operator-only query be treated as empty?
 
 ## Limits
 
-- Operator-only queries, such as `q=AND`, still return a parse error (see the second choice above).
-- Only the dismax parser changes. The edismax parser does not call this code.
+**Only the dismax parser changes, and a query that is only an operator still fails.**
+
+- `q=AND` is the example. The cleanup leaves a lone operator in place, so the parser still rejects it (see the second choice above).
+- The only caller of the cleanup is [`DisMaxQParser`](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/solr/core/src/java/org/apache/solr/search/DisMaxQParser.java#L195). The edismax parser does not call it.
 
 Changelog: [changelog/unreleased/SOLR-874-dismax-dangling-boolean-operator.yml](https://github.com/nick-boss-tech/solr/blob/ac9ab33753751a6fef05b5f100f5c1c5683510b2/changelog/unreleased/SOLR-874-dismax-dangling-boolean-operator.yml#L1-L8)
 

@@ -16,4 +16,4 @@
 - Decision rule: scope questions under the decision default and the three-rung ladder; each decision recorded in the round report.
 - Deliverable: `reports/census-followup-scheduled-round-1.md`, one line per ticket, with each fix, each draft written and each gate job posted.
 - Heartbeat: 2026-10-14T04:38Z (claim taken).
-- Status: IN PROGRESS.
+- Status: DONE (2026-10-14). Deliverable: `reports/census-followup-scheduled-round-1.md`. 15 READY TO OPEN, 4 SATISFIED with opening held on a named gate job, 5 HOLD. Seven gate jobs filed, none run.
