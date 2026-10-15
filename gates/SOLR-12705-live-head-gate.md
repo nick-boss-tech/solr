@@ -41,3 +41,8 @@ The audit's second blocking item is the counter-level gap, and this job carries 
 
 - Record the failing step, the failing test and seed if a test ran, and the log path in this file and in the receipt. A gate that executed tests and failed is never relaunched by the claimant; the main side investigates first (WORKFLOW.md). A run that never executed tests because of an environment refusal may be relaunched once, with the refusal recorded.
 - Note for sequencing, not part of this job: SOLR-16655 and SOLR-7504 both conflict textually with this branch (in `FieldMutatingUpdateProcessor.java` and `FieldMutatingUpdateProcessorTest.java` respectively); the audits record fixed landing orders for both pairs.
+
+## PR body edit, 2026-10-15 (approved by the owner)
+
+- PR #5096 body edited at 2026-10-15T21:40:37Z under the owner's approval, Proof and Limits only: the Proof now records the base run at 0cc328310f8f (43 tests, one failure, testParseDateInAtomicUpdateOperations, by content), and Limits states that testAtomicOperandsOptOut has no fail-before result because it cannot compile against the base.
+- Read back through the API: stored body matches the edit, head aa56b7b1be4c unchanged, no comments, draft false.
