@@ -5,4 +5,4 @@
 - Capability tags: gate.
 - Runner: gates/g18010-changelog-title-gate.sh, worktree /workspace/gates/solr-18010-changelog-title (detached). Seed 18010C0FFEE18010.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued. The fork push happens only after the gate is green, per the job's On green section.
+- Status: DONE 2026-10-15T04:24Z. Gate green at 571307400b6917ce458db989f29febb5cff8a600. Fork push done as a fast-forward from 2b5ad801c9e8, verified by ls-remote. Receipt refreshed; draft citation re-point left for the main side.

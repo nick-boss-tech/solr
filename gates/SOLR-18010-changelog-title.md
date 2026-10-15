@@ -1,7 +1,7 @@
 # Gate job: SOLR-18010 changelog title correction (E13, finding B5), title stated inline
 
 - Branch: solr-18010-submit. Head to build on: `2b5ad801c9e88807337f4f0a3fdd689126ad37d1` (fork tip, verified by `git ls-remote` on 2026-10-14 at filing). Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
-- Status: OPEN, unclaimed. Claimable by either Linux host (vm1 or vm2). Claim under `claims/` before running anything, per WORKFLOW.md. Windows never claims build work.
+- Status: DONE 2026-10-15T04:24Z. GATE GREEN at 571307400b6917ce458db989f29febb5cff8a600 (log logs/vm2/queue-g18010-changelog-title-gate-20261015T035900Z.out). Pushed to solr-18010-submit as a fast-forward from 2b5ad801c9e88807337f4f0a3fdd689126ad37d1. Receipt refreshed in receipts/SOLR-18010.md. The draft citations in pr-drafts/core-admin/SOLR-18010.md are main-side follow-on.
 - Capability tags: gate.
 - Job type: one branch commit that changes only the `title:` line of one changelog fragment, then the hardening gate at the new head, a plain push on green, and the records refresh.
 - This job supersedes the scratchpad patch named in `pr-drafts/core-admin/SOLR-18010.md` (staging notes, E13) and in `reports/review-batch-round-2-slices-round-1.md`: `SOLR-18010-changelog-title.patch` was never placed under `gates/` or anywhere else on this branch, so there is nothing to apply. Do not recreate the patch file; the replacement title is stated verbatim below and the edit is made directly.
