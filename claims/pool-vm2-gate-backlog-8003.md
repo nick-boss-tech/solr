@@ -4,4 +4,4 @@
 - Capability tags: gate. Runner: gates/g8003-gate.sh on vm2 (worktree /workspace/gates/solr-8003-gate, detached). Seeds 8003C0FFEE8003 and 8003C0FFEE8004.
 - Stops before any push. A tidy change, an unexpected proof-leg shape, or a failed focused run is recorded in gates/SOLR-8003.md and escalated; not relaunched.
 - The PR 5140 body edit (Decisions row, pending Nick) is not part of this claim.
-- Status: ESCALATED, NOT GREEN (2026-10-15T19:40:41Z). Proof leg failed with an unexpected shape: testGlobJsonTransformer's 400 reads `undefined field: "su"`, not "Error parsing fieldname". Focused runs and tidy, compile and module check passed. Recorded in gates/SOLR-8003.md; no receipt, no DONE, not relaunched. Worktree /workspace/gates/solr-8003-gate kept for the main agent.
+- Status: DONE (2026-10-15). The main agent settled the escalation: the proof leg stands by content (both glob tests fail at the merge-base because a glob cannot take a raw value transformer there; the `su*` form's 400 reads `undefined field: "su"`), so the gate is GREEN at 85a8d32339. Receipt: receipts/SOLR-8003.md (top section). Verdict recorded at the end of gates/SOLR-8003.md.
