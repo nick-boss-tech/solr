@@ -1,5 +1,7 @@
 # Pool assignment: <title>
 
+Status: OPEN
+
 - Capability tags: <tags from WORKFLOW.md>.
 - Intended host: <host>. Claim under `claims/` before starting (WORKFLOW.md).
 - Posted by: <agent or lane>, <YYYY-MM-DD>, at the direction of <who>.

@@ -1,8 +1,10 @@
 # Gate job: <TICKET> (<short title>)
 
+Status: OPEN
+
 - Branch: <fork branch>. Head: `<40-character sha>` (fork tip, confirmed by ls-remote on <YYYY-MM-DD>). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `<sha, or none>`. Merge-base with upstream/main: `<sha>`.
-- Status: OPEN. Intended host: <host>. Any capable Linux host may claim if the intended host is busy (WORKFLOW.md).
+- Intended host: <host>. Any capable Linux host may claim if the intended host is busy (WORKFLOW.md).
 - Capability tags: gate.
 - Module: `<gradle module, for example :solr:core>`. Focused class: `<fully qualified test class>`. Seed: `<hex seed>`.
 - Diff scope against `<base sha>`: <files, with insertions and deletions>. Anything else in the tree is out of scope.

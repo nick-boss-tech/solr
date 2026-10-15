@@ -1,6 +1,7 @@
 # Claim: <slug>
 
 - Claimant host: <host>, matching a file in `hosts/`.
+- Status: <ACTIVE; mark DONE with the deliverable paths when the work lands>.
 - Job or assignment: `<gates/... or assignments/... path>`.
 - Slice: <the whole job, or the slice taken>.
 - Capability tags used: <tags>.

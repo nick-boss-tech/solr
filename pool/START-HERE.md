@@ -31,6 +31,10 @@ If the job or claim name already exists, stop. Another session got there first, 
      5. `git push origin HEAD:refs/heads/pr-prepare`. If the push is rejected, run `git fetch origin pr-prepare`, `git rebase origin/pr-prepare`, and push again.
      6. Read it back: `git show origin/pr-prepare:gates/<TICKET>.md`.
 
+## Find open work
+
+Open assignments and gate jobs are listed in [OPEN-WORK.md](../OPEN-WORK.md) at the branch root, grouped by intended host. The list is generated from the Status line under each file's title; if the two ever disagree, the file's own Status line governs. When you claim a file, set its Status line to CLAIMED naming your claim file in the same push as the claim; when the work lands, set it to DONE in the same push as the deliverable.
+
 ## Claim a gate job
 
 Copy `pool/templates/claim.md` to `claims/pool-<host>-gate-backlog-<ticket number>.md`, fill it, and post it with the same steps (`-Kind claim -Name pool-<host>-gate-backlog-<ticket number>` on Windows). Claim before you run anything. Append a heartbeat line at least once an hour and push it. Mark the claim `DONE:` in the same push as the deliverable.
