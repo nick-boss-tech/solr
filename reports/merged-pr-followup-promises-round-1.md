@@ -1,5 +1,130 @@
 # Merged PR follow-up promises, ledger, round 1
 
+## Pass dated 2026-10-15 (current)
+
+Pass dated 2026-10-15 (pr-prepare tip at pass start `c5a6b5e7ca0`). Assignment: `assignments/pool-merged-pr-followup-promises-round-1.md`. This run updates the ledger in place. The file already held the 2026-10-13 pass and the round 2 pass of 2026-10-14; both stay below, unchanged, as history. Where this pass differs from them, this pass is current. The assignment is still named round 1, but this is the third recorded pass, so the round numbering is for the owner to settle.
+
+Merged set, re-derived this pass with `research\gh.ps1 pr list --repo apache/solr --author nick-boss-tech --state merged --limit 200`: total 8, all base `main`, all with `mergedAt` set (UTC). It matches the seed list, and no seed PR failed to come back merged.
+
+Open set, re-derived with `--state open --limit 200`. A first attempt without the limit returned only 30 PRs (the gh default), so it was discarded; the census below uses the full list.
+
+Counts for this pass:
+
+- Merged PRs: 8.
+- Promises found in merged bodies: 3 (#4953, #5001, #5070).
+- Discharged: 0. Open: 3. Not yet due: 0.
+- Named shapes outside the merged set: 6 entries, all pending merge or not yet due (see the seed section). Absent from the set: #5100 and #5104 are open, #5090 is open with no promise, and #5061 is open (pending merge, out of ledger).
+
+### Merged PRs
+
+#### #4939 (SOLR-18135), merged 2026-09-24 (UTC)
+No follow-up promise in the description.
+
+#### #4953 (SOLR-8291, SOLR-13217), merged 2026-09-30 (UTC)
+Promise, verbatim: "This also fixes SOLR-16130, I plan to submit a separate, test-only PR for that."
+The same body also says "If the tests are not needed, I can remove them." That is an offer about this PR's tests, moot after merge, so it is not counted as a follow-up.
+State: OPEN. Candidate discharge: #5004 (SOLR-16130, "Add cross-collection export regression test"), open, author nick-boss-tech, head `solr-16130-test-followup` at `3c48dec4b79f`, which matches the fork branch. Its live body says it "contains no production change" and that the root cause "was fixed and merged in #4953 (SOLR-8291)". The 2026-10-14 pass verified its file list is test-only.
+Open question for Nick: whether an open PR satisfies "I plan to submit", or whether the promise waits for #5004 to merge. This ledger keeps it open until he rules.
+Next step: no pool action. Nick rules on the wording. Merging #5004 is a maintainer call.
+
+#### #4959 (SOLR-18277), merged 2026-10-05 (UTC)
+No follow-up promise in the description. The sentence "The size of the rollback window was not measured." is a limit, not a promise.
+
+#### #4965 (SOLR-10198), merged 2026-10-07 (UTC)
+No follow-up promise in the description.
+
+#### #4995 (SOLR-18196), merged 2026-10-03 (UTC)
+No follow-up promise in the description. (In Eastern time the merge falls on 2026-10-02; the UTC date is used here.)
+
+#### #5001 (SOLR-18317), merged 2026-10-05 (UTC)
+Promise, verbatim: "The server-side hardening that degraded such calls to the local node was split out at reviewer request and is preserved intact on the fork branch `solr-18317-server-submit`, to be opened as its own PR."
+State: OPEN. The fork branch exists at `ae918a03fa7b`, matching the 2026-10-14 pass. No open or merged PR has that head (open census). The discussion thread on #5001 gives the context: Nick's comment of 2026-10-04 says "The server-side proxy changes are preserved on a separate branch for a later PR." Eric Pugh's comment of 2026-10-05 13:38:52Z asks whether Nick would take "a follow up to this PR" to move to the V2 logging APIs and points to SOLR-15823.
+Owner ruling, recorded in the 2026-10-14 pass and not re-checkable on GitHub: Nick ruled the promise kept, relying on the SOLR-15823 pair #5030 and #5031 (both open). The 2026-10-14 pass also records SOLR-18317 as Resolved in Jira; Jira was not queried this pass.
+Next step: Nick chooses one of two paths. (a) Open a PR from `solr-18317-server-submit`, which needs his go-ahead and a ticket decision, because SOLR-18317 is resolved. (b) Confirm the ruling in writing, with the SOLR-15823 pair as the discharge. The coverage check is in `assignments/pool-solr-18317-server-coverage-round-1.md`. Whose call: Nick.
+
+#### #5012 (SOLR-13202), merged 2026-10-07 (UTC)
+No follow-up promise in the description. The Limits line, "A missing `v` parameter (the query being joined) is not checked by this change and is not covered by the new tests," is a scope exclusion, not a promise.
+
+#### #5070 (SOLR-4841), merged 2026-10-10 (UTC)
+Promise, verbatim: "A follow-up submission is planned for a test that runs language detection through a custom identifier."
+State: OPEN. No fork branch carries that test: `solr-4841-langid-followup-submit` is not on the fork (`ls-remote`), and `ci/4841-langid-r28` is the CI copy of the merged change (2026-10-14 pass). Nick ruled on 2026-10-14 that the promise is to be executed.
+Record this pass: `assignments/pool-solr-4841-langid-followup-round-1.md` exists and directs a build of the test on `solr-4841-langid-followup-submit` off current main, review rounds to SATISFIED, and a gate job at `gates/SOLR-4841-langid-followup.md`. That gate file does not exist yet. The assignment also records Jan Høydahl's direction (reported by Nick, 2026-10-14) that the follow-up get a new Jira ticket, with packaging re-pointed at that ticket. The 2026-10-14 pass did not record this.
+Next step: the pool builds the test, files the gate job, and runs review to SATISFIED. Opening the branch needs Nick's approval and the new ticket number. Whose call: the build is the pool's under the assignment; the opening and the ticket are Nick's.
+
+### Summary of merged PRs
+
+| Merged PR | Ticket | Merged (UTC) | Promise state |
+|---|---|---|---|
+| #4939 | SOLR-18135 | 2026-09-24 | none |
+| #4953 | SOLR-8291, SOLR-13217 | 2026-09-30 | open (#5004 open and test-only; discharges on merge or Nick's ruling) |
+| #4959 | SOLR-18277 | 2026-10-05 | none |
+| #4965 | SOLR-10198 | 2026-10-07 | none |
+| #4995 | SOLR-18196 | 2026-10-03 | none |
+| #5001 | SOLR-18317 | 2026-10-05 | open (branch at `ae918a03`, no PR; owner ruling kept, recorded 2026-10-14) |
+| #5012 | SOLR-13202 | 2026-10-07 | none |
+| #5070 | SOLR-4841 | 2026-10-10 | open (assigned for build; gate job not yet filed) |
+
+### Seed promise shapes (open PRs or no merged carrier)
+
+These are checked against live bodies. None is in the merged set, so none is a ledger entry yet. Each enters the ledger when it merges.
+
+#### #5100 (SOLR-18532), open, head `7dfd3d98d0a2`
+Promise, verbatim: "The SOLR-9865 change edits the same rollback lines and writes back only the previous directory name. Once this change lands, I will follow up on that branch by dropping its rollback edit, so the two do not conflict."
+State: PENDING MERGE. `solr-9865-submit` is still at its gated head `4937608bb181`, so the rollback edit has not been dropped.
+Next step: after #5100 merges, drop the rollback edit on `solr-9865-submit`, re-gate, and open. Whose call: Nick.
+
+#### #5104 (SOLR-2681), open, head `a3b1ea7994d9`
+Promise, verbatim: "A follow-up pull request is planned for the nested forms."
+State: PENDING MERGE. No fork branch for the nested forms exists (`ls-remote`). The plan is not confirmed in the records. `reports/highlighting-answers-check-2681.md` (lines 25 to 31) says no record it read shows a plan, and asks Nick to confirm before the sentence stands.
+Correction: the 2026-10-13 pass cited `material/highlighting-round-1-answers.md` line 9 as the source of the plan. That file has no "nested" text, so the citation is withdrawn.
+Next step: Nick confirms the nested-form plan, or the Limits line is reworded to an offer "on request", as the check suggests. Whose call: Nick.
+
+#### #5061 (SOLR-18119), open, head `660faedd026`
+Out of this round's ledger, because #5061 is open. It enters the ledger when it merges.
+Named follow-up, verbatim from the body: "A follow-up change can restore the anchor check; it is not in this PR."
+Record: the anchor follow-up has no named plan or owner (`reports/build-docs-misc-round-1-g6.md` line 42, re-read this pass).
+Next step: before merge, Nick names the plan (which PR, by whom). Whose call: Nick.
+
+#### SOLR-13943 and SOLR-13059 (the assignment's "#5090")
+The SOLR-13943 PR is #5089, not #5090. #5089 (open, head `ca443f6f6806`) carries the promise, verbatim: "A follow-up submission for those six tests is planned." The full sentence in the Limits section reads: "The six tests left in `TimeRoutedAliasUpdateProcessorTest` keep the class-level `@AwaitsFix`, so they stay skipped in normal mode. `testPreemptiveCreation` is one of them. A follow-up submission for those six tests is planned."
+State: PENDING MERGE. No fork branch and no open PR for the SOLR-13059 six-test follow-up (`ls-remote` and open census).
+Next step: Nick schedules the six-test follow-up. Whose call: Nick.
+
+#### #5090 (SOLR-14262), open
+Checked as the seed "#5090". The live body has no SOLR-13059 promise and no planned follow-up. Its Limits name scope gaps (SolrCloud, docs, autocommit overlap, "This branch does not address that overlap"), which are limits, not promises.
+Record: No follow-up promise in the description. Not merged.
+
+#### #5088 (SOLR-13696), open (new this pass, not a seed)
+Promise, verbatim from the Limits section: "A follow-up submission to restore that coverage is planned." The coverage is commitWithin coverage, which the change removes.
+State: PENDING MERGE. It enters the ledger when #5088 merges.
+
+#### SOLR-17393 and SOLR-9637 (no merged carrier)
+Assignment wording: the merge-only scope on 17393 names the per-shard top-count cut as a follow-up, and 9637 follows as its own PR once 17393 lands, rebased onto it.
+Search result: no merged description carries this. The eight merged bodies do not mention either ticket, and a search of all apache/solr PRs for SOLR-17393, SOLR-9637 and SOLR-13059 returns no PR for either ticket.
+The text exists only in unmerged drafts. `pr-drafts/suggester/SOLR-17393.md`: "The per-shard fix is a planned follow-up submission." `pr-drafts/suggester/SOLR-9637.md`: "This PR opens after SOLR-17393 lands, rebased onto the landed tip."
+Fork branches `solr-17393-submit` (`626241e647e5`) and `solr-9637-submit` (`c50fa4ffd932`) exist. No PR is open for either.
+State: NOT YET DUE. The trigger is the SOLR-17393 PR merging, and that PR is not yet opened.
+Next step: Nick opens the 17393 PR. After it lands, Nick rebases 9637 onto it and opens that PR. Whose call: Nick.
+
+### Discharges proposed, none executed
+
+- #4953: Nick rules whether an open #5004 satisfies "I plan to submit", or the promise waits for its merge.
+- #5001: Nick chooses between opening from `solr-18317-server-submit` and confirming the SOLR-15823 pair as the discharge.
+- #5070: the pool builds and gates the test under `assignments/pool-solr-4841-langid-followup-round-1.md`; Nick approves the opening and the new ticket.
+
+### Not verified this pass
+
+- Owner rulings from 2026-10-14 (#5001 kept; #5070 to be executed). The #5070 direction appears in the assignment text. The #5001 ruling is not in any file read this pass; it is carried from the 2026-10-14 pass.
+- Jira status (SOLR-18317 Resolved, SOLR-15823 Open, SOLR-13059, SOLR-17393, SOLR-9637). Jira was not queried this pass.
+- The SOLR-16130 receipt (GATE GREEN) and the #5004 file list are carried from the 2026-10-14 pass, not re-read.
+- The nested-form plan for #5104: no record confirms it.
+- The anchor-check plan for #5061: none named.
+- Fork branches for the nested forms and for the SOLR-13059 follow-up: none found on the fork.
+
+Everything below this heading is history: the 2026-10-13 pass and the round 2 pass of 2026-10-14, kept as recorded.
+
+## Earlier pass, 2026-10-13
+
 Pass dated 2026-10-13 (pr-prepare tip `1faa41f34d2`). Assignment: `assignments/pool-merged-pr-followup-promises-round-1.md`. Later rounds update this ledger in place.
 
 Merged set, derived from the GitHub search API (`repo:apache/solr author:nick-boss-tech is:pr is:merged`, total 8, all base `main`, all with `merged_at` set). The seed list matches the search exactly: no seed is missing and no extra merged PR is returned. Closed without merge and out of scope: #4967 (SOLR-18134).
