@@ -7,3 +7,5 @@
 - Status: CLAIMED, runner queued.
 
 - 2026-10-15T00:13ZZ vm2 finish list section C: gate green at ; fork pushed (fast-forward from c2396f425f). Draft and receipt refresh left open.
+
+- 2026-10-15T00:32ZZ vm2 finish list section C follow-up: claimed the two owed knn tests on 2fe0986158 (id desc already present in the landed head; this adds the maxScore pins). Runner gates/g17055-followup-gate.sh queued. Push only on green, as a fast-forward of solr-17055-submit from 2fe0986158.
