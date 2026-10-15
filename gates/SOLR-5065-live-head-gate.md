@@ -1,7 +1,7 @@
 # Gate job: SOLR-5065 gate at the live head, with the suggester pin test's fail-before verdict
 
 - Branch: solr-5065-submit. Head pinned at filing: `ab894a996c8aa9825c4ac5af38536aec1ee865eb` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-5065.md`). Merge-base with upstream main: `0cc328310f8f` (as recorded in the audit; not the merge-base of the other Group C branches).
-Status: CLAIMED (claims/pool-vm2-gate-backlog-5065.md)
+Status: GATE ENDED, NOT MARKED GREEN, ESCALATED TO MAIN AGENT (claims/pool-vm2-gate-backlog-5065.md). Run 2026-10-15T21:00:46Z to 21:23:37Z on head ab894a996c8aa9825c4ac5af38536aec1ee865eb; tidy clean, no commit. Changelog, tidy, compile-errorprone, focused head (DefaultSchemaSuggesterTest 2/0 failures, ParsingFieldUpdateProcessorsTest 44/0 failures) and `:solr:core:check -x test` all rc=0. Proof leg rc=1 with `expected:<pdouble> but was:<string>` on base 0cc328310f8f, which is the fail-before outcome by content; the coordinator's every-rc-zero rule does not mark it GREEN, so the main agent decides the verdict. Log: logs/vm2/5065-result.txt. Not relaunched.
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head, whose proof leg is the fail-before verdict for the suggester pin test. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 
