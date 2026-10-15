@@ -1,7 +1,7 @@
 # Gate job: SOLR-6065 gate at the live head, with the cloud test in the run
 
 - Branch: solr-6065-submit. Head pinned at filing: `3d2cec9e1ab3a19f6b948682b116c2780da4b65b` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-6065.md`). Merge-base with upstream main: `97d973814336101e12475558d7419321c743de79`.
-Status: CLAIMED (claims/pool-vm2-gate-backlog-6065.md)
+Status: NOT GREEN at 3d2cec9e1a (proof leg rc=1, left for the main agent; see the Gate result section)
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head, with the cloud test named in the run list. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 
@@ -35,3 +35,12 @@ Status: CLAIMED (claims/pool-vm2-gate-backlog-6065.md)
 ## On failure
 
 - Record the failing step, the failing test and seed if a test ran, and the log path in this file and in the receipt. A gate that executed tests and failed is never relaunched by the claimant; the main side investigates first (WORKFLOW.md). A run that never executed tests because of an environment refusal may be relaunched once, with the refusal recorded.
+
+## Gate result (coordinator record, 2026-10-15)
+
+Run: /workspace/gates/g6065-gate.sh, ended 2026-10-15T21:00:43Z, head 3d2cec9e1ab3a19f6b948682b116c2780da4b65b, log logs/vm2/queue-g6065-gate-20261015T203556Z.out.
+
+- changelog rc=0, tidy rc=0 with an empty tidy tree, compile rc=0, focused head rc=0, core check rc=0.
+- Proof leg rc=1 (nonzero expected). Against base 97d973814336 with the branch test files in place, `MaxDocsLimitCloudTest.testMaxDocsExceededGivesClearErrorToClient` failed with `expected:<500> but was:<400>`. The server text is "possible analysis error: number of documents in the index cannot exceed 3" (logs/vm2/6065-proof.log, lines 112-113 and 370). Whether that is the intended pre-change symptom is a by-content verdict for the main agent.
+- The focused head run (`MaxDocsLimitCloudTest` and `DirectUpdateHandlerTest`) is not counted as proof, and the step 6 counts were not recorded because the proof leg did not pass.
+- Not relaunched. No push was made. No receipt was written.
