@@ -7,3 +7,5 @@
 - Status: FAILED at 3e07d801df598573823cc997bbabb848fa2b1cfb: focused TestQueryLimits head leg 8 tests, 1 failure (testPivotFacetRefinementStopsWhenOmittedPartialResults, SolrServerException: No live SolrServers available). Not relaunched; left for the main agent. Details in gates/SOLR-6831-omitted-refinement-round-2.md run record.
 
 - 2026-10-15T06:29ZZ vm2 gate backlog coordinator: BLOCKED (red). Focused head 1 failure (SolrServerException: no live servers) on testPivotFacetRefinementStopsWhenOmittedPartialResults; proof leg shows the same error, so n is not reached. Not relaunched, not pushed. Record in gates/SOLR-6831-omitted-refinement-round-2.md.
+
+- 2026-10-15T07:00ZZ vm2 gate backlog coordinator: round 3 head green (8 of 8 at local 4afed04987b2); proof leg fails with SolrServerException at base, not the expected message. Not pushed. Recorded in gates/SOLR-6831-omitted-refinement-round-2.md.

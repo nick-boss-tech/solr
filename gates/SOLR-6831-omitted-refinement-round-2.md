@@ -59,3 +59,12 @@ Record the failing step and detail in this file, mark the claim with the blocker
 - Proof leg (production FacetComponent.java at 2ee19dc646): 8 tests, 1 failure, the same test with the same error. The proof does not decide the change: the new test fails before the refinement code can be compared, so n is not reached.
 - Stop per the job: an executed test failed. Not relaunched. Nothing pushed. The fork branch stays at 3e07d801df.
 - Needs a decision: the test's cluster does not come up in this shape (an environment or fixture defect, or the new test's setup). Options: fix the test setup in a new commit and re-gate, or the review lane investigates the setup first.
+
+
+## Run record, vm2 round 3 (2026-10-15T07:00ZZ): head green, proof shape differs, not pushed
+
+- Local commit 4afed04987b2 (on 3e07d801df, not on the fork): skips an incomplete refinement answer that has no pivot data, instead of throwing "No pivot refinement response". Spotless and tidy clean. Compile rc=0.
+- Focused head run: TestQueryLimits 8 tests, 0 failures, 0 errors (XML 2026-10-15T06:54:51Z). Log logs/vm2/6831-r3-result.txt.
+- Proof leg, production FacetComponent.java at 2ee19dc646: 8 tests, 1 failure, testPivotFacetRefinementStopsWhenOmittedPartialResults with `SolrServerException: No live SolrServers available` (XML 2026-10-15T06:58:49Z). Not the expected "refinement should not be requested again ... n" message: at base the coordinator throws before the refinement loop, so n is never reached.
+- The test discriminates in outcome (fails at base, passes at head) but not in the message the job expects. Per the job, a different failure shape stops the run; not pushed. The fork stays at 3e07d801df.
+- Same error appears in the SOLR-6975 proof leg (see that job), which points at a shared test-cluster issue for proof legs that trip a limit on a shard.
