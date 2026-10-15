@@ -1,7 +1,7 @@
 # Gate job: SOLR-16655 gate at the live head (decided descent fix)
 
 - Branch: solr-16655-submit. Head pinned at filing: `5e2317443f4116a9e97330b0d6ce175cf44b54df` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-16655.md`). Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
-Status: NOT GREEN at 5e2317443f (proof leg rc=1, left for the main agent; see the Gate result section)
+Status: DONE (GATE GREEN at 5e2317443f4; main-side proof verdict 2026-10-15, see the verdict section below)
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 
@@ -45,3 +45,12 @@ Run: /workspace/gates/g16655-gate.sh, ended 2026-10-15T20:35:52Z, head 5e2317443
 - Proof leg rc=1 (nonzero expected): 1 failed of 36 at base. The failing test is FieldMutatingUpdateProcessorTest.testTrimFieldsRecurseIntoNestedDocumentsOnlyWhenParentSelected (logs/vm2/16655-proof.log). Whether that is the intended fail-before shape is a by-content verdict for the main agent.
 - Proof base mismatch to check: the run used b201a57fb3e5 as the base for the proof leg and the diff, while this job file names merge-base 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Not relaunched. No push was made.
+
+## Main-side proof verdict (2026-10-15)
+
+The base question is settled. Step 5 of this job names the pre-fix branch production at b201a57fb3e5 as the proof base; the 14c7aac0d151402b00259e2fb9bf5eed7049ec5d in the header is the branch's merge-base with upstream main. The proof was run at both bases, with the branch's FieldMutatingUpdateProcessorTest, seed 16655C0FFEE16655, counts from fresh JUnit XML:
+
+- At b201a57fb3e5 (vm2, 2026-10-15): 1 failed of 36, the named test testTrimFieldsRecurseIntoNestedDocumentsOnlyWhenParentSelected, failing on the unselected parent's child: without the guard, the child under the unselected child_doc field is mutated. The 2026-10-09 receipt records the same failure at line 136.
+- At 14c7aac0d151 (vm1, 2026-10-15; log gate-16655-proof-correctbase.log; scratch tree = head 5e2317443f4 with the single production file reverted to the merge-base blob, hash-verified before the run): 12 failed of 36, 0 errors, 0 skipped. All 12 failures are the branch's RecurseIntoNestedDocuments tests, each failing because merge-base production never descends into child documents. The named test fails on the opposite assertion from the pre-fix run: expected "selected child" but was " selected child ", because the child under the selected foo_t field is never visited.
+
+The difference between the two bases for this test's area is the branch's own earlier commits: b201a57fb3e5 already descends into child documents unconditionally (commits 0c527ea270 and 6597e6e86c), while merge-base production has no descent at all. The named test discriminates at both bases, by content, on the two halves of the premise. With the head legs from the coordinator record all rc=0 (changelog parse, tidy with a clean tree, Error Prone compile, focused tests at the head, module check), the gate is GATE GREEN at 5e2317443f4116a9e97330b0d6ce175cf44b54df. The gate produced no commit; the fork tip does not move.
