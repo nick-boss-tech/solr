@@ -33,3 +33,10 @@ The first gate of the fix commit (log logs/vm2/queue-g17055-gate-20261014T113414
 - Refresh `receipts/SOLR-17055.md`: new head `2fe0986158391908ac89564090eb97e245788023`, the score-order and sort-order counts, the fail-before result at the decided proof base (base, overlay shape, failing assertion), and the module check.
 - Re-point every link in `pr-drafts/search-components/SOLR-17055.md` to the new head, rewrite its Limits (the sort gap is closed, so that paragraph goes), delete the OWED BEFORE POSTING hold comment at its top, and re-read the draft against the diff.
 - Mark gates/SOLR-17055-sort-path.md DONE and this job DONE with the new head recorded.
+
+## Run record (proof-c, 2026-10-14T23:30:03Z to 23:50:08Z, recorded 2026-10-15T00:03Z)
+
+- Head: `2fe0986158391908ac89564090eb97e245788023` (fix commit). Log: `logs/vm2/queue-g17055-proof-c-gate-20261014T233003Z.out`.
+- Head legs, all rc 0: changelog YAML parse, spotless, tree clean, Error Prone compile, `DistributedKnnTopKTest` 1 of 1 (failures 0), module check.
+- Fail-before leg, production at `c2396f425fa2` with the fix commit's test files: rc 1 at the sort assertion `.response.size():9!=3`. The score-order case runs first and passed.
+- Not counted GREEN: the fail-before rc is nonzero and the every-rc-0 rule applies. No fork push. Not relaunched. Status stays OPEN for the main agent to decide whether this run establishes the proof.
