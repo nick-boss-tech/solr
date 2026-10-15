@@ -2,6 +2,10 @@
 
 Working branch for preparing Solr pull requests by code area.
 
+Agents posting or claiming assignments and gate jobs: start with
+[`pool/START-HERE.md`](pool/START-HERE.md). The rules are in
+[`WORKFLOW.md`](WORKFLOW.md).
+
 Contents:
 
 - `pr-formula.md`: the formula every PR description draft on this
