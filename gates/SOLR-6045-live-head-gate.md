@@ -1,7 +1,7 @@
 # Gate job: SOLR-6045 gate at the live head (decided factory fix and post-gate commits)
 
 - Branch: solr-6045-submit. Head pinned at filing: `04208ba7f0b45837738e2afe1c428292f9fecae3` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-6045.md`). Merge-base with upstream main: `97d973814336101e12475558d7419321c743de79`.
-Status: CLAIMED (claims/pool-vm2-gate-backlog-6045.md)
+Status: GATE ENDED, NOT MARKED GREEN, ESCALATED TO MAIN AGENT (claims/pool-vm2-gate-backlog-6045.md). Run 2026-10-15T21:23:41Z to 21:47:15Z on head 04208ba7f0b45837738e2afe1c428292f9fecae3; changelog, tidy, compile-errorprone, focused head and `:solr:core:check -x test` all rc=0. Proof leg rc=1 against base 97d973814336, so the by-content verdict is left to the main agent. Log: logs/vm2/queue-g6045-gate-20261015T212341Z.out. Not relaunched; no push.
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 

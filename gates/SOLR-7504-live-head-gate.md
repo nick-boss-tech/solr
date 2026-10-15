@@ -1,7 +1,7 @@
 # Gate job: SOLR-7504 gate at the live head (every-value scan and null guard)
 
 - Branch: solr-7504-submit. Head pinned at filing: `2fe06bfd917f193b3591dfa4c088ef0994279ed6` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-7504.md`). Merge-base with upstream main: `97d973814336101e12475558d7419321c743de79`.
-Status: CLAIMED (claims/pool-vm2-gate-backlog-7504.md)
+Status: GATE ENDED, NOT MARKED GREEN, ESCALATED TO MAIN AGENT (claims/pool-vm2-gate-backlog-7504.md). Run 2026-10-15T21:47:22Z to 22:11:05Z on head 2fe06bfd917f193b3591dfa4c088ef0994279ed6; changelog, tidy, compile-errorprone, focused head and `:solr:core:check -x test` all rc=0. Proof leg rc=1 against base 22b77196e662, so the by-content verdict is left to the main agent. Log: logs/vm2/queue-g7504-gate-20261015T214722Z.out. Not relaunched; no push.
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 

@@ -10,3 +10,5 @@ Claimed 2026-10-15T20:53Z by the vm2 gate backlog coordinator.
 - Worktree: /workspace/gates/solr-6045-gate
 
 Scope: the full gate of the job file, gate only, no implementation step. Pushes only if the gate produces a commit, per the job file's On green.
+
+Status: GATE ENDED 2026-10-15T21:47:15Z, NOT MARKED GREEN, escalated to the main agent. Proof leg rc=1 against base 97d973814336; all other legs rc=0. Recorded in gates/SOLR-6045-live-head-gate.md. Not relaunched.
