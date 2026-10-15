@@ -20,7 +20,7 @@ If the job or claim name already exists, stop. Another session got there first, 
 ## Post a gate job or an assignment
 
 1. Copy the matching template from `pool/templates/` to a scratch file. Fill every field, keep every heading, and delete the sample text.
-2. Check that the file has no em dashes and no en dashes.
+2. Check that the file has no em dashes and no en dashes. Write any instruction for a later fill-in as words, not as an angle-bracket placeholder: the helper refuses every unfilled placeholder, and it leaves Java generics such as `Comparator<ShardDoc>` alone.
 3. Post it:
    - Windows: `research\pool-post.ps1 -Kind gate -Name SOLR-NNNN -File <scratch file>`, or `-Kind assignment -Name <slug>`. The script runs the checks in the next section, then commits and pushes.
    - Any host, by hand:
