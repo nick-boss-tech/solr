@@ -1,5 +1,7 @@
 # Pool assignment: write the PR drafts for the round 2 newly gated branches
 
+Status: DONE
+
 Capability tags: `draft`. Intended hosts: windows or vm3. Staffing: 1. Claim path: claims/pool-drafts-newly-gated-round-2.md (slice-level claims by ticket are fine).
 
 Background: three more branches have gated green and their PR drafts do not exist yet. Each draft is written from the ticket's receipt on this branch (receipts/<ticket>.md), which records the gated head, the counts and the proof result, following pr-formula.md (bold summary opening each section, citations as blob links at the head the receipt names, plain language, no internal process vocabulary, verification dates in Proof). Where a receipt records a packaged head that differs from the fork tip, draft at the receipt's head and note the packaging delta in the deliverable report, not in the draft. Follow each category's answers material for the Limits and Choice content where it exists.

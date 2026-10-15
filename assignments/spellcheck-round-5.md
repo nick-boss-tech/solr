@@ -1,5 +1,7 @@
 # Round 5 assignment: spellcheck audits
 
+Status: DONE (2026-10-10)
+
 Opened by the main side on 2026-10-09, following the inventory's suggested batching order (`branch-focus-inventory-2026-10-08.md`, item 3: "Suggester, then Spellcheck"). Audits only in this round: no gates, tests, builds, drafts, PRs, comments, or submit-branch edits. Drafts follow in a later round once the audits settle and any owner decisions are recorded.
 
 ## In scope (9)

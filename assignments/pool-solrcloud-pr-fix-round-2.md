@@ -1,5 +1,7 @@
 # Pool assignment: SolrCloud PR drafts, fix pass, round 2
 
+Status: DONE
+
 Capability tags: `review`, `draft`. Intended host: windows (review coordinator). Staffing: four subagents, one per group below. Claim: `claims/pool-solrcloud-pr-fix-round-2.md`.
 
 ## Why this round

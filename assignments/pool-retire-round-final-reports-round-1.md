@@ -1,5 +1,7 @@
 # Pool assignment: retire candidates, final evidence packs, round 1
 
+Status: CLAIMED (claims/pool-retire-round-final-reports-round-1.md)
+
 Capability tags: `review`. No build work. Claim under `claims/` before starting, per WORKFLOW.md.
 
 ## Starting record

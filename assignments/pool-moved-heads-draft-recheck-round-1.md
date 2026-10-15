@@ -1,5 +1,7 @@
 # Pool assignment: moved-heads draft re-check, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: up to 3 subagents in parallel, one draft each. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

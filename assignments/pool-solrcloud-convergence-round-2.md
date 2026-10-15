@@ -1,5 +1,7 @@
 # Pool assignment: SolrCloud convergence, round 2
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-solrcloud-convergence-round-2.md.
 
 ## Scope: the 12 drafts not converged in round 1, two rebutted findings, and two limited re-checks

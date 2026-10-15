@@ -1,5 +1,7 @@
 # Pool assignment: CombinedQueryComponent Jira ticket draft review, round 6 confirmation
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 2 read-only subagents. Claim path: claims/pool-combinedquerycomponent-ticket-review-round6.md.
 
 ## Scope

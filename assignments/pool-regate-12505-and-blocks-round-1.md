@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-12505 re-gate check and remaining internal blocks, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: one read-only subagent for SOLR-12505, and the review agent for the remaining internal blocks. Claim: `claims/pool-regate-12505-and-blocks-round-1.md`.
 
 ## Purpose

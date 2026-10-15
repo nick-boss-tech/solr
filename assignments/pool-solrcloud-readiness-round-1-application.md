@@ -1,5 +1,7 @@
 # SolrCloud readiness round 1: application of the verdicts
 
+Status: DONE
+
 Source: `reports/solrcloud-readiness-round-1.md`. That round read all 19 SolrCloud drafts and returned 5 READY TO OPEN, 6 DECISION and 8 HOLD. This assignment applies what the round established: it confirms the ready drafts at their live heads, applies the recorded decision-ladder adoptions to the drafts that carry one, and reconciles the three items the round listed as open with no recorded recommendation. The 8 HOLD drafts are out of scope here; their items stand as the readiness report records them. Opening stays with the owner. Nothing in this assignment opens, posts, or pushes to a submit branch.
 
 Claimable by the Windows review host under its standing coordinator claim (`claims/coordinator-review-rounds.md`). Staffing: up to 4 subagents in parallel, split by part.

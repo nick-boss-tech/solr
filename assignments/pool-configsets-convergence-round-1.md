@@ -1,5 +1,7 @@
 # Pool assignment: Configsets convergence, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-configsets-convergence-round-1.md.
 
 ## Purpose

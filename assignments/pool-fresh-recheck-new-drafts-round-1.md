@@ -1,5 +1,7 @@
 # Pool assignment: fresh re-check of the three new PR drafts, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: one read-only subagent per draft (three in parallel at most). Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

@@ -1,5 +1,7 @@
 # Assignment: update processing, round 3 close-out
 
+Status: UNCONFIRMED (see the census note in OPEN-WORK.md)
+
 Close out final round 3. The round 3 report is
 reports/update-processing-final-round-3.md; every answer and
 the new material are in

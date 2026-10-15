@@ -1,5 +1,7 @@
 # Pool assignment: review confidence round 6 (confirmation pass over the bodies fixed from rounds 4 and 5)
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 2. Claim path: claims/pool-review-confidence-round-6.md (slice-level claims by PR group are fine).
 
 Purpose: confirm that the fixes rounds 4 and 5 specified actually landed, and that each fixed body is now consistent with the gate evidence in `receipts/` at the branch's live head. On 2026-10-11 the main side applied the rounds 4 and 5 replacement texts to 19 live PR bodies on apache/solr and verified each returned body against the intended text. This pass is the independent confirmation: it re-reads the bodies as they now stand and gives a closing verdict per body. It does not reopen the code review, rerun tests, or re-litigate findings the earlier rounds already closed.

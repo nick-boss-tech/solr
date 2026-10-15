@@ -1,5 +1,7 @@
 # Pool assignment: receipt refresh recheck for SOLR-16673 and SOLR-13136, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: two read-only subagents, one per ticket. Claim: `claims/pool-recheck-16673-13136-round-1.md`.
 
 ## Purpose

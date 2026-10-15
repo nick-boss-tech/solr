@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 1 for SOLR-16630 (draft PR on apache/solr)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 2. Claim path: claims/pool-flaky-16630-post-pr-review-round-1.md.
 
 Background: SOLR-16630 (Reopened) is the fourth flaky-fix ticket. Its branch (solr-16630-submit) is gated green at 9bea59741ac (TestCoordinatorRole.testNRTRestart passed on six seeds); the live head 9c77a4db09d7a890f62dc9a9ffb2bf5613245da7 differs only by a changelog title correction. The base-runs job then reproduced the premise failure on the merge-base at the CI seed: one run, failing with a SolrServerException over a ClosedChannelException from the add in the retry loop, after the fixed-delay stop of the PULL node and before any successful add (recorded in receipts/SOLR-16630.md). The draft PR is open on apache/solr at that head; the draft text is pr-drafts/flaky-fixes/SOLR-16630.md. The other three flaky PRs took nine, six-plus and four post-PR rounds respectively before all slices were SATISFIED and the main side marked them ready; this PR follows the same pattern. When a round reports SATISFIED the main side marks it ready.

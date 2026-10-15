@@ -1,5 +1,7 @@
 # Pool assignment: Replication and backup convergence, round 2
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-replication-backup-convergence-round-2.md.
 
 ## Purpose

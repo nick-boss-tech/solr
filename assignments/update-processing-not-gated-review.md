@@ -1,5 +1,7 @@
 # Assignment: last-review audit of the ten ungated branches in Update processing and atomic updates
 
+Status: DONE
+
 Revised 2026-10-08. This replaces the first version of this
 assignment. The task is an audit, not a fresh review.
 

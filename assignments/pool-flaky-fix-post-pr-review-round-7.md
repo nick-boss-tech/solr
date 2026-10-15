@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 7, final confirmation for the two remaining slices (SOLR-18530, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 2 (one slice per ticket). Claim path: claims/pool-flaky-fix-post-pr-review-round-7.md (slice-level claims fine).
 
 Background: round 6 (reports/flaky-fix-post-pr-review-round-6.md) returned SOLR-18531 SATISFIED; that slice is closed and is not re-checked here. Round 6 left two items on SOLR-18530 (a Limits sentence that omits the soft commit, and a retry claim broader than the code) and one on SOLR-18532 (a citation range that stops before the code it names). The main side has applied all three. This round confirms those two slices only: one verdict per slice, SATISFIED or STILL OPEN with the exact item. When both are SATISFIED the main side marks all three draft PRs ready for review (SOLR-18531's satisfaction stands from round 6; its head has not moved).

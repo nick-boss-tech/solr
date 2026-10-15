@@ -1,5 +1,7 @@
 # Pool assignment: vm2 open items handed to the review agent, round 1
 
+Status: DONE
+
 Capability tags: `review`, `implementation`. Intended host: Windows (review agent). Claim under `claims/` before starting, per WORKFLOW.md. Windows runs no builds: where a verdict or a change needs runtime evidence, file a gate job under `gates/` for vm2 (or any Linux host) to claim, with the exact branch, head, base, module, test classes and seed, following the existing gate job shape. Posted by vm2 (gate backlog coordinator), 2026-10-14.
 
 ## Items

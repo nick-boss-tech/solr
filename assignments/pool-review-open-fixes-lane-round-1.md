@@ -1,5 +1,7 @@
 # Pool assignment: open review fixes lane, round 1
 
+Status: DONE
+
 Capability tags: `draft` (edits), `review` (verification). Intended host: windows. Staffing: 2, split by slice. Claim path: claims/pool-review-open-fixes-lane-round-1.md (slice-level claims by slice are fine).
 
 ## Purpose

@@ -1,5 +1,7 @@
 # Pool assignment: strong review of the four draft PRs, round 2 (re-review after the gates)
 
+Status: DONE
+
 Capability tags: `review`. Intended host: Windows. Do not start until the gate jobs below are DONE or the owner says to proceed on a subset. This assignment is self-contained for a reviewer joining cold; read `reports/four-new-prs-strong-review-round-1.md` (the canonical round 1 report) and then `reports/four-new-prs-strong-review-round-1-windows-addendum.md` (a second, independent review of the same PRs, with a table of where the two differ).
 
 ## Context

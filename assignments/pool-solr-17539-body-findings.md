@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-17539 live PR body findings
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-solr-17539-body-findings.md.
 
 ## Purpose

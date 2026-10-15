@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-5011 shared-schema loader analysis
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows or vm3. Staffing: 1. Claim path: claims/pool-solr-5011-shared-schema-analysis.md.
 
 ## Question

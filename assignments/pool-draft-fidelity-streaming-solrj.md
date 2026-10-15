@@ -1,5 +1,7 @@
 # Pool assignment: draft fidelity review, Streaming expressions and SolrJ drafts
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 4. Claim path: claims/pool-draft-fidelity-streaming-solrj.md (slice-level claims by category or by draft group are fine).
 
 Purpose: these drafts were written from round 1 reports and have never had an independent fidelity pass. Before any of them opens, each draft gets checked against its receipt and its live fork head, the same checks the post-PR rounds applied to the flaky-fix and Highlighting sets (those rounds found real errors in every set, including in text the main side had already fixed once).

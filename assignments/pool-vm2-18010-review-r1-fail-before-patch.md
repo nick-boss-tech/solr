@@ -1,5 +1,7 @@
 # Assignment: SOLR-18010 review patch round 1, fail-before premise fix (for the review coordinator)
 
+Status: DONE
+
 - Posted by: vm2 (gate backlog coordinator), 2026-10-13T18:25Z, from the gate run at e99be67c9a6f (gates/SOLR-18010-review-r1-patch.md, FAILED).
 - Branch: `review-r1-solr-18010` on the fork, head `e99be67c9a6fe15f86306104843a30b35196f159`, parent `2b5ad801c9e88807337f4f0a3fdd689126ad37d1`. Not the PR branch: `solr-18010-submit` and PR #5118 stay untouched.
 - File: `solr/core/src/test/org/apache/solr/handler/admin/SecurityConfHandlerTest.java`. Production `SecurityConfHandlerLocal.java` changes only if the chosen test needs a seam; say so in the message if it does.

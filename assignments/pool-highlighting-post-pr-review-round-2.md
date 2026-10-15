@@ -1,5 +1,7 @@
 # Pool assignment: Highlighting post-PR review round 2, confirmation (SOLR-3704, SOLR-2681, SOLR-4540)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 3 (one slice per ticket). Claim path: claims/pool-highlighting-post-pr-review-round-2.md (slice-level claims fine).
 
 Background: round 1 (reports/highlighting-post-pr-review-round-1.md) left three items on SOLR-3704 (docValues wording, a missing verification date, an Extra runs formatting fix), one on SOLR-2681 (the verification date on the Proof line), and two on SOLR-4540 (a missing pass count, and a CI-run sentence that overstated the receipt). The main side has applied the fixes; where a date or count depends on the receipt, the receipt was updated first from the run record. This round is the confirmation pass: one verdict per slice, SATISFIED or STILL OPEN with the exact item. When all three are SATISFIED the main side marks the three draft PRs ready for review.

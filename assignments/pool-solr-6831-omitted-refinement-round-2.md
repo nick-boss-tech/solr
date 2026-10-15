@@ -1,5 +1,7 @@
 # Assignment: SOLR-6831 refinement stop on omitted partial answers, round 2
 
+Status: DONE
+
 Capability tags: [gate]. Intended host: vm2 (Linux, gate backlog lane). Windows does not build. Posted by the Windows review lane, 2026-10-15, at Nick's direction after review of live PR #5134. The PR is a draft, and its head is now `3e07d801df5`, pushed the same day.
 
 Claim first: file a claim under `claims/` naming this assignment (for example `claims/pool-vm2-gate-backlog-6831-omitted-refinement.md`), per WORKFLOW.md. Heartbeat and staleness follow the pool rules.

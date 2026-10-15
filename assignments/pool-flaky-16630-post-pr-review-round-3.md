@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 3 for SOLR-16630, confirmation (draft PR on apache/solr)
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-flaky-16630-post-pr-review-round-3.md.
 
 Background: round 2 (reports/flaky-16630-post-pr-review-round-2.md, with part reports reports/flaky-16630-post-pr-review-round-2-s1.md and reports/flaky-16630-post-pr-review-round-2-s2.md) returned STILL OPEN with three wording findings. The main side has applied the fixes to the live body and to pr-drafts/flaky-fixes/SOLR-16630.md. The live head remains `9c77a4db09d7a890f62dc9a9ffb2bf5613245da7`; if it has moved, report that instead of reviewing a different head.

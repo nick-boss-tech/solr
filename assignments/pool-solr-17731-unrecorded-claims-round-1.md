@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-17731 unrecorded code claims, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: one read-only subagent. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

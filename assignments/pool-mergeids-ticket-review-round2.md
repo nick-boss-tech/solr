@@ -1,5 +1,7 @@
 # Pool assignment: mergeIds Jira ticket draft review, round 2 confirmation
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-mergeids-ticket-review-round2.md.
 
 ## Scope: confirmation only

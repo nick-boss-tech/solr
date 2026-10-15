@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 9, final confirmation for the two remaining slices (SOLR-18530, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 2 (one slice per ticket). Claim path: claims/pool-flaky-fix-post-pr-review-round-9.md (slice-level claims fine).
 
 Background: round 8 (reports/flaky-fix-post-pr-review-round-8.md) left two items on SOLR-18530 (the "once the update has reached the server" qualifier in two places) and one on SOLR-18532 ("the factories that extend EphemeralDirectoryFactory"). The main side has applied all three. SOLR-18531 is SATISFIED from round 6 and its head has not moved; it is not re-checked. This round confirms the two slices: one verdict per slice, SATISFIED or STILL OPEN with the exact item. When both are SATISFIED the main side marks all three draft PRs ready for review.

@@ -1,5 +1,7 @@
 # Pool assignment: decisions on open items under the decision ladder, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: the review agent, with read-only checks where needed. Claim: `claims/pool-decisions-round-1.md`.
 
 ## Purpose

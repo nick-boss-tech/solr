@@ -1,5 +1,7 @@
 # Pool assignment: gate the SOLR-16630 latch change for the open PR (vm2)
 
+Status: DONE (GATE GREEN at a31707acfdb7)
+
 Capability tags: `gate`. Intended host: vm2 (Linux). Windows never claims build work. Staffing: one job, one host. Claim path: `claims/pool-vm2-gate-backlog-16630.md`, under the WORKFLOW.md rules.
 
 ## Why this is assigned

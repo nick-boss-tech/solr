@@ -1,5 +1,7 @@
 # Pool assignment: review confidence round 4 (live PR body fidelity)
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 3. Claim path: claims/pool-review-confidence-round-4.md (slice-level claims by PR group are fine).
 
 Purpose: give the named live PR bodies a dedicated fidelity pass against the current branch tips and the gate evidence in `receipts/`. Review rounds are stochastic, and this pass is limited to body fidelity: it does not reopen the code review, rerun tests, or decide any question that a PR state or receipt leaves open.

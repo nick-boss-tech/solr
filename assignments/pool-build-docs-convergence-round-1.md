@@ -1,5 +1,7 @@
 # Pool assignment: Build and docs convergence, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-build-docs-convergence-round-1.md.
 
 ## Purpose

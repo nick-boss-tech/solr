@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 3, confirmation pass (SOLR-18530, SOLR-18531, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 3 (one slice per ticket). Claim path: claims/pool-flaky-fix-post-pr-review-round-3.md (slice-level claims fine).
 
 Background: round 2 (reports/flaky-fix-post-pr-review-round-2.md) returned REMAINING items for slices 1 and 3, and slice 2 was inactive pending the SOLR-18531 variant-test head. The main side has applied the round 2 items. This round is a confirmation pass only: check the named items in the live PRs and give a SATISFIED or STILL OPEN verdict per slice. Nick marks the three draft PRs ready once all three slices are SATISFIED.

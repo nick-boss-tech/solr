@@ -1,5 +1,7 @@
 # Pool assignment: SolrCloud HOLD drafts, first-rung round
 
+Status: DONE
+
 Capability tags: `review`. Intended host: Windows (review coordinator), under the standing coordinator claim. Staffing: one review agent per draft in parallel where the coordinator can staff it, items run per draft independently.
 
 ## Owner directive (recorded 2026-10-12)

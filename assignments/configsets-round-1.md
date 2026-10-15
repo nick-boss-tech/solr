@@ -1,5 +1,7 @@
 # Assignment: Configsets and config API round 1 (audit, then drafts for the draftable tickets)
 
+Status: DONE (2026-10-10)
+
 Claim first: add `claims/configsets-round-1.md`, then work. Report: `reports/configsets-round-1.md`. Drafts, for the tickets the audit finds draftable, go in `pr-drafts/configsets/` following `pr-formula.md`.
 
 ## Scope

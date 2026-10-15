@@ -1,5 +1,7 @@
 # Pool assignment: draft fidelity confirmation round 3
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-draft-fidelity-confirmation-round-3.md.
 
 ## Scope

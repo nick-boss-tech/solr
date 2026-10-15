@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 2 for the flaky-fix PRs (SOLR-18530, SOLR-18531, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 3 (one slice per ticket). Claim path: claims/pool-flaky-fix-post-pr-review-round-2.md (slice-level claims fine).
 
 Background: round 1 of the post-PR review (reports/flaky-fix-post-pr-review-round-1.md) found drifts on all three PRs; the main side applied the fixes to the live bodies, drafts and receipts. Nick directed a second round, and once this round is satisfied the main side marks the three draft PRs ready for review. This round is the satisfaction check: verify the round 1 findings are actually cleared in the live PRs, and re-check the bodies against the heads and receipts one more time.

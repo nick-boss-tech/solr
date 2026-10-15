@@ -1,5 +1,7 @@
 # Pool assignment: mergeIds fix branch, thorough review
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-mergeids-fix-review.md.
 
 ## Scope

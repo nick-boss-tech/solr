@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-8628 head-leg failure investigation
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows for the reading; any confirmation run is spec'd for a Linux host, not run by the claimant. Staffing: 1. Claim path: claims/pool-solr-8628-head-failure-investigation.md.
 
 ## What happened

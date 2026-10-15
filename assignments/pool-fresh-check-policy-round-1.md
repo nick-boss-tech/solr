@@ -1,5 +1,7 @@
 # Pool assignment: proposal for a fresh check before a draft is marked converged, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: one read-only subagent. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

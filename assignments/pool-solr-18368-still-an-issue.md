@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-18368, is the issue still there?
 
+Status: DONE
+
 Capability tags: `review`, `premise-run`. Intended host: windows for the reading; any run the reading specs goes to vm1 or vm2. Staffing: 1. Claim path: claims/pool-solr-18368-still-an-issue.md.
 
 Background: SOLR-18368 is RESOLVED/Fixed upstream. The removal the ticket asked for (CloudSolrClient.Builder.withInternalClientBuilder) landed upstream in the project's own commit 3ef3d093c06 on main, and the same removal on branch_10x. The branch (solr-18368-submit) is a salvage: its gated tree is 1acaced80b2, and its live tip a7ec9a1b65c05b2e359e9a186fc2938fe7b7ca7d is docs-only past the gate, with a final diff of exactly one file against its base: `solr/solr-ref-guide/modules/deployment-guide/pages/basic-authentication-plugin.adoc`. The salvage record (receipts/SOLR-18368.md) says that on the main of 2026-10-04, that page's example did not compile, for three reasons: it called the removed withInternalClientBuilder, it wrote HttpJettySolrClient.Builder() without `new`, and the sentence above the example named Http2SolrClient.Builder, which no longer exists. The branch fixes all three.

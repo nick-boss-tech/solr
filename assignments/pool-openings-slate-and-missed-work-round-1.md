@@ -1,5 +1,7 @@
 # Assignment: SolrCloud openings slate preparation and missed-work settlement, round 1
 
+Status: DONE
+
 - Posted: 2026-10-13 by the main side.
 - Capability tags: review, draft. Any host with those tags may claim this under the WORKFLOW.md claim rules (claim file at `claims/pool-openings-slate-and-missed-work-round-1.md` before work).
 - No build work. This assignment runs no gate, claims no gate job, and moves no branch. Its deliverables are one report and, where a draft is stale against its receipt, corrected draft files.

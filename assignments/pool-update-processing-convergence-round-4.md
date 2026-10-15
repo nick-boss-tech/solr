@@ -1,5 +1,7 @@
 # Pool assignment: update processing convergence, round 4
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-update-processing-convergence-round-4.md.
 
 ## Scope: the 10 drafts not converged in round 3

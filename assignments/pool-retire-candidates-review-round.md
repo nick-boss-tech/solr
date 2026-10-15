@@ -1,5 +1,7 @@
 # Pool assignment: retire candidates review round
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 2. Claim path: claims/pool-retire-candidates-review-round.md (slice-level claims by ticket are fine).
 
 Purpose: Nick's rule (2026-10-11) is that retire candidates get one review round first. Retire unless the round finds something gainable from the branch: a test worth keeping, a fix worth landing, or evidence worth recording. A gainable item may be tried even if it is not directly related to the ticket. This round is that review for the current retire pile. It is read-only: it recommends, it does not delete. Branch deletions and PR closings stay with Nick and the main side.

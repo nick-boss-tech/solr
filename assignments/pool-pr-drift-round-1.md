@@ -1,5 +1,7 @@
 # Pool assignment: drift between open PR descriptions and drafts, round 1
 
+Status: DONE
+
 Capability tags: `review`, `public-edit` (authorised by the owner for PR descriptions only). Intended host: windows. Staffing: read-only subagents to compare; the review agent applies edits. Claim: `claims/pool-pr-drift-round-1.md`.
 
 ## Authorisation

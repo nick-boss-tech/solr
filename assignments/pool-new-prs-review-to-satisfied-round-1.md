@@ -1,5 +1,7 @@
 # Pool assignment: review the four draft PRs opened 2026-10-12 until each returns SATISFIED
 
+Status: DONE
+
 Capability tags: `review`. Intended host: Windows (review coordinator), under the standing coordinator claim. Staffing: one review agent per PR in parallel where the coordinator can staff it, rounds run per PR independently.
 
 ## Owner directive (recorded 2026-10-12)

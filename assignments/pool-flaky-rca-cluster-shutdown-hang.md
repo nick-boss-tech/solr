@@ -1,5 +1,7 @@
 # Pool assignment: flaky root-cause reading, the MiniSolrCloudCluster shutdown hang
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 2. Claim path: claims/pool-flaky-rca-cluster-shutdown-hang.md.
 
 Background: reports/flaky-rca-gcs-install-shard.md established that two upstream test runs (37384974639 on the SOLR-18506 branch and 37987579785 on the SOLR-3657 branch) failed the same way: a MiniSolrCloudCluster shutdown hang, where the HTTP client stop inside HttpShardHandlerFactory.close blocks, ExecutorUtil.awaitTermination waits 60 seconds, interrupts, waits 60 more, and throws "Timeout waiting for pool to shutdown". The failing branches were not involved either time. This assignment is the next step: characterize the hang itself.

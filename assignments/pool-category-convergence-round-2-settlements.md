@@ -1,5 +1,7 @@
 # Pool assignment: category convergence round 2 settlements (build-docs, CLI, security, streaming, SolrJ)
 
+Status: DONE
+
 Capability tags: `review`. No build work. Claim under `claims/` before starting, per WORKFLOW.md. This assignment may be claimed per category; each category produces its own response report.
 
 ## Standing patch-loop directive

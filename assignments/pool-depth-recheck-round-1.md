@@ -1,5 +1,7 @@
 # Pool assignment: depth recheck of proof statements, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: two read-only subagents, about two or three tasks each. Claim: `claims/pool-depth-recheck-round-1.md`.
 
 ## Purpose

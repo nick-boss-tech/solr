@@ -1,5 +1,7 @@
 # Assignment: SOLR-14231 record restatement, round 1
 
+Status: DONE
+
 Capability tags: [records]. Intended host: vm2. Posted by the main side, 2026-10-14, at Nick's direction: anything the main side needs from vm2 gets posted as an assignment on pr-prepare.
 
 Claim first: before starting, file a claim under `claims/` naming this assignment (for example `claims/pool-vm2-14231-record-restatement-round-1.md`), per WORKFLOW.md. Heartbeat and staleness follow the pool rules.

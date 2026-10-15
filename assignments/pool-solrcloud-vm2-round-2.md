@@ -1,5 +1,7 @@
 # Pool assignment: SolrCloud round 2 builds and tests (vm2)
 
+Status: DONE
+
 Capability tags: `gate`, `premise-run`, `settling-run`, `sweep`, and `implementation` for the investigation in job 5 only. Intended host: vm2 (Linux). Staffing: one gate per host at a time, so these run in the order listed unless vm2's coordinator says otherwise. Claim: `claims/pool-vm2-solrcloud-round-2.md`, taken by vm2.
 
 Why this exists: the Windows review host does not run builds. Nick directed on 2026-10-12 that anything needing a build or a test goes here. Every job below has a gate or record file under `gates/`, or is described in full here.

@@ -1,5 +1,7 @@
 # Assignment: consistency pass over the 29 update-processing and atomic-updates branches
 
+Status: DONE (2026-10-10)
+
 Owner direction, 2026-10-09: before the 29 PRs open, run one bounded pass over the batch for conflicts of position. Desk work only: no code, no gates, no branch edits, no new decisions. Contradictions are reported, not resolved. Claim first in `claims/update-29-consistency-pass.md`, then write the report to `reports/update-29-consistency-pass.md`.
 
 ## Why

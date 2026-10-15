@@ -1,5 +1,7 @@
 # Pool assignment: SolrCloud drafts round 1, fidelity pass and missing drafts
 
+Status: DONE
+
 Capability tags: `draft`. Intended host: windows. Staffing: 2. Claim path: claims/pool-solrcloud-drafts-round-1.md (slice-level claims by ticket are fine).
 
 Background: the SolrCloud round 1 answers pass is adopted (material/solrcloud-round-1-answers.md, including the DISCUSS items adopted under the decision default recorded there). Some SolrCloud tickets already have drafts under pr-drafts/solrcloud/ and some do not. This round brings every in-scope draft in line with its receipt and its adopted answer, and writes the missing ones.

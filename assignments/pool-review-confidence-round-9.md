@@ -1,5 +1,7 @@
 # Pool assignment: review confidence round 9 (confirmation pass over SOLR-13568)
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-review-confidence-round-9.md.
 
 Purpose: confirm that the round 8 settlement actually landed, and give a closing verdict on the last open body in this set. Round 8 (`reports/review-confidence-round-8.md`) returned 2 SATISFIED (SOLR-18178, SOLR-18505) and 1 STILL OPEN: SOLR-13568 (PR #5014), where the "rarely hit" ruling was FURTHER SOFTEN with one exact replacement. The main side has now applied that replacement; the record is in `reports/review-confidence-round-8-response.md`. On 2026-10-11 the main side applied the body edit through the GitHub API and verified the returned body against the intended text. This pass re-reads that one body as it now stands. It does not reopen the code review, rerun tests, or re-litigate findings the earlier rounds already closed. On SATISFIED, the 19-body set that rounds 4 to 9 covered is fully settled.

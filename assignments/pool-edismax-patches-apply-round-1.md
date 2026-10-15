@@ -1,5 +1,7 @@
 # Assignment: eDisMax draft patches P1 to P6, application round 1
 
+Status: OPEN
+
 Capability tags: [implementation, gate]. Intended host: either Linux host (vm1 or vm2); Windows never claims build work. Posted by the main side, 2026-10-15.
 
 Claim first: before starting, file a claim under `claims/` naming this assignment (for example `claims/pool-edismax-patches-apply-round-1.md`), per WORKFLOW.md. Heartbeat and staleness follow the pool rules. The six patches are independent per branch; a claimant may take all six or claim per patch, recording which patches its claim covers.

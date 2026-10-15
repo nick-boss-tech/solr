@@ -1,5 +1,7 @@
 # Pool assignment: SolrCloud convergence, round 3
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-solrcloud-convergence-round-3.md.
 
 ## Scope: the three drafts still open after round 2, and the round 2 record corrections

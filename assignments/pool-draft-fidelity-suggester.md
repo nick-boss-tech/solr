@@ -1,5 +1,7 @@
 # Pool assignment: draft fidelity review, Suggester drafts
 
+Status: DONE
+
 Capability tags: `review`, `draft`. Intended host: windows. Staffing: 1. Claim path: claims/pool-draft-fidelity-suggester.md.
 
 Purpose: give all eight Suggester drafts an independent fidelity pass against the live branch tips, the receipt evidence for each ticket, and the ratified round 4 decisions. Fix wording and citation drift directly in the drafts. Do not silently change a claim, a number, a date, a head, or a decision: flag those in the report for the main side.

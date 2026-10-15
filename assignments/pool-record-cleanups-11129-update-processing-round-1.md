@@ -1,5 +1,7 @@
 # Pool assignment: small record cleanups for SOLR-11129 and the update-processing summary, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: one read-only subagent. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

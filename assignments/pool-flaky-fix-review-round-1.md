@@ -1,5 +1,7 @@
 # Pool assignment: review of the three new flaky-fix branches (SOLR-18530, SOLR-18531, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`, `draft`. Staffing: up to 3 (one per ticket, in parallel). Claim path: claims/pool-flaky-fix-review-round-1.md (one claim per ticket slice is fine).
 
 Background: on 2026-10-10 four CI failures on unrelated PRs were root-caused (reports/flaky-tests-root-cause-round-1.md and its part reports). Nick created three new Jira tickets for the fixes, and the main side built one branch per ticket. Each branch is reviewed here like any other category round: audit the change against its ticket and its root-cause part report, then write the PR draft. Openings stay with the main agent and need Nick's approval.

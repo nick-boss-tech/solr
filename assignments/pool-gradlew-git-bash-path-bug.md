@@ -1,5 +1,7 @@
 # Pool assignment: gradlew converts paths twice under Git Bash (investigation and fix proposal)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: 1. Claim path: claims/pool-gradlew-git-bash-path-bug.md.
 
 Background: on the Windows host, `./gradlew` fails under Git Bash (MINGW64) before Gradle starts, with `Error: Could not find or load main class org.gradle.wrapper.GradleWrapperMain`. `gradlew.bat` is not affected. The wrapper jar is present, valid (SHA-256 matches `gradle/wrapper/gradle-wrapper.jar.sha256`) and contains `org/gradle/wrapper/GradleWrapperMain.class`. The JDK loads that class from the jar when given a Windows path (`javap -cp` finds it), so the jar and the JDK are fine.

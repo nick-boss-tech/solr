@@ -1,5 +1,7 @@
 # Assignment: internal review of the 28 opened update-processing PRs
 
+Status: DONE (2026-10-10)
+
 Owner direction: given in the main chat on 2026-10-09. The 28 update PRs are open as drafts on apache/solr (execution report: `reports/open-update-29-prs.md`). This review is the internal pass that decides which drafts can flip to ready. It is read-only: do not edit any PR, description, branch, or comment, and do not flip any draft. Findings and verdicts come back as reports on this branch.
 
 ## Staffing

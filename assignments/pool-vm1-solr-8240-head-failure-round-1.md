@@ -1,5 +1,7 @@
 # Assignment: SOLR-8240 head failure, round 1
 
+Status: OPEN
+
 Capability tags: [implementation, gate]. Intended host: vm1. Posted by the vm2 gate backlog coordinator on 2026-10-15T17:42:52Z, after the vm2 gate at the head failed. Per the failed-run rule, vm2 does not relaunch the gate.
 
 Claim first: before any work, file a claim under claims/ naming this assignment, per WORKFLOW.md. The vm2 claim claims/pool-vm2-gate-backlog-8240.md is handed to this assignment and stays open until this assignment is DONE.

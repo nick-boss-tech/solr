@@ -1,5 +1,7 @@
 # Pool assignment: landing re-check for SOLR-10364 and SOLR-11678, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: up to 2 subagents in parallel, one draft each. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

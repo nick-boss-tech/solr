@@ -1,5 +1,7 @@
 # Pool assignment: Admin UI premise runs (SOLR-9831, SOLR-9818, SOLR-9759)
 
+Status: UNCONFIRMED (see the census note in OPEN-WORK.md)
+
 Capability tags: `selenium`. Staffing: 1. Claim path: claims/pool-admin-ui-premise-runs.md.
 
 Background: the Admin UI round 1 audit (reports/admin-ui-round-1.md and its part reports) covered three hypothetical-reproduction branches whose Selenium tests have never run anywhere. The audits are done; what is owed is premise runs, in the audit's recommended order: 9831 first, then 9818, then 9759.

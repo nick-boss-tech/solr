@@ -1,5 +1,7 @@
 # Pool assignment: land the search-components and query-parsing review verdicts, round 1
 
+Status: DONE
+
 Capability tags: `review`. No build work. Claim under `claims/` before starting, per WORKFLOW.md.
 
 ## Standing patch-loop directive

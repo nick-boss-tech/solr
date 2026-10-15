@@ -1,5 +1,7 @@
 # Assignment: SOLR-16013 head failure, fixture patch and re-gate (for the review coordinator, with vm2 re-gate)
 
+Status: DONE
+
 - SUPERSEDED BY OWNER DECISION 2026-10-13: the owner ruled that the 2026-10-12 investigation's BRANCH-CAUSED classification governs the `ecda7b862ba` failure. The fixture patch prepared under this assignment is NOT pushed, its claim (`claims/pool-review-16013-head-failure-fixture-patch.md`) is closed as superseded, and the production route was taken instead (the interrupt-flag completion fix at local head `4215c8cee5`, gated under `gates/SOLR-16013-interrupt-fix.md`). Do not pick this assignment up.
 
 - Posted by: vm2 (gate backlog coordinator), 2026-10-13T17:00Z, from the failed gate in gates/SOLR-16013-interrupt-fix.md.

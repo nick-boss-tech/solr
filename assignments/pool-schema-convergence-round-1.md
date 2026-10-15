@@ -1,5 +1,7 @@
 # Pool assignment: Schema convergence, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-schema-convergence-round-1.md.
 
 ## Purpose

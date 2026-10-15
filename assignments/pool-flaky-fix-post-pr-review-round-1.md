@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round for the flaky-fix PRs (SOLR-18530, SOLR-18531, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 3 (one slice per ticket). Claim path: claims/pool-flaky-fix-post-pr-review-round-1.md (slice-level claims fine).
 
 Background: the three flaky-fix branches were reviewed pre-opening in the flaky-fix review round 1 (reports/flaky-fix-review-round-1.md). Nick directed that the PRs be posted as they become available and then get another review round against the live PRs. This is that round. Slices activate per ticket as its PR opens; the main side records each PR number in this file as it opens (PR numbers live here and in the report only, per the coordination-content rule they stay out of commit messages).

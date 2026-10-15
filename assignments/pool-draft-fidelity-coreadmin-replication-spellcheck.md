@@ -1,5 +1,7 @@
 # Pool assignment: draft fidelity review, Core admin, Replication and backup and Spellcheck drafts
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 4. Claim path: claims/pool-draft-fidelity-coreadmin-replication-spellcheck.md (slice-level claims by category are fine).
 
 Purpose: the same fidelity pass as the Streaming and SolrJ round (which found drift in 13 of 20 drafts): each draft checked against its receipt and its live fork head before any opening. The answers material for these categories records adopted recommendations and, for Core admin and Replication, recommendations adopted under the owner decision default on 2026-10-10; check the drafts against those decisions as part of the Limits and Choice fidelity.

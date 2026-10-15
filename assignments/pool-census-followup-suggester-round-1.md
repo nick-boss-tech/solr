@@ -1,5 +1,7 @@
 # Assignment: suggester draft confirmations, reconciling round 4 against the ledger gates, census follow-up round 1
 
+Status: DONE
+
 Capability tags: [review]. Intended host: Windows (review coordinator). Claim under claims/ before starting, per WORKFLOW.md.
 
 ## Owner directive: run to SATISFIED

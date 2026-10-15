@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 8, final confirmation for the two remaining slices (SOLR-18530, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 2 (one slice per ticket). Claim path: claims/pool-flaky-fix-post-pr-review-round-8.md (slice-level claims fine).
 
 Background: round 7 (reports/flaky-fix-post-pr-review-round-7.md) left one item on each slice: on SOLR-18530, the failover sentence scoped to SolrJ as a whole instead of LBSolrClient; on SOLR-18532, the word "in-memory" for the test directory factory. The main side has applied both fixes as the round 7 part reports specified. SOLR-18531 is SATISFIED from round 6 and its head has not moved; it is not re-checked. This round confirms the two slices: one verdict per slice, SATISFIED or STILL OPEN with the exact item. When both are SATISFIED the main side marks all three draft PRs ready for review.

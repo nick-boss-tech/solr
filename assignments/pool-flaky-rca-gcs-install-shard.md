@@ -1,5 +1,7 @@
 # Pool assignment: flaky root-cause reading, GCSInstallShardTest failure on the SOLR-18506 branch
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 2. Claim path: claims/pool-flaky-rca-gcs-install-shard.md.
 
 Background: the Solr Tests run 37384974639 on the SOLR-18506 branch (head 77c019e1ff0, live PR by this author) failed in GCSInstallShardTest's classMethod, not in the test the branch changes. The failure is recorded in the takeover log (2026-10-10 ~15:50 MDT entry) and in the goal's CI failure record. Classification on record: pre-existing status unverified, three-run check owed. This assignment is the reading half of that check; the runs themselves stay on the Linux hosts.

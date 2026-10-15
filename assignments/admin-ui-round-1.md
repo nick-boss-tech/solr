@@ -1,5 +1,7 @@
 # Assignment: Admin UI round 1 (audit only; no ticket in this round is draftable on the recorded state)
 
+Status: DONE (2026-10-10)
+
 Claim first: add `claims/admin-ui-round-1.md`, then work. Report: `reports/admin-ui-round-1.md`. Drafts, only if the audit finds a ticket draftable on evidence the receipts support, go in `pr-drafts/admin-ui/` following `pr-formula.md`.
 
 Staffing: run this round with 6 subagents in parallel, split by ticket, with the lead writing the roll-up report. Hard cap from Nick (2026-10-09): never more than 6 to 7 subagents running at once across ALL assignments combined, on either side; subagents slow each other down past that. Run rounds one after another, not together.

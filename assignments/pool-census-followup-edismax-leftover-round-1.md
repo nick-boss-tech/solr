@@ -1,5 +1,7 @@
 # Assignment: SOLR-3923 draft and premise gate job, census follow-up round 1
 
+Status: DONE
+
 Capability tags: [review]. Intended host: Windows (review coordinator). Claim under claims/ before starting, per WORKFLOW.md.
 
 ## Why this is separate

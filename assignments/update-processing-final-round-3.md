@@ -1,5 +1,7 @@
 # READY: claim this round
 
+Status: DONE (2026-10-10)
+
 Status change 2026-10-09: this round was held as superseded
 pending a single final batch after the remaining main-side
 gate work. The owner directed later the same morning that

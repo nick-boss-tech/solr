@@ -1,5 +1,7 @@
 # Pool assignment: Highlighting post-PR review round 1 (SOLR-3704, SOLR-2681, SOLR-4540)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 3 (one slice per ticket). Claim path: claims/pool-highlighting-post-pr-review-round-1.md (slice-level claims fine).
 
 Background: Nick picked Highlighting as the next category to submit, following the same pattern as the flaky-fix PRs: the three PRs are open as drafts, and review rounds run until a round reports every slice satisfied; the main side then marks them ready. The drafts are in pr-drafts/highlighting/ and are live as draft PRs on apache/solr (the main side has the numbers; check the live body, the draft is its source). Heads: SOLR-3704 de63d4e5d5d1ddde0da6a100a631e254c078bd55, SOLR-2681 a3b1ea7994d932cdf78667f799542d7d49, SOLR-4540 180b6e8a7d3c23ac308a28d547f61816b5815f04. Receipts: receipts/SOLR-3704.md, receipts/SOLR-2681.md, receipts/SOLR-4540.md.

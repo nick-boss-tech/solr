@@ -1,5 +1,7 @@
 # Pool assignment: Highlighting post-PR review round 3, confirmation (SOLR-3704, SOLR-2681, SOLR-4540)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 3 (one slice per ticket). Claim path: claims/pool-highlighting-post-pr-review-round-3.md (slice-level claims fine).
 
 Background: round 2 (reports/highlighting-post-pr-review-round-2.md) left three items on SOLR-3704, one on SOLR-2681, one on SOLR-4540. The main side has applied them. The citation tension is settled by a main-side rule decision, recorded in pr-formula.md: citations to code the change produces link the PR head SHA; citations to the pre-change symptom link the merge-base commit and the text says so. This round is the confirmation pass: one verdict per slice, SATISFIED or STILL OPEN with the exact item. When all three are SATISFIED the main side marks the three draft PRs ready for review.

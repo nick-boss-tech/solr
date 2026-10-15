@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-11129 draft Limits touch-up, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: one subagent. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

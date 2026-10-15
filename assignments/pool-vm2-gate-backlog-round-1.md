@@ -1,5 +1,7 @@
 # Pool assignment: vm2 gate and runs backlog, round 1
 
+Status: DONE
+
 Capability tags: `gate`, `premise-run`, `settling-run`, `bats`. Intended host: vm2, which has finished onboarding with full gate capability confirmed (hosts/vm2.md). Per WORKFLOW.md, any capable Linux host may claim a job if vm2 is busy; the Windows host never claims any of this (build work). Staffing: 1 to 2 subagents across the whole backlog; one job at a time per host.
 
 Purpose: the main side owes a backlog of gates and focused runs recorded in the category answers files. vm2 reported no further assignments addressed to it; this backlog names the jobs, one gate job file per job under `gates/`, each verified against its receipt and the answers file that records the debt. Every head below was verified by ls-remote on 2026-10-10 and matches its receipt exactly.

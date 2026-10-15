@@ -1,5 +1,7 @@
 # Pool assignment: draft fidelity review, Search components and eDisMax drafts
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 6. Claim path: claims/pool-draft-fidelity-searchcomponents-edismax.md (slice-level claims by sub-batch or category are fine).
 
 Purpose: the same fidelity pass as the Streaming and SolrJ round (which found drift in 13 of 20 drafts): each draft checked against its receipt and its live fork head before any opening. This is the largest remaining draft set; slice it the way the search components audits were sliced (Facets; Handler components; Doc transformers and writers; Search core, grouping and stats).

@@ -1,5 +1,7 @@
 # Pool assignment: draft fidelity review, CLI, Security, Build/docs and Metrics drafts
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 4. Claim path: claims/pool-draft-fidelity-cli-security-builddocs-metrics.md (slice-level claims by category are fine).
 
 Purpose: same fidelity pass as the Streaming and SolrJ assignment, for the remaining newer categories. Each draft gets checked against its receipt and its live fork head before any opening: the post-PR rounds on the flaky-fix and Highlighting sets found real errors in every set, including in text already fixed once.

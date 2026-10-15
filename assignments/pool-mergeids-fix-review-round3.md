@@ -1,5 +1,7 @@
 # Pool assignment: mergeIds fix review, round 3 confirmation
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-mergeids-fix-review-round3.md.
 
 ## Scope: confirmation of the six round 2 should-fix items only

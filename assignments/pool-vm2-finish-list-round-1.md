@@ -1,5 +1,7 @@
 # Assignment: vm2 finish list, round 1
 
+Status: CLAIMED (claims/pool-vm2-finish-list-round-1-a.md)
+
 Capability tags: [push, gate, implementation]. Intended host: vm2. Posted by the main side, 2026-10-14, at Nick's direction: post an assignment for what vm2 has not finished.
 
 Claim by section: before starting a section, file a claim under `claims/` naming this assignment and the section letter (for example `claims/pool-vm2-finish-list-round-1-a.md`), per WORKFLOW.md. Sections are independent; take them in any order, one at a time. Heartbeat and staleness follow the pool rules.

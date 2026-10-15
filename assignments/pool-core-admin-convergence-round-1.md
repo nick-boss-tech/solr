@@ -1,5 +1,7 @@
 # Pool assignment: Core admin convergence, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 2, split by draft. Claim path: claims/pool-core-admin-convergence-round-1.md (slice-level claims by draft group are fine).
 
 ## Purpose

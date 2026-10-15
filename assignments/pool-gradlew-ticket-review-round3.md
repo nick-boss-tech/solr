@@ -1,5 +1,7 @@
 # Pool assignment: gradlew Jira ticket draft review, round 3 confirmation
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-gradlew-ticket-review-round3.md.
 
 ## Scope: three record fixes and the upgraded verification passages

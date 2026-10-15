@@ -1,5 +1,7 @@
 # Pool assignment: VM2 onboarding checks
 
+Status: DONE
+
 Capability tags: `windows-check` analogue for the second Linux VM; only the vm2 host can claim this (claim path: claims/pool-vm2-onboarding-checks.md). Staffing: 1.
 
 Purpose: before vm2 takes gate work from the pool, establish that the machine can run a full hardening gate. On 2026-10-08 this host was blocked by a 1024 open-file limit (soft and hard): the OpenAPI step produced a stub spec and every full gate failed at the module check. These checks settle whether that is fixed and what else the host needs.

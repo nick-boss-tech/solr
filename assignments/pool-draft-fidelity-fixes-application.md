@@ -1,5 +1,7 @@
 # Pool assignment: draft fidelity fixes application (the four landed rounds whose fixes are still owed)
 
+Status: DONE
+
 Capability tags: `review`, `draft`. Intended host: windows. Staffing: 2. Claim path: claims/pool-draft-fidelity-fixes-application.md (slice-level claims by fidelity round are fine).
 
 Purpose: four draft fidelity rounds have landed their reports, but unlike the Streaming and SolrJ round and the Suggester round, their direct draft fixes were never applied. This assignment applies them. It follows the established fidelity pattern: wording and citation drift that the evidence settles mechanically is fixed directly in the drafts under `pr-drafts/`; anything that touches a claim, a number, a date, a head, or a decision is not applied and is flagged for the main side instead.

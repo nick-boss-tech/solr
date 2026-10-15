@@ -1,5 +1,7 @@
 # Pool assignment: resolve the open decisions in the SOLR-6711 and SOLR-16013 drafts under the ladder, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: one read-only subagent. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

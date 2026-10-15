@@ -1,5 +1,7 @@
 # Pool assignment: verification-date flags in the draft-fidelity family, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: one read-only subagent per two drafts, at most three in parallel. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

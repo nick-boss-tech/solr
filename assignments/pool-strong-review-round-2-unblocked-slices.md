@@ -1,5 +1,7 @@
 # Pool assignment: strong review round 2, the unblocked slices
 
+Status: CLAIMED (claims/pool-strong-review-round-2-unblocked-slices.md)
+
 Capability tags: `review`. No build work. Claim under `claims/` before starting, per WORKFLOW.md.
 
 ## Context

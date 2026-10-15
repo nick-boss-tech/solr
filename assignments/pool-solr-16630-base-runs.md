@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-16630 base runs and changelog title fix
 
+Status: DONE
+
 Capability tags: `premise-run`, `implementation`. Intended host: vm2 (it built and gated the branch). Staffing: 1. Claim path: claims/pool-solr-16630-base-runs.md.
 
 Background: branch solr-16630-submit at 9bea59741ac30ffd11ed11be5269ea025cf17f68 is GATE GREEN (receipts/SOLR-16630.md). The flaky-fix review (slice 4) held the draft's proof claim on owner decision O1: no run of TestCoordinatorRole.testNRTRestart on the base code is on record, so the change has not been shown to fail without the fix. The main side's decision: run the base check, then open either way.

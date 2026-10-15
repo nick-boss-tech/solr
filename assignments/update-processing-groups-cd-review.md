@@ -1,5 +1,7 @@
 # Assignment: last-review audit, Groups C and D (the remaining 19 in Update processing and atomic updates)
 
+Status: DONE
+
 Groups A and B are done; their audits are in
 `audits/update-processing/` on this branch. This assignment
 covers the other 19 branches in the category: the ten recorded

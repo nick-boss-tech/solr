@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 6, final confirmation (SOLR-18530, SOLR-18531, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 3 (one slice per ticket). Claim path: claims/pool-flaky-fix-post-pr-review-round-6.md (slice-level claims fine).
 
 Background: round 5 (reports/flaky-fix-post-pr-review-round-5.md) left one item on SOLR-18530, three on SOLR-18531, two on SOLR-18532. The main side has applied all of them, plus two Limits lines on SOLR-18531 for the failed-start and shared-port-map edges (round 5 non-blocking notes, verified against the head code). This round is the final confirmation: one verdict per slice, SATISFIED or STILL OPEN with the exact item. When all three are SATISFIED the main side marks the three draft PRs ready for review.

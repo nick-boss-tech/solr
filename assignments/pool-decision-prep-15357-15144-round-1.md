@@ -1,5 +1,7 @@
 # Pool assignment: decision preparation for SOLR-15357 and SOLR-15144, round 1
 
+Status: DONE
+
 Capability tags: `review`. No build work. Read-only, plus the report. No code changes, no draft edits, no gate jobs. Claim under `claims/` before starting, per WORKFLOW.md.
 
 ## Purpose

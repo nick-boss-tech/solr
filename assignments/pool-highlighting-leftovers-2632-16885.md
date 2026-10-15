@@ -1,5 +1,7 @@
 # Pool assignment: Highlighting leftovers, SOLR-2632 pin draft and SOLR-16885 Jira comment text
 
+Status: DONE
+
 Capability tags: `draft`. Staffing: up to 2. Claim path: claims/pool-highlighting-leftovers-2632-16885.md.
 
 Background: both tickets were NO GATE dispositions held for the owner during Highlighting round 1. The owner has since set a decision default (2026-10-10): a decision defaults to the recorded recommendation, or to the harder, more thorough option where no single recommendation is on record. Applied here: SOLR-2632 gets the test-only pin draft (option (a) of the recorded dispositions), and SOLR-16885 gets the Jira comment text with the full premise evidence (the presented disposition). Openings and Jira posts themselves stay with the main side and the owner.

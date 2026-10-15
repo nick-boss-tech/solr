@@ -1,5 +1,7 @@
 # Pool assignment: draft fidelity review, Configsets, Query parsing and Schema and analysis drafts
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 4. Claim path: claims/pool-draft-fidelity-configsets-query-schema.md (slice-level claims by category are fine).
 
 Purpose: the same fidelity pass as the Streaming and SolrJ round (which found drift in 13 of 20 drafts): each draft checked against its receipt and its live fork head before any opening.

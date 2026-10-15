@@ -1,5 +1,7 @@
 # Assignment: final review round and PR drafts, update processing
 
+Status: DONE (2026-10-10)
+
 ## Purpose
 
 The update processing and atomic updates category (29 branches) has

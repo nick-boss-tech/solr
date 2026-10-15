@@ -1,5 +1,7 @@
 # Assignment: standing owner calls, round 1
 
+Status: DONE
+
 Capability tags: [review, decision, draft]. Intended hosts: the review agent, or a lane coordinator on either side. Posted by the main side, 2026-10-14, under Nick's decision-routing instruction of the same day: an item that would otherwise wait for his decision is posted as a pool assignment and settled under the decision ladder, or settled on the main side under the decision default.
 
 Claim by item: before starting an item, file a claim under `claims/` naming this assignment and the item number (for example `claims/pool-standing-calls-round-1-3.md`), per WORKFLOW.md. Items are independent; take them in any order, one at a time. Heartbeat and staleness follow the pool rules.

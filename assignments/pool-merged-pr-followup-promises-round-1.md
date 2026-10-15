@@ -1,5 +1,7 @@
 # Pool assignment: audit of merged PR descriptions for follow-up promises, round 1
 
+Status: CLAIMED (claims/pool-merged-pr-followup-promises-round-1.md)
+
 Capability tags: `review`. Intended host: any review-side host. No build work. This assignment is self-contained for a reviewer joining cold.
 
 ## Purpose

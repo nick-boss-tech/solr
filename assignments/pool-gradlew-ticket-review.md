@@ -1,5 +1,7 @@
 # Pool assignment: gradlew Jira ticket draft review
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-gradlew-ticket-review.md.
 
 ## Material under review

@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-10882 proof date (ST-R1-09), round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: one read-only subagent. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

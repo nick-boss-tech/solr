@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-13097 merge conflict analysis (read-only)
 
+Status: DONE
+
 Capability tags: `review`. Intended hosts: windows or vm3. Staffing: 1. Claim path: claims/pool-solr-13097-conflict-analysis.md.
 
 Background: the SOLR-13097 branch (solr-13097-submit) has a live PR that is open with changes requested by Jan Høydahl and a merge conflict against main. The Core admin round 1 answers record (material/core-admin-round-1-answers.md, the SOLR-13097 entry) is the starting record: the branch was gated green at an older head, the gate's fix is also present in the live history under a different commit, the live tip carries a test class with more test methods than the gate ran, and one Limits claim in the live body (the blockUnknown=false statement) was already marked for softening or removal until it is verified. Whether and when this branch gets rebased and re-gated is an owner call recorded elsewhere. This analysis informs that call; it does not unblock the branch by itself, and no part of it authorizes a rebase.

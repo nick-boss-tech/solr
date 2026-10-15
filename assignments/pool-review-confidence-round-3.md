@@ -1,5 +1,7 @@
 # Pool assignment: review confidence round 3 (live PRs beyond the update set, gate job files, near-opening drafts)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 5. Claim path: claims/pool-review-confidence-round-3.md (slice-level claims fine).
 
 Background: review rounds are stochastic; repeated independent passes compound the chance a defect is caught (round 2 of the confidence review and the flaky-fix rounds both found real defects after earlier passes). Round 2 covered 54 category drafts and the 28 update-processing PR bodies. This round covers what those did not: the other live PRs, the VM2 gate job files before VM2 spends gates on them, and the drafts nearest to opening. Read-only except the report and claim files. Verify any automated or reviewer comment against the code before reporting it as real.

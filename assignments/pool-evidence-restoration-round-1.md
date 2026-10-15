@@ -1,5 +1,7 @@
 # Pool assignment: evidence restoration runs (SOLR-18178, SOLR-18482)
 
+Status: DONE
+
 Capability tags: `gate`. Intended host: vm2. Claim path: claims/pool-evidence-restoration-round-1.md.
 
 Background: review confidence round 3 and the main side's fixes found two live PR Proof claims with no run record behind them. The bodies were corrected to what the records support. These two runs restore the missing evidence; results go into the receipts, and the main side updates the bodies from the receipts.

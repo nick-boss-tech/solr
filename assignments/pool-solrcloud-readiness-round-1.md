@@ -1,5 +1,7 @@
 # Pool assignment: SolrCloud readiness for opening PRs, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: five read-only subagents, four drafts each. Claim: `claims/pool-solrcloud-readiness-round-1.md`.
 
 ## Purpose

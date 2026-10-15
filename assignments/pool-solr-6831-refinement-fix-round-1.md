@@ -1,5 +1,7 @@
 # Assignment: SOLR-6831 refinement fix, round 1
 
+Status: DONE
+
 Capability tags: [implementation, gate]. Intended host: either Linux host (vm1 or vm2); Windows never claims build work. Posted by the main side, 2026-10-15, under the owner's decision routing: the items the refinement gate left as decisions owed are settled by the pool under the decision ladder, on run evidence, not returned to the owner.
 
 Claim first: before starting, file a claim under `claims/` naming this assignment (for example `claims/pool-solr-6831-refinement-fix-round-1.md`), per WORKFLOW.md. Heartbeat and staleness follow the pool rules.

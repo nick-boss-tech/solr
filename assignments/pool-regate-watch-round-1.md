@@ -1,5 +1,7 @@
 # Pool assignment: re-gate watch and internal-block inventory, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: two read-only subagents. Claim: `claims/pool-regate-watch-round-1.md`.
 
 ## Purpose

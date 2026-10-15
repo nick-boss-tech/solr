@@ -1,5 +1,7 @@
 # Assignment: Highlighting round 1 (audit, then drafts for the draftable tickets)
 
+Status: DONE (2026-10-10)
+
 Claim first: add `claims/highlighting-round-1.md`, then work. Report: `reports/highlighting-round-1.md`. Drafts, for the tickets the audit finds draftable, go in `pr-drafts/highlighting/` following `pr-formula.md`.
 
 ## Scope

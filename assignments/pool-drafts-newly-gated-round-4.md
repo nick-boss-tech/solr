@@ -1,5 +1,7 @@
 # Pool assignment: write the PR drafts for the round 4 newly gated branches
 
+Status: DONE
+
 Capability tags: `draft`. Intended host: windows. Staffing: 1. Claim path: claims/pool-drafts-newly-gated-round-4.md.
 
 Background: two more branches gated green overnight and neither has a PR draft yet. Write each draft from the ticket's receipt in receipts/ on this branch, following pr-formula.md and the category material where it exists. Draft at the gated head named below for each ticket.

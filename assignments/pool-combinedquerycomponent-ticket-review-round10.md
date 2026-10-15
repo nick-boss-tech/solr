@@ -1,5 +1,7 @@
 # Pool assignment: CombinedQueryComponent Jira ticket draft review, round 10
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1 or 2 subagents. Claim: under the standing coordinator claim, `claims/coordinator-review-rounds.md`.
 
 ## Scope

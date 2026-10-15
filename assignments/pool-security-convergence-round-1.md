@@ -1,5 +1,7 @@
 # Pool assignment: Security convergence, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-security-convergence-round-1.md.
 
 ## Purpose

@@ -1,5 +1,7 @@
 # Assignment: Query parsing round 1 (audit, then drafts for the draftable tickets)
 
+Status: DONE (2026-10-10)
+
 Claim first: add `claims/query-parsing-round-1.md`, then work. Report: `reports/query-parsing-round-1.md`. Drafts, for the tickets the audit finds draftable, go in `pr-drafts/query-parsing/` following `pr-formula.md`.
 
 Staffing: run this round with 6 subagents in parallel, split by parser family or by ticket cluster, with the lead writing the roll-up report. Hard cap from Nick (2026-10-09): never more than 6 subagents running at once across ALL assignments combined; subagents slow each other down past that. Run rounds one after another, not together.

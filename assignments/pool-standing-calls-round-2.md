@@ -1,5 +1,7 @@
 # Assignment: standing owner calls, round 2
 
+Status: DONE
+
 Capability tags: [review, decision, draft]. Intended hosts: the review agent, or a lane coordinator on either side. Posted by the main side, 2026-10-15, under Nick's decision-routing instruction of 2026-10-14: an item that would otherwise wait for his decision is posted as a pool assignment and settled under the decision ladder, or settled on the main side under the decision default.
 
 This round has one item: SOLR-15358. It was item 5 of `assignments/pool-standing-calls-round-1.md`, but round 1's brief covered items 1 to 4 only, so it was not worked (`reports/standing-calls-round-1.md` states this in its limits). Round 1 settled its four items; this round carries the fifth, unchanged in substance.

@@ -1,5 +1,7 @@
 # Pool assignment: moved fork heads and placeholder text, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: two read-only subagents, about three tasks each. Claim: `claims/pool-moved-heads-round-1.md`.
 
 ## Purpose

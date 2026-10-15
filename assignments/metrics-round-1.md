@@ -1,5 +1,7 @@
 # Assignment: Metrics and monitoring round 1 (audit; no draft this round)
 
+Status: DONE (2026-10-10)
+
 Claim first: add `claims/metrics-round-1.md`, then work. Report: `reports/metrics-round-1.md`. A draft in `pr-drafts/metrics/` follows only after the main-side gate lands (see Starting state); this round delivers the report alone.
 
 Staffing: this round has a single ticket, so a small team inside the standing envelope is expected: the lead plus at most a few subagents, split by question cluster if at all. Hard cap from Nick (2026-10-09): never more than 6 to 7 subagents running at once across ALL assignments combined, on either side; subagents slow each other down past that. Run rounds one after another, not together.

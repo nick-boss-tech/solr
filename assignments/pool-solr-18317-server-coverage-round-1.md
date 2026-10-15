@@ -1,5 +1,7 @@
 # Assignment: check whether the SOLR-18317 server branch's work is already covered, round 1
 
+Status: DONE
+
 Capability tags: [review]. Intended host: Windows (review agent). Claim under claims/ before starting, per WORKFLOW.md. This is a code-reading assignment: no builds run on Windows. If a verdict turns on runtime behavior, file a gate job instead (see below).
 
 ## Owner directive

@@ -1,5 +1,7 @@
 # Pool assignment: CombinedQueryComponent maximum fold, intent investigation
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-combinedquerycomponent-maximum-fold-intent.md.
 
 ## Why this exists

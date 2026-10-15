@@ -1,5 +1,7 @@
 # Pool assignment: Admin UI Selenium test selection (the SOLR-9831 premise run selects no tests)
 
+Status: DONE
+
 Capability tags: `review` for the investigation (any review host); `selenium` for the confirming runs (a Linux host with Chrome and Gradle, or Nick typing the commands himself, as the premise runs were set up). Staffing: 1. Claim path: claims/pool-admin-ui-test-selection.md.
 
 Background: the Admin UI premise runs (claims/pool-admin-ui-premise-runs.md) need `AdminUiLoggingScreenTest#testEventsViewerShowsWarnings` to execute on the SOLR-9831 head and on the merge-base with the head's tests overlaid. The first run on the Windows host did not execute it. Two attempts with the same command, after the wrapper was fixed, produced the same result. The command was:

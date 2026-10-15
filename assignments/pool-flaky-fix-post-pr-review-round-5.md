@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 5, final confirmation (SOLR-18530, SOLR-18531, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 3 (one slice per ticket). Claim path: claims/pool-flaky-fix-post-pr-review-round-5.md (slice-level claims fine).
 
 Background: round 4 (reports/flaky-fix-post-pr-review-round-4.md) left three items on SOLR-18530, three on SOLR-18531, one on SOLR-18532, plus notes N1 to N3 on SOLR-18531. The main side has applied all of them. SOLR-18531's branch also gained the N2 guard fix (a second stop() no longer logs a false port warning) and moved to head c8a67c7267d00e33ad8323c683c040b539989b0d; its re-gate is running on vm1 and the receipt is finalized when it lands green. This round is the final confirmation: one verdict per slice, SATISFIED or STILL OPEN with the exact item. When all three are SATISFIED the main side marks the three draft PRs ready for review.

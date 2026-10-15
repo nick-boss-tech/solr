@@ -1,5 +1,7 @@
 # Assignment: Flaky test root causes round 1 (four CI flakes from 2026-10-10)
 
+Status: DONE (2026-10-10)
+
 Claim first: add `claims/flaky-tests-root-cause-round-1.md`, then work. Report: `reports/flaky-tests-root-cause-round-1.md`, one section per test, in the order below.
 
 Staffing: run this round with 4 subagents in parallel, one per test, with the lead writing the roll-up and the cross-test pattern section. Hard cap from Nick (2026-10-09): never more than 6 to 7 subagents running at once across ALL assignments combined, on either side; subagents slow each other down past that. Run rounds one after another, not together.

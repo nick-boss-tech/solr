@@ -1,5 +1,7 @@
 # Pool assignment: review-confidence round 2 (verification of finished drafts, live bodies, and three unverified premises)
 
+Status: DONE
+
 Capability tags: `review`, `draft`. Staffing: up to 4 (slices in parallel; Slice A may split by category). Claim path: claims/pool-review-confidence-round-2.md (slice-level claims allowed, for example claims/pool-review-confidence-round-2-a.md).
 
 Background: the category rounds are done and their answers are adopted. The drafts written from those answers have had one writing pass and no independent verification pass. This round is that verification pass: it re-checks finished work against the decisions already recorded and the gate receipts, at the branches' live tips. It opens no new audits and takes no decisions. Anything that would change a claim, a number, or a decision is flagged in the report for the main agent, never settled inside this round. Intended host: the review agent (all three slices are reading and draft work; no builds).

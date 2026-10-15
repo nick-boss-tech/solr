@@ -1,5 +1,7 @@
 # Pool assignment: mergeIds PR draft text fixes, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows (review coordinator). Staffing: 1 subagent. Claim: under the standing coordinator claim, `claims/coordinator-review-rounds.md`.
 
 ## Scope

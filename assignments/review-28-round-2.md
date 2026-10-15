@@ -1,5 +1,7 @@
 # Assignment: review round 2 for the 28 update-processing PRs (verification of the corrections)
 
+Status: DONE
+
 Claim first: add `claims/review-28-round-2.md`, then work. Reports go in `reports/review-28-round-2*.md` on this branch. Read-only toward the drafts, the receipts, the branches, and the PRs: report findings, do not edit any of them.
 
 ## Background

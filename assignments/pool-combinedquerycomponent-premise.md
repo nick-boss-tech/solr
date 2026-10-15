@@ -1,5 +1,7 @@
 # Pool assignment: CombinedQueryComponent totals premise: verify or refute
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows for the reading; any confirmation run is spec'd for a Linux host, not run by the claimant. Staffing: 1. Claim path: claims/pool-combinedquerycomponent-premise.md.
 
 ## Where this comes from

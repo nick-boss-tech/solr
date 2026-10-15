@@ -1,5 +1,7 @@
 # Pool assignment: category close-out, overnight round 1
 
+Status: DONE
+
 Capability tags: `review`. Builds only through gate job files under `gates/` for vm1 or vm2; no host runs a build outside a gate job. Claim under `claims/` before starting, per WORKFLOW.md. This assignment may be claimed per workstream.
 
 Owner direction (2026-10-13, evening): close out the category reviews so the openings slates are ready for his approval in the morning. This assignment is the pool's priority until the W4 deliverable exists; the three morning assignments and the five-item review batch continue behind it.

@@ -1,5 +1,7 @@
 # Assignment: review the 24 opened search components draft PRs, round 1
 
+Status: DONE
+
 Capability tags: [review]. Intended host: Windows (review agent, acting as review coordinator). Claim under claims/ before starting, per WORKFLOW.md. The coordinator spawns 6 subagents, one per slice below, and each subagent reviews the 4 PRs in its slice. This is a reading and description-editing assignment: no builds run on Windows, and no branch is pushed (see the patch loop rules).
 
 ## Owner directive

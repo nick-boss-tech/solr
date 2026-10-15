@@ -1,5 +1,7 @@
 # Pool assignment: Streaming expressions convergence, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-streaming-convergence-round-1.md.
 
 ## Purpose

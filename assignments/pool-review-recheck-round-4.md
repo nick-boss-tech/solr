@@ -1,5 +1,7 @@
 # Pool assignment: review re-check, round 4 (changed passages from the open fixes lane)
 
+Status: DONE
+
 Capability tags: `review` (read-only). Intended host: windows. Staffing: 2, split by slice, read-only subagents. Claim path: `claims/pool-review-recheck-round-4.md` (slice-level claims by slice are fine).
 
 ## Purpose

@@ -1,5 +1,7 @@
 # Pool assignment: review confidence round 5 (the newest ready PR bodies, as they now stand)
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 2. Claim path: claims/pool-review-confidence-round-5.md (slice-level claims by PR group are fine).
 
 Purpose: a fresh independent fidelity pass over the seven newest PRs on apache/solr that were flipped to ready after their internal review rounds closed. The earlier post-PR rounds reviewed the drafts before those flips, and several bodies changed during the fix rounds that followed. This pass verifies the bodies as they now stand, against the gate evidence in receipts/ at each branch's live head. It does not reopen the code review, rerun tests, or re-litigate findings the earlier rounds already closed.

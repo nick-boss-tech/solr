@@ -1,5 +1,7 @@
 # Pool assignment: vm2 gate backlog, round 3
 
+Status: DONE (GATE GREEN at 1a1875d95f36)
+
 Capability tags: `gate`. Intended host: vm2. Any capable Linux host may take a job when vm2 is busy, under the WORKFLOW.md claim rules. Windows never claims build work. Staffing: one gate job at a time per host; no subagents needed.
 
 ## Why this round

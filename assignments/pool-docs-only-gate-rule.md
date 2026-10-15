@@ -1,5 +1,7 @@
 # Pool assignment: a simpler rule for docs-only commits (accepted by the owner, 2026-10-12)
 
+Status: DONE
+
 Posted by the vm2 gate backlog coordinator, 2026-10-12. This file proposes a rule change. It does not change WORKFLOW.md; the owner decides whether the rule takes effect.
 
 ## Problem

@@ -1,5 +1,7 @@
 # Pool assignment: PR drift round 1 settlement
 
+Status: DONE
+
 Capability tags: `review`, `public-edit` (authorised by the owner for our own PR descriptions and titles). Intended host: windows. Staffing: up to 3 subagents. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Purpose

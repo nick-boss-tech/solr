@@ -1,5 +1,7 @@
 # Pool assignment: post-PR review round 4, final confirmation (SOLR-18530, SOLR-18531, SOLR-18532)
 
+Status: DONE
+
 Capability tags: `review`. Staffing: up to 3 (one slice per ticket). Claim path: claims/pool-flaky-fix-post-pr-review-round-4.md (slice-level claims fine).
 
 Background: round 3 (reports/flaky-fix-post-pr-review-round-3.md) left one item on SOLR-18530 (the "of this shard" qualifier), two on SOLR-18532 (a missing link, two links at the old head), and SOLR-18531 inactive. The main side has applied those items, and SOLR-18531's variant-test head 351914f52c99180f0582d45c5bea1bd800194d29 is gated green with its receipt and PR body updated (the committed served-traffic test reproduced the TIME_WAIT reservation failure and the same commit fixes the reservation bind; the body's earlier "did not reproduce" text is removed). This round is the final confirmation: one verdict per slice, SATISFIED or STILL OPEN with the exact item. When all three are SATISFIED the main side marks the three draft PRs ready for review.

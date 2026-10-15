@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-16630 TestCoordinatorRole.testNRTRestart fix
 
+Status: DONE
+
 Capability tags: `implementation`, `gate`. Staffing: 1 to 2. Claim path: claims/pool-solr-16630-testcoordinatorrole-fix.md. Gate job file when the gate is posted: gates/SOLR-16630.md.
 
 Background: SOLR-16630 is an existing, reopened Jira ticket for this test failing; no new ticket is needed. The root-cause analysis is on this branch at reports/flaky-tests-root-cause-round-1-t3.md (read it in full first). Finding (about 70 percent confidence): the test stops the PULL node on a fixed timer, which closes the client the add loop is still using; the loop catches only SolrException, so a ClosedChannelException from the closed channel fails the test. It failed again on an apache/solr CI run for an unrelated change on 2026-10-10 (run 38009158573, seed 681E2A715B2CE1D3), and settling runs with that seed on current main and at that change's head did not reproduce it.

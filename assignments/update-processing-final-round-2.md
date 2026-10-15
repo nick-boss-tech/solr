@@ -1,5 +1,7 @@
 # Assignment: final review round, batch 2, update processing
 
+Status: DONE (2026-10-10)
+
 ## Purpose
 
 Round 1 (`assignments/update-processing-final-round.md`) drafted

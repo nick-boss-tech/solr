@@ -1,5 +1,7 @@
 # Assignment: round 4, suggester audits
 
+Status: DONE (2026-10-10)
+
 Round 4 opens the suggester area (8 branches in
 branch-focus-inventory-2026-10-08.md), following the
 inventory's suggested batching order: suggester third,

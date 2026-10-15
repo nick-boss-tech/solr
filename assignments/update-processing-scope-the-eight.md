@@ -1,5 +1,7 @@
 # Assignment: scope the eight DISCUSS items in the update processing category
 
+Status: DONE
+
 ## Purpose
 
 `TESTING.md` on this branch records eight DISCUSS items from the Groups C and D audit reconciliation (report: `reports/update-processing-cd-reconcile.md`). Each item is a scope call: ship the branch narrow as it stands, or do the broader thing in the same branch. The owner prefers doing more when it is contained, and narrow when it is not, but right now the cost of "more" is unpriced for all eight.

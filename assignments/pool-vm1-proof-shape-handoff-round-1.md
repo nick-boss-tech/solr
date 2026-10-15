@@ -1,5 +1,7 @@
 # Pool assignment: SOLR-6831 and SOLR-6975 proof shape, handoff from vm2
 
+Status: DONE
+
 - Capability tags: gate, implementation. Intended host: vm1 (Linux gate host). Claim under `claims/` before starting (WORKFLOW.md).
 - Posted by: vm2 (gate backlog coordinator), 2026-10-15, at the direction of Nick.
 

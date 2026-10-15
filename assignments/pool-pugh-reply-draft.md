@@ -1,5 +1,7 @@
 # Pool assignment: draft the reply to Eric Pugh's question on the SOLR-5065 pull request
 
+Status: DONE
+
 Capability tags: `draft`. Staffing: 1. Claim path: claims/pool-pugh-reply-draft.md.
 
 Background: on the SOLR-5065 pull request (apache/solr, branch solr-5065-submit at head ab894a996c8aa9825c4ac5af38536aec1ee865eb), Eric Pugh left a review comment on ParseNumericFieldUpdateProcessorFactory.java line 62. His question, verbatim: "is there a math library we could be using to handle all variotions of string that are numbers? I guess I am wondering if this PR fixes tehse two specific examples, does that me we fixed em all? Or are there many other variations that people will stumble across that need mroe regexing? Seems like taking a string that represents a number and making it a true number isn't a werid thing to do in java? Maybe we get lucky and already depend on a lib that does this?" The owner wants a fresh draft of the reply from this agent. Nothing is posted under this assignment; the main side posts after the owner approves the text.

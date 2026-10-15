@@ -2,6 +2,8 @@ SUPERSEDED 2026-10-12 by Nick's direction: the descriptions are being compressed
 
 # Pool assignment: tightened versions of the three new ticket texts, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows (review coordinator). Staffing: 1 subagent. Claim: under the standing coordinator claim, `claims/coordinator-review-rounds.md`.
 
 ## Purpose

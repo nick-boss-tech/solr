@@ -1,5 +1,7 @@
 # Pool assignment: update processing convergence, round 6
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim: this round runs under the standing coordinator claim, claims/coordinator-review-rounds.md.
 
 ## Scope: confirmation of the round 5 application

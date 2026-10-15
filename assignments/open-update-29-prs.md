@@ -1,5 +1,7 @@
 # Assignment: open the 28 update-processing PRs as drafts
 
+Status: DONE (2026-10-10)
+
 Owner approval: given in the main chat on 2026-10-09. All 29 update branches are gated at the heads their PRs open from; receipts are in `receipts/`. SOLR-18505 is already out and is not part of this assignment.
 
 ## What to do

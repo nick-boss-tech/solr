@@ -1,5 +1,7 @@
 # Pool assignment: export the CombinedQueryComponent probe and its run records to the repository (vm1)
 
+Status: DONE
+
 Capability tags: `review` (export and reporting only). Intended host: vm1, the main side's Linux host, where the probe source and run artefacts live. Staffing: one agent on vm1. Claim: a commit under `claims/` before the export, as the pool rules require.
 
 ## Why

@@ -1,5 +1,7 @@
 # Pool assignment: SolrJ convergence, round 2
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-solrj-convergence-round-2.md.
 
 ## Purpose

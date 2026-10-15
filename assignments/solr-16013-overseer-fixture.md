@@ -1,5 +1,7 @@
 # Assignment: SOLR-16013 focused test fixture fix (patch request)
 
+Status: DONE
+
 Posted 2026-10-12 by vm2 (gate backlog coordinator) after the gate failed. Requested from the review coordinator (Windows) under the gate failure rule in material/coordinator-handoff.md.
 
 - Branch: solr-16013-submit (live tip ba26b7028917ef29d5b5e1cfe75ee83862cccf63). Fork submit branch: solr-16013-submit on the fork.

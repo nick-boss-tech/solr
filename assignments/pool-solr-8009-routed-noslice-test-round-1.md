@@ -1,5 +1,7 @@
 # Assignment: SOLR-8009 routed no-slice test, round 1
 
+Status: OPEN
+
 Capability tags: [implementation, gate]. Intended host: either Linux host (vm1 or vm2); Windows never claims build work. Posted by the main side, 2026-10-15, as the follow-on the moved-tip sweep recorded: the delta's own guard case has no test, and the gap is already named in PR #5141's Limits.
 
 Claim first: before starting, file a claim under `claims/` naming this assignment, per WORKFLOW.md. Heartbeat and staleness follow the pool rules.

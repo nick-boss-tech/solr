@@ -1,5 +1,7 @@
 # Assignment: SOLR-11475 proof fix, round 1
 
+Status: OPEN
+
 Capability tags: [implementation, gate]. Intended host: either Linux host (vm1 or vm2); Windows never claims build work. Posted by the main side, 2026-10-15, from the update-processing audit at `audits/update-processing/SOLR-11475.md` (2026-10-15).
 
 Claim first: before starting, file a claim under `claims/` naming this assignment (for example `claims/pool-solr-11475-proof-fix-round-1.md`), per WORKFLOW.md. Heartbeat and staleness follow the pool rules.

@@ -1,5 +1,7 @@
 # Pool assignment: review confidence round 7 (confirmation pass over the round 6 settlement)
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-review-confidence-round-7.md.
 
 Purpose: confirm that the round 6 settlement actually landed, and give a closing verdict per body. Round 6 (`reports/review-confidence-round-6.md`) returned 15 STILL OPEN over the bodies fixed from rounds 4 and 5. The main side has now settled every one of those 15: the decisions and the per-body record are in `reports/review-confidence-round-6-response.md`. On 2026-10-11 the main side applied the settlement's body edits through the GitHub API (13 bodies) and verified each returned body against the intended text; two bodies were settled with no body change, for the reasons the response records. This pass re-reads the bodies as they now stand. It does not reopen the code review, rerun tests, or re-litigate findings the earlier rounds already closed.

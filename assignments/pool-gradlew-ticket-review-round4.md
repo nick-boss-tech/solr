@@ -1,5 +1,7 @@
 # Pool assignment: gradlew ticket review, round 4 confirmation
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-gradlew-ticket-review-round4.md.
 
 ## Scope: confirmation of the round 3 item 4 fixes only

@@ -1,5 +1,7 @@
 # Pool assignment: CLI convergence, round 2
 
+Status: DONE
+
 Capability tags: `review`. Intended host: windows. Staffing: 1. Claim path: claims/pool-cli-convergence-round-2.md.
 
 ## Purpose

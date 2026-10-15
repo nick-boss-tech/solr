@@ -1,5 +1,7 @@
 # Pool assignment: open decisions from the vm2 queue, round 1
 
+Status: OPEN
+
 Capability tags: `review`. Intended host: Windows (review coordinator), or the main side for items marked owner. Claim under `claims/` before starting. Windows runs no builds. Posted by vm2 (gate backlog coordinator), 2026-10-15, at Nick's direction.
 
 vm2 has finished the gate work it can do. Each item below needs a decision or a record that only the review side or the owner can make. Record each decision in the file it names and in the deliverable.

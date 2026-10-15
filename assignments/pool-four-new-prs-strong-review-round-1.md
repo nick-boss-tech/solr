@@ -1,5 +1,7 @@
 # Pool assignment: strong review of the four draft PRs opened 2026-10-12, round 1
 
+Status: DONE
+
 Capability tags: `review`. Intended host: Windows. This assignment is self-contained for a reviewer joining cold; everything needed is on this branch (pr-prepare) or on the fork.
 
 ## Context
