@@ -1,9 +1,27 @@
 # Gate job: SOLR-6045 gate at the live head (decided factory fix and post-gate commits)
 
 - Branch: solr-6045-submit. Head pinned at filing: `04208ba7f0b45837738e2afe1c428292f9fecae3` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-6045.md`). Merge-base with upstream main: `97d973814336101e12475558d7419321c743de79`.
-Status: GATE ENDED, NOT MARKED GREEN, ESCALATED TO MAIN AGENT (claims/pool-vm2-gate-backlog-6045.md). Run 2026-10-15T21:23:41Z to 21:47:15Z on head 04208ba7f0b45837738e2afe1c428292f9fecae3; changelog, tidy, compile-errorprone, focused head and `:solr:core:check -x test` all rc=0. Proof leg rc=1 against base 97d973814336, so the by-content verdict is left to the main agent. Log: logs/vm2/queue-g6045-gate-20261015T212341Z.out. Not relaunched; no push.
+Status: DONE (GATE GREEN at 04208ba7f0b4, main-side verdict 2026-10-15). Run by vm2 2026-10-15T21:23:41Z to 21:47:15Z on head 04208ba7f0b45837738e2afe1c428292f9fecae3; changelog, tidy, compile-errorprone, focused head and `:solr:core:check -x test` all rc=0 (log: logs/vm2/queue-g6045-gate-20261015T212341Z.out). The proof leg returned rc=1 against base 97d973814336 and was escalated; the by-content verdict below is GATE GREEN. The gate produced no commit; no push.
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head. No implementation step. Pushes only if the gate itself produces a commit (see On green).
+
+## Main-side verdict, 2026-10-15 (vm1): GATE GREEN
+
+vm2's run left one item open: the step 5 proof leg returned rc=1 against merge-base 97d973814336 with no per-test detail recorded, so the verdict could not be read from the run record. The main side re-ran the proof leg on vm1 (branch test files in place against merge-base production, seed 6045C0FFEE6045, log g6045-proof-vm1.log) and counted from fresh JUnit XML:
+
+- AtomicUpdatesTest: 32 tests, 6 failures, 0 errors, 1 skipped (the pre-existing testRemoveDateUsingDateType skip).
+- AtomicUpdateProcessorFactoryTest: 6 tests, 1 failure, 0 errors, 0 skipped.
+
+Every failure is the premise failing in the way step 5 records:
+
+- testRepeatedAddFieldOfOperationsIsAtomicUpdate: assertion failure; on base, a repeated-operation field's getValue() is a collection, so isAtomicUpdate is false.
+- testRepeatedAddFieldOfOperationsViaJavabin: the final query assertion fails; the update sent as javabin does not land as an atomic update on base.
+- testMixedFieldPlainValueFirstIsRejected and testMixedFieldOperationMapFirstIsRejected: assertion failures; base has no mixed-field rejection in either order.
+- testRepeatedOperationsWithPlainFieldStillMerge: expected [bbb, ddd] but was [{set=bbb}, {add=ddd}]; on base the operation maps are indexed as plain values.
+- testAtomicUpdateWithChildDocuments: SolrException "Unknown operation for the an atomic update: id"; on base the merger reads the child document's own field names as operation names.
+- testRepeatedOperationMapsPassThroughUnwrapped (factory test): expected the list of operation maps but was [{set=[{set=bbb}, {add=ddd}]}]; on base the factory wraps a collection of operation maps because it does not recognize it as already atomic. The control testPlainMultiValueFieldStillWrapped passed on base.
+
+No failure came from setup, compilation, or an unrelated test; the branch test code compiles against merge-base production, so no proof test is inconclusive by compile. Focused head counts were also confirmed firsthand on vm1 at 04208ba7f0b4 (log g6045-head-vm1.log, same seed): AtomicUpdatesTest 32 tests, 0 failures, 1 skipped; AtomicUpdateProcessorFactoryTest 6 tests, 0 failures; rc=0. With vm2's green head legs, the gate is GATE GREEN at 04208ba7f0b4.
 
 ## Why this job exists
 
