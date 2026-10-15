@@ -4,4 +4,4 @@
 - Capability tags: gate. Runner: /workspace/gates/g7520-gate.sh on vm2, using /workspace/gates/lib/gate-run.sh. Seed 7520C0FFEE752020.
 - Stops before any push. A tidy change (GATE INVALID), a proof-leg failure of an unexpected shape, or a failed focused run is recorded in the job file and escalated; not relaunched.
 - The PR 5138 body re-point is not part of this claim and waits for the owner's approval.
-- Status: CLAIMED, runner queued.
+- Status: DONE (2026-10-15). GATE GREEN at 15cc9ba5a6; receipts/SOLR-7520.md. PR #5138 body re-point awaits the owner.
