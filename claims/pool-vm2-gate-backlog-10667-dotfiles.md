@@ -7,4 +7,6 @@
 - Scope of this claim: the premise run only (job steps 1 and 1b, record only). No branch change is made under this claim. If the cause sits in the copy spec, the fix is a follow-up under a new claim, after the record is read.
 - Fork push: none under this claim.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued.
+- Run: started 2026-10-15T02:05:07Z, GATE END 2026-10-15T02:18:24Z. Log: gates/logs/vm2/queue-g10667-dotfiles-gate-20261015T020507Z.out.
+- Result: not GREEN. Premise assemble rc=0; the `.gitignore` presence probe reported the file absent in the assembled distribution (rc=1, 0 present, 1 absent), the six other tracked example files present. The liblinear link probe ran with rc=0 and the probe was removed (rc=0). The run did not isolate the cause of the absent file; the trace step only captured Gradle output.
+- Status: RUN ENDED, record incomplete. Cause not recorded. Left for the main agent; no fork push, no branch change under this claim. Not DONE.
