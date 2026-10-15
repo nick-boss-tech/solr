@@ -2,7 +2,7 @@
 
 This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/`, per the census of 2026-10-15 (generated 2026-10-15, from pr-prepare tip cac628fdb26b). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
 
-Counts at generation: 7 open assignments, 22 open gate jobs (plus 1 held, below), 12 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
+Counts at generation: 7 open assignments, 22 open gate jobs, 12 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
 
 ## Open assignments
 
@@ -96,7 +96,3 @@ These files could not be settled from the records at the census. Each carries `S
 - `gates/SOLR-12505-fetchstream-fix-amendment-1.md`: the directed re-run executed NOT GREEN and amendment 2 ruled on it, but the checklist is unticked and the head never landed
 - `gates/SOLR-18541-score-only-exit-input.md`: the claim is marked DONE, but the job file has no result section and no receipt records the answers
 - `gates/pr-drift-round-1-run-records.md`: the file's two status lines conflict; items (b), (c) and (d) have final classifications, item (a) owes a main-agent decision
-
-## Held
-
-- `gates/SOLR-17752-base-rebase-rerun.md` (pinned head: e5c0a64f993c): owner item, not pool-claimable. The rebase this job waits on rewrites a published branch, and the build-docs record reserves that direction to the owner. Its Status line reads OPEN because the job is neither done nor claimed, but it does not appear in the open gate jobs above and no host should claim it; it moves only on the owner's direction in the main chat.
