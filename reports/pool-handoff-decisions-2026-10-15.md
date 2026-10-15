@@ -73,3 +73,62 @@ Checked against origin/pr-prepare at 489dba10770 (2026-10-15, UTC). Live PR stat
 
 - Four-PR strong review round 2 is blocked on VM2 gates. Nothing for the Windows lane until those land.
 - `assignments/pool-vm2-open-decisions-round-1.md` (OPEN, unclaimed) is the next Windows review item. Three of its four items need Nick: the SOLR-17055 maxScore contract, the SOLR-17842 fork push, and the SOLR-4374 include-or-follow-up call.
+
+## Update, 2026-10-15: Nick accepted the recommendations
+
+Done, each verified by a read-back against the approved text:
+
+- **PR #5117 body** replaced with the cut version (about 3,490 visible characters, links not counted). Head `a93f9f6a997e` unchanged, still a draft, no comments or reviews. The cut claims a fail-before only for the seven first-version tests, which is what the record shows. The two later exactness tests have no fail-before: their gate run passed on the merge-base, so the body makes no claim for them.
+- **PR #5118 body**: the head references already cite `571307400b69`, so no head sync was needed. The receipt's note that the body still cites `2b5ad801c9e8` was out of date. The two base-failure sentences in the Proof section were removed. Head `571307400b69` unchanged, still a draft, one comment (Nick's), no reviews.
+- **SOLR-18010 receipt** (commit `62d6006d58a`, pushed fast-forward): the three cited logs are recorded as not archived on any reachable record. The "found and on disk" wording is corrected, and the results attributed to those logs are marked unverified from a log.
+- **SOLR-18010 draft**: the prepared Choice block was removed under the 2026-10-13 ruling (see item 2).
+- **Branch history**: nothing was rewritten, and the commits from this review stay in place. This review will not rewrite `pr-prepare`.
+
+Still open on the PR #5118 body: its Choice paragraph poses the permission-copy question to maintainers. The 2026-10-13 ruling says that item waits for the post-merge rework. Nick should decide whether the paragraph stays.
+
+Process note: the rewrite lane's empty-ref guard was accepted in principle. This review did not locate the rewrite lane's script from this host, so the guard is not implemented here.
+
+### #5001 (SOLR-18317): recommended path (a), new ticket and PR
+
+The promise, verbatim from the ledger: the server-side hardening "is preserved intact on the fork branch `solr-18317-server-submit`, to be opened as its own PR."
+
+The SOLR-15823 pair (#5030 and #5031) does not carry that hardening. It adds the V2 logging broadcast and migrates the Admin UI. It does not change `RemoteRequestProxy`, `GenericV1RequestProxy`, `V2SolrRequestBasedProxy`, `SystemInfoHandler`, `MetricsHandler`, or the v1 logging tail (`reports/solr-18317-server-coverage-round-1.md`). The gap is live on main for four endpoints.
+
+- **Path (b)**, confirming the pair as the discharge, would close the promise on a PR that lacks the promised change. Not recommended.
+- **Path (a)** is recommended:
+  1. Nick opens a new JIRA ticket for the gap, using the text below.
+  2. The server branch gets a gate at its head under the new ticket key. It has none today (`receipts/SOLR-18317.md`).
+  3. Nick approves the PR opening. The PR links the new ticket, which discharges the promise.
+
+The ledger's 2026-10-14 entry records an owner ruling that keeps the promise on the pair. That ruling's text is not in any record here, and the coverage check of the same date contradicts it. This recommendation supersedes it once Nick confirms path (a). The cached Jira packet for SOLR-18317 (`research/jira-context/SOLR-18317.json`, dated 2026-07-24) reads Open, so the ledger's "Resolved" is also unverified.
+
+Choices made for the draft ticket, each a default Nick can change:
+
+1. Standalone `nodes=all` is answered by the node on the v1 logging, v1 system info and v2 node system endpoints. The V2 logging endpoint keeps the 400 that SOLR-15823 gives it, and the ticket asks that question openly.
+2. Metrics with `node=all` or an explicit node name return 400 in standalone mode.
+3. File the ticket now, so the SOLR-15823 author has a target for the v1 tail.
+
+Draft ticket text (for Nick to post; not posted):
+
+> **Title:** Standalone node throws NullPointerException for nodes or node parameters in proxy-capable admin endpoints
+> **Type:** Bug. **Priority:** Major (as SOLR-18317).
+>
+> 🤖 _AI text below_ 🤖 _(posted on behalf of Nick Shanin)_
+>
+> Found by reading the code at main 7767d36d29f. The endpoints were not run, so the exact status codes are not confirmed.
+>
+> Related: SOLR-18317 (the Admin UI half of the same report), SOLR-15823 (open; V2 logging broadcast).
+>
+> The {{nodes}} and {{node}} parameters on a standalone node (not running in SolrCloud) fail with a NullPointerException, or with a 500 error that wraps one, in four endpoints:
+> * {{/admin/info/logging}} (v1), for reads and for {{set}}
+> * {{/admin/info/system}} (v1)
+> * {{/api/node/system}} (v2)
+> * {{/admin/metrics}} (v1), with {{node}}
+>
+> For example, {{GET /solr/admin/info/logging?nodes=all}} fails. A {{set}} request with {{nodes=all}} applies the level change on the node and then fails the same way. The shared proxy code (RemoteRequestProxy.validateNodeNames and GenericV1RequestProxy.shouldProxy) reads the ZooKeeper controller without checking that one exists. The Admin UI no longer sends {{nodes=all}} in standalone mode, but other clients, older UIs and direct calls still get the error.
+>
+> Expected behavior:
+> * {{/admin/info/logging}}, {{/admin/info/system}} and {{/api/node/system}}: {{nodes=all}} is answered by the node itself. Other {{nodes}} values return 400 with a message that the parameter requires SolrCloud mode.
+> * {{/admin/metrics}}: {{node=all}} and explicit node names return 400 with the same kind of message.
+>
+> Outside this ticket: the V2 logging endpoint ({{/api/node/logging/levels}}). SOLR-15823 gives it a 400 for {{nodes}} in standalone mode. Open question: should the V2 logging endpoint answer {{nodes=all}} locally too, for consistency with v1? This ticket does not decide it.
