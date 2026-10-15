@@ -10,3 +10,5 @@
 - Heartbeat: 2026-10-11T14:53Z (coordinator claim taken).
 - Heartbeat: 2026-10-11T20:17Z (refreshed; coordination is ongoing in this session: the mergeIds round 3 closed SATISFIED, the mergeIds fix review closed STILL OPEN, and scheduled checks run each cycle; vm2 had flagged the 14:53Z heartbeat as stale).
 - Status: ACTIVE.
+
+- Heartbeat: 2026-10-15T16:25:03Z (refreshed; round 1 wave run: standing calls, landing order, ungated and Groups C/D audits DONE; eDisMax, proof-shape and SolrCloud hold first rung PARTIAL; new ticket texts superseded; SOLR-4841 build and eDisMax patches blocked on branch-creation permission).
