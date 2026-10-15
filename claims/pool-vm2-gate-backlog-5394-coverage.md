@@ -4,4 +4,4 @@
 - Capability tags: gate (no push; the fork tip is already the head).
 - Runner: gates/g5394-coverage-gate.sh, worktree /workspace/gates/solr-5394-coverage (detached). Seed 224D384E56AEA306, the seed of the 2026-10-14 focused run at 6e4c302c41 so counts compare.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued.
+- Status: STOPPED, NOT RUN (2026-10-15T01:55Z). Head-check found the fork tip at 74532d0f76a6, not 437b818067a4, so the gate stopped without a test run. Earlier run killed by the runtime restart with a stale index lock, cleared. Left for the main agent: the branch owner must decide the new tip.
