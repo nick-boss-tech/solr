@@ -1,10 +1,7 @@
-# Claim: SOLR-6975 distributed _docid_ sort gate at the patched head (vm2, gate backlog coordinator)
+# Claim: SOLR-6975 gate at the patched head (vm2, gate backlog coordinator)
 
-- Claimed: 2026-10-15T05:47Z by vm2. Job: gates/SOLR-6975.md.
-- Head at claim: c666155ed058a0535f60e8c51a49c25f17821f98 (solr-6975-submit, ls-remote matched on 2026-10-15). Diff against 761aa629bb83 is the test file only; no code change under this claim.
-- Capability tags: gate.
-- Runner: gates/g6975-gate.sh, worktree /workspace/gates/solr-6975-gate (detached at c666155ed058).
-- Fork push: none under this claim.
-- PR body edit (apache/solr #5135): not in this claim's scope; left for the main side after the gate result.
-- Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, queued.
+- Claimed: 2026-10-15T05:54ZZ by vm2. Job: gates/SOLR-6975.md (head c666155ed058, fork tip verified by the runner at start).
+- Capability tags: gate. Runner: gates/g6975-vm2-gate.sh (worktree /workspace/gates/solr-6975-gate, detached). Seed 6975C0FFEE6975.
+- Decisions D1 to D5 applied as the job states. Proof leg: ShardFieldSortedHitQueue.java reverted to e432df19c4a5.
+- Note: the queue entry named gates/g6975-gate.sh was a superseded local entry; its file was overwritten by this runner's name clash before the rename to g6975-vm2-gate.sh. The superseded content was not recorded and is not run.
+- Status: CLAIMED, runner queued.
