@@ -1,7 +1,7 @@
 # Gate job: SOLR-5941 third getBool site fix (audit finding 3)
 
 - Branch: solr-5941-submit. Head: `a4df7bfd214b15d9c8d4519fdac8fd6df9468f2d` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing). The branch backs the owner's open PR at that head. If the tip has moved when claimed, stop and record the new tip here; do not run at any other head without noting it.
-Status: OPEN
+Status: BLOCKED (scope stop at the line 125 fix, 2026-10-15; see the Stop section)
 - Capability tags: [implementation, gate].
 - Source: `audits/update-processing/SOLR-5941.md` (2026-10-15), finding 3 and readiness item 1. Read the audit in full before claiming. Per the no-new-ticket rule, this fix belongs inside this branch: no new ticket, no separate PR.
 - Current gate state (`receipts/SOLR-5941.md`): gated at the pinned head (2026-10-09): AutoCommitUpdateChainTest 2/2, CommitThroughNonLeaderTest 1/1, ParallelCommitExecutionTest 1/1, HttpPartitionOnCommitTest 1/1, module check rc=0. The receipt does not cover finding 3: no test exercises the factory below with a forwarded commit.
@@ -37,3 +37,11 @@ The round 30 design report (`material/last-reviews/5941-round30-design-report.md
 4. On green: push plainly to `fork solr-5941-submit` (fast-forward; the branch backs the owner's own open PR, and pushes to it carry standing authorization). Refresh `receipts/SOLR-5941.md` at the new head (new tip, gate date and log name, focused counts including the new test, the fail-before proof result). Refresh `pr-drafts/update-processing/SOLR-5941.md` to the new head: account for the finding 3 fix, and correct the draft's "No live multi-node run was made" sentence per audit finding 5 (say which tests run in a cluster, including the step 2 test, and that no multi-node soak or live run was done). Mark this job DONE and the claim DONE, and append the outcome to the takeover log.
 5. On an executed-test failure: record it (failing test, seed, reproduce line, classification if the log establishes one) in this file, the receipt, and the takeover log, mark the claim with the blocker, and stop. Do not relaunch an unchanged gate.
 6. Stop condition: either the green path has landed (fix pushed at the gated head, receipt and draft refreshed, job and claim DONE), or a stop under step 1's scope rule or step 5 is recorded with its evidence.
+
+## Stop, 2026-10-15 (step 1 scope rule)
+
+Claimed at a4df7bfd21, live tip verified with git ls-remote. No production change, no test, no push to the fork.
+
+The line 125 fix is not the one-line compare the sibling sites use. Line 125 sits in the branch whose comment reads "this is a targeted commit from replica to leader needed for recovery, so can't be ignored". The forwarded values are "leaders" and "replicas" (DistributedUpdateProcessor sets them at lines 225 and 242). The sibling sites compare with "true" because "true" marks a local end point such as an auto commit, which is a different meaning. Copied to line 125, `"true".equals(...)` returns false for "leaders" and "replicas", so a forwarded commit would enter the ignore branch rather than pass to the distributing processor. That reads from the code and was not run. It would replace a BAD_REQUEST with a silent ignore.
+
+The owner decides the predicate at line 125: which commit_end_point values make a commit non-ignorable (for example any non-null value other than "false", or the explicit set true, leaders, replicas). The step 2 proof depends on that predicate. Re-file the job with the decided predicate to resume.
