@@ -48,3 +48,14 @@ Record the failing step and detail in this file, mark the claim with the blocker
 (The host fills this in as the steps finish.)
 
 - Head leg FAILED at 3e07d801df598573823cc997bbabb848fa2b1cfb (seed 6831C0FFEE6831; log logs/vm2/6831-r2-head.log; runner gates/g6831-r2-gate.sh, GATE START 2026-10-15T05:48:00Z). Focused `TestQueryLimits`: tests=8 failures=1 errors=0 skipped=0. Failing test: testPivotFacetRefinementStopsWhenOmittedPartialResults, message "org.apache.solr.client.solrj.SolrServerException: No live SolrServers available to handle this request"; the server side reports "No pivot refinement response from shard". Compile, tidy and spotless rc=0. The proof leg (rc=1, expected) ran after it; the module check was still running when recorded. Not relaunched; no further commit pushed. Left for the main agent.
+
+
+## Run record, vm2 (2026-10-15T06:29ZZ): RED, not pushed
+
+- Head 3e07d801df598573823cc997bbabb848fa2b1cfb. Log logs/vm2/6831-r2-result.txt; GATE END 2026-10-15T06:17:35Z; seed 6831C0FFEE6831.
+- Changelog: none in this patch. Tidy rc=0 (tree changed only in TestQueryLimits.java). Spotless rc=0 changed the same file: committed locally as formatApplied 55588a1c709f on the gate worktree, not pushed.
+- Compile (Error Prone) rc=0. Module check rc=0.
+- Focused head run: TestQueryLimits 8 tests, 1 failure: testPivotFacetRefinementStopsWhenOmittedPartialResults with `SolrServerException: No live SolrServers available to handle this request`.
+- Proof leg (production FacetComponent.java at 2ee19dc646): 8 tests, 1 failure, the same test with the same error. The proof does not decide the change: the new test fails before the refinement code can be compared, so n is not reached.
+- Stop per the job: an executed test failed. Not relaunched. Nothing pushed. The fork branch stays at 3e07d801df.
+- Needs a decision: the test's cluster does not come up in this shape (an environment or fixture defect, or the new test's setup). Options: fix the test setup in a new commit and re-gate, or the review lane investigates the setup first.
