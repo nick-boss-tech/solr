@@ -1,0 +1,6 @@
+# Claim: SOLR-8240 gate at head 97cd22159ba (vm2, gate backlog coordinator)
+
+- Claimed: 2026-10-15T16:10:54Z by vm2. Job: gates/SOLR-8240.md (head 97cd22159ba0d2bffa, fork tip verified by ls-remote at claim time).
+- Capability tags: gate. Runner: gates/g8240-gate.sh (worktree /workspace/gates/solr-8240-gate, detached). Seed 8240C0FFEE824001.
+- Stops before any push. A tidy change stops the run (GATE INVALID). A failed run is recorded and not relaunched.
+- Status: CLAIMED, runner queued.
