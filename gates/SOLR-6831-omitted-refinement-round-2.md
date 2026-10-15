@@ -46,3 +46,5 @@ Record the failing step and detail in this file, mark the claim with the blocker
 ## Run record
 
 (The host fills this in as the steps finish.)
+
+- Head leg FAILED at 3e07d801df598573823cc997bbabb848fa2b1cfb (seed 6831C0FFEE6831; log logs/vm2/6831-r2-head.log; runner gates/g6831-r2-gate.sh, GATE START 2026-10-15T05:48:00Z). Focused `TestQueryLimits`: tests=8 failures=1 errors=0 skipped=0. Failing test: testPivotFacetRefinementStopsWhenOmittedPartialResults, message "org.apache.solr.client.solrj.SolrServerException: No live SolrServers available to handle this request"; the server side reports "No pivot refinement response from shard". Compile, tidy and spotless rc=0. The proof leg (rc=1, expected) ran after it; the module check was still running when recorded. Not relaunched; no further commit pushed. Left for the main agent.
