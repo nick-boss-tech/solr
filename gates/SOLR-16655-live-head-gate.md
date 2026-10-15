@@ -1,7 +1,7 @@
 # Gate job: SOLR-16655 gate at the live head (decided descent fix)
 
 - Branch: solr-16655-submit. Head pinned at filing: `5e2317443f4116a9e97330b0d6ce175cf44b54df` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-16655.md`). Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
-Status: OPEN
+Status: CLAIMED (claims/pool-vm2-gate-backlog-16655.md)
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 

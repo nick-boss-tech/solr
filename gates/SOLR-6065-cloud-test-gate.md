@@ -1,7 +1,7 @@
 # Gate job: SOLR-6065 gate at the live head, with the cloud test in the run
 
 - Branch: solr-6065-submit. Head pinned at filing: `3d2cec9e1ab3a19f6b948682b116c2780da4b65b` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-6065.md`). Merge-base with upstream main: `97d973814336101e12475558d7419321c743de79`.
-Status: OPEN
+Status: CLAIMED (claims/pool-vm2-gate-backlog-6065.md)
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head, with the cloud test named in the run list. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 
