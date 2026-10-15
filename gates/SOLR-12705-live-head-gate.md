@@ -2,6 +2,7 @@
 
 - Branch: solr-12705-submit. Head pinned at filing: `aa56b7b1be4c5491723c58f296e20c906d7b7334` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-12705.md`). Merge-base with upstream main: `0cc328310f8f` (as recorded in the audit).
 Status: CLAIMED (claims/pool-vm2-gate-backlog-12705.md)
+- Run record (runner log logs/vm2/queue-g12705-gate-20261015T194603Z.out, GATE END 2026-10-15T20:11:01Z, head aa56b7b1be4): changelog rc=0, tidy rc=0 with clean tree, compile rc=0, proof rc=1 (the fail-before leg, nonzero expected; verdict by content is owed to the main side), head rc=0, core check rc=0. Not GREEN until the proof verdict is recorded. Not relaunched.
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head, plus the counter-level check in step 6. No implementation step and no new test written under this job. Pushes only if the gate itself produces a commit (see On green).
 
