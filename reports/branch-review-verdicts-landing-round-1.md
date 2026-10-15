@@ -159,3 +159,16 @@ Not yet worked:
 ## Shared worktree
 
 Changes by other reviewers in the same worktree: `pr-drafts/security/SOLR-11678.md` and `SOLR-12161.md`, and the security gate and response files. They are committed under the security category record, not here.
+
+## SOLR-16290 disposition: settled (standing calls round 1, item 4, 2026-10-15)
+
+Decision: fund the real fix. Not a pin-only PR, and not banked. The pin stays on `solr-16290-submit` (live tip `ff760120c817`, gated) as the regression test for the fix. Full reasons: `reports/standing-calls-round-1.md`.
+
+- What the pin buys alone: a test-only PR. The pin is `@AwaitsFix` (branch `TestJsonFacetsWithNestedObjects.java` line 355) and asserts the control's output, so it records the defect and fixes nothing. The reported query still returns empty child buckets. A reviewer's first question would be the fix, so a pin-only PR is a public record with no resolution.
+- The defect is real on the record: the premise run at base `0cc328310f8` fails exactly 1 of 9 with awaitsfix enabled, `testNestedChildFacetWithExclusionKeepsBlockChildrenDomain`, with the nested buckets empty (`receipts/SOLR-16290.md`, log `g16290-premise.log`). Main's facet package has had no commit since that base (`git log 0cc328310f8..upstream/main -- solr/core/src/java/org/apache/solr/search/facet/` is empty), so the premise is expected to hold on main. Not run here, because the Windows host does not build.
+- Where the fix sits (the record supports this scope, not a root cause): `FacetProcessor.java` `handleFilterExclusions` (base lines about 190 to 222, which rebuilds the base from the query and the filters minus the excluded tags) and `handleBlockJoin` (lines about 255 to 290, the parent to child transform), and their order for a child facet under a block-join domain. `FacetParser.java` lines 209 to 245 parse `excludeTags` and `blockChildren`. The failing line in the pin was not traced; that trace is the fix's first step.
+- Shared files: none with SOLR-12556 or SOLR-17051 at their tips (`reports/search-components-1-f5.md`, note 11). Not checked against other open facet branches.
+- Cost: not estimated on record. The fix needs a design step (how an exclusion composes with a block-join domain). That is a Choice for the fix's draft, not settled here.
+- Banking would lose the only public record of a reported wrong-results bug open since 2022 (SOLR-16290 created 2022-07-13; the JIRA packet has no comments), and it would leave the reported query broken.
+- Follow-up named in the disposition: SOLR-16290 fix, funded 2026-10-15. Acceptance: the `@AwaitsFix` pin passes with the annotation removed, the control test still passes, and the facet suites stay green at the gate. The pin ships inside the fix PR, not as a pin-only PR. The gate carries the fail-before proof (the premise leg is recorded above).
+- Next step (one line): a fix job on `solr-16290-submit` (implementation, Linux host); the branch stays unopened until that gate is green.

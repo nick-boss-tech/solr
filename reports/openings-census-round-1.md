@@ -340,7 +340,7 @@ Why this exists: the W1 ready lists (`reports/category-ready-lists-round-1.md`) 
 |---|---|---|---|---|---|---|
 | SOLR-10627 | solr-10627-submit | 5a15dc0ba220 | GREEN 2026-10-05 | written | HOLD | changelog title landing and parse owed; job already posted (gates/SOLR-10627-sec-r1-02-title.md) |
 | SOLR-11678 | solr-11678-submit | 2c68a83c64ee | GREEN 2026-10-13 | written | HOLD | keystore-type reading owed on vm2; job already posted (gates/SOLR-11678-sec-r1-07-keystore-reading.md) |
-| SOLR-12161 | solr-12161-submit | cdd265168a2a | GREEN at the live tip (security round 2 record: the packaged head is gated; the receipt first section names the superseded head) | CONVERGED (Security r2) | READY TO OPEN |  |
+| SOLR-12161 | solr-12161-submit | cdd265168a2a | GREEN at the live tip (security round 2 record: the packaged head is gated; the receipt first section names the superseded head) | CONVERGED (Security r2) | READY TO OPEN | Standing call round 1, item 1 (2026-10-15): READY TO OPEN stands. The awaiting-pipeline state (tests not run) was discharged by the vm2 gate of 2026-10-11 (gates/SOLR-12161.md DONE, both pin runs green); the intake pause does not reach this branch. Opening still needs Nick's approval. See reports/standing-calls-round-1.md. |
 | SOLR-18368 | solr-18368-submit | a7ec9a1b65c0 | GREEN 2026-10-10 | written | OWNER ITEM | key choice at opening (round 2 flags banner option (a) for confirmation) |
 
 ## Spellcheck (9)

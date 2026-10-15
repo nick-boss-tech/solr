@@ -159,3 +159,18 @@ Open points:
 5. A null `getMessage()` would render as "(null)" in the 503 text. Minor, and not stated in the draft.
 
 Not done: no gates, tests, builds, Gradle, PRs, comments, or submit-branch edits. Nothing was posted.
+
+## SOLR-9637 stacking: settled (standing calls round 1, item 3, 2026-10-15)
+
+Decision: the ratified shape is confirmed. SOLR-17393 submits first with the merge-only scope. SOLR-9637 follows as its own PR after SOLR-17393 lands, rebased onto the landed tip. No fold into one PR, and no rework onto plain main. Full record: `reports/standing-calls-round-1.md`.
+
+Live tips (`git ls-remote`, 2026-10-14, matched on 2026-10-15): `solr-17393-submit` `626241e647e5`, `solr-9637-submit` `c50fa4ffd932`.
+
+- SOLR-17393 scope holds at its tip. Against its base `c3cdf7b46e8c` it changes three files: `SuggestComponent.java` (29 lines), `SuggestComponentMergeTest.java` (+73) and the changelog fragment (+8). The handoff doc was removed at `063a040e1d7`.
+- The 9637 stack sits on the 17393 commit `dd6c82924fff`, not on the tip. Its two commits (`872c8130da2`, `c50fa4ffd93`) change 18 lines of `SuggestComponent.java` (16 added, 2 removed) and add 19 test lines, on top of the 17393 tip. A dry run (`git merge-tree --write-tree`, no ref or worktree change) of `872c8130da2` onto the 17393 tip, with merge base `dd6c82924fff`, is clean. A dry run of the whole 9637 branch onto `upstream/main` is also clean. `SuggestComponent.java` has had no upstream commits since `c3cdf7b46e8c`, so there is no drift to absorb.
+- `SOLR-17393-TESTING.md` is in the 9637 history (from `dd6c82924fff`) and is absent at the 17393 tip. A rebase onto the landed tip drops it from the PR file list. The 9637 branch tip still carries it, so the rebased branch gets a file-list check before any PR.
+- Rebase cost: no code step at these tips. The rebased head needs its own gate, because the 9637 proof ran on the stacked base (the draft says so).
+- Fold cost: one PR for two tickets. It would put 9637's dedupe-and-sum behavior into the PR the owner ratified as merge-only, and it needs a combined gate.
+- Rework cost: 9637's change sits on 17393's merge rewrite, so a plain-main branch rebuilds that rewrite inside 9637. That is a fold by another name, plus a new gate.
+- Draft check: `pr-drafts/suggester/SOLR-9637.md` line 36 already says the PR opens after 17393 lands, rebased onto the landed tip, and that the proof ran on the stacked base. It matches this settlement, so no draft edit.
+- Census: the SOLR-9637 row in `reports/openings-census-round-1.md` still reads OWNER ITEM. The main side may move it to HOLD (behind the SOLR-17393 landing) at the next census refresh. This round did not edit the census row or its totals.
