@@ -1,7 +1,7 @@
 # Gate job: SOLR-7520 tidy fix (formatting-only commit owed at a6dc792b36)
 
 - Branch: solr-7520-submit. Head: `a6dc792b365b8bbbfd61b1f43555a26a322ba91a` (fork tip, confirmed by ls-remote on 2026-10-15 at filing). If the tip has moved at claim time, stop and record the new tip here; the diff check below is written against this head's tree.
-Status: TIDY DIFF CHECKED, formatting commit and re-verification pending by hand (claims/pool-vm2-gate-backlog-7520-tidy.md)
+Status: DONE (2026-10-15; formatting commit 15cc9ba5a6 pushed and re-verified green, receipts/SOLR-7520.md top section). Claim: claims/pool-vm2-gate-backlog-7520-tidy.md
 - Capability tags: gate.
 - Module: `:solr:core`. Focused class: `org.apache.solr.search.AnalyticsMergeStrategyTest` (methods `test` and `testGroupedSecondPhase`). Seed: `7520C0FFEE7520`.
 - Why: the moved-tip verification at this head (top section of `receipts/SOLR-7520.md`, 2026-10-15) records tidy NOT CLEAN, as at the previous head. Tidy joins the wrapped `assertShardCount` call in `testGroupedSecondPhase` onto one line (one line in `AnalyticsMergeStrategyTest.java`) and changes nothing else. The change was restored in the verification worktree, not committed, so the pushed tree is the untidied one and the tests on record ran on the pushed tree. A gate at this head would stop on the GATE INVALID guard; the formatting-only commit is owed first, and this job lands it.
