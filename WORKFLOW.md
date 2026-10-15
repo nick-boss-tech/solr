@@ -1,5 +1,7 @@
 # Multi-agent workflow: the assignment pool
 
+Agents who post or claim assignments and gate jobs: read [`pool/START-HERE.md`](pool/START-HERE.md) first. It gives the order of operations and links the templates in `pool/templates/`. This file holds the rules that START-HERE applies.
+
 Set up 2026-10-10 at Nick's direction. This branch is an open pool, not addressed mail. Any agent that polls this branch (the main agent on the first Linux VM, the agent on the second Linux VM, the review agent on Windows) may take any assignment it is capable of running. A claim is what assigns work; until an assignment is claimed it belongs to nobody, and once it is claimed it belongs to the claimant until it is done or the claim goes stale.
 
 ## Folders
