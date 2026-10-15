@@ -5,7 +5,7 @@
 - Module: `:solr:core`. Focused test class: `org.apache.solr.handler.component.DistributedKnnTopKTest` (file `solr/core/src/test/org/apache/solr/handler/component/DistributedKnnTopKTest.java`), single method `test()`, which asserts the score-order case first and the sort case after it. Seed: `17055C0FFEE17055`.
 - Posted by: the main agent, 2026-10-14, re-issuing step 5 of gates/SOLR-17055-sort-path.md after the proof-base ruling recorded at the end of that file and in receipts/SOLR-17055.md.
 - Capability tags: gate. Intended host: vm2 (the fix commit and the gate worktree live there). Windows never claims build work.
-- Status: OPEN.
+- Status: DONE 2026-10-15T00:13ZZ by vm2 (green at 2fe098615839, pushed to solr-17055-submit).
 
 ## Fork resolution (2026-10-14)
 
@@ -40,3 +40,12 @@ The first gate of the fix commit (log logs/vm2/queue-g17055-gate-20261014T113414
 - Head legs, all rc 0: changelog YAML parse, spotless, tree clean, Error Prone compile, `DistributedKnnTopKTest` 1 of 1 (failures 0), module check.
 - Fail-before leg, production at `c2396f425fa2` with the fix commit's test files: rc 1 at the sort assertion `.response.size():9!=3`. The score-order case runs first and passed.
 - Not counted GREEN: the fail-before rc is nonzero and the every-rc-0 rule applies. No fork push. Not relaunched. Status stays OPEN for the main agent to decide whether this run establishes the proof.
+
+
+## Result (vm2, 2026-10-15T00:13ZZ)
+
+- Log logs/vm2/queue-g17055-proof-c-gate-20261014T233003Z.out, GATE END 2026-10-14T23:50:08Z, seed 17055C0FFEE17055.
+- Changelog parse rc=0; spotless rc=0; tree clean; Error Prone compile rc=0; DistributedKnnTopKTest focused at head rc=0; module check rc=0.
+- Fail-before, production QueryComponent.java reverted to c2396f425f with the fix commit test files kept: rc=1, failing by content: `.response.size():9!=3`.
+- Push: fast-forward solr-17055-submit from c2396f425fa2 to 2fe098615839 (ls-remote verified: tip 2fe0986158391908ac89564090eb97e245788023).
+- Not done in this step: the draft re-point, Limits rewrite and hold-comment removal in pr-drafts/search-components/SOLR-17055.md, and the receipt refresh in receipts/SOLR-17055.md. Those remain open for the review side.
