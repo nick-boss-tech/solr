@@ -6,4 +6,4 @@
 - Runner: gates/g17842-gate.sh, worktree /workspace/gates/solr-17842-placeholder-fix (detached).
 - Fork push: none under this claim. The job names the branch owner as the one who pushes the branch commit (decision 10).
 - Heartbeat: refresh hourly; staleness rule 2 hours.
-- Status: CLAIMED, runner queued.
+- Status: DONE 2026-10-15T04:27Z. Gate green at 9da1242b1d29c8f204455f6574e8fb91239192a5 (local commit on 008973f6; not pushed under this claim). Receipt refreshed. The owner's fork push and the draft HOLD removal are left for the main side.
