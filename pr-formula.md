@@ -121,6 +121,7 @@ design-decisions-open.md.
   and check with Nick first.
 - Minimize comments on PRs; correct by editing the description.
 - No "Claude" in commit authors, committers, or trailers.
+- Changelog fragments list the author by name only (`name: Nick Shanin`), with no `nick:` line (Nick, 2026-10-15). The upstream `dev-docs/changelog.adoc` example includes one; remove it from any fragment before committing.
 
 ## Template (approved draft, 2026-10-04)
 
