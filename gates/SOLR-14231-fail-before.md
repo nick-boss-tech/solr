@@ -50,3 +50,15 @@
 - [x] per-test outcomes counted from fresh JUnit XML; failure lines quoted for failing new tests
 - [x] receipt line added to receipts/SOLR-14231.md (2026-10-14, with this confirmation); draft Proof sentence updated from the outcomes (still the review coordinator's step, per the job text)
 - [x] branch unchanged (ls-remote re-verified 2026-10-14); job DONE. Throwaway worktree removal outstanding on vm2 (see confirmation)
+
+
+## Restatement (vm2, 2026-10-15T00:31ZZ, assignment pool-vm2-14231-record-restatement-round-1)
+
+- Raw record: logs/vm2/14231-failbefore-focused.log and the JUnit XML in the throwaway worktree (now discarded). XML file TEST-org.apache.solr.client.solrj.io.graph.GraphExpressionTest.xml, timestamp 2026-10-14T06:26:43Z, seed 14231C0FFEE14231.
+- Attributes on the suite element: tests 10, failures 4, errors 0, skipped 0. The XML holds 3 failure elements, so the attribute cannot be reproduced from the elements. This restatement does not reconstruct the fourth.
+- Test methods: 8. Failing: testScoreNodesStreamSingleNode and testScoreNodesNoNodes, both "No collection param specified on request and no default collection has been set". Passing: testShortestPathStream, testGatherNodesFriendsStream, testScoreNodesFacetStream, testGatherNodesStream, testGraphHandler, testScoreNodesStream.
+- Class-level entry (classMethod): one failure element, "ObjectTracker found 6 object(s) that were not released!!!", with the six tracked objects: HttpJettySolrClient, SolrZkClient, LBJettySolrClient, HttpJettySolrClient, ZkStateReader, HttpJettySolrClient. The tracking stack shows where each was allocated (HttpJettySolrClient.<init>). The log does not establish which test allocated them, so that is not recorded here.
+- Head leg at 593463f398 (logs/vm2/14231-head.log): no ObjectTracker message in that log. The complaint appears only in the fail-before run.
+- Per-test verdicts: unchanged (confirmed).
+- Throwaway worktree /workspace/gates/solr-14231-failbefore: discarded. Its only change was the reverted production file, ScoreNodesStream.java at the base, which the log already records.
+- Draft hold: pr-drafts/streaming/SOLR-14231.md is not edited here; the restatement is complete, so the review coordinator can lift the hold.
