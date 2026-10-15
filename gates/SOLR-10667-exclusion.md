@@ -2,7 +2,7 @@
 
 - Branch: solr-10667-submit. Head: 1e3f022552be4d281a020e015f4c8c05ce4eec6c (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-10667.md). Merge-base with main: cabedd1d968059215188f4e7563fb303241899ed.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE, GATE GREEN at the live head 9ce9ef1db5e9d33312ac628d2e3f0b236a474c36 (2026-10-13, gate log /workspace/gates/logs/vm2/queue-g10667-exclusion-gate-20261013T030018Z.out). Claim: claims/pool-vm2-gate-backlog-10667-exclusion.md.
+Status: DONE
 - Result: proof leg present (rc=0), head leg absent (rc=0), tracked files present except `.gitignore` (see the check correction below), BATS 1 test 0 failures, changelog parse OK, tidy clean. Receipt refreshed at receipts/SOLR-10667.md.
 - Check correction (2026-10-13, vm2): the head-leg list named `.gitignore` among the seven tracked files that must be present. The run returned rc=1 for it; the assembled distribution has no `.gitignore`. The change is `exclude "solrclient/**"`, which cannot match a top-level `.gitignore`, and the pre-change receipt never listed it. The job's required list is corrected to the six other files, `.gitignore` expected absent. Classified as a defect in the job's expected-file list, not in the branch; no branch change needed. Cause of the hidden-file omission not isolated by a run; not a blocker for this change.
 - Capability tags: gate.

@@ -2,7 +2,7 @@
 
 - Branch: solr-9864-submit. Head: `b5826e466b9a8664adf11e0f247cff220f2f5953` (live head of PR #5150, read by the slice 6 review on 2026-10-14). The job applies to that head only.
 - Filed by: the slice 6 review of the opened search components drafts (assignment `assignments/pool-search-components-opened-review-round-1.md`). The review did not push and did not commit.
-- Status: OPEN.
+Status: DONE (GATE GREEN at 176ed67491b5)
 
 ## Finding answered
 

@@ -4,7 +4,7 @@
 - Change since the prior gated head: the changelog title in changelog/unreleased/SOLR-12651-restore-cleanup-on-failure.yml now states the cleanup as it covers it (replacement recorded in reports/solrcloud-round-1-p2.md, finding 9). No Java change.
 - Posted by: windows (review agent), for Nick Shanin, 2026-10-12. Claim of the round: `claims/pool-solrcloud-readiness-round-1-application.md`.
 - Capability tags: gate. Intended host: any capable Linux host. Windows never claims build work.
-- Status: DONE. GATE GREEN at 404f13b501c97d6c6b65743a27f54f4f38363afa (GATE END 2026-10-13T00:51:09Z).
+Status: DONE (GATE GREEN at 404f13b501c9)
 - Module: :solr:core. Focused class: TestLocalFSCloudBackupRestore (seed from the receipt: 12651C0FFEE12651). Confirm the package by grep before composing the run.
 - Landing order: the draft lands after SOLR-9598 (adopted, material/replication-backup-round-1-answers.md). SOLR-9598's own default call is still open with its owner, so this job does not settle the order.
 - Steps: changelog YAML parse; tidy with the GATE INVALID guard; Error Prone compile; focused tests at the head (fresh JUnit XML); module check `:solr:core:check -x test`.

@@ -2,7 +2,7 @@
 
 - Branch: `review-r1-solr-18539` on the fork. Base head: `fbf7610644d178049e1110ffc0ec34dad8c5b32f`. Patch: `gates/SOLR-18539-narrowing-round-1.patch`, against fbf7610, touching only `QueryComponent.java` and `QueryComponentPartialResultsTest.java`. The narrowed head does not exist yet; record its SHA when the patch is committed.
 - PR branch `mergeids-skipped-shard-totals` at `4eb996121804b043f1ee53f5bb7e22b9c3021b0a` (PR #5115) is not touched by this job.
-- Status: DONE 2026-10-14 by vm2. Pushed f9b0e5d722 (fast-forward from fbf7610644); receipt section in receipts/mergeids-fix.md. The expected results below were derived by reading the code and the assertions on Windows; nothing was built or run there. The vm2 run is the proof.
+Status: DONE
 - Capability tags: gate.
 - Intended host: vm2 (Linux), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Source: `reports/four-new-prs-strong-review-round-1.md`, "Narrowing task for the review patch loop (SOLR-18539)" under the SOLR-18539 premise addendum. Claim: `claims/pool-18539-narrowing-review-patch-round-1.md`.

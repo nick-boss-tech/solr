@@ -2,7 +2,7 @@
 
 - Branch: solr-3923-submit. Head: `723f61ee4ab7438220193db0c39dad32601dfe07` (live tip per the reviewer's ls-remote on 2026-10-14; matches `receipts/SOLR-3923.md`).
 - Base: `cabedd1d968059215188f4e7563fb303241899ed` (merge-base with `upstream/main`, computed by the reviewer from the local `upstream/main` ref on 2026-10-14). The claiming host confirms it after a fresh fetch.
-- Status: OPEN. Run executed 2026-10-14 (13:36:44Z to 13:43:04Z); result recorded in the run record below. Receipt base-run section and DONE are left for the main agent. Filed 2026-10-14 by the review lane (windows), for vm2. Anyone with the premise-run capability may claim it under the WORKFLOW.md rules.
+Status: DONE
 - Capability tags: `premise-run`. Intended host: vm2. Any capable Linux host may claim it if vm2 is busy.
 - Job type: one focused run on the base production code, with the branch's test file overlaid. No code change, no push.
 

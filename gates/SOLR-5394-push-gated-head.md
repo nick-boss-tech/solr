@@ -1,7 +1,7 @@
 # Job: SOLR-5394 push the gated changelog-type head (post-gate step)
 
 - Branch: `solr-5394-submit` on the fork. Current fork tip: `967445622f9294e26e425ec494d37e5ca13d4fe4` (draft PR #5131). Gated head: `6e4c302c418be91b71305a1fe2f718e96295835f`, one commit on the fork tip changing `changelog/unreleased/SOLR-5394-fcs-default-threads.yml` from `type: fixed` to `type: changed`.
-- Status: DONE 2026-10-14T23:27ZZ by vm2. vm2 ran the gate (gates/SOLR-5394-review-changelog-type.md, DONE 2026-10-14, GATE GREEN at the gated head; record commit 432285f807 and receipts/SOLR-5394.md) and holds the gated head locally. That job's own step 8 kept the head move as a separate step after the gate; this job is that step.
+Status: DONE
 - Authorization: no further approval is needed. Pushes to Nick's own open PRs carry his standing authorization (ruled 2026-10-14), and the changelog type `changed` carries his owner ruling of 2026-10-14.
 - Capability tags: push, description edit. Linux only (vm2 holds the head). Windows never runs this job.
 

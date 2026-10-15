@@ -3,7 +3,7 @@
 - Branch: solr-10627-submit. Gated head: 5a15dc0ba22083a294524210b3be007d870daa35 (origin/solr-10627-submit, receipts/SOLR-10627.md). The gated fragment still carries the round 1 title ("...set-permission command now rejects ... which previously protected nothing.").
 - Land from origin/solr-10627-submit (5a15dc0ba22). The local refs/heads/solr-10627-submit is an older tip (ce126ca60e7) and is not the base for this job.
 - Patch: gates/SOLR-10627-sec-r1-02-title.patch. It replaces the `title:` block of changelog/unreleased/SOLR-10627-reject-null-collection-permission.yml with the replacement text recorded in reports/security-convergence-round-1-response.md (SEC-R1-02) and reports/security-round-1-s1.md (item 3). It dry-runs clean with `patch -p1` against the gated fragment.
-- Status: OWED. This round did not commit or push, and the fork was not touched from the review host.
+Status: OPEN
 - Capability tags: gate (parse only).
 
 ## Owed steps, in order

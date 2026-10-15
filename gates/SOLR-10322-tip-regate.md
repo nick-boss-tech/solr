@@ -1,5 +1,7 @@
 # Gate job: SOLR-10322 re-gate at the live tip (changelog title only)
 
+Status: DONE (GATE GREEN at 80ce9d7a3c8)
+
 - Branch: solr-10322-submit. Live tip: 80ce9d7a3c8a61dfb5c5169a371890f11d9e17ff (verified by ls-remote 2026-10-13). Gated head: 0523a10639dd9a74dfca559503324ebf74103464 (receipts/SOLR-10322.md).
 - Why: the one commit past the gate, 80ce9d7a3c8, changes only the changelog fragment title (changelog/unreleased/SOLR-10322-topic-stream-client-cache.yml, one line). No code or test file changes, but the receipt records no green run at the tip.
 - Intended host: any capable Linux host (vm2 or vm1), under the WORKFLOW.md claim rules. Windows never claims build work.

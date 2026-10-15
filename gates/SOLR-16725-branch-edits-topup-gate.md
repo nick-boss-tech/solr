@@ -2,7 +2,7 @@
 
 - Branch: solr-16725-submit. Head: be1838ef8ccf21a21938a9669d418abeec66e29d (live tip, verified by `git ls-remote` on 2026-10-13; receipt `receipts/SOLR-16725.md`, GATE GREEN at this head).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: OPEN, unclaimed. Posted 2026-10-13 by the main side (openings census, `reports/openings-census-round-1.md`).
+Status: OPEN
 - Capability tags: gate.
 - Job type: two recorded branch edits under the patch loop (VM2 and vm1 patch authority, Nick 2026-10-12: a gate job may direct the host to patch the branch), then the top-up gate at the moved head. The claiming host makes the commits and pushes them (the patching agent pushes), then gates the head it created.
 - Why owed: the core admin round 2 response (`reports/core-admin-convergence-round-2-response.md`) records two owed branch edits for this ticket that have not landed: (1) a raw-request test comment, and (2) a ClusterStatus javadoc. The draft is CONVERGED on its text at the current head; the edits move the head, so a top-up gate at the moved head is the remaining step before opening. The exact text and file locations for both edits are in the round 1 and round 2 core admin records (`reports/core-admin-convergence-round-1-response.md`, `reports/core-admin-convergence-round-2-response.md`); take them from there, not from memory.

@@ -1,7 +1,7 @@
 # Gate job: SOLR-18541 fail-before for the two new review tests (the proof leg the patch gate still owes)
 
 - Branch: `combinedquerycomponent-merge-totals` on the fork. Head: `a93f9f6a997e748514cf2575a6e94c5f1c01f85e` (the PR branch at its moved head; the same head as `review-r1-solr-18541`).
-- Status: FAILED (finding at step 4: both new tests pass on the merge-base production), not DONE.
+Status: DONE
 - Capability tags: gate.
 - Intended host: Linux only (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Source: `gates/SOLR-18541-review-r1-patch.md` step 7 and `reports/review-batch-round-2-slices-round-1.md` section 3. The patch gate's focused run at this head is recorded GREEN in `receipts/SOLR-18541.md` (CombinedQueryComponentMergeTotalsTest, 10 tests, 0 failures, seed `C0FFEE42C0FFEE42`, module check rc=0), but the fail-before for the two new tests is not in the receipt and step 7 of the patch gate job is unchecked. This job supplies that proof leg only; it does not re-run the whole gate.

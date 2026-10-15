@@ -1,7 +1,7 @@
 # Gate job: SOLR-18541 score-only timeAllowed exit, ticket input only
 
 - Ticket: SOLR-18541 (PR #5117 draft at `pr-drafts/search-components/SOLR-18541.md`). Merge-base for this job: upstream main `d76fc14b9857e77b830d7a82514b28c523a239c2`.
-- Status: OPEN, unclaimed. Claim before work under `claims/`.
+Status: UNCONFIRMED (see the census note in OPEN-WORK.md)
 - Capability tags: gate. Intended host: any capable Linux host under the WORKFLOW.md claim rules. Windows never claims build work.
 - Why: the strong review of the four new draft PRs (`reports/four-new-prs-strong-review-round-1.md`, SOLR-18541 section) reads a second real-exit failure path by code only. A score-only sort whose first sub-query exits on timeAllowed could leave a partial shard with no per-query data, which the document loop might dereference. The review did not run it. The ticket text should say which of the two it is before the owner decides scope.
 - Job type: premise run on the merge-base. No code change. No fork push. No PR touched. No test is added.

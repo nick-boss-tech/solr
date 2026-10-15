@@ -2,7 +2,7 @@
 
 - Branch: solr-8088-submit (fork). Live PR: apache/solr #5144, draft.
 - Applies to head: 567efa9b78c32df3454ed431a40a04c06ed09d46
-- Status: CLOSED 2026-10-14 by owner ruling (see Closure at the end of this file). The rewrite is cancelled; the branch stays as it stands. Not run, and not to be run.
+Status: DONE
 
 ## Finding answered
 

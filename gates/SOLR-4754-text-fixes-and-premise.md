@@ -1,5 +1,7 @@
 # Gate job: SOLR-4754 text fixes and premise run
 
+Status: OPEN
+
 - Branch: solr-4754-submit. Live tip: e4ea4bfde80ea027f005fe138b0285f6c2e5a689 (ls-remote, 2026-10-14). Gated head: the same (receipts/SOLR-4754.md, GATE GREEN 2026-10-11, compile-level proof shape).
 - Filed by: the Windows review lane, 2026-10-14. Status: OPEN, not claimed.
 - Intended host: a Linux host with the Gradle toolchain (capability tag: gate), under the WORKFLOW.md claim rules. Windows does not build.

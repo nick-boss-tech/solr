@@ -3,7 +3,7 @@
 - Branch: solr-10305-submit. Head: `c43de86d4c133ed4987ac8963d1a3806e40c5132` (live tip, read with `git ls-remote origin refs/heads/solr-10305-submit` on the Windows review host, 2026-10-14; matches the gated head in receipts/SOLR-10305.md).
 - Intended host: any capable Linux host with the Gradle toolchain (gate capability). The Windows host does not run it.
 - Posted by: the review round for search components drafts (pool-census-followup-search-components-drafts-round-1, slice S4). Spec source: reports/receipt-refresh-round-2-b1.md, findings F6 and F7 (replacement wording recorded there).
-- Status: DONE at f559126972153367a846ef2a6a1989906849e403. Gate green 2026-10-14 (changelog, spotless and compile rc=0); fast-forward pushed to solr-10305-submit; receipt refreshed.
+Status: DONE
 - Why: the changelog line and the test javadoc on the branch name the wrong place for the NullPointerException. The code site is `QueryComponent.createMainQuery` (base commit cabedd1d968, line 793), which runs before any shard answers, not `mergeIds` or "while merging shard responses".
 - Decision recorded here (scope, owner decision 3 in receipt-refresh-round-2-b1.md): the default standalone case, where the URL allow list returns 403 before `QueryComponent.prepare`, is not changed by this branch. It is named in the draft's Limits as a follow-up. No code change. Settled under the ladder's third rung (optional, defer as a named follow-up), because the reported NullPointerException is not reached in that setup.
 

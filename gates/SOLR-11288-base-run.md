@@ -1,7 +1,7 @@
 # Gate job: SOLR-11288 base-code run at the live head
 
 - Branch: solr-11288-submit. Head: `cbf0c678f277d6f50d75408d4889d3b664469905` (live tip, ls-remote).
-- Status: DONE. Claimed by vm2 (gate backlog coordinator) 2026-10-13T07:37:27Z; run 07:45:13Z to 07:52:09Z; base-run section in receipts/SOLR-11288.md. Claim: claims/pool-vm2-gate-backlog-11288-baserun.md.
+Status: DONE
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: premise run. No code change.

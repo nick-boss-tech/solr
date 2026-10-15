@@ -2,7 +2,7 @@
 
 - Code under test: unmodified main d76fc14b9857e77b830d7a82514b28c523a239c2, file solr/core/src/java/org/apache/solr/handler/component/CombinedQueryComponent.java. No branch; no production edit.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE by vm1, 2026-10-13. Claim: claims/pool-vm1-combinedquerycomponent-real-exit-premise.md. Runner on vm1: ~/workspace/tools/gate-cqc-real-exit.sh; log ~/workspace/tools/gcqc-real-exit.log. Verdicts in the completion record at the end of this file.
+Status: DONE
 - Capability tags: premise-run.
 - Job type: premise run only. No branch edit, no gate, no draft edit. Posted by the main side's adjudication of the CombinedQueryComponent ticket review (2026-10-11), appended to reports/combinedquerycomponent-ticket-review.md. The ticket draft (material/combinedquerycomponent-ticket-draft.md) states the code-reading account of the real exit and claims neither outcome this job settles; the main side settles the draft from the verdict when this job lands.
 

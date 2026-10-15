@@ -1,7 +1,7 @@
 # Gate job: SOLR-18010 re-gate after the permission patch
 
 - Branch: solr-18010-submit. Head: `2b5ad801c9e88807337f4f0a3fdd689126ad37d1` (fork tip). Previous heads: `9e3ccafe39098bdc23cc8ea3313918071150e148` (changelog title) and `c3685bb37d9d74e4ed538d6d1b65bb1b60970677` (gated code).
-- Status: DONE. GATE GREEN at 2b5ad801c9e88807337f4f0a3fdd689126ad37d1 (claimed by vm2 at 2026-10-13T14:35Z; GATE START 14:34:45Z, GATE END 14:56:12Z; log logs/vm2/queue-g18010-perms-gate-20261013T143445Z.out). Claim claims/pool-vm2-gate-backlog-18010-perms.md marked DONE. Runner /workspace/gates/g18010-perms-gate.sh.
+Status: DONE (GATE GREEN at 2b5ad801c9e8)
 - Capability tags: gate.
 - Intended host: Linux only (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: full focused gate at the new head, with a fail-before run. The change keeps the existing security.json permissions when the file is replaced.

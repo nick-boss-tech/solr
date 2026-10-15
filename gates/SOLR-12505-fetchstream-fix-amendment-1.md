@@ -3,7 +3,7 @@
 - Job amended: gates/SOLR-12505-fetchstream-fix.md. Read it first; this amendment does not restate the defect, the fix spec, the proof shape or the gate steps, which stand as written there.
 - Branch: solr-12505-submit. Fork tip: 5f20e1171bc890509d76e4f5f7defcc4fc8c102c (unchanged). The failed fix head d81a77311773 exists only on vm2 and was never pushed.
 - Intended host: vm2, which holds the failed fix head and the claim (claims/pool-vm2-gate-backlog-12505.md). No other host claims this job; the amendment is worked under that claim.
-- Status: OPEN (direction recorded 2026-10-12 by the main side, from its investigation of the failed gate).
+Status: UNCONFIRMED (see the census note in OPEN-WORK.md)
 - Capability tags: implementation, gate.
 
 ## Investigation record (main side)

@@ -2,7 +2,7 @@
 
 - Branch: solr-8628-submit. Head: ce8211e05e062444e7afc1c5ea33fb6eff581d8f (live tip, verified by ls-remote 2026-10-11; matches receipts/SOLR-8628.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules.
-- Status: DONE 2026-10-11, outcome NO GATE by finding. Premise parts 1 and 2 and the expected merge-base proof are complete (vm3). The branch-head leg RAN on vm1 at 2026-10-11T15:10:22Z to 15:12:59Z under claims/pool-vm1-premise-8628-part3.md (runner `~/workspace/tools/g8628-premise.sh`, log `~/workspace/tools/g8628-premise.log`) and FAILED with the identical AssertionError as the base leg (1 test, 1 failure, seed `8628C0FFEE8628A1`), so part 3 does not discriminate. The windows investigation (`reports/solr-8628-head-failure-investigation.md`) classifies it as a test-shape problem (the minimal configset selects the ephemeral MockDirectoryFactory). Receipt: receipts/SOLR-8628.md. Earlier status: PAUSED BY OWNER at 2026-10-11T14:06:20Z and the vm3 claim RELEASED at 2026-10-11T14:10:34Z (UTC).
+Status: DONE
 - Runner: vm3 (Linux, JDK 21, Gradle 9.7.0).
 - Worktree: `/workspace/gates/solr-8628-premise-build`.
 - Logs: `/workspace/gates/logs/vm3/8628-premise-*.log`.

@@ -2,7 +2,7 @@
 
 - Branch: solr-17796-submit. Head: 661165d2673de9211846e276c05daf1fd0e879d6 (live tip, matches the draft in pr-drafts/query-parsing/SOLR-17796.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE. Verdict: EXCEPTION OCCURS at head 661165d2673de9211846e276c05daf1fd0e879d6 (run 2026-10-13T00:00Z, runner gates/g17796-gate.sh, log logs/vm2/17796-probe.log, probe diff logs/vm2/17796-probe.diff).
+Status: DONE
 - Capability tags: gate.
 - Job type: premise run only. No branch edit, no gate. Posted by the Group O settlement (2026-10-11): the draft's Limits now state that a negated collapse "may still occur there" for the ticket's UnsupportedOperationException, verified by code reading (the branch unwraps only a lone required PostFilter; a negated one stays wrapped, and a wrapped CollapsingPostFilter has no createWeight). The fidelity round asked for the case to be run before posting; this job is that run.
 

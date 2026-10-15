@@ -2,7 +2,7 @@
 
 - Branch: solr-14199-submit. Head: e743c90da79a155fd6e6161233af5d924dc9dad1 (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-14199.md; the draft stays HELD, see below).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE, 2026-10-12, by vm1 (claim claims/pool-vm1-gate-14199-record.md; log g14199-record.log on vm1). Run 1: TestSolrQueryParser 37 tests, 0 failures; the 37th test is identified in receipts/SOLR-14199.md (a method declared in the head file with its signature wrapped across lines 1416 to 1418, missed by same-line counts). Run 2: SchemaVersionSpecificBehaviorTest 1 test, 1 failure (testVersionBehavior), recorded verbatim in the receipt; not fixed under this job, and the draft HOLD stands.
+Status: DONE
 - Capability tags: gate (record runs only).
 - Job type: record only. Two runs at the head, both recorded in receipts/SOLR-14199.md. No branch commit, no push, no test edit under this job.
 - Why: receipts/SOLR-14199.md counts TestSolrQueryParser 37 of 37 from fresh JUnit XML, but the head's TestSolrQueryParser.java declares 36 test methods (reports/schema-analysis-round-1.md), and no record names the 37th test. Separately, the draft's HOLD (pr-drafts/schema-analysis/SOLR-14199.md) stands in part because SchemaVersionSpecificBehaviorTest was not in the gate run and is not on record; reports/schema-analysis-round-1-s1.md finding 1 predicts it fails at this head (the test expects the old omitNorms default for point types on schema versions 1.0 to 1.4, and the branch sets it for all versions) and gives an exact replacement assertion. Whether it fails is settled by running it, which is this job's second run.

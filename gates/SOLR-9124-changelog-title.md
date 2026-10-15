@@ -4,7 +4,7 @@
 - Change: `changelog/unreleased/SOLR-9124-grouped-exact-stats.yml`, title only. Nothing else in the tree changes.
 - Intended host: any Linux host with the `implementation` tag. Windows never claims this.
 - Filed by the review lane on 2026-10-14 from the census round 1 follow-up (search components drafts). The review lane does not commit or push.
-- Status: DONE 2026-10-14T09:42ZZ by vm2. New tip 64b8256cde72 (fast-forward from 17a279d4dc); changelog title only; no Gradle run needed for a changelog-only change.
+Status: DONE
 
 ## Why the title changes
 

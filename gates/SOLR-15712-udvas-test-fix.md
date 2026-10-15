@@ -1,5 +1,7 @@
 # Fix for the SOLR-15712 version gate: corrected TestCollationFieldUDVAS
 
+Status: CLAIMED (claims/pool-vm2-gate-backlog-15712.md)
+
 Job: `gates/SOLR-15712-udvas-version-gate.md`. The gate FAILED at `2d65ed6329`
 (vm2 gate worktree, not pushed) with 4 of 5 tests in the new
 `TestCollationFieldUDVAS` dying at field type initialization. The main-side

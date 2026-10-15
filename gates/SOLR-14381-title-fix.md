@@ -1,7 +1,7 @@
 # Gate job: SOLR-14381 changelog title correction (title-only commit)
 
 - Branch: solr-14381-submit. Head: a28b3f672cb4daa7cc32833082b0f499f41e3a85 (live tip, verified by `git ls-remote origin refs/heads/solr-14381-submit` on 2026-10-14; the gated head in receipts/SOLR-14381.md is the same SHA).
-- Status: DONE. Title commit 7caf8d33d3bf29d38e3f16c38a01282982329e90 pushed to solr-14381-submit, gate green (receipts/SOLR-14381.md). Posted 2026-10-14 by the Windows review agent from the census follow-up round for search components (assignments/pool-census-followup-search-components-wording-round-1.md, item SOLR-14381 step S4). No claim is filed by the poster; the claiming host files its claim under the WORKFLOW.md claim rules before it starts.
+Status: DONE
 - Intended host: vm2 (Linux gate lane). Windows does not run this job and does not claim build work.
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch. One title-only commit on top of the head, then the gate evidence check at the new head.

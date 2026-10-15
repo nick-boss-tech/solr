@@ -2,7 +2,7 @@
 
 - Branch: solr-15035-submit. Head: 12d7491e82cd660ad55063cb85633b7e05e1918c (live tip, verified by `git ls-remote` on 2026-10-13; receipt `receipts/SOLR-15035.md`, GATE GREEN (hardened) at this head).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE 2026-10-14T12:49ZZ by vm2. Parse OK at 12d7491e82; see Result below. Posted 2026-10-13 by the main side (openings census, `reports/openings-census-round-1.md`). The round 2 SolrCloud slate (`reports/solrcloud-openings-slate-round-2.md`) names this job as owed and not yet filed; this file files it.
+Status: DONE
 - Capability tags: gate.
 - Job type: a parse check only. No test run, no branch change, no push.
 - Why owed: the branch adds `changelog/unreleased/SOLR-15035.yml`. An unquoted title containing ": " is invalid plain YAML and fails the Validate Changelog workflow while looking fine to a reader, so the fragment gets a real YAML parse before the ticket can leave its hold. The ticket itself stays HOLD: its blocking step is the owner's settlement line from HOLD to READY, which is not this job's to write.

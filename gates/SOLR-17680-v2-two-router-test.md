@@ -1,7 +1,7 @@
 # Gate job: SOLR-17680 end-to-end test for the v2 two-router path
 
 - Branch: solr-17680-submit. Head: `ce59bbe112d063e3d3c93b3be6a1a5269a38fc37` (fork tip). Merge-base: `56ec140e3636d5f4150fa87fbf7103529536ac99`.
-- Status: DONE. GATE GREEN at the live tip 52b641ca1a26 (2026-10-13). Pushed to solr-17680-submit by a plain fast-forward from ce59bbe112d at 13:40Z (ls-remote confirms). Receipt receipts/SOLR-17680.md refreshed. The 766dd13e9e run FAILED on a test-fixture defect, now corrected on the branch. See the sections below.
+Status: DONE
 - Capability tags: gate.
 - Intended host: vm2 (Linux). Windows never claims build work.
 - Job type: a new focused test, then the focused run and the fail-before run. vm2 may patch the branch to add the test, under the patch-loop rule: the patching agent pushes with a plain fast-forward push, and the gating host refreshes the receipt.

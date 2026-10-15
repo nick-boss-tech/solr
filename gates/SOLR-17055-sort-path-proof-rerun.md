@@ -5,7 +5,7 @@
 - Module: `:solr:core`. Focused test class: `org.apache.solr.handler.component.DistributedKnnTopKTest` (file `solr/core/src/test/org/apache/solr/handler/component/DistributedKnnTopKTest.java`), single method `test()`, which asserts the score-order case first and the sort case after it. Seed: `17055C0FFEE17055`.
 - Posted by: the main agent, 2026-10-14, re-issuing step 5 of gates/SOLR-17055-sort-path.md after the proof-base ruling recorded at the end of that file and in receipts/SOLR-17055.md.
 - Capability tags: gate. Intended host: vm2 (the fix commit and the gate worktree live there). Windows never claims build work.
-- Status: DONE 2026-10-15T00:13ZZ by vm2 (green at 2fe098615839, pushed to solr-17055-submit).
+Status: DONE
 
 ## Fork resolution (2026-10-14)
 

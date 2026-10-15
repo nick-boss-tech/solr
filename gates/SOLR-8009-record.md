@@ -2,7 +2,7 @@
 
 - Branch: solr-8009-submit. Head: 8795661ddc98c8bffdb8db49a7dd5f293216e929 (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-8009.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE (2026-10-12T23:15Z). Reconciliation recorded in receipts/SOLR-8009.md: 10 testcases, all pass; the tenth is testIndexQueryDeleteHierarchical at FullSolrCloudDistribCmdsTest.java:668.
+Status: DONE
 - Capability tags: gate (record run only).
 - Job type: record only. One run at the head, recorded in receipts/SOLR-8009.md. No branch commit, no push.
 - Why: receipts/SOLR-8009.md counts FullSolrCloudDistribCmdsTest at 10 tests, but the head's test file declares 9 test methods, and no record explains the tenth. Either the run's tenth testcase has an origin the file alone does not show (inherited from a base class, or a variant the runner expands), or the recorded count is wrong. This run settles which.

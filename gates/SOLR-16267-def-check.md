@@ -2,7 +2,7 @@
 
 - Branch: solr-16267-submit. Head: 8f4b0c6d2fb0c89c833512de502f39eb1bec560e (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-16267.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE by vm1, 2026-10-12. Verdict in receipts/SOLR-16267.md: DefFunction consults the wrapped source's exists() in both Lucene 9.12.3 and 10.4.0; the draft's def() claim stands for both versions, no narrowing for 9.x. Claim: claims/pool-vm1-SOLR-16267-def-check.md.
+Status: DONE
 - Capability tags: investigation, record.
 - Job type: record only. A code-reading check against the Lucene artifacts, recorded in receipts/SOLR-16267.md. No branch commit, no push, no gate run.
 - The claim to settle: pr-drafts/query-parsing/SOLR-16267.md says of the branch's new `exists()` overrides on the single and two argument math wrappers: "The same answer reaches `exists()` and `def()`, as the changelog says. Those results change for any sparse field used inside these math functions." The changelog title names `def()` too. `def()` is Lucene's DefFunction, whose source is not in the Solr tree (reports/query-parsing-round-1-q7.md, finding 15: not confirmed that it calls `exists()`). The gate at the head ran against Lucene 10.4.0 (main's pin). Whether the claim holds on Lucene 9.12.3, which branch_9x pins, is the check receipts/SOLR-16267.md still owes (reports/draft-fidelity-fixes-application-response.md, item F24).

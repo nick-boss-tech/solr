@@ -1,5 +1,7 @@
 # Gate job: SOLR-6831 changelog line names every query limit the change checks
 
+Status: DONE (GATE GREEN at 24bd15ebb84e)
+
 - Branch: solr-6831-submit. Head this applies to: 96b33ba5f6f834038e570d0b93f8684dc887fbe8 (live PR #5134 head, read 2026-10-14).
 - Filed by: the Windows review lane (review round 1, slice 2), 2026-10-14. Status: OPEN. Not run.
 - Intended host: a Linux host with the Gradle toolchain (capability tag: gate), under the WORKFLOW.md claim rules. Windows does not build.

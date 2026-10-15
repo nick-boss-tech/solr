@@ -1,5 +1,7 @@
 # Reading job: SOLR-11678 SEC-R1-07, keystore type of the standalone premise run
 
+Status: OPEN
+
 - Question: did the standalone Jetty premise run (receipts/SOLR-11678.md, "Premise", vm2, 2026-10-11) use a JKS keystore? The receipt does not name the type. The SEC-R1-07 Limits sentence in reports/security-convergence-round-1.md says JKS, and it can be added only after this reading confirms it.
 - Host: vm2 only. The premise files and the vm2 logs are not on the Windows review host. This is a read. No gate run, no build, no new keystore, and no change to the keystore file.
 - Read, in this order:

@@ -2,7 +2,7 @@
 
 - Branch: solr-10882-submit. Head: 5d7d07a5b17bfbf9370fe8562ce7b5d9909118ee (live tip, verified by ls-remote at posting, 2026-10-11; this is the packaged head, GATE GREEN per receipts/SOLR-10882.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE. Gate green at b12b0ffab487e88a790c0d6dab31bd4a7464be47 (run 2026-10-13T00:09Z, runner gates/g10882-title-fix-gate.sh, all rc 0; ArrayEvaluatorTest tests=7 failures=0). Pushed to solr-10882-submit as a fast-forward from 5d7d07a5b1. Receipt refreshed.
+Status: DONE (GATE GREEN at b12b0ffab487)
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization. The earlier job gates/SOLR-10882.md (premise run and first gate) is DONE and does not cover this correction.
 - Spec: reports/streaming-convergence-round-1-response.md, item ST-R1-08 (verified there against receipts/SOLR-10882.md: no null-value test was gated, so the title's null clause is unproven).

@@ -1,7 +1,7 @@
 # Gate job: SOLR-14919 counted focused run at the precision-gate head
 
 - Branch: solr-14919-submit. Head: `483b3885f6439391a3128e6c61be34fc47122514` (fork tip, verified by `git ls-remote` on 2026-10-14 at filing). Parent: `8f1f4ef91e798f736eb91c9625223a654b59794a`; the delta is the changelog title and a test comment reflow only, no production file changes and no test logic changes.
-- Status: DONE 2026-10-15T00:39ZZ by vm2. Counted at 483b3885f643: 1 of 1, seed 14919C0FFEE14919. Claimable by either Linux host (vm1 or vm2). Claim under `claims/` before running anything. Windows never claims build work.
+Status: DONE
 - Capability tags: gate.
 - Job type: a run only. No push, no branch change, no code change. The head is already the fork tip and is classified GATE GREEN (gates/SOLR-14919-precision-round-1-gate.md, Classification; receipts/SOLR-14919.md, top section).
 - Why owed: vm2's precision gate at this head (GATE END 2026-10-14T22:24:18Z) took no fresh JUnit count and recorded no seed for its head leg; its pass evidence is the head leg's rc 0. The receipt's top section states that gap plainly. This job closes it with a counted run at the exact head.

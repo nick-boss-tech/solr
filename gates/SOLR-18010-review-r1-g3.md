@@ -1,7 +1,7 @@
 # Gate job: SOLR-18010 review round 1, leg G3 (focused set at the patched review head)
 
 - DEPENDENCY, read first: this job runs only after vm2's corrected parent-baseline fail-before for the SOLR-18010 review patch has recorded its result in `gates/SOLR-18010-review-r1-patch.md`. That corrected run reverts production to the parent `2b5ad801c9e8` (not the merge-base) with the review branch's tests kept; until its result is recorded there, this job is not claimable. If that result finds the new test does not pin the review patch's change, stop and report instead of running: the finding goes to the review coordinator first.
-- Status: DONE 2026-10-13T19:52Z by vm2 (coordinator), GATE GREEN at e99be67c9a6f (GATE END 19:51:22Z).
+Status: DONE (GATE GREEN at e99be67c9a6f)
 - Source job: `gates/SOLR-18010-permissions-fail-before-and-multiauth.md`, leg G3 (the legs G1 and G2 of that file are DONE at `2b5ad801c9e8`). This file carries G3 as its own job so the gate buffer holds it as claimable work once the dependency clears.
 - Branch: `review-r1-solr-18010` on the fork (the strong review's patch branch, not the PR branch). Head: `e99be67c9a6fe15f86306104843a30b35196f159`; confirm by ls-remote before the run and stop if the tip has moved.
 - Capability tags: gate. Intended host: vm1 or vm2 (Linux only). Windows never claims build work.

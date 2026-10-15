@@ -1,5 +1,7 @@
 # Gate job: SOLR-14913 top-up gate at the live tip (comment-only commit)
 
+Status: DONE (GATE GREEN at b80221f46d3)
+
 - Branch: solr-14913-submit. Live tip: b80221f46d3ce5889c510b97a97d8748a2ea4c7c (verified by ls-remote 2026-10-13). Gated tree: 51fe1087fe9aedf7da74165e0f9f0e1c34e4d600 (receipts/SOLR-14913.md).
 - Why: the one commit past the gated tree, b80221f46d3 ("SOLR-14913: correct the all-invalid-alias comments to the verified behavior"), changes comments only, in ExtendedDismaxQParser.java (two comment blocks) and TestExtendedDismaxParser.java (one comment block). No statement changes. The receipt carries the gate evidence by argument, not by a run at the tip; a comment edit can still break the spotless wrap or the compile, so the tip gets a short gate.
 - Intended host: any capable Linux host (vm2 or vm1), under the WORKFLOW.md claim rules. Windows never claims build work.

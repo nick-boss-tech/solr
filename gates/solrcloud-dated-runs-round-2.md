@@ -1,6 +1,6 @@
 # Gate job batch: dated focused runs for SolrCloud drafts, round 2
 
-- Status: DONE (items 1 and 2 run GREEN at the live heads on 2026-10-13, receipts updated; item 3 covered by claims/pool-vm2-gate-backlog-15106.md).
+Status: DONE
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: dated focused runs at the live heads. No code change.

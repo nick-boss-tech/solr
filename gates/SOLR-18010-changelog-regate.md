@@ -1,7 +1,7 @@
 # Gate job: SOLR-18010 changelog title re-gate
 
 - Branch: solr-18010-submit. Head: `9e3ccafe39098bdc23cc8ea3313918071150e148` (fork tip after the fast-forward push). Previous gated head: `c3685bb37d9d74e4ed538d6d1b65bb1b60970677`.
-- Status: DONE 2026-10-13T14:23Z, GATE GREEN at 9e3ccafe39 (receipts/SOLR-18010.md). The fork tip moved to 2b5ad801c9 by 14:30Z; that head is gated by gates/SOLR-18010-perms-regate.md. Claim claims/pool-vm2-gate-backlog-18010.md DONE.
+Status: DONE (GATE GREEN at 9e3ccafe39)
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: changelog check at the new head. No code change.

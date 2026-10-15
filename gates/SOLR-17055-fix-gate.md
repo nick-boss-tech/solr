@@ -7,7 +7,7 @@
 - Seed: `17055C0FFEE17055` (the seed of the premise run in gates/SOLR-17055-sort-path.md).
 - Posted by: the Windows review agent, handoff round 1 item 1 (assignments/pool-vm2-open-items-handoff-round-1.md; claim claims/vm2-open-items-handoff-round-1.md), 2026-10-14. No build, test, Gradle or gate run on the Windows host.
 - Capability tags: gate. Intended host: vm2 (Linux, Gradle toolchain).
-- Status: SUPERSEDED (2026-10-14). Not run, and not to be run. The implementation choice in `reports/solr-17055-implementation-choice-round-1.md` resolves this job's questions 1 to 3: vm2's fix commit `2fe0986158391908ac89564090eb97e245788023` is the one that lands, through `gates/SOLR-17055-sort-path-proof-rerun.md`. This job's head `2d154d1a402` stays as the fork tip until the main side restores the parent `c2396f425fa2`; nothing is deleted. Do not claim or run this job.
+Status: DONE
 
 ## Change record (before and after)
 

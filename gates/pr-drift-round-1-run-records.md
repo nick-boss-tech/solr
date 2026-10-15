@@ -2,7 +2,7 @@
 
 - Spec: reports/pr-drift-round-1.md, owner decisions section. Four live PR bodies carry run claims that no record backs. This job makes the runs and records them; it does not edit any PR body. Where a run cannot back a claim, the completion note at the end of this file names the sentence for cutting, and the cutting happens in the drift settlement, not in this job.
 - Intended host: vm2 or vm1, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: CLAIMED, not DONE. Run of 2026-10-13T12:20Z to 12:55Z: item (a) head leg failed (see the coordinator run record at the end); not relaunched, left for the main agent.
+Status: UNCONFIRMED (see the census note in OPEN-WORK.md)
 - Capability tags: gate.
 - Job type: record runs only. The four items are independent: a claimant may take one item or all four, and records per-item status in this file. No branch changes, no pushes to a submit branch.
 - Common rules: every run goes through the claiming host's normal gate route (on vm1, ~/workspace/tools/solr-gradle.sh; never ./gradlew), counts come from fresh JUnit XML, and the seed used is recorded with the result. A base run means the branch's test tree against the branch's merge-base production; compute the merge-base with upstream main at claim time and record it. Each item's result is written into the ticket's receipt on pr-prepare.

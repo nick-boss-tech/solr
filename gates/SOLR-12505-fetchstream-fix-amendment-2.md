@@ -9,7 +9,7 @@
   leg for the main side to rule on. The claim (claims/pool-vm2-gate-backlog-12505.md) also
   asks whether the focused head leg of the later interrupted run at the same head must be
   re-run.
-- Status: RULED by the main side, 2026-10-13. The proof leg is not accepted as recorded;
+Status: DONE
   the corrected proof shape is below. Only the proof leg re-runs. No other leg is
   relaunched by this amendment.
 

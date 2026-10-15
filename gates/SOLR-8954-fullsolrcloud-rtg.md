@@ -4,7 +4,7 @@
 - Module: `:solr:core`. Test: `org.apache.solr.cloud.FullSolrCloudDistribCmdsTest#testRTGCompositeRouterWithRouterField`. Run this one method only.
 - Intended host: any Linux host with the `premise-run` tag (WORKFLOW.md). Windows never claims this.
 - Filed by the review lane on 2026-10-14 from the census round 1 follow-up (search components drafts). No code change, no commit, no push, no receipt write.
-- Status: RUN, head failed (rc=1); result left for the main agent, not relaunched, not DONE.
+Status: CLAIMED (claims/pool-vm2-gate-backlog-8954.md)
 
 ## Why this run is owed
 

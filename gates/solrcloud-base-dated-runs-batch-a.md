@@ -1,6 +1,6 @@
 # Gate job batch: dated base-code runs owed by the batch A review
 
-- Status: DONE 2026-10-13. Runs 15:26Z to 15:45Z; all four base results match the expected outcomes and are recorded in the base-run sections of receipts/SOLR-5813.md, SOLR-12991.md, SOLR-13186.md and SOLR-15863.md. Claim closed DONE.
+Status: DONE
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: dated focused runs on the base code, with the branch's test file overlaid. No code change.

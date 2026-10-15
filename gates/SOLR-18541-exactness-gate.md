@@ -1,7 +1,7 @@
 # Gate job: SOLR-18541 exactness fix, first gate at the new branch
 
 - Branch: solr-18541-combined-query-merge-totals (new fork branch, created 2026-10-13). Head: `fcd92f23ba65f304ee542c6fe0fec73d5d9e8ce2`. Parent: `d5ed34125db9582b584bbfdd149a4de4b40650d0`, the head the earlier gate covered (`combinedquerycomponent-merge-totals`).
-- Status: DONE. GATE GREEN at fcd92f23ba65f304ee542c6fe0fec73d5d9e8ce2 on vm2 (GATE END 2026-10-13T15:26:16Z). Claimed by vm2 (gate backlog coordinator) 2026-10-13T14:45Z; claim claims/pool-vm2-gate-backlog-18541.md, marked DONE. Runner /workspace/gates/g18541-gate.sh. Receipt refreshed at the gated head.
+Status: DONE (GATE GREEN at fcd92f23ba65)
 - Capability tags: gate.
 - Intended host: Linux only (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: full focused gate at the new head, with a fail-before run for the new test.

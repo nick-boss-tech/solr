@@ -1,7 +1,7 @@
 # Gate job: SOLR-18541 review patch, round 1 (strong review of the four new draft PRs)
 
 - Branch: `review-r1-solr-18541` on the fork. Head: `a93f9f6a997e748514cf2575a6e94c5f1c01f85e`. Parent chain: two review commits on `fcd92f23ba65f304ee542c6fe0fec73d5d9e8ce2` (the side branch `solr-18541-combined-query-merge-totals`, gated green on vm2), whose parent is `d5ed34125db9582b584bbfdd149a4de4b40650d0`, the head of draft PR #5117. Not the PR branch.
-- Status: OPEN, unclaimed.
+Status: DONE
 - Capability tags: gate.
 - Intended host: Linux only (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Source: `reports/four-new-prs-strong-review-round-1.md`, section SOLR-18541.

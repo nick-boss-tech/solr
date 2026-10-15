@@ -1,6 +1,6 @@
 # Gate job: SOLR-12916 changelog title correction, re-gate at the new head
 
-- Status: DONE by vm2 (gate GREEN at d62ddfc246160c90f0f74a27bf6befff7664b684, gate 2026-10-13T05:01:11Z to 05:19:08Z; pushed as a fast-forward from 50b1f4bcab; receipt receipts/SOLR-12916.md refreshed; draft changelog link re-pointed in pr-drafts/core-admin/SOLR-12916.md).
+Status: DONE (GATE GREEN at d62ddfc24616)
 - Branch: solr-12916-submit. Head: 50b1f4bcab039f8d25a729a8d02a1e8a16defd3e (live tip, verified by ls-remote at posting, 2026-10-11; this is the packaged head, GATE GREEN per receipts/SOLR-12916.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
 - Status: OPEN, unclaimed.

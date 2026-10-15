@@ -1,7 +1,7 @@
 # Gate job: SOLR-18010 permission fail-before and the multi-auth write path
 
 - Branch: solr-18010-submit. Head: `2b5ad801c9e88807337f4f0a3fdd689126ad37d1` (confirmed by ls-remote before the review round).
-- Status: G1 and G2 DONE by vm2 (gate backlog coordinator) at 18:39Z; G3 owed after the review patch lands. Earlier: CLAIMED by vm2 (gate backlog coordinator) 18:28Z; claim claims/pool-vm2-gate-backlog-18010-permissions-fail-before.md.
+Status: DONE
 - Capability tags: gate. Intended host: any capable Linux host under the WORKFLOW.md claim rules. Windows never claims build work.
 - Why: the strong review of PR #5118 (round 1, `reports/four-new-prs-strong-review-round-1.md`) found two gaps the body depends on.
   1. The draft's fail-before line says the permissions test fails with "0644 observed where 0640 was expected" when the permission step is reverted. The code the line names creates the replacement file with `Files.createTempFile`, which gives owner-only permissions on POSIX (0600 in the JDK we checked). The recorded value cannot be reproduced from the code as described. The line must not ship until this run shows what the test reports.

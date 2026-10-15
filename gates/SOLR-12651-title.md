@@ -1,7 +1,7 @@
 # Gate job: SOLR-12651 changelog title correction, title stated inline
 
 - Branch: solr-12651-submit. Head to build on: `de3f3604f0ee12935080c8f3d418b6bd1be3013e` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing). Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
-- Status: OPEN, unclaimed.
+Status: OPEN
 - Capability tags: gate.
 - Intended host: a Linux host (vm1 or vm2). Claim first under `claims/` per WORKFLOW.md.
 - Job type: one branch commit that changes only the `title:` of one changelog fragment, then the hardening gate at the new head, a plain push on green, and the receipt refresh.

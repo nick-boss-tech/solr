@@ -1,5 +1,7 @@
 # Gate job: SOLR-6831 pivot refinement stops on a partial shard response
 
+Status: DONE (GATE GREEN at 2ee19dc646)
+
 - Branch: solr-6831-submit. Head this applies to: d804a2ce092 (two commits on 24bd15ebb84: ae76f048005 tests only, d804a2ce092 fix in FacetComponent).
 - Filed by: the Windows review lane, 2026-10-14, at Nick's direction after review of live PR #5134. Status: RUN 2026-10-15 by vm1; NOT GREEN, gate stopped at the spotless step (see the run record at the bottom of this file). SUPERSEDED 2026-10-15 by assignments/pool-solr-6831-refinement-fix-round-1.md: the follow-up reworked the two tests on run evidence, took the spotless change, and ran the full gate GREEN at the new head 2ee19dc646 (the Error Prone compile, module check and fail-before leg owed here all ran there). The settlement is recorded at the top of receipts/SOLR-6831.md. This file's run record stands as the record of the stopped gate.
 - Intended host: vm1 (capability tag: gate). Windows does not build.

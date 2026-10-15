@@ -2,7 +2,7 @@
 
 - Branch: solr-10390-submit. Head: 4af4a6834e2b43251381027c24b18761fc5a9513 (live tip, verified by ls-remote 2026-10-10).
 - Intended host: vm2. Any capable Linux host may claim if vm2 is busy (WORKFLOW.md).
-- Status: DONE by vm2 (2026-10-11T01:49Z, UTC). Premise HOLDS on the added test's body: base fails at the lsof NOTE, head passes. The bats report marks the test not ok only from its teardown (solr stop --all timed out on this host); see Result. No gate run.
+Status: DONE
 - Base used: cabedd1d96, the parent of the branch's first commit 3f4e497364 (the bin/solr change). The merge-base with origin/main (e044bf20b4) is older and is not the ticket's base.
 - Job type: premise run (BATS). No gate, BATS run or premise run has been executed for this branch; premise unverified (receipt). The branch changes bin/solr so start detects the listening port without lsof, via a bash /dev/tcp fallback, adds a test to test_start_solr.bats, and adds a changelog fragment; it still carries SOLR-10390-TESTING.md at the tip, which this run does not remove.
 - Run shape: the fair setup the receipt names: a PATH without lsof, so the fallback is the path exercised. Run the branch's added test in solr/packaging/test/test_start_solr.bats (claimant locates the added test by name from the branch diff) twice under that PATH: once against the base bin/solr, where port detection without lsof is the defect and the start path the test covers must fail; once at the branch head, where the /dev/tcp fallback must carry it. Record both outcomes and the failure text here.

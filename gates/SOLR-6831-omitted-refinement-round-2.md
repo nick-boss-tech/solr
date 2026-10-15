@@ -1,5 +1,7 @@
 # Gate job: SOLR-6831 refinement stops on omitted partial answers (round 2)
 
+Status: DONE
+
 - Head to gate: `3e07d801df598573823cc997bbabb848fa2b1cfb` on branch `solr-6831-submit`. It is already pushed to the fork as a fast-forward from `2ee19dc646329f21ef630df33ae9ebab7e239cbc`, and PR #5134's head moved to it on 2026-10-15. The PR is a draft. Fetch the fork and check the head out in a fresh worktree. Re-verify with `ls-remote` at claim time.
 - Patch: `gates/SOLR-6831-omitted-refinement-round-2.patch` is the same change, kept for reference. `git diff 2ee19dc646 3e07d801df5` should match it.
 - If a step adds commits (for example `formatApplied`), commit them with the identity Nick Shanin (nick.boss.us@gmail.com), no trailers, and record the new head in the run record.

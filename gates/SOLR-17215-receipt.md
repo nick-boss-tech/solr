@@ -1,7 +1,7 @@
 # Gate job: SOLR-17215 receipt at the reviewed head
 
 - Branch: solr-17215-submit. Head: `04d35df186ddeab079ed93fce15c6fc61554912a` (live tip, `git ls-remote origin refs/heads/solr-17215-submit`, checked 2026-10-14).
-- Status: DONE (main agent ruling, 2026-10-14): GATE GREEN at the head; receipt written at receipts/SOLR-17215.md. Written by the windows review coordinator (round 5, slice S3).
+Status: DONE
 - Capability tags: gate.
 - Intended host: a Linux host with the gate toolchain (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Why: the gate result at this head is recorded on the main side (`material/suggester-17215-receipt.md`, 2026-10-09), but `receipts/SOLR-17215.md` is not on this branch. Under the date rule in `reports/draft-date-flags-round-1.md`, the draft's Proof carries counts and head but no verification date until a receipt file exists. The draft also needs the observed failure of the pre-fix run, which no record names yet.

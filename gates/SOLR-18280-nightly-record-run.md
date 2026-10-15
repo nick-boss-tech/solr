@@ -1,7 +1,7 @@
 # Gate job: SOLR-18280 nightly record run at the live tip
 
 - Branch: solr-18280-submit. Head: `0da92abd9e96616ed817a25da47078c753766119` (live tip, verified by ls-remote at posting, 2026-10-13).
-- Status: DONE 2026-10-13T14:23Z (vm2, gate backlog coordinator). Head run 25 of 25, 0 failures, seed 18280C0FFEE18280; see receipts/SOLR-18280.md. Claim claims/pool-vm2-gate-backlog-18280-nightly-record-run.md DONE. Queued as /workspace/gates/g18280-gate.sh.
+Status: DONE
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: record run only. No branch changes, no pushes to the submit branch.

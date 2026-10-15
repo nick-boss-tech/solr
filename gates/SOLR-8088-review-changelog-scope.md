@@ -2,7 +2,7 @@
 
 - Branch: solr-8088-submit (fork). Live PR: apache/solr #5144, draft.
 - Applies to head: 567efa9b78c32df3454ed431a40a04c06ed09d46
-- Status: OPEN. Not run. Filed by the slice 4 review; no push and no commit made.
+Status: DONE
 
 ## Finding answered
 

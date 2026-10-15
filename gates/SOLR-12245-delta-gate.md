@@ -1,7 +1,7 @@
 # Gate job: SOLR-12245 delta review of the live head's new commit, the coordinator log check, and a gate at the live head
 
 - Branch: solr-12245-submit. Head pinned at filing: `f325d5d0576e582d4488570eabdeabc7410a8a0f` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-12245.md`). Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`. The commit under review: `f325d5d0576` ("do not name the host twice in the distributed update error"), on top of `4a93167458b`.
-- Status: OPEN, unclaimed.
+Status: OPEN
 - Capability tags: review, gate.
 - Job type: a delta review of one commit, a record check the conditional decision requires, and a full hardening gate at the pinned head. No implementation step and no branch edit under this job. Pushes only if the gate itself produces a commit (see On green).
 

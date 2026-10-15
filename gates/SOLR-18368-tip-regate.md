@@ -3,7 +3,7 @@
 - Branch: solr-18368-submit. Live tip: a7ec9a1b65c05b2e359e9a186fc2938fe7b7ca7d (verified by ls-remote 2026-10-13). Last green gate: the salvage tree at 1acaced80b2 (receipts/SOLR-18368.md).
 - Why: the live tip adds a commit that drops the reflection test the gated salvage carried (the withInternalClientBuilder removal pin). The receipt's 3 of 3 count includes that test, so no green gate covers the tip.
 - Intended host: any capable Linux host (vm2 or vm1), under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE 2026-10-13T11:13Z by vm2 (gate backlog coordinator). Gate GREEN at a7ec9a1b65 (focused count 2 of 2, from fresh XML). Receipt: receipts/SOLR-18368.md, live-tip section. Claim: claims/pool-vm2-gate-backlog-18368-tip-regate.md.
+Status: DONE (GATE GREEN at a7ec9a1b65)
 - Capability tags: gate.
 - Module: :solr:solrj. Focused class: org.apache.solr.client.solrj.impl.CloudHttp2SolrClientMultiConstructorTest (the claimant confirms the exact package by grep before composing the run).
 - Job type: re-gate at the tip. Record the count the tip actually gives from fresh JUnit XML. Do not force it to 3; the receipt records the change in test count.

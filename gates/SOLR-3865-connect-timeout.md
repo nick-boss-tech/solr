@@ -1,5 +1,7 @@
 # Gate job: SOLR-3865 connect timeout and commit-message cleanup
 
+Status: DONE
+
 - Branch: solr-3865-submit. Live tip: f483bc4c32e033ef797e16528b9e021dca56770a (ls-remote, 2026-10-14). Gated head: the same (receipts/SOLR-3865.md, GATE GREEN 2026-10-11).
 - Filed by: the Windows review lane, 2026-10-14. Status: DONE. GATE GREEN at 1ca7bf9ad0e6efb442cb55cf95b455a8a721bd27 (vm2, 2026-10-14); receipts/SOLR-3865.md.
 - Intended host: a Linux host with the Gradle toolchain (capability tag: gate), under the WORKFLOW.md claim rules. Windows does not build.

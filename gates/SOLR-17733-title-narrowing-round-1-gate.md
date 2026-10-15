@@ -3,7 +3,7 @@
 - Branch: solr-17733-submit. Gated head before this job: 636196b7954af6b34efad54bd0cda2330ef8c7a4 (ls-remote on origin, 2026-10-13: equal). Receipt: `receipts/SOLR-17733.md`.
 - Posted by: windows (review coordinator, workstream W3 of `assignments/pool-category-closeout-overnight-round-1.md`), for Nick Shanin, 2026-10-13. Claim: `claims/pool-category-closeout-overnight-w3-round-1.md`.
 - Capability tags: gate. Intended host: vm2 (Linux, Gradle toolchain). Windows never claims build work; this job was prepared with no build, test, Gradle or gate run.
-- Status: OPEN. Nothing ticked. The landed head does not exist yet.
+Status: OPEN
 - Patch: `gates/SOLR-17733-title-narrowing-round-1.patch`. One file, one hunk: the `title:` line of `changelog/unreleased/SOLR-17733.yml`. It applies cleanly to 636196b7954a (checked on the review host with `git apply --cached --check` against a temporary index file outside the repo; no ref, index or worktree of the repo changed).
 - Title before: `DELETE /cluster/filestore/files/{file} no longer fails with "The path exist ZK, delete and retry"; the file store entry in ZooKeeper is removed together with the file`
 - Title after: `DELETE /cluster/filestore/files/{file} without localDelete=true no longer fails with "The path exist ZK, delete and retry"; the file store entry in ZooKeeper is removed together with the file`

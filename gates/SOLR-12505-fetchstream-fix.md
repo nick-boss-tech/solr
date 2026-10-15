@@ -2,7 +2,7 @@
 
 - Branch: solr-12505-submit. Head: 5f20e1171bc890509d76e4f5f7defcc4fc8c102c (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-12505.md). Merge-base with main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE 2026-10-13T16:49Z by vm2 (gate backlog coordinator). GATE GREEN at 1a1875d95f3680c20447006efc3c949c57f5135f (GATE END 2026-10-13T16:48:06Z; logs/vm2/queue-g12505-full-gate-*.out). Route validate. Receipt: receipts/SOLR-12505.md, section 'Gate at 1a1875d95f'. Draft: pr-drafts/streaming/SOLR-12505.md at the new head. Claim: claims/pool-vm2-gate-backlog-12505.md. Previous status: CLAIMED at 1a1875d95f after the round 3 proof-leg classification as a test-fixture defect.
+Status: DONE (GATE GREEN at 1a1875d95f36)
 - Capability tags: gate.
 - Job type: branch-side fix on a gated branch, then the full hardening gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/streaming-convergence-round-1-response.md, item ST-R1-23 (verified there against the head code), with the register text in reports/streaming-convergence-round-1.md. The draft pr-drafts/streaming/SOLR-12505.md stays NOT CONVERGED until this job lands; the streaming convergence round 2 assignment re-checks the draft against the new head.

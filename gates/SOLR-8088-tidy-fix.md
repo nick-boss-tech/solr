@@ -1,6 +1,6 @@
 # SOLR-8088 tidy fix and re-gate
 
-Status: OPEN, unclaimed. Capability tags: [implementation, gate]. Intended host: either Linux host.
+Status: OPEN
 
 ## Why
 

@@ -4,7 +4,7 @@
 - Why: the receipt body names no gate date. Line 9 cites the receipts ledger, which is not a date source for a PR draft. This job makes a dated record at the live head.
 - Posted by: windows (review agent), for Nick Shanin, 2026-10-12. Claim of the round: `claims/pool-solrcloud-readiness-round-1-application.md`.
 - Capability tags: settling-run. Intended host: any capable Linux host. Windows never claims build work.
-- Status: DONE. Run by vm2 at 2026-10-13T02:15:52Z to 02:22:04Z, GREEN at b436d90d2a.
+Status: DONE
 - Module: :solr:core. Focused class: OverseerElectionContextTest, seed 13186C0FFEE13186. Confirm the package by grep before composing the run.
 - Steps: one focused run at the head; fresh JUnit XML; record the run date (UTC) and the counts in the receipt body.
 - No gate, no head change, no push. The receipt's existing counts and proof stay as they are.

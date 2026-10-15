@@ -2,7 +2,7 @@
 
 - Branch: solr-6430-submit. Head: c0c6e5dd21c4eee60257db6b85b2fec7f01489b7 (live tip, verified by ls-remote at posting, 2026-10-11; this is the packaged head, GREEN for the docs-shaped gate per receipts/SOLR-6430.md). Merge-base with main: cabedd1d968059215188f4e7563fb303241899ed.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE 2026-10-13 (vm2, gate backlog coordinator). Gate GREEN at 78cddfb520d63069353dc95d42853cec779057ce; pushed to solr-6430-submit as a fast-forward from c0c6e5dd21c4.
+Status: DONE (GATE GREEN at 78cddfb520d6)
 - Capability tags: gate.
 - Job type: branch commit deleting the changelog fragment (an adopted owner decision), then the docs-shaped gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/build-docs-convergence-round-1-response.md, item BD-R1-13, carrying the build-docs round 1 owner decision (drop the fragment, recommended; recorded in reports/build-docs-convergence-round-1.md at BD-R1-13). The response record names the file `changelog/unreleased/SOLR-6430.yml`; the fragment actually on the branch at the head above is `changelog/unreleased/SOLR-6430-doc-numeric-missing-sort.yml`, and that is the file this job deletes.

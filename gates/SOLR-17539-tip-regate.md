@@ -9,7 +9,7 @@
 - Gate steps: changelog YAML parse and changelog lint; tidy with a clean tree afterward; reference guide local build at the tip; module check for the module named in the gate log, `-x test`.
 - On green: refresh receipts/SOLR-17539.md with a live-tip section (tip sha, steps, the module named); mark this job DONE and the claim DONE. No fork push: the tip is already on the fork.
 - On failure: record the failing step and message in this file; do not relaunch unchanged.
-- Status: DONE 2026-10-13T11:50Z by vm2 (gate backlog coordinator). Gate GREEN at f9d201a278 in a plain clone (run of 11:32:09Z). The 11:14Z run failed at the reference guide build on an environment refusal (worktree gitfile), with no tests executed; the rerun followed the environment fix. Receipt: receipts/SOLR-17539.md, live-tip section.
+Status: DONE (GATE GREEN at f9d201a278)
 
 ## Failure record
 

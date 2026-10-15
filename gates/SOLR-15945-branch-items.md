@@ -2,7 +2,7 @@
 
 - Branch: solr-15945-submit. Head: adb0fd450c06c07f49ccd187c3d810410a76c5b3 (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-15945.md). Merge-base with main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE by vm2 (2026-10-12). Fix commit 793765c927 pushed to solr-15945-submit; gate green (see receipts/SOLR-15945.md).
+Status: DONE
 - Capability tags: gate.
 - Job type: changelog title correction and a test-schema comment correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/schema-convergence-round-1-response.md, items SCH-R1-30 and SCH-R1-37 (both held branch-side there, replacements recorded verbatim; register text in reports/schema-convergence-round-1.md lines 50 and 52).

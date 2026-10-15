@@ -1,7 +1,7 @@
 # Gate job: SOLR-16437 nightly-group run at the live head
 
 - Branch: solr-16437-submit. Head: `f72a9edd0a8b` (fork tip, per the receipt; confirm by ls-remote).
-- Status: DONE 2026-10-13. Claimed by vm2 06:40Z and run at f72a9edd0a8b on the owner's allowance (the live tip a23f770e4b9 differs by the changelog title only). Counts recorded in receipts/SOLR-16437.md under "Nightly-group run at f72a9edd0a8b". The runner's own junit-counts line printed zeros; the counts were read directly from the XML files.
+Status: DONE
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: focused run with the nightly group enabled. No code change.

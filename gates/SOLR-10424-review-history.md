@@ -3,7 +3,7 @@
 - Branch: solr-10424-submit. Head: `e629ab8bb293eb54249b426b69a559f1da0f08d7` (live head of PR #5152, read 2026-10-14). The job applies to that head only.
 - Merge-base with upstream main: `cabedd1d968059215188f4e7563fb303241899ed`.
 - Filed by: the slice 6 review. The review did not push and did not commit.
-- Status: DONE 2026-10-14. The rewrite was executed under Nick's direction; see the Outcome section below. No further action in this job; a replacement draft opening awaits Nick's approval.
+Status: DONE
 
 ## Finding answered
 

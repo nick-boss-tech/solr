@@ -4,7 +4,7 @@
 - Change since the prior gated head: one line in changelog/unreleased/SOLR-15863-backup-index-version.yml (the title starts with a capital letter). No Java change.
 - Posted by: windows (review agent), for Nick Shanin, 2026-10-12. Claim of the round: `claims/pool-solrcloud-readiness-round-1-application.md`.
 - Capability tags: gate. Intended host: any capable Linux host. Windows never claims build work.
-- Status: DONE (vm2, 2026-10-13T02:41:55Z): GATE GREEN at 78dff1d52f6; receipts/SOLR-15863.md refreshed. Route: full gate, no fix commit, no fork push.
+Status: DONE (GATE GREEN at 78dff1d52f6)
 - Module: :solr:core. Focused classes at the head: BackupCmdTest, BackupCoreAPITest, LocalFSCloudIncrementalBackupTest. Seed from the receipt: 15863C0FFEE15863, nightly tests enabled. Confirm packages by grep before composing the run.
 - Steps: changelog YAML parse; tidy with the GATE INVALID guard; Error Prone compile; focused tests at the head (fresh JUnit XML); module check `:solr:core:check -x test`.
 - The lane may use a changelog-only carry-over if its rule allows one. The receipt must name the new head and say which route was taken.

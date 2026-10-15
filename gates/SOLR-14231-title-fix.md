@@ -2,7 +2,7 @@
 
 - Branch: solr-14231-submit. Head: 2f73d00a3996da1623156ccef649b59be0b59d45 (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-14231.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE. Title fix pushed at 593463f398 (fast-forward from 2f73d00a399); re-gate green, see receipts/SOLR-14231.md.
+Status: DONE
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization.
 - Spec: reports/streaming-convergence-round-1-response.md, item ST-R1-33 (verified there: the title at the head above claims the single-node and no-node failure, and no base run exists, so that failure claim is unshown).

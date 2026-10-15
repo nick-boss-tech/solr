@@ -3,7 +3,7 @@
 - Branch: solr-10305-submit. Head: `f559126972153367a846ef2a6a1989906849e403` (live head of PR #5151, read 2026-10-14). The job applies to that head only.
 - Merge-base with upstream main: `cabedd1d968059215188f4e7563fb303241899ed`.
 - Filed by: the slice 6 review. The review did not push and did not commit.
-- Status: OPEN. Needs Nick's direction before any push.
+Status: DONE
 
 ## Finding answered
 

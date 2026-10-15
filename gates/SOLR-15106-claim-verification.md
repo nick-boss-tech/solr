@@ -1,7 +1,7 @@
 # Premise job: SOLR-15106 claim verification, the 1200 queued messages figure
 
 - Branch: solr-15106-submit. Head: `40b7e5d0efa70d61b74b9fa9ac04beb1ed397637` (fork tip, verified by `git ls-remote` on 2026-10-14 at filing, unchanged since receipts/SOLR-15106.md). Merge-base: `9b3a84b1c460981eab09d8ffaef776acc4a184f8`.
-- Status: OPEN, unclaimed. Claimable by either Linux host (vm1 or vm2). Claim under `claims/` before running anything. Windows never claims build work.
+Status: OPEN
 - Capability tags: premise-run.
 - Job type: verification and records only. No branch code change is authorized by this job, no push, no PR change. The only texts it edits are the draft and the receipt on pr-prepare, per the outcome below.
 - Why owed: `pr-drafts/solrcloud/SOLR-15106.md` line 9 states: "The ticket reports more than 1200 queued messages during a ZooKeeper outage." The openings slates doc (reports/morning-openings-slates-2026-10-14.md) flags the owner check: the ticket's 1200-message claim has no packet on the branch. The draft's own Limits say the ZooKeeper outage in the ticket is not reproduced and the test ends the processor thread directly. Nothing on the branch currently supports or refutes the number, and the draft cannot go out with the figure resting on nothing.

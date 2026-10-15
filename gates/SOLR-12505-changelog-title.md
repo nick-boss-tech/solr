@@ -2,7 +2,7 @@
 
 - Branch: solr-12505-submit. Head: 1a1875d95f3680c20447006efc3c949c57f5135f (live tip, verified by `git ls-remote origin refs/heads/solr-12505-submit` on 2026-10-13; GATE GREEN at this head per `receipts/SOLR-12505.md`, section "Gate at 1a1875d95f").
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE 2026-10-14, executed inside the widening gate rather than as a standalone title-only job. Ruling 1a on the owner brief (material/owner-items-brief-2026-10-14.md) recorded the Choice as posed (defType=lucene, not the terms parser), discharging hold 1, and the title text below was applied verbatim in the same commit as the owner item 1b widening (head 248a9715b1), which this file anticipated would supersede the job. The full gate at that head is GREEN (receipts/SOLR-12505.md, top section); the parsed title was verified equal to the text below during the gate's step 0, the focused counts stand in the receipt, and the draft's changelog link is re-pointed to the new head.
+Status: DONE
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head. Same shape as `gates/SOLR-10882-title-fix.md`.
 - Spec: `reports/streaming-convergence-round-2-response.md`, SOLR-12505 line. The current title describes only the defType change. The branch now also rejects a join field name that would break the batch query, and the receipt records that the changelog "does not yet name the join field check".

@@ -1,7 +1,7 @@
 # Premise job: what does the temp-file move do to a symlinked or bind-mounted security.json?
 
 - Code under test: draft PR #5118 head `2b5ad801c9e88807337f4f0a3fdd689126ad37d1` (`SecurityConfHandlerLocal.persistConf`). No production edit.
-- Status: DONE 2026-10-13T17:08Z by vm2 (coordinator). Q1 answered by run at both heads; Q2 and Q3 skipped (reasons below). Claim: claims/pool-vm2-gate-backlog-18010-replace-semantics.md.
+Status: DONE
 - Capability tags: premise-run.
 - Intended host: a Linux host. The symlink case needs no privileges. The bind-mount case needs mount rights; skip it and record that if the host has none.
 - Source: `reports/four-new-prs-strong-review-round-1.md`, section SOLR-18010, finding on replace semantics. The old write opened the existing path and wrote in place, which follows a symlink and works on a single-file bind mount. The new write creates a temp file and moves it over the path, which replaces the directory entry.

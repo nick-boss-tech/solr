@@ -1,7 +1,7 @@
 # Gate job: SOLR-7504 gate at the live head (every-value scan and null guard)
 
 - Branch: solr-7504-submit. Head pinned at filing: `2fe06bfd917f193b3591dfa4c088ef0994279ed6` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-7504.md`). Merge-base with upstream main: `97d973814336101e12475558d7419321c743de79`.
-- Status: OPEN, unclaimed.
+Status: OPEN
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 

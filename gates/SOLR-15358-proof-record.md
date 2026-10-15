@@ -2,7 +2,7 @@
 
 - Branch: solr-15358-submit. Head: cbb345f2e7df452e20036d357c82cc63db96ffd3 (live tip, verified by ls-remote at posting, 2026-10-11; matches receipts/SOLR-15358.md, GATE GREEN at this head, log g15358-harden.log on vm1). Merge-base: b5c71bc5573c4e31b4cee5a7965d73587fc0ae58.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE by vm2 (coordinator), 2026-10-12T09:37Z. Proof named in receipts/SOLR-15358.md.
+Status: DONE
 - Capability tags: gate.
 - Job type: record completion only. No branch edit, no new gate at the head; the head does not move.
 - Why: receipts/SOLR-15358.md and the receipts ledger both record the gate's pre-fix proof only as "the gate's pre-fix proof step passed at this head", without naming which tests failed on the base run or how they failed. Every other receipt names its proof. This job re-runs the proof leg once and puts the names on record.

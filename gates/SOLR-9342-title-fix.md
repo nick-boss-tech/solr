@@ -2,7 +2,7 @@
 
 - Branch: solr-9342-submit. Head: 833e11192a7ff918f7e401bde920cf63c89df063 (live tip, verified by ls-remote at posting, 2026-10-14T02:10Z).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE. Fork push to solr-9342-submit at 3e5d46d2c8625c3a6db0ff188e6dc14442b67ce4 after the gate was green; receipt refreshed, draft links re-pointed. Posted by the CLI convergence round 2 review (claims/pool-category-closeout-w2-cli-round-1.md).
+Status: DONE
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch. A title-only commit on top of the head, then the gate evidence check at the new head.
 - Spec: reports/cli-convergence-round-1-response.md, item CLI-R1-03 (replacement text recorded there verbatim). Owner decision 1 in reports/cli-bin-packaging-round-1.md lists the changelog title as an owner item; the round 1 replacement is the adopted text.

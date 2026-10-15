@@ -1,6 +1,6 @@
 # Gate job: SOLR-16887 restore -XX:ErrorFile, rename the BATS test, then the gate and BATS run at the new head
 
-- Status: OPEN, re-issued 2026-10-14 after the main agent classified the first run. The 2026-10-14 run FAILED at both BATS legs from a runner defect, not a branch defect; see Gate run record and Main agent classification below. The re-run must use a runner that exports the BATS port environment (named in the classification). Posted by the review lane (round 3, census follow-up S5, 2026-10-14).
+Status: CLAIMED (claims/pool-vm2-gate-backlog-16887.md)
 - Branch: solr-16887-submit. Live head: 42675f65d6fc4362e427d3b4927801466b062ca6 (verified by `git ls-remote origin refs/heads/solr-16887-submit` on 2026-10-14; matches the gated head in `receipts/SOLR-16887.md`).
 - Merge base: 9b3a84b1c460981eab09d8ffaef776acc4a184f8 (`git merge-base upstream/main 42675f65d6f`).
 - Intended host: a Linux host with the Gradle toolchain and BATS, under the WORKFLOW.md claim rules. Windows never claims build work.

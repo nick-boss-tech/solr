@@ -1,5 +1,7 @@
 # Gate job: SOLR-10234 drop the test-only changelog fragment
 
+Status: DONE
+
 - Branch: solr-10234-submit. Live tip: eb8c4060d9436d7abfdcfdd0ba231a5b31debc01 (ls-remote, 2026-10-14). Gated head: the same (receipts/SOLR-10234.md, GATE GREEN 2026-10-12).
 - Filed by: the Windows review lane, 2026-10-14. Status: DONE. GREEN at 8745afd00cf99597c24ee12764fc7b3d7dc7870e; fork force-with-lease pushed from eb8c4060d9436d7abfdcfdd0ba231a5b31debc01 and verified by ls-remote; receipts/SOLR-10234.md refreshed.
 - Intended host: a Linux host with the Gradle toolchain (capability tag: gate), under the WORKFLOW.md claim rules. Windows does not build.

@@ -2,7 +2,7 @@
 
 - Branch: solr-16272-submit. Head: d2cf817391692b29c3d221ec4ebed65c3833bb91 (live tip, verified by ls-remote at posting, 2026-10-14T02:10Z; GATE GREEN per receipts/SOLR-16272.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE. Fork push to solr-16272-submit at fbcd65f71652816a5994ae4631587dd47f98a48d after the gate was green; receipt refreshed. Posted by the CLI convergence round 2 review (claims/pool-category-closeout-w2-cli-round-1.md).
+Status: DONE
 - Capability tags: gate.
 - Job type: branch-side changelog title correction on a gated branch, then a re-gate at the new head.
 - Spec: reports/cli-convergence-round-1-response.md, item CLI-R1-14 (replacement text recorded there verbatim). Owner decision 2 in reports/cli-bin-packaging-round-1.md: amend the changelog title to the keep rule, as a changelog-only commit.

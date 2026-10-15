@@ -2,7 +2,7 @@
 
 - Branch: solr-16977-submit. Head: 1142f9563abe13aea113bd80d241db770fd6cdb6 (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-16977.md). Merge-base with main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE (vm2, 2026-10-12T22:04Z). Title commit c65d242718e7953e81016526372421d7a47a7db0 pushed fast-forward to solr-16977-submit; gate green; receipt refreshed in receipts/SOLR-16977.md. Pending from the job's On-green list: re-point the changelog link in pr-drafts/schema-analysis/SOLR-16977.md to the new head (not done in this run).
+Status: DONE
 - Capability tags: gate.
 - Job type: changelog title correction on a gated branch, then a re-gate at the new head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization. Scope note: this job is the title only; the ticket's document-vector half stays unaddressed, as the draft's Limits now state, and is not part of this job.
 - Spec: reports/schema-convergence-round-1-response.md, item SCH-R1-31 (held branch-side there, replacement recorded verbatim; register text in reports/schema-convergence-round-1.md line 58: the current title's "internal error while rendering results" ending was not reproduced by anything in the record).

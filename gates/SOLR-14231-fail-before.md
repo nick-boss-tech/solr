@@ -2,7 +2,7 @@
 
 - Branch: solr-14231-submit. Head: 593463f398cb96a50ea9ab4a70b26c0b9a5b1599 (live tip, verified by `git ls-remote origin refs/heads/solr-14231-submit` on 2026-10-13; receipt `receipts/SOLR-14231.md`, section "Re-gate at 593463f398", GATE GREEN at this head).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE, 2026-10-14. The focused step returned rc=1 at the fail-before run; the main agent confirmed that rc as the expected fail-before outcome (see "Main-side confirmation, 2026-10-14" below). Posted 2026-10-13 by the review coordinator (W2 streaming, `reports/streaming-convergence-round-2-response.md`).
+Status: DONE
 - Capability tags: gate.
 - Job type: fail-before proof, a run only. No push, no branch change, no receipt "green" line. The gate records each new test's outcome on the proof base.
 - Why owed: the branch adds tests, and WORKFLOW's fail-before rule asks that a new test fail without its fix. `pr-drafts/streaming/SOLR-14231.md` states "Fail without the fix: not run for these tests." That sentence stays true until this job reports.

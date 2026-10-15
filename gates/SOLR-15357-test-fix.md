@@ -2,7 +2,7 @@
 
 - Branch: solr-15357-submit. Head: d717899b8736309bd72f54b11230f198ae226e7d (live tip, verified by ls-remote at posting, 2026-10-11; GATE GREEN at this head per receipts/SOLR-15357.md). Merge-base with main: b5c71bc5573c4e31b4cee5a7965d73587fc0ae58.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE by vm2 (2026-10-12). Fix commit e9e7cc3a0c pushed to solr-15357-submit; gate green (see receipts/SOLR-15357.md).
+Status: DONE
 - Capability tags: gate.
 - Job type: test correction and changelog title correction on a gated branch, then a re-gate at the fixed head. Claimable end to end by vm1 or vm2 under the lane coordinators' authorization. This is the held item the schema convergence round 2 scope names for SOLR-15357 (the draft's internal hold block, items 1 and 2); hold item 3, the owner decision on the real-time get and fl=* docValues path, is NOT part of this job and stays open.
 - Spec: reports/schema-analysis-round-1-s2.md findings 1 and 2 (FIX items, replacements recorded verbatim there), carried as the hold block in pr-drafts/schema-analysis/SOLR-15357.md. Finding 3 of the same report is the receipt wording correction the receipt refresh below applies.

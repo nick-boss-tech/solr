@@ -5,7 +5,7 @@
 - Branch: solr-17752-submit. Head: e5c0a64f993c7ce5e9a594f5a6eb0679925e9de9 (live tip, verified by `git ls-remote origin refs/heads/solr-17752-submit` on 2026-10-13; the gated head in receipts/SOLR-17752.md, gate green at this head on 2026-10-04).
 - Current merge-base with upstream main: 56ec140e3636d5f4150fa87fbf7103529536ac99. The receipt's proof leg ran at 14c7aac0d151402b00259e2fb9bf5eed7049ec5d, which is neither the merge-base nor current main. That is why the rerun is owed.
 - Target base: upstream main when the rebase runs. Read on 2026-10-13 as d38e0f1623728bdd305e76a598f013f1bf32e449. The runner re-reads upstream main by ls-remote and records the value it rebases onto.
-- Status: HELD. Owner item. The rebase rewrites a published branch, and the build-docs record reserves that to the owner (`reports/build-docs-misc-round-1.md`, item 9: "rebasing a published branch is the owner's call"). Nothing claims or runs this job until Nick directs the rebase in the main chat. Written 2026-10-13 by the review coordinator; not a claim.
+Status: OPEN
 - Intended host: a Linux gate host, after that direction. Windows never claims build work.
 - Capability tags: gate.
 - Decision adopted: rebase onto current upstream main. This is item 9's recommendation, adopted under the decision default (`reports/build-docs-convergence-round-2-response.md`).

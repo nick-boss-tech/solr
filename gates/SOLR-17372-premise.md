@@ -2,7 +2,7 @@
 
 - Branch under test: solr-17372-submit at 048862fda8ab76f36f259c6849ec5c5a8cfafabe (live tip, verified by ls-remote at posting, 2026-10-11; commit 3257831180f carries the tolerance hunk in StatsComponentTest). Current main at the checking time: d76fc14b9857e77b830d7a82514b28c523a239c2. Branch merge-base: e2cdb2d7e8ae0be4cf6cf0606206c67d89e7278f.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-- Status: DONE by vm2 (coordinator). Verdict NOT SUPPORTED: leg A passes at seed 2074D8EC40F42163 on current main; receipts/SOLR-17372.md.
+Status: DONE
 - Capability tags: premise.
 - Outcome: verdict recorded in this file and appended to receipts/SOLR-17372.md: CONFIRMED or NOT SUPPORTED, on the method below.
 

@@ -3,7 +3,7 @@
 - Branch: solr-9864-submit. Head: `b5826e466b9a8664adf11e0f247cff220f2f5953` (live head of PR #5150, read 2026-10-14). The job applies to that head only.
 - Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
 - Filed by: the slice 6 review. The review did not push and did not commit.
-- Status: CLOSED 2026-10-14 by owner ruling (see Closure at the end of this file). Nick's direction arrived and it is the other way: the rewrite is cancelled and the branch stays as it stands. Not run, and not to be run.
+Status: DONE
 
 ## Finding answered
 

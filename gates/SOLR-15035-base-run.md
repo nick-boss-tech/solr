@@ -1,7 +1,7 @@
 # Gate job: SOLR-15035 base-code run and head-production run
 
 - Branch: solr-15035-submit. Head: `12d7491e82c` (live tip, ls-remote).
-- Status: DONE 2026-10-13T08:05Z. Runs 06:07:52Z to 06:19:20Z; recorded in receipts/SOLR-15035.md.
+Status: DONE
   - Merge-base: `b5c71bc5573c4e31b4cee5a7965d73587fc0ae58`. Head: `12d7491e82c`.
   - Base run (rc=1, the premise run's expected failure): `AddReplicaTest.testAddReplicaPersistsNumShardsInCoreProperties` failed with `java.lang.AssertionError: expected:<2> but was:<null>`. Count tests=1 failures=1 errors=0. XML timestamp 2026-10-13T06:13:52Z. Log: logs/vm2/15035-base.log. The seed is not in the JUnit XML.
   - Head-production run on base tests (rc=0): test file at the merge-base; production files `AddReplicaCmd.java` and `CoreAdminHandler.java` at the head (the full production change). Count tests=3 failures=0 errors=0. XML timestamp 2026-10-13T06:18:58Z. Log: logs/vm2/15035-banked.log (name predates this label).

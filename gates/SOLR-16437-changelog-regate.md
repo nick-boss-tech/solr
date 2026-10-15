@@ -1,7 +1,7 @@
 # Gate job: SOLR-16437 re-gate at the moved head
 
 - Branch: solr-16437-submit. Head: `a23f770e4b9587acbd14fcdbaae2047bd5c727c4` (fork tip). Previous gated head: `f72a9edd0a8b1aa1dded6af6c0c792fbb6179aa2`. Merge-base: `e2cdb2d7e8ae0be4cf6cf0606206c67d89e7278f`.
-- Status: DONE 2026-10-13 by vm2 (gate backlog coordinator). Full gate GREEN at a23f770e4b9 (focused count from fresh JUnit XML, 07:35Z). Receipt refreshed at receipts/SOLR-16437.md; draft re-pointed. Claim: claims/pool-vm2-gate-backlog-16437-changelog.md.
+Status: DONE (GATE GREEN at a23f770e4b9)
 - Capability tags: gate.
 - Intended host: any capable Linux host (vm1 or vm2), under the WORKFLOW.md claim rules. Windows never claims build work.
 - Job type: full hardening gate at the new head, then the receipt refresh and the draft re-point. Amended by the main side 2026-10-13: the first version of this job was a changelog check only; the head complaint stands until the receipt and the draft name the live head, so the full gate and both record fixes are part of this job.

@@ -3,7 +3,7 @@
 - Branch: solr-7394-recovery. Head: `a92a0d89b20` (pushed 2026-10-13, fast-forward from `9857d9ee802`).
 - Change: `changelog/unreleased/SOLR-7394.yml`, title only. It now names the restore of the pre-recovery term, using the wording recorded in `material/solrcloud-round-1-answers.md` (line 265) and already applied to the live PR title. Decision record: `material/held-items-decisions-2026-10-13.md`.
 - Intended host: any Linux host. Windows never claims build work.
-- Status: DONE 2026-10-13T16:50Z by vm2 (gate backlog coordinator). Changelog check GREEN at a92a0d89b20 (GATE END 2026-10-13T16:49:30Z; logs/vm2/queue-g7394-changelog-title-gate-20261013T164930Z.out). Receipt: receipts/SOLR-7394.md, section 'Changelog check at a92a0d89b20'. Claim: claims/pool-vm2-gate-backlog-7394-changelog-title.md.
+Status: DONE
 
 ## Steps
 
