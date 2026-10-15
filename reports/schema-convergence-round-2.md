@@ -68,3 +68,7 @@ Note on the basis: `pr-prepare` moved during the review, on an unrelated commit.
 ## Convergence line
 
 NOT CONVERGED for SOLR-14199 and SOLR-15358. SOLR-15357 is converged on register text, and its hold stands until the branch fix and the owner's ruling land.
+
+## Settlement note, standing calls round 2 (2026-10-15)
+
+The owner call on the default docValues as stored setting for SOLR-15358 is settled. It survived rung 4 of the decision ladder and is posed as a Choice in `pr-drafts/schema-analysis/SOLR-15358.md`, with the implemented position stated: the branch ships the default (option a). Reasons and code citations are in `reports/standing-calls-round-2.md`. The verdict lines above are the round 2 record and are not rewritten. The only hold left on SOLR-15358 is landing after SOLR-15357. RC-S5 (line 14) is still open.
