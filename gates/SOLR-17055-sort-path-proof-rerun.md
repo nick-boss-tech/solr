@@ -49,3 +49,11 @@ The first gate of the fix commit (log logs/vm2/queue-g17055-gate-20261014T113414
 - Fail-before, production QueryComponent.java reverted to c2396f425f with the fix commit test files kept: rc=1, failing by content: `.response.size():9!=3`.
 - Push: fast-forward solr-17055-submit from c2396f425fa2 to 2fe098615839 (ls-remote verified: tip 2fe0986158391908ac89564090eb97e245788023).
 - Not done in this step: the draft re-point, Limits rewrite and hold-comment removal in pr-drafts/search-components/SOLR-17055.md, and the receipt refresh in receipts/SOLR-17055.md. Those remain open for the review side.
+
+## Follow-up run record (2026-10-15T00:38:34Z to 01:00:13Z)
+
+- Follow-up commit: `5d6b81d86bcecc9c80c3a97aae8ad8d66d463c1a`, one commit on `2fe0986158391908ac89564090eb97e245788023`, held locally in /workspace/gates/solr-17055-followup. Not pushed to the fork.
+- Log: logs/vm2/queue-g17055-followup-gate-20261015T003834Z.out. Seed `17055C0FFEE17055`.
+- Legs: spotless rc 0; tree clean; Error Prone compile rc 0; focused `DistributedKnnTopKTest` rc 1 (1 test, 1 failure, from the fresh JUnit XML); module check rc 0.
+- Failure: `java.lang.AssertionError: .response.maxScore:0.99756694!=null` on the `sort=id asc` request (`fl=id`, the id-sort maxScore pin). The score-sort pin (`sort=score desc`) runs before it and does not fail. The comparison does not decide which side is wrong.
+- Not GREEN. No fork push. Not relaunched. Left for the main agent; Status stays OPEN.
