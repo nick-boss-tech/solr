@@ -1,7 +1,7 @@
 # Gate job: SOLR-17842 placeholder fix, light gate at the new head
 
 - Branch: solr-17842-submit. Head: 008973f6313374517e20a0c347d0fb4885afe1dd (live tip, verified by `git ls-remote origin refs/heads/solr-17842-submit` on 2026-10-13; the gated head in receipts/SOLR-17842.md). Merge-base with upstream main: 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
-- Status: GATE GREEN 2026-10-15T04:26Z at 9da1242b1d29c8f204455f6574e8fb91239192a5 (local branch commit on 008973f6, not pushed; log logs/vm2/queue-g17842-gate-20261015T042336Z.out). The fork push is the branch owner's; the draft HOLD stays until it lands. Written 2026-10-13 by the review coordinator (Windows review lane).
+- Status: DONE 2026-10-15T04:27Z. GATE GREEN at 9da1242b1d29c8f204455f6574e8fb91239192a5 (local branch commit on 008973f6, not pushed; log logs/vm2/queue-g17842-gate-20261015T042336Z.out). The fork push is the branch owner's; the draft HOLD stays until it lands. Written 2026-10-13 by the review coordinator (Windows review lane).
 - Intended host: any capable Linux gate host. Windows never claims build work.
 - Capability tags: gate.
 - Job type: a docs-only branch commit (the placeholder fix), then the light gate at the new head. No Java changes.
