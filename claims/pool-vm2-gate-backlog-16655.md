@@ -4,3 +4,5 @@
 - Capability tags: gate. Runner: /workspace/gates/g16655-gate.sh on vm2, using the shared runner /workspace/gates/lib/gate-run.sh. Seed 16655C0FFEE16655.
 - Stops before any push. A tidy change (GATE INVALID), a proof-leg failure of an unexpected shape, or a failed focused run is recorded in the job file and escalated; not relaunched.
 - Status: CLAIMED, runner queued.
+
+Gate result, 2026-10-15T20:35Z: not green. Proof leg rc=1 with 1 failed of 36 at base (testTrimFieldsRecurseIntoNestedDocumentsOnlyWhenParentSelected); the run used base b201a57fb3e5 where the job names 14c7aac0d151. Recorded in gates/SOLR-16655-live-head-gate.md under Gate result. Left for the main agent; not relaunched; no push.

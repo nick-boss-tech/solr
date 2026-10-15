@@ -1,7 +1,7 @@
 # Gate job: SOLR-16655 gate at the live head (decided descent fix)
 
 - Branch: solr-16655-submit. Head pinned at filing: `5e2317443f4116a9e97330b0d6ce175cf44b54df` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-16655.md`). Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
-Status: CLAIMED (claims/pool-vm2-gate-backlog-16655.md)
+Status: NOT GREEN at 5e2317443f (proof leg rc=1, left for the main agent; see the Gate result section)
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 
@@ -36,3 +36,12 @@ Status: CLAIMED (claims/pool-vm2-gate-backlog-16655.md)
 
 - Record the failing step, the failing test and seed if a test ran, and the log path in this file and in the receipt. A gate that executed tests and failed is never relaunched by the claimant; the main side investigates first (WORKFLOW.md). A run that never executed tests because of an environment refusal may be relaunched once, with the refusal recorded.
 - Note for sequencing, not part of this job: SOLR-12705 conflicts textually with this branch in `FieldMutatingUpdateProcessor.java`; the audit records that the two PRs are sequenced and the second is rebased.
+
+## Gate result (coordinator record, 2026-10-15)
+
+Run: /workspace/gates/g16655-gate.sh, ended 2026-10-15T20:35:52Z, head 5e2317443f4116a9e97330b0d6ce175cf44b54df, log logs/vm2/queue-g16655-gate-20261015T201105Z.out.
+
+- changelog rc=0, tidy rc=0 with clean tree, compile rc=0, focused head rc=0, core check rc=0.
+- Proof leg rc=1 (nonzero expected): 1 failed of 36 at base. The failing test is FieldMutatingUpdateProcessorTest.testTrimFieldsRecurseIntoNestedDocumentsOnlyWhenParentSelected (logs/vm2/16655-proof.log). Whether that is the intended fail-before shape is a by-content verdict for the main agent.
+- Proof base mismatch to check: the run used b201a57fb3e5 as the base for the proof leg and the diff, while this job file names merge-base 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.
+- Not relaunched. No push was made.
