@@ -1,7 +1,7 @@
 # Gate job: SOLR-6065 gate at the live head, with the cloud test in the run
 
 - Branch: solr-6065-submit. Head pinned at filing: `3d2cec9e1ab3a19f6b948682b116c2780da4b65b` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-6065.md`). Merge-base with upstream main: `97d973814336101e12475558d7419321c743de79`.
-Status: NOT GREEN at 3d2cec9e1a (proof leg rc=1, left for the main agent; see the Gate result section)
+Status: DONE (GATE GREEN at 3d2cec9e1ab3; proof settled by the main-side verdict by content, 2026-10-15)
 - Capability tags: gate.
 - Job type: full hardening gate at the pinned head, with the cloud test named in the run list. No implementation step. Pushes only if the gate itself produces a commit (see On green).
 
@@ -44,3 +44,12 @@ Run: /workspace/gates/g6065-gate.sh, ended 2026-10-15T21:00:43Z, head 3d2cec9e1a
 - Proof leg rc=1 (nonzero expected). Against base 97d973814336 with the branch test files in place, `MaxDocsLimitCloudTest.testMaxDocsExceededGivesClearErrorToClient` failed with `expected:<500> but was:<400>`. The server text is "possible analysis error: number of documents in the index cannot exceed 3" (logs/vm2/6065-proof.log, lines 112-113 and 370). Whether that is the intended pre-change symptom is a by-content verdict for the main agent.
 - The focused head run (`MaxDocsLimitCloudTest` and `DirectUpdateHandlerTest`) is not counted as proof, and the step 6 counts were not recorded because the proof leg did not pass.
 - Not relaunched. No push was made. No receipt was written.
+
+## Main-side proof verdict (2026-10-15)
+
+The proof stands by content; the gate is GREEN at 3d2cec9e1ab3.
+
+- The 500 in the failure message is the test's own first assertion (`assertEquals(500, e.code())` in `MaxDocsLimitCloudTest`), which states the fixed behavior under the locked SERVER_ERROR decision. It was never a prediction about the base; a fail-before run whose first failing assertion is the status code prints exactly this pair.
+- At the merge-base (97d973814336), `DirectUpdateHandler2.addDoc` catches the IndexWriter limit exception in its generic `catch (IllegalArgumentException)` and rethrows it as a SolrException with BAD_REQUEST and the message "Exception writing document id ... to the index; possible analysis error: " plus the exception text. The proof log's server text, "possible analysis error: number of documents in the index cannot exceed 3", is that mapping's output: the same request, rejected at the same site, for the premise reason (the IndexWriter doc limit, whose message wording the branch's MAX_DOCS_MESSAGE_PREFIX keys on).
+- That is the pre-change symptom step 5 names: the generic analysis-error shape instead of the clear maximum-documents message. The branch's change sits inside that same catch and maps this one exception to SERVER_ERROR with the clear wording, so the test discriminates: at base the response carries "analysis error" and not "maximum number of documents"; at the head the reverse. The head leg of this gate ran both named classes at rc=0, which also settles the audit's reflective-access question for this run: the cloud test executed and passed.
+- No re-run was needed: the recorded server text plus the code at both trees settle the base behavior. The job's step 5 expectation stands as written (failure with the analysis-error shape); the numeric pair in the log is the test asserting the shape change, not a miss against the job.
