@@ -1,0 +1,56 @@
+package org.apache.solr.cloud;
+
+import org.apache.solr.client.solrj.RemoteSolrException;
+import org.apache.solr.client.solrj.request.CollectionAdminRequest;
+import org.apache.solr.client.solrj.request.QueryRequest;
+import org.apache.solr.common.params.ModifiableSolrParams;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class ProbeNoUniqueKeyCloudTest extends SolrCloudTestCase {
+
+  @BeforeClass
+  public static void setup() throws Exception {
+    configureCluster(1).addConfig("nouk", configset("nouk-cloud")).configure();
+    CollectionAdminRequest.createCollection("nouk", "nouk", 2, 1).process(cluster.getSolrClient());
+    cluster.waitForActiveCollection("nouk", 2, 2);
+  }
+
+  private static final String[][] CASES = {
+    {"plain", "q=*:*"},
+    {"query_false", "q=*:*&query=false"},
+    {"rows0", "q=*:*&rows=0"},
+    {"sort_id", "q=*:*&sort=id+asc"},
+    {"fl_id", "q=*:*&fl=id"},
+    {"facet_field", "q=*:*&facet=true&facet.field=id"},
+    {"shards_info", "q=*:*&shards.info=true"},
+    {"distrib_false", "q=*:*&distrib=false"},
+    {"group_field", "q=*:*&group=true&group.field=id"},
+    {"group_query_false", "q=*:*&group=true&group.field=id&query=false"},
+    {"group_facet", "q=*:*&group.facet=true&group.field=id&facet=true&facet.field=id"},
+  };
+
+  @Test
+  public void probe() throws Exception {
+    System.out.println("PROBE diag nodes=" + cluster.getJettySolrRunners().size() + " live=" + cluster.getSolrClient().getClusterStateProvider().getLiveNodes());
+    System.out.println("PROBE diag state=" + String.valueOf(cluster.getSolrClient().getClusterStateProvider().getCollection("nouk")).replaceAll("\\s+", " ").substring(0, 600));
+    for (String[] c : CASES) {
+      ModifiableSolrParams p = new ModifiableSolrParams();
+      for (String kv : c[1].split("&")) {
+        int eq = kv.indexOf('=');
+        p.add(kv.substring(0, eq), kv.substring(eq + 1).replace('+', ' '));
+      }
+      String out;
+      try {
+        new QueryRequest(p).process(cluster.getSolrClient(), "nouk");
+        out = "status=200";
+      } catch (RemoteSolrException e) {
+        out = "status=" + e.code() + " msg=" + e.getMessage();
+      } catch (Exception e) {
+        out = "exception=" + e.getClass().getSimpleName() + " msg=" + e.getMessage();
+      }
+      out = out.replaceAll("\\s+", " ");
+      System.out.println("PROBE " + c[0] + " " + out.substring(0, Math.min(400, out.length())));
+    }
+  }
+}

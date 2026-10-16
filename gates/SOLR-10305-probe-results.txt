@@ -1,0 +1,26 @@
+base PROBE diag nodes=1 live=[127.0.0.1:35279_solr]
+base PROBE diag state=DocCollection(nouk//collections/nouk/state.json/6 )={ "pullReplicas":"0", "configName":"nouk", "nrtReplicas":1, "replicationFactor":1, "tlogReplicas":"0", "router":{"name":"compositeId"}, "shards":{ "shard1":{ "range":"80000000-ffffffff", "replicas":{"core_node2":{ "core":"nouk_shard1_replica_n1", "node_name":"127.0.0.1:35279_solr", "type":"NRT", "state":"active", "leader":"true", "force_set_sta
+base PROBE plain exception=SolrServerException msg=No live SolrServers available to handle this request
+base PROBE query_false exception=SolrServerException msg=No live SolrServers available to handle this request
+base PROBE rows0 exception=SolrServerException msg=No live SolrServers available to handle this request
+base PROBE sort_id exception=SolrServerException msg=No live SolrServers available to handle this request
+base PROBE fl_id exception=SolrServerException msg=No live SolrServers available to handle this request
+base PROBE facet_field exception=SolrServerException msg=No live SolrServers available to handle this request
+base PROBE shards_info exception=SolrServerException msg=No live SolrServers available to handle this request
+base PROBE distrib_false status=200
+base PROBE group_field exception=SolrServerException msg=No live SolrServers available to handle this request
+base PROBE group_query_false exception=SolrServerException msg=No live SolrServers available to handle this request
+base PROBE group_facet exception=SolrServerException msg=No live SolrServers available to handle this request
+head PROBE diag nodes=1 live=[127.0.0.1:44663_solr]
+head PROBE diag state=DocCollection(nouk//collections/nouk/state.json/6 )={ "pullReplicas":"0", "configName":"nouk", "nrtReplicas":1, "replicationFactor":1, "tlogReplicas":"0", "router":{"name":"compositeId"}, "shards":{ "shard1":{ "range":"80000000-ffffffff", "replicas":{"core_node4":{ "core":"nouk_shard1_replica_n3", "node_name":"127.0.0.1:44663_solr", "type":"NRT", "state":"active", "leader":"true", "force_set_sta
+head PROBE plain status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard2_replica_n1/select?q=*%3A*&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
+head PROBE query_false status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard2_replica_n1/select?q=*%3A*&query=false&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
+head PROBE rows0 status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard1_replica_n3/select?q=*%3A*&rows=0&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
+head PROBE sort_id status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard2_replica_n1/select?q=*%3A*&sort=id+asc&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
+head PROBE fl_id status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard2_replica_n1/select?q=*%3A*&fl=id&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
+head PROBE facet_field status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard2_replica_n1/select?q=*%3A*&facet=true&facet.field=id&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
+head PROBE shards_info status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard2_replica_n1/select?q=*%3A*&shards.info=true&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
+head PROBE distrib_false status=200
+head PROBE group_field status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard2_replica_n1/select?q=*%3A*&group=true&group.field=id&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
+head PROBE group_query_false status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard1_replica_n3/select?q=*%3A*&group=true&group.field=id&query=false&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
+head PROBE group_facet status=400 msg=Error from server at https://127.0.0.1:44663/solr/nouk_shard2_replica_n1/select?q=*%3A*&group.facet=true&group.field=id&facet=true&facet.field=id&_stateVer_=nouk%3A6&wt=javabin: org.apache.solr.common.SolrException: Distributed search requires a uniqueKey field in the schema
