@@ -4,3 +4,5 @@
 - Capability tags: premise-run. Host: vm2. Runner /workspace/gates/g9396-distrib-verify.sh, worktrees /workspace/gates/solr-9396-verify (head) and /workspace/gates/solr-9396-base (base). Seed 9396C0FFEE9396.
 - Writes reports/SOLR-9396-distrib-row-field-verify.md only. No code, test, receipt or PR change.
 - Status: CLAIMED, runner queued.
+
+- Status: DONE (2026-10-16T03:57:52Z). Verdict PASS; reports/SOLR-9396-distrib-row-field-verify.md.
