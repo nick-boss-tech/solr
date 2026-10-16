@@ -101,6 +101,7 @@ public class JSONResponseWriter implements QueryResponseWriter {
 
     @Override
     public void writeNamedList(String name, NamedList<?> val) throws IOException {
+      ifNeededWriteTypeAndValueKey("lst");
 
       if (val instanceof SimpleOrderedMap) {
         super.writeNamedList(name, val);

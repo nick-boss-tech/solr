@@ -34,6 +34,8 @@ import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.JsonTextWriter;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.common.util.SimpleOrderedMap;
+import org.apache.solr.common.util.Utils;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.search.ReturnFields;
 import org.apache.solr.search.SolrReturnFields;
@@ -380,7 +382,8 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
                   "json",
                   "json.nl",
                   JsonTextWriter.JSON_NL_ARROFNTV));
-      assertTrue(response, response.contains("\"type\":\"int\""));
+      assertNotNull(Utils.fromJSONString(response));
+      assertTrue(response, response.contains("{\"name\":\"a\",\"type\":\"int\",\"value\":1}"));
     } finally {
       assertU(delQ("id:arrntv-*"));
       assertU(commit());
@@ -410,6 +413,152 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
         "{\"nl\":[{\"name\":null,\"type\":\"int\",\"value\":42}]}",
         baos.toString(StandardCharsets.UTF_8));
     req.close();
+  }
+
+  private static final String NTV_NL_HELLO =
+      "\"nl\":[{\"name\":\"data1\",\"type\":\"str\",\"value\":\"hello\"},"
+          + "{\"name\":null,\"type\":\"int\",\"value\":42},"
+          + "{\"name\":null,\"type\":\"null\",\"value\":null}]";
+
+  private static final String NTV_NESTED =
+      "{\"outer\":[{\"name\":\"inner\",\"type\":\"lst\",\"value\":"
+          + "[{\"name\":\"a\",\"type\":\"int\",\"value\":1}]},"
+          + "{\"name\":\"map\",\"type\":\"lst\",\"value\":{\"x\":2}}]}";
+
+  private static SolrQueryResponse nestedResponse() {
+    NamedList<Object> inner = new NamedList<>();
+    inner.add("a", 1);
+    SimpleOrderedMap<Object> map = new SimpleOrderedMap<>();
+    map.add("x", 2);
+    NamedList<Object> outer = new NamedList<>();
+    outer.add("inner", inner);
+    outer.add("map", map);
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    rsp.add("outer", outer);
+    return rsp;
+  }
+
+  // A NamedList or SimpleOrderedMap used as an NTV element value needs a type of its own.
+  // Without one, the legacy writer emitted a bare array or object after "name": invalid JSON.
+  @Test
+  public void testArrntvNestedNamedListIsValidJson() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "off");
+    StringWriter buf = new StringWriter();
+    new JSONResponseWriter().write(buf, req, nestedResponse());
+    jsonEq(NTV_NESTED, buf.toString());
+    req.close();
+  }
+
+  @Test
+  public void testArrntvNestedNamedListThroughJacksonJsonWriter() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "off");
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    new JacksonJsonWriter().write(baos, req, nestedResponse());
+    jsonEq(NTV_NESTED, baos.toString(StandardCharsets.UTF_8));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvWithJsonWrfIsValidJson() throws IOException {
+    SolrQueryRequest req =
+        req(
+            "wt",
+            "json",
+            "json.nl",
+            JsonTextWriter.JSON_NL_ARROFNTV,
+            "indent",
+            "off",
+            JSONWriter.JSON_WRAPPER_FUNCTION,
+            "cb");
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    nl.add("data1", "hello");
+    nl.add(null, 42);
+    nl.add(null, null);
+    rsp.add("nl", nl);
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    new JacksonJsonWriter().write(baos, req, rsp);
+    jsonEq("cb({" + NTV_NL_HELLO + "})", baos.toString(StandardCharsets.UTF_8));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvWithIndentIsValidJson() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "on");
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    new JacksonJsonWriter().write(baos, req, nestedResponse());
+    String json = baos.toString(StandardCharsets.UTF_8);
+    assertNotNull(Utils.fromJSONString(json));
+    assertTrue(json, json.contains("\"lst\""));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvKeepsJsonContentType() throws Exception {
+    SolrQueryRequest req = req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV);
+    assertEquals(
+        JSONResponseWriter.CONTENT_TYPE_JSON_UTF8,
+        new JacksonJsonWriter().getContentType(req, new SolrQueryResponse()));
+    req.close();
+  }
+
+  @Test
+  public void testOtherStylesUnchangedThroughJacksonJsonWriter() throws IOException {
+    String[] styles =
+        new String[] {
+          JsonTextWriter.JSON_NL_FLAT,
+          JsonTextWriter.JSON_NL_MAP,
+          JsonTextWriter.JSON_NL_ARROFARR,
+          JsonTextWriter.JSON_NL_ARROFMAP
+        };
+    for (String style : styles) {
+      SolrQueryRequest req = req("wt", "json", "json.nl", style, "indent", "off");
+      SolrQueryResponse rsp = new SolrQueryResponse();
+      NamedList<Object> nl = new NamedList<>();
+      nl.add("data1", "hello");
+      nl.add(null, 42);
+      nl.add(null, null);
+      rsp.add("nl", nl);
+
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      new JacksonJsonWriter().write(baos, req, rsp);
+      StringWriter legacy = new StringWriter();
+      new JSONResponseWriter().write(legacy, req, rsp);
+      assertEquals(style, legacy.toString().trim(), baos.toString(StandardCharsets.UTF_8).trim());
+      req.close();
+    }
+  }
+
+  @Test
+  public void testXmlWriterIgnoresArrntv() throws Exception {
+    assertU(adoc("id", "arrntv-xml", "cat", "a"));
+    assertU(commit());
+    try {
+      String xml =
+          h.query(
+              "/select",
+              req(
+                  "q",
+                  "id:arrntv-xml",
+                  "rows",
+                  "0",
+                  "facet",
+                  "true",
+                  "facet.field",
+                  "cat",
+                  "wt",
+                  "xml",
+                  "json.nl",
+                  JsonTextWriter.JSON_NL_ARROFNTV));
+      assertTrue(xml, xml.contains("<response"));
+      assertTrue(xml, xml.contains("name=\"cat\""));
+    } finally {
+      assertU(delQ("id:arrntv-xml"));
+      assertU(commit());
+    }
   }
 
   @Test
