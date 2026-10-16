@@ -403,3 +403,8 @@ defect was masked. Nick approved folding the repair into the
 tolerant path as parseRouteKey instead of the cast. The PR's
 Choices will pose both folded-in production fixes as the scope
 question. Gate r5 follows the fix.
+
+## Coordinator decisions, 2026-10-16
+
+- SOLR-6831: round 3 (4afed04987b2, on top of the PR head 3e07d801df) is pushed fast-forward to solr-6831-submit, and PR #5134 is re-pointed to it. Decision by the vm2 coordinator under the decision default: the red round-2 head was the PR head with no fix that completes an omitted refinement answer; round 3 is the only head that is green on both vm1 and vm2 (TestQueryLimits 8 of 8), and skipping an omitted answer with no pivot data keeps the partialResults=false contract (header "omitted", no pivot data, request completes). The alternative, reverting to 2ee19dc646, would drop the production fix. Behavior change recorded in the PR body.
+
