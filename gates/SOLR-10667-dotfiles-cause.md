@@ -2,7 +2,7 @@
 
 - Branch: solr-10667-submit. Head: 9ce9ef1db5e9d33312ac628d2e3f0b236a474c36 (live tip, verified by ls-remote by the main agent at filing, 2026-10-14; GATE GREEN at this head per receipts/SOLR-10667.md and gates/SOLR-10667-exclusion.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-Status: OPEN
+Status: CLAIMED (claims/pool-vm2-gate-backlog-10667-cause.md, vm2, 2026-10-16)
 - Capability tags: gate, premise-run.
 - Run shape: claim first under claims/. All Gradle work runs under the host's blocking test-queue flock, one build at a time, through the host's own route per its host file (vm1: ~/workspace/tools/solr-gradle.sh, never ./gradlew; vm2: ./gradlew with the vendored JDK and GRADLE_USER_HOME under /workspace). Copy ~/workspace/solr/gradle.properties into the worktree. Distributions assemble with `:solr:packaging:installFullDist` (not `assembleDist`) and a fresh NPM_CONFIG_CACHE, as in the earlier 10667 gates. Test counts come from fresh JUnit XML only.
 
