@@ -33,3 +33,21 @@ Claim first: before any work, file a claim under claims/ naming this assignment,
 ## On completion
 
 Mark this assignment DONE and the vm2 claim DONE, naming the outcome.
+
+## Investigation outcome (vm1, 2026-10-16): test defect, escalated to the main agent
+
+Classification: the production code at head 97cd22159b is correct for the initParams case. The new test in TestInitParams is wrong in two independent ways. Per Scope item 3 the test is not changed under this assignment; the item is escalated to the main agent with this record, and the vm1 claim is marked BLOCKED with this reason. No branch commit, no push, no receipt.
+
+Finding 1, the named failure is the test's assertion shape. testUpdateJsonDocsInitParamsRejectsFieldMappings wraps handler.handleRequest(...) in expectThrows(SolrException.class, ...). RequestHandlerBase.handleRequest never propagates a handler exception: it catches Exception and records it on the response (rsp.setException). The assertion therefore fails with the same text at the base (where the loader never throws) and at the head (where the loader throws and the handler puts the exception on the response). The other tests in the same class follow the handler contract and assert on the response; JsonLoaderTest's matching test passes because it calls JsonLoader.load directly, where the exception does propagate.
+
+Finding 2, the ObjectTracker leak is a separate test defect, not a consequence of Finding 1. With the assertion corrected in a scratch probe (see below) the test passes and classMethod still fails with exactly 147 unreleased objects, whole-core objects (SolrCore, SolrIndexSearcher, NRTCachingDirectory, MockDirectoryWrapper, SolrMetricsContext). Cause: the test calls initCore twice mid-class; SolrTestCaseJ4.createCore replaces the static harness without closing the previous one, and the class teardown closes only the last harness, so the beforeClass core and the initParams-config core are never closed. No other test in the class calls initCore mid-class.
+
+Why the head is nevertheless correct, verified by run and by code. Code path: RequestHandlers.initHandlersFromConfig applies the solrconfig's initParams (path /update/json/docs) to the implicit UpdateRequestHandler's PluginInfo; RequestHandlerBase.handleRequest calls SolrPluginUtils.setDefaults, which merges those handler defaults into the request params before handleRequestBody; JsonLoader.handleSplitMode at the head reads mapUniqueKeyOnly from the request params and throws. Probe: a scratch copy of the test asserting on the response exception instead of expectThrows passed at the head with production untouched (SolrException, code 400 BAD_REQUEST, message contains "mapUniqueKeyOnly"; the explicit mapUniqueKeyOnly=false override with echo returned the mapped document). The probe edit was reverted after the run and never committed. The probe passing also settles the two open checks: solrconfig-update-json-docs-initparams.xml is loaded by the test (the true value reached the loader only from that config's initParams defaults), and the JsonLoader change covers the initParams path.
+
+Runs (vm1, seed 8240C0FFEE824001, blocking flock; log /home/hatch/workspace/tools/g8240-investigate.log, JUnit XML archived at /home/hatch/workspace/tools/g8240-runs/):
+
+- Head 97cd22159b, unmodified: TestInitParams tests=10 failures=3 (the named test with the recorded text, plus classMethod, ObjectTracker 147). Matches vm2's record exactly. In this run JsonLoaderTest was skipped wholesale in the shared JVM ("Leaked background threads present (zombies)"), a side effect of the leaked cores; vm2's run has JsonLoaderTest 33 of 33.
+- Prior gated head fad7a1dd8e: TestInitParams 7 of 7, JsonLoaderTest 32 of 32, no leak. The class was green before the new test commit.
+- Scratch probe at the head (Finding 1's corrected assertion only): the named test passes; classMethod still fails with the same 147 objects.
+
+What a fix needs (for the main agent's decision, not done here): rewrite the test to assert on the response exception (or dispatch through a path that surfaces it), and close the swapped-out harnesses (or avoid mid-class initCore) so the class teardown accounts for every core the test creates. Either change edits a test the PR body describes, so it waits for the main agent.
