@@ -1,6 +1,6 @@
 # Gate job: SOLR-8051 (live-head gate at d4fe2e6f6620)
 
-Status: CLAIMED (claims/pool-vm1-gate-8051-live-head.md)
+Status: DONE
 
 - Branch: solr-8051-submit. Head: `d4fe2e6f6620e918d29eeb63fe481cf28ec9645f` (fork tip, confirmed by ls-remote on 2026-10-16). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `65d0c968d8a41f949cf7564df896827ec112c8dc` (tree-identical to the gated head e50a2aa3437c; see receipts/SOLR-8051.md). That evidence does not cover the one commit on top of it, d4fe2e6f66, which this job gates. Merge-base with upstream/main: `cabedd1d968059215188f4e7563fb303241899ed`.
@@ -48,14 +48,21 @@ If any step cannot be verified, record it here and stop.
 
 - [x] head confirmed by ls-remote
 - [x] diff scope confirmed
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg, expected failure by content
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean
+- [x] step 2 Error Prone compile
+- [x] step 3 proof leg, expected failure by content
+- [x] step 4 focused head run, counted from fresh XML
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
+
+## Outcome (vm1, 2026-10-16): DONE, GATE GREEN at d4fe2e6f6620
+
+- Log: ~/workspace/tools/g8051-gate.log on vm1 (GATE RESULT: GREEN, GATE RUNNER DONE). JUnit XML archived at ~/workspace/tools/g8051-head-xml/ and ~/workspace/tools/g8051-proof-xml/. Seed 8051C0FFEE8051.
+- Steps: changelog YAML parse OK rc 0; tidy rc 0, post-tidy tree unchanged; Error Prone compile rc 0; focused head runs from fresh JUnit XML: ExactStatsCacheMergeTest 1 of 1, ExactStatsCacheNoAnswerTest 1 of 1, 0 failures, 0 errors, 0 skipped; module check :solr:core:check -x test rc 0; post-gate tree clean.
+- Proof leg at merge-base cabedd1d9680 production with the branch test files: ExactStatsCacheMergeTest failed with the premise NullPointerException (SolrResponse.getException at SolrResponse.java:49, from ExactStatsCache.doMergeToGlobalStats at ExactStatsCache.java:117, on a response whose body is null). ExactStatsCacheNoAnswerTest passed on base production too (1 of 1), matching the expectation recorded in this job before the run: a regression pin for the tolerant path, not a discriminator.
+- Receipt: receipts/SOLR-8051.md, new top section at d4fe2e6f6620. No branch push was needed; the head was already the fork tip and the branch was not edited.
 
 ## Deliverable and limits
 
