@@ -15,3 +15,5 @@ Status: BLOCKED at the scope stop, 2026-10-15T20:58Z. No code change and no fork
 Status: STALE (vm2 audit, 2026-10-16T00:57Z). The line 125 predicate was decided on the main side (gates/SOLR-5941-getbool-fix.md, Amendment 2026-10-15). The fix, the SolrCloud proof test and the full gate are not started. Still owed under claims/pool-vm2-open-work-list-round-1.md (section C).
 
 Status: CLAIMED (vm2, 2026-10-16T01:29Z). Resumed under claims/pool-vm2-open-work-list-round-1.md. Local fix commit 6940409879 (on a4df7bfd214b, not pushed until green). Runner gates/g5941-fix-gate.sh, seed 5941C0FFEE5941. Pre-push: the fix is a string-presence predicate on commit_end_point at factory line 125; test IgnoreCommitEndPointCloudTest with configset cloud-ignore-commit-chain.
+
+- 2026-10-16T02:01Z vm2 gate backlog coordinator: STOPPED at tidy guard (GATE INVALID, no tests run, no GATE END). Tidy changed IgnoreCommitOptimizeUpdateProcessorFactory.java; runner reverted it. Head 6940409879 unchanged. Not GREEN, not relaunched; left for the main agent.

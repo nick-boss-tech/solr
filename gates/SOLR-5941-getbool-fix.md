@@ -90,3 +90,7 @@ The new SolrCloud chain test stands as written in step 2 (a chain containing thi
 
 - Fix, local commit 6940409879 on a4df7bfd214b (fast-forward candidate; not pushed). Production: IgnoreCommitOptimizeUpdateProcessorFactory.java line 125 reads commit_end_point as a string and passes when it is present and not "false". Test: IgnoreCommitEndPointCloudTest (SolrCloudTestCase, configset cloud-ignore-commit-chain). Negative case: a plain client commit with no end point is still ignored with 403.
 - Gate: g5941-fix-gate.sh, queued behind SOLR-13943. Results to logs/vm2/5941-fix-result.txt. Push only on green.
+
+## 2026-10-16T02:01Z gate stop, tidy guard (vm2 gate backlog coordinator)
+
+Runner g5941-fix-gate.sh (started 01:45:52Z, log logs/vm2/queue-g5941-fix-gate-20261016T014552Z.out) stopped at the tidy step as GATE INVALID: tidy changed solr/core/.../IgnoreCommitOptimizeUpdateProcessorFactory.java. No test ran and no GATE END was written. The runner reverted the tidy change with git checkout; head 6940409879 is unchanged. Not GREEN, not finished, not relaunched. Per step 3, commit the tidy result on the branch and re-gate on the committed tree; left for the main agent.
