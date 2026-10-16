@@ -10,3 +10,5 @@ Heartbeat: 2026-10-10T22:15:50Z. Proof leg on base (cabedd1d96 production, branc
 
 Result 2026-10-10T22:26:52Z: GREEN at packaged head 50b1f4bcab039f8d25a729a8d02a1e8a16defd3e. Changelog OK, tidy clean, compile OK, QuerySenderListenerTest tests=2 failures=0 at head, module check rc 0. Receipt receipts/SOLR-12916.md. Config API round trip not run (stated limit). Packaging commit local only, not pushed.
 DONE: 2026-10-10T22:26:52Z (UTC), outcome GREEN.
+
+Status: RELEASED (vm2 audit, 2026-10-16T00:56Z). Premise claim from 2026-10-13 with no run since; the title-fix claim pool-vm2-gate-backlog-12916-title-fix.md is DONE. Job gates/SOLR-12916-title-fix.md still reads OPEN, unclaimed; the main agent should confirm whether it is DONE by the title-fix claim.

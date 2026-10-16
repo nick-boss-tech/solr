@@ -5,3 +5,5 @@
 - Capability tags: implementation, gate, bats.
 - Runner: /workspace/gates/g16887-gate.sh. Worktree: /workspace/gates/solr-16887-gate (detached at the head); base worktree /workspace/gates/solr-16887-base for the premise leg.
 - Status: FAILED. Run ended 2026-10-14T15:10:03Z; head BATS leg rc=1 at the same startup assertion as the premise leg (`test_start_solr.bats` line 137, empty `SOLR_PORT` in the assertion URL). Not relaunched. Record in `gates/SOLR-16887-errorfile-bats-name.md`. Left for the main agent.
+
+Status: ESCALATED to the main agent (vm2 audit, 2026-10-16T00:56Z). Head BATS leg failed at the startup assertion; not relaunched.

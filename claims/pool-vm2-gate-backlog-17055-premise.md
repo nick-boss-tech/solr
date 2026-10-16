@@ -9,3 +9,5 @@
 - Status: CLAIMED, runner queued.
 
 - 2026-10-14T10:44ZZ vm2 gate backlog coordinator: premise step DONE (not the whole job). Distributed 9 documents vs control 3 with sort=id asc at c2396f425f. Recorded in gates/SOLR-17055-sort-path.md. Fix not started.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:56Z). Gate job gates/SOLR-17055-fix-gate.md is DONE on pr-prepare; the queued runner was never started and is not run.
