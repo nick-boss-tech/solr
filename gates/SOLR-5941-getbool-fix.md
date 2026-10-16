@@ -1,7 +1,7 @@
 # Gate job: SOLR-5941 third getBool site fix (audit finding 3)
 
 - Branch: solr-5941-submit. Head: `a4df7bfd214b15d9c8d4519fdac8fd6df9468f2d` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing). The branch backs the owner's open PR at that head. If the tip has moved when claimed, stop and record the new tip here; do not run at any other head without noting it.
-Status: CLAIMED (claims/pool-vm2-gate-backlog-5941.md; resumed 2026-10-16T01:29Z; the line 125 predicate is the decided one)
+Status: DONE. GATE GREEN at 26720c7818f3, pushed to solr-5941-submit; PR #5076 body updated (receipts/SOLR-5941.md top section).
 - Capability tags: [implementation, gate].
 - Source: `audits/update-processing/SOLR-5941.md` (2026-10-15), finding 3 and readiness item 1. Read the audit in full before claiming. Per the no-new-ticket rule, this fix belongs inside this branch: no new ticket, no separate PR.
 - Current gate state (`receipts/SOLR-5941.md`): gated at the pinned head (2026-10-09): AutoCommitUpdateChainTest 2/2, CommitThroughNonLeaderTest 1/1, ParallelCommitExecutionTest 1/1, HttpPartitionOnCommitTest 1/1, module check rc=0. The receipt does not cover finding 3: no test exercises the factory below with a forwarded commit.

@@ -21,3 +21,5 @@ Status: CLAIMED (vm2, 2026-10-16T01:29Z). Resumed under claims/pool-vm2-open-wor
 - 2026-10-16T03:50:51Z gate backlog coordinator: runner g5941-fix-gate.sh (started 03:15:00Z, head 21dbf94e3f local) stopped at the Error Prone compile with rc=1; tidy rc=0; no tests run, no GATE END. Not GREEN, not relaunched by the coordinator; a further run is in queue.txt and left for the main agent. Recorded in gates/SOLR-5941-getbool-fix.md.
 
 - 2026-10-16T04:17Z gate backlog coordinator: runner g5941-fix-gate.sh at head 26720c7818 completed (GATE END 04:13:26Z). Tidy, compile, focused head and module check rc=0; fail-before proof rc=1 by design, with "invalid boolean value: replicas" at pre-fix. Not GREEN under the every-rc-0 rule and not pushed; main side to confirm fix commit (6940409879 named here vs 26720c7818 gated) and rule on the proof rc. Recorded in gates/SOLR-5941-getbool-fix.md.
+
+- Status: DONE (2026-10-16). GATE GREEN at 26720c7818f3; receipts/SOLR-5941.md.
