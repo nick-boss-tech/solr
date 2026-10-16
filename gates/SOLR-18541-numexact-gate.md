@@ -1,6 +1,6 @@
 # Gate job: SOLR-18541 (numFoundExact false on multi-sub-query merges)
 
-Status: OPEN
+Status: DONE
 
 - Branch: `combinedquerycomponent-merge-totals`. Head: `81a88e40dd42f90fe6c67b2aeb6f678c437d7c0d` (fork tip, confirmed by ls-remote on 2026-10-16). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `a93f9f6a997e748514cf2575a6e94c5f1c01f85e` (GREEN, receipts/SOLR-18541.md). Merge-base with upstream/main: `597ed67740831566b708b793f52554b2e49e7e17`.
@@ -37,3 +37,17 @@ A gate that executed tests and failed is not relaunched by the claimant. Record 
 1. Write `receipts/SOLR-18541.md` with a new top section: head, gate date and host, log path, step results, both proof legs' results (test names and failure text), and the focused counts from the fresh XML.
 2. No public text edits in this job. The PR body sentences this change falsifies are flagged to the main side by the implementing lane.
 3. Mark this job DONE and the claim DONE in the same push as the receipt.
+
+## Outcome
+
+GATE GREEN at head `81a88e40dd42f90fe6c67b2aeb6f678c437d7c0d` on vm1, 2026-10-16 (log `~/workspace/tools/g18541-numexact-gate.log`, GATE RUNNER DONE 06:39Z; XML archived at `~/workspace/tools/g18541-numexact-xml/`).
+
+- Step 0: changelog YAML parse rc=0.
+- Step 1: tidy rc=0, tree unchanged after tidy (no GATE INVALID).
+- Step 2: Error Prone compile rc=0.
+- Step 3A (merge-base production, head test file): 9 tests, 6 failures, all premise contents (approximateTotalHits 5 vs 15 and 5 vs 7; numFound 3 vs 7 and 0 vs 2; numFoundExact inverted in both directions). The new test and the two no-count/no-hits skip tests pass on base by the inverted fold, as this job's step 3 expected.
+- Step 3B (prior head production, head test file): 9 tests, exactly 1 failure, `multipleContributingSubQueriesClearExactness`, numFoundExact expected:<false> but was:<true>.
+- Step 4: focused head run 9 tests, 0 failures, 0 errors, 0 skipped, from fresh JUnit XML.
+- Step 5: module check rc=0. Post-gate tree clean.
+
+Receipt: `receipts/SOLR-18541.md`, new top section.

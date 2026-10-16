@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18541 maintainer-directed minimum change (numFoundExact false on multi-sub-query merges)
 
-Status: OPEN
+Status: DONE
 
 - Capability tags: build, gate.
 - Intended host: vm1. Claim under `claims/` before starting (WORKFLOW.md).
@@ -37,3 +37,9 @@ On PR #5117 he writes: "On the PR head, the repro above returns numFound=3, numF
 - No PR body edit, no comment, no JIRA write, no email. No force push; the branch push is a plain fast-forward.
 - Production changes stay inside `CombinedQueryComponent.java`; test changes inside `CombinedQueryComponentMergeTotalsTest.java`; plus the changelog fragment title.
 - Commit as Nick Shanin with no trailers. No em dashes.
+
+## Closing record (2026-10-16, vm1)
+
+- Implemented and pushed: head `81a88e40dd42f90fe6c67b2aeb6f678c437d7c0d` on `combinedquerycomponent-merge-totals` (plain fast-forward from `a93f9f6a997e`, ls-remote and PR API verified). Production: `CombinedQueryComponent.mergeIds` counts contributing sub-queries and clears the merged numFoundExact when more than one contributes. Tests: the two `largestSubQueryTotalWins*` tests dropped, `multipleContributingSubQueriesClearExactness` added. Changelog title extended with the one-sub-query condition.
+- Gate: GREEN under `gates/SOLR-18541-numexact-gate.md` (9 of 9 at the head; proof leg B exactly one failure, the new test, on the prior head's production; proof leg A the 6 premise failures on merge-base production). Receipt: `receipts/SOLR-18541.md` top section.
+- Flags handed to the main side: the falsified PR #5117 body sentences (the Choice's exactness question, the Proof count and head citations, the Limits sentence tying exactness to the Choice), the state of `reports/live-body-18541-prepared-round-1.md` (superseded, conflicts with the resolution), and the `simpleCombine` scope flag (named by the maintainer, not in this PR's diff, not changed).
