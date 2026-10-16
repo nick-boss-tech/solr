@@ -1,6 +1,6 @@
 # Gate job: SOLR-10424 (live-head gate at b0a03a5226)
 
-Status: CLAIMED
+Status: DONE
 
 - Branch: solr-10424-submit. Head: `b0a03a5226e64abbc1545bb6bc42db8fb73eef06` (fork tip, confirmed by ls-remote on 2026-10-15). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `0072435a9d12128d8012bec0a4146b0b2c09593b`, the history-rewrite head whose tree is identical to the gated e629ab8bb293 tree (receipts/SOLR-10424.md). Merge-base with upstream/main: `cabedd1d968059215188f4e7563fb303241899ed`.
@@ -41,16 +41,24 @@ If any step cannot be verified, record it here and stop.
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof legs, expected failures by content
-- [ ] step 4 focused head runs, counted from fresh XML
-- [ ] step 5 module checks
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean
+- [x] step 2 Error Prone compile
+- [x] step 3 proof legs, expected failures by content
+- [x] step 4 focused head runs, counted from fresh XML
+- [x] step 5 module checks
+- [x] receipt written
+- [x] job DONE, claim DONE
+
+## Outcome (vm1, 2026-10-16)
+
+GATE GREEN at b0a03a5226e64abbc1545bb6bc42db8fb73eef06. Log: ~/workspace/tools/g10424-live-gate.log (flock acquired 2026-10-16T05:52Z). Step 0 changelog parse rc 0. Step 1 tidy rc 0, tree unchanged after tidy. Step 2 Error Prone compile rc 0 for :solr:core and :solr:solrj; the unverified-commit compile risk did not materialize. Step 3 leg A: base plus the branch test file, exactly 1 failure, the designed mapUniqueKeyOnly assertFalse in testUpdateJsonDocsParamSetDoesNotDropFields. Step 3 leg B: head tree with the techproducts solrconfig.xml reverted to base, exactly 1 failure in 42 tests, testArbitraryJsonIndexing with "Document is missing mandatory uniqueKey field: id". Step 4, from fresh JUnit XML at seed 10424C0FFEE10424: TechproductsJsonDocsParamsTest 1 of 1; SolrExampleJsonTest 42 tests, 0 failures, 1 skipped. Step 5 module checks rc 0. Receipt: receipts/SOLR-10424.md, new top section.
+
+The branch tip moved to 5b087b1a389c892850401f79154824607cb338ac while this gate was queued and running (one changelog fragment title line). That head is not gated by this job; see the receipt's tip-moved note.
+
+Flagged for the main side (not edited here): PR #5159's Proof says commits b0a03a5226e and 5b087b1a389 "have not been run", and its Limits says the name queries commit b0a03a5226e adds are "not yet run". The b0a03a5226e half is now falsified by this gate; 5b087b1a389 remains ungated. The pr-prepare draft pr-drafts/search-components/SOLR-10424.md still cites head 0072435a9d12 and does not describe the json-docs-uuid chain; the live PR body is ahead of it.
 
 ## Deliverable and limits
 
