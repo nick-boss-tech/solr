@@ -1,9 +1,9 @@
 # Gate job: SOLR-4754 text fixes and premise run
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm1-gate-4754.md)
 
 - Branch: solr-4754-submit. Live tip: e4ea4bfde80ea027f005fe138b0285f6c2e5a689 (ls-remote, 2026-10-14). Gated head: the same (receipts/SOLR-4754.md, GATE GREEN 2026-10-11, compile-level proof shape).
-- Filed by: the Windows review lane, 2026-10-14. Status: OPEN, not claimed.
+- Filed by: the Windows review lane, 2026-10-14. Claimed by vm1 on 2026-10-15 (claims/pool-vm1-gate-4754.md).
 - Intended host: a Linux host with the Gradle toolchain (capability tag: gate), under the WORKFLOW.md claim rules. Windows does not build.
 - Decision recorded: keep the scheme-only guard and its link. Recommendation in material/solrcloud-round-1-answers.md (SOLR-4754 section), adopted under the decision default. The disclosure that the ticket's empty value already falls back is in pr-drafts/solrcloud/SOLR-4754.md.
 - Why: the text fixes and the premise run are owed per that answers section and part p5 findings 2, 3 and 4. None of them is in the gated head. The draft stays on HOLD until this job lands.

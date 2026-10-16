@@ -1,6 +1,6 @@
 # Assignment: SOLR-13059 diagnosis, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-solr-13059-diagnosis-round-1.md)
 
 Capability tags: [gate, premise-run]. Intended host: either Linux host (vm1 or vm2); Windows never claims build work. Posted by the main side, 2026-10-14, at Nick's direction: the diagnosis he was offered as a go or no-go is posted to the pool as an assignment instead.
 
