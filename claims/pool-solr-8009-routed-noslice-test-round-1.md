@@ -1,0 +1,7 @@
+# Claim: SOLR-8009 routed no-slice real-time-get test, round 1 (vm1)
+
+- Claimed: 2026-10-16T17:33Z by vm1. Assignment: assignments/pool-solr-8009-routed-noslice-test-round-1.md (branch solr-8009-submit at e600375aaee30d66694b69e1d05e276801327e73, confirmed by ls-remote at claim time; pre-delta head 8795661ddc98c8bffdb8db49a7dd5f293216e929; merge-base 14c7aac0d151402b00259e2fb9bf5eed7049ec5d). Handed from vm2 to vm1 in assignments/pool-vm2-handoff-to-vm1-round-2.md item 3.
+- Capability tags: implementation, gate. Host: vm1. Seed 8009C0FFEE8009.
+- Coordination check at claim time: the full gate job gates/SOLR-8009.md at the same head is DONE (its claim claims/pool-vm2-gate-backlog-8009-head-e600375.md is DONE, green 2026-10-15T07:58Z), so no gate is active at this head and this test lands next, per the assignment's coordination section.
+- Scope on this claim: write the routed no-slice test, prove it discriminates against the pre-delta head, gate the landing (tidy, Error Prone compile, the four focused classes, module check), push the branch on green, refresh receipts/SOLR-8009.md. The PR body edit the assignment's step 4 names is NOT done on this claim; the main side handles it after this lane reports. What the body will need: the Limits entry naming the untested routed no-slice case is superseded by the new test, and the Proof should name the new test and its discrimination evidence at the new head.
+- Status: CLAIMED, work starting.
