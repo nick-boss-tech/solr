@@ -1,7 +1,7 @@
 # Gate job: SOLR-13943 recorded normal-mode run of the moved class on the stacked tree
 
 - Branch: solr-13943-submit. Head pinned at filing: `ca443f6f680606b6c995ae86b88b4841b53addbf` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-13943.md`). The branch stacks on the SOLR-13696 repair: repair head `1d0b8a0a73cd` is in its ancestry.
-Status: DONE (recorded normal-mode run GREEN on vm1 at the pinned head, 2026-10-16; see the outcome section at the end of this file)
+Status: DONE. Normal-mode run GREEN at ca443f6f68 (receipts/SOLR-13943.md, top section): the moved class ran and passed, 1 of 1.
 - Capability tags: gate.
 - Job type: a gate-shaped recorded run at the pinned head, whose required deliverable is the normal-mode run of the moved class. No implementation step, no push, no rebase under this job.
 
