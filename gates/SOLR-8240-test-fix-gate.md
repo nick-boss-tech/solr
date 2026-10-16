@@ -1,8 +1,8 @@
 # Gate job: SOLR-8240 (test fix for the initParams rejection test)
 
-Status: CLAIMED (claims/pool-vm1-solr-8240-head-failure-round-1.md)
+Status: DONE
 
-- Branch: solr-8240-submit. Head: `78ecddf01f5c76736d415b9d031095f22aa38b17` (committed on vm1, not yet pushed; the fork tip stays at `97cd22159ba0d2dd2de9f8a5bdb52de93bd2bffa` until this gate is green and the push step runs).
+- Branch: solr-8240-submit. Head: `78ecddf01f5c76736d415b9d031095f22aa38b17` (committed on vm1; pushed to the fork on green, see the run record at the end of this file).
 - Prior gated head: `fad7a1dd8e2397330e0973e809aeba60490d2f08`. Merge-base with upstream/main: `e432df19c4a50b9d54d7fba545397b859cc54f98`.
 - Intended host: vm1, the fix lane under assignments/pool-vm1-solr-8240-head-failure-round-1.md (main-agent decision of 2026-10-16T02:19Z in that file).
 - Capability tags: gate.
@@ -46,16 +46,24 @@ If any step cannot be verified, record it here and stop.
 
 ## Checklist
 
-- [ ] head confirmed: local commit `78ecddf01f` on top of `97cd22159b`, fork tip unchanged until the push step
-- [ ] diff scope confirmed: 1 file, test only, against `97cd22159b`
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean (GATE INVALID guard)
-- [ ] step 2 Error Prone compile
-- [ ] step 3 focused head run, counted from fresh XML
-- [ ] step 4 module check
-- [ ] branch pushed on green, verified by ls-remote
-- [ ] receipt written
-- [ ] job DONE, assignment DONE, both claims DONE
+- [x] head confirmed: local commit `78ecddf01f` on top of `97cd22159b`, fork tip unchanged until the push step
+- [x] diff scope confirmed: 1 file, test only, against `97cd22159b`
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean (GATE INVALID guard)
+- [x] step 2 Error Prone compile
+- [x] step 3 focused head run, counted from fresh XML
+- [x] step 4 module check
+- [x] branch pushed on green, verified by ls-remote
+- [x] receipt written
+- [x] job DONE, assignment DONE, both claims DONE
+
+## Gate run record, vm1, 2026-10-16
+
+- Run: gate log `~/workspace/tools/g8240-fix-gate.log` on vm1, runner `~/workspace/tools/g8240-fix-gate.sh`, head `78ecddf01f5c76736d415b9d031095f22aa38b17`, seed `8240C0FFEE824001`. GATE GREEN.
+- Step 0 changelog parse: rc=0. Step 1 tidy: rc=0, tree unchanged after tidy (guard passed, `gradle/libs.versions.toml` restored). Step 2 Error Prone compile: rc=0. Step 4 module check: rc=0. Final tree clean.
+- Step 3 focused head run: rc=0. Fresh JUnit XML (archived at `~/workspace/tools/g8240-fix-runs/` on vm1): TestInitParams tests=8, skipped=0, failures=0, errors=0, with no ObjectTracker "not released" text in the class output, so the classMethod check passes and the harness leak is gone; JsonLoaderTest tests=33, failures=0 (33 of 33).
+- Push: on green, `78ecddf01f` was pushed to fork `solr-8240-submit` as a plain fast-forward from `97cd22159b` and verified by ls-remote.
+- Receipt: receipts/SOLR-8240.md, new top section at this head. This job, the assignment, and both claims are marked DONE in the same push sequence.
 
 ## Deliverable and limits
 

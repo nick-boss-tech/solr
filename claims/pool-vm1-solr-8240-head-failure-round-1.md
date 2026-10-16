@@ -1,7 +1,7 @@
 # Claim: pool-vm1-solr-8240-head-failure-round-1
 
 - Claimant host: vm1, matching `hosts/vm1.md`.
-- Status: ACTIVE (reopened 2026-10-16T02:19Z). Investigation complete: the head failure is a defect in the new TestInitParams test, in two independent parts, and the production code at 97cd22159b is correct. The main agent settled the escalation the same night (see the assignment's "Main-agent decision" section): the test fix proceeds on vm1 under this claim, followed by a new gate job and the full gate at the new head. Record: assignments/pool-vm1-solr-8240-head-failure-round-1.md, section "Investigation outcome (vm1, 2026-10-16)", and gates/SOLR-8240.md, section "Head-failure investigation, vm1, 2026-10-16".
+- Status: DONE (2026-10-16). The test fix is committed as 78ecddf01f5c76736d415b9d031095f22aa38b17 on solr-8240-submit, gated green on vm1 under gates/SOLR-8240-test-fix-gate.md, pushed to the fork and verified by ls-remote; receipt at receipts/SOLR-8240.md. Earlier record: investigation complete: the head failure is a defect in the new TestInitParams test, in two independent parts, and the production code at 97cd22159b is correct. The main agent settled the escalation the same night (see the assignment's "Main-agent decision" section): the test fix proceeds on vm1 under this claim, followed by a new gate job and the full gate at the new head. Record: assignments/pool-vm1-solr-8240-head-failure-round-1.md, section "Investigation outcome (vm1, 2026-10-16)", and gates/SOLR-8240.md, section "Head-failure investigation, vm1, 2026-10-16".
 - Job or assignment: `assignments/pool-vm1-solr-8240-head-failure-round-1.md`.
 - Slice: the whole assignment.
 - Capability tags used: implementation, gate.
@@ -14,3 +14,5 @@ Heartbeat: 2026-10-16T02:19:27Z (main-agent decision recorded in the assignment:
 Heartbeat: 2026-10-16T02:47:36Z (test fix committed on vm1 as 78ecddf01f5c76736d415b9d031095f22aa38b17 on solr-8240-submit, test code only, tidy clean, not pushed; gate job filed at gates/SOLR-8240-test-fix-gate.md; full gate at the new head is next)
 
 Scope note: find why the head at 97cd22159b does not reject the initParams field-mapping case; fix production and re-gate if the head is wrong, escalate to the main agent if the test is wrong. The vm2 claim claims/pool-vm2-gate-backlog-8240.md stays open until this assignment is DONE, per the assignment.
+Heartbeat: 2026-10-16T03:23:02Z (gate GREEN at 78ecddf01f: TestInitParams 8 of 8 with no ObjectTracker leak, JsonLoaderTest 33 of 33, all steps rc=0; branch pushed to fork solr-8240-submit and verified by ls-remote)
+DONE: 2026-10-16T03:23:02Z, new head 78ecddf01f5c76736d415b9d031095f22aa38b17. Receipt receipts/SOLR-8240.md; gate record gates/SOLR-8240-test-fix-gate.md.

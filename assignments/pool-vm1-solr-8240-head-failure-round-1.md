@@ -1,6 +1,6 @@
 # Assignment: SOLR-8240 head failure, round 1
 
-Status: CLAIMED (claims/pool-vm1-solr-8240-head-failure-round-1.md)
+Status: DONE
 
 Capability tags: [implementation, gate]. Intended host: vm1. Posted by the vm2 gate backlog coordinator on 2026-10-15T17:42:52Z, after the vm2 gate at the head failed. Per the failed-run rule, vm2 does not relaunch the gate.
 
@@ -62,3 +62,7 @@ Fix both defects in TestInitParams, test code only:
 2. Fix the harness leak: account for every harness the class creates (close the swapped-out harnesses, or restructure so no mid-class initCore swap leaks), so classMethod reports no unreleased objects. Both solrconfig variants stay exercised.
 
 Then file a new gate job for the resulting head (gates/ directory, naming the branch, the new head, the focused classes TestInitParams and JsonLoaderTest, and seed 8240C0FFEE824001), run the full hardening gate at that head, and push the fix commit to solr-8240-submit only on green (plain fast-forward). On green: write receipts/SOLR-8240.md at the new head, mark this assignment DONE, and mark both claims (claims/pool-vm1-solr-8240-head-failure-round-1.md and claims/pool-vm2-gate-backlog-8240.md) DONE naming the new head. Flag in the lane's report any PR body sentence the test fix falsifies; body edits stay with the main side.
+
+## Completion (vm1, 2026-10-16): test fix gated green and pushed
+
+DONE. The test fix authorized above is committed as 78ecddf01f5c76736d415b9d031095f22aa38b17 on solr-8240-submit (test code only, 1 file, TestInitParams.java; production byte-identical to 97cd22159b) and pushed to the fork as a plain fast-forward, verified by ls-remote. The named test now asserts on the response exception (SolrException, code 400, message naming mapUniqueKeyOnly; the explicit mapUniqueKeyOnly=false override case and its expectation are unchanged), and the test closes each swapped-out harness with deleteCore() so both solrconfig variants stay exercised and no harness leaks. Gate: gates/SOLR-8240-test-fix-gate.md, run on vm1 (log g8240-fix-gate.log, seed 8240C0FFEE824001): changelog parse rc=0, tidy clean with the tree unchanged, Error Prone compile rc=0, focused run green from fresh JUnit XML (TestInitParams tests=8 failures=0 errors=0 with no ObjectTracker leak; JsonLoaderTest 33 of 33), module check rc=0. Receipt: receipts/SOLR-8240.md at the new head. Both claims (claims/pool-vm1-solr-8240-head-failure-round-1.md and claims/pool-vm2-gate-backlog-8240.md) are marked DONE naming this head.
