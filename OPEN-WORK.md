@@ -1,8 +1,8 @@
 # Open work
 
-This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/` (regenerated 2026-10-16, from pr-prepare tip 1a46e300dc). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
+This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/` (regenerated 2026-10-16, from pr-prepare tip b6a3744608). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
 
-Counts at generation: 6 open assignments, 3 open gate jobs, 14 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
+Counts at generation: 5 open assignments, 3 open gate jobs, 11 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
 
 ## Open assignments
 
@@ -13,10 +13,6 @@ Counts at generation: 6 open assignments, 3 open gate jobs, 14 claimed files, 5 
 ### Intended host: Windows (review coordinator), or the main side for items marked owner
 
 - `assignments/pool-vm2-open-decisions-round-1.md`: Pool assignment: open decisions from the vm2 queue, round 1
-
-### Intended host: either Linux host (vm1 or vm2)
-
-- `assignments/pool-solr-9396-distrib-row-field-round-1.md`: Pool assignment: SOLR-9396 distributed row-field test, round 1
 
 ### Intended host: either Linux host (vm1 or vm2); Windows never claims build work
 
@@ -43,7 +39,6 @@ Counts at generation: 6 open assignments, 3 open gate jobs, 14 claimed files, 5 
 - `assignments/pool-merged-pr-followup-promises-round-1.md`: claim `claims/pool-merged-pr-followup-promises-round-1.md`. Pool assignment: audit of merged PR descriptions for follow-up promises, round 1
 - `assignments/pool-retire-round-final-reports-round-1.md`: claim `claims/pool-retire-round-final-reports-round-1.md`. Pool assignment: retire candidates, final evidence packs, round 1
 - `assignments/pool-strong-review-round-2-unblocked-slices.md`: claim `claims/pool-strong-review-round-2-unblocked-slices.md`. Pool assignment: strong review round 2, the unblocked slices
-- `assignments/pool-vm1-solr-8240-head-failure-round-1.md`: claim `claims/pool-vm1-solr-8240-head-failure-round-1.md`. Assignment: SOLR-8240 head failure, round 1
 - `assignments/pool-vm2-finish-list-round-1.md`: claim `claims/pool-vm2-finish-list-round-1-a.md`. Assignment: vm2 finish list, round 1
 - `assignments/pool-vm2-open-work-list-round-1.md`: claim `claims/pool-vm2-open-work-list-round-1.md`. Assignment: vm2 open-work list, round 1
 - `assignments/solr-13696-fix-project.md`: claim `claims/solr-13696-fix-project.md`. Assignment: SOLR-13696 fix project (repair the re-enabled routed-alias tests)
@@ -51,8 +46,6 @@ Counts at generation: 6 open assignments, 3 open gate jobs, 14 claimed files, 5 
 - `gates/SOLR-15712-udvas-version-gate.md`: claim `claims/pool-vm2-gate-backlog-15712.md`. Gate job: SOLR-15712 version-gated useDocValuesAsStored refusal (ICU rule on the core CollationField), with the changelog title to match
 - `gates/SOLR-16887-errorfile-bats-name.md`: claim `claims/pool-vm2-gate-backlog-16887.md`. Gate job: SOLR-16887 restore -XX:ErrorFile, rename the BATS test, then the gate and BATS run at the new head
 - `gates/SOLR-17055-sort-path.md`: claim `claims/pool-vm2-gate-backlog-17055-fix.md`. Gate job: SOLR-17055 sort path (premise run first, then fix and gate)
-- `gates/SOLR-5941-getbool-fix.md`: claim `claims/pool-vm2-gate-backlog-5941.md`. Gate job: SOLR-5941 third getBool site fix (audit finding 3)
-- `gates/SOLR-8240-test-fix-gate.md`: claim `claims/pool-vm1-solr-8240-head-failure-round-1.md`. Gate job: SOLR-8240 (test fix for the initParams rejection test)
 - `gates/SOLR-8628-packaging.md`: claim `claims/pool-vm2-gate-backlog-8628-packaging.md`. Gate job: SOLR-8628, packaging and top-up gate
 
 ## Unconfirmed
