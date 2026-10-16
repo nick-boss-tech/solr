@@ -11,3 +11,5 @@ Claimed 2026-10-15T20:48Z by the vm2 gate backlog coordinator.
 Scope: the one-line string compare at IgnoreCommitOptimizeUpdateProcessorFactory.java line 125, a SolrCloud chain test for a forwarded commit with commit_end_point=replicas, then the full gate of the job file. On green the job file's push and receipt refresh apply. Stop rule per the job file, step 1.
 
 Status: BLOCKED at the scope stop, 2026-10-15T20:58Z. No code change and no fork push were made. The predicate for line 125 is an owner decision, recorded in gates/SOLR-5941-getbool-fix.md under Stop.
+
+Status: STALE (vm2 audit, 2026-10-16T00:57Z). The line 125 predicate was decided on the main side (gates/SOLR-5941-getbool-fix.md, Amendment 2026-10-15). The fix, the SolrCloud proof test and the full gate are not started. Still owed under claims/pool-vm2-open-work-list-round-1.md (section C).

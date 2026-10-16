@@ -11,3 +11,5 @@ Heartbeat: 2026-10-11T22:02Z.
 Heartbeat: 2026-10-11T22:04Z. Gate started (runner /workspace/gates/g4754-gate.sh, log /workspace/gates/logs/vm2/4754-gate.out).
 Heartbeat: 2026-10-11T22:30Z. Gate GREEN (GATE END 22:29:30Z). Receipt receipts/SOLR-4754.md written at e4ea4bfde80ea027f005fe138b0285f6c2e5a689.
 DONE: 2026-10-11T22:31Z. Deliverables: receipts/SOLR-4754.md, gates/SOLR-4754.md, packaged head e4ea4bfde80ea027f005fe138b0285f6c2e5a689.
+
+Status: STALE (vm2 audit, 2026-10-16T00:57Z). Claimed 2026-10-11; last log 2026-10-11 22:29Z and no queue entry. Still owed under claims/pool-vm2-open-work-list-round-1.md (section A item 3); not being worked yet.
