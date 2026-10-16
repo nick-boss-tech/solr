@@ -32,8 +32,8 @@ import org.junit.Test;
 /**
  * Runs json.nl=arrntv through a SolrCloud collection with two shards. The coordinator writes the
  * final response, so facet and terms output must be valid JSON on the default writer (no wt) and on
- * an explicit wt=json. Each shard holds part of the data, so the counts and statistics below are the
- * merged totals.
+ * an explicit wt=json. Each shard holds part of the data, so the counts and statistics below are
+ * the merged totals.
  */
 public class JacksonJsonWriterArrntvCloudTest extends SolrCloudTestCase {
 
@@ -123,15 +123,6 @@ public class JacksonJsonWriterArrntvCloudTest extends SolrCloudTestCase {
   @Test
   public void testTermsTtfWithWtJsonAcrossShards() throws Exception {
     assertTermStats(
-        get(
-            "/terms",
-            "terms.fl",
-            "cat_s",
-            "terms.ttf",
-            "true",
-            "wt",
-            "json",
-            "json.nl",
-            "arrntv"));
+        get("/terms", "terms.fl", "cat_s", "terms.ttf", "true", "wt", "json", "json.nl", "arrntv"));
   }
 }
