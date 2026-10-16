@@ -98,3 +98,15 @@ Runner g5941-fix-gate.sh (started 01:45:52Z, log logs/vm2/queue-g5941-fix-gate-2
 ## 2026-10-16T03:50:51Z gate run stop, compile step (gate backlog coordinator)
 
 Runner g5941-fix-gate.sh (started 03:15:00Z, log logs/vm2/queue-g5941-fix-gate-20261016T031500Z.out) ran at local head 21dbf94e3f (pre-fix a4df7bfd214b, 4 files, 138 insertions). Tidy rc=0 with a clean tree. The Error Prone compile returned rc=1; no test ran and no GATE END was written. The log ends at the proof-leg step. Not GREEN, not finished, not relaunched by the coordinator. The head differs from the claim's local commit 6940409879; the main side should confirm which commit the fix is.
+
+## 2026-10-16T04:17Z gate result, not pushed (gate backlog coordinator)
+
+Runner g5941-fix-gate.sh (started 03:53:00Z, log logs/vm2/queue-g5941-fix-gate-20261016T035300Z.out, results logs/vm2/5941-fix-result.txt) ran at local head 26720c7818, one commit on fork tip a4df7bfd21 (factory line 125 now a presence-and-not-"false" check, plus IgnoreCommitEndPointCloudTest and the cloud-ignore-commit-chain configset). Results:
+
+- tidy rc=0, tree clean after tidy.
+- compile-errorprone rc=0.
+- fail-before proof rc=1 (expected nonzero): IgnoreCommitEndPointCloudTest 2 tests, 1 failure, testForwardedCommitWithReplicasEndPointPassesIgnoreFactory, "invalid boolean value: replicas" at pre-fix a4df7bfd21. This matches step 2's by-content proof.
+- focused head rc=0, counted from fresh XML (04:06-04:09Z): IgnoreCommitEndPointCloudTest 2/0 failures, CommitThroughNonLeaderTest 1/0, HttpPartitionOnCommitTest 1/0, ParallelCommitExecutionTest 1/0, AutoCommitUpdateChainTest 2/0, IgnoreCommitOptimizeUpdateProcessorFactoryTest 1/0.
+- module check rc=0.
+
+Not marked GREEN: the coordinator rule requires every rc line to be 0, and the proof rc is nonzero by design. Not pushed to solr-5941-submit (live PR branch). Two items for the main side before any push: confirm the fix commit (the claim names 6940409879; the gated head is 26720c7818), and rule on the proof rc. Receipt and PR draft untouched; not relaunched.
