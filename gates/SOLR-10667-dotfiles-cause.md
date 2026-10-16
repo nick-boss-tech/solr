@@ -48,3 +48,16 @@ The first run (vm2, 2026-10-15T02:05:07Z to 02:18:24Z) captured Gradle `--info` 
 - [ ] BATS check 'ltr module ships its example directory' at the new head, counted from fresh JUnit XML (after a branch change only)
 - [ ] changelog YAML parse; tidy clean (GATE INVALID guard) (after a branch change only)
 - [ ] receipt refreshed, draft updated, job and claim DONE
+
+## Run record, vm2, 2026-10-16T05:59Z: trace stopped at the module packaging step; the rule that writes the example directory was not located
+
+- Head 9ce9ef1db5e9 (ls-remote at run start). Runner gates/g10667-cause.sh; log logs/vm2/10667-cause-result.txt; module log logs/vm2/10667-cause-module.log; distribution log logs/vm2/10667-cause-dist.log; step 1b log logs/vm2/10667-cause-dist-1b.log; --info log logs/vm2/10667-ltr-info.log (fresh npm cache, vendored JDK).
+- Presence (step 1):
+  - Source: solr/modules/ltr/example/.gitignore present (tracked, 12 bytes).
+  - Module packaging output, :solr:modules:ltr:assemblePackaging: solr/modules/ltr/build/packaging/ltr/example/ holds README.md, config.json, exampleFeatures.json, libsvm_formatter.py, train_and_upload_demo_model.py and user_queries.txt. The .gitignore is absent. The drop is therefore at or before this step, not in the distribution copy.
+  - Distribution, :solr:packaging:installFullDist: solr/packaging/build/solr-11.0.0-SNAPSHOT/modules/ltr/example/ holds the same six files. The .gitignore is absent (confirmed again, rc 0).
+- Mechanism: not isolated. The --info run shows that :solr:modules:ltr:assemblePackaging rebuilds its destinationDir (build/packaging/ltr/example and its files) as a task output. But no copy rule that adds an example directory to the module packaging was found at head 9ce9ef1db5e9 in build.gradle, settings.gradle, gradle/solr/packaging.gradle, solr/modules/ltr/build.gradle, solr/packaging/build.gradle or solr/example/build.gradle. The exclude that this job names (solrclient/** in gradle/solr/packaging.gradle) does not appear in any build script at this head. The premise references in this job file therefore do not match the head's build text.
+- Step 1b (liblinear link): with a probe link modules/ltr/example/liblinear to a local directory (removed afterward), the distribution holds modules/ltr/example/liblinear as a copied directory, not a link. The distribution dereferences the link and copies its contents.
+- Branch change: none. The cause is not in the two named files, so this is the NO BRANCH CHANGE path only once the responsible rule is named; that is not yet done.
+- Status: BLOCKED for the cause (not DONE). Next step for the main agent or vm1: find the rule that feeds the module packaging's example directory (for example with `:solr:modules:ltr:assemblePackaging --debug` and the Sync task's source list), and confirm whether this job's premise references are stale.
+
