@@ -1,8 +1,8 @@
 # Open work
 
-This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/`, per the census of 2026-10-15 (regenerated 2026-10-15, from pr-prepare tip 3510ebbe29). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
+This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/`, per the census of 2026-10-15 (regenerated 2026-10-15, from pr-prepare tip 86697a0bc6). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
 
-Counts at generation: 7 open assignments, 11 open gate jobs, 14 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
+Counts at generation: 7 open assignments, 6 open gate jobs, 13 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
 
 ## Open assignments
 
@@ -27,47 +27,39 @@ Counts at generation: 7 open assignments, 11 open gate jobs, 14 claimed files, 5
 
 ## Open gate jobs
 
-### Intended host: not stated
-
-- `gates/SOLR-10627-sec-r1-02-title.md`: Gate job: SOLR-10627 SEC-R1-02 changelog title (landing and parse)
-  - Attachment: `gates/SOLR-10627-sec-r1-02-title.patch` (a patch file; it inherits this job's status and is not stamped separately)
-- `gates/SOLR-11678-sec-r1-07-keystore-reading.md`: Reading job: SOLR-11678 SEC-R1-07, keystore type of the standalone premise run
-- `gates/SOLR-15106-claim-verification.md`: Premise job: SOLR-15106 claim verification, the 1200 queued messages figure
-- `gates/SOLR-8088-tidy-fix.md`: SOLR-8088 tidy fix and re-gate
-
 ### Intended host: any capable Linux host
 
 - `gates/SOLR-10667-dotfiles-cause.md`: Gate job: SOLR-10667 example `.gitignore` in the distribution (cause trace, then the fix decision from gates/SOLR-10667-dotfiles.md)
-- `gates/SOLR-13943-stacked-run.md`: Gate job: SOLR-13943 recorded normal-mode run of the moved class on the stacked tree
 - `gates/SOLR-16725-branch-edits-topup-gate.md`: Gate job: SOLR-16725 recorded branch edits and top-up gate at the moved head
+
+### Intended host: a Linux host
+
+- `gates/SOLR-16290-fix.md`: Gate job: SOLR-16290 real facet fix (funded by standing calls round 1, item 4)
+- `gates/SOLR-4754-text-fixes-and-premise.md`: Gate job: SOLR-4754 text fixes and premise run
 
 ### Intended host: vm2
 
 - `gates/SOLR-17733-title-narrowing-round-1-gate.md`: Gate job: SOLR-17733 changelog title narrowing (round 1)
-  - Attachment: `gates/SOLR-17733-title-narrowing-round-1.patch` (a patch file; it inherits this job's status and is not stamped separately)
 
-### Intended host: a Linux host
+### Intended host: not stated
 
-- `gates/SOLR-12651-title.md`: Gate job: SOLR-12651 changelog title correction, title stated inline
-- `gates/SOLR-16290-fix.md`: Gate job: SOLR-16290 real facet fix (funded by standing calls round 1, item 4)
-- `gates/SOLR-4754-text-fixes-and-premise.md`: Gate job: SOLR-4754 text fixes and premise run
+- `gates/SOLR-13943-stacked-run.md`: Gate job: SOLR-13943 recorded normal-mode run of the moved class on the stacked tree
 
 ## Claimed work
 
-- `assignments/pool-merged-pr-followup-promises-round-1.md`: claim `claims/pool-merged-pr-followup-promises-round-1.md`, heartbeat 2026-10-15T18:50:00Z; claim file records DONE (2026-10-15, coordinator, verified). Pool assignment: audit of merged PR descriptions for follow-up promises, round 1
-- `assignments/pool-retire-round-final-reports-round-1.md`: claim `claims/pool-retire-round-final-reports-round-1.md`, heartbeat 2026-10-15T18:50:00Z; claim file records DONE (2026-10-15, coordinator). Pool assignment: retire candidates, final evidence packs, round 1
-- `assignments/pool-strong-review-round-2-unblocked-slices.md`: claim `claims/pool-strong-review-round-2-unblocked-slices.md`, heartbeat 2026-10-15T18:50:00Z; claim file records DONE (2026-10-15T19:20Z, subagent hand-back, verified by the coordinator). Pool assignment: strong review round 2, the unblocked slices
-- `assignments/pool-vm2-finish-list-round-1.md`: claim `claims/pool-vm2-finish-list-round-1-a.md`, claimed 2026-10-14T23:26Z. Assignment: vm2 finish list, round 1
+- `assignments/pool-merged-pr-followup-promises-round-1.md`: claim `claims/pool-merged-pr-followup-promises-round-1.md`. Pool assignment: audit of merged PR descriptions for follow-up promises, round 1
+- `assignments/pool-retire-round-final-reports-round-1.md`: claim `claims/pool-retire-round-final-reports-round-1.md`. Pool assignment: retire candidates, final evidence packs, round 1
+- `assignments/pool-strong-review-round-2-unblocked-slices.md`: claim `claims/pool-strong-review-round-2-unblocked-slices.md`. Pool assignment: strong review round 2, the unblocked slices
+- `assignments/pool-vm2-finish-list-round-1.md`: claim `claims/pool-vm2-finish-list-round-1-a.md`. Assignment: vm2 finish list, round 1
+- `assignments/pool-vm2-open-work-list-round-1.md`: claim `claims/pool-vm2-open-work-list-round-1.md`. Assignment: vm2 open-work list, round 1
 - `assignments/solr-13696-fix-project.md`: claim `claims/solr-13696-fix-project.md`. Assignment: SOLR-13696 fix project (repair the re-enabled routed-alias tests)
-- `gates/SOLR-12245-delta-gate.md`: claim `claims/pool-vm2-gate-backlog-12245.md`, claimed 2026-10-15T23:07:28Z. Gate job: SOLR-12245 delta review of the live head's new commit, the coordinator log check, and a gate at the live head
-- `gates/SOLR-15712-udvas-test-fix.md`: claim `claims/pool-vm2-gate-backlog-15712.md`, heartbeat 2026-10-14T13:03:00Z. Fix for the SOLR-15712 version gate: corrected TestCollationFieldUDVAS
-- `gates/SOLR-15712-udvas-version-gate.md`: claim `claims/pool-vm2-gate-backlog-15712.md`, heartbeat 2026-10-14T13:03:00Z. Gate job: SOLR-15712 version-gated useDocValuesAsStored refusal (ICU rule on the core CollationField), with the changelog title to match
-- `gates/SOLR-16887-errorfile-bats-name.md`: claim `claims/pool-vm2-gate-backlog-16887.md`, claimed 2026-10-14T14:06:07Z. Gate job: SOLR-16887 restore -XX:ErrorFile, rename the BATS test, then the gate and BATS run at the new head
-- `gates/SOLR-17055-sort-path.md`: claim `claims/pool-vm2-gate-backlog-17055-fix.md`, claimed 2026-10-14T10:34:37Z. Gate job: SOLR-17055 sort path (premise run first, then fix and gate)
-- `gates/SOLR-5941-getbool-fix.md`: claim `claims/pool-vm2-gate-backlog-5941.md`, claimed 2026-10-15T20:48Z; the 2026-10-15 scope stop is discharged by the predicate amendment in the job file. Gate job: SOLR-5941 third getBool site fix (audit finding 3)
-- `gates/SOLR-7520.md`: claim `claims/pool-vm2-gate-backlog-7520.md`, claimed 2026-10-15T23:06:44Z. Gate job: SOLR-7520 (distributed grouping completes the post filter on shards)
-- `gates/SOLR-8628-packaging.md`: claim `claims/pool-vm2-gate-backlog-8628-packaging.md`, claimed 2026-10-14T21:52Z. Gate job: SOLR-8628, packaging and top-up gate
-- `gates/SOLR-8954-fullsolrcloud-rtg.md`: claim `claims/pool-vm2-gate-backlog-8954.md`, claimed 2026-10-14T10:03Z. Run job: SOLR-8954 measured run of the existing composite-router RTG test (premise-run)
+- `gates/SOLR-15712-udvas-test-fix.md`: claim `claims/pool-vm2-gate-backlog-15712.md`. Fix for the SOLR-15712 version gate: corrected TestCollationFieldUDVAS
+- `gates/SOLR-15712-udvas-version-gate.md`: claim `claims/pool-vm2-gate-backlog-15712.md`. Gate job: SOLR-15712 version-gated useDocValuesAsStored refusal (ICU rule on the core CollationField), with the changelog title to match
+- `gates/SOLR-16887-errorfile-bats-name.md`: claim `claims/pool-vm2-gate-backlog-16887.md`. Gate job: SOLR-16887 restore -XX:ErrorFile, rename the BATS test, then the gate and BATS run at the new head
+- `gates/SOLR-17055-sort-path.md`: claim `claims/pool-vm2-gate-backlog-17055-fix.md`. Gate job: SOLR-17055 sort path (premise run first, then fix and gate)
+- `gates/SOLR-5941-getbool-fix.md`: claim `claims/pool-vm2-gate-backlog-5941.md`. Gate job: SOLR-5941 third getBool site fix (audit finding 3)
+- `gates/SOLR-8628-packaging.md`: claim `claims/pool-vm2-gate-backlog-8628-packaging.md`. Gate job: SOLR-8628, packaging and top-up gate
+- `gates/SOLR-8954-fullsolrcloud-rtg.md`: claim `claims/pool-vm2-gate-backlog-8954.md`. Run job: SOLR-8954 measured run of the existing composite-router RTG test (premise-run)
 
 ## Unconfirmed
 
