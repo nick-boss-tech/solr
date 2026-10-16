@@ -6,4 +6,4 @@
 - Runner: gates/g8954-gate.sh, worktree /workspace/gates/solr-8954-gate (detached).
 - Status: FAILED at head (rc=1, FullSolrCloudDistribCmdsTest assertion expected:<0> but was:<1>; base rc=0 pass). Recorded in the job file for the main agent. Not relaunched.
 
-Status: ESCALATED to the main agent (vm2 audit, 2026-10-16T00:56Z). The gate executed tests and failed; not relaunched. Job gates/SOLR-8954-fullsolrcloud-rtg.md still reads CLAIMED until the main agent rules.
+Status: DONE (closed 2026-10-15 on the main agent's classification: premise confirmed by measurement; the failure at FullSolrCloudDistribCmdsTest.java:301 is the result this premise-run job was filed to measure, corroborated on vm1 at the same head and seed. See the classification section in gates/SOLR-8954-fullsolrcloud-rtg.md).
