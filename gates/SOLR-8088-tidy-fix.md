@@ -1,6 +1,6 @@
 # SOLR-8088 tidy fix and re-gate
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm2-gate-backlog-8088-tidy.md)
 
 ## Why
 
