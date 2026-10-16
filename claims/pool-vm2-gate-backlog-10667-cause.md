@@ -5,3 +5,5 @@
 - Scope: the cause trace and the liblinear link record. No branch change unless step 3 of the job says so; if it does, the change is re-claimed under this claim before commit.
 - Status: CLAIMED, runner queued.
 - Status: BLOCKED (2026-10-16T05:59Z). Steps 1 and 1b run at 9ce9ef1db5e9. The file is absent from the module packaging output and the distribution, but the rule that feeds the module's example directory was not located; no branch change. Record in gates/SOLR-10667-dotfiles-cause.md.
+
+- 2026-10-16T17:07Z vm2 wind-down: handed to vm1 under assignments/pool-vm2-handoff-to-vm1-round-2.md (no further vm2 work on this claim).

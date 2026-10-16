@@ -1,0 +1,28 @@
+From 5d6b81d86bcecc9c80c3a97aae8ad8d66d463c1a Mon Sep 17 00:00:00 2001
+From: Nick Shanin <nick.boss.us@gmail.com>
+Date: Thu, 15 Oct 2026 00:40:47 +0000
+Subject: [PATCH] SOLR-17055: pin maxScore for score-sorted and id-sorted knn
+ requests
+
+---
+ .../solr/handler/component/DistributedKnnTopKTest.java       | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/solr/core/src/test/org/apache/solr/handler/component/DistributedKnnTopKTest.java b/solr/core/src/test/org/apache/solr/handler/component/DistributedKnnTopKTest.java
+index 635d52fa6a..7f57bab10d 100644
+--- a/solr/core/src/test/org/apache/solr/handler/component/DistributedKnnTopKTest.java
++++ b/solr/core/src/test/org/apache/solr/handler/component/DistributedKnnTopKTest.java
+@@ -91,5 +91,10 @@ public class DistributedKnnTopKTest extends BaseDistributedSearchTestCase {
+           Integer.toString(TOP_K - i),
+           rsp.getResults().get(i).get("id"));
+     }
++
++    rsp = query("q", knn, "fl", "id", "rows", "20", "sort", "score desc");
++    assertNotNull("sorting on score keeps maxScore", rsp.getResults().getMaxScore());
++    rsp = query("q", knn, "fl", "id", "rows", "20", "sort", "id asc");
++    assertNull("sorting on id without score omits maxScore", rsp.getResults().getMaxScore());
+   }
+ }
+-- 
+2.34.1
+

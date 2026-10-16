@@ -14,3 +14,5 @@
 - 2026-10-13T04:22Z vm2 gate backlog coordinator: run 2 at 8f1f4ef91e interrupted, not relaunched. GATE START 2026-10-13T02:41:55Z; changelog, tidy, compile, proof and proof-restored passed; the focused-head leg started and the log ends at "STEP focused-head" with no GATE END (logs/vm2/queue-g14919-gate-20261013T024155Z.out). The run executed tests, so it is left for the main agent to decide a re-run.
 
 - 2026-10-13T16Z vm2 gate backlog coordinator: heartbeat at pickup of round 3 (item 2). Re-run at 8f1f4ef91e queued as gates/g14919-gate.sh; not started yet.
+
+- 2026-10-16T17:07Z vm2 wind-down: handed to vm1 under assignments/pool-vm2-handoff-to-vm1-round-2.md (no further vm2 work on this claim).

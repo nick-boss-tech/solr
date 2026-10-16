@@ -1,6 +1,6 @@
 # Assignment: vm2 open-work list, round 1
 
-Status: CLAIMED (claims/pool-vm2-open-work-list-round-1.md)
+Status: HANDED OFF to vm1 (2026-10-16T17:07Z), see assignments/pool-vm2-handoff-to-vm1-round-2.md
 Capability tags: [coordination, gate, implementation, premise-run, reading]. Intended host: vm2. Posted by the main side, 2026-10-15.
 
 ## Occasion and how open work is found
