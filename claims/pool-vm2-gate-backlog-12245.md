@@ -4,4 +4,4 @@
 - Capability tags: gate (Part C). Parts A and B are reading and records, done by the vm2 coordinator under this claim.
 - Runner: /workspace/gates/g12245-gate.sh on vm2, using /workspace/gates/lib/gate-run.sh. Seed 12245C0FFEE12245.
 - Stops before any push. A tidy change, a proof-leg failure of an unexpected shape, or a failed focused run is recorded in the job file and escalated; not relaunched.
-- Status: CLAIMED, runner queued.
+- Status: DONE (2026-10-16). Gate green at f325d5d0576e; Part A and Part B recorded in gates/SOLR-12245-delta-gate.md and receipts/SOLR-12245.md.

@@ -268,6 +268,7 @@ from DISCUSS to DECIDED as follows.
   detail stays and the duplicated host in `describe()` on the
   streaming path is fixed first. If it does, the item returns to Nick
   before any logs-only change.
+  Dated note, 2026-10-16 (vm2 coordinator, Part B of the delta job): the forward-retry log at SolrCmdDistributor.java:171-172 names the node URL only, not the collection or shard. The check's result is therefore that the line does not name them, and the response-stays path the commit took is this decision's path.
 - SOLR-12705: option (a). Exclude counting processors from the
   atomic-operand path in code, with a test. This reverses the earlier
   option (b) recommendation: stating the behavior would publish

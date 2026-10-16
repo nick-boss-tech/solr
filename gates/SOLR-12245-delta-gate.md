@@ -1,7 +1,7 @@
 # Gate job: SOLR-12245 delta review of the live head's new commit, the coordinator log check, and a gate at the live head
 
 - Branch: solr-12245-submit. Head pinned at filing: `f325d5d0576e582d4488570eabdeabc7410a8a0f` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-12245.md`). Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`. The commit under review: `f325d5d0576` ("do not name the host twice in the distributed update error"), on top of `4a93167458b`.
-Status: CLAIMED (claims/pool-vm2-gate-backlog-12245.md)
+Status: DONE. GATE GREEN at f325d5d0576e (Part C). Part A verdict: SATISFIED with two non-blocking findings; Part B: the forward-to-leader log line does not name the collection and shard. See the Results section.
 - Capability tags: review, gate.
 - Job type: a delta review of one commit, a record check the conditional decision requires, and a full hardening gate at the pinned head. No implementation step and no branch edit under this job. Pushes only if the gate itself produces a commit (see On green).
 
@@ -45,3 +45,19 @@ Steps, in order:
 ## On failure
 
 - Record the failing step, the failing test and seed if a test ran, and the log path in this file and in the receipt. A gate that executed tests and failed is never relaunched by the claimant; the main side investigates first (WORKFLOW.md). A run that never executed tests because of an environment refusal may be relaunched once, with the refusal recorded. Parts A and B stand even if Part C fails; record them before stopping.
+
+## Results, vm2, 2026-10-16 (coordinator record; Part C from the gate, Parts A and B from the reading)
+
+**Part C (gate at f325d5d0576e), GATE GREEN.** Runner gates/g12245-gate.sh, seed 12245C0FFEE12245, GATE START 2026-10-15T23:32:28Z, GATE END 2026-10-15T23:57:52Z, log logs/vm2/12245-result.txt.
+- Changelog parse rc=0. Tidy rc=0, tree clean afterward. Error Prone compile rc=0. Module check rc=0.
+- Proof leg (step 5), DistributedUpdateProcessor.java reverted to 4a93167458b, test file at head: rc=1, DistributedUpdateProcessorTest tests=6, failures=1. The failure is testDistribErrorMessageNamesTheHostOnce: its assertion at DistributedUpdateProcessorTest.java:236 requires "host:8983" to appear once, and the base message names it twice ("Error from server at http://host:8983/solr ... while sending to http://host:8983/solr/coll_shard1_replica_n1/"). Failing by content, as the job requires. Tree restored.
+- Head run (step 6), counted from fresh JUnit XML: DistributedUpdateProcessorTest tests=6, failures=0, errors=0, skipped=0 (ts 2026-10-15T23:53:30Z).
+
+**Part A (delta review of f325d5d0576e), verdict: SATISFIED with two findings for the main side, neither blocking Part C.**
+- (a) The core-name branch in describe() (DistributedUpdateProcessor.java, the `msg.contains(node.getBaseUrl())` condition) keys on the message containing the node's base URL, not on the remote wording or the exception type. For a RemoteSolrException the message is built as "Error from server at <remoteHost>: ..." (solrj RemoteSolrException.java:42), and remoteHost is the server base URL, so the branch fires for the remote case as intended. The dependence is acceptable for the named case. Note: any non-remote message that contains the base URL also takes the core-name path and drops the URL there; the core, collection and shard are still named. Not a defect for the current callers, recorded for the main side.
+- (b) Finding 7 stands: the changelog title (changelog/unreleased/SOLR-12245-distrib-update-error-names-replica.yml) says the error "now names the replica URL, collection and shard". For a remote error the URL no longer appears; the core is named. Owed wording in the draft text: "names the replica, collection and shard". Not edited under this job.
+- (c) The new test pins the behavior it names: line 236 (exactly one "host:8983") and lines 237 to 239 (core, collection and shard present). It covers only the remote-error branch; the full-URL branch for other errors has no test. Recorded as a gap, not a blocker.
+
+**Part B (coordinator log check), result: the forward-to-leader log line does NOT name the collection and shard.** The forward-retry log is SolrCmdDistributor.java:171 to 172 ("forwarding update to {} failed - retrying ... retries: {}/{}. {} params: {} rsp: {}"), and its node argument is err.req.node.getUrl() only. The collection and shard are not in the line. The FROMLEADER branch at the same site has the same shape. Under the TESTING.md conditional decision, the response-stays path is the decision's path, and the commit took it. No logs-only change is made under this job. The Part B record is also in receipts/SOLR-12245.md and a dated note in TESTING.md.
+
+**Status: DONE on the gate, with Parts A and B recorded.** The gate produced no commit, so the fork tip does not move and no PR body edit is owed under this job. The changelog wording (finding b) is owed in the draft text for the main side.
