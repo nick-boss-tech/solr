@@ -1,6 +1,6 @@
 # Gate job: SOLR-9595 (live-head gate at defce50943)
 
-Status: CLAIMED (claims/pool-vm1-gate-9595-live-head.md)
+Status: DONE
 
 - Branch: solr-9595-submit. Head: `defce50943f21e1abcfa4bf6d3fe8e225eefd0ee` (fork tip, confirmed by ls-remote on 2026-10-16). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `e18a8063e6afcb85b67d2adc66a862104bedb258` (tree-identical to the gated head bf99cd0e89c255889b3d801e2ec863813dad78a7; see receipts/SOLR-9595.md). That evidence does not cover the one commit on top of it, defce50943, which this job gates. Merge-base with upstream/main: `cabedd1d968059215188f4e7563fb303241899ed`.
@@ -47,14 +47,21 @@ If any step cannot be verified, record it here and stop.
 
 - [x] head confirmed by ls-remote
 - [x] diff scope confirmed
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg, expected failure by content
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean
+- [x] step 2 Error Prone compile
+- [x] step 3 proof leg, expected failure by content
+- [x] step 4 focused head run, counted from fresh XML
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
+
+## Outcome (vm1, 2026-10-16): DONE, GATE GREEN at defce50943
+
+- Log: ~/workspace/tools/g9595-live-gate.log on vm1 (GATE RESULT: GREEN, GATE RUNNER DONE). JUnit XML archived at ~/workspace/tools/g9595-live-head-xml/ and ~/workspace/tools/g9595-live-proof-xml/. Seed 9595C0FFEE9595.
+- Steps: changelog YAML parse OK rc 0; tidy rc 0, post-tidy tree unchanged; Error Prone compile rc 0 (the author's never-compiled IndexWriter and IndexWriterConfig calls compile clean; the step 2 defect possibility recorded in this job did not materialize); focused head run from fresh JUnit XML: TestSlowCompositeReaderWrapper 3 of 3, 0 failures, 0 errors, 0 skipped; module check :solr:core:check -x test rc 0; post-gate tree clean.
+- Proof leg at merge-base cabedd1d9680 production with the branch's pinned test file in place: 3 tests, exactly 1 failure, testTermsAndLiveDocsAreCached at the terms assertSame (TestSlowCompositeReaderWrapper.java:164), "expected same:<org.apache.lucene.index.MultiTerms@28fc6bff> was not:<org.apache.lucene.index.MultiTerms@42173c8a>". The exact two-leaf setup assertion passed on base and the other two tests passed, matching the expectation recorded in this job before the run; the premise discriminates with the pinned test.
+- Receipt: receipts/SOLR-9595.md, new top section at defce50943. No branch push was needed; the head was already the fork tip and the branch was not edited.
 
 ## Deliverable and limits
 

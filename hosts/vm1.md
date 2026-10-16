@@ -6,3 +6,4 @@
 - Heartbeat: 2026-10-13 17:10 UTC (claimed four strong-review jobs: the SOLR-18541 review patch gate, the QueryComponent real-exit shape premise run, legs G1 and G2 of the SOLR-18010 permissions job, and the SOLR-18541 score-only exit input; one chained runner on vm1, see the claims).
 - Heartbeat: 2026-10-16 01:52 UTC (claimed five pool items at the owner's direction: the SOLR-8240 head-failure assignment, the SOLR-11475 proof-fix assignment, the SOLR-13059 diagnosis assignment, the SOLR-13943 stacked-run gate job, and the SOLR-4754 text-fixes gate job; see the claims).
 - Heartbeat: 2026-10-16 03:43 UTC (claimed the SOLR-9595 live-head gate at defce50943; see claims/pool-vm1-gate-9595-live-head.md).
+- Heartbeat: 2026-10-16 04:24 UTC (SOLR-9595 live-head gate GATE GREEN at defce50943; see claims/pool-vm1-gate-9595-live-head.md).
