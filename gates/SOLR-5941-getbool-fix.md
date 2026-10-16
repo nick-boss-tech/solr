@@ -1,7 +1,7 @@
 # Gate job: SOLR-5941 third getBool site fix (audit finding 3)
 
 - Branch: solr-5941-submit. Head: `a4df7bfd214b15d9c8d4519fdac8fd6df9468f2d` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing). The branch backs the owner's open PR at that head. If the tip has moved when claimed, stop and record the new tip here; do not run at any other head without noting it.
-Status: CLAIMED (claims/pool-vm2-gate-backlog-5941.md; the 2026-10-15 scope stop is discharged by the predicate amendment at the end of this file)
+Status: CLAIMED (claims/pool-vm2-gate-backlog-5941.md; resumed 2026-10-16T01:29Z; the line 125 predicate is the decided one)
 - Capability tags: [implementation, gate].
 - Source: `audits/update-processing/SOLR-5941.md` (2026-10-15), finding 3 and readiness item 1. Read the audit in full before claiming. Per the no-new-ticket rule, this fix belongs inside this branch: no new ticket, no separate PR.
 - Current gate state (`receipts/SOLR-5941.md`): gated at the pinned head (2026-10-09): AutoCommitUpdateChainTest 2/2, CommitThroughNonLeaderTest 1/1, ParallelCommitExecutionTest 1/1, HttpPartitionOnCommitTest 1/1, module check rc=0. The receipt does not cover finding 3: no test exercises the factory below with a forwarded commit.
@@ -85,3 +85,8 @@ What the factory decides: `processCommit` passes a commit down the chain when th
 ### Step 2 expectation, restated against the decided predicate
 
 The new SolrCloud chain test stands as written in step 2 (a chain containing this factory; a forwarded commit carrying `commit_end_point=replicas`). Fail-before by content: on the pre-fix production the request fails with the BAD_REQUEST "invalid boolean value" from the line 125 `getBool` call. At the fixed head the same commit passes the factory and is committed, and the test's assertions pass. No `"leaders"` variant is required to discharge this job: the decided predicate treats both forwarded values the same way, by the same presence rule.
+
+## Resumed, vm2, 2026-10-16T01:29Z
+
+- Fix, local commit 6940409879 on a4df7bfd214b (fast-forward candidate; not pushed). Production: IgnoreCommitOptimizeUpdateProcessorFactory.java line 125 reads commit_end_point as a string and passes when it is present and not "false". Test: IgnoreCommitEndPointCloudTest (SolrCloudTestCase, configset cloud-ignore-commit-chain). Negative case: a plain client commit with no end point is still ignored with 403.
+- Gate: g5941-fix-gate.sh, queued behind SOLR-13943. Results to logs/vm2/5941-fix-result.txt. Push only on green.
