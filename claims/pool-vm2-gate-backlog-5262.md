@@ -21,3 +21,5 @@ Heartbeat: 2026-10-11T07:12:31Z (UTC).
 Status: BLOCKED. Packaging and changelog validation passed. The root tidy task could not start because the Develocity Gradle plugin download was truncated on both attempts; no tests ran. Details and logs: gates/SOLR-5262.md.
 BLOCKED: 2026-10-11T07:25:52Z (UTC), environment dependency-download failure after the single permitted retry.
 RELEASED: 2026-10-11T14:10:34Z (UTC) by owner direction that no claim remain held. The job is still blocked, not DONE; no active vm3 holder remains.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-5262-premise.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

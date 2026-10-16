@@ -18,3 +18,5 @@ Rebase done: 11 commits onto d76fc14b98, both predicted stops resolved, head 1cf
 ## 2026-10-12T06:16Z DONE (vm2 coordinator)
 
 DONE: gate green at 1cf59fe6a9f1e4b5586a358653facd916e7518a5 (GATE END 2026-10-12T06:09:55Z). Fork pushed with force-with-lease pinned to f0e7395f58f3c8d8c9066cd88baa6931d8b6f425; ls-remote shows 1cf59fe6a9. Deliverables: receipts/SOLR-13097.md (section for 1cf59fe6a9), gates/SOLR-13097.md marked DONE.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-13097.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

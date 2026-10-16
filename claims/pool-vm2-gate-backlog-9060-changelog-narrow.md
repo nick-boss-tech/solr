@@ -8,3 +8,5 @@
 - Status: CLAIMED, runner queued.
 
 - 2026-10-14T12:18ZZ vm2 gate backlog coordinator: DONE. Landed head 49040cb7b8; head test 1 of 1; fail-before fails by content (PASS). Receipt and job recorded.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-9060-changelog-narrow.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

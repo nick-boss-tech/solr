@@ -7,3 +7,5 @@
 - Status: CLAIMED, runner queued.
 
 - Completion note (appended by vm1, 2026-10-15, on verification per the WORKFLOW.md missed-marks rule): this claim's run finished as recorded in the takeover log's 2026-10-15 01:19 MDT queue pass (head leg 10 of 10; proof leg stopped under D3 on a failure-shape difference). The proof shape was then handed to vm1 in assignments/pool-vm1-proof-shape-handoff-round-1.md and settled there: GATE GREEN at c666155ed058, receipts/SOLR-6975.md top section, gates/SOLR-6975.md marked DONE. Status: DONE (gate completed under the handoff claim claims/pool-vm1-proof-shape-handoff-round-1.md).
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-6975.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

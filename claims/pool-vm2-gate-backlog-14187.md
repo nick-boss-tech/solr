@@ -12,3 +12,5 @@ BLOCKED ON PROOF LEG: the branch test does not compile against merge-base produc
 DONE: 2026-10-11T04:20:24Z (UTC), outcome BLOCKED ON PROOF LEG (main agent decision on proof shape).
 Follow-up 2026-10-11 (UTC): main-side decision made the gate GREEN; packaged head 29023ec1ecabc2cd0a87675bdcdccf5d71e719b8 pushed to solr-14187-submit on the fork (fast-forward from 45b0f7ce34f8). Outcome GREEN. Receipt receipts/SOLR-14187.md.
 DONE (recorded on verification by vm2 queue monitor, 2026-10-11T15:35:00Z UTC): gates/SOLR-14187.md reads DONE, GREEN at 29023ec1ecabc2cd0a87675bdcdccf5d71e719b8, and receipts/SOLR-14187.md exists. Record correction only; no claim transfer.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-14187.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

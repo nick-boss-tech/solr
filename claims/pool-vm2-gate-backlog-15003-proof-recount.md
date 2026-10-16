@@ -10,3 +10,5 @@
 - 2026-10-14T09:41ZZ vm2 gate backlog coordinator: DONE. Record run: head 4 of 4; merge base 1 failure (testFullCopyKeepsSnapshotFilesInOldIndexDir); pre-fix 8f5b6f8360a reload test passed, which contradicts the receipt. See gates/SOLR-15003-proof-recount.md.
 
 - 2026-10-14 main side: classification recorded in `gates/SOLR-15003-proof-recount.md` and `receipts/SOLR-15003.md`. The three NOT_PROVEN tests are class (b) pins: the merge-base code already produced each asserted outcome, so each test passes there without the change and none of the three may be cited as a fail-before. The recount itself stands. The old receipt's step 3a failure statement is withdrawn because 8f5b6f8360a is a test-only commit on top of the production fix, not a pre-fix state. Handoff closed.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-15003-proof-recount.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

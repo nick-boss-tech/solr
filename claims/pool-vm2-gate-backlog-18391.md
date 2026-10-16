@@ -8,3 +8,5 @@ Heartbeat: 2026-10-10T19:18:26Z.
 
 Result 2026-10-10T19:45:03Z: gate green at head adcda10b501. Proof leg has a mismatch (second base failure in CreateCollectionCleanupTest, testCreateDoesNotDeleteExistingCollectionOnStaleView). Job stopped per protocol; main agent decides. Claim DONE.
 DONE: 2026-10-10T19:45:03Z (UTC).
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-18391-changelog-wording.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

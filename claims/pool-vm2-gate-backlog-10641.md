@@ -15,3 +15,5 @@ Heartbeat: 2026-10-11T21:04:29Z.
 Heartbeat: 2026-10-11T21:11:22Z (queue monitor check; proof-prod-at-merge-base leg running, compile rc=0, tidy clean).
 
 DONE: 2026-10-11T21:30Z (UTC), outcome GREEN at packaged head fbc1f47b280843278a6c9ddbc8d6dbd1fe37cdc0 (gate end 21:22:04Z). Deliverables: receipts/SOLR-10641.md, gates/SOLR-10641.md. Proof leg inconclusive by construction (9/0 at merge-base).
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-10641.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

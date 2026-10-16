@@ -17,3 +17,5 @@ BLOCKED: 2026-10-11T05:05Z (UTC), outcome BLOCKED (environment).
 ## 2026-10-13T19:18Z DONE (marked on verification by vm2 gate backlog coordinator)
 
 Deliverable receipts/SOLR-12347.md names GATE GREEN at the packaged head, and the job file carries vm1's status correction (2026-10-13T16:28Z). This is a record correction for the missed claim mark, not a claim transfer.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-12347.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

@@ -8,3 +8,5 @@
 - Status: CLAIMED, runner queued.
 
 - 2026-10-14T21:24ZZ vm2 gate backlog coordinator: DONE. Top-up gate green at 550af283134e (7 of 7, 1 pre-existing skip).
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-16725-branch-edits-gate.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

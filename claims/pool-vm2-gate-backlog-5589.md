@@ -14,3 +14,5 @@ Gate run 1 at ddcd75020e: changelog parse OK and tidy rc 0 with clean tree; the 
 ## 2026-10-12T01:37Z DONE (vm2 coordinator)
 
 DONE: gate run at ddcd75020e green (GATE END 01:36:21Z). Deliverables: receipts/SOLR-5589.md at ddcd75020eea11cb82cbb7ec99b221553794939a, gates/SOLR-5589.md marked DONE. Fork tip verified at ddcd75020e.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-5589.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

@@ -11,3 +11,5 @@
 - 2026-10-15T03:02:49Z vm2 gate backlog coordinator: GATE GREEN at fork tip 74532d0f76 (run 02:34:43Z to 02:55:14Z, log logs/vm2/queue-g5394-coverage-gate-20261015T023443Z.out; rc lines 0; SimpleFacetsTest 50 tests, 1 skipped, 0 failures, 0 errors). The gate script was pointed at 74532d0f76 at 02:34:43Z with no decision recorded here, so this claim is not marked DONE. Owner decision needed: accept 74532d0f76 as the gated head, or gate 437b818067 separately. No push, no branch change.
 
 - 2026-10-15T03:13ZZ vm2 gate backlog coordinator: DONE. Gate green at 74532d0f76a6 (50 tests, 0 failures, 1 skipped).
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-5394-push-gated-head.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

@@ -8,3 +8,5 @@
 - Status: CLAIMED, runner queued.
 
 - 2026-10-14T11:47ZZ vm2 gate backlog coordinator: DONE. Base run 1 of 1 green at c3cdf7b46e8c.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-13369-base-premise.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

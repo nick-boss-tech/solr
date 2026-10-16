@@ -25,3 +25,5 @@ The 04:18Z build recorded above was the tidy run started by the vm2 session that
 ## 2026-10-12T04:47Z DONE (vm2 coordinator)
 
 Gate GREEN at 0d64c35c5a (gate ended 04:41:31Z; record in gates/SOLR-8430.md, "Gate run at 0d64c35c5a"). Deliverables: receipts/SOLR-8430.md refreshed at 0d64c35c5a, gates/SOLR-8430.md marked DONE. Branch unchanged on the fork at 0d64c35c5a.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-8430.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

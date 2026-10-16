@@ -27,3 +27,5 @@ Re-gate at 3a456c27dd still running (g17612-gate.sh, GATE START 05:00:14Z, modul
 ## 2026-10-12T05:37Z DONE (vm2 coordinator)
 
 DONE: gate green at 3a456c27dd (GATE END 2026-10-12T05:18:52Z; record in gates/SOLR-17612.md, "Gate run at 3a456c27dd"). Deliverables: receipts/SOLR-17612.md refreshed at 3a456c27dda52061e95eeabf9bd228cc48e1ea47 (baseline kept), gates/SOLR-17612.md marked DONE. Fork tip verified at 3a456c27dd by ls-remote.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-17612.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

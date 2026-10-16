@@ -19,3 +19,5 @@ Heartbeat: 2026-10-11T19:42Z (UTC), queue monitor: gate still running (compile s
 DONE 2026-10-11T20:03Z (UTC), queue monitor. Outcome: GATE GREEN at local head 82c0c11373d009f773980ba7f2d512e87e817eec (gate end 19:56:39Z). Proof leg failed by content as predicted; focused tests 4 of 4 pass at head; changelog, tidy, compile and module check green. Receipt: receipts/SOLR-4399.md. Fork push of solr-4399-submit not done: held for a main-side go, since the job asks for it before the gate and the monitor rule allows fork pushes only on green.
 
 Push: 2026-10-11T20:35Z (UTC), queue monitor. Fast-forward de6cc6b27e..82c0c11373 pushed to solr-4399-submit under the main-side go recorded above. Remote now at 82c0c11373d.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-4399.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

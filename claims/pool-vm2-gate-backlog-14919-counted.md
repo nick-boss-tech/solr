@@ -7,3 +7,5 @@
 - Status: CLAIMED, runner queued.
 
 - 2026-10-15T00:39ZZ vm2 gate backlog coordinator: DONE. Counted run 1 of 1 at 483b3885f6.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-14919-counted-run.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

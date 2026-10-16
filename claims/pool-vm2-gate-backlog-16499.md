@@ -18,3 +18,5 @@ Heartbeat: 2026-10-10T22:51:21Z. Compile BUILD SUCCESSFUL (16499-compile.log). P
 
 Result 2026-10-10T22:53:44Z: GREEN at packaged head 51b7addddd45dfbb8e18e4f80982a3793206bdcd. Changelog OK, tidy clean, compile OK, premise held on base, ReplaceNodeAPITest tests=4 failures=0 at head from fresh XML, module check rc 0. Receipt receipts/SOLR-16499.md. Packaging commit local only, not pushed.
 DONE: 2026-10-10T22:53:44Z (UTC), outcome GREEN.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-16499.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

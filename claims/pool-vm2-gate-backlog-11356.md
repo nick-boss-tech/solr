@@ -11,3 +11,5 @@ Premise run 2026-10-11T03:43:03Z: PREMISE HOLDS. Base (ConcurrentUpdateJettySolr
 
 Result 2026-10-11T03:50:44Z: GATE GREEN at packaged head 6120dae28d04a07763f44d4bc5e9d9793af025f6. Changelog OK, tidy clean, compileTestJava rc 0, ConcurrentUpdateJettySolrClientTest tests=12 failures=0 at head, :solr:solrj-jetty:check -x test rc 0. Proof base: cabedd1d96, not e044bf20b405 (see gates/SOLR-11356.md).
 DONE: 2026-10-11T03:50:44Z (UTC), outcome GREEN.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-11356-sj-r1-49-header-copy.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

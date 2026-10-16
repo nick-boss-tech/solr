@@ -14,3 +14,5 @@ First gate at f16c7fba78 ended with the tidy step not clean (formatting-only, re
 ## DONE (vm2 coordinator, 2026-10-11T23:40Z)
 
 Re-gate at 654c1a7c3570b66e66c446b433e6cb8a16c637be GREEN (GATE END 23:35:03Z). Deliverables: receipts/SOLR-8554.md, gates/SOLR-8554.md (DONE line), this claim. Packaged head f16c7fba78cd and tidy fold-in 654c1a7c3570 are on the fork as fast-forwards.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-8554-changelog-phrase.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

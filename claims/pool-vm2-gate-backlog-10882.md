@@ -11,3 +11,5 @@ Heartbeat: 2026-10-11T02:23:40Z. Premise HOLDS (base fails arrayMixedTypesSortTe
 
 Result 2026-10-11T02:32:06Z: GREEN at packaged head 5d7d07a5b17bfbf9370fe8562ce7b5d9909118ee. Proof leg (base production, branch test kept) ArrayEvaluatorTest tests=7 failures=1, arrayMixedTypesSortTest ClassCastException as premised; focused head tests=7 failures=0; tidy clean, compile rc 0, module check rc 0. Receipt receipts/SOLR-10882.md. Packaging commit local only.
 DONE: 2026-10-11T02:32:06Z (UTC), outcome GREEN.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-10882-title-fix.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

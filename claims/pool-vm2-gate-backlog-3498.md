@@ -11,3 +11,5 @@ Premise run 2026-10-11T02:49:11Z: PREMISE HOLDS. Base (merge-base e044bf20b405, 
 
 Result 2026-10-11T02:57:03Z: GATE GREEN at packaged head 2ca0b3743427. Changelog OK, tidy clean, compileTestJava rc 0, focused TestContentWriterUpdateRequest 2/0, QueryResponseTest 6/0, SimpleOrderedMapTest 18/0 (fresh XML), module check rc 0. Receipt receipts/SOLR-3498.md. Packaging commit local only, not pushed.
 DONE: 2026-10-11T02:57:03Z (UTC), outcome GREEN.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-3498.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

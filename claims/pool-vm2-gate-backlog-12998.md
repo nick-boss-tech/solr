@@ -8,3 +8,5 @@ Heartbeat: 2026-10-10T18:56:57Z.
 
 Result 2026-10-10T19:17:39Z: gate steps green at head 62a17a116b5 (tidy clean, compile ok, focused 9/9 and 47/47, module check rc=0). Proof leg blocked: branch tests do not compile against merge-base production, so the fail-before proof is not established. Job stopped per protocol; main agent decides. Claim DONE with that outcome.
 DONE: 2026-10-10 (UTC), outcome BLOCKED ON PROOF LEG.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-12998.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

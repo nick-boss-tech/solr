@@ -14,3 +14,5 @@ Gate running from 02:22:26Z at 5533ba27b1 (runner /workspace/gates/g1877-gate.sh
 ## 2026-10-12T03:10Z DONE (vm2 coordinator)
 
 DONE: gate green at 5533ba27b17e4ed65c45d3ea863c6cf024916abd (GATE END 02:46:07Z). Proof leg inconclusive by compile, as in SOLR-12998. Deliverables: receipts/SOLR-1877.md, gates/SOLR-1877.md marked DONE.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-1877.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

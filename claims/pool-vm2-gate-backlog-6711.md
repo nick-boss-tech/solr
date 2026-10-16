@@ -19,3 +19,5 @@ Patch pushed at 73c5e6e0d2 (test allow-list property plus tidy fold-in; see gate
 ## 2026-10-12T05:37Z DONE (vm2 coordinator)
 
 DONE: gate green at 73c5e6e0d2 (GATE END 2026-10-12T05:00:14Z; record in gates/SOLR-6711.md, "Gate run at 73c5e6e0d2"). Deliverables: receipts/SOLR-6711.md at 73c5e6e0d243a9886da0a25efe0acc7f1bbf7ec2, gates/SOLR-6711.md marked DONE. Fork tip verified at 73c5e6e0d2 by ls-remote.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-6711.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

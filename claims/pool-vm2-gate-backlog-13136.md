@@ -6,3 +6,5 @@
 - Runner: gates/g13136-gate.sh, worktree /workspace/gates/solr-13136-gate (detached), log gates/logs/vm2/13136-run.out.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - DONE: 2026-10-12T18:30Z by vm2. GREEN at 486b38775565f7e369d5429c356ca83d750d710a; receipt top section in receipts/SOLR-13136.md. Status: DONE.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-13136.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

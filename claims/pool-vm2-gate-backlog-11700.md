@@ -7,3 +7,5 @@ Started: 2026-10-11T04:59:25Z (UTC).
 Heartbeat: 2026-10-11T05:14:34Z (UTC).
 
 DONE: 2026-10-11T05:14:34Z (UTC), outcome GREEN, host label vm3. Deliverables: `gates/SOLR-11700.md` and `receipts/SOLR-11700.md`; exact packaged and tested topic-branch head `8a945757e6687253f61f7dc1e46130fa722c3f14`. No Java tests were run. The unexpected compilation during the earlier supposed dry-run and the Lucene Javadoc caveat are documented in the gate and receipt.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-11700.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

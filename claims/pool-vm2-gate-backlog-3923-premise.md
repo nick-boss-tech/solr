@@ -9,3 +9,5 @@ Started: 2026-10-14T13:25:00Z (UTC).
 Heartbeat: 2026-10-14T13:25:00Z.
 
 Result: run executed 2026-10-14T13:36:44Z to 13:43:04Z. 39 tests, 1 failure (testPfPs, check (a)), as the job expects. Recorded in gates/SOLR-3923-premise.md. Claim left open for the main agent to close after the receipt section.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-3923-premise.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

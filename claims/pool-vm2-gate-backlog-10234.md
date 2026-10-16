@@ -18,3 +18,5 @@ Gate run 1 at f5ded23ffb ended 00:18:04Z: every step green or failing by content
 ## 2026-10-12T01:06Z DONE (vm2 coordinator)
 
 DONE: gate run 2 at eb8c4060d9 green (GATE END 00:51:20Z). Deliverables: receipts/SOLR-10234.md at eb8c4060d9436d7abfdcfdd0ba231a5b31debc01, gates/SOLR-10234.md marked DONE. Fork tip verified at eb8c4060d9.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-10234-drop-changelog.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

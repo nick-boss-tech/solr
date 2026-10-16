@@ -8,3 +8,5 @@
 - Status: CLAIMED.
 
 - 2026-10-13T08:02Z DONE: base run finished (GATE END 07:52:09Z). Base fails TestCollectionAPI.test with "duplicate element: shard1" at line 321 (1 of 4 tests). Deliverable: receipts/SOLR-11288.md, base-run section. Job gates/SOLR-11288-base-run.md DONE.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-11288-base-run.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

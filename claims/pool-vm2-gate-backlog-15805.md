@@ -10,3 +10,5 @@
 ## 2026-10-12T18:06Z DONE (vm2 coordinator)
 
 DONE: gate GREEN at 6d78603d82 (GATE END 18:05:22Z). CoreContainerProviderTest 1 run, 0 failed. Receipt section at the top of receipts/SOLR-15805.md; job marked DONE.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-15805.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.

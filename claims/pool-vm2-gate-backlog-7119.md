@@ -6,3 +6,5 @@ Started: 2026-10-11T04:53:33Z (UTC).
 Heartbeat: 2026-10-11T04:53:33Z (UTC).
 
 DONE: 2026-10-11T04:58:39Z (UTC), outcome GREEN. Packaged branch head 4c652c93b99c0eed496d70a69043e8bcd9760e21; receipt gates/SOLR-7119.md.
+
+Status: CLOSED (vm2 audit, 2026-10-16T00:55Z). Job gates/SOLR-7119-changelog-drop.md is DONE on pr-prepare; no work remains under this claim. Earlier status lines are kept as history.
