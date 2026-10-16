@@ -1,6 +1,6 @@
 # Gate job: SOLR-10305 live-head gate at 52e32f892c
 
-Status: CLAIMED (claims/pool-vm1-gate-10305-live-head.md)
+Status: DONE
 
 - Branch: solr-10305-submit. Head: `52e32f892c5e8ccdb474c8fc222ce8203955efd3` (fork tip, confirmed by ls-remote on 2026-10-16). If the tip has moved at run time, stop and record the new tip here.
 - Prior gated head: `86ddbd433dba9852f30880b184b3ec2bc14180e4` (full gate GREEN, receipts/SOLR-10305.md). That evidence does not cover the one commit on top of it, 52e32f892c, which this job gates. Merge-base with upstream main: `cabedd1d968059215188f4e7563fb303241899ed`.
@@ -15,12 +15,12 @@ Status: CLAIMED (claims/pool-vm1-gate-10305-live-head.md)
 
 Use the host's standard gate runner (~/workspace/tools/solr-gradle.sh behind the blocking flock on ~/workspace/tools/.solr-test-queue.lock). Do not run the build tool directly. Check the worktree out at the head first.
 
-- [ ] Step 0: changelog YAML parse of `changelog/unreleased/SOLR-10305-distributed-query-requires-unique-key.yml`.
-- [ ] Step 1: tidy (`:solr:core:tidy`; every changed Java file on the branch is in :solr:core). If tidy changes any file (post-tidy status, with gradle/libs.versions.toml restored), the run is GATE INVALID and stops.
-- [ ] Step 2: Error Prone compile: `:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true`.
-- [ ] Step 3, proof leg: scratch worktree at the merge-base `cabedd1d9680` (base production) with the branch's test file `MinimalSchemaTest.java` at 52e32f892c copied in; run the focused class at the seed; count and read failures from the fresh JUnit XML. Expected, by content, stated from the code before the run: base production has no uniqueKey check in `QueryComponent.prepare` at all, so both uniqueKey tests fail there: `testDistributedQueryWithoutUniqueKeyIsBadRequest` (the established premise; the request proceeds into the distributed path instead of answering the branch's 400) and the new `testDistributedQueryWithoutUniqueKeyAndQueryFalseIsBadRequest` (no check exists to fire before or after the query=false early return). Expected shape: 5 tests run, exactly 2 failures, both uniqueKey tests; the other 3 tests pass. Any other failure shape stops the job and follows the failure route.
-- [ ] Step 4, focused head run: cleanTest first, then the focused class at the seed in the head worktree. Count from the fresh JUnit XML. Expected: 5 of 5. Nothing else runs on the worktree between the test run and the XML read.
-- [ ] Step 5: module check `:solr:core:check -x test`.
+- [x] Step 0: changelog YAML parse of `changelog/unreleased/SOLR-10305-distributed-query-requires-unique-key.yml`.
+- [x] Step 1: tidy (`:solr:core:tidy`; every changed Java file on the branch is in :solr:core). If tidy changes any file (post-tidy status, with gradle/libs.versions.toml restored), the run is GATE INVALID and stops.
+- [x] Step 2: Error Prone compile: `:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true`.
+- [x] Step 3, proof leg: scratch worktree at the merge-base `cabedd1d9680` (base production) with the branch's test file `MinimalSchemaTest.java` at 52e32f892c copied in; run the focused class at the seed; count and read failures from the fresh JUnit XML. Expected, by content, stated from the code before the run: base production has no uniqueKey check in `QueryComponent.prepare` at all, so both uniqueKey tests fail there: `testDistributedQueryWithoutUniqueKeyIsBadRequest` (the established premise; the request proceeds into the distributed path instead of answering the branch's 400) and the new `testDistributedQueryWithoutUniqueKeyAndQueryFalseIsBadRequest` (no check exists to fire before or after the query=false early return). Expected shape: 5 tests run, exactly 2 failures, both uniqueKey tests; the other 3 tests pass. Any other failure shape stops the job and follows the failure route.
+- [x] Step 4, focused head run: cleanTest first, then the focused class at the seed in the head worktree. Count from the fresh JUnit XML. Expected: 5 of 5. Nothing else runs on the worktree between the test run and the XML read.
+- [x] Step 5: module check `:solr:core:check -x test`.
 
 A gate that executed tests and failed is not relaunched by the claimant. Record the failure here and follow the failure route.
 
@@ -40,4 +40,13 @@ A gate that executed tests and failed is not relaunched by the claimant. Record 
 
 ## Result
 
-(pending)
+DONE, GATE GREEN at 52e32f892c5e (vm1, 2026-10-16). All steps green (log ~/workspace/tools/g10305-live-gate.log, gate end 2026-10-16T03:56Z):
+
+- Step 0: changelog YAML parse rc=0.
+- Step 1: tidy rc=0; post-tidy tree unchanged (gradle/libs.versions.toml restored), no GATE INVALID.
+- Step 2: Error Prone compile (:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true) rc=0.
+- Step 3, proof leg: base production cabedd1d9680 with the branch test file in place, seed 10305C0FFEE10305: 5 tests run, exactly 2 failures, both uniqueKey tests, verified by content from the fresh JUnit XML (archived at ~/workspace/tools/g10305-live-proof-xml/). testDistributedQueryWithoutUniqueKeyIsBadRequest fails in assertQEx with a NullPointerException caused by IndexSchema.getUniqueKeyField() returning null; testDistributedQueryWithoutUniqueKeyAndQueryFalseIsBadRequest fails in assertQEx with a NullPointerException on the ResponseBuilder sort spec. The other 3 tests pass on base. The premise discriminates for both tests.
+- Step 4, head run: MinimalSchemaTest 5 of 5 from fresh JUnit XML (archived at ~/workspace/tools/g10305-live-head-xml/).
+- Step 5: module check :solr:core:check -x test rc=0.
+
+Receipt: receipts/SOLR-10305.md, new top section at 52e32f892c. No branch edit or push; the head was already the fork tip and is unchanged.
