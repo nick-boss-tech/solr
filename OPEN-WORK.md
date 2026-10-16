@@ -1,55 +1,49 @@
 # Open work
 
-This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/`, per the census of 2026-10-15 (regenerated 2026-10-15, from pr-prepare tip 86697a0bc6). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
+This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/` (regenerated 2026-10-16, from pr-prepare tip 1a46e300dc). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
 
-Counts at generation: 7 open assignments, 6 open gate jobs, 13 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
+Counts at generation: 6 open assignments, 3 open gate jobs, 14 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
 
 ## Open assignments
-
-### Intended host: either Linux host (vm1 or vm2); Windows never claims build work
-
-- `assignments/pool-edismax-patches-apply-round-1.md`: Assignment: eDisMax draft patches P1 to P6, application round 1
-- `assignments/pool-solr-11475-proof-fix-round-1.md`: Assignment: SOLR-11475 proof fix, round 1
-- `assignments/pool-solr-13059-diagnosis-round-1.md`: Assignment: SOLR-13059 diagnosis, round 1
-- `assignments/pool-solr-8009-routed-noslice-test-round-1.md`: Assignment: SOLR-8009 routed no-slice test, round 1
 
 ### Intended host: Windows (review agent)
 
 - `assignments/pool-solr-4841-langid-followup-round-1.md`: Assignment: build the SOLR-4841 follow-up test (language detection through a custom identifier), round 1
 
-### Intended host: vm1
-
-- `assignments/pool-vm1-solr-8240-head-failure-round-1.md`: Assignment: SOLR-8240 head failure, round 1
-
 ### Intended host: Windows (review coordinator), or the main side for items marked owner
 
 - `assignments/pool-vm2-open-decisions-round-1.md`: Pool assignment: open decisions from the vm2 queue, round 1
 
+### Intended host: either Linux host (vm1 or vm2)
+
+- `assignments/pool-solr-9396-distrib-row-field-round-1.md`: Pool assignment: SOLR-9396 distributed row-field test, round 1
+
+### Intended host: either Linux host (vm1 or vm2); Windows never claims build work
+
+- `assignments/pool-edismax-patches-apply-round-1.md`: Assignment: eDisMax draft patches P1 to P6, application round 1
+- `assignments/pool-solr-13059-fix-round-1.md`: Assignment: SOLR-13059 test fix, round 1
+- `assignments/pool-solr-8009-routed-noslice-test-round-1.md`: Assignment: SOLR-8009 routed no-slice test, round 1
+
 ## Open gate jobs
+
+### Intended host: a Linux host (vm1 or vm2)
+
+- `gates/SOLR-16290-fix.md`: Gate job: SOLR-16290 real facet fix (funded by standing calls round 1, item 4)
 
 ### Intended host: any capable Linux host
 
 - `gates/SOLR-10667-dotfiles-cause.md`: Gate job: SOLR-10667 example `.gitignore` in the distribution (cause trace, then the fix decision from gates/SOLR-10667-dotfiles.md)
-- `gates/SOLR-16725-branch-edits-topup-gate.md`: Gate job: SOLR-16725 recorded branch edits and top-up gate at the moved head
 
-### Intended host: a Linux host
-
-- `gates/SOLR-16290-fix.md`: Gate job: SOLR-16290 real facet fix (funded by standing calls round 1, item 4)
-- `gates/SOLR-4754-text-fixes-and-premise.md`: Gate job: SOLR-4754 text fixes and premise run
-
-### Intended host: vm2
+### Intended host: vm2 (Linux, Gradle toolchain)
 
 - `gates/SOLR-17733-title-narrowing-round-1-gate.md`: Gate job: SOLR-17733 changelog title narrowing (round 1)
-
-### Intended host: not stated
-
-- `gates/SOLR-13943-stacked-run.md`: Gate job: SOLR-13943 recorded normal-mode run of the moved class on the stacked tree
 
 ## Claimed work
 
 - `assignments/pool-merged-pr-followup-promises-round-1.md`: claim `claims/pool-merged-pr-followup-promises-round-1.md`. Pool assignment: audit of merged PR descriptions for follow-up promises, round 1
 - `assignments/pool-retire-round-final-reports-round-1.md`: claim `claims/pool-retire-round-final-reports-round-1.md`. Pool assignment: retire candidates, final evidence packs, round 1
 - `assignments/pool-strong-review-round-2-unblocked-slices.md`: claim `claims/pool-strong-review-round-2-unblocked-slices.md`. Pool assignment: strong review round 2, the unblocked slices
+- `assignments/pool-vm1-solr-8240-head-failure-round-1.md`: claim `claims/pool-vm1-solr-8240-head-failure-round-1.md`. Assignment: SOLR-8240 head failure, round 1
 - `assignments/pool-vm2-finish-list-round-1.md`: claim `claims/pool-vm2-finish-list-round-1-a.md`. Assignment: vm2 finish list, round 1
 - `assignments/pool-vm2-open-work-list-round-1.md`: claim `claims/pool-vm2-open-work-list-round-1.md`. Assignment: vm2 open-work list, round 1
 - `assignments/solr-13696-fix-project.md`: claim `claims/solr-13696-fix-project.md`. Assignment: SOLR-13696 fix project (repair the re-enabled routed-alias tests)
@@ -58,8 +52,8 @@ Counts at generation: 7 open assignments, 6 open gate jobs, 13 claimed files, 5 
 - `gates/SOLR-16887-errorfile-bats-name.md`: claim `claims/pool-vm2-gate-backlog-16887.md`. Gate job: SOLR-16887 restore -XX:ErrorFile, rename the BATS test, then the gate and BATS run at the new head
 - `gates/SOLR-17055-sort-path.md`: claim `claims/pool-vm2-gate-backlog-17055-fix.md`. Gate job: SOLR-17055 sort path (premise run first, then fix and gate)
 - `gates/SOLR-5941-getbool-fix.md`: claim `claims/pool-vm2-gate-backlog-5941.md`. Gate job: SOLR-5941 third getBool site fix (audit finding 3)
+- `gates/SOLR-8240-test-fix-gate.md`: claim `claims/pool-vm1-solr-8240-head-failure-round-1.md`. Gate job: SOLR-8240 (test fix for the initParams rejection test)
 - `gates/SOLR-8628-packaging.md`: claim `claims/pool-vm2-gate-backlog-8628-packaging.md`. Gate job: SOLR-8628, packaging and top-up gate
-- `gates/SOLR-8954-fullsolrcloud-rtg.md`: claim `claims/pool-vm2-gate-backlog-8954.md`. Run job: SOLR-8954 measured run of the existing composite-router RTG test (premise-run)
 
 ## Unconfirmed
 
