@@ -31,11 +31,13 @@ import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.JsonTextWriter;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.search.ReturnFields;
 import org.apache.solr.search.SolrReturnFields;
+import org.apache.solr.util.SolrPluginUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -329,6 +331,84 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
     String received = new String(baos.toByteArray(), StandardCharsets.UTF_8);
     String expected = "testFun( {\n  \"param0\":\"v0\",\n  \"param1\":42\n} )";
     jsonEq(expected, received);
+    req.close();
+  }
+
+  @Test
+  public void testArrntvThroughJacksonJsonWriter() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "off");
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    nl.add("data1", "hello");
+    nl.add(null, 42);
+    nl.add(null, null);
+    rsp.add("nl", nl);
+
+    JacksonJsonWriter w = new JacksonJsonWriter();
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    w.write(baos, req, rsp);
+
+    String expectedNLjson =
+        "\"nl\":[{\"name\":\"data1\",\"type\":\"str\",\"value\":\"hello\"},"
+            + "{\"name\":null,\"type\":\"int\",\"value\":42},"
+            + "{\"name\":null,\"type\":\"null\",\"value\":null}]";
+    jsonEq("{" + expectedNLjson + "}", baos.toString(StandardCharsets.UTF_8));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvFacetsThroughJacksonJsonWriter() throws Exception {
+    assertU(adoc("id", "arrntv-1", "cat", "a"));
+    assertU(adoc("id", "arrntv-2", "cat", "b"));
+    assertU(commit());
+    try {
+      // in this core wt=json resolves to JacksonJsonWriter; omitted wt resolves to the xml default
+      String response =
+          h.query(
+              "/select",
+              req(
+                  "q",
+                  "id:arrntv-*",
+                  "rows",
+                  "0",
+                  "facet",
+                  "true",
+                  "facet.field",
+                  "cat",
+                  "wt",
+                  "json",
+                  "json.nl",
+                  JsonTextWriter.JSON_NL_ARROFNTV));
+      assertTrue(response, response.contains("\"type\":\"int\""));
+    } finally {
+      assertU(delQ("id:arrntv-*"));
+      assertU(commit());
+    }
+  }
+
+  @Test
+  public void testArrntvFromHandlerDefaultsThroughJacksonJsonWriter() throws IOException {
+    SolrQueryRequest req = req("q", "*:*", "indent", "off");
+    SolrPluginUtils.setDefaults(
+        req,
+        SolrParams.of(JsonTextWriter.JSON_NL_STYLE, JsonTextWriter.JSON_NL_ARROFNTV),
+        SolrParams.of(),
+        SolrParams.of());
+    // handler defaults are merged into getParams(), the view the writer reads
+    assertNull(req.getOriginalParams().get(JsonTextWriter.JSON_NL_STYLE));
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    nl.add(null, 42);
+    rsp.add("nl", nl);
+
+    JacksonJsonWriter w = new JacksonJsonWriter();
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    w.write(baos, req, rsp);
+
+    jsonEq(
+        "{\"nl\":[{\"name\":null,\"type\":\"int\",\"value\":42}]}",
+        baos.toString(StandardCharsets.UTF_8));
     req.close();
   }
 
