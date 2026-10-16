@@ -1,6 +1,6 @@
 # Assignment: SOLR-9124 head test fix, round 1
 
-Status: CLAIMED
+Status: DONE
 
 Capability tags: [implementation, gate]. Intended host: vm1. Posted by the main side 2026-10-16, after the live-head gate at 07b5f39e35 failed at step 4 (gates/SOLR-9124-live-head-gate.md, receipts/SOLR-9124.md top section).
 
@@ -31,6 +31,10 @@ So in every variant where *_s is multivalued, *_s1 is defined and single-valued.
 ## Re-gate
 
 Fresh gate job gates/SOLR-9124-test-fix-gate.md at the new head, full hardening gate on vm1 (blocking flock on ~/workspace/tools/.solr-test-queue.lock, ~/workspace/tools/solr-gradle.sh): changelog YAML parse; tidy with the GATE INVALID guard (tidy the final tree before committing; restore gradle/libs.versions.toml); Error Prone compile; proof leg against merge-base production cabedd1d9680 judged by content (premise: TestExactStatsCache grouped-scores divergence at checkGroupedScores; the other classes' base behavior must be premise-consistent, not the grp_s server error); focused run of TestExactStatsCache, TestLRUStatsCache, TestExactSharedStatsCache, TestDefaultStatsCache counted from fresh JUnit XML at seed 9124C0FFEE9124; module check :solr:core:check -x test.
+
+## Outcome (2026-10-16, vm1)
+
+DONE, green path. Fix commit 3dd985b93ac0e26a3850c338765ba1235bd811d4 pushed plainly to solr-9124-submit (fast-forward from 07b5f39e35; test code only, production byte-identical). Gate at the new head under gates/SOLR-9124-test-fix-gate.md: GATE GREEN (log g9124-fix-gate.log, seed 9124C0FFEE9124; head 5 tests 0 failures from fresh XML; proof leg on base production exactly 1 failure, the TestExactStatsCache grouped-scores divergence at checkGroupedScores, and no grp_s FieldCache error in any run). Receipt refreshed at the top of receipts/SOLR-9124.md. Flagged for the main side, not edited: pr-drafts/search-components/SOLR-9124.md still states the branch is verified at 17a279d4dce1 with the live head at 64b8256cde; the verified head is now 3dd985b93a, and any PR text describing verification at 07b5f39e35 stays falsified by that head's failed gate.
 
 ## Stop conditions
 

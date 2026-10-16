@@ -8,3 +8,4 @@
 - Heartbeat: 2026-10-16 03:43 UTC (claimed the SOLR-9595 live-head gate at defce50943; see claims/pool-vm1-gate-9595-live-head.md).
 - Heartbeat: 2026-10-16 04:24 UTC (SOLR-9595 live-head gate GATE GREEN at defce50943; see claims/pool-vm1-gate-9595-live-head.md).
 - Heartbeat: 2026-10-16 06:16 UTC (SOLR-10424 live-head gate GATE GREEN at b0a03a5226; the branch tip moved to 5b087b1a389 during the run, changelog title line only, not gated; see claims/pool-vm1-gate-10424-live-head.md).
+- Heartbeat: 2026-10-16 07:07 UTC (SOLR-9124 test fix at 3dd985b93a GATE GREEN; see claims/pool-vm1-solr-9124-test-fix-round-1.md).
