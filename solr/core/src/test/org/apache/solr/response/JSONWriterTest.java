@@ -31,11 +31,13 @@ import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.JsonTextWriter;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.search.ReturnFields;
 import org.apache.solr.search.SolrReturnFields;
+import org.apache.solr.util.SolrPluginUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -372,6 +374,31 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
       assertU(delQ("id:arrntv-*"));
       assertU(commit());
     }
+  }
+
+  @Test
+  public void testArrntvFromHandlerDefaultsThroughJacksonJsonWriter() throws IOException {
+    SolrQueryRequest req = req("q", "*:*", "indent", "off");
+    SolrPluginUtils.setDefaults(
+        req,
+        SolrParams.of(JsonTextWriter.JSON_NL_STYLE, JsonTextWriter.JSON_NL_ARROFNTV),
+        SolrParams.of(),
+        SolrParams.of());
+    // handler defaults are merged into getParams(), the view the writer reads
+    assertNull(req.getOriginalParams().get(JsonTextWriter.JSON_NL_STYLE));
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    nl.add(null, 42);
+    rsp.add("nl", nl);
+
+    JacksonJsonWriter w = new JacksonJsonWriter();
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    w.write(baos, req, rsp, JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+
+    jsonEq(
+        "{\"nl\":[{\"name\":null,\"type\":\"int\",\"value\":42}]}",
+        baos.toString(StandardCharsets.UTF_8));
+    req.close();
   }
 
   @Test
