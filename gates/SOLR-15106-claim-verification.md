@@ -1,7 +1,7 @@
 # Premise job: SOLR-15106 claim verification, the 1200 queued messages figure
 
 - Branch: solr-15106-submit. Head: `40b7e5d0efa70d61b74b9fa9ac04beb1ed397637` (fork tip, verified by `git ls-remote` on 2026-10-14 at filing, unchanged since receipts/SOLR-15106.md). Merge-base: `9b3a84b1c460981eab09d8ffaef776acc4a184f8`.
-Status: OPEN
+Status: DONE (vm2, 2026-10-16): UNVERIFIED. The 1200 figure is the ticket's report; the test queues one createCollection command. Draft unchanged (already attributed).
 - Capability tags: premise-run.
 - Job type: verification and records only. No branch code change is authorized by this job, no push, no PR change. The only texts it edits are the draft and the receipt on pr-prepare, per the outcome below.
 - Why owed: `pr-drafts/solrcloud/SOLR-15106.md` line 9 states: "The ticket reports more than 1200 queued messages during a ZooKeeper outage." The openings slates doc (reports/morning-openings-slates-2026-10-14.md) flags the owner check: the ticket's 1200-message claim has no packet on the branch. The draft's own Limits say the ZooKeeper outage in the ticket is not reproduced and the test ends the processor thread directly. Nothing on the branch currently supports or refutes the number, and the draft cannot go out with the figure resting on nothing.
@@ -34,3 +34,12 @@ Status: OPEN
 - [ ] number established by cited code reading, or by one instrumented run counted from fresh output
 - [ ] outcome settled (verified, corrected, or unverified) and applied to the draft and the receipt
 - [ ] job and claim marked DONE
+
+
+## Outcome, vm2, 2026-10-16T00:43:29Z: UNVERIFIED (step 4, third outcome)
+
+- Step 1, code reading at 40b7e5d0efa7: OverseerProcessorExitTest.java (lines 25 to 67) queues one Collection API command, a single createCollection request (line 62 to 63), after closing the collection processor thread. It queues no batch of messages and has no count or loop bound over messages. The queue size is not read.
+- Step 2: no exact count exists in the branch. The 1200 figure appears nowhere in the branch's cloud tests (a grep of solr/core/src/test/org/apache/solr/cloud at the head finds only unrelated timeout arrays).
+- Step 3 not run: the count is not dynamic in the test either, so there is nothing to observe. No Gradle run.
+- Outcome: UNVERIFIED. The figure rests only on the ticket's outage report, which the branch does not reproduce. The draft's sentence (pr-drafts/solrcloud/SOLR-15106.md, line 9) already attributes it as "The ticket reports ...", and the draft's Limits already say the outage is not reproduced, so the draft is left as it stands; the figure is not presented as branch evidence.
+- Status: DONE. No branch code change, no push, no PR change.
