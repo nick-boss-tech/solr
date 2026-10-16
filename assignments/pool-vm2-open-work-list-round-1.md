@@ -1,6 +1,6 @@
 # Assignment: vm2 open-work list, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm2-open-work-list-round-1.md)
 Capability tags: [coordination, gate, implementation, premise-run, reading]. Intended host: vm2. Posted by the main side, 2026-10-15.
 
 ## Occasion and how open work is found
