@@ -210,3 +210,43 @@ public class TestCollationFieldUDVAS extends SolrTestCaseJ4 {
   }
 }
 ```
+
+## Outcome: main-side classification of the escalated failure (2026-10-15)
+
+Classification: test defect, confirming the 2026-10-14 investigation's (b). The
+escalated run is the 2026-10-14 run at `2d65ed6329` (the 2026-10-16 claim audit
+re-escalated that record; the corrected test below has not been run yet). Its
+four failures are the original test class's generated schema: it set no
+`language` or `custom` attribute on the core CollationField type, so `setup(...)`
+threw "Either custom or language is required." during field type init on every
+load; the one pass, `testTypeUdvasFailsFrom90`, is the case where init's
+type-level refusal fires before `setup(...)`.
+
+Verified on vm1 by reproduction (scratch tree at `cb988a2ff4c` plus the version
+gate job's prescribed CollationField change; logs `g15712-classify.log` and
+`g15712-classify-b.log` on vm1, seed 15712C0FFEE15712):
+
+- With the corrected class below (valid schema): the two fail cases and the
+  control pass, and the pre-existing classes pass with it (TestCollationFieldDocValues
+  9 of 9, TestCollationField 8 of 8). The production implementation follows the
+  ICU rule correctly at both the field and the field type level.
+- With the same class but the `language` attribute removed from its schema: 5
+  tests, 4 failures, the exact recorded set and wrapper text ("Can't load schema
+  ... Plugin Initializing failure for [schema.xml] fieldType", root cause "Either
+  custom or language is required."), and `testTypeUdvasFailsFrom90` the only pass.
+  The 2026-10-14 caveat (classification by elimination, test source never read)
+  is discharged: the defect is the original test's schema, not the production
+  implementation, not this job's premise, and not the environment.
+
+One defect in the corrected class below, found in the same vm1 run: its two warn
+tests fail at `LogListener.close()` because the class asserts
+`warnLog.getCount() > 0` but never drains the listener queue; `close()` asserts
+the queue was consumed and finds 2 events ("expected:<0> but was:<2>"). The
+warning itself fires correctly at both levels (2 events each, the count the ICU
+test asserts before draining with `pollMessage()`).
+
+Next step for the claim holder: when dropping in the corrected class, drain the
+listener in `testFieldUdvasWarnsBelow90` and `testTypeUdvasWarnsBelow90` after
+the count assertion (`pollMessage()` once per recorded event, 2 on the vm1 run),
+then re-run the version gate job's steps 5 to 7 at the resulting head. As filed
+without the drain, the re-gate fails those two tests at `close()`.
