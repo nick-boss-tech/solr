@@ -17,3 +17,5 @@ Status: STALE (vm2 audit, 2026-10-16T00:57Z). The line 125 predicate was decided
 Status: CLAIMED (vm2, 2026-10-16T01:29Z). Resumed under claims/pool-vm2-open-work-list-round-1.md. Local fix commit 6940409879 (on a4df7bfd214b, not pushed until green). Runner gates/g5941-fix-gate.sh, seed 5941C0FFEE5941. Pre-push: the fix is a string-presence predicate on commit_end_point at factory line 125; test IgnoreCommitEndPointCloudTest with configset cloud-ignore-commit-chain.
 
 - 2026-10-16T02:01Z vm2 gate backlog coordinator: STOPPED at tidy guard (GATE INVALID, no tests run, no GATE END). Tidy changed IgnoreCommitOptimizeUpdateProcessorFactory.java; runner reverted it. Head 6940409879 unchanged. Not GREEN, not relaunched; left for the main agent.
+
+- 2026-10-16T03:50:51Z gate backlog coordinator: runner g5941-fix-gate.sh (started 03:15:00Z, head 21dbf94e3f local) stopped at the Error Prone compile with rc=1; tidy rc=0; no tests run, no GATE END. Not GREEN, not relaunched by the coordinator; a further run is in queue.txt and left for the main agent. Recorded in gates/SOLR-5941-getbool-fix.md.
