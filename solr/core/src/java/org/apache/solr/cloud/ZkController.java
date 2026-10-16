@@ -1016,8 +1016,9 @@ public class ZkController implements Closeable {
     if (host == null || host.isBlank()) {
       throw new SolrException(
           SolrException.ErrorCode.SERVER_ERROR,
-          "Could not determine the host name to register in ZooKeeper; set the 'host' property"
-              + " (e.g. -Dhost=<name>) to a non-empty host name");
+          "Could not determine the host name to register in ZooKeeper; set the"
+              + " 'solr.host.advertise' property (e.g. -Dsolr.host.advertise=<name>) to a"
+              + " non-empty host name");
     }
     return host;
   }

@@ -1,4 +1,4 @@
-title: Fail node startup with a clear error when the host name registered in ZooKeeper would be empty (for example host=http://).
+title: Fail node startup with a clear error when the configured host is only a URL scheme (for example host=http://), which would register an empty host name in ZooKeeper.
 type: fixed
 authors:
   - name: Nick Shanin
