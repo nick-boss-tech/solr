@@ -1,0 +1,7 @@
+title: Support json.nl=arrntv in the default JSON response writer
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17268
+    url: https://issues.apache.org/jira/browse/SOLR-17268

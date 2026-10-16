@@ -26,6 +26,7 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import org.apache.solr.common.PushWriter;
+import org.apache.solr.common.util.JsonTextWriter;
 import org.apache.solr.request.SolrQueryRequest;
 
 /** A JSON ResponseWriter that uses jackson. */
@@ -43,9 +44,24 @@ public class JacksonJsonWriter extends BinaryResponseWriter {
     jsonfactory = new JsonFactory();
   }
 
+  private static boolean isArrntv(SolrQueryRequest request) {
+    return JsonTextWriter.JSON_NL_ARROFNTV.equals(
+        request.getParams().get(JsonTextWriter.JSON_NL_STYLE));
+  }
+
   @Override
   public void write(OutputStream out, SolrQueryRequest request, SolrQueryResponse response)
       throws IOException {
+    if (isArrntv(request)) {
+      // only the legacy writer implements json.nl=arrntv
+      QueryResponseWriterUtil.writeQueryResponse(
+          out,
+          new JSONResponseWriter(),
+          request,
+          response,
+          JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+      return;
+    }
     WriterImpl sw = new WriterImpl(jsonfactory, out, request, response);
     sw.writeResponse();
     sw.close();
