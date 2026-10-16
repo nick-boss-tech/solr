@@ -26,3 +26,7 @@ Assignment: assignments/pool-solr-9396-distrib-row-field-round-1.md. Run by vm2,
 ## Verdict
 
 **PASS.** The head is green (2 of 2 and 11 of 11), the new test fails on base by its assertion, and the format check is clean. The distributed path is covered: the test fails without the fix and passes with it.
+
+## PR body edit
+
+PR #5156 body updated to head f62c06588f272834cae16f3f02c8383886b8f00d under the owner's blanket approval for PR edits (2026-10-16). Head citations moved from dc862ccf; the Proof now cites testRowFieldNotInFlDistributed and this verification. Read back through the API: stored body matches the edit, head unchanged, no comments, still a draft.
