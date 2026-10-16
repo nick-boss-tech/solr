@@ -1,7 +1,7 @@
 # Gate job: SOLR-13943 recorded normal-mode run of the moved class on the stacked tree
 
 - Branch: solr-13943-submit. Head pinned at filing: `ca443f6f680606b6c995ae86b88b4841b53addbf` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing; matches the head in `audits/update-processing/SOLR-13943.md`). The branch stacks on the SOLR-13696 repair: repair head `1d0b8a0a73cd` is in its ancestry.
-Status: CLAIMED (claims/pool-vm1-gate-13943-stacked-run.md)
+Status: DONE (recorded normal-mode run GREEN on vm1 at the pinned head, 2026-10-16; see the outcome section at the end of this file)
 - Capability tags: gate.
 - Job type: a gate-shaped recorded run at the pinned head, whose required deliverable is the normal-mode run of the moved class. No implementation step, no push, no rebase under this job.
 
@@ -45,3 +45,19 @@ The moved test polls the cluster state provider for a race that has never been r
 ## On failure
 
 - Record the failing step, the failing test and seed if a test ran, and the log path in this file and in the receipt. A run that executed tests and failed is never relaunched by the claimant; the main side investigates first (WORKFLOW.md), subject to the unreliable-run section above for the moved class. A run that never executed tests because of an environment refusal may be relaunched once, with the refusal recorded.
+
+## Outcome: DONE, run GREEN on vm1 (2026-10-16)
+
+Executed by vm1 under claims/pool-vm1-gate-13943-stacked-run.md. Runner: ~/workspace/tools/g13943-stacked.sh behind the vm1 test-queue flock (acquired 2026-10-16T01:55:14Z); log ~/workspace/tools/g13943-stacked.log; fresh JUnit XML archived at ~/workspace/tools/g13943-stacked-xml/. Scratch worktree at the pinned head; no branch commit, no push, no rebase, as the job requires.
+
+- [x] Step 1, base confirmed: `git ls-remote fork refs/heads/solr-13943-submit` = `ca443f6f680606b6c995ae86b88b4841b53addbf`, and `1d0b8a0a73cd` is an ancestor of the pinned head.
+- [x] Step 2, changelog parse: `changelog/unreleased/SOLR-13943.yml` parses with a real YAML parser, rc 0.
+- [x] Step 3, tidy guard: `:solr:core:tidy` rc 0; after restoring `gradle/libs.versions.toml` the tree was clean, so the run is not GATE INVALID and no tidy change needed recording.
+- [x] Step 4, Error Prone compile: `:solr:core:compileJava` and `:solr:core:compileTestJava` with `-Pvalidation.errorprone=true`, rc 0.
+- [x] Step 5, recorded run in normal mode (no `-Dtests.awaitsfix=true` anywhere), seed `13943C0FFEE13943`, module `:solr:core`, counted from fresh JUnit XML: TimeRoutedAliasDateMathInStartTest tests=1, skipped=0, failures=0, errors=0 (the moved class ran and passed; it was not skipped); CategoryRoutedAliasUpdateProcessorTest tests=6, skipped=0, failures=0, errors=0; DimensionalRoutedAliasUpdateProcessorTest tests=2, skipped=0, failures=0, errors=0; CreateAliasAPITest tests=13, skipped=0, failures=0, errors=0. Gradle rc 0.
+- [x] Step 6, module check: `:solr:core:check -x test`, rc 0.
+- [x] Step 7: no proof leg, by the job's design.
+
+The annotation state at the pinned head matches the decision the run supports: the moved class carries no AwaitsFix annotation, and the original class keeps its class-level `@AwaitsFix(SOLR-13059)`. Receipt section for this run is at the top of `receipts/SOLR-13943.md`.
+
+Note for the record: vm2's coordinator recorded (2026-10-16T02:01Z, in claims/pool-vm2-gate-backlog-13943.md) that a separate vm2 normal-mode attempt the same night stopped at the compile step with no rc and no test run. That attempt executed no tests, so it neither discharges nor conflicts with this job; this vm1 run is the recorded run the job required.
