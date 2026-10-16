@@ -30,6 +30,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import org.apache.solr.common.PushWriter;
 import org.apache.solr.common.util.ContentStreamBase;
+import org.apache.solr.common.util.JsonTextWriter;
 import org.apache.solr.request.SolrQueryRequest;
 
 /** A JSON ResponseWriter that uses jackson. */
@@ -52,11 +53,21 @@ public class JacksonJsonWriter implements TextQueryResponseWriter {
     jsonfactory = new JsonFactory();
   }
 
+  private static boolean isArrntv(SolrQueryRequest request) {
+    return JsonTextWriter.JSON_NL_ARROFNTV.equals(
+        request.getParams().get(JsonTextWriter.JSON_NL_STYLE));
+  }
+
   // let's also implement the binary version since Jackson supports that (probably faster)
   @Override
   public void write(
       OutputStream out, SolrQueryRequest request, SolrQueryResponse response, String contentType)
       throws IOException {
+    if (isArrntv(request)) {
+      // only the legacy writer implements json.nl=arrntv
+      new JSONResponseWriter().write(out, request, response, contentType);
+      return;
+    }
     out = new NonFlushingStream(out);
     // resolve the encoding
     final String charSet = ContentStreamBase.getCharsetFromContentType(contentType);
@@ -80,6 +91,10 @@ public class JacksonJsonWriter implements TextQueryResponseWriter {
   @Override
   public void write(Writer writer, SolrQueryRequest request, SolrQueryResponse response)
       throws IOException {
+    if (isArrntv(request)) {
+      new JSONResponseWriter().write(writer, request, response);
+      return;
+    }
     var sw = new WriterImpl(request, response, jsonfactory.createGenerator(writer));
     sw.writeResponse();
     sw.close();

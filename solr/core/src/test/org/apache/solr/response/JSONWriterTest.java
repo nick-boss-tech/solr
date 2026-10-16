@@ -324,6 +324,57 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testArrntvThroughJacksonJsonWriter() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "off");
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    nl.add("data1", "he\u2028llo\u2029!");
+    nl.add(null, 42);
+    nl.add(null, null);
+    rsp.add("nl", nl);
+
+    JacksonJsonWriter w = new JacksonJsonWriter();
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    w.write(baos, req, rsp, JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+
+    String expectedNLjson =
+        "\"nl\":[{\"name\":\"data1\",\"type\":\"str\",\"value\":\"he\\u2028llo\\u2029!\"},"
+            + "{\"name\":null,\"type\":\"int\",\"value\":42},"
+            + "{\"name\":null,\"type\":\"null\",\"value\":null}]";
+    jsonEq("{" + expectedNLjson + "}", baos.toString(StandardCharsets.UTF_8));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvFacetsOnDefaultJsonWriter() throws Exception {
+    assertU(adoc("id", "arrntv-1", "cat", "a"));
+    assertU(adoc("id", "arrntv-2", "cat", "b"));
+    assertU(commit());
+    try {
+      // no wt: the request resolves to JacksonJsonWriter, the writer used when wt is omitted
+      String response =
+          h.query(
+              "/select",
+              req(
+                  "q",
+                  "id:arrntv-*",
+                  "rows",
+                  "0",
+                  "facet",
+                  "true",
+                  "facet.field",
+                  "cat",
+                  "json.nl",
+                  JsonTextWriter.JSON_NL_ARROFNTV));
+      assertTrue(response, response.contains("\"type\":\"int\""));
+    } finally {
+      assertU(delQ("id:arrntv-*"));
+      assertU(commit());
+    }
+  }
+
+  @Test
   public void testWfrJSONWriter() throws IOException {
     SolrQueryRequest req = req("wt", "json", JSONWriter.JSON_WRAPPER_FUNCTION, "testFun");
     SolrQueryResponse rsp = new SolrQueryResponse();
