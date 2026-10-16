@@ -5,4 +5,4 @@
 - Steps: tidy commit alone under the Nick Shanin identity, then the full gate at the resulting head with the shared runner. Fast-forward push to solr-8088-submit under the standing push authorization for the owner's draft branch.
 - The PR #5144 body edit is not part of this claim and waits for the owner's approval.
 - A failed focused run or a tidy change beyond the one join is recorded in the job file and escalated; not relaunched.
-- Status: CLAIMED, tidy in progress.
+- Status: DONE (2026-10-16). GATE GREEN at 0a5eaf4b2c; receipts/SOLR-8088.md. PR #5144 body re-point awaits the owner.

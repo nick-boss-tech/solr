@@ -1,6 +1,6 @@
 # SOLR-8088 tidy fix and re-gate
 
-Status: CLAIMED (claims/pool-vm2-gate-backlog-8088-tidy.md)
+Status: DONE. GATE GREEN at 0a5eaf4b2c (receipts/SOLR-8088.md, top section). PR #5144 body re-point awaits the owner.
 
 ## Why
 
