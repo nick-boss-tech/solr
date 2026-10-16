@@ -1,5 +1,5 @@
 title: >
-  A RESTORE that fails before its shards become active now deletes the new collection instead of leaving a partly restored collection behind, unless the restore runs asynchronously.
+  A RESTORE that fails before its shards become active now deletes the new collection instead of leaving a partly restored collection behind, except when a shard copy fails in an async restore.
 type: fixed
 authors:
   - name: Nick Shanin
