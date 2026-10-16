@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-9396 distributed row-field test, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-solr-9396-distrib-row-field-round-1.md)
 
 - Capability tags: premise-run.
 - Intended host: either Linux host (vm1 or vm2). Claim under `claims/` before starting (WORKFLOW.md). Windows does not run this.
