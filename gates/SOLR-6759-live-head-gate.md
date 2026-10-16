@@ -1,6 +1,6 @@
 # Gate job: SOLR-6759 (live-head gate at 680044f1d2)
 
-Status: CLAIMED (claims/pool-vm1-gate-6759-live-head.md)
+Status: DONE
 
 - Branch: solr-6759-submit. Head: `680044f1d2a6a36b4543f4d52bb552e32b142919` (fork tip, confirmed by ls-remote on 2026-10-16). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `7f8d08e34b11d01dce6ea7161cbc9096a8a7444f` (tree-identical to the gated head 42f03eb52376; see receipts/SOLR-6759.md). That evidence does not cover the one commit on top of it, 680044f1d2, which this job gates. Merge-base with upstream/main: `cabedd1d968059215188f4e7563fb303241899ed`.
@@ -47,14 +47,22 @@ No row may leave the choice to the claimant.
 
 - [x] head confirmed by ls-remote
 - [x] diff scope confirmed
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg, expected failure by content
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean
+- [x] step 2 Error Prone compile
+- [x] step 3 proof leg, expected failure by content
+- [x] step 4 focused head run, counted from fresh XML
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
+
+## Outcome (vm1, 2026-10-16): DONE, GATE GREEN at 680044f1d2a6
+
+- All six steps passed at 680044f1d2a6a36b4543f4d52bb552e32b142919: changelog parse rc 0; tidy rc 0, tree unchanged; Error Prone compile rc 0; focused TestExpandComponent 10 tests, 0 failures, 0 errors, 0 skipped from fresh JUnit XML at seed 6759C0FFEE6759; module check rc 0; post-gate tree clean. Receipt: receipts/SOLR-6759.md, top section.
+- Proof leg 1 (merge-base production, branch tests in place): 10 tests, exactly 1 failure, testExpandCompletesPostFilterCollectors with "expected:<2> but was:<1>" on the complete() count. The premise discriminates as expected.
+- Correction to the Decisions row above: the new limit test did NOT fail on the merge-base. A supplementary leg (~/workspace/tools/g6759-proof-parent.log) also ran it against the parent head 7f8d08e34b11 production with the new test file overlaid: 10 tests, 0 failures there too. Reason, from the merge-base run log: a query limit stops the expand search through the searcher's graceful partial-results exit, which completes the collector chain itself (the limit trips inside the request, the handler logs "Query terminated", the request returns status 0 with partial results); at the parent head the search then returns and the post-search complete() call runs. The test therefore pins the limit scenario on every tree and does not discriminate the delta commit; the exception path the try/finally adds is exercised by no run in this gate and rests on the code reading. Recorded here and in the receipt so no later reader takes the test for a fail-before proof of the delta.
+- Author context, relayed by the owner after the runs (2026-10-16): the commit's author states the unwrapped call (the parent commit's shape) skips complete() when a limit throws out of the search, that the new test would fail against that shape, and that on base production the new test should fail on the completion counts because base never calls complete() on that path. The two counted runs above contradict that expectation: the test passes on base and on the parent shape, because the injected limit exits the search gracefully (partial results) instead of throwing out of it. The author's shape concern stands for a search that throws; this test does not drive one. The record follows the runs, and the disagreement is recorded here so the main side can put it to the author with the logs named above.
+- Flagged for the main side (not edited by this lane): the live PR body and pr-drafts/search-components/SOLR-6759.md both say the expand search makes the complete() call "without the finally block", and the Limits section says "The call sits after the search, not in a finally block. If the expand search ends with an exception, complete() is skipped. No test covers that path." The new head falsifies all of it: the call is in a finally block, it is no longer skipped when the search ends early, and the new test covers the query-limit path. Their Proof sections also still cite verification at 42f03eb52376 and the tree at 7f8d08e34b11.
 
 ## Deliverable and limits
 
