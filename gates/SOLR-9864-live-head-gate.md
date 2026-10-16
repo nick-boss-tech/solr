@@ -1,6 +1,6 @@
 # Gate job: SOLR-9864 live-head gate at 0fdc9e97b2
 
-Status: CLAIMED
+Status: DONE
 
 - Branch: solr-9864-submit. Head: `0fdc9e97b2b0930641f1d4174e6053c69895e4d3` (fork tip, confirmed by ls-remote on 2026-10-16). If the tip has moved at run time, stop and record the new tip here.
 - Prior gated head: `176ed67491b50fef0669d629341ed05db4b2e700` (full gate GREEN 2026-10-14, receipts/SOLR-9864.md). That evidence does not cover the one commit on top of it, 0fdc9e97b2, which this job gates. Merge-base with upstream main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
@@ -16,12 +16,12 @@ Status: CLAIMED
 
 Use the host's standard gate runner (~/workspace/tools/solr-gradle.sh behind the blocking flock on ~/workspace/tools/.solr-test-queue.lock). Do not run the build tool directly. Check the worktree out at the head first.
 
-- [ ] Step 0: changelog YAML parse of `changelog/unreleased/SOLR-9864-solrquery-getcopy-sorts.yml`.
-- [ ] Step 1: tidy (`:solr:solrj:tidy`). If tidy changes any file (post-tidy status, with gradle/libs.versions.toml restored), the run is GATE INVALID and stops.
-- [ ] Step 2: Error Prone compile: `:solr:solrj:compileJava :solr:solrj:compileTestJava -Pvalidation.errorprone=true`.
-- [ ] Step 3, proof leg: scratch worktree at the merge-base `14c7aac0d151` (base production) with the branch's test file `SolrQueryTest.java` at 0fdc9e97b2 copied in; run the focused class at the seed; count and read failures from the fresh JUnit XML. Expected, by content, stated from the code before the run: base `getCopy()` never copies `sortClauses`, so a copy starts with no sorts. `testGetCopyKeepsSortClauses` fails (the copy had none; the established premise) and the new `testGetCopyRemoveReplaceAndClearSortClauses` fails at its first content assertion (`copy.getSortField()` is not "id desc" after removing "price" from a copy that never received the clauses). The new `testGetCopyWithoutSortClauses` passes on base: the original has no sorts, and adding a sort to the copy works without the production fix, so it pins the no-sort case rather than discriminating. Expected shape: 19 tests run, exactly 2 failures, the two named above. Any other failure shape stops the job and follows the failure route.
-- [ ] Step 4, focused head run: cleanTest first, then the three focused classes at the seed in the head worktree. Count from the fresh JUnit XML. Expected: SolrQueryTest 19 of 19, QueryRequestTest 5 of 5, TestUpdateRequest 5 of 5. Nothing else runs on the worktree between the test run and the XML read.
-- [ ] Step 5: module check `:solr:solrj:check -x test`.
+- [x] Step 0: changelog YAML parse of `changelog/unreleased/SOLR-9864-solrquery-getcopy-sorts.yml`.
+- [x] Step 1: tidy (`:solr:solrj:tidy`). If tidy changes any file (post-tidy status, with gradle/libs.versions.toml restored), the run is GATE INVALID and stops.
+- [x] Step 2: Error Prone compile: `:solr:solrj:compileJava :solr:solrj:compileTestJava -Pvalidation.errorprone=true`.
+- [x] Step 3, proof leg: scratch worktree at the merge-base `14c7aac0d151` (base production) with the branch's test file `SolrQueryTest.java` at 0fdc9e97b2 copied in; run the focused class at the seed; count and read failures from the fresh JUnit XML. Expected, by content, stated from the code before the run: base `getCopy()` never copies `sortClauses`, so a copy starts with no sorts. `testGetCopyKeepsSortClauses` fails (the copy had none; the established premise) and the new `testGetCopyRemoveReplaceAndClearSortClauses` fails at its first content assertion (`copy.getSortField()` is not "id desc" after removing "price" from a copy that never received the clauses). The new `testGetCopyWithoutSortClauses` passes on base: the original has no sorts, and adding a sort to the copy works without the production fix, so it pins the no-sort case rather than discriminating. Expected shape: 19 tests run, exactly 2 failures, the two named above. Any other failure shape stops the job and follows the failure route.
+- [x] Step 4, focused head run: cleanTest first, then the three focused classes at the seed in the head worktree. Count from the fresh JUnit XML. Expected: SolrQueryTest 19 of 19, QueryRequestTest 5 of 5, TestUpdateRequest 5 of 5. Nothing else runs on the worktree between the test run and the XML read.
+- [x] Step 5: module check `:solr:solrj:check -x test`.
 
 A gate that executed tests and failed is not relaunched by the claimant. Record the failure here and follow the failure route.
 
@@ -57,3 +57,17 @@ A gate that executed tests and failed is not relaunched by the claimant. Record 
 
 - One fast-forward push with the receipt and the DONE marks.
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Outcome (vm1, 2026-10-16)
+
+GATE GREEN at 0fdc9e97b2b0930641f1d4174e6053c69895e4d3. Log: ~/workspace/tools/g9864-live-gate.log, gate end 2026-10-16T05:52Z.
+
+- Step 0: changelog YAML parse rc=0.
+- Step 1: tidy rc=0; post-tidy tree unchanged (gradle/libs.versions.toml restored); not GATE INVALID.
+- Step 2: Error Prone compile rc=0. The author-context caution did not materialize: the head commit is test-only and compiles clean.
+- Step 3, proof leg: SolrQueryTest on base production 14c7aac0d151 with the branch test file: 19 run, exactly 2 failures, both by content. testGetCopyKeepsSortClauses (the copy's sort list is empty on base) and testGetCopyRemoveReplaceAndClearSortClauses (after removeSort("price") the copy's sort field is still "price asc,id desc"; the empty clause list gives the removal nothing to act on). testGetCopyWithoutSortClauses passed on base, as predicted (a pin for the no-sort case). XML archived at ~/workspace/tools/g9864-live-proof-xml/.
+- Step 4: SolrQueryTest 19 of 19, QueryRequestTest 5 of 5, TestUpdateRequest 5 of 5, from fresh JUnit XML at seed 9864C0FFEE9864 (XML timestamps 2026-10-16T05:50Z; archived at ~/workspace/tools/g9864-live-head-xml/).
+- Step 5: module check rc=0. Post-gate tree clean.
+- Receipt: receipts/SOLR-9864.md, new top section. The branch was not edited and not pushed; ls-remote still shows solr-9864-submit at 0fdc9e97b2.
+
+Flagged for the main side (not edited here): PR #5150's live body and pr-drafts/search-components/SOLR-9864.md both cite the 2026-10-14 verification at 176ed67491b5 (SolrQueryTest 17 of 17) and carry a Limits sentence saying the test does not cover a copy of a query with no sorts; the new head's testGetCopyWithoutSortClauses covers exactly that case, and the counts at the live head are 19 of 19. The body's quoted base failure text ("expected the two sort clauses but the copy had none") also no longer matches the current test's failure text recorded in this gate.
