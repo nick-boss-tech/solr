@@ -1,6 +1,6 @@
 # Gate job: SOLR-8939 tidy-fix gate (fresh full gate at the tidy-fix head)
 
-Status: CLAIMED (vm1, claims/pool-vm1-gate-8939-tidy-fix.md, 2026-10-16).
+Status: DONE (tidy fix pushed as 1a4a312bb7; fresh full gate GREEN at that head on 2026-10-16; see Outcome).
 
 - Branch: solr-8939-submit. Starting head: `0a97b52c7d97341d45817205ac1057669a756d50` (fork tip, confirmed by ls-remote on 2026-10-16). The tidy fix below adds one commit on top; this job gates the resulting head.
 - Prior records: gates/SOLR-8939-live-head-gate.md ran at 0a97b52c7d and stopped GATE INVALID at step 1: `:solr:core:tidy` inserts exactly one blank line in `solr/core/src/java/org/apache/solr/handler/component/ResponseBuilder.java`, after line 208 (`public Map<Object, ShardDoc> resultIds;`), before the comment block preceding the new `pageShardDocs` field. Steps 2 to 5 never ran; no tests were executed at that head. The GATE GREEN at a855a2d896 stands for that tree only.
@@ -13,14 +13,14 @@ Status: CLAIMED (vm1, claims/pool-vm1-gate-8939-tidy-fix.md, 2026-10-16).
 
 Use the host's standard gate runner (~/workspace/tools/solr-gradle.sh behind the blocking flock on ~/workspace/tools/.solr-test-queue.lock). Do not run the build tool directly. Check the head worktree out at the tidy-fix head first.
 
-- [ ] Step 0: changelog YAML parse of `changelog/unreleased/SOLR-8939-date-unique-key-millis.yml`.
-- [ ] Step 1: tidy (`:solr:core:tidy`). The tree must be unchanged after tidy; if tidy changes any file, the run is GATE INVALID and stops.
-- [ ] Step 2: Error Prone compile: `:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true`.
-- [ ] Step 3, proof legs, in the proof worktree at the merge-base `97d973814336` (base production), judged by content from fresh JUnit XML:
+- [x] Step 0: changelog YAML parse of `changelog/unreleased/SOLR-8939-date-unique-key-millis.yml`.
+- [x] Step 1: tidy (`:solr:core:tidy`). The tree must be unchanged after tidy; if tidy changes any file, the run is GATE INVALID and stops.
+- [x] Step 2: Error Prone compile: `:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true`.
+- [x] Step 3, proof legs, in the proof worktree at the merge-base `97d973814336` (base production), judged by content from fresh JUnit XML:
   - Leg A (established premise): the branch's `StoredFieldsShardRequestFactoryTest.java` copied in; run that class at the seed. Expected: 2 tests, exactly 1 failure, `testDateUniqueKeyIsSentAsIsoWithMilliseconds`, because base production sends the date key with `Date.toString()`, which carries no milliseconds. The string-key test passes on base.
   - Leg B (new-commit discriminator): `QueryComponentIdFormatTest` at the head does not compile against base production (its first three tests call `QueryComponent.idToString`, which the branch adds), so those tests are INCONCLUSIVE-by-compile against base. The new `testSameSecondDateKeysAllReachThePage` uses only base APIs and runs on base production as the scratch probe class `QueryComponentSameSecondProbeTest` holding only that test (never committed). Expected: exactly 1 failure, the response-docs size assertion, expected 3 but was 2, because on base `setResultIdsAndResponseDocs` sizes the page from the `resultIds` map keyed by `id.toString()` and the two same-second date keys collapse into one entry. Any other failure shape stops the job and follows the failure route.
-- [ ] Step 4, focused head run: cleanTest first, then both focused classes at the seed in the head worktree. Count from the fresh JUnit XML. Expected: QueryComponentIdFormatTest 4 of 4, StoredFieldsShardRequestFactoryTest 2 of 2. Nothing else runs on the worktree between the test run and the XML read.
-- [ ] Step 5: module check `:solr:core:check -x test`.
+- [x] Step 4, focused head run: cleanTest first, then both focused classes at the seed in the head worktree. Count from the fresh JUnit XML. Expected: QueryComponentIdFormatTest 4 of 4, StoredFieldsShardRequestFactoryTest 2 of 2. Nothing else runs on the worktree between the test run and the XML read.
+- [x] Step 5: module check `:solr:core:check -x test`.
 
 A gate that executed tests and failed is not relaunched by the claimant. Record the failure here and follow the failure route.
 
@@ -41,14 +41,26 @@ A gate that executed tests and failed is not relaunched by the claimant. Record 
 
 ## Checklist
 
-- [ ] fork tip confirmed by ls-remote
-- [ ] tidy fix commit is exactly the recorded blank line
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean
-- [ ] step 2 Error Prone compile
-- [ ] step 3 leg A, expected failure by content
-- [ ] step 3 leg B probe, expected failure by content
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] fork tip confirmed by ls-remote
+- [x] tidy fix commit is exactly the recorded blank line
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean
+- [x] step 2 Error Prone compile
+- [x] step 3 leg A, expected failure by content
+- [x] step 3 leg B probe, expected failure by content
+- [x] step 4 focused head run, counted from fresh XML
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
+
+## Outcome (2026-10-16, vm1): tidy fix pushed; GATE GREEN at 1a4a312bb7
+
+- Tidy fix: `:solr:core:tidy` at 0a97b52c7d changed exactly one file, `solr/core/src/java/org/apache/solr/handler/component/ResponseBuilder.java`, numstat 1 insertion 0 deletions: the blank line after line 208 (`public Map<Object, ShardDoc> resultIds;`) recorded by gates/SOLR-8939-live-head-gate.md (post-tidy blob 29e9511492, identical to that gate's recorded post-tidy blob). gradle/libs.versions.toml untouched. Committed as 1a4a312bb7ab034fd932018691e76c86309f3b3d ("SOLR-8939: tidy ResponseBuilder (blank line after resultIds)", Nick Shanin, no trailers) and pushed plainly to solr-8939-submit (fast-forward 0a97b52c7d..1a4a312bb7), verified by ls-remote.
+- Gate log: g8939-tidy-fix-gate.log (vm1, runner g8939-tidy-fix-gate.sh; flock acquired 2026-10-16T06:57:02Z; gate end 2026-10-16T07:12Z). Head worktree confirmed at 1a4a312bb7, clean at gate start and after the gate.
+- Step 0: changelog YAML parse of `changelog/unreleased/SOLR-8939-date-unique-key-millis.yml` rc 0.
+- Step 1: tidy rc 0, tree unchanged after tidy.
+- Step 2: Error Prone compile rc 0.
+- Step 3, proof legs on merge-base production 97d973814336 (proof worktree state verified: exactly the two test files differ, nothing under src/java), judged from fresh JUnit XML archived at ~/workspace/tools/g8939-tidy-fix-proof-xml/: leg A (branch's StoredFieldsShardRequestFactoryTest copied in): 2 tests, exactly 1 failure, `testDateUniqueKeyIsSentAsIsoWithMilliseconds`, ComparisonFailure expected:<[2016-03-21T10:15:30.123Z]> but was:<[Mon Mar 21 06:15:30 AST 2016]>; the string-key test passes on base. Leg B (scratch probe QueryComponentSameSecondProbeTest, the branch's new same-second test only; the class's idToString tests are INCONCLUSIVE-by-compile against base): 1 test, exactly 1 failure, `testSameSecondDateKeysAllReachThePage`, AssertionError expected:<3> but was:<2>. Both legs match the expectations recorded in gates/SOLR-8939-live-head-gate.md by content.
+- Step 4: focused head run after cleanTest, counts from fresh JUnit XML archived at ~/workspace/tools/g8939-tidy-fix-head-xml/: QueryComponentIdFormatTest 4 of 4, StoredFieldsShardRequestFactoryTest 2 of 2 (seed 8939C0FFEE8939).
+- Step 5: module check `:solr:core:check -x test` rc 0.
+- Flagged for the main side (public text, not edited by this lane): the flags recorded in gates/SOLR-8939-live-head-gate.md against PR #5146's body and title and pr-drafts/search-components/SOLR-8939.md still stand, and every head citation in them is now one commit further stale: the live head is 1a4a312bb7, gated green by this job. The draft still cites the a855a2d896 gate as the branch's verification.
