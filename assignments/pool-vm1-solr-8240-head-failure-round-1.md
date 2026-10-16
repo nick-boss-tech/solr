@@ -51,3 +51,14 @@ Runs (vm1, seed 8240C0FFEE824001, blocking flock; log /home/hatch/workspace/tool
 - Scratch probe at the head (Finding 1's corrected assertion only): the named test passes; classMethod still fails with the same 147 objects.
 
 What a fix needs (for the main agent's decision, not done here): rewrite the test to assert on the response exception (or dispatch through a path that surfaces it), and close the swapped-out harnesses (or avoid mid-class initCore) so the class teardown accounts for every core the test creates. Either change edits a test the PR body describes, so it waits for the main agent.
+
+## Main-agent decision (2026-10-16T02:19Z): proceed with the test fix
+
+The escalation is settled on the main side under the owner's decision-routing rule (2026-10-14): the test fix proceeds. Production at 97cd22159b is correct and is not changed.
+
+Fix both defects in TestInitParams, test code only:
+
+1. Rewrite testUpdateJsonDocsInitParamsRejectsFieldMappings to assert on the response exception (the SolrException recorded on the response, code 400, message naming mapUniqueKeyOnly), following the class's own pattern in its other tests. Keep the explicit mapUniqueKeyOnly=false override case and its expectation.
+2. Fix the harness leak: account for every harness the class creates (close the swapped-out harnesses, or restructure so no mid-class initCore swap leaks), so classMethod reports no unreleased objects. Both solrconfig variants stay exercised.
+
+Then file a new gate job for the resulting head (gates/ directory, naming the branch, the new head, the focused classes TestInitParams and JsonLoaderTest, and seed 8240C0FFEE824001), run the full hardening gate at that head, and push the fix commit to solr-8240-submit only on green (plain fast-forward). On green: write receipts/SOLR-8240.md at the new head, mark this assignment DONE, and mark both claims (claims/pool-vm1-solr-8240-head-failure-round-1.md and claims/pool-vm2-gate-backlog-8240.md) DONE naming the new head. Flag in the lane's report any PR body sentence the test fix falsifies; body edits stay with the main side.
