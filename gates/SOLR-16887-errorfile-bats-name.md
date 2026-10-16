@@ -79,6 +79,18 @@ Evidence:
 
 Re-run requirement (the defect to not repeat): the runner must run the BATS legs through the Gradle bats task, or export `SOLR_PORT`, `SOLR_PORT_LISTEN`, `SOLR2_PORT`, `SOLR3_PORT` and `ZK_PORT` the way `solr/packaging/build.gradle` sets them before invoking `bats` directly (a free base port, with `SOLR_PORT_LISTEN` equal to `SOLR_PORT`). Steps 1 to 3 already passed at `8c1a3faa530271a471393f3acf313d9ff7dacf2b` and do not need redoing; the re-run covers steps 4 to 6 only, at that same head, which is kept in the vm2 gate worktree `/workspace/gates/solr-16887-gate`. This job is OPEN and claimable by a Linux host under the WORKFLOW.md claim rules; the failed claim `claims/pool-vm2-gate-backlog-16887.md` is discharged by this classification.
 
+## Classification of the escalated failure (2026-10-15): runner defect, confirmed again from the record and the code
+
+The escalation added to `claims/pool-vm2-gate-backlog-16887.md` by the vm2 audit of 2026-10-16T00:56Z records no new run. It re-raises the single follow-up run of 2026-10-14 (run output `queue-g16887-gate-20261014T143050Z.out`, gated head `8c1a3faa530`), and no re-run of steps 4 to 6 appears in any record since the re-issue in the 2026-10-14 classification above. That classification therefore stands, restated here with its deciding points verified against the code at `42675f65d6f`:
+
+- The failure sits in the harness, before the assertions this gate exists to check. Both legs stopped at the started-check (`test_start_solr.bats` line 137, `solr assert --started http://localhost:${SOLR_PORT} --timeout 5000`) with status 100 and the URL rendered as `http://localhost:` (empty port), while Solr logged "Started Solr server on port 8983" in both legs. The flag assertion never ran, and step 6's system info request was never made.
+- A branch defect cannot produce this failure: the premise leg runs merge-base production `9b3a84b1c460` with only the head's BATS file overlaid, and it failed identically. A test defect is excluded as well: the same started-check and flag assertion passed in the r35 gate at `42675f65d6f` when the runner supplied the port environment, so the test's assertions are satisfiable and were met at this branch's gated head. A product startup failure is excluded because Solr did start; the check polled a portless URL.
+- `SOLR_PORT` has exactly one source: the Gradle bats task in `solr/packaging/build.gradle` picks a free base port and exports the family at lines 329 to 333 (`SOLR_PORT`, `SOLR_PORT_LISTEN`, `SOLR2_PORT` at +1, `SOLR3_PORT` at +2, `ZK_PORT` at +1000). Nothing under `solr/packaging/` assigns it, and neither the test file nor `bats_helper.bash` sets or defaults it. The runner `g16887-gate.sh` invoked `bats` directly without that environment, so every `${SOLR_PORT}` URL in the run was portless.
+
+No BATS leg was re-run for this classification: the record and the code settle it, and the gated head `8c1a3faa530` exists only in the vm2 gate worktree (the fork head is still `42675f65d6f`), so it is not available to run elsewhere.
+
+Next step for the claim holder: re-run steps 4 to 6 only, at `8c1a3faa530` in the kept vm2 gate worktree `/workspace/gates/solr-16887-gate`, through the Gradle bats task, or with `SOLR_PORT`, `SOLR_PORT_LISTEN`, `SOLR2_PORT`, `SOLR3_PORT` and `ZK_PORT` exported the way `solr/packaging/build.gradle` sets them. Per the 2026-10-14 ruling, that is an environment correction to a harness failure, not a relaunch of a gate whose assertions ran and failed. Steps 1 to 3 stand as passed at that head and do not need redoing. On green, follow the On green section below.
+
 ## On green
 
 - Push the branch with a plain fast-forward to `solr-16887-submit`. Record the new head here.
