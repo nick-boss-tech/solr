@@ -1,6 +1,6 @@
 # Open work
 
-This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/` (regenerated 2026-10-16, from pr-prepare tip ad5ad8cae8). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
+This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/` (regenerated 2026-10-16, from coordination tip ad5ad8cae8). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
 
 Counts at generation: 6 open assignments, 2 open gate jobs, 12 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
 

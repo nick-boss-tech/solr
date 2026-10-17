@@ -4,7 +4,7 @@ This page is the order of operations for any agent that posts assignments or gat
 
 ## Two rules that cause most failures
 
-1. A handoff is a file on this branch. If it has no path on `pr-prepare`, no other agent can see it. Chat messages and local notes are not handoffs.
+1. A handoff is a file on this branch. If it has no path on `coordination`, no other agent can see it. Chat messages and local notes are not handoffs.
 2. Push only as a fast-forward: fetch, rebase, push. Never force. Never reset a worktree that holds commits you have not pushed.
 
 ## Before you post or claim
@@ -12,8 +12,8 @@ This page is the order of operations for any agent that posts assignments or gat
 Check the fork, not your local copy:
 
 - Head: `git ls-remote origin refs/heads/<branch>`. Put that exact sha in the job.
-- Existing gate: `git ls-tree --name-only origin/pr-prepare -- gates/`. Look for `<TICKET>.md`.
-- Existing claims: `git ls-tree --name-only origin/pr-prepare -- claims/`. Look for names with the ticket number. Read any claim that has no `DONE:` line.
+- Existing gate: `git ls-tree --name-only origin/coordination -- gates/`. Look for `<TICKET>.md`.
+- Existing claims: `git ls-tree --name-only origin/coordination -- claims/`. Look for names with the ticket number. Read any claim that has no `DONE:` line.
 
 If the job or claim name already exists, stop. Another session got there first, and the first push wins.
 
@@ -24,12 +24,12 @@ If the job or claim name already exists, stop. Another session got there first, 
 3. Post it:
    - Windows: `research\pool-post.ps1 -Kind gate -Name SOLR-NNNN -File <scratch file>`, or `-Kind assignment -Name <slug>`. The script runs the checks in the next section, then commits and pushes.
    - Any host, by hand:
-     1. `git fetch origin pr-prepare`
-     2. Make a worktree at the fork tip with `git worktree add --detach <your path> origin/pr-prepare`. Use your own path. Do not share a checkout with another session.
+     1. `git fetch origin coordination`
+     2. Make a worktree at the fork tip with `git worktree add --detach <your path> origin/coordination`. Use your own path. Do not share a checkout with another session.
      3. Copy the file to `gates/<TICKET>.md` or `assignments/<slug>.md` in that worktree.
      4. `git add` that file, then commit as Nick Shanin with no trailers: `git -c user.name="Nick Shanin" -c user.email="nick.boss.us@gmail.com" commit -m "<TICKET>: post gate job at <short head>"`.
-     5. `git push origin HEAD:refs/heads/pr-prepare`. If the push is rejected, run `git fetch origin pr-prepare`, `git rebase origin/pr-prepare`, and push again.
-     6. Read it back: `git show origin/pr-prepare:gates/<TICKET>.md`.
+     5. `git push origin HEAD:refs/heads/coordination`. If the push is rejected, run `git fetch origin coordination`, `git rebase origin/coordination`, and push again.
+     6. Read it back: `git show origin/coordination:gates/<TICKET>.md`.
 
 ## Find open work
 

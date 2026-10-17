@@ -1,4 +1,4 @@
-# pr-prepare
+# coordination
 
 Working branch for preparing Solr pull requests by code area.
 
