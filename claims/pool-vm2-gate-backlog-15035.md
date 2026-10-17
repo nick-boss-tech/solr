@@ -1,6 +1,6 @@
 # Claim: SOLR-15035 base-code run and banked-patch run (gate backlog coordinator)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-15035-base-run.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 - Claimed: 2026-10-13T05:48Z. Job: gates/SOLR-15035-base-run.md.
 - Head at claim: 12d7491e82cd660ad55063cb85633b7e05e1918c (solr-15035-submit, verified by ls-remote at claim time).

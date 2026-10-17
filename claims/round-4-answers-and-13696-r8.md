@@ -1,6 +1,6 @@
 # Claim: round 4 answers and SOLR-13696 r8 addendum (main side)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 Claimed by the main side (Muse, working for Nick Shanin) on 2026-10-09.
 

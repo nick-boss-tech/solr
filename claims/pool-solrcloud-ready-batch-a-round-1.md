@@ -1,6 +1,6 @@
 # Claim: SolrCloud READY drafts, batch A, review to SATISFIED, round 1 (pr-prepare)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-solrcloud-ready-review-batch-a-round-1.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 - Claimed by: windows (review agent), Claude Code on this host, working for Nick Shanin
 - Capability tags: review, draft

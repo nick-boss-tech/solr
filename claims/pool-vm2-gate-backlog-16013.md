@@ -1,6 +1,6 @@
 # Claim: SOLR-16013 re-gate at the live tip (vm2, gate backlog coordinator)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-16013.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 - Claimed: 2026-10-12T09:39Z by vm2 (coordinator). Job: gates/SOLR-16013.md.
 - Branch tip read at claim time: ba26b7028917ef29d5b5e1cfe75ee83862cccf63 (solr-16013-submit, ls-remote). No branch change under this job.

@@ -1,6 +1,6 @@
 # Claim: review round 2 for the 28 update-processing PRs
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/review-28-round-2.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 Claimed 2026-10-09 by Claude Code (AI agent), working for Nick Shanin.
 

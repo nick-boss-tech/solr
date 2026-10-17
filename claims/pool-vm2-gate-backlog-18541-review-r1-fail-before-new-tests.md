@@ -1,6 +1,6 @@
 # Claim: SOLR-18541 fail-before for the two new review tests (vm2, gate backlog coordinator)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-18541-review-r1-fail-before-new-tests.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 - Claimed: 2026-10-13T22:46Z by vm2 (gate backlog coordinator). Job: gates/SOLR-18541-review-r1-fail-before-new-tests.md.
 - Head: a93f9f6a997e748514cf2575a6e94c5f1c01f85e (combinedquerycomponent-merge-totals fork tip read by ls-remote at claim time). Fail-before leg: production CombinedQueryComponent.java reverted to merge-base d76fc14b9857e77b830d7a82514b28c523a239c2 in a scratch worktree only. No fork push, no PR touched.

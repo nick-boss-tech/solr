@@ -1,6 +1,6 @@
 # Claim: SOLR-18010 review patch round 1, fail-before premise fix (review side)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-vm2-18010-review-r1-fail-before-patch.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 - Claimed by: windows (review coordinator), Claude Code on this host, working for Nick Shanin
 - Capability tags: review (writes the patch)

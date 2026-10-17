@@ -1,6 +1,6 @@
 # Claim: SOLR-12651 base-code run at the live head (gate backlog coordinator)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-12651-base-run.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 - Claimed: 2026-10-13T04:45Z. Job: gates/SOLR-12651-base-run.md.
 - Head at claim: 404f13b501c97d6c6b65743a27f54f4f38363afa (solr-12651-submit, verified by ls-remote at claim time). Merge-base 14c7aac0d151402b00259e2fb9bf5eed7049ec5d.

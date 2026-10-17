@@ -1,6 +1,6 @@
 # Claim: SOLR-18010 review round 1, leg G3 (vm2, gate backlog coordinator)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-18010-review-r1-g3.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 - Claimed: 2026-10-13T19:35:37Z by vm2 (gate backlog coordinator). Job: gates/SOLR-18010-review-r1-g3.md.
 - Head: e99be67c9a6fe15f86306104843a30b35196f159 (review-r1-solr-18010 fork tip read by ls-remote at claim time). Not the PR branch; no fork push, no PR touched.

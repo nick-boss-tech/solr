@@ -1,6 +1,6 @@
 # Claim: corrections to the 28 drafts from the internal review
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 Claimed 2026-10-09 by Claude Code (AI agent), working for Nick Shanin.
 

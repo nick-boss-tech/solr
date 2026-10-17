@@ -1,6 +1,6 @@
 # Claim: SOLR-4374 digit-leading names in fl gate at the head (vm2, gate backlog coordinator)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-4374.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 - Claimed: 2026-10-15T01:20ZZ by vm2. Job: gates/SOLR-4374.md (head f0e23fca1b7, fork tip verified by ls-remote).
 - Capability tags: gate (no push; the job's on-green steps are a receipt and a job update).

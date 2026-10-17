@@ -1,6 +1,6 @@
 # Claim: pool-solr-16630-base-runs
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-solr-16630-base-runs.md: none linked)
+Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 hours; listed in reports/claims-stale-batch-close-2026-10-17.md)
 
 - Assignment: assignments/pool-solr-16630-base-runs.md
 - Claimant host: vm1 (hosts/vm1.md)
