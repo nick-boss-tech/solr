@@ -98,7 +98,7 @@ public class ShardBackupMetadata {
     }
 
     try (IndexInput is =
-        repository.openInput(dir, shardBackupMetadataFilename, IOContext.DEFAULT)) {
+        repository.openInput(dir, shardBackupMetadataFilename, IOContext.READONCE)) {
       return from(new IndexInputInputStream(is));
     }
   }

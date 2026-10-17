@@ -441,7 +441,7 @@ public class SolrCore implements SolrInfoBean, Closeable {
   private String getIndexPropertyFromPropFile(Directory dir) throws IOException {
     IndexInput input;
     try {
-      input = dir.openInput(IndexFetcher.INDEX_PROPERTIES, IOContext.DEFAULT);
+      input = dir.openInput(IndexFetcher.INDEX_PROPERTIES, IOContext.READONCE);
     } catch (FileNotFoundException | NoSuchFileException e) {
       // Swallow this error, dataDir/index is the right thing to return
       // if there is no index.properties file

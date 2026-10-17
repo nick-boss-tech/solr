@@ -105,7 +105,7 @@ public class BackupProperties {
     try (Reader is =
         new InputStreamReader(
             new IndexInputInputStream(
-                repository.openInput(backupPath, fileName, IOContext.DEFAULT)),
+                repository.openInput(backupPath, fileName, IOContext.READONCE)),
             StandardCharsets.UTF_8)) {
       props.load(is);
       Map<String, String> extraProperties = extractExtraProperties(props);

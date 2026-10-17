@@ -210,7 +210,7 @@ public class BackupManager {
 
     URI zkStateDir = getZkStateDir();
     try (IndexInput is =
-        repository.openInput(zkStateDir, COLLECTION_PROPS_FILE, IOContext.DEFAULT)) {
+        repository.openInput(zkStateDir, COLLECTION_PROPS_FILE, IOContext.READONCE)) {
       byte[] arr = new byte[(int) is.length()]; // probably ok since the json file should be small.
       is.readBytes(arr, 0, (int) is.length());
       // set a default created date, we don't aim at reading actual zookeeper state. The restored
@@ -288,7 +288,8 @@ public class BackupManager {
             + ZkStateReader.COLLECTION_PROPS_ZKNODE;
 
     try (IndexInput is =
-        repository.openInput(sourceDir, ZkStateReader.COLLECTION_PROPS_ZKNODE, IOContext.DEFAULT)) {
+        repository.openInput(
+            sourceDir, ZkStateReader.COLLECTION_PROPS_ZKNODE, IOContext.READONCE)) {
       byte[] arr = new byte[(int) is.length()];
       is.readBytes(arr, 0, (int) is.length());
       zkStateReader.getZkClient().create(zkPath, arr, CreateMode.PERSISTENT);
@@ -381,7 +382,7 @@ public class BackupManager {
               log.warn(
                   "Not including zookeeper file in restore, as it is a forbidden type: {}", file);
             } else {
-              try (IndexInput is = repository.openInput(sourceDir, file, IOContext.DEFAULT)) {
+              try (IndexInput is = repository.openInput(sourceDir, file, IOContext.READONCE)) {
                 // probably ok since the config file should be small.
                 byte[] arr = new byte[(int) is.length()];
                 is.readBytes(arr, 0, (int) is.length());

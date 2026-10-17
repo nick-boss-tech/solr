@@ -1248,7 +1248,7 @@ public class ReplicationHandler extends RequestHandlerBase
                     core.getSolrConfig().indexConfig.lockType);
         IndexInput input;
         try {
-          input = dir.openInput(IndexFetcher.REPLICATION_PROPERTIES, IOContext.DEFAULT);
+          input = dir.openInput(IndexFetcher.REPLICATION_PROPERTIES, IOContext.READONCE);
         } catch (FileNotFoundException | NoSuchFileException e) {
           return new Properties();
         }
