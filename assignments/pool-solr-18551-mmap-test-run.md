@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18551 focused IndexFetcher mmap test run
 
-Status: CLAIMED (claims/pool-solr-18551-mmap-test-run.md, vm2, 2026-10-17)
+Status: STOPPED (vm2, 2026-10-17): head test sources do not compile, no test ran, fail-before not run. See reports/SOLR-18551-indexfetcher-mmap-test-run.md.
 
 - Capability tags: settling-run.
 - Intended host: vm2 (Linux). Claim under `claims/` before starting (WORKFLOW.md).

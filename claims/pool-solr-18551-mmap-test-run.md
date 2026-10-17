@@ -7,3 +7,5 @@
 - Source changes: none. No PR, comment, JIRA or email.
 
 Heartbeat: 2026-10-17T03:50Z (claim).
+- 2026-10-17T04:01Z result: STOPPED. Head run rc=1 at :solr:core:compileTestJava (IndexFetcherTest.java:86, slowFileExists is private static and overrides a public LuceneTestCase method). No tests ran; fail-before not run. Report: reports/SOLR-18551-indexfetcher-mmap-test-run.md. No source changed.
+- Status: DONE (stopped, 2026-10-17T04:01Z). Deliverable: reports/SOLR-18551-indexfetcher-mmap-test-run.md.
