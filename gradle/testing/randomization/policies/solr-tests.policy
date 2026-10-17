@@ -150,6 +150,7 @@ grant {
   // needed for kafka mockito
   permission java.lang.RuntimePermission "manageProcess";
   permission java.io.FilePermission "${/}proc${/}self${/}io", "read";
+  permission java.io.FilePermission "${/}proc${/}self${/}maps", "read";
   permission java.io.FilePermission "${java.home}${/}bin${/}java", "execute";
   permission java.io.FilePermission "${java.home}${/}bin${/}java.exe", "execute";
 

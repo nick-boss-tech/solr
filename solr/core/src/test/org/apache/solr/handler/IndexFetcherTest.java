@@ -20,8 +20,16 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FilterDirectory;
 import org.apache.lucene.store.IOContext;
@@ -29,6 +37,7 @@ import org.apache.lucene.store.IndexInput;
 import org.apache.lucene.store.IndexOutput;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.solr.SolrTestCase;
+import org.junit.Assume;
 import org.junit.Test;
 
 /** Tests the file-existence check used before IndexFetcher moves replicated files. */
@@ -70,6 +79,59 @@ public class IndexFetcherTest extends SolrTestCase {
         assertEquals(List.of("fileLength:missing"), dir.calls);
       }
     }
+  }
+
+  @Test
+  public void testExistenceCheckLeavesNoMappingWhileReaderOpen() throws Exception {
+    Assume.assumeTrue("needs /proc/self/maps", Files.isReadable(Path.of("/proc/self/maps")));
+    Path indexPath = createTempDir();
+    try (MMapDirectory dir = new MMapDirectory(indexPath)) {
+      writeIndex(dir);
+      String segmentInfo = segmentInfoFile(dir);
+      Path file = indexPath.resolve(segmentInfo).toRealPath();
+
+      try (DirectoryReader reader = DirectoryReader.open(dir)) {
+        assertEquals(1, reader.leaves().size());
+        long before = mappedBytes(file);
+        for (int i = 0; i < 50; i++) {
+          assertTrue(invokeSlowFileExists(dir, segmentInfo));
+        }
+        assertEquals(before, mappedBytes(file));
+      }
+      assertEquals(0, mappedBytes(file));
+    }
+  }
+
+  private static void writeIndex(Directory dir) throws IOException {
+    try (IndexWriter writer =
+        new IndexWriter(dir, new IndexWriterConfig().setUseCompoundFile(false))) {
+      Document doc = new Document();
+      doc.add(new StringField("id", "1", Field.Store.NO));
+      writer.addDocument(doc);
+      writer.commit();
+    }
+  }
+
+  private static String segmentInfoFile(Directory dir) throws IOException {
+    for (String name : dir.listAll()) {
+      if (name.endsWith(".si")) {
+        return name;
+      }
+    }
+    throw new AssertionError("no segment info file in index");
+  }
+
+  private static long mappedBytes(Path file) throws IOException {
+    String path = file.toString();
+    long total = 0;
+    for (String line : Files.readAllLines(Path.of("/proc/self/maps"))) {
+      if (!line.endsWith(path)) {
+        continue;
+      }
+      String[] range = line.split(" ")[0].split("-");
+      total += Long.parseUnsignedLong(range[1], 16) - Long.parseUnsignedLong(range[0], 16);
+    }
+    return total;
   }
 
   private static List<Directory> directories() throws IOException {
