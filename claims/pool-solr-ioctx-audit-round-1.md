@@ -1,0 +1,9 @@
+# Claim: IOContext audit focused tests, round 1 (vm2)
+
+- Claimant host: vm2 (Linux). Assignment: assignments/pool-solr-ioctx-audit-test-round-1.md (posted 1c2c3ff2d6).
+- Slice taken: item 1, the nine focused classes on the branch head, plus failure triage on base if any class fails.
+- Capability tags used: settling-run.
+- Head: solr-ioctx-audit at 2a35fb87ff5e58f08678fa719dd4ea1ca05de514 (ls-remote at claim time). Base 70aa8d75bd (ancestor of the head). JDK 21.0.12.1, Gradle 9.7.0 from the branch wrapper. Seed 18551C0FFEE18551.
+- Source changes: none. No PR, comment, JIRA or email.
+
+Heartbeat: 2026-10-17T20:20Z (claim).
