@@ -60,6 +60,7 @@ public class JacksonJsonWriterArrntvCloudTest extends SolrCloudTestCase {
       p.set(params[i], params[i + 1]);
     }
     GenericSolrRequest req = new GenericSolrRequest(METHOD.GET, path, SolrRequestType.QUERY, p);
+    req.setRequiresCollection(true);
     req.setResponseParser(new InputStreamResponseParser("json"));
     NamedList<Object> res = cluster.getSolrClient().request(req, COLLECTION);
     return InputStreamResponseParser.consumeResponseToString(res);

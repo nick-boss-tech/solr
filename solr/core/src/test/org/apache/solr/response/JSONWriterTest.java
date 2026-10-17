@@ -352,8 +352,8 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
 
   @Test
   public void testArrntvFacetsOnDefaultJsonWriter() throws Exception {
-    assertU(adoc("id", "arrntv-1", "cat", "a"));
-    assertU(adoc("id", "arrntv-2", "cat", "b"));
+    assertU(adoc("id", "172680001", "cat", "a"));
+    assertU(adoc("id", "172680002", "cat", "b"));
     assertU(commit());
     try {
       // no wt: the request resolves to JacksonJsonWriter, the writer used when wt is omitted
@@ -362,7 +362,7 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
               "/select",
               req(
                   "q",
-                  "id:arrntv-*",
+                  "id:17268000*",
                   "rows",
                   "0",
                   "facet",
@@ -374,7 +374,7 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
       assertNotNull(Utils.fromJSONString(response));
       assertTrue(response, response.contains("{\"name\":\"a\",\"type\":\"int\",\"value\":1}"));
     } finally {
-      assertU(delQ("id:arrntv-*"));
+      assertU(delQ("id:17268000*"));
       assertU(commit());
     }
   }
@@ -538,7 +538,7 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
 
   @Test
   public void testXmlWriterIgnoresArrntv() throws Exception {
-    assertU(adoc("id", "arrntv-xml", "cat", "a"));
+    assertU(adoc("id", "172680003", "cat", "a"));
     assertU(commit());
     try {
       String xml =
@@ -546,7 +546,7 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
               "/select",
               req(
                   "q",
-                  "id:arrntv-xml",
+                  "id:172680003",
                   "rows",
                   "0",
                   "facet",
@@ -560,7 +560,7 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
       assertTrue(xml, xml.contains("<response"));
       assertTrue(xml, xml.contains("name=\"cat\""));
     } finally {
-      assertU(delQ("id:arrntv-xml"));
+      assertU(delQ("id:172680003"));
       assertU(commit());
     }
   }
