@@ -7,3 +7,5 @@
 - Source changes: none. No PR, comment, JIRA or email.
 
 Heartbeat: 2026-10-17T20:20Z (claim).
+- 2026-10-17T20:22Z: head run at 2a35fb87ff, JDK 21, seed 18551C0FFEE18551. Eight classes OK (0 failures, 0 errors, 0 skipped). TestReplicationHandler: 25 tests, all 25 skipped; no source annotation; the rule is to stop. Report: reports/ioctx-audit-test-round-1.md. Decision needed on the skip.
+- Status: STOPPED (2026-10-17T20:22Z) on the skip decision. The branch is not verified.
