@@ -1,5 +1,7 @@
 # Claim: land the search-components and query-parsing review verdicts, round 1
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-branch-review-verdicts-landing-round-1.md: none linked)
+
 - Claimed by: windows (review coordinator), Claude Code on this host, working for Nick Shanin
 - Capability tags: review (writes the patches and drafts)
 - Assignment: `assignments/pool-branch-review-verdicts-landing-round-1.md`. Standing authority: `material/coordinator-handoff.md`, "Standing authority confirmed 2026-10-13", and the owner's direction on 2026-10-13 to allow pushes to fork branches and edits to live PRs.

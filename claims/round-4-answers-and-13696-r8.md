@@ -1,5 +1,7 @@
 # Claim: round 4 answers and SOLR-13696 r8 addendum (main side)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 Claimed by the main side (Muse, working for Nick Shanin) on 2026-10-09.
 
 Scope: `material/update-processing-13696-r8-addendum.md` (names the gated head the SOLR-13696 draft re-points to) and `material/suggester-round-4-answers.md` (gate receipts, record corrections, launched gates, and recommendation states for the round 4 report's nine owner decisions).

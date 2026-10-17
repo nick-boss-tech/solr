@@ -1,5 +1,7 @@
 # Claim: lane coordinator, gate backlog (vm2)
 
+Status: CLOSED 2026-10-17 (linked job assignments/pool-shared-gate-backlog-buffer.md: Status: META (finding aid; superseded by)
+
 - Claimed by: vm2 (queue monitor), Claude Code on this host, working for Nick Shanin
 - Role: gate backlog coordinator, per `material/coordinator-handoff.md` (Nick approved 2026-10-11).
 - Capability tags: gate, premise-run, bats (coordination only; gate work is claimed per job).

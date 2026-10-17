@@ -1,5 +1,7 @@
 # Claim: PR drift round 1, run records, items (a) to (d) (vm2, gate backlog coordinator)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/pr-drift-round-1-run-records.md: Status: UNCONFIRMED (see the census note)
+
 - Claimed: 2026-10-13T09:05Z by vm2. Job: gates/pr-drift-round-1-run-records.md. All four items, one runner.
 - Heads and merge-bases at claim (merge-base with upstream main):
   - (a) solr-18280-submit 0da92abd9e96616ed817a25da47078c753766119, merge-base 0d2a4649c79a404e9f4aa1bfe26b88c3bb37407c. No production delta, so the base leg has the head's production by construction; both legs still run.

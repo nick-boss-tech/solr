@@ -1,5 +1,7 @@
 # Claim: pool-solrcloud-hold-first-rung-round-1
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-solrcloud-hold-first-rung-round-1.md: none linked)
+
 - Claimant host: windows (review agent, review-rounds coordinator lane).
 - Job or assignment: `assignments/pool-solrcloud-hold-first-rung-round-1.md`.
 - Slice: the whole assignment, first rung per HOLD draft.

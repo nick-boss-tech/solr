@@ -1,5 +1,7 @@
 # Claim: SolrCloud PR drafts, critical review with JIRA context, round 1 (pr-prepare)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 - Claimed by: windows (review agent), Claude Code on this host, working for Nick Shanin
 - Capability tags: review
 - Assignment: none posted. Direction from Nick, 2026-10-13: the SolrCloud PRs are to be submitted, so run another review round, be critical, and read the JIRA context for each ticket.

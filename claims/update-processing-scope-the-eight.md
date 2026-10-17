@@ -1,5 +1,7 @@
 # Claim: scope the eight DISCUSS items in update processing
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/update-processing-scope-the-eight.md: none linked)
+
 Claimed 2026-10-09 by Claude Code (AI agent), working for Nick Shanin.
 
 Scope: price each of the eight DISCUSS items in `TESTING.md` on this

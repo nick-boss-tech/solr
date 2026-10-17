@@ -1,5 +1,7 @@
 # Claim: SOLR-10667 premise run, then first gate (round 2, job 7)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-vm2-gate-backlog-round-2.md: none linked)
+
 Claimant host: vm2. Assignment: assignments/pool-vm2-gate-backlog-round-2.md. Job: gates/SOLR-10667.md.
 Capability tags: gate, premise-run. Staffing: 1.
 Started: 2026-10-11T04:21:27Z (UTC).

@@ -1,5 +1,7 @@
 # Claim: update-processing last-review audit, Group C
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 - Claimed by: Claude Code (AI agent), working for Nick Shanin
 - Date: 2026-10-08
 - Group: C, the ten branches recorded PR-ready

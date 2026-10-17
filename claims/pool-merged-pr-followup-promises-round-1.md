@@ -1,5 +1,7 @@
 # Claim: pool-merged-pr-followup-promises-round-1
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-merged-pr-followup-promises-round-1.md: Status: CLAIMED (claims/pool-merged-pr-f)
+
 - Claimant host: windows (review agent, review-rounds coordinator lane).
 - Job or assignment: `assignments/pool-merged-pr-followup-promises-round-1.md` (audit of merged PR descriptions for follow-up promises).
 - Slice: the whole assignment.

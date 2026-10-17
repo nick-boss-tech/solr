@@ -1,5 +1,7 @@
 # Claim: CombinedQueryComponent ticket review, round 13 (pr-prepare)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 - Claimed by: windows (review agent), Claude Code on this host, working for Nick Shanin
 - Capability tags: review, draft
 - Assignment: none posted. Direction from Nick, 2026-10-13: apply the three open items from round 12 and run the next review round on this host, not with another lane.

@@ -1,5 +1,7 @@
 # Claim: code round 2, item 3 (SOLR-18541 PR 5117, short timeAllowed list)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-review-2026-10-16-code-round-2.md: Status: OPEN)
+
 - Claimant host: vm2 (Linux). Assignment: assignments/pool-review-2026-10-16-code-round-2.md, item 3.
 - Requested directly by Nick Shanin, 2026-10-17: claim, patch and run item 3; the max-versus-sum choice for numFound and approximateTotalHits is left to the claimant.
 - Capability tags used: implementation, gate.

@@ -1,5 +1,7 @@
 # Claim: category close-out overnight, W3 slate round 2 (the report that round 1 left unwritten)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-category-closeout-overnight-round-1.md: none linked)
+
 - Claimed by: windows (review coordinator), Claude Code on this host, working for Nick Shanin
 - Capability tags: review
 - Assignment: `assignments/pool-category-closeout-overnight-round-1.md`, W3. Starting record: `reports/solrcloud-openings-slate-round-1.md` and the W3 record `reports/category-closeout-w3-w5-round-1.md`.

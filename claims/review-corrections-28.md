@@ -1,5 +1,7 @@
 # Claim: corrections to the 28 drafts from the internal review
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 Claimed 2026-10-09 by Claude Code (AI agent), working for Nick Shanin.
 
 Scope: `material/review-opened-28-answers.md` (commit `7cda66bd41a`), which accepts the description and Proof findings of `reports/review-opened-28.md` and records the owner's decisions. Input: the seven group reports `reports/review-opened-28-g1.md` to `reports/review-opened-28-g7.md`, and the restored SOLR-7022 receipt at the same commit. Output: edits to the 28 drafts under `pr-drafts/update-processing/`, and a round report.

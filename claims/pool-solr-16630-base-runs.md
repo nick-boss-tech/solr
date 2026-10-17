@@ -1,5 +1,7 @@
 # Claim: pool-solr-16630-base-runs
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-solr-16630-base-runs.md: none linked)
+
 - Assignment: assignments/pool-solr-16630-base-runs.md
 - Claimant host: vm1 (hosts/vm1.md)
 - Slice: whole assignment (base runs, changelog title fix, receipt update)

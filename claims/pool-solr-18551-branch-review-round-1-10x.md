@@ -1,5 +1,7 @@
 # Claim: SOLR-18551 branch validation round 1, 10x row
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-solr-18551-branch-review-round-1.md: Status: OPEN)
+
 - Claimant host: vm4 (Linux). Assignment: assignments/pool-solr-18551-branch-review-round-1.md.
 - Slice taken: the 10x row only (head leg and base leg).
 - Capability tags used: settling-run.

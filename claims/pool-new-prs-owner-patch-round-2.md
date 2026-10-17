@@ -1,5 +1,7 @@
 # Claim: patches and live edits for the four draft PRs, round 2 (pr-prepare)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 - Claimed by: windows (review agent), Claude Code on this host, working for Nick Shanin
 - Capability tags: review, draft
 - Direction: Nick, 2026-10-13: "You should do these patches, you can edit those PR descriptions and/or comments." Recorded in `memory/pr-review-patch-authority.md`.

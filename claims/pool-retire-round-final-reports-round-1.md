@@ -1,5 +1,7 @@
 # Claim: pool-retire-round-final-reports-round-1
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-retire-round-final-reports-round-1.md: Status: CLAIMED (claims/pool-retire-roun)
+
 - Claimant host: windows (review agent, review-rounds coordinator lane).
 - Job or assignment: `assignments/pool-retire-round-final-reports-round-1.md` (the nine retire evidence packs, the SOLR-18277 receipt record, and the index).
 - Slice: the whole assignment.

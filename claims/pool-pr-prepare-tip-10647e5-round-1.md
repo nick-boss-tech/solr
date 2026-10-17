@@ -1,5 +1,7 @@
 # Claim: scheduled check round for the pr-prepare tip 10647e52204 (round 1)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 - Claimed by: windows (review coordinator), Claude Code on this host, working for Nick Shanin
 - Capability tags: review, draft
 - Trigger: the owner asked why the remaining overnight tasks were not completed. The remaining work is workstreams W2 (four categories), the W1 ready lists, and the W3 slate round 2 report, which was never written.

@@ -1,5 +1,7 @@
 # Claim: code round 2, item 1, SOLR-6831 (PR 5134), distributed refinement with partialResults=false
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-review-2026-10-16-code-round-2.md: Status: OPEN)
+
 - Claimant host: vm2 (Linux). Assignment: assignments/pool-review-2026-10-16-code-round-2.md, item 1.
 - Capability tags used: implementation, gate.
 - Head reviewed: solr-6831-submit at 4afed04987b2343af58261b83c4b49fda0af45c0 (ls-remote at claim time).

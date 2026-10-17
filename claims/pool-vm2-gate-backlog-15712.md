@@ -1,5 +1,7 @@
 # Claim: SOLR-15712 UDVAS version gate (CollationField)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-15712-udvas-version-gate.md: Status: CLAIMED (claims/pool-vm2-gate-ba)
+
 Claimant host: vm2. Job: gates/SOLR-15712-udvas-version-gate.md.
 Capability tags: implementation, gate.
 Head under gate: cb988a2ff4c3e890e3a9c258019d22d1f888aebd (solr-15712-submit).

@@ -1,5 +1,7 @@
 # Claim: Admin UI premise runs (SOLR-9831, SOLR-9818; SOLR-9759 optional)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-admin-ui-premise-runs.md: Status: UNCONFIRMED (see the census note)
+
 - Claimed by: windows (review agent), Claude Code on this host, working for Nick Shanin
 - Capability tags: selenium
 - Assignment: `assignments/pool-admin-ui-premise-runs.md`

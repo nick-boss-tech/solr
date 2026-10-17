@@ -1,5 +1,7 @@
 # Claim: pool-vm5-review-2026-10-16-code-round-2-item-2
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-review-2026-10-16-code-round-2.md: Status: OPEN)
+
 - Claimant host: vm5, matching a file in `hosts/` (`hosts/vm5.md`).
 - Status: ACTIVE; mark DONE with the deliverable path when the work lands.
 - Job or assignment: `assignments/pool-review-2026-10-16-code-round-2.md`, item 2 (SOLR-9124, PR 5147).

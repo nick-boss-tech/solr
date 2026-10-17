@@ -1,5 +1,7 @@
 # Claim: round 3 close-out addendum (answers and SOLR-13943)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/update-processing-round-3-closeout.md: Status: UNCONFIRMED (see the census note)
+
 Claimed 2026-10-09 by Claude Code (AI agent), working for Nick Shanin.
 
 Scope: `material/update-processing-round-3-closeout-answers.md` (commit `e441a3a3b93`), which answers the six owner decisions in `reports/update-processing-round-3-closeout.md` and supplies the SOLR-13943 material. The assignment `assignments/update-processing-round-3-closeout.md` (commit `49bc048b3e9`) says SOLR-13943 joins the close-out when that addendum lands. Output: draft edits under `pr-drafts/update-processing/`, and an addendum section in `reports/update-processing-round-3-closeout.md`.

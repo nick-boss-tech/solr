@@ -1,5 +1,7 @@
 # Claim: SOLR-16887 errorfile restore, BATS rename and gate (gate backlog coordinator)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-16887-errorfile-bats-name.md: Status: CLAIMED (claims/pool-vm2-gate-ba)
+
 - Claimed: 2026-10-14T14:06:07Z by vm2. Job: gates/SOLR-16887-errorfile-bats-name.md.
 - Head: 42675f65d6fc4362e427d3b4927801466b062ca6 (solr-16887-submit, confirmed by ls-remote). Base: 9b3a84b1c460.
 - Capability tags: implementation, gate, bats.

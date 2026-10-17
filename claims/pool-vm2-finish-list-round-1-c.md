@@ -1,5 +1,7 @@
 # Claim: vm2 finish list round 1, section C (SOLR-17055 proof rerun at the fix commit)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-vm2-finish-list-round-1.md: Status: CLAIMED (claims/pool-vm2-finish-)
+
 - Claimed: 2026-10-14T23:30ZZ by vm2. Assignment: assignments/pool-vm2-finish-list-round-1.md, section C. Job: gates/SOLR-17055-sort-path-proof-rerun.md.
 - Fix commit: 2fe0986158391908ac89564090eb97e245788023 (parent c2396f425fa2, fork tip verified by ls-remote at claim time).
 - Runner: gates/g17055-proof-c-gate.sh (worktree /workspace/gates/solr-17055-fix). Seed 17055C0FFEE17055.

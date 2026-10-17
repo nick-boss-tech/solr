@@ -1,5 +1,7 @@
 # Claim: SOLR-18010 review patch round 1, gate (vm2, gate backlog coordinator)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-18010-review-r1-patch.md: none linked)
+
 - Claimed: 2026-10-13T17:01Z by vm2 (gate backlog coordinator). Job: gates/SOLR-18010-review-r1-patch.md.
 - Head: e99be67c9a6fe15f86306104843a30b35196f159 (review-r1-solr-18010, parent 2b5ad801c9e88807337f4f0a3fdd689126ad37d1). Not the PR branch.
 - Capability tags: gate.

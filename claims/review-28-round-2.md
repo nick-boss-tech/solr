@@ -1,5 +1,7 @@
 # Claim: review round 2 for the 28 update-processing PRs
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/review-28-round-2.md: none linked)
+
 Claimed 2026-10-09 by Claude Code (AI agent), working for Nick Shanin.
 
 Scope: `assignments/review-28-round-2.md` (commit `db860669c5b`). It verifies that the corrections to the 28 drafts landed as recorded: every accepted finding in `reports/review-opened-28.md` and every edit in `reports/review-corrections-28.md`, and the six dispositions recorded at the end of `material/review-opened-28-answers.md` (commit `0d23d001594`).

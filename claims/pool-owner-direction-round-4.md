@@ -1,5 +1,7 @@
 # Claim: owner directions on the draft PRs, round 4 (pr-prepare)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 - Claimed by: windows (review agent), Claude Code on this host, working for Nick Shanin
 - Capability tags: review, draft
 - Direction: Nick, 2026-10-13:

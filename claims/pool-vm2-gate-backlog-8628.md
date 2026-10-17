@@ -1,5 +1,7 @@
 # Claim: SOLR-8628 premise-only run
 
+Status: CLOSED 2026-10-17 (linked job assignments/pool-shared-gate-backlog-buffer.md: Status: META (finding aid; superseded by)
+
 - Claimant host: vm3.
 - Assignment: `assignments/pool-shared-gate-backlog-buffer.md`.
 - Job: `gates/SOLR-8628-premise.md`.

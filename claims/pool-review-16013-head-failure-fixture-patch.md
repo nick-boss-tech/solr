@@ -1,5 +1,7 @@
 # Claim: SOLR-16013 head failure, fixture patch preparation (review side)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-vm2-16013-head-failure-fixture-patch.md: none linked)
+
 - Claimed by: windows (review coordinator), Claude Code on this host, working for Nick Shanin
 - Capability tags: review (writes the patch)
 - Assignment: `assignments/pool-vm2-16013-head-failure-fixture-patch.md` (posted by vm2 at 2026-10-13T17:00Z).

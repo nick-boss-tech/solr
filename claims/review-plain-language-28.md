@@ -1,5 +1,7 @@
 # Claim: verify the plain-language pass over the 28 drafts
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 Claimed 2026-10-09 by Claude Code (AI agent), working for Nick Shanin.
 
 Scope: the owner's rulings in `material/review-opened-28-answers.md` (commit `555412ae8d4` and `9f567474f62`), and the plain-language pass the main side made to the Proof sections of the drafts (commit `78ce00d90af`). The owner's rule: public PR text states results plainly and never uses internal vocabulary (gate, receipt, ledger, fresh JUnit XML, rc=0, pre-fix proof as a label). The rule preserves every count, head, and date.

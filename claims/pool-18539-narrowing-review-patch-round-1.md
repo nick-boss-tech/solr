@@ -1,5 +1,7 @@
 # Claim: SOLR-18539 review patch narrowing to Option B, round 1
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/queryComponent-real-exit-shape-premise.md: none linked)
+
 - Claimed by: windows (review coordinator), Claude Code on this host, working for Nick Shanin
 - Capability tags: review (writes the patch), draft
 - Task: the narrowing task in the premise addendum of `reports/four-new-prs-strong-review-round-1.md` (SOLR-18539 section), recorded after the plain QueryComponent real-exit run (`gates/queryComponent-real-exit-shape-premise.md`). The run supports canonical Option B.

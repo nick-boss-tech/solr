@@ -1,5 +1,7 @@
 # Claim: pool-strong-review-round-2-unblocked-slices
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-strong-review-round-2-unblocked-slices.md: Status: CLAIMED (claims/pool-strong-revi)
+
 - Claimant host: windows (review agent, review-rounds coordinator lane).
 - Job or assignment: `assignments/pool-strong-review-round-2-unblocked-slices.md`. Slices A (SOLR-18541 body rewrite at the new head) and B (SOLR-18010 items that do not depend on the corrected gate). The waiting slices are restated in the report, not worked.
 - Slice: A and B.

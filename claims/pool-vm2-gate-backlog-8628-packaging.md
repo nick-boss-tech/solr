@@ -1,5 +1,7 @@
 # Claim: SOLR-8628 packaging commit and top-up gate (vm2, gate backlog coordinator)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job gates/SOLR-8628-packaging.md: Status: CLAIMED (claims/pool-vm2-gate-ba)
+
 - Claimed: 2026-10-14T21:52Z by vm2. Job: gates/SOLR-8628-packaging.md.
 - Head at claim: 5b606dc779d0f367d7c8ac7235988a65f092b6a4 (solr-8628-submit, ls-remote matched). The packaging commit deletes SOLR-8628-TESTING.md only.
 - Capability tags: gate.

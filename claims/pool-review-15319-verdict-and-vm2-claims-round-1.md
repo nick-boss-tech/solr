@@ -1,5 +1,7 @@
 # Claim: review of the SOLR-15319 premise verdict and draft Limits, and the vm2 claim heads (pr-prepare)
 
+Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job none: none linked)
+
 - Claimed by: windows (review agent), Claude Code on this host, working for Nick Shanin
 - Capability tags: review
 - Assignment: none posted. The triggering commits are `86aa0daaf15` (the main side's SOLR-15319 verdict and draft Limits settlement) and `7c48ddaae80` (vm2 claims for SOLR-13186 and SOLR-15863).
