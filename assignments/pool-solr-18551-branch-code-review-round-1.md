@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18551 branch code review, round 1
 
-Status: OPEN
+Status: DONE
 
 - Capability tags: review.
 - Intended host: Windows (review agent). Claim under `claims/` before starting (WORKFLOW.md).
