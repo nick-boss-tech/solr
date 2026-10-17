@@ -352,7 +352,6 @@ public class TestJsonFacetsWithNestedObjects extends SolrTestCaseHS {
    * domain of its ancestor (the reporter's multi select scenario).
    */
   @Test
-  @AwaitsFix(bugUrl = "https://issues.apache.org/jira/browse/SOLR-16290")
   public void testNestedChildFacetWithExclusionKeepsBlockChildrenDomain() throws Exception {
     final Client client = Client.localClient();
     client.testJQ(

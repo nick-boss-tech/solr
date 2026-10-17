@@ -222,16 +222,38 @@ public abstract class FacetProcessor<T extends FacetRequest> {
       }
     }
 
-    // now walk back up the context tree
     // TODO: we lose parent exclusions...
+    List<FacetContext> chain = new ArrayList<>();
     for (FacetContext curr = fcontext; curr != null; curr = curr.parent) {
-      if (curr.filter != null) {
-        qlist.add(curr.filter);
-      }
+      chain.add(0, curr);
     }
 
-    // recompute the base domain
-    fcontext.base = fcontext.searcher.getDocSet(qlist);
+    DocSet level = fcontext.searcher.getDocSet(qlist);
+    for (int i = 0; i < chain.size(); i++) {
+      FacetContext ctx = chain.get(i);
+      if (ctx.filter != null) {
+        level = level.intersection(fcontext.searcher.getDocSet(ctx.filter));
+      }
+      if (i < chain.size() - 1) {
+        level = applyBlockJoinDomain(ctx, level);
+      }
+    }
+    fcontext.base = level;
+  }
+
+  private DocSet applyBlockJoinDomain(FacetContext ctx, DocSet docs) throws IOException {
+    if (ctx.processor == null) return docs;
+    FacetRequest.Domain domain = ctx.processor.freq.domain;
+    if (domain == null || !(domain.toChildren || domain.toParent)) return docs;
+
+    BitDocSet parents = blockJoinParents(domain.parents);
+    DocSet ctxFilter = ctx.processor.filter;
+    if (domain.toChildren) {
+      DocSet acceptDocs = ctxFilter == null ? fcontext.searcher.getLiveDocSet() : ctxFilter;
+      return BlockJoin.toChildren(docs, parents, acceptDocs, fcontext.qcontext);
+    }
+    DocSet result = BlockJoin.toParents(docs, parents, fcontext.qcontext);
+    return ctxFilter == null ? result : result.intersection(ctxFilter);
   }
 
   /** modifies the context base if there is a join field domain change */
@@ -250,13 +272,8 @@ public abstract class FacetProcessor<T extends FacetRequest> {
     fcontext.base = fcontext.searcher.getDocSet(domainQuery);
   }
 
-  // returns "true" if filters were applied to fcontext.base already
-  private boolean handleBlockJoin() throws IOException {
-    boolean appliedFilters = false;
-    if (!(freq.domain.toChildren || freq.domain.toParent)) return appliedFilters;
-
+  private BitDocSet blockJoinParents(String parentStr) throws IOException {
     // TODO: avoid query parsing per-bucket somehow...
-    String parentStr = freq.domain.parents;
     Query parentQuery;
     try {
       QParser parser = QParser.getParser(parentStr, fcontext.req);
@@ -267,8 +284,15 @@ public abstract class FacetProcessor<T extends FacetRequest> {
           SolrException.ErrorCode.BAD_REQUEST,
           "Error parsing block join parent specification: " + parentStr);
     }
+    return fcontext.searcher.getDocSetBits(parentQuery);
+  }
 
-    BitDocSet parents = fcontext.searcher.getDocSetBits(parentQuery);
+  // returns "true" if filters were applied to fcontext.base already
+  private boolean handleBlockJoin() throws IOException {
+    boolean appliedFilters = false;
+    if (!(freq.domain.toChildren || freq.domain.toParent)) return appliedFilters;
+
+    BitDocSet parents = blockJoinParents(freq.domain.parents);
     DocSet input = fcontext.base;
     DocSet result;
 
