@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-10424 V2 id-less update check, retry (round 1)
 
-Status: OPEN
+Status: DONE (INCONCLUSIVE, escalated; vm2, 2026-10-17). Deliverable: reports/2026-10-16-pr-batch/SOLR-10424-check.md
 
 - Capability tags: implementation, gate.
 - Intended host: vm2 (Linux, the lane that ran the first check). Claim under `claims/` before starting (WORKFLOW.md). The Windows host never claims this work.
