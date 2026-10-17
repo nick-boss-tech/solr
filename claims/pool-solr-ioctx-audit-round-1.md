@@ -9,3 +9,5 @@
 Heartbeat: 2026-10-17T20:20Z (claim).
 - 2026-10-17T20:22Z: head run at 2a35fb87ff, JDK 21, seed 18551C0FFEE18551. Eight classes OK (0 failures, 0 errors, 0 skipped). TestReplicationHandler: 25 tests, all 25 skipped; no source annotation; the rule is to stop. Report: reports/ioctx-audit-test-round-1.md. Decision needed on the skip.
 - Status: STOPPED (2026-10-17T20:22Z) on the skip decision. The branch is not verified.
+- 2026-10-17T20:47Z: follow-up with tests.nightly=true on the head. TestReplicationHandler 25 of 25 pass, 0 failures, 0 errors, 0 skipped (fresh XML 20:42Z). Report updated: reports/ioctx-audit-test-round-1.md.
+- Status: DONE (2026-10-17T20:47Z). All nine classes green on the head with JDK 21; the one skip is explained by @LuceneTestCase.Nightly and passes when nightly tests run.

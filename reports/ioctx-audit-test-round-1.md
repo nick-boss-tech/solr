@@ -2,7 +2,7 @@
 
 Assignment: assignments/pool-solr-ioctx-audit-test-round-1.md (posted 1c2c3ff2d6). Claim: claims/pool-solr-ioctx-audit-round-1.md. Run by vm2, 2026-10-17, 20:12Z to 20:22Z.
 
-Result: STOPPED on the head decision. One class (TestReplicationHandler) was skipped, 25 of 25 tests. The assignment's rule is to record and stop, so no triage run and no whole-set rerun.
+Result: the first pass stopped on a skipped class (TestReplicationHandler, 25 of 25 skipped). The follow-up below runs that class with nightly tests enabled and it passes 25 of 25. All nine classes are green on the head with JDK 21. The branch is verified for the nine focused classes, subject to the assignment owner's acceptance of the nightly follow-up.
 
 ## Branch and command
 
@@ -39,3 +39,12 @@ Whether to (a) run TestReplicationHandler on base 70aa8d75bd to see whether it s
 ## Not done
 
 - No triage run, no whole-set rerun, no source edits, no pushes to the fork branch.
+
+## Follow-up: TestReplicationHandler with nightly tests enabled
+
+- Cause of the skip: TestReplicationHandler.java line 95 is annotated `@LuceneTestCase.Nightly`. Those tests run only when `tests.nightly` is on. The head's randomization config (gradle/testing/randomization.gradle) sets it to false by default.
+- Run: branch head 2a35fb87ff5e58f08678fa719dd4ea1ca05de514, JDK 21.0.12.1, Gradle 9.7.0 from the branch wrapper, seed 18551C0FFEE18551, with `-Ptests.nightly=true`. Command: `./gradlew --no-daemon --console=plain -Ptests.workDir=/tmp/ioctx-nightly-tests -Ptests.seed=18551C0FFEE18551 -Dtests.seed=18551C0FFEE18551 -Ptests.nightly=true :solr:core:cleanTest :solr:core:test --tests org.apache.solr.handler.TestReplicationHandler`.
+- Result, fresh XML (2026-10-17T20:42:00Z): tests=25, failures=0, errors=0, skipped=0. Build: BUILD SUCCESSFUL in 11m 1s.
+- Log: logs/vm2/ioctx-nightly.log. Summary: logs/vm2/ioctx-nightly-result.txt. Runner: gates/g-ioctx-nightly.sh.
+- Reading: the skip is explained by the nightly gate. The class passes on the head when its tests run.
+- The base run was not made, because the skip is explained and the head result is a pass. No triage applies.
