@@ -40,6 +40,7 @@ import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.ResourceLoader;
+import org.apache.lucene.util.Version;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
 import org.apache.solr.response.TextResponseWriter;
@@ -84,23 +85,27 @@ public class CollationField extends FieldType {
 
   // Collation keys are arbitrary bytes, not UTF-8, so useDocValuesAsStored is pathological. See
   // SOLR-15712 and, for the ICU variant, SOLR-15777
+  static final Version UDVAS_FORBIDDEN_AS_OF = Version.LUCENE_9_0_0;
   static final String UDVAS_MESSAGE =
       "useDocValuesAsStored is forbidden for " + CollationField.class;
+
+  private boolean failHardOnUdvas;
 
   @Override
   public void checkSchemaField(final SchemaField field) {
     if (field.useDocValuesAsStored()) {
       // the user must have specified udvas at the level of the field, not the fieldType
-      assertWarnOrFail(UDVAS_MESSAGE, false, true);
+      assertWarnOrFail(UDVAS_MESSAGE, false, failHardOnUdvas);
     }
     super.checkSchemaField(field);
   }
 
   @Override
   protected void init(IndexSchema schema, Map<String, String> args) {
+    failHardOnUdvas = schema.getDefaultLuceneMatchVersion().onOrAfter(UDVAS_FORBIDDEN_AS_OF);
     if ((trueProperties & USE_DOCVALUES_AS_STORED) != 0) {
       // fail fast at fieldType init
-      assertWarnOrFail(UDVAS_MESSAGE, false, true);
+      assertWarnOrFail(UDVAS_MESSAGE, false, failHardOnUdvas);
     }
     properties &= ~USE_DOCVALUES_AS_STORED;
     properties |= TOKENIZED; // this ensures our analyzer gets hit

@@ -1,5 +1,5 @@
 title: >
-  CollationField no longer defaults useDocValuesAsStored, so fl=* does not decode binary collation keys as UTF-8 text.
+  CollationField no longer defaults useDocValuesAsStored, so fl=* does not decode binary collation keys as UTF-8 text. Setting useDocValuesAsStored=true on a CollationField warns below luceneMatchVersion 9.0 and fails from 9.0 on.
 type: fixed
 authors:
   - name: Nick Shanin
