@@ -8,3 +8,4 @@
 - Runner: gates/g18551-branch-9x-only.sh (g18551-branch-9x-10x.sh, narrowed to the 9.x row). Source changes: none. No PR, comment, JIRA or email.
 
 Heartbeat: 2026-10-17T18:00Z (claim).
+- 2026-10-17T18:20Z: 9.x head leg stalled at :buildSrc:jar (Gradle client and daemon idle for 30+ minutes, no test ran). Stopped by the coordinator; log logs/vm2/18551-9x-head.log and the result file record it. Not relaunched. The 9.x row is open again pending a decision on retry. Queue is free.
