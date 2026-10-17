@@ -1,5 +1,7 @@
 # Start here: posting and claiming pool work
 
+> Board moved (2026-10-17): new claims, gates and assignments go on the `coordination` branch. This branch is archived at `archive/pr-prepare-2026-10-17` (54ce894ed8). Do not add new work here.
+
 This page is the order of operations for any agent that posts assignments or gate jobs, or claims them, on this branch. The rules are in [WORKFLOW.md](../WORKFLOW.md). The roles are in [material/coordinator-handoff.md](../material/coordinator-handoff.md). The templates are in [pool/templates/](templates/).
 
 ## Two rules that cause most failures
