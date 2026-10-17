@@ -20,11 +20,14 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FilterDirectory;
 import org.apache.lucene.store.IOContext;
 import org.apache.lucene.store.IndexInput;
 import org.apache.lucene.store.IndexOutput;
+import org.apache.lucene.store.MMapDirectory;
 import org.apache.solr.SolrTestCase;
 import org.junit.Test;
 
@@ -34,39 +37,53 @@ public class IndexFetcherTest extends SolrTestCase {
   private static final MethodHandle SLOW_FILE_EXISTS = createSlowFileExistsHandle();
 
   @Test
-  public void testSlowFileExistsUsesLengthWithoutOpeningExistingFile() throws Exception {
-    try (TrackingDirectory dir = new TrackingDirectory(newDirectory())) {
-      try (IndexOutput output = dir.createOutput("present", IOContext.DEFAULT)) {
+  public void testExistingFileIsCheckedWithFileLengthOnly() throws Exception {
+    for (Directory base : directories()) {
+      try (TrackingDirectory dir = new TrackingDirectory(base)) {
+        writeFile(dir, "present", 1);
+        dir.resetCalls();
+
+        assertTrue(invokeSlowFileExists(dir, "present"));
+        assertEquals(List.of("fileLength:present"), dir.calls);
+      }
+    }
+  }
+
+  @Test
+  public void testEmptyFileIsCheckedWithFileLengthOnly() throws Exception {
+    for (Directory base : directories()) {
+      try (TrackingDirectory dir = new TrackingDirectory(base)) {
+        writeFile(dir, "empty", 0);
+        dir.resetCalls();
+
+        assertTrue(invokeSlowFileExists(dir, "empty"));
+        assertEquals(List.of("fileLength:empty"), dir.calls);
+      }
+    }
+  }
+
+  @Test
+  public void testMissingFileIsCheckedWithFileLengthOnly() throws Exception {
+    for (Directory base : directories()) {
+      try (TrackingDirectory dir = new TrackingDirectory(base)) {
+        assertFalse(invokeSlowFileExists(dir, "missing"));
+        assertEquals(List.of("fileLength:missing"), dir.calls);
+      }
+    }
+  }
+
+  private static List<Directory> directories() throws IOException {
+    List<Directory> directories = new ArrayList<>();
+    directories.add(newDirectory());
+    directories.add(new MMapDirectory(createTempDir()));
+    return directories;
+  }
+
+  private static void writeFile(Directory dir, String name, int length) throws IOException {
+    try (IndexOutput output = dir.createOutput(name, IOContext.DEFAULT)) {
+      for (int i = 0; i < length; i++) {
         output.writeByte((byte) 1);
       }
-      dir.resetCalls();
-
-      assertTrue(invokeSlowFileExists(dir, "present"));
-      assertEquals(0, dir.openInputCalls);
-      assertEquals(1, dir.fileLengthCalls);
-    }
-  }
-
-  @Test
-  public void testSlowFileExistsTreatsEmptyFileAsPresent() throws Exception {
-    try (TrackingDirectory dir = new TrackingDirectory(newDirectory())) {
-      try (IndexOutput output = dir.createOutput("empty", IOContext.DEFAULT)) {
-        assertEquals(0, output.getFilePointer());
-      }
-      dir.resetCalls();
-
-      assertTrue(invokeSlowFileExists(dir, "empty"));
-      assertEquals(0, dir.openInputCalls);
-      assertEquals(1, dir.fileLengthCalls);
-    }
-  }
-
-  @Test
-  public void testSlowFileExistsReturnsFalseForMissingFile() throws Exception {
-    try (TrackingDirectory dir = new TrackingDirectory(newDirectory())) {
-      assertFalse(invokeSlowFileExists(dir, "missing"));
-      assertEquals(0, dir.openInputCalls);
-      assertEquals(1, dir.fileLengthCalls);
     }
   }
 
@@ -94,27 +111,25 @@ public class IndexFetcherTest extends SolrTestCase {
   }
 
   private static class TrackingDirectory extends FilterDirectory {
-    private int openInputCalls;
-    private int fileLengthCalls;
+    private final List<String> calls = new ArrayList<>();
 
     TrackingDirectory(Directory in) {
       super(in);
     }
 
     void resetCalls() {
-      openInputCalls = 0;
-      fileLengthCalls = 0;
+      calls.clear();
     }
 
     @Override
     public IndexInput openInput(String name, IOContext context) throws IOException {
-      openInputCalls++;
+      calls.add("openInput:" + name);
       return super.openInput(name, context);
     }
 
     @Override
     public long fileLength(String name) throws IOException {
-      fileLengthCalls++;
+      calls.add("fileLength:" + name);
       return super.fileLength(name);
     }
   }
