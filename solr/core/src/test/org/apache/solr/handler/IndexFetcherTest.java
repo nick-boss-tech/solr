@@ -41,7 +41,7 @@ public class IndexFetcherTest extends SolrTestCase {
       }
       dir.resetCalls();
 
-      assertTrue(slowFileExists(dir, "present"));
+      assertTrue(invokeSlowFileExists(dir, "present"));
       assertEquals(0, dir.openInputCalls);
       assertEquals(1, dir.fileLengthCalls);
     }
@@ -55,7 +55,7 @@ public class IndexFetcherTest extends SolrTestCase {
       }
       dir.resetCalls();
 
-      assertTrue(slowFileExists(dir, "empty"));
+      assertTrue(invokeSlowFileExists(dir, "empty"));
       assertEquals(0, dir.openInputCalls);
       assertEquals(1, dir.fileLengthCalls);
     }
@@ -64,7 +64,7 @@ public class IndexFetcherTest extends SolrTestCase {
   @Test
   public void testSlowFileExistsReturnsFalseForMissingFile() throws Exception {
     try (TrackingDirectory dir = new TrackingDirectory(newDirectory())) {
-      assertFalse(slowFileExists(dir, "missing"));
+      assertFalse(invokeSlowFileExists(dir, "missing"));
       assertEquals(0, dir.openInputCalls);
       assertEquals(1, dir.fileLengthCalls);
     }
@@ -83,7 +83,7 @@ public class IndexFetcherTest extends SolrTestCase {
     }
   }
 
-  private static boolean slowFileExists(Directory dir, String fileName) throws Exception {
+  private static boolean invokeSlowFileExists(Directory dir, String fileName) throws Exception {
     try {
       return (boolean) SLOW_FILE_EXISTS.invoke(dir, fileName);
     } catch (Throwable t) {
