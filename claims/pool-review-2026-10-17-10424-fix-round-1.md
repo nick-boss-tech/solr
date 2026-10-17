@@ -7,3 +7,5 @@
 - Scope: one solrconfig.xml initParams path, and the focused test file. No changelog edit, no PR body edit, no comment.
 
 Heartbeat: 2026-10-17T06:55Z (claim).
+- 2026-10-17T07:28Z pushed solr-10424-submit fast-forward 5b087b1a38 to 5f38ba54a8 (UpdateAPI rewriteToJsonDocs sets update.chain=json-docs-uuid for both V2 update endpoints; focused test added). Focused run on the exact commit: 2 of 2 pass (logs/vm2/10424-fix-final.log).
+- Status: DONE (fix pushed, 2026-10-17T07:28Z). Record: reports/2026-10-16-pr-batch/SOLR-10424-check.md.
