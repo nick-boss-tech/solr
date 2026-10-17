@@ -7,3 +7,5 @@
 - Source changes: none. Per the assignment's decision row, a 400 at testMarker is recorded and escalated, not fixed.
 
 Heartbeat: 2026-10-17T04:20Z (claim).
+- 2026-10-17T04:20Z result: CONFIRMED, escalated. Head 7463dd006a: QueryElevationComponentTest 16 tests, 1 failure (testMarker: Unknown DocTransformer: elev). No source changed. Report: reports/2026-10-16-pr-batch/SOLR-7390-check.md.
+- Status: DONE (confirmed and escalated, 2026-10-17T04:20Z). Deliverable: reports/2026-10-16-pr-batch/SOLR-7390-check.md.
