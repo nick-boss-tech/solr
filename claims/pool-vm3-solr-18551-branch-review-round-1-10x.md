@@ -1,6 +1,6 @@
 # Claim: SOLR-18551 branch validation, round 1, 10x row (vm3)
 
-Status: RELEASED 2026-10-17T18:20Z. No run started; the 10x row is claimable again. Another host holds this row.
+Status: RELEASED 2026-10-17T18:20Z. No run was started here. The 10x row was completed by vm4 (reports/SOLR-18551-branch-review-round-1.md, section 10x). Nothing remains open on this row.
 
 - Claimant host: vm3 (Linux). Assignment: assignments/pool-solr-18551-branch-review-round-1.md.
 - Slice taken: the 10x row only (head and base legs). The 9.x row is vm2's (claims/pool-solr-18551-branch-review-round-1-9x-10x.md) and the main row is vm4's.

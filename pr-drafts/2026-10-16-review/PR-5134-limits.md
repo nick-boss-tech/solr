@@ -1,6 +1,6 @@
 # PR 5134 body correction (draft, not live)
 
-Head: `5c1124bdef95f4fa1d5bbbb6cf2dfd495111f528` on `solr-6831-submit`. The live PR body describes `4afed04987b2343af58261b83c4b49fda0af45c0`, the previous head. Replace the sentences below in the PR body when the PR is updated. Do not edit the live body from this draft.
+Head: `5c1124bdef95f4fa1d5bbbb6cf2dfd495111f528` on `solr-6831-submit`. Applied to the live PR 5134 body on 2026-10-17 at 18:17Z, at the operator's direction. This file is the record of the replacement text.
 
 ## Limits, replace the last bullet
 

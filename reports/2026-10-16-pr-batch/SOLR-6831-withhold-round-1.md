@@ -6,7 +6,7 @@ Assignment: `assignments/pool-review-2026-10-17-6831-withhold-round-1.md`. Claim
 
 - Start: `solr-6831-submit` at `4afed04987b2343af58261b83c4b49fda0af45c0`, matching the assignment. No stop was needed.
 - Fix commit: `5c1124bdef95f4fa1d5bbbb6cf2dfd495111f528` (author Nick Shanin, no trailers), pushed fast-forward to `solr-6831-submit`.
-- The PR head moves when this lands. PR 5134 (apache/solr) is open and still shows `4afed04987b2343af58261b83c4b49fda0af45c0` until the PR is updated.
+- The PR head moves when this lands. PR 5134 (apache/solr) moved to `5c1124bdef95f4fa1d5bbbb6cf2dfd495111f528` on push. Its live body was updated on 2026-10-17 at 18:17Z (see Draft).
 
 ## Tests before
 
@@ -24,7 +24,7 @@ Assignment: `assignments/pool-review-2026-10-17-6831-withhold-round-1.md`. Claim
 - Cloud run (`6831-cloudpivot.log`): `TestCloudPivotFacet` 1 test, 0 failures, 0 errors.
 - Module check (`6831-check.log`): `:solr:core:check -x test` BUILD SUCCESSFUL.
 - Tidy (`6831-tidy.log`): BUILD SUCCESSFUL, no changes beyond the commit.
-- Not run: the proof leg against the pre-fix base. The assignment defers it to Nick.
+- The proof leg against the pre-fix base was run after this section was first written. See "Proof leg" below.
 
 ## Push
 
@@ -36,12 +36,12 @@ Assignment: `assignments/pool-review-2026-10-17-6831-withhold-round-1.md`. Claim
 
 - Applied to the live PR 5134 body on 2026-10-17 at 18:17Z, at the direction of the operator. The body was checked after the PATCH: "8 of 8" is gone, "9 of 9" is present, the "is skipped" sentence is gone, and the new withhold test sentence is present. The PR head is `5c1124bdef95f4fa1d5bbbb6cf2dfd495111f528`.
 
-- `pr-drafts/2026-10-16-review/PR-5134-limits.md` corrects the PR 5134 Limits bullet, the omitted-answer sentence in the Proof section, and the test count. The live PR body is not edited.
+- `pr-drafts/2026-10-16-review/PR-5134-limits.md` is the record of the replacement text: the Limits bullet, the omitted-answer sentence in the Proof section, and the test count.
 
 ## Verdict
 
 - PASS. The withhold rule is in place at `5c1124bdef`, and both new assertions pass in the focused run.
-- The PR head moves to `5c1124bdef`. The draft is ready for the main agent to review. Opening or editing the PR stays with the main agent.
+- The PR head is `5c1124bdef`, and the live PR body has been updated to match the draft (2026-10-17 18:17Z, at the operator's direction).
 - Overlap noted: `claims/pool-review-2026-10-16-code-round-2-item-1-6831.md` (vm2, test-only check at `4afed04987`) has no deliverable on the branch. It was not touched.
 
 ## Proof leg (pre-fix base, run 2026-10-17)
@@ -57,4 +57,4 @@ Assignment: `assignments/pool-review-2026-10-17-6831-withhold-round-1.md`. Claim
     - Cause at the base: `FacetComponent.java:1041` on the base throws `No pivot refinement response from shard` for any null pivot answer. There is no `haveCompleteResults` guard. That throw is the defect that commit `4afed04987` fixes, not the withhold change. The client reports the resulting 500 as endpoint exhaustion.
 - Decision (vm3, 2026-10-17, taken on the evidence above because the main side is away): the pre-fix leg at `4afed04987` is conclusive for the withhold change. Both new no-pivot-data assertions fail on the pivot assertion, with pivot data present, no 500 responses, no infrastructure errors, seed `6831C0FFEE6831`. The PR-base leg is not a proof of the withhold change. It shows only that the base lacks the branch's fixes (6 of 9 fail, 3 of them through the `4afed04987` defect).
   - Assertion failures at the base, as expected because the base has none of the branch's production changes: `testPivotFacetStopsBelowTopLevel` (no partial result), `testPivotFacetTruncatesWhenLimitsTrip` (no pivot data at all), `testPivotFacetOmitsResultsWhenPartialResultsDisallowed` (detail does not name the pivot limit check).
-- Net: the withhold assertions discriminate at `4afed04987` (the pre-fix production). At the PR base they are INCONCLUSIVE because of the startup error, not because of a verdict on the fix.
+- Net: the withhold assertions discriminate at `4afed04987` (the pre-fix production), and that leg is the conclusive proof for the change. At the PR base the three `No live SolrServers` failures come from the `4afed04987` defect, so they say nothing about the withhold change either way.

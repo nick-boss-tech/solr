@@ -37,7 +37,7 @@ On 2026-10-17 Nick chose to withhold pivot data when a shard answers `omitted` d
 | --- | --- | --- | --- |
 | Behavior for an omitted distributed refinement answer | decided: withhold pivot data (Nick, 2026-10-17) | none | Nick |
 | Local-trip behavior | decided: unchanged | if the fix would need to change the local-trip path, stop and escalate | main agent |
-| Proof leg against the pre-fix base | decided: deferred. Nick reruns it later, with the cluster startup workaround. Do not run it in this assignment | none | Nick |
+| Proof leg against the pre-fix base | decided: deferred. Nick reruns it later, with the cluster startup workaround. Do not run it in this assignment. Superseded 2026-10-17: the leg was run and is recorded in the Proof leg section of reports/2026-10-16-pr-batch/SOLR-6831-withhold-round-1.md; the pre-fix leg at 4afed04987 is conclusive | none | Nick |
 | The new assertion fails at the head after the change | default: stop before the push and record the failing assertion | escalate to the main agent | main agent |
 | A test fails with a cluster startup error | default: INCONCLUSIVE, no push | record the error text and escalate to the main agent | main agent |
 | Live PR body or title edit | decided: none; the correction is a draft only | none | Nick |
