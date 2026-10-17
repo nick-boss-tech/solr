@@ -1,6 +1,6 @@
 # Pool assignment: 2026-10-16 review follow-ups, PR text drafts (round 1)
 
-Status: CLAIMED (claims/pool-review-2026-10-16-text-round-1.md, vm2, 2026-10-17)
+Status: DONE (vm2, 2026-10-17): all seven items drafted under pr-drafts/2026-10-16-review/, index.md lists each item. Nothing applied to a live PR.
 
 - Capability tags: draft.
 - Intended host: any host with the draft tag. Claim under `claims/` before starting (WORKFLOW.md).
