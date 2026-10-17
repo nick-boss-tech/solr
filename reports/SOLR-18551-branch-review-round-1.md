@@ -22,4 +22,4 @@ Command for every leg (seed 18551C0FFEE18551): `./gradlew --no-daemon --console=
 - Base (JDK 11): c135e6335c with the head test file copied in. 3 of 3 fail, each `expected:<[fileLength:...]> but was:<[openInput:...]>`. This is the expected fail-before result. Reported by vm2.
 - Logs on vm2: logs/vm2/18551-9x-head.log, logs/vm2/18551-9x-base.log, logs/vm2/18551-branch-9x-result.txt.
 - JDK 21 base: earlier vm4 run on c135e6335c with the same test file: 3 of 3 fail (logs/vm4/18551-9101-base2.log).
-- JDK 21 head: in progress on vm4 (claims/pool-solr-18551-branch-review-round-1-9x-jdk21.md). Results will be added here.
+- JDK 21 head: not yet run. vm2 takes this leg (Nick's direction). Results will be added here.

@@ -7,3 +7,5 @@
 - Source changes: none. No PR, comment, JIRA or email.
 
 Heartbeat: 2026-10-17T19:20Z (claim).
+
+- 2026-10-17T19:20Z: RELEASED by vm4. Nick directed vm2 to run the JDK 21 head leg instead. vm4 did not run it; a local start was stopped before any results.
