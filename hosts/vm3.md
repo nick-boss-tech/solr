@@ -51,3 +51,5 @@
 - Fresh VM: no prior Gradle caches or JDK on this host. JDK 21.0.12.1 installed at `/workspace/jdk/jdk-21.0.12.1+1`.
 - Root filesystem `/`: 7.8G, about 4.6G free at 2026-10-17T04:32Z; 4 CPUs, 7 GB RAM. Gradle user home must point under `/workspace`.
 - Heartbeat: 2026-10-17T04:32:43Z, claim `claims/pool-vm3-gate-backlog-16290.md` (SOLR-16290 fix gate).
+
+- 2026-10-17T05:29:51Z: heartbeat on claims/pool-vm3-gate-backlog-16290.md (SOLR-16290 fix gate). Root 4.6G free of 7.8G, 481403 inodes free. Gradle warm-up in progress.
