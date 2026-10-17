@@ -9,3 +9,5 @@ Status: CLAIMED 2026-10-17T22:20:57Z by vm3 (takes over from the STALE vm2 claim
 - Push rule: fast-forward only, and only on green. Gate failures are recorded in the job file before any relaunch.
 
 Heartbeat: 2026-10-17T22:20:57Z (claim).
+
+- 2026-10-17T23:33:41Z: heartbeat. Head rebuilt as b0223fd235 (from 42675f65d6, four edits per the job file). BATS premise leg blocked on the JS client build on this host (npm babel plugin missing; see gates/SOLR-16887-*.md once recorded). Not relaunched.

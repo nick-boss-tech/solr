@@ -9,3 +9,5 @@ Status: CLAIMED 2026-10-17T22:20:57Z by vm3 (takes over from the STALE vm2 claim
 - Push rule: fast-forward only, and only on green. Gate failures are recorded in the job file before any relaunch.
 
 Heartbeat: 2026-10-17T22:20:57Z (claim).
+
+- 2026-10-17T23:33:41Z: heartbeat. Implementation commit adfaa87733 (on cb988a2ff4, unpushed). Tidy clean on rerun (first tidy run reflowed the new test's Javadoc and invalidated that run; the amend folds that in). Error Prone compile passed. Focused run in progress at this heartbeat. Next: pre-fix proof, module check.
