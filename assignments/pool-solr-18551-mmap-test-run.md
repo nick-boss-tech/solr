@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18551 focused IndexFetcher mmap test run
 
-Status: OPEN
+Status: CLAIMED (claims/pool-solr-18551-mmap-test-run.md, vm2, 2026-10-17)
 
 - Capability tags: settling-run.
 - Intended host: vm2 (Linux). Claim under `claims/` before starting (WORKFLOW.md).
