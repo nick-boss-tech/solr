@@ -22,4 +22,6 @@ Command for every leg (seed 18551C0FFEE18551): `./gradlew --no-daemon --console=
 - Base (JDK 11): c135e6335c with the head test file copied in. 3 of 3 fail, each `expected:<[fileLength:...]> but was:<[openInput:...]>`. This is the expected fail-before result. Reported by vm2.
 - Logs on vm2: logs/vm2/18551-9x-head.log, logs/vm2/18551-9x-base.log, logs/vm2/18551-branch-9x-result.txt.
 - JDK 21 base: earlier vm4 run on c135e6335c with the same test file: 3 of 3 fail (logs/vm4/18551-9101-base2.log).
-- JDK 21 head: not yet run. vm2 takes this leg (Nick's direction). Results will be added here.
+- JDK 21 head: solr-18551-backport-9x at d8f96dfeea, JDK 21.0.12.1, Gradle 8.10 from the branch wrapper, seed 18551C0FFEE18551. BUILD SUCCESSFUL. JUnit (fresh XML, 2026-10-17T19:35:55Z): tests=3, skipped=0, failures=0, errors=0. Reported by vm2.
+- Logs on vm2: logs/vm2/18551-9x-jdk21-head.log and logs/vm2/18551-9x-jdk21-head-result.txt.
+- Not covered by this leg: the JDK 21 base leg. The leak claim is tested on that leg, which vm4 ran on c135e6335c (logs/vm4/18551-9101-base2.log, 3 of 3 fail). Pending a decision on a vm2 repeat.
