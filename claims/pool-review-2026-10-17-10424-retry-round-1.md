@@ -9,3 +9,4 @@
 Heartbeat: 2026-10-17T05:20Z (claim).
 - 2026-10-17T05:35Z result: INCONCLUSIVE, escalated. Head V2 request fails with missing uniqueKey id; main V2 request accepted but count 0; legacy requests fail with no live SolrServers on both legs. Report: reports/2026-10-16-pr-batch/SOLR-10424-check.md.
 - Status: DONE (INCONCLUSIVE, escalated, 2026-10-17T05:35Z).
+- 2026-10-17T06:37Z result: CONFIRMED on the second retry (the first retry's INCONCLUSIVE was caused by two test bugs, fixed). Head V2 HTTP 400 missing uniqueKey id; main V2 adds a UUID id; legacy adds a UUID id on both. Report: reports/2026-10-16-pr-batch/SOLR-10424-check.md. Escalated for the fix shape.
