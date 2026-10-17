@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-6831 withhold pivot data on omitted distributed refinement (round 1)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm3-6831-withhold-round-1.md, vm3, 2026-10-17)
 
 - Capability tags: implementation, gate.
 - Intended host: any Linux host with the Gradle toolchain (vm1, vm2, or vm3). Claim under `claims/` before starting (WORKFLOW.md). The Windows host never claims this work.
