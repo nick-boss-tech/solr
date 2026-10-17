@@ -1,7 +1,7 @@
 # Gate job: SOLR-16290 real facet fix (funded by standing calls round 1, item 4)
 
 - Branch: solr-16290-submit. Head to build on: `ff760120c81792022458a5a290b6e58d57b9cd17` (fork tip, verified by `git ls-remote` on 2026-10-15 at filing). The branch today is a gated test-only pin at that head; this job turns it into the fix branch.
-Status: OPEN
+Status: CLAIMED (claims/pool-vm3-gate-backlog-16290.md, vm3, 2026-10-17)
 - Capability tags: implementation, gate.
 - Intended host: a Linux host (vm1 or vm2). Claim first under `claims/` per WORKFLOW.md.
 - Job type: implement the production fix on the branch, remove the `@AwaitsFix` pin, then the full hardening gate at the resulting head, a plain push on green, and the records refresh.

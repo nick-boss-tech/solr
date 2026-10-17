@@ -44,3 +44,10 @@
 - The SOLR-8628 premise claim and the SOLR-5262 gate claim were released by vm3 at 14:10Z, before the outage, and are claimable by the other hosts.
 - SOLR-8628 premise state at release: parts 1 and 2 confirmed (the write.lock-only crash state is reachable); part 3, the test leg, is unfinished.
 - SOLR-5262 state at release: still blocked on the develocity plugin resolution failure during tidy; no tests ran.
+
+## Host status, 2026-10-17
+
+- Status: UP. Nick directed on 2026-10-17 that this VM is vm3 and may claim work again. The 2026-10-11 DOWN note above is superseded.
+- Fresh VM: no prior Gradle caches or JDK on this host. JDK 21.0.12.1 installed at `/workspace/jdk/jdk-21.0.12.1+1`.
+- Root filesystem `/`: 7.8G, about 4.6G free at 2026-10-17T04:32Z; 4 CPUs, 7 GB RAM. Gradle user home must point under `/workspace`.
+- Heartbeat: 2026-10-17T04:32:43Z, claim `claims/pool-vm3-gate-backlog-16290.md` (SOLR-16290 fix gate).
