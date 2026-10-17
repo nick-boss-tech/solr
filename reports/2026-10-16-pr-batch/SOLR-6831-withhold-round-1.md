@@ -34,6 +34,8 @@ Assignment: `assignments/pool-review-2026-10-17-6831-withhold-round-1.md`. Claim
 
 ## Draft
 
+- Applied to the live PR 5134 body on 2026-10-17 at 18:17Z, at the direction of the operator. The body was checked after the PATCH: "8 of 8" is gone, "9 of 9" is present, the "is skipped" sentence is gone, and the new withhold test sentence is present. The PR head is `5c1124bdef95f4fa1d5bbbb6cf2dfd495111f528`.
+
 - `pr-drafts/2026-10-16-review/PR-5134-limits.md` corrects the PR 5134 Limits bullet, the omitted-answer sentence in the Proof section, and the test count. The live PR body is not edited.
 
 ## Verdict
