@@ -41,3 +41,12 @@ Assignment: `assignments/pool-review-2026-10-17-6831-withhold-round-1.md`. Claim
 - PASS. The withhold rule is in place at `5c1124bdef`, and both new assertions pass in the focused run.
 - The PR head moves to `5c1124bdef`. The draft is ready for the main agent to review. Opening or editing the PR stays with the main agent.
 - Overlap noted: `claims/pool-review-2026-10-16-code-round-2-item-1-6831.md` (vm2, test-only check at `4afed04987`) has no deliverable on the branch. It was not touched.
+
+## Proof leg (pre-fix base, run 2026-10-17)
+
+- Decision on the omitted-answer behavior is recorded in the assignment (withhold, Nick, 2026-10-17). No question is open for Nick.
+- Pre-fix production at `4afed04987b2343af58261b83c4b49fda0af45c0` with the head test file: the two new no-pivot-data assertions fail on the pivot assertion, the `omitted` header passes. Seed `6831C0FFEE6831`. Log `/workspace/gates/logs/vm3/6831-before.log`. Counts from fresh JUnit XML: 9 tests, 2 failures, 0 errors.
+- PR base `8373d0392a612b0b7ff901b75b5ca041c1f85a2c` (apache/solr main, from the PR API) with the head test file overlaid and no branch production changes. Seed `6831C0FFEE6831`, run with `-DleaderVoteWait=60000` through `tests.jvmargs`. Log `/workspace/gates/logs/vm3/6831-proof-base.log`. Counts from fresh JUnit XML: 9 tests, 6 failures, 0 errors.
+  - INCONCLUSIVE, cluster startup error (`SolrServerException: No live SolrServers available to handle this request`): `testPivotFacetRefinementStopsWhenPartial`, `testPivotFacetRefinementWithholdsPivotDataWhenAnyShardOmits`, `testPivotFacetRefinementStopsWhenOmittedPartialResults`. The `leaderVoteWait` setting did not clear it. These three do not prove or disprove the change at the base.
+  - Assertion failures at the base, as expected because the base has none of the branch's production changes: `testPivotFacetStopsBelowTopLevel` (no partial result), `testPivotFacetTruncatesWhenLimitsTrip` (no pivot data at all), `testPivotFacetOmitsResultsWhenPartialResultsDisallowed` (detail does not name the pivot limit check).
+- Net: the withhold assertions discriminate at `4afed04987` (the pre-fix production). At the PR base they are INCONCLUSIVE because of the startup error, not because of a verdict on the fix.
