@@ -8,3 +8,6 @@
 - Source changes: none. No PR, comment, JIRA or email.
 
 Heartbeat: 2026-10-17T04:56Z (claim).
+- 2026-10-17T05:18Z: head run GREEN at 02c82ea6c8858495c4b1b2286167b77628d89485, IndexFetcherTest 3 of 3 passed (0 failures, 0 errors, 0 skipped).
+- 2026-10-17T05:28Z: fail-before GREEN as expected. Base 714d6ceff852e6dc743ef51ae094e4eaf8f3b3f9 with the test file overlaid: 3 of 3 failed at `assertEquals(0, dir.openInputCalls)` (IndexFetcherTest.java lines 45, 59, 68), `expected:<0> but was:<1>`.
+- Status: DONE (2026-10-17T05:28Z). Deliverable: reports/SOLR-18551-indexfetcher-mmap-rerun.md.

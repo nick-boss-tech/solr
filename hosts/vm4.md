@@ -13,3 +13,4 @@
 ## Heartbeat
 
 - 2026-10-17T04:56Z: claimed `claims/pool-solr-18551-mmap-test-rerun.md` (SOLR-18551 settling-run).
+- 2026-10-17T05:28Z: SOLR-18551 rerun complete (head 3 of 3 green, fail-before failed at openInputCalls as expected). Claim marked DONE. Root filesystem 3.8 GB available, 457,331 inodes free. No Gradle process running.

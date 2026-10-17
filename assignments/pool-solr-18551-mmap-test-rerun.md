@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18551 focused IndexFetcher mmap test rerun
 
-Status: CLAIMED (claims/pool-solr-18551-mmap-test-rerun.md)
+Status: DONE (claims/pool-solr-18551-mmap-test-rerun.md; deliverable reports/SOLR-18551-indexfetcher-mmap-rerun.md)
 
 - Capability tags: settling-run.
 - Intended host: vm2 (Linux). Claim under `claims/` before starting (WORKFLOW.md).
