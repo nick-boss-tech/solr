@@ -1,0 +1,7 @@
+title: Use READONCE IOContext for Directory opens that read a file once in Solr core
+type: other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-18554
+    url: https://issues.apache.org/jira/browse/SOLR-18554
