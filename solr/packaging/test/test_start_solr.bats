@@ -132,7 +132,7 @@ teardown() {
   config_exists "techproducts"
 }
 
-@test "solr exits on OutOfMemoryError instead of crashing" {
+@test "solr starts with ExitOnOutOfMemoryError" {
   solr start
   solr assert --started http://localhost:${SOLR_PORT} --timeout 5000
 

@@ -234,6 +234,7 @@ curl http://localhost:8983/api/node/system
         "-Duser.timezone=UTC",
         "-XX:-OmitStackTraceInFastThrow",
         "-XX:+ExitOnOutOfMemoryError",
+        "-XX:ErrorFile=/opt/solr/../logs/jvm_crash_%p.log",
         "-Djetty.home=/opt/solr/server",
         "-Dsolr.solr.home=/opt/solr/example/cloud/node1/solr",
         "-Dsolr.install.dir=/opt/solr/",

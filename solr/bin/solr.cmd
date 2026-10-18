@@ -1104,6 +1104,7 @@ set START_OPTS=%START_OPTS% -XX:-OmitStackTraceInFastThrow
 REM '+ExitOnOutOfMemoryError' ensures that Solr exits whenever OOME is thrown, with a non-zero
 REM exit code and the cause logged to the console. Program operation after OOME is unpredictable.
 set START_OPTS=%START_OPTS% -XX:+ExitOnOutOfMemoryError
+set START_OPTS=%START_OPTS% -XX:ErrorFile="%SOLR_LOGS_DIR%\jvm_crash_%%p.log"
 set START_OPTS=%START_OPTS% !GC_TUNE! %GC_LOG_OPTS%
 IF NOT "!CLOUD_MODE_OPTS!"=="" set "START_OPTS=%START_OPTS% !CLOUD_MODE_OPTS!"
 IF NOT "!IP_ACL_OPTS!"=="" set "START_OPTS=%START_OPTS% !IP_ACL_OPTS!"
