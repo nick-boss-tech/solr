@@ -216,6 +216,18 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
   }
 
   /**
+   * SOLR-3243: a negated unfielded open range excludes every document, as a negated bare * does.
+   */
+  @Test
+  public void testNegatedUnfieldedOpenRangeExcludesEveryDocument() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      assertJQ(
+          req("defType", "edismax", "q", "*:* -[* TO *]", "qf", "name title", "sow", sow),
+          "/response/numFound==0");
+    }
+  }
+
+  /**
    * SOLR-3243: with pf set, the only required clause is the match-all; any phrase clause the pf
    * analysis derives from the range text is an optional boost, never a filter. The exact phrase
    * text comes from feeding the literal range string to the pf analyzer (the class of problem
