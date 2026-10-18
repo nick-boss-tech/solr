@@ -9,3 +9,5 @@ Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
 - Started: 2026-10-18T07:42:08Z (UTC).
 
 Heartbeat: 2026-10-18T07:42:08Z
+
+Result: 2026-10-18T07:52Z: `:solr:packaging:installFullDist` at 9ce9ef1db5e9 (ls-remote verified), log `/workspace/gates/logs/vm3/10667-cause-dist.log`, rc=1, BUILD FAILED in 6m48s. No test executed. Failure is the non-branch environment pattern in the job file: `:solr:webapp:js-client:jsClientBuild` (npm run build) cannot find `@babel/plugin-syntax-dynamic-import` in `build/jsClientWorkspace`, although npm reported 178 packages added with the fresh `NPM_CONFIG_CACHE=/workspace/npm-cache/vm3-10667-cause`. Inconclusive for the cause trace (the module packaging output is not reached by this run's result, though assemblePackaging tasks ran). Step: one retry with a second fresh npm cache and the js-client build directory removed (git-ignored build output), recorded before the run; the job's stop rule applies only after a second identical environment failure.
