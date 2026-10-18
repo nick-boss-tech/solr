@@ -1,0 +1,375 @@
+file,line,heuristic_category,sleep_ms,code
+solr/core/src/test/org/apache/solr/TestDistributedSearch.java,1587,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/TestDistributedSearch.java,1694,other,10000000000,// Thread.sleep(10000000000L);
+solr/core/src/test/org/apache/solr/blockcache/BlockCacheTest.java,396,poll-loop,1000,// Thread.sleep(1000); // need to wait if executor is used for listener?
+solr/core/src/test/org/apache/solr/cli/PostToolTest.java,113,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cli/PostToolTest.java,151,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cli/PostToolTest.java,197,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cli/SolrCloudExampleTest.java,138,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cli/TestSolrCLIRunExample.java,365,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cli/TestSolrCLIRunExample.java,395,other,1000,TimeUnit.MILLISECONDS.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/ActionThrottleTest.java,80,other,100,if (random().nextBoolean()) Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/ActionThrottleTest.java,94,other,,Thread.sleep(random().nextInt(1000));
+solr/core/src/test/org/apache/solr/cloud/AddReplicaTest.java,149,poll-loop,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/AddReplicaTest.java,173,poll-loop,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/AddReplicaTest.java,177,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/BasicDistributedZk2Test.java,331,other,4000,Thread.sleep(4000);
+solr/core/src/test/org/apache/solr/cloud/BasicDistributedZk2Test.java,366,other,3500,Thread.sleep(3500);
+solr/core/src/test/org/apache/solr/cloud/BasicDistributedZk2Test.java,403,beside-wait-helper,1500,Thread.sleep(1500);
+solr/core/src/test/org/apache/solr/cloud/BasicDistributedZk2Test.java,427,other,1500,Thread.sleep(1500);
+solr/core/src/test/org/apache/solr/cloud/BasicDistributedZk2Test.java,432,beside-wait-helper,1500,Thread.sleep(1500);
+solr/core/src/test/org/apache/solr/cloud/BasicDistributedZk2Test.java,436,beside-wait-helper,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/BasicDistributedZkTest.java,861,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeyNothingIsSafeTest.java,203,other,,Thread.sleep(runLength);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeyNothingIsSafeTest.java,228,poll-loop,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeySafeLeaderTest.java,152,other,,Thread.sleep(runLength);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeySafeLeaderTest.java,172,poll-loop,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeySafeLeaderTest.java,179,beside-wait-helper,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeySafeLeaderTest.java,220,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeySafeLeaderWithPullReplicasTest.java,215,poll-loop,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeySafeLeaderWithPullReplicasTest.java,222,beside-wait-helper,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeySafeLeaderWithPullReplicasTest.java,270,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeyShardSplitTest.java,103,poll-loop,,Thread.sleep(atLeast(25));
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeyShardSplitTest.java,116,beside-wait-helper,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeyShardSplitTest.java,120,beside-wait-helper,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeyShardSplitTest.java,191,poll-loop,800,Thread.sleep(800);
+solr/core/src/test/org/apache/solr/cloud/ChaosMonkeyShardSplitTest.java,199,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/CleanupOldIndexTest.java,71,other,,Thread.sleep(waitTimes[random().nextInt(waitTimes.length - 1)]);
+solr/core/src/test/org/apache/solr/cloud/CleanupOldIndexTest.java,101,other,,Thread.sleep(waitTimes[random().nextInt(waitTimes.length - 1)]);
+solr/core/src/test/org/apache/solr/cloud/CleanupOldIndexTest.java,107,other,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/cloud/ClusterStateUpdateTest.java,68,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/ClusterStateUpdateTest.java,117,poll-loop,200,Thread.sleep(200);
+solr/core/src/test/org/apache/solr/cloud/ClusterStateUpdateTest.java,138,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/CollectionPropsTest.java,165,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/cloud/CollectionsAPISolrJTest.java,152,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/cloud/CollectionsAPISolrJTest.java,597,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/cloud/ConfigSetApiLockingTest.java,124,other,30,Thread.sleep(30);
+solr/core/src/test/org/apache/solr/cloud/ConfigSetApiLockingTest.java,142,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/cloud/CreateRoutedAliasTest.java,138,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/DeleteNodeTest.java,102,poll-loop,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/cloud/DeleteReplicaTest.java,382,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/DeleteReplicaTest.java,385,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/DeleteReplicaTest.java,495,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/DeleteStatusTest.java,51,poll-loop,1,TimeUnit.SECONDS.sleep(1);
+solr/core/src/test/org/apache/solr/cloud/DistribAuxIndexJoinFromCollectionTest.java,115,other,1000,Thread.sleep(1000); // so the commits fire
+solr/core/src/test/org/apache/solr/cloud/DistribDocExpirationUpdateProcessorTest.java,341,poll-loop,,"Thread.sleep(Math.max(1, Math.min(5000, timeout.timeLeft(TimeUnit.MILLISECONDS))));"
+solr/core/src/test/org/apache/solr/cloud/DistribJoinFromCollectionTest.java,98,other,1000,Thread.sleep(1000); // so the commits fire
+solr/core/src/test/org/apache/solr/cloud/DistributedQueueTest.java,119,poll-loop,20,Thread.sleep(20);
+solr/core/src/test/org/apache/solr/cloud/DistributedQueueTest.java,169,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/DistributedQueueTest.java,209,other,100,Thread.sleep(100); // watcher should have fired now
+solr/core/src/test/org/apache/solr/cloud/DistributedQueueTest.java,271,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/DistributedQueueTest.java,332,other,,Thread.sleep(waitBeforeOfferMs);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,159,other,,Thread.sleep(rand.nextInt(30) + 1);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,166,poll-loop,,Thread.sleep(rand.nextInt(50) + 1);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,186,other,,Thread.sleep(rand.nextInt(300) + 1);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,197,poll-loop,,Thread.sleep(rand.nextInt(300) + 300);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,211,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,217,poll-loop,,Thread.sleep(rand.nextInt(50) + 1);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,238,other,,Thread.sleep(rand.nextInt(200) + 1);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,249,poll-loop,,Thread.sleep(rand.nextInt(100) + 100);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,373,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,378,other,2000,Thread.sleep(2000); // reload can take a short while
+solr/core/src/test/org/apache/solr/cloud/DistributedVersionInfoTest.java,390,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/ForceLeaderTest.java,252,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionOnCommitTest.java,106,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionOnCommitTest.java,117,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionOnCommitTest.java,156,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionOnCommitTest.java,167,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionOnCommitTest.java,206,other,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionTest.java,264,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionTest.java,343,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionTest.java,351,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionTest.java,421,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/HttpPartitionTest.java,583,other,200,Thread.sleep(200L);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,98,other,,Thread.sleep(runLeaderDelay);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,198,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,258,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,281,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,285,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,299,poll-loop,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,321,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,459,poll-loop,200,Thread.sleep(200);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,524,other,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,536,poll-loop,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,553,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/LeaderElectionTest.java,565,other,4000,Thread.sleep(4000);
+solr/core/src/test/org/apache/solr/cloud/LeaderFailoverAfterPartitionTest.java,85,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/LeaderFailoverAfterPartitionTest.java,95,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/LeaderFailoverAfterPartitionTest.java,129,other,,Thread.sleep(sleepMsBeforeHealPartition);
+solr/core/src/test/org/apache/solr/cloud/LeaderFailoverAfterPartitionTest.java,145,other,10000,Thread.sleep(10000); // give chance for new leader to be elected.
+solr/core/src/test/org/apache/solr/cloud/LeaderFailoverAfterPartitionTest.java,169,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/LeaderTragicEventTest.java,163,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/MigrateReplicasTest.java,131,other,5000,Thread.sleep(5000);
+solr/core/src/test/org/apache/solr/cloud/MigrateRouteKeyTest.java,71,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/MigrateRouteKeyTest.java,272,other,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/cloud/MoveReplicaTest.java,160,poll-loop,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/MoveReplicaTest.java,204,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/MoveReplicaTest.java,247,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/MoveReplicaTest.java,321,poll-loop,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/MoveReplicaTest.java,403,poll-loop,5000,Thread.sleep(5000);
+solr/core/src/test/org/apache/solr/cloud/MultiThreadedOCPTest.java,143,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/MultiThreadedOCPTest.java,173,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/MultiThreadedOCPTest.java,232,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/MultiThreadedOCPTest.java,314,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/cloud/OverseerCollectionConfigSetProcessorTest.java,349,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/OverseerCollectionConfigSetProcessorTest.java,371,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/OverseerCollectionConfigSetProcessorTest.java,992,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/OverseerCollectionConfigSetProcessorTest.java,1431,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/OverseerRolesTest.java,69,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/OverseerTest.java,1086,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/OverseerTest.java,1144,poll-loop,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/cloud/OverseerTest.java,1251,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/PeerSyncReplicationTest.java,227,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/PeerSyncReplicationTest.java,242,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/PeerSyncReplicationTest.java,297,other,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/cloud/RecoveryAfterSoftCommitTest.java,116,other,2000,Thread.sleep(2000L);
+solr/core/src/test/org/apache/solr/cloud/RecoveryStrategyStressTest.java,71,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/RecoveryZkTest.java,96,other,,Thread.sleep(waitTimes[random().nextInt(waitTimes.length - 1)]);
+solr/core/src/test/org/apache/solr/cloud/RecoveryZkTest.java,107,other,,Thread.sleep(waitTimes[random().nextInt(waitTimes.length - 1)]);
+solr/core/src/test/org/apache/solr/cloud/RecoveryZkTest.java,113,other,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/cloud/ReindexCollectionTest.java,438,poll-loop,100,Thread.sleep(100L);
+solr/core/src/test/org/apache/solr/cloud/ReplaceNodeTest.java,122,other,5000,Thread.sleep(5000);
+solr/core/src/test/org/apache/solr/cloud/ReplicationFactorTest.java,154,other,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/ReplicationFactorTest.java,182,other,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/ReplicationFactorTest.java,262,other,100,Thread.sleep(100); // Let the system settle down before retrying
+solr/core/src/test/org/apache/solr/cloud/ReplicationFactorTest.java,347,other,2000,Thread.sleep(2000); // give time for the healed partition to get propagated
+solr/core/src/test/org/apache/solr/cloud/ReplicationFactorTest.java,429,other,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/ReplicationFactorTest.java,478,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/ReplicationFactorTest.java,513,other,5000,Thread.sleep(5000); // let system settle down. This should be very rare.
+solr/core/src/test/org/apache/solr/cloud/RestartWhileUpdatingTest.java,89,poll-loop,,Thread.sleep(random().nextInt(15000));
+solr/core/src/test/org/apache/solr/cloud/RestartWhileUpdatingTest.java,117,poll-loop,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/RestartWhileUpdatingTest.java,121,poll-loop,,Thread.sleep(random().nextInt(30000));
+solr/core/src/test/org/apache/solr/cloud/RestartWhileUpdatingTest.java,123,poll-loop,,Thread.sleep(random().nextInt(30000));
+solr/core/src/test/org/apache/solr/cloud/RestartWhileUpdatingTest.java,126,poll-loop,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/RestartWhileUpdatingTest.java,135,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/RestartWhileUpdatingTest.java,139,beside-wait-helper,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/RestartWhileUpdatingTest.java,143,beside-wait-helper,5000,Thread.sleep(5000);
+solr/core/src/test/org/apache/solr/cloud/RestartWhileUpdatingTest.java,162,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/SplitShardTest.java,270,poll-loop,10,"// Thread.sleep(10);  // cap indexing rate at 100 docs per second, per thread"
+solr/core/src/test/org/apache/solr/cloud/SyncSliceTest.java,142,beside-wait-helper,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/cloud/SyncSliceTest.java,146,beside-wait-helper,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/SyncSliceTest.java,252,other,,Thread.sleep(sleep);
+solr/core/src/test/org/apache/solr/cloud/TestAuthenticationFramework.java,110,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/TestCloudRecovery.java,223,beside-wait-helper,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/TestCloudSearcherWarming.java,364,other,,Thread.sleep(sleepTime.get());
+solr/core/src/test/org/apache/solr/cloud/TestLeaderElectionWithEmptyReplica.java,84,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/TestLockTree.java,237,other,1,Thread.sleep(1);
+solr/core/src/test/org/apache/solr/cloud/TestPullReplica.java,290,other,1500,Thread.sleep(1500);
+solr/core/src/test/org/apache/solr/cloud/TestPullReplica.java,924,other,200,Thread.sleep(200);
+solr/core/src/test/org/apache/solr/cloud/TestPullReplicaErrorHandling.java,168,poll-loop,200,Thread.sleep(200);
+solr/core/src/test/org/apache/solr/cloud/TestPullReplicaErrorHandling.java,265,poll-loop,200,Thread.sleep(200);
+solr/core/src/test/org/apache/solr/cloud/TestRandomRequestDistribution.java,254,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/TestRebalanceLeaders.java,218,poll-loop,50,TimeUnit.MILLISECONDS.sleep(50);
+solr/core/src/test/org/apache/solr/cloud/TestSegmentSorting.java,241,other,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/cloud/TestStressLiveNodes.java,125,other,200,Thread.sleep(200);
+solr/core/src/test/org/apache/solr/cloud/TestTlogReplica.java,302,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/TestTlogReplica.java,599,poll-loop,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/TestTlogReplica.java,1013,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/TestTlogReplica.java,1190,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/TestTolerantUpdateProcessorRandomCloud.java,287,poll-loop,200,Thread.sleep(200);
+solr/core/src/test/org/apache/solr/cloud/TlogReplayBufferedWhileIndexingTest.java,90,other,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/TlogReplayBufferedWhileIndexingTest.java,94,beside-wait-helper,45000,Thread.sleep(45000);
+solr/core/src/test/org/apache/solr/cloud/TlogReplayBufferedWhileIndexingTest.java,99,beside-wait-helper,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/UnloadDistributedZkTest.java,291,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/UnloadDistributedZkTest.java,327,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/UnloadDistributedZkTest.java,432,beside-wait-helper,,Thread.sleep(random().nextInt(50));
+solr/core/src/test/org/apache/solr/cloud/ZkControllerTest.java,814,other,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/cloud/ZkDistributedLockTest.java,201,other,30,Thread.sleep(30);
+solr/core/src/test/org/apache/solr/cloud/ZkDistributedLockTest.java,217,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/cloud/ZkDistributedLockTest.java,288,other,30,Thread.sleep(30);
+solr/core/src/test/org/apache/solr/cloud/ZkDistributedLockTest.java,304,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/cloud/ZkFailoverTest.java,96,other,2500,Thread.sleep(2500);
+solr/core/src/test/org/apache/solr/cloud/ZkShardTermsTest.java,234,poll-loop,,Thread.sleep(random().nextInt(200));
+solr/core/src/test/org/apache/solr/cloud/ZkShardTermsTest.java,254,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/ZkShardTermsTest.java,384,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/ZkSolrClientTest.java,134,other,80,Thread.sleep(80);
+solr/core/src/test/org/apache/solr/cloud/ZkSolrClientTest.java,157,other,600,Thread.sleep(600);
+solr/core/src/test/org/apache/solr/cloud/ZkSolrClientTest.java,195,other,1000,Thread.sleep(1000); // pause for reconnect
+solr/core/src/test/org/apache/solr/cloud/ZkSolrClientTest.java,205,poll-loop,1000,Thread.sleep(1000 * i);
+solr/core/src/test/org/apache/solr/cloud/ZkSolrClientTest.java,314,other,700,Thread.sleep(700);
+solr/core/src/test/org/apache/solr/cloud/ZkSolrClientTest.java,317,other,4000,Thread.sleep(4000); // wait a bit more
+solr/core/src/test/org/apache/solr/cloud/ZkSolrClientTest.java,321,other,4000,Thread.sleep(4000); // wait a bit more
+solr/core/src/test/org/apache/solr/cloud/ZkSolrClientTest.java,424,other,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/cloud/api/collections/CollectionApiLockingTest.java,214,other,30,Thread.sleep(30);
+solr/core/src/test/org/apache/solr/cloud/api/collections/CollectionApiLockingTest.java,229,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/cloud/api/collections/ReplicaPropertiesBase.java,70,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/api/collections/ReplicaPropertiesBase.java,108,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/api/collections/ReplicaPropertiesBase.java,199,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/api/collections/ShardSplitTest.java,169,other,1000,Thread.sleep(1000); // give the indexer sometime to do its work
+solr/core/src/test/org/apache/solr/cloud/api/collections/ShardSplitTest.java,494,poll-loop,1000,Thread.sleep(1000); // give the indexers some time to do their work
+solr/core/src/test/org/apache/solr/cloud/api/collections/ShardSplitTest.java,528,other,1000,Thread.sleep(1000 + random().nextInt(500));
+solr/core/src/test/org/apache/solr/cloud/api/collections/ShardSplitTest.java,880,poll-loop,,Thread.sleep(sleep);
+solr/core/src/test/org/apache/solr/cloud/api/collections/ShardSplitTest.java,1234,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/cloud/api/collections/TestReplicaProperties.java,284,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/api/collections/TestRequestStatusCollectionAPI.java,219,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/cloud/overseer/ZkCollectionPropsCachingTest.java,74,other,10000,Thread.sleep(10000); // test the timeout feature
+solr/core/src/test/org/apache/solr/cloud/overseer/ZkStateReaderTest.java,659,other,100,TimeUnit.MILLISECONDS.sleep(100);
+solr/core/src/test/org/apache/solr/cloud/overseer/ZkStateWriterTest.java,104,other,,Thread.sleep(Overseer.STATE_UPDATE_DELAY + 100);
+solr/core/src/test/org/apache/solr/cloud/overseer/ZkStateWriterTest.java,172,other,,Thread.sleep(Overseer.STATE_UPDATE_DELAY + 100);
+solr/core/src/test/org/apache/solr/cloud/overseer/ZkStateWriterTest.java,383,other,,Thread.sleep(Overseer.STATE_UPDATE_DELAY + 100);
+solr/core/src/test/org/apache/solr/cluster/events/impl/CollectionsRepairEventListenerTest.java,173,beside-wait-helper,,"Thread.sleep(TimeUnit.MILLISECONDS.convert(waitFor, TimeUnit.SECONDS));"
+solr/core/src/test/org/apache/solr/core/CachingDirectoryFactoryTest.java,180,poll-loop,,Thread.sleep(TEST_NIGHTLY ? 30000 : 4000);
+solr/core/src/test/org/apache/solr/core/CachingDirectoryFactoryTest.java,231,poll-loop,,Thread.sleep(random.nextInt(TEST_NIGHTLY ? 50 : 10) + 1);
+solr/core/src/test/org/apache/solr/core/CachingDirectoryFactoryTest.java,277,poll-loop,,Thread.sleep(random.nextInt(350) + 1);
+solr/core/src/test/org/apache/solr/core/CachingDirectoryFactoryTest.java,328,poll-loop,,Thread.sleep(random.nextInt(TEST_NIGHTLY ? 300 : 50) + 1);
+solr/core/src/test/org/apache/solr/core/SolrCoreTest.java,225,poll-loop,0,"Thread.sleep(0, (n % 13 + 1) * 10);"
+solr/core/src/test/org/apache/solr/core/SolrCoreTest.java,373,other,5,TimeUnit.MILLISECONDS.sleep(5);
+solr/core/src/test/org/apache/solr/core/SolrCoreTest.java,380,other,25,TimeUnit.MILLISECONDS.sleep(25);
+solr/core/src/test/org/apache/solr/core/SolrCoreTest.java,384,poll-loop,50,TimeUnit.MILLISECONDS.sleep(50); // to allow metrics to be checked at least once
+solr/core/src/test/org/apache/solr/core/TestLazyCores.java,621,other,,Thread.sleep(sleep_millis);
+solr/core/src/test/org/apache/solr/core/TestSolrConfigHandler.java,261,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/core/TestSolrConfigHandler.java,598,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/core/TestSolrConfigHandler.java,615,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/core/TestSolrDeletionPolicy1.java,105,other,,Thread.sleep(age);
+solr/core/src/test/org/apache/solr/core/snapshots/TestSolrCloudSnapshots.java,103,other,5000,Thread.sleep(5000);
+solr/core/src/test/org/apache/solr/core/snapshots/TestSolrCloudSnapshots.java,196,other,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/filestore/TestDistribFileStore.java,283,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/handler/ReplicationTestHelper.java,196,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/handler/TestConfigReload.java,98,poll-loop,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/handler/TestReplicationHandler.java,191,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/handler/TestReplicationHandler.java,311,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/handler/TestReplicationHandler.java,599,other,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/handler/TestReplicationHandler.java,680,poll-loop,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/handler/TestReplicationHandler.java,716,beside-wait-helper,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/handler/TestReplicationHandler.java,1542,beside-wait-helper,,Thread.sleep(reserveDuration + 1000);
+solr/core/src/test/org/apache/solr/handler/TestReplicationHandler.java,1745,other,,Thread.sleep(sleepInterval);
+solr/core/src/test/org/apache/solr/handler/TestReplicationHandler.java,1860,beside-wait-helper,3000,Thread.sleep(3000);
+solr/core/src/test/org/apache/solr/handler/TestRestoreCore.java,160,poll-loop,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/handler/TestRestoreCore.java,222,poll-loop,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/handler/TestSolrConfigHandlerConcurrent.java,142,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/handler/TestUserManagedReplicationWithAuth.java,207,other,5000,Thread.sleep(5000);
+solr/core/src/test/org/apache/solr/handler/admin/CoreAdminHandlerTest.java,505,poll-loop,10,Thread.sleep(10L);
+solr/core/src/test/org/apache/solr/handler/admin/CoreAdminRequestStatusTest.java,86,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/handler/admin/DaemonStreamApiTest.java,213,poll-loop,100,TimeUnit.MILLISECONDS.sleep(100);
+solr/core/src/test/org/apache/solr/handler/admin/DaemonStreamApiTest.java,232,poll-loop,100,TimeUnit.MILLISECONDS.sleep(100);
+solr/core/src/test/org/apache/solr/handler/admin/DaemonStreamApiTest.java,249,poll-loop,100,TimeUnit.MILLISECONDS.sleep(100);
+solr/core/src/test/org/apache/solr/handler/admin/ThreadDumpHandlerTest.java,198,poll-loop,10,"Thread.sleep(10); // 10ms at a time, at most 5 sec total"
+solr/core/src/test/org/apache/solr/handler/admin/ThreadDumpHandlerTest.java,326,poll-loop,10,"Thread.sleep(10); // 10ms at a time, at most 5 sec total"
+solr/core/src/test/org/apache/solr/handler/admin/UpgradeCoreIndexActionTest.java,165,other,250,Thread.sleep(250);
+solr/core/src/test/org/apache/solr/handler/admin/api/ClusterCommandsTest.java,123,poll-loop,1,TimeUnit.SECONDS.sleep(1);
+solr/core/src/test/org/apache/solr/handler/component/AsyncTrackerSemaphoreLeakTest.java,217,other,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/handler/component/InfixSuggestersTest.java,145,other,100,Thread.sleep(100); // TODO: is there a better way to ensure that the build has begun?
+solr/core/src/test/org/apache/solr/handler/component/SuggestComponentTest.java,638,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/logging/TestLogWatcher.java,98,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/schema/TestManagedSchemaThreadSafety.java,86,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/schema/TestManagedSchemaWithMultipleAdd.java,82,other,,Thread.sleep(AUTOSOFTCOMMIT_MAXTIME_MS + 500);
+solr/core/src/test/org/apache/solr/search/DelayingSearchComponent.java,39,other,,// Thread.sleep() (and derivatives) are not guaranteed to sleep the full amount:
+solr/core/src/test/org/apache/solr/search/DelayingSearchComponent.java,50,poll-loop,,TimeUnit.NANOSECONDS.sleep(sleepNanos);
+solr/core/src/test/org/apache/solr/search/ExpensiveSearchComponent.java,150,other,,Thread.sleep(sleepMs);
+solr/core/src/test/org/apache/solr/search/TestCaffeineCache.java,199,beside-wait-helper,,Thread.sleep(TimeUnit.SECONDS.toMillis(IDLE_TIME_SEC * 2));
+solr/core/src/test/org/apache/solr/search/TestCancellableCollector.java,189,other,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/search/TestCancellableCollector.java,202,other,30,Thread.sleep(30);
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,248,other,,Thread.sleep(establishBaselineMs);
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,252,other,,Thread.sleep(nrtDowntimeMs); // let NRT be down for a while
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,259,other,,Thread.sleep(pullServiceTimeMs);
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,278,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,312,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,342,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,383,poll-loop,,Thread.sleep(serveTogetherTime);
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,387,beside-wait-helper,,Thread.sleep(downTime);
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,419,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java,486,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/search/TestCpuAllowedLimit.java,101,poll-loop,1,Thread.sleep(1);
+solr/core/src/test/org/apache/solr/search/TestIndexSearcher.java,314,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/search/TestIndexSearcher.java,331,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/search/TestIndexSearcher.java,393,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/search/TestMemAllowedLimit.java,105,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/search/TestRecovery.java,311,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/search/TestRecovery.java,1985,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/search/TestReloadDeadlock.java,189,poll-loop,10,Thread.sleep(10 + random().nextInt(250));
+solr/core/src/test/org/apache/solr/search/TestStressRecovery.java,390,other,,if (random().nextBoolean()) Thread.sleep(random().nextInt(10) + 1);
+solr/core/src/test/org/apache/solr/search/join/CrossCollectionJoinQueryTest.java,174,other,10000,Thread.sleep(10000);
+solr/core/src/test/org/apache/solr/security/AuditLoggerIntegrationTest.java,165,other,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/security/AuditLoggerIntegrationTest.java,607,other,2000,Thread.sleep(2000);
+solr/core/src/test/org/apache/solr/security/BasicAuthOnSingleNodeTest.java,91,poll-loop,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/security/TestAuthorizationFramework.java,101,other,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/servlet/TestRequestRateLimiter.java,522,other,,Thread.sleep(tRandom.nextInt(200));
+solr/core/src/test/org/apache/solr/servlet/TestRequestRateLimiter.java,529,other,,Thread.sleep(tRandom.nextInt(10));
+solr/core/src/test/org/apache/solr/servlet/TestRequestRateLimiter.java,551,other,,Thread.sleep(tRandom.nextInt(200));
+solr/core/src/test/org/apache/solr/servlet/TestRequestRateLimiter.java,558,other,,Thread.sleep(tRandom.nextInt(10));
+solr/core/src/test/org/apache/solr/servlet/TestRequestRateLimiter.java,565,other,5000,Thread.sleep(5000); // let it run for a while
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,361,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,438,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,693,other,,Thread.sleep(WAIT_TIME);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,950,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,1054,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,1166,other,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,1262,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,1275,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,1367,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,1381,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,1664,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/update/TestInPlaceUpdatesDistrib.java,1677,poll-loop,10,Thread.sleep(10);
+solr/core/src/test/org/apache/solr/update/processor/DimensionalRoutedAliasUpdateProcessorTest.java,216,other,5000,Thread.sleep(5000);
+solr/core/src/test/org/apache/solr/update/processor/DimensionalRoutedAliasUpdateProcessorTest.java,441,other,5000,Thread.sleep(5000);
+solr/core/src/test/org/apache/solr/update/processor/DistributedUpdateProcessorTest.java,212,other,,Thread.sleep(sleepMs);
+solr/core/src/test/org/apache/solr/update/processor/RoutedAliasUpdateProcessorTest.java,85,poll-loop,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/update/processor/RoutedAliasUpdateProcessorTest.java,129,other,500,"Thread.sleep(500); // YUCK, but works (beasts 2500x20 ok vs failing in ~500x20 every time)"
+solr/core/src/test/org/apache/solr/update/processor/RoutedAliasUpdateProcessorTest.java,269,other,500,Thread.sleep(500);
+solr/core/src/test/org/apache/solr/update/processor/RoutedAliasUpdateProcessorTest.java,368,other,,Thread.sleep(commitWithin);
+solr/core/src/test/org/apache/solr/update/processor/RoutedAliasUpdateProcessorTest.java,373,poll-loop,100,Thread.sleep(100);
+solr/core/src/test/org/apache/solr/update/processor/TimeRoutedAliasUpdateProcessorTest.java,164,other,1000000,//    Thread.sleep(1000000);
+solr/core/src/test/org/apache/solr/update/processor/TimeRoutedAliasUpdateProcessorTest.java,204,other,1000,Thread.sleep(1000);
+solr/core/src/test/org/apache/solr/update/processor/TimeRoutedAliasUpdateProcessorTest.java,382,poll-loop,5000,Thread.sleep(5000); // avoid spurious fails due to TRA thread not done yet
+solr/core/src/test/org/apache/solr/update/processor/TimeRoutedAliasUpdateProcessorTest.java,400,other,5000,Thread.sleep(5000);
+solr/core/src/test/org/apache/solr/update/processor/TimeRoutedAliasUpdateProcessorTest.java,691,other,,"// This method must NOT gain any Thread.sleep() statements, nor should it gain any long-running"
+solr/core/src/test/org/apache/solr/util/DateMathParserTest.java,159,other,5,Thread.sleep(5);
+solr/core/src/test/org/apache/solr/util/TestCircuitBreakers.java,302,poll-loop,50,Thread.sleep(50);
+solr/core/src/test/org/apache/solr/util/circuitbreaker/TestLoadAverageCircuitBreakerSampling.java,117,other,20,Thread.sleep(20);
+solr/core/src/test/org/apache/solr/util/stats/OtelInstrumentedExecutorServiceTest.java,128,beside-wait-helper,,Thread.sleep(durationMs);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/DeleteByQueryToIdTest.java,261,poll-loop,1000,Thread.sleep(1000);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/RetryQueueIntegrationTest.java,230,other,15000,Thread.sleep(15000);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/RetryQueueIntegrationTest.java,233,other,10000,Thread.sleep(10000);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/RetryQueueIntegrationTest.java,244,poll-loop,100,Thread.sleep(100);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/RetryQueueIntegrationTest.java,278,other,15000,Thread.sleep(15000);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/RetryQueueIntegrationTest.java,283,other,10000,Thread.sleep(10000);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/RetryQueueIntegrationTest.java,294,poll-loop,100,Thread.sleep(100);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/SolrAndKafkaIntegrationTest.java,601,other,5000,Thread.sleep(5000);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/SolrAndKafkaIntegrationTest.java,635,poll-loop,300,Thread.sleep(300);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/SolrAndKafkaMultiCollectionIntegrationTest.java,347,poll-loop,100,Thread.sleep(100);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/SolrAndKafkaReindexTest.java,175,poll-loop,100,Thread.sleep(100);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/SolrAndKafkaReindexTest.java,198,poll-loop,200,Thread.sleep(200);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/SolrAndKafkaReindexTest.java,223,poll-loop,100,Thread.sleep(100);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/ZkConfigIntegrationTest.java,206,poll-loop,100,Thread.sleep(100);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/ZkConfigIntegrationTest.java,235,poll-loop,100,Thread.sleep(100);
+solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/consumer/KafkaCrossDcConsumerTest.java,546,other,1000,Thread.sleep(1000);
+solr/modules/extraction/src/test/org/apache/solr/handler/extraction/ExtractingRequestHandlerTestAbstract.java,1037,other,100,Thread.sleep(100);
+solr/modules/jwt-auth/src/test/org/apache/solr/security/jwt/JWTAuthPluginIntegrationTest.java,383,other,200,Thread.sleep(200);
+solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/GoldFileTraceVerifier.java,183,poll-loop,500,TimeUnit.MILLISECONDS.sleep(500);
+solr/solrj-streaming/src/test/org/apache/solr/client/solrj/io/stream/CloudAuthStreamTest.java,549,other,,"Thread.sleep(Math.max(1, Math.min(5000, timeout.timeLeft(TimeUnit.MILLISECONDS))));"
+solr/solrj-streaming/src/test/org/apache/solr/client/solrj/io/stream/CloudAuthStreamTest.java,624,other,,"Thread.sleep(Math.max(1, Math.min(5000, timeout.timeLeft(TimeUnit.MILLISECONDS))));"
+solr/solrj-streaming/src/test/org/apache/solr/client/solrj/io/stream/StreamDecoratorTest.java,1250,poll-loop,1000,Thread.sleep(1000);
+solr/solrj-streaming/src/test/org/apache/solr/client/solrj/io/stream/StreamDecoratorTest.java,3600,other,1000,Thread.sleep(1000);
+solr/solrj-streaming/src/test/org/apache/solr/client/solrj/io/stream/StreamDecoratorTest.java,3650,other,1000,Thread.sleep(1000);
+solr/solrj-streaming/src/test/org/apache/solr/client/solrj/io/stream/StreamDecoratorTest.java,3793,other,1000,Thread.sleep(1000);
+solr/solrj-streaming/src/test/org/apache/solr/client/solrj/io/stream/StreamDecoratorTest.java,4232,other,1000,Thread.sleep(1000);
+solr/solrj-streaming/src/test/org/apache/solr/client/solrj/io/stream/StreamDecoratorTest.java,4279,other,1000,Thread.sleep(1000);
+solr/solrj-zookeeper/src/test/org/apache/solr/common/cloud/SolrZkClientTest.java,212,other,600000,// Thread.sleep(600000);
+solr/solrj-zookeeper/src/test/org/apache/solr/common/cloud/SolrZkClientTest.java,227,other,500,Thread.sleep(500);
+solr/solrj-zookeeper/src/test/org/apache/solr/common/cloud/SolrZkClientTest.java,245,other,500,Thread.sleep(500);
+solr/solrj/src/test/org/apache/solr/client/solrj/SolrExampleTestsBase.java,111,other,1000,Thread.sleep(1000); // wait 1 sec
+solr/solrj/src/test/org/apache/solr/client/solrj/SolrExampleTestsBase.java,125,poll-loop,2000,Thread.sleep(2000); // wait 2 seconds...
+solr/solrj/src/test/org/apache/solr/client/solrj/SolrExampleTestsBase.java,139,other,1000,Thread.sleep(1000); // wait 1 sec
+solr/solrj/src/test/org/apache/solr/client/solrj/SolrExampleTestsBase.java,153,poll-loop,2000,Thread.sleep(2000); // wait 2 seconds...
+solr/solrj/src/test/org/apache/solr/client/solrj/SolrExampleTestsBase.java,193,other,250,Thread.sleep(250); // wait 250 ms
+solr/solrj/src/test/org/apache/solr/client/solrj/StartSolrJetty.java,64,poll-loop,5000,Thread.sleep(5000);
+solr/solrj/src/test/org/apache/solr/client/solrj/TestSolrJErrorHandling.java,372,other,1000,Thread.sleep(1000);
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/ClusterStateProviderTest.java,513,beside-wait-helper,2000,Thread.sleep(2000);
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/FakeTimeSource.java,23,other,,"* relying on real system time and Thread.sleep(), tests can use this to advance time manually and"
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/HttpJdkSolrClientTest.java,171,beside-wait-helper,1000,Thread.sleep(1000); // let the writer fill the pipe and block in awaitSpace()
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/HttpJdkSolrClientTest.java,194,poll-loop,100,Thread.sleep(100);
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/LBSolrClientTest.java,157,other,300,Thread.sleep(300);
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/StallDetectionTest.java,360,poll-loop,,Thread.sleep(random().nextInt(5));
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/StallDetectionTest.java,371,other,5,Thread.sleep(5); // Wait briefly before checking again
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/StallDetectionTest.java,433,other,,Thread.sleep(CHECKER_INTERVAL_MILLIS);
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/StallDetectionTest.java,464,poll-loop,,Thread.sleep(TIME_ADVANCE_STEP_MILLIS);
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/StallDetectionTest.java,494,other,100,Thread.sleep(100);
+solr/solrj/src/test/org/apache/solr/client/solrj/impl/StallDetectionTest.java,510,poll-loop,20,Thread.sleep(20); // Let checkers run with new time
+solr/solrj/src/test/org/apache/solr/common/cloud/TestCollectionStateWatchers.java,92,poll-loop,10,TimeUnit.MILLISECONDS.sleep(10);
+solr/solrj/src/test/org/apache/solr/common/cloud/TestDocCollectionWatcher.java,93,poll-loop,10,TimeUnit.MILLISECONDS.sleep(10);
+solr/webapp/src/test/org/apache/solr/webapp/AdminUiCollectionsScreenTest.java,177,beside-wait-helper,1500,Thread.sleep(1500);
+solr/webapp/src/test/org/apache/solr/webapp/AdminUiLoggingScreenTest.java,61,poll-loop,250,Thread.sleep(250);
+solr/webapp/src/test/org/apache/solr/webapp/AdminUiTestBase.java,365,other,200,Thread.sleep(200);
+solr/webapp/src/test/org/apache/solr/webapp/AdminUiTestBase.java,415,poll-loop,250,Thread.sleep(250);
+solr/webapp/src/test/org/apache/solr/webapp/AdminUiTestBase.java,485,poll-loop,200,Thread.sleep(200);
+solr/webapp/src/test/org/apache/solr/webapp/AdminUiTestBase.java,511,poll-loop,200,Thread.sleep(200);
