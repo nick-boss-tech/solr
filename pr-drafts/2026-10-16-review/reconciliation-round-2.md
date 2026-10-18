@@ -36,6 +36,6 @@ Option A, corrections only: sentences that the live head or a receipt contradict
 | 5134 | 5c1124bdef | live body corrected per the reconciliation table; links re-pointed to 5c1124bdef with recomputed anchors | 6,739 |
 | 5135 | 6c033ba6ea | body rewritten for the head: leading _docid_ sort, cycle test in the proof, Known limitation replaced with the paging runs | 5,436 |
 
-5135 row correction: the head is 6c033ba6ea (not c666155ed0), and the draft was longer than live only in the earlier count, which used the old body. At 6c033ba6ea the live body is 4,148 visible characters and the draft is 3,895.
+5135 row correction: the head is 6c033ba6ea, not c666155ed0. The earlier row said the draft was longer than live, which was counted against an old body. Against the live body at 6c033ba6ea (4,148 visible characters), the draft is 3,895.
 
 Known limitation for 5135: the paging probe reproduces repeats and skips at 6c033ba6ea in two of four runs (receipts/SOLR-6975.md, "Paging probe"). The section stays and reports the runs.
