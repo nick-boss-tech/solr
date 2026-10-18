@@ -13528,7 +13528,10 @@
       "date": "2026-10-17",
       "round": "audit-8",
       "evidence": "JIRA records the leader-sync wait fixes in 1546683/1546851 and fix versions 4.9/6.0. The later replacement-leader wait is present in current history as 2cc87df6ef4."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5516-draft-open",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-5508",

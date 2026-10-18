@@ -1,7 +1,7 @@
 # Claim: pool-vm5-skip-repro-5516-round-2
 
 - Claimant host: vm5, matching a file in `hosts/`.
-- Status: ACTIVE; mark DONE with the deliverable path when the work lands.
+- Status: DONE 2026-10-18T21:46:23Z. One run, passed (seed 1F1EBA800A9BB08D); verdict keep-open. Deliverable: `reports/2026-10-18-skip-repro/D3-5516.md` (round 2 section).
 - Job or assignment: `assignments/pool-skip-repro-5516-round-1.md` (HANDED; this claim takes it under the rule that HANDED is not a host restriction).
 - Slice: item 1 (run the class) with the nightly flag, items 2 and 3 (read the mitigation and the test output).
 - Capability tags used: sweep, review.
