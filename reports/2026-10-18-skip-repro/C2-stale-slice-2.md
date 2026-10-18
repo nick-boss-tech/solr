@@ -1,74 +1,71 @@
-# C2 stale-slice-2 partial report
+# C2 stale-slice-2 report
 
 Pinned source: `origin/main` at `498a09aea97aac86c2cc7ac114113b946d249942`.
-This partial pass checked 11 of 61 assignment rows. The remaining 50 were not
-reached and are listed below so the assignment can stay open for another
-reviewer. The separate Tier 2 audit batch is recorded against
-`upstream/main` at `c8ab71430f6e7547c773da596101d680862310ff` in
-`material/skip-audit/tier2-audit-2026-10-17-c.json`.
+The windows partial pass (`claims/pool-windows-skip-review-stale-slice-2-a.md`) reviewed 11 of the 61 assignment rows. The vm3 pass (`claims/pool-skip-review-stale-slice-2-vm3.md`, started 2026-10-18T07:25Z) reviewed the remaining 50. All 61 rows now have a verdict.
+The separate Tier 2 audit batch is recorded against `upstream/main` at `c8ab71430f6e7547c773da596101d680862310ff` in `material/skip-audit/tier2-audit-2026-10-17-c.json`.
 
-No builds or tests were run. No JIRA, GitHub, or email posts were made.
+No builds or tests were run. No JIRA, GitHub, or email posts were made. Ticket text was read from the anonymous JIRA REST API. Code was read at the pinned sha only with `git show` and `git grep`.
 
 | Ticket | Status | Verdict | Evidence or next step |
 | --- | --- | --- | --- |
 | SOLR-5559 | reviewed | fixed | `solr/core/src/java/org/apache/solr/core/SolrXmlConfig.java:237-243` explicitly rejects the old `solr/cores` configuration used by the report. |
-| SOLR-5566 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-5579 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-5712 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-5736 | not reached |  | Not reached in this partial C2 pass. |
+| SOLR-5566 | reviewed | unclear | `HighlightComponent.java:215-235` finishStage now calls getAllHighlights (lines 275-279), which runs removeNulls before any map is built, so the 4.6 direct path is no longer in finishStage. `NamedList.java:91` still takes `Entry[]`, and no commit at the pinned sha cites SOLR-5566. Next: a shards highlighting repro to see whether nulls still reach NamedList. |
+| SOLR-5579 | reviewed | unclear | `Overseer.java:961` still defines `/overseer/collection-queue-work`, and `RecoveryStrategy.java:373` and `:811` still call getLeaderRetry. OverseerCollectionProcessor is gone from main code (only `OverseerStatusTest.java:60` strings remain), replaced by `OverseerCollectionMessageHandler.java:65`. Next: repro a failed reload with no leader on the rewritten Overseer. |
+| SOLR-5712 | reviewed | fixed | Commit 96e8392921 (SOLR-11770) added the guard at `TermVectorComponent.java:291-292` ("There can be no documents with vectors", `if (vectors != null)`), the all-fields branch the ticket hit. The commit does not cite SOLR-5712. |
+| SOLR-5736 | reviewed | present | `QueryComponent.java:685` still calls mergeIds from handleRegularResponses, and mergeIds is defined at `QueryComponent.java:971`. No repro was run, so the NPE trigger at the reported line is unchecked. |
 | SOLR-5759 | reviewed | unclear | `HighlightComponent.java:59,61,177,186` keeps `original` selectable while defaulting to `unified`; the ticket lacks a self-contained current reproduction, so verify the reported case with `hl.method=original` and the full analyzer/query settings. |
 | SOLR-5788 | reviewed | unclear | `solr/solrj/src/java/org/apache/solr/client/solrj/impl/HttpSolrClient.java:226-262` builds remote exceptions from HTTP response errors. The old report's exact message path was not established; a current request/schema reproduction is needed. |
 | SOLR-5833 | reviewed | gone | No `forceOverSeer` hit on the pinned Solr tree. `solr/core/src/java/org/apache/solr/cloud/OverseerElectionContext.java:42,64` uses an ephemeral elected leader node; the old force-overseer hook is gone. |
-| SOLR-5850 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-5878 | not reached |  | Not reached in this partial C2 pass. |
+| SOLR-5850 | reviewed | gone | `ConcurrentUpdateSolrServer` has no hits under `solr/` at the pinned sha. It was removed by 4a6d85790a (SOLR-6895). Its successor `ConcurrentUpdateBaseSolrClient.java:159-161` keeps a queue.add path that throws "Queue is full", so a new report should target that class. |
+| SOLR-5878 | reviewed | unclear | No commit at the pinned sha cites SOLR-5878. `QueryComponent.java:1733-1737` sets docsToCollect from rows for simple format, and `SimpleEndResultTransformer.java:39-80` emits every scoreDoc of each group without trimming to rows. Whether this is a bug or a wiki error is a maintainer decision; a distributed test is needed. |
 | SOLR-5919 | reviewed | present | `solr/test-framework/src/java/org/apache/solr/cloud/AbstractFullDistribZkTestBase.java:384-407` still creates and uses `control_collection`; this is the test framework's cloud topology discussed by maintainers. |
 | SOLR-5990 | reviewed | unclear | `solr/core/src/java/org/apache/solr/core/NodeConfig.java:103,210-211,327,603,756` and `solr/solr-ref-guide/modules/configuration-guide/pages/configuring-solr-xml.adoc:156` expose `coreLoadThreads`. Current logs and settings are missing, so incomplete startup cannot be attributed to a product defect. |
-| SOLR-5995 | not reached |  | Not reached in this partial C2 pass. |
+| SOLR-5995 | reviewed | unclear | `DirectSolrSpellChecker.java:67` still exists, but the ticket names no class or code path, and its attachments are not in the record. Next: fetch the attachment list read-only, then reproduce the spurious single-character suggestions against DirectSolrSpellChecker. |
 | SOLR-6184 | reviewed | present | `solr/core/src/java/org/apache/solr/handler/ReplicationHandler.java:1654` defines `commitReserveDuration`; `solr/solr-ref-guide/modules/deployment-guide/pages/user-managed-index-replication.adoc:133,154` documents the setting. A current reproduction is still needed to establish whether the reported recovery failure remains. |
-| SOLR-6255 | not reached |  | Not reached in this partial C2 pass. |
+| SOLR-6255 | reviewed | present | `DocumentBuilder.java:320` still emits "missing required field: <name>" for a missing required field, and `JsonLoader.java` still parses the update body. The duplicate-key handling in the JSON parser was not traced, so the root cause is unchecked. |
 | SOLR-6366 | reviewed | fixed | `solr/core/src/java/org/apache/solr/spelling/SpellCheckCollator.java:67-107` bounds collation attempts by `maxTries` and `maxCollations`. |
-| SOLR-6429 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6468 | not reached |  | Not reached in this partial C2 pass. |
+| SOLR-6429 | reviewed | unclear | be10d9e501 (SOLR-8260) removed the rename to core.properties.unloaded (diff line 176), and `CorePropertiesLocator.java` delete() now only deletes core.properties. `CoreContainer.java:2093-2105` unload still runs, and `UpdateLog.java:2399-2416` waits for replay with no timeout. Next: repro unload during tlog replay to see whether it blocks or fails. |
+| SOLR-6468 | reviewed | gone | `git grep` finds no `enablePositionIncrements` in `solr/core/src/java` or `solr/core/src/test`, and there is no top-level `lucene/` directory. Only commented-out lines remain in `solr/core/src/test-files/solr/collection1/conf/schema-tagger.xml:170` and `:178`. Lucene sources were removed from main by 168df90d79 (SOLR-14497), and the option was dropped from test schemas in 513cefa5e9 (LUCENE-6044). |
 | SOLR-6525 | reviewed | unclear | `solr/core/src/java/org/apache/solr/cloud/Overseer.java:136,282,413` shows the current queue processor. The umbrella ticket has no current workload, latency measurements, or reproducible slow operation to isolate a defect. |
 | SOLR-6534 | reviewed | fixed | The JIRA discussion attributes the geodetic-bounds issue to Spatial4j; pinned `gradle/libs.versions.toml:175,406` uses LocationTech Spatial4j 0.8, and the ticket records the fix in Solr 5.0. |
 | SOLR-6561 | reviewed | gone | The old `LBHttpSolrServer` class is absent; current `solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java:123,186` contains its replacement and only a historical mention. JIRA says the reporter stopped passing a null `ResponseParser`. |
-| SOLR-6582 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6678 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6712 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6756 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6782 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6811 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6822 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6828 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6836 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6890 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6903 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6922 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6929 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-6934 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7088 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7153 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7192 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7249 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7295 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7343 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7415 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7482 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7536 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7559 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7612 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7721 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7806 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7846 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7867 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7973 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-7982 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-8079 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-8098 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-8106 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-8117 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-8171 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-8310 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-8365 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-8469 | not reached |  | Not reached in this partial C2 pass. |
-| SOLR-8572 | not reached |  | Not reached in this partial C2 pass. |
+| SOLR-6582 | reviewed | gone | HDFS module removed by 1e77bdf062 (SOLR-17609, "Remove HDFS module"). `git grep` for `FileSystem.newInstance` or `FileSystem.get(` under `solr/` at the pinned sha has no hits. |
+| SOLR-6678 | reviewed | present | `solr/core/src/java/org/apache/solr/spelling/suggest/SolrSuggester.java:116-128`: the close hook closes only `lookup`. The `Dictionary dictionary` field (line 81) is never closed or cleared anywhere in the file. Next: confirm with a heap-path repro whether the SolrCore reference runs through the dictionary. |
+| SOLR-6712 | reviewed | unclear | `HighlightComponent.java:215-218` still calls `rb.resultIds.size()` with no null check. Grouping sets `resultIds` in `TopGroupsShardResponseProcessor.java:254`. Next: run `group.query` with `hl=true` on a cloud collection at the pinned sha to see whether `resultIds` is null on that path. |
+| SOLR-6756 | reviewed | gone | `solr/cloud-dev/` no longer exists. `04ad0955e7` (SOLR-12930) deleted `solr/cloud-dev/cloud.sh`. The replacement is `dev-tools/scripts/cloud.sh`, last changed in `b6562691c8`. |
+| SOLR-6782 | reviewed | gone | `PostingsSolrHighlighter.java` was deleted in `101296f606` (SOLR-12901, which makes `hl.method=unified` the default). No `PostingsSolrHighlighter` hits remain under `solr/core/src`. The default method is set at `HighlightComponent.java:177`. |
+| SOLR-6811 | reviewed | gone | `LBHttpSolrServer.java` was removed in `4a6d85790a` (SOLR-6895). `git grep CloserThread` under `solr/` has no hits, and there is no TestLBHttpSolrServer. `LB2SolrClientTest.java` replaces it. |
+| SOLR-6822 | reviewed | fixed | `6396cb759f` (SOLR-10830) makes init fail when `_root_` and uniqueKey types differ: `IndexSchema.java:582-590`, with `isUsableForChildDocs` at `IndexSchema.java:2196`. Test schema `bad-schema-uniquekey-diff-type-root.xml` came in the same commit. |
+| SOLR-6828 | reviewed | unclear | `PivotFacetProcessor.java:194` (`processSingle`) and `:302` (`doPivots`) are still present. No pivot test uses PathHierarchy; `PathHierarchyTokenizerFactoryTest.java` covers only the tokenizer. Next: reproduce `pivot.fields` on a PathHierarchy field at the pinned sha and compare counts. |
+| SOLR-6836 | reviewed | unclear | `DefaultSolrHighlighter.java:644` passes FRAGSIZE to the FVH path. The 4.10 default was `original`, but the default is now `unified` (`HighlightComponent.java:177`). Next: run the ticket query with `hl.method=original` and `hl.method=unified` at the pinned sha and compare snippets. |
+| SOLR-6890 | reviewed | gone | `SolrConfig.java:935-937` logs "<lib/> entries no longer supported" and ignores them. Removal commit: `c1062d9406` (SOLR-16781, "Remove solrconfig.xml <lib> directives"). |
+| SOLR-6903 | reviewed | fixed | Commit 7053a99f49 (SOLR-8651) changed solrj `UpdateRequest` to pass commitWithin on deleteById. Distributed deletes carry it: `solr/core/src/java/org/apache/solr/update/SolrCmdDistributor.java:220` sets `uReq.setCommitWithin(cmd.commitWithin)` for both deleteById and deleteByQuery. |
+| SOLR-6922 | reviewed | unclear | The RPT type exists in `solr/server/solr/configsets/sample_techproducts_configs/conf/managed-schema.xml:711` and `*_srpt` in `solr/server/solr/configsets/_default/conf/managed-schema.xml:160`. Techproducts' location field is LatLonPoint (line 147), and no geonames dataset is under `solr/example`. Next step: Nick decides whether these meet the request. |
+| SOLR-6929 | reviewed | unclear | Highlighting lives in `solr/core/src/java/org/apache/solr/highlight/UnifiedSolrHighlighter.java`. The only special-character test (`solr/core/src/test/org/apache/solr/highlight/TestUnifiedSolrHighlighter.java:526`) uses "#" with spaces, so the no-space case is not covered. Next step: run a no-space special-character query at this sha and check the highlight output. |
+| SOLR-6934 | reviewed | unclear | The named `SolrCLI.SolrResponseHandler` has zero grep hits under `solr/` (removed by b4b28e52d7, SOLR-16504). `AssertTool` exists (`solr/core/src/java/org/apache/solr/cli/AssertTool.java`), but `solr/bin/solr` never calls it. `-e cloud` waits via `StatusTool.waitToSeeSolrUp` (`StatusTool.java:268`). Next step: check whether a half-started node now fails the -e cloud run. |
+| SOLR-7088 | reviewed | fixed | Commit cbf0eba176 ("Fixes #124 in bin/solr for 'cdpath' users") added `CDPATH=''` at `solr/bin/solr:87`, before the `cd` substitutions at lines 90 and 92 that the ticket names. |
+| SOLR-7153 | reviewed | fixed | Commit f60f243b17 (SOLR-6781, 2014) "BBoxField didn't support dynamic fields". `solr/core/src/java/org/apache/solr/schema/BBoxField.java:135-137` registers sub-fields as explicit schema fields for dynamic fields, using `registerSubFields` (lines 110-114). |
+| SOLR-7192 | reviewed | unclear | The Hunspell stemmer is not in this tree. It comes from Lucene 10.4.0 (`gradle/libs.versions.toml:39`). The tree holds only the test dictionary `solr/core/src/test-files/solr/collection1/conf/hunspell-test.aff` and a ref-guide page. No cs_CZ dictionary or benchmark. Next step: time cs_CZ stemming on Lucene 10.4.0 against CzechStemFilter. |
+| SOLR-7249 | reviewed | unclear | Commit 0eca10b618 (SOLR-18256) adds `autoFixPureNegative` in `QParser.java` and applies it at `solr/core/src/java/org/apache/solr/search/SolrQueryParser.java:34`. `ExtendedSolrQueryParser` (`ExtendedDismaxQParser.java:974`) extends that class, but the ticket's edismax query was not traced. Next step: run the ticket query with defType=edismax at this sha. |
+| SOLR-7295 | reviewed | present | Query clone is still used: `solr/core/src/java/org/apache/solr/search/ExportQParserPlugin.java:72` overrides clone() and line 101 calls `clone().wrap(q)` in rewrite. `GraphTermsQParserPlugin.java:222` also overrides clone(). No commit on this sha references SOLR-7295. |
+| SOLR-7343 | reviewed | present | `solr/core/src/java/org/apache/solr/core/SolrCore.java:2325-2330` still reopens from the IndexWriter whenever one is open. The `updateHandlerReopens` flag only gates the directory-path check (lines 2305 and 2318). |
+| SOLR-7415 | reviewed | unclear | The umbrella names no code path. The JSON Facet module still exists at `solr/core/src/java/org/apache/solr/search/facet/FacetModule.java:45`. Next step: Nick decides whether to close it as an umbrella after the child tickets are triaged. |
+| SOLR-7482 | reviewed | present | The requested inter-node call helper is absent (no hits for InterNodeCaller or callAnyReplica). Callers still build clients directly, e.g. `solr/core/src/java/org/apache/solr/cloud/ZkController.java:976` and `SyncStrategy.java:72`. |
+| SOLR-7536 | reviewed | unclear | The stack path still exists: `SchemaManager.java:117` and getFreshManagedSchema at `:509`, plus `ZkSolrResourceLoader.java:79`. The failure is intermittent with no repro, so reading the code cannot settle it. Next step: reproduce on a current build with a ZK-uploaded managed-schema config. |
+| SOLR-7559 | reviewed | fixed | Commit 335ba21352 (SOLR-7883, 2022-09-15) changed `MoreLikeThisHandler.java:218` from a SimpleFacets built without a ResponseBuilder to one built with it (lines 223-229). `SpatialHeatmapFacets.java:55` dereferences rb.req, so the NPE path is closed. No commit cites SOLR-7559 and no test covers facet.heatmap, so this is inferred. |
+| SOLR-7612 | reviewed | gone | setIdField was deprecated in 6bf5f4a87f (SOLR-11868) and removed in 291068d18a (SOLR-15608). `git grep` for setIdField or setRouteField finds no code hits at 498a09ae, only `CHANGELOG.md:2304`. |
+| SOLR-7721 | reviewed | unclear | group.facet still hides numerics for single-valued non-docValues fields (`SimpleFacets.java:803-804`, getNumericHidingWrapper at `:836`). Reading the code does not explain the repeated 0.0 to 4.5 entries. Next step: reproduce the ticket fixture on this sha and trace the merged counts. |
+| SOLR-7806 | reviewed | unclear | The advertised host now comes from AddressUtils.getHostToAdvertise (`solr/core/src/java/org/apache/solr/util/AddressUtils.java:34`, used at `ZkController.java:987`). Commit 3b2b1b7f79 (SOLR-16926) introduced it and did not target this request. The literal "localhost" remains at `solr/core/src/java/org/apache/solr/cli/CLIUtils.java:108`. Next step: decide whether this answers the report. |
+| SOLR-7846 | reviewed | present | `PropertiesUtil.substitute` throws when a `${name}` has no system property or default (`solr/solrj/src/java/org/apache/solr/common/util/PropertiesUtil.java:73`). Query-time `${}` expansion exists only for JSON request params (`solr/core/src/java/org/apache/solr/request/json/RequestUtil.java:175`), not solrconfig loading. |
+| SOLR-7867 | reviewed | unclear | The crash is inside Lucene's doc values reader (Lucene50DocValuesProducer), not Solr code. The group.facet path is still at `SimpleFacets.java:775`, and the default codec is now Lucene104 (`solr/core/src/java/org/apache/solr/core/SchemaCodecFactory.java:100`). The ticket has no isolated cause. Next step: reproduce with digit-leading multivalued docValues strings on an implicit-router collection. |
+| SOLR-7973 | reviewed | gone | `JettyWebappTest.java` was deleted in 00e0870c4d (SOLR-18168). `git grep` for JettyWebappTest at 498a09ae returns no hits. |
+| SOLR-7982 | reviewed | unclear | coreNodeName is now read from cluster state (`ZkController.java:2070-2078, 2139`) rather than generated per core, but no commit at 498a09aea9 mentions SOLR-7982 and the core.properties writer was not traced. Next: confirm `ClusterStateMutator.getAssignedCoreNodeName` prevents duplicate names and trace the core.properties writer. |
+| SOLR-8079 | reviewed | present | SearchHandler reads first-components and last-components from init args (`SearchHandler.java:92-93, 167-169, 244-245`), and runtime overlay plugins are merged into SolrConfig (`SolrConfig.java:881, 991`). JIRA is still Open. |
+| SOLR-8098 | reviewed | unclear | Managed schema naming and legacy fallback are in `ManagedIndexSchemaFactory.java:57-58, 109-140`, and `ConfigSetService.java:300` notes the schema-sharing guess. The schema.xml rename on collection create was not located. Next: find the rename in the create path. JIRA is Open, not the "not a bug" note in the queue. |
+| SOLR-8106 | reviewed | present | NumericStatsValues keeps min, max and sums as doubles (`StatsValuesFactory.java:416-424`), and the comment at `507-508` says doubles are always used in the response. The precision loss the ticket reports is still by design. No pinned commit mentions SOLR-8106. |
+| SOLR-8117 | reviewed | gone | Commit 321b4fa0de (SOLR-14930) deleted `solr/core/src/java/org/apache/solr/cloud/rule/` (Rule.java, ReplicaAssigner.java). At 498a09aea9 that directory is absent, and a grep for the cores rule tag finds no placement code. |
+| SOLR-8171 | reviewed | present | Facet queries still resolve their filters through `searcher.getDocSet(q, base)` (`FacetProcessor.java:431`), and SolrIndexSearcher keeps a filterCache used by getDocSet(Query, DocSet) (`SolrIndexSearcher.java:444-446, 1473`). The lookups-versus-hits stats mismatch was not checked. |
+| SOLR-8310 | reviewed | present | `bin/solr:1381-1387` still runs `lsof -t -PniTCP:$port -sTCP:LISTEN`, gated on an `lsof -v` grep for "revision". That selection matches the error letters in the ticket, and it was added by 859415c7e1 (SOLR-7635). Next: a CentOS 5 lsof 4.78 check needs that host and was not run. |
+| SOLR-8365 | reviewed | present | `LogUpdateProcessorFactory.java:63-66` builds LogUpdateProcessor only when `log.isInfoEnabled()` or a slow-update threshold is set, so update logging is still controlled only by logger level. Logging at info is at line 201. |
+| SOLR-8469 | reviewed | present | `HttpSolrCall.java:620-641`: sendRemoteProxy catches the proxy failure and calls sendError with SERVER_ERROR and the "Error trying to proxy request" message (lines 633-641). The IOException and buffer path the ticket names was not traced. No pinned commit mentions SOLR-8469. |
+| SOLR-8572 | reviewed | unclear | Request JSON is parsed by noggit `ObjectBuilder.fromJSONStrict` (`RequestUtil.java:323`), so handling of the reused AUX keys depends on noggit, which is outside this repo. JIRA shows Open with no resolution, although the queue note says resolved. Next: confirm duplicate-key behavior in the noggit version used. |
