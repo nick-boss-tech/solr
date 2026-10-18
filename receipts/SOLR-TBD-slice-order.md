@@ -30,6 +30,12 @@ Branch solr-slice-order on nick-boss-tech/solr, commit f82db58 on top of 6c033ba
 - 12 of 12 page sets returned all 40 ids. Before the fix, 8 of 9 page sets failed in interleaved clusters (receipts/SOLR-6975.md, Paging mechanism).
 - Logs: /workspace/gates/logs/vm4/solr-slice-order/probe/.
 
+## Merge-level test (commit a9a85c20)
+
+- `QueryComponentShardOrderTest.groupOrderAcrossShardsDoesNotDependOnReplicaListOrder`: calls `QueryComponent.mergeIds` on two fake shard responses (no cluster), with the replica lists in two orders. Passes at a9a85c20 with the fix (1 test, 0 failures, seed 6975C0FFEE6975).
+- Fail-before: `ShardFieldSortedHitQueue.java` reverted to 6c033ba6ea, test kept. Fails with `expected:<[1, 2, 3, 4]> but was:<[3, 4, 1, 2]>`. Logs: /workspace/gates/logs/vm4/solr-slice-order/deep-failbefore.log, deep-failbefore-TEST.xml.
+- Tidy on the new file: rc=0, no changes.
+
 ## Not run
 
 - No run on the upstream main base. The change depends on the SOLR-6975 comparator.

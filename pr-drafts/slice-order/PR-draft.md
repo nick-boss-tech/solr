@@ -32,13 +32,14 @@ The merge ranks documents from different shards by `ShardDoc.shard`, which is th
 **The new unit test fails on the SOLR-6975 comparator and passes with this change.**
 
 - `ShardFieldSortedHitQueueCycleTest.testCrossShardOrderIgnoresReplicaAddress` fails with the comparator from `6c033ba6ea` (`expected:<false> but was:<true>`) and passes with this change. The other test in that class still passes.
+- `QueryComponentShardOrderTest.groupOrderAcrossShardsDoesNotDependOnReplicaListOrder` runs `QueryComponent.mergeIds` on two fake shard responses, with the replica lists in two orders. It fails with the comparator from `6c033ba6ea` (`expected:<[1, 2, 3, 4]> but was:<[3, 4, 1, 2]>`) and passes with this change.
 - Paging probe with default routing, 2 shards, 2 replicas each, 40 documents, `rows=7`: four fresh clusters, three page sets each, 12 of 12 returned all 40 ids. Two of the clusters had interleaved shard addresses. On the SOLR-6975 head, 8 of 9 page sets failed in the interleaved clusters.
 - Focused run, seed `6975C0FFEE6975`: 32 tests across the cycle test, `DistributedQueryComponentOptimizationTest`, and the combined-query tests, 0 failures, 0 skipped.
 
 ## Limits
 
 - Stable paging also depends on each replica keeping the same `_docid_` values. This change does not check that.
-- No cluster-level regression test is in this PR. The paging failure depends on random cluster ports and random replica choice, so a SolrCloud test would be flaky. The paging probe is recorded in receipts/SOLR-TBD-slice-order.md and is not in the repo.
+- No cluster-level regression test is in this PR. The paging failure depends on random cluster ports and random replica choice, so a SolrCloud test would be flaky. The merge-level test covers the same ordering path without a cluster. The paging probe is recorded in receipts/SOLR-TBD-slice-order.md and is not in the repo.
 - Results are ordered by slice name, which is an ordering choice. A reviewer may prefer a different one.
 
 ## AI assistance
