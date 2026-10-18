@@ -1,6 +1,6 @@
 # Pool assignment: 2026-10-16 review follow-ups, code and tests (round 2)
 
-Status: OPEN
+Status: CLAIMED (vm2, claims/pool-review-2026-10-16-code-round-2.md, 2026-10-18T04:02:20Z)
 
 - Capability tags: implementation, gate.
 - Intended host: any Linux host with the Gradle toolchain (vm1, vm2, or vm3). Claim under `claims/` before starting (WORKFLOW.md). The Windows host never claims this work.
