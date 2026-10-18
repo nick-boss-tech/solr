@@ -31,11 +31,16 @@ import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.JsonTextWriter;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.common.util.SimpleOrderedMap;
+import org.apache.solr.common.util.Utils;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.request.SolrQueryRequestBase;
 import org.apache.solr.search.ReturnFields;
 import org.apache.solr.search.SolrReturnFields;
+import org.apache.solr.util.SolrPluginUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -324,6 +329,247 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testArrntvThroughJacksonJsonWriter() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "off");
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    nl.add("data1", "he\u2028llo\u2029!");
+    nl.add(null, 42);
+    nl.add(null, null);
+    rsp.add("nl", nl);
+
+    JacksonJsonWriter w = new JacksonJsonWriter();
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    w.write(baos, req, rsp, JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+
+    String expectedNLjson =
+        "\"nl\":[{\"name\":\"data1\",\"type\":\"str\",\"value\":\"he\\u2028llo\\u2029!\"},"
+            + "{\"name\":null,\"type\":\"int\",\"value\":42},"
+            + "{\"name\":null,\"type\":\"null\",\"value\":null}]";
+    jsonEq("{" + expectedNLjson + "}", baos.toString(StandardCharsets.UTF_8));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvFacetsOnDefaultJsonWriter() throws Exception {
+    assertU(adoc("id", "172680001", "cat", "a"));
+    assertU(adoc("id", "172680002", "cat", "b"));
+    assertU(commit());
+    try {
+      // no wt: the request resolves to JacksonJsonWriter, the writer used when wt is omitted
+      String response =
+          h.query(
+              "/select",
+              new SolrQueryRequestBase(
+                  h.getCore(),
+                  params(
+                      "q",
+                      "id:17268000*",
+                      "rows",
+                      "0",
+                      "facet",
+                      "true",
+                      "facet.field",
+                      "cat",
+                      "json.nl",
+                      JsonTextWriter.JSON_NL_ARROFNTV)));
+      assertNotNull(Utils.fromJSONString(response));
+      String compact = response.replaceAll("\\s+", "");
+      assertTrue(response, compact.contains("{\"name\":\"a\",\"type\":\"int\",\"value\":1}"));
+    } finally {
+      assertU(delQ("id:17268000*"));
+      assertU(commit());
+    }
+  }
+
+  @Test
+  public void testArrntvFromHandlerDefaultsThroughJacksonJsonWriter() throws IOException {
+    SolrQueryRequest req = req("q", "*:*", "indent", "off");
+    SolrPluginUtils.setDefaults(
+        req,
+        SolrParams.of(JsonTextWriter.JSON_NL_STYLE, JsonTextWriter.JSON_NL_ARROFNTV),
+        SolrParams.of(),
+        SolrParams.of());
+    // handler defaults are merged into getParams(), the view the writer reads
+    assertNull(req.getOriginalParams().get(JsonTextWriter.JSON_NL_STYLE));
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    nl.add(null, 42);
+    rsp.add("nl", nl);
+
+    JacksonJsonWriter w = new JacksonJsonWriter();
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    w.write(baos, req, rsp, JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+
+    jsonEq(
+        "{\"nl\":[{\"name\":null,\"type\":\"int\",\"value\":42}]}",
+        baos.toString(StandardCharsets.UTF_8));
+    req.close();
+  }
+
+  private static final String NTV_NL_HELLO =
+      "\"nl\":[{\"name\":\"data1\",\"type\":\"str\",\"value\":\"hello\"},"
+          + "{\"name\":null,\"type\":\"int\",\"value\":42},"
+          + "{\"name\":null,\"type\":\"null\",\"value\":null}]";
+
+  private static final String NTV_NESTED =
+      "{\"outer\":[{\"name\":\"inner\",\"type\":\"lst\",\"value\":"
+          + "[{\"name\":\"a\",\"type\":\"int\",\"value\":1}]},"
+          + "{\"name\":\"map\",\"type\":\"lst\",\"value\":{\"x\":2}}]}";
+
+  private static SolrQueryResponse nestedResponse() {
+    NamedList<Object> inner = new NamedList<>();
+    inner.add("a", 1);
+    SimpleOrderedMap<Object> map = new SimpleOrderedMap<>();
+    map.add("x", 2);
+    NamedList<Object> outer = new NamedList<>();
+    outer.add("inner", inner);
+    outer.add("map", map);
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    rsp.add("outer", outer);
+    return rsp;
+  }
+
+  // A NamedList or SimpleOrderedMap used as an NTV element value needs a type of its own.
+  // Without one, the legacy writer emitted a bare array or object after "name": invalid JSON.
+  @Test
+  public void testArrntvNestedNamedListIsValidJson() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "off");
+    StringWriter buf = new StringWriter();
+    new JSONResponseWriter().write(buf, req, nestedResponse());
+    jsonEq(NTV_NESTED, buf.toString());
+    req.close();
+  }
+
+  @Test
+  public void testArrntvNestedNamedListThroughJacksonJsonWriter() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "off");
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    new JacksonJsonWriter()
+        .write(baos, req, nestedResponse(), JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+    jsonEq(NTV_NESTED, baos.toString(StandardCharsets.UTF_8));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvWithJsonWrfIsValidJson() throws IOException {
+    SolrQueryRequest req =
+        req(
+            "wt",
+            "json",
+            "json.nl",
+            JsonTextWriter.JSON_NL_ARROFNTV,
+            "indent",
+            "off",
+            JSONWriter.JSON_WRAPPER_FUNCTION,
+            "cb");
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    nl.add("data1", "hello");
+    nl.add(null, 42);
+    nl.add(null, null);
+    rsp.add("nl", nl);
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    new JacksonJsonWriter().write(baos, req, rsp, JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+    jsonEq("cb({" + NTV_NL_HELLO + "})", baos.toString(StandardCharsets.UTF_8));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvWithIndentIsValidJson() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "on");
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    new JacksonJsonWriter()
+        .write(baos, req, nestedResponse(), JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+    String json = baos.toString(StandardCharsets.UTF_8);
+    assertNotNull(Utils.fromJSONString(json));
+    assertTrue(json, json.contains("\"lst\""));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvWriterAndStreamPathsMatch() throws IOException {
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "off");
+    JacksonJsonWriter w = new JacksonJsonWriter();
+    StringWriter chars = new StringWriter();
+    w.write(chars, req, nestedResponse());
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    w.write(baos, req, nestedResponse(), JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+    assertEquals(chars.toString(), baos.toString(StandardCharsets.UTF_8));
+    req.close();
+  }
+
+  @Test
+  public void testArrntvKeepsJsonContentType() throws Exception {
+    SolrQueryRequest req = req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV);
+    assertEquals(
+        JSONResponseWriter.CONTENT_TYPE_JSON_UTF8,
+        new JacksonJsonWriter().getContentType(req, new SolrQueryResponse()));
+    req.close();
+  }
+
+  @Test
+  public void testOtherStylesUnchangedThroughJacksonJsonWriter() throws IOException {
+    String[] styles =
+        new String[] {
+          JsonTextWriter.JSON_NL_FLAT,
+          JsonTextWriter.JSON_NL_MAP,
+          JsonTextWriter.JSON_NL_ARROFARR,
+          JsonTextWriter.JSON_NL_ARROFMAP
+        };
+    for (String style : styles) {
+      SolrQueryRequest req = req("wt", "json", "json.nl", style, "indent", "off");
+      SolrQueryResponse rsp = new SolrQueryResponse();
+      NamedList<Object> nl = new NamedList<>();
+      nl.add("data1", "hello");
+      nl.add(null, 42);
+      nl.add(null, null);
+      rsp.add("nl", nl);
+
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      new JacksonJsonWriter().write(baos, req, rsp, JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+      StringWriter legacy = new StringWriter();
+      new JSONResponseWriter().write(legacy, req, rsp);
+      assertEquals(style, legacy.toString().trim(), baos.toString(StandardCharsets.UTF_8).trim());
+      req.close();
+    }
+  }
+
+  @Test
+  public void testXmlWriterIgnoresArrntv() throws Exception {
+    assertU(adoc("id", "172680003", "cat", "a"));
+    assertU(commit());
+    try {
+      String xml =
+          h.query(
+              "/select",
+              req(
+                  "q",
+                  "id:172680003",
+                  "rows",
+                  "0",
+                  "facet",
+                  "true",
+                  "facet.field",
+                  "cat",
+                  "wt",
+                  "xml",
+                  "json.nl",
+                  JsonTextWriter.JSON_NL_ARROFNTV));
+      assertTrue(xml, xml.contains("<response"));
+      assertTrue(xml, xml.contains("name=\"cat\""));
+    } finally {
+      assertU(delQ("id:172680003"));
+      assertU(commit());
+    }
+  }
+
+  @Test
   public void testWfrJSONWriter() throws IOException {
     SolrQueryRequest req = req("wt", "json", JSONWriter.JSON_WRAPPER_FUNCTION, "testFun");
     SolrQueryResponse rsp = new SolrQueryResponse();
@@ -391,5 +637,101 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
       String response = h.query("/select", req);
       jsonEq(expected, response);
     }
+  }
+
+  private static SolrQueryResponse parityResponse(int which) {
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    switch (which) {
+      case 0 -> {
+        nl.add("s", "he\"llo\\\n\t\u0001 \u2028 \u2029 \u00e9");
+        nl.add(null, 42);
+        nl.add(null, 42L);
+        nl.add(null, 1.5f);
+        nl.add(null, 2.5d);
+        nl.add(null, Boolean.TRUE);
+        nl.add(null, false);
+        nl.add(null, (byte) 1);
+        nl.add(null, (short) 2);
+        nl.add(null, null);
+        nl.add("x", "");
+      }
+      case 1 -> {
+        NamedList<Object> inner = new NamedList<>();
+        inner.add("a", 1);
+        NamedList<Object> nested = new NamedList<>();
+        nested.add("deep", inner);
+        nl.add("inner", inner);
+        nl.add("nested", nested);
+        SimpleOrderedMap<Object> som = new SimpleOrderedMap<>();
+        som.add("k", "v");
+        nl.add("som", som);
+        nl.add(null, inner);
+      }
+      case 2 -> {
+        nl.add("map", new java.util.LinkedHashMap<>(java.util.Map.of("m", 3)));
+      }
+      default -> {
+        nl.add("big", new java.math.BigInteger("123456789012345678901234567890"));
+        nl.add("dec", new java.math.BigDecimal("1.25"));
+        nl.add("mixed", java.util.List.of(new NamedList<>(java.util.Map.of("z", 9))));
+      }
+    }
+    rsp.add("nl", nl);
+    rsp.add("count", 3);
+    return rsp;
+  }
+
+  @Test
+  public void testArrntvNativeMatchesLegacyAcrossValueTypes() throws IOException {
+    for (int which = 0; which < 4; which++) {
+      for (String indent : new String[] {"off", "on"}) {
+        SolrQueryRequest legacyReq =
+            req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", indent);
+        StringWriter legacy = new StringWriter();
+        new JSONResponseWriter().write(legacy, legacyReq, parityResponse(which));
+        legacyReq.close();
+
+        SolrQueryRequest nativeReq =
+            req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", indent);
+        ByteArrayOutputStream nativeOut = new ByteArrayOutputStream();
+        new JacksonJsonWriter()
+            .write(
+                nativeOut,
+                nativeReq,
+                parityResponse(which),
+                JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+        nativeReq.close();
+        String nativeJson = nativeOut.toString(StandardCharsets.UTF_8);
+
+        assertNotNull(Utils.fromJSONString(nativeJson));
+        if (indent.equals("off")) {
+          assertEquals("response " + which, legacy.toString().trim(), nativeJson.trim());
+        } else {
+          assertEquals(
+              "response " + which,
+              Utils.fromJSONString(legacy.toString()),
+              Utils.fromJSONString(nativeJson));
+        }
+      }
+    }
+  }
+
+  @Test
+  public void testArrntvNativeTypesArraysAsArrayElements() throws IOException {
+    SolrQueryResponse rsp = new SolrQueryResponse();
+    NamedList<Object> nl = new NamedList<>();
+    nl.add("list", java.util.List.of("p", 4, 5L));
+    nl.add("arr", new String[] {"q"});
+    rsp.add("nl", nl);
+    SolrQueryRequest req =
+        req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", "off");
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    new JacksonJsonWriter().write(baos, req, rsp, JSONResponseWriter.CONTENT_TYPE_JSON_UTF8);
+    req.close();
+    jsonEq(
+        "{\"nl\":[{\"name\":\"list\",\"type\":\"array\",\"value\":[\"p\",4,5]},"
+            + "{\"name\":\"arr\",\"type\":\"array\",\"value\":[\"q\"]}]}",
+        baos.toString(StandardCharsets.UTF_8));
   }
 }
