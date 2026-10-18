@@ -1,0 +1,137 @@
+package org.apache.solr.cloud;
+
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
+import org.apache.solr.client.solrj.request.CollectionAdminRequest;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrException;
+import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.cloud.DocCollection;
+import org.apache.solr.common.cloud.Replica;
+import org.apache.solr.common.params.ModifiableSolrParams;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class ProbeNoUniqueKeyCloudTest extends SolrCloudTestCase {
+
+  private static final String COLL = "probe";
+  private static String coreUrl;
+
+  @BeforeClass
+  public static void setupCluster() throws Exception {
+    configureCluster(1).addConfig("probe-nouk", configset("probe-nouk")).configure();
+    CollectionAdminRequest.createCollection(COLL, "probe-nouk", 1, 1)
+        .process(cluster.getSolrClient());
+    cluster.waitForActiveCollection(COLL, 1, 1);
+    DocCollection dc = cluster.getSolrClient().getClusterState().getCollection(COLL);
+    Replica r = dc.getSlices().iterator().next().getReplicas().iterator().next();
+    coreUrl = r.getBaseUrl() + "/" + r.getCoreName();
+    System.out.println("PROBE coreUrl=" + coreUrl);
+    try {
+      cluster.getSolrClient().add(COLL, new SolrInputDocument("id", "4055", "subject", "Hoss"));
+      cluster.getSolrClient().add(COLL, new SolrInputDocument("id", "4056", "subject", "Yonik"));
+      cluster.getSolrClient().commit(COLL);
+      System.out.println("PROBE seed docs indexed");
+    } catch (Exception e) {
+      System.out.println("PROBE seed docs FAILED " + e);
+    }
+  }
+
+  @Test
+  public void probeShapes() throws Exception {
+    try (SolrClient core = new HttpJettySolrClient.Builder(coreUrl).build()) {
+      probe("S01 no-shards q=subject:Hoss", core, "q", "subject:Hoss");
+      probe("S02 no-shards query=false", core, "q", "subject:Hoss", "query", "false");
+      probe("S03 no-shards distrib=false", core, "q", "subject:Hoss", "distrib", "false");
+      probe("S04 shards q=subject:Hoss", core, "q", "subject:Hoss", "shards", coreUrl);
+      probe("S05 shards q=*:*", core, "q", "*:*", "shards", coreUrl);
+      probe(
+          "S06 shards fl=id,score rows=0",
+          core,
+          "q",
+          "subject:Hoss",
+          "shards",
+          coreUrl,
+          "fl",
+          "id,score",
+          "rows",
+          "0");
+      probe("S07 shards query=false", core, "q", "subject:Hoss", "shards", coreUrl, "query", "false");
+      probe("S08 shards rows=0", core, "q", "subject:Hoss", "shards", coreUrl, "rows", "0");
+      probe(
+          "S09 shards sort=subject asc",
+          core,
+          "q",
+          "subject:Hoss",
+          "shards",
+          coreUrl,
+          "sort",
+          "subject asc");
+      probe(
+          "S10 shards facet.field=subject",
+          core,
+          "q",
+          "*:*",
+          "shards",
+          coreUrl,
+          "facet",
+          "true",
+          "facet.field",
+          "subject");
+      probe(
+          "S11 shards distrib=false",
+          core,
+          "q",
+          "subject:Hoss",
+          "shards",
+          coreUrl,
+          "distrib",
+          "false");
+      probe(
+          "S12 shards shards.info=true rows=0",
+          core,
+          "q",
+          "subject:Hoss",
+          "shards",
+          coreUrl,
+          "shards.info",
+          "true",
+          "rows",
+          "0");
+      probe("S13 shards fl=id", core, "q", "subject:Hoss", "shards", coreUrl, "fl", "id");
+      probe("S14 shards no-hit q", core, "q", "subject:nomatch", "shards", coreUrl);
+    }
+  }
+
+  private static void probe(String name, SolrClient client, String... kv) {
+    ModifiableSolrParams p = new ModifiableSolrParams();
+    for (int i = 0; i < kv.length; i += 2) {
+      p.add(kv[i], kv[i + 1]);
+    }
+    try {
+      QueryResponse r = client.query(p);
+      System.out.println(
+          "PROBE " + name + " OK status=" + r.getStatus() + " numFound="
+              + (r.getResults() == null ? "null" : r.getResults().getNumFound()));
+    } catch (Exception e) {
+      Throwable root = e;
+      while (root.getCause() != null) {
+        root = root.getCause();
+      }
+      int code = e instanceof SolrException ? ((SolrException) e).code() : -1;
+      System.out.println(
+          "PROBE "
+              + name
+              + " ERR class="
+              + e.getClass().getName()
+              + " code="
+              + code
+              + " msg="
+              + e.getMessage()
+              + " root="
+              + root.getClass().getName()
+              + ": "
+              + root.getMessage());
+    }
+  }
+}
