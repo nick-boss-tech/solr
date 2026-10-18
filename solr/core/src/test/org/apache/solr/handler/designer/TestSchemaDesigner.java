@@ -62,6 +62,7 @@ import org.apache.solr.core.CoreContainer;
 import org.apache.solr.handler.TestSampleDocumentsLoader;
 import org.apache.solr.jersey.SolrJacksonMapper;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.ManagedIndexSchema;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.util.ExternalPaths;
@@ -307,6 +308,37 @@ public class TestSchemaDesigner extends SolrCloudTestCase implements SchemaDesig
 
     String idField = response.uniqueKeyField;
     assertNotNull(idField);
+  }
+
+  @Test
+  public void testAnalyzeNestedDocsWithNumericUniqueKey() throws Exception {
+    String configSet = "testNestedDocsNumericUniqueKey";
+    schemaDesigner.prepNewSchema(configSet, null);
+
+    String mutableId = getMutableId(configSet);
+    ManagedIndexSchema schema = schemaDesigner.loadLatestSchema(mutableId);
+    schema =
+        schema.replaceField(
+            "id", schema.getFieldTypeByName("plong"), schema.getField("id").getArgs());
+    assertEquals("plong", schema.getUniqueKeyField().getType().getTypeName());
+    assertTrue(schema.persistManagedSchema(false));
+
+    ModifiableSolrParams reqParams = new ModifiableSolrParams();
+    reqParams.set(CONFIG_SET_PARAM, configSet);
+    when(mockReq.getParams()).thenReturn(reqParams);
+    String nestedJson = "[{\"id\":\"1\",\"_childDocuments_\":[{\"id\":\"2\"}]}]";
+    ContentStream stream = new ContentStreamBase.StringStream(nestedJson, JSON_MIME);
+    when(mockReq.getContentStreams()).thenReturn(List.of(stream));
+
+    SchemaDesignerResponse response =
+        schemaDesigner.analyze(configSet, null, null, null, null, null, null, true);
+
+    assertNull(response.analysisError);
+    assertEquals(List.of("1"), response.docIds);
+    assertEquals(1, response.numDocs);
+    schema = schemaDesigner.loadLatestSchema(mutableId);
+    assertEquals("plong", schema.getField(IndexSchema.ROOT_FIELD_NAME).getType().getTypeName());
+    assertTrue(schema.isUsableForChildDocs());
   }
 
   @Test
