@@ -1,6 +1,6 @@
 # Gate job: SOLR-12092 (edismax stopwords and ManagedStopFilterFactory, patch P5)
 
-Status: HANDED by vm5, 2026-10-18 (claims/pool-vm5-gate-backlog-12092-edismax-p5.md): the nine-class focused list is not recoverable from the round 33 gate log or the receipt, so no build ran. Main side to supply the list before the gate runs.
+Status: DONE 2026-10-18 (vm2, GATE GREEN at `e309a2ddefab`, nine classes 82 of 82; receipts/SOLR-12092.md). The round 33 list was recovered by vm1 (reports/SOLR-12092-round-33-focused-list.md). Trailers removed by a history rewrite with the user's approval.
 
 - Branch: `solr-12092-submit`. Head: `4243924c34faa28d9964d7c214d82a8fd175b822` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `ca9573dabd385a38711bd60633973ae46b7a552e` (receipts/SOLR-12092.md, round 33). Merge-base with upstream/main: `14c7aac0d151`.
