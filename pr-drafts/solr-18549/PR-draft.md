@@ -21,6 +21,9 @@ The shared proxy code (`RemoteRequestProxy.validateNodeNames` and `GenericV1Requ
 - Any other `nodes` value in standalone mode returns 400 with the message that the parameter requires SolrCloud.
 - `/admin/metrics` keeps the strict behavior: `node=all` and explicit node names return 400 in standalone mode. The metrics `node` parameter selects a scrape destination, not a broadcast.
 - The ZooKeeper check now throws a 400 instead of an NPE, in one place (`RemoteRequestProxy`).
+- Behavior changes beyond the ticket, stated here so a reviewer can judge them:
+  - In SolrCloud, `/api/node/system?nodes=<name>` for a node that is not live now returns 400 ("is not part of cluster") instead of 500. Other remote errors on that endpoint keep their own status codes instead of being wrapped in 500.
+  - In standalone mode, v2 `/api/node/metrics?node=all` is still answered by the node itself (the v2 handler catches the proxy error and serves locally). Only the v1 `/admin/metrics` endpoint returns 400 for `node=all`.
 
 ## Proof
 
