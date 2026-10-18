@@ -1,6 +1,6 @@
 # Assignment: eDisMax draft patches P1 to P6, application round 1
 
-Status: OPEN
+Status: CLAIMED (vm2, claims/pool-edismax-patches-apply-round-1.md, 2026-10-18T03:16Z)
 
 Capability tags: [implementation, gate]. Intended host: either Linux host (vm1 or vm2); Windows never claims build work. Posted by the main side, 2026-10-15.
 
