@@ -1,15 +1,10 @@
 # Claim: pool-merged-pr-followup-promises-round-1
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-merged-pr-followup-promises-round-1.md: Status: CLAIMED (claims/pool-merged-pr-f)
+Status: CLAIMED 2026-10-18T00:25Z by vm4 (takes over from the STALE windows claim, WORKFLOW.md rule 4: no heartbeat since 2026-10-15T18:50Z)
 
-- Claimant host: windows (review agent, review-rounds coordinator lane).
-- Job or assignment: `assignments/pool-merged-pr-followup-promises-round-1.md` (audit of merged PR descriptions for follow-up promises).
-- Slice: the whole assignment.
+- Claimant host: vm4 (Linux). Assignment: assignments/pool-merged-pr-followup-promises-round-1.md.
+- Slice taken: the whole assignment, read-only. Focus requested by Nick: the SOLR-4841 language-detection follow-up (#5070) and SOLR-18549 (the new ticket for the SOLR-18317 server-side promise on #5001).
 - Capability tags used: review.
-- Started: 2026-10-15T18:50:00Z (UTC).
+- Source changes: none. No PR, comment, JIRA or email. No builds.
 
-Heartbeat: 2026-10-15T18:50:00Z
-
-Runs under the standing coordinator claim, `claims/coordinator-review-rounds.md`. DONE (2026-10-15, coordinator, verified). Outcome: the 2026-10-15 pass is in `reports/merged-pr-followup-promises-round-1.md` (committed cac628fdb26): 8 merged PRs, 3 promises (#4953, #5001, #5070), all open, none discharged. Seed correction: the SOLR-13943 PR is #5089, not #5090 (verified against the live PR list). New open promise on #5088 pending merge. Owner calls listed in the ledger; no JIRA or GitHub writes made.
-
-Deliverable: `reports/merged-pr-followup-promises-round-1.md`. Reads only: GitHub reads through `research\gh.ps1`, and the pool records. No GitHub writes, no JIRA writes, no builds.
+Heartbeat: 2026-10-18T00:25Z (claim).

@@ -1,6 +1,6 @@
 # Pool assignment: audit of merged PR descriptions for follow-up promises, round 1
 
-Status: OPEN (prior claim claims/pool-merged-pr-followup-promises-round-1.md STALE since 2026-10-17; takeover allowed by WORKFLOW.md rule 4)
+Status: CLAIMED (claims/pool-merged-pr-followup-promises-round-1.md, vm4 takeover 2026-10-18)
 
 Capability tags: `review`. Intended host: any review-side host. No build work. This assignment is self-contained for a reviewer joining cold.
 
