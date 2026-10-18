@@ -1,6 +1,6 @@
 # Assignment: SOLR-2681 nested-form highlighting, broader fix on a separate branch, round 1
 
-Status: CLAIMED (claims/pool-solr-2681-nested-forms-round-1.md, vm4, 2026-10-18)
+Status: DONE (gate green at cec42ef4f0; receipt receipts/SOLR-2681-nested.md; drafts in pr-drafts/highlighting-nested/, not filed or opened)
 
 Capability tags: implementation, gate. Intended host: vm4 (Linux), at Nick's direction.
 
