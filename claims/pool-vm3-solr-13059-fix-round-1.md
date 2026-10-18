@@ -41,3 +41,6 @@ Next tick: heartbeat only. Do not rerun gates or push until Q1 and Q2 have answe
   - Fix: commit (see git log, "the preemptive checks use the alias they were given") uses alias + TRA in both places. The seeds that passed (13063, 13064) passed by timing, with alias2 not yet showing 2017-10-26; they say nothing about this bug.
   - The module check of gate2 did not complete (chain stopped). Recorded as incomplete.
 - 2026-10-18T06:00:48Z: gate3 queued on the fixed head, same steps as gate2 (gates/logs/vm3/13059/gate3/, marker chain.done). No push until green.
+
+- 2026-10-18T06:04:58Z: decisions from the operator. Q1: Option A (bounded either-or check) accepted. Random failures: read the code and run similar tests before deciding; do not just rerun. Receipts: each gate gets receipts/SOLR-13059.md on coordination when it finishes. Host id: ~/.pool-host went missing once; the copy at /workspace/tools/pool-host is the fallback, and the sweep script reads it. Recorded in AGENTS.md.
+- 2026-10-18T06:04:58Z: tidy on gate3 passed (tree clean). Gate3 continues in the background on the fixed head.
