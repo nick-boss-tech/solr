@@ -10,3 +10,7 @@
 Heartbeat: 2026-10-18T13:17:00Z
 
 Append one heartbeat line at least once an hour while the claim is active, and push it.
+
+Result: 2026-10-18T13:18Z: the merged set is unchanged at 10 (#4939, #4953, #4959, #4965, #4995, #5001, #5012, #5027, #5062, #5070; latest merge 2026-10-17T00:24:06Z, #5027), so no full pass is due under the recurrence rule. Seed list all present as merged. #5061 (SOLR-18119) is still open at head 660faedd026ddc77f8736a4d1ab5cb89a4253a4a, so it stays pending-merge. Ledger not edited; the last full pass is pass g (vm2, 2026-10-18T10:37Z). Read-only GET requests against the GitHub API; nothing posted.
+
+DONE: 2026-10-18T13:18Z. Deliverables: `assignments/pool-merged-pr-followup-promises-round-1.md` (status line only). No ledger change.
