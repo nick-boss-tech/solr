@@ -116,3 +116,23 @@ Next step for the claim holder: re-run steps 4 to 6 only, at `8c1a3faa530` in th
 - Step 5, head leg at b0223fd235, direct BATS on the target test: the test body passes (the flag assertion finds -XX:+ExitOnOutOfMemoryError in the system info) but teardown fails at `solr stop --all`. Two runs: without lsof (gates/logs/vm3/16887-head-direct.log) and with an ss-backed lsof shim on PATH (gates/logs/vm3/16887-head-direct-shim.log). On this host a graceful stop does not end the Solr JVM: the Jetty shutdown service logs a stop command, the JVM keeps running, and the script forces a kill. Cause not established; this is an environment issue, not the branch change, but it is unresolved.
 - Step 6 (system info ErrorFile path) not reached.
 - Verdict for now: BLOCKED. No product result is recorded, so the gate is neither GREEN nor FAILED. Not relaunched until the teardown stop path is understood. The branch is not pushed.
+
+## Handoff to vm1 (2026-10-18, from vm3)
+
+vm3 releases this job. vm1 should claim it under claims/pool-vm1-gate-backlog-16887.md.
+
+- Head to gate: b0223fd235 (the four edits in the job file). Patch: `gates/SOLR-16887-head-b0223fd235.patch`, a diff from 42675f65d6 that reverses cleanly on b0223fd235. Apply it on a fresh worktree of 42675f65d6 with `git apply`, then commit as Nick Shanin. The commit hash will differ from b0223fd235 unless the timestamp matches, so record the new hash in the receipt.
+- Steps 1 to 3 (edits, changelog parse, tidy, Error Prone, module check) were not run on vm3 for this head. Steps 1 to 3 at 8c1a3faa53 passed on vm2; rerun them at the new head.
+- Use `-PdisableJsClient=true` for every Gradle run here. The JS client npm prepare step fails with a missing `@babel/plugin-syntax-dynamic-import` on a fresh host, and BATS does not use the admin UI. Record that flag in the receipt as a deviation.
+- Run the BATS legs with `SOLR_PORT`, `SOLR_PORT_LISTEN`, `SOLR2_PORT`, `SOLR3_PORT` and `ZK_PORT` set as `solr/packaging/build.gradle` sets them, or through `:solr:packaging:integrationTests --tests test_start_solr.bats` (the task that did run on vm3, premise leg only).
+- Install lsof on vm1 before the BATS run. vm3 had no lsof, and the stop path depends on it.
+
+What vm3 found (for vm1 to check, not a settled cause):
+
+- Premise leg at 9b3a84b1c4 with the head's BATS file overlaid: fails at test/test_start_solr.bats line 140 (`assert_output --partial "-XX:+ExitOnOutOfMemoryError"`). The base system info shows `CrashOnOutOfMemoryError`. This is the expected premise.
+- Head target test (`solr starts with ExitOnOutOfMemoryError`): the test body passes, including the flag check. The failure is in teardown, where `solr stop --all` returns 1. Two runs (with and without an ss-backed lsof shim) show the same result.
+- On vm3, `solr stop` sends the Jetty stop command, and `solr.log` shows "Performing 'stop' command" followed by "Exiting JVM". The Solr JVM still ran about 17 seconds later, with the main thread parked and no shutdown progress. The script then force-killed it with `kill -9`, which the script reports as "ERROR: Failed to kill previous Solr Java process".
+- Hypothesis, not confirmed: a non-daemon thread (possibly the embedded ZooKeeper server started on port 39900 for this run) keeps the JVM alive after the stop. vm1 should check this with a thread dump taken during the stop wait, and check whether the same happens without the flag change at 9b3a84b1c4.
+- The `/workspace/tools/shim/lsof` script on vm3 is a local workaround, not part of the repo. Do not use it for the record.
+
+Records on vm3: `gates/logs/vm3/16887-premise-direct.log` (premise), `16887-head-direct.log` and `16887-head-direct-shim.log` (head). The vm3 worktree `/workspace/worktrees/16887` is detached at b0223fd235 and stays until vm1 confirms the patch matches.

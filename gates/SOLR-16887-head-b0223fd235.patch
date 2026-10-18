@@ -1,0 +1,50 @@
+diff --git a/solr/bin/solr b/solr/bin/solr
+index 599fa1c6ff..c317933e4d 100755
+--- a/solr/bin/solr
++++ b/solr/bin/solr
+@@ -1329,7 +1329,7 @@ function start_solr() {
+     "${SOLR_HOST_ADVERTISE_ARG[@]}" "-Duser.timezone=$SOLR_TIMEZONE" "-XX:-OmitStackTraceInFastThrow" \
+     # '+ExitOnOutOfMemoryError' ensures that Solr exits whenever OOME is thrown, with a non-zero exit
+     # code and the cause logged to the console. Program operation after OOME is unpredictable.
+-    "-XX:+ExitOnOutOfMemoryError" \
++    "-XX:+ExitOnOutOfMemoryError" "-XX:ErrorFile=${SOLR_LOGS_DIR}/jvm_crash_%p.log" \
+     "-Djetty.home=$SOLR_SERVER_DIR" "-Dsolr.solr.home=$SOLR_HOME" "-Dsolr.install.dir=$SOLR_TIP" "-Dsolr.install.symDir=$SOLR_TIP_SYM" \
+     "${LOG4J_CONFIG[@]}" "${SCRIPT_SOLR_OPTS[@]}" "${SECURITY_MANAGER_OPTS[@]}" "${SOLR_OPTS[@]}")
+ 
+diff --git a/solr/bin/solr.cmd b/solr/bin/solr.cmd
+index 8960145116..675301640c 100755
+--- a/solr/bin/solr.cmd
++++ b/solr/bin/solr.cmd
+@@ -1104,6 +1104,7 @@ set START_OPTS=%START_OPTS% -XX:-OmitStackTraceInFastThrow
+ REM '+ExitOnOutOfMemoryError' ensures that Solr exits whenever OOME is thrown, with a non-zero
+ REM exit code and the cause logged to the console. Program operation after OOME is unpredictable.
+ set START_OPTS=%START_OPTS% -XX:+ExitOnOutOfMemoryError
++set START_OPTS=%START_OPTS% -XX:ErrorFile="%SOLR_LOGS_DIR%\jvm_crash_%%p.log"
+ set START_OPTS=%START_OPTS% !GC_TUNE! %GC_LOG_OPTS%
+ IF NOT "!CLOUD_MODE_OPTS!"=="" set "START_OPTS=%START_OPTS% !CLOUD_MODE_OPTS!"
+ IF NOT "!IP_ACL_OPTS!"=="" set "START_OPTS=%START_OPTS% !IP_ACL_OPTS!"
+diff --git a/solr/packaging/test/test_start_solr.bats b/solr/packaging/test/test_start_solr.bats
+index c1e65828a6..c28d48268d 100644
+--- a/solr/packaging/test/test_start_solr.bats
++++ b/solr/packaging/test/test_start_solr.bats
+@@ -132,7 +132,7 @@ teardown() {
+   config_exists "techproducts"
+ }
+ 
+-@test "solr exits on OutOfMemoryError instead of crashing" {
++@test "solr starts with ExitOnOutOfMemoryError" {
+   solr start
+   solr assert --started http://localhost:${SOLR_PORT} --timeout 5000
+ 
+diff --git a/solr/solr-ref-guide/modules/configuration-guide/pages/system-info-handler.adoc b/solr/solr-ref-guide/modules/configuration-guide/pages/system-info-handler.adoc
+index 758f0fc819..255e807464 100644
+--- a/solr/solr-ref-guide/modules/configuration-guide/pages/system-info-handler.adoc
++++ b/solr/solr-ref-guide/modules/configuration-guide/pages/system-info-handler.adoc
+@@ -234,6 +234,7 @@ curl http://localhost:8983/api/node/system
+         "-Duser.timezone=UTC",
+         "-XX:-OmitStackTraceInFastThrow",
+         "-XX:+ExitOnOutOfMemoryError",
++        "-XX:ErrorFile=/opt/solr/../logs/jvm_crash_%p.log",
+         "-Djetty.home=/opt/solr/server",
+         "-Dsolr.solr.home=/opt/solr/example/cloud/node1/solr",
+         "-Dsolr.install.dir=/opt/solr/",
