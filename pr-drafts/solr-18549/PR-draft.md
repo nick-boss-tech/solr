@@ -22,16 +22,9 @@ The shared proxy code (`RemoteRequestProxy.validateNodeNames` and `GenericV1Requ
 - `/admin/metrics` keeps the strict behavior: `node=all` and explicit node names return 400 in standalone mode. The metrics `node` parameter selects a scrape destination, not a broadcast.
 - The ZooKeeper check now throws a 400 instead of an NPE, in one place (`RemoteRequestProxy`).
 - Behavior changes beyond the ticket, stated here so a reviewer can judge them:
-  - In SolrCloud, `/api/node/system?nodes=<name>` for a node that is not live now returns 400 ("is not part of cluster") instead of 500. Other remote errors on that endpoint keep their own status codes instead of being wrapped in 500.
-  - In standalone mode, v2 `/api/node/metrics?node=all` is still answered by the node itself (the v2 handler catches the proxy error and serves locally). Only the v1 `/admin/metrics` endpoint returns 400 for `node=all`.
-
-## Proof
-
-Each class below runs on the base with the head tests kept, and on the head. Counts come from the JUnit XML of the gate run.
-
-- Gate run at `cf4b869346` (receipts/SOLR-18549.md): focused head after cleanTest, 36 tests, 0 failures, 0 errors, 0 skipped, from fresh JUnit XML. Classes: LoggingHandlerTest 3, MetricsHandlerTest 10, GetNodeSystemInfoTest 4, GenericV1RequestProxyTest 10, V2SolrRequestBasedProxyTest 9.
-- Base: apache/solr `main` `c8ab71430f` with the production files reverted and only the `standaloneAllMeansLocal()` hook declared (returns `false`). The head tests call that method, so a plain revert does not compile. On this base, 14 of 36 tests fail, each with the ticket's NullPointerException or the wrong status code: LoggingHandlerTest 2, MetricsHandlerTest 2, GetNodeSystemInfoTest 3, GenericV1RequestProxyTest 4, V2SolrRequestBasedProxyTest 3.
+  - In SolrCloud, `/api/node/system?nodes=<name>` for a node that is not live now returns 400 ("is not part of cluster") instead of 500. Before the JAX-RS conversion (SOLR-16458) the endpoint returned 400 for this case, and `/admin/info/system` (v1) still does. The 500 came from a catch-all that wrapped every exception in that conversion. Remote errors that already carry a status keep it. Remote I/O failures are still 500.
+  - In standalone mode, v2 `/api/node/metrics?node=all` is still answered by the node itself (the v2 handler catches the proxy error and serves locally). Only the v1 `/admin/metrics` endpoint returns 400 for `node=all`. This is out of the ticket's scope, so it is unchanged here.
 
 ## The choice
 
-The question for the maintainer: should a broadcast selector in standalone mode mean "this node" (`nodes=all` on the logging and system-info endpoints), or should every node selector be rejected with 400 outside SolrCloud as it is for metrics? This change takes the first option for the three broadcast endpoints and the second for metrics. Is that split the right call?
+The questions for the maintainer: (1) should a broadcast selector in standalone mode mean "this node" (`nodes=all` on the logging and system-info endpoints), or should every node selector be rejected with 400 outside SolrCloud as it is for metrics? This change takes the first option for the three broadcast endpoints and the second for metrics. (2) Is 400 the right status for a node that is not live on `/api/node/system`? It is the status the endpoint returned before the JAX-RS conversion, and the status v1 still returns.

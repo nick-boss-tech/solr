@@ -19,3 +19,15 @@ Branch: `solr-18549-submit` at `cf4b869346`, base apache/solr `main` `c8ab71430f
 ## Recommendation
 
 Fix or state finding 1 before opening, and decide finding 2 with Nick. Nothing else blocks the PR.
+
+## Decision on finding 1: 500 to 400 (rung 1 read, then rung 4 decision, 2026-10-18T20:41:24Z)
+
+Rung 1, what the code did before:
+- v1 `/admin/info/system` on apache main: `GenericV1RequestProxy.proxyRequest()` runs without a catch in `SystemInfoHandler`. A non-live node raises `SolrException(BAD_REQUEST, "Requested node … is not part of cluster")` and the response is 400.
+- v2 `/api/node/system` before SOLR-16458 (`c74142675e`, 2026-03-16): `AdminHandlersProxy` throws the same BAD_REQUEST exception, with no wrap. The response was 400.
+- v2 after `c74142675e`: `GetNodeSystemInfo.proxyToNodes` wraps every exception as SERVER_ERROR "Error occurred while proxying to other node". The 500 is a side effect of the JAX-RS conversion, not a deliberate contract.
+- Remote I/O failures in `RemoteRequestProxy` are wrapped in `RuntimeException` and still become 500. The rethrow only passes `SolrException`s through, so that path is unchanged.
+
+Rung 4, the choice: accept 400 for a non-live node on v2. It restores the pre-conversion status and matches v1 on the same condition. Remote `SolrException`s keep their own codes, as they did before the conversion. Narrowing the catch further would bring back the 500 that was never intended. No code change.
+
+Finding 2 (v2 metrics): not in the ticket. Changing `GetMetrics` would widen the change, so v2 stays as it is and the PR says so. Decided at rung 4 for this PR.
