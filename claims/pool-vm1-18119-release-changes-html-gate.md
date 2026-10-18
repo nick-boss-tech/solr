@@ -1,6 +1,6 @@
 # Claim: SOLR-18119 release changes HTML gate and review (vm1)
 
-Status: CLAIMED by vm1 2026-10-18 (owner asked the main side to gate and review the new 18119 branch and create the receipt)
+Status: DONE 2026-10-18 (GATE GREEN at 1029a6b0cf09; review SATISFIED; receipt appended; report at reports/SOLR-18119-release-changes-html-review.md)
 
 - Job: gates/SOLR-18119-release-changes-html.md.
 - Head: 1029a6b0cf09dc75bdb380cd63fce1511bf440b2 (branches solr-18119-release-python and solr-18119-remove-changes2html, same commit), merge base c8ab71430f6e.
