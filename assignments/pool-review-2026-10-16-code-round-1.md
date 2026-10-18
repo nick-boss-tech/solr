@@ -1,6 +1,6 @@
 # Pool assignment: 2026-10-16 review follow-ups, code and tests (round 1)
 
-Status: CLAIMED
+Status: DONE 2026-10-18 by vm5 (claims/pool-review-2026-10-16-code-round-1.md); index at reports/2026-10-16-pr-batch/code-round-1-index.md. Items 2 to 4 escalated, item 5 refuted for string keys, item 1 per vm2's claim.
 
 - Capability tags: implementation, gate.
 - Intended host: any Linux host with the Gradle toolchain (vm1, vm2, or vm3). Claim under `claims/` before starting (WORKFLOW.md). The Windows host never claims this work.
