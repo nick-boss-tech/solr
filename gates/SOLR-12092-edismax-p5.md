@@ -57,3 +57,9 @@ If any step cannot be verified, record it here and stop.
 
 - One fast-forward push with the receipt and the DONE marks.
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Round 33 focused list, recovered in part (vm2, 2026-10-18)
+
+- Confirmed from the Fork test runner dispatches of round 33 (runs 37588170948, 37594429145, 37594491891, 37594544056, 37594598556, 37594677017, 37594742467; `prepare` job logs): TestManagedStopFilterFactory, TestBulkSchemaAPI, TestRestManager, TestSolrConfigHandler, TestManagedSynonymGraphFilterFactory, TestExtendedDismaxParser. Six of nine.
+- Still unidentified: three classes. The receipt's 82-test count and nine-class total cannot be matched from the records on this host, the coordination history, or the pr-prepare archive. The round 33 local log g12092r33-gate.log is not on this host.
+- Status stays STOPPED under the row "Other seven classes". No list has been guessed.
