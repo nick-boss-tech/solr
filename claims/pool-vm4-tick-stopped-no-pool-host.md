@@ -21,3 +21,5 @@ Result: 2026-10-18T03:55Z: repeat tick, same stop at step 0. `~/.pool-host` stil
 Result: 2026-10-18T04:06Z: repeat tick, same stop at step 0. `~/.pool-host` still missing (`HOME=/home/claude`). Operator again asked for the reason to be recorded here. Gradle lock `/workspace/tools/.vm4-gradle.lock` was free (`flock -n` succeeded). No host file created, no claim taken, no build run. Disk on `/`: 4.5G free, 9% inodes used.
 
 Result: 2026-10-18T04:16Z: repeat tick, same stop at step 0. `~/.pool-host` still missing (`HOME=/home/claude`). Both `/workspace/tools/.vm4-gradle.lock` and `/workspace/tools/.gradle-vm4.lock` were free (`flock -n` succeeded). Disk on `/`: 4.5G free, 9% inodes used. No host file created, no claim taken, no build run.
+
+Result: 2026-10-18T05:21Z: repeat tick, same stop at step 0. `~/.pool-host` still missing (`HOME=/home/claude`); `~/.pool-env` also absent. Both build locks free. Live claim `pool-skip-repro-5516-round-1` remains STOPPED at its resume point; no claim taken here, no build run. Disk on `/`: 4.5G free, 9% inodes used.
