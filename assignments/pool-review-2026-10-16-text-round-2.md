@@ -1,6 +1,6 @@
 # Pool assignment: 2026-10-16 review follow-ups, PR text drafts (round 2)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-review-2026-10-16-text-round-2.md, vm4, 2026-10-18T04:27:57Z)
 
 - Capability tags: draft.
 - Intended host: any host with the draft tag. Claim under `claims/` before starting (WORKFLOW.md).
