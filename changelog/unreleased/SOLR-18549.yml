@@ -1,4 +1,4 @@
-title: Standalone nodes no longer throw an NPE for nodes or node parameters in proxy-capable admin endpoints.
+title: Standalone nodes no longer throw an NPE for nodes or node parameters in proxy-capable admin endpoints. In SolrCloud, /api/node/system returns 400 instead of 500 for a node that is not in the cluster.
 type: fixed
 authors:
   - name: Nick Shanin
