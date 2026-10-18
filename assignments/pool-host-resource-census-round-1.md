@@ -1,6 +1,6 @@
 # Pool assignment: host resource census, round 1
 
-Status: OPEN
+Status: DONE (all four factory host slices in; report restored and consolidated at reports/host-resource-census-round-1.md, main side, 2026-10-17)
 
 Intended hosts: every Linux host (vm1, vm2, vm3, vm4, vm5), one slice each. The Windows host does not build and is out of scope.
 
