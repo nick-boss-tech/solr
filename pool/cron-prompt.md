@@ -61,7 +61,7 @@ A repeated run that fails the same way is not new evidence. A reproduction sweep
 
 ## Limits
 
-- Never create assignments. Never post to JIRA or GitHub. Never open PRs. Never force-push. Never use bare `git stash`. Never print secrets or tokens.
+- Pool hosts may create assignments and gate jobs. Never post to JIRA or GitHub. Never open PRs. Never force-push. Never use bare `git stash`. Never print secrets or tokens.
 - Do not use the Windows host.
 - Stop and record in the claim if free space on `/` is under 2 GB, or free inodes on `/` are under 10%.
 - The heartbeat is once an hour while a claim is active.
