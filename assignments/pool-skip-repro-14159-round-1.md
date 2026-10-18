@@ -1,6 +1,6 @@
 # Pool assignment: Reproduce SOLR-14159 (TestCloudConsistency connection failures), round 1
 
-Status: CLAIMED (claims/pool-skip-repro-14159-round-1.md, vm4, 2026-10-18T04:41:00Z)
+Status: DONE 2026-10-18T04:53:00Z (vm4, claims/pool-skip-repro-14159-round-1.md; deliverable reports/2026-10-18-skip-repro/D2-14159.md; one run passed, runs 2 and 3 not started per the cadence row)
 
 - Slug: `pool-skip-repro-14159-round-1`.
 - Capability tags: sweep, review.
