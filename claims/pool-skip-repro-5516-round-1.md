@@ -45,3 +45,7 @@ Result: 2026-10-18T11:31Z: tick stopped at cron step 0, same cause. `~/.pool-hos
 Heartbeat: 2026-10-18T11:31Z (still STOPPED at its resume point; blocked on missing `~/.pool-host`; not resumed).
 
 Result: 2026-10-18T11:46Z: tick stopped at cron step 0, same cause. `~/.pool-host` and `~/.pool-env` are still absent for user `claude`. `/workspace/tools/host-name` reads `vm4`. Not created: the tick message restates the host as vm4 but does not authorize creating the file. Both `/workspace/tools/.vm4-gradle.lock` and `/workspace/tools/.gradle-vm4.lock` were free (flock -n). Disk on `/`: 4.6G free, 9% inodes used. No build run, no source change, no new claim taken. Claim stays ACTIVE at the resume point in the STOPPED line above.
+
+Heartbeat: 2026-10-18T12:17Z (still STOPPED at its resume point; blocked on missing `~/.pool-host`; not resumed).
+
+Result: 2026-10-18T12:17Z: tick stopped at cron step 0, same cause. `~/.pool-host` is still missing for user `claude` (`HOME=/home/claude`), and `~/.pool-env` is absent. `/workspace/tools/host-name` reads `vm4`. Coordination tip at start of tick: 2a43e3c9f. Not created: the operator's tick message names the host as vm4 but does not authorize creating the file, and cron step 0 says a missing file means exit and record. Both build locks were free at this tick (flock -n). Disk on `/`: 4.6G free, 39% used, 9% inodes used. No build run, no source change, no new claim taken. Claim stays ACTIVE at the resume point in the STOPPED line above.
