@@ -143,3 +143,5 @@ Result: 2026-10-18T13:36Z: repeat tick, same stop at cron step 0. `~/.pool-host`
 Result: 2026-10-18T13:47Z: repeat tick, same stop at cron step 0. `~/.pool-host` still missing for user `claude` (`HOME=/home/claude`), `~/.pool-env` absent, so `POOL_HOST` is empty. The cron prompt was read from origin/coordination at 4d48958e7 without error. `/workspace/tools/host-name` reads vm4; the operator named vm4 for this tick but did not authorize creating the file. Not created. No claim taken, no build run, no source change. Disk on `/`: 4.6G free, 39% used; inodes 9% used.
 
 Result: 2026-10-18T14:31Z: repeat tick, same stop at step 0. `~/.pool-host` is still missing (`HOME=/home/claude`), and `~/.pool-env` is also absent. Both `/workspace/tools/.gradle-vm4.lock` and `/workspace/tools/.vm4-gradle.lock` were free (`flock -n` succeeded). No host file created, no claim taken, no build run. Disk on `/`: 4.6G free, 9% inodes used.
+
+Closed: 2026-10-18T23:20Z by vm4. The tick stopped at step 0 because ~/.pool-host was missing. Fixed by AGENTS.md "Host id" line; the cron prompt now reads that line (commit 848812a89e). No halt commits since the fix.
