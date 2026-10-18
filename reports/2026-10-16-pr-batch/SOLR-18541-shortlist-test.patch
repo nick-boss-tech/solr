@@ -1,0 +1,45 @@
+diff --git a/solr/core/src/test/org/apache/solr/handler/component/CombinedQueryComponentMergeTotalsTest.java b/solr/core/src/test/org/apache/solr/handler/component/CombinedQueryComponentMergeTotalsTest.java
+index 7763d60f91..4e5d907e56 100644
+--- a/solr/core/src/test/org/apache/solr/handler/component/CombinedQueryComponentMergeTotalsTest.java
++++ b/solr/core/src/test/org/apache/solr/handler/component/CombinedQueryComponentMergeTotalsTest.java
+@@ -231,6 +231,40 @@ public class CombinedQueryComponentMergeTotalsTest extends SolrTestCase {
+     assertEquals("response size", 3, rb.getResponseDocs().size());
+   }
+ 
++  /**
++   * Scratch check: a shard that timed out while extracting sort values for sub-query 1 has
++   * response_per_query with one entry, sort_values_0 present, and partial results.
++   */
++  @Test
++  public void shortPerQueryListThrowsBeforeSkip() {
++    SolrDocument a1 = doc("a1", 2.0f);
++    NamedList<List<Object>> sortValues = new NamedList<>();
++    sortValues.add("intDefault", List.<Object>of("1"));
++    ShardResponse shard1 =
++        shardResponse(
++            "shard1",
++            header(SolrQueryResponse.RESPONSE_HEADER_PARTIAL_RESULTS_KEY, Boolean.TRUE),
++            docList(1, false, a1),
++            List.of(docList(1, false, a1)),
++            sortValues);
++    SchemaField intField = currentRequestSchemaField("intDefault");
++    SortSpec sortSpec =
++        new SortSpec(
++            new Sort(new SortField("intDefault", SortField.Type.INT)), List.of(intField), 10, 0);
++    ResponseBuilder rb = newResponseBuilder(sortSpec, "q0", "q1");
++    try {
++      cqc.mergeIds(rb, shardRequest(shard1));
++      fail("expected IndexOutOfBoundsException");
++    } catch (IndexOutOfBoundsException e) {
++      StackTraceElement top =
++          Arrays.stream(e.getStackTrace())
++              .filter(f -> f.getClassName().endsWith("CombinedQueryComponent"))
++              .findFirst()
++              .orElseThrow();
++      assertEquals("throwing line", 342, top.getLineNumber());
++    }
++  }
++
+   /** Same setup as above, asserting only the approximate total (10 + 5 = 15 before the fix). */
+   @Test
+   public void skippedPartialShardApproximateTotalExcluded() {

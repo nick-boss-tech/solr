@@ -1,0 +1,72 @@
+diff --git a/solr/core/src/test/org/apache/solr/handler/admin/SecurityConfHandlerTest.java b/solr/core/src/test/org/apache/solr/handler/admin/SecurityConfHandlerTest.java
+index a4b8df0157..779f2a5f5b 100644
+--- a/solr/core/src/test/org/apache/solr/handler/admin/SecurityConfHandlerTest.java
++++ b/solr/core/src/test/org/apache/solr/handler/admin/SecurityConfHandlerTest.java
+@@ -27,6 +27,7 @@ import java.nio.charset.StandardCharsets;
+ import java.nio.file.Files;
+ import java.nio.file.Path;
+ import java.nio.file.attribute.PosixFilePermission;
++import java.nio.file.attribute.PosixFilePermissions;
+ import java.util.Arrays;
+ import java.util.EnumSet;
+ import java.util.HashMap;
+@@ -563,4 +564,59 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
+       System.out.println(msh.getStandardJson());
+     }
+   }
++  public void testScratchReadOnlySolrHome() throws Exception {
++    assumeWorkingMockito();
++    Path solrHome = createTempDir("scratchRo");
++    Path securityJson = solrHome.resolve("security.json");
++    Files.write(securityJson, Utils.toJSON(shortSecurityData("seed")));
++    byte[] before = Files.readAllBytes(securityJson);
++    CoreContainer cc = mock(CoreContainer.class);
++    when(cc.getSolrHome()).thenReturn(solrHome);
++    SecurityConfHandlerLocalForTesting handler = new SecurityConfHandlerLocalForTesting(cc);
++    Files.setPosixFilePermissions(
++        solrHome, PosixFilePermissions.fromString("r-xr-xr-x"));
++    try {
++      try {
++        handler.persistConf(new SecurityConfig().setData(longSecurityData()));
++        System.out.println("SCRATCH-RO persistConf=succeeded");
++      } catch (Exception e) {
++        System.out.println(
++            "SCRATCH-RO persistConf=" + e + " cause=" + e.getCause());
++      }
++    } finally {
++      Files.setPosixFilePermissions(solrHome, PosixFilePermissions.fromString("rwxr-xr-x"));
++    }
++    System.out.println(
++        "SCRATCH-RO security.json unchanged=" + Arrays.equals(before, Files.readAllBytes(securityJson)));
++  }
++
++  public void testScratchModeNewFile() throws Exception {
++    assumeWorkingMockito();
++    Path solrHome = createTempDir("scratchModeNew");
++    Path securityJson = solrHome.resolve("security.json");
++    CoreContainer cc = mock(CoreContainer.class);
++    when(cc.getSolrHome()).thenReturn(solrHome);
++    SecurityConfHandlerLocalForTesting handler = new SecurityConfHandlerLocalForTesting(cc);
++    handler.persistConf(new SecurityConfig().setData(longSecurityData()));
++    System.out.println(
++        "SCRATCH-MODE new file="
++            + PosixFilePermissions.toString(Files.getPosixFilePermissions(securityJson)));
++  }
++
++  public void testScratchModeExistingFile() throws Exception {
++    assumeWorkingMockito();
++    Path solrHome = createTempDir("scratchModeExisting");
++    Path securityJson = solrHome.resolve("security.json");
++    Files.write(securityJson, Utils.toJSON(shortSecurityData("seed")));
++    System.out.println(
++        "SCRATCH-MODE existing before="
++            + PosixFilePermissions.toString(Files.getPosixFilePermissions(securityJson)));
++    CoreContainer cc = mock(CoreContainer.class);
++    when(cc.getSolrHome()).thenReturn(solrHome);
++    SecurityConfHandlerLocalForTesting handler = new SecurityConfHandlerLocalForTesting(cc);
++    handler.persistConf(new SecurityConfig().setData(longSecurityData()));
++    System.out.println(
++        "SCRATCH-MODE existing after="
++            + PosixFilePermissions.toString(Files.getPosixFilePermissions(securityJson)));
++  }
+ }
