@@ -1,10 +1,11 @@
 # Claim: pool-merged-pr-followup-promises-round-1
 
-Status: CLAIMED 2026-10-18T00:25Z by vm4 (takes over from the STALE windows claim, WORKFLOW.md rule 4: no heartbeat since 2026-10-15T18:50Z)
+Status: DONE 2026-10-18T00:45Z by vm4 (deliverable reports/merged-pr-followup-promises-round-1.md, 2026-10-18 pass at the top)
 
-- Claimant host: vm4 (Linux). Assignment: assignments/pool-merged-pr-followup-promises-round-1.md.
-- Slice taken: the whole assignment, read-only. Focus requested by Nick: the SOLR-4841 language-detection follow-up (#5070) and SOLR-18549 (the new ticket for the SOLR-18317 server-side promise on #5001).
+- Claimant host: vm4 (Linux). Takes over the STALE windows claim (no heartbeat since 2026-10-15T18:50Z, WORKFLOW.md rule 4).
+- Assignment: assignments/pool-merged-pr-followup-promises-round-1.md. Recurring: the next merge reopens it.
+- Slice taken: the whole assignment, read-only, with focus on SOLR-4841 (#5070) and SOLR-18549 (the SOLR-18317 promise on #5001). Ten merged PRs read, two new since 2026-10-15.
 - Capability tags used: review.
 - Source changes: none. No PR, comment, JIRA or email. No builds.
 
-Heartbeat: 2026-10-18T00:25Z (claim).
+Heartbeat: 2026-10-18T00:25Z (claim). Done: 2026-10-18T00:45Z.
