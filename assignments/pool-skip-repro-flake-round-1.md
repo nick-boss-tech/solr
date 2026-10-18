@@ -1,6 +1,6 @@
 # Pool assignment: Reproduce flake tickets with named test classes, round 1
 
-Status: CLAIMED (claims/pool-skip-repro-flake-round-1.md, vm2, 2026-10-18T06:51:11Z)
+Status: DONE (claims/pool-skip-repro-flake-round-1.md, vm2, 2026-10-18T08:20Z; deliverable reports/2026-10-18-skip-repro/A1-flake-round-1.md)
 
 - Slug: `pool-skip-repro-flake-round-1`.
 - Capability tags: sweep.

@@ -1,7 +1,7 @@
 # Claim: pool-skip-repro-flake-round-1
 
 - Claimant host: vm2, matching a file in `hosts/` (`hosts/vm2.md`).
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: DONE: 2026-10-18T08:20Z, deliverable `reports/2026-10-18-skip-repro/A1-flake-round-1.md`.
 - Job or assignment: `assignments/pool-skip-repro-flake-round-1.md`.
 - Slice: the whole assignment, 28 tickets, at the pinned head `498a09aea9`.
 - Capability tags used: sweep.
@@ -41,5 +41,17 @@ Result: 2026-10-18T07:46Z: SOLR-11058-p1, no explicit seed, head 498a09aea9, rc=
 Rerun plan, written before the run, 2026-10-18T07:55Z: the Decisions row "Run cadence" allows one more run with the failing seed, passed as `-Ptests.seed=<seed>`. The first run for SOLR-10841 and SOLR-11058 had no `-Ptests.seed`, so this rerun is the first to pin that seed explicitly. Head, JDK, worktree and command are unchanged. This is the second and last run for each failing ticket under the two-run stop rule: SOLR-10841 and SOLR-11058 so far, and any other ticket that fails in pass 1 gets the same single rerun. The rerun starts after pass 1 finishes, because the host lock is held until then. A dedicated script `/tmp/vm2-flake-r1/chain2.sh` runs it.
 
 Heartbeat: 2026-10-18T07:55:00Z
+
+Result: 2026-10-18T08:12Z: SOLR-10841-p2 (rerun at the failing seed `-Ptests.seed=B2EDDADF9B4A881F`), head 498a09aea9, rc=1 FAIL, 14 tests, 2 failures, 0 errors. Same two methods and messages as pass 1 (testKillLeader, testRecovery). Log `SOLR-10841-p2.log`, XML `SOLR-10841-p2.xml/`. Reproduced at this seed; last run for this ticket.
+
+Result: 2026-10-18T08:17Z: SOLR-11058-p2 (rerun at `-Ptests.seed=F982A35C90FB67A5`), head 498a09aea9, rc=1 FAIL, 14 tests, 3 failures, 0 errors. Same three methods and messages as pass 1 (testRecovery, testOnlyLeaderIndexes, testKillLeader). Log `SOLR-11058-p2.log`, XML `SOLR-11058-p2.xml/`. Reproduced at this seed; last run for this ticket.
+
+Result: 2026-10-18T08:19Z, pass 1 tail (no explicit seed, rc=0 PASS, the seeds are the ones printed): SOLR-11247 seed 21FA8A11BC9942C6, 10 tests; SOLR-11463 seed 79F00C0EE1E59DB2, 2 tests; SOLR-11627 seed 130AB2BA39750A2E, 3 tests; SOLR-11826 seed B936D489BA66A869, 4 tests; SOLR-12093 seed 97B5BFB090B42617, 2 tests; SOLR-12302 seed 152ECDC474A04E45, 1 test; SOLR-12844 seed A0D025C0835FBE2A, 1 test; SOLR-14881 seed 80C222C6E18916C8, 1 test; SOLR-16094 seed 64F796917C63A967, 1 test. All 0 failures, 0 errors. Logs `<ticket>-p1.log`, XML `<ticket>-p1.xml/`. Did not reproduce at these seeds.
+
+Result: 2026-10-18T08:19Z: pass 1 complete, 26 of 28 rows green, 2 failing (SOLR-10841, SOLR-11058). Both reproduced at the pinned seed. Deliverable `reports/2026-10-18-skip-repro/A1-flake-round-1.md`.
+
+DONE: 2026-10-18T08:20Z. Deliverables: `reports/2026-10-18-skip-repro/A1-flake-round-1.md` (one row per ticket, seeds, XML paths, the two failing rows with the reproduced methods and exception lines).
+
+Heartbeat: 2026-10-18T08:20:00Z
 
 Append one heartbeat line at least once an hour while the claim is active, and push it.
