@@ -1,6 +1,6 @@
 # Pool assignment: Reproduce SOLR-5516 (ChaosMonkeyNothingIsSafeTest), round 1
 
-Status: CLAIMED (claims/pool-skip-repro-5516-round-1.md, vm4, 2026-10-18T04:58:12Z)
+Status: HANDED 2026-10-18T15:15Z (vm4, claims/pool-skip-repro-5516-round-1.md). Run at 498a09aea9 skipped the test (nightly group not enabled), so no reproduction ran. Deliverable reports/2026-10-18-skip-repro/D3-5516.md. Needs a main-side decision on the nightly flag before a rerun.
 
 - Slug: `pool-skip-repro-5516-round-1`.
 - Capability tags: sweep, review.
