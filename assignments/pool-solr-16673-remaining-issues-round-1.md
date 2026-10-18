@@ -1,6 +1,8 @@
 # Pool assignment: SOLR-16673 remaining Schema Designer issues, round 1
 
-Status: CLAIMED (claims/pool-windows-solr-16673-premises-round-1.md)
+Status: OPEN
+
+Windows review slice completed 2026-10-18. See `reports/SOLR-16673-remaining-issues.md`; Linux implementation, regression tests, and gate work remain.
 
 - Capability tags: implementation, gate, review, draft.
 - Intended host: any pool Linux host. Claim under `claims/` before starting (WORKFLOW.md).
