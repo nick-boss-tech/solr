@@ -1,0 +1,7 @@
+title: Standalone nodes no longer throw an NPE for nodes or node parameters in proxy-capable admin endpoints.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-18549
+    url: https://issues.apache.org/jira/browse/SOLR-18549
