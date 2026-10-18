@@ -40,6 +40,7 @@ import org.apache.solr.client.api.model.FlexibleSolrJerseyResponse;
 import org.apache.solr.client.api.model.ListCollectionsResponse;
 import org.apache.solr.client.api.model.SchemaDesignerAddRequestBody;
 import org.apache.solr.client.api.model.SchemaDesignerAddResponse;
+import org.apache.solr.client.api.model.SchemaDesignerAnalyzeResponse;
 import org.apache.solr.client.api.model.SchemaDesignerFileContentsResponse;
 import org.apache.solr.client.api.model.SchemaDesignerInfoResponse;
 import org.apache.solr.client.api.model.SchemaDesignerResponse;
@@ -307,6 +308,29 @@ public class TestSchemaDesigner extends SolrCloudTestCase implements SchemaDesig
 
     String idField = response.uniqueKeyField;
     assertNotNull(idField);
+  }
+
+  @Test
+  public void testNumericUniqueKeyDocIds() throws Exception {
+    String configSet = "testNumericUniqueKeyDocIds";
+    schemaDesigner.prepNewSchema(configSet, null);
+
+    String mutableId = getMutableId(configSet);
+    ManagedIndexSchema schema = schemaDesigner.loadLatestSchema(mutableId);
+    schema =
+        schema.replaceField(
+            "id", schema.getFieldTypeByName("plong"), schema.getField("id").getArgs());
+    assertEquals("plong", schema.getUniqueKeyField().getType().getTypeName());
+    assertTrue(schema.persistManagedSchema(false));
+    schema = schemaDesigner.loadLatestSchema(mutableId);
+
+    SolrInputDocument sampleDoc = new SolrInputDocument();
+    sampleDoc.setField("id", 42L);
+    SchemaDesignerAnalyzeResponse response =
+        schemaDesigner.buildSchemaDesignerResponse(
+            SchemaDesignerAnalyzeResponse.class, configSet, schema, null, List.of(sampleDoc));
+
+    assertEquals(List.of("42"), response.docIds);
   }
 
   @Test

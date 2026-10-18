@@ -1308,8 +1308,9 @@ public class SchemaDesigner extends JerseyResource
       final String uniqueKeyField = schema.getUniqueKeyField().getName();
       response.docIds =
           docs.stream()
-              .map(d -> (String) d.getFieldValue(uniqueKeyField))
+              .map(d -> d.getFieldValue(uniqueKeyField))
               .filter(Objects::nonNull)
+              .map(Object::toString)
               .limit(100)
               .collect(Collectors.toList());
     }
