@@ -1,6 +1,6 @@
 # Pool assignment: Verify already-committed and support-question tickets
 
-Status: CLAIMED (claims/pool-skip-review-committed-support-round-1.md, vm2, 2026-10-18T04:55Z)
+Status: DONE 2026-10-18T05:20Z (vm2, claims/pool-skip-review-committed-support-round-1.md; deliverable reports/2026-10-18-skip-repro/B3-committed-support-round-1.md, 37 of 37 rows)
 
 - Slug: `pool-skip-review-committed-support-round-1`.
 - Capability tags: review.
