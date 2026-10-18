@@ -26,10 +26,12 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import org.apache.solr.JSONTestUtil;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrDocument;
@@ -687,10 +689,48 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
       case 2 -> {
         nl.add("map", new LinkedHashMap<>(Map.of("m", 3)));
       }
-      default -> {
+      case 3 -> {
         nl.add("big", new BigInteger("123456789012345678901234567890"));
         nl.add("dec", new BigDecimal("1.25"));
         nl.add("mixed", List.of(new NamedList<>(Map.of("z", 9))));
+      }
+      case 4 -> {
+        nl.add("nan", Float.NaN);
+        nl.add("pinf", Double.POSITIVE_INFINITY);
+        nl.add("ninf", Float.NEGATIVE_INFINITY);
+        nl.add("negzero", -0.0d);
+        nl.add("fmax", Float.MAX_VALUE);
+        nl.add("dmin", Double.MIN_VALUE);
+      }
+      case 5 -> {
+        nl.add("dup", 1);
+        nl.add("dup", "two");
+        nl.add("astral", "\uD83D\uDE00 \uD834\uDD1E");
+        nl.add("date", new Date(0L));
+        nl.add("char", 'c');
+        nl.add("unit", TimeUnit.SECONDS);
+      }
+      default -> {
+        NamedList<Object> group = new NamedList<>();
+        SolrDocumentList docs = new SolrDocumentList();
+        docs.setNumFound(1);
+        docs.setStart(0);
+        SolrDocument doc = new SolrDocument();
+        doc.addField("id", "1");
+        doc.addField("name", "a");
+        docs.add(doc);
+        group.add("groupValue", "g1");
+        group.add("doclist", docs);
+        NamedList<Object> pivot = new SimpleOrderedMap<>();
+        pivot.add("field", "cat");
+        pivot.add("value", "book");
+        pivot.add("count", 2);
+        SimpleOrderedMap<Object> inner = new SimpleOrderedMap<>();
+        inner.add("field", "inStock");
+        inner.add("value", true);
+        pivot.add("pivot", List.of(inner));
+        nl.add("grouped", List.of(group));
+        nl.add("pivot", List.of(pivot));
       }
     }
     rsp.add("nl", nl);
@@ -700,7 +740,7 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
 
   @Test
   public void testArrntvNativeMatchesLegacyAcrossValueTypes() throws IOException {
-    for (int which = 0; which < 4; which++) {
+    for (int which = 0; which < 7; which++) {
       for (String indent : new String[] {"off", "on"}) {
         SolrQueryRequest legacyReq =
             req("wt", "json", "json.nl", JsonTextWriter.JSON_NL_ARROFNTV, "indent", indent);

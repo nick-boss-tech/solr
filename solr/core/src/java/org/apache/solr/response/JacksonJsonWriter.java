@@ -163,14 +163,24 @@ public class JacksonJsonWriter extends BinaryResponseWriter {
     @Override
     public void writeStr(String name, String val, boolean needsEscaping) throws IOException {
       ifNeededWriteTypeAndValueKey("str");
-      if (arrntv && (val.indexOf('\u2028') >= 0 || val.indexOf('\u2029') >= 0)) {
-        gen.writeRawValue(escapeLineSeparators(val));
+      if (arrntv && needsRawQuoting(val)) {
+        gen.writeRawValue(quoteRaw(val));
       } else {
         gen.writeString(val);
       }
     }
 
-    private static String escapeLineSeparators(String val) {
+    private static boolean needsRawQuoting(String val) {
+      for (int i = 0; i < val.length(); i++) {
+        char c = val.charAt(i);
+        if (c == '\u2028' || c == '\u2029' || Character.isSurrogate(c)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    private static String quoteRaw(String val) {
       String quoted = new String(JsonStringEncoder.getInstance().quoteAsString(val));
       return "\"" + quoted.replace("\u2028", "\\u2028").replace("\u2029", "\\u2029") + "\"";
     }
@@ -195,6 +205,11 @@ public class JacksonJsonWriter extends BinaryResponseWriter {
 
     @Override
     public void writeFloat(String name, float val) throws IOException {
+      if (!Float.isFinite(val)) {
+        ifNeededWriteTypeAndValueKey("str");
+        gen.writeString(Float.toString(val));
+        return;
+      }
       ifNeededWriteTypeAndValueKey("float");
       gen.writeNumber(val);
     }
@@ -295,9 +310,15 @@ public class JacksonJsonWriter extends BinaryResponseWriter {
       } else if (val instanceof Long) {
         ifNeededWriteTypeAndValueKey("long");
         gen.writeNumber(val.longValue());
+      } else if (val instanceof Float && !Float.isFinite(val.floatValue())) {
+        ifNeededWriteTypeAndValueKey("str");
+        gen.writeString(val.toString());
       } else if (val instanceof Float) {
         ifNeededWriteTypeAndValueKey("float");
         gen.writeNumber(val.floatValue());
+      } else if (val instanceof Double && !Double.isFinite(val.doubleValue())) {
+        ifNeededWriteTypeAndValueKey("str");
+        gen.writeString(val.toString());
       } else if (val instanceof Double) {
         ifNeededWriteTypeAndValueKey("double");
         gen.writeNumber(val.doubleValue());
