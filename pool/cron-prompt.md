@@ -2,6 +2,13 @@
 
 This file is the job for every pool Linux host. The scheduled task reads it from `origin/coordination` at the start of each tick, so edits take effect on the next tick. Do not work from any other copy.
 
+## General rules
+
+- Claim work before you start it. The claim is the record that you are on it.
+- Give every ticket the same attention you would give a pull request. A verdict needs the evidence the rubric asks for: the code paths read with file and line, the git history, and a reproduction attempt wherever the ticket describes a testable behavior.
+- Read the code and the history, not only the ticket. When a reproduction is inconclusive, find the gap and try again with a different variant.
+- A thin verdict is worse than an open ticket. If the evidence does not meet the rubric, use `keep-open` and say what is missing.
+
 ## Setup, every tick
 
 1. Your worktree: `/workspace/worktrees/pool-$(hostname -s)`. If it does not exist, create it with `git -C /workspace/solr worktree add --detach /workspace/worktrees/pool-$(hostname -s) origin/coordination`. Every tick, `git fetch origin coordination` and `git rebase origin/coordination` inside it. Never switch the shared checkout at `/workspace/solr`.
