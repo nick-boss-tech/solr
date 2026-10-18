@@ -32,4 +32,14 @@ Conclusive for a passing run only; a flake shows as a failure, so these 14 are "
 
 Heartbeat: 2026-10-18T07:38:00Z
 
+Result: 2026-10-18T07:38Z: SOLR-10841-p1, no explicit seed, head 498a09aea9, rc=1 FAIL, seed B2EDDADF9B4A881F, 14 tests, 2 failures, 0 errors. Failures: testKillLeader "AssertionError: Expected collection to be 1x2"; testRecovery "AssertionError: Replica didn't recover". The log also has 12 "Index fetch failed" lines, each a `FileSystemException ... -> ...: Too many links` on hard-link creation for a segment file under `tlog_replica_test_kill_leader_shard1_replica_t3/data/index.*`. Log `/workspace/gates/logs/vm2/flake-r1/SOLR-10841-p1.log`, XML `SOLR-10841-p1.xml/`. Conclusive as a failing run at that seed; the failure is in the class.
+
+Result: 2026-10-18T07:46Z: SOLR-10976-p1, no explicit seed, head 498a09aea9, rc=0 PASS, seed 5DF3F7F65065E53C, 33 tests, 0 failures, 0 errors. Log `SOLR-10976-p1.log`, XML `SOLR-10976-p1.xml/`. Did not reproduce at this seed.
+
+Result: 2026-10-18T07:46Z: SOLR-11058-p1, no explicit seed, head 498a09aea9, rc=1 FAIL, seed F982A35C90FB67A5, 14 tests, 3 failures, 0 errors. Failures: testRecovery "Replica didn't recover"; testOnlyLeaderIndexes "Some replicas are not in sync with leader"; testKillLeader "Expected collection to be 1x2". The log has 29 `FileSystemException ... -> ...: Too many links` lines on hard-link creation (`_0.si`, `_2.si`, `_b.fdm`, `_k.fdt`). Log `SOLR-11058-p1.log`, XML `SOLR-11058-p1.xml/`. Conclusive as a failing run at that seed.
+
+Rerun plan, written before the run, 2026-10-18T07:55Z: the Decisions row "Run cadence" allows one more run with the failing seed, passed as `-Ptests.seed=<seed>`. The first run for SOLR-10841 and SOLR-11058 had no `-Ptests.seed`, so this rerun is the first to pin that seed explicitly. Head, JDK, worktree and command are unchanged. This is the second and last run for each failing ticket under the two-run stop rule: SOLR-10841 and SOLR-11058 so far, and any other ticket that fails in pass 1 gets the same single rerun. The rerun starts after pass 1 finishes, because the host lock is held until then. A dedicated script `/tmp/vm2-flake-r1/chain2.sh` runs it.
+
+Heartbeat: 2026-10-18T07:55:00Z
+
 Append one heartbeat line at least once an hour while the claim is active, and push it.
