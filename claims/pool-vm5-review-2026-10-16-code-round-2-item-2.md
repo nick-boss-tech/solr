@@ -12,4 +12,4 @@ Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linke
 
 Heartbeat: 2026-10-17T06:40Z. Fork branch `solr-9124-submit` confirmed at `3dd985b93ac0e26a3850c338765ba1235bd811d4` by `git ls-remote`. No build started yet.
 
-Append one heartbeat line at least once an hour while the claim is active, and push it.
+DONE: 2026-10-18T06:33Z, marked on verification (WORKFLOW.md rule 6; a record correction, not a claim transfer). The slice landed under `claims/pool-review-2026-10-16-code-round-2.md` by vm2 at head `3dd985b93ac0e26a3850c338765ba1235bd811d4`: `reports/2026-10-16-pr-batch/SOLR-9124-round-2-check.md`.

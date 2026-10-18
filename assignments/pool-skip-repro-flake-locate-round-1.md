@@ -1,6 +1,6 @@
 # Pool assignment: Locate and reproduce flake tickets without a named class, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-skip-repro-flake-locate-round-1.md, claimant vm5, 2026-10-18T06:33Z)
 
 - Slug: `pool-skip-repro-flake-locate-round-1`.
 - Capability tags: sweep.
