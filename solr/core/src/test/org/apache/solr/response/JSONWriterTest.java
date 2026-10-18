@@ -21,10 +21,14 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.apache.solr.JSONTestUtil;
 import org.apache.solr.SolrTestCaseJ4;
@@ -681,12 +685,12 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
         nl.add(null, inner);
       }
       case 2 -> {
-        nl.add("map", new java.util.LinkedHashMap<>(java.util.Map.of("m", 3)));
+        nl.add("map", new LinkedHashMap<>(Map.of("m", 3)));
       }
       default -> {
-        nl.add("big", new java.math.BigInteger("123456789012345678901234567890"));
-        nl.add("dec", new java.math.BigDecimal("1.25"));
-        nl.add("mixed", java.util.List.of(new NamedList<>(java.util.Map.of("z", 9))));
+        nl.add("big", new BigInteger("123456789012345678901234567890"));
+        nl.add("dec", new BigDecimal("1.25"));
+        nl.add("mixed", List.of(new NamedList<>(Map.of("z", 9))));
       }
     }
     rsp.add("nl", nl);
@@ -733,7 +737,7 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
   public void testArrntvNativeTypesArraysAsArrayElements() throws IOException {
     SolrQueryResponse rsp = new SolrQueryResponse();
     NamedList<Object> nl = new NamedList<>();
-    nl.add("list", java.util.List.of("p", 4, 5L));
+    nl.add("list", List.of("p", 4, 5L));
     nl.add("arr", new String[] {"q"});
     rsp.add("nl", nl);
     SolrQueryRequest req =
