@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-17268 full re-gate on corrected test head
 
-Status: HANDED BACK, NOT GREEN at 9993394741 (reports/SOLR-17268-regate-9993394.md). No receipt. A new run needs a decision first.
+Status: DONE 2026-10-18 at f888c1cea8 (GREEN; receipts/SOLR-17268.md, claims/pool-vm3-solr-17268-regate-round-2.md).
 
 - Capability tags: gate.
 - Intended host: vm2 (Linux). Any capable Linux host may claim if vm2 is busy or unavailable. Claim under `claims/` before starting (WORKFLOW.md).

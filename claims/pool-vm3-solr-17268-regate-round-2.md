@@ -1,6 +1,6 @@
 # Claim: SOLR-17268 full re-gate on the patched head (vm3)
 
-Status: CLAIMED 2026-10-18T21:10Z.
+Status: DONE 2026-10-18T21:45Z. Deliverable: receipts/SOLR-17268.md (new top section, GREEN at f888c1cea8), gates/SOLR-17268.md (re-gate run), assignments/pool-solr-17268-regate-round-1.md (DONE).
 
 - Claimant host: vm3. Job: `gates/SOLR-17268.md` (re-gate section) and `assignments/pool-solr-17268-regate-round-1.md`.
 - Head: `f888c1cea8` on `solr-17268-submit`, pushed by Nick Shanin at 2026-10-18T01:30Z. Its +/- lines match `gates/SOLR-17268-test-fix-proposal.patch` exactly.
