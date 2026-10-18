@@ -1,6 +1,6 @@
 # SOLR-6759 (PR 5154) check: does the query-limit test reach the new `finally` block?
 
-Status: escalated. The test does not reach the new block, but I could not find a corrected trip point that does. No test or production change was committed to `solr-6759-submit`.
+Status: resolved. The test is corrected in `bdeb07d03b` on `solr-6759-submit`: it trips at the sixth `ExpandComponent.process` check, inside the expand search, and fails on the parent code without the `finally`.
 
 - Head: `solr-6759-submit` at `680044f1d2a6a36b4543f4d52bb552e32b142919` (fix commit `680044f1d2`, parent `66809d9564`).
 - Test: `TestExpandComponent.testExpandCompletesPostFilterCollectorsWhenQueryLimitExceeded`.
@@ -22,6 +22,12 @@ Status: escalated. The test does not reach the new block, but I could not find a
 - Runs D and E move the trip to the second and third `ExpandComponent.process` checks. These also pass without the `finally`, so neither variant makes the test fail on the missing `finally`. The trip site for counts 2 and 3 was not isolated. The likely candidates are the check after the search at `ExpandComponent.java:455` (outside the `try`) and any check inside `searcher.search`, which I did not confirm.
 - The assignment's note that the stated base result does not match the base code was not checked. No run was made at `cabedd1d96`.
 
-## Escalation
+## Resolution
 
-A detecting test needs the limit to throw inside `searcher.search`, so the exception leaves the `try` and the `finally` must run. Finding a count or caller expression that does this needs the trip location instrumented (for example, the stack at each `checkCaller` hit), which is beyond this check. Main agent to decide whether to keep the `finally` change without a detecting test, or to ask the author for one. The default in the decisions table (change the test, not production code) was not applied because no variant was verified.
+- Probe on the parent commit `66809d9564` (no `finally`), with the trip count varied from 1 to 8 on `ExpandComponent.process`. Counts 1 to 5 trip before the expand search (one collector, completed). Count 6 trips inside the expand search: two post filter collectors are created and one completes, so the limit exception leaves the search with the collector chain incomplete. Count 7 and above never trip.
+- Test change in `bdeb07d03b`: the trip is `ExpandComponent.process:6`. The comment explains the trip point.
+- Fail-before: the test fails on the parent code with `expected:<2> but was:<1>` on the completion count (log `6759-failbefore-parent.log`).
+- Pass: the test passes at the PR head `680044f1d2` plus the test change (log `6759-pass-head.log`, 1 of 1 passed).
+- The PR body is corrected (readback verified). It had said the second test passes on the base code, which the fail-before run disproves.
+
+The escalation to the main agent is withdrawn: there is no main agent. The count was found by measurement, not guessed.
