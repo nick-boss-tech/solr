@@ -1,6 +1,6 @@
 # Gate job: SOLR-4841 language-detection follow-up (test-only, custom identifier through processAdd)
 
-Status: CLAIMED (claims/pool-solr-4841-langid-followup-round-1.md, vm4, 2026-10-18). Gate run on vm4 at the head below; the receipt is written when the gate is green.
+Status: GATE GREEN at bf1b01d0dc (receipts/SOLR-4841-followup.md; deliverable reports/SOLR-4841-followup-round-1.md). Review rounds 2 and 3 by a reviewer other than the builder are still needed before SATISFIED.
 
 - Branch: solr-4841-langid-followup-submit on the fork (https://github.com/nick-boss-tech/solr). Head at filing: bf1b01d0dc (ls-remote matched). The earlier head 92567d75c4 failed tidy on import order and is superseded by bf1b01d0dc, a fast-forward commit.
 - Base: apache/solr upstream main c8ab71430f. The merged change a99ff066f4 is on apache main as a squash commit under a different hash; the pre-fix legs use the same tree with the one-line constructor revert.
@@ -11,12 +11,12 @@ Status: CLAIMED (claims/pool-solr-4841-langid-followup-round-1.md, vm4, 2026-10-
 
 ## Steps
 
-- [ ] 0. Head check: head = bf1b01d0dc. Log: /workspace/gates/logs/vm4/SOLR-4841-gate-head.log
-- [ ] 1. Tidy on the final tree, then the tree must be clean (no changed paths). Logs: SOLR-4841-tidy.log, SOLR-4841-tidy-status.log
-- [ ] 2. Error Prone compile, `-Pvalidation.errorprone=true`, main and test sources of :solr:modules:langid. Log: SOLR-4841-errorprone.log
-- [ ] 3. Pre-fix leg, does not compile at the parent state (DetectedLanguage constructor not public). Ran on 92567d75c4 with the constructor reverted, 2026-10-18 01:45Z. Quoted error: "DetectedLanguage(String,Double) is not public in DetectedLanguage" in ContentLanguageIdentifierFactory.java:67, and in CustomLanguageIdentifierTest.java:40 and :45 (the merged test). Log: /workspace/gates/logs/vm4/SOLR-4841-followup-prefix-compile.log. Rerun on bf1b01d0dc is not needed: the only change since is an import order.
-- [ ] 4. Focused head run, CustomLanguageIdentifierProcessingTest and CustomLanguageIdentifierTest, counted from fresh JUnit XML. Log: SOLR-4841-focused.log
-- [ ] 5. Module check, `:solr:modules:langid:check -x test`. Log: SOLR-4841-check.log
+- [x] 0. Head check: head = bf1b01d0dc. Log: /workspace/gates/logs/vm4/SOLR-4841-gate-head.log
+- [x] 1. Tidy on the final tree, then the tree must be clean (no changed paths). Logs: SOLR-4841-tidy.log, SOLR-4841-tidy-status.log
+- [x] 2. Error Prone compile, `-Pvalidation.errorprone=true`, main and test sources of :solr:modules:langid. Log: SOLR-4841-errorprone.log
+- [x] 3. Pre-fix leg, does not compile at the parent state (DetectedLanguage constructor not public). Ran on bf1b01d0dc with the constructor reverted. Quoted error: "DetectedLanguage(String,Double) is not public in DetectedLanguage" in ContentLanguageIdentifierFactory.java:67, and in CustomLanguageIdentifierTest.java:40 and :45 (the merged test). Log: /workspace/gates/logs/vm4/SOLR-4841-followup-prefix-compile.log. Rerun on bf1b01d0dc is not needed: the only change since is an import order.
+- [x] 4. Focused head run, CustomLanguageIdentifierProcessingTest and CustomLanguageIdentifierTest, counted from fresh JUnit XML. Log: SOLR-4841-focused.log
+- [x] 5. Module check, `:solr:modules:langid:check -x test`. Log: SOLR-4841-check.log
 
 ## Earlier run, not counted
 

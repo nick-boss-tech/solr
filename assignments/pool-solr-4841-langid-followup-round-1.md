@@ -1,6 +1,6 @@
 # Assignment: build the SOLR-4841 follow-up test (language detection through a custom identifier), round 1
 
-Status: CLAIMED (claims/pool-solr-4841-langid-followup-round-1.md, vm4, 2026-10-18)
+Status: OPEN (test built and gated by vm4 at bf1b01d0dc; review rounds 2 and 3 by a reviewer other than the builder still needed before SATISFIED)
 
 Capability tags: [implementation, review]. Intended host: Windows (review agent). Claim under claims/ before starting, per WORKFLOW.md. The gate itself runs on a Linux host through the gate job this assignment directs you to file; no builds run on Windows.
 
