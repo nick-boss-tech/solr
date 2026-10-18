@@ -1,0 +1,102 @@
+[
+  {
+    "key": "SOLR-8310",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, bin/solr contains no lsof startup probe. The report shows lsof 4.78 rejecting its TCP:LISTEN selector on CentOS 5, an obsolete environment and diagnostic-tool incompatibility rather than a current Solr defect."
+  },
+  {
+    "key": "SOLR-8171",
+    "verdict": "deferred",
+    "evidence": "JIRA raises unresolved questions about facet-query filterCache usage and cache statistics but gives no request/counter trace. Need a current-main request pair with cache metrics, comparing queryResultCache enabled and disabled, to distinguish a metrics defect from expected caching behavior."
+  },
+  {
+    "key": "SOLR-8117",
+    "verdict": "confirmed-skip",
+    "evidence": "The ticket concerns legacy cores:<n replica-placement rules, which are absent from upstream/main c8ab714; current collection assignment uses the placement-plugin API. The reporter also accepted that cores:<1 is an impossible postcondition for creating a replica."
+  },
+  {
+    "key": "SOLR-7982",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, Assign.assignCoreNodeName uses the collection-wide ZooKeeper counter. Assign.incAndGetId updates it with a versioned setData and retries BadVersionException, so concurrent replica creation cannot allocate the same counter value."
+  },
+  {
+    "key": "SOLR-7947",
+    "verdict": "deferred",
+    "evidence": "The only JIRA comment guesses at a stale write.lock or multiple cores sharing a data directory; the attached log/config needed to confirm that diagnosis is unavailable here. The reported OverlappingFileLockException alone does not establish whether this is Solr or deployment configuration."
+  },
+  {
+    "key": "SOLR-7867",
+    "verdict": "deferred",
+    "evidence": "The failure stack is in Lucene50DocValuesProducer while merging grouped facet terms, and later comments report it across Solr 5.3 through 6.6 with reindexing changing the symptom. I have not established the status of the corresponding Lucene codec path on current main, so this needs Lucene-side verification before clearing."
+  },
+  {
+    "key": "SOLR-7846",
+    "verdict": "confirmed-skip",
+    "evidence": "This is a request for a new runtime query-parameter syntax inside QTs because XML ${...} substitution is configuration-time property expansion. The ticket proposes syntax rather than showing a regression in a supported feature."
+  },
+  {
+    "key": "SOLR-7806",
+    "verdict": "confirmed-skip",
+    "evidence": "JIRA maintainers rejected globally replacing localhost with 127.0.0.1 because that breaks IPv6-only configurations. The report does not identify a reproducible Solr code path; the requested global behavior change is not a valid fix."
+  },
+  {
+    "key": "SOLR-7721",
+    "verdict": "confirmed-skip",
+    "evidence": "The JIRA comment traces the old duplicate counts to tfloat Trie precisionStep behavior and says the ordinary float field avoids it. On upstream/main c8ab714, SimpleFacets.getNumericHidingWrapper handles single-valued numeric group facets by wrapping the field with NumericHidingLeafReader for term-based grouping."
+  },
+  {
+    "key": "SOLR-7612",
+    "verdict": "confirmed-skip",
+    "evidence": "This asks to rename CloudSolrServer.setIdField to setRouteField for API clarity. The current SolrJ source has no CloudSolrServer or setIdField API, and the ticket reports no routing behavior defect."
+  },
+  {
+    "key": "SOLR-7559",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, MoreLikeThisHandler constructs a non-null ResponseBuilder before passing it to SimpleFacets and FacetComponent, removing the old null-builder path behind the reported NPE. The JIRA comment also says the request parameters were chosen incorrectly."
+  },
+  {
+    "key": "SOLR-7526",
+    "verdict": "confirmed-skip",
+    "evidence": "The reported workflow replaces Lucene index files on disk while the core is open, then reloads the core. That is external mutation of a live index/writer rather than a supported Solr index replacement operation, so the symptom does not identify a Solr defect."
+  },
+  {
+    "key": "SOLR-7415",
+    "verdict": "confirmed-skip",
+    "evidence": "The JIRA explicitly describes this as a parent for improvements to the experimental JSON Facet API before its planned 5.2 finalization. It is an umbrella feature ticket, not a specific bug."
+  },
+  {
+    "key": "SOLR-7352",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, CloudSolrStream initializes eofTuples as Collections.synchronizedMap(new HashMap<>()). This protects the concurrent EOF insertions during parallel stream opening that the ticket describes."
+  },
+  {
+    "key": "SOLR-7249",
+    "verdict": "deferred",
+    "evidence": "JIRA commenters identify eDisMax parsing/default-field differences, but the final discussion also raises a possible regression of SOLR-3377. The ticket lacks the schema and complete parser parameters needed to decide; a minimal current-main reproduction is still required."
+  },
+  {
+    "key": "SOLR-6929",
+    "verdict": "confirmed-skip",
+    "evidence": "The JIRA component is clients - C# and the report concerns how a C# client renders highlighter tags around special characters. No Solr server code path or server-side behavior defect is identified."
+  },
+  {
+    "key": "SOLR-6922",
+    "verdict": "confirmed-skip",
+    "evidence": "This is a request to add a spatial dataset and example schema to the examples, with no malfunction reported; its JIRA fix version is 5.0. It is an example/documentation enhancement, not a bug."
+  },
+  {
+    "key": "SOLR-6890",
+    "verdict": "deferred",
+    "evidence": "SplitShardCmd still creates sub-shard replicas on upstream/main c8ab714, but the ticket gives no configset contents, custom-lib path, or node-local deployment details. Without those, the class-loading failure cannot be separated from inconsistent plugin deployment across nodes."
+  },
+  {
+    "key": "SOLR-6836",
+    "verdict": "deferred",
+    "evidence": "The reported partial-term highlighting depends on the field analyzer, query parser, and hl.* settings, none of which are included. Without that configuration or a reproducer, the output cannot distinguish a highlighter defect from expected token-boundary behavior."
+  },
+  {
+    "key": "SOLR-6811",
+    "verdict": "confirmed-skip",
+    "evidence": "The ticket concerns TestLBHttpSolrServer and its CloserThread, but upstream/main no longer contains that client implementation or test; the only LBHttpSolrServer occurrence is a historical comment in LBSolrClient. The reported test path is obsolete."
+  }
+]
