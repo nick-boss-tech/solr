@@ -1,6 +1,6 @@
 # Pool assignment: Reproduce SOLR-8380 (CollectionsAPIDistributedZkTest 500 on proxied request), round 1
 
-Status: CLAIMED (claims/pool-skip-repro-8380-round-1.md, vm5, 2026-10-18T05:01:39Z)
+Status: DONE 2026-10-18 (vm5, claims/pool-skip-repro-8380-round-1.md; deliverable reports/2026-10-18-skip-repro/D1-8380.md; no failure in 2 runs at 498a09aea9)
 
 - Slug: `pool-skip-repro-8380-round-1`.
 - Capability tags: sweep, review.
