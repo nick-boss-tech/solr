@@ -1,5 +1,18 @@
 # Merged PR follow-up promises, ledger, round 1
 
+## Pass dated 2026-10-18, vm5 (07:06Z recurrence check, pass d)
+
+Claim: `claims/pool-vm5-merged-pr-followup-promises-round-1-d.md`. Read-only: GitHub API reads, `ls-remote` on the fork, and public Apache JIRA reads. Nothing posted, filed or edited. No PR has merged since #5027 (2026-10-17T00:24Z), so this pass re-checks states without adding entries.
+
+Counts for this pass: merged PRs 10 (re-derived with the search API, `is:merged`), promises found in merged bodies 3, discharged 0, open 3, not yet due 0.
+
+Checked this pass:
+
+- Merged set unchanged at 10. The promise lines in the bodies of #4953, #5001 and #5070 were re-read and match the ledger verbatim.
+- Open PRs #5004, #5061, #5088, #5089, #5090, #5100 and #5104 are still open, heads unchanged from pass c (#5088 at `6914eae1c2ed`).
+- Fork heads unchanged: `solr-18317-server-submit` `ae918a03fa7b`, `solr-17393-submit` `626241e647e5`, `solr-9637-submit` `c50fa4ffd932`, `solr-9865-submit` `4937608bb181`, `solr-16130-test-followup` `3c48dec4b79f`, `solr-4841-langid-followup-submit` `bf1b01d0dc`. `solr-13059-submit` is still absent.
+- JIRA states unchanged: SOLR-4841 Open, SOLR-16130 Open, SOLR-18317 Resolved (Fixed), SOLR-17393 Open, SOLR-9637 Open, SOLR-18532 Open, SOLR-18119 Open, SOLR-13059 Open, SOLR-9865 Open, SOLR-18549 Open, SOLR-15823 Open.
+
 ## Pass dated 2026-10-18, vm5 (07:02Z recurrence check, pass c)
 
 Claim: `claims/pool-vm5-merged-pr-followup-promises-round-1-c.md`. Read-only: GitHub API reads, `ls-remote` on the fork, and public Apache JIRA reads. Nothing posted, filed or edited. No PR has merged since #5027 (2026-10-17T00:24Z), so this pass re-checks states without adding entries.
