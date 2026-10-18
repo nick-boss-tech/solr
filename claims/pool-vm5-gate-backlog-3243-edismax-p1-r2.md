@@ -1,7 +1,7 @@
 # Claim: pool-vm5-gate-backlog-3243-edismax-p1-r2
 
 - Claimant host: vm5, matching a file in `hosts/`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: DONE 2026-10-18T20:24:06Z. Deliverables: `receipts/SOLR-3243.md`, `gates/SOLR-3243-edismax-p1.md` (Status line).
 - Job or assignment: `gates/SOLR-3243-edismax-p1.md` (HANDED; this claim takes it under the rule that HANDED is not a host restriction).
 - Slice: steps 4 and 5 of the job, plus the decision on the step 3 proof leg.
 - Capability tags used: gate.
