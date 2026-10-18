@@ -17,7 +17,7 @@ This file is the job for every pool Linux host. The scheduled task reads it from
 
 ## Pick work
 
-4. Find your live claim: a file in `claims/` that names your host and has no `DONE:` line. If there is one, do its next step. Heartbeat only if the last heartbeat is more than an hour old.
+4. Find your live claim: a file in `claims/` that names your host and has neither a `DONE:` line nor a `STALE:` line. If there is one, do its next step. Heartbeat only if the last heartbeat is more than an hour old.
 5. If there is no live claim, take the first `assignments/*.md` in filename order that has `Status: OPEN`, names any pool Linux host as its intended host, and lists tags that appear in `hosts/pool-linux.md`, and that has no live claim. Items marked for vm1 only or `Status: HANDED` go only to vm1; other hosts skip them.
 6. Write `claims/<assignment slug>.md` from `pool/templates/claim.md`. In the same commit, set the assignment to `Status: CLAIMED`. Commit as Nick Shanin with no trailers and push fast-forward. If the push is rejected, fetch, rebase, re-read the branch, and stand down.
 

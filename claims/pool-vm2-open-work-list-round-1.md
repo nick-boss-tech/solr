@@ -9,3 +9,5 @@ Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linke
 - Status: HANDED OFF to vm1 (2026-10-16T17:07Z), see assignments/pool-vm2-handoff-to-vm1-round-2.md
 
 - 2026-10-16T17:07Z vm2 wind-down: handed to vm1 under assignments/pool-vm2-handoff-to-vm1-round-2.md (no further vm2 work on this claim).
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

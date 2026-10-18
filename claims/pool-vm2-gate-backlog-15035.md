@@ -8,3 +8,5 @@ Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 h
 - Capability tags: gate.
 - Runner: gates/g15035-gate.sh, worktree /workspace/gates/solr-15035-base (detached at the merge-base). The worktree's production and test files are swapped between the two runs; no code commit, no fork push.
 - Status: RUN ENDED 2026-10-13T06:30Z, gate log logs/vm2/queue-g15035-gate-20261013T060752Z.out. Base run rc=1 (expected premise failure: `expected:<2> but was:<null>`, tests=1 failures=1). Banked-patch-alone run rc=0 (tests=3 failures=0). Receipt section written and job DONE by vm2 on 2026-10-13T08:05Z from the GATE END log; the claim is DONE.
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

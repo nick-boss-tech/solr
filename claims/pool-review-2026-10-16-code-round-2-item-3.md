@@ -9,3 +9,5 @@ Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linke
 - Scope: a short per-query list from a shard (fewer entries than sub-queries) must not reach docList.get(queryIndex) in CombinedQueryComponent.mergeIds; a regression test for that shape; the focused test run at head and at the patch. The max-versus-sum choice is recorded in the output file.
 - Output: reports/2026-10-16-pr-batch/SOLR-18541-check.md.
 - Heartbeat: 2026-10-17T04:20Z (claim).
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

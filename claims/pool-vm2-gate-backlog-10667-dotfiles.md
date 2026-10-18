@@ -17,3 +17,5 @@ Status: CLOSED 2026-10-17 (linked job gates/SOLR-10667-dotfiles.md: Status: DONE
 Status: STALE (vm2 audit, 2026-10-16T00:57Z). The run ended 2026-10-15 and its record is incomplete (cause not recorded). Still owed under claims/pool-vm2-open-work-list-round-1.md (section A item 4); not being worked yet.
 
 - 2026-10-16T17:07Z vm2 wind-down: handed to vm1 under assignments/pool-vm2-handoff-to-vm1-round-2.md (no further vm2 work on this claim).
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

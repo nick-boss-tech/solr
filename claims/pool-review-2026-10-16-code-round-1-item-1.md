@@ -9,3 +9,5 @@ Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linke
 - Deliverable: reports/2026-10-16-pr-batch/SOLR-10424-check.md.
 
 Heartbeat: 2026-10-17T04:20Z (claim).
+
+DONE: reports/2026-10-16-pr-batch/SOLR-10424-check.md (marked by vm2, 2026-10-18)

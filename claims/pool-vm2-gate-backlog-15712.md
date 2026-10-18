@@ -14,3 +14,5 @@ Heartbeat: 2026-10-14T13:03:00Z.
 Status: GATE FAILED at head 2d65ed6329 (focused-head rc=1, 4 of 5 TestCollationFieldUDVAS tests failed). Recorded 2026-10-14T13:37Z in gates/SOLR-15712-udvas-version-gate.md. Not relaunched; left for the main agent.
 
 Status: ESCALATED to the main agent (vm2 audit, 2026-10-16T00:56Z). Focused head run failed (4 of 5 TestCollationFieldUDVAS); not relaunched.
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

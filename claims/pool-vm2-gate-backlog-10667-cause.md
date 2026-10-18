@@ -9,3 +9,5 @@ Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linke
 - Status: BLOCKED (2026-10-16T05:59Z). Steps 1 and 1b run at 9ce9ef1db5e9. The file is absent from the module packaging output and the distribution, but the rule that feeds the module's example directory was not located; no branch change. Record in gates/SOLR-10667-dotfiles-cause.md.
 
 - 2026-10-16T17:07Z vm2 wind-down: handed to vm1 under assignments/pool-vm2-handoff-to-vm1-round-2.md (no further vm2 work on this claim).
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

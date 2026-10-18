@@ -10,3 +10,5 @@ Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 h
 - Heartbeat: 2026-10-13T19:35:37Z by vm2.
 - Status: CLAIMED.
 - 2026-10-13T19:52Z DONE (vm2 coordinator): GATE GREEN at e99be67c9a6f (GATE END 19:51:22Z). Focused 17 of 17 from fresh JUnit XML, module check rc=0. Deliverables: receipts/SOLR-18010.md (section "Review round 1 check (G3)"), gates/SOLR-18010-review-r1-g3.md (DONE).
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

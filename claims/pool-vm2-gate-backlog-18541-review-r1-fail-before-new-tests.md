@@ -7,3 +7,5 @@ Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 h
 - Capability tags: gate.
 - Runner: /workspace/gates/g18541-review-r1-fail-before-new-tests.sh, worktree /workspace/gates/solr-18541-failbefore (detached). Log: logs/vm2/18541-review-r1-failbefore-*.log.
 - Status: FAILED (finding), not DONE. Runner queued 2026-10-13T22:46Z; run 22:53Z to 22:59Z. Focused rc=1 with 8 of 10 failing as the premise records; the two new tests `skippedPartialShardWithoutCountClearsExactness` and `skippedPartialShardWithoutHitsClearsExactness` PASSED on the merge-base production, which the job treats as a finding. Recorded in gates/SOLR-18541-review-r1-fail-before-new-tests.md (Run record). Not relaunched; left for the main agent.
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

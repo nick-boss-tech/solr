@@ -5,3 +5,5 @@
 - Source changes: none. No builds, cleanup, or lock changes.
 - Started: 2026-10-18T03:00Z. Heartbeat: 2026-10-18T03:00Z (claim).
 - Status: DONE (2026-10-18T03:10Z), numbers in reports/host-resource-census-round-1.md. Gradle cache sizes not measured (du timed out on the NFS mount).
+
+DONE: reports/host-resource-census-round-1.md (vm2 section) (marked by vm2, 2026-10-18)

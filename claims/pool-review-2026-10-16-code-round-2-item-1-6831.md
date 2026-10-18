@@ -9,3 +9,5 @@ Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linke
 - Deliverable: reports/2026-10-16-pr-batch/SOLR-6831-round-2-check.md.
 
 Heartbeat: 2026-10-17T04:25Z (claim).
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

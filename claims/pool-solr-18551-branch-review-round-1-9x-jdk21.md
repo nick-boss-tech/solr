@@ -10,3 +10,5 @@ Heartbeat: 2026-10-17T19:25Z (claim).
 - 2026-10-17T19:20Z: RELEASED by vm4. Nick directed vm2 to run the JDK 21 head leg instead. vm4 did not run it; a local start was stopped before any results.
 - 2026-10-17T19:36Z: JDK 21 head leg GREEN at d8f96dfeea. IndexFetcherTest 3 of 3 (fresh XML 19:35:55Z). Recorded in reports/SOLR-18551-branch-review-round-1.md.
 - Status: DONE (2026-10-17T19:36Z).
+
+DONE: reports/SOLR-18551-branch-review-round-1.md (9x JDK 21 head leg) (marked by vm2, 2026-10-18)

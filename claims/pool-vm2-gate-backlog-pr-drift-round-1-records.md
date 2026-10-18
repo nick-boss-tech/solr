@@ -17,3 +17,5 @@ Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linke
 - Failure, 2026-10-13T09:50Z: item (c) base leg `18178-base` rc=1 at compileTestJava (24 errors; no tests ran). Recorded in the job file; not relaunched; left for the main side.
 
 - 2026-10-13T18:49Z vm2 gate backlog coordinator: PARKED for the main agent; no runner live. Item (a): the SOLR-18280 record run passed the head at 25 of 25 (0da92abd9e96, seed 18280C0FFEE18280; receipts/SOLR-18280.md), which records the 12:55Z head failure as a flake. Items (b) and (c) need the main side to quote the sentences named for cutting (receipts/SOLR-7394.md, receipts/SOLR-18178.md). Item (d) recorded (receipts/SOLR-11431.md). Not relaunched; the claim stays with vm2 until the main side decides.
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.

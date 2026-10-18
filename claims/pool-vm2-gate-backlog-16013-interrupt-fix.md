@@ -9,3 +9,5 @@ Status: CLOSED 2026-10-17 (batch close approved by Nick; no heartbeat within 2 h
 - Runner: gates/g16013-interrupt-fix-gate.sh, worktree /workspace/gates/solr-16013-interrupt-gate (detached), log under logs/vm2/.
 - Heartbeat: refresh hourly; staleness rule 2 hours.
 - Status: FAILED at ecda7b862ba (vm2, 2026-10-13T16:50Z). Focused run rc=1: `testZkClientClosesOnlyAfterOverseerCloseCompletes` failed with "no node is running the overseer" (seed C3E3D7F50937D13C). Pre-fix proof NOT_PROVEN. Not relaunched; left for the main agent. Not closed as DONE; no receipt.
+
+STALE: no live work by vm2 since 2026-10-18; marked by the vm2 coordinator so the pool tick does not resume it. Work not finished, see the job or assignment file.
