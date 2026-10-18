@@ -1,6 +1,6 @@
 # Gate job: SOLR-3243 (edismax unfielded inclusive range, patch P1)
 
-Status: CLAIMED (claims/pool-vm5-gate-backlog-3243-edismax-p1.md, vm5, 2026-10-18T08:24:58Z)
+Status: HANDED (vm5, claims/pool-vm5-gate-backlog-3243-edismax-p1.md, 2026-10-18T08:47:19Z): the step 3 proof leg failed in the wrong shape, four failures instead of the one expected. The leg reverted the parser to `97d973814336`, which also removes the widening from `24f09dc007`, so three existing tests fail with it. The main side must choose the proof-leg base (see the claim) before the gate runs again from step 3.
 
 - Branch: `solr-3243-submit`. Head: `a07674262eee472a8faf1bfebc0a95e8e611b362` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `1db99c13662d8f827511a5d3a51763d7e1e2ee4c` (receipts/SOLR-3243.md, round 32). Merge-base with upstream/main: `97d973814336`.
@@ -41,12 +41,12 @@ If any step cannot be verified, record it here and stop.
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg, expected failure by content
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean
+- [x] step 2 Error Prone compile
+- [ ] step 3 proof leg, expected failure by content (FAILED, four failures, see the claim)
 - [ ] step 4 focused head run, counted from fresh XML
 - [ ] step 5 module check
 - [ ] receipt written
