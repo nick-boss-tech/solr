@@ -1,6 +1,6 @@
 # Pool assignment: Verify removed-feature tickets, round 2
 
-Status: CLAIMED
+Status: DONE 2026-10-18T07:23:07Z (deliverable reports/2026-10-18-skip-repro/B2-removed-round-2.md)
 
 - Slug: `pool-skip-review-removed-round-2`.
 - Capability tags: review.
