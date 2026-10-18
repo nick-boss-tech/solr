@@ -28,3 +28,6 @@ Decision: one PR. The production commits stay with the test repair (no split, no
 - Alternative: reject. Return a 400 error that names the field, instead of parsing the value.
 
 **Our recommendation:** the choices in this PR for both. Choice 1 removes a difference between the V2 and SolrJ create paths. Choice 2 uses the parser the class already has. The alternatives are reasonable if a maintainer prefers a narrower API surface.
+
+---
+Applied: 2026-10-18T01:21:53Z. Nick approved the draft in the main chat. PATCH to apache/solr PR 5088 returned 200; read-back matches the intended body (9263 characters). Before-body saved in the vm3 session only; the replaced section was "## A choice to check".
