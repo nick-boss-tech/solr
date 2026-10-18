@@ -12,4 +12,12 @@
 - Lock: `/workspace/tools/.vm4-gradle.lock` wraps `pool/bin/sweep-run.sh`, which takes `/workspace/tools/.gradle-vm4.lock` inside it, so manual and tick builds cannot overlap.
 - Source changes: none. No PR, comment, JIRA or email.
 
-Heartbeat: 2026-10-18T04:58:12Z (claim).
+Heartbeat: 2026-10-18T05:16:00Z.
+
+Result: 2026-10-18T05:00Z: first launch of `pool/bin/sweep-run.sh` at 498a09aea9, run name `chaos-5516-run1`, command `:solr:core:test --rerun --tests org.apache.solr.cloud.ChaosMonkeyNothingIsSafeTest`, under `flock /workspace/tools/.vm4-gradle.lock`. Disk before: `/` 4.5G free, 9% inodes used. Gradle compiled through `:solr:test-framework:classes` and then stopped when the session ended. No test task started, no `rc=` line, no XML. Partial log: `/workspace/gates/logs/vm4/pool-skip-repro-5516/chaos-5516-run1.log`. Not conclusive: no test ran.
+
+Result: 2026-10-18T05:15Z: relaunch refused by `sweep-run.sh` with `missing ~/.pool-host` (exit 3, before any build). `/home/claude/.pool-host` read as `vm4` earlier in this tick and is absent now. It was not recreated: cron step 0 says a missing host file means exit, and the earlier stop claim records that creating it needs the operator's go-ahead. `/workspace/tools/host-name` still reads `vm4`. No build ran in this relaunch. Disk on `/`: 4.6G free, 9% inodes used.
+
+Result: 2026-10-18T05:16Z: item 2 read. `solr/core/src/java/org/apache/solr/cloud/ShardLeaderElectionContext.java:206-219`: when `weAreReplacement && !core.readOnly`, the code calls `cancelRecovery()` and then `Thread.sleep(2500)` (line 209), then runs `syncStrategy.sync(...)` (line 219). Nothing in this path waits for in-flight updates from the old leader to finish; the sleep is the only explicit wait before the sync.
+
+STOPPED: `~/.pool-host` is missing, so the tick cannot run per cron step 0. Operator action: restore `~/.pool-host` with `vm4`, or give the go-ahead to create it. Resume with: `flock /workspace/tools/.vm4-gradle.lock bash -c 'source /workspace/tools/vm4-env.sh && cd /workspace/worktrees/pool-vm4 && pool/bin/sweep-run.sh /workspace/worktrees/pool-skip-repro-5516 /workspace/gates/logs/vm4/pool-skip-repro-5516 chaos-5516-run1 :solr:core:test --rerun --tests org.apache.solr.cloud.ChaosMonkeyNothingIsSafeTest'`. The worktree at `/workspace/worktrees/pool-skip-repro-5516` is kept at the pinned head.
