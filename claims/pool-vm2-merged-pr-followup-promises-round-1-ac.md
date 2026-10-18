@@ -1,10 +1,14 @@
 # Claim: pool-vm2-merged-pr-followup-promises-round-1-ac
 
 - Claimant host: vm2, matching a file in `hosts/` (`hosts/vm2.md`).
-- Status: ACTIVE.
+- Status: DONE 2026-10-18T15:19Z (pass ac).
 - Job or assignment: `assignments/pool-merged-pr-followup-promises-round-1.md` (recurring; this pass is the merged-set check only).
 - Slice: the merged-set check of the recurring assignment.
 - Capability tags used: review.
 - Started: 2026-10-18T15:18:47Z (UTC).
 
 Heartbeat: 2026-10-18T15:18:47Z
+
+Result: 2026-10-18T15:19Z: merged set re-derived from the authenticated search API (`repo:apache/solr is:pr is:merged author:nick-boss-tech`, 10 results: #4939, #4953, #4959, #4965, #4995, #5001, #5012, #5027, #5062, #5070), same set as pass ab, latest merge #5027 2026-10-17T00:24:06Z. #5061 still open at 660faedd026d. Trigger for a new round (a merge after #5027) has not fired. Ledger unchanged.
+
+DONE: 2026-10-18T15:19Z. Deliverables: `assignments/pool-merged-pr-followup-promises-round-1.md` (status line only).
