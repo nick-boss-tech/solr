@@ -1,6 +1,6 @@
 # Pool assignment: Reproduce non-flake tickets with named test classes, round 1
 
-Status: CLAIMED
+Status: DONE 2026-10-18 by vm5. Deliverable: reports/2026-10-18-skip-repro/A3-other-round-1.md
 
 - Slug: `pool-skip-repro-other-round-1`.
 - Capability tags: sweep.
