@@ -1,6 +1,6 @@
 # Gate job: SOLR-3243 (edismax unfielded inclusive range, patch P1)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm5-gate-backlog-3243-edismax-p1.md, vm5, 2026-10-18T08:24:58Z)
 
 - Branch: `solr-3243-submit`. Head: `a07674262eee472a8faf1bfebc0a95e8e611b362` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `1db99c13662d8f827511a5d3a51763d7e1e2ee4c` (receipts/SOLR-3243.md, round 32). Merge-base with upstream/main: `97d973814336`.
