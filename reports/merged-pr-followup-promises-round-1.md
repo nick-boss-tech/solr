@@ -1,5 +1,18 @@
 # Merged PR follow-up promises, ledger, round 1
 
+## Pass dated 2026-10-18, vm5 (16:38Z recurrence check, pass k)
+
+Claim: `claims/pool-vm5-merged-pr-followup-promises-round-1-f.md`. Read-only: GitHub API reads, `ls-remote` on the fork, and JIRA REST reads. Nothing posted, filed or edited.
+
+Counts for this pass: merged PRs 10 (re-derived with the search API, `is:pr is:merged author:nick-boss-tech`, same set as pass j; latest #5027 merged 2026-10-17T00:24:06Z). Promises found in merged bodies 3, discharged 0, open 3, not yet due 1. No PR has merged since pass j.
+
+Checked this pass:
+
+- Open PRs: #5004 `3c48dec4b79f`, #5061 `660faedd026d`, #5088 `6914eae1c2ed`, #5090 `1e8d2b0075d7`, #5100 `7dfd3d98d0a2`, #5104 `a3b1ea7994d9`, all still open at the heads recorded in pass j. #5089 moved from `ca443f6f6806` to `33fa8d13819a` (pushed 2026-10-18T16:36:33Z to `solr-13943-submit`: a merge of the SOLR-13696 head with the SOLR-13059 test fix). It is still open. None of the ledger's open or not-yet-due promises is about #5089, so the move discharges nothing.
+- Fork heads unchanged from pass j: `solr-4841-langid-followup-submit` `bf1b01d0dc0e`, `solr-18317-server-submit` `ae918a03fa7b`, `solr-18317-ready` `c5d63b1a67c1`, `solr-16130-test-followup` `3c48dec4b79f`, `solr-9865-submit` `4937608bb181`, `solr-17393-submit` `626241e647e5`, `solr-9637-submit` `c50fa4ffd932`. `solr-13059-submit` is still absent.
+- JIRA states re-read this pass: SOLR-4841 Open, SOLR-18549 Open, SOLR-18317 Resolved, SOLR-17393 Open, SOLR-9637 Open, SOLR-18532 Open, SOLR-18119 Open, SOLR-13059 Open, SOLR-9865 Open, SOLR-13943 Open. Unchanged from pass j.
+- Open promises (SOLR-4841 follow-up, SOLR-18549 server-side promise, #4953) and the not-yet-due SOLR-17393/9637 item are unchanged in state, with the discharge paths as recorded in pass g.
+
 ## Pass dated 2026-10-18, vm2 (12:57Z recurrence check, pass j)
 
 Claim: `claims/pool-vm2-merged-pr-followup-promises-round-1-l.md`. Read-only: GitHub API reads, `ls-remote` on the fork, and JIRA REST reads. Nothing posted, filed or edited. Host id from `/workspace/.pool-host`.
