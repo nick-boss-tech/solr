@@ -27,4 +27,6 @@ The shared proxy code (`RemoteRequestProxy.validateNodeNames` and `GenericV1Requ
 
 ## The choice
 
-The question for the maintainer: should a broadcast selector in standalone mode mean "this node" (`nodes=all` on the logging and system-info endpoints), or should every node selector be rejected with 400 outside SolrCloud as it is for metrics? This change takes the first option for the three broadcast endpoints and the second for metrics.
+Options considered for a broadcast selector in standalone mode: (a) `nodes=all` means "this node", as the ticket's expected behavior states for the logging and system-info endpoints; (b) reject every node selector with 400 outside SolrCloud, as `/admin/metrics` does. This change takes (a) for the three broadcast endpoints and (b) for `/admin/metrics`. The ticket's expected behavior sets both, so the split follows it.
+
+Not changed here: the V2 logging endpoint (`/api/node/logging/levels`) still returns 400 for `nodes` in standalone mode (SOLR-15823). The ticket leaves whether it should answer `nodes=all` locally open, and this PR does not decide it.

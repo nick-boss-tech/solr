@@ -1,6 +1,6 @@
 # Decision ladder (proposed revision, 2026-10-18)
 
-Status: PROPOSED. Not yet in force. Written from the gate and review records of 2026-10-18 (SOLR-3243, SOLR-14913, SOLR-18549, SOLR-4841). Once Nick approves it, `pool/cron-prompt.md` step 7 points here.
+Status: IN FORCE (approved by Nick, 2026-10-18T21:15:06ZZ). Written from the gate and review records of 2026-10-18 (SOLR-3243, SOLR-14913, SOLR-18549, SOLR-4841). `pool/cron-prompt.md` step 7 points here.
 
 The ladder is for a decision inside a claim: a choice the claimant could make without the owner. Go down the rungs in order, and stop at the first rung that settles the question. Record the rung used in the claim.
 
