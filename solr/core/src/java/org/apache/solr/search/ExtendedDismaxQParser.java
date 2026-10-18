@@ -735,10 +735,11 @@ public class ExtendedDismaxQParser extends QParser {
   }
 
   /**
-   * Whether a clause is a standalone "match all" query: nothing but a {@code *:*} term, wrapped in
-   * any number of parentheses, with an optional leading {@code +} or {@code -} and an optional
-   * trailing boost. A {@code *:*} glued to other text in the clause, such as {@code foo(*:*)bar} or
-   * {@code (*:*)foo}, is not standalone, so its colon is escaped like any other colon.
+   * Whether a clause is a standalone "match all" query: a {@code *:*} term with any leading {@code
+   * (}, {@code +}, or {@code -} characters, then any closing {@code )} characters and an optional
+   * plain-number boost. Parentheses are not counted, so an unbalanced clause such as {@code (*:*}
+   * is accepted; the grammar then rejects it and the query falls back to the escaped parse. A
+   * {@code *:*} glued to other text, such as {@code foo(*:*)bar}, is not standalone.
    */
   private static boolean isStandaloneMatchAll(String raw) {
     int pos = 0;

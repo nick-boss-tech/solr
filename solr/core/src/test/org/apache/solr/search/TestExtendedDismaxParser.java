@@ -204,9 +204,9 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         assertThat(parsed.toString().replace("*\\:*", ""), not(containsString("*:*")));
       }
     }
-    // a malformed boost or extra closing parens on a standalone match-all are accepted by the
-    // helper and then fail in the Lucene grammar, hitting the same escape-and-reparse fallback
-    // as any other malformed input; parsing must not throw
+    // a malformed boost makes the helper reject the clause, so its colon is escaped; extra closing
+    // parens are accepted by the helper and then rejected by the grammar. Either way the query
+    // parses without throwing
     for (String q : Arrays.asList("*:*^abc", "*:*)))")) {
       try (SolrQueryRequest req = req("qf", "name title subject text")) {
         assertNotNull(QParser.getParser(q, "edismax", req).getQuery());
