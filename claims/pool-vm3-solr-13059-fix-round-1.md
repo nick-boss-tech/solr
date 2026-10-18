@@ -63,3 +63,14 @@ Push: solr-13696-submit fast-forwarded da4fa6df11 to 6914eae1c2 (the live PR 508
 Open for Nick: Q1 option A weakens the proof in the run where creation wins the race (flagged, see decisions above). reports/solr-13059-diagnosis-round-1.md is still missing from the tree. Shared pool/bin/sweep-run.sh XML copy bug and its ~/.pool-env dependency are in receipts/SOLR-13059.md. The takeover log line was not appended (file not on vm3).
 
 DONE: 2026-10-18. Head 6914eae1c2 (solr-13696-submit). Annotation removed: yes (class-level). Run counts: awaitsfix seed set 6 of 6 runs green (7 tests each, 0 failures); normal mode focused classes green (TimeRouted 14 with 2 method-level skips, CategoryRouted 12, DimensionalRouted 4, CreateAliasAPITest 26; 0 failures). Deliverables: receipts/SOLR-13059.md, receipts/SOLR-13696.md (refreshed), assignments/pool-solr-13059-fix-round-1.md (DONE), this claim.
+
+## Q1 closed at rung 1 of the decision ladder (2026-10-18, after the operator's request)
+
+- Question: does the bounded either-or check in `concurrentUpdates` (the mid-creation snapshot) let a regression pass, where preemptive creation never runs?
+- Rung 1, code read at `solr-13696-submit` 6914eae1c2:
+  - `concurrentUpdates` is called only from `testPreemptiveCreation`, at `TimeRoutedAliasUpdateProcessorTest.java` lines 354 and 366. It is not called anywhere else.
+  - After the worker threads are joined, `testPreemptiveCreation` requires the collection to exist, with `waitColAndAlias(alias, TRA, "2017-10-26", numShards)` and the same for `alias2` (lines 395 and 396). `waitColAndAlias` (`RoutedAliasUpdateProcessorTest.java` lines 84 to 98) fails the test if the alias does not list the collection within 10 seconds. The `waitCol` call it makes first is defined in another file that I did not read.
+  - `checkPreemptiveCase1` (lines 740 to 760) then asserts that `2017-10-27` is absent and that the count is 4, after a 5-second sleep.
+- Finding: a regression where preemptive creation never runs fails at line 395 or 396, so the either-or check does not let it pass. The duplicate-creation guard, which the test comment at lines 34 to 37 describes, is checked by `checkPreemptiveCase1`, not by the snapshot.
+- Decision: option (a), keep the either-or check as it is. No test change and no extra wait. The ladder stops here, so no owner question is needed.
+- Scope limit: the snapshot does not prove the creation was in flight in the four-collection branch. The test does not assert that, and this change does not add it.
