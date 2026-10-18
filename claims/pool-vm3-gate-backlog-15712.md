@@ -13,3 +13,5 @@ Heartbeat: 2026-10-17T22:20:57Z (claim).
 - 2026-10-17T23:33:41Z: heartbeat. Implementation commit adfaa87733 (on cb988a2ff4, unpushed). Tidy clean on rerun (first tidy run reflowed the new test's Javadoc and invalidated that run; the amend folds that in). Error Prone compile passed. Focused run in progress at this heartbeat. Next: pre-fix proof, module check.
 
 - 2026-10-18T00:20Z: DONE. Deliverables: receipts/SOLR-15712.md, gates/SOLR-15712-udvas-version-gate.md (vm3 relaunch record), fork solr-15712-submit at 6c3d87dc98.
+
+DONE: 2026-10-18. Deliverables: receipts/SOLR-15712.md and gates/SOLR-15712-udvas-version-gate.md (vm3 relaunch record); fork solr-15712-submit at 6c3d87dc98.

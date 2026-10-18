@@ -13,3 +13,5 @@ Status: DONE 2026-10-18T02:40:21Z (assignments/pool-host-resource-census-round-1
   - Footprint: gradle-home 1.4G, worktrees 2.1G, gates 7.1M, jdk 347M. A full gate footprint was not measured in this slice.
 - Shared storage: this host's export is 127.0.0.1:/agents/om9wpuz85k/workspace. vm4 reports agents/ysyf6wtgd7 and vm5 reports agents/hg3bt762n6. The export paths differ, so /workspace is per-host storage even though every host reports device 47. vm5's lock name .vm3-gradle.lock is on vm5's own volume, so it is a naming problem only, with no contention.
 - Heartbeat: 2026-10-18T02:40:21Z (claim).
+
+DONE: 2026-10-18. Deliverable: reports/host-resource-census-round-1.md (vm3 section).

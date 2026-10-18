@@ -17,3 +17,5 @@ Heartbeat: 2026-10-17T22:20:57Z (claim).
 - 2026-10-18T00:50Z: HANDED OFF to vm1. Job, patch (gates/SOLR-16887-head-b0223fd235.patch) and host notes are in the gate file. vm3 holds no active build.
 
 - 2026-10-18: closed. vm1 gate is green and pushed. vm3 BATS blockage did not reproduce there: vm1 has lsof, which vm3 lacked. The vm3 shim test was not a reliable substitute and the JVM-stop hypothesis in the gate file is not confirmed; both are left as recorded.
+
+DONE: 2026-10-18. vm1 completed the gate (receipts/SOLR-16887.md, GREEN at a1ab4a348d44). vm3 holds no active work on this job.
