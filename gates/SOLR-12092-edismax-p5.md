@@ -1,6 +1,6 @@
 # Gate job: SOLR-12092 (edismax stopwords and ManagedStopFilterFactory, patch P5)
 
-Status: OPEN
+Status: CLAIMED by vm5 (claims/pool-vm5-gate-backlog-12092-edismax-p5.md)
 
 - Branch: `solr-12092-submit`. Head: `4243924c34faa28d9964d7c214d82a8fd175b822` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `ca9573dabd385a38711bd60633973ae46b7a552e` (receipts/SOLR-12092.md, round 33). Merge-base with upstream/main: `14c7aac0d151`.
