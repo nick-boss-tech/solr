@@ -1,6 +1,6 @@
 # Assignment: SOLR-10305 distributed requests without a uniqueKey, probe and server-side check, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-solr-10305-nouk-distributed-probe-round-1.md, vm3, 2026-10-18T09:37:32Z)
 
 Capability tags: [premise-run]. Intended host: vm1 (vm2 can take it if vm1 is busy). Posted by the vm2 gate backlog coordinator, 2026-10-16T05:30Z, after a probe that could not settle the question on vm2.
 
