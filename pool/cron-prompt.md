@@ -16,6 +16,8 @@ This file is the job for every pool Linux host. The scheduled task reads it from
 
 ## Work the claim
 
+Builds and test runs go through `pool/bin/sweep-run.sh <worktree> <log dir> <run name> <gradle args...>` from your worktree. It takes this host's lock and writes the log, the headroom record, and the test XML. Exit code 2 means the lock is held; record it and stop.
+
 7. Work the assignment item by item. Each Decisions row is binding. Where a row says escalate, record it in the claim and stop that item.
 8. After every build or test run, write a Result line in the claim: the command, the head sha, pass or fail, the seed, the log path, and whether the result is conclusive, with the reason.
 9. If a result is not conclusive, gather more information: read the code, the git history (`git log -S`, `git blame`, the test's own history), and the ticket. Pick a different build or test variant that separates the explanations, run it, and record that attempt as well.
