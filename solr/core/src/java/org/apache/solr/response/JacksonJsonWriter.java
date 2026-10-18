@@ -19,14 +19,23 @@ package org.apache.solr.response;
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import org.apache.solr.common.PushWriter;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.util.JsonTextWriter;
+import org.apache.solr.common.util.NamedList;
+import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.search.ReturnFields;
 
 /** A JSON ResponseWriter that uses jackson. */
 public class JacksonJsonWriter extends BinaryResponseWriter {
@@ -66,34 +75,57 @@ public class JacksonJsonWriter extends BinaryResponseWriter {
   public static class WriterImpl extends JSONWriter {
 
     protected JsonGenerator gen;
+    private final DefaultPrettyPrinter prettyPrinter;
+    private final boolean arrntv;
+    private boolean writeTypeAndValueKey = false;
 
     public WriterImpl(
         JsonFactory j, OutputStream out, SolrQueryRequest req, SolrQueryResponse rsp) {
       super(null, req, rsp);
       try {
         gen = j.createGenerator(out, JsonEncoding.UTF8);
-        if (doIndent) {
-          gen.setPrettyPrinter(pretty.createInstance());
-        }
       } catch (IOException e) {
         throw new RuntimeException(e);
+      }
+      arrntv = JsonTextWriter.JSON_NL_ARROFNTV.equals(getNamedListStyle());
+      if (doIndent) {
+        prettyPrinter = pretty.createInstance();
+        gen.setPrettyPrinter(prettyPrinter);
+      } else {
+        prettyPrinter = null;
       }
     }
 
     @Override
     public void writeResponse() throws IOException {
       if (wrapperFunction != null) {
-        writeStrRaw(null, wrapperFunction + "(");
+        if (arrntv) {
+          gen.writeRaw(wrapperFunction + "(");
+        } else {
+          writeStrRaw(null, wrapperFunction + "(");
+        }
       }
-      super.writeNamedList(null, rsp.getValues());
+      if (arrntv) {
+        writeNamedListAsMapWithDups(rsp.getValues());
+      } else {
+        writeNamedList(null, rsp.getValues());
+      }
       if (wrapperFunction != null) {
-        writeStrRaw(null, ")");
+        if (arrntv) {
+          gen.writeRaw(")");
+        } else {
+          writeStrRaw(null, ")");
+        }
       }
       gen.close();
     }
 
     @Override
     public void writeNumber(String name, Number val) throws IOException {
+      if (arrntv) {
+        writeArrntvNumber(val);
+        return;
+      }
       if (val instanceof Integer) {
         gen.writeNumber(val.intValue());
       } else if (val instanceof Long) {
@@ -118,37 +150,161 @@ public class JacksonJsonWriter extends BinaryResponseWriter {
 
     @Override
     public void writeBool(String name, Boolean val) throws IOException {
+      ifNeededWriteTypeAndValueKey("bool");
       gen.writeBoolean(val);
     }
 
     @Override
     public void writeNull(String name) throws IOException {
+      ifNeededWriteTypeAndValueKey("null");
       gen.writeNull();
     }
 
     @Override
     public void writeStr(String name, String val, boolean needsEscaping) throws IOException {
-      gen.writeString(val);
+      ifNeededWriteTypeAndValueKey("str");
+      if (arrntv && (val.indexOf('\u2028') >= 0 || val.indexOf('\u2029') >= 0)) {
+        gen.writeRawValue(escapeLineSeparators(val));
+      } else {
+        gen.writeString(val);
+      }
+    }
+
+    private static String escapeLineSeparators(String val) {
+      String quoted = new String(JsonStringEncoder.getInstance().quoteAsString(val));
+      return "\"" + quoted.replace("\u2028", "\\u2028").replace("\u2029", "\\u2029") + "\"";
     }
 
     @Override
     public void writeLong(String name, long val) throws IOException {
+      ifNeededWriteTypeAndValueKey("long");
       gen.writeNumber(val);
     }
 
     @Override
     public void writeInt(String name, int val) throws IOException {
+      ifNeededWriteTypeAndValueKey("int");
       gen.writeNumber(val);
     }
 
     @Override
     public void writeBool(String name, boolean val) throws IOException {
+      ifNeededWriteTypeAndValueKey("bool");
       gen.writeBoolean(val);
     }
 
     @Override
     public void writeFloat(String name, float val) throws IOException {
+      ifNeededWriteTypeAndValueKey("float");
       gen.writeNumber(val);
+    }
+
+    @Override
+    public void writeNamedList(String name, NamedList<?> val) throws IOException {
+      if (!arrntv) {
+        super.writeNamedList(name, val);
+        return;
+      }
+      ifNeededWriteTypeAndValueKey("lst");
+      if (val instanceof SimpleOrderedMap) {
+        super.writeNamedList(name, val);
+        return;
+      }
+      final int sz = val.size();
+      writeArrayOpener(sz);
+      for (int i = 0; i < sz; i++) {
+        final String elementName = val.getName(i);
+        final Object elementVal = val.getVal(i);
+        writeMapOpener(-1);
+        writeKey("name", false);
+        writeVal(null, elementName);
+        writeTypeAndValueKey = true;
+        writeVal(null, elementVal);
+        if (writeTypeAndValueKey) {
+          throw new IllegalStateException(
+              "writeTypeAndValueKey should have been reset to false by writeVal('"
+                  + elementName
+                  + "','"
+                  + elementVal
+                  + "')");
+        }
+        writeMapCloser();
+      }
+      writeArrayCloser();
+    }
+
+    @Override
+    public void writeMap(String name, Map<?, ?> val, boolean excludeOuter, boolean isFirstVal)
+        throws IOException {
+      ifNeededWriteTypeAndValueKey("map");
+      super.writeMap(name, val, excludeOuter, isFirstVal);
+    }
+
+    @Override
+    public void writeArray(String name, List<?> l, boolean raw) throws IOException {
+      ifNeededWriteTypeAndValueKey("array");
+      super.writeArray(name, l, raw);
+    }
+
+    @Override
+    public void writeArray(String name, Object[] val, boolean raw) throws IOException {
+      ifNeededWriteTypeAndValueKey("array");
+      super.writeArray(name, val, raw);
+    }
+
+    @Override
+    public void writeArray(String name, Iterator<?> val, boolean raw) throws IOException {
+      ifNeededWriteTypeAndValueKey("array");
+      super.writeArray(name, val, raw);
+    }
+
+    @Override
+    public void writeArray(String name, Iterator<?> val, int size, boolean raw) throws IOException {
+      ifNeededWriteTypeAndValueKey("array");
+      super.writeArray(name, val, size, raw);
+    }
+
+    @Override
+    public void writeSolrDocument(String name, SolrDocument doc, ReturnFields returnFields, int idx)
+        throws IOException {
+      ifNeededWriteTypeAndValueKey("doc");
+      super.writeSolrDocument(name, doc, returnFields, idx);
+    }
+
+    @Override
+    public void writeStartDocumentList(
+        String name, long start, int size, long numFound, Float maxScore, Boolean numFoundExact)
+        throws IOException {
+      ifNeededWriteTypeAndValueKey("doclist");
+      super.writeStartDocumentList(name, start, size, numFound, maxScore, numFoundExact);
+    }
+
+    private void ifNeededWriteTypeAndValueKey(String type) throws IOException {
+      if (writeTypeAndValueKey) {
+        writeTypeAndValueKey = false;
+        gen.writeFieldName("type");
+        gen.writeString(type);
+        gen.writeFieldName("value");
+      }
+    }
+
+    private void writeArrntvNumber(Number val) throws IOException {
+      if (val instanceof Integer || val instanceof Short || val instanceof Byte) {
+        ifNeededWriteTypeAndValueKey("int");
+        gen.writeNumber(val.intValue());
+      } else if (val instanceof Long) {
+        ifNeededWriteTypeAndValueKey("long");
+        gen.writeNumber(val.longValue());
+      } else if (val instanceof Float) {
+        ifNeededWriteTypeAndValueKey("float");
+        gen.writeNumber(val.floatValue());
+      } else if (val instanceof Double) {
+        ifNeededWriteTypeAndValueKey("double");
+        gen.writeNumber(val.doubleValue());
+      } else {
+        ifNeededWriteTypeAndValueKey("str");
+        gen.writeString(val.getClass().getName() + ':' + val.toString());
+      }
     }
 
     @Override
@@ -228,11 +384,15 @@ public class JacksonJsonWriter extends BinaryResponseWriter {
 
     @Override
     public void writeStrRaw(String name, String val) throws IOException {
+      if (writeTypeAndValueKey) {
+        throw new IllegalStateException("NamedList should never be a field value");
+      }
       gen.writeRawValue(val);
     }
 
     @Override
     public void writeDate(String name, String val) throws IOException {
+      ifNeededWriteTypeAndValueKey("date");
       gen.writeString(val);
     }
   }
