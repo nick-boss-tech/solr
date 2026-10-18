@@ -1,4 +1,4 @@
-title: edismax field aliases now skip targets that are missing from the schema instead of failing the whole query; an alias with no usable target matches nothing
+title: edismax field aliases now skip targets that are missing from the schema instead of re-parsing the query with escaped characters; an alias with no usable target matches nothing
 type: fixed
 authors:
   - name: Nick Shanin

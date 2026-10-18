@@ -1028,6 +1028,9 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
             "f.myalias.qf",
             "nosuchfield alsobad"),
         nor);
+    assertQ(
+        req("defType", "edismax", "q", "myalias:Zapp AND name:Zapp", "f.myalias.qf", "nosuchfield"),
+        nor);
   }
 
   public void testAliasingBoost() {
