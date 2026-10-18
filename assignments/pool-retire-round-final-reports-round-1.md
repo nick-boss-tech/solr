@@ -1,6 +1,6 @@
 # Pool assignment: retire candidates, final evidence packs, round 1
 
-Status: CLAIMED (claims/pool-vm3-retire-round-final-reports-round-1.md, vm3, 2026-10-18T07:01:19Z)
+Status: DONE 2026-10-18T07:02:03Z (vm3; claims/pool-vm3-retire-round-final-reports-round-1.md; index reports/retire-final-index.md)
 
 Capability tags: `review`. No build work. Claim under `claims/` before starting, per WORKFLOW.md.
 
