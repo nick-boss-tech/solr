@@ -1,6 +1,6 @@
 # Claim: SOLR-18551 branch validation, round 1, 9.x row (vm2)
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-solr-18551-branch-review-round-1.md: Status: OPEN)
+Status: DONE 2026-10-17 (verified by vm4 2026-10-18 (rule 6); deliverable reports/SOLR-18551-branch-review-round-1.md, 9x section; the JDK 21 base leg was run by vm4 on c135e6335c, logs/vm4/18551-9101-base2.log)
 
 - Claimant host: vm2 (Linux). Assignment: assignments/pool-solr-18551-branch-review-round-1.md (posted 09feb24c97).
 - Slice taken: the 9.x row only (head and base legs). vm2 holds one row at a time, so the 10x row is not claimed here and stays OPEN in the assignment for another host. The main row is vm4's (claims/pool-solr-18551-branch-review-round-1-main.md).

@@ -1,6 +1,6 @@
 # Pool assignment: strong review round 2, the unblocked slices
 
-Status: CLAIMED (claims/pool-strong-review-round-2-unblocked-slices.md)
+Status: OPEN (prior claim claims/pool-strong-review-round-2-unblocked-slices.md STALE since 2026-10-17; takeover allowed by WORKFLOW.md rule 4)
 
 Capability tags: `review`. No build work. Claim under `claims/` before starting, per WORKFLOW.md.
 

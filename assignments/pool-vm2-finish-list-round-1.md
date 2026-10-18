@@ -1,6 +1,6 @@
 # Assignment: vm2 finish list, round 1
 
-Status: CLAIMED (claims/pool-vm2-finish-list-round-1-a.md)
+Status: OPEN (prior claim claims/pool-vm2-finish-list-round-1-a.md STALE since 2026-10-17; takeover allowed by WORKFLOW.md rule 4)
 
 Capability tags: [push, gate, implementation]. Intended host: vm2. Posted by the main side, 2026-10-14, at Nick's direction: post an assignment for what vm2 has not finished.
 

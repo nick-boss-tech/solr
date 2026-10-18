@@ -1,6 +1,6 @@
 # Pool assignment: retire candidates, final evidence packs, round 1
 
-Status: CLAIMED (claims/pool-retire-round-final-reports-round-1.md)
+Status: OPEN (prior claim claims/pool-retire-round-final-reports-round-1.md STALE since 2026-10-17; takeover allowed by WORKFLOW.md rule 4)
 
 Capability tags: `review`. No build work. Claim under `claims/` before starting, per WORKFLOW.md.
 

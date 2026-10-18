@@ -1,6 +1,6 @@
 # Pool assignment: IOContext audit focused tests, round 1
 
-Status: OPEN
+Status: DONE 2026-10-17 (verified by vm4 2026-10-18 (rule 6); deliverable reports/ioctx-audit-test-round-1.md, claim claims/pool-solr-ioctx-audit-round-1.md; the nightly follow-up ran TestReplicationHandler 25 of 25)
 
 - Capability tags: settling-run.
 - Intended host: vm2 (Linux, Gradle toolchain). Claim under `claims/` before starting (WORKFLOW.md).

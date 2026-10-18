@@ -1,5 +1,7 @@
 # Claim: IOContext audit focused tests, round 1 (vm2)
 
+Status: DONE 2026-10-17 (verified by vm4 2026-10-18 (rule 6); deliverable reports/ioctx-audit-test-round-1.md)
+
 - Claimant host: vm2 (Linux). Assignment: assignments/pool-solr-ioctx-audit-test-round-1.md (posted 1c2c3ff2d6).
 - Slice taken: item 1, the nine focused classes on the branch head, plus failure triage on base if any class fails.
 - Capability tags used: settling-run.
