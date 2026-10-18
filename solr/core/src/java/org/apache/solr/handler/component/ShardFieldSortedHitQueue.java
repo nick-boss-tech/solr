@@ -105,7 +105,7 @@ public class ShardFieldSortedHitQueue extends PriorityQueue<ShardDoc> {
     // solve tiebreaks by comparing shards (similar to using docid)
     // smaller docid's beat larger ids, so reverse the natural ordering
     if (c == 0) {
-      c = -docA.shard.compareTo(docB.shard);
+      c = -docA.sliceName.compareTo(docB.sliceName);
     }
 
     return c < 0;

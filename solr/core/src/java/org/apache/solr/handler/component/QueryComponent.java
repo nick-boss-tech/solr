@@ -1031,6 +1031,12 @@ public class QueryComponent extends SearchComponent {
     int failedShardCount = 0;
     int failedShardCountForReRankCutoff = 0;
     NamedList<Object> reRankCutoffByShard = null;
+    Map<String, String> sliceByShard = new HashMap<>();
+    if (rb.slices != null) {
+      for (int i = 0; i < rb.slices.length; i++) {
+        sliceByShard.put(rb.shards[i], rb.slices[i]);
+      }
+    }
     for (ShardResponse srsp : sreq.responses) {
       SolrDocumentList docs = null;
       NamedList<?> responseHeader = null;
@@ -1206,6 +1212,7 @@ public class QueryComponent extends SearchComponent {
         ShardDoc shardDoc = new ShardDoc();
         shardDoc.id = id;
         shardDoc.shard = srsp.getShard();
+        shardDoc.sliceName = sliceByShard.getOrDefault(srsp.getShard(), srsp.getShard());
         shardDoc.orderInShard = i;
         Object scoreObj = doc.getFieldValue(SolrReturnFields.SCORE);
         if (scoreObj != null) {

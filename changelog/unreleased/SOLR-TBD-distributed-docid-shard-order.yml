@@ -1,0 +1,8 @@
+title: >
+  A distributed sort on _docid_ orders documents from different shards by shard, not by the replica that answered, so paging no longer repeats or skips documents.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-TBD
+    url: https://issues.apache.org/jira/browse/SOLR-TBD

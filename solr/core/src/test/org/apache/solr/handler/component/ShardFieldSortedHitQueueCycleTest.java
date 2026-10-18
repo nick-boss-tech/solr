@@ -44,6 +44,32 @@ public class ShardFieldSortedHitQueueCycleTest extends SolrTestCase {
     assertFalse(isCycle(queue, a1, a2, b1) || isCycle(queue, a1, b1, a2));
   }
 
+  @Test
+  public void testCrossShardOrderIgnoresReplicaAddress() {
+    ShardFieldSortedHitQueue queue =
+        new ShardFieldSortedHitQueue(new SortField[] {SortField.FIELD_DOC}, 10, null);
+    NamedList<List<Object>> values = new NamedList<>();
+    ShardDoc fromShard1Replica1 =
+        sliceDoc("10.0.0.1:8983/solr/c_shard1_replica_n1", "shard1", values);
+    ShardDoc fromShard1Replica2 =
+        sliceDoc("10.0.0.9:8983/solr/c_shard1_replica_n2", "shard1", values);
+    ShardDoc fromShard2 = sliceDoc("10.0.0.2:8983/solr/c_shard2_replica_n3", "shard2", values);
+    assertEquals(
+        queue.lessThan(fromShard1Replica1, fromShard2),
+        queue.lessThan(fromShard1Replica2, fromShard2));
+    assertEquals(
+        queue.lessThan(fromShard2, fromShard1Replica1),
+        queue.lessThan(fromShard2, fromShard1Replica2));
+  }
+
+  private static ShardDoc sliceDoc(String shard, String sliceName, NamedList<List<Object>> values) {
+    ShardDoc doc = new ShardDoc();
+    doc.shard = shard;
+    doc.sliceName = sliceName;
+    doc.sortFieldValues = values;
+    return doc;
+  }
+
   private static boolean isCycle(
       ShardFieldSortedHitQueue queue, ShardDoc x, ShardDoc y, ShardDoc z) {
     return queue.lessThan(x, y) && queue.lessThan(y, z) && queue.lessThan(z, x);
@@ -52,6 +78,7 @@ public class ShardFieldSortedHitQueueCycleTest extends SolrTestCase {
   private static ShardDoc shardDoc(String shard, int orderInShard, NamedList<List<Object>> values) {
     ShardDoc doc = new ShardDoc();
     doc.shard = shard;
+    doc.sliceName = shard;
     doc.orderInShard = orderInShard;
     doc.sortFieldValues = values;
     return doc;

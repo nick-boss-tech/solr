@@ -26,6 +26,7 @@ import org.apache.solr.search.SolrReturnFields;
 
 public class ShardDoc extends FieldDoc {
   public String shard;
+  public String sliceName;
   public String shardAddress; // TODO
 
   public int orderInShard;

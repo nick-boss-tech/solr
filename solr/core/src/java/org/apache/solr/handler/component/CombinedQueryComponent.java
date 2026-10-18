@@ -331,6 +331,12 @@ public class CombinedQueryComponent extends QueryComponent implements SolrCoreAw
       long queryApproximateTotalHits = 0;
       final ShardDocQueue queuePerQuery =
           newShardDocQueue(rb.req.getSearcher(), sortFields, perQueryQueueSize);
+      Map<String, String> sliceByShard = new HashMap<>();
+      if (rb.slices != null) {
+        for (int i = 0; i < rb.slices.length; i++) {
+          sliceByShard.put(rb.shards[i], rb.slices[i]);
+        }
+      }
       for (ShardResponse srsp : sreq.responses) {
         SolrDocumentList docs = null;
         NamedList<?> responseHeader;
@@ -418,6 +424,7 @@ public class CombinedQueryComponent extends QueryComponent implements SolrCoreAw
           shardDoc.id = id;
           shardDoc.orderInShard = i;
           shardDoc.shard = srsp.getShard();
+          shardDoc.sliceName = sliceByShard.getOrDefault(srsp.getShard(), srsp.getShard());
           Object scoreObj = doc.getFieldValue(SolrReturnFields.SCORE);
           if (scoreObj != null) {
             if (scoreObj instanceof String scoreStr) {
