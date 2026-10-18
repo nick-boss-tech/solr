@@ -1,8 +1,8 @@
 # Open work
 
-This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/` (regenerated 2026-10-16, from coordination tip ad5ad8cae8). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
+This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/` (regenerated 2026-10-18, from coordination tip 54a59669d6240bc5a1729180025a20c8739e9343). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
 
-Counts at generation: 6 open assignments, 2 open gate jobs, 12 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
+Counts at generation: 6 open assignments, 2 open gate jobs, 13 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
 
 ## Open assignments
 
@@ -39,6 +39,7 @@ Counts at generation: 6 open assignments, 2 open gate jobs, 12 claimed files, 5 
 - `assignments/pool-merged-pr-followup-promises-round-1.md`: claim `claims/pool-merged-pr-followup-promises-round-1.md`. Pool assignment: audit of merged PR descriptions for follow-up promises, round 1
 - `assignments/pool-retire-round-final-reports-round-1.md`: claim `claims/pool-retire-round-final-reports-round-1.md`. Pool assignment: retire candidates, final evidence packs, round 1
 - `assignments/pool-strong-review-round-2-unblocked-slices.md`: claim `claims/pool-strong-review-round-2-unblocked-slices.md`. Pool assignment: strong review round 2, the unblocked slices
+- `assignments/pool-vm1-solr18119-review-fixes-round-1.md`: claim `claims/pool-vm1-solr18119-review-fixes-round-1.md`. Pool assignment: SOLR-18119 review findings follow-up
 - `assignments/pool-vm2-finish-list-round-1.md`: claim `claims/pool-vm2-finish-list-round-1-a.md`. Assignment: vm2 finish list, round 1
 - `assignments/pool-vm2-open-work-list-round-1.md`: claim `claims/pool-vm2-open-work-list-round-1.md`. Assignment: vm2 open-work list, round 1
 - `assignments/solr-13696-fix-project.md`: claim `claims/solr-13696-fix-project.md`. Assignment: SOLR-13696 fix project (repair the re-enabled routed-alias tests)
