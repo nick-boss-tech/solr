@@ -3,7 +3,9 @@
 # Runs one Gradle build under this host's lock, writes <name>.log, <name>.headroom.log and copies new test XML to <name>.xml/.
 set -u
 W=$1; L=$2; name=$3; shift 3
-LOCK=/workspace/tools/.gradle-$(hostname -s).lock
+POOL_HOST=$(cat "$HOME/.pool-host" 2>/dev/null)
+[ -n "$POOL_HOST" ] || { echo "missing ~/.pool-host" >&2; exit 3; }
+LOCK=/workspace/tools/.gradle-$POOL_HOST.lock
 mkdir -p "$L"
 { echo "pre $(date -u +%FT%TZ) | $(df -h / | tail -1 | awk '{print $4" free"}') | $(df -i / | tail -1 | awk '{print $4" ifree"}')"; } > "$L/$name.headroom.log"
 cd "$W" || exit 1
