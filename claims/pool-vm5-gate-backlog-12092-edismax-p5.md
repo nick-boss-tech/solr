@@ -8,3 +8,7 @@
 - Started: 2026-10-18T07:53:00Z (UTC).
 
 Heartbeat: 2026-10-18T07:53:00Z. Base confirmed: `solr-12092-submit` at `4243924c34faa28d9964d7c214d82a8fd175b822` (git ls-remote, matches the job's recorded head). Prior gated head `ca9573dabd38`. Build environment: `~/.pool-env` (JAVA_HOME `/workspace/jdk/jdk-21.0.12.1+1`, GRADLE_USER_HOME `/workspace/gradle-home`). No build started yet.
+
+Result: 2026-10-18T08:05:00Z: stopped before any build. The decision row "Other seven classes" requires the nine-class focused list from `g12092r33-gate.log` or `receipts/SOLR-12092.md`. The log is not on this host (not under `/workspace/gates/logs/vm3` or `vm5`, and not in any worktree). The receipt names only `TestManagedStopFilterFactory` and `TestExtendedDismaxParser`. The git history of the receipt names no others. Head confirmed at `4243924c34faa28d9964d7c214d82a8fd175b822` before stopping. No build was run; no fork state changed.
+
+DONE: 2026-10-18T08:05:00Z. Deliverables: none. Claim closed on stop; the job is set to HANDED so the main side can supply the nine-class list.
