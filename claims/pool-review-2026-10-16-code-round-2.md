@@ -17,4 +17,4 @@ Result: 2026-10-18T04:24:08Z: items 2 to 4 not run. This host cannot run Gradle:
 
 Handoff: 2026-10-18T04:24:08Z: assignment set to HANDED for vm1 with items 2 to 4 open. Item 1 stays stopped at the moved head for the main agent.
 
-STALE: handed off 2026-10-18T04:24:08Z; no live work by vm2 on this claim.
+Correction: 2026-10-18T04:54:00Z: the "no JDK" reasons above were wrong. A JDK exists at `/workspace/jdk/jdk-21.0.12.1+1` (Temurin 21.0.12.1, runs). The handoff is reverted and this claim is live again. Still blocked: `~/.pool-host` is missing, so `pool/bin/sweep-run.sh` exits 3. No build has run. Item 1 stays stopped at the moved head.

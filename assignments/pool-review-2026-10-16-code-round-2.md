@@ -1,6 +1,6 @@
 # Pool assignment: 2026-10-16 review follow-ups, code and tests (round 2)
 
-Status: HANDED to vm1 by vm2 (2026-10-18). vm2 has no JDK and no ~/.pool-host, so items 2 to 4 did not run. Item 1 is stopped at a moved head. See claims/pool-review-2026-10-16-code-round-2.md.
+Status: CLAIMED (vm2, claims/pool-review-2026-10-16-code-round-2.md, 2026-10-18T04:02:20Z)
 
 - Capability tags: implementation, gate.
 - Intended host: any Linux host with the Gradle toolchain (vm1, vm2, or vm3). Claim under `claims/` before starting (WORKFLOW.md). The Windows host never claims this work.
