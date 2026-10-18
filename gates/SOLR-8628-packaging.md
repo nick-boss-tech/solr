@@ -1,7 +1,7 @@
 # Gate job: SOLR-8628, packaging and top-up gate
 
 - Branch: solr-8628-submit. Head: 5b606dc779d0f367d7c8ac7235988a65f092b6a4 (fork tip, verified by ls-remote 2026-10-14; matches receipts/SOLR-8628.md).
-Status: CLAIMED (claims/pool-vm5-gate-backlog-8628-packaging.md, vm5, 2026-10-18T08:51Z). Prior status: OPEN (reset by the main side 2026-10-17: vm2's claim claims/pool-vm2-gate-backlog-8628-packaging.md went STALE on 2026-10-18; claimable by any capable Linux host. The Section A path in assignments/pool-vm2-finish-list-round-1.md remains an alternate route to the same packaging.)
+Status: DONE (verified 2026-10-18T15:55Z by vm5, claims/pool-vm5-gate-backlog-8628-packaging.md): fork solr-8628-submit tip is 2e56ce9990b008c00d2d07b2498cf28cdc101a06, pushed by vm2 on 2026-10-14 (see the Push section). The vm5 claim of 08:51Z only re-verified the head; no run was repeated.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Capability tags: gate.
 - Why: receipts/SOLR-8628.md says the root SOLR-8628-TESTING.md comes off as packaging after the green gate. The file is still on the live tip. Opening the pull request needs it removed, which moves the head, so the packaged head needs its own gate, as the SOLR-5262 and SOLR-8554 gates did.
 - Change: delete SOLR-8628-TESTING.md in one packaging commit. Nothing else changes.
