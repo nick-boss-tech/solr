@@ -4489,7 +4489,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: fixed by commit 7de72c9 in 2018."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-13066-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-13061",
