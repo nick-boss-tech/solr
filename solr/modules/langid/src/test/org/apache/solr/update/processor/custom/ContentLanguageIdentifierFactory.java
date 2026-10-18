@@ -23,13 +23,13 @@ import java.io.UncheckedIOException;
 import java.util.List;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.NamedList;
-import org.apache.solr.util.SolrPluginUtils;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.update.processor.DetectedLanguage;
 import org.apache.solr.update.processor.LanguageIdentifierUpdateProcessor;
 import org.apache.solr.update.processor.UpdateRequestProcessor;
 import org.apache.solr.update.processor.UpdateRequestProcessorFactory;
+import org.apache.solr.util.SolrPluginUtils;
 
 /** Builds a custom language identifier for the processing test. */
 public class ContentLanguageIdentifierFactory extends UpdateRequestProcessorFactory {
