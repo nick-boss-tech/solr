@@ -1,6 +1,6 @@
 # Pool assignment: audit of merged PR descriptions for follow-up promises, round 1
 
-Status: CLAIMED (claims/pool-vm3-merged-pr-followup-promises-round-1.md, vm3, 2026-10-18T09:27Z; prior pass claims/pool-vm5-merged-pr-followup-promises-round-1-e.md, DONE 07:12Z; prior passes by vm5 at 07:08Z, 05:27Z, 03:45Z and vm4 at 2026-10-18T00:45Z, reports/merged-pr-followup-promises-round-1.md)
+Status: OPEN (recurring; last pass 2026-10-18 by vm3, claims/pool-vm3-merged-pr-followup-promises-round-1.md, DONE 09:28Z, no merge since #5027; prior pass claims/pool-vm5-merged-pr-followup-promises-round-1-e.md, DONE 07:12Z; prior passes by vm5 at 07:08Z, 05:27Z, 03:45Z and vm4 at 2026-10-18T00:45Z, reports/merged-pr-followup-promises-round-1.md)
 
 Capability tags: `review`. Intended host: any review-side host. No build work. This assignment is self-contained for a reviewer joining cold.
 

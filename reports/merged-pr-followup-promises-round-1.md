@@ -1,5 +1,19 @@
 # Merged PR follow-up promises, ledger, round 1
 
+## Pass dated 2026-10-18, vm3 (09:28Z recurrence check, pass f)
+
+Claim: `claims/pool-vm3-merged-pr-followup-promises-round-1.md`. Read-only: GitHub API reads, `ls-remote` on the fork, and public Apache JIRA reads. Nothing posted, filed or edited. No PR has merged since #5027 (2026-10-17T00:24Z), so this pass re-checks states without adding entries.
+
+Counts for this pass: merged PRs 10 (re-derived with the search API, `is:merged`), promises found in merged bodies 3, discharged 0, open 3, not yet due 0.
+
+Checked this pass:
+
+- Merged set unchanged at 10. All eight seed PRs (#4939, #4953, #4959, #4995, #5001, #4965, #5012, #5070) came back merged. The bodies of all ten merged PRs were scanned for follow-up, Limits, choice, planned and submit lines. The promise sentences in #4953, #5001 and #5070 match the ledger verbatim. No new promise line appears in the other seven.
+- Open PRs #5004, #5061, #5088, #5089, #5090, #5100 and #5104 are still open, heads unchanged from pass e (#5088 at `6914eae1c2ed`).
+- Fork heads unchanged: `solr-18317-server-submit` `ae918a03fa7b`, `solr-17393-submit` `626241e647e5`, `solr-9637-submit` `c50fa4ffd932`, `solr-9865-submit` `4937608bb181`, `solr-16130-test-followup` `3c48dec4b79f`, `solr-4841-langid-followup-submit` `bf1b01d0dc`, `solr-18317-ready` `c5d63b1a67`. `solr-13059-submit` is still absent.
+- JIRA states unchanged: SOLR-4841 Open, SOLR-16130 Open, SOLR-18317 Resolved, SOLR-18549 Open, SOLR-17393 Open, SOLR-9637 Open, SOLR-18532 Open, SOLR-18119 Open, SOLR-13059 Open, SOLR-9865 Open, SOLR-13943 Open, SOLR-2681 Open.
+- Coordination since 07:00Z: no new report, gate, receipt or PR-draft entry for SOLR-4841, SOLR-18549 or the SOLR-18317 server branch.
+
 ## Pass dated 2026-10-18, vm5 (07:12Z recurrence check, pass e)
 
 Claim: `claims/pool-vm5-merged-pr-followup-promises-round-1-e.md`. Read-only: GitHub API reads. Nothing posted, filed or edited. No PR has merged since #5027 (2026-10-17T00:24Z), so this pass re-checks states without adding entries.
