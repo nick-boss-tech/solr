@@ -1,6 +1,6 @@
 # Gate job: SOLR-6009 (edismax regexp changelog title, patch P3)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm2-gate-backlog-6009-edismax-p3.md, vm2, 2026-10-18T08:40Z)
 
 - Branch: `solr-6009-submit`. Head: `b7695a518cccc0158a6374c61af9760884d1cb80` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `a41bb034a1f47c08a8f8ea6ebbe46e6d443cbb6f` (receipts/SOLR-6009.md, round 32). Merge-base with upstream/main: `14c7aac0d151`.
