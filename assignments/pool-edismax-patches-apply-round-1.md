@@ -1,6 +1,6 @@
 # Assignment: eDisMax draft patches P1 to P6, application round 1
 
-Status: CLAIMED (vm2, claims/pool-edismax-patches-apply-round-1.md, 2026-10-18T03:16Z)
+Status: DONE 2026-10-18 (vm2, claims/pool-edismax-patches-apply-round-1.md). P1 to P6 pushed fast-forward and gate jobs posted under gates/; gates not yet run. P5 trailer removal skipped (owner item O3, needs a force push).
 
 Capability tags: [implementation, gate]. Intended host: either Linux host (vm1 or vm2); Windows never claims build work. Posted by the main side, 2026-10-15.
 
