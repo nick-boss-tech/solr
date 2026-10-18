@@ -1,0 +1,102 @@
+[
+  {
+    "key": "SOLR-10512",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, the Streaming Expressions reference says both input streams must be sorted by the fields in `on`. The report sorted by different fields than its join keys; JIRA comments confirm that sorting each stream by the join key works. This is the documented contract, not a JoinStream defect."
+  },
+  {
+    "key": "SOLR-9722",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, the standard query parser guide lists `/` as a syntax character and says literal special characters must be backslash-escaped. The query `a / b` therefore needs an escaped slash; this is documented parser syntax."
+  },
+  {
+    "key": "SOLR-9645",
+    "verdict": "deferred",
+    "evidence": "The linked SOLR-9639 was explicitly a CDCR test-cleanup race; its fix waited for recovery before deleting the temporary test collection. Current CollectionTooManyReplicasTest also waits for recovery before clean shutdown, but that does not prove the reported production `/get` flood is fixed. Need a current supported-version reproduction and thread/heap evidence."
+  },
+  {
+    "key": "SOLR-9599",
+    "verdict": "deferred",
+    "evidence": "The JIRA contains detailed DocValues performance comparisons from the 2016-2017 Lucene iterator transition, plus only a limited later Calcite export comparison. Those measurements do not establish current Solr/Lucene performance. Need a reproducible benchmark on current main and the original workload before deciding whether an actionable regression remains."
+  },
+  {
+    "key": "SOLR-9260",
+    "verdict": "deferred",
+    "evidence": "The local-param coordinator issue remains in upstream/main c8ab714. The pushed origin/solr-11129-submit branch changes FacetComponent.FieldFacet.fillParams to read local facet.limit/mincount and adds distributed local-param tests, so it appears to cover the same seam. Keep linked and re-audit after that branch lands or is superseded; do not treat the unmerged branch as an upstream fix."
+  },
+  {
+    "key": "SOLR-9197",
+    "verdict": "deferred",
+    "evidence": "This is a Config API umbrella. JIRA comments name possible failures (highlight component settings ignored and a ClusteringComponent ClassCastException), but provide no concrete request/config or failing test; the maintainer asked for a failing command and a subtask. Need one minimal current-version reproduction to scope it."
+  },
+  {
+    "key": "SOLR-9129",
+    "verdict": "deferred",
+    "evidence": "The original report creates about 2,000 empty collections on one host with embedded ZooKeeper; a later comment mentions a single routed-alias collection with separate ZooKeeper, but supplies no complete logs or reproduction. The current root cause cannot be distinguished from scale/environment limits without current logs and a supported-version reproduction."
+  },
+  {
+    "key": "SOLR-9062",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, TestDistributedStatsComponentCardinality is annotated @SuppressSSL with SOLR-9062. The report attributes OOM to forcing SSL/clientAuth under the default test heap, so this is a test-resource limitation rather than a Solr runtime defect."
+  },
+  {
+    "key": "SOLR-9061",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, TestDistributedSearch is annotated @SuppressSSL with SOLR-9061. The report is a randomized test OOM under SSL/clientAuth and the test disables that combination, so this is a test-resource limitation rather than a Solr runtime defect."
+  },
+  {
+    "key": "SOLR-8928",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, DocumentExpressionDictionaryFactory builds a DocumentValueSourceDictionary from the term field, payload, and weight expression; it has no context-field mapping. The reporter later confirmed that switching to DocumentDictionaryFactory/weightField worked. This is an unsupported dictionary/configuration combination, not a broken general suggest.cfq path."
+  },
+  {
+    "key": "SOLR-8877",
+    "verdict": "reopen",
+    "evidence": "On upstream/main c8ab714, TestSolrCLIRunExample.beforeClass explicitly skips when the working directory contains whitespace and labels it FIXME SOLR-8877. RunExampleTool still assembles a command string and passes it to CommandLine.parse on both execution paths. The reported whitespace-path behavior remains an actionable defect."
+  },
+  {
+    "key": "SOLR-8768",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, the JSON Facet API documents refine:true as the second phase that makes returned bucket counts and stats exact. The JIRA example omitted refinement; incomplete shard stats and a wrong global top-term order are the documented approximate behavior without it."
+  },
+  {
+    "key": "SOLR-8757",
+    "verdict": "deferred",
+    "evidence": "The report gives only a custom in-process CoreContainer create/swap/unload snippet and a 'not yet closed' wait log, without the handler implementation or reference-acquisition/release sequence. Need a minimal reproduction through supported core lifecycle operations before deciding whether unload is defective."
+  },
+  {
+    "key": "SOLR-8729",
+    "verdict": "deferred",
+    "evidence": "The report has no complete query parameters, schema, or thread dump, and the comments note that SolrCloud nodes were on separate network interfaces. There is no current code path to attribute the hang to Solr from this packet alone; need a supported-version reproduction and thread dump."
+  },
+  {
+    "key": "SOLR-8685",
+    "verdict": "confirmed-skip",
+    "evidence": "The JIRA response identifies the legacy IndexBasedSpellChecker as producing less-than-optimal suggestions at very low spellcheck.count and recommends DirectSolrSpellChecker. The ticket establishes a configuration/algorithm quality limitation, not general query-result corruption."
+  },
+  {
+    "key": "SOLR-8632",
+    "verdict": "deferred",
+    "evidence": "The JIRA packet has no description or comments, and the original skip note contains no code hypothesis. Need the actual query, cache configuration, and observed cache metrics before the filter-cache claim can be evaluated."
+  },
+  {
+    "key": "SOLR-8609",
+    "verdict": "confirmed-skip",
+    "evidence": "On upstream/main c8ab714, the old maxShardsPerNode/rule-based autoscaling path described in this 5.x snitch report has been removed (SOLR-12847 and SOLR-14656); only historical test comments remain for that rules interaction. The reported configuration is obsolete."
+  },
+  {
+    "key": "SOLR-8568",
+    "verdict": "confirmed-skip",
+    "evidence": "The request value facet.pivot=A1%2CA2 is valid URL encoding: the server decodes the comma before Solr parses the comma-delimited pivot value. The JIRA response correctly routes this SolrJ usage question to the user list; no client/server defect is evidenced."
+  },
+  {
+    "key": "SOLR-8478",
+    "verdict": "deferred",
+    "evidence": "Current default index-join tests cover multivalued from/to fields, but the report is a cross-core, negated join and does not include a complete schema or reproducible result set. Need a current cross-core reproduction to determine whether this is query construction, empty-source semantics, or a multivalue defect."
+  },
+  {
+    "key": "SOLR-8431",
+    "verdict": "confirmed-skip",
+    "evidence": "The reported failure follows a failed async split followed by direct edits to clusterstate.json and manual unloading of the parent core; the later 'Cannot unload non-existent core' is consistent with that manual state change. No supported split/delete reproduction is provided, so this is not evidence of a current Collections API defect."
+  }
+]

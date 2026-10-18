@@ -1,0 +1,102 @@
+[
+  {
+    "key": "SOLR-17838",
+    "verdict": "confirmed-skip",
+    "evidence": "The JIRA is the SIP-25 encryption-module umbrella and asks to create subtasks or link related tickets. It gives no reproducible failure or single Solr code path. This is feature tracking, not a bug report."
+  },
+  {
+    "key": "SOLR-14140",
+    "verdict": "confirmed-skip",
+    "evidence": "The description explicitly makes this an umbrella to identify plugin types that need package-loading support. It names no failing plugin, request, or regression to verify. This needs decomposition into concrete feature tickets, not a bug fix."
+  },
+  {
+    "key": "SOLR-12234",
+    "verdict": "deferred",
+    "evidence": "The title says grouping fails for inner joins, but the packet only asks why an item whose status was closed still appears in an open-status query. It includes no query, schema, documents, or expected/actual output tying that symptom to inner joins. Need a minimal reproducer before deciding whether Solr is at fault."
+  },
+  {
+    "key": "SOLR-11655",
+    "verdict": "confirmed-skip",
+    "evidence": "The ticket asks whether the VMParams digest ZooKeeper providers can accept encrypted credentials and how to configure them; it reports no authentication failure or credential exposure. This is a new secret-storage capability, not a defect in the documented providers."
+  },
+  {
+    "key": "SOLR-10982",
+    "verdict": "confirmed-skip",
+    "evidence": "The description calls this a proposal to deprecate FieldCache and coordinates it with SOLR-10808 and SOLR-10046. The comments discuss the proposal and timing; there is no observed wrong behavior or regression."
+  },
+  {
+    "key": "SOLR-10604",
+    "verdict": "confirmed-skip",
+    "evidence": "Checked upstream/main c8ab71430f6e7547c773da596101d680862310ff: ChaosMonkey.java initializes expireSessions and causeConnectionLoss with Boolean.parseBoolean when the properties are present, and uses chaosRandom.nextBoolean when absent (lines 131-138). The Boolean.valueOf(null) default bug described in the ticket is no longer present."
+  },
+  {
+    "key": "SOLR-10284",
+    "verdict": "confirmed-skip",
+    "evidence": "The reporter explicitly says this is not a bug per se. The discussion converges on a policy for standalone ZooKeeper when the connection string lists an ensemble, so the request is a compatibility/design choice rather than a demonstrated regression."
+  },
+  {
+    "key": "SOLR-10256",
+    "verdict": "confirmed-skip",
+    "evidence": "This asks for a new switch controlling multiword spell-check collation. Current upstream/main SpellCheckCollator.getCollation inserts AND and parentheses for multiword boolean-query corrections to preserve their boolean meaning; the JIRA discussion disputes adding a flag and identifies extended results as a workaround. No incorrect result is demonstrated."
+  },
+  {
+    "key": "SOLR-10197",
+    "verdict": "deferred",
+    "evidence": "The local JIRA packet contains indexing progress but no exception or Solr request/configuration. A maintainer hypothesizes that MoreLikeThis includes a numeric field in its similarity field list, but that cannot be checked without the actual exception, request handler, and field list. Need those details to distinguish configuration from a Solr defect."
+  },
+  {
+    "key": "SOLR-10016",
+    "verdict": "confirmed-skip",
+    "evidence": "The ticket requests a new SQL sorting feature. Its discussion moves from random_SEED to Calcite RAND functions and notes function pushdown limitations; it does not report incorrect behavior for an existing supported SQL operation."
+  },
+  {
+    "key": "SOLR-9806",
+    "verdict": "confirmed-skip",
+    "evidence": "The reporter describes a custom module for probabilistic page-wise result elevation after searching existing modules. This is a new ranking feature proposal, not a defect in an existing supported behavior."
+  },
+  {
+    "key": "SOLR-9578",
+    "verdict": "confirmed-skip",
+    "evidence": "The ticket requests document-level authorization and discusses possible SearchComponent, QParser, and handler designs for integrations such as Sentry/Ranger. It identifies missing functionality, not a failure of an existing authorization contract."
+  },
+  {
+    "key": "SOLR-8732",
+    "verdict": "confirmed-skip",
+    "evidence": "The ticket asks for Beider-Morse phonetic filtering to preserve the original token. The Solr reference guide documents the filter as phonetic encoding, and the report requests an additional preserve-original option; it shows no regression from the documented analyzer behavior."
+  },
+  {
+    "key": "SOLR-7793",
+    "verdict": "confirmed-skip",
+    "evidence": "JIRA records commits 1690935 on dev/trunk and 1690940 on branch_5x for SOLR-7793. Current upstream/main also uses the extracted Utils.makeMap helper in production call sites, so the requested utility refactor was implemented."
+  },
+  {
+    "key": "SOLR-7235",
+    "verdict": "confirmed-skip",
+    "evidence": "Checked upstream/main c8ab71430f6e7547c773da596101d680862310ff: TruncateFieldUpdateProcessorFactory documents that it truncates CharSequence values and its value mutator only changes values implementing CharSequence (line 92). A map-shaped atomic update value is outside that contract; the ticket requests broader support."
+  },
+  {
+    "key": "SOLR-6977",
+    "verdict": "confirmed-skip",
+    "evidence": "The ticket asks to add date-part grouping to range facets and mentions a proposed patch, but reports no incorrect existing range-facet result. This is an additional faceting feature."
+  },
+  {
+    "key": "SOLR-6335",
+    "verdict": "deferred",
+    "evidence": "Checked upstream/main c8ab71430f6e7547c773da596101d680862310ff: HttpShardHandler throws SERVICE_UNAVAILABLE with 'no servers hosting shard' when a shard has no live servers (line 255). The ticket does not explain why the replica repeatedly remains in recovery or provide cluster state/recovery logs, so the underlying cause cannot be confirmed."
+  },
+  {
+    "key": "SOLR-6199",
+    "verdict": "confirmed-skip",
+    "evidence": "The ticket asks for Reader-valued SolrInputDocument fields to stream large updates and explicitly raises the request-copy/lifecycle problem in SolrCloud. This is a new SolrJ API and ownership design, not a failure of an existing API contract."
+  },
+  {
+    "key": "SOLR-4944",
+    "verdict": "reopen",
+    "evidence": "Checked upstream/main c8ab71430f6e7547c773da596101d680862310ff: ChaosMonkeyShardSplitTest remains annotated @Ignore for SOLR-4944; the overseer-kill section still says 'TODO: Actually kill the Overseer instance'. The reported test-coverage defect remains in source and should return to revisit for a real test scenario."
+  },
+  {
+    "key": "SOLR-3931",
+    "verdict": "confirmed-skip",
+    "evidence": "The ticket requests a per-query option to disable the coord scoring factor. Its discussion identifies Similarity configuration as the supported extension point, and current upstream/main exposes SimilarityFactory configuration (including ClassicSimilarityFactory). This is a scoring configuration enhancement, not a reported regression."
+  }
+]
