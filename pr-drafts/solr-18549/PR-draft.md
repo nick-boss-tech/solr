@@ -1,6 +1,6 @@
 # PR draft: SOLR-18549 (for Nick to approve; not opened)
 
-Status: DRAFT. Not opened. Opening needs Nick's approval. Head: `solr-18549-submit` at `cf4b869346` (fork), base apache/solr `main` at `c8ab71430f`. Gate: pending (`gates/` job in assignments/pool-gate-solr-18549-server-round-1.md).
+Status: DRAFT. Not opened. Opening needs Nick's approval. Head: `solr-18549-submit` at `cf4b869346` (fork), base apache/solr `main` at `c8ab71430f`. Gate: GREEN at this head (receipts/SOLR-18549.md).
 
 Title: SOLR-18549: Standalone nodes no longer NPE for nodes or node parameters in proxy-capable admin endpoints
 
@@ -26,7 +26,8 @@ The shared proxy code (`RemoteRequestProxy.validateNodeNames` and `GenericV1Requ
 
 Each class below runs on the base with the head tests kept, and on the head. Counts come from the JUnit XML of the gate run.
 
-- Gate run: pending (gate job, round 1).
+- Gate run at `cf4b869346` (receipts/SOLR-18549.md): focused head after cleanTest, 36 tests, 0 failures, 0 errors, 0 skipped, from fresh JUnit XML. Classes: LoggingHandlerTest 3, MetricsHandlerTest 10, GetNodeSystemInfoTest 4, GenericV1RequestProxyTest 10, V2SolrRequestBasedProxyTest 9.
+- Base: apache/solr `main` `c8ab71430f` with the production files reverted and only the `standaloneAllMeansLocal()` hook declared (returns `false`). The head tests call that method, so a plain revert does not compile. On this base, 14 of 36 tests fail, each with the ticket's NullPointerException or the wrong status code: LoggingHandlerTest 2, MetricsHandlerTest 2, GetNodeSystemInfoTest 3, GenericV1RequestProxyTest 4, V2SolrRequestBasedProxyTest 3.
 
 ## The choice
 
