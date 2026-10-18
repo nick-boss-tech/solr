@@ -1,6 +1,6 @@
 # Pool assignment: strong review round 2, the unblocked slices
 
-Status: CLAIMED (claims/pool-strong-review-round-2-unblocked-slices-vm2.md, vm2, 2026-10-18T08:32Z; prior claim claims/pool-strong-review-round-2-unblocked-slices.md STALE since 2026-10-17; takeover allowed by WORKFLOW.md rule 4)
+Status: HANDED 2026-10-18T08:37Z (vm2): Slice B2 and owner item O4 done in reports/strong-review-round-2-unblocked-slices.md. Slice A (GitHub write) and Slice B1 (inputs missing from the branch, owner ruling 3 open) need the owner or main side.
 
 Capability tags: `review`. No build work. Claim under `claims/` before starting, per WORKFLOW.md.
 
