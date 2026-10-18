@@ -54,7 +54,7 @@ The Windows host never claims `gate`, `implementation`, `premise-run`, `settling
 
 ## Standing limits that bind every host
 
-- At most 6 to 7 subagents running at once in total, across all hosts combined. An assignment names its staffing; slices taken in parallel count toward the same total.
+- No cross-host subagent cap (the owner removed it on 2026-10-17: the host agents themselves are the parallelism now). An assignment still names its staffing, and a host says in its claim what it is running. Subagents are for research and implementation, never for waiting on queues or gate results.
 - Public text follows `pr-formula.md`: plain language, no internal process vocabulary, proof numbers only from receipts or gate files.
 - Maintainer requests on our PRs are implemented at the scope written; feasibility is settled by attempting the design, and any objection goes to the owner before a reply is drafted (the maintainer requests section of `material/coordinator-handoff.md`).
 - No builds on the Windows host (above). No new Jira ticket unless a maintainer asks or Nick directs it.
