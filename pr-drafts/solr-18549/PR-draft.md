@@ -27,4 +27,4 @@ The shared proxy code (`RemoteRequestProxy.validateNodeNames` and `GenericV1Requ
 
 ## The choice
 
-The questions for the maintainer: (1) should a broadcast selector in standalone mode mean "this node" (`nodes=all` on the logging and system-info endpoints), or should every node selector be rejected with 400 outside SolrCloud as it is for metrics? This change takes the first option for the three broadcast endpoints and the second for metrics. (2) Is 400 the right status for a node that is not live on `/api/node/system`? It is the status the endpoint returned before the JAX-RS conversion, and the status v1 still returns.
+The question for the maintainer: should a broadcast selector in standalone mode mean "this node" (`nodes=all` on the logging and system-info endpoints), or should every node selector be rejected with 400 outside SolrCloud as it is for metrics? This change takes the first option for the three broadcast endpoints and the second for metrics.
