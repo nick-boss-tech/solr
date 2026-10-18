@@ -193,7 +193,7 @@ No follow-up promise in the description.
 
 #### #4953 (SOLR-8291, SOLR-13217), merged 2026-09-30 (UTC)
 Promise, verbatim: "This also fixes SOLR-16130, I plan to submit a separate, test-only PR for that."
-State: OPEN. Candidate discharge #5004 (SOLR-16130) is still open, unchanged. Whether an open PR satisfies "I plan to submit" is Nick's ruling.
+State: NEEDS-OWNER. The PR is ready and needs no draft: #5004 (SOLR-16130) is open with a gated head `3c48dec4b79f` (`receipts/SOLR-16130.md`). Question for Nick: does an open PR satisfy "I plan to submit"? If yes, the promise is discharged; if no, the pool has nothing else to do here.
 
 #### #4959 (SOLR-18277), merged 2026-10-05 (UTC)
 No follow-up promise in the description.
@@ -444,7 +444,7 @@ To discharge: Nick schedules the six-test follow-up. A fail-before run is needed
 | Merged PR | Ticket | Merged | Promise state |
 |---|---|---|---|
 | #4939 | SOLR-18135 | 2026-09-24 | none |
-| #4953 | SOLR-8291, SOLR-13217 | 2026-09-30 | open (candidate #5004, unverified) |
+| #4953 | SOLR-8291, SOLR-13217 | 2026-09-30 | NEEDS-OWNER (Nick rules whether open #5004 counts) |
 | #4959 | SOLR-18277 | 2026-10-05 | none |
 | #4965 | SOLR-10198 | 2026-10-07 | none |
 | #4995 | SOLR-18196 | 2026-10-03 | none |
