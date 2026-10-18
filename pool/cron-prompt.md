@@ -15,7 +15,7 @@ This file is the job for every pool Linux host. The scheduled task reads it from
 
 ## Setup, every tick
 
-0. Read your host id from the line that starts `- Host id:` in `/workspace/AGENTS.md`. Every `$POOL_HOST` below is that id. If the line is missing, exit and record nothing. The host environment file `~/.pool-env` stays on this VM's local disk with JAVA_HOME and GRADLE_USER_HOME.
+0. Read your host id from the line that starts `- Host id:` in `/workspace/AGENTS.md`. Every `$POOL_HOST` below is that id. If the line is missing, exit and record nothing.
 1. Your worktree: `/workspace/worktrees/pool-$POOL_HOST`. If it does not exist, create it with `git -C /workspace/solr worktree add --detach /workspace/worktrees/pool-$POOL_HOST origin/coordination`. Every tick, `git fetch origin coordination` and `git rebase origin/coordination` inside it. Never switch the shared checkout at `/workspace/solr`.
 2. Sync scripts and skills: copy `pool/skills/*` from your worktree into `/workspace/.claude/skills/`, replacing older copies. Do this only if the files differ.
 3. If `flock -n /workspace/tools/.gradle-$POOL_HOST.lock true` fails, a build is running on this host. Exit.
@@ -28,7 +28,7 @@ This file is the job for every pool Linux host. The scheduled task reads it from
 
 ## Work the claim
 
-Builds and test runs go through `pool/bin/sweep-run.sh <worktree> <log dir> <run name> <gradle args...>` from your worktree. It takes this host's lock and writes the log, the headroom record, and the test XML. The host environment (JAVA_HOME, GRADLE_USER_HOME) comes from `~/.pool-env`, which each host keeps on its local disk. Exit code 2 means the lock is held; record it and stop. Any other non-zero exit means the build failed; read the log before you retry.
+Builds and test runs go through `pool/bin/sweep-run.sh <worktree> <log dir> <run name> <gradle args...>` from your worktree. It takes this host's lock and writes the log, the headroom record, and the test XML. The host environment (JAVA_HOME, GRADLE_USER_HOME) comes from `/workspace/AGENTS.md`, with defaults in the script. Exit code 2 means the lock is held; record it and stop. Any other non-zero exit means the build failed; read the log before you retry.
 
 7. Work the assignment item by item. Each Decisions row is binding. Where a row says escalate, make the call under the PR's stated intent, record the reason in the claim, and carry it through to the PR branch or draft. Stop only when the intent itself is ambiguous: then set the item to `Status: NEEDS-OWNER` and write the one question for Nick in the claim.
 8. After every build or test run, write a Result line in the claim: the command, the head sha, pass or fail, the seed, the log path, and whether the result is conclusive, with the reason.

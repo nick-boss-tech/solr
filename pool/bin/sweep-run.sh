@@ -1,11 +1,14 @@
 #!/bin/bash
 # usage: sweep-run.sh <worktree> <log dir> <run name> <gradle args...>
-# Runs one Gradle build under this host's lock. Host environment comes from ~/.pool-env.
+# Runs one Gradle build under this host's lock. Host id, JAVA_HOME and GRADLE_USER_HOME are read from /workspace/AGENTS.md.
 set -u
 W=$1; L=$2; name=$3; shift 3
-POOL_HOST=$(sed -n 's/^- Host id: `\([^`]*\)`.*/\1/p' /workspace/AGENTS.md 2>/dev/null | head -n1)
+agents_value() { sed -n "s/^- $1: \`\([^\`]*\)\`.*/\1/p" /workspace/AGENTS.md 2>/dev/null | head -n1; }
+POOL_HOST=$(agents_value 'Host id')
 [ -n "$POOL_HOST" ] || { echo "missing Host id line in /workspace/AGENTS.md" >&2; exit 3; }
-[ -f "$HOME/.pool-env" ] && . "$HOME/.pool-env"
+JAVA_HOME=$(agents_value JAVA_HOME); JAVA_HOME=${JAVA_HOME:-/workspace/jdk/jdk-21.0.12.1+1}
+GRADLE_USER_HOME=$(agents_value GRADLE_USER_HOME); GRADLE_USER_HOME=${GRADLE_USER_HOME:-/workspace/gradle-home}
+export JAVA_HOME GRADLE_USER_HOME PATH="$JAVA_HOME/bin:$PATH"
 LOCK=/workspace/tools/.gradle-$POOL_HOST.lock
 mkdir -p "$L"
 exec 9>"$LOCK"
