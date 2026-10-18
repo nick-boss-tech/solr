@@ -31,3 +31,11 @@ Rung 1, what the code did before:
 Rung 4, the choice: accept 400 for a non-live node on v2. It restores the pre-conversion status and matches v1 on the same condition. Remote `SolrException`s keep their own codes, as they did before the conversion. Narrowing the catch further would bring back the 500 that was never intended. No code change.
 
 Finding 2 (v2 metrics): not in the ticket. Changing `GetMetrics` would widen the change, so v2 stays as it is and the PR says so. Decided at rung 4 for this PR.
+
+## Decision on the broadcast question (rung 3, 2026-10-18T21:15:14Z)
+
+Question: should `nodes=all` in standalone mode mean "this node" on the broadcast endpoints, or be rejected with 400 like `/admin/metrics`?
+
+Settled by the ticket's expected behavior, which is the stated intent (rung 3): `/admin/info/logging`, `/admin/info/system` and `/api/node/system` answer `nodes=all` with the node itself, and `/admin/metrics` returns 400 for `node=all`. The branch implements exactly that. The ticket also leaves the V2 logging endpoint open, so it is not changed here and is not an open question for this PR.
+
+The PR draft's Choice section states this and no longer asks the maintainer a question.
