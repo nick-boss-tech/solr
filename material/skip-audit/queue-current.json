@@ -1754,7 +1754,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "BadApple quarantine on retired branch_8_11."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-15848-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-15823",
@@ -3726,7 +3729,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "CollectionPropertiesZkStateReader.removeCollectionPropsWatcher takes the collection lock outside the compute() call, with a comment about the deadlock (SOLR-17720); PropsNotification.run no longer holds the map lock."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-13678-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-13654",
@@ -3850,7 +3856,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: hardcoded timeout code paths no longer exist after HTTP/2 client migration."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-13570-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-13568",
@@ -5927,7 +5936,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "no transient cache code left in CoreContainer on upstream/main"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-11688-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-11678",
@@ -6757,7 +6769,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "TestMetricsHandler does not exist on main (no class or testPropertyFilter match); the test change was committed upstream."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-11008-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-10982",
@@ -11039,7 +11054,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 15 comments). Class: test flake / test-infra. Reason holds: test failures, mostly fixed Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-7804-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-7793",
@@ -13774,7 +13792,10 @@
       "date": "2026-10-17",
       "round": "audit-8",
       "evidence": "A symbol search found no CloserThread in current upstream/main Solr core. The reported CoreContainer wait/non-notify path is gone with the old closer-thread implementation."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-5145-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-5115",
@@ -14106,7 +14127,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: 4.x alias update race; aliases reworked Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-4739-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-4733",
@@ -14202,7 +14226,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ShardHandlerFactory.newInstance wraps the failure as SolrException with class name, message and cause"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-4635-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-4610",
@@ -14334,7 +14361,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "MoreLikeThisComponent.process on upstream/main passes a flags variable to getMoreLikeThese, not mltcount; mlt.count is read separately (DOC_COUNT) for rows/merge."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-4501-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-4499",
@@ -14382,7 +14412,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrConfig.getPluginInfo on upstream/main (l.902-912) throws SERVER_ERROR \"Multiple plugins configured for type\" when more than one plugin of a type exists; the silent-ignore is gone"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-4427-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-4424",
@@ -14416,7 +14449,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "REOPEN: On upstream/main c8ab71430f6e7547c773da596101d680862310ff, NamedList.toSolrParams still falls through to val.toString() for non-list values; its adjacent TODO explicitly says null values cause an NPE. This is the failure path described for an invalid XML named-list datatype, so the old 'fixed/old' skip is not supported by current code."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-4423-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-4422",
@@ -15170,7 +15206,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. SolrCloud takes the advertised host from solr.xml's solrcloud.host setting (SolrXmlConfig.java:515; ZkController.java:314); when unset it uses AddressUtils.getHostToAdvertise. A short-name versus .local mismatch is host/DNS configuration, not a demonstrated shard-routing defect."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-3806-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-3798",
@@ -15186,7 +15225,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. IndexSchema now tracks dynamic copy-field rules and resolves matching targets in getCopyFieldsList; the old Luke copyField limitation was reworked in the SOLR-4503 schema API work."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-3798-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-3785",
@@ -15202,7 +15244,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "4.0 clusterstate leader-marker staleness; Replica.isActive(liveNodes) now accounts for live nodes and state is per collection."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-3785-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-3765",
@@ -15418,7 +15463,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "Checked upstream/main c8ab71430f6e7547c773da596101d680862310ff: ConcurrentUpdateSolrServer is absent from current SolrJ source. The reported scheduler-pool leak belongs to that removed client class."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-3697-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-3694",
@@ -15434,7 +15482,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrCmdDistributor implements Closeable; finish() and close() call clients.shutdown(), and it uses the shared update executor."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-3694-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-3693",
@@ -15450,7 +15501,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SimpleFacets takes its executor from req.getCoreContainer().getUpdateShardHandler().getUpdateExecutor() (line 170); no per-instance or static executor is created."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-3693-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-3692",
@@ -15678,7 +15732,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 11 comments). Class: no repro or too vague to test. Reason holds: old MMap closed exception, no repro Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-3408-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-3407",
@@ -15938,7 +15995,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "EmbeddedSolrServer.request on upstream/main gets the core in try-with-resources, so the unknown-handler throw closes the core (no refcount leak)."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-2936-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-2928",
@@ -15970,7 +16030,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrCore.close uses ExecutorUtil.shutdownAndAwaitTermination, which preserves interrupt status and no longer logs an ERROR stack"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-2913-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-2900",
@@ -16166,7 +16229,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "JIRA explicitly says duplicate jars were not considered a release blocker and describes low-priority packaging cleanup, but no current binary artifact was inspected. Packaging has since been reorganized; need a current distribution inventory before confirming the duplicate-jar condition is gone."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-2435-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-2420",
@@ -16232,7 +16298,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrCore constructor catch block calls close() on failure, releasing directory and index writer"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-2274-draft-close",
+    "evidence_head": "498a09aea9"
   },
   {
     "key": "SOLR-2018",
