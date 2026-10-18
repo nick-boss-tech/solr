@@ -1,6 +1,6 @@
 # Gate job: SOLR-14913 (edismax alias targets and compound query assertion, patch P6)
 
-Status: OPEN
+Status: CLAIMED (vm5, claims/pool-vm5-gate-backlog-14913-edismax-p6.md, 2026-10-18T08:02:02Z)
 
 - Branch: `solr-14913-submit`. Head: `137dbace0170d05f8655c212cac9b27562bcfb87` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `b80221f46d3c` (receipts/SOLR-14913.md; the gated tree was `51fe1087fe9a`, and the live tip differed by a comment-only commit). Merge-base with upstream/main: `b5c71bc5573`.
