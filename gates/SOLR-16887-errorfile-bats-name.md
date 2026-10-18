@@ -1,6 +1,6 @@
 # Gate job: SOLR-16887 restore -XX:ErrorFile, rename the BATS test, then the gate and BATS run at the new head
 
-Status: CLAIMED (claims/pool-vm1-gate-backlog-16887.md)
+Status: DONE (vm1, 2026-10-17: GATE GREEN at a1ab4a348d44; branch pushed; receipt refreshed)
 - Branch: solr-16887-submit. Live head: 42675f65d6fc4362e427d3b4927801466b062ca6 (verified by `git ls-remote origin refs/heads/solr-16887-submit` on 2026-10-14; matches the gated head in `receipts/SOLR-16887.md`).
 - Merge base: 9b3a84b1c460981eab09d8ffaef776acc4a184f8 (`git merge-base upstream/main 42675f65d6f`).
 - Intended host: a Linux host with the Gradle toolchain and BATS, under the WORKFLOW.md claim rules. Windows never claims build work.
@@ -99,13 +99,13 @@ Next step for the claim holder: re-run steps 4 to 6 only, at `8c1a3faa530` in th
 
 ## Step checklist
 
-- [ ] step 1: the four edits applied; diff against `42675f65d6f` shows only those files; commit with the branch identity
-- [ ] step 2: changelog YAML parse
-- [ ] step 3: tidy, Error Prone compile, module check at the new head
-- [ ] step 4: BATS premise leg at `9b3a84b1c460`
-- [ ] step 5: BATS head leg at the new head under the renamed test
-- [ ] step 6: ErrorFile presence in the head-leg system info recorded
-- [ ] push to `solr-16887-submit`; receipt refreshed; job and claim DONE
+- [x] step 1: the four edits applied; diff against `42675f65d6f` shows only those files; commit with the branch identity
+- [x] step 2: changelog YAML parse
+- [x] step 3: tidy, Error Prone compile, module check at the new head
+- [x] step 4: BATS premise leg at `9b3a84b1c460`
+- [x] step 5: BATS head leg at the new head under the renamed test
+- [x] step 6: ErrorFile presence in the head-leg system info recorded
+- [x] push to `solr-16887-submit`; receipt refreshed; job and claim DONE
 
 ## vm3 relaunch record (2026-10-17 to 2026-10-18): BLOCKED on the BATS teardown, not a verdict
 
@@ -136,3 +136,12 @@ What vm3 found (for vm1 to check, not a settled cause):
 - The `/workspace/tools/shim/lsof` script on vm3 is a local workaround, not part of the repo. Do not use it for the record.
 
 Records on vm3: `gates/logs/vm3/16887-premise-direct.log` (premise), `16887-head-direct.log` and `16887-head-direct-shim.log` (head). The vm3 worktree `/workspace/worktrees/16887` is detached at b0223fd235 and stays until vm1 confirms the patch matches.
+
+## vm1 run record (2026-10-17): GATE GREEN
+
+- Head gated: a1ab4a348d444454e0c53f0caf63a51bfd988708 (42675f65d6 plus the four edits from gates/SOLR-16887-head-b0223fd235.patch, applied with git apply and committed as Nick Shanin; content matches b0223fd235, the hash differs by commit timestamp). Pushed fast-forward to solr-16887-submit and verified by ls-remote.
+- Step 2: changelog YAML parse rc=0. Step 3: tidy rc=0 with the clean-tree guard passed; Error Prone compile rc=0; :solr:core:check -x test rc=0. Every Gradle run carried -PdisableJsClient=true (the handoff deviation; recorded in the receipt).
+- Step 4, premise leg at 9b3a84b1c460 with the head's BATS file overlaid: rc=1 as designed, "not ok 1 solr starts with ExitOnOutOfMemoryError", failing at assert_output --partial "-XX:+ExitOnOutOfMemoryError" because the base system info carries CrashOnOutOfMemoryError.
+- Step 5, head leg at a1ab4a348d44: rc=0, "ok 1 solr starts with ExitOnOutOfMemoryError", teardown included. This host has lsof (/usr/bin/lsof), so the stop path that blocked vm3 worked here; the BATS legs ran as staged distribution runs with the SOLR_PORT family exported the way solr/packaging/build.gradle sets it (18865 base), per the 2026-10-14 re-run requirement.
+- Step 6: the head distribution's system info carries -XX:ErrorFile= with the logs-dir path form (SOLR_LOGS_DIR/jvm_crash_%p.log), next to -XX:+ExitOnOutOfMemoryError.
+- Logs on vm1: ~/workspace/tools/g16887r36-gate.log, g16887r36-gate-premise.log, g16887r36-gate-head.log. Receipt: receipts/SOLR-16887.md. Job DONE; claim DONE in the same push.

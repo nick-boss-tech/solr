@@ -1,6 +1,6 @@
 # Claim: SOLR-16887 restore ErrorFile and BATS gate (vm1)
 
-Status: CLAIMED by vm1 2026-10-17 (takes the vm3 handoff of 2026-10-18 in gates/SOLR-16887-errorfile-bats-name.md)
+Status: DONE 2026-10-17 (GATE GREEN at a1ab4a348d44; branch pushed; receipt refreshed)
 
 - Job: gates/SOLR-16887-errorfile-bats-name.md.
 - Head to gate: the four edits from gates/SOLR-16887-head-b0223fd235.patch applied on 42675f65d6 and committed as Nick Shanin on this host; the new hash is recorded in the gate file when built (it will differ from b0223fd235).
@@ -9,3 +9,5 @@ Status: CLAIMED by vm1 2026-10-17 (takes the vm3 handoff of 2026-10-18 in gates/
 - Push rule: fast-forward only to solr-16887-submit, and only on green. Gate failures are recorded in the job file before any relaunch.
 
 Heartbeat: 2026-10-17 (claim).
+
+- 2026-10-17: gate completed on vm1, all steps green. See the vm1 run record in gates/SOLR-16887-errorfile-bats-name.md and receipts/SOLR-16887.md.
