@@ -18,6 +18,7 @@ package org.apache.solr.highlight;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,6 +38,11 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.index.TermVectors;
 import org.apache.lucene.index.Terms;
+import org.apache.lucene.queries.function.FunctionQuery;
+import org.apache.lucene.queries.function.ValueSource;
+import org.apache.lucene.queries.function.valuesource.DualFloatFunction;
+import org.apache.lucene.queries.function.valuesource.MultiFloatFunction;
+import org.apache.lucene.queries.function.valuesource.QueryValueSource;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.highlight.Encoder;
@@ -295,13 +301,52 @@ public class DefaultSolrHighlighter extends SolrHighlighter implements PluginInf
     protected void extract(Query query, float boost, Map<String, WeightedSpanTerm> terms)
         throws IOException {
       // these queries are not supported in lucene highlighting out of the box since 8.0
-      if (query instanceof ToParentBlockJoinQuery) {
+      if (query instanceof FunctionQuery) {
+        for (Query wrapped : queriesWrappedBy(((FunctionQuery) query).getValueSource())) {
+          extract(wrapped, boost, terms);
+        }
+      } else if (query instanceof ToParentBlockJoinQuery) {
         extract(((ToParentBlockJoinQuery) query).getChildQuery(), boost, terms);
       } else if (query instanceof ToChildBlockJoinQuery) {
         extract(((ToChildBlockJoinQuery) query).getParentQuery(), boost, terms);
       } else {
         super.extract(query, boost, terms);
       }
+    }
+  }
+
+  private static final VarHandle MULTI_FLOAT_SOURCES =
+      valueSourceField(MultiFloatFunction.class, "sources", ValueSource[].class);
+  private static final VarHandle DUAL_FLOAT_A =
+      valueSourceField(DualFloatFunction.class, "a", ValueSource.class);
+  private static final VarHandle DUAL_FLOAT_B =
+      valueSourceField(DualFloatFunction.class, "b", ValueSource.class);
+
+  private static VarHandle valueSourceField(Class<?> owner, String name, Class<?> type) {
+    try {
+      return MethodHandles.privateLookupIn(owner, MethodHandles.lookup())
+          .findVarHandle(owner, name, type);
+    } catch (ReflectiveOperationException e) {
+      throw new ExceptionInInitializerError(e);
+    }
+  }
+
+  private static List<Query> queriesWrappedBy(ValueSource source) {
+    List<Query> queries = new ArrayList<>();
+    collectQueries(source, queries);
+    return queries;
+  }
+
+  private static void collectQueries(ValueSource source, List<Query> queries) {
+    if (source instanceof QueryValueSource querySource) {
+      queries.add(querySource.getQuery());
+    } else if (source instanceof MultiFloatFunction multi) {
+      for (ValueSource child : (ValueSource[]) MULTI_FLOAT_SOURCES.get(multi)) {
+        collectQueries(child, queries);
+      }
+    } else if (source instanceof DualFloatFunction dual) {
+      collectQueries((ValueSource) DUAL_FLOAT_A.get(dual), queries);
+      collectQueries((ValueSource) DUAL_FLOAT_B.get(dual), queries);
     }
   }
 

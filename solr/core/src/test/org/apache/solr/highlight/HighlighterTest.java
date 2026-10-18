@@ -89,6 +89,58 @@ public class HighlighterTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testHighlightQueryInsideNestedFunctions() {
+    assertU(adoc("t_text", "lorem ipsum", "id", "1"));
+    assertU(commit());
+    assertQ(
+        "product wrapping a query",
+        req(
+            "q",
+            "{!func}product($v1,$v2)",
+            "v1",
+            "{!dismax qf=t_text}lorem",
+            "v2",
+            "100.0",
+            "hl",
+            "true",
+            "hl.fl",
+            "t_text",
+            "hl.method",
+            "original"),
+        "//lst[@name='highlighting']/lst[@name='1']/arr[@name='t_text']/str='<em>lorem</em> ipsum'");
+    assertQ(
+        "sub wrapping a query",
+        req(
+            "q",
+            "{!func}sub(query($v1),1)",
+            "v1",
+            "{!dismax qf=t_text}lorem",
+            "hl",
+            "true",
+            "hl.fl",
+            "t_text",
+            "hl.method",
+            "original"),
+        "//lst[@name='highlighting']/lst[@name='1']/arr[@name='t_text']/str='<em>lorem</em> ipsum'");
+    assertQ(
+        "sum nested in product",
+        req(
+            "q",
+            "{!func}product(sum(query($v1),0),$v2)",
+            "v1",
+            "{!dismax qf=t_text}lorem",
+            "v2",
+            "2.0",
+            "hl",
+            "true",
+            "hl.fl",
+            "t_text",
+            "hl.method",
+            "original"),
+        "//lst[@name='highlighting']/lst[@name='1']/arr[@name='t_text']/str='<em>lorem</em> ipsum'");
+  }
+
+  @Test
   public void testMergeContiguous() {
     HashMap<String, String> args = new HashMap<>();
     args.put(HighlightParams.HIGHLIGHT, "true");
