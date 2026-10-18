@@ -1,0 +1,50 @@
+# PR 5116 (SOLR-18540): body draft, round 2 item 4
+
+- Head: 58e07b4571fbbfc83c14bdd28283cd573acb0d7a (live body read 2026-10-18T04:33Z; branch head matches).
+- Visible characters: 3868 (no limit set for this item).
+- Proof numbers come only from receipts/SOLR-18540.md: Windows run 2026-10-11 (base 498a09aea97 fails, branch 192aacaaf89 prints Gradle 9.7.0, exit 0); Linux run 2026-10-12 on the gradlew script at 192aacaaf89, which is byte-identical in head 58e07b4571.
+- Changes from the stored body: the Linux run is now tied to the script commit it tested (192aacaaf89) and to this head by byte-identity, instead of "run from the head 58e07b4571".
+- For the main agent (not for the body): the receipt dates the Linux run 2026-10-12, but commit 58e07b4571 is dated 2026-10-13 04:40:35 UTC. The draft keeps the receipt's run date and does not claim the run was on the commit itself. If the receipt is the wrong document, escalate; the receipt was not edited.
+
+---
+
+🤖 *AI text below* 🤖 *(posted on behalf of Nick Shanin)*
+
+https://issues.apache.org/jira/browse/SOLR-18540
+
+## What happens today
+
+**gradlew fails under Git Bash on Windows before the build starts, because APP_HOME is converted to Windows form twice, and CLASSPATH is then converted again after being built from it.**
+
+APP_HOME is converted once early in the script, at [line 159](https://github.com/nick-boss-tech/solr/blob/d76fc14b9857e77b830d7a82514b28c523a239c2/gradlew#L159) (line numbers in this section are at the merge-base commit), so by the time the script reaches the Cygwin and MSYS block it is already a Windows path. The block converts APP_HOME and CLASSPATH a second time, at [lines 216 to 217](https://github.com/nick-boss-tech/solr/blob/d76fc14b9857e77b830d7a82514b28c523a239c2/gradlew#L216-L217). `cygpath --path` treats its input as a colon-separated list, so the second conversion splits the path at the drive-letter colon and produces a classpath like `C;C:/Users/.../gradle-wrapper.jar`. The JVM then reports: Could not find or load main class org.gradle.wrapper.GradleWrapperMain.
+
+## What this change does
+
+**This change deletes the second conversion, so each path is converted once.**
+
+The deleted lines are the second APP_HOME conversion, the second CLASSPATH conversion, and the blank line after them, at [lines 216 to 218 of the merge-base](https://github.com/nick-boss-tech/solr/blob/d76fc14b9857e77b830d7a82514b28c523a239c2/gradlew#L216-L218), in the Cygwin and MSYS block. The JAVACMD conversion in the same block stays ([lines 215 to 216 at the PR head](https://github.com/nick-boss-tech/solr/blob/58e07b4571fbbfc83c14bdd28283cd573acb0d7a/gradlew#L215-L216)). APP_HOME is already in Windows form from the first conversion, and CLASSPATH is built from APP_HOME, so neither needs converting again. The first conversion stays because the wrapper download and the properties generator can run Java on paths built from APP_HOME before this block ([lines 158 to 183](https://github.com/nick-boss-tech/solr/blob/58e07b4571fbbfc83c14bdd28283cd573acb0d7a/gradlew#L158-L183)). gradlew.bat has no cygpath conversion and does not change.
+
+## Proof
+
+**On a Windows Git Bash host, the unmodified script fails with the error above, and the changed script prints Gradle 9.7.0 and exits 0.**
+
+The repository has no automated test for gradlew, so this proof is a manual run, one per tree.
+
+I ran `gradlew -version` under Git Bash (MINGW64, JDK 21) on 2026-10-11, once on the unmodified base (498a09aea97, whose gradlew is identical to the merge-base) and once on this branch before the changelog entry was added (192aacaaf89). The run on main failed with "Could not find or load main class org.gradle.wrapper.GradleWrapperMain", exit 1. The branch run printed Gradle 9.7.0, exit 0. The only tree change since that run is the changelog entry, so the gradlew that was run is the gradlew in this PR. The run covers wrapper startup only; see Limits.
+
+The changed script also runs on Linux. On 2026-10-12, `gradlew -version` was run on a Linux host with the gradlew script from `192aacaaf89`. Head `58e07b4571` has a byte-identical gradlew, so that run covers this PR. It printed Gradle 9.7.0 and exited 0. The deleted lines sit inside the block that only Cygwin and MSYS shells enter (the script sets its cygwin and msys flags from the operating system name, and they stay unset on Linux), so Linux never reached them even before this change; the run shows that the script still starts the wrapper on Linux.
+
+## Limits
+
+**Only wrapper startup was run: gradlew -version under Git Bash (MSYS) on Windows, and gradlew -version on Linux.**
+
+- gradlew check, gradlew build, and test tasks were not run.
+- The loop in the same block that converts the command-line arguments did not convert anything on `-version`, and this change does not touch it.
+- Cygwin (non-MSYS) was not run. The deleted lines sat in the block shared by Cygwin and MSYS, and the first conversion covers both, but only MSYS was exercised.
+- gradlew.bat and macOS were not run. The change touches only the Cygwin and MSYS block, so other platforms never reach the deleted lines; the Linux run in Proof confirms the script works there.
+
+Changelog: [changelog/unreleased/SOLR-18540-gradlew-git-bash.yml](https://github.com/nick-boss-tech/solr/blob/58e07b4571fbbfc83c14bdd28283cd573acb0d7a/changelog/unreleased/SOLR-18540-gradlew-git-bash.yml)
+
+### AI assistance
+
+AI agents assisted with research, implementation, review, and drafting. Nick Shanin directed the work and takes responsibility for this contribution.
