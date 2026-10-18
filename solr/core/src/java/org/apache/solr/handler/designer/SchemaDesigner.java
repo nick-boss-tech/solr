@@ -808,6 +808,11 @@ public class SchemaDesigner extends JerseyResource
       configSetHelper.toggleNestedDocsFields(schema, enableNestedDocs);
     }
 
+    if (settingsDAO.persistIfChanged(mutableId, settings)) {
+      // Reload before indexing so the temp collection uses the updated nested-doc schema.
+      CollectionAdminRequest.reloadCollection(mutableId).process(cloudClient());
+    }
+
     // index the sample docs using the suggested schema
     String[] analysisErrorHolder = new String[1];
     Map<Object, Throwable> errorsDuringIndexing = null;
@@ -816,10 +821,6 @@ public class SchemaDesigner extends JerseyResource
       errorsDuringIndexing =
           indexSampleDocsWithRebuildOnAnalysisError(
               idField, docs, mutableId, false, analysisErrorHolder);
-    }
-
-    if (settingsDAO.persistIfChanged(mutableId, settings)) {
-      CollectionAdminRequest.reloadCollection(mutableId).process(cloudClient());
     }
 
     SchemaDesignerAnalyzeResponse response =

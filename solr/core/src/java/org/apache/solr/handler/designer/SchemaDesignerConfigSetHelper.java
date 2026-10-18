@@ -538,9 +538,13 @@ class SchemaDesignerConfigSetHelper implements SchemaDesignerConstants {
 
     if (!schema.hasExplicitField(ROOT_FIELD_NAME)) {
       Map<String, Object> fieldAttrs = Map.of("docValues", false, "indexed", true, "stored", false);
+      String uniqueKeyType =
+          schema.getUniqueKeyField() == null
+              ? "string"
+              : schema.getUniqueKeyField().getType().getTypeName();
       schema =
           (ManagedIndexSchema)
-              schema.addField(schema.newField(ROOT_FIELD_NAME, "string", fieldAttrs), false);
+              schema.addField(schema.newField(ROOT_FIELD_NAME, uniqueKeyType, fieldAttrs), false);
       madeChanges = true;
     }
 
