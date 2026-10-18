@@ -1,6 +1,6 @@
 # Pool assignment: Verify stale tickets without a named test, slice 2 of 4
 
-Status: CLAIMED (claims/pool-windows-skip-review-stale-slice-2-a.md)
+Status: OPEN
 
 - Slug: `pool-skip-review-stale-slice-2`.
 - Capability tags: review.
@@ -98,4 +98,10 @@ Status: CLAIMED (claims/pool-windows-skip-review-stale-slice-2-a.md)
 
 - No PR, comment, JIRA or email. No force push.
 - Commit as Nick Shanin with no trailers. No em dashes.
+
+### Partial progress (2026-10-18)
+
+One claimed slice reviewed 11 of the 61 tickets against the pinned head. The
+other 50 were not reached and remain available for another reviewer. See
+`reports/2026-10-18-skip-repro/C2-stale-slice-2.md`.
 

@@ -2,7 +2,7 @@
 
 Status: OPEN. This is one queue document. Each `##` section is one assignment with its own Status line. When cron gates a section, copy it to `assignments/` as its own file named by the section slug and post it under the usual rules in `pool/START-HERE.md`. Then set its Status line to CLAIMED or DONE in the same push as the claim or deliverable.
 
-Source: `material/skip-audit/queue-current.json` (748 records with status `skip`). Audit verdicts on the branch cover 58 of them (tier 2 audit-6 and audit-7, and tier 4 audit-5); those are left out. Earlier audit batches are not committed to the branch, so a claimant who finds a verdict for one of the other tickets should record it and skip the ticket.
+Source: `material/skip-audit/queue-current.json` (748 records with status `skip`). Audit verdicts on the branch cover 78 of them (tier 2 audit-6, audit-7 and audit-8, and tier 4 audit-5); those are left out. Earlier audit batches are not committed to the branch, so a claimant who finds a verdict for one of the other tickets should record it and skip the ticket.
 
 Pinned head for every sweep and review: fork `origin/main` `498a09aea9` (2026-10-18). The skip notes name upstream/main at `c8ab71430f` (2026-10-17). A ticket verdict that depends on a commit between the two heads must name the commit.
 

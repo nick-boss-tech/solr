@@ -1,12 +1,14 @@
 # Claim: pool-skip-review-stale-slice-2-a
 
 - Claimant host: windows, matching `hosts/windows.md`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: DONE.
 - Job or assignment: `assignments/pool-skip-review-stale-slice-2.md`.
-- Slice: 20 Tier 2 queue tickets, SOLR-4533, 4851, 5145, 5516, 5559, 5759, 5772, 5788, 5822, 5833, 5845, 5919, 5990, 6184, 6334, 6366, 6525, 6534, 6561, and 6588.
+- Slice: 11 assignment tickets, SOLR-5559, 5759, 5788, 5833, 5919, 5990, 6184, 6366, 6525, 6534, and 6561.
 - Capability tags used: review.
 - Started: 2026-10-18T03:07:00Z (UTC).
 
-Heartbeat: 2026-10-18T03:07:00Z
+Heartbeat: 2026-10-18T03:45:00Z
 
-Result: 2026-10-18T03:07:00Z: Began Tier 2 queue audit; evidence will land in the assignment deliverable and skip-audit batch.
+Result: 2026-10-18T03:45:00Z: Reviewed the 11-ticket overlap against the assignment's pinned origin/main head. The other 50 assignment rows were not reached and remain open. The separate Tier 2 queue batch contains 20 audits on upstream/main.
+
+DONE: 2026-10-18T03:45:00Z. Deliverables: reports/2026-10-18-skip-repro/C2-stale-slice-2.md; material/skip-audit/tier2-audit-2026-10-17-c.json.

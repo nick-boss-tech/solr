@@ -12413,7 +12413,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "nested docs with atomic update unsupported combination"
+    "note": "nested docs with atomic update unsupported combination",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "On upstream/main c8ab714, AtomicUpdateDocumentMerger handles nested children and NestedAtomicUpdateTest.testBlockAtomicInplaceUpdates adds child docs before applying integer inc updates (lines 252-324). The reported nested-plus-integer partial-update combination is supported."
+    }
   },
   {
     "key": "SOLR-6582",
@@ -12455,7 +12461,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.10 LBHttpSolrServer, class replaced"
+    "note": "4.10 LBHttpSolrServer, class replaced",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "The JIRA comment says the reporter stopped passing a null ResponseParser. LBHttpSolrServer no longer exists on upstream/main; its old name survives only in a historical LBSolrClient comment. This was a caller configuration issue, not a current Solr defect."
+    }
   },
   {
     "key": "SOLR-6537",
@@ -12481,7 +12493,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "spatial4j bug, not Solr"
+    "note": "spatial4j bug, not Solr",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "JIRA attributes the ShapeCollection geodetic-bounds problem to Spatial4j and lists Solr 5.0 as the fix. Current upstream/main uses LocationTech Spatial4j 0.8 in gradle/libs.versions.toml."
+    }
   },
   {
     "key": "SOLR-6525",
@@ -12491,7 +12509,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "investigation umbrella"
+    "note": "investigation umbrella",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "This investigation umbrella cites SOLR-5872 and SOLR-6524 but has no measured queue latency, cluster workload, or reproducible slow operation. Need current collection/core counts, operation latency, and linked-ticket outcomes to identify a specific code defect."
+    }
   },
   {
     "key": "SOLR-6468",
@@ -12579,7 +12603,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.9 edismax mm with collation hang, old"
+    "note": "4.9 edismax mm with collation hang, old",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "JIRA lists fix version 4.9. Current SpellCheckCollator bounds candidate processing with maxTries and loops only while tryNo is below that limit (SpellCheckCollator.java:67-96), so the reported parameters do not create an unbounded retry path."
+    }
   },
   {
     "key": "SOLR-6364",
@@ -12621,7 +12651,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.7 recovery, support"
+    "note": "4.7 recovery, support",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "Current RecoveryStrategy explicitly tries replication when PeerSync fails (RecoveryStrategy.java:752). The reported transition from failed PeerSync to SnapPull is the intended recovery fallback, not a stuck-recovery defect."
+    }
   },
   {
     "key": "SOLR-6320",
@@ -12749,7 +12785,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.6 full replication during commits, commitReserveDuration config"
+    "note": "4.6 full replication during commits, commitReserveDuration config",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "The JIRA discussion identifies commitReserveDuration. Current ReplicationHandler exposes it and the replication guide says to increase it when frequent commits and slow transfers could retire the commit being copied too early."
+    }
   },
   {
     "key": "SOLR-6166",
@@ -12923,7 +12965,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.7 lots of cores config question"
+    "note": "4.7 lots of cores config question",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "The report describes about 800 collections and 1,600 cores; comments suggest coreLoadThreads, which remains configurable and documented. No logs, current setting, or reproduction show whether the down cores result from a product defect or insufficient startup parallelism."
+    }
   },
   {
     "key": "SOLR-5962",
@@ -12997,7 +13045,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "test framework issue, invalid per discussion"
+    "note": "test framework issue, invalid per discussion",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "Maintainers agreed the control node intentionally belongs to the test cloud. AbstractFullDistribZkTestBase still creates control_collection, and current OverseerTest exercises killing and re-electing an Overseer. The observed role is expected test topology, not a product bug."
+    }
   },
   {
     "key": "SOLR-5887",
@@ -13057,7 +13111,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.6 file lock after indexing, support"
+    "note": "4.6 file lock after indexing, support",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "The JIRA sample calls contentStream.getStream() again in finally. Current ContentStreamBase.FileStream.getStream() creates a new FileInputStream per call, so the sample closes a second handle and leaves the request stream open. This is a client-code issue."
+    }
   },
   {
     "key": "SOLR-5840",
@@ -13083,7 +13143,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "old overseer forceOverseer test finding"
+    "note": "old overseer forceOverseer test finding",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "No forceOverSeer method remains on upstream/main. OverseerElectionContext writes the ephemeral leader node before starting Overseer and closes it on cancellation; current OverseerTest includes Overseer restart and failover coverage. The old test hook and behavior are obsolete."
+    }
   },
   {
     "key": "SOLR-5822",
@@ -13093,7 +13159,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "chaos monkey test finding, fixed 4.9/6.0"
+    "note": "chaos monkey test finding, fixed 4.9/6.0",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "JIRA lists fix versions 4.9 and 6.0 for the ChaosMonkeyNothingIsSafeTest shard-count inconsistency. The current main test tree retains the chaos-distribution suite; the reported old failure predates both fixes."
+    }
   },
   {
     "key": "SOLR-5813",
@@ -13185,7 +13257,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.6.1 error message formatting, old"
+    "note": "4.6.1 error message formatting, old",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "The 4.6.1 report shows a distributed update error wrapping a shard request URL instead of the leader-side schema error. Current source search did not locate the exact legacy request-message assembly, but a current request/schema reproduction is needed to determine whether the wrapper remains."
+    }
   },
   {
     "key": "SOLR-5772",
@@ -13195,7 +13273,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "mixing block join and normal docs unsupported, per maintainers"
+    "note": "mixing block join and normal docs unsupported, per maintainers",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "JIRA maintainers say mixing normal docs with block-join docs is unsupported. Current nested-document documentation treats a hierarchy as one block and says updates rewrite the block, matching the unsupported duplicate-ID scenario."
+    }
   },
   {
     "key": "SOLR-5759",
@@ -13205,7 +13289,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.4 highlighter fragsize, old highlighter"
+    "note": "4.4 highlighter fragsize, old highlighter",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "The only JIRA comment asks for a self-contained reproduction, which was not supplied. Current highlighting defaults to hl.method=unified while original remains optional; reproduce the report with hl.method=original plus the analyzer and full query settings before deciding."
+    }
   },
   {
     "key": "SOLR-5754",
@@ -13398,7 +13488,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.6 old-style solr.xml delete collection"
+    "note": "4.6 old-style solr.xml delete collection",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "Current SolrXmlConfig.checkForIllegalConfig explicitly rejects the old solr/cores section (SolrXmlConfig.java:243). The report depends on that old-style solr.xml configuration, which is not a current collection-management setup."
+    }
   },
   {
     "key": "SOLR-5516",
@@ -13408,7 +13504,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "chaos monkey, fixed 4.9/6.0"
+    "note": "chaos monkey, fixed 4.9/6.0",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "JIRA records the leader-sync wait fixes in 1546683/1546851 and fix versions 4.9/6.0. The later replacement-leader wait is present in current history as 2cc87df6ef4."
+    }
   },
   {
     "key": "SOLR-5508",
@@ -13666,7 +13768,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "old CloserThread stall, code replaced"
+    "note": "old CloserThread stall, code replaced",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "A symbol search found no CloserThread in current upstream/main Solr core. The reported CoreContainer wait/non-notify path is gone with the old closer-thread implementation."
+    }
   },
   {
     "key": "SOLR-5115",
@@ -13906,7 +14014,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "3.6 highlighter numeric token duplicate"
+    "note": "3.6 highlighter numeric token duplicate",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "JIRA lists fix version 3.6.2 for the original-highlighter numeric-token duplication. Current highlighting defaults to unified, and the historical report has no later current-version reproduction."
+    }
   },
   {
     "key": "SOLR-4841",
@@ -14164,7 +14278,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.1 custom filter synonyms with q.op=AND, no test"
+    "note": "4.1 custom filter synonyms with q.op=AND, no test",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-17",
+      "round": "audit-8",
+      "evidence": "JIRA lists fix version 4.1 and the reporter later says Fixed. Current ExtendedDismaxQParser recognizes same-position synonyms as a SynonymQuery (around line 1445), so q.op=AND does not require every synonym branch."
+    }
   },
   {
     "key": "SOLR-4522",
