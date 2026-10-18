@@ -17,3 +17,19 @@ Observations for the bottom line:
 - The local disk is the tightest small pool: 4.6 GB free on `/`, with the Gradle cache on NFS instead.
 - The lock file name `.vm3-gradle.lock` is used by this host. Rename it per host so the name no longer points at another host.
 - If hosts share the NFS export, every build contends on the same Gradle user home. Gradle locks files in that home during dependency resolution and cache updates, so concurrent builds can block each other even when their lock files differ.
+
+## vm4 (checked 2026-10-18T03:05Z)
+
+| Item | Result |
+| --- | --- |
+| 1. Root filesystem `/` (ext4, local disk, `/dev/vdc`) | 7.8 GB total, 2.9 GB used, 4.5 GB available (40% used). Inodes: 524,288 total, 45,961 used, 478,327 free (9% used). |
+| 1. `/workspace` | NFS4 mount from `127.0.0.1:/agents/ysyf6wtgd7/workspace`. `df` reports 8.0E size and 883 GB used, and the NFS server reports 0 inodes, so inode headroom on `/workspace` is not visible from this host. |
+| 2. Same filesystem as other hosts? | `stat -c %d /workspace` returns 47, the same device number as `/workspace/gradle-home` and `/workspace/tmp`. The device number is not proof of sharing. The mount source is: `ysyf6wtgd7` here, `hg3bt762n6` on vm5. Different sources mean different exports, so vm4 and vm5 do not share the Gradle home or the lock files. Hosts should compare the source string, not the device number. |
+| 3. Gradle serialization | Lock file: `/workspace/tools/.vm4-gradle.lock`, taken by every build through `flock`. `GRADLE_USER_HOME=/workspace/gradle-home`, which sits on the NFS mount, not the local disk. The lock file is empty (0 bytes), so it serves only as a lock target. |
+| 4. CPU, memory, open files | 4 CPUs. 7 GB RAM, 4 GB available at the check. `ulimit -n` 65,536. |
+| 5. Footprint | `/workspace/gradle-home` 2.4 GB. `/workspace/worktrees` 2.0 GB (about 10 worktrees, mostly detached checkouts with build output). `/workspace/solr` 738 MB. `/workspace/gates` 748 KB (logs). A single full gate's added footprint was not measured separately in this read-only slice. |
+
+Observations:
+- The local disk is the tight part: 4.5 GB free on `/`, and about 6 GB of the NFS-side data is build output and caches. Worktree build output is the largest thing to trim, not the Gradle cache.
+- Gradle's home is on NFS on this host, so cache locks and journal writes go to the NFS server. Builds on this host are serialized by the lock file, so this does not add parallel contention on its own.
+- Worktrees that are finished but not removed add up quickly. vm4 removes its scratch worktrees after each closeout.
