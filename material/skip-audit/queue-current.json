@@ -1291,7 +1291,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Backup test wait-time flake still reported by Risden after the 30s fix; test class path on main not located (moved?), needs search."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16430-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16356",
@@ -13300,7 +13303,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "Test-harness index dir deleted before IndexWriter close (2014 Jenkins seed); resolved in ticket by a workaround commit in TestDistribDocBasedVersion (still present as commit() on upstream/main). No deterministic repro."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5628-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5592",
