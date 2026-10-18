@@ -1,6 +1,6 @@
 # Pool assignment: Verify stale tickets without a named test, slice 3 of 4
 
-Status: CLAIMED (claims/pool-skip-review-stale-slice-3.md, vm3, 2026-10-18T07:35Z)
+Status: DONE 2026-10-18T07:38Z (vm3, claims/pool-skip-review-stale-slice-3.md; deliverable reports/2026-10-18-skip-repro/C3-stale-slice-3.md)
 
 - Slug: `pool-skip-review-stale-slice-3`.
 - Capability tags: review.
