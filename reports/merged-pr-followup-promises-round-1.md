@@ -1,6 +1,19 @@
 # Merged PR follow-up promises, ledger, round 1
 
-## Pass dated 2026-10-18 (current)
+## Pass dated 2026-10-18, vm5 (current, 03:45Z recurrence check)
+
+Claim: `claims/pool-vm5-merged-pr-followup-promises-round-1.md`. Read-only: GitHub reads, `ls-remote` on the fork, and JIRA reads. Nothing posted, filed or edited on GitHub or JIRA. No PR has merged since the vm4 pass below (00:45Z), so this pass re-checks states without adding entries.
+
+Counts for this pass: merged PRs 10 (re-derived with `is:merged`), promises found in merged bodies 3, discharged 0, open 3, not yet due 0.
+
+Changes from the vm4 pass below:
+
+- #5070 (SOLR-4841): the follow-up branch `solr-4841-langid-followup-submit` now exists on the fork at `bf1b01d0dc`, and `gates/SOLR-4841-langid-followup.md` records GATE GREEN at that head (vm4, `receipts/SOLR-4841-followup.md`). The vm4 pass below says the branch and gate file were missing; that is no longer true. The promise stays OPEN: review rounds 2 and 3 by a reviewer other than the builder are not done, no follow-up JIRA ticket exists (the only SOLR-4841 hit is the 2013 ticket, still Open), and no PR is open.
+- JIRA re-queried: SOLR-18549 Open, SOLR-18317 Resolved (Fixed), SOLR-15823 Open, SOLR-16130 Open, SOLR-13059 Open, SOLR-17393 Open, SOLR-9637 Open, SOLR-18532 Open, SOLR-18119 Open, SOLR-4841 Open. No new tickets.
+- Open PR heads match the ledger: #5004 `3c48dec4b79f`, #5061 `660faedd026d`, #5089 `ca443f6f6806`, #5100 `7dfd3d98d0a2`, #5104 `a3b1ea7994d9`. #5088 (`da4fa6df1178`) and #5090 (`1e8d2b0075d7`) are open with no promise carried in the merged set.
+- Fork heads unchanged: `solr-18317-server-submit` `ae918a03fa7b`, `solr-17393-submit` `626241e647e5`, `solr-9637-submit` `c50fa4ffd932`, `solr-9865-submit` `4937608bb181`, `solr-16130-test-followup` `3c48dec4b79f`. `solr-13059-submit` is still absent.
+
+## Pass dated 2026-10-18 (vm4, 00:45Z)
 
 Assignment: `assignments/pool-merged-pr-followup-promises-round-1.md`. Claim: `claims/pool-merged-pr-followup-promises-round-1.md` (vm4 took over the stale windows claim on 2026-10-18). Read-only: GitHub reads, `ls-remote` on the fork, and JIRA reads. Nothing posted, filed or edited on GitHub or JIRA. This ledger now lives on `coordination`; the 2026-10-13 to 2026-10-15 passes were on `pr-prepare` and are kept below.
 
@@ -19,12 +32,12 @@ Counts for this pass:
 
 #### SOLR-4841 language-detection follow-up (#5070, merged 2026-10-10)
 Promise, verbatim from the merged body: "A follow-up submission is planned for a test that runs language detection through a custom identifier."
-State: OPEN. Checked 2026-10-18:
-- The fork has no `solr-4841-langid-followup-submit` branch. It has `solr-4841-submit` (`bda9f9d640`), which is the merged change.
-- `assignments/pool-solr-4841-langid-followup-round-1.md` is still OPEN. Its intended host is Windows for the build and review rounds. No gate file exists at `gates/SOLR-4841-langid-followup.md`.
-- No new JIRA ticket exists. A search for "language detection custom identifier" and "DetectedLanguage" finds only older tickets. SOLR-4841 itself is still Open.
-Next step, in order: (1) Nick approves and files the new JIRA ticket, which is a public write and his call. (2) The Windows review agent builds the test on `solr-4841-langid-followup-submit` off current main and runs review to SATISFIED. (3) A Linux host gates it. vm4 can claim the gate once the branch and gate file exist. (4) Nick approves opening the PR, which discharges the promise.
-Whose call: Nick for the ticket and the PR opening. The build is the Windows agent's under the assignment.
+State: OPEN. Checked 2026-10-18 (vm5, 03:45Z):
+- The fork has `solr-4841-langid-followup-submit` at `bf1b01d0dc`. `gates/SOLR-4841-langid-followup.md` records GATE GREEN at that head (vm4). Review rounds 2 and 3 by a reviewer other than the builder are still needed before SATISFIED.
+- No new JIRA ticket exists. A search for "language detection custom identifier" and "DetectedLanguage" finds only the 2013 SOLR-4841. It is still Open.
+- No PR is open from the follow-up branch.
+Next step, in order: (1) Nick approves and files the new JIRA ticket, which is a public write and his call. (2) A reviewer other than the builder runs review rounds 2 and 3 to SATISFIED. (3) Gate: done at `bf1b01d0dc`. (4) Nick approves opening the PR, which discharges the promise.
+Whose call: Nick for the ticket and the PR opening. Review is the reviewer's under the assignment.
 
 #### SOLR-18549 for the SOLR-18317 server-side promise (#5001, merged 2026-10-05)
 Promise, verbatim from the merged body: "The server-side hardening that degraded such calls to the local node was split out at reviewer request and is preserved intact on the fork branch `solr-18317-server-submit`, to be opened as its own PR."
@@ -143,9 +156,9 @@ No follow-up promise in the description. The Limits line, "A missing `v` paramet
 
 #### #5070 (SOLR-4841), merged 2026-10-10 (UTC)
 Promise, verbatim: "A follow-up submission is planned for a test that runs language detection through a custom identifier."
-State: OPEN. No fork branch carries that test: `solr-4841-langid-followup-submit` is not on the fork (`ls-remote`), and `ci/4841-langid-r28` is the CI copy of the merged change (2026-10-14 pass). Nick ruled on 2026-10-14 that the promise is to be executed.
-Record this pass: `assignments/pool-solr-4841-langid-followup-round-1.md` exists and directs a build of the test on `solr-4841-langid-followup-submit` off current main, review rounds to SATISFIED, and a gate job at `gates/SOLR-4841-langid-followup.md`. That gate file does not exist yet. The assignment also records Jan Høydahl's direction (reported by Nick, 2026-10-14) that the follow-up get a new Jira ticket, with packaging re-pointed at that ticket. The 2026-10-14 pass did not record this.
-Next step: the pool builds the test, files the gate job, and runs review to SATISFIED. Opening the branch needs Nick's approval and the new ticket number. Whose call: the build is the pool's under the assignment; the opening and the ticket are Nick's.
+State: OPEN. The follow-up branch `solr-4841-langid-followup-submit` is on the fork at `bf1b01d0dc`, and its gate is GREEN at that head (vm4, `gates/SOLR-4841-langid-followup.md`, 2026-10-18 vm5 pass). `ci/4841-langid-r28` is the CI copy of the merged change (2026-10-14 pass). Nick ruled on 2026-10-14 that the promise is to be executed.
+The assignment (`assignments/pool-solr-4841-langid-followup-round-1.md`) also records Jan Høydahl's direction (reported by Nick, 2026-10-14) that the follow-up get a new Jira ticket, with packaging re-pointed at that ticket. No such ticket exists yet.
+Next step: review rounds 2 and 3 by a reviewer other than the builder, then the new ticket, then Nick's approval to open the PR. Whose call: the review is the pool's under the assignment; the ticket and the opening are Nick's.
 
 ### Summary of merged PRs
 
@@ -158,7 +171,7 @@ Next step: the pool builds the test, files the gate job, and runs review to SATI
 | #4995 | SOLR-18196 | 2026-10-03 | none |
 | #5001 | SOLR-18317 | 2026-10-05 | open (branch at `ae918a03`, no PR; owner ruling kept, recorded 2026-10-14) |
 | #5012 | SOLR-13202 | 2026-10-07 | none |
-| #5070 | SOLR-4841 | 2026-10-10 | open (assigned for build; gate job not yet filed) |
+| #5070 | SOLR-4841 | 2026-10-10 | open (follow-up branch `bf1b01d0dc` gate GREEN; review rounds 2 and 3, new ticket and PR still needed) |
 
 ### Seed promise shapes (open PRs or no merged carrier)
 
@@ -206,7 +219,7 @@ Next step: Nick opens the 17393 PR. After it lands, Nick rebases 9637 onto it an
 
 - #4953: Nick rules whether an open #5004 satisfies "I plan to submit", or the promise waits for its merge.
 - #5001: Nick chooses between opening from `solr-18317-server-submit` and confirming the SOLR-15823 pair as the discharge.
-- #5070: the pool builds and gates the test under `assignments/pool-solr-4841-langid-followup-round-1.md`; Nick approves the opening and the new ticket.
+- #5070: review rounds 2 and 3 under `assignments/pool-solr-4841-langid-followup-round-1.md` (the gate is done at `bf1b01d0dc`); Nick approves the opening and the new ticket.
 
 ### Not verified this pass
 
