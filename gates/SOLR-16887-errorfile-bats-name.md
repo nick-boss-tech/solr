@@ -106,3 +106,13 @@ Next step for the claim holder: re-run steps 4 to 6 only, at `8c1a3faa530` in th
 - [ ] step 5: BATS head leg at the new head under the renamed test
 - [ ] step 6: ErrorFile presence in the head-leg system info recorded
 - [ ] push to `solr-16887-submit`; receipt refreshed; job and claim DONE
+
+## vm3 relaunch record (2026-10-17 to 2026-10-18): BLOCKED on the BATS teardown, not a verdict
+
+- Head: b0223fd235 on the gate worktree (rebuilt from 42675f65d6 with the four edits; content matches the job file, the commit hash differs from 8c1a3faa53 because the commit timestamp differs). Steps 1 to 3 are not repeated under this relaunch; the fork branch is not pushed.
+- Host gaps found on this fresh VM: no lsof (bin/solr falls back and prints the "Please install lsof" note; the stop path needs it), and the JS client's npm prepare step cannot find @babel/plugin-syntax-dynamic-import. The Gradle switch -PdisableJsClient=true is used for the BATS legs (documented in settings.gradle; the BATS tests do not use the admin UI).
+- Step 4, premise leg at 9b3a84b1c4 with the head's BATS file overlaid, run directly from the packaging dir with the Gradle task's environment: not ok, at test/test_start_solr.bats line 140, assert_output --partial "-XX:+ExitOnOutOfMemoryError". The base system info lists -XX:+CrashOnOutOfMemoryError and no Exit flag. This matches the expected premise. Log: gates/logs/vm3/16887-premise-direct.log.
+- Full-file run via Gradle (premise overlay, -PdisableJsClient=true): test 1 (SOLR-11740 stop connection) failed because the stop path could not confirm the listener without lsof; stopped after test 1. Log: gates/logs/vm3/16887-premise-run4.log.
+- Step 5, head leg at b0223fd235, direct BATS on the target test: the test body passes (the flag assertion finds -XX:+ExitOnOutOfMemoryError in the system info) but teardown fails at `solr stop --all`. Two runs: without lsof (gates/logs/vm3/16887-head-direct.log) and with an ss-backed lsof shim on PATH (gates/logs/vm3/16887-head-direct-shim.log). On this host a graceful stop does not end the Solr JVM: the Jetty shutdown service logs a stop command, the JVM keeps running, and the script forces a kill. Cause not established; this is an environment issue, not the branch change, but it is unresolved.
+- Step 6 (system info ErrorFile path) not reached.
+- Verdict for now: BLOCKED. No product result is recorded, so the gate is neither GREEN nor FAILED. Not relaunched until the teardown stop path is understood. The branch is not pushed.
