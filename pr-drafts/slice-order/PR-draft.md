@@ -38,6 +38,7 @@ The merge ranks documents from different shards by `ShardDoc.shard`, which is th
 ## Limits
 
 - Stable paging also depends on each replica keeping the same `_docid_` values. This change does not check that.
+- No cluster-level regression test is in this PR. The paging failure depends on random cluster ports and random replica choice, so a SolrCloud test would be flaky. The paging probe is recorded in receipts/SOLR-TBD-slice-order.md and is not in the repo.
 - Results are ordered by slice name, which is an ordering choice. A reviewer may prefer a different one.
 
 ## AI assistance
