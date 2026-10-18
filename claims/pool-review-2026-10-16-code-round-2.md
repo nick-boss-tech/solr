@@ -9,7 +9,7 @@
 
 Item 1 (SOLR-6831): `solr-6831-submit` has moved. Assignment head `4afed04987b2343af58261b83c4b49fda0af45c0`, current remote tip `5c1124bdef95f4fa1d5bbbb6cf2dfd495111f528` (checked 2026-10-18T04:02Z). Stopped and recorded, per the item's rule.
 
-Heartbeat: 2026-10-18T04:02:20Z
+Heartbeat: 2026-10-18T05:27:00Z
 
 Result: 2026-10-18T04:24:08Z: item 1 (SOLR-6831) head moved. `solr-6831-submit` is now 5c1124bdef95f4fa1d5bbbb6cf2dfd495111f528, not 4afed04987b2343af58261b83c4b49fda0af45c0. Stopped and recorded per the item's rule. No build run.
 
@@ -18,3 +18,5 @@ Result: 2026-10-18T04:24:08Z: items 2 to 4 not run. This host cannot run Gradle:
 Handoff: 2026-10-18T04:24:08Z: assignment set to HANDED for vm1 with items 2 to 4 open. Item 1 stays stopped at the moved head for the main agent.
 
 Correction: 2026-10-18T04:54:00Z: the "no JDK" reasons above were wrong. A JDK exists at `/workspace/jdk/jdk-21.0.12.1+1` (Temurin 21.0.12.1, runs). The handoff is reverted and this claim is live again. Still blocked: `~/.pool-host` is missing, so `pool/bin/sweep-run.sh` exits 3. No build has run. Item 1 stays stopped at the moved head.
+
+Setup: 2026-10-18T05:27:00Z: `~/.pool-host` was missing, so this host wrote `vm2` to it, matching `/workspace/.pool-host` and AGENTS.md. `~/.pool-env` now sets JAVA_HOME=/workspace/jdk/jdk-21.0.12.1+1 and GRADLE_USER_HOME=/workspace/gradle-home. Fork heads rechecked: solr-6831-submit 5c1124bd (moved, item 1 stays stopped), solr-9124-submit 3dd985b9, combinedquerycomponent-merge-totals 81a88e40, solr-18010-submit 57130740 (all as assignment or claim). Next: item 2.
