@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18551 branch validation, round 1
 
-Status: OPEN
+Status: DONE (all three rows reported in reports/SOLR-18551-branch-review-round-1.md; claims for each row are linked there)
 
 - Capability tags: settling-run.
 - Intended host: vm3 for the main leg; vm2 for the 9.x and 10x legs, in that order. Claim under `claims/` before starting (WORKFLOW.md).

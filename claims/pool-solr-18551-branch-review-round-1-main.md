@@ -1,6 +1,6 @@
 # Claim: SOLR-18551 branch validation round 1, main row
 
-Status: STALE 2026-10-17 (no heartbeat within 2 hours, WORKFLOW.md rule 4; linked job assignments/pool-solr-18551-branch-review-round-1.md: Status: OPEN)
+Status: DONE 2026-10-17T18:11Z (deliverable reports/SOLR-18551-branch-review-round-1.md, this row)
 
 - Claimant host: vm4 (Linux). Assignment: assignments/pool-solr-18551-branch-review-round-1.md.
 - Slice taken: the main row only (head leg and base leg).
