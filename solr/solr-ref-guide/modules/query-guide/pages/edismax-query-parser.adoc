@@ -108,6 +108,7 @@ If not specified, `ps` is used.
 `stopwords`::
 A Boolean parameter indicating if the stop filter (`StopFilterFactory` or `ManagedStopFilterFactory`) configured in the query analyzer should be respected when parsing the query.
 If this is set to `false`, then the stop filter in the query analyzer is ignored.
+If the index analyzer also has a stop filter, this parameter has no effect.
 
 `alwaysStopwords`::
 A Boolean parameter indicating that the stop filter (`StopFilterFactory` or `ManagedStopFilterFactory`) configured in the query analyzer should always be respected even if all query terms are stopwords.
