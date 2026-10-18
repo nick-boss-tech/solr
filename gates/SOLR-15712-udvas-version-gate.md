@@ -2,7 +2,7 @@
 
 - Branch: solr-15712-submit. Head under gate: the live fork tip `cb988a2ff4c3e890e3a9c258019d22d1f888aebd` (verified by ls-remote at posting, 2026-10-14). Merge-base with upstream main: `cabedd1d968059215188f4e7563fb303241899ed`. The gated head in `receipts/SOLR-15712.md` is the same commit, so the receipt stands until this job lands.
 - Intended host: a Linux host with the `implementation` and `gate` tags (WORKFLOW.md). Windows never claims build or implementation work. The Windows review coordinator posts this job and does not claim it.
-Status: CLAIMED (claims/pool-vm2-gate-backlog-15712.md)
+Status: DONE 2026-10-18 (vm3 relaunch, GREEN at 6c3d87dc98; receipts/SOLR-15712.md; claims/pool-vm3-gate-backlog-15712.md)
 - Gate failure, 2026-10-14T13:37Z: runner gates/g15712-gate.sh (log logs/vm2/queue-g15712-gate-20261014T131618Z.out), gate head 2d65ed6329 (implementation commit, local to the gate worktree, not pushed). Focused-head run rc=1: TestCollationFieldUDVAS 5 tests, 4 failed (testNoUdvasNoWarning, testFieldUdvasFailsFrom90, testTypeUdvasWarnsBelow90, testFieldUdvasWarnsBelow90). Each fails with "Can't load schema ... Plugin Initializing failure for [schema.xml] fieldType" where the test expects FAIL or WARN and gets OK. The fail-before step ended rc=1 as expected (GATE END 2026-10-14T13:36:44Z). Not relaunched; left for the main agent.
 - Capability tags: implementation, gate.
 - Question: the branch refuses `useDocValuesAsStored` on a `CollationField` at every schema version (`CollationField.java` lines 91 to 105 at the head). The ICU collation field, in the same repository, has warned below Lucene 9.0 and failed from 9.0 since SOLR-15777 (`solr/modules/analysis-extras/src/java/org/apache/solr/schema/ICUCollationField.java` lines 97 and 126 at the merge-base). An existing schema that sets the flag on a core collation field stops loading under the current branch.
@@ -89,3 +89,15 @@ What the pattern shows:
   got OK" does not match the exception text it quotes and is treated as a
   recording error. The quoted exception text and the test names are the reliable
   parts of the record.
+
+## vm3 relaunch record (2026-10-17 to 2026-10-18)
+
+- Head: 6c3d87dc98 on solr-15712-submit, pushed fast-forward from cb988a2ff4. Pre-gate implementation was adfaa87733, then amended twice to fold in the test changes below. Commit author Nick Shanin, no trailers.
+- Step 1, changelog validator: pass.
+- Step 3, tidy: run 1 (adfaa87733) reflowed the new test's Javadoc, so the run is invalid and recorded in gates/logs/vm3/15712-tidy-run1-invalid.log. Amended, rerun clean at 6c3d87dc98.
+- Test defect found on run 1, fixed before the green run: the listener drain loop used getCount(), which counts every event ever logged, not queue depth, so testFieldUdvasWarnsBelow90 and testTypeUdvasWarnsBelow90 never finished draining. The run hung at TestCollationFieldUDVAS.java:114 and was stopped. The drain now polls until the queue is empty (`while (warnLog.pollMessage() != null) {}`). Recorded here as the cause of the hang; the cause was the vm3 drain code, not the production change.
+- Step 4, Error Prone compile: pass.
+- Step 5, focused run: TestCollationFieldDocValues 9/9, TestCollationField 8/8, TestCollationFieldUDVAS 5/5, seed 15712C0FFEE15712. Zero failures.
+- Step 6, pre-fix proof: CollationField.java at cb988a2ff4 with the test kept. testFieldUdvasWarnsBelow90 and testTypeUdvasWarnsBelow90 fail with the refusal text where a warning was expected. The fail cases and control pass. Restored to 6c3d87dc98 and checked clean.
+- Step 7, module check (:solr:core:check -x test): pass.
+- Verdict: GREEN. Receipt: receipts/SOLR-15712.md. The fork branch is fast-forwarded. The draft pr-drafts/schema-analysis/SOLR-15712.md still describes the earlier head and needs its Proof section refreshed before any PR is opened; no PR is opened or edited by this job.
