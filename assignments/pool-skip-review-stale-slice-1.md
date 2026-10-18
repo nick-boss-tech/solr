@@ -1,6 +1,6 @@
 # Pool assignment: Verify stale tickets without a named test, slice 1 of 4
 
-Status: OPEN
+Status: CLAIMED (vm5, claims/pool-skip-review-stale-slice-1.md)
 
 - Slug: `pool-skip-review-stale-slice-1`.
 - Capability tags: review.
