@@ -4,7 +4,7 @@
 - Module: `:solr:core`. Focused test class: `org.apache.solr.handler.component.DistributedKnnTopKTest` (GradleTask `:solr:core:test`).
 - Intended host: a Linux host with the Gradle toolchain (premise-run and gate capabilities). The Windows host does not run it.
 - Posted by: the review round for search components drafts (pool-census-followup-search-components-drafts-round-1, slice S4). Evidence by reading at the head, no run: `QueryComponent.java` lines 1018 to 1024 trim the merge queue only when `sort == null`, and lines 1238 to 1240 cap `numFound` for every knn request. `SortSpecParsing` returns a null sort only for the default score order. The earlier audit in reports/search-components-2-h6.md (finding 2) recorded the same gap at an older head.
-Status: CLAIMED (claims/pool-vm2-gate-backlog-17055-fix.md)
+Status: HANDED (to the main agent, status correction by the main side 2026-10-17: vm2's claim claims/pool-vm2-gate-backlog-17055-fix.md is CLOSED and STALE; its run record says the premise proof did not establish the failure and the item was left for the main agent. Pool hosts skip this file.)
 - Decision recorded here (decision default): no recommendation is on record for the sort path. The harder, more thorough option is taken, so the sort path is fixed in this branch, not deferred. The ladder's first rung (get more information) comes first: the premise run below must show the failure before the fix is written.
 
 ## Premise run (get more information)
