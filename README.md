@@ -14,6 +14,9 @@ Contents:
 - `TESTING.md`: decisions taken for the batches, with the
   recommendations adopted and the tough calls flagged for
   discussion.
+- Skip-audit history is captured in
+  [`material/skip-audit/README.md`](material/skip-audit/README.md). It is a
+  dated reference snapshot, not an active assignment.
 
 How the work runs here:
 
