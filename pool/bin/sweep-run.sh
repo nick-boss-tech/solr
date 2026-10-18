@@ -15,10 +15,11 @@ if ! flock -n 9; then
 fi
 { echo "pre $(date -u +%FT%TZ) | $(df -h / | tail -1 | awk '{print $4" free"}') | $(df -i / | tail -1 | awk '{print $4" ifree"}')"; } > "$L/$name.headroom.log"
 cd "$W" || exit 1
+touch "$L/$name.start"
 ./gradlew "$@" > "$L/$name.log" 2>&1
 rc=$?
 echo "rc=$rc end $(date -u +%FT%TZ) | $(df -h / | tail -1 | awk '{print $4" free"}') | $(df -i / | tail -1 | awk '{print $4" ifree"}')" >> "$L/$name.headroom.log"
 mkdir -p "$L/$name.xml"
-find "$W" -path '*/build/test-results/test/*.xml' -newer "$L/$name.headroom.log" -exec cp {} "$L/$name.xml/" \;
+find "$W" -path '*/build/test-results/test/*.xml' -newer "$L/$name.start" -exec cp {} "$L/$name.xml/" \;
 echo "rc=$rc" >> "$L/$name.log"
 exit $rc
