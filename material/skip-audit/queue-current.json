@@ -14344,7 +14344,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "umbrella TLC for stats component"
+    "note": "umbrella TLC for stats component",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. JIRA is an umbrella list of StatsComponent performance/API and behavior proposals, with no concrete incorrect response or bounded regression to implement. Current StatsComponent and stats.facet coverage remain; this is improvement work, not a demonstrated bug."
+    }
   },
   {
     "key": "SOLR-4486",
@@ -14401,10 +14407,16 @@
     "summary": "NPE in SolrParams.toSolrParams when an invalid datatype is used in an XML named list in solrconfig.xml",
     "priority": "Major",
     "created": "2013-02-09",
-    "status": "skip",
+    "status": "revisit",
     "sha": null,
     "base": null,
-    "note": "NamedList datatype validation old, 4.0"
+    "note": "REVISIT (was skip: NamedList datatype validation old, 4.0) -- REOPEN: On upstream/main c8ab71430f6e7547c773da596101d680862310ff, NamedList.toSolrParams still falls through to val.toString() for non-list values; its adjacent TODO explicitly says null values cause an NPE. This is the failure path described for an invalid XML named-list datatype, so the old 'fixed/old' skip is not supported by current code.",
+    "audit": {
+      "verdict": "reopen",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "REOPEN: On upstream/main c8ab71430f6e7547c773da596101d680862310ff, NamedList.toSolrParams still falls through to val.toString() for non-list values; its adjacent TODO explicitly says null values cause an NPE. This is the failure path described for an invalid XML named-list datatype, so the old 'fixed/old' skip is not supported by current code."
+    }
   },
   {
     "key": "SOLR-4422",
@@ -14432,7 +14444,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "distributed MLT, handled by shards.qt, later SOLR-5480"
+    "note": "distributed MLT, handled by shards.qt, later SOLR-5480",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. The current tree has no MoreLikeThisHandler class; distributed MLT is supported through MoreLikeThisComponent and DistributedMLTComponentTest covers shard requests. The JIRA discussion itself identifies confusion between the handler and component and points to the better-specified SOLR-5480."
+    }
   },
   {
     "key": "SOLR-4399",
@@ -14642,7 +14660,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.0 spellcheck false positives, usage"
+    "note": "4.0 spellcheck false positives, usage",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Current SpellCheckComponent and AbstractLuceneSpellChecker still implement spellcheck.alternativeTermCount, which intentionally offers alternatives for correctly spelled terms; the JIRA discussion agrees that part is expected but leaves collation duplication and correctlySpelled semantics unresolved. Need a current-version repro and an explicit behavior contract before confirming the whole report is by design."
+    }
   },
   {
     "key": "SOLR-4274",
@@ -14684,7 +14708,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "test-suite umbrella"
+    "note": "test-suite umbrella",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. This is a general complaint about test-suite reliability and dependency validation, not a specific failing test or Solr behavior. The ticket does not identify a bounded defect that can be audited or implemented."
+    }
   },
   {
     "key": "SOLR-4146",
@@ -14694,7 +14724,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "old admin status error, fixed 6.0"
+    "note": "old admin status error, fixed 6.0",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "The JIRA has later reports through Solr 7.2.1, including a missing-segment failure and a link to SOLR-8793. Current CoreStatus still opens a core and may fetch its searcher/index information for status, so the old skip cannot be confirmed solely from its 6.0 fix version. Need a current repro to distinguish a status-path defect from an underlying failed/corrupt index or the linked fixes."
+    }
   },
   {
     "key": "SOLR-4139",
@@ -14704,7 +14740,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "test with preventDoubleWrite, old"
+    "note": "test with preventDoubleWrite, old",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked the current TestReplicationHandler in upstream/main c8ab71430f6e7547c773da596101d680862310ff. The test class remains, but neither it nor the Solr test tree references MockDirectoryWrapper.preventDoubleWrite; the report is about a removed test-instrumentation condition, not a current replication failure."
+    }
   },
   {
     "key": "SOLR-4130",
@@ -14890,7 +14932,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "test infra lingering threads"
+    "note": "test infra lingering threads",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "The report is a broad 2012 Jenkins test-infrastructure complaint about lingering threads and connect timeouts, without a named current failure or thread dump tied to a Solr defect. Current shard HTTP clients and timeout configuration are different; need a current failing test and thread evidence before treating it as resolved or promoting it."
+    }
   },
   {
     "key": "SOLR-3999",
@@ -15034,7 +15082,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "4.0 highlighter mergeContinuous, old"
+    "note": "4.0 highlighter mergeContinuous, old",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. DefaultSolrHighlighter explicitly merges contiguous fragments (lines 698 and 769-771); four adjacent 100-character fragments can therefore be returned as one 400-character fragment when hl.mergeContiguous is enabled. This matches the reported output and is the configured behavior."
+    }
   },
   {
     "key": "SOLR-3905",
@@ -15110,7 +15164,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "hostname environment issue"
+    "note": "hostname environment issue",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. SolrCloud takes the advertised host from solr.xml's solrcloud.host setting (SolrXmlConfig.java:515; ZkController.java:314); when unset it uses AddressUtils.getHostToAdvertise. A short-name versus .local mismatch is host/DNS configuration, not a demonstrated shard-routing defect."
+    }
   },
   {
     "key": "SOLR-3798",
@@ -15120,7 +15180,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "Luke copyField logic, reworked (SOLR-4511 etc.)"
+    "note": "Luke copyField logic, reworked (SOLR-4511 etc.)",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. IndexSchema now tracks dynamic copy-field rules and resolves matching targets in getCopyFieldsList; the old Luke copyField limitation was reworked in the SOLR-4503 schema API work."
+    }
   },
   {
     "key": "SOLR-3785",
@@ -15294,7 +15360,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "classloader context request, old"
+    "note": "classloader context request, old",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. CoreContainer sets the current thread context classloader to the SolrResourceLoader classloader while creating a core (line 748) and restores the original afterward (line 751), which supplies the requested SPI visibility."
+    }
   },
   {
     "key": "SOLR-3704",
@@ -15340,7 +15412,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "thread leak in test shutdown, old class"
+    "note": "thread leak in test shutdown, old class",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked upstream/main c8ab71430f6e7547c773da596101d680862310ff: ConcurrentUpdateSolrServer is absent from current SolrJ source. The reported scheduler-pool leak belongs to that removed client class."
+    }
   },
   {
     "key": "SOLR-3694",
@@ -15382,7 +15460,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "3.6 highlighter token limit, config"
+    "note": "3.6 highlighter token limit, config",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "The report includes a specific old highlighter token-offset exception and attached documents/configuration, but no current-version reproduction was established. The default highlighter has since changed and the original highlighter remains selectable; the old 3.6 fix-version labels alone do not show whether that path is safe today. Need to replay the attached case with current hl.method and analyzer settings."
+    }
   },
   {
     "key": "SOLR-3676",
@@ -15439,10 +15523,16 @@
     "summary": "spellchecker directory/files not deleted",
     "priority": "Major",
     "created": "2012-07-02",
-    "status": "skip",
+    "status": "revisit",
     "sha": null,
     "base": null,
-    "note": "3.6 spellcheck dir deletion on unload, old"
+    "note": "REVISIT (was skip: 3.6 spellcheck dir deletion on unload, old) -- REOPEN: Current AbstractLuceneSpellChecker.initIndex opens FSDirectory for spellcheckIndexDir and wraps it in FilterDirectory, but SolrSpellChecker is not closeable and SpellCheckComponent registers no close hook for its spellcheckers. The current source comment says Solr never closes spell checkers; core unload can therefore retain the filesystem directory/lock described by this ticket.",
+    "audit": {
+      "verdict": "reopen",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "REOPEN: Current AbstractLuceneSpellChecker.initIndex opens FSDirectory for spellcheckIndexDir and wraps it in FilterDirectory, but SolrSpellChecker is not closeable and SpellCheckComponent registers no close hook for its spellcheckers. The current source comment says Solr never closes spell checkers; core unload can therefore retain the filesystem directory/lock described by this ticket."
+    }
   },
   {
     "key": "SOLR-3576",
@@ -15452,7 +15542,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "defaults tuning 4.0"
+    "note": "defaults tuning 4.0",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. The JIRA asks the project to choose between latency-oriented and throughput-oriented defaults and clarify configuration; it contains no defect or failing behavior. This is a design/defaults decision."
+    }
   },
   {
     "key": "SOLR-3539",
@@ -15544,7 +15640,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "3.6 binary fields across shards, old"
+    "note": "3.6 binary fields across shards, old",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. BinaryField encodes binary values as Base64 for external and response output (lines 56-90), avoiding the Java byte-array identity string reported for distributed responses."
+    }
   },
   {
     "key": "SOLR-3447",
@@ -15602,7 +15704,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "test coverage umbrella"
+    "note": "test coverage umbrella",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. This requests broader SolrJ client test coverage without naming a missing behavior or specific regression; it is general test-improvement work."
+    }
   },
   {
     "key": "SOLR-3243",
@@ -15710,7 +15818,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "old highlighter numeric fields"
+    "note": "old highlighter numeric fields",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. DefaultSolrHighlighter retains the explicit Lucene numeric-field limitation and special-cases legacy TrieField at line 535; the report concerns numeric terms that do not expose ordinary text offsets for highlighting, not a Solr-side field-value serialization bug."
+    }
   },
   {
     "key": "SOLR-3034",
@@ -15720,7 +15834,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "replication config usage, 4.0-ALPHA"
+    "note": "replication config usage, 4.0-ALPHA",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "The JIRA discussion states that every optimize is also a commit, so replicateAfter=commit includes optimize-triggered replication. The reported configuration omitted commit and therefore asked for a redundant event; this is expected replication configuration behavior."
+    }
   },
   {
     "key": "SOLR-3027",
@@ -15730,7 +15850,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "plugin double instantiation, 4.0-ALPHA, old"
+    "note": "plugin double instantiation, 4.0-ALPHA, old",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. PluginBag initializes configured plugins within each SolrCore and stores them in that core's registry; one instance per core is the lifecycle scope, not one JVM-global singleton. The report was observed in a test that may create more than one core and has no same-core reproduction."
+    }
   },
   {
     "key": "SOLR-3023",
@@ -15740,7 +15866,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "3.5 disk full replication"
+    "note": "3.5 disk full replication",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "The 3.5 report is a disk-full replication failure whose stack reaches Lucene index metadata and has no identified Solr-side root cause or current reproduction. Disk exhaustion can leave an index unusable; need a supported-version repro and evidence of a Solr replication defect before closing or promoting it."
+    }
   },
   {
     "key": "SOLR-3008",
@@ -15816,7 +15948,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "test leaves write.lock, old"
+    "note": "test leaves write.lock, old",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "TestIndexingPerformance and MockFSDirectoryFactory remain in upstream/main c8ab71430f6e7547c773da596101d680862310ff; the test rolls back updates and closes its request, while the factory documents that Solr may reopen a directory during rollback/replication. Code inspection alone does not establish whether a write.lock remains after the normal test teardown; needs a current filesystem-level reproduction."
+    }
   },
   {
     "key": "SOLR-2913",
@@ -15842,7 +15980,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "test hygiene"
+    "note": "test hygiene",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Checked the full upstream/main c8ab71430f6e7547c773da596101d680862310ff Solr tree: the old shared solr/core/src/test-files/solr/data fixture path has no references. The reported test-order dependency was tied to that legacy shared fixture."
+    }
   },
   {
     "key": "SOLR-2865",
@@ -15884,7 +16028,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "3.4 highlighting synonyms, old"
+    "note": "3.4 highlighting synonyms, old",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "The old report was tied to Lucene's synonym token behavior and used the legacy highlighter; the JIRA comment says Lucene's slower LUCENE_33 synonym filter avoided it. Current default highlighting is Unified, but the original highlighter remains available and no current reproduction was checked. Need a current synonym/highlighter repro before calling it fixed."
+    }
   },
   {
     "key": "SOLR-2751",
@@ -16010,7 +16160,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "release packaging, old"
+    "note": "release packaging, old",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "JIRA explicitly says duplicate jars were not considered a release blocker and describes low-priority packaging cleanup, but no current binary artifact was inspected. Packaging has since been reorganized; need a current distribution inventory before confirming the duplicate-jar condition is gone."
+    }
   },
   {
     "key": "SOLR-2420",
@@ -16036,7 +16192,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "replication indexversion, fixed 4.9/6.0"
+    "note": "replication indexversion, fixed 4.9/6.0",
+    "audit": {
+      "verdict": "confirmed-skip",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "Current ReplicationHandler returns indexversion from the latest commit and returns zero only when replication is disabled or no commit point exists; TestReplicationHandler exercises the command. In the JIRA, a later reporter traced the zero result to missing -Dsolr.enable.master=true, a configuration error."
+    }
   },
   {
     "key": "SOLR-2309",
@@ -16116,7 +16278,13 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "1.4 NaN/Inf scoring, old"
+    "note": "1.4 NaN/Inf scoring, old",
+    "audit": {
+      "verdict": "deferred",
+      "date": "2026-10-18",
+      "round": "audit-9",
+      "evidence": "The report concerns Lucene 1.4 score collectors receiving NaN or infinite scores; the current Solr checkout does not include the Lucene collector implementation, and no current custom-query reproduction was found. Need current Lucene behavior and a supported-version case before closing or promoting this upstream-scoped report."
+    }
   },
   {
     "key": "SOLR-1780",
