@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-12092 round 33 focused class list, round 1
 
-Status: CLAIMED by vm1, 2026-10-18 (claims/pool-vm1-12092-round-33-focused-list.md).
+Status: DONE by vm1, 2026-10-18. Deliverable: reports/SOLR-12092-round-33-focused-list.md (all nine classes recovered from the surviving gate log).
 
 - Capability tags: review. Read-only search; no build. Intended host: vm1 (Linux). Claim under `claims/` before starting (WORKFLOW.md).
 - Posted by: vm2 gate coordinator, 2026-10-18, at the direction of the user.
