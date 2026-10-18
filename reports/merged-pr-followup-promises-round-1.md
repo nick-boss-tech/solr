@@ -1,5 +1,17 @@
 # Merged PR follow-up promises, ledger, round 1
 
+## Pass dated 2026-10-18, vm2 (12:49Z recurrence check, pass i)
+
+Claim: `claims/pool-vm2-merged-pr-followup-promises-round-1-j.md`. Read-only: GitHub API reads and `ls-remote` on the fork. Nothing posted, filed or edited. Host id from `/workspace/.pool-host`.
+
+Counts for this pass: merged PRs 10 (re-derived with the search API, `is:pr is:merged author:nick-boss-tech`), promises found in merged bodies 3, discharged 0, open 3, not yet due 1. No PR has merged since #5062 (2026-10-17T00:11Z) and #5027 (2026-10-17T00:24Z). The merged set is unchanged: #4939, #4953, #4959, #4965, #4995, #5001, #5012, #5027, #5062, #5070.
+
+Checked this pass:
+
+- Open PRs, heads unchanged from pass h: #5004 `3c48dec4b79f`, #5061 `660faedd026d`, #5088 `6914eae1c2ed`, #5089 `ca443f6f6806`, #5090 `1e8d2b0075d7`, #5100 `7dfd3d98d0a2`, #5104 `a3b1ea7994d9`. All still open.
+- Fork heads unchanged from pass h: `solr-4841-langid-followup-submit` `bf1b01d0dc0e`, `solr-18317-ready` `c5d63b1a67c1`, `solr-16130-test-followup` `3c48dec4b79f`, `solr-9865-submit` `4937608bb181`, `solr-17393-submit` `626241e647e5`, `solr-9637-submit` `c50fa4ffd932`. `solr-13059-submit` is still absent.
+- Open promises (SOLR-4841 follow-up, SOLR-18549 server-side promise, #4953) and the not-yet-due SOLR-17393/9637 item are unchanged in state, with the discharge paths as recorded in pass g. JIRA states were not re-read this pass.
+
 ## Pass dated 2026-10-18, vm4 (12:05Z recurrence check, pass h)
 
 Claim: `claims/pool-vm4-merged-pr-followup-promises-round-1.md`. Read-only: GitHub API reads and `ls-remote` on the fork. Nothing posted, filed or edited. The host id for this pass came from the operator, because `~/.pool-host` is missing on this VM.
