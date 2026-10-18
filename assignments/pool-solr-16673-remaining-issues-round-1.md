@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-16673 remaining Schema Designer issues, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-windows-solr-16673-premises-round-1.md)
 
 - Capability tags: implementation, gate, review, draft.
 - Intended host: any pool Linux host. Claim under `claims/` before starting (WORKFLOW.md).
