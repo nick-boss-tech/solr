@@ -1,6 +1,6 @@
 # PR draft: SOLR-18549 (for Nick to approve; not opened)
 
-Status: DRAFT. Not opened. Opening needs Nick's approval. Head: `solr-18549-submit` at `cf4b869346` (fork), base apache/solr `main` at `c8ab71430f`. Gate: GREEN at this head (receipts/SOLR-18549.md).
+Status: DRAFT. Not opened. Opening needs Nick's approval. Head: `solr-18549-submit` at `b89664d164` (fork; the code is the same as `cf4b869346`, the changelog title changed), base apache/solr `main` at `c8ab71430f`. Gate: GREEN at this head (receipts/SOLR-18549.md).
 
 Title: SOLR-18549: Standalone nodes no longer NPE for nodes or node parameters in proxy-capable admin endpoints
 
