@@ -36,6 +36,12 @@ Branch solr-slice-order on nick-boss-tech/solr, commit f82db58 on top of 6c033ba
 - Fail-before: `ShardFieldSortedHitQueue.java` reverted to 6c033ba6ea, test kept. Fails with `expected:<[1, 2, 3, 4]> but was:<[3, 4, 1, 2]>`. Logs: /workspace/gates/logs/vm4/solr-slice-order/deep-failbefore.log, deep-failbefore-TEST.xml.
 - Tidy on the new file: rc=0, no changes.
 
+## Gate at a9a85c20 (test commit): GREEN
+
+- Error Prone compile (compileJava and compileTestJava, -Pvalidation.errorprone=true): rc=0. Log: /workspace/gates/logs/vm4/solr-slice-order/a9a85-compile.log.
+- Module check `:solr:core:check -x test`: rc=0, BUILD SUCCESSFUL in 7m 20s. Log: a9a85-check.log.
+- Tree clean after the run (a9a85-status.log empty).
+
 ## Not run
 
 - No run on the upstream main base. The change depends on the SOLR-6975 comparator.
