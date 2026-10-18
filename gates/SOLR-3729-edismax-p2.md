@@ -1,6 +1,6 @@
 # Gate job: SOLR-3729 (edismax match-all helper comments, patch P2)
 
-Status: OPEN
+Status: CLAIMED
 
 - Branch: `solr-3729-submit`. Head: `ec4173da5dbb9333dcb69257d10c66b0b7138ee6` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `0fe7e503945c1a169f76a019392d68bdf4261eb7` (receipts/SOLR-3729.md, round 36). Merge-base with upstream/main: `97d973814336`.
