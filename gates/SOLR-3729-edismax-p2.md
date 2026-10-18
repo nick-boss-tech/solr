@@ -1,6 +1,6 @@
 # Gate job: SOLR-3729 (edismax match-all helper comments, patch P2)
 
-Status: CLAIMED
+Status: DONE 2026-10-18 at gated head `ec4173da5dbb9333dcb69257d10c66b0b7138ee6` (GREEN; receipts/SOLR-3729.md; claim claims/pool-vm3-gate-backlog-3729.md)
 
 - Branch: `solr-3729-submit`. Head: `ec4173da5dbb9333dcb69257d10c66b0b7138ee6` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `0fe7e503945c1a169f76a019392d68bdf4261eb7` (receipts/SOLR-3729.md, round 36). Merge-base with upstream/main: `97d973814336`.
@@ -40,15 +40,15 @@ If any step cannot be verified, record it here and stop.
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed (comment-only)
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean
-- [ ] step 2 Error Prone compile
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed (comment-only)
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean
+- [x] step 2 Error Prone compile
+- [x] step 4 focused head run, counted from fresh XML
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
 
 ## Deliverable and limits
 
