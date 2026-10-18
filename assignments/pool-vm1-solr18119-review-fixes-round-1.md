@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18119 review findings follow-up
 
-Status: CLAIMED by vm1, 2026-10-18 (claims/pool-vm1-solr18119-review-fixes-round-1.md).
+Status: DONE by vm1, 2026-10-18. Final head fd796bbf2a6dcb12215124516291348cb9e4516a; deliverable reports/SOLR-18119-release-changes-html-followup.md; PR #5180 body updated and read back.
 
 - Capability tags: implementation, gate, review, draft.
 - Intended host: vm1. Claim under `claims/pool-vm1-solr18119-review-fixes-round-1.md` before starting (WORKFLOW.md).

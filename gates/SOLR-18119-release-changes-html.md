@@ -21,3 +21,12 @@ Status: DONE (vm1, 2026-10-18: GATE GREEN at 1029a6b0cf09; review SATISFIED; rec
 - Log: ~/workspace/tools/g18119-gate.log. All steps green: tidy clean (guard passed), configuration and Error Prone compile rc=0, documentation wiring tasks rc=0, distribution assembleRelease task graph resolves, Python tests 2 of 2, direct generation writes Changes.html plus the three stylesheets.
 - Proof: :solr:documentation:changesToHtml runs at the merge base and is not found at the head; the head script's Changes.html is byte-identical to the base Gradle output (SHA-256 b3539c06a3111c4c6026ee863fe0f7a2e0dfd292a5e7da1f99bb0178559634ea both sides).
 - Deliverables: receipts/SOLR-18119.md (appended section) and reports/SOLR-18119-release-changes-html-review.md.
+
+## Follow-up: review fixes round 1 (vm1, 2026-10-18)
+
+- Assignment: assignments/pool-vm1-solr18119-review-fixes-round-1.md. Report: reports/SOLR-18119-release-changes-html-followup.md.
+- Final head: fd796bbf2a6dcb12215124516291348cb9e4516a (one commit over 1029a6b0cf09 adding the renderer stdout-mode test; suite 3 of 3).
+- assembleRelease executed both ways: absent files fail with the four missing files and the generating command named (rc=1); after generating, success (rc=0) with all four files packaged under changes/.
+- Tidy clean (no tidy changes), Error Prone compile rc=0 at the patched tree; byte identity rechecked at the final head (SHA-256 b3539c06a3111c4c6026ee863fe0f7a2e0dfd292a5e7da1f99bb0178559634ea).
+- Not run in either gate: the full documentation site build and :solr:solr-ref-guide:checkSiteLinks.
+- PR #5180 body updated for the final head and read back (release-only wording, narrowed verification, retained limits).
