@@ -1,7 +1,7 @@
 # Claim: pool-vm5-skip-repro-16430-5628-round-1
 
 - Claimant host: vm5, matching a file in `hosts/`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: DONE 2026-10-18T03:45Z (verdicts keep-open for both tickets; deliverables below).
 - Job or assignment: none. Coordinator run from the skip queue. The handed-off tickets are in `material/skip-audit/overnight-queue-2026-10-18.md`; this claim covers only SOLR-16430 and SOLR-5628.
 - Slice: SOLR-16430 (`LocalFSCloudIncrementalBackupTest`, two runs) and SOLR-5628 (`TestDistribDocBasedVersion` with the `commit(); // work arround SOLR-5628` line removed in the repro worktree only, two runs, then reverted).
 - Capability tags used: sweep.
@@ -35,4 +35,10 @@ Runner note: `pool/bin/sweep-run.sh` failed twice this tick. (a) On this host th
 
 Missing for a verdict: SOLR-16430 needs the macOS environment or the failing run's timing from the ticket. SOLR-5628 needs the full 2014 description (the failing seed and the svn revision), which is past the first 1200 characters the evidence helper prints, or a fail-before reproduction on a current base. The claim stays ACTIVE. Next tick decides keep-open with a record, or runs a different variant.
 
-Append one heartbeat line at least once an hour while the claim is active, and push it.
+DONE: 2026-10-18T03:45Z. Verdicts keep-open for both tickets, recorded in `material/skip-audit/queue-current.json` at 498a09aea9.
+- SOLR-16430: record `drafts/SOLR-16430/record.md`, comment draft `drafts/SOLR-16430/jira-comment.md`, branch `solr-16430-draft-open`.
+- SOLR-5628: record `drafts/SOLR-5628/record.md`, comment draft `drafts/SOLR-5628/jira-comment.md`, branch `solr-5628-draft-open`.
+
+Decision on the next step: the failing 20-second wait in `testRestoreToOriginalCollection` is at `AbstractIncrementalBackupTest.java:215` (backup), and the one at 516 is in `testRestoreToOriginalSucceedsWithErrors`. The 2014 seed in SOLR-5628 was not replayed on this head: the ticket says seeds are valid only for unchanged code, and the 2014 revision needs an ant-era build. Earlier note corrected: the SOLR-16430 failing call is at line 516, not 517.
+
+Two items for the pool, not fixed here: `vm5-jira-run.sh` locks with `/workspace/tools/.vm3-gradle.lock`, which is vm3's lock name; and `pool/bin/sweep-run.sh` needs `JAVA_HOME` set on this host (see the runner note above).
