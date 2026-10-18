@@ -1,6 +1,6 @@
 # Gate job: SOLR-3243 (edismax unfielded inclusive range, patch P1)
 
-Status: HANDED (vm5, claims/pool-vm5-gate-backlog-3243-edismax-p1.md, 2026-10-18T08:47:19Z): the step 3 proof leg failed in the wrong shape, four failures instead of the one expected. The leg reverted the parser to `97d973814336`, which also removes the widening from `24f09dc007`, so three existing tests fail with it. The main side must choose the proof-leg base (see the claim) before the gate runs again from step 3.
+Status: CLAIMED (vm5, claims/pool-vm5-gate-backlog-3243-edismax-p1-r2.md, 2026-10-18T20:14:57ZZ). Decision recorded in the claim: the 08:47Z proof-leg run stands as the step 3 result.: the step 3 proof leg failed in the wrong shape, four failures instead of the one expected. The leg reverted the parser to `97d973814336`, which also removes the widening from `24f09dc007`, so three existing tests fail with it. The main side must choose the proof-leg base (see the claim) before the gate runs again from step 3.
 
 - Branch: `solr-3243-submit`. Head: `a07674262eee472a8faf1bfebc0a95e8e611b362` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `1db99c13662d8f827511a5d3a51763d7e1e2ee4c` (receipts/SOLR-3243.md, round 32). Merge-base with upstream/main: `97d973814336`.
