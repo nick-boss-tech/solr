@@ -1,6 +1,6 @@
 # Pool assignment: Reproduce SOLR-5516 (ChaosMonkeyNothingIsSafeTest), round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-skip-repro-5516-round-1.md, vm4, 2026-10-18T04:58:12Z)
 
 - Slug: `pool-skip-repro-5516-round-1`.
 - Capability tags: sweep, review.
