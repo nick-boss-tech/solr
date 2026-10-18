@@ -14,3 +14,7 @@ Expected: the multi-term assertion at line 960 passes, and the first failure is 
 Then restore the head parser (verify the tree equals HEAD), and run steps 4 and 5 at `137dbace01`: clean, focused `TestExtendedDismaxParser` with seed `14913C0FFEE14913` (expect 40 of 40 from the fresh XML), then `:solr:core:check -x test`.
 
 Heartbeat: 2026-10-18T20:14:57Z
+
+Result (2026-10-18T20:26:42Z): proof leg with the all-invalid block removed from `getAliasedQuery` passed 40 of 40 (`proof.xml/`, seed `14913C0FFEE14913`). That block is not what the new assertions test: the fallback after it gives the same empty result. The proof base is therefore not discriminating, and this claim records that instead of counting it as a proof.
+
+Decision (2026-10-18T20:26:42Z): second proof base. Keep the head parser except the term-path skip in `getQueries`, the `if (!isValidAliasTarget(f)) continue;` before `this.field = f; Query sub = getAliasedQuery();`. Without that skip an alias target missing from the schema reaches `getAliasedQuery` and the parse falls back to the escape-and-re-parse path, which is the behavior 78d8222742 removed. The multi-term skip stays, so the line 960 assertion is still served. Expected: the new compound assertion at line 1031 fails with a name:Zapp match, or an earlier single-term all-invalid assertion does. Whichever line fails first is recorded. Restore after the run, then re-run head only if the restore changes anything (it does not change the head tree).
