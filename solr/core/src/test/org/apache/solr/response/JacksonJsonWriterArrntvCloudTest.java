@@ -74,10 +74,11 @@ public class JacksonJsonWriterArrntvCloudTest extends SolrCloudTestCase {
 
   private static void assertTermStats(String body) {
     assertNotNull(Utils.fromJSONString(body));
+    String compact = body.replaceAll("\\s+", "");
     assertTrue(
-        body, body.contains("{\"name\":\"a\",\"type\":\"lst\",\"value\":{\"df\":4,\"ttf\":4}}"));
+        body, compact.contains("{\"name\":\"a\",\"type\":\"lst\",\"value\":{\"df\":4,\"ttf\":4}}"));
     assertTrue(
-        body, body.contains("{\"name\":\"b\",\"type\":\"lst\",\"value\":{\"df\":2,\"ttf\":2}}"));
+        body, compact.contains("{\"name\":\"b\",\"type\":\"lst\",\"value\":{\"df\":2,\"ttf\":2}}"));
   }
 
   @Test

@@ -37,6 +37,7 @@ import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.request.SolrQueryRequestBase;
 import org.apache.solr.search.ReturnFields;
 import org.apache.solr.search.SolrReturnFields;
 import org.apache.solr.util.SolrPluginUtils;
@@ -360,17 +361,19 @@ public class JSONWriterTest extends SolrTestCaseJ4 {
       String response =
           h.query(
               "/select",
-              req(
-                  "q",
-                  "id:17268000*",
-                  "rows",
-                  "0",
-                  "facet",
-                  "true",
-                  "facet.field",
-                  "cat",
-                  "json.nl",
-                  JsonTextWriter.JSON_NL_ARROFNTV));
+              new SolrQueryRequestBase(
+                  h.getCore(),
+                  params(
+                      "q",
+                      "id:17268000*",
+                      "rows",
+                      "0",
+                      "facet",
+                      "true",
+                      "facet.field",
+                      "cat",
+                      "json.nl",
+                      JsonTextWriter.JSON_NL_ARROFNTV)));
       assertNotNull(Utils.fromJSONString(response));
       assertTrue(response, response.contains("{\"name\":\"a\",\"type\":\"int\",\"value\":1}"));
     } finally {
