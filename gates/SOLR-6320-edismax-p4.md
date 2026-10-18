@@ -1,6 +1,6 @@
 # Gate job: SOLR-6320 (edismax lowercase operator test comments, patch P4)
 
-Status: CLAIMED (vm3, claims/pool-vm3-gate-backlog-6320-edismax-p4.md, 2026-10-18T08:55:02Z)
+Status: DONE. GATE GREEN at head `3a35d800a2e5ea9e14632733110973d5caee70e8` (vm3, 2026-10-18; claim `claims/pool-vm3-gate-backlog-6320-edismax-p4.md`; receipt `receipts/SOLR-6320.md`).
 
 - Branch: `solr-6320-submit`. Head: `3a35d800a2e5ea9e14632733110973d5caee70e8` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `cb710c963531c4f32166e6e0b28c45e54b164a3f` (receipts/SOLR-6320.md, round 36). Merge-base with upstream/main: `97d973814336`.
@@ -42,14 +42,14 @@ If any step cannot be verified, record it here and stop.
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed (comment-only)
-- [ ] step 1 tidy clean
-- [ ] step 2 Error Prone compile
-- [ ] step 4 focused head run, counted from fresh XML (44 of 44)
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed (comment-only)
+- [x] step 1 tidy clean
+- [x] step 2 Error Prone compile
+- [x] step 4 focused head run, counted from fresh XML (44 of 44)
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
 
 ## Deliverable and limits
 
