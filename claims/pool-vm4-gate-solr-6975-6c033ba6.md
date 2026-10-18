@@ -6,3 +6,5 @@ Branch: solr-6975-submit on nick-boss-tech/solr, head 6c033ba6ea89335674573ea904
 Scope: gate only (changelog parse, tidy, Error Prone compile, focused tests, module check). No PR edits, no pushes to solr-6975-submit.
 Why: PR #5135 moved from c666155ed0 to 6c033ba6ea (one production change to ShardFieldSortedHitQueue.java plus ShardFieldSortedHitQueueCycleTest.java). No receipt covers the new head.
 Deliverable: receipts/SOLR-6975.md section for 6c033ba6ea.
+
+DONE: 2026-10-18T16:03Z by vm4. Receipt: receipts/SOLR-6975.md, section "Gate at head 6c033ba6ea: GREEN". Logs: /workspace/gates/logs/vm4/solr-6975-6c033ba6/.
