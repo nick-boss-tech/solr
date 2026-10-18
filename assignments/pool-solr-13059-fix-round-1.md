@@ -1,6 +1,6 @@
 # Assignment: SOLR-13059 test fix, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm3-solr-13059-fix-round-1.md)
 
 Capability tags: [implementation, gate]. Intended host: either Linux host (vm1 or vm2); Windows never claims build work. Posted by the main side, 2026-10-16, from the round 1 diagnosis (reports/solr-13059-diagnosis-round-1.md).
 
