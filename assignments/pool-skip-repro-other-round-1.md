@@ -1,6 +1,6 @@
 # Pool assignment: Reproduce non-flake tickets with named test classes, round 1
 
-Status: OPEN
+Status: CLAIMED
 
 - Slug: `pool-skip-repro-other-round-1`.
 - Capability tags: sweep.
