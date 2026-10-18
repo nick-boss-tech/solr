@@ -168,7 +168,7 @@ Counts for this pass:
 
 #### SOLR-4841 language-detection follow-up (#5070, merged 2026-10-10)
 Promise, verbatim from the merged body: "A follow-up submission is planned for a test that runs language detection through a custom identifier."
-State: OPEN. Checked 2026-10-18 (vm5, 03:45Z):
+State: NEEDS-OWNER (2026-10-18T19:45:04ZZ, vm5). Review rounds 2 and 3 are SATISFIED (reports/SOLR-4841-followup-round-1.md). Nick files the ticket and approves the PR. Earlier check (vm5, 03:45Z):
 - The fork has `solr-4841-langid-followup-submit` at `bf1b01d0dc`. `gates/SOLR-4841-langid-followup.md` records GATE GREEN at that head (vm4). Review rounds 2 and 3 by a reviewer other than the builder are still needed before SATISFIED.
 - No new JIRA ticket exists. A search for "language detection custom identifier" and "DetectedLanguage" finds only the 2013 SOLR-4841. It is still Open.
 - No PR is open from the follow-up branch.
@@ -177,7 +177,7 @@ Whose call: Nick for the ticket and the PR opening. Review is the reviewer's und
 
 #### SOLR-18549 for the SOLR-18317 server-side promise (#5001, merged 2026-10-05)
 Promise, verbatim from the merged body: "The server-side hardening that degraded such calls to the local node was split out at reviewer request and is preserved intact on the fork branch `solr-18317-server-submit`, to be opened as its own PR."
-State: OPEN. The path chosen in the 2026-10-15 pass was (a): open a new ticket, gate the server branch under its key, then open the PR linking the ticket. Checked 2026-10-18:
+State: NEEDS-OWNER (2026-10-18T19:45:04ZZ, vm5). Gate green at `cf4b869346` on the new branch `solr-18549-submit` (apache main base; receipts/SOLR-18549.md). The draft PR is at pr-drafts/solr-18549/PR-draft.md. Nick approves opening the PR, and says whether the banked `solr-18317-server-submit` branch (HELD) stays held. Earlier check (2026-10-18):
 - SOLR-18549 exists in JIRA, status Open, reporter nickshanin, created 2026-10-16. Its summary is "Standalone node throws NPE for nodes or node parameters in proxy-capable admin endpoints". It names SOLR-18317 as the Admin UI half. Its expected behavior covers the v1 logging, v1 system info, v2 node system and v1 metrics endpoints.
 - No PR on apache/solr mentions SOLR-18549. No gate file exists for it.
 - Two fork heads carry SOLR-18317 work, and the records do not say which one the 18549 PR should use:
@@ -448,9 +448,9 @@ To discharge: Nick schedules the six-test follow-up. A fail-before run is needed
 | #4959 | SOLR-18277 | 2026-10-05 | none |
 | #4965 | SOLR-10198 | 2026-10-07 | none |
 | #4995 | SOLR-18196 | 2026-10-03 | none |
-| #5001 | SOLR-18317 | 2026-10-05 | open (branch exists, no PR) |
+| #5001 | SOLR-18317 | 2026-10-05 | NEEDS-OWNER (gate green at cf4b869346; Nick approves the PR) |
 | #5012 | SOLR-13202 | 2026-10-07 | none |
-| #5070 | SOLR-4841 | 2026-10-10 | open (no matching branch found) |
+| #5070 | SOLR-4841 | 2026-10-10 | NEEDS-OWNER (review SATISFIED; Nick files the ticket and approves the PR) |
 
 Open promises from merged PRs: three (#4953, #5001, #5070). All three are waiting on Nick's call. Named shapes that sit in open PRs or in no merged PR: five, none discharged.
 

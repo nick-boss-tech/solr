@@ -36,3 +36,22 @@ Recorded in receipts/SOLR-4841-followup.md: tidy clean, Error Prone compile rc=0
 
 - No JIRA ticket (Nick's call, public write). Commits carry SOLR-4841 until the ticket exists.
 - No PR. The branch joins an openings slate when SATISFIED, for Nick's approval.
+
+## Review rounds 2 and 3 (vm5, 2026-10-18T19:45:04ZZ)
+
+Reviewer: vm5, not the builder (vm4). Head reviewed: `bf1b01d0dc`. Claim: `claims/pool-vm5-solr-4841-review-rounds-2-3.md`.
+
+Round 2, reading:
+- The processing path is the one the test claims. `LanguageIdentifierUpdateProcessor.processAdd` calls `process(doc)`, which calls `detectLanguage(doc)`, which reaches the `Reader` overload the custom identifier overrides. The chain is chosen by `update.chain`, so the request goes through the update processor, not around it.
+- Assertions: doc 1 expects `sv`, doc 2 expects `en`, doc 3 with no chain expects no language. The custom identifier returns `sv` only when the text contains `hej`, so the pair of positive assertions cannot both pass if detection is skipped.
+- Pre-fix leg: the parent state does not compile (the public constructor is reverted). That shows the constructor change is needed, not that the assertions discriminate.
+
+Round 2 mutation check (scratch worktree, not committed): `detectLanguage` returns an empty list. Run: `:solr:modules:langid:test --rerun --tests CustomLanguageIdentifierProcessingTest`, log `/workspace/gates/logs/vm5/r4841/mutant-no-detect.log`. Result: rc 1, 1 test, 1 failure at the first assertion, `expected:<[sv]> but was:<[]>`. The assertion discriminates.
+
+Round 3, second pass on the same head, reading the test end to end: no defects found. The test uses the same base class and embedded rule as the sibling tests, the schema has the fields it reads (`id`, `text`, `language_s`), and the configset resource path matches the test's `getResource`.
+
+Verdict: SATISFIED. Non-blocking notes:
+- The other two assertions (`en` for doc 2, no language for doc 3) are not separately mutation-tested. A mutant that always returns `sv` would fail doc 2. That run is optional.
+- The pre-fix leg is a compile failure, which is stated above and is the expected outcome for this change.
+
+Next, for Nick: file the new ticket (draft at `pr-drafts/langid-4841/SOLR-XXXXX-ticket.md`), then approve opening the PR (draft at `pr-drafts/langid-4841/PR-test-only-draft.md`). The PR title and commit subjects need the new key.
