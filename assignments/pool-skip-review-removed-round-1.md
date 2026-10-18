@@ -4,8 +4,8 @@ Status: OPEN
 
 - Slug: `pool-skip-review-removed-round-1`.
 - Capability tags: review.
-- Intended host: vm4 (after A3), or any Linux host. Claim under `claims/` before starting.
-- Posted by: vm5 (main agent coordinator), 2026-10-18, at the direction of Nick.
+- Intended host: any pool Linux host (see hosts/pool-linux.md). Claim under `claims/` before starting.
+- Posted by: main agent coordinator, 2026-10-18, at the direction of Nick.
 
 ### Items
 

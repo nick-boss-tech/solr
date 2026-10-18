@@ -8,26 +8,7 @@ Pinned head for every sweep and review: fork `origin/main` `498a09aea9` (2026-10
 
 ## Host plan
 
-| Host | Order | Notes |
-| --- | --- | --- |
-| vm2 | D1, A1, C1 | Open claims from 2026-10-16 have no heartbeat for more than two hours. This queue does not release them; the host owner does. |
-| vm3 | D2, A2, B3 | Open claims: `pool-vm3-gate-backlog-16887` (00:50Z) and `pool-vm3-solr-13059-fix-round-1` (01:54Z). Finish or release these first. |
-| vm4 | D3, A3, B1 | No open claims on coordination. |
-| Any Linux host | B2, C2, C3, C4 | Open. Claim per WORKFLOW.md. |
-| vm5 (coordinator) | Not handed off | Running SOLR-16430 (LocalFSCloudIncrementalBackupTest) and SOLR-5628 (TestDistribDocBasedVersion with the workaround line removed). Claim `pool-vm5-skip-repro-16430-5628-round-1`. |
-
-Deferred, not assigned: 180 `awaitsfix/design` tickets with no named test (these are design items, not reproduction questions), and 11 `admin-ui` tickets (the Selenium suites run on the Windows host only).
-
-```mermaid
-flowchart LR
-  Cron[Cron gates each section] --> V2[vm2: D1, A1, C1]
-  Cron --> V3[vm3: D2, A2, B3]
-  Cron --> V4[vm4: D3, A3, B1]
-  V2 --> Out[reports/2026-10-18-skip-repro/]
-  V3 --> Out
-  V4 --> Out
-  Out --> Main[Main agent reads results and decides any closes; nothing is posted automatically]
-```
+Any pool Linux host (`hosts/pool-linux.md`) may take any assignment below. Pick in filename order from the top, skipping items already claimed. The main agent coordinator runs its own reproduction claims and takes no assignment here.
 
 ## Common rules
 

@@ -4,8 +4,8 @@ Status: OPEN
 
 - Slug: `pool-skip-repro-5516-round-1`.
 - Capability tags: sweep, review.
-- Intended host: vm4 (first in its queue). Claim under `claims/` before starting.
-- Posted by: vm5 (main agent coordinator), 2026-10-18, at the direction of Nick.
+- Intended host: any pool Linux host (see hosts/pool-linux.md). Claim under `claims/` before starting.
+- Posted by: main agent coordinator, 2026-10-18, at the direction of Nick.
 
 ### Items
 
@@ -24,7 +24,7 @@ Status: OPEN
 | Decision | Answer or default |
 | --- | --- |
 | Head | decided: the fork origin/main sha 498a09aea9 at posting time. Record the sha you ran. Do not move it. |
-| Build protocol | decided: one Gradle build at a time under `flock /workspace/tools/.vm3-gradle.lock`. Record `df -h /` and `df -i /` before and after each run in the claim. |
+| Build protocol | decided: one Gradle build per host, under the host lock in `hosts/pool-linux.md` (`flock -n`). Record `df -h /` and `df -i /` before and after each run in the claim. |
 | Worktree | decided: one detached worktree under `/workspace/worktrees/` at the pinned head. Do not reuse another session worktree. Never run bare `git stash`. |
 | JDK and Gradle home | decided: the JDK and GRADLE_USER_HOME recorded in your host file under `hosts/`. Caches under /workspace only. |
 | Run cadence | decided: run each class once with `--rerun`. If it fails, run it once more with the failing seed (pass the seed printed in the failing log as `-Ptests.seed`, written out in full). Stop at two runs per ticket. |
