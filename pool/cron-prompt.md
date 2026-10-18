@@ -30,7 +30,18 @@ Builds and test runs go through `pool/bin/sweep-run.sh <worktree> <log dir> <run
 7. Work the assignment item by item. Each Decisions row is binding. Where a row says escalate, record it in the claim and stop that item.
 8. After every build or test run, write a Result line in the claim: the command, the head sha, pass or fail, the seed, the log path, and whether the result is conclusive, with the reason.
 9. If a result is not conclusive, gather more information: read the code, the git history (`git log -S`, `git blame`, the test's own history), and the ticket. Pick a different build or test variant that separates the explanations, run it, and record that attempt as well.
-10. A failed gate job is not relaunched on sight. Record the failure and escalate. Reproduction sweeps may retry as their Decisions rows allow.
+10. A failed run is never repeated on its own. Follow the failure sequence in the section below, and record each step in the claim.
+
+## Failed runs
+
+A failed build, gate, test or sweep moves through these steps in order. The claim records each one.
+
+1. Assignment: state the question the run answers and the result you expected.
+2. Information gathering: read the failing output, the code path it names, and the git history of that code. Write what the failure shows.
+3. Test, gate or build: run again only if something changed since the failure. Something changed means one of these, written in the claim before the run: the head sha, a patch, the seed or the input, or the environment (for example JAVA_HOME). A rerun with the same head, seed, input and environment is not allowed.
+4. Patch and retry, or attach a status: if the gathering shows a fix, commit the patch on a branch, then run once against the new head. If it does not, attach a status (escalated, keep-open, or refuted) with the reason, and stop.
+
+A repeated run that fails the same way is not new evidence. A reproduction sweep may use new seeds only if its Decisions rows name that rule.
 
 ## Skip-queue tickets
 
