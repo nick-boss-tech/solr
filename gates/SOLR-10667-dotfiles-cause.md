@@ -2,7 +2,7 @@
 
 - Branch: solr-10667-submit. Head: 9ce9ef1db5e9d33312ac628d2e3f0b236a474c36 (live tip, verified by ls-remote by the main agent at filing, 2026-10-14; GATE GREEN at this head per receipts/SOLR-10667.md and gates/SOLR-10667-exclusion.md).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Windows never claims build work.
-Status: CLAIMED by vm3 (claims/pool-vm3-gate-backlog-10667-cause.md, 2026-10-18)
+Status: DONE (NO BRANCH CHANGE, vm3, 2026-10-18; run record below)
 - Capability tags: gate, premise-run.
 - Run shape: claim first under claims/. All Gradle work runs under the host's blocking test-queue flock, one build at a time, through the host's own route per its host file (vm1: ~/workspace/tools/solr-gradle.sh, never ./gradlew; vm2: ./gradlew with the vendored JDK and GRADLE_USER_HOME under /workspace). Copy ~/workspace/solr/gradle.properties into the worktree. Distributions assemble with `:solr:packaging:installFullDist` (not `assembleDist`) and a fresh NPM_CONFIG_CACHE, as in the earlier 10667 gates. Test counts come from fresh JUnit XML only.
 
@@ -41,13 +41,13 @@ The first run (vm2, 2026-10-15T02:05:07Z to 02:18:24Z) captured Gradle `--info` 
 
 ## Step checklist
 
-- [ ] cause trace at 9ce9ef1db5: presence recorded at the source, the module packaging output and the distribution; dropping layer and mechanism recorded with log paths
-- [ ] step 1b record: what the distribution holds for a local `liblinear` link, recorded here
-- [ ] branch change, if the cause is in the copy spec; or NO BRANCH CHANGE recorded with the cause
-- [ ] head leg with the probes (after a branch change only): `.gitignore` present, `solrclient` absent, six other tracked files present
-- [ ] BATS check 'ltr module ships its example directory' at the new head, counted from fresh JUnit XML (after a branch change only)
-- [ ] changelog YAML parse; tidy clean (GATE INVALID guard) (after a branch change only)
-- [ ] receipt refreshed, draft updated, job and claim DONE
+- [x] cause trace at 9ce9ef1db5: presence recorded at the source, the module packaging output and the distribution; dropping layer and mechanism recorded with log paths
+- [x] step 1b record: what the distribution holds for a local `liblinear` link, recorded here
+- [x] branch change, if the cause is in the copy spec; or NO BRANCH CHANGE recorded with the cause
+- [x] not run: head leg with the probes (after a branch change only): `.gitignore` present, `solrclient` absent, six other tracked files present
+- [x] not run: BATS check 'ltr module ships its example directory' at the new head, counted from fresh JUnit XML (after a branch change only)
+- [x] not run: changelog YAML parse; tidy clean (GATE INVALID guard) (after a branch change only)
+- [x] receipt refreshed and draft updated: not applicable (no branch change; draft wording in the run record). Job and claim DONE.
 
 ## Run record, vm2, 2026-10-16T05:59Z: trace stopped at the module packaging step; the rule that writes the example directory was not located
 
@@ -61,3 +61,23 @@ The first run (vm2, 2026-10-15T02:05:07Z to 02:18:24Z) captured Gradle `--info` 
 - Branch change: none. The cause is not in the two named files, so this is the NO BRANCH CHANGE path only once the responsible rule is named; that is not yet done.
 - Status: BLOCKED for the cause (not DONE). Next step for the main agent or vm1: find the rule that feeds the module packaging's example directory (for example with `:solr:modules:ltr:assemblePackaging --debug` and the Sync task's source list), and confirm whether this job's premise references are stale.
 
+## Run record, vm3, 2026-10-18: NO BRANCH CHANGE
+
+- Claim: `claims/pool-vm3-gate-backlog-10667-cause.md`. Head `9ce9ef1db5e9` (ls-remote verified at claim time, 2026-10-18T07:4xZ). Worktree removed after this record.
+- Builds: all `:solr:packaging:installFullDist`, through `pool/bin/sweep-run.sh`.
+  - `10667-cause-dist`: rc=1 at `:solr:webapp:js-client:jsClientBuild`, `Cannot find package '@babel/plugin-syntax-dynamic-import'`. Log `/workspace/gates/logs/vm3/10667-cause-dist.log`.
+  - `10667-cause-dist-r2`: the same failure with a second fresh npm cache (`/workspace/npm-cache/vm3-10667-cause-2`). Log `10667-cause-dist-r2.log`. The fresh cache does not clear it.
+  - Environment cause: the shell sets `NODE_ENV=production`. Under that value `npm install` omits devDependencies, and the js-client lock marks `@babel/plugin-syntax-dynamic-import` as `dev: true`. With `NODE_ENV` unset for the Gradle process (`env -u NODE_ENV`), the build passed: `10667-cause-dist-r3`, rc=0, log `10667-cause-dist-r3.log`. The job's fresh-cache remedy does not apply to this failure. Every host that runs this build needs `NODE_ENV` unset.
+- Step 1, presence (run `10667-cause-dist-r3`):
+  - Source `solr/modules/ltr/example/.gitignore`: present (12 bytes, tracked).
+  - Module packaging output `solr/modules/ltr/build/packaging/ltr/example/`: absent. The other six files are present.
+  - Distribution `solr/packaging/build/solr-11.0.0-SNAPSHOT/modules/ltr/example/`: absent. The same six files are present.
+- Mechanism, isolated with a scratch init script (`/workspace/tmp/vm3-10667/probe.gradle` and `probe2.gradle`, not committed; logs `10667-cause-probe2.log`, `10667-cause-probe3.log`):
+  - Ant's default excludes apply to Gradle's directory walks and include `**/.gitignore` (`DirectoryScanner.getDefaultExcludes()`, 28 patterns).
+  - `fileTree(example)` with no exclude lists six files. The copy with `exclude "solrclient/**"` and the plain copy with no exclude both list six files. So the `solrclient/**` exclude is not the cause, and removing it would not add the file.
+  - A single-file copy of `example/.gitignore` also produces nothing. The copy spec cannot name the file in to get it through.
+  - The rule is the Gradle default exclude, applied to the directory copy in the `assemblePackaging` Sync at `gradle/solr/packaging.gradle:83-86`. The vm2 record (`claims/pool-vm2-gate-backlog-10667-cause.md`) said no build script carries the `solrclient/**` text at this head; it is at line 85, so that record is superseded.
+- Step 1b, liblinear link (owed from the first run): with a probe symlink `solr/modules/ltr/example/liblinear` to a local directory holding `marker.txt` (link removed afterward, nothing committed), `10667-cause-dist-1b` rc=0. The distribution holds `modules/ltr/example/liblinear` as a real directory with `marker.txt` (contents copied, not a link). The module packaging output holds the same directory. Recorded only.
+- Branch change: none. The cause is Gradle's default exclude on the directory copy. The copy spec in the two named files cannot switch it off, and a single-file copy is excluded too. A workaround (for example writing the file's text from the copy spec) would be a new design choice for the PR, not the minimal include the job names, so it is not made here. Whether the example `.gitignore` should ship at all is an owner call; no decision row answers it.
+- Steps 3 to 6 (head leg, BATS check, changelog parse and tidy, receipt refresh): not run, because there is no branch change.
+- Draft wording (the draft is on `pr-prepare` at `pr-drafts/cli/SOLR-10667.md`, not on `coordination`, and was not edited here). Line 47 reads: "The example's own `.gitignore` is not in the assembled distribution. The cause is not yet known, so this change does not ship it." Proposed for the main side to apply: "The example's own `.gitignore` is not in the assembled distribution. Gradle's default exclude list, which includes `**/.gitignore`, removes it from the directory copy, and a single-file copy is excluded the same way, so this change does not ship it."
