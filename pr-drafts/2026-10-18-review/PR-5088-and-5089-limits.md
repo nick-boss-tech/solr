@@ -24,3 +24,6 @@ Replacement:
 
 - `testPreemptiveCreation` is one of the six. They keep the class-level `@AwaitsFix` in `TimeRoutedAliasUpdateProcessorTest`, so they do not run in normal mode.
 - SOLR-13059 is open, and its test fix is under way on the 13696 branch. No separate follow-up is planned in this PR.
+
+---
+Applied: 2026-10-18T02:02:06Z, after Nick approved the draft ("Post the draft"). PATCH to PR 5088 and PR 5089 returned 200 and read-back matches the intended body in both. PR 5088 Limits: the commitWithin follow-up promise is replaced. PR 5089 Limits: the six-test follow-up promise is replaced by "stay skipped until SOLR-13059 is resolved. No follow-up is planned in this PR." The 5089 text is one line shorter than the draft above, so it does not repeat the list already in the body.
