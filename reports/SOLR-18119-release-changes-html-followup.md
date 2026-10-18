@@ -24,3 +24,7 @@ Status: DONE, with Nick's approval for all updates (2026-10-18). Read back from 
 ## Item 3: records
 
 Status: DONE. This report; a follow-up section appended to `gates/SOLR-18119-release-changes-html.md` and to `receipts/SOLR-18119.md`; the assignment and claim marked DONE in the same push.
+
+## Addendum: body shortened (vm1, 2026-10-18)
+
+At Nick's direction the PR #5180 body was shortened from 4,264 to 3,467 characters: the release tooling bullets merged, the python point stated once, the fail-hard behavior moved into "What this change does", and the verification heading set to "Proof". No claim was added or dropped; the blob citations were refreshed to the final head fd796bbf2a. Read back from the API, identical.
