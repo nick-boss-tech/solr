@@ -1,6 +1,6 @@
 # Claim: SOLR-13059 test fix, round 1 (TimeRoutedAliasUpdateProcessorTest)
 
-Status: CLAIMED 2026-10-18T01:54:40Z by vm3 (assignments/pool-solr-13059-fix-round-1.md)
+Status: DONE 2026-10-18 (assignments/pool-solr-13059-fix-round-1.md; head 6914eae1c2 on solr-13696-submit; receipts/SOLR-13059.md)
 
 - Claimed by: vm3 (Linux, JDK 21.0.12.1, Gradle 9.7.0). Capability tags: implementation, gate.
 - Branch: solr-13696-submit, tip da4fa6df11784ce5a83bc7e74ec7b6aa78f689b9 (verified by ls-remote at claim time). The branch backs PR 5088.
@@ -44,3 +44,22 @@ Next tick: heartbeat only. Do not rerun gates or push until Q1 and Q2 have answe
 
 - 2026-10-18T06:04:58Z: decisions from the operator. Q1: Option A (bounded either-or check) accepted. Random failures: read the code and run similar tests before deciding; do not just rerun. Receipts: each gate gets receipts/SOLR-13059.md on coordination when it finishes. Host id: ~/.pool-host went missing once; the copy at /workspace/tools/pool-host is the fallback, and the sweep script reads it. Recorded in AGENTS.md.
 - 2026-10-18T06:04:58Z: tidy on gate3 passed (tree clean). Gate3 continues in the background on the fixed head.
+
+Result (gate3, head 6914eae1c2; all logs under gates/logs/vm3/13059/gate3/; receipt receipts/SOLR-13059.md):
+- Tidy `:solr:core:tidy`, rc 0, tree clean after. Conclusive.
+- Error Prone `:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true`, rc 0. Conclusive for compile.
+- testPreemptiveCreation x8, awaitsfix on, seed 13059C0FFEE13059: 8 of 8 passed, 0 failures (preemptive-x8.log, fresh XML 06:16:50Z). Conclusive; the gate-2 failure on this seed is the myalias literal bug fixed in 6914eae1c2.
+- Whole class, awaitsfix on, seeds 13059C0FFEE13059 to 13059C0FFEE13064: six runs, each 7 tests, 0 failures, 0 errors, 0 skipped (awaitsfix-13059.log to awaitsfix-13064.log, fresh XML per run). Conclusive for pass/fail; testDateMathInStart runs and passes here.
+- Normal mode, seed 13059C0FFEE13059, iters=2: TimeRouted 14 (2 skipped, testDateMathInStart, method-level SOLR-13943), CategoryRouted 12, DimensionalRouted 4, CreateAliasAPITest 26, all 0 failures (normal.log, normal.xml/). Conclusive.
+- Module check `:solr:core:check -x test`, rc 0 (module-check.log).
+- Changelog YAML parse: not run, the branch fragment is not touched.
+
+Random-failure investigation (recorded before the green run): the gate-2 failures were read against the code. The bug is the literal "myalias" in both preemptive checks while alias2 runs as myalias2. Fixed in 6914eae1c2. No rerun of gate 2 was used as evidence.
+
+Annotation: class-level @AwaitsFix(SOLR-13059) removed (424c52bb02). Method-level @AwaitsFix(SOLR-13943) on testDateMathInStart kept, out of scope.
+
+Push: solr-13696-submit fast-forwarded da4fa6df11 to 6914eae1c2 (the live PR 5088 head moves to this commit). Not force-pushed.
+
+Open for Nick: Q1 option A weakens the proof in the run where creation wins the race (flagged, see decisions above). reports/solr-13059-diagnosis-round-1.md is still missing from the tree. Shared pool/bin/sweep-run.sh XML copy bug and its ~/.pool-env dependency are in receipts/SOLR-13059.md. The takeover log line was not appended (file not on vm3).
+
+DONE: 2026-10-18. Head 6914eae1c2 (solr-13696-submit). Annotation removed: yes (class-level). Run counts: awaitsfix seed set 6 of 6 runs green (7 tests each, 0 failures); normal mode focused classes green (TimeRouted 14 with 2 method-level skips, CategoryRouted 12, DimensionalRouted 4, CreateAliasAPITest 26; 0 failures). Deliverables: receipts/SOLR-13059.md, receipts/SOLR-13696.md (refreshed), assignments/pool-solr-13059-fix-round-1.md (DONE), this claim.
