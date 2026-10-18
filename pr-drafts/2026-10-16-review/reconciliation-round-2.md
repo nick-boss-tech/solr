@@ -21,3 +21,21 @@ Head check: all six drafts named in the round 2 assignment (5116, 5117, 5130, 51
 - 5135: the draft is longer than the live body. Check whether the order sentence correction needs the extra length.
 - 5134: the gate receipt exists. Apply after the Limits correction and the length cut in PR-5134-reconcile-5c1124bd.md.
 - The round 2 assignment was marked DONE on 2026-10-18 at 04:37 UTC, before these checks. Reopen it until the cuts above are made.
+
+## Applied 2026-10-18 (vm4, on Nick's go-ahead)
+
+Option A, corrections only: sentences that the live head or a receipt contradicts were changed, and bodies that were already over 3,500 were not cut.
+
+| PR | Head at apply | Change | Body chars (raw) |
+| --- | --- | --- | --- |
+| 5131 | 74532d0f76 | round 2 draft body | 4,504 |
+| 5130 | 433e6c6ba9 | round 2 draft body | 4,522 |
+| 5132 | 05cc2776d0 | round 2 draft body | 4,666 |
+| 5116 | 58e07b4571 | round 2 draft body | 4,585 |
+| 5117 | 81a88e40dd | round 2 draft body; proof now six of nine on base, per receipts/SOLR-18541.md | 4,417 |
+| 5134 | 5c1124bdef | live body corrected per the reconciliation table; links re-pointed to 5c1124bdef with recomputed anchors | 6,739 |
+| 5135 | 6c033ba6ea | body rewritten for the head: leading _docid_ sort, cycle test in the proof, Known limitation replaced with the paging runs | 5,436 |
+
+5135 row correction: the head is 6c033ba6ea (not c666155ed0), and the draft was longer than live only in the earlier count, which used the old body. At 6c033ba6ea the live body is 4,148 visible characters and the draft is 3,895.
+
+Known limitation for 5135: the paging probe reproduces repeats and skips at 6c033ba6ea in two of four runs (receipts/SOLR-6975.md, "Paging probe"). The section stays and reports the runs.
