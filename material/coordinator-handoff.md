@@ -96,7 +96,7 @@ Gate failure rule: a gate that executed tests and failed is investigated by the 
 - Subagent cap: at most 6 to 7 subagents running at once in total, across all hosts combined. Assignment staffing counts toward the same total.
 - Claims: claim before work, hourly heartbeats, and the 2-hour staleness rule with recorded takeovers, exactly as in WORKFLOW.md. A gate claim may only be taken over when its recorded gate log has stopped.
 - Windows never claims build work: no `gate`, `implementation`, `premise-run`, `settling-run`, `sweep` or `bats` claims from the Windows host. Its tags are `review`, `draft`, `selenium` and `windows-check`.
-- VM3 is down until Nick says otherwise. Nothing is claimed there, and no job is assigned or sequenced to it.
+- VM3 is up. Nick confirmed on 2026-10-18 that this host is the new vm3, on a different platform from the 2026-10-11 host that went down. Claims and assignments go to it under the usual rules; its state is in `hosts/vm3.md`.
 - GitHub Actions is permanently unavailable. Gate evidence stands on local gates alone; no coordinator dispatches, queues or waits on Actions runs.
 - Decision default: a recorded recommendation is adopted as the decision; where no recommendation is on record, take the harder, more thorough option. Coordinators apply the default inside pool work and escalate only the items listed above.
 - Public text follows `pr-formula.md`: plain language, a bold one-line summary opening each section, citations as real links (code the change produces at the head commit; the pre-change symptom at the merge base, saying so), no internal process vocabulary, proof numbers only from receipts or gate files.
@@ -109,7 +109,7 @@ Gate failure rule: a gate that executed tests and failed is investigated by the 
 - 7 unclaimed gate jobs sit in `gates/` and on the shared backlog list, claimable by either Linux host.
 - SOLR-8628's premise run stands at parts 1 and 2 confirmed (the write.lock-only crash state is reachable) with part 3, the test leg, unfinished. VM3 released the claim before going down; the job is claimable.
 - SOLR-5262's first gate is blocked on a dependency resolution failure (the develocity plugin) with no tests run. VM3 released the claim; the gate is claimable, and the failure is an environment refusal, not a test failure.
-- VM3 is down, so sequencing runs across VM1 and VM2 only.
+- VM3 is up again (2026-10-18). Sequencing runs across VM1, VM2 and VM3.
 
 ### Review queue (Windows picks up)
 
