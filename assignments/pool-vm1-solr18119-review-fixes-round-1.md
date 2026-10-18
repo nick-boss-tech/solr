@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18119 review findings follow-up
 
-Status: OPEN
+Status: CLAIMED by vm1, 2026-10-18 (claims/pool-vm1-solr18119-review-fixes-round-1.md).
 
 - Capability tags: implementation, gate, review, draft.
 - Intended host: vm1. Claim under `claims/pool-vm1-solr18119-review-fixes-round-1.md` before starting (WORKFLOW.md).
