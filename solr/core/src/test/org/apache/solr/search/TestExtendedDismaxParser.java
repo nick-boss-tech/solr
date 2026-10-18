@@ -334,12 +334,10 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
    * query is the same with and without the fix; both cases also pass on the unfixed parser. In
    * "Zapp AND +and Brannigan" the operator word carries its own + prefix, so it was never a
    * promotion candidate. In "Zapp and and Brannigan" the chained lowercase operators have no
-   * explicit operator neighbour, so both still promote exactly as on the unfixed parser, which
-   * still falls back to the escaped form shown here; that shape is outside this ticket's scope.
+   * explicit operator neighbor. Both still promote, the rebuilt query is invalid, and the escaped
+   * form is used; that shape is outside this ticket's scope.
    */
   public void testLowercaseOperatorBoundaryPins() throws Exception {
-    // TODO: the chained lowercase operator case below pins the escaped-fallback shape; it is
-    // a known out-of-scope case that a future fix should flip.
     // {user query, q.op, expected parsed query, identical before and after the fix}
     String[][] cases = {
       {"Zapp AND +and Brannigan", "AND", "+(+(name:Zapp) +(name:and) +(name:Brannigan))"},
@@ -393,13 +391,9 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
    * SOLR-6320: the shapes in which a demoted lowercase "or" is the only operator-like word in the
    * query (its neighbour is an explicit AND, which the mm logic does not count as an operator).
    * foundOperators must agree with the demotion rule and not count the word as an operator, or it
-   * would switch off the configured mm for a query that contains no OR. In these shapes the parsed
-   * query is the same with and without that alignment: under q.op=AND every clause is required, so
-   * mm has nothing to relax, and under q.op=OR the derived mm is already 0%. The exact strings pin
-   * both rules together, so a change to either one shows up here. A later re-check over a wider
-   * matrix (these shapes with extra trailing terms, minimumShouldMatch read off every BooleanQuery,
-   * and a scratch tree with the alignment reverted) produced identical output, so no test can
-   * observe the alignment on its own; it is kept so the two rules cannot drift apart.
+   * would switch off the configured mm for a query that contains no OR. These strings pin the
+   * demotion rule. The mm check does not change them: under q.op=AND every clause is required, so
+   * mm has no optional clause to act on, and under q.op=OR the derived mm is already 0%.
    */
   public void testLowercaseOperatorDemotedOrShapes() throws Exception {
     // {user query, q.op, expected parsed query}
