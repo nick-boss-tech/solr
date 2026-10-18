@@ -3,8 +3,8 @@
 # Runs one Gradle build under this host's lock. Host environment comes from ~/.pool-env.
 set -u
 W=$1; L=$2; name=$3; shift 3
-POOL_HOST=$(cat "$HOME/.pool-host" 2>/dev/null)
-[ -n "$POOL_HOST" ] || { echo "missing ~/.pool-host" >&2; exit 3; }
+POOL_HOST=$(sed -n 's/^- Host id: `\([^`]*\)`.*/\1/p' /workspace/AGENTS.md 2>/dev/null | head -n1)
+[ -n "$POOL_HOST" ] || { echo "missing Host id line in /workspace/AGENTS.md" >&2; exit 3; }
 [ -f "$HOME/.pool-env" ] && . "$HOME/.pool-env"
 LOCK=/workspace/tools/.gradle-$POOL_HOST.lock
 mkdir -p "$L"

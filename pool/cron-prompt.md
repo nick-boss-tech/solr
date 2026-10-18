@@ -15,7 +15,7 @@ This file is the job for every pool Linux host. The scheduled task reads it from
 
 ## Setup, every tick
 
-0. Read your host id: `POOL_HOST=$(cat ~/.pool-host)`. It is a file on this VM's local disk, not in the repo. If the file is missing or empty, exit and record nothing. Every `$POOL_HOST` below is that id. Keep `~/.pool-env` on the same disk with this host's JAVA_HOME and GRADLE_USER_HOME.
+0. Read your host id from the line that starts `- Host id:` in `/workspace/AGENTS.md`. Every `$POOL_HOST` below is that id. If the line is missing, exit and record nothing. The host environment file `~/.pool-env` stays on this VM's local disk with JAVA_HOME and GRADLE_USER_HOME.
 1. Your worktree: `/workspace/worktrees/pool-$POOL_HOST`. If it does not exist, create it with `git -C /workspace/solr worktree add --detach /workspace/worktrees/pool-$POOL_HOST origin/coordination`. Every tick, `git fetch origin coordination` and `git rebase origin/coordination` inside it. Never switch the shared checkout at `/workspace/solr`.
 2. Sync scripts and skills: copy `pool/skills/*` from your worktree into `/workspace/.claude/skills/`, replacing older copies. Do this only if the files differ.
 3. If `flock -n /workspace/tools/.gradle-$POOL_HOST.lock true` fails, a build is running on this host. Exit.
