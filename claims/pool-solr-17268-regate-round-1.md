@@ -8,3 +8,5 @@
 - Source changes: none. No PR, comment, JIRA or email.
 
 Heartbeat: 2026-10-17T22:00Z (claim).
+- 2026-10-18T00:05Z: gate run complete at 9993394741. Not green. Focused head: JSONWriterTest 1 of 20 failed (testArrntvFacetsOnDefaultJsonWriter, XML body); JacksonJsonWriterArrntvCloudTest 2 of 4 failed (terms tests, compact-string match on pretty JSON with correct values). Leg A and Leg B deviations recorded. Report: reports/SOLR-17268-regate-9993394.md.
+- Status: HANDED BACK to the main agent (2026-10-18T00:05Z). Not relaunched. No receipt written.
