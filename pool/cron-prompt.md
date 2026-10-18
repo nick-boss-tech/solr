@@ -4,6 +4,9 @@ This file is the job for every pool Linux host. The scheduled task reads it from
 
 ## General rules
 
+- There is no main agent. Wherever an assignment, WORKFLOW.md or START-HERE.md says "main agent", read it as: the claimant decides, and the owner (Nick) answers only questions that are genuinely ambiguous.
+- A finding is not the end of a claim. Each finding ends in one of: a commit on the PR branch that fixes it, with the check rerun on the new head and the PR updated; a PR body or draft update that corrects the claim; or a recorded finding that the check did not reproduce, with the reason.
+
 - Claim work before you start it. The claim is the record that you are on it.
 - Give every ticket the same attention you would give a pull request. A verdict needs the evidence the rubric asks for: the code paths read with file and line, the git history, and a reproduction attempt wherever the ticket describes a testable behavior.
 - Read the code and the history, not only the ticket. When a reproduction is inconclusive, find the gap and try again with a different variant.
@@ -27,7 +30,7 @@ This file is the job for every pool Linux host. The scheduled task reads it from
 
 Builds and test runs go through `pool/bin/sweep-run.sh <worktree> <log dir> <run name> <gradle args...>` from your worktree. It takes this host's lock and writes the log, the headroom record, and the test XML. The host environment (JAVA_HOME, GRADLE_USER_HOME) comes from `~/.pool-env`, which each host keeps on its local disk. Exit code 2 means the lock is held; record it and stop. Any other non-zero exit means the build failed; read the log before you retry.
 
-7. Work the assignment item by item. Each Decisions row is binding. Where a row says escalate, record it in the claim and stop that item.
+7. Work the assignment item by item. Each Decisions row is binding. Where a row says escalate, make the call under the PR's stated intent, record the reason in the claim, and carry it through to the PR branch or draft. Stop only when the intent itself is ambiguous: then set the item to `Status: NEEDS-OWNER` and write the one question for Nick in the claim.
 8. After every build or test run, write a Result line in the claim: the command, the head sha, pass or fail, the seed, the log path, and whether the result is conclusive, with the reason.
 9. If a result is not conclusive, gather more information: read the code, the git history (`git log -S`, `git blame`, the test's own history), and the ticket. Pick a different build or test variant that separates the explanations, run it, and record that attempt as well.
 10. A failed run is never repeated on its own. Follow the failure sequence in the section below, and record each step in the claim.
@@ -39,7 +42,7 @@ A failed build, gate, test or sweep moves through these steps in order. The clai
 1. Assignment: state the question the run answers and the result you expected.
 2. Information gathering: read the failing output, the code path it names, and the git history of that code. Write what the failure shows.
 3. Test, gate or build: run again only if something changed since the failure. Something changed means one of these, written in the claim before the run: the head sha, a patch, the seed or the input, or the environment (for example JAVA_HOME). A rerun with the same head, seed, input and environment is not allowed.
-4. Patch and retry, or attach a status: if the gathering shows a fix, commit the patch on a branch, then run once against the new head. If it does not, attach a status (escalated, keep-open, or refuted) with the reason, and stop.
+4. Patch and retry, or attach a status: if the gathering shows a fix, commit the patch on a branch, then run once against the new head. If it does not, attach a status (NEEDS-OWNER, keep-open, or refuted) with the reason, and stop.
 
 A repeated run that fails the same way is not new evidence. A reproduction sweep may use new seeds only if its Decisions rows name that rule.
 
