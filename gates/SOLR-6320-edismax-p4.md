@@ -1,6 +1,6 @@
 # Gate job: SOLR-6320 (edismax lowercase operator test comments, patch P4)
 
-Status: OPEN
+Status: CLAIMED (vm3, claims/pool-vm3-gate-backlog-6320-edismax-p4.md, 2026-10-18T08:55:02Z)
 
 - Branch: `solr-6320-submit`. Head: `3a35d800a2e5ea9e14632733110973d5caee70e8` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `cb710c963531c4f32166e6e0b28c45e54b164a3f` (receipts/SOLR-6320.md, round 36). Merge-base with upstream/main: `97d973814336`.
