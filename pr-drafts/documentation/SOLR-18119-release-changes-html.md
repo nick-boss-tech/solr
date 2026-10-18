@@ -1,6 +1,6 @@
 # SOLR-18119 PR draft (for Nick to approve; no PR exists yet)
 
-Status: DRAFT. Not opened. Opening the PR needs Nick's approval.
+Status: OPENED as draft PR #5180 on 2026-10-18 at Nick's approval (https://github.com/apache/solr/pull/5180). Flipping to ready needs Nick's approval.
 Head: solr-18119-remove-changes2html at 1029a6b0cf09 (the same commit is also pushed as solr-18119-release-python; the PR opens from the remove-changes2html name). Gate green and review satisfied: receipts/SOLR-18119.md, reports/SOLR-18119-release-changes-html-review.md.
 Ticket: SOLR-18119, status Open. Direction on the ticket (Jan Høydahl, 2026-10-18): remove changes2html from the build, make it release-only, stay Python.
 
