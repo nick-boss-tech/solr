@@ -1,6 +1,6 @@
 # Gate job: SOLR-6009 (edismax regexp changelog title, patch P3)
 
-Status: CLAIMED (claims/pool-vm2-gate-backlog-6009-edismax-p3.md, vm2, 2026-10-18T08:40Z)
+Status: DONE (GATE GREEN at gated head b7695a518cccc0158a6374c61af9760884d1cb80, vm2, 2026-10-18T08:57Z; receipts/SOLR-6009.md; claims/pool-vm2-gate-backlog-6009-edismax-p3.md)
 
 - Branch: `solr-6009-submit`. Head: `b7695a518cccc0158a6374c61af9760884d1cb80` (fork tip after the vm2 push under `assignments/pool-edismax-patches-apply-round-1.md`, 2026-10-18). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `a41bb034a1f47c08a8f8ea6ebbe46e6d443cbb6f` (receipts/SOLR-6009.md, round 32). Merge-base with upstream/main: `14c7aac0d151`.
@@ -41,13 +41,14 @@ If any step cannot be verified, record it here and stop.
 ## Checklist
 
 - [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed (changelog only)
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed (changelog only)
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean
+- [x] step 4 focused head run, counted from fresh XML (41 of 41)
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
 
 ## Deliverable and limits
 
