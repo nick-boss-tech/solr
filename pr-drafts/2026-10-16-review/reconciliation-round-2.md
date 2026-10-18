@@ -12,12 +12,12 @@ Head check: all six drafts named in the round 2 assignment (5116, 5117, 5130, 51
 | 5131 (SOLR-5394) | 74532d0f76 | 3,795 | 3,498 | 0.91 | yes | Within the guideline. Check the fcs scope sentence against the head. |
 | 5132 (SOLR-6207) | 05cc2776d0 | 3,725 | 3,516 | 0.90 | yes | Over by 16. Trim slightly. |
 | 5135 (SOLR-6975) | c666155ed0 | 3,558 | 3,896 | 0.92 | yes | Draft is over the guideline and longer than live, which is the reverse of what a correction should do. Recheck the order sentence and cut. |
-| 5134 (SOLR-6831) | 5c1124bdef | 5,170 | 3,457 (written for 4afed049) | 0.38 | yes, for 4afed049 only | Stale draft. See PR-5134-reconcile-5c1124bd.md. A gate at 5c1124bdef is running. |
+| 5134 (SOLR-6831) | 5c1124bdef | 5,170 | 3,457 (written for 4afed049) | 0.38 | yes, for 4afed049 only | Stale draft. See PR-5134-reconcile-5c1124bd.md. Full gate green at 5c1124bdef (receipt in receipts/SOLR-6831.md). |
 
 ## Open items
 
 - Cut 5116, 5130, 5132, 5135 under 3,500 visible characters, and recheck each cut against its receipt.
 - 5117: confirm the proof paragraph and the max() note against receipts/SOLR-18541.md, since the body changed most.
 - 5135: the draft is longer than the live body. Check whether the order sentence correction needs the extra length.
-- 5134: apply only after the full gate at 5c1124bdef has a receipt.
+- 5134: the gate receipt exists. Apply after the Limits correction and the length cut in PR-5134-reconcile-5c1124bd.md.
 - The round 2 assignment was marked DONE on 2026-10-18 at 04:37 UTC, before these checks. Reopen it until the cuts above are made.

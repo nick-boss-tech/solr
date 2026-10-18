@@ -29,6 +29,6 @@ The live visible body is about 5,230 characters (links reduced to text), over th
 
 ## What is needed before the body can be applied
 
-1. A full gate at 5c1124bdef, with tidy, Error Prone, the module check and a receipt written to receipts/SOLR-6831.md on coordination. Until then the body can say "TestQueryLimits passes 9 of 9 at 5c1124bd (test run, 2026-10-18)" and nothing stronger.
+1. Done 2026-10-18: full gate green at 5c1124bdef (tidy, Error Prone, focused 9 of 9, module check), receipt section in receipts/SOLR-6831.md. The body can now cite the gate.
 2. Recompute the links at 5c1124bdef, and fix the Limits sentence about omitted answers.
 3. Nick approves the applied body.
