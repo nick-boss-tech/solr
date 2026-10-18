@@ -170,8 +170,6 @@ public class CollectionsRepairEventListenerTest extends SolrCloudTestCase {
     eventsListener.waitForExpectedEvent(10);
     cluster.waitForActiveCollection(collection, 1, 2);
 
-    Thread.sleep(TimeUnit.MILLISECONDS.convert(waitFor, TimeUnit.SECONDS));
-
     // wait for completed processing in the repair listener
     boolean await = repairListener.completed.await(60, TimeUnit.SECONDS);
     if (!await) {
