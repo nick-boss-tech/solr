@@ -119,6 +119,22 @@ of its PR description: sections 3 and 5 come straight from the
 receipt, section 2 from the branch's commits, section 4 from
 design-decisions-open.md.
 
+## Contribution guidance (dev-docs/how-to-contribute.adoc)
+
+Every PR also follows the project's own guidance in
+`dev-docs/how-to-contribute.adoc`, which this formula is built to
+satisfy: AI-assisted work is human-reviewed, its use is declared
+transparently, and the named human takes responsibility for it (the
+header and footer in section 6 do this; the adoc asks for disclosure
+of AI tool use and rules out contributing AI-generated code without
+human review and declaration); a unit test shows the bug was fixed or
+the feature works (section 3); code is tidy-formatted and dependency
+licenses are current before the PR. The adoc's readying command is
+`./gradlew tidy updateLicenses check -x test`. Owner ruling (Nick,
+2026-10-19): the full `check` is not required for our branches; the
+gate's module check is sufficient, with tidy and licenses kept
+current.
+
 ## Standing rules that still apply
 
 - Description edits are Muse's to make; exception: a maintainer
