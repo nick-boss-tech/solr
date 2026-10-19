@@ -39,7 +39,7 @@ class FacetRangeParser extends FacetParser<FacetRange> {
     @SuppressWarnings({"unchecked"})
     Map<String, Object> m = (Map<String, Object>) arg;
 
-    facet.field = getString(m, "field", null);
+    facet.field = getField(m);
     facet.ranges = getVal(m, "ranges", false);
 
     boolean required = facet.ranges == null;

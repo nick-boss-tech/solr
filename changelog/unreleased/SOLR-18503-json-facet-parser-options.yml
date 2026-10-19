@@ -1,0 +1,7 @@
+title: Document JSON Facet parser options and aliases
+type: changed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-18503
+    url: https://issues.apache.org/jira/browse/SOLR-18503

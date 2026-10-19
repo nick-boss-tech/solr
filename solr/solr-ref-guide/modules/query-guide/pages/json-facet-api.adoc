@@ -188,7 +188,7 @@ include::example$JsonRequestApiTest.java[tag=solrj-json-terms-facet-2]
 [width="100%",cols="20%,90%",options="header",]
 |===
 |Parameter |Description
-|`field` |The field name to facet over.
+|`field` |The field name to facet over. `f` is a short alias for `field`.
 |`offset` |Used for paging, this skips the first N buckets. Defaults to 0.
 |`limit` |Limits the number of buckets returned. Defaults to 10.
 |`sort` |Specifies how to sort the buckets produced.
@@ -223,12 +223,13 @@ This parameter indicates the facet algorithm to use:
 * `stream` Presently equivalent to `enum`. Used for indexed, non-point fields with sort `index asc` and `allBuckets`, `numBuckets`, and `missing` disabled.
 * `smart` Pick the best method for the field type (this is the default)
 
+|`cacheDf` |Minimum document frequency for a term to use `filterCache` when `method` is `enum`. Defaults to `0`, which uses the default threshold (one sixteenth of maxDoc, with a minimum of 3); a positive value sets the threshold, and `-1` disables caching.
 |`prelim_sort` |An optional parameter for specifying an approximation of the final `sort` to use during initial collection of top buckets when the <<sorting-facets-by-nested-functions,`sort` parameter is very costly>>.
 |===
 
 === Query Facet
 
-The query facet produces a single bucket of documents that match the domain as well as the specified query.
+The query facet produces a single bucket of documents that match the domain as well as the specified query. Specify the query with `q` or its `query` alias.
 
 [tabs#json-query-facet-simple]
 ======
@@ -308,6 +309,7 @@ Example response:
 === Range Facet
 
 The range facet produces multiple buckets over a date or numeric field.
+The field may be specified with `field` or its short alias `f`.
 
 [tabs#json-range-facet-simple]
 ======
@@ -500,7 +502,7 @@ Currently, custom `key` is not supported.
 The `heatmap` facet generates a 2D grid of facet counts for documents having spatial data in each grid cell.
 
 This feature is primarily documented in the xref:spatial-search.adoc#heatmap-faceting[spatial] section of the reference guide.
-The key parameters are `type` to specify `heatmap` and `field` to indicate a spatial RPT field.
+The key parameters are `type` to specify `heatmap` and `field` (or its short alias `f`) to indicate a spatial RPT field.
 The rest of the parameter names use the same names and semantics mirroring
   facet.heatmap query-parameter style faceting, albeit without the "facet.heatmap." prefix.
 For example `geom` here corresponds to `facet.heatmap.geom` in a facet.heatmap command.
@@ -570,6 +572,7 @@ Instead, they calculate something over all the documents in the domain.
 |avg |`avg(popularity)` |average of numeric values
 |min |`min(salary)` |minimum value
 |max |`max(mul(price,popularity))` |maximum value
+|count |`count()` |number of documents in the current domain or bucket
 |missing |`missing(author)` |number of documents which do not have value for given field or function
 |countvals |`countvals(author)` |number of values for a given field or function
 |unique |`unique(author)` |number of unique values of the given field. Beyond 100 values it yields not exact estimate
@@ -662,6 +665,7 @@ include::example$JsonRequestApiTest.java[tag=solrj-json-metrics-facet-expanded]
 
 Nested facets, or **sub-facets**, allow one to nest facet commands under any facet command that partitions the domain into buckets (i.e., `terms`, `range`, `query`).
 These sub-facets are then evaluated against the domains defined by the set of all documents in each bucket of their parent.
+For a bucket facet, set `processEmpty` to `true` in its nested `facet` block to compute sub-facets and statistics for buckets with an empty domain. By default, statistics are omitted and sub-facets that cannot produce results from an empty domain are skipped.
 
 The syntax is identical to top-level facets - just add a `facet` command to the facet command block of the parent facet.
 Technically, every facet command is actually a sub-facet since we start off with a single facet bucket with a domain defined by the main query and filters.
@@ -842,6 +846,7 @@ As discussed above, facets compute buckets or statistics based on their "domain"
 In addition to this default behavior, domains can be also be widened, narrowed, or changed entirely.
 The JSON Faceting API supports modifying domains through its `domain` property.
 This is discussed in more detail in xref:json-faceting-domain-changes.adoc[].
+The facet-level `excludeTags` option is a shorthand for `domain.excludeTags`; it excludes the tagged filters from that facet's domain.
 
 == Special Stat Facet Functions
 
