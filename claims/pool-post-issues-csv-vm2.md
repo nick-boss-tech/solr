@@ -20,3 +20,7 @@ BLOCKED: 2026-10-19T16:10:00Z. The claim stays on the record with no DONE line.
 Heartbeat: 2026-10-19T16:00:45Z
 
 Append one heartbeat line at least once an hour while the claim is active, and push it.
+
+SUPERSEDED: 2026-10-19T16:09:43Z. The owner decided on 2026-10-19 to publish the full upload. Claim claims/pool-post-issues-csv-vm2-r2.md published it.
+
+DONE: 2026-10-19T16:09:43Z. Deliverables: material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv (byte-identical to the upload, SHA-256 5c2a97038a8a714412a41fb22c63893ef31a5d905569521e38a5c33a9732b60b; marked on verification by vm2).
