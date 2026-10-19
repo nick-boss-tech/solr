@@ -45,13 +45,13 @@ def main():
         f"{l['type']['name']} {(l.get('outwardIssue') or l.get('inwardIssue'))['key']} ({(l.get('outwardIssue') or l.get('inwardIssue'))['fields']['status']['name']})"
         for l in f.get("issuelinks", [])) or "- Links: none")
     out.append("")
-    out.append("### Description (first 1200 chars)")
-    out.append(clean(f.get("description"), 1200) or "(empty)")
+    out.append("### Description (first 4000 chars)")
+    out.append(clean(f.get("description"), 4000) or "(empty)")
     out.append("")
     comments = (f.get("comment") or {}).get("comments", [])
     out.append(f"### Comments ({len(comments)})")
     for c in comments:
-        out.append(f"- {c['created'][:10]} {(c.get('author') or {}).get('name')}: {clean(c.get('body'), 240)}")
+        out.append(f"- {c['created'][:10]} {(c.get('author') or {}).get('name')}: {clean(c.get('body'), 2000)}")
     out.append("")
     out.append(f"### Commits on {a.ref} naming {a.key}")
     log = git(a.repo, "log", a.ref, "--grep", a.key, "-i", "--format=%h %ad %s", "--date=short", "-30")

@@ -23,7 +23,7 @@ Options:
 ## What the output covers
 
 1. The JIRA summary, status, resolution, fix versions, and issue links.
-2. The description (first 1200 characters) and every comment (first 240 characters each).
+2. The description (first 4000 characters) and every comment (first 2000 characters each). A cut-off text ends in `...`; read the ticket in JIRA when it does.
 3. Commits on `--ref` whose messages name the key.
 4. Test classes named in the summary or description, with the file path on `--ref` and the last two commits to that file.
 5. Identifiers in backticks, with the number of matching lines under `solr/` on `--ref`.
