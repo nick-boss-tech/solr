@@ -1,6 +1,6 @@
 # Pool assignment: skip verdict cross-audit, batch 4 of 21
 
-Status: CLAIMED (claims/pool-aab-skip-verdict-audit-04.md)
+Status: DONE 2026-10-19T16:07:56Z (vm2: pass 0, suspect 11, deferred 14). Deliverable: reports/skip-verdict-audit-batch-04.md
 
 - Capability tags: review, draft.
 - Intended host: any pool Linux host. Claim under `claims/` before starting (WORKFLOW.md).
