@@ -10,7 +10,7 @@
 
 The reporter runs SolrCloud behind a reverse proxy that terminates TLS. Opening the admin UI redirects the browser to http:// even when the request came in over https://. Changing the URL scheme in Solr breaks internal connections behind the proxy. The reporter asks how to keep the redirect from / to /solr/ while keeping the scheme that the client used.
 
-The comments (13, 2022-05-16 to 2022-05-17 in the first pages read) say the admin UI uses relative URLs in its own requests, so the scheme comes from the browser. One commenter reports that an out-of-the-box install behind a proxy keeps https, and that the redirect appears only with a security.json or with a particular proxy setup. The same commenter cannot reproduce the problem with a standalone install or with a cloud example listening on one port. No comment names a fix or a commit.
+The comments (13, 2022-05-16 to 2022-05-17 in the first pages read) say the admin UI uses relative URLs in its own requests, so the scheme comes from the browser. One commenter reports that an out-of-the-box install behind a proxy keeps https. With a security.json added, the same commenter reports that the admin UI stayed on https after login. Later the commenter says that with Solr listening only on localhost and the proxy using the same port, they could not reproduce the problem. No comment names a fix or a commit.
 
 ## Code reading
 
