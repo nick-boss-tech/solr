@@ -1,0 +1,10 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >
+  SolrJ HTTP client built with a non-SSL SSLConfig and an https URL now fails with a clear message instead of a NullPointerException
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16220
+    url: https://issues.apache.org/jira/browse/SOLR-16220

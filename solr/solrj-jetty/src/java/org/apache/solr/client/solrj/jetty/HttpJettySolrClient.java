@@ -25,6 +25,7 @@ import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -152,7 +153,7 @@ public class HttpJettySolrClient extends HttpSolrClient {
       initAuthStoreFromExistingClient(httpClient);
       this.closeClient = false;
     } else {
-      this.httpClient = createHttpClient(builder);
+      this.httpClient = createHttpClient(serverBaseUrl, builder);
       this.closeClient = true;
     }
     // note: do not manipulate httpClient below this point; it could be a shared instance
@@ -216,7 +217,18 @@ public class HttpJettySolrClient extends HttpSolrClient {
     return httpClient;
   }
 
-  private HttpClient createHttpClient(Builder builder) {
+  private HttpClient createHttpClient(String serverBaseUrl, Builder builder) {
+    SSLConfig sslConfig =
+        builder.sslConfig != null ? builder.sslConfig : HttpJettySolrClient.defaultSSLConfig;
+    if (sslConfig != null
+        && !sslConfig.isSSLMode()
+        && serverBaseUrl.toLowerCase(Locale.ROOT).startsWith("https://")) {
+      throw new IllegalArgumentException(
+          "The SSL configuration is not in SSL mode, but the base URL uses https: "
+              + serverBaseUrl
+              + ". Enable SSL in the SSL configuration or use an http URL.");
+    }
+
     executor = builder.getExecutor();
     if (executor == null) {
       this.executor = ExecutorUtil.newMDCAwareCachedThreadPool(new SolrNamedThreadFactory("h2sc"));
@@ -225,8 +237,6 @@ public class HttpJettySolrClient extends HttpSolrClient {
       shutdownExecutor = false;
     }
 
-    SSLConfig sslConfig =
-        builder.sslConfig != null ? builder.sslConfig : HttpJettySolrClient.defaultSSLConfig;
     SslContextFactory.Client sslContextFactory =
         (sslConfig == null)
             ? getDefaultSslContextFactory()
