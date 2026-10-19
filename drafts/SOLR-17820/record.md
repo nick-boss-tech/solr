@@ -4,7 +4,7 @@
 - Verdict: pr-needed. The verdict changed from keep-open in the earlier audit (see Gap analysis).
 - Draft branch: solr-17820-draft-pr (replaces solr-17820-draft-open, whose record reads "not reproducible").
 - Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (2026-10-07). Upstream fix 7e3b17502194 is not an ancestor of this head.
-- Checked by: vm4, 2026-10-19 13:10-13:40 UTC.
+- Checked by: vm4, 2026-10-19 13:05-13:09 UTC.
 
 ## Ticket reading
 
