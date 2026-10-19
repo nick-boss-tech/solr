@@ -867,7 +867,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "SunCertPathBuilderException fetching Azure AD well-known is JVM truststore config; no code pointer, 0 comments."
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-17169-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17155",
