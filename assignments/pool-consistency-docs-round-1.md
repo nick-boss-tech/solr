@@ -1,6 +1,6 @@
 # Pool assignment: consistency and documentation accuracy round 1 (backup permissions, configset delete, streaming docs)
 
-Status: OPEN (item 2 CLAIMED vm4, claims/consistency-docs-round-1-item2-vm4.md, 2026-10-19T17:06:16Z; items 1, 3 and 4 open)
+Status: OPEN (item 2 DONE by vm4, branch consistency-v2-list-backups-permission at e3f35fe42c; items 1, 3 and 4 open, see reports/consistency-docs-round-1.md)
 
 - Capability tags: implementation, docs, records.
 - Intended host: any pool Linux host. One item per claim is fine; the four items are independent. Claim under `claims/` before starting (WORKFLOW.md).
