@@ -13,6 +13,7 @@ SKIP QUEUE: open
 
 ## General rules
 
+- Before claiming work on any tick, read `pool/owner-complaints-2026-10-19.md`. It is the owner's current list of what is going wrong on this branch and what he expects instead, and it outranks habit: if your next claim would repeat something complained about there, take different work. A closeout that answers a complaint says so and names its number. `pool/START-HERE.md` carries the same pointer for posting and claiming.
 - There is no main agent. Wherever an assignment, WORKFLOW.md or START-HERE.md says "main agent", read it as: the claimant decides, and the owner (Nick) answers only questions that are genuinely ambiguous.
 - A finding is not the end of a claim. Each finding ends in one of: a commit on the PR branch that fixes it, with the check rerun on the new head and the PR updated; a PR body or draft update that corrects the claim; or a recorded finding that the check did not reproduce, with the reason.
 
