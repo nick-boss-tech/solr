@@ -111,7 +111,7 @@
     },
     {
       "key": "SOLR-17224",
-      "status": "open",
+      "status": "cleared",
       "recorded_verdict": "close-fixed",
       "draft_branch": "solr-17224-draft-close",
       "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
@@ -120,11 +120,13 @@
       "reasons": [
         "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
         "record.md states JIRA was not re-read for this record; status taken from the earlier B3 reading"
-      ]
+      ],
+      "cleared_date": "2026-10-19",
+      "cleared_coordination_tip": "29fd4da75c32f937e5bd9c548381bdff50a51f7f"
     },
     {
       "key": "SOLR-17154",
-      "status": "open",
+      "status": "cleared",
       "recorded_verdict": "keep-open",
       "draft_branch": "solr-17154-draft-open",
       "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
@@ -133,11 +135,13 @@
       "reasons": [
         "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
         "record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record"
-      ]
+      ],
+      "cleared_date": "2026-10-19",
+      "cleared_coordination_tip": "29fd4da75c32f937e5bd9c548381bdff50a51f7f"
     },
     {
       "key": "SOLR-16786",
-      "status": "open",
+      "status": "cleared",
       "recorded_verdict": "keep-open",
       "draft_branch": "solr-16786-draft-open",
       "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
@@ -146,7 +150,9 @@
       "reasons": [
         "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
         "record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record"
-      ]
+      ],
+      "cleared_date": "2026-10-19",
+      "cleared_coordination_tip": "29fd4da75c32f937e5bd9c548381bdff50a51f7f"
     },
     {
       "key": "SOLR-16785",
@@ -157,27 +163,27 @@
       "audit_date": "2026-10-19",
       "audit_coordination_tip": "b700e341478c8f28f04921d3a397a557951c2861",
       "reasons": [
-        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
-        "record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record",
-        "record.md names no code path with file and line; its code reading states no code path is in the ticket and nothing on head can be tied to the failure, and its reproduction section states only Not attempted, with no attempt or result"
+        "record.md names no code path with file and line; its code reading states not done at the code level, no code pointer in the ticket, and its reproduction section states only not attempted, with no attempt or result (the claim and Jira re-read gaps from the original audit are now fixed: claims/skip-SOLR-16785-vm4.md carries a DONE line naming remediation batch 01, and the record at cb55a58539 cites the pinned head and the Jira status read on 2026-10-19)"
       ]
     },
     {
       "key": "SOLR-16609",
-      "status": "open",
-      "recorded_verdict": "keep-open",
-      "draft_branch": "solr-16609-draft-open",
+      "status": "cleared",
+      "recorded_verdict": "close-answered",
+      "draft_branch": "solr-16609-draft-close",
       "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
       "audit_date": "2026-10-19",
       "audit_coordination_tip": "b700e341478c8f28f04921d3a397a557951c2861",
       "reasons": [
         "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
         "record.md states JIRA was not re-read for this record; status taken from the earlier B3 reading"
-      ]
+      ],
+      "cleared_date": "2026-10-19",
+      "cleared_coordination_tip": "29fd4da75c32f937e5bd9c548381bdff50a51f7f"
     },
     {
       "key": "SOLR-16548",
-      "status": "open",
+      "status": "cleared",
       "recorded_verdict": "keep-open",
       "draft_branch": "solr-16548-draft-open",
       "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
@@ -186,11 +192,13 @@
       "reasons": [
         "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
         "record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record"
-      ]
+      ],
+      "cleared_date": "2026-10-19",
+      "cleared_coordination_tip": "29fd4da75c32f937e5bd9c548381bdff50a51f7f"
     },
     {
       "key": "SOLR-16526",
-      "status": "open",
+      "status": "cleared",
       "recorded_verdict": "keep-open",
       "draft_branch": "solr-16526-draft-open",
       "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
@@ -199,11 +207,13 @@
       "reasons": [
         "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
         "record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record"
-      ]
+      ],
+      "cleared_date": "2026-10-19",
+      "cleared_coordination_tip": "29fd4da75c32f937e5bd9c548381bdff50a51f7f"
     },
     {
       "key": "SOLR-17086",
-      "status": "open",
+      "status": "cleared",
       "recorded_verdict": "keep-open",
       "draft_branch": "solr-17086-draft-open",
       "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
@@ -212,11 +222,13 @@
       "reasons": [
         "the record on the draft branch named in queue-current.json is a bulk audit-derived record, not the re-check record the vm5 claim describes: it states JIRA was not re-read, the audit was checked against upstream main c8ab71430f not the fork pin, and it was not re-checked at the pinned head; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record",
         "claim claims/skip-SOLR-17086-vm5.md carries a DONE line but states the new draft branch head as fdf29b716508, which is not a valid object on the fork and does not match the fork tip of the named draft branch (564eb5312949c64c1fdd9abce02543e0abd96786)"
-      ]
+      ],
+      "cleared_date": "2026-10-19",
+      "cleared_coordination_tip": "29fd4da75c32f937e5bd9c548381bdff50a51f7f"
     },
     {
       "key": "SOLR-17003",
-      "status": "open",
+      "status": "cleared",
       "recorded_verdict": "keep-open",
       "draft_branch": "solr-17003-draft-open",
       "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
@@ -225,7 +237,9 @@
       "reasons": [
         "the record on the draft branch named in queue-current.json is a bulk audit-derived record, not the re-check record the vm5 claim describes: it states JIRA was not re-read, the audit was checked against upstream main c8ab71430f not the fork pin, and it was not re-checked at the pinned head; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record",
         "claim claims/skip-SOLR-17003-vm5.md carries a DONE line but states the new draft branch head as aa50491d480c, which is not a valid object on the fork and does not match the fork tip of the named draft branch (be5edf5582e25efcb77bd67fd6633aacaa50d5e5)"
-      ]
+      ],
+      "cleared_date": "2026-10-19",
+      "cleared_coordination_tip": "29fd4da75c32f937e5bd9c548381bdff50a51f7f"
     },
     {
       "key": "SOLR-16930",
