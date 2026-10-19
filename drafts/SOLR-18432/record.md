@@ -3,7 +3,7 @@
 Verdict: keep-open (draft branch `solr-18432-draft-open`).
 
 - Pinned head: fork `origin/main` `498a09aea97aac86c2cc7ac114113b946d249942`. Upstream history is not cited.
-- JIRA checked 2026-10-19: status Open, no resolution, no fix versions, created and updated 2026-09-09. Description read in full (about 900 characters). One comment (2026-09-09, janhoy), read in full: the reporter's maintainer-level reply calls the items "improvements worth doing" and says they have not been seen as issues.
+- JIRA checked 2026-10-19: status Open, no resolution, no fix versions, created and updated 2026-09-09. Description read in full (about 900 characters). One comment (2026-09-09, janhoy), read in full: a maintainer reply that calls the items "improvements worth doing" and says they have not been seen as issues.
 - Audit verdict on record: `confirmed-skip` (audit-1, 2026-10-04): "Improvement program for SolrVersion prerelease handling; not a single bug." The audit note also cites `research-notes/SOLR-18432.md`, which is not on `coordination` or in the pool worktree. It was not read for this record.
 
 ## Code paths read at the pinned head
