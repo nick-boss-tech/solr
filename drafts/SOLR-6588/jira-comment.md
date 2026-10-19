@@ -1,0 +1,1 @@
+The reference guide answers this. In the current docs (partial-document-updates.adoc, lines 164): "All of the Atomic Update operations mentioned above are supported for "real" fields of Child Documents." Link: https://github.com/apache/solr/blob/main/solr/solr-ref-guide/modules/indexing-guide/pages/partial-document-updates.adoc#L164. Closing as answered by the documentation.
