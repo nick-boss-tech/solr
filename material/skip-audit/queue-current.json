@@ -17649,7 +17649,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 9 comments). Class: design decision / by design / needs maintainer call. Reason holds: shards param parsing, 1.4 design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-1557-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-1542",
