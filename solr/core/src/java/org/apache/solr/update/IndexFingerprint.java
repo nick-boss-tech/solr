@@ -161,10 +161,7 @@ public class IndexFingerprint implements MapWriter {
 
   /** Returns the live fingerprint represented by a gross per-segment fingerprint. */
   public static IndexFingerprint getFingerprintFromGross(
-      IndexFingerprint gross,
-      SolrIndexSearcher searcher,
-      LeafReaderContext ctx,
-      long maxVersion)
+      IndexFingerprint gross, SolrIndexSearcher searcher, LeafReaderContext ctx, long maxVersion)
       throws IOException {
     // A gross fingerprint cannot answer a request that excludes some of its versions.
     if (gross.maxVersionEncountered > maxVersion) {

@@ -126,10 +126,7 @@ public class SolrIndexFingerprintTest extends SolrTestCaseJ4 {
 
     iwRef = core.getSolrCoreState().getIndexWriter(core);
     try {
-      iwRef
-          .get()
-          .updateDocValues(
-              new Term("id", "1"), new NumericDocValuesField("_version_", 100));
+      iwRef.get().updateDocValues(new Term("id", "1"), new NumericDocValuesField("_version_", 100));
     } finally {
       iwRef.decref();
     }

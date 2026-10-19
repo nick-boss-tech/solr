@@ -240,6 +240,7 @@ public class SolrCore implements SolrInfoBean, Closeable {
       perSegmentGrossFingerprintCache = Caffeine.newBuilder().weakKeys().recordStats().build();
 
   private record CachedSegmentFingerprint(long docValuesGen, IndexFingerprint fingerprint) {}
+
   // singleton listener for all packages used in schema
 
   private final CircuitBreakerRegistry circuitBreakerRegistry;
@@ -2161,9 +2162,7 @@ public class SolrCore implements SolrInfoBean, Closeable {
 
     IndexReader.CacheKey readerKey = readerCacheHelper.getKey();
     IndexFingerprint f = perSegmentFingerprintCache.getIfPresent(readerKey);
-    if (f != null
-        && f.getMaxInHash() <= maxVersion
-        && f.getNumDocs() == ctx.reader().numDocs()) {
+    if (f != null && f.getMaxInHash() <= maxVersion && f.getNumDocs() == ctx.reader().numDocs()) {
       if (log.isDebugEnabled()) {
         log.debug(
             "IndexFingerprint cache hit for searcher:{} reader:{} readerHash:{} maxVersion:{}",
