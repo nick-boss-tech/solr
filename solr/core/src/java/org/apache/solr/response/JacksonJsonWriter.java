@@ -106,7 +106,7 @@ public class JacksonJsonWriter extends BinaryResponseWriter {
         }
       }
       if (arrntv) {
-        writeNamedListAsMapWithDups(rsp.getValues());
+        writeNamedListAsMapWithDups(null, rsp.getValues());
       } else {
         writeNamedList(null, rsp.getValues());
       }
@@ -271,12 +271,6 @@ public class JacksonJsonWriter extends BinaryResponseWriter {
     public void writeArray(String name, Iterator<?> val, boolean raw) throws IOException {
       ifNeededWriteTypeAndValueKey("array");
       super.writeArray(name, val, raw);
-    }
-
-    @Override
-    public void writeArray(String name, Iterator<?> val, int size, boolean raw) throws IOException {
-      ifNeededWriteTypeAndValueKey("array");
-      super.writeArray(name, val, size, raw);
     }
 
     @Override
