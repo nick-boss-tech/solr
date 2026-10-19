@@ -649,7 +649,7 @@ public class BJQParserTest extends SolrTestCaseJ4 {
   public void testChildQueryWithNoClausesAndNoParentFilterIsBadRequest() {
     assertQEx(
         "child query with no clauses and no 'of' parent filter must not fail with an NPE",
-        req("q", "{!child q=\"\"}"),
+        req("q", "{!child of=\"\"}"),
         SolrException.ErrorCode.BAD_REQUEST.code);
   }
 
