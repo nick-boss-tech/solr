@@ -23,3 +23,11 @@ One section per ticket. Assignment: `assignments/pool-jira-newdev-bugs-round-1.m
 - Probe: a temporary test (not committed) indexed one document, deleted all documents, committed, then ran `qt=/suggest&suggest.dictionary=suggest_fuzzy_doc_dict&suggest.build=true&suggest.q=exampel`. It passed with `numFound=0` and no error in the log (`/workspace/gates/logs/vm3/solr-16193-repro/focused.log`, seed `16193E50`).
 - Not covered: the reporter's own handler and dictionary config (for example a build-on-commit or stored-dictionary setup). That path would need the reporter's configuration to reproduce, so this is recorded as not reproduced, not as fixed.
 - Gate: none, since no branch was pushed.
+
+## SOLR-16220: Missing SslContextFactory NPE for SolrJ https client (vm3, 2026-10-19)
+
+- Status: not reproduced for the documented case on apache/main at `c8ab71430f`. No branch pushed. Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-16220.md`.
+- Code reading: `solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java` lines 229 to 233 use `getDefaultSslContextFactory()` when no `SSLConfig` is set, so a client built with an `https` URL and no SSL config gets a factory.
+- Probe (temporary test, not committed): `new HttpJettySolrClient.Builder("https://127.0.0.1:1/solr").build()` then a query. The output shows the request reached the socket connect step (`SolrServerException: access denied ("java.net.SocketPermission" ...)`), with no `Missing SslContextFactory` NPE. The test passed (`/workspace/gates/logs/vm3/solr-16220-repro/`, seed `16220E50`). The sandbox's socket check stopped the connect, so this shows the destination was built, not that a live TLS handshake succeeds.
+- Variant not covered: `SSLConfig.createClientContextFactory()` returns null when the config is not in SSL mode (`solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/SSLConfig.java` line 144). A client built with a non-SSL `SSLConfig` and an `https` URL would pass a null factory to Jetty. That is the path that matches the ticket's NPE, and it needs an owner decision on the intended behavior (fall back to the default factory, or fail with a clear message). Not fixed here.
+- Gate: none, since no branch was pushed.
