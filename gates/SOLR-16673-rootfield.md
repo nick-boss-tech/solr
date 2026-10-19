@@ -1,6 +1,6 @@
 # Gate job: SOLR-16673 nested root field type
 
-Status: BLOCKED at step 1 (tidy drift on the shared base; decision needed, see the result section)
+Status: OPEN (handoff: assignments/pool-solr-16673-gate-handoff-round-1.md; step 1 decided there)
 
 - Branch: `solr-16673-rootfield`. Head: `5fb792482fc3d8fef851513bb91eb3231409a033` (fork tip, confirmed by `git ls-remote` on 2026-10-18).
 - Prior gated head: none. Merge-base with upstream/main: `e044bf20b405b8ca985730be3553d77d1fc8ff31`.
