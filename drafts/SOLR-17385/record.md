@@ -35,7 +35,7 @@ The behavior the ticket reports follows from line 74. The change the ticket asks
 
 pr-needed: "The problem reproduces on the pinned head, or the code path shows it, and a change is needed." The code path shows it at `CoordinatorHttpSolrCall.java:74`, and a change is needed. Minimum evidence: the code path with the line that causes the behavior (above), and the test the PR would add. The test: a coordinator test in `solr/core/src/test/org/apache/solr/search/TestCoordinatorRole.java` (the existing coordinator role test) that sends a query to a custom request handler whose path does not end in `/select` and checks that it is federated once the change is in.
 
-Scope note: PR #5106 (the test-sleep work on this host's records) changes `TestCoordinatorRole.java`. The PR for this ticket would conflict with it in that file; the PR should be opened after #5106 merges or rebased onto it. This closeout does not open any PR.
+Scope note: PR #5106, an upstream Solr PR that converts sleeps in `TestCoordinatorRole.java` (see `reports/test-sleep-audit/batch-1-bd-2026-10-18.md` on coordination), changes the same file. The PR for this ticket would conflict with it in that file; the PR should be opened after #5106 merges or rebased onto it. This closeout does not open any PR.
 
 ## Limits
 
