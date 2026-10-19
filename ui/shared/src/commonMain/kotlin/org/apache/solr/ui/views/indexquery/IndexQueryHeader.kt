@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import org.apache.solr.ui.domain.RequestHandlerOption
 import org.apache.solr.ui.shared.generated.resources.Res
 import org.apache.solr.ui.shared.generated.resources.label_request_handler
 import org.apache.solr.ui.shared.generated.resources.nav_collections
@@ -43,17 +44,6 @@ import org.apache.solr.ui.shared.generated.resources.no_collections_available
 import org.apache.solr.ui.shared.generated.resources.no_request_handlers
 import org.apache.solr.ui.shared.generated.resources.placeholder_select_request_handler
 import org.jetbrains.compose.resources.stringResource
-
-/**
- * A request handler of a collection, shown with its endpoint name and its class.
- *
- * @property name The endpoint, for example "/select".
- * @property className The fully qualified handler class.
- */
-data class RequestHandlerOption(
-    val name: String,
-    val className: String,
-)
 
 /**
  * Header of the Index & Query section with a collection dropdown and a request handler dropdown.
