@@ -109,3 +109,13 @@ One section per ticket. Assignment: `assignments/pool-jira-newdev-bugs-round-1.m
 - Behavior change: signatures change for documents whose quantized profile has tied frequencies. Stored signatures for such documents need a re-index to match. Stated in the PR draft for review.
 - Test: `solr/core/src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java` (new, 1 test). Failed on base (signature changed after the resize, log `/workspace/gates/logs/vm3/solr-18200-repro/`), passes on the fix.
 - Gate, on the fixed tree: tidy 0, Error Prone compile 0, focused `TextProfileSignatureTest` 1 of 1 with 0 failures (seed 18200E50), `:solr:core:check -x test` 0. Logs: `/workspace/gates/logs/vm3/solr-18200-gate-r2/`. First gate failed only at forbiddenApis (a `String.format` without a locale in the new test); fixed with `Locale.ROOT` and re-gated once (`/workspace/gates/logs/vm3/solr-18200-gate/` for the first run).
+
+## SOLR-16750: Grouping on EnumFieldType fields fails (vm3, 2026-10-19)
+
+- Status: reproduced at base `c8ab71430f`, stopped for an owner decision. No branch. Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-16750.md`.
+- Reproduction: a regression test in `EnumFieldTest` (`testGroupingOnEnumFieldReturnsLabels`, seed `16750E51`, docValues on). Single-shard `group=true&group.field=severity` returns `groupValue` `'3'` for the label `High`. Log: `/workspace/gates/logs/vm3/solr-16750-repro/`.
+- Seed `16750E50` was skipped (docValues off, which `EnumFieldType` does not allow); the suite's `assumeFalse` guard is copied from `testEnumSchema`.
+- Causes, read from code: the multi-shard path casts an `EnumFieldValue` to `Integer` in `solr/core/src/java/org/apache/solr/search/grouping/distributed/command/GroupConverter.java` line 86, because `EnumFieldType.getNumberType()` returns `INTEGER`. The single-shard path (`GroupedEndResultTransformer.java` line 81) adds the enum object; the exact path that prints `3` was not traced.
+- Decision needed: the enum group-value conversion. Option A: emit the label through `EnumFieldType.indexedToReadable`, the conversion `TopGroupsResultTransformer` uses, for enum fields only. Option B: keep `EnumFieldValue` and fix the writer path. The multi-shard `Integer` cast needs its own change either way, so this is more than a minimal fix.
+- Test patch kept outside the repo: `/workspace/tools/solr-16750-test.patch`.
+- Gate: none, since no branch was pushed.
