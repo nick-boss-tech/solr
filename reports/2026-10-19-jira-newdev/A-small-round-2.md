@@ -22,3 +22,11 @@ Assignment: `assignments/pool-jira-newdev-small-round-2.md`. One section per tic
 - Code on `c8ab71430f`: `solr/core/src/java/org/apache/solr/cli/RunExampleTool.java` prompts for node ports only (lines 858 to 886). The embedded ZooKeeper follows the first node's port plus 1000 (`bin/solr` line 517 and `StartCommand.java` line 63 document the `PORT-1000` and `PORT+10000` rule).
 - Why stopped: a ZK prompt adds a question to the interactive flow, which changes the order of the `--script-inputs` answers that scripted and packaging tests depend on. The ticket does not say whether the prompt should be default-on or opt-in, or whether `-z` / the ZK port should be an option instead. That is a user-facing choice for the owner.
 - Gate: none, since no branch was pushed.
+
+## Unclaimed by vm3 at the end of this session (triage only, for the owner)
+
+- SOLR-2534, add min() and max() on strings: a new function-query feature. The design (which function names, behavior with multi-valued and missing fields, and how it sorts) is not in the ticket, so it is outside a minimal fix.
+- SOLR-8614, add simple SolrClient.setUseXmlFormat: a new public client API. The ticket does not say which clients and which request and response writers the toggle covers, so it needs an API decision.
+- SOLR-12718, StreamContext constructor should always take a SolrClientCache: a constructor signature change, which is a breaking API change for existing callers. Owner decision on compatibility.
+- SOLR-16865, Solr should warn about low disk space at startup: a new startup check. The ticket suggests 2% free but leaves the path, the threshold and the log level open.
+- SOLR-17719 and SOLR-18173 are claimed by other hosts.
