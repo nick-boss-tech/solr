@@ -1,1 +1,1 @@
-We reviewed this ticket against current upstream main. The review did not find a reproducible defect in the current code, but the ticket is not closed yet, and we are leaving it open for a decision.
+We checked this ticket against the current code. With eDisMax, the phrase boosts (pf) are built from the whole query's terms rather than from each group joined by boolean operators, which is the behavior described. Changing that would change scoring for queries with boolean operators, and the ticket does not record a decision on that, so we are leaving the ticket open for one.
