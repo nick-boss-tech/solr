@@ -56,3 +56,7 @@ Heartbeat: 2026-10-19T19:29:36Z. Item 22 SOLR-15679 DONE (keep-open, 13704d7602)
 Heartbeat: 2026-10-19T19:33:38Z. Item 23 SOLR-15672 DONE (keep-open, 55fcbb81f9). Remaining: items 24 and 25.
 
 Heartbeat: 2026-10-19T19:38:38Z. Item 24 SOLR-15586 DONE (keep-open, 805fbcd07f). Remaining: item 25.
+
+Heartbeat: 2026-10-19T19:45:03Z. Item 25 SOLR-15585 DONE (keep-open, 876656abef). Batch complete.
+
+DONE: 2026-10-19T19:45:03Z. Deliverables: `reports/skip-verdict-remediation-02.md` (25 rows, items 1 to 25); per-ticket claims `claims/skip-<KEY>-vm2.md` for each item; queue verdicts in `material/skip-audit/queue-current.json`; drafts on the fork branches listed in the report. Items that answer complaint 2: none of these redos marks a ticket cleared; cleared is set only by re-audit (see `pool/owner-complaints-2026-10-19.md`).
