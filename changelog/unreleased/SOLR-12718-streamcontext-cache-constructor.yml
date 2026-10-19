@@ -1,0 +1,10 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >
+  StreamContext has a constructor that takes a SolrClientCache
+type: added
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-12718
+    url: https://issues.apache.org/jira/browse/SOLR-12718
