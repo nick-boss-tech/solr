@@ -10,4 +10,6 @@ Heartbeat: 2026-10-19T17:32Z
 
 Result: 2026-10-19T17:33Z: keep-open on solr-15571-draft-open at 7a19edfb57, evidence ExportWriter.java:501-539. Not run; missing piece named in the record.
 
-DONE: 2026-10-19T17:33Z. Deliverables: drafts/SOLR-15571/record.md and jira-comment.md on solr-15571-draft-open (7a19edfb57); reports/skip-verdict-remediation-03.md.
+DONE: 2026-10-19T18:30Z. Verdict revised to close-cannot-reproduce after a reproduction on the pinned head (not reproduced, see the record). Deliverables: drafts/SOLR-15571/record.md, jira-comment.md and repro/ on solr-15571-draft-close (a2ceb96a50); queue verdict; reports/skip-verdict-remediation-03.md.
+
+Result: 2026-10-19T18:30Z: three reproduction variants on the pinned head (logs /workspace/gates/logs/vm5/15571/), all matching stored and exported values; verdict close-cannot-reproduce.
