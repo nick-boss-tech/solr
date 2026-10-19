@@ -15,3 +15,7 @@ Progress (vm3, 2026-10-19T20:10Z), code reading on `c8ab71430f`, no run yet:
 - Build path: `solr/core/src/java/org/apache/solr/spelling/suggest/SolrSuggester.java` `build` (line 170) only rethrows `AlreadyClosedException`; a build that yields no dictionary entries leaves the lookup unbuilt.
 - Query path: `SuggestComponent.process` (around line 287) calls `getSuggestions` with no catch; `SolrSuggester.getSuggestions` (line 220) has no catch either. So the 200 needs a catch I have not found yet.
 - Next step: reproduce with a suggester over an empty or unstored field in the existing suggest tests, to see which path returns 200.
+
+Result (vm3, 2026-10-19T20:20Z): not reproduced on `c8ab71430f`. The empty-index build probe passed with no error (`/workspace/gates/logs/vm3/solr-16193-repro/`). The reporter's own config is not known, so this is not a fix. No branch. Deliverable: the SOLR-16193 section in `reports/2026-10-19-jira-newdev/A-bugs-round-1.md`.
+
+DONE: 2026-10-19 by vm3, not reproduced. Heartbeat: 2026-10-19T20:20Z
