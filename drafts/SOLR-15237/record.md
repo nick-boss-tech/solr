@@ -29,7 +29,7 @@ The credential forwarding the reporter's configuration uses (`forwardCredentials
 
 ## Proposed change (recorded choice)
 
-The change is to make the internode listener exist in standalone mode, so that the existing BasicAuthPlugin forwarding (BasicAuthPlugin.java:215-216) runs for shard sub-requests. That means building `PKIAuthenticationPlugin` (CoreContainer.java:839-840) outside the ZooKeeper branch. The constructor takes a node name (CoreContainer.java:841 passes `zkSys.getZkController().getNodeName()`), which standalone mode does not have. So the choice is which node name the standalone listener uses. Recorded choice for the PR draft: use the core container's configured node name, which the review must confirm exists at this head. The ZooKeeper path is unchanged. The owner may overrule.
+The change is to make the internode listener exist in standalone mode, so that the existing BasicAuthPlugin forwarding (BasicAuthPlugin.java:215-216) runs for shard sub-requests. That means building `PKIAuthenticationPlugin` (CoreContainer.java:839-840) outside the ZooKeeper branch. The constructor takes a node name (CoreContainer.java:842 passes `zkSys.getZkController().getNodeName()`), which standalone mode does not have. So the choice is which node name the standalone listener uses. Recorded choice for the PR draft: use the core container's configured node name, which the review must confirm exists at this head. The ZooKeeper path is unchanged. The owner may overrule.
 
 ## Check the PR would add
 
