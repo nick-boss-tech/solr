@@ -25,7 +25,13 @@ import org.apache.lucene.store.SingleInstanceLockFactory;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
 
-/** Factory to instantiate {@link org.apache.lucene.store.ByteBuffersDirectory} */
+/**
+ * Factory to instantiate {@link org.apache.lucene.store.ByteBuffersDirectory}
+ *
+ * @deprecated use {@link RAMDirectoryFactory}, which creates the same directory with the same lock
+ *     handling
+ */
+@Deprecated(since = "11.0")
 public class ByteBuffersDirectoryFactory extends EphemeralDirectoryFactory {
 
   @Override

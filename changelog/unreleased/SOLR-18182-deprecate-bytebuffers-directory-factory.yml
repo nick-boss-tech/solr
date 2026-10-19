@@ -1,0 +1,10 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >
+  Deprecate ByteBuffersDirectoryFactory; use RAMDirectoryFactory, which creates the same directory
+type: deprecated
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-18182
+    url: https://issues.apache.org/jira/browse/SOLR-18182

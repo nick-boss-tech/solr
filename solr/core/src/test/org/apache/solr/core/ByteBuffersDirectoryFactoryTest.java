@@ -27,6 +27,10 @@ import org.apache.solr.core.DirectoryFactory.DirContext;
 /** Test-case for ByteBuffersDirectoryFactory */
 public class ByteBuffersDirectoryFactoryTest extends SolrTestCaseJ4 {
 
+  public void testDeprecated() {
+    assertTrue(ByteBuffersDirectoryFactory.class.isAnnotationPresent(Deprecated.class));
+  }
+
   public void testLockTypeNone() throws IOException {
     ByteBuffersDirectoryFactory factory = new ByteBuffersDirectoryFactory();
     assertSame(NoLockFactory.INSTANCE, factory.createLockFactory(DirectoryFactory.LOCK_TYPE_NONE));
