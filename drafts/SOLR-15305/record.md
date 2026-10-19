@@ -1,37 +1,41 @@
 # Skip record: SOLR-15305
 
-- Ticket: SOLR-15305, Multiple nodes from same directory causes bizarre SolrCloud errors. JIRA was not re-read for this record.
+- Ticket: SOLR-15305, Multiple nodes from same directory causes bizarre SolrCloud errors. JIRA read 2026-10-19 (this pass, evidence tool): status Open, resolution None, created 2021-04-01, updated 2021-04-12, no fix versions, no links, no comments. Spinoff from SOLR-15288.
 - Verdict: keep-open.
-- Draft branch: solr-15305-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-2, 2026-10-04, audit verdict confirmed-skip).
+- Draft branch: solr-15305-draft-open (the existing keep-open branch; this record replaces its draft files).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Code read and every cited name grepped at this head (detached worktree).
+- Source: remediation redo of batch 03, item 15, under assignments/pool-aaa-skip-verdict-remediation-03.md. The earlier record (round audit-2, 2026-10-04, confirmed-skip) cited the design rationale from audit evidence, not from this head; that rationale is not checked here.
 
 ## Ticket reading
 
-The summary as recorded in the queue: Multiple nodes from same directory causes bizarre SolrCloud errors. Skip note: Same-dir multi-node SolrCloud errors: zero comments since 2021, no isolated root cause; fix shape is a maintainer design decision (fail-fast guard vs shared-dir support); PRS sibling SOLR-15288 already fixed separately.
+Two Solr nodes started from the same solr home directory, with a replica placed on the second node. Restarting the second node leaves both replicas down, and the second replica stays ACTIVE after the second node is stopped. The repro is a shell script with `bin/solr -c -p 9000` and `-p 9001` against one ZooKeeper.
 
 ## Code reading
 
-Taken from the audit evidence, not re-read at the pinned head: Two nodes sharing one solr home is an unsupported setup. A fail-fast guard in ZkController.checkStateInZk (replica node_name != this node) was considered and rejected: node_name legitimately changes (hostname/IP change, container restart) and the core republishes its own node_name, so the guard would break that recovery path. No safe discriminator, so a doc/design matter, not a patch.
+- solr/core/src/java/org/apache/solr/cloud/ZkController.java:2190-2240, `checkStateInZk(CoreDescriptor, Replica.State)`: waits up to 10 seconds for the replica named by `coreNodeName` to exist in its shard, and, when a state is given, for it to have that state. The method compares the core node name and the state. It does not compare the replica's node_name with this node's name. So at the pin there is no fail-fast guard on node_name in this method.
+- The node name is written into replica properties at ZkController.java:1761 (`ZkStateReader.NODE_NAME_PROP`) and at :1864 and :2028. The replica that a restarted node reads back is whatever the cluster state holds for that core node name.
+
+So the recovery path runs in code, and the two-node case goes through it unchanged. Whether the reporter's replicas end up in the states described is not shown by reading.
 
 ## History
 
-No commit history was used for this record.
+- SOLR-15288 fixes are on the pin: 291f9b32c7 (2021-04-05, "Hardening NODEDOWN event") and ddf9dc7d21 (2021-04-11, "fix DOWNNODE issue for PRS collections"). They change DOWNNODE handling for PRS collections. Neither mentions the shared-directory case, so they are not shown to fix SOLR-15305.
+- The audit's remark that a node-name guard was considered and rejected was not verified: no such guard exists at the pin, and the discussion that rejected it is not in this repository.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. The repro needs a ZooKeeper, two Solr nodes from one solr home, and the collection steps in the ticket. This pass did not build or start a cluster.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The ticket names a setup (two nodes from one directory) that Solr does not document as supported, and asks for a fix that is a design choice: a fail-fast guard or support for shared directories. Reading does not settle which, and the reporter's two replica states are not reproduced. The ticket has had no comments since 2021.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
+keep-open: the attempts made are the code path reads above at the pinned head, the Jira read, and the history check of SOLR-15288. The missing piece is a run of the ticket's script on the pinned head (the two replica states after the second node's restart and stop), and a maintainer decision between a guard and documenting the setup as unsupported. No closing verdict is supported, and no PR is supported without the run and the decision.
 
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+Missing for a closing or PR verdict: (1) the run output with the two replica states, command and log path; (2) the design decision.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not reproduce the states. It does not post anything to JIRA or GitHub. The draft comment is a draft until someone posts it by hand.
