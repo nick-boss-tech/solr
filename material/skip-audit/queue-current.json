@@ -596,7 +596,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Coordinator federates only paths ending in /select by design; requested custom-RH support is a feature needing a config design; reporter PR exists."
-    }
+    },
+    "verdict": "pr-needed",
+    "draft_branch": "solr-17385-draft-pr",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17377",
