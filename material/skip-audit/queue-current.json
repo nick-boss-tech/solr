@@ -375,7 +375,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "HNSW optimize failure is Lucene merge behaviour; no Solr-side code pointer, no comments."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-17747-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17733",
