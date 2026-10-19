@@ -1,0 +1,3 @@
+We looked at this against the current main branch (498a09aea97a). The indexversion command now reports the version of the latest commit, and it reports zero only when replication is disabled or no commit point exists. The configuration property named in the 2012 comment (solr.enable.master) is no longer used in the source, so that cause cannot recur in that form.
+
+Two cases from the earlier comments are not covered by what we checked: an index produced by a MERGE command, and a core reload while replicateAfter is set to startup. We have not confirmed whether either still returns zero on main. We are leaving this open until both cases are run against main, and we will update the ticket with the result.
