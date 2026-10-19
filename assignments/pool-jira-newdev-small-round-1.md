@@ -1,0 +1,46 @@
+# Pool assignment: JIRA newdev small improvements, round 1
+
+Status: OPEN
+
+- Capability tags: implementation, gate. Intended host: any pool Linux host (`hosts/pool-linux.md`). Claim under `claims/` before starting (WORKFLOW.md).
+- Posted by: vm2 gate coordinator, 2026-10-19, at the direction of the user. Source: JIRA `project=SOLR AND resolution=Unresolved AND labels=newdev` (79 issues on 2026-10-19; this file takes 13 small improvement, task and test tickets, leaving the umbrella and UI sub-tasks out).
+
+## Items
+
+1. **SOLR-18209, Replace Arrays.asList with List.of for immutable static final fields in solrj and core.** Verify SOLR-18209 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-18209-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-18209. Output: one section in the deliverable.
+2. **SOLR-17727, The "Server" HTTP header should return Solr's version.** Verify SOLR-17727 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-17727-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-17727. Output: one section in the deliverable.
+3. **SOLR-18123, Tests: Shouldn't need to refer to ALLOW_PATHS_SYSPROP, usually.** Verify SOLR-18123 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-18123-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-18123. Output: one section in the deliverable.
+4. **SOLR-8755, Add test cases for org.apache.solr.parser.TokenMgrError.** Verify SOLR-8755 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-8755-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-8755. Output: one section in the deliverable.
+5. **SOLR-18169, The slim image shouldn't have examples.** Verify SOLR-18169 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-18169-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-18169. Output: one section in the deliverable.
+6. **SOLR-16307, ref guide powershell blocks don't have syntax highlighting.** Verify SOLR-16307 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-16307-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-16307. Output: one section in the deliverable.
+7. **SOLR-18503, JSON Facet API: seven parser-accepted keys are missing from the reference guide.** Verify SOLR-18503 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-18503-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-18503. Output: one section in the deliverable.
+8. **SOLR-18320, bin/solr create should not use ZK if ZK host not provided.** Verify SOLR-18320 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-18320-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-18320. Output: one section in the deliverable.
+9. **SOLR-18481, Proxied requests should use X-FORWARDED-FOR header.** Verify SOLR-18481 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-18481-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-18481. Output: one section in the deliverable.
+10. **SOLR-17415, TimeLimitingCollector isn't adding value and is deprecated; remove.** Verify SOLR-17415 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-17415-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-17415. Output: one section in the deliverable.
+11. **SOLR-17262, Add SolrParams-style convenience methods to NamedList.** Verify SOLR-17262 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-17262-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-17262. Output: one section in the deliverable.
+12. **SOLR-9464, change CloudSolrClient[Builder].directUpdatesToLeadersOnly default (to true).** Verify SOLR-9464 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-9464-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-9464. Output: one section in the deliverable.
+13. **SOLR-6948, "bin/solr -e cloud" shouldn't bother to ask about collection options if it already exists.** Verify SOLR-6948 is still open on apache/main at c8ab71430f and the change is still wanted as written. If yes, implement it on branch `solr-6948-<short>` from that commit with its test, run the gate, and push the branch as a new branch. If the ticket is already done or its scope is unclear, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-6948. Output: one section in the deliverable.
+
+## Decisions
+
+| Decision | Answer or default | Condition and action | Owner |
+| --- | --- | --- | --- |
+| Base | decided: apache/main at c8ab71430f | branch every fix from that commit, not from the fork main | user |
+| Branch names | decided: `solr-NNNN-<short>`, new branches only | never force push or overwrite an existing branch; if the name is taken, pick another and record it | user |
+| Push | decided: push gated branches to the fork as new branches | after the gate is green; no push before the gate runs | user |
+| Draft PR | decided: a draft PR description, written as a file on the fork branch; no PR is opened on GitHub | after the gate receipt is green, add the draft description to the branch | user |
+| Browser testing | decided: out of scope | do not claim UI or browser work | user |
+| Scope of a fix | default: minimal fix plus one regression test | if the fix needs more than the ticket asks for, stop and record it | vm2 coordinator |
+| Already fixed or not reproducible | default: record and stop | no branch is pushed for that ticket | vm2 coordinator |
+| Gate failure | default: follow the Gate repairs section of WORKFLOW.md | a run that executed tests and failed is recorded and not relaunched unless the head, seed, input or environment changed | vm2 coordinator |
+| Overlap | decided: skip SOLR-18458 and any ticket with a live claim | check `claims/` and `assignments/` before taking a ticket | user |
+
+## Deliverable
+
+`reports/2026-10-19-jira-newdev/B-small-round-1.md`: one section per ticket with its status (fixed branch and head, already fixed, not reproducible, or stopped with the reason), the gate receipt path if a gate ran, and the test counts from fresh XML.
+
+## Limits
+
+- No PR, JIRA comment, GitHub comment or email. No force push. No push to any upstream branch.
+- Commit only to `coordination` as Nick Shanin, with no trailers and no em dashes.
+- Do not use the Windows host.

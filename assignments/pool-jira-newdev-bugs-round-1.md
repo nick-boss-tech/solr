@@ -1,0 +1,48 @@
+# Pool assignment: JIRA newdev bugs, round 1
+
+Status: OPEN
+
+- Capability tags: implementation, gate. Intended host: any pool Linux host (`hosts/pool-linux.md`). Claim under `claims/` before starting (WORKFLOW.md).
+- Posted by: vm2 gate coordinator, 2026-10-19, at the direction of the user. Source: JIRA `project=SOLR AND resolution=Unresolved AND labels=newdev` (79 issues on 2026-10-19; this file takes the 15 bug tickets).
+
+## Items
+
+1. **SOLR-13182, NullPointerException due to an invariant violation in org/apache/lucene/search/BooleanClause.java[60].** Verify SOLR-13182 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-13182-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-13182. Output: one section in the deliverable.
+2. **SOLR-13183, NullPointerException at o.a.solr.servlet.SolrDispatchFilter.doFilter.** Verify SOLR-13183 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-13183-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-13183. Output: one section in the deliverable.
+3. **SOLR-13184, NPE due to missing input checking in ValueSourceParser.** Verify SOLR-13184 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-13184-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-13184. Output: one section in the deliverable.
+4. **SOLR-13185, NPE in query parsing because of missing null check.** Verify SOLR-13185 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-13185-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-13185. Output: one section in the deliverable.
+5. **SOLR-13188, NullPointerException in org.apache.lucene.search.IndexSearcher.rewrite(IndexSearcher.java:667).** Verify SOLR-13188 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-13188-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-13188. Output: one section in the deliverable.
+6. **SOLR-13195, NPE caused by distributed queries when no shards are configured.** Verify SOLR-13195 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-13195-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-13195. Output: one section in the deliverable.
+7. **SOLR-14970, elevation does not work without elevate.xml config.** Verify SOLR-14970 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-14970-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-14970. Output: one section in the deliverable.
+8. **SOLR-15231, zk upconfig does not recognize ZK_HOST style url.** Verify SOLR-15231 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-15231-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-15231. Output: one section in the deliverable.
+9. **SOLR-16750, Grouping on EnumFieldType fields fails.** Verify SOLR-16750 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-16750-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-16750. Output: one section in the deliverable.
+10. **SOLR-16193, Solr logs indicate that suggester was not built, but API returns success.** Verify SOLR-16193 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-16193-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-16193. Output: one section in the deliverable.
+11. **SOLR-16220, Documentation leads to NPE Missing SslContextFactory for SolrJ client.** Verify SOLR-16220 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-16220-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-16220. Output: one section in the deliverable.
+12. **SOLR-5744, Solrj configuerd with BinaryRequestWriter throws NullpointerException if LangDetectLanguageIdentifierUpdateProcessorFactory is configuerd.** Verify SOLR-5744 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-5744-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-5744. Output: one section in the deliverable.
+13. **SOLR-17433, SolrStream by default creates a Http2SolrClient that can only stream for 60 seconds.** Verify SOLR-17433 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-17433-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-17433. Output: one section in the deliverable.
+14. **SOLR-18200, TextProfileSignature produces different signatures for identical input when the internal HashMap rehashes.** Verify SOLR-18200 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-18200-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-18200. Output: one section in the deliverable.
+15. **SOLR-18214, Base configset during configset creation is not optional.** Verify SOLR-18214 on apache/main at c8ab71430f. If it reproduces, fix it with one regression test on branch `solr-18214-<short>` from that commit, run the gate, and push the branch as a new branch. If it does not reproduce or is already fixed on main, record why and stop without a branch. Start from: https://issues.apache.org/jira/browse/SOLR-18214. Output: one section in the deliverable.
+
+## Decisions
+
+| Decision | Answer or default | Condition and action | Owner |
+| --- | --- | --- | --- |
+| Base | decided: apache/main at c8ab71430f | branch every fix from that commit, not from the fork main | user |
+| Branch names | decided: `solr-NNNN-<short>`, new branches only | never force push or overwrite an existing branch; if the name is taken, pick another and record it | user |
+| Push | decided: push gated branches to the fork as new branches | after the gate is green; no push before the gate runs | user |
+| Draft PR | decided: a draft PR description, written as a file on the fork branch; no PR is opened on GitHub | after the gate receipt is green, add the draft description to the branch | user |
+| Browser testing | decided: out of scope | do not claim UI or browser work | user |
+| Scope of a fix | default: minimal fix plus one regression test | if the fix needs more than the ticket asks for, stop and record it | vm2 coordinator |
+| Already fixed or not reproducible | default: record and stop | no branch is pushed for that ticket | vm2 coordinator |
+| Gate failure | default: follow the Gate repairs section of WORKFLOW.md | a run that executed tests and failed is recorded and not relaunched unless the head, seed, input or environment changed | vm2 coordinator |
+| Overlap | decided: skip SOLR-18458 and any ticket with a live claim | check `claims/` and `assignments/` before taking a ticket | user |
+
+## Deliverable
+
+`reports/2026-10-19-jira-newdev/A-bugs-round-1.md`: one section per ticket with its status (fixed branch and head, already fixed, not reproducible, or stopped with the reason), the gate receipt path if a gate ran, and the test counts from fresh XML.
+
+## Limits
+
+- No PR, JIRA comment, GitHub comment or email. No force push. No push to any upstream branch.
+- Commit only to `coordination` as Nick Shanin, with no trailers and no em dashes.
+- Do not use the Windows host.
