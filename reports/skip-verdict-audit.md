@@ -1960,3 +1960,57 @@ Claiming host: none. The record source is the queue entry audit field, round aud
 Missing:
 - No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
 - The re-check required by steps 11 and 12: record.md is a bulk audit-derived record: it states JIRA was not re-read, the audit was checked against upstream main c8ab71430f not the fork pin, and it was not re-checked at the pinned head; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record
+
+## 2026-10-19 remediation re-audit, batch 01 redos (vm3)
+
+Re-audited by vm3 at each redo head, pinned head 498a09aea97aac86c2cc7ac114113b946d249942. Each item below failed the rubric floor and stays open. Claim: `claims/pool-vm3-remediation-reaudit-batch-01.md`.
+
+### SOLR-16785, verdict keep-open, draft branch solr-16785-draft-open
+
+Claiming host: vm4, `claims/skip-SOLR-16785-vm4.md` (DONE 2026-10-19T14:02:41Z). Redo head cb55a58539.
+
+Missing:
+- No file:line code citation at the pin and no reproduction attempt. The record says "Not done at the code level" and "Not attempted".
+- Needed: at least one code path for the core load or recovery failure, cited with file and line at 498a09aea97a, or a reproduction attempt with its command and result.
+
+### SOLR-16758, verdict keep-open, draft branch solr-16758-draft-open
+
+Claiming host: vm4, `claims/skip-SOLR-16758-vm4.md` (DONE 2026-10-19T14:43:28Z). Redo head 0f30dd2dfb.
+
+Missing:
+- No reproduction or benchmark on the pin. The record calls the pass review-only, but the ticket is a measured latency claim.
+- SOLR-14185 is "not traced in this pass", yet commit `bec4ed890b` (DocSet.iterator(LeafReaderContext)) is at the pin and is the change the reporter's revert undoes. The central claim is untested against that commit.
+- Needed: trace `bec4ed890b` against the reporter's revert, and run at least one repeatable cache=false benchmark on the pin with command, data size and log path, or state why it cannot run.
+
+### SOLR-16657, verdict keep-open, draft branch solr-16657-draft-open
+
+Claiming host: vm4, `claims/skip-SOLR-16657-vm4.md` (DONE 2026-10-19T14:47:46Z). Redo head c4c69b7187.
+
+Missing:
+- The code reading confirms the staleness (`solr/webapp/web/js/angular/app.js:527-529, 557-559`, verified at the pin). The open question is an owner decision, and the record says the browser reproduction was "Not attempted". A decision is not evidence.
+- Needed: an Admin UI reproduction with command, result and log path, or a pr-needed verdict that names the test to add.
+
+### SOLR-16652, verdict keep-open, draft branch solr-16652-draft-open
+
+Claiming host: vm4, `claims/skip-SOLR-16652-vm4.md` (DONE 2026-10-19T14:52:50Z). Redo head d567d818b9.
+
+Missing:
+- The ticket gives its own reproduction steps (the `_default` configset, the synonym rule, four documents, two queries). The record says "Not attempted" and calls the pass review-only.
+- Needed: run the ticket's steps at the pin and record the command, result and log path.
+
+### SOLR-16792, verdict keep-open, draft branch solr-16792-draft-open
+
+Claiming host: vm4, `claims/skip-SOLR-16792-vm4.md` (DONE 2026-10-19T14:58:05Z). Redo head 94e304ab68.
+
+Missing:
+- The candidate-site analysis is wrong. The record says the only dereference a null could reach is `CoreStatus.java:146-150`. At the pin, `solr/core/src/java/org/apache/solr/handler/admin/api/CoreStatus.java:139` has the same unguarded `core.getInstancePath().toString()` on the same loaded branch, and that is the frame in the ticket's NPE. The cloud-descriptor chains at lines 147-148 and 155-159 are also candidates, since the core descriptor leaves the cloud descriptor null for non-cloud cores.
+- No reproduction attempt.
+- Needed: correct the candidate-site analysis to name line 139 and the null cloud-descriptor path, attempt the reproduction or state why not, and fix the public JIRA draft, which repeats the wrong analysis.
+
+### SOLR-16305, verdict keep-open, draft branch solr-16305-draft-open
+
+Claiming host: vm4, `claims/skip-SOLR-16305-vm4.md` (DONE 2026-10-19T15:11:49Z). Redo head d32e52a658.
+
+Missing:
+- The record cites `CollectionsHandler.java:809` as the modify path. That line is inside `ADDREPLICAPROP_OP` (lines 800-812), not the modify path.
+- Needed: cite the real modify path (`MODIFYCOLLECTION_OP` at `CollectionsHandler.java:848`, and `CollectionMutator.java:156-164`, which writes the `property.*` keys to collection state), and the grep behind "the modify path does not rewrite core.properties".
