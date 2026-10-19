@@ -6,7 +6,7 @@ Source: gate4/focused.xml/TEST-org.apache.solr.handler.HighlightRequestHandlerTe
    was:      <em>Solr</em> <em>highlights</em> the ...
 
 2. testHtmlEncoderEscapesSuppliedText (HighlightRequestHandlerTest.java:106)
-   expected: ...&lt;<em>Solr</em>&lt;/strong&gt;   (element holds raw "/")
+   expected: ...&lt;<em>Solr</em>&lt;/strong&gt;
    was:      ...&lt;<em>Solr</em>&lt;&#x2F;strong&gt;
 
 3. testRejectsParserOverridesAndParserSubqueries (HighlightRequestHandlerTest.java:299)
