@@ -1,1 +1,1 @@
-We reviewed this ticket against current upstream main. The review did not find a reproducible defect in the current code, but the ticket is not closed yet, and we are leaving it open for a decision.
+We checked this ticket against the current code. Facet threading (facet.threads) still runs on the update executor, as the ticket describes, and that executor is shared with update and sync work. We have not reproduced a problem from that sharing, and the ticket does not give a fix, so we are leaving it open for a decision on whether facets should get their own executor.
