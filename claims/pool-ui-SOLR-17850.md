@@ -1,12 +1,13 @@
 # Claim: pool-ui-SOLR-17850
 
 - Claimant host: vm2, matching a file in `hosts/`.
-- Status: ACTIVE. SearchHandler request form under `assignments/pool-ui-tickets-round-1.md`.
+- Status: DONE for the component scope. Executing the request, the previews, and hosting the form on a screen are not done.
 - Job or assignment: `assignments/pool-ui-tickets-round-1.md`.
-- Slice: the request form component only. It holds form state through callbacks, reports execute (normal or debug) and clear-all, and makes no API call.
-- Not in this claim: executing the request against Solr, the request and response previews (the ticket excludes them), and hosting the form on the Index / Query screen, which does not exist yet.
+- Slice: the solr.SearchHandler request form component only.
 - Capability tags used: ui, jvm-tests.
+- Branch: `solr-17850-search-handler-form` on the fork, commit 887778ce5d8 on base apache/main c8ab71430f.
+- Gate: `SearchHandlerFormTest` passes 6 of 6; `:shared:spotlessCheck` passes.
+- Draft PR: `pr-draft/SOLR-17850.md` on the branch, marked partial.
 - Blast radius: not flagged. Layout and text only.
-- Started: 2026-10-19T18:35:00Z (UTC).
 
-Heartbeat: 2026-10-19T18:35:00Z
+Heartbeat: 2026-10-19T18:43:00Z
