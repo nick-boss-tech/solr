@@ -1,37 +1,41 @@
 # Skip record: SOLR-14427
 
-- Ticket: SOLR-14427, Potential bug in optimistic concurrency with versions=true and failOnVersionConflicts=false. JIRA was not re-read for this record.
+- Ticket: SOLR-14427, "Potential bug in optimistic concurrency with versions=true and failOnVersionConflicts=false". JIRA status Open, resolution none, fix versions none, created 2020-04-23, updated 2020-05-27. Checked 2026-10-19 UTC.
 - Verdict: keep-open.
 - Draft branch: solr-14427-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-05, audit verdict confirmed-skip).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. No upstream sha cited.
+- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, for the remediation redo of this ticket (claim claims/skip-SOLR-14427-vm2.md).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Potential bug in optimistic concurrency with versions=true and failOnVersionConflicts=false. Skip note: stale 6yr multi-shard optimistic-concurrency semantic bug, 0 comments, no maintainer signal, distributed-semantics design-heavy; siblings SOLR-7404/8733 still open.
+With update parameters versions=true and failOnVersionConflicts=false, a batch update of an existing document with a stale version and a document with _version_ -1 returns errors (DistributedUpdatesAsyncException, ERROR CONFLICT). The documentation says the conflicting document should be skipped. The test case is a 3-node cluster, 3 shards, 2 replicas, two documents. Related tickets: SOLR-8733 and SOLR-7404. No comments.
 
 ## Code reading
 
-Taken from the audit evidence, not re-read at the pinned head: Fixed on main: DistributedUpdateProcessor constructor whitelists CommonParams.FAIL_ON_VERSION_CONFLICTS for forwarded shard requests (commit 29dbb3ec178, GitHub PR 1173), and the leader path (versionAdd ~l.418, doVersionAdd ~l.769) honors failOnVersionConflicts=false. The ticket error was a replica rejecting the forwarded request that lacked the param. Verified by git log -S on upstream/main.
+- solr/core/src/java/org/apache/solr/update/processor/DistributedUpdateProcessor.java:418-421 (origin/main 498a09aea97): when the stored version does not match the update's version, and failOnVersionConflicts is false, the leader returns true (the document is skipped). Otherwise it throws CONFLICT ("version conflict for ...").
+- DistributedUpdateProcessor.java:769-771: the same flag, for the case where the document to update is not found (returns false, skipping it); otherwise the CONFLICT error is thrown.
+- The flag is read from the request params (cmd.getReq().getParams().getBool(CommonParams.FAIL_ON_VERSION_CONFLICTS, true)). Whether the flag reaches the requests forwarded to the other shards' leaders and replicas, which is where the reported DistributedUpdatesAsyncException arises, was not traced.
+
+Commands at the pinned head:
+- git grep -n 'FAIL_ON_VERSION_CONFLICTS\|failOnVersionConflicts' origin/main -- solr/core/src/java/org/apache/solr/update/processor/DistributedUpdateProcessor.java: lines 199, 418, 769.
+- git log --oneline --grep='SOLR-14427' origin/main: no output.
 
 ## History
 
-No commit history was used for this record.
+- Commits on origin/main naming SOLR-14427: none.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not attempted. The report's case needs a 3-shard, 2-replica cluster with the two updates sent in one request, which needs a cluster test. Not set up in this pass.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The leader-side handling of failOnVersionConflicts=false is in place at the pin. The reported error is an asynchronous distributed update exception, so the question is whether the forwarding step (the parameters sent to the other shards, and the handling of their conflict responses) keeps the flag. That path was not traced.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric: the pinned head sha is cited, the Jira status and date are read in this pass, code paths are cited with file and line, and the attempts and the missing piece are listed. close-fixed does not hold: no commit names the ticket. close-cannot-reproduce does not hold: no reproduction, and the distributed forwarding path is not traced. The missing pieces are (1) the trace of the forwarded request parameters and the async conflict handling, and (2) a cluster run of the report's two-document update.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not reproduce the error. It does not trace the forwarding path. It does not compare with SOLR-8733 or SOLR-7404.
