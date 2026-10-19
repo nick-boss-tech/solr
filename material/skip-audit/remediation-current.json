@@ -3095,6 +3095,942 @@
         "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
         "record.md is a bulk audit-derived record: it states JIRA was not re-read, the audit was checked against upstream main c8ab71430f not the fork pin, and it was not re-checked at the pinned head; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record"
       ]
+    },
+    {
+      "key": "SOLR-10974",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10974-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10960",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10960-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, L (audit evidence only; \"not re-checked at the pinned head\"). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10959",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-10959-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, G (no grep command), L (no file and line). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10952",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10952-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, L (audit evidence only; \"not re-checked at the pinned head\"). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10936",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10936-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, L (Lucene frame, no Solr file and line, no reproduction). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10917",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-10917-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10904",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-10904-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, G (no grep command), L (no file and line). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10896",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10896-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10889",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-10889-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, G (no grep command), L (no file and line). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10856",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10856-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10841",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10841-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, L (no code path read for this record). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10806",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10806-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10759",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10759-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, L (no code path read for this record). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10751",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10751-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10726",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10726-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10712",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-10712-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10709",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-10709-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10706",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10706-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10650",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-10650-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10604",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10604-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, L (cites upstream main c8ab71430f, not the pinned fork head). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10601",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-10601-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, L (commit 17563ce81f is an ancestor, but no file and line for the changed code or its presence). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10597",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10597-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10592",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10592-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, L (no code path read for this record). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10534",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10534-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-10533",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10533-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "2d9f327e394333b16ade24cf9e711baa111d5154",
+      "reasons": [
+        "Cross-audit batch 03 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-03.md."
+      ]
+    },
+    {
+      "key": "SOLR-9648",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9648-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9645",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9645-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9622",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9622-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9599",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9599-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9594",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9594-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9593",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9593-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (no code path; the cited run skipped every test, and no missing piece is named). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9578",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9578-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9573",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9573-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (fix version only, \"not code-verified\"). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9571",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9571-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9550",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9550-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9514",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9514-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9492",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9492-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9477",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9477-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9468",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-9468-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9428",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9428-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, L (no code path read for this record). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9427",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9427-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, L (no code path read for this record). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9426",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9426-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, L (no code path read for this record); the cited run skipped all 25 tests, so it is not a reproduction attempt. Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9400",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-9400-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, G (grep result taken from the B1 reading, not re-run), L (no file and line). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9398",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9398-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9390",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9390-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, L (no code path read for this record). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9369",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9369-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9366",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-9366-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, G (grep result taken from the B1 reading, not re-run). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9361",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9361-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9352",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9352-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-9329",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9329-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "4a4e2b67839a58204a759bbfad818906d5ef195a",
+      "reasons": [
+        "Cross-audit batch 06 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-06.md."
+      ]
+    },
+    {
+      "key": "SOLR-4674",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4674-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4669",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4669-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4659",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4659-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4635",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-4635-draft-close",
+      "evidence_head": "498a09aea9",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing C (no claim names the ticket). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4610",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4610-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4593",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4593-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C, L (no code path; one passing run of a flaky test). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4558",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4558-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4533",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4533-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4522",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-4522-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4501",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-4501-draft-close",
+      "evidence_head": "498a09aea9",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing C (no claim names the ticket). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4499",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4499-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4486",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4486-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4427",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-4427-draft-close",
+      "evidence_head": "498a09aea9",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing C (no claim names the ticket). Note: the ticket asked for a warning and the record shows the fix throws an error; the record does not reconcile the two. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4423",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-4423-draft-close",
+      "evidence_head": "498a09aea9",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing C (no claim names the ticket). Note: the record says NamedList.java:362-364 still throws on an explicit null tag, and the close-fixed verdict does not address that path. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4414",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4414-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4390",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-4390-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4382",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-4382-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4344",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4344-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4338",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4338-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4304",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4304-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4277",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4277-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4274",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4274-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4183",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-4183-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C, G (grep result taken from the B1 reading, not re-run), L (no file and line). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4169",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4169-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-4146",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4146-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "960779910e33626e2d5e91b854b8ef43ec938999",
+      "reasons": [
+        "Cross-audit batch 17 (vm5): missing J, C, L (audit evidence only). Detail in reports/skip-verdict-audit-batch-17.md."
+      ]
+    },
+    {
+      "key": "SOLR-1785",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-1785-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "8fae45bcd281c4b02330e0bffd661f137e76d848",
+      "reasons": [
+        "Cross-audit batch 21 (vm5): missing J, C (no claim names the ticket). Detail in reports/skip-verdict-audit-batch-21.md."
+      ]
+    },
+    {
+      "key": "SOLR-1780",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-1780-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "8fae45bcd281c4b02330e0bffd661f137e76d848",
+      "reasons": [
+        "Cross-audit batch 21 (vm5): missing J, C (no claim names the ticket). Detail in reports/skip-verdict-audit-batch-21.md."
+      ]
+    },
+    {
+      "key": "SOLR-1658",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-1658-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "8fae45bcd281c4b02330e0bffd661f137e76d848",
+      "reasons": [
+        "Cross-audit batch 21 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-21.md."
+      ]
     }
   ]
 }
