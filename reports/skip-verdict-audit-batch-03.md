@@ -9,7 +9,7 @@ Rung used (decision ladder): rung 3, following the assignment's floor. The floor
 Missing-item codes for suspects:
 - J: the record does not name a Jira status and date read in this record's pass. Every record says "JIRA was not re-read for this record" or cites an earlier round's reading.
 - C: no `claims/` file names the ticket with a DONE line.
-- L: no file and line code path at the pinned head, and no reproduction; or the cited code was read at upstream main, not the pinned head.
+- L: no file and line code path read at the pinned head. The rubric asks for this on every verdict, so a reproduction-only record still needs one. A path read only at upstream main counts as missing.
 - G: close-obsolete without the grep command and its empty result run at the pinned head.
 - F: close-fixed without a file-and-line check that the changed code is present at the head (the ancestor check is present for each close-fixed record).
 
@@ -25,9 +25,9 @@ Missing-item codes for suspects:
 | SOLR-10896 | suspect | none | 620ac6c9aa20 | J, C |
 | SOLR-10889 | suspect | none | 9b94ba0b502e | J, C, G (no grep command), L (no file and line) |
 | SOLR-10856 | suspect | none | faba992af6b1 | J, C |
-| SOLR-10841 | suspect | claims/pool-skip-repro-flake-round-1.md (DONE 2026-10-18T08:20Z) | 0e937780a9ed | J |
+| SOLR-10841 | suspect | claims/pool-skip-repro-flake-round-1.md (DONE 2026-10-18T08:20Z) | 0e937780a9ed | J, L (no code path read for this record) |
 | SOLR-10806 | suspect | none | 13b65f3d22b6 | J, C |
-| SOLR-10759 | suspect | claims/pool-skip-repro-flake-round-1.md (DONE 2026-10-18T08:20Z) | a8e0bc2d51f2 | J |
+| SOLR-10759 | suspect | claims/pool-skip-repro-flake-round-1.md (DONE 2026-10-18T08:20Z) | a8e0bc2d51f2 | J, L (no code path read for this record) |
 | SOLR-10751 | suspect | none | 4b27815dc844 | J, C, L (audit evidence only) |
 | SOLR-10726 | suspect | none | 6c882b453658 | J, C, L (audit evidence only) |
 | SOLR-10712 | suspect | none | 79d4979f4920 | J, C |
@@ -35,9 +35,9 @@ Missing-item codes for suspects:
 | SOLR-10706 | suspect | none | bb7c60953b4d | J, C |
 | SOLR-10650 | suspect | none | 4e05a4ef4c96 | J, C |
 | SOLR-10604 | suspect | none | 722c819002ec | J, C, L (cites upstream main c8ab71430f, not the pinned fork head) |
-| SOLR-10601 | suspect | claims/pool-skip-review-committed-support-round-1.md (DONE 2026-10-18T05:20Z) | b24aca0b32e6 | J, F (commit 17563ce81f is an ancestor; no file and line presence check) |
+| SOLR-10601 | suspect | claims/pool-skip-review-committed-support-round-1.md (DONE 2026-10-18T05:20Z) | b24aca0b32e6 | J, L (commit 17563ce81f is an ancestor, but no file and line for the changed code or its presence) |
 | SOLR-10597 | suspect | none | ec8c4b876bd9 | J, C |
-| SOLR-10592 | suspect | claims/pool-skip-repro-flake-round-1.md (DONE 2026-10-18T08:20Z) | 945e9845af8a | J |
+| SOLR-10592 | suspect | claims/pool-skip-repro-flake-round-1.md (DONE 2026-10-18T08:20Z) | 945e9845af8a | J, L (no code path read for this record) |
 | SOLR-10534 | suspect | none | beaa92a50a67 | J, C |
 | SOLR-10533 | suspect | none | d88ba3596b1c | J, C, L (audit evidence only) |
 
@@ -46,5 +46,5 @@ Result count: 0 pass, 25 suspect, 0 deferred-own-host (no record names vm5 as th
 ## Notes for the vm1 watch
 
 - J is the common failure. The records themselves say the Jira status was not re-read, so the watch can settle the Jira question by one ruling and not 25 separate ones.
-- Records for 10841, 10759 and 10592 are candid about flaky-test results (one passing run, or a reproduction whose environment cause is not ruled out). Their keep-open verdicts fit the rubric; only J is missing.
+- Records for 10841, 10759 and 10592 are candid about flaky-test results (one passing run, or a reproduction whose environment cause is not ruled out). Their keep-open verdicts rest on the run data, which fits the rubric's repro route, but the rubric also asks for a file-and-line code path on every verdict, so L is missing too.
 - 10960 and 10952 are close to identical in their verdict text. The bodies differ by ticket lines, so the duplicate test passes, but the gap analysis is reused word for word across the audit-evidence keep-open records (10960, 10952, 10751, 10726, 10604, 10533).
