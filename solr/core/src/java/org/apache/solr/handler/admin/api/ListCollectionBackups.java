@@ -21,7 +21,7 @@ import static org.apache.solr.common.params.CoreAdminParams.BACKUP_ID;
 import static org.apache.solr.common.params.CoreAdminParams.BACKUP_LOCATION;
 import static org.apache.solr.common.params.CoreAdminParams.BACKUP_REPOSITORY;
 import static org.apache.solr.common.params.CoreAdminParams.NAME;
-import static org.apache.solr.security.PermissionNameProvider.Name.COLL_EDIT_PERM;
+import static org.apache.solr.security.PermissionNameProvider.Name.COLL_READ_PERM;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.inject.Inject;
@@ -77,7 +77,7 @@ public class ListCollectionBackups extends BackupAPIBase implements ListCollecti
   }
 
   @Override
-  @PermissionName(COLL_EDIT_PERM)
+  @PermissionName(COLL_READ_PERM)
   public ListCollectionBackupsResponse listBackupsAtLocation(
       String backupName, String location, String repositoryName) throws IOException {
     final var response = instantiateJerseyResponse(ListCollectionBackupsResponse.class);
