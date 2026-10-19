@@ -1,0 +1,1 @@
+The reference guide answers this. In the current docs (collapse-and-expand-results.adoc, lines 23): "Collapse and Expand are not supported when Result Grouping is enabled." Link: https://github.com/apache/solr/blob/main/solr/solr-ref-guide/modules/query-guide/pages/collapse-and-expand-results.adoc#L23. Closing as answered by the documentation.
