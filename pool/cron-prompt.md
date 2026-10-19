@@ -4,8 +4,8 @@ This file is the job for every pool Linux host. Each tick reads it from `origin/
 
 ## Mode
 
-OVERNIGHT: off
-SKIP QUEUE: hold
+OVERNIGHT: on
+SKIP QUEUE: open
 
 - `OVERNIGHT` is the chain switch. `on` means you keep the chain going by scheduling your own wake at the end of each tick (step 18). `off` means you finish any live claim, schedule nothing, and stop. The human sets this line; you do not change it.
 - `SKIP QUEUE` gates the skip-queue work in steps 6a and 11 to 15. `hold` means take none of it. The human sets it to `open` when the queue list is confirmed.
@@ -56,6 +56,12 @@ On a later tick, check it once with `bash pool/bin/run-status.sh <log dir> <run 
 
 A tick never runs a status check in a loop. If a claim has nothing else to do until the run finishes, end the tick with the wake from step 18 set to `in 15 minutes`.
 
+A gate job or a test list with several steps (tidy, Error Prone, focused tests, module checks) starts as one detached job so each step gets the lock in turn:
+
+`setsid nohup bash pool/bin/bg-steps.sh <job> <worktree> /workspace/gates/logs/$POOL_HOST <steps file> >/dev/null 2>&1 </dev/null &`
+
+The steps file has one line per step, `<label>|<gradle args>`, and a `|continue` suffix on a step that may fail without stopping the job. The job stops at the first failing step without `continue`. Check it with `bash pool/bin/job-status.sh /workspace/gates/logs/$POOL_HOST <job>`, which prints the state, each finished step with its rc, and the current step. Its state is `running`, `done`, `stopped at <label>`, or `died`. Use a job name unique to the attempt.
+
 7. Work the assignment item by item. Each Decisions row is binding. A decision you have to make inside a claim follows the ladder in `material/decision-ladder.md`: read the code and its history first, then probes, then stated intent, then a recorded choice; only an open maintainer question or an owner-level decision goes to NEEDS-OWNER. Where a row says escalate, make the call under the PR's stated intent, record the reason in the claim, and carry it through to the PR branch or draft. Stop only when the intent itself is ambiguous: then set the item to `Status: NEEDS-OWNER` and write the one question for Nick in the claim.
 8. After every build or test run, write a Result line in the claim: the command, the head sha, pass or fail, the seed, the log path, and whether the result is conclusive, with the reason.
 9. If a result is not conclusive, gather more information: read the code, the git history (`git log -S`, `git blame`, the test's own history), and the ticket. Pick a different build or test variant that separates the explanations, run it, and record that attempt as well.
@@ -86,7 +92,7 @@ Steps 11 to 15 apply only when `SKIP QUEUE` is `open` and you hold a ticket clai
 
 16. When the work lands: write the deliverable, mark the assignment and the claim `DONE:` with the deliverable paths, and push once. For a gate job, also set the gate file to `Status: DONE` with the gated head, and write or refresh `receipts/<TICKET>.md` in the same push, as WORKFLOW.md requires of the gating host.
 17. If you cannot finish, write the reason in the claim, set the assignment to `Status: HANDED`, and push.
-18. Every tick ends here, whether or not a run is in progress. Wake, if `OVERNIGHT` is `on`. End every tick by calling `mcp__user-input__schedule_resume` to continue this same session. Use `in 2 minutes` if this tick pushed a claim step, a record or a result, and `in 15 minutes` if it found nothing to do. The note names the mode, your live claim (or none), and the next step. A session holds one pending wake, so schedule once per tick, at the end. If `OVERNIGHT` is `off`, schedule nothing. Nothing enforces this step: it is part of finishing the tick. Do not use `schedule_task` for ticks: it starts a fresh session with no memory of this one.
+18. Every tick ends here, whether or not a run is in progress. Wake, if `OVERNIGHT` is `on`. On hosts with the wake hooks (`pool/hooks/`, installed in `/workspace/.claude/hooks`), the Stop hook refuses to end a turn without a scheduled wake while `OVERNIGHT` is `on`; the hook is a backstop, not a reason to skip the wake. End every tick by calling `mcp__user-input__schedule_resume` to continue this same session. Use `in 2 minutes` if this tick pushed a claim step, a record or a result, and `in 15 minutes` if it found nothing to do. The note names the mode, your live claim (or none), and the next step. A session holds one pending wake, so schedule once per tick, at the end. If `OVERNIGHT` is `off`, schedule nothing. Nothing enforces this step: it is part of finishing the tick. Do not use `schedule_task` for ticks: it starts a fresh session with no memory of this one.
 
 ## Limits
 
