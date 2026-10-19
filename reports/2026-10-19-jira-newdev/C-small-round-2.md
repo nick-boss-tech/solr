@@ -18,3 +18,12 @@ Assignment: `assignments/pool-jira-newdev-small-round-2.md`. Base: apache/main c
 - Status: fixed branch. `solr-17719-semaphore-newsearcher` on the fork: code commit bd878b38f8 (test only: `TestManagedSchemaWithMultipleAdd` waits for a newSearcher event through a `TestInjection` hook and a semaphore instead of sleeping), draft commit 732d3fbcc4 (`drafts/SOLR-17719/pr-description.md`).
 - Gate: `TestManagedSchemaWithMultipleAdd` 1 of 1 pass, 0 failures, 0 skipped; spotless passes. Log `/workspace/gates/logs/vm4/solr-17719-gate.log`.
 - No fail-before run: the failure is sporadic and was not reproduced on this host.
+## Item 7: SOLR-12718 (vm4), stopped, 2026-10-19T22:33:05Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Stopped, no branch. `StreamContext` at apache/main c8ab71430f has only the default constructor and a `setSolrClientCache` setter. The ticket asks that the constructor always take a `SolrClientCache`. Making that required means removing the no-arg constructor, which about 388 call sites in the tree use, or leaving both constructors, which is not what "always" asks. That choice changes the public API and the test surface, so it needs a maintainer decision.
+
+## Item 8: SOLR-16865 (vm4), stopped, 2026-10-19T22:33:05Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Stopped, no branch. The ticket asks Solr to warn at startup when the data directory is low on disk. The threshold (the ticket suggests about 2 percent free), what counts as the data directory with several cores, and where the warning shows (log only, or health output) are all open choices. The assignment says to stop when the change needs a design decision.
