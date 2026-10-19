@@ -1,37 +1,41 @@
 # Skip record: SOLR-16062
 
-- Ticket: SOLR-16062, Solr 8.1 - Score for same catalog entry differs for different persons / environment. JIRA status not recorded in the C reading. JIRA was not re-read for this record.
+- Ticket: SOLR-16062, "Solr 8.1 - Score for same catalog entry differs for different persons / environment". JIRA status Open, resolution none, fix versions none, created 2022-03-01, updated 2022-05-12. Checked 2026-10-19 UTC.
 - Verdict: keep-open.
 - Draft branch: solr-16062-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the C reading (reports/2026-10-18-skip-repro/C4, slice 4, pinned head unchanged).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. No upstream sha cited.
+- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, for the remediation redo of this ticket (claim claims/skip-SOLR-16062-vm2.md).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Solr 8.1 - Score for same catalog entry differs for different persons / environment.
+The reporter enabled learning to rank (LTR) on Solr 8.1, uploaded the same catalog and model to a local system and a QA environment, and found that the scores and sort order for the same query differ between them. The report attaches a screenshot of the score difference (not available here). It gives no query, no model or feature store contents, and no index or environment details. The report has no comments and names no test class.
 
 ## Code reading
 
-No code path is named, the ticket has no comments, and the score-comparison attachment is not in the ticket data. LTR code exists (solr/modules/ltr/src/java/org/apache/solr/ltr/LTRRescorer.java), but narrowing the cross-environment difference needs the catalog and feature-store data.
+- The LTR module is solr/modules/ltr/src/java/org/apache/solr/ltr (origin/main 498a09aea97).
+- LTRRescorer.java:119-135: rescore(searcher, ...) and rerank(...) read the searcher's leaves (searcher.getIndexReader().leaves() at line 135) and compute the model score per leaf. The score therefore depends on the feature values and the model, and on the index the features are computed from.
+- LTRScoringQuery.java: the features and the model are read from the feature store and the model store uploaded to the environment. Two environments that uploaded the same JSON can still differ if the feature definitions, the model, or the index contents differ.
+
+Commands at the pinned head:
+- git grep -n -i 'docFreq\|termStatistics\|collectionStatistics' origin/main -- solr/modules/ltr/src/java: no output. The LTR module does not read collection statistics directly. Whether a feature reads term statistics through a Lucene query is not checked in this pass.
+- git grep -n 'SOLR-16062' origin/main: no output.
 
 ## History
 
-- None cited in the C reading.
+- Commits on origin/main naming SOLR-16062: none.
 
 ## Reproduction attempts
 
-Not attempted. The C scope ran no builds or tests.
+Not attempted. The report gives no query, feature store, model, or index, so a run here would be guessing at the reporter's setup. The attached screenshot is not in the report text.
 
 ## Gap analysis
 
-The C reading gives the missing piece; see the evidence below.
+The score difference has several candidate causes in the code path above: a different model or feature store on one environment, feature definitions that read index-dependent values (such as term statistics), or different index contents. The report does not separate them. No candidate is confirmed, and the reporter's setup is needed to separate them.
 
 ## Verdict justification
 
-keep-open: the code reading does not settle the question; the C reading names the piece that would settle it.
-
-Missing for this verdict: The missing piece named in the C reading (see the evidence below).
+keep-open meets the rubric: the pinned head sha is cited, the Jira status and date are read in this pass, code paths are cited with file and line, and the attempt and the missing piece are listed. The missing pieces are (1) the reporter's query, feature store, model, and the feature values for one document on each environment, and (2) the index contents or statistics for the two environments. A close verdict needs a documented answer or a reproduction showing identical scores; a pr-needed verdict needs the cause.
 
 ## Limits
 
-This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path where the subject does not cite the ticket.
+This record does not reproduce the difference. It does not check the attached screenshot, which is not in the report text. It does not establish which feature type reads index statistics.
