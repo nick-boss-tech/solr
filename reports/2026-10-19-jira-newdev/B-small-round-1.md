@@ -58,3 +58,23 @@ Claim: `claims/pool-jira-newdev-small-round-1-solr-17727.md`. Work follows on br
 
 - Verified: JIRA status Open, no resolution, on 2026-10-19.
 - Stopped, no branch. At apache/main c8ab71430f the code no longer uses `TimeLimitingCollector`. `CommandHandler.searchWithTimeLimiter` calls `searcher.search` directly, and `Grouping.searchWithTimeLimiter` does the same. Two stale javadoc comments still name the class (`search/Grouping.java:426`, `search/grouping/CommandHandler.java:243`), and the method names are misleading. Those are cleanup with no behavior to test, so a branch would not carry a regression test. A maintainer can close the ticket or ask for the comment cleanup.
+
+## Item 5: SOLR-18169 (vm4), stopped, 2026-10-19T20:32:14Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Stopped, no branch. The change is to the slim packaging and the Docker image build (`solr/docker/build.gradle` has the slim distribution switch at line 29). Gating it needs a Docker build, and Docker is not installed on this host. A packaging change cannot be gated here, so no branch is pushed.
+
+## Item 6: SOLR-16307 (vm4), blocked on the docs build, 2026-10-19T20:32:14Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Blocked, no branch. The affected blocks are `[source,powershell]` in `solr-ref-guide/modules/deployment-guide/pages/enabling-ssl.adoc` (lines 105, 160, 187). The fix is in the ref guide highlighting, and the gate for a ref guide change is the Antora site build. That build fails on this host with `Cannot find module '@asciidoctor/tabs'` (logs `/workspace/gates/logs/vm4/docs-item4-site.log` and `docs-item4-site-2.log`). No gate, no branch.
+
+## Item 7: SOLR-18503 (vm4), blocked on the docs build, 2026-10-19T20:32:14Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Blocked, no branch. The ticket asks for seven JSON Facet keys to be documented in the ref guide. The docs change is the gate target, and the Antora site build fails on this host with the same `@asciidoctor/tabs` error, so the change cannot be gated. No branch.
+
+## Item 11: SOLR-17262 (vm4), stopped, 2026-10-19T20:32:14Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Stopped, no branch. The ticket asks for SolrParams-style typed getters on `NamedList` and names `getLong`, `getFloat`, `getDouble` as examples. It does not fix the full method set, the names beyond those examples, or the error behavior on a missing or wrong-typed value. Those are API decisions. The assignment says to stop when the scope is unclear. A maintainer should choose the method set first.
