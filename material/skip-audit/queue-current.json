@@ -14771,7 +14771,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Still true on main: CommitTracker.run calls core.getUpdateHandler().commit(command) directly, so a custom processor with a commit action is not run on autocommit. JIRA fix version 4.9/6.0 was a bulk move, not a fix. Routing it through the chain would fan the commit out in SolrCloud (DistributedUpdateProcessor), so this needs a design decision; not built."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5941-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5939",
