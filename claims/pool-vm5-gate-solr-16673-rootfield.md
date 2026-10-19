@@ -1,7 +1,7 @@
 # Claim: pool-vm5-gate-solr-16673-rootfield
 
 - Claimant host: vm5, matching a file in `hosts/`.
-- Status: ENDED BLOCKED at step 2 in round 2 (Error Prone, base-file warning). Not DONE; decision needed in the gate file (Result r2).
+- Status: DONE: 2026-10-19T05:39:35Z. Deliverables: receipts/SOLR-16673.md (round 2 sections).
 - Job or assignment: `gates/SOLR-16673-rootfield.md`.
 - Slice: the whole gate job. Gates run one at a time on this host: uniquekey first, then rootfield.
 - Capability tags used: gate.

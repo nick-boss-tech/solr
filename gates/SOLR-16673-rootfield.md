@@ -1,6 +1,6 @@
 # Gate job: SOLR-16673 nested root field type
 
-Status: OPEN (claim released by vm1 2026-10-19 at the owner's word: SOLR-16673 is being handled on another host and may return to vm1 later. The main-side base-drift disposition stands for the next claimant: restore gradle/libs.versions.toml after tidy; the prune is base drift, verified on the merge-base.)
+Status: DONE (round 2 on apache/main, see receipts/SOLR-16673.md; uniqueKey head a494962d79, rootfield head 72e505cc20).
 
 - Branch: `solr-16673-rootfield`. Head: `5fb792482fc3d8fef851513bb91eb3231409a033` (fork tip, confirmed by `git ls-remote` on 2026-10-18).
 - Prior gated head: none. Merge-base with upstream/main: `e044bf20b405b8ca985730be3553d77d1fc8ff31`.
@@ -93,3 +93,8 @@ Decision needed (main agent, then Nick): the same step 2 question as the uniqueK
 ## Decision on vm1 claim
 
 Decision needed (main agent): whether vm1's queued claim on `5fb792482f` stops (tip moved, per the rule), or re-runs at `e9ce052946`. vm5 has run the new head to the point of step 2 and recorded the result above.
+
+## Result r3 on apache/main (vm5, 2026-10-19T05:39:35Z)
+
+- Ticket branch rebased onto `apache/main` `c8ab71430f` as `solr-16673-rootfield-main`, head `72e505cc20`. All steps green: changelog OK, tidy clean, Error Prone rc 0, proof leg `Failed to index 1 sample docs`, focused 11/0/0, check rc 0. Receipt in `receipts/SOLR-16673.md`. Logs: `/workspace/gates/logs/vm5/16673-rootfield-apache/`.
+- Result r2 (fork base `e9ce052946`) is superseded. The vm1 claim on `5fb792482f` is superseded by this head; vm1 should stop its queued run.

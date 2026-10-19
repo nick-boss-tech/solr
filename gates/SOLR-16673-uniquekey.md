@@ -1,6 +1,6 @@
 # Gate job: SOLR-16673 numeric uniqueKey response
 
-Status: BLOCKED at step 2 (Error Prone: a base-file warning under -Werror; decision needed, see Result r2). Head fce77f45a3.
+Status: DONE (round 2 on apache/main, see receipts/SOLR-16673.md; uniqueKey head a494962d79, rootfield head 72e505cc20).
 
 - Branch: `solr-16673-uniquekey`. Head: `70c6eb0c49008cf9518c456dedd6c4981642d52c` (fork tip, confirmed by `git ls-remote` on 2026-10-18).
 - Prior gated head: none. Merge-base with upstream/main: `e044bf20b405b8ca985730be3553d77d1fc8ff31`.
@@ -88,3 +88,8 @@ Not queued: the branch tip moved from the job head 70c6eb0c49008cf9518c456dedd6c
 - Receipt: not written (step 2 did not pass).
 
 Decision needed (main agent, then Nick): how step 2 treats a `-Werror` warning in a base file that neither branch changes. Options: (a) accept step 2 for this gate when no warning is reported in a changed file, with the evidence above, and write the receipt with that note; (b) fix `CoreReplicationAPITest` in a separate base change outside SOLR-16673, then re-run this gate; (c) hold. vm5 recommends (a) for this gate and (b) as a separate follow-up.
+
+## Result r3 on apache/main (vm5, 2026-10-19T05:39:35Z)
+
+- Ticket branch rebased onto `apache/main` `c8ab71430f` as `solr-16673-uniquekey-apache`, head `a494962d79`. All steps green: changelog OK, tidy clean, Error Prone rc 0, proof `ClassCastException`, focused 11/0/0, check rc 0. Receipt in `receipts/SOLR-16673.md`. Logs: `/workspace/gates/logs/vm5/16673-uniquekey-apache/`.
+- Result r2 on the fork base is superseded (see `reports/SOLR-16673-stale-base-decision.md`).
