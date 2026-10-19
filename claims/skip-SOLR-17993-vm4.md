@@ -11,4 +11,4 @@ Heartbeat: 2026-10-19T06:38:00Z
 
 Result: 2026-10-19T06:50:00Z: close-obsolete. The greps at the pinned head are empty: `CLOUD_CORE_PATTERN` in `solr/core/src/java`, and the `metrics/prometheus` package. Conclusive for the removal; the reopen condition is in the record.
 
-DONE: 2026-10-19T06:50:00Z. Deliverables: `drafts/SOLR-17993/record.md`, `drafts/SOLR-17993/jira-comment.md` on draft branch `solr-17993-draft-close` (head `pending`, see the draft branch).
+DONE: 2026-10-19T06:50:00Z. Deliverables: `drafts/SOLR-17993/record.md`, `drafts/SOLR-17993/jira-comment.md` on draft branch `solr-17993-draft-close` (head `98626d0f8e`).
