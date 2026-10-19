@@ -2,7 +2,7 @@
 
 - Proposed title: SOLR-18552: Set MMapDirectory shared arena permits to 64
 - Head: nick-boss-tech:solr-18552-submit at a5406c9fe531161df7b424b2a55143489b95166e. Base: branch_9x.
-- Gate: LIGHT GATE GREEN (gates/SOLR-18552.md on coordination). Opened 2026-10-18: https://github.com/apache/solr/pull/5181 (base branch_9x, head a5406c9fe531, ready).
+- Gate: LIGHT GATE GREEN (gates/SOLR-18552.md on coordination). Opened 2026-10-18: https://github.com/apache/solr/pull/5181 (base branch_9x, head 0652af46e490, ready (one follow-up commit collapsed the solr.cmd assignment onto the init line)).
 
 ---
 
