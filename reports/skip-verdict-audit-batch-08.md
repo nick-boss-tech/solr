@@ -1,0 +1,41 @@
+# Skip verdict cross-audit, batch 8 of 21
+
+Assignment: `assignments/pool-aab-skip-verdict-audit-08.md`. Auditor: vm4, 2026-10-19 UTC, claim `claims/pool-aab-skip-verdict-audit-08.md`. Each item was checked against the floor in `material/skip-audit/verdict-rubric.md`.
+
+Checks run per item: (1) a claim in `claims/` naming the ticket with a DONE line, searched by filename and by content on `origin/coordination`; (2) the named draft branch on the fork (`origin`), fetched and holding `drafts/SOLR-<n>/record.md` and `jira-comment.md`; (3) the record cites the pinned head `498a09aea97` (matches `evidence_head` in `material/skip-audit/queue-current.json` for every item); (4) the Jira status read in this pass; (5) a code path with file and line, or a reproduction attempt that ran; (6) the record is substantive (210 words or more each, none identical to another); (7) the verdict is allowed and the draft suffix matches (`open` for keep-open, `close` for close-*).
+
+Result: pass 0, suspect 25, deferred-own-host 0.
+
+Own-host check: no record names vm4 as the worker. Records that name vm2 or vm3 do so as the checker of their reading, not as the worker, so none is deferred.
+
+Common failure: no `claims/` file names any of the 25 tickets. The batch 01 and batch 02 reports found the same gap, so this batch repeats it.
+
+| # | Ticket | Result | Claim found | Draft branch head | Missing |
+| --- | --- | --- | --- | --- | --- |
+| 1 | SOLR-9062 | suspect | none | `22bfe1adcb` on `solr-9062-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 2 | SOLR-9061 | suspect | none | `d2f1db554d` on `solr-9061-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 3 | SOLR-9042 | suspect | none | `8c0f98fe4e` on `solr-9042-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded) |
+| 4 | SOLR-8991 | suspect | none | `d44d170663` on `solr-8991-draft-close` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 5 | SOLR-8966 | suspect | none | `986cb190a8` on `solr-8966-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 6 | SOLR-8941 | suspect | none | `27c67c017d` on `solr-8941-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 7 | SOLR-8928 | suspect | none | `190f4af605` on `solr-8928-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 8 | SOLR-8909 | suspect | none | `b7ea1f6b05` on `solr-8909-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded) |
+| 9 | SOLR-8899 | suspect | none | `95b75dba81` on `solr-8899-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded) |
+| 10 | SOLR-8893 | suspect | none | `89b8f324cf` on `solr-8893-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 11 | SOLR-8879 | suspect | none | `03ec8ec283` on `solr-8879-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded) |
+| 12 | SOLR-8862 | suspect | none | `c0fe9975ee` on `solr-8862-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 13 | SOLR-8843 | suspect | none | `c4ff3af3fd` on `solr-8843-draft-close` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded) |
+| 14 | SOLR-8841 | suspect | none | `8d260ba8c1` on `solr-8841-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 15 | SOLR-9202 | suspect | none | `204a801af4` on `solr-9202-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded) |
+| 16 | SOLR-8806 | suspect | none | `b98ad20272` on `solr-8806-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 17 | SOLR-8770 | suspect | none | `c7176c0093` on `solr-8770-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 18 | SOLR-8768 | suspect | none | `0366b7b371` on `solr-8768-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 19 | SOLR-8757 | suspect | none | `efe16e2f2c` on `solr-8757-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 20 | SOLR-8756 | suspect | none | `63f25b7900` on `solr-8756-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded) |
+| 21 | SOLR-8741 | suspect | none | `c2dd3ac82e` on `solr-8741-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 22 | SOLR-8733 | suspect | none | `8c6526f5e1` on `solr-8733-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 23 | SOLR-8732 | suspect | none | `61a2072b79` on `solr-8732-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 24 | SOLR-8729 | suspect | none | `d9439a7cc3` on `solr-8729-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+| 25 | SOLR-8709 | suspect | none | `9616ba3f4c` on `solr-8709-draft-open` | closeout claim with a DONE line in `claims/` (none names this ticket); Jira status read in this pass (record says not re-read or not recorded); code path with file and line, and no reproduction attempt that ran |
+
+Count: pass 0, suspect 25, deferred 0.

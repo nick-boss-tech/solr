@@ -10,3 +10,7 @@
 Heartbeat: 2026-10-19T16:21:44Z
 
 Append one heartbeat line at least once an hour while the claim is active, and push it.
+
+Result: 2026-10-19T16:26:17Z: 25 items audited, 0 pass, 25 suspect, 0 deferred (no claim names any ticket in the batch; no record names vm4). Per-item missing fields in `reports/skip-verdict-audit-batch-08.md`.
+
+DONE: 2026-10-19T16:26:17Z. Deliverables: `reports/skip-verdict-audit-batch-08.md`.
