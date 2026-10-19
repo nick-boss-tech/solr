@@ -1,42 +1,43 @@
 # Skip record: SOLR-17003
 
-- Ticket: SOLR-17003, "UnifiedHighlighter breaks with DateRangeField". JIRA status Open, resolution none, created 2023-09-28, last updated 2023-10-21, checked 2026-10-19 UTC. Link: SOLR-16885 (Open).
-- Verdict: keep-open.
+- Ticket: SOLR-17003, "UnifiedHighlighter breaks with DateRangeField". JIRA status read 2026-10-19 (UTC): Open, resolution none, created 2023-09-28, updated 2023-10-21, no fix version. Link: SOLR-16885 (Open). Four comments: stillalex (2023-10-18) gives the stack trace and points at the intersection of the UnifiedHighlighter and DateRangeField; sarcanon (2023-10-19) confirms `hl.method=fastVector` avoids the error; sarcanon (2023-10-20) reports a warning that the field does not store term vectors with positions and offsets; stillalex (2023-10-21) asks whether the original highlighter gives correct results.
+- Verdict: keep-open. Unchanged from the earlier keep-open verdict; the earlier vm5 closeout (DONE, pre-remediation) is not reused.
 - Draft branch: solr-17003-draft-open.
-- Pinned head: fork origin/main `498a09aea97aac86c2cc7ac114113b946d249942`.
-- Checked by: vm5, 2026-10-19 UTC.
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (2026-10-07). Upstream sha not cited.
+- Checked by: vm4, 2026-10-19 14:27-14:28 UTC.
 
 ## Ticket reading
 
-A query on a `DateRangeField` with `hl=true` and the default highlighter fails with HTTP 500: `ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 10` at `org.apache.lucene.spatial.prefix.tree.NumberRangePrefixTree.readCell`. Setting `hl.method=fastVector` avoids it. The reporter then sees repeated warnings in the log with fastVector, and the commenter asks whether the unified results are correct with the original method. The description links a mailing-list thread.
+Highlighting a query on a `DateRangeField` fails with a 500. The reporter's stack trace, quoted in the comments, ends at `org.apache.lucene.spatial.prefix.tree.NumberRangePrefixTree.readCell` (an `ArrayIndexOutOfBoundsException` with index -1). Setting `hl.method=fastVector` avoids the error, at the cost of a warning about term vectors.
 
-## Code reading (at `498a09aea97aac86c2cc7ac114113b946d249942`)
+## Code reading
 
-- `solr/core/src/java/org/apache/solr/highlight/UnifiedSolrHighlighter.java:135-175`: the unified highlighter is Solr's wrapper around Lucene's `UnifiedHighlighter`; `getHighlighter(req)` creates it. No field-type check is made before the highlighter reads terms for a field.
-- `git grep -n "DateRangeField\|NumberRangePrefixTree\|RangeField" -- solr/core/src/java/org/apache/solr/highlight`: no match. The highlight package has no special case for range or spatial field types.
-- `solr/core/src/java/org/apache/solr/schema/DateRangeField.java:47`: `DateRangeField` is a Solr field type backed by Lucene's spatial prefix-tree range encoding (`NumberRangePrefixTree` in `lucene-spatial-extras`).
-- The exception is raised in Lucene's `NumberRangePrefixTree.readCell`, which the unified highlighter reaches through the field's terms. The index value -1 is read from the term bytes of a range encoding, not from a Solr path.
+- `gradle/libs.versions.toml:39`: `apache-lucene = "10.4.0"`. The pinned head uses Lucene 10.4.0.
+- `solr/core/src/java/org/apache/solr/highlight/UnifiedSolrHighlighter.java:135`: the unified highlighter class. A search at the pin for `DateRange` in `solr/core/src/java/org/apache/solr/highlight/` finds no DateRangeField handling in the highlight package.
+- `UnifiedSolrHighlighter.java:26-29` imports `NumberRangePrefixTreeStrategy`, `DateRangePrefixTree` and `NumberRangePrefixTree.NRShape`/`UnitNRShape`, so the highlighter file uses the same Lucene spatial classes as the failing call.
 
-So the failure path is: Solr passes a non-text field to the Lucene unified highlighter; the highlighter reads its terms; Lucene's range-cell decoder fails. Solr does not guard the field type. Whether the guard belongs in Solr (skip highlighting for range or spatial fields) or in Lucene's decoder is not decided by the code.
+What this shows at the pin: the failing method is in Lucene (`NumberRangePrefixTree.readCell`), which Solr uses but does not contain. Solr's highlighter does not guard DateRangeField values before handing them to the Lucene call. So the root cause sits in Lucene, and a Solr-side fix would be a guard or a different highlight path for this field type. The audit's "possible Solr-side guard, not investigated" stays open.
 
 ## History
 
-- `git log` on `solr/core/src/java/org/apache/solr/highlight` for DateRangeField or the ticket key: not searched in detail.
-- No commit on the fork names SOLR-17003 (empty `git log --grep`).
-- SOLR-16885 (linked, Open): not traced on the fork.
+- No commit on the pinned head names SOLR-17003 (evidence tool: no hits).
+- SOLR-16885 (linked, Open) is not checked for a fix in this pass.
+- Lucene's `NumberRangePrefixTree` change history is not traced here: Lucene is a separate repository.
 
 ## Reproduction attempts
 
-Not attempted. A reproduction is a small Solr test: a schema with a `DateRangeField` field, one indexed value, and a query with `hl=true` and `hl.fl` on that field under the default (unified) method, run at the pinned head. Its result would show whether the failure is reproduced on main. That run is the missing piece; it was not run in this closeout.
+Not attempted. Reproducing needs a `DateRangeField` index with the unified highlighter on the pinned build, which is a test run; this pass is review-only.
 
 ## Gap analysis
 
-The reported exception is in Lucene's range-cell decoder, reached from Solr's unified highlighter with no field-type check. The ticket does not say which field value triggered it, and the code does not show whether every `DateRangeField` value fails or only some. The decision (Solr-side guard or Lucene fix) is open.
+Two possible fixes exist, and both are decisions outside this repo's review: a Lucene fix for `readCell` (the cause the stack trace names), or a Solr-side guard that routes DateRangeField highlighting elsewhere. The `fastVector` workaround avoids the error but produces the term-vector warning, and the reporter asked whether the original highlighter gives correct results. That answer is not in the ticket.
+
+Missing piece for a verdict change: (1) the status of the Lucene issue for `readCell` and whether Lucene 10.4.0 carries a fix; (2) the owner's decision on a Solr-side guard; (3) a run of the highlighter on a DateRangeField query at the pin, to check the default highlighter result against the `fastVector` one.
 
 ## Verdict justification
 
-keep-open: the attempts (code reads at the pinned head, the highlight package search, the field-type read) are named, and the missing piece is a reproduction on main and the decision about where the guard belongs. close-cannot-reproduce needs a reproduction on the pinned head; none was run. pr-needed needs a decided change; the location of the change (Solr or Lucene) is not decided. The keep-open minimum is met.
+keep-open meets the rubric: the code path is read (the Lucene dependency pin, the highlighter, the DateRangeField strategy classes), the attempts are named (the comments' workaround), and the missing pieces are named (the Lucene status and a run). close-fixed and close-obsolete are not met. pr-needed is not met as a shown Solr defect, because the failing call is in Lucene and the Solr-side change is a design choice.
 
 ## Limits
 
-This record does not reproduce the failure. It does not trace SOLR-16885 or the mailing-list thread. It does not check Lucene's decoder code at its own version (the fork does not contain Lucene sources).
+This record does not reproduce the failure, does not check Lucene's issue tracker, and does not decide the Solr-side guard. It does not post anything to JIRA or GitHub.
