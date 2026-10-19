@@ -485,7 +485,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Maintainers (Hostetter, Benedetti) point to knn excludeTags, already supported and tested in KnnQParserTest; remaining ask is an enhancement."
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-17615-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17612",
