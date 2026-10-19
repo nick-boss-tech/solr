@@ -12,3 +12,5 @@ Heartbeat: 2026-10-19T07:46:59Z
 Result: 2026-10-19T07:47:41Z: close-answered for the certificate part (jwt-authentication-plugin.adoc:195-201, trustedCertsFile or trustedCerts). The intermittent restart failure is environmental; the reporter should reopen with the trust configuration and the startup logs if it persists.
 
 DONE: 2026-10-19T07:47:41Z. Deliverables: `drafts/SOLR-17169/record.md`, `drafts/SOLR-17169/jira-comment.md` on draft branch `solr-17169-draft-close` (head `3c4d5e8e8859`), and the queue verdict in `material/skip-audit/queue-current.json`.
+
+Correction: : the draft head recorded above is not the branch tip. The comment was amended after the claim (link replaced with a page reference). Current head of solr-17169-draft-close is 0249f8cdd3c6.

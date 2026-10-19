@@ -14,3 +14,5 @@ Result: 2026-10-19T07:52:10Z: close-fixed. The NPE site (c058ea5dac^ MediaTypeOv
 DONE: 2026-10-19T07:52:10Z. Deliverables: `drafts/SOLR-17086/record.md`, `drafts/SOLR-17086/jira-comment.md` on draft branch `solr-17086-draft-close` (head `a210672ca482`), and the queue verdict in `material/skip-audit/queue-current.json`.
 
 Revised: 2026-10-19T07:55:42Z: verdict changed from close-fixed to keep-open. Problem 1 (backup NPE) is fixed by c058ea5dac. Problem 2 (ADDREPLICA, same 500) is not covered: CreateReplica is an annotated v2 API, and the Jersey media-type filter does not run for it. Draft branch solr-17086-draft-close is superseded and kept; the record there says so. New draft: solr-17086-draft-open at `fdf29b716508`.
+
+Correction: : the draft head recorded above is not the branch tip. The first draft push was rejected as non-fast-forward (the branch already held a bulk-audit record) and the failure was not seen. The closeout record was added on top; current head of solr-17086-draft-open is b24504758dce (replaces the bulk record at 564eb5312949, kept in history).

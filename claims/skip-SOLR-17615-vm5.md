@@ -12,3 +12,5 @@ Heartbeat: 2026-10-19T07:26:58Z
 Result: 2026-10-19T07:27:37Z: close-answered. The documented option excludeTags on the knn parser answers the facet drill-down question (dense-vector-search.adoc:814-817, option at :397; tested in KnnQParserTest). The request to change the default pre-filter behavior is a product decision, not closed here.
 
 DONE: 2026-10-19T07:27:37Z. Deliverables: `drafts/SOLR-17615/record.md`, `drafts/SOLR-17615/jira-comment.md` on draft branch `solr-17615-draft-close` (head `d7bbf66c31b2`), and the queue verdict in `material/skip-audit/queue-current.json`.
+
+Correction: : the draft head recorded above is not the branch tip. The record was amended after the claim (history note). Current head of solr-17615-draft-close is d85501a63895.

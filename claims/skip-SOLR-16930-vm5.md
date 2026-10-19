@@ -12,3 +12,5 @@ Heartbeat: 2026-10-19T08:01:57Z
 Result: 2026-10-19T08:02:42Z: keep-open. SolrResourceLoader.java:466-470 and 515-526: the legacy shim looks up the factory by name only and never compares the kind written in the config (group 5) with the expected type. Missing: the compatibility decision (reject the mismatch or keep and document it).
 
 DONE: 2026-10-19T08:02:42Z. Deliverables: `drafts/SOLR-16930/record.md`, `drafts/SOLR-16930/jira-comment.md` on draft branch `solr-16930-draft-open` (head `523f44ad750a`), and the queue verdict in `material/skip-audit/queue-current.json`.
+
+Correction: : the draft head recorded above is not the branch tip. Same as SOLR-17086: current head of solr-16930-draft-open is 9756732b3e97 (bulk record at 0c1dd8c3c88a kept in history).
