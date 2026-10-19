@@ -664,7 +664,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "License header hygiene on ref-guide UI bundle; not a product bug."
-    }
+    },
+    "verdict": "pr-needed",
+    "draft_branch": "solr-17365-draft-pr",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17363",
