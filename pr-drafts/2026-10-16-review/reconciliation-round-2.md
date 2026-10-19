@@ -39,3 +39,12 @@ Option A, corrections only: sentences that the live head or a receipt contradict
 5135 row correction: the head is 6c033ba6ea, not c666155ed0. The earlier row said the draft was longer than live, which was counted against an old body. Against the live body at 6c033ba6ea (4,148 visible characters), the draft is 3,895.
 
 Known limitation for 5135: the paging probe reproduces repeats and skips at 6c033ba6ea in two of four runs (receipts/SOLR-6975.md, "Paging probe"). The section stays and reports the runs.
+
+## Verification of the applied bodies (2026-10-19, vm4)
+
+The flagged claims left unchecked when the bodies were applied on 2026-10-18 are now checked. No body change was needed.
+
+- PR 5131 (head 74532d0f76): "explicit facet.method=fcs also reaches other single-valued fields, such as BoolField." Verified in code. `SimpleFacets.getFacetFieldCounts` keeps an explicit FCS request (`selectFacetMethod` only overrides it for multi-token fields), and the FCS branch sends non-numeric single-valued fields to `PerSegmentSingleValuedFaceting`. BoolField has no number type, so it takes that path.
+- PR 5130 (head 433e6c6ba9): the `fl=1001,id` check is `testDigitLeadingNumberWithoutSchemaFieldStaysConstant` (ReturnFieldsTest.java lines 408-415), present at the head. The receipt (receipts/SOLR-4374.md) gives 17 of 17 at the head, and records that this test passes on the base source.
+- PR 5132 (head 05cc2776d0): the 2026-10-07 result is for the gated head b099a9f1be5a (receipts/SOLR-6207.md, "Full gate at b099a9f1be5a"). The later change from b099a9f1be5a to 05cc2776d0 is a changelog fragment and javadoc in SolrQueryRequest.java only, checked with the compare API.
+- PR 5116 (head 58e07b4571): "byte-identical gradlew" holds. The gradlew blob is the same at 192aacaaf89 and at 58e07b4571 (6b3aa0098675).
