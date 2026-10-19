@@ -466,7 +466,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Perf design problem (SolrIndexSearcher inheritance, executor per searcher); maintainers say no good path in current structure; the one-line fix is changing the indexSearcherExecutorThreads default, a config decision."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-17665-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17615",
