@@ -1,6 +1,6 @@
 # Gate job: SOLR-16673 nested root field type
 
-Status: CLAIMED (claims/pool-vm5-gate-solr-16673-rootfield.md)
+Status: BLOCKED at step 1 (tidy drift on the shared base; decision needed, see the result section)
 
 - Branch: `solr-16673-rootfield`. Head: `5fb792482fc3d8fef851513bb91eb3231409a033` (fork tip, confirmed by `git ls-remote` on 2026-10-18).
 - Prior gated head: none. Merge-base with upstream/main: `e044bf20b405b8ca985730be3553d77d1fc8ff31`.
@@ -60,3 +60,14 @@ A gate that executed tests and failed is not relaunched by the claimant. Record 
 - One fast-forward push to `coordination` with the receipt and DONE marks.
 - The existing branch head remains unchanged by the gate.
 - No PR opening or state change, no comment, no Jira or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Result (vm5, 2026-10-19T00:55:43Z)
+
+- Claimant: vm5. Runner: `pool/bin/sweep-run.sh` under `/workspace/tools/.gradle-vm5.lock`, JDK 21.0.12.1, worktree `/workspace/worktrees/vm5-gate-16673` at head 5fb792482fc3d8fef851513bb91eb3231409a033 (confirmed by `git ls-remote` on 2026-10-19).
+- Step 0 changelog YAML parse: OK (`/workspace/gates/logs/vm5/16673-rootfield/step0.log`).
+- Step 1 tidy: GATE INVALID. Tidy changed `gradle/libs.versions.toml` by removing `oshai-logging = "8.0.4"`. The gate stopped here as the job requires. Diff: `/workspace/gates/logs/vm5/16673-rootfield/tidy-diff.txt`. The branch was not changed and nothing was committed.
+- Base check (diagnostic, not a gate step): tidy on the merge-base `e044bf20b405b8ca985730be3553d77d1fc8ff31` makes the same one-line removal (`/workspace/gates/logs/vm5/16673-base-tidy-check/tidy-diff.txt`). The line is unused by the build (its only other mentions are the renovate config and the changelog). So the drift is in the shared base, not in this branch.
+- Steps 2 to 5 (Error Prone compile, proof leg, focused head run, module check): not run.
+- Receipt: not written. A receipt is written only on green.
+
+Decision needed (main agent, then Nick): how step 1 should treat the base drift. Options: (a) a tidy-only change on `main`, then re-check both heads; (b) a tidy-only commit on each branch, which moves both heads and requires a new gate; (c) record the base drift as known and exclude `gradle/libs.versions.toml` from step 1 for both gates. Recommended: (c) for now, since it changes no ticket code. Until one is chosen, both gates stay BLOCKED.
