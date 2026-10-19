@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.handler.HighlightRequestHandlerHttpTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-19T07:34:34.259Z" hostname="localhost" time="11.945">
+  <properties/>
+  <testcase name="testPostAndQueryMethodsAcceptPlainTextBody" classname="org.apache.solr.handler.HighlightRequestHandlerHttpTest" time="0.639"/>
+  <testcase name="testGetStreamBodyAndV2Routes" classname="org.apache.solr.handler.HighlightRequestHandlerHttpTest" time="0.046"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 19, 2026 7:34:35 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+2223 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18555-impl/solr/server/solr/configsets/_default/conf'
+2239 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+2257 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.HighlightRequestHandlerHttpTest_18555C0FFEE18555-001/data-dir-1-001
+2345 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+2371 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+2470 WARN  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18555-impl/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18555-impl/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+2470 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.SolrTestCaseJ4.SuppressSSL(bugUrl="None")
+2905 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+2913 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+2917 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+2927 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+2929 WARN  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@757dd277{/solr,/solr,b=file:///workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@5839f883{STOPPED}}. May not be supported in future releases.
+2936 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-cwd/
+2944 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@757dd277{/solr,/solr,b=file:///workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@5839f883{STARTED}}
+3009 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=36943}
+3026 ERROR (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+3027 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+3032 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0
+3032 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+3033 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18555-impl/solr
+3033 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T07:34:36.045148611Z
+3099 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.HighlightRequestHandlerHttpTest_18555C0FFEE18555-001/solrhome-001 (source: servlet config: solr.solr.home)
+3183 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.c.SolrXmlConfig solr.xml not found in SOLR_HOME, using built-in default
+3183 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18555-impl/solr/server/solr/solr.xml
+3716 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+3752 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+5053 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [/workspace/worktrees/solr-18555-impl/solr/server/solr]
+5856 WARN  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+6512 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.HighlightRequestHandlerHttpTest_18555C0FFEE18555-001/solrhome-001
+7243 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@757dd277{/solr,/solr,b=file:///workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@5839f883{STARTED}}
+7246 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@34fffbf5{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:36943}
+7246 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.s.Server Started oejs.Server@60bcffd0{STARTING}[12.1.14,sto=0] @4332ms
+7279 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#36943
+8605 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [ x:highlight] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+8605 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [ x:highlight] o.a.s.c.CoreContainer Creating SolrCore 'highlight' using configuration from configset /workspace/worktrees/solr-18555-impl/solr/server/solr/configsets/_default
+8772 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [ x:highlight] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.HighlightRequestHandlerHttpTest_18555C0FFEE18555-001/solrhome-001/highlight], dataDir=[/workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.HighlightRequestHandlerHttpTest_18555C0FFEE18555-001/solrhome-001/highlight/data/]
+11778 WARN  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [ x:highlight] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+12147 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [ x:highlight] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+12152 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [ x:highlight] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+12152 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [ x:highlight] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+12308 WARN  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [ x:highlight] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/solr-18555-impl/solr/server/solr/configsets/_default/conf ; switching to use InMemory storage instead.
+12485 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [ x:highlight] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+12486 INFO  (searcherExecutor-16-thread-1-processing-highlight) [ x:highlight] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+12488 INFO  (searcherExecutor-16-thread-1-processing-highlight) [ x:highlight] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+12513 INFO  (TEST-HighlightRequestHandlerHttpTest.testPostAndQueryMethodsAcceptPlainTextBody-seed#[18555C0FFEE18555]) [] o.a.s.SolrTestCaseJ4 ###Starting testPostAndQueryMethodsAcceptPlainTextBody
+13022 INFO  (qtp625421179-25-null-1) [ x:highlight t:null-1] o.a.s.c.S.Request path=/highlight params={q=_text_:solr&hl.fl=_text_&wt=json} status=0 QTime=356
+13142 INFO  (qtp625421179-26-null-2) [ x:highlight t:null-2] o.a.s.c.S.Request path=/highlight params={q=_text_:solr&hl.fl=_text_&wt=json} status=0 QTime=1
+13144 INFO  (TEST-HighlightRequestHandlerHttpTest.testPostAndQueryMethodsAcceptPlainTextBody-seed#[18555C0FFEE18555]) [] o.a.s.SolrTestCaseJ4 ###Ending testPostAndQueryMethodsAcceptPlainTextBody
+13151 INFO  (TEST-HighlightRequestHandlerHttpTest.testGetStreamBodyAndV2Routes-seed#[18555C0FFEE18555]) [] o.a.s.SolrTestCaseJ4 ###Starting testGetStreamBodyAndV2Routes
+13155 INFO  (qtp625421179-27-null-3) [ x:highlight t:null-3] o.a.s.c.S.Request path=/highlight params={q=_text_:solr&stream.body=Solr+highlights+the+text.&hl.fl=_text_&wt=json} status=0 QTime=1
+13192 INFO  (TEST-HighlightRequestHandlerHttpTest.testGetStreamBodyAndV2Routes-seed#[18555C0FFEE18555]) [] o.a.s.SolrTestCaseJ4 ###Ending testGetStreamBodyAndV2Routes
+13193 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+13200 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.s.Server Stopped oejs.Server@60bcffd0{STOPPING}[12.1.14,sto=0]
+13201 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@34fffbf5{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+13381 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=196652641
+13383 INFO  (coreCloseExecutor-23-thread-1) [ x:highlight] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@30211c9d highlight
+13384 INFO  (coreCloseExecutor-23-thread-1) [ x:highlight] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+yar 19, 2026 12:34:46 KIKIIƊE io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+13406 INFO  (SUITE-HighlightRequestHandlerHttpTest-seed#[18555C0FFEE18555]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@757dd277{/solr,/solr,b=file:///workspace/worktrees/solr-18555-impl/solr/core/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@5839f883{STOPPED}}
+]]></system-err>
+</testsuite>

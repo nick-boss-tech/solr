@@ -1,0 +1,47 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :checkJdkInternalsExportedToGradle
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:solrj:processResources UP-TO-DATE
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/solr-18555-impl/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-18555-impl/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj:classes
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:core:compileJava UP-TO-DATE
+> Task :solr:core:classes UP-TO-DATE
+> Task :solr:test-framework:compileJava UP-TO-DATE
+> Task :solr:core:compileTestJava UP-TO-DATE
+
+> Task :solr:solrj:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+BUILD SUCCESSFUL in 1m 43s
+20 actionable tasks: 6 executed, 14 up-to-date
+rc=0

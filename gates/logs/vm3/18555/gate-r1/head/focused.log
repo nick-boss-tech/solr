@@ -1,0 +1,115 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :solr:core:processResources UP-TO-DATE
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:api:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:api:classes
+> Task :solr:api:resolve UP-TO-DATE
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/solr-18555-impl/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-18555-impl/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+> Task :solr:core:processTestResources
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=18555C0FFEE18555
+
+> Task :solr:api:jar
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:processResources
+> Task :solr:modules:analysis-extras:processResources NO-SOURCE
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:compileJava
+Note: /workspace/worktrees/solr-18555-impl/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-zookeeper:compileJava
+> Task :solr:solrj:processResources UP-TO-DATE
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar
+> Task :solr:solrj-jetty:classes
+> Task :solr:solrj-jetty:jar
+> Task :solr:solrj-zookeeper:classes
+> Task :solr:solrj-zookeeper:jar
+
+> Task :solr:solrj-streaming:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-streaming:classes
+> Task :solr:solrj-streaming:jar
+> Task :solr:core:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:classes
+> Task :solr:core:jar
+
+> Task :solr:test-framework:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:analysis-extras:compileJava
+Note: /workspace/worktrees/solr-18555-impl/solr/modules/analysis-extras/src/java/org/apache/solr/schema/ICUCollationField.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:test-framework:classes
+> Task :solr:test-framework:jar
+> Task :solr:modules:analysis-extras:classes
+> Task :solr:modules:analysis-extras:jar
+> Task :solr:core:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:testClasses
+
+> Task :solr:core:test
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+:solr:core:test (SUCCESS): 10 test(s)
+
+> Task :solr:core:wipeTaskTemp
+The slowest suites (exceeding 1s) during this run:
+  18.48s HighlightRequestHandlerTest (:solr:core)
+
+BUILD SUCCESSFUL in 5m 11s
+35 actionable tasks: 28 executed, 7 up-to-date
+rc=0

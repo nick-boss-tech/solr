@@ -1,6 +1,6 @@
 # Gate job: SOLR-18555 (text highlighting request handler, round 1 gate)
 
-Status: CLAIMED (claims/pool-vm3-gate-SOLR-18555-phase-r1.md)
+Status: DONE (head b99259cba3; receipt receipts/SOLR-18555.md)
 
 - Branch: `solr-18555-submit`. Head: `b99259cba3572cc08586b2456c78780c814a2bf7` (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `c8ab71430f6e7547c773da596101d680862310ff`. Prior gated head: none recorded.
@@ -62,3 +62,7 @@ If any step cannot be verified, record it here and stop.
 
 - One fast-forward push with the receipt and the DONE marks, plus any repair commits (WORKFLOW.md, Gate repairs).
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Run record (vm3, 2026-10-19)
+
+- Head `b99259cba3`. Proof leg rc=1 as expected (LinkageError, cause ClassNotFoundException). Steps 0 to 5 green. Focused: HighlightRequestHandlerTest 10 of 10, HighlightRequestHandlerHttpTest 2 of 2. Logs under `gates/logs/vm3/18555/gate-r1/`.
