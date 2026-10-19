@@ -1,37 +1,41 @@
 # Skip record: SOLR-13832
 
-- Ticket: SOLR-13832, MoreLikeThis parsers SimpleMLTQParser and CloudMLTQParser - termvectors vs fieldvalues. JIRA status not recorded in the C reading. JIRA was not re-read for this record.
+- Ticket: SOLR-13832, MoreLikeThis parsers SimpleMLTQParser and CloudMLTQParser - termvectors vs fieldvalues. JIRA read 2026-10-19 (this pass, evidence tool): status Open, resolution None, created 2019-10-09, updated 2020-01-21, no fix versions, no links, no comments.
 - Verdict: keep-open.
-- Draft branch: solr-13832-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the C reading (reports/2026-10-18-skip-repro/C4, slice 4, pinned head unchanged).
+- Draft branch: solr-13832-draft-open (the existing keep-open branch; this record replaces its draft files).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Code read and grep run at this head (detached worktree).
+- Source: remediation redo of batch 05, item 19, under assignments/pool-aaa-skip-verdict-remediation-05.md. The earlier record (vm2, from the C reading) cited the same two parsers; the lines are confirmed here.
 
 ## Ticket reading
 
-The summary as recorded in the queue: MoreLikeThis parsers SimpleMLTQParser and CloudMLTQParser - termvectors vs fieldvalues.
+The standalone MLT parser finds similar documents from the term vectors of the original document. The cloud parser builds the query from the stored field values, so a field that is indexed but not stored gives a different result. The reporter asks for a parameter that chooses the source.
 
-## Code reading
+## Code reading at the pinned head
 
-CloudMLTQParser.likeDoc builds terms from stored SolrDocument field values (solr/core/src/java/org/apache/solr/search/mlt/CloudMLTQParser.java:55-70, 115-124), while SimpleMLTQParser uses moreLikeThis.like(docId) (term vectors, SimpleMLTQParser.java:60). No option to choose between them exists in the mlt directory.
+- solr/core/src/java/org/apache/solr/search/mlt/CloudMLTQParser.java: `likeDoc` (from about line 62) builds the terms from the stored document's field values (`doc.getFieldValues` at :70, through `getFieldValuesIncludingCopyField`, defined at :115-124).
+- solr/core/src/java/org/apache/solr/search/mlt/SimpleMLTQParser.java:60: `moreLikeThis -> moreLikeThis.like(scoreDocs[0].doc)`. This is the term-vector path the ticket describes.
+- `git grep -n -i "termvector\|termVector\|useTermVectors\|fieldvalues" 498a09aea97aac86c2cc7ac114113b946d249942 -- solr/core/src/java/org/apache/solr/search/mlt` returns only field-value lines (for example `getFieldValuesIncludingCopyField`). No parameter switches between the two sources.
+
+So the difference the ticket describes is in code, and no option to choose the source exists.
 
 ## History
 
-- None cited in the C reading.
+- No commit on the pin names SOLR-13832.
 
 ## Reproduction attempts
 
-Not attempted. The C scope ran no builds or tests.
+Not run. A reproduction needs a standalone and a SolrCloud core with a field that is indexed and not stored, then an MLT request on each. This pass did not start a core.
 
 ## Gap analysis
 
-The code path is still present; the reported behavior is not yet shown on a build.
+The two parsers differ as described, and the ticket asks for a choice between them. Adding that parameter is a feature decision (the name, the default, and how the cloud parser would read term vectors when they are not stored).
 
 ## Verdict justification
 
-keep-open: the code path the ticket names is still present at the pinned head, but the behavior has not been shown on a build.
+keep-open: the attempts made are the code reads and the greps above at the pinned head, the Jira read, and the absence of any switch. The missing piece is the feature decision (parameter design and default) and a run that shows the two results on an unstored field. close-fixed and close-obsolete are not supported: both parsers exist and the difference is present. pr-needed is not supported without that decision.
 
-Missing for this verdict: Reproduction on the pinned head with the input the ticket describes. The C scope ran no builds.
+Missing for a closing or PR verdict: the parameter decision, and the run output.
 
 ## Limits
 
-This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path where the subject does not cite the ticket.
+This record does not run an MLT request. It does not post anything to JIRA or GitHub. The draft comment is a draft until someone posts it by hand.
