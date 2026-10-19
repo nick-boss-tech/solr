@@ -16,6 +16,7 @@
  */package org.apache.solr.ui.views.files
 
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,28 +41,31 @@ fun FileContentViewer(
     val lines = remember(content) { content.lines() }
     val numberWidth = lines.size.toString().length
     val textStyle = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace)
+    val verticalScroll = rememberScrollState()
     val horizontalScroll = rememberScrollState()
-    Row(
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+            .horizontalScroll(horizontalScroll),
     ) {
-        DisableSelection {
-            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
-                lines.forEachIndexed { index, _ ->
-                    Text(
-                        text = (index + 1).toString().padStart(numberWidth),
-                        style = textStyle,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        softWrap = false,
-                    )
+        Row(modifier = Modifier.verticalScroll(verticalScroll)) {
+            DisableSelection {
+                Column(modifier = Modifier.padding(horizontal = 8.dp)) {
+                    lines.forEachIndexed { index, _ ->
+                        Text(
+                            text = (index + 1).toString().padStart(numberWidth),
+                            style = textStyle,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            softWrap = false,
+                        )
+                    }
                 }
             }
-        }
-        SelectionContainer(modifier = Modifier.weight(1f).horizontalScroll(horizontalScroll)) {
-            Column(modifier = Modifier.padding(end = 8.dp)) {
-                lines.forEach { line ->
-                    Text(text = line, style = textStyle, softWrap = false)
+            SelectionContainer {
+                Column(modifier = Modifier.padding(end = 8.dp)) {
+                    lines.forEach { line ->
+                        Text(text = line, style = textStyle, softWrap = false)
+                    }
                 }
             }
         }
