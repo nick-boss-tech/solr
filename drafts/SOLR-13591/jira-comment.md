@@ -1,0 +1,1 @@
+We reviewed this ticket against the current code. The connect path in the reported stack trace has been removed, but ZkClientClusterStateProvider still throws AlreadyClosedException when the client is used after close(), which matches the cause described in the 2021 comment. We have not reproduced the exception without a prior close(), so we are leaving the ticket open.
