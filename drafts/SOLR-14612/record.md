@@ -1,37 +1,41 @@
 # Skip record: SOLR-14612
 
-- Ticket: SOLR-14612, Cannot register custom plugins in instances with hostname starting with "solr". JIRA was not re-read for this record.
+- Ticket: SOLR-14612, "Cannot register custom plugins in instances with hostname starting with 'solr'". JIRA status Open, resolution none, fix versions none, created 2020-07-01, updated 2020-07-15. Checked 2026-10-19 UTC.
 - Verdict: keep-open.
 - Draft branch: solr-14612-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-06, audit verdict confirmed-skip).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. No upstream sha cited.
+- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, for the remediation redo of this ticket (claim claims/skip-SOLR-14612-vm2.md).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Cannot register custom plugins in instances with hostname starting with "solr". Skip note: Already fixed by SOLR-16659 (PR #2473, commit 8bbfbdbc469) — naive /solr->/api substring replacement removed from PackageAPI; no code left to patch, no linked PR to this ticket..
+Custom plugin registration through the package API fails on a host whose name starts with "solr". The reporter says that PackageAPI.java (at lucene-solr commit 6eb7bc3b, around line 418) replaces "/solr" with "/api" in the URL, so "http://solrexample.domain/solr" becomes "http://apiexample.domain/api". The report names no test class and has no comments.
 
 ## Code reading
 
-Taken from the audit evidence, not re-read at the pinned head: no "/solr" replace left in PackageAPI/pkg code
+- solr/core/src/java/org/apache/solr/pkg/PackageAPI.java (origin/main 498a09aea97): the class is documented as the public endpoints under /api/cluster/package (line 63). A bounded search for the /solr-to-/api replacement in the package code (`git grep -n 'replaceFirst\|replace("/solr\|"/solr'` over solr/core/src/java/org/apache/solr/pkg and handler/admin) found no such replacement.
+- The reporter's line 418 is not in this file at the pin. So the exact code the report names is absent or moved, and the path that builds the plugin URL on the pin was not traced.
+
+Commands at the pinned head:
+- git grep -n 'replaceFirst\|replace("/solr\|"/solr' origin/main -- solr/core/src/java/org/apache/solr/pkg solr/core/src/java/org/apache/solr/handler/admin: no match for the rewrite.
+- git log --oneline --grep='SOLR-14612' origin/main: no output.
 
 ## History
 
-No commit history was used for this record.
+- Commits on origin/main naming SOLR-14612: none.
+- The removal or move of the replacement code was not located within the bounded search.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not attempted. A reproduction needs a server whose hostname starts with "solr" and a package registration through the API. That needs a running node, which was not set up in this pass.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The replacement the report names is not found at the pin, but the URL-building path that would replace it was not traced, so whether a host name starting with "solr" still breaks plugin registration is not established.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric: the pinned head sha is cited, the Jira status and date are read in this pass, code paths are cited with file and line, and the attempts and the missing piece are listed. close-obsolete does not hold: the named line is not in the file at the pin, but the removal was not located and the URL path was not traced. close-fixed does not hold: no commit names the ticket. close-cannot-reproduce does not hold: no reproduction was made. The missing pieces are (1) the URL-building path for package plugin registration at the pin, and (2) a run with a host name starting with "solr".
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not reproduce the failure. It does not locate the removal of the cited replacement. It does not test a host name starting with "solr".
