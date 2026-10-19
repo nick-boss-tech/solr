@@ -19,6 +19,8 @@ package org.apache.solr.ui.views.configsets
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -62,7 +64,7 @@ fun ConfigsetsOverviewContent(
     component: ConfigsetsOverviewComponent,
     configsetsViewModel: ConfigsetsViewModel,
     modifier: Modifier = Modifier,
-) = Column(modifier) {
+) = Column(modifier.verticalScroll(rememberScrollState())) {
     val viewModel = viewModel { component.createConfigsetsOverviewViewModel() }
 
     val configsetsModel by configsetsViewModel.uiState.collectAsState()
