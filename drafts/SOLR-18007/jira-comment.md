@@ -1,0 +1,3 @@
+We looked at this against the current main branch (498a09aea97a). The spellchecker named in the report is configured in the test resources (solr/core/src/test-files/solr/collection1/conf/solrconfig-phrasesuggest.xml, around line 280), and the reload path is SolrSuggester.reload (solr/core/src/java/org/apache/solr/spelling/suggest/SolrSuggester.java, around line 196). We could not tell from the code alone whether the NoSuchFileException still happens.
+
+If anyone still has the CI log from this failure, or the seed and the commit where it was first seen, that would let us check whether it reproduces on main. We are leaving this open until then.
