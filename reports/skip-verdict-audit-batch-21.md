@@ -13,19 +13,19 @@ Missing-item codes for suspects:
 
 | Ticket | Result | Claim found | Draft head | Missing (suspects only) |
 | --- | --- | --- | --- | --- |
-| SOLR-1785 | deferred-own-host | claims/pool-skip-review-stale-slice-1.md (DONE 2026-10-18T07:40Z, claimant vm5) | 9d44e0674866 | not scored (record cites the C1 slice reading, whose claim names vm5) |
-| SOLR-1780 | deferred-own-host | claims/pool-skip-review-stale-slice-1.md (DONE 2026-10-18T07:40Z, claimant vm5) | 95762dd7ab18 | not scored (record cites the C1 slice reading, whose claim names vm5) |
+| SOLR-1785 | suspect | none | 9d44e0674866 | J, C (no claim names the ticket) |
+| SOLR-1780 | suspect | none | 95762dd7ab18 | J, C (no claim names the ticket) |
 | SOLR-1658 | suspect | none | 1dedf4ca4cc8 | J, C |
 | SOLR-1557 | pass | claims/skip-SOLR-1557-vm4.md (DONE 2026-10-19T07:45:00Z, claimant vm4) | 868231790333 | none |
 | SOLR-1542 | pass | claims/skip-SOLR-1542-vm4.md (DONE 2026-10-19T07:40:00Z, claimant vm4) | 175f3e05da08 | none |
 | SOLR-1247 | pass | claims/skip-SOLR-1247-vm4.md (DONE 2026-10-19T07:30:00Z, claimant vm4) | e0d9d8332f55 | none |
 
-Result count: 3 pass, 1 suspect, 2 deferred-own-host (SOLR-1785, 1780).
+Result count: 3 pass, 3 suspect, 0 deferred-own-host. SOLR-1780 and 1785 were first deferred because they cite vm5's C1 slice reading; rescored here after the user said the handoff between vm2 to vm5 is not needed.
 
 Checks behind the passes: each names a Jira status and a date read on 2026-10-19 in the record's own pass, cites file-and-line code paths at the pinned head, and states what the verdict does not cover and what would discharge keep-open. Each has a DONE claim by vm4 that names the ticket.
 
 ## Notes for the vm1 watch
 
-- SOLR-1780 and SOLR-1785 are deferred because the slice reading they cite is vm5's C1 claim (`pool-skip-review-stale-slice-1`). The records themselves name vm2 as the checker. If the watch reads the rule as naming the record's checker only, these two should be audited by another host.
+- SOLR-1780 and SOLR-1785 were first deferred. Rescored: both fail J and C.
 - SOLR-1247 and SOLR-1542 also appear in the C1 slice table with a verdict from vm5's earlier reading. That reading is not their closeout, which is vm4's claim, so they are scored.
 - SOLR-1658 is a close-fixed record whose reading is the B1 round (vm3). Its fixing commit is an ancestor of the pinned head and the cited test lines are present. It fails only on J and C.

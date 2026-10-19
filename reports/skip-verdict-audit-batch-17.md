@@ -17,17 +17,17 @@ Missing-item codes for suspects:
 | SOLR-4674 | suspect | none | 91dcb20dfc75 | J, C, L (audit evidence only) |
 | SOLR-4669 | suspect | none | a37bd180aa58 | J, C, L (audit evidence only) |
 | SOLR-4659 | suspect | none | 55dedb0cecf8 | J, C |
-| SOLR-4635 | deferred-own-host | none | 5c7e8e4be213 | not scored (record says "Checked by: vm5") |
+| SOLR-4635 | suspect | none | 5c7e8e4be213 | C (no claim names the ticket) |
 | SOLR-4610 | suspect | none | dbddad1413c6 | J, C |
 | SOLR-4593 | suspect | none | 15684b3dd02e | J, C, L (no code path; one passing run of a flaky test) |
 | SOLR-4558 | suspect | none | 6b6f17c63798 | J, C, L (audit evidence only) |
 | SOLR-4533 | suspect | none | 516c343366c4 | J, C |
 | SOLR-4522 | suspect | none | 5d22dcea76da | J, C |
-| SOLR-4501 | deferred-own-host | none | a4e90580cecb | not scored (record says "Checked by: vm5") |
+| SOLR-4501 | suspect | none | a4e90580cecb | C (no claim names the ticket) |
 | SOLR-4499 | suspect | none | dc16c9b3cf36 | J, C |
 | SOLR-4486 | suspect | none | f4cdab47891e | J, C, L (audit evidence only) |
-| SOLR-4427 | deferred-own-host | none | 71152d38dc42 | not scored (record says "Checked by: vm5") |
-| SOLR-4423 | deferred-own-host | none | 5b41a3c52be3 | not scored (record says "Checked by: vm5") |
+| SOLR-4427 | suspect | none | 71152d38dc42 | C (no claim names the ticket). Note: the ticket asked for a warning and the record shows the fix throws an error; the record does not reconcile the two |
+| SOLR-4423 | suspect | none | 5b41a3c52be3 | C (no claim names the ticket). Note: the record says NamedList.java:362-364 still throws on an explicit null tag, and the close-fixed verdict does not address that path |
 | SOLR-4414 | suspect | none | 0694e2eaf5ee | J, C |
 | SOLR-4390 | suspect | none | 19bfb1424f15 | J, C |
 | SOLR-4382 | suspect | none | ae1cab8f9ac0 | J, C |
@@ -40,11 +40,11 @@ Missing-item codes for suspects:
 | SOLR-4169 | suspect | none | 6cd85caf7cd5 | J, C, L (audit evidence only) |
 | SOLR-4146 | suspect | none | 059d978772bb | J, C, L (audit evidence only) |
 
-Result count: 0 pass, 21 suspect, 4 deferred-own-host (SOLR-4635, 4501, 4427, 4423).
+Result count: 0 pass, 25 suspect, 0 deferred-own-host. The four vm5 close-fixed records were first deferred as own-host; rescored here after the user said the handoff between vm2 to vm5 is not needed.
 
 ## Notes for the vm1 watch
 
-- The four deferred records (SOLR-4635, 4501, 4427, 4423) are close-fixed and were all closed by vm5 on 2026-10-18T21:32:17Z. They are left for the vm1 watch or another host.
+- SOLR-4635, 4501, 4427 and 4423 were first deferred because vm5 closed them on 2026-10-18T21:32:17Z. Rescored here, see the result count.
 - J is the common failure. No record in this batch reads the Jira status in its own pass.
 - The close-fixed records that are scored (SOLR-4522, 4390, 4382) cite a fixing commit that is an ancestor of the pinned head and a file and line where the changed code is present. Only J and C are missing on them.
 - SOLR-4593 cites a run that passed once. The rubric's repro route needs a second run or the same seed twice, and it also needs a file-and-line code path.

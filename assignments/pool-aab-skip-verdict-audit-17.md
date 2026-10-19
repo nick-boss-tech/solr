@@ -1,6 +1,6 @@
 # Pool assignment: skip verdict cross-audit, batch 17 of 21
 
-Status: DONE (vm5, claims/pool-aab-skip-verdict-audit-17.md). Deliverable: reports/skip-verdict-audit-batch-17.md, 0 pass, 21 suspect, 4 deferred-own-host.
+Status: DONE (vm5, claims/pool-aab-skip-verdict-audit-17.md). Deliverable: reports/skip-verdict-audit-batch-17.md, 0 pass, 25 suspect, 0 deferred-own-host.
 
 - Capability tags: review, draft.
 - Intended host: any pool Linux host. Claim under `claims/` before starting (WORKFLOW.md).

@@ -30,7 +30,7 @@ Missing-item codes for suspects:
 | SOLR-9468 | suspect | none | d6ccaaf54230 | J, C |
 | SOLR-9428 | suspect | claims/pool-skip-repro-flake-round-1.md (DONE 2026-10-18T08:20Z) | d8029f0ce897 | J, L (no code path read for this record) |
 | SOLR-9427 | suspect | claims/pool-skip-repro-flake-round-1.md (DONE 2026-10-18T08:20Z) | f3f7de15a253 | J, L (no code path read for this record) |
-| SOLR-9426 | deferred-own-host | claims/pool-skip-repro-flake-locate-round-1.md (DONE 2026-10-18T06:55Z, claimant vm5) | 36eb08028ab4 | not scored |
+| SOLR-9426 | suspect | claims/pool-skip-repro-flake-locate-round-1.md (DONE 2026-10-18T06:55Z, claimant vm5) | 36eb08028ab4 | J, L (no code path read for this record); the cited run skipped all 25 tests, so it is not a reproduction attempt |
 | SOLR-9400 | suspect | none | 8dd8fe238312 | J, C, G (grep result taken from the B1 reading, not re-run), L (no file and line) |
 | SOLR-9398 | suspect | none | 99f045139f85 | J, C |
 | SOLR-9390 | suspect | claims/pool-skip-repro-flake-round-1.md (DONE 2026-10-18T08:20Z) | bc97c30cd969 | J, L (no code path read for this record) |
@@ -40,11 +40,11 @@ Missing-item codes for suspects:
 | SOLR-9352 | suspect | none | 563e306889b2 | J, C |
 | SOLR-9329 | suspect | none | 0f8d2685cf8a | J, C |
 
-Result count: 0 pass, 24 suspect, 1 deferred-own-host (SOLR-9426).
+Result count: 0 pass, 25 suspect, 0 deferred-own-host. SOLR-9426 was first deferred as own-host; rescored here after the user said the handoff between vm2 to vm5 is not needed.
 
 ## Notes for the vm1 watch
 
-- SOLR-9426 is deferred-own-host. Its closeout claim `claims/pool-skip-repro-flake-locate-round-1.md` names vm5 as claimant, and the run its record cites (seed 420562093AFD92BD) is that claim's run. Left for the vm1 watch or another host.
+- SOLR-9426 was first deferred because its closeout claim names vm5. Rescored here, see the result count.
 - J is the common failure again: no record in this batch reads the Jira status in its own pass.
 - The repro-based keep-open records (SOLR-9428, 9427, 9390) have a DONE claim and a single passing run each. The rubric's repro route is met in shape, but each record also needs a file-and-line code path, so L is missing.
 - SOLR-9593 cites a run in which every test was skipped, so it exercised nothing and is not evidence either way.
