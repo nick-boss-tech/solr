@@ -8,3 +8,7 @@
 - Started: 2026-10-19T22:05Z (UTC).
 
 Heartbeat: 2026-10-19T22:05Z
+
+Result (vm3, 2026-10-19T22:30Z): fixed. Branch `solr-18182-deprecate-bytebuffers`, commit `0abcca2f4b` (tree `be235de6ba`). Gate green (logs `/workspace/gates/logs/vm3/solr-18182-gate/`). The test is a pin, labelled as such in the deliverable. No PR opened.
+
+DONE: 2026-10-19 by vm3. Deliverable: the SOLR-18182 section in `reports/2026-10-19-jira-newdev/A-small-round-2.md`. Heartbeat: 2026-10-19T22:30Z
