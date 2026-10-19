@@ -100,3 +100,12 @@ One section per ticket. Assignment: `assignments/pool-jira-newdev-bugs-round-1.m
 - The 60-second floor in `SolrClientCache` (`solr/solrj-streaming/src/java/org/apache/solr/client/solrj/io/SolrClientCache.java`, `MIN_TIMEOUT`) sets the connection timeout to 60 s. The idle timeout becomes 600 s on the base, and the total request timeout falls back to it, so a default `SolrStream` gets a 600-second total timeout.
 - Not run: no live streaming test of longer than 60 s, so this is a code-reading verdict.
 - Gate: none, since no branch was pushed.
+
+## SOLR-18200: TextProfileSignature signature changes after HashMap resize (vm3, 2026-10-19)
+
+- Status: fixed. Branch `solr-18200-textprofile-tiebreak`, fix commit `b4feea8e99` (tree `a2aa2f62ff`), PR draft `f8c4ee22bd` (`pr-drafts/SOLR-18200.md` on the branch). Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-18200.md`.
+- Cause: `TextProfileSignature.TokenComparator` (`solr/core/src/java/org/apache/solr/update/processor/TextProfileSignature.java`) ordered by frequency only, so equal-frequency tokens came out in `HashMap` iteration order, which changes on resize.
+- Fix: frequency ties are ordered by token text.
+- Behavior change: signatures change for documents whose quantized profile has tied frequencies. Stored signatures for such documents need a re-index to match. Stated in the PR draft for review.
+- Test: `solr/core/src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java` (new, 1 test). Failed on base (signature changed after the resize, log `/workspace/gates/logs/vm3/solr-18200-repro/`), passes on the fix.
+- Gate, on the fixed tree: tidy 0, Error Prone compile 0, focused `TextProfileSignatureTest` 1 of 1 with 0 failures (seed 18200E50), `:solr:core:check -x test` 0. Logs: `/workspace/gates/logs/vm3/solr-18200-gate-r2/`. First gate failed only at forbiddenApis (a `String.format` without a locale in the new test); fixed with `Locale.ROOT` and re-gated once (`/workspace/gates/logs/vm3/solr-18200-gate/` for the first run).
