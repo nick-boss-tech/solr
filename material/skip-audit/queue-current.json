@@ -8272,7 +8272,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "PointField.createFields returns List.of() when !isFieldUsed (neither indexed, stored nor docValues); TrieField is gone"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9809-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9806",
@@ -8398,7 +8401,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "/admin/plugins is not in ImplicitPlugins.json on upstream/main and no PluginInfoHandler exists; implicit paramsets are only useParams names there"
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-9749-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9741",
@@ -8478,7 +8484,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ExtendedDismaxQParser.validateQueryFields rejects an unknown qf field with SyntaxError (Query Field is not a valid field name); TestExtendedDismaxParser asserts it (nosuchfield)"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-9677-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9664",
@@ -8836,7 +8845,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "DIH removed: no DataImport class or reference in any java file on main."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-9400-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9398",
@@ -8936,7 +8948,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "LIR removed (see 10041)."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-9366-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9361",
@@ -9062,7 +9077,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "AbstractMLTQParser strips field boosts via parseFieldBoosts; CloudMLTQParser.likeDoc converts IndexableField to stringValue"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-9267-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9260",
@@ -9416,7 +9434,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ExecutorUtil.awaitTermination catches InterruptedException, calls shutdownNow and restores the interrupt flag (lines 152-157); awaitTerminationForever does the same."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-9126-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9124",
@@ -9482,7 +9503,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ReRankCollector always collects with scores for the rescorer, regardless of sort"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-9094-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9091",
@@ -9628,7 +9652,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "app.js ping() sets showPing=true and pingMS=QTime; index.html shows it with ng-show=\"showPing\" (boolean), so a 0ms QTime renders. The old falsy check is gone."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-8991-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8977",
@@ -9836,7 +9863,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "NoChildrenForEphemeralsException no longer exists on main."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-8843-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8841",
@@ -9868,7 +9898,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Note (\"Lucene removed\") was wrong: Solr keeps a private UninvertingReader (solr/uninverting, with INTEGER_POINT..DOUBLE_POINT single-valued types). But the ticket outcome stands: Muir, Grand, Schindler and McCandless agreed not to add multi-valued points uninverting; docValues is required for sort/facet."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9202-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8806",
@@ -10382,7 +10415,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "FacetComponent countFacets/refineFacets/refinePivotFacets skip a null facet_counts"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8463-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8431",
@@ -10580,7 +10616,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Analytics component removed: solr/modules has no analytics module and no AnalyticsComponent class."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-8158-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8117",
@@ -10644,7 +10683,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: design decision / by design / needs maintainer call. Reason holds: enablePositionIncrements removed in Lucene; design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-8089-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8088",
@@ -10678,7 +10720,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "LIR removed (see 10041); there is no publish-active guard for a LIR state any more."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-8087-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8079",
@@ -10710,7 +10755,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "DIH removed (see 9400)."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-8076-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8067",
@@ -10776,7 +10824,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "FacetField.createFacetProcessor: a multi-valued field with docValues goes to FacetFieldProcessorByArrayDV (UIF only when !hasDocValues, line 90), and numerics with SORTED_SET dvType are handled; the 5.3 gap is closed. TrieField itself still exists (deprecated)."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-8024-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8020",
@@ -10856,7 +10907,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "bin/solr compatibility with SUSE 11, an end-of-life OS; the script logic moved on."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7998-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7992",
@@ -10920,7 +10974,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "BaseEditorialTransformer.getKey uses instanceof IndexableField"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-7953-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7947",
@@ -11101,7 +11158,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SOLR_HEAP commented out in solr.in.sh; env wins"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-7773-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7758",
@@ -11307,7 +11367,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "CorePropertiesLocator.persist logs and throws SolrException on IOException"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-7517-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7511",
@@ -11647,7 +11710,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ConcurrentUpdateSolrServer on Apache HttpClientBuilder: no org.apache.http use left; the client is now ConcurrentUpdateJettySolrClient."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-7221-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7198",
@@ -11877,7 +11943,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "upstream/main XMLLoader.getStream now logs trace with a \"body: {}\" placeholder, so the missing-body bug is fixed. Close-out candidate (not posted)."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-7009-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7000",
@@ -12091,7 +12160,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "4.10 replica inconsistency from the LIR era; no hypothesis and LIR is gone."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6875-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6846",
@@ -12623,7 +12695,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "cloud.js treeSubController loads znodes per path via ZookeeperReadV2.listNodes(path, {children:false}); tree is lazily loaded, not one whole-tree request."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6395-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6366",
@@ -12721,7 +12796,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "JDBC driver leak was a DIH problem; DIH removed."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-6303-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6287",
@@ -12837,7 +12915,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrClient is still Serializable but the HTTP clients are not; making them serializable or removing the interface is a breaking API call, needs a maintainer decision."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-6166-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6142",
@@ -12853,7 +12934,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "pom.xml dependency scopes of solr-core; the build is Gradle."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-6142-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6099",
@@ -13391,7 +13475,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Trie classes still exist (deprecated since 7.0) but grouping on a numeric field uses ValueSourceGroupSelector (CommandHandler:192, Grouping:148, GroupConverter), not terms, so precisionStep terms cannot produce empty groups."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-5717-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5712",
@@ -13659,7 +13746,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Not \"Trie removed\": TrieField still exists and SimpleFacets.getGroupedCounts still uses TermGroupFacetCollector with NumericHidingLeafReader for non-docValues numerics. The gap (group.facet on numeric fields) is covered by branch solr-10844-submit e7709d685f2a, which rejects numeric group/facet fields with a 400."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5383-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5376",
@@ -14260,7 +14350,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "TrieField still uses legacy prefix-coded terms (deprecated since 7.0), so raw Query.toString is still unreadable, but DebugComponent documents parsedquery (QueryParsing.toString with schema) as the readable form and parsedquery_toString as the raw one; reporter accepted QueryParsing.toString."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4610-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4593",
@@ -14342,7 +14435,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SimpleFacets.numDocs uses ft.getFieldTermQuery, works for docValues-only fields"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-4522-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4502",
@@ -14535,7 +14631,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrParams.toQueryString URL-encodes names and values"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-4390-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4382",
@@ -14551,7 +14650,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ExtendedDismaxQParser.validateQueryFields rejects undefined qf fields (SOLR-5163); Munendra on the ticket confirms. A dynamic * ignored field is the documented workaround."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-4382-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4374",
@@ -14749,7 +14851,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "DIH removed (see 9400)."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-4183-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4169",
@@ -14845,7 +14950,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "DIH removed (see 9400)."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-4113-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4100",
@@ -15832,7 +15940,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "DIH VariableResolver; DIH removed (see 9400)."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-3201-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3128",
@@ -15864,7 +15975,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Same as 4610: parsedquery_toString is documented raw (DebugComponent:397); parsedquery is schema-aware. Explanation text for legacy Trie terms stays raw; Trie is deprecated since 7.0 so no new work."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3124-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3064",
@@ -15880,7 +15994,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Replacement ContentWriterUpdateRequest.addFile(Path, String contentType) takes and sends the content type via the ContentWriter; the missing-content-type gap is closed. (The sibling commitWithin gap is branched under SOLR-3498.)"
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-3064-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3050",
@@ -15994,7 +16111,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Muir in ticket: underlying problem fixed (stats.facet reimplemented, SOLR-3855); StatsValuesFactory treats TrieField and PointField alike (line 79). Trie deprecated since 7.0."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-2976-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-2936",
@@ -16400,7 +16520,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "TestSolrQueryParser.testNestedPureNegativeQuery covers AND (NOT x) with autoFixPureNegative"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-1658-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-1557",
