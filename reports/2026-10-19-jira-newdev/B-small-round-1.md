@@ -24,3 +24,10 @@ Claim: `claims/pool-jira-newdev-small-round-1-solr-17727.md`. Work follows on br
 
 - Verified: JIRA status Open, no resolution, on 2026-10-19.
 - Stopped, no branch. The Server header is off on purpose. `solr/server/etc/jetty.xml` sets `sendServerVersion` from `solr.jetty.send.server.version`, default `false`. Jetty's own switch only sends `Jetty(<version>)`, not Solr's version, so sending Solr's version needs a custom `HttpConfiguration` customizer loaded by the server's XML config. That is a new class on the server classpath that I could not verify without a packaged start, and it reverses a default that hides the version. The assignment says to stop when the change conflicts with the wanted result; a maintainer or the owner should decide whether Solr should expose its version.
+
+## Item 1: SOLR-18209 (vm4), fixed branch, 2026-10-19T19:26:34Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Status: fixed branch. `solr-18209-list-of` on the fork: code commit f73f2d4358 (three files, four lists: `NodeHealth.UNHEALTHY_STATES`, `SchemaDesignerConfigSetHelper.includeLangIds`, `ContentStreamBase` `UNHELPFUL_TYPES` and the three suffix lists), draft commit c8fef7c4cd (`drafts/SOLR-18209/pr-description.md`).
+- Gate: `ContentStreamTest` 7 of 7, `NodeHealthTest` 8 of 8, `TestSchemaDesignerConfigSetHelper` 8 of 8, 0 failures, 0 skipped; spotless passes for solrj and core. Log `/workspace/gates/logs/vm4/solr-18209-gate.log`.
+- No new test: the existing tests named above cover the changed fields. HashSet-wrapped fields left alone (mutable sets). Recorded in the draft as a maintainer question.
