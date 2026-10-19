@@ -3301,8 +3301,8 @@
       "round": "audit-1",
       "evidence": "Read ticket: newcomer parent/child query question, no defect."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-14288-draft-open",
+    "verdict": "close-answered",
+    "draft_branch": "solr-14288-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
