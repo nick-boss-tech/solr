@@ -1,1 +1,1 @@
-We reviewed this ticket against current upstream main. The review did not find a reproducible defect in the current code, but the ticket is not closed yet, and we are leaving it open for a decision.
+We checked this ticket against the current code. The Query Elevation component is still opt-in: the default configset does not configure it on /select, and the code does not register it by default. The open question is the one raised in the 2020 comments, how to keep existing configurations working if it is turned on by default. We are leaving the ticket open for that decision.
