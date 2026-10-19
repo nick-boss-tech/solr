@@ -9,3 +9,5 @@
 Heartbeat: 2026-10-19T03:24Z (claim taken on the owner's word; gate launching on vm1)
 
 Heartbeat: 2026-10-19T03:31Z (gate stopped at step 1, GATE INVALID; see gates/SOLR-18458.md)
+
+Heartbeat: 2026-10-19T03:31Z (owner approved the tidy commit and the widened re-gate; tidy commit 1267d6ead0e pushed; round 2 launching at the new head)
