@@ -8,13 +8,13 @@
 
 ## Ticket reading
 
-Solr sends audit logs to another Solr through Ranger, which uses a CloudSolrClient. The PKI authentication plugin intercepts that outgoing request, adds Solr's internode headers, and the receiving Solr, which uses Kerberos, rejects them with a PKI decryption failure. The reporter asks that PKI apply only to internode requests. Discussion in the ticket (janhoy, gezan, gus, 2021-04-30 to 2021-05-12) finds that the interceptors are registered globally in HttpClientUtil, so every client gets them, and that a client built with `withHttpClient()` avoids them.
+Solr sends audit logs to another Solr through Ranger, which uses a CloudSolrClient. The PKI authentication plugin intercepts that outgoing request, adds Solr's internode headers, and the receiving Solr, which uses Kerberos, rejects them with a PKI decryption failure. The reporter asks that PKI apply only to internode requests. Discussion in the ticket (janhoy, gezan, gus, 2021-04-30 to 2021-05-12) finds that the interceptors were registered globally in HttpClientUtil (that class is no longer on the pin; see the Code reading), so every client gets them, and that a client built with `withHttpClient()` avoids them.
 
 ## Code reading
 
 - solr/core/src/java/org/apache/solr/security/PKIAuthenticationPlugin.java:317-327: the PKI listener's `onQueued` runs for every request on the clients it is registered with, and calls `cores.getAuthenticationPlugin().interceptInternodeRequest(request)` at :327. There is no destination check in this listener; it only asks the authentication plugin whether it handles the request.
 - solr/core/src/java/org/apache/solr/security/AuthenticationPlugin.java:134-136: the base `interceptInternodeRequest` returns `this instanceof HttpClientBuilderPlugin`. A plugin that is not a client-builder plugin returns false, which makes the PKI listener add its own headers to that request. The overrides at BasicAuthPlugin.java:215 and MultiAuthPlugin.java:278-280 decide per request. The Kerberos plugin has no override in this tree, so it uses the base method. None of these checks whether the destination is inside the cluster.
-- The listener is registered through the `setup(MutableListenerFactory)` hook of the plugin (PKIAuthenticationPlugin.java:315). The ticket's point about global registration fits this design: the listener is in a shared factory, not on a per-client basis.
+- The listener is registered through the `setup(MutableListenerFactory)` hook of the plugin (PKIAuthenticationPlugin.java:315). The factory is an instance per provider or handler, not a static: HttpSolrClientProvider.java:42, HttpShardHandlerFactory.java:90 and UpdateShardHandler.java:74 each create one `MutableListenerFactory`. So every client a provider or handler creates gets the PKI listener, which fits the ticket's complaint about clients used for external Solr nodes.
 
 So the code path that the ticket names is still present at the pinned head: a request to an external Solr from a client created by the shared factory gets PKI headers unless the authentication plugin says it handled the request.
 
