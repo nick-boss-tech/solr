@@ -376,4 +376,9 @@ public class TestComplexPhraseQParserPlugin extends SolrTestCaseJ4 {
     assertQ(
         req("q", "{!complexphrase} name:\"sulfur-reducing bacteria\""), "//result[@numFound='1']");
   }
+
+  @Test
+  public void testMissingQueryStringIsNotAnError() {
+    assertQ(req("defType", "complexphrase", "q.op", "AND"), "//result");
+  }
 }
