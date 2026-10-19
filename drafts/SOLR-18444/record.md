@@ -3,7 +3,7 @@
 Verdict: keep-open (draft branch `solr-18444-draft-open`).
 
 - Pinned head: fork `origin/main` `498a09aea97aac86c2cc7ac114113b946d249942` (2026-10-19 fetch). Upstream history is not cited.
-- JIRA checked 2026-10-19: status Open, no resolution, no fix versions, updated 2026-09-22. Description is 525 characters and was read in full. Two comments (2026-09-13 and 2026-09-22, both by the reporter's maintainer colleague) were read in full; the closeout evidence skill cut them at 240 characters before this record, so the earlier attempt missed the second comment's NRT and leader-only query points.
+- JIRA checked 2026-10-19: status Open, no resolution, no fix versions, updated 2026-09-22. Description is 525 characters and was read in full. Two comments (2026-09-13 and 2026-09-22, both by dsmiley) were read in full; the closeout evidence skill cut them at 240 characters before this record, so the earlier attempt missed the second comment's NRT and leader-only query points.
 - Audit verdict on record: `confirmed-skip` (audit-1, 2026-10-04): "Feature proposal (coordinated autoCommit), not a bug."
 
 ## Code paths read at the pinned head
