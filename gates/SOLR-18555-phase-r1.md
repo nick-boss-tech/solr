@@ -1,6 +1,6 @@
 # Gate job: SOLR-18555 (text highlighting request handler, round 1 gate)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm3-gate-SOLR-18555-phase-r1.md)
 
 - Branch: `solr-18555-submit`. Head: `b99259cba3572cc08586b2456c78780c814a2bf7` (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `c8ab71430f6e7547c773da596101d680862310ff`. Prior gated head: none recorded.
