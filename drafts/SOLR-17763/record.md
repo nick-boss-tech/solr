@@ -4,7 +4,7 @@
 - Verdict: close-fixed.
 - Draft branch: solr-17763-draft-close.
 - Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (2026-10-07). Upstream sha not cited.
-- Checked by: vm4, 2026-10-19 13:10-13:45 UTC.
+- Checked by: vm4, 2026-10-19 13:09-13:16 UTC.
 
 ## Ticket reading
 
