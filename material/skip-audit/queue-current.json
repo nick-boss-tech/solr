@@ -275,7 +275,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "AdminHandlersProxy removed from main"
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-17768-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17765",
