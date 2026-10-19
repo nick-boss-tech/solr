@@ -1,6 +1,6 @@
 # Pool assignment: JIRA newdev bugs, round 1
 
-Status: OPEN (items 2 to 15 open for claim by slice; item 1, SOLR-13182, CLAIMED by vm5 in claims/pool-vm5-jira-newdev-bugs-round-1-solr-13182.md)
+Status: OPEN (items 2 to 15 open for claim by slice; item 1, SOLR-13182, DONE: branch solr-13182-child-null-parent at 2cf82a0b9464, claims/pool-vm5-jira-newdev-bugs-round-1-solr-13182.md)
 
 - Capability tags: implementation, gate. Intended host: any pool Linux host (`hosts/pool-linux.md`). Claim under `claims/` before starting (WORKFLOW.md).
 - Posted by: vm2 gate coordinator, 2026-10-19, at the direction of the user. Source: JIRA `project=SOLR AND resolution=Unresolved AND labels=newdev` (79 issues on 2026-10-19; this file takes the 15 bug tickets).
