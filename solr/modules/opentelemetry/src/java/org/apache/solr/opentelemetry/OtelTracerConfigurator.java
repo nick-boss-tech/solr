@@ -91,8 +91,7 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
         .map(String::trim)
         .filter(exporter -> !exporter.isEmpty())
         .anyMatch(
-            exporter ->
-                !"otlp".equalsIgnoreCase(exporter) && !"none".equalsIgnoreCase(exporter));
+            exporter -> !"otlp".equalsIgnoreCase(exporter) && !"none".equalsIgnoreCase(exporter));
   }
 
   /**
@@ -170,9 +169,7 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
       int userInfoEnd = value.lastIndexOf('@', authorityEnd - 1);
       if (userInfoEnd >= authorityStart) {
         value =
-            value.substring(0, authorityStart)
-                + "<redacted>@"
-                + value.substring(userInfoEnd + 1);
+            value.substring(0, authorityStart) + "<redacted>@" + value.substring(userInfoEnd + 1);
       }
     }
 

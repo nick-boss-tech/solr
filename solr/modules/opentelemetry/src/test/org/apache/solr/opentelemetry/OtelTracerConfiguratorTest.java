@@ -86,8 +86,7 @@ public class OtelTracerConfiguratorTest extends SolrTestCaseJ4 {
     args.add("OTEL_EXPORTER_OTLP_HEADERS", secret);
     try {
       try (LogListener listener =
-          LogListener.debug(OtelTracerConfigurator.class)
-              .substring("otel.exporter.otlp.headers")) {
+          LogListener.debug(OtelTracerConfigurator.class).substring("otel.exporter.otlp.headers")) {
         configurator.prepareConfiguration(args);
 
         String message = listener.pollMessage();

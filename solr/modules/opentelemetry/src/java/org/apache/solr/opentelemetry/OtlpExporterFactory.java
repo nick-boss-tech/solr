@@ -92,8 +92,7 @@ public class OtlpExporterFactory implements MetricExporterFactory {
 
   private MetricExporter createHttpExporter() {
     var builder =
-        OtlpHttpMetricExporter.getDefault()
-            .toBuilder()
+        OtlpHttpMetricExporter.getDefault().toBuilder()
             .setEndpoint(settings.httpEndpoint())
             .setTimeout(settings.timeoutMillis(), MILLISECONDS);
     configure(builder);
@@ -102,8 +101,7 @@ public class OtlpExporterFactory implements MetricExporterFactory {
 
   private MetricExporter createGrpcExporter() {
     var builder =
-        OtlpGrpcMetricExporter.getDefault()
-            .toBuilder()
+        OtlpGrpcMetricExporter.getDefault().toBuilder()
             .setEndpoint(settings.grpcEndpoint())
             .setTimeout(settings.timeoutMillis(), MILLISECONDS);
     configure(builder);

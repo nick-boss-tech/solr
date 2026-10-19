@@ -101,11 +101,8 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
     Resource resource =
         (Resource) MetricExporterFactory.class.getMethod("currentResource").invoke(null);
 
-    assertEquals(
-        "search",
-        resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
-    assertEquals(
-        "solr-metrics", resource.getAttribute(AttributeKey.stringKey("service.name")));
+    assertEquals("search", resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
+    assertEquals("solr-metrics", resource.getAttribute(AttributeKey.stringKey("service.name")));
   }
 
   @Test
@@ -226,9 +223,7 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
                   null,
                   null);
       Object factory =
-          OtlpExporterFactory.class
-              .getDeclaredConstructor(settingsClass)
-              .newInstance(settings);
+          OtlpExporterFactory.class.getDeclaredConstructor(settingsClass).newInstance(settings);
       return (MetricExporter) factory.getClass().getMethod("getExporter").invoke(factory);
     } catch (ReflectiveOperationException e) {
       throw new AssertionError("Could not create an OTLP exporter with configured headers", e);
@@ -318,8 +313,7 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_METRICS_HEADERS=<redacted>"));
     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_API_KEY=<redacted>"));
     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CLIENT_KEY=<redacted>"));
-    assertTrue(
-        loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE=<redacted>"));
+    assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE=<redacted>"));
     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CERTIFICATE=<redacted>"));
     assertFalse(loggedConfiguration.contains(envSecret));
     assertFalse(loggedConfiguration.contains(propertySecret));

@@ -82,8 +82,7 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
 
   @Test
   public void testExporterListRecognizesOtlpAfterTrimmingAndCaseNormalization() {
-    Object config =
-        configOrSkip(Map.of("OTEL_METRICS_EXPORTER", "prometheus, OTLP"), Map.of());
+    Object config = configOrSkip(Map.of("OTEL_METRICS_EXPORTER", "prometheus, OTLP"), Map.of());
 
     assertTrue((Boolean) invoke(config, "isExporterEnabled"));
   }
@@ -127,10 +126,14 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
         configOrSkip(
             Map.of(),
             Map.of(
-                "solr.metrics.otlpExporterEnabled", "true",
-                "solr.metrics.otlp.exporter.protocol", "http",
-                "solr.metrics.otlpExporterInterval", "4321",
-                "solr.metrics.otlpGrpcExporterEndpoint", "http://legacy.example:4317",
+                "solr.metrics.otlpExporterEnabled",
+                "true",
+                "solr.metrics.otlp.exporter.protocol",
+                "http",
+                "solr.metrics.otlpExporterInterval",
+                "4321",
+                "solr.metrics.otlpGrpcExporterEndpoint",
+                "http://legacy.example:4317",
                 "solr.metrics.otlp.http.exporter.endpoint",
                 "http://legacy.example:4318/v1/metrics"));
 
@@ -202,8 +205,7 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
 
   @Test
   public void testInvalidIntervalUsesDefaultWhenNoLegacyValueExists() {
-    Object config =
-        configOrSkip(Map.of("OTEL_METRIC_EXPORT_INTERVAL", "0"), Map.of());
+    Object config = configOrSkip(Map.of("OTEL_METRIC_EXPORT_INTERVAL", "0"), Map.of());
 
     assertEquals(Integer.valueOf(60000), invoke(config, "getExportInterval"));
   }
@@ -310,10 +312,8 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
     Resource resource = (Resource) invoke(config, "getResource");
 
     assertEquals(
-        "prod blue",
-        resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
-    assertEquals(
-        "solr-node", resource.getAttribute(AttributeKey.stringKey("service.name")));
+        "prod blue", resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
+    assertEquals("solr-node", resource.getAttribute(AttributeKey.stringKey("service.name")));
   }
 
   private Object configOrSkip(Map<String, String> environment, Map<String, String> properties) {

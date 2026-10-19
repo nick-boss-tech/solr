@@ -107,8 +107,7 @@ final class OtelMetricsConfig {
 
   Map<String, String> getHeaders() {
     String headers =
-        firstNonBlank(
-            get("OTEL_EXPORTER_OTLP_METRICS_HEADERS"), get("OTEL_EXPORTER_OTLP_HEADERS"));
+        firstNonBlank(get("OTEL_EXPORTER_OTLP_METRICS_HEADERS"), get("OTEL_EXPORTER_OTLP_HEADERS"));
     return parseHeaders(headers);
   }
 
