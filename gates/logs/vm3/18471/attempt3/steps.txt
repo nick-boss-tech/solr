@@ -1,0 +1,6 @@
+2026-10-19T05:56:37Z attempt 2 head d48c714b9db7256ceeac263877ba02ffefae1188 (origin e15bdfc3703f27bdd1c32ab068324be7b3469427 plus tidy repair commit)
+2026-10-19T05:56:39Z step 0 changelog validator rc=0; SOLR-18471.yml: ✓ changelog/unreleased/SOLR-18471.yml is valid
+2026-10-19T05:58:00Z tidy rc=0
+2026-10-19T05:58:02Z step 1 tidy clean after repair
+2026-10-19T06:04:04Z errorprone rc=1
+2026-10-19T06:04:04Z STOP errorprone compile failed

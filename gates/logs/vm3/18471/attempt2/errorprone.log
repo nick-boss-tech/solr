@@ -1,0 +1,75 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :checkJdkInternalsExportedToGradle
+> Task :solr:api:processResources NO-SOURCE
+> Task :solr:core:processResources
+> Task :solr:modules:opentelemetry:processResources NO-SOURCE
+
+> Task :solr:api:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:api:classes
+> Task :solr:api:resolve
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/solr-18471/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-18471/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:compileJava
+Note: /workspace/worktrees/solr-18471/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-zookeeper:compileJava
+
+> Task :solr:solrj-streaming:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:compileJava
+/workspace/worktrees/solr-18471/solr/core/src/java/org/apache/solr/metrics/otel/MetricExporterFactory.java:50: warning: [UnnecessarilyFullyQualified] The fully qualified name 'java.util.Map' is unambiguous to the compiler if imported, prefer using the name 'Map'.
+  static java.util.Map<String, String> currentHeaders() {
+                  ^
+    (see https://errorprone.info/bugpattern/UnnecessarilyFullyQualified)
+  Did you mean 'static Map<String, String> currentHeaders() {'?
+error: warnings found and -Werror specified
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 error
+1 warning
+
+> Task :solr:core:compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':solr:core:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  /workspace/worktrees/solr-18471/solr/core/src/java/org/apache/solr/metrics/otel/MetricExporterFactory.java:50: warning: [UnnecessarilyFullyQualified] The fully qualified name 'java.util.Map' is unambiguous to the compiler if imported, prefer using the name 'Map'.
+    static java.util.Map<String, String> currentHeaders() {
+                    ^
+      (see https://errorprone.info/bugpattern/UnnecessarilyFullyQualified)
+    Did you mean 'static Map<String, String> currentHeaders() {'?
+  1 error
+  1 warning
+
+BUILD FAILED in 2m 17s
+16 actionable tasks: 12 executed, 4 up-to-date
+rc=1

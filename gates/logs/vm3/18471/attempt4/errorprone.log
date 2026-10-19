@@ -1,0 +1,74 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :checkJdkInternalsExportedToGradle
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:modules:opentelemetry:processResources NO-SOURCE
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/solr-18471/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-18471/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:core:compileJava UP-TO-DATE
+> Task :solr:core:classes UP-TO-DATE
+> Task :solr:modules:opentelemetry:compileJava UP-TO-DATE
+> Task :solr:modules:opentelemetry:classes UP-TO-DATE
+> Task :solr:test-framework:compileJava UP-TO-DATE
+> Task :solr:core:compileTestJava UP-TO-DATE
+
+> Task :solr:modules:opentelemetry:compileTestJava
+/workspace/worktrees/solr-18471/solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java:337: warning: [RethrowReflectiveOperationExceptionAsLinkageError] Prefer LinkageError for rethrowing ReflectiveOperationException as unchecked
+      throw new AssertionError("Could not instantiate OTEL metrics configuration", e);
+            ^
+    (see https://errorprone.info/bugpattern/RethrowReflectiveOperationExceptionAsLinkageError)
+  Did you mean 'throw new LinkageError("Could not instantiate OTEL metrics configuration", e);'?
+/workspace/worktrees/solr-18471/solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java:350: warning: [RethrowReflectiveOperationExceptionAsLinkageError] Prefer LinkageError for rethrowing ReflectiveOperationException as unchecked
+      throw new AssertionError("Could not read OTEL metrics configuration: " + methodName, e);
+            ^
+    (see https://errorprone.info/bugpattern/RethrowReflectiveOperationExceptionAsLinkageError)
+  Did you mean 'throw new LinkageError("Could not read OTEL metrics configuration: " + methodName, e);'?
+error: warnings found and -Werror specified
+1 error
+2 warnings
+
+> Task :solr:modules:opentelemetry:compileTestJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':solr:modules:opentelemetry:compileTestJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  /workspace/worktrees/solr-18471/solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java:337: warning: [RethrowReflectiveOperationExceptionAsLinkageError] Prefer LinkageError for rethrowing ReflectiveOperationException as unchecked
+        throw new AssertionError("Could not instantiate OTEL metrics configuration", e);
+              ^
+      (see https://errorprone.info/bugpattern/RethrowReflectiveOperationExceptionAsLinkageError)
+    Did you mean 'throw new LinkageError("Could not instantiate OTEL metrics configuration", e);'?
+  1 error
+  2 warnings
+
+BUILD FAILED in 1m 23s
+20 actionable tasks: 6 executed, 14 up-to-date
+rc=1

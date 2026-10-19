@@ -1,0 +1,184 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :checkJdkInternalsExportedToGradle
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:modules:opentelemetry:processResources NO-SOURCE
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/solr-18471/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-18471/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:core:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:classes
+> Task :solr:modules:opentelemetry:compileJava
+> Task :solr:modules:opentelemetry:classes
+
+> Task :solr:test-framework:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:opentelemetry:compileTestJava
+/workspace/worktrees/solr-18471/solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java:217: error: no suitable method found for of(String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String)
+            Map.of(
+               ^
+    method Map.<K#1,V#1>of() is not applicable
+      (cannot infer type-variable(s) K#1,V#1
+        (actual and formal argument lists differ in length))
+    method Map.<K#2,V#2>of(K#2,V#2) is not applicable
+      (cannot infer type-variable(s) K#2,V#2
+        (actual and formal argument lists differ in length))
+    method Map.<K#3,V#3>of(K#3,V#3,K#3,V#3) is not applicable
+      (cannot infer type-variable(s) K#3,V#3
+        (actual and formal argument lists differ in length))
+    method Map.<K#4,V#4>of(K#4,V#4,K#4,V#4,K#4,V#4) is not applicable
+      (cannot infer type-variable(s) K#4,V#4
+        (actual and formal argument lists differ in length))
+    method Map.<K#5,V#5>of(K#5,V#5,K#5,V#5,K#5,V#5,K#5,V#5) is not applicable
+      (cannot infer type-variable(s) K#5,V#5
+        (actual and formal argument lists differ in length))
+    method Map.<K#6,V#6>of(K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6) is not applicable
+      (cannot infer type-variable(s) K#6,V#6
+        (actual and formal argument lists differ in length))
+    method Map.<K#7,V#7>of(K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7) is not applicable
+      (cannot infer type-variable(s) K#7,V#7
+        (actual and formal argument lists differ in length))
+    method Map.<K#8,V#8>of(K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8) is not applicable
+      (cannot infer type-variable(s) K#8,V#8
+        (actual and formal argument lists differ in length))
+    method Map.<K#9,V#9>of(K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9) is not applicable
+      (cannot infer type-variable(s) K#9,V#9
+        (actual and formal argument lists differ in length))
+    method Map.<K#10,V#10>of(K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10) is not applicable
+      (cannot infer type-variable(s) K#10,V#10
+        (actual and formal argument lists differ in length))
+    method Map.<K#11,V#11>of(K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11) is not applicable
+      (cannot infer type-variable(s) K#11,V#11
+        (actual and formal argument lists differ in length))
+  where K#1,V#1,K#2,V#2,K#3,V#3,K#4,V#4,K#5,V#5,K#6,V#6,K#7,V#7,K#8,V#8,K#9,V#9,K#10,V#10,K#11,V#11 are type-variables:
+    K#1 extends Object declared in method <K#1,V#1>of()
+    V#1 extends Object declared in method <K#1,V#1>of()
+    K#2 extends Object declared in method <K#2,V#2>of(K#2,V#2)
+    V#2 extends Object declared in method <K#2,V#2>of(K#2,V#2)
+    K#3 extends Object declared in method <K#3,V#3>of(K#3,V#3,K#3,V#3)
+    V#3 extends Object declared in method <K#3,V#3>of(K#3,V#3,K#3,V#3)
+    K#4 extends Object declared in method <K#4,V#4>of(K#4,V#4,K#4,V#4,K#4,V#4)
+    V#4 extends Object declared in method <K#4,V#4>of(K#4,V#4,K#4,V#4,K#4,V#4)
+    K#5 extends Object declared in method <K#5,V#5>of(K#5,V#5,K#5,V#5,K#5,V#5,K#5,V#5)
+    V#5 extends Object declared in method <K#5,V#5>of(K#5,V#5,K#5,V#5,K#5,V#5,K#5,V#5)
+    K#6 extends Object declared in method <K#6,V#6>of(K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6)
+    V#6 extends Object declared in method <K#6,V#6>of(K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6)
+    K#7 extends Object declared in method <K#7,V#7>of(K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7)
+    V#7 extends Object declared in method <K#7,V#7>of(K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7)
+    K#8 extends Object declared in method <K#8,V#8>of(K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8)
+    V#8 extends Object declared in method <K#8,V#8>of(K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8)
+    K#9 extends Object declared in method <K#9,V#9>of(K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9)
+    V#9 extends Object declared in method <K#9,V#9>of(K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9)
+    K#10 extends Object declared in method <K#10,V#10>of(K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10)
+    V#10 extends Object declared in method <K#10,V#10>of(K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10)
+    K#11 extends Object declared in method <K#11,V#11>of(K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11)
+    V#11 extends Object declared in method <K#11,V#11>of(K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11)
+1 error
+
+> Task :solr:modules:opentelemetry:compileTestJava FAILED
+> Task :solr:core:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':solr:modules:opentelemetry:compileTestJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  /workspace/worktrees/solr-18471/solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java:217: error: no suitable method found for of(String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String,String)
+              Map.of(
+                 ^
+      method Map.<K#1,V#1>of() is not applicable
+        (cannot infer type-variable(s) K#1,V#1
+          (actual and formal argument lists differ in length))
+      method Map.<K#2,V#2>of(K#2,V#2) is not applicable
+        (cannot infer type-variable(s) K#2,V#2
+          (actual and formal argument lists differ in length))
+      method Map.<K#3,V#3>of(K#3,V#3,K#3,V#3) is not applicable
+        (cannot infer type-variable(s) K#3,V#3
+          (actual and formal argument lists differ in length))
+      method Map.<K#4,V#4>of(K#4,V#4,K#4,V#4,K#4,V#4) is not applicable
+        (cannot infer type-variable(s) K#4,V#4
+          (actual and formal argument lists differ in length))
+      method Map.<K#5,V#5>of(K#5,V#5,K#5,V#5,K#5,V#5,K#5,V#5) is not applicable
+        (cannot infer type-variable(s) K#5,V#5
+          (actual and formal argument lists differ in length))
+      method Map.<K#6,V#6>of(K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6) is not applicable
+        (cannot infer type-variable(s) K#6,V#6
+          (actual and formal argument lists differ in length))
+      method Map.<K#7,V#7>of(K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7) is not applicable
+        (cannot infer type-variable(s) K#7,V#7
+          (actual and formal argument lists differ in length))
+      method Map.<K#8,V#8>of(K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8) is not applicable
+        (cannot infer type-variable(s) K#8,V#8
+          (actual and formal argument lists differ in length))
+      method Map.<K#9,V#9>of(K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9) is not applicable
+        (cannot infer type-variable(s) K#9,V#9
+          (actual and formal argument lists differ in length))
+      method Map.<K#10,V#10>of(K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10) is not applicable
+        (cannot infer type-variable(s) K#10,V#10
+          (actual and formal argument lists differ in length))
+      method Map.<K#11,V#11>of(K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11) is not applicable
+        (cannot infer type-variable(s) K#11,V#11
+          (actual and formal argument lists differ in length))
+    where K#1,V#1,K#2,V#2,K#3,V#3,K#4,V#4,K#5,V#5,K#6,V#6,K#7,V#7,K#8,V#8,K#9,V#9,K#10,V#10,K#11,V#11 are type-variables:
+      K#1 extends Object declared in method <K#1,V#1>of()
+      V#1 extends Object declared in method <K#1,V#1>of()
+      K#2 extends Object declared in method <K#2,V#2>of(K#2,V#2)
+      V#2 extends Object declared in method <K#2,V#2>of(K#2,V#2)
+      K#3 extends Object declared in method <K#3,V#3>of(K#3,V#3,K#3,V#3)
+      V#3 extends Object declared in method <K#3,V#3>of(K#3,V#3,K#3,V#3)
+      K#4 extends Object declared in method <K#4,V#4>of(K#4,V#4,K#4,V#4,K#4,V#4)
+      V#4 extends Object declared in method <K#4,V#4>of(K#4,V#4,K#4,V#4,K#4,V#4)
+      K#5 extends Object declared in method <K#5,V#5>of(K#5,V#5,K#5,V#5,K#5,V#5,K#5,V#5)
+      V#5 extends Object declared in method <K#5,V#5>of(K#5,V#5,K#5,V#5,K#5,V#5,K#5,V#5)
+      K#6 extends Object declared in method <K#6,V#6>of(K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6)
+      V#6 extends Object declared in method <K#6,V#6>of(K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6,K#6,V#6)
+      K#7 extends Object declared in method <K#7,V#7>of(K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7)
+      V#7 extends Object declared in method <K#7,V#7>of(K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7,K#7,V#7)
+      K#8 extends Object declared in method <K#8,V#8>of(K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8)
+      V#8 extends Object declared in method <K#8,V#8>of(K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8,K#8,V#8)
+      K#9 extends Object declared in method <K#9,V#9>of(K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9)
+      V#9 extends Object declared in method <K#9,V#9>of(K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9,K#9,V#9)
+      K#10 extends Object declared in method <K#10,V#10>of(K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10)
+      V#10 extends Object declared in method <K#10,V#10>of(K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10,K#10,V#10)
+      K#11 extends Object declared in method <K#11,V#11>of(K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11)
+      V#11 extends Object declared in method <K#11,V#11>of(K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11,K#11,V#11)
+  1 error
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+
+BUILD FAILED in 5m 52s
+20 actionable tasks: 10 executed, 10 up-to-date
+rc=1
