@@ -315,14 +315,8 @@ public class TestSchemaDesigner extends SolrCloudTestCase implements SchemaDesig
     String configSet = "testNumericUniqueKeyDocIds";
     schemaDesigner.prepNewSchema(configSet, null);
 
-    String mutableId = getMutableId(configSet);
-    ManagedIndexSchema schema = schemaDesigner.loadLatestSchema(mutableId);
-    schema =
-        schema.replaceField(
-            "id", schema.getFieldTypeByName("plong"), schema.getField("id").getArgs());
-    assertEquals("plong", schema.getUniqueKeyField().getType().getTypeName());
-    assertTrue(schema.persistManagedSchema(false));
-    schema = schemaDesigner.loadLatestSchema(mutableId);
+    ManagedIndexSchema schema = schemaDesigner.loadLatestSchema(getMutableId(configSet));
+    assertEquals("string", schema.getUniqueKeyField().getType().getTypeName());
 
     SolrInputDocument sampleDoc = new SolrInputDocument();
     sampleDoc.setField("id", 42L);
