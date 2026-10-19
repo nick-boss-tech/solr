@@ -1,6 +1,6 @@
 # Pool assignment: post the 4,000-issue CSV Nick sent vm2 to this branch
 
-Status: OPEN
+Status: CLAIMED (claims/pool-post-issues-csv-vm2.md)
 
 - Capability tags: records.
 - Intended host: vm2 only. Claim under `claims/` before starting (WORKFLOW.md).
