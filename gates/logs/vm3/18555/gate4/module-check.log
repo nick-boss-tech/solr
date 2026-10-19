@@ -1,0 +1,82 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:core:validateSourcePatterns UP-TO-DATE
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:core:processTestResources UP-TO-DATE
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+> Task :gitStatus
+> Task :solr:api:jar UP-TO-DATE
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources UP-TO-DATE
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:processResources UP-TO-DATE
+> Task :solr:modules:analysis-extras:processResources NO-SOURCE
+> Task :solr:modules:cross-dc:processResources NO-SOURCE
+> Task :solr:modules:opentelemetry:processResources NO-SOURCE
+> Task :checkJdkInternalsExportedToGradle
+> Task :solr:core:validateLogCalls UP-TO-DATE
+> Task :solr:solrj:processResources UP-TO-DATE
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/18555/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/18555/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar UP-TO-DATE
+> Task :solr:solrj-jetty:classes UP-TO-DATE
+> Task :solr:solrj-jetty:jar UP-TO-DATE
+> Task :solr:solrj-streaming:classes UP-TO-DATE
+> Task :solr:solrj-streaming:jar UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:solrj-zookeeper:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:jar UP-TO-DATE
+
+> Task :solr:core:ecjLintMain FAILED
+----------
+1. ERROR in /workspace/worktrees/18555/solr/core/src/java/org/apache/solr/handler/HighlightRequestHandler.java (at line 31)
+	import org.apache.lucene.search.uhighlight.UnifiedHighlighter.HighlightFlag;
+	       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The import org.apache.lucene.search.uhighlight.UnifiedHighlighter.HighlightFlag is never used
+----------
+1 problem (1 error)
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':solr:core:ecjLintMain' (registered in script 'gradle/validation/ecj-lint.gradle').
+> Process 'command '/workspace/jdk/jdk-21.0.12.1+1/bin/java'' finished with non-zero exit value 255
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1m 34s
+29 actionable tasks: 8 executed, 21 up-to-date
+rc=1

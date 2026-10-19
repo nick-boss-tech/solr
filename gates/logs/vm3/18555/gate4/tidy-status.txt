@@ -1,0 +1,4 @@
+ M changelog/unreleased/SOLR-18555.yml
+ M solr/core/src/java/org/apache/solr/handler/HighlightRequestHandler.java
+ M solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerHttpTest.java
+ M solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerTest.java

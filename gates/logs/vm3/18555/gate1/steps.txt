@@ -1,0 +1,6 @@
+changelog rc=1
+tidy rc=0
+errorprone rc=1
+focused rc=1
+broad-highlight rc=1
+module-check rc=1

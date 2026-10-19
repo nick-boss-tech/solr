@@ -1,0 +1,16 @@
+SOLR-18555 gate 4 (patched local tree, head 884de51579 plus local fixes), focused run, seed 18555C0FFEE18555
+Source: gate4/focused.xml/TEST-org.apache.solr.handler.HighlightRequestHandlerTest.xml (tests=10, failures=3, errors=0)
+
+1. testPhraseAndMultiTermQueries (HighlightRequestHandlerTest.java:117)
+   expected: <em>Solr highlights</em> the ...
+   was:      <em>Solr</em> <em>highlights</em> the ...
+
+2. testHtmlEncoderEscapesSuppliedText (HighlightRequestHandlerTest.java:106)
+   expected: ...&lt;<em>Solr</em>&lt;/strong&gt;   (element holds raw "/")
+   was:      ...&lt;<em>Solr</em>&lt;&#x2F;strong&gt;
+
+3. testRejectsParserOverridesAndParserSubqueries (HighlightRequestHandlerTest.java:299)
+   expected: SyntaxError
+   was:      org.apache.solr.common.SolrException: undefined field _query_
+
+HighlightRequestHandlerHttpTest: tests=2, failures=0, errors=0.
