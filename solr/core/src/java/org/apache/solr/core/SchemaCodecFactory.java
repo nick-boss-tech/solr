@@ -132,9 +132,11 @@ public class SchemaCodecFactory extends CodecFactory implements SolrCoreAware {
             // are disabled. Existing summaries remain harmless and are ignored by the check path.
             if (CommonParams.VERSION_FIELD.equals(field)
                 && EnvUtils.getPropertyAsBool("solr.index.replication.fingerprint.enabled", true)) {
-              return new IndexFingerprintDocValuesFormat(
-                  docValuesFormat,
-                  IndexFingerprint.getSegmentMetadataSchemaSignature(core.getLatestSchema()));
+              String schemaSignature =
+                  IndexFingerprint.getSegmentMetadataSchemaSignature(core.getLatestSchema());
+              if (schemaSignature != null) {
+                return new IndexFingerprintDocValuesFormat(docValuesFormat, schemaSignature);
+              }
             }
             return docValuesFormat;
           }

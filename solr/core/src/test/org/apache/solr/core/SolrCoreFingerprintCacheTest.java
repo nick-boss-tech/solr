@@ -39,7 +39,7 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
 
   @BeforeClass
   public static void beforeTests() throws Exception {
-    initCore("solrconfig-nomergepolicyfactory.xml", "schema.xml");
+    initCore("solrconfig-nomergepolicyfactory.xml", "schema-fingerprint-docvaluesformat.xml");
   }
 
   @Test

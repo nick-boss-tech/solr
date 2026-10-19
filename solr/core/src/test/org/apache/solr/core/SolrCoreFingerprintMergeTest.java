@@ -17,6 +17,7 @@
 package org.apache.solr.core;
 
 import java.io.IOException;
+import org.apache.lucene.codecs.perfield.PerFieldDocValuesFormat;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.NumericDocValuesField;
@@ -37,7 +38,8 @@ public class SolrCoreFingerprintMergeTest extends SolrTestCaseJ4 {
 
   @BeforeClass
   public static void beforeTests() throws Exception {
-    initCore("solrconfig-mergepolicyfactory-nocfs.xml", "schema.xml");
+    initCore(
+        "solrconfig-mergepolicyfactory-nocfs.xml", "schema-fingerprint-docvaluesformat.xml");
   }
 
   @Test
@@ -75,6 +77,12 @@ public class SolrCoreFingerprintMergeTest extends SolrTestCaseJ4 {
           getSegmentReader(searcher.getTopReaderContext().leaves().get(0).reader());
       assertEquals(11, segmentReader.maxDoc());
       assertEquals(11, segmentReader.numDocs());
+      assertEquals(
+          "Asserting",
+          segmentReader
+              .getFieldInfos()
+              .fieldInfo("_version_")
+              .getAttribute(PerFieldDocValuesFormat.PER_FIELD_FORMAT_KEY));
       assertNotNull(
           "The merged segment must contain a persisted gross fingerprint",
           segmentReader.getSegmentInfo().info.getAttribute("solr.indexFingerprint"));

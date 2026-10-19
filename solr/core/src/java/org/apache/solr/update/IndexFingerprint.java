@@ -39,7 +39,9 @@ import org.apache.solr.common.util.Hash;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.core.SolrCore;
+import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.IndexSchema;
+import org.apache.solr.schema.LongPointField;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.util.RTimer;
@@ -190,16 +192,29 @@ public class IndexFingerprint implements MapWriter {
     return fingerprint;
   }
 
-  /** Identifies the _version_ interpretation used to create a persisted summary. */
+  /**
+   * Identifies the _version_ interpretation used to create a persisted summary, or returns {@code
+   * null} when the field type does not have the direct numeric DocValues semantics required by
+   * the write-time summary.
+   */
   public static String getSegmentMetadataSchemaSignature(IndexSchema schema) {
     SchemaField versionField = VersionInfo.getAndCheckVersionField(schema);
+    if (!versionField.hasDocValues() || !supportsSegmentMetadata(versionField.getType())) {
+      return null;
+    }
     return versionField.getName()
         + "|"
-        + versionField.getType().getTypeName()
+        + versionField.getType().getNamedPropertyValues(true)
         + "|"
-        + versionField.getType().getClass().getName()
+        + versionField.getDocValuesFormat()
         + "|"
         + versionField.getProperties();
+  }
+
+  static boolean supportsSegmentMetadata(FieldType fieldType) {
+    // The writer summary reads raw numeric DocValues. Only the built-in LongPointField is known to
+    // expose those same values through its ValueSource; custom types keep the scan fallback.
+    return fieldType.getClass() == LongPointField.class;
   }
 
   /**
@@ -239,7 +254,11 @@ public class IndexFingerprint implements MapWriter {
     if (metadata == null) {
       return null;
     }
-    return fromSegmentMetadata(metadata, segmentInfo, getSegmentMetadataSchemaSignature(schema));
+    String schemaSignature = getSegmentMetadataSchemaSignature(schema);
+    if (schemaSignature == null) {
+      return null;
+    }
+    return fromSegmentMetadata(metadata, segmentInfo, schemaSignature);
   }
 
   private static IndexFingerprint fromSegmentMetadata(
