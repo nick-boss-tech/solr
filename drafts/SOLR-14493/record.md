@@ -14,7 +14,7 @@ Creating an implicitly routed collection and then calling COLLECTIONSTATUS on it
 
 - The failing computation is the range of a slice. Implicit-router slices have no range, so `s.getRange().toString()` throws.
 - At the pin, solr/core/src/java/org/apache/solr/handler/admin/ColStatus.java:163-165 guards the call: `if (s.getRange() != null) { sliceMap.add("range", s.getRange().toString()); }`. The guard is in place at origin/main 498a09aea97.
-- The guard was added by commit 83770854a35 (2021-08-03, "SOLR-14506: Fix NPE in COLSTATUS for collections using implicit routing"). That commit is an ancestor of the pinned head (git merge-base --is-ancestor). Its diff replaces the unguarded call with the guard and also changes the collections list it reads (getCollectionStates). It adds 14 lines to solr/solrj-jetty or core test CollectionsAPISolrJTest.java, which exercises collection status for implicit collections.
+- The guard was added by commit 83770854a35 (2021-08-03, "SOLR-14506: Fix NPE in COLSTATUS for collections using implicit routing"). That commit is an ancestor of the pinned head (git merge-base --is-ancestor). Its diff replaces the unguarded call with the guard and also changes the collections list it reads (getCollectionStates). It adds 14 lines to the test class CollectionsAPISolrJTest (solr/core test tree, cloud package).
 
 Commands at the pinned head:
 - git show origin/main:solr/core/src/java/org/apache/solr/handler/admin/ColStatus.java | sed -n 163,165p: the guard.
