@@ -96,7 +96,7 @@ class SchemaDesignerConfigSetHelper implements SchemaDesignerConstants {
 
   private static final Set<String> removeFieldProps =
       new HashSet<>(Arrays.asList("href", "id", "copyDest"));
-  private static final List<String> includeLangIds = Arrays.asList("ws", "general", "rev", "sort");
+  private static final List<String> includeLangIds = List.of("ws", "general", "rev", "sort");
   private static final String ZNODE_PATH_DELIM = "/";
   private static final String MULTIVALUED = "multiValued";
   private static final int TEXT_PREFIX_LEN = "text_".length();

@@ -29,7 +29,6 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
@@ -53,10 +52,10 @@ public abstract class ContentStreamBase implements ContentStream {
   public static final String APPLICATION_XML = "application/xml";
   public static final String APPLICATION_JSON = "application/json";
   private static final List<String> UNHELPFUL_TYPES =
-      Arrays.asList(APPLICATION_OCTET_STREAM, APPLICATION_GZIP, "content/unknown");
-  private static final List<String> XML_SUF = Arrays.asList(".xml", ".xml.gz", ".xml.gzip");
-  private static final List<String> JSON_SUF = Arrays.asList(".json", ".json.gz", ".json.gzip");
-  private static final List<String> CSV_SUF = Arrays.asList(".csv", ".csv.gz", ".csv.gzip");
+      List.of(APPLICATION_OCTET_STREAM, APPLICATION_GZIP, "content/unknown");
+  private static final List<String> XML_SUF = List.of(".xml", ".xml.gz", ".xml.gzip");
+  private static final List<String> JSON_SUF = List.of(".json", ".json.gz", ".json.gzip");
+  private static final List<String> CSV_SUF = List.of(".csv", ".csv.gz", ".csv.gzip");
 
   protected String name;
   protected String sourceInfo;

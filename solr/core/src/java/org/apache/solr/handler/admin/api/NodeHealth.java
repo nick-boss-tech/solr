@@ -27,7 +27,6 @@ import static org.apache.solr.security.PermissionNameProvider.Name.HEALTH_PERM;
 import jakarta.inject.Inject;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -62,7 +61,7 @@ import org.slf4j.LoggerFactory;
 public class NodeHealth extends JerseyResource implements NodeHealthApi {
 
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-  private static final List<State> UNHEALTHY_STATES = Arrays.asList(State.DOWN, State.RECOVERING);
+  private static final List<State> UNHEALTHY_STATES = List.of(State.DOWN, State.RECOVERING);
 
   private final CoreContainer coreContainer;
 
