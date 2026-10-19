@@ -1,8 +1,8 @@
 # Gate job: SOLR-18507 (Phase 2 gross fingerprint cache)
 
-Status: CLAIMED by vm1 for round 2, 2026-10-19T05:20Z, at head a36ca787d5b. Round 1 record: GATE INVALID at step 1 (tidy modified SolrCore.java, IndexFingerprint.java, SolrIndexFingerprintTest.java; formatting only); the tidy output was committed as a36ca787d5b under the owner's proactive tidy direction.
+Status: CLAIMED by vm1 for round 3, 2026-10-19T06:00Z, at head d55d4422de4. Round 2 record: GATE FAILED at step 2: SolrCore.java:2178 cannot find symbol LeafReader (the branch adds FilterLeafReader and SegmentReader imports but not LeafReader; neither the base nor apache/main carries that import, so a rebase does not cure it). Steps 4 and 5 rc=1 are downstream of the compile failure; no tests ran. Fix: one line, import org.apache.lucene.index.LeafReader in sorted position, commit d55d4422de4, applied by vm1 under the owner's proactive direction and re-gating.
 
-- Branch: `solr-18507-phase-2-submit`. Head: `a36ca787d5b62bb57efaeb54eb0292d874644c2b` (round 2; round 1 head 3f273e29ee00 plus the tidy commit a36ca787d5b, pushed by vm1 under the owner's proactive tidy direction 2026-10-19) (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
+- Branch: `solr-18507-phase-2-submit`. Head: `d55d4422de4348274a42a031408ffe03ddb0c328` (round 3; round 2 head a36ca787d5b plus the import fix d55d4422de4) (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `1ba98f9240902c26f0bcd411f8787d38555dea8d`. Prior gated head: none recorded.
 - Gate ID: `SOLR-18507-phase-2`. Claim file: `claims/pool-<host>-gate-SOLR-18507-phase-2.md`.
 - Intended host: any capable Linux host. WORKFLOW.md lets any capable Linux host claim it if that host is busy.

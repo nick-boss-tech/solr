@@ -11,3 +11,5 @@ Heartbeat: 2026-10-19T03:40Z (claim taken; queued)
 Heartbeat: 2026-10-19T05:05Z (gate stopped at step 1, GATE INVALID; see gates/SOLR-18507-phase-2.md)
 
 Heartbeat: 2026-10-19T05:20Z (tidy commit a36ca787d5b pushed; round 2 launching)
+
+Heartbeat: 2026-10-19T06:00Z (round 2 GATE FAILED at compile: missing LeafReader import; fix d55d4422de4 pushed; round 3 launching)
