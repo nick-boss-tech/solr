@@ -1,0 +1,42 @@
+# Skip verdict cross-audit, batch 16 of 21
+
+Assignment: `assignments/pool-aab-skip-verdict-audit-16.md`. Auditor: vm2, 2026-10-19, claim `claims/pool-aab-skip-verdict-audit-16.md`. Each item was checked against the floor in `material/skip-audit/verdict-rubric.md`: a closeout claim in `claims/` naming the ticket with a DONE line, the named draft branch on the fork with `drafts/<KEY>/record.md` and `jira-comment.md`, the pinned head the record cites (matched to `evidence_head` in `material/skip-audit/queue-current.json`, which is `498a09aea97a` for every item here), the Jira status read in that pass, a code path with file and line or a reproduction, a substantive record, and a verdict whose draft suffix matches.
+
+Checks run on the fork at tip `33bf30d0354`. Every draft branch exists with its suffix matching the recorded verdict, both files are present for all 25, and every record cites the pinned head. No item passed: no claim in `claims/` is a closeout with a DONE line for any of the 17 suspects.
+
+Own-host check: 8 items are `deferred-own-host`. 8 records state "Checked by: vm2" for the reading they cite. 0 record a reproduction seed from vm2's own repro round (`claims/pool-skip-repro-flake-round-1.md`); this host did not audit them.
+
+| # | Ticket | Result | Claim found | Draft branch head | Missing |
+| --- | --- | --- | --- | --- | --- |
+| 1 | SOLR-5462 | suspect (keep-open) | none naming the ticket as a closeout | `a5c22e8b6a37` (solr-5462-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 2 | SOLR-5435 | deferred-own-host (keep-open) | not checked (own host) | `44bd98890bad` (solr-5435-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
+| 3 | SOLR-5383 | deferred-own-host (keep-open) | not checked (own host) | `15ea2f0ce63e` (solr-5383-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
+| 4 | SOLR-5376 | deferred-own-host (keep-open) | not checked (own host) | `78e9594a4505` (solr-5376-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
+| 5 | SOLR-5252 | deferred-own-host (keep-open) | not checked (own host) | `96d59a4e553a` (solr-5252-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
+| 6 | SOLR-5235 | suspect (keep-open) | none naming the ticket as a closeout | `987aad45b2e3` (solr-5235-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 7 | SOLR-5224 | suspect (keep-open) | none naming the ticket as a closeout | `c096acaa9c47` (solr-5224-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 8 | SOLR-5205 | suspect (keep-open) | none naming the ticket as a closeout | `71aeea0fbb23` (solr-5205-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 9 | SOLR-5161 | suspect (keep-open) | none naming the ticket as a closeout | `f18c9f9fa483` (solr-5161-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 10 | SOLR-5145 | suspect (close-fixed) | none naming the ticket as a closeout | `282a3dbdc9c7` (solr-5145-draft-close) | no closeout claim with a DONE line names this ticket; the close-fixed verdict has no closeout claim to check |
+| 11 | SOLR-5115 | suspect (keep-open) | none naming the ticket as a closeout | `48790d6b931b` (solr-5115-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 12 | SOLR-5095 | suspect (keep-open) | none naming the ticket as a closeout | `8db5ca0cb060` (solr-5095-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 13 | SOLR-5089 | suspect (keep-open) | none naming the ticket as a closeout | `cd6142387ec2` (solr-5089-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 14 | SOLR-5067 | suspect (keep-open) | none naming the ticket as a closeout | `d5f76f80fe94` (solr-5067-draft-open) | no closeout claim with a DONE line names this ticket; JIRA was not re-read in this pass; no source file path with a line number cited; the one reproduction run passed, the record calls it inconclusive, and the rerun was not run |
+| 15 | SOLR-5046 | deferred-own-host (keep-open) | not checked (own host) | `08abe4199ac6` (solr-5046-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
+| 16 | SOLR-4996 | suspect (keep-open) | none naming the ticket as a closeout | `b52eb4aa73fe` (solr-4996-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 17 | SOLR-4983 | suspect (keep-open) | none naming the ticket as a closeout | `48e2ac117102` (solr-4983-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 18 | SOLR-4880 | suspect (keep-open) | none naming the ticket as a closeout | `348f7a6fd842` (solr-4880-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 19 | SOLR-4878 | suspect (keep-open) | none naming the ticket as a closeout | `b087cfe306bd` (solr-4878-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 20 | SOLR-4859 | suspect (keep-open) | none naming the ticket as a closeout | `ca7fa39ff66f` (solr-4859-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 21 | SOLR-4851 | deferred-own-host (keep-open) | not checked (own host) | `5eed78805e77` (solr-4851-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
+| 22 | SOLR-4753 | suspect (keep-open) | none naming the ticket as a closeout | `448b6a55c35f` (solr-4753-draft-open) | no closeout claim with a DONE line names this ticket; the record says JIRA was not re-read in this pass; no source file path with a line number cited; no reproduction attempt recorded |
+| 23 | SOLR-4739 | suspect (close-fixed) | none naming the ticket as a closeout | `de81fea870ab` (solr-4739-draft-close) | no closeout claim with a DONE line names this ticket; the close-fixed verdict has no closeout claim to check |
+| 24 | SOLR-4733 | deferred-own-host (keep-open) | not checked (own host) | `d5977e23f4f1` (solr-4733-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
+| 25 | SOLR-4686 | deferred-own-host (keep-open) | not checked (own host) | `e7c1053bc886` (solr-4686-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
+
+Count: pass 0, suspect 17, deferred 8.
+
+## Questions for the vm1 watch
+
+1. The remediation-current.json question from batch 04 still stands. The 17 suspects are not appended to `material/skip-audit/remediation-current.json`, because the batch assignment says auditors do not edit it while `pool/cron-prompt.md` says the pool maintains it.
+2. Most records in this batch say the Jira status was not re-read in the pass that wrote them. Records need a Jira read on the current pass before they can pass.
