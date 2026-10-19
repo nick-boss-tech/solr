@@ -16,7 +16,7 @@ Upgrading from Solr 7.4 to 8.8.2, a leader/follower setup with no SolrCloud and 
 - solr/core/src/java/org/apache/solr/handler/IndexFetcher.java:304-305: on a follower, the leader core URL is checked with `getAllowListUrlChecker().checkAllowList(List.of(leaderCoreUrl), clusterState)`. For a standalone node `clusterState` is null.
 - solr/core/src/java/org/apache/solr/handler/IndexFetcher.java:314-319: a SolrException from the check is rethrown as FORBIDDEN, "The 'leaderUrl' parameter value ... is not allowed", with the clue from AllowListUrlChecker.SET_SOLR_DISABLE_URL_ALLOW_LIST_CLUE.
 - solr/core/src/java/org/apache/solr/security/AllowListUrlChecker.java:133-150: a URL passes only if its host:port is a live node of the cluster or is in the configured allow list. solr/core/src/java/org/apache/solr/security/AllowListUrlChecker.java:158-161: `getLiveHostUrls(null)` returns an empty set. So in standalone mode the only way to pass is the allow list.
-- The disable switch at this head is the property `solr.security.allow.urls.enabled` (AllowListUrlChecker.java:46, read at :105-106). The reporter's `solr.disable.shardsWhitelist` no longer exists.
+- The disable switch at this head is the property `solr.security.allow.urls.enabled` (AllowListUrlChecker.java:46, read in create() at :103). The reporter's `solr.disable.shardsWhitelist` no longer exists.
 
 So a standalone follower whose leader host is not in `allowUrls` still fails at startup, with a FORBIDDEN error instead of the reported message.
 
