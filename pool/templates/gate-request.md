@@ -1,9 +1,10 @@
 # Gate request: fill every field, then run pool/bin/request-gate.py on this file
 
-Each line is `Field: value`. Replace every FILL value. Delete the Head or Title line if you do not use it. The script refuses any value that still starts with FILL, and any em dash or en dash.
+Each line is `Field: value`. Replace every FILL value. Delete the Head, Title, or Gate ID line if you do not use it. The script refuses any value that still starts with FILL, and any em dash or en dash.
 
 Ticket: FILL the ticket key, for example SOLR-1234
 Title: FILL a short title for the job heading (optional)
+Gate ID: FILL the ticket key plus -phase-<slug> when the ticket has more than one gate (optional)
 Branch: FILL the fork branch name, for example solr-1234-submit
 Head: FILL the 40-character sha (optional; if given it must match the fork tip)
 Base: FILL the sha the branch was cut from (upstream main or the release branch)

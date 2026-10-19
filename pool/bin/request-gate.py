@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Post a gate request to coordination as gates/<TICKET>.md.
+"""Post a gate request to coordination as gates/<GATE_ID>.md.
 
 usage: request-gate.py [--dry-run] <request file>
 
 The request file has one "Field: value" per line (pool/templates/gate-request.md).
-The script checks it, reads the branch tip from the fork, refuses a ticket that already
+The script checks it, reads the branch tip from the fork, refuses a gate ID that already
 has a gate job or a live claim, writes the gate job, and pushes it to coordination as a
 fast-forward commit. --dry-run prints the job and changes nothing.
 """
@@ -66,6 +66,11 @@ def validate(v):
             die(f"'{k}' has an em dash or en dash")
     if not re.fullmatch(r"[A-Z][A-Z0-9]*-\d+", v["Ticket"]):
         die("Ticket must look like SOLR-1234")
+    gate = v.get("Gate ID", "").strip()
+    if gate and gate != v["Ticket"] and not re.fullmatch(
+        re.escape(v["Ticket"]) + r"-phase-[a-z0-9]+(?:-[a-z0-9]+)*", gate, re.I
+    ):
+        die("Gate ID must be the ticket key or the ticket key plus -phase-<slug>")
     if not re.fullmatch(r"[A-Za-z0-9._/-]+", v["Branch"]):
         die("Branch must be a plain branch name")
     if not re.fullmatch(r"[0-9a-f]{7,40}", v["Base"]):
@@ -82,21 +87,33 @@ def validate(v):
         die("Changelog must be a path under changelog/, or none")
 
 
-def check_free(ticket, cwd):
-    if git("cat-file", "-e", f"origin/coordination:gates/{ticket}.md", cwd=cwd, check=False).returncode == 0:
-        die(f"gates/{ticket}.md already exists on coordination")
+def gate_id(v):
+    return v.get("Gate ID", "").strip() or v["Ticket"]
+
+
+def check_free(ticket, gate, cwd):
+    job_path = f"gates/{gate}.md"
+    if git("cat-file", "-e", f"origin/coordination:{job_path}", cwd=cwd, check=False).returncode == 0:
+        die(f"{job_path} already exists on coordination")
     names = git("ls-tree", "--name-only", "origin/coordination", "claims/", cwd=cwd).stdout.split()
     pattern = re.escape(ticket.lower()) + r"(?!\d)"
+    legacy_gate_pattern = "gate-backlog-" + ticket.rsplit("-", 1)[1].lower()
+    phase_pattern = re.compile(re.escape(ticket.lower()) + r"-phase-[a-z0-9]+(?:-[a-z0-9]+)*(?=\.md$)")
     for name in names:
-        if not re.search(pattern, name.lower()):
+        lower_name = name.lower()
+        phase_match = phase_pattern.search(lower_name)
+        if gate.lower() != ticket.lower() and phase_match and phase_match.group() != gate.lower():
+            continue
+        if not re.search(pattern, lower_name) and legacy_gate_pattern not in lower_name:
             continue
         text = git("show", f"origin/coordination:{name}", cwd=cwd).stdout
         if not re.search(r"(?m)^(DONE|STALE)\b|^Status: (DONE|STALE|CLOSED)", text):
-            die(f"{name} is a live claim for {ticket}")
+            die(f"{name} is a live claim for {gate}")
 
 
 def build(v, tip):
     ticket, module, cls, seed = v["Ticket"], v["Module"], v["Focused class"], v["Seed"]
+    gate = gate_id(v)
     heading = f" ({v['Title']})" if v.get("Title") else ""
     host = v.get("Intended host") or "any capable Linux host"
     today = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
@@ -126,6 +143,7 @@ Status: OPEN
 
 - Branch: `{v['Branch']}`. Head: `{tip}` (fork tip, confirmed by ls-remote on {today}). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `{v['Base']}`. Prior gated head: none recorded.
+- Gate ID: `{gate}`. Claim file: `claims/pool-<host>-gate-{gate}.md`.
 - Intended host: {host}. WORKFLOW.md lets any capable Linux host claim it if that host is busy.
 - Capability tags: gate.
 - Module: `{module}`. Focused class: `{cls}`. Seed: `{seed}`.
@@ -155,9 +173,9 @@ No row may leave the choice to the claimant.
 
 ## On green
 
-1. Write `receipts/{ticket}.md` with a new top section: head, gate date and host, log path, step results, the proof-leg result (test name and failure text, or none requested), and the focused counts from the fresh XML.
+1. Write or refresh `receipts/{ticket}.md` with a new top section for gate ID `{gate}`: head, gate date and host, log path, step results, the proof-leg result (test name and failure text, or none requested), and the focused counts from the fresh XML.
 2. No public text edits in this job unless a later job says so.
-3. Mark this job DONE and the claim DONE in the same push as the receipt.
+3. Mark this job DONE and `claims/pool-<host>-gate-{gate}.md` DONE in the same push as the receipt.
 
 If any step cannot be verified, record it here and stop.
 
@@ -181,30 +199,31 @@ If any step cannot be verified, record it here and stop.
 """
 
 
-def post(ticket, job, tip, cwd):
+def post(ticket, gate, job, tip, cwd):
+    job_path = f"gates/{gate}.md"
     path = tempfile.mkdtemp(prefix="request-gate-")
     git("worktree", "add", "--detach", path, "origin/coordination", cwd=cwd)
     try:
         os.makedirs(os.path.join(path, "gates"), exist_ok=True)
-        with open(os.path.join(path, "gates", f"{ticket}.md"), "w", encoding="utf-8") as f:
+        with open(os.path.join(path, job_path), "w", encoding="utf-8") as f:
             f.write(job)
-        git("add", f"gates/{ticket}.md", cwd=path)
-        git("commit", "-q", "-m", f"{ticket}: post gate job at {tip[:10]}", cwd=path)
+        git("add", job_path, cwd=path)
+        git("commit", "-q", "-m", f"{ticket}: post {gate} gate at {tip[:10]}", cwd=path)
         for _ in range(3):
             if git("push", "origin", "HEAD:refs/heads/coordination", cwd=path, auth=True, check=False).returncode == 0:
                 break
             git("fetch", "-q", "origin", "coordination", cwd=path, auth=True)
             if git("rebase", "origin/coordination", cwd=path, check=False).returncode != 0:
                 die(f"rebase onto coordination failed; resolve in {path}")
-            check_free(ticket, path)
+            check_free(ticket, gate, path)
         else:
             die("push was rejected three times")
         git("fetch", "-q", "origin", "coordination", cwd=path, auth=True)
-        back = git("show", f"origin/coordination:gates/{ticket}.md", cwd=path).stdout
+        back = git("show", f"origin/coordination:{job_path}", cwd=path).stdout
         if f"# Gate job: {ticket}" not in back:
             die("read-back did not find the gate job")
         sha = git("rev-parse", "--short", "HEAD", cwd=path).stdout.strip()
-        print(f"posted gates/{ticket}.md on coordination at {sha}; read back OK")
+        print(f"posted {job_path} on coordination at {sha}; read back OK")
     finally:
         git("worktree", "remove", "--force", path, cwd=cwd, check=False)
 
@@ -227,12 +246,13 @@ def main():
         die(f"fork tip of {v['Branch']} is {tip}, not {v['Head']}")
     cwd = os.getcwd()
     git("fetch", "-q", "origin", "coordination", cwd=cwd, auth=True)
-    check_free(v["Ticket"], cwd)
+    gate = gate_id(v)
+    check_free(v["Ticket"], gate, cwd)
     job = build(v, tip)
     if dry:
         sys.stdout.write(job)
         return
-    post(v["Ticket"], job, tip, cwd)
+    post(v["Ticket"], gate, job, tip, cwd)
 
 
 if __name__ == "__main__":

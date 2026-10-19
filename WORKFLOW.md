@@ -10,7 +10,7 @@ Set up 2026-10-10 at Nick's direction. This branch is an open pool, not addresse
 
 - `assignments/` holds the pool. Every assignment file names its capability tags, its slices, its deliverables and its rules.
 - `claims/` holds one claim file per assignment or per slice of a large assignment.
-- `gates/` holds one file per gate job, written by whoever posts the job and updated by the host that runs it.
+- `gates/` holds one file per gate job, written by whoever posts the job and updated by the host that runs it. Use `gates/<TICKET>.md` for a single gate and `gates/<TICKET>-phase-<slug>.md` when separate phase heads for one ticket need independent gates.
 - `hosts/` holds one file per agent host: its capabilities and its latest heartbeat.
 - `receipts/` holds one file per ticket with the verified gate state at the live tip. The host that runs a gate writes or refreshes the receipt itself as the finishing step of that gate, so a receipt never waits on a separate refresh.
 - `reports/`, `pr-drafts/`, `material/` hold deliverables as before.
@@ -41,7 +41,8 @@ The Windows host never claims `gate`, `implementation`, `premise-run`, `settling
 
 ## Gates
 
-- A gate job file at `gates/<TICKET>.md` records: branch, head, module, focused test classes, seed, proof shape, the claiming host, the runner and log paths on that host, and a step checklist the runner updates as each step finishes. A host that dies mid-gate therefore loses at most one step, and the next host resumes from the checklist instead of from memory.
+- A gate job file at `gates/<GATE_ID>.md` records: ticket, branch, head, module, focused test classes, seed, proof shape, the claiming host, the runner and log paths on that host, and a step checklist the runner updates as each step finishes. A host that dies mid-gate therefore loses at most one step, and the next host resumes from the checklist instead of from memory.
+- When two phase heads for one ticket have separate gate jobs, each has its own gate ID and claim. Both results are recorded as separate top sections in the ticket receipt at `receipts/<TICKET>.md`.
 - One gate per host at a time (each host serializes its own Gradle builds behind its local lock). Two hosts may gate different branches in parallel; that is the point of the pool.
 - On green, the gating host pushes the branch if the job says to, writes `receipts/<TICKET>.md`, marks the gate file DONE, and marks the claim DONE.
 - A gate that executed tests and failed is never relaunched by another host on sight. The failure is recorded in the gate file and reported; the main agent investigates before any relaunch. A run that never executed tests (environment refusal, VM replacement) may be relaunched once by the claiming or taking-over host.

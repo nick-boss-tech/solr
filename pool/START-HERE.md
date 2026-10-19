@@ -12,8 +12,8 @@ This page is the order of operations for any agent that posts assignments or gat
 Check the fork, not your local copy:
 
 - Head: `git ls-remote origin refs/heads/<branch>`. Put that exact sha in the job.
-- Existing gate: `git ls-tree --name-only origin/coordination -- gates/`. Look for `<TICKET>.md`.
-- Existing claims: `git ls-tree --name-only origin/coordination -- claims/`. Look for names with the ticket number. Read any claim that has no `DONE:` line.
+- Existing gate: `git ls-tree --name-only origin/coordination -- gates/`. Look for `<TICKET>.md` and any phase-specific `<TICKET>-phase-<slug>.md` files.
+- Existing claims: `git ls-tree --name-only origin/coordination -- claims/`. Look for the ticket key or ticket number. Phase-specific gate claims include the full gate ID. Read any related claim that has no `DONE:` line.
 
 If the job or claim name already exists, stop. Another session got there first, and the first push wins.
 
@@ -26,22 +26,22 @@ If the job or claim name already exists, stop. Another session got there first, 
    - Any host, by hand:
      1. `git fetch origin coordination`
      2. Make a worktree at the fork tip with `git worktree add --detach <your path> origin/coordination`. Use your own path. Do not share a checkout with another session.
-     3. Copy the file to `gates/<TICKET>.md` or `assignments/<slug>.md` in that worktree.
+     3. Copy the file to `gates/<GATE_ID>.md` or `assignments/<slug>.md` in that worktree. The gate ID is the ticket key unless the request has a phase suffix.
      4. `git add` that file, then commit as Nick Shanin with no trailers: `git -c user.name="Nick Shanin" -c user.email="nick.boss.us@gmail.com" commit -m "<TICKET>: post gate job at <short head>"`.
      5. `git push origin HEAD:refs/heads/coordination`. If the push is rejected, run `git fetch origin coordination`, `git rebase origin/coordination`, and push again.
-     6. Read it back: `git show origin/coordination:gates/<TICKET>.md`.
+     6. Read it back: `git show origin/coordination:gates/<GATE_ID>.md`.
 
 ## Request a gate (implementation agents)
 
 Use this when your branch has a head that needs a full gate. You file the request; a gate host claims and runs it. You do not claim or run the gate yourself.
 
 1. Push your branch to the fork and note the tip: `git ls-remote origin refs/heads/<branch>`.
-2. Copy `pool/templates/gate-request.md` to a scratch file and fill every field. Delete the Head or Title line if you do not use it.
+2. Copy `pool/templates/gate-request.md` to a scratch file and fill every field. Delete the Head, Title, or Gate ID line if you do not use it. Use `Gate ID: <TICKET>-phase-<slug>` when separate phase heads for one JIRA ticket need their own gate jobs.
 3. From any checkout of this repo, run `python3 pool/bin/request-gate.py --dry-run <scratch file>` to see the job, then run it again without `--dry-run` to post it. The script needs `GITHUB_TOKEN` in the environment or in `/workspace/.env`.
-4. The script refuses when the ticket already has a gate job or a live claim, when the branch tip differs from Head, or when a field is still FILL or contains a dash. Fix the request and run it again. Do not edit another session's job to make your request fit.
-5. On success it prints the job path and the commit. The job is OPEN; gate hosts find it in [OPEN-WORK.md](../OPEN-WORK.md). Your part ends there.
+4. The script refuses when that gate ID already has a gate job or a matching live claim, when the branch tip differs from Head, or when a field is still FILL or contains a dash. A live ticket-level claim also blocks a phase request. Different phase IDs for the same ticket may stay open together. Do not edit another session's job to make your request fit.
+5. On success it prints the gate path and commit. The job is OPEN; gate hosts find it in [OPEN-WORK.md](../OPEN-WORK.md). Your part ends there.
 
-Windows agents use `research\pool-post.ps1 -Kind gate` with the same fields, filled into `pool/templates/gate-job.md`.
+The legacy Windows `research\pool-post.ps1 -Kind gate` path supports ticket-level gate jobs. Use `request-gate.py` for phase-specific gate IDs.
 
 ## Find open work
 
@@ -49,7 +49,7 @@ Open assignments and gate jobs are listed in [OPEN-WORK.md](../OPEN-WORK.md) at 
 
 ## Claim a gate job
 
-Copy `pool/templates/claim.md` to `claims/pool-<host>-gate-backlog-<ticket number>.md`, fill it, and post it with the same steps (`-Kind claim -Name pool-<host>-gate-backlog-<ticket number>` on Windows). Claim before you run anything. Append a heartbeat line at least once an hour and push it. Mark the claim `DONE:` in the same push as the deliverable.
+Copy `pool/templates/claim.md` to the claim path named in the gate job, using `claims/pool-<host>-gate-<GATE_ID>.md`. This keeps claims for two phases of one ticket separate. Fill it and post it with the same steps. Claim before you run anything. Append a heartbeat line at least once an hour and push it. Mark the claim `DONE:` in the same push as the deliverable.
 
 ## Decisions in a job
 
