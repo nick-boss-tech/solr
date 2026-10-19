@@ -36,10 +36,27 @@ import org.junit.Test;
 public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
 
   private static final String SEGMENT_FINGERPRINT_ATTRIBUTE = "solr.indexFingerprint";
+  private static final String FINGERPRINT_SCHEMA =
+      hasPersistedFingerprintFormat()
+          ? "schema-fingerprint-docvaluesformat.xml"
+          : "schema.xml";
 
   @BeforeClass
   public static void beforeTests() throws Exception {
-    initCore("solrconfig-nomergepolicyfactory.xml", "schema-fingerprint-docvaluesformat.xml");
+    initCore("solrconfig-nomergepolicyfactory.xml", FINGERPRINT_SCHEMA);
+  }
+
+  private static boolean hasPersistedFingerprintFormat() {
+    try {
+      Class.forName(
+          "org.apache.solr.update.IndexFingerprintDocValuesFormat",
+          false,
+          SolrCoreFingerprintCacheTest.class.getClassLoader());
+      return true;
+    } catch (ClassNotFoundException e) {
+      // The fail-before proof overlays src/test but not src/test-files on its Phase 2 base.
+      return false;
+    }
   }
 
   @Test

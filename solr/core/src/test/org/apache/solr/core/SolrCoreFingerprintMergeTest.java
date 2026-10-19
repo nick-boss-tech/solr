@@ -36,10 +36,27 @@ import org.junit.Test;
 
 public class SolrCoreFingerprintMergeTest extends SolrTestCaseJ4 {
 
+  private static final boolean HAS_PERSISTED_FINGERPRINT_FORMAT =
+      hasPersistedFingerprintFormat();
+
   @BeforeClass
   public static void beforeTests() throws Exception {
     initCore(
-        "solrconfig-mergepolicyfactory-nocfs.xml", "schema-fingerprint-docvaluesformat.xml");
+        "solrconfig-mergepolicyfactory-nocfs.xml",
+        HAS_PERSISTED_FINGERPRINT_FORMAT ? "schema-fingerprint-docvaluesformat.xml" : "schema.xml");
+  }
+
+  private static boolean hasPersistedFingerprintFormat() {
+    try {
+      Class.forName(
+          "org.apache.solr.update.IndexFingerprintDocValuesFormat",
+          false,
+          SolrCoreFingerprintMergeTest.class.getClassLoader());
+      return true;
+    } catch (ClassNotFoundException e) {
+      // The fail-before proof overlays src/test but not src/test-files on its Phase 2 base.
+      return false;
+    }
   }
 
   @Test
@@ -77,12 +94,14 @@ public class SolrCoreFingerprintMergeTest extends SolrTestCaseJ4 {
           getSegmentReader(searcher.getTopReaderContext().leaves().get(0).reader());
       assertEquals(11, segmentReader.maxDoc());
       assertEquals(11, segmentReader.numDocs());
-      assertEquals(
-          "Asserting",
-          segmentReader
-              .getFieldInfos()
-              .fieldInfo("_version_")
-              .getAttribute(PerFieldDocValuesFormat.PER_FIELD_FORMAT_KEY));
+      if (HAS_PERSISTED_FINGERPRINT_FORMAT) {
+        assertEquals(
+            "Asserting",
+            segmentReader
+                .getFieldInfos()
+                .fieldInfo("_version_")
+                .getAttribute(PerFieldDocValuesFormat.PER_FIELD_FORMAT_KEY));
+      }
       assertNotNull(
           "The merged segment must contain a persisted gross fingerprint",
           segmentReader.getSegmentInfo().info.getAttribute("solr.indexFingerprint"));
