@@ -1,8 +1,8 @@
-# PR draft: SOLR-18552 (for Nick's approval; not opened)
+# PR draft: SOLR-18552 (OPENED as PR #5181, ready, 2026-10-18 at Nick's approval)
 
 - Proposed title: SOLR-18552: Set MMapDirectory shared arena permits to 64
 - Head: nick-boss-tech:solr-18552-submit at a5406c9fe531161df7b424b2a55143489b95166e. Base: branch_9x.
-- Gate: LIGHT GATE GREEN (gates/SOLR-18552.md on coordination). Opening needs Nick's approval.
+- Gate: LIGHT GATE GREEN (gates/SOLR-18552.md on coordination). Opened 2026-10-18: https://github.com/apache/solr/pull/5181 (base branch_9x, head a5406c9fe531, ready).
 
 ---
 
