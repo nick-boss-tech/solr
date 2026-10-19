@@ -19,8 +19,7 @@ package org.apache.solr.ui.views.configsets
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -46,16 +45,11 @@ import org.apache.solr.ui.shared.generated.resources.overview
 import org.apache.solr.ui.shared.generated.resources.schema
 import org.apache.solr.ui.views.navigation.NavigationTabs
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ConfigsetsScene(
     component: ConfigsetsComponent,
     modifier: Modifier = Modifier,
-) = FlowRow(
-    modifier = modifier,
-    horizontalArrangement = Arrangement.spacedBy(16.dp),
-    verticalArrangement = Arrangement.spacedBy(16.dp),
-) {
+) = Box(modifier = modifier.fillMaxSize()) {
     val viewModel = viewModel { component.createConfigsetsRouteViewModel() }
     val model by viewModel.uiState.collectAsState()
 
@@ -70,6 +64,7 @@ fun ConfigsetsScene(
             modifier = Modifier.padding(1.dp),
         )
 
+        Box(Modifier.weight(1f).fillMaxWidth()) {
         NavDisplay(
             backStack = viewModel.backStack,
             entryDecorators = listOf(rememberViewModelStoreNavEntryDecorator()),
@@ -87,13 +82,20 @@ fun ConfigsetsScene(
                         modifier = Modifier.fillMaxSize().padding(16.dp),
                     )
                 }
-                entry<ConfigsetsScene.Files> { Box(Modifier.fillMaxSize()) }
+                entry<ConfigsetsScene.Files> {
+                    ConfigsetFilesContent(
+                        viewModel = viewModel { component.createConfigsetFilesViewModel() },
+                        configsetsViewModel = sharedConfigsetsViewModel,
+                        modifier = Modifier.fillMaxSize().padding(16.dp),
+                    )
+                }
                 entry<ConfigsetsScene.Schema> { Box(Modifier.fillMaxSize()) }
                 entry<ConfigsetsScene.UpdateConfig> { Box(Modifier.fillMaxSize()) }
                 entry<ConfigsetsScene.Handlers> { Box(Modifier.fillMaxSize()) }
                 entry<ConfigsetsScene.SearchComponents> { Box(Modifier.fillMaxSize()) }
             },
         )
+        }
     }
 }
 

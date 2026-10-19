@@ -40,27 +40,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import org.apache.solr.ui.domain.FileTreeFile
+import org.apache.solr.ui.domain.FileTreeFolder
+import org.apache.solr.ui.domain.FileTreeNode
 import org.apache.solr.ui.shared.generated.resources.Res
 import org.apache.solr.ui.shared.generated.resources.chevron_right
 import org.apache.solr.ui.shared.generated.resources.expand_more
 import org.apache.solr.ui.shared.generated.resources.folder_data
 import org.jetbrains.compose.resources.painterResource
-
-sealed interface FileTreeNode {
-    val name: String
-    val path: String
-}
-
-data class FileTreeFile(
-    override val name: String,
-    override val path: String,
-) : FileTreeNode
-
-data class FileTreeFolder(
-    override val name: String,
-    override val path: String,
-    val children: List<FileTreeNode>,
-) : FileTreeNode
 
 @Composable
 fun FileTree(

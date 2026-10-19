@@ -117,4 +117,8 @@
   <string name="no_collections_available">No collections are available</string>
   <string name="no_request_handlers">This collection has no request handlers</string>
   <string name="index_query_error">The request could not be completed</string>
+  <string name="configset_files_select_configset">Select a configset to browse its files.</string>
+  <string name="configset_files_no_collection">No collection uses this configset, so its files cannot be listed.</string>
+  <string name="configset_files_select_file">Select a file to view its contents.</string>
+  <string name="configset_files_error">The files could not be loaded.</string>
 </resources>

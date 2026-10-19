@@ -18,7 +18,10 @@
 package org.apache.solr.ui.preview.configsets
 
 import androidx.compose.runtime.Composable
+import org.apache.solr.ui.components.files.data.ConfigsetFilesRepository
+import org.apache.solr.ui.components.files.viewmodel.ConfigsetFilesViewModel
 import org.apache.solr.ui.components.indexquery.data.IndexQueryRepository
+import org.apache.solr.ui.domain.FileTreeNode
 import org.apache.solr.ui.components.indexquery.viewmodel.IndexQueryViewModel
 import org.apache.solr.ui.domain.RequestHandlerOption
 import androidx.compose.ui.tooling.preview.Preview
@@ -66,6 +69,14 @@ private class PreviewConfigsetsComponent(
     )
 
     override fun createConfigsetsOverviewComponent(): ConfigsetsOverviewComponent = PreviewConfigsetsOverviewComponent(configsets)
+
+    override fun createConfigsetFilesViewModel(): ConfigsetFilesViewModel = ConfigsetFilesViewModel(
+        repository = object : ConfigsetFilesRepository {
+            override suspend fun findCollection(configset: String): Result<String?> = Result.success(null)
+            override suspend fun listFiles(collection: String): Result<List<FileTreeNode>> = Result.success(emptyList())
+            override suspend fun readFile(collection: String, path: String): Result<String> = Result.success("")
+        },
+    )
 
     override fun createIndexQueryViewModel(): IndexQueryViewModel = IndexQueryViewModel(
         repository = object : IndexQueryRepository {

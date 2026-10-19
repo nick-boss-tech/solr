@@ -24,6 +24,8 @@ import org.apache.solr.ui.components.configsets.domain.LoadConfigsetsUseCase
 import org.apache.solr.ui.components.configsets.repository.ConfigsetsRepository
 import org.apache.solr.ui.components.configsets.viewmodel.ConfigsetsRouteViewModel
 import org.apache.solr.ui.components.configsets.viewmodel.ConfigsetsViewModel
+import org.apache.solr.ui.components.files.data.HttpConfigsetFilesRepository
+import org.apache.solr.ui.components.files.viewmodel.ConfigsetFilesViewModel
 import org.apache.solr.ui.components.indexquery.data.HttpIndexQueryRepository
 import org.apache.solr.ui.components.indexquery.viewmodel.IndexQueryViewModel
 import org.apache.solr.ui.utils.AppDispatchers
@@ -56,4 +58,7 @@ class DefaultConfigsetsComponent(
     override fun createConfigsetsOverviewComponent(): ConfigsetsOverviewComponent = DefaultConfigsetsOverviewComponent(configsetsRepository)
 
     override fun createIndexQueryViewModel(): IndexQueryViewModel = IndexQueryViewModel(HttpIndexQueryRepository(httpClient))
+
+    override fun createConfigsetFilesViewModel(): ConfigsetFilesViewModel =
+        ConfigsetFilesViewModel(HttpConfigsetFilesRepository(httpClient))
 }

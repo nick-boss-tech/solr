@@ -22,6 +22,9 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.v2.runComposeUiTest
+import org.apache.solr.ui.domain.FileTreeFile
+import org.apache.solr.ui.domain.FileTreeFolder
+import org.apache.solr.ui.domain.FileTreeNode
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
