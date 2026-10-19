@@ -10,3 +10,12 @@ Assignment: `assignments/pool-jira-newdev-small-round-1.md`. Base: apache/main c
 - No fail-before run: test-only change, no source change.
 - Observation, not changed: the lexical error message quotes the numeric code point (`'120' (120)`), not the character. Recorded in the draft as a maintainer question.
 
+## Item 3: SOLR-18123 (vm4), 2026-10-19T18:59:12Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Stopped, no branch. Scope is unclear: the ticket asks that test infrastructure stop imposing the allow-paths restriction by default. That is a change to the shared test base and affects many tests, and the ticket itself says isolation should be decided another way. The assignment says to record and stop when scope is unclear. Owner or maintainer decision needed on the test-infrastructure design.
+
+## Item 2: SOLR-17727 (vm4), claimed 2026-10-19T18:59:12Z
+
+Claim: `claims/pool-jira-newdev-small-round-1-solr-17727.md`. Work follows on branch `solr-17727-server-header`.
+
