@@ -9,3 +9,7 @@
 Heartbeat: 2026-10-19T20:45:00Z
 
 DONE: 2026-10-19. Deliverables: this claim file and the SOLR-14970 section in `reports/2026-10-19-jira-newdev/A-bugs-round-1.md`. No branch.
+
+## Owner decision (2026-10-19)
+
+- Owner decision for SOLR-14970 (row 3 of `assignments/pool-vm3-owner-decisions-round-1.md`): working as designed; no branch. Query-time IDs belong in a separate feature ticket.
