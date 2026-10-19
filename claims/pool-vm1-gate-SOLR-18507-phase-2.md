@@ -15,3 +15,7 @@ Heartbeat: 2026-10-19T05:20Z (tidy commit a36ca787d5b pushed; round 2 launching)
 Heartbeat: 2026-10-19T06:00Z (round 2 GATE FAILED at compile: missing LeafReader import; fix d55d4422de4 pushed; round 3 launching)
 
 Heartbeat: 2026-10-19T06:45Z (round 3 GATE FAILED at test compile: assertTrue argument order; fix 613a1b29fea pushed; round 4 launching)
+
+Result: round 5 GATE GREEN at 137e77a4c8 (2026-10-19): steps 0, 1, 2, 4, 5 rc=0; SolrCoreFingerprintCacheTest seed 18507A002 1 test, 0 failures (fresh XML g18507p2-head5-TEST.xml on vm1); receipt in receipts/SOLR-18507.md.
+
+DONE: 2026-10-19. Deliverable: receipts/SOLR-18507.md and gates/SOLR-18507-phase-2.md round 5 record.
