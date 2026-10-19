@@ -14,7 +14,7 @@ With timeAllowed set and a sort in a distributed query, a shard that returns a p
 
 - Fix commit: a72c993123 (2021-08-10), "SOLR-14758: Fix NPE in QueryComponent.mergeIds when using timeAllowed and sorting (#251)". `git merge-base --is-ancestor a72c993123 498a09aea97aac86c2cc7ac114113b946d249942` succeeds.
 - The commit changes solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java (the sort_values check in mergeIds), and adds a regression check to solr/core/src/test/org/apache/solr/handler/component/DistributedQueryComponentCustomSortTest.java.
-- Changed code present at the pin: QueryComponent.java:1180-1184 (in mergeIds), `sortFieldValues = SolrResponseUtil.getSubsectionFromShardResponse(rb, srsp, "sort_values", true)` followed by `if (null == sortFieldValues) { sortFieldValues = new NamedList<>(); }`. The null from a partial shard response is replaced by an empty list before the sort-values check, so the NPE path is closed. The surrounding code was refactored after the fix, but the null protection is still there.
+- Changed code present at the pin: QueryComponent.java:1178-1183 (in mergeIds), `sortFieldValues = SolrResponseUtil.getSubsectionFromShardResponse(rb, srsp, "sort_values", true)` followed by `if (null == sortFieldValues) { sortFieldValues = new NamedList<>(); }`. The null from a partial shard response is replaced by an empty list before the sort-values check, so the NPE path is closed. The surrounding code was refactored after the fix, but the null protection is still there.
 - Regression test present at the pin: DistributedQueryComponentCustomSortTest.java:240-251, "Regression check on timeAllowed in combination with sorting, SOLR-14758", which runs the distributed query with `timeAllowed` set to 1000 and a sort.
 
 ## Reproduction attempts
@@ -27,7 +27,7 @@ The ticket's symptom (NPE when timeAllowed is exceeded and the query sorts) is c
 
 ## Verdict justification
 
-close-fixed: the fix commit a72c993123 addresses the reported NPE, it is an ancestor of the pinned head, the changed null handling is present at QueryComponent.java:1180-1184, and the regression test is present at DistributedQueryComponentCustomSortTest.java:240-251. The earlier audit's claim is confirmed by these reads.
+close-fixed: the fix commit a72c993123 addresses the reported NPE, it is an ancestor of the pinned head, the changed null handling is present at QueryComponent.java:1178-1183, and the regression test is present at DistributedQueryComponentCustomSortTest.java:240-251. The earlier audit's claim is confirmed by these reads.
 
 ## Limits
 
