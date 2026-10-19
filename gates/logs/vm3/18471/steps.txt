@@ -1,0 +1,4 @@
+2026-10-19T05:26:44Z head e15bdfc3703f27bdd1c32ab068324be7b3469427
+2026-10-19T05:26:44Z step 0 changelog parse: valid (validator rc=0, SOLR-18471.yml listed valid)
+2026-10-19T05:29:54Z tidy rc=0
+2026-10-19T05:29:57Z GATE INVALID: tidy changed files (see tidy.patch)

@@ -1,0 +1,198 @@
+diff --git a/solr/core/src/java/org/apache/solr/metrics/otel/MetricExporterFactory.java b/solr/core/src/java/org/apache/solr/metrics/otel/MetricExporterFactory.java
+index 3e24edf7bc..024dfc480e 100644
+--- a/solr/core/src/java/org/apache/solr/metrics/otel/MetricExporterFactory.java
++++ b/solr/core/src/java/org/apache/solr/metrics/otel/MetricExporterFactory.java
+@@ -29,18 +29,15 @@ public interface MetricExporterFactory {
+ 
+   long OTLP_EXPORTER_TIMEOUT = OtelMetricsConfig.current().getExporterTimeout();
+ 
+-  String OTLP_EXPORTER_GRPC_ENDPOINT =
+-      OtelMetricsConfig.current().getGrpcEndpoint();
++  String OTLP_EXPORTER_GRPC_ENDPOINT = OtelMetricsConfig.current().getGrpcEndpoint();
+ 
+-  String OTLP_EXPORTER_HTTP_ENDPOINT =
+-      OtelMetricsConfig.current().getHttpEndpoint();
++  String OTLP_EXPORTER_HTTP_ENDPOINT = OtelMetricsConfig.current().getHttpEndpoint();
+ 
+   String OTLP_EXPORTER_COMPRESSION = OtelMetricsConfig.current().getCompression();
+ 
+   String OTLP_EXPORTER_CERTIFICATE = OtelMetricsConfig.current().getCertificatePath();
+ 
+-  String OTLP_EXPORTER_CLIENT_CERTIFICATE =
+-      OtelMetricsConfig.current().getClientCertificatePath();
++  String OTLP_EXPORTER_CLIENT_CERTIFICATE = OtelMetricsConfig.current().getClientCertificatePath();
+ 
+   String OTLP_EXPORTER_CLIENT_KEY = OtelMetricsConfig.current().getClientKeyPath();
+ 
+diff --git a/solr/core/src/java/org/apache/solr/metrics/otel/OtelMetricsConfig.java b/solr/core/src/java/org/apache/solr/metrics/otel/OtelMetricsConfig.java
+index 354f99c8ea..827cc70f67 100644
+--- a/solr/core/src/java/org/apache/solr/metrics/otel/OtelMetricsConfig.java
++++ b/solr/core/src/java/org/apache/solr/metrics/otel/OtelMetricsConfig.java
+@@ -107,8 +107,7 @@ final class OtelMetricsConfig {
+ 
+   Map<String, String> getHeaders() {
+     String headers =
+-        firstNonBlank(
+-            get("OTEL_EXPORTER_OTLP_METRICS_HEADERS"), get("OTEL_EXPORTER_OTLP_HEADERS"));
++        firstNonBlank(get("OTEL_EXPORTER_OTLP_METRICS_HEADERS"), get("OTEL_EXPORTER_OTLP_HEADERS"));
+     return parseHeaders(headers);
+   }
+ 
+diff --git a/solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtelTracerConfigurator.java b/solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtelTracerConfigurator.java
+index a11f6e7f1b..b8338da213 100644
+--- a/solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtelTracerConfigurator.java
++++ b/solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtelTracerConfigurator.java
+@@ -91,8 +91,7 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
+         .map(String::trim)
+         .filter(exporter -> !exporter.isEmpty())
+         .anyMatch(
+-            exporter ->
+-                !"otlp".equalsIgnoreCase(exporter) && !"none".equalsIgnoreCase(exporter));
++            exporter -> !"otlp".equalsIgnoreCase(exporter) && !"none".equalsIgnoreCase(exporter));
+   }
+ 
+   /**
+@@ -170,9 +169,7 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
+       int userInfoEnd = value.lastIndexOf('@', authorityEnd - 1);
+       if (userInfoEnd >= authorityStart) {
+         value =
+-            value.substring(0, authorityStart)
+-                + "<redacted>@"
+-                + value.substring(userInfoEnd + 1);
++            value.substring(0, authorityStart) + "<redacted>@" + value.substring(userInfoEnd + 1);
+       }
+     }
+ 
+diff --git a/solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtlpExporterFactory.java b/solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtlpExporterFactory.java
+index e80304d841..d46b287d71 100644
+--- a/solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtlpExporterFactory.java
++++ b/solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtlpExporterFactory.java
+@@ -92,8 +92,7 @@ public class OtlpExporterFactory implements MetricExporterFactory {
+ 
+   private MetricExporter createHttpExporter() {
+     var builder =
+-        OtlpHttpMetricExporter.getDefault()
+-            .toBuilder()
++        OtlpHttpMetricExporter.getDefault().toBuilder()
+             .setEndpoint(settings.httpEndpoint())
+             .setTimeout(settings.timeoutMillis(), MILLISECONDS);
+     configure(builder);
+@@ -102,8 +101,7 @@ public class OtlpExporterFactory implements MetricExporterFactory {
+ 
+   private MetricExporter createGrpcExporter() {
+     var builder =
+-        OtlpGrpcMetricExporter.getDefault()
+-            .toBuilder()
++        OtlpGrpcMetricExporter.getDefault().toBuilder()
+             .setEndpoint(settings.grpcEndpoint())
+             .setTimeout(settings.timeoutMillis(), MILLISECONDS);
+     configure(builder);
+diff --git a/solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java b/solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java
+index 55df75bb7c..9991f3d59d 100644
+--- a/solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java
++++ b/solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java
+@@ -82,8 +82,7 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
+ 
+   @Test
+   public void testExporterListRecognizesOtlpAfterTrimmingAndCaseNormalization() {
+-    Object config =
+-        configOrSkip(Map.of("OTEL_METRICS_EXPORTER", "prometheus, OTLP"), Map.of());
++    Object config = configOrSkip(Map.of("OTEL_METRICS_EXPORTER", "prometheus, OTLP"), Map.of());
+ 
+     assertTrue((Boolean) invoke(config, "isExporterEnabled"));
+   }
+@@ -127,10 +126,14 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
+         configOrSkip(
+             Map.of(),
+             Map.of(
+-                "solr.metrics.otlpExporterEnabled", "true",
+-                "solr.metrics.otlp.exporter.protocol", "http",
+-                "solr.metrics.otlpExporterInterval", "4321",
+-                "solr.metrics.otlpGrpcExporterEndpoint", "http://legacy.example:4317",
++                "solr.metrics.otlpExporterEnabled",
++                "true",
++                "solr.metrics.otlp.exporter.protocol",
++                "http",
++                "solr.metrics.otlpExporterInterval",
++                "4321",
++                "solr.metrics.otlpGrpcExporterEndpoint",
++                "http://legacy.example:4317",
+                 "solr.metrics.otlp.http.exporter.endpoint",
+                 "http://legacy.example:4318/v1/metrics"));
+ 
+@@ -202,8 +205,7 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
+ 
+   @Test
+   public void testInvalidIntervalUsesDefaultWhenNoLegacyValueExists() {
+-    Object config =
+-        configOrSkip(Map.of("OTEL_METRIC_EXPORT_INTERVAL", "0"), Map.of());
++    Object config = configOrSkip(Map.of("OTEL_METRIC_EXPORT_INTERVAL", "0"), Map.of());
+ 
+     assertEquals(Integer.valueOf(60000), invoke(config, "getExportInterval"));
+   }
+@@ -310,10 +312,8 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
+     Resource resource = (Resource) invoke(config, "getResource");
+ 
+     assertEquals(
+-        "prod blue",
+-        resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
+-    assertEquals(
+-        "solr-node", resource.getAttribute(AttributeKey.stringKey("service.name")));
++        "prod blue", resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
++    assertEquals("solr-node", resource.getAttribute(AttributeKey.stringKey("service.name")));
+   }
+ 
+   private Object configOrSkip(Map<String, String> environment, Map<String, String> properties) {
+diff --git a/solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/OtelTracerConfiguratorTest.java b/solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/OtelTracerConfiguratorTest.java
+index c6a4984dbc..816651da64 100644
+--- a/solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/OtelTracerConfiguratorTest.java
++++ b/solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/OtelTracerConfiguratorTest.java
+@@ -86,8 +86,7 @@ public class OtelTracerConfiguratorTest extends SolrTestCaseJ4 {
+     args.add("OTEL_EXPORTER_OTLP_HEADERS", secret);
+     try {
+       try (LogListener listener =
+-          LogListener.debug(OtelTracerConfigurator.class)
+-              .substring("otel.exporter.otlp.headers")) {
++          LogListener.debug(OtelTracerConfigurator.class).substring("otel.exporter.otlp.headers")) {
+         configurator.prepareConfiguration(args);
+ 
+         String message = listener.pollMessage();
+diff --git a/solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/TestOtelMetricExporterConfiguration.java b/solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/TestOtelMetricExporterConfiguration.java
+index 57547d0e56..1942340895 100644
+--- a/solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/TestOtelMetricExporterConfiguration.java
++++ b/solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/TestOtelMetricExporterConfiguration.java
+@@ -101,11 +101,8 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
+     Resource resource =
+         (Resource) MetricExporterFactory.class.getMethod("currentResource").invoke(null);
+ 
+-    assertEquals(
+-        "search",
+-        resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
+-    assertEquals(
+-        "solr-metrics", resource.getAttribute(AttributeKey.stringKey("service.name")));
++    assertEquals("search", resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
++    assertEquals("solr-metrics", resource.getAttribute(AttributeKey.stringKey("service.name")));
+   }
+ 
+   @Test
+@@ -226,9 +223,7 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
+                   null,
+                   null);
+       Object factory =
+-          OtlpExporterFactory.class
+-              .getDeclaredConstructor(settingsClass)
+-              .newInstance(settings);
++          OtlpExporterFactory.class.getDeclaredConstructor(settingsClass).newInstance(settings);
+       return (MetricExporter) factory.getClass().getMethod("getExporter").invoke(factory);
+     } catch (ReflectiveOperationException e) {
+       throw new AssertionError("Could not create an OTLP exporter with configured headers", e);
+@@ -318,8 +313,7 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
+     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_METRICS_HEADERS=<redacted>"));
+     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_API_KEY=<redacted>"));
+     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CLIENT_KEY=<redacted>"));
+-    assertTrue(
+-        loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE=<redacted>"));
++    assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE=<redacted>"));
+     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CERTIFICATE=<redacted>"));
+     assertFalse(loggedConfiguration.contains(envSecret));
+     assertFalse(loggedConfiguration.contains(propertySecret));

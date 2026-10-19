@@ -1,0 +1,7 @@
+ M solr/core/src/java/org/apache/solr/metrics/otel/MetricExporterFactory.java
+ M solr/core/src/java/org/apache/solr/metrics/otel/OtelMetricsConfig.java
+ M solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtelTracerConfigurator.java
+ M solr/modules/opentelemetry/src/java/org/apache/solr/opentelemetry/OtlpExporterFactory.java
+ M solr/modules/opentelemetry/src/test/org/apache/solr/metrics/otel/TestOtelMetricsConfig.java
+ M solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/OtelTracerConfiguratorTest.java
+ M solr/modules/opentelemetry/src/test/org/apache/solr/opentelemetry/TestOtelMetricExporterConfiguration.java
