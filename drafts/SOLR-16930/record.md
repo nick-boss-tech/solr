@@ -1,41 +1,42 @@
 # Skip record: SOLR-16930
 
-- Ticket: SOLR-16930, "schema short class name support can use factories w/different names then specified name". JIRA status Open, resolution none, created 2023-08-11, last updated 2023-10-15, checked 2026-10-19 UTC.
-- Verdict: keep-open.
+- Ticket: SOLR-16930, "schema short class name support can use factories w/different names then specified name". JIRA status read 2026-10-19 (UTC): Open, resolution none, created 2023-08-11, updated 2023-10-15, no fix version. One comment, from hossman (2023-08-11), listing SPI names in Lucene 9x that more than one factory class uses.
+- Verdict: keep-open. Unchanged from the earlier keep-open verdict; the earlier vm5 closeout (DONE, pre-remediation) is not reused.
 - Draft branch: solr-16930-draft-open.
-- Pinned head: fork origin/main `498a09aea97aac86c2cc7ac114113b946d249942`.
-- Checked by: vm5, 2026-10-19 UTC.
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (2026-10-07). Upstream sha not cited.
+- Checked by: vm4, 2026-10-19 14:32-14:32 UTC.
 
 ## Ticket reading
 
-A field type declares `solr.EdgeNGramTokenizerFactory` as a `TokenFilter` in its index analyzer. The reporter expected a failure (the class is a tokenizer, not a filter) but the schema loads and the field gets an `EdgeNGramTokenFilter`. The reporter suspects that the short-name lookup takes the name and ignores the kind. Comment: hossman (2023-08-11) lists the SPI names in Lucene's branch_9x that are used by more than one factory kind.
+A schema in the wild declares `<filter class="solr.EdgeNGramTokenizerFactory" .../>` in a filter position. The short-name lookup for `solr.<Name>` accepts a factory of the wrong kind, and the reporter argues the lookup should be stricter or the naming should be consistent. The only comment lists SPI names in Lucene that are used by more than one class, which is the root of the leniency. The ticket asks for a spec direction; the reporter (a maintainer) is unsure it is worth fixing.
 
-## Code reading (at `498a09aea97aac86c2cc7ac114113b946d249942`)
+## Code reading
 
-- `solr/core/src/java/org/apache/solr/core/SolrResourceLoader.java:466-470`: `legacyAnalysisPattern` is `((solr\.|<base>.analysis.)) ([A-Za-z_][A-Za-z0-9_]+?)(TokenFilter|Filter|Tokenizer|CharFilter)Factory`. Group 4 is the name; group 5 is the kind suffix.
-- `SolrResourceLoader.java:515-526`: when the cname matches the pattern, the lookup uses only group 4 and the expected type: `CharFilterFactory.lookupClass(name)`, `TokenizerFactory.lookupClass(name)`, or `TokenFilterFactory.lookupClass(name)`, chosen by `expectedType`. Group 5 (the kind written in the config) is not compared with `expectedType`.
-- For `solr.EdgeNGramTokenizerFactory` with expected type `TokenFilterFactory`, group 4 is `EdgeNGram` and group 5 is `Tokenizer`. The lookup becomes `TokenFilterFactory.lookupClass("EdgeNGram")`, which resolves to the Lucene token filter. That is the reported behavior.
-- The shim returns the class on success; on `IllegalArgumentException` it falls back to the legacy path.
+- `solr/core/src/java/org/apache/solr/schema/FieldTypePluginLoader.java:255`: char filters go through `CharFilterFactory.forName(name, params)`.
+- `FieldTypePluginLoader.java:319`: tokenizers go through `TokenizerFactory.forName(name, params)`. Token filters use the same pattern through Lucene's `TokenFilterFactory`.
+- The short-name resolution itself (`forName`, and the SPI name lookup behind it) is in Lucene, not in this repository. Solr delegates to it.
 
-So the mismatch is accepted by design of the shim at this head. The code does not check that the kind in the config name matches the expected factory kind.
+What this shows at the pin: Solr does not implement the cross-kind lookup. The leniency the ticket describes comes from Lucene's SPI resolution, which Solr calls. A fix would be in Lucene's naming or lookup, or in Solr's schema loader if it wanted to validate the kind of factory it gets back.
 
 ## History
 
-- `c99af207c7` (2022-03-04, SOLR-14920, formatting only) and `d172b2c7ae` (2021-12-05, SOLR-15826, simplification) are the recent changes to `findClass`. The pattern and lookup logic predate them (`515608a087`, 2020-09-17, SOLR-14151, classloading fix).
-- No commit on the fork names SOLR-16930 (empty `git log --grep`).
+- No commit on the pinned head names SOLR-16930 (evidence tool: no hits).
+- The hossman comment's list of duplicate SPI names is from Lucene 9x (2023-08-11). Not re-checked at the pin, because the list is in Lucene.
 
 ## Reproduction attempts
 
-Not attempted. The mechanism is shown by the pattern and the lookup at the lines above. A run that would show it on main is a schema with the tokenizer name in a filter position, loaded and inspected through the analysis request handler, which the reporter already did. The missing piece is the decision below, not a reproduction.
+Not attempted. A reproduction would show that the schema loads with a mismatched factory, which the ticket already describes. Whether that should be an error is the open question, and a run does not answer it. This pass is review-only.
 
 ## Gap analysis
 
-The shim accepts a wrong-kind name because it never compares group 5 with the expected type. Changing that (rejecting the mismatch, or only allowing the matching kind) would make configs that currently load fail to load. Configs that rely on the leniency exist in the wild (the reporter found one). Whether to break them is a compatibility decision for the maintainers, not a code-path question. The ticket's own comments say the maintainers are unsure it is worth fixing.
+The behavior is a design question: whether a schema should be allowed to name a factory of another kind, and whether that is a defect or a permitted fallback. The ticket asks for that direction, and the code path is in Lucene. Without a decision, neither a close nor a PR has a defined correct behavior to implement.
+
+Missing piece for a verdict change: a decision from the maintainers on whether cross-kind names should be rejected (a Lucene and Solr change) or accepted (close, with a docs note). With that decision, the record can name the change to make or close the ticket.
 
 ## Verdict justification
 
-keep-open: the mechanism is shown with file and line at the pinned head, and the missing piece is the compatibility decision (reject the mismatch, which may break existing schemas, or keep the leniency and document it). pr-needed needs that decision made; it is not made by the code or the ticket. close-answered and close-fixed do not apply: the question is not answered by the docs, and nothing is fixed. The keep-open minimum is met.
+keep-open meets the rubric: the code path is read (`FieldTypePluginLoader.java:255, 319`), the mechanism is traced to Lucene's SPI lookup, and the missing piece is named (the spec direction). close-answered is not met: the docs do not settle the question. pr-needed is not met: no correct behavior is defined in the ticket or the code.
 
 ## Limits
 
-This record does not check every factory name that the Lucene SPI maps to more than one kind. It does not check existing schemas in the wild. It does not change behavior.
+This record does not reproduce the schema behavior, does not inspect Lucene's SPI code, and does not decide the design question. It does not post anything to JIRA or GitHub.
