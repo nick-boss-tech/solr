@@ -2,6 +2,10 @@
 
 This page is the order of operations for any agent that posts assignments or gate jobs, or claims them, on this branch. The rules are in [WORKFLOW.md](../WORKFLOW.md). The roles are in [material/coordinator-handoff.md](../material/coordinator-handoff.md). The templates are in [pool/templates/](templates/). The overnight tick job is [pool/cron-prompt.md](cron-prompt.md) (not a file called prompt.md); read it with `git show origin/coordination:pool/cron-prompt.md` if your worktree does not have it.
 
+## Read the owner's complaints first
+
+Before claiming any work, read [`pool/owner-complaints-2026-10-19.md`](owner-complaints-2026-10-19.md). It is the owner's current list of what is going wrong on this branch and what he expects instead, and it outranks habit: if your next claim would repeat something complained about there, take different work. Closeouts that answer a complaint say so and name its number.
+
 ## Two rules that cause most failures
 
 1. A handoff is a file on this branch. If it has no path on `coordination`, no other agent can see it. Chat messages and local notes are not handoffs.
