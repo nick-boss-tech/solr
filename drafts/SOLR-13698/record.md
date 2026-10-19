@@ -12,7 +12,7 @@ With an alias that points to six collections, a /suggest request fails on 8.x: t
 
 ## Code reading and grep at the pinned head
 
-- solr/core/src/java/org/apache/solr/handler/component/SuggestComponent.java:217-229, `distributedProcess`: the first stage clears `shards` on the shard request (:227-230 region) and queues one request per shard with `PURPOSE_GET_TOP_IDS`. That is the distributed suggest path.
+- solr/core/src/java/org/apache/solr/handler/component/SuggestComponent.java:217-229, `distributedProcess`: the first stage clears `shards` on the shard request (:226) and queues one request per shard with `PURPOSE_GET_TOP_IDS`. That is the distributed suggest path.
 - solr/core/src/java/org/apache/solr/servlet/HttpSolrCall.java:763, `addCollectionParamIfNeeded(List<String> collections)`, called from :318: this is where the collection list of an alias is turned into a collection parameter. Whether it handles a multi-collection alias for suggest was not traced beyond the call.
 - `git grep -l -i "suggest" 498a09aea97aac86c2cc7ac114113b946d249942 -- solr/core/src/test/*` returns 34 test files. None of them mentions an alias (checked by reading each file for "alias"; count 0).
 
