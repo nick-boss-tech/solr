@@ -1,0 +1,3 @@
+We looked at this against the current main branch (498a09aea97a). Each core schedules its own autoCommit timer from the time of its first update (solr/core/src/java/org/apache/solr/update/CommitTracker.java, around lines 136 to 165), so commit times across shards depend on when each core gets traffic. The timer is local to the core and there is no shared clock or alignment step.
+
+Aligning commit times to a common anchor would be a change to how autoCommit is scheduled, and the second comment raises a related question about how this interacts with queries that go to leaders only or to NRT replicas. Whether the project wants this behavior is a design question that is not settled on this ticket, so we are leaving it open until that is decided.
