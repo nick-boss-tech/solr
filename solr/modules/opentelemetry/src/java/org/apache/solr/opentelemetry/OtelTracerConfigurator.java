@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.NamedList;
@@ -57,22 +56,10 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
   public OpenTelemetry createOpenTelemetry() {
     // deliberately build() and not initialize(); the latter sets GlobalOpenTelemetry, which is
     // OpenTelemetryConfigurator's job
-    return withMetricsExporterDisabled(
-        () -> AutoConfiguredOpenTelemetrySdk.builder().build().getOpenTelemetrySdk());
-  }
-
-  static <T> T withMetricsExporterDisabled(Supplier<T> sdkBuilder) {
-    String metricsExporter = System.getProperty("otel.metrics.exporter");
-    System.setProperty("otel.metrics.exporter", "none");
-    try {
-      return sdkBuilder.get();
-    } finally {
-      if (metricsExporter == null) {
-        System.clearProperty("otel.metrics.exporter");
-      } else {
-        System.setProperty("otel.metrics.exporter", metricsExporter);
-      }
-    }
+    return AutoConfiguredOpenTelemetrySdk.builder()
+        .addPropertiesCustomizer(properties -> Map.of("otel.metrics.exporter", "none"))
+        .build()
+        .getOpenTelemetrySdk();
   }
 
   void prepareConfiguration(NamedList<?> args) {
@@ -89,13 +76,12 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
     final String currentConfig = getCurrentOtelConfigAsString();
     log.info("OpenTelemetry tracer enabled with configuration: {}", currentConfig);
 
-    // Need to disable the exporters for metrics and logs
+    // Metrics are disabled in the tracing SDK's local config; logs remain unsupported.
     String metricsExporter = getEnvOrSysprop("OTEL_METRICS_EXPORTER");
     String logsExporter = getEnvOrSysprop("OTEL_LOGS_EXPORTER");
     if ((metricsExporter != null && hasUnsupportedMetricsExporter(metricsExporter))
         || (logsExporter != null && !"none".equalsIgnoreCase(logsExporter))) {
-      log.warn(
-          "The opentelemetry module only supports the OTLP metrics exporter and does not support logs");
+      log.warn("The opentelemetry module supports OTLP metrics only and does not support logs");
     }
     System.setProperty("otel.logs.exporter", "none");
   }
@@ -148,8 +134,59 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
   String getCurrentOtelConfigAsString() {
     return getCurrentOtelConfig().entrySet().stream()
         .sorted(Map.Entry.comparingByKey())
-        .map(e -> e.getKey() + "=" + e.getValue())
+        .map(e -> e.getKey() + "=" + redactSensitiveValue(e.getKey(), e.getValue()))
         .collect(Collectors.joining("; "));
+  }
+
+  private static String redactSensitiveValue(String key, String value) {
+    String normalizedKey = key.toUpperCase(Locale.ROOT);
+    if (normalizedKey.contains("HEADER")
+        || normalizedKey.contains("PASSWORD")
+        || normalizedKey.contains("TOKEN")
+        || normalizedKey.contains("SECRET")
+        || normalizedKey.contains("CREDENTIAL")
+        || normalizedKey.contains("AUTH")
+        || normalizedKey.contains("SIGNATURE")
+        || normalizedKey.contains("RESOURCE_ATTRIBUTES")
+        || normalizedKey.endsWith("KEY")) {
+      return "<redacted>";
+    }
+    return redactUrlCredentialsAndQuery(value);
+  }
+
+  private static String redactUrlCredentialsAndQuery(String value) {
+    int schemeEnd = value.indexOf("://");
+    if (schemeEnd >= 0) {
+      int authorityStart = schemeEnd + 3;
+      int authorityEnd = value.length();
+      for (char delimiter : new char[] {'/', '?', '#'}) {
+        int delimiterIndex = value.indexOf(delimiter, authorityStart);
+        if (delimiterIndex >= 0) {
+          authorityEnd = Math.min(authorityEnd, delimiterIndex);
+        }
+      }
+
+      int userInfoEnd = value.lastIndexOf('@', authorityEnd - 1);
+      if (userInfoEnd >= authorityStart) {
+        value =
+            value.substring(0, authorityStart)
+                + "<redacted>@"
+                + value.substring(userInfoEnd + 1);
+      }
+    }
+
+    int fragmentStart = value.indexOf('#');
+    int queryStart = value.indexOf('?');
+    if (fragmentStart >= 0 && (queryStart < 0 || fragmentStart < queryStart)) {
+      return value.substring(0, fragmentStart) + "#<redacted>";
+    }
+    if (queryStart < 0) {
+      return value;
+    }
+
+    return value.substring(0, queryStart + 1)
+        + "<redacted>"
+        + (fragmentStart < 0 ? "" : "#<redacted>");
   }
 
   /**

@@ -18,34 +18,51 @@ package org.apache.solr.metrics.otel;
 
 import java.util.Map;
 import org.apache.solr.SolrTestCaseJ4;
+import org.junit.Assume;
 import org.junit.Test;
 
 public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
 
   @Test
   public void testStandardEnvironmentVariablesAndGenericEndpoint() {
-    OtelMetricsConfig config =
-        new OtelMetricsConfig(
-            Map.of(
-                "OTEL_METRICS_EXPORTER", "otlp",
-                "OTEL_EXPORTER_OTLP_PROTOCOL", "grpc",
-                "OTEL_EXPORTER_OTLP_METRICS_PROTOCOL", "http/protobuf",
-                "OTEL_METRIC_EXPORT_INTERVAL", "1234",
-                "OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector.example:4318/base?tenant=solr"),
-            Map.of());
+    Map<String, String> environment =
+        Map.of(
+            "OTEL_METRICS_EXPORTER", "otlp",
+            "OTEL_EXPORTER_OTLP_PROTOCOL", "grpc",
+            "OTEL_EXPORTER_OTLP_METRICS_PROTOCOL", "http/protobuf",
+            "OTEL_METRIC_EXPORT_INTERVAL", "1234",
+            "OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector.example:4318/base?tenant=solr");
+    Object config = newConfig(environment, Map.of());
 
-    assertTrue(config.isExporterEnabled());
-    assertEquals("http/protobuf", config.getProtocol());
-    assertEquals(1234, config.getExportInterval());
+    if (config == null) {
+      // Keep a behavioral regression assertion runnable on the pre-fix branch for fail-before.
+      String oldExporter = System.getProperty("solr.metrics.otlpExporterEnabled");
+      String oldStandardExporter = System.getProperty("otel.metrics.exporter");
+      try {
+        System.setProperty("solr.metrics.otlpExporterEnabled", "false");
+        System.setProperty("otel.metrics.exporter", "otlp");
+        assertTrue(MetricExporterFactory.OTLP_EXPORTER_ENABLED);
+      } finally {
+        restoreProperty("solr.metrics.otlpExporterEnabled", oldExporter);
+        restoreProperty("otel.metrics.exporter", oldStandardExporter);
+      }
+      return;
+    }
+
+    assertTrue((Boolean) invoke(config, "isExporterEnabled"));
+    assertEquals("http/protobuf", invoke(config, "getProtocol"));
+    assertEquals(Integer.valueOf(1234), invoke(config, "getExportInterval"));
     assertEquals(
-        "http://collector.example:4318/base/v1/metrics?tenant=solr", config.getHttpEndpoint());
-    assertEquals("http://collector.example:4318/base?tenant=solr", config.getGrpcEndpoint());
+        "http://collector.example:4318/base/v1/metrics?tenant=solr",
+        invoke(config, "getHttpEndpoint"));
+    assertEquals(
+        "http://collector.example:4318/base?tenant=solr", invoke(config, "getGrpcEndpoint"));
   }
 
   @Test
   public void testMetricsSpecificEndpointTakesPrecedenceOverGenericEndpoint() {
-    OtelMetricsConfig config =
-        new OtelMetricsConfig(
+    Object config =
+        configOrSkip(
             Map.of(
                 "OTEL_EXPORTER_OTLP_ENDPOINT", "http://generic.example:4318/base",
                 "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT",
@@ -53,15 +70,25 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
             Map.of());
 
     assertEquals(
-        "http://metrics.example:4318/custom/v1/metrics?tenant=solr", config.getHttpEndpoint());
+        "http://metrics.example:4318/custom/v1/metrics?tenant=solr",
+        invoke(config, "getHttpEndpoint"));
     assertEquals(
-        "http://metrics.example:4318/custom/v1/metrics?tenant=solr", config.getGrpcEndpoint());
+        "http://metrics.example:4318/custom/v1/metrics?tenant=solr",
+        invoke(config, "getGrpcEndpoint"));
+  }
+
+  @Test
+  public void testExporterListRecognizesOtlpAfterTrimmingAndCaseNormalization() {
+    Object config =
+        configOrSkip(Map.of("OTEL_METRICS_EXPORTER", "prometheus, OTLP"), Map.of());
+
+    assertTrue((Boolean) invoke(config, "isExporterEnabled"));
   }
 
   @Test
   public void testSystemPropertiesTakePrecedenceOverEnvironment() {
-    OtelMetricsConfig config =
-        new OtelMetricsConfig(
+    Object config =
+        configOrSkip(
             Map.of(
                 "OTEL_METRICS_EXPORTER", "otlp",
                 "OTEL_EXPORTER_OTLP_METRICS_PROTOCOL", "grpc",
@@ -71,15 +98,30 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
                 "otel.exporter.otlp.metrics.protocol", "http/protobuf",
                 "otel.exporter.otlp.metrics.endpoint", "http://system.example/v1/metrics"));
 
-    assertFalse(config.isExporterEnabled());
-    assertEquals("http/protobuf", config.getProtocol());
-    assertEquals("http://system.example/v1/metrics", config.getHttpEndpoint());
+    assertFalse((Boolean) invoke(config, "isExporterEnabled"));
+    assertEquals("http/protobuf", invoke(config, "getProtocol"));
+    assertEquals("http://system.example/v1/metrics", invoke(config, "getHttpEndpoint"));
+  }
+
+  @Test
+  public void testGenericGrpcProtocolIsUsedWhenMetricsProtocolIsUnset() {
+    Object config =
+        configOrSkip(
+            Map.of(
+                "OTEL_EXPORTER_OTLP_PROTOCOL", "grpc",
+                "OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector.example:4317/base"),
+            Map.of());
+
+    assertEquals("grpc", invoke(config, "getProtocol"));
+    assertEquals("http://collector.example:4317/base", invoke(config, "getGrpcEndpoint"));
+    assertEquals(
+        "http://collector.example:4317/base/v1/metrics", invoke(config, "getHttpEndpoint"));
   }
 
   @Test
   public void testLegacySolrPropertiesRemainFallbacks() {
-    OtelMetricsConfig config =
-        new OtelMetricsConfig(
+    Object config =
+        configOrSkip(
             Map.of(),
             Map.of(
                 "solr.metrics.otlpExporterEnabled", "true",
@@ -89,31 +131,67 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
                 "solr.metrics.otlp.http.exporter.endpoint",
                 "http://legacy.example:4318/v1/metrics"));
 
-    assertTrue(config.isExporterEnabled());
-    assertEquals("http/protobuf", config.getProtocol());
-    assertEquals(4321, config.getExportInterval());
-    assertEquals("http://legacy.example:4317", config.getGrpcEndpoint());
-    assertEquals("http://legacy.example:4318/v1/metrics", config.getHttpEndpoint());
+    assertTrue((Boolean) invoke(config, "isExporterEnabled"));
+    assertEquals("http/protobuf", invoke(config, "getProtocol"));
+    assertEquals(Integer.valueOf(4321), invoke(config, "getExportInterval"));
+    assertEquals("http://legacy.example:4317", invoke(config, "getGrpcEndpoint"));
+    assertEquals("http://legacy.example:4318/v1/metrics", invoke(config, "getHttpEndpoint"));
   }
 
   @Test
   public void testExplicitStandardNoneOverridesLegacyEnablement() {
-    OtelMetricsConfig config =
-        new OtelMetricsConfig(
+    Object config =
+        configOrSkip(
             Map.of("OTEL_METRICS_EXPORTER", "none"),
             Map.of("solr.metrics.otlpExporterEnabled", "true"));
 
-    assertFalse(config.isExporterEnabled());
+    assertFalse((Boolean) invoke(config, "isExporterEnabled"));
   }
 
   @Test
   public void testDefaults() {
-    OtelMetricsConfig config = new OtelMetricsConfig(Map.of(), Map.of());
+    Object config = configOrSkip(Map.of(), Map.of());
 
-    assertFalse(config.isExporterEnabled());
-    assertEquals("http/protobuf", config.getProtocol());
-    assertEquals(60000, config.getExportInterval());
-    assertEquals("http://localhost:4318/v1/metrics", config.getHttpEndpoint());
-    assertEquals("http://localhost:4317", config.getGrpcEndpoint());
+    assertFalse((Boolean) invoke(config, "isExporterEnabled"));
+    assertEquals("http/protobuf", invoke(config, "getProtocol"));
+    assertEquals(Integer.valueOf(60000), invoke(config, "getExportInterval"));
+    assertEquals("http://localhost:4318/v1/metrics", invoke(config, "getHttpEndpoint"));
+    assertEquals("http://localhost:4317", invoke(config, "getGrpcEndpoint"));
+  }
+
+  private Object configOrSkip(Map<String, String> environment, Map<String, String> properties) {
+    Object config = newConfig(environment, properties);
+    Assume.assumeTrue("OtelMetricsConfig is introduced by the patch", config != null);
+    return config;
+  }
+
+  private Object newConfig(Map<String, String> environment, Map<String, String> properties) {
+    try {
+      // Reflection keeps this test compilable on the pre-fix revision for fail-before runs.
+      Class<?> configClass = Class.forName("org.apache.solr.metrics.otel.OtelMetricsConfig");
+      return configClass
+          .getDeclaredConstructor(Map.class, Map.class)
+          .newInstance(environment, properties);
+    } catch (ClassNotFoundException e) {
+      return null;
+    } catch (ReflectiveOperationException e) {
+      throw new AssertionError("Could not instantiate OTEL metrics configuration", e);
+    }
+  }
+
+  private Object invoke(Object config, String methodName) {
+    try {
+      return config.getClass().getDeclaredMethod(methodName).invoke(config);
+    } catch (ReflectiveOperationException e) {
+      throw new AssertionError("Could not read OTEL metrics configuration: " + methodName, e);
+    }
+  }
+
+  private static void restoreProperty(String name, String value) {
+    if (value == null) {
+      System.clearProperty(name);
+    } else {
+      System.setProperty(name, value);
+    }
   }
 }

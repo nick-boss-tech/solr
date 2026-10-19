@@ -31,13 +31,18 @@ final class OtelMetricsConfig {
   private final Map<String, String> environment;
   private final Map<String, String> systemProperties;
 
+  private static final class CurrentConfigHolder {
+    private static final OtelMetricsConfig INSTANCE =
+        new OtelMetricsConfig(System.getenv(), EnvUtils.getProperties());
+  }
+
   OtelMetricsConfig(Map<String, String> environment, Map<String, String> systemProperties) {
     this.environment = environment;
     this.systemProperties = systemProperties;
   }
 
   static OtelMetricsConfig current() {
-    return new OtelMetricsConfig(System.getenv(), EnvUtils.getProperties());
+    return CurrentConfigHolder.INSTANCE;
   }
 
   boolean isExporterEnabled() {

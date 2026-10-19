@@ -1,4 +1,4 @@
-title: Use standard OTEL configuration for metrics export
+title: Use standard OTEL metrics configuration and redact secrets from logs
 type: changed
 authors:
   - name: Nick Shanin

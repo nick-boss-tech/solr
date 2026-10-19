@@ -35,7 +35,7 @@ Solr builds and owns the meter providers these come from -- it has to, so that t
 Only tracing goes through `GlobalOpenTelemetry`.
 A Java agent therefore takes over tracing but not Solr's metrics, which keep their own configuration and exporter either way.
 
-NOTE: While it builds the tracing SDK, the `opentelemetry` module temporarily turns that SDK's metrics exporter off to avoid a duplicate metrics pipeline. It restores the original setting after the SDK is built, so `OTEL_METRICS_EXPORTER=otlp` configures Solr's separate metrics exporter. Log exporters remain unsupported; a non-`none` `OTEL_LOGS_EXPORTER` value logs a warning.
+NOTE: While it builds the tracing SDK, the `opentelemetry` module disables metrics export in that SDK's configuration to avoid a duplicate metrics pipeline. This does not change the process-wide `OTEL_METRICS_EXPORTER` setting, so `OTEL_METRICS_EXPORTER=otlp` remains available to Solr's separate metrics exporter. Log exporters remain unsupported; a non-`none` `OTEL_LOGS_EXPORTER` value logs a warning.
 
 == Integration Options
 
