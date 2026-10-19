@@ -1,0 +1,3 @@
+We looked at this against the current main branch (498a09aea97a). Stats on multi-valued fields now go through DocValuesStats (solr/core/src/java/org/apache/solr/handler/component/StatsField.java, around line 439). Single-valued fields still use a per-segment value source (the same file, around lines 441 and 462 to 475), so the stats path no longer builds a top-level FieldCache entry, but per-segment FieldCache entries are still used for those fields.
+
+We have not measured whether memory still doubles when the same single-valued field is also used for sorting or in a function query. We are leaving this open until someone measures that on a current release.
