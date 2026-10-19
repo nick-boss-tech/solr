@@ -1947,7 +1947,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Maintainer feature proposal to split v2 /node/logging by verb."
-    }
+    },
+    "verdict": "pr-needed",
+    "draft_branch": "solr-15823-draft-pr",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15805",
