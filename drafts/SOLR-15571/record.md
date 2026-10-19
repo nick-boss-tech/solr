@@ -13,10 +13,10 @@ The reporter queries `canonical_type:" " AND Collaborator_ss:" "` in the standar
 ## Code reading
 
 - `solr/core/src/java/org/apache/solr/handler/export/MultiFieldWriter.java:84-105`: a multi-valued, non-point field is read from SortedSetDocValues. Each value is `lookupOrd(nextOrd())`, converted with `indexedToReadable`, then written with `toObject` (or as the string itself when there is no field). No trimming or replacement happens in this path.
-- `solr/core/src/java/org/apache/solr/handler/export/StringFieldWriter.java:112-120` (`writeBytes`): the single-valued path converts the bytes with `indexedToReadable` and writes the string. It also writes the value verbatim.
+- `solr/core/src/java/org/apache/solr/handler/export/StringFieldWriter.java:106-115` (`writeBytes`): the single-valued path converts the bytes with `indexedToReadable` and writes the string. It also writes the value verbatim.
 - `solr/core/src/java/org/apache/solr/handler/export/ExportWriter.java:501-539`: field selection. A field with usable DocValues is written from DocValues (513-515). A stored-only field is written only with `includeStoredFields=true`; otherwise a glob-matched one is skipped silently (516-519, 527), and an explicitly requested one fails with "must have DocValues" (520-526). A field with neither DocValues nor stored values is skipped silently when glob-matched (538) and fails when named explicitly (528-535).
 - What this shows at the pinned head: the value path writes the stored bytes as they are, so a whitespace-only or angle-bracketed value cannot come out as `""` through this path. The silent-skip branch can drop a whole field, but it does not produce empty strings. The export guide (`solr-ref-guide/.../exporting-result-sets.adoc:28-31, 49-53`) documents that fields without DocValues need `includeStoredFields=true`.
-- `grep -rn 15571` on the pinned head: no hits in code or commit messages (evidence tool: no commits name the ticket).
+- `git grep 15571` on the pinned head: no reference to the ticket in source or docs (the only matches are unrelated numbers in `solr/example/films` data). The evidence tool also found no commit naming the ticket.
 
 ## History
 
