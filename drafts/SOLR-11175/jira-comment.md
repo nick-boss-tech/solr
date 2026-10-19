@@ -1,0 +1,1 @@
+The reference guide answers this. In the current docs (suggester.adoc, lines 739-742): "suggest.count: Optional, default 1. Specifies the number of suggestions for Solr to return." Link: https://github.com/apache/solr/blob/main/solr/solr-ref-guide/modules/query-guide/pages/suggester.adoc#L739. Closing as answered by the documentation.
