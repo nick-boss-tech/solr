@@ -22,7 +22,7 @@ This page covers how OpenTelemetry gets into a Solr JVM and how it is configured
 
 == Traces and Metrics
 
-Solr uses OpenTelemetry for two signals, configured independently:
+Solr uses OpenTelemetry for two signals. Signal-specific settings configure each signal separately; generic OTLP settings can be shared:
 
 xref:distributed-tracing.adoc[]::
 Spans describing requests as they move between nodes.
@@ -30,13 +30,12 @@ Exported by the OpenTelemetry SDK itself, so it is configured with the standard 
 
 xref:metrics-reporting.adoc#otlp[Metrics over OTLP]::
 Solr's own metrics, pushed periodically.
-Solr builds and owns the meter providers these come from -- it has to, so that the `/metrics` endpoints can read them -- so they are configured with `solr.metrics.otlp*` properties, with their own endpoint and protocol settings.
+Solr builds and owns the meter providers these come from -- it has to, so that the `/metrics` endpoints can read them -- and configures the optional OTLP exporter with the standard `OTEL_*` environment variables (or equivalent `otel.*` system properties).
 
 Only tracing goes through `GlobalOpenTelemetry`.
 A Java agent therefore takes over tracing but not Solr's metrics, which keep their own configuration and exporter either way.
 
-NOTE: The `opentelemetry` module turns the autoconfigured SDK's metrics and logs exporters off (`otel.metrics.exporter=none`, `otel.logs.exporter=none`) so they cannot duplicate or conflict with the above.
-Setting `OTEL_METRICS_EXPORTER` or `OTEL_LOGS_EXPORTER` has no effect and logs a warning.
+NOTE: While it builds the tracing SDK, the `opentelemetry` module temporarily turns that SDK's metrics exporter off to avoid a duplicate metrics pipeline. It restores the original setting after the SDK is built, so `OTEL_METRICS_EXPORTER=otlp` configures Solr's separate metrics exporter. Log exporters remain unsupported; a non-`none` `OTEL_LOGS_EXPORTER` value logs a warning.
 
 == Integration Options
 
@@ -112,6 +111,7 @@ The effective defaults, some set by Solr and the rest by the SDK, are:
 OTEL_SDK_DISABLED=false
 OTEL_SERVICE_NAME=solr
 OTEL_TRACES_EXPORTER=otlp
+OTEL_METRICS_EXPORTER=none
 OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
 OTEL_TRACES_SAMPLER=parentbased_always_on
@@ -139,7 +139,7 @@ SOLR_OPTS=-Dotel.exporter.otlp.endpoint=http://my-remote-collector:4318
 The module ships a deliberately minimal set of dependencies: OTLP over HTTP, and nothing else.
 Anything beyond that means adding JARs yourself (or use the Java agent).
 
-gRPC:: Add the required gRPC and Netty JARs to the module's lib directory, then set `OTEL_EXPORTER_OTLP_PROTOCOL=grpc`.
+gRPC:: Add the required gRPC and Netty JARs to the module's lib directory, then set `OTEL_EXPORTER_OTLP_PROTOCOL=grpc` for traces and metrics, or `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc` for metrics only.
 
 Other backends:: Exporters such as Jaeger and Zipkin are supported by the SDK but not shipped. Add the exporter JAR(s) to `$SOLR_TIP/lib/` and configure the exporter, for example:
 +

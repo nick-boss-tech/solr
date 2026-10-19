@@ -319,62 +319,42 @@ For users who do not use or support pulling metrics in Prometheus format with th
 
 OTLP is widely supported by many tools, vendors, and pipelines. See the OpenTelemetry https://opentelemetry.io/ecosystem/vendors/[vendors list] for more details on available and compatible options.
 
-This exporter is disabled by default and is packaged with the `opentelemetry` module; see xref:opentelemetry.adoc[] for enabling that module.  *It does NOT work with the OTEL Java Agent in any way*.
+This exporter is disabled by default in Solr and is packaged with the `opentelemetry` module; see xref:opentelemetry.adoc[] for enabling that module. Set `OTEL_METRICS_EXPORTER=otlp` to enable it. *It does NOT work with the OTEL Java Agent in any way*.
 
-=== OTLP properties
+=== OTLP configuration
 
-The OTLP exporter can be configured with the supported system properties below. These can also be set as environment variables by following these mapping rules:
+Solr reads the standard OpenTelemetry environment variables or their equivalent `otel.*` Java system properties. A Java system property takes precedence over its environment variable, and signal-specific settings take precedence over generic settings.
 
-- Replace `.` with `_`
-- Convert camelCase to UPPER_SNAKE_CASE
-- Make all letters uppercase
+[cols="2,2,4",options="header"]
+|===
+| Variable | Default in Solr | Purpose
 
-`solr.metrics.otlpExporterEnabled`::
-+
-[%autowidth,frame=none]
-|===
-|Optional |Default: false
-|===
-+
-Boolean value to enable or disable the OTLP metrics exporter.
+| `OTEL_METRICS_EXPORTER`
+| `none`
+| Include `otlp` to enable the Solr OTLP metrics exporter. Set to `none` to disable it.
 
-`solr.metrics.otlpExporterProtocol`::
-+
-[%autowidth,frame=none]
-|===
-|Optional |Default: http
-|===
-+
-OTLP protocol to use for pushing metrics. Available options are `grpc`, `http`, or `none` (disabled).
+| `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`
+| `http/protobuf`
+| Protocol for metrics. Solr supports `http/protobuf` and `grpc`. This signal-specific value takes precedence over `OTEL_EXPORTER_OTLP_PROTOCOL`.
 
-NOTE: gRPC is not supported out of the box. To use it, add the required gRPC and Netty JARs to the `opentelemetry` module's lib directory.
+| `OTEL_EXPORTER_OTLP_PROTOCOL`
+| `http/protobuf`
+| Generic protocol used when the metrics-specific protocol is not set. The `opentelemetry` module must include the required gRPC and Netty JARs to use `grpc`.
 
-`solr.metrics.otlpExporterInterval`::
-+
-[%autowidth,frame=none]
-|===
-|Optional |Default: 60000
-|===
-+
-The interval in milliseconds for how frequently metrics are pushed via OTLP.
+| `OTEL_METRIC_EXPORT_INTERVAL`
+| `60000`
+| Time in milliseconds between metric export attempts.
 
-`solr.metrics.otlpGrpcExporterEndpoint`::
-+
-[%autowidth,frame=none]
-|===
-|Optional |Default: http://localhost:4317
-|===
-+
-Endpoint to send OTLP metrics to using the gRPC protocol.
+| `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT`
+| `http://localhost:4318/v1/metrics` for HTTP, `http://localhost:4317` for gRPC
+| Metrics endpoint. The value is used as-is.
 
-`solr.metrics.otlpHttpExporterEndpoint`::
-+
-[%autowidth,frame=none]
+| `OTEL_EXPORTER_OTLP_ENDPOINT`
+| `http://localhost:4318` for HTTP, `http://localhost:4317` for gRPC
+| Generic endpoint used when the metrics-specific endpoint is not set. For HTTP, Solr appends `/v1/metrics` to this base URL.
 |===
-|Optional |Default: http://localhost:4318/v1/metrics
-|===
-+
-Endpoint to send OTLP metrics to using the HTTP protocol.
+
+The former `solr.metrics.otlpExporterEnabled`, `solr.metrics.otlpExporterProtocol`, `solr.metrics.otlpExporterInterval`, `solr.metrics.otlpGrpcExporterEndpoint`, and `solr.metrics.otlpHttpExporterEndpoint` settings remain available as fallbacks when the corresponding standard setting is absent. The standard OTEL setting takes precedence. The legacy protocol value `http` is treated as `http/protobuf`, and legacy `none` continues to disable the exporter.
 
 
 === OpenTelemetry Collector setup

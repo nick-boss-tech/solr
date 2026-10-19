@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.NamedList;
@@ -57,7 +56,17 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
   public OpenTelemetry createOpenTelemetry() {
     // deliberately build() and not initialize(); the latter sets GlobalOpenTelemetry, which is
     // OpenTelemetryConfigurator's job
-    return AutoConfiguredOpenTelemetrySdk.builder().build().getOpenTelemetrySdk();
+    String metricsExporter = System.getProperty("otel.metrics.exporter");
+    System.setProperty("otel.metrics.exporter", "none");
+    try {
+      return AutoConfiguredOpenTelemetrySdk.builder().build().getOpenTelemetrySdk();
+    } finally {
+      if (metricsExporter == null) {
+        System.clearProperty("otel.metrics.exporter");
+      } else {
+        System.setProperty("otel.metrics.exporter", metricsExporter);
+      }
+    }
   }
 
   void prepareConfiguration(NamedList<?> args) {
@@ -77,13 +86,21 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
     // Need to disable the exporters for metrics and logs
     String metricsExporter = getEnvOrSysprop("OTEL_METRICS_EXPORTER");
     String logsExporter = getEnvOrSysprop("OTEL_LOGS_EXPORTER");
-    if ((metricsExporter != null && !Objects.equals(metricsExporter, "none"))
-        || (logsExporter != null && !Objects.equals(logsExporter, "none"))) {
+    if ((metricsExporter != null && hasUnsupportedMetricsExporter(metricsExporter))
+        || (logsExporter != null && !"none".equalsIgnoreCase(logsExporter))) {
       log.warn(
-          "The opentelemetry module does not support METRICS or LOGS. Ignoring faulty environment setting");
+          "The opentelemetry module only supports the OTLP metrics exporter and does not support logs");
     }
-    System.setProperty("otel.metrics.exporter", "none");
     System.setProperty("otel.logs.exporter", "none");
+  }
+
+  private static boolean hasUnsupportedMetricsExporter(String exporters) {
+    return Arrays.stream(exporters.split(","))
+        .map(String::trim)
+        .filter(exporter -> !exporter.isEmpty())
+        .anyMatch(
+            exporter ->
+                !"otlp".equalsIgnoreCase(exporter) && !"none".equalsIgnoreCase(exporter));
   }
 
   /**

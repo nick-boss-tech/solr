@@ -17,24 +17,20 @@
 package org.apache.solr.metrics.otel;
 
 import io.opentelemetry.sdk.metrics.export.MetricExporter;
-import org.apache.solr.common.util.EnvUtils;
 
 public interface MetricExporterFactory {
 
-  Boolean OTLP_EXPORTER_ENABLED =
-      Boolean.parseBoolean(EnvUtils.getProperty("solr.metrics.otlpExporterEnabled", "false"));
+  Boolean OTLP_EXPORTER_ENABLED = OtelMetricsConfig.current().isExporterEnabled();
 
-  String OTLP_EXPORTER_PROTOCOL = EnvUtils.getProperty("solr.metrics.otlpExporterProtocol", "http");
+  String OTLP_EXPORTER_PROTOCOL = OtelMetricsConfig.current().getProtocol();
 
-  int OTLP_EXPORTER_INTERVAL =
-      Integer.parseInt(EnvUtils.getProperty("solr.metrics.otlpExporterInterval", "60000"));
+  int OTLP_EXPORTER_INTERVAL = OtelMetricsConfig.current().getExportInterval();
 
   String OTLP_EXPORTER_GRPC_ENDPOINT =
-      EnvUtils.getProperty("solr.metrics.otlpGrpcExporterEndpoint", "http://localhost:4317");
+      OtelMetricsConfig.current().getGrpcEndpoint();
 
   String OTLP_EXPORTER_HTTP_ENDPOINT =
-      EnvUtils.getProperty(
-          "solr.metrics.otlpHttpExporterEndpoint", "http://localhost:4318/v1/metrics");
+      OtelMetricsConfig.current().getHttpEndpoint();
 
   MetricExporter getExporter();
 }

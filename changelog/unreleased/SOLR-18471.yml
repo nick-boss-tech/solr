@@ -1,0 +1,7 @@
+title: Use standard OTEL configuration for metrics export
+type: changed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-18471
+    url: https://issues.apache.org/jira/browse/SOLR-18471

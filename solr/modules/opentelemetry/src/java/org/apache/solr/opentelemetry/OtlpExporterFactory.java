@@ -46,7 +46,7 @@ public class OtlpExporterFactory implements MetricExporterFactory {
           OtlpGrpcMetricExporter.getDefault().toBuilder()
               .setEndpoint(OTLP_EXPORTER_GRPC_ENDPOINT)
               .build();
-      case "http" ->
+      case "http/protobuf", "http" ->
           OtlpHttpMetricExporter.getDefault().toBuilder()
               .setEndpoint(OTLP_EXPORTER_HTTP_ENDPOINT)
               .build();
