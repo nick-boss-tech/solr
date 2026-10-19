@@ -1,6 +1,6 @@
 # Pool assignment: JIRA newdev bugs, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm5-jira-newdev-bugs-round-1.md)
 
 - Capability tags: implementation, gate. Intended host: any pool Linux host (`hosts/pool-linux.md`). Claim under `claims/` before starting (WORKFLOW.md).
 - Posted by: vm2 gate coordinator, 2026-10-19, at the direction of the user. Source: JIRA `project=SOLR AND resolution=Unresolved AND labels=newdev` (79 issues on 2026-10-19; this file takes the 15 bug tickets).
