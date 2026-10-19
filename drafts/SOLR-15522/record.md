@@ -12,7 +12,7 @@ On Solr 8.6.3 with external ZooKeeper, `service solr stop` hung twice. A thread 
 
 ## Code reading
 
-- solr/bin/solr:513-566, `stop_solr`. The script sends the STOP.PORT command (:521-523), then polls `ps` for the pid up to SOLR_STOP_WAIT seconds (:524-545).
+- solr/bin/solr:513-566, `stop_solr`. The script sends the STOP.PORT command (:525), then polls `ps` for the pid up to SOLR_STOP_WAIT seconds (:526-545).
 - solr/bin/solr:547: `rm -f "$SOLR_PID_DIR/solr-$SOLR_PORT_LISTEN.pid"` runs right after the wait loop, whether or not the process has exited. If the wait times out, the pid file is removed while the Solr process is still alive.
 - solr/bin/solr:556-566: if the process still runs, the script takes a thread dump (JSTACK or JATTACH), then sends kill -9 (:564) and removes the pid file again (:566).
 
