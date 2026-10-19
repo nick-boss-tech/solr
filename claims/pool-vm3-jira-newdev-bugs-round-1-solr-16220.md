@@ -8,3 +8,7 @@
 - Started: 2026-10-19T20:25Z (UTC).
 
 Heartbeat: 2026-10-19T20:25Z
+
+Result (vm3, 2026-10-19T20:45Z): not reproduced for the documented case on `c8ab71430f`. Probe passed with the destination built (`/workspace/gates/logs/vm3/solr-16220-repro/`). The non-SSL `SSLConfig` variant (null factory) is the candidate for the ticket's NPE and is left to the owner. No branch. Deliverable: the SOLR-16220 section in `reports/2026-10-19-jira-newdev/A-bugs-round-1.md`.
+
+DONE: 2026-10-19 by vm3, not reproduced. Heartbeat: 2026-10-19T20:45Z
