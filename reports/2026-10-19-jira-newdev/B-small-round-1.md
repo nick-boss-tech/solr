@@ -19,3 +19,8 @@ Assignment: `assignments/pool-jira-newdev-small-round-1.md`. Base: apache/main c
 
 Claim: `claims/pool-jira-newdev-small-round-1-solr-17727.md`. Work follows on branch `solr-17727-server-header`.
 
+
+## Item 2: SOLR-17727 (vm4), stopped, 2026-10-19T19:03:40Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Stopped, no branch. The Server header is off on purpose. `solr/server/etc/jetty.xml` sets `sendServerVersion` from `solr.jetty.send.server.version`, default `false`. Jetty's own switch only sends `Jetty(<version>)`, not Solr's version, so sending Solr's version needs a custom `HttpConfiguration` customizer loaded by the server's XML config. That is a new class on the server classpath that I could not verify without a packaged start, and it reverses a default that hides the version. The assignment says to stop when the change conflicts with the wanted result; a maintainer or the owner should decide whether Solr should expose its version.
