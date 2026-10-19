@@ -1,5 +1,7 @@
 # Claim: vm4 gate of SOLR-18555 highlight request handler handoff
 
+Status: CLOSED (2026-10-19; superseded by the user-requested gate job for head 884de51579dc39a196292bbf7184b6aa2601099b; no gate ran on this claim)
+
 Claimed by: vm4 (manual, Nick's handoff; no assignment file exists on coordination yet)
 Claimed at: 2026-10-19T02:30Z
 Branch: solr-18555-submit on nick-boss-tech/solr, head 603033256aa4b8818d5b4a2be90e7f9241757b54.
