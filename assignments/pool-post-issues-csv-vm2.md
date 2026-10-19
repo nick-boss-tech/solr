@@ -1,6 +1,6 @@
 # Pool assignment: post the 4,000-issue CSV Nick sent vm2 to this branch
 
-Status: CLAIMED (claims/pool-post-issues-csv-vm2.md)
+Status: NEEDS-OWNER (claims/pool-post-issues-csv-vm2.md)
 
 - Capability tags: records.
 - Intended host: vm2 only. Claim under `claims/` before starting (WORKFLOW.md).
@@ -27,3 +27,7 @@ If no matching CSV exists on your disk, mark the claim BLOCKED instead: state th
 
 - Change nothing else on this branch beyond the claim, the copied CSV, and the regenerated OPEN-WORK.md if the posting tooling requires it.
 - No posts to Jira or GitHub, no PRs, no force-push.
+
+## Owner question
+
+Is `/workspace/uploads/solr-jira-metadata-2026-10-18-1792393324869.csv` (18364 data rows, SHA-256 5c2a9703...) the CSV Nick sent vm2? This assignment asked for roughly 4,000 rows. Claim: claims/pool-post-issues-csv-vm2.md, BLOCKED with the search record.
