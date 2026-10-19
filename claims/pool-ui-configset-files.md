@@ -8,7 +8,7 @@
 - Layout: the root cause of the blank Configsets content was `MainContent.kt` wrapping the Configsets page in a vertical scroll (unbounded height). The page now fills the main area. The Overview cannot scroll yet on that page.
 - Branch: `solr-17887-configset-files` on the fork, commit ce587f39f9d on base apache/main c8ab71430f. It includes the Index / Query screen (b91f75ed935) and the two file tickets.
 - Gate: full `:shared:jvmTest` passes (23 suites, no failures); `:shared:spotlessCheck` passes. Browser smoke: the Files tab lists `smoke`, shows `solrconfig.xml` with numbered content, and expands `lang`.
-- Open follow-ups: (1) Overview cannot scroll on the Configsets page; add a scroll inside the Overview. (2) The tree loads all folders at selection, which is slow for large configsets; load folders on expand. (3) Configsets with no collection cannot list files; a server endpoint would fix that (owner decision). (4) Other Configsets tabs remain empty.
+- Open follow-ups: (1) done: the Overview scrolls on the bounded page (commit on the branch after ce587f39f9d). (2) The tree loads all folders at selection, which is slow for large configsets; load folders on expand. (3) Configsets with no collection cannot list files; a server endpoint would fix that (owner decision). (4) Other Configsets tabs remain empty.
 - Blast radius: not flagged. Layout, state, and GET calls to existing endpoints.
 
-Heartbeat: 2026-10-19T22:20:00Z
+Heartbeat: 2026-10-19T22:30:00Z
