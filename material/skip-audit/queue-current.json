@@ -1686,8 +1686,8 @@
       "round": "audit-1",
       "evidence": "Hashing scheme is deliberate; docs half split to SOLR-17724; redesign needs security-committer decision."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-16077-draft-open",
+    "verdict": "close-fixed",
+    "draft_branch": "solr-16077-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
