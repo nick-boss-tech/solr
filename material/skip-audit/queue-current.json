@@ -298,7 +298,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Message now only in NodeHealth (health check handler); the startup latch-wait path was removed per SOLR-17118. 9.6.1 symptom, no repro, 0 comments."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-17763-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17752",
@@ -1719,7 +1722,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "FastLRUCache on 7.5, class removed from main."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-15879-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15863",
@@ -1866,7 +1872,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "DataImportHandler removed from main."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-15704-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15690",
@@ -1882,7 +1891,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "DataImportHandler removed from main."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-15690-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15679",
@@ -2246,7 +2258,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "SolrInfoMBeanHandler has zero references in solr/core/src/java on main (removed by SOLR-17853)."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-15350-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15331",
@@ -2302,7 +2317,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "HttpClientUtil/addRequestInterceptor absent from solrj on main; static interceptor registry removed."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-15310-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15305",
@@ -2350,7 +2368,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "placement rules TLOG/PULL error string gone from main"
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-15297-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15279",
@@ -3258,7 +3279,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "AnalyticsShardResponseParser removed with analytics component; ObjectInputStream no longer in tree per note."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-14117-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14100",
@@ -3382,7 +3406,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Title: tests.src.home test infra; user.dir default removed in Gradle migration."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14023-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14004",
@@ -3514,7 +3541,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: PreemptiveBasicAuthClientBuilderFactory deleted."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-13846-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13838",
@@ -3930,7 +3960,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: ConcurrentUpdateHttp2SolrClient removed; refactor proposal."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-13501-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13486",
@@ -3962,7 +3995,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: LBHttpSolrClient removed."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-13481-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13471",
@@ -4124,7 +4160,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: PreAnalyzedField removed (SOLR-17839)."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-13304-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13291",
@@ -4975,7 +5014,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "6.x to 7.x split upgrade with autoscaling Variable$Type; no org.apache.solr.cloud.autoscaling package on main and 6.x segments are unreadable."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-12646-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12645",
@@ -4991,7 +5033,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "git grep finds no MemClassLoader class on upstream/main; plugin loading was rewritten."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-12645-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12608",
@@ -5019,7 +5064,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ZooKeeper 3.4 client DNS handling; the client library is ZK 3.9 now. Library behaviour, not verified in repo code."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12585-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12556",
@@ -5153,7 +5201,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Existing note: LB already chains cause; remaining is wording / HTTP mapping design decision."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12446-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12369",
@@ -5431,7 +5482,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "LIR race; LIR removed in Solr 9."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12166-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12161",
@@ -5601,7 +5655,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "WordDelimiterGraphFilter appears only in schema comments in shipped configsets"
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-11955-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11954",
@@ -5825,7 +5882,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: no repro or too vague to test. Reason holds: no repro; log4j-frame StackOverflowError in 7.1 leader election, probable duplicate of SOLR-6213; LIR/election code reworked since. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11787-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11776",
@@ -5841,7 +5901,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "Ticket is about the leader putting a replica into LIR on SocketException broken pipe. LIR was removed from Solr (see skip list category removed infrastructure); only a stale TODO remains in HttpPartitionTest."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-11776-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11768",
@@ -6020,7 +6083,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "no JMX metrics reporter or ObjectName factory left; only JmxUtil MBeanServer lookup"
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-11659-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11655",
@@ -6132,7 +6198,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "7.1 rolling-upgrade InvalidClassException from Java serialization of SolrResponse; no ObjectInputStream use left in solr/core/src/java."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-11537-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11517",
@@ -6288,7 +6357,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "legacyCloud / baseUrl comparison model is gone: no legacyCloud symbol in solr/core/src/java."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-11435-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11432",
@@ -6370,7 +6442,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: no repro or too vague to test. Reason holds: no repro/isolating test; autoscaling test removed; similar to SOLR-15695 (core unload vs commit tlog leak); race needs stress test. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11378-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11364",
@@ -6562,7 +6637,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "MoveReplicaCmd passes REPLICA_TYPE at lines 247 and 370"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-11246-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11214",
@@ -6768,7 +6846,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "FacetModule null-checks mcontext (line 181) and merger (336)"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-11009-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11008",
@@ -6883,7 +6964,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "6.6 maven artifact packaging question; org.apache.solr.core.MapSerializable no longer exists and the build is Gradle."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-10959-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10952",
@@ -6965,7 +7049,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "OverseerAutoReplicaFailoverThread is gone (no match); AutoAddReplicasPlanAction survives only in a comment in CollectionsRepairEventListener."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-10904-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10897",
@@ -7015,7 +7102,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Same as 10904: failover thread removed, no failover check left to be stale."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-10889-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10882",
@@ -7197,7 +7287,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "FieldType.getPrefixQuery and PointField.getPrefixQuery return getExistenceQuery for field:*; Trie gone"
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-10709-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10706",
@@ -7423,7 +7516,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "replication.js getIterations on main checks matchingIterations[0] before reuse; the undefined-status TypeError is fixed."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-10511-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10497",
@@ -7439,7 +7535,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "partials/index.html ngRepeat over commandLineArgs now uses track by $index; duplicate JVM flags no longer raise ngRepeat:dupes."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-10497-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10492",
@@ -7625,7 +7724,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "AutoAddReplicas shared-data-dir (HDFS-era) logic removed with the autoAddReplicas rewrite; no AutoAddReplicasPlanAction class."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-10326-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10325",
@@ -7777,7 +7879,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Add Collection now uses CollectionsV2.createCollection (superagent client, outside $http), so the 10s $http timeout in httpInterceptor.started does not apply; the 9818 replay hazard is tracked by the new solr-9818-submit branch."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10201-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10197",
@@ -7891,7 +7996,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Leader Initiated Recovery removed: no LeaderInitiatedRecovery symbol in core or solrj java."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-10041-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10030",
@@ -8069,7 +8177,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "LIR removed (see 10041)."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-9913-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9872",
@@ -8085,7 +8196,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "TransactionLog constructor rewritten: no setLength call left; non-openExisting path throws if the file exists, CREATE_NEW otherwise"
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-9872-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9871",
@@ -8225,7 +8339,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "LIR removed (see 10041); the executor-interrupt path it describes no longer exists."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-9826-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9825",
