@@ -22,4 +22,5 @@ Round end: the round stays open until all hosts show activity or 2026-10-20T06:0
   - vm3 (session 58b1129b-9028-4979-b7ed-98545d10e9f3): complaints file and START-HERE; complaints 1, 2 and 5.
   - vm5 (session 6830d10d-708d-40c6-adb0-ecd04fd859f6): complaints file and START-HERE; complaints 1, 2 and 5.
   Next tick: check each host's branch activity since 2026-10-19T15:13Z; re-message any silent host.
+- 2026-10-19T16:00:30Z: at the owner's request, the wake assignment was pushed to all three pool hosts (vm2, vm3, vm5) with the instruction to reach out to the other two over the MCP channel. Sent, async: vm2 session b848a7a7-62b7-47d3-ac9a-9ddbcb9ed60f, vm3 session 230be243-27a9-420f-9eb3-603c86fff75d, vm5 session 9c39c53d-eb92-4b98-ad7b-3ead8e744ac9. Each message names the complaints file and START-HERE and the complaints for the recipient host.
 
