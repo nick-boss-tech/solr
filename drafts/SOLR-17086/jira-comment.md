@@ -1,10 +1,19 @@
-We checked this against Solr main at commit 498a09aea9. The first problem in the report, the NullPointerException in the v2 media-type filter during a backup request, is fixed on main. The second problem, the same HTTP 500 for replica creation, is not explained yet, so the ticket stays open.
+We checked Solr main at commit 498a09aea9 (October 7, 2026). The null pointer that the request filter in this ticket hit is guarded at that commit. The error handler that formats the 500 response still assumes the request object is present, though, so a request that reaches it without that object would produce the "exception mapper failure" message.
 
 What we checked:
 
-- The v2 media-type filter now checks that the request is set before it reads the parameters. Commit c058ea5dac added that check; before it, the call was unguarded, which is the NullPointerException in the report.
-- Replica creation through the v2 API is handled by a different code path. The media-type filter does not run for it, so the fix above does not cover that path.
+- The request filter that reads the query request, and its null check.
+- The exception handler and the helper it calls, which assumes the request is not null.
+- Where the v2 path sets the query request object.
 
-What this means: the backup-request 500 should no longer occur on current main. For replica creation we have not found the code that produces the 500 on current main, and we have not reproduced it.
+How we tried to reproduce it:
 
-If you still see the 500 on replica creation: please send the full response for an ADDREPLICA request (the JSON body, the Solr version, and the Solr log for the same request), so we can find the code path that raises it.
+- We did not run a reproduction for this check. Earlier attempts in the comments on this ticket did not reproduce it.
+
+What this means:
+
+- The handler gap is real in the code, but we have not shown that the backup and replica requests in this report reach it. The full stack trace would show which path fails.
+
+If you still see this:
+
+- Please send the full stack trace from the server log for one failed backup or replica request, with the Solr version and whether the request was async.
