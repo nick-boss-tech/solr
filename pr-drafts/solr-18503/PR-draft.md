@@ -1,6 +1,6 @@
 # PR draft: SOLR-18503 (for Nick to approve; not opened)
 
-Status: DRAFT. Not opened. Proof pending the gate. Head: `solr-18503-submit` at `dba48d69b4d8f2c1f367e48fbcc884cce82420e6`. Base: apache/solr `main` at `c8ab71430f6e7547c773da596101d680862310ff`.
+Status: DRAFT. Not opened. Proof complete. Head: `solr-18503-submit` at `cc5b84dfcdd783ec2c2626aba4ba9931bb027893`. Base: apache/solr `main` at `c8ab71430f6e7547c773da596101d680862310ff`.
 
 Title: SOLR-18503: Document JSON Facet parser options and aliases
 
@@ -20,13 +20,13 @@ At the merge base, the parser reads [`processEmpty`](https://github.com/apache/s
 
 **The guide describes the accepted options, and range facets now resolve `f` like other field facets.**
 
-The guide documents `f` for terms, range, and heatmap facets; `cacheDf`; `query` on query facets; `count()`; `processEmpty`; and facet-level `excludeTags` ([terms and query](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L191-L232), [range](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L312-L312), [heatmap](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L505-L505), [count](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L575-L575), [processEmpty](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L668-L668), [excludeTags](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L849-L849)). `FacetRangeParser` now uses the shared field helper, and the range test uses an `f`-only request with the existing expected bucket count ([parser](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/solr/core/src/java/org/apache/solr/search/facet/FacetRangeParser.java#L42), [test](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/solr/core/src/test/org/apache/solr/search/facet/TestJsonRangeFacets.java#L386-L387)).
+The guide documents `f` for terms, range, and heatmap facets; `cacheDf`; `query` on query facets; `count()`; `processEmpty`; and facet-level `excludeTags` ([terms and query](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L191-L232), [range](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L312-L312), [heatmap](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L505-L505), [count](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L575-L575), [processEmpty](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L668-L668), [excludeTags](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/solr/solr-ref-guide/modules/query-guide/pages/json-facet-api.adoc#L849-L849)). `FacetRangeParser` now uses the shared field helper, and the range test uses an `f`-only request with the existing expected bucket count ([parser](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/solr/core/src/java/org/apache/solr/search/facet/FacetRangeParser.java#L42), [test](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/solr/core/src/test/org/apache/solr/search/facet/TestJsonRangeFacets.java#L382-L383)).
 
 ## Proof
 
-**Proof is pending the hardening gate.**
+**`TestJsonRangeFacets` fails on the merge base for the `f`-only range request and passes at the gated head.**
 
-The gate will run `TestJsonRangeFacets` with only the changed test overlaid on the merge base, where the `f`-only range request is expected to fail, then run the focused class at this head. No test counts are claimed yet. Before opening, replace this section with the failure text, focused counts, verification date, and exact head from the gate receipt.
+At base `c8ab71430f6e7547c773da596101d680862310ff`, the class ran 10 tests with the updated test file overlaid; 2 failed at the `f`-only request on line 382 (`testRangeFacetWithRanges` reported `NullPointerException: key is null`; `testRangeFacetWithRangesDistrib` reported `RemoteSolrException`). At head `cc5b84dfcdd783ec2c2626aba4ba9931bb027893`, all 10 tests passed, with 0 failures, 0 errors, and 0 skipped. Verified 2026-10-19 with seed `18503C0FFEE18503`. The Error Prone compile, core module check, and reference-guide check also passed.
 
 ## A choice to check
 
@@ -36,8 +36,8 @@ The alternative is to deprecate the `f` and `query` aliases. Was keeping them th
 
 ## Limits
 
-**`perSeg` remains undocumented because the source marks it experimental and for testing purposes only.** ([source comment](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/solr/core/src/java/org/apache/solr/search/facet/FacetField.java#L38-L40))
+**`perSeg` remains undocumented because the source marks it experimental and for testing purposes only.** ([source comment](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/solr/core/src/java/org/apache/solr/search/facet/FacetField.java#L38-L40))
 
-Changelog: [changelog/unreleased/SOLR-18503-json-facet-parser-options.yml](https://github.com/nick-boss-tech/solr/blob/dba48d69b4d8f2c1f367e48fbcc884cce82420e6/changelog/unreleased/SOLR-18503-json-facet-parser-options.yml)
+Changelog: [changelog/unreleased/SOLR-18503-json-facet-parser-options.yml](https://github.com/nick-boss-tech/solr/blob/cc5b84dfcdd783ec2c2626aba4ba9931bb027893/changelog/unreleased/SOLR-18503-json-facet-parser-options.yml)
 
 *AI-generated description. Nick Shanin directed the work and takes responsibility for this contribution.*
