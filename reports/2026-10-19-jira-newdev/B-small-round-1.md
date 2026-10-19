@@ -38,3 +38,8 @@ Claim: `claims/pool-jira-newdev-small-round-1-solr-17727.md`. Work follows on br
 - Status: fixed branch. `solr-18481-xff` on the fork: code commit 5aedffcccd (`HttpSolrProxy` appends the client address to `X-Forwarded-For`, with the TODO removed), draft commit 8f687ca04d (`drafts/SOLR-18481/pr-description.md`).
 - Gate: `HttpSolrProxyForwardedForTest` 5 of 5, `HttpSolrProxyTest` 2 of 2, 0 failures, 0 skipped; spotless passes. Log `/workspace/gates/logs/vm4/solr-18481-gate.log`.
 - The ticket's forward cap and current-node exclusion are not in this change. The draft asks the maintainer whether to add them.
+
+## Item 12: SOLR-9464 (vm4), stopped, 2026-10-19T19:53:09Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Stopped, no branch. The change flips `CloudSolrClient` `directUpdatesToLeadersOnly` from `false` to `true`. The ticket's own history says the flag was added under SOLR-9090 with a default of `false` "corresponding to existing behaviour". A default flip changes update routing for every SolrJ cloud client that does not set the flag. The assignment says to record and stop when the change conflicts with a deliberate default. A maintainer decision is needed on whether to change the default for all clients.
