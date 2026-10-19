@@ -5,3 +5,5 @@ Claimed at: 2026-10-19T03:55Z
 Head confirmed by ls-remote at claim: cc5b84dfcdd783ec2c2626aba4ba9931bb027893 (checked at the start of this claim).
 Runner: pool/bin/sweep-run.sh. Seed 18503C0FFEE18503.
 Deliverable: receipts/SOLR-18503.md, logs under /workspace/gates/logs/vm4/solr-18503-phase-tidyfix/.
+
+DONE: 2026-10-19 by vm4. Receipt: receipts/SOLR-18503.md. Logs: /workspace/gates/logs/vm4/solr-18503-phase-tidyfix/.
