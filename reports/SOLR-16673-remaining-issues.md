@@ -42,3 +42,12 @@ The ticket comment does not record whether the analysis request enabled nested d
 - The root field patch covers an automatically added `_root_`. An explicitly declared incompatible `_root_` remains subject to schema validation.
 - Keep the assignment OPEN until both Linux gates are green and the receipt and drafts are updated from their results.
 - No PR was opened. No Jira or PR comment was posted.
+
+## Linux slice (vm5, 2026-10-19T08:29:08Z)
+
+This section supersedes the branch heads in the Windows review above. The Windows heads (`solr-16673-uniquekey` at `70c6eb0c49`, `solr-16673-rootfield` at `5fb792482f`) were based on the fork main `e044bf20b4`, where tidy and Error Prone fail on the base. Both are kept as records. The gated branches are based on Apache `main` `c8ab71430f`, per `reports/SOLR-16673-stale-base-decision.md`.
+
+- Issue 2 (numeric uniqueKey in the response): premise confirmed by the gated proof leg. On the base, `testNumericUniqueKeyDocIds` fails with `ClassCastException: Long cannot be cast to String`. Fix on `solr-16673-uniquekey-apache` at `a494962d79`. Gate GREEN (changelog, tidy, Error Prone, check rc 0; focused `TestSchemaDesigner` 11 tests, 0 failures, seed `16673C0FFEE16673`). Receipt: `receipts/SOLR-16673.md`.
+- Issue 3 (`_root_` type and nested children): mechanism confirmed on the base. The helper creates `_root_` as `string` when the uniqueKey is numeric, and `IndexSchema.isUsableForChildDocs` then rejects child documents (`_root_ field must be defined using the exact same fieldType as the uniqueKey field (id) uses: tlong`). A second defect was found on the same path: `JsonLoader.buildDoc` stores `_childDocuments_` as a field, so the sample loader indexed nested samples with zero children. The fix on `solr-16673-rootfield-main` at `72e505cc20` covers both. This is a defect in the activation path, not a legitimate validation result; whether the reporter enabled nested docs is still not recorded in the ticket. Gate GREEN (same steps; focused 11 tests, 0 failures, seed `16673B00B516673B`). Receipt: `receipts/SOLR-16673.md`.
+- PR drafts: `pr-drafts/solr-16673/unique-key.md` and `pr-drafts/solr-16673/root-field.md` now cite the gated heads and receipt counts. Not opened; openings stay with Nick.
+- Limits: no PR opened, no Jira or PR comment posted, no force push. The reporter's exact path (nested docs enabled or not) is unconfirmed.

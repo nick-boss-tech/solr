@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-16673 remaining Schema Designer issues, round 1
 
-Status: CLAIMED (claims/pool-vm5-solr-16673-remaining-issues-round-1.md)
+Status: DONE (2026-10-19T08:29:08Z, vm5 Linux slice): gates green on apache/main, see reports/SOLR-16673-remaining-issues.md (Linux slice); claim claims/pool-vm5-solr-16673-remaining-issues-round-1.md
 
 Windows review slice completed 2026-10-18. At Nick's direction, both fixes and regression tests were implemented and pushed to their assignment branches. See `reports/SOLR-16673-remaining-issues.md`; the two Linux full hardening gates remain open.
 
