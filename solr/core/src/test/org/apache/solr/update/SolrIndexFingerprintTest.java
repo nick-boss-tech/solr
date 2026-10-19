@@ -27,6 +27,7 @@ import org.apache.lucene.index.LeafReader;
 import org.apache.lucene.index.Term;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.core.SolrCore;
+import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.util.RefCounted;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -157,7 +158,9 @@ public class SolrIndexFingerprintTest extends SolrTestCaseJ4 {
 
   private void assertCachedFingerprintMatchesUncached(SolrCore core, long maxVersion)
       throws Exception {
-    try (var searcher = core.getSearcher().get()) {
+    RefCounted<SolrIndexSearcher> searcherRef = core.getSearcher();
+    try {
+      SolrIndexSearcher searcher = searcherRef.get();
       IndexFingerprint expectedFingerprint = new IndexFingerprint(maxVersion);
       for (var ctx : searcher.getTopReaderContext().leaves()) {
         LeafReader noCacheLeafReader =
@@ -179,6 +182,8 @@ public class SolrIndexFingerprintTest extends SolrTestCaseJ4 {
                     searcher, noCacheLeafReader.getContext(), maxVersion));
       }
       assertEquals(expectedFingerprint, searcher.getIndexFingerprint(maxVersion));
+    } finally {
+      searcherRef.decref();
     }
   }
 }

@@ -181,12 +181,16 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     assertU(commit("openSearcher", "true"));
 
     String persistedMetadata;
-    try (var searcher = core.getSearcher().get()) {
+    RefCounted<SolrIndexSearcher> searcherRef = core.getSearcher();
+    try {
+      SolrIndexSearcher searcher = searcherRef.get();
       SegmentReader segmentReader =
           getSegmentReader(searcher.getTopReaderContext().leaves().get(0).reader());
       persistedMetadata =
           segmentReader.getSegmentInfo().info.getAttribute(SEGMENT_FINGERPRINT_ATTRIBUTE);
       assertNotNull("The test requires a persisted pre-update summary", persistedMetadata);
+    } finally {
+      searcherRef.decref();
     }
 
     iwRef = core.getSolrCoreState().getIndexWriter(core);
