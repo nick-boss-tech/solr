@@ -3771,8 +3771,8 @@
       "round": "audit-3",
       "evidence": "mergeIds skips a partial shard without sort_values (SOLR-14758)"
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-14004-draft-open",
+    "verdict": "close-fixed",
+    "draft_branch": "solr-14004-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
