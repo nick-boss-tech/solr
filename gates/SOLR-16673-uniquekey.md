@@ -1,6 +1,6 @@
 # Gate job: SOLR-16673 numeric uniqueKey response
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm5-gate-solr-16673-uniquekey.md)
 
 - Branch: `solr-16673-uniquekey`. Head: `70c6eb0c49008cf9518c456dedd6c4981642d52c` (fork tip, confirmed by `git ls-remote` on 2026-10-18).
 - Prior gated head: none. Merge-base with upstream/main: `e044bf20b405b8ca985730be3553d77d1fc8ff31`.
