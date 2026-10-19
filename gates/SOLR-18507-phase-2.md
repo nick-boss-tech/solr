@@ -1,6 +1,6 @@
 # Gate job: SOLR-18507 (Phase 2 gross fingerprint cache)
 
-Status: CLAIMED by vm1 for round 5 at head 137e77a4c8 (vm3 fix from the round 4 investigation), gate running 2026-10-19, log g18507p2-gate5.log on vm1.
+Status: DONE (round 5 GATE GREEN at 137e77a4c8, vm1, 2026-10-19; receipt in receipts/SOLR-18507.md).
 
 - Branch: `solr-18507-phase-2-submit`. Head: `613a1b29fea36af00378f8deeee68c71ab56aa0f` (round 4; round 3 head d55d4422de4 plus the assertTrue fix 613a1b29fea) (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `1ba98f9240902c26f0bcd411f8787d38555dea8d`. Prior gated head: none recorded.
@@ -72,3 +72,9 @@ Claim: `claims/pool-vm3-investigate-solr-18507-phase-2.md`. Head investigated: 6
 - Fix (one commit on this branch, `137e77a4c8`): the three `try (var searcher = core.getSearcher().get())` blocks become `core.withSearcher(searcher -> searcher.getIndexFingerprint(Long.MAX_VALUE))`, which releases the reference.
 - Verified on the fixed head by vm3: tidy exit 0 (no changes), Error Prone compile exit 0, `SolrCoreFingerprintCacheTest` seed 18507A002 1 test, 0 failures (XML). Log: `/workspace/gates/logs/vm3/18507-p2-investigate/fixed-focused.log`.
 - Not run by vm3: step 5 (`:solr:core:check -x test`) and the full gate receipt. Relaunching the gate on `137e77a4c8` is vm1's; this is a new head, so it needs a new gate run, not a relaunch of round 4.
+
+## Round 5 record (vm1, 2026-10-19, head 137e77a4c8): GATE GREEN
+
+- Runner `~/workspace/tools/g18507p2-gate5-runner.sh` on vm1 under the queue lock; log `~/workspace/tools/g18507p2-gate5.log`; focused XML at `~/workspace/tools/g18507p2-head5-TEST.xml`.
+- Step 0 changelog parse rc=0. Step 1 tidy rc=0, post-tidy status empty. Step 2 Error Prone compile rc=0. Step 4 `SolrCoreFingerprintCacheTest`, seed `18507A002`: 1 test, 0 failures, 0 errors. Step 5 `:solr:core:check -x test` rc=0.
+- Receipt: `receipts/SOLR-18507.md` (phase 2 section). The gate job is DONE. Owner complaint 6 is answered by vm3's investigation plus this re-gate.
