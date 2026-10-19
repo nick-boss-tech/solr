@@ -18,6 +18,7 @@ package org.apache.solr.metrics.otel;
 
 import io.opentelemetry.sdk.metrics.export.MetricExporter;
 import io.opentelemetry.sdk.resources.Resource;
+import java.util.Map;
 
 public interface MetricExporterFactory {
 
@@ -47,7 +48,7 @@ public interface MetricExporterFactory {
     return OtelMetricsConfig.current().getResource();
   }
 
-  static java.util.Map<String, String> currentHeaders() {
+  static Map<String, String> currentHeaders() {
     return OtelMetricsConfig.current().getHeaders();
   }
 }
