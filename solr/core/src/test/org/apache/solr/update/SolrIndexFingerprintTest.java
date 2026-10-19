@@ -24,6 +24,7 @@ import org.apache.lucene.document.StringField;
 import org.apache.lucene.index.FilterLeafReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.LeafReader;
+import org.apache.lucene.index.Term;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.util.RefCounted;
@@ -90,6 +91,79 @@ public class SolrIndexFingerprintTest extends SolrTestCaseJ4 {
 
       IndexFingerprint actualFingerprint = searcher.getIndexFingerprint(maxVersion);
       assertEquals(expectedFingerprint, actualFingerprint);
+    }
+  }
+
+  @Test
+  public void testGrossFingerprintCacheAccountsForDeletesAndDocValuesUpdates() throws Exception {
+    SolrCore core = h.getCore();
+    RefCounted<IndexWriter> iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      IndexWriter writer = iwRef.get();
+      for (int i = 1; i <= 8; i++) {
+        Document doc = new Document();
+        doc.add(new StringField("id", Integer.toString(i), Field.Store.YES));
+        doc.add(new NumericDocValuesField("_version_", i));
+        writer.addDocument(doc);
+      }
+      writer.flush();
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+    assertCachedFingerprintMatchesUncached(core, Long.MAX_VALUE);
+
+    iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      iwRef.get().deleteDocuments(new Term("id", "8"), new Term("id", "4"));
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+    // Deleting the maximum version exercises the non-invertible maxima fallback. The other
+    // deletion exercises checksum subtraction from the cached gross fingerprint.
+    assertCachedFingerprintMatchesUncached(core, Long.MAX_VALUE);
+
+    iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      iwRef
+          .get()
+          .updateDocValues(
+              new Term("id", "1"), new NumericDocValuesField("_version_", 100));
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+    // An in-place DocValues update advances the segment DocValues generation. The gross entry
+    // must be rebuilt before it is reused.
+    assertCachedFingerprintMatchesUncached(core, Long.MAX_VALUE);
+    assertCachedFingerprintMatchesUncached(core, 50);
+  }
+
+  private void assertCachedFingerprintMatchesUncached(SolrCore core, long maxVersion)
+      throws Exception {
+    try (var searcher = core.getSearcher().get()) {
+      IndexFingerprint expectedFingerprint = new IndexFingerprint(maxVersion);
+      for (var ctx : searcher.getTopReaderContext().leaves()) {
+        LeafReader noCacheLeafReader =
+            new FilterLeafReader(ctx.reader()) {
+              @Override
+              public CacheHelper getReaderCacheHelper() {
+                return null;
+              }
+
+              @Override
+              public CacheHelper getCoreCacheHelper() {
+                return null;
+              }
+            };
+        expectedFingerprint =
+            IndexFingerprint.reduce(
+                expectedFingerprint,
+                IndexFingerprint.getFingerprint(
+                    searcher, noCacheLeafReader.getContext(), maxVersion));
+      }
+      assertEquals(expectedFingerprint, searcher.getIndexFingerprint(maxVersion));
     }
   }
 }

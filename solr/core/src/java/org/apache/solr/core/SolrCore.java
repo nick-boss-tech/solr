@@ -73,10 +73,12 @@ import java.util.stream.StreamSupport;
 import org.apache.commons.io.file.PathUtils;
 import org.apache.lucene.codecs.Codec;
 import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.FilterLeafReader;
 import org.apache.lucene.index.IndexDeletionPolicy;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.LeafReaderContext;
+import org.apache.lucene.index.SegmentReader;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.IOContext;
 import org.apache.lucene.store.IndexInput;
@@ -234,6 +236,10 @@ public class SolrCore implements SolrInfoBean, Closeable {
   private final ConfigSet configSet;
   private final Cache<IndexReader.CacheKey, IndexFingerprint> perSegmentFingerprintCache =
       Caffeine.newBuilder().weakKeys().build();
+  private final Cache<IndexReader.CacheKey, CachedSegmentFingerprint>
+      perSegmentGrossFingerprintCache = Caffeine.newBuilder().weakKeys().recordStats().build();
+
+  private record CachedSegmentFingerprint(long docValuesGen, IndexFingerprint fingerprint) {}
   // singleton listener for all packages used in schema
 
   private final CircuitBreakerRegistry circuitBreakerRegistry;
@@ -2140,8 +2146,8 @@ public class SolrCore implements SolrInfoBean, Closeable {
    */
   public IndexFingerprint getIndexFingerprint(
       SolrIndexSearcher searcher, LeafReaderContext ctx, long maxVersion) throws IOException {
-    IndexReader.CacheHelper cacheHelper = ctx.reader().getReaderCacheHelper();
-    if (cacheHelper == null) {
+    IndexReader.CacheHelper readerCacheHelper = ctx.reader().getReaderCacheHelper();
+    if (readerCacheHelper == null) {
       if (log.isDebugEnabled()) {
         log.debug(
             "Cannot cache IndexFingerprint as reader does not support caching. searcher:{} reader:{} readerHash:{} maxVersion:{}",
@@ -2153,12 +2159,77 @@ public class SolrCore implements SolrInfoBean, Closeable {
       return IndexFingerprint.getFingerprint(searcher, ctx, maxVersion);
     }
 
-    IndexFingerprint f = null;
-    f = perSegmentFingerprintCache.getIfPresent(cacheHelper.getKey());
-    // fingerprint is either not cached or if we want fingerprint only up to a version less than
-    // maxVersionEncountered in the segment, or documents were deleted from segment for which
-    // fingerprint was cached
-    //
+    IndexReader.CacheKey readerKey = readerCacheHelper.getKey();
+    IndexFingerprint f = perSegmentFingerprintCache.getIfPresent(readerKey);
+    if (f != null
+        && f.getMaxInHash() <= maxVersion
+        && f.getNumDocs() == ctx.reader().numDocs()) {
+      if (log.isDebugEnabled()) {
+        log.debug(
+            "IndexFingerprint cache hit for searcher:{} reader:{} readerHash:{} maxVersion:{}",
+            searcher,
+            ctx.reader(),
+            ctx.reader().hashCode(),
+            maxVersion);
+      }
+      return f;
+    }
+    f = null;
+
+    LeafReader unwrappedReader = FilterLeafReader.unwrap(ctx.reader());
+    if (maxVersion == Long.MAX_VALUE && unwrappedReader instanceof SegmentReader segmentReader) {
+      IndexReader.CacheHelper coreCacheHelper = segmentReader.getCoreCacheHelper();
+      if (coreCacheHelper != null) {
+        IndexReader.CacheKey coreKey = coreCacheHelper.getKey();
+        long docValuesGen = segmentReader.getSegmentInfo().getDocValuesGen();
+        CachedSegmentFingerprint cachedGross =
+            perSegmentGrossFingerprintCache.getIfPresent(coreKey);
+        if (cachedGross != null && cachedGross.docValuesGen() == docValuesGen) {
+          if (log.isDebugEnabled()) {
+            log.debug(
+                "IndexFingerprint gross cache hit for searcher:{} segment:{} maxVersion:{}",
+                searcher,
+                segmentReader.getSegmentName(),
+                maxVersion);
+          }
+          f =
+              IndexFingerprint.getFingerprintFromGross(
+                  cachedGross.fingerprint(), searcher, ctx, maxVersion);
+        } else if (cachedGross != null) {
+          perSegmentGrossFingerprintCache.invalidate(coreKey);
+        }
+
+        // A cold segment that already contains deletions would require decoding the deleted
+        // documents just to build a gross summary. Keep the old live-doc scan for that first
+        // reader; summaries are warmed while the segment has no deletions and reused afterward.
+        if (f == null && ctx.reader().numDocs() == ctx.reader().maxDoc()) {
+          if (log.isDebugEnabled()) {
+            log.debug(
+                "IndexFingerprint gross cache miss for searcher:{} segment:{} maxVersion:{}",
+                searcher,
+                segmentReader.getSegmentName(),
+                maxVersion);
+          }
+          IndexFingerprint.FingerprintAndGross fingerprints =
+              IndexFingerprint.getFingerprintAndGross(searcher, ctx, maxVersion);
+          f = fingerprints.live();
+          if (fingerprints.gross().getMaxVersionEncountered()
+              == fingerprints.gross().getMaxInHash()) {
+            perSegmentGrossFingerprintCache.put(
+                coreKey, new CachedSegmentFingerprint(docValuesGen, fingerprints.gross()));
+          }
+        }
+        if (f != null) {
+          if (f.getMaxVersionEncountered() == f.getMaxInHash()) {
+            perSegmentFingerprintCache.put(readerKey, f);
+          }
+          return f;
+        }
+      }
+    }
+
+    // Bounded fingerprints and readers without a stable segment core retain the existing cache
+    // behavior. Gross fingerprints are only used when the request includes every segment version.
     if (f == null
         || (f.getMaxInHash() > maxVersion)
         || (f.getNumDocs() != ctx.reader().numDocs())) {
@@ -2171,17 +2242,15 @@ public class SolrCore implements SolrInfoBean, Closeable {
             maxVersion);
       }
       f = IndexFingerprint.getFingerprint(searcher, ctx, maxVersion);
-      // cache fingerprint for the segment only if all the versions in the segment are included in
-      // the fingerprint
+      // Cache the segment only if every version was included in this fingerprint.
       if (f.getMaxVersionEncountered() == f.getMaxInHash()) {
         log.debug(
             "Caching fingerprint for searcher:{} leafReaderContext:{} mavVersion:{}",
             searcher,
             ctx,
             maxVersion);
-        perSegmentFingerprintCache.put(cacheHelper.getKey(), f);
+        perSegmentFingerprintCache.put(readerKey, f);
       }
-
     } else {
       if (log.isDebugEnabled()) {
         log.debug(
@@ -2194,11 +2263,20 @@ public class SolrCore implements SolrInfoBean, Closeable {
     }
     if (log.isDebugEnabled()) {
       log.debug(
-          "Approximate perSegmentFingerprintCache Size: {}, Segments Size:{}",
+          "Approximate perSegmentFingerprintCache Size: {}, gross cache size: {}, Segments Size:{}",
           perSegmentFingerprintCache.estimatedSize(),
+          perSegmentGrossFingerprintCache.estimatedSize(),
           searcher.getTopReaderContext().leaves().size());
     }
     return f;
+  }
+
+  long getPerSegmentGrossFingerprintCacheHitCount() {
+    return perSegmentGrossFingerprintCache.stats().hitCount();
+  }
+
+  long getPerSegmentGrossFingerprintCacheSize() {
+    return perSegmentGrossFingerprintCache.estimatedSize();
   }
 
   /**

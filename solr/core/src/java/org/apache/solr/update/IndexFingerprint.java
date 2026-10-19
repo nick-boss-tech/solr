@@ -110,11 +110,6 @@ public class IndexFingerprint implements MapWriter {
 
   public static IndexFingerprint getFingerprint(
       SolrIndexSearcher searcher, LeafReaderContext ctx, Long maxVersion) throws IOException {
-    SchemaField versionField = VersionInfo.getAndCheckVersionField(searcher.getSchema());
-    ValueSource vs = versionField.getType().getValueSource(versionField, null);
-    Map<Object, Object> funcContext = ValueSource.newContext(searcher);
-    vs.createWeight(funcContext, searcher);
-
     IndexFingerprint f = new IndexFingerprint();
     f.maxVersionSpecified = maxVersion;
     f.maxDoc = ctx.reader().maxDoc();
@@ -122,20 +117,133 @@ public class IndexFingerprint implements MapWriter {
 
     int maxDoc = ctx.reader().maxDoc();
     Bits liveDocs = ctx.reader().getLiveDocs();
-    FunctionValues fv = vs.getValues(funcContext, ctx);
+    FunctionValues fv = getVersionValues(searcher, ctx);
     for (int doc = 0; doc < maxDoc; doc++) {
       if (liveDocs != null && !liveDocs.get(doc)) continue;
       long v = fv.longVal(doc);
-      f.maxVersionEncountered = Math.max(v, f.maxVersionEncountered);
-      if (v <= f.maxVersionSpecified) {
-        f.maxInHash = Math.max(v, f.maxInHash);
-        f.versionsHash += Hash.fmix64(v);
-        f.numVersions++;
-      }
+      addVersion(f, v, maxVersion);
     }
 
     return f;
   }
+
+  /**
+   * Computes the live fingerprint and a gross fingerprint that includes deleted documents. The
+   * gross value can be retained for the segment core and adjusted for later deletions without
+   * decoding the versions of live documents again.
+   */
+  public static FingerprintAndGross getFingerprintAndGross(
+      SolrIndexSearcher searcher, LeafReaderContext ctx, long maxVersion) throws IOException {
+    if (ctx.reader().numDocs() == ctx.reader().maxDoc()) {
+      IndexFingerprint fingerprint = getFingerprint(searcher, ctx, maxVersion);
+      return new FingerprintAndGross(fingerprint, fingerprint.copy());
+    }
+
+    IndexFingerprint live = new IndexFingerprint(maxVersion);
+    IndexFingerprint gross = new IndexFingerprint(maxVersion);
+    int maxDoc = ctx.reader().maxDoc();
+    Bits liveDocs = ctx.reader().getLiveDocs();
+    live.maxDoc = maxDoc;
+    live.numDocs = ctx.reader().numDocs();
+    gross.maxDoc = maxDoc;
+    gross.numDocs = maxDoc;
+
+    FunctionValues fv = getVersionValues(searcher, ctx);
+    for (int doc = 0; doc < maxDoc; doc++) {
+      long version = fv.longVal(doc);
+      addVersion(gross, version, maxVersion);
+      if (liveDocs == null || liveDocs.get(doc)) {
+        addVersion(live, version, maxVersion);
+      }
+    }
+    return new FingerprintAndGross(live, gross);
+  }
+
+  /** Returns the live fingerprint represented by a gross per-segment fingerprint. */
+  public static IndexFingerprint getFingerprintFromGross(
+      IndexFingerprint gross,
+      SolrIndexSearcher searcher,
+      LeafReaderContext ctx,
+      long maxVersion)
+      throws IOException {
+    // A gross fingerprint cannot answer a request that excludes some of its versions.
+    if (gross.maxVersionEncountered > maxVersion) {
+      return getFingerprint(searcher, ctx, maxVersion);
+    }
+
+    IndexFingerprint live = gross.copy();
+    live.maxVersionSpecified = maxVersion;
+    Bits liveDocs = ctx.reader().getLiveDocs();
+    if (liveDocs == null || ctx.reader().numDocs() == gross.numDocs) {
+      live.numDocs = ctx.reader().numDocs();
+      return live;
+    }
+
+    FunctionValues fv = getVersionValues(searcher, ctx);
+    boolean recomputeMaxima = false;
+    for (int doc = 0; doc < ctx.reader().maxDoc(); doc++) {
+      if (liveDocs.get(doc)) continue;
+      long version = fv.longVal(doc);
+      if (version <= maxVersion) {
+        // The fingerprint hash is an additive 64-bit checksum, so subtraction preserves its
+        // existing modulo-2^64 behavior.
+        live.versionsHash -= Hash.fmix64(version);
+        live.numVersions--;
+      }
+      if (version == gross.maxVersionEncountered || version == gross.maxInHash) {
+        recomputeMaxima = true;
+      }
+    }
+    live.numDocs = ctx.reader().numDocs();
+
+    // Maxima are not invertible. Re-scan live versions only when a deletion removed one of the
+    // cached maxima; the checksum and counts above still come from the gross summary.
+    if (recomputeMaxima) {
+      live.maxVersionEncountered = 0;
+      live.maxInHash = 0;
+      FunctionValues liveValues = getVersionValues(searcher, ctx);
+      for (int doc = 0; doc < ctx.reader().maxDoc(); doc++) {
+        if (!liveDocs.get(doc)) continue;
+        long version = liveValues.longVal(doc);
+        live.maxVersionEncountered = Math.max(version, live.maxVersionEncountered);
+        if (version <= maxVersion) {
+          live.maxInHash = Math.max(version, live.maxInHash);
+        }
+      }
+    }
+    return live;
+  }
+
+  private static FunctionValues getVersionValues(SolrIndexSearcher searcher, LeafReaderContext ctx)
+      throws IOException {
+    SchemaField versionField = VersionInfo.getAndCheckVersionField(searcher.getSchema());
+    ValueSource vs = versionField.getType().getValueSource(versionField, null);
+    Map<Object, Object> funcContext = ValueSource.newContext(searcher);
+    vs.createWeight(funcContext, searcher);
+    return vs.getValues(funcContext, ctx);
+  }
+
+  private static void addVersion(IndexFingerprint f, long version, long maxVersion) {
+    f.maxVersionEncountered = Math.max(version, f.maxVersionEncountered);
+    if (version <= maxVersion) {
+      f.maxInHash = Math.max(version, f.maxInHash);
+      f.versionsHash += Hash.fmix64(version);
+      f.numVersions++;
+    }
+  }
+
+  private IndexFingerprint copy() {
+    IndexFingerprint copy = new IndexFingerprint(maxVersionSpecified);
+    copy.maxVersionEncountered = maxVersionEncountered;
+    copy.maxInHash = maxInHash;
+    copy.versionsHash = versionsHash;
+    copy.numVersions = numVersions;
+    copy.numDocs = numDocs;
+    copy.maxDoc = maxDoc;
+    return copy;
+  }
+
+  public static record FingerprintAndGross(IndexFingerprint live, IndexFingerprint gross) {}
 
   public static IndexFingerprint reduce(IndexFingerprint acc, IndexFingerprint f2) {
     // acc should have maxVersionSpecified already set in it using IndexFingerprint(long
