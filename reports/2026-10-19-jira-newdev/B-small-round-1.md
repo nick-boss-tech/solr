@@ -48,3 +48,13 @@ Claim: `claims/pool-jira-newdev-small-round-1-solr-17727.md`. Work follows on br
 
 - Verified: JIRA status Open, no resolution, on 2026-10-19, but the reported flow is no longer what the code does at apache/main c8ab71430f.
 - Stopped, no branch. `solr/core/src/java/org/apache/solr/cli/RunExampleTool.java` checks collection existence right after the name prompt (lines 1202 to 1213). When the collection exists, the user is asked only whether to reuse it, and reuse returns the name at once (`return collectionName`, line 1217 area). The shard, replica, and config prompts come after that check and are skipped on reuse. That is the behavior the ticket asks for. The ticket reads as already done. A maintainer should confirm and close it.
+
+## Item 8: SOLR-18320 (vm4), stopped, 2026-10-19T20:11:48Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Stopped, no branch. The report is a warning from the ZK credentials injector on `bin/solr create --solr-connection` with no ZK host. The class is loaded from `ZkController`, `CloudConfig`, and `SolrXmlConfig` (the config setter at `SolrXmlConfig.java:545`). I did not find which path the HTTP-only create command takes to reach it. Confirming the path needs a live `bin/solr create` run against a Solr node, which I did not run. Scope is unclear without that run, so no fix is proposed.
+
+## Item 10: SOLR-17415 (vm4), already done in code, 2026-10-19T20:11:48Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Stopped, no branch. At apache/main c8ab71430f the code no longer uses `TimeLimitingCollector`. `CommandHandler.searchWithTimeLimiter` calls `searcher.search` directly, and `Grouping.searchWithTimeLimiter` does the same. Two stale javadoc comments still name the class (`search/Grouping.java:426`, `search/grouping/CommandHandler.java:243`), and the method names are misleading. Those are cleanup with no behavior to test, so a branch would not carry a regression test. A maintainer can close the ticket or ask for the comment cleanup.
