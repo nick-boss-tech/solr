@@ -1,0 +1,3 @@
+We looked at this against the current main branch (498a09aea97a). The streaming update path still caches one update client per node, and that client is created with the first request sent to that node (solr/core/src/java/org/apache/solr/update/StreamingSolrClients.java, around lines 66 to 78). Errors from later requests on the same node are then recorded against that first request (the same file, around lines 131 to 146), so the retry decision and the request tracking can use the wrong request.
+
+We have confirmed this from the code, not with a test. A fix is needed, and a test would show the mis-attribution directly; we have not written either yet.
