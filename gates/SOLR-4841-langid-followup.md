@@ -1,6 +1,6 @@
 # Gate job: SOLR-4841 language-detection follow-up (test-only, custom identifier through processAdd)
 
-Status: GATE GREEN at bf1b01d0dc (receipts/SOLR-4841-followup.md; deliverable reports/SOLR-4841-followup-round-1.md). Review rounds 2 and 3 by a reviewer other than the builder are still needed before SATISFIED.
+Status: DONE 2026-10-19 (gate GREEN at bf1b01d0dc, receipts/SOLR-4841-followup.md; review rounds 2 and 3 by vm5 SATISFIED, reports/SOLR-4841-followup-round-1.md; the new ticket and PR opening are Nick's, see assignments/pool-solr-4841-langid-followup-round-1.md).
 
 - Branch: solr-4841-langid-followup-submit on the fork (https://github.com/nick-boss-tech/solr). Head at filing: bf1b01d0dc (ls-remote matched). The earlier head 92567d75c4 failed tidy on import order and is superseded by bf1b01d0dc, a fast-forward commit.
 - Base: apache/solr upstream main c8ab71430f. The merged change a99ff066f4 is on apache main as a squash commit under a different hash; the pre-fix legs use the same tree with the one-line constructor revert.
