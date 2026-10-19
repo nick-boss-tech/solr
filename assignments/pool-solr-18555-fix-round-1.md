@@ -14,8 +14,8 @@ The gate on `solr-18555-submit` at head `884de51579` is NOT GREEN. Its receipt i
 2. **Remove the unused import.** `HighlightFlag` in `HighlightRequestHandler.java` (line 31) is never used, and the ECJ lint in the module check fails on it. Remove it. Start from: the file after item 1. Output: the same file.
 3. **Run tidy on the branch.** Tidy changed whitespace in `HighlightRequestHandlerTest.java` and `HighlightRequestHandlerHttpTest.java` at the old head. Run `:solr:core:tidy` and commit whatever it changes, so the tree is clean before the gate. Output: a tidy-clean tree.
 4. **Commit and push the fixes.** One commit per item, author Nick Shanin, no trailers, no em dashes, message `SOLR-18555: <summary>`. Push as a fast-forward from `884de51579`. Output: the new head on `solr-18555-submit`.
-5. **Do not decide the three failing expectations.** They are listed in the Decisions table. Stop at them; do not edit the expectations or the handler to make them pass.
-6. **File a gate job at the new head.** Use `pool/bin/request-gate.py` with the request template (`pool/templates/gate-request.md`), after item 4. Name the three failing tests as a known open item in the Why field. Output: `gates/SOLR-18555.md` on coordination.
+5. **Apply the main-agent decisions below.** Preserve the phrase-highlight expectation and fix the handler path. Update the HTML and parser-rejection test expectations as decided, while preserving production HTML encoding and parser isolation.
+6. **File a gate job at the new head.** Use `pool/bin/request-gate.py` with `pool/templates/gate-request.md`, after item 4. The ticket-level `gates/SOLR-18555.md` already exists, so use `Gate ID: SOLR-18555-phase-fix-round-1` and post `gates/SOLR-18555-phase-fix-round-1.md`. Set `Focused class` to `org.apache.solr.handler.HighlightRequestHandlerTest`, which contains all three affected assertions. The HTTP class passed with 2 tests and no failures in gate 4, and this round does not change request routing. In the Why field, summarize the prior NOT GREEN receipt and the three main-agent decisions. Output: the phase gate job on coordination.
 
 ## Decisions
 
@@ -25,13 +25,13 @@ The gate on `solr-18555-submit` at head `884de51579` is NOT GREEN. Its receipt i
 | Unused import | decided: remove it | none | Nick Shanin |
 | Tidy changes | decided: run tidy and commit its changes before the gate | none | Nick Shanin |
 | Push | decided: fast-forward from 884de51579 only | if the branch has moved, stop and record the new head here | Nick Shanin |
-| testPhraseAndMultiTermQueries: expected one `<em>` span, handler gives one per word | escalate to the main agent | do not change the test or the handler; record the failure text here | Nick Shanin |
-| testHtmlEncoderEscapesSuppliedText: expected raw `/`, encoder writes `&#x2F;` | escalate to the main agent | do not change the test or the handler; record the failure text here | Nick Shanin |
-| testRejectsParserOverridesAndParserSubqueries: expected SyntaxError, handler throws SolrException (undefined field _query_) | escalate to the main agent | do not change the test or the handler; record the failure text here | Nick Shanin |
+| testPhraseAndMultiTermQueries: expected one `<em>` span, handler gives one per word | decided: handler behavior is wrong | Keep the expected `<em>Solr highlights</em>` phrase span. Fix query and highlighter handling so default strict phrase highlighting works without a searcher; do not merge adjacent term spans as a formatting workaround. | Nick Shanin |
+| testHtmlEncoderEscapesSuppliedText: expected raw `/`, encoder writes `&#x2F;` | decided: test expectation is wrong | Expect `&#x2F;` for the slash and keep HTML encoding. Existing `TestUnifiedSolrHighlighter` coverage expects this encoded slash. | Nick Shanin |
+| testRejectsParserOverridesAndParserSubqueries: expected SyntaxError, handler throws SolrException (undefined field _query_) | decided: exception-class expectation is wrong | Keep `setAllowSubQueryParsing(false)` and the built-in Lucene parser. Assert `SolrException` with BAD_REQUEST for the `_query_` input; do not wrap it as SyntaxError. | Nick Shanin |
 
 ## Deliverable
 
-`assignments/pool-solr-18555-fix-round-1.md` Status updated to DONE with the new head, and `gates/SOLR-18555.md` from item 6. The deliverable also lists each item's status and the three escalated tests.
+`assignments/pool-solr-18555-fix-round-1.md` Status updated to DONE with the new head, and `gates/SOLR-18555-phase-fix-round-1.md` from item 6. The deliverable also lists each item's status and confirms the three decisions above.
 
 ## Limits
 
