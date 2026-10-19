@@ -380,10 +380,7 @@ public class TestJsonRangeFacets extends SolrTestCaseHS {
     final SolrParams p = params("q", "*:*", "rows", "0");
     // with lower and upper include
     client.testJQ(
-        params(
-            p,
-            "json.facet",
-            "{price:{type : range,f : num_i, ranges:[{range:\"  [-5,7] \"}]}}"),
+        params(p, "json.facet", "{price:{type : range,f : num_i, ranges:[{range:\"  [-5,7] \"}]}}"),
         "facets=={count:6, price:{buckets:[{val:\"[-5,7]\",count:5}]}}");
 
     // with lower include and upper exclude
