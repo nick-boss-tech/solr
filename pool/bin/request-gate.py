@@ -228,6 +228,19 @@ def post(ticket, gate, job, tip, cwd):
         git("worktree", "remove", "--force", path, cwd=cwd, check=False)
 
 
+def tidy_preflight(tip, cwd):
+    url = git("remote", "get-url", "origin", cwd=cwd).stdout.strip()
+    logdir = tempfile.mkdtemp(prefix="preflight-")
+    script = os.path.join(cwd, "pool", "bin", "gate-preflight.sh")
+    r = subprocess.run(["bash", script, url, tip, logdir], capture_output=True, text=True)
+    log = os.path.join(logdir, "preflight.log")
+    detail = open(log, encoding="utf-8").read().strip() if os.path.exists(log) else r.stderr.strip()
+    if r.returncode == 3:
+        die(f"{detail} Patch: {os.path.join(logdir, 'tidy.patch')}. Fix the head and request again.")
+    if r.returncode != 0:
+        die(f"tidy preflight could not run at {tip[:10]}: {detail}")
+
+
 def main():
     global TOKEN
     args = sys.argv[1:]
@@ -248,6 +261,7 @@ def main():
     git("fetch", "-q", "origin", "coordination", cwd=cwd, auth=True)
     gate = gate_id(v)
     check_free(v["Ticket"], gate, cwd)
+    tidy_preflight(tip, cwd)
     job = build(v, tip)
     if dry:
         sys.stdout.write(job)
