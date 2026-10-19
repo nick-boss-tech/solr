@@ -1,6 +1,6 @@
 # Gate job: SOLR-18507 (Phase 1 recovery policy)
 
-Status: CLAIMED by vm1 2026-10-19T03:40Z (claims/pool-vm1-gate-SOLR-18507-phase-1.md; queued behind SOLR-18458 round 2)
+Status: DONE 2026-10-19 (vm1, GATE GREEN at 1ba98f924090; receipts/SOLR-18507.md)
 
 - Branch: `solr-18507-submit`. Head: `1ba98f9240902c26f0bcd411f8787d38555dea8d` (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `c8ab71430f6e7547c773da596101d680862310ff`. Prior gated head: none recorded.
@@ -46,16 +46,16 @@ If any step cannot be verified, record it here and stop.
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed
-- [ ] step 0 changelog check
-- [ ] step 1 tidy clean
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg, if requested
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed
+- [x] step 0 changelog check
+- [x] step 1 tidy clean
+- [x] step 2 Error Prone compile
+- [x] step 3 proof leg, if requested
+- [x] step 4 focused head run, counted from fresh XML
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
 
 ## Deliverable and limits
 
