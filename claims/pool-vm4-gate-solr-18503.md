@@ -6,3 +6,5 @@ Head confirmed by ls-remote at claim: dba48d69b4d8f2c1f367e48fbcc884cce82420e6 (
 Base: c8ab71430f6e7547c773da596101d680862310ff.
 Runner: pool/bin/sweep-run.sh. Seed 18503C0FFEE18503.
 Deliverable: receipts/SOLR-18503.md, logs under /workspace/gates/logs/vm4/solr-18503/.
+
+STOPPED: 2026-10-19T03:13Z by vm4. Tidy changed the head test file (GATE INVALID). See gates/SOLR-18503.md Result. Claim time in the first line was corrected here: gate started about 02:59Z.
