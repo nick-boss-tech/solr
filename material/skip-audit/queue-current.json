@@ -2274,8 +2274,8 @@
       "round": "audit-1",
       "evidence": "IndexFetcher on main calls checkAllowList(List.of(leaderCoreUrl), clusterState); the \"Invalid URL syntax in shards parameter: null\" message exists only in CloudReplicaSource for a real shards param. Reported path gone."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-15481-draft-open",
+    "verdict": "pr-needed",
+    "draft_branch": "solr-15481-draft-pr",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
