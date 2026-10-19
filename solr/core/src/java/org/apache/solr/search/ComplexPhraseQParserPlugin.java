@@ -139,6 +139,7 @@ public class ComplexPhraseQParserPlugin extends QParserPlugin {
     @Override
     public Query parse() throws SyntaxError {
       String qstr = getString();
+      if (qstr == null) return null;
 
       String defaultField = getParam(CommonParams.DF);
 
