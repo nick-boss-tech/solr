@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
@@ -30,6 +32,7 @@ import org.apache.solr.client.solrj.request.schema.SchemaRequest;
 import org.apache.solr.client.solrj.response.schema.SchemaResponse;
 import org.apache.solr.cloud.SolrCloudTestCase;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.util.TestInjection;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -40,10 +43,36 @@ public class TestManagedSchemaWithMultipleAdd extends SolrCloudTestCase {
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private static final int AUTOSOFTCOMMIT_MAXTIME_MS = 3000;
 
+  private static final Semaphore newSearcherSignal = new Semaphore(0);
+  private static volatile String hookCollection;
+
+  private static final TestInjection.Hook newSearcherHook =
+      new TestInjection.Hook() {
+        @Override
+        public void newSearcher(String collectionName) {
+          if (collectionName.equals(hookCollection)) {
+            newSearcherSignal.release();
+          }
+        }
+
+        @Override
+        public void waitForSearcher(
+            String collection, int cnt, int timeoutms, boolean failOnTimeout)
+            throws InterruptedException {
+          hookCollection = collection;
+          newSearcherSignal.drainPermits();
+          boolean signalled = newSearcherSignal.tryAcquire(cnt, timeoutms, TimeUnit.MILLISECONDS);
+          if (!signalled && failOnTimeout) {
+            fail("timed out waiting for new searcher event");
+          }
+        }
+      };
+
   @BeforeClass
   public static void createClusterAndInitSysProperties() throws Exception {
     System.setProperty("managed.schema.mutable", "true");
     System.setProperty("solr.autoSoftCommit.maxTime", Integer.toString(AUTOSOFTCOMMIT_MAXTIME_MS));
+    TestInjection.newSearcherHook(newSearcherHook);
     configureCluster(1)
         .addConfig(
             "conf1",
@@ -78,8 +107,8 @@ public class TestManagedSchemaWithMultipleAdd extends SolrCloudTestCase {
     cloudClient.request(ureq, collection);
 
     // The issue we test in this class does not appear when using explicit commits.
-    // Because of this we are waiting for autoSoftCommit to finish if there is one.
-    Thread.sleep(AUTOSOFTCOMMIT_MAXTIME_MS + 500);
+    // Because of this we wait for the autoSoftCommit to open a new searcher.
+    newSearcherHook.waitForSearcher(collection, 1, 20000, true);
 
     assertEquals(
         numDocs, cloudClient.query(collection, new SolrQuery("*:*")).getResults().getNumFound());
