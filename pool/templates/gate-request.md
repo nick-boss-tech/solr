@@ -1,6 +1,6 @@
 # Gate request: fill every field, then run pool/bin/request-gate.py on this file
 
-Each line is `Field: value`. Replace every FILL value. Delete the Head, Title, or Gate ID line if you do not use it. The script refuses any value that still starts with FILL, and any em dash or en dash.
+Each line is `Field: value`. Replace every FILL value. Delete the Head, Title, or Gate ID line if you do not use it. The script refuses any value that still starts with FILL, and any em dash or en dash. Windows posts do not run tidy or Gradle; the Linux gate host runs tidy and any repair (WORKFLOW.md, Gate repairs).
 
 Ticket: FILL the ticket key, for example SOLR-1234
 Title: FILL a short title for the job heading (optional)

@@ -40,6 +40,7 @@ Use this when your branch has a head that needs a full gate. You file the reques
 3. From any checkout of this repo, run `python3 pool/bin/request-gate.py --dry-run <scratch file>` to see the job, then run it again without `--dry-run` to post it. The script needs `GITHUB_TOKEN` in the environment or in `/workspace/.env`.
 4. The script refuses when that gate ID already has a gate job or a matching live claim, when the branch tip differs from Head, or when a field is still FILL or contains a dash. A live ticket-level claim also blocks a phase request. Different phase IDs for the same ticket may stay open together. Do not edit another session's job to make your request fit.
 5. On success it prints the gate path and commit. The job is OPEN; gate hosts find it in [OPEN-WORK.md](../OPEN-WORK.md). Your part ends there.
+6. Windows agents do not run tidy or Gradle. The Linux gate host runs tidy first and repairs mechanical failures, then re-gates once (WORKFLOW.md, Gate repairs). Do not patch the branch just to make a request pass.
 
 The legacy Windows `research\pool-post.ps1 -Kind gate` path supports ticket-level gate jobs. Use `request-gate.py` for phase-specific gate IDs.
 

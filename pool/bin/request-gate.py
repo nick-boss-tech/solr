@@ -126,10 +126,12 @@ def build(v, tip):
     else:
         step3 = f"Step 3, proof leg: {v['Proof leg']} Any other failure shape stops the job and follows the failure-route row."
     rows = [
-        ("Gate failure after tests executed", "decided: record and stop",
-         "Record the failing test, its failure text, the seed and the XML counts here. Do not relaunch.", "Nick Shanin (standing pool rule)"),
-        ("Tidy changes any file", "decided: GATE INVALID",
-         "Record the tidy diff here and stop. Do not commit the tidy change.", "Nick Shanin (standing pool rule)"),
+        ("Tidy changes any file", "decided: repair",
+         "Apply the tidy output on the gate worktree, record its patch and the tidied tree sha here, and continue from step 2. WORKFLOW.md, Gate repairs.", "Nick Shanin (standing pool rule)"),
+        ("Failure in repair scope (compile, changelog, lint, or up to two failing tests)", "decided: repair, then one retry",
+         "Make the repair as one commit and push it per WORKFLOW.md. Record the commit, its files, and the failing test or task here, then rerun from step 0 on the new head. Do not rerun an unchanged tree.", "Nick Shanin (standing pool rule)"),
+        ("Failure outside repair scope, or any failure after the retry", "decided: hand back",
+         "Set Status to HANDED BACK with the reason. Record the failing test or task, its failure text, the seed, the fresh XML counts, and both attempts. Do not relaunch.", "Nick Shanin (standing pool rule)"),
         ("Cluster fails to start before any assertion", "default: run the same command once more",
          "If the second run also fails before an assertion, record the first exception here and stop. This is harness setup, not a test result.", "Nick Shanin (standing pool rule)"),
         ("Proof leg result differs from the stated expectation", "decided: record and stop",
@@ -155,13 +157,13 @@ Status: OPEN
 Use the host's standard gate runner. Do not run the build tool directly. Check the worktree out at the head first.
 
 - {step0}
-- Step 1: tidy. If tidy changes any file, the run is GATE INVALID and stops.
+- Step 1: tidy. If tidy changes any file, apply the tidy output, record its patch and the tidied tree sha in this job, and continue from step 2. WORKFLOW.md, Gate repairs.
 - Step 2: Error Prone compile: `{module}:compileJava {module}:compileTestJava -Pvalidation.errorprone=true`.
 - {step3}
 - Step 4, focused head run: `{module}:cleanTest` first, then `{module}:test --tests {cls} -Ptests.seed={seed}`. Count from the fresh JUnit XML. Nothing else runs on the worktree between the test run and the XML read.
 - Step 5: module check `{module}:check -x test`.
 
-A gate that executed tests and failed is not relaunched by the claimant. Record the failure here and follow the failure-route row.
+Failures follow the rows below and WORKFLOW.md, Gate repairs. A failed retry hands the job back.
 
 ## Decisions
 
@@ -173,7 +175,7 @@ No row may leave the choice to the claimant.
 
 ## On green
 
-1. Write or refresh `receipts/{ticket}.md` with a new top section for gate ID `{gate}`: head, gate date and host, log path, step results, the proof-leg result (test name and failure text, or none requested), and the focused counts from the fresh XML.
+1. Write or refresh `receipts/{ticket}.md` with a new top section for gate ID `{gate}`: head, gate date and host, log path, step results, the proof-leg result (test name and failure text, or none requested), and the focused counts from the fresh XML. Record every attempt, its repair commits and files, and the gated head.
 2. No public text edits in this job unless a later job says so.
 3. Mark this job DONE and `claims/pool-<host>-gate-{gate}.md` DONE in the same push as the receipt.
 
@@ -184,7 +186,7 @@ If any step cannot be verified, record it here and stop.
 - [ ] head confirmed by ls-remote
 - [ ] diff scope confirmed
 - [ ] step 0 changelog check
-- [ ] step 1 tidy clean
+- [ ] step 1 tidy clean, or repaired and recorded
 - [ ] step 2 Error Prone compile
 - [ ] step 3 proof leg, if requested
 - [ ] step 4 focused head run, counted from fresh XML
@@ -194,7 +196,7 @@ If any step cannot be verified, record it here and stop.
 
 ## Deliverable and limits
 
-- One fast-forward push with the receipt and the DONE marks.
+- One fast-forward push with the receipt and the DONE marks, plus any repair commits (WORKFLOW.md, Gate repairs).
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
 """
 
@@ -228,19 +230,6 @@ def post(ticket, gate, job, tip, cwd):
         git("worktree", "remove", "--force", path, cwd=cwd, check=False)
 
 
-def tidy_preflight(tip, cwd):
-    url = git("remote", "get-url", "origin", cwd=cwd).stdout.strip()
-    logdir = tempfile.mkdtemp(prefix="preflight-")
-    script = os.path.join(cwd, "pool", "bin", "gate-preflight.sh")
-    r = subprocess.run(["bash", script, url, tip, logdir], capture_output=True, text=True)
-    log = os.path.join(logdir, "preflight.log")
-    detail = open(log, encoding="utf-8").read().strip() if os.path.exists(log) else r.stderr.strip()
-    if r.returncode == 3:
-        die(f"{detail} Patch: {os.path.join(logdir, 'tidy.patch')}. Fix the head and request again.")
-    if r.returncode != 0:
-        die(f"tidy preflight could not run at {tip[:10]}: {detail}")
-
-
 def main():
     global TOKEN
     args = sys.argv[1:]
@@ -261,7 +250,6 @@ def main():
     git("fetch", "-q", "origin", "coordination", cwd=cwd, auth=True)
     gate = gate_id(v)
     check_free(v["Ticket"], gate, cwd)
-    tidy_preflight(tip, cwd)
     job = build(v, tip)
     if dry:
         sys.stdout.write(job)

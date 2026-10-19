@@ -45,7 +45,23 @@ The Windows host never claims `gate`, `implementation`, `premise-run`, `settling
 - When two phase heads for one ticket have separate gate jobs, each has its own gate ID and claim. Both results are recorded as separate top sections in the ticket receipt at `receipts/<TICKET>.md`.
 - One gate per host at a time (each host serializes its own Gradle builds behind its local lock). Two hosts may gate different branches in parallel; that is the point of the pool.
 - On green, the gating host pushes the branch if the job says to, writes `receipts/<TICKET>.md`, marks the gate file DONE, and marks the claim DONE.
-- A gate that executed tests and failed is never relaunched by another host on sight. The failure is recorded in the gate file and reported; the main agent investigates before any relaunch. A run that never executed tests (environment refusal, VM replacement) may be relaunched once by the claiming or taking-over host.
+- A gate that executed tests and failed is repaired and retried only under Gate repairs below; otherwise it is handed back for implementation. A run that never executed tests (environment refusal, VM replacement) may be relaunched once by the claiming or taking-over host.
+
+## Gate repairs and hand-back
+
+Windows agents post gate requests but never run tidy or Gradle. The Linux gate host runs tidy first and owns the repair and the re-gate.
+
+Repair scope. A gate host may repair these failures and re-gate. Nothing else.
+- Tidy changes: apply the tidy output as it is.
+- Changelog problems the validator reports (type, links or issues).
+- Compile errors, and Error Prone or ECJ lint findings whose message names the fix (a missing import, an unused import, a helper that hides an inherited one).
+- Up to two failing tests, when the repair is in test code, or a production change of one or two lines that changes no expected value and is not an escalated decision.
+
+Out of scope: changing an expected value in a test, deleting a test, any change that answers an escalated decision row, edits outside the job's Diff scope, and any repair the host cannot state in one line.
+
+Recording. Each repair is one commit, `TICKET: gate repair: <summary>`, authored as Nick Shanin with no trailers. It is pushed fast-forward to the ticket branch from the head the gate ran on; if the branch tip has moved, stop and record it. The receipt names the original head, each repair commit with its files, and the gated head. The proof leg runs on the repaired head.
+
+One retry. After repairs the gate runs again from step 0 on the new head. The retry is allowed only if the repair changed the tree. If the retry fails at any step, or a repair falls outside scope, the gate job's Status becomes `HANDED BACK (reason)` and the ticket returns to implementation. The receipt records both attempts.
 
 ## What stays addressed, not pooled
 
