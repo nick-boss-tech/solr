@@ -1,6 +1,6 @@
 # Pool assignment: skip verdict remediation, batch 4 of 8
 
-Status: OPEN (released 2026-10-19: the owner stood vm2 down and paused factory work; vm2's claim is RELEASED in claims/pool-aaa-skip-verdict-remediation-04.md. Items 1 to 21 are DONE per that claim's heartbeats and reports/skip-verdict-remediation-04.md; items 22 to 25 remain and are claimable by any available Linux host.)
+Status: DONE (claims/pool-aaa-skip-verdict-remediation-04.md). All 25 items redone; deliverables in reports/skip-verdict-remediation-04.md.
 
 - Capability tags: review, draft.
 - Intended host: any pool Linux host. Claim under `claims/` before starting (WORKFLOW.md).
