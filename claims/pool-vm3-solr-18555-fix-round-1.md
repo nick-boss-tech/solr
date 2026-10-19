@@ -10,3 +10,5 @@
 Heartbeat: 2026-10-19T06:20:48Z
 
 Note on item 2: corrected wording on claim; the import is shadowed, not dead code. Same fix.
+
+Run: 2026-10-19T06:24:55Z: job r1-prep-062443 (log dir /workspace/gates/logs/vm3/18555/r1-prep-062443). Steps: tidy, then ErrorProne compile of :solr:core and :solr:solrj. Head: local branch on top of 884de51579 (commits c7778b917f starting patch, 71a34b3bc0 import). Not pushed yet; tidy changes, if any, are committed as item 3 before the push.
