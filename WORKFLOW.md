@@ -39,6 +39,19 @@ The Windows host never claims `gate`, `implementation`, `premise-run`, `settling
 5. Done. The holder marks the claim DONE with the deliverable paths when the work lands, in the same push sequence as the deliverable itself; an unmarked completed claim reads as open work to every other host and risks duplicated effort. A claim that ends in failure or a blocker says so in the claim file, with the reason; it does not just go quiet.
 6. Missed marks. If a deliverable has landed but its claim was never marked, any agent that verifies the deliverable on this branch may append the DONE mark, stating that it marked on verification and naming the deliverable. The mark is a record correction, not a claim transfer.
 
+## Posting a file to this branch
+
+Most records on this branch are one file added or edited: a claim, a report, a receipt section, an assignment, a status line. Post those with `pool/bin/post-file.sh`, which writes the file through the GitHub contents API as a server-side commit on the branch's current tip:
+
+    pool/bin/post-file.sh <branch-path> <local-file> <commit-message> [--branch <name>] [--base-sha <blob-sha>]
+
+There is no local tree to fall behind and nothing to rebase when another host lands first; the commit is made on whatever the tip is at that moment. Rules:
+
+- For an edit to an existing file, pass `--base-sha` with the git blob SHA your edit is based on. If the file has moved since, the post is refused rather than overwriting the newer edit: re-read the file, re-apply your change, and post again. That retry is seconds of work, not a rebase.
+- Claims keep the first-post-wins rule: the first claim file to land on the branch holds the slice, however it got there.
+- A change that must land atomically across several files (a deliverable plus its claim and status marks) still goes through a normal git push with fetch and rebase first. Never force-push this branch.
+- The helper reads the credential from `~/.git-credentials` and never prints it. Any host without the helper can make the same contents-API call directly; the route is the rule, not the script.
+
 ## Gates
 
 - A gate job file at `gates/<GATE_ID>.md` records: ticket, branch, head, module, focused test classes, seed, proof shape, the claiming host, the runner and log paths on that host, and a step checklist the runner updates as each step finishes. A host that dies mid-gate therefore loses at most one step, and the next host resumes from the checklist instead of from memory.
