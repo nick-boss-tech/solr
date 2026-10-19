@@ -16,3 +16,4 @@ Assignment: `assignments/pool-vm4-wake-round-1.md`. Claim: `claims/pool-vm4-wake
 | vm5 | 0 | 0 | not yet checked | open |
 
 Round end: the round stays open until all hosts show activity or 2026-10-20T06:00Z.
+- 2026-10-19T15:41:33Z: `mcp__agents__list_agents` failed a fourth time (HTTP 502). No message sent to vm2, vm3 or vm5. Retry next tick.

@@ -11,4 +11,4 @@ Heartbeat: 2026-10-19T15:06:30Z
 
 Result: 2026-10-19T15:07:20Z: close-answered, changed from keep-open. The reference guide answers the question: `maxSegments` has no default and is optional (`indexing-with-update-handlers.adoc:142-150`), and the Solr 8 upgrade note says to set `maxSegments` to control the segment count after an optimize (`major-changes-in-solr-8.adoc:365-367`). Code default at `CommitUpdateCommand.java:56`. Not reproduced; the docs answer it.
 
-DONE: 2026-10-19T15:07:20Z. Deliverables: `drafts/SOLR-16355/record.md` and `drafts/SOLR-16355/jira-comment.md` on the new draft branch `solr-16355-draft-close` (head 346bcd46af); queue verdict `close-answered`; batch line in `reports/skip-verdict-remediation-01.md`.
+DONE: 2026-10-19T15:07:20Z. Deliverables: `drafts/SOLR-16355/record.md` and `drafts/SOLR-16355/jira-comment.md` on the new draft branch `solr-16355-draft-close` (head ebe745fe0d); queue verdict `close-answered`; batch line in `reports/skip-verdict-remediation-01.md`.
