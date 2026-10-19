@@ -67,9 +67,14 @@ the work already done so the answer costs the maintainer nothing.
    offer.
 5. **Limits.** What is not covered, not tested, or deliberately out of
    scope. Named, not omitted.
-6. AI header at the top AND the AI assistance footer, on every PR
+6. AI header at the top AND the AI footer, on every PR
    description (Nick confirmed both stay, 2026-10-04; the header on
    #4965 specifically answers sigram's disclosure request there).
+   Footer form (Nick, 2026-10-18, replacing the headed "AI
+   assistance" block): one italic line, "*AI-generated description.
+   Nick Shanin directed the work and takes responsibility for this
+   contribution.*" The header does the disclosure; the footer's job
+   is the responsibility statement, kept in one line.
    Comments longer than one sentence carry the header; one-sentence
    comments stay plain. The footer goes only on PR descriptions and
    new Jira ticket descriptions, never on comments.
@@ -161,11 +166,8 @@ Named, not omitted.>
 
 Changelog: [changelog/unreleased/SOLR-<ticket>.yml](https://github.com/nick-boss-tech/solr/blob/<head-sha>/changelog/unreleased/SOLR-<ticket>.yml)
 
-### AI assistance
-
-AI agents assisted with research, implementation, review, and
-drafting. Nick Shanin directed the work and takes responsibility
-for this contribution.
+*AI-generated description. Nick Shanin directed the work and
+takes responsibility for this contribution.*
 ```
 
 Rules for filling it in:
