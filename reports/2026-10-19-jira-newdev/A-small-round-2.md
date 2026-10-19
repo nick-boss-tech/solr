@@ -15,3 +15,10 @@ Assignment: `assignments/pool-jira-newdev-small-round-2.md`. One section per tic
 - Test: `ByteBuffersDirectoryFactoryTest.testDeprecated` is a pin: it checks the annotation is present, and it does not show a behavior change. The behavior is unchanged, and the existing tests in the class cover it.
 - Gate, on `0abcca2f4b`'s tree: changelog validation 0, tidy 0 (no changes), Error Prone compile 0, focused `ByteBuffersDirectoryFactoryTest` 5 of 5 with 0 failures (seed 18182E50), `:solr:core:check -x test` 0. Logs: `/workspace/gates/logs/vm3/solr-18182-gate/`.
 - Not done: no reference-guide note. Maintainers may want one on the deprecation page.
+
+## SOLR-16124: Solr example should prompt for ZK port (vm3, 2026-10-19)
+
+- Status: stopped, no branch. The ticket asks for a choice the code does not settle. Claim: `claims/pool-vm3-jira-newdev-small-round-2-solr-16124.md`.
+- Code on `c8ab71430f`: `solr/core/src/java/org/apache/solr/cli/RunExampleTool.java` prompts for node ports only (lines 858 to 886). The embedded ZooKeeper follows the first node's port plus 1000 (`bin/solr` line 517 and `StartCommand.java` line 63 document the `PORT-1000` and `PORT+10000` rule).
+- Why stopped: a ZK prompt adds a question to the interactive flow, which changes the order of the `--script-inputs` answers that scripted and packaging tests depend on. The ticket does not say whether the prompt should be default-on or opt-in, or whether `-z` / the ZK port should be an option instead. That is a user-facing choice for the owner.
+- Gate: none, since no branch was pushed.
