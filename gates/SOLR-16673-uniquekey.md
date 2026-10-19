@@ -1,6 +1,6 @@
 # Gate job: SOLR-16673 numeric uniqueKey response
 
-Status: OPEN (handoff: assignments/pool-solr-16673-gate-handoff-round-1.md; step 1 decided there)
+Status: BLOCKED at step 2 (Error Prone: a base-file warning under -Werror; decision needed, see Result r2). Head fce77f45a3.
 
 - Branch: `solr-16673-uniquekey`. Head: `70c6eb0c49008cf9518c456dedd6c4981642d52c` (fork tip, confirmed by `git ls-remote` on 2026-10-18).
 - Prior gated head: none. Merge-base with upstream/main: `e044bf20b405b8ca985730be3553d77d1fc8ff31`.
@@ -75,3 +75,16 @@ Decision needed (main agent, then Nick): how step 1 should treat the base drift.
 ## Queue note (vm1, 2026-10-19T03:40Z)
 
 Not queued: the branch tip moved from the job head 70c6eb0c49008cf9518c456dedd6c4981642d52c to fce77f45a3e4e68d385aae104030e573458ac731 (new commit "SOLR-16673: test numeric unique key docIds on a string unique key"). Per the decision table the job is not retargeted by the claimant; it waits for a refreshed job or a main-side call. The step 1 base-drift disposition recorded on the rootfield gate applies here too when the job is refreshed.
+
+## Result r2 (vm5, 2026-10-19T04:14:20Z)
+
+- Head: `fce77f45a3e4e68d385aae104030e573458ac731`, one commit on `70c6eb0c49` that rewrites `testNumericUniqueKeyDocIds` on the default string uniqueKey (the `plong` uniqueKey version cannot load: Solr rejects Points uniqueKey types). Pushed fast-forward. Logs: `/workspace/gates/logs/vm5/16673-uniquekey-r2/`.
+- Step 0 changelog parse: OK.
+- Step 1 tidy: rc 0. Only `gradle/libs.versions.toml` changed (the `oshai-logging` line), restored per the decided rule.
+- Step 2 Error Prone compile: FAILED (rc 1). Cause: `-Werror` on two `DirectInvocationOnMock` warnings in `solr/core/src/test/org/apache/solr/handler/admin/api/CoreReplicationAPITest.java` lines 213 and 217. That file is not changed by either branch and is byte-identical on merge-base `e044bf20b4`. No warning is reported in any changed file.
+- Step 3 proof leg (`SchemaDesigner.java` at merge-base, test at head): `testNumericUniqueKeyDocIds` fails with `java.lang.ClassCastException: class java.lang.Long cannot be cast to class java.lang.String`. Fresh XML: 11 tests, 1 failure.
+- Step 4 focused head run, seed `16673C0FFEE16673`: fresh XML 11 tests, 0 failures, 0 errors, 0 skipped.
+- Step 5 `:solr:core:check -x test`: rc 0.
+- Receipt: not written (step 2 did not pass).
+
+Decision needed (main agent, then Nick): how step 2 treats a `-Werror` warning in a base file that neither branch changes. Options: (a) accept step 2 for this gate when no warning is reported in a changed file, with the evidence above, and write the receipt with that note; (b) fix `CoreReplicationAPITest` in a separate base change outside SOLR-16673, then re-run this gate; (c) hold. vm5 recommends (a) for this gate and (b) as a separate follow-up.

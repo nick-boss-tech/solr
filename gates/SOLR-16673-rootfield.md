@@ -71,3 +71,25 @@ A gate that executed tests and failed is not relaunched by the claimant. Record 
 - Receipt: not written. A receipt is written only on green.
 
 Decision needed (main agent, then Nick): how step 1 should treat the base drift. Options: (a) a tidy-only change on `main`, then re-check both heads; (b) a tidy-only commit on each branch, which moves both heads and requires a new gate; (c) record the base drift as known and exclude `gradle/libs.versions.toml` from step 1 for both gates. Recommended: (c) for now, since it changes no ticket code. Until one is chosen, both gates stay BLOCKED.
+
+## Result r2 (vm5, 2026-10-19T04:14:20Z)
+
+- Head: `e9ce05294620831799eaefdfdfc566da22814109` (fork tip, confirmed by `git ls-remote`). This head moved from `5fb792482f` after the vm1 claim named it. The tip-moved rule applies to the claim on `5fb792482f`; the main side decides whether vm1 re-runs at `e9ce052946` or this result stands. Logs: `/workspace/gates/logs/vm5/16673-rootfield-r2/`.
+- Changes since `5fb792482f`: `DefaultSampleDocumentsLoader.java` moves `_childDocuments_` into real child documents (the loader's `buildDoc` stored children as a field named `_childDocuments_`, so nested sample documents indexed with no children); the test now builds a trie long uniqueKey (`tlong`, `TrieLongField`) and uses string ids; the changelog title covers both parts. `SchemaDesigner.java` and `SchemaDesignerConfigSetHelper.java` keep the `_root_` type and reload-before-index changes from `5fb792482f`.
+- Step 0 changelog parse: OK.
+- Step 1 tidy: rc 0. Only the `oshai-logging` line in `gradle/libs.versions.toml` changed; restored per the decided rule.
+- Step 2 Error Prone compile: FAILED (rc 1), the same cause as the uniqueKey gate: `-Werror` on two `DirectInvocationOnMock` warnings in `CoreReplicationAPITest.java` lines 213 and 217, a file neither branch changes. No warning in a changed file.
+- Step 3 proof leg (all three production files at merge-base, test at head): `testAnalyzeNestedDocsWithNumericUniqueKey` fails with `SolrException: Failed to index 1 sample docs into temp collection`. Fresh XML: 11 tests, 1 failure.
+- Step 4 focused head run, seed `16673B00B516673B`: fresh XML 11 tests, 0 failures, 0 errors, 0 skipped.
+- Step 5 `:solr:core:check -x test`: rc 0.
+- Receipt: not written (step 2 did not pass).
+
+Mutation probes (each fix is needed; logs under `/workspace/gates/logs/vm5/rf-proof-*`):
+- Loader reverted, rest at head: fails with the same `Failed to index 1 sample docs` shape. The child-document parse fix is needed.
+- `SchemaDesigner.java` and `SchemaDesignerConfigSetHelper.java` reverted, loader fix kept: fails with `Error loading parsing schema`, cause `Can't load schema null: _root_ field must be defined using the exact same fieldType as the uniqueKey field (id) uses: tlong`. This reproduces the Issue 3 mechanism on a trie long uniqueKey: the base helper's `string` `_root_` makes the schema unloadable.
+
+Decision needed (main agent, then Nick): the same step 2 question as the uniqueKey gate. Recommended: (a) for both gates, with the evidence above.
+
+## Decision on vm1 claim
+
+Decision needed (main agent): whether vm1's queued claim on `5fb792482f` stops (tip moved, per the rule), or re-runs at `e9ce052946`. vm5 has run the new head to the point of step 2 and recorded the result above.

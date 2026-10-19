@@ -2,7 +2,7 @@
 
 Status: OPEN
 
-HOLD: do not claim. The review in `reports/SOLR-16673-handoff-review-round-1.md` found that neither head can pass its gate: rootfield does not compile its test, and both regression tests build a uniqueKey that Solr rejects. Re-post these gates at the new heads once the review items are answered.
+Round 2 (vm5): both heads were re-tested. Both gates are blocked at step 2 (Error Prone) on a base-file warning, and vm1 has a claim on a superseded rootfield head. See reports/SOLR-16673-handoff-review-round-2.md and the gate files Result r2. The HOLD is lifted for the uniqueKey gate only after the step 2 decision.
 
 Picks up the two Linux hardening gates that stopped at step 1 (tidy) on 2026-10-19. See `gates/SOLR-16673-uniquekey.md` and `gates/SOLR-16673-rootfield.md`, each with a Result section. Neither branch has been changed. Both gates run in this round, one after the other, on one host.
 
