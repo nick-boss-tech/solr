@@ -101,4 +101,15 @@
   <string name="label_username">Username</string>
 
   <!-- Uncategorized -->
+  <string name="search_form_query">q (Query)</string>
+  <string name="search_form_filter_query">fq (Filter Query)</string>
+  <string name="search_form_fields">fl (Fields)</string>
+  <string name="search_form_sort">sort (Sort)</string>
+  <string name="search_form_rows">rows (Rows)</string>
+  <string name="search_form_start">start (Start)</string>
+  <string name="search_form_add_input">Add</string>
+  <string name="search_form_remove_input">Remove</string>
+  <string name="search_form_execute">Execute</string>
+  <string name="search_form_execute_debug">Execute in Debug Mode</string>
+  <string name="search_form_clear_all">Clear all</string>
 </resources>
