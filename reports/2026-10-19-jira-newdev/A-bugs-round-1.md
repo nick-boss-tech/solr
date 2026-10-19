@@ -93,3 +93,10 @@ One section per ticket. Assignment: `assignments/pool-jira-newdev-bugs-round-1.m
 - Evidence: `LangDetectLanguageIdentifierUpdateProcessorFactoryTest` 13 of 13 pass on the base, including the empty and short document cases (seed in the claim's log).
 - Not run: no JavaBin end-to-end update was run, so this is a code-reading verdict plus the existing tests.
 - Gate: none, since no branch was pushed.
+
+## SOLR-17433: SolrStream default client has a 60-second timeout (vm3, 2026-10-19)
+
+- Status: not reproduced by code reading at `c8ab71430f`. No branch pushed. Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-17433.md`.
+- The 60-second floor in `SolrClientCache` (`solr/solrj-streaming/src/java/org/apache/solr/client/solrj/io/SolrClientCache.java`, `MIN_TIMEOUT`) sets the connection timeout to 60 s. The idle timeout becomes 600 s on the base, and the total request timeout falls back to it, so a default `SolrStream` gets a 600-second total timeout.
+- Not run: no live streaming test of longer than 60 s, so this is a code-reading verdict.
+- Gate: none, since no branch was pushed.
