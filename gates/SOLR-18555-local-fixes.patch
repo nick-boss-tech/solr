@@ -1,0 +1,289 @@
+diff --git a/changelog/unreleased/SOLR-18555.yml b/changelog/unreleased/SOLR-18555.yml
+index f2b8ff4e6d..9a3210f1e3 100644
+--- a/changelog/unreleased/SOLR-18555.yml
++++ b/changelog/unreleased/SOLR-18555.yml
+@@ -1,5 +1,8 @@
+ # See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+ title: Add a request handler for highlighting supplied text without searching the index.
+-type: new_features
++type: added
+ authors:
+   - name: Nick Shanin
++links:
++  - name: SOLR-18555
++    url: https://issues.apache.org/jira/browse/SOLR-18555
+diff --git a/solr/core/src/java/org/apache/solr/handler/HighlightRequestHandler.java b/solr/core/src/java/org/apache/solr/handler/HighlightRequestHandler.java
+index 4fbcb1a641..ab303c3198 100644
+--- a/solr/core/src/java/org/apache/solr/handler/HighlightRequestHandler.java
++++ b/solr/core/src/java/org/apache/solr/handler/HighlightRequestHandler.java
+@@ -48,6 +48,7 @@ import org.apache.solr.search.QParser;
+ import org.apache.solr.search.QParserPlugin;
+ import org.apache.solr.search.QueryParsing;
+ import org.apache.solr.search.SolrQueryParser;
++import org.apache.solr.search.SyntaxError;
+ import org.apache.solr.security.AuthorizationContext;
+ 
+ /** Highlights supplied plain text with a query. */
+@@ -99,11 +100,7 @@ public class HighlightRequestHandler extends RequestHandlerBase {
+     if (queryString == null || queryString.isBlank()) {
+       throw new SolrException(
+           SolrException.ErrorCode.BAD_REQUEST,
+-          "A query is required using '"
+-              + CommonParams.Q
+-              + "' or '"
+-              + HighlightParams.Q
+-              + "'");
++          "A query is required using '" + CommonParams.Q + "' or '" + HighlightParams.Q + "'");
+     }
+ 
+     String parserType = params.get(HighlightParams.QPARSER, params.get(QueryParsing.DEFTYPE));
+diff --git a/solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerHttpTest.java b/solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerHttpTest.java
+index 87f805730a..ee6b6f8ccc 100644
+--- a/solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerHttpTest.java
++++ b/solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerHttpTest.java
+@@ -63,8 +63,7 @@ public class HighlightRequestHandlerHttpTest extends SolrTestCaseJ4 {
+   public void testGetStreamBodyAndV2Routes() throws Exception {
+     String encodedText = URLEncoder.encode(TEXT, StandardCharsets.UTF_8);
+     String params = "?q=_text_%3Asolr&hl.fl=_text_&wt=json&stream.body=" + encodedText;
+-    String v2Url =
+-        solrTestRule.getJetty().getBaseURLV2() + "/cores/" + CORE_NAME + "/highlight";
++    String v2Url = solrTestRule.getJetty().getBaseURLV2() + "/cores/" + CORE_NAME + "/highlight";
+ 
+     assertHighlightResponse(
+         solrTestRule
+@@ -74,11 +73,7 @@ public class HighlightRequestHandlerHttpTest extends SolrTestCaseJ4 {
+             .GET(solrTestRule.getBaseUrl() + "/" + CORE_NAME + "/highlight" + params));
+ 
+     assertHighlightResponse(
+-        solrTestRule
+-            .getJetty()
+-            .getSolrClient()
+-            .getHttpClient()
+-            .GET(v2Url + params));
++        solrTestRule.getJetty().getSolrClient().getHttpClient().GET(v2Url + params));
+     assertHighlightResponse(
+         sendBodyRequest("POST", v2Url + "?q=_text_%3Asolr&hl.fl=_text_&wt=json"));
+     assertHighlightResponse(
+diff --git a/solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerTest.java b/solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerTest.java
+index e5f5da5196..438b8a88ed 100644
+--- a/solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerTest.java
++++ b/solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerTest.java
+@@ -46,11 +46,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+   @Test
+   public void testTextPlainResponseShapeWithoutIndexedDocuments() throws Exception {
+     ModifiableSolrParams params =
+-        params(
+-            CommonParams.Q,
+-            "text:solr",
+-            HighlightParams.FIELDS,
+-            "text");
++        paramsSet(CommonParams.Q, "text:solr", HighlightParams.FIELDS, "text");
+     SolrQueryResponse response =
+         handle(
+             params,
+@@ -63,7 +59,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+   @Test
+   public void testGetStreamBodyAndHighlightQueryParameter() throws Exception {
+     ModifiableSolrParams params =
+-        params(
++        paramsSet(
+             HighlightParams.Q,
+             "text:solr",
+             HighlightParams.FIELDS,
+@@ -79,7 +75,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+ 
+   @Test
+   public void testDefaultFieldFallback() throws Exception {
+-    ModifiableSolrParams params = params(CommonParams.Q, "solr", CommonParams.DF, "text");
++    ModifiableSolrParams params = paramsSet(CommonParams.Q, "solr", CommonParams.DF, "text");
+     SolrQueryResponse response =
+         handle(
+             params,
+@@ -92,7 +88,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+   @Test
+   public void testHtmlEncoderEscapesSuppliedText() throws Exception {
+     ModifiableSolrParams params =
+-        params(
++        paramsSet(
+             CommonParams.Q,
+             "text:solr",
+             HighlightParams.FIELDS,
+@@ -116,13 +112,13 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+     List<ContentStream> content =
+         List.of(new ContentStreamBase.StringStream("Solr highlights the text.", "text/plain"));
+     ModifiableSolrParams phraseParams =
+-        params(CommonParams.Q, "text:\"solr highlights\"", HighlightParams.FIELDS, "text");
++        paramsSet(CommonParams.Q, "text:\"solr highlights\"", HighlightParams.FIELDS, "text");
+     SolrQueryResponse phraseResponse = handle(phraseParams, content);
+     assertArrayEquals(
+         new String[] {"<em>Solr highlights</em> the text."}, snippets(phraseResponse, "text"));
+ 
+     ModifiableSolrParams prefixParams =
+-        params(CommonParams.Q, "text:sol*", HighlightParams.FIELDS, "text");
++        paramsSet(CommonParams.Q, "text:sol*", HighlightParams.FIELDS, "text");
+     SolrQueryResponse prefixResponse = handle(prefixParams, content);
+     assertArrayEquals(
+         new String[] {"<em>Solr</em> highlights the text."}, snippets(prefixResponse, "text"));
+@@ -131,7 +127,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+   @Test
+   public void testDefaultSummaryReturnsWholeInputWhenThereIsNoMatch() throws Exception {
+     ModifiableSolrParams params =
+-        params(
++        paramsSet(
+             CommonParams.Q,
+             "text:missing",
+             HighlightParams.FIELDS,
+@@ -143,14 +139,13 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+             params,
+             List.of(new ContentStreamBase.StringStream("Solr highlights the text.", "text/plain")));
+ 
+-    assertArrayEquals(
+-        new String[] {"Solr highlights the text."}, snippets(response, "text"));
++    assertArrayEquals(new String[] {"Solr highlights the text."}, snippets(response, "text"));
+   }
+ 
+   @Test
+   public void testLengthLimitTruncatesAndRejectsOversizedLimit() throws Exception {
+     ModifiableSolrParams params =
+-        params(
++        paramsSet(
+             CommonParams.Q,
+             "text:solr",
+             HighlightParams.FIELDS,
+@@ -174,9 +169,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+         expectThrows(
+             SolrException.class,
+             () ->
+-                handle(
+-                    params,
+-                    List.of(new ContentStreamBase.StringStream("Solr", "text/plain"))));
++                handle(params, List.of(new ContentStreamBase.StringStream("Solr", "text/plain"))));
+     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, exception.code());
+     assertTrue(exception.getMessage().contains("must not exceed"));
+   }
+@@ -184,7 +177,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+   @Test
+   public void testRejectsInvalidInputs() throws Exception {
+     ModifiableSolrParams params =
+-        params(CommonParams.Q, "text:solr", HighlightParams.FIELDS, "text");
++        paramsSet(CommonParams.Q, "text:solr", HighlightParams.FIELDS, "text");
+     SolrException exception =
+         expectThrows(
+             SolrException.class,
+@@ -208,28 +201,24 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+     exception = expectThrows(SolrException.class, () -> handle(params, null));
+     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, exception.code());
+ 
+-    ModifiableSolrParams noQuery = params(HighlightParams.FIELDS, "text");
++    ModifiableSolrParams noQuery = paramsSet(HighlightParams.FIELDS, "text");
+     exception =
+         expectThrows(
+             SolrException.class,
+             () ->
+-                handle(
+-                    noQuery,
+-                    List.of(new ContentStreamBase.StringStream("Solr", "text/plain"))));
++                handle(noQuery, List.of(new ContentStreamBase.StringStream("Solr", "text/plain"))));
+     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, exception.code());
+ 
+-    ModifiableSolrParams noField = params(CommonParams.Q, "text:solr");
++    ModifiableSolrParams noField = paramsSet(CommonParams.Q, "text:solr");
+     exception =
+         expectThrows(
+             SolrException.class,
+             () ->
+-                handle(
+-                    noField,
+-                    List.of(new ContentStreamBase.StringStream("Solr", "text/plain"))));
++                handle(noField, List.of(new ContentStreamBase.StringStream("Solr", "text/plain"))));
+     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, exception.code());
+ 
+     ModifiableSolrParams wildcardField =
+-        params(CommonParams.Q, "text:solr", HighlightParams.FIELDS, "text*");
++        paramsSet(CommonParams.Q, "text:solr", HighlightParams.FIELDS, "text*");
+     exception =
+         expectThrows(
+             SolrException.class,
+@@ -240,7 +229,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, exception.code());
+ 
+     ModifiableSolrParams invalidLimit =
+-        params(
++        paramsSet(
+             CommonParams.Q,
+             "text:solr",
+             HighlightParams.FIELDS,
+@@ -260,7 +249,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+   @Test
+   public void testRejectsParserOverridesAndParserSubqueries() throws Exception {
+     ModifiableSolrParams parserOverride =
+-        params(
++        paramsSet(
+             CommonParams.Q,
+             "text:solr",
+             HighlightParams.FIELDS,
+@@ -278,7 +267,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+     assertTrue(exception.getMessage().contains("supports only"));
+ 
+     ModifiableSolrParams defTypeOverride =
+-        params(CommonParams.Q, "text:solr", HighlightParams.FIELDS, "text", "defType", "mlt");
++        paramsSet(CommonParams.Q, "text:solr", HighlightParams.FIELDS, "text", "defType", "mlt");
+     exception =
+         expectThrows(
+             SolrException.class,
+@@ -290,7 +279,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+     assertTrue(exception.getMessage().contains("supports only"));
+ 
+     ModifiableSolrParams localParamsQuery =
+-        params(CommonParams.Q, "{!mlt qf=text}solr", HighlightParams.FIELDS, "text");
++        paramsSet(CommonParams.Q, "{!mlt qf=text}solr", HighlightParams.FIELDS, "text");
+     exception =
+         expectThrows(
+             SolrException.class,
+@@ -302,17 +291,14 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+     assertTrue(exception.getMessage().contains("Local-parameter"));
+ 
+     ModifiableSolrParams subquery =
+-        params(
++        paramsSet(
+             CommonParams.Q,
+             "text:solr OR _query_:\"{!mlt qf=text}solr\"",
+             HighlightParams.FIELDS,
+             "text");
+     expectThrows(
+         SyntaxError.class,
+-        () ->
+-            handle(
+-                subquery,
+-                List.of(new ContentStreamBase.StringStream("Solr", "text/plain"))));
++        () -> handle(subquery, List.of(new ContentStreamBase.StringStream("Solr", "text/plain"))));
+   }
+ 
+   @Test
+@@ -337,12 +323,12 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+ 
+   private static RequestHandlerBase newHandler() {
+     try {
+-      return (RequestHandlerBase)
+-          Class.forName("org.apache.solr.handler.HighlightRequestHandler")
+-              .getConstructor()
+-              .newInstance();
++      return Class.forName("org.apache.solr.handler.HighlightRequestHandler")
++          .asSubclass(RequestHandlerBase.class)
++          .getConstructor()
++          .newInstance();
+     } catch (ReflectiveOperationException e) {
+-      throw new AssertionError("The text highlight request handler must be available", e);
++      throw new LinkageError("The text highlight request handler must be available", e);
+     }
+   }
+ 
+@@ -354,7 +340,7 @@ public class HighlightRequestHandlerTest extends SolrTestCaseJ4 {
+     return (String[]) document.get(field);
+   }
+ 
+-  private static ModifiableSolrParams params(String... nameValues) {
++  private static ModifiableSolrParams paramsSet(String... nameValues) {
+     ModifiableSolrParams params = new ModifiableSolrParams();
+     for (int i = 0; i < nameValues.length; i += 2) {
+       params.set(nameValues[i], nameValues[i + 1]);
