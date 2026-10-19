@@ -1,7 +1,1 @@
-The deadlock is in `removeCollectionPropsWatcher`. Commit a052fb5436 (2019) only hardened `CollectionPropsTest.testReadWriteCached` and did not fix the lock ordering. The fix is SOLR-17720, commit 67a642fe02 (April 2025). It moves the lock on the collection outside `collectionPropsObservers.compute()`, which removes the lock-order inversion this ticket describes (`solr/solrj-zookeeper/src/java/org/apache/solr/common/cloud/CollectionPropertiesZkStateReader.java`).
-
-I checked the code change, not the thread dump attached to this ticket.
-
-If you still see this:
-
-- Reopen with the Solr version and steps, and say which of the commits named here does not cover it.
+This is fixed on current main. The collection properties watcher used to take its collection lock inside a map update, which could deadlock with a notification thread taking the same locks in the other order. The lock is now taken before that update, which removes the ordering problem. The change is in the 2025 commit for SOLR-17720. We are closing this ticket as fixed.
