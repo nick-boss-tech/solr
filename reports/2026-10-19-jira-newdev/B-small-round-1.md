@@ -31,3 +31,10 @@ Claim: `claims/pool-jira-newdev-small-round-1-solr-17727.md`. Work follows on br
 - Status: fixed branch. `solr-18209-list-of` on the fork: code commit f73f2d4358 (three files, four lists: `NodeHealth.UNHEALTHY_STATES`, `SchemaDesignerConfigSetHelper.includeLangIds`, `ContentStreamBase` `UNHELPFUL_TYPES` and the three suffix lists), draft commit c8fef7c4cd (`drafts/SOLR-18209/pr-description.md`).
 - Gate: `ContentStreamTest` 7 of 7, `NodeHealthTest` 8 of 8, `TestSchemaDesignerConfigSetHelper` 8 of 8, 0 failures, 0 skipped; spotless passes for solrj and core. Log `/workspace/gates/logs/vm4/solr-18209-gate.log`.
 - No new test: the existing tests named above cover the changed fields. HashSet-wrapped fields left alone (mutable sets). Recorded in the draft as a maintainer question.
+
+## Item 9: SOLR-18481 (vm4), fixed branch, 2026-10-19T19:48:24Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19.
+- Status: fixed branch. `solr-18481-xff` on the fork: code commit 5aedffcccd (`HttpSolrProxy` appends the client address to `X-Forwarded-For`, with the TODO removed), draft commit 8f687ca04d (`drafts/SOLR-18481/pr-description.md`).
+- Gate: `HttpSolrProxyForwardedForTest` 5 of 5, `HttpSolrProxyTest` 2 of 2, 0 failures, 0 skipped; spotless passes. Log `/workspace/gates/logs/vm4/solr-18481-gate.log`.
+- The ticket's forward cap and current-node exclusion are not in this change. The draft asks the maintainer whether to add them.
