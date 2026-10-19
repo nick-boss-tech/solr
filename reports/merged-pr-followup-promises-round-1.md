@@ -1,5 +1,15 @@
 # Merged PR follow-up promises, ledger, round 1
 
+## Pass dated 2026-10-19, vm4 (overnight recurrence check)
+
+Claim: `claims/pool-vm4-merged-pr-followup-promises-round-1-overnight.md`. Read-only: GitHub API reads only. Nothing posted, filed or edited.
+
+Merged set: 10, re-derived with the search API (`repo:apache/solr author:nick-boss-tech is:pr is:merged`), same set as the last pass; latest #5027 merged 2026-10-17T00:24:06Z. No new merge.
+
+Change since the last pass: #5061 (SOLR-18119, changelog-to-HTML converter in Java, head `660faedd026d`) is closed, not merged, closed at 2026-10-18T18:50:40Z. It was carried as pending-merge for the fragment-anchor promise. That promise now has no open PR. Reopening, resubmitting or dropping it is the owner's call; this pass does not change its state. The SOLR-18119 release-path work continues in #5180, which is a different change; whether #5180 carries the fragment-anchor promise has not been checked.
+
+Not re-read in this pass: the other open PRs (#5004, #5088, #5089, #5090, #5100, #5104). Their heads are as recorded in the pass below.
+
 ## Pass dated 2026-10-18, vm5 (16:38Z recurrence check, pass k)
 
 Claim: `claims/pool-vm5-merged-pr-followup-promises-round-1-f.md`. Read-only: GitHub API reads, `ls-remote` on the fork, and JIRA REST reads. Nothing posted, filed or edited.
