@@ -51,6 +51,8 @@ public class CoreReplicationAPITest extends SolrTestCaseJ4 {
   private CoreReplication coreReplicationAPI;
   private SolrCore mockCore;
   private ReplicationHandler mockReplicationHandler;
+  private Path mockConfigPath;
+  private Path mockTlogDir;
 
   @BeforeClass
   public static void ensureWorkingMockito() {
@@ -210,27 +212,25 @@ public class CoreReplicationAPITest extends SolrTestCaseJ4 {
     // against those checks over-rejecting.
     // Also exercises the normalize() applied to the resolved path by
     // resolveWithinOrForbidden; the on-disk file must still be readable.
-    Path configPath = mockCore.getResourceLoader().getConfigPath();
-    Files.createDirectories(configPath.resolve("lang"));
-    Path cfFile = configPath.resolve("lang").resolve("en.txt");
+    Files.createDirectories(mockConfigPath.resolve("lang"));
+    Path cfFile = mockConfigPath.resolve("lang").resolve("en.txt");
     Files.writeString(cfFile, "hello");
-    Path tlogDir = Path.of(mockCore.getUpdateHandler().getUpdateLog().getTlogDir());
-    Files.createDirectories(tlogDir.resolve("nested"));
-    Path tlogFile = tlogDir.resolve("nested").resolve("tlog.0");
+    Files.createDirectories(mockTlogDir.resolve("nested"));
+    Path tlogFile = mockTlogDir.resolve("nested").resolve("tlog.0");
     Files.writeString(tlogFile, "hello");
 
     ReplicationAPIBase.DirectoryFileStream cfStream =
         coreReplicationAPI.doFetchFile("lang/en.txt", "cf", null, null, false, false, 0, null);
     assertTrue(cfStream instanceof ReplicationAPIBase.LocalFsConfFileStream);
     assertTrue("Expected readable config file at " + cfFile, Files.isReadable(cfFile));
-    assertEquals(cfFile.normalize(), configPath.resolve("lang/en.txt").normalize());
+    assertEquals(cfFile.normalize(), mockConfigPath.resolve("lang/en.txt").normalize());
 
     ReplicationAPIBase.DirectoryFileStream tlogStream =
         coreReplicationAPI.doFetchFile(
             "nested/tlog.0", "tlogFile", null, null, false, false, 0, null);
     assertTrue(tlogStream instanceof ReplicationAPIBase.LocalFsTlogFileStream);
     assertTrue("Expected readable tlog file at " + tlogFile, Files.isReadable(tlogFile));
-    assertEquals(tlogFile.normalize(), tlogDir.resolve("nested/tlog.0").normalize());
+    assertEquals(tlogFile.normalize(), mockTlogDir.resolve("nested/tlog.0").normalize());
   }
 
   @Test
@@ -287,15 +287,16 @@ public class CoreReplicationAPITest extends SolrTestCaseJ4 {
     UpdateHandler mockUpdateHandler = mock(UpdateHandler.class);
     UpdateLog mockUpdateLog = mock(UpdateLog.class);
     when(mockUpdateHandler.getUpdateLog()).thenReturn(mockUpdateLog);
-    when(mockUpdateLog.getTlogDir()).thenReturn(createTempDir("coreReplicationTlog").toString());
+    mockTlogDir = createTempDir("coreReplicationTlog");
+    when(mockUpdateLog.getTlogDir()).thenReturn(mockTlogDir.toString());
 
     // Mocks for LocalFsConfFileStream
     SolrResourceLoader mockSolrResourceLoader = mock(SolrResourceLoader.class);
-    Path configPath = createTempDir("coreReplicationConf");
+    mockConfigPath = createTempDir("coreReplicationConf");
     when(mockCore.getRequestHandler(ReplicationHandler.PATH)).thenReturn(mockReplicationHandler);
     when(mockCore.getUpdateHandler()).thenReturn(mockUpdateHandler);
     when(mockCore.getResourceLoader()).thenReturn(mockSolrResourceLoader);
-    when(mockSolrResourceLoader.getConfigPath()).thenReturn(configPath);
+    when(mockSolrResourceLoader.getConfigPath()).thenReturn(mockConfigPath);
   }
 
   private static class CoreReplicationAPIMock extends CoreReplication {
