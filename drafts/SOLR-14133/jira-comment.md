@@ -1,0 +1,1 @@
+This is fixed on current main. Components loaded from a package now receive the core-aware callback, so their inform method runs as expected. The change is in the 2020 commit that resolved SOLR-14525, with a test in the same commit. We are closing this ticket as fixed.
