@@ -1,0 +1,1 @@
+The reference guide answers this. In the current docs (system-requirements.adoc, lines 70-86): "Solr 9.x is continuously tested against Java 11, 17, 21 and also newer versions." Link: https://github.com/apache/solr/blob/main/solr/solr-ref-guide/modules/deployment-guide/pages/system-requirements.adoc#L70. Closing as answered by the documentation.
