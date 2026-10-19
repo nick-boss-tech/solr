@@ -52,9 +52,7 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     }
     assertU(commit("openSearcher", "true"));
 
-    try (var searcher = core.getSearcher().get()) {
-      searcher.getIndexFingerprint(Long.MAX_VALUE);
-    }
+    core.withSearcher(searcher -> searcher.getIndexFingerprint(Long.MAX_VALUE));
 
     iwRef = core.getSolrCoreState().getIndexWriter(core);
     try {
@@ -65,9 +63,7 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     assertU(commit("openSearcher", "true"));
 
     long hitsBeforeDeleteFingerprint = core.getPerSegmentGrossFingerprintCacheHitCount();
-    try (var searcher = core.getSearcher().get()) {
-      searcher.getIndexFingerprint(Long.MAX_VALUE);
-    }
+    core.withSearcher(searcher -> searcher.getIndexFingerprint(Long.MAX_VALUE));
 
     assertTrue(
         "Expected the deleted segment to reuse its gross fingerprint",
@@ -90,9 +86,7 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     }
     assertU(commit("openSearcher", "true"));
 
-    try (var searcher = core.getSearcher().get()) {
-      searcher.getIndexFingerprint(Long.MAX_VALUE);
-    }
+    core.withSearcher(searcher -> searcher.getIndexFingerprint(Long.MAX_VALUE));
 
     assertEquals(grossCacheSizeBeforeColdSegment, core.getPerSegmentGrossFingerprintCacheSize());
   }
