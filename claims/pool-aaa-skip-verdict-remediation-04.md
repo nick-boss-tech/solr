@@ -1,7 +1,7 @@
 # Claim: pool-aaa-skip-verdict-remediation-04
 
 - Claimant host: vm2, matching a file in `hosts/`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: RELEASED 2026-10-19 by the phone agent at the owner's direction: the owner stood vm2 down (its browser and UI session work spent too many tokens) and paused factory work. Items 1 to 21 are DONE per the heartbeats below and reports/skip-verdict-remediation-04.md; items 22 to 25 return to the pool with the assignment, which is OPEN again for any available Linux host.
 - Job or assignment: `assignments/pool-aaa-skip-verdict-remediation-04.md`.
 - Slice: the whole batch, one ticket at a time in the listed order, each redone under steps 11 to 15 of `pool/cron-prompt.md` at the pinned head `498a09aea97aac86c2cc7ac114113b946d249942`, with a per-ticket claim `claims/skip-<KEY>-vm2.md` for each.
 - Capability tags used: review, draft.
