@@ -1,6 +1,6 @@
 # Start here: posting and claiming pool work
 
-This page is the order of operations for any agent that posts assignments or gate jobs, or claims them, on this branch. The rules are in [WORKFLOW.md](../WORKFLOW.md). The roles are in [material/coordinator-handoff.md](../material/coordinator-handoff.md). The templates are in [pool/templates/](templates/).
+This page is the order of operations for any agent that posts assignments or gate jobs, or claims them, on this branch. The rules are in [WORKFLOW.md](../WORKFLOW.md). The roles are in [material/coordinator-handoff.md](../material/coordinator-handoff.md). The templates are in [pool/templates/](templates/). The overnight tick job is [pool/cron-prompt.md](cron-prompt.md) (not a file called prompt.md); read it with `git show origin/coordination:pool/cron-prompt.md` if your worktree does not have it.
 
 ## Two rules that cause most failures
 
