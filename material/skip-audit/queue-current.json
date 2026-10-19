@@ -1137,7 +1137,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "Re-read CoreStatus.getCoreStatus on main (api/CoreStatus.java l.112-180): a failed-init core is not in getAllCoreNames and a missing descriptor yields an empty SingleCoreData, not an NPE; the only unguarded derefs (l.146-158 getCloudDescriptor().getLastPublished(), getSolrConfig().getZnodeVersion()) need a loaded core. Ticket stack is truncated at CoreAdminOperation (pre-refactor 9.x code), reporter never replied to the repro request. Cannot reproduce from code; leave open, candidate for a close-as-cannot-reproduce comment (not posted)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16792-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16786",
@@ -1191,7 +1194,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Logging redesign proposal (move SOLR_LOG_LEVEL into log4j2.xml); improvement, no consensus."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16772-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16758",
@@ -1207,7 +1213,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Perf regression disputed: maintainer could not reproduce a difference with the reporter patch in-test; no repro after 6 comments."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16758-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16673",
@@ -1235,7 +1244,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Self-described minor Admin UI refresh nicety, 0 comments."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16657-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16652",
@@ -1251,7 +1263,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "By design: Lucene QueryBuilder requires original terms for multi-term synonyms (TestQueryParser); Khludnev confirms."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16652-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16609",
@@ -1427,7 +1442,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "DirectUpdateHandler2 commit path calls forceMerge(maxOptimizeSegments) whose default (Integer.MAX_VALUE) is a documented no-op; optimize=true&maxSegments=1 works as the reporter found. Not a defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16355-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16322",
@@ -1480,7 +1498,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "MODIFYCOLLECTION property.* cannot change core vars; 17-comment design debate, partially addressed by SOLR-17006; wants a human decision on property API unification."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16305-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16290",
@@ -1538,7 +1559,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Maintainer (Gerlowski) explains collateParam adds to single-valued params, expected behaviour."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16253-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16200",
@@ -1554,7 +1578,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Reverse-proxy config; solved by uncommenting ForwardedRequestCustomizer in jetty.xml (Heisey); not a code defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16200-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16167",
@@ -1570,7 +1597,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Codebase-wide audit umbrella with no concrete instance and maintainer doubt about feasibility."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16167-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16122",
@@ -1693,7 +1723,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Crash is in Lucene BaseFragmentsBuilder on Solr 7.7.3; no repro."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16020-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16013",
@@ -1721,7 +1754,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Sporadic BadVersionException in Overseer when perReplicaState flipped; no stack or detail; could be real race but undecidable from ticket."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15997-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15977",
@@ -1775,7 +1811,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "bin/solr stop hangs after startup errors; reproducible via low-memory docker (Putman) but a shell-script/Jetty-stop-port issue with no obvious JUnit surface; needs a human call."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15948-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15945",
@@ -1870,7 +1909,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "UploadConfigSet skips directory entries and uploads files via uploadFileToConfig; ZK makePath creates parents; FileSystemConfigSetService createDirectories"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15858-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15848",
@@ -2058,7 +2100,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Discussion ticket, not a work item per its author."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15672-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15615",
@@ -2092,7 +2137,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Grouping.CommandFunc.finish still calls populateScoresIfNecessary (needScores) on main; perf complaint on 8.7 with reporter patch; whether score population is needed is unclear, needs a maintainer opinion."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15586-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15585",
@@ -2108,7 +2156,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Maintainers dispute it is a defect; pending vs lost data when all TLOG replicas down."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15585-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15571",
@@ -2143,7 +2194,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Support question about plugin lifecycle on reload."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15544-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15540",
@@ -2159,7 +2213,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Upgrade 7->8 _root_ semantics; Hoss: must reindex; no focused fix."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15540-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15522",
@@ -2175,7 +2232,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "solr.pid removal on stop is by design; no defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15522-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15521",
@@ -2191,7 +2251,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Build-tooling cleanup (gitattributes/spotless) by maintainer; improvement, not a product bug."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15521-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15481",
@@ -2319,7 +2382,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Jan Hoydahl proposed Not a bug; fix is architectural. PKIAuthenticationPlugin still exists but no concrete defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15388-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15386",
@@ -2427,7 +2493,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Solr 7.5 crash; reporter confirmed fixed in 8.8, maintainer pointed to SOLR-13336."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15330-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15319",
@@ -2474,7 +2543,10 @@
       "date": "2026-10-04",
       "round": "audit-2",
       "evidence": "Two nodes sharing one solr home is an unsupported setup. A fail-fast guard in ZkController.checkStateInZk (replica node_name != this node) was considered and rejected: node_name legitimately changes (hostname/IP change, container restart) and the core republishes its own node_name, so the guard would break that recovery path. No safe discriminator, so a doc/design matter, not a patch."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15305-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15304",
@@ -2490,7 +2562,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Feature proposal for permission hierarchy; not a bug."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15304-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15297",
@@ -2601,7 +2676,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "SolrPaths.assertPathAllowed on main still rejects any \"..\" (assertNoPathTraversal) incl. relative dataDir; TestCoreContainer l.654-656 deliberately asserts ../ paths blocked. Fix = resolve relative dataDir vs instanceDir then check allowPaths: a security-contract change needing a human call."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15151-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15144",
@@ -2690,7 +2768,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: IO-health/failover feature proposal (v7.4), not a defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15028-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15026",
@@ -2706,7 +2787,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: test-framework SSL cleanup; thread settled on SuppressSSL workaround (SOLR-14934)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15026-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15024",
@@ -2734,7 +2818,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: perf report on 200 collection cluster (v8.2), no code hypothesis."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15023-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15018",
@@ -2866,7 +2953,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: shutdown/reload race is a cross-cutting lifecycle redesign (refuse requests, drain in-flight); participants (Erickson, Smiley) have no concrete scoped fix, patch abandoned."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14861-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14784",
@@ -2950,7 +3040,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: Erickson says composite-id changes cannot be cleaned by Solr; copyField workaround; feature request."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14668-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14648",
@@ -2966,7 +3059,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: Erickson/Ishan/Tomas debate fail-fast vs expert flag vs promote; data-loss semantics need maintainer design, no scoped fix."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14648-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14627",
@@ -2982,7 +3078,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: AIOOBE in Lucene QueryBuilder.newSynonymQuery (v8.3.1), not Solr tree; no repro."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14627-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14612",
@@ -2998,7 +3097,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "no \"/solr\" replace left in PackageAPI/pkg code"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14612-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14601",
@@ -3014,7 +3116,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: Smiley says explicit [child fl=*] is the fix; behavior change would be design decision, workaround verified by reporter."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14601-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14580",
@@ -3030,7 +3135,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "CloudSolrClient.Builder handles zkHosts with isEmpty checks"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14580-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14530",
@@ -3046,7 +3154,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Ticket title and note: ShardHandler refactor, not a bug."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14530-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14493",
@@ -3062,7 +3173,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ColStatus null-guards getRange and getCoreUrl"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14493-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14487",
@@ -3078,7 +3192,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "all numeric collapse collectors use advanceExact; zero value is a group"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14487-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14451",
@@ -3112,7 +3229,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Ticket title: documentation request, no code defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14434-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14427",
@@ -3128,7 +3248,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "Fixed on main: DistributedUpdateProcessor constructor whitelists CommonParams.FAIL_ON_VERSION_CONFLICTS for forwarded shard requests (commit 29dbb3ec178, GitHub PR 1173), and the leader path (versionAdd ~l.418, doVersionAdd ~l.769) honors failOnVersionConflicts=false. The ticket error was a replica rejecting the forwarded request that lacked the param. Verified by git log -S on upstream/main."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14427-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14381",
@@ -3193,7 +3316,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: /get returning input doc without copyField targets is by design (SOLR-3743); improvement."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14282-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14278",
@@ -3209,7 +3335,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Yonik: 0.5% intermittent data loss during live split, dsmiley says fixed locally; no root cause."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14278-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14262",
@@ -3255,7 +3384,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "SolrStream.constructParser on main checks responseStatus 401/403 and consumes body as error message; reported symptom fixed."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14226-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14201",
@@ -3271,7 +3403,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: SolrCore not released after collection delete, repro script exists, commenter says disabling metrics stops leak; needs heap analysis, no code hypothesis."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14201-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14199",
@@ -3317,7 +3452,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket + SyncStrategy: leader fires async REQUESTRECOVERY via executor (l.391-411); ticket offers two alternative redesigns (sync RECOVERING in op vs leader-set state) without a chosen one; protocol change."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14183-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14180",
@@ -3333,7 +3471,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Title/note: masking assert removed by SOLR-16347; test/assert only."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14180-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14178",
@@ -3402,7 +3543,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "Read LukeRequestHandler on main: index flags (getFieldFlags(IndexableField), l.654-711) come from the first live doc reloaded from stored fields, so docValues is never set (stored-doc fields carry no docValues type) and tokenized() is the Lucene FieldType default (true) for reloaded numerics. Real fix = build index flags from FieldInfos (docValuesType, indexOptions, omitNorms, term vectors) but FieldInfo has no tokenized bit, and the flag semantics change; design call, no test-only surface. Not branched."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14150-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14140",
@@ -3418,7 +3562,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The description explicitly makes this an umbrella to identify plugin types that need package-loading support. It names no failing plugin, request, or regression to verify. This needs decomposition into concrete feature tickets, not a bug fix."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14140-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14133",
@@ -3434,7 +3581,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "PackagePluginHolder.handleAwareCallbacks informs SolrCoreAware and ResourceLoaderAware; other pkg: loads go through SolrResourceLoader.newInstance addToCoreAware"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14133-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14117",
@@ -3469,7 +3619,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Title: suite-wide test sysprop cleanup; test infrastructure."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14100-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14098",
@@ -3535,7 +3688,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Test-only hardening of AbstractCloudBackupRestoreTestCase."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14063-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14061",
@@ -3570,7 +3726,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: Jan Hoydahl redirects to ZK AdminServer support (SOLR-13502); suspected socket leak was disproved (try-with-resources)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14027-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14023",
@@ -3605,7 +3764,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "mergeIds skips a partial shard without sort_values (SOLR-14758)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14004-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13976",
@@ -3702,7 +3864,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Title only: shard state not reflecting replica state (2019); no comments; not traced on main."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13853-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13851",
@@ -3761,7 +3926,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket + AuditEvent on main: /____v2 -> /api conversion (l.546) and v2 collection regexes (l.552+) now exist; remaining ask (log POST body) is an improvement."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13837-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13833",
@@ -3827,7 +3995,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: Smiley says overlapping child/parent ids are user error with no protection by design."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13785-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13781",
@@ -3862,7 +4033,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Test framework redesign proposal."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13772-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13709",
@@ -3878,7 +4052,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Uncertain test-artifact root cause per ticket investigation; no fix designed."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13709-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13708",
@@ -3894,7 +4071,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "JavaBinUpdateRequestCodec passes version in the _route_ branch (deleteById(id, route, version))"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13708-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13706",
@@ -3959,7 +4139,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Feature: bin/solr URL option."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13687-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13678",
@@ -3994,7 +4177,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Error path removed with legacy mode (SOLR-12823)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13654-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13627",
@@ -4029,7 +4215,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket + CoreContainer.create l.1513 on main: assertPathAllowed(instancePath) now validates instanceDir against allowPaths (SOLR_HOME by default); ancestor core.properties scan is a new feature."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13618-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13616",
@@ -4233,7 +4422,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: javabin partial response corruption needs wire-format restart tag or hardened marshal; Noble Paul and Hoss disagree, no spec."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13471-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13470",
@@ -4249,7 +4441,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Duplicate of SOLR-13471 (reporter found root cause there)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13470-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13455",
@@ -4265,7 +4460,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "JettySolrRunner adds HTTP2CServerConnectionFactory outside jetty.testMode"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13455-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13416",
@@ -4300,7 +4498,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Feature: QueryElevationComponent by default."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13390-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13369",
@@ -4334,7 +4535,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Feature: eDisMax pf per boolean clause."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13346-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13310",
@@ -4350,7 +4554,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: executor lifecycle proposal, Hostetter walked back bug claim."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13310-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13305",
@@ -4366,7 +4573,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "solr.zookeeper.client.connect.timeout and withZkConnectTimeout exist"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13305-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13304",
@@ -4401,7 +4611,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note only: delete/recreate race leaving locked core, related to open SOLR-13021; not traced."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13291-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13283",
@@ -4417,7 +4630,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Feature: facet.limit/offset for {!terms} legacy facet."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13283-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13278",
@@ -4452,7 +4668,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: HttpComponents RequestConfig path no longer exists on main."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13270-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13265",
@@ -4486,7 +4705,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Feature: heatmap GeoJSON."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13263-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13247",
@@ -4502,7 +4724,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: legacy assigner replaced by placement framework."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13247-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13246",
@@ -4585,7 +4810,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: leader tragic-event criteria depends on LUCENE-8692, test hardened by SOLR-18025; no agreed fix shape."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13237-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13233",
@@ -4601,7 +4829,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: reporter and Sokolov unsure of correct fix (WDGF order vs collator behavior)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13233-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13216",
@@ -4648,7 +4879,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: prepDistributed now populates rb.shards on all distributed paths."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13195-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13192",
@@ -4664,7 +4898,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Pure-negative query semantics documented, maintainer pushed back."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13192-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13186",
@@ -4698,7 +4935,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: Erickson notes NULL and 0 are treated equivalently; missing-field export sort order places missing with 0 buckets, so split NULL buckets come from /export sort semantics, not RollupStream; no Solr-local fix."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13175-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13167",
@@ -4733,7 +4973,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Feature: Config/Schema API guardrails."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13166-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13136",
@@ -4811,7 +5054,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Reporter said SOLR-11443 fixed it; queue size configurable."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13061-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13056",
@@ -4827,7 +5073,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Design: SortableTextField distributed faceting refinement trade-off, no agreed fix."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13056-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13038",
@@ -4843,7 +5092,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: retry surface (SolrHttpRequestRetryHandler / HttpClient4) gone; needs per-API idempotency decision."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13038-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13021",
@@ -4878,7 +5130,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "JIRA FixVersion 8.2 set (fixed upstream)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13009-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12998",
@@ -4924,7 +5179,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: API half fixed, remainder replica-count storage redesign."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12944-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12918",
@@ -4996,7 +5254,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "UX: schema browser for Point fields."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12884-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12871",
@@ -5060,7 +5321,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Feature: corrupt-index status semantics."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12850-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12849",
@@ -5219,7 +5483,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Umbrella; sub-tasks 12697/12698/12699 closed. FieldValueFeature multi-valued docValues is pinned as unsupported in TestFieldValueFeature (design)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12688-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12659",
@@ -5235,7 +5502,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Existing research note: needs multipart/ERH support, design-level."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12659-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12657",
@@ -5374,7 +5644,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Dup of SOLR-12543; empty body fixed."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12542-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12532",
@@ -5414,7 +5687,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Existing revisit: concurrency design, maintainer rejects blocking updates."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12504-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12487",
@@ -5430,7 +5706,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Existing revisit: tlog corruption data only, nothing to build a test from."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12487-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12460",
@@ -5503,7 +5782,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Existing revisit note: random sort seeded per docId, cursors unstable across replicas by design; test would need schema-sorts change."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12363-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12347",
@@ -5537,7 +5819,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "sow=false default since 7.0, documented workaround; behaviour change not bug."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12340-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12315",
@@ -5629,7 +5914,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Design discussion on Luke getIndexInfo / IW lock, no agreed fix."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12268-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12263",
@@ -5664,7 +5952,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Existing research note: SnapShooter.createSnapAsync reports in-progress on main."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12262-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12246",
@@ -5723,7 +6014,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The title says grouping fails for inner joins, but the packet only asks why an item whose status was closed still appears in an open-status query. It includes no query, schema, documents, or expected/actual output tying that symptom to inner joins. Need a minimal reproducer before deciding whether Solr is at fault."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12234-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12220",
@@ -5807,7 +6101,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: QueryComponent.mergeIds treats missing sort_values as empty NamedList on main; no repro data."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12112-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12094",
@@ -5902,7 +6199,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "API refactor discussion of ErrorCode.UNKNOWN, reporter asks for discussion."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12029-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12007",
@@ -5930,7 +6230,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Improvement: warning when id field missing in CloudSolrClient; documented fallback."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11983-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11955",
@@ -5965,7 +6268,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Expected synonym analysis difference per Shawn Heisey."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11954-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11939",
@@ -5999,7 +6305,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: design decision / by design / needs maintainer call. Reason holds: design disagreement: Shalin Shekhar Mangar says ZkCmdExecutor cannot retry on SessionExpired (SolrZooKeeper instance unusable; use OnReconnect hook); reporter PR #321 had failing tests; not a safe small fix. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11932-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11927",
@@ -6015,7 +6324,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: wont fix per Mikhail Khludnev: child-document semantics need a first-class redesign; XML empty-child workaround not supported. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11927-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11922",
@@ -6156,7 +6468,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 7 comments). Class: design decision / by design / needs maintainer call. Reason holds: design-level and superseded: avoiding fullCopy split into SOLR-11920 (differential copy); removing isIndexStale is a replication design change. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11815-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11814",
@@ -6279,7 +6594,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "DocExpirationUpdateProcessorFactory deleter sets req.setUserPrincipalName(PKIAuthenticationPlugin.NODE_IS_USER) inside its own SolrRequestInfo"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11759-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11712",
@@ -6295,7 +6613,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 10 comments). Class: design decision / by design / needs maintainer call. Reason holds: behavior changed since ticket: TupleStream.getReplicas now silently skips slices with no active replica (no IndexOutOfBounds there); ParallelStream worker/shard mismatch and whether a down shard should error vs return partial results is a design decision. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11712-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11700",
@@ -6366,7 +6687,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "V2HttpCall.init guards pathSegments.size() before get(1)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11675-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11672",
@@ -6420,7 +6744,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The ticket asks whether the VMParams digest ZooKeeper providers can accept encrypted credentials and how to configure them; it reports no authentication failure or credential exposure. This is a new secret-storage capability, not a defect in the documented providers."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11655-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11627",
@@ -6455,7 +6782,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: feature/design proposal (memory-efficient SolrJ response parsing), not a bug. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11583-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11577",
@@ -6471,7 +6801,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: design-level: HttpShardHandler retry on stale cluster state needs a retry policy across the shard handler; found while working on SOLR-11576; no test or repro beyond a scenario description. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11577-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11563",
@@ -6563,7 +6896,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 10 comments). Class: design decision / by design / needs maintainer call. Reason holds: design/security-policy debate (reduce default query parsers); maintainers (Yonik, David Smiley, Jan Hoydahl) prefer keeping them enabled; not a bug. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11495-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11483",
@@ -6639,7 +6975,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "Admin UI file viewer output encoding; picker policy skips Admin UI and it needs a UI build to verify."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11468-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11463",
@@ -6712,7 +7051,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: no repro or too vague to test. Reason holds: design/complex: QueryElevation over a multi-collection alias where only some shards return elevation sort values breaks mergeIds/unmarshalSortValues; needs shard-level sort-value contract design, no repro data. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11432-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11408",
@@ -6833,7 +7175,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: usage/semantics: [child parentFilter] with a parent-filter fq on children; works as designed when the which/parentFilter is used correctly; no defect shown. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11353-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11301",
@@ -6868,7 +7213,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 5 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: alias sharing a name with a collection (David Smiley: 'bizarre'); fix is either forbidding the clash or resolving aliases first in CloudSolrClient (perf trade-off) - unresolved in ticket. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11292-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11290",
@@ -7179,7 +7527,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: design decision / by design / needs maintainer call. Reason holds: design-level feature (temporary unload API), no simple fix Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11083-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11058",
@@ -7214,7 +7565,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: design discussion about duplicate watchers, no concrete bug fix Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11034-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11009",
@@ -7268,7 +7622,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The description calls this a proposal to deprecate FieldCache and coordinates it with SOLR-10808 and SOLR-10046. The comments discuss the proposal and timing; there is no observed wrong behavior or regression."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10982-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11022",
@@ -7341,7 +7698,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "test-only points randomization, fixed via SOLR-10946."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10960-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10959",
@@ -7376,7 +7736,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: cache regeneration is local-only, maintainers advise disabling queryResultCache with exact stats Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10952-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10937",
@@ -7653,7 +8016,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 6 comments). Class: design decision / by design / needs maintainer call. Reason holds: design change with PR/discussion on replica types; no isolated fix Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10751-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10726",
@@ -7669,7 +8035,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: multiple searchers on replica creation, no concrete fix Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10726-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10712",
@@ -7827,7 +8196,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "Checked upstream/main c8ab71430f6e7547c773da596101d680862310ff: ChaosMonkey.java initializes expireSessions and causeConnectionLoss with Boolean.parseBoolean when the properties are present, and uses chaosRandom.nextBoolean when absent (lines 131-138). The Boolean.valueOf(null) default bug described in the ticket is no longer present."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10604-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10601",
@@ -7919,7 +8291,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: no repro or too vague to test. Reason holds: design/vague; draft patches without agreement Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10533-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10512",
@@ -7935,7 +8310,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "On upstream/main c8ab714, the Streaming Expressions reference says both input streams must be sorted by the fields in `on`. The report sorted by different fields than its join keys; JIRA comments confirm that sorting each stream by the join key works. This is the documented contract, not a JoinStream defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10512-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10511",
@@ -8117,7 +8495,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 7 comments). Class: design decision / by design / needs maintainer call. Reason holds: fixed by Lucene changes (analysis of wildcard in complexphrase); not reproducible on later versions per reporter Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10363-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10334",
@@ -8152,7 +8533,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: CurrencyField stats rounding by design of long-cents conversion, no clear fix Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10332-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10326",
@@ -8242,7 +8626,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The reporter explicitly says this is not a bug per se. The discussion converges on a policy for standalone ZooKeeper when the connection string lists an ensemble, so the request is a compatibility/design choice rather than a demonstrated regression."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10284-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10256",
@@ -8258,7 +8645,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "This asks for a new switch controlling multiword spell-check collation. Current upstream/main SpellCheckCollator.getCollation inserts AND and parentheses for multiword boolean-query corrections to preserve their boolean meaning; the JIRA discussion disputes adding a flag and identifies extended results as a workaround. No incorrect result is demonstrated."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10256-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10252",
@@ -8348,7 +8738,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The local JIRA packet contains indexing progress but no exception or Solr request/configuration. A maintainer hypothesizes that MoreLikeThis includes a numeric field in its similarity field list, but that cannot be checked without the actual exception, request handler, and field list. Need those details to distinguish configuration from a Solr defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10197-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10131",
@@ -8382,7 +8775,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: design (DBQ reordering), large change Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10112-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10110",
@@ -8436,7 +8832,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "formdataUploadLimitInKB default is now unlimited (SolrConfig Integer.MAX_VALUE, documented in requestdispatcher.adoc); SolrRequestParserTest covers the limit; the 2048 KB of the ticket was the old default"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10084-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10041",
@@ -8471,7 +8870,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: no repro or too vague to test. Reason holds: no repro, getById child docs needs [child] transformer, by design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10030-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10022",
@@ -8506,7 +8908,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The ticket requests a new SQL sorting feature. Its discussion moves from random_SEED to Calcite RAND functions and notes function pushdown limitations; it does not report incorrect behavior for an existing supported SQL operation."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10016-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10010",
@@ -8541,7 +8946,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 10 comments). Class: design decision / by design / needs maintainer call. Reason holds: performance optimization with new collector, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9978-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9970",
@@ -8769,7 +9177,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 9 comments). Class: design decision / by design / needs maintainer call. Reason holds: feature: disable expiration commits, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9841-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9831",
@@ -8897,7 +9308,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The reporter describes a custom module for probabilistic page-wise result elevation after searching existing modules. This is a new ranking feature proposal, not a defect in an existing supported behavior."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9806-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9791",
@@ -8951,7 +9365,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: schema modification rollback across replicas Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9765-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9759",
@@ -9073,7 +9490,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "On upstream/main c8ab714, the standard query parser guide lists `/` as a syntax character and says literal special characters must be backslash-escaped. The query `a / b` therefore needs an escaped slash; this is documented parser syntax."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9722-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9713",
@@ -9127,7 +9547,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: CloudSolrClient cache rework since 6.3, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9664-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9648",
@@ -9143,7 +9566,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: wrapping merge policies Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9648-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9645",
@@ -9159,7 +9585,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The linked SOLR-9639 was explicitly a CDCR test-cleanup race; its fix waited for recovery before deleting the temporary test collection. Current CollectionTooManyReplicasTest also waits for recovery before clean shutdown, but that does not prove the reported production `/get` flood is fixed. Need a current supported-version reproduction and thread/heap evidence."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9645-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9637",
@@ -9193,7 +9622,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: explain in grouped queries needs query object, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9622-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9599",
@@ -9209,7 +9641,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The JIRA contains detailed DocValues performance comparisons from the 2016-2017 Lucene iterator transition, plus only a limited later Calcite export comparison. Those measurements do not establish current Solr/Lucene performance. Need a reproducible benchmark on current main and the original workload before deciding whether an actionable regression remains."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9599-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9598",
@@ -9261,7 +9696,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Single-shard query on a recovering node goes two-phase; DistributedZkUpdate/HttpShardHandler.prepDistributed needs a forwarding design (canShortCircuit). JIRA fix version 6.7/7.0 does not prove the code path changed. Not built."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9594-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9593",
@@ -9296,7 +9734,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The ticket requests document-level authorization and discusses possible SearchComponent, QParser, and handler designs for integrations such as Sentry/Ranger. It identifies missing functionality, not a failure of an existing authorization contract."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9578-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9573",
@@ -9312,7 +9753,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "JIRA fix version 7.0 (resolved Fixed). Not code-verified; the ticket has no repro details."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9573-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9571",
@@ -9347,7 +9791,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: streaming join sort validation design, no obvious fix Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9550-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9514",
@@ -9363,7 +9810,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 5 comments). Class: design decision / by design / needs maintainer call. Reason holds: deprecation/API design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9514-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9492",
@@ -9398,7 +9848,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 6 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: URPs and child documents Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9477-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9468",
@@ -9583,7 +10036,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: commitTimeMSec comparison Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9369-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9366",
@@ -9618,7 +10074,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: confusing semantics/docs, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9361-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9352",
@@ -9759,7 +10218,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The local-param coordinator issue remains in upstream/main c8ab714. The pushed origin/solr-11129-submit branch changes FacetComponent.FieldFacet.fillParams to read local facet.limit/mincount and adds distributed local-param tests, so it appears to cover the same seam. Keep linked and re-audit after that branch lands or is superseded; do not treat the unmerged branch as an upstream fix."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9260-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9250",
@@ -9813,7 +10275,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: SolrJ writer design change, throw-or-convert design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9230-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9227",
@@ -9847,7 +10312,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: auto FORCELEADER risks data loss Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9226-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9223",
@@ -9863,7 +10331,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: leaderless shard scenario Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9223-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9214",
@@ -9879,7 +10350,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "HttpShardHandler.prepDistributed standalone branch builds a self shard for distrib=true"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9214-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9213",
@@ -9952,7 +10426,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "This is a Config API umbrella. JIRA comments name possible failures (highlight component settings ignored and a ClusteringComponent ClassCastException), but provide no concrete request/config or failing test; the maintainer asked for a failing command and a subtask. Need one minimal current-version reproduction to scope it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9197-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9183",
@@ -10006,7 +10483,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 12 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: mm vs q.op semantics, long debate; separate edismax tickets Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9174-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9173",
@@ -10108,7 +10588,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The original report creates about 2,000 empty collections on one host with embedded ZooKeeper; a later comment mentions a single routed-alias collection with separate ZooKeeper, but supplies no complete logs or reproduction. The current root cause cannot be distinguished from scale/environment limits without current logs and a supported-version reproduction."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9129-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9126",
@@ -10161,7 +10644,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "createMainQuery and DebugComponent send global stats in debug mode"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9123-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9122",
@@ -10252,7 +10738,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "On upstream/main c8ab714, TestDistributedStatsComponentCardinality is annotated @SuppressSSL with SOLR-9062. The report attributes OOM to forcing SSL/clientAuth under the default test heap, so this is a test-resource limitation rather than a Solr runtime defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9062-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9061",
@@ -10268,7 +10757,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "On upstream/main c8ab714, TestDistributedSearch is annotated @SuppressSSL with SOLR-9061. The report is a randomized test OOM under SSL/clientAuth and the test disables that combination, so this is a test-resource limitation rather than a Solr runtime defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9061-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9060",
@@ -10382,7 +10874,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: by design: default NOW applies only when the field is absent Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8966-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8954",
@@ -10416,7 +10911,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "no numShards in CloudDescriptor/ZkController/CoreDescriptor on main"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8941-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8939",
@@ -10450,7 +10948,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "On upstream/main c8ab714, DocumentExpressionDictionaryFactory builds a DocumentValueSourceDictionary from the term field, payload, and weight expression; it has no context-field mapping. The reporter later confirmed that switching to DocumentDictionaryFactory/weightField worked. This is an unsupported dictionary/configuration combination, not a broken general suggest.cfq path."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8928-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8909",
@@ -10504,7 +11005,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: ExactStatsCache term vector stats design, maintainers say by design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8893-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8879",
@@ -10555,7 +11059,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 10 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: live_nodes readiness, long thread Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8862-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8843",
@@ -10590,7 +11097,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: edismax mm with compound word filter, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8841-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9202",
@@ -10625,7 +11135,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ExportWriter.getSortDoc requires docValues; StringValue.setNextReader uses DocValues.getSorted (empty fallback)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8806-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8770",
@@ -10641,7 +11154,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: null field values in SolrInputDocument, API design debate Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8770-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8768",
@@ -10657,7 +11173,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "On upstream/main c8ab714, the JSON Facet API documents refine:true as the second phase that makes returned bucket counts and stats exact. The JIRA example omitted refinement; incomplete shard stats and a wrong global top-term order are the documented approximate behavior without it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8768-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8757",
@@ -10673,7 +11192,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The report gives only a custom in-process CoreContainer create/swap/unload snippet and a 'not yet closed' wait log, without the handler implementation or reference-acquisition/release sequence. Need a minimal reproduction through supported core lifecycle operations before deciding whether unload is defective."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8757-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8756",
@@ -10708,7 +11230,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 7 comments). Class: design decision / by design / needs maintainer call. Reason holds: numBuckets is an HLL estimate by design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8741-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8733",
@@ -10724,7 +11249,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: versions=true across forwarded updates needs response aggregation, design-level; Yonik says not a public API Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8733-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8732",
@@ -10740,7 +11268,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The ticket asks for Beider-Morse phonetic filtering to preserve the original token. The Solr reference guide documents the filter as phonetic encoding, and the report requests an additional preserve-original option; it shows no regression from the documented analyzer behavior."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8732-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8729",
@@ -10756,7 +11287,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The report has no complete query parameters, schema, or thread dump, and the comments note that SolrCloud nodes were on separate network interfaces. There is no current code path to attribute the hang to Solr from this packet alone; need a supported-version reproduction and thread dump."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8729-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8709",
@@ -10772,7 +11306,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: TopicStream checksum feature/design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8709-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8685",
@@ -10788,7 +11325,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The JIRA response identifies the legacy IndexBasedSpellChecker as producing less-than-optimal suggestions at very low spellcheck.count and recommends DirectSolrSpellChecker. The ticket establishes a configuration/algorithm quality limitation, not general query-result corruption."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8685-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8681",
@@ -10823,7 +11363,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: IndexFetcher version-zero dual use, design; not a small fix Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8641-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8635",
@@ -10858,7 +11401,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: function types design, old 5.x Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8634-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8632",
@@ -10874,7 +11420,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The JIRA packet has no description or comments, and the original skip note contains no code hypothesis. Need the actual query, cache configuration, and observed cache metrics before the filter-cache claim can be evaluated."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8632-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8629",
@@ -10890,7 +11439,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: leader sync failure policy Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8629-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8628",
@@ -10943,7 +11495,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 18 comments). Class: design decision / by design / needs maintainer call. Reason holds: design of leader election for new replicas, fix version 5.5 Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8619-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8609",
@@ -10959,7 +11514,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "On upstream/main c8ab714, the old maxShardsPerNode/rule-based autoscaling path described in this 5.x snitch report has been removed (SOLR-12847 and SOLR-14656); only historical test comments remain for that rules interaction. The reported configuration is obsolete."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8609-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8576",
@@ -11012,7 +11570,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The request value facet.pivot=A1%2CA2 is valid URL encoding: the server decodes the comma before Solr parses the comma-delimited pivot value. The JIRA response correctly routes this SolrJ usage question to the user list; no client/server defect is evidenced."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8568-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8554",
@@ -11046,7 +11607,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: skip recovering replicas Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8553-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8543",
@@ -11062,7 +11626,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: schemaless json typing design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8543-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8539",
@@ -11078,7 +11645,10 @@
       "date": "2026-10-07",
       "round": "audit-4",
       "evidence": "SOLR-8539 discussion attributes swallowed request-thread OutOfMemoryError handling to Jetty and says the related Jetty issue was closed as wontfix. Current Solr launchers set -XX:+CrashOnOutOfMemoryError in solr and solr.cmd, so the JVM exits on OOM without a Solr request-handler change."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8539-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8536",
@@ -11106,7 +11676,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "Current default index-join tests cover multivalued from/to fields, but the report is a cross-core, negated join and does not include a complete schema or reproducible result set. Need a current cross-core reproduction to determine whether this is query construction, empty-source semantics, or a multivalue defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8478-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8469",
@@ -11160,7 +11733,10 @@
       "date": "2026-10-17",
       "round": "audit-6",
       "evidence": "The reported failure follows a failed async split followed by direct edits to clusterstate.json and manual unloading of the parent core; the later 'Cannot unload non-existent core' is consistent with that manual state change. No supported split/delete reproduction is provided, so this is not evidence of a current Collections API defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8431-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8430",
@@ -11210,7 +11786,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 22 comments). Class: design decision / by design / needs maintainer call. Reason holds: investigation of leader election peer sync, patch design, old Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8368-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8365",
@@ -11245,7 +11824,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: ResourceLoaderAware lifecycle refactor Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8311-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8310",
@@ -11280,7 +11862,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrIndexWriter has no finalize() on main (isClosed flag guards close)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8304-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8275",
@@ -11521,7 +12106,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 6 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: retry on session expiration Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8067-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8051",
@@ -11555,7 +12143,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 42 comments). Class: design decision / by design / needs maintainer call. Reason holds: long design discussion, URP chain on tlog replay; later separate tickets Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8030-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8024",
@@ -11620,7 +12211,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: sort missing-value ordering on multivalued function, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8005-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8003",
@@ -11768,7 +12362,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 17 comments). Class: design decision / by design / needs maintainer call. Reason holds: replication timestamp design, long debate Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7932-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7927",
@@ -11784,7 +12381,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Read in 26th session: the UTF-8 buffer already uses MAX_UTF8_BYTES_PER_CHAR, no oversizing left."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7927-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7924",
@@ -11913,7 +12513,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "JIRA records commits 1690935 on dev/trunk and 1690940 on branch_5x for SOLR-7793. Current upstream/main also uses the extracted Utils.makeMap helper in production call sites, so the requested utility refactor was implemented."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7793-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7773",
@@ -11948,7 +12551,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: data-driven nested JSON is not supported by design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7758-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7721",
@@ -12039,7 +12645,10 @@
       "date": "2026-10-07",
       "round": "audit-4",
       "evidence": "SOLR-7606 AIOOBE originated in Lucene ToParentBlockJoinQuery; its JIRA thread points to LUCENE-6553, which changed invalid-parent handling to IllegalStateException. Solr BlockJoinParentQParser delegates to Lucene, and the report requires malformed child-parent blocks."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7606-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7597",
@@ -12131,7 +12740,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: numeric as string index field Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7521-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7520",
@@ -12178,7 +12790,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 6 comments). Class: design decision / by design / needs maintainer call. Reason holds: design of corruption handling under chaos monkey Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7511-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7504",
@@ -12224,7 +12839,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Fix version 5.2 set; a multi-valued enum JSON-facet test (testMultivalueEnumTypes) exists on main, and FacetField routes multi-valued docValues fields to the DV processor."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7496-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7482",
@@ -12259,7 +12877,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: design decision / by design / needs maintainer call. Reason holds: design/fixed by later recovery work Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7427-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7415",
@@ -12294,7 +12915,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: versions=true on multi shard, same as SOLR-8733 design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7404-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7390",
@@ -12366,7 +12990,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: version clock skew Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7347-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7343",
@@ -12456,7 +13083,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: copyField targets not returned by design (RTG) Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7257-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7249",
@@ -12491,7 +13121,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 15 comments). Class: design decision / by design / needs maintainer call. Reason holds: router field semantics debate, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7247-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7235",
@@ -12507,7 +13140,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "Checked upstream/main c8ab71430f6e7547c773da596101d680862310ff: TruncateFieldUpdateProcessorFactory documents that it truncates CharSequence values and its value mutator only changes values implementing CharSequence (line 92). A map-shaped atomic update value is outside that contract; the ticket requests broader support."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7235-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7221",
@@ -12542,7 +13178,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: 4.10 leader election/delete race, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7198-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7192",
@@ -12596,7 +13235,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "LRUStatsCache.doRetrieveStatsRequest returns null when approxCheckMissingStats finds nothing missing (useCachedGlobalStats)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7149-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7120",
@@ -12686,7 +13328,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: init failure preempts failover Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7071-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7070",
@@ -12702,7 +13347,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 8 comments). Class: design decision / by design / needs maintainer call. Reason holds: field names beginning with digits parsed as functions, by design (SOLR-6051) Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7070-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7069",
@@ -12718,7 +13366,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: same as SOLR-7071, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7069-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7035",
@@ -12734,7 +13385,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: design decision / by design / needs maintainer call. Reason holds: reload firstSearcher listener timing, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7035-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7022",
@@ -12787,7 +13441,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ExternalFileField/FileFloatSource no longer in the tree"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7000-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6977",
@@ -12803,7 +13460,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The ticket asks to add date-part grouping to range facets and mentions a proposed patch, but reports no incorrect existing range-facet result. This is an additional faceting feature."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6977-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6975",
@@ -12949,7 +13609,10 @@
       "date": "2026-10-04",
       "round": "audit-0",
       "evidence": "audit-0 spot-check 2026-10-04: redesign of managed-resource storage vs configsets"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6911-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6903",
@@ -13022,7 +13685,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "no wait()/notifyAll() left in solr/core search/facet or request; UnInvertedField no longer uses the cache.wait pattern"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6846-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6837",
@@ -13038,7 +13704,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: write semantics with partitioned leader Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6837-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6836",
@@ -13129,7 +13798,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 9 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: singlePass with expand Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6813-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6811",
@@ -13164,7 +13836,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: CSV escape/encapsulator design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6785-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6782",
@@ -13236,7 +13911,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 5 comments). Class: design decision / by design / needs maintainer call. Reason holds: property.name ignored on core creation, design (see 11939) Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6719-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6717",
@@ -13252,7 +13930,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "JIRA fix version 5.0/6.0 (a real 5.0 release, not only the bulk move). Not code-verified; forwarding of updates from a wrong node is a performance question without a defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6717-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6714",
@@ -13268,7 +13949,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: status aggregation design, tracked under SOLR-6595 Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6714-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6712",
@@ -13340,7 +14024,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Read in 27th session: only a javadoc-style mention of getConfigDir is left."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6649-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6621",
@@ -13356,7 +14043,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrZkClient.wrapWatcher exposed; ProcessWatchWithExecutor not re-wrapped"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6621-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6593",
@@ -13429,7 +14119,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "add(SolrParams) javadoc now states overriding semantics (Hoss: intentional putAll analogue)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6576-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6561",
@@ -13464,7 +14157,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrCore.deleteUnloadedCore removes an external ulogDir"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6537-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6534",
@@ -13624,7 +14320,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: design decision / by design / needs maintainer call. Reason holds: json long precision design (json.long param); client concern Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6364-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6335",
@@ -13640,7 +14339,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "Checked upstream/main c8ab71430f6e7547c773da596101d680862310ff: HttpShardHandler throws SERVICE_UNAVAILABLE with 'no servers hosting shard' when a shard has no live servers (line 255). The ticket does not explain why the replica repeatedly remains in recovery or provide cluster state/recovery logs, so the underlying cause cannot be confirmed."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6335-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6334",
@@ -13768,7 +14470,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The ticket asks for Reader-valued SolrInputDocument fields to stream large updates and explicitly raises the request-copy/lifecycle problem in SolrCloud. This is a new SolrJ API and ownership design, not a failure of an existing API contract."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6199-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6193",
@@ -13859,7 +14564,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: SPLITSHARD cleanup design, old Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6099-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6065",
@@ -13959,7 +14667,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: edismax pf with OR, behavior/design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6004-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5995",
@@ -14013,7 +14724,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: state naming during tlog recovery, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5962-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5948",
@@ -14174,7 +14888,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "UpdateRequest on upstream/main has no lastCommitWithin/docLists comparison any more (grep lastCommitWithin empty; add() stores commitWithin in per-doc params)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5840-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5833",
@@ -14246,7 +14963,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "CoreContainer.create unregisters from ZK when !preExistingZkEntry"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5812-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5793",
@@ -14413,7 +15133,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "CloudSolrServer is gone (no match); the report is a \"no live servers\" exception without a diagnosed hang."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5719-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5717",
@@ -14486,7 +15209,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Deadlock needed JMX registration after the first searcher calling getSearcher; no JMX reporter exists on main (see 11659)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5592-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5589",
@@ -14558,7 +15284,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Still unsupported: QueryParser.jj LPARAMS token ends at whitespace, so {!lucene df=text}(a b) inside a lucene query fails. Fix needs a javacc token-grammar change and regenerated QueryParserTokenManager; not hand-editable."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5560-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5559",
@@ -14668,7 +15397,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "HttpSolrProxy.doHttpProxy forwards servletReq.getMethod() for any method and sends a body for everything except GET/HEAD/DELETE, so PUT is proxied like POST."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5462-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5435",
@@ -14796,7 +15528,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: update log replay commit handling, old design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5235-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5224",
@@ -14812,7 +15547,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrCmdDistributor flush functions are gone; distribAdd/distribDelete/distribCommit set the caller params on the UpdateRequest explicitly"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5224-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5220",
@@ -14846,7 +15584,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "MoreLikeThisComponent.mltViaQueryParams on upstream/main builds shard queries as {!bool must_not=$p should=$q} with {!field f=id}val and {!term f=..}val params, so no query-string escaping is involved; the toString-based shard query is gone."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5205-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5161",
@@ -14862,7 +15603,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Same rewrite as SOLR-5205: distributed MLT now sends {!bool} with should=$param terms (MoreLikeThisComponent.mltViaQueryParams), so q.op=AND of the original request no longer applies to the term clauses."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5161-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5145",
@@ -14897,7 +15641,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Verified in 25th session: ZkResourceLoader reads through SolrResourceLoader on main."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5115-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5095",
@@ -14913,7 +15660,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: infoRegistry overhaul design, 5.0 Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5095-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5089",
@@ -14929,7 +15679,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Read in 27th session: mock assertions now run in the test thread after verify/captors."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5089-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5067",
@@ -15019,7 +15772,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: propagate requests via CloudSolrServer Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4996-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4989",
@@ -15053,7 +15809,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 8 comments). Class: design decision / by design / needs maintainer call. Reason holds: core naming design, long debate Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4983-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4944",
@@ -15085,7 +15844,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ClientUtils.toSolrInputDocument(SolrDocument) no longer exists on upstream/main (symbol grep over solr/*.java finds only DocumentBuilder, RealTimeGetComponent and DocumentObjectBinder variants)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4880-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4878",
@@ -15101,7 +15863,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrIndexConfig infoStream is now a boolean that routes to LoggingInfoStream (no file option, no CWD default)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4878-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4859",
@@ -15117,7 +15882,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 9 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: min/max URP agnostic of field type Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4859-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4851",
@@ -15206,7 +15974,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrCore.close asserts on too many closes (refCount)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4753-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4739",
@@ -15279,7 +16050,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: replication config design, old Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4674-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4669",
@@ -15295,7 +16069,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: replication ordering of index vs conf, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4669-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4659",
@@ -15387,7 +16164,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: raw parser and local params design (enableLocalParams), old Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4558-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4540",
@@ -15515,7 +16295,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: 4.1 command order in batch, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4486-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4427",
@@ -15858,7 +16641,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "HttpSolrCall.writeResponse and sendError catch EOFException"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4274-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4183",
@@ -15893,7 +16679,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "Checked against upstream/main c8ab71430f6e7547c773da596101d680862310ff. This is a general complaint about test-suite reliability and dependency validation, not a specific failing test or Solr behavior. The ticket does not identify a bounded defect that can be audited or implemented."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4169-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4146",
@@ -15909,7 +16698,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "The JIRA has later reports through Solr 7.2.1, including a missing-segment failure and a link to SOLR-8793. Current CoreStatus still opens a core and may fetch its searcher/index information for status, so the old skip cannot be confirmed solely from its 6.0 fix version. Need a current repro to distinguish a status-path defect from an underlying failed/corrupt index or the linked fixes."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4146-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4139",
@@ -15944,7 +16736,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: edismax pf with field clauses in parentheses, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4130-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4122",
@@ -15998,7 +16793,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 11 comments). Class: design decision / by design / needs maintainer call. Reason holds: softCommit replication, NRT design per maintainers Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4100-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4089",
@@ -16014,7 +16812,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "alternateField now applied per hl.fl field with the original highlighter semantics; ticket asks a different design (once per request)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4089-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4069",
@@ -16030,7 +16831,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "rejoinLeaderElection (ShardLeaderElectionContext:483) cancels the election and rejoins; Mark Miller doubted a leader entry is ever registered at that point, and the leader marker now lives in per-collection state, not a clusterstate entry to clear."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4069-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4040",
@@ -16046,7 +16850,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Read in 27th session: deleteByQuery cloud tests exist; JIRA fix version 4.0."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4040-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4039",
@@ -16062,7 +16869,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "CoreAdminRequest.MergeIndexes.getParams uses params.add for srcCores"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4039-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4037",
@@ -16078,7 +16888,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "HttpShardHandlerFactory defaults to maximumPoolSize=Integer.MAX_VALUE with a SynchronousQueue, so RejectedExecutionException only occurs after shutdown or explicit bounding; reporter fixed it by refreshing the connection."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4037-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4023",
@@ -16094,7 +16907,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: query parser boolean precedence design, long known Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4023-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4021",
@@ -16110,7 +16926,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 10 comments). Class: design decision / by design / needs maintainer call. Reason holds: javabin unknown class behavior, design; BigDecimal supported now Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4021-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4006",
@@ -16200,7 +17019,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "postings=BloomFilter has no match anywhere in the java sources; the feature is gone."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3950-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3945",
@@ -16216,7 +17038,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: setFacet(false) removes the param by API design; changing needs compat discussion Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3945-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3944",
@@ -16251,7 +17076,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The ticket requests a per-query option to disable the coord scoring factor. Its discussion identifies Similarity configuration as the supported extension point, and current upstream/main exposes SimilarityFactory configuration (including ClassicSimilarityFactory). This is a scoring configuration enhancement, not a reported regression."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3931-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3923",
@@ -16323,7 +17151,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "tlog recovery vs external add/commit: the ticket is a list of open design questions (block updates, delay port). UpdateLog replay was reworked since 4.0 but the commit-during-replay case was not traced. JIRA fix version was a bulk move."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3888-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3865",
@@ -16357,7 +17188,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "4.0-BETA admin graph shows a working leader as recovery_failed after two nodes die; Mark Miller linked it to SOLR-7065. LIR and the graph state model changed; not traced."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3859-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3806",
@@ -16430,7 +17264,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: design decision / by design / needs maintainer call. Reason holds: cross-collection duplicate ids, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3765-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3744",
@@ -16446,7 +17283,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 5 comments). Class: design decision / by design / needs maintainer call. Reason holds: pure negative sub-queries, long design discussion; related work in solr-12212 and solr-11470 branches Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3744-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3742",
@@ -16724,7 +17564,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: 4.0-ALPHA lowercase uniqueKey semantics, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3676-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3657",
@@ -16812,7 +17655,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 10 comments). Class: design decision / by design / needs maintainer call. Reason holds: softCommit param rethink, API design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3539-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3523",
@@ -16865,7 +17711,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 15 comments). Class: design decision / by design / needs maintainer call. Reason holds: design; resolved in docs (see ticket final comment, 2021) Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3473-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3461",
@@ -16919,7 +17768,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Read in 25th session: HttpSolrClient.checkContentType already reports the HTML error body."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3447-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3408",
@@ -16954,7 +17806,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 6 comments). Class: design decision / by design / needs maintainer call. Reason holds: field names with leading digits are parsed as functions by design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3407-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3380",
@@ -17045,7 +17900,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Still true: DisMaxQParser.addMainQuery adds the parsed user query as MUST even when analysis leaves an empty BooleanQuery (+()), which matches nothing; edismax has ExtendedDismaxQParser.isEmpty handling. Wanted semantics (ignore versus no match) not decided; not built."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3128-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3124",
@@ -17175,7 +18033,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: edismax pf with quoted subphrase, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3008-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-2988",
@@ -17323,7 +18184,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: range facet limits design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-2855-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-2845",
@@ -17451,7 +18315,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: searcher caching Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-2516-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-2507",
