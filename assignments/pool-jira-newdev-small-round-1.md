@@ -1,7 +1,6 @@
 # Pool assignment: JIRA newdev small improvements, round 1
 
-Status: OPEN
-
+Status: OPEN (every item has an outcome in reports/2026-10-19-jira-newdev/B-small-round-1.md: done with branch 1 (solr-18209-list-of), 4 (solr-8755-tokenmgrerror-tests), 9 (solr-18481-xff); stopped 2, 3, 5, 8, 11, 12; already done in code 10, 13; BLOCKED on the docs build 6 and 7, which need a host with a working Antora install)
 - Capability tags: implementation, gate. Intended host: any pool Linux host (`hosts/pool-linux.md`). Claim under `claims/` before starting (WORKFLOW.md).
 - Posted by: vm2 gate coordinator, 2026-10-19, at the direction of the user. Source: JIRA `project=SOLR AND resolution=Unresolved AND labels=newdev` (79 issues on 2026-10-19; this file takes 13 small improvement, task and test tickets, leaving the umbrella and UI sub-tasks out).
 
