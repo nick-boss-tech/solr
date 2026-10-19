@@ -908,7 +908,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Test-only failure under PRS, empty description."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-17133-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17086",
@@ -1565,7 +1568,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "TestLeaderElectionZkExpiry still @AwaitsFix on upstream/main. Test expires the ZK session every 10ms for 10s while waiting for an overseer leader; Smiley attributes the failures to ZK EventThread leaks (ThreadLeakError), no Solr-side defect identified and no deterministic repro."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16122-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16108",
@@ -1593,7 +1599,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "OSX-only hang never reproduced; no code pointer, 0 comments."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16094-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16084",
@@ -2820,7 +2829,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: fix commits 73c06e3 / 669aff2 already linked."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14881-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14861",
@@ -2852,7 +2864,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: Lucene LUCENE-9456 test assumption; Smiley/Grand fixed on the Lucene side."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14784-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14756",
@@ -3518,7 +3533,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: speculation from SecurityManager-era AccessControlException in a test; SecurityManager removed; no concrete code defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14061-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14027",
@@ -4159,7 +4177,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: tlog replay vs recovery race, needs protocol design consensus."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13486-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13481",
@@ -4901,7 +4922,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: crash is in Lucene test framework code."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12918-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12916",
@@ -5046,7 +5070,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Test flake on 7.x, no repro."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12844-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12819",
@@ -5062,7 +5089,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Seeded test failure, no product bug confirmed."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12819-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12808",
@@ -5116,7 +5146,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: OOM never reproduced; remoteQuery path gone."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12748-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12705",
@@ -5433,7 +5466,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Beasting flake, no deterministic repro."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12369-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12363",
@@ -5518,7 +5554,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "ant-era BasicDistributedZkTest seed failures."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12302-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12300",
@@ -5553,7 +5592,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Jenkins flake in TimeRoutedAliasUpdateProcessorTest, no repro."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12296-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12268",
@@ -5679,7 +5721,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Windows-only test cleanup flake."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12220-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12212",
@@ -5778,7 +5823,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Test flake JettySolrRunner.getNodeName NPE."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-12093-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12092",
@@ -6052,7 +6100,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: test flake / test-infra. Reason holds: test flake (TestPKIAuthenticationPlugin NPE, Jenkins 2018), test-infra only. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11826-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11816",
@@ -6367,7 +6418,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: test flake / test-infra. Reason holds: test flake (AddReplicaTest on Jenkins 2017); only debug logging was added, no product defect identified. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11627-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11583",
@@ -6415,7 +6469,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: test flake / test-infra. Reason holds: test failure already fixed by a follow-up commit per SOLR-11484 discussion; reporter confirmed. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11563-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11550",
@@ -6580,7 +6637,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: test flake / test-infra. Reason holds: test flake (TestCloudSearcherWarming on Jenkins 2017), test-infra only. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11463-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11441",
@@ -6843,7 +6903,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "LTR test config problem in the reporter environment (unknown field description); test-infra."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11274-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11269",
@@ -6878,7 +6941,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: per session 2 handoff triage: flake, AwaitsFix on old branch, obsolete (Trie/EnumField removed), or design-level Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-11259-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11247",
@@ -6894,7 +6960,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: test flake / test-infra. Reason holds: per session 2 handoff triage: flake, AwaitsFix on old branch, obsolete (Trie/EnumField removed), or design-level Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11247-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11246",
@@ -6929,7 +6998,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "upstream/main GraphQueryParser.validateFields accepts point fields with docValues and StrField indexed or docValues; the Trie field type in the report no longer exists. Close-out candidate (not posted)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11214-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11208",
@@ -6945,7 +7017,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 10 comments). Class: test flake / test-infra. Reason holds: per session 2 handoff triage: flake, AwaitsFix on old branch, obsolete (Trie/EnumField removed), or design-level Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11208-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11193",
@@ -6961,7 +7036,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "upstream/main EnumFieldTest has testMultivaluedEnumRangeSearch and testMultivaluedEnumSort enabled, no AwaitsFix; ticket was about the old Trie-based EnumField, now removed. Close-out candidate (not posted)."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11193-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11175",
@@ -6996,7 +7074,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: test flake (ConcurrentUpdateSolrClientTest timing), no repro Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11168-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11153",
@@ -7096,7 +7177,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: Windows test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11058-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11034",
@@ -7201,7 +7285,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: Windows/jenkins test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10976-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10974",
@@ -7473,7 +7560,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 8 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10841-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10806",
@@ -7526,7 +7616,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10759-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10751",
@@ -7770,7 +7863,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10592-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10534",
@@ -8480,7 +8576,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9965-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9942",
@@ -9160,7 +9259,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: test flake, fixed 6.7/7.0 Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9593-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9578",
@@ -9313,7 +9415,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 7 comments). Class: test flake / test-infra. Reason holds: test flake, root cause in ZK read retry Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9428-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9427",
@@ -9329,7 +9434,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9427-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9426",
@@ -9345,7 +9453,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9426-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9400",
@@ -9417,7 +9528,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 6 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9390-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9382",
@@ -9570,7 +9684,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9328-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9312",
@@ -9852,7 +9969,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "Test-infra OOM investigation, resolved via SOLR-9604."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9182-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9174",
@@ -9951,7 +10071,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9144-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9129",
@@ -11532,7 +11655,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7992-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7982",
@@ -11674,7 +11800,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: test flake / test-infra. Reason holds: non-reproducible test failure Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7899-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7867",
@@ -11854,7 +11983,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "HttpSolrCall.call catch(Throwable) walks the cause chain and rethrows the first Error (SOLR-6161), so OOM wrapped in RuntimeException is handled on main."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7646-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7612",
@@ -11905,7 +12037,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7597-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7559",
@@ -12514,7 +12649,10 @@
       "date": "2026-10-04",
       "round": "audit-0",
       "evidence": "audit-0 spot-check 2026-10-04: 2015 Jenkins failure, only stack trace/log, no hypothesis; TestConfigReload still exists"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7075-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7071",
@@ -12774,7 +12912,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 3 comments). Class: test flake / test-infra. Reason holds: test timeout flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6914-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6911",
@@ -13213,7 +13354,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6593-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6588",
@@ -13550,7 +13694,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6287-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6255",
@@ -13864,7 +14011,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 7 comments). Class: test flake / test-infra. Reason holds: test flake (LUCENE-5574) Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5948-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5941",
@@ -14041,7 +14191,10 @@
       "date": "2026-10-17",
       "round": "audit-8",
       "evidence": "JIRA lists fix versions 4.9 and 6.0 for the ChaosMonkeyNothingIsSafeTest shard-count inconsistency. The current main test tree retains the chaos-distribution suite; the reported old failure predates both fixes."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5822-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5813",
@@ -14091,7 +14244,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 7 comments). Class: test flake / test-infra. Reason holds: J9 test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5793-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5792",
@@ -14107,7 +14263,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: test flake / test-infra. Reason holds: J9 test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5792-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5791",
@@ -14123,7 +14282,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 6 comments). Class: test flake / test-infra. Reason holds: J9 test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5791-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5788",
@@ -14469,7 +14631,10 @@
       "date": "2026-10-07",
       "round": "audit-4",
       "evidence": "SOLR-5485 has a rare Lucene40LiveDocsFormat corruption stack trace from ChaosMonkeySafeLeaderTest, but no deterministic seed, failing index, or reproduced Solr mutation path. The failing index or a reproducible sequence is needed to attribute the corruption."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5485-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5462",
@@ -14762,7 +14927,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "doTestReplicateAfterWrite2Slave no longer exists in solr/core/src/test on upstream/main (grep, 2026-10-06); test was rewritten"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5067-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5065",
@@ -15182,7 +15350,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: test flake / test-infra. Reason holds: test flake, fixed 4.9/6.0 Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4593-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4558",
@@ -15736,7 +15907,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "Checked the current TestReplicationHandler in upstream/main c8ab71430f6e7547c773da596101d680862310ff. The test class remains, but neither it nor the Solr test tree references MockDirectoryWrapper.preventDoubleWrite; the report is about a removed test-instrumentation condition, not a current replication failure."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-4139-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4130",
@@ -16040,7 +16214,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "RequestHandlerBase on upstream/main rolls the index writer after a tragic exception (log \"Could not roll index writer after tragedy\"), CoreContainer/SolrCoreState expose getTragicException; the stuck-writer-until-restart state no longer persists."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3944-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3931",
@@ -16686,7 +16863,10 @@
       "date": "2026-10-07",
       "round": "audit-4",
       "evidence": "SOLR-3461's TestRealTimeGet.testStressRecovery method is absent from current TestRealTimeGet on upstream/main; the JIRA records a Windows suppression commit and timing varied by machine. This is a removed/flaky test rather than a current Solr behavior defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3461-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3452",
@@ -16809,7 +16989,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 8 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3220-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3201",
@@ -17046,7 +17229,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "TestIndexingPerformance and MockFSDirectoryFactory remain in upstream/main c8ab71430f6e7547c773da596101d680862310ff; the test rolls back updates and closes its request, while the factory documents that Solr may reopen a directory during rollback/replication. Code inspection alone does not establish whether a write.lock remains after the normal test teardown; needs a current filesystem-level reproduction."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-2928-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-2913",
@@ -17081,7 +17267,10 @@
       "date": "2026-10-18",
       "round": "audit-9",
       "evidence": "Checked the full upstream/main c8ab71430f6e7547c773da596101d680862310ff Solr tree: the old shared solr/core/src/test-files/solr/data fixture path has no references. The reported test-order dependency was tied to that legacy shared fixture."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-2900-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-2865",
@@ -17097,7 +17286,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-2865-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-2855",
@@ -17167,7 +17359,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-2720-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-2715",
@@ -17183,7 +17378,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 9 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-2715-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-2681",
