@@ -2,6 +2,7 @@
 
 Status: DONE 2026-10-18
 Report: reports/SOLR-18522-9x-live-repro-round-1.md
+Follow-up report: reports/SOLR-18522-9x-live-repro-round-2.md
 
 - Capability tags: review. No build, no checkout, no edits to any branch. The Linux Solr server is driven by the operator; the Windows agent records the results.
 - Intended host: windows (the operator's interface to the live Solr on Linux). Claim under `claims/` before starting (WORKFLOW.md).
