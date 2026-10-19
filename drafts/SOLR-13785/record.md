@@ -23,7 +23,7 @@ So the overlap is a user error under the documented rule. The version conflict i
 
 ## History
 
-- The rule on the page predates the pin; the commit that added it was not traced in this pass.
+- The commit that added the uniqueness rule to the page was not traced in this pass.
 
 ## Reproduction attempts
 
