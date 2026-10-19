@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18555 fixes on solr-18555-submit, then gate (round 1)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm3-solr-18555-fix-round-1.md)
 
 - Capability tags: implementation, gate.
 - Intended host: any Linux host with the Gradle toolchain. Claim under `claims/` before starting (WORKFLOW.md).
@@ -11,7 +11,7 @@ The gate on `solr-18555-submit` at head `884de51579` is NOT GREEN. Its receipt i
 ## Items
 
 1. **Apply the starting patch.** Check out `solr-18555-submit` at `884de51579`. Apply `gates/SOLR-18555-local-fixes.patch` with `git apply`. It has four changes: the changelog fragment (`type: added`, a `links` entry for SOLR-18555); the missing `org.apache.solr.search.SyntaxError` import in `HighlightRequestHandler.java`; the rename of the private `params(String...)` helper in `HighlightRequestHandlerTest.java` to `paramsSet`, so it no longer hides the inherited helper; and the reflection rewrite in `newHandler()` (`asSubclass` and `LinkageError`). Start from: `gates/SOLR-18555-local-fixes.patch`. Output: the changed files on the branch.
-2. **Remove the unused import.** `HighlightFlag` in `HighlightRequestHandler.java` (line 31) is never used, and the ECJ lint in the module check fails on it. Remove it. Start from: the file after item 1. Output: the same file.
+2. **Remove the redundant import.** `HighlightFlag` in `HighlightRequestHandler.java` (line 31) is used in `getFlags`, but inside the anonymous `UnifiedHighlighter` subclass the name resolves to the inherited nested type `UnifiedHighlighter.HighlightFlag`, so the import is shadowed and ECJ reports it as unused. Remove it. Start from: the file after item 1. Output: the same file.
 3. **Apply the main-agent decisions below.** Preserve the phrase-highlight expectation and fix the handler path. Update the HTML and parser-rejection test expectations as decided, while preserving production HTML encoding and parser isolation. If the phrase behavior cannot be implemented confidently, stop and report the evidence instead of weakening that test.
 4. **Run tidy on the branch.** Run `:solr:core:tidy` after all code and test edits. Commit any formatting changes so the tree is clean before the gate. Output: a tidy-clean tree.
 5. **Commit and push the fixes.** Commit the code and test changes from items 1-4 as Nick Shanin, with no trailers or em dashes and messages `SOLR-18555: <summary>`. Push as a fast-forward from `884de51579`. Output: the new head on `solr-18555-submit`.
