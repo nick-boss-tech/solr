@@ -1,6 +1,6 @@
 # Gate job: SOLR-18503 (JSON facet parser options, after the tidy commit)
 
-Status: OPEN
+Status: CLAIMED (vm4, claims/pool-vm4-gate-solr-18503-phase-tidyfix.md, 2026-10-19T03:55Z)
 
 - Branch: `solr-18503-submit`. Head: `cc5b84dfcdd783ec2c2626aba4ba9931bb027893` (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `c8ab71430f6e7547c773da596101d680862310ff`. Prior gated head: none recorded.
