@@ -1,6 +1,6 @@
 # Gate job: SOLR-18507 (Phase 2 gross fingerprint cache)
 
-Status: OPEN
+Status: CLAIMED by vm1 2026-10-19T03:40Z (claims/pool-vm1-gate-SOLR-18507-phase-2.md; queued behind SOLR-18458 round 2)
 
 - Branch: `solr-18507-phase-2-submit`. Head: `3f273e29ee000c44647304e583bd3f564231ea60` (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `1ba98f9240902c26f0bcd411f8787d38555dea8d`. Prior gated head: none recorded.

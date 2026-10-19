@@ -1,6 +1,6 @@
 # Gate job: SOLR-18507 (Phase 1 recovery policy)
 
-Status: OPEN
+Status: CLAIMED by vm1 2026-10-19T03:40Z (claims/pool-vm1-gate-SOLR-18507-phase-1.md; queued behind SOLR-18458 round 2)
 
 - Branch: `solr-18507-submit`. Head: `1ba98f9240902c26f0bcd411f8787d38555dea8d` (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `c8ab71430f6e7547c773da596101d680862310ff`. Prior gated head: none recorded.

@@ -71,3 +71,7 @@ A gate that executed tests and failed is not relaunched by the claimant. Record 
 - Receipt: not written. A receipt is written only on green.
 
 Decision needed (main agent, then Nick): how step 1 should treat the base drift. Options: (a) a tidy-only change on `main`, then re-check both heads; (b) a tidy-only commit on each branch, which moves both heads and requires a new gate; (c) record the base drift as known and exclude `gradle/libs.versions.toml` from step 1 for both gates. Recommended: (c) for now, since it changes no ticket code. Until one is chosen, both gates stay BLOCKED.
+
+## Queue note (vm1, 2026-10-19T03:40Z)
+
+Not queued: the branch tip moved from the job head 70c6eb0c49008cf9518c456dedd6c4981642d52c to fce77f45a3e4e68d385aae104030e573458ac731 (new commit "SOLR-16673: test numeric unique key docIds on a string unique key"). Per the decision table the job is not retargeted by the claimant; it waits for a refreshed job or a main-side call. The step 1 base-drift disposition recorded on the rootfield gate applies here too when the job is refreshed.
