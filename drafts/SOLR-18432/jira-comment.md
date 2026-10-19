@@ -1,0 +1,3 @@
+We looked at this against the current main branch (498a09aea97a). SolrVersion.LATEST_STRING is a hardcoded constant (solr/api/src/java/org/apache/solr/client/api/util/SolrVersion.java, line 32), and the release script rewrites it with the release version. The Gradle build version gets a SNAPSHOT suffix from build.gradle (line 56), so between releases the two differ as the ticket describes.
+
+Whether the constant should carry the suffix, and what that would change for code that compares versions, is a design question that is not settled on this ticket. We are leaving it open until that is decided.
