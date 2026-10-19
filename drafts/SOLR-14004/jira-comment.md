@@ -1,0 +1,1 @@
+This is fixed on current main. A distributed query that combines a sort with timeAllowed no longer fails with a null pointer error when a shard returns a partial result. The change is in the 2021 commit for SOLR-14758, and a regression check for this case is in the test suite. We are closing this ticket as fixed.
