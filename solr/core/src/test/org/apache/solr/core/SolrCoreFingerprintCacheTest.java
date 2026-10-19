@@ -70,8 +70,8 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     }
 
     assertTrue(
-        core.getPerSegmentGrossFingerprintCacheHitCount() > hitsBeforeDeleteFingerprint,
-        "Expected the deleted segment to reuse its gross fingerprint");
+        "Expected the deleted segment to reuse its gross fingerprint",
+        core.getPerSegmentGrossFingerprintCacheHitCount() > hitsBeforeDeleteFingerprint);
 
     long grossCacheSizeBeforeColdSegment = core.getPerSegmentGrossFingerprintCacheSize();
     iwRef = core.getSolrCoreState().getIndexWriter(core);
