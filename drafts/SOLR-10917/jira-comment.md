@@ -1,0 +1,1 @@
+We checked this against current main (fork main at 498a09aea9, which includes the upstream main changes). The behavior in this report appears to be addressed by a later change, and the changed code is still in place. No test run was done for this check. Closing as fixed unless someone finds a case the change does not cover.
