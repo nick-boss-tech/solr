@@ -273,6 +273,8 @@ In SolrCloud mode, the allow-list is automatically configured to include all liv
 +
 The allow-list can also be configured with the `solr.security.allow.urls` system property in `solr.in.sh` / `solr.in.cmd`.
 If you need to disable this feature for backwards compatibility, you can set the system property `solr.security.allow.urls.enabled=false`.
++
+The allow-list does not cover stream sources. The `zkHost` and `solrConnection` operands of a streaming expression connect directly to the named target and are not checked against this list; bound those outbound connections with the operator's network controls. See xref:query-guide:stream-source-reference.adoc[stream sources].
 
 [#allow-zk-hosts]
 `allowZkHosts`::

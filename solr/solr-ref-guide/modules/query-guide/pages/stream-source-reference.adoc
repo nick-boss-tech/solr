@@ -17,6 +17,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
+NOTE: The URL allow-list does not cover stream sources. The `zkHost` and `solrConnection` operands connect directly to the named target and are not checked against `allowUrls`; bound those connections with the operator's network controls. See xref:configuration-guide:configuring-solr-xml.adoc#allow-urls[`allowUrls`].
+
 == search
 
 The `search` function searches a SolrCloud collection and emits a stream of tuples that match the query.
