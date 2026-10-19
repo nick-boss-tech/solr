@@ -1,6 +1,6 @@
 # Pool assignment: skip verdict remediation, batch 1 of 8
 
-Status: CLAIMED (vm5, claims/pool-aaa-skip-verdict-remediation-01.md, 2026-10-19T17:00Z)
+Status: DONE (redos recorded by vm4 for all 25; 19 cleared; six open items re-audited by vm3 and vm5 with gaps in reports/skip-verdict-audit.md; the open items need a redo fix by the claimant, not a new take).
 
 - Capability tags: review, draft.
 - Intended host: any pool Linux host. Claim under `claims/` before starting (WORKFLOW.md).

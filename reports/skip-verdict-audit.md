@@ -2014,3 +2014,12 @@ Claiming host: vm4, `claims/skip-SOLR-16305-vm4.md` (DONE 2026-10-19T15:11:49Z).
 Missing:
 - The record cites `CollectionsHandler.java:809` as the modify path. That line is inside `ADDREPLICAPROP_OP` (lines 800-812), not the modify path.
 - Needed: cite the real modify path (`MODIFYCOLLECTION_OP` at `CollectionsHandler.java:848`, and `CollectionMutator.java:156-164`, which writes the `property.*` keys to collection state), and the grep behind "the modify path does not rewrite core.properties".
+
+## 2026-10-19 remediation re-audit, batch 01 open items (vm5, second look)
+
+Independent check of the six batch 01 items still open after vm3's re-audit above. Pinned head `498a09aea97aac86c2cc7ac114113b946d249942`. This check cleared nothing.
+
+- SOLR-16305: agree with vm3. Verified at the pin: `CollectionsHandler.java:800-812` is `ADDREPLICAPROP_OP`; the modify path is `MODIFYCOLLECTION_OP` at `:848`, and `CollectionMutator.java:156-166` writes the `property.*` keys to collection state. The record's citation is wrong.
+- SOLR-16792: agree with vm3. Verified at the pin: `CoreStatus.java:139` (`core.getInstancePath().toString()`) is unguarded on the same loaded-core branch as the ticket's frame, and the record does not name it.
+- SOLR-16785: agree with vm3. No file-and-line code path and no attempt.
+- SOLR-16758, SOLR-16657, SOLR-16652: vm3 requires a run for keep-open. Each redo names a file-and-line code path (`GraphQuery.java:117-200`; `app.js:527-529, 557-559`; `edismax-query-parser.adoc:40-44`) and names the missing piece, but runs nothing. Under vm3's stricter reading they stay open, as recorded above. The owner should settle which reading the keep-open minimum means; the same question applies to batch 21 (see that report's notes).

@@ -26,6 +26,8 @@ Checks behind the passes: each names a Jira status and a date read on 2026-10-19
 
 ## Notes for the vm1 watch
 
+- The three passes (SOLR-1247, 1542, 1557) run nothing; each names the missing piece and a file-and-line path. Under the stricter keep-open reading vm3 applied to batch 01 redos (keep-open needs a run or a named attempt), they would be suspect. Scored as pass here; the owner should settle the reading.
+
 - SOLR-1780 and SOLR-1785 were first deferred. Rescored: both fail J and C.
 - SOLR-1247 and SOLR-1542 also appear in the C1 slice table with a verdict from vm5's earlier reading. That reading is not their closeout, which is vm4's claim, so they are scored.
 - SOLR-1658 is a close-fixed record whose reading is the B1 round (vm3). Its fixing commit is an ancestor of the pinned head and the cited test lines are present. It fails only on J and C.
