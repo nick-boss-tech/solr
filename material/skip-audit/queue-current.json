@@ -229,7 +229,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "ClusterStatus.Health.calcShardHealth on main yields YELLOW for 0.5<ratio<1 with a leader; per-replica state is counted from the state string, so 4 of 5 active gives YELLOW. Ticket is 9.6.1 with no code pointer or repro and 0 comments."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-17820-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17796",
@@ -332,7 +335,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "SolrResponseUtil.getSubsectionFromShardResponse wraps the original exception as cause (log shows it); ticket is a one-hour burst on 9.6.1 with no repro or comments. Nothing concrete to fix."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-17751-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17748",
@@ -766,7 +772,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Duplicate of SOLR-17721; doAddDistinct null-check already on main per note."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-17224-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17219",
@@ -1192,7 +1201,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Support request on setting config properties via create; solved via bin/solr config / Config API per maintainer."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16609-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16570",
@@ -1377,7 +1389,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "facet.field on DateRangeField never supported; feature request."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16306-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16305",
@@ -1559,7 +1574,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Hashing scheme is deliberate; docs half split to SOLR-17724; redesign needs security-committer decision."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-16077-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-16062",
@@ -1651,7 +1669,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Release tooling, not product."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-15970-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15948",
@@ -1825,7 +1846,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Docs only, text already rewritten."
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-15801-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15727",
@@ -2159,7 +2183,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "ConcurrentUpdateHttp2SolrClient no longer present in solrj on main; support-style 8.8.1 report with no defect claim."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15408-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15403",
@@ -2438,7 +2465,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: Solr 6.1.1 corrupt index after network failure, support report with no code hypothesis."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-15226-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15151",
@@ -3329,7 +3359,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Title: Internet Explorer admin UI; IE EOL, Jan Hoydahl declined IE support."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-14083-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-14074",
@@ -3619,7 +3652,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Windows AccessDeniedException in Lucene fsync, OS-level support question."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13825-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13785",
@@ -3844,7 +3880,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Note: race between collection DELETE and PrepRecovery in TestPolicyCloud, reporter Hostetter had open design questions, mechanics partly mitigated on main."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13616-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13601",
@@ -3888,7 +3927,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Read ticket: 7.7.2 NPE in FieldType.createFields, reporter never answered 8.x retest, no repro."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-13572-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13570",
@@ -4214,7 +4256,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Support question; multi-dictionary works."
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-13278-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13270",
@@ -4486,7 +4531,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Support: duplicate child docs from re-ingest, no repro."
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-13167-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-13166",
@@ -5425,7 +5473,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "note: Log4j2Watcher.toSolrDocument already copies the core MDC key; could not reproduce on main."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-12236-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-12234",
@@ -5755,7 +5806,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "upstream/main CreateCollection calls SolrIdentifierValidator.validateCollectionName (line 274), which rejects names outside the allowed character set; a trailing space is no longer accepted. Close-out candidate (not posted)."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-11864-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11858",
@@ -5939,7 +5993,10 @@
       "date": "2026-10-04",
       "round": "audit-0",
       "evidence": "audit-0 spot-check 2026-10-04: support question; reporter confirmed storeOffsetsWithPositions fixes it"
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-11764-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11761",
@@ -6185,7 +6242,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "addressed by SOLR-10114 (shared _version_ for parent and children); reporter repro not reproducible."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-11550-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11537",
@@ -6542,7 +6602,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "ticket text read: report uses replace(subject,\" \",withValue=...) with no error text; note says main ReplaceWithValueOperation supports string values. No deterministic failing case to write."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11290-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11288",
@@ -6592,7 +6655,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "note: ZkController catches NodeExistsException when re-creating the ephemeral live node on main."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-11269-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11259",
@@ -6707,7 +6773,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: no repro or too vague to test. Reason holds: vague suggester config/support question, no clear defect Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-11175-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-11168",
@@ -6935,7 +7004,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: no repro or too vague to test. Reason holds: support question, no repro (user list) Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-10974-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10960",
@@ -7423,7 +7495,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "fixed upstream: commit 17563ce81f2 (SOLR-10601) is in upstream/main history. Close-out candidate (not posted)."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-10601-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10597",
@@ -7967,7 +8042,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SolrAggregate maps COUNT(DISTINCT) to countDist/hll metrics; TestSQLHandler ~2813 runs COUNT(distinct str_s) on main"
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-10096-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-10084",
@@ -8591,7 +8669,10 @@
       "date": "2026-10-07",
       "round": "audit-4",
       "evidence": "SOLR-9713 case 2 sets the store password to changeit while its keystore uses secret; current EnvSSLCredentialProvider maps SOLR_SSL_KEY_STORE_PASSWORD to solr.jetty.keystore.password, and solr.in.cmd exposes the variable. Search of upstream/main confirms the Windows env mapping; the separate client key password issue is SOLR-11678."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-9713-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-9677",
@@ -9906,7 +9987,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "IterativeMergeStrategy uses CoreContainer.getDefaultHttpSolrClient and only shuts down its executor; no private HttpClient left"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-8899-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-8893",
@@ -11116,7 +11200,10 @@
       "date": "2026-10-17",
       "round": "audit-7",
       "evidence": "The only JIRA comment guesses at a stale write.lock or multiple cores sharing a data directory; the attached log/config needed to confirm that diagnosis is unavailable here. The reported OverlappingFileLockException alone does not establish whether this is Solr or deployment configuration."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7947-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7932",
@@ -11446,7 +11533,10 @@
       "date": "2026-10-17",
       "round": "audit-7",
       "evidence": "The reported workflow replaces Lucene index files on disk while the core is open, then reloads the core. That is external mutation of a live index/writer rather than a supported Solr index replacement operation, so the symptom does not identify a Solr defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-7526-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7521",
@@ -11653,7 +11743,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "ExpandComponent.prepare on upstream/main throws 400 \"Can not use expand with Grouping enabled\" for expand+group, so the NPE is gone"
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-7363-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7352",
@@ -11669,7 +11762,10 @@
       "date": "2026-10-17",
       "round": "audit-7",
       "evidence": "On upstream/main c8ab714, CloudSolrStream initializes eofTuples as Collections.synchronizedMap(new HashMap<>()). This protects the concurrent EOF insertions during parallel stream opening that the ticket describes."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-7352-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-7347",
@@ -12644,7 +12740,10 @@
       "date": "2026-10-17",
       "round": "audit-8",
       "evidence": "On upstream/main c8ab714, AtomicUpdateDocumentMerger handles nested children and NestedAtomicUpdateTest.testBlockAtomicInplaceUpdates adds child docs before applying integer inc updates (lines 252-324). The reported nested-plus-integer partial-update combination is supported."
-    }
+    },
+    "verdict": "close-answered",
+    "draft_branch": "solr-6588-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6582",
@@ -12885,7 +12984,10 @@
       "date": "2026-10-17",
       "round": "audit-8",
       "evidence": "Current RecoveryStrategy explicitly tries replication when PeerSync fails (RecoveryStrategy.java:752). The reported transition from failed PeerSync to SnapPull is the intended recovery fallback, not a stuck-recovery defect."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-6334-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-6320",
@@ -13354,7 +13456,10 @@
       "date": "2026-10-17",
       "round": "audit-8",
       "evidence": "The JIRA sample calls contentStream.getStream() again in finally. Current ContentStreamBase.FileStream.getStream() creates a new FileInputStream per call, so the sample closes a second handle and leaves the request stream open. This is a client-code issue."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5845-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5840",
@@ -13516,7 +13621,10 @@
       "date": "2026-10-17",
       "round": "audit-8",
       "evidence": "JIRA maintainers say mixing normal docs with block-join docs is unsupported. Current nested-document documentation treats a hierarchy as one block and says updates rewrite the block, matching the unsupported duplicate-ID scenario."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-5772-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-5759",
@@ -15541,7 +15649,10 @@
       "date": "2026-10-06",
       "round": "audit-3",
       "evidence": "SimpleFacets.getGroupedCounts now throws 400 when group.field absent (no AIOOBE)"
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-3742-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-3741",
