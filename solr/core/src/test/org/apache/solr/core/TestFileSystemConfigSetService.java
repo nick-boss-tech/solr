@@ -18,6 +18,7 @@ package org.apache.solr.core;
 
 import static org.apache.solr.core.FileSystemConfigSetService.METADATA_FILE;
 import static org.hamcrest.Matchers.hasItem;
+import static org.junit.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.commons.io.file.PathUtils;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.SolrException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -75,6 +77,29 @@ public class TestFileSystemConfigSetService extends SolrTestCaseJ4 {
       fileSystemConfigSetService.uploadFileToConfig(configName, invalidFilePath, testdata, true);
       assertFalse(Files.exists(specificConfigSetBase.resolve(invalidFilePath)));
     }
+  }
+
+  @Test
+  public void testDeleteFilesRejectsNamesOutsideConfigSet() throws IOException {
+    final String configName = "deleteEscapeTestConfig";
+    fileSystemConfigSetService.uploadConfig(configName, configset("cloud-minimal"));
+    byte[] testdata = "test data".getBytes(StandardCharsets.UTF_8);
+    fileSystemConfigSetService.uploadFileToConfig(configName, "normalfile", testdata, true);
+    final var configDir = configSetBase.resolve(configName);
+    final var outsideFile = configSetBase.resolve("otherConfig").resolve("victim");
+    Files.createDirectories(outsideFile.getParent());
+    Files.write(outsideFile, testdata);
+
+    assertThrows(
+        SolrException.class,
+        () ->
+            fileSystemConfigSetService.deleteFilesFromConfig(
+                configName, List.of("normalfile", "../otherConfig/victim")));
+    assertTrue(Files.exists(configDir.resolve("normalfile")));
+    assertTrue(Files.exists(outsideFile));
+
+    fileSystemConfigSetService.deleteFilesFromConfig(configName, List.of("normalfile"));
+    assertFalse(Files.exists(configDir.resolve("normalfile")));
   }
 
   @Test

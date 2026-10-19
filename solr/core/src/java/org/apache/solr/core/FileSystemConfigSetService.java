@@ -101,8 +101,17 @@ public class FileSystemConfigSetService extends ConfigSetService {
       throws IOException {
     Path configDir = getConfigDir(configName);
     Objects.requireNonNull(filesToDelete);
+    List<Path> files = new ArrayList<>(filesToDelete.size());
     for (String fileName : filesToDelete) {
       Path file = configDir.resolve(normalizePathToOsSeparator(fileName));
+      if (!FileUtils.isPathAChildOfParent(configDir, file)) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST,
+            "The file name '" + fileName + "' resolves outside of the configset directory.");
+      }
+      files.add(file);
+    }
+    for (Path file : files) {
       if (Files.exists(file)) {
         if (Files.isDirectory(file)) {
           deleteDir(file);
