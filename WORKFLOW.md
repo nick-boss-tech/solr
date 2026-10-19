@@ -4,7 +4,7 @@
 
 Agents who post or claim assignments and gate jobs: read [`pool/START-HERE.md`](pool/START-HERE.md) first. It gives the order of operations and links the templates in `pool/templates/`. This file holds the rules that START-HERE applies.
 
-Set up 2026-10-10 at Nick's direction. This branch is an open pool, not addressed mail. Any agent that polls this branch (the main agent on the first Linux VM, the agent on the second Linux VM, the review agent on Windows) may take any assignment it is capable of running. A claim is what assigns work; until an assignment is claimed it belongs to nobody, and once it is claimed it belongs to the claimant until it is done or the claim goes stale.
+Set up 2026-10-10 at Nick's direction. This branch is an open pool, not addressed mail. Any agent that polls this branch may take any assignment it is capable of running. There is no coordinating agent: the pool hosts coordinate and troubleshoot among themselves through claims, gate files and reports on this branch, and Nick answers only questions that are genuinely ambiguous. A claim is what assigns work; until an assignment is claimed it belongs to nobody, and once it is claimed it belongs to the claimant until it is done or the claim goes stale.
 
 ## Folders
 
@@ -65,8 +65,8 @@ One retry. After repairs the gate runs again from step 0 on the new head. The re
 
 ## What stays addressed, not pooled
 
-- Decision slates and answers passes for Nick stay with the main agent: they need the full record and they end at Nick.
-- PR openings stay with the main agent, each with Nick's explicit approval.
+- Decision slates and answers passes for Nick are prepared by any pool host from the full record and they end at Nick.
+- PR openings are executed by any pool host once Nick's approval is recorded on this branch, each opening with his explicit approval.
 - Everything else (audits, drafts, implementation, gates, premise runs, settling runs, sweeps) is pool work.
 
 ## Standing limits that bind every host
@@ -79,10 +79,10 @@ One retry. After repairs the gate runs again from step 0 on the new head. The re
 
 ## Queue buffer
 
-Each queue keeps unclaimed work available so a host finishing a task finds the next one waiting (owner direction, 2026-10-10). Targets: at least 2 unclaimed review or draft assignments, and at least 3 unclaimed gate jobs from the shared backlog (assignments/pool-shared-gate-backlog-buffer.md). The main side tops the buffer up when it posts assignments or finishes review rounds; the queue check counts unclaimed items and reports when either queue runs dry.
+Each queue keeps unclaimed work available so a host finishing a task finds the next one waiting (owner direction, 2026-10-10). Targets: at least 2 unclaimed review or draft assignments, and at least 3 unclaimed gate jobs from the shared backlog (assignments/pool-shared-gate-backlog-buffer.md). Hosts top the buffer up when posting assignments or finishing review rounds; the queue check counts unclaimed items and reports when either queue runs dry.
 
 Status lines: every assignment and gate job file carries a Status line under its title (`Status: OPEN`, `Status: CLAIMED (claims/<claim file>)`, `Status: DONE`, `Status: UNCONFIRMED`, or `Status: META` for a finding aid). The poster sets OPEN. The claimant sets CLAIMED, naming the claim file, in the same push as the claim. Completion sets DONE in the same push as the deliverable. `OPEN-WORK.md` at the branch root is generated from those lines and is where agents find open work; if it and a file's own Status line ever disagree, the file's Status line governs.
 
 ## Lane coordinators
 
-Since 2026-10-11 the pool has two lane coordinators (Nick approved): VM2 coordinates the gate backlog end to end, and the Windows agent coordinates the review rounds end to end. They hand work to each other through claims, gate job files and reports on this branch and keep the loop running without waiting for the main agent. PR openings and flips, new comment posts, the private records, and anything needing Nick's decision stay with the main agent; gate failures where tests executed are investigated by the lane coordinator first and are never relaunched until the investigation is recorded in the gate file. Nick extended the coordinators' authorization on 2026-10-11: either coordinator may update Nick's own PR descriptions against receipts, implement changes identified in review through the full hardening gate and push its own patches, and decide scope questions under the decision default, recording each decision where the category records live. The full handoff, with roles, escalation rules, inherited standing rules and the state each coordinator picks up first, is at `material/coordinator-handoff.md`.
+Since 2026-10-11 the pool has two lane coordinators (Nick approved): VM2 coordinates the gate backlog end to end, and the Windows agent coordinates the review rounds end to end. They hand work to each other through claims, gate job files and reports on this branch and keep the loop running without waiting for any single host. PR openings and flips and new comment posts are executed by any pool host once Nick's approval for that act is recorded on this branch; anything needing Nick's decision is posted for him and waits for his recorded word; gate failures where tests executed are investigated by the lane coordinator first and are never relaunched until the investigation is recorded in the gate file. Nick extended the coordinators' authorization on 2026-10-11: either coordinator may update Nick's own PR descriptions against receipts, implement changes identified in review through the full hardening gate and push its own patches, and decide scope questions under the decision default, recording each decision where the category records live. The full handoff, with roles, escalation rules, inherited standing rules and the state each coordinator picks up first, is at `material/coordinator-handoff.md`.
