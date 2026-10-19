@@ -14,3 +14,12 @@ One section per ticket. Assignment: `assignments/pool-jira-newdev-bugs-round-1.m
   - The chroot-aware universal connection string arrived with SOLR-18130 (`bf610531f1`), which is the change that fixes this path.
 - Not run: no ZooKeeper reproduction on `c8ab71430f`. A live run would be needed to say the original report cannot happen; this section records a code-reading verdict only.
 - Gate: none, since no branch was pushed.
+
+## SOLR-16193: suggester not built, but API returns success (vm3, 2026-10-19)
+
+- Status: not reproduced on apache/main at `c8ab71430f`. No branch pushed. Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-16193.md`.
+- The ticket expects a non-200 when the suggester build fails. The reporter's log shows `IllegalStateException: suggester was not built` while `suggest.build=true&suggest=true` returns 200.
+- Code reading: `SolrSuggester.build` (`solr/core/src/java/org/apache/solr/spelling/suggest/SolrSuggester.java` line 170) rethrows only `AlreadyClosedException`. `SuggestComponent.process` (`solr/core/src/java/org/apache/solr/handler/component/SuggestComponent.java` around line 287) has no catch around `getSuggestions`. The `not built` text comes from Lucene's lookup.
+- Probe: a temporary test (not committed) indexed one document, deleted all documents, committed, then ran `qt=/suggest&suggest.dictionary=suggest_fuzzy_doc_dict&suggest.build=true&suggest.q=exampel`. It passed with `numFound=0` and no error in the log (`/workspace/gates/logs/vm3/solr-16193-repro/focused.log`, seed `16193E50`).
+- Not covered: the reporter's own handler and dictionary config (for example a build-on-commit or stored-dictionary setup). That path would need the reporter's configuration to reproduce, so this is recorded as not reproduced, not as fixed.
+- Gate: none, since no branch was pushed.
