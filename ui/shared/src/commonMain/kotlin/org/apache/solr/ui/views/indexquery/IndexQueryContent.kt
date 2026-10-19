@@ -16,12 +16,11 @@
  */package org.apache.solr.ui.views.indexquery
 
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,11 +54,7 @@ fun IndexQueryContent(
     val state by stateHolder.uiState.collectAsState()
     var form by remember { mutableStateOf(SearchRequestForm()) }
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState()),
-    ) {
+    Column(modifier = modifier.fillMaxWidth()) {
         IndexQueryHeader(
             collections = state.collections,
             collectionsLoading = state.collectionsLoading,
