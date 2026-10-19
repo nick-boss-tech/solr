@@ -1,0 +1,132 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=18458C0FFEE18458
+
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:solrj:processResources UP-TO-DATE
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources UP-TO-DATE
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:processResources UP-TO-DATE
+> Task :solr:modules:ltr:processResources NO-SOURCE
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:jar UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+> Task :solr:modules:ltr:processTestResources
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/solr-18458/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-18458/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar UP-TO-DATE
+> Task :solr:solrj-jetty:classes UP-TO-DATE
+> Task :solr:solrj-jetty:jar UP-TO-DATE
+> Task :solr:solrj-streaming:classes UP-TO-DATE
+> Task :solr:solrj-streaming:jar UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:solrj-zookeeper:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:jar UP-TO-DATE
+> Task :solr:core:compileJava UP-TO-DATE
+> Task :solr:core:classes UP-TO-DATE
+> Task :solr:core:jar UP-TO-DATE
+> Task :solr:test-framework:compileJava UP-TO-DATE
+> Task :solr:test-framework:classes UP-TO-DATE
+> Task :solr:test-framework:jar UP-TO-DATE
+
+> Task :solr:modules:ltr:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:ltr:classes
+
+> Task :solr:modules:ltr:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:ltr:testClasses
+
+> Task :solr:modules:ltr:test
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+:solr:modules:ltr:test (SUCCESS): 91 test(s), 1 skipped
+
+> Task :solr:modules:ltr:wipeTaskTemp
+The slowest tests (exceeding 500 ms) during this run:
+   4.45s TestLTRQParserExplain.interleavingModels_shouldReturnExplainForTheModelPicked (:solr:modules:ltr)
+   3.92s TestLTRQParserExplain.multipleAdditiveTreesScoreExplainMissingEfiFeatureShouldReturnDefaultScore (:solr:modules:ltr)
+   2.85s TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures (:solr:modules:ltr)
+   2.66s TestFeatureLoggerTransformer.interleaving_explicitNewFeatureStore_shouldExtractAllFeaturesFromNewStore (:solr:modules:ltr)
+   2.60s TestRankingFeature.testRankingSolrFeature (:solr:modules:ltr)
+   2.27s TestMultipleAdditiveTreesModel.multipleAdditiveTreesTestTreesParamDoesNotContainTree (:solr:modules:ltr)
+   2.18s TestFeatureLogging.testNoReranking_definedStoreDefaultLogAll_shouldPrintAllFeatures (:solr:modules:ltr)
+   2.15s TestRankingFeature.testParamsToMap (:solr:modules:ltr)
+   2.14s TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest (:solr:modules:ltr)
+   2.13s TestFeatureLoggerTransformer.featureTransformer_shouldWorkInSparseFormat_withNulls (:solr:modules:ltr)
+The slowest suites (exceeding 1s) during this run:
+  29.52s TestFeatureLogging (:solr:modules:ltr)
+  18.69s TestFeatureLoggerTransformer (:solr:modules:ltr)
+  17.69s TestMultipleAdditiveTreesModel (:solr:modules:ltr)
+  16.19s TestLTRQParserExplain (:solr:modules:ltr)
+   7.67s TestLTRQParserPlugin (:solr:modules:ltr)
+   7.67s TestLTRQParserInterleaving (:solr:modules:ltr)
+   6.50s TestInterleavingTransformer (:solr:modules:ltr)
+   5.53s TestLTRWithSort (:solr:modules:ltr)
+   5.19s TestOriginalScoreFeature (:solr:modules:ltr)
+   4.90s TestRankingFeature (:solr:modules:ltr)
+
+BUILD SUCCESSFUL in 2m 28s
+34 actionable tasks: 12 executed, 22 up-to-date
+rc=0

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.util.TestCircuitBreakers" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:50:56.512Z" hostname="localhost" time="2.768">
+  <properties/>
+  <testcase name="testFakeCPUCircuitBreaker" classname="org.apache.solr.util.TestCircuitBreakers" time="0.022"/>
+  <testcase name="testCBsCanBeMarkedAsWarnOnly" classname="org.apache.solr.util.TestCircuitBreakers" time="0.007"/>
+  <testcase name="testBadRequestType" classname="org.apache.solr.util.TestCircuitBreakers" time="0.006"/>
+  <testcase name="testCBAlwaysTripsInvalidErrorCodeSysProp" classname="org.apache.solr.util.TestCircuitBreakers" time="0.006"/>
+  <testcase name="testBuildingMemoryPressure" classname="org.apache.solr.util.TestCircuitBreakers" time="0.007"/>
+  <testcase name="testCPUCircuitBreakerReadsLiveUsage" classname="org.apache.solr.util.TestCircuitBreakers" time="0.022"/>
+  <testcase name="testFakeLoadAverageCircuitBreaker" classname="org.apache.solr.util.TestCircuitBreakers" time="0.016"/>
+  <testcase name="testGlobalCBsCanBeParsedFromSystemProperties" classname="org.apache.solr.util.TestCircuitBreakers" time="0.011"/>
+  <testcase name="testCBFakeMemoryPressure" classname="org.apache.solr.util.TestCircuitBreakers" time="0.011"/>
+  <testcase name="testCBAlwaysTripsWithCorrectCode" classname="org.apache.solr.util.TestCircuitBreakers" time="0.007"/>
+  <testcase name="testResponseWithCBTiming" classname="org.apache.solr.util.TestCircuitBreakers" time="0.017"/>
+  <testcase name="testGlobalCBAlwaysTrips" classname="org.apache.solr.util.TestCircuitBreakers" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[226473 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+226483 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.util.TestCircuitBreakers_18458C0FFEE18458-001/data-dir-15-001
+226484 WARN  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=9 numCloses=9
+226484 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-559 for ERROR logs matching regex: ignore_exception
+226484 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=false
+226488 WARN  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+226488 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+226488 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+226488 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+226495 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+226522 WARN  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+226561 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+226595 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+227636 WARN  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+227660 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+227691 WARN  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+227765 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+227805 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+227806 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.util.TestCircuitBreakers_18458C0FFEE18458-001/data-dir-15-001/]
+227976 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker MemoryCircuitBreaker for request type(s) UPDATE
+227977 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker MemoryCircuitBreaker for request type(s) QUERY
+228135 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker CPUCircuitBreaker for request type(s) QUERY
+228222 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker LoadAverageCircuitBreaker for request type(s) QUERY
+228223 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=44, maxMergedSegmentMB=104.0456657409668, floorSegmentMB=0.21646499633789062, forceMergeDeletesPctAllowed=2.63443657535527, segmentsPerTier=38.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.25172449018512133, deletesPctAllowed=38.09755544180328, targetSearchConcurrency=15
+228316 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+228316 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+228317 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=48, maxMergedSegmentMB=75.95970630645752, floorSegmentMB=0.9388360977172852, forceMergeDeletesPctAllowed=8.487655919489328, segmentsPerTier=26.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.3421580622637751, deletesPctAllowed=37.846938062457696, targetSearchConcurrency=14
+228319 WARN  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/conf ; switching to use InMemory storage instead.
+228323 INFO  (coreLoadExecutor-852-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+228504 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228578 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+228581 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 2
+228584 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228586 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228588 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228589 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228591 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 1
+228669 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228669 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 77
+228672 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228674 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228675 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228676 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228678 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 1
+228680 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228700 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228701 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 20
+228703 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228704 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 1
+228706 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228707 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228710 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 2
+228712 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 1
+228728 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228728 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 15
+228730 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228733 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 1
+228734 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228736 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228737 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228738 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228754 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228754 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 15
+228756 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228758 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228759 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228761 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228762 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228764 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228778 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228778 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 13
+228780 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228781 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228782 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228784 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228785 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228786 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228800 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228800 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 12
+228802 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228803 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228804 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228805 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228806 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228808 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228820 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228821 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 12
+228823 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228824 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228825 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228826 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228827 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228828 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228842 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228842 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 12
+228844 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228845 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228846 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228847 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228849 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228850 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228862 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228863 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 12
+228866 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 2
+228867 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228868 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228869 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228871 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 1
+228872 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228883 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228884 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+228885 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228886 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228887 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228888 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228889 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228890 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228902 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228902 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+228904 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228905 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228906 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228907 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228908 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228909 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228920 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228920 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+228923 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228924 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228924 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228926 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228927 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228928 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228940 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228940 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+228942 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+228943 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228944 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228945 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228946 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228947 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228958 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228958 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+228960 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228960 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228962 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228963 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228964 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228965 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228985 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+228985 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 19
+228986 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228987 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228988 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+228989 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+228990 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+228991 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+229004 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+229004 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 12
+229006 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+229007 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+229008 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+229009 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+229010 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+229011 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+229021 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+229022 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+229023 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+229024 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+229025 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+229026 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+229027 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+229028 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+229038 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+229039 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+229040 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+229041 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+229042 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+229043 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+229044 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+229045 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+229055 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+229056 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 9
+229057 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+229058 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+229058 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+229059 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 0
+229060 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+229061 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+229071 INFO  (searcherExecutor-854-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+229071 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+229078 INFO  (TEST-TestCircuitBreakers.testFakeCPUCircuitBreaker-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testFakeCPUCircuitBreaker
+229078 INFO  (TEST-TestCircuitBreakers.testFakeCPUCircuitBreaker-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker FakeCPUCircuitBreaker for request type(s) QUERY
+229090 INFO  (TestCircuitBreaker-858-thread-1) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=11
+229090 INFO  (TestCircuitBreaker-858-thread-3) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=11
+229090 INFO  (TestCircuitBreaker-858-thread-2) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=11
+229091 INFO  (TestCircuitBreaker-858-thread-4) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=11
+229091 INFO  (TestCircuitBreaker-858-thread-5) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=11
+229094 INFO  (TEST-TestCircuitBreakers.testFakeCPUCircuitBreaker-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testFakeCPUCircuitBreaker
+229098 INFO  (TEST-TestCircuitBreakers.testCBsCanBeMarkedAsWarnOnly-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testCBsCanBeMarkedAsWarnOnly
+229100 INFO  (TEST-TestCircuitBreakers.testCBsCanBeMarkedAsWarnOnly-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=0
+229100 WARN  (TEST-TestCircuitBreakers.testCBsCanBeMarkedAsWarnOnly-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerUtils 'warnOnly' circuit-breakers tripped for request: Memory Circuit Breaker triggered as JVM heap usage values are greater than allocated threshold. Seen JVM heap memory usage 0 and allocated threshold 0
+
+229101 INFO  (TEST-TestCircuitBreakers.testCBsCanBeMarkedAsWarnOnly-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=0
+229101 INFO  (TEST-TestCircuitBreakers.testCBsCanBeMarkedAsWarnOnly-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testCBsCanBeMarkedAsWarnOnly
+229106 INFO  (TEST-TestCircuitBreakers.testBadRequestType-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testBadRequestType
+229106 INFO  (TEST-TestCircuitBreakers.testBadRequestType-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testBadRequestType
+229111 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsInvalidErrorCodeSysProp-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testCBAlwaysTripsInvalidErrorCodeSysProp
+229111 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsInvalidErrorCodeSysProp-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testCBAlwaysTripsInvalidErrorCodeSysProp
+229117 INFO  (TEST-TestCircuitBreakers.testBuildingMemoryPressure-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testBuildingMemoryPressure
+229117 INFO  (TEST-TestCircuitBreakers.testBuildingMemoryPressure-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker BuildingUpMemoryPressureCircuitBreaker for request type(s) QUERY
+229118 INFO  (TestCircuitBreaker-859-thread-2) [] o.a.s.u.TestCircuitBreakers BuildingUpMemoryPressureCircuitBreaker: Returning unblocking value for count 1
+229118 INFO  (TestCircuitBreaker-859-thread-3) [] o.a.s.u.TestCircuitBreakers BuildingUpMemoryPressureCircuitBreaker: Returning unblocking value for count 2
+229118 INFO  (TestCircuitBreaker-859-thread-4) [] o.a.s.u.TestCircuitBreakers BuildingUpMemoryPressureCircuitBreaker: Returning unblocking value for count 3
+229118 INFO  (TestCircuitBreaker-859-thread-2) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=0
+229118 INFO  (TestCircuitBreaker-859-thread-4) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=0
+229119 INFO  (TestCircuitBreaker-859-thread-3) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=1
+229118 INFO  (TestCircuitBreaker-859-thread-1) [] o.a.s.u.TestCircuitBreakers BuildingUpMemoryPressureCircuitBreaker: Returning unblocking value for count 0
+229119 INFO  (TestCircuitBreaker-859-thread-5) [] o.a.s.u.TestCircuitBreakers Blocking query from BuildingUpMemoryPressureCircuitBreaker for count 4
+229119 INFO  (TestCircuitBreaker-859-thread-1) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=1
+229119 INFO  (TestCircuitBreaker-859-thread-5) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=0
+229120 INFO  (TEST-TestCircuitBreakers.testBuildingMemoryPressure-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testBuildingMemoryPressure
+229124 INFO  (TEST-TestCircuitBreakers.testCPUCircuitBreakerReadsLiveUsage-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testCPUCircuitBreakerReadsLiveUsage
+229142 INFO  (TEST-TestCircuitBreakers.testCPUCircuitBreakerReadsLiveUsage-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testCPUCircuitBreakerReadsLiveUsage
+229146 INFO  (TEST-TestCircuitBreakers.testFakeLoadAverageCircuitBreaker-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testFakeLoadAverageCircuitBreaker
+229147 INFO  (TEST-TestCircuitBreakers.testFakeLoadAverageCircuitBreaker-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker FakeLoadAverageCircuitBreaker for request type(s) QUERY
+229158 INFO  (TestCircuitBreaker-860-thread-1) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=10
+229158 INFO  (TestCircuitBreaker-860-thread-3) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=9
+229158 INFO  (TestCircuitBreaker-860-thread-5) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=9
+229158 INFO  (TestCircuitBreaker-860-thread-4) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=9
+229158 INFO  (TestCircuitBreaker-860-thread-2) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=10
+229159 INFO  (TEST-TestCircuitBreakers.testFakeLoadAverageCircuitBreaker-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testFakeLoadAverageCircuitBreaker
+229163 INFO  (TEST-TestCircuitBreakers.testGlobalCBsCanBeParsedFromSystemProperties-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobalCBsCanBeParsedFromSystemProperties
+229169 INFO  (TEST-TestCircuitBreakers.testGlobalCBsCanBeParsedFromSystemProperties-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobalCBsCanBeParsedFromSystemProperties
+229174 INFO  (TEST-TestCircuitBreakers.testCBFakeMemoryPressure-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testCBFakeMemoryPressure
+229176 INFO  (TEST-TestCircuitBreakers.testCBFakeMemoryPressure-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 1
+229177 INFO  (TEST-TestCircuitBreakers.testCBFakeMemoryPressure-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=0
+229177 INFO  (TEST-TestCircuitBreakers.testCBFakeMemoryPressure-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker FakeMemoryPressureCircuitBreaker for request type(s) QUERY
+229178 INFO  (TEST-TestCircuitBreakers.testCBFakeMemoryPressure-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=0
+229179 INFO  (TEST-TestCircuitBreakers.testCBFakeMemoryPressure-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+229180 INFO  (TEST-TestCircuitBreakers.testCBFakeMemoryPressure-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker FakeMemoryPressureCircuitBreaker for request type(s) UPDATE
+229180 INFO  (TEST-TestCircuitBreakers.testCBFakeMemoryPressure-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.S.Request path=/update params={{params(wt=xml),defaults(wt=xml)}} status=429 QTime=0
+229181 INFO  (TEST-TestCircuitBreakers.testCBFakeMemoryPressure-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testCBFakeMemoryPressure
+229185 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testCBAlwaysTripsWithCorrectCode
+229186 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker MockCircuitBreaker for request type(s) QUERY
+229186 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=0
+229186 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker MockCircuitBreaker for request type(s) QUERY
+229187 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=0
+229187 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker MockCircuitBreaker for request type(s) QUERY
+229187 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=503 QTime=0
+229187 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker MockCircuitBreaker for request type(s) QUERY
+229187 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=400 QTime=0
+229188 INFO  (TEST-TestCircuitBreakers.testCBAlwaysTripsWithCorrectCode-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testCBAlwaysTripsWithCorrectCode
+229192 INFO  (TEST-TestCircuitBreakers.testResponseWithCBTiming-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testResponseWithCBTiming
+229193 INFO  (TEST-TestCircuitBreakers.testResponseWithCBTiming-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debug=true&wt=xml} hits=3 status=0 QTime=1
+229200 INFO  (TEST-TestCircuitBreakers.testResponseWithCBTiming-seed#[18458C0FFEE18458]) [] o.a.s.u.c.CircuitBreakerRegistry Registered circuit breaker MockCircuitBreaker for request type(s) QUERY
+229200 INFO  (TEST-TestCircuitBreakers.testResponseWithCBTiming-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debug=true&wt=xml} hits=3 status=0 QTime=0
+229205 INFO  (TEST-TestCircuitBreakers.testResponseWithCBTiming-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testResponseWithCBTiming
+229209 INFO  (TEST-TestCircuitBreakers.testGlobalCBAlwaysTrips-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobalCBAlwaysTrips
+229210 INFO  (TEST-TestCircuitBreakers.testGlobalCBAlwaysTrips-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=name:"john+smith"&qt=&start=0&rows=20&wt=xml} status=429 QTime=0
+229210 INFO  (TEST-TestCircuitBreakers.testGlobalCBAlwaysTrips-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobalCBAlwaysTrips
+229210 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+229210 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=2099975588
+229211 INFO  (coreCloseExecutor-862-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@5eee783a collection1
+229211 INFO  (coreCloseExecutor-862-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+اکتبر ۱۹, ۲۰۲۶ ۱۱:۵۰:۵۹ قبل‌ازظهر io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+229256 INFO  (SUITE-TestCircuitBreakers-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-559 after muting 0 log messages
+]]></system-err>
+</testsuite>

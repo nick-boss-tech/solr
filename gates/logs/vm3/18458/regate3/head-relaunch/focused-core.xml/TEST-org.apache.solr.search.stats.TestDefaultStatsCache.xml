@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.search.stats.TestDefaultStatsCache" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:50:23.445Z" hostname="localhost" time="24.21">
+  <properties/>
+  <testcase name="test" classname="org.apache.solr.search.stats.TestDefaultStatsCache" time="24.174"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[193397 INFO  (SUITE-TestDefaultStatsCache-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+193397 INFO  (SUITE-TestDefaultStatsCache-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+193407 INFO  (SUITE-TestDefaultStatsCache-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/data-dir-14-001
+193407 WARN  (SUITE-TestDefaultStatsCache-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=108 numCloses=108
+193407 INFO  (SUITE-TestDefaultStatsCache-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-558 for ERROR logs matching regex: ignore_exception
+193408 INFO  (SUITE-TestDefaultStatsCache-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=true
+193411 WARN  (SUITE-TestDefaultStatsCache-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+193411 INFO  (SUITE-TestDefaultStatsCache-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+199782 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 Writing core.properties file to /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/control/cores/collection1
+199804 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+199804 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+199805 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+199806 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+199806 WARN  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@5fb202d6{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@2c166c76{STOPPED}}. May not be supported in future releases.
+199806 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/
+199807 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@5fb202d6{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2c166c76{STARTED}}
+199807 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=37957, coreRootDirectory=/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/control/cores}
+199807 ERROR (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+199807 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+199817 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0
+199817 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+199817 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+199817 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:50:29.888579180Z
+199817 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/control (source: servlet config: solr.solr.home)
+199817 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/control/solr.xml
+199824 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+199824 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+200257 WARN  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+200271 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 1 core definitions underneath /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/control/cores
+200271 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Cores are: [collection1]
+200279 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+200296 WARN  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+200342 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@5fb202d6{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2c166c76{STARTED}}
+200343 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@49d69ad6{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:37957}
+200343 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@1b35e27f{STARTING}[12.1.14,sto=0] @538ms
+200348 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+200381 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+200382 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/control/cores/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/control/cores/collection1/data/]
+200382 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=17, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.11787801478416773]
+200416 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+200416 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+200417 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+200435 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=28, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.103605060201859]
+200801 INFO  (coreLoadExecutor-782-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+200801 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+200805 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+200805 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+200805 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+200805 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+200809 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+200814 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+200818 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+200822 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+200826 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+200826 INFO  (searcherExecutor-784-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+207228 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 Writing core.properties file to /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard0/cores/collection1
+207249 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+207249 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+207249 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+207250 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+207250 WARN  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@6698f0be{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@eabba33{STOPPED}}. May not be supported in future releases.
+207251 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/
+207251 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@6698f0be{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@eabba33{STARTED}}
+207251 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=43591, coreRootDirectory=/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard0/cores}
+207251 ERROR (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+207251 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+207251 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0
+207251 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+207251 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+207252 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:50:37.323001765Z
+207252 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard0 (source: servlet config: solr.solr.home)
+207252 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard0/solr.xml
+207258 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+208045 WARN  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+208058 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 1 core definitions underneath /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard0/cores
+208058 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Cores are: [collection1]
+208067 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+208085 WARN  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+208107 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@6698f0be{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@eabba33{STARTED}}
+208107 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@576caac3{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:43591}
+208107 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@3663a4e3{STARTING}[12.1.14,sto=0] @858ms
+208128 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+208162 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+208162 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard0/cores/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard0/cores/collection1/data/]
+208163 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=17, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.11787801478416773]
+208197 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+208197 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+208197 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+208216 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=28, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.103605060201859]
+208569 INFO  (coreLoadExecutor-803-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+208571 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+208576 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+208576 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+208576 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+208576 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+208580 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+208584 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+208588 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+208592 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+208596 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+208596 INFO  (searcherExecutor-805-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+215028 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 Writing core.properties file to /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard1/cores/collection1
+215049 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+215049 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+215049 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+215050 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+215051 WARN  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@63f7be1{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@465db60b{STOPPED}}. May not be supported in future releases.
+215051 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/
+215052 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@63f7be1{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@465db60b{STARTED}}
+215052 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=37661, coreRootDirectory=/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard1/cores}
+215052 ERROR (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+215052 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+215052 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0
+215052 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+215052 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+215052 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:50:45.123636020Z
+215052 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard1 (source: servlet config: solr.solr.home)
+215053 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard1/solr.xml
+215059 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+216831 WARN  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+216846 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 1 core definitions underneath /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard1/cores
+216846 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Cores are: [collection1]
+216855 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+216878 WARN  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+216899 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@63f7be1{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@465db60b{STARTED}}
+216899 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@73fa03b7{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:37661}
+216899 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@4ff92eec{STARTING}[12.1.14,sto=0] @1849ms
+216921 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+216956 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+216957 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard1/cores/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.stats.TestDefaultStatsCache_18458C0FFEE18458-001/tempDir-001/shard1/cores/collection1/data/]
+216957 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=17, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.11787801478416773]
+216992 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+216992 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+216992 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+217011 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=28, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.103605060201859]
+217370 INFO  (coreLoadExecutor-824-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+217370 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+217375 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+217375 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+217375 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+217375 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+217375 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting test
+217380 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+217384 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+217385 INFO  (qtp1550851927-1124-null-14066) [ x:collection1 t:null-14066] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{deleteByQuery=*:* (-1879467462438682624)} 0 7
+217389 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+217393 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+217395 INFO  (qtp1698704391-1146-null-14067) [ x:collection1 t:null-14067] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{deleteByQuery=*:* (-1879467462449168384)} 0 7
+217398 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+217398 INFO  (searcherExecutor-826-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+217404 INFO  (qtp318277759-1168-null-14068) [ x:collection1 t:null-14068] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{deleteByQuery=*:* (-1879467462459654144)} 0 6
+217409 INFO  (qtp1550851927-1125-null-14069) [ x:collection1 t:null-14069] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 4
+217414 INFO  (qtp1698704391-1147-null-14070) [ x:collection1 t:null-14070] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 4
+217419 INFO  (qtp318277759-1169-null-14071) [ x:collection1 t:null-14071] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 4
+217428 INFO  (qtp1550851927-1126-null-14072) [ x:collection1 t:null-14072] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[0 (1879467462482722816)]} 0 7
+217436 INFO  (qtp1698704391-1148-null-14073) [ x:collection1 t:null-14073] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[0 (1879467462492160000)]} 0 7
+217455 INFO  (qtp1550851927-1127-null-14074) [ x:collection1 t:null-14074] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[1 (1879467462500548608)]} 0 18
+217465 INFO  (qtp318277759-1170-null-14075) [ x:collection1 t:null-14075] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[1 (1879467462520471552)]} 0 8
+217466 INFO  (qtp1550851927-1122-null-14076) [ x:collection1 t:null-14076] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[2 (1879467462529908736)]} 0 0
+217467 INFO  (qtp318277759-1171-null-14077) [ x:collection1 t:null-14077] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[2 (1879467462532005888)]} 0 0
+217471 INFO  (searcherExecutor-784-thread-1-processing-collection1 null-14078) [ x:collection1 t:null-14078] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+217474 INFO  (qtp1550851927-1123-null-14078) [ x:collection1 t:null-14078] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 6
+217479 INFO  (searcherExecutor-805-thread-1-processing-collection1 null-14079) [ x:collection1 t:null-14079] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+217482 INFO  (qtp1698704391-1149-null-14079) [ x:collection1 t:null-14079] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 6
+217486 INFO  (searcherExecutor-826-thread-1-processing-collection1 null-14080) [ x:collection1 t:null-14080] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+217489 INFO  (qtp318277759-1166-null-14080) [ x:collection1 t:null-14080] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 6
+217491 INFO  (qtp1550851927-1124-null-14081) [ x:collection1 t:null-14081] o.a.s.c.S.Request path=/select params={q=a_t:one&debug=true&fl=*,score&wt=javabin} hits=3 status=0 QTime=0
+217494 INFO  (qtp1698704391-1147-null-14082) [ x:collection1 t:null-14082] o.a.s.c.S.Request path=/select params={distrib=false&df=text&debug=false&debug=timing&debug=track&shards.purpose=16388&fl=id&fl=score&start=0&fsv=true&rows=10&q=a_t:one&omitHeader=false&requestPurpose=GET_TOP_IDS,SET_TERM_STATS&NOW=1792399847563&isShard=true&wt=javabin} hits=1 status=0 QTime=0
+217494 INFO  (qtp318277759-1169-null-14082) [ x:collection1 t:null-14082] o.a.s.c.S.Request path=/select params={distrib=false&df=text&debug=false&debug=timing&debug=track&shards.purpose=16388&fl=id&fl=score&start=0&fsv=true&rows=10&q=a_t:one&omitHeader=false&requestPurpose=GET_TOP_IDS,SET_TERM_STATS&NOW=1792399847563&isShard=true&wt=javabin} hits=2 status=0 QTime=0
+217496 INFO  (qtp318277759-1170-null-14082) [ x:collection1 t:null-14082] o.a.s.c.S.Request path=/select params={q=a_t:one&distrib=false&df=text&debug=true&debug=timing&debug=track&omitHeader=false&shards.purpose=16704&fl=*,score&requestPurpose=GET_FIELDS,GET_DEBUG,SET_TERM_STATS&NOW=1792399847563&isShard=true&ids=1,2&wt=javabin} status=0 QTime=0
+217496 INFO  (qtp1698704391-1148-null-14082) [ x:collection1 t:null-14082] o.a.s.c.S.Request path=/select params={q=a_t:one&distrib=false&df=text&debug=true&debug=timing&debug=track&omitHeader=false&shards.purpose=16704&fl=*,score&requestPurpose=GET_FIELDS,GET_DEBUG,SET_TERM_STATS&NOW=1792399847563&isShard=true&ids=0&wt=javabin} status=0 QTime=0
+217497 INFO  (qtp1698704391-1144-null-14082) [ x:collection1 t:null-14082] o.a.s.c.S.Request path=/select params={q=a_t:one&shards=http://127.0.0.1:43591/solr/collection1,http://127.0.0.1:37661/solr/collection1&debug=true&fl=*,score&wt=javabin} hits=3 status=0 QTime=5
+217506 INFO  (qtp1550851927-1125-null-14083) [ x:collection1 t:null-14083] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[3 (1879467462564511744)]} 0 7
+217514 INFO  (qtp1698704391-1149-null-14084) [ x:collection1 t:null-14084] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[3 (1879467462572900352)]} 0 7
+217515 INFO  (qtp1550851927-1126-null-14085) [ x:collection1 t:null-14085] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[4 (1879467462582337536)]} 0 0
+217524 INFO  (qtp318277759-1171-null-14086) [ x:collection1 t:null-14086] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[4 (1879467462583386112)]} 0 7
+217525 INFO  (qtp1550851927-1127-null-14087) [ x:collection1 t:null-14087] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[5 (1879467462591774720)]} 0 0
+217526 INFO  (qtp318277759-1166-null-14088) [ x:collection1 t:null-14088] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[5 (1879467462592823296)]} 0 0
+217530 INFO  (searcherExecutor-784-thread-1-processing-collection1 null-14089) [ x:collection1 t:null-14089] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+217534 INFO  (qtp1550851927-1122-null-14089) [ x:collection1 t:null-14089] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 7
+217538 INFO  (searcherExecutor-805-thread-1-processing-collection1 null-14090) [ x:collection1 t:null-14090] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+217541 INFO  (qtp1698704391-1145-null-14090) [ x:collection1 t:null-14090] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 6
+217546 INFO  (searcherExecutor-826-thread-1-processing-collection1 null-14091) [ x:collection1 t:null-14091] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+217549 INFO  (qtp318277759-1167-null-14091) [ x:collection1 t:null-14091] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 7
+217551 INFO  (qtp1550851927-1123-null-14092) [ x:collection1 t:null-14092] o.a.s.c.S.Request path=/select params={q={!cache%3Dfalse}id:5&debug=true&fl=*,score&wt=javabin} hits=1 status=0 QTime=0
+217554 INFO  (qtp1698704391-1148-null-14093) [ x:collection1 t:null-14093] o.a.s.c.S.Request path=/select params={distrib=false&df=text&debug=false&debug=timing&debug=track&shards.purpose=16388&fl=id&fl=score&start=0&fsv=true&rows=10&q={!cache%3Dfalse}id:5&omitHeader=false&requestPurpose=GET_TOP_IDS,SET_TERM_STATS&NOW=1792399847622&isShard=true&wt=javabin} hits=0 status=0 QTime=0
+217554 INFO  (qtp318277759-1171-null-14093) [ x:collection1 t:null-14093] o.a.s.c.S.Request path=/select params={distrib=false&df=text&debug=false&debug=timing&debug=track&shards.purpose=16388&fl=id&fl=score&start=0&fsv=true&rows=10&q={!cache%3Dfalse}id:5&omitHeader=false&requestPurpose=GET_TOP_IDS,SET_TERM_STATS&NOW=1792399847622&isShard=true&wt=javabin} hits=1 status=0 QTime=0
+217556 INFO  (qtp318277759-1166-null-14093) [ x:collection1 t:null-14093] o.a.s.c.S.Request path=/select params={q={!cache%3Dfalse}id:5&distrib=false&df=text&debug=true&debug=timing&debug=track&omitHeader=false&shards.purpose=16704&fl=*,score&requestPurpose=GET_FIELDS,GET_DEBUG,SET_TERM_STATS&NOW=1792399847622&isShard=true&ids=5&wt=javabin} status=0 QTime=0
+217556 INFO  (qtp318277759-1168-null-14093) [ x:collection1 t:null-14093] o.a.s.c.S.Request path=/select params={q={!cache%3Dfalse}id:5&shards=http://127.0.0.1:43591/solr/collection1,http://127.0.0.1:37661/solr/collection1&debug=true&fl=*,score&wt=javabin} hits=1 status=0 QTime=5
+217559 INFO  (qtp1550851927-1124-null-14094) [ x:collection1 t:null-14094] o.a.s.c.S.Request path=/select params={q=a_t:one+a_t:four&debug=true&fl=*,score&wt=javabin} hits=6 status=0 QTime=1
+217561 INFO  (qtp1698704391-1149-null-14095) [ x:collection1 t:null-14095] o.a.s.c.S.Request path=/select params={distrib=false&df=text&debug=false&debug=timing&debug=track&shards.purpose=16388&fl=id&fl=score&start=0&fsv=true&rows=10&q=a_t:one+a_t:four&omitHeader=false&requestPurpose=GET_TOP_IDS,SET_TERM_STATS&NOW=1792399847631&isShard=true&wt=javabin} hits=2 status=0 QTime=0
+217561 INFO  (qtp318277759-1167-null-14095) [ x:collection1 t:null-14095] o.a.s.c.S.Request path=/select params={distrib=false&df=text&debug=false&debug=timing&debug=track&shards.purpose=16388&fl=id&fl=score&start=0&fsv=true&rows=10&q=a_t:one+a_t:four&omitHeader=false&requestPurpose=GET_TOP_IDS,SET_TERM_STATS&NOW=1792399847631&isShard=true&wt=javabin} hits=4 status=0 QTime=0
+217564 INFO  (qtp1698704391-1145-null-14095) [ x:collection1 t:null-14095] o.a.s.c.S.Request path=/select params={q=a_t:one+a_t:four&distrib=false&df=text&debug=true&debug=timing&debug=track&omitHeader=false&shards.purpose=16704&fl=*,score&requestPurpose=GET_FIELDS,GET_DEBUG,SET_TERM_STATS&NOW=1792399847631&isShard=true&ids=0,3&wt=javabin} status=0 QTime=0
+217565 INFO  (qtp318277759-1169-null-14095) [ x:collection1 t:null-14095] o.a.s.c.S.Request path=/select params={q=a_t:one+a_t:four&distrib=false&df=text&debug=true&debug=timing&debug=track&omitHeader=false&shards.purpose=16704&fl=*,score&requestPurpose=GET_FIELDS,GET_DEBUG,SET_TERM_STATS&NOW=1792399847631&isShard=true&ids=1,2,4,5&wt=javabin} status=0 QTime=1
+217565 INFO  (qtp1698704391-1144-null-14095) [ x:collection1 t:null-14095] o.a.s.c.S.Request path=/select params={q=a_t:one+a_t:four&shards=http://127.0.0.1:43591/solr/collection1,http://127.0.0.1:37661/solr/collection1&debug=true&fl=*,score&wt=javabin} hits=6 status=0 QTime=5
+217568 ERROR (qtp318277759-1170-null-14096) [ x:collection1 t:null-14096] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Explicitly set distrib.statsCache=true is not supported with LocalStatsCache
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:163)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+217568 INFO  (qtp318277759-1170-null-14096) [ x:collection1 t:null-14096] o.a.s.c.S.Request path=/select params={shards=http://127.0.0.1:43591/solr/collection1,http://127.0.0.1:37661/solr/collection1&distrib.statsCache=true&wt=javabin} status=400 QTime=0
+217569 INFO  (TEST-TestDefaultStatsCache.test-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending test
+217569 INFO  (closeThreadPool-832-thread-2) [] o.e.j.s.Server Stopped oejs.Server@1b35e27f{STOPPING}[12.1.14,sto=0]
+217570 INFO  (closeThreadPool-832-thread-2) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@49d69ad6{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+217570 INFO  (closeThreadPool-832-thread-2) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1447154686
+217571 INFO  (closeThreadPool-832-thread-6) [] o.e.j.s.Server Stopped oejs.Server@4ff92eec{STOPPING}[12.1.14,sto=0]
+217571 INFO  (closeThreadPool-832-thread-5) [] o.e.j.s.Server Stopped oejs.Server@3663a4e3{STOPPING}[12.1.14,sto=0]
+217571 INFO  (coreCloseExecutor-834-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@4b09e0f8 collection1
+217571 INFO  (coreCloseExecutor-834-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+217572 INFO  (closeThreadPool-832-thread-5) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@576caac3{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+217572 INFO  (closeThreadPool-832-thread-5) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=2103066285
+217572 INFO  (closeThreadPool-832-thread-6) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@73fa03b7{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+217572 INFO  (closeThreadPool-832-thread-6) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=2054287851
+217573 INFO  (coreCloseExecutor-836-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@4eebc982 collection1
+217573 INFO  (coreCloseExecutor-838-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@196bc742 collection1
+217573 INFO  (coreCloseExecutor-836-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+217573 INFO  (coreCloseExecutor-838-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+okt 19, 2026 4:50:47 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+okt 19, 2026 4:50:47 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+okt 19, 2026 4:50:47 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+217583 INFO  (closeThreadPool-832-thread-2) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@5fb202d6{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@2c166c76{STOPPED}}
+217583 INFO  (closeThreadPool-832-thread-5) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@6698f0be{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@eabba33{STOPPED}}
+217583 INFO  (closeThreadPool-832-thread-6) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@63f7be1{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/core/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@465db60b{STOPPED}}
+217585 INFO  (SUITE-TestDefaultStatsCache-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-558 after muting 0 log messages
+]]></system-err>
+</testsuite>

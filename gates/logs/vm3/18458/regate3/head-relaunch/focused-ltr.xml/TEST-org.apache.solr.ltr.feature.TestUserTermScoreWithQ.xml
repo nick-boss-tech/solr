@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.ltr.feature.TestUserTermScoreWithQ" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:56:25.826Z" hostname="localhost" time="1.777">
+  <properties/>
+  <testcase name="testUserTermScoreWithQ" classname="org.apache.solr.ltr.feature.TestUserTermScoreWithQ" time="1.741"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[27698 INFO  (SUITE-TestUserTermScoreWithQ-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+27708 INFO  (SUITE-TestUserTermScoreWithQ-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/data-dir-5-001
+27708 WARN  (SUITE-TestUserTermScoreWithQ-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=6 numCloses=6
+27708 INFO  (SUITE-TestUserTermScoreWithQ-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-5 for ERROR logs matching regex: ignore_exception
+27709 INFO  (SUITE-TestUserTermScoreWithQ-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+27711 WARN  (SUITE-TestUserTermScoreWithQ-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+27711 INFO  (SUITE-TestUserTermScoreWithQ-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+27711 INFO  (SUITE-TestUserTermScoreWithQ-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+27715 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testUserTermScoreWithQ
+27868 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+27868 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+27868 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+27869 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+27869 WARN  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@71281d3d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@46fcee57{STOPPED}}. May not be supported in future releases.
+27870 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+27870 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@71281d3d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@46fcee57{STARTED}}
+27870 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-001, hostPort=41377, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-002}
+27870 ERROR (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+27870 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+27871 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+27871 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+27871 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+27871 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:26.023151843Z
+27871 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+27871 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-001/solr.xml
+27877 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+27878 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+29089 WARN  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+29096 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-002
+29144 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@71281d3d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@46fcee57{STARTED}}
+29145 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@4aec0e42{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:41377}
+29145 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@35c53d5c{STARTING}[12.1.14,sto=0] @1277ms
+29145 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#41377
+29195 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+29201 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-001/collection1
+29201 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-002/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-002/collection1/data/]
+29215 WARN  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+29241 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+29241 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+29241 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+29261 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-001/collection1/conf
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+29264 WARN  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+29264 WARN  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+29264 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+29265 INFO  (searcherExecutor-284-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+29295 INFO  (qtp1173529742-394-null-183) [ x:collection1 t:null-183] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467818944036864)]} 0 8
+29298 INFO  (qtp1173529742-395-null-184) [ x:collection1 t:null-184] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467818954522624)]} 0 0
+29300 INFO  (qtp1173529742-396-null-185) [ x:collection1 t:null-185] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467818957668352)]} 0 0
+29302 INFO  (qtp1173529742-397-null-186) [ x:collection1 t:null-186] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467818959765504)]} 0 0
+29305 INFO  (qtp1173529742-392-null-187) [ x:collection1 t:null-187] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467818961862656)]} 0 0
+29307 INFO  (qtp1173529742-393-null-188) [ x:collection1 t:null-188] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467818963959808)]} 0 0
+29309 INFO  (qtp1173529742-394-null-189) [ x:collection1 t:null-189] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467818966056960)]} 0 0
+29310 INFO  (qtp1173529742-395-null-190) [ x:collection1 t:null-190] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467818968154112)]} 0 0
+29317 INFO  (searcherExecutor-284-thread-1-processing-collection1 null-191) [ x:collection1 t:null-191] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+29321 INFO  (qtp1173529742-396-null-191) [ x:collection1 t:null-191] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 9
+29322 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"SomeTermQ",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"q":"{!terms f=popularity}88888"}
+}
+ 
+29323 INFO  (qtp1173529742-397-null-192) [ x:collection1 t:null-192] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@d1d5bb5] for /schema/feature-store
+29323 INFO  (qtp1173529742-397-null-192) [ x:collection1 t:null-192] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=SomeTermQ, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!terms f=popularity}88888}} is a java.util.LinkedHashMap
+29323 INFO  (qtp1173529742-397-null-192) [ x:collection1 t:null-192] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=SomeTermQ, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!terms f=popularity}88888}}
+29336 INFO  (qtp1173529742-397-null-192) [ x:collection1 t:null-192] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-001/collection1/conf
+29336 INFO  (qtp1173529742-397-null-192) [ x:collection1 t:null-192] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+29336 INFO  (qtp1173529742-397-null-192) [ x:collection1 t:null-192] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+29336 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"Term-modelQ",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"SomeTermQ"}
+]
+,
+"params":{"weights":{"SomeTermQ":1.0}}
+}
+ 
+29337 INFO  (qtp1173529742-392-null-193) [ x:collection1 t:null-193] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@d1d5bb5]] for /schema/model-store
+29338 INFO  (qtp1173529742-392-null-193) [ x:collection1 t:null-193] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=Term-modelQ, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=SomeTermQ}], params={weights={SomeTermQ=1.0}}} is a java.util.LinkedHashMap
+29340 INFO  (qtp1173529742-392-null-193) [ x:collection1 t:null-193] o.a.s.l.s.r.ManagedModelStore adding model Term-modelQ
+29350 INFO  (qtp1173529742-392-null-193) [ x:collection1 t:null-193] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestUserTermScoreWithQ_18458C0FFEE18458-001/tempDir-001/collection1/conf
+29350 INFO  (qtp1173529742-392-null-193) [ x:collection1 t:null-193] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+29350 INFO  (qtp1173529742-392-null-193) [ x:collection1 t:null-193] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=12
+29353 INFO  (qtp1173529742-393-null-194) [ x:collection1 t:null-194] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DTerm-modelQ+reRankDocs%3D4}} hits=4 status=0 QTime=2
+29356 INFO  (qtp1173529742-394-null-195) [ x:collection1 t:null-195] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DTerm-modelQ+reRankDocs%3D4}} hits=4 status=0 QTime=1
+29359 INFO  (qtp1173529742-395-null-196) [ x:collection1 t:null-196] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DTerm-modelQ+reRankDocs%3D4}} hits=4 status=0 QTime=1
+29361 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@35c53d5c{STOPPING}[12.1.14,sto=0]
+29361 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@4aec0e42{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+29361 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=962590357
+29362 INFO  (coreCloseExecutor-291-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@72b75e61 collection1
+29362 INFO  (coreCloseExecutor-291-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+ⴽⵜⵓ 19, 2026 5:56:27 ⵜⵉⴼⴰⵡⵜ io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+29365 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@71281d3d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@46fcee57{STOPPED}}
+29450 INFO  (TEST-TestUserTermScoreWithQ.testUserTermScoreWithQ-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testUserTermScoreWithQ
+29452 INFO  (SUITE-TestUserTermScoreWithQ-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-5 after muting 0 log messages
+]]></system-err>
+</testsuite>

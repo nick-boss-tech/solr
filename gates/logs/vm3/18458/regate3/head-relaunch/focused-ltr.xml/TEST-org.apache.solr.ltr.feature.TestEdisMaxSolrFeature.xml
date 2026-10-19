@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.ltr.feature.TestEdisMaxSolrFeature" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:56:17.128Z" hostname="localhost" time="3.363">
+  <properties/>
+  <testcase name="testEdisMaxSolrFeature" classname="org.apache.solr.ltr.feature.TestEdisMaxSolrFeature" time="1.692"/>
+  <testcase name="testEdisMaxSolrFeatureCustomMM" classname="org.apache.solr.ltr.feature.TestEdisMaxSolrFeature" time="1.633"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[18997 INFO  (SUITE-TestEdisMaxSolrFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+19008 INFO  (SUITE-TestEdisMaxSolrFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/data-dir-3-001
+19008 WARN  (SUITE-TestEdisMaxSolrFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=2 numCloses=2
+19008 INFO  (SUITE-TestEdisMaxSolrFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-3 for ERROR logs matching regex: ignore_exception
+19011 INFO  (SUITE-TestEdisMaxSolrFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+19013 WARN  (SUITE-TestEdisMaxSolrFeature-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+19013 INFO  (SUITE-TestEdisMaxSolrFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+19013 INFO  (SUITE-TestEdisMaxSolrFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+19017 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testEdisMaxSolrFeature
+19176 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+19176 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+19176 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+19177 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+19177 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@3b7ee2{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@20dbfdc5{STOPPED}}. May not be supported in future releases.
+19178 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+19178 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@3b7ee2{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@20dbfdc5{STARTED}}
+19178 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001, hostPort=46061, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-002}
+19178 ERROR (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+19179 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+19179 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+19179 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+19179 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+19179 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:17.331185435Z
+19179 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+19179 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/solr.xml
+19186 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+19186 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+20314 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+20322 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-002
+20372 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@3b7ee2{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@20dbfdc5{STARTED}}
+20372 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@49716515{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:46061}
+20372 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@36269216{STARTING}[12.1.14,sto=0] @1196ms
+20373 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#46061
+20423 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+20429 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/collection1
+20429 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-002/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-002/collection1/data/]
+20440 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+20466 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+20466 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+20466 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+20488 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+20490 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+20490 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+20490 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+20491 INFO  (searcherExecutor-172-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+20521 INFO  (qtp2040418988-240-null-91) [ x:collection1 t:null-91] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467809743831040)]} 0 9
+20525 INFO  (qtp2040418988-241-null-92) [ x:collection1 t:null-92] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467809755365376)]} 0 0
+20527 INFO  (qtp2040418988-242-null-93) [ x:collection1 t:null-93] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467809758511104)]} 0 0
+20530 INFO  (qtp2040418988-243-null-94) [ x:collection1 t:null-94] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467809761656832)]} 0 0
+20533 INFO  (qtp2040418988-238-null-95) [ x:collection1 t:null-95] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467809763753984)]} 0 0
+20535 INFO  (qtp2040418988-239-null-96) [ x:collection1 t:null-96] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467809766899712)]} 0 0
+20537 INFO  (qtp2040418988-240-null-97) [ x:collection1 t:null-97] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467809768996864)]} 0 0
+20539 INFO  (qtp2040418988-241-null-98) [ x:collection1 t:null-98] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467809771094016)]} 0 0
+20547 INFO  (searcherExecutor-172-thread-1-processing-collection1 null-99) [ x:collection1 t:null-99] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+20551 INFO  (qtp2040418988-242-null-99) [ x:collection1 t:null-99] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 9
+20552 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"SomeEdisMax",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"q":"{!edismax qf='title description' pf='description' mm=100% boost='pow(popularity, 0.1)' v='w1' tie=0.1}"}
+}
+ 
+20553 INFO  (qtp2040418988-243-null-100) [ x:collection1 t:null-100] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@65bba75e] for /schema/feature-store
+20553 INFO  (qtp2040418988-243-null-100) [ x:collection1 t:null-100] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=SomeEdisMax, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!edismax qf='title description' pf='description' mm=100% boost='pow(popularity, 0.1)' v='w1' tie=0.1}}} is a java.util.LinkedHashMap
+20553 INFO  (qtp2040418988-243-null-100) [ x:collection1 t:null-100] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=SomeEdisMax, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!edismax qf='title description' pf='description' mm=100% boost='pow(popularity, 0.1)' v='w1' tie=0.1}}}
+20565 INFO  (qtp2040418988-243-null-100) [ x:collection1 t:null-100] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+20565 INFO  (qtp2040418988-243-null-100) [ x:collection1 t:null-100] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+20565 INFO  (qtp2040418988-243-null-100) [ x:collection1 t:null-100] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=12
+20567 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"EdisMax-model",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"SomeEdisMax"}
+]
+,
+"params":{"weights":{"SomeEdisMax":1.0}}
+}
+ 
+20568 INFO  (qtp2040418988-238-null-101) [ x:collection1 t:null-101] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@65bba75e]] for /schema/model-store
+20568 INFO  (qtp2040418988-238-null-101) [ x:collection1 t:null-101] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=EdisMax-model, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=SomeEdisMax}], params={weights={SomeEdisMax=1.0}}} is a java.util.LinkedHashMap
+20570 INFO  (qtp2040418988-238-null-101) [ x:collection1 t:null-101] o.a.s.l.s.r.ManagedModelStore adding model EdisMax-model
+20579 INFO  (qtp2040418988-238-null-101) [ x:collection1 t:null-101] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+20579 INFO  (qtp2040418988-238-null-101) [ x:collection1 t:null-101] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+20579 INFO  (qtp2040418988-238-null-101) [ x:collection1 t:null-101] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=11
+20605 INFO  (qtp2040418988-239-null-102) [ x:collection1 t:null-102] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&fl=*,+score&rows=4&rq={!ltr+model%3DEdisMax-model+reRankDocs%3D4}} hits=4 status=0 QTime=24
+20612 INFO  (qtp2040418988-240-null-103) [ x:collection1 t:null-103] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DEdisMax-model+reRankDocs%3D4}} hits=4 status=0 QTime=4
+20614 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@36269216{STOPPING}[12.1.14,sto=0]
+20614 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@49716515{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+20614 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=2043486901
+20615 INFO  (coreCloseExecutor-179-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@28d664a6 collection1
+20615 INFO  (coreCloseExecutor-179-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Oki 19, 2026 3:56:18 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+20619 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@3b7ee2{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@20dbfdc5{STOPPED}}
+20704 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testEdisMaxSolrFeature
+20710 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testEdisMaxSolrFeatureCustomMM
+20867 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+20867 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+20867 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+20868 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+20869 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@17dd3af2{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@39213613{STOPPED}}. May not be supported in future releases.
+20869 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+20869 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@17dd3af2{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@39213613{STARTED}}
+20870 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001, hostPort=34963, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-003}
+20870 ERROR (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+20870 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+20870 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+20870 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+20870 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+20870 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:19.022431946Z
+20870 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+20870 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/solr.xml
+20877 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+21963 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+21970 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-003
+22018 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@17dd3af2{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@39213613{STARTED}}
+22019 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@71be7c12{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:34963}
+22019 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@46930eea{STARTING}[12.1.14,sto=0] @1151ms
+22019 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#34963
+22067 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+22072 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/collection1
+22072 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-003/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-003/collection1/data/]
+22081 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+22107 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+22107 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+22107 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+22129 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+22131 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+22131 WARN  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+22131 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+22132 INFO  (searcherExecutor-194-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+22162 INFO  (qtp1305765575-270-null-104) [ x:collection1 t:null-104] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467811464544256)]} 0 8
+22165 INFO  (qtp1305765575-271-null-105) [ x:collection1 t:null-105] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467811475030016)]} 0 0
+22167 INFO  (qtp1305765575-272-null-106) [ x:collection1 t:null-106] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467811478175744)]} 0 0
+22170 INFO  (qtp1305765575-273-null-107) [ x:collection1 t:null-107] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467811480272896)]} 0 0
+22172 INFO  (qtp1305765575-268-null-108) [ x:collection1 t:null-108] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467811482370048)]} 0 0
+22174 INFO  (qtp1305765575-269-null-109) [ x:collection1 t:null-109] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467811484467200)]} 0 0
+22176 INFO  (qtp1305765575-270-null-110) [ x:collection1 t:null-110] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467811487612928)]} 0 0
+22178 INFO  (qtp1305765575-271-null-111) [ x:collection1 t:null-111] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467811488661504)]} 0 0
+22184 INFO  (searcherExecutor-194-thread-1-processing-collection1 null-112) [ x:collection1 t:null-112] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+22189 INFO  (qtp1305765575-272-null-112) [ x:collection1 t:null-112] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 9
+22190 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"SomeEdisMaxMM1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"q":"{!edismax qf='title' mm=1}${term}"}
+}
+ 
+22191 INFO  (qtp1305765575-273-null-113) [ x:collection1 t:null-113] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@714ad8c0] for /schema/feature-store
+22191 INFO  (qtp1305765575-273-null-113) [ x:collection1 t:null-113] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=SomeEdisMaxMM1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!edismax qf='title' mm=1}${term}}} is a java.util.LinkedHashMap
+22191 INFO  (qtp1305765575-273-null-113) [ x:collection1 t:null-113] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=SomeEdisMaxMM1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!edismax qf='title' mm=1}${term}}}
+22202 INFO  (qtp1305765575-273-null-113) [ x:collection1 t:null-113] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+22202 INFO  (qtp1305765575-273-null-113) [ x:collection1 t:null-113] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+22202 INFO  (qtp1305765575-273-null-113) [ x:collection1 t:null-113] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=11
+22203 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"SomeEdisMaxMM5",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"q":"{!edismax qf='title' mm=5}${term}"}
+}
+ 
+22204 INFO  (qtp1305765575-268-null-114) [ x:collection1 t:null-114] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@714ad8c0] for /schema/feature-store
+22204 INFO  (qtp1305765575-268-null-114) [ x:collection1 t:null-114] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=SomeEdisMaxMM5, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!edismax qf='title' mm=5}${term}}} is a java.util.LinkedHashMap
+22204 INFO  (qtp1305765575-268-null-114) [ x:collection1 t:null-114] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=SomeEdisMaxMM5, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!edismax qf='title' mm=5}${term}}}
+22217 INFO  (qtp1305765575-268-null-114) [ x:collection1 t:null-114] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestEdisMaxSolrFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+22217 INFO  (qtp1305765575-268-null-114) [ x:collection1 t:null-114] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+22217 INFO  (qtp1305765575-268-null-114) [ x:collection1 t:null-114] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+22237 INFO  (qtp1305765575-269-null-115) [ x:collection1 t:null-115] o.a.s.c.S.Request path=/query params={q=title:w1+w2+w3+w4+w5+w6+w7+w8&fl=*,features:[fv+store%3Dtest+efi.term%3D"w1+w2+w3+w4+w5+w6+w7+w8"]} hits=4 status=0 QTime=19
+22245 INFO  (qtp1305765575-270-null-116) [ x:collection1 t:null-116] o.a.s.c.S.Request path=/query params={q=title:w1+w2+w3+w4+w5+w6+w7+w8&indent=on&fl=*,features:[fv+store%3Dtest+efi.term%3D"w1+w2+w3+w4+w5+w6+w7+w8"]&wt=json} hits=4 status=0 QTime=1
+22249 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@46930eea{STOPPING}[12.1.14,sto=0]
+22249 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@71be7c12{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+22250 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=953833575
+22250 INFO  (coreCloseExecutor-201-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@71deb638 collection1
+22250 INFO  (coreCloseExecutor-201-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Oki 19, 2026 3:56:20 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+22255 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@17dd3af2{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@39213613{STOPPED}}
+22338 INFO  (TEST-TestEdisMaxSolrFeature.testEdisMaxSolrFeatureCustomMM-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testEdisMaxSolrFeatureCustomMM
+22339 INFO  (SUITE-TestEdisMaxSolrFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-3 after muting 0 log messages
+]]></system-err>
+</testsuite>

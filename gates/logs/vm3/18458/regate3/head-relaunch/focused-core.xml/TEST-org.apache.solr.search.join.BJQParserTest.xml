@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.search.join.BJQParserTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:51:23.204Z" hostname="localhost" time="1.63">
+  <properties/>
+  <testcase name="testJustParentsFilter" classname="org.apache.solr.search.join.BJQParserTest" time="0.027"/>
+  <testcase name="testScoresForParent" classname="org.apache.solr.search.join.BJQParserTest" time="0.03"/>
+  <testcase name="testToChildFilters" classname="org.apache.solr.search.join.BJQParserTest" time="0.024"/>
+  <testcase name="nullInit" classname="org.apache.solr.search.join.BJQParserTest" time="0.016"/>
+  <testcase name="testIntersectBqBjq" classname="org.apache.solr.search.join.BJQParserTest" time="0.021"/>
+  <testcase name="testJustParentsFilterInChild" classname="org.apache.solr.search.join.BJQParserTest" time="0.018"/>
+  <testcase name="testFq" classname="org.apache.solr.search.join.BJQParserTest" time="0.019"/>
+  <testcase name="testScoreNoneScoringForParent" classname="org.apache.solr.search.join.BJQParserTest" time="0.019"/>
+  <testcase name="testFull" classname="org.apache.solr.search.join.BJQParserTest" time="0.024"/>
+  <testcase name="testGrandChildren" classname="org.apache.solr.search.join.BJQParserTest" time="0.025"/>
+  <testcase name="testFilters" classname="org.apache.solr.search.join.BJQParserTest" time="0.042"/>
+  <testcase name="testFiltersCache" classname="org.apache.solr.search.join.BJQParserTest" time="0.054"/>
+  <testcase name="testScoresForChild" classname="org.apache.solr.search.join.BJQParserTest" time="0.023"/>
+  <testcase name="testWrongScoreExceptionForParent" classname="org.apache.solr.search.join.BJQParserTest" time="0.023"/>
+  <testcase name="testCacheHit" classname="org.apache.solr.search.join.BJQParserTest" time="0.073"/>
+  <testcase name="testChildrenParser" classname="org.apache.solr.search.join.BJQParserTest" time="0.025"/>
+  <testcase name="testToParentFilters" classname="org.apache.solr.search.join.BJQParserTest" time="0.024"/>
+  <testcase name="testIntersectParentBqChildBq" classname="org.apache.solr.search.join.BJQParserTest" time="0.023"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[253160 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+253170 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.join.BJQParserTest_18458C0FFEE18458-001/data-dir-13-001
+253170 WARN  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=436 numCloses=436
+253170 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-24 for ERROR logs matching regex: ignore_exception
+253171 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+253174 WARN  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+253174 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+253174 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+253174 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+253183 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+253210 WARN  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+253375 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.6 with uniqueid field id
+253420 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+253421 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+253645 WARN  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+253656 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+253675 WARN  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+253721 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.6 with uniqueid field id
+253766 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+253766 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.join.BJQParserTest_18458C0FFEE18458-001/data-dir-13-001/]
+253767 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogByteSizeMergePolicy: [LogByteSizeMergePolicy: minMergeSize=16777216, mergeFactor=43, maxMergeSize=2147483648, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=0.6177501678466797, noCFSRatio=0.2393184299320833]
+253809 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+253809 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+253809 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+253826 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=24, maxMergedSegmentMB=38.76122188568115, floorSegmentMB=0.7929706573486328, forceMergeDeletesPctAllowed=29.478725364836603, segmentsPerTier=41.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=1.0, deletesPctAllowed=32.14850426087556, targetSearchConcurrency=3
+254176 INFO  (coreLoadExecutor-1323-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+254176 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+254180 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+254180 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+254180 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+254180 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+254184 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+254188 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+254192 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+254196 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+254200 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+254201 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254220 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+254228 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[6 (1879467501070319616)]} 0 7
+254229 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[13 (1879467501079756800)]} 0 0
+254229 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[20 (1879467501079756801)]} 0 0
+254232 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254236 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 6
+254244 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[27 (1879467501087096832)]} 0 7
+254244 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[34 (1879467501095485440)]} 0 0
+254245 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[41 (1879467501095485441)]} 0 0
+254247 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254251 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 6
+254251 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.S.Request path=null params={q=*:*&wt=xml} hits=42 status=0 QTime=0
+254256 INFO  (TEST-BJQParserTest.testJustParentsFilter-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testJustParentsFilter
+254266 INFO  (TEST-BJQParserTest.testJustParentsFilter-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!parent+which%3D"parent_s:[*+TO+*]"}&wt=xml} hits=6 status=0 QTime=9
+254274 INFO  (TEST-BJQParserTest.testJustParentsFilter-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501119602688)]} 0 6
+254275 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254279 INFO  (TEST-BJQParserTest.testJustParentsFilter-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 4
+254279 INFO  (TEST-BJQParserTest.testJustParentsFilter-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testJustParentsFilter
+254283 INFO  (TEST-BJQParserTest.testScoresForParent-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testScoresForParent
+254283 INFO  (TEST-BJQParserTest.testScoresForParent-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=child_s:l&sort=score+asc&fl=score&wt=xml} hits=6 status=0 QTime=0
+254296 INFO  (TEST-BJQParserTest.testScoresForParent-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!parent+which%3D"parent_s:[*+TO+*]"+score%3DMin}child_s:l&fl=score&wt=xml} hits=6 status=0 QTime=6
+254303 INFO  (TEST-BJQParserTest.testScoresForParent-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501150011392)]} 0 6
+254305 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254308 INFO  (TEST-BJQParserTest.testScoresForParent-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 4
+254308 INFO  (TEST-BJQParserTest.testScoresForParent-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testScoresForParent
+254312 INFO  (TEST-BJQParserTest.testToChildFilters-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testToChildFilters
+254317 INFO  (TEST-BJQParserTest.testToChildFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={fq={!child+of%3D$pq+filters%3D$parent.fq++v%3D$pq}"&q=child_s:(l+m)&parent.fq=%2Bparent_s:(d+c)&pq=parent_s:[*+TO+*]&wt=xml} hits=4 status=0 QTime=4
+254319 INFO  (TEST-BJQParserTest.testToChildFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={fq={!child+of%3D$pq+filters%3D$parent.fq++v%3D$pq}"&q=child_s:(l+m)&parent.fq=%2Bparent_s:(d+c)&parent.fq=%2Bparent_s:(c+a)&pq=parent_s:[*+TO+*]&wt=xml} hits=2 status=0 QTime=0
+254327 INFO  (TEST-BJQParserTest.testToChildFilters-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501175177216)]} 0 7
+254330 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 1 ms
+254332 INFO  (TEST-BJQParserTest.testToChildFilters-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 5
+254332 INFO  (TEST-BJQParserTest.testToChildFilters-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testToChildFilters
+254337 INFO  (TEST-BJQParserTest.nullInit-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting nullInit
+254344 INFO  (TEST-BJQParserTest.nullInit-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501193003008)]} 0 6
+254346 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 1 ms
+254349 INFO  (TEST-BJQParserTest.nullInit-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 4
+254349 INFO  (TEST-BJQParserTest.nullInit-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending nullInit
+254353 INFO  (TEST-BJQParserTest.testIntersectBqBjq-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testIntersectBqBjq
+254355 INFO  (TEST-BJQParserTest.testIntersectBqBjq-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=%2Bparent_s:(e+b)+%2B_query_:"{!parent+which%3D$pq+v%3D$chq}"&chq=child_s:l&pq=parent_s:[*+TO+*]&wt=xml} hits=2 status=0 QTime=1
+254356 INFO  (TEST-BJQParserTest.testIntersectBqBjq-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={fq={!parent+which%3D$pq+v%3D$chq}"&q=parent_s:(e+b)&chq=child_s:l&pq=parent_s:[*+TO+*]&wt=xml} hits=2 status=0 QTime=0
+254357 INFO  (TEST-BJQParserTest.testIntersectBqBjq-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&fq={!parent+which%3D$pq+v%3D$chq}"&fq=parent_s:(e+b)&chq=child_s:l&pq=parent_s:[*+TO+*]&wt=xml} hits=2 status=0 QTime=0
+254364 INFO  (TEST-BJQParserTest.testIntersectBqBjq-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501213974528)]} 0 6
+254366 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254370 INFO  (TEST-BJQParserTest.testIntersectBqBjq-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 5
+254370 INFO  (TEST-BJQParserTest.testIntersectBqBjq-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testIntersectBqBjq
+254374 INFO  (TEST-BJQParserTest.testJustParentsFilterInChild-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testJustParentsFilterInChild
+254375 INFO  (TEST-BJQParserTest.testJustParentsFilterInChild-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!child+of%3D"parent_s:[*+TO+*]"}&fq=childparent_s:b&indent=on&wt=xml} hits=3 status=0 QTime=0
+254383 INFO  (TEST-BJQParserTest.testJustParentsFilterInChild-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501233897472)]} 0 7
+254385 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254388 INFO  (TEST-BJQParserTest.testJustParentsFilterInChild-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 4
+254388 INFO  (TEST-BJQParserTest.testJustParentsFilterInChild-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testJustParentsFilterInChild
+254392 INFO  (TEST-BJQParserTest.testFq-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testFq
+254393 INFO  (TEST-BJQParserTest.testFq-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!parent+which%3D$pq+v%3D$chq}&fq=parent_s:(e+b)&chq=child_s:l&pq=parent_s:[*+TO+*]&wt=xml} hits=2 status=0 QTime=0
+254395 INFO  (TEST-BJQParserTest.testFq-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=parent_s:(a+e+b)&fq={!parent+which%3D$pq+v%3D$chq}&chq=parentchild_s:(bm+ek+cl)&pq=parent_s:[*+TO+*]&wt=xml} hits=2 status=0 QTime=0
+254402 INFO  (TEST-BJQParserTest.testFq-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501253820416)]} 0 7
+254405 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254408 INFO  (TEST-BJQParserTest.testFq-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 5
+254408 INFO  (TEST-BJQParserTest.testFq-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testFq
+254412 INFO  (TEST-BJQParserTest.testScoreNoneScoringForParent-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testScoreNoneScoringForParent
+254413 INFO  (TEST-BJQParserTest.testScoreNoneScoringForParent-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!parent+which%3D"parent_s:[*+TO+*]"+score%3DNone}child_s:l&fl=score&wt=xml} hits=6 status=0 QTime=0
+254421 INFO  (TEST-BJQParserTest.testScoreNoneScoringForParent-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501272694784)]} 0 7
+254423 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254426 INFO  (TEST-BJQParserTest.testScoreNoneScoringForParent-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 4
+254426 INFO  (TEST-BJQParserTest.testScoreNoneScoringForParent-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testScoreNoneScoringForParent
+254430 INFO  (TEST-BJQParserTest.testFull-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testFull
+254431 INFO  (TEST-BJQParserTest.testFull-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!parent+which%3D"parent_s:[*+TO+*]"}child_s:l&wt=xml} hits=6 status=0 QTime=0
+254439 INFO  (TEST-BJQParserTest.testFull-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501292617728)]} 0 7
+254441 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254450 INFO  (TEST-BJQParserTest.testFull-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+254450 INFO  (TEST-BJQParserTest.testFull-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testFull
+254454 INFO  (TEST-BJQParserTest.testGrandChildren-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testGrandChildren
+254455 INFO  (TEST-BJQParserTest.testGrandChildren-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!parent+which%3D$parentfilter+v%3D$children}&children={!parent+which%3D$childrenfilter+v%3D$grandchildren}&grandchildren=grand_s:x&parentfilter=parent_s:[*+TO+*]&childrenfilter=child_s:[*+TO+*]&wt=xml} hits=6 status=0 QTime=0
+254457 INFO  (TEST-BJQParserTest.testGrandChildren-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=%2Bparent_s:(a+e+b)+%2B_query_:"{!parent+which%3D$pq+v%3D$chq}"&chq={!parent+which%3D$childfilter+v%3D$grandchq}&grandchq=%2Bgrand_s:z+%2Bgrand_parentchild_s:(b*+e*+c*)&pq=parent_s:[*+TO+*]&childfilter=child_s:[*+TO+*]&wt=xml} hits=2 status=0 QTime=1
+254465 INFO  (TEST-BJQParserTest.testGrandChildren-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501319880704)]} 0 7
+254468 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 1 ms
+254475 INFO  (TEST-BJQParserTest.testGrandChildren-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 9
+254475 INFO  (TEST-BJQParserTest.testGrandChildren-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testGrandChildren
+254479 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testFilters
+254480 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+param%3D$child.fq+v%3D$gchq}&child.fq=childparent_s:e&child.fq=child_s:l&gchq=child_s:[*+TO+*]&wt=xml} hits=1 status=0 QTime=0
+254481 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+param%3D$child.fq+excludeTags%3DfirstTag+v%3D$gchq}&child.fq={!tag%3DzeroTag,firstTag}childparent_s:e&child.fq={!tag%3DsecondTag}child_s:l&gchq=child_s:[*+TO+*]&wt=xml} hits=6 status=0 QTime=0
+254496 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+param%3D$child.fq+excludeTags%3DsecondTag+v%3D$gchq}&child.fq={!tag%3DfirstTag}childparent_s:e&child.fq={!tag%3DsecondTag}child_s:l&gchq=child_s:[*+TO+*]&wt=xml} hits=3 status=0 QTime=13
+254497 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+param%3D$child.fq+excludeTags%3DfirstTag,secondTag+v%3D$gchq}&child.fq={!tag%3DfirstTag}childparent_s:e&child.fq={!tag%3DsecondTag}child_s:l&gchq=child_s:[*+TO+*]&wt=xml} hits=18 status=0 QTime=0
+254497 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+v%3D$gchq+param%3D}"&gchq=child_s:[*+TO+*]&wt=xml} hits=18 status=0 QTime=0
+254498 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+param%3D$child.fq}&child.fq={!tag%3DfirstTag}childparent_s:(e+f)&child.fq={!tag%3DsecondTag}child_s:l&wt=xml} hits=2 status=0 QTime=0
+254499 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+param%3D$child.fq+excludeTags%3DfirstTag,secondTag}&child.fq={!tag%3DfirstTag}childparent_s:(e+f)&child.fq={!tag%3DsecondTag}child_s:l&wt=xml} hits=42 status=0 QTime=0
+254499 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+param%3D$child.fq+excludeTags%3Dbot,top+v%3D$gchq}&child.fq={!tag%3DsecondTag}child_s:l&gchq={!tag%3Dtop}childparent_s:e&wt=xml} hits=6 status=0 QTime=0
+254500 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+excludeTags%3Dbot,secondTag,top+v%3D$gchq}&child.fq={!tag%3DsecondTag}child_s:l&gchq={!tag%3Dtop}childparent_s:e&wt=xml} hits=42 status=0 QTime=0
+254507 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501363920896)]} 0 7
+254510 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254518 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+254518 INFO  (TEST-BJQParserTest.testFilters-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testFilters
+254522 INFO  (TEST-BJQParserTest.testFiltersCache-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testFiltersCache
+254523 INFO  (TEST-BJQParserTest.testFiltersCache-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+param%3D$child.fq+v%3D$gchq}&child.fq=childparent_s:e&child.fq=child_s:l&gchq=child_s:[*+TO+*]&wt=xml} hits=1 status=0 QTime=0
+254536 INFO  (TEST-BJQParserTest.testFiltersCache-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[12275 (1879467501393281024)]} 0 7
+254539 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254548 INFO  (TEST-BJQParserTest.testFiltersCache-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+254548 INFO  (TEST-BJQParserTest.testFiltersCache-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!filters+param%3D$child.fq+v%3D$gchq}&child.fq=childparent_s:e&child.fq=child_s:l&gchq=child_s:[*+TO+*]&wt=xml} hits=2 status=0 QTime=0
+254562 INFO  (TEST-BJQParserTest.testFiltersCache-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501421592576)]} 0 6
+254564 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254572 INFO  (TEST-BJQParserTest.testFiltersCache-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 9
+254572 INFO  (TEST-BJQParserTest.testFiltersCache-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testFiltersCache
+254576 INFO  (TEST-BJQParserTest.testScoresForChild-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testScoresForChild
+254576 INFO  (TEST-BJQParserTest.testScoresForChild-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=parent_s:a&sort=score+asc&fl=score&wt=xml} hits=1 status=0 QTime=0
+254577 INFO  (TEST-BJQParserTest.testScoresForChild-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!child+of%3D"parent_s:[*+TO+*]"}parent_s:a&fl=score&wt=xml} hits=6 status=0 QTime=0
+254584 INFO  (TEST-BJQParserTest.testScoresForChild-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501445709824)]} 0 6
+254586 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254595 INFO  (TEST-BJQParserTest.testScoresForChild-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+254595 INFO  (TEST-BJQParserTest.testScoresForChild-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testScoresForChild
+254599 INFO  (TEST-BJQParserTest.testWrongScoreExceptionForParent-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testWrongScoreExceptionForParent
+254599 INFO  (TEST-BJQParserTest.testWrongScoreExceptionForParent-seed#[18458C0FFEE18458]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-25 for ERROR logs matching regex: .
+254600 INFO  (TEST-BJQParserTest.testWrongScoreExceptionForParent-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!parent+which%3D"parent_s:[*+TO+*]"+score%3D}child_s:l&fl=score&wt=xml} status=400 QTime=0
+254600 INFO  (TEST-BJQParserTest.testWrongScoreExceptionForParent-seed#[18458C0FFEE18458]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-25 after muting 1 log messages
+254607 INFO  (TEST-BJQParserTest.testWrongScoreExceptionForParent-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501469827072)]} 0 6
+254609 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254617 INFO  (TEST-BJQParserTest.testWrongScoreExceptionForParent-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 9
+254618 INFO  (TEST-BJQParserTest.testWrongScoreExceptionForParent-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testWrongScoreExceptionForParent
+254622 INFO  (TEST-BJQParserTest.testCacheHit-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testCacheHit
+254647 INFO  (TEST-BJQParserTest.testCacheHit-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!parent+which%3D"parent_s:([a+TO+c]+[d+TO+f])"}&wt=xml} hits=6 status=0 QTime=0
+254648 INFO  (TEST-BJQParserTest.testCacheHit-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&fq={!parent+which%3D"parent_s:([a+TO+c]+[d+TO+f])"}&wt=xml} hits=6 status=0 QTime=0
+254652 INFO  (TEST-BJQParserTest.testCacheHit-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&fq={!parent+which%3D"parent_s:([a+TO+c]+[d+TO+f])"}child_s:l&wt=xml} hits=6 status=0 QTime=0
+254680 INFO  (TEST-BJQParserTest.testCacheHit-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501545324544)]} 0 6
+254682 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254691 INFO  (TEST-BJQParserTest.testCacheHit-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+254691 INFO  (TEST-BJQParserTest.testCacheHit-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testCacheHit
+254695 INFO  (TEST-BJQParserTest.testChildrenParser-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testChildrenParser
+254696 INFO  (TEST-BJQParserTest.testChildrenParser-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!child+of%3D"parent_s:[*+TO+*]"}parent_s:a&fq=NOT+grand_s:[*+TO+*]&wt=xml} hits=3 status=0 QTime=0
+254697 INFO  (TEST-BJQParserTest.testChildrenParser-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!child+of%3D"parent_s:[*+TO+*]"}parent_s:b&fq=-parentchild_s:bm&fq=-grand_s:*&wt=xml} hits=2 status=0 QTime=0
+254705 INFO  (TEST-BJQParserTest.testChildrenParser-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501571538944)]} 0 7
+254707 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+254715 INFO  (TEST-BJQParserTest.testChildrenParser-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+254715 INFO  (TEST-BJQParserTest.testChildrenParser-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testChildrenParser
+254719 INFO  (TEST-BJQParserTest.testToParentFilters-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testToParentFilters
+254721 INFO  (TEST-BJQParserTest.testToParentFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={fq={!parent+filters%3D$child.fq+which%3D$pq+v%3D$chq}"&q=parent_s:(e+b)&child.fq=%2Bchildparent_s:e+%2Bchild_s:l&chq=child_s:[*+TO+*]&pq=parent_s:[*+TO+*]&wt=xml} hits=1 status=0 QTime=1
+254722 INFO  (TEST-BJQParserTest.testToParentFilters-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={fq={!parent+filters%3D$child.fq+which%3D$pq+v%3D$chq}"&q=parent_s:(e+b)&child.fq=childparent_s:e&child.fq=child_s:l&chq=child_s:[*+TO+*]&pq=parent_s:[*+TO+*]&wt=xml} hits=1 status=0 QTime=0
+254729 INFO  (TEST-BJQParserTest.testToParentFilters-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501596704768)]} 0 7
+254732 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 1 ms
+254740 INFO  (TEST-BJQParserTest.testToParentFilters-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+254740 INFO  (TEST-BJQParserTest.testToParentFilters-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testToParentFilters
+254744 INFO  (TEST-BJQParserTest.testIntersectParentBqChildBq-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testIntersectParentBqChildBq
+254745 INFO  (TEST-BJQParserTest.testIntersectParentBqChildBq-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=%2Bparent_s:(a+e+b)+%2B_query_:"{!parent+which%3D$pq+v%3D$chq}"&chq=parentchild_s:(bm+ek+cl)&pq=parent_s:[*+TO+*]&wt=xml} hits=2 status=0 QTime=0
+254752 INFO  (TEST-BJQParserTest.testIntersectParentBqChildBq-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[12275 (-1879467501621870592)]} 0 7
+254755 INFO  (searcherExecutor-1325-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 1 ms
+254763 INFO  (TEST-BJQParserTest.testIntersectParentBqChildBq-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+254764 INFO  (TEST-BJQParserTest.testIntersectParentBqChildBq-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testIntersectParentBqChildBq
+254764 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+254764 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=23409010
+254764 INFO  (coreCloseExecutor-1331-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@751edf6a collection1
+254764 INFO  (coreCloseExecutor-1331-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+yar 19, 2026 10:51:24 SUBAKA io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+254774 INFO  (SUITE-BJQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-24 after muting 0 log messages
+]]></system-err>
+</testsuite>

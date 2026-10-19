@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:56:47.877Z" hostname="localhost" time="7.411">
+  <properties/>
+  <testcase name="interleavingLtrNotSupportedAlgorithmTest" classname="org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving" time="0.815"/>
+  <testcase name="defaultAlgorithm_shouldApplyTeamDraftInterleaving" classname="org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving" time="1.417"/>
+  <testcase name="interleavingLtrTooManyModelsTest" classname="org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving" time="2.143"/>
+  <testcase name="teamDraftAlgorithm_shouldApplyTeamDraftInterleaving" classname="org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving" time="0.883"/>
+  <testcase name="interleavingLtrModelIsEmptyTest" classname="org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving" time="2.117"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[49747 INFO  (SUITE-TestLTRQParserInterleaving-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+49757 INFO  (SUITE-TestLTRQParserInterleaving-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/data-dir-6-001
+49757 WARN  (SUITE-TestLTRQParserInterleaving-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=2 numCloses=2
+49757 INFO  (SUITE-TestLTRQParserInterleaving-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-6 for ERROR logs matching regex: ignore_exception
+49758 INFO  (SUITE-TestLTRQParserInterleaving-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+49760 WARN  (SUITE-TestLTRQParserInterleaving-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+49760 INFO  (SUITE-TestLTRQParserInterleaving-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+49760 INFO  (SUITE-TestLTRQParserInterleaving-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+49764 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting interleavingLtrNotSupportedAlgorithmTest
+49920 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+49920 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+49920 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+49921 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+49921 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@319b2ba8{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@43dca4bb{STOPPED}}. May not be supported in future releases.
+49922 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+49922 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@319b2ba8{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@43dca4bb{STARTED}}
+49922 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001, hostPort=42603, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-002}
+49922 ERROR (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+49922 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+49922 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+49923 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+49923 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+49923 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:48.075083690Z
+49923 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+49923 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/solr.xml
+49930 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+49930 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+50081 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+50088 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-002
+50144 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@319b2ba8{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@43dca4bb{STARTED}}
+50144 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@59ea1840{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:42603}
+50144 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@1606592{STARTING}[12.1.14,sto=0] @224ms
+50144 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#42603
+50204 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+50210 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1
+50210 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-002/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-002/collection1/data/]
+50220 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+50254 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+50254 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+50254 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+50275 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50277 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+50277 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+50277 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+50277 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+50277 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+50278 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+50278 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+50278 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+50278 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+50278 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+50278 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+50278 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+50278 INFO  (searcherExecutor-681-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+50308 INFO  (qtp1814220473-938-null-401) [ x:collection1 t:null-401] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467840977764352)]} 0 7
+50311 INFO  (qtp1814220473-939-null-402) [ x:collection1 t:null-402] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467840988250112)]} 0 0
+50312 INFO  (qtp1814220473-940-null-403) [ x:collection1 t:null-403] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467840990347264)]} 0 0
+50314 INFO  (qtp1814220473-941-null-404) [ x:collection1 t:null-404] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467840992444416)]} 0 0
+50315 INFO  (qtp1814220473-936-null-405) [ x:collection1 t:null-405] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467840993492992)]} 0 0
+50318 INFO  (qtp1814220473-937-null-406) [ x:collection1 t:null-406] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467840995590144)]} 0 1
+50319 INFO  (qtp1814220473-938-null-407) [ x:collection1 t:null-407] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467840997687296)]} 0 0
+50321 INFO  (qtp1814220473-939-null-408) [ x:collection1 t:null-408] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467840999784448)]} 0 0
+50326 INFO  (searcherExecutor-681-thread-1-processing-collection1 null-409) [ x:collection1 t:null-409] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+50330 INFO  (qtp1814220473-940-null-409) [ x:collection1 t:null-409] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 7
+50331 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}88888"]}
+}
+ 
+50331 INFO  (qtp1814220473-941-null-410) [ x:collection1 t:null-410] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b] for /schema/feature-store
+50331 INFO  (qtp1814220473-941-null-410) [ x:collection1 t:null-410] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}} is a java.util.LinkedHashMap
+50331 INFO  (qtp1814220473-941-null-410) [ x:collection1 t:null-410] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}}
+50344 INFO  (qtp1814220473-941-null-410) [ x:collection1 t:null-410] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50344 INFO  (qtp1814220473-941-null-410) [ x:collection1 t:null-410] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+50344 INFO  (qtp1814220473-941-null-410) [ x:collection1 t:null-410] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=12
+50344 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+50345 INFO  (qtp1814220473-936-null-411) [ x:collection1 t:null-411] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b] for /schema/feature-store
+50345 INFO  (qtp1814220473-936-null-411) [ x:collection1 t:null-411] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+50345 INFO  (qtp1814220473-936-null-411) [ x:collection1 t:null-411] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+50359 INFO  (qtp1814220473-936-null-411) [ x:collection1 t:null-411] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50360 INFO  (qtp1814220473-936-null-411) [ x:collection1 t:null-411] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+50360 INFO  (qtp1814220473-936-null-411) [ x:collection1 t:null-411] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+50360 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureAB",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+50361 INFO  (qtp1814220473-937-null-412) [ x:collection1 t:null-412] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b] for /schema/feature-store
+50361 INFO  (qtp1814220473-937-null-412) [ x:collection1 t:null-412] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+50361 INFO  (qtp1814220473-937-null-412) [ x:collection1 t:null-412] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+50375 INFO  (qtp1814220473-937-null-412) [ x:collection1 t:null-412] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50375 INFO  (qtp1814220473-937-null-412) [ x:collection1 t:null-412] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+50375 INFO  (qtp1814220473-937-null-412) [ x:collection1 t:null-412] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+50376 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+50377 INFO  (qtp1814220473-938-null-413) [ x:collection1 t:null-413] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b] for /schema/feature-store
+50377 INFO  (qtp1814220473-938-null-413) [ x:collection1 t:null-413] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+50377 INFO  (qtp1814220473-938-null-413) [ x:collection1 t:null-413] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+50391 INFO  (qtp1814220473-938-null-413) [ x:collection1 t:null-413] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50391 INFO  (qtp1814220473-938-null-413) [ x:collection1 t:null-413] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+50391 INFO  (qtp1814220473-938-null-413) [ x:collection1 t:null-413] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+50392 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=description}${user_query}"]}
+}
+ 
+50392 INFO  (qtp1814220473-939-null-414) [ x:collection1 t:null-414] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b] for /schema/feature-store
+50393 INFO  (qtp1814220473-939-null-414) [ x:collection1 t:null-414] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}} is a java.util.LinkedHashMap
+50393 INFO  (qtp1814220473-939-null-414) [ x:collection1 t:null-414] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}}
+50406 INFO  (qtp1814220473-939-null-414) [ x:collection1 t:null-414] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50406 INFO  (qtp1814220473-939-null-414) [ x:collection1 t:null-414] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+50406 INFO  (qtp1814220473-939-null-414) [ x:collection1 t:null-414] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+50407 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC1",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+50407 INFO  (qtp1814220473-940-null-415) [ x:collection1 t:null-415] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b] for /schema/feature-store
+50407 INFO  (qtp1814220473-940-null-415) [ x:collection1 t:null-415] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+50407 INFO  (qtp1814220473-940-null-415) [ x:collection1 t:null-415] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+50422 INFO  (qtp1814220473-940-null-415) [ x:collection1 t:null-415] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50422 INFO  (qtp1814220473-940-null-415) [ x:collection1 t:null-415] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+50422 INFO  (qtp1814220473-940-null-415) [ x:collection1 t:null-415] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+50422 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC2",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}1"]}
+}
+ 
+50423 INFO  (qtp1814220473-941-null-416) [ x:collection1 t:null-416] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b] for /schema/feature-store
+50423 INFO  (qtp1814220473-941-null-416) [ x:collection1 t:null-416] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}} is a java.util.LinkedHashMap
+50423 INFO  (qtp1814220473-941-null-416) [ x:collection1 t:null-416] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}}
+50437 INFO  (qtp1814220473-941-null-416) [ x:collection1 t:null-416] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50437 INFO  (qtp1814220473-941-null-416) [ x:collection1 t:null-416] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+50437 INFO  (qtp1814220473-941-null-416) [ x:collection1 t:null-416] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+50437 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelA",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureA1"},
+	{ "name":"featureA2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureA1":3.0, "featureA2":9.0, "featureAB":27.0}}
+}
+ 
+50438 INFO  (qtp1814220473-936-null-417) [ x:collection1 t:null-417] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b]] for /schema/model-store
+50438 INFO  (qtp1814220473-936-null-417) [ x:collection1 t:null-417] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelA, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureA1}, {name=featureA2}, {name=featureAB}], params={weights={featureA1=3.0, featureA2=9.0, featureAB=27.0}}} is a java.util.LinkedHashMap
+50440 INFO  (qtp1814220473-936-null-417) [ x:collection1 t:null-417] o.a.s.l.s.r.ManagedModelStore adding model modelA
+50449 INFO  (qtp1814220473-936-null-417) [ x:collection1 t:null-417] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50449 INFO  (qtp1814220473-936-null-417) [ x:collection1 t:null-417] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+50449 INFO  (qtp1814220473-936-null-417) [ x:collection1 t:null-417] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=11
+50450 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelB",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureB1"},
+	{ "name":"featureB2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureB1":2.0, "featureB2":4.0, "featureAB":8.0}}
+}
+ 
+50450 INFO  (qtp1814220473-937-null-418) [ x:collection1 t:null-418] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b]] for /schema/model-store
+50450 INFO  (qtp1814220473-937-null-418) [ x:collection1 t:null-418] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelB, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureB1}, {name=featureB2}, {name=featureAB}], params={weights={featureB1=2.0, featureB2=4.0, featureAB=8.0}}} is a java.util.LinkedHashMap
+50451 INFO  (qtp1814220473-937-null-418) [ x:collection1 t:null-418] o.a.s.l.s.r.ManagedModelStore adding model modelB
+50464 INFO  (qtp1814220473-937-null-418) [ x:collection1 t:null-418] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50464 INFO  (qtp1814220473-937-null-418) [ x:collection1 t:null-418] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+50464 INFO  (qtp1814220473-937-null-418) [ x:collection1 t:null-418] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=14
+50465 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelC",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureC1"},
+	{ "name":"featureC2"}
+]
+,
+"params":{"weights":{"featureC1":5.0, "featureC2":25.0}}
+}
+ 
+50465 INFO  (qtp1814220473-938-null-419) [ x:collection1 t:null-419] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelB, modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@1a6a4c3b]] for /schema/model-store
+50466 INFO  (qtp1814220473-938-null-419) [ x:collection1 t:null-419] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelC, store=featureStore2, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureC1}, {name=featureC2}], params={weights={featureC1=5.0, featureC2=25.0}}} is a java.util.LinkedHashMap
+50466 INFO  (qtp1814220473-938-null-419) [ x:collection1 t:null-419] o.a.s.l.s.r.ManagedModelStore adding model modelC
+50479 INFO  (qtp1814220473-938-null-419) [ x:collection1 t:null-419] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+50479 INFO  (qtp1814220473-938-null-419) [ x:collection1 t:null-419] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+50479 INFO  (qtp1814220473-938-null-419) [ x:collection1 t:null-419] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=13
+50481 ERROR (qtp1814220473-939-null-420) [ x:collection1 t:null-420] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Unknown Interleaving algorithm: unsupported
+	at org.apache.solr.ltr.interleaving.Interleaving.getImplementation(Interleaving.java:44)
+	at org.apache.solr.ltr.search.LTRQParserPlugin$LTRQParser.parse(LTRQParserPlugin.java:250)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:202)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+50481 INFO  (qtp1814220473-939-null-420) [ x:collection1 t:null-420] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'title'+mm%3D100%25+v%3D'bloomberg'+tie%3D0.1}&fl=*,+score&rows=4&rq={!ltr+model%3DmodelA+model%3DmodelB+interleavingAlgorithm%3Dunsupported+reRankDocs%3D100}} status=400 QTime=1
+50483 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@1606592{STOPPING}[12.1.14,sto=0]
+50483 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@59ea1840{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+50483 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1206681557
+50483 INFO  (coreCloseExecutor-688-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@21e39699 collection1
+50484 INFO  (coreCloseExecutor-688-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+అక్టో 19, 2026 4:56:48 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+50487 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@319b2ba8{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@43dca4bb{STOPPED}}
+50574 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrNotSupportedAlgorithmTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending interleavingLtrNotSupportedAlgorithmTest
+50579 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting defaultAlgorithm_shouldApplyTeamDraftInterleaving
+50734 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+50734 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+50734 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+50735 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+50736 WARN  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@3517ff81{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@19d4ceed{STOPPED}}. May not be supported in future releases.
+50736 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+50736 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@3517ff81{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@19d4ceed{STARTED}}
+50737 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001, hostPort=46053, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-003}
+50737 ERROR (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+50737 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+50737 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+50737 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+50737 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+50737 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:48.889557422Z
+50737 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+50737 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/solr.xml
+50744 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+51466 WARN  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+51473 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-003
+51524 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@3517ff81{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@19d4ceed{STARTED}}
+51524 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@29b3a25e{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:46053}
+51524 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@4baead8f{STARTING}[12.1.14,sto=0] @790ms
+51524 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#46053
+51576 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+51582 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1
+51583 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-003/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-003/collection1/data/]
+51595 WARN  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+51623 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+51623 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+51623 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+51646 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+51648 WARN  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+51648 WARN  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+51648 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+51649 INFO  (searcherExecutor-703-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+51679 INFO  (qtp330087126-968-null-421) [ x:collection1 t:null-421] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467842415362048)]} 0 8
+51682 INFO  (qtp330087126-969-null-422) [ x:collection1 t:null-422] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467842426896384)]} 0 0
+51684 INFO  (qtp330087126-970-null-423) [ x:collection1 t:null-423] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467842428993536)]} 0 0
+51686 INFO  (qtp330087126-971-null-424) [ x:collection1 t:null-424] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467842430042112)]} 0 0
+51687 INFO  (qtp330087126-966-null-425) [ x:collection1 t:null-425] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467842432139264)]} 0 0
+51689 INFO  (qtp330087126-967-null-426) [ x:collection1 t:null-426] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467842434236416)]} 0 0
+51690 INFO  (qtp330087126-968-null-427) [ x:collection1 t:null-427] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467842435284992)]} 0 0
+51692 INFO  (qtp330087126-969-null-428) [ x:collection1 t:null-428] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467842437382144)]} 0 0
+51698 INFO  (searcherExecutor-703-thread-1-processing-collection1 null-429) [ x:collection1 t:null-429] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+51701 INFO  (qtp330087126-970-null-429) [ x:collection1 t:null-429] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 8
+51702 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}88888"]}
+}
+ 
+51703 INFO  (qtp330087126-971-null-430) [ x:collection1 t:null-430] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc] for /schema/feature-store
+51703 INFO  (qtp330087126-971-null-430) [ x:collection1 t:null-430] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}} is a java.util.LinkedHashMap
+51703 INFO  (qtp330087126-971-null-430) [ x:collection1 t:null-430] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}}
+51713 INFO  (qtp330087126-971-null-430) [ x:collection1 t:null-430] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51713 INFO  (qtp330087126-971-null-430) [ x:collection1 t:null-430] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+51713 INFO  (qtp330087126-971-null-430) [ x:collection1 t:null-430] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=10
+51713 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+51714 INFO  (qtp330087126-966-null-431) [ x:collection1 t:null-431] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc] for /schema/feature-store
+51714 INFO  (qtp330087126-966-null-431) [ x:collection1 t:null-431] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+51714 INFO  (qtp330087126-966-null-431) [ x:collection1 t:null-431] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+51728 INFO  (qtp330087126-966-null-431) [ x:collection1 t:null-431] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51728 INFO  (qtp330087126-966-null-431) [ x:collection1 t:null-431] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+51728 INFO  (qtp330087126-966-null-431) [ x:collection1 t:null-431] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+51728 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureAB",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+51729 INFO  (qtp330087126-967-null-432) [ x:collection1 t:null-432] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc] for /schema/feature-store
+51729 INFO  (qtp330087126-967-null-432) [ x:collection1 t:null-432] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+51729 INFO  (qtp330087126-967-null-432) [ x:collection1 t:null-432] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+51742 INFO  (qtp330087126-967-null-432) [ x:collection1 t:null-432] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51742 INFO  (qtp330087126-967-null-432) [ x:collection1 t:null-432] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+51742 INFO  (qtp330087126-967-null-432) [ x:collection1 t:null-432] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+51743 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+51744 INFO  (qtp330087126-968-null-433) [ x:collection1 t:null-433] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc] for /schema/feature-store
+51744 INFO  (qtp330087126-968-null-433) [ x:collection1 t:null-433] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+51744 INFO  (qtp330087126-968-null-433) [ x:collection1 t:null-433] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+51757 INFO  (qtp330087126-968-null-433) [ x:collection1 t:null-433] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51757 INFO  (qtp330087126-968-null-433) [ x:collection1 t:null-433] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+51757 INFO  (qtp330087126-968-null-433) [ x:collection1 t:null-433] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+51758 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=description}${user_query}"]}
+}
+ 
+51759 INFO  (qtp330087126-969-null-434) [ x:collection1 t:null-434] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc] for /schema/feature-store
+51759 INFO  (qtp330087126-969-null-434) [ x:collection1 t:null-434] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}} is a java.util.LinkedHashMap
+51759 INFO  (qtp330087126-969-null-434) [ x:collection1 t:null-434] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}}
+51772 INFO  (qtp330087126-969-null-434) [ x:collection1 t:null-434] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51773 INFO  (qtp330087126-969-null-434) [ x:collection1 t:null-434] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+51773 INFO  (qtp330087126-969-null-434) [ x:collection1 t:null-434] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+51773 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC1",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+51774 INFO  (qtp330087126-970-null-435) [ x:collection1 t:null-435] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc] for /schema/feature-store
+51774 INFO  (qtp330087126-970-null-435) [ x:collection1 t:null-435] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+51774 INFO  (qtp330087126-970-null-435) [ x:collection1 t:null-435] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+51788 INFO  (qtp330087126-970-null-435) [ x:collection1 t:null-435] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51788 INFO  (qtp330087126-970-null-435) [ x:collection1 t:null-435] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+51788 INFO  (qtp330087126-970-null-435) [ x:collection1 t:null-435] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+51788 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC2",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}1"]}
+}
+ 
+51789 INFO  (qtp330087126-971-null-436) [ x:collection1 t:null-436] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc] for /schema/feature-store
+51789 INFO  (qtp330087126-971-null-436) [ x:collection1 t:null-436] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}} is a java.util.LinkedHashMap
+51789 INFO  (qtp330087126-971-null-436) [ x:collection1 t:null-436] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}}
+51803 INFO  (qtp330087126-971-null-436) [ x:collection1 t:null-436] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51803 INFO  (qtp330087126-971-null-436) [ x:collection1 t:null-436] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+51803 INFO  (qtp330087126-971-null-436) [ x:collection1 t:null-436] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+51804 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelA",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureA1"},
+	{ "name":"featureA2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureA1":3.0, "featureA2":9.0, "featureAB":27.0}}
+}
+ 
+51804 INFO  (qtp330087126-966-null-437) [ x:collection1 t:null-437] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc]] for /schema/model-store
+51805 INFO  (qtp330087126-966-null-437) [ x:collection1 t:null-437] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelA, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureA1}, {name=featureA2}, {name=featureAB}], params={weights={featureA1=3.0, featureA2=9.0, featureAB=27.0}}} is a java.util.LinkedHashMap
+51805 INFO  (qtp330087126-966-null-437) [ x:collection1 t:null-437] o.a.s.l.s.r.ManagedModelStore adding model modelA
+51814 INFO  (qtp330087126-966-null-437) [ x:collection1 t:null-437] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51814 INFO  (qtp330087126-966-null-437) [ x:collection1 t:null-437] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+51814 INFO  (qtp330087126-966-null-437) [ x:collection1 t:null-437] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=10
+51815 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelB",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureB1"},
+	{ "name":"featureB2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureB1":2.0, "featureB2":4.0, "featureAB":8.0}}
+}
+ 
+51816 INFO  (qtp330087126-967-null-438) [ x:collection1 t:null-438] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc]] for /schema/model-store
+51816 INFO  (qtp330087126-967-null-438) [ x:collection1 t:null-438] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelB, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureB1}, {name=featureB2}, {name=featureAB}], params={weights={featureB1=2.0, featureB2=4.0, featureAB=8.0}}} is a java.util.LinkedHashMap
+51816 INFO  (qtp330087126-967-null-438) [ x:collection1 t:null-438] o.a.s.l.s.r.ManagedModelStore adding model modelB
+51829 INFO  (qtp330087126-967-null-438) [ x:collection1 t:null-438] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51829 INFO  (qtp330087126-967-null-438) [ x:collection1 t:null-438] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+51829 INFO  (qtp330087126-967-null-438) [ x:collection1 t:null-438] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=13
+51830 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelC",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureC1"},
+	{ "name":"featureC2"}
+]
+,
+"params":{"weights":{"featureC1":5.0, "featureC2":25.0}}
+}
+ 
+51830 INFO  (qtp330087126-968-null-439) [ x:collection1 t:null-439] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelB, modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@1eefc3fc]] for /schema/model-store
+51831 INFO  (qtp330087126-968-null-439) [ x:collection1 t:null-439] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelC, store=featureStore2, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureC1}, {name=featureC2}], params={weights={featureC1=5.0, featureC2=25.0}}} is a java.util.LinkedHashMap
+51831 INFO  (qtp330087126-968-null-439) [ x:collection1 t:null-439] o.a.s.l.s.r.ManagedModelStore adding model modelC
+51844 INFO  (qtp330087126-968-null-439) [ x:collection1 t:null-439] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+51844 INFO  (qtp330087126-968-null-439) [ x:collection1 t:null-439] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+51844 INFO  (qtp330087126-968-null-439) [ x:collection1 t:null-439] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=13
+51886 INFO  (qtp330087126-969-null-440) [ x:collection1 t:null-440] o.a.s.c.S.Request path=/query params={q=*:*&debug=true&indent=on&fl=*,+score,interleavingPick:[interleaving]&fq={!terms+f%3Dtitle}w1&rows=10&wt=json&rq={!ltr+model%3DmodelA+model%3DmodelB+reRankDocs%3D10+efi.user_query%3D'w5'}} hits=5 status=0 QTime=40
+51889 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@4baead8f{STOPPING}[12.1.14,sto=0]
+51889 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@29b3a25e{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+51889 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=896014696
+51890 INFO  (coreCloseExecutor-710-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@141c6d95 collection1
+51891 INFO  (coreCloseExecutor-710-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+అక్టో 19, 2026 4:56:50 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+51904 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@3517ff81{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@19d4ceed{STOPPED}}
+51992 INFO  (TEST-TestLTRQParserInterleaving.defaultAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending defaultAlgorithm_shouldApplyTeamDraftInterleaving
+51997 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting interleavingLtrTooManyModelsTest
+52152 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+52152 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+52152 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+52153 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+52153 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@5296f5a8{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@fdf70dc{STOPPED}}. May not be supported in future releases.
+52154 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+52154 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@5296f5a8{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@fdf70dc{STARTED}}
+52154 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001, hostPort=41561, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-004}
+52155 ERROR (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+52155 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+52155 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+52155 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+52155 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+52155 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:50.307220836Z
+52155 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+52155 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/solr.xml
+52161 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+53690 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+53697 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-004
+53744 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@5296f5a8{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@fdf70dc{STARTED}}
+53745 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@10d70dac{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:41561}
+53745 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@a1f9f49{STARTING}[12.1.14,sto=0] @1592ms
+53745 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#41561
+53792 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+53798 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1
+53798 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-004/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-004/collection1/data/]
+53806 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+53832 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+53832 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+53832 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+53852 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+53854 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+53855 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+53855 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+53855 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+53855 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+53855 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+53855 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+53855 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+53855 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+53855 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+53855 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+53855 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+53856 INFO  (searcherExecutor-725-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+53885 INFO  (qtp771302831-998-null-441) [ x:collection1 t:null-441] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467844729569280)]} 0 7
+53887 INFO  (qtp771302831-999-null-442) [ x:collection1 t:null-442] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467844739006464)]} 0 0
+53889 INFO  (qtp771302831-1000-null-443) [ x:collection1 t:null-443] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467844741103616)]} 0 0
+53891 INFO  (qtp771302831-1001-null-444) [ x:collection1 t:null-444] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467844742152192)]} 0 0
+53892 INFO  (qtp771302831-996-null-445) [ x:collection1 t:null-445] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467844744249344)]} 0 0
+53894 INFO  (qtp771302831-997-null-446) [ x:collection1 t:null-446] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467844746346496)]} 0 0
+53895 INFO  (qtp771302831-998-null-447) [ x:collection1 t:null-447] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467844747395072)]} 0 0
+53897 INFO  (qtp771302831-999-null-448) [ x:collection1 t:null-448] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467844749492224)]} 0 0
+53902 INFO  (searcherExecutor-725-thread-1-processing-collection1 null-449) [ x:collection1 t:null-449] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+53906 INFO  (qtp771302831-1000-null-449) [ x:collection1 t:null-449] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 8
+53907 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}88888"]}
+}
+ 
+53907 INFO  (qtp771302831-1001-null-450) [ x:collection1 t:null-450] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba] for /schema/feature-store
+53907 INFO  (qtp771302831-1001-null-450) [ x:collection1 t:null-450] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}} is a java.util.LinkedHashMap
+53908 INFO  (qtp771302831-1001-null-450) [ x:collection1 t:null-450] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}}
+53917 INFO  (qtp771302831-1001-null-450) [ x:collection1 t:null-450] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+53917 INFO  (qtp771302831-1001-null-450) [ x:collection1 t:null-450] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+53917 INFO  (qtp771302831-1001-null-450) [ x:collection1 t:null-450] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=10
+53918 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+53918 INFO  (qtp771302831-996-null-451) [ x:collection1 t:null-451] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba] for /schema/feature-store
+53919 INFO  (qtp771302831-996-null-451) [ x:collection1 t:null-451] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+53919 INFO  (qtp771302831-996-null-451) [ x:collection1 t:null-451] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+53931 INFO  (qtp771302831-996-null-451) [ x:collection1 t:null-451] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+53931 INFO  (qtp771302831-996-null-451) [ x:collection1 t:null-451] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+53931 INFO  (qtp771302831-996-null-451) [ x:collection1 t:null-451] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=12
+53931 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureAB",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+53932 INFO  (qtp771302831-997-null-452) [ x:collection1 t:null-452] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba] for /schema/feature-store
+53932 INFO  (qtp771302831-997-null-452) [ x:collection1 t:null-452] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+53932 INFO  (qtp771302831-997-null-452) [ x:collection1 t:null-452] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+53945 INFO  (qtp771302831-997-null-452) [ x:collection1 t:null-452] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+53945 INFO  (qtp771302831-997-null-452) [ x:collection1 t:null-452] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+53945 INFO  (qtp771302831-997-null-452) [ x:collection1 t:null-452] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+53945 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+53946 INFO  (qtp771302831-998-null-453) [ x:collection1 t:null-453] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba] for /schema/feature-store
+53946 INFO  (qtp771302831-998-null-453) [ x:collection1 t:null-453] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+53946 INFO  (qtp771302831-998-null-453) [ x:collection1 t:null-453] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+53959 INFO  (qtp771302831-998-null-453) [ x:collection1 t:null-453] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+53959 INFO  (qtp771302831-998-null-453) [ x:collection1 t:null-453] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+53959 INFO  (qtp771302831-998-null-453) [ x:collection1 t:null-453] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+53960 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=description}${user_query}"]}
+}
+ 
+53960 INFO  (qtp771302831-999-null-454) [ x:collection1 t:null-454] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba] for /schema/feature-store
+53961 INFO  (qtp771302831-999-null-454) [ x:collection1 t:null-454] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}} is a java.util.LinkedHashMap
+53961 INFO  (qtp771302831-999-null-454) [ x:collection1 t:null-454] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}}
+53974 INFO  (qtp771302831-999-null-454) [ x:collection1 t:null-454] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+53974 INFO  (qtp771302831-999-null-454) [ x:collection1 t:null-454] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+53974 INFO  (qtp771302831-999-null-454) [ x:collection1 t:null-454] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+53974 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC1",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+53975 INFO  (qtp771302831-1000-null-455) [ x:collection1 t:null-455] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba] for /schema/feature-store
+53975 INFO  (qtp771302831-1000-null-455) [ x:collection1 t:null-455] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+53975 INFO  (qtp771302831-1000-null-455) [ x:collection1 t:null-455] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+53989 INFO  (qtp771302831-1000-null-455) [ x:collection1 t:null-455] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+53989 INFO  (qtp771302831-1000-null-455) [ x:collection1 t:null-455] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+53989 INFO  (qtp771302831-1000-null-455) [ x:collection1 t:null-455] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+53990 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC2",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}1"]}
+}
+ 
+53991 INFO  (qtp771302831-1001-null-456) [ x:collection1 t:null-456] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba] for /schema/feature-store
+53991 INFO  (qtp771302831-1001-null-456) [ x:collection1 t:null-456] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}} is a java.util.LinkedHashMap
+53991 INFO  (qtp771302831-1001-null-456) [ x:collection1 t:null-456] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}}
+54004 INFO  (qtp771302831-1001-null-456) [ x:collection1 t:null-456] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54004 INFO  (qtp771302831-1001-null-456) [ x:collection1 t:null-456] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+54004 INFO  (qtp771302831-1001-null-456) [ x:collection1 t:null-456] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+54005 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelA",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureA1"},
+	{ "name":"featureA2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureA1":3.0, "featureA2":9.0, "featureAB":27.0}}
+}
+ 
+54006 INFO  (qtp771302831-996-null-457) [ x:collection1 t:null-457] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba]] for /schema/model-store
+54006 INFO  (qtp771302831-996-null-457) [ x:collection1 t:null-457] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelA, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureA1}, {name=featureA2}, {name=featureAB}], params={weights={featureA1=3.0, featureA2=9.0, featureAB=27.0}}} is a java.util.LinkedHashMap
+54006 INFO  (qtp771302831-996-null-457) [ x:collection1 t:null-457] o.a.s.l.s.r.ManagedModelStore adding model modelA
+54016 INFO  (qtp771302831-996-null-457) [ x:collection1 t:null-457] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54016 INFO  (qtp771302831-996-null-457) [ x:collection1 t:null-457] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+54016 INFO  (qtp771302831-996-null-457) [ x:collection1 t:null-457] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=10
+54016 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelB",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureB1"},
+	{ "name":"featureB2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureB1":2.0, "featureB2":4.0, "featureAB":8.0}}
+}
+ 
+54017 INFO  (qtp771302831-997-null-458) [ x:collection1 t:null-458] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba]] for /schema/model-store
+54017 INFO  (qtp771302831-997-null-458) [ x:collection1 t:null-458] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelB, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureB1}, {name=featureB2}, {name=featureAB}], params={weights={featureB1=2.0, featureB2=4.0, featureAB=8.0}}} is a java.util.LinkedHashMap
+54017 INFO  (qtp771302831-997-null-458) [ x:collection1 t:null-458] o.a.s.l.s.r.ManagedModelStore adding model modelB
+54030 INFO  (qtp771302831-997-null-458) [ x:collection1 t:null-458] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54030 INFO  (qtp771302831-997-null-458) [ x:collection1 t:null-458] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+54030 INFO  (qtp771302831-997-null-458) [ x:collection1 t:null-458] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=13
+54031 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelC",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureC1"},
+	{ "name":"featureC2"}
+]
+,
+"params":{"weights":{"featureC1":5.0, "featureC2":25.0}}
+}
+ 
+54032 INFO  (qtp771302831-998-null-459) [ x:collection1 t:null-459] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelB, modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@65dfd1ba]] for /schema/model-store
+54032 INFO  (qtp771302831-998-null-459) [ x:collection1 t:null-459] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelC, store=featureStore2, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureC1}, {name=featureC2}], params={weights={featureC1=5.0, featureC2=25.0}}} is a java.util.LinkedHashMap
+54032 INFO  (qtp771302831-998-null-459) [ x:collection1 t:null-459] o.a.s.l.s.r.ManagedModelStore adding model modelC
+54045 INFO  (qtp771302831-998-null-459) [ x:collection1 t:null-459] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54045 INFO  (qtp771302831-998-null-459) [ x:collection1 t:null-459] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+54045 INFO  (qtp771302831-998-null-459) [ x:collection1 t:null-459] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=13
+54047 ERROR (qtp771302831-999-null-460) [ x:collection1 t:null-460] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Must provide one or two models in the request
+	at org.apache.solr.ltr.search.LTRQParserPlugin$LTRQParser.parse(LTRQParserPlugin.java:159)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:202)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+54048 INFO  (qtp771302831-999-null-460) [ x:collection1 t:null-460] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'title'+mm%3D100%25+v%3D'bloomberg'+tie%3D0.1}&fl=*,+score&rows=4&rq={!ltr+model%3DmodelA+model%3DmodelB+model%3DC+reRankDocs%3D100}} status=400 QTime=1
+54049 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@a1f9f49{STOPPING}[12.1.14,sto=0]
+54049 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@10d70dac{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+54049 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=152640668
+54050 INFO  (coreCloseExecutor-732-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@ebb44cb collection1
+54050 INFO  (coreCloseExecutor-732-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+అక్టో 19, 2026 4:56:52 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+54053 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@5296f5a8{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@fdf70dc{STOPPED}}
+54136 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrTooManyModelsTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending interleavingLtrTooManyModelsTest
+54141 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting teamDraftAlgorithm_shouldApplyTeamDraftInterleaving
+54295 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+54295 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+54295 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+54296 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+54296 WARN  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@70ffc490{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@18c05673{STOPPED}}. May not be supported in future releases.
+54297 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+54297 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@70ffc490{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@18c05673{STARTED}}
+54297 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001, hostPort=40311, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-005}
+54297 ERROR (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+54297 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+54297 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+54297 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+54297 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+54297 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:52.449991115Z
+54298 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+54298 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/solr.xml
+54304 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+54570 WARN  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+54577 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-005
+54624 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@70ffc490{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@18c05673{STARTED}}
+54625 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@1b205d7c{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:40311}
+54625 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@6c3081bf{STARTING}[12.1.14,sto=0] @329ms
+54625 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#40311
+54672 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+54678 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1
+54678 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-005/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-005/collection1/data/]
+54686 WARN  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+54712 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+54712 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+54712 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+54733 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54735 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+54735 WARN  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+54735 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+54735 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+54735 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+54735 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+54735 WARN  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+54735 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+54735 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+54735 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+54735 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+54736 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+54736 INFO  (searcherExecutor-747-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+54764 INFO  (qtp1766202925-1028-null-461) [ x:collection1 t:null-461] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467845650219008)]} 0 8
+54766 INFO  (qtp1766202925-1029-null-462) [ x:collection1 t:null-462] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467845660704768)]} 0 0
+54768 INFO  (qtp1766202925-1030-null-463) [ x:collection1 t:null-463] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467845662801920)]} 0 0
+54769 INFO  (qtp1766202925-1031-null-464) [ x:collection1 t:null-464] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467845663850496)]} 0 0
+54771 INFO  (qtp1766202925-1026-null-465) [ x:collection1 t:null-465] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467845665947648)]} 0 0
+54772 INFO  (qtp1766202925-1027-null-466) [ x:collection1 t:null-466] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467845666996224)]} 0 0
+54774 INFO  (qtp1766202925-1028-null-467) [ x:collection1 t:null-467] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467845669093376)]} 0 0
+54775 INFO  (qtp1766202925-1029-null-468) [ x:collection1 t:null-468] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467845670141952)]} 0 0
+54780 INFO  (searcherExecutor-747-thread-1-processing-collection1 null-469) [ x:collection1 t:null-469] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+54784 INFO  (qtp1766202925-1030-null-469) [ x:collection1 t:null-469] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 7
+54785 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}88888"]}
+}
+ 
+54785 INFO  (qtp1766202925-1031-null-470) [ x:collection1 t:null-470] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8] for /schema/feature-store
+54786 INFO  (qtp1766202925-1031-null-470) [ x:collection1 t:null-470] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}} is a java.util.LinkedHashMap
+54786 INFO  (qtp1766202925-1031-null-470) [ x:collection1 t:null-470] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}}
+54795 INFO  (qtp1766202925-1031-null-470) [ x:collection1 t:null-470] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54795 INFO  (qtp1766202925-1031-null-470) [ x:collection1 t:null-470] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+54795 INFO  (qtp1766202925-1031-null-470) [ x:collection1 t:null-470] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=10
+54796 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+54797 INFO  (qtp1766202925-1026-null-471) [ x:collection1 t:null-471] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8] for /schema/feature-store
+54797 INFO  (qtp1766202925-1026-null-471) [ x:collection1 t:null-471] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+54797 INFO  (qtp1766202925-1026-null-471) [ x:collection1 t:null-471] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+54810 INFO  (qtp1766202925-1026-null-471) [ x:collection1 t:null-471] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54810 INFO  (qtp1766202925-1026-null-471) [ x:collection1 t:null-471] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+54810 INFO  (qtp1766202925-1026-null-471) [ x:collection1 t:null-471] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+54811 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureAB",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+54811 INFO  (qtp1766202925-1027-null-472) [ x:collection1 t:null-472] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8] for /schema/feature-store
+54812 INFO  (qtp1766202925-1027-null-472) [ x:collection1 t:null-472] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+54812 INFO  (qtp1766202925-1027-null-472) [ x:collection1 t:null-472] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+54824 INFO  (qtp1766202925-1027-null-472) [ x:collection1 t:null-472] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54824 INFO  (qtp1766202925-1027-null-472) [ x:collection1 t:null-472] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+54824 INFO  (qtp1766202925-1027-null-472) [ x:collection1 t:null-472] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=12
+54825 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+54825 INFO  (qtp1766202925-1028-null-473) [ x:collection1 t:null-473] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8] for /schema/feature-store
+54825 INFO  (qtp1766202925-1028-null-473) [ x:collection1 t:null-473] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+54825 INFO  (qtp1766202925-1028-null-473) [ x:collection1 t:null-473] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+54839 INFO  (qtp1766202925-1028-null-473) [ x:collection1 t:null-473] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54839 INFO  (qtp1766202925-1028-null-473) [ x:collection1 t:null-473] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+54839 INFO  (qtp1766202925-1028-null-473) [ x:collection1 t:null-473] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+54839 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=description}${user_query}"]}
+}
+ 
+54840 INFO  (qtp1766202925-1029-null-474) [ x:collection1 t:null-474] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8] for /schema/feature-store
+54840 INFO  (qtp1766202925-1029-null-474) [ x:collection1 t:null-474] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}} is a java.util.LinkedHashMap
+54840 INFO  (qtp1766202925-1029-null-474) [ x:collection1 t:null-474] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}}
+54854 INFO  (qtp1766202925-1029-null-474) [ x:collection1 t:null-474] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54854 INFO  (qtp1766202925-1029-null-474) [ x:collection1 t:null-474] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+54854 INFO  (qtp1766202925-1029-null-474) [ x:collection1 t:null-474] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+54855 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC1",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+54855 INFO  (qtp1766202925-1030-null-475) [ x:collection1 t:null-475] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8] for /schema/feature-store
+54855 INFO  (qtp1766202925-1030-null-475) [ x:collection1 t:null-475] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+54855 INFO  (qtp1766202925-1030-null-475) [ x:collection1 t:null-475] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+54868 INFO  (qtp1766202925-1030-null-475) [ x:collection1 t:null-475] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54869 INFO  (qtp1766202925-1030-null-475) [ x:collection1 t:null-475] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+54869 INFO  (qtp1766202925-1030-null-475) [ x:collection1 t:null-475] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+54869 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC2",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}1"]}
+}
+ 
+54870 INFO  (qtp1766202925-1031-null-476) [ x:collection1 t:null-476] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8] for /schema/feature-store
+54870 INFO  (qtp1766202925-1031-null-476) [ x:collection1 t:null-476] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}} is a java.util.LinkedHashMap
+54870 INFO  (qtp1766202925-1031-null-476) [ x:collection1 t:null-476] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}}
+54883 INFO  (qtp1766202925-1031-null-476) [ x:collection1 t:null-476] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54883 INFO  (qtp1766202925-1031-null-476) [ x:collection1 t:null-476] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+54883 INFO  (qtp1766202925-1031-null-476) [ x:collection1 t:null-476] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+54883 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelA",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureA1"},
+	{ "name":"featureA2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureA1":3.0, "featureA2":9.0, "featureAB":27.0}}
+}
+ 
+54884 INFO  (qtp1766202925-1026-null-477) [ x:collection1 t:null-477] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8]] for /schema/model-store
+54884 INFO  (qtp1766202925-1026-null-477) [ x:collection1 t:null-477] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelA, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureA1}, {name=featureA2}, {name=featureAB}], params={weights={featureA1=3.0, featureA2=9.0, featureAB=27.0}}} is a java.util.LinkedHashMap
+54884 INFO  (qtp1766202925-1026-null-477) [ x:collection1 t:null-477] o.a.s.l.s.r.ManagedModelStore adding model modelA
+54894 INFO  (qtp1766202925-1026-null-477) [ x:collection1 t:null-477] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54894 INFO  (qtp1766202925-1026-null-477) [ x:collection1 t:null-477] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+54894 INFO  (qtp1766202925-1026-null-477) [ x:collection1 t:null-477] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=10
+54894 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelB",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureB1"},
+	{ "name":"featureB2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureB1":2.0, "featureB2":4.0, "featureAB":8.0}}
+}
+ 
+54895 INFO  (qtp1766202925-1027-null-478) [ x:collection1 t:null-478] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8]] for /schema/model-store
+54895 INFO  (qtp1766202925-1027-null-478) [ x:collection1 t:null-478] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelB, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureB1}, {name=featureB2}, {name=featureAB}], params={weights={featureB1=2.0, featureB2=4.0, featureAB=8.0}}} is a java.util.LinkedHashMap
+54895 INFO  (qtp1766202925-1027-null-478) [ x:collection1 t:null-478] o.a.s.l.s.r.ManagedModelStore adding model modelB
+54909 INFO  (qtp1766202925-1027-null-478) [ x:collection1 t:null-478] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54909 INFO  (qtp1766202925-1027-null-478) [ x:collection1 t:null-478] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+54909 INFO  (qtp1766202925-1027-null-478) [ x:collection1 t:null-478] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=14
+54910 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelC",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureC1"},
+	{ "name":"featureC2"}
+]
+,
+"params":{"weights":{"featureC1":5.0, "featureC2":25.0}}
+}
+ 
+54910 INFO  (qtp1766202925-1028-null-479) [ x:collection1 t:null-479] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelB, modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@51ccc3b8]] for /schema/model-store
+54910 INFO  (qtp1766202925-1028-null-479) [ x:collection1 t:null-479] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelC, store=featureStore2, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureC1}, {name=featureC2}], params={weights={featureC1=5.0, featureC2=25.0}}} is a java.util.LinkedHashMap
+54910 INFO  (qtp1766202925-1028-null-479) [ x:collection1 t:null-479] o.a.s.l.s.r.ManagedModelStore adding model modelC
+54924 INFO  (qtp1766202925-1028-null-479) [ x:collection1 t:null-479] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+54924 INFO  (qtp1766202925-1028-null-479) [ x:collection1 t:null-479] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+54924 INFO  (qtp1766202925-1028-null-479) [ x:collection1 t:null-479] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=14
+54929 INFO  (qtp1766202925-1029-null-480) [ x:collection1 t:null-480] o.a.s.c.S.Request path=/query params={q=*:*&debug=true&indent=on&fl=*,+score,interleavingPick:[interleaving]&fq={!terms+f%3Dtitle}w1&rows=10&wt=json&rq={!ltr+model%3DmodelA+model%3DmodelB+reRankDocs%3D10+interleavingAlgorithm%3DTeamDraft+efi.user_query%3D'w5'}} hits=5 status=0 QTime=3
+54931 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@6c3081bf{STOPPING}[12.1.14,sto=0]
+54931 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@1b205d7c{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+54931 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=260090354
+54932 INFO  (coreCloseExecutor-754-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@7d6f1b8d collection1
+54932 INFO  (coreCloseExecutor-754-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+అక్టో 19, 2026 4:56:53 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+54935 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@70ffc490{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@18c05673{STOPPED}}
+55019 INFO  (TEST-TestLTRQParserInterleaving.teamDraftAlgorithm_shouldApplyTeamDraftInterleaving-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending teamDraftAlgorithm_shouldApplyTeamDraftInterleaving
+55024 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting interleavingLtrModelIsEmptyTest
+55186 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+55186 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+55187 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+55187 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+55188 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@1fd9296e{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@5716ac54{STOPPED}}. May not be supported in future releases.
+55188 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+55189 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@1fd9296e{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@5716ac54{STARTED}}
+55189 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001, hostPort=34745, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-006}
+55189 ERROR (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+55189 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+55189 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+55189 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+55189 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+55189 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:53.341643260Z
+55189 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+55190 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/solr.xml
+55196 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+56689 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+56696 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-006
+56746 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@1fd9296e{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@5716ac54{STARTED}}
+56747 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@a0ab9f4{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:34745}
+56747 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@5f4fd711{STARTING}[12.1.14,sto=0] @1560ms
+56747 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#34745
+56793 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+56799 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1
+56799 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-006/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-006/collection1/data/]
+56807 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+56833 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+56833 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+56833 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+56854 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+56856 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+56856 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+56856 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+56856 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+56856 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+56856 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+56856 WARN  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+56856 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+56856 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+56856 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+56857 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+56857 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+56857 INFO  (searcherExecutor-769-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+56885 INFO  (qtp168187833-1058-null-481) [ x:collection1 t:null-481] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467847875297280)]} 0 7
+56887 INFO  (qtp168187833-1059-null-482) [ x:collection1 t:null-482] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467847884734464)]} 0 0
+56889 INFO  (qtp168187833-1060-null-483) [ x:collection1 t:null-483] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467847885783040)]} 0 0
+56890 INFO  (qtp168187833-1061-null-484) [ x:collection1 t:null-484] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467847887880192)]} 0 0
+56892 INFO  (qtp168187833-1056-null-485) [ x:collection1 t:null-485] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467847889977344)]} 0 0
+56893 INFO  (qtp168187833-1057-null-486) [ x:collection1 t:null-486] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467847891025920)]} 0 0
+56895 INFO  (qtp168187833-1058-null-487) [ x:collection1 t:null-487] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467847893123072)]} 0 0
+56896 INFO  (qtp168187833-1059-null-488) [ x:collection1 t:null-488] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467847894171648)]} 0 0
+56902 INFO  (searcherExecutor-769-thread-1-processing-collection1 null-489) [ x:collection1 t:null-489] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+56905 INFO  (qtp168187833-1060-null-489) [ x:collection1 t:null-489] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 7
+56906 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}88888"]}
+}
+ 
+56907 INFO  (qtp168187833-1061-null-490) [ x:collection1 t:null-490] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890] for /schema/feature-store
+56907 INFO  (qtp168187833-1061-null-490) [ x:collection1 t:null-490] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}} is a java.util.LinkedHashMap
+56907 INFO  (qtp168187833-1061-null-490) [ x:collection1 t:null-490] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}88888]}}
+56917 INFO  (qtp168187833-1061-null-490) [ x:collection1 t:null-490] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+56917 INFO  (qtp168187833-1061-null-490) [ x:collection1 t:null-490] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+56917 INFO  (qtp168187833-1061-null-490) [ x:collection1 t:null-490] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=10
+56917 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureA2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+56918 INFO  (qtp168187833-1056-null-491) [ x:collection1 t:null-491] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890] for /schema/feature-store
+56918 INFO  (qtp168187833-1056-null-491) [ x:collection1 t:null-491] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+56918 INFO  (qtp168187833-1056-null-491) [ x:collection1 t:null-491] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureA2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+56932 INFO  (qtp168187833-1056-null-491) [ x:collection1 t:null-491] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+56932 INFO  (qtp168187833-1056-null-491) [ x:collection1 t:null-491] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+56932 INFO  (qtp168187833-1056-null-491) [ x:collection1 t:null-491] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+56933 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureAB",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=title}${user_query}"]}
+}
+ 
+56934 INFO  (qtp168187833-1057-null-492) [ x:collection1 t:null-492] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890] for /schema/feature-store
+56934 INFO  (qtp168187833-1057-null-492) [ x:collection1 t:null-492] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}} is a java.util.LinkedHashMap
+56934 INFO  (qtp168187833-1057-null-492) [ x:collection1 t:null-492] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureAB, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=title}${user_query}]}}
+56947 INFO  (qtp168187833-1057-null-492) [ x:collection1 t:null-492] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+56947 INFO  (qtp168187833-1057-null-492) [ x:collection1 t:null-492] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+56947 INFO  (qtp168187833-1057-null-492) [ x:collection1 t:null-492] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+56948 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB1",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+56948 INFO  (qtp168187833-1058-null-493) [ x:collection1 t:null-493] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890] for /schema/feature-store
+56949 INFO  (qtp168187833-1058-null-493) [ x:collection1 t:null-493] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+56949 INFO  (qtp168187833-1058-null-493) [ x:collection1 t:null-493] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB1, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+56961 INFO  (qtp168187833-1058-null-493) [ x:collection1 t:null-493] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+56961 INFO  (qtp168187833-1058-null-493) [ x:collection1 t:null-493] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+56961 INFO  (qtp168187833-1058-null-493) [ x:collection1 t:null-493] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=12
+56962 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureB2",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=description}${user_query}"]}
+}
+ 
+56962 INFO  (qtp168187833-1059-null-494) [ x:collection1 t:null-494] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890] for /schema/feature-store
+56962 INFO  (qtp168187833-1059-null-494) [ x:collection1 t:null-494] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}} is a java.util.LinkedHashMap
+56962 INFO  (qtp168187833-1059-null-494) [ x:collection1 t:null-494] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureB2, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=description}${user_query}]}}
+56976 INFO  (qtp168187833-1059-null-494) [ x:collection1 t:null-494] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+56976 INFO  (qtp168187833-1059-null-494) [ x:collection1 t:null-494] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+56976 INFO  (qtp168187833-1059-null-494) [ x:collection1 t:null-494] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+56976 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC1",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}6"]}
+}
+ 
+56977 INFO  (qtp168187833-1060-null-495) [ x:collection1 t:null-495] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890] for /schema/feature-store
+56977 INFO  (qtp168187833-1060-null-495) [ x:collection1 t:null-495] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}} is a java.util.LinkedHashMap
+56977 INFO  (qtp168187833-1060-null-495) [ x:collection1 t:null-495] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC1, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}6]}}
+56990 INFO  (qtp168187833-1060-null-495) [ x:collection1 t:null-495] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+56990 INFO  (qtp168187833-1060-null-495) [ x:collection1 t:null-495] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+56990 INFO  (qtp168187833-1060-null-495) [ x:collection1 t:null-495] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+56991 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"featureC2",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"fq":["{!terms f=popularity}1"]}
+}
+ 
+56991 INFO  (qtp168187833-1061-null-496) [ x:collection1 t:null-496] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890] for /schema/feature-store
+56991 INFO  (qtp168187833-1061-null-496) [ x:collection1 t:null-496] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}} is a java.util.LinkedHashMap
+56991 INFO  (qtp168187833-1061-null-496) [ x:collection1 t:null-496] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=featureC2, store=featureStore2, class=org.apache.solr.ltr.feature.SolrFeature, params={fq=[{!terms f=popularity}1]}}
+57005 INFO  (qtp168187833-1061-null-496) [ x:collection1 t:null-496] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+57005 INFO  (qtp168187833-1061-null-496) [ x:collection1 t:null-496] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+57005 INFO  (qtp168187833-1061-null-496) [ x:collection1 t:null-496] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=14
+57006 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelA",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureA1"},
+	{ "name":"featureA2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureA1":3.0, "featureA2":9.0, "featureAB":27.0}}
+}
+ 
+57006 INFO  (qtp168187833-1056-null-497) [ x:collection1 t:null-497] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890]] for /schema/model-store
+57006 INFO  (qtp168187833-1056-null-497) [ x:collection1 t:null-497] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelA, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureA1}, {name=featureA2}, {name=featureAB}], params={weights={featureA1=3.0, featureA2=9.0, featureAB=27.0}}} is a java.util.LinkedHashMap
+57007 INFO  (qtp168187833-1056-null-497) [ x:collection1 t:null-497] o.a.s.l.s.r.ManagedModelStore adding model modelA
+57016 INFO  (qtp168187833-1056-null-497) [ x:collection1 t:null-497] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+57016 INFO  (qtp168187833-1056-null-497) [ x:collection1 t:null-497] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+57016 INFO  (qtp168187833-1056-null-497) [ x:collection1 t:null-497] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=9
+57016 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelB",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureB1"},
+	{ "name":"featureB2"},
+	{ "name":"featureAB"}
+]
+,
+"params":{"weights":{"featureB1":2.0, "featureB2":4.0, "featureAB":8.0}}
+}
+ 
+57017 INFO  (qtp168187833-1057-null-498) [ x:collection1 t:null-498] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890]] for /schema/model-store
+57017 INFO  (qtp168187833-1057-null-498) [ x:collection1 t:null-498] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelB, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureB1}, {name=featureB2}, {name=featureAB}], params={weights={featureB1=2.0, featureB2=4.0, featureAB=8.0}}} is a java.util.LinkedHashMap
+57017 INFO  (qtp168187833-1057-null-498) [ x:collection1 t:null-498] o.a.s.l.s.r.ManagedModelStore adding model modelB
+57030 INFO  (qtp168187833-1057-null-498) [ x:collection1 t:null-498] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+57030 INFO  (qtp168187833-1057-null-498) [ x:collection1 t:null-498] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+57030 INFO  (qtp168187833-1057-null-498) [ x:collection1 t:null-498] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=13
+57030 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"modelC",
+"store":"featureStore2",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"featureC1"},
+	{ "name":"featureC2"}
+]
+,
+"params":{"weights":{"featureC1":5.0, "featureC2":25.0}}
+}
+ 
+57031 INFO  (qtp168187833-1058-null-499) [ x:collection1 t:null-499] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[modelB, modelA]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@40139890]] for /schema/model-store
+57031 INFO  (qtp168187833-1058-null-499) [ x:collection1 t:null-499] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=modelC, store=featureStore2, class=org.apache.solr.ltr.model.LinearModel, features=[{name=featureC1}, {name=featureC2}], params={weights={featureC1=5.0, featureC2=25.0}}} is a java.util.LinkedHashMap
+57031 INFO  (qtp168187833-1058-null-499) [ x:collection1 t:null-499] o.a.s.l.s.r.ManagedModelStore adding model modelC
+57045 INFO  (qtp168187833-1058-null-499) [ x:collection1 t:null-499] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.interleaving.TestLTRQParserInterleaving_18458C0FFEE18458-001/tempDir-001/collection1/conf
+57045 INFO  (qtp168187833-1058-null-499) [ x:collection1 t:null-499] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+57045 INFO  (qtp168187833-1058-null-499) [ x:collection1 t:null-499] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=13
+57047 ERROR (qtp168187833-1059-null-500) [ x:collection1 t:null-500] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: the model 1 is empty
+	at org.apache.solr.ltr.search.LTRQParserPlugin$LTRQParser.parse(LTRQParserPlugin.java:172)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:202)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+57047 INFO  (qtp168187833-1059-null-500) [ x:collection1 t:null-500] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'title'+mm%3D100%25+v%3D'bloomberg'+tie%3D0.1}&fl=*,+score&rows=4&rq={!ltr+model%3DmodelA+model%3D""+reRankDocs%3D100}} status=400 QTime=1
+57048 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@5f4fd711{STOPPING}[12.1.14,sto=0]
+57048 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@a0ab9f4{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+57049 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=669808966
+57049 INFO  (coreCloseExecutor-776-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@ca1dfe6 collection1
+57049 INFO  (coreCloseExecutor-776-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+అక్టో 19, 2026 4:56:55 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+57053 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@1fd9296e{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@5716ac54{STOPPED}}
+57136 INFO  (TEST-TestLTRQParserInterleaving.interleavingLtrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending interleavingLtrModelIsEmptyTest
+57138 INFO  (SUITE-TestLTRQParserInterleaving-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-6 after muting 0 log messages
+]]></system-err>
+</testsuite>

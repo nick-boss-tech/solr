@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.ltr.feature.TestOriginalScoreFeature" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:56:20.621Z" hostname="localhost" time="5.033">
+  <properties/>
+  <testcase name="testOriginalScoreWithNonScoringFeatures" classname="org.apache.solr.ltr.feature.TestOriginalScoreFeature" time="2.854"/>
+  <testcase name="testParamsToMap" classname="org.apache.solr.ltr.feature.TestOriginalScoreFeature" time="0.881"/>
+  <testcase name="testOriginalScore" classname="org.apache.solr.ltr.feature.TestOriginalScoreFeature" time="1.262"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[22490 INFO  (SUITE-TestOriginalScoreFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+22501 INFO  (SUITE-TestOriginalScoreFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/data-dir-4-001
+22501 WARN  (SUITE-TestOriginalScoreFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=4 numCloses=4
+22501 INFO  (SUITE-TestOriginalScoreFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-4 for ERROR logs matching regex: ignore_exception
+22502 INFO  (SUITE-TestOriginalScoreFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+22504 WARN  (SUITE-TestOriginalScoreFeature-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+22504 INFO  (SUITE-TestOriginalScoreFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+22504 INFO  (SUITE-TestOriginalScoreFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+22508 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testOriginalScoreWithNonScoringFeatures
+22659 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+22659 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+22659 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+22660 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+22660 WARN  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@1e7612b6{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@65a8aee1{STOPPED}}. May not be supported in future releases.
+22661 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+22661 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@1e7612b6{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@65a8aee1{STARTED}}
+22661 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001, hostPort=35835, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-002}
+22662 ERROR (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+22662 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+22662 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+22662 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+22662 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+22662 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:20.814211092Z
+22662 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+22662 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/solr.xml
+22669 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+22669 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+24912 WARN  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+24919 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-002
+24969 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@1e7612b6{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@65a8aee1{STARTED}}
+24969 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@7e2fa1b9{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:35835}
+24969 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@7143d6c9{STARTING}[12.1.14,sto=0] @2310ms
+24969 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#35835
+25018 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+25024 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1
+25025 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-002/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-002/collection1/data/]
+25037 WARN  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+25063 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+25063 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+25063 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+25083 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+25086 WARN  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+25086 WARN  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+25086 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+25087 INFO  (searcherExecutor-217-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+25117 INFO  (qtp902319194-302-null-117) [ x:collection1 t:null-117] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467814563086336)]} 0 8
+25120 INFO  (qtp902319194-303-null-118) [ x:collection1 t:null-118] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467814574620672)]} 0 0
+25123 INFO  (qtp902319194-304-null-119) [ x:collection1 t:null-119] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467814576717824)]} 0 0
+25125 INFO  (qtp902319194-305-null-120) [ x:collection1 t:null-120] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467814579863552)]} 0 0
+25127 INFO  (qtp902319194-300-null-121) [ x:collection1 t:null-121] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467814581960704)]} 0 0
+25129 INFO  (qtp902319194-301-null-122) [ x:collection1 t:null-122] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467814584057856)]} 0 0
+25131 INFO  (qtp902319194-302-null-123) [ x:collection1 t:null-123] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467814586155008)]} 0 0
+25134 INFO  (qtp902319194-303-null-124) [ x:collection1 t:null-124] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467814589300736)]} 0 0
+25140 INFO  (searcherExecutor-217-thread-1-processing-collection1 null-125) [ x:collection1 t:null-125] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+25144 INFO  (qtp902319194-304-null-125) [ x:collection1 t:null-125] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 8
+25151 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"origScore",
+"store":"store2",
+"class":"org.apache.solr.ltr.feature.OriginalScoreFeature",
+"params":{}
+}
+ 
+25152 INFO  (qtp902319194-305-null-126) [ x:collection1 t:null-126] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@2c94ed6c] for /schema/feature-store
+25152 INFO  (qtp902319194-305-null-126) [ x:collection1 t:null-126] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=origScore, store=store2, class=org.apache.solr.ltr.feature.OriginalScoreFeature, params={}} is a java.util.LinkedHashMap
+25152 INFO  (qtp902319194-305-null-126) [ x:collection1 t:null-126] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=origScore, store=store2, class=org.apache.solr.ltr.feature.OriginalScoreFeature, params={}}
+25168 INFO  (qtp902319194-305-null-126) [ x:collection1 t:null-126] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+25168 INFO  (qtp902319194-305-null-126) [ x:collection1 t:null-126] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+25168 INFO  (qtp902319194-305-null-126) [ x:collection1 t:null-126] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=15
+25168 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"c2",
+"store":"store2",
+"class":"org.apache.solr.ltr.feature.ValueFeature",
+"params":{"value":2.0}
+}
+ 
+25169 INFO  (qtp902319194-300-null-127) [ x:collection1 t:null-127] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@2c94ed6c] for /schema/feature-store
+25169 INFO  (qtp902319194-300-null-127) [ x:collection1 t:null-127] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=c2, store=store2, class=org.apache.solr.ltr.feature.ValueFeature, params={value=2.0}} is a java.util.LinkedHashMap
+25169 INFO  (qtp902319194-300-null-127) [ x:collection1 t:null-127] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=c2, store=store2, class=org.apache.solr.ltr.feature.ValueFeature, params={value=2.0}}
+25185 INFO  (qtp902319194-300-null-127) [ x:collection1 t:null-127] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+25185 INFO  (qtp902319194-300-null-127) [ x:collection1 t:null-127] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+25185 INFO  (qtp902319194-300-null-127) [ x:collection1 t:null-127] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=16
+25186 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"origScore",
+"store":"store2",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"origScore"}
+]
+,
+"params":{"weights":{"origScore":1.0}}
+}
+ 
+25187 INFO  (qtp902319194-301-null-128) [ x:collection1 t:null-128] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@2c94ed6c]] for /schema/model-store
+25187 INFO  (qtp902319194-301-null-128) [ x:collection1 t:null-128] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=origScore, store=store2, class=org.apache.solr.ltr.model.LinearModel, features=[{name=origScore}], params={weights={origScore=1.0}}} is a java.util.LinkedHashMap
+25189 INFO  (qtp902319194-301-null-128) [ x:collection1 t:null-128] o.a.s.l.s.r.ManagedModelStore adding model origScore
+25199 INFO  (qtp902319194-301-null-128) [ x:collection1 t:null-128] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+25199 INFO  (qtp902319194-301-null-128) [ x:collection1 t:null-128] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+25199 INFO  (qtp902319194-301-null-128) [ x:collection1 t:null-128] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=11
+25201 INFO  (qtp902319194-302-null-129) [ x:collection1 t:null-129] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+25204 INFO  (qtp902319194-303-null-130) [ x:collection1 t:null-130] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+25206 INFO  (qtp902319194-304-null-131) [ x:collection1 t:null-131] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+25208 INFO  (qtp902319194-305-null-132) [ x:collection1 t:null-132] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+25210 INFO  (qtp902319194-300-null-133) [ x:collection1 t:null-133] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+25212 INFO  (qtp902319194-301-null-134) [ x:collection1 t:null-134] o.a.s.c.S.Request path=/query params={q=title:w1&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+25223 INFO  (qtp902319194-302-null-135) [ x:collection1 t:null-135] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=8
+25227 INFO  (qtp902319194-303-null-136) [ x:collection1 t:null-136] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25230 INFO  (qtp902319194-304-null-137) [ x:collection1 t:null-137] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25233 INFO  (qtp902319194-305-null-138) [ x:collection1 t:null-138] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25237 INFO  (qtp902319194-300-null-139) [ x:collection1 t:null-139] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25243 INFO  (qtp902319194-301-null-140) [ x:collection1 t:null-140] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25248 INFO  (qtp902319194-302-null-141) [ x:collection1 t:null-141] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25251 INFO  (qtp902319194-303-null-142) [ x:collection1 t:null-142] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25254 INFO  (qtp902319194-304-null-143) [ x:collection1 t:null-143] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25257 INFO  (qtp902319194-305-null-144) [ x:collection1 t:null-144] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25260 INFO  (qtp902319194-300-null-145) [ x:collection1 t:null-145] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25263 INFO  (qtp902319194-301-null-146) [ x:collection1 t:null-146] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25266 INFO  (qtp902319194-302-null-147) [ x:collection1 t:null-147] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DorigScore+reRankDocs%3D4}} hits=4 status=0 QTime=1
+25268 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@7143d6c9{STOPPING}[12.1.14,sto=0]
+25269 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@7e2fa1b9{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+25269 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1303778549
+25269 INFO  (coreCloseExecutor-224-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@751a4888 collection1
+25269 INFO  (coreCloseExecutor-224-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Epe 19, 2026 3:56:23 KOOSKOLINY io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+25274 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@1e7612b6{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@65a8aee1{STOPPED}}
+25358 INFO  (TEST-TestOriginalScoreFeature.testOriginalScoreWithNonScoringFeatures-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testOriginalScoreWithNonScoringFeatures
+25364 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testParamsToMap
+25516 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+25517 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+25517 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+25518 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+25518 WARN  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@434a83c1{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@2868849b{STOPPED}}. May not be supported in future releases.
+25519 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+25519 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@434a83c1{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2868849b{STARTED}}
+25519 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001, hostPort=38119, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-003}
+25519 ERROR (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+25519 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+25519 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+25519 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+25519 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+25519 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:23.671807105Z
+25520 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+25520 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/solr.xml
+25526 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+25919 WARN  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+25926 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-003
+25973 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@434a83c1{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2868849b{STARTED}}
+25973 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@5581b9b3{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:38119}
+25974 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@7284a5d9{STARTING}[12.1.14,sto=0] @456ms
+25974 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#38119
+26021 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+26027 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1
+26027 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-003/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-003/collection1/data/]
+26036 WARN  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+26064 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+26064 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+26064 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+26086 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+26088 WARN  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+26088 WARN  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+26088 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+26089 INFO  (searcherExecutor-239-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+26119 INFO  (qtp1716436049-332-null-148) [ x:collection1 t:null-148] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467815613759488)]} 0 8
+26122 INFO  (qtp1716436049-333-null-149) [ x:collection1 t:null-149] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467815624245248)]} 0 0
+26124 INFO  (qtp1716436049-334-null-150) [ x:collection1 t:null-150] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467815626342400)]} 0 0
+26126 INFO  (qtp1716436049-335-null-151) [ x:collection1 t:null-151] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467815628439552)]} 0 0
+26128 INFO  (qtp1716436049-330-null-152) [ x:collection1 t:null-152] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467815630536704)]} 0 0
+26130 INFO  (qtp1716436049-331-null-153) [ x:collection1 t:null-153] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467815633682432)]} 0 0
+26132 INFO  (qtp1716436049-332-null-154) [ x:collection1 t:null-154] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467815635779584)]} 0 0
+26134 INFO  (qtp1716436049-333-null-155) [ x:collection1 t:null-155] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467815637876736)]} 0 0
+26140 INFO  (searcherExecutor-239-thread-1-processing-collection1 null-156) [ x:collection1 t:null-156] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+26144 INFO  (qtp1716436049-334-null-156) [ x:collection1 t:null-156] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 8
+26161 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@7284a5d9{STOPPING}[12.1.14,sto=0]
+26161 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@5581b9b3{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+26161 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=474330358
+26161 INFO  (coreCloseExecutor-246-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@2d33bd04 collection1
+26162 INFO  (coreCloseExecutor-246-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Epe 19, 2026 3:56:24 KOOSKOLINY io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+26165 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@434a83c1{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@2868849b{STOPPED}}
+26240 INFO  (TEST-TestOriginalScoreFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testParamsToMap
+26245 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testOriginalScore
+26405 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+26405 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+26405 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+26406 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+26407 WARN  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@5363ca3d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@3dbe2bd7{STOPPED}}. May not be supported in future releases.
+26407 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+26407 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@5363ca3d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@3dbe2bd7{STARTED}}
+26408 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001, hostPort=35509, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-004}
+26408 ERROR (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+26408 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+26408 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+26408 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+26408 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+26408 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:24.560400974Z
+26408 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+26408 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/solr.xml
+26415 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+27121 WARN  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+27127 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-004
+27174 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@5363ca3d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@3dbe2bd7{STARTED}}
+27175 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@7c0e4c13{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:35509}
+27175 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@216b9a3{STARTING}[12.1.14,sto=0] @769ms
+27175 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#35509
+27223 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+27228 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1
+27229 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-004/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-004/collection1/data/]
+27238 WARN  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+27263 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+27263 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+27263 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+27285 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+27287 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+27287 WARN  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+27287 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+27287 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+27287 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+27287 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+27288 WARN  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+27288 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+27288 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+27288 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+27288 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+27288 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+27288 INFO  (searcherExecutor-261-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+27320 INFO  (qtp1560246603-362-null-157) [ x:collection1 t:null-157] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467816873099264)]} 0 8
+27325 INFO  (qtp1560246603-363-null-158) [ x:collection1 t:null-158] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467816885682176)]} 0 0
+27327 INFO  (qtp1560246603-364-null-159) [ x:collection1 t:null-159] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467816887779328)]} 0 0
+27331 INFO  (qtp1560246603-365-null-160) [ x:collection1 t:null-160] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467816891973632)]} 0 0
+27336 INFO  (qtp1560246603-360-null-161) [ x:collection1 t:null-161] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467816898265088)]} 0 0
+27338 INFO  (qtp1560246603-361-null-162) [ x:collection1 t:null-162] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467816900362240)]} 0 0
+27341 INFO  (qtp1560246603-362-null-163) [ x:collection1 t:null-163] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467816903507968)]} 0 0
+27343 INFO  (qtp1560246603-363-null-164) [ x:collection1 t:null-164] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467816905605120)]} 0 0
+27350 INFO  (searcherExecutor-261-thread-1-processing-collection1 null-165) [ x:collection1 t:null-165] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+27355 INFO  (qtp1560246603-364-null-165) [ x:collection1 t:null-165] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 10
+27357 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"score",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.OriginalScoreFeature",
+"params":{}
+}
+ 
+27358 INFO  (qtp1560246603-365-null-166) [ x:collection1 t:null-166] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@15017cb4] for /schema/feature-store
+27358 INFO  (qtp1560246603-365-null-166) [ x:collection1 t:null-166] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=score, store=test, class=org.apache.solr.ltr.feature.OriginalScoreFeature, params={}} is a java.util.LinkedHashMap
+27358 INFO  (qtp1560246603-365-null-166) [ x:collection1 t:null-166] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=score, store=test, class=org.apache.solr.ltr.feature.OriginalScoreFeature, params={}}
+27368 INFO  (qtp1560246603-365-null-166) [ x:collection1 t:null-166] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+27368 INFO  (qtp1560246603-365-null-166) [ x:collection1 t:null-166] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+27368 INFO  (qtp1560246603-365-null-166) [ x:collection1 t:null-166] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=10
+27369 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"originalScore",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"score"}
+]
+,
+"params":{"weights":{"score":1.0}}
+}
+ 
+27370 INFO  (qtp1560246603-360-null-167) [ x:collection1 t:null-167] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@15017cb4]] for /schema/model-store
+27370 INFO  (qtp1560246603-360-null-167) [ x:collection1 t:null-167] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=originalScore, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=score}], params={weights={score=1.0}}} is a java.util.LinkedHashMap
+27370 INFO  (qtp1560246603-360-null-167) [ x:collection1 t:null-167] o.a.s.l.s.r.ManagedModelStore adding model originalScore
+27381 INFO  (qtp1560246603-360-null-167) [ x:collection1 t:null-167] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestOriginalScoreFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+27381 INFO  (qtp1560246603-360-null-167) [ x:collection1 t:null-167] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+27381 INFO  (qtp1560246603-360-null-167) [ x:collection1 t:null-167] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=10
+27382 INFO  (qtp1560246603-361-null-168) [ x:collection1 t:null-168] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+27385 INFO  (qtp1560246603-362-null-169) [ x:collection1 t:null-169] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+27386 INFO  (qtp1560246603-363-null-170) [ x:collection1 t:null-170] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+27388 INFO  (qtp1560246603-364-null-171) [ x:collection1 t:null-171] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+27390 INFO  (qtp1560246603-365-null-172) [ x:collection1 t:null-172] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+27392 INFO  (qtp1560246603-360-null-173) [ x:collection1 t:null-173] o.a.s.c.S.Request path=/query params={q=title:w1&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+27394 INFO  (qtp1560246603-361-null-174) [ x:collection1 t:null-174] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DoriginalScore+reRankDocs%3D4}} hits=4 status=0 QTime=0
+27396 INFO  (qtp1560246603-362-null-175) [ x:collection1 t:null-175] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DoriginalScore+reRankDocs%3D4}} hits=4 status=0 QTime=0
+27398 INFO  (qtp1560246603-363-null-176) [ x:collection1 t:null-176] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DoriginalScore+reRankDocs%3D4}} hits=4 status=0 QTime=0
+27400 INFO  (qtp1560246603-364-null-177) [ x:collection1 t:null-177] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DoriginalScore+reRankDocs%3D4}} hits=4 status=0 QTime=0
+27403 INFO  (qtp1560246603-365-null-178) [ x:collection1 t:null-178] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DoriginalScore+reRankDocs%3D4}} hits=4 status=0 QTime=0
+27405 INFO  (qtp1560246603-360-null-179) [ x:collection1 t:null-179] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DoriginalScore+reRankDocs%3D4}} hits=4 status=0 QTime=0
+27407 INFO  (qtp1560246603-361-null-180) [ x:collection1 t:null-180] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DoriginalScore+reRankDocs%3D4}} hits=4 status=0 QTime=0
+27409 INFO  (qtp1560246603-362-null-181) [ x:collection1 t:null-181] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DoriginalScore+reRankDocs%3D4}} hits=4 status=0 QTime=0
+27411 INFO  (qtp1560246603-363-null-182) [ x:collection1 t:null-182] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score,+fv:[fv+logAll%3Dtrue]&rows=4&wt=json&rq={!ltr+model%3DoriginalScore+reRankDocs%3D4}} hits=4 status=0 QTime=0
+27413 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@216b9a3{STOPPING}[12.1.14,sto=0]
+27413 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@7c0e4c13{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+27413 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=385166523
+27414 INFO  (coreCloseExecutor-268-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@647c6574 collection1
+27414 INFO  (coreCloseExecutor-268-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Epe 19, 2026 3:56:25 KOOSKOLINY io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+27417 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@5363ca3d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@3dbe2bd7{STOPPED}}
+27502 INFO  (TEST-TestOriginalScoreFeature.testOriginalScore-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testOriginalScore
+27504 INFO  (SUITE-TestOriginalScoreFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-4 after muting 0 log messages
+]]></system-err>
+</testsuite>

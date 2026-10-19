@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.ltr.TestLTRQParserPlugin" tests="15" skipped="1" failures="0" errors="0" timestamp="2026-10-19T08:55:59.097Z" hostname="localhost" time="7.487">
+  <properties/>
+  <testcase name="ltrEchoReRankCutoff_falseShouldNotAddHeaderField" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.173"/>
+  <testcase name="ltrModelIdDoesNotExistTest" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.013"/>
+  <testcase name="ltrNoResultsTest" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.017"/>
+  <testcase name="ltr_expensiveFeatureRescoringWithinTimeAllowed_shouldReturnRerankedResults" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="1.029"/>
+  <testcase name="ltrEchoReRankCutoff_withMixedScoreAndFieldSort_shouldAddBothValuesInOrder" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.02"/>
+  <testcase name="ltrBadRerankDocsTest" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.008"/>
+  <testcase name="ltr_expensiveFeatureRescoring_shouldTimeOutAndReturnPartialResults" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="ltrEchoReRankCutoff_withFieldSortShouldAddSortCutoffValue" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.01"/>
+  <testcase name="ltrModelIsEmptyTest" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.008"/>
+  <testcase name="ltrEchoReRankCutoff_defaultShouldNotAddHeaderField" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.008"/>
+  <testcase name="ltrModelIdMissingTest" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.008"/>
+  <testcase name="ltrMoreResultsThanReRankedTest" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.019"/>
+  <testcase name="ltrEchoReRankCutoff_shouldAddHeaderField" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.009"/>
+  <testcase name="ltr_expensiveFeatureRescoringAndPartialResultsNotTolerated_shouldRaiseException" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="1.011"/>
+  <testcase name="ltrEchoReRankCutoff_withNoResults_shouldNotAddHeaderField" classname="org.apache.solr.ltr.TestLTRQParserPlugin" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 19, 2026 8:55:59 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1824 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+1857 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/data-dir-1-001
+1868 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+1893 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=true
+1964 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+1965 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+1979 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+2409 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+2410 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+2416 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+2424 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+2425 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@4e3da30c{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@2e07d02c{STOPPED}}. May not be supported in future releases.
+2432 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+2437 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@4e3da30c{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2e07d02c{STARTED}}
+2440 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-001, hostPort=35057, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-002}
+2443 ERROR (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+2443 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+2452 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+2452 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+2452 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+2452 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:00.604901535Z
+2513 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+2515 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-001/solr.xml
+2639 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+2645 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+3684 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+3764 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-002
+4175 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@4e3da30c{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2e07d02c{STARTED}}
+4179 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@74d415c8{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:35057}
+4179 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.Server Started oejs.Server@7bf7df5e{STARTING}[12.1.14,sto=0] @1768ms
+4184 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#35057
+4307 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.D.s.TrieIntField Solr loaded a deprecated plugin/analysis class [solr.TrieIntField]. Please consult documentation how to replace it accordingly.
+4317 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.D.s.TrieFloatField Solr loaded a deprecated plugin/analysis class [solr.TrieFloatField]. Please consult documentation how to replace it accordingly.
+4325 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.D.s.TrieLongField Solr loaded a deprecated plugin/analysis class [solr.TrieLongField]. Please consult documentation how to replace it accordingly.
+4333 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.D.s.TrieDoubleField Solr loaded a deprecated plugin/analysis class [solr.TrieDoubleField]. Please consult documentation how to replace it accordingly.
+4341 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.D.s.TrieDateField Solr loaded a deprecated plugin/analysis class [solr.TrieDateField]. Please consult documentation how to replace it accordingly.
+4484 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+4492 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-001/collection1
+4520 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-002/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-002/collection1/data/]
+4909 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+5072 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+5164 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+5165 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+5165 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+5233 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-001/collection1/conf
+5237 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+5238 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+5238 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+5238 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+5239 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+5254 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+5262 WARN  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+5262 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+5263 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+5263 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+5263 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+5272 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+5275 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+5601 INFO  (qtp2132482285-25-null-1) [ x:collection1 t:null-1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467794050842624)]} 0 114
+5628 INFO  (qtp2132482285-26-null-2) [ x:collection1 t:null-2] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467794134728704)]} 0 1
+5632 INFO  (qtp2132482285-27-null-3) [ x:collection1 t:null-3] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467794138923008)]} 0 1
+5635 INFO  (qtp2132482285-28-null-4) [ x:collection1 t:null-4] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[9 (1879467794143117312)]} 0 1
+5863 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-5) [ x:collection1 t:null-5] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+5867 INFO  (qtp2132482285-23-null-5) [ x:collection1 t:null-5] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 228
+5875 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.l.TestRerankBase send 
+[
+  {
+     "name": "title",
+     "class": "org.apache.solr.ltr.feature.ValueFeature",
+     "params": {
+         "value": 1
+     }
+  },
+  {
+    "name": "description",
+    "class": "org.apache.solr.ltr.feature.ValueFeature",
+    "params": {
+       "value": 2
+    }
+  },
+  {
+    "name": "keywords",
+    "class": "org.apache.solr.ltr.feature.ValueFeature",
+    "params": {
+        "value": 2
+    }
+  },
+ {
+     "name": "popularity",
+     "class": "org.apache.solr.ltr.feature.ValueFeature",
+     "params": {
+         "value": 3
+     }
+ },
+ {
+     "name": "text",
+     "class": "org.apache.solr.ltr.feature.ValueFeature",
+     "params": {
+         "value": 4
+     }
+ },
+ {
+   "name": "queryIntentPerson",
+   "class": "org.apache.solr.ltr.feature.ValueFeature",
+   "params": {
+       "value": 5
+   }
+ },
+ {
+   "name": "queryIntentCompany",
+   "class": "org.apache.solr.ltr.feature.ValueFeature",
+   "params": {
+       "value": 5
+   }
+ }
+]
+
+5880 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@6c998690] for /schema/feature-store
+5880 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.r.ManagedResource Processing update to /schema/feature-store: [{name=title, class=org.apache.solr.ltr.feature.ValueFeature, params={value=1}}, {name=description, class=org.apache.solr.ltr.feature.ValueFeature, params={value=2}}, {name=keywords, class=org.apache.solr.ltr.feature.ValueFeature, params={value=2}}, {name=popularity, class=org.apache.solr.ltr.feature.ValueFeature, params={value=3}}, {name=text, class=org.apache.solr.ltr.feature.ValueFeature, params={value=4}}, {name=queryIntentPerson, class=org.apache.solr.ltr.feature.ValueFeature, params={value=5}}, {name=queryIntentCompany, class=org.apache.solr.ltr.feature.ValueFeature, params={value=5}}] is a java.util.ArrayList
+5880 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=title, class=org.apache.solr.ltr.feature.ValueFeature, params={value=1}}
+5924 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=description, class=org.apache.solr.ltr.feature.ValueFeature, params={value=2}}
+5924 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=keywords, class=org.apache.solr.ltr.feature.ValueFeature, params={value=2}}
+5924 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=popularity, class=org.apache.solr.ltr.feature.ValueFeature, params={value=3}}
+5924 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=text, class=org.apache.solr.ltr.feature.ValueFeature, params={value=4}}
+5924 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=queryIntentPerson, class=org.apache.solr.ltr.feature.ValueFeature, params={value=5}}
+5924 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=queryIntentCompany, class=org.apache.solr.ltr.feature.ValueFeature, params={value=5}}
+5935 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-001/collection1/conf
+5935 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+5936 INFO  (qtp2132482285-24-null-6) [ x:collection1 t:null-6] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=57
+5964 INFO  (qtp2132482285-25-null-7) [ x:collection1 t:null-7] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@6c998690]] for /schema/model-store
+5965 INFO  (qtp2132482285-25-null-7) [ x:collection1 t:null-7] o.a.s.r.ManagedResource Processing update to /schema/model-store: {class=org.apache.solr.ltr.model.LinearModel, name=6029760550880411648, features=[{name=title}, {name=description}, {name=keywords}, {name=popularity, norm={class=org.apache.solr.ltr.norm.MinMaxNormalizer, params={min=0.0f, max=10.0f}}}, {name=text}, {name=queryIntentPerson}, {name=queryIntentCompany}], params={weights={title=0.0, description=0.1, keywords=0.2, popularity=0.3, text=0.4, queryIntentPerson=0.1231231, queryIntentCompany=0.12121211}}} is a java.util.LinkedHashMap
+6031 INFO  (qtp2132482285-25-null-7) [ x:collection1 t:null-7] o.a.s.l.s.r.ManagedModelStore adding model 6029760550880411648
+6044 INFO  (qtp2132482285-25-null-7) [ x:collection1 t:null-7] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-001/collection1/conf
+6044 INFO  (qtp2132482285-25-null-7) [ x:collection1 t:null-7] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+6044 INFO  (qtp2132482285-25-null-7) [ x:collection1 t:null-7] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=80
+6049 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.l.TestRerankBase send 
+[
+  {
+    "name" : "slow",
+    "class" : "org.apache.solr.ltr.feature.SolrFeature",
+    "params" : { "q" : "{!func}sleep(1000,999)" }
+  }
+]
+
+6051 INFO  (qtp2132482285-26-null-8) [ x:collection1 t:null-8] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@6c998690] for /schema/feature-store
+6051 INFO  (qtp2132482285-26-null-8) [ x:collection1 t:null-8] o.a.s.r.ManagedResource Processing update to /schema/feature-store: [{name=slow, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!func}sleep(1000,999)}}] is a java.util.ArrayList
+6051 INFO  (qtp2132482285-26-null-8) [ x:collection1 t:null-8] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=slow, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!func}sleep(1000,999)}}
+6070 INFO  (qtp2132482285-26-null-8) [ x:collection1 t:null-8] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-001/collection1/conf
+6070 INFO  (qtp2132482285-26-null-8) [ x:collection1 t:null-8] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+6070 INFO  (qtp2132482285-26-null-8) [ x:collection1 t:null-8] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=19
+6075 INFO  (qtp2132482285-27-null-9) [ x:collection1 t:null-9] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[6029760550880411648]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@6c998690]] for /schema/model-store
+6075 INFO  (qtp2132482285-27-null-9) [ x:collection1 t:null-9] o.a.s.r.ManagedResource Processing update to /schema/model-store: {class=org.apache.solr.ltr.model.LinearModel, name=slowModel, features=[{name=slow}], params={weights={slow=1}}} is a java.util.LinkedHashMap
+6075 INFO  (qtp2132482285-27-null-9) [ x:collection1 t:null-9] o.a.s.l.s.r.ManagedModelStore adding model slowModel
+6089 INFO  (qtp2132482285-27-null-9) [ x:collection1 t:null-9] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.TestLTRQParserPlugin_18458C0FFEE18458-001/tempDir-001/collection1/conf
+6089 INFO  (qtp2132482285-27-null-9) [ x:collection1 t:null-9] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+6089 INFO  (qtp2132482285-27-null-9) [ x:collection1 t:null-9] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=14
+6098 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_falseShouldNotAddHeaderField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrEchoReRankCutoff_falseShouldNotAddHeaderField
+6252 INFO  (qtp2132482285-28-null-10) [ x:collection1 t:null-10] o.a.s.c.S.Request path=/query params={q=_query_:{!edismax+qf%3D'id'+v%3D'8^%3D10+9^%3D5+7^%3D3+6^%3D1'}&indent=on&fl=id,score&rows=2&wt=json&rq={!ltr+model%3D6029760550880411648+reRankDocs%3D3+echoReRankCutoff%3Dfalse}} hits=4 status=0 QTime=152
+6262 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_falseShouldNotAddHeaderField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrEchoReRankCutoff_falseShouldNotAddHeaderField
+6268 INFO  (TEST-TestLTRQParserPlugin.ltrModelIdDoesNotExistTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrModelIdDoesNotExistTest
+6273 ERROR (qtp2132482285-23-null-11) [ x:collection1 t:null-11] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: cannot find model -1
+	at org.apache.solr.ltr.search.LTRQParserPlugin$LTRQParser.parse(LTRQParserPlugin.java:179)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:202)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+6275 INFO  (qtp2132482285-23-null-11) [ x:collection1 t:null-11] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'title'+mm%3D100%25+v%3D'bloomberg'+tie%3D0.1}&fl=*,+score&rows=4&rq={!ltr+model%3D-1+reRankDocs%3D100}} status=400 QTime=5
+6277 INFO  (TEST-TestLTRQParserPlugin.ltrModelIdDoesNotExistTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrModelIdDoesNotExistTest
+6282 INFO  (TEST-TestLTRQParserPlugin.ltrNoResultsTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrNoResultsTest
+6291 INFO  (qtp2132482285-24-null-12) [ x:collection1 t:null-12] o.a.s.c.S.Request path=/query params={q=title:bloomberg23&debug=true&indent=on&fl=*,[fv]&rows=3&wt=json&rq={!ltr+reRankDocs%3D3+model%3D6029760550880411648}} hits=0 status=0 QTime=8
+6293 INFO  (TEST-TestLTRQParserPlugin.ltrNoResultsTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrNoResultsTest
+6298 INFO  (TEST-TestLTRQParserPlugin.ltr_expensiveFeatureRescoringWithinTimeAllowed_shouldReturnRerankedResults-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltr_expensiveFeatureRescoringWithinTimeAllowed_shouldReturnRerankedResults
+7320 INFO  (qtp2132482285-25-null-13) [ x:collection1 t:null-13] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'id'+v%3D'8^%3D10+9^%3D5+7^%3D3+6^%3D1'}&indent=on&fl=id,score&timeAllowed=5000&rows=4&wt=json&rq={!ltr+model%3DslowModel+reRankDocs%3D3}} hits=4 status=0 QTime=1021
+7323 INFO  (TEST-TestLTRQParserPlugin.ltr_expensiveFeatureRescoringWithinTimeAllowed_shouldReturnRerankedResults-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltr_expensiveFeatureRescoringWithinTimeAllowed_shouldReturnRerankedResults
+7328 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_withMixedScoreAndFieldSort_shouldAddBothValuesInOrder-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrEchoReRankCutoff_withMixedScoreAndFieldSort_shouldAddBothValuesInOrder
+7341 INFO  (qtp2132482285-26-null-14) [ x:collection1 t:null-14] o.a.s.c.S.Request path=/query params={q=_query_:{!edismax+qf%3D'id'+v%3D'8^%3D10+9^%3D5+7^%3D3+6^%3D1'}&indent=on&fl=id,score&sort=score+desc,id+asc&rows=2&wt=json&rq={!ltr+model%3D6029760550880411648+reRankDocs%3D3+echoReRankCutoff%3Dtrue}} hits=4 status=0 QTime=11
+7342 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_withMixedScoreAndFieldSort_shouldAddBothValuesInOrder-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrEchoReRankCutoff_withMixedScoreAndFieldSort_shouldAddBothValuesInOrder
+7347 INFO  (TEST-TestLTRQParserPlugin.ltrBadRerankDocsTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrBadRerankDocsTest
+7349 ERROR (qtp2132482285-27-null-15) [ x:collection1 t:null-15] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Must rerank at least 1 document
+	at org.apache.solr.ltr.search.LTRQParserPlugin$LTRQParser.parse(LTRQParserPlugin.java:233)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:202)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7349 INFO  (qtp2132482285-27-null-15) [ x:collection1 t:null-15] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'title'+mm%3D100%25+v%3D'bloomberg'+tie%3D0.1}&fl=*,+score&rows=4&rq={!ltr+model%3D6029760550880411648+reRankDocs%3D-1}} status=400 QTime=1
+7350 INFO  (TEST-TestLTRQParserPlugin.ltrBadRerankDocsTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrBadRerankDocsTest
+7355 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_withFieldSortShouldAddSortCutoffValue-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrEchoReRankCutoff_withFieldSortShouldAddSortCutoffValue
+7360 INFO  (qtp2132482285-28-null-16) [ x:collection1 t:null-16] o.a.s.c.S.Request path=/query params={q=_query_:{!edismax+qf%3D'id'+v%3D'8^%3D10+9^%3D5+7^%3D3+6^%3D1'}&indent=on&fl=id,score&sort=id+asc&rows=2&wt=json&rq={!ltr+model%3D6029760550880411648+reRankDocs%3D3+echoReRankCutoff%3Dtrue}} hits=4 status=0 QTime=3
+7361 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_withFieldSortShouldAddSortCutoffValue-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrEchoReRankCutoff_withFieldSortShouldAddSortCutoffValue
+7365 INFO  (TEST-TestLTRQParserPlugin.ltrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrModelIsEmptyTest
+7367 ERROR (qtp2132482285-23-null-17) [ x:collection1 t:null-17] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: the model 0 is empty
+	at org.apache.solr.ltr.search.LTRQParserPlugin$LTRQParser.parse(LTRQParserPlugin.java:172)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:202)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7368 INFO  (qtp2132482285-23-null-17) [ x:collection1 t:null-17] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'title'+mm%3D100%25+v%3D'bloomberg'+tie%3D0.1}&fl=*,+score&rows=4&rq={!ltr+model%3D""+reRankDocs%3D100}} status=400 QTime=1
+7369 INFO  (TEST-TestLTRQParserPlugin.ltrModelIsEmptyTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrModelIsEmptyTest
+7374 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_defaultShouldNotAddHeaderField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrEchoReRankCutoff_defaultShouldNotAddHeaderField
+7377 INFO  (qtp2132482285-24-null-18) [ x:collection1 t:null-18] o.a.s.c.S.Request path=/query params={q=_query_:{!edismax+qf%3D'id'+v%3D'8^%3D10+9^%3D5+7^%3D3+6^%3D1'}&indent=on&fl=id,score&rows=2&wt=json&rq={!ltr+model%3D6029760550880411648+reRankDocs%3D3}} hits=4 status=0 QTime=1
+7378 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_defaultShouldNotAddHeaderField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrEchoReRankCutoff_defaultShouldNotAddHeaderField
+7383 INFO  (TEST-TestLTRQParserPlugin.ltrModelIdMissingTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrModelIdMissingTest
+7385 ERROR (qtp2132482285-25-null-19) [ x:collection1 t:null-19] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Must provide one or two models in the request
+	at org.apache.solr.ltr.search.LTRQParserPlugin$LTRQParser.parse(LTRQParserPlugin.java:159)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:202)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7385 INFO  (qtp2132482285-25-null-19) [ x:collection1 t:null-19] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'title'+mm%3D100%25+v%3D'bloomberg'+tie%3D0.1}&fl=*,+score&rows=4&rq={!ltr+reRankDocs%3D100}} status=400 QTime=1
+7386 INFO  (TEST-TestLTRQParserPlugin.ltrModelIdMissingTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrModelIdMissingTest
+7390 INFO  (TEST-TestLTRQParserPlugin.ltrMoreResultsThanReRankedTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrMoreResultsThanReRankedTest
+7395 INFO  (qtp2132482285-26-null-20) [ x:collection1 t:null-20] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'title'+mm%3D100%25+v%3D'bloomberg'+tie%3D0.1}&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=3
+7403 INFO  (qtp2132482285-27-null-21) [ x:collection1 t:null-21] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'title'+mm%3D100%25+v%3D'bloomberg'+tie%3D0.1}&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3D6029760550880411648+reRankDocs%3D3}} hits=4 status=0 QTime=1
+7405 INFO  (TEST-TestLTRQParserPlugin.ltrMoreResultsThanReRankedTest-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrMoreResultsThanReRankedTest
+7409 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_shouldAddHeaderField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrEchoReRankCutoff_shouldAddHeaderField
+7412 INFO  (qtp2132482285-28-null-22) [ x:collection1 t:null-22] o.a.s.c.S.Request path=/query params={q=_query_:{!edismax+qf%3D'id'+v%3D'8^%3D10+9^%3D5+7^%3D3+6^%3D1'}&indent=on&fl=id,score&rows=2&wt=json&rq={!ltr+model%3D6029760550880411648+reRankDocs%3D3+echoReRankCutoff%3Dtrue}} hits=4 status=0 QTime=1
+7414 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_shouldAddHeaderField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrEchoReRankCutoff_shouldAddHeaderField
+7418 INFO  (TEST-TestLTRQParserPlugin.ltr_expensiveFeatureRescoringAndPartialResultsNotTolerated_shouldRaiseException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltr_expensiveFeatureRescoringAndPartialResultsNotTolerated_shouldRaiseException
+8422 ERROR (qtp2132482285-23-null-23) [ x:collection1 t:null-23] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: org.apache.solr.search.QueryLimitsExceededException: Limits exceeded! (Learning To Rank rescoring - The full reranking didn't complete. If partial results are tolerated the reranking got reverted and all documents preserved their original score and ranking.): Query limits: [TimeAllowedLimit:LIMIT EXCEEDED]
+	at org.apache.solr.search.ReRankCollector.topDocs(ReRankCollector.java:224)
+	at org.apache.solr.search.SolrIndexSearcher.getDocListNC(SolrIndexSearcher.java:1909)
+	at org.apache.solr.search.SolrIndexSearcher.getDocListC(SolrIndexSearcher.java:1711)
+	at org.apache.solr.search.SolrIndexSearcher.search(SolrIndexSearcher.java:792)
+	at org.apache.solr.handler.component.QueryComponent.doProcessUngroupedSearch(QueryComponent.java:1857)
+	at org.apache.solr.handler.component.QueryComponent.process(QueryComponent.java:444)
+	at org.apache.solr.handler.component.SearchHandler.processComponentsLocal(SearchHandler.java:482)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:410)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.apache.solr.search.QueryLimitsExceededException: Limits exceeded! (Learning To Rank rescoring - The full reranking didn't complete. If partial results are tolerated the reranking got reverted and all documents preserved their original score and ranking.): Query limits: [TimeAllowedLimit:LIMIT EXCEEDED]
+	at org.apache.solr.search.QueryLimits.maybeExitWithPartialResults(QueryLimits.java:154)
+	at org.apache.solr.search.QueryLimits.maybeExitWithPartialResults(QueryLimits.java:162)
+	at org.apache.solr.ltr.LTRRescorer.scoreSingleHit(LTRRescorer.java:212)
+	at org.apache.solr.ltr.LTRRescorer.scoreFeatures(LTRRescorer.java:182)
+	at org.apache.solr.ltr.LTRRescorer.rerank(LTRRescorer.java:140)
+	at org.apache.solr.ltr.LTRRescorer.rescore(LTRRescorer.java:127)
+	at org.apache.solr.search.ReRankCollector.topDocs(ReRankCollector.java:159)
+	... 48 more
+8423 INFO  (qtp2132482285-23-null-23) [ x:collection1 t:null-23] o.a.s.c.S.Request path=/query params={fv=true&q=_query_:{!edismax+qf%3D'id'+v%3D'8^%3D10+9^%3D5+7^%3D3+6^%3D1'}&indent=on&fl=id,score&timeAllowed=800&rows=4&wt=json&partialResults=false&rq={!ltr+model%3DslowModel+reRankDocs%3D3}} status=400 QTime=1003
+8424 INFO  (TEST-TestLTRQParserPlugin.ltr_expensiveFeatureRescoringAndPartialResultsNotTolerated_shouldRaiseException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltr_expensiveFeatureRescoringAndPartialResultsNotTolerated_shouldRaiseException
+8429 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_withNoResults_shouldNotAddHeaderField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting ltrEchoReRankCutoff_withNoResults_shouldNotAddHeaderField
+8432 INFO  (qtp2132482285-24-null-24) [ x:collection1 t:null-24] o.a.s.c.S.Request path=/query params={q=title:title_that_does_not_exist&indent=on&fl=*,[fv]&rows=3&wt=json&rq={!ltr+model%3D6029760550880411648+reRankDocs%3D3+echoReRankCutoff%3Dtrue}} hits=0 status=0 QTime=1
+8433 INFO  (TEST-TestLTRQParserPlugin.ltrEchoReRankCutoff_withNoResults_shouldNotAddHeaderField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending ltrEchoReRankCutoff_withNoResults_shouldNotAddHeaderField
+8438 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.Server Stopped oejs.Server@7bf7df5e{STOPPING}[12.1.14,sto=0]
+8438 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@74d415c8{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+8439 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1599756698
+8441 INFO  (coreCloseExecutor-23-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@192fa442 collection1
+8441 INFO  (coreCloseExecutor-23-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+DAP 19, 2026 5:56:06 OD io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+8450 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@4e3da30c{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@2e07d02c{STOPPED}}
+8546 INFO  (SUITE-TestLTRQParserPlugin-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+]]></system-err>
+</testsuite>

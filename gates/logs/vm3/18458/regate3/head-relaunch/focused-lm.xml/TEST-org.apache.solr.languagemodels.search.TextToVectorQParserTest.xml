@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.languagemodels.search.TextToVectorQParserTest" tests="23" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:58:30.221Z" hostname="localhost" time="6.186">
+  <properties/>
+  <testcase name="embeddedQueryAsSubQuery" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.09"/>
+  <testcase name="embeddedQueryUsedInFilter_shouldFilterResultsBeforeTheQueryExecution" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.015"/>
+  <testcase name="vectorByteEncodingField_shouldRaiseException" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.012"/>
+  <testcase name="embeddedQueryUsedInFilters_shouldFilterResultsBeforeTheQueryExecution" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.012"/>
+  <testcase name="earlyTerminationEnabled_returnsPatienceKnnVectorQuery" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.022"/>
+  <testcase name="embeddedQueryAsSubQuery_rejectIncludeExclude" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.012"/>
+  <testcase name="embeddedQuery_shouldRankBySimilarityFunction" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.009"/>
+  <testcase name="embeddedQueryAsRerank_shouldAddSimilarityFunctionScore" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.022"/>
+  <testcase name="embeddedQueryWithNegativeFilterQuery_shouldPerformKnnSearchInPreFilteredResults" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.011"/>
+  <testcase name="vectorFieldParam_shouldSearchOnThatField" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.008"/>
+  <testcase name="incorrectVectorToSearchDimension_shouldThrowException" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.008"/>
+  <testcase name="missingQueryToEmbed_shouldThrowException" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.008"/>
+  <testcase name="notExistentModel_shouldThrowException" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.008"/>
+  <testcase name="embeddedQueryAsSubQuery_withPreFilter" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.008"/>
+  <testcase name="missingVectorFieldParam_shouldThrowException" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.008"/>
+  <testcase name="embeddedQueryWithCostlyFq_shouldPerformKnnSearchWithPostFilter" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.017"/>
+  <testcase name="topK_shouldEmbedAndReturnOnlyTopKResults" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.007"/>
+  <testcase name="embeddedQueryUsedInFilters_rejectIncludeExclude" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.011"/>
+  <testcase name="missingModelParam_shouldThrowException" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.007"/>
+  <testcase name="embeddedQueryUsedInFiltersWithPreFilter_shouldFilterResultsBeforeTheQueryExecution" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.009"/>
+  <testcase name="embeddedQueryWithFilterQueries_shouldPerformKnnSearchWithPreFiltersAndPostFilters" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.011"/>
+  <testcase name="undefinedVectorField_shouldThrowException" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.007"/>
+  <testcase name="incorrectVectorFieldType_shouldThrowException" classname="org.apache.solr.languagemodels.search.TextToVectorQParserTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 19, 2026 8:58:31 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+2184 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+2216 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/data-dir-1-001
+2227 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+2260 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+2340 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+2340 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (true) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+2376 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+3121 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+3124 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+3129 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+3137 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+3139 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@24047e9d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@1825d760{STOPPED}}. May not be supported in future releases.
+3144 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-cwd/
+3152 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@24047e9d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@1825d760{STARTED}}
+3157 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-001, hostPort=36067, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-002}
+3160 ERROR (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+3160 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+3170 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+3170 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+3170 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+3170 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:58:32.318662011Z
+3236 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+3257 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-001/solr.xml
+3438 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+3450 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+4218 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@4f81c10[provider=null,keyStore=null,trustStore=null]
+4219 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@4f81c10[provider=null,keyStore=null,trustStore=null]
+4251 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@20dd3ddf[provider=null,keyStore=null,trustStore=null]
+4251 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@20dd3ddf[provider=null,keyStore=null,trustStore=null]
+4254 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@7e693d2a[provider=null,keyStore=null,trustStore=null]
+4254 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@7e693d2a[provider=null,keyStore=null,trustStore=null]
+4258 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@48a127d4[provider=null,keyStore=null,trustStore=null]
+4258 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@48a127d4[provider=null,keyStore=null,trustStore=null]
+4266 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+4370 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-002
+4924 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@24047e9d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@1825d760{STARTED}}
+4928 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@1449c884{ssl, (ssl, alpn, http/1.1, h2)}{127.0.0.1:36067}
+4928 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.Server Started oejs.Server@4c2480f4{STARTING}[12.1.14,sto=0] @1803ms
+4933 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#36067
+5315 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.s.DenseVectorField The vector dimension 2048 specified for field 2048_byte_vector exceeds the current Lucene default max dimension of 1024. It's un-tested territory, extra caution and benchmarks are recommended for production systems.
+5316 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.s.DenseVectorField The vector dimension 2048 specified for field 2048_float_vector exceeds the current Lucene default max dimension of 1024. It's un-tested territory, extra caution and benchmarks are recommended for production systems.
+5319 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema schema-language-models/1.7 with uniqueid field id
+5319 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-001/collection1
+5347 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-002/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-002/collection1/data/]
+5749 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+5993 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+5994 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+5994 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+6060 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-001/collection1/conf
+6098 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.languagemodels.store.rest.TextToVectorModelStore for path /schema/text-to-vector-model-store
+6105 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/text-to-vector-model-store
+6105 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.l.s.r.ManagedLanguageModelStore ------ managed models ~ loading ------
+6105 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/text-to-vector-model-store
+6105 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/text-to-vector-model-store
+6115 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.languagemodels.update.processor.factory.TextToVectorUpdateProcessorFactory to existing ManagedResource /schema/text-to-vector-model-store
+6115 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.languagemodels.update.processor.factory.TextToVectorUpdateProcessorFactory to existing ManagedResource /schema/text-to-vector-model-store
+6115 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.languagemodels.update.processor.factory.TextToVectorUpdateProcessorFactory to existing ManagedResource /schema/text-to-vector-model-store
+6115 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.languagemodels.update.processor.factory.TextToVectorUpdateProcessorFactory to existing ManagedResource /schema/text-to-vector-model-store
+6116 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+6120 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+6136 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@657775d2[provider=null,keyStore=null,trustStore=null]
+6136 WARN  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@657775d2[provider=null,keyStore=null,trustStore=null]
+6663 INFO  (qtp1671024103-25-null-1) [ x:collection1 t:null-1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467953336877056)]} 0 263
+6695 INFO  (qtp1671024103-26-null-2) [ x:collection1 t:null-2] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467953585389568)]} 0 1
+6700 INFO  (qtp1671024103-27-null-3) [ x:collection1 t:null-3] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467953589583872)]} 0 1
+6704 INFO  (qtp1671024103-28-null-4) [ x:collection1 t:null-4] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467953593778176)]} 0 1
+6708 INFO  (qtp1671024103-23-null-5) [ x:collection1 t:null-5] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467953597972480)]} 0 1
+6712 INFO  (qtp1671024103-24-null-6) [ x:collection1 t:null-6] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467953602166784)]} 0 1
+6716 INFO  (qtp1671024103-25-null-7) [ x:collection1 t:null-7] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467953606361088)]} 0 1
+6720 INFO  (qtp1671024103-26-null-8) [ x:collection1 t:null-8] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467953610555392)]} 0 1
+6724 INFO  (qtp1671024103-27-null-9) [ x:collection1 t:null-9] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[9 (1879467953614749696)]} 0 1
+6727 INFO  (qtp1671024103-28-null-10) [ x:collection1 t:null-10] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[10 (1879467953618944000)]} 0 1
+6731 INFO  (qtp1671024103-23-null-11) [ x:collection1 t:null-11] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[11 (1879467953622089728)]} 0 1
+6735 INFO  (qtp1671024103-24-null-12) [ x:collection1 t:null-12] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[12 (1879467953626284032)]} 0 1
+6738 INFO  (qtp1671024103-25-null-13) [ x:collection1 t:null-13] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[13 (1879467953630478336)]} 0 0
+6869 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-14) [ x:collection1 t:null-14] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+6872 INFO  (qtp1671024103-26-null-14) [ x:collection1 t:null-14] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 131
+6886 INFO  (qtp1671024103-27-null-15) [ x:collection1 t:null-15] o.a.s.r.RestManager Found ManagedResource [TextToVectorModelStore [store=LanguageModelStore [availableModels=[]]]] for /schema/text-to-vector-model-store
+6887 INFO  (qtp1671024103-27-null-15) [ x:collection1 t:null-15] o.a.s.r.ManagedResource Processing update to /schema/text-to-vector-model-store: {class=org.apache.solr.languagemodels.model.DummyEmbeddingModel, name=dummy-1, params={embedding=[1.0, 2.0, 3.0, 4.0]}} is a java.util.LinkedHashMap
+6898 INFO  (qtp1671024103-27-null-15) [ x:collection1 t:null-15] o.a.s.l.s.r.ManagedLanguageModelStore adding model dummy-1
+6908 INFO  (qtp1671024103-27-null-15) [ x:collection1 t:null-15] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_text-to-vector-model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-tmp/org.apache.solr.languagemodels.search.TextToVectorQParserTest_18458C0FFEE18458-001/tempDir-001/collection1/conf
+6908 INFO  (qtp1671024103-27-null-15) [ x:collection1 t:null-15] o.a.s.r.RestManager path=/schema/text-to-vector-model-store params={indent=on&wt=json}
+6909 INFO  (qtp1671024103-27-null-15) [ x:collection1 t:null-15] o.a.s.c.S.Request path=/schema/text-to-vector-model-store params={indent=on&wt=json} status=0 QTime=23
+6935 INFO  (TEST-TextToVectorQParserTest.embeddedQueryAsSubQuery-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryAsSubQuery
+7004 INFO  (qtp1671024103-28-null-16) [ x:collection1 t:null-16] o.a.s.c.S.Request path=/query params={q=*:*+AND+{!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D5+v%3D'hello+world'}&indent=on&fl=id&fq=id:(2+4+7+9+8+20+3)&wt=json} hits=3 status=0 QTime=66
+7015 INFO  (TEST-TextToVectorQParserTest.embeddedQueryAsSubQuery-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryAsSubQuery
+7022 INFO  (TEST-TextToVectorQParserTest.embeddedQueryUsedInFilter_shouldFilterResultsBeforeTheQueryExecution-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryUsedInFilter_shouldFilterResultsBeforeTheQueryExecution
+7031 INFO  (qtp1671024103-23-null-17) [ x:collection1 t:null-17] o.a.s.c.S.Request path=/query params={q=id:(3+4+9+2)&indent=on&fl=id&fq={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D4}hello+world&wt=json} hits=2 status=0 QTime=7
+7033 INFO  (TEST-TextToVectorQParserTest.embeddedQueryUsedInFilter_shouldFilterResultsBeforeTheQueryExecution-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryUsedInFilter_shouldFilterResultsBeforeTheQueryExecution
+7037 INFO  (TEST-TextToVectorQParserTest.vectorByteEncodingField_shouldRaiseException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting vectorByteEncodingField_shouldRaiseException
+7040 ERROR (qtp1671024103-24-null-18) [ x:collection1 t:null-18] o.a.s.h.RequestHandlerBase Server exception
+org.apache.solr.common.SolrException: Vector Encoding not supported : BYTE
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.checkVectorEncoding(TextToVectorQParserPlugin.java:84)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:98)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7041 INFO  (qtp1671024103-24-null-18) [ x:collection1 t:null-18] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector_byte_encoding+topK%3D5}hello+world&indent=on&fl=id&wt=json} status=500 QTime=2
+7042 ERROR (qtp1671024103-24-null-18) [ x:collection1 t:null-18] o.a.s.s.HttpSolrCall 500 Exception
+org.apache.solr.common.SolrException: Vector Encoding not supported : BYTE
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.checkVectorEncoding(TextToVectorQParserPlugin.java:84)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:98)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7045 INFO  (TEST-TextToVectorQParserTest.vectorByteEncodingField_shouldRaiseException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending vectorByteEncodingField_shouldRaiseException
+7049 INFO  (TEST-TextToVectorQParserTest.embeddedQueryUsedInFilters_shouldFilterResultsBeforeTheQueryExecution-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryUsedInFilters_shouldFilterResultsBeforeTheQueryExecution
+7055 INFO  (qtp1671024103-25-null-19) [ x:collection1 t:null-19] o.a.s.c.S.Request path=/query params={q=id:(3+4+9+2)&indent=on&fl=id&fq={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D4}hello+world&fq=id:(4+20+9)&wt=json} hits=1 status=0 QTime=4
+7057 INFO  (TEST-TextToVectorQParserTest.embeddedQueryUsedInFilters_shouldFilterResultsBeforeTheQueryExecution-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryUsedInFilters_shouldFilterResultsBeforeTheQueryExecution
+7061 INFO  (TEST-TextToVectorQParserTest.earlyTerminationEnabled_returnsPatienceKnnVectorQuery-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting earlyTerminationEnabled_returnsPatienceKnnVectorQuery
+7077 INFO  (qtp1671024103-26-null-20) [ x:collection1 t:null-20] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D5+earlyTermination%3Dtrue}hello+world&debug=true&indent=on&fl=id&wt=json} hits=5 status=0 QTime=13
+7079 INFO  (TEST-TextToVectorQParserTest.earlyTerminationEnabled_returnsPatienceKnnVectorQuery-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending earlyTerminationEnabled_returnsPatienceKnnVectorQuery
+7083 INFO  (TEST-TextToVectorQParserTest.embeddedQueryAsSubQuery_rejectIncludeExclude-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryAsSubQuery_rejectIncludeExclude
+7085 ERROR (qtp1671024103-27-null-21) [ x:collection1 t:null-21] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Knn Query Parser used as a sub-query does not support includeTags or excludeTags localparams
+	at org.apache.solr.search.vector.AbstractVectorQParserBase.getFilterQuery(AbstractVectorQParserBase.java:105)
+	at org.apache.solr.search.vector.KnnQParser.parse(KnnQParser.java:184)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:100)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.parser.SolrQueryParserBase.getLocalParams(SolrQueryParserBase.java:1352)
+	at org.apache.solr.parser.QueryParser.Clause(QueryParser.java:342)
+	at org.apache.solr.parser.QueryParser.Query(QueryParser.java:235)
+	at org.apache.solr.parser.QueryParser.TopLevelQuery(QueryParser.java:143)
+	at org.apache.solr.parser.SolrQueryParserBase.parse(SolrQueryParserBase.java:276)
+	at org.apache.solr.search.LuceneQParser.parse(LuceneQParser.java:51)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7086 INFO  (qtp1671024103-27-null-21) [ x:collection1 t:null-21] o.a.s.c.S.Request path=/query params={q=*:*+OR+{!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D5+includeTags%3Dxxx}hello+world&indent=on&fl=id&wt=json} status=400 QTime=1
+7089 ERROR (qtp1671024103-28-null-22) [ x:collection1 t:null-22] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Knn Query Parser used as a sub-query does not support includeTags or excludeTags localparams
+	at org.apache.solr.search.vector.AbstractVectorQParserBase.getFilterQuery(AbstractVectorQParserBase.java:105)
+	at org.apache.solr.search.vector.KnnQParser.parse(KnnQParser.java:184)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:100)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.parser.SolrQueryParserBase.getLocalParams(SolrQueryParserBase.java:1352)
+	at org.apache.solr.parser.QueryParser.Clause(QueryParser.java:342)
+	at org.apache.solr.parser.QueryParser.Query(QueryParser.java:235)
+	at org.apache.solr.parser.QueryParser.TopLevelQuery(QueryParser.java:143)
+	at org.apache.solr.parser.SolrQueryParserBase.parse(SolrQueryParserBase.java:276)
+	at org.apache.solr.search.LuceneQParser.parse(LuceneQParser.java:51)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7090 INFO  (qtp1671024103-28-null-22) [ x:collection1 t:null-22] o.a.s.c.S.Request path=/query params={q=*:*+OR+{!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D5+excludeTags%3Dxxx}hello+world&indent=on&fl=id&wt=json} status=400 QTime=1
+7092 INFO  (TEST-TextToVectorQParserTest.embeddedQueryAsSubQuery_rejectIncludeExclude-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryAsSubQuery_rejectIncludeExclude
+7096 INFO  (TEST-TextToVectorQParserTest.embeddedQuery_shouldRankBySimilarityFunction-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQuery_shouldRankBySimilarityFunction
+7098 INFO  (qtp1671024103-23-null-23) [ x:collection1 t:null-23] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D10}hello+world&indent=on&fl=id&wt=json} hits=10 status=0 QTime=0
+7100 INFO  (TEST-TextToVectorQParserTest.embeddedQuery_shouldRankBySimilarityFunction-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQuery_shouldRankBySimilarityFunction
+7104 INFO  (TEST-TextToVectorQParserTest.embeddedQueryAsRerank_shouldAddSimilarityFunctionScore-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryAsRerank_shouldAddSimilarityFunctionScore
+7121 INFO  (qtp1671024103-24-null-24) [ x:collection1 t:null-24] o.a.s.c.S.Request path=/query params={q=id:(3+4+9+2)&rqq={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D4}hello+world&indent=on&fl=id&wt=json&rq={!rerank+reRankQuery%3D$rqq+reRankDocs%3D4+reRankWeight%3D1}} hits=4 status=0 QTime=15
+7123 INFO  (TEST-TextToVectorQParserTest.embeddedQueryAsRerank_shouldAddSimilarityFunctionScore-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryAsRerank_shouldAddSimilarityFunctionScore
+7127 INFO  (TEST-TextToVectorQParserTest.embeddedQueryWithNegativeFilterQuery_shouldPerformKnnSearchInPreFilteredResults-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryWithNegativeFilterQuery_shouldPerformKnnSearchInPreFilteredResults
+7133 INFO  (qtp1671024103-25-null-25) [ x:collection1 t:null-25] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D4}hello+world&indent=on&fl=id&fq=-id:4&wt=json} hits=4 status=0 QTime=4
+7134 INFO  (TEST-TextToVectorQParserTest.embeddedQueryWithNegativeFilterQuery_shouldPerformKnnSearchInPreFilteredResults-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryWithNegativeFilterQuery_shouldPerformKnnSearchInPreFilteredResults
+7139 INFO  (TEST-TextToVectorQParserTest.vectorFieldParam_shouldSearchOnThatField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting vectorFieldParam_shouldSearchOnThatField
+7141 INFO  (qtp1671024103-26-null-26) [ x:collection1 t:null-26] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector2+topK%3D5}hello+world&indent=on&fl=id&wt=json} hits=3 status=0 QTime=0
+7142 INFO  (TEST-TextToVectorQParserTest.vectorFieldParam_shouldSearchOnThatField-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending vectorFieldParam_shouldSearchOnThatField
+7146 INFO  (TEST-TextToVectorQParserTest.incorrectVectorToSearchDimension_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting incorrectVectorToSearchDimension_shouldThrowException
+7148 ERROR (qtp1671024103-27-null-27) [ x:collection1 t:null-27] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: incorrect vector dimension. The vector value has size 4 while it is expected a vector with size 2048
+	at org.apache.solr.util.vector.DenseVectorParser.checkVectorDimension(DenseVectorParser.java:117)
+	at org.apache.solr.util.vector.DenseVectorParser.parseQueryVector(DenseVectorParser.java:102)
+	at org.apache.solr.util.vector.DenseVectorParser.parseVector(DenseVectorParser.java:48)
+	at org.apache.solr.util.vector.FloatDenseVectorParser.getFloatVector(FloatDenseVectorParser.java:34)
+	at org.apache.solr.schema.DenseVectorField.getKnnVectorQuery(DenseVectorField.java:537)
+	at org.apache.solr.search.vector.KnnQParser.parse(KnnQParser.java:179)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:100)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7149 INFO  (qtp1671024103-27-null-27) [ x:collection1 t:null-27] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3D2048_float_vector+topK%3D5}hello+world&indent=on&fl=id&wt=json} status=400 QTime=1
+7150 INFO  (TEST-TextToVectorQParserTest.incorrectVectorToSearchDimension_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending incorrectVectorToSearchDimension_shouldThrowException
+7155 INFO  (TEST-TextToVectorQParserTest.missingQueryToEmbed_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting missingQueryToEmbed_shouldThrowException
+7156 ERROR (qtp1671024103-28-null-28) [ x:collection1 t:null-28] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Query string is empty, nothing to vectorise
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin.checkParam(TextToVectorQParserPlugin.java:114)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:92)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7157 INFO  (qtp1671024103-28-null-28) [ x:collection1 t:null-28] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D5}&indent=on&fl=id&wt=json} status=400 QTime=0
+7158 INFO  (TEST-TextToVectorQParserTest.missingQueryToEmbed_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending missingQueryToEmbed_shouldThrowException
+7162 INFO  (TEST-TextToVectorQParserTest.notExistentModel_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting notExistentModel_shouldThrowException
+7164 ERROR (qtp1671024103-23-null-29) [ x:collection1 t:null-29] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: The model requested 'not-exist' can't be found in the store: /schema/text-to-vector-model-store
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:102)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7165 INFO  (qtp1671024103-23-null-29) [ x:collection1 t:null-29] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Dnot-exist+f%3Dvector+topK%3D5}hello+world&indent=on&fl=id&wt=json} status=400 QTime=1
+7166 INFO  (TEST-TextToVectorQParserTest.notExistentModel_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending notExistentModel_shouldThrowException
+7170 INFO  (TEST-TextToVectorQParserTest.embeddedQueryAsSubQuery_withPreFilter-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryAsSubQuery_withPreFilter
+7173 INFO  (qtp1671024103-24-null-30) [ x:collection1 t:null-30] o.a.s.c.S.Request path=/query params={q=*:*+AND+{!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D5+preFilter%3D'id:(2+4+7+9+8+20+3)'+v%3D'hello+world'}&indent=on&fl=id&wt=json} hits=5 status=0 QTime=1
+7174 INFO  (TEST-TextToVectorQParserTest.embeddedQueryAsSubQuery_withPreFilter-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryAsSubQuery_withPreFilter
+7179 INFO  (TEST-TextToVectorQParserTest.missingVectorFieldParam_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting missingVectorFieldParam_shouldThrowException
+7180 ERROR (qtp1671024103-25-null-31) [ x:collection1 t:null-31] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: the Dense Vector field 'f' is missing
+	at org.apache.solr.search.vector.AbstractVectorQParserBase.getFieldName(AbstractVectorQParserBase.java:61)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.checkVectorEncoding(TextToVectorQParserPlugin.java:81)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:98)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7181 INFO  (qtp1671024103-25-null-31) [ x:collection1 t:null-31] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+topK%3D5}hello+world&indent=on&fl=id&wt=json} status=400 QTime=0
+7182 INFO  (TEST-TextToVectorQParserTest.missingVectorFieldParam_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending missingVectorFieldParam_shouldThrowException
+7186 INFO  (TEST-TextToVectorQParserTest.embeddedQueryWithCostlyFq_shouldPerformKnnSearchWithPostFilter-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryWithCostlyFq_shouldPerformKnnSearchWithPostFilter
+7198 INFO  (qtp1671024103-26-null-32) [ x:collection1 t:null-32] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D10}hello+world&indent=on&fl=id&fq={!frange+cache%3Dfalse+l%3D0.99}$q&wt=json} hits=5 status=0 QTime=10
+7199 INFO  (TEST-TextToVectorQParserTest.embeddedQueryWithCostlyFq_shouldPerformKnnSearchWithPostFilter-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryWithCostlyFq_shouldPerformKnnSearchWithPostFilter
+7203 INFO  (TEST-TextToVectorQParserTest.topK_shouldEmbedAndReturnOnlyTopKResults-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting topK_shouldEmbedAndReturnOnlyTopKResults
+7205 INFO  (qtp1671024103-27-null-33) [ x:collection1 t:null-33] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D5}hello+world&indent=on&fl=id&wt=json} hits=5 status=0 QTime=0
+7207 INFO  (TEST-TextToVectorQParserTest.topK_shouldEmbedAndReturnOnlyTopKResults-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending topK_shouldEmbedAndReturnOnlyTopKResults
+7211 INFO  (TEST-TextToVectorQParserTest.embeddedQueryUsedInFilters_rejectIncludeExclude-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryUsedInFilters_rejectIncludeExclude
+7212 ERROR (qtp1671024103-28-null-34) [ x:collection1 t:null-34] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Knn Query Parser used as a filter does not support includeTags or excludeTags localparams
+	at org.apache.solr.search.vector.AbstractVectorQParserBase.getFilterQuery(AbstractVectorQParserBase.java:95)
+	at org.apache.solr.search.vector.KnnQParser.parse(KnnQParser.java:184)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:100)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.search.QueryUtils.parseFilterQueries(QueryUtils.java:286)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:226)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7213 INFO  (qtp1671024103-28-null-34) [ x:collection1 t:null-34] o.a.s.c.S.Request path=/query params={q=*:*&indent=on&fl=id&fq={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D5+includeTags%3Dxxx}hello+world&wt=json} status=400 QTime=0
+7215 ERROR (qtp1671024103-23-null-35) [ x:collection1 t:null-35] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Knn Query Parser used as a filter does not support includeTags or excludeTags localparams
+	at org.apache.solr.search.vector.AbstractVectorQParserBase.getFilterQuery(AbstractVectorQParserBase.java:95)
+	at org.apache.solr.search.vector.KnnQParser.parse(KnnQParser.java:184)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:100)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.search.QueryUtils.parseFilterQueries(QueryUtils.java:286)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:226)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7216 INFO  (qtp1671024103-23-null-35) [ x:collection1 t:null-35] o.a.s.c.S.Request path=/query params={q=*:*&indent=on&fl=id&fq={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D5+excludeTags%3Dxxx}hello+world&wt=json} status=400 QTime=0
+7217 INFO  (TEST-TextToVectorQParserTest.embeddedQueryUsedInFilters_rejectIncludeExclude-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryUsedInFilters_rejectIncludeExclude
+7221 INFO  (TEST-TextToVectorQParserTest.missingModelParam_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting missingModelParam_shouldThrowException
+7223 ERROR (qtp1671024103-24-null-36) [ x:collection1 t:null-36] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: The 'model' parameter is missing
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin.checkParam(TextToVectorQParserPlugin.java:114)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:94)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7223 INFO  (qtp1671024103-24-null-36) [ x:collection1 t:null-36] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+f%3Dvector+topK%3D5}hello+world&indent=on&fl=id&wt=json} status=400 QTime=0
+7224 INFO  (TEST-TextToVectorQParserTest.missingModelParam_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending missingModelParam_shouldThrowException
+7229 INFO  (TEST-TextToVectorQParserTest.embeddedQueryUsedInFiltersWithPreFilter_shouldFilterResultsBeforeTheQueryExecution-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryUsedInFiltersWithPreFilter_shouldFilterResultsBeforeTheQueryExecution
+7232 INFO  (qtp1671024103-25-null-37) [ x:collection1 t:null-37] o.a.s.c.S.Request path=/query params={q=id:(3+4+9+2)&indent=on&fl=id&fq={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D4+preFilter%3D'id:(1+4+7+8+9)'}hello+world&fq=id:(4+20+9)&wt=json} hits=2 status=0 QTime=2
+7234 INFO  (TEST-TextToVectorQParserTest.embeddedQueryUsedInFiltersWithPreFilter_shouldFilterResultsBeforeTheQueryExecution-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryUsedInFiltersWithPreFilter_shouldFilterResultsBeforeTheQueryExecution
+7238 INFO  (TEST-TextToVectorQParserTest.embeddedQueryWithFilterQueries_shouldPerformKnnSearchWithPreFiltersAndPostFilters-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting embeddedQueryWithFilterQueries_shouldPerformKnnSearchWithPreFiltersAndPostFilters
+7243 INFO  (qtp1671024103-26-null-38) [ x:collection1 t:null-38] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Dvector+topK%3D4}hello+world&indent=on&fl=id&fq=id:(3+4+9+2)&fq={!frange+cache%3Dfalse+l%3D0.99}$q&wt=json} hits=2 status=0 QTime=3
+7244 INFO  (TEST-TextToVectorQParserTest.embeddedQueryWithFilterQueries_shouldPerformKnnSearchWithPreFiltersAndPostFilters-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending embeddedQueryWithFilterQueries_shouldPerformKnnSearchWithPreFiltersAndPostFilters
+7248 INFO  (TEST-TextToVectorQParserTest.undefinedVectorField_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting undefinedVectorField_shouldThrowException
+7250 ERROR (qtp1671024103-27-null-39) [ x:collection1 t:null-39] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: undefined field: "notExistent"
+	at org.apache.solr.schema.IndexSchema.getField(IndexSchema.java:1414)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.checkVectorEncoding(TextToVectorQParserPlugin.java:81)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:98)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7251 INFO  (qtp1671024103-27-null-39) [ x:collection1 t:null-39] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3DnotExistent+topK%3D5}hello+world&indent=on&fl=id&wt=json} status=400 QTime=0
+7252 INFO  (TEST-TextToVectorQParserTest.undefinedVectorField_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending undefinedVectorField_shouldThrowException
+7256 INFO  (TEST-TextToVectorQParserTest.incorrectVectorFieldType_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting incorrectVectorFieldType_shouldThrowException
+7258 ERROR (qtp1671024103-28-null-40) [ x:collection1 t:null-40] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: only DenseVectorField is compatible with Vector Query Parsers
+	at org.apache.solr.search.vector.AbstractVectorQParserBase.getCheckedFieldType(AbstractVectorQParserBase.java:70)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.checkVectorEncoding(TextToVectorQParserPlugin.java:81)
+	at org.apache.solr.languagemodels.search.TextToVectorQParserPlugin$TextToVectorQParser.parse(TextToVectorQParserPlugin.java:98)
+	at org.apache.solr.search.QParser.getQuery(QParser.java:214)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:191)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:426)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:405)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+7258 INFO  (qtp1671024103-28-null-40) [ x:collection1 t:null-40] o.a.s.c.S.Request path=/query params={q={!knn_text_to_vector+model%3Ddummy-1+f%3Did+topK%3D5}hello+world&indent=on&fl=id&wt=json} status=400 QTime=0
+7259 INFO  (TEST-TextToVectorQParserTest.incorrectVectorFieldType_shouldThrowException-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending incorrectVectorFieldType_shouldThrowException
+7265 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.Server Stopped oejs.Server@4c2480f4{STOPPING}[12.1.14,sto=0]
+7266 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@1449c884{ssl, (ssl, alpn, http/1.1, h2)}{127.0.0.1:0}
+7267 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1857051494
+7268 INFO  (coreCloseExecutor-23-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@58e412ff collection1
+7269 INFO  (coreCloseExecutor-23-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Oct 19, 2026 4:58:36 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+7282 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@24047e9d{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/language-models/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@1825d760{STOPPED}}
+7379 INFO  (SUITE-TextToVectorQParserTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+]]></system-err>
+</testsuite>

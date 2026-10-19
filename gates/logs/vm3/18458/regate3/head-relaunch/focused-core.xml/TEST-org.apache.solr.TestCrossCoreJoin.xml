@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.TestCrossCoreJoin" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:47:31.832Z" hostname="localhost" time="2.27">
+  <properties/>
+  <testcase name="testJoin" classname="org.apache.solr.TestCrossCoreJoin" time="0.419"/>
+  <testcase name="testScoreJoin" classname="org.apache.solr.TestCrossCoreJoin" time="0.066"/>
+  <testcase name="testCoresAreDifferent" classname="org.apache.solr.TestCrossCoreJoin" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[21781 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+21791 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.TestCrossCoreJoin_18458C0FFEE18458-001/data-dir-2-001
+21792 WARN  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=38 numCloses=38
+21792 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-5 for ERROR logs matching regex: ignore_exception
+21792 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+21795 WARN  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+21795 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+21795 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+21795 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+21803 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+21830 WARN  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+21868 WARN  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.IndexSchema Field text is not multivalued and destination for multiple copyFields (2)
+21943 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.4 with uniqueid field id
+22023 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+22023 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+22764 WARN  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+22777 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+22796 WARN  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+22808 WARN  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.s.IndexSchema Field text is not multivalued and destination for multiple copyFields (2)
+22881 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.4 with uniqueid field id
+22960 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+22960 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.TestCrossCoreJoin_18458C0FFEE18458-001/data-dir-2-001/]
+22961 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=29, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.53239957773335]
+23008 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+23008 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+23009 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=50, maxMergedSegmentMB=44.10712242126465, floorSegmentMB=1.6620912551879883, forceMergeDeletesPctAllowed=2.6467766450381625, segmentsPerTier=42.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.0, deletesPctAllowed=22.759715156251822, targetSearchConcurrency=5
+23359 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+23359 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+23364 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+23365 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+23365 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+23365 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+23369 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+23373 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+23377 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+23382 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+23386 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+23386 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+23424 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+23449 WARN  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.s.IndexSchema no uniqueKey specified in schema.
+23449 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.s.IndexSchema Loaded schema minimal/1.7 with uniqueid field null
+23449 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.c.CoreContainer Creating SolrCore 'fromCore' using configuration from configset /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/configsets/minimal
+23449 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/fromCore], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/fromCore/data/]
+23489 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+23489 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+23491 WARN  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/configsets/minimal/conf ; switching to use InMemory storage instead.
+23492 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+23492 INFO  (searcherExecutor-43-thread-1-processing-fromCore) [ x:fromCore] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+23500 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 8
+23502 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+23503 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3]} 0 0
+23504 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[4]} 0 0
+23505 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[5]} 0 0
+23509 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+23509 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 4
+23534 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults()}}{add=[(null), (null), (null), (null)]} 0 15
+23538 INFO  (searcherExecutor-43-thread-1-processing-fromCore) [ x:fromCore] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+23539 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [ x:fromCore] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults(commit=true&softCommit=false&waitSearcher=true)}}{commit=} 0 3
+23543 INFO  (TEST-TestCrossCoreJoin.testJoin-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testJoin
+23632 INFO  (TEST-TestCrossCoreJoin.testJoin-seed#[18458C0FFEE18458]) [ x:fromCore] o.a.s.c.S.Request path=null params={q={!join+from%3Ddept_id_s+to%3Ddept_s+fromIndex%3DfromCore}cat:dev&fl=id&debug=false&wt=xml} hits=3 status=0 QTime=88
+23851 INFO  (TEST-TestCrossCoreJoin.testJoin-seed#[18458C0FFEE18458]) [ x:fromCore] o.a.s.c.S.Request path=/export params={q={!join+from%3Ddept_id_s+to%3Ddept_s+fromIndex%3DfromCore}cat:dev&fl=id_s_dv&sort=id_s_dv+asc&debug=true&wt=xml} hits=3 status=0 QTime=206
+23958 INFO  (TEST-TestCrossCoreJoin.testJoin-seed#[18458C0FFEE18458]) [ x:fromCore] o.a.s.c.S.Request path=null params={q={!join+from%3Ddept_id_s+to%3Ddept_s+fromIndex%3DfromCore}cat:dev&fl=id&fq=name:john&debug=false&wt=xml} hits=1 status=0 QTime=3
+23958 INFO  (TEST-TestCrossCoreJoin.testJoin-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testJoin
+23962 INFO  (TEST-TestCrossCoreJoin.testScoreJoin-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testScoreJoin
+24021 INFO  (TEST-TestCrossCoreJoin.testScoreJoin-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!join++score%3DNone++from%3Ddept_id_s+to%3Ddept_s+fromIndex%3DfromCore}cat:dev&fl=id&debug=false&wt=xml} hits=3 status=0 QTime=46
+24022 INFO  (TEST-TestCrossCoreJoin.testScoreJoin-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/export params={q={!join++score%3DNone++from%3Ddept_id_s+to%3Ddept_s+fromIndex%3DfromCore}cat:dev&fl=id_s_dv&sort=id_s_dv+asc&debug=false&wt=xml} hits=3 status=0 QTime=0
+24024 INFO  (TEST-TestCrossCoreJoin.testScoreJoin-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!join++score%3DNone++from%3Ddept_id_s+to%3Ddept_s+fromIndex%3DfromCore}cat:dev&fl=id&fq=name:john&debug=false&wt=xml} hits=1 status=0 QTime=1
+24024 INFO  (TEST-TestCrossCoreJoin.testScoreJoin-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testScoreJoin
+24028 INFO  (TEST-TestCrossCoreJoin.testCoresAreDifferent-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testCoresAreDifferent
+24029 INFO  (TEST-TestCrossCoreJoin.testCoresAreDifferent-seed#[18458C0FFEE18458]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-6 for ERROR logs matching regex: .
+24029 INFO  (TEST-TestCrossCoreJoin.testCoresAreDifferent-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=cat:*&qt=&start=0&rows=20&wt=xml} status=400 QTime=0
+24029 INFO  (TEST-TestCrossCoreJoin.testCoresAreDifferent-seed#[18458C0FFEE18458]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-6 after muting 1 log messages
+24031 INFO  (TEST-TestCrossCoreJoin.testCoresAreDifferent-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=cat:*&rows=100} hits=1 status=0 QTime=1
+24031 INFO  (TEST-TestCrossCoreJoin.testCoresAreDifferent-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testCoresAreDifferent
+24032 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+24032 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=348371033
+24032 INFO  (coreCloseExecutor-50-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@33c57d67 collection1
+24032 INFO  (coreCloseExecutor-50-thread-2) [ x:fromCore] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@4374d56a fromCore
+24032 INFO  (coreCloseExecutor-50-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+24033 INFO  (coreCloseExecutor-50-thread-2) [ x:fromCore] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Oct 19, 2026 4:47:34 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+24035 INFO  (SUITE-TestCrossCoreJoin-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-5 after muting 0 log messages
+]]></system-err>
+</testsuite>

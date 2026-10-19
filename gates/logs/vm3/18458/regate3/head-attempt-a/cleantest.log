@@ -1,0 +1,13 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:solrj:cleanTest UP-TO-DATE
+> Task :solr:core:cleanTest UP-TO-DATE
+> Task :solr:modules:ltr:cleanTest UP-TO-DATE
+> Task :solr:modules:language-models:cleanTest UP-TO-DATE
+
+BUILD SUCCESSFUL in 30s
+8 actionable tasks: 8 up-to-date
+rc=0

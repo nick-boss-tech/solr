@@ -1,0 +1,326 @@
+Downloading gradle-wrapper.jar from https://raw.githubusercontent.com/gradle/gradle/v8.10.2/gradle/wrapper/gradle-wrapper.jar
+Generating gradle.properties
+Starting a Gradle Daemon, 2 busy Daemons could not be reused, use --status for details
+
+> Task :build-infra:compileJava
+Note: /workspace/worktrees/solr-18458-proof/build-tools/build-infra/src/main/java/org/apache/lucene/gradle/Checksum.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :build-infra:pluginDescriptors
+> Task :build-infra:processResources
+> Task :build-infra:classes
+> Task :build-infra:jar
+> Task :solr:api:processResources NO-SOURCE
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:core:processResources
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=18458C0FFEE18458
+
+> Task :solr:api:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:api:classes
+> Task :solr:api:resolve
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/solr-18458-proof/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-18458-proof/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+> Task :solr:core:processTestResources
+> Task :solr:api:jar
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:processResources
+> Task :solr:modules:analysis-extras:processResources NO-SOURCE
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:compileJava
+Note: /workspace/worktrees/solr-18458-proof/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-zookeeper:compileJava
+> Task :solr:solrj:processResources
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar
+> Task :solr:solrj-jetty:classes
+> Task :solr:solrj-jetty:jar
+> Task :solr:solrj-zookeeper:classes
+> Task :solr:solrj-zookeeper:jar
+
+> Task :solr:solrj-streaming:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-streaming:classes
+> Task :solr:solrj-streaming:jar
+> Task :solr:core:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:classes
+> Task :solr:core:jar
+
+> Task :solr:modules:analysis-extras:compileJava
+Note: /workspace/worktrees/solr-18458-proof/solr/modules/analysis-extras/src/java/org/apache/solr/schema/ICUCollationField.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:analysis-extras:classes
+> Task :solr:modules:analysis-extras:jar
+
+> Task :solr:test-framework:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:test-framework:classes
+> Task :solr:test-framework:jar
+> Task :solr:core:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:testClasses
+
+> Task :solr:core:test
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+
+DebugComponentTest > testLegacyDebugQueryParameterIgnored FAILED
+    java.lang.AssertionError: REQUEST FAILED: xpath=count(//lst[@name='debug'])=0
+    	xml response was: <?xml version="1.0" encoding="UTF-8"?>
+    <response>
+    <lst name="responseHeader"><int name="status">0</int><int name="QTime">274</int></lst><result name="response" numFound="3" start="0" numFoundExact="true"><doc><str name="id">1</str><arr name="range_facet_l"><long>1</long></arr><int name="id_i1">1</int><arr name="range_facet_l_dv"><long>1</long></arr><arr name="range_facet_i_dv"><int>1</int></arr><arr name="title"><str>this is a title.</str></arr><arr name="title_stringNoNorms"><str>this is a title.</str></arr><arr name="max_chars"><str>this is a </str></arr><arr name="no_max_chars"><str>this is a title.</str></arr><arr name="large_max_chars"><str>this is a title.</str></arr><bool name="inStock_b1">true</bool><arr name="multiDefault"><str>muLti-Default</str></arr><int name="intDefault">42</int><date name="timestamp">2026-10-19T08:18:23.328Z</date><long name="_version_">1879465424080338944</long><int name="intDvoDefault">42</int></doc><doc><str name="id">2</str><arr name="range_facet_l"><long>2</long></arr><int name="id_i1">2</int><arr name="range_facet_l_dv"><long>2</long></arr><arr name="range_facet_i_dv"><int>2</int></arr><arr name="title"><str>this is another title.</str></arr><arr name="title_stringNoNorms"><str>this is another title.</str></arr><arr name="max_chars"><str>this is an</str></arr><arr name="no_max_chars"><str>this is another title.</str></arr><arr name="large_max_chars"><str>this is another title.</str></arr><bool name="inStock_b1">true</bool><arr name="multiDefault"><str>muLti-Default</str></arr><int name="intDefault">42</int><date name="timestamp">2026-10-19T08:18:23.836Z</date><long name="_version_">1879465424413786112</long><int name="intDvoDefault">42</int></doc><doc><str name="id">3</str><arr name="range_facet_l"><long>3</long></arr><int name="id_i1">3</int><arr name="range_facet_l_dv"><long>3</long></arr><arr name="range_facet_i_dv"><int>3</int></arr><arr name="title"><str>Mary had a little lamb.</str></arr><arr name="title_stringNoNorms"><str>Mary had a little lamb.</str></arr><arr name="max_chars"><str>Mary had a</str></arr><arr name="no_max_chars"><str>Mary had a little lamb.</str></arr><arr name="large_max_chars"><str>Mary had a little lamb.</str></arr><bool name="inStock_b1">false</bool><arr name="multiDefault"><str>muLti-Default</str></arr><int name="intDefault">42</int><date name="timestamp">2026-10-19T08:18:23.838Z</date><long name="_version_">1879465424415883264</long><int name="intDvoDefault">42</int></doc></result><lst name="debug"><str name="rawquerystring">*:*</str><str name="querystring">*:*</str><str name="parsedquery">MatchAllDocsQuery(*:*)</str><str name="parsedquery_toString">*:*</str><lst name="explain"><str name="1">
+    1.0 = *:*
+    </str><str name="2">
+    1.0 = *:*
+    </str><str name="3">
+    1.0 = *:*
+    </str></lst><str name="QParser">LuceneQParser</str><lst name="timing"><double name="time">274.0</double><lst name="prepare"><double name="time">146.0</double><lst name="query"><double name="time">146.0</double></lst><lst name="facet"><double name="time">0.0</double></lst><lst name="facet_module"><double name="time">0.0</double></lst><lst name="mlt"><double name="time">0.0</double></lst><lst name="highlight"><double name="time">0.0</double></lst><lst name="stats"><double name="time">0.0</double></lst><lst name="expand"><double name="time">0.0</double></lst><lst name="terms"><double name="time">0.0</double></lst><lst name="debug"><double name="time">0.0</double></lst></lst><lst name="process"><double name="time">119.0</double><lst name="query"><double name="time">80.0</double></lst><lst name="facet"><double name="time">0.0</double></lst><lst name="facet_module"><double name="time">8.0</double></lst><lst name="mlt"><double name="time">0.0</double></lst><lst name="highlight"><double name="time">0.0</double></lst><lst name="stats"><double name="time">0.0</double></lst><lst name="expand"><double name="time">0.0</double></lst><lst name="terms"><double name="time">0.0</double></lst><lst name="debug"><double name="time">29.0</double></lst></lst></lst></lst>
+    </response>
+
+    	request was:q=*:*&debugQuery=true&wt=xml
+        at __randomizedtesting.SeedInfo.seed([18458C0FFEE18458:BBC5BA037847E5F6]:0)
+        at org.junit.Assert.fail(Assert.java:89)
+        at org.apache.solr.SolrTestCaseJ4.assertQ(SolrTestCaseJ4.java:841)
+        at org.apache.solr.SolrTestCaseJ4.assertQ(SolrTestCaseJ4.java:805)
+        at org.apache.solr.handler.component.DebugComponentTest.testLegacyDebugQueryParameterIgnored(DebugComponentTest.java:69)
+        at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+        at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+        at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+        at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+        at java.base/java.lang.Thread.run(Thread.java:1583)
+
+org.apache.solr.handler.component.DebugComponentTest > test suite's output saved to /workspace/worktrees/solr-18458-proof/solr/core/build/test-results/test/outputs/OUTPUT-org.apache.solr.handler.component.DebugComponentTest.txt, copied below:
+  2> Oct 19, 2026 8:18:05 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+  2> WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+  2> 2511 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458-proof/solr/server/solr/configsets/_default/conf'
+  2> 2565 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458-proof/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.component.DebugComponentTest_18458C0FFEE18458-001/data-dir-1-001
+  2> 2748 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+  2> 2786 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+  2> 2949 WARN  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458-proof/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458-proof/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+  2> 2949 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+  2> 3003 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+  2> 3008 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+  2> 3569 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458-proof/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458-proof/solr/core/build/resources/test/solr/collection1/lib/classes]
+  2> 3875 WARN  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+  2> 4839 WARN  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.D.s.WordDelimiterFilterFactory Solr loaded a deprecated plugin/analysis class [solr.WordDelimiterFilterFactory]. Please consult documentation how to replace it accordingly.
+  2> 5735 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+  2> 6528 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+  2> 6579 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+  2> 8639 WARN  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+  2> 10251 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458-proof/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458-proof/solr/core/build/resources/test/solr/collection1/lib/classes]
+  2> 10278 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+  2> 10351 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+  2> 10395 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/worktrees/solr-18458-proof/solr/core/build/resources/test/solr/collection1
+  2> 10692 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458-proof/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/worktrees/solr-18458-proof/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.component.DebugComponentTest_18458C0FFEE18458-001/data-dir-1-001/]
+  2> 10776 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=14, maxMergedSegmentMB=56.029245376586914, floorSegmentMB=0.7221050262451172, forceMergeDeletesPctAllowed=20.703078930158558, segmentsPerTier=22.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.6608090966200612, deletesPctAllowed=42.49760572542188, targetSearchConcurrency=5
+  2> 15808 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+  2> 17933 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+  2> 17943 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+  2> 17944 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+  2> 17983 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=35, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8509558294794581]
+  2> 19325 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+  2> 19328 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+  2> 19334 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+  2> 19334 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+  2> 19334 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+  2> 19334 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+  2> 19339 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+  2> 19343 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+  2> 19349 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+  2> 19354 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+  2> 19359 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+  2> 19362 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+  2> 19550 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+  2> 20047 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1879465424080338944)]} 0 412
+  2> 20145 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2 (1879465424413786112)]} 0 1
+  2> 20147 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3 (1879465424415883264)]} 0 1
+  2> 20251 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 17 ms
+  2> 20252 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 104
+  2> 20266 INFO  (TEST-DebugComponentTest.testLegacyDebugQueryParameterIgnored-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testLegacyDebugQueryParameterIgnored
+  2> 20541 INFO  (TEST-DebugComponentTest.testLegacyDebugQueryParameterIgnored-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debugQuery=true&wt=xml} hits=3 status=0 QTime=274
+  2> 20663 INFO  (TEST-DebugComponentTest.testLegacyDebugQueryParameterIgnored-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testLegacyDebugQueryParameterIgnored
+   >     java.lang.AssertionError: REQUEST FAILED: xpath=count(//lst[@name='debug'])=0
+   >     	xml response was: <?xml version="1.0" encoding="UTF-8"?>
+   >     <response>
+   >     <lst name="responseHeader"><int name="status">0</int><int name="QTime">274</int></lst><result name="response" numFound="3" start="0" numFoundExact="true"><doc><str name="id">1</str><arr name="range_facet_l"><long>1</long></arr><int name="id_i1">1</int><arr name="range_facet_l_dv"><long>1</long></arr><arr name="range_facet_i_dv"><int>1</int></arr><arr name="title"><str>this is a title.</str></arr><arr name="title_stringNoNorms"><str>this is a title.</str></arr><arr name="max_chars"><str>this is a </str></arr><arr name="no_max_chars"><str>this is a title.</str></arr><arr name="large_max_chars"><str>this is a title.</str></arr><bool name="inStock_b1">true</bool><arr name="multiDefault"><str>muLti-Default</str></arr><int name="intDefault">42</int><date name="timestamp">2026-10-19T08:18:23.328Z</date><long name="_version_">1879465424080338944</long><int name="intDvoDefault">42</int></doc><doc><str name="id">2</str><arr name="range_facet_l"><long>2</long></arr><int name="id_i1">2</int><arr name="range_facet_l_dv"><long>2</long></arr><arr name="range_facet_i_dv"><int>2</int></arr><arr name="title"><str>this is another title.</str></arr><arr name="title_stringNoNorms"><str>this is another title.</str></arr><arr name="max_chars"><str>this is an</str></arr><arr name="no_max_chars"><str>this is another title.</str></arr><arr name="large_max_chars"><str>this is another title.</str></arr><bool name="inStock_b1">true</bool><arr name="multiDefault"><str>muLti-Default</str></arr><int name="intDefault">42</int><date name="timestamp">2026-10-19T08:18:23.836Z</date><long name="_version_">1879465424413786112</long><int name="intDvoDefault">42</int></doc><doc><str name="id">3</str><arr name="range_facet_l"><long>3</long></arr><int name="id_i1">3</int><arr name="range_facet_l_dv"><long>3</long></arr><arr name="range_facet_i_dv"><int>3</int></arr><arr name="title"><str>Mary had a little lamb.</str></arr><arr name="title_stringNoNorms"><str>Mary had a little lamb.</str></arr><arr name="max_chars"><str>Mary had a</str></arr><arr name="no_max_chars"><str>Mary had a little lamb.</str></arr><arr name="large_max_chars"><str>Mary had a little lamb.</str></arr><bool name="inStock_b1">false</bool><arr name="multiDefault"><str>muLti-Default</str></arr><int name="intDefault">42</int><date name="timestamp">2026-10-19T08:18:23.838Z</date><long name="_version_">1879465424415883264</long><int name="intDvoDefault">42</int></doc></result><lst name="debug"><str name="rawquerystring">*:*</str><str name="querystring">*:*</str><str name="parsedquery">MatchAllDocsQuery(*:*)</str><str name="parsedquery_toString">*:*</str><lst name="explain"><str name="1">
+   >     1.0 = *:*
+   >     </str><str name="2">
+   >     1.0 = *:*
+   >     </str><str name="3">
+   >     1.0 = *:*
+   >     </str></lst><str name="QParser">LuceneQParser</str><lst name="timing"><double name="time">274.0</double><lst name="prepare"><double name="time">146.0</double><lst name="query"><double name="time">146.0</double></lst><lst name="facet"><double name="time">0.0</double></lst><lst name="facet_module"><double name="time">0.0</double></lst><lst name="mlt"><double name="time">0.0</double></lst><lst name="highlight"><double name="time">0.0</double></lst><lst name="stats"><double name="time">0.0</double></lst><lst name="expand"><double name="time">0.0</double></lst><lst name="terms"><double name="time">0.0</double></lst><lst name="debug"><double name="time">0.0</double></lst></lst><lst name="process"><double name="time">119.0</double><lst name="query"><double name="time">80.0</double></lst><lst name="facet"><double name="time">0.0</double></lst><lst name="facet_module"><double name="time">8.0</double></lst><lst name="mlt"><double name="time">0.0</double></lst><lst name="highlight"><double name="time">0.0</double></lst><lst name="stats"><double name="time">0.0</double></lst><lst name="expand"><double name="time">0.0</double></lst><lst name="terms"><double name="time">0.0</double></lst><lst name="debug"><double name="time">29.0</double></lst></lst></lst></lst>
+   >     </response>
+   > 
+   >     	request was:q=*:*&debugQuery=true&wt=xml
+   >         at __randomizedtesting.SeedInfo.seed([18458C0FFEE18458:BBC5BA037847E5F6]:0)
+   >         at org.junit.Assert.fail(Assert.java:89)
+   >         at org.apache.solr.SolrTestCaseJ4.assertQ(SolrTestCaseJ4.java:841)
+   >         at org.apache.solr.SolrTestCaseJ4.assertQ(SolrTestCaseJ4.java:805)
+   >         at org.apache.solr.handler.component.DebugComponentTest.testLegacyDebugQueryParameterIgnored(DebugComponentTest.java:69)
+   >         at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+   >         at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+   >         at java.base/java.lang.Thread.run(Thread.java:1583)
+  2> NOTE: reproduce with: gradlew test --tests DebugComponentTest.testLegacyDebugQueryParameterIgnored -Dtests.seed=18458C0FFEE18458 -Dtests.locale=sah-Cyrl-RU -Dtests.timezone=Europe/Athens -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+  2> 20675 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+  2> 20675 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1731622626
+  2> 20677 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@356a16be collection1
+  2> 20678 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+  2> Алт 19, 2026 11:18:24 ЭИ io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+  2> WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+  2> 20718 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+  2> NOTE: leaving temporary files on disk at: /workspace/worktrees/solr-18458-proof/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.component.DebugComponentTest_18458C0FFEE18458-001
+  2> NOTE: test params are: codec=Asserting(Lucene104): {}, docValues:{}, maxPointsInLeafNode=990, maxMBSortInHeap=7.789319036154379, sim=Asserting(RandomSimilarity(queryNorm=true): {}), locale=sah-Cyrl-RU, timezone=Europe/Athens
+  2> NOTE: Linux 6.1.166-24.303.amzn2023.aarch64 aarch64/Eclipse Adoptium 21.0.12.1 (64-bit)/cpus=1,threads=1,free=167495792,total=255852544
+  2> NOTE: All tests run in this JVM: [DebugComponentTest]
+
+:solr:core:test (FAILURE): 1 test(s), 1 failure(s)
+
+1 test completed, 1 failed
+
+> Task :solr:core:test FAILED
+> Task :solr:core:wipeTaskTemp
+ERROR: The following test(s) have failed:
+  - org.apache.solr.handler.component.DebugComponentTest.testLegacyDebugQueryParameterIgnored (:solr:core)
+    Test history: https://develocity.apache.org/scans/tests?search.rootProjectNames=solr-root&tests.container=org.apache.solr.handler.component.DebugComponentTest&tests.test=testLegacyDebugQueryParameterIgnored http://fucit.org/solr-jenkins-reports/history-trend-of-recent-failures.html#series/org.apache.solr.handler.component.DebugComponentTest.testLegacyDebugQueryParameterIgnored
+    Test output: /workspace/worktrees/solr-18458-proof/solr/core/build/test-results/test/outputs/OUTPUT-org.apache.solr.handler.component.DebugComponentTest.txt
+    Reproduce with: ./gradlew :solr:core:test --tests "org.apache.solr.handler.component.DebugComponentTest.testLegacyDebugQueryParameterIgnored" "-Ptests.jvmargs=-XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:ReservedCodeCacheSize=120m" -Ptests.seed=18458C0FFEE18458 -Ptests.useSecurityManager=true -Ptests.file.encoding=US-ASCII
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':solr:core:test'.
+> There were failing tests. See the results at: file:///workspace/worktrees/solr-18458-proof/solr/core/build/test-results/test/
+
+BUILD FAILED in 6m 40s
+35 actionable tasks: 35 executed
+rc=1

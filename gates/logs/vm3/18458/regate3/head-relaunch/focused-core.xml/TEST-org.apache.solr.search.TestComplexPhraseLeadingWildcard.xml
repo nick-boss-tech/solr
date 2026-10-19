@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.search.TestComplexPhraseLeadingWildcard" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:49:52.476Z" hostname="localhost" time="0.914">
+  <properties/>
+  <testcase name="testReverseWithoutOriginal" classname="org.apache.solr.search.TestComplexPhraseLeadingWildcard" time="0.074"/>
+  <testcase name="testWithoutReverse" classname="org.apache.solr.search.TestComplexPhraseLeadingWildcard" time="0.019"/>
+  <testcase name="testReverseWithOriginal" classname="org.apache.solr.search.TestComplexPhraseLeadingWildcard" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[162425 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+162435 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.TestComplexPhraseLeadingWildcard_18458C0FFEE18458-001/data-dir-8-001
+162435 WARN  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=2 numCloses=2
+162435 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-209 for ERROR logs matching regex: ignore_exception
+162436 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+162438 WARN  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+162438 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+162438 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+162438 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+162446 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+162463 WARN  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+162467 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.7 with uniqueid field id
+162467 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+162467 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+162703 WARN  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+162715 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+162731 WARN  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+162735 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.7 with uniqueid field id
+162735 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+162735 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.search.TestComplexPhraseLeadingWildcard_18458C0FFEE18458-001/data-dir-8-001/]
+162736 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=13, maxMergedSegmentMB=25.35772132873535, floorSegmentMB=0.5826749801635742, forceMergeDeletesPctAllowed=13.434568687686522, segmentsPerTier=13.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.0, deletesPctAllowed=41.140259027102346, targetSearchConcurrency=16
+162771 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+162771 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+162771 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+162784 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=23, maxMergedSegmentMB=102.74170398712158, floorSegmentMB=0.6878833770751953, forceMergeDeletesPctAllowed=5.274398308258061, segmentsPerTier=23.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.7579478009986337, deletesPctAllowed=45.09629695560632, targetSearchConcurrency=12
+163136 INFO  (coreLoadExecutor-513-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+163136 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+163141 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+163141 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+163141 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+163141 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+163145 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+163149 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+163154 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+163158 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+163162 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+163163 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+163190 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+163198 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1879467405619494912)]} 0 7
+163200 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2 (1879467405628932096)]} 0 0
+163201 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7 (1879467405628932097)]} 0 0
+163201 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[8 (1879467405629980672)]} 0 0
+163202 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[9 (1879467405631029248)]} 0 0
+163206 INFO  (searcherExecutor-515-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+163210 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 7
+163215 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithoutOriginal-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testReverseWithoutOriginal
+163273 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithoutOriginal-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"on*+for*"&df=two&wt=xml} hits=0 status=0 QTime=58
+163284 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithoutOriginal-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"*nce+*ver"&df=two&wt=xml} hits=1 status=0 QTime=10
+163284 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithoutOriginal-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testReverseWithoutOriginal
+163289 INFO  (TEST-TestComplexPhraseLeadingWildcard.testWithoutReverse-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testWithoutReverse
+163292 INFO  (TEST-TestComplexPhraseLeadingWildcard.testWithoutReverse-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"on*+*ver"&df=three&indent=on&debug=true&wt=xml} hits=2 status=0 QTime=3
+163295 INFO  (TEST-TestComplexPhraseLeadingWildcard.testWithoutReverse-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"ON*+*VER"&df=three&wt=xml} hits=2 status=0 QTime=1
+163297 INFO  (TEST-TestComplexPhraseLeadingWildcard.testWithoutReverse-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"ON*+*ver"&df=three&wt=xml} hits=2 status=0 QTime=1
+163299 INFO  (TEST-TestComplexPhraseLeadingWildcard.testWithoutReverse-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"on*+*ver"~1&df=three&wt=xml} hits=3 status=0 QTime=1
+163302 INFO  (TEST-TestComplexPhraseLeadingWildcard.testWithoutReverse-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"on*+[*+TO+a]"&df=three&wt=xml} hits=0 status=0 QTime=2
+163304 INFO  (TEST-TestComplexPhraseLeadingWildcard.testWithoutReverse-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"[on+TO+onZ]+for*"&df=three&wt=xml} hits=1 status=0 QTime=0
+163304 INFO  (TEST-TestComplexPhraseLeadingWildcard.testWithoutReverse-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testWithoutReverse
+163308 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithOriginal-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testReverseWithOriginal
+163311 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithOriginal-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"on*+*ver"&df=one&indent=on&debug=true&wt=xml} hits=2 status=0 QTime=2
+163313 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithOriginal-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"ON*+*VER"&df=one&wt=xml} hits=2 status=0 QTime=1
+163315 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithOriginal-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"ON*+*ver"&df=one&wt=xml} hits=2 status=0 QTime=1
+163317 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithOriginal-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"on*+*ver"~1&df=one&wt=xml} hits=3 status=0 QTime=1
+163318 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithOriginal-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"on*+[*+TO+a]"&df=one&wt=xml} hits=0 status=0 QTime=0
+163320 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithOriginal-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+inOrder%3Dtrue}"[on+TO+onZ]+for*"&df=one&wt=xml} hits=1 status=0 QTime=0
+163320 INFO  (TEST-TestComplexPhraseLeadingWildcard.testReverseWithOriginal-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testReverseWithOriginal
+163320 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+163320 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1084608595
+163321 INFO  (coreCloseExecutor-521-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@6a5d924b collection1
+163321 INFO  (coreCloseExecutor-521-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Oktoba 19, 2026 4:49:53 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+163324 INFO  (SUITE-TestComplexPhraseLeadingWildcard-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-209 after muting 0 log messages
+]]></system-err>
+</testsuite>

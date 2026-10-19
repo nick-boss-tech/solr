@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.ltr.feature.TestRankingFeature" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:56:41.855Z" hostname="localhost" time="4.779">
+  <properties/>
+  <testcase name="testParamsToMap" classname="org.apache.solr.ltr.feature.TestRankingFeature" time="2.145"/>
+  <testcase name="testRankingSolrFeature" classname="org.apache.solr.ltr.feature.TestRankingFeature" time="2.596"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[43725 INFO  (SUITE-TestRankingFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+43736 INFO  (SUITE-TestRankingFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/data-dir-4-001
+43736 WARN  (SUITE-TestRankingFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=42 numCloses=42
+43736 INFO  (SUITE-TestRankingFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-4 for ERROR logs matching regex: ignore_exception
+43736 INFO  (SUITE-TestRankingFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=false
+43741 WARN  (SUITE-TestRankingFeature-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+43741 INFO  (SUITE-TestRankingFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+43741 INFO  (SUITE-TestRankingFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+43746 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testParamsToMap
+43900 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+43900 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+43901 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+43902 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+43902 WARN  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@cdfad85{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@1c8592f8{STOPPED}}. May not be supported in future releases.
+43902 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+43903 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@cdfad85{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@1c8592f8{STARTED}}
+43903 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001, hostPort=38587, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-002}
+43903 ERROR (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+43903 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+43903 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+43903 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+43903 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+43903 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:42.055675759Z
+43903 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+43904 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/solr.xml
+43910 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+43910 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+45545 WARN  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+45551 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-002
+45619 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@cdfad85{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@1c8592f8{STARTED}}
+45619 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@1e80c927{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:38587}
+45619 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@5a5296be{STARTING}[12.1.14,sto=0] @1718ms
+45619 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#38587
+45672 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+45678 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1
+45679 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-002/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-002/collection1/data/]
+45689 WARN  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+45715 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+45715 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+45715 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+45736 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+45738 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+45738 WARN  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+45738 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+45738 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+45738 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+45738 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+45738 WARN  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+45738 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+45738 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+45738 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+45738 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+45739 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+45739 INFO  (searcherExecutor-613-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+45768 INFO  (qtp1486626262-844-null-342) [ x:collection1 t:null-342] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467836217229312)]} 0 8
+45771 INFO  (qtp1486626262-845-null-343) [ x:collection1 t:null-343] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467836228763648)]} 0 0
+45773 INFO  (qtp1486626262-846-null-344) [ x:collection1 t:null-344] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467836230860800)]} 0 0
+45774 INFO  (qtp1486626262-847-null-345) [ x:collection1 t:null-345] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467836231909376)]} 0 0
+45777 INFO  (qtp1486626262-842-null-346) [ x:collection1 t:null-346] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467836234006528)]} 0 0
+45778 INFO  (qtp1486626262-843-null-347) [ x:collection1 t:null-347] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467836236103680)]} 0 0
+45780 INFO  (qtp1486626262-844-null-348) [ x:collection1 t:null-348] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467836238200832)]} 0 0
+45781 INFO  (qtp1486626262-845-null-349) [ x:collection1 t:null-349] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467836239249408)]} 0 0
+45786 INFO  (searcherExecutor-613-thread-1-processing-collection1 null-350) [ x:collection1 t:null-350] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+45791 INFO  (qtp1486626262-846-null-350) [ x:collection1 t:null-350] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 8
+45795 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@5a5296be{STOPPING}[12.1.14,sto=0]
+45795 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@1e80c927{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+45795 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1061922333
+45795 INFO  (coreCloseExecutor-620-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@7a44834a collection1
+45796 INFO  (coreCloseExecutor-620-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Okt 19, 2026 4:56:43 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+45802 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@cdfad85{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@1c8592f8{STOPPED}}
+45885 INFO  (TEST-TestRankingFeature.testParamsToMap-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testParamsToMap
+45890 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testRankingSolrFeature
+46047 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+46047 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+46047 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+46048 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+46048 WARN  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@60b4f4bf{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@60fe3b05{STOPPED}}. May not be supported in future releases.
+46049 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/
+46049 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@60b4f4bf{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@60fe3b05{STARTED}}
+46049 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.e.JettySolrRunner Jetty properties: {configSetBaseDir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001, hostPort=42515, coreRootDirectory=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-003}
+46050 ERROR (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+46050 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+46050 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 344485485fb8e1706a1e04c02e373d8a97bcd1b8 [snapshot build, details omitted]
+46050 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+46050 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18458/solr
+46050 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-19T08:56:44.202189639Z
+46050 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001 (source: servlet config: solr.solr.home)
+46050 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/solr.xml
+46056 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+48020 WARN  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+48027 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-003
+48077 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@60b4f4bf{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@60fe3b05{STARTED}}
+48078 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@49b13c8f{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:42515}
+48078 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Started oejs.Server@60596371{STARTING}[12.1.14,sto=0] @2031ms
+48078 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#42515
+48126 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+48131 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1
+48132 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-003/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-003/collection1/data/]
+48140 WARN  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.c.RequestHandlers no default request handler is registered (either '/select' or 'standard')
+48165 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+48165 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+48165 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 1000ms; 
+48186 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+48188 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedFeatureStore for path /schema/feature-store
+48188 WARN  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/feature-store
+48188 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedFeatureStore ------ managed feature ~ loading ------
+48188 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/feature-store
+48188 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/feature-store
+48188 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.ltr.store.rest.ManagedModelStore for path /schema/model-store
+48189 WARN  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/model-store
+48189 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore INIT model store
+48189 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.l.s.r.ManagedModelStore ------ managed models ~ loading ------
+48189 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.ManagedResource Notified 1 observers of /schema/model-store
+48189 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.r.RestManager Registered new managed resource /schema/model-store
+48189 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+48189 INFO  (searcherExecutor-635-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+48218 INFO  (qtp1194704215-874-null-351) [ x:collection1 t:null-351] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[1 (1879467838786240512)]} 0 8
+48220 INFO  (qtp1194704215-875-null-352) [ x:collection1 t:null-352] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[2 (1879467838796726272)]} 0 0
+48222 INFO  (qtp1194704215-876-null-353) [ x:collection1 t:null-353] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[3 (1879467838798823424)]} 0 0
+48224 INFO  (qtp1194704215-877-null-354) [ x:collection1 t:null-354] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[4 (1879467838799872000)]} 0 0
+48225 INFO  (qtp1194704215-872-null-355) [ x:collection1 t:null-355] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[5 (1879467838801969152)]} 0 0
+48227 INFO  (qtp1194704215-873-null-356) [ x:collection1 t:null-356] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[6 (1879467838804066304)]} 0 0
+48229 INFO  (qtp1194704215-874-null-357) [ x:collection1 t:null-357] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[7 (1879467838806163456)]} 0 0
+48230 INFO  (qtp1194704215-875-null-358) [ x:collection1 t:null-358] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{add=[8 (1879467838807212032)]} 0 0
+48236 INFO  (searcherExecutor-635-thread-1-processing-collection1 null-359) [ x:collection1 t:null-359] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+48239 INFO  (qtp1194704215-876-null-359) [ x:collection1 t:null-359] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{commit=} 0 7
+48240 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"powpularityS",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"q":"{!func}pow(popularity,2)"}
+}
+ 
+48241 INFO  (qtp1194704215-877-null-360) [ x:collection1 t:null-360] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@5aa19450] for /schema/feature-store
+48241 INFO  (qtp1194704215-877-null-360) [ x:collection1 t:null-360] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=powpularityS, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!func}pow(popularity,2)}} is a java.util.LinkedHashMap
+48241 INFO  (qtp1194704215-877-null-360) [ x:collection1 t:null-360] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=powpularityS, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!func}pow(popularity,2)}}
+48250 INFO  (qtp1194704215-877-null-360) [ x:collection1 t:null-360] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+48250 INFO  (qtp1194704215-877-null-360) [ x:collection1 t:null-360] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+48250 INFO  (qtp1194704215-877-null-360) [ x:collection1 t:null-360] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=9
+48251 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"unpopularityS",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"q":"{!func}div(1,popularity)"}
+}
+ 
+48252 INFO  (qtp1194704215-872-null-361) [ x:collection1 t:null-361] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@5aa19450] for /schema/feature-store
+48252 INFO  (qtp1194704215-872-null-361) [ x:collection1 t:null-361] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=unpopularityS, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!func}div(1,popularity)}} is a java.util.LinkedHashMap
+48252 INFO  (qtp1194704215-872-null-361) [ x:collection1 t:null-361] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=unpopularityS, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!func}div(1,popularity)}}
+48265 INFO  (qtp1194704215-872-null-361) [ x:collection1 t:null-361] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+48265 INFO  (qtp1194704215-872-null-361) [ x:collection1 t:null-361] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+48265 INFO  (qtp1194704215-872-null-361) [ x:collection1 t:null-361] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+48266 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"powpularityS-model",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"powpularityS"}
+]
+,
+"params":{"weights":{"powpularityS":1.0}}
+}
+ 
+48266 INFO  (qtp1194704215-873-null-362) [ x:collection1 t:null-362] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@5aa19450]] for /schema/model-store
+48266 INFO  (qtp1194704215-873-null-362) [ x:collection1 t:null-362] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=powpularityS-model, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=powpularityS}], params={weights={powpularityS=1.0}}} is a java.util.LinkedHashMap
+48268 INFO  (qtp1194704215-873-null-362) [ x:collection1 t:null-362] o.a.s.l.s.r.ManagedModelStore adding model powpularityS-model
+48278 INFO  (qtp1194704215-873-null-362) [ x:collection1 t:null-362] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+48278 INFO  (qtp1194704215-873-null-362) [ x:collection1 t:null-362] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+48278 INFO  (qtp1194704215-873-null-362) [ x:collection1 t:null-362] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=11
+48279 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"unpopularityS-model",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"unpopularityS"}
+]
+,
+"params":{"weights":{"unpopularityS":1.0}}
+}
+ 
+48279 INFO  (qtp1194704215-874-null-363) [ x:collection1 t:null-363] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[powpularityS-model]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@5aa19450]] for /schema/model-store
+48280 INFO  (qtp1194704215-874-null-363) [ x:collection1 t:null-363] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=unpopularityS-model, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=unpopularityS}], params={weights={unpopularityS=1.0}}} is a java.util.LinkedHashMap
+48280 INFO  (qtp1194704215-874-null-363) [ x:collection1 t:null-363] o.a.s.l.s.r.ManagedModelStore adding model unpopularityS-model
+48293 INFO  (qtp1194704215-874-null-363) [ x:collection1 t:null-363] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+48293 INFO  (qtp1194704215-874-null-363) [ x:collection1 t:null-363] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+48293 INFO  (qtp1194704215-874-null-363) [ x:collection1 t:null-363] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=13
+48295 INFO  (qtp1194704215-875-null-364) [ x:collection1 t:null-364] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+48297 INFO  (qtp1194704215-876-null-365) [ x:collection1 t:null-365] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+48299 INFO  (qtp1194704215-877-null-366) [ x:collection1 t:null-366] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+48301 INFO  (qtp1194704215-872-null-367) [ x:collection1 t:null-367] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+48302 INFO  (qtp1194704215-873-null-368) [ x:collection1 t:null-368] o.a.s.c.S.Request path=/query params={q=title:w1&indent=on&fl=*,+score&rows=4&wt=json} hits=4 status=0 QTime=0
+48305 INFO  (qtp1194704215-874-null-369) [ x:collection1 t:null-369] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowpularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=2
+48308 INFO  (qtp1194704215-875-null-370) [ x:collection1 t:null-370] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowpularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48311 INFO  (qtp1194704215-876-null-371) [ x:collection1 t:null-371] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowpularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48314 INFO  (qtp1194704215-877-null-372) [ x:collection1 t:null-372] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowpularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48317 INFO  (qtp1194704215-872-null-373) [ x:collection1 t:null-373] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowpularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48320 INFO  (qtp1194704215-873-null-374) [ x:collection1 t:null-374] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowpularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48323 INFO  (qtp1194704215-874-null-375) [ x:collection1 t:null-375] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowpularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48326 INFO  (qtp1194704215-875-null-376) [ x:collection1 t:null-376] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowpularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48329 INFO  (qtp1194704215-876-null-377) [ x:collection1 t:null-377] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowpularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48334 INFO  (qtp1194704215-877-null-378) [ x:collection1 t:null-378] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DunpopularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=3
+48337 INFO  (qtp1194704215-872-null-379) [ x:collection1 t:null-379] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DunpopularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48340 INFO  (qtp1194704215-873-null-380) [ x:collection1 t:null-380] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DunpopularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48343 INFO  (qtp1194704215-874-null-381) [ x:collection1 t:null-381] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DunpopularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48346 INFO  (qtp1194704215-875-null-382) [ x:collection1 t:null-382] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DunpopularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48348 INFO  (qtp1194704215-876-null-383) [ x:collection1 t:null-383] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DunpopularityS-model+reRankDocs%3D4}} hits=4 status=0 QTime=1
+48349 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading feauture 
+{
+"name":"powdesS",
+"store":"test",
+"class":"org.apache.solr.ltr.feature.SolrFeature",
+"params":{"q":"{!func}pow(description,2)"}
+}
+ 
+48350 INFO  (qtp1194704215-877-null-384) [ x:collection1 t:null-384] o.a.s.r.RestManager Found ManagedResource [org.apache.solr.ltr.store.rest.ManagedFeatureStore@5aa19450] for /schema/feature-store
+48350 INFO  (qtp1194704215-877-null-384) [ x:collection1 t:null-384] o.a.s.r.ManagedResource Processing update to /schema/feature-store: {name=powdesS, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!func}pow(description,2)}} is a java.util.LinkedHashMap
+48350 INFO  (qtp1194704215-877-null-384) [ x:collection1 t:null-384] o.a.s.l.s.r.ManagedFeatureStore register feature based on {name=powdesS, store=test, class=org.apache.solr.ltr.feature.SolrFeature, params={q={!func}pow(description,2)}}
+48363 INFO  (qtp1194704215-877-null-384) [ x:collection1 t:null-384] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_feature-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+48363 INFO  (qtp1194704215-877-null-384) [ x:collection1 t:null-384] o.a.s.r.RestManager path=/schema/feature-store params={indent=on&wt=json}
+48363 INFO  (qtp1194704215-877-null-384) [ x:collection1 t:null-384] o.a.s.c.S.Request path=/schema/feature-store params={indent=on&wt=json} status=0 QTime=13
+48364 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.l.TestRerankBase loading model 
+{
+"name":"powdesS-model",
+"store":"test",
+"class":"org.apache.solr.ltr.model.LinearModel",
+"features":[
+	{ "name":"powdesS"}
+]
+,
+"params":{"weights":{"powdesS":1.0}}
+}
+ 
+48365 INFO  (qtp1194704215-872-null-385) [ x:collection1 t:null-385] o.a.s.r.RestManager Found ManagedResource [ManagedModelStore [store=ModelStore [availableModels=[powpularityS-model, unpopularityS-model]], featureStores=org.apache.solr.ltr.store.rest.ManagedFeatureStore@5aa19450]] for /schema/model-store
+48365 INFO  (qtp1194704215-872-null-385) [ x:collection1 t:null-385] o.a.s.r.ManagedResource Processing update to /schema/model-store: {name=powdesS-model, store=test, class=org.apache.solr.ltr.model.LinearModel, features=[{name=powdesS}], params={weights={powdesS=1.0}}} is a java.util.LinkedHashMap
+48365 INFO  (qtp1194704215-872-null-385) [ x:collection1 t:null-385] o.a.s.l.s.r.ManagedModelStore adding model powdesS-model
+48380 INFO  (qtp1194704215-872-null-385) [ x:collection1 t:null-385] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_model-store.json using file:dir=/workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-tmp/org.apache.solr.ltr.feature.TestRankingFeature_18458C0FFEE18458-001/tempDir-001/collection1/conf
+48380 INFO  (qtp1194704215-872-null-385) [ x:collection1 t:null-385] o.a.s.r.RestManager path=/schema/model-store params={indent=on&wt=json}
+48380 INFO  (qtp1194704215-872-null-385) [ x:collection1 t:null-385] o.a.s.c.S.Request path=/schema/model-store params={indent=on&wt=json} status=0 QTime=15
+48382 ERROR (qtp1194704215-873-null-386) [ x:collection1 t:null-386] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: org.apache.solr.ltr.feature.FeatureException: java.lang.UnsupportedOperationException: Unable to extract feature for powdesS
+	at org.apache.solr.search.ReRankCollector.topDocs(ReRankCollector.java:224)
+	at org.apache.solr.search.SolrIndexSearcher.getDocListNC(SolrIndexSearcher.java:1909)
+	at org.apache.solr.search.SolrIndexSearcher.getDocListC(SolrIndexSearcher.java:1711)
+	at org.apache.solr.search.SolrIndexSearcher.search(SolrIndexSearcher.java:792)
+	at org.apache.solr.handler.component.QueryComponent.doProcessUngroupedSearch(QueryComponent.java:1857)
+	at org.apache.solr.handler.component.QueryComponent.process(QueryComponent.java:444)
+	at org.apache.solr.handler.component.SearchHandler.processComponentsLocal(SearchHandler.java:493)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:410)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:234)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.apache.solr.ltr.feature.FeatureException: java.lang.UnsupportedOperationException: Unable to extract feature for powdesS
+	at org.apache.solr.ltr.feature.SolrFeature$SolrFeatureWeight$SolrFeatureScorer.score(SolrFeature.java:251)
+	at org.apache.solr.ltr.feature.extraction.SingleFeatureExtractor.extractFeatureVector(SingleFeatureExtractor.java:60)
+	at org.apache.solr.ltr.feature.extraction.FeatureExtractor.fillFeaturesInfo(FeatureExtractor.java:87)
+	at org.apache.solr.ltr.scoring.FeatureTraversalScorer.score(FeatureTraversalScorer.java:62)
+	at org.apache.solr.ltr.LTRScoringQuery$ModelWeight$ModelScorer.score(LTRScoringQuery.java:539)
+	at org.apache.solr.ltr.LTRRescorer.scoreSingleHit(LTRRescorer.java:210)
+	at org.apache.solr.ltr.LTRRescorer.scoreFeatures(LTRRescorer.java:182)
+	at org.apache.solr.ltr.LTRRescorer.rerank(LTRRescorer.java:140)
+	at org.apache.solr.ltr.LTRRescorer.rescore(LTRRescorer.java:127)
+	at org.apache.solr.search.ReRankCollector.topDocs(ReRankCollector.java:159)
+	... 48 more
+Caused by: java.lang.UnsupportedOperationException
+	at org.apache.lucene.queries.function.FunctionValues.doubleVal(FunctionValues.java:61)
+	at org.apache.solr.search.ValueSourceParser$46.func(ValueSourceParser.java:667)
+	at org.apache.solr.search.ValueSourceParser$Double2Parser$Function$1.doubleVal(ValueSourceParser.java:1735)
+	at org.apache.lucene.queries.function.docvalues.DoubleDocValues.floatVal(DoubleDocValues.java:50)
+	at org.apache.lucene.queries.function.FunctionQuery$AllScorer.score(FunctionQuery.java:131)
+	at org.apache.solr.ltr.feature.SolrFeature$SolrFeatureWeight$SolrFeatureScorer.score(SolrFeature.java:249)
+	... 57 more
+48383 INFO  (qtp1194704215-873-null-386) [ x:collection1 t:null-386] o.a.s.c.S.Request path=/query params={q=title:w1&debug=true&indent=on&fl=*,+score&rows=4&wt=json&rq={!ltr+model%3DpowdesS-model+reRankDocs%3D4}} status=400 QTime=1
+48385 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.Server Stopped oejs.Server@60596371{STOPPING}[12.1.14,sto=0]
+48385 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@49b13c8f{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+48385 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1295890633
+48385 INFO  (coreCloseExecutor-642-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@3f45fdfa collection1
+48386 INFO  (coreCloseExecutor-642-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Okt 19, 2026 4:56:46 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+48389 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@60b4f4bf{/solr,/solr,b=file:///workspace/worktrees/solr-18458/solr/modules/ltr/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@60fe3b05{STOPPED}}
+48481 INFO  (TEST-TestRankingFeature.testRankingSolrFeature-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testRankingSolrFeature
+48482 INFO  (SUITE-TestRankingFeature-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-4 after muting 0 log messages
+]]></system-err>
+</testsuite>

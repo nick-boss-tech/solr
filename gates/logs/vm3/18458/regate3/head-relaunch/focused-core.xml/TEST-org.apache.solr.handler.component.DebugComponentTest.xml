@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.handler.component.DebugComponentTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:49:34.346Z" hostname="localhost" time="1.581">
+  <properties/>
+  <testcase name="testBasicInterface" classname="org.apache.solr.handler.component.DebugComponentTest" time="0.008"/>
+  <testcase name="testLegacyDebugQueryParameterIgnored" classname="org.apache.solr.handler.component.DebugComponentTest" time="0.005"/>
+  <testcase name="testModifyRequestTrack" classname="org.apache.solr.handler.component.DebugComponentTest" time="0.004"/>
+  <testcase name="testPerItemInterface" classname="org.apache.solr.handler.component.DebugComponentTest" time="0.015"/>
+  <testcase name="testSolrQueryShowDebugInfoUsesDebugParameter" classname="org.apache.solr.handler.component.DebugComponentTest" time="0.004"/>
+  <testcase name="testDistributedStageResolution" classname="org.apache.solr.handler.component.DebugComponentTest" time="0.004"/>
+  <testcase name="testPrepare" classname="org.apache.solr.handler.component.DebugComponentTest" time="0.004"/>
+  <testcase name="testQueryToString" classname="org.apache.solr.handler.component.DebugComponentTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[144295 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+144305 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.component.DebugComponentTest_18458C0FFEE18458-001/data-dir-6-001
+144305 WARN  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=279 numCloses=279
+144305 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-11 for ERROR logs matching regex: ignore_exception
+144316 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+144325 WARN  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+144325 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+144325 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+144326 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+144335 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+144441 WARN  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+144486 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+144520 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+144520 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+145222 WARN  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+145233 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+145256 WARN  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+145294 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+145326 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+145326 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.component.DebugComponentTest_18458C0FFEE18458-001/data-dir-6-001/]
+145327 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=14, maxMergedSegmentMB=56.029245376586914, floorSegmentMB=0.7221050262451172, forceMergeDeletesPctAllowed=20.703078930158558, segmentsPerTier=22.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.6608090966200612, deletesPctAllowed=42.49760572542188, targetSearchConcurrency=5
+145374 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+145374 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+145374 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+145386 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=35, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8509558294794581]
+145731 INFO  (coreLoadExecutor-593-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+145732 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+145736 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+145736 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+145736 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+145736 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+145740 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+145744 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+145748 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+145752 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+145756 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+145757 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+145783 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+145791 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1879467387366932480)]} 0 7
+145793 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2 (1879467387376369664)]} 0 0
+145793 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3 (1879467387376369665)]} 0 0
+145797 INFO  (searcherExecutor-595-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+145801 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 7
+145806 INFO  (TEST-DebugComponentTest.testBasicInterface-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testBasicInterface
+145806 INFO  (TEST-DebugComponentTest.testBasicInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debug=true&wt=xml} hits=3 status=0 QTime=0
+145810 INFO  (TEST-DebugComponentTest.testBasicInterface-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testBasicInterface
+145814 INFO  (TEST-DebugComponentTest.testLegacyDebugQueryParameterIgnored-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testLegacyDebugQueryParameterIgnored
+145814 INFO  (TEST-DebugComponentTest.testLegacyDebugQueryParameterIgnored-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debugQuery=true&wt=xml} hits=3 status=0 QTime=0
+145815 INFO  (TEST-DebugComponentTest.testLegacyDebugQueryParameterIgnored-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testLegacyDebugQueryParameterIgnored
+145819 INFO  (TEST-DebugComponentTest.testModifyRequestTrack-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testModifyRequestTrack
+145819 INFO  (TEST-DebugComponentTest.testModifyRequestTrack-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testModifyRequestTrack
+145823 INFO  (TEST-DebugComponentTest.testPerItemInterface-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testPerItemInterface
+145823 INFO  (TEST-DebugComponentTest.testPerItemInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debug=true&wt=xml} hits=3 status=0 QTime=0
+145826 INFO  (TEST-DebugComponentTest.testPerItemInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debug=timing&wt=xml} hits=3 status=0 QTime=0
+145829 INFO  (TEST-DebugComponentTest.testPerItemInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debug=query&wt=xml} hits=3 status=0 QTime=0
+145830 INFO  (TEST-DebugComponentTest.testPerItemInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debug=results&wt=xml} hits=3 status=0 QTime=0
+145832 INFO  (TEST-DebugComponentTest.testPerItemInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debug=results&debug=query&wt=xml} hits=3 status=0 QTime=0
+145834 INFO  (TEST-DebugComponentTest.testPerItemInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q=*:*&debug=results&debug=true&group=true&group.field=inStock_b1&wt=xml} hits=3 status=0 QTime=0
+145835 INFO  (TEST-DebugComponentTest.testPerItemInterface-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testPerItemInterface
+145838 INFO  (TEST-DebugComponentTest.testSolrQueryShowDebugInfoUsesDebugParameter-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testSolrQueryShowDebugInfoUsesDebugParameter
+145839 INFO  (TEST-DebugComponentTest.testSolrQueryShowDebugInfoUsesDebugParameter-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testSolrQueryShowDebugInfoUsesDebugParameter
+145842 INFO  (TEST-DebugComponentTest.testDistributedStageResolution-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testDistributedStageResolution
+145843 INFO  (TEST-DebugComponentTest.testDistributedStageResolution-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testDistributedStageResolution
+145847 INFO  (TEST-DebugComponentTest.testPrepare-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testPrepare
+145847 INFO  (TEST-DebugComponentTest.testPrepare-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testPrepare
+145851 INFO  (TEST-DebugComponentTest.testQueryToString-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryToString
+145852 INFO  (TEST-DebugComponentTest.testQueryToString-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={debug=true&indent=true&rows=0&q=(foo_s:aaa^3)^4&wt=xml} hits=0 status=0 QTime=0
+145853 INFO  (TEST-DebugComponentTest.testQueryToString-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={debug=true&indent=true&rows=0&q=%2Bfoo_s:aaa^3+-bar_s:bbb^0&wt=xml} hits=0 status=0 QTime=0
+145854 INFO  (TEST-DebugComponentTest.testQueryToString-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={debug=true&indent=true&rows=0&q=foo_s:aaa+(bar_s:bbb+baz_s:ccc)&wt=xml} hits=0 status=0 QTime=0
+145854 INFO  (TEST-DebugComponentTest.testQueryToString-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={debug=true&indent=true&rows=0&q=foo_s:aaa^3+(bar_s:bbb+baz_s:ccc)^4&wt=xml} hits=0 status=0 QTime=0
+145855 INFO  (TEST-DebugComponentTest.testQueryToString-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={debug=true&indent=true&rows=0&q=foo_s:aaa^%3D3&wt=xml} hits=0 status=0 QTime=0
+145856 INFO  (TEST-DebugComponentTest.testQueryToString-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryToString
+145856 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+145856 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1242997749
+145856 INFO  (coreCloseExecutor-601-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@566eb8e5 collection1
+145857 INFO  (coreCloseExecutor-601-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Алт 19, 2026 11:49:35 ЭИ io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+145860 INFO  (SUITE-DebugComponentTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-11 after muting 0 log messages
+]]></system-err>
+</testsuite>

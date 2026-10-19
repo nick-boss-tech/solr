@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.handler.MoreLikeThisHandlerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:49:41.752Z" hostname="localhost" time="2.269">
+  <properties/>
+  <testcase name="testInterface" classname="org.apache.solr.handler.MoreLikeThisHandlerTest" time="0.089"/>
+  <testcase name="testMultifieldSimilarity" classname="org.apache.solr.handler.MoreLikeThisHandlerTest" time="0.027"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[151701 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+151711 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.MoreLikeThisHandlerTest_18458C0FFEE18458-001/data-dir-5-001
+151712 WARN  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=50 numCloses=50
+151712 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-6 for ERROR logs matching regex: ignore_exception
+151714 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+151716 WARN  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+151716 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+151716 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+151717 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+151725 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+151743 WARN  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+151785 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+151819 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+151819 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+153272 WARN  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+153284 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+153302 WARN  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+153343 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+153375 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+153375 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.handler.MoreLikeThisHandlerTest_18458C0FFEE18458-001/data-dir-5-001/]
+153376 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=19, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=1.0]
+153416 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+153416 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+153416 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+153429 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=37, maxMergedSegmentMB=26.62754726409912, floorSegmentMB=2.0057191848754883, forceMergeDeletesPctAllowed=13.511954624799154, segmentsPerTier=36.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.43008263624824405, deletesPctAllowed=23.53895147949312, targetSearchConcurrency=13
+153775 INFO  (coreLoadExecutor-439-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+153776 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+153780 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+153780 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+153780 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+153780 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+153784 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+153788 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+153793 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+153797 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+153801 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+153802 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+153835 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+153839 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testInterface
+153848 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1879467395813212160)]} 0 8
+153850 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[43 (1879467395824746496)]} 0 0
+153851 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[44 (1879467395825795072)]} 0 0
+153852 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[45 (1879467395826843648)]} 0 0
+153853 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[46 (1879467395827892224)]} 0 0
+153858 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+153861 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 7
+153899 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q=id:42} hits=1 status=0 QTime=17
+153902 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q=id:42&mlt.boost=true} hits=1 status=0 QTime=1
+153904 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q=id:44&mlt.boost=true} hits=1 status=0 QTime=1
+153907 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q=id:44&mlt.boost=true&debug=all} hits=1 status=0 QTime=1
+153909 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q={!field+f%3Did}44&mlt.boost=true} hits=1 status=0 QTime=0
+153911 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q=id:42&mlt.boost=true&mlt.qf=name^5.0+subword^0.1} hits=1 status=0 QTime=1
+153914 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/mlt params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q={!field+f%3Did}44&mlt.boost=true&mlt.qf=name^5.0+subword^0.1} status=0 QTime=1
+153915 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/mlt params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q={!field+f%3Did}44&mlt.boost=true&mlt.qf=name^5.0+subword^0.1&debugQuery=true} status=0 QTime=0
+153917 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/mlt params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q={!field+f%3Did}44&mlt.boost=true&mlt.qf=name^5.0+subword^0.1&debug=all} status=0 QTime=1
+153919 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/mlt params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q={!field+f%3Did}44&mlt.boost=true&mlt.qf=name^5.0+subword^0.1&debug=all&facet=true&facet.field=name} status=0 QTime=1
+153923 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/mlt params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=1&indent=true&q={!field+f%3Did}44&mlt.boost=true&mlt.qf=name^5.0+subword^0.1&debug=all&facet=true&facet.field={!ex%3Dtg}name&fq={!tag%3Dtg}name:George} status=0 QTime=2
+153924 INFO  (TEST-MoreLikeThisHandlerTest.testInterface-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testInterface
+153928 INFO  (TEST-MoreLikeThisHandlerTest.testMultifieldSimilarity-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testMultifieldSimilarity
+153936 INFO  (TEST-MoreLikeThisHandlerTest.testMultifieldSimilarity-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1879467395906535424)]} 0 7
+153937 INFO  (TEST-MoreLikeThisHandlerTest.testMultifieldSimilarity-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2 (1879467395915972608)]} 0 0
+153938 INFO  (TEST-MoreLikeThisHandlerTest.testMultifieldSimilarity-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3 (1879467395915972609)]} 0 0
+153938 INFO  (TEST-MoreLikeThisHandlerTest.testMultifieldSimilarity-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[4 (1879467395917021184)]} 0 0
+153944 INFO  (searcherExecutor-441-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 2 ms
+153949 INFO  (TEST-MoreLikeThisHandlerTest.testMultifieldSimilarity-seed#[18458C0FFEE18458]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 9
+153950 INFO  (TEST-MoreLikeThisHandlerTest.testMultifieldSimilarity-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/mlt params={mlt=true&mlt.fl=name,subword&mlt.interestingTerms=details&mlt.mintf=1&mlt.mindf=2&mlt.boost=true&indent=true} status=0 QTime=0
+153951 INFO  (TEST-MoreLikeThisHandlerTest.testMultifieldSimilarity-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testMultifieldSimilarity
+153951 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+153951 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1114164919
+153952 INFO  (coreCloseExecutor-447-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@7a053510 collection1
+153952 INFO  (coreCloseExecutor-447-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+ოქტ 19, 2026 7:49:44 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+153957 INFO  (SUITE-MoreLikeThisHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-6 after muting 0 log messages
+]]></system-err>
+</testsuite>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.DisMaxRequestHandlerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-19T08:47:11.695Z" hostname="localhost" time="19.055">
+  <properties/>
+  <testcase name="testSomeStuff" classname="org.apache.solr.DisMaxRequestHandlerTest" time="0.903"/>
+  <testcase name="testSubQueriesNotSupported" classname="org.apache.solr.DisMaxRequestHandlerTest" time="0.008"/>
+  <testcase name="testExtraBlankBQ" classname="org.apache.solr.DisMaxRequestHandlerTest" time="0.021"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 19, 2026 8:47:12 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+3094 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18458/solr/server/solr/configsets/_default/conf'
+3154 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.DisMaxRequestHandlerTest_18458C0FFEE18458-001/data-dir-1-001
+3324 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+3360 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=false
+3543 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18458/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+3544 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (true) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+3632 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+3645 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+4162 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+4468 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+4995 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.D.s.TrieIntField Solr loaded a deprecated plugin/analysis class [solr.TrieIntField]. Please consult documentation how to replace it accordingly.
+5034 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.D.s.TrieFloatField Solr loaded a deprecated plugin/analysis class [solr.TrieFloatField]. Please consult documentation how to replace it accordingly.
+5071 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.D.s.TrieLongField Solr loaded a deprecated plugin/analysis class [solr.TrieLongField]. Please consult documentation how to replace it accordingly.
+5107 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.D.s.TrieDoubleField Solr loaded a deprecated plugin/analysis class [solr.TrieDoubleField]. Please consult documentation how to replace it accordingly.
+5392 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.D.s.TrieDateField Solr loaded a deprecated plugin/analysis class [solr.TrieDateField]. Please consult documentation how to replace it accordingly.
+5560 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.D.s.WordDelimiterFilterFactory Solr loaded a deprecated plugin/analysis class [solr.WordDelimiterFilterFactory]. Please consult documentation how to replace it accordingly.
+6564 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+7364 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+7428 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+8991 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@420767fd[provider=null,keyStore=null,trustStore=null]
+8991 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@420767fd[provider=null,keyStore=null,trustStore=null]
+9040 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@78f0cfed[provider=null,keyStore=null,trustStore=null]
+9040 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@78f0cfed[provider=null,keyStore=null,trustStore=null]
+9044 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@486de769[provider=null,keyStore=null,trustStore=null]
+9044 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@486de769[provider=null,keyStore=null,trustStore=null]
+9055 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@1440c390[provider=null,keyStore=null,trustStore=null]
+9055 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@1440c390[provider=null,keyStore=null,trustStore=null]
+9083 WARN  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+10392 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib, /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1/lib/classes]
+10444 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+10513 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+10554 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1
+10821 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18458/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/worktrees/solr-18458/solr/core/build/tmp/tests-tmp/org.apache.solr.DisMaxRequestHandlerTest_18458C0FFEE18458-001/data-dir-1-001/]
+10891 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogByteSizeMergePolicy: [LogByteSizeMergePolicy: minMergeSize=16777216, mergeFactor=29, maxMergeSize=2147483648, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.6419717542002598]
+15453 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+17506 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+17515 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+17516 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+17560 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=11, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=1.0]
+18793 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+18794 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+18800 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+18800 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+18800 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+18800 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+18805 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+18809 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+18814 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+18818 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+18823 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+18826 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+19012 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+19592 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[666 (1879467254698999808)]} 0 506
+19637 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1879467255091167232)]} 0 1
+19640 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1879467255093264384)]} 0 1
+19642 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[8675309 (1879467255096410112)]} 0 1
+19745 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 13 ms
+19745 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 102
+19754 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testSomeStuff
+20372 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={facet.field=t_s&facet=true&q=guide&qt=/dismax&start=0&rows=20&wt=xml} hits=2 status=0 QTime=618
+20418 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={facet.field=t_s&facet=true&q=cool+stuff&qt=/dismax&start=0&rows=20&wt=xml} hits=3 status=0 QTime=12
+20426 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/dismax params={q=cool&qf=subject&qf=features_t&wt=xml} hits=3 status=0 QTime=2
+20429 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={q={!dismax+qf%3Dsubject+qf%3Dfeatures_t}cool&wt=xml} hits=3 status=0 QTime=1
+20434 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/dismax params={q=cool+stuff&bq=subject:hell^400&wt=xml} hits=3 status=0 QTime=3
+20455 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/dismax params={q=cool+stuff&bq=subject:hell^400&bq=subject:cool^4&debug=true&wt=xml} hits=3 status=0 QTime=18
+20462 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={facet.field=t_s&facet=true&q=cool+stuff+traveling&qt=/dismax&start=0&rows=20&wt=xml} hits=2 status=0 QTime=3
+20469 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={facet.field=t_s&facet=true&q=cool+stuff+traveling+jenny&qt=/dismax&start=0&rows=20&wt=xml} hits=3 status=0 QTime=5
+20638 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/dismax params={fq=id:666&facet=false&wt=xml} hits=1 status=0 QTime=167
+20641 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/dismax params={q.alt=id:9999&fq=id:666&facet=false&wt=xml} hits=0 status=0 QTime=1
+20645 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/dismax params={q="cool+chick"&wt=xml} hits=0 status=0 QTime=3
+20647 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/dismax params={qs=2&q="cool+chick"&wt=xml} hits=1 status=0 QTime=1
+20648 INFO  (TEST-DisMaxRequestHandlerTest.testSomeStuff-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testSomeStuff
+20654 INFO  (TEST-DisMaxRequestHandlerTest.testSubQueriesNotSupported-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testSubQueriesNotSupported
+20657 INFO  (TEST-DisMaxRequestHandlerTest.testSubQueriesNotSupported-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={defType=dismax&df=doesnotexist_s&q=_query_:"{!v%3D$qq}"&qq=features_t:cool&wt=xml} hits=0 status=0 QTime=1
+20658 INFO  (TEST-DisMaxRequestHandlerTest.testSubQueriesNotSupported-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=null params={defType=dismax&df=doesnotexist_s&q={!v%3D$qq}&qq=features_t:cool&wt=xml} hits=0 status=0 QTime=0
+20658 INFO  (TEST-DisMaxRequestHandlerTest.testSubQueriesNotSupported-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testSubQueriesNotSupported
+20662 INFO  (TEST-DisMaxRequestHandlerTest.testExtraBlankBQ-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Starting testExtraBlankBQ
+20670 INFO  (TEST-DisMaxRequestHandlerTest.testExtraBlankBQ-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/dismax params={q=cool+stuff&bq=subject:hell+OR+subject:cool&debug=true&wt=xml} hits=3 status=0 QTime=7
+20678 INFO  (TEST-DisMaxRequestHandlerTest.testExtraBlankBQ-seed#[18458C0FFEE18458]) [] o.a.s.c.S.Request path=/dismax params={q=cool+stuff&bq=subject:hell+OR+subject:cool&bq=&debug=true&wt=xml} hits=3 status=0 QTime=6
+20679 INFO  (TEST-DisMaxRequestHandlerTest.testExtraBlankBQ-seed#[18458C0FFEE18458]) [] o.a.s.SolrTestCaseJ4 ###Ending testExtraBlankBQ
+20679 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+20680 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1338920519
+20681 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@20a1fd89 collection1
+20682 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+十月 19, 2026 11:47:30 上午 io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+20719 INFO  (SUITE-DisMaxRequestHandlerTest-seed#[18458C0FFEE18458]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+]]></system-err>
+</testsuite>
