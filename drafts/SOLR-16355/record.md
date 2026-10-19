@@ -4,7 +4,7 @@
 - Verdict: close-answered. This replaces the earlier keep-open verdict; the reference guide answers the question (see below).
 - Draft branch: solr-16355-draft-close (new; the earlier draft branch for this ticket is not reused).
 - Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (2026-10-07). Upstream sha not cited.
-- Checked by: vm4, 2026-10-19 15:07-15:06 UTC.
+- Checked by: vm4, 2026-10-19 15:06-15:07 UTC.
 
 ## Ticket reading
 
