@@ -17,6 +17,7 @@
 package org.apache.solr.metrics.otel;
 
 import io.opentelemetry.sdk.metrics.export.MetricExporter;
+import io.opentelemetry.sdk.resources.Resource;
 
 public interface MetricExporterFactory {
 
@@ -26,11 +27,30 @@ public interface MetricExporterFactory {
 
   int OTLP_EXPORTER_INTERVAL = OtelMetricsConfig.current().getExportInterval();
 
+  long OTLP_EXPORTER_TIMEOUT = OtelMetricsConfig.current().getExporterTimeout();
+
   String OTLP_EXPORTER_GRPC_ENDPOINT =
       OtelMetricsConfig.current().getGrpcEndpoint();
 
   String OTLP_EXPORTER_HTTP_ENDPOINT =
       OtelMetricsConfig.current().getHttpEndpoint();
 
+  String OTLP_EXPORTER_COMPRESSION = OtelMetricsConfig.current().getCompression();
+
+  String OTLP_EXPORTER_CERTIFICATE = OtelMetricsConfig.current().getCertificatePath();
+
+  String OTLP_EXPORTER_CLIENT_CERTIFICATE =
+      OtelMetricsConfig.current().getClientCertificatePath();
+
+  String OTLP_EXPORTER_CLIENT_KEY = OtelMetricsConfig.current().getClientKeyPath();
+
   MetricExporter getExporter();
+
+  static Resource currentResource() {
+    return OtelMetricsConfig.current().getResource();
+  }
+
+  static java.util.Map<String, String> currentHeaders() {
+    return OtelMetricsConfig.current().getHeaders();
+  }
 }

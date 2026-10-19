@@ -31,6 +31,7 @@ Exported by the OpenTelemetry SDK itself, so it is configured with the standard 
 xref:metrics-reporting.adoc#otlp[Metrics over OTLP]::
 Solr's own metrics, pushed periodically.
 Solr builds and owns the meter providers these come from -- it has to, so that the `/metrics` endpoints can read them -- and configures the optional OTLP exporter with the standard `OTEL_*` environment variables (or equivalent `otel.*` system properties).
+The metric resource uses `OTEL_RESOURCE_ATTRIBUTES` and `OTEL_SERVICE_NAME` as well; OTLP headers, timeouts, compression, and TLS certificate settings are documented on the xref:metrics-reporting.adoc#otlp[metrics configuration page].
 
 Only tracing goes through `GlobalOpenTelemetry`.
 A Java agent therefore takes over tracing but not Solr's metrics, which keep their own configuration and exporter either way.

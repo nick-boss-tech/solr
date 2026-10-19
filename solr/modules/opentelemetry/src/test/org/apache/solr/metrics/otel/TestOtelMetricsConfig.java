@@ -16,6 +16,9 @@
  */
 package org.apache.solr.metrics.otel;
 
+import io.opentelemetry.api.common.AttributeKey;
+import io.opentelemetry.sdk.resources.Resource;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import org.apache.solr.SolrTestCaseJ4;
 import org.junit.Assume;
@@ -157,6 +160,160 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
     assertEquals(Integer.valueOf(60000), invoke(config, "getExportInterval"));
     assertEquals("http://localhost:4318/v1/metrics", invoke(config, "getHttpEndpoint"));
     assertEquals("http://localhost:4317", invoke(config, "getGrpcEndpoint"));
+    assertEquals(Long.valueOf(10000), invoke(config, "getExporterTimeout"));
+  }
+
+  @Test
+  public void testBlankValuesAreUnsetAndFallBackToGenericOrLegacySettings() {
+    Object config =
+        configOrSkip(
+            Map.of(
+                "OTEL_METRICS_EXPORTER", "",
+                "OTEL_EXPORTER_OTLP_METRICS_PROTOCOL", " ",
+                "OTEL_EXPORTER_OTLP_PROTOCOL", "grpc",
+                "OTEL_METRIC_EXPORT_INTERVAL", "",
+                "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT", "",
+                "OTEL_EXPORTER_OTLP_ENDPOINT", "http://generic.example:4318/base"),
+            Map.of(
+                "otel.metrics.exporter", " ",
+                "otel.exporter.otlp.metrics.protocol", "",
+                "otel.exporter.otlp.endpoint", "",
+                "otel.metric.export.interval", "",
+                "solr.metrics.otlpExporterEnabled", "true",
+                "solr.metrics.otlpExporterInterval", "4321"));
+
+    assertTrue((Boolean) invoke(config, "isExporterEnabled"));
+    assertEquals("grpc", invoke(config, "getProtocol"));
+    assertEquals(Integer.valueOf(4321), invoke(config, "getExportInterval"));
+    assertEquals("http://generic.example:4318/base/v1/metrics", invoke(config, "getHttpEndpoint"));
+  }
+
+  @Test
+  public void testMalformedIntervalsFallBackWithoutThrowing() {
+    Object config =
+        configOrSkip(
+            Map.of(),
+            Map.of(
+                "otel.metric.export.interval", "not-a-number",
+                "solr.metrics.otlpExporterInterval", "9876"));
+
+    assertEquals(Integer.valueOf(9876), invoke(config, "getExportInterval"));
+  }
+
+  @Test
+  public void testInvalidIntervalUsesDefaultWhenNoLegacyValueExists() {
+    Object config =
+        configOrSkip(Map.of("OTEL_METRIC_EXPORT_INTERVAL", "0"), Map.of());
+
+    assertEquals(Integer.valueOf(60000), invoke(config, "getExportInterval"));
+  }
+
+  @Test
+  public void testExporterHeadersAndTimeoutsUseSignalSpecificValues() {
+    Object config =
+        configOrSkip(
+            Map.of(
+                "OTEL_EXPORTER_OTLP_HEADERS", "Authorization=Bearer%20generic",
+                "OTEL_EXPORTER_OTLP_METRICS_HEADERS", "x-tenant=solr%20metrics",
+                "OTEL_EXPORTER_OTLP_TIMEOUT", "1000",
+                "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT", "2345",
+                "OTEL_EXPORTER_OTLP_COMPRESSION", "none",
+                "OTEL_EXPORTER_OTLP_METRICS_COMPRESSION", "gzip",
+                "OTEL_EXPORTER_OTLP_CERTIFICATE", "/certs/ca.pem",
+                "OTEL_EXPORTER_OTLP_METRICS_CERTIFICATE", "/certs/metrics-ca.pem",
+                "OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE", "/certs/client.pem",
+                "OTEL_EXPORTER_OTLP_METRICS_CLIENT_CERTIFICATE", "/certs/metrics-client.pem",
+                "OTEL_EXPORTER_OTLP_METRICS_CLIENT_KEY", "/certs/metrics-client-key.pem"),
+            Map.of());
+
+    assertEquals(Map.of("x-tenant", "solr metrics"), invoke(config, "getHeaders"));
+    assertEquals(Long.valueOf(2345), invoke(config, "getExporterTimeout"));
+    assertEquals("gzip", invoke(config, "getCompression"));
+    assertEquals("/certs/metrics-ca.pem", invoke(config, "getCertificatePath"));
+    assertEquals("/certs/metrics-client.pem", invoke(config, "getClientCertificatePath"));
+    assertEquals("/certs/metrics-client-key.pem", invoke(config, "getClientKeyPath"));
+  }
+
+  @Test
+  public void testSystemPropertiesOverrideEnvironmentForSensitiveHeadersAndTimeouts() {
+    Object config =
+        configOrSkip(
+            Map.of(
+                "OTEL_EXPORTER_OTLP_METRICS_HEADERS", "Authorization=Bearer%20environment",
+                "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT", "1234"),
+            Map.of(
+                "otel.exporter.otlp.metrics.headers", "Authorization=Bearer%20system",
+                "otel.exporter.otlp.metrics.timeout", "4321"));
+
+    assertEquals(Map.of("Authorization", "Bearer system"), invoke(config, "getHeaders"));
+    assertEquals(Long.valueOf(4321), invoke(config, "getExporterTimeout"));
+  }
+
+  @Test
+  public void testMalformedHeaderConfigurationFailsWithoutEchoingItsValue() {
+    for (String value :
+        new String[] {
+          "Authorization=Bearer%ZZ-private-value",
+          "Authorization=Bearer%0D%0AX-Injected%3A%20secret",
+          "Bad Header=private-value"
+        }) {
+      Object config = configOrSkip(Map.of("OTEL_EXPORTER_OTLP_HEADERS", value), Map.of());
+
+      IllegalArgumentException error =
+          expectThrows(IllegalArgumentException.class, () -> invoke(config, "getHeaders"));
+      assertEquals("Malformed OTLP exporter headers configuration", error.getMessage());
+      assertFalse(error.getMessage().contains("private-value"));
+      assertFalse(error.getMessage().contains("secret"));
+    }
+  }
+
+  @Test
+  public void testGenericHeadersAndTimeoutAreUsedWhenSpecificValuesAreUnset() {
+    Object config =
+        configOrSkip(
+            Map.of(
+                "OTEL_EXPORTER_OTLP_HEADERS", "Authorization=Bearer%20generic",
+                "OTEL_EXPORTER_OTLP_METRICS_HEADERS", "",
+                "OTEL_EXPORTER_OTLP_TIMEOUT", "4321",
+                "OTEL_METRIC_EXPORT_TIMEOUT", "6543",
+                "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT", "",
+                "OTEL_EXPORTER_OTLP_COMPRESSION", "gzip",
+                "OTEL_EXPORTER_OTLP_METRICS_COMPRESSION", ""),
+            Map.of());
+
+    assertEquals(Map.of("Authorization", "Bearer generic"), invoke(config, "getHeaders"));
+    assertEquals(Long.valueOf(4321), invoke(config, "getExporterTimeout"));
+    assertEquals("gzip", invoke(config, "getCompression"));
+  }
+
+  @Test
+  public void testInvalidExporterTimeoutFallsBackToMetricTimeout() {
+    Object config =
+        configOrSkip(
+            Map.of(
+                "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT", "2147483648",
+                "OTEL_EXPORTER_OTLP_TIMEOUT", "0",
+                "OTEL_METRIC_EXPORT_TIMEOUT", "6543"),
+            Map.of());
+
+    assertEquals(Long.valueOf(6543), invoke(config, "getExporterTimeout"));
+  }
+
+  @Test
+  public void testResourceAttributesAndServiceNameAreApplied() {
+    Object config =
+        configOrSkip(
+            Map.of(
+                "OTEL_RESOURCE_ATTRIBUTES", "deployment.environment=prod%20blue,service.name=old",
+                "OTEL_SERVICE_NAME", "solr-node"),
+            Map.of());
+    Resource resource = (Resource) invoke(config, "getResource");
+
+    assertEquals(
+        "prod blue",
+        resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
+    assertEquals(
+        "solr-node", resource.getAttribute(AttributeKey.stringKey("service.name")));
   }
 
   private Object configOrSkip(Map<String, String> environment, Map<String, String> properties) {
@@ -182,6 +339,11 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
   private Object invoke(Object config, String methodName) {
     try {
       return config.getClass().getDeclaredMethod(methodName).invoke(config);
+    } catch (InvocationTargetException e) {
+      if (e.getCause() instanceof RuntimeException runtimeException) {
+        throw runtimeException;
+      }
+      throw new AssertionError("Could not read OTEL metrics configuration: " + methodName, e);
     } catch (ReflectiveOperationException e) {
       throw new AssertionError("Could not read OTEL metrics configuration: " + methodName, e);
     }

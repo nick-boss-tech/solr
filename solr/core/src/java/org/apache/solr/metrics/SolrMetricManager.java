@@ -457,6 +457,7 @@ public class SolrMetricManager {
               var reader = new FilterablePrometheusMetricReader(true, null);
               var builder =
                   SdkMeterProvider.builder()
+                      .setResource(MetricExporterFactory.currentResource())
                       .registerMetricReader(reader)
                       .setExemplarFilter(ExemplarFilter.traceBased())
                       .registerView(

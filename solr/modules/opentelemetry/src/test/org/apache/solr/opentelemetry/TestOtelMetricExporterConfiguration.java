@@ -16,10 +16,24 @@
  */
 package org.apache.solr.opentelemetry;
 
+import com.sun.net.httpserver.HttpServer;
 import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.common.AttributeKey;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
+import io.opentelemetry.sdk.metrics.SdkMeterProvider;
+import io.opentelemetry.sdk.metrics.data.MetricData;
+import io.opentelemetry.sdk.metrics.export.MetricExporter;
+import io.opentelemetry.sdk.resources.Resource;
+import io.opentelemetry.sdk.testing.exporter.InMemoryMetricReader;
+import java.io.OutputStream;
+import java.lang.reflect.Method;
+import java.net.InetSocketAddress;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.metrics.otel.MetricExporterFactory;
@@ -80,6 +94,170 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testMetricResourceReadsSettingsAfterFactoryInitialization() throws Exception {
+    System.setProperty("otel.resource.attributes", "deployment.environment=search");
+    System.setProperty("otel.service.name", "solr-metrics");
+
+    Resource resource =
+        (Resource) MetricExporterFactory.class.getMethod("currentResource").invoke(null);
+
+    assertEquals(
+        "search",
+        resource.getAttribute(AttributeKey.stringKey("deployment.environment")));
+    assertEquals(
+        "solr-metrics", resource.getAttribute(AttributeKey.stringKey("service.name")));
+  }
+
+  @Test
+  public void testConfiguredHeadersAndCompressionReachTheHttpCollector() throws Exception {
+    AtomicReference<String> authorizationHeader = new AtomicReference<>();
+    AtomicReference<String> compressionHeader = new AtomicReference<>();
+    CountDownLatch requestReceived = new CountDownLatch(1);
+    HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+    server.createContext(
+        "/v1/metrics",
+        exchange -> {
+          exchange.getRequestBody().transferTo(OutputStream.nullOutputStream());
+          authorizationHeader.set(exchange.getRequestHeaders().getFirst("Authorization"));
+          compressionHeader.set(exchange.getRequestHeaders().getFirst("Content-Encoding"));
+          exchange.sendResponseHeaders(200, -1);
+          exchange.close();
+          requestReceived.countDown();
+        });
+    server.start();
+
+    InMemoryMetricReader reader = InMemoryMetricReader.create();
+    SdkMeterProvider meterProvider =
+        SdkMeterProvider.builder().registerMetricReader(reader).build();
+    MetricExporter exporter = null;
+    try {
+      meterProvider.get("solr.test").counterBuilder("test.requests").build().add(1);
+      Collection<MetricData> metrics = reader.collectAllMetrics();
+      assertFalse(metrics.isEmpty());
+
+      String endpoint = "http://127.0.0.1:" + server.getAddress().getPort() + "/v1/metrics";
+      exporter = newExporterWithHeader(endpoint, "Bearer test-exporter-secret", 10000);
+      assertNotNull(exporter);
+      assertTrue(exporter.export(metrics).join(10, TimeUnit.SECONDS).isSuccess());
+      assertTrue(requestReceived.await(10, TimeUnit.SECONDS));
+      assertEquals("Bearer test-exporter-secret", authorizationHeader.get());
+      assertEquals("gzip", compressionHeader.get());
+    } finally {
+      if (exporter != null) {
+        exporter.close();
+      }
+      meterProvider.close();
+      server.stop(0);
+    }
+  }
+
+  @Test
+  public void testConfiguredTimeoutFailsAStalledHttpExport() throws Exception {
+    CountDownLatch requestStarted = new CountDownLatch(1);
+    CountDownLatch releaseResponse = new CountDownLatch(1);
+    HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+    server.createContext(
+        "/v1/metrics",
+        exchange -> {
+          exchange.getRequestBody().transferTo(OutputStream.nullOutputStream());
+          requestStarted.countDown();
+          try {
+            releaseResponse.await(5, TimeUnit.SECONDS);
+            exchange.sendResponseHeaders(200, -1);
+          } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+          } finally {
+            exchange.close();
+          }
+        });
+    server.start();
+
+    InMemoryMetricReader reader = InMemoryMetricReader.create();
+    SdkMeterProvider meterProvider =
+        SdkMeterProvider.builder().registerMetricReader(reader).build();
+    MetricExporter exporter = null;
+    try {
+      meterProvider.get("solr.test").counterBuilder("test.requests").build().add(1);
+      Collection<MetricData> metrics = reader.collectAllMetrics();
+      String endpoint = "http://127.0.0.1:" + server.getAddress().getPort() + "/v1/metrics";
+      exporter = newExporterWithHeader(endpoint, "Bearer test-exporter-secret", 100);
+
+      var result = exporter.export(metrics);
+      assertTrue(requestStarted.await(5, TimeUnit.SECONDS));
+      assertFalse(result.join(5, TimeUnit.SECONDS).isSuccess());
+      assertTrue(result.isDone());
+    } finally {
+      releaseResponse.countDown();
+      if (exporter != null) {
+        exporter.close();
+      }
+      meterProvider.close();
+      server.stop(0);
+    }
+  }
+
+  private MetricExporter newExporterWithHeader(
+      String endpoint, String headerValue, long timeoutMillis) {
+    try {
+      Class<?> settingsClass =
+          Class.forName("org.apache.solr.opentelemetry.OtlpExporterFactory$ExporterSettings");
+      Object settings =
+          settingsClass
+              .getDeclaredConstructor(
+                  boolean.class,
+                  String.class,
+                  String.class,
+                  String.class,
+                  long.class,
+                  String.class,
+                  Map.class,
+                  String.class,
+                  String.class,
+                  String.class)
+              .newInstance(
+                  true,
+                  "http/protobuf",
+                  endpoint,
+                  endpoint,
+                  timeoutMillis,
+                  "gzip",
+                  Map.of("Authorization", headerValue),
+                  null,
+                  null,
+                  null);
+      Object factory =
+          OtlpExporterFactory.class
+              .getDeclaredConstructor(settingsClass)
+              .newInstance(settings);
+      return (MetricExporter) factory.getClass().getMethod("getExporter").invoke(factory);
+    } catch (ReflectiveOperationException e) {
+      throw new AssertionError("Could not create an OTLP exporter with configured headers", e);
+    }
+  }
+
+  @Test
+  public void testInactiveExporterSkipsMalformedHeaderParsing()
+      throws ReflectiveOperationException {
+    String previous = System.getProperty("otel.exporter.otlp.headers");
+    System.setProperty("otel.exporter.otlp.headers", "malformed-header-config");
+    try {
+      Method configuredHeaders =
+          OtlpExporterFactory.class.getDeclaredMethod(
+              "configuredHeaders", boolean.class, String.class);
+      configuredHeaders.setAccessible(true);
+
+      assertEquals(Map.of(), configuredHeaders.invoke(null, false, "http/protobuf"));
+      assertEquals(Map.of(), configuredHeaders.invoke(null, true, "unsupported"));
+    } finally {
+      if (previous == null) {
+        System.clearProperty("otel.exporter.otlp.headers");
+      } else {
+        System.setProperty("otel.exporter.otlp.headers", previous);
+      }
+    }
+  }
+
+  @Test
   public void testSdkDisablesMetricsLocallyWithoutChangingGlobalSelection() {
     System.setProperty("otel.metrics.exporter", "unsupported");
     OtelTracerConfigurator configurator = new OtelTracerConfigurator(Map.of());
@@ -121,6 +299,12 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
                 envSecret,
                 "OTEL_EXPORTER_OTLP_API_KEY",
                 apiKeySecret,
+                "OTEL_EXPORTER_OTLP_CLIENT_KEY",
+                "client-private-key-path-secret",
+                "OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE",
+                "client-certificate-path-secret",
+                "OTEL_EXPORTER_OTLP_CERTIFICATE",
+                "ca-certificate-path-secret",
                 "OTEL_EXPORTER_OTLP_ENDPOINT",
                 endpointWithCredentials,
                 "OTEL_RESOURCE_ATTRIBUTES",
@@ -133,9 +317,16 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_HEADERS=<redacted>"));
     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_METRICS_HEADERS=<redacted>"));
     assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_API_KEY=<redacted>"));
+    assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CLIENT_KEY=<redacted>"));
+    assertTrue(
+        loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE=<redacted>"));
+    assertTrue(loggedConfiguration.contains("OTEL_EXPORTER_OTLP_CERTIFICATE=<redacted>"));
     assertFalse(loggedConfiguration.contains(envSecret));
     assertFalse(loggedConfiguration.contains(propertySecret));
     assertFalse(loggedConfiguration.contains(apiKeySecret));
+    assertFalse(loggedConfiguration.contains("client-private-key-path-secret"));
+    assertFalse(loggedConfiguration.contains("client-certificate-path-secret"));
+    assertFalse(loggedConfiguration.contains("ca-certificate-path-secret"));
     assertFalse(loggedConfiguration.contains("otlp-user"));
     assertFalse(loggedConfiguration.contains("otlp-password"));
     assertFalse(loggedConfiguration.contains("endpoint-query-secret"));

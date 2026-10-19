@@ -21,6 +21,7 @@ import java.util.Map;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.util.LogListener;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -73,6 +74,33 @@ public class OtelTracerConfiguratorTest extends SolrTestCaseJ4 {
     instance.setDefaultIfNotConfigured("OTEL_YEY", "default");
     assertEquals("default", instance.getCurrentOtelConfig().get("OTEL_YEY"));
     assertEquals("prop-k1", instance.getCurrentOtelConfig().get("OTEL_K1"));
+  }
+
+  @Test
+  public void testDefaultSettingLogDoesNotExposeHeaderValue() {
+    String secret = "Authorization=Bearer plugin-header-secret";
+    String previousValue = System.getProperty("otel.exporter.otlp.headers");
+    System.clearProperty("otel.exporter.otlp.headers");
+    OtelTracerConfigurator configurator = new OtelTracerConfigurator(Map.of());
+    NamedList<String> args = new NamedList<>();
+    args.add("OTEL_EXPORTER_OTLP_HEADERS", secret);
+    try {
+      try (LogListener listener =
+          LogListener.debug(OtelTracerConfigurator.class)
+              .substring("otel.exporter.otlp.headers")) {
+        configurator.prepareConfiguration(args);
+
+        String message = listener.pollMessage();
+        assertEquals("Using default setting otel.exporter.otlp.headers", message);
+        assertFalse(message.contains(secret));
+      }
+    } finally {
+      if (previousValue == null) {
+        System.clearProperty("otel.exporter.otlp.headers");
+      } else {
+        System.setProperty("otel.exporter.otlp.headers", previousValue);
+      }
+    }
   }
 
   @Test

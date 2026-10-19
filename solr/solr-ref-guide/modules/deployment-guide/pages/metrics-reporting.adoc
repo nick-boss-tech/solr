@@ -323,7 +323,7 @@ This exporter is disabled by default in Solr and is packaged with the `opentelem
 
 === OTLP configuration
 
-Solr reads the standard OpenTelemetry environment variables or their equivalent `otel.*` Java system properties. A Java system property takes precedence over its environment variable, and signal-specific settings take precedence over generic settings.
+Solr reads the standard OpenTelemetry metrics settings listed here or their equivalent `otel.*` Java system properties. A Java system property takes precedence over its environment variable, and signal-specific settings take precedence over generic settings.
 
 [cols="2,2,4",options="header"]
 |===
@@ -352,9 +352,62 @@ Solr reads the standard OpenTelemetry environment variables or their equivalent 
 | `OTEL_EXPORTER_OTLP_ENDPOINT`
 | `http://localhost:4318` for HTTP, `http://localhost:4317` for gRPC
 | Generic endpoint used when the metrics-specific endpoint is not set. For HTTP, Solr appends `/v1/metrics` to this base URL.
+
+| `OTEL_EXPORTER_OTLP_METRICS_HEADERS`
+| Unset; generic headers are used when configured
+| Comma-separated `key=value` headers for metrics. URL-encode header values. This setting replaces the generic header list when non-empty.
+
+| `OTEL_EXPORTER_OTLP_HEADERS`
+| Unset
+| Generic OTLP headers used when metrics-specific headers are not set. Header values are redacted in Solr's OpenTelemetry startup log.
+
+| `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT`
+| `10000` ms
+| Metrics exporter request timeout. Takes precedence over generic exporter timeout.
+
+| `OTEL_EXPORTER_OTLP_TIMEOUT`
+| `10000` ms
+| Generic exporter request timeout used when the metrics-specific timeout is not set.
+
+| `OTEL_METRIC_EXPORT_TIMEOUT`
+| Unset
+| Used as a fallback request timeout when neither OTLP exporter timeout is configured. If unset, the exporter default is `10000` ms.
+
+| `OTEL_EXPORTER_OTLP_METRICS_COMPRESSION`
+| Unset
+| Metrics exporter compression. Use `gzip` to enable compression; otherwise the exporter default applies.
+
+| `OTEL_EXPORTER_OTLP_COMPRESSION`
+| Unset
+| Generic compression used when metrics-specific compression is not set.
+
+| `OTEL_EXPORTER_OTLP_METRICS_CERTIFICATE`
+| Unset
+| Path to a PEM certificate file used to trust the metrics collector.
+
+| `OTEL_EXPORTER_OTLP_CERTIFICATE`
+| Unset
+| Generic trust certificate path used when the metrics-specific path is not set.
+
+| `OTEL_EXPORTER_OTLP_METRICS_CLIENT_CERTIFICATE` and `OTEL_EXPORTER_OTLP_METRICS_CLIENT_KEY`
+| Unset
+| Client certificate and private key paths for metrics TLS authentication. Configure both together.
+
+| `OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE` and `OTEL_EXPORTER_OTLP_CLIENT_KEY`
+| Unset
+| Generic client certificate and private key paths used when metrics-specific paths are not set.
+
+| `OTEL_RESOURCE_ATTRIBUTES` and `OTEL_SERVICE_NAME`
+| Unset
+| Resource attributes attached to Solr's metric data. URL-encode attribute values. The service name takes precedence over a `service.name` resource attribute.
 |===
 
+The standalone Solr metrics SDK honors the settings listed here. Other Java SDK autoconfiguration options are not applied to it automatically.
+
 The former `solr.metrics.otlpExporterEnabled`, `solr.metrics.otlpExporterProtocol`, `solr.metrics.otlpExporterInterval`, `solr.metrics.otlpGrpcExporterEndpoint`, and `solr.metrics.otlpHttpExporterEndpoint` settings remain available as fallbacks when the corresponding standard setting is absent. The standard OTEL setting takes precedence. The legacy protocol value `http` is treated as `http/protobuf`, and legacy `none` continues to disable the exporter.
+
+An empty standard setting is treated as unset. Invalid, non-positive, or out-of-range interval and timeout values are warned about and ignored in favor of the next configured fallback or the documented default. Header values and TLS key material are never included in these warnings.
+Malformed OTLP header lists are rejected with a value-free error instead of silently dropping an authentication header.
 
 
 === OpenTelemetry Collector setup

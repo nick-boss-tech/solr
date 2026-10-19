@@ -147,8 +147,9 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
         || normalizedKey.contains("CREDENTIAL")
         || normalizedKey.contains("AUTH")
         || normalizedKey.contains("SIGNATURE")
+        || normalizedKey.contains("CERTIFICATE")
         || normalizedKey.contains("RESOURCE_ATTRIBUTES")
-        || normalizedKey.endsWith("KEY")) {
+        || normalizedKey.contains("KEY")) {
       return "<redacted>";
     }
     return redactUrlCredentialsAndQuery(value);
@@ -235,7 +236,7 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
     if (incomingValue == null) {
       EnvUtils.setProperty(envNameToSyspropName(envName), defaultValue);
       if (log.isDebugEnabled()) {
-        log.debug("Using default setting {}={}", envName, getEnvOrSysprop(envName));
+        log.debug("Using default setting {}", envName);
       }
     }
   }
