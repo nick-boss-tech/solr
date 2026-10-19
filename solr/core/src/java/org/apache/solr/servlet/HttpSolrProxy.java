@@ -22,7 +22,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import org.apache.solr.util.tracing.TraceUtils;
@@ -39,7 +42,7 @@ import org.eclipse.jetty.http.HttpHeader;
 // Tried to use Jetty's ProxyServlet instead but ran into inexplicable difficulties:  EOF/reset.
 // Perhaps was related to its use of ServletRequest.startAsync()/AsyncContext
 class HttpSolrProxy {
-  // TODO add X-Forwarded-For and with comma delimited
+  private static final String X_FORWARDED_FOR = "X-Forwarded-For";
 
   // Headers stripped when copying in either direction. Hop-by-hop headers, plus Host (not
   // hop-by-hop, but the client must re-derive it for the upstream, else Jetty 12.1 rejects a
@@ -68,7 +71,17 @@ class HttpSolrProxy {
     Request proxyReq = httpClient.newRequest(url).method(servletReq.getMethod());
 
     // clearing them first to ensure there's no stock entries (e.g. user-agent)
-    proxyReq.headers(proxyFields -> copyRequestHeaders(servletReq, proxyFields.clear()));
+    proxyReq.headers(
+        proxyFields -> {
+          copyRequestHeaders(servletReq, proxyFields.clear());
+          String forwardedFor =
+              forwardedFor(
+                  Collections.list(servletReq.getHeaders(X_FORWARDED_FOR)),
+                  servletReq.getRemoteAddr());
+          if (forwardedFor != null) {
+            proxyFields.put(X_FORWARDED_FOR, forwardedFor);
+          }
+        });
 
     // FYI see InstrumentedHttpListenerFactory
     TraceUtils.injectTraceContext(proxyReq);
@@ -133,6 +146,14 @@ class HttpSolrProxy {
     if (failure != null) {
       throw failure;
     }
+  }
+
+  static String forwardedFor(List<String> existingHops, String remoteAddr) {
+    List<String> hops = new ArrayList<>(existingHops);
+    if (remoteAddr != null) {
+      hops.add(remoteAddr);
+    }
+    return hops.isEmpty() ? null : String.join(", ", hops);
   }
 
   private static void copyRequestHeaders(
