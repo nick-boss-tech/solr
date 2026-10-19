@@ -1,0 +1,36 @@
+# Pool assignment: owner decisions for stopped JIRA items, round 1
+
+Status: OPEN (waiting for the owner or the phone agent to answer each row; no claimant has started any work)
+
+- Posted by: vm3, 2026-10-19, at the owner's request. The owner asked for the decisions to be posted here so they can be answered without a live discussion.
+- Intended host: owner (Nick Shanin) or the phone agent (vm1). No pool host should implement any row until its answer is recorded here.
+- Capability tags: none. This is a decision record, not implementation.
+- Source record: `reports/2026-10-19-jira-newdev/decision-ladder-stopped-items.md` (the ladder applied to each choice) and the per-ticket sections in `reports/2026-10-19-jira-newdev/A-bugs-round-1.md` and `A-small-round-2.md`.
+
+## Background
+
+Several JIRA newdev tickets were stopped by vm3 because the fix needs a choice that the ticket does not settle. The decision ladder (`material/decision-ladder.md`) was applied to each. Rows 1 to 5 are settled by the ladder, with a recommended answer. Rows 6 to 9 are not settled by the ladder and need the owner's judgement. Nothing has been pushed to a branch for any of them.
+
+## Decisions
+
+| Row | Ticket | Choice | Options | Recommendation and evidence | Answer (owner fills in) |
+| --- | --- | --- | --- | --- | --- |
+| 1 | SOLR-16124 (round 2 item 3) | Ask for the embedded ZooKeeper port in the cloud example? | A: add a prompt after the node port prompts, default port+1000. B: keep the rule and add no prompt. C: add an option instead of a prompt. | A. The prompt falls back to its default when `--script-inputs` runs out (`solr/core/src/java/org/apache/solr/cli/RunExampleTool.java` lines 1505 to 1525), so existing scripts keep working if the new prompt is last. The ticket asks for the port to be customizable. | |
+| 2 | SOLR-18214 (bugs item 15) | What should an omitted `baseConfigSet` do on the v2 create endpoint? | A: create an empty configset with no files. B: keep defaulting to `_default` (current behavior, which the ticket says blocks from-scratch creation). C: reject the request with a clear message. | A. The ticket says the base is "truly optional". v1 stays on `_default` (`ConfigSetsHandler.java` lines 133 to 135). Open point: the configset service has no "create empty" call (`ConfigSetService.uploadConfig(name, dir)` only); uploading an empty directory is untested and whether Solr loads a core from an empty configset is untested. | |
+| 3 | SOLR-14970 (bugs item 7) | Close as working as designed? | A: close with no branch, and suggest a separate feature ticket for query-time IDs. B: keep open for a fix. | A. SOLR-11021 made `config-file` optional on purpose; the `handleInitializationException` javadoc says a missing file silently mutes the component. The reporter's `elevateIds` parameter has no history in the code. | |
+| 4 | SOLR-16865 (round 2 item 8) | Low disk space warning at startup: threshold? | A: warn below 2% free on the data directory. B: another threshold. C: do not add the warning. | A, since the ticket suggests less than 2%. The log level and the exact check are not in the ticket and are still open. | |
+| 5 | SOLR-16220 (bugs item 11) | Non-SSL `SSLConfig` with an `https` URL: what happens? | A: clear error. B: fall back to the default SSL settings. | A, because the caller asked for no SSL; a silent fallback would change what the caller asked for. The documented case (no SSL config at all) does not reproduce on base. | |
+| 6 | SOLR-16750 (bugs item 9) | Enum grouping: what should `groupValue` contain? | A: the label, matching the distributed path, which already uses `indexedToReadable`. B: keep the enum index. | A. Still needs a probe to find which line prints the index in the single-shard path before the fix can be written. The probe is the next step if A is chosen; no owner input is needed for the probe. | |
+| 7 | SOLR-12718 (round 2 item 7) | `StreamContext` constructor always takes a `SolrClientCache` | A: break the existing constructor signature. B: add an overload that takes the cache, keep the old constructor. C: decline. | Owner judgement. B avoids breaking callers but adds an overload; A matches the ticket. | |
+| 8 | SOLR-8614 (round 2 item 2) | Scope of the XML-format toggle on `SolrClient` | A: one toggle that covers the request writer and response parser for every client. B: a per-client setter. C: decline. | Owner judgement. The ticket gives the goal (one toggle) but not the surface. | |
+| 9 | SOLR-2534 (round 2 item 1) | `min()` and `max()` on strings: semantics | A: lexicographic, ignoring missing values, error on multi-valued fields. B: lexicographic, with missing values as a sentinel. C: decline. | Owner judgement. The ticket does not define missing or multi-valued behavior; the ladder cannot settle it. | |
+
+## Deliverable
+
+For each row, the owner or phone agent writes the answer in the last column and pushes the change to this file on coordination. A row answered "A" in rows 1 to 5 authorizes a pool host to implement that item, on a new branch named for the ticket, with the usual gate and receipt. A row answered "C" or "decline" closes its ticket with no branch. Rows 6 to 9 that choose an option authorize the same work under the same rules. Nothing in this file authorizes a PR opening; PRs stay with the owner.
+
+## Limits
+
+- No PR, comment, JIRA or email. The owner decides any of those.
+- No force push. Push only as a fast-forward.
+- No em dashes or en dashes in this file.
