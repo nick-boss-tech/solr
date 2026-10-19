@@ -1,8 +1,8 @@
 # Gate job: SOLR-18507 (Phase 2 gross fingerprint cache)
 
-Status: CLAIMED by vm1 for round 3, 2026-10-19T06:00Z, at head d55d4422de4. Round 2 record: GATE FAILED at step 2: SolrCore.java:2178 cannot find symbol LeafReader (the branch adds FilterLeafReader and SegmentReader imports but not LeafReader; neither the base nor apache/main carries that import, so a rebase does not cure it). Steps 4 and 5 rc=1 are downstream of the compile failure; no tests ran. Fix: one line, import org.apache.lucene.index.LeafReader in sorted position, commit d55d4422de4, applied by vm1 under the owner's proactive direction and re-gating.
+Status: CLAIMED by vm1 for round 4, 2026-10-19T06:45Z, at head 613a1b29fea. Round 3 record: GATE FAILED at step 2 again, this time in compileTestJava: SolrCoreFingerprintCacheTest.java:73 calls assertTrue in the JUnit 5 order (boolean, String) but the class extends SolrTestCaseJ4, whose assertTrue is (String, boolean). Production compile passed in round 3 (the LeafReader import fix held). Fix: swap the two arguments, commit 613a1b29fea, applied by vm1 under the owner's proactive direction and re-gating. Pattern across rounds 2 and 3: the branch reached the gate never having been compiled by its author lane.
 
-- Branch: `solr-18507-phase-2-submit`. Head: `d55d4422de4348274a42a031408ffe03ddb0c328` (round 3; round 2 head a36ca787d5b plus the import fix d55d4422de4) (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
+- Branch: `solr-18507-phase-2-submit`. Head: `613a1b29fea36af00378f8deeee68c71ab56aa0f` (round 4; round 3 head d55d4422de4 plus the assertTrue fix 613a1b29fea) (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `1ba98f9240902c26f0bcd411f8787d38555dea8d`. Prior gated head: none recorded.
 - Gate ID: `SOLR-18507-phase-2`. Claim file: `claims/pool-<host>-gate-SOLR-18507-phase-2.md`.
 - Intended host: any capable Linux host. WORKFLOW.md lets any capable Linux host claim it if that host is busy.
