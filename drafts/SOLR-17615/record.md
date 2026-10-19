@@ -19,7 +19,7 @@ The reporter uses a `knn` query with `fq` filters that are added as implicit pre
 
 ## History
 
-- `b49f3d0769` (2024-06-21), SOLR-17335, is the commit that names `excludeTags` in the core source for the vector query path in the search that `git log -S` finds. The support predates this ticket; the ticket's maintainers say it was added for this use case.
+- `b49f3d0769` (2024-06-21), SOLR-17335, is the latest commit that changed `excludeTags` in the core source, found by `git log -S` on `solr/core/src/java`. It is not the commit that introduced `excludeTags`; the introducing commit was not traced in this closeout. The support predates this ticket (2025-01-08); the ticket maintainers say it was added for this use case.
 - No commit on the fork names SOLR-17615 (empty `git log --grep` at the pinned head).
 
 ## Reproduction attempts
