@@ -13,8 +13,8 @@ LOCK=/workspace/tools/.gradle-$POOL_HOST.lock
 mkdir -p "$L"
 exec 9>"$LOCK"
 if ! flock -n 9; then
-  echo "lock held on $LOCK; build not started" > "$L/$name.log"
-  exit 2
+  echo "queued: waiting for $LOCK" > "$L/$name.log"
+  flock -w "${SWEEP_WAIT:-14400}" 9 || { echo "lock held on $LOCK for ${SWEEP_WAIT:-14400}s; build not started" > "$L/$name.log"; exit 2; }
 fi
 { echo "pre $(date -u +%FT%TZ) | $(df -h / | tail -1 | awk '{print $4" free"}') | $(df -i / | tail -1 | awk '{print $4" ifree"}')"; } > "$L/$name.headroom.log"
 cd "$W" || exit 1
