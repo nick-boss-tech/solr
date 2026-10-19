@@ -4002,8 +4002,8 @@
       "round": "audit-1",
       "evidence": "Read ticket: Smiley says overlapping child/parent ids are user error with no protection by design."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-13785-draft-open",
+    "verdict": "close-answered",
+    "draft_branch": "solr-13785-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
