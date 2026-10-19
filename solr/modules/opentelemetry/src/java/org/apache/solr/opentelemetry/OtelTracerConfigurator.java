@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.NamedList;
@@ -56,10 +57,15 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
   public OpenTelemetry createOpenTelemetry() {
     // deliberately build() and not initialize(); the latter sets GlobalOpenTelemetry, which is
     // OpenTelemetryConfigurator's job
+    return withMetricsExporterDisabled(
+        () -> AutoConfiguredOpenTelemetrySdk.builder().build().getOpenTelemetrySdk());
+  }
+
+  static <T> T withMetricsExporterDisabled(Supplier<T> sdkBuilder) {
     String metricsExporter = System.getProperty("otel.metrics.exporter");
     System.setProperty("otel.metrics.exporter", "none");
     try {
-      return AutoConfiguredOpenTelemetrySdk.builder().build().getOpenTelemetrySdk();
+      return sdkBuilder.get();
     } finally {
       if (metricsExporter == null) {
         System.clearProperty("otel.metrics.exporter");

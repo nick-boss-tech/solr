@@ -31,7 +31,7 @@ final class OtelMetricsConfig {
   private final Map<String, String> environment;
   private final Map<String, String> systemProperties;
 
-  private OtelMetricsConfig(Map<String, String> environment, Map<String, String> systemProperties) {
+  OtelMetricsConfig(Map<String, String> environment, Map<String, String> systemProperties) {
     this.environment = environment;
     this.systemProperties = systemProperties;
   }

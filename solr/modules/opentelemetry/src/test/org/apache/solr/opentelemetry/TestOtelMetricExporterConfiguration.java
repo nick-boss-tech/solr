@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Properties;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.util.NamedList;
-import org.apache.solr.metrics.otel.MetricExporterFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,22 +57,39 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
   }
 
   @Test
-  public void testStandardMetricsConfiguration() {
-    assertTrue(MetricExporterFactory.OTLP_EXPORTER_ENABLED);
-    assertEquals("http/protobuf", MetricExporterFactory.OTLP_EXPORTER_PROTOCOL);
-    assertEquals(1234, MetricExporterFactory.OTLP_EXPORTER_INTERVAL);
-    assertEquals(
-        "http://collector.example:4318/base/v1/metrics",
-        MetricExporterFactory.OTLP_EXPORTER_HTTP_ENDPOINT);
-    assertEquals(
-        "http://collector.example:4318/base", MetricExporterFactory.OTLP_EXPORTER_GRPC_ENDPOINT);
+  public void testMetricsSelectionIsTemporarilyOverriddenDuringBuild() {
+    String exporterDuringBuild =
+        OtelTracerConfigurator.withMetricsExporterDisabled(
+            () -> System.getProperty("otel.metrics.exporter"));
 
-    var exporter = new OtlpExporterFactory().getExporter();
-    assertNotNull(exporter);
-    assertEquals(
-        "io.opentelemetry.exporter.otlp.http.metrics.OtlpHttpMetricExporter",
-        exporter.getClass().getName());
-    exporter.close();
+    assertEquals("none", exporterDuringBuild);
+    assertEquals("otlp", System.getProperty("otel.metrics.exporter"));
+  }
+
+  @Test
+  public void testMetricsSelectionIsRestoredWhenSdkConstructionFails() {
+    expectThrows(
+        IllegalStateException.class,
+        () ->
+            OtelTracerConfigurator.withMetricsExporterDisabled(
+                () -> {
+                  assertEquals("none", System.getProperty("otel.metrics.exporter"));
+                  throw new IllegalStateException("failed while building SDK");
+                }));
+
+    assertEquals("otlp", System.getProperty("otel.metrics.exporter"));
+  }
+
+  @Test
+  public void testMetricsSelectionIsClearedWhenItWasOriginallyUnset() {
+    System.clearProperty("otel.metrics.exporter");
+
+    String exporterDuringBuild =
+        OtelTracerConfigurator.withMetricsExporterDisabled(
+            () -> System.getProperty("otel.metrics.exporter"));
+
+    assertEquals("none", exporterDuringBuild);
+    assertNull(System.getProperty("otel.metrics.exporter"));
   }
 
   @Test
