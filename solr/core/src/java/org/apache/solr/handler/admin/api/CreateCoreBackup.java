@@ -16,7 +16,7 @@
  */
 package org.apache.solr.handler.admin.api;
 
-import static org.apache.solr.security.PermissionNameProvider.Name.COLL_EDIT_PERM;
+import static org.apache.solr.security.PermissionNameProvider.Name.CORE_EDIT_PERM;
 
 import jakarta.inject.Inject;
 import java.net.URI;
@@ -54,7 +54,7 @@ public class CreateCoreBackup extends CoreAdminAPIBase implements CreateCoreBack
   }
 
   @Override
-  @PermissionName(COLL_EDIT_PERM)
+  @PermissionName(CORE_EDIT_PERM)
   public SolrJerseyResponse createBackup(
       String coreName, CreateCoreBackupRequestBody backupCoreRequestBody) throws Exception {
     ensureRequiredParameterProvided("coreName", coreName);
