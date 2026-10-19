@@ -2877,8 +2877,8 @@
       "round": "audit-1",
       "evidence": "Read ticket: Smiley says minor optimization, not a bug."
     },
-    "verdict": "close-fixed",
-    "draft_branch": "solr-14966-draft-close",
+    "verdict": "keep-open",
+    "draft_branch": "solr-14966-draft-open",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {

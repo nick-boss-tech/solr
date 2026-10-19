@@ -12,3 +12,5 @@ Heartbeat: 2026-10-19T20:02:48Z
 Append one heartbeat line at least once an hour while the claim is active, and push it.
 
 Heartbeat: 2026-10-19T20:14:43Z. Item 1 SOLR-15023 DONE (keep-open, ebc6761559). Remaining: items 2 to 25.
+
+Heartbeat: 2026-10-19T20:23:03Z. Item 2 SOLR-14966 DONE (keep-open, dfb26c4f72; verdict changed from close-fixed). Remaining: items 3 to 25.
