@@ -415,6 +415,10 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
           public ValueSource parse(FunctionQParser fp) throws SyntaxError {
             String f0 = fp.parseArg();
             String qf = fp.parseArg();
+            if (f0 == null || qf == null) {
+              throw new SolrException(
+                  SolrException.ErrorCode.BAD_REQUEST, "joindf requires a field and a query");
+            }
             return new JoinDocFreqValueSource(f0, qf);
           }
         });
