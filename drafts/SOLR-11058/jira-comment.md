@@ -1,0 +1,1 @@
+On current main, the test class this ticket names failed in our runs, and the failure repeated at the same seed. The error we see is a filesystem 'Too many links' error during index fetch, which may be specific to our environment. We are leaving the ticket open until we can tell which it is.
