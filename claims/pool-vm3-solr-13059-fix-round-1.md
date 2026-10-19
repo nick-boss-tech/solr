@@ -74,3 +74,12 @@ DONE: 2026-10-18. Head 6914eae1c2 (solr-13696-submit). Annotation removed: yes (
 - Finding: a regression where preemptive creation never runs fails at line 395 or 396, so the either-or check does not let it pass. The duplicate-creation guard, which the test comment at lines 34 to 37 describes, is checked by `checkPreemptiveCase1`, not by the snapshot.
 - Decision: option (a), keep the either-or check as it is. No test change and no extra wait. The ladder stops here, so no owner question is needed.
 - Scope limit: the snapshot does not prove the creation was in flight in the four-collection branch. The test does not assert that, and this change does not add it.
+
+## Review pass and latch hook (2026-10-18 to 2026-10-19), added after DONE
+
+- Review of the test change by a read-only agent, then the thoroughness edits. Full record: receipts/SOLR-13059.md (review gate 1 and review gate 2 sections).
+- Pushed to solr-13696-submit: 7d3fb3b74b (pin the ninth collection to 2017-10-31, alias constant in the 11-03 check), then 960355fce3 (preemptive creation held at TestInjection.preemptiveCreateLatch so the snapshot is deterministic). Both fast-forward.
+- Decision on the earlier Q1 (the either-or check): settled at rung 1 of the decision ladder, then superseded by the latch hook, which removes the timing dependence.
+- Mutants on 960355fce3: synchronous creation caught (snapshot already lists 2017-10-26), no creation caught, extra creation caught. Six-seed flakiness 6 of 6. The synchronous gap is closed.
+- Still open: the 10-27 duplicate check depends on timing (a pin); duplicate submissions to the Overseer are not observable from the test.
+- Shown in PR 5088 body as Choice 3, which needs Nick's decision on the hook.
