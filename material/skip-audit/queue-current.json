@@ -1443,8 +1443,8 @@
       "round": "audit-1",
       "evidence": "DirectUpdateHandler2 commit path calls forceMerge(maxOptimizeSegments) whose default (Integer.MAX_VALUE) is a documented no-op; optimize=true&maxSegments=1 works as the reporter found. Not a defect."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-16355-draft-open",
+    "verdict": "close-answered",
+    "draft_branch": "solr-16355-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
