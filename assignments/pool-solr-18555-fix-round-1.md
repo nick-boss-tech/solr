@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18555 fixes on solr-18555-submit, then gate (round 1)
 
-Status: CLAIMED (claims/pool-vm3-solr-18555-fix-round-1.md)
+Status: HANDED (branch moved at push; see stop record)
 
 - Capability tags: implementation, gate.
 - Intended host: any Linux host with the Gradle toolchain. Claim under `claims/` before starting (WORKFLOW.md).
@@ -37,3 +37,10 @@ The gate on `solr-18555-submit` at head `884de51579` is NOT GREEN. Its receipt i
 
 - No PR, comment, JIRA or email. No force push.
 - Commit as Nick Shanin with no trailers. No em dashes.
+
+## Stop record (vm3, 2026-10-19T06:57:42Z)
+
+- Stopped at item 4 (push). `solr-18555-submit` moved after the claim: tip is `79909b2bd1`. Two commits on top of `884de51579`, both by Nick Shanin, at 2026-10-19 06:33Z and 06:40Z: `4f7368f53c` (preserve phrase matches: `withWeightMatches(true)`, flags built from the parent set, `SyntaxError` import re-added) and `79909b2bd1` (remove shadowed highlighter import).
+- Per the Push row, the job stops here and does not retarget. The vm3 work (starting patch, import removal, tidy, and the three ladder decisions) is on `coordination` as `gates/SOLR-18555-vm3-round1.patch`, against `884de51579`. It is not pushed to the ticket branch.
+- Overlap: the vm3 phrase decision (weight matches on for phrase and multi-term, probe 12 of 12 at seed 18555C0FFEE18555) matches the intent of `4f7368f53c`, but the mechanism differs. Test expectations changed by vm3: encoder to `&#x2F;`, subquery to `SolrException` with `BAD_REQUEST`. Compare with `79909b2bd1` before choosing a head.
+- Next: decide which head goes to gate (`79909b2bd1` as is, or the vm3 patch rebased onto it). The gate job is not filed.
