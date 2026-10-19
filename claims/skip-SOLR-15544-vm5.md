@@ -1,0 +1,12 @@
+# Claim: skip-SOLR-15544-vm5
+
+- Claimant host: vm5, matching a file in `hosts/`.
+- Status: ACTIVE. Remediation redo of batch 03, item 2, under `assignments/pool-aaa-skip-verdict-remediation-03.md`.
+- Job or assignment: `assignments/pool-aaa-skip-verdict-remediation-03.md` (item 2, SOLR-15544).
+- Slice: the whole ticket.
+- Capability tags used: review, draft.
+- Started: 2026-10-19T18:33:00Z (UTC).
+
+Heartbeat: 2026-10-19T18:33:00Z
+
+Append one heartbeat line at least once an hour while the claim is active, and push it.
