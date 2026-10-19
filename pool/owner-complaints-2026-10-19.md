@@ -34,13 +34,17 @@ re-audits is not finished work; it is inventory.
 
 ## 3. vm2 has not touched the CSV assignment
 
-The CSV is believed to sit on vm2's storage, and as of this census
-no host has claimed assignments/pool-post-issues-csv-vm2.md and no
-CSV is on the branch. Whoever can reach the file claims the
-assignment and posts the file as it says; if the file cannot be
-found, the claim is marked BLOCKED with the search record: where was
-looked, what was found. A silent assignment is the one unacceptable
-outcome.
+Answered 2026-10-19. The CSV is on this branch at
+material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv
+(18,364 data rows, 4,140,142 bytes, SHA-256
+5c2a97038a8a714412a41fb22c63893ef31a5d905569521e38a5c33a9732b60b),
+published byte-identical from the upload on vm2, and
+assignments/pool-post-issues-csv-vm2.md is DONE (claim
+claims/pool-post-issues-csv-vm2-r2.md). Owner direction, 2026-10-19:
+working the CSV is backlog. The triage slices in
+assignments/pool-csv-backlog-round-1.md are fallback work, claimed
+only once the JSON queue (the remediation and audit work) has
+nothing open for the claiming host.
 
 ## 4. The remediation queue still carries a retired ownership note
 
