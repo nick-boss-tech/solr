@@ -1679,3 +1679,172 @@ Claiming host: none. The record source is the queue entry audit field, round aud
 Missing:
 - No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
 - The re-check required by steps 11 and 12: record.md states JIRA was not re-read, the audit was checked against upstream main c8ab71430f not the fork pin, and it was not re-checked at the pinned head. Its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record.
+
+## 2026-10-19 (twelfth run)
+
+Scope: the next 20 auditable closeout records in file order in material/skip-audit/queue-current.json at coordination tip e48fa11863f33bd53c2f00779d2f35693f7bf015, pinned head 498a09aea97aac86c2cc7ac114113b946d249942. Priorities this run: no remediation re-audit was due (no claims/skip-<KEY>-<host>.md carries a DONE line naming a pool-aaa batch, and queue-current.json is unchanged between the previous audit tip a9a6ae3eed773510a996edeb6c649a65557cf33b and this tip, so no verdict, draft branch or evidence head changed), and no new or changed verdict was due for the same reason. Result: 0 pass, 20 suspect. Gate receipts: no new DONE gate tickets this run; every gates file whose Status line says DONE names a ticket already checked in an earlier run, so no gate receipt check was due and no gate receipt suspect was found. The pattern is unchanged from earlier passes: bulk closeouts without a claim or a per-ticket re-check.
+
+For every suspect below, the draft branch named in queue-current.json exists on the fork and contains drafts/<KEY>/record.md and drafts/<KEY>/jira-comment.md, the record cites the pinned head that matches queue-current.json, the word count is over 40, and the record.md text is not identical to another ticket record in this batch. The verdict is a value the rubric allows and the draft branch suffix matches the verdict. The missing pieces are only the ones listed per ticket. Note on shared text: the jira-comment.md files are byte-identical across groups in this batch: SOLR-12236 and SOLR-11864 share one text; SOLR-12234, SOLR-12112, SOLR-12029, SOLR-11983, SOLR-11954, SOLR-11932, SOLR-11927 and SOLR-11815 share a second; SOLR-12166 and SOLR-11787 share a third; SOLR-12093 and SOLR-11826 share a fourth; SOLR-11858 and SOLR-11816 share a fifth; SOLR-11827 and SOLR-11814 share a sixth.
+
+### SOLR-12236, verdict close-fixed, draft branch solr-12236-draft-close
+
+Claiming host: none. The record says it was checked by vm2 from an earlier B3 reading dated 2026-10-19 UTC.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md states JIRA was not re-read for this record; status taken from the earlier B3 reading
+
+### SOLR-12234, verdict keep-open, draft branch solr-12234-draft-open
+
+Claiming host: none. The record source is the queue entry audit field, round audit-5 dated 2026-10-17.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record
+
+### SOLR-12220, verdict keep-open, draft branch solr-12220-draft-open
+
+Claiming host: none. The record source is the earlier A2 report dated 2026-10-18; the only claims file naming this key is a vm5 flake locate round claim, not a closeout claim.
+
+Missing:
+- No skip closeout claim in claims/: no claims/skip-SOLR-12220-<host>.md and no closeout claim with a DONE line; the only claims/ file naming the key is claims/pool-skip-repro-flake-locate-round-1.md (vm5), a flake locate round claim whose DONE line delivers the A2 report, not a closeout.
+- The re-check required by steps 11 and 12: record.md states JIRA was not re-read for this record; its code reading was not read for this record and the A2 runs were not repeated; the record does state the A2 run command, seed and result, so the missing piece is the re-check itself, not a reproduction statement
+
+### SOLR-12166, verdict keep-open, draft branch solr-12166-draft-open
+
+Claiming host: none. The record says it was checked by vm2 from an earlier B2 reading dated 2026-10-19 UTC.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md states JIRA status was not recorded in the B2 reading and JIRA was not re-read for this record
+
+### SOLR-12112, verdict keep-open, draft branch solr-12112-draft-open
+
+Claiming host: none. The record source is the queue entry audit field, round audit-1 dated 2026-10-04.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record
+
+### SOLR-12093, verdict keep-open, draft branch solr-12093-draft-open
+
+Claiming host: none. The record source is the earlier A1 report dated 2026-10-18; the only claims file naming this key is a vm2 repro round claim, not a closeout claim.
+
+Missing:
+- No skip closeout claim in claims/: no claims/skip-SOLR-12093-<host>.md and no closeout claim with a DONE line; the only claims/ file naming the key is claims/pool-skip-repro-flake-round-1.md (vm2), a repro round claim whose DONE line delivers the A1 report, not a closeout.
+- The re-check required by steps 11 and 12: record.md states JIRA was not re-read for this record and records no JIRA status or date; its code reading was not read for this record and the A1 runs were not repeated; the record does state the A1 run command, seed and result, so the missing piece is the re-check itself, not a reproduction statement
+
+### SOLR-12029, verdict keep-open, draft branch solr-12029-draft-open
+
+Claiming host: none. The record source is the queue entry audit field, round audit-1 dated 2026-10-04.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record
+
+### SOLR-11983, verdict keep-open, draft branch solr-11983-draft-open
+
+Claiming host: none. The record source is the queue entry audit field, round audit-1 dated 2026-10-04.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record
+
+### SOLR-11955, verdict close-obsolete, draft branch solr-11955-draft-close
+
+Claiming host: none. The record says it was checked by vm2 from an earlier B2 reading dated 2026-10-19 UTC.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md states JIRA status was not recorded in the B2 reading and JIRA was not re-read for this record
+- The grep the close-obsolete verdict requires at the pinned head: record.md states the grep result is taken from the B2 reading and was not re-run in this record
+
+### SOLR-11954, verdict keep-open, draft branch solr-11954-draft-open
+
+Claiming host: none. The record source is the queue entry audit field, round audit-1 dated 2026-10-04.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record
+
+### SOLR-11932, verdict keep-open, draft branch solr-11932-draft-open
+
+Claiming host: none. The record source is the queue entry audit field, round audit-3 dated 2026-10-05.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record
+
+### SOLR-11927, verdict keep-open, draft branch solr-11927-draft-open
+
+Claiming host: none. The record source is the queue entry audit field, round audit-3 dated 2026-10-05.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record
+
+### SOLR-11864, verdict close-fixed, draft branch solr-11864-draft-close
+
+Claiming host: none. The record says it was checked by vm2 from an earlier B3 reading dated 2026-10-19 UTC.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md states JIRA was not re-read for this record; status taken from the earlier B3 reading
+
+### SOLR-11858, verdict keep-open, draft branch solr-11858-draft-open
+
+Claiming host: none. The record says it was checked by vm2 from an earlier C reading dated 2026-10-19 UTC.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record
+
+### SOLR-11827, verdict keep-open, draft branch solr-11827-draft-open
+
+Claiming host: none. The record says it was checked by vm2 from an earlier C reading dated 2026-10-19 UTC.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record
+
+### SOLR-11826, verdict keep-open, draft branch solr-11826-draft-open
+
+Claiming host: none. The record source is the earlier A1 report dated 2026-10-18; the only claims file naming this key is a vm2 repro round claim, not a closeout claim.
+
+Missing:
+- No skip closeout claim in claims/: no claims/skip-SOLR-11826-<host>.md and no closeout claim with a DONE line; the only claims/ file naming the key is claims/pool-skip-repro-flake-round-1.md (vm2), a repro round claim whose DONE line delivers the A1 report, not a closeout.
+- The re-check required by steps 11 and 12: record.md states JIRA was not re-read for this record and records no JIRA status or date; its code reading was not read for this record and the A1 runs were not repeated; the record does state the A1 run command, seed and result, so the missing piece is the re-check itself, not a reproduction statement
+
+### SOLR-11816, verdict keep-open, draft branch solr-11816-draft-open
+
+Claiming host: none. The record says it was checked by vm2 from an earlier C reading dated 2026-10-19 UTC.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record
+- A code path with file and line, or a reproduction attempt with a result: record.md names no code path with file and line (it states no class, method or config is named and there is no code path to check at this head) and its reproduction section states only Not attempted, with no attempt or result
+
+### SOLR-11815, verdict keep-open, draft branch solr-11815-draft-open
+
+Claiming host: none. The record source is the queue entry audit field, round audit-3 dated 2026-10-05.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record
+
+### SOLR-11814, verdict keep-open, draft branch solr-11814-draft-open
+
+Claiming host: none. The record says it was checked by vm2 from an earlier C reading dated 2026-10-19 UTC.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record
+
+### SOLR-11787, verdict keep-open, draft branch solr-11787-draft-open
+
+Claiming host: none. The record says it was checked by vm2 from an earlier B2 reading dated 2026-10-19 UTC.
+
+Missing:
+- No claim in claims/ naming this key at all, so no closeout claim with a DONE line.
+- The re-check required by steps 11 and 12: record.md states JIRA status was not recorded in the B2 reading and JIRA was not re-read for this record
+- A code path with file and line, or a reproduction attempt with a result: record.md names no code path with file and line; its reproduction section states only Not attempted, with no attempt or result

@@ -2625,6 +2625,269 @@
         "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
         "record.md states JIRA was not re-read, the audit was checked against upstream main c8ab71430f not the fork pin, and it was not re-checked at the pinned head; its code reading is taken from the audit evidence, names no code path with file and line, and its reproduction section states not attempted in this record"
       ]
+    },
+    {
+      "key": "SOLR-12236",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-12236-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md states JIRA was not re-read for this record; status taken from the earlier B3 reading"
+      ]
+    },
+    {
+      "key": "SOLR-12234",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-12234-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record"
+      ]
+    },
+    {
+      "key": "SOLR-12220",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-12220-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no skip closeout claim in claims/: no claims/skip-SOLR-12220-<host>.md and no closeout claim with a DONE line; the only claims/ file naming the key is claims/pool-skip-repro-flake-locate-round-1.md (vm5), a flake locate round claim whose DONE line delivers the A2 report, not a closeout",
+        "record.md states JIRA was not re-read for this record; its code reading was not read for this record and the A2 runs were not repeated; the record does state the A2 run command, seed and result, so the missing piece is the re-check itself, not a reproduction statement"
+      ]
+    },
+    {
+      "key": "SOLR-12166",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-12166-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md states JIRA status was not recorded in the B2 reading and JIRA was not re-read for this record"
+      ]
+    },
+    {
+      "key": "SOLR-12112",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-12112-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record"
+      ]
+    },
+    {
+      "key": "SOLR-12093",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-12093-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no skip closeout claim in claims/: no claims/skip-SOLR-12093-<host>.md and no closeout claim with a DONE line; the only claims/ file naming the key is claims/pool-skip-repro-flake-round-1.md (vm2), a repro round claim whose DONE line delivers the A1 report, not a closeout",
+        "record.md states JIRA was not re-read for this record and records no JIRA status or date; its code reading was not read for this record and the A1 runs were not repeated; the record does state the A1 run command, seed and result, so the missing piece is the re-check itself, not a reproduction statement"
+      ]
+    },
+    {
+      "key": "SOLR-12029",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-12029-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record"
+      ]
+    },
+    {
+      "key": "SOLR-11983",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11983-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record"
+      ]
+    },
+    {
+      "key": "SOLR-11955",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-11955-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md states JIRA status was not recorded in the B2 reading and JIRA was not re-read for this record",
+        "record.md states the grep result the close-obsolete verdict requires is taken from the B2 reading and was not re-run in this record"
+      ]
+    },
+    {
+      "key": "SOLR-11954",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11954-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record"
+      ]
+    },
+    {
+      "key": "SOLR-11932",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11932-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record"
+      ]
+    },
+    {
+      "key": "SOLR-11927",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11927-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record"
+      ]
+    },
+    {
+      "key": "SOLR-11864",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-11864-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md states JIRA was not re-read for this record; status taken from the earlier B3 reading"
+      ]
+    },
+    {
+      "key": "SOLR-11858",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11858-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record"
+      ]
+    },
+    {
+      "key": "SOLR-11827",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11827-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record"
+      ]
+    },
+    {
+      "key": "SOLR-11826",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11826-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no skip closeout claim in claims/: no claims/skip-SOLR-11826-<host>.md and no closeout claim with a DONE line; the only claims/ file naming the key is claims/pool-skip-repro-flake-round-1.md (vm2), a repro round claim whose DONE line delivers the A1 report, not a closeout",
+        "record.md states JIRA was not re-read for this record and records no JIRA status or date; its code reading was not read for this record and the A1 runs were not repeated; the record does state the A1 run command, seed and result, so the missing piece is the re-check itself, not a reproduction statement"
+      ]
+    },
+    {
+      "key": "SOLR-11816",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11816-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record",
+        "record.md names no code path with file and line (it states no class, method or config is named and there is no code path to check at this head) and its reproduction section states only Not attempted, with no attempt or result"
+      ]
+    },
+    {
+      "key": "SOLR-11815",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11815-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md is a bulk audit-derived record: it states JIRA was not re-read for this record; the audit below was checked against upstream main c8ab71430f, not the fork pin, and was not re-checked at the pinned head for this record; its code reading is taken from the audit evidence, not re-read at the pinned head, names no code path with file and line, and its reproduction section states not attempted in this record"
+      ]
+    },
+    {
+      "key": "SOLR-11814",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11814-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md states JIRA status was not recorded in the C reading and JIRA was not re-read for this record"
+      ]
+    },
+    {
+      "key": "SOLR-11787",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11787-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-19",
+      "audit_coordination_tip": "e48fa11863f33bd53c2f00779d2f35693f7bf015",
+      "reasons": [
+        "no claim in claims/ naming the key at all, so no closeout claim with a DONE line",
+        "record.md states JIRA status was not recorded in the B2 reading and JIRA was not re-read for this record",
+        "record.md names no code path with file and line; its reproduction section states only Not attempted, with no attempt or result"
+      ]
     }
   ]
 }
