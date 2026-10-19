@@ -46,6 +46,10 @@ public class BlockJoinChildQParser extends BlockJoinParentQParser {
   @Override
   protected Query noClausesQueryLegacy() throws SyntaxError {
     final Query parents = parseLegacyParentFilter();
+    if (parents == null) {
+      throw new SyntaxError(
+          "The 'of' parent filter is required when the child query has no clauses");
+    }
     final BooleanQuery notParents =
         new BooleanQuery.Builder()
             .add(new MatchAllDocsQuery(), Occur.MUST)

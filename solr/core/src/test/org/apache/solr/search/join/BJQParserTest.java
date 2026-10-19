@@ -645,6 +645,14 @@ public class BJQParserTest extends SolrTestCaseJ4 {
     assertU("most of the time", commit());
   }
 
+  @Test
+  public void testChildQueryWithNoClausesAndNoParentFilterIsBadRequest() {
+    assertQEx(
+        "child query with no clauses and no 'of' parent filter must not fail with an NPE",
+        req("q", "{!child q=\"\"}"),
+        SolrException.ErrorCode.BAD_REQUEST.code);
+  }
+
   private long getCacheHits(String cacheName) {
     return (long) SolrMetricTestUtils.getCacheSearcherOpsHits(h.getCore(), cacheName).getValue();
   }
