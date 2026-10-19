@@ -1929,9 +1929,9 @@
       "round": "audit-1",
       "evidence": "BadApple quarantine on retired branch_8_11."
     },
-    "verdict": "close-fixed",
-    "draft_branch": "solr-15848-draft-close",
-    "evidence_head": "498a09aea9"
+    "verdict": "keep-open",
+    "draft_branch": "solr-15848-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-15823",
