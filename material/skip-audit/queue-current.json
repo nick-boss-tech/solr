@@ -233,8 +233,8 @@
       "round": "audit-1",
       "evidence": "ClusterStatus.Health.calcShardHealth on main yields YELLOW for 0.5<ratio<1 with a leader; per-replica state is counted from the state string, so 4 of 5 active gives YELLOW. Ticket is 9.6.1 with no code pointer or repro and 0 comments."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-17820-draft-open",
+    "verdict": "pr-needed",
+    "draft_branch": "solr-17820-draft-pr",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
