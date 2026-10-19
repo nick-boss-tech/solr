@@ -1,7 +1,7 @@
 # Skip record: SOLR-17086
 
 - Ticket: SOLR-17086, "v2 Backup and Replica creation: HTTP 500 error messages". JIRA status Open, resolution none, created 2023-11-28, last updated 2024-01-18, checked 2026-10-19 UTC.
-- Verdict: close-fixed.
+- Verdict: close-fixed (superseded: see solr-17086-draft-open, keep-open, because the second reported problem is not covered).
 - Draft branch: solr-17086-draft-close.
 - Pinned head: fork origin/main `498a09aea97aac86c2cc7ac114113b946d249942`.
 - Checked by: vm5, 2026-10-19 UTC.
@@ -24,11 +24,11 @@ Two v2 API problems on 9.4. The first (the one with a fix candidate) is an HTTP 
 
 ## Reproduction attempts
 
-Not attempted on the pinned head. The reporter's setup (a Kubernetes cluster, S3 repository, a v2 backup request on a collection with rf=1) is not something a closeout run reproduces. The code-path check is enough for close-fixed: the NPE line is shown in the parent commit and is guarded on main. Name of the test that would show the guard working: none in the fork for this path (not searched).
+Not attempted on the pinned head. The reporter's setup (a Kubernetes cluster, S3 repository, a v2 backup request on a collection with rf=1) is not something a closeout run reproduces. The code-path check is enough for close-fixed: the NPE line is shown in the parent commit and is guarded on main. No unit test for this guard was searched for on the fork.
 
 ## Gap analysis
 
-The NPE in the ticket is the unguarded `solrQueryRequest.getParams()` at the parent commit. At the pinned head the same line is guarded, so the NPE cannot occur there. The ticket's second problem (the stack trace in the first part of the description is the only one reported as HTTP 500) is not separately addressed in this record. The reporter's backup-completes observation is unchanged by this fix.
+The NPE in the ticket is the unguarded `solrQueryRequest.getParams()` at the parent commit. At the pinned head the same line is guarded, so the NPE cannot occur there. The ticket's second problem (ADDREPLICA through the v2 API, with the same NPE in the report) was not read in full: the evidence output cut the description at 1200 characters, and the full text was read later from the JIRA page. That problem is not covered by this fix (see the superseding record solr-17086-draft-open, which changes the verdict to keep-open).
 
 ## Verdict justification
 
