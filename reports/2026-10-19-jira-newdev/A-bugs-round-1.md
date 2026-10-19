@@ -85,3 +85,11 @@ One section per ticket. Assignment: `assignments/pool-jira-newdev-bugs-round-1.m
 - The ticket's example uses an `elevateIds` query parameter. No such parameter exists in `solr/core/src/java`, so the example cannot work with any config.
 - Options for Nick: (a) minimal: log a warning when the config-file is missing, which is still a behavior change in the logs; (b) feature: accept elevated ids from the request without an elevate.xml. Option (b) goes beyond the ticket's minimal-fix scope.
 - Gate: none.
+
+## SOLR-5744: LangDetect processor NPE with JavaBin update (vm3, 2026-10-19)
+
+- Status: not reproduced at `c8ab71430f`. No branch pushed. Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-5744.md`.
+- The ticket's NPE is in `LangDetectLanguageIdentifierUpdateProcessor.detectLanguage`. On the base, `SolrInputDocumentReader` skips missing fields, `asString` cannot throw an NPE, and `LanguageDetectionOrchestrator.detectAll` returns a non-null list on every path (checked with `javap` on language-detection-12.5.2.jar).
+- Evidence: `LangDetectLanguageIdentifierUpdateProcessorFactoryTest` 13 of 13 pass on the base, including the empty and short document cases (seed in the claim's log).
+- Not run: no JavaBin end-to-end update was run, so this is a code-reading verdict plus the existing tests.
+- Gate: none, since no branch was pushed.
