@@ -18,7 +18,9 @@ With BasicAuthPlugin on (blockUnknown true, forwardCredentials false), a distrib
 
 So on a standalone node (no ZooKeeper), the PKI builder is null, and no builder is installed on any shard client. The shard sub-requests carry no credentials. With blockUnknown set, the receiving node rejects them with 401, which is the failure the ticket reports.
 
-The grep at the pin for `HttpClientBuilderPlugin` in solr/core/src/java returns the interface uses in HttpSolrClientProvider.java:80, HttpShardHandlerFactory.java:325, ShardHandlerFactory.java:34 and AuthenticationPlugin.java:135. No standalone path passes the auth plugin to the shard clients; AuthenticationPlugin.java:135 returns `this instanceof HttpClientBuilderPlugin`, which only matters if a builder is installed at all.
+The grep at the pin for `HttpClientBuilderPlugin` in solr/core/src/java returns the interface uses in HttpSolrClientProvider.java:80, HttpShardHandlerFactory.java:325, ShardHandlerFactory.java:34 and AuthenticationPlugin.java:135. BasicAuthPlugin is not one of them: `public class BasicAuthPlugin extends AuthenticationPlugin implements ConfigEditablePlugin, SpecProvider` (BasicAuthPlugin.java:48-49).
+
+The credential forwarding the reporter's configuration uses (`forwardCredentials`, read at BasicAuthPlugin.java:55 and :75) is applied in BasicAuthPlugin.interceptInternodeRequest (BasicAuthPlugin.java:215-216). That method is called only from the PKI listener's onQueued (PKIAuthenticationPlugin.java:327). The listener exists only when pkiAuthenticationSecurityBuilder is set, which is the ZooKeeper case. So in standalone mode the forwarding code is never reached.
 
 ## History
 
@@ -27,7 +29,7 @@ The grep at the pin for `HttpClientBuilderPlugin` in solr/core/src/java returns 
 
 ## Proposed change (recorded choice)
 
-Two options fit the code: (a) install a client builder for standalone shard clients that carries the auth plugin's credentials (the BasicAuthPlugin is an HttpClientBuilderPlugin when it implements that interface), or (b) build the PKI builder in standalone mode too, so shard sub-requests are signed. Option (a) with forwardCredentials is the narrower change. The record chooses (a) for the PR draft because it touches only the standalone shard path and leaves the ZooKeeper PKI path unchanged. The owner may overrule.
+The change is to make the internode listener exist in standalone mode, so that the existing BasicAuthPlugin forwarding (BasicAuthPlugin.java:215-216) runs for shard sub-requests. That means building `PKIAuthenticationPlugin` (CoreContainer.java:839-840) outside the ZooKeeper branch. The constructor takes a node name (CoreContainer.java:841 passes `zkSys.getZkController().getNodeName()`), which standalone mode does not have. So the choice is which node name the standalone listener uses. Recorded choice for the PR draft: use the core container's configured node name, which the review must confirm exists at this head. The ZooKeeper path is unchanged. The owner may overrule.
 
 ## Check the PR would add
 
