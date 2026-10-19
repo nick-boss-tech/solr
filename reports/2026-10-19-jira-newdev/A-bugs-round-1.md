@@ -42,3 +42,46 @@ One section per ticket. Assignment: `assignments/pool-jira-newdev-bugs-round-1.m
   - v1 `CREATE`: `solr/core/src/java/org/apache/solr/handler/admin/ConfigSetsHandler.java` lines 133 to 135 map an omitted base to `_default` on purpose. That behavior must stay for v1.
 - Why stopped: "omitted" needs a defined result. Options: (a) default to `_default`, which the ticket says blocks from-scratch creation; (b) create an empty configset with no base, which needs a decision on the minimum files it gets (for example `solrconfig.xml`, `schema.xml`) and on how an empty configset is validated. Option (b) is a new creation path, beyond a minimal fix. Owner decision needed on which result, and on whether base-change propagation (the ticket's second point) is in scope.
 - Gate: none, since no branch was pushed.
+
+## SOLR-13183: NullPointerException at SolrDispatchFilter.doFilter (vm3, 2026-10-19)
+
+- Status: not reproducible at `c8ab71430f`. No branch pushed. Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-13183.md`.
+- The ticket's `SolrDispatchFilter.doFilter` no longer exists at the base; it was renamed to `SolrServlet` by SOLR-18112. The base dispatches through `ServletUtils.getPathAfterContext`, which handles the input.
+- Evidence: a throwaway test with the ticket's inputs returned HTTP 400 on the base in two runs. Seed `13183C0FFEE13183`.
+- Gate: none, since no branch was pushed.
+
+## SOLR-13184: NPE in ValueSourceParser for joindf with missing argument (vm3, 2026-10-19)
+
+- Status: fixed on branch `solr-13184-joindf-missing-arg` at `6bb01a08cd` (base `c8ab71430f`; test commit `2e178c9d92`). Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-13184.md`. Receipt: `receipts/SOLR-13184.md`.
+- Reproduced on the base: `{!frange l=10 u=100}joindf(genre:comedy,$x)` gives an NPE in `ValueSourceRangeFilter.hashCode` (null `qfield`), a 500 instead of 400. Seed `8B3C0622AB0B57FC`.
+- Fix: the `joindf` parser in `solr/core/src/java/org/apache/solr/search/ValueSourceParser.java` throws `BAD_REQUEST` when the field or query argument is missing.
+- Gate: tidy exit 0 (no changes); `JoinDocFreqMissingArgTest` 1 of 1 pass at head (seed `9BAA9229A0A59961`); `:solr:core:check -x test` exit 0.
+
+## SOLR-13185: NPE in complexphrase query parsing with no query string (vm3, 2026-10-19)
+
+- Status: fixed on branch `solr-13185-query-parse-null` at `84523828bb` (base `c8ab71430f`; test commit `365392a484`). Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-13185.md`. Receipt: `receipts/SOLR-13185.md`.
+- Reproduced on the base: `defType=complexphrase` with no `q` gives an NPE in `StringReader` through `ComplexPhraseQueryParser.parse`. Seed `42E3C64708EB0C45`.
+- Fix: `ComplexPhraseQParser.parse` in `solr/core/src/java/org/apache/solr/search/ComplexPhraseQParserPlugin.java` returns null for a null query string, matching the Surround parser.
+- Gate: `TestComplexPhraseQParserPlugin` 7 of 7 pass at head (seed `EC3309AF3E79CF1D`); tidy and `:solr:core:check -x test` exit 0.
+
+## SOLR-13188: NPE in IndexSearcher.rewrite via block-join parent with fq (vm3, 2026-10-19)
+
+- Status: not reproducible at `c8ab71430f`. No branch pushed. Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-13188.md`. Receipt: `receipts/SOLR-13188.md`.
+- The ticket's query `{!parent fq={!collapse field=id}&rentDocument}` returns HTTP 400 on the base, because `BlockJoinParentQParser.parse` throws a `SyntaxError` when neither `which` nor `parentPath` is given. The NPE stack names `BitDocIdSetFilterWrapper`, which is not in the base.
+- Evidence: `BJQParserTest` 19 of 19 pass at base, including the new 400 assertion (seed `3A1E14DB0B2A6B32`).
+- Gate: none, since no branch was pushed.
+
+## SOLR-13195: NPE for distributed queries when no shards are configured (vm3, 2026-10-19)
+
+- Status: not reproducible over HTTP at `c8ab71430f`. No branch pushed. Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-13195.md`. Receipt: `receipts/SOLR-13195.md`.
+- Over HTTP, the ticket's request (`distrib=true&facet=on&facet.field=...`, no `shards`) returns HTTP 400 on the base: the node's own URL is not in `allowUrls`. Seed `7FF92B0309150483`.
+- Open question for Nick: an in-process request with `distrib=true` and no shards (TestHarness or EmbeddedSolrServer, no HTTP call) hits an NPE at `HttpShardHandler.prepDistributed`, where `req.getHttpSolrCall()` is null. The fix was not made because it is not the HTTP symptom in the ticket.
+- Gate: none, since no branch was pushed.
+
+## SOLR-14970: elevation does not work without elevate.xml config (vm3, 2026-10-19)
+
+- Status: stopped, no branch. The ticket needs behavior beyond a minimal fix, so the assignment's scope rule applies. Claim: `claims/pool-vm3-jira-newdev-bugs-round-1-solr-14970.md`.
+- Verdict by code reading, no test run: with no `config-file`, `QueryElevationComponent` throws `InitializationException` with `NO_CONFIG_FILE_DEFINED`, and `handleInitializationException` skips that cause without logging (`solr/core/src/java/org/apache/solr/handler/component/QueryElevationComponent.java` lines 265 to 273 and 298 to 305). The component is then a no-op, which matches the report.
+- The ticket's example uses an `elevateIds` query parameter. No such parameter exists in `solr/core/src/java`, so the example cannot work with any config.
+- Options for Nick: (a) minimal: log a warning when the config-file is missing, which is still a behavior change in the logs; (b) feature: accept elevated ids from the request without an elevate.xml. Option (b) goes beyond the ticket's minimal-fix scope.
+- Gate: none.
