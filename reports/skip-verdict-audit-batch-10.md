@@ -1,10 +1,12 @@
 # Skip verdict cross-audit, batch 10 of 21
 
+Amended 2026-10-19: SOLR-7992 was first marked suspect. Its claim `claims/pool-skip-repro-flake-round-1.md` names vm2 as claimant, so it is deferred-own-host. Count corrected below.
+
 Assignment: `assignments/pool-aab-skip-verdict-audit-10.md`. Auditor: vm2, 2026-10-19, claim `claims/pool-aab-skip-verdict-audit-10.md`. Each item was checked against the floor in `material/skip-audit/verdict-rubric.md`: a closeout claim in `claims/` naming the ticket with a DONE line, the named draft branch on the fork with `drafts/<KEY>/record.md` and `jira-comment.md`, the pinned head the record cites, the Jira status read in that pass, a code path with file and line or a reproduction, a substantive record, and a verdict whose draft suffix matches.
 
-Checks run on the fork and on the coordination branch at tip `03848f346df`. All 25 draft branches exist with the suffix matching the recorded verdict. Every record cites the pinned head `498a09aea97a` and is between 206 and 365 words. No item passed. Seven items have no closeout claim with a DONE line naming the ticket, and their records contain no file-and-line code citation. SOLR-7992 is named only in a test-run claim (`claims/pool-skip-repro-flake-round-1.md`), which is not a closeout.
+Checks run on the fork and on the coordination branch at tip `03848f346df`. All 25 draft branches exist with the suffix matching the recorded verdict. Every record cites the pinned head `498a09aea97a` and is between 206 and 365 words. No item passed. Six items have no closeout claim with a DONE line naming the ticket, and their records contain no file-and-line code citation. SOLR-7992 has a claim, `claims/pool-skip-repro-flake-round-1.md`, but it names vm2 as claimant, so it is own-host.
 
-Own-host check: 18 records state "Checked by: vm2" for the reading they cite. These 18 are `deferred-own-host`; this host did not audit them. This follows the same reading as batch 09.
+Own-host check: 18 records state "Checked by: vm2" for the reading they cite. These 18, and SOLR-7992, are `deferred-own-host`; this host did not audit them. This follows the same reading as batch 09.
 
 | # | Ticket | Result | Claim found | Draft branch head | Missing |
 | --- | --- | --- | --- | --- | --- |
@@ -22,7 +24,7 @@ Own-host check: 18 records state "Checked by: vm2" for the reading they cite. Th
 | 8024 | SOLR-8024 | deferred-own-host (close-fixed) | not checked (own host) | `44e1dba34a91` (solr-8024-draft-close) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
 | 8005 | SOLR-8005 | suspect (keep-open) | none naming the ticket as a closeout | `ecd7a6a396d9` (solr-8005-draft-open) | no closeout claim with a DONE line names this ticket; no file-and-line code citation found in the record |
 | 7998 | SOLR-7998 | deferred-own-host (keep-open) | not checked (own host) | `735006832862` (solr-7998-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
-| 7992 | SOLR-7992 | suspect (keep-open) | claims/pool-skip-repro-flake-round-1.md (test run only, not a closeout) | `afbcf4192234` (solr-7992-draft-open) | no closeout claim with a DONE line names this ticket; no file-and-line code citation found in the record |
+| 7992 | SOLR-7992 | deferred-own-host (keep-open) | claims/pool-skip-repro-flake-round-1.md (claimant vm2) | `afbcf4192234` (solr-7992-draft-open) | the closeout claim names vm2 as the claimant |
 | 7982 | SOLR-7982 | deferred-own-host (keep-open) | not checked (own host) | `eefa3d2797c7` (solr-7982-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
 | 7973 | SOLR-7973 | deferred-own-host (close-obsolete) | not checked (own host) | `d71df168b8cb` (solr-7973-draft-close) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
 | 7953 | SOLR-7953 | deferred-own-host (close-fixed) | not checked (own host) | `b2ecbe0499a0` (solr-7953-draft-close) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
@@ -34,4 +36,4 @@ Own-host check: 18 records state "Checked by: vm2" for the reading they cite. Th
 | 7846 | SOLR-7846 | deferred-own-host (keep-open) | not checked (own host) | `eff2751b4c36` (solr-7846-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
 | 7806 | SOLR-7806 | deferred-own-host (keep-open) | not checked (own host) | `93b4805e39a9` (solr-7806-draft-open) | the record names vm2 as the checker of the reading it cites ("Checked by: vm2") |
 
-Count: pass 0, suspect 7, deferred 18.
+Count: pass 0, suspect 6, deferred 19.
