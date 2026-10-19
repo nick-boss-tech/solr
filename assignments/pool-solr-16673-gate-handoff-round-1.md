@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-16673 gate handoff, round 1
 
-Status: OPEN
+Status: DONE (2026-10-19, vm5): both gates green on apache/main. uniqueKey head a494962d79, rootfield head 72e505cc20. Deliverables: receipts/SOLR-16673.md (round 2 sections), gates/SOLR-16673-uniquekey.md and gates/SOLR-16673-rootfield.md (DONE).
 
 Round 2 (vm5): both heads were re-tested. Both gates are blocked at step 2 (Error Prone) on a base-file warning, and vm1 has a claim on a superseded rootfield head. See reports/SOLR-16673-handoff-review-round-2.md and the gate files Result r2. The HOLD is lifted for the uniqueKey gate only after the step 2 decision.
 
