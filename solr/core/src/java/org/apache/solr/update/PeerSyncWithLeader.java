@@ -33,6 +33,7 @@ import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
 import org.apache.solr.client.solrj.request.GenericSolrRequest;
 import org.apache.solr.cloud.ZkController;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.NamedList;
@@ -74,12 +75,26 @@ public class PeerSyncWithLeader implements SolrMetricProducer {
   private SolrMetricsContext solrMetricsContext;
 
   public PeerSyncWithLeader(SolrCore core, String leaderUrl, int nUpdates) {
+    this(core, leaderUrl, nUpdates, true);
+  }
+
+  /** Creates a peer sync for recovery, applying the replica type fingerprint policy. */
+  public static PeerSyncWithLeader forRecovery(SolrCore core, String leaderUrl, int nUpdates) {
+    var cloudDescriptor = core.getCoreDescriptor().getCloudDescriptor();
+    Replica.Type replicaType = cloudDescriptor == null ? null : cloudDescriptor.getReplicaType();
+    return new PeerSyncWithLeader(
+        core, leaderUrl, nUpdates, PeerSync.shouldComputeIndexFingerprint(replicaType));
+  }
+
+  private PeerSyncWithLeader(
+      SolrCore core, String leaderUrl, int nUpdates, boolean allowFingerprint) {
     this.core = core;
     this.leaderUrl = leaderUrl;
     this.nUpdates = nUpdates;
 
     this.doFingerprint =
-        EnvUtils.getPropertyAsBool("solr.index.replication.fingerprint.enabled", true);
+        EnvUtils.getPropertyAsBool("solr.index.replication.fingerprint.enabled", true)
+            && allowFingerprint;
     this.uhandler = core.getUpdateHandler();
     this.ulog = uhandler.getUpdateLog();
 

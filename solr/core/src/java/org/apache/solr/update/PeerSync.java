@@ -38,6 +38,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.cloud.ZkController;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.IOUtils;
@@ -135,6 +136,12 @@ public class PeerSync implements SolrMetricProducer {
     this.updater = new Updater(msg(), core);
 
     core.getCoreMetricManager().registerMetricProducer(this, Attributes.empty());
+  }
+
+  static boolean shouldComputeIndexFingerprint(Replica.Type replicaType) {
+    // TLOG and PULL replicas converge through segment replication, so document-version checksums
+    // do not help them decide whether their indexes are equivalent.
+    return replicaType == null || !replicaType.replicateFromLeader;
   }
 
   public static final String METRIC_SCOPE = "peerSync";

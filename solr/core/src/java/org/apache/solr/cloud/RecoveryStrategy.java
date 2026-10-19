@@ -727,7 +727,8 @@ public class RecoveryStrategy implements Runnable, Closeable {
           Span.current().addEvent("peerSync");
           boolean syncSuccess;
           try (PeerSyncWithLeader peerSyncWithLeader =
-              new PeerSyncWithLeader(core, leader.getCoreUrl(), ulog.getNumRecordsToKeep())) {
+              PeerSyncWithLeader.forRecovery(
+                  core, leader.getCoreUrl(), ulog.getNumRecordsToKeep())) {
             syncSuccess = peerSyncWithLeader.sync(recentVersions).isSuccess();
           }
           Span.current().addEvent("peerSyncDone", Attributes.of(SUCCESS_ATTR, syncSuccess));
