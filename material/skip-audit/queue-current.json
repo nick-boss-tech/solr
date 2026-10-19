@@ -213,7 +213,10 @@
       "date": "2026-10-17",
       "round": "audit-5",
       "evidence": "The JIRA is the SIP-25 encryption-module umbrella and asks to create subtasks or link related tickets. It gives no reproducible failure or single Solr code path. This is feature tracking, not a bug report."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-17838-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17820",
