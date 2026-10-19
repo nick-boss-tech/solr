@@ -12,3 +12,9 @@ Heartbeat: 2026-10-19T17:40Z
 Heartbeat: 2026-10-19T18:05Z
 
 BLOCKED: 2026-10-19 by vm3 at gate step 2 (Error Prone compile). Branch `consistency-v1-core-backup-permission`, head `08bbb44b9e` (base `498a09aea9`, same base as item 2). The item change is `CreateCoreBackup.java` `@PermissionName(COLL_EDIT_PERM)` to `CORE_EDIT_PERM`, with its import. `BackupCoreAPITest` passed 5 of 5 (seed A1B2C3D4E5F60718, XML). The Error Prone compile failed on two `DirectInvocationOnMock` warnings in `solr/core/src/test/org/apache/solr/handler/admin/api/CoreReplicationAPITest.java` lines 213 and 217 (`-Werror`). That file is untouched from the base, so the failure is at base. The item's Limits say to change only the declaration and its asserting tests, so vm3 did not edit it. Decision needed from the owner: fix `CoreReplicationAPITest` in a separate item, or waive the errorprone step for this item. Logs: `/workspace/gates/logs/vm3/consistency-item1/`.
+
+Result (vm3, 2026-10-19T18:33Z): the Error Prone block was resolved at rung 1. `CoreReplicationAPITest` already stubs the config path and tlog dir in `setUpMocks`, so the test now reads those stored values instead of calling through `mockCore`. Tidy also removed the unused `oshai-logging` version line from `gradle/libs.versions.toml`, which is part of the gated tree. Gate: tidy 0, Error Prone compile 0, focused `CoreReplicationAPITest` 12 tests (1 skipped, 0 failures) and `BackupCoreAPITest` 5 tests (0 failures), `:solr:core:check -x test` 0. Logs: `/workspace/gates/logs/vm3/consistency-item1-r2/`.
+
+DONE: 2026-10-19 by vm3. Branch `consistency-v1-core-backup-permission`, gated head `0c37fbd580` (tree `33e474e5e6`, base `498a09aea9`). Commits `08bbb44b9e` (permission change) and `0c37fbd580` (Error Prone repair and tidy output). PR draft not written and no PR opened; the owner decides the vehicle.
+
+Heartbeat: 2026-10-19T18:33Z
