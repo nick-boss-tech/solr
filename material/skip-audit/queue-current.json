@@ -936,7 +936,10 @@
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "MediaTypeOverridingFilter on main null-guards SolrQueryRequest before getMediaTypeFromWtParam (the ticket NPE site); V2HttpCall sets SOLR_QUERY_REQUEST on every Jersey request."
-    }
+    },
+    "verdict": "close-fixed",
+    "draft_branch": "solr-17086-draft-close",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17055",
