@@ -8,3 +8,9 @@
 - Started: 2026-10-19T19:20Z (UTC).
 
 Heartbeat: 2026-10-19T19:20Z
+
+Result (vm3, 2026-10-19T19:30Z): already fixed on apache/main at `c8ab71430f`, judged by reading the code path (the chroot is kept from `-z` through `SolrZkClient`, and the universal connection string came in SOLR-18130). No branch. Not reproduced live; see `reports/2026-10-19-jira-newdev/A-bugs-round-1.md`.
+
+DONE: 2026-10-19 by vm3. Deliverable: `reports/2026-10-19-jira-newdev/A-bugs-round-1.md` (SOLR-15231 section). No branch.
+
+Heartbeat: 2026-10-19T19:30Z
