@@ -1,8 +1,8 @@
 # Gate job: SOLR-18507 (Phase 2 gross fingerprint cache)
 
-Status: GATE INVALID (vm1, 2026-10-19): step 0 passed; step 1 tidy modified 3 files, so the run stopped per the decision table. Tidy diff is formatting only (blank line and line joins) in solr/core/src/java/org/apache/solr/core/SolrCore.java, solr/core/src/java/org/apache/solr/update/IndexFingerprint.java, solr/core/src/test/org/apache/solr/update/SolrIndexFingerprintTest.java. Log: ~/workspace/tools/g18507p2-gate.log on vm1. The branch head 3f273e29ee00 is not tidy-clean; it needs a tidy commit and a retargeted job before the gate can run.
+Status: CLAIMED by vm1 for round 2, 2026-10-19T05:20Z, at head a36ca787d5b. Round 1 record: GATE INVALID at step 1 (tidy modified SolrCore.java, IndexFingerprint.java, SolrIndexFingerprintTest.java; formatting only); the tidy output was committed as a36ca787d5b under the owner's proactive tidy direction.
 
-- Branch: `solr-18507-phase-2-submit`. Head: `3f273e29ee000c44647304e583bd3f564231ea60` (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
+- Branch: `solr-18507-phase-2-submit`. Head: `a36ca787d5b62bb57efaeb54eb0292d874644c2b` (round 2; round 1 head 3f273e29ee00 plus the tidy commit a36ca787d5b, pushed by vm1 under the owner's proactive tidy direction 2026-10-19) (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `1ba98f9240902c26f0bcd411f8787d38555dea8d`. Prior gated head: none recorded.
 - Gate ID: `SOLR-18507-phase-2`. Claim file: `claims/pool-<host>-gate-SOLR-18507-phase-2.md`.
 - Intended host: any capable Linux host. WORKFLOW.md lets any capable Linux host claim it if that host is busy.
@@ -49,7 +49,7 @@ If any step cannot be verified, record it here and stop.
 - [ ] head confirmed by ls-remote
 - [ ] diff scope confirmed
 - [x] step 0 changelog check (passed 2026-10-19, vm1)
-- [ ] step 1 tidy clean (FAILED as GATE INVALID 2026-10-19: tidy modified 3 files)
+- [x] step 1 tidy clean (round 1 FAILED as GATE INVALID 2026-10-19: tidy modified 3 files; fixed by commit a36ca787d5b; round 2 rechecks)
 - [ ] step 2 Error Prone compile
 - [ ] step 3 proof leg, if requested
 - [ ] step 4 focused head run, counted from fresh XML
