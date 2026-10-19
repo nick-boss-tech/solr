@@ -1,0 +1,1 @@
+We checked current main (fork main at 498a09aea9). The feature or code this ticket describes has been removed, and nothing in the current code refers to it. Closing as obsolete, since the report does not apply to the current code.
