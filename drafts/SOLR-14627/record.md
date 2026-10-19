@@ -1,37 +1,40 @@
 # Skip record: SOLR-14627
 
-- Ticket: SOLR-14627, SynonymGraphFilterFactory with Wordnet format synonym file produces array_index_out_of_bounds_exception at query time. JIRA was not re-read for this record.
+- Ticket: SOLR-14627, "SynonymGraphFilterFactory with Wordnet format synonym file produces array_index_out_of_bounds_exception at query time". JIRA status Open, resolution none, fix versions none, created 2020-07-04, updated 2024-08-16. Checked 2026-10-19 UTC.
 - Verdict: keep-open.
 - Draft branch: solr-14627-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-1, 2026-10-04, audit verdict confirmed-skip).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. No upstream sha cited.
+- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, for the remediation redo of this ticket (claim claims/skip-SOLR-14627-vm2.md).
 
 ## Ticket reading
 
-The summary as recorded in the queue: SynonymGraphFilterFactory with Wordnet format synonym file produces array_index_out_of_bounds_exception at query time. Skip note: stale 2020, zero comments; AIOOBE is inside Lucene QueryBuilder.newSynonymQuery (not in apache/solr tree), no repro details.
+A query with SynonymGraphFilterFactory using a WordNet-format synonym file throws ArrayIndexOutOfBoundsException (index 0) while the query is built, from Lucene's QueryBuilder.newSynonymQuery, reached through Solr's query parser. The report includes a stack trace and an example query; it does not include the WordNet file or the field type. The ticket has no comments.
 
 ## Code reading
 
-Taken from the audit evidence, not re-read at the pinned head: Read ticket: AIOOBE in Lucene QueryBuilder.newSynonymQuery (v8.3.1), not Solr tree; no repro.
+- solr/core/src/java/org/apache/solr/parser/SolrQueryParserBase.java:631-649 (origin/main 498a09aea97): newSynonymQuery switches on synonymQueryStyle. For PICK_BEST and AS_DISTINCT_TERMS it builds the query itself; for AS_SAME_TERM it calls super.newSynonymQuery(field, terms) at line 648, which is Lucene's QueryBuilder.newSynonymQuery. The exception in the report is raised inside that Lucene method (its line 653 in the reporter's version).
+- Lucene's QueryBuilder is not in this repository, so its line-level logic (the array access that fails when the terms array is empty or has a missing entry) is not read here. The graph-token input that gives an empty term array for a position is not identified, since the WordNet file is not in the report.
+
+Commands at the pinned head:
+- git grep -n 'newSynonymQuery' origin/main -- solr/core/src/java/org/apache/solr/parser/SolrQueryParserBase.java: lines 617 (the call site named in the trace), 631, 648.
+- git log --oneline --grep='SOLR-14627' origin/main: no output.
 
 ## History
 
-No commit history was used for this record.
+- Commits on origin/main naming SOLR-14627: none.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not attempted. A reproduction needs the reporter's WordNet-format synonym file and the field type that uses SynonymGraphFilterFactory, and the query string. The report gives the query but not the synonym file. A test with a guessed synonym file would not show whether the reporter's input is covered.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The failing call is located: Solr delegates the AS_SAME_TERM style to Lucene's QueryBuilder, where the array access fails. The input that produces the empty or short term array (the WordNet-format synonym entries with the query's graph tokens) is not in the report, so the cause in the input is not identified, and whether the fault is in Lucene or in Solr's handling of the graph is not established.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric: the pinned head sha is cited, the Jira status and date are read in this pass, code paths are cited with file and line, and the attempts and the missing piece are listed. close-fixed does not hold: no commit names the ticket (bounded --grep, no output). close-cannot-reproduce does not hold: no reproduction was made, and the code path inside Lucene is not read. The missing piece is the reporter's WordNet synonym file and field type, so the failing input can be reproduced.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not reproduce the exception. It does not read Lucene's QueryBuilder at the version the pin uses. It does not identify the input that triggers it.
