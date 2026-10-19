@@ -1,1 +1,19 @@
-The reference guide answers this. In the current docs (system-requirements.adoc, lines 70-86): "Solr 9.x is continuously tested against Java 11, 17, 21 and also newer versions." Link: https://github.com/apache/solr/blob/main/solr/solr-ref-guide/modules/deployment-guide/pages/system-requirements.adoc#L70. Closing as answered by the documentation.
+We checked this against Solr main at commit 498a09aea97 and found that the reference guide no longer has the out-of-date list.
+
+What we checked:
+
+- The system requirements page now gives the Java requirement as version 21 or higher.
+- The page now gives the minimum Java version for each Solr release, instead of the per-version testing list from 2019.
+- The change was made in April 2022 (commit bea30b959f9), and the page has been updated since then to keep the requirement current.
+
+How we tried to reproduce it:
+
+- Not applicable. This is a documentation request, and we checked the text on main.
+
+What this means:
+
+- The reference guide's Java requirement is current on main, so this report's concern is addressed.
+
+If you still see this:
+
+- If a page in the guide still gives an out-of-date Java requirement, please reopen with the page link and the text.
