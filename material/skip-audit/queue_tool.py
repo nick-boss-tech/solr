@@ -39,22 +39,40 @@ def draft_branches(repo):
 def cmd_coverage(a):
     q = load(a.repo)
     by_status = {}
-    by_verdict = {}
+    by_queue_verdict = {}
+    by_audit_verdict = {}
     for r in q:
         by_status[r["status"]] = by_status.get(r["status"], 0) + 1
         if r.get("verdict"):
-            by_verdict[r["verdict"]] = by_verdict.get(r["verdict"], 0) + 1
+            by_queue_verdict[r["verdict"]] = by_queue_verdict.get(r["verdict"], 0) + 1
+        audit = r.get("audit") or {}
+        if audit.get("verdict"):
+            verdict = audit["verdict"]
+            by_audit_verdict[verdict] = by_audit_verdict.get(verdict, 0) + 1
     branches = draft_branches(a.repo)
     skips = [r["key"] for r in q if r["status"] == "skip"]
-    with_verdict = [r["key"] for r in q if r.get("verdict")]
+    with_queue_verdict = [r["key"] for r in q if r.get("verdict")]
+    with_audit_verdict = [r["key"] for r in q if (r.get("audit") or {}).get("verdict")]
     print(f"records: {len(q)}")
     print("by status:", dict(sorted(by_status.items())))
-    print("skip tickets with a verdict:", sum(1 for k in skips if k in with_verdict), "of", len(skips))
-    print("verdicts:", dict(sorted(by_verdict.items())))
+    print(
+        "skip tickets with an audit verdict:",
+        sum(1 for k in skips if k in with_audit_verdict),
+        "of",
+        len(skips),
+    )
+    print(
+        "skip tickets with a closeout/PR verdict:",
+        sum(1 for k in skips if k in with_queue_verdict),
+        "of",
+        len(skips),
+    )
+    print("skip-audit verdicts (audit.verdict):", dict(sorted(by_audit_verdict.items())))
+    print("closeout/PR verdicts (top-level verdict):", dict(sorted(by_queue_verdict.items())))
     print("draft branches on origin:", len(branches))
-    stale = [k for k in with_verdict if k not in branches]
+    stale = [k for k in with_queue_verdict if k not in branches]
     if stale:
-        print("verdict without draft branch:", stale)
+        print("closeout/PR verdict without draft branch:", stale)
 
 
 def cmd_set(a):

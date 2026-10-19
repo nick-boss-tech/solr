@@ -1,6 +1,6 @@
 # Active skip audit queue
 
-This is the shared, current tracker for the 1,027-ticket Solr issue queue. The latest full queue state is [`queue-current.json`](queue-current.json), refreshed from `research/pipeline/queue.json` after audit-9 on 2026-10-18; it contains the status and audit evidence for every ticket. Batch evidence files are stored beside it.
+This is the shared, current tracker for the 1,027-ticket Solr issue queue. The latest full queue state is [`queue-current.json`](queue-current.json), refreshed after audit-9 on 2026-10-18; it contains the status and per-ticket audit evidence for every ticket. Separate batch JSON files are linked below for the six recent batches.
 
 The 2026-10-07 [`queue-snapshot-2026-10-07.json`](queue-snapshot-2026-10-07.json) remains as an immutable import snapshot. Use `queue-current.json` for coordination and ticket selection.
 
@@ -17,6 +17,15 @@ Counts below are from `audit.ps1 status` after audit-9. “Remaining” counts u
 | 5 | 23 | 23 | 0 |
 
 Recorded verdict totals: 173 branched, 672 confirmed-skip, 76 deferred, and 4 reopen. Four formerly skipped items are now `revisit`: SOLR-4944, SOLR-8877, SOLR-4423, and SOLR-3586. All current Tier 2 skips are audited.
+
+## Which verdict count is which
+
+There are two independent verdict fields in `queue-current.json`:
+
+- **Skip-audit result:** `audit.verdict` records the review outcome for a ticket. The 925 records are 173 `branched`, 672 `confirmed-skip`, 76 `deferred`, and 4 `reopen`. The full evidence for each ticket is in `queue-current.json`, including earlier batches that have no separate batch JSON file.
+- **Closeout or PR decision:** top-level `verdict` records a later JIRA closeout or draft-branch decision. The current 27 records are 24 `close-fixed` and 3 `keep-open`. They do not count skip audits.
+
+`queue_tool.py coverage` reports both fields separately. A count of 27 refers to closeout or PR decisions; it does not mean the earlier skip-audit records are missing from this branch.
 
 ## Latest audits
 
