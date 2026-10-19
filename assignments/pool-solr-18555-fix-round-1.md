@@ -44,3 +44,5 @@ The gate on `solr-18555-submit` at head `884de51579` is NOT GREEN. Its receipt i
 - Per the Push row, the job stops here and does not retarget. The vm3 work (starting patch, import removal, tidy, and the three ladder decisions) is on `coordination` as `gates/SOLR-18555-vm3-round1.patch`, against `884de51579`. It is not pushed to the ticket branch.
 - Overlap: the vm3 phrase decision (weight matches on for phrase and multi-term, probe 12 of 12 at seed 18555C0FFEE18555) matches the intent of `4f7368f53c`, but the mechanism differs. Test expectations changed by vm3: encoder to `&#x2F;`, subquery to `SolrException` with `BAD_REQUEST`. Compare with `79909b2bd1` before choosing a head.
 - Next: decide which head goes to gate (`79909b2bd1` as is, or the vm3 patch rebased onto it). The gate job is not filed.
+
+Note on the Decisions table: the three test rows were decided on the branch in `79ddff7d43` (Nick Shanin, 2026-10-19 05:53Z), before this run. The vm3 probe agrees with rows 2 and 3, and with row 1's mechanism (weight matches on, no span merging). vm3 did not change those rows.
