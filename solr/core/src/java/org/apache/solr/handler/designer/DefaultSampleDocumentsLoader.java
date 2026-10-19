@@ -167,7 +167,9 @@ public class DefaultSampleDocumentsLoader implements SampleDocumentsLoader {
       }
     }
 
-    return docs.stream().map(JsonLoader::buildDoc).collect(Collectors.toList());
+    return docs.stream()
+        .map(d -> nestChildDocs(JsonLoader.buildDoc(d)))
+        .collect(Collectors.toList());
   }
 
   private void parseStringToJson(List<Map<String, Object>> docs, String line) throws IOException {
@@ -230,7 +232,9 @@ public class DefaultSampleDocumentsLoader implements SampleDocumentsLoader {
     if (maxDocsToLoad > 0 && docs.size() > maxDocsToLoad) {
       docs = docs.subList(0, maxDocsToLoad);
     }
-    return docs.stream().map(JsonLoader::buildDoc).collect(Collectors.toList());
+    return docs.stream()
+        .map(d -> nestChildDocs(JsonLoader.buildDoc(d)))
+        .collect(Collectors.toList());
   }
 
   protected List<SolrInputDocument> loadXmlDocs(
@@ -379,5 +383,15 @@ public class DefaultSampleDocumentsLoader implements SampleDocumentsLoader {
         docs.add(templateAdd.solrDoc);
       }
     }
+  }
+
+  private static SolrInputDocument nestChildDocs(SolrInputDocument doc) {
+    SolrInputField childDocs = doc.remove(JsonLoader.CHILD_DOC_KEY);
+    if (childDocs != null) {
+      for (Object child : childDocs.getValues()) {
+        doc.addChildDocument(nestChildDocs((SolrInputDocument) child));
+      }
+    }
+    return doc;
   }
 }

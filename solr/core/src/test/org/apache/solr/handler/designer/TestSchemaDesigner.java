@@ -318,10 +318,19 @@ public class TestSchemaDesigner extends SolrCloudTestCase implements SchemaDesig
     String mutableId = getMutableId(configSet);
     ManagedIndexSchema schema = schemaDesigner.loadLatestSchema(mutableId);
     schema =
+        schema.addFieldTypes(
+            List.of(
+                schema.newFieldType(
+                    "tlong",
+                    "solr.TrieLongField",
+                    Map.of("name", "tlong", "class", "solr.TrieLongField"))),
+            false);
+    schema =
         schema.replaceField(
-            "id", schema.getFieldTypeByName("plong"), schema.getField("id").getArgs());
-    assertEquals("plong", schema.getUniqueKeyField().getType().getTypeName());
+            "id", schema.getFieldTypeByName("tlong"), schema.getField("id").getArgs());
     assertTrue(schema.persistManagedSchema(false));
+    schema = schemaDesigner.loadLatestSchema(mutableId);
+    assertEquals("tlong", schema.getUniqueKeyField().getType().getTypeName());
 
     ModifiableSolrParams reqParams = new ModifiableSolrParams();
     reqParams.set(CONFIG_SET_PARAM, configSet);
@@ -336,9 +345,9 @@ public class TestSchemaDesigner extends SolrCloudTestCase implements SchemaDesig
     assertNull(response.analysisError);
     assertNull(response.updateError);
     assertEquals(List.of("1"), response.docIds);
-    assertEquals(1, response.numDocs);
+    assertEquals(Integer.valueOf(1), response.numDocs);
     schema = schemaDesigner.loadLatestSchema(mutableId);
-    assertEquals("plong", schema.getField(IndexSchema.ROOT_FIELD_NAME).getType().getTypeName());
+    assertEquals("tlong", schema.getField(IndexSchema.ROOT_FIELD_NAME).getType().getTypeName());
     assertTrue(schema.isUsableForChildDocs());
   }
 

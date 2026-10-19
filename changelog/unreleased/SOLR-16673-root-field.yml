@@ -1,4 +1,4 @@
-title: Schema Designer uses the unique key type for nested document root fields
+title: Schema Designer indexes nested sample documents and uses the unique key type for nested document root fields
 type: fixed
 authors:
   - name: Nick Shanin
