@@ -1,6 +1,6 @@
 # Pool assignment: vm4 wakes the other pool hosts and points them at the owner complaints
 
-Status: OPEN
+Status: CLAIMED (vm4, claims/pool-vm4-wake-round-1.md, 2026-10-19T15:27:00Z)
 
 - Capability tags: records, coordination.
 - Intended host: vm4 only. Claim under `claims/` before starting (WORKFLOW.md).
