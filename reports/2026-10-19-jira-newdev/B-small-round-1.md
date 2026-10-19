@@ -43,3 +43,8 @@ Claim: `claims/pool-jira-newdev-small-round-1-solr-17727.md`. Work follows on br
 
 - Verified: JIRA status Open, no resolution, on 2026-10-19.
 - Stopped, no branch. The change flips `CloudSolrClient` `directUpdatesToLeadersOnly` from `false` to `true`. The ticket's own history says the flag was added under SOLR-9090 with a default of `false` "corresponding to existing behaviour". A default flip changes update routing for every SolrJ cloud client that does not set the flag. The assignment says to record and stop when the change conflicts with a deliberate default. A maintainer decision is needed on whether to change the default for all clients.
+
+## Item 13: SOLR-6948 (vm4), already fixed at base, 2026-10-19T19:55:24Z
+
+- Verified: JIRA status Open, no resolution, on 2026-10-19, but the reported flow is no longer what the code does at apache/main c8ab71430f.
+- Stopped, no branch. `solr/core/src/java/org/apache/solr/cli/RunExampleTool.java` checks collection existence right after the name prompt (lines 1202 to 1213). When the collection exists, the user is asked only whether to reuse it, and reuse returns the name at once (`return collectionName`, line 1217 area). The shard, replica, and config prompts come after that check and are skipped on reuse. That is the behavior the ticket asks for. The ticket reads as already done. A maintainer should confirm and close it.
