@@ -8,3 +8,7 @@
 - Started: 2026-10-19T22:25Z (UTC).
 
 Heartbeat: 2026-10-19T22:25Z
+
+Result (vm3, 2026-10-19T22:40Z): stopped, no branch. The example's ZK port is `PORT+1000` by rule. A prompt for it changes the `--script-inputs` order that scripted and packaging tests use, and whether it should be default-on or an option is a user-facing choice for the owner. Deliverable: the SOLR-16124 section in `reports/2026-10-19-jira-newdev/A-small-round-2.md`.
+
+DONE: 2026-10-19 by vm3, stopped for an owner decision. Heartbeat: 2026-10-19T22:40Z
