@@ -33,10 +33,14 @@ import org.apache.lucene.index.SegmentReadState;
 import org.apache.lucene.index.SegmentWriteState;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
+import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.schema.DenseVectorField;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.SchemaField;
+import org.apache.solr.update.IndexFingerprint;
+import org.apache.solr.update.IndexFingerprintDocValuesFormat;
 import org.apache.solr.util.plugin.SolrCoreAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,13 +117,26 @@ public class SchemaCodecFactory extends CodecFactory implements SolrCoreAware {
           @Override
           public DocValuesFormat getDocValuesFormatForField(String field) {
             final SchemaField schemaField = core.getLatestSchema().getFieldOrNull(field);
+            final DocValuesFormat docValuesFormat;
             if (schemaField != null) {
               String docValuesFormatName = schemaField.getDocValuesFormat();
               if (docValuesFormatName != null) {
-                return DocValuesFormat.forName(docValuesFormatName);
+                docValuesFormat = DocValuesFormat.forName(docValuesFormatName);
+              } else {
+                docValuesFormat = super.getDocValuesFormatForField(field);
               }
+            } else {
+              docValuesFormat = super.getDocValuesFormatForField(field);
             }
-            return super.getDocValuesFormatForField(field);
+            // Segment summaries add write-time work, so skip that work when fingerprint checks
+            // are disabled. Existing summaries remain harmless and are ignored by the check path.
+            if (CommonParams.VERSION_FIELD.equals(field)
+                && EnvUtils.getPropertyAsBool("solr.index.replication.fingerprint.enabled", true)) {
+              return new IndexFingerprintDocValuesFormat(
+                  docValuesFormat,
+                  IndexFingerprint.getSegmentMetadataSchemaSignature(core.getLatestSchema()));
+            }
+            return docValuesFormat;
           }
 
           @Override

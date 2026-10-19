@@ -2184,6 +2184,20 @@ public class SolrCore implements SolrInfoBean, Closeable {
         long docValuesGen = segmentReader.getSegmentInfo().getDocValuesGen();
         CachedSegmentFingerprint cachedGross =
             perSegmentGrossFingerprintCache.getIfPresent(coreKey);
+        if (cachedGross == null && docValuesGen == -1) {
+          IndexFingerprint persistedGross =
+              IndexFingerprint.getPersistedGrossFingerprint(segmentReader, getLatestSchema());
+          if (persistedGross != null) {
+            cachedGross = new CachedSegmentFingerprint(docValuesGen, persistedGross);
+            perSegmentGrossFingerprintCache.put(coreKey, cachedGross);
+            if (log.isDebugEnabled()) {
+              log.debug(
+                  "IndexFingerprint loaded persisted gross summary for segment:{} maxVersion:{}",
+                  segmentReader.getSegmentName(),
+                  maxVersion);
+            }
+          }
+        }
         if (cachedGross != null && cachedGross.docValuesGen() == docValuesGen) {
           if (log.isDebugEnabled()) {
             log.debug(
@@ -2199,9 +2213,9 @@ public class SolrCore implements SolrInfoBean, Closeable {
           perSegmentGrossFingerprintCache.invalidate(coreKey);
         }
 
-        // A cold segment that already contains deletions would require decoding the deleted
-        // documents just to build a gross summary. Keep the old live-doc scan for that first
-        // reader; summaries are warmed while the segment has no deletions and reused afterward.
+        // A legacy segment without a persisted gross summary that already contains deletions
+        // would require decoding deleted documents just to build one. Keep the old live-doc scan
+        // for that first reader; new segments carry summaries in their segment metadata.
         if (f == null && ctx.reader().numDocs() == ctx.reader().maxDoc()) {
           if (log.isDebugEnabled()) {
             log.debug(

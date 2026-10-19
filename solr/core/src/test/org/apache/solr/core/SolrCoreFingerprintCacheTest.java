@@ -88,6 +88,9 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
 
     core.withSearcher(searcher -> searcher.getIndexFingerprint(Long.MAX_VALUE));
 
-    assertEquals(grossCacheSizeBeforeColdSegment, core.getPerSegmentGrossFingerprintCacheSize());
+    assertTrue(
+        "Expected a cold deleted segment to load its persisted gross fingerprint",
+        core.getPerSegmentGrossFingerprintCacheSize() > grossCacheSizeBeforeColdSegment);
   }
+
 }

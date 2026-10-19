@@ -19,9 +19,17 @@ package org.apache.solr.update;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.HexFormat;
 import java.util.Map;
 import java.util.Objects;
+import org.apache.lucene.codecs.DocValuesProducer;
+import org.apache.lucene.index.FieldInfo;
 import org.apache.lucene.index.LeafReaderContext;
+import org.apache.lucene.index.NumericDocValues;
+import org.apache.lucene.index.SegmentInfo;
+import org.apache.lucene.index.SegmentReader;
 import org.apache.lucene.queries.function.FunctionValues;
 import org.apache.lucene.queries.function.ValueSource;
 import org.apache.lucene.util.Bits;
@@ -31,6 +39,7 @@ import org.apache.solr.common.util.Hash;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.core.SolrCore;
+import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.util.RTimer;
@@ -42,6 +51,11 @@ import org.slf4j.LoggerFactory;
  * @lucene.internal
  */
 public class IndexFingerprint implements MapWriter {
+  /** SegmentInfo attribute containing the gross fingerprint written with a new segment. */
+  public static final String SEGMENT_METADATA_ATTRIBUTE = "solr.indexFingerprint";
+
+  private static final int SEGMENT_METADATA_FORMAT_VERSION = 1;
+
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   private long maxVersionSpecified;
@@ -157,6 +171,116 @@ public class IndexFingerprint implements MapWriter {
       }
     }
     return new FingerprintAndGross(live, gross);
+  }
+
+  /**
+   * Computes a gross fingerprint while Lucene writes the numeric _version_ DocValues for a
+   * segment. Missing values have the same zero value used by the version ValueSource.
+   */
+  public static IndexFingerprint getGrossFingerprint(
+      DocValuesProducer valuesProducer, FieldInfo fieldInfo, int maxDoc) throws IOException {
+    IndexFingerprint fingerprint = new IndexFingerprint(Long.MAX_VALUE);
+    fingerprint.maxDoc = maxDoc;
+    fingerprint.numDocs = maxDoc;
+    NumericDocValues values = valuesProducer.getNumeric(fieldInfo);
+    for (int doc = 0; doc < maxDoc; doc++) {
+      long version = values.advanceExact(doc) ? values.longValue() : 0L;
+      addVersion(fingerprint, version, Long.MAX_VALUE);
+    }
+    return fingerprint;
+  }
+
+  /** Identifies the _version_ interpretation used to create a persisted summary. */
+  public static String getSegmentMetadataSchemaSignature(IndexSchema schema) {
+    SchemaField versionField = VersionInfo.getAndCheckVersionField(schema);
+    return versionField.getName()
+        + "|"
+        + versionField.getType().getTypeName()
+        + "|"
+        + versionField.getType().getClass().getName()
+        + "|"
+        + versionField.getProperties();
+  }
+
+  /**
+   * Serializes the gross summary as a versioned, self-validating SegmentInfo attribute. The
+   * segment id, schema signature, and DocValues generation prevent reuse across incompatible data.
+   */
+  public String toSegmentMetadata(SegmentInfo segmentInfo, String schemaSignature) {
+    String encodedSchema =
+        Base64.getUrlEncoder()
+            .withoutPadding()
+            .encodeToString(schemaSignature.getBytes(StandardCharsets.UTF_8));
+    return SEGMENT_METADATA_FORMAT_VERSION
+        + "|"
+        + HexFormat.of().formatHex(segmentInfo.getId())
+        + "|"
+        + encodedSchema
+        + "|-1|"
+        + maxDoc
+        + "|"
+        + maxVersionEncountered
+        + "|"
+        + maxInHash
+        + "|"
+        + versionsHash
+        + "|"
+        + numVersions;
+  }
+
+  /** Returns a persisted gross summary, or {@code null} when it is absent or stale. */
+  public static IndexFingerprint getPersistedGrossFingerprint(
+      SegmentReader reader, IndexSchema schema) {
+    if (reader.getSegmentInfo().getDocValuesGen() != -1) {
+      return null;
+    }
+    SegmentInfo segmentInfo = reader.getSegmentInfo().info;
+    String metadata = segmentInfo.getAttribute(SEGMENT_METADATA_ATTRIBUTE);
+    if (metadata == null) {
+      return null;
+    }
+    return fromSegmentMetadata(metadata, segmentInfo, getSegmentMetadataSchemaSignature(schema));
+  }
+
+  private static IndexFingerprint fromSegmentMetadata(
+      String metadata, SegmentInfo segmentInfo, String schemaSignature) {
+    try {
+      String[] parts = metadata.split("\\|", -1);
+      if (parts.length != 9
+          || Integer.parseInt(parts[0]) != SEGMENT_METADATA_FORMAT_VERSION
+          || !parts[1].equals(HexFormat.of().formatHex(segmentInfo.getId()))
+          || !parts[2]
+              .equals(
+                  Base64.getUrlEncoder()
+                      .withoutPadding()
+                      .encodeToString(schemaSignature.getBytes(StandardCharsets.UTF_8)))
+          || Long.parseLong(parts[3]) != -1) {
+        return null;
+      }
+
+      long maxDoc = Long.parseLong(parts[4]);
+      long maxVersionEncountered = Long.parseLong(parts[5]);
+      long maxInHash = Long.parseLong(parts[6]);
+      long versionsHash = Long.parseLong(parts[7]);
+      long numVersions = Long.parseLong(parts[8]);
+      if (maxDoc != segmentInfo.maxDoc()
+          || numVersions != maxDoc
+          || maxVersionEncountered != maxInHash) {
+        return null;
+      }
+
+      IndexFingerprint fingerprint = new IndexFingerprint(Long.MAX_VALUE);
+      fingerprint.maxDoc = maxDoc;
+      fingerprint.numDocs = maxDoc;
+      fingerprint.maxVersionEncountered = maxVersionEncountered;
+      fingerprint.maxInHash = maxInHash;
+      fingerprint.versionsHash = versionsHash;
+      fingerprint.numVersions = numVersions;
+      return fingerprint;
+    } catch (IllegalArgumentException e) {
+      // Old, malformed, or incompatible attributes must never affect the computed fingerprint.
+      return null;
+    }
   }
 
   /** Returns the live fingerprint represented by a gross per-segment fingerprint. */
