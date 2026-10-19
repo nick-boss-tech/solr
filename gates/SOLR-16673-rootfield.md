@@ -1,6 +1,6 @@
 # Gate job: SOLR-16673 nested root field type
 
-Status: CLAIMED by vm1 2026-10-19T03:40Z (claims/pool-vm1-gate-solr-16673-rootfield.md; queued behind SOLR-18458 round 2). Main-side decision on the vm5 base-drift question: option (c) in effect; the vm1 runner restores gradle/libs.versions.toml after tidy (known base drift; tidy makes the same change on the merge-base), so step 1 judges the branch files only.
+Status: OPEN (claim released by vm1 2026-10-19 at the owner's word: SOLR-16673 is being handled on another host and may return to vm1 later. The main-side base-drift disposition stands for the next claimant: restore gradle/libs.versions.toml after tidy; the prune is base drift, verified on the merge-base.)
 
 - Branch: `solr-16673-rootfield`. Head: `5fb792482fc3d8fef851513bb91eb3231409a033` (fork tip, confirmed by `git ls-remote` on 2026-10-18).
 - Prior gated head: none. Merge-base with upstream/main: `e044bf20b405b8ca985730be3553d77d1fc8ff31`.
