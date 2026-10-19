@@ -214,18 +214,20 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
   public void testExporterHeadersAndTimeoutsUseSignalSpecificValues() {
     Object config =
         configOrSkip(
-            Map.of(
-                "OTEL_EXPORTER_OTLP_HEADERS", "Authorization=Bearer%20generic",
-                "OTEL_EXPORTER_OTLP_METRICS_HEADERS", "x-tenant=solr%20metrics",
-                "OTEL_EXPORTER_OTLP_TIMEOUT", "1000",
-                "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT", "2345",
-                "OTEL_EXPORTER_OTLP_COMPRESSION", "none",
-                "OTEL_EXPORTER_OTLP_METRICS_COMPRESSION", "gzip",
-                "OTEL_EXPORTER_OTLP_CERTIFICATE", "/certs/ca.pem",
-                "OTEL_EXPORTER_OTLP_METRICS_CERTIFICATE", "/certs/metrics-ca.pem",
-                "OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE", "/certs/client.pem",
-                "OTEL_EXPORTER_OTLP_METRICS_CLIENT_CERTIFICATE", "/certs/metrics-client.pem",
-                "OTEL_EXPORTER_OTLP_METRICS_CLIENT_KEY", "/certs/metrics-client-key.pem"),
+            Map.ofEntries(
+                Map.entry("OTEL_EXPORTER_OTLP_HEADERS", "Authorization=Bearer%20generic"),
+                Map.entry("OTEL_EXPORTER_OTLP_METRICS_HEADERS", "x-tenant=solr%20metrics"),
+                Map.entry("OTEL_EXPORTER_OTLP_TIMEOUT", "1000"),
+                Map.entry("OTEL_EXPORTER_OTLP_METRICS_TIMEOUT", "2345"),
+                Map.entry("OTEL_EXPORTER_OTLP_COMPRESSION", "none"),
+                Map.entry("OTEL_EXPORTER_OTLP_METRICS_COMPRESSION", "gzip"),
+                Map.entry("OTEL_EXPORTER_OTLP_CERTIFICATE", "/certs/ca.pem"),
+                Map.entry("OTEL_EXPORTER_OTLP_METRICS_CERTIFICATE", "/certs/metrics-ca.pem"),
+                Map.entry("OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE", "/certs/client.pem"),
+                Map.entry(
+                    "OTEL_EXPORTER_OTLP_METRICS_CLIENT_CERTIFICATE", "/certs/metrics-client.pem"),
+                Map.entry(
+                    "OTEL_EXPORTER_OTLP_METRICS_CLIENT_KEY", "/certs/metrics-client-key.pem")),
             Map.of());
 
     assertEquals(Map.of("x-tenant", "solr metrics"), invoke(config, "getHeaders"));
