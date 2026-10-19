@@ -176,7 +176,10 @@
       "date": "2026-10-04",
       "round": "audit-1",
       "evidence": "Question-form ticket pointing at PR 3477 comment; SolrIndexSearcher.getIndexFingerprint still fans out per-segment tasks on the CoreContainer fingerprint executor. Possible bounded-executor fix but ticket gives no confirmed leak; needs the PR thread read."
-    }
+    },
+    "verdict": "keep-open",
+    "draft_branch": "solr-17881-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-17866",
