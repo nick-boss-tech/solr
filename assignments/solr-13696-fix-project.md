@@ -1,6 +1,6 @@
 # Assignment: SOLR-13696 fix project (repair the re-enabled routed-alias tests)
 
-Status: CLAIMED (claims/solr-13696-fix-project.md)
+Status: DONE 2026-10-19 (report reports/solr-13696-fix-project.md; work on solr-13696-submit through 960355fce3, gated green in receipts/SOLR-13059.md; owner decision on routed-alias commitWithin coverage open in PR 5088)
 
 The owner directed this project on 2026-10-08. It supersedes
 the hold on this branch: the PARKED record said not to reopen
