@@ -4312,7 +4312,7 @@
     },
     "verdict": "close-fixed",
     "draft_branch": "solr-13570-draft-close",
-    "evidence_head": "498a09aea9"
+    "evidence_head": "af05ec7c80"
   },
   {
     "key": "SOLR-13568",
