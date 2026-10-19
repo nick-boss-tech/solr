@@ -7,3 +7,5 @@ Scope: focused run of org.apache.solr.handler.HighlightRequestHandlerTest at tha
 Not in scope: PR or JIRA changes, pushes to solr-18555-submit.
 Known open review follow-ups from the handoff: custom query parsers may access the index; HTTP/V2 routing lacks end-to-end tests. Recorded as limits, not tested here.
 Deliverable: receipts/SOLR-18555.md.
+
+STOPPED: 2026-10-19 by vm4. The user stopped the handoff because the branch needs more work. No gate result is recorded. Partial logs, if any, are in /workspace/gates/logs/vm4/solr-18555/.
