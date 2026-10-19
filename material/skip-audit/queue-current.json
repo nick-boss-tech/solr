@@ -1283,8 +1283,8 @@
       "round": "audit-1",
       "evidence": "Support request on setting config properties via create; solved via bin/solr config / Config API per maintainer."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-16609-draft-open",
+    "verdict": "close-answered",
+    "draft_branch": "solr-16609-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
