@@ -2,7 +2,7 @@
 
 Status: OPEN
 
-Windows review slice completed 2026-10-18. See `reports/SOLR-16673-remaining-issues.md`; Linux implementation, regression tests, and gate work remain.
+Windows review slice completed 2026-10-18. At Nick's direction, both fixes and regression tests were implemented and pushed to their assignment branches. See `reports/SOLR-16673-remaining-issues.md`; the two Linux full hardening gates remain open.
 
 - Capability tags: implementation, gate, review, draft.
 - Intended host: any pool Linux host. Claim under `claims/` before starting (WORKFLOW.md).

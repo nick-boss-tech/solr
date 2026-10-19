@@ -1,6 +1,6 @@
 # Open work
 
-This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/` (regenerated 2026-10-18, from coordination tip 54a59669d6240bc5a1729180025a20c8739e9343). If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
+This file lists the pool work that is open, claimed, or unconfirmed on this branch. It is generated from the Status line under the title of each file in `assignments/` and `gates/` (last generated 2026-10-18, from coordination tip 54a59669d6240bc5a1729180025a20c8739e9343). The SOLR-16673 assignment and gates below were added after that snapshot. If this file and a job file's own Status line ever disagree, the job file's Status line governs, and this file is regenerated from the lines at the next census or stamp pass.
 
 Counts at generation: 6 open assignments, 2 open gate jobs, 13 claimed files, 5 unconfirmed files. The old finding aid `assignments/pool-shared-gate-backlog-buffer.md` is superseded by this file.
 
@@ -23,16 +23,14 @@ Counts at generation: 6 open assignments, 2 open gate jobs, 13 claimed files, 5 
 - `assignments/pool-edismax-patches-apply-round-1.md`: Assignment: eDisMax draft patches P1 to P6, application round 1
 - `assignments/pool-solr-13059-fix-round-1.md`: Assignment: SOLR-13059 test fix, round 1
 - `assignments/pool-solr-8009-routed-noslice-test-round-1.md`: Assignment: SOLR-8009 routed no-slice test, round 1
+- `assignments/pool-solr-16673-remaining-issues-round-1.md`: Pool assignment: SOLR-16673 remaining Schema Designer issues, round 1. Fixes and tests are pushed; both Linux gates remain open.
 
 ## Open gate jobs
 
-### Intended host: a Linux host (vm1 or vm2)
+### Intended host: any capable Linux host
 
-- `gates/SOLR-16290-fix.md`: Gate job: SOLR-16290 real facet fix (funded by standing calls round 1, item 4)
-
-### Intended host: vm2 (Linux, Gradle toolchain)
-
-- `gates/SOLR-17733-title-narrowing-round-1-gate.md`: Gate job: SOLR-17733 changelog title narrowing (round 1)
+- `gates/SOLR-16673-uniquekey.md`: Gate job: SOLR-16673 numeric uniqueKey response
+- `gates/SOLR-16673-rootfield.md`: Gate job: SOLR-16673 nested root field type
 
 ## Claimed work
 

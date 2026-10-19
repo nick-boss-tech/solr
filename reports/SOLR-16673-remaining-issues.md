@@ -1,31 +1,44 @@
-# SOLR-16673 remaining issues: Windows premise review
+# SOLR-16673 remaining Schema Designer issues
 
-Review date: 2026-10-18 UTC
-Ticket branch: `origin/solr-16673-submit` at `2adeae3bf8f14a64147d0dabc078b31ff378b4ab`
-Scope: static code-path review only. No build or tests were run. Linux owns any implementation, regression test, and gate work.
+Review and implementation date: 2026-10-18 UTC
+Ticket branch reviewed: `origin/solr-16673-submit` at `2adeae3bf8f14a64147d0dabc078b31ff378b4ab`
+Implementation base: fork `origin/main` at `498a09aea97aac86c2cc7ac114113b946d249942`
+Merge-base with `upstream/main`: `e044bf20b405b8ca985730be3553d77d1fc8ff31`
+
+The Windows review was static. No build or test was run on this host. The two fixes and regression tests below are pushed to separate branches. Both full hardening gates remain open for Linux.
 
 ## Issue 2 premise: confirmed
 
-In `SchemaDesigner.analyze`, sample documents are indexed at `SchemaDesigner.java:817`, then passed to `buildSchemaDesignerResponse` at lines 825-831. In that response builder, lines 1308-1314 obtain the uniqueKey name and cast each document's raw `getFieldValue(uniqueKeyField)` result to `String` before returning `docIds`.
+In the analysis response builder, the base code casts the raw uniqueKey field value to `String` at `SchemaDesigner.java:1311`. A `Long` or `Integer` value therefore throws `ClassCastException` while the response is built. This confirms the numeric uniqueKey failure described in the ticket.
 
-The ticket comment says the supplied uniqueKey is a long or int. For that input, the raw value is numeric, so the cast at line 1311 throws `ClassCastException` while constructing the analysis response. This confirms the reported numeric uniqueKey premise.
+**Status:** implementation pushed; Linux gate pending.
 
-**Status:** confirmed by code path. Hand off to a Linux host for the smallest response fix, a regression test that fails before the fix, and the required gate. This Windows review did not edit the submit branch.
+- Branch: `solr-16673-uniquekey`
+- Head: `70c6eb0c49008cf9518c456dedd6c4981642d52c`
+- Change: convert each non-null uniqueKey value with `Object.toString()` before returning `docIds`.
+- Regression test: `TestSchemaDesigner.testNumericUniqueKeyDocIds` changes the uniqueKey schema to `plong`, supplies a `Long` value, and expects `"42"` in the response.
+- Gate: `gates/SOLR-16673-uniquekey.md`, status OPEN. No test, Error Prone, tidy, changelog parser, or module check has run.
+- PR draft: `pr-drafts/solr-16673/unique-key.md`. Proof counts and date remain pending the gate receipt.
 
 ## Issue 3: nested child documents and `_root_`
 
-`DocumentBuilder.unexpectedNestedDocException` checks `!schema.isUsableForChildDocs()` at `DocumentBuilder.java:404` and emits the reported message at lines 407-410. `IndexSchema.isUsableForChildDocs`, lines 2194-2199, returns true only when `_root_` has a field type and that type name exactly matches the uniqueKey field type. Separately, an explicitly declared incompatible `_root_` is rejected during schema initialization at `IndexSchema.java:582-590`; that initialization check does not emit the reported BAD_REQUEST.
+`DocumentBuilder.unexpectedNestedDocException` checks `!schema.isUsableForChildDocs()` at `DocumentBuilder.java:404`. `IndexSchema.isUsableForChildDocs` requires `_root_` and the uniqueKey field to have the same field type name. When nested docs are enabled and `_root_` is absent, the base Schema Designer helper adds `_root_` as the literal `string` type at `SchemaDesignerConfigSetHelper.java:543`, even when the uniqueKey is numeric. That is a defect in the numeric-key nested-doc activation path.
 
-There is a Schema Designer defect for the ticket's numeric uniqueKey case. When nested docs are enabled and `_root_` is not explicitly declared, `SchemaDesignerConfigSetHelper.enableNestedDocsFields` creates `_root_` with the literal `string` type at line 543, regardless of the uniqueKey type. That produces a root field incompatible with a numeric uniqueKey.
+The ticket comment does not record whether the analysis request enabled nested docs, so the exact reporter path remains unconfirmed. With nested docs disabled and no usable `_root_`, rejecting child documents is expected validation. The regression test exercises the defective activation path directly.
 
-`SchemaDesigner.analyze` creates or reloads the temp collection at lines 796-802, applies and persists a nested-doc toggle at lines 805-808, indexes sample documents at lines 815-818, and performs its conditional collection reload at lines 821-823. The explicit reload is after indexing. Whether the live collection sees the persisted `_root_` before indexing depends on managed-schema refresh behavior, so the Linux reproduction should check this ordering rather than assume it caused the ticket's error.
+**Status:** implementation pushed; Linux gate pending.
 
-The ticket comment does not record whether the analysis request enabled nested docs. With the toggle left disabled and no usable `_root_`, rejecting child documents is expected validation. With the toggle enabled for a numeric uniqueKey, the helper's auto-added `string` root is a defect; if that schema is what indexing sees, `isUsableForChildDocs()` is false and the same BAD_REQUEST check follows. The explicit collection reload occurs after indexing, but whether the live collection sees the persisted schema before then depends on managed-schema refresh behavior.
-
-**Status:** the incompatible `_root_` type is a confirmed defect in the numeric-key nested-doc activation path; the exact reporter path remains unconfirmed because the ticket comment does not record the toggle state or live schema refresh. Hand off to a Linux host to reproduce both toggle states against the pinned ticket input, check the update ordering, then implement the smallest fix, add a regression test, and gate it. Do not draft a JIRA comment until that run establishes whether the reporter left nested docs disabled.
+- Branch: `solr-16673-rootfield`
+- Head: `5fb792482fc3d8fef851513bb91eb3231409a033`
+- Change: create an automatic `_root_` field with the uniqueKey field type, then persist settings and reload the temporary collection before indexing sample documents.
+- Regression test: `TestSchemaDesigner.testAnalyzeNestedDocsWithNumericUniqueKey` enables nested docs with a `plong` uniqueKey, indexes a parent and child, checks that the analysis response has no update error, and checks that `_root_` is `plong` and usable for child docs.
+- Gate: `gates/SOLR-16673-rootfield.md`, status OPEN. No test, Error Prone, tidy, changelog parser, or module check has run.
+- PR draft: `pr-drafts/solr-16673/root-field.md`. Proof counts and date remain pending the gate receipt.
 
 ## Handoff and limits
 
-- The Windows claim covered only these premise reviews. No ticket submit branch was changed, and no build or test was run.
-- The remaining Issue 2 and Issue 3 implementation and gate work is open for a Linux claimant.
-- The assignment remains open for those remaining items. This report completes only the Windows review slice.
+- Both branches are based on fork `main`, not on the existing `solr-16673-submit` branch.
+- The numeric doc ID response fix and the nested `_root_` type fix are separate patches and separate PR drafts.
+- The root field patch covers an automatically added `_root_`. An explicitly declared incompatible `_root_` remains subject to schema validation.
+- Keep the assignment OPEN until both Linux gates are green and the receipt and drafts are updated from their results.
+- No PR was opened. No Jira or PR comment was posted.
