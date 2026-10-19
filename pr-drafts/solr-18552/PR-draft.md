@@ -2,7 +2,7 @@
 
 - Proposed title: SOLR-18552: Set MMapDirectory shared arena permits to 64
 - Head: nick-boss-tech:solr-18552-submit at a5406c9fe531161df7b424b2a55143489b95166e. Base: branch_9x.
-- Gate: LIGHT GATE GREEN (gates/SOLR-18552.md on coordination). Opened 2026-10-18: https://github.com/apache/solr/pull/5181 (base branch_9x, head cb32d0d9661, ready (two follow-up commits set the limit on the existing init line in both launch scripts). Body rewritten to the PR formula on 2026-10-18 at Nick's note (Jira link line, merge-base citations with anchors, dated Proof at the head, Changelog link line, AI assistance footer).).
+- Gate: LIGHT GATE GREEN (gates/SOLR-18552.md on coordination). Opened 2026-10-18: https://github.com/apache/solr/pull/5181 (base branch_9x, head cb32d0d9661, ready (two follow-up commits set the limit on the existing init line in both launch scripts). Body rewritten to the PR formula on 2026-10-18 at Nick's note (Jira link line, merge-base citations with anchors, dated Proof at the head, Changelog link line, AI assistance footer; footer set to the one-line form by Nick's 2026-10-18 decision, applied to #5181 and #5180).).
 
 ---
 
@@ -42,6 +42,4 @@ https://issues.apache.org/jira/browse/SOLR-18552
 
 Changelog: [changelog/unreleased/SOLR-18552-mmap-arena-permits.yml](https://github.com/apache/solr/blob/cb32d0d966159edb237d581318af9bf96071c0d1/changelog/unreleased/SOLR-18552-mmap-arena-permits.yml)
 
-### AI assistance
-
-AI agents assisted with research, implementation, review, and drafting. Nick Shanin directed the work and takes responsibility for this contribution.
+*AI-generated description. Nick Shanin directed the work and takes responsibility for this contribution.*
