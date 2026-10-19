@@ -1,7 +1,7 @@
 # Claim: pool-aab-skip-verdict-audit-15
 
 - Claimant host: vm2, matching a file in `hosts/`.
-- Status: CLAIMED. Cross-audit of batch 15 of 21 under `assignments/pool-aab-skip-verdict-audit-15.md`. Taken as the lowest unclaimed aab batch (01 to 14 claimed or DONE), per the owner's complaints file (`pool/owner-complaints-2026-10-19.md`, item 1).
+- Status: DONE (reconciled 2026-10-19 from reports/skip-verdict-audit-batch-15.md: pass 1, suspect 8, deferred 16). Cross-audit of batch 15 of 21 under `assignments/pool-aab-skip-verdict-audit-15.md`. Taken as the lowest unclaimed aab batch (01 to 14 claimed or DONE), per the owner's complaints file (`pool/owner-complaints-2026-10-19.md`, item 1).
 - Job or assignment: `assignments/pool-aab-skip-verdict-audit-15.md`.
 - Slice: the whole batch, one item at a time, each checked against the floor in `material/skip-audit/verdict-rubric.md`.
 - Capability tags used: review.
