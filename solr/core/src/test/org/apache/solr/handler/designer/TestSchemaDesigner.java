@@ -334,6 +334,7 @@ public class TestSchemaDesigner extends SolrCloudTestCase implements SchemaDesig
         schemaDesigner.analyze(configSet, null, null, null, null, null, null, true);
 
     assertNull(response.analysisError);
+    assertNull(response.updateError);
     assertEquals(List.of("1"), response.docIds);
     assertEquals(1, response.numDocs);
     schema = schemaDesigner.loadLatestSchema(mutableId);
