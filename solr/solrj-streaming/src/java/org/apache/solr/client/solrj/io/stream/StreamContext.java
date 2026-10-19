@@ -47,6 +47,12 @@ public class StreamContext {
   private SolrParams requestParams;
   private RequestReplicaListTransformerGenerator requestReplicaListTransformerGenerator;
 
+  public StreamContext() {}
+
+  public StreamContext(SolrClientCache clientCache) {
+    this.clientCache = clientCache;
+  }
+
   public ConcurrentMap<String, ConcurrentMap<String, Object>> getObjectCache() {
     return this.objectCache;
   }
