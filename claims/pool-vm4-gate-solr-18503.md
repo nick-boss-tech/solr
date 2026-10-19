@@ -8,3 +8,5 @@ Runner: pool/bin/sweep-run.sh. Seed 18503C0FFEE18503.
 Deliverable: receipts/SOLR-18503.md, logs under /workspace/gates/logs/vm4/solr-18503/.
 
 STOPPED: 2026-10-19T03:13Z by vm4. Tidy changed the head test file (GATE INVALID). See gates/SOLR-18503.md Result. Claim time in the first line was corrected here: gate started about 02:59Z.
+
+STALE: 2026-10-19 by vm4. Superseded by gate SOLR-18503-phase-tidyfix at head cc5b84dfcdd7 (the tidy commit). The run at dba48d69 was GATE INVALID at tidy, and vm1 released its later claim to vm4.
