@@ -6,6 +6,13 @@ the things I am unhappy about after this morning's census of the branch
 expect instead. This file stays until I replace it; work that answers a
 complaint should say so in its closeout.
 
+Owner correction, later on 2026-10-19: assignments on this branch are
+addressed to a capability, not to a named host. Any available Linux
+host claims Linux work and any available Windows host claims Windows
+work, as the capability tags say. Where a complaint below names a
+host, read it as the host that had the context or the file, not as
+the only host allowed to act.
+
 ## 1. The cross-audit program has not started
 
 The 21 pool-aab cross-audit batches cover 506 verdicts and have been
@@ -27,11 +34,13 @@ re-audits is not finished work; it is inventory.
 
 ## 3. vm2 has not touched the CSV assignment
 
-assignments/pool-post-issues-csv-vm2.md is addressed to vm2 only. As
-of this census there is no claim from vm2 and no CSV on the branch.
-Claim it and post the file as the assignment says, or mark the claim
-BLOCKED with the search record: where was looked, what was found. A
-silent assignment is the one unacceptable outcome.
+The CSV is believed to sit on vm2's storage, and as of this census
+no host has claimed assignments/pool-post-issues-csv-vm2.md and no
+CSV is on the branch. Whoever can reach the file claims the
+assignment and posts the file as it says; if the file cannot be
+found, the claim is marked BLOCKED with the search record: where was
+looked, what was found. A silent assignment is the one unacceptable
+outcome.
 
 ## 4. The remediation queue still carries a retired ownership note
 
