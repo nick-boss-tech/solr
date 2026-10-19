@@ -4,7 +4,7 @@
 - Verdict: keep-open. Unchanged from the earlier record.
 - Draft branch: solr-17509-draft-open.
 - Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (2026-10-07). Upstream sha not cited.
-- Checked by: vm4, 2026-10-19 13:22-14:10 UTC.
+- Checked by: vm4, 2026-10-19 13:22-13:25 UTC.
 
 ## Ticket reading
 
