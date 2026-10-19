@@ -56,3 +56,5 @@ Heartbeat: 2026-10-19T22:39:00Z. Item 21 SOLR-14226 DONE (close-fixed, 30e0d9085
 Heartbeat: 2026-10-19T22:43:35Z. Item 22 SOLR-14201 DONE (keep-open, e16d7b9f73). Remaining: items 23 to 25.
 
 Heartbeat: 2026-10-19T22:48:10Z. Item 23 SOLR-14183 DONE (keep-open, 87dbee3563). Remaining: items 24 and 25.
+
+Heartbeat: 2026-10-19T22:54:58Z. Item 24 SOLR-14180 DONE (close-obsolete, 92a27d030f; verdict changed from keep-open). Remaining: item 25.
