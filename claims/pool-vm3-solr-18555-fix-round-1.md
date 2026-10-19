@@ -1,7 +1,7 @@
 # Claim: SOLR-18555 fix round 1 (vm3)
 
 - Claimant host: vm3, matching `hosts/vm3.md`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: ENDED at push (branch moved); see the stop record.
 - Job or assignment: `assignments/pool-solr-18555-fix-round-1.md`.
 - Slice: items 1 to 4 and 6 (apply the starting patch, the import, tidy, push fast-forward from 884de51579, file a gate job at the new head). Item 5 (three escalated tests) is not touched.
 - Capability tags used: implementation, gate.
@@ -14,3 +14,5 @@ Note on item 2: corrected wording on claim; the import is shadowed, not dead cod
 Run: 2026-10-19T06:24:55Z: job r1-prep-062443 (log dir /workspace/gates/logs/vm3/18555/r1-prep-062443). Steps: tidy, then ErrorProne compile of :solr:core and :solr:solrj. Head: local branch on top of 884de51579 (commits c7778b917f starting patch, 71a34b3bc0 import). Not pushed yet; tidy changes, if any, are committed as item 3 before the push.
 
 Stopped: 2026-10-19T06:57:42Z. Branch moved to 79909b2bd1 before our push; per the assignment Push row, stopped without retargeting. vm3 work is on coordination as gates/SOLR-18555-vm3-round1.patch. Not DONE; the gate is not filed. See the assignment stop record.
+
+DONE: 2026-10-19T07:13:33Z. Deliverables: assignments/pool-solr-18555-fix-round-1.md (stop record), gates/SOLR-18555-vm3-round1.patch (reference only; superseded by the implementor head). The gate for the repaired head is a new claim.
