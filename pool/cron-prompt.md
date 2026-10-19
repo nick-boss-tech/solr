@@ -1,6 +1,6 @@
 # Pool cron prompt
 
-This file is the job for every pool Linux host. The scheduled task reads it from `origin/coordination` at the start of each tick, so edits take effect on the next tick. Do not work from any other copy.
+This file is the job for every pool Linux host. Each tick reads it from `origin/coordination` at its start, so edits take effect on the next tick. Do not work from any other copy.
 
 ## General rules
 
@@ -18,7 +18,7 @@ This file is the job for every pool Linux host. The scheduled task reads it from
 0. Read your host id from the line that starts `- Host id:` in `/workspace/AGENTS.md`. Every `$POOL_HOST` below is that id. If the line is missing, exit and record nothing.
 1. Your worktree: `/workspace/worktrees/pool-$POOL_HOST`. If it does not exist, create it with `git -C /workspace/solr worktree add --detach /workspace/worktrees/pool-$POOL_HOST origin/coordination`. Every tick, `git fetch origin coordination` and `git rebase origin/coordination` inside it. Never switch the shared checkout at `/workspace/solr`.
 2. Sync scripts and skills: copy `pool/skills/*` from your worktree into `/workspace/.claude/skills/`, replacing older copies. Do this only if the files differ.
-3. If `flock -n /workspace/tools/.gradle-$POOL_HOST.lock true` fails, a build is running on this host. Exit.
+3. If `flock -n /workspace/tools/.gradle-$POOL_HOST.lock true` fails, a build is running on this host. Skip the rest of this tick's work and still do step 18.
 
 ## Pick work
 
@@ -59,6 +59,7 @@ A repeated run that fails the same way is not new evidence. A reproduction sweep
 
 16. When the work lands: write the deliverable, mark the assignment and the claim `DONE:` with the deliverable paths, and push once. For a gate job, also set the gate file to `Status: DONE` with the gated head, and write or refresh `receipts/<TICKET>.md` in the same push, as WORKFLOW.md requires of the gating host.
 17. If you cannot finish, write the reason in the claim, set the assignment to `Status: HANDED`, and push.
+18. End every tick by calling `mcp__user-input__schedule_resume` to continue this same session at the next tick, with `wakeTime` set to `in 1 hour` and a `note` that names the live claim (or the gate job) and its next step. If no claim is live and no assignment or gate job qualifies, schedule nothing and stop. Do not use `schedule_task` for ticks: it starts a new session with no memory of this one. A session holds one pending wake, so each resume replaces the last.
 
 ## Limits
 
