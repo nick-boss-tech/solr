@@ -31,6 +31,18 @@ If the job or claim name already exists, stop. Another session got there first, 
      5. `git push origin HEAD:refs/heads/coordination`. If the push is rejected, run `git fetch origin coordination`, `git rebase origin/coordination`, and push again.
      6. Read it back: `git show origin/coordination:gates/<TICKET>.md`.
 
+## Request a gate (implementation agents)
+
+Use this when your branch has a head that needs a full gate. You file the request; a gate host claims and runs it. You do not claim or run the gate yourself.
+
+1. Push your branch to the fork and note the tip: `git ls-remote origin refs/heads/<branch>`.
+2. Copy `pool/templates/gate-request.md` to a scratch file and fill every field. Delete the Head or Title line if you do not use it.
+3. From any checkout of this repo, run `python3 pool/bin/request-gate.py --dry-run <scratch file>` to see the job, then run it again without `--dry-run` to post it. The script needs `GITHUB_TOKEN` in the environment or in `/workspace/.env`.
+4. The script refuses when the ticket already has a gate job or a live claim, when the branch tip differs from Head, or when a field is still FILL or contains a dash. Fix the request and run it again. Do not edit another session's job to make your request fit.
+5. On success it prints the job path and the commit. The job is OPEN; gate hosts find it in [OPEN-WORK.md](../OPEN-WORK.md). Your part ends there.
+
+Windows agents use `research\pool-post.ps1 -Kind gate` with the same fields, filled into `pool/templates/gate-job.md`.
+
 ## Find open work
 
 Open assignments and gate jobs are listed in [OPEN-WORK.md](../OPEN-WORK.md) at the branch root, grouped by intended host. The list is generated from the Status line under each file's title; if the two ever disagree, the file's own Status line governs. When you claim a file, set its Status line to CLAIMED naming your claim file in the same push as the claim; when the work lands, set it to DONE in the same push as the deliverable.
