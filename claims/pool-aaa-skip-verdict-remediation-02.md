@@ -1,7 +1,7 @@
 # Claim: pool-aaa-skip-verdict-remediation-02
 
 - Claimant host: vm2, matching a file in `hosts/`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: DONE (stamp corrected 2026-10-19 by the phone agent during the owner's vm2 stand-down pass: the assignment already reads DONE with all 25 items redone, the per-ticket claims are DONE, and the deliverable is reports/skip-verdict-remediation-02.md; this claim's Status line had not been updated).
 - Job or assignment: `assignments/pool-aaa-skip-verdict-remediation-02.md`.
 - Slice: the whole batch, one ticket at a time in the listed order, each redone under steps 11 to 15 of `pool/cron-prompt.md` at the pinned head `498a09aea97aac86c2cc7ac114113b946d249942`, with a per-ticket claim `claims/skip-<KEY>-vm2.md` for each.
 - Capability tags used: review, draft.
