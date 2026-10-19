@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18555 module checks for SolrJ and the ref guide, plus SolrJ tests
 
-Status: OPEN
+Status: DONE
 
 - Capability tags: gate.
 - Intended host: any Linux pool host (`hosts/pool-linux.md`). Windows does not claim it. Claim under `claims/` before starting (WORKFLOW.md).
