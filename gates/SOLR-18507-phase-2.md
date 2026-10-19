@@ -61,3 +61,14 @@ If any step cannot be verified, record it here and stop.
 
 - One fast-forward push with the receipt and the DONE marks.
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Investigation of the round 4 closed reader (vm3, 2026-10-19)
+
+Claim: `claims/pool-vm3-investigate-solr-18507-phase-2.md`. Head investigated: 613a1b29fe.
+
+- Reproduced: `SolrCoreFingerprintCacheTest.testGrossFingerprintCacheHitAfterDelete`, seed 18507A002, fails at the commit on line 65 with `Error opening new searcher`, caused by `AlreadyClosedException: this IndexReader is closed` from `StandardDirectoryReader.doOpenIfChanged` via `SolrCore.openNewSearcher` (SolrCore.java:2408). Log: `/workspace/gates/logs/vm3/18507-p2-investigate/focused.log`.
+- Cause: the test, not the production change. The test calls `core.getSearcher().get()` inside try-with-resources. Searchers built by `openNewSearcher` own their raw reader (`closeReader` is true), and `SolrIndexSearcher.close()` releases it (SolrIndexSearcher.java:650). The RefCounted returned by `getSearcher()` is never decref'd, so the registered searcher's reader drops to zero. The next commit reopens from that closed reader.
+- The gross fingerprint cache holds `IndexFingerprint` values only, never readers, so it is not involved in the close.
+- Fix (one commit on this branch, `137e77a4c8`): the three `try (var searcher = core.getSearcher().get())` blocks become `core.withSearcher(searcher -> searcher.getIndexFingerprint(Long.MAX_VALUE))`, which releases the reference.
+- Verified on the fixed head by vm3: tidy exit 0 (no changes), Error Prone compile exit 0, `SolrCoreFingerprintCacheTest` seed 18507A002 1 test, 0 failures (XML). Log: `/workspace/gates/logs/vm3/18507-p2-investigate/fixed-focused.log`.
+- Not run by vm3: step 5 (`:solr:core:check -x test`) and the full gate receipt. Relaunching the gate on `137e77a4c8` is vm1's; this is a new head, so it needs a new gate run, not a relaunch of round 4.
