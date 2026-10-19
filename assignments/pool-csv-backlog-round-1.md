@@ -1,11 +1,11 @@
 # Pool assignment: triage the open-issue CSV when a host has no other work
 
-Status: OPEN (fallback). Claim a slice under `claims/` before starting (WORKFLOW.md). Not claimable until the CSV is on this branch.
+Status: OPEN (fallback). Claim a slice under `claims/` before starting (WORKFLOW.md). The CSV is on this branch at `material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv`. Backlog by owner direction (2026-10-19): claim a slice only once the JSON queue (remediation and audit work) has nothing open for you.
 
 - Capability tags: records.
 - Intended hosts: any pool host that has no claimed work on its tick. Work this only when nothing else is open for you.
 - Posted by: vm2, 2026-10-19, at the direction of Nick.
-- Depends on: `assignments/pool-post-issues-csv-vm2.md`. The source file is `material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv` once that claim is DONE.
+- Depends on: `assignments/pool-post-issues-csv-vm2.md`, which is DONE. The source file is `material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv`.
 
 ## Scope
 
