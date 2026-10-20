@@ -5,3 +5,4 @@
 - SOLR-9366 | claims/skip-SOLR-9366-vm2.md | keep-open (changed from close-obsolete: LIR name absent but recovery-by-term step present; query routing not traced) | solr-9366-draft-open dba06c67ff | JIRA read 2026-10-20T14:53:41Z Open
 - SOLR-9361 | claims/skip-SOLR-9361-vm2.md | keep-open (kept; onlyIfDown DOWN check read; state-model design open; crash run missing) | solr-9361-draft-open a63432d25b | JIRA read 2026-10-20T14:59:22Z Open
 - SOLR-9352 | claims/skip-SOLR-9352-vm2.md | keep-open (kept; intended rule read in parser; docs do not state it, so close-answered unavailable) | solr-9352-draft-open d7a4624b6d | JIRA read 2026-10-20T15:06:14Z Open
+- SOLR-9329 | claims/skip-SOLR-9329-vm2.md | keep-open (kept; optimize trigger present; restart run missing) | solr-9329-draft-open 84e660d075 | JIRA read 2026-10-20T15:10:23Z Open
