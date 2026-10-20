@@ -1,1 +1,2 @@
 - SOLR-10706 | claims/skip-SOLR-10706-vm2.md | close-cannot-reproduce (changed from keep-open: URLEncoder gives + for space; repro run JDK 21) | solr-10706-draft-close 4a8b3488bd | JIRA read 2026-10-20T11:42:17Z Open
+- SOLR-10650 | claims/skip-SOLR-10650-vm2.md | close-answered (changed from close-fixed: no fix commit; system-requirements.adoc:62 answers the Java question) | solr-10650-draft-close b72080244e | JIRA read 2026-10-20T11:50:55Z Open
