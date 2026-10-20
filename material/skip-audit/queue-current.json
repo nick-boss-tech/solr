@@ -8099,8 +8099,8 @@
       "round": "audit-0",
       "evidence": "audit-0 spot-check 2026-10-04: SolrParams.toQueryString uses URLEncoder for query params = correct form-encoding"
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-10706-draft-open",
+    "verdict": "close-cannot-reproduce",
+    "draft_branch": "solr-10706-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
