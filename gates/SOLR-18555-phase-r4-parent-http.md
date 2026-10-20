@@ -1,6 +1,6 @@
 # Gate job: SOLR-18555 (Parent branch HTTP regression after moving the collection route test)
 
-Status: OPEN
+Status: PAUSED (covered by the integrated child-head gate 0c6aae3162f; resume if the parent branch will be submitted separately)
 
 - Branch: `solr-18555-submit`. Head: `39c1b546ef44db53466671dba6a7b3cdfc83422f` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `2c54781a6ea1c8a5d17b802fbc97fed18005aa2b`. Prior gated head: none recorded.
@@ -9,6 +9,7 @@ Status: OPEN
 - Capability tags: gate.
 - Module: `:solr:core`. Focused class: `org.apache.solr.handler.HighlightRequestHandlerHttpTest`. Seed: `18555C0FFEE18555`.
 - Diff scope: 2 files, 71 insertions and 3 deletions against 2c54781a6ea1c8a5d17b802fbc97fed18005aa2b: remove the collection route assertion from HighlightRequestHandlerHttpTest.java and add HighlightRequestHandlerCloudHttpTest.java with that route coverage.
+- Consolidation: the combined child-head gate runs both this class and the cloud class, plus the handler unit test, SolrJ transports, and guide check.
 - Why: The r2 focused run failed because the /c route was tested in a non-cloud fixture without ZooKeeper. This repair keeps the non-cloud HTTP coverage and moves the same V2 collection route assertion to a SolrCloudTestCase fixture. Run the HTTP class on the pushed parent head to verify the remaining routes and input cases.
 
 ## What to run
