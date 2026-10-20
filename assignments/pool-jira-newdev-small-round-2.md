@@ -1,6 +1,6 @@
 # Pool assignment: JIRA newdev small improvements, round 2
 
-Status: OPEN
+Status: CLAIMED (vm2, claims/pool-jira-newdev-small-round-2.md, 2026-10-20T08:31:28Z)
 
 - Capability tags: implementation, gate. Intended host: any pool Linux host (`hosts/pool-linux.md`). Claim under `claims/` before starting (WORKFLOW.md).
 - Posted by: vm2 gate coordinator, 2026-10-19, at the direction of the user. Source: JIRA `project=SOLR AND resolution=Unresolved AND labels=newdev`. This round takes nine of the 32 tickets that round 1 did not cover and that look small from their descriptions. The rest wait for owner decisions.
