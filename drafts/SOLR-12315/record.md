@@ -4,7 +4,7 @@
 - Verdict: keep-open.
 - Draft branch: solr-12315-draft-open.
 - Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (checked at this head for this record).
-- Source: the queue entry (round audit-1, 2018/2026 audit verdict confirmed-skip) is background only; the reading below is fresh at the pin.
+- Source: the queue entry (audit verdict confirmed-skip, audit date 2026-10-19) is background only; the reading below is fresh at the pin.
 
 ## Ticket reading
 
