@@ -1185,6 +1185,12 @@ public abstract class SolrClient implements Serializable, Closeable {
   public abstract NamedList<Object> request(final SolrRequest<?> request, String collection)
       throws SolrServerException, IOException;
 
+  /** Uses XML for requests and responses when true, the binary default when false. */
+  public void setUseXmlFormat(boolean useXml) {
+    throw new UnsupportedOperationException(
+        getClass().getName() + " does not support setUseXmlFormat");
+  }
+
   /**
    * Execute a request against a Solr server using the default collection
    *

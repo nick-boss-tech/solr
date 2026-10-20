@@ -41,10 +41,13 @@ import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.request.JavaBinRequestWriter;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.SolrQuery;
 import org.apache.solr.client.solrj.request.UpdateRequest;
+import org.apache.solr.client.solrj.request.XMLRequestWriter;
 import org.apache.solr.client.solrj.response.InputStreamResponseParser;
+import org.apache.solr.client.solrj.response.JavaBinResponseParser;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.ResponseParser;
 import org.apache.solr.client.solrj.response.XMLResponseParser;
@@ -173,6 +176,27 @@ public abstract class HttpSolrClientTestBase extends SolrTestCaseJ4 {
     assertEquals(expectedUserAgent(), DebugServlet.headers.get("user-agent"));
     assertEquals("application/x-www-form-urlencoded", DebugServlet.headers.get("content-type"));
     assertEquals("93", DebugServlet.headers.get("content-length"));
+  }
+
+  public void testSetUseXmlFormatTogglesWireFormat() throws Exception {
+    DebugServlet.clear();
+    DebugServlet.addResponseHeader("Content-Type", "application/xml; charset=UTF-8");
+    DebugServlet.responseBodyByQueryFragment.put(
+        "", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response />");
+    String url = solrTestRule.getBaseUrl() + DEBUG_SERVLET_PATH;
+    HttpSolrClient.BuilderBase<?, ?> builder =
+        builder(url, DEFAULT_CONNECTION_TIMEOUT, DEFAULT_CONNECTION_TIMEOUT);
+    try (HttpSolrClient client = builder.build()) {
+      client.setUseXmlFormat(true);
+      assertTrue(client.getRequestWriter() instanceof XMLRequestWriter);
+      assertTrue(client.getParser() instanceof XMLResponseParser);
+      client.query(new SolrQuery("foo"), SolrRequest.METHOD.GET);
+      assertEquals("xml", DebugServlet.parameters.get(CommonParams.WT)[0]);
+
+      client.setUseXmlFormat(false);
+      assertTrue(client.getRequestWriter() instanceof JavaBinRequestWriter);
+      assertTrue(client.getParser() instanceof JavaBinResponseParser);
+    }
   }
 
   public void testQueryXmlGet() throws Exception {

@@ -419,6 +419,11 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
   }
 
   @Override
+  public void setUseXmlFormat(boolean useXml) {
+    client.setUseXmlFormat(useXml);
+  }
+
+  @Override
   public NamedList<Object> request(final SolrRequest<?> request, String collection)
       throws SolrServerException, IOException {
     final String effectiveCollection =

@@ -153,6 +153,11 @@ public class EmbeddedSolrServer extends SolrClient {
   // It *should* be able to convert the response directly into a named list.
 
   @Override
+  public void setUseXmlFormat(boolean useXml) {
+    // In-process requests have no wire format to switch.
+  }
+
+  @Override
   public NamedList<Object> request(SolrRequest<?> request, String coreName)
       throws SolrServerException, IOException {
 

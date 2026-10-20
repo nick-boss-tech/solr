@@ -236,6 +236,11 @@ public abstract class CloudSolrClient extends SolrClient {
     return getLbClient().getRequestWriter();
   }
 
+  @Override
+  public void setUseXmlFormat(boolean useXml) {
+    getLbClient().setUseXmlFormat(useXml);
+  }
+
   /** Gets whether direct updates are sent in parallel */
   public boolean isParallelUpdates() {
     return parallelUpdates;

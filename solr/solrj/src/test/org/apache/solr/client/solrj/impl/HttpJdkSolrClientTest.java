@@ -97,6 +97,12 @@ public class HttpJdkSolrClientTest extends HttpSolrClientTestBase {
 
   @Test
   @Override
+  public void testSetUseXmlFormatTogglesWireFormat() throws Exception {
+    super.testSetUseXmlFormatTogglesWireFormat();
+  }
+
+  @Test
+  @Override
   public void testQueryXmlGet() throws Exception {
     super.testQueryXmlGet();
   }

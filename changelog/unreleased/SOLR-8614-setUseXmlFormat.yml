@@ -1,0 +1,11 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >
+  SolrJ clients gain setUseXmlFormat(boolean) to send requests and read responses as XML, instead of
+  the binary default, without choosing the writer and parser classes
+type: added
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-8614
+    url: https://issues.apache.org/jira/browse/SOLR-8614

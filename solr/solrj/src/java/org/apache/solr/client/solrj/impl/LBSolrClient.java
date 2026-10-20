@@ -154,6 +154,7 @@ public abstract class LBSolrClient extends SolrClient {
   private static final SolrQuery solrQuery = new SolrQuery("*:*");
   protected volatile ResponseParser parser;
   protected volatile RequestWriter requestWriter;
+  private HttpSolrClient httpClient;
 
   static {
     solrQuery.setRows(0);
@@ -513,6 +514,7 @@ public abstract class LBSolrClient extends SolrClient {
     this(Arrays.asList(builder.solrEndpoints));
     this.aliveCheckIntervalMillis = builder.aliveCheckIntervalMillis;
     this.defaultCollection = builder.defaultCollection;
+    this.httpClient = builder.solrClient;
     this.requestWriter = builder.solrClient.getRequestWriter();
     this.parser = builder.solrClient.getParser();
   }
@@ -741,6 +743,13 @@ public abstract class LBSolrClient extends SolrClient {
 
   public RequestWriter getRequestWriter() {
     return requestWriter;
+  }
+
+  @Override
+  public void setUseXmlFormat(boolean useXml) {
+    httpClient.setUseXmlFormat(useXml);
+    this.requestWriter = httpClient.getRequestWriter();
+    this.parser = httpClient.getParser();
   }
 
   private void checkAZombieServer(EndpointWrapper zombieServer) {

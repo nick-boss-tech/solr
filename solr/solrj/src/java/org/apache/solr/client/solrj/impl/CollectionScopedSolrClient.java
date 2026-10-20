@@ -38,6 +38,11 @@ public class CollectionScopedSolrClient extends SolrClient {
   }
 
   @Override
+  public void setUseXmlFormat(boolean useXml) {
+    delegate.setUseXmlFormat(useXml);
+  }
+
+  @Override
   public NamedList<Object> request(SolrRequest<?> request, String collection)
       throws SolrServerException, IOException {
     if (collection == null) {
