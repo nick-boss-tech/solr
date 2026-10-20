@@ -1,7 +1,7 @@
 # Claim: pool-vm2-gate-SOLR-18555-phase-r2-repair
 
 - Claimant host: vm2, matching `hosts/vm2.md`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: ENDED (HANDED BACK at head 2c54781a6ea; see the Result line).
 - Job or assignment: `gates/SOLR-18555-phase-r2.md`.
 - Slice: the whole gate job, taken again from the tidy repair. Head 59a44dbaf10c627d340f23f5481fdb2ba716f089 (tip confirmed by ls-remote at claim time). Steps: tidy repair (WORKFLOW.md Gate repairs), push fast-forward to `solr-18555-submit`, then steps 0 to 5 once on the repaired head, then the receipt section in `receipts/SOLR-18555.md`.
 - Capability tags used: gate, implementation (the repair commit only).
@@ -21,3 +21,7 @@ Heartbeat: 2026-10-20T04:54:14Z
 Step 2 result (519ca48ad56, job r2-retry-519ca48, 2026-10-20T04:59Z): Error Prone compile failed rc=1 at HighlightRequestHandlerHttpTest.java:85, "incompatible types: URL cannot be converted to String" (`solrTestRule.getJetty().getBaseURLV2()` returns URL). Repair in test code, one line, names the fix: repair commit 2c54781a6ea1c8a5d17b802fbc97fed18005aa2b adds `.toString()`. Changes no expected value. Second retry of steps 0 to 5 runs as job r2-retry2-2c54781 (logs /workspace/gates/logs/vm2/18555/gate-r2/retry2/). Step 0 is re-checked inline (changelog ok); the job's first line is a placeholder gradle help task to warm the build, not a gate step.
 
 Heartbeat: 2026-10-20T05:10:34Z
+
+Result: 2026-10-20T05:27:30Z: HANDED BACK. Retry job r2-retry2-2c54781 (head 2c54781a6ea): step 2 rc 0, step 4 focused rc 1. HighlightRequestHandlerTest 10 of 10; HighlightRequestHandlerHttpTest 3 of 4, failing testGetStreamBodyAndV2Routes at the V2 collection route (500, non-cloud alias lookup, CoreContainer.getAliases). Reason and hand-back in gates/SOLR-18555-phase-r2.md. Ended, no DONE line.
+
+Heartbeat: 2026-10-20T05:27:30Z

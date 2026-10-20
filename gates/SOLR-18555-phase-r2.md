@@ -1,6 +1,6 @@
 # Gate job: SOLR-18555 (text supplied highlighting, phase r2)
 
-Status: CLAIMED (claims/pool-vm2-gate-SOLR-18555-phase-r2-repair.md)
+Status: HANDED BACK (focused test failure after the second attempt, head 2c54781a6ea; see Result)
 
 - Branch: `solr-18555-submit`. Head: `59a44dbaf10c627d340f23f5481fdb2ba716f089` (fork tip, confirmed on 2026-10-19). If the tip has moved at claim time, stop and record the new tip. Do not retarget this job.
 - Base: `c8ab71430f6e7547c773da596101d680862310ff`. Prior gated head: `b99259cba3572cc08586b2456c78780c814a2bf7`.
@@ -74,3 +74,15 @@ If any step cannot be verified, record it here and stop.
 ## Result
 
 2026-10-20T04:52:00Z: GATE INVALID at head 59a44dbaf10c627d340f23f5481fdb2ba716f089 (vm2). Step 0 changelog parse rc 0. Step 1 tidy (`./gradlew tidy`, log gates/logs/vm2/18555/gate-r2 on vm2) rc 0 but changed one file: `solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerHttpTest.java`, 1 insertion and 2 deletions. The change joins the two-line `String update = ...` in `testQueryMethodCannotReachUpdateHandler` onto one line (line 64 at head). Per step 1 this is GATE INVALID: the tidy diff is recorded here, no later step ran, and the ticket branch was not edited or pushed. The author must apply tidy to the branch and push a new head; this job does not retarget.
+
+## Result
+
+2026-10-20T05:27:30Z: HANDED BACK at head 2c54781a6ea (vm2, claims/pool-vm2-gate-SOLR-18555-phase-r2-repair.md).
+- Repairs on the branch: `519ca48ad56` (tidy output, one file, one line join) and `2c54781a6ea` (one line in the same test, `getBaseURLV2().toString()`, after Error Prone failed at HighlightRequestHandlerHttpTest.java:85 with "URL cannot be converted to String").
+- Retry job `r2-retry2-2c54781`, logs gates/logs/vm2/18555/gate-r2/retry2/. Step 0 changelog rc 0. Step 2 Error Prone compile rc 0. Step 4 cleanTest rc 0. Step 4 focused rc 1 (tests executed).
+- Focused counts from fresh XML, seed 18555C0FFEE18555: HighlightRequestHandlerTest 10 tests, 0 failures, 0 errors, 0 skipped. HighlightRequestHandlerHttpTest 4 tests, 1 failure, 0 errors, 0 skipped.
+- Failure: `HighlightRequestHandlerHttpTest.testGetStreamBodyAndV2Routes`: `expected:<200> but was:<500>` on the V2 collection route `/c/<core>/highlight` (the `v2CollectionUrl` GET). The server log says `IllegalStateException: Aliases don't exist in a non-cloud context, check isZookeeperAware() before calling this method.` Stack: `CoreContainer.getAliases` (CoreContainer.java:2412) from `HttpSolrCall.resolveCollectionListOrAlias` (HttpSolrCall.java:395) from `V2HttpCall.init` (V2HttpCall.java:137).
+- Why not repaired: the cause is in production routing, not in the test's own code. Making the `/c/` route work in standalone mode changes what the branch promises (the job's Why says the test "exercises the documented V2 collection route"), so it is outside the one-or-two-line repair scope. Changing the test to drop or skip the collection route changes an expected value, which is also out of scope. Under WORKFLOW.md Gate repairs, the retry failed and the ticket returns to implementation.
+- The proof leg (step 3) did not run. No receipt is written for a stopped gate.
+- Hand-back: the branch author decides whether standalone `/c/` routing should work (the fix is in `V2HttpCall`/`HttpSolrCall` routing, or the test should move to a cloud-mode test base). Then a new gate job at the new head.
+
