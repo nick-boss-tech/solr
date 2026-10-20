@@ -16,3 +16,10 @@ Heartbeat: 2026-10-20T07:20:31Z
 - Worktree /workspace/worktrees/solr-18555-r3 at e78e776c3e; full clone /workspace/clones/solr-18555-r3 at the same head (step 6).
 - Gate: /workspace/tools/gate-solr-18555-r3.sh, logs /workspace/gates/logs/vm3/solr-18555-phase-r3/ (result-clone, result-step0, result-tidy, result-compile, result-test, result-check, result-guide .txt; done marker). Seed 18555C0FFEE18555, class `org.apache.solr.handler.HighlightRequestHandlerHttpTest`.
 - Heartbeat: 2026-10-20T07:23:43Z
+
+## Attempt 1 result, repairs, retry (2026-10-20T07:56:25Z)
+
+- Attempt 1 (e78e776c3e): step 0 pass; tidy changed `HighlightRequestHandlerHttpTest.java` (one line wrap), applied as repair 23f5d7dfbd; compile pass (Error Prone); focused `HighlightRequestHandlerHttpTest` seed 18555C0FFEE18555: 4 tests, 1 failed: `testGetStreamBodyAndV2Routes`, `expected:<200> but was:<500>` on the `/c/highlight` v2 collection route. Cause: `Aliases don't exist in a non-cloud context` (the collection route needs ZooKeeper, which the non-cloud Jetty fixture does not have). Known case in the gate's decision rows.
+- Repair 344e0a4375: the `/c` assertion removed from the non-cloud class (no expected value changed in the other assertions). Repair 7c859a4d0e: new `HighlightRequestHandlerCloudHttpTest` (SolrCloudTestCase, one node, collection `highlight`) holds the same `/c/highlight` stream-body assertion with the same expected 200 and highlighting content. Tidy formatting of the new file folded into 7c859a4d0e before push (unpushed amendment, same commit).
+- Retry: one retry from step 0 on head 7c859a4d0e. Attempt 1 logs: `gates/logs/vm3/solr-18555-phase-r3-attempt1/`. The attempt-1 guide step was stopped (old head, not useful); the retry runs the guide check in a full clone at 7c859a4d0e.
+- Heartbeat: 2026-10-20T07:56:25Z
