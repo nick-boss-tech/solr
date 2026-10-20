@@ -194,7 +194,7 @@ def get_editor():
     if editor is None:
       if 'EDITOR' in os.environ:
           if os.environ['EDITOR'] in ['vi', 'vim', 'nano', 'pico', 'emacs']:
-              print("WARNING: You have EDITOR set to %s, which will not work when launched from this tool. Please use an editor that launches a separate window/process" % os.environ['EDITOR'])
+              sys.exit("EDITOR is set to %s, a terminal editor that hangs this tool. Set EDITOR to an editor that opens its own window, then run again." % os.environ['EDITOR'])
           editor = os.environ['EDITOR']
       elif is_windows():
           editor = 'notepad.exe'
