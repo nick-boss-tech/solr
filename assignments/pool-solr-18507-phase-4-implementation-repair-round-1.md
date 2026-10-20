@@ -1,10 +1,10 @@
 # Pool assignment: SOLR-18507 Phase 4 incremental fingerprint repair, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-windows-solr-18507-phase-4-implementation-repair-round-1.md)
 
 - Capability tags: implementation.
 - Category: Core admin and cores.
-- Intended host: any pool Linux host with implementation. Claim under `claims/` before starting (WORKFLOW.md).
+- Intended host: Windows source implementation by Nick's assignment-specific direction on 2026-10-20. All build and test proof remains on Linux. Claim under `claims/` before starting (WORKFLOW.md).
 - Posted by: Windows implementation host, 2026-10-20, at the direction of Nick Shanin.
 - Parent: SOLR-18507.
 - Siblings: `gates/SOLR-18507-phase-3.md`, `gates/SOLR-18507-phase-4.md`, `assignments/pool-solr-18507-fingerprint-benchmark-round-1.md`, `assignments/pool-solr-18507-phase-3-benchmark-followup-round-1.md`.
