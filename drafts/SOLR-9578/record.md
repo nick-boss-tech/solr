@@ -1,37 +1,36 @@
 # Skip record: SOLR-9578
 
-- Ticket: SOLR-9578, Implement document level security in Solr. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-9578, "Implement document level security in Solr". JIRA status read 2026-10-20T13:16:41Z (UTC): Open, resolution None, updated 2026-10-10. Linked: SOLR-1834 (Open, the duplicate target).
+- Verdict: keep-open (kept; re-read at the pinned head). This is a feature request, and its design is a maintainer decision.
 - Draft branch: solr-9578-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-5, 2026-10-17, audit verdict confirmed-skip).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T13:16:41Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Implement document level security in Solr. Skip note: feature: document level security.
+The ticket asks for document-level authorization in Solr so that Sentry (and similar systems) can filter results per user without custom search components. Six comments (2017-2019) discuss a SearchComponent, a query-parser filter as in ManifoldCF, and integration with Alfresco. No design has been agreed. JIRA marks it a duplicate of SOLR-1834, which is Open.
 
-## Code reading
+## Code reading (pinned head)
 
-Taken from the audit evidence, not re-read at the pinned head: The ticket requests document-level authorization and discusses possible SearchComponent, QParser, and handler designs for integrations such as Sentry/Ranger. It identifies missing functionality, not a failure of an existing authorization contract.
+- A case-insensitive grep for document-level security terms (`documentlevel`, `document level`, `docLevel`) under `solr/core/src/java` and `solr/solrj/src/java`: no hits.
+- The authorization framework has rule-based plugins (`solr/core/src/java/org/apache/solr/security/RuleBasedAuthorizationPlugin.java`, `RuleBasedAuthorizationPluginBase.java`, `ExternalRoleRuleBasedAuthorizationPlugin.java`, `MultiAuthRuleBasedAuthorizationPlugin.java`). They authorize requests by path and permission, not by document, so the per-document filter the ticket asks for is not present.
 
 ## History
 
-No commit history was used for this record.
+- evidence.py at the pinned head: no commits naming SOLR-9578.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not applicable: this is a missing feature, so there is nothing to reproduce. The check was the grep and the plugin reading above.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The feature is absent and the design is open: a SearchComponent, a query-parser filter applied per request, or an authorization hook that returns a filter. Choosing one is a design decision.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric for an open feature with a design question: the attempts made are the grep and the plugin reading; the missing piece is the design choice, which belongs to the maintainers. close-fixed, close-obsolete and close-cannot-reproduce do not apply to an absent feature. pr-needed is not chosen, since the design is not agreed.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not choose a design. It does not check the duplicate SOLR-1834 beyond the JIRA link.
