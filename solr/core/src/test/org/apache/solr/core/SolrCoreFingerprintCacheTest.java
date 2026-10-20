@@ -257,6 +257,55 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testIncrementalFingerprintFallsBackWhenDeletedSnapshotExceedsLimit()
+      throws Exception {
+    SolrCore core = h.getCore();
+    int deletedDocLimit = 4096;
+    RefCounted<IndexWriter> iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      IndexWriter writer = iwRef.get();
+      for (int i = 1; i <= deletedDocLimit + 2; i++) {
+        Document doc = new Document();
+        doc.add(new StringField("id", "limit-" + i, Field.Store.YES));
+        doc.add(new NumericDocValuesField("_version_", i));
+        writer.addDocument(doc);
+      }
+      writer.flush();
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+    core.withSearcher(searcher -> searcher.getIndexFingerprint(Long.MAX_VALUE));
+
+    Term[] deleteTerms = new Term[deletedDocLimit + 1];
+    for (int i = 1; i <= deletedDocLimit + 1; i++) {
+      deleteTerms[i - 1] = new Term("id", "limit-" + i);
+    }
+    iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      iwRef.get().deleteDocuments(deleteTerms);
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+
+    long cacheHitsBefore = core.getPerSegmentGrossFingerprintCacheHitCount();
+    long incrementalUpdatesBefore = core.getIncrementalFingerprintUpdateCount();
+    core.withSearcher(
+        searcher -> {
+          assertCachedFingerprintMatchesUncached(searcher, Long.MAX_VALUE);
+          return null;
+        });
+    assertTrue(
+        "An over-limit deletion snapshot should fall back to the cached gross fingerprint",
+        core.getPerSegmentGrossFingerprintCacheHitCount() > cacheHitsBefore);
+    assertEquals(
+        "An over-limit deletion snapshot must not use the incremental update path",
+        incrementalUpdatesBefore,
+        core.getIncrementalFingerprintUpdateCount());
+  }
+
+  @Test
   public void testPersistedGrossFingerprintSurvivesCoreReloadAndDeletes() throws Exception {
     SolrCore core = h.getCore();
     RefCounted<IndexWriter> iwRef = core.getSolrCoreState().getIndexWriter(core);
@@ -336,8 +385,29 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     try {
       iwRef
           .get()
+          .deleteDocuments(new Term("id", "updated-1"));
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+
+    long incrementalUpdatesBeforeDelete = core.getIncrementalFingerprintUpdateCount();
+    core.withSearcher(
+        searcher -> {
+          assertCachedFingerprintMatchesUncached(searcher, Long.MAX_VALUE);
+          return null;
+        });
+    assertEquals(
+        "The non-maximum deletion should populate the cached live snapshot",
+        incrementalUpdatesBeforeDelete + 1,
+        core.getIncrementalFingerprintUpdateCount());
+
+    iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      iwRef
+          .get()
           .updateDocValues(
-              new Term("id", "updated-1"), new NumericDocValuesField("_version_", 1000));
+              new Term("id", "updated-2"), new NumericDocValuesField("_version_", 1000));
     } finally {
       iwRef.decref();
     }
