@@ -13,7 +13,7 @@ The ticket: Solr always allocates a default transient-core cache (log "Allocatin
 ## Code reading
 
 - The named class TransientSolrCoreCacheDefault and its log line "Allocating transient cache" are absent from the whole solr tree at the pin (git grep -- solr: 0 hits for "Allocating transient" and for TransientSolrCoreCacheDefault).
-- The removal: commit cb6dd31eca (SOLR-17932, "Remove deprecated Solr Transient Cores", 2025-09-27) deleted solr/core/src/java/org/apache/solr/core/TransientSolrCoreCache.java, TransientSolrCoreCacheDefault.java and TransientSolrCores.java, and the transient-cache allocation in SolrCores.java. Ancestry checked: cb6dd31eca is an ancestor of the pin.
+- The removal: commit cb6dd31eca (SOLR-17932, "Remove deprecated Solr Transient Cores", 2025-09-27) deleted solr/core/src/java/org/apache/solr/core/TransientSolrCoreCache.java, TransientSolrCoreCacheDefault.java and TransientSolrCores.java, and changed solr/core/src/java/org/apache/solr/core/SolrCores.java (112 lines, including the removal of the pendingCloses list and the core closer thread). Ancestry checked: cb6dd31eca is an ancestor of the pin.
 - What remains at the pin mentions "transient cores" only in comments in solr/core/src/java/org/apache/solr/core/SolrCores.java (for example :137, :186, :194) and in solr/core/src/test/org/apache/solr/core/TestLazyCores.java (:271, :513); these describe the removed concept or lazy-core tests, not an allocated cache.
 
 So the cache the ticket asks to avoid no longer exists, and the transient-core feature it configures was removed by SOLR-17932.
