@@ -4,7 +4,7 @@ This file is the job for every pool Linux host. Each tick reads it from `origin/
 
 ## Mode
 
-OVERNIGHT: on
+OVERNIGHT: off
 SKIP QUEUE: open
 
 - `OVERNIGHT` is the chain switch. `on` means you keep the chain going by scheduling your own wake at the end of each tick (step 18). `off` means you finish any live claim, schedule nothing, and stop. The human sets this line; you do not change it.
