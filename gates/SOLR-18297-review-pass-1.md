@@ -15,3 +15,9 @@ Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-18297.md)
 - Steps 4 and 5: test and check ran against the failed compile; they are not evidence for this head.
 - Log: /workspace/gates/logs/vm3/solr-18297-review-pass-1/ (compile.log).
 - Next: one retry from step 0 on 7c07821070 (tree changed by the tidy repair), under the same claim.
+
+## Attempt 1 addendum: the compile result depends on Gradle's incremental state
+
+- A second focused run of the same head (log in the attempt-1 record, test step) recompiled nothing for the file, and `compileTestJava` passed without the warning. The compile failure is therefore not reproduced without a clean compile. It is a warning on an unchanged file that fails `-Werror` only when javac recompiles it.
+- Attempt 2 (retry, head 7c07821070, the one retry for this pass): the same steps with `:solr:core:cleanCompileJava :solr:core:cleanCompileTestJava` before the compile, so every source is recompiled. Logs: /workspace/gates/logs/vm3/solr-18297-review-pass-1/. Attempt-1 logs: /workspace/gates/logs/vm3/solr-18297-review-pass-1-attempt1/.
+- If attempt 2 fails at compile with the same warning, the pass is HANDED BACK: the warning is in a test file outside the branch diff, and the fix is outside the repair scope.
