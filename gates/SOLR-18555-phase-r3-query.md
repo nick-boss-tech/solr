@@ -1,6 +1,6 @@
 # Gate job: SOLR-18555 (V2 QUERY feasibility for supplied-text highlighting)
 
-Status: OPEN
+Status: NEARLY (claims/pool-vm3-gate-SOLR-18555-phase-r3-query.md; steps 0 to 5 green at 7c859a4d0e; step 6 not verified, environment; receipts/SOLR-18555.md)
 
 - Branch: `solr-18555-query-feasibility`. Head: `e78e776c3e7fe0cf63aac7f0bd705edfeb60e19d` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `2c54781a6ea1c8a5d17b802fbc97fed18005aa2b`. Prior gated head: none recorded.
