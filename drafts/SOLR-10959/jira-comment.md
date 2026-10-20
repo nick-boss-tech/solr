@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The feature or code this ticket describes has been removed, and nothing in the current code refers to it. Closing as obsolete, since the report does not apply to the current code.
+We re-checked this ticket at fork commit 498a09aea97. The class org.apache.solr.common.MapSerializable no longer exists in the source tree: SOLR-17600 (f9f5abf21e) deleted it after migrating its users. The packaging question about the 6.6.0 artifact cannot arise at this commit, so we are treating the ticket as obsolete.

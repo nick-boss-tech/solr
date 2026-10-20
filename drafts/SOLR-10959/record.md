@@ -1,37 +1,39 @@
 # Skip record: SOLR-10959
 
-- Ticket: SOLR-10959, o.a.s.c.MapSerializable missing in solr-core maven artifact. JIRA status not recorded in the B2 reading. JIRA was not re-read for this record.
-- Verdict: close-obsolete.
+- Ticket: SOLR-10959, o.a.s.c.MapSerializable missing in solr-core maven artifact. JIRA read in this pass: Open, resolution none, fix versions none, 0 comments; updated 2019-06-08.
+- Verdict: close-obsolete (unchanged status; this record replaces the earlier record on this branch, whose cross-audit reading named missing items J, C, G and L).
 - Draft branch: solr-10959-draft-close.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the B2 reading (reports/2026-10-18-skip-repro/B2-removed-round-2.md, vm3, round 2, pinned head unchanged).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (checked at this head for this record).
+- Source: the queue entry (audit verdict confirmed-skip, audit date 2026-10-19) is background only; the reading below is fresh at the pin.
 
 ## Ticket reading
 
-The summary as recorded in the queue: o.a.s.c.MapSerializable missing in solr-core maven artifact.
+The ticket: after updating a test dependency from solr-core 5.5.4 to 6.6.0, compilation fails with ClassNotFoundException for org.apache.solr.common.MapSerializable, which was missing from the solr-core artifact. The report is about a published artifact of Solr 6.6.0.
 
 ## Code reading
 
-MapSerializable has no hits on main. Deleted by f9f5abf21e (SOLR-17600 p4).
+- The named class is absent from the whole solr tree at the pin: git grep -c MapSerializable over solr returns 0 files.
+- The removal: commit f9f5abf21e (SOLR-17600 p4, "Delete MapSerializable", 2026-06-21) deleted solr/solrj/src/java/org/apache/solr/common/MapSerializable.java (33 lines). Earlier steps p1 to p3 (ddb1923d15, 22c37b3c7f, 9cc72f1638) migrated its users. Ancestry checked: f9f5abf21e is an ancestor of the pin.
+
+So the symbol the ticket names does not exist at the pin, and the failure it reports (a missing MapSerializable in the solr-core artifact) cannot be reproduced against a build of the pin.
 
 ## History
 
-- `f9f5abf21e`: named or touching the path in the B2 reading; ancestor of the pinned head: yes (checked).
+- MapSerializable was introduced in the 6.x line for the response writers (SOLR-9502, 1e18c12c19); the artifact question in the ticket dates from the 6.6.0 release.
+- No commit at the pin names SOLR-10959 (git log --grep at the pin: none).
 
 ## Reproduction attempts
 
-Not attempted. The B2 scope ran no builds or tests.
+No run was attempted. For close-obsolete the rubric's check is the removed code and the whole-tree grep, which are done above.
 
 ## Gap analysis
 
-The code reading shows the reported behavior no longer applies at the pinned head, as described above.
+The ticket asks why a class is missing from a released artifact. The class is now removed from the source, so any user still referring to it would fail at compile time for a different reason (the class is gone), which is outside this ticket's question. The packaging question for 6.6.0 is historical and not in the pin.
 
 ## Verdict justification
 
-close-obsolete: the feature or code the ticket names was removed, and the search at the pinned head finds no remaining use (cited in the code reading).
-
-Missing for this verdict: The grep result is taken from the B2 reading; it was not re-run in this record.
+close-obsolete: the named class is absent from the whole tree at the pin, and the commit that removed it (f9f5abf21e, SOLR-17600) is an ancestor of the pin. The rubric's close-obsolete check (removed code, empty whole-tree grep) is met.
 
 ## Limits
 
-This record does not establish a reproduction. Commit linkage is by code path where the commit subject does not cite the ticket. It does not post anything to JIRA or GitHub.
+This record does not check the published 6.6.0 artifact contents, does not run a build, and does not post anything to JIRA or GitHub.
