@@ -9,3 +9,4 @@
 - SOLR-10533 | claims/skip-SOLR-10533-vm2.md | pr-needed (changed from keep-open: stored-only check at DocBasedVersionConstraintsProcessorFactory.java:192-199; docValues read path not verified) | solr-10533-draft-pr b40cdcfa52 | JIRA read 2026-10-20T12:30:21Z Open
 - SOLR-9648 | claims/skip-SOLR-9648-vm2.md | keep-open (kept; opt-in UpgradeIndexMergePolicyFactory exists; default-wrap is a design decision) | solr-9648-draft-open ff331b06dd | JIRA read 2026-10-20T12:37:36Z Open
 - SOLR-9645 | claims/skip-SOLR-9645-vm2.md | keep-open (kept; SOLR-9639 commit not in tree, repro not runnable here) | solr-9645-draft-open d5ceecbea4 | JIRA read 2026-10-20T12:42:50Z Open
+- SOLR-9622 | claims/skip-SOLR-9622-vm2.md | keep-open (kept; explain path read; grouped-query run missing; SOLR-14693 commit not in history) | solr-9622-draft-open c16f12aacf | JIRA read 2026-10-20T12:51:20Z Open
