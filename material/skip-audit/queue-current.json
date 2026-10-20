@@ -5263,7 +5263,7 @@
     },
     "verdict": "keep-open",
     "draft_branch": "solr-12884-draft-open",
-    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
+    "evidence_head": "50a3b980f8"
   },
   {
     "key": "SOLR-12871",
