@@ -11,3 +11,5 @@
 Heartbeat: 2026-10-20T08:33:00Z
 
 Heartbeat: 2026-10-20T09:17:12Z (SOLR-18507 benchmark item 1: Phase 2 core jar built at 137e77a4c8; Phase 3 core jar build run build-p3-core-jar; harness next)
+
+Heartbeat: 2026-10-20T09:45:28Z (SOLR-18507 benchmark item 1: harness Bench.java compiled; matrix running detached: /workspace/gates/bench-harness/run-matrix.sh, out/matrix.csv, out/matrix.log; no product changes)
