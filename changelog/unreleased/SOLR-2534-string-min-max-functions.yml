@@ -1,0 +1,10 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >
+  The min and max function queries accept single-valued string fields and compare them lexicographically
+type: added
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-2534
+    url: https://issues.apache.org/jira/browse/SOLR-2534

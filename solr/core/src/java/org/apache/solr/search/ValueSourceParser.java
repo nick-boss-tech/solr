@@ -84,6 +84,7 @@ import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.LateInteractionVectorField;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.schema.StrField;
+import org.apache.solr.schema.StrFieldSource;
 import org.apache.solr.schema.TextField;
 import org.apache.solr.search.facet.AggValueSource;
 import org.apache.solr.search.facet.AvgAgg;
@@ -108,6 +109,7 @@ import org.apache.solr.search.function.EqualFunction;
 import org.apache.solr.search.function.OrdFieldSource;
 import org.apache.solr.search.function.ReverseOrdFieldSource;
 import org.apache.solr.search.function.SolrComparisonBoolFunction;
+import org.apache.solr.search.function.StringMinMaxValueSource;
 import org.apache.solr.search.function.distance.GeoDistValueSourceParser;
 import org.apache.solr.search.function.distance.HaversineFunction;
 import org.apache.solr.search.function.distance.SquaredEuclideanFunction;
@@ -686,8 +688,7 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
         new ValueSourceParser() {
           @Override
           public ValueSource parse(FunctionQParser fp) throws SyntaxError {
-            List<ValueSource> sources = fp.parseValueSourceList();
-            return new MaxFloatFunction(sources.toArray(new ValueSource[0]));
+            return minMaxValueSource(fp, true);
           }
         });
     addParser(
@@ -695,8 +696,7 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
         new ValueSourceParser() {
           @Override
           public ValueSource parse(FunctionQParser fp) throws SyntaxError {
-            List<ValueSource> sources = fp.parseValueSourceList();
-            return new MinFloatFunction(sources.toArray(new ValueSource[0]));
+            return minMaxValueSource(fp, false);
           }
         });
 
@@ -1362,6 +1362,27 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
+  private static ValueSource minMaxValueSource(FunctionQParser fp, boolean max) throws SyntaxError {
+    List<ValueSource> sources = fp.parseValueSourceList();
+    long stringSources = sources.stream().filter(vs -> vs instanceof StrFieldSource).count();
+    if (stringSources == 0) {
+      return max
+          ? new MaxFloatFunction(sources.toArray(new ValueSource[0]))
+          : new MinFloatFunction(sources.toArray(new ValueSource[0]));
+    }
+    if (stringSources != sources.size()) {
+      throw new SyntaxError(
+          "min and max cannot mix string fields with other arguments: " + sources);
+    }
+    for (ValueSource vs : sources) {
+      String field = ((StrFieldSource) vs).getField();
+      if (fp.getReq().getSchema().getField(field).multiValued()) {
+        throw new SyntaxError("min and max do not support the multi-valued field: " + field);
+      }
+    }
+    return new StringMinMaxValueSource(max, sources.toArray(new ValueSource[0]));
+  }
 
   private static TInfo parseTerm(FunctionQParser fp) throws SyntaxError {
     TInfo tinfo = new TInfo();
