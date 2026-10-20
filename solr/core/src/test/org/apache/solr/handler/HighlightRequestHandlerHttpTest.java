@@ -69,13 +69,12 @@ public class HighlightRequestHandlerHttpTest extends SolrTestCaseJ4 {
   }
 
   @Test
-  public void testQueryMethodIsNotRegisteredForV2Handler() throws Exception {
-    String v2Url = solrTestRule.getJetty().getBaseURLV2() + "/cores/" + CORE_NAME + "/highlight";
+  public void testQueryMethodHighlightsV2Route() throws Exception {
+    String v2Url =
+        solrTestRule.getJetty().getBaseURLV2() + "/c/" + CORE_NAME + "/highlight";
     String url = v2Url + "?q=_text_%3Asolr&hl.fl=_text_&wt=json";
 
-    ContentResponse response = sendBodyRequest("QUERY", url);
-
-    assertTrue(response.getContentAsString(), response.getStatus() != 200);
+    assertHighlightResponse(sendBodyRequest("QUERY", url));
   }
 
   @Test

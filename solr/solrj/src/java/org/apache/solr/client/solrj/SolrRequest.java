@@ -63,7 +63,8 @@ public abstract class SolrRequest<T> implements Serializable {
     HEAD,
     POST,
     PUT,
-    DELETE;
+    DELETE,
+    QUERY;
 
     /**
      * Returns the METHOD enum value matching the provided string, or 'null' if no match is found.

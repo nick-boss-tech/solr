@@ -238,6 +238,13 @@ public class HttpSolrCall {
       reason =
           "Set the thread contextClassLoader for all 3rd party dependencies that we cannot control")
   protected void init() throws Exception {
+    // This is the legacy V1 route. QUERY is limited to V2 APIs that declare the method.
+    if ("QUERY".equals(req.getMethod())) {
+      throw new SolrException(
+          SolrException.ErrorCode.BAD_REQUEST,
+          "The QUERY method is supported only by V2 APIs that declare it");
+    }
+
     queryParams = SolrRequestParsers.parseQueryString(req.getQueryString());
 
     // Check for container handlers

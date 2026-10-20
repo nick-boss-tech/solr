@@ -1,5 +1,5 @@
 # See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
-title: Add a request handler for highlighting supplied text without searching the index.
+title: Add text highlighting with opt-in QUERY support on the V2 API.
 type: added
 authors:
   - name: Nick Shanin

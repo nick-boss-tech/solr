@@ -17,7 +17,6 @@
 
 package org.apache.solr.api;
 
-import static org.apache.solr.client.solrj.SolrRequest.SUPPORTED_METHODS;
 import static org.apache.solr.common.params.CommonParams.NAME;
 import static org.apache.solr.common.util.StrUtils.formatString;
 import static org.apache.solr.common.util.ValidatingJsonMap.ENUM_OF;
@@ -35,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.common.SolrErrorWrappingException;
 import org.apache.solr.common.SolrException;
@@ -59,6 +59,11 @@ import org.slf4j.LoggerFactory;
 public class ApiBag {
   private final boolean isCoreSpecific;
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
+  // QUERY can be parsed as a request method, but only V2 API specs that opt in should expose it.
+  static final Set<String> API_METHODS =
+      Stream.concat(SolrRequest.SUPPORTED_METHODS.stream(), Stream.of("QUERY"))
+          .collect(Collectors.toUnmodifiableSet());
 
   private final Map<String, PathTrie<Api>> apis = new ConcurrentHashMap<>();
 
@@ -186,7 +191,7 @@ public class ApiBag {
   private void validateAndRegister(Api api, Map<String, String> nameSubstitutes) {
     ValidatingJsonMap spec = api.getSpec();
     Api introspect = new IntrospectApi(api, isCoreSpecific);
-    List<String> methods = spec.getList("methods", ENUM_OF, SUPPORTED_METHODS);
+    List<String> methods = spec.getList("methods", ENUM_OF, API_METHODS);
     for (String method : methods) {
       PathTrie<Api> registry = apis.get(method);
 
