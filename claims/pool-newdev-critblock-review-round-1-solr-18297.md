@@ -1,7 +1,7 @@
 # Claim: pool-newdev-critblock-review-round-1, unit 2 (SOLR-18297)
 
 - Claimant host: vm3, matching `hosts/vm3.md`.
-- Status: CLAIMED
+- Status: ENDED (duplicate of vm5's claim, claims/pool-newdev-critblock-review-round-1-solr-18297-jetty-12-1-14.md, posted 13:45Z; vm5 holds the pass-1 record. vm3's clean-compile result is in gates/SOLR-18297-review-pass-1-vm3.md.)
 - Job or assignment: `assignments/pool-newdev-critblock-review-round-1.md`, unit 2 (Blocker, SOLR-18297, Upgrade Jetty to v12.1.14).
 - Slice: the whole unit, three review passes, each with its regate, then `receipts/SOLR-18297.md`. Branch `solr-18297-jetty-12-1-14` at 5cdc65747028cefeaf35aad9df23ab1b71661960 (ls-remote at claim time; the table says 5cdc657470).
 - Capability tags used: review, implementation, gate.
