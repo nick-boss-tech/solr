@@ -20,7 +20,7 @@ The assignment's seed reads "PeerSync fingerprint cache". At the pinned revision
 - `solr/core/src/java/org/apache/solr/core/CoreContainer.java`: owns the `IndexFingerprintPool` executor (lines 188 and 454) used for parallel fingerprint work.
 - `solr/core/src/java/org/apache/solr/search/SolrIndexSearcher.java`: listed by grep (the searcher-level fingerprint entry point; lines not reread here).
 - `solr/core/src/java/org/apache/solr/update/IndexFingerprint.java` itself, and `RecoveryStrategy`, `SyncStrategy`, `ShardLeaderElectionContext` (these call the peer-sync path rather than the fingerprint directly; listed by grep in the PeerSync search).
-- Tests: `TestInjection` names fingerprint failure hooks (`injectFailIndexFingerprintRequests`, `injectWrongIndexFingerprint`). SOLR-18507 test classes (`SolrCoreFingerprintCacheTest`, `SolrCoreFingerprintMergeTest`, `SolrIndexFingerprintTest`) exist only on the phase branches, not at this revision.
+- Tests: `TestInjection` names fingerprint failure hooks (`injectFailIndexFingerprintRequests`, `injectWrongIndexFingerprint`). `solr/core/src/test/org/apache/solr/update/SolrIndexFingerprintTest.java` exists at this revision. The SOLR-18507 test classes `SolrCoreFingerprintCacheTest` and `SolrCoreFingerprintMergeTest` are not found at this revision by `git grep`; they are named in the phase-3 gate job.
 
 ## 3. Invariants and contracts
 
