@@ -1,37 +1,37 @@
 # Skip record: SOLR-4610
 
-- Ticket: SOLR-4610, Calling query.toString will print binary values for encoded integer values in terms.. JIRA status as recorded in the B1 reading: Open. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-4610, "Calling query.toString will print binary values for encoded integer values in terms". JIRA status read 2026-10-20T15:43:44Z (UTC): Open, resolution None, updated 2013-03-20.
+- Verdict: keep-open (kept; re-read at the pinned head). The schema-aware helper exists; the deeper fix (typed terms) is a design change.
 - Draft branch: solr-4610-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the B1 reading (reports/2026-10-18-skip-repro/B1-removed-round-1.md, vm3, round 1, pinned head unchanged).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T15:43:44Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Calling query.toString will print binary values for encoded integer values in terms..
+`Query.toString` prints the encoded bytes of numeric terms, because a term does not record its field type. The reporter proposes carrying the type into the term. A 2013 comment points to `QueryParsing.toString(...)`, which takes the schema.
 
-## Code reading
+## Code reading (pinned head)
 
-DebugComponent.java:443 prints bare query.toString(). Schema-aware decoding exists only in QueryParsing.toString(Query, IndexSchema) (QueryParsing.java:195, 211), which callers must opt into (DebugComponent.java:442).
+- `solr/core/src/java/org/apache/solr/search/QueryParsing.java:346`: `toString(Query query, IndexSchema schema)` is the schema-aware printer the comment names.
+- The numeric field types are still in the tree (`solr/core/src/java/org/apache/solr/schema/TrieField.java`, `TrieIntField.java`), so encoded terms still need the schema to print.
+- A plain `Query.toString` call still prints the bytes; the ticket's deeper change (types in terms, or typed setters) was not made.
 
 ## History
 
-- None cited in the B1 reading.
+- evidence.py at the pinned head: no commits naming SOLR-4610.
 
 ## Reproduction attempts
 
-Not attempted. The B1 scope ran no builds or tests.
+Not run. A run would build a numeric term query and print it with `Query.toString` and with `QueryParsing.toString`.
 
 ## Gap analysis
 
-The code reading shows the reported path is still present, but the behavior has not been shown on a build.
+A schema-aware helper answers the practical need. The reporter's deeper fix changes how terms carry types, which is a design change in Lucene-facing code.
 
 ## Verdict justification
 
-keep-open: the code reading does not settle the question alone. The reading found the path but needs a build to show the behavior (for example a test with a specific input).
-
-Missing for this verdict: Reproduction on the pinned head with the input the ticket describes. B1 ran no builds.
+keep-open meets the rubric for an open design question: attempts made are the helper reading and the field-type check; the missing piece is the decision on typed terms. close-answered needs a docs page that answers the question, and none was found here; close-fixed needs a fix commit, which is not named.
 
 ## Limits
 
-This record does not establish a reproduction. Commit linkage is by code path where the commit subject does not cite the ticket. It does not post anything to JIRA or GitHub.
+This record does not run the printers. It does not check the reference guide for the helper.
