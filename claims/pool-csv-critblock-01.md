@@ -6,3 +6,5 @@
 - Basis: upstream reference `c8ab71430f` (apache/main as used for the newdev rounds).
 
 Heartbeat: 2026-10-20T04:00:08Z
+
+Heartbeat: 2026-10-20T04:11:17Z. Partial report at reports/csv-critblock-01.md: 3 rows classified, 22 PENDING.
