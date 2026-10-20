@@ -2,16 +2,16 @@
 
 Status: OPEN
 
-- Branch: `solr-18555-query-client-support`. Head: `0c6aae3162f29a7ae2f62fb226cefdf9c365dd63` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
-- Base: `7c859a4d0eeae897542e21046e059f6fca45a6e8`. Prior gated head: none recorded.
+- Branch: `solr-18555-query-client-support`. Head: `07953eab473f3f05853916f7efb4a42edc1edb0c` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
+- Base: `7c859a4d0eeae897542e21046e059f6fca45a6e8`. Prior gated head: none recorded. The earlier OPEN entry at `0c6aae3162f29a7ae2f62fb226cefdf9c365dd63` was updated before a gate host claimed it.
 - Gate ID: `SOLR-18555-phase-r4-solrj-query`. Claim file: `claims/pool-<host>-gate-SOLR-18555-phase-r4-solrj-query.md`.
 - Intended host: any capable Linux gate host with the Solr reference-guide npm dependencies available.
 - Capability tags: gate, npm.
-- Modules: `:solr:core`, `:solr:solrj-jetty`, and `:solr:solr-ref-guide`.
-- Focused classes: `org.apache.solr.handler.HighlightRequestHandlerTest`, `org.apache.solr.handler.HighlightRequestHandlerHttpTest`, `org.apache.solr.handler.HighlightRequestHandlerCloudHttpTest`, and `org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest`. The SolrJ class includes a direct JDK-client case.
+- Modules: `:solr:core`, `:solr:solrj`, `:solr:solrj-jetty`, and `:solr:solr-ref-guide`.
+- Focused classes: `org.apache.solr.handler.HighlightRequestHandlerTest`, `org.apache.solr.handler.HighlightRequestHandlerHttpTest`, `org.apache.solr.handler.HighlightRequestHandlerCloudHttpTest`, `org.apache.solr.security.TestExternalRoleRuleBasedAuthorizationPlugin`, `org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest`, and `org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest`. The SolrJ HTTP client class includes a direct JDK-client case.
 - Seed: `18555C0FFEE18555`.
-- Diff scope: 6 files, 101 insertions and 10 deletions against `7c859a4d0eeae897542e21046e059f6fca45a6e8`: `SolrRequest.java`, `HttpJdkSolrClient.java`, `HttpJettySolrClient.java`, `HttpSolrClientTestBase.java`, `HttpJettySolrClientTest.java`, and `highlighting.adoc`. The three core handler tests are inherited from the feature branch and run at this exact integrated head.
-- Why: One gate now validates the full feature stack at a single head: highlighting supplied text, the V2-only QUERY route and legacy rejection, QUERY body transmission by both SolrJ HTTP clients, and the guide text. The two parent-head phase-r4 jobs are paused; this replaces the SolrJ-only phase-r4 scope. The existing phase-r3 claim is NEARLY on `7c859a4`; do not edit or transfer that claim. It may finish its already-started guide check independently.
+- Diff scope: 13 files, 199 insertions and 17 deletions against `7c859a4d0eeae897542e21046e059f6fca45a6e8`: `Permission.java`, `RuleBasedAuthorizationPluginBase.java`, `BaseTestRuleBasedAuthorizationPlugin.java`, `HighlightRequestHandlerCloudHttpTest.java`, `rule-based-authorization-plugin.adoc`, `CloudSolrClient.java`, `CloudSolrClientCacheTest.java`, `SolrRequest.java`, `HttpJdkSolrClient.java`, `HttpJettySolrClient.java`, `HttpSolrClientTestBase.java`, `HttpJettySolrClientTest.java`, and `highlighting.adoc`.
+- Why: One gate validates the full feature stack at one head: supplied-text highlighting, the V2-only QUERY route and legacy rejection, body transmission by both SolrJ HTTP clients, GET and QUERY authorization matching, QUERY retries in CloudSolrClient, and both guide updates. The two parent-head phase-r4 jobs are paused. The previous integrated head was still OPEN and unclaimed when this scope was added. The phase-r3 claim is NEARLY on `7c859a4`; do not edit or transfer that claim. It may finish its already-started guide check independently.
 
 ## What to run
 
@@ -19,11 +19,12 @@ Use the host's standard gate runner. Do not run the build tool directly. Check t
 
 - Step 0: changelog check. This branch adds no changelog fragment. If a new fragment appears, record it here and stop.
 - Step 1: tidy. If tidy changes any file, apply the tidy output, record its patch and the tidied tree sha here, and continue from step 2. WORKFLOW.md, Gate repairs.
-- Step 2: Error Prone compile: `:solr:core:compileJava :solr:core:compileTestJava :solr:solrj-jetty:compileJava :solr:solrj-jetty:compileTestJava -Pvalidation.errorprone=true`.
+- Step 2: Error Prone compile: `:solr:core:compileJava :solr:core:compileTestJava :solr:solrj:compileJava :solr:solrj:compileTestJava :solr:solrj-jetty:compileJava :solr:solrj-jetty:compileTestJava -Pvalidation.errorprone=true`.
 - Step 3, proof leg: none requested. Record that in the receipt.
-- Step 4a, core focused run: `:solr:core:cleanTest`, then `:solr:core:test --tests org.apache.solr.handler.HighlightRequestHandlerTest --tests org.apache.solr.handler.HighlightRequestHandlerHttpTest --tests org.apache.solr.handler.HighlightRequestHandlerCloudHttpTest -Ptests.seed=18555C0FFEE18555`. Read the fresh JUnit XML immediately after this run, before running another task.
-- Step 4b, SolrJ focused run: `:solr:solrj-jetty:cleanTest`, then `:solr:solrj-jetty:test --tests org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest -Ptests.seed=18555C0FFEE18555`. Read the fresh JUnit XML immediately after this run.
-- Step 5, module checks: `:solr:core:check -x test`, `:solr:solrj-jetty:check -x test`, and `:solr:solr-ref-guide:check -x test`. The guide check must include `checkSiteLinks` at this branch head.
+- Step 4a, core focused run: `:solr:core:cleanTest`, then `:solr:core:test --tests org.apache.solr.handler.HighlightRequestHandlerTest --tests org.apache.solr.handler.HighlightRequestHandlerHttpTest --tests org.apache.solr.handler.HighlightRequestHandlerCloudHttpTest --tests org.apache.solr.security.TestExternalRoleRuleBasedAuthorizationPlugin -Ptests.seed=18555C0FFEE18555`. Read the fresh JUnit XML immediately after this run, before running another task.
+- Step 4b, SolrJ focused run: `:solr:solrj:cleanTest`, then `:solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest -Ptests.seed=18555C0FFEE18555`. Read the fresh JUnit XML immediately after this run.
+- Step 4c, SolrJ HTTP focused run: `:solr:solrj-jetty:cleanTest`, then `:solr:solrj-jetty:test --tests org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest -Ptests.seed=18555C0FFEE18555`. Read the fresh JUnit XML immediately after this run.
+- Step 5, module checks: `:solr:core:check -x test`, `:solr:solrj:check -x test`, `:solr:solrj-jetty:check -x test`, and `:solr:solr-ref-guide:check -x test`. The guide check must include `checkSiteLinks` at this branch head.
 
 Failures follow the rows below and WORKFLOW.md, Gate repairs. A failed retry hands the job back.
 
@@ -58,8 +59,9 @@ If any step cannot be verified, record it here and stop.
 - [ ] step 2 Error Prone compile
 - [ ] step 3 proof leg
 - [ ] step 4a core focused tests counted from fresh XML
-- [ ] step 4b SolrJ focused test counted from fresh XML
-- [ ] step 5 core, SolrJ, and reference-guide module checks
+- [ ] step 4b CloudSolrClient focused test counted from fresh XML
+- [ ] step 4c SolrJ HTTP focused test counted from fresh XML
+- [ ] step 5 core, SolrJ, SolrJ HTTP, and reference-guide module checks
 - [ ] receipt written
 - [ ] job DONE, claim DONE
 
