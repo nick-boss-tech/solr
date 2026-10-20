@@ -10,6 +10,8 @@ Status: OPEN
 - Diff scope against `<base sha>`: <files, with insertions and deletions>. Anything else in the tree is out of scope.
 - Why: <one paragraph: what changed since the last receipt, and why this gate is owed>.
 
+Links: Ticket or parent: <ticket>. Category: <one of the 14 in pool/work-map.md>. Siblings: <branches on the same surface, or none known>. Supersedes: <gate job or head, or none>.
+
 ## What to run
 
 Use the host's standard gate runner. Do not run the build tool directly. Check the worktree out at the head first.
