@@ -7726,7 +7726,7 @@
     },
     "verdict": "close-obsolete",
     "draft_branch": "solr-10959-draft-close",
-    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
+    "evidence_head": "255f1168d2"
   },
   {
     "key": "SOLR-10952",
