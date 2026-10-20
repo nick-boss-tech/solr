@@ -1,0 +1,1 @@
+- SOLR-9400 | claims/skip-SOLR-9400-vm2.md | close-obsolete (confirmed; Data Import Handler and cache absent under solr/) | solr-9400-draft-close 480c45a2f0 | JIRA read 2026-10-20T14:25:43Z Open
