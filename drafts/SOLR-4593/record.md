@@ -1,35 +1,36 @@
 # Skip record: SOLR-4593
 
-- Ticket: SOLR-4593, Test failure in CollectionsAPIDistributedZkTest:  collection already exists:. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-4593, "Test failure in CollectionsAPIDistributedZkTest: collection already exists". JIRA status read 2026-10-20T15:50:45Z (UTC): Open, resolution None, fix versions 4.9 and 6.0 set, updated 2016-05-09.
+- Verdict: keep-open (kept; re-read at the pinned head). The fix-version field is not a commit, and the 2013 failure needs a seeded run to confirm.
 - Draft branch: solr-4593-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Source: A3 other round 1 (reports/2026-10-18-skip-repro/A3-other-round-1.md). Checked here from that report; the runs were not repeated.
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T15:50:45Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Test failure in CollectionsAPIDistributedZkTest:  collection already exists:. Test class from the report: org.apache.solr.cloud.api.collections.CollectionsAPIDistributedZkTest.
+One Jenkins run of `CollectionsAPIDistributedZkTest.testDistribSearch` failed with "collection already exists" for a new collection name. The run also had a JVM crash. The 2013 seed did not reproduce for the commenter.
 
-## Code reading
+## Code reading (pinned head)
 
-Not read for this record; the verdict rests on the run data and the grep result given below.
+- `solr/core/src/test/org/apache/solr/cloud/api/collections/CollectionsAPIDistributedZkTest.java`: the test class is present.
+- `solr/core/src/java/org/apache/solr/cloud/api/collections/CreateCollectionCmd.java:129`: the create path refuses an existing collection name with BAD_REQUEST. That is the error the ticket reports, and it is still present.
 
 ## History
 
-No commit history was used for this record.
+- evidence.py at the pinned head: no commits naming SOLR-4593.
 
 ## Reproduction attempts
 
-Command: :solr:core:test --rerun --tests org.apache.solr.cloud.api.collections.CollectionsAPIDistributedZkTest --rerun --tests org.apache.solr.cloud.api.collections.CollectionsAPIDistributedZkTest (seed printed by Gradle: 4292A65D59EE06DE). Result: build SUCCESSFUL. Counts tests/failures/errors/skipped: 17 / 0 / 0 / 0. Rerun: not run. Conclusive: no, because the test is flaky and one passing run cannot rule out the failure.
+Not run. The failure is intermittent and the seed did not reproduce in 2013; a seeded run on this head is the check.
 
 ## Gap analysis
 
-One passing run does not settle a flaky test. Repeated runs at several seeds would be needed.
+The error path is intended (creating an existing collection is refused). The question is whether the test can reach it by a race in the test setup, which a seeded run would show. The fix-version field does not name the change.
 
 ## Verdict justification
 
-keep-open: a single run passed, which is not a reproduction of a flaky test. A passing run does not show the problem is gone.
+keep-open meets the rubric: attempts made are the test-presence check and the create-path reading; the missing piece is a seeded run. close-fixed is not supported without a commit; close-obsolete is not supported since the test and path are present.
 
 ## Limits
 
-This record does not establish a reproduction. It does not post anything to JIRA or GitHub.
+This record does not run the test. It does not establish whether a race exists in the test setup.
