@@ -12,3 +12,8 @@
 Heartbeat: 2026-10-20T04:50:57Z
 
 Decision (ladder rung 3): `gates/SOLR-18555-phase-r2.md` step 1 said stop on tidy. WORKFLOW.md Gate repairs and the owner's 2026-10-20 direction say a tidy change is a repair and the gate reruns once. The job's step 1 text now says that.
+
+Step 1 result (2026-10-20T04:54:14Z): tidy repair applied on the gate head. Repair commit 519ca48ad568e4e5175b6b814479a8623eebc064 on solr-18555-submit (fast-forward from 59a44dbaf10), one file: HighlightRequestHandlerHttpTest.java, 1 insertion and 2 deletions (line join). Tidy log: gates/logs/vm2/18555/gate-r2/repair-tidy-59a44dbaf1.log, rc=0.
+Steps 2, 4 and 5 running as job r2-retry-519ca48 (log dir /workspace/gates/logs/vm2/18555/gate-r2/... under vm2 gate logs). Step 3 proof leg runs after that job on /workspace/gates/solr-18555-r2-proof.
+
+Heartbeat: 2026-10-20T04:54:14Z
