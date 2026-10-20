@@ -1,9 +1,1 @@
-The code this ticket describes was removed from Solr main, and no remaining use was found at 498a09aea9.
-
-What we checked:
-
-- Removal commit cb6dd31eca (2025-09-27) is an ancestor of main.
-
-If you still see this:
-
-- Reopen with the Solr version and steps, and say which of the commits named here does not cover it.
+We re-checked this ticket at fork commit 498a09aea97. The default transient cache that logs "Allocating transient cache" no longer exists: SOLR-17932 (cb6dd31eca) removed the deprecated transient cores feature, including TransientSolrCoreCacheDefault. Nothing at this commit allocates that cache at startup, so the behavior the ticket describes cannot occur. We are treating the ticket as obsolete rather than fixed.
