@@ -23,3 +23,13 @@
 - SOLR-9468 | claims/skip-SOLR-9468-vm2.md | keep-open (changed from close-fixed: no fix commit named; generic branch still HTTP 200; backup run missing) | solr-9468-draft-open 3d9db25b0a | JIRA read 2026-10-20T14:00:51Z Open
 - SOLR-9428 | claims/skip-SOLR-9428-vm2.md | keep-open (kept; config read has no retry; seeded run missing) | solr-9428-draft-open 95a53f4b6b | JIRA read 2026-10-20T14:05:57Z Open
 - SOLR-9427 | claims/skip-SOLR-9427-vm2.md | pr-needed (changed from keep-open: whole-second rounding in the throttled timing assertion; test-only fix) | solr-9427-draft-pr 6028ddeb42 | JIRA read 2026-10-20T14:11:23Z Open
+- SOLR-9426 | claims/skip-SOLR-9426-vm2.md | keep-open (kept; test present; 2016 explanations read; seeded run missing) | solr-9426-draft-open a2a6f25b2b | JIRA read 2026-10-20T14:16:19Z Open
+
+## Batch 11 summary (vm2, closed 2026-10-20T14:16:28Z)
+
+- 25 of 25 items redone at pinned head 498a09aea97aac86c2cc7ac114113b946d249942. Each has a claim `claims/skip-<KEY>-vm2.md` with DONE and a draft record on its branch.
+- Verdicts changed from the recorded verdict (8): SOLR-10706 (keep-open to close-cannot-reproduce; a JDK run shows SolrJ encodes a space as +), SOLR-10650 (close-fixed to close-answered; system-requirements.adoc:62), SOLR-10601 (keep-open to close-fixed; fix 17563ce81f is an ancestor and the line is present), SOLR-10592 (keep-open to close-obsolete; the named test method is absent), SOLR-10533 (keep-open to pr-needed; stored-only check at DocBasedVersionConstraintsProcessorFactory.java:192-199), SOLR-9593 (keep-open to close-obsolete; InternalHttpClient absent), SOLR-9468 (close-fixed to keep-open; no fix commit, generic branch still HTTP 200), SOLR-9427 (keep-open to pr-needed; whole-second rounding in the throttled-time assertion).
+- Verdicts kept (17): SOLR-10604, SOLR-10597, SOLR-10534, SOLR-9648, SOLR-9645, SOLR-9622, SOLR-9599, SOLR-9594, SOLR-9578, SOLR-9573, SOLR-9571, SOLR-9550, SOLR-9514, SOLR-9492, SOLR-9477, SOLR-9428, SOLR-9426.
+- Finding for the auditor: the recorded close-fixed verdicts for SOLR-10650 and SOLR-9468 had no fix commit, and SOLR-10601's close-fixed was right only after its fix commit was found. Re-run the greps recorded in each claim before accepting the close verdicts in this batch.
+- Mistake recorded: a keep-open record for SOLR-9468 was first pushed to the close branch; that commit was reverted there (43d419502c) and the record is on solr-9468-draft-open. A second draft push for SOLR-10601 was rejected (the branch already had an older record) and was rebuilt on top of it.
+- Batch order: the list in the assignment file is authoritative (it is 1 SOLR-10706 through 25 SOLR-9426).

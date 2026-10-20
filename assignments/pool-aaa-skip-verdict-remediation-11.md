@@ -1,6 +1,6 @@
 # Pool assignment: skip verdict remediation, batch 11
 
-Status: CLAIMED (vm2, claims/pool-aaa-skip-verdict-remediation-11.md, 2026-10-20T11:37:17Z)
+Status: DONE (vm2, claims/pool-aaa-skip-verdict-remediation-11.md, closed 2026-10-20T14:16:28Z)
 
 - Capability tags: review, draft.
 - Intended host: any pool Linux host. Claim under `claims/` before starting (WORKFLOW.md).

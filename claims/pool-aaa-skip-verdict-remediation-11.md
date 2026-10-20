@@ -14,3 +14,5 @@ Heartbeat: 2026-10-20T12:21:51Z (batch 11 items 1 to 6 done; item 7 SOLR-10534 n
 Heartbeat: 2026-10-20T13:01:00Z (batch 11 items 1 to 12 done; item 13 SOLR-9594 next)
 
 Heartbeat: 2026-10-20T13:56:04Z (batch 11 items 1 to 21 done; item 22 SOLR-9468 next)
+
+DONE: 2026-10-20T14:16:28Z. Deliverable: reports/skip-verdict-remediation-11.md (25 item lines and the summary); claims/skip-<KEY>-vm2.md for each of the 25 items; drafts on each branch named in the report; material/skip-audit/queue-current.json (verdicts set for all 25).
