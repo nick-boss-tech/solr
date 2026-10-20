@@ -17,3 +17,4 @@
 - SOLR-9573 | claims/skip-SOLR-9573-vm2.md | keep-open (kept; DebugComponent debug split explicit; multi-shard run missing) | solr-9573-draft-open fef42bebf9 | JIRA read 2026-10-20T13:24:34Z Open
 - SOLR-9571 | claims/skip-SOLR-9571-vm2.md | keep-open (kept; message changed to processing limits; client-side partial response not implemented, design open) | solr-9571-draft-open bda7fd9a1a | JIRA read 2026-10-20T13:31:00Z Open
 - SOLR-9550 | claims/skip-SOLR-9550-vm2.md | keep-open (kept; InnerJoinStream merge join has no order check; validation design open; no run) | solr-9550-draft-open ccee000b9d | JIRA read 2026-10-20T13:36:24Z Open
+- SOLR-9514 | claims/skip-SOLR-9514-vm2.md | keep-open (kept; command live and documented; deprecation is an owner-level API decision) | solr-9514-draft-open a1f813d8cc | JIRA read 2026-10-20T13:42:10Z Open
