@@ -1,6 +1,6 @@
 # Gate job: SOLR-18507 (Phase 3 persisted gross fingerprint metadata)
 
-Status: OPEN
+Status: DONE (vm3, 2026-10-20, green at ad706640ff; see receipts/SOLR-18507.md)
 
 - Branch: `solr-18507-phase-3-submit`. Head: `35f6e044dda8c15115bccce6b7c965371a97ad30` (fork tip, confirmed by ls-remote on 2026-10-19). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `137e77a4c8baa2684ea758edb6bbaa6bda7b7de7`. Prior gated head: none recorded.

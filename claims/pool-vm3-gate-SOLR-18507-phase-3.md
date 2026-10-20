@@ -1,7 +1,7 @@
 # Claim: pool-vm3-gate-SOLR-18507-phase-3
 
 - Claimant host: vm3, matching `hosts/vm3.md`.
-- Status: CLAIMED. Gate job `gates/SOLR-18507-phase-3.md`, head `35f6e044dda8c15115bccce6b7c965371a97ad30` (tip confirmed by ls-remote at claim time).
+- Status: DONE. Gate green at `ad706640ff`, receipt `receipts/SOLR-18507.md` (phase 3 section). Gate job `gates/SOLR-18507-phase-3.md`, head `35f6e044dda8c15115bccce6b7c965371a97ad30` (tip confirmed by ls-remote at claim time).
 - Job or assignment: `gates/SOLR-18507-phase-3.md`.
 - Slice: the whole gate.
 - Capability tags used: gate.
@@ -10,3 +10,7 @@
 - Idempotency key: SOLR-18507-phase-3@35f6e044dd.
 
 Heartbeat: 2026-10-20T11:00:00Z
+
+Result: 2026-10-20T13:00:00Z: attempt 1 failed one test after the tidy repair; one repair commit (`ad706640ff`); attempt 2 green.
+
+DONE: 2026-10-20T13:00:00Z. Deliverables: `receipts/SOLR-18507.md` (phase 3 section), `gates/SOLR-18507-phase-3.md` Status DONE, branch `solr-18507-phase-3-submit` at `ad706640ff`.
