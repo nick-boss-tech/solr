@@ -1,7 +1,7 @@
 # Claim: SOLR-18214 implementation, round 2 (owner decision row 2, option A)
 
 - Claimant host: vm3, matching `hosts/vm3.md`.
-- Status: CLAIMED
+- Status: DONE
 - Supersedes: `claims/pool-decisions-impl-SOLR-18214.md` (DONE, stopped at verification). That claim is terminal and is not edited.
 - Job or assignment: `assignments/pool-vm3-owner-decisions-round-1.md` row 2 (answer A), and `pool/decision-map.md` standing answer on "a decision is needed".
 - Slice: the whole ticket, on a new branch `solr-18214-empty-configset` from c8ab71430f.
@@ -31,3 +31,5 @@ Heartbeat: 2026-10-20T04:43:43Z
 - Rung used: 4 (choice between defensible behaviors, decided from rung 3 intent and the probe). The generated files are the minimum that loads a core. The empty configset of answer A is kept as the base; v1 is unchanged.
 - Implementation on `solr-18214-empty-configset` from c8ab71430f (uncommitted at this record; committed after gate): `CloneConfigsetRequestBody.baseConfigSet` drops the `_default` default; `CloneConfigSet` passes `minimalConfigSet=true` when the base is omitted and checks the base only when given; `ConfigSetCmds.createConfigSet` uploads the generated files instead of copying a base and skips base-only checks and property merge for the minimal path; new test `TestCloneConfigSetWithoutBase` (v2 POST /configsets with name only, collection created and queried); changelog `changelog/unreleased/SOLR-18214.yml`.
 - Gate: /workspace/tools/gate-solr-18214.sh, logs gates/logs/vm3/solr-18214/ (step 0 changelog, tidy, compile with Error Prone, focused test `TestCloneConfigSetWithoutBase` and `TestConfigSetsAPI` seed 18214A002, check). Receipt to follow in receipts/SOLR-18214.md.
+
+DONE: 2026-10-20T06:14:36Z. Deliverables: branch solr-18214-empty-configset at c00cacddf6 (pushed; PR not opened, owner decides), receipts/SOLR-18214.md (GATE GREEN), gate logs /workspace/gates/logs/vm3/solr-18214/, probe logs /workspace/gates/logs/vm3/solr-18214-probe-minimal/.
