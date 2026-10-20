@@ -1,0 +1,52 @@
+# The work map: categories, parents, and linkages
+
+Owner direction, 2026-10-19: our branches, PRs, and tickets are one body of work, not a pile. Every piece of work carries four links, recorded in its receipt or draft: its ticket (or its parent, when it has no ticket of its own), its category from the list below, its siblings (other work touching the same code surface), and what it supersedes or is superseded by. An agent reads the category entry and the sibling records before writing code in an area; that reading is the bootstrap, and it is not optional. The worked example is the Update batch: the update-processing PRs were reviewable as a set because they shared one category, one vocabulary, and one reading of the module.
+
+## The linkage rules
+
+- A branch with no ticket number in its name is not orphaned work; it is tied to its parent in the table below, and new unnumbered branches are added to that table in the same push that creates them.
+- Before editing a file, check the category's sibling work for open branches touching the same surface. Two of our branches changing the same class is a coordination fact, recorded in both records, never a surprise at rebase time.
+- A dependency between two pieces of work (one rebases onto the other, one opens only after the other merges) is written in both records, in the same words.
+- Tickets that do not exist yet live in `pool/tickets-to-open.md`, each with its parent work and the event that triggers filing. Nothing is filed early: the standing rule is that a follow-up ticket is filed after its parent PR merges, unless a maintainer or the owner directs otherwise.
+
+## Branches with no ticket number, tied to their parents
+
+Census 2026-10-19: 1,567 branches on the fork, 18 with no digits in the name (plus `solr-874-submit` and `ci/874-dismax-dangling`, which carry the three-digit SOLR-874). Infrastructure branches (coordination, pr-prepare and its archive, main, gradle-queue, code-review, the two assignment-* review branches) are the pool's own machinery, not product work.
+
+| Branch | Parent | Notes |
+|---|---|---|
+| `mergeids-skipped-shard-totals` | SOLR-18539 (filed 2026-10-12 from the side finding) | Working branch for the mergeIds fix; PR #5115 carries the narrowed head. |
+| `combinedquerycomponent-merge-totals` | SOLR-18541 (filed 2026-10-12) | Pre-ticket working branch; the ticket-named successor is `solr-18541-combined-query-merge-totals`, PR #5117. |
+| `gradlew-msys-double-conversion` | SOLR-18540 (filed 2026-10-12) | The fix branch itself; final verification is the owner's own Windows run. |
+| `consistency-v1-core-backup-permission` | `assignments/pool-consistency-docs-round-1.md` item 2 family | No ticket by design; the vehicle is the owner's call. |
+| `consistency-v2-list-backups-permission` | `assignments/pool-consistency-docs-round-1.md` | Same round, same standing. |
+| `hardening-configset-delete-containment` | `assignments/pool-consistency-docs-round-1.md` | Same round, same standing. |
+| `docs-streaming-allowlist-note` | `assignments/pool-consistency-docs-round-1.md` | Same round; its docs build is the blocked item. |
+| `solr-ioctx-audit` | Audit working branch | Parent record to be confirmed in the linkage pass. |
+| `solr-slice-order` | Audit working branch | Parent record to be confirmed in the linkage pass. |
+| `test-sleep-audit-batch-1` | The sleeps-to-latches work family (PR #5106) | Audit working branch; confirm the exact parent in the linkage pass. |
+
+## Categories
+
+Each entry names the code area, where it lives in the tree, what to read first, and the surfaces siblings collide on. The linkage pass (the round 1 assignment) fills each category with its branch, PR, and ticket table from the receipts and drafts.
+
+1. **Update processing and atomic updates.** `solr/core`, the update processor chain and `DistributedUpdateProcessor`. Read first: the chain factory, the processor you are touching, and its test class. Collision surface: the chain wiring and the shared test helpers. The original 29-issue batch lives here.
+2. **Search and query components.** `solr/core`, `org.apache.solr.handler.component` and the query parsers. Read first: `QueryComponent` and the component you are touching. Collision surface: `QueryComponent` itself (SOLR-18539 and SOLR-18541 both land here and must be read together), response builders.
+3. **Highlighting.** `solr/core`, `org.apache.solr.highlight` and the search handler's highlight path. Parent example: SOLR-18555, whose handler, SolrJ, and ref-guide pieces are one item in three modules.
+4. **SolrJ and clients.** `solr/solrj`. Read first: the client class and its cache and timeout handling. Collision surface: `SolrClientCache` and its core-side subclass; check the whole tree before changing a field's visibility.
+5. **Replication, backup, and restore.** `solr/core`, `org.apache.solr.handler` replication and the V2 backup APIs. The consistency round's permission items live here; so does the IndexFetcher work around SOLR-18551.
+6. **Configsets and the filestore.** `solr/core`, configset service and filestore code. The containment hardening branch lives here.
+7. **Permissions and security declarations.** The V1 and V2 API permission annotations across core. Findings from the private review track never enter this map; only the neutral consistency items the owner released to the pool appear, under their own categories.
+8. **Streaming expressions.** `solr/modules/streaming` (solrj streaming) and the `/stream` handler. The allow-list documentation note lives here.
+9. **Suggester, spellcheck, and language detection.** `solr/modules/langid` and the suggester components in core. Known dependency edge: SOLR-9637 follows SOLR-17393 and rebases onto it after 17393 lands; the SOLR-4841 follow-up in the tickets-to-open registry lives here.
+10. **Core admin and cores.** `solr/core`, `org.apache.solr.core` and the core admin handler. PeerSync and the fingerprint cache (SOLR-18507) live here.
+11. **SolrCloud and ZooKeeper.** `solr/core`, `org.apache.solr.cloud`. Recovery and overseer work; the slowest tests in the tree, so gates here are planned, not squeezed in.
+12. **Build, scripts, and release tooling.** `build.gradle` family, `dev-tools`, `solr/bin`, the gradlew scripts. SOLR-18540 lives here, and so does the Changes.html removal pair: PR #5180 (SOLR-18119) supersedes PR #5061, which closes when the owner posts the ticket comment.
+13. **Test quality.** Flaky tests, sleeps-to-latches conversions (PR #5106 family), and test hygiene across every module. A test-quality branch names the production category it serves as a secondary link.
+14. **Reference guide and docs.** `solr/solr-ref-guide`. Docs pieces of a code item stay in that item's category as a secondary link; a docs-only item lives here.
+
+## Using the map
+
+- A claim on new work states its category and its siblings in the claim's first lines.
+- A receipt or draft that lacks the four links is incomplete; the linkage pass completes them from the records, and new records carry them from the start.
+- When a category's table shows two open branches on one surface, the later claimant reads the earlier branch before writing code, and says so in its claim.
