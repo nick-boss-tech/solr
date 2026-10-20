@@ -1,37 +1,37 @@
 # Skip record: SOLR-4669
 
-- Ticket: SOLR-4669, conf file replication can cause new index to be loaded before new core (with new configs) is loaded.. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-4669, "conf file replication can cause new index to be loaded before new core (with new configs) is loaded". JIRA status read 2026-10-20T15:20:35Z (UTC): Open, resolution None, updated 2018-01-10. Linked: SOLR-4629 (Closed).
+- Verdict: keep-open (kept; re-read at the pinned head). The window the ticket describes is present in the install order, and the fix changes replication ordering, which is a design decision.
 - Draft branch: solr-4669-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-05, audit verdict confirmed-skip).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T15:20:35Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: conf file replication can cause new index to be loaded before new core (with new configs) is loaded.. Skip note: replication ordering of index vs conf, design.
+When replication sees both changed index files and changed configuration, the index is installed and used with the old configuration until the core reloads with the new configuration. A 2014 comment says the window is small in practice.
 
-## Code reading
+## Code reading (pinned head)
 
-Taken from the audit evidence, not re-read at the pinned head: audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: design decision / by design / needs maintainer call. Reason holds: replication ordering of index vs conf, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it.
+- `solr/core/src/java/org/apache/solr/handler/IndexFetcher.java:691-696`: when conf files changed, `reloadCore = true` and the conf files are downloaded.
+- Lines 696-726: the index is installed next (`modifyIndexProps` or `moveIndexFiles`), and the log line "Configuration files are modified, core will be reloaded" follows.
+- Lines 740-741: `reloadCore()` runs after the index is installed and the index writer is reopened. So the window in the ticket is in the code order.
 
 ## History
 
-No commit history was used for this record.
+- evidence.py at the pinned head: no commits naming SOLR-4669.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. A run would change an index and a config on a leader, and sample the follower's searches during the install to see which config answers.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The order is index first, reload second. Changing it (install configs before the index, or reload before the index install) is a replication ordering change, with effects on the reload path that were not traced. The window's effect is the open question.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric: attempts made are the reading of the install order (IndexFetcher.java:691-741); the missing pieces are the window run and the design decision on ordering. close-fixed and close-obsolete are not supported: the order is present. pr-needed is not chosen because the ordering change is a design decision.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not measure the window. It does not trace the reload effects.
