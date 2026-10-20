@@ -3,3 +3,4 @@
 - SOLR-9390 | claims/skip-SOLR-9390-vm2.md | keep-open (kept; test present, directToLeaders gone; seeded run missing) | solr-9390-draft-open 34692be3c5 | JIRA read 2026-10-20T14:37:53Z Open
 - SOLR-9369 | claims/skip-SOLR-9369-vm2.md | keep-open (kept; sync check is checksum-based; removal commit not named) | solr-9369-draft-open fd288281e6 | JIRA read 2026-10-20T14:42:39Z Open
 - SOLR-9366 | claims/skip-SOLR-9366-vm2.md | keep-open (changed from close-obsolete: LIR name absent but recovery-by-term step present; query routing not traced) | solr-9366-draft-open dba06c67ff | JIRA read 2026-10-20T14:53:41Z Open
+- SOLR-9361 | claims/skip-SOLR-9361-vm2.md | keep-open (kept; onlyIfDown DOWN check read; state-model design open; crash run missing) | solr-9361-draft-open a63432d25b | JIRA read 2026-10-20T14:59:22Z Open
