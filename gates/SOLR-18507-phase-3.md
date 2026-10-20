@@ -7,9 +7,9 @@ Status: OPEN
 - Gate ID: `SOLR-18507-phase-3`. Claim file: `claims/pool-<host>-gate-SOLR-18507-phase-3.md`.
 - Intended host: any capable Linux host. WORKFLOW.md lets any capable Linux host claim it if that host is busy.
 - Capability tags: gate.
-- Module: `:solr:core`. Focused class: `org.apache.solr.core.SolrCoreFingerprintMergeTest`. Seed: `18507A003`.
+- Module: `:solr:core`. Focused classes: `org.apache.solr.core.SolrCoreFingerprintCacheTest`, `org.apache.solr.core.SolrCoreFingerprintMergeTest`, and `org.apache.solr.update.SolrIndexFingerprintTest`. Seed: `18507A003`.
 - Diff scope: 9 files: changelog/unreleased/SOLR-18507-3.yml (8 insertions); solr/core/src/java/org/apache/solr/core/SchemaCodecFactory.java (21 insertions, 2 deletions); solr/core/src/java/org/apache/solr/core/SolrCore.java (17 insertions, 3 deletions); solr/core/src/java/org/apache/solr/update/IndexFingerprint.java (143 insertions); solr/core/src/java/org/apache/solr/update/IndexFingerprintDocValuesFormat.java (101 insertions); solr/core/src/test-files/solr/collection1/conf/schema-fingerprint-docvaluesformat.xml (35 insertions); solr/core/src/test/org/apache/solr/core/SolrCoreFingerprintCacheTest.java (266 insertions, 2 deletions); solr/core/src/test/org/apache/solr/core/SolrCoreFingerprintMergeTest.java (145 insertions); solr/core/src/test/org/apache/solr/update/SolrIndexFingerprintTest.java (25 insertions, 2 deletions). Total 761 insertions, 9 deletions.
-- Why: No receipt covers this head. Phase 3 persists gross summaries in SegmentInfo, validates schema and DocValues generation, and falls back to scans for invalid metadata. It stacks on the green Phase 2 head and needs an independent gate result for release.
+- Why: No receipt covers this head. Phase 3 persists gross summaries in SegmentInfo, validates schema and DocValues generation, and falls back to scans for invalid metadata. Run the cache, merge, and fingerprint test classes changed by this phase; the module check excludes tests. The restart, mixed-version, crash, and performance evidence in the implementation plan remains separate follow-up before claiming the optimization is ready.
 
 ## What to run
 
@@ -19,7 +19,7 @@ Use the host's standard gate runner. Do not run the build tool directly. Check t
 - Step 1: tidy. If tidy changes any file, apply the tidy output, record its patch and the tidied tree sha in this job, and continue from step 2. WORKFLOW.md, Gate repairs.
 - Step 2: Error Prone compile: `:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true`.
 - Step 3, proof leg: none requested. Record that in the receipt.
-- Step 4, focused head run: `:solr:core:cleanTest` first, then `:solr:core:test --tests org.apache.solr.core.SolrCoreFingerprintMergeTest -Ptests.seed=18507A003`. Count from the fresh JUnit XML. Nothing else runs on the worktree between the test run and the XML read.
+- Step 4, focused head run: `:solr:core:cleanTest` first, then `:solr:core:test --tests org.apache.solr.core.SolrCoreFingerprintCacheTest --tests org.apache.solr.core.SolrCoreFingerprintMergeTest --tests org.apache.solr.update.SolrIndexFingerprintTest -Ptests.seed=18507A003`. Count from the fresh JUnit XML. Nothing else runs on the worktree between the test run and the XML read.
 - Step 5: module check `:solr:core:check -x test`.
 
 Failures follow the rows below and WORKFLOW.md, Gate repairs. A failed retry hands the job back.

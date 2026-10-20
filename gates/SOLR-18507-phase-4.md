@@ -2,14 +2,14 @@
 
 Status: OPEN
 
-- Branch: `solr-18507-phase-4-submit`. Head: `7d83f3ed62b9561e0e36d5a2932874b03fa1f5c4` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
+- Branch: `solr-18507-phase-4-submit`. Head: `f50c2271a32f25eb24ced4276516beb858f3b97e` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `35f6e044dda8c15115bccce6b7c965371a97ad30`. Prior gated head: none recorded.
 - Gate ID: `SOLR-18507-phase-4`. Claim file: `claims/pool-<host>-gate-SOLR-18507-phase-4.md`.
 - Intended host: any capable Linux host. WORKFLOW.md lets any capable Linux host claim it if that host is busy.
 - Capability tags: gate.
 - Module: `:solr:core`. Focused class: `org.apache.solr.core.SolrCoreFingerprintCacheTest`. Seed: `18507A004`.
-- Diff scope: 4 files: changelog/unreleased/SOLR-18507-4.yml (8 additions); solr/core/src/java/org/apache/solr/core/SolrCore.java (48 additions, 6 deletions); solr/core/src/java/org/apache/solr/update/IndexFingerprint.java (101 additions); solr/core/src/test/org/apache/solr/core/SolrCoreFingerprintCacheTest.java (153 additions, 1 deletion); total 310 additions, 7 deletions.
-- Why: Phase 4 adds a bounded per-segment live fingerprint delta cache that subtracts newly deleted versions and falls back when a maximum is removed, a document is restored, or the DocValues generation changes. The focused test compares sequential deletion results with an uncached scan and checks maximum deletion fallback, restored-document rejection, and DocValues invalidation. The Phase 3 performance benchmark remains pending, so this work makes no speedup claim.
+- Diff scope: 4 files: changelog/unreleased/SOLR-18507-4.yml (8 additions); solr/core/src/java/org/apache/solr/core/SolrCore.java (48 additions, 6 deletions); solr/core/src/java/org/apache/solr/update/IndexFingerprint.java (101 additions); solr/core/src/test/org/apache/solr/core/SolrCoreFingerprintCacheTest.java (222 additions, 2 deletions); total 379 additions, 8 deletions.
+- Why: Phase 4 adds a bounded per-segment live fingerprint delta cache that subtracts newly deleted versions and falls back when a maximum is removed, a document is restored, the deletion snapshot exceeds its limit, or the DocValues generation changes. The focused test compares results with an uncached scan and covers sequential deletes, maximum deletion, restored-document rejection, over-limit fallback, and generation invalidation after a delta snapshot is populated. The Phase 3 performance benchmark remains pending, so this work makes no speedup claim.
 
 ## What to run
 
