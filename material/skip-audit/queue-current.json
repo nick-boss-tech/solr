@@ -6418,8 +6418,8 @@
       "round": "audit-3",
       "evidence": "test-infra only: MockAuthorizationPlugin behavior, no product defect."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-11827-draft-open",
+    "verdict": "pr-needed",
+    "draft_branch": "solr-11827-draft-pr",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
