@@ -1,7 +1,7 @@
 # Claim: SOLR-18507 gate, phase 4, new gate job at head 807f9d42db (vm3)
 
 - Claimant host: vm3, matching `hosts/vm3.md`.
-- Status: CLAIMED
+- Status: ENDED (see the ENDED line at the foot of this claim)
 - Supersedes: `claims/pool-vm3-gate-SOLR-18507-phase-4.md` (HANDED BACK at attempt 2, compile error in repair 13f2c6d045). That claim is not reopened; this is a new gate job after implementation, as WORKFLOW.md "Gate repairs and hand-back" says.
 - Job or assignment: `gates/SOLR-18507-phase-4.md`.
 - Slice: the whole gate job at head 807f9d42db, steps 0 to 5, then the receipt section in `receipts/SOLR-18507.md`.
@@ -21,3 +21,5 @@ Heartbeat: 2026-10-20T05:33:20Z
 ## Decision (ladder, rung 4)
 
 Attempt 2's handback came from a one-line compile error in my own repair. The repair is in scope (test code, one line, no expected value changed). The job's purpose is the phase 4 gate, so the claim carries on: the fix goes in as a repair commit and the job reruns from step 0 on 807f9d42db under this new claim.
+
+ENDED: 2026-10-20T05:52:40Z. Reason: attempt 3 at 807f9d42db ran the focused test to its own assertions (the attempt-1 lifecycle defect is gone) and 5 of 7 tests failed on incremental fingerprint cache counts. The fix is an implementation decision outside gate repair scope. Test log: gates/logs/vm3/solr-18507-phase-4/test.log. Gate record: gates/SOLR-18507-phase-4.md attempt 3.

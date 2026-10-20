@@ -1,6 +1,6 @@
 # Gate job: SOLR-18507 (Phase 4 live fingerprint deltas)
 
-Status: HANDED BACK (retry failed at compile, repair defect at 13f2c6d045; see attempt 2)
+Status: ENDED (attempt 3 at 807f9d42db: test failed, 5 of 7 assertion failures in the incremental fingerprint path; see attempt 3)
 
 - Branch: `solr-18507-phase-4-submit`. Head: `f50c2271a32f25eb24ced4276516beb858f3b97e` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `35f6e044dda8c15115bccce6b7c965371a97ad30`. Prior gated head: none recorded.
@@ -88,3 +88,12 @@ If any step cannot be verified, record it here and stop.
 - Cause: a defect in the repair, not in the fingerprint code. The attempt-1 test evidence still stands (gates/logs/vm3/solr-18507-phase-4-run1-head-d797b9b310/).
 - Fix for the next host: in that method, rename the new declaration at the block near line 428 (for example `reloadedSearcherRef`), and its `decref` in the finally, so it no longer collides. Then a new gate job at the new head, with its own receipt. One line-level change, no other edits.
 - Status: HANDED BACK (retry failed at compile; the one retry is spent). The job returns to implementation with this fix as its first step.
+
+## Attempt 3 (vm3, head 807f9d42db, new gate job under claims/pool-vm3-gate-SOLR-18507-phase-4-r3.md): test failed, ENDED
+
+- Steps: step 0 pass; tidy pass with no changes; compile pass (Error Prone on); focused test `org.apache.solr.core.SolrCoreFingerprintCacheTest`, seed 18507A004: FAILED, 7 tests, 5 failed. The module check was stopped after the red test (not run), so there is no check result for this head.
+- Failing (assertion, not the closed-reader error from attempt 1): testMalformedPersistedGrossFingerprintFallsBackToLiveScan (`expected:<0> but was:<1>`, a malformed summary warmed a gross entry); testIncrementalFingerprintFallsBackWhenDeletedSnapshotExceedsLimit (`expected:<1> but was:<3>`, an over-limit snapshot took the incremental path); testStalePersistedGrossFingerprintIsRejectedAfterDocValuesUpdate (`expected:<6> but was:<8>`); testGrossFingerprintCacheHitAfterDelete (`expected:<12> but was:<15>`); testPersistedGrossFingerprintSurvivesCoreReloadAndDeletes (`expected:<1> but was:<7>`).
+- Log: gates/logs/vm3/solr-18507-phase-4/test.log (and the test XML in the worktree build directory).
+- What this shows: the attempt-1 lifecycle defect is gone (no AlreadyClosedException), so the tests now run to their own assertions. The remaining failures are count mismatches in the incremental fingerprint path: the tests expect fewer cache entries and updates than the implementation produces. Whether the production delta logic or the test expectations are wrong is an implementation question, not a gate repair.
+- Repair scope: five failing tests, with changes that would have to be production logic or changed expected values. Both are outside WORKFLOW.md "Gate repairs" (up to two failing tests, and no expected value changed). Not repaired.
+- Result: ENDED. The phase 4 implementation needs a decision on the delta path before a gate can pass. Recorded in claims/pool-vm3-gate-SOLR-18507-phase-4-r3.md.
