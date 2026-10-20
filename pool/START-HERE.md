@@ -10,6 +10,10 @@ Before claiming any work, read [`pool/owner-complaints-2026-10-19.md`](owner-com
 
 [`pool/work-map.md`](work-map.md) is the holistic view: the category taxonomy, the table tying branches with no ticket number back to their parents, and the linkage rules (every work item carries its ticket or parent, its category, its siblings, and what it supersedes). [`pool/tickets-to-open.md`](tickets-to-open.md) is the registry of tickets that do not exist yet, each with its parent work and its filing trigger. Read the category entry and the sibling records before writing code in an area.
 
+## The decision map
+
+[`pool/decision-map.md`](decision-map.md) classifies every item on its axes (work type, store, category, lifecycle, evidence, authority, visibility, capability, sequence, unit, value, cost, reversibility, record health) and gives the standing answer on each. Decide from the map before asking the owner anything; a question reaches him only if it passes the escalation test on that page.
+
 ## The documentation base
 
 [`pool/documentation-base.md`](documentation-base.md) indexes the guides agents read to bootstrap: the build and test traps, the category briefs, the hot-surface dossiers, and the failure atlas, all under `pool/guides/`. Read your category's brief before writing code in its area.
