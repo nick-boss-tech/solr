@@ -9,3 +9,5 @@
 - Links: Ticket or parent: skip-queue remediation (material/skip-audit/remediation-current.json). Category: per ticket. Siblings: batches 01 to 08 and 10. Supersedes: none.
 
 Heartbeat: 2026-10-20T05:31:25Z
+
+Heartbeat: 2026-10-20T06:14:01Z (batch 9 items 1 to 6 done; item 7 SOLR-12029 next)
