@@ -8,7 +8,7 @@
 
 ## Ticket reading
 
-With `df=id`, the query `q=*` is parsed as MatchAllDocsQuery, not as `id:*`. The reporter expected a wildcard on the default field. Hoss Hoss's 2016 comment says the behavior was added on purpose because most users kept getting unexpected results when a bare star matched only the default field.
+With `df=id`, the query `q=*` is parsed as MatchAllDocsQuery, not as `id:*`. The reporter expected a wildcard on the default field. Hoss's 2016 comment says the behavior was added on purpose because most users kept getting unexpected results when a bare star matched only the default field.
 
 ## Code reading (pinned head)
 
