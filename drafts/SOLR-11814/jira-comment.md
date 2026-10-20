@@ -1,0 +1,1 @@
+The Jetty assertion this issue reports is no longer in Solr on current main; the dispatch filter that produced it has been restructured. One of the three named test classes has also been renamed. We are closing this as obsolete. If you still see an assertion from the response stream in a current test run, please open a new issue with the log.
