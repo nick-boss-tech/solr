@@ -9,3 +9,5 @@
 - Links: Ticket or parent: SOLR-18507. Category: Core admin and cores. Siblings: gates/SOLR-18507-phase-3.md (DONE), gates/SOLR-18507-phase-4.md (head moved, not claimed). Supersedes: none.
 
 Heartbeat: 2026-10-20T08:33:00Z
+
+Heartbeat: 2026-10-20T09:17:12Z (SOLR-18507 benchmark item 1: Phase 2 core jar built at 137e77a4c8; Phase 3 core jar build run build-p3-core-jar; harness next)
