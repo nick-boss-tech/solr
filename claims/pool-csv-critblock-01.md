@@ -1,7 +1,7 @@
 # Claim: pool-csv-critblock-01 (Blocker and Critical slice 01, 25 tickets)
 
 - Claimant host: vm4, matching a file in `hosts/`.
-- Status: CLAIMED. Slice 01 of `assignments/pool-csv-critical-blocker-round-1.md`.
+- Status: DONE. Slice 01 of `assignments/pool-csv-critical-blocker-round-1.md`.
 - Started: 2026-10-20T04:00:08Z (UTC).
 - Basis: upstream reference `c8ab71430f` (apache/main as used for the newdev rounds).
 
@@ -28,3 +28,5 @@ Heartbeat: 2026-10-20T05:21:42Z. Partial report at reports/csv-critblock-01.md: 
 Heartbeat: 2026-10-20T05:26:45Z. Partial report at reports/csv-critblock-01.md: 20 rows classified, 5 PENDING.
 
 Heartbeat: 2026-10-20T05:43:25Z. Partial report at reports/csv-critblock-01.md: 24 rows classified, 1 PENDING.
+
+DONE: 2026-10-20T05:58:01Z. Report `reports/csv-critblock-01.md`: 25 rows classified (NOT-REPRODUCIBLE 13, STILL-PRESENT 6, ALREADY-FIXED 4, OBSOLETE 2). No branches or PRs. Repro artifacts in gates/logs/vm4/csv-critblock-01/.

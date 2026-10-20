@@ -3,7 +3,9 @@
 Assignment: `assignments/pool-csv-critical-blocker-round-1.md`, slice 01. Claim: `claims/pool-csv-critblock-01.md`.
 Basis: JIRA REST `issues.apache.org/jira/rest/api/2/issue/<KEY>` read 2026-10-20 (UTC) for status, links and comments. Upstream reference `c8ab71430f` (apache/main). The local clone is shallow, so upstream history was checked through the GitHub API (`repos/apache/solr/compare`, `search/commits`).
 
-Status: PARTIAL. Rows marked PENDING have not been classified yet. The claim stays open until every row has a class and evidence.
+Status: DONE. All 25 rows have a class.
+
+Tally: NOT-REPRODUCIBLE 13, STILL-PRESENT 6, ALREADY-FIXED 4, OBSOLETE 2. No branches and no receipts: no row was STILL-PRESENT with a fix to write in this slice. Six STILL-PRESENT rows are owner or upstream items (SOLR-3044, SOLR-6816, SOLR-7394 with PR #5003, SOLR-7889, SOLR-7926 with LUCENE-7016, SOLR-7351). SOLR-7351 has a repro, `MltDateReproTest`, that fails at base; its fix needs a rung-4 choice before a branch is written, and that is a follow-up, not part of this closeout.
 
 | Ticket | Summary | Class | Evidence | Next step |
 | --- | --- | --- | --- | --- |
@@ -32,3 +34,8 @@ Status: PARTIAL. Rows marked PENDING have not been classified yet. The claim sta
 | SOLR-8096 | Major faceting performance regressions | ALREADY-FIXED | The uninverted multi-valued path is back as `facet.method=uif`: `SimpleFacets.java` lines 485 to 486 (`FacetMethod.UIF`) and line 598. The linked SOLR-8466 is Closed and incorporated, which is the reference for this path. Fixing commit not identified. No benchmark run at base; the default method for multi-valued fields was not checked | Owner note: confirm the default method for multi-valued fields if the regression is still a concern |
 | SOLR-8331 | CorruptIndexException after auto commit | OBSOLETE | Reported against Solr 4.10.4 on Java 1.7.0_67 (reporter's JVM). The maintainer asked for JVM details, and the reporter's answer names the old JVM. Both the Solr line and the JVM are unsupported now, and base is current main. No repro attempted | Owner note: close as unsupported version and JVM |
 | SOLR-8417 | Infinite loop when no core of a collection loads | ALREADY-FIXED | The forwarding loop is capped in base: `HttpSolrCall` throws `INVALID_STATE` ("No active replicas found for collection") once `INTERNAL_REQUEST_COUNT` exceeds `totalReplicas` (lines 950 to 958). Fixing commit `b8648c60e7`, SOLR-13793 (2019-10-15), "Limiting number of forwards to total replicas in collection to avoid deadly forwarding loops", an ancestor of `c8ab71430f`. Not reproduced with the read-permission setup from the ticket | Owner may want a repro of the unreadable-core setup; the cap is in code |
+
+
+## Repro artifacts
+
+- `/workspace/gates/logs/vm4/csv-critblock-01/`: `MltDateReproTest.java` (SOLR-7351), `HlBoostReproTest.java` (SOLR-4690), `ChaosMonkeySafeLeaderTest` run log and XML (SOLR-5735), Gradle logs.
