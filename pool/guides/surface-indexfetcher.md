@@ -44,9 +44,9 @@ Review requests on these changes are not located in this pass; the receipts abov
 
 ## 6. Danger spots
 
-- `isIndexStale` (line 1306) decides whether a full copy is needed. Removing the check looks safe because the differential copy already reuses files, but the flag also controls the reload path and the log text; the SOLR-11815 record (`solr-11815-draft-close`) keeps the flag as a stated limit for this reason.
+- `isIndexStale` (line 1306) decides whether a full copy is needed. Removing it looks safe because the differential copy already reuses matching files; the SOLR-11815 record (`solr-11815-draft-close`) keeps the flag as a stated limit. The effect of removing it on the reload path was not traced in this pass.
 - Searcher open during shutdown. `9e15873bb5` is a guard that is easy to lose when a refactor moves the searcher call. Any change that opens a searcher from inside the fetch must keep that guard.
-- Temporary directory and index directory. The temporary directory is the same factory and lock type. Changing the lock type for one of them alone can break the move step, because the move assumes the same underlying directory layer.
+- Temporary directory and index directory. Both are opened through the same directory factory with the same lock type (`fetchLatestIndexOnce`, around lines 596-613). Whether a change to only one of them breaks the move step (`moveIndexFiles`, line 1350) was not tested in this pass.
 - `index.properties` has two writers: `IndexFetcher` and `SolrCore` (rename at `SolrCore.java:1474-1476`). A change to the file name or format must update both, and `SolrIndexSplitter` deletes it during a split (line 455).
 
 ## Limits
