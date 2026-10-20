@@ -28,4 +28,4 @@ Owner direction, 2026-10-19: build the documentation base by category, so an age
 - Every structural claim (a class's role, a call flow, an invariant) is read from the code at the current main tip in this pass, not copied from a draft, a receipt, or memory. Cite the file for sections 2 to 4.
 - The brief passes the bootstrap test: a host that has never touched the area can, from the brief alone, name the classes to read first, the test command, and the invariants. A second host confirms this in a review round before the slice is DONE; the reviewer is never the author.
 - Brevity is a requirement: a brief is read in one sitting at claim time. Anything that belongs in a dossier or the traps guide is linked, not repeated.
-- Check the balk advisory before claiming: a category whose brief already exists gets WON'T DO, not a rewrite.
+- Check the WON'T DO advisory before claiming: a category whose brief already exists gets WON'T DO, not a rewrite.

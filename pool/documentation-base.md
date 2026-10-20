@@ -8,11 +8,11 @@ Owner direction, 2026-10-19: build the documentation base out, by category, the 
 2. `pool/work-stores.md`: where work comes from, in pull order.
 3. `pool/work-map.md`: the category taxonomy and the linkage rules; find your item's category and siblings.
 4. Your category's brief in `pool/guides/` (below), and the dossiers of the surfaces your item touches.
-5. `pool/advisory-balk-and-clear.md` before claiming, and `pool/guides/traps-build-and-test.md` before building.
+5. `pool/advisory-wont-do.md` before claiming, and `pool/guides/traps-build-and-test.md` before building.
 
 ## The layers
 
-**Standing docs (pool/).** START-HERE, the work stores, the work map, the tickets-to-open registry, the balk advisory, WORKFLOW.md, the templates, the tick prompt. Maintained as they change; they are the rules, not a record of events.
+**Standing docs (pool/).** START-HERE, the work stores, the work map, the tickets-to-open registry, the WON'T DO advisory, WORKFLOW.md, the templates, the tick prompt. Maintained as they change; they are the rules, not a record of events.
 
 **Guides (pool/guides/).** How things behave, learned the expensive way:
 

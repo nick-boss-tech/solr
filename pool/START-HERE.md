@@ -14,9 +14,9 @@ Before claiming any work, read [`pool/owner-complaints-2026-10-19.md`](owner-com
 
 [`pool/documentation-base.md`](documentation-base.md) indexes the guides agents read to bootstrap: the build and test traps, the category briefs, the hot-surface dossiers, and the failure atlas, all under `pool/guides/`. Read your category's brief before writing code in its area.
 
-## Balk, do not redo
+## WON'T DO: refuse, do not redo
 
-Before starting any claimed item, check it against [`pool/advisory-balk-and-clear.md`](advisory-balk-and-clear.md): work that is already done, already claimed and live, structurally unable to finish, or only stale paperwork. When a shape matches, refuse the item, record the balk, and clear the stale record in the same push, exactly as the advisory describes. Redoing finished work is the failure this branch keeps paying for.
+Before starting any claimed item, check it against [`pool/advisory-wont-do.md`](advisory-wont-do.md): work that is already done, already claimed and live, structurally unable to finish, or only stale paperwork. When a shape matches, refuse the item, record the refusal, and clear the stale record in the same push, exactly as the advisory describes. Redoing finished work is the failure this branch keeps paying for.
 
 ## Where work comes from
 

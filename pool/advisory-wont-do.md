@@ -1,6 +1,6 @@
-# Advisory: balk at stuck and duplicate work, and clear it
+# Advisory: WON'T DO: refuse stuck and duplicate work, and clear it
 
-Owner direction, 2026-10-19: agents keep redoing work that is already done, already claimed, or structurally unable to finish. That stops. When one of the shapes below matches the item in front of you, refuse the item: do not do the work, record the balk, and clear the stale record in the same push. A balk with the record cleared is finished work, not a failure, and it outranks filling the tick.
+Owner direction, 2026-10-19: agents keep redoing work that is already done, already claimed, or structurally unable to finish. That stops. When one of the shapes below matches the item in front of you, refuse the item: do not do the work, record the refusal, and clear the stale record in the same push. A refusal with the record cleared is finished work, not a failure, and it outranks filling the tick.
 
 ## The check
 
@@ -12,7 +12,7 @@ A claim for the same item already carries a DONE line, or the deliverable alread
 
 Example: SOLR-16930 was closed out twice in one day, by vm5 in the morning (`claims/skip-SOLR-16930-vm5.md`) and by vm4 in the afternoon, the second pass discarding the first. The same shape created a second draft branch for SOLR-16355 (`solr-16355-draft-close`) instead of reusing the branch the ticket already had; check `git ls-remote` for the ticket's draft branches before creating one.
 
-Clearing action: stamp the duplicate claim SUPERSEDED with a pointer to the claim that stands. If you created a branch or a record before noticing, name it in the balk so it can be retired in the records; do not build on it.
+Clearing action: stamp the duplicate claim SUPERSEDED with a pointer to the claim that stands. If you created a branch or a record before noticing, name it in the refusal so it can be retired in the records; do not build on it.
 
 ## Shape 2: already claimed and live
 
@@ -38,10 +38,10 @@ Example: the batch 02 remediation claim still read ACTIVE hours after its assign
 
 Clearing action: correct the stamp to match the deliverables, cite them, and move on.
 
-## What a balk record contains
+## What a WON'T DO record contains
 
 The item, the shape number, the evidence (the claim path and its DONE line, the live claim and its heartbeat, or the missing material), and the clearing action taken. Stamp your own claim WON'T DO, with a closing line in the same push. WON'T DO is a terminal label: the tick treats the claim as closed, the item leaves the claimable pool, and no third host walks into it.
 
-## What is not a balk
+## What is not a refusal
 
-Difficulty, size, an unfamiliar area, or a failed first attempt. Those follow the normal rules: escalate with the evidence, hand back with the record, or ask for the missing input. Balk only on the four shapes above.
+Difficulty, size, an unfamiliar area, or a failed first attempt. Those follow the normal rules: escalate with the evidence, hand back with the record, or ask for the missing input. Refuse only on the four shapes above.

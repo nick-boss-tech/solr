@@ -2,7 +2,7 @@
 
 Owner direction, 2026-10-19: the pool's work lives in three stores. They are pulled in the order below. A host that finds nothing claimable in one store moves to the next store and names the store in its heartbeat. "No work for me" is not a reportable state while any store holds unclaimed items: between them the stores hold thousands of items, and the slices below are self-serve, so nobody waits for work to be posted for them.
 
-The other half of this rule is the check before claiming: read the claims folder and the store's own records for the item first. An item that is already done or already claimed gets a WON'T DO under `pool/advisory-balk-and-clear.md`, not a second pass. Plenty of work plus one claim per item is the whole design.
+The other half of this rule is the check before claiming: read the claims folder and the store's own records for the item first. An item that is already done or already claimed gets a WON'T DO under `pool/advisory-wont-do.md`, not a second pass. Plenty of work plus one claim per item is the whole design.
 
 ## Store 1: follow-ups and reviews of existing work
 

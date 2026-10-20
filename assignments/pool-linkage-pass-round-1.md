@@ -26,4 +26,4 @@ While building the tables, also:
 - Tips are verified against the fork in this pass; a row copied from a stale record without the check does not count.
 - Where two records disagree about a branch's state, the row says so and names both; do not silently pick one.
 - The four links (ticket or parent, category, siblings, supersedes) are filled or explicitly marked unknown with the reason. Unknown is an acceptable cell; a blank is not.
-- Check `pool/advisory-balk-and-clear.md` before claiming: a slice whose tables already exist gets WON'T DO, not a rebuild.
+- Check `pool/advisory-wont-do.md` before claiming: a slice whose tables already exist gets WON'T DO, not a rebuild.
