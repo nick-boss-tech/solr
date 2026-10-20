@@ -1,37 +1,43 @@
 # Skip record: SOLR-11675
 
-- Ticket: SOLR-11675, v2 API should gracefully decline unexpected HTTP methods. JIRA was not re-read for this record.
+- Ticket: SOLR-11675, v2 API should gracefully decline unexpected HTTP methods. JIRA read in this pass: Open, resolution none, fix versions none, 1 comment (2017-12-03, gerlowskija pointing at getApiInfo in V2HttpCall); updated 2019-06-08.
 - Verdict: keep-open.
-- Draft branch: solr-11675-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-06, audit verdict confirmed-skip).
+- Draft branch: solr-11675-draft-open (unchanged status; this record replaces the bulk audit-derived record on this branch).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (checked at this head for this record).
+- Source: the queue entry (audit verdict confirmed-skip, audit date 2026-10-19) is background only; the reading below is fresh at the pin.
 
 ## Ticket reading
 
-The summary as recorded in the queue: v2 API should gracefully decline unexpected HTTP methods. Skip note: likely fixed on main: V2HttpCall now guards path segments (size checks around prefix c/collections); v2 rewritten onto JAX-RS..
+The ticket: a DELETE, PATCH or PROPFIND sent to /api/c returns an error body with "Index: 1, Size: 1" and an IndexOutOfBoundsException trace from V2HttpCall.init (the 2017 trace at V2HttpCall.java:110, an ArrayList.get). The reporter wants the request declined gracefully. The 2017 comment points to getApiInfo as the place the method lookup happens.
 
 ## Code reading
 
-Taken from the audit evidence, not re-read at the pinned head: V2HttpCall.init guards pathSegments.size() before get(1)
+- solr/core/src/java/org/apache/solr/api/V2HttpCall.java:111 and :133: pathSegments.get(0) and get(1) are read; the get(1) read at :133 is inside the branch that requires pathSegments.size() > 1 (line 131 check), so the path /api/c with no collection name does not reach it.
+- V2HttpCall.java:114-115 (init): getApiInfo is called with the request method. At :233-275 (getApiInfo): if the method has no API, v2lookup returns null and getApiInfo returns null (the path is retried with a null method only for introspect requests).
+- V2HttpCall.java:169-180 (the "cores" branch) and :184-187: the read pathSegments.get(1) on the core-level branch runs only after core is non-null, and a null core for /c with no collection name goes to initAdminRequest and returns at V2HttpCall.java:~176-180 before line 187.
+- V2HttpCall.java:202 (catch RuntimeException) is the handler for runtime errors during init; its response shape was not traced.
+
+So the specific IndexOutOfBounds of the 2017 trace is not reachable by reading at the pin for the /c path, because the size guard now precedes the read. What a client receives for DELETE, PATCH or PROPFIND on /api/c at the pin (status code and body) is not established by reading the code.
 
 ## History
 
-No commit history was used for this record.
+- No commit at the pin names SOLR-11675 (git log --grep at the pin: none).
+- The commit that added the size guard around the collection read was not traced in this pass.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. A reproduction needs a running Solr at the pin and requests with DELETE, PATCH and PROPFIND to /api/c and to /api/c/<collection>, recording status code and body. Not built or run in this pass.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The IndexOutOfBounds in the ticket is not reachable on the path the ticket names, by reading. Whether the other methods now decline gracefully with a 4xx and a useful message, or still return an unhelpful body, is the open question the ticket asks. Neither a close-fixed (no commit names the ticket) nor a close-obsolete (the message text is produced at runtime, so a whole-tree grep cannot settle it) verdict is supported without that run.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
+keep-open: the reported failure is not reachable by reading, but the client-visible result for the named methods is unverified, so neither close verdict has its check. close-cannot-reproduce needs a run attempt, and none was made.
 
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+Missing for a closing verdict: a run at the pin sending DELETE, PATCH and PROPFIND to /api/c and to /api/c/<collection>, recording the status code and body for each.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not run a Solr server, does not trace the guard's commit history, and does not post anything to JIRA or GitHub.
