@@ -17,3 +17,7 @@ Step 1 result (2026-10-20T04:54:14Z): tidy repair applied on the gate head. Repa
 Steps 2, 4 and 5 running as job r2-retry-519ca48 (log dir /workspace/gates/logs/vm2/18555/gate-r2/... under vm2 gate logs). Step 3 proof leg runs after that job on /workspace/gates/solr-18555-r2-proof.
 
 Heartbeat: 2026-10-20T04:54:14Z
+
+Step 2 result (519ca48ad56, job r2-retry-519ca48, 2026-10-20T04:59Z): Error Prone compile failed rc=1 at HighlightRequestHandlerHttpTest.java:85, "incompatible types: URL cannot be converted to String" (`solrTestRule.getJetty().getBaseURLV2()` returns URL). Repair in test code, one line, names the fix: repair commit 2c54781a6ea1c8a5d17b802fbc97fed18005aa2b adds `.toString()`. Changes no expected value. Second retry of steps 0 to 5 runs as job r2-retry2-2c54781 (logs /workspace/gates/logs/vm2/18555/gate-r2/retry2/). Step 0 is re-checked inline (changelog ok); the job's first line is a placeholder gradle help task to warm the build, not a gate step.
+
+Heartbeat: 2026-10-20T05:10:34Z
