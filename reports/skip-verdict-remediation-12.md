@@ -11,3 +11,4 @@
 - SOLR-4659 | claims/skip-SOLR-4659-vm2.md | keep-open (kept; null parent default present at SolrResourceLoader.java:187-207; constructor change is a maintainer call) | solr-4659-draft-open 7e55416c90 | JIRA read 2026-10-20T15:27:37Z Open
 - SOLR-4635 | claims/skip-SOLR-4635-vm2.md | keep-open (changed from close-fixed: cause chained at ShardHandlerFactory.java:52-68; fixing commit not identified; blame is formatting-only) | solr-4635-draft-open 2b6c439061 | JIRA read 2026-10-20T15:38:59Z Open
 - SOLR-4610 | claims/skip-SOLR-4610-vm2.md | keep-open (kept; schema-aware helper exists; typed-term change is design) | solr-4610-draft-open 7f03d98cad | JIRA read 2026-10-20T15:45:33Z Open
+- SOLR-4593 | claims/skip-SOLR-4593-vm2.md | keep-open (kept; test present; refusal present; seeded run missing) | solr-4593-draft-open 656cb6d37c | JIRA read 2026-10-20T15:51:55Z Open
