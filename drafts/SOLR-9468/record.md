@@ -1,38 +1,37 @@
 # Skip record: SOLR-9468
 
-- Ticket: SOLR-9468, "HTTP api endpoint /replication does not handle errors propely". JIRA status read 2026-10-20T13:57:08Z (UTC): Open, resolution None, updated 2019-06-08.
-- Verdict: keep-open. This replaces the recorded close-fixed: the status is now ERR for the generic error branch, but the HTTP status is still 200 there, and no fixing commit is named.
-- Draft branch: solr-9468-draft-close (kept name from the recorded verdict; the record is keep-open, so the draft status is open: see the note below).
-- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
-- Checked by: vm2, 2026-10-20T13:57:08Z (UTC).
-
-Note: the verdict is keep-open, so the draft branch name should be solr-9468-draft-open. This record is pushed on the close branch by mistake and must move; see the batch report.
+- Ticket: SOLR-9468, HTTP api endpoint /replication does not handle errors propely. JIRA status not recorded in the C reading. JIRA was not re-read for this record.
+- Verdict: close-fixed.
+- Draft branch: solr-9468-draft-close.
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
+- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the C reading (reports/2026-10-18-skip-repro/C3, slice 3, pinned head unchanged).
 
 ## Ticket reading
 
-A backup through the replication endpoint fails with "Unable to create snapshot directory", but the response has status OK and an exception string, and the HTTP code is 200. The reporter wants a 4xx or 5xx code, or at least a bad status in the body.
+The summary as recorded in the queue: HTTP api endpoint /replication does not handle errors propely.
 
-## Code reading (pinned head)
+## Code reading
 
-- `solr/core/src/java/org/apache/solr/handler/ReplicationHandler.java:655-672`: a `SolrException` is rethrown, so it gets its HTTP error code. Other exceptions go to `reportErrorOnResponse` (line 374-380), which sets `status` to ERR and the message and exception. The success status `OK` is added only after `doSnapShoot` returns normally (line 664).
-- So the ticket's OK-with-exception response is not produced by this branch. A generic error is reported with status ERR, but the HTTP code is still 200 on that branch.
+ReplicationHandler.doSnapShoot (solr/core/src/java/org/apache/solr/handler/ReplicationHandler.java:649-672) now catches errors and calls reportErrorOnResponse which sets status ERROR (line 375), c951578fca SOLR-6117: Unify ReplicationHandler error handling; HTTP code is still not 4xx/5xx for non-SolrException errors
 
 ## History
 
-- evidence.py at the pinned head: no commits naming SOLR-9468. The API rewrite that the batch note mentions is not named by a commit here.
+- `c951578fca`: cited in the C3 reading; ancestor of the pinned head: yes (checked).
 
 ## Reproduction attempts
 
-Not run. A run would call the backup endpoint with an unwritable location and record the HTTP code and the body.
+Not attempted. The C scope ran no builds or tests.
 
 ## Gap analysis
 
-The body status is fixed for the generic branch; the HTTP status is not, and the fix commit the record would need is not named. The run decides which branch the reporter's error takes.
+The code reading shows the reported behavior no longer applies at the pinned head, as described above.
 
 ## Verdict justification
 
-keep-open meets the rubric: attempts made are the code-path reading of ReplicationHandler.java:655-672 and 374-380; the missing pieces are a run of the backup failure and the fixing commit if one exists. close-fixed is not supported: no fixing commit is named and the HTTP code is still 200 on the generic branch.
+close-fixed: a change on main addresses the reported behavior, and the changed code is present at the pinned head (cited in the code reading). Linkage is by code path or commit title, as the C reading states.
+
+Missing for this verdict: No reproduction was run; the C scope ran no builds.
 
 ## Limits
 
-This record does not run the backup. It does not check the v2 backup API.
+This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path where the subject does not cite the ticket.
