@@ -1,6 +1,6 @@
 # Review: SOLR-18552, branch solr-18552-submit (unit 4, main line)
 
-Head reviewed: cb32d0d96615 9edb237d581318af9bf96071c0d1 (ls-remote 2026-10-20T14:08Z). Base: upstream branch_9x at 3511867c3e (merge-base). PR #5181 is open on this head. Commits: a5406c9fe5 (set the permit default), 0652af46e4 (solr.cmd init line), cb32d0d966 (bin/solr init line).
+Head reviewed: cb32d0d966159edb237d581318af9bf96071c0d1 (ls-remote 2026-10-20T14:08Z). Base: upstream branch_9x at 3511867c3e (merge-base). PR #5181 is open on this head. Commits: a5406c9fe5 (set the permit default), 0652af46e4 (solr.cmd init line), cb32d0d966 (bin/solr init line).
 
 ## Pass 1
 

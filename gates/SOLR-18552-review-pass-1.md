@@ -2,7 +2,7 @@
 
 Status: NEARLY (partial regate on vm5; the bats launcher leg is handed to vm1 as the named piece)
 
-- Branch: solr-18552-submit. Head: `cb32d0d9661`-full `cb32d0d966159edb237d581318af9bf96071c0d1` (ls-remote 2026-10-20T14:08Z, unchanged at claim).
+- Branch: solr-18552-submit. Head: `cb32d0d966159edb237d581318af9bf96071c0d1` (ls-remote 2026-10-20T14:08Z, unchanged at claim).
 - Prior gated head: `a5406c9fe531161df7b424b2a55143489b95166e` (receipt, PR #5181 earlier head). Merge-base with upstream branch_9x: `3511867c3e`.
 - Intended host: vm5 for syntax and changelog legs; vm1 for the bats launcher leg (only vm1 carries the bats tag, hosts/vm1.md).
 - Capability tags: gate (vm5); bats (vm1).
