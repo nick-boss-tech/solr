@@ -5552,9 +5552,9 @@
       "round": "audit-3",
       "evidence": "6.x to 7.x split upgrade with autoscaling Variable$Type; no org.apache.solr.cloud.autoscaling package on main and 6.x segments are unreadable."
     },
-    "verdict": "close-obsolete",
-    "draft_branch": "solr-12646-draft-close",
-    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
+    "verdict": "keep-open",
+    "draft_branch": "solr-12646-draft-open",
+    "evidence_head": "8deb355b3a"
   },
   {
     "key": "SOLR-12645",
