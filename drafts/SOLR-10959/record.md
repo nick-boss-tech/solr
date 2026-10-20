@@ -19,7 +19,7 @@ So the symbol the ticket names does not exist at the pin, and the failure it rep
 
 ## History
 
-- MapSerializable was introduced in the 6.x line for the response writers (SOLR-9502, 1e18c12c19); the artifact question in the ticket dates from the 6.6.0 release.
+- SOLR-9502 (1e18c12c19) made the response writers support MapSerializable; the artifact question in the ticket dates from the 6.6.0 release.
 - No commit at the pin names SOLR-10959 (git log --grep at the pin: none).
 
 ## Reproduction attempts
