@@ -1,37 +1,37 @@
 # Skip record: SOLR-9622
 
-- Ticket: SOLR-9622, ExplainAugmenterFactory does not work on grouped queries. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-9622, "ExplainAugmenterFactory does not work on grouped queries". JIRA status read 2026-10-20T12:49:23Z (UTC): Open, resolution None, updated 2020-08-01. JIRA marks it a duplicate of SOLR-14693 (Resolved).
+- Verdict: keep-open (kept; re-read at the pinned head).
 - Draft branch: solr-9622-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-05, audit verdict confirmed-skip).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T12:49:23Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: ExplainAugmenterFactory does not work on grouped queries. Skip note: explain in grouped queries needs query object, design.
+`fl=*,[explain]` works without grouping but the explanation disappears when grouping (group field or group facet) is on. A 2019 comment says the explain transformer needs the query object, and links the code. JIRA lists SOLR-14693 as a duplicate, and that issue is Resolved.
 
-## Code reading
+## Code reading (pinned head)
 
-Taken from the audit evidence, not re-read at the pinned head: audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: explain in grouped queries needs query object, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it.
+- `solr/core/src/java/org/apache/solr/response/transform/ExplainAugmenterFactory.java:102-103`: the explanation is computed only when `context.getQuery()` is non-null; `context.getSearcher().explain(context.getQuery(), docid)` is the call.
+- Whether `context.getQuery()` is null on a grouped request was not traced in this pass.
 
 ## History
 
-No commit history was used for this record.
+- evidence.py at the pinned head: no commits naming SOLR-9622.
+- `git log --grep=SOLR-14693` over the full history: no commit names SOLR-14693, so the duplicate's fix is not identifiable by its ticket number here.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. A run would send a grouped query with `fl=*,[explain]` against a small index at the pinned head and check whether the explanation is present.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The mechanism the 2019 comment names (the query object in the context) is present in the code, and whether it is null on grouped requests decides the question. The JIRA duplicate points at a fix that this history does not name.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric: attempts made are the code-path reading (ExplainAugmenterFactory.java:102-103) and the history search; the missing piece is the grouped-query run, or the commit behind SOLR-14693. close-fixed is not supported: no fix commit is named. close-obsolete is not supported: the transformer is present.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not establish the current grouped-query behavior. It does not verify the duplicate link beyond the JIRA field.
