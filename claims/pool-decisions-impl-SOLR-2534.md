@@ -1,7 +1,7 @@
 # Claim: pool-decisions-impl, slice SOLR-2534 (owner decision row 9, option A)
 
 - Claimant host: vm3, matching `hosts/vm3.md`.
-- Status: HANDED BACK. Implementation on branch `solr-2534-string-min-max` at `722232054e`. The gate failed twice at compile, one repair and one retry (see the receipt). No gate result yet; the next step needs a new gate job.
+- Status: DONE 2026-10-20T12:01:23Z (vm5, stale HANDED BACK status updated). Branch `solr-2534-string-min-max` gated green at `a75b012a20` by vm3 round 2 (receipt `receipts/SOLR-2534.md`, focused TestStringMinMaxFunction 5 of 5). Not re-gated here.
 - Job or assignment: `assignments/pool-owner-decisions-round-1-implementation.md`, item 8. Source answer: `assignments/pool-vm3-owner-decisions-round-1.md` row 9.
 - Slice: the whole ticket.
 - Capability tags used: implementation, gate.
