@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The code reading does not settle this ticket yet. We are leaving the ticket open while we look further.
+We re-read this ticket against the Solr source at fork commit 498a09aea97. A custom transformer's fields are left out of the fetch set unless it returns them from getExtraRequestFields (SolrReturnFields.java), which is the workaround the earlier reply gives. We have not run the reported two-field and three-field requests at that commit, so the count-dependent behavior is unconfirmed and this ticket stays open.
