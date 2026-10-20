@@ -60,6 +60,7 @@ import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.PluginInfo;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.handler.RequestHandlerBase;
+import org.apache.solr.logging.DeprecationLog;
 import org.apache.solr.metrics.SolrMetricsContext;
 import org.apache.solr.pkg.PackageAPI;
 import org.apache.solr.pkg.PackageListeners;
@@ -226,6 +227,11 @@ public class SearchHandler extends RequestHandlerBase
     rb.isDistrib = isDistrib(req, rb); // can change later nonetheless
 
     boolean dbg = req.getParams().getBool(CommonParams.DEBUG_QUERY, false);
+    if (req.getParams().get(CommonParams.DEBUG_QUERY) != null) {
+      DeprecationLog.log(
+          CommonParams.DEBUG_QUERY,
+          "The debugQuery parameter is deprecated and will be removed; use debug=all instead.");
+    }
     rb.setDebug(dbg);
     if (dbg == false) { // if it's true, we are doing everything anyway.
       SolrPluginUtils.getDebugInterests(req.getParams().getParams(CommonParams.DEBUG), rb);
