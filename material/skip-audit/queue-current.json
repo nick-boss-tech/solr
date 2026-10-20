@@ -6601,8 +6601,8 @@
       "round": "audit-3",
       "evidence": "DocExpirationUpdateProcessorFactory deleter sets req.setUserPrincipalName(PKIAuthenticationPlugin.NODE_IS_USER) inside its own SolrRequestInfo"
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-11759-draft-open",
+    "verdict": "close-fixed",
+    "draft_branch": "solr-11759-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
