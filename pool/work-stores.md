@@ -12,6 +12,7 @@ The closest to shipping, so it is pulled first.
 - Size: hundreds of prepared branches with drafts and receipts, plus the follow-up ledger.
 - Claim unit: one item. Nobody posts these one by one: when you pull an item, post its per-item assignment and your claim in one push, claim first, then verify everything at the live tip before acting on any record.
 - Boundary: a follow-up whose parent PR has not merged is worked as a named follow-up inside that PR's branch and records; it does not get its own ticket or branch until the parent merges, unless a maintainer or the owner directs otherwise.
+- Every item pulled from this store is categorized and linked under `pool/work-map.md` (ticket or parent, category, siblings, supersedes) before code is written, and any ticket it promises is registered in `pool/tickets-to-open.md`.
 
 ## Store 2: the skip list
 
