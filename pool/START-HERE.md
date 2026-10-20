@@ -10,6 +10,10 @@ Before claiming any work, read [`pool/owner-complaints-2026-10-19.md`](owner-com
 
 [`pool/work-map.md`](work-map.md) is the holistic view: the category taxonomy, the table tying branches with no ticket number back to their parents, and the linkage rules (every work item carries its ticket or parent, its category, its siblings, and what it supersedes). [`pool/tickets-to-open.md`](tickets-to-open.md) is the registry of tickets that do not exist yet, each with its parent work and its filing trigger. Read the category entry and the sibling records before writing code in an area.
 
+## The documentation base
+
+[`pool/documentation-base.md`](documentation-base.md) indexes the guides agents read to bootstrap: the build and test traps, the category briefs, the hot-surface dossiers, and the failure atlas, all under `pool/guides/`. Read your category's brief before writing code in its area.
+
 ## Balk, do not redo
 
 Before starting any claimed item, check it against [`pool/advisory-balk-and-clear.md`](advisory-balk-and-clear.md): work that is already done, already claimed and live, structurally unable to finish, or only stale paperwork. When a shape matches, refuse the item, record the balk, and clear the stale record in the same push, exactly as the advisory describes. Redoing finished work is the failure this branch keeps paying for.
