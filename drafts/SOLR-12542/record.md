@@ -23,7 +23,7 @@ So the skip note's claim that the empty body was fixed by an EXCEPTION document 
 ## History
 
 - The DocValues sort check was not changed by a fix commit that names SOLR-12542 (git log --grep at the pin: no commit names SOLR-12542).
-- The commit that added the stored-field support for the export writer, 45adb11a9e (SOLR-18071), is an ancestor of the pin and is the most recent change to ExportWriter.java in the file history at this pin for the sort path; it does not change getSortDoc (checked by the file history at the pin).
+- The file history of ExportWriter.java at the pin ends with 1af33ac699 (SOLR-18164), 37a0869158 (SOLR-18137), and 45adb11a9e (SOLR-18071, support for stored fields in the export writer). None of these is a fix for SOLR-12542, and the DocValues sort check at line 634 was not traced through their diffs in this pass.
 - SOLR-12543 is named by the skip note; this record does not re-check it.
 
 ## Reproduction attempts
