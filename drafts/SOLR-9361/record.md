@@ -1,37 +1,37 @@
 # Skip record: SOLR-9361
 
-- Ticket: SOLR-9361, Concept of replica state being "down" is confusing and missleading (especially w/DELETEREPLICA). JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-9361, "Concept of replica state being down is confusing and misleading (especially w/ DELETEREPLICA)". JIRA status read 2026-10-20T14:58:13Z (UTC): Open, resolution None, updated 2019-06-08. Linked: SOLR-11427 (Resolved).
+- Verdict: keep-open (kept; re-read at the pinned head). The state model is a design question.
 - Draft branch: solr-9361-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-05, audit verdict confirmed-skip).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T14:58:13Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Concept of replica state being "down" is confusing and missleading (especially w/DELETEREPLICA). Skip note: confusing semantics/docs, design.
+The "down" replica state is used for cleanly shut down replicas, while the Admin UI shows replicas on vanished nodes as "Gone". DELETEREPLICA with `onlyIfDown=true` works only for a replica in state DOWN, so a replica on a crashed node cannot be removed that way. The 2016 comments say "Gone" means no live node in ZooKeeper and "down" should mean stale state or a connection being recovered.
 
-## Code reading
+## Code reading (pinned head)
 
-Taken from the audit evidence, not re-read at the pinned head: audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: confusing semantics/docs, design Basis is ticket text, not a fresh code repro; no deterministic test could be written from it.
+- `solr/core/src/java/org/apache/solr/cloud/api/collections/DeleteReplicaCmd.java:273-287`: with `onlyIfDown=true`, the command throws BAD_REQUEST unless `replica.getState() == DOWN`. A replica whose stored state is not DOWN (for example a stale ACTIVE after a crash) is refused, which is the behavior the ticket describes.
+- The option is declared at `CollectionHandlingUtils.java:100` and passed through `solr/core/src/java/org/apache/solr/handler/admin/api/DeleteReplica.java:74`.
+- The Admin UI and CLUSTERSTATUS state labels were not re-read in this pass.
 
 ## History
 
-No commit history was used for this record.
+- evidence.py at the pinned head: no commits naming SOLR-9361. SOLR-11427 (Resolved) is linked by JIRA; not located here.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. A run would start a three-node cluster, kill a node without a clean shutdown, and call DELETEREPLICA with onlyIfDown=true.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The check is the one the ticket describes. Changing it or the state labels changes the meaning of "down" for every client, which is a design decision for the maintainers.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric for an open design question: attempts made are the code-path reading of DeleteReplicaCmd.java:273-287; the missing piece is the design decision on the state model and the crash run. close-fixed is not supported without a named commit; close-obsolete is not supported since the check is present.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not run the crash case. It does not read the Admin UI.
