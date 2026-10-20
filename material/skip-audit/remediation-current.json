@@ -6035,6 +6035,126 @@
         "the record says JIRA was not re-read for it, or cites a prior reading",
         "the commit that added the createCollection status assertion is not found (git log -S inconclusive); that is the missing piece"
       ]
+    },
+    {
+      "key": "SOLR-5435",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-5435-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "67b7dc1766b7d66ccbee58a6d11f2d650fc7da14",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece (the parse of the reported query with its analyzers at this sha) named but not run; parse path not traced"
+      ]
+    },
+    {
+      "key": "SOLR-5383",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-5383-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "67b7dc1766b7d66ccbee58a6d11f2d650fc7da14",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece (Lucene TermGroupFacetCollector behavior or a head repro with a multivalued trie field) named but not run"
+      ]
+    },
+    {
+      "key": "SOLR-5376",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-5376-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "67b7dc1766b7d66ccbee58a6d11f2d650fc7da14",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "code path present (SimpleFacets FCS multi-token forced to FC); repro not run"
+      ]
+    },
+    {
+      "key": "SOLR-5252",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-5252-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "67b7dc1766b7d66ccbee58a6d11f2d650fc7da14",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece (unload then create of the same core name) named but not traced or run"
+      ]
+    },
+    {
+      "key": "SOLR-5046",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-5046-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "67b7dc1766b7d66ccbee58a6d11f2d650fc7da14",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece (Lucene TopDocs.merge behavior and a repro) named but not run; TopGroupsShardResponseProcessor merge calls present"
+      ]
+    },
+    {
+      "key": "SOLR-4851",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4851-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "67b7dc1766b7d66ccbee58a6d11f2d650fc7da14",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece (Lucene TokenSources and a runtime repro) named but not run"
+      ]
+    },
+    {
+      "key": "SOLR-4733",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4733-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "67b7dc1766b7d66ccbee58a6d11f2d650fc7da14",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "standalone rollback followed by an atomic update not reproduced; 93b33b5fdb ancestor and SolrCloud rollback rejection present"
+      ]
+    },
+    {
+      "key": "SOLR-4686",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-4686-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "67b7dc1766b7d66ccbee58a6d11f2d650fc7da14",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece (Lucene HTMLStripCharFilter source at the Lucene version used) named; no lucene/ directory at the pin; not run"
+      ]
     }
   ]
 }
