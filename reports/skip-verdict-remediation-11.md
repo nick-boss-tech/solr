@@ -1,3 +1,4 @@
 - SOLR-10706 | claims/skip-SOLR-10706-vm2.md | close-cannot-reproduce (changed from keep-open: URLEncoder gives + for space; repro run JDK 21) | solr-10706-draft-close 4a8b3488bd | JIRA read 2026-10-20T11:42:17Z Open
 - SOLR-10650 | claims/skip-SOLR-10650-vm2.md | close-answered (changed from close-fixed: no fix commit; system-requirements.adoc:62 answers the Java question) | solr-10650-draft-close b72080244e | JIRA read 2026-10-20T11:50:55Z Open
 - SOLR-10604 | claims/skip-SOLR-10604-vm2.md | keep-open (kept; defaults deliberate per ChaosMonkey.java:78-82 NOTE; reliability run missing) | solr-10604-draft-open f976a28302 | JIRA read 2026-10-20T11:56:38Z Open
+- SOLR-10601 | claims/skip-SOLR-10601-vm2.md | close-fixed (changed from keep-open: fix 17563ce81f ancestor; line present at StreamExpressionParser.java:187) | solr-10601-draft-close b24aca0b32 | JIRA read 2026-10-20T12:03:36Z Open
