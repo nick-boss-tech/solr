@@ -440,11 +440,17 @@ public class TestSolrCLIRunExample extends SolrTestCaseJ4 {
       bindPort = socket.getLocalPort();
     }
 
+    int zkPort;
+    try (ServerSocket socket = new ServerSocket(0)) {
+      zkPort = socket.getLocalPort();
+    }
+
     String collectionName = "testCloudExamplePrompt";
 
     // this test only support launching one SolrCloud node due to how MiniSolrCloudCluster works
     // and the need for setting the host and port system properties ...
-    String userInput = "1\n" + bindPort + "\n" + collectionName + "\n2\n2\n_default\n";
+    String userInput =
+        "1\n" + bindPort + "\n" + zkPort + "\n" + collectionName + "\n2\n2\n_default\n";
 
     // simulate user input from stdin
     InputStream userInputSim = new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8));
@@ -513,6 +519,10 @@ public class TestSolrCLIRunExample extends SolrTestCaseJ4 {
     if (!Files.isDirectory(node1SolrHome)) {
       fail(node1SolrHome + " not found! run cloud example failed; tool output: " + toolOutput);
     }
+    String node1ZooCfg = Files.readString(node1SolrHome.resolve("zoo.cfg"));
+    assertTrue(
+        "embedded ZooKeeper port not written to node1 zoo.cfg: " + node1ZooCfg,
+        node1ZooCfg.contains("clientPort=" + zkPort));
 
     // delete the collection
     DeleteTool deleteTool = new DeleteTool(runtime);

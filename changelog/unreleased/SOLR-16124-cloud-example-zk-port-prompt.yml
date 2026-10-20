@@ -1,0 +1,10 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >
+  The SolrCloud example asks for the embedded ZooKeeper port, defaulting to the first node's port plus 1000
+type: added
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16124
+    url: https://issues.apache.org/jira/browse/SOLR-16124

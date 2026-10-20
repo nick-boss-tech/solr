@@ -26,6 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -847,6 +848,7 @@ public class RunExampleTool extends ToolBase {
       readInput = new Scanner(userInput, StandardCharsets.UTF_8);
     }
 
+    Integer embeddedZkPort = null;
     if (prompt) {
       if (!usingScriptInputs) {
         echo(
@@ -885,6 +887,27 @@ public class RunExampleTool extends ToolBase {
         cloudPorts[n] = port;
         echoIfVerbose("Using port " + port + " for node " + (n + 1));
       }
+
+      if (params.zkHost() == null && !usingScriptInputs) {
+        int defaultZkPort = cloudPorts[0] + 1000;
+        String zkPromptMsg =
+            String.format(
+                Locale.ROOT,
+                "Please enter the port for the embedded ZooKeeper [%d]: ",
+                defaultZkPort);
+        int zkPort = promptForPort(readInput, 1, zkPromptMsg, defaultZkPort);
+        while (!isUsableZkPort(zkPort, cloudPorts, numNodes)) {
+          zkPort =
+              promptForPort(
+                  readInput,
+                  1,
+                  "Oops! Port "
+                      + zkPort
+                      + " is already used by a node or another process. Please choose a different port.",
+                  defaultZkPort);
+        }
+        embeddedZkPort = zkPort;
+      }
     } else {
       echo("Starting up " + numNodes + " Solr nodes for your example SolrCloud cluster.\n");
     }
@@ -899,6 +922,13 @@ public class RunExampleTool extends ToolBase {
       } else {
         echo(nodeNDir.toAbsolutePath() + " already exists.");
       }
+    }
+
+    if (embeddedZkPort != null) {
+      Files.writeString(
+          node1Dir.resolve("solr").resolve("zoo.cfg"),
+          "clientPort=" + embeddedZkPort + System.lineSeparator(),
+          StandardOpenOption.APPEND);
     }
 
     // deal with extra args passed to the script to run the example
@@ -1420,6 +1450,13 @@ public class RunExampleTool extends ToolBase {
       runExample(new RunExampleParams(!userManagedOpt, zkHost, port, startParams));
     }
     return 0;
+  }
+
+  private boolean isUsableZkPort(int port, int[] nodePorts, int numNodes) {
+    for (int n = 0; n < numNodes; n++) {
+      if (nodePorts[n] == port) return false;
+    }
+    return isPortAvailable(port);
   }
 
   protected boolean isPortAvailable(int port) {
