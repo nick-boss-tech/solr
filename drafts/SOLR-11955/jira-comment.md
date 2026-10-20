@@ -1,0 +1,1 @@
+The shipped text_en_splitting type on current main still runs a synonym graph filter into a word delimiter graph filter at query time, in the default and techproducts configsets. We have not yet confirmed whether that gives wrong results, so this issue stays open until that check is done. If you have a query that shows the problem, please attach it to this issue.
