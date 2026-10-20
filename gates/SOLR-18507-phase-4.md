@@ -1,6 +1,6 @@
 # Gate job: SOLR-18507 (Phase 4 live fingerprint deltas)
 
-Status: OPEN
+Status: HANDED BACK (retry failed at compile, repair defect at 13f2c6d045; see attempt 2)
 
 - Branch: `solr-18507-phase-4-submit`. Head: `f50c2271a32f25eb24ced4276516beb858f3b97e` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `35f6e044dda8c15115bccce6b7c965371a97ad30`. Prior gated head: none recorded.
@@ -80,3 +80,11 @@ If any step cannot be verified, record it here and stop.
 ## Tip check
 
 2026-10-20T05:27:50Z: fork tip of solr-18507-phase-4-submit is 13f2c6d045fa26982d215a68b477d72e635bdc5f, not the head this job names (f50c2271a32f25eb24ced4276516beb858f3b97e). The job says to stop and record the new tip when the tip moves at claim time. Recorded here; not claimed, not retargeted. A new gate job at the new head is needed.
+
+## Attempt 2 (vm3, head 13f2c6d045, the one retry): HANDED BACK
+
+- Steps: step 0 pass; tidy pass with no changes; compile FAILED. `SolrCoreFingerprintCacheTest.java:428: error: variable searcherRef is already defined in method testStalePersistedGrossFingerprintIsRejectedAfterDocValuesUpdate()`. The repair in 13f2c6d045 declared a second `searcherRef` in the method that already declares one at the block near line 368 (try/finally with decref). The repair assumed a different method. Test and check then ran against a tree that did not compile and produced no test evidence (test=1, check=1 are from the compile failure).
+- Log: gates/logs/vm3/solr-18507-phase-4/compile.log.
+- Cause: a defect in the repair, not in the fingerprint code. The attempt-1 test evidence still stands (gates/logs/vm3/solr-18507-phase-4-run1-head-d797b9b310/).
+- Fix for the next host: in that method, rename the new declaration at the block near line 428 (for example `reloadedSearcherRef`), and its `decref` in the finally, so it no longer collides. Then a new gate job at the new head, with its own receipt. One line-level change, no other edits.
+- Status: HANDED BACK (retry failed at compile; the one retry is spent). The job returns to implementation with this fix as its first step.
