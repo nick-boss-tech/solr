@@ -1,0 +1,1 @@
+Checked on current main: the logging watcher copies the core name from the logging context into each log entry, and it sets an empty core value when none is present. We have not yet reproduced an empty Core column on main. We are keeping this issue open until we have run a reproduction through the update error path on the logging page.
