@@ -387,8 +387,7 @@ public class IndexFingerprint implements MapWriter {
       return null;
     }
 
-    int[] deletedDocIds =
-        new int[previousDeletedDocIds.length + (int) newlyDeletedCount];
+    int[] deletedDocIds = new int[previousDeletedDocIds.length + (int) newlyDeletedCount];
     IndexFingerprint live = previous.copy();
     live.maxVersionSpecified = maxVersion;
     live.numDocs = ctx.reader().numDocs();

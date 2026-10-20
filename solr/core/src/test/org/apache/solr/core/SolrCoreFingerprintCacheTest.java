@@ -247,11 +247,7 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
           assertNull(
               "The incremental path must reject a snapshot that restores a deleted document",
               IndexFingerprint.getFingerprintFromPrevious(
-                  previousFingerprint,
-                  new int[] {0},
-                  searcher,
-                  currentContext,
-                  Long.MAX_VALUE));
+                  previousFingerprint, new int[] {0}, searcher, currentContext, Long.MAX_VALUE));
           return null;
         });
   }
@@ -383,9 +379,7 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
 
     iwRef = core.getSolrCoreState().getIndexWriter(core);
     try {
-      iwRef
-          .get()
-          .deleteDocuments(new Term("id", "updated-1"));
+      iwRef.get().deleteDocuments(new Term("id", "updated-1"));
     } finally {
       iwRef.decref();
     }
