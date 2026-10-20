@@ -1,3 +1,4 @@
 - SOLR-9400 | claims/skip-SOLR-9400-vm2.md | close-obsolete (confirmed; Data Import Handler and cache absent under solr/) | solr-9400-draft-close 480c45a2f0 | JIRA read 2026-10-20T14:25:43Z Open
 - SOLR-9398 | claims/skip-SOLR-9398-vm2.md | keep-open (kept; DBQ under update lock read; timing run and Solr-vs-Lucene attribution missing) | solr-9398-draft-open 6d6e23b739 | JIRA read 2026-10-20T14:32:34Z Open
 - SOLR-9390 | claims/skip-SOLR-9390-vm2.md | keep-open (kept; test present, directToLeaders gone; seeded run missing) | solr-9390-draft-open 34692be3c5 | JIRA read 2026-10-20T14:37:53Z Open
+- SOLR-9369 | claims/skip-SOLR-9369-vm2.md | keep-open (kept; sync check is checksum-based; removal commit not named) | solr-9369-draft-open fd288281e6 | JIRA read 2026-10-20T14:42:39Z Open
