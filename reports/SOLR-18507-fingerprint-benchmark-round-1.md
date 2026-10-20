@@ -5,7 +5,7 @@ Status: PARTIAL, handed back for direction (written 2026-10-20T10:34:28Z by vm2)
 - Assignment: `assignments/pool-solr-18507-fingerprint-benchmark-round-1.md`. Claim: `claims/pool-solr-18507-fingerprint-benchmark-round-1.md`.
 - Heads: Phase 2 `137e77a4c8baa2684ea758edb6bbaa6bda7b7de7` (gate-green phase 2 head) and Phase 3 `ad706640ffd62907961749dc9319ca8bff35bbb0` (gate-green phase 3 head, gate job `gates/SOLR-18507-phase-3.md`). Both core jars built from detached worktrees (`solr/core/build/libs/solr-core-11.0.0-SNAPSHOT.jar`). The solrj, api and solrj-* modules have no diff between the two heads and are shared.
 - Host: 4 CPUs, 7 GiB RAM, Linux 6.1, OpenJDK 21.0.12.1, `-Xmx2g`. Single host, shared with other pool activity (load about 1 during the run). Phase 2 and Phase 3 legs ran on the same host, one after the other.
-- Harness: `reports/data/SOLR-18507-fingerprint-benchmark-round-1-Bench.java` (throwaway, outside the product branches). Each cell builds an index with EmbeddedSolrServer (one doc per add, commit every 5000 docs, then deletes of a seeded random set using `Random(18507)`), closes the container, then runs a fresh JVM that reopens the core and times `IndexFingerprint.getFingerprint(core, Long.MAX_VALUE)`: one cold call and three warm calls. Driver: `reports/data/SOLR-18507-fingerprint-benchmark-round-1-run-matrix.sh`. Config: the `_default` configset from the Phase 3 worktree.
+- Harness: `reports/data/SOLR-18507-fingerprint-benchmark-round-1-Bench.java.txt` (stored as text; not a Java source on this branch) (throwaway, outside the product branches). Each cell builds an index with EmbeddedSolrServer (one doc per add, commit every 5000 docs, then deletes of a seeded random set using `Random(18507)`), closes the container, then runs a fresh JVM that reopens the core and times `IndexFingerprint.getFingerprint(core, Long.MAX_VALUE)`: one cold call and three warm calls. Driver: `reports/data/SOLR-18507-fingerprint-benchmark-round-1-run-matrix.sh`. Config: the `_default` configset from the Phase 3 worktree.
 - Matrix: sizes 10,000, 100,000, 1,000,000 docs; delete ratios 0, 0.01, 0.10, 0.50; 5 fresh-JVM reps per cell; 480 rows. Raw rows: `reports/data/SOLR-18507-fingerprint-benchmark-round-1.csv` (columns phase, docs, delratio, kind, rep, millis, liveDocs). Live-doc counts match the deletes in every cell.
 
 ## Results (medians in ms; min and max across reps)
@@ -22,11 +22,11 @@ Status: PARTIAL, handed back for direction (written 2026-10-20T10:34:28Z by vm2)
 | 1M | 50% | cold | 42.5 (39.8-71.2) | 13.0 (11.1-14.8) |
 | all | all | warm (3 per rep) | 0.55-1.14 | 0.56-0.82 |
 
-Warm medians are under 1.2 ms in every cell for both phases. The full 12-cell table is in the CSV summary below.
+Warm medians are under 1.2 ms in every cell for both phases.
 
 ## Reading
 
-- Cold reopen cost is lower for Phase 3 in most cells, most clearly at 1M docs with 0% and 50% deletes (16 vs 92 ms and 13 vs 43 ms). At 1M docs with 10% deletes the two legs are within noise (65 vs 70 ms). At 1M docs with 1% deletes Phase 3 is slower in the medians (54 vs 76 ms is faster, so this is not a regression; the min-max ranges overlap).
+- Cold reopen cost is lower for Phase 3 in most cells, most clearly at 1M docs with 0% and 50% deletes (16 vs 92 ms and 13 vs 43 ms). At 1M docs with 10% deletes the two legs are within noise (65 vs 70 ms). At 1M docs with 1% deletes Phase 3 is faster in the medians (54 vs 76 ms), but the min-max ranges overlap.
 - Warm calls show no meaningful difference. Both legs keep the fingerprint in the cache, so the Phase 3 change does not move the warm path.
 - The spread in cold numbers is large (up to 3x within one cell), which is the host noise. Five reps are too few to call the 10% cells different.
 - Not measured: segment flush and merge cost, retained summary memory, persisted metadata size, and the max-version fallback case. Without the flush and merge side, the assignment's rule (do not claim a win unless read savings exceed flush, merge and memory costs) cannot be applied. No win is claimed.
