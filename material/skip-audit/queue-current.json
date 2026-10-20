@@ -5959,9 +5959,9 @@
       "round": "audit-1",
       "evidence": "Existing research note: SnapShooter.createSnapAsync reports in-progress on main."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-12262-draft-open",
-    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
+    "verdict": "close-fixed",
+    "draft_branch": "solr-12262-draft-close",
+    "evidence_head": "dc644ce5a6"
   },
   {
     "key": "SOLR-12246",
