@@ -9,7 +9,9 @@
 - Links: Ticket or parent: SOLR-2534. Category: Search and query components. Siblings: `MinMaxAgg` (read-only). Supersedes: none.
 - Idempotency key: SOLR-2534@c8ab71430f.
 
-Heartbeat: 2026-10-20T08:20:00Z
+Heartbeat: 2026-10-20T03:20:20Z
+
+DONE: 2026-10-20T03:20:20Z. Branch `solr-2534-string-minmax` at `04bbcee582`, receipt `receipts/SOLR-2534.md`, draft `drafts/SOLR-2534/pr-description.md`.
 
 Result: 2026-10-20T08:20:00Z: handed back at `722232054e`, receipt `receipts/SOLR-2534.md`. Failure: test methods in `TestStringMinMaxFunction` do not declare `throws Exception`.
 
