@@ -32,3 +32,15 @@ Review (2026-10-20T15:30Z, vm5, second pass on head dab6a466316940ea643c22dd9e56
 Repairs: none.
 
 Regate: gates/SOLR-15326-review-pass-2.md (DONE, green with minor notes).
+
+## Pass 3
+
+Review (2026-10-20T15:35Z, vm5, third pass on head dab6a466316940ea643c22dd9e56c9a63c0cb7fb; ls-remote unchanged):
+
+- Final verdict: keep the change. The tie-breaker is applied once, the comparator is aligned with it, and the unique-key clause is accepted by the export handler in the test shapes. Open notes, none blocking: the extra schema round trip per construction, the new IOException on schema lookup failure, no docValues check on the unique key, and the substring-only test assertion.
+- Rerun. `StreamingTest` (offline) rc=0; tests=35, skipped=1, failures=0, errors=0 (`/workspace/gates/logs/vm5/g15326-test-p3.log`). This run took the alias-disabled branch (skip count 1), so across the three passes both `useAlias` branches were covered.
+- Owner question open from the receipt: the retire-or-keep call on the branch is the owner's, not this review's.
+
+Repairs: none.
+
+Regate: gates/SOLR-15326-review-pass-3.md (DONE).
