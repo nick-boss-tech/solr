@@ -1,37 +1,36 @@
 # Skip record: SOLR-9477
 
-- Ticket: SOLR-9477, UpdateRequestProcessors ignore child documents. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-9477, "UpdateRequestProcessors ignore child documents". JIRA status read 2026-10-20T13:51:34Z (UTC): Open, resolution None, updated 2020-01-29.
+- Verdict: keep-open (kept; re-read at the pinned head). The question is which update processors should apply to child documents, which is a design decision.
 - Draft branch: solr-9477-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-05, audit verdict confirmed-skip).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T13:51:34Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: UpdateRequestProcessors ignore child documents. Skip note: design: URPs and child documents.
+Update request processors ignore child documents, so a JSON document with `_childDocuments_` fails the required-ID check that a processor-chain document without children would pass. The reporter's example fails with "missing required field: id" on a child. Comments from 2016 say processors may differ in whether they should apply to children, and show a per-processor workaround.
 
-## Code reading
+## Code reading (pinned head)
 
-Taken from the audit evidence, not re-read at the pinned head: audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 6 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: URPs and child documents Basis is ticket text, not a fresh code repro; no deterministic test could be written from it.
+- `git grep -l getChildDocuments 498a09aea97aac86c2cc7ac114113b946d249942 -- solr/core/src/java/org/apache/solr/update/processor`: two files, `AddSchemaFieldsUpdateProcessorFactory.java` and `IgnoreLargeDocumentProcessorFactory.java`.
+- The package has 44 update processor factory classes (`git grep -l "class .*UpdateProcessorFactory"`). Two of them handle child documents; the other 42 do not.
 
 ## History
 
-No commit history was used for this record.
+- evidence.py at the pinned head: no commits naming SOLR-9477.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. The reporter's example (a JSON document with `_childDocuments_` through a chain with an ID-requiring processor) is a short run, but the expected behavior for each processor is the design question, not something a run settles.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+Only two processors handle children; the rest act on the root only or on the whole document without a child path. Whether all processors should apply to children (the ticket's reading) or only those that need to (the 2016 comments) is a design choice.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric for an open design question: attempts made are the processor count and the grep; the missing piece is the design decision on which processors apply to children. close-fixed and close-obsolete are not supported. pr-needed is not chosen, since the scope of processors touched is a design choice.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not run the example. It does not check the ref guide's text on child documents.
