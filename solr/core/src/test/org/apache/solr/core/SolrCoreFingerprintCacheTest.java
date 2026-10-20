@@ -425,9 +425,9 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     h.getCoreContainer().reload(core.getName());
     core = h.getCore();
     assertEquals(0, core.getPerSegmentGrossFingerprintCacheSize());
-    RefCounted<SolrIndexSearcher> searcherRef = core.getSearcher();
+    RefCounted<SolrIndexSearcher> reloadedSearcherRef = core.getSearcher();
     try {
-      SolrIndexSearcher searcher = searcherRef.get();
+      SolrIndexSearcher searcher = reloadedSearcherRef.get();
       SegmentReader segmentReader =
           getSegmentReader(searcher.getTopReaderContext().leaves().get(0).reader());
       assertTrue(
@@ -442,7 +442,7 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
       // this uncached live-doc scan.
       assertCachedFingerprintMatchesUncached(searcher, Long.MAX_VALUE);
     } finally {
-      searcherRef.decref();
+      reloadedSearcherRef.decref();
     }
   }
 
