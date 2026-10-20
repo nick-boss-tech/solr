@@ -13,3 +13,4 @@ Append one heartbeat line at least once an hour while the claim is active, and p
 Heartbeat: 2026-10-20T05:14:49Z (batch 8 claimed; item 1 in progress)
 Heartbeat: 2026-10-20T05:16:06Z (batch 8 item 1 done; item 2 next)
 Heartbeat: 2026-10-20T05:19:51Z (batch 8 item 1 done; item 2 in progress)
+Heartbeat: 2026-10-20T05:20:57Z (batch 8 item 2 done; item 3 next)
