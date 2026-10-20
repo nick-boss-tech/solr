@@ -1,0 +1,1 @@
+ZkCmdExecutor is no longer in Solr on current main, so the change proposed here does not apply to the code as it is now. The session-expiry handling that exists now is in the leader election and Overseer classes. If you still see a session-expired operation fail without a retry on a current release, please open a new issue with the stack trace and the Solr version.
