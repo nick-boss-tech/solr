@@ -21,3 +21,7 @@ All 179 completed slice files contain exactly two data rows. Of 2,039 planned sl
 ## Changes made from this check
 
 The CSV assignment now requires a per-key lookup across both skip queues, earlier CSV slices, the priority-round reports, and ticket records. It keeps overlapping rows in the two-row slice, labels them `overlap`, and records the exact path and status. It also distinguishes metadata triage from the deeper evidence work required by the completed Critical and Blocker round. The `records` capability is now listed for Linux and Windows pool hosts.
+
+## Live assignment status after the spot check
+
+At coordination tip `a8224fff70c`, owner direction had paused `assignments/pool-csv-backlog-round-1.md` and made `assignments/pool-newdev-critblock-review-round-1.md` top priority. Do not claim or create CSV slices until the CSV assignment is reopened. Its existing slice claims remain active under their own records.

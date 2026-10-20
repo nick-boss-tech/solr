@@ -24,7 +24,7 @@ Before starting any claimed item, check it against [`pool/advisory-wont-do.md`](
 
 ## Where work comes from
 
-Work is pulled from the three stores in [`pool/work-stores.md`](work-stores.md), in the order given there: follow-ups and reviews of existing work, then the skip list, then the CSV backlog. CSV backlog slices contain exactly two open rows. Before classifying either row, check the skip queue and prior ticket records for overlap; keep the row in its slice and cite the matching record and status. Slices and batches are self-serve: when the posted ones are taken, cut the next one yourself under the rules on that page. "No work for me" is not a reportable state while any store holds unclaimed items.
+Work is pulled from the three stores in [`pool/work-stores.md`](work-stores.md), in the order given there: follow-ups and reviews of existing work, then the skip list, then the CSV backlog. An assignment with `Status: PAUSED` is unavailable until it is reopened. The CSV backlog is currently paused by owner direction; the newdev and Critical/Blocker review assignment is top priority. When CSV work resumes, slices contain exactly two open rows. Before classifying either row, check the skip queue and prior ticket records for overlap; keep the row in its slice and cite the matching record and status. Slices and batches are self-serve only when their assignment is OPEN: when the posted ones are taken, cut the next one yourself under the rules on that page. "No work for me" is not a reportable state while any claimable store holds unclaimed items.
 
 ## Two rules that cause most failures
 
