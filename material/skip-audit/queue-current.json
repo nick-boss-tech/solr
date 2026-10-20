@@ -6494,8 +6494,8 @@
       "round": "audit-4",
       "evidence": "SOLR-11814 logs a Jetty AssertionError during REST response-stream close, with SOLR-8933 as background. Upstream/main no longer contains the old SolrDispatchFilter path or exact assertion string, but current REST tests remain; need a current-version reproduction and Jetty trace to decide whether a Solr test misses failure."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-11814-draft-open",
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-11814-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
