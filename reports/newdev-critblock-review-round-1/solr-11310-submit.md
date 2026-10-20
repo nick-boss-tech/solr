@@ -20,3 +20,15 @@ Gate (vm5, this pass):
 Not run this pass: tidy, Error Prone, module check for ltr (the receipt's hardening gate covered those on the head before; this pass reran the focused leg).
 
 Regate: gates/SOLR-11310-review-pass-1.md.
+
+## Pass 2
+
+Review (2026-10-20T14:38Z, vm5, second pass on head e38ddec5279c465f65a2fa2de22ee9c92e0f5e31; ls-remote unchanged):
+
+- Test assertion against the window. `testBoostedDocsSurviveLTRRescore` runs `ReRankCollector` with a window of 2 (`setLen(2)`, rerank 2) and `boostedPriority = {"1"}`. The assertions at the end of the test check that doc `1` is first and doc `0` second. Doc `0` has the higher model score, so the order depends only on the boost. The assertion is the right one.
+- `forceElevation`. The flag is `QueryElevationComponent.forceElevation` (line 147), read from the request parameter with the configured default (lines 243, 708-709). The `ReRankCollector` change does not read it. The new test does not set it, so it covers the boost path only. Finding, minor, coverage: the receipt's owner call names `forceElevation=false`; that is the default path, which the test runs, but no test sets the flag to true. Not repaired (a test addition is outside the repair scope for this round, and the true path is the existing sort-spec path, not this change).
+- Rerun. `:solr:modules:ltr:test --tests org.apache.solr.ltr.TestLTRReRankingPipeline` (offline) under the vm5 lock: rc=0; JUnit XML tests=4, failures=0, errors=0, skipped=0 (`/workspace/gates/logs/vm5/g11310/test-p2.log`).
+
+Repairs: none.
+
+Regate: gates/SOLR-11310-review-pass-2.md.
