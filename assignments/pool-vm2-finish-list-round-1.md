@@ -1,6 +1,6 @@
 # Assignment: vm2 finish list, round 1
 
-Status: OPEN (prior claim claims/pool-vm2-finish-list-round-1-a.md STALE since 2026-10-17; takeover allowed by WORKFLOW.md rule 4)
+Status: HANDED (vm2, 2026-10-20T10:38:57Z): section A is already complete by evidence (fork solr-8628-submit tip is 2e56ce9990, the packaged head; gates/SOLR-8628-packaging.md is DONE); section B's job gates/SOLR-5394-push-gated-head.md is not on coordination and the fork tip solr-5394-submit is 74532d0f76, not the gated head 6e4c302c4; section C waits on the owner decisions in assignments/pool-vm2-open-decisions-round-1.md and a follow-up gate job not yet filed.
 
 Capability tags: [push, gate, implementation]. Intended host: vm2. Posted by the main side, 2026-10-14, at Nick's direction: post an assignment for what vm2 has not finished.
 
