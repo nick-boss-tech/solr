@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The code reading does not settle this ticket yet. We are leaving the ticket open while we look further.
+On current main a bare star with a default field is parsed as match-all, by design, so that a plain q=* query is not turned into a wildcard on the default field. The reference guide does not describe this rule yet, and documenting it is the step that would let us close this issue. We are keeping it open until that is decided. If you think the behavior should change instead, please say so here.

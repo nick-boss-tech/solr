@@ -1,37 +1,36 @@
 # Skip record: SOLR-9352
 
-- Ticket: SOLR-9352, matchAllDocsQuery instead of WildCardQuery from lucene qp with df and *. JIRA status not recorded in the C reading. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-9352, "matchAllDocsQuery instead of WildCardQuery from lucene qp with df and *". JIRA status read 2026-10-20T15:03:41Z (UTC): Open, resolution None, updated 2019-06-08. Linked: SOLR-2996 (Closed).
+- Verdict: keep-open (kept; re-read at the pinned head). The behavior is deliberate per the linked issue, but the reference guide does not state it, so the close-answered route is not yet available.
 - Draft branch: solr-9352-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the C reading (reports/2026-10-18-skip-repro/C3, slice 3, pinned head unchanged).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T15:03:41Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: matchAllDocsQuery instead of WildCardQuery from lucene qp with df and *.
+With `df=id`, the query `q=*` is parsed as MatchAllDocsQuery, not as `id:*`. The reporter expected a wildcard on the default field. Hoss Hoss's 2016 comment says the behavior was added on purpose because most users kept getting unexpected results when a bare star matched only the default field.
 
-## Code reading
+## Code reading (pinned head)
 
-Code unchanged at solr/core/src/java/org/apache/solr/parser/SolrQueryParserBase.java:1277-1281 (bare * with df returns MatchAllDocsQuery) but Hoss says it is intentional per SOLR-2996 and suggests Won't Fix; needs a maintainer decision
+- `solr/core/src/java/org/apache/solr/parser/SolrQueryParserBase.java:1279-1281`: a wildcard term `*` with no explicit field (`getExplicitField() == null`) or with field `*` returns `newMatchAllDocsQuery()`. So the default field is ignored for a bare star, as the ticket describes.
+- `solr/solr-ref-guide/modules/query-guide/pages/other-parsers.adoc:1620`: the reference guide lists MatchAllDocsQuery as a builder only, and does not state the bare-star rule with `df`.
 
 ## History
 
-- None cited in the C reading.
+- evidence.py at the pinned head: no commits naming SOLR-9352. The linked SOLR-2996 is closed; its commit was not located here.
 
 ## Reproduction attempts
 
-Not attempted. The C scope ran no builds or tests.
+Not run. The check is one query: `df=id&q=*` with the parsed query in debug output. The result is already visible in the code path above.
 
 ## Gap analysis
 
-The C reading gives the missing piece; see the evidence below.
+The behavior is intended, but the documentation does not say so. A docs sentence stating the rule would allow close-answered; without one, the verdict stays open.
 
 ## Verdict justification
 
-keep-open: the code reading does not settle the question; the C reading names the piece that would settle it.
-
-Missing for this verdict: The missing piece named in the C reading (see the evidence below).
+keep-open meets the rubric: attempts made are the parser reading and the docs check; the missing piece is a docs statement or the owner's view that the rule should stay undocumented. close-answered would need a docs page that answers the question, and none states the rule here.
 
 ## Limits
 
-This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path where the subject does not cite the ticket.
+This record does not change the behavior. It does not read SOLR-2996.
