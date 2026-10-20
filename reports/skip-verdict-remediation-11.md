@@ -19,3 +19,4 @@
 - SOLR-9550 | claims/skip-SOLR-9550-vm2.md | keep-open (kept; InnerJoinStream merge join has no order check; validation design open; no run) | solr-9550-draft-open ccee000b9d | JIRA read 2026-10-20T13:36:24Z Open
 - SOLR-9514 | claims/skip-SOLR-9514-vm2.md | keep-open (kept; command live and documented; deprecation is an owner-level API decision) | solr-9514-draft-open a1f813d8cc | JIRA read 2026-10-20T13:42:10Z Open
 - SOLR-9492 | claims/skip-SOLR-9492-vm2.md | keep-open (kept; completion check reads top-level keys only; split-failure run missing) | solr-9492-draft-open 3c12a87d90 | JIRA read 2026-10-20T13:47:28Z Open
+- SOLR-9477 | claims/skip-SOLR-9477-vm2.md | keep-open (kept; 2 of 44 processors handle children; design decision open) | solr-9477-draft-open 3c8973ffac | JIRA read 2026-10-20T13:52:36Z Open
