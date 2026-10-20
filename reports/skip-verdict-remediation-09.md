@@ -17,3 +17,4 @@ One line per item: ticket, claim, verdict recorded, draft branch head, evidence.
 - SOLR-11864 | claims/skip-SOLR-11864-vm2.md | keep-open (changed from close-fixed: validator and call site present; fixing commit not named; no API run) | solr-11864-draft-open 211e3df2c9 | JIRA read 2026-10-20T07:04:52Z Open
 - SOLR-11858 | claims/skip-SOLR-11858-vm2.md | keep-open (kept; count path at DirectSolrSpellChecker.java:197-203; trigger config and run missing) | solr-11858-draft-open 60801d869b | JIRA read 2026-10-20T07:12:54Z Open
 - SOLR-11827 | claims/skip-SOLR-11827-vm2.md | pr-needed (changed from keep-open: MockAuthorizationPlugin.java:42-50 returns 200/403 for missing principal; test-only change) | solr-11827-draft-pr e43f015cec | JIRA read 2026-10-20T07:20:26Z Open
+- SOLR-11816 | claims/skip-SOLR-11816-vm2.md | keep-open (kept; timed Docker reproduction not run; no code defect named) | solr-11816-draft-open 329180a703 | JIRA read 2026-10-20T07:25:22Z Open
