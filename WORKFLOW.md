@@ -21,6 +21,7 @@ An assignment lists the tags it needs, and an agent claims only work whose tags 
 
 - `review`: reading code and writing audit findings. Any host.
 - `draft`: writing PR drafts from receipts. Any host.
+- `records`: reading structured coordination records and producing bounded CSV or record deliverables, without Jira or GitHub writes or source-code changes. A host may claim `records` assignments only when its host file lists this tag.
 - `implementation`: editing branch code and committing. Linux hosts.
 - `gate`: running the full hardening gate (changelog parse, tidy, Error Prone compile, proof run, focused tests, module check). Linux hosts with the Gradle toolchain.
 - `premise-run`, `settling-run`, `sweep`: focused test runs short of a full gate. Linux hosts.
@@ -28,7 +29,7 @@ An assignment lists the tags it needs, and an agent claims only work whose tags 
 - `selenium`: the Admin UI Selenium suites. The Windows host; a Linux host only if it has Chrome and says so in its host file.
 - `windows-check`: checks that can only run on the Windows host.
 
-The Windows host never claims `gate`, `implementation`, `premise-run`, `settling-run` or `sweep` work: builds stay off that machine (Nick's standing rule). It claims `review`, `draft`, `selenium` and `windows-check` work.
+The Windows host never claims `gate`, `implementation`, `premise-run`, `settling-run` or `sweep` work: builds stay off that machine (Nick's standing rule). It claims `review`, `draft`, `records`, `selenium` and `windows-check` work.
 
 ## Claims
 

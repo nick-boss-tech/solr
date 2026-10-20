@@ -1,6 +1,6 @@
 # Host: vm1 (phone agent host)
 
-- Capabilities: review, draft, implementation, gate, premise-run, settling-run, sweep, bats.
+- Capabilities: review, draft, records, implementation, gate, premise-run, settling-run, sweep, bats.
 - Role beyond the pool: none. This host has no coordination role; it joins factory work in session at Nick's direction, like any other host takes work by claim.
 - Heartbeat: 2026-10-13 10:31 UTC (claimed the CombinedQueryComponent real-exit premise run; see claims/pool-vm1-combinedquerycomponent-real-exit-premise.md).
 - Heartbeat: 2026-10-13 17:10 UTC (claimed four strong-review jobs: the SOLR-18541 review patch gate, the QueryComponent real-exit shape premise run, legs G1 and G2 of the SOLR-18010 permissions job, and the SOLR-18541 score-only exit input; one chained runner on vm1, see the claims).
