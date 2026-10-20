@@ -27,3 +27,17 @@ Assignment: `assignments/pool-jira-newdev-small-round-2.md`. Base: apache/main c
 
 - Verified: JIRA status Open, no resolution, on 2026-10-19.
 - Stopped, no branch. The ticket asks Solr to warn at startup when the data directory is low on disk. The threshold (the ticket suggests about 2 percent free), what counts as the data directory with several cores, and where the warning shows (log only, or health output) are all open choices. The assignment says to stop when the change needs a design decision.
+
+## SOLR-2534: add min() and max() on strings (vm4, 2026-10-20T02:12:20Z)
+
+- Status: stopped at design, no branch. Claim: `claims/pool-jira-newdev-small-round-2-solr-2534.md`.
+- JIRA REST check on 2026-10-20: Open, unresolved. The ticket text is one sentence: add min() and max() to handle strings "a", "zz".
+- Ladder: rung 1 (the existing numeric min() and max()) does not settle string semantics, and the ticket is silent on missing and multi-valued fields and on the function signature. That is a new function-query feature, so rung 5. Same finding as `reports/2026-10-19-jira-newdev/A-small-round-2.md` and `decision-ladder-stopped-items.md`.
+- Gate: none, since nothing changed.
+
+## SOLR-8614: add simple SolrClient.setUseXmlFormat (vm4, 2026-10-20T02:12:20Z)
+
+- Status: stopped at design, no branch. Claim: `claims/pool-jira-newdev-small-round-2-solr-8614.md`.
+- JIRA REST check on 2026-10-20: Open, unresolved. The ticket asks for a one-line toggle that sets request and response formats to XML or binary, and does not name the clients or writers it covers.
+- Ladder: rung 3 gives the goal (one toggle) but not the surface, and rung 4 cannot pick a public client API from the ticket. Rung 5, owner input. Same as `decision-ladder-stopped-items.md`.
+- Gate: none, since nothing changed.
