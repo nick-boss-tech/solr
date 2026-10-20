@@ -10,3 +10,7 @@
 - Links: Ticket or parent: SOLR-18507. Category: 10, Core admin and cores. Siblings: pool-windows-solr-18507-phase-4-implementation-repair-round-1 (the repair that produced this head). Supersedes: pool-vm3-gate-SOLR-18507-phase-4-r3 (ENDED; its attempt-3 head 807f9d42db predates the repair).
 
 Heartbeat: 2026-10-20T20:35:00Z
+
+Result: 2026-10-20T20:57:00Z: gate green at 81a7e5d78f (changelog, tidy clean, compile, 7 focused tests, check). Receipt: receipts/SOLR-18507.md.
+
+DONE: 2026-10-20T20:57:00Z. Deliverables: receipts/SOLR-18507.md, gates/SOLR-18507-phase-4-r4.md (Status DONE).

@@ -1,6 +1,6 @@
 # Gate job: SOLR-18507 (Phase 4 incremental fingerprint repair)
 
-Status: CLAIMED (claims/pool-vm3-gate-SOLR-18507-phase-4-r4.md)
+Status: DONE (receipts/SOLR-18507.md; green at 81a7e5d78f)
 
 - Branch: `solr-18507-phase-4-submit`. Head: `81a7e5d78fa2be005a81e29d3dfc47a742272928` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `ad706640ffd62907961749dc9319ca8bff35bbb0`. Prior gated head: none recorded.
