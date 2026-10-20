@@ -1,6 +1,6 @@
 # Guide: build and test traps
 
-Hard-won lessons from gated branches, written down so each one is paid for once. Every entry names the trap, the symptom, and the rule. Add an entry in the same push that pays for a new one; an entry without a date and a ticket is folklore and gets challenged.
+Hard-won lessons from gated branches, written down so each one is paid for once. Every entry names the trap, the symptom, and the rule. Add an entry in the same push that pays for a new one; an entry without a date and a ticket is folklore and gets challenged. New entries carry a Recurrences count starting at 1, incremented in the same push when the trap bites again; a trap whose count keeps rising is a system problem to fix, not bad luck to log.
 
 ## Gradle and tidy
 
