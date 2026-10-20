@@ -44,3 +44,14 @@ Pass 1 result: GREEN at `344485485f`. Pass 2 starts on the same head.
 - Regate: green (see the gate job `gates/SOLR-18458-review-pass-2.md`). Counts from fresh XML match pass 1: core 30/303 (2 skipped), solrj 1/2, ltr 15/91 (1 skipped), language-models 1/23, zero failures. Tidy rc 0, tree clean. Module checks rc 0 on four modules.
 
 Pass 2 result: GREEN at `344485485f`. Pass 3 starts on the same head.
+
+## Pass 3 (vm3, 2026-10-20T21:58:22Z, taken over from vm4's stale pass-3 slot)
+
+- Head reviewed: `344485485fb8e1706a1e04c02e373d8a97bcd1b8` (unchanged). Base `c8ab71430f`. Passes 1 and 2 reused, not redone.
+- Review focus: the production paths of the four core files, the SolrJ constant removal, and the ReRank fallback. Checked the MoreLikeThis and SearchHandler changes against the ticket: `debug=all` and `debug=true` both enable the debug paths, and the legacy `debugQuery` key is no longer read.
+- Finding (minor, new in pass 3): `ReRankQParserPlugin` fallback (used only without SearchHandler and ResponseBuilder) now returns true for `debug=results` as well as `debug=all` and `debug=true`. Before, only `debug=true` counted. The ticket asks for `debug=all`; the widening is not asked for and no test pins it. It changes behaviour, so it is recorded, not repaired (outside the repair scope). Owner's call whether to keep it or narrow it to the ticket.
+- Repairs in pass 3: none.
+- Regate: `gates/SOLR-18458-review-pass-3.md`, GREEN at `344485485f`. Logs `gates/logs/vm3/solr-18458-review-pass-3/`. Changelog rc 0; tidy rc 0 with an empty status; Error Prone compile of four modules rc 0; focused runs with seed 18458C0FFEE18458, counted from fresh XML: core 28 classes, 290 tests, 2 skipped, 0 failures, 0 errors; solrj 1 class, 2 tests, 0 failures; ltr 15 classes, 91 tests, 1 skipped, 0 failures; language-models 1 class, 23 tests, 0 failures; module checks rc 0.
+- Count note: pass 2 counted 30 core classes and 303 tests. This pass counted the touched test files that contain `@Test` (28 classes). The two-class difference is not reconciled here; both counts are zero-failure.
+
+Pass 3 result: GREEN at `344485485f`. Unit 3 is complete after pass 3.

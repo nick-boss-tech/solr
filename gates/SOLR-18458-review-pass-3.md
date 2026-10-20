@@ -1,6 +1,6 @@
 # Gate job: SOLR-18458 review pass 3 (vm3)
 
-Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-18458-submit.md, takeover line 2026-10-20T21:30:18Z)
+Status: DONE (pass 3 green at 344485485f; receipts/SOLR-18458.md)
 
 - Branch: `solr-18458-submit`. Head: `344485485fb8e1706a1e04c02e373d8a97bcd1b8` (the head pass 1 and pass 2 reviewed; fork tip confirmed by ls-remote at pass 1). No repair is expected in pass 3; if the tip moved, stop and record it here.
 - Prior gated head: `344485485f` (pass 1 and pass 2 regates, GREEN). Merge-base with upstream: `c8ab71430f`.
