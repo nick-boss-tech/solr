@@ -1,37 +1,32 @@
 # Skip record: SOLR-9400
 
-- Ticket: SOLR-9400, Casting error when using SortedMapBackedCache. JIRA status as recorded in the B1 reading: Open. JIRA was not re-read for this record.
-- Verdict: close-obsolete.
+- Ticket: SOLR-9400, "Casting error when using SortedMapBackedCache". JIRA status read 2026-10-20T14:24:58Z (UTC): Open, resolution None, updated 2019-06-08.
+- Verdict: close-obsolete (confirmed; the recorded verdict is kept).
 - Draft branch: solr-9400-draft-close.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the B1 reading (reports/2026-10-18-skip-repro/B1-removed-round-1.md, vm3, round 1, pinned head unchanged).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T14:24:58Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Casting error when using SortedMapBackedCache.
+Full import through the Data Import Handler fails with a ClassCastException when an entity uses `cacheImpl='SortedMapBackedCache'`. The reporter asks for a clearer exception naming the entity and field.
 
-## Code reading
+## Code reading (pinned head)
 
-DIH removed by a57ba25400. No SortedMapBackedCache code at head.
+- `git grep -l SortedMapBackedCache 498a09aea97aac86c2cc7ac114113b946d249942 -- solr`: empty. The cache class is not in the tree.
+- `git grep -l "org.apache.solr.handler.dataimport" 498a09aea97aac86c2cc7ac114113b946d249942 -- solr`: empty. The Data Import Handler package is not in the tree.
 
 ## History
 
-- `a57ba25400`: named or touching the path in the B1 reading; ancestor of the pinned head: yes (checked).
+- evidence.py at the pinned head: no commits naming SOLR-9400.
 
 ## Reproduction attempts
 
-Not attempted. The B1 scope ran no builds or tests.
-
-## Gap analysis
-
-The code reading shows the reported behavior no longer applies at the pinned head (fixed or removed), as described above.
+Not applicable: the handler the ticket is about is absent, so there is nothing to run.
 
 ## Verdict justification
 
-close-obsolete: the feature or class the ticket names was removed, and the search at the pinned head finds no remaining use (cited in the code reading).
-
-Missing for this verdict: The grep result is taken from the B1 reading; it was not re-run in this record.
+close-obsolete meets the rubric: the feature the ticket is about (the Data Import Handler and its cache) is removed, and the grep under `solr/` at the pinned head is empty for both names.
 
 ## Limits
 
-This record does not establish a reproduction. Commit linkage is by code path where the commit subject does not cite the ticket. It does not post anything to JIRA or GitHub.
+This record does not name the commit that removed the handler.
