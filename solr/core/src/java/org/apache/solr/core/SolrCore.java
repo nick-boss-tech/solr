@@ -37,6 +37,7 @@ import java.io.Writer;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Constructor;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileStore;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -185,6 +186,7 @@ public class SolrCore implements SolrInfoBean, Closeable {
   public static final String version = "1.0";
 
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+  private static final double LOW_DATA_DIR_SPACE_FRACTION = 0.02;
   private static final Logger requestLog =
       LoggerFactory.getLogger(
           MethodHandles.lookup().lookupClass().getName() + ".Request"); // nowarn
@@ -1068,6 +1070,7 @@ public class SolrCore implements SolrInfoBean, Closeable {
       }
 
       this.dataDir = initDataDir(dataDir, solrConfig, coreDescriptor);
+      warnIfDataDirLowOnSpace();
 
       if (log.isInfoEnabled()) {
         log.info("Opening new SolrCore at [{}], dataDir=[{}]", getInstancePath(), this.dataDir);
@@ -1413,6 +1416,28 @@ public class SolrCore implements SolrInfoBean, Closeable {
             "Schema will not work with SolrCloud mode: " + e.getMessage(),
             e);
       }
+    }
+  }
+
+  static boolean isBelowFreeSpaceThreshold(long usable, long total) {
+    return total > 0 && usable < total * LOW_DATA_DIR_SPACE_FRACTION;
+  }
+
+  private void warnIfDataDirLowOnSpace() {
+    try {
+      FileStore store = Files.getFileStore(Path.of(dataDir));
+      long total = store.getTotalSpace();
+      long usable = store.getUsableSpace();
+      if (isBelowFreeSpaceThreshold(usable, total)) {
+        log.warn(
+            "Core [{}] data directory [{}] has less than 2 percent free space: {} of {} bytes usable",
+            getName(),
+            dataDir,
+            usable,
+            total);
+      }
+    } catch (IOException e) {
+      log.debug("Could not check free space of data directory [{}]", dataDir, e);
     }
   }
 
