@@ -7,9 +7,9 @@ Status: PARTIAL. Rows marked PENDING have not been classified yet. The claim sta
 
 | Ticket | Summary | Class | Evidence | Next step |
 | --- | --- | --- | --- | --- |
-| SOLR-8767 | RealTimeGetComponent and stored/copyField exclusion | PENDING | Open, updated 2018. Link: SOLR-3743 (Closed) | Read SOLR-3743; check the RTG field list at base |
+| SOLR-8767 | RealTimeGetComponent and stored/copyField exclusion | STILL-PRESENT (fix not written in this slice) | Base still removes copyField targets from RTG output: `RealTimeGetComponent.java` line 299 calls `removeCopyFieldTargets`, defined at lines 626 to 633 with `schema.isCopyFieldTarget`. So a stored target that was indexed directly is dropped, as the ticket describes. Link SOLR-3743 (Closed) not read. Fix needs a rule that keeps targets whose sources were not sent | Follow-up: write a branch and a gate for this rule |
 | SOLR-8887 | Security features export deprecated DefaultHttpClient | OBSOLETE | No reference to `DefaultHttpClient` in `solr/core/src/java` or `solr/solrj/src/java` at base. Reporter comment (2016-11-21) suggests closing as a duplicate of SOLR-4509 (Resolved) | Owner note: close as duplicate of SOLR-4509 |
-| SOLR-8905 | AutoAddReplicas deletes local core.properties | PENDING | Open, no links | Read the AutoAddReplicas delete path at base |
+| SOLR-8905 | AutoAddReplicas deletes local core.properties | NOT-REPRODUCIBLE | The startup removal in the ticket matches the `solr.cloud.delete.unknown.cores.enabled` path at base (`CorePropertiesLocator.java` lines 244 to 252). That option is off by default, and the ticket does not say it was set. The failover scenario was not run | Owner note: ask for the cluster config and whether the option was on |
 | SOLR-9138 | CDATA should be required for text fields in XML output | PENDING | Open, no links | Check the XML response writer for CDATA handling |
 | SOLR-9170 | Detailed diagnostics for ZooKeeper connection issues | STILL-PRESENT (feature) | Open diagnostics request, no links. It asks for new logging or output, not a defect | Owner scoping: a feature request, not a slice-sized fix |
 | SOLR-9956 | ArrayIndexOutOfBounds when indexing a large amount | PENDING | Open, updated 2020, no links | Read the stack in the ticket and the matching base code |
