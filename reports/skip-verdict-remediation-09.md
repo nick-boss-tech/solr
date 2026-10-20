@@ -8,3 +8,4 @@ One line per item: ticket, claim, verdict recorded, draft branch head, evidence.
 - SOLR-12166 | claims/skip-SOLR-12166-vm2.md | close-obsolete (changed from keep-open; LIR mechanism and test absent, grep empty at pinned head; removal commit not named) | solr-12166-draft-close f78590958f | JIRA read 2026-10-20T05:53:10Z Open
 - SOLR-12112 | claims/skip-SOLR-12112-vm2.md | keep-open (kept; null-sort guard present at QueryComponent.java:1181, 1362; fixing commit not named; no shard repro) | solr-12112-draft-open | JIRA read 2026-10-20T06:01:43Z Open
 - SOLR-12093 | claims/skip-SOLR-12093-vm2.md | keep-open (kept; null-container guard present at JettySolrRunner.java:452; focused run not done) | solr-12093-draft-open dda5f57eb0 | JIRA read 2026-10-20T06:13:12Z Open
+- SOLR-12029 | claims/skip-SOLR-12029-vm2.md | keep-open (kept; UNKNOWN(0) present, 10 core uses; open question is public SolrJ enum decision) | solr-12029-draft-open | JIRA read 2026-10-20T06:20:49Z Open
