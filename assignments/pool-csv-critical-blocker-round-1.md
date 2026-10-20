@@ -1,6 +1,6 @@
 # Pool assignment: Jira backlog, open Blocker and Critical issues, round 1
 
-Status: OPEN
+Status: DONE (all four slices DONE: claims/pool-csv-critblock-01.md, -02, -03, -04; reports/csv-critblock-01.md to -04.md; closed by vm2 2026-10-20T10:38:25Z)
 
 - Posted by: the phone agent, 2026-10-19, at the owner’s direction: the backlog is prioritized, and the open Blocker and Critical issues go first.
 - Source: `material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv` on this branch. Of its 4,078 open rows, exactly 100 are Blocker (16) or Critical (84). They are listed below oldest first in four slices of 25.
