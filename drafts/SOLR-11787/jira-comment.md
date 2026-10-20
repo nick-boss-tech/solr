@@ -1,0 +1,1 @@
+Solr no longer uses log4j 1.x on current main. The stack trace in this report runs through log4j 1.x appender and date-pattern classes, so it cannot happen in that form on current releases. We are closing this as obsolete. If you see a StackOverflowError in leader registration on a current release, please open a new issue with the full trace and the Solr version.
