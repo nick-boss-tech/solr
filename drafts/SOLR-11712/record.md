@@ -1,37 +1,38 @@
 # Skip record: SOLR-11712
 
-- Ticket: SOLR-11712, Streaming throws IndexOutOfBoundsException against an alias when a shard is down. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-11712, "Streaming throws IndexOutOfBoundsException against an alias when a shard is down". JIRA status read 2026-10-20T08:25:39Z (UTC): Open, resolution None, updated 2021-08-13.
+- Verdict: keep-open (kept; re-read at the pinned head).
 - Draft branch: solr-11712-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-05, audit verdict confirmed-skip).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T08:25:39Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Streaming throws IndexOutOfBoundsException against an alias when a shard is down. Skip note: behavior changed since ticket: TupleStream.getReplicas now silently skips slices with no active replica (no IndexOutOfBounds there); ParallelStream worker/shard mismatch and whether a down shard should error vs return partial results is a design decision..
+A streaming expression over an alias returns IndexOutOfBoundsException (Index 0, Size 0) when one shard of one collection behind the alias is down. The reporter's stack is in CloudSolrStream.constructStreams. The ticket has a long comment thread (2018) on a patch with a test, and on whether the test fails without the fix. The thread does not settle whether a down shard should error or return partial results.
 
-## Code reading
+## Code reading (pinned head)
 
-Taken from the audit evidence, not re-read at the pinned head: audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 10 comments). Class: design decision / by design / needs maintainer call. Reason holds: behavior changed since ticket: TupleStream.getReplicas now silently skips slices with no active replica (no IndexOutOfBounds there); ParallelStream worker/shard mismatch and whether a down shard should error vs return partial results is a design decision. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it.
+- `solr/solrj/src/java/org/apache/solr/client/solrj/impl/CloudSolrClient.java:456, 471, 1002`: slice replica iteration on the client side. The stream stack in the ticket is in `solr/solrj/src/java/org/apache/solr/client/solrj/io/stream/CloudSolrStream.java` (constructStreams), not re-read line by line here.
+- The queue record's claim that `TupleStream.getReplicas` now skips slices with no active replica does not hold at the pinned head as stated: `git grep "getReplicas("` under `solr/solrj/src/java` finds no such method in `TupleStream.java`. That claim is not used in this verdict.
+- The tests named in the thread (StreamingAliasColTest, TestStreamErrorHandling) are not in `solr/core/src/test` at the pinned head (grep empty). The thread's test is not present.
 
 ## History
 
-No commit history was used for this record.
+- `git log --grep=SOLR-11712` path-scoped on CloudSolrStream.java was not run in this pass (the pickaxe-scale search times out in this repo).
+- evidence.py at the pinned head: no commits naming SOLR-11712.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. A run would start an alias over two collections, take one shard down, and call the stream expression, to see whether the error is an IndexOutOfBounds or a clean error.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The thread shows a fix and a test that did not agree on the failing case. At the pinned head, the stream code path has changed, and the named tests are gone. Whether the current behavior is the bug, or the intended partial-result behavior, is the open design question the ticket leaves unanswered.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric: the attempts made are the code-path reading and the test-presence check; the missing pieces are a reproduction against the current stream code and a decision on error versus partial results. close-fixed is not supported: no fixing commit is named. close-obsolete is not supported: the stream path is present.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not establish the current behavior with a run. It does not verify the queue note's claim about TupleStream.getReplicas beyond the grep above.
