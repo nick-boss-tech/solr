@@ -6532,8 +6532,8 @@
       "round": "audit-3",
       "evidence": "Ticket is about the leader putting a replica into LIR on SocketException broken pipe. LIR was removed from Solr (see skip list category removed infrastructure); only a stale TODO remains in HttpPartitionTest."
     },
-    "verdict": "close-obsolete",
-    "draft_branch": "solr-11776-draft-close",
+    "verdict": "keep-open",
+    "draft_branch": "solr-11776-draft-open",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
