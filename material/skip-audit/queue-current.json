@@ -6475,8 +6475,8 @@
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 7 comments). Class: design decision / by design / needs maintainer call. Reason holds: design-level and superseded: avoiding fullCopy split into SOLR-11920 (differential copy); removing isIndexStale is a replication design change. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-11815-draft-open",
+    "verdict": "close-fixed",
+    "draft_branch": "solr-11815-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
