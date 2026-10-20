@@ -86,11 +86,77 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     assertU(commit("openSearcher", "true"));
 
     long hitsBeforeDeleteFingerprint = core.getPerSegmentGrossFingerprintCacheHitCount();
-    core.withSearcher(searcher -> searcher.getIndexFingerprint(Long.MAX_VALUE));
+    long incrementalUpdatesBefore = core.getIncrementalFingerprintUpdateCount();
+    core.withSearcher(
+        searcher -> {
+          assertCachedFingerprintMatchesUncached(searcher, Long.MAX_VALUE);
+          return null;
+        });
 
     assertTrue(
         "Expected the deleted segment to reuse its gross fingerprint",
         core.getPerSegmentGrossFingerprintCacheHitCount() > hitsBeforeDeleteFingerprint);
+    assertEquals(
+        "The first non-maximum deletion should update the cached live fingerprint",
+        incrementalUpdatesBefore + 1,
+        core.getIncrementalFingerprintUpdateCount());
+
+    iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      iwRef.get().deleteDocuments(new Term("id", "3"));
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+
+    incrementalUpdatesBefore = core.getIncrementalFingerprintUpdateCount();
+    core.withSearcher(
+        searcher -> {
+          assertCachedFingerprintMatchesUncached(searcher, Long.MAX_VALUE);
+          return null;
+        });
+    assertEquals(
+        "A later non-maximum deletion should subtract only its new version",
+        incrementalUpdatesBefore + 1,
+        core.getIncrementalFingerprintUpdateCount());
+
+    iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      iwRef.get().deleteDocuments(new Term("id", "8"));
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+
+    incrementalUpdatesBefore = core.getIncrementalFingerprintUpdateCount();
+    core.withSearcher(
+        searcher -> {
+          assertCachedFingerprintMatchesUncached(searcher, Long.MAX_VALUE);
+          return null;
+        });
+    assertEquals(
+        "Deleting a cached maximum must use the gross rebuild path",
+        incrementalUpdatesBefore,
+        core.getIncrementalFingerprintUpdateCount());
+
+    iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      iwRef.get().deleteDocuments(new Term("id", "5"));
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+
+    incrementalUpdatesBefore = core.getIncrementalFingerprintUpdateCount();
+    core.withSearcher(
+        searcher -> {
+          assertCachedFingerprintMatchesUncached(searcher, Long.MAX_VALUE);
+          return null;
+        });
+    assertEquals(
+        "A gross rebuild should refresh the deletion snapshot for later incremental updates",
+        incrementalUpdatesBefore + 1,
+        core.getIncrementalFingerprintUpdateCount());
 
     long grossCacheSizeBeforeColdSegment = core.getPerSegmentGrossFingerprintCacheSize();
     iwRef = core.getSolrCoreState().getIndexWriter(core);
@@ -177,6 +243,7 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
       iwRef.decref();
     }
     assertU(commit("openSearcher", "true"));
+    core.withSearcher(searcher -> searcher.getIndexFingerprint(Long.MAX_VALUE));
 
     String persistedMetadata;
     RefCounted<SolrIndexSearcher> searcherRef = core.getSearcher();
@@ -201,6 +268,17 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
       iwRef.decref();
     }
     assertU(commit("openSearcher", "true"));
+
+    long incrementalUpdatesBefore = core.getIncrementalFingerprintUpdateCount();
+    core.withSearcher(
+        searcher -> {
+          assertCachedFingerprintMatchesUncached(searcher, Long.MAX_VALUE);
+          return null;
+        });
+    assertEquals(
+        "A DocValues generation change must rebuild instead of applying the old live summary",
+        incrementalUpdatesBefore,
+        core.getIncrementalFingerprintUpdateCount());
 
     h.getCoreContainer().reload(core.getName());
     core = h.getCore();

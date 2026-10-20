@@ -57,6 +57,7 @@ public class IndexFingerprint implements MapWriter {
   public static final String SEGMENT_METADATA_ATTRIBUTE = "solr.indexFingerprint";
 
   private static final int SEGMENT_METADATA_FORMAT_VERSION = 1;
+  private static final int MAX_CACHED_DELETED_DOC_IDS = 4096;
 
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
@@ -358,6 +359,103 @@ public class IndexFingerprint implements MapWriter {
     return live;
   }
 
+  /**
+   * Applies only the newly deleted documents to a previous live fingerprint. Returns {@code null}
+   * when the snapshots are not a monotonic delete-only transition or a deleted document could
+   * change a cached maximum; callers should then rebuild from the gross fingerprint.
+   */
+  public static FingerprintAndDeletedDocs getFingerprintFromPrevious(
+      IndexFingerprint previous,
+      int[] previousDeletedDocIds,
+      SolrIndexSearcher searcher,
+      LeafReaderContext ctx,
+      long maxVersion)
+      throws IOException {
+    if (previous == null
+        || previousDeletedDocIds == null
+        || previous.maxVersionSpecified != Long.MAX_VALUE
+        || maxVersion != Long.MAX_VALUE
+        || previous.maxDoc != ctx.reader().maxDoc()
+        || previous.numDocs != previous.maxDoc - previousDeletedDocIds.length
+        || previousDeletedDocIds.length > MAX_CACHED_DELETED_DOC_IDS) {
+      return null;
+    }
+
+    long newlyDeletedCount = previous.numDocs - ctx.reader().numDocs();
+    if (newlyDeletedCount < 0
+        || previousDeletedDocIds.length + newlyDeletedCount > MAX_CACHED_DELETED_DOC_IDS) {
+      return null;
+    }
+
+    int[] deletedDocIds =
+        new int[previousDeletedDocIds.length + (int) newlyDeletedCount];
+    IndexFingerprint live = previous.copy();
+    live.maxVersionSpecified = maxVersion;
+    live.numDocs = ctx.reader().numDocs();
+    Bits liveDocs = ctx.reader().getLiveDocs();
+    FunctionValues versionValues = null;
+    int previousDeletedIndex = 0;
+    int deletedDocIndex = 0;
+
+    for (int doc = 0; doc < ctx.reader().maxDoc(); doc++) {
+      if (previousDeletedIndex < previousDeletedDocIds.length
+          && previousDeletedDocIds[previousDeletedIndex] < doc) {
+        return null;
+      }
+      boolean previouslyDeleted =
+          previousDeletedIndex < previousDeletedDocIds.length
+              && previousDeletedDocIds[previousDeletedIndex] == doc;
+      if (previouslyDeleted) previousDeletedIndex++;
+
+      boolean currentlyLive = liveDocs == null || liveDocs.get(doc);
+      if (previouslyDeleted) {
+        if (currentlyLive) return null;
+        deletedDocIds[deletedDocIndex++] = doc;
+      } else if (!currentlyLive) {
+        if (versionValues == null) {
+          versionValues = getVersionValues(searcher, ctx);
+        }
+        long version = versionValues.longVal(doc);
+        if (version == previous.maxVersionEncountered || version == previous.maxInHash) {
+          return null;
+        }
+        if (version <= maxVersion) {
+          if (live.numVersions == 0) return null;
+          // Fingerprint hashes are additive 64-bit checksums, so subtraction retains their
+          // existing modulo-2^64 behavior.
+          live.versionsHash -= Hash.fmix64(version);
+          live.numVersions--;
+        }
+        deletedDocIds[deletedDocIndex++] = doc;
+      }
+    }
+
+    if (previousDeletedIndex != previousDeletedDocIds.length
+        || deletedDocIndex != deletedDocIds.length) {
+      return null;
+    }
+    return new FingerprintAndDeletedDocs(live, deletedDocIds);
+  }
+
+  /** Returns a bounded, sorted snapshot of deleted document IDs, or {@code null} if too large. */
+  public static int[] getDeletedDocIds(LeafReaderContext ctx) {
+    int deletedCount = ctx.reader().maxDoc() - ctx.reader().numDocs();
+    if (deletedCount < 0 || deletedCount > MAX_CACHED_DELETED_DOC_IDS) return null;
+    if (deletedCount == 0) return new int[0];
+
+    Bits liveDocs = ctx.reader().getLiveDocs();
+    if (liveDocs == null) return null;
+    int[] deletedDocIds = new int[deletedCount];
+    int deletedDocIndex = 0;
+    for (int doc = 0; doc < ctx.reader().maxDoc(); doc++) {
+      if (!liveDocs.get(doc)) {
+        if (deletedDocIndex == deletedDocIds.length) return null;
+        deletedDocIds[deletedDocIndex++] = doc;
+      }
+    }
+    return deletedDocIndex == deletedDocIds.length ? deletedDocIds : null;
+  }
+
   private static FunctionValues getVersionValues(SolrIndexSearcher searcher, LeafReaderContext ctx)
       throws IOException {
     SchemaField versionField = VersionInfo.getAndCheckVersionField(searcher.getSchema());
@@ -388,6 +486,9 @@ public class IndexFingerprint implements MapWriter {
   }
 
   public static record FingerprintAndGross(IndexFingerprint live, IndexFingerprint gross) {}
+
+  public static record FingerprintAndDeletedDocs(
+      IndexFingerprint fingerprint, int[] deletedDocIds) {}
 
   public static IndexFingerprint reduce(IndexFingerprint acc, IndexFingerprint f2) {
     // acc should have maxVersionSpecified already set in it using IndexFingerprint(long

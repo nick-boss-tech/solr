@@ -67,6 +67,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.stream.StreamSupport;
@@ -240,7 +241,13 @@ public class SolrCore implements SolrInfoBean, Closeable {
   private final Cache<IndexReader.CacheKey, CachedSegmentFingerprint>
       perSegmentGrossFingerprintCache = Caffeine.newBuilder().weakKeys().recordStats().build();
 
-  private record CachedSegmentFingerprint(long docValuesGen, IndexFingerprint fingerprint) {}
+  private final LongAdder incrementalFingerprintUpdateCount = new LongAdder();
+
+  private record CachedSegmentFingerprint(
+      long docValuesGen,
+      IndexFingerprint fingerprint,
+      IndexFingerprint liveFingerprint,
+      int[] deletedDocIds) {}
 
   // singleton listener for all packages used in schema
 
@@ -2188,7 +2195,7 @@ public class SolrCore implements SolrInfoBean, Closeable {
           IndexFingerprint persistedGross =
               IndexFingerprint.getPersistedGrossFingerprint(segmentReader, getLatestSchema());
           if (persistedGross != null) {
-            cachedGross = new CachedSegmentFingerprint(docValuesGen, persistedGross);
+            cachedGross = new CachedSegmentFingerprint(docValuesGen, persistedGross, null, null);
             perSegmentGrossFingerprintCache.put(coreKey, cachedGross);
             if (log.isDebugEnabled()) {
               log.debug(
@@ -2206,9 +2213,35 @@ public class SolrCore implements SolrInfoBean, Closeable {
                 segmentReader.getSegmentName(),
                 maxVersion);
           }
-          f =
-              IndexFingerprint.getFingerprintFromGross(
-                  cachedGross.fingerprint(), searcher, ctx, maxVersion);
+          if (cachedGross.liveFingerprint() != null && cachedGross.deletedDocIds() != null) {
+            IndexFingerprint.FingerprintAndDeletedDocs updated =
+                IndexFingerprint.getFingerprintFromPrevious(
+                    cachedGross.liveFingerprint(),
+                    cachedGross.deletedDocIds(),
+                    searcher,
+                    ctx,
+                    maxVersion);
+            if (updated != null) {
+              f = updated.fingerprint();
+              perSegmentGrossFingerprintCache.put(
+                  coreKey,
+                  new CachedSegmentFingerprint(
+                      docValuesGen, cachedGross.fingerprint(), f, updated.deletedDocIds()));
+              incrementalFingerprintUpdateCount.increment();
+            }
+          }
+          if (f == null) {
+            f =
+                IndexFingerprint.getFingerprintFromGross(
+                    cachedGross.fingerprint(), searcher, ctx, maxVersion);
+            perSegmentGrossFingerprintCache.put(
+                coreKey,
+                new CachedSegmentFingerprint(
+                    docValuesGen,
+                    cachedGross.fingerprint(),
+                    f,
+                    IndexFingerprint.getDeletedDocIds(ctx)));
+          }
         } else if (cachedGross != null) {
           perSegmentGrossFingerprintCache.invalidate(coreKey);
         }
@@ -2230,7 +2263,12 @@ public class SolrCore implements SolrInfoBean, Closeable {
           if (fingerprints.gross().getMaxVersionEncountered()
               == fingerprints.gross().getMaxInHash()) {
             perSegmentGrossFingerprintCache.put(
-                coreKey, new CachedSegmentFingerprint(docValuesGen, fingerprints.gross()));
+                coreKey,
+                new CachedSegmentFingerprint(
+                    docValuesGen,
+                    fingerprints.gross(),
+                    fingerprints.live(),
+                    IndexFingerprint.getDeletedDocIds(ctx)));
           }
         }
         if (f != null) {
@@ -2291,6 +2329,10 @@ public class SolrCore implements SolrInfoBean, Closeable {
 
   long getPerSegmentGrossFingerprintCacheSize() {
     return perSegmentGrossFingerprintCache.estimatedSize();
+  }
+
+  long getIncrementalFingerprintUpdateCount() {
+    return incrementalFingerprintUpdateCount.sum();
   }
 
   /**
