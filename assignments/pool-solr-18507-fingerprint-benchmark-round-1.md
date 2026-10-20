@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18507 fingerprint performance benchmark, round 1
 
-Status: CLAIMED (vm2, claims/pool-solr-18507-fingerprint-benchmark-round-1.md, 2026-10-20T08:33:00Z)
+Status: HANDED (item 1 partial, item 2 blocked; reports/SOLR-18507-fingerprint-benchmark-round-1.md; claim claims/pool-solr-18507-fingerprint-benchmark-round-1.md, 2026-10-20T10:35:16Z)
 
 - Capability tags: sweep.
 - Category: Core admin and cores.
