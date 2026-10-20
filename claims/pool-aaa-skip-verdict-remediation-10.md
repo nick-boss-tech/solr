@@ -1,7 +1,7 @@
 # Claim: pool-aaa-skip-verdict-remediation-10
 
 - Claimant host: vm5, matching a file in `hosts/`.
-- Status: ACTIVE. Remediation of batch 10 under `assignments/pool-aaa-skip-verdict-remediation-10.md`, one ticket at a time in the listed order, each with its own `claims/skip-<KEY>-vm5.md`.
+- Status: DONE 2026-10-20T08:48:00Z. Remediation of batch 10 under `assignments/pool-aaa-skip-verdict-remediation-10.md`, one ticket at a time in the listed order, each with its own `claims/skip-<KEY>-vm5.md`.
 - Job or assignment: `assignments/pool-aaa-skip-verdict-remediation-10.md`.
 - Slice: the whole batch, one live ticket at a time.
 - Capability tags used: review, draft.
@@ -9,7 +9,6 @@
 
 Heartbeat: 2026-10-20T07:06:38Z
 
-Append one heartbeat line at least once an hour while the claim is active, and push it.
 Heartbeat: 2026-10-20T07:10:40Z (batch 10 item 1 done; item 2 next)
 Heartbeat: 2026-10-20T07:14:39Z (batch 10 item 2 done; item 3 next)
 Heartbeat: 2026-10-20T07:18:40Z (batch 10 item 3 done; item 4 next)
@@ -35,3 +34,7 @@ Heartbeat: 2026-10-20T08:35:32Z (batch 10 item 22 done; item 23 next)
 Heartbeat: 2026-10-20T08:39:27Z (batch 10 item 23 done; item 24 next)
 Heartbeat: 2026-10-20T08:43:33Z (batch 10 item 24 done; item 25 next)
 Heartbeat: 2026-10-20T08:47:40Z (batch 10 item 25 done; batch closeout next)
+
+Result: 2026-10-20T08:48:00Z: batch 10 closed, 25 items. Verdicts: 17 keep-open, 5 close-obsolete (SOLR-11688 on solr-11688-draft-close; SOLR-11659 on solr-11659-draft-close; SOLR-10959 on solr-10959-draft-close; SOLR-10904 on solr-10904-draft-close; SOLR-10889 on solr-10889-draft-close), 3 close-fixed (SOLR-10917 on solr-10917-draft-close, fix SOLR-13793 commit b8648c60e7; SOLR-10712 on solr-10712-draft-close, fix SOLR-18351 commit 78862e7f54; SOLR-10709 on solr-10709-draft-close, fix SOLR-17631 commit c64a35adbc). Per-item lines in reports/skip-verdict-remediation-10.md; all 25 item claims DONE.
+
+DONE: 2026-10-20T08:48:00Z. Deliverables: 25 item claims, reports/skip-verdict-remediation-10.md (25 lines), queue-current entries for all 25 items, OPEN-WORK regenerated.
