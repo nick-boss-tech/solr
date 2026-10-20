@@ -32,3 +32,17 @@ Review (2026-10-20T14:38Z, vm5, second pass on head e38ddec5279c465f65a2fa2de22e
 Repairs: none.
 
 Regate: gates/SOLR-11310-review-pass-2.md.
+
+## Pass 3
+
+Review (2026-10-20T14:45Z, vm5, third pass on head e38ddec5279c465f65a2fa2de22ee9c92e0f5e31; ls-remote unchanged):
+
+- Final verdict: keep the change. The fix is two lines, the test covers the bug, the changelog is correct, and the owner call is settled at rung 3 in pass 1.
+- Proof leg, rerun here. The receipt cites `g11310r35-ab.log` for the round-35 A/B; that log is not on this host (searched /workspace/gates). Rerun instead: `solr/core/.../ReRankCollector.java` restored to base 14c7aac0d1 in the scratch worktree, `TestLTRReRankingPipeline` run: rc=1, `testBoostedDocsSurviveLTRRescore` FAILED with `expected:<[1]> but was:<[0]>`, and the other three tests pass. Head file restored to e38ddec527; worktree clean. Log `/workspace/gates/logs/vm5/g11310/proof-base.log`.
+- Head run, pass 3: `TestLTRReRankingPipeline` tests=4, failures=0, errors=0, skipped=0 (`/workspace/gates/logs/vm5/g11310/test-p3.log`).
+- Coverage note, still open: no test sets `forceElevation=true`. Not repaired (outside this round's scope).
+- Not rerun this round: tidy, Error Prone, ltr module check (the receipt's hardening gate covers the head).
+
+Repairs: none.
+
+Regate: gates/SOLR-11310-review-pass-3.md.
