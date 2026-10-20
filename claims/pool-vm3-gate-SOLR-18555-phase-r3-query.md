@@ -10,3 +10,9 @@
 - Idempotency key: SOLR-18555-phase-r3-query@e78e776c3e.
 
 Heartbeat: 2026-10-20T07:20:31Z
+
+## Launch (2026-10-20T07:23:43Z)
+
+- Worktree /workspace/worktrees/solr-18555-r3 at e78e776c3e; full clone /workspace/clones/solr-18555-r3 at the same head (step 6).
+- Gate: /workspace/tools/gate-solr-18555-r3.sh, logs /workspace/gates/logs/vm3/solr-18555-phase-r3/ (result-clone, result-step0, result-tidy, result-compile, result-test, result-check, result-guide .txt; done marker). Seed 18555C0FFEE18555, class `org.apache.solr.handler.HighlightRequestHandlerHttpTest`.
+- Heartbeat: 2026-10-20T07:23:43Z
