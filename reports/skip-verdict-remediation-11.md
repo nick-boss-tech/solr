@@ -5,3 +5,4 @@
 - SOLR-10601 correction: branch head is 497cd93a3e (the record was added on top of b24aca0b32), see claims/skip-SOLR-10601-vm2.md.
 - SOLR-10597 | claims/skip-SOLR-10597-vm2.md | keep-open (kept; LeaderElector.java:130-133 retry read, bound not traced; no repro) | solr-10597-draft-open 5df656a1fc | JIRA read 2026-10-20T12:12:18Z Open
 - SOLR-10592 | claims/skip-SOLR-10592-vm2.md | close-obsolete (changed from keep-open: test method absent under solr/, rewritten by SOLR-17855) | solr-10592-draft-close 0936a06de8 | JIRA read 2026-10-20T12:18:52Z Open
+- SOLR-10534 | claims/skip-SOLR-10534-vm2.md | keep-open (kept; CoreContainer.java:1527-1539, 1738 read; repro of the second create not run) | solr-10534-draft-open 9ecb4bca08 | JIRA read 2026-10-20T12:24:07Z Open
