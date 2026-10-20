@@ -14,7 +14,7 @@ Status: DONE (GATE GREEN at 5cdc657470, vm5, 2026-10-20T14:00Z)
 - [x] head confirmed by ls-remote
 - [x] diff scope confirmed
 - [ ] step 0 changelog: not applicable (no changelog file in the commit)
-- [x] step 1 tidy: not run in this pass; no Java changed. Owner gate to confirm.
+- [ ] step 1 tidy: not run in this pass (no Java changed); the pre-merge gate must run it.
 - [x] step 2 compile: `:solr:core:compileTestJava :solr:server:compileJava` BUILD SUCCESSFUL, rc=0
 - [x] step 3 proof leg: not applicable to a version bump
 - [x] step 4 focused run: `StatusToolTest` tests=1 failures=0 errors=0 skipped=0 (fresh JUnit XML)
