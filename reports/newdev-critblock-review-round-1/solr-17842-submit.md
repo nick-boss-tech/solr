@@ -17,3 +17,16 @@ Review (2026-10-20T13:35Z, vm5):
 Repairs: none. Nothing in the pass needed a repair inside the Gate repairs scope.
 
 Regate: gates/SOLR-17842-review-pass-1.md (light gate, docs-only shape).
+
+## Pass 2
+
+Review (2026-10-20T13:37Z, vm5, second pass on the same head 008973f631):
+
+- Command. `./jmh.sh SimpleSearch JsonFaceting FilterCache -f 1 -wi 5 -i 5 -rf json -rff work/jmh-<build>.json` matches the README usage at line 195 (`-rff work/jmh-results.json`). `jmh.sh` runs JMH from `solr/benchmark` only (its first check), and the doc says so.
+- Output path. `work/` is gitignored (`solr/benchmark/.gitignore`). The example assumes the directory exists; the README already makes the same assumption. Minor, nit: recorded, not changed here.
+- Name matching. JMH matches the class arguments as regular expressions, so the short names in the example select the intended classes. Not run.
+- Consistency with pass 1. Head unchanged; pass 1 findings stand; no new finding of major severity.
+
+Repairs: none. Nothing in pass 2 was in the Gate repairs scope.
+
+Regate: gates/SOLR-17842-review-pass-2.md (light gate shape, same checks as pass 1).
