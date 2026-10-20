@@ -42,7 +42,7 @@ def short(st):
     return st[:160]
 
 
-items = {k: [] for k in ("open_a", "open_g", "claimed", "handed", "green", "unconf")}
+items = {k: [] for k in ("top", "open_a", "open_g", "claimed", "handed", "green", "unconf", "paused")}
 for sub in ("assignments", "gates"):
     for name in sorted(os.listdir(os.path.join(root, sub))):
         if not name.endswith(".md"):
@@ -55,6 +55,10 @@ for sub in ("assignments", "gates"):
         title = title_of(text)
         if st.startswith("OPEN"):
             items["open_a" if sub == "assignments" else "open_g"].append((host_of(text), path, title, short(st)))
+            if re.search(r"^Priority: TOP\b", text, re.M):
+                items["top"].append((path, title, short(st)))
+        elif st.startswith("PAUSED"):
+            items["paused"].append((path, title, short(st)))
         elif st.startswith("CLAIMED"):
             m = re.search(r"claims/[\w.\-]+\.md", st)
             items["claimed"].append((path, title, m.group(0) if m else short(st)))
@@ -80,9 +84,13 @@ lines = [
     "",
     counts,
     "",
-    "## Open assignments",
+    "## Top priority",
     "",
 ]
+lines += [f"- `{p}`: {t}. Status: {s}" for p, t, s in items["top"]] or ["None.", ""]
+lines += ["", "## Paused", ""]
+lines += [f"- `{p}`: {t}. Status: {s}" for p, t, s in items["paused"]] or ["None.", ""]
+lines += ["", "## Open assignments", ""]
 
 
 def grouped(rows):

@@ -1,6 +1,6 @@
 # Pool assignment: triage the open-issue CSV when a host has no other work
 
-Status: OPEN (fallback). Claim a slice under `claims/` before starting (WORKFLOW.md). The CSV is on this branch at `material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv`. Backlog by owner direction (2026-10-19): claim a slice only once the JSON queue (remediation and audit work) has nothing open for you. Carve-out (owner direction, 2026-10-19, later): the 100 open Blocker and Critical rows are a separate priority round, `assignments/pool-csv-critical-blocker-round-1.md`, claimable without that wait; work that round before these slices.
+Status: PAUSED (owner direction, 2026-10-20: stop CSV triage; `assignments/pool-newdev-critblock-review-round-1.md` takes priority). Slices already claimed keep their claims. Earlier note: Claim a slice under `claims/` before starting (WORKFLOW.md). The CSV is on this branch at `material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv`. Backlog by owner direction (2026-10-19): claim a slice only once the JSON queue (remediation and audit work) has nothing open for you. Carve-out (owner direction, 2026-10-19, later): the 100 open Blocker and Critical rows are a separate priority round, `assignments/pool-csv-critical-blocker-round-1.md`, claimable without that wait; work that round before these slices.
 
 - Capability tags: records.
 - Intended hosts: any pool host that has no claimed work on its tick. Work this only when nothing else is open for you.
