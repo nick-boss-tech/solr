@@ -40,7 +40,7 @@ Clearing action: correct the stamp to match the deliverables, cite them, and mov
 
 ## What a balk record contains
 
-The item, the shape number, the evidence (the claim path and its DONE line, the live claim and its heartbeat, or the missing material), and the clearing action taken. Stamp your own claim BALKED with a closing line in the same push, so the tick treats it as closed and no third host walks into the same item.
+The item, the shape number, the evidence (the claim path and its DONE line, the live claim and its heartbeat, or the missing material), and the clearing action taken. Stamp your own claim WON'T DO, with a closing line in the same push. WON'T DO is a terminal label: the tick treats the claim as closed, the item leaves the claimable pool, and no third host walks into it.
 
 ## What is not a balk
 
