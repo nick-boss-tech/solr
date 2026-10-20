@@ -1,6 +1,6 @@
 # Gate job: SOLR-18555 (text supplied highlighting, phase r2)
 
-Status: GATE INVALID (vm2, claims/pool-vm2-gate-SOLR-18555-phase-r2.md, step 1 tidy changed a file at head 59a44dbaf10)
+Status: CLAIMED (claims/pool-vm2-gate-SOLR-18555-phase-r2-repair.md)
 
 - Branch: `solr-18555-submit`. Head: `59a44dbaf10c627d340f23f5481fdb2ba716f089` (fork tip, confirmed on 2026-10-19). If the tip has moved at claim time, stop and record the new tip. Do not retarget this job.
 - Base: `c8ab71430f6e7547c773da596101d680862310ff`. Prior gated head: `b99259cba3572cc08586b2456c78780c814a2bf7`.
@@ -19,7 +19,7 @@ Status: GATE INVALID (vm2, claims/pool-vm2-gate-SOLR-18555-phase-r2.md, step 1 t
 Use the host's standard gate runner. Check out the exact head first. Do not run the build tool directly.
 
 - Step 0: parse `changelog/unreleased/SOLR-18555.yml`.
-- Step 1: run tidy. If tidy changes any file, mark this gate GATE INVALID, record the diff, and stop. Do not edit or push the ticket branch from the gate host.
+- Step 1: run tidy. If tidy changes any file, apply the tidy output as one gate repair commit (WORKFLOW.md, Gate repairs), push it fast-forward to `solr-18555-submit` from the gate head, record the patch and the new head here, and rerun steps 0 to 5 once on the new head.
 - Step 2: Error Prone compile: `:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true`.
 - Step 3, proof leg: use production code at prior head `b99259cba3572cc08586b2456c78780c814a2bf7`, overlay only `solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerHttpTest.java` from this head, and run `org.apache.solr.handler.HighlightRequestHandlerHttpTest.testQueryMethodCannotReachUpdateHandler` with seed `18555C0FFEE18555`. Expected: the test fails at its non-200 assertion because the prior production code accepts the `QUERY` update request. Any compile failure or different failure shape is inconclusive; record it and stop.
 - Step 4, focused head run: run `:solr:core:cleanTest` first, then `:solr:core:test --tests org.apache.solr.handler.HighlightRequestHandlerTest --tests org.apache.solr.handler.HighlightRequestHandlerHttpTest -Ptests.seed=18555C0FFEE18555`. Count both classes from fresh JUnit XML. Nothing else runs on the worktree between the test run and the XML read. Expected: both classes pass with 0 failures and 0 errors; record skipped and total counts for each class.

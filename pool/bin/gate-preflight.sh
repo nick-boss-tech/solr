@@ -1,7 +1,7 @@
 #!/bin/bash
 # usage: gate-preflight.sh <owner/repo URL> <full commit SHA> <log dir>
 # Runs tidy on a clean clone of the head before a gate job is claimed.
-# Exit 0: tidy leaves the tree unchanged. Exit 3: tidy changes files, so the gate would be GATE INVALID.
+# Exit 0: tidy leaves the tree unchanged. Exit 3: tidy changes files, a repair under WORKFLOW.md Gate repairs.
 # Exit 2: fetch failed. Writes preflight.log and, on exit 3, tidy.patch to the log dir.
 set -u
 URL=$1; SHA=$2; L=$3
@@ -21,7 +21,7 @@ flock 9
 ./gradlew --no-daemon tidy > "$L/preflight-tidy.log" 2>&1 || { echo "tidy task failed, see preflight-tidy.log" > "$L/preflight.log"; exit 2; }
 if [ -n "$(git status --porcelain)" ]; then
   git diff > "$L/tidy.patch"
-  echo "tidy changed files at $SHA: $(git status --porcelain | wc -l) file(s). Gate would be GATE INVALID." > "$L/preflight.log"
+  echo "tidy changed files at $SHA: $(git status --porcelain | wc -l) file(s). Gate host applies the tidy output as a repair (WORKFLOW.md Gate repairs)." > "$L/preflight.log"
   exit 3
 fi
 echo "tidy clean at $SHA" > "$L/preflight.log"

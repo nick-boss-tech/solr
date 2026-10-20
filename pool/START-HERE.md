@@ -72,6 +72,10 @@ The legacy Windows `research\pool-post.ps1 -Kind gate` path supports ticket-leve
 
 Open assignments and gate jobs are listed in [OPEN-WORK.md](../OPEN-WORK.md) at the branch root, grouped by intended host. The list is generated from the Status line under each file's title; if the two ever disagree, the file's own Status line governs. When you claim a file, set its Status line to CLAIMED naming your claim file in the same push as the claim; when the work lands, set it to DONE in the same push as the deliverable.
 
+## Take the claim to the end
+
+A claim is a commitment to finish. Carry it to `DONE:`, or to an `ENDED` line that names the reason the job cannot finish on this host, without stopping to ask permission. Decisions inside the claim follow [material/decision-ladder.md](../material/decision-ladder.md): record the rung used and continue. A tidy change is a gate repair under WORKFLOW.md "Gate repairs"; it is not a stop. The owner is asked only at rung 5, and opening a PR stays owner-approved.
+
 ## Claim a gate job
 
 Copy `pool/templates/claim.md` to the claim path named in the gate job, using `claims/pool-<host>-gate-<GATE_ID>.md`. This keeps claims for two phases of one ticket separate. Fill it and post it with the same steps. Claim before you run anything. Append a heartbeat line at least once an hour and push it. Mark the claim `DONE:` in the same push as the deliverable.

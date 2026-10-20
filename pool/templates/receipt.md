@@ -8,7 +8,7 @@ Prepend one section per gate to `receipts/<TICKET>.md`. The first lines are stru
 - Links: Ticket or parent: <SOLR-XXXXX or parent PR/branch>. Category: <one of the 14 in pool/work-map.md>. Siblings: <branches or records on the same surface, or none known>. Supersedes: <record or head, or none>.
 - Runner: <runner and host>. Log: <log path>.
 - Step 0, changelog YAML parse of `<path>`: rc=<n>.
-- Step 1, tidy: rc=<n>; post-tidy status <clean, or the GATE INVALID handling and the tidy commit>.
+- Step 1, tidy: rc=<n>; post-tidy status <clean, or the tidy repair commit and its files>.
 - Step 2, Error Prone compile (`<tasks> -Pvalidation.errorprone=true`): rc=<n>.
 - Step 3, proof leg: <what was reverted, and the expected failure by content; or none requested, with the reason>.
 - Step 4, focused head run: `<fully qualified class>`, seed `<seed>`: <t> tests, <f> failures, <e> errors, <s> skipped (fresh JUnit XML, copied to <path>).

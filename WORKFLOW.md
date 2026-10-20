@@ -40,6 +40,7 @@ The Windows host never claims `gate`, `implementation`, `premise-run`, `settling
 6. Missed marks. If a deliverable has landed but its claim was never marked, any agent that verifies the deliverable on this branch may append the DONE mark, stating that it marked on verification and naming the deliverable. The mark is a record correction, not a claim transfer.
 7. Terminal states. A claim marked DONE, or marked WON'T DO under `pool/advisory-wont-do.md`, is terminal: its status lines are never edited afterwards by anyone. Superseding a terminal claim happens by posting a new claim that names the old one in its Supersedes line. A late completion, heartbeat, or correction arriving for a terminal claim goes into a new record, not into the closed one.
 8. Takeovers resume, they do not restart. A takeover under rule 4 increments the claim's Attempts count, keeps the idempotency key (item at head or slice), and reuses every completed step already recorded in the claim, the gate checklist, or the deliverable. Redoing a recorded step needs a stated reason in the takeover line.
+9. Take it to the end. A claimant carries the claim to DONE, or to an ENDED line with the reason the job cannot finish on this host, without stopping to ask permission. A decision inside the claim follows `material/decision-ladder.md`: record the rung used in the claim and continue. The owner is asked only at rung 5, and opening a PR stays owner-approved.
 
 ## Posting a file to this branch
 
@@ -65,6 +66,8 @@ There is no local tree to fall behind and nothing to rebase when another host la
 ## Gate repairs and hand-back
 
 Windows agents post gate requests but never run tidy or Gradle. The Linux gate host runs tidy first and owns the repair and the re-gate.
+
+GATE INVALID is not a gate outcome. A tidy change, a changelog problem, or a finding in repair scope below is repaired under this section, and the gate reruns once. A job file that says GATE INVALID and stops is read as the repair route, not as a stop.
 
 Repair scope. A gate host may repair these failures and re-gate. Nothing else.
 - Tidy changes: apply the tidy output as it is.
