@@ -10,11 +10,11 @@ All 25 tickets are classified. The four code fixes marked STILL-PRESENT have a c
 | --- | --- | --- |
 | ALREADY-FIXED | 1 | SOLR-17840 |
 | NOT-REPRODUCIBLE | 1 | SOLR-17844 |
-| STILL-PRESENT (route chosen, fix not started) | 9 | SOLR-18552, 18446, 18398, 18297, 18458, 17252, 17433, 17375, (17546 is keep-open, see below) |
+| STILL-PRESENT (route chosen, fix not started) | 8 | SOLR-18552, 18446, 18398, 18297, 18458, 17252, 17433, 17375 |
 | NEEDS-OWNER | 6 | SOLR-18486, 18240, 17988, 17842, 18501, 17767 |
-| KEEP-OPEN (evidence inconclusive; missing piece named) | 8 | SOLR-17291, 17546, 17762, 18010, 17788, 17463, 17370, 17297, 17281 |
+| KEEP-OPEN (evidence inconclusive; missing piece named) | 9 | SOLR-17291, 17546, 17762, 18010, 17788, 17463, 17370, 17297, 17281 |
 
-Note: the STILL-PRESENT count is 8 (18552, 18446, 18398, 18297, 18458, 17252, 17433, 17375). The keep-open count is 9. Totals: 1+1+8+6+9 = 25.
+Totals: 1 + 1 + 8 + 6 + 9 = 25.
 
 ## Classified, with evidence and route
 
