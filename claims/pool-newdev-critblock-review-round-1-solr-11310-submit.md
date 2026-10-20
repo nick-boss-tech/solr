@@ -1,0 +1,10 @@
+# Claim: pool-newdev-critblock-review-round-1, unit 6 (SOLR-11310)
+
+- Claimant host: vm5, matching a file in `hosts/`.
+- Assignment: `assignments/pool-newdev-critblock-review-round-1.md`, unit 6, Critical.
+- Branch: `solr-11310-submit`, head `e38ddec527` (short; ls-remote at claim time, 2026-10-20T14:21Z). Receipt: receipts/SOLR-11310.md.
+- Capability tags: review, gate.
+- Status: CLAIMED. Three review passes, each with a regate.
+- Started: 2026-10-20T14:21:00Z (UTC).
+
+Heartbeat: 2026-10-20T14:21:00Z

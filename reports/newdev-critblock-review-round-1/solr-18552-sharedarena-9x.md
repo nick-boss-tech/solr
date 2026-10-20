@@ -29,3 +29,15 @@ Review (2026-10-20T14:18Z, vm5, second pass on head cd7cc695fb09fc8adba211992a85
 Repairs: none.
 
 Regate: gates/SOLR-18552-9x-review-pass-2.md (partial).
+
+## Pass 3
+
+Review (2026-10-20T14:21Z, vm5, third pass on head cd7cc695fb09fc8adba211992a85b5f76380b110; ls-remote unchanged):
+
+- Final verdict on the change: correct as a 9.x launcher default. One line, consistent with the array form and with the override order (user `SOLR_OPTS` wins).
+- Open, not repaired: (a) the owner question on the `solr.cmd` default for 9.x (NEEDS-OWNER in the claim; no recorded answer on the branch or in the claim as of this pass, so it is not treated as answered); (b) no changelog file on this line.
+- Open, for vm1: the 9.x distribution launcher check and the bats run. The draft's 11.0 SNAPSHOT run does not cover the 9.x line.
+
+Repairs: none.
+
+Regate: gates/SOLR-18552-9x-review-pass-3.md (partial).
