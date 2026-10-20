@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The code reading does not settle this ticket yet, so we are leaving it open while we look further.
+We checked this ticket against the current code. The behavior the ticket describes depends on how the ZooKeeper client (version 3.9.5 at the current head) handles one host name that cannot be resolved, and that code is in the ZooKeeper library, not in Solr. We have not traced Solr's connection handling or run a three-node ensemble with one unresolvable host, so we are leaving the ticket open for that run.
