@@ -1,0 +1,1 @@
+The object type this report names, the Apache HttpClient instance that was not released, is no longer used in Solr's test infrastructure on current main, so this exact leak cannot happen there. We are closing this as obsolete. If a nightly run of ConcurrentDeleteAndCreateCollectionTest fails with an object-release error on a current build, please open a new issue with the output.
