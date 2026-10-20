@@ -74,7 +74,7 @@ public class HighlightRequestHandler extends RequestHandlerBase {
             this,
             () -> {
               var spec = ApiBag.HANDLER_NAME_SPEC_PROVIDER.getSpec();
-              spec.put("methods", List.of("GET", "POST"));
+              spec.put("methods", List.of("GET", "POST", "QUERY"));
               return spec;
             }));
   }

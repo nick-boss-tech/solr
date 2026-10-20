@@ -69,13 +69,11 @@ public class HighlightRequestHandlerHttpTest extends SolrTestCaseJ4 {
   }
 
   @Test
-  public void testQueryMethodIsNotRegisteredForV2Handler() throws Exception {
+  public void testQueryMethodHighlightsV2Route() throws Exception {
     String v2Url = solrTestRule.getJetty().getBaseURLV2() + "/cores/" + CORE_NAME + "/highlight";
     String url = v2Url + "?q=_text_%3Asolr&hl.fl=_text_&wt=json";
 
-    ContentResponse response = sendBodyRequest("QUERY", url);
-
-    assertTrue(response.getContentAsString(), response.getStatus() != 200);
+    assertHighlightResponse(sendBodyRequest("QUERY", url));
   }
 
   @Test
@@ -84,7 +82,6 @@ public class HighlightRequestHandlerHttpTest extends SolrTestCaseJ4 {
     String params = "?q=_text_%3Asolr&hl.fl=_text_&wt=json&stream.body=" + encodedText;
     String v2BaseUrl = solrTestRule.getJetty().getBaseURLV2().toString();
     String v2CoreUrl = v2BaseUrl + "/cores/" + CORE_NAME + "/highlight";
-    String v2CollectionUrl = v2BaseUrl + "/c/" + CORE_NAME + "/highlight";
 
     assertHighlightResponse(
         solrTestRule
@@ -95,8 +92,6 @@ public class HighlightRequestHandlerHttpTest extends SolrTestCaseJ4 {
 
     assertHighlightResponse(
         solrTestRule.getJetty().getSolrClient().getHttpClient().GET(v2CoreUrl + params));
-    assertHighlightResponse(
-        solrTestRule.getJetty().getSolrClient().getHttpClient().GET(v2CollectionUrl + params));
     assertHighlightResponse(
         sendBodyRequest("POST", v2CoreUrl + "?q=_text_%3Asolr&hl.fl=_text_&wt=json"));
   }

@@ -38,7 +38,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.util.JsonSchemaValidator;
@@ -250,7 +249,7 @@ public class V2HttpCall extends HttpSolrCall {
 
     if (api instanceof ApiBag.IntrospectApi) {
       final Map<String, Api> apis = new LinkedHashMap<>();
-      for (String m : SolrRequest.SUPPORTED_METHODS) {
+      for (String m : ApiBag.API_METHODS) {
         Api x = requestHandlers.v2lookup(path, m, parts);
         if (x != null) apis.put(m, x);
       }
