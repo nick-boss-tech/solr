@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The code reading does not settle this ticket yet. We are leaving the ticket open while we look further.
+We re-read this ticket against the Solr source at fork commit 498a09aea97. The failing indexing code is in Lucene, which this tree pins at 10.4.0, and Solr's wrapper for the error is still DirectUpdateHandler2.addDoc. We have not reproduced the large-document failure at that commit, so we cannot yet say whether the overflow still exists in the pinned Lucene, and this ticket stays open.
