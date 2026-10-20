@@ -1,6 +1,10 @@
 # Tickets to open: the registry
 
-Owner direction, 2026-10-19: one inventory of the tickets that do not exist yet, each tied to the existing work that parents it. A row states the proposed ticket, its parent work, its category (from `pool/work-map.md`), the event that triggers filing, and who files. The standing rule governs every row: a follow-up ticket is filed only after its parent PR merges, unless a maintainer or the owner directs otherwise, and the owner files tickets himself. Agents maintain this registry; agents do not file Jira tickets.
+Owner direction, 2026-10-19: one inventory of the tickets that do not exist yet. A row states the proposed ticket, its parent work or the finding that produced it, its category (from `pool/work-map.md`), the event that triggers filing, and who files.
+
+Owner direction, 2026-10-20: the registry is inclusive. Add a row for any of these: a follow-up to a PR; a new issue found while working; a tangential issue examined in passing that deserves its own fix; a follow-up to a ticket that has become more urgent than its origin; a branch that must merge before a broader change named in another row ships. A row with no parent reads "None" in the parent column and cites the record that produced it. When in doubt, add the row.
+
+Filing stays with the owner, who files tickets himself. A follow-up to a PR that has not merged waits for the merge unless the owner directs otherwise. A new issue or an urgent follow-up may be filed as soon as its trigger fires. Agents maintain this registry; agents do not file Jira tickets.
 
 Graduated off this registry: the three side-finding tickets the owner filed on 2026-10-12 (SOLR-18539 mergeIds, SOLR-18540 gradlew Git Bash, SOLR-18541 CombinedQueryComponent). Rows leave the registry the same way, by recording the filed number.
 
@@ -13,5 +17,6 @@ Security findings never enter this registry. They stay on the owner's private tr
 | 3 | Fragment anchor validation, the follow-up promised in PR #5061 | PR #5061, whose converter piece is superseded by PR #5180 (SOLR-18119) | Build, scripts, and release tooling | The owner decides the vehicle when PR #5061 closes | Promise recorded in #5061's description; with #5061 closing unmerged, the follow-up needs a new home or the owner's ruling that it lapses. |
 | 4 | Native arrntv support in the Jackson writer | SOLR-17268, whose fix delegates to the legacy writer | Search and query components (response writers) | A maintainer orders the native work | Contingent only. The delegation fix is the submission; this row exists so the option is not lost, and it is offered to maintainers as their choice, never pre-filed. |
 | 5 | The SOLR-18317 server-side coverage work | SOLR-18317 (closed; the related server branch cannot open under it) | Permissions and security declarations | A verdict lands on the coverage question, then the owner's call | Awaiting the verdict. If the work proceeds, it proceeds under a new ticket from this row. |
+| 6 | Clean-compile warning in `CoreReplicationAPITest`: `DirectInvocationOnMock` under `-Werror` at lines 213 and 217 | None. Found while gating SOLR-18297 (Jetty 12.1.14). The warning is at base, outside that branch's diff, so it is not that PR's defect. | Core admin and cores | The owner files it whenever he chooses; it does not block SOLR-18297 | Open for the owner's filing. Incremental compiles stay green, so only a clean compile shows it. Record: `gates/SOLR-18297-review-pass-1-vm3.md`. |
 
-Maintenance: a row is added in the same push that records the promise or the direction creating it, citing the record it came from. A row whose trigger fires is updated the same day, and the filed ticket number replaces the row's state.
+Maintenance: a row is added in the same push that records the promise, the direction, or the finding creating it, citing the record it came from. A row whose trigger fires is updated the same day, and the filed ticket number replaces the row's state.
