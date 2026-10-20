@@ -20,3 +20,4 @@
 - SOLR-9514 | claims/skip-SOLR-9514-vm2.md | keep-open (kept; command live and documented; deprecation is an owner-level API decision) | solr-9514-draft-open a1f813d8cc | JIRA read 2026-10-20T13:42:10Z Open
 - SOLR-9492 | claims/skip-SOLR-9492-vm2.md | keep-open (kept; completion check reads top-level keys only; split-failure run missing) | solr-9492-draft-open 3c12a87d90 | JIRA read 2026-10-20T13:47:28Z Open
 - SOLR-9477 | claims/skip-SOLR-9477-vm2.md | keep-open (kept; 2 of 44 processors handle children; design decision open) | solr-9477-draft-open 3c8973ffac | JIRA read 2026-10-20T13:52:36Z Open
+- SOLR-9468 | claims/skip-SOLR-9468-vm2.md | keep-open (changed from close-fixed: no fix commit named; generic branch still HTTP 200; backup run missing) | solr-9468-draft-open 3d9db25b0a | JIRA read 2026-10-20T14:00:51Z Open
