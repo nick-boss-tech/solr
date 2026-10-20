@@ -50,7 +50,9 @@ public class TestStringMinMaxFunction extends SolrTestCaseJ4 {
 
   @Test
   public void testNoValueYieldsNoResult() throws Exception {
-    assertJQ(req("q", "id:4", "fl", "id,v:max(a_s,b_s)"), "/response/docs/[0]/v==null");
+    String response = h.query(req("q", "id:4", "fl", "id,v:max(a_s,b_s)"));
+    assertJQ(req("q", "id:4", "fl", "id,v:max(a_s,b_s)"), "/response/numFound==1");
+    assertFalse("a null function value is omitted from the response", response.contains("\"v\""));
   }
 
   @Test
