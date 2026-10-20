@@ -31,6 +31,7 @@ The `/highlight` request handler highlights supplied text without searching
 the index. Send a `text/plain` body with POST; for GET, provide the text with
 `stream.body`. The V2 route also accepts `QUERY` with a `text/plain` body.
 That method is enabled only for this V2 API, not for legacy request handlers.
+The JDK and Jetty SolrJ clients can send it with `GenericV2SolrRequest`.
 A query is required in `q` or `hl.q`. Use `hl.fl`
 to select fields; if it is omitted, the handler uses `df`. The legacy route is
 `/solr/{collection}/highlight`. V2 collection requests use

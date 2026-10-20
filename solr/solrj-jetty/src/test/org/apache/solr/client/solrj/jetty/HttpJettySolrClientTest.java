@@ -38,6 +38,7 @@ import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpJdkSolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClientTestBase;
 import org.apache.solr.client.solrj.request.ContentWriterUpdateRequest;
@@ -229,6 +230,22 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
   @Override
   public void testQueryPost() throws Exception {
     super.testQueryPost();
+  }
+
+  @Test
+  @Override
+  public void testQueryMethodWithBody() throws Exception {
+    super.testQueryMethodWithBody();
+  }
+
+  @Test
+  public void testQueryMethodWithBodyUsingJdkClient() throws Exception {
+    try (var client =
+        new HttpJdkSolrClient.Builder(solrTestRule.getBaseUrl())
+            .withResponseParser(new XMLResponseParser())
+            .build()) {
+      assertQueryMethodWithBody(client);
+    }
   }
 
   @Test

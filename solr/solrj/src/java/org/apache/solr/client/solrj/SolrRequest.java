@@ -64,6 +64,9 @@ public abstract class SolrRequest<T> implements Serializable {
     POST,
     PUT,
     DELETE,
+    /**
+     * HTTP QUERY, accepted only by V2 APIs that opt in to the method.
+     */
     QUERY;
 
     /**
@@ -109,6 +112,7 @@ public abstract class SolrRequest<T> implements Serializable {
     SERVER
   };
 
+  // QUERY is enabled by individual API specs rather than by the default method set.
   public static final Set<String> SUPPORTED_METHODS =
       Set.of(
           METHOD.GET.toString(),

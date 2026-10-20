@@ -37,10 +37,15 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.request.GenericSolrRequest;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.SolrQuery;
 import org.apache.solr.client.solrj.request.UpdateRequest;
@@ -53,6 +58,7 @@ import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.MapSolrParams;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.common.util.NamedList;
@@ -77,6 +83,8 @@ public abstract class HttpSolrClientTestBase extends SolrTestCaseJ4 {
   protected static final String SLOW_SERVLET_REGEX = SLOW_SERVLET_PATH + "/*";
   protected static final String DEBUG_SERVLET_PATH = "/debug";
   protected static final String DEBUG_SERVLET_REGEX = DEBUG_SERVLET_PATH + "/*";
+  protected static final String QUERY_METHOD_SERVLET_PATH = "/query-method";
+  protected static final String QUERY_METHOD_SERVLET_REGEX = QUERY_METHOD_SERVLET_PATH + "/*";
   protected static final String REDIRECT_SERVLET_PATH = "/redirect";
   protected static final String REDIRECT_SERVLET_REGEX = REDIRECT_SERVLET_PATH + "/*";
   protected static final String SLOW_STREAM_SERVLET_PATH = "/slowStream";
@@ -91,6 +99,7 @@ public abstract class HttpSolrClientTestBase extends SolrTestCaseJ4 {
             .withServlet(new ServletHolder(RedirectServlet.class), REDIRECT_SERVLET_REGEX)
             .withServlet(new ServletHolder(SlowServlet.class), SLOW_SERVLET_REGEX)
             .withServlet(new ServletHolder(DebugServlet.class), DEBUG_SERVLET_REGEX)
+            .withServlet(new ServletHolder(QueryMethodServlet.class), QUERY_METHOD_SERVLET_REGEX)
             .withServlet(new ServletHolder(SlowStreamServlet.class), SLOW_STREAM_SERVLET_REGEX)
             .withSSLConfig(sslConfig.buildServerSSLConfig())
             .build();
@@ -155,6 +164,39 @@ public abstract class HttpSolrClientTestBase extends SolrTestCaseJ4 {
     assertEquals("application/x-www-form-urlencoded", DebugServlet.headers.get("content-type"));
     // this validates that URI encoding has been applied - the content-length is smaller if not
     assertEquals("93", DebugServlet.headers.get("content-length"));
+  }
+
+  public void testQueryMethodWithBody() throws Exception {
+    try (var client =
+        builder(
+                solrTestRule.getBaseUrl(),
+                DEFAULT_CONNECTION_TIMEOUT,
+                DEFAULT_CONNECTION_TIMEOUT)
+            .withResponseParser(new XMLResponseParser())
+            .build()) {
+      assertQueryMethodWithBody(client);
+    }
+  }
+
+  protected void assertQueryMethodWithBody(HttpSolrClient client) throws Exception {
+    QueryMethodServlet.clear();
+    ModifiableSolrParams params = new ModifiableSolrParams();
+    params.set("q", "solr");
+    params.set("hl.fl", "text");
+    String text = "text to highlight";
+    var request =
+        new GenericSolrRequest(
+                SolrRequest.METHOD.QUERY,
+                QUERY_METHOD_SERVLET_PATH + "/highlight",
+                params)
+            .withContent(text.getBytes(StandardCharsets.UTF_8), "text/plain");
+
+    client.request(request);
+
+    assertEquals("QUERY", QueryMethodServlet.lastMethod);
+    assertEquals("text/plain", QueryMethodServlet.contentType);
+    assertEquals("solr", QueryMethodServlet.query);
+    assertEquals(text, new String(QueryMethodServlet.requestBody, StandardCharsets.UTF_8));
   }
 
   public void testQueryPut() throws Exception {
@@ -671,5 +713,34 @@ public abstract class HttpSolrClientTestBase extends SolrTestCaseJ4 {
       gotExpectedError = true;
     }
     assertTrue(gotExpectedError);
+  }
+
+  public static class QueryMethodServlet extends HttpServlet {
+    static String lastMethod;
+    static String contentType;
+    static String query;
+    static byte[] requestBody;
+
+    static void clear() {
+      lastMethod = null;
+      contentType = null;
+      query = null;
+      requestBody = null;
+    }
+
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+      lastMethod = request.getMethod();
+      contentType = request.getContentType();
+      query = request.getParameter("q");
+      requestBody = request.getInputStream().readAllBytes();
+      response.setContentType("application/xml; charset=UTF-8");
+      response
+          .getOutputStream()
+          .write(
+              "<?xml version=\"1.0\" encoding=\"UTF-8\"?><response/>"
+                  .getBytes(StandardCharsets.UTF_8));
+    }
   }
 }

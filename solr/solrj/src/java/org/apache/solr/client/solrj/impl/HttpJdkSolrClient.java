@@ -253,8 +253,10 @@ public class HttpJdkSolrClient extends HttpSolrClient {
           }
         case POST:
         case PUT:
+        case QUERY:
           {
-            pReq = preparePutOrPost(url, solrRequest.getMethod(), reqb, solrRequest, queryParams);
+            pReq =
+                prepareBodyRequest(url, solrRequest.getMethod(), reqb, solrRequest, queryParams);
             break;
           }
         default:
@@ -283,7 +285,7 @@ public class HttpJdkSolrClient extends HttpSolrClient {
     return new PreparedRequest(reqb);
   }
 
-  private PreparedRequest preparePutOrPost(
+  private PreparedRequest prepareBodyRequest(
       String url,
       SolrRequest.METHOD method,
       HttpRequest.Builder reqb,
@@ -328,11 +330,7 @@ public class HttpJdkSolrClient extends HttpSolrClient {
     }
 
     decorateRequest(reqb, solrRequest);
-    if (method == SolrRequest.METHOD.PUT) {
-      reqb.method("PUT", bodyPublisher);
-    } else {
-      reqb.method("POST", bodyPublisher);
-    }
+    reqb.method(method.name(), bodyPublisher);
     URI uriWithQueryParams = new URI(url + queryParams.toQueryString());
     reqb.uri(uriWithQueryParams);
 
