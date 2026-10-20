@@ -29,3 +29,14 @@ Review (2026-10-20T15:52Z, vm5, second pass on head 0881de1ed68b847c781abd7ccb56
 Repairs: none.
 
 Regate: gates/SOLR-16155-review-pass-2.md (DONE).
+
+## Pass 3 (vm3, 2026-10-20T23:34:21Z, taken over from vm5's stale pass-3 slot)
+
+- Head reviewed: `0881de1ed68b847c781abd7ccb56196cdbf15ecd` (unchanged). Base `14c7aac0d1`. Passes 1 and 2 reused, not redone.
+- Review: production diff read end to end (JavabinLoader `describeDocument`, DocumentBuilder `getFieldErrorMessage` and `traceFieldError`, the copy-field message). The change does what the ticket asks: no field values in update error messages; values stay available at TRACE. A search of the update, loader and processor packages finds no remaining message that appends a field value.
+- Finding carried from pass 1 (minor, disclosed in the changelog): the exception text (`msg=`) is no longer in the response; the cause is still attached. Behaviour change, recorded, not repaired (outside the repair scope). Owner's call whether to keep it.
+- Repairs in pass 3: none.
+- Regate: `gates/SOLR-16155-review-pass-3.md`, GREEN at `0881de1ed6`. Logs `gates/logs/vm3/solr-16155-review-pass-3/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 on a forced re-run (`compile-rerun.log`: `:solr:core:compileJava` and `compileTestJava` executed with `-Pvalidation.errorprone=true`); focused run of JavabinLoaderTest, DocumentBuilderTest and TolerantUpdateProcessorTest: 3 classes, 31 tests, 0 failures, 0 errors, 0 skipped (fresh XML); `:solr:core:check -x test` rc 0.
+- Gate note: the first pass-3 compile step ran only `cleanCompile*` wrapper tasks (UP-TO-DATE), so its Error Prone compile was not real. The real compile ran in the focused step without the flag. Fixed by the forced re-run above; the step-2 result in the job file is superseded by it.
+
+Pass 3 result: GREEN at `0881de1ed6`. Unit 12 is complete after pass 3.

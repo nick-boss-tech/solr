@@ -1,6 +1,6 @@
 # Gate job: SOLR-16155 review pass 3 (vm3)
 
-Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-16155-submit.md, takeover line 2026-10-20T23:11:49Z)
+Status: DONE (pass 3 green at 0881de1ed6; receipts/SOLR-16155.md)
 
 - Branch: `solr-16155-submit`. Head: `0881de1ed68b847c781abd7ccb56196cdbf15ecd` (ls-remote unchanged since pass 1). If the tip moved, stop and record it here.
 - Prior gated head: `0881de1ed6` (pass 1 and pass 2 GREEN). Base: `14c7aac0d1`.
