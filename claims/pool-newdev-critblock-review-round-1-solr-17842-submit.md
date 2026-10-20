@@ -12,3 +12,7 @@ Heartbeat: 2026-10-20T13:30:00Z
 Heartbeat: 2026-10-20T13:36:00Z. Pass 1 GREEN at 008973f631: reports/newdev-critblock-review-round-1/solr-17842-submit.md, gates/SOLR-17842-review-pass-1.md, receipts/SOLR-17842.md (top section). No repairs. Pass 2 next.
 
 Heartbeat: 2026-10-20T13:38:00Z. Pass 2 GREEN at 008973f631 (gates/SOLR-17842-review-pass-2.md, receipt top section). No repairs. Pass 3 next.
+
+Heartbeat: 2026-10-20T13:41:00Z. Pass 3 GREEN at 008973f631.
+
+DONE: 2026-10-20T13:41:00Z. Unit 1 of assignments/pool-newdev-critblock-review-round-1.md. Three review passes, three regates on head 008973f631, all GREEN, no repairs. Deliverables: reports/newdev-critblock-review-round-1/solr-17842-submit.md, gates/SOLR-17842-review-pass-{1,2,3}.md, receipts/SOLR-17842.md (three top sections). Owner notes: published-results gap; placeholder commit 9da1242b1d not on branch.

@@ -30,3 +30,16 @@ Review (2026-10-20T13:37Z, vm5, second pass on the same head 008973f631):
 Repairs: none. Nothing in pass 2 was in the Gate repairs scope.
 
 Regate: gates/SOLR-17842-review-pass-2.md (light gate shape, same checks as pass 1).
+
+## Pass 3
+
+Review (2026-10-20T13:40Z, vm5, third pass on head 008973f631):
+
+- Head unchanged since pass 1 (ls-remote 2026-10-20T13:40Z). No new diff.
+- Links. The release doc has no relative links; its only link target is the README link, which resolves.
+- Final verdict on the implementation: it is correct as far as it goes. The commands and class names are right, and the scope note is honest. It does not deliver published benchmark results, which the ticket asks for. That gap is the owner's decision (the receipt says so); it does not block the branch as documentation.
+- Open items for the owner, recorded: (1) whether SOLR-17842 should be narrowed to the guidance, or kept open for published results; (2) the 2026-10-15 placeholder commit 9da1242b1d is not on the branch and needs a fast-forward if it is wanted.
+
+Repairs: none.
+
+Regate: gates/SOLR-17842-review-pass-3.md (light gate shape).
