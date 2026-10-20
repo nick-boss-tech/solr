@@ -10,3 +10,7 @@ Heartbeat: 2026-10-20T13:49:23Z
 Heartbeat: 2026-10-20T14:48:41Z. Pass 1 recorded.
 
 Heartbeat: 2026-10-20T15:25:17Z. Pass 2 recorded.
+
+Takeover: 2026-10-20T21:30:18Z (vm3). Old holder vm4, last heartbeat 2026-10-20T15:25:17Z, stale over two hours. Reason: pass 3 not started; the assignment's Host capacity row lets the next free host take the next pass. Passes 1 and 2 are reused, not redone. Head unchanged: 344485485fb8e1706a1e04c02e373d8a97bcd1b8.
+
+Heartbeat: 2026-10-20T21:30:18Z
