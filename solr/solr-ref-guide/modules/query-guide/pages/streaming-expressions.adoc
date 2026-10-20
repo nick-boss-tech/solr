@@ -156,3 +156,16 @@ The xref:math-expressions.adoc[] has in depth coverage of visualization techniqu
 === Stream Tool
 
 * xref:stream-tool.adoc[]: Submit streaming expressions and see results via `bin/solr stream`.
+
+== Stream client timeouts
+
+Streaming expressions open HTTP connections to other nodes through a client cache. The cache never lets the connection timeout or the socket timeout fall below 60 seconds, so a stream that is idle on a socket for longer than that is cut off.
+
+To raise the limits, set these system properties on the node that runs the expression, for example in `solr.in.sh`:
+
+[source,bash]
+----
+SOLR_OPTS="$SOLR_OPTS -DsocketTimeout=300000 -DconnTimeout=120000"
+----
+
+The values are in milliseconds. They can only raise the 60-second floor; a lower value is ignored.
