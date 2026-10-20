@@ -26,6 +26,7 @@ import org.apache.solr.cloud.SolrCloudTestCase;
 import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.util.ExternalPaths;
 import org.eclipse.jetty.client.ContentResponse;
+import org.eclipse.jetty.client.StringRequestContent;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -46,7 +47,7 @@ public class HighlightRequestHandlerCloudHttpTest extends SolrCloudTestCase {
   }
 
   @Test
-  public void testGetStreamBodyOnV2CollectionRoute() throws Exception {
+  public void testGetAndQueryOnV2CollectionRoute() throws Exception {
     String params =
         "?q=_text_%3Asolr&hl.fl=_text_&wt=json&stream.body="
             + URLEncoder.encode(TEXT, StandardCharsets.UTF_8);
@@ -59,6 +60,18 @@ public class HighlightRequestHandlerCloudHttpTest extends SolrCloudTestCase {
             .getSolrClient()
             .getHttpClient()
             .GET(v2CollectionUrl + params));
+
+    assertHighlightResponse(
+        cluster
+            .getJettySolrRunner(0)
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(v2CollectionUrl + "?q=_text_%3Asolr&hl.fl=_text_&wt=json")
+            .method("QUERY")
+            .body(
+                new StringRequestContent(
+                    "text/plain; charset=UTF-8", TEXT, StandardCharsets.UTF_8))
+            .send());
   }
 
   private static void assertHighlightResponse(ContentResponse response) {

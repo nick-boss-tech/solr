@@ -256,13 +256,15 @@ public abstract class RuleBasedAuthorizationPluginBase
   private boolean customPermissionAppliesToRequest(
       Permission customPermission, AuthorizationContext context) {
     log.trace("Permission [{}] is a custom permission", customPermission);
+    String requestMethod = context.getHttpMethod();
     if (customPermission.method != null
-        && !customPermission.method.contains(context.getHttpMethod())) {
+        && !customPermission.method.contains(requestMethod)
+        && !("QUERY".equals(requestMethod) && customPermission.method.contains("GET"))) {
       if (log.isTraceEnabled()) {
         log.trace(
             "Custom permission requires method [{}] but request had method [{}]; permission doesn't apply",
             customPermission.method,
-            context.getHttpMethod());
+            requestMethod);
       }
       // this permissions HTTP method does not match this rule. try other rules
       return false;

@@ -748,6 +748,51 @@ public class BaseTestRuleBasedAuthorizationPlugin extends SolrTestCaseJ4 {
     ((Map) rules.get("user-role")).put(user, role);
   }
 
+  @Test
+  public void testQueryMatchesGetMethodPermission() {
+    Map<String, Object> permissions =
+        Map.of(
+            "permissions",
+            List.of(
+                Map.of(
+                    "path", "/highlight",
+                    "collection", "mycoll",
+                    "method", "GET",
+                    "role", "admin")));
+
+    checkRules(highlightRequest("QUERY"), FORBIDDEN, permissions);
+  }
+
+  @Test
+  public void testQueryCanHaveItsOwnMethodPermission() {
+    Map<String, Object> permissions =
+        Map.of(
+            "permissions",
+            List.of(
+                Map.of(
+                    "path", "/highlight",
+                    "collection", "mycoll",
+                    "method", "QUERY",
+                    "role", "admin")));
+
+    checkRules(highlightRequest("QUERY"), FORBIDDEN, permissions);
+    checkRules(highlightRequest("GET"), STATUS_OK, permissions);
+  }
+
+  private Map<String, Object> highlightRequest(String method) {
+    return Map.of(
+        "resource",
+        "/highlight",
+        "httpMethod",
+        method,
+        "userPrincipal",
+        "joe",
+        "collectionRequests",
+        "mycoll",
+        "handler",
+        new SearchHandler());
+  }
+
   public void testEditRules() throws IOException {
     Perms perms = new Perms();
     perms.runCmd("{set-permission : {name: config-edit, role: admin } }", true);

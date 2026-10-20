@@ -321,8 +321,10 @@ The wildcard `\*` can be used to indicate that this permission applies to all pa
 |===
 +
 Defines the HTTP methods this permission applies to.
-Options include `HEAD`, `POST`, `PUT`, `GET`, `DELETE`, and the wildcard `\*`.
+Options include `HEAD`, `POST`, `PUT`, `GET`, `DELETE`, `QUERY`, and the wildcard `\*`.
 Multiple values can also be specified using a JSON array.
+A `QUERY` request matches both `QUERY`-specific and `GET`-specific permissions, so existing
+read-method rules continue to apply. If both match, the first permission applies.
 
 `params`::
 +

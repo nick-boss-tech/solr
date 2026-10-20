@@ -174,5 +174,6 @@ class Permission {
       Stream.concat(
               predefinedPermissionAllowedKeys.stream(), customPermissionAdditionalKeys.stream())
           .collect(Collectors.toUnmodifiableSet());
-  public static final Set<String> HTTP_METHODS = Set.of("GET", "POST", "DELETE", "PUT", "HEAD");
+  public static final Set<String> HTTP_METHODS =
+      Set.of("GET", "POST", "DELETE", "PUT", "HEAD", "QUERY");
 }

@@ -701,11 +701,12 @@ public abstract class CloudSolrClient extends SolrClient {
       Throwable rootCause = SolrException.getRootCause(exc);
       // don't do retry support for admin requests
       // or if the request doesn't have a collection specified
-      // or request is v2 api and its method is not GET
+      // or request is v2 API and method is not GET or QUERY (both are safe and idempotent)
       if (inputCollections.isEmpty()
           || isAdmin
           || (request.getApiVersion() == SolrRequest.ApiVersion.V2
-              && request.getMethod() != SolrRequest.METHOD.GET)) {
+              && request.getMethod() != SolrRequest.METHOD.GET
+              && request.getMethod() != SolrRequest.METHOD.QUERY)) {
         if (exc instanceof SolrServerException) {
           throw (SolrServerException) exc;
         } else if (exc instanceof IOException) {

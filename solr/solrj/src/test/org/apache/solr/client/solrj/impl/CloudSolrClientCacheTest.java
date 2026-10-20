@@ -48,6 +48,7 @@ import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
 import org.apache.solr.client.solrj.request.UpdateRequest;
+import org.apache.solr.client.solrj.request.V2Request;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.DocCollection;
@@ -162,6 +163,32 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
       assertTrue(history.get(0).startsWith(collName + ":"));
       assertNull("Second attempt should skip _stateVer_", history.get(1));
       assertTrue("Expected refresh to be triggered", refGets.get() >= 1);
+    }
+  }
+
+  public void testV2QueryRequestRetriesCommunicationError() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
+
+    try (ClusterStateProvider provider = getStateProvider(liveNodes, Map.of());
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 2)) {
+      client.enqueue(
+          (req, cols) -> {
+            throw new ConnectException("TEST");
+          });
+      client.enqueue((req, cols) -> null);
+
+      V2Request request =
+          new V2Request.Builder("/c/" + collName + "/highlight")
+              .withMethod(SolrRequest.METHOD.QUERY)
+              .build();
+      NamedList<Object> response = client.request(request, collName);
+
+      assertNotNull(response);
+      assertEquals(
+          "QUERY request should be retried after a communication error",
+          2,
+          client.getStateVersionHistory().size());
     }
   }
 
