@@ -8,3 +8,5 @@
 - Started: 2026-10-20T14:15:00Z (UTC).
 
 Heartbeat: 2026-10-20T14:15:00Z
+
+Heartbeat: 2026-10-20T14:18:00Z. Pass 1 PARTIAL at cd7cc695fb. Findings: no solr.cmd default on the 9.x line (owner question, scope widening); no changelog file on this line (owner). Launcher and bats leg for vm1 (not yet posted as its own job).
