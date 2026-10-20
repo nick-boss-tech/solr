@@ -1,37 +1,37 @@
 # Skip record: SOLR-9648
 
-- Ticket: SOLR-9648, Wrap all solr merge policies with SolrMergePolicy. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-9648, "Wrap all solr merge policies with SolrMergePolicy". JIRA status read 2026-10-20T12:35:36Z (UTC): Open, resolution None, updated 2019-06-08. Linked: LUCENE-7523 (Open).
+- Verdict: keep-open (kept; re-read at the pinned head).
 - Draft branch: solr-9648-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-05, audit verdict confirmed-skip).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T12:35:36Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Wrap all solr merge policies with SolrMergePolicy. Skip note: design: wrapping merge policies.
+Wrap every configured merge policy in one Solr-level policy, so that a single entry point can upgrade segments on startup and handle schema-driven index changes. Comments from 2016 show an initial POC, a discussion of configuration semantics, and LUCENE-7523 for a Lucene-side change. No maintainer decision.
 
-## Code reading
+## Code reading (pinned head)
 
-Taken from the audit evidence, not re-read at the pinned head: audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 4 comments). Class: design decision / by design / needs maintainer call. Reason holds: design: wrapping merge policies Basis is ticket text, not a fresh code repro; no deterministic test could be written from it.
+- `solr/core/src/java/org/apache/solr/index/UpgradeIndexMergePolicyFactory.java:9-18`: a `WrapperMergePolicyFactory` that wraps the configured merge policy in Lucene's `UpgradeIndexMergePolicy`. So segment upgrade on merge exists as an opt-in configuration.
+- The ticket's "wrap all" design (a default wrapper around every configured policy) is not present: the wrapper is configured per policy, not applied to every policy by default. The grep `git grep -l "SolrMergePolicy\|UpgradeIndexMergePolicy" 498a09aea97aac86c2cc7ac114113b946d249942 -- solr/core/src/java` returns only this factory.
 
 ## History
 
-No commit history was used for this record.
+- evidence.py at the pinned head: no commits naming SOLR-9648.
+- The path-scoped history of the factory was not read in this pass (the full path log timed out).
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. The question is a design choice about default behavior, which a run does not settle.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The capability the ticket describes exists as opt-in. Whether every merge policy should be wrapped by default, and with what startup-upgrade behavior, is a maintainer decision on configuration semantics, not a reproducible defect.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric: the attempts made are the code-path reading and the grep; the missing piece is the maintainer's decision on whether the wrap is default behavior (and whether LUCENE-7523 changes the design). close-answered is not supported: the answer is a design choice, not a docs question. close-fixed is not supported: the default-wrap design is not present.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not decide the design. It does not check LUCENE-7523's status beyond the ticket's note.
