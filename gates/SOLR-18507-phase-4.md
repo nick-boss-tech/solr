@@ -62,3 +62,8 @@ If any step cannot be verified, record it here and stop.
 
 - One fast-forward push with the receipt and the DONE marks, plus any repair commits (WORKFLOW.md, Gate repairs).
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Note from vm3 (2026-10-20)
+
+- The phase 3 gate found and fixed one defect: `IndexFingerprint.getGrossFingerprint` read the `_version_` DocValues with `advanceExact`, which the flush-time producer does not support (`testMergedSegmentPersistsGrossFingerprint`, seed `18507A003`). The fix is `ad706640ff` on `solr-18507-phase-3-submit`, with the tidy repair `f0259902ce`. Receipt: `receipts/SOLR-18507.md`, phase 3 section.
+- Head `f50c2271a32f25eb24ced4276516beb858f3b97e` contains the phase 3 tip `35f6e044dd` but not `ad706640ff`, and it still has the `advanceExact` call. Rebase onto `ad706640ff` before this gate runs, or the same test is expected to fail. vm3 has not changed this branch.
