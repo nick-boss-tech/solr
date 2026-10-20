@@ -6,6 +6,10 @@ This page is the order of operations for any agent that posts assignments or gat
 
 Before claiming any work, read [`pool/owner-complaints-2026-10-19.md`](owner-complaints-2026-10-19.md). It is the owner's current list of what is going wrong on this branch and what he expects instead, and it outranks habit: if your next claim would repeat something complained about there, take different work. Closeouts that answer a complaint say so and name its number.
 
+## The map
+
+[`pool/work-map.md`](work-map.md) is the holistic view: the category taxonomy, the table tying branches with no ticket number back to their parents, and the linkage rules (every work item carries its ticket or parent, its category, its siblings, and what it supersedes). [`pool/tickets-to-open.md`](tickets-to-open.md) is the registry of tickets that do not exist yet, each with its parent work and its filing trigger. Read the category entry and the sibling records before writing code in an area.
+
 ## Balk, do not redo
 
 Before starting any claimed item, check it against [`pool/advisory-balk-and-clear.md`](advisory-balk-and-clear.md): work that is already done, already claimed and live, structurally unable to finish, or only stale paperwork. When a shape matches, refuse the item, record the balk, and clear the stale record in the same push, exactly as the advisory describes. Redoing finished work is the failure this branch keeps paying for.
