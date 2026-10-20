@@ -14,3 +14,5 @@ Heartbeat: 2026-10-20T12:03:36Z
 Result: 2026-10-20T12:03:36Z: close-fixed at pinned head 498a09aea97aac86c2cc7ac114113b946d249942. Draft branch solr-10601-draft-close at b24aca0b32 (drafts/SOLR-10601/record.md, jira-comment.md). Fix 17563ce81f is an ancestor; the line is present at StreamExpressionParser.java:187. No run.
 
 DONE: 2026-10-20T12:03:36Z. Deliverables: drafts/SOLR-10601/record.md and jira-comment.md on solr-10601-draft-close (b24aca0b32); material/skip-audit/queue-current.json (close-fixed); line in reports/skip-verdict-remediation-11.md.
+
+Correction (2026-10-20T12:05:34Z): the draft branch head is 497cd93a3e (the first push was rejected because a close-fixed record already existed on the branch at b24aca0b32; the new record is on top of it).
