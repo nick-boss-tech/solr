@@ -27,7 +27,13 @@ No commit at the pin names SOLR-13278 (the evidence tool lists none). The histor
 
 ## Reproduction attempts
 
-Not run. This pass ran no builds or tests. The missing piece is a run of the ticket's request at this sha: a core with two suggesters, one per dictionary name, then the same query with two `suggest.dictionary` and two `suggest.cfq` values, comparing the two per-dictionary sections. The response file in the ticket would be the expected output to compare against.
+Run on 2026-10-20 at the pin 498a09aea97aac86c2cc7ac114113b946d249942 (fork commit, base of the run worktree):
+
+- Command: `./gradlew :solr:core:test --offline --tests "*SuggestComponentTest*"` (JAVA_HOME /workspace/jdk/jdk-21.0.12.1+1, GRADLE_USER_HOME /workspace/gradle-home). Result: BUILD SUCCESSFUL, EXIT 0; SuggestComponentTest 13 tests, 0 failures, 0 errors.
+- Added for the run only (not committed): `testTwoDictionaries`, which sends two `suggest.dictionary` values (suggest_fuzzy_doc_dict and suggest_fuzzy_with_high_freq_dict) and two `suggest.q` values (exampel) with count 5, and asserts both per-dictionary sections are returned. Result: pass (time 1.213 s).
+- Not run: the reporter's exact request, which uses two `suggest.cfq` values. The cfq variant is the remaining difference between the run and the ticket.
+
+The run shows the two-dictionary response returns a section per dictionary for this configuration. It does not reproduce the reported output, because the reported request differs (suggest.cfq, not suggest.q). The missing piece is a run of the ticket's request at this sha: a core with two suggesters, one per dictionary name, then the same query with two `suggest.dictionary` and two `suggest.cfq` values, comparing the two per-dictionary sections. The response file in the ticket would be the expected output to compare against.
 
 ## Gap analysis
 
