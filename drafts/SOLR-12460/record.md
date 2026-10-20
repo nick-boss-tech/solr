@@ -23,7 +23,7 @@ So the cache key for the join domain still depends on the base docset of the fac
 ## History
 
 - No commit at the pin names SOLR-12460 (git log --grep at the pin: none).
-- The file history of FacetRequest.java and FacetProcessor.java was not traced in this pass; the commits listed by the evidence tool for the file-level path are not fixes for this ticket.
+- The file history of FacetRequest.java, FacetProcessor.java, and WrappedQuery.java was not traced in this pass, so no claim is made about past changes to the join-domain caching.
 
 ## Reproduction attempts
 
