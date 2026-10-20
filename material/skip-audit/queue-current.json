@@ -16123,9 +16123,9 @@
       "round": "audit-3",
       "evidence": "ShardHandlerFactory.newInstance wraps the failure as SolrException with class name, message and cause"
     },
-    "verdict": "close-fixed",
-    "draft_branch": "solr-4635-draft-close",
-    "evidence_head": "498a09aea9"
+    "verdict": "keep-open",
+    "draft_branch": "solr-4635-draft-open",
+    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
     "key": "SOLR-4610",

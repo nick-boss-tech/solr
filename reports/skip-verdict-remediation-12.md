@@ -9,3 +9,4 @@
 - SOLR-4674 | claims/skip-SOLR-4674-vm2.md | keep-open (kept; startup flag read; repeater reload run missing; docs silent) | solr-4674-draft-open 7a08091d3e | JIRA read 2026-10-20T15:16:05Z Open
 - SOLR-4669 | claims/skip-SOLR-4669-vm2.md | keep-open (kept; install order read at IndexFetcher.java:691-741; window run and ordering decision missing) | solr-4669-draft-open b57646de33 | JIRA read 2026-10-20T15:21:30Z Open
 - SOLR-4659 | claims/skip-SOLR-4659-vm2.md | keep-open (kept; null parent default present at SolrResourceLoader.java:187-207; constructor change is a maintainer call) | solr-4659-draft-open 7e55416c90 | JIRA read 2026-10-20T15:27:37Z Open
+- SOLR-4635 | claims/skip-SOLR-4635-vm2.md | keep-open (changed from close-fixed: cause chained at ShardHandlerFactory.java:52-68; fixing commit not identified; blame is formatting-only) | solr-4635-draft-open 2b6c439061 | JIRA read 2026-10-20T15:38:59Z Open
