@@ -8,3 +8,5 @@
 - Started: 2026-10-20T13:45:00Z (UTC).
 
 Heartbeat: 2026-10-20T13:45:00Z
+
+Heartbeat: 2026-10-20T13:55:00Z. Pass 1 in progress on 5cdc657470. Finding (major, pending gate): 14 module lockfiles still pin jetty 12.1.12 (solr/modules/{analysis-extras,clustering,cross-dc,cuvs,extraction,gcs-repository,jwt-auth,langid,language-models,ltr,opentelemetry,s3-repository,scripting,sql}/gradle.lockfile); the commit updates only api, benchmark, core and cross-dc-manager. Scratch worktree /workspace/worktrees/gate-18297; compile log /workspace/gates/logs/vm5/g18297/compile.log.
