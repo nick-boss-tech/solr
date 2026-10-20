@@ -327,7 +327,9 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
         0,
         core.getPerSegmentGrossFingerprintCacheSize());
 
-    try (var searcher = core.getSearcher().get()) {
+    RefCounted<SolrIndexSearcher> searcherRef = core.getSearcher();
+    try {
+      SolrIndexSearcher searcher = searcherRef.get();
       assertEquals(1, searcher.getTopReaderContext().leaves().size());
       SegmentReader segmentReader =
           getSegmentReader(searcher.getTopReaderContext().leaves().get(0).reader());
@@ -342,6 +344,8 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
           "The cold deleted segment should load its persisted gross summary",
           1,
           core.getPerSegmentGrossFingerprintCacheSize());
+    } finally {
+      searcherRef.decref();
     }
   }
 
@@ -421,7 +425,9 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     h.getCoreContainer().reload(core.getName());
     core = h.getCore();
     assertEquals(0, core.getPerSegmentGrossFingerprintCacheSize());
-    try (var searcher = core.getSearcher().get()) {
+    RefCounted<SolrIndexSearcher> searcherRef = core.getSearcher();
+    try {
+      SolrIndexSearcher searcher = searcherRef.get();
       SegmentReader segmentReader =
           getSegmentReader(searcher.getTopReaderContext().leaves().get(0).reader());
       assertTrue(
@@ -435,6 +441,8 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
       // The old summary has the wrong version hash and maximum. Accepting it would disagree with
       // this uncached live-doc scan.
       assertCachedFingerprintMatchesUncached(searcher, Long.MAX_VALUE);
+    } finally {
+      searcherRef.decref();
     }
   }
 
@@ -460,7 +468,9 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     h.getCoreContainer().reload(core.getName());
     core = h.getCore();
     assertEquals(0, core.getPerSegmentGrossFingerprintCacheSize());
-    try (var searcher = core.getSearcher().get()) {
+    RefCounted<SolrIndexSearcher> searcherRef = core.getSearcher();
+    try {
+      SolrIndexSearcher searcher = searcherRef.get();
       SegmentReader segmentReader =
           getSegmentReader(searcher.getTopReaderContext().leaves().get(0).reader());
       assertNotNull(
@@ -482,6 +492,8 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
             .info
             .putAttribute(SEGMENT_FINGERPRINT_ATTRIBUTE, persistedMetadata);
       }
+    } finally {
+      searcherRef.decref();
     }
   }
 
@@ -508,7 +520,9 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     h.getCoreContainer().reload(core.getName());
     core = h.getCore();
     assertEquals(0, core.getPerSegmentGrossFingerprintCacheSize());
-    try (var searcher = core.getSearcher().get()) {
+    RefCounted<SolrIndexSearcher> searcherRef = core.getSearcher();
+    try {
+      SolrIndexSearcher searcher = searcherRef.get();
       SegmentReader segmentReader =
           getSegmentReader(searcher.getTopReaderContext().leaves().get(0).reader());
       String persistedMetadata =
@@ -535,6 +549,8 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
             .info
             .putAttribute(SEGMENT_FINGERPRINT_ATTRIBUTE, persistedMetadata);
       }
+    } finally {
+      searcherRef.decref();
     }
   }
 
