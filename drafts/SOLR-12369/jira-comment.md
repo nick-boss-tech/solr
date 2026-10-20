@@ -1,1 +1,1 @@
-We checked current main. This ticket does not name a test class we can run, so we have not reproduced it yet. Leaving it open while we look for a way to run it.
+We re-read this ticket against the Solr source at fork commit 498a09aea97. ZkController.waitForShardId still waits on the watched cluster state for up to 320 seconds without forcing a collection refresh, which is the behavior the ticket describes. We have not run the repeated core-create test, and whether to add a forced refresh is a design trade-off, so this ticket stays open.
