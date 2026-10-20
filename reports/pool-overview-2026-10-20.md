@@ -11,7 +11,7 @@ Read from coordination at 4f4aef0a80, with the vm3 gate claim on 7f0edc0435. Sta
 | DONE | 1 SOLR-17842, 6 SOLR-11310, 11 SOLR-15326 |
 | ENDED | 8 SOLR-12743 (base cannot finish), 10 SOLR-14638 (parked by owner) |
 | HANDED BACK at pass 1 (retry needed) | 7 SOLR-11650 (redaction fails open for a raw slash or question mark), 9 SOLR-14200 (empty result for missing shard, divide by zero) |
-| Pass 2 recorded or green, pass 3 open | 3 SOLR-18458 (live claim, last heartbeat 15:25Z), 12 SOLR-16155 (pass 2 green at 0881de1ed6) |
+| Pass 2 recorded or green, pass 3 open; claims stale (last heartbeat over two hours old, so takeable under the lease rule) | 3 SOLR-18458 (last heartbeat 15:25Z), 12 SOLR-16155 (pass 2 green at 0881de1ed6, last heartbeat 15:53Z) |
 | Live, other host | 13 SOLR-16655 (vm3 claim, pass 1 gate result pending) |
 | NEARLY, owner or vm1 piece | 4 and 5 SOLR-18552 (solr.cmd question for the owner; launcher and bats leg on a vm1 gate job) |
 | NEEDS-OWNER | 2 SOLR-18297 (Jetty warning, options A to C) |
