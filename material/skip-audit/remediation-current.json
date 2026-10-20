@@ -4791,6 +4791,126 @@
         "the record says JIRA was not re-read for it",
         "missing piece not stated: \"see the evidence below\" has no evidence below; no repro and no named code path"
       ]
+    },
+    {
+      "key": "SOLR-8681",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-8681-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "65ce55712c246a63f6591492a63383234a5920d1",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; multi-shard repro not run"
+      ]
+    },
+    {
+      "key": "SOLR-8635",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-8635-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "65ce55712c246a63f6591492a63383234a5920d1",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "no code path and no repro; missing piece (router type, duplicate id setup) not stated: \"see the evidence below\" has no evidence below"
+      ]
+    },
+    {
+      "key": "SOLR-8623",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-8623-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "65ce55712c246a63f6591492a63383234a5920d1",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "verdict holds on the code path (988a16fe95 ancestor; FacetRangeProcessor EnumCalc for EnumFieldType); repro not run"
+      ]
+    },
+    {
+      "key": "SOLR-8572",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-8572-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "65ce55712c246a63f6591492a63383234a5920d1",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "the queue note says resolved but Jira is Open; the record flags this conflict; noggit duplicate-key behavior not checked"
+      ]
+    },
+    {
+      "key": "SOLR-8469",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-8469-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "65ce55712c246a63f6591492a63383234a5920d1",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "IOException and buffer path the ticket names was not traced; proxy error path present (HttpSolrCall sendRemoteProxy)"
+      ]
+    },
+    {
+      "key": "SOLR-8463",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-8463-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "65ce55712c246a63f6591492a63383234a5920d1",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "null guards present (FacetComponent 723-724, 985-986); missing piece (original NPE stack and a shards.tolerant run) not run"
+      ]
+    },
+    {
+      "key": "SOLR-8365",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-8365-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "65ce55712c246a63f6591492a63383234a5920d1",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "code path present (LogUpdateProcessorFactory 63-66); repro not run"
+      ]
+    },
+    {
+      "key": "SOLR-8310",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-8310-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "65ce55712c246a63f6591492a63383234a5920d1",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "code path present (solr/bin/solr lsof gate, 859415c7e1 ancestor); CentOS 5 lsof check named as the missing piece, not run"
+      ]
     }
   ]
 }
