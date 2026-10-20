@@ -4658,7 +4658,7 @@
     },
     "verdict": "keep-open",
     "draft_branch": "solr-13278-draft-open",
-    "evidence_head": "1d0232df17"
+    "evidence_head": "6cbce1634b"
   },
   {
     "key": "SOLR-13270",
