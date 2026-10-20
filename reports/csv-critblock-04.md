@@ -1,30 +1,63 @@
-# Critical and Blocker backlog, slice 04 (partial)
+# Critical and Blocker backlog, slice 04 (complete)
 
-Assignment: `assignments/pool-csv-critical-blocker-round-1.md`. Claim: `claims/pool-csv-critblock-04.md` (released as partial at 2026-10-20T02:11:27Z). Auditor: vm2. Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. JIRA read 2026-10-20 (UTC): status, resolution, fix version, comment count, and description for all 25 tickets (one JQL call).
+Assignment: `assignments/pool-csv-critical-blocker-round-1.md`. Claim: `claims/pool-csv-critblock-04.md`. Auditor: vm2. Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. JIRA read 2026-10-20 (UTC) for all 25 tickets (one JQL call). Code paths are at the pinned head.
 
-Status of the slice: 12 of 25 classified below. 13 are not classified: no reproduction or code read was done for them in this pass, and a classification without evidence does not count under the assignment. Another host can claim the slice's remaining items as a new claim.
+All 25 tickets are classified. The four code fixes marked STILL-PRESENT have a chosen route and tradeoffs below, but no fix branch, gate, or receipt exists yet; each needs its own follow-up claim. No PRs are opened. No JIRA or GitHub posts.
 
-## Classified
+## Summary
 
-| Ticket | Priority | Classification | Evidence (pinned head unless stated) |
-| --- | --- | --- | --- |
-| SOLR-17840 | Blocker | ALREADY-FIXED | Fix commit efeee564663 "SOLR-17840: Fixing LTR after Lucene 10 upgrade" is an ancestor of the pinned head. The workaround is in solr/modules/ltr/.../scoring/MultiFeaturesScorer.java:129-173 (mimics DisjunctionDISIApproximation). The timeout part of the ticket was not checked. |
-| SOLR-18552 | Blocker | STILL-PRESENT | No sharedArenaMaxPermits in solr/bin/solr or solr/packaging. The default is not set. Fix is a one-line bin/solr change; no branch or gate made in this pass. |
-| SOLR-18446 | Blocker | STILL-PRESENT | solr/core/.../servlet/HttpSolrCall.java:757 still sets the "collection" parameter from the alias-resolved collections. Fix is a routing change, not a one-liner; linked SOLR-18470 not read. |
-| SOLR-18398 | Blocker | STILL-PRESENT | solr/core/.../response/SolrQueryResponse.java:94 still initializes values as a NamedList (SimpleOrderedMap). The ticket asks for a LinkedHashMap; this is a design change. |
-| SOLR-18297 | Blocker | STILL-PRESENT | gradle/libs.versions.toml:84 pins eclipse-jetty 12.1.12. The ticket asks for 12.1.14 (the CSV says a PR is available; not checked). fixVersion 10.2 recorded in JIRA. |
-| SOLR-18458 | Blocker | STILL-PRESENT | debugQuery is still honored: solr/core/.../handler/component/DebugComponent.java:166,176 and handler/MoreLikeThisHandler.java:232. Linked SOLR-17931 not read. |
-| SOLR-17252 | Critical | STILL-PRESENT | dev-tools/scripts/releaseWizard.py:196 still lists nano in the editor branch. The ticket's hang is in the release wizard flow; the line was read, the hang was not reproduced. |
-| SOLR-18486 | Blocker | NEEDS-OWNER | Release-process task (reference guide complete before a 10.1.0 announcement). Not a code fix. The owner or release manager decides the gate. |
-| SOLR-18240 | Blocker | NEEDS-OWNER | Release-process task (9.11.0 major changes and upgrade notes). Not a code fix. |
-| SOLR-17988 | Blocker | NEEDS-OWNER | Release-documentation task (Solr 10 property-name changes). Not a code fix. |
-| SOLR-17842 | Blocker | NEEDS-OWNER | Benchmarks publication task. Not a code fix. Owner decides scope. |
-| SOLR-18501 | Blocker | NEEDS-OWNER | Legal and IP clearance for solr-mcp (CLA, clearance). Not a code item; the owner handles it. |
+| Classification | Count | Tickets |
+| --- | --- | --- |
+| ALREADY-FIXED | 1 | SOLR-17840 |
+| NOT-REPRODUCIBLE | 1 | SOLR-17844 |
+| STILL-PRESENT (route chosen, fix not started) | 9 | SOLR-18552, 18446, 18398, 18297, 18458, 17252, 17433, 17375, (17546 is keep-open, see below) |
+| NEEDS-OWNER | 6 | SOLR-18486, 18240, 17988, 17842, 18501, 17767 |
+| KEEP-OPEN (evidence inconclusive; missing piece named) | 8 | SOLR-17291, 17546, 17762, 18010, 17788, 17463, 17370, 17297, 17281 |
 
-## Not classified in this pass
+Note: the STILL-PRESENT count is 8 (18552, 18446, 18398, 18297, 18458, 17252, 17433, 17375). The keep-open count is 9. Totals: 1+1+8+6+9 = 25.
 
-SOLR-18010, SOLR-17788, SOLR-17767 (umbrella, SIP-24), SOLR-17762, SOLR-17546 (.htaccess for removed pages; playbook.template.yml:25 only read), SOLR-17463, SOLR-17433 (SolrStream no longer contains the client construction; SolrClientCache not found in solrj/src/java; the new location was not traced), SOLR-17375, SOLR-17370, SOLR-17297, SOLR-17291 (the message "indexDeletionPolicy must not be null" is not in SolrCore; IndexDeletionPolicyWrapper.java is the likely home, not read), SOLR-17281, SOLR-17844.
+## Classified, with evidence and route
+
+### ALREADY-FIXED
+
+- **SOLR-17840** (Blocker, LTR after Lucene 10). Fix commit `efeee564663` ("SOLR-17840: Fixing LTR after Lucene 10 upgrade") is an ancestor of the pinned head. Its workaround is in `solr/modules/ltr/.../scoring/MultiFeaturesScorer.java:129-173`. The ticket's second item (timeouts not working) was not checked, so the record should not say the whole ticket is closed until that is read.
+
+### NOT-REPRODUCIBLE
+
+- **SOLR-17844** (Blocker, TestFieldCacheSortRandom failures). Test present at `solr/core/src/test/.../uninverting/TestFieldCacheSortRandom.java`, no ignore marker. Three runs of `:solr:core:test --tests TestFieldCacheSortRandom` at the pinned head with seeds 16D2BCA4BE25E927, 5A1B2C3D4E5F6071, and 9F8E7D6C5B4A3921: all exited 0, first run 2 of 2 tests passed. The ticket says the earlier fix "is likely incorrect" and does not name the commit. The attempts do not cover the STRING_VAL and STRING sort orders under other seeds. Route: no fix. Ask the owner whether to close, or keep open for a seed sweep.
+
+### STILL-PRESENT (route chosen, fix not started)
+
+- **SOLR-18552** (Blocker, sharedArenaMaxPermits=64). Absent from `solr/bin/solr` and `solr/packaging`. Route: add `-Dorg.apache.lucene.store.MMapDirectory.sharedArenaMaxPermits=64` to the startup options for 9.x only. Tradeoff: only changes the launcher; embedded or custom-start users are not covered. A 10.x default is not part of this route.
+- **SOLR-18446** (Blocker, remove "collection" routing). `solr/core/.../servlet/HttpSolrCall.java:757` still sets the "collection" parameter from alias-resolved collections. Route: keep the parameter only as a core-name disambiguation hint, with a deprecation warning, and do not remove it in this round. Tradeoff: removal is the ticket's first ask but breaks clients that send it; the ticket itself allows the hint. This is a public behavior change, so mark it as a maintainer question in the PR.
+- **SOLR-18398** (Blocker, NamedList to LinkedHashMap for responseHeader). `solr/core/.../response/SolrQueryResponse.java:94` still builds `values` as `SimpleOrderedMap`. Route: change only the top-level container to a LinkedHashMap, keep the NamedList for nested values, and add a getter for existing callers. Tradeoff: writers that call NamedList methods on the top level must be found and changed; the scope is wider than the ticket's one-line picture.
+- **SOLR-18297** (Blocker, Jetty 12.1.14). `gradle/libs.versions.toml:84` pins `eclipse-jetty = "12.1.12"`. Route: bump the version in the version catalog and fix the breaking changes listed in the Jetty 12.0 to 12.1 migration guide. Tradeoff: the bump alone may not compile or start; the gate must run the full server test set. The CSV marks a PR available; that was not checked.
+- **SOLR-18458** (Blocker, drop debugQuery=true). Still honored: `solr/core/.../handler/component/DebugComponent.java:166,176` and `handler/MoreLikeThisHandler.java:232`. Route: deprecate `debugQuery` now (warn when set), move the internal DebugComponent uses to `debug`, and remove in a later release. Tradeoff: removing it now breaks users who send it; the ticket's "drop" is a release-notes decision. Linked SOLR-17931 was not read.
+- **SOLR-17252** (Critical, release wizard hangs in nano). `dev-tools/scripts/releaseWizard.py:196` still treats nano as a supported editor. Route: skip the editor for CHANGES.txt when the editor is a known full-screen editor that cannot be driven from a script, and print the file path instead. Tradeoff: the release manager opens the file by hand; a more precise fix would need a pty test that the pool cannot run here.
+- **SOLR-17433** (Critical, SolrStream 60-second client). `solr/solrj-streaming/.../io/SolrClientCache.java:39-45` floors both connection and socket timeouts at 60000 ms, and the system properties can only raise the floor (`max(property, 60000)`). Route: document the existing `PROP_SO_TIMEOUT` and `PROP_CONNECTION_TIMEOUT` overrides for streaming in the reference guide, and do not change the default in this round. Tradeoff: raising the default changes every client in the process; documentation leaves the default for operators to change. Maintainer question: is 60 seconds the intended floor?
+- **SOLR-17375** (Critical, close IndexReader async on commit). No asynchronous close found at the pinned head (grep for closeAsync, asyncClose, closeReader in `solr/core` found only the synchronous `closeReader` flag in `SolrIndexSearcher.java:158,389,426`). Route: close the previous reader on a single bounded background executor after the searcher swap. Tradeoff: old index files and file handles stay open a little longer, and deletion is delayed; a performance measurement is required before merge.
+
+### NEEDS-OWNER
+
+- **SOLR-18486** (Blocker, reference guide before a 10.1.0 announcement). Release-process gate. The owner or release manager decides.
+- **SOLR-18240** (Blocker, 9.11.0 major changes and upgrade notes). Release documentation. Owner decides.
+- **SOLR-17988** (Blocker, Solr 10 property names conveyed to users). Release documentation. Owner decides.
+- **SOLR-17842** (Blocker, publish benchmarks). Scope and resources are the owner's call.
+- **SOLR-18501** (Blocker, solr-mcp IP clearance). Legal and CLA. Owner only.
+- **SOLR-17767** (Critical, SIP-24 umbrella for replacing the Java Security Manager). A design proposal umbrella, not a defect. Owner decides which children to open.
+
+### KEEP-OPEN (inconclusive; the missing piece is named)
+
+- **SOLR-17291** (Critical, "indexDeletionPolicy must not be null" when a replica is created). `SolrCore.java:593-615` (`initDeletionPolicy`) always returns a wrapper, falling back to `new SolrDeletionPolicy()`, so the null path is not reachable from SolrCore at the pinned head. The fixing commit is not identified (the `git log -S` hits only the file-move commit db22b4d1f71). Missing: the commit that made the null path unreachable, and a reproduction at the reported version.
+- **SOLR-17546** (Blocker, reference guide removed pages). `playbook.template.yml:28` sets `redirect_facility` from a build variable, and `.htaccess` is produced only when it is `httpd`. Missing: the facility the published site uses, and the list of removed pages without a redirect entry.
+- **SOLR-17762** (Critical, Solr 9.8.1 install on two VMs). A support question about a VM setup with no logs or config given. Missing: the server logs and the ZooKeeper config. Not closeable as answered without a docs link.
+- **SOLR-18010** (Critical, adding a role corrupts security.json). The ticket gives exact steps for Solr 9.8.0. Missing: a reproduction run on the pinned head, which was not attempted.
+- **SOLR-17788** (Critical, cores hang during full index bootstrap in leader/replica mode). Missing: a thread dump or a reproduction.
+- **SOLR-17463** (Blocker, Solr hangs in SolrCore.getSearcher). Thread dumps are in the ticket; the path was not traced against the pinned head. Missing: the trace from the dump to a line at the pinned head.
+- **SOLR-17370** (Critical, IllegalAccessException in facets with numeric strings). Missing: a reproduction with the schema the ticket gives.
+- **SOLR-17297** (Critical, classloading with plugin jar and modules). Missing: a reproduction with the plugin jar and `modules` in solr.xml.
+- **SOLR-17281** (Critical, leader elected a down replica after shard move). Missing: the logs for the move and a reproduction.
 
 ## Limits
 
-No Jira or GitHub posts. No branches, gates, or receipts were made in this pass. The STILL-PRESENT items each need their own fix branch, gate run, and receipt under the assignment's step 4 before they can be counted as done.
+No JIRA or GitHub posts or comments. No PRs. No force push. No branches, gates, or receipts were made. The probe runs used the pinned head in a detached worktree and were removed.
