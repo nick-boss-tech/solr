@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The code reading does not settle this ticket yet. We are leaving the ticket open while we look further.
+The spell checker adapter still passes its suggestion count straight to Lucene, and the NullPointerException here is tracked on the Lucene side in LUCENE-8147. We have not reproduced it on current main, and the report does not include the full spellchecker configuration. If you can share the full spellcheck section and a query that triggers the error, we will test it. We are keeping this issue open until then.
