@@ -1,1 +1,1 @@
-We reviewed this ticket against current upstream main. The review did not find a reproducible defect in the current code, but the ticket is not closed yet, and we are leaving it open for a decision.
+The DocValues iterator change that this report measures was followed by Lucene fixes (LUCENE-7462, LUCENE-8374, both Resolved). We have not measured current Solr against the 2016 numbers, so we are keeping this issue open until a current benchmark is run. If you have current measurements, please attach the index size, the queries, and the Solr version.
