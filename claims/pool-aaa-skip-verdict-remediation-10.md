@@ -10,3 +10,4 @@
 Heartbeat: 2026-10-20T07:06:38Z
 
 Append one heartbeat line at least once an hour while the claim is active, and push it.
+Heartbeat: 2026-10-20T07:10:40Z (batch 10 item 1 done; item 2 next)

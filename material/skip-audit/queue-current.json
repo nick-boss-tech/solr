@@ -6657,9 +6657,9 @@
       "round": "audit-3",
       "evidence": "no transient cache code left in CoreContainer on upstream/main"
     },
-    "verdict": "close-fixed",
+    "verdict": "close-obsolete",
     "draft_branch": "solr-11688-draft-close",
-    "evidence_head": "498a09aea9"
+    "evidence_head": "b2c983c394"
   },
   {
     "key": "SOLR-11678",
