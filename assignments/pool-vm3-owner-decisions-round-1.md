@@ -34,3 +34,7 @@ For each row, the owner or phone agent writes the answer in the last column and 
 - No PR, comment, JIRA or email. The owner decides any of those.
 - No force push. Push only as a fast-forward.
 - No em dashes or en dashes in this file.
+
+## Evidence from implementation (vm3, 2026-10-20)
+
+- Row 2, SOLR-18214: verification failed, so the branch was not started. An empty configset uploads and is registered, but a collection created from it fails with `Can't find resource 'solrconfig.xml'`. Full evidence: `claims/pool-decisions-impl-SOLR-18214.md`. The answer is not changed. The owner or phone agent needs to choose between a generated minimal configset (not in the answer) and option C (reject with a message).
