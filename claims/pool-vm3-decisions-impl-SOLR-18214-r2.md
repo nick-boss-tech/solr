@@ -18,3 +18,9 @@ Heartbeat: 2026-10-20T04:43:43Z
 - Rung 1 (code): the probe shows an uploaded empty configset has no `solrconfig.xml`, so no core loads (claim above). `CloneConfigSet` and `ConfigSetCmds.createConfigSet` require a base today.
 - Rung 4 (choice): the empty configset is kept, with the minimum files a core needs added by the server (`solrconfig.xml` and a managed schema). Their contents are fixed by the probe in this claim, not guessed. v1 is unchanged. Option C (reject) is not taken: it contradicts answer A.
 - The probe result and the chosen file set will be recorded here before the gate runs.
+
+## Probe, round 2 (started 2026-10-20T05:31:06Z)
+
+- Probe (uncommitted, in worktree /workspace/worktrees/solr-18214 on solr-18214-empty-configset from c8ab71430f): `EmptyConfigSetProbeTest`, one node. It uploads a configset holding only a generated minimal `solrconfig.xml` (ClassicIndexSchemaFactory, DirectUpdateHandler2 with updateLog, `/select` and `/update` handlers) and a minimal `schema.xml` (`id`, `_version_`, uniqueKey). It creates a collection from it, indexes one document, commits, and asserts one hit.
+- Script: /workspace/tools/probe-18214.sh. Seed 18214A001. Logs: gates/logs/vm3/solr-18214-probe-minimal/ (test.log, result-test.txt, done).
+- Outcome decides the next step: pass means the generated files are the minimum that loads a core, and the implementation adds them to the server-side create path. Fail means the evidence goes here and the decision goes back to the ladder.
