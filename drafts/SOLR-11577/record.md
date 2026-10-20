@@ -1,37 +1,42 @@
 # Skip record: SOLR-11577
 
-- Ticket: SOLR-11577, HttpShardHandler do not retry on stale clusterstate. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-11577, HttpShardHandler does not retry on stale clusterstate. JIRA read in this pass: Open, resolution none, fix versions none, 0 comments; updated 2019-06-08.
+- Verdict: keep-open (unchanged status; this record replaces the bulk audit-derived record on this branch).
 - Draft branch: solr-11577-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-05, audit verdict confirmed-skip).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942 (checked at this head for this record).
+- Source: the queue entry (audit verdict confirmed-skip, audit date 2026-10-19) is background only; the reading below is fresh at the pin.
 
 ## Ticket reading
 
-The summary as recorded in the queue: HttpShardHandler do not retry on stale clusterstate. Skip note: design-level: HttpShardHandler retry on stale cluster state needs a retry policy across the shard handler; found while working on SOLR-11576; no test or repro beyond a scenario description..
+The ticket: with two shards and one replica each, restarting a node and then indexing and committing through CloudSolrClient can fail the next query, because CloudSolrClient retries on a stale cluster state (SOLR-11484) but HttpShardHandler does not; when no live replica is found for a shard the shard handler throws "no servers hosting shard". The reporter describes the steps in the ticket (restart node2, index, commit, assert). No comments.
 
 ## Code reading
 
-Taken from the audit evidence, not re-read at the pinned head: audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 0 comments). Class: design decision / by design / needs maintainer call. Reason holds: design-level: HttpShardHandler retry on stale cluster state needs a retry policy across the shard handler; found while working on SOLR-11576; no test or repro beyond a scenario description. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it.
+- solr/core/src/java/org/apache/solr/handler/component/HttpShardHandler.java:194-201 (getURLs): the URL list for a shard is looked up in shardToURLs and built once with httpShardHandlerFactory.buildURLList(shard) when first needed; the map is per handler (per request), so a list computed before a replica comes back is not refreshed during the request.
+- HttpShardHandler.java:245-257 (submit): if urls is empty, the shard response is recorded with SolrException SERVICE_UNAVAILABLE "no servers hosting shard: <shard>" and the method returns. No refresh of the cluster state and no retry is attempted on this path.
+- The grep at the pin for a forced refresh or retry in HttpShardHandler.java (forceUpdate, retry, refresh) returns no hits.
+
+So the behavior the ticket describes is present at the pin: a shard with no URLs at submit time fails the request without a cluster-state refresh or a retry in the shard handler.
 
 ## History
 
-No commit history was used for this record.
+- No commit at the pin names SOLR-11577 (git log --grep at the pin: none).
+- SOLR-11484 (the CloudSolrClient retry) was not traced in this pass.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. A reproduction needs a two-shard, two-node collection at the pin, a node restart, indexing and commit through CloudSolrClient, and a query immediately after, recording whether the query fails with "no servers hosting shard". Not built or run in this pass.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The code matches the ticket's mechanism: no refresh or retry on an empty URL list. Whether the failure window is hit in practice depends on the cluster-state timing during restart, which a run would show.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
+keep-open: the mechanism is present at the pin, so close-fixed and close-obsolete are not supported. close-cannot-reproduce needs a run attempt, and none was made.
 
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+Missing for a closing verdict: a restart-and-query run at the pin recording whether "no servers hosting shard" occurs; zero occurrences over repeated runs would support close-cannot-reproduce.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not run the restart scenario, does not trace SOLR-11484, and does not post anything to JIRA or GitHub.
