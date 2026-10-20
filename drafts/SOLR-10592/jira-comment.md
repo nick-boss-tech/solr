@@ -1,0 +1,1 @@
+The test method named in this report, testRegisterMetricsWithReplacements, is no longer in Solr on current main. The metrics tests were rewritten in 2025 during the metrics cleanup (SOLR-17855). We are closing this as obsolete. If you see a metrics test failure with a registration count on a current release, please open a new issue with the test name and the seed.
