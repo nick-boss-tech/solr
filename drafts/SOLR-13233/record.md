@@ -1,37 +1,44 @@
 # Skip record: SOLR-13233
 
-- Ticket: SOLR-13233, SpellCheckCollator ignores stacked tokens. JIRA was not re-read for this record.
+- Ticket: SOLR-13233, SpellCheckCollator ignores stacked tokens.
 - Verdict: keep-open.
-- Draft branch: solr-13233-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-1, 2026-10-04, audit verdict confirmed-skip).
+- Draft branch: solr-13233-draft-open (verdict unchanged; this record replaces the audit-derived record on this branch).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
+- Checked by: vm5 (pool Linux host), 2026-10-20 UTC. Redo of remediation batch 07, item 7 (`assignments/pool-aaa-skip-verdict-remediation-07.md`).
 
 ## Ticket reading
 
-The summary as recorded in the queue: SpellCheckCollator ignores stacked tokens. Skip note: Design-heavy: reporter unsure of correct fix (WDGF emission order vs collator behavior), no maintainer consensus, stale since 2019; no linked PR.
+JIRA read 2026-10-20: Open, no resolution, created 2019-02-08, updated 2019-06-08, no fix versions, no links. The report: `SpellCheckCollator` skips every token with a position increment of 0, on the assumption that such tokens were injected and carry offsets that do not match the original query. A stacked token from a filter such as WordDelimiterGraphFilter, which keeps the original text, is skipped too, so the collation misses a valid correction. Three comments (2019-02-08 to 2019-02-10): romseygeek is unsure of the fix (emit the original token first, or check the other token filters); sokolov suggests skipping all stacked tokens, original and injected. No agreed fix.
 
 ## Code reading
 
-Taken from the audit evidence, not re-read at the pinned head: Read ticket: reporter and Sokolov unsure of correct fix (WDGF order vs collator behavior).
+Read at the pin:
+
+- `solr/core/src/java/org/apache/solr/spelling/SpellCheckCollator.java:210-217`: `offset` is set, and the loop over the tokens does `if (tok.positionIncrement() == 0) continue;` on line 217. The skip is present as the ticket describes.
+- `SpellCheckCollator.java:255-258`: the replacement uses `tok.startOffset()` and `tok.endOffset()` against the unparsed query, so a stacked token's offsets are used directly; the skip exists because those offsets can be wrong for injected terms.
+- The skip has not changed in the history read in this pass (`git log -S 'getPositionIncrement'` on the file returned no commit that names the ticket).
 
 ## History
 
-No commit history was used for this record.
+No commit at the pin names SOLR-13233 (the evidence tool lists none). The history of the skip line was not traced beyond the search above.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. This pass ran no builds or tests. The missing piece is a run: a spellcheck collation request on a field whose analyzer emits a stacked (position increment 0) token with the original text, showing the collation that is not produced.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+- The code path is present and matches the ticket's description.
+- The ticket records no agreed fix: one option (emit the original token first in the filter) is a filter change, and the other (skip all stacked tokens) changes collation for synonyms. Choosing between them is a maintainer decision.
+- No fix commit exists, so close-fixed does not fit; the feature is present, so close-obsolete does not fit.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
+keep-open: the code path is confirmed at the pin, the reproduction has not been run, and the fix choice is open on the ticket. pr-needed needs the reproduction and the fix choice.
 
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+Missing for this verdict: a run of a stacked-token collation at the pin, and the maintainer choice between the two fix shapes.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path, as stated above.
+</content>
