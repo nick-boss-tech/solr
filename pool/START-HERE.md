@@ -10,6 +10,10 @@ Before claiming any work, read [`pool/owner-complaints-2026-10-19.md`](owner-com
 
 Before starting any claimed item, check it against [`pool/advisory-balk-and-clear.md`](advisory-balk-and-clear.md): work that is already done, already claimed and live, structurally unable to finish, or only stale paperwork. When a shape matches, refuse the item, record the balk, and clear the stale record in the same push, exactly as the advisory describes. Redoing finished work is the failure this branch keeps paying for.
 
+## Where work comes from
+
+Work is pulled from the three stores in [`pool/work-stores.md`](work-stores.md), in the order given there: follow-ups and reviews of existing work, then the skip list, then the CSV backlog. Slices and batches are self-serve: when the posted ones are taken, cut the next one yourself under the rules on that page. "No work for me" is not a reportable state while any store holds unclaimed items.
+
 ## Two rules that cause most failures
 
 1. A handoff is a file on this branch. If it has no path on `coordination`, no other agent can see it. Chat messages and local notes are not handoffs.
