@@ -185,8 +185,13 @@ public class IndexFingerprint implements MapWriter {
     fingerprint.maxDoc = maxDoc;
     fingerprint.numDocs = maxDoc;
     NumericDocValues values = valuesProducer.getNumeric(fieldInfo);
+    int nextDocWithValue = values.nextDoc();
     for (int doc = 0; doc < maxDoc; doc++) {
-      long version = values.advanceExact(doc) ? values.longValue() : 0L;
+      long version = 0L;
+      if (doc == nextDocWithValue) {
+        version = values.longValue();
+        nextDocWithValue = values.nextDoc();
+      }
       addVersion(fingerprint, version, Long.MAX_VALUE);
     }
     return fingerprint;
