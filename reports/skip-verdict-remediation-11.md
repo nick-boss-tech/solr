@@ -12,3 +12,4 @@
 - SOLR-9622 | claims/skip-SOLR-9622-vm2.md | keep-open (kept; explain path read; grouped-query run missing; SOLR-14693 commit not in history) | solr-9622-draft-open c16f12aacf | JIRA read 2026-10-20T12:51:20Z Open
 - SOLR-9599 | claims/skip-SOLR-9599-vm2.md | keep-open (kept; 2016 perf umbrella, no current measurement; linked Lucene issues resolved) | solr-9599-draft-open 61ad6d4e24 | JIRA read 2026-10-20T12:56:19Z Open
 - SOLR-9594 | claims/skip-SOLR-9594-vm2.md | keep-open (kept; canShortCircuit requires ACTIVE, behavior present; SolrCloud run and fix design missing) | solr-9594-draft-open ebbf033e48 | JIRA read 2026-10-20T13:03:18Z Open
+- SOLR-9593 | claims/skip-SOLR-9593-vm2.md | close-obsolete (changed from keep-open: InternalHttpClient absent under solr/; SOLR-18188 removed Apache HttpClient from tests) | solr-9593-draft-close c2703e0702 | JIRA read 2026-10-20T13:11:52Z Open
