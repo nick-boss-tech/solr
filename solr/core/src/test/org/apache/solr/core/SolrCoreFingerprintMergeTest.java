@@ -36,8 +36,7 @@ import org.junit.Test;
 
 public class SolrCoreFingerprintMergeTest extends SolrTestCaseJ4 {
 
-  private static final boolean HAS_PERSISTED_FINGERPRINT_FORMAT =
-      hasPersistedFingerprintFormat();
+  private static final boolean HAS_PERSISTED_FINGERPRINT_FORMAT = hasPersistedFingerprintFormat();
 
   @BeforeClass
   public static void beforeTests() throws Exception {

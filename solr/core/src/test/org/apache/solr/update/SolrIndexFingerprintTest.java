@@ -35,9 +35,7 @@ import org.junit.Test;
 public class SolrIndexFingerprintTest extends SolrTestCaseJ4 {
 
   private static final String FINGERPRINT_SCHEMA =
-      hasPersistedFingerprintFormat()
-          ? "schema-fingerprint-docvaluesformat.xml"
-          : "schema.xml";
+      hasPersistedFingerprintFormat() ? "schema-fingerprint-docvaluesformat.xml" : "schema.xml";
 
   @BeforeClass
   public static void beforeTests() throws Exception {

@@ -37,9 +37,7 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
 
   private static final String SEGMENT_FINGERPRINT_ATTRIBUTE = "solr.indexFingerprint";
   private static final String FINGERPRINT_SCHEMA =
-      hasPersistedFingerprintFormat()
-          ? "schema-fingerprint-docvaluesformat.xml"
-          : "schema.xml";
+      hasPersistedFingerprintFormat() ? "schema-fingerprint-docvaluesformat.xml" : "schema.xml";
 
   @BeforeClass
   public static void beforeTests() throws Exception {
@@ -195,7 +193,8 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
 
     iwRef = core.getSolrCoreState().getIndexWriter(core);
     try {
-      iwRef.get()
+      iwRef
+          .get()
           .updateDocValues(
               new Term("id", "updated-1"), new NumericDocValuesField("_version_", 1000));
     } finally {

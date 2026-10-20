@@ -176,8 +176,8 @@ public class IndexFingerprint implements MapWriter {
   }
 
   /**
-   * Computes a gross fingerprint while Lucene writes the numeric _version_ DocValues for a
-   * segment. Missing values have the same zero value used by the version ValueSource.
+   * Computes a gross fingerprint while Lucene writes the numeric _version_ DocValues for a segment.
+   * Missing values have the same zero value used by the version ValueSource.
    */
   public static IndexFingerprint getGrossFingerprint(
       DocValuesProducer valuesProducer, FieldInfo fieldInfo, int maxDoc) throws IOException {
@@ -194,8 +194,8 @@ public class IndexFingerprint implements MapWriter {
 
   /**
    * Identifies the _version_ interpretation used to create a persisted summary, or returns {@code
-   * null} when the field type does not have the direct numeric DocValues semantics required by
-   * the write-time summary.
+   * null} when the field type does not have the direct numeric DocValues semantics required by the
+   * write-time summary.
    */
   public static String getSegmentMetadataSchemaSignature(IndexSchema schema) {
     SchemaField versionField = VersionInfo.getAndCheckVersionField(schema);
@@ -218,8 +218,8 @@ public class IndexFingerprint implements MapWriter {
   }
 
   /**
-   * Serializes the gross summary as a versioned, self-validating SegmentInfo attribute. The
-   * segment id, schema signature, and DocValues generation prevent reuse across incompatible data.
+   * Serializes the gross summary as a versioned, self-validating SegmentInfo attribute. The segment
+   * id, schema signature, and DocValues generation prevent reuse across incompatible data.
    */
   public String toSegmentMetadata(SegmentInfo segmentInfo, String schemaSignature) {
     String encodedSchema =
@@ -268,11 +268,10 @@ public class IndexFingerprint implements MapWriter {
       if (parts.length != 9
           || Integer.parseInt(parts[0]) != SEGMENT_METADATA_FORMAT_VERSION
           || !parts[1].equals(HexFormat.of().formatHex(segmentInfo.getId()))
-          || !parts[2]
-              .equals(
-                  Base64.getUrlEncoder()
-                      .withoutPadding()
-                      .encodeToString(schemaSignature.getBytes(StandardCharsets.UTF_8)))
+          || !parts[2].equals(
+              Base64.getUrlEncoder()
+                  .withoutPadding()
+                  .encodeToString(schemaSignature.getBytes(StandardCharsets.UTF_8)))
           || Long.parseLong(parts[3]) != -1) {
         return null;
       }
