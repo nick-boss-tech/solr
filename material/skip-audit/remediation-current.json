@@ -4071,6 +4071,202 @@
         "no closeout claim in claims/ naming SOLR-11009 with a DONE line (the assignment floor)",
         "code path verified at the pinned head (FacetModule.java:181-182, :308-311); null check introduced by 9c066f60f1 (SOLR-14482 warnings cleanup, found by git log -S); no reproduction run, record says so"
       ]
+    },
+    {
+      "key": "SOLR-10511",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-10511-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "code path verified at the pin: 69d0c70651 ancestor, replication.js:108 guard present; verdict holds on the code"
+      ]
+    },
+    {
+      "key": "SOLR-10497",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-10497-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "code path verified at the pin: 0dadf2c2a8 ancestor, partials/index.html:215 track by $index present; verdict holds on the code"
+      ]
+    },
+    {
+      "key": "SOLR-10407",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-10407-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "close-obsolete needs an empty grep at the pin; availableSubPaths remains at solrj PathTrie.java:181-182 and ref guide v2-api.adoc:94, :105, :127; the ref guide still documents the removed output",
+        "Jira read 2026-10-20: Open, no resolution, last updated 2019-06-08."
+      ]
+    },
+    {
+      "key": "SOLR-10395",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10395-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "the record says see the evidence below, and no evidence is below; the missing piece (the reporter llparser and ngram field, as a repro input) is not named; no attempt run"
+      ]
+    },
+    {
+      "key": "SOLR-10334",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10334-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not named; the only input is a Cloudera 4.10.3 report, outside the fork; no repro input given"
+      ]
+    },
+    {
+      "key": "SOLR-10326",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-10326-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "close-obsolete needs the grep command and its empty result in the record; the record says the grep is from the B2 reading; hits at the pin: CollectionsRepairEventListener.java:51 (comment) and SolrZkClientCompressedDataTest.java:62 (fixture); the rule for comment and fixture hits is not stated",
+        "Jira read 2026-10-20: Open, no resolution, last updated 2019-06-08."
+      ]
+    },
+    {
+      "key": "SOLR-10325",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10325-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not named (see the evidence below, which is absent); ticket description empty, so intended scope is a maintainer question the record does not state"
+      ]
+    },
+    {
+      "key": "SOLR-10242",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10242-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not named (see the evidence below, which is absent); the repro input (autoCommit openSearcher=false, no soft commit, query after indexing) is not stated"
+      ]
+    },
+    {
+      "key": "SOLR-10201",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10201-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "verdict holds as keep-open: app.js:391-393 default timeout present, no doNotTimeout hits; no attempt run; missing piece named (build repro)"
+      ]
+    },
+    {
+      "key": "SOLR-10110",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10110-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "verdict holds as keep-open: CommitTracker.java:280-283 and SolrCore.java:2438 present; no guard or fix commit; missing piece named (repro on the pin)"
+      ]
+    },
+    {
+      "key": "SOLR-10096",
+      "status": "open",
+      "recorded_verdict": "close-answered",
+      "draft_branch": "solr-10096-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the Jira status used was the B3 reading, not read in this pass",
+        "docs floor verified: sql-query.adoc:305-306 quote matches; verdict holds on the docs"
+      ]
+    },
+    {
+      "key": "SOLR-10041",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-10041-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "close-obsolete needs the grep command and its empty result in the record; the record says the grep was not re-run; the removal itself is verified: f1ce5419ee ancestor, SolrCmdDistributor has no LIR or recovery call at the pin",
+        "Jira read 2026-10-20: Open, no resolution, last updated 2019-06-08."
+      ]
+    },
+    {
+      "key": "SOLR-10022",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-10022-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "verdict does not fit: the reported failure is a Lucene DocValues type-change error on a schema fieldType change during a full import; removing DataImportHandler (a57ba25400) does not remove the schema change path, which is still reachable through DirectUpdateHandler2; close-obsolete rule not met"
+      ]
+    },
+    {
+      "key": "SOLR-10010",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-10010-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "66ca540f5ab04d00bd9e3dbfcfbbcbd948ae6141",
+      "reasons": [
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not named (see the evidence below, which is absent); the repro input (NGram tokenizer plus synonym filter on a managed schema) is not stated; code path present at IndexSchema.java:662-665"
+      ]
     }
   ]
 }
