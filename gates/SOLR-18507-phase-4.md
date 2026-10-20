@@ -76,3 +76,7 @@ If any step cannot be verified, record it here and stop.
 - Repair: 13f2c6d045 (one commit, lifecycle only): the four blocks now hold a `RefCounted` from `getSearcher()` and release it in `finally`, the same pattern as the existing block at line 368. Pushed fast-forward to solr-18507-phase-4-submit (d797b9b310 to 13f2c6d045).
 - Retry: one retry from step 0 on 13f2c6d045 under the same seed. Result recorded below when it finishes.
 - A duplicate invocation of the same gate script started during attempt 1 and was stopped by PID before it reached the test step. Attempt 1's logs were not overwritten.
+
+## Tip check
+
+2026-10-20T05:27:50Z: fork tip of solr-18507-phase-4-submit is 13f2c6d045fa26982d215a68b477d72e635bdc5f, not the head this job names (f50c2271a32f25eb24ced4276516beb858f3b97e). The job says to stop and record the new tip when the tip moves at claim time. Recorded here; not claimed, not retargeted. A new gate job at the new head is needed.
