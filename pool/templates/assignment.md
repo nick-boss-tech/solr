@@ -3,6 +3,7 @@
 Status: OPEN
 
 - Capability tags: <tags from WORKFLOW.md>.
+- Category: <one of the 14 in pool/work-map.md, when the work belongs to one>.
 - Intended host: <host>. Claim under `claims/` before starting (WORKFLOW.md).
 - Posted by: <agent or lane>, <YYYY-MM-DD>, at the direction of <who>.
 
