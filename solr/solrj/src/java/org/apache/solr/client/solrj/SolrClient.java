@@ -56,6 +56,14 @@ public abstract class SolrClient implements Serializable, Closeable {
   protected String defaultCollection;
 
   /**
+   * Sends requests and reads responses in XML when true, or in the binary format when false.
+   * Clients that do not send requests over HTTP ignore this.
+   *
+   * @param useXmlFormat true for XML, false for the binary format
+   */
+  public void setUseXmlFormat(boolean useXmlFormat) {}
+
+  /**
    * Adds a collection of documents
    *
    * @param collection the Solr collection to add documents to

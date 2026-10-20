@@ -48,11 +48,15 @@ import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.request.JavaBinRequestWriter;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.RequestWriter;
 import org.apache.solr.client.solrj.request.SolrQuery;
+import org.apache.solr.client.solrj.request.XMLRequestWriter;
+import org.apache.solr.client.solrj.response.JavaBinResponseParser;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.ResponseParser;
+import org.apache.solr.client.solrj.response.XMLResponseParser;
 import org.apache.solr.client.solrj.util.ClientUtils;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CommonParams;
@@ -154,6 +158,7 @@ public abstract class LBSolrClient extends SolrClient {
   private static final SolrQuery solrQuery = new SolrQuery("*:*");
   protected volatile ResponseParser parser;
   protected volatile RequestWriter requestWriter;
+  private volatile Boolean xmlFormatOverride;
 
   static {
     solrQuery.setRows(0);
@@ -608,9 +613,25 @@ public abstract class LBSolrClient extends SolrClient {
     return timeAllowedNano > 0 && System.nanoTime() > timeOutTime;
   }
 
+  @Override
+  public void setUseXmlFormat(boolean useXmlFormat) {
+    xmlFormatOverride = useXmlFormat;
+    this.requestWriter = useXmlFormat ? new XMLRequestWriter() : new JavaBinRequestWriter();
+    this.parser = useXmlFormat ? new XMLResponseParser() : new JavaBinResponseParser();
+  }
+
+  private SolrClient clientFor(Endpoint endpoint) {
+    SolrClient client = getClient(endpoint);
+    Boolean useXmlFormat = xmlFormatOverride;
+    if (useXmlFormat != null && client instanceof HttpSolrClient http) {
+      http.setUseXmlFormat(useXmlFormat);
+    }
+    return client;
+  }
+
   private NamedList<Object> doRequest(Endpoint endpoint, SolrRequest<?> solrRequest)
       throws SolrServerException, IOException {
-    final var solrClient = getClient(endpoint);
+    final var solrClient = clientFor(endpoint);
     return doRequest(solrClient, endpoint.getBaseUrl(), endpoint.getCore(), solrRequest);
   }
 
@@ -753,7 +774,7 @@ public abstract class LBSolrClient extends SolrClient {
           Objects.requireNonNullElse(zombieEndpoint.getCore(), getDefaultCollection());
       final var responseRaw =
           doRequest(
-              getClient(zombieEndpoint),
+              clientFor(zombieEndpoint),
               zombieEndpoint.getBaseUrl(),
               effectiveCollection,
               queryRequest);
@@ -858,7 +879,7 @@ public abstract class LBSolrClient extends SolrClient {
         // Choose the endpoint's core/collection over any specified by the user
         final var effectiveCollection =
             endpoint.getCore() == null ? collection : endpoint.getCore();
-        return doRequest(getClient(endpoint), endpoint.getBaseUrl(), effectiveCollection, request);
+        return doRequest(clientFor(endpoint), endpoint.getBaseUrl(), effectiveCollection, request);
       } catch (SolrException e) {
         // Server is alive but the request was malformed or invalid
         throw e;
@@ -903,7 +924,7 @@ public abstract class LBSolrClient extends SolrClient {
         final String effectiveCollection =
             endpoint.getCore() == null ? collection : endpoint.getCore();
         NamedList<Object> rsp =
-            doRequest(getClient(endpoint), endpoint.getBaseUrl(), effectiveCollection, request);
+            doRequest(clientFor(endpoint), endpoint.getBaseUrl(), effectiveCollection, request);
         reviveZombieServer(wrapper.getEndpoint());
         return rsp;
       } catch (SolrException e) {

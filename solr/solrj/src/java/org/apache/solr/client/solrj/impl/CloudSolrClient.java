@@ -232,6 +232,12 @@ public abstract class CloudSolrClient extends SolrClient {
     return getLbClient().getParser();
   }
 
+  @Override
+  public void setUseXmlFormat(boolean useXmlFormat) {
+    getHttpClient().setUseXmlFormat(useXmlFormat);
+    getLbClient().setUseXmlFormat(useXmlFormat);
+  }
+
   public RequestWriter getRequestWriter() {
     return getLbClient().getRequestWriter();
   }

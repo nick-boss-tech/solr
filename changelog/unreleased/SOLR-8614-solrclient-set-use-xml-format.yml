@@ -1,0 +1,10 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >
+  SolrJ: SolrClient.setUseXmlFormat switches requests and responses between XML and the binary format
+type: added
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-8614
+    url: https://issues.apache.org/jira/browse/SOLR-8614

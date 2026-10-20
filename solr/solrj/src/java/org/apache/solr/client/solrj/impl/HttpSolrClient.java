@@ -41,9 +41,11 @@ import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.request.JavaBinRequestWriter;
 import org.apache.solr.client.solrj.request.RequestWriter;
+import org.apache.solr.client.solrj.request.XMLRequestWriter;
 import org.apache.solr.client.solrj.response.InputStreamResponseParser;
 import org.apache.solr.client.solrj.response.JavaBinResponseParser;
 import org.apache.solr.client.solrj.response.ResponseParser;
+import org.apache.solr.client.solrj.response.XMLResponseParser;
 import org.apache.solr.client.solrj.util.ClientUtils;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CollectionAdminParams;
@@ -144,6 +146,12 @@ public abstract class HttpSolrClient extends SolrClient {
   protected ResponseParser responseParser(SolrRequest<?> solrRequest) {
     // TODO add invariantParams support
     return solrRequest.getResponseParser() == null ? this.parser : solrRequest.getResponseParser();
+  }
+
+  @Override
+  public void setUseXmlFormat(boolean useXmlFormat) {
+    this.requestWriter = useXmlFormat ? new XMLRequestWriter() : new JavaBinRequestWriter();
+    this.parser = useXmlFormat ? new XMLResponseParser() : new JavaBinResponseParser();
   }
 
   public RequestWriter getRequestWriter() {

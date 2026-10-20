@@ -358,6 +358,18 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
   }
 
   @Test
+  public void testSetUseXmlFormatSwitchesUpdateFormat() throws Exception {
+    String url = solrTestRule.getBaseUrl() + "/debug/foo";
+    try (var client =
+        new HttpJettySolrClient.Builder(url).withDefaultCollection(DEFAULT_COLLECTION).build()) {
+      client.setUseXmlFormat(true);
+      testUpdate(client, WT.XML, "application/xml; charset=UTF-8", MUST_ENCODE);
+      client.setUseXmlFormat(false);
+      testUpdate(client, WT.JAVABIN, "application/javabin", MUST_ENCODE);
+    }
+  }
+
+  @Test
   public void testUpdateJavabin() throws Exception {
     String url = solrTestRule.getBaseUrl() + "/debug/foo";
     try (var client =

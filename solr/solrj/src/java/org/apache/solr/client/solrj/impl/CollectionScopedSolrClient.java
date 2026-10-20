@@ -50,6 +50,11 @@ public class CollectionScopedSolrClient extends SolrClient {
   }
 
   @Override
+  public void setUseXmlFormat(boolean useXmlFormat) {
+    delegate.setUseXmlFormat(useXmlFormat);
+  }
+
+  @Override
   public String toString() {
     return delegate + "/" + defaultCollection;
   }
