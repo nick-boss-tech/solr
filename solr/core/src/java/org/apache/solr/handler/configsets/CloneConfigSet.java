@@ -61,16 +61,18 @@ public class CloneConfigSet extends ConfigSetAPIBase implements ConfigsetsApi.Cl
           SolrException.ErrorCode.BAD_REQUEST, "ConfigSet already exists: " + requestBody.name);
     }
 
-    // is there a base config that already exists
-    if (!configSetService.checkConfigExists(requestBody.baseConfigSet)) {
-      throw new SolrException(
-          SolrException.ErrorCode.BAD_REQUEST,
-          "Base ConfigSet does not exist: " + requestBody.baseConfigSet);
-    }
-
     final Map<String, Object> configsetCommandMsg = new HashMap<>();
     configsetCommandMsg.put(NAME, requestBody.name);
-    configsetCommandMsg.put(ConfigSetCmds.BASE_CONFIGSET, requestBody.baseConfigSet);
+    if (requestBody.baseConfigSet == null) {
+      configsetCommandMsg.put(ConfigSetCmds.MINIMAL_CONFIGSET, true);
+    } else {
+      if (!configSetService.checkConfigExists(requestBody.baseConfigSet)) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST,
+            "Base ConfigSet does not exist: " + requestBody.baseConfigSet);
+      }
+      configsetCommandMsg.put(ConfigSetCmds.BASE_CONFIGSET, requestBody.baseConfigSet);
+    }
     if (requestBody.properties != null) {
       for (Map.Entry<String, Object> e : requestBody.properties.entrySet()) {
         configsetCommandMsg.put(

@@ -1,0 +1,10 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >
+  The v2 configset create API creates an empty ConfigSet with generated minimal files when baseConfigSet is omitted, instead of copying _default
+type: changed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-18214
+    url: https://issues.apache.org/jira/browse/SOLR-18214

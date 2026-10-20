@@ -53,6 +53,37 @@ public class ConfigSetCmds {
   /** Name of the ConfigSet to copy from for CREATE */
   public static final String BASE_CONFIGSET = "baseConfigSet";
 
+  /** Create for CREATE without a base: the ConfigSet gets generated minimal files, not a copy */
+  public static final String MINIMAL_CONFIGSET = "minimalConfigSet";
+
+  private static final String MINIMAL_SOLRCONFIG =
+      """
+      <config>
+        <luceneMatchVersion>${tests.luceneMatchVersion:LATEST}</luceneMatchVersion>
+        <dataDir>${solr.data.dir:}</dataDir>
+        <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.NRTCachingDirectoryFactory}"/>
+        <schemaFactory class="ClassicIndexSchemaFactory"/>
+        <updateHandler class="solr.DirectUpdateHandler2">
+          <updateLog>
+            <str name="dir">${solr.ulog.dir:}</str>
+          </updateLog>
+        </updateHandler>
+        <requestHandler name="/select" class="solr.SearchHandler"/>
+        <requestHandler name="/update" class="solr.UpdateRequestHandler"/>
+      </config>
+      """;
+
+  private static final String MINIMAL_SCHEMA =
+      """
+      <schema name="minimal" version="1.6">
+        <fieldType name="string" class="solr.StrField"/>
+        <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+        <field name="id" type="string" indexed="true" stored="true" required="true"/>
+        <field name="_version_" type="plong" indexed="false" stored="false"/>
+        <uniqueKey>id</uniqueKey>
+      </schema>
+      """;
+
   /** Prefix for properties that should be applied to the ConfigSet for CREATE */
   public static final String CONFIG_SET_PROPERTY_PREFIX = "configSetProp.";
 
@@ -111,6 +142,14 @@ public class ConfigSetCmds {
     return null;
   }
 
+  private static void uploadMinimalConfig(ConfigSetService configSetService, String configSetName)
+      throws IOException {
+    configSetService.uploadFileToConfig(
+        configSetName, "solrconfig.xml", MINIMAL_SOLRCONFIG.getBytes(StandardCharsets.UTF_8), true);
+    configSetService.uploadFileToConfig(
+        configSetName, "schema.xml", MINIMAL_SCHEMA.getBytes(StandardCharsets.UTF_8), true);
+  }
+
   public static void createConfigSet(ZkNodeProps message, CoreContainer coreContainer)
       throws IOException {
     String configSetName = message.getStr(NAME);
@@ -118,6 +157,7 @@ public class ConfigSetCmds {
       throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "ConfigSet name not specified");
     }
 
+    boolean minimal = message.getBool(MINIMAL_CONFIGSET, false);
     String baseConfigSetName = message.getStr(BASE_CONFIGSET, DEFAULT_CONFIGSET_NAME);
 
     if (coreContainer.getConfigSetService().checkConfigExists(configSetName)) {
@@ -126,7 +166,7 @@ public class ConfigSetCmds {
     }
 
     // is there a base config that already exists
-    if (!coreContainer.getConfigSetService().checkConfigExists(baseConfigSetName)) {
+    if (!minimal && !coreContainer.getConfigSetService().checkConfigExists(baseConfigSetName)) {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,
           "Base ConfigSet does not exist: " + baseConfigSetName);
@@ -134,7 +174,7 @@ public class ConfigSetCmds {
 
     String propertyPath = ConfigSetProperties.DEFAULT_FILENAME;
     Map<String, Object> props = getNewProperties(message);
-    if (props != null) {
+    if (props != null && !minimal) {
       // read the old config properties and do a merge, if necessary
       NamedList<Object> oldProps =
           getConfigSetProperties(
@@ -146,7 +186,11 @@ public class ConfigSetCmds {
     byte[] propertyData = getPropertyData(props);
 
     try {
-      coreContainer.getConfigSetService().copyConfig(baseConfigSetName, configSetName);
+      if (minimal) {
+        uploadMinimalConfig(coreContainer.getConfigSetService(), configSetName);
+      } else {
+        coreContainer.getConfigSetService().copyConfig(baseConfigSetName, configSetName);
+      }
       if (propertyData != null) {
         coreContainer
             .getConfigSetService()
