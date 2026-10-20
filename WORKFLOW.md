@@ -101,6 +101,19 @@ Each queue keeps unclaimed work available so a host finishing a task finds the n
 
 Status lines: every assignment and gate job file carries a Status line under its title (`Status: OPEN`, `Status: CLAIMED (claims/<claim file>)`, `Status: DONE`, `Status: UNCONFIRMED`, or `Status: META` for a finding aid). The poster sets OPEN. The claimant sets CLAIMED, naming the claim file, in the same push as the claim. Completion sets DONE in the same push as the deliverable. `OPEN-WORK.md` at the branch root is generated from those lines and is where agents find open work; if it and a file's own Status line ever disagree, the file's Status line governs.
 
+Terminal states. Once an agent has touched an item, it must end in one of these states, and OPEN is never left behind:
+
+- `DONE`: the deliverable is pushed and the receipt is written.
+- `NEARLY`: the work is finished except for one named, bounded piece (for example a rerun or a pending owner check). The claim names that piece and its next step, so the next host does only that piece.
+- `WON'T DO`: refused under `pool/advisory-wont-do.md`, with the evidence.
+- `OWNER DECISION`: one question the decision map and ladder cannot settle, written into the item with its options and a recommendation. Rare.
+- `RETRY`: the agent gave up for a stated reason (host lost, gate environment refusal, repair outside scope). One more attempt is allowed. The item names what the retry must do differently. A second give-up becomes `HANDED BACK` or `WON'T DO`.
+- `HANDED BACK (reason)`: a gate or implementation that failed its retry and returned to implementation, as in the gate rules above.
+
+No re-claim after a pass. An item whose Status is NEARLY, RETRY, DONE, WON'T DO, OWNER DECISION or HANDED BACK is not claimed again by a new host. Only a RETRY or NEARLY item names its next actor, and only that actor takes it. A claim with a stale heartbeat (2 hours) is taken over under the lease rules above, not reclaimed as a fresh OPEN item.
+
+No polling. Hosts do not sleep, loop or re-check status inside a session. Long work starts as a background job (or runs under the lock detached), and the session ends with a scheduled wake that names the job, its log directory and the next step. Results are read on the wake.
+
 ## Lane coordinators
 
 Since 2026-10-11 the pool has two lane coordinators (Nick approved): VM2 coordinates the gate backlog end to end, and the Windows agent coordinates the review rounds end to end. They hand work to each other through claims, gate job files and reports on this branch and keep the loop running without waiting for any single host. PR openings and flips and new comment posts are executed by any pool host once Nick's approval for that act is recorded on this branch; anything needing Nick's decision is posted for him and waits for his recorded word; gate failures where tests executed are investigated by the lane coordinator first and are never relaunched until the investigation is recorded in the gate file. Nick extended the coordinators' authorization on 2026-10-11: either coordinator may update Nick's own PR descriptions against receipts, implement changes identified in review through the full hardening gate and push its own patches, and decide scope questions under the decision default, recording each decision where the category records live. The full handoff, with roles, escalation rules, inherited standing rules and the state each coordinator picks up first, is at `material/coordinator-handoff.md`.

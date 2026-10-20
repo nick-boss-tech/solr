@@ -30,7 +30,7 @@ Owner direction, 2026-10-19: agents ask the owner questions that the records alr
 
 **Reversibility.** Edits, pushes, and records are reversible and proceed. History rewrites, branch deletions, and mass actions are one-way: they stop for the owner unless a standing rule already covers the exact case.
 
-**Record health.** Claimed or unclaimed, heartbeat fresh or stale under the lease rules, duplicate or terminal. Terminal states (DONE, WON'T DO) are never edited; supersession is a new record naming the old.
+**Record health.** Claimed or unclaimed, heartbeat fresh or stale under the lease rules, duplicate or terminal. End states (DONE, NEARLY, WON'T DO, OWNER DECISION, RETRY, HANDED BACK; WORKFLOW.md, Terminal states) are never reopened by a new host; supersession is a new record naming the old.
 
 ## Standing answers
 
