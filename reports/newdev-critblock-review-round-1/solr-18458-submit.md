@@ -33,3 +33,14 @@ Repairs in pass 1: none.
   3. Step 4 per module, fixed list: green (above).
 
 Pass 1 result: GREEN at `344485485f`. Pass 2 starts on the same head.
+
+## Pass 2 (vm4, 2026-10-20T15:25:10Z)
+
+- Head reviewed: `344485485fb8e1706a1e04c02e373d8a97bcd1b8` (unchanged from pass 1). Base `c8ab71430f`.
+- Review focus: the behaviour pinned by tests, not only the code. Checked that the legacy parameter is pinned on both the standalone and the SolrJ paths, and that `SolrQuery.setShowDebugInfo` sends `debug` (`DebugComponentTest.testSolrQueryShowDebugInfoUsesDebugParameter`).
+- Proof leg (step 3), run on base `c8ab71430f` with the head's `DebugComponentTest.java` overlaid: 8 tests, 2 failed, as expected. `testLegacyDebugQueryParameterIgnored` fails with `count(//lst[@name='debug'])=0` (base still honours `debugQuery`). `testSolrQueryShowDebugInfoUsesDebugParameter` fails for the same reason (base sets `debugQuery` in `setShowDebugInfo`). Both tests therefore pin the change.
+- Findings: the pass 1 minor finding stands (silent drop with no DeprecationLog warning). No new findings.
+- Repairs in pass 2: none.
+- Regate: green (see the gate job `gates/SOLR-18458-review-pass-2.md`). Counts from fresh XML match pass 1: core 30/303 (2 skipped), solrj 1/2, ltr 15/91 (1 skipped), language-models 1/23, zero failures. Tidy rc 0, tree clean. Module checks rc 0 on four modules.
+
+Pass 2 result: GREEN at `344485485f`. Pass 3 starts on the same head.
