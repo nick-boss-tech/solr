@@ -33,28 +33,28 @@ public class TestStringMinMaxFunction extends SolrTestCaseJ4 {
   }
 
   @Test
-  public void testMaxOfStringFieldsIsLexicographic() {
+  public void testMaxOfStringFieldsIsLexicographic() throws Exception {
     assertJQ(req("q", "id:1", "fl", "id,v:max(a_s,b_s)"), "/response/docs/[0]/v=='zz'");
   }
 
   @Test
-  public void testMinOfStringFieldsIsLexicographic() {
+  public void testMinOfStringFieldsIsLexicographic() throws Exception {
     assertJQ(req("q", "id:1", "fl", "id,v:min(a_s,b_s)"), "/response/docs/[0]/v=='b'");
   }
 
   @Test
-  public void testMissingValuesAreIgnored() {
+  public void testMissingValuesAreIgnored() throws Exception {
     assertJQ(req("q", "id:3", "fl", "id,v:min(a_s,b_s)"), "/response/docs/[0]/v=='m'");
     assertJQ(req("q", "id:3", "fl", "id,v:max(a_s,b_s)"), "/response/docs/[0]/v=='m'");
   }
 
   @Test
-  public void testNoValueYieldsNoResult() {
+  public void testNoValueYieldsNoResult() throws Exception {
     assertJQ(req("q", "id:4", "fl", "id,v:max(a_s,b_s)"), "/response/docs/[0]/v==null");
   }
 
   @Test
-  public void testMultiValuedStringFieldIsRejected() {
+  public void testMultiValuedStringFieldIsRejected() throws Exception {
     expectThrows(Exception.class, () -> h.query(req("q", "*:*", "fl", "id,v:max(a_ss)")));
   }
 }
