@@ -17,3 +17,17 @@ Review (2026-10-20, vm5):
 Repairs: none.
 
 Regate: gates/SOLR-18552-review-pass-1.md (partial: syntax and changelog legs on vm5; launcher leg named for vm1).
+
+## Pass 2
+
+Review (2026-10-20T14:12Z, vm5, second pass on head cb32d0d966159edb237d581318af9bf96071c0d1; ls-remote recheck unchanged):
+
+- Override order, bash. `solr/bin/solr` builds the java command as `... "${SCRIPT_SOLR_OPTS[@]}" ... "${SOLR_OPTS[@]}"`: the launcher default comes before any user `SOLR_OPTS`. For a repeated `-D`, the JVM takes the last value, so a user-set `sharedArenaMaxPermits` in `SOLR_OPTS` wins over the default. Verified by reading the command line at the head (line 1428). Not run.
+- Override order, cmd. `solr/bin/solr.cmd` appends `%SCRIPT_SOLR_OPTS%` to `START_OPTS` (line 1203) before `%SOLR_OPTS%` (line 1219). Same result: the user value wins.
+- Quoting, cmd. The default is set with `set "SCRIPT_SOLR_OPTS=..."`, and the later appends use the same `set "...%SCRIPT_SOLR_OPTS% ..."` form the file already uses at lines 797 to 938. The value contains `=`, which the quoted form handles. Consistent with the file; not run.
+- Ordering with the stack-size line. `solr.cmd` line 1087 rebuilds `SCRIPT_SOLR_OPTS` as `%SOLR_JAVA_STACK_SIZE% %SCRIPT_SOLR_OPTS%`; the permit default stays in the value. No issue found.
+- Still not run on vm5: launcher behavior and bats. Named piece for vm1 (gates/SOLR-18552-launcher-bats.md).
+
+Repairs: none.
+
+Regate: gates/SOLR-18552-review-pass-2.md (partial, same shape as pass 1).
