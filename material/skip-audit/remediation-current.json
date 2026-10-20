@@ -4031,6 +4031,46 @@
       "reasons": [
         "Cross-audit batch 21 (vm5): missing J, C. Detail in reports/skip-verdict-audit-batch-21.md."
       ]
+    },
+    {
+      "key": "SOLR-11378",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-11378-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "47d567d6f73c15db9d93dcc5cc3c4f4df7ffcb2f",
+      "reasons": [
+        "no closeout claim in claims/ naming SOLR-11378 with a DONE line (the assignment floor)",
+        "record.md code reading is empty (missing piece only); no code path with file and line at the pinned head. Re-audit read DirectUpdateHandler2.java:865, :905, :910 (postCommit skipped if openNewSearcher throws); UpdateLog pre/postCommit state not read",
+        "no reproduction attempt; the test the ticket came from (AutoscalingHistoryHandlerTest) is gone"
+      ]
+    },
+    {
+      "key": "SOLR-11246",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-11246-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "47d567d6f73c15db9d93dcc5cc3c4f4df7ffcb2f",
+      "reasons": [
+        "no closeout claim in claims/ naming SOLR-11246 with a DONE line (the assignment floor)",
+        "code path verified at the pinned head (MoveReplicaCmd.java:247, :370); fix 86a40c1cd5 (SOLR-13843, same symptom) is an ancestor and touches the file; record must state the SOLR-13843 link because no commit cites SOLR-11246"
+      ]
+    },
+    {
+      "key": "SOLR-11009",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-11009-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "47d567d6f73c15db9d93dcc5cc3c4f4df7ffcb2f",
+      "reasons": [
+        "no closeout claim in claims/ naming SOLR-11009 with a DONE line (the assignment floor)",
+        "code path verified at the pinned head (FacetModule.java:181-182, :308-311); null check introduced by 9c066f60f1 (SOLR-14482 warnings cleanup, found by git log -S); no reproduction run, record says so"
+      ]
     }
   ]
 }
