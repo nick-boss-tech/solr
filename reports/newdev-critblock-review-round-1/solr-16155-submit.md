@@ -17,3 +17,15 @@ Gate (vm5, on 0881de1ed6):
 Outcome: green with a minor scope note; no blocker in pass 1.
 
 Regate: gates/SOLR-16155-review-pass-1.md (DONE).
+
+## Pass 2
+
+Review (2026-10-20T15:52Z, vm5, second pass on head 0881de1ed68b847c781abd7ccb56196cdbf15ecd; ls-remote unchanged):
+
+- Test expectations against the new message shape. `TolerantUpdateProcessorTest` (lines 240 and 270) expects `ERROR: [doc=1] Error adding field 'weight'`. The production message is `"ERROR: " + getID(doc, schema) + "Error adding field '" + name + "'"`, and `getID` returns `[doc=1] ` for this schema, so the expected string matches the new shape. The expected text carries no field value. The regex muter at line 81 still matches `Error adding field`. Consistent.
+- Rerun. `JavabinLoaderTest` 3/3, `DocumentBuilderTest` 17/17, `TolerantUpdateProcessorTest` 11/11, all failures=0 and errors=0 (`/workspace/gates/logs/vm5/g16155-test-p2.log`).
+- The scope note from pass 1 stands (exception text dropped from the response, disclosed in the changelog).
+
+Repairs: none.
+
+Regate: gates/SOLR-16155-review-pass-2.md (DONE).
