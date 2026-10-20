@@ -1,37 +1,36 @@
 # Skip record: SOLR-9645
 
-- Ticket: SOLR-9645, removing collection while it's recovering blows up cluster. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-9645, "removing collection while it's recovering blows up cluster". JIRA status read 2026-10-20T12:41:48Z (UTC): Open, resolution None, updated 2019-06-08. Superseded SOLR-9639 (Closed).
+- Verdict: keep-open (kept; re-read at the pinned head).
 - Draft branch: solr-9645-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-6, 2026-10-17, audit verdict deferred).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T12:41:48Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: removing collection while it's recovering blows up cluster. Skip note: test-only flood scenario tied to SOLR-9639.
+Deleting a collection while its replicas are recovering floods the heap with requests that look like `/get`. The reporter says the removal is stuck (explained in SOLR-9639) but not the flood, and gives a reproduction: roll back the SOLR-9639 commit and run the test. No comments.
 
-## Code reading
+## Code reading (pinned head)
 
-Taken from the audit evidence, not re-read at the pinned head: The linked SOLR-9639 was explicitly a CDCR test-cleanup race; its fix waited for recovery before deleting the temporary test collection. Current CollectionTooManyReplicasTest also waits for recovery before clean shutdown, but that does not prove the reported production `/get` flood is fixed. Need a current supported-version reproduction and thread/heap evidence.
+- `solr/core/src/java/org/apache/solr/cloud/api/collections/DeleteCollectionCmd.java:150`: the delete waits for the collection state to disappear (`waitForState(..., 60 seconds, Objects::isNull)`). The removal wait is present.
+- The reproduction needs the SOLR-9639 commit, which is not in this tree (grep `SOLR-9639` under `solr/`: no hits). Without it the rollback cannot be done here.
 
 ## History
 
-No commit history was used for this record.
+- evidence.py at the pinned head: no commits naming SOLR-9645.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. The reproduction depends on reverting SOLR-9639, a commit this tree does not name, and on the test the reporter ran, which was not located.
 
 ## Gap analysis
 
-The audit (deferred) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The flood source is not identified: the ticket names `/get` traffic during recovery, and the code path for that was not traced in this pass. A run on the reverted commit is the missing piece.
 
 ## Verdict justification
 
-keep-open: the audit verdict (deferred) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+keep-open meets the rubric: attempts made are the removal-wait reading and the SOLR-9639 search; the missing piece is the reverted-commit reproduction. close-fixed and close-obsolete are not supported: no fix commit is named and the removal path is present.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not identify the flood source. It does not check the Solr 6.x history of SOLR-9639.
