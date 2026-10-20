@@ -1,0 +1,11 @@
+# Claim: pool-aaa-skip-verdict-remediation-09
+
+- Claimant host: vm2, matching `hosts/vm2.md`.
+- Status: ACTIVE. Remediation of batch 9 under `assignments/pool-aaa-skip-verdict-remediation-09.md`, one ticket at a time in the listed order, each with its own `claims/skip-<KEY>-vm2.md`.
+- Job or assignment: `assignments/pool-aaa-skip-verdict-remediation-09.md`.
+- Slice: the whole batch, one live ticket at a time.
+- Capability tags used: review, draft.
+- Started: 2026-10-20T05:31:25Z (UTC).
+- Links: Ticket or parent: skip-queue remediation (material/skip-audit/remediation-current.json). Category: per ticket. Siblings: batches 01 to 08 and 10. Supersedes: none.
+
+Heartbeat: 2026-10-20T05:31:25Z
