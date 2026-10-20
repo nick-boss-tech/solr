@@ -26,6 +26,7 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.LeafReader;
 import org.apache.lucene.index.SegmentReader;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.util.Bits;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.update.IndexFingerprint;
@@ -180,6 +181,79 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
     assertTrue(
         "Expected a cold deleted segment to load its persisted gross fingerprint",
         core.getPerSegmentGrossFingerprintCacheSize() > grossCacheSizeBeforeColdSegment);
+  }
+
+  @Test
+  public void testIncrementalFingerprintRejectsRestoredDocument() throws Exception {
+    SolrCore core = h.getCore();
+    RefCounted<IndexWriter> iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      IndexWriter writer = iwRef.get();
+      for (int i = 1; i <= 3; i++) {
+        Document doc = new Document();
+        doc.add(new StringField("id", "restored-" + i, Field.Store.YES));
+        doc.add(new NumericDocValuesField("_version_", i + 400));
+        writer.addDocument(doc);
+      }
+      writer.flush();
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+
+    core.withSearcher(
+        searcher -> {
+          var currentContext = searcher.getTopReaderContext().leaves().get(0);
+          LeafReader currentReader = currentContext.reader();
+          Bits currentLiveDocs = currentReader.getLiveDocs();
+          Bits previousLiveDocs =
+              new Bits() {
+                @Override
+                public boolean get(int index) {
+                  return index != 0 && (currentLiveDocs == null || currentLiveDocs.get(index));
+                }
+
+                @Override
+                public int length() {
+                  return currentReader.maxDoc();
+                }
+              };
+          LeafReader previousReader =
+              new FilterLeafReader(currentReader) {
+                @Override
+                public Bits getLiveDocs() {
+                  return previousLiveDocs;
+                }
+
+                @Override
+                public int numDocs() {
+                  return currentReader.numDocs() - 1;
+                }
+
+                @Override
+                public CacheHelper getReaderCacheHelper() {
+                  return null;
+                }
+
+                @Override
+                public CacheHelper getCoreCacheHelper() {
+                  return null;
+                }
+              };
+          IndexFingerprint previousFingerprint =
+              IndexFingerprint.getFingerprint(
+                  searcher, previousReader.getContext(), Long.MAX_VALUE);
+
+          assertNull(
+              "The incremental path must reject a snapshot that restores a deleted document",
+              IndexFingerprint.getFingerprintFromPrevious(
+                  previousFingerprint,
+                  new int[] {0},
+                  searcher,
+                  currentContext,
+                  Long.MAX_VALUE));
+          return null;
+        });
   }
 
   @Test
