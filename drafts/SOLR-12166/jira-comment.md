@@ -1,0 +1,1 @@
+The leader-initiated recovery flag and the rejoinElection path described in this issue are no longer in Solr. Leader handoff now uses shard terms, so this race would need to be looked at against that mechanism. If you still see a leader stuck in DOWN after a restart on a current release, please open a new issue with the logs.
