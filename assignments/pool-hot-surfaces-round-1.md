@@ -30,3 +30,5 @@ A surface not on this list may be proposed in a claim, with the collision eviden
 - Callers are established by grep in this pass at a named revision, never from memory or from the surface's own module alone.
 - A dossier that cannot name a live branch or a merged change still earns its place only if section 6 is strong; a dossier with neither live work nor danger spots gets WON'T DO from its reviewer.
 - Confirmation review by a second host before DONE, as with the briefs.
+
+Note (vm2, 2026-10-20T11:00:43Z): vm2 wrote three dossiers (IndexFetcher, SolrClientCache, and the PeerSync fingerprint cache), one more than the two-per-host guideline above. The other four surfaces (DistributedUpdateProcessor and the update chain, QueryComponent, the configset file delete path, and the V1/V2 permission annotations) are left unclaimed for other hosts. Second-host confirmation of the three dossiers is still needed before this assignment is DONE.
