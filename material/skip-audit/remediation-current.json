@@ -5196,6 +5196,171 @@
         "the record says JIRA was not re-read for it, or cites a prior reading",
         "missing piece (the decision whether AddressUtils answers the report) not stated; code path present (AddressUtils.java:34, 3b2b1b7f79 ancestor)"
       ]
+    },
+    {
+      "key": "SOLR-7249",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-7249-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; the edismax query run at this sha not done"
+      ]
+    },
+    {
+      "key": "SOLR-7221",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-7221-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "close-obsolete grep not in the record (the record says the grep was from the B1 reading); verdict holds at the pin: 4a6d85790a ancestor, ConcurrentUpdateSolrServer.java absent",
+        "the record says JIRA was not re-read for it, or cites a prior reading"
+      ]
+    },
+    {
+      "key": "SOLR-7192",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-7192-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; cs_CZ timing run not done"
+      ]
+    },
+    {
+      "key": "SOLR-7153",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-7153-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "verdict holds on the code path (f60f243b17 ancestor; BBoxField registerSubFields for dynamic fields); repro not run"
+      ]
+    },
+    {
+      "key": "SOLR-7088",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-7088-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "verdict holds on the code path (cbf0eba176 ancestor; CDPATH set at solr/bin/solr:87); repro not run"
+      ]
+    },
+    {
+      "key": "SOLR-7009",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-7009-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "verdict holds on the code path (04193d5252 ancestor; XMLLoader body trace log); the record cites a prior round"
+      ]
+    },
+    {
+      "key": "SOLR-6934",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-6934-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; whether a half-started node fails the -e cloud run not checked"
+      ]
+    },
+    {
+      "key": "SOLR-6929",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-6929-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; no-space special-character highlight run not done"
+      ]
+    },
+    {
+      "key": "SOLR-6922",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-6922-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; the decision whether the configsets meet the request is for the owner"
+      ]
+    },
+    {
+      "key": "SOLR-6903",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-6903-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it, or cites a prior reading",
+        "verdict holds on the code path (7053a99f49 ancestor; SolrCmdDistributor setCommitWithin on deletes); repro not run"
+      ]
+    },
+    {
+      "key": "SOLR-6890",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-6890-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "a6de3bacb55ff9f8d6415c9d8a2ff9d25fe9336a",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "close-obsolete grep not in the record (the record says it was from the C reading); verdict holds at the pin: c1062d9406 ancestor, SolrConfig ignores lib entries",
+        "the record says JIRA was not re-read for it, or cites a prior reading"
+      ]
     }
   ]
 }
