@@ -1,37 +1,25 @@
 # Skip record: SOLR-10601
 
-- Ticket: SOLR-10601, StreamExpressionParser should handle white space around = in named parameters. JIRA status as recorded in the B3 reading: Open, 2021-08-14, 3. JIRA was not re-read for this record.
-- Verdict: close-fixed.
+- Ticket: SOLR-10601, "StreamExpressionParser should handle white space around = in named parameters". JIRA status read 2026-10-20T12:04:47Z (UTC): Open, resolution None, updated 2021-08-14.
+- Verdict: close-fixed. This replaces the recorded keep-open.
 - Draft branch: solr-10601-draft-close.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the B3 reading (reports/2026-10-18-skip-repro/B3-committed-support-round-1.md, vm2, round 1, pinned head unchanged).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T12:04:47Z (UTC).
 
-## Ticket reading
+## Code reading (pinned head)
 
-The summary as recorded in the queue: StreamExpressionParser should handle white space around = in named parameters. B3 row type: committed. Skip note from the B3 reading: Title matches the ticket.
-
-## Code reading
-
-commit 17563ce81f "SOLR-10601: StreamExpressionParser should handle white space around = in named parameters"; ancestor of pinned head: yes
-
-## History
-
-- `17563ce81f`: cited in the B3 reading; ancestor of the pinned head: yes (checked).
+- Fix commit `17563ce81f` (2017-05-03, SOLR-10601) changes `wordToken(name)` to `wordToken(name.trim())`; it is an ancestor of the pinned head (`git merge-base --is-ancestor`).
+- The line is present at `solr/solrj-streaming/src/java/org/apache/solr/client/solrj/io/stream/expr/StreamExpressionParser.java:187`.
+- Changelog follow-up `df6da67204`; squash merge `95968c69fd` also contains the commit.
 
 ## Reproduction attempts
 
-Not attempted. The B3 scope ran no builds or tests.
-
-## Gap analysis
-
-The code reading shows the reported behavior no longer applies at the pinned head, as described above.
+Not run; the changed line and its commit establish the fix at the pinned head.
 
 ## Verdict justification
 
-close-fixed: a change on main addresses the reported behavior, and the changed code is present at the pinned head (cited in the B3 code reading). Linkage is by commit title or code path, as the B3 reading states.
-
-Missing for this verdict: No reproduction was run; B3 ran no builds.
+close-fixed meets the rubric: fix commit named, ancestor of the pinned head, changed line present.
 
 ## Limits
 
-This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path, as stated above.
+This record does not check other whitespace paths in the parser or run the test.
