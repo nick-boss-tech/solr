@@ -8,3 +8,4 @@
 - SOLR-9329 | claims/skip-SOLR-9329-vm2.md | keep-open (kept; optimize trigger present; restart run missing) | solr-9329-draft-open 84e660d075 | JIRA read 2026-10-20T15:10:23Z Open
 - SOLR-4674 | claims/skip-SOLR-4674-vm2.md | keep-open (kept; startup flag read; repeater reload run missing; docs silent) | solr-4674-draft-open 7a08091d3e | JIRA read 2026-10-20T15:16:05Z Open
 - SOLR-4669 | claims/skip-SOLR-4669-vm2.md | keep-open (kept; install order read at IndexFetcher.java:691-741; window run and ordering decision missing) | solr-4669-draft-open b57646de33 | JIRA read 2026-10-20T15:21:30Z Open
+- SOLR-4659 | claims/skip-SOLR-4659-vm2.md | keep-open (kept; null parent default present at SolrResourceLoader.java:187-207; constructor change is a maintainer call) | solr-4659-draft-open 7e55416c90 | JIRA read 2026-10-20T15:27:37Z Open
