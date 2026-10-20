@@ -1,1 +1,1 @@
-We reviewed this ticket against current upstream main. The review did not find a reproducible defect in the current code, but the ticket is not closed yet, and we are leaving it open for a decision.
+We re-read this ticket against the Solr source at fork commit 498a09aea97. RandomSortField's seed still includes the index version and the segment docBase (RandomSortField.java, getSeed), so a cursor's stored random sort value is only valid for the same index version and segment layout. We have not run a cursor walk across a commit or on a static index, so this ticket stays open.
