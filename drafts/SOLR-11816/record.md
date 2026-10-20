@@ -1,37 +1,36 @@
 # Skip record: SOLR-11816
 
-- Ticket: SOLR-11816, Rolling restarts (rf>1) cause latency spike. JIRA status not recorded in the C reading. JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-11816, "Rolling restarts (rf>1) cause latency spike". JIRA status read 2026-10-20T07:24:29Z (UTC): Open, resolution None, no fix versions, updated 2019-06-08.
+- Verdict: keep-open (kept; re-read at the pinned head).
 - Draft branch: solr-11816-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the C reading (reports/2026-10-18-skip-repro/C4, slice 4, pinned head unchanged).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T07:24:29Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Rolling restarts (rf>1) cause latency spike.
+During rolling restarts with replication factor 2 or more, query latency rises about four times. Some shards are reported as leaderless. The reporter supplies a Docker, InfluxDB and Grafana reproduction (external repository, not in this tree) and says the leaderless state is still being reproduced. No comments.
 
-## Code reading
+## Code reading (pinned head)
 
-No class, method or config is named. The repro is an external docker and grafana suite, and the ticket has no comments, so there is no code path to check at this head.
+- Not done line by line for this record: the ticket names no class or method, only a latency symptom and a leaderless state. The leader-election and recovery paths that a leaderless shard would go through were checked for the sibling tickets in this batch (ShardLeaderElectionContext.java, LeaderElector.java, Overseer.java; see the SOLR-12166 and SOLR-11932 records).
+- evidence.py at the pinned head: no identifiers in backticks in the ticket; no test classes named.
 
 ## History
 
-- None cited in the C reading.
+- evidence.py at the pinned head: no commits naming SOLR-11816.
 
 ## Reproduction attempts
 
-Not attempted. The C scope ran no builds or tests.
+Not attempted on this host. The reproduction is a Docker Compose stack with InfluxDB and Grafana plus an indexing and query load and rolling restarts. The pool's Linux hosts do not run that stack, and a latency measurement needs a timed run, not a pass or fail.
 
 ## Gap analysis
 
-The C reading gives the missing piece; see the evidence below.
+The symptom is measured latency, which needs the reporter's load setup to compare. The leaderless state would need a deterministic check at restart, which the reporter has not yet reproduced. Neither is a code-level defect that this pass can name.
 
 ## Verdict justification
 
-keep-open: the code reading does not settle the question; the C reading names the piece that would settle it.
-
-Missing for this verdict: The missing piece named in the C reading (see the evidence below).
+keep-open meets the rubric: the attempts made are the ticket reading and the cross-reference to the leader-election paths; the missing piece is a timed reproduction with the reporter's load and a leaderless-shard check. close-cannot-reproduce is not supported, since no run was made. close-fixed and close-obsolete are not supported, since no fix or removed code is named.
 
 ## Limits
 
-This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path where the subject does not cite the ticket.
+This record does not measure latency. It does not establish that the leaderless state occurs on the pinned head.

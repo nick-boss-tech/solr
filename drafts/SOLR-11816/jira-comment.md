@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The code reading does not settle this ticket yet. We are leaving the ticket open while we look further.
+We have not reproduced the latency spike or the leaderless shards on current main. The reproduction uses an external Docker setup that we have not run. We are keeping this issue open until a timed run with that setup, or a deterministic check for a leaderless shard after restart, can be attached. Please share the results if you have them.
