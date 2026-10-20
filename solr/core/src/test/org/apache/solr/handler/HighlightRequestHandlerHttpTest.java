@@ -70,8 +70,7 @@ public class HighlightRequestHandlerHttpTest extends SolrTestCaseJ4 {
 
   @Test
   public void testQueryMethodHighlightsV2Route() throws Exception {
-    String v2Url =
-        solrTestRule.getJetty().getBaseURLV2() + "/cores/" + CORE_NAME + "/highlight";
+    String v2Url = solrTestRule.getJetty().getBaseURLV2() + "/cores/" + CORE_NAME + "/highlight";
     String url = v2Url + "?q=_text_%3Asolr&hl.fl=_text_&wt=json";
 
     assertHighlightResponse(sendBodyRequest("QUERY", url));
