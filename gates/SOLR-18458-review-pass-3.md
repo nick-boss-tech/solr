@@ -12,7 +12,7 @@ Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-18458-submit.m
 - Step 4 scope: the touched test classes from the diff, run in full, plus the minimal filters from gates/SOLR-18458.md. Per-module lists are in gates/logs/vm3/solr-18458-review-pass-3/ (core 28 classes, solrj 1, ltr 15, language-models 1). Pass 2 counted 30 core classes; the difference is recorded in the regate result.
 - Runner: `/workspace/tools/gate-solr-18458-p3.sh` on vm3, under `flock /workspace/tools/.vm3-gradle.lock`. Worktree `/workspace/worktrees/solr-18458-p3`. Log: `gates/logs/vm3/solr-18458-review-pass-3/`.
 
-Links: Ticket or parent: SOLR-18458. Category: 4? See pool/work-map.md (the parent review row). Siblings: the review round units 3 and 12 (pool-newdev-critblock-review-round-1). Supersedes: none.
+Links: Ticket or parent: SOLR-18458. Category: 2, Search and query components. Siblings: review round units 12 and 13 (pool-newdev-critblock-review-round-1). Supersedes: none.
 
 ## What to run
 
