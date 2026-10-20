@@ -11,3 +11,4 @@
 - SOLR-9645 | claims/skip-SOLR-9645-vm2.md | keep-open (kept; SOLR-9639 commit not in tree, repro not runnable here) | solr-9645-draft-open d5ceecbea4 | JIRA read 2026-10-20T12:42:50Z Open
 - SOLR-9622 | claims/skip-SOLR-9622-vm2.md | keep-open (kept; explain path read; grouped-query run missing; SOLR-14693 commit not in history) | solr-9622-draft-open c16f12aacf | JIRA read 2026-10-20T12:51:20Z Open
 - SOLR-9599 | claims/skip-SOLR-9599-vm2.md | keep-open (kept; 2016 perf umbrella, no current measurement; linked Lucene issues resolved) | solr-9599-draft-open 61ad6d4e24 | JIRA read 2026-10-20T12:56:19Z Open
+- SOLR-9594 | claims/skip-SOLR-9594-vm2.md | keep-open (kept; canShortCircuit requires ACTIVE, behavior present; SolrCloud run and fix design missing) | solr-9594-draft-open ebbf033e48 | JIRA read 2026-10-20T13:03:18Z Open
