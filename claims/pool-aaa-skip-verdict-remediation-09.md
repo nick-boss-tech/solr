@@ -1,7 +1,7 @@
 # Claim: pool-aaa-skip-verdict-remediation-09
 
 - Claimant host: vm2, matching `hosts/vm2.md`.
-- Status: ACTIVE. Remediation of batch 9 under `assignments/pool-aaa-skip-verdict-remediation-09.md`, one ticket at a time in the listed order, each with its own `claims/skip-<KEY>-vm2.md`.
+- Status: DONE. Remediation of batch 9 under `assignments/pool-aaa-skip-verdict-remediation-09.md`, one ticket at a time in the listed order, each with its own `claims/skip-<KEY>-vm2.md`.
 - Job or assignment: `assignments/pool-aaa-skip-verdict-remediation-09.md`.
 - Slice: the whole batch, one live ticket at a time.
 - Capability tags used: review, draft.
@@ -15,3 +15,5 @@ Heartbeat: 2026-10-20T06:14:01Z (batch 9 items 1 to 6 done; item 7 SOLR-12029 ne
 Heartbeat: 2026-10-20T06:50:04Z (batch 9 items 1 to 11 done; item 12 SOLR-11927 next)
 
 Heartbeat: 2026-10-20T07:49:08Z (batch 9 items 1 to 19 done; item 20 SOLR-11787 next)
+
+DONE: 2026-10-20T08:27:25Z. Deliverables: reports/skip-verdict-remediation-09.md (25 lines and the summary); claims/skip-<KEY>-vm2.md for each of the 25 items; drafts on each branch named in the report; material/skip-audit/queue-current.json (verdicts set for all 25).

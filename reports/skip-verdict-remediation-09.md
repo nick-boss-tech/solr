@@ -27,3 +27,13 @@ One line per item: ticket, claim, verdict recorded, draft branch head, evidence.
 - SOLR-11764 | claims/skip-SOLR-11764-vm2.md | close-answered (kept; highlighting.adoc:338 answers it, reporter confirmed) | solr-11764-draft-close f13dd0b60c | JIRA read 2026-10-20T08:08:23Z Open
 - SOLR-11759 | claims/skip-SOLR-11759-vm2.md | close-fixed (changed from keep-open: fix 95dfddc7d4 names SOLR-12859, same symptom; ancestor; line 369 present) | solr-11759-draft-close b024c8e719 | JIRA read 2026-10-20T08:21:05Z Open
 - SOLR-11712 | claims/skip-SOLR-11712-vm2.md | keep-open (kept; named tests absent; queue getReplicas claim not supported by grep; error-vs-partial design question open) | solr-11712-draft-open bc560175ba | JIRA read 2026-10-20T08:26:41Z Open
+
+## Batch 9 summary (vm2, closed 2026-10-20T08:27:25Z)
+
+- 25 of 25 items redone at pinned head 498a09aea97aac86c2cc7ac114113b946d249942. Each has a claim `claims/skip-<KEY>-vm2.md` with DONE, and a draft record on its branch.
+- Verdicts changed from the recorded verdict (12): SOLR-12236 (close-fixed to keep-open), SOLR-12166 (keep-open to close-obsolete), SOLR-11955 (close-obsolete to keep-open), SOLR-11932 (keep-open to close-obsolete), SOLR-11864 (close-fixed to keep-open), SOLR-11827 (keep-open to pr-needed), SOLR-11815 (keep-open to close-fixed), SOLR-11814 (keep-open to close-obsolete), SOLR-11787 (keep-open to close-obsolete), SOLR-11776 (close-obsolete to keep-open), SOLR-11768 (keep-open to close-answered), SOLR-11759 (keep-open to close-fixed).
+- Verdicts kept (13): SOLR-12234, SOLR-12220, SOLR-12112, SOLR-12093, SOLR-12029, SOLR-11983, SOLR-11954, SOLR-11927, SOLR-11858, SOLR-11826, SOLR-11816, SOLR-11764 (close-answered), SOLR-11712.
+- Finding for the auditor: the recorded close-obsolete and close-fixed verdicts that rested on a grep or a fix commit were wrong in 5 of 8 cases checked here (SOLR-11955, SOLR-11864, SOLR-11776, SOLR-12236, SOLR-11759 shows a fix on a different ticket's commit). The close-obsolete verdicts in this batch that stand (SOLR-12166, SOLR-11932, SOLR-11814, SOLR-11787) rest on greps whose empty results are recorded in each record.
+- Labels: the file's item 16 is SOLR-11826 and item 17 is SOLR-11816. This batch did SOLR-11816 before SOLR-11826, so the claim files and the report lines for those two carry the labels 16 and 17 swapped. The records are correct; only the labels are.
+- Branch notes: several draft branches already existed on the fork (SOLR-11858, SOLR-11827 keep-open, SOLR-11826, SOLR-11816, SOLR-11764, SOLR-11712). New drafts were added on top of the existing tips, and the earlier records stay in history.
+- Heartbeats: batch claim heartbeats at 06:16Z, 06:47Z, 07:47Z; batch claim marked DONE below.
