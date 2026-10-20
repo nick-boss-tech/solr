@@ -31,6 +31,7 @@ import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.update.IndexFingerprint;
 import org.apache.solr.util.RefCounted;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -43,6 +44,21 @@ public class SolrCoreFingerprintCacheTest extends SolrTestCaseJ4 {
   @BeforeClass
   public static void beforeTests() throws Exception {
     initCore("solrconfig-nomergepolicyfactory.xml", FINGERPRINT_SCHEMA);
+  }
+
+  @Before
+  public void resetFingerprintTestIndex() throws Exception {
+    // This class shares one core across test methods. Remove earlier segments so cache sizes and
+    // update counts describe only the segment under test.
+    SolrCore core = h.getCore();
+    RefCounted<IndexWriter> iwRef = core.getSolrCoreState().getIndexWriter(core);
+    try {
+      iwRef.get().deleteAll();
+    } finally {
+      iwRef.decref();
+    }
+    assertU(commit("openSearcher", "true"));
+    h.getCoreContainer().reload(core.getName());
   }
 
   private static boolean hasPersistedFingerprintFormat() {
