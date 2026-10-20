@@ -8260,8 +8260,8 @@
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: test flake / test-infra. Reason holds: test flake Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
     },
-    "verdict": "keep-open",
-    "draft_branch": "solr-10592-draft-open",
+    "verdict": "close-obsolete",
+    "draft_branch": "solr-10592-draft-close",
     "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
   },
   {
