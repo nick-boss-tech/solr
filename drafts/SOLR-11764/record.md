@@ -1,37 +1,40 @@
 # Skip record: SOLR-11764
 
-- Ticket: SOLR-11764, preanalyzed field with highlight option throws exception. JIRA status as recorded in the B3 reading: Open, 2019-06-08, 11. JIRA was not re-read for this record.
-- Verdict: close-answered.
+- Ticket: SOLR-11764, "preanalyzed field with highlight option throws exception". JIRA status read 2026-10-20T08:06:30Z (UTC): Open, resolution None, updated 2019-06-08.
+- Verdict: close-answered (kept; the recorded verdict is re-checked against the docs at the pinned head).
 - Draft branch: solr-11764-draft-close.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
-- Checked by: vm2 (pool Linux host), 2026-10-19 UTC, from the B3 reading (reports/2026-10-18-skip-repro/B3-committed-support-round-1.md, vm2, round 1, pinned head unchanged).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-20T08:06:30Z (UTC).
 
 ## Ticket reading
 
-The summary as recorded in the queue: preanalyzed field with highlight option throws exception. B3 row type: support. Skip note from the B3 reading: The highlight exception cannot occur because the class is removed. This is a removal, not a highlight fix.
+A PreAnalyzedField with highlighting enabled throws "Invalid JSON type java.lang.String, expected Map" during highlighting. The reporter's comment (2018-07-06) says that setting `storeOffsetsWithPositions="true"` on the field fixed it. The reporter confirmed the fix. Other comments discuss whether PreAnalyzedField should be an update processor, which is a design topic, not this question.
 
-## Code reading
+## Docs (pinned head)
 
-Docs page and sentence: `solr/solr-ref-guide/modules/upgrade-notes/pages/major-changes-in-solr-10.adoc:298`. Quote: "PreAnalyzedField and PreAnalyzedUpdateProcessor have been removed due to incompatibility with Lucene 10 (SOLR-17839)."
+- `solr/solr-ref-guide/modules/query-guide/pages/highlighting.adoc:338`: under the Postings option, "Set `storeOffsetsWithPositions` to `true`." The same page (line 326-340) explains that the Unified Highlighter can read offsets from postings, and that analysis is the default.
+- The page answers the question: the highlighting option that avoids analyzing the stored text needs offsets stored with positions. The reporter's fix is that option.
+
+## Code reading (pinned head)
+
+Not needed for the answer. The exception path is the pre-analyzed parser on the analysis route, which the docs direct away from by the postings option.
 
 ## History
 
-None cited as an ancestor in the B3 reading.
+- evidence.py at the pinned head: no commits naming SOLR-11764.
 
 ## Reproduction attempts
 
-Not attempted. The B3 scope ran no builds or tests.
+Not run. The reporter's fix is confirmed in the ticket, and the docs give the option.
 
 ## Gap analysis
 
-The documentation answers the question as asked; no code change is involved.
+None for the answer. Whether the pre-analyzed parser should give a clearer error when the highlight method is set without offsets is a separate question, not raised here.
 
 ## Verdict justification
 
-close-answered: the reference guide answers the question. The cited page and sentence are below.
-
-Missing for this verdict: No reproduction; the answer is documentation.
+close-answered meets the rubric: a support question that the reference guide answers, with the page linked (highlighting.adoc:338 and the Postings description at 326-340), and the reporter confirmed the option in the ticket.
 
 ## Limits
 
-This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path, as stated above.
+This record does not verify the behavior on the pinned head with a run. It does not change the pre-analyzed parser's error text.
