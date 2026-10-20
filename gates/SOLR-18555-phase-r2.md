@@ -1,6 +1,6 @@
 # Gate job: SOLR-18555 (text supplied highlighting, phase r2)
 
-Status: CLAIMED (claims/pool-vm2-gate-SOLR-18555-phase-r2.md)
+Status: GATE INVALID (vm2, claims/pool-vm2-gate-SOLR-18555-phase-r2.md, step 1 tidy changed a file at head 59a44dbaf10)
 
 - Branch: `solr-18555-submit`. Head: `59a44dbaf10c627d340f23f5481fdb2ba716f089` (fork tip, confirmed on 2026-10-19). If the tip has moved at claim time, stop and record the new tip. Do not retarget this job.
 - Base: `c8ab71430f6e7547c773da596101d680862310ff`. Prior gated head: `b99259cba3572cc08586b2456c78780c814a2bf7`.
@@ -70,3 +70,7 @@ If any step cannot be verified, record it here and stop.
 - One fast-forward push to `coordination` with the receipt and DONE marks.
 - The ticket branch head remains unchanged by the gate.
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Result
+
+2026-10-20T04:52:00Z: GATE INVALID at head 59a44dbaf10c627d340f23f5481fdb2ba716f089 (vm2). Step 0 changelog parse rc 0. Step 1 tidy (`./gradlew tidy`, log gates/logs/vm2/18555/gate-r2 on vm2) rc 0 but changed one file: `solr/core/src/test/org/apache/solr/handler/HighlightRequestHandlerHttpTest.java`, 1 insertion and 2 deletions. The change joins the two-line `String update = ...` in `testQueryMethodCannotReachUpdateHandler` onto one line (line 64 at head). Per step 1 this is GATE INVALID: the tidy diff is recorded here, no later step ran, and the ticket branch was not edited or pushed. The author must apply tidy to the branch and push a new head; this job does not retarget.

@@ -1,7 +1,7 @@
 # Claim: pool-vm2-gate-SOLR-18555-phase-r2
 
 - Claimant host: vm2, matching `hosts/vm2.md`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: ENDED at step 1 (GATE INVALID); see the Result line.
 - Job or assignment: `gates/SOLR-18555-phase-r2.md`.
 - Slice: the whole gate job at head 59a44dbaf10c627d340f23f5481fdb2ba716f089 (tip confirmed by ls-remote at claim time): steps 0 to 5, then the receipt `receipts/SOLR-18555.md` section.
 - Capability tags used: gate.
@@ -11,4 +11,8 @@
 
 Heartbeat: 2026-10-20T04:26:00Z
 
+Heartbeat: 2026-10-20T04:52:00Z
+
 Note: gates/SOLR-18507-phase-4.md names head f50c2271a32f25eb24ced4276516beb858f3b97e, but the fork tip read at 2026-10-20T04:25Z is d797b9b31060252bf941e28d53aef1ce78e641b3. That job is not claimed here; its claimant must record the moved tip under its own rules.
+
+Result: 2026-10-20T04:52:00Z: GATE INVALID at head 59a44dbaf10. Step 1 tidy changed `HighlightRequestHandlerHttpTest.java` (one line joined, 1 insertion and 2 deletions). The gate stopped per the job's step 1 rule; steps 2 to 5 did not run. Gate file `gates/SOLR-18555-phase-r2.md` carries the diff.
