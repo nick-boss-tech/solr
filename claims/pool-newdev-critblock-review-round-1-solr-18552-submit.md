@@ -8,3 +8,5 @@
 - Started: 2026-10-20T14:08:00Z (UTC).
 
 Heartbeat: 2026-10-20T14:08:00Z
+
+Heartbeat: 2026-10-20T14:15:00Z. Pass 1 PARTIAL at cb32d0d966: changelog and syntax green on vm5; launcher and bats leg named for vm1 (NEARLY piece). Pass 2 next on the same head.
