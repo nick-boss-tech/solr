@@ -15,3 +15,4 @@
 - SOLR-9593 | claims/skip-SOLR-9593-vm2.md | close-obsolete (changed from keep-open: InternalHttpClient absent under solr/; SOLR-18188 removed Apache HttpClient from tests) | solr-9593-draft-close c2703e0702 | JIRA read 2026-10-20T13:11:52Z Open
 - SOLR-9578 | claims/skip-SOLR-9578-vm2.md | keep-open (kept; feature absent, design open; authorization plugins path-based) | solr-9578-draft-open 5cea8bde2e | JIRA read 2026-10-20T13:18:41Z Open
 - SOLR-9573 | claims/skip-SOLR-9573-vm2.md | keep-open (kept; DebugComponent debug split explicit; multi-shard run missing) | solr-9573-draft-open fef42bebf9 | JIRA read 2026-10-20T13:24:34Z Open
+- SOLR-9571 | claims/skip-SOLR-9571-vm2.md | keep-open (kept; message changed to processing limits; client-side partial response not implemented, design open) | solr-9571-draft-open bda7fd9a1a | JIRA read 2026-10-20T13:31:00Z Open
