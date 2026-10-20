@@ -5044,7 +5044,7 @@
     },
     "verdict": "close-fixed",
     "draft_branch": "solr-13066-draft-close",
-    "evidence_head": "498a09aea9"
+    "evidence_head": "e86d5cf27a"
   },
   {
     "key": "SOLR-13061",
