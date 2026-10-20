@@ -6,6 +6,7 @@ Owner direction, 2026-10-19: build the documentation base out, by category, the 
 
 1. `pool/owner-complaints-2026-10-19.md`: what the owner currently expects done differently.
 2. `pool/work-stores.md`: where work comes from, in pull order.
+2a. `pool/decision-map.md`: the classification axes and the standing answers; decide from it before escalating anything.
 3. `pool/work-map.md`: the category taxonomy and the linkage rules; find your item's category and siblings.
 4. Your category's brief in `pool/guides/` (below), and the dossiers of the surfaces your item touches.
 5. `pool/advisory-wont-do.md` before claiming, and `pool/guides/traps-build-and-test.md` before building.
