@@ -1,1 +1,1 @@
-We ran the test class this ticket names once on current main, and it passed. A single passing run does not show whether the flaky failure is gone, so we are leaving the ticket open.
+We re-read this ticket against the Solr source at fork commit 498a09aea97. The test in question now sorts its results by id, which fixes the order the reported mismatch depended on, but that change came in with an unrelated commit and we have not run the test repeatedly at that commit. This ticket stays open until that is checked.
