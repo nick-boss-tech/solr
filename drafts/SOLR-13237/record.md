@@ -1,37 +1,46 @@
 # Skip record: SOLR-13237
 
-- Ticket: SOLR-13237, Not all types of index corruption garuntee a leader will "give up its leadership". JIRA was not re-read for this record.
+- Ticket: SOLR-13237, Not all types of index corruption garuntee a leader will "give up its leadership".
 - Verdict: keep-open.
-- Draft branch: solr-13237-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-1, 2026-10-04, audit verdict confirmed-skip).
+- Draft branch: solr-13237-draft-open (verdict unchanged; this record replaces the audit-derived record on this branch).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
+- Checked by: vm5 (pool Linux host), 2026-10-20 UTC. Redo of remediation batch 07, item 6 (`assignments/pool-aaa-skip-verdict-remediation-07.md`).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Not all types of index corruption garuntee a leader will "give up its leadership". Skip note: Design-heavy: rethink-when-leader-gives-up-leadership has no agreed fix shape since 2019; real bug but needs maintainer spec or upstream Lucene tragic-classification change.
+JIRA read 2026-10-20: Open, no resolution, created 2019-02-09, updated 2025-12-18, no fix versions. Links: "Incorporates LUCENE-8692 (Open)"; "Reference SOLR-15029 (Closed)"; "Reference SOLR-13027 (Open)". The report: external index corruption can make a leader reject updates without giving up its leadership, because the tragic-event check depends on Lucene's classification of the exception (LUCENE-8692). Fourteen comments (2019-02-09 to 2025-12-18). The 2019 AwaitsFix commits (hossman, March 2019) disabled `LeaderTragicEventTest` until the corruption detection is reliable. A 2020 comment proposes injecting a tragic event by hand. In 2025 janhoy hardened the test (SOLR-18025) and the test failed during teardown.
 
 ## Code reading
 
-Taken from the audit evidence, not re-read at the pinned head: Read ticket: leader tragic-event criteria depends on LUCENE-8692, test hardened by SOLR-18025; no agreed fix shape.
+Read at the pin:
+
+- `solr/core/src/java/org/apache/solr/handler/RequestHandlerBase.java:321-341` (`processReceivedException`): when `coreContainer.checkTragicException(core)` is true and the container is ZooKeeper-aware, the leader gives up leadership. The criterion is the tragic check, not the corruption itself.
+- `solr/core/src/java/org/apache/solr/core/CoreContainer.java:2467` (`checkTragicException`): the check is unchanged in this pass, and it relies on the writer's tragic exception, which is the Lucene behavior LUCENE-8692 covers.
+- `solr/core/src/test/org/apache/solr/cloud/LeaderTragicEventTest.java:134-137`: the test retries up to three times "to ensure the tragic event is properly triggered" and names LUCENE-8692 as the reason ("getTragicException() may not reflect all exceptions"). This is the workaround in the test, not a change to the product criterion.
+- The 2019 AwaitsFix annotation (commit `e827dc2234`, an ancestor of the pin) is no longer on the test; `5d8220c599` (SOLR-18025, an ancestor) removed the disabling and added the retry.
 
 ## History
 
-No commit history was used for this record.
+- `e827dc2234` (2019-03-06, "SOLR-13237: AwaitsFix LeaderTragicEventTest until we can make the underlying corruption detection reliable"): ancestor of the pin.
+- `5d8220c599` (SOLR-18025, "Test LeaderTragicEventTest flaky"): ancestor of the pin; test-only change (41 insertions, 11 deletions in `LeaderTragicEventTest.java`).
+- No commit at the pin changes `checkTragicException` or the leader criterion for this ticket.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. This pass ran no builds or tests. A run of `LeaderTragicEventTest` at the pin with the corruption injection, repeated over seeds, would show whether the leader keeps leadership after a corruption that is not classified as tragic; the test retries are the only mitigation in the tree.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+- The gap is in the product criterion for giving up leadership, which depends on Lucene's tragic classification (LUCENE-8692, Open). The product code at the pin does not broaden it, and the ticket records no agreed fix shape.
+- The test-side fix (retries) is a workaround for the test, not for the product behavior.
+- Closing needs either the upstream Lucene fix plus a Solr change, or a maintainer decision that a retry-based test is the accepted coverage. Neither is recorded on the ticket.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
+keep-open: the criterion the ticket names is present and unchanged at the pin, the upstream issue it depends on (LUCENE-8692) is open, and no fix shape has been agreed. close-fixed does not fit (no fix commit on the product path). close-obsolete does not fit (the feature is present). pr-needed needs the fix shape and a run.
 
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+Missing for this verdict: a run showing the non-tragic corruption case at the pin, and an agreed fix shape (the Lucene fix, or a Solr-side criterion).
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path, as stated above.
