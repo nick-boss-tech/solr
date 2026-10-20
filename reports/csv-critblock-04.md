@@ -61,3 +61,25 @@ Totals: 1 + 1 + 8 + 6 + 9 = 25.
 ## Limits
 
 No JIRA or GitHub posts or comments. No PRs. No force push. No branches, gates, or receipts were made. The probe runs used the pinned head in a detached worktree and were removed.
+
+## Fix branches (route taken, gate, state)
+
+Routes are the ones recorded above. Each branch is on the fork. None is opened as a PR; pool hosts do not open PRs, and opening is the owner's call.
+
+| Ticket | Branch (fork) | Head | Route taken | Gate run | Open |
+| --- | --- | --- | --- | --- | --- |
+| SOLR-17252 | solr-17252-release-wizard-editor | f2d0e2e3ac9 | Fail fast when EDITOR is a terminal editor. Changed from the report's first route ("print the path"): the wizard already warns the editor will not work, so stopping early matches that warning. Tradeoff: the release manager must restart the wizard with a windowed editor. | `get_editor()` checked with the wizard's requirements: nano exits with a message, a windowed editor is accepted. | Needs a release-manager look. |
+| SOLR-18552 | solr-18552-sharedarena-9x | (branch on 9.x line, upstream branch_9 f4f2507) | Default `-Dorg.apache.lucene.store.MMapDirectory.sharedArenaMaxPermits=64` in the launcher, 9.x only. Tradeoff: embedded and custom-start users keep the Lucene default. | Launcher gate: a node started with the branch's `bin/solr` has the property on its JVM; the control launcher has none. Run on an 11.0 distribution copy because the 9.x distribution build cannot run on this host. | The 9.x distribution build and the bats launcher tests need a pool gate host. |
+| SOLR-17433 | solr-17433-stream-timeout-doc | 42b90588cc2 | Document the `socketTimeout` and `connTimeout` system properties and the 60-second floor, in the streaming expressions guide. Default left unchanged. Tradeoff: raising the default would change every client in the process; documentation leaves that to operators. | Documentation only. The reference guide build was not run. | Maintainer question: is 60 seconds the intended floor? |
+| SOLR-18458 | solr-18458-debugquery-deprecation | (head of branch) | Deprecation warning through `DeprecationLog` in `SearchHandler`, once per process. Parameter still honored. Removal is a later release. Tradeoff: the warning covers the main entry point only; `DebugComponent`, `MoreLikeThisHandler`, `ReRankQParserPlugin`, and the SolrJ `setShowDebugInfo` still use the parameter. | `:solr:core:test --tests org.apache.solr.BasicFunctionalityTest`: 23 of 23 pass. | Full core suite not run; the warning text is not tested. |
+| SOLR-18297 | solr-18297-jetty-12-1-14 | 5cdc6574702 | Version bump only (12.1.12 to 12.1.14), lock files and license entries updated. No code changes: the compile gate passed without migration edits. Tradeoff: a compile is not a behavior check. | `:solr:core:compileTestJava :solr:server:compileJava` pass; `StatusToolTest` 1 of 1 (Jetty-backed). | Full core and server test suites need a pool gate host. Migration guide items not reviewed. |
+
+## Deferred design items (routes recorded, no branch)
+
+- **SOLR-18446** (remove "collection" routing in HttpSolrCall). The route is to keep the parameter as a core-name disambiguation hint and deprecate it, not remove it this round. Tradeoff: removal is the ticket's first ask but breaks clients that send it. Public behavior change: maintainer question. Needs its own claim and design PR text.
+- **SOLR-18398** (responseHeader from NamedList to LinkedHashMap). The route is to change only the top-level container in `SolrQueryResponse` and keep a getter for existing callers. Tradeoff: callers that treat the top level as a NamedList must be found; the scope is wider than the ticket suggests. Needs its own claim.
+- **SOLR-17375** (close IndexReader asynchronously on commit). The route is one bounded background executor after the searcher swap. Tradeoff: old files and handles stay open longer. Needs a performance measurement before any merge.
+
+## Claim status
+
+The claim `claims/pool-csv-critblock-04.md` is DONE for classification. The fix branches above are follow-ups; their gates beyond the ones listed are open.
