@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The code path this report names is still present, but we have not reproduced the behavior yet. We are leaving the ticket open while we look further.
+On current main SolrResourceLoader still accepts a null parent classloader and falls back to its own class loader. Removing that default would change a constructor used across the codebase, so it is a decision for the maintainers. We are keeping this issue open for that decision. If you have a use case that depends on the default, please describe it here.
