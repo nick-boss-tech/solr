@@ -1,37 +1,44 @@
 # Skip record: SOLR-13175
 
-- Ticket: SOLR-13175, Rollup does not roll up NULL values.. JIRA was not re-read for this record.
+- Ticket: SOLR-13175, Rollup does not roll up NULL values.
 - Verdict: keep-open.
-- Draft branch: solr-13175-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-1, 2026-10-04, audit verdict confirmed-skip).
+- Draft branch: solr-13175-draft-open (verdict unchanged; this record replaces the audit-derived record on this branch).
+- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. Upstream sha not cited.
+- Checked by: vm5 (pool Linux host), 2026-10-20 UTC. Redo of remediation batch 07, item 11 (`assignments/pool-aaa-skip-verdict-remediation-07.md`).
 
 ## Ticket reading
 
-The summary as recorded in the queue: Rollup does not roll up NULL values.. Skip note: stale 2019 PMC-reported rollup NULL-bucket split; root cause unverified (upstream merge-comparator misordering, design-sensitive); no maintainer direction.
+JIRA read 2026-10-20: Open, no resolution, created 2019-01-29, updated 2021-08-13, no fix versions, no links. The report: on a two-shard `sample_techproducts_configs` collection, `rollup(search(eoe, q="*:*", fl="popularity", qt="/export", sort="popularity asc"), over="popularity", count(*))` returns a separate bucket for NULL popularity, next to the bucket for 0. One comment (2019-01-29, erickerickson): NULL and zero are treated equivalently, which is the cause the commenter identifies.
 
 ## Code reading
 
-Taken from the audit evidence, not re-read at the pinned head: Read ticket: Erickson notes NULL and 0 are treated equivalently; missing-field export sort order places missing with 0 buckets, so split NULL buckets come from /export sort semantics, not RollupStream; no Solr-local fix.
+Read at the pin:
+
+- `solr/solrj-streaming/src/java/org/apache/solr/client/solrj/io/stream/RollupStream.java:241-262`: each tuple's bucket values are read with `buckets[i].getBucketValue(tuple)`, a `HashKey` is built from them, and a new rollup bucket is emitted when `hashKey.equals(currentKey)` is false.
+- Because the rollup emits a bucket whenever the key changes, two rows that are NULL and 0 but arrive adjacent in the input stream get different keys and become two buckets. Rollup needs its input sorted by the bucket fields; the NULL and 0 rows are split only if the export sort places them apart.
+- No code in RollupStream maps NULL to 0 or back. Whether NULL and 0 should group together is the semantic question the ticket raises, and the ticket does not settle it.
 
 ## History
 
-No commit history was used for this record.
+No commit at the pin names SOLR-13175. The history of `RollupStream` bucket handling was not traced.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run. This pass ran no builds or tests. The missing piece is a run at the pin: the ticket's two-shard expression, then the same expression with the `popularity` values listed to show whether the null and zero rows are adjacent in the sorted export.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+- The reading explains the split from the comparison in `RollupStream`, given an input where NULL and 0 rows interleave with the sort; the run would confirm the input order.
+- The fix is a semantic choice (group NULL with 0, or keep them apart and document it), not a clear defect; the ticket does not record the choice.
+- The export sort for missing values is outside `RollupStream`, so a complete fix may also touch the export sort.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
+keep-open: the mechanism is clear from reading, but the expected grouping of NULL and 0 is a semantic choice the ticket leaves open, and the run that confirms the input order has not been made. close-fixed and close-obsolete do not fit (no fix commit; the feature is present). pr-needed needs the grouping decision.
 
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+Missing for this verdict: a run of the ticket's expression at the pin with the sorted output shown, and a maintainer decision on NULL versus 0 grouping.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not establish a reproduction. It does not post anything to JIRA or GitHub. Commit linkage is by commit title or code path, as stated above.
+</content>
