@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18507 Phase 4 incremental fingerprint repair, round 1
 
-Status: CLAIMED (claims/pool-windows-solr-18507-phase-4-implementation-repair-round-1.md)
+Status: DONE
 
 - Capability tags: implementation.
 - Category: Core admin and cores.
