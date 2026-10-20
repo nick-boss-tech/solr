@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The feature or code this ticket describes has been removed, and nothing in the current code refers to it. Closing as obsolete, since the report does not apply to the current code.
+We checked this ticket against the current code. The PreAnalyzedField class, its parsers, and its update processor were removed in Solr 10 (SOLR-17839), and the upgrade notes say so. Nothing in the current code refers to them, so the behavior described in this report no longer applies. Closing as obsolete.
