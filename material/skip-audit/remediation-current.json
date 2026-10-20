@@ -4566,6 +4566,231 @@
         "the record says JIRA was not re-read for it",
         "verdict holds on the code (9481c1f623 ancestor; ExtendedDismaxQParser validates query fields and throws SyntaxError at the pin)"
       ]
+    },
+    {
+      "key": "SOLR-9328",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9328-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "code not read; one passing run; repeated seeded runs named as the missing piece but not run"
+      ]
+    },
+    {
+      "key": "SOLR-9312",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9312-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; no repro run"
+      ]
+    },
+    {
+      "key": "SOLR-9267",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-9267-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "verdict holds on the code path (2b4e3dd941 ancestor; AbstractMLTQParser.java:120-122); repro not run"
+      ]
+    },
+    {
+      "key": "SOLR-9250",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9250-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; getWildcardQuery cited at 1277, defined at 1275"
+      ]
+    },
+    {
+      "key": "SOLR-9248",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-9248-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "close-obsolete grep not in the record (the record says the grep was from the C reading); verdict holds at the pin: no Gzip or Deflate decompressing entity, cf7f5079e8 and 31405c513d ancestors",
+        "the record says JIRA was not re-read for it"
+      ]
+    },
+    {
+      "key": "SOLR-9213",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9213-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; no repro run"
+      ]
+    },
+    {
+      "key": "SOLR-9208",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9208-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "repro on the pin not run; code path holds (SolrCore.java:1766 iterates closeHooks; addCloseHook at 1913)"
+      ]
+    },
+    {
+      "key": "SOLR-9206",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9206-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "repro on the pin not run; code path holds (TermVectorComponent.java:249 docList dereference)"
+      ]
+    },
+    {
+      "key": "SOLR-9183",
+      "status": "open",
+      "recorded_verdict": "close-obsolete",
+      "draft_branch": "solr-9183-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "close-obsolete grep not in the record; verdict holds at the pin: 321b4fa0de ancestor, no snitch test file",
+        "the record says JIRA was not re-read for it"
+      ]
+    },
+    {
+      "key": "SOLR-9173",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9173-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; repro of the recovery NPE not run"
+      ]
+    },
+    {
+      "key": "SOLR-9144",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9144-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "code not read; one passing run; repeated seeded runs named as the missing piece but not run"
+      ]
+    },
+    {
+      "key": "SOLR-9126",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-9126-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "verdict holds on the code path (fa9dfac8a7 ancestor; ExecutorUtil.shutdownAndAwaitTermination); repro not run"
+      ]
+    },
+    {
+      "key": "SOLR-9122",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9122-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; ExactStatsCache.java:236 and :298 match"
+      ]
+    },
+    {
+      "key": "SOLR-9094",
+      "status": "open",
+      "recorded_verdict": "close-fixed",
+      "draft_branch": "solr-9094-draft-close",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "verdict holds on the code path (55bfadbce1 ancestor; ReRankCollector.java:136-138); no regression test found and not run"
+      ]
+    },
+    {
+      "key": "SOLR-9089",
+      "status": "open",
+      "recorded_verdict": "keep-open",
+      "draft_branch": "solr-9089-draft-open",
+      "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942",
+      "audit_date": "2026-10-20",
+      "audit_coordination_tip": "f4c8a2fcbb930485db5843602bda417df0e15bb8",
+      "reasons": [
+        "Jira read 2026-10-20: Open, no resolution.",
+        "no closeout claim in claims/ naming the ticket with a DONE line (the assignment floor)",
+        "the record says JIRA was not re-read for it",
+        "missing piece not stated: \"see the evidence below\" has no evidence below; no repro and no named code path"
+      ]
     }
   ]
 }
