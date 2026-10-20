@@ -58,6 +58,7 @@ import org.apache.solr.common.SolrException.ErrorCode;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.schema.EnumFieldType;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.schema.StrFieldSource;
@@ -939,6 +940,17 @@ public class Grouping {
       return new ValueSourceGroupSelector(groupBy, context);
     }
 
+    private Object groupValueObject(MutableValue value) {
+      Object obj = value.toObject();
+      SchemaField schemaField = searcher.getSchema().getFieldOrNull(key);
+      if (obj instanceof Integer intValue
+          && schemaField != null
+          && schemaField.getType() instanceof EnumFieldType enumType) {
+        return enumType.intValueToEnumFieldValue(intValue);
+      }
+      return obj;
+    }
+
     FirstPassGroupingCollector<MutableValue> firstPass;
     TopGroupsCollector<MutableValue> secondPass;
     // If offset falls outside the number of documents a group can provide use this collector
@@ -1047,7 +1059,7 @@ public class Grouping {
       for (GroupDocs<MutableValue> group : result.groups) {
         NamedList<Object> nl = new SimpleOrderedMap<>();
         groupList.add(nl); // grouped={ key={ groups=[ {
-        nl.add("groupValue", group.groupValue().toObject());
+        nl.add("groupValue", groupValueObject(group.groupValue()));
         addDocList(nl, group);
       }
     }

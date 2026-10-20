@@ -713,4 +713,24 @@ public class EnumFieldTest extends SolrTestCaseJ4 {
       }
     }
   }
+
+  @Test
+  public void testGroupingOnEnumFieldReturnsLabels() throws Exception {
+    assumeFalse(
+        "Skipping testing of EnumFieldType without docValues, which is unsupported.",
+        System.getProperty("solr.tests.numeric.dv").equals("false"));
+    assertU(adoc("id", "1", FIELD_NAME, "High"));
+    assertU(adoc("id", "2", FIELD_NAME, "Low"));
+    assertU(commit());
+
+    assertJQ(
+        req(
+            "q", "*:*",
+            "group", "true",
+            "group.field", FIELD_NAME,
+            "fl", "id",
+            "wt", "json"),
+        "/grouped/severity/groups/[0]/groupValue=='High'",
+        "/grouped/severity/groups/[1]/groupValue=='Low'");
+  }
 }

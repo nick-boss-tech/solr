@@ -347,6 +347,10 @@ public class EnumFieldType extends PrimitiveFieldType {
     return new EnumFieldValue(intValue, stringValue);
   }
 
+  public EnumFieldValue intValueToEnumFieldValue(int intValue) {
+    return new EnumFieldValue(intValue, enumMapping.intValueToStringValue(intValue));
+  }
+
   @Override
   public EnumFieldValue toObject(IndexableField f) {
     Integer intValue = null;
