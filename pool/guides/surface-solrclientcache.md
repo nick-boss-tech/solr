@@ -31,7 +31,7 @@ Production:
 
 ## 4. Live work
 
-Fork branches whose names point at streaming or cross-collection work, by name only (not commit-checked here): none found by the name grep `streaming\|join\|solrclient` in this pass beyond the `ci/` list in `pool/guides/surface-indexfetcher.md`. Recent upstream changes that touch the file are in section 5.
+Fork branches for streaming or cross-collection work were not searched in this pass (the earlier ls-remote scan used replication, fetch and backup patterns only). Recent upstream changes that touch the file are in section 5.
 
 ## 5. Recent history (path-scoped, at 498a09aea97aac86c2cc7ac114113b946d249942)
 
