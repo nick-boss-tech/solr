@@ -2,10 +2,12 @@
 
 - Claimant host: vm3, matching `hosts/vm3.md`.
 - Store: 3 (CSV backlog), `assignments/pool-csv-backlog-round-1.md` (2 open rows per slice, file order).
-- Status: CLAIMED
+- Status: DONE
 - Slice: open rows 99 and 100 of the 4,078 open rows, `material/jira-csv-triage/slice-0050.csv`.
 - Capability tags used: records.
 - Started: 2026-10-20T11:41:51Z (UTC).
 - Idempotency key: csv-backlog-slice-0050@62e1daebab.
 
 Heartbeat: 2026-10-20T11:41:51Z
+
+DONE: 2026-10-20T11:41:54Z. Rows 2. File: material/jira-csv-triage/slice-0050.csv, SHA-256 d4b691aaaa1e1254877fd5fc26b6614e14ee30ea40ef80bdbc95d1be68eca1fe.
