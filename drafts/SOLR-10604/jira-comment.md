@@ -1,1 +1,1 @@
-We reviewed this ticket against current upstream main. The review did not find a reproducible defect in the current code, but the ticket is not closed yet, and we are leaving it open for a decision.
+In current Solr the session-expiry and connection-loss options in the test ChaosMonkey default to off on purpose, until the cloud tests pass reliably with them on. Turning the default on is a test-reliability decision. We are keeping this issue open until a run with those options enabled shows the cloud tests are reliable. If you have results from such a run, please attach them.
