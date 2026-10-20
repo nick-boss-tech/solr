@@ -1,10 +1,13 @@
 # Claim: pool-vm2-merged-pr-followup-promises-round-1-u
 
-- Claimant host: vm2, matching a file in `hosts/`.
-- Status: DONE 2026-10-18T14:16Z. Deliverables: `assignments/pool-merged-pr-followup-promises-round-1.md` (status line only). Merged set unchanged at 10, no new merge, #5061 still open at 660faedd026d, no discharge.
-- Job or assignment: `assignments/pool-merged-pr-followup-promises-round-1.md` (recurring; this pass re-derives the merged set and updates the ledger in place).
-- Slice: the merged-set check of the recurring assignment.
+- Claimant host: vm2, matching `hosts/vm2.md`.
+- Status: DONE (recurring merged-set check; no new merge).
+- Job or assignment: `assignments/pool-merged-pr-followup-promises-round-1.md` (recurring; newest DONE before this was 2026-10-18T15:19Z, so the 12-hour gate is open).
+- Slice: merged-set check only. The 10 merged PRs by the owner were compared with the last audit; no new merge since #5027.
 - Capability tags used: review.
-- Started: 2026-10-18T14:12:30Z (UTC).
+- Started: 2026-10-20T11:18:26Z (UTC).
+- Links: Supersedes: `claims/pool-vm2-merged-pr-followup-promises-round-1-s.md` and `-t.md` (both left ACTIVE with 2026-10-18 heartbeats, stale; ended here).
 
-Heartbeat: 2026-10-18T14:12:30Z
+Heartbeat: 2026-10-20T11:18:26Z
+
+DONE: 2026-10-20T11:18:26Z. Result: merged set is unchanged (10 merged, latest #5027 closed 2026-10-17), checked via the GitHub search API. No new follow-up promises to audit. Deliverable: this line.
