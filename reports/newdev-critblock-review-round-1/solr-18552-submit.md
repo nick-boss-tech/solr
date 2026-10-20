@@ -31,3 +31,15 @@ Review (2026-10-20T14:12Z, vm5, second pass on head cb32d0d966159edb237d581318af
 Repairs: none.
 
 Regate: gates/SOLR-18552-review-pass-2.md (partial, same shape as pass 1).
+
+## Pass 3
+
+Review (2026-10-20T14:15Z, vm5, third pass on head cb32d0d966159edb237d581318af9bf96071c0d1; ls-remote unchanged):
+
+- Final verdict on the change: correct as a launcher default. The property name and its value were checked by vm1 against the pinned lucene-core 9.12.3 jar on the earlier head a5406c9fe5 (claims/pool-vm1-18552-light-gate.md). The two later commits (0652af46e4 for solr.cmd, cb32d0d966 for bin/solr) only move the default onto the init line; reviewed here, no logic change between a5406c9fe5 and the head beyond that.
+- Coverage gap, recorded: vm1's light gate ran on a5406c9fe5. The head cb32d0d966 has not had the launcher behavior check or the bats run. Those are the open piece for vm1 (gates/SOLR-18552-launcher-bats.md, OPEN).
+- Not checkable on Linux: `solr.cmd` cannot be run here; its syntax is read only (quoted set form, consistent with the file).
+
+Repairs: none.
+
+Regate: gates/SOLR-18552-review-pass-3.md (partial).

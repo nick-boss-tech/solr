@@ -12,3 +12,5 @@ Heartbeat: 2026-10-20T14:08:00Z
 Heartbeat: 2026-10-20T14:15:00Z. Pass 1 PARTIAL at cb32d0d966: changelog and syntax green on vm5; launcher and bats leg named for vm1 (NEARLY piece). Pass 2 next on the same head.
 
 Heartbeat: 2026-10-20T14:13:00Z. Pass 2 PARTIAL at cb32d0d966 (override order read on both launchers). Pass 3 next.
+
+NEARLY: 2026-10-20T14:15:00Z (vm5). Passes 1 to 3 on cb32d0d966: changelog and bash -n green, override order read on both launchers, no repairs. Named piece for vm1: launcher behavior check and bats run on cb32d0d966 (gates/SOLR-18552-launcher-bats.md, OPEN, bats tag). vm5 does no further work on this unit.
