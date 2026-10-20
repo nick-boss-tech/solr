@@ -84,6 +84,7 @@ import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.LateInteractionVectorField;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.schema.StrField;
+import org.apache.solr.schema.StrFieldSource;
 import org.apache.solr.schema.TextField;
 import org.apache.solr.search.facet.AggValueSource;
 import org.apache.solr.search.facet.AvgAgg;
@@ -108,6 +109,7 @@ import org.apache.solr.search.function.EqualFunction;
 import org.apache.solr.search.function.OrdFieldSource;
 import org.apache.solr.search.function.ReverseOrdFieldSource;
 import org.apache.solr.search.function.SolrComparisonBoolFunction;
+import org.apache.solr.search.function.StringMinMaxFunction;
 import org.apache.solr.search.function.distance.GeoDistValueSourceParser;
 import org.apache.solr.search.function.distance.HaversineFunction;
 import org.apache.solr.search.function.distance.SquaredEuclideanFunction;
@@ -686,8 +688,7 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
         new ValueSourceParser() {
           @Override
           public ValueSource parse(FunctionQParser fp) throws SyntaxError {
-            List<ValueSource> sources = fp.parseValueSourceList();
-            return new MaxFloatFunction(sources.toArray(new ValueSource[0]));
+            return minMax(fp.parseValueSourceList(), true);
           }
         });
     addParser(
@@ -695,8 +696,7 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
         new ValueSourceParser() {
           @Override
           public ValueSource parse(FunctionQParser fp) throws SyntaxError {
-            List<ValueSource> sources = fp.parseValueSourceList();
-            return new MinFloatFunction(sources.toArray(new ValueSource[0]));
+            return minMax(fp.parseValueSourceList(), false);
           }
         });
 
@@ -1879,5 +1879,19 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
     public SortField getSortField(boolean reverse) {
       return super.getSortField(reverse);
     }
+  }
+
+  private static ValueSource minMax(List<ValueSource> sources, boolean max) {
+    long stringSources = sources.stream().filter(StrFieldSource.class::isInstance).count();
+    if (stringSources == 0) {
+      ValueSource[] array = sources.toArray(new ValueSource[0]);
+      return max ? new MaxFloatFunction(array) : new MinFloatFunction(array);
+    }
+    if (stringSources != sources.size()) {
+      throw new SolrException(
+          SolrException.ErrorCode.BAD_REQUEST,
+          "min and max can't mix string fields with numeric arguments");
+    }
+    return new StringMinMaxFunction(sources.toArray(new ValueSource[0]), max);
   }
 }
