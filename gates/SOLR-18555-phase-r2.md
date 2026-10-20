@@ -1,6 +1,6 @@
 # Gate job: SOLR-18555 (text supplied highlighting, phase r2)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm2-gate-SOLR-18555-phase-r2.md)
 
 - Branch: `solr-18555-submit`. Head: `59a44dbaf10c627d340f23f5481fdb2ba716f089` (fork tip, confirmed on 2026-10-19). If the tip has moved at claim time, stop and record the new tip. Do not retarget this job.
 - Base: `c8ab71430f6e7547c773da596101d680862310ff`. Prior gated head: `b99259cba3572cc08586b2456c78780c814a2bf7`.
