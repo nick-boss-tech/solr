@@ -64,6 +64,10 @@ The failure this corrects: a reviewer asked twice for all the sleeps in a test t
 - Either coordinator may decide a scope question under the decision default: a recorded recommendation is adopted; where no recommendation is on record, the harder and more thorough option is taken.
 - Each decision is recorded in the category's TESTING.md or answers file, in the same push that acts on it.
 
+### Live PR text edits
+
+Owner ruling (Nick, 2026-10-21): live title and body edits on existing PRs do not need approval. Make the edit, re-read the live text to confirm it, and record it in the receipt or report. Keep the text in `pr-drafts/` as the record. The inventory of edits that were waiting is `reports/live-edit-inventory-2026-10-21.md`.
+
 ### What stays reserved
 
 - PR openings and draft-to-ready flips need Nick's approval each time.
