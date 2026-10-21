@@ -22,3 +22,12 @@ Pass 1 result: GREEN at `c0ab38fc0a8b57953f8b8df03f54085fb37e138d`, with the own
 - Regate: `gates/SOLR-17297-review-pass-2.md`, GREEN at `c0ab38fc0a8b57953f8b8df03f54085fb37e138d`. Logs `/workspace/gates/logs/vm3/solr-17297-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `TestCoreContainer`: 1 class, 26 tests, 0 failures, 0 errors, 3 skipped (fresh XML); `:solr:core:check -x test` rc 0.
 
 Pass 2 result: GREEN at `c0ab38fc0a8b57953f8b8df03f54085fb37e138d`; owner item still open.
+
+## Pass 3 (vm3, 2026-10-21T04:59:47Z)
+
+- Head reviewed: `c0ab38fc0a8b57953f8b8df03f54085fb37e138d` (unchanged). Base `14c7aac0d1`. Passes 1 and 2 reused, not redone.
+- Review: no new findings. The owner item from pass 1 is still open at this head: a module-stage SPI class can be orphaned when the shared-lib step closes the module loader. The reorder moves that close; it does not remove it. Recorded for the owner, not repaired (a loader-design change, outside gate-repair scope).
+- Repairs in pass 3: none.
+- Regate: `gates/SOLR-17297-review-pass-3.md`, GREEN at `c0ab38fc0a8b57953f8b8df03f54085fb37e138d`. Logs `/workspace/gates/logs/vm3/solr-17297-review-pass-3/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `TestCoreContainer`: 1 class, 26 tests, 0 failures, 0 errors, 3 skipped (fresh XML); `:solr:core:check -x test` rc 0.
+
+Pass 3 result: GREEN at `c0ab38fc0a8b57953f8b8df03f54085fb37e138d`. Unit 18 is complete after pass 3. Owner item open: module-stage SPI orphaning (round-35 probe, pass 1).
