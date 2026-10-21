@@ -31,3 +31,12 @@ Pass 2 result: GREEN at `571307400b6917ce458db989f29febb5cff8a600`.
 - `BasicAuthStandaloneTest.testBasicAuth` FAILED: `authentication config should not contain internal metadata`. This pins the empty-key strip (pass 1, rung 1).
 - Result: the new assertions discriminate. Exit status of the base run is nonzero (`BUILD FAILED`); the result file records a literal `$?` because the proof runner's echo was mis-quoted. The counts and messages are the evidence.
 
+
+## Pass 3 (vm3, 2026-10-21T07:31:46Z)
+
+- Head reviewed: `571307400b6917ce458db989f29febb5cff8a600` (unchanged). Base `14c7aac0d1`. Passes 1 and 2 reused, not redone. The base proof leg (96e0275af0) is the discriminating evidence: the head's new tests fail on base with the ticket's three symptoms.
+- Review: no new findings. Open minor items are recorded and settled at the ladder: the empty-key strip (rung 1, matches the repo's test contract) and the new-file mode 0600 (rung 4, kept).
+- Repairs in pass 3: none.
+- Regate: `gates/SOLR-18010-review-pass-3.md`, GREEN at `571307400b6917ce458db989f29febb5cff8a600`. Logs `/workspace/gates/logs/vm3/solr-18010-review-pass-3/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); focused `SecurityConfHandlerTest` and `BasicAuthStandaloneTest`: 2 classes, 5 tests, 0 failures, 0 errors (fresh XML); `:solr:core:check -x test` rc 0.
+
+Pass 3 result: GREEN at `571307400b6917ce458db989f29febb5cff8a600`. Unit 20 is complete after pass 3.
