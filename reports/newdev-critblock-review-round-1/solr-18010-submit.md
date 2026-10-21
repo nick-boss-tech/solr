@@ -11,3 +11,14 @@
 - Regate: `gates/SOLR-18010-review-pass-1.md`, GREEN at `571307400b6917ce458db989f29febb5cff8a600`. Logs `/workspace/gates/logs/vm3/solr-18010-review-pass-1/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); focused `SecurityConfHandlerTest` and `BasicAuthStandaloneTest`: 2 classes, 5 tests, 0 failures, 0 errors (fresh XML); `:solr:core:check -x test` rc 0.
 
 Pass 1 result: GREEN at `571307400b6917ce458db989f29febb5cff8a600`.
+
+## Pass 2 (vm3, 2026-10-21T06:53:48Z)
+
+- Head reviewed: `571307400b6917ce458db989f29febb5cff8a600` (unchanged). Base `14c7aac0d1`.
+- Test expectations against the ticket: `testConcurrentEditsToLocalSecurityJson` runs two edits (alice's and bob's role assignments) through a latching authorization plugin that forces them to interleave, and asserts both survive. That is the ticket's lost-update symptom. `testConcurrentPersistConfLeavesOneWholeDocument` runs two persists of different documents and asserts the file is one whole JSON document, not a mix. That is the corruption symptom. Both tests pin the mechanism.
+- Ladder rung 2 (proof leg): the new assertions must fail on base, or be labelled a pin. Run in the next step, on base `14c7aac0d1` with the head's two test files overlaid. Result recorded below when it lands.
+- Finding: none new beyond pass 1.
+- Repairs in pass 2: none.
+- Regate: `gates/SOLR-18010-review-pass-2.md`, GREEN at `571307400b6917ce458db989f29febb5cff8a600`. Logs `/workspace/gates/logs/vm3/solr-18010-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); focused `SecurityConfHandlerTest` and `BasicAuthStandaloneTest`: 2 classes, 5 tests, 0 failures, 0 errors (fresh XML); `:solr:core:check -x test` rc 0.
+
+Pass 2 result: GREEN at `571307400b6917ce458db989f29febb5cff8a600`.
