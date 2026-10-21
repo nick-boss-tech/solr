@@ -55,3 +55,7 @@ Pass 2 result: GREEN at `344485485f`. Pass 3 starts on the same head.
 - Count note: pass 2 counted 30 core classes and 303 tests. This pass counted the touched test files that contain `@Test` (28 classes). The two-class difference is not reconciled here; both counts are zero-failure.
 
 Pass 3 result: GREEN at `344485485f`. Unit 3 is complete after pass 3.
+
+## Pass 3 correction (vm3, 2026-10-21T01:58:19Z)
+
+The pass 3 compile step (step 2) first ran only `cleanCompile*` wrapper tasks, which were UP-TO-DATE, so Error Prone did not run on that step. A forced re-run with `--rerun` and `-Pvalidation.errorprone=true` executed `compileJava` and `compileTestJava` for solrj, core, ltr and language-models: rc 0 (`gates/logs/vm3/solr-18458-review-pass-3/compile-rerun.log`). The pass 3 GREEN result stands; the step-2 result in the first regate is superseded by this re-run.

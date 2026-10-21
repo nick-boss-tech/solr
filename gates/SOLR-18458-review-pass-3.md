@@ -30,3 +30,5 @@ Failures follow WORKFLOW.md, Gate repairs. A failed retry hands the job back.
 | --- | --- | --- | --- |
 | Pass 3 repair scope | default: WORKFLOW.md Gate repairs only | a finding outside that scope is recorded in the pass 3 section, not fixed | vm3, rung 4 |
 | Pass 1 minor finding (silent debugQuery drop, no DeprecationLog) | default: recorded, not repaired | changes behaviour; not in repair scope | vm4 pass 1 |
+
+Correction (2026-10-21T01:58:19Z): the first step-2 compile ran only UP-TO-DATE wrapper tasks. The forced re-run (`compile-rerun.log`, rc 0) executed the real Error Prone compile for all four modules and supersedes that step.
