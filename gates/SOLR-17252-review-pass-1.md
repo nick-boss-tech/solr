@@ -1,6 +1,6 @@
 # Gate job: SOLR-17252 review pass 1 (unit 16, vm3)
 
-Status: DONE (GATE GREEN at head `d730a266a0425b2609f4bcf21756555d3d3b8f52`, 2026-10-21T03:45:08Z; receipts/SOLR-17252.md)
+Status: DONE (GATE GREEN at head `d730a266a0425b2609f4bcf21756555d3d3b8f52`, passes 1 to 3, $T; receipts/SOLR-17252.md)
 
 - Branch: `solr-17252-submit`. Head: `d730a266a0425b2609f4bcf21756555d3d3b8f52` (ls-remote at claim time). Base: `14c7aac0d1`.
 - Intended host: vm3. Capability tags: review, gate. No Gradle gate applies to this script-branch.
