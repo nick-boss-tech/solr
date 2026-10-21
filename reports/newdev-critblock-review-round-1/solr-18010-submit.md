@@ -22,3 +22,12 @@ Pass 1 result: GREEN at `571307400b6917ce458db989f29febb5cff8a600`.
 - Regate: `gates/SOLR-18010-review-pass-2.md`, GREEN at `571307400b6917ce458db989f29febb5cff8a600`. Logs `/workspace/gates/logs/vm3/solr-18010-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); focused `SecurityConfHandlerTest` and `BasicAuthStandaloneTest`: 2 classes, 5 tests, 0 failures, 0 errors (fresh XML); `:solr:core:check -x test` rc 0.
 
 Pass 2 result: GREEN at `571307400b6917ce458db989f29febb5cff8a600`.
+
+### Pass 2 proof leg (vm3, 2026-10-21T07:04:59Z): fails on base as expected
+
+- Base `14c7aac0d1`, production code at base, the head's `SecurityConfHandlerTest.java` and `BasicAuthStandaloneTest.java` overlaid. Not a synthetic base: the tests compile against base. Log `/workspace/gates/logs/vm3/solr-18010-review-pass-2-proof/proof-base.log`; counts `/workspace/gates/logs/vm3/solr-18010-review-pass-2-proof/count-proof.txt`: 5 tests, 3 failures, 0 errors.
+- `SecurityConfHandlerTest.testConcurrentPersistConfLeavesOneWholeDocument` FAILED: `security.json is not a single JSON document` (JsonParseException at line 3). The corruption symptom.
+- `SecurityConfHandlerTest.testConcurrentEditsToLocalSecurityJson` FAILED: `bob's role assignment was lost expected:<dev> but was:<null>`. The lost-update symptom.
+- `BasicAuthStandaloneTest.testBasicAuth` FAILED: `authentication config should not contain internal metadata`. This pins the empty-key strip (pass 1, rung 1).
+- Result: the new assertions discriminate. Exit status of the base run is nonzero (`BUILD FAILED`); the result file records a literal `$?` because the proof runner's echo was mis-quoted. The counts and messages are the evidence.
+
