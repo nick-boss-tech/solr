@@ -23,3 +23,12 @@ Pass 1 result: GREEN at `a92a0d89b20908`.
 - Regate: `gates/SOLR-7394-review-pass-2.md`, GREEN at `a92a0d89b20908`. Logs `/workspace/gates/logs/vm3/solr-7394-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed); focused classes: 4 classes, 13 tests, 0 failures, 0 errors (fresh XML); `:solr:core:check -x test` rc 0.
 
 Pass 2 result: GREEN at `a92a0d89b20908`; the mutation probe shows the test pins the shard-term update.
+
+## Pass 3 (vm3, 2026-10-21T14:38:39Z)
+
+- Head reviewed: `a92a0d89b20908` (unchanged). Review base `56ec140e36`. Passes 1 and 2 reused; the mutation probe in pass 2 (fb3f8ff3ea) is the discriminating evidence.
+- Review: no new findings. The shard-term update is pinned by `ZkShardTermsRecoveryFailureTest` (the single-site probe fails it). The null-return and the test-injection hook were checked in pass 1.
+- Repairs in pass 3: none.
+- Regate: `gates/SOLR-7394-review-pass-3.md`, GREEN at `a92a0d89b20908`. Logs `/workspace/gates/logs/vm3/solr-7394-review-pass-3/`. Changelog rc 0; tidy rc 0; Error Prone compile rc 0 (real); focused 4 classes, 13 tests, 0 failures, 0 errors (fresh XML); `:solr:core:check -x test` rc 0.
+
+Pass 3 result: GREEN at `a92a0d89b20908`. Unit 24 is complete after pass 3.
