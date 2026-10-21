@@ -11,3 +11,14 @@
 - Regate: `gates/SOLR-17297-review-pass-1.md`, GREEN at `c0ab38fc0a8b57953f8b8df03f54085fb37e138d`. Logs `/workspace/gates/logs/vm3/solr-17297-review-pass-1/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `TestCoreContainer`: 1 class, 26 tests, 0 failures, 0 errors, 3 skipped (fresh XML, `count-core.txt`); `:solr:core:check -x test` rc 0.
 
 Pass 1 result: GREEN at `c0ab38fc0a8b57953f8b8df03f54085fb37e138d`, with the owner item open.
+
+## Pass 2 (vm3, 2026-10-21T04:37:54Z)
+
+- Head reviewed: `c0ab38fc0a8b57953f8b8df03f54085fb37e138d` (unchanged). Base `14c7aac0d1`.
+- Review of the test against the ticket mechanism: `testSharedLibSpiCanStillLoadItsClassesWhenModulesAreEnabled` puts a Lucene SPI class and a helper class in one shared-lib jar, enables module `mod1` (its jar is added first, at init), then calls `fieldsProducer` on the SPI. The expected `UnsupportedOperationException` shows the SPI loaded and its helper resolved after the module step; a `ClassNotFoundException` would fail the assertion. That is the ticket's reported shape, so the test pins the fix for lib plugins.
+- What the test does not pin: a module-stage class whose dependency loads after the shared-lib step closes the module loader (the pass 1 owner item). A green gate does not show that residual is fixed. The round-35 probe is the only evidence for it, and it is not in the repo.
+- Finding: none new beyond pass 1.
+- Repairs in pass 2: none.
+- Regate: `gates/SOLR-17297-review-pass-2.md`, GREEN at `c0ab38fc0a8b57953f8b8df03f54085fb37e138d`. Logs `/workspace/gates/logs/vm3/solr-17297-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `TestCoreContainer`: 1 class, 26 tests, 0 failures, 0 errors, 3 skipped (fresh XML); `:solr:core:check -x test` rc 0.
+
+Pass 2 result: GREEN at `c0ab38fc0a8b57953f8b8df03f54085fb37e138d`; owner item still open.
