@@ -13,3 +13,15 @@
 - Regate: `gates/SOLR-17433-review-pass-1.md`, GREEN at `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`. Logs `/workspace/gates/logs/vm3/solr-17433-review-pass-1/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `SolrClientCacheTest`: 1 class, 4 tests, 0 failures, 0 errors, 0 skipped (fresh XML); `:solr:solrj-streaming:check -x test` rc 0.
 
 Pass 1 result: GREEN at `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`, with the owner decision open.
+
+## Pass 2 (vm3, 2026-10-21T05:40:53Z)
+
+- Head reviewed: `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9` (unchanged). Base `14c7aac0d1`.
+- Test expectations against the ticket: `testCustomTimeoutFloorsAreApplied` pins the connect and idle values from the new constructor and asserts `Long.MAX_VALUE` as the request timeout. `testStreamingClientsDoNotInheritSeedRequestTimeout` asserts the same `Long.MAX_VALUE` for a cache seeded with a client whose request timeout is 1234 ms. Both tests check builder field values. They pin the owner-decision behaviour (unbounded request timeout for every cached client), so if the owner narrows the policy, both change with it.
+- Limit: no test runs a stream past 60 seconds, which is the ticket's observable symptom. The tests show the configuration, not the stream outcome.
+- Proof: the new constructors do not exist on base, so the base run cannot discriminate (receipt, pass 1). Recorded plainly.
+- Finding: none new beyond the pass 1 owner decision.
+- Repairs in pass 2: none.
+- Regate: `gates/SOLR-17433-review-pass-2.md`, GREEN at `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`. Logs `/workspace/gates/logs/vm3/solr-17433-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `SolrClientCacheTest`: 1 class, 4 tests, 0 failures, 0 errors (fresh XML); `:solr:solrj-streaming:check -x test` rc 0.
+
+Pass 2 result: GREEN at `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`; owner decision open.

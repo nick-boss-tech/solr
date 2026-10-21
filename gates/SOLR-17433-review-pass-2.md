@@ -1,6 +1,6 @@
 # Gate job: SOLR-17433 review pass 2 (unit 19, vm3)
 
-Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-17433-submit.md, 2026-10-21T05:24:51Z)
+Status: DONE (GATE GREEN at head `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`, 2026-10-21T05:40:53Z; receipts/SOLR-17433.md)
 
 - Branch: `solr-17433-17143-submit`. Head: `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`. Base: `14c7aac0d1`.
 - Intended host: vm3. Capability tags: gate.
