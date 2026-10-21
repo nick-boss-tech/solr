@@ -23,3 +23,12 @@ Pass 1 result: GREEN at `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`.
 - Regate: `gates/SOLR-3684-review-pass-2.md`, GREEN at `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`. Logs `/workspace/gates/logs/vm3/solr-3684-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `TestJettySolrRunner`: 1 class, 4 tests, 0 failures, 0 errors (fresh XML); `:solr:test-framework:check -x test` rc 0.
 
 Pass 2 result: GREEN at `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`.
+
+## Pass 3 (vm3, 2026-10-21T08:33:45Z)
+
+- Head reviewed: `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa` (unchanged). Base `14c7aac0d1`. Passes 1 and 2 reused, not redone.
+- Review: no new findings. The knob and the default are pinned by tests; the GC effect in the ticket is a load property that this round does not measure (recorded in pass 2).
+- Repairs in pass 3: none.
+- Regate: `gates/SOLR-3684-review-pass-3.md`, GREEN at `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`. Logs `/workspace/gates/logs/vm3/solr-3684-review-pass-3/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `TestJettySolrRunner`: 1 class, 4 tests, 0 failures, 0 errors (fresh XML); `:solr:test-framework:check -x test` rc 0.
+
+Pass 3 result: GREEN at `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`. Unit 22 is complete after pass 3.
