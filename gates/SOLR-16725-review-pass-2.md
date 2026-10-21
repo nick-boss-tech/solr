@@ -1,6 +1,6 @@
 # Gate job: SOLR-16725 review pass 2 (unit 14, vm3)
 
-Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-16725-submit.md, 2026-10-21T02:25:28Z)
+Status: DONE (pass 2 green at 550af28313; proof leg fails on base; receipts/SOLR-16725.md)
 
 - Branch: `solr-16725-submit`. Head: `550af283134e2f` (unchanged from pass 1). Base: `14c7aac0d1`.
 - Intended host: vm3. Capability tags: gate.
