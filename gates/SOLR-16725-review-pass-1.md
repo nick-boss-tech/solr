@@ -1,6 +1,6 @@
 # Gate job: SOLR-16725 review pass 1 (unit 14, vm3)
 
-Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-16725-submit.md, 2026-10-21T01:59:01Z)
+Status: DONE (pass 1 green at 550af28313; receipts/SOLR-16725.md)
 
 - Branch: `solr-16725-submit`. Head: `550af28313` (ls-remote at claim time). If the tip moved, stop and record it here.
 - Prior gated head: `be1838ef8c` (receipt). Base: `14c7aac0d1`.
