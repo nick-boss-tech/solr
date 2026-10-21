@@ -8,3 +8,7 @@
 - Started: 2026-10-21T05:02:28Z (UTC). Not parked: the owner's pending call is retire-or-ship, not a review hold.
 
 Heartbeat: 2026-10-21T05:02:28Z
+
+Decision: 2026-10-21T05:43:57Z, the unbounded request timeout is scoped to streaming clients (rung 1: every SolrClientCache caller is a streaming, graph, SQL or commit-stream path; rung 3: the ticket asks for no timeout while a stream returns content). Kept as branch behaviour. Entry D1 in reports/decision-log-2026-10-21.md.
+
+Heartbeat: 2026-10-21T05:43:57Z
