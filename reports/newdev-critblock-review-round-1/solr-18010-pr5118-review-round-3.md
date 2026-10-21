@@ -30,7 +30,7 @@ Ladder rung in brackets. "Probe" means a run outside the suite on JDK 21.0.12.1 
 
 9. **File mode of a created file.** Probe here: a temporary file created with an explicit directory gets `rw-------`, and the moved file keeps it. The 2026-10-16 vm2 check recorded `rw-r--r--` at head for a new file. The two readings do not agree and are not reconciled here. Reachability decides it: `SecurityConfHandler.doEdit` reads the file, returns "No configuration present" when the key is missing, and only then calls `persistConf`. A created file therefore appears only if security.json is removed between the read and the write. [1] Decision: no code change. The PR body states the behavior. Round 2 wrote "0600 from createTempFile"; that matches this probe, and the 2026-10-16 reading is recorded here as disputed.
 
-10. **Internal version marker.** `CoreContainer.readVersion` (lines 611 to 618) reads the `""` key only to gate a reload on a positive version. A standalone edit only ever writes `v` 0 (version -1, plus one), and standalone does not read a version back. Removing the key therefore changes no reload. The visible change is that `GET /admin/authentication` on a local file no longer shows the `""` entry after an edit. [1] Kept; the PR body states it.
+10. **Internal version marker.** `CoreContainer.readVersion` (lines 611 to 618) reads the `""` key only to gate a reload on a positive version. `CoreContainer.readVersion` does read the key when a file loads, but it skips a reload only when the version is positive. A standalone edit only ever writes `v` 0 (version -1, plus one). Removing the key therefore changes no reload. The visible change is that `GET /admin/authentication` on a local file no longer shows the `""` entry after an edit. [1] Kept; the PR body states it.
 
 11. **Scope and alternative.** The ticket's reproduction, overlapping edits, is handled by the lock on main. The atomic write adds protection against a process crash mid-write. The alternative is to drop the atomic write and keep the lock and the strip. Kept the atomic write: the ticket is about corruption, and after findings 1 to 4 the atomic path changes no behavior that base kept. [4] The alternative is recorded here with its evidence and needs no decision now.
 
@@ -55,9 +55,21 @@ Logs `gates/logs/vm3/solr-18010-r3-r3-head/`.
 
 Gate `gates/logs/vm3/solr-18010-r3-before/` on `09c8e5c8f6`'s parent `dfcf50aec0` main code with the new test. Result: compile rc 0; test rc 1. `testEditInPlaceWhenSolrHomeIsReadOnly` fails with `AccessDeniedException` on the temporary file. The symlink test is not in the run, because it was removed after this run (finding 5).
 
+## Symbolic link evidence (scratch, not committed)
+
+The symlink test (from reflog commit `263c73664f`) was run with `LinkPermission "symbolic"` added locally to `solr-tests.policy`. Neither change was committed.
+
+- At `1b14ce9556` (main file at head): `SecurityConfHandlerTest` 6 of 6 pass, 0 failures. Log `gates/logs/vm3/solr-18010-r3-symlink-head-policy/`.
+- At `dfcf50aec0` main file with the same tests: `testEditThroughSymbolicLinkUpdatesTarget` fails with "security.json is no longer a symbolic link"; `testEditInPlaceWhenSolrHomeIsReadOnly` fails with `AccessDeniedException`. Log `gates/logs/vm3/solr-18010-r3-symlink-before-policy/`. The `head.txt` in that folder records the worktree HEAD (`1b14ce9556`), not the code under test. The code under test was `dfcf50aec0`'s `SecurityConfHandlerLocal.java`.
+- The worktree was reverted to `1b14ce9556` after the runs. The pushed PR contains no policy change and no symlink test.
+
+## PR body
+
+Live PR #5118 updated on 2026-10-21 (title and body) at the owner's direction that the PR can be updated; no PR was opened. The body is `pr-drafts/solr-18010/PR-5118-body-round-3.md`. It names the policy widening as a maintainer choice and states the symlink evidence. The widening itself is not in this PR, because the test policy is repo-wide.
+
 ## Not run in this round
 
-- Symbolic link and single-file bind mount on a real system (no suite policy for links; no root here).
+- Single-file bind mount on a real system (no root here).
 - Owner change (needs root).
 - Windows.
 
