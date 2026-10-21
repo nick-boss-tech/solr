@@ -25,3 +25,13 @@ Pass 1 result: GREEN at `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`, with the own
 - Regate: `gates/SOLR-17433-review-pass-2.md`, GREEN at `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`. Logs `/workspace/gates/logs/vm3/solr-17433-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `SolrClientCacheTest`: 1 class, 4 tests, 0 failures, 0 errors (fresh XML); `:solr:solrj-streaming:check -x test` rc 0.
 
 Pass 2 result: GREEN at `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`; owner decision open.
+
+## Pass 3 (vm3, 2026-10-21T05:57:51Z)
+
+- Head reviewed: `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9` (unchanged). Base `14c7aac0d1`. Passes 1 and 2 reused, not redone.
+- Review: no new findings. The request-timeout scope is settled by ladder decision D1 (claims/pool-newdev-critblock-review-round-1-solr-17433-submit.md, 61ad09d815; reports/decision-log-2026-10-21.md): every SolrClientCache caller is a streaming, graph, SQL or commit-stream path, and the ticket asks for no timeout while a stream returns content. The branch behaviour stands as stated behaviour.
+- Remaining limit (recorded in pass 2): no test runs a stream past 60 seconds.
+- Repairs in pass 3: none.
+- Regate: `gates/SOLR-17433-review-pass-3.md`, GREEN at `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`. Logs `/workspace/gates/logs/vm3/solr-17433-review-pass-3/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `SolrClientCacheTest`: 1 class, 4 tests, 0 failures, 0 errors (fresh XML); `:solr:solrj-streaming:check -x test` rc 0.
+
+Pass 3 result: GREEN at `42b6c4fc9158524ceb6b91aa2f4c6583a387c6f9`. Unit 19 is complete after pass 3.
