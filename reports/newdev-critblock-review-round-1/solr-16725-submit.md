@@ -21,3 +21,12 @@
 - Regate: `gates/SOLR-16725-review-pass-2.md`, GREEN at `550af28313`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 with `--rerun` (`compileJava` and `compileTestJava` executed); focused head run 1 class, 7 tests, 0 failures, 0 errors, 1 skipped (fresh XML, `count-core.txt`); check rc 0.
 
 Pass 2 result: GREEN at `550af28313`, proof leg fails on base as expected.
+
+## Pass 3 (vm3, 2026-10-21T03:20:46Z)
+
+- Head reviewed: `550af283134e2f` (unchanged). Base `14c7aac0d1`. Passes 1 and 2 reused, not redone. The proof leg is recorded in pass 2.
+- Review: no new findings. The branch change and its test are consistent with the ticket and with the surrounding ClusterStatus code (pass 1 notes).
+- Repairs in pass 3: none.
+- Regate: `gates/SOLR-16725-review-pass-3.md`, GREEN at `550af28313`. Logs `gates/logs/vm3/solr-16725-review-pass-3/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 with `--rerun` (compileJava and compileTestJava executed); focused `LocalFSCloudIncrementalBackupTest` seed `16725C0FFEE16725`: 1 class, 7 tests, 0 failures, 0 errors, 1 skipped (fresh XML); `:solr:core:check -x test` rc 0.
+
+Pass 3 result: GREEN at `550af28313`. Unit 14 is complete after pass 3.
