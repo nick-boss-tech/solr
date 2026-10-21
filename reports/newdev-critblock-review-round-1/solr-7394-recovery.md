@@ -11,3 +11,15 @@
 - Regate: `gates/SOLR-7394-review-pass-1.md`, GREEN at `a92a0d89b20908`. Logs `/workspace/gates/logs/vm3/solr-7394-review-pass-1/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); focused `RecoveryStrategyTest`, `ShardTermsTest`, `ZkShardTermsRecoveryFailureTest`, `TestTestInjection`: 4 classes, 13 tests, 0 failures, 0 errors (fresh XML); `:solr:core:check -x test` rc 0.
 
 Pass 1 result: GREEN at `a92a0d89b20908`.
+
+## Pass 2 (vm3, 2026-10-21T10:00:01Z)
+
+- Head reviewed: `a92a0d89b20908` (unchanged). Review base `56ec140e36`.
+- Test expectations against the ticket: `ZkShardTermsRecoveryFailureTest.testFailedRecoveryClearsShardTermsAndRestoresEligibility` checks the mechanism: no `_recovering` entry after the failed recovery, term restored to 0, no eligibility while the higher-term leader stands, eligibility after it stops.
+- Mutation probe (rung 2), single site: the shard-term update in `RecoveryStrategy.recoveryFailed` (line 210) is disabled in a throwaway worktree (`/workspace/gates/logs/vm3/solr-7394-review-pass-2-mut1/diff.txt`: one line changed). Result: `ZkShardTermsRecoveryFailureTest.testFailedRecoveryClearsShardTermsAndRestoresEligibility` FAILED with `AssertionError: failed replica must not retain a _recovering shard-terms entry`. The test discriminates the fix at this head. Log `/workspace/gates/logs/vm3/solr-7394-review-pass-2-mut1/mutation-test.log`.
+- Probe note: an earlier probe disabled both `leaderEligible` sites (the second is in `replicate()`, a commit-on-leader call). Its result is not cited.
+- Finding: none new beyond pass 1.
+- Repairs in pass 2: none.
+- Regate: `gates/SOLR-7394-review-pass-2.md`, GREEN at `a92a0d89b20908`. Logs `/workspace/gates/logs/vm3/solr-7394-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed); focused classes: 4 classes, 13 tests, 0 failures, 0 errors (fresh XML); `:solr:core:check -x test` rc 0.
+
+Pass 2 result: GREEN at `a92a0d89b20908`; the mutation probe shows the test pins the shard-term update.

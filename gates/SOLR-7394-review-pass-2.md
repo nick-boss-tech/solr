@@ -1,6 +1,6 @@
 # Gate job: SOLR-7394 review pass 2 (unit 24, vm3)
 
-Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-7394-recovery.md, 2026-10-21T09:13:14Z): head regate plus mutation probe
+Status: DONE (GATE GREEN at head `a92a0d89b20908`, 2026-10-21T10:00:01Z; mutation probe fails as expected; receipts/SOLR-7394.md)
 
 - Branch: `solr-7394-recovery`. Head: `a92a0d89b20908`. Base for the review: `56ec140e3636d5f4150fa87fbf7103529536ac99` (the branch's own merge base).
 - Intended host: vm3. Capability tags: gate.
