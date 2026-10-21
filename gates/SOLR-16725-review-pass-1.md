@@ -5,7 +5,7 @@ Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-16725-submit.m
 - Branch: `solr-16725-submit`. Head: `550af28313` (ls-remote at claim time). If the tip moved, stop and record it here.
 - Prior gated head: `be1838ef8c` (receipt). Base: `14c7aac0d1`.
 - Intended host: vm3. Capability tags: gate.
-- Module: `:solr:core`. Focused class: `org.apache.solr.handler.admin.api.LocalFSCloudIncrementalBackupTest` (the test the receipt names). Seed: `16725C0FFEE16725`.
+- Module: `:solr:core`. Focused class: `org.apache.solr.cloud.api.collections.LocalFSCloudIncrementalBackupTest` (the test the receipt names). Seed: `16725C0FFEE16725`.
 - Diff scope against `14c7aac0d1`: 3 files, 92 insertions, 1 deletion: changelog/unreleased/SOLR-16725-clusterstatus-restored-count-types.yml, solr/core ClusterStatus.java, LocalFSCloudIncrementalBackupTest.java.
 - Why: the review round's pass 1 regate, the sign-off for unit 14.
 - Runner: `/workspace/tools/gate-solr-16725-p1.sh`. Worktree `/workspace/worktrees/solr-16725-p1`. Log: `gates/logs/vm3/solr-16725-review-pass-1/`.
