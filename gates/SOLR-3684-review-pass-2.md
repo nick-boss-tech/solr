@@ -1,6 +1,6 @@
 # Gate job: SOLR-3684 review pass 2 (unit 22, vm3)
 
-Status: CLAIMED (claims/pool-newdev-critblock-review-round-1-solr-3684-submit.md, 2026-10-21T08:00:49Z)
+Status: DONE (GATE GREEN at head `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`, 2026-10-21T08:16:47Z; receipts/SOLR-3684.md)
 
 - Branch: `solr-3684-submit`. Head: `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`. Base: `14c7aac0d1`.
 - Intended host: vm3. Capability tags: gate.

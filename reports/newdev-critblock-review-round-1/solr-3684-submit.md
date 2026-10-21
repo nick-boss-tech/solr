@@ -12,3 +12,14 @@
 - Regate: `gates/SOLR-3684-review-pass-1.md`, GREEN at `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`. Logs `/workspace/gates/logs/vm3/solr-3684-review-pass-1/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `TestJettySolrRunner`: 1 class, 4 tests (the 2 new plus 2 existing), 0 failures, 0 errors (fresh XML); `:solr:test-framework:check -x test` rc 0.
 
 Pass 1 result: GREEN at `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`.
+
+## Pass 2 (vm3, 2026-10-21T08:16:47Z)
+
+- Head reviewed: `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa` (unchanged). Base `14c7aac0d1`.
+- Test expectations against the ticket: `testJettyThreadPoolDefaultIsUnchanged` pins 10000 for the default config, and `testJettyThreadPoolCanBeConfigured` pins 123 for a configured one. Both check the pool size on the server object. The ticket's symptom is frequent full GC under indexing pressure, which a unit test cannot observe. So the tests show the knob works and the default is unchanged; they do not show the GC effect is fixed.
+- Limit recorded: the GC effect is a load property. No test or run in this round measures it.
+- Finding: none new beyond pass 1.
+- Repairs in pass 2: none.
+- Regate: `gates/SOLR-3684-review-pass-2.md`, GREEN at `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`. Logs `/workspace/gates/logs/vm3/solr-3684-review-pass-2/`. Changelog rc 0; tidy rc 0, empty status; Error Prone compile rc 0 (compileJava and compileTestJava executed, no skip warning); `TestJettySolrRunner`: 1 class, 4 tests, 0 failures, 0 errors (fresh XML); `:solr:test-framework:check -x test` rc 0.
+
+Pass 2 result: GREEN at `663b8ce754b69fd81dcd1b5c1abe7e94ca8e6faa`.
