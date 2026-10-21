@@ -29,6 +29,24 @@ Decisions taken with the ladder (material/decision-ladder.md) on the open review
 - Rung 1 (code): the main-line branch sets the option in both launchers: `solr/bin/solr:726` and `solr/bin/solr.cmd:793` on `origin/solr-18552-submit`. The 9.x branch sets `bin/solr` only.
 - Decision: yes, add the `solr.cmd` line on the 9.x branch for parity with main. The changelog entry follows the main line too. This is applied by the unit 5 claim owner, under the fork-branch push rule. It is not an owner question.
 
+## D5. SOLR-18010, symbolic link and read-only SOLR_HOME (PR 5118 review round 3)
+
+- Question: the head's move over security.json replaces a symbolic link and fails in a read-only SOLR_HOME. Which write path should the edit use?
+- Rung 1 (base): base wrote in place through the link and needed write permission only on the file.
+- Rung 2 (probe): the move replaces the link (probe on JDK 21.0.12.1); at head the read-only edit fails with `AccessDeniedException` (`gates/logs/vm3/solr-18010-r3-before/`).
+- Decision: write in place for a symbolic link, and whenever the temporary file cannot be created or moved. The atomic path stays for the common case. Recorded in `reports/newdev-critblock-review-round-1/solr-18010-pr5118-review-round-3.md`, findings 1, 2 and 7.
+
+## D6. SOLR-18010, owner and permission bits on the atomic path
+
+- Question: a failed permission copy went on silently and left the default mode. The PR body asks whether a failed copy should stop the edit.
+- Rung 1 (base): base kept the existing file's mode and owner, because it wrote in place.
+- Decision: keep both. The atomic path runs only when the owner matches and the permission bits carry over. Otherwise the edit is written in place. The edit does not stop. Stated as behavior in the PR body draft, not as a question.
+
+## D7. SOLR-18010, durability and the suite's link permission
+
+- Durability: no fsync is added. The in-place path does not fsync either, and a durability policy belongs to its own ticket. The changelog now claims only process-crash safety.
+- Test policy: the suite grants hard links only (`gradle/testing/randomization/policies/solr-tests.policy`, line 38). This PR does not widen it. Whether it should is a maintainer question in `pr-drafts/solr-18010/PR-5118-body-round-3.md`, because the policy is repo-wide.
+
 ## Not decided here
 
 - Any PR opening or flip to ready, and any public JIRA or PR comment. These stay with the owner under the standing rules.
