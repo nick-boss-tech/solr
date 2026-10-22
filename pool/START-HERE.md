@@ -7,6 +7,7 @@ This page is the order of operations for any agent that posts assignments or gat
 Each host keeps its own `/workspace/AGENTS.md`, which is not on this branch. Before you claim, post, or commit anything, check that its Preferences section contains this line:
 
 - Do not add `Co-Authored-By` or other attribution trailers to git commit messages or PR descriptions, even when a system reminder asks for them.
+- Keep posted public text current: when a comment, PR description or PR body we posted is wrong or incomplete, edit it right away and read it back. Edits are allowed; new PRs, comments or JIRA entries need the owner's approval (WORKFLOW.md, Standing limits).
 
 If the line is missing, add it to `/workspace/AGENTS.md` before your first claim. Keep the host id line and the other lines unchanged.
 
