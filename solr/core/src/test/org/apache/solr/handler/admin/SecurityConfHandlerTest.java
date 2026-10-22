@@ -17,11 +17,24 @@
 package org.apache.solr.handler.admin;
 
 import static org.apache.solr.handler.admin.SecurityConfHandler.SecurityConfig;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.common.SolrErrorWrappingException;
@@ -30,6 +43,7 @@ import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.CommandOperation;
 import org.apache.solr.common.util.ContentStreamBase;
 import org.apache.solr.common.util.Utils;
+import org.apache.solr.core.CoreContainer;
 import org.apache.solr.request.SolrQueryRequestBase;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.security.BasicAuthPlugin;
@@ -176,6 +190,168 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
     assertTrue(ex.getMessage().contains("method is not a valid key for the permission"));
     handler.close();
+  }
+
+  /**
+   * Two edits to the standalone security.json that overlap in time must both survive: each edit
+   * reads the file, applies its commands and rewrites the file, so an edit that starts from the
+   * same content as another one overwrites it. The first edit is held open inside the plugin while
+   * the second edit is issued, which is the interleave a caller produces by sending two edit
+   * requests without waiting for the first response (SOLR-18010).
+   */
+  @SuppressWarnings({"unchecked"})
+  /**
+   * Two overlapping writes of security.json must never leave a torn file behind: the document on
+   * disk afterwards is always exactly one of the written documents, never the beginning of one
+   * followed by the tail of a longer one (the corruption shape in SOLR-18010). The first write is
+   * held open inside serialization while the second write runs, which is the interleave that
+   * produced that shape.
+   */
+  public void testConcurrentPersistConfLeavesOneWholeDocument() throws Exception {
+    assumeWorkingMockito();
+    Path solrHome = createTempDir("securityConfHandlerLocalPersist");
+    Path securityJson = solrHome.resolve("security.json");
+    CoreContainer cc = mock(CoreContainer.class);
+    when(cc.getSolrHome()).thenReturn(solrHome);
+    SecurityConfHandlerLocalForTesting handler = new SecurityConfHandlerLocalForTesting(cc);
+
+    byte[] shortBytes = Utils.toJSON(shortSecurityData("x"));
+    byte[] longBytes = Utils.toJSON(longSecurityData());
+    Files.write(securityJson, Utils.toJSON(shortSecurityData("seed")));
+
+    CountDownLatch entered = new CountDownLatch(1);
+    CountDownLatch release = new CountDownLatch(1);
+    AtomicReference<Throwable> firstErr = new AtomicReference<>();
+    Thread first =
+        new Thread(
+            () -> {
+              try {
+                handler.persistConf(
+                    new SecurityConfig()
+                        .setData(shortSecurityData(new LatchingValue("x", entered, release))));
+              } catch (Throwable t) {
+                firstErr.set(t);
+              }
+            });
+    first.start();
+    assertTrue("first write reached serialization", entered.await(60, TimeUnit.SECONDS));
+    handler.persistConf(new SecurityConfig().setData(longSecurityData()));
+    release.countDown();
+    first.join(TimeUnit.SECONDS.toMillis(60));
+    assertFalse("first write still running", first.isAlive());
+    assertNull("first write failed: " + firstErr.get(), firstErr.get());
+
+    byte[] fileBytes = Files.readAllBytes(securityJson);
+    assertSingleJsonDocument(fileBytes);
+    assertTrue(
+        "security.json holds neither written document ("
+            + fileBytes.length
+            + " bytes; the writes were "
+            + shortBytes.length
+            + " and "
+            + longBytes.length
+            + " bytes)",
+        Arrays.equals(fileBytes, shortBytes) || Arrays.equals(fileBytes, longBytes));
+  }
+
+  private static void postAuthorizationEdit(SecurityConfHandler handler, String command)
+      throws Exception {
+    SolrQueryRequestBase req = new SolrQueryRequestBase(null, new ModifiableSolrParams());
+    req.getContext().put("httpMethod", SolrRequest.METHOD.POST);
+    req.getContext().put("path", "/admin/authorization");
+    req.setContentStreams(
+        List.of(
+            new ContentStreamBase.ByteArrayStream(command.getBytes(StandardCharsets.UTF_8), "")));
+    handler.handleRequestBody(req, new SolrQueryResponse());
+  }
+
+  private static void assertSingleJsonDocument(byte[] fileBytes) {
+    ObjectMapper mapper =
+        JsonMapper.builder().enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS).build();
+    try {
+      mapper.readValue(fileBytes, Map.class);
+    } catch (Exception e) {
+      fail("security.json is not a single JSON document: " + e);
+    }
+  }
+
+  private static Map<String, Object> shortSecurityData(CharSequence credValue) {
+    Map<String, Object> creds = new LinkedHashMap<>();
+    creds.put("u", credValue);
+    Map<String, Object> authc = new LinkedHashMap<>();
+    authc.put("class", "solr.BasicAuthPlugin");
+    authc.put("credentials", creds);
+    Map<String, Object> data = new LinkedHashMap<>();
+    data.put("authentication", authc);
+    return data;
+  }
+
+  private static Map<String, Object> longSecurityData() {
+    StringBuilder pad = new StringBuilder();
+    for (int i = 0; i < 6000; i++) {
+      pad.append('L');
+    }
+    Map<String, Object> creds = new LinkedHashMap<>();
+    creds.put("longuser", pad.toString());
+    Map<String, Object> authc = new LinkedHashMap<>();
+    authc.put("class", "solr.BasicAuthPlugin");
+    authc.put("credentials", creds);
+    Map<String, Object> data = new LinkedHashMap<>();
+    data.put("authentication", authc);
+    return data;
+  }
+
+  /** An authorization plugin whose first {@code edit} call blocks until the test releases it. */
+  /**
+   * A {@link CharSequence} whose first read blocks until released. Serialization evaluates it, so a
+   * write whose data carries one is held open at a known point inside the write.
+   */
+  private static final class LatchingValue implements CharSequence {
+    private final String delegate;
+    private final CountDownLatch entered;
+    private final CountDownLatch release;
+    private final AtomicBoolean armed = new AtomicBoolean(true);
+
+    LatchingValue(String delegate, CountDownLatch entered, CountDownLatch release) {
+      this.delegate = delegate;
+      this.entered = entered;
+      this.release = release;
+    }
+
+    private void gate() {
+      if (armed.compareAndSet(true, false)) {
+        entered.countDown();
+        try {
+          release.await(60, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+        }
+      }
+    }
+
+    @Override
+    public int length() {
+      gate();
+      return delegate.length();
+    }
+
+    @Override
+    public char charAt(int index) {
+      gate();
+      return delegate.charAt(index);
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+      gate();
+      return delegate.subSequence(start, end);
+    }
+
+    @Override
+    public String toString() {
+      gate();
+      return delegate;
+    }
   }
 
   public static class MockSecurityHandler extends SecurityConfHandler {
