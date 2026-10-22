@@ -14,3 +14,12 @@ Review (2026-10-22, vm4):
 - Repairs: none.
 
 Regate: `gates/SOLR-13184-review-pass-1.md`, GATE GREEN at 6bb01a08cd on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head 6bb01a08cd. No new findings against the head. The pass 1 minor findings stand.
+
+- Repairs: none.
+
+Regate: `gates/SOLR-13184-review-pass-2.md`, GATE GREEN at 6bb01a08cd on vm4.
+
