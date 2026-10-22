@@ -544,6 +544,103 @@ public class TestCoreContainer extends SolrTestCaseJ4 {
           + "<str name=\"allowPaths\">${solr.security.allow.paths:}</str>\n"
           + "</solr>";
 
+  @Test
+  public void testModuleSpiCanStillLoadItsClassesWhenSharedLibIsAdded() throws Exception {
+    Path tmpRoot = createTempDir("testModuleSpiWithSharedLib");
+    Path sharedLib = Files.createDirectories(tmpRoot.resolve("lib"));
+    Path moduleLib = Files.createDirectories(ModuleUtils.getModuleLibPath(tmpRoot, "mod1"));
+    String spiName = "modulepf17297" + Long.toHexString(random().nextLong());
+
+    writeFixtureJar(
+        moduleLib.resolve("module-spi.jar"),
+        Map.of(
+            "ModulePostingsFormat.java", modulePostingsFormatSource(spiName),
+            "ModuleHelper.java", moduleHelperSource()),
+        "META-INF/services/org.apache.lucene.codecs.PostingsFormat",
+        "org.apache.solr.core.test17297.module.ModulePostingsFormat");
+    writeFixtureJar(
+        sharedLib.resolve("shared-dummy.jar"),
+        Map.of("SharedDummy.java", sharedDummySource()),
+        null,
+        null);
+
+    String previousInstallDir = System.getProperty(SOLR_INSTALL_DIR);
+    System.setProperty(SOLR_INSTALL_DIR, tmpRoot.toAbsolutePath().toString());
+    try {
+      final CoreContainer cc = init(tmpRoot, "<solr><str name=\"modules\">mod1</str></solr>");
+      try {
+        PostingsFormat format = PostingsFormat.forName(spiName);
+        assertThrows(UnsupportedOperationException.class, () -> format.fieldsProducer(null));
+      } finally {
+        cc.shutdown();
+      }
+    } finally {
+      if (previousInstallDir == null) {
+        System.clearProperty(SOLR_INSTALL_DIR);
+      } else {
+        System.setProperty(SOLR_INSTALL_DIR, previousInstallDir);
+      }
+    }
+  }
+
+  private static String moduleHelperSource() {
+    return """
+        package org.apache.solr.core.test17297.module;
+
+        public final class ModuleHelper {
+          private ModuleHelper() {}
+        }
+        """;
+  }
+
+  private static String sharedDummySource() {
+    return """
+        package org.apache.solr.core.test17297.shared;
+
+        public final class SharedDummy {
+          private SharedDummy() {}
+        }
+        """;
+  }
+
+  private static String modulePostingsFormatSource(String spiName) {
+    return """
+        package org.apache.solr.core.test17297.module;
+
+        import java.io.IOException;
+        import org.apache.lucene.codecs.FieldsConsumer;
+        import org.apache.lucene.codecs.FieldsProducer;
+        import org.apache.lucene.codecs.PostingsFormat;
+        import org.apache.lucene.index.SegmentReadState;
+        import org.apache.lucene.index.SegmentWriteState;
+
+        public final class ModulePostingsFormat extends PostingsFormat {
+          public ModulePostingsFormat() {
+            super("__SPI_NAME__");
+          }
+
+          @Override
+          public FieldsConsumer fieldsConsumer(SegmentWriteState state) throws IOException {
+            throw new UnsupportedOperationException("test-only SPI");
+          }
+
+          @Override
+          public FieldsProducer fieldsProducer(SegmentReadState state) throws IOException {
+            try {
+              Class.forName(
+                  "org.apache.solr.core.test17297.module.ModuleHelper",
+                  true,
+                  getClass().getClassLoader());
+            } catch (ClassNotFoundException e) {
+              throw new IllegalStateException(e);
+            }
+            throw new UnsupportedOperationException("test-only SPI");
+          }
+        }
+        """
+        .replace("__SPI_NAME__", spiName);
+  }
+
   private static String sharedLibSpiSource(String spiName) {
     return """
         package org.apache.solr.core.test17297.shared;

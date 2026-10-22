@@ -122,6 +122,7 @@ public class SolrResourceLoader
 
   private String name = "";
   protected URLClassLoader classLoader;
+  private final List<URLClassLoader> replacedClassLoaders = new ArrayList<>();
   private final Path instanceDir;
   private String coreName;
   private UUID coreId;
@@ -224,6 +225,7 @@ public class SolrResourceLoader
       return; // short-circuit
     }
 
+    replacedClassLoaders.add(classLoader);
     this.classLoader = newLoader;
     this.needToReloadLuceneSPI = true;
 
@@ -276,7 +278,6 @@ public class SolrResourceLoader
     }
 
     ClassLoader oldParent = oldLoader.getParent();
-    IOUtils.closeWhileHandlingException(oldLoader);
     return URLClassLoader.newInstance(allURLs.toArray(new URL[0]), oldParent);
   }
 
@@ -908,7 +909,9 @@ public class SolrResourceLoader
 
   @Override
   public void close() throws IOException {
-    IOUtils.close(classLoader);
+    List<URLClassLoader> loaders = new ArrayList<>(replacedClassLoaders);
+    loaders.add(classLoader);
+    IOUtils.close(loaders);
   }
 
   public List<SolrInfoBean> getInfoMBeans() {
