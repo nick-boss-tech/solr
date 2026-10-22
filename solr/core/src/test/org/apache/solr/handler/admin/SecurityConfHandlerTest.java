@@ -329,13 +329,16 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
               }
             });
     writer.start();
-    while (writing.get()) {
-      byte[] got = Files.readAllBytes(securityJson);
-      assertTrue(
-          "reader saw a partial security.json of " + got.length + " bytes",
-          Arrays.equals(got, smallBytes) || Arrays.equals(got, largeBytes));
+    try {
+      while (writing.get()) {
+        byte[] got = Files.readAllBytes(securityJson);
+        assertTrue(
+            "reader saw a partial security.json of " + got.length + " bytes",
+            Arrays.equals(got, smallBytes) || Arrays.equals(got, largeBytes));
+      }
+    } finally {
+      writer.join(TimeUnit.SECONDS.toMillis(60));
     }
-    writer.join(TimeUnit.SECONDS.toMillis(60));
     assertNull("writer failed: " + writerErr.get(), writerErr.get());
   }
 
