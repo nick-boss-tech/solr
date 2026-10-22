@@ -56,6 +56,27 @@ public class TestRealTimeGet extends TestRTGBase {
   }
 
   @Test
+  public void testCopyFieldTargetReturnedWithWildcardFl() throws Exception {
+    clearIndex();
+    assertU(commit());
+
+    assertU(adoc("id", "copyfield-wild", "author_s", "direct value"));
+
+    assertJQ(req("qt", "/get", "id", "copyfield-wild", "fl", "*"), "/doc/author_s=='direct value'");
+  }
+
+  @Test
+  public void testMultiValuedStoredFieldReturnedFromRealTimeGet() throws Exception {
+    clearIndex();
+    assertU(commit());
+
+    assertU(adoc("id", "multivalued-doc", "tags_ss", "first", "tags_ss", "second"));
+
+    assertJQ(
+        req("qt", "/get", "id", "multivalued-doc", "fl", "*"), "/doc/tags_ss==['first','second']");
+  }
+
+  @Test
   public void testCopyFieldTargetSetDirectlyAfterCommit() throws Exception {
     clearIndex();
     assertU(commit());
