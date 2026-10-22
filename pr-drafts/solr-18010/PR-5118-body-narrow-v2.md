@@ -21,12 +21,15 @@ Each save still stores an empty-string key `{"v":0}` in every section ([Security
 
 ## Choice for maintainers
 
-**Should standalone security.json keep the empty-string version entry?**
+**Should standalone security.json and its GET output keep the empty-string `""` entry?**
 
-- Keep it: the saved file and GET output stay as they are, including the entry the ticket's example shows.
-- Remove it (this PR): the saved file and GET output no longer include it.
+- The entry holds the ZooKeeper version that each edit expects. Standalone files have no ZooKeeper version, so the stored value is always 0 there ([SecurityConfHandler.java L147-L148](https://github.com/apache/solr/blob/7892348272/solr/core/src/java/org/apache/solr/handler/admin/SecurityConfHandler.java#L147-L148), added in [db2ccb1d41](https://github.com/apache/solr/commit/db2ccb1d41), SOLR-7757).
+- Only the reload check reads it, and only when the value is positive ([CoreContainer.java L611-L617](https://github.com/apache/solr/blob/7892348272/solr/core/src/java/org/apache/solr/core/CoreContainer.java#L611-L617)). A standalone value of 0 never triggers that check, so removing it changes no reload. No Admin UI, SolrJ or test code reads it.
+- GET on each section returns the stored section, so the entry appears after any edit, on standalone and ZooKeeper alike. No published response in the reference guide shows it.
+- Keep it: saved files and GET output stay the same on both storage forms.
+- Remove it (this PR): saved standalone files and GET output no longer include it. ZooKeeper keeps it, so the two GET outputs differ after an edit.
 
-Keep it if the saved file's shape is part of the API. Remove it if the entry is internal. Nothing in the repository reads it for standalone files, and ZooKeeper keeps its own version, so removing it changes no reload or write.
+We recommend keeping it. Removing it does not change behavior that Solr reads, and it changes a response that only an external client could depend on. We cannot see external clients, so that judgment is yours.
 
 ## Proof
 
