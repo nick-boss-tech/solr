@@ -103,7 +103,7 @@ the work already done so the answer costs the maintainer nothing.
    Nick Shanin directed the work and takes responsibility for this
    contribution.*" The header does the disclosure; the footer's job
    is the responsibility statement, kept in one line.
-   Comments longer than one sentence carry the header; one-sentence
+   Comments longer than one sentence carry the header (see `comment-formula.md`); one-sentence
    comments stay plain. The footer goes only on PR descriptions and
    new Jira ticket descriptions, never on comments.
 
@@ -177,7 +177,7 @@ module check is sufficient, with tidy and licenses kept current.
 ## Template (approved draft, 2026-10-04)
 
 ```markdown
-🤖 *AI text below* 🤖 *(posted on behalf of Nick Shanin)*
+🤖 *AI text below* 🤖 *(reviewed by Nick Shanin)*
 
 https://issues.apache.org/jira/browse/SOLR-<ticket>
 
