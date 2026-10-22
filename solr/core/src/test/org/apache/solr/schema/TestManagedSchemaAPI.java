@@ -299,10 +299,10 @@ public class TestManagedSchemaAPI extends SolrCloudTestCase {
   }
 
   @Test
-  public void testFacetOnNewFieldBeforeCommitOnReceivingReplica() throws Exception {
+  public void testFacetOnNewFieldBeforeCommitOnEveryReplica() throws Exception {
     CloudSolrClient client = cluster.getSolrClient();
     for (int run = 0; run < 5; run++) {
-      String collection = "facet_receiving_" + run;
+      String collection = "facet_every_" + run;
       String field = "live_field" + run;
       CollectionAdminRequest.createCollection(collection, "conf1", 1, 2).process(client);
       cluster.waitForActiveCollection(collection, 1, 2);
@@ -313,8 +313,13 @@ public class TestManagedSchemaAPI extends SolrCloudTestCase {
         attrs.put("name", field);
         attrs.put("type", "string");
         new SchemaRequest.AddField(attrs).process(http, receiving.getCoreName());
-        client.add(collection, sdoc("id", "live-" + run, field, "v"));
-        http.query(new SolrQuery("*:*").setFacet(true).addFacetField(field));
+      }
+      client.add(collection, sdoc("id", "live-" + run, field, "v"));
+      for (Replica replica : getCollectionState(collection).replicaStream().toList()) {
+        try (HttpJettySolrClient http =
+            cluster.getReplicaJetty(replica).newSolrClient(replica.getCoreName())) {
+          http.query(new SolrQuery("*:*").setFacet(true).addFacetField(field));
+        }
       }
     }
   }

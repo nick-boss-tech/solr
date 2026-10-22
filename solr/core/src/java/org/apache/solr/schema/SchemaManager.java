@@ -206,7 +206,8 @@ public class SchemaManager {
       // replicas. This reduces the likelihood of a (time-limited) distributed deadlock during
       // concurrent schema updates.
       waitForOtherReplicasToUpdate(timeOut, latestVersion);
-    } else if (appliedWithoutReload) {
+    }
+    if (appliedWithoutReload) {
       // Outside the schema update lock: autowarming can take a long time.
       openSearcherWithLatestSchema(core);
     }

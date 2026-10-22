@@ -41,6 +41,7 @@ import org.slf4j.LoggerFactory;
 public class ZkIndexSchemaReader implements OnReconnect {
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final ManagedIndexSchemaFactory managedIndexSchemaFactory;
+  private final SolrCore solrCore;
   private final SolrZkClient zkClient;
   private final String managedSchemaPath;
   private final String
@@ -51,6 +52,7 @@ public class ZkIndexSchemaReader implements OnReconnect {
   public ZkIndexSchemaReader(
       ManagedIndexSchemaFactory managedIndexSchemaFactory, SolrCore solrCore) {
     this.managedIndexSchemaFactory = managedIndexSchemaFactory;
+    this.solrCore = solrCore;
     zkLoader = (ZkSolrResourceLoader) managedIndexSchemaFactory.getResourceLoader();
     this.zkClient = zkLoader.getZkController().getZkClient();
     this.managedSchemaPath = managedIndexSchemaFactory.lookupZKManagedSchemaPath();
@@ -209,6 +211,7 @@ public class ZkIndexSchemaReader implements OnReconnect {
                   stat.getVersion(),
                   oldSchema.getSchemaUpdateLock());
           managedIndexSchemaFactory.setSchema(newSchema);
+          solrCore.getSearcher(true, false, null);
           long stop = System.nanoTime();
           log.info(
               "Finished refreshing schema in {} ms",
