@@ -20,7 +20,8 @@ Goal: a comment on a PR or a JIRA ticket reads the same way every time. The answ
 
 - No "we", "our" or "us". Write "the branch", "this change" or "the test".
 - No internal vocabulary: gates, claims, assignments, receipts, job IDs, pool, hosts, agent names.
-- Plain words. Short sentences. One idea per sentence.
+- Simple language (the rule in `pr-formula.md`, Nick, 2026-10-08). Short sentences, one idea per sentence, plain words in place of compressed jargon. Say "checked", not "dispositioned"; say "a planted error", not "a negative control".
+- Simpler wording never changes a claim. Numbers, counts, hashes and citations stay exact and complete.
 - No em dashes.
 
 ## Links
