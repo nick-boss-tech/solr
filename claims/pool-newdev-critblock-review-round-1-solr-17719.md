@@ -8,3 +8,7 @@
 - Started: 2026-10-22T17:06:11Z (UTC).
 
 Heartbeat: 2026-10-22T17:06:11Z
+
+Result: 2026-10-22T17:30:00Z: pass 1 GREEN at 732d3fbcc4 (vm4). Findings: no fail-before evidence for the timing fix (major); the global hook is never cleared (minor). Pass 2 next on the same head.
+
+Heartbeat: 2026-10-22T17:30:00Z
