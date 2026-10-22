@@ -12,3 +12,11 @@ Head reviewed: 84523828bba8eb780472d037af3ff60a919d34eb. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-13185-review-pass-1.md`, GATE GREEN at 84523828bb on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head 84523828bb. - Open pass 1 finding, major, confirmed in code. `QueryComponent` normalizes a null parsed query to `MatchNoDocsQuery` (`solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java:191-195`), so the intended result of a query with no string is zero documents. The test asserts only that a `//result` element exists, so it would still pass if the query matched everything. A `numFound='0'` assertion would pin the result. Recorded, not repaired (a changed assertion is a test change outside the repair scope).
+- Open pass 1 finding, minor, unchanged: no changelog file. Not repaired.
+- Repairs: none.
+
+Regate: `gates/SOLR-13185-review-pass-2.md`, GATE GREEN at 84523828bb on vm4.
