@@ -21,20 +21,18 @@ Other projects use the same pattern. ZooKeeper's [`AtomicFileOutputStream`](http
 
 ## A choice to check
 
-**Renaming over a hard-linked `security.json` breaks the link. Write such files in place, or always rename?** We recommend writing them in place, as implemented.
+**Replacing `security.json` by rename drops its ACLs and SELinux labels. Is that acceptable?**
 
-Context: a rename always loses ACLs and SELinux labels, which Java cannot copy on Linux. A hard link is the one attribute Java can see (`unix:nlink`). Main writes in place, so a shared file keeps its sharing today. Vim on Unix copies over the file by default, so links and attributes survive.
+The rename is what makes a crash safe: a reader sees the old file or the new one, never a partial one. But the new file is a new inode, so anything stored on the old one is lost. That includes POSIX ACLs and SELinux labels. Java on Linux cannot read or copy either, so the code cannot keep them.
 
-- **A. Always rename.** Every edit is atomic. A second name for the file keeps the old content, with no error.
-- **B. Rename, unless the file has more than one link.** Those files are written in place, so the links keep sharing content. They lose atomic replace, as symlinks already do.
+- **Rename (this PR).** A crash cannot leave a partial file. The cost: an ACL or custom SELinux label has to be set again after an edit. The new file gets the directory's defaults.
+- **Write in place (main today).** Keeps everything. A crash during the write can truncate the file, which is the bug this PR fixes.
 
-Decision ladder:
+We recommend rename. Setups that depend on an ACL or a custom label on `security.json` are rare in our view. A lost label usually shows up as a permission error on the next start, so it is found quickly. The reference guide says the labels are not kept.
 
-1. Does any deployment keep `security.json` under a second hard link, such as two Solr homes sharing one file? If yes, A leaves that copy stale. Choose B.
-2. If no, A is enough. B adds one check and one branch that rarely runs.
-3. So the question is whether a silently stale copy is worse than a non-atomic write for linked files. We think it is, so B.
+A smaller version of the same trade is hard links. A hard-linked file is written in place, so its links keep sharing content.
 
-Was writing hard-linked files in place the right call?
+Is losing ACLs and SELinux labels on `security.json` after an edit acceptable?
 
 ## Proof
 
