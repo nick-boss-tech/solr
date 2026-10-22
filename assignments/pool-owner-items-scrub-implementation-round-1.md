@@ -60,6 +60,26 @@ Verified 2026-10-22 against the fork heads and the coordination tip `717879a360`
 
 Row 12 is part of row 1 and is listed separately only so its changelog gap is visible.
 
+## Status at 2026-10-22 16:45 UTC
+
+| # | Item | Head now | Change | Gate | State |
+| --- | --- | --- | --- | --- | --- |
+| 1 | SOLR-18552 9.x | `f7cf67fc124` | `solr.cmd` default after the init line; changelog | Changelog parses (vm5). Launcher leg open for vm1 (`gates/SOLR-18552-9x-owner-items.md`) | NEARLY |
+| 2 | SOLR-11650 | `4de476d091d` | Withheld placeholder in `IndexFetcher` messages (corrected rung 4) | GREEN; mutation fails the new test | DONE |
+| 3 | SOLR-14200 | `c373a718ad6` | `IllegalArgumentException` in both streams | GREEN (39 tests); mutation fails both new tests | DONE |
+| 4 | SOLR-8767 | `46e758551c3` | Two tests (`fl=*`, multivalued pin) | GREEN (9 tests); mutation fails the `fl=*` test | DONE |
+| 5 | SOLR-12718 | `a0c4f926e4` (no change) | None; test already on the decided branch | GREEN (2 tests) | DONE. Table branch `solr-12718` retired as duplicate, not deleted |
+| 6 | SOLR-18458 | `326184849e3` | `debug=results` removed from the fallback; flipped test and `debug=all` test | GREEN (14 tests) | DONE |
+| 7 | SOLR-16914 | `cd878023d3` (no change) | None | No probe run | NOT DONE: blocked. The probe needs the reporter's synonym data; the records do not carry it. Next step: take the example from the SOLR-16914 JIRA text, then probe the chain in `solr/core` (kuromoji is a runtime dependency there) |
+| 8 | SOLR-18010 narrow | `e81e5e28e9` (no change) | None | GREEN (4 tests); code checked | DONE |
+| 9 | SOLR-17297 follow-up | n/a | Assignment posted: `assignments/pool-solr-17297-spi-orphaning-followup-round-1.md` | Probe not yet re-run (step 1 of that assignment) | ASSIGNED |
+| 10 | SOLR-18297 | `73f269e99a0` | `pr-draft` removed; `DirectInvocationOnMock` fixed; 14 lockfiles to Jetty 12.1.14 | GREEN at both heads (clean compile with `-Werror`; 12 tests) | DONE |
+| 11 | SOLR-12743 | `1bb4b227df` (no change) | None; branch not deleted | n/a | DONE (no action) |
+
+Mutation runs are rung 2 proofs that the new tests discriminate. Gate records: `gates/<TICKET>-owner-items.md`. Claims: `claims/pool-owner-items-<ticket>.md`.
+
+Process note: items 3, 4, 6, 8 and 5 were started before their claims were posted. Their claims say so.
+
 ## Done when
 
 Each item has its claim marked DONE, a receipt naming the rung, and a gate file at the implementation head. The vm5 status file and `OPEN-WORK.md` regenerate on the next `pool/bin/open-work.py` run.

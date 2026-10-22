@@ -1,6 +1,6 @@
 # Gate job: SOLR-18297 owner-items round 1 (item 8, tree cleanup, DirectInvocationOnMock, lockfiles)
 
-Status: PENDING re-gate at `73f269e99a0`
+Status: DONE at `73f269e99a0`
 
 - Branch `solr-18297-jetty-12-1-14`. Commits: `c44fc60601e` (PR draft removed, `DirectInvocationOnMock` fixed), `73f269e99a0` (module lockfiles regenerated for Jetty 12.1.14).
 - Host: vm5. Logs: `/workspace/gates/logs/vm5/solr-18297-owner-items/` and `solr-18297-owner-items-2/`.
@@ -18,4 +18,4 @@ Status: PENDING re-gate at `73f269e99a0`
 
 ## Re-gate
 
-The gate for `73f269e99a0` is queued (tidy, clean compile, `CoreReplicationAPITest`). The result goes in this file when it runs.
+Gate at `73f269e99a0` (tidy, clean compile with `-Werror`, `CoreReplicationAPITest`): all rc=0. XML: 12 tests, 1 skipped, 0 failures. Logs: `solr-18297-owner-items-2/`.

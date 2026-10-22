@@ -4,7 +4,7 @@
 - Assignment: `assignments/pool-owner-items-scrub-implementation-round-1.md`, item 2.
 - Branch: `solr-11650-submit`, head `e4f5e941cd`.
 - Capability tags: implementation, gate.
-- Status: CLAIMED.
+- Status: DONE. Gate record: `gates/SOLR-11650-owner-items.md`, head `4de476d091d`.
 - Started: 2026-10-22T15:12:00Z (UTC).
 
 Correction to the decision (rung 4, recorded before any code change). The decided rule "the userinfo ends at the last `@` before the first `/`, `?` or `#`" cannot match a password with a raw `/` or `?`: no `@` comes before that character, so the rule finds no userinfo. Two facts settle the choice:
@@ -14,3 +14,5 @@ Correction to the decision (rung 4, recorded before any code change). The decide
 Chosen behavior: `URLUtil.redactUserInfo` keeps its current rule and its pins. The `IndexFetcher` messages (malformed leaderUrl, forbidden, and the leaderUrl update log) show the URL redacted when `redactUserInfo` changes it, and show a withheld placeholder when the URL contains `@` and redaction leaves it unchanged. Rung 4; reason: the messages are where the credentials leak, and withholding keeps the pinned URLUtil behavior.
 
 Heartbeat: 2026-10-22T15:12:00Z
+
+Result: 2026-10-22T16:40:00Z: DONE on the gate records above.
