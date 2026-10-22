@@ -13,3 +13,11 @@ Head reviewed: f8c4ee22bdd218ddfbf287fe0e389c17a5198f8f. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-18200-review-pass-1.md`, GATE GREEN at f8c4ee22bd on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head f8c4ee22bd. - Pass 1 major finding, unchanged, and confirmed in the diff: the tie-break changes stored signatures for any document with equal-frequency tokens. The owner must decide whether the change needs a reindex note. Not repaired.
+- Pass 1 minor findings, unchanged: the test does not pin a signature value; no changelog file.
+- Repairs: none.
+
+Regate: `gates/SOLR-18200-review-pass-2.md`, GATE GREEN at f8c4ee22bd on vm4.
