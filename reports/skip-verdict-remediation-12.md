@@ -12,3 +12,4 @@
 - SOLR-4635 | claims/skip-SOLR-4635-vm2.md | keep-open (changed from close-fixed: cause chained at ShardHandlerFactory.java:52-68; fixing commit not identified; blame is formatting-only) | solr-4635-draft-open 2b6c439061 | JIRA read 2026-10-20T15:38:59Z Open
 - SOLR-4610 | claims/skip-SOLR-4610-vm2.md | keep-open (kept; schema-aware helper exists; typed-term change is design) | solr-4610-draft-open 7f03d98cad | JIRA read 2026-10-20T15:45:33Z Open
 - SOLR-4593 | claims/skip-SOLR-4593-vm2.md | keep-open (kept; test present; refusal present; seeded run missing) | solr-4593-draft-open 656cb6d37c | JIRA read 2026-10-20T15:51:55Z Open
+- SOLR-4558 | claims/skip-SOLR-4558-vm2.md | keep-open (kept; re-read at pinned head; no enableLocalParams on main; repro run missing) | solr-4558-draft-open c3e3af7f05 | JIRA read 2026-10-22T06:06Z Open
