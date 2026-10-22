@@ -138,7 +138,7 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
     }
   }
 
-  boolean atomicReplaceSupported() {
+  private boolean atomicReplaceSupported() {
     return supportsAtomicReplace(
         securityJsonPath.getFileSystem().supportedFileAttributeViews(),
         Files.isSymbolicLink(securityJsonPath));
@@ -159,7 +159,6 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
         copyPermissions(tmpPath);
         checkOwner(tmpPath);
       }
-      beforeMove(tmpPath);
       moveTemporaryFile(tmpPath);
     } finally {
       try {
@@ -181,25 +180,23 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
     }
   }
 
-  void syncFile(Path path) throws IOException {
+  private void syncFile(Path path) throws IOException {
     try (FileChannel channel = FileChannel.open(path, StandardOpenOption.WRITE)) {
       channel.force(true);
     }
   }
 
-  void copyPermissions(Path tmpPath) throws IOException {
+  private void copyPermissions(Path tmpPath) throws IOException {
     Files.setPosixFilePermissions(tmpPath, Files.getPosixFilePermissions(securityJsonPath));
   }
 
-  void checkOwner(Path tmpPath) throws IOException {
+  private void checkOwner(Path tmpPath) throws IOException {
     if (!Files.getOwner(tmpPath).equals(Files.getOwner(securityJsonPath))) {
       throw new IOException("security.json is owned by " + Files.getOwner(securityJsonPath));
     }
   }
 
-  void beforeMove(Path tmpPath) throws IOException {}
-
-  void moveTemporaryFile(Path tmpPath) throws IOException {
+  private void moveTemporaryFile(Path tmpPath) throws IOException {
     try {
       Files.move(
           tmpPath,
@@ -211,7 +208,7 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
     }
   }
 
-  void syncDirectory(Path dir) throws IOException {
+  private void syncDirectory(Path dir) throws IOException {
     try (FileChannel channel = FileChannel.open(dir, StandardOpenOption.READ)) {
       channel.force(true);
     }

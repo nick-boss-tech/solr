@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -313,6 +314,18 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
     assertEquals(
         Files.getPosixFilePermissions(control), Files.getPosixFilePermissions(securityJson));
     assertNoTemporaryFiles(solrHome);
+  }
+
+  /** Atomic replacement needs a POSIX view and a file that is not a symbolic link. */
+  public void testAtomicReplaceNeedsPosixViewAndNoSymbolicLink() {
+    assertTrue(
+        SecurityConfHandlerLocal.supportsAtomicReplace(
+            Set.of("basic", "posix", "unix", "owner"), false));
+    assertFalse(
+        SecurityConfHandlerLocal.supportsAtomicReplace(
+            Set.of("basic", "owner", "dos", "acl", "user"), false));
+    assertFalse(
+        SecurityConfHandlerLocal.supportsAtomicReplace(Set.of("basic", "posix", "owner"), true));
   }
 
   private static String seedSecurityJson() {
