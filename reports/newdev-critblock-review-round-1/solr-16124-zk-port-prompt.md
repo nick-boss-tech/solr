@@ -20,3 +20,12 @@ Review (2026-10-22, vm4), same head 7b81166ae9. - Open pass 1 finding, major (te
 - Repairs: none.
 
 Regate: `gates/SOLR-16124-review-pass-2.md`, GATE GREEN at 7b81166ae9 on vm4.
+
+## Pass 3
+
+Review (2026-10-22, vm4), same head 7b81166ae9. - No new findings against the head. The pass 1 and pass 2 findings stand: the test checks the `zoo.cfg` file, not the listening ZooKeeper port (major); the proof leg does not isolate the `zoo.cfg` check (major); the zkPort race (minor). `SolrZkServer` reads `zoo.cfg` from the node's Solr home, so the written port is honored.
+- Repairs: none.
+
+Regate: `gates/SOLR-16124-review-pass-3.md`, GATE GREEN at 7b81166ae9 on vm4.
+
+Final head: 7b81166ae905bc12f3cd7d18a7265ae446d62e38. Unit 31 DONE with the three pass sections.
