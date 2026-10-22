@@ -1,6 +1,6 @@
 # Assignment: build the SOLR-4841 follow-up test (language detection through a custom identifier), round 1
 
-Status: NEEDS-OWNER (review rounds 2 and 3 SATISFIED by vm5 2026-10-18T19:45:04ZZ, reports/SOLR-4841-followup-round-1.md; Nick files the ticket and approves the PR). Claim: claims/pool-vm5-solr-4841-review-rounds-2-3.md, 2026-10-18T19:12:15Z). Test built and gated by vm4 at bf1b01d0dc; the review rounds are the open part.
+Status: SATISFIED (review rounds 2 and 3 done by vm5 2026-10-18T19:45:04ZZ, reports/SOLR-4841-followup-round-1.md; the mutation run in that report shows `expected:<[sv]> but was:<[]>`). Remaining steps are public actions for Nick: file the ticket and approve the PR. Claim: claims/pool-vm5-solr-4841-review-rounds-2-3.md, 2026-10-18T19:12:15Z). Test built and gated by vm4 at bf1b01d0dc; the review rounds are the open part.
 
 Capability tags: [implementation, review]. Intended host: Windows (review agent). Claim under claims/ before starting, per WORKFLOW.md. The gate itself runs on a Linux host through the gate job this assignment directs you to file; no builds run on Windows.
 
