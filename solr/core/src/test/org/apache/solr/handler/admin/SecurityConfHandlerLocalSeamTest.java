@@ -36,6 +36,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.SolrRequest;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.ContentStreamBase;
 import org.apache.solr.core.CoreContainer;
@@ -102,33 +103,34 @@ public class SecurityConfHandlerLocalSeamTest extends SolrTestCaseJ4 {
     assertNoTemporaryFiles(solrHome);
   }
 
-  /**
-   * A failed fsync of the temporary file falls back to the in-place write and removes the temporary
-   * file.
-   */
-  public void testFailedSyncFallsBackToInPlaceWrite() throws Exception {
+  /** A failed fsync of the temporary file fails the edit and leaves the existing security.json. */
+  public void testFailedSyncKeepsExistingSecurityJson() throws Exception {
     assumeWorkingMockito();
     assumeAtomicReplaceSupported();
     Path solrHome = createTempDir("securityConfHandlerLocalSyncFail");
     Path securityJson = solrHome.resolve("security.json");
-    Files.write(securityJson, seedSecurityJson().getBytes(StandardCharsets.UTF_8));
+    byte[] seed = seedSecurityJson().getBytes(StandardCharsets.UTF_8);
+    Files.write(securityJson, seed);
     HookedSecurityConfHandler handler = new HookedSecurityConfHandler(mockCoreContainer(solrHome));
     handler.failSync.set(true);
-    postAuthorizationEdit(handler, "{'set-user-role': {'alice': 'admin'}}");
+    assertThrows(
+        SolrException.class,
+        () -> postAuthorizationEdit(handler, "{'set-user-role': {'alice': 'admin'}}"));
     assertFalse("the file was moved after a failed sync", handler.events.contains("move-attempt"));
-    assertTrue(Files.readString(securityJson, StandardCharsets.UTF_8).contains("alice"));
+    assertArrayEquals(seed, Files.readAllBytes(securityJson));
     assertNoTemporaryFiles(solrHome);
   }
 
-  /** A permission copy that fails falls back to the in-place write, which keeps the file mode. */
-  public void testFailedPermissionCopyFallsBackAndKeepsMode() throws Exception {
+  /** A failed permission copy fails the edit and leaves the existing security.json and its mode. */
+  public void testFailedPermissionCopyKeepsExistingSecurityJson() throws Exception {
     assumeWorkingMockito();
     Path solrHome = createTempDir("securityConfHandlerLocalPermCopy");
     assumeTrue(
         "POSIX file permissions are not supported on this file system",
         solrHome.getFileSystem().supportedFileAttributeViews().contains("posix"));
     Path securityJson = solrHome.resolve("security.json");
-    Files.write(securityJson, seedSecurityJson().getBytes(StandardCharsets.UTF_8));
+    byte[] seed = seedSecurityJson().getBytes(StandardCharsets.UTF_8);
+    Files.write(securityJson, seed);
     EnumSet<PosixFilePermission> expected =
         EnumSet.of(
             PosixFilePermission.OWNER_READ,
@@ -137,8 +139,10 @@ public class SecurityConfHandlerLocalSeamTest extends SolrTestCaseJ4 {
     Files.setPosixFilePermissions(securityJson, expected);
     HookedSecurityConfHandler handler = new HookedSecurityConfHandler(mockCoreContainer(solrHome));
     handler.failPermissionCopy.set(true);
-    postAuthorizationEdit(handler, "{'set-user-role': {'alice': 'admin'}}");
-    assertTrue(Files.readString(securityJson, StandardCharsets.UTF_8).contains("alice"));
+    assertThrows(
+        SolrException.class,
+        () -> postAuthorizationEdit(handler, "{'set-user-role': {'alice': 'admin'}}"));
+    assertArrayEquals(seed, Files.readAllBytes(securityJson));
     assertEquals(expected, Files.getPosixFilePermissions(securityJson));
     assertNoTemporaryFiles(solrHome);
   }
@@ -241,11 +245,11 @@ public class SecurityConfHandlerLocalSeamTest extends SolrTestCaseJ4 {
     }
 
     @Override
-    void checkOwner(Path tmpPath) throws IOException {
+    boolean hasSameOwner(Path tmpPath) throws IOException {
       if (failOwnerCheck.get()) {
-        throw new IOException("simulated owner mismatch");
+        return false;
       }
-      super.checkOwner(tmpPath);
+      return super.hasSameOwner(tmpPath);
     }
 
     @Override

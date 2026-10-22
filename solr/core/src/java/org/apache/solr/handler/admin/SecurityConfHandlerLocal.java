@@ -115,21 +115,49 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
   }
 
   private void replaceSecurityJson(byte[] json) throws IOException {
-    if (atomicReplaceSupported()) {
+    if (!atomicReplaceSupported()) {
+      writeInPlace(json);
+      return;
+    }
+    Path tmpPath =
+        securityJsonPath.resolveSibling(
+            securityJsonPath.getFileName() + "." + UUID.randomUUID() + ".tmp");
+    try {
+      Files.createFile(tmpPath);
+    } catch (IOException e) {
+      log.warn(
+          "Could not create a temporary file next to {}, writing it in place", securityJsonPath, e);
+      writeInPlace(json);
+      return;
+    }
+    try {
+      Files.write(tmpPath, json);
+      syncFile(tmpPath);
+      if (Files.exists(securityJsonPath)) {
+        copyPermissions(tmpPath);
+        if (!hasSameOwner(tmpPath)) {
+          log.warn("{} is owned by another user, writing it in place", securityJsonPath);
+          writeInPlace(json);
+          return;
+        }
+      }
+      beforeMove(tmpPath);
       try {
-        replaceThroughTemporaryFile(json);
+        moveTemporaryFile(tmpPath);
       } catch (IOException e) {
         log.warn(
-            "Could not replace {} through a temporary file, writing it in place",
-            securityJsonPath,
-            e);
+            "Could not move a temporary file over {}, writing it in place", securityJsonPath, e);
         writeInPlace(json);
         return;
       }
       syncParentDirectory();
-      return;
+    } finally {
+      try {
+        Files.deleteIfExists(tmpPath);
+      } catch (IOException e) {
+        log.warn("Could not remove temporary file {}", tmpPath, e);
+      }
     }
-    writeInPlace(json);
   }
 
   private void writeInPlace(byte[] json) throws IOException {
@@ -146,28 +174,6 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
 
   static boolean supportsAtomicReplace(Set<String> fileAttributeViews, boolean symbolicLink) {
     return !symbolicLink && fileAttributeViews.contains("posix");
-  }
-
-  private void replaceThroughTemporaryFile(byte[] json) throws IOException {
-    Path tmpPath =
-        securityJsonPath.resolveSibling(
-            securityJsonPath.getFileName() + "." + UUID.randomUUID() + ".tmp");
-    try {
-      Files.write(tmpPath, json, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
-      syncFile(tmpPath);
-      if (Files.exists(securityJsonPath)) {
-        copyPermissions(tmpPath);
-        checkOwner(tmpPath);
-      }
-      beforeMove(tmpPath);
-      moveTemporaryFile(tmpPath);
-    } finally {
-      try {
-        Files.deleteIfExists(tmpPath);
-      } catch (IOException e) {
-        log.warn("Could not remove temporary file {}", tmpPath, e);
-      }
-    }
   }
 
   private void syncParentDirectory() {
@@ -191,10 +197,8 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
     Files.setPosixFilePermissions(tmpPath, Files.getPosixFilePermissions(securityJsonPath));
   }
 
-  void checkOwner(Path tmpPath) throws IOException {
-    if (!Files.getOwner(tmpPath).equals(Files.getOwner(securityJsonPath))) {
-      throw new IOException("security.json is owned by " + Files.getOwner(securityJsonPath));
-    }
+  boolean hasSameOwner(Path tmpPath) throws IOException {
+    return Files.getOwner(tmpPath).equals(Files.getOwner(securityJsonPath));
   }
 
   void beforeMove(Path tmpPath) throws IOException {}
