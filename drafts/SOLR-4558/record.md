@@ -1,37 +1,42 @@
 # Skip record: SOLR-4558
 
-- Ticket: SOLR-4558, raw query parser cannot parse value "{!". JIRA was not re-read for this record.
-- Verdict: keep-open.
+- Ticket: SOLR-4558, "raw query parser cannot parse value "{!"". JIRA status read 2026-10-22T06:06Z (UTC): Open, resolution None, created 2013-03-11, updated 2013-03-16, fix versions none.
+- Verdict: keep-open (kept; re-read at the pinned head, replaces the audit-based record of 2026-10-19).
 - Draft branch: solr-4558-draft-open.
-- Pinned head: fork origin/main 498a09aea97aac86c2cc7ac114113b946d249942. The audit below was checked against upstream main c8ab71430f, not the fork pin. Not re-checked at the pinned head for this record.
-- Source: the queue entry's audit field (round audit-3, 2026-10-05, audit verdict confirmed-skip).
+- Pinned head: 498a09aea97aac86c2cc7ac114113b946d249942 (fork origin/main).
+- Checked by: vm2, 2026-10-22.
 
 ## Ticket reading
 
-The summary as recorded in the queue: raw query parser cannot parse value "{!". Skip note: raw parser and local params design (enableLocalParams), old.
+The reporter says `QParser.getParser` handles local params (`{!...}`) before the query reaches a parser plugin, so the raw parser never sees a value beginning with `{!`. The proposed fix is an `enableLocalParams` option that bypasses the local-params step. Comment 1 (rjernst, 2013-03-16) added that option in a patch and waited for a test in SOLR-4559. Comment 2 (yseeley, 2013-03-16) argued that a query-wide switch is a poor idea, and that an explicit raw query with a dereferenced value works.
 
-## Code reading
+## Code reading (pinned head)
 
-Taken from the audit evidence, not re-read at the pinned head: audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 2 comments). Class: design decision / by design / needs maintainer call. Reason holds: raw parser and local params design (enableLocalParams), old Basis is ticket text, not a fresh code repro; no deterministic test could be written from it.
+- `solr/core/src/java/org/apache/solr/search/QParser.java:392-396`: local params are allowed when the default parser is lucene or func.
+- `solr/core/src/java/org/apache/solr/search/QParser.java:424-426`: when local params are allowed and the query starts with `{!`, `QueryParsing.parseLocalParams` runs before any parser plugin is chosen. This is the step the ticket describes.
+- `solr/core/src/java/org/apache/solr/search/RawQParserPlugin.java:36`: the raw parser plugin is present.
+- `git grep -n enableLocalParams 498a09ae... -- solr`: no match. The option the ticket proposes is not on main.
 
 ## History
 
-No commit history was used for this record.
+`git log` at the pinned head finds no commit naming SOLR-4558 (evidence.py, ref origin/main, run 2026-10-22). No commit has added the option.
 
 ## Reproduction attempts
 
-Not attempted in this record. The audit did not record a reproduction.
+Not run in this pass. The record is based on the code path above and the absence of the option. A focused run would send a raw query whose value starts with `{!` through the default request path at the pinned head and record the output and log path.
 
 ## Gap analysis
 
-The audit (confirmed-skip) classified the ticket as not a current, reproducible defect. Nothing in the audit shows a closing fix or an obsolete feature, and no reproduction was recorded. Whether to close it is a maintainer decision, or a reproduction is needed first.
+The mechanism in the ticket is still in the code. What is not settled is whether the behaviour is a defect or the intended result of local-params parsing, and the ticket's own comments disagree on that. The proposed fix is a design choice, not a bug fix, so it needs a maintainer decision before a change can be made.
 
 ## Verdict justification
 
-keep-open: the audit verdict (confirmed-skip) is recorded, but the rubric's close verdicts need evidence at the pinned head that this record does not have. Precedent on this queue: the other tickets with the same audit verdict carry keep-open (254 confirmed-skip, 41 deferred), with the audit in the queue entry.
-
-Missing for a closing verdict: a check at the pinned head of the code path the audit names, or a reproduction of the reported behavior.
+- close-fixed: not supported. No commit names the ticket and the option is absent.
+- close-obsolete: not supported. The raw parser and the local-params path are present.
+- close-cannot-reproduce: not met. No reproduction was attempted at the pinned head.
+- pr-needed: not met. The fix is a design call, and no reproduction was run.
+- keep-open: the attempts made are the JIRA re-read, the code-path reading, and the history check. The missing piece is a reproduction at the pinned head and a maintainer decision on the option.
 
 ## Limits
 
-This record does not establish a reproduction, and it does not check the fork pin. It does not post anything to JIRA or GitHub.
+This record does not run a test. It does not establish that a value beginning with `{!` fails on the current head.
