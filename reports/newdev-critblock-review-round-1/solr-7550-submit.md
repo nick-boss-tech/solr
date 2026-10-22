@@ -16,3 +16,14 @@ Review (2026-10-22, vm4):
 Repairs: none. The two findings above are recorded for the owner.
 
 Regate: `gates/SOLR-7550-review-pass-1.md`, GATE GREEN at fcc8a874ab on vm4. Log directory `/workspace/gates/logs/vm4/7550/`.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head fcc8a874ab:
+
+- Open pass 1 finding, major (no live-path test), narrowed. Traced the server path: \`CoreContainer.getCore\` throws \`SolrCoreInitializationException\` for a core in the init-failure map (\`CoreContainer.java:2222\`). \`HttpSolrCall\` does not wrap it (\`HttpSolrCall.java:259-273\`). \`ResponseUtils.getErrorInfo\` writes \`error-class\` as the thrown class name (\`ResponseUtils.java:77\`). The client's \`SolrException.getThrowable()\` reads that metadata, so the fix's class-name check matches what a replica with a failed core sends. The code path is consistent end to end. A cluster repro (the ticket's four-node restart) is still not run, and the branch has no test that goes through HTTP. Recorded, not repaired (outside the repair scope).
+- Owner item (rung 5, scope), unchanged from pass 1: other 500s on the versions request now fail the sync where they used to count as success.
+- Repairs: none.
+
+Regate: \`gates/SOLR-7550-review-pass-2.md\`, GATE GREEN at fcc8a874ab on vm4.
+

@@ -12,3 +12,7 @@ Heartbeat: 2026-10-22T03:48:41Z
 Result: 2026-10-22T04:32:05Z: pass 1 GREEN at fcc8a874ab (vm4). Report: reports/newdev-critblock-review-round-1/solr-7550-submit.md. Owner items open: the narrowing of 500 handling to core-init failures (rung 5, scope); no live-cluster test of the core-init error class. Passes 2 and 3 next on the same head.
 
 Heartbeat: 2026-10-22T04:32:05Z
+
+Result: 2026-10-22T05:31:53Z: pass 2 GREEN at fcc8a874ab (vm4). Report: reports/newdev-critblock-review-round-1/solr-7550-submit.md. The end-to-end error-class path is traced in code; no cluster test. Pass 3 next on the same head.
+
+Heartbeat: 2026-10-22T05:31:53Z
