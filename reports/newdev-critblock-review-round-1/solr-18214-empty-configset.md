@@ -19,3 +19,12 @@ Review (2026-10-22, vm4), same head c00cacddf6. - Pass 1 minor findings, unchang
 - Repairs: none.
 
 Regate: `gates/SOLR-18214-review-pass-2.md`, GATE GREEN at c00cacddf6 on vm4.
+
+## Pass 3
+
+Review (2026-10-22, vm4), same head c00cacddf6. - No new findings against the head. The pass 1 minor findings stand: the test-only placeholder `${tests.luceneMatchVersion:LATEST}` in the generated `solrconfig.xml`; the test does not check the generated content.
+- Repairs: none.
+
+Regate: `gates/SOLR-18214-review-pass-3.md`, GATE GREEN at c00cacddf6 on vm4.
+
+Final head: c00cacddf62d67001b13b8aa2c2287a012a5807e. Unit 39 DONE with the three pass sections.
