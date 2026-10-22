@@ -15,7 +15,7 @@ Status: DONE (GATE GREEN at 84523828bb, vm4, 2026-10-22T11:56:36Z)
 - [x] step 1 tidy, rc=0
 - [x] step 2 Error Prone compile, rc=0
 - [x] step 3 proof leg (base `ComplexPhraseQParserPlugin.java`): rc=1. Expected failure `testMissingQueryStringIsNotAnError` (NullPointerException, "s" is null). Tests 7, failed 1.
-- [x] step 4 focused head run, from fresh XML: TestComplexPhraseQParserPlugin tests=7, skipped=0, failures=0, errors=0 (ts 2026-10-22T11:54:41Z). rc=0.
+- [x] step 4 focused head run, from fresh XML: TestComplexPhraseQParserPlugin tests=7, skipped=0, failures=0, errors=0 (ts 2026-10-22T11:54:25Z). rc=0.
 - [x] step 5 module check `:solr:core:check -x test`, rc=0 (11:56:36).
 
 Logs: `/workspace/gates/logs/vm4/13185/`.

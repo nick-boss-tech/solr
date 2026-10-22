@@ -20,3 +20,12 @@ Review (2026-10-22, vm4), same head 84523828bb. - Open pass 1 finding, major, co
 - Repairs: none.
 
 Regate: `gates/SOLR-13185-review-pass-2.md`, GATE GREEN at 84523828bb on vm4.
+
+## Pass 3
+
+Review (2026-10-22, vm4), same head 84523828bb. - No new findings against the head. The pass 1 and pass 2 findings stand: the test does not assert zero results for the null query, although Solr normalizes a null query to MatchNoDocsQuery (`QueryComponent.java:191-195`); no changelog file.
+- Repairs: none.
+
+Regate: `gates/SOLR-13185-review-pass-3.md`, GATE GREEN at 84523828bb on vm4.
+
+Final head: 84523828bba8eb780472d037af3ff60a919d34eb. Unit 30 DONE with the three pass sections.
