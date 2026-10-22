@@ -19,10 +19,12 @@ package org.apache.solr.response;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.apache.solr.client.solrj.SolrClient;
@@ -451,6 +453,191 @@ public class TestRawTransformer extends SolrCloudTestCase {
     SolrException e =
         expectThrows(SolrException.class, () -> CLIENT.request(starReq, "collection1"));
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+  }
+
+  private static String queryJson(String fl) throws Exception {
+    return queryJson(fl, "*:*");
+  }
+
+  private static String queryJson(String fl, String q) throws Exception {
+    QueryRequest req =
+        new QueryRequest(
+            new ModifiableSolrParams(
+                Map.of(
+                    "q",
+                    new String[] {q},
+                    "fl",
+                    new String[] {fl},
+                    "sort",
+                    new String[] {"id asc"},
+                    "wt",
+                    new String[] {"json"},
+                    "indent",
+                    new String[] {"false"})));
+    req.setResponseParser(JSON_STREAM_RESPONSE_PARSER);
+    return InputStreamResponseParser.consumeResponseToString(CLIENT.request(req, "collection1"));
+  }
+
+  private static List<Map<?, ?>> jsonDocs(String json) {
+    Map<?, ?> response = (Map<?, ?>) ((Map<?, ?>) Utils.fromJSONString(json)).get("response");
+    List<Map<?, ?>> docs = new ArrayList<>();
+    for (Object doc : (List<?>) response.get("docs")) {
+      docs.add((Map<?, ?>) doc);
+    }
+    assertEquals(MAX, docs.size());
+    return docs;
+  }
+
+  private static String queryXml(String fl) throws Exception {
+    QueryRequest req =
+        new QueryRequest(
+            new ModifiableSolrParams(
+                Map.of(
+                    "q",
+                    new String[] {"*:*"},
+                    "fl",
+                    new String[] {fl},
+                    "sort",
+                    new String[] {"id asc"},
+                    "wt",
+                    new String[] {"xml"},
+                    "indent",
+                    new String[] {"false"})));
+    req.setResponseParser(XML_STREAM_RESPONSE_PARSER);
+    return InputStreamResponseParser.consumeResponseToString(CLIENT.request(req, "collection1"));
+  }
+
+  @Test
+  public void testRawGlobReturnsTheSameFieldsAsThePlainGlob() throws Exception {
+    List<Map<?, ?>> plain = jsonDocs(queryJson("id,*_json"));
+    List<Map<?, ?>> raw = jsonDocs(queryJson("id,*_json:[json]"));
+    for (int i = 0; i < MAX; i++) {
+      assertEquals("field names differ for doc " + i, plain.get(i).keySet(), raw.get(i).keySet());
+      assertTrue(raw.get(i).containsKey("payload_json"));
+    }
+  }
+
+  @Test
+  public void testRawGlobLeavesExplicitlyNamedFieldsAsPlainValues() throws Exception {
+    Map<?, ?> doc = jsonDocs(queryJson("id,author,*_json:[json]")).get(0);
+    assertEquals(
+        "<root><child1>some</child1><child2>trivial</child2><child3>xml</child3></root>",
+        doc.get("author"));
+    assertEquals("[{seq=[1, 2]}, {seq=[3, 4]}]", String.valueOf(doc.get("payload_json")));
+  }
+
+  @Test
+  public void testRawGlobWithAnotherRawTransformerOnItsOwnField() throws Exception {
+    String json = queryJson("id,payload_json:[json],*_json:[json]");
+    assertEquals(
+        "payload_json was written more than once per document: " + json,
+        MAX,
+        countOccurrences(json, "\"payload_json\":"));
+    assertTrue(
+        "payload_json was not written raw: " + json,
+        Pattern.compile("\"payload_json\":\\[\\{\"seq\":\\[1,2]}").matcher(json).find());
+  }
+
+  @Test
+  public void testRawGlobWithAnotherOverlappingRawGlob() throws Exception {
+    String json = queryJson("id,*_json:[json],p*:[json]");
+    assertEquals(
+        "payload_json was written more than once per document: " + json,
+        MAX,
+        countOccurrences(json, "\"payload_json\":"));
+    assertTrue(
+        "payload_json was not written raw: " + json,
+        Pattern.compile("\"payload_json\":\\[\\{\"seq\":\\[1,2]}").matcher(json).find());
+  }
+
+  @Test
+  public void testRawGlobWithAliasOfAnExplicitField() throws Exception {
+    Map<?, ?> doc = jsonDocs(queryJson("id,al:id,*_json:[json]")).get(0);
+    assertEquals(doc.get("id"), doc.get("al"));
+    assertEquals("[{seq=[1, 2]}, {seq=[3, 4]}]", String.valueOf(doc.get("payload_json")));
+  }
+
+  @Test
+  public void testRawGlobWithRenamedFieldOfTheSameGlob() throws Exception {
+    Map<?, ?> doc = jsonDocs(queryJson("id,p:payload_json,*_json:[json]")).get(0);
+    assertFalse(
+        "the renamed field still appears under its source name: " + doc,
+        doc.containsKey("payload_json"));
+    assertEquals("[{\"seq\":[1,2]}, {\"seq\":[3,4]}]", String.valueOf(doc.get("p")));
+  }
+
+  @Test
+  public void testRawGlobMatchingNothingIsNotAnError() throws Exception {
+    for (Map<?, ?> doc : jsonDocs(queryJson("id,zz*:[json]"))) {
+      assertEquals("unexpected fields: " + doc, Set.of("id"), doc.keySet());
+    }
+  }
+
+  @Test
+  public void testRawGlobWithXmlWriter() throws Exception {
+    String xml = queryXml("id,*_json:[xml]");
+    assertTrue(
+        "payload_json was not written raw in the XML response: " + xml,
+        xml.contains("<raw>{\"seq\":[1,2]}</raw>"));
+    assertTrue(
+        "the author field was not returned in the XML response: " + xml,
+        xml.contains("<str name=\"id\">"));
+  }
+
+  @Test
+  public void testRawGlobWithDifferentWriterIsNotRaw() throws Exception {
+    // [xml] applies only to an XML response, so a JSON response returns the glob's fields plain
+    Map<?, ?> doc = jsonDocs(queryJson("id,*_json:[xml]")).get(0);
+    Object payload = doc.get("payload_json");
+    assertTrue("payload_json should be a list of plain strings: " + doc, payload instanceof List);
+    assertTrue(
+        "payload_json was written raw by a transformer for another writer: " + doc,
+        ((List<?>) payload).get(0) instanceof String);
+  }
+
+  @Test
+  public void testRawGlobOnAnExplicitlyNamedFieldOfTheSameName() throws Exception {
+    Map<?, ?> doc = jsonDocs(queryJson("id,payload_json,*_json:[json]")).get(0);
+    assertEquals("[{seq=[1, 2]}, {seq=[3, 4]}]", String.valueOf(doc.get("payload_json")));
+  }
+
+  @Test
+  public void testRawGlobWithPseudoFieldScore() throws Exception {
+    Map<?, ?> doc = jsonDocs(queryJson("id,score,*_json:[json]")).get(0);
+    assertTrue("score was not returned: " + doc, doc.containsKey("score"));
+    assertEquals("[{seq=[1, 2]}, {seq=[3, 4]}]", String.valueOf(doc.get("payload_json")));
+  }
+
+  @Test
+  public void testRawGlobOverDocValuesOnlyField() throws Exception {
+    // *_sd is stored="false" docValues="true" in the fixture schema, so the value is read from
+    // docValues
+    SolrInputDocument sdoc = new SolrInputDocument();
+    sdoc.addField("id", "dvonly");
+    sdoc.addField("note_sd", "{\"k\":1}");
+    CLIENT.add("collection1", sdoc);
+    CLIENT.commit("collection1");
+    try {
+      String plain = queryJson("id,*_sd", "id:dvonly");
+      String raw = queryJson("id,*_sd:[json]", "id:dvonly");
+      assertTrue(
+          "the plain glob did not return note_sd from docValues: " + plain,
+          plain.contains("\"note_sd\":\"{\\\"k\\\":1}\""));
+      assertTrue(
+          "note_sd, a docValues-only field, was not written raw: " + raw,
+          raw.contains("\"note_sd\":{\"k\":1}"));
+    } finally {
+      CLIENT.deleteByQuery("collection1", "id:dvonly");
+      CLIENT.commit("collection1");
+    }
+  }
+
+  private static int countOccurrences(String text, String needle) {
+    int count = 0;
+    for (int at = text.indexOf(needle); at >= 0; at = text.indexOf(needle, at + 1)) {
+      count++;
+    }
+    return count;
   }
 
   private static final InputStreamResponseParser XML_STREAM_RESPONSE_PARSER =
