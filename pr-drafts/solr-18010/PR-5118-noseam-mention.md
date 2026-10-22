@@ -1,6 +1,6 @@
 # PR 5118 mention of the seam-free branch (draft, not applied)
 
-Status: drafted 2026-10-22 by vm3, updated after the Linux coverage pass. Not applied to the live PR body. Placement and wording need Nick's approval before anything is posted.
+Status: superseded on 2026-10-22 by pr-drafts/solr-18010/PR-5118-body-seamfree.md, which is applied to the live PR body.
 
 Proposed paragraph for the PR body:
 
