@@ -37,7 +37,31 @@ Rule applied: a question is settled at the first rung that answers it. Rung 5 is
 
 Nothing in this round is left for the owner. The only public actions in the table are "no PR" (SOLR-16155) and "no branch deletion" (SOLR-12743), and both are "no action", which needs no approval.
 
-Items outside this round (vm2 queue decisions, SOLR-8954, SOLR-15357 owner decision 2, the `pr-review` NEEDS-OWNER drafts, SOLR-4841) are not in this scrub. They are listed in `OPEN-WORK.md` under their own groups and need a separate pass.
+## Second pass: items outside the review round
+
+| Item | Decision | Rung | Implementation |
+| --- | --- | --- | --- |
+| SOLR-4841 follow-up | Satisfied. Review rounds 2 and 3 are done at `bf1b01d0dc`, with the mutation run (`expected:<[sv]> but was:<[]>`). Change the header from NEEDS-OWNER to SATISFIED. Filing the ticket and PR opening stay with Nick. | 2 | Header edit only |
+| SOLR-8954 | Do not land `solr-8954-submit`; add no test-only follow-up. The all-shards fix is carried by `solr-8009-submit`, gated 10 of 10 at `e600375aae`. | 1 | None on this branch |
+| SOLR-15357 | Keep the branch narrow at `e9e7cc3a0c`. The RTG and `fl=*` gap stays in Limits. Widening is a scope change with no recorded recommendation, so it is not taken. | 4 | None |
+| SOLR-18119 | Label `solr-18119-submit` retired in place, as the 2026-10-14 owner rule says. Do not close PR #4999 or delete the branch. | 3 | Label only |
+| SOLR-18280 (pr-drift run records) | Record the 12:55Z head failure as a clock-based timing flake in `receipts/SOLR-18280.md`. The head is not counted as 25 of 25. | 4 | Receipt text; a rerun is optional |
+| SOLR-17055 (vm2 row 1) | Keep choice (a): `maxScore` on a score sort in both paths, which the distributed path already reports (`QueryComponent.java` lines 1086, 1167 to 1169, 1293 on main). | 1 | Code only after the response contract is set (see owner list) |
+| SOLR-4374 (vm2 row 4) | Include the changelog wording and the function-alias Limits line on the branch. | 3 | Branch commit, then gate |
+| SOLR-17612 (round 5 threshold) | Keep the gated rule: minimum over filters of summed per-filter shard counts. | 1 | None on gated head `3a456c27dd` |
+| pr-review-4042 | Do not adopt `SolrXPathTestCase`; keep the existing test style. The review posts without that point. | 4 | None |
+| pr-review-4626 | Keep the existing SolrJ request timeout default. D1 covers only `SolrClientCache` streaming callers, so the default does not change. | 3 | None |
+
+## Still for the owner: public actions and public contracts
+
+The ladder reserves rung 5 for public commitments and public contracts. These cannot be settled inside the pool:
+
+- Post the reviews for pr-review-4042, 4626 and 4874 (the drafts are ready).
+- Set the release target for removing `SolrPing` (pr-review-4874).
+- Approve the fork push for SOLR-17842 (`assignments/pool-vm2-open-decisions-round-1.md` row 2). The assignment reserves that push for an owner yes.
+- Rule on the SOLR-17055 response contract (a public API change).
+- Approve filing the SOLR-4841 ticket and opening its PR.
+- Decide whether to close PR #4999 once PR #5061 is in.
 
 ## Notes
 
