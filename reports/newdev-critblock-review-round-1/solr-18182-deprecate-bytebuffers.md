@@ -12,3 +12,10 @@ Head reviewed: 0abcca2f4b99b92136e5a5650fc7262bbe24ab17. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-18182-review-pass-1.md`, GATE GREEN at 0abcca2f4b on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head 0abcca2f4b. - Pass 1 minor findings, unchanged and confirmed in the file: the rejected-lock message still names `ByteBuffersDirectory` while the replacement names `RAMDirectory`; the new test checks only the annotation.
+- Repairs: none.
+
+Regate: `gates/SOLR-18182-review-pass-2.md`, GATE GREEN at 0abcca2f4b on vm4.
