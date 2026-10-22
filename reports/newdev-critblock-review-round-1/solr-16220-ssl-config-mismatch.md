@@ -20,3 +20,12 @@ Review (2026-10-22, vm4), same head d7db0784a1. - Pass 1 finding, minor (shared 
 - Repairs: none.
 
 Regate: `gates/SOLR-16220-review-pass-2.md`, GATE GREEN at d7db0784a1 on vm4.
+
+## Pass 3
+
+Review (2026-10-22, vm4), same head d7db0784a1. - No new findings against the head. The pass 1 and pass 2 minor findings stand: the SSL-mode guard does not run when the builder passes its own `httpClient` (confirmed in code); the test does not assert the message.
+- Repairs: none.
+
+Regate: `gates/SOLR-16220-review-pass-3.md`, GATE GREEN at d7db0784a1 on vm4.
+
+Final head: d7db0784a19500aa5be380ccd8e88600084c2b8c. Unit 32 DONE with the three pass sections.
