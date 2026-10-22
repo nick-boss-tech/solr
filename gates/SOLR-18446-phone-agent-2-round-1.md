@@ -51,3 +51,5 @@ Attempt 1 at 23db47ef150dd87198718085a9d28cffdf4ada4c: changelog parsed; tidy rc
 ## Retry outcome
 
 At 5dcdf0d2bce40a9e83b9d19567beb6785844335f, YAML parsed and tidy was clean. Error Prone compile failed at HttpSolrCall.java:286 because java.util.HashSet is not imported. No test, proof or module check executed. Retry allowance exhausted; handed back to implementation without another run. Receipt `receipts/SOLR-18446.md` records both attempts and the exact bounded follow-up.
+
+Implementation follow-up after handback: one-line missing import committed and pushed as 8bb60e6f61abc9827fb58dcae1863cabb33f9796. No third attempt; terminal gate outcome remains HANDED BACK, and this new implementation head is unverified.
