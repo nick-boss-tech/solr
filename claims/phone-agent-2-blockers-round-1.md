@@ -13,3 +13,5 @@
 - Decision ladder: rung 1, exact assignment and standing rules apply. Prior finished or live ticket work will be cited, not duplicated.
 
 Heartbeat: 2026-10-22T23:25:03Z
+
+Progress: 2026-10-22T23:36:23Z. Fresh public Jira reviews completed for all 13. Source pinned to upstream main b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb. Narrow candidate branches in preparation for SOLR-17844 and SOLR-18446. SOLR-17840 ignored timeout test enabled only in a disposable premise worktree; run evidence pending. SOLR-18398 explicitly deferred in Jira until closer to 11.0 release; no premature broad API migration. No external posts or PR actions.
