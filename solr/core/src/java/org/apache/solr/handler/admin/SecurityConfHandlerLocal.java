@@ -147,28 +147,43 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
     try {
       Files.write(tmpPath, json);
       if (Files.exists(securityJsonPath)) {
-        if (tmpPath.getFileSystem().supportedFileAttributeViews().contains("posix")) {
-          Files.setPosixFilePermissions(tmpPath, Files.getPosixFilePermissions(securityJsonPath));
-        }
-        if (!Files.getOwner(tmpPath).equals(Files.getOwner(securityJsonPath))) {
-          throw new IOException("security.json is owned by " + Files.getOwner(securityJsonPath));
-        }
+        copyPermissions(tmpPath);
+        checkOwner(tmpPath);
       }
-      try {
-        Files.move(
-            tmpPath,
-            securityJsonPath,
-            StandardCopyOption.ATOMIC_MOVE,
-            StandardCopyOption.REPLACE_EXISTING);
-      } catch (AtomicMoveNotSupportedException e) {
-        Files.move(tmpPath, securityJsonPath, StandardCopyOption.REPLACE_EXISTING);
-      }
+      beforeMove(tmpPath);
+      moveTemporaryFile(tmpPath);
     } finally {
       try {
         Files.deleteIfExists(tmpPath);
       } catch (IOException e) {
         log.warn("Could not remove temporary file {}", tmpPath, e);
       }
+    }
+  }
+
+  void copyPermissions(Path tmpPath) throws IOException {
+    if (tmpPath.getFileSystem().supportedFileAttributeViews().contains("posix")) {
+      Files.setPosixFilePermissions(tmpPath, Files.getPosixFilePermissions(securityJsonPath));
+    }
+  }
+
+  void checkOwner(Path tmpPath) throws IOException {
+    if (!Files.getOwner(tmpPath).equals(Files.getOwner(securityJsonPath))) {
+      throw new IOException("security.json is owned by " + Files.getOwner(securityJsonPath));
+    }
+  }
+
+  void beforeMove(Path tmpPath) throws IOException {}
+
+  void moveTemporaryFile(Path tmpPath) throws IOException {
+    try {
+      Files.move(
+          tmpPath,
+          securityJsonPath,
+          StandardCopyOption.ATOMIC_MOVE,
+          StandardCopyOption.REPLACE_EXISTING);
+    } catch (AtomicMoveNotSupportedException e) {
+      Files.move(tmpPath, securityJsonPath, StandardCopyOption.REPLACE_EXISTING);
     }
   }
 

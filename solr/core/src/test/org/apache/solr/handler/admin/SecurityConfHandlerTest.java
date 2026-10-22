@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,6 +38,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Stream;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.common.SolrErrorWrappingException;
@@ -386,6 +388,170 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
               PosixFilePermission.OWNER_READ,
               PosixFilePermission.OWNER_WRITE,
               PosixFilePermission.OWNER_EXECUTE));
+    }
+  }
+
+  /** An edit whose temporary file is ready is not visible as a partial file until the move. */
+  public void testReaderSeesOldDocumentUntilTemporaryFileIsMoved() throws Exception {
+    assumeWorkingMockito();
+    Path solrHome = createTempDir("securityConfHandlerLocalAtomic");
+    Path securityJson = solrHome.resolve("security.json");
+    byte[] oldBytes = seedSecurityJson().getBytes(StandardCharsets.UTF_8);
+    Files.write(securityJson, oldBytes);
+    HookedSecurityConfHandler handler = new HookedSecurityConfHandler(mockCoreContainer(solrHome));
+    CountDownLatch entered = new CountDownLatch(1);
+    CountDownLatch release = new CountDownLatch(1);
+    handler.entered = entered;
+    handler.release = release;
+    AtomicReference<Throwable> editErr = new AtomicReference<>();
+    Thread edit = new Thread(() -> runEdit(handler, editErr));
+    edit.start();
+    assertTrue("the edit did not reach the move", entered.await(30, TimeUnit.SECONDS));
+    assertArrayEquals(
+        "a reader must see the old document until the move",
+        oldBytes,
+        Files.readAllBytes(securityJson));
+    release.countDown();
+    edit.join(TimeUnit.SECONDS.toMillis(60));
+    assertFalse("edit still running", edit.isAlive());
+    assertNull("edit failed: " + editErr.get(), editErr.get());
+    assertTrue(Files.readString(securityJson, StandardCharsets.UTF_8).contains("alice"));
+    assertNoTemporaryFiles(solrHome);
+  }
+
+  /** A move the file system refuses falls back to the in-place write. */
+  public void testRefusedMoveFallsBackToInPlaceWrite() throws Exception {
+    assumeWorkingMockito();
+    Path solrHome = createTempDir("securityConfHandlerLocalRefused");
+    Path securityJson = solrHome.resolve("security.json");
+    Files.write(securityJson, seedSecurityJson().getBytes(StandardCharsets.UTF_8));
+    HookedSecurityConfHandler handler = new HookedSecurityConfHandler(mockCoreContainer(solrHome));
+    handler.failMove.set(true);
+    postAuthorizationEdit(handler, "{'set-user-role': {'alice': 'admin'}}");
+    assertTrue("the move was not attempted", handler.moveAttempted.get());
+    assertTrue(Files.readString(securityJson, StandardCharsets.UTF_8).contains("alice"));
+    assertNoTemporaryFiles(solrHome);
+  }
+
+  /** A permission copy that fails falls back to the in-place write, which keeps the file mode. */
+  public void testFailedPermissionCopyFallsBackAndKeepsMode() throws Exception {
+    assumeWorkingMockito();
+    Path solrHome = createTempDir("securityConfHandlerLocalPermCopy");
+    assumeTrue(
+        "POSIX file permissions are not supported on this file system",
+        solrHome.getFileSystem().supportedFileAttributeViews().contains("posix"));
+    Path securityJson = solrHome.resolve("security.json");
+    Files.write(securityJson, seedSecurityJson().getBytes(StandardCharsets.UTF_8));
+    EnumSet<PosixFilePermission> expected =
+        EnumSet.of(
+            PosixFilePermission.OWNER_READ,
+            PosixFilePermission.OWNER_WRITE,
+            PosixFilePermission.GROUP_READ);
+    Files.setPosixFilePermissions(securityJson, expected);
+    HookedSecurityConfHandler handler = new HookedSecurityConfHandler(mockCoreContainer(solrHome));
+    handler.failPermissionCopy.set(true);
+    postAuthorizationEdit(handler, "{'set-user-role': {'alice': 'admin'}}");
+    assertTrue(Files.readString(securityJson, StandardCharsets.UTF_8).contains("alice"));
+    assertEquals(expected, Files.getPosixFilePermissions(securityJson));
+    assertNoTemporaryFiles(solrHome);
+  }
+
+  /** An owner mismatch falls back to the in-place write and does not fail the edit. */
+  public void testOwnerMismatchFallsBackToInPlaceWrite() throws Exception {
+    assumeWorkingMockito();
+    Path solrHome = createTempDir("securityConfHandlerLocalOwner");
+    Path securityJson = solrHome.resolve("security.json");
+    Files.write(securityJson, seedSecurityJson().getBytes(StandardCharsets.UTF_8));
+    HookedSecurityConfHandler handler = new HookedSecurityConfHandler(mockCoreContainer(solrHome));
+    handler.failOwnerCheck.set(true);
+    postAuthorizationEdit(handler, "{'set-user-role': {'alice': 'admin'}}");
+    assertTrue(Files.readString(securityJson, StandardCharsets.UTF_8).contains("alice"));
+    assertNoTemporaryFiles(solrHome);
+  }
+
+  private static String seedSecurityJson() {
+    return "{\"authentication\":{\"class\":\"solr.BasicAuthPlugin\","
+        + "\"credentials\":{\"solr\":\"solr\"}},"
+        + "\"authorization\":{\"class\":\"solr.RuleBasedAuthorizationPlugin\",\"user-role\":{}}}";
+  }
+
+  private static CoreContainer mockCoreContainer(Path solrHome) {
+    CoreContainer cc = mock(CoreContainer.class);
+    when(cc.getSolrHome()).thenReturn(solrHome);
+    when(cc.getAuthorizationPlugin()).thenReturn(new RuleBasedAuthorizationPlugin());
+    return cc;
+  }
+
+  private static void runEdit(SecurityConfHandler handler, AtomicReference<Throwable> err) {
+    try {
+      postAuthorizationEdit(handler, "{'set-user-role': {'alice': 'admin'}}");
+    } catch (Throwable t) {
+      err.set(t);
+    }
+  }
+
+  private static void assertNoTemporaryFiles(Path solrHome) throws IOException {
+    try (Stream<Path> files = Files.list(solrHome)) {
+      assertEquals(
+          "temporary files left behind",
+          List.of(),
+          files.filter(f -> f.getFileName().toString().endsWith(".tmp")).toList());
+    }
+  }
+
+  /** Test seam: each hook can be made to fail, and the move can be held open. */
+  private static class HookedSecurityConfHandler extends SecurityConfHandlerLocal {
+    final AtomicBoolean failPermissionCopy = new AtomicBoolean();
+    final AtomicBoolean failOwnerCheck = new AtomicBoolean();
+    final AtomicBoolean failMove = new AtomicBoolean();
+    final AtomicBoolean moveAttempted = new AtomicBoolean();
+    volatile CountDownLatch entered;
+    volatile CountDownLatch release;
+
+    HookedSecurityConfHandler(CoreContainer cc) {
+      super(cc);
+    }
+
+    @Override
+    void copyPermissions(Path tmpPath) throws IOException {
+      if (failPermissionCopy.get()) {
+        throw new IOException("simulated permission copy failure");
+      }
+      super.copyPermissions(tmpPath);
+    }
+
+    @Override
+    void checkOwner(Path tmpPath) throws IOException {
+      if (failOwnerCheck.get()) {
+        throw new IOException("simulated owner mismatch");
+      }
+      super.checkOwner(tmpPath);
+    }
+
+    @Override
+    void beforeMove(Path tmpPath) throws IOException {
+      CountDownLatch e = entered;
+      if (e == null) {
+        return;
+      }
+      e.countDown();
+      try {
+        if (!release.await(60, TimeUnit.SECONDS)) {
+          throw new IOException("release was not signalled");
+        }
+      } catch (InterruptedException ie) {
+        Thread.currentThread().interrupt();
+        throw new IOException(ie);
+      }
+    }
+
+    @Override
+    void moveTemporaryFile(Path tmpPath) throws IOException {
+      moveAttempted.set(true);
+      if (failMove.get()) {
+        throw new IOException("simulated refused move");
+      }
+      super.moveTemporaryFile(tmpPath);
     }
   }
 
