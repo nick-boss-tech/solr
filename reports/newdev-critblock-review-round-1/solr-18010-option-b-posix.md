@@ -48,3 +48,25 @@ Logs: `gates/logs/vm3/atomic2-mut-*` and `atomic3-mut-*`.
 - Windows: not run. The non-POSIX branch test runs on Windows (it forces the flag), but the held-file and ACL cases are not covered.
 - Owner mismatch on a real second user: not testable here (one mapped user in the namespace).
 - Crash injection mid-write (kill during the move): not run.
+
+## Update 2026-10-22: split, POSIX assumptions, fail-before on main
+
+Branch head `b12895b4e2` (on `e66ec9d3ea`).
+
+- Seam tests moved to `SecurityConfHandlerLocalSeamTest` (9 tests and the hooked handler). `SecurityConfHandlerTest` keeps 4 tests that compile against main's handler (`testEdit`, `testConcurrentPersistConfLeavesOneWholeDocument`, `testEditKeepsExistingSecurityJsonPermissions`, `testEditInPlaceWhenSolrHomeIsReadOnly`).
+- Six atomic-path tests now assume POSIX file attributes (`assumeAtomicReplaceSupported`). Without this, on Windows the atomic path is off and these tests would time out or fail for the wrong reason. `testNonPosixFileSystemWritesInPlace` runs everywhere.
+- Focused run on Linux: 15 tests across the three classes, 0 failures (`gates/logs/vm3/split-r2/`).
+- Full gate green on the split tree: `gates/logs/vm3/solr-18010-r3-atomic-split-full/` (changelog, tidy with no changes, Error Prone compile, 6 focused tests, module check).
+- Fail-before on main's handler (seam class excluded, since it cannot compile against main): 6 tests run, 1 fails, `testConcurrentPersistConfLeavesOneWholeDocument` (`gates/logs/vm3/split-failbefore-main/`). The other five pass on main, which is expected: this branch keeps the marker, so the marker assertion is not in it.
+- Not run: stray `security.json*.tmp` at startup. Read from code only: `SecurityConfHandlerLocal.getSecurityConfig` opens only `securityJsonPath` (L67-68 at main), so a stray temp file is not read. Not measured.
+
+## Prompt for the Windows agent (run on `b12895b4e2`)
+
+Run the three security test classes on Windows, with no branch change, no commit, no push, no tidy:
+
+    git clone https://github.com/nick-boss-tech/solr.git solr-18010-atomic
+    cd solr-18010-atomic
+    git checkout b12895b4e2
+    .\gradlew.bat --no-daemon :solr:core:test --tests org.apache.solr.handler.admin.SecurityConfHandlerTest --tests org.apache.solr.handler.admin.SecurityConfHandlerLocalSeamTest --tests org.apache.solr.security.BasicAuthStandaloneTest
+
+Report from the JUnit XML in `solr\core\build\test-results\test\`: each test with PASS, FAIL or SKIPPED and its message; counts per class (tests, failures, errors, skipped). Expected on Windows: the POSIX-only tests are SKIPPED (permission copy, read-only SOLR_HOME, and the six atomic-path tests); `testNonPosixFileSystemWritesInPlace`, `testEdit`, `testConcurrentPersistConfLeavesOneWholeDocument`, `testAtomicReplaceNeedsPosixViewAndNoSymbolicLink`, and the BasicAuth tests PASS. Any FAIL is a finding, with its message. Gradle version from `gradlew.bat --version` and JDK version. Plain text, no em or en dashes.
