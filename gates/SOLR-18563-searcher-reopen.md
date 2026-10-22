@@ -1,6 +1,6 @@
 # Gate job: SOLR-18563 (reopen the searcher on every replica after an additive schema change)
 
-Status: OPEN
+Status: HANDED BACK (step 4 failed at head 0af85fe847; see Result)
 
 - Branch: `solr-18563-searcher-reopen`. Head: `0af85fe84729f83371950528006aeaec0ab2422f` (fork tip, confirmed by ls-remote on 2026-10-22). If the tip has moved at claim time, stop and record the new tip here. Do not retarget this job.
 - Base: `7892348272727b8530d26ad08db734712ab2dacb12` (upstream main). Prior gated head: `8ef09875876fe25afdf052a2360df9b23cf18ca0` (the test-only branch; its focused run was recorded in gate job `SOLR-18563-receiving-replica-facet`). Merge-base with upstream/main: `7892348272727b8530d26ad08db734712ab2dacb12`.
@@ -60,3 +60,16 @@ Write the results into this file under a `## Result` heading: head, host and dat
 
 - One fast-forward push with the result section and the DONE marks, plus any repair commit (WORKFLOW.md, Gate repairs).
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Result
+
+Head `0af85fe84729f83371950528006aeaec0ab2422f`, host vm2, run 2026-10-22 (logs `logs/vm2/gate-18563-opt/`).
+
+- Step 0: rc 0 on rerun (first attempt rc 1: the uv environment had no pyyaml; the rerun used `--with pyyaml`).
+- Step 1 tidy: rc 0, no changes.
+- Step 2 Error Prone compile: rc 0.
+- Step 3 proof leg (pre-change production code, head test file): rc 1, as expected. 1 test, 1 failure, `undefined field`.
+- Step 4 focused head run: rc 1. `TestManagedSchemaAPI` 7 tests, 1 failure; `TestBulkSchemaAPI` 19 tests, 0 failures. The failure is in `testDeleteFieldStillReloadsCore`: `SolrException: openNewSearcher called on closed core`, thrown on the ZooKeeper callback thread from `ZkIndexSchemaReader.updateSchema`. A reload closes the old core, and its schema watcher can still run afterwards.
+- Step 5 module check: rc 0.
+
+Ended here: step 4 failed. The fix is a closed-core guard on the reopen, at head `73d5b4a35cb458a37113be78d6c0e57b266d07de`. It is gated in `gates/SOLR-18563-searcher-reopen-r2.md`.
