@@ -14,6 +14,7 @@ Each item says what to do, the file to start from, and the output path. If an it
 1. **Run the full bats suite on the branch head.** Confirm the head first: `git ls-remote origin refs/heads/solr-18565-submit` must print `2c747689c32bd17a6327ecd2b60999b972771269`. If it prints anything else, stop and follow the first Decisions row. Then, from your worktree at that head, run `pool/bin/sweep-run.sh <worktree> <log dir> solr-18565-head-full :solr:packaging:integrationTests`. This is the same Gradle task that fails in CI. Record the pass and fail counts from `solr/packaging/build/test-output` and the state of test 88 ("use different hostname when not checking peer-name", `test/test_ssl.bats`). Output: `reports/SOLR-18565-bats-run-1.md`, section "Head full run".
 2. **Run only the SSL file on the head.** Run `pool/bin/sweep-run.sh <worktree> <log dir> solr-18565-head-ssl :solr:packaging:integrationTests --tests test_ssl.bats`. Record the same counts and the result of test 88. Output: `reports/SOLR-18565-bats-run-1.md`, section "Head SSL file".
 3. **Control on the base commit.** In a second worktree at `7892348272727b8530d26ad08db734712ab2dacb12`, run the same command as item 2. Record the result of test 88. This shows whether the failure also happens on this host without the fix. Output: `reports/SOLR-18565-bats-run-1.md`, section "Base SSL file".
+4. **Write the PR proof line.** When items 1 and 2 are finished, add a section "PR proof line" to the deliverable. It is one or two plain sentences for the Proof section of the pull request: the head commit, the command, the pass and fail counts, the result of test 88, and the date. Write for a public reader. Do not name the host, the pool, or any agent. If test 88 fails on the head, the sentence says so. Output: `reports/SOLR-18565-bats-run-1.md`, section "PR proof line".
 
 Record the host OS and kernel (`uname -a` and `/etc/os-release`) at the top of the deliverable. Record the log paths for every run.
 
@@ -36,4 +37,5 @@ No row may leave the choice to the claimant.
 ## Limits
 
 - No PR, comment, JIRA or email. No force push. Do not change or push the branch.
+- vm2 updates the PR body from the proof line. This assignment does not edit the PR.
 - Commit as Nick Shanin with no trailers. No em dashes.
