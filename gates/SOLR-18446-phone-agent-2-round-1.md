@@ -1,6 +1,6 @@
 # Gate job: SOLR-18446 (path-scoped collection routing)
 
-Status: CLAIMED (claims/phone-agent-2-blockers-round-1.md)
+Status: HANDED BACK (permitted retry failed compilation: missing HashSet import)
 
 - Branch: solr-18446-path-routing-phone-agent-2. Head: `23db47ef150dd87198718085a9d28cffdf4ada4c`, pushed to fork 2026-10-22.
 - Prior gated head: none. Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`.
@@ -47,3 +47,7 @@ No external posts, PR opening, ready flips or force pushes. Commits as Nick Shan
 ## Attempt 1 and permitted retry
 
 Attempt 1 at 23db47ef150dd87198718085a9d28cffdf4ada4c: changelog parsed; tidy rc=0, but it reformatted the new test assertion. No compile or tests ran in this attempt. Exact tidy output committed as `5dcdf0d2bce40a9e83b9d19567beb6785844335f`, `SOLR-18446: gate repair: apply tidy formatting`, changing only HttpSolrCallCloudTest.java. Fork branch pushed fast-forward. Retry starts at step 0 on that repaired head, logs `/workspace/phone-agent-2-logs/gate-18446-attempt-2`, configuration `/workspace/phone-agent-2-logs/gate-18446-attempt-2.json`. No further gate retry is allowed after this one.
+
+## Retry outcome
+
+At 5dcdf0d2bce40a9e83b9d19567beb6785844335f, YAML parsed and tidy was clean. Error Prone compile failed at HttpSolrCall.java:286 because java.util.HashSet is not imported. No test, proof or module check executed. Retry allowance exhausted; handed back to implementation without another run. Receipt `receipts/SOLR-18446.md` records both attempts and the exact bounded follow-up.
