@@ -15,3 +15,5 @@
 Heartbeat: 2026-10-22T23:25:03Z
 
 Progress: 2026-10-22T23:36:23Z. Fresh public Jira reviews completed for all 13. Source pinned to upstream main b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb. Narrow candidate branches in preparation for SOLR-17844 and SOLR-18446. SOLR-17840 ignored timeout test enabled only in a disposable premise worktree; run evidence pending. SOLR-18398 explicitly deferred in Jira until closer to 11.0 release; no premature broad API migration. No external posts or PR actions.
+
+Heartbeat: 2026-10-22T23:53:26Z. SOLR-17844 first head gate failed one test after a successful discriminating mutation; returned to implementation, no green claim. SOLR-18446 exact tidy output committed and pushed as 5dcdf0d2bce40a9e83b9d19567beb6785844335f; one permitted full retry will run from step 0. SOLR-17840 enabled test executed once and failed with an LTR timeout response containing no hits; diagnostic boundary probe is being prepared, no speculative patch.

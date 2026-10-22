@@ -1,6 +1,6 @@
 # Gate job: SOLR-17844 (restore field-cache sort assertions)
 
-Status: CLAIMED (claims/phone-agent-2-blockers-round-1.md)
+Status: HANDED BACK (restored test oracle count fails; implementation investigation, not green)
 
 - Branch: solr-17844-restore-sort-assertions-phone-agent-2. Head: `0a7ffa07a40c123bd541df3068548247f40055d7`, pushed to fork 2026-10-22.
 - Prior gated head: none. Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`.
@@ -43,3 +43,7 @@ Runner: `/workspace/tools/phone-agent-2-hardening-gate.py`, configuration `/work
 - [ ] terminal gate status and round claim updated
 
 No external posts, PR opening, ready flips or force pushes. Commits as Nick Shanin without trailers.
+
+## Attempt 1 outcome
+
+At 0a7ffa07a40c123bd541df3068548247f40055d7, changelog exemption and tidy passed, Error Prone compile passed, and mutation proof executed 2 tests with 2 expected order failures. Restored-head test executed 2 tests, 0 skipped, 1 failure, 0 errors at seed 1BB02D3762B56611: testRandomStringValSort expected count 42, actual 14. Module check not run after failure. Receipt `receipts/SOLR-17844.md`. Return to implementation to establish the independent match oracle, with no weakened assertion or expected-value substitution.

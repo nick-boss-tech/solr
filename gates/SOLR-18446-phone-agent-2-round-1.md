@@ -43,3 +43,7 @@ Runner: `/workspace/tools/phone-agent-2-hardening-gate.py`, configuration `/work
 - [ ] terminal gate status and round claim updated
 
 No external posts, PR opening, ready flips or force pushes. Commits as Nick Shanin without trailers.
+
+## Attempt 1 and permitted retry
+
+Attempt 1 at 23db47ef150dd87198718085a9d28cffdf4ada4c: changelog parsed; tidy rc=0, but it reformatted the new test assertion. No compile or tests ran in this attempt. Exact tidy output committed as `5dcdf0d2bce40a9e83b9d19567beb6785844335f`, `SOLR-18446: gate repair: apply tidy formatting`, changing only HttpSolrCallCloudTest.java. Fork branch pushed fast-forward. Retry starts at step 0 on that repaired head, logs `/workspace/phone-agent-2-logs/gate-18446-attempt-2`, configuration `/workspace/phone-agent-2-logs/gate-18446-attempt-2.json`. No further gate retry is allowed after this one.
