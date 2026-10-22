@@ -90,4 +90,25 @@ public class IndexFetcherLeaderUrlRedactionTest extends SolrTestCase {
     assertFalse(e.getMessage(), e.getMessage().contains("secretpw"));
     assertTrue(e.getMessage(), e.getMessage().contains("solr:********@127.0.0.1"));
   }
+
+  @Test
+  public void testLeaderUrlWithRawSlashOrQuestionMarkInPasswordIsWithheld() throws Exception {
+    for (String leaderUrl :
+        List.of(
+            "http://solr:secret/pw@localhost:8983/solr/collection1",
+            "http://solr:secret?pw@localhost:8983/solr/collection1")) {
+      SolrException e =
+          assertThrows(
+              SolrException.class,
+              () ->
+                  new IndexFetcher(
+                      initArgsWithLeaderUrl(leaderUrl), null, coreWithRealAllowListChecker()));
+      assertFalse(e.getMessage(), e.getMessage().contains("secret"));
+      assertFalse(e.getMessage(), e.getMessage().contains("pw@"));
+      assertTrue(e.getMessage(), e.getMessage().contains("credentials withheld"));
+      if (e.getCause() != null && e.getCause().getMessage() != null) {
+        assertFalse(e.getCause().getMessage(), e.getCause().getMessage().contains("secret"));
+      }
+    }
+  }
 }

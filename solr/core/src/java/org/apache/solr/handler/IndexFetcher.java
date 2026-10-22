@@ -305,7 +305,7 @@ public class IndexFetcher {
             .checkAllowList(List.of(leaderCoreUrl), clusterState);
       } catch (MalformedURLException e) {
         // the leader URL can carry basic-auth credentials; never print them in an error
-        String redactedLeaderUrl = URLUtil.redactUserInfo(leaderCoreUrl);
+        String redactedLeaderUrl = redactForMessage(leaderCoreUrl);
         MalformedURLException cause = e;
         if (e.getMessage() != null && e.getMessage().contains(leaderCoreUrl)) {
           cause =
@@ -317,7 +317,7 @@ public class IndexFetcher {
             "Malformed 'leaderUrl' " + redactedLeaderUrl,
             cause);
       } catch (SolrException e) {
-        String redactedLeaderUrl = URLUtil.redactUserInfo(leaderCoreUrl);
+        String redactedLeaderUrl = redactForMessage(leaderCoreUrl);
         String detail = e.getMessage();
         if (detail != null) {
           // the allow-list checker's message embeds the URL it rejected
@@ -484,7 +484,7 @@ public class IndexFetcher {
         if (!replica.getCoreUrl().equals(leaderCoreUrl)) {
           setLeaderCoreUrl(replica.getCoreUrl());
           if (log.isInfoEnabled()) {
-            log.info("Updated leaderUrl to {}", URLUtil.redactUserInfo(leaderCoreUrl));
+            log.info("Updated leaderUrl to {}", redactForMessage(leaderCoreUrl));
           }
           // TODO: Do we need to set forceReplication = true?
         } else {
@@ -1299,6 +1299,13 @@ public class IndexFetcher {
       compareResult.equal = false;
       return compareResult;
     }
+  }
+
+  private static String redactForMessage(String url) {
+    String redacted = URLUtil.redactUserInfo(url);
+    return redacted.equals(url) && url.indexOf('@') >= 0
+        ? "<credentials withheld: URL cannot be redacted>"
+        : redacted;
   }
 
   /**
