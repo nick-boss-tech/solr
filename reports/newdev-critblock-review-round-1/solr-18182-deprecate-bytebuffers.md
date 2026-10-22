@@ -19,3 +19,12 @@ Review (2026-10-22, vm4), same head 0abcca2f4b. - Pass 1 minor findings, unchang
 - Repairs: none.
 
 Regate: `gates/SOLR-18182-review-pass-2.md`, GATE GREEN at 0abcca2f4b on vm4.
+
+## Pass 3
+
+Review (2026-10-22, vm4), same head 0abcca2f4b. - No new findings against the head. The pass 1 minor findings stand: the rejected-lock message names `ByteBuffersDirectory` while the replacement names `RAMDirectory`; the new test checks only the annotation.
+- Repairs: none.
+
+Regate: `gates/SOLR-18182-review-pass-3.md`, GATE GREEN at 0abcca2f4b on vm4.
+
+Final head: 0abcca2f4b99b92136e5a5650fc7262bbe24ab17. Unit 36 DONE with the three pass sections.
