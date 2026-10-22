@@ -18,3 +18,12 @@ Review (2026-10-22, vm4), same head c8fef7c4cd. - Pass 1 minor findings, unchang
 - Repairs: none.
 
 Regate: `gates/SOLR-18209-review-pass-2.md`, GATE GREEN at c8fef7c4cd on vm4.
+
+## Pass 3
+
+Review (2026-10-22, vm4), same head c8fef7c4cd. - No new findings against the head. The pass 1 minor findings stand: the null-state path in `NodeHealth.contains` (latent); the schema designer change has no focused coverage.
+- Repairs: none.
+
+Regate: `gates/SOLR-18209-review-pass-3.md`, GATE GREEN at c8fef7c4cd on vm4.
+
+Final head: c8fef7c4cd970fb84cae835a7a2f7a497b7dd4fc. Unit 38 DONE with the three pass sections.
