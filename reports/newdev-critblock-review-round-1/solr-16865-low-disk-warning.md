@@ -12,3 +12,11 @@ Head reviewed: 606eca38e9594ada4ed16e2a376ba30b0c21273a. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-16865-review-pass-1.md`, GATE GREEN at 606eca38e9 on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head 606eca38e9. - Pass 1 major finding, unchanged and confirmed in the file: the startup path `warnIfDataDirLowOnSpace` is not exercised by any test (`LowDataDirSpaceThresholdTest.java` calls only `isBelowFreeSpaceThreshold`). Recorded, not repaired.
+- Pass 1 minor finding, unchanged: the fixed 2 percent constant.
+- Repairs: none.
+
+Regate: `gates/SOLR-16865-review-pass-2.md`, GATE GREEN at 606eca38e9 on vm4.
