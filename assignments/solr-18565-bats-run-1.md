@@ -1,6 +1,6 @@
 # Pool assignment: run the bats integration tests on the SOLR-18565 branch
 
-Status: OPEN
+Status: DONE (closed without counting: the three runs were made as root, so the assertion was never reached. The check on the head is the passing Script Tests run on PR 5193, before it merged.)
 
 - Capability tags: bats.
 - Category: none. This is a CI check of a one-line test fix.
