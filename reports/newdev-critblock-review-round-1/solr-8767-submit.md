@@ -30,3 +30,13 @@ Review (2026-10-22, vm4), same head 3b5f2d2357.
 
 Regate: `gates/SOLR-8767-review-pass-2.md`, GATE GREEN at 3b5f2d2357 on vm4.
 
+## Pass 3
+
+Review (2026-10-22, vm4), same head 3b5f2d2357. No new findings against the head. Passes 1 and 2 findings stand: no `fl=*` test (major); multivalued feedback not pinned (minor); owner item on the output change (rung 5).
+
+- Repairs: none.
+
+Regate: `gates/SOLR-8767-review-pass-3.md`, GATE GREEN at 3b5f2d2357 on vm4.
+
+Final head: 3b5f2d2357325ba993fe1d2716fafee55741fc1b. Unit 26 DONE with the three pass sections.
+
