@@ -14,3 +14,5 @@ Heartbeat: 2026-10-20T14:15:00Z. Pass 1 PARTIAL at cb32d0d966: changelog and syn
 Heartbeat: 2026-10-20T14:13:00Z. Pass 2 PARTIAL at cb32d0d966 (override order read on both launchers). Pass 3 next.
 
 NEARLY: 2026-10-20T14:15:00Z (vm5). Passes 1 to 3 on cb32d0d966: changelog and bash -n green, override order read on both launchers, no repairs. Named piece for vm1: launcher behavior check and bats run on cb32d0d966 (gates/SOLR-18552-launcher-bats.md, OPEN, bats tag). vm5 does no further work on this unit.
+
+- 2026-10-22 (vm1): the launcher and bats leg named in gates/SOLR-18552-launcher-bats.md is DONE at head cb32d0d966: the branch launcher puts sharedArenaMaxPermits=64 on a started node's JVM command line and the base launcher does not; bats ran 21 tests with 14 passes and 7 failures, all 7 the root-user start refusal on this host. Receipt: receipts/SOLR-18552.md, top section.
