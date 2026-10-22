@@ -22,5 +22,22 @@ Head verification before any run: `git ls-remote` for `refs/heads/solr-18565-sub
 - Test 88 ("use different hostname when not checking peer-name", `test/test_ssl.bats`): FAILED. Failure at test_ssl.bats line 92: "`solr start' failed", with the root-user warning in the output. The branch's changed assertion is never reached.
 - Log path: `/home/hatch/workspace/tools/bats-18565-logs/head-full-retry2/` (`solr-18565-head-full.log`, `solr-18565-head-full.headroom.log`, and `test-output-evidence/` holding a copy of the run's `test-output`).
 - Attempts: attempt 1 (`logs/head-full/`) stopped at `downloadBats` on the TLS interception described above, no tests ran; attempt 2 (`logs/head-full-retry/`) was killed by a runtime restart about 73 seconds in, mid-build; attempt 3 is the counted run.
-- Other failing tests (46, all recorded per the Decisions table; the failure mode is the host cause above): test_adminconsole_urls.bats: "assert able to launch solr admin console", "assert CSP header contains custom connect src URLs". test_assert.bats: "assert for non cloud mode", "assert for cloud mode". test_auth.bats: "auth enable/disable lifecycle", "enable auth connects via zookeeper". test_basic_auth.bats: "create, config, api, and delete with basic auth", "post, postlogs and export with basic auth", "package with basic auth", "admin UI static content is excepted from basic auth". test_create.bats: "create for non cloud mode", "create for cloud mode". test_export.bats: "Check export command". test_healthcheck.bats: "healthcheck on cloud solr", "healthcheck errors on standalone solr". test_modules.bats: "SQL Module", "icu collation in analysis-extras module". test_placement_plugin.bats: "Affinity placement plugin using sysprop", "Random placement plugin using ENV". test_security_manager.bats: "allowPaths - backup". test_ssl.bats: "start solr with ssl", "start solr wi
-...[truncated 4215 chars]
+- Other failing tests (46): every one traces to the same root-start refusal described above; the full list is in the run's report.xml at the log path above. (This paragraph was truncated in the first posting of this report; the two sections below were missing from it and are added in this completion.)
+
+## Head SSL file
+
+- Status: DONE. Command: `pool/bin/sweep-run.sh /home/hatch/workspace/solr-worktrees/solr-18565-head <log dir> solr-18565-head-ssl :solr:packaging:integrationTests --tests test_ssl.bats` (the --tests option was accepted; no fallback needed).
+- Counts from `solr/packaging/build/test-output/report.xml`: 7 tests, 0 passed, 7 failed, 0 skipped.
+- Test 88 ("use different hostname when not checking peer-name"): FAILED at test_ssl.bats line 92, "`solr start' failed", with the root-user warning in the output. The branch's changed assertion is never reached.
+- Log path: `/home/hatch/workspace/tools/bats-18565-logs/head-ssl/`
+
+## Base SSL file
+
+- Status: DONE (second attempt; the first stopped on a stale Gradle journal lock left by the head runs, cleared per the standing rule, and the retry is the counted run). Command: the same as the Head SSL file item, in the base worktree at `78923482727b8530d26ad08db734712ab2dacb12`.
+- Counts from `solr/packaging/build/test-output/report.xml`: 7 tests, 0 passed, 7 failed, 0 skipped.
+- Test 88: FAILED identically to the head (line 92, root-user warning). On this host the base and the head are indistinguishable: both die before the curl assertion.
+- Log path: `/home/hatch/workspace/tools/bats-18565-logs/base-ssl-retry/`
+
+## Completion note
+
+Added by vm1 on 2026-10-22: the first posting of this report (commit 9830aafe9d) was truncated inside the Head full run section and lacked the Head SSL file and Base SSL file sections. The sections above come from the run evidence (report.xml and test-output.txt in the recorded log paths), re-verified at completion time. No runs were repeated for this completion, and no code or branch state changed.
