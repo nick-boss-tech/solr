@@ -21,9 +21,21 @@ Behavior changes:
 **Both concurrency tests fail on main and pass on this head.** Verified 2026-10-22.
 
 - Base `63f2459f3b`, main's `SecurityConfHandlerLocal.java`, `SecurityConfHandlerTest` 6 of 6 (the predicate test needs the new helper): `testReaderNeverSeesPartialSecurityJsonDuringEdits` fails ("reader saw a partial security.json of 0 bytes") and `testConcurrentPersistConfLeavesOneWholeDocument` fails ("not a single JSON document"). The other four pass on main because they pin behavior main already has.
-- Head `d1bf9b1407`: `SecurityConfHandlerTest` 7 of 7, `BasicAuthStandaloneTest` 2 of 2.
-- Disk full with every inode in use (2 MB tmpfs, outside the suite): the earlier fallback left a 1 MB file as 2 MB of unparseable JSON. Now the edit fails and the file is unchanged. Measured on `691eba654c` and `d1bf9b1407`.
-- Earlier runs outside the suite, on an earlier tree: 150 `kill -9` trials during 8 MB writes gave 0 torn files with this change and 23 torn or empty in place. A second process made 2,000 reads during repeated writes: 0 torn with this change, 1,843 torn or empty in place. A bind-mounted file refuses the move, falls back in place, and gets the new content.
+- Head `d1bf9b1407`: `SecurityConfHandlerTest` 7 of 7, `BasicAuthStandaloneTest` 2 of 2, no failures or skips.
+
+**Real conditions, run on this head (2026-10-22, outside the suite).**
+
+- Kill -9 during 8 MB writes, 100 trials with a 2.5 s window: 50 old, 50 new, 0 torn. The in-place write (main's behavior) under the same window: 40 old, 47 new, 13 torn or empty.
+- Disk full with every inode in use (2 MB tmpfs): the earlier fallback left a 1 MB file as 2 MB of unparseable JSON. Now the edit fails and the file is unchanged.
+- A second process reads 2,000 times during repeated writes: 2,000 complete, 0 torn. The in-place control, from an earlier run: 1,843 torn or empty.
+- Symlink: the edit writes through the link, which stays a link, and the target gets the new content.
+- Bind-mounted file: the rename is refused (Device or resource busy), the in-place fallback writes, and the mounted file gets the new content.
+
+**Test seams on Option B.** Branch `solr-18010-atomic-posix` (head `9be90e623b`) has the same write path with test seams added to production code. Commit [`e66ec9d3ea`](https://github.com/nick-boss-tech/solr/commit/e66ec9d3ea04ba288a11cb7165efdf6178f51ee9) adds six package-private hook methods to [`SecurityConfHandlerLocal`](https://github.com/nick-boss-tech/solr/blob/9be90e623b60d024c575308d2ad1ee20735731ec/solr/core/src/java/org/apache/solr/handler/admin/SecurityConfHandlerLocal.java#L190-L218). Commit [`b12895b4e2`](https://github.com/nick-boss-tech/solr/commit/b12895b4e2) puts nine seam tests in their own class. This head removes the hooks.
+
+- Option B's full gate passed: `SecurityConfHandlerTest` 6 of 6, `BasicAuthStandaloneTest` 2 of 2, and 17 of 17 with the seam tests. The seams let the suite make the sync, owner, permission-copy and move steps fail. On this head those steps are reviewed only.
+- Option B does not have the group copy or the narrowed create fallback. Those two changes were checked on this head only: the disk-full run above, and no test for the group, since the test host has one group.
+- The two branches differ in more than the hooks, so [the two-dot compare](https://github.com/nick-boss-tech/solr/compare/solr-18010-atomic-posix..solr-18010-submit) also lists main changes that landed after Option B's base. The `security.json` files are `SecurityConfHandlerLocal.java`, `SecurityConfHandlerTest.java`, and `SecurityConfHandlerLocalSeamTest.java`, which exists only on Option B.
 
 ## A choice to check
 
