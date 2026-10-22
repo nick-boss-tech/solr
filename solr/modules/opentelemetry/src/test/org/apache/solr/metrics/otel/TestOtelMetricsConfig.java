@@ -334,7 +334,7 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
     } catch (ClassNotFoundException e) {
       return null;
     } catch (ReflectiveOperationException e) {
-      throw new AssertionError("Could not instantiate OTEL metrics configuration", e);
+      throw new LinkageError("Could not instantiate OTEL metrics configuration", e);
     }
   }
 
@@ -345,9 +345,9 @@ public class TestOtelMetricsConfig extends SolrTestCaseJ4 {
       if (e.getCause() instanceof RuntimeException runtimeException) {
         throw runtimeException;
       }
-      throw new AssertionError("Could not read OTEL metrics configuration: " + methodName, e);
+      throw new LinkageError("Could not read OTEL metrics configuration: " + methodName, e);
     } catch (ReflectiveOperationException e) {
-      throw new AssertionError("Could not read OTEL metrics configuration: " + methodName, e);
+      throw new LinkageError("Could not read OTEL metrics configuration: " + methodName, e);
     }
   }
 
