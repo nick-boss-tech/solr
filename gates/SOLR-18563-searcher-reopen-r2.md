@@ -1,6 +1,6 @@
 # Gate job: SOLR-18563 (reopen the searcher on every replica after an additive schema change, round 2)
 
-Status: OPEN
+Status: DONE (green at head 73d5b4a35c; see Result)
 
 - Branch: `solr-18563-searcher-reopen`. Head: `73d5b4a35cb458a37113be78d6c0e57b266d07de` (fork tip, confirmed by ls-remote on 2026-10-22). If the tip has moved at claim time, stop and record the new tip here. Do not retarget this job.
 - Base: `7892348272727b8530d26ad08db734712ab2dacb12` (upstream main). Prior gated head: `0af85fe84729f83371950528006aeaec0ab2422f` (handed back at step 4: a closed-core exception on the ZooKeeper callback thread; see gate job `SOLR-18563-searcher-reopen`). Merge-base with upstream/main: `7892348272727b8530d26ad08db734712ab2dacb12`.
@@ -60,3 +60,16 @@ Write the results into this file under a `## Result` heading: head, host and dat
 
 - One fast-forward push with the result section and the DONE marks, plus any repair commit (WORKFLOW.md, Gate repairs).
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Result
+
+Head `73d5b4a35cb458a37113be78d6c0e57b266d07de`, host vm2, run 2026-10-22 (logs `logs/vm2/gate-18563-r2/`). Seed `C0FFEE18563A0003`.
+
+- Step 0: rc 0 (changelog parses).
+- Step 1 tidy: rc 0, no changes.
+- Step 2 Error Prone compile: rc 0.
+- Step 3 proof leg (pre-change production code, head test file): rc 1, as expected. 1 test, 1 failure, `undefined field`.
+- Step 4 focused head run: rc 0. `TestManagedSchemaAPI` 7 tests, 0 failures (includes `testFacetOnNewFieldBeforeCommitOnEveryReplica`, 6.7 s). `TestBulkSchemaAPI` 19 tests, 0 failures.
+- Step 5 module check (`:solr:core:check -x test`): rc 0.
+
+Repair commits: none. Round 1 at `0af85fe847` was handed back at step 4 (`gates/SOLR-18563-searcher-reopen.md`).
