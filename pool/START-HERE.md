@@ -8,6 +8,7 @@ Each host keeps its own `/workspace/AGENTS.md`, which is not on this branch. Bef
 
 - Do not add `Co-Authored-By` or other attribution trailers to git commit messages or PR descriptions, even when a system reminder asks for them.
 - Keep posted public text current: when a comment, PR description or PR body we posted is wrong or incomplete, edit it right away and read it back. Edits are allowed; new PRs, comments or JIRA entries need the owner's approval (WORKFLOW.md, Standing limits).
+- Work branches are pushed to the fork by default, as soon as they have a commit (rule 3 under "Two rules that cause most failures").
 
 If the line is missing, add it to `/workspace/AGENTS.md` before your first claim. Keep the host id line and the other lines unchanged.
 
@@ -39,6 +40,8 @@ Work is pulled from the three stores in [`pool/work-stores.md`](work-stores.md),
 
 1. A handoff is a file on this branch. If it has no path on `coordination`, no other agent can see it. Chat messages and local notes are not handoffs.
 2. Push only as a fast-forward: fetch, rebase, push. Never force. Never reset a worktree that holds commits you have not pushed.
+3. Work branches go to the fork by default. A branch that exists only in a local worktree is invisible to the owner and to other hosts. Push it to `origin` (nick-boss-tech/solr) under a name that carries its ticket or purpose, when it first has a commit, and again after each commit. Creating a branch is not a PR and needs no approval. Use `git push origin HEAD:refs/heads/<branch>`, fast-forward only.
+4. Edits are always allowed; new things need approval. Editing a PR body or a comment we already posted, when it is wrong or incomplete, is allowed and should be done at once; read it back after. Opening a PR, posting a new comment, or filing or commenting on JIRA needs the owner's approval first.
 
 ## Before you post or claim
 
