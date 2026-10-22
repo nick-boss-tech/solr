@@ -631,4 +631,35 @@ public class ReturnFieldsTest extends SolrTestCaseJ4 {
     }
     return out.toString();
   }
+
+  @Test
+  public void testRawGlobIsAGlobNotAnExplicitField() throws Exception {
+    ReturnFields rf = new SolrReturnFields(req("fl", "id,su*:[json]"));
+    assertTrue(rf.wantsLuceneField("su_x"));
+    assertFalse(rf.isExplicitLuceneField("su_x"));
+    assertTrue(rf.isExplicitLuceneField("id"));
+    assertTrue(rf.wantsLuceneField("id"));
+    assertFalse(rf.wantsLuceneField("other"));
+    assertNull(rf.getLuceneFieldNames());
+  }
+
+  @Test
+  public void testRawGlobKeepsExplicitFieldsAsExplicit() throws Exception {
+    ReturnFields rf = new SolrReturnFields(req("fl", "id,author,*_json:[json]"));
+    assertTrue(rf.isExplicitLuceneField("author"));
+    assertFalse(rf.isExplicitLuceneField("payload_json"));
+    assertTrue(rf.wantsLuceneField("payload_json"));
+    assertTrue(rf.wantsLuceneField("author"));
+    assertNull(rf.getLuceneFieldNames());
+  }
+
+  @Test
+  public void testRawGlobLoadsFieldsReadByAnotherTransformer() throws Exception {
+    ReturnFields rf = new SolrReturnFields(req("fl", "id,*_json:[json],x:[json f=author]"));
+    Set<String> loaded = rf.getLuceneFieldNames();
+    assertTrue(
+        "a field read by a transformer is not loaded next to a raw glob: " + loaded,
+        loaded == null || loaded.contains("author"));
+    assertTrue(rf.wantsLuceneField("author"));
+  }
 }

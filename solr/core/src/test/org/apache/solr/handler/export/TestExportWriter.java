@@ -1893,4 +1893,68 @@ public class TestExportWriter extends SolrTestCaseJ4 {
         resp,
         "{\"responseHeader\":{\"status\":0},\"response\":{\"numFound\":1,\"docs\":[{\"id\":\"1\",\"group_s_dv\":\"A\",\"intdv\":10}]}}");
   }
+
+  @Test
+  public void testRawGlobOnExportMatchesThePlainGlob() throws Exception {
+    assertU(adoc("id", "rawglob1", "str_s_stored", "a"));
+    assertU(commit());
+    String plain =
+        h.query(
+            reqWithPath(
+                "/export",
+                "q",
+                "id:rawglob1",
+                "fl",
+                "id,*_stored",
+                "sort",
+                "id asc",
+                "wt",
+                "json"));
+    String raw =
+        h.query(
+            reqWithPath(
+                "/export",
+                "q",
+                "id:rawglob1",
+                "fl",
+                "id,*_stored:[json]",
+                "sort",
+                "id asc",
+                "wt",
+                "json"));
+    assertTrue(plain, plain.contains("rawglob1"));
+    assertEquals(plain, raw);
+  }
+
+  @Test
+  public void testRawGlobOnExportSkipsAGlobMatchOfANonExportableField() throws Exception {
+    assertU(adoc("id", "rawglob2", "sortabledv", "x"));
+    assertU(commit());
+    String plain =
+        h.query(
+            reqWithPath(
+                "/export",
+                "q",
+                "id:rawglob2",
+                "fl",
+                "id,sortabledv*",
+                "sort",
+                "id asc",
+                "wt",
+                "json"));
+    String raw =
+        h.query(
+            reqWithPath(
+                "/export",
+                "q",
+                "id:rawglob2",
+                "fl",
+                "id,sortabledv*:[json]",
+                "sort",
+                "id asc",
+                "wt",
+                "json"));
+    assertTrue(plain, plain.contains("rawglob2"));
+    assertEquals(plain, raw);
+  }
 }
