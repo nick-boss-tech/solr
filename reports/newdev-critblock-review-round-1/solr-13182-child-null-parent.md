@@ -14,3 +14,14 @@ Review (2026-10-22, vm4):
 - Repairs: none.
 
 Regate: `gates/SOLR-13182-review-pass-1.md`, GATE GREEN at 2cf82a0b94 on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head 2cf82a0b94.
+
+- Minor, unchanged from pass 1: the test pins `of=""`. The absent-`of` case is not run. In code, `subQuery` takes a null string through `getParser` too, but no test in the branch covers it. Not repaired.
+- The guard message is clear and returns 400 (`SyntaxError` mapped to BAD_REQUEST by the test's `assertQEx`). Consistent with the other `{!child}` errors in the file.
+- Repairs: none.
+
+Regate: `gates/SOLR-13182-review-pass-2.md`, GATE GREEN at 2cf82a0b94 on vm4.
+
