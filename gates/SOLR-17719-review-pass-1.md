@@ -16,7 +16,7 @@ Status: DONE (GATE GREEN at 732d3fbcc4, vm4, 2026-10-22T17:30:00Z)
 - [x] step 2 Error Prone compile `:solr:core:compileTestJava -Pvalidation.errorprone=true`, rc=0 (17:20:57)
 - [ ] step 3 proof leg: not run. Test-only timing change; no production file to revert, and the original failure is timing-dependent, so a base run is not a fail-before proof here.
 - [x] step 4 focused head run, from fresh XML: TestManagedSchemaWithMultipleAdd tests=1, skipped=0, failures=0, errors=0 (ts 2026-10-22T17:25:46Z). rc=0.
-- [x] step 5 module check `:solr:core:check -x test`, rc=0 (17:31).
+- [x] step 5 module check `:solr:core:check -x test`, rc=0 (17:29:35).
 
 Logs: `/workspace/gates/logs/vm4/17719/`.
 

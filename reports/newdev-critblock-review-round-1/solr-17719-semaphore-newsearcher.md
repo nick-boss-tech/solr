@@ -11,3 +11,11 @@ Head reviewed: 732d3fbcc47358dfa532cbdf77d6205fde6a0368. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-17719-review-pass-1.md`, GATE GREEN at 732d3fbcc4 on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head 732d3fbcc4. - Pass 1 major finding, unchanged: no fail-before evidence for the timing fix (the proof leg was not run). Not repaired.
+- Pass 1 minor finding, unchanged and confirmed in the file: `TestInjection.newSearcherHook` is installed in `@BeforeClass` and no code clears it (`TestManagedSchemaWithMultipleAdd.java`, no `@AfterClass`). Not repaired.
+- Repairs: none.
+
+Regate: `gates/SOLR-17719-review-pass-2.md`, GATE GREEN at 732d3fbcc4 on vm4.
