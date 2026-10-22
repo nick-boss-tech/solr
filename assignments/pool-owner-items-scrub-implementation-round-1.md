@@ -70,7 +70,7 @@ Row 12 is part of row 1 and is listed separately only so its changelog gap is vi
 | 4 | SOLR-8767 | `46e758551c3` | Two tests (`fl=*`, multivalued pin) | GREEN (9 tests); mutation fails the `fl=*` test | DONE |
 | 5 | SOLR-12718 | `a0c4f926e4` (no change) | None; test already on the decided branch | GREEN (2 tests) | DONE. Table branch `solr-12718` retired as duplicate, not deleted |
 | 6 | SOLR-18458 | `326184849e3` | `debug=results` removed from the fallback; flipped test and `debug=all` test | GREEN (14 tests) | DONE |
-| 7 | SOLR-16914 | `cd878023d3` (no change) | None | No probe run | NOT DONE: blocked. The probe needs the reporter's synonym data; the records do not carry it. Next step: take the example from the SOLR-16914 JIRA text, then probe the chain in `solr/core` (kuromoji is a runtime dependency there) |
+| 7 | SOLR-16914 | `cd878023d3` (no change) | None | Probe passes with the ticket's analyzer chain and a sample synonym set (`gates/SOLR-16914-owner-items.md`). The reporter's own synonym file is an attachment, not available | DONE for the probe. Docs are the resolution; the reply to the reporter is a public action for Nick |
 | 8 | SOLR-18010 narrow | `e81e5e28e9` (no change) | None | GREEN (4 tests); code checked | DONE |
 | 9 | SOLR-17297 follow-up | n/a | Assignment posted: `assignments/pool-solr-17297-spi-orphaning-followup-round-1.md` | Probe not yet re-run (step 1 of that assignment) | ASSIGNED |
 | 10 | SOLR-18297 | `73f269e99a0` | `pr-draft` removed; `DirectInvocationOnMock` fixed; 14 lockfiles to Jetty 12.1.14 | GREEN at both heads (clean compile with `-Werror`; 12 tests) | DONE |
