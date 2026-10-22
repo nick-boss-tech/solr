@@ -12,3 +12,11 @@ Head reviewed: d7db0784a19500aa5be380ccd8e88600084c2b8c. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-16220-review-pass-1.md`, GATE GREEN at d7db0784a1 on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head d7db0784a1. - Pass 1 finding, minor (shared httpClient skips the check), confirmed in code: when the builder passes its own `httpClient`, the constructor takes the `builder.httpClient` branch (`HttpJettySolrClient.java:148-155` at this head) and `createHttpClient` is never called, so the SSL-mode guard does not run. Recorded, not changed.
+- Pass 1 finding, minor (message not asserted), unchanged. Not repaired.
+- Repairs: none.
+
+Regate: `gates/SOLR-16220-review-pass-2.md`, GATE GREEN at d7db0784a1 on vm4.
