@@ -36,6 +36,6 @@ No row may leave the choice to the claimant.
 
 ## Limits
 
-- No PR, comment, JIRA or email. No force push. Do not change or push the branch.
+- New PRs, comments, JIRA entries and emails need the owner's approval. Editing text that is already posted (a PR body, a comment, a JIRA description) is allowed. No force push. Do not change or push the branch.
 - vm2 updates the PR body from the proof line. This assignment does not edit the PR.
 - Commit as Nick Shanin with no trailers. No em dashes.

@@ -28,6 +28,6 @@ No row may leave the choice to the claimant.
 
 ## Limits
 
-- No PR, comment, JIRA or email. No force push.
+- New PRs, comments, JIRA entries and emails need the owner's approval. Editing text that is already posted (a PR body, a comment, a JIRA description) is allowed. No force push.
 - <Item-specific limits.>
 - Commit as Nick Shanin with no trailers. No em dashes.
