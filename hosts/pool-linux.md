@@ -1,6 +1,6 @@
 # Host: pool Linux host
 
-Every Linux pool host has the same capabilities. A host's label (the name a claim uses) is only a tracking name. One host also carries the bats tag; see its file in this folder.
+Every Linux pool host has the same baseline capabilities. A host's label (the name a claim uses) is only a tracking name. Additional bats and npm capabilities are listed in each host's own file in this folder.
 
 - Capability tags: review, draft, records, implementation, gate, premise-run, settling-run, sweep. Not bats or npm unless this host's own file in hosts/ lists them.
 - Toolchain: JDK 21.0.12.1 (Temurin) and Gradle 9.7.0 through the repo wrapper. The JDK install path can differ between hosts, so set JAVA_HOME to the local install and record the path in the claim.
