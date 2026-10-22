@@ -17,15 +17,6 @@
 package org.apache.solr.opentelemetry;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static org.apache.solr.metrics.otel.MetricExporterFactory.OTLP_EXPORTER_CERTIFICATE;
-import static org.apache.solr.metrics.otel.MetricExporterFactory.OTLP_EXPORTER_CLIENT_CERTIFICATE;
-import static org.apache.solr.metrics.otel.MetricExporterFactory.OTLP_EXPORTER_CLIENT_KEY;
-import static org.apache.solr.metrics.otel.MetricExporterFactory.OTLP_EXPORTER_COMPRESSION;
-import static org.apache.solr.metrics.otel.MetricExporterFactory.OTLP_EXPORTER_ENABLED;
-import static org.apache.solr.metrics.otel.MetricExporterFactory.OTLP_EXPORTER_GRPC_ENDPOINT;
-import static org.apache.solr.metrics.otel.MetricExporterFactory.OTLP_EXPORTER_HTTP_ENDPOINT;
-import static org.apache.solr.metrics.otel.MetricExporterFactory.OTLP_EXPORTER_PROTOCOL;
-import static org.apache.solr.metrics.otel.MetricExporterFactory.OTLP_EXPORTER_TIMEOUT;
 
 import io.opentelemetry.exporter.otlp.http.metrics.OtlpHttpMetricExporter;
 import io.opentelemetry.exporter.otlp.http.metrics.OtlpHttpMetricExporterBuilder;
