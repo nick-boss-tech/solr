@@ -27,6 +27,7 @@ import java.util.UUID;
 import java.util.function.Predicate;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.SolrQuery;
 import org.apache.solr.client.solrj.request.UpdateRequest;
@@ -295,5 +296,26 @@ public class TestManagedSchemaAPI extends SolrCloudTestCase {
               cloudClient.query(collection, params("q", "*:*", "sort", "id asc"));
             });
     assertTrue("Should fail because needs docValues", e.getMessage().contains("docValues"));
+  }
+
+  @Test
+  public void testFacetOnNewFieldBeforeCommitOnReceivingReplica() throws Exception {
+    CloudSolrClient client = cluster.getSolrClient();
+    for (int run = 0; run < 5; run++) {
+      String collection = "facet_receiving_" + run;
+      String field = "live_field" + run;
+      CollectionAdminRequest.createCollection(collection, "conf1", 1, 2).process(client);
+      cluster.waitForActiveCollection(collection, 1, 2);
+      Replica receiving = getCollectionState(collection).replicaStream().findFirst().orElseThrow();
+      try (HttpJettySolrClient http =
+          cluster.getReplicaJetty(receiving).newSolrClient(receiving.getCoreName())) {
+        Map<String, Object> attrs = new LinkedHashMap<>();
+        attrs.put("name", field);
+        attrs.put("type", "string");
+        new SchemaRequest.AddField(attrs).process(http, receiving.getCoreName());
+        client.add(collection, sdoc("id", "live-" + run, field, "v"));
+        http.query(new SolrQuery("*:*").setFacet(true).addFacetField(field));
+      }
+    }
   }
 }
