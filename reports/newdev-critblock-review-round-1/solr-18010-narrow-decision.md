@@ -17,7 +17,8 @@ Narrow version: keep the marker removal and serialize the content before the fil
 
 - `solr-18010-submit` (PR 5118 head): unchanged at `1b14ce9556`. It still has the atomic design. Replacing it needs a decision (see below).
 - `solr-18010-seam-tests` at `6f0236a9f7`: record only, not for merge. Package-private hooks around the temp-file steps, and four tests (reader sees the old document until the move; refused move; failed permission copy; owner mismatch), each forcing one fallback. Focused run on Linux: 11 of 11 pass. Failure-mode runs (removing each fallback) were not run, because the design is being dropped.
-- `solr-18010-narrow` (from upstream main `7892348272`): the narrow version. Gate in progress at the time of writing.
+- `solr-18010-narrow` at `e81e5e28e9` (from upstream main `7892348272`): the narrow version. Gate green (receipt `receipts/SOLR-18010.md`). Fail-before on main: two tests fail as expected.
+- PR body draft for the narrow design: `pr-drafts/solr-18010/PR-5118-body-narrow.md`. Not applied.
 
 ## Evidence that informed the decision
 
