@@ -39,6 +39,27 @@ Each item is a separate branch or commit on its fork branch, gated and receipted
 - SOLR-16155 PR (no PR; upstream #1151 covers the ticket).
 - SOLR-12743 branch deletion (no action).
 
+## Tracker
+
+Verified 2026-10-22 against the fork heads and the coordination tip `717879a360`. A row is DONE only when the branch code matches the decision and a gate record names that head. Update a row in the same commit that changes its branch or its gate.
+
+| # | Item | Branch head checked | Code matches decision | Gate at that head | State |
+| --- | --- | --- | --- | --- | --- |
+| 1 | SOLR-18552 9.x: solr.cmd default and changelog | `cd7cc695fb` | No: bin/solr only, no solr.cmd line, no changelog | Passes 1 to 3 at `cd7cc695fb`, for the bin/solr-only state | NOT DONE |
+| 2 | SOLR-11650: redact raw `/` `?` `#` in password | `e4f5e941cd` | No: regex still `[^/?]*`, so a raw `/` or `?` passes unredacted. The branch fails closed instead, which is not the decided behavior | Review pass 1 (handback) at an earlier head | NOT DONE (mismatch) |
+| 3 | SOLR-14200: IAE in SignificantTermsStream and DeepRandomStream | `10991af9bd` | No: neither stream is changed. The branch changes TupleStream, ParallelStream and SqlStream instead | Review pass 1 (handback) | NOT DONE (mismatch) |
+| 4 | SOLR-8767: fl=* test and multivalued test | `3b5f2d2357` | No: four copyField tests added with explicit fl lists. No fl=* case, no multivalued case | Passes 1 to 3 at `3b5f2d2357`, for the state without the tests | NOT DONE |
+| 5 | SOLR-12718: test on decided branch | `a0c4f926e4` | Yes: `StreamContextTest` asserts the cache from `new SolrClientCache()` | No gate record names `a0c4f926e4` | IMPLEMENTED, NOT GATED |
+| 6 | SOLR-18458: narrow debug=results | `344485485f` | No: `ReRankQParserPlugin` still accepts `RESULTS` | Passes 1 to 3 at `344485485f` | NOT DONE |
+| 7 | SOLR-16914: reporter config probe | `cd878023d3` | No probe. Only docs commits and a content check | Receipt only; no probe run | NOT DONE |
+| 8 | SOLR-18297: remove pr-draft from tree | `7c07821070` | No: `pr-draft/SOLR-18297.md` still in the tree. Lockfile check not recorded | Pass 1 at `7c07821070` | NOT DONE |
+| 9 | SOLR-18010 narrow | `e81e5e28e9` | Yes for the write path: `persistConf` serializes, then `Files.newOutputStream`; no temp file, move, permission copy or owner check | No gate record names `e81e5e28e9` | IMPLEMENTED, NOT GATED. Marker removal and tests not checked |
+| 10 | SOLR-17297 follow-up assignment | `c0ab38fc0a` | No follow-up file under `assignments/` | n/a | NOT DONE |
+| 11 | SOLR-12743: no branch deletion | `1bb4b227df` | Yes: branch untouched by this round | n/a | DONE (no action) |
+| 12 | SOLR-18552 9.x changelog | `cd7cc695fb` | No changelog file on the 9.x line | n/a | NOT DONE (part of row 1) |
+
+Row 12 is part of row 1 and is listed separately only so its changelog gap is visible.
+
 ## Done when
 
-Each item has its claim marked DONE, a receipt naming the rung, and a gate file. The vm5 status file and `OPEN-WORK.md` regenerate on the next `pool/bin/open-work.py` run.
+Each item has its claim marked DONE, a receipt naming the rung, and a gate file at the implementation head. The vm5 status file and `OPEN-WORK.md` regenerate on the next `pool/bin/open-work.py` run.
