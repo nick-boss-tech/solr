@@ -21,3 +21,12 @@ Review (2026-10-22, vm4), same head f8c4ee22bd. - Pass 1 major finding, unchange
 - Repairs: none.
 
 Regate: `gates/SOLR-18200-review-pass-2.md`, GATE GREEN at f8c4ee22bd on vm4.
+
+## Pass 3
+
+Review (2026-10-22, vm4), same head f8c4ee22bd. - No new findings against the head. The pass 1 findings stand: the tie-break changes stored signatures for documents with equal-frequency tokens (major, owner, rung 5); the test does not pin a signature value (minor); no changelog file (minor).
+- Repairs: none.
+
+Regate: `gates/SOLR-18200-review-pass-3.md`, GATE GREEN at f8c4ee22bd on vm4.
+
+Final head: f8c4ee22bdd218ddfbf287fe0e389c17a5198f8f. Unit 37 DONE with the three pass sections.
