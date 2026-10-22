@@ -59,6 +59,8 @@ Owner ruling (Nick, 2026-10-14). When a maintainer asks for a change on one of N
 
 The failure this corrects: a reviewer asked twice for all the sleeps in a test to be replaced with latches. The lane converted one sleep, replied with reasons the rest had to stay, and produced the full conversion design only when Nick pressed. The reasons given were the lane's preference presented as a constraint.
 
+Step by step, including the blast-radius checklist and the reply patterns: `material/maintainer-response-playbook.md`.
+
 ### Deciding scope questions
 
 - Either coordinator may decide a scope question under the decision default: a recorded recommendation is adopted; where no recommendation is on record, the harder and more thorough option is taken.
