@@ -1,6 +1,6 @@
 # Gate job: SOLR-17297 module SPI orphaning, follow-up round 1 (vm5)
 
-Status: PROBE CONFIRMED at c0ab38fc0a; FIX GATE pending
+Status: DONE (probe confirmed at c0ab38fc0a; fix GATE GREEN at 46a5476bf87)
 
 - Claim: `claims/pool-solr-17297-spi-followup.md`. Assignment: `assignments/pool-solr-17297-spi-orphaning-followup-round-1.md`.
 - Base: `solr-17297-submit` at `c0ab38fc0a` (unchanged). Fix branch: `solr-17297-spi-followup`.
@@ -23,3 +23,13 @@ Changed files: `SolrResourceLoader.java` (list of replaced loaders; no close on 
 ## Gate (fix)
 
 Pending, see the status file in the fix log directory.
+
+## Result of the fix gate
+
+- Head `46a5476bf87` on `solr-17297-spi-followup` (pushed as a new branch; `solr-17297-submit` unchanged).
+- Tidy rc=0, `:solr:core:compileTestJava` rc=0.
+- `TestCoreContainer`: 27 run, 3 skipped, 0 failures; the probe test `testModuleSpiCanStillLoadItsClassesWhenSharedLibIsAdded` now passes (it failed at `c0ab38fc0a`).
+- `ResourceLoaderTest`: 8 run, 0 failures.
+- Not run: the full core suite. Suggested before any PR: the full `:solr:core:test` on the head.
+
+Status: GATE GREEN at `46a5476bf87`. The residual is fixed on the new branch; the shipped branch `solr-17297-submit` is unchanged and still carries the residual until this branch is reviewed.

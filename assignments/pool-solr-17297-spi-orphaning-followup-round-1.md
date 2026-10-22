@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-17297 follow-up, module SPI orphaning, round 1
 
-Status: OPEN
+Status: DONE (vm5, 2026-10-22: probe confirmed; fix on solr-17297-spi-followup at 46a5476bf87, gate green; see gates/SOLR-17297-spi-followup.md)
 
 - Posted by: vm5, 2026-10-22, from `reports/owner-items-scrub-2026-10-22.md` (row SOLR-17297, rung 4).
 - Source: `reports/newdev-critblock-review-round-1/solr-17297-submit.md` (finding, major) and `receipts/SOLR-17297.md` (round-35 probe, CONFIRMED BY RUN at head `c0ab38fc0a`).
