@@ -160,6 +160,7 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
         copyPermissions(tmpPath);
       }
       try {
+        beforeMove(tmpPath);
         moveTemporaryFile(tmpPath);
       } catch (IOException e) {
         log.warn(
@@ -189,7 +190,7 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
     }
   }
 
-  private boolean atomicReplaceSupported() throws IOException {
+  boolean atomicReplaceSupported() throws IOException {
     return supportsAtomicReplace(
             securityJsonPath.getFileSystem().supportedFileAttributeViews(),
             Files.isSymbolicLink(securityJsonPath))
@@ -216,13 +217,13 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
     }
   }
 
-  private void syncFile(Path path) throws IOException {
+  void syncFile(Path path) throws IOException {
     try (FileChannel channel = FileChannel.open(path, StandardOpenOption.WRITE)) {
       channel.force(true);
     }
   }
 
-  private void copyPermissions(Path tmpPath) throws IOException {
+  void copyPermissions(Path tmpPath) throws IOException {
     Files.setPosixFilePermissions(tmpPath, Files.getPosixFilePermissions(securityJsonPath));
   }
 
@@ -232,11 +233,13 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
     Files.getFileAttributeView(tmpPath, PosixFileAttributeView.class).setGroup(group);
   }
 
-  private boolean hasSameOwner(Path tmpPath) throws IOException {
+  boolean hasSameOwner(Path tmpPath) throws IOException {
     return Files.getOwner(tmpPath).equals(Files.getOwner(securityJsonPath));
   }
 
-  private void moveTemporaryFile(Path tmpPath) throws IOException {
+  void beforeMove(Path tmpPath) throws IOException {}
+
+  void moveTemporaryFile(Path tmpPath) throws IOException {
     try {
       Files.move(
           tmpPath,
@@ -248,7 +251,7 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
     }
   }
 
-  private void syncDirectory(Path dir) throws IOException {
+  void syncDirectory(Path dir) throws IOException {
     try (FileChannel channel = FileChannel.open(dir, StandardOpenOption.READ)) {
       channel.force(true);
     }
