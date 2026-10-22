@@ -18,3 +18,15 @@ Review (2026-10-22, vm4):
 Repairs: none. The findings are recorded for pass 2 and the owner.
 
 Regate: `gates/SOLR-8767-review-pass-1.md`, GATE GREEN at 3b5f2d2357 on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head 3b5f2d2357.
+
+- Open pass 1 finding, major (no `fl=*` test), narrowed in code. The index path for wildcard fields (`SolrDocumentFetcher`, the `copyField` check around line 190) only excludes copy targets that are not stored, so a stored copy target is returned by a wildcard read after commit. The output filter that the branch removed was the only thing that hid stored targets on the real-time path. The behaviour is consistent for `fl=*`, but no test pins it. Still recorded, not repaired (a new test is outside the repair scope).
+- Open pass 1 finding, minor (multivalued feedback not pinned), unchanged. Not repaired.
+- Owner item (rung 5, scope), unchanged from pass 1: `/get` now returns copyField targets that used to be hidden.
+- Repairs: none.
+
+Regate: `gates/SOLR-8767-review-pass-2.md`, GATE GREEN at 3b5f2d2357 on vm4.
+
