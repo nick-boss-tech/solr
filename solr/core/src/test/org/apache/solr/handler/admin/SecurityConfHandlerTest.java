@@ -299,6 +299,57 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
     }
   }
 
+  /** A reader of security.json never sees a partial document while edits are written. */
+  public void testReaderNeverSeesPartialSecurityJsonDuringEdits() throws Exception {
+    assumeWorkingMockito();
+    Path solrHome = createTempDir("securityConfHandlerLocalReaders");
+    assumeTrue(
+        "atomic replacement needs POSIX file attributes",
+        solrHome.getFileSystem().supportedFileAttributeViews().contains("posix"));
+    Path securityJson = solrHome.resolve("security.json");
+    SecurityConfHandlerLocal handler = new SecurityConfHandlerLocal(mockCoreContainer(solrHome));
+    Map<String, Object> small = shortSecurityData("x");
+    Map<String, Object> large = largeSecurityData();
+    byte[] smallBytes = Utils.toJSON(small);
+    byte[] largeBytes = Utils.toJSON(large);
+    Files.write(securityJson, smallBytes);
+    AtomicReference<Throwable> writerErr = new AtomicReference<>();
+    AtomicBoolean writing = new AtomicBoolean(true);
+    Thread writer =
+        new Thread(
+            () -> {
+              try {
+                for (int i = 0; i < 100; i++) {
+                  handler.persistConf(new SecurityConfig().setData(i % 2 == 0 ? large : small));
+                }
+              } catch (Throwable t) {
+                writerErr.set(t);
+              } finally {
+                writing.set(false);
+              }
+            });
+    writer.start();
+    while (writing.get()) {
+      byte[] got = Files.readAllBytes(securityJson);
+      assertTrue(
+          "reader saw a partial security.json of " + got.length + " bytes",
+          Arrays.equals(got, smallBytes) || Arrays.equals(got, largeBytes));
+    }
+    writer.join(TimeUnit.SECONDS.toMillis(60));
+    assertNull("writer failed: " + writerErr.get(), writerErr.get());
+  }
+
+  private static Map<String, Object> largeSecurityData() {
+    Map<String, Object> creds = new LinkedHashMap<>();
+    creds.put("large", "L".repeat(1_000_000));
+    Map<String, Object> authc = new LinkedHashMap<>();
+    authc.put("class", "solr.BasicAuthPlugin");
+    authc.put("credentials", creds);
+    Map<String, Object> data = new LinkedHashMap<>();
+    data.put("authentication", authc);
+    return data;
+  }
+
   /** A security.json created by a write gets the mode a newly created file gets. */
   public void testPersistCreatesSecurityJsonWithDefaultMode() throws Exception {
     assumeWorkingMockito();
