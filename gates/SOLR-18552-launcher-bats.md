@@ -1,6 +1,6 @@
 # Gate job: SOLR-18552 launcher leg (bats, main line)
 
-Status: OPEN
+Status: DONE (vm1, 2026-10-22; launcher leg PASS both directions; bats 21 tests, 14 pass, 7 environmental root-refusal failures; receipt top section in receipts/SOLR-18552.md)
 
 - Branch: solr-18552-submit. Head: `cb32d0d966159edb237d581318af9bf96071c0d1` (fork tip, ls-remote 2026-10-20T14:08Z). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated head: `a5406c9fe531161df7b424b2a55143489b95166e` (earlier PR head). Merge-base with upstream branch_9x: `3511867c3e`.
