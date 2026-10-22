@@ -197,14 +197,6 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
   }
 
   /**
-   * Two edits to the standalone security.json that overlap in time must both survive: each edit
-   * reads the file, applies its commands and rewrites the file, so an edit that starts from the
-   * same content as another one overwrites it. The first edit is held open inside the plugin while
-   * the second edit is issued, which is the interleave a caller produces by sending two edit
-   * requests without waiting for the first response (SOLR-18010).
-   */
-  @SuppressWarnings({"unchecked"})
-  /**
    * Two overlapping writes of security.json must never leave a torn file behind: the document on
    * disk afterwards is always exactly one of the written documents, never the beginning of one
    * followed by the tail of a longer one (the corruption shape in SOLR-18010). The first write is
@@ -306,6 +298,23 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
     }
   }
 
+  /** A security.json created by a write gets the mode a newly created file gets. */
+  public void testPersistCreatesSecurityJsonWithDefaultMode() throws Exception {
+    assumeWorkingMockito();
+    Path solrHome = createTempDir("securityConfHandlerLocalCreate");
+    assumeTrue(
+        "POSIX file permissions are not supported on this file system",
+        solrHome.getFileSystem().supportedFileAttributeViews().contains("posix"));
+    Path control = solrHome.resolve("control.json");
+    Files.write(control, new byte[] {'{', '}'});
+    SecurityConfHandlerLocal handler = new SecurityConfHandlerLocal(mockCoreContainer(solrHome));
+    assertTrue(handler.persistConf(new SecurityConfig().setData(shortSecurityData("x"))));
+    Path securityJson = solrHome.resolve("security.json");
+    assertEquals(
+        Files.getPosixFilePermissions(control), Files.getPosixFilePermissions(securityJson));
+    assertNoTemporaryFiles(solrHome);
+  }
+
   private static String seedSecurityJson() {
     return "{\"authentication\":{\"class\":\"solr.BasicAuthPlugin\","
         + "\"credentials\":{\"solr\":\"solr\"}},"
@@ -375,7 +384,6 @@ public class SecurityConfHandlerTest extends SolrTestCaseJ4 {
     return data;
   }
 
-  /** An authorization plugin whose first {@code edit} call blocks until the test releases it. */
   /**
    * A {@link CharSequence} whose first read blocks until released. Serialization evaluates it, so a
    * write whose data carries one is held open at a known point inside the write.

@@ -29,6 +29,7 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.CommandOperation;
 import org.apache.solr.common.util.Utils;
@@ -149,10 +150,10 @@ public class SecurityConfHandlerLocal extends SecurityConfHandler {
 
   private void replaceThroughTemporaryFile(byte[] json) throws IOException {
     Path tmpPath =
-        Files.createTempFile(
-            securityJsonPath.getParent(), securityJsonPath.getFileName().toString(), ".tmp");
+        securityJsonPath.resolveSibling(
+            securityJsonPath.getFileName() + "." + UUID.randomUUID() + ".tmp");
     try {
-      Files.write(tmpPath, json);
+      Files.write(tmpPath, json, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
       syncFile(tmpPath);
       if (Files.exists(securityJsonPath)) {
         copyPermissions(tmpPath);
