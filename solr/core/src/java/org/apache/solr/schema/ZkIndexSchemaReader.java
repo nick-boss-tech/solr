@@ -211,7 +211,9 @@ public class ZkIndexSchemaReader implements OnReconnect {
                   stat.getVersion(),
                   oldSchema.getSchemaUpdateLock());
           managedIndexSchemaFactory.setSchema(newSchema);
-          solrCore.getSearcher(true, false, null);
+          if (!solrCore.isClosed()) {
+            solrCore.getSearcher(true, false, null);
+          }
           long stop = System.nanoTime();
           log.info(
               "Finished refreshing schema in {} ms",
