@@ -632,6 +632,13 @@ public class TestRawTransformer extends SolrCloudTestCase {
     }
   }
 
+  @Test
+  public void testRenamedRawTransformerWritesRawUnderNewName() throws Exception {
+    Map<?, ?> doc = jsonDocs(queryJson("id,p:[json f=payload_json],*_json:[json]")).get(0);
+    assertEquals("[{seq=[1, 2]}, {seq=[3, 4]}]", String.valueOf(doc.get("p")));
+    assertFalse("the source name still appears: " + doc, doc.containsKey("payload_json"));
+  }
+
   private static int countOccurrences(String text, String needle) {
     int count = 0;
     for (int at = text.indexOf(needle); at >= 0; at = text.indexOf(needle, at + 1)) {
