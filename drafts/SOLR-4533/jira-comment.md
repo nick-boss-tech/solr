@@ -1,1 +1,1 @@
-We checked current main (fork main at 498a09aea9). The code reading does not settle this ticket yet. We are leaving the ticket open while we look further.
+Current main does not appear to group same-position alternatives under the AND operator in the way this ticket describes, but we have not yet run a query with a custom filter that emits a same-position synonym to confirm it. We are keeping this issue open until that check is done. If you still see this on a current build, please attach the analyzer chain and the query with q.op=AND.
