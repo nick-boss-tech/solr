@@ -12,3 +12,7 @@ Heartbeat: 2026-10-22T12:21:10Z
 Result: 2026-10-22T12:57:02Z: pass 1 GREEN at 7b81166ae9 (vm4). Findings: the test checks the zoo.cfg file, not the listening ZooKeeper port (major); the proof leg fails on the collection assertion, not the new check (major); port picked by a close-and-reuse race (minor). Pass 2 next on the same head.
 
 Heartbeat: 2026-10-22T12:57:02Z
+
+Result: 2026-10-22T13:17:28Z: pass 2 GREEN at 7b81166ae9 (vm4). Pass 1 major finding narrowed: SolrZkServer reads zoo.cfg from the node's Solr home, which is the file the test checks, so the port is honored; a listening-port check is still missing. Pass 3 next on the same head.
+
+Heartbeat: 2026-10-22T13:17:28Z

@@ -11,3 +11,12 @@ Head reviewed: 7b81166ae905bc12f3cd7d18a7265ae446d62e38. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-16124-review-pass-1.md`, GATE GREEN at 7b81166ae9 on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head 7b81166ae9. - Open pass 1 finding, major (test checks zoo.cfg, not the listening port), narrowed in code. `SolrZkServer` reads `zoo.cfg` from the node's Solr home (`solr/core/src/java/org/apache/solr/cloud/SolrZkServer.java:104`), and the test asserts on that same file (`node1SolrHome/zoo.cfg`). So the written `clientPort` reaches the embedded ZooKeeper. The gap that remains is that no test checks the running ZooKeeper listens on the chosen port. Recorded, not repaired.
+- Open pass 1 finding, major (proof leg not isolated), unchanged. Not repaired.
+- Open pass 1 finding, minor (zkPort race), unchanged.
+- Repairs: none.
+
+Regate: `gates/SOLR-16124-review-pass-2.md`, GATE GREEN at 7b81166ae9 on vm4.
