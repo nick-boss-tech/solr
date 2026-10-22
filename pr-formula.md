@@ -75,20 +75,24 @@ the work already done so the answer costs the maintainer nothing.
    depends on; if an option rests on something outside the PR
    (a dead service, a gated workspace, another page that is
    itself broken), that fact is stated with its evidence. (2)
-   **The ladder, run visibly:** before anything is posed, the
-   options pass through the decision ladder (missing
-   information: get it; cost is effort: do the hard thing;
-   optional: defer as a named follow-up), and the section says
-   in a line or two why the ladder did not settle the question,
-   so what reaches the maintainer is the genuine fork that
-   survives it. (3) **A recommendation:** one option named as
-   recommended, with the reason tied to the context, and the
+   **A decision ladder for the reader:** our own ladder runs
+   before drafting and decides what, if anything, is worth
+   posing; it is never posted. What the section gives the
+   maintainer is a ladder of theirs: the deciding
+   considerations in order, each rung a question they can
+   answer from the stated context, with what follows from each
+   answer, ending at the option those answers select. A
+   maintainer who weighs a rung differently can stop there and
+   land on the other option, and the section makes that
+   landing visible too. The rungs are written in the subject's
+   own terms (readers, costs, behavior), never in our process
+   terms. (3) **A recommendation:** one option named as
+   recommended, with the reason tied to the context and to
+   where our answers land on the reader's ladder, and the
    implemented position matching the recommendation unless the
    text says why it does not. The pointed question stays, but
    it asks the maintainer to confirm or redirect a
-   recommendation, not to pick from a bare list. In public text
-   the ladder is shown as plain context and reasoning, never
-   named as process; the internal vocabulary rule still applies.
+   recommendation, not to pick from a bare list.
 5. **Limits.** What is not covered, not tested, or deliberately out of
    scope. Named, not omitted.
 6. AI header at the top AND the AI footer, on every PR
@@ -198,10 +202,12 @@ test-only): <say exactly that, and why.>
 
 ## A choice to check   (only when a real decision exists)
 
-<The verified context the options live in; the options; why the
-ladder did not settle it; the one implemented; our recommendation
-and its reason. Ends with the pointed question, now confirming or
-redirecting the recommendation: Was this the right call?>
+<The verified context the options live in; the options; a short
+decision ladder written for the reader, the deciding
+considerations in order and where each answer lands; the one
+implemented; our recommendation and its reason. Ends with the
+pointed question, now confirming or redirecting the
+recommendation: Was this the right call?>
 
 ## Limits
 
@@ -223,10 +229,12 @@ Rules for filling it in:
 - "A choice to check" appears only for a real decision with a live
   alternative. A section that merely restates what the code does is
   not a design choice (Nick's #4959 parking call) and is left out.
-  A choice section always carries its context, its ladder pass and
-  a recommendation (Nick, 2026-10-22): a bare list of options with
-  a question is an unfinished choice, because recommending an
-  option is the follow-up to posing one.
+  A choice section always carries its context, a decision ladder
+  written for the reader, and a recommendation (Nick, 2026-10-22):
+  a bare list of options with a question is an unfinished choice,
+  because recommending an option is the follow-up to posing one,
+  and the reader is handed the ladder our recommendation climbed,
+  not our own internal one.
   Narrow-scope-versus-broader-fix is never a choice section on a
   straightforward patch; the broader issue is named in Limits with a
   follow-up ticket and PR offer (Nick, 2026-10-04; first applied to
