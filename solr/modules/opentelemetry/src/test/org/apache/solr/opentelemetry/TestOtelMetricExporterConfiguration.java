@@ -226,7 +226,7 @@ public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
           OtlpExporterFactory.class.getDeclaredConstructor(settingsClass).newInstance(settings);
       return (MetricExporter) factory.getClass().getMethod("getExporter").invoke(factory);
     } catch (ReflectiveOperationException e) {
-      throw new AssertionError("Could not create an OTLP exporter with configured headers", e);
+      throw new LinkageError("Could not create an OTLP exporter with configured headers", e);
     }
   }
 
