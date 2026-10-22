@@ -20,6 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.lang.invoke.MethodHandles;
 import java.util.concurrent.TimeUnit;
 import org.apache.solr.cloud.ZkSolrResourceLoader;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
 import org.apache.solr.common.cloud.OnReconnect;
 import org.apache.solr.common.cloud.SolrZkClient;
@@ -211,8 +212,12 @@ public class ZkIndexSchemaReader implements OnReconnect {
                   stat.getVersion(),
                   oldSchema.getSchemaUpdateLock());
           managedIndexSchemaFactory.setSchema(newSchema);
-          if (!solrCore.isClosed()) {
+          try {
             solrCore.getSearcher(true, false, null);
+          } catch (SolrException e) {
+            if (!solrCore.isClosed()) {
+              throw e;
+            }
           }
           long stop = System.nanoTime();
           log.info(
