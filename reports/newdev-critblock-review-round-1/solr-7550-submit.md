@@ -27,3 +27,12 @@ Review (2026-10-22, vm4), same head fcc8a874ab:
 
 Regate: \`gates/SOLR-7550-review-pass-2.md\`, GATE GREEN at fcc8a874ab on vm4.
 
+## Pass 3
+
+Review (2026-10-22, vm4), same head fcc8a874ab. Re-read the three commits' diff and the test diff against the pass 1 and pass 2 findings. No new findings.
+
+- Open owner items, unchanged: (1) other 500s on the versions request now fail the sync where they counted as success before (rung 5, scope); (2) no cluster-level test for the ticket's four-node restart; the error-class path is traced in code (`CoreContainer.java:2222`, `HttpSolrCall.java:259-273`, `ResponseUtils.java:77`).
+- Repairs: none.
+
+Regate: `gates/SOLR-7550-review-pass-3.md`, GATE GREEN at fcc8a874ab on vm4.
+
