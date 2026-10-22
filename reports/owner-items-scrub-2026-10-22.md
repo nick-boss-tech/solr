@@ -67,3 +67,9 @@ The ladder reserves rung 5 for public commitments and public contracts. These ca
 
 - The earlier status file (`assignments/vm5-status-for-nick-2026-10-22.md`) listed these as decisions for Nick. This record supersedes that list.
 - Rung use follows `material/decision-ladder.md`. Each row cites the record it relies on.
+
+## Corrections found while implementing (2026-10-22)
+
+- SOLR-11650: the row's rule ("the userinfo ends at the last `@` before the first `/`, `?` or `#`") cannot match a password with a raw `/` or `?`, because no `@` comes before that character. The `URLUtilTest` pin that an `@` in the path is not user-info rules out a last-`@` rule. Corrected choice (rung 4, claim `claims/pool-owner-items-solr-11650.md`): `URLUtil.redactUserInfo` keeps its rule; the `IndexFetcher` messages show a withheld placeholder when the URL has an `@` and redaction leaves it unchanged.
+- SOLR-18458: the row said "as before the widening". Before the branch, the fallback accepted only `debug=true`; the branch added `all` (ignoring case) and `results`. The ticket asks for `all`, so the narrowing removes `results` only.
+- SOLR-18297: the lockfile row was not a no-op. Fourteen module lockfiles still pin `jetty-server` 12.1.12 while `gradle/libs.versions.toml` says 12.1.14. Fix: regenerate the locks.
