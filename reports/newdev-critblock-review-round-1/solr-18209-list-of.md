@@ -11,3 +11,10 @@ Head reviewed: c8fef7c4cd970fb84cae835a7a2f7a497b7dd4fc. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-18209-review-pass-1.md`, GATE GREEN at c8fef7c4cd on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head c8fef7c4cd. - Pass 1 minor findings, unchanged: the null-state path in `NodeHealth.contains` (latent); the schema designer change has no focused coverage.
+- Repairs: none.
+
+Regate: `gates/SOLR-18209-review-pass-2.md`, GATE GREEN at c8fef7c4cd on vm4.
