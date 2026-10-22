@@ -12,3 +12,10 @@ Head reviewed: c00cacddf62d67001b13b8aa2c2287a012a5807e. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-18214-review-pass-1.md`, GATE GREEN at c00cacddf6 on vm4.
+
+## Pass 2
+
+Review (2026-10-22, vm4), same head c00cacddf6. - Pass 1 minor findings, unchanged and confirmed in the file: the test-only placeholder `${tests.luceneMatchVersion:LATEST}` in the generated `solrconfig.xml`; the test does not check the generated content.
+- Repairs: none.
+
+Regate: `gates/SOLR-18214-review-pass-2.md`, GATE GREEN at c00cacddf6 on vm4.
