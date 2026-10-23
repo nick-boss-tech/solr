@@ -1,6 +1,6 @@
 # Gate job: SOLR-10928 (Request and distributed elevate.q hardening)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-10928-phase-request-hardening.md)
 
 - Branch: `solr-10928-submit`. Head: `d5621a29281f28659db7b9e9ca57cc46c2651f53` (fork tip, confirmed by ls-remote on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`. Prior gated head: none recorded.
