@@ -1,142 +1,46 @@
-================priv_key2048.pem===================
+Current package and filestore test signatures use SHA512withRSA. Generate accepted
+signatures with the test-only key pair `cryptokeys/pk2.pem` and `cryptokeys/pubk2.der`:
 
-openssl dgst -sha1 -sign ../cryptokeys/priv_key2048.pem runtimelibs.jar.bin | openssl enc -base64
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem runtimelibs.jar.bin | openssl enc -base64 -A
+jzRwIpc5oUBIp7Ti6rHmpzEPwBJc5eNh5FejCE18aLdSvDqk9k5MhW+//2LXpqosVGE3p8DsBC40s9D1UjWSBEcsR0lKjq5FeN3aIUw/zr6vD8OehH7M8mMyA51GukSa
 
-NaTm3+i99/ZhS8YRsLc3NLz2Y6VuwEbu7DihY8GAWwWIGm+jpXgn1JiuaenfxFCc
-fNKCC9WgZmEgbTZTzmV/OZMVn90u642YJbF3vTnzelW1pHB43ZRAJ1iesH0anM37
-w03n3es+vFWQtuxc+2Go888fJoMkUX2C6Zk6Jn116KE45DWjeyPM4mp3vvGzwGvd
-RxP5K9Q3suA+iuI/ULXM7m9mV4ruvs/MZvL+ELm5Jnmk1bBtixVJhQwJP2z++8tQ
-KJghhyBxPIC/2fkAHobQpkhZrXu56JjP+v33ul3Ku4bbvfVMY/LVwCAEnxlvhk+C
-6uRCKCeFMrzQ/k5inasXLw==
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem runtimelibs_v2.jar.bin | openssl enc -base64 -A
+EBkxjWVPwSP8ykFdCk4GOc55eHeM+4jGeT1JNAvJ8i9Oc8qveLpeJ9kRF9yMycWh5C7Lk0r1XW3q5bFpK0lBuwAbHI1ZM4D//LTmzKOPTvyk0V3ZWCSKbOPqCFUXL9s2
 
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem runtimelibs_v3.jar.bin | openssl enc -base64 -A
+Vei3pruXDGORnqHPqUAG6P6ZiTu4c0uTpMPC4y1SwakAKI8vXpH4UrNzxbfZOy+owNiUl/TeTxcwuRoA4Tzw+2CU0xnmH/TcWJYxaoyQ33bHHM8wRSiZFSPjcoJJv3Mw
 
-openssl dgst -sha1 -sign ../cryptokeys/priv_key2048.pem runtimelibs_v2.jar.bin | openssl enc -base64
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem testurp_v1.jar.bin | openssl enc -base64 -A
+evIFs7EQt4Pf44AKAMrqzBuEKTJ59B+wylJAwLCE05IiGV+YhIDgtjJp01IvH+qeXmffwgZC6bwsHuC901Fq7IsdvM/KR4c3lGwrFxmvAk6EanjQKLgbDYPDyl1Wj8Bi
 
-jsPpNMs74ogRbx9M4n/OH3j3s85KOq9dOtgGJkUf6O5D8T9d9zU2lDwxnTYjQCaW
-cRTLGH3Z8vpc0wyT3g4aXepgLUTSnrepbPffSFhQtFrCNxurPOLzbp6ERhwjZ0RL
-GvZrlbbjR2SxqZ3BpHiGxslj0tPCkdevNCEy1glLhl8RWG5xsLCrRL1mrEtLg97A
-53oCCrfGAHLEvW+olGeB1r7jqUaSrbfAUfDMSIvZfOIV+xdlvabkNiuzvsAc+B6Q
-pXWm+Em2f5TO/bkOh2m/UInGXcNHCa0oqRMGKP1H252Cv9eXm/d0h3Dqxv+f80Gz
-LfyA6/OKQ9FfskY4pltCsQ==
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem testurp_v2.jar.bin | openssl enc -base64 -A
+pNAfsalpLvAnwzXk8aM3IxkDwV/BuM/py0VVAYu92s9zReCyV753rN6IBo4B9FtlFfKd61a/+HQ1zQratO1p6iuWV82fk6siJOjpfx/Y93Fxl0UyuhIgoEREEK6++dz/
 
-openssl dgst -sha1 -sign ../cryptokeys/priv_key2048.pem runtimelibs_v3.jar.bin | openssl enc -base64
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem expressible.jar.bin | openssl enc -base64 -A
+xxHLVTDL/j6TFff3bBRxwqY8ZyvEZUBjl9BhsJ/B6QwYcZeMeY3qATbGcKgm+xgRyIsU+GnAmxiv9cFEfSt8i2e+Xf3nik5lOYNcOaeHKq+3El57ziCjFrkgcmB+bGCM
 
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem schema-plugins.jar.bin | openssl enc -base64 -A
+K3Lkf208bzf2aJ53DgGF0JFxFMd91TJ35lMPww8YpPu4Ap92ZQhHjIY6DPAYbNIH38wBaXWH6b0ZRx2tSSRNI7Zne8k4Bcx/2CaBFEE5c/PPNEjYHzQhz09h0O/nluQ/
 
-YxFr6SpYrDwG85miDfRWHTjU9UltjtIWQZEhcV55C2rczRUVowCYBxmsDv5mAM8j
-0CTv854xpI1DtBT86wpoTdbF95LQuP9FJId4TS1j8bZ9cxHP5Cqyz1uBHFfUUNUr
-npzTHQkVTp02O9NAjh3c2W41bL4U7j6jQ32+4CW2M+x00TDG0y0H75rQDR8zbLt3
-1oWCz+sBOdZ3rGKJgAvdoGm/wVCTmsabZN+xoz4JaDeBXF16O9Uk9SSq4G0dz5YX
-FuLxHK7ciB5t0+q6pXlF/tdlDqF76Abze0R3d2/0MhXBzyNp3UxJmj6DiprgysfB
-0TbQtJG0XGfdSmx0VChvcA==
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem payload-component.jar.bin | openssl enc -base64 -A
+jpDQKcqoUcwtvFCrj2srrrjSl94TKiNJZVjsnU29znG9nzs9LQ8AkpOZCUAWHcmFIo+j2URMHCC+PQm5Eo23G2FM3r/15FhRPsX8xynC8xmmipP0iPkIlWZNzmtfNc7b
 
-YxFr6SpYrDwG85miDfRWHTjU9UltjtIWQZEhcV55C2rczRUVowCYBxmsDv5mAM8j0CTv854xpI1DtBT86wpoTdbF95LQuP9FJId4TS1j8bZ9cxHP5Cqyz1uBHFfUUNUrnpzTHQkVTp02O9NAjh3c2W41bL4U7j6jQ32+4CW2M+x00TDG0y0H75rQDR8zbLt31oWCz+sBOdZ3rGKJgAvdoGm/wVCTmsabZN+xoz4JaDeBXF16O9Uk9SSq4G0dz5YXFuLxHK7ciB5t0+q6pXlF/tdlDqF76Abze0R3d2/0MhXBzyNp3UxJmj6DiprgysfB0TbQtJG0XGfdSmx0VChvcA==
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem containerplugin.v.1.jar.bin | openssl enc -base64 -A
+xr0P0SMNIBPV9uMYM2yjqQBvMN8H8iK6+8ijuikAvfjgZBf5z4bO2qyiJuLAMWNVrvPTgwwFV+GFEq4v7EMt04w0oXmq08NHO7qXPoqWkvgncYFVdZvYWO4VX0PPEexr
 
-=====================priv_key512.pem=====================
-openssl dgst -sha1 -sign ../cryptokeys/priv_key512.pem runtimelibs.jar.bin | openssl enc -base64
+openssl dgst -sha512 -sign ../cryptokeys/pk2.pem containerplugin.v.2.jar.bin | openssl enc -base64 -A
+liFwNH/tHXuVKjfqg0/QPCBo7nz1oQTggs5PdFpb7ccSrxEinahIt4cIQlrmnXm4qjBNXklPii3U/t3Y3FDzVyIVe8dCS7k31mhwFWui43x22keSnnlXhxYuASHt+iAd
 
-L3q/qIGs4NaF6JiO0ZkMUFa88j0OmYc+I6O7BOdNuMct/xoZ4h73aZHZGc0+nmI1
-f/U3bOlMPINlSOM6LK3JpQ==
+The following SHA1withRSA signature is used only as a negative assertion in
+TestDistribFileStore and must be rejected:
 
-openssl dgst -sha1 -sign ../cryptokeys/priv_key512.pem runtimelibs_v2.jar.bin | openssl enc -base64
+openssl dgst -sha1 -sign ../cryptokeys/pk2.pem runtimelibs.jar.bin | openssl enc -base64 -A
+VJPMTxDf8Km3IBj2B5HWkIOqeM/o+HHNobOYCNA3WjrEVfOMZbMMqS1Lo7uLUUp//RZwOGkOhrUhuPNY1z2CGEIKX2/m8VGH64L14d52oSvFiwhoTDDuuyjW1TFGu35D
 
-j+Rflxi64tXdqosIhbusqi6GTwZq8znunC/dzwcWW0/dHlFGKDurOaE1Nz9FSPJu
-XbHkVLj638yZ0Lp1ssnoYA==
+The question-answer repository signatures in repository.json use the same key:
 
-openssl dgst -sha1 -sign ../cryptokeys/priv_key512.pem runtimelibs_v3.jar.bin | openssl enc -base64
+openssl dgst -sha512 -sign ../solr/question-answer-repository-private-key.pem ../solr/question-answer-repository/question-answer-request-handler-1.0.jar.tmp | openssl enc -base64 -A
+XI8KgCzsr0UCPfz+fRMz50Iy0eFSzoxnxtqGPiuTfF8dUrtRrR8PCiKJzXTw9v+dGiL920iVLfrbsFcETnLHyyAyVPsQoI932k5MduWtLA0CnBc3j/bF1ZzKglOfxgoM
 
-a400n4T7FT+2gM0SC6+MfSOExjud8MkhTSFylhvwNjtWwUgKdPFn434Wv7Qc4QEq
-DVLhQoL3WqYtQmLPti0G4Q==
-
-openssl dgst -sha1 -sign ../cryptokeys/priv_key512.pem cache.jar.bin | openssl enc -base64
-
-A2CDnReirpII005KRN1C3pvt4NM4kItsagQPNaa3ljj/5R3LKVgiPuNvqBsffU8n
-81LOAfr5VMyGFcb4QMHpyg==
-
-openssl dgst -sha1 -sign ../cryptokeys/priv_key512.pem cache_v2.jar.bin | openssl enc -base64
-
-SOrekHt+uup+z2z+nZU5indk2huRRfmbM+W+vQ0variHrcZEG9EXt5LuPFl8Ki9A
-hr6klMHdVP8nj4wuQhu/Hg==
-
-openssl dgst -sha1 -sign ../cryptokeys/priv_key512.pem testurp_v1.jar.bin | openssl enc -base64 | tr -d \\n | sed
-
-h6UmMzuPqu4hQFGLBMJh/6kDSEXpJlgLsQDXx0KuxXWkV5giilRP57K3towiJRh2J+rqihqIghNCi3YgzgUnWQ==
-
-openssl dgst -sha1 -sign ../cryptokeys/priv_key512.pem testurp_v2.jar.bin | openssl enc -base64 | openssl enc -base64 | tr -d \\n | sed
-
-P/ptFXRvQMd4oKPvadSpd+A9ffwY3gcex5GVFVRy3df0/OF8XT5my8rQz7FZva+2ORbWxdXS8NKwNrbPVHLGXw==
-
-openssl dgst -sha1 -sign ../cryptokeys/priv_key512.pem expressible.jar.bin | openssl enc -base64 | openssl enc -base64 | tr -d \\n | sed
-
-ZOT11arAiPmPZYOHzqodiNnxO9pRyRozWZEBX8XGjU1/HJptFnZK+DI7eXnUtbNaMcbXE2Ze8hh4M/eGyhY8BQ==
-
-openssl dgst -sha1 -sign priv_key512.pem containerplugin.v.1.jar.bin | openssl enc -base64 | sed 's/+/%2B/g' | tr -d \\n | sed
-
-pmrmWCDafdNpYle2rueAGnU2J6NYlcAey9mkZYbqh+5RdYo2Ln+llLF9voyRj+DDivK9GV1XdtKvD9rgCxlD7Q==
-
-openssl dgst -sha1 -sign ../cryptokeys/priv_key512.pem containerplugin.v.2.jar.bin | openssl enc -base64 | sed 's/+/%2B/g' | tr -d \\n | sed
-
-StR3DmqaUSL7qjDOeVEiCqE+ouiZAkW99fsL48F9oWG047o7NGgwwZ36iGgzDC3S2tPaFjRAd9Zg4UK7OZLQzg==
-
-====================sha512====================
-
-openssl dgst -sha512 runtimelibs.jar.bin
-
-d01b51de67ae1680a84a813983b1de3b592fc32f1a22b662fc9057da5953abd1b72476388ba342cad21671cd0b805503c78ab9075ff2f3951fdf75fa16981420
-
-
-openssl dgst -sha512 runtimelibs_v2.jar.bin
-
-bc5ce45ad281b6a08fb7e529b1eb475040076834816570902acb6ebdd809410e31006efdeaa7f78a6c35574f3504963f5f7e4d92247d0eb4db3fc9abdda5d417
-
-openssl dgst -sha512 runtimelibs_v3.jar.bin
-
-60ec88c2a2e9b409f7afc309273383810a0d07a078b482434eda9674f7e25b8adafa8a67c9913c996cbfb78a7f6ad2b9db26dbd4fe0ca4068f248d5db563f922
-
-openssl dgst -sha512 cache.jar.bin
-
-8946650ba88919cea2f81e4771c418411f61837b2a276088c2f2c86ef2d730f152ccf5975fa8a2c7035a1f00de1994a7788676d95dc7ccea6aaf28c7fff1f46b
-
-openssl dgst -sha512 cache_v2.jar.bin
-
-873337e67b90b7ff99df012b2e9093c63079c37a564643d34861a88c4cbaf0698ebb096905929d69cdbde3b4d29d55e31db24ee05c01b39c0b75a16e54eb4335
-
-openssl dgst -sha512 testurp_v1.jar.bin
-
-7b9df184202e62cc6f73e69a7f369a6f469ad9e1508a2d61eeb7744b204f2489a2c617808f28a496fcbca3a318e16dca238c111e60a903ace877a79900bb8729
-
-openssl dgst -sha512 testurp_v2.jar.bin
-
-5c4c0c454a032916e48a1c14a0fecbd6658658a66aedec5168b7222f2e3c0c63fbe09637238a9325ce2e95a2c8521834397a97701ead46c681aa20c9fccb6654
-
-openssl dgst -sha512 expressible.jar.bin
-
-3474a1414c8329c71ef5db2d3eb6e870363bdd7224a836aab561dccf5e8bcee4974ac799e72398c7e0b0c01972bab1c7454c8a4e791a8865bb676c0440627388
-
-openssl dgst -sha512 schema-plugins.jar.bin
-
-9299d8d5f8b358b66f113a0a91a0f55db09a41419872cb56e6e4ee402645487b75b17ec515f8035352e7fdcfac9e2e861f371d1e601869859384807b19abc2fb
-
-
-=============sha256============================
-
-openssl dgst -sha256 runtimelibs.jar.bin
-
-e1f9e23988c19619402f1040c9251556dcd6e02b9d3e3b966a129ea1be5c70fc
-
-openssl dgst -sha512 runtimelibs_v2.jar.bin
-
-79298d7d5c3e60d91154efe7d72f4536eac46698edfa22ab894b85492d562ed4
-
-openssl dgst -sha256 runtimelibs_v3.jar.bin
-
-20e0bfaec71b2e93c4da9f2ed3745dda04dc3fc915b66cc0275863982e73b2a3
-
-openssl dgst -sha256 cache.jar.bin
-
-32e8b5b2a95ea306538b52017f0954aa1b0f8a8b2d0acbc498fd0e66a223f7bd
-
-openssl dgst -sha256 cache_v2.jar.bin
-
-0f670f6dcc2b00f9a448a7ebd457d4ff985ab702c85cdb3608dcae9889e8d702
-
-
+openssl dgst -sha512 -sign ../solr/question-answer-repository-private-key.pem ../solr/question-answer-repository/question-answer-request-handler-1.1.jar.tmp | openssl enc -base64 -A
+qZu+1kY5GmKKhKjiKG/Ws5Xv3NMKyEtX+a+gnwSGzgFsXhVTX3RdFoINnr5O0RGEKOLAXyErgDa6myHsVP1LkesydEiibv93hbA7+BIPdeweOI9rFHFVqRDgNbxvInr3

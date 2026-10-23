@@ -112,7 +112,7 @@ public class PackageStoreSchemaPluginsTest extends SolrCloudTestCase {
   // utility methods
 
   private static String signature(byte[] content) throws Exception {
-    Signature signature = Signature.getInstance("SHA1WithRSA");
+    Signature signature = Signature.getInstance("SHA512WithRSA");
 
     signature.initSign(KEY_PAIR.getPrivate());
     signature.update(content);

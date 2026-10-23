@@ -9,7 +9,7 @@
         "artifacts": [
           {
             "url": "question-answer-request-handler-1.0.jar.tmp",
-            "sig": "C9UWKkucmY3UNzqn0VLneVMe9kCbJjw7Urc76vGenoRwp32xvNn5ZIGZ7G34xZP7cVjqn/ltDlLWBZ/C3eAtuw=="
+            "sig": "XI8KgCzsr0UCPfz+fRMz50Iy0eFSzoxnxtqGPiuTfF8dUrtRrR8PCiKJzXTw9v+dGiL920iVLfrbsFcETnLHyyAyVPsQoI932k5MduWtLA0CnBc3j/bF1ZzKglOfxgoM"
           }
         ],
         "manifest": {
@@ -46,7 +46,7 @@
         "artifacts": [
           {
             "url": "question-answer-request-handler-1.1.jar.tmp",
-            "sig": "2PBHV2xBqd+teFpSY322lviCrr6EXB7g1Q7UAZcNsr2qzR+w+sPSyfV4YYeHKHYbMkyw1YBz11Gw/Fdgd1VIOQ=="
+            "sig": "qZu+1kY5GmKKhKjiKG/Ws5Xv3NMKyEtX+a+gnwSGzgFsXhVTX3RdFoINnr5O0RGEKOLAXyErgDa6myHsVP1LkesydEiibv93hbA7+BIPdeweOI9rFHFVqRDgNbxvInr3"
           }
         ],
         "manifest": {

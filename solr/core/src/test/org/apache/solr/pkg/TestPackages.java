@@ -124,13 +124,13 @@ public class TestPackages extends SolrCloudTestCase {
   public void testCoreReloadingPlugin() throws Exception {
     String FILE1 = "/mypkg/runtimelibs.jar";
     String COLLECTION_NAME = "testCoreReloadingPluginColl";
-    byte[] derFile = readFile("cryptokeys/pub_key512.der");
-    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pub_key512.der", cluster);
+    byte[] derFile = readFile("cryptokeys/pubk2.der");
+    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pubk2.der", cluster);
     postFileAndWait(
         cluster,
         "runtimecode/runtimelibs.jar.bin",
         FILE1,
-        "L3q/qIGs4NaF6JiO0ZkMUFa88j0OmYc+I6O7BOdNuMct/xoZ4h73aZHZGc0+nmI1f/U3bOlMPINlSOM6LK3JpQ==");
+        TestDistribFileStore.RUNTIMELIBS_SHA512_SIGNATURE);
 
     PackagePayload.AddVersion add = new PackagePayload.AddVersion();
     add.version = "1.0";
@@ -193,25 +193,25 @@ public class TestPackages extends SolrCloudTestCase {
     String URP2 = "/mypkg/testurpv2.jar";
     String EXPR1 = "/mypkg/expressible.jar";
     String COLLECTION_NAME = "testPluginLoadingColl";
-    byte[] derFile = readFile("cryptokeys/pub_key512.der");
-    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pub_key512.der", cluster);
+    byte[] derFile = readFile("cryptokeys/pubk2.der");
+    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pubk2.der", cluster);
     postFileAndWait(
         cluster,
         "runtimecode/runtimelibs.jar.bin",
         FILE1,
-        "L3q/qIGs4NaF6JiO0ZkMUFa88j0OmYc+I6O7BOdNuMct/xoZ4h73aZHZGc0+nmI1f/U3bOlMPINlSOM6LK3JpQ==");
+        TestDistribFileStore.RUNTIMELIBS_SHA512_SIGNATURE);
 
     postFileAndWait(
         cluster,
         "runtimecode/testurp_v1.jar.bin",
         URP1,
-        "h6UmMzuPqu4hQFGLBMJh/6kDSEXpJlgLsQDXx0KuxXWkV5giilRP57K3towiJRh2J+rqihqIghNCi3YgzgUnWQ==");
+        TestDistribFileStore.TESTURP_V1_SHA512_SIGNATURE);
 
     postFileAndWait(
         cluster,
         "runtimecode/expressible.jar.bin",
         EXPR1,
-        "ZOT11arAiPmPZYOHzqodiNnxO9pRyRozWZEBX8XGjU1/HJptFnZK+DI7eXnUtbNaMcbXE2Ze8hh4M/eGyhY8BQ==");
+        TestDistribFileStore.EXPRESSIBLE_SHA512_SIGNATURE);
 
     PackagePayload.AddVersion add = new PackagePayload.AddVersion();
     add.version = "1.0";
@@ -336,13 +336,13 @@ public class TestPackages extends SolrCloudTestCase {
         cluster,
         "runtimecode/runtimelibs_v2.jar.bin",
         FILE2,
-        "j+Rflxi64tXdqosIhbusqi6GTwZq8znunC/dzwcWW0/dHlFGKDurOaE1Nz9FSPJuXbHkVLj638yZ0Lp1ssnoYA==");
+        TestDistribFileStore.RUNTIMELIBS_V2_SHA512_SIGNATURE);
 
     postFileAndWait(
         cluster,
         "runtimecode/testurp_v2.jar.bin",
         URP2,
-        "P/ptFXRvQMd4oKPvadSpd+A9ffwY3gcex5GVFVRy3df0/OF8XT5my8rQz7FZva+2ORbWxdXS8NKwNrbPVHLGXw==");
+        TestDistribFileStore.TESTURP_V2_SHA512_SIGNATURE);
     // add the version using package API
     add.version = "1.1";
     add.files = Arrays.asList(new String[] {FILE2, URP2, EXPR1});
@@ -371,7 +371,7 @@ public class TestPackages extends SolrCloudTestCase {
         cluster,
         "runtimecode/runtimelibs_v3.jar.bin",
         FILE3,
-        "a400n4T7FT+2gM0SC6+MfSOExjud8MkhTSFylhvwNjtWwUgKdPFn434Wv7Qc4QEqDVLhQoL3WqYtQmLPti0G4Q==");
+        TestDistribFileStore.RUNTIMELIBS_V3_SHA512_SIGNATURE);
 
     add.version = "2.1";
     add.files = Arrays.asList(new String[] {FILE3, URP2, EXPR1});
@@ -606,14 +606,14 @@ public class TestPackages extends SolrCloudTestCase {
     add.files = List.of(FILE1);
     expectError(req, cluster.getSolrClient(), errPath, FILE1 + " has no signature");
     // now we upload the keys
-    byte[] derFile = readFile("cryptokeys/pub_key512.der");
-    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pub_key512.der", cluster);
+    byte[] derFile = readFile("cryptokeys/pubk2.der");
+    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pubk2.der", cluster);
     // and upload the same file with a different name, but it has proper signature
     postFileAndWait(
         cluster,
         "runtimecode/runtimelibs.jar.bin",
         FILE2,
-        "L3q/qIGs4NaF6JiO0ZkMUFa88j0OmYc+I6O7BOdNuMct/xoZ4h73aZHZGc0+nmI1f/U3bOlMPINlSOM6LK3JpQ==");
+        TestDistribFileStore.RUNTIMELIBS_SHA512_SIGNATURE);
     // with correct signature
     // after uploading the file, let's delete the keys to see if we get proper error message
     add.files = List.of(FILE2);
@@ -639,7 +639,7 @@ public class TestPackages extends SolrCloudTestCase {
         cluster,
         "runtimecode/runtimelibs_v2.jar.bin",
         FILE3,
-        "j+Rflxi64tXdqosIhbusqi6GTwZq8znunC/dzwcWW0/dHlFGKDurOaE1Nz9FSPJuXbHkVLj638yZ0Lp1ssnoYA==");
+        TestDistribFileStore.RUNTIMELIBS_V2_SHA512_SIGNATURE);
 
     // this time we are adding the second version of the package (0.13)
     add.version = "0.13";
@@ -748,20 +748,20 @@ public class TestPackages extends SolrCloudTestCase {
     IndexSchema[] schemas = new IndexSchema[2]; // tracks schemas for a selected core
 
     String FILE1 = "/schemapkg/schema-plugins.jar";
-    byte[] derFile = readFile("cryptokeys/pub_key512.der");
-    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pub_key512.der", cluster);
+    byte[] derFile = readFile("cryptokeys/pubk2.der");
+    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pubk2.der", cluster);
     postFileAndWait(
         cluster,
         "runtimecode/schema-plugins.jar.bin",
         FILE1,
-        "U+AdO/jgY3DtMpeFRGoTQk72iA5g/qjPvdQYPGBaXB5+ggcTZk4FoIWiueB0bwGJ8Mg3V/elxOqEbD2JR8R0tA==");
+        TestDistribFileStore.SCHEMA_PLUGINS_SHA512_SIGNATURE);
 
     String FILE2 = "/schemapkg/payload-component.jar";
     postFileAndWait(
         cluster,
         "runtimecode/payload-component.jar.bin",
         FILE2,
-        "gI6vYUDmSXSXmpNEeK1cwqrp4qTeVQgizGQkd8A4Prx2K8k7c5QlXbcs4lxFAAbbdXz9F4esBqTCiLMjVDHJ5Q==");
+        TestDistribFileStore.PAYLOAD_COMPONENT_SHA512_SIGNATURE);
 
     // upload package v1.0
     PackagePayload.AddVersion add = new PackagePayload.AddVersion();

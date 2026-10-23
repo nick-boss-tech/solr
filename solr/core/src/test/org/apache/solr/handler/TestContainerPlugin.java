@@ -288,18 +288,18 @@ public class TestContainerPlugin extends SolrCloudTestCase {
 
     int version = phaser.getPhase();
 
-    byte[] derFile = readFile("cryptokeys/pub_key512.der");
-    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pub_key512.der", cluster);
+    byte[] derFile = readFile("cryptokeys/pubk2.der");
+    uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pubk2.der", cluster);
     TestPackages.postFileAndWait(
         cluster,
         "runtimecode/containerplugin.v.1.jar.bin",
         FILE1,
-        "pmrmWCDafdNpYle2rueAGnU2J6NYlcAey9mkZYbqh+5RdYo2Ln+llLF9voyRj+DDivK9GV1XdtKvD9rgCxlD7Q==");
+        TestDistribFileStore.CONTAINER_PLUGIN_V1_SHA512_SIGNATURE);
     TestPackages.postFileAndWait(
         cluster,
         "runtimecode/containerplugin.v.2.jar.bin",
         FILE2,
-        "StR3DmqaUSL7qjDOeVEiCqE+ouiZAkW99fsL48F9oWG047o7NGgwwZ36iGgzDC3S2tPaFjRAd9Zg4UK7OZLQzg==");
+        TestDistribFileStore.CONTAINER_PLUGIN_V2_SHA512_SIGNATURE);
 
     // We have two versions of the plugin in 2 different jar files. they are already uploaded to
     // the package store

@@ -120,7 +120,7 @@ public final class CryptoKeys {
       throws InvalidKeyException, SignatureException {
     data = ByteBuffer.wrap(data.array(), data.arrayOffset(), data.limit());
     try {
-      Signature signature = Signature.getInstance("SHA1withRSA");
+      Signature signature = Signature.getInstance("SHA512withRSA");
       signature.initVerify(publicKey);
       signature.update(data);
       return signature.verify(sig);
@@ -133,7 +133,7 @@ public final class CryptoKeys {
   public static boolean verify(PublicKey publicKey, byte[] sig, InputStream is)
       throws InvalidKeyException, SignatureException, IOException {
     try {
-      Signature signature = Signature.getInstance("SHA1withRSA");
+      Signature signature = Signature.getInstance("SHA512withRSA");
       signature.initVerify(publicKey);
       byte[] buf = new byte[1024];
       while (true) {

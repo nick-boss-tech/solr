@@ -62,6 +62,50 @@ import org.slf4j.LoggerFactory;
 public class TestDistribFileStore extends SolrCloudTestCase {
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+  public static final String RUNTIMELIBS_SHA512_SIGNATURE =
+      "jzRwIpc5oUBIp7Ti6rHmpzEPwBJc5eNh5FejCE18aLdSvDqk9k5MhW+//2LXpqos"
+          + "VGE3p8DsBC40s9D1UjWSBEcsR0lKjq5FeN3aIUw/zr6vD8OehH7M8mMyA51GukSa";
+
+  public static final String RUNTIMELIBS_SHA1_SIGNATURE =
+      "VJPMTxDf8Km3IBj2B5HWkIOqeM/o+HHNobOYCNA3WjrEVfOMZbMMqS1Lo7uLUUp/"
+          + "/RZwOGkOhrUhuPNY1z2CGEIKX2/m8VGH64L14d52oSvFiwhoTDDuuyjW1TFGu35D";
+
+  public static final String RUNTIMELIBS_V2_SHA512_SIGNATURE =
+      "EBkxjWVPwSP8ykFdCk4GOc55eHeM+4jGeT1JNAvJ8i9Oc8qveLpeJ9kRF9yMycWh"
+          + "5C7Lk0r1XW3q5bFpK0lBuwAbHI1ZM4D//LTmzKOPTvyk0V3ZWCSKbOPqCFUXL9s2";
+
+  public static final String RUNTIMELIBS_V3_SHA512_SIGNATURE =
+      "Vei3pruXDGORnqHPqUAG6P6ZiTu4c0uTpMPC4y1SwakAKI8vXpH4UrNzxbfZOy+ow"
+          + "NiUl/TeTxcwuRoA4Tzw+2CU0xnmH/TcWJYxaoyQ33bHHM8wRSiZFSPjcoJJv3Mw";
+
+  public static final String TESTURP_V1_SHA512_SIGNATURE =
+      "evIFs7EQt4Pf44AKAMrqzBuEKTJ59B+wylJAwLCE05IiGV+YhIDgtjJp01IvH+qe"
+          + "XmffwgZC6bwsHuC901Fq7IsdvM/KR4c3lGwrFxmvAk6EanjQKLgbDYPDyl1Wj8Bi";
+
+  public static final String TESTURP_V2_SHA512_SIGNATURE =
+      "pNAfsalpLvAnwzXk8aM3IxkDwV/BuM/py0VVAYu92s9zReCyV753rN6IBo4B9Ftl"
+          + "FfKd61a/+HQ1zQratO1p6iuWV82fk6siJOjpfx/Y93Fxl0UyuhIgoEREEK6++dz/";
+
+  public static final String EXPRESSIBLE_SHA512_SIGNATURE =
+      "xxHLVTDL/j6TFff3bBRxwqY8ZyvEZUBjl9BhsJ/B6QwYcZeMeY3qATbGcKgm+xgRy"
+          + "IsU+GnAmxiv9cFEfSt8i2e+Xf3nik5lOYNcOaeHKq+3El57ziCjFrkgcmB+bGCM";
+
+  public static final String SCHEMA_PLUGINS_SHA512_SIGNATURE =
+      "K3Lkf208bzf2aJ53DgGF0JFxFMd91TJ35lMPww8YpPu4Ap92ZQhHjIY6DPAYbNIH"
+          + "38wBaXWH6b0ZRx2tSSRNI7Zne8k4Bcx/2CaBFEE5c/PPNEjYHzQhz09h0O/nluQ/";
+
+  public static final String PAYLOAD_COMPONENT_SHA512_SIGNATURE =
+      "jpDQKcqoUcwtvFCrj2srrrjSl94TKiNJZVjsnU29znG9nzs9LQ8AkpOZCUAWHcmFI"
+          + "o+j2URMHCC+PQm5Eo23G2FM3r/15FhRPsX8xynC8xmmipP0iPkIlWZNzmtfNc7b";
+
+  public static final String CONTAINER_PLUGIN_V1_SHA512_SIGNATURE =
+      "xr0P0SMNIBPV9uMYM2yjqQBvMN8H8iK6+8ijuikAvfjgZBf5z4bO2qyiJuLAMWNV"
+          + "rvPTgwwFV+GFEq4v7EMt04w0oXmq08NHO7qXPoqWkvgncYFVdZvYWO4VX0PPEexr";
+
+  public static final String CONTAINER_PLUGIN_V2_SHA512_SIGNATURE =
+      "liFwNH/tHXuVKjfqg0/QPCBo7nz1oQTggs5PdFpb7ccSrxEinahIt4cIQlrmnXm4"
+          + "qjBNXklPii3U/t3Y3FDzVyIVe8dCS7k31mhwFWui43x22keSnnlXhxYuASHt+iAd";
+
   @Before
   public void setup() {
     System.setProperty("solr.packages.enabled", "true");
@@ -76,15 +120,15 @@ public class TestDistribFileStore extends SolrCloudTestCase {
             .addConfig("conf", configset("cloud-minimal"))
             .configure();
     try {
-      byte[] derFile = readFile("cryptokeys/pub_key512.der");
-      uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pub_key512.der", cluster);
+      byte[] derFile = readFile("cryptokeys/pubk2.der");
+      uploadKey(derFile, ClusterFileStore.KEYS_DIR + "/pubk2.der", cluster);
 
       try {
         postFile(
             cluster.getSolrClient(),
             getFileContent("runtimecode/runtimelibs.jar.bin"),
             "/package/mypkg/v1.0/runtimelibs.jar",
-            "j+Rflxi64tXdqosIhbusqi6GTwZq8znunC/dzwcWW0/dHlFGKDurOaE1Nz9FSPJuXbHkVLj638yZ0Lp1ssnoYA==");
+            RUNTIMELIBS_SHA1_SIGNATURE);
         fail("should have failed because of wrong signature ");
       } catch (RemoteSolrException e) {
         assertThat(e.getMessage(), containsString("Signature does not match"));
@@ -94,14 +138,14 @@ public class TestDistribFileStore extends SolrCloudTestCase {
           cluster.getSolrClient(),
           getFileContent("runtimecode/runtimelibs.jar.bin"),
           "/package/mypkg/v1.0/runtimelibs.jar",
-          "L3q/qIGs4NaF6JiO0ZkMUFa88j0OmYc+I6O7BOdNuMct/xoZ4h73aZHZGc0+nmI1f/U3bOlMPINlSOM6LK3JpQ==");
+          RUNTIMELIBS_SHA512_SIGNATURE);
 
       NavigableObject rsp =
           postFile(
               cluster.getSolrClient(),
               getFileContent("runtimecode/runtimelibs.jar.bin"),
               "/package/mypkg/v1.0/runtimelibs.jar",
-              "L3q/qIGs4NaF6JiO0ZkMUFa88j0OmYc+I6O7BOdNuMct/xoZ4h73aZHZGc0+nmI1f/U3bOlMPINlSOM6LK3JpQ==");
+              "jzRwIpc5oUBIp7Ti6rHmpzEPwBJc5eNh5FejCE18aLdSvDqk9k5MhW+//2LXpqosVGE3p8DsBC40s9D1UjWSBEcsR0lKjq5FeN3aIUw/zr6vD8OehH7M8mMyA51GukSa");
 
       assertTrue(
           Objects.requireNonNullElse(rsp._getStr("message"), "")
@@ -118,7 +162,7 @@ public class TestDistribFileStore extends SolrCloudTestCase {
               ":files:/package/mypkg/v1.0[0]:sha512",
                   "d01b51de67ae1680a84a813983b1de3b592fc32f1a22b662fc9057da5953abd1b72476388ba342cad21671cd0b805503c78ab9075ff2f3951fdf75fa16981420",
               ":files:/package/mypkg/v1.0[0]:sig[0]",
-                  "L3q/qIGs4NaF6JiO0ZkMUFa88j0OmYc+I6O7BOdNuMct/xoZ4h73aZHZGc0+nmI1f/U3bOlMPINlSOM6LK3JpQ=="));
+              RUNTIMELIBS_SHA512_SIGNATURE));
 
       assertResponseValues(
           10,
