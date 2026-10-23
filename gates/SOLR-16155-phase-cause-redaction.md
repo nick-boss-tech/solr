@@ -65,7 +65,9 @@ Use the host's standard gate runner under its normal lock. Do not run the build 
 - Assigned head `323bafea9e097d05e46f2f088e5034f6fce171ec` and the 13-file diff scope against `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb` were confirmed. Fork tip remained unchanged before the tidy repair push.
 - Preflight attempt 1 exited 2 before clone or tidy because the host lacked `/workspace/.env` and `/workspace/tmp`; no build or tests ran. Attempt 2 used the authorized process-scoped credential and a scratch directory, exited 3, and produced the tidy patch at `/workspace/gates/logs/phone-agent-2/preflight/SOLR-16155-phase-cause-redaction-attempt-2/tidy.patch`.
 - Tidy repair commit: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, parent `323bafea9e097d05e46f2f088e5034f6fce171ec`, tree `ae47de910e065fe76d6d24763215224a11a11353`. It changes only `JavabinLoaderTest.java`, `DenseVectorFieldTest.java`, and `RankFieldTest.java` formatting. The pushed fork tip reads back as the repair commit.
-- Full gate rerun from step 0 on the repaired head is pending. Gate logs will be recorded under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`.
+- Phase 1 completed on the repaired head under the standard runner. Step 0 parsed the changelog; author Nick Shanin is retained and no `nick` key exists. Step 1 tidy exited 0 with no diff. Step 2 Error Prone compilation exited 0; both `:solr:core:compileJava` and `:solr:core:compileTestJava` executed, with 14 tasks executed and 4 up to date.
+- Step 3 used a separate proof worktree at seed `16155C0FFEE23`, restoring only the six production files from prior head `9d1d0e5df9d91d5b18bc62c277c6baff5faee69c`; tests and `LogListener.trace` remained at the gated head. `DocumentBuilderTest.testFailedUpdateDoesNotLogFieldValue` had one expected assertion failure at line 164; its ERROR Throwable log includes `not-a-number-secret` and `NumberFormatException`. `JavabinLoaderTest.testIOExceptionDoesNotLeakDocumentContents` had one expected assertion failure at line 173 in the v1 serialized error-info check; `-Dsolr.hideStackTrace=false` was picked up, and the raw log includes `IOException: simulated failure for secret customer value`. Its JUnit XML records the suppressed `LogListener.close` assertion for one unconsumed event; the primary line-173 assertion is present. See `phase1-proof-verdict.json` and the two proof logs/XML under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`.
+- Step 4 has not started. The phase-one wrapper paused after step 3; the standard runner had created only an empty `4-head.log` placeholder and no step-4 state. The placeholder was recorded in `4-head-placeholder-note.json` and removed without discarding test output. Phase 2 remains pending; logs are under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`.
 
 ## On green
 
@@ -79,10 +81,10 @@ If any step cannot be verified, record the limitation and stop under the appropr
 
 - [x] head confirmed by ls-remote
 - [x] diff scope confirmed
-- [ ] step 0 changelog parse
+- [x] step 0 changelog parse
 - [x] step 1 tidy clean, or committed and pushed repair recorded
-- [ ] step 2 Error Prone compilation actually executed
-- [ ] step 3 both boundary regressions fail on the prior PR production code
+- [x] step 2 Error Prone compilation actually executed
+- [x] step 3 both boundary regressions fail on the prior PR production code
 - [ ] step 4 focused head tests and compatibility suites pass, counted from fresh XML
 - [ ] step 5 core and test-framework module checks
 - [ ] fork and PR heads match the gated head
