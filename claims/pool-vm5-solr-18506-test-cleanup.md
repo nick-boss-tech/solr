@@ -26,3 +26,7 @@ Heartbeat: 2026-10-23T16:40:47Z
 Resumed: 2026-10-23T16:40:47Z. Owner direction (Nick, 2026-10-23): push the candidate branch, check whether the inode counters can be fixed, and otherwise run a one-off. The candidate branch `solr-18506-test-cleanup` is pushed at 5262d15678d0. No client-side fix exists: `/workspace` is the NFS export, and the Gradle home is on it, so the counters stay invalid. Root `/` reports 9% of inodes used. One-off: Gradle runs directly under `/workspace/tools/.gradle-vm5.lock` with `flock`, bypassing `inode-guard.py` for this claim only. Each run is logged under `gates/logs/vm5/SOLR-18506-test-cleanup/`.
 
 Rung: 3 of the decision ladder (the assignment and the owner's direction settle it). The ObjectTracker proof uses a temporary edit that is reverted before the final runs.
+
+Result: 2026-10-23T17:08:00Z: GATE GREEN for candidate `solr-18506-test-cleanup` at 5262d15678d0f21ec1b0a9cfcbf968252a0de5aa. Receipt: `receipts/SOLR-18506.md`. Gate file: `gates/SOLR-18506-test-cleanup-vm5.md`.
+
+DONE: 2026-10-23T17:08:00Z. Deliverables: `reports/solr-18506-test-cleanup-vm5.md`, `gates/SOLR-18506-test-cleanup-vm5.md`, `receipts/SOLR-18506.md` (new top section), candidate branch `solr-18506-test-cleanup`.
