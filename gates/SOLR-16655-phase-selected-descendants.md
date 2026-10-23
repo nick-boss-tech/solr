@@ -1,6 +1,6 @@
 # Gate job: SOLR-16655 (selected fields beneath unselected child labels)
 
-Status: HANDED (successor gate specification for the existing vm3 claimant; settle the older ticket-level claim before opening or running this gate)
+Status: CLAIMED (claims/phone-agent-gate-SOLR-16655-phase-selected-descendants.md)
 
 - Branch: `solr-16655-submit`. Head: `6c5c11aaf5a4c0b27daec2b4ab39a9139e95ef1c` (fork and PR head confirmed on 2026-10-23). If the tip moves before claim or execution, record it and stop.
 - Prior gated head and patch parent: `5e2317443f4116a9e97330b0d6ce175cf44b54df`. Merge-base with upstream/main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
@@ -82,3 +82,8 @@ Use the host's standard gate runner and lock. Do not run the build tool directly
 ## Deliverable and limits
 
 Receipt plus this job's actual run record and DONE marks on coordination, with any scoped gate repair pushed to the fork. No PR opening or state change, public comment, PR-body edit, JIRA or email, force push, or SOLR-12705 integration. Commit as Nick Shanin with no attribution trailers. No em dashes or en dashes.
+
+## Settlement and claim
+
+- 2026-10-23T18:21:25Z, phone-agent: the claim prerequisite above is settled. claims/pool-newdev-critblock-review-round-1-solr-16655.md was taken over under WORKFLOW.md Claims rule 4 (last heartbeat 2026-10-20T15:54:54Z; the owner confirms vm3 died many hours ago; the rule 4 gate-log check could not be performed from vm1 because the log is on vm3's disk, recorded in the takeover entry) and marked ENDED with the old-head evidence preserved. gates/SOLR-16655-review-pass-1.md is ENDED with no recorded result.
+- This job is CLAIMED by phone-agent: claims/phone-agent-gate-SOLR-16655-phase-selected-descendants.md.
