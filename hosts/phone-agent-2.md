@@ -17,4 +17,6 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 
 - Heartbeat: 2026-10-23T06:21:49.802110+00:00; completed SOLR-5821 unit 23 at `327547d693e098447ff70c536b794aa364508670` with all three guide regates GREEN. No repair, product commit, or running build.
 
-- Heartbeat: 2026-10-23T06:24:00Z; claimed SOLR-8755 unit 45, the final unit in the top-priority review round. Initial review and first gate next.
+- Heartbeat at claim: 2026-10-23T06:24:00Z; claimed SOLR-8755 unit 45, the final unit in the top-priority review round.
+
+- Heartbeat: 2026-10-23T06:53:32Z; completed SOLR-8755 unit 45 with all three review gates GREEN at the unchanged head. No product repair, product push, or running build.
