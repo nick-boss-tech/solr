@@ -493,4 +493,31 @@ public class CombinedQueryComponentMergeTotalsTest extends SolrTestCase {
         Boolean.TRUE,
         rb.rsp.getResponseHeader().get(SolrQueryResponse.RESPONSE_HEADER_PARTIAL_RESULTS_KEY));
   }
+
+  @Test
+  public void shortPerQueryListFromPartialShardIsSkipped() {
+    SolrDocument a1 = doc("a1", 2.0f), a2 = doc("a2", 1.0f);
+    SolrDocument b1 = doc("b1", 3.0f), b2 = doc("b2", 2.0f);
+    ShardResponse shard1 =
+        shardResponse(
+            "shard1",
+            header(SolrQueryResponse.RESPONSE_HEADER_PARTIAL_RESULTS_KEY, Boolean.TRUE),
+            docList(2, true, a1, a2),
+            List.of(docList(2, true, a1, a2)),
+            null);
+    ShardResponse shard2 =
+        shardResponse(
+            "shard2",
+            header(),
+            docList(2, true, b1, b2),
+            List.of(docList(2, true, b1, b2), docList(2, true, b1, b2)),
+            null);
+    ResponseBuilder rb = newResponseBuilder(scoreSortSpec(), "q0", "q1");
+    cqc.mergeIds(rb, shardRequest(shard1, shard2));
+    assertEquals("numFoundExact", Boolean.FALSE, rb.getResponseDocs().getNumFoundExact());
+    assertEquals(
+        "partialResults",
+        Boolean.TRUE,
+        rb.rsp.getResponseHeader().get(SolrQueryResponse.RESPONSE_HEADER_PARTIAL_RESULTS_KEY));
+  }
 }

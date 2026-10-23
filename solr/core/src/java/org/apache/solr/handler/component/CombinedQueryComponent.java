@@ -338,6 +338,7 @@ public class CombinedQueryComponent extends QueryComponent implements SolrCoreAw
 
         if (SolrResponseUtil.getSubsectionFromShardResponse(rb, srsp, RESPONSE_PER_QUERY_KEY, false)
                 instanceof List<?> docList
+            && queryIndex < docList.size()
             && docList.get(queryIndex) instanceof SolrDocumentList solrDocumentList) {
           docs = Objects.requireNonNull(solrDocumentList);
         }
