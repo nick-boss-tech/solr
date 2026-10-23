@@ -18,6 +18,7 @@ package org.apache.solr.cloud;
 
 import java.lang.invoke.MethodHandles;
 import java.util.EnumSet;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
@@ -34,6 +35,8 @@ import org.apache.solr.common.cloud.Slice;
 import org.apache.solr.common.cloud.ZkCoreNodeProps;
 import org.apache.solr.common.cloud.ZkNodeProps;
 import org.apache.solr.common.cloud.ZkStateReader;
+import org.apache.solr.common.util.ExecutorUtil;
+import org.apache.solr.common.util.SolrNamedThreadFactory;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.logging.MDCLoggingContext;
@@ -58,6 +61,10 @@ final class ShardLeaderElectionContext extends ShardLeaderElectionContextBase {
   private volatile boolean isClosed = false;
 
   static volatile Predicate<SolrCore> testForceSyncFailure;
+
+  private final ExecutorService rejoinExecutor =
+      ExecutorUtil.newMDCAwareSingleLazyThreadExecutor(
+          new SolrNamedThreadFactory("leaderRejoin"), 10, TimeUnit.SECONDS);
 
   public ShardLeaderElectionContext(
       LeaderElector leaderElector,
@@ -499,6 +506,16 @@ final class ShardLeaderElectionContext extends ShardLeaderElectionContextBase {
 
     cancelElection();
 
-    leaderElector.joinElection(this, true);
+    rejoinExecutor.execute(this::joinElectionAfterRejoin);
+  }
+
+  private void joinElectionAfterRejoin() {
+    try {
+      leaderElector.joinElection(this, true);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    } catch (KeeperException e) {
+      log.error("Failed to rejoin the election", e);
+    }
   }
 }
