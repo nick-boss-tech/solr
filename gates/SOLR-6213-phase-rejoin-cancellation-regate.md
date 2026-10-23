@@ -1,6 +1,6 @@
 # Gate job: SOLR-6213 (rejoin cancellation and retained regressions)
 
-Status: CLAIMED (claims/phone-agent-gate-SOLR-6213-phase-rejoin-cancellation-regate.md)
+Status: DONE (gate GREEN at 2193e0104a3fa5c6235d4f843f1d6930afeb65d1, 2026-10-23; receipt in receipts/SOLR-6213.md)
 
 - Gate ID: SOLR-6213-phase-rejoin-cancellation-regate.
 - Branch: `solr-6213-rejoin-fix`. Head: `2193e0104a3fa5c6235d4f843f1d6930afeb65d1`, confirmed against the fork ref and PR #5210 head on 2026-10-23. If the fork tip has moved at claim time, stop and record the new tip.
@@ -44,18 +44,18 @@ Claim this job under the phase-specific ID before running. Use the host's standa
 
 ## Checklist
 
-- [ ] phase claim posted; fork and PR head confirmed
-- [ ] diff scope confirmed
-- [ ] step 0 changelog parsed
-- [ ] step 1 tidy clean or repaired and re-gated
-- [ ] step 2 Error Prone compile
-- [ ] step 3a cancellation fails before, assertion recorded
-- [ ] step 3b stack growth fails on base, assertion recorded
-- [ ] step 4 three focused seeds, fresh XML counts, no skips
-- [ ] step 4b neighboring tests, no thread leaks or deadlocks
-- [ ] step 5 module check
-- [ ] receipt written at exact final head
-- [ ] job DONE and claim DONE
+- [x] phase claim posted; fork and PR head confirmed
+- [x] diff scope confirmed
+- [x] step 0 changelog parsed
+- [x] step 1 tidy clean or repaired and re-gated
+- [x] step 2 Error Prone compile
+- [x] step 3a cancellation fails before, assertion recorded
+- [x] step 3b stack growth fails on base, assertion recorded
+- [x] step 4 three focused seeds, fresh XML counts, no skips
+- [x] step 4b neighboring tests, no thread leaks or deadlocks
+- [x] step 5 module check
+- [x] receipt written at exact final head
+- [x] job DONE and claim DONE
 
 ## Deliverable and limits
 
