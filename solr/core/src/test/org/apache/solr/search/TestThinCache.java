@@ -152,7 +152,9 @@ public class TestThinCache extends SolrTestCaseJ4 {
     // lfuCache isn't registered for removals here, so check the backing cache's size.
     assertEquals(100, backing.size());
 
-    // The backing is full; make room so warming doesn't evict the new cache's own entries.
+    // Which entry the backing evicts depends on the scopes' identity hashes (SOLR-18506), so
+    // warming into a full backing could evict one of the new cache's own entries. Sizing the
+    // backing above everything this test puts keeps it from evicting anything here.
     backing.setMaxSize(200);
 
     // Test autowarming
