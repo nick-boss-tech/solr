@@ -344,23 +344,26 @@ public class HttpShardHandlerFactory extends ShardHandlerFactory
   @Override
   public void close() {
     try {
-      if (loadbalancer != null) {
-        loadbalancer.close();
-      }
-    } finally {
       try {
-        if (defaultClient != null) {
-          IOUtils.closeQuietly(defaultClient);
+        if (loadbalancer != null) {
+          loadbalancer.close();
         }
       } finally {
-        ExecutorUtil.shutdownAndAwaitTermination(commExecutor);
+        try {
+          if (defaultClient != null) {
+            IOUtils.closeQuietly(defaultClient);
+          }
+        } finally {
+          ExecutorUtil.shutdownAndAwaitTermination(commExecutor);
+        }
       }
-    }
-    IOUtils.closeQuietly(asyncRequestsGauge);
-    try {
-      SolrMetricProducer.super.close();
-    } catch (Exception e) {
-      log.warn("Exception closing.", e);
+    } finally {
+      IOUtils.closeQuietly(asyncRequestsGauge);
+      try {
+        SolrMetricProducer.super.close();
+      } catch (Exception e) {
+        log.warn("Exception closing.", e);
+      }
     }
   }
 
