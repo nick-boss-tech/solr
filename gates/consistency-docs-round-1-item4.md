@@ -1,5 +1,5 @@
 # Gate job: consistency and documentation accuracy round 1, item 4
-Status: CLAIMED (claims/consistency-docs-round-1-item4-vm4.md)
+Status: DONE
 
 - Assignment: `assignments/pool-consistency-docs-round-1.md`, item 4.
 - Branch: `docs-streaming-allowlist-note`.
@@ -23,11 +23,15 @@ Decision ladder rung 1: the pinned `solr/solr-ref-guide/build.gradle` installs `
 
 - [x] Confirm fork head and clean tracked tree.
 - [x] Reuse the already committed note text and draft.
-- [ ] Build `:solr:solr-ref-guide:buildLocalAntoraSite`.
-- [ ] Verify both rendered notes and their cross-reference destinations, including `#allow-urls`.
-- [ ] Run `:solr:solr-ref-guide:checkSiteLinks`.
-- [ ] Write the final receipt, update draft and summary, and mark the item and claim terminal.
+- [x] Build `:solr:solr-ref-guide:buildLocalAntoraSite`.
+- [x] Verify both rendered notes and their cross-reference destinations, including `#allow-urls`.
+- [x] Run `:solr:solr-ref-guide:checkSiteLinks`.
+- [x] Write the final receipt, update draft and summary, and mark the item and claim terminal.
 
 ## Limits
 
 Keep the source head unchanged. No PR, comment, Jira or email. Do not force push. Gate and receipt distinguish a successful Antora build from the full site link check.
+
+## Result
+
+GREEN at `4b185504ef7dd5e4530664995719a0e743564382`, 2026-10-23T07:21:40.292402+00:00. Antora exit 0; both rendered notes and xrefs verified; Gradle checkSiteLinks exit 0 with an output-handler caveat. Direct pinned checker exit 0, 835 files parsed, zero errors and zero warnings. The Gradle TeeOutputStream NPE and empty report are recorded, not treated as link proof. Receipt: `receipts/consistency-docs-round-1-item4.md`. Evidence: `material/consistency-docs-round-1/item4-4b185504ef-docs-evidence.tar.gz`. No tracked source change or PR.

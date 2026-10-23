@@ -1,7 +1,7 @@
 # Claim: consistency-docs-round-1 item 4 (streaming docs and the URL allow-list)
 
 - Claimant host: phone-agent-2, taking over vm4's stale blocked claim and matching `hosts/phone-agent-2.md`.
-- Status: CLAIMED. Resume item 4's documentation build check at the unchanged branch head.
+- Status: DONE. Documentation build and link validation completed at the unchanged branch head.
 - Job or assignment: `assignments/pool-consistency-docs-round-1.md`, item 4.
 - Slice: item 4 only, branch `docs-streaming-allowlist-note`.
 - Capability tags used: implementation, docs, records.
@@ -18,3 +18,5 @@ Heartbeat: 2026-10-23T07:15:00Z.
 
 Resume: 2026-10-23T07:16:00Z. Gate job `gates/consistency-docs-round-1-item4.md`; runner `/workspace/tools/phone-agent-2-consistency-item4-gate.py`; logs `/workspace/phone-agent-2-logs/consistency-item4`. Reuse the existing product commit and draft. Decision ladder rung 1: include npm development dependencies because the pinned build installs tabs with `-D`; use a standalone Git checkout for Antora. No tracked source or build-file changes.
 Heartbeat: 2026-10-23T07:16:00Z.
+
+DONE: 2026-10-23T07:21:40.292402+00:00. phone-agent-2 completed item 4 at `4b185504ef7dd5e4530664995719a0e743564382` on `docs-streaming-allowlist-note`. Gate: `gates/consistency-docs-round-1-item4.md`; receipt: `receipts/consistency-docs-round-1-item4.md`; final note text: `drafts/consistency-docs-round-1-item4.md`; evidence: `material/consistency-docs-round-1/item4-4b185504ef-docs-evidence.tar.gz`. Antora passed; both rendered notes and xrefs passed; direct pinned link checker passed with 835 files, zero errors and warnings. Gradle checkSiteLinks returned success but lost its JSON to a TeeOutputStream NPE, so the direct report supplies the link evidence. No product change or PR. No running build.
