@@ -22,6 +22,7 @@ Goal: a comment on a PR or a JIRA ticket reads the same way every time. The answ
 - No internal vocabulary: gates, claims, assignments, receipts, job IDs, pool, hosts, agent names.
 - Simple language (the rule in `pr-formula.md`, Nick, 2026-10-08). Short sentences, one idea per sentence, plain words in place of compressed jargon. Say "checked", not "dispositioned"; say "a planted error", not "a negative control".
 - Simpler wording never changes a claim. Numbers, counts, hashes and citations stay exact and complete.
+- No signposting (Nick, 2026-10-22; the full worked example is in `pr-formula.md`). Never announce content before presenting it or recap it after ("One question decides it", "An example shows", "Three things follow"). Say the thing itself, once. Announcing, saying, then summarizing makes the reader process the same content three times.
 - No em dashes.
 
 ## Links
