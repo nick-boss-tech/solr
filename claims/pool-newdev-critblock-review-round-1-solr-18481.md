@@ -8,3 +8,7 @@
 - Started: 2026-10-23T00:31:31Z (UTC).
 
 Heartbeat: 2026-10-23T00:31:31Z
+
+Result: 2026-10-23T01:02:44Z: pass 1 GREEN at 8f687ca04d (vm4). Findings: no test sends a request through the proxy (major); the proof leg does not compile on base (major, a consequence). Pass 2 next on the same head.
+
+Heartbeat: 2026-10-23T01:02:44Z
