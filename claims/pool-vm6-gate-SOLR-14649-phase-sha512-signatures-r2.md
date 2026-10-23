@@ -1,7 +1,7 @@
 # Claim: pool-vm6-gate-SOLR-14649-phase-sha512-signatures-r2
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE. Job: `gates/SOLR-14649-phase-sha512-signatures.md`. Mark DONE with the receipt path when the gate lands.
+- Status: DONE. Job: `gates/SOLR-14649-phase-sha512-signatures.md`. Receipt: `receipts/SOLR-14649.md`.
 - Job or assignment: `gates/SOLR-14649-phase-sha512-signatures.md`.
 - Supersedes: `claims/pool-vm6-gate-SOLR-14649-phase-sha512-signatures.md` (HANDED BACK at head 25589eb5e6, PackageToolTest install failure).
 - Owner decision (Nick, 2026-10-23): re-sign the question-answer fixture and widen this job's diff scope to the two key files. The existing 512-bit test key cannot produce SHA-512 signatures, so it was rotated to 2048-bit.
@@ -13,3 +13,5 @@
 - Links: Ticket or parent: SOLR-14649 (branch `solr-14649-submit`). Category: see pool/work-map.md. Siblings: none known. Supersedes: as above.
 
 Heartbeat: 2026-10-23T18:32:46Z
+
+DONE: 2026-10-23T19:02Z. Deliverables: `receipts/SOLR-14649.md` (GREEN at head `1767e9dce8`), `gates/SOLR-14649-phase-sha512-signatures.md` (DONE).
