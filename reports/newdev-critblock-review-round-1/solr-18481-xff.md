@@ -18,3 +18,12 @@ Review (2026-10-23, vm4), same head 8f687ca04d. - Pass 1 major findings, unchang
 - Repairs: none.
 
 Regate: `gates/SOLR-18481-review-pass-2.md`, GATE GREEN at 8f687ca04d on vm4.
+
+## Pass 3
+
+Review (2026-10-23, vm4), same head 8f687ca04d. - No new findings against the head. The pass 1 major findings stand: no test sends a request through the proxy; the proof is inconclusive.
+- Repairs: none.
+
+Regate: `gates/SOLR-18481-review-pass-3.md`, GATE GREEN at 8f687ca04d on vm4.
+
+Final head: 8f687ca04de6cfb6baa6075cb69fcb03737de918. Unit 41 DONE with the three pass sections.
