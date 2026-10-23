@@ -1,6 +1,6 @@
 # Pool assignment: release-path round 3 isolated factory-interrupt test
 
-Status: OPEN
+Status: CLAIMED (vm4, 2026-10-23T20:30:00Z; claim `claims/pool-teardown-release-path-round-3-test-proof.md`)
 
 - Capability tags: premise-run.
 - Category: Core admin and cores (10), with Test quality (13).
