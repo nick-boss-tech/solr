@@ -349,8 +349,11 @@ public class HttpJettySolrClient extends HttpSolrClient {
     asyncTracker.waitForComplete();
     try {
       if (closeClient) {
-        httpClient.stop();
-        httpClient.destroy();
+        try {
+          httpClient.stop();
+        } finally {
+          httpClient.destroy();
+        }
 
         if (scanner != null) {
           scanner.stop();
@@ -363,11 +366,14 @@ public class HttpJettySolrClient extends HttpSolrClient {
     } catch (Exception e) {
       throw new RuntimeException("Exception on closing client", e);
     } finally {
-      if (shutdownExecutor) {
-        ExecutorUtil.shutdownAndAwaitTermination(executor);
+      try {
+        if (shutdownExecutor) {
+          ExecutorUtil.shutdownAndAwaitTermination(executor);
+        }
+      } finally {
+        assert ObjectReleaseTracker.release(this);
       }
     }
-    assert ObjectReleaseTracker.release(this);
   }
 
   public void setAuthenticationStore(AuthenticationStore authenticationStore) {
