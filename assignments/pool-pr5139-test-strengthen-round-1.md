@@ -1,6 +1,6 @@
 # Assignment: PR #5139 (SOLR-7550) assertion-free PeerSync test (round 1)
 
-Status: CLAIMED (vm3, 2026-10-23T04:14:32Z)
+Status: DONE (2026-10-23T04:47Z, vm3, head 54d7e21f28fc7ffbbb224da068442d3105da7fc8; report `reports/pool-pr5139-test-strengthen-round-1.md`)
 
 Posted by the phone agent at the owner's direction, 2026-10-22. Source: Eric Pugh's "Nick-Boss-Tech Breach Report" (Claude.ai artifact, October 2026, Refresh 2), quoted on the dev list. Claim before starting by adding `claims/pool-<host>-{name}.md` per WORKFLOW.md. Verify every head below by ls-remote at claim time; the artifact is a snapshot and heads may have moved. If a tip has moved, work at the live tip and record it.
 
