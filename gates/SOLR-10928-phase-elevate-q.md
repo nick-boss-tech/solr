@@ -1,6 +1,6 @@
 # Gate job: SOLR-10928 (Support elevate.q in QueryElevationComponent)
 
-Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-10928-phase-elevate-q.md)
+Status: DONE
 
 - Branch: `solr-10928-submit`. Head: `034c9e65b2ce755a0b7dc238e656edc91b103f4b` (fork tip, confirmed by ls-remote on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`. Prior gated head: none recorded.
@@ -51,12 +51,12 @@ If any step cannot be verified, record it here and stop.
 - [x] diff scope confirmed
 - [x] step 0 changelog check
 - [x] step 1 tidy clean, or repaired and recorded
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg, if requested
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] step 2 Error Prone compile
+- [x] step 3 proof leg, if requested
+- [x] step 4 focused head run, counted from fresh XML
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
 
 ## Deliverable and limits
 
@@ -81,3 +81,14 @@ If any step cannot be verified, record it here and stop.
 - Repair commit: `1ff57c1b21c22031513f733b641496b77057ea55`, authored and committed as Nick Shanin with no trailers. Fast-forward pushed to `solr-10928-submit`, read back by ls-remote.
 - Decision applied: the stated tidy repair row and WORKFLOW.md Gate repairs. The unchanged standard runner restarts at step 0 on the repaired head as required by the workflow's one-retry rule, then continues through step 2 and the remaining gate. No unchanged-tree retry.
 - Attempt 2 configuration: `/workspace/tools/phone-agent-2-10928-gate-attempt-2.json`; evidence directory: `/workspace/logs/phone-agent-2-SOLR-10928-phase-elevate-q-20261023/attempt-2/`. This is the single repaired-tree retry; any failure hands the job back.
+
+### Completion
+
+- GREEN at `2026-10-23T03:04:25Z` on gated head `1ff57c1b21c22031513f733b641496b77057ea55`.
+- Attempt 2: changelog parse PASS; tidy PASS with no tracked changes; Error Prone compile PASS; proof PASS with exactly the two expected override failures; restored focused head run PASS; `:solr:core:check -x test` PASS.
+- Proof XML: 4 tests, 0 skipped, 2 failures, 0 errors. `testElevateQOverridesRequestQuery`: `org.junit.ComparisonFailure: expected:<[simple]> but was:<[complex query]>`. `testElevateQOverridesLocalParserQuery`: `org.junit.ComparisonFailure: expected:<[simple]> but was:<[parser query]>`. Both default/fallback tests passed. The production proof mutation was restored; tests were not edited.
+- Fresh head XML: 4 tests, 4 passed, 0 skipped, 0 failures, 0 errors. Seed: `10928E1E10928E1E`. Archived and counted immediately after the test run, before any other worktree command.
+- Fresh head XML path: `/workspace/logs/phone-agent-2-SOLR-10928-phase-elevate-q-20261023/attempt-2/4-head-xml/test/TEST-org.apache.solr.handler.component.QueryElevationComponentParamTest.xml`.
+- Receipt: `receipts/SOLR-10928.md`. The receipt, this DONE status, and the claim DONE mark land in the same fast-forward push.
+- Both attempts, the tidy/proof patches, all logs, and fresh XML remain preserved under the recorded evidence root. No additional repair or retry occurred. Product worktree clean at the gated head; branch tip reconfirmed by ls-remote.
+- No PR opening or state change, comment, JIRA action, email, force push, or public text edit.
