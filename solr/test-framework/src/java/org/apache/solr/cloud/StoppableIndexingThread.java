@@ -18,6 +18,7 @@ package org.apache.solr.cloud;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.nio.channels.ClosedChannelException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +40,7 @@ public class StoppableIndexingThread extends AbstractFullDistribZkTestBase.Stopp
   protected final List<String> deletes = new ArrayList<>();
   protected Set<String> addFails = new HashSet<>();
   protected Set<String> deleteFails = new HashSet<>();
+  protected Set<String> stoppedNodeAddFails = new HashSet<>();
   protected boolean doDeletes;
   private int numCycles;
   private SolrClient controlClient;
@@ -131,6 +133,10 @@ public class StoppableIndexingThread extends AbstractFullDistribZkTestBase.Stopp
           log.error("ROOT CAUSE for id={}", id, ((SolrServerException) e).getRootCause());
         }
         addFails.add(id);
+        if (e instanceof SolrServerException serverException
+            && serverException.getRootCause() instanceof ClosedChannelException) {
+          stoppedNodeAddFails.add(id);
+        }
       }
 
       if (!addFailed && doDeletes && AbstractFullDistribZkTestBase.random().nextBoolean()) {
@@ -170,7 +176,7 @@ public class StoppableIndexingThread extends AbstractFullDistribZkTestBase.Stopp
   }
 
   public int getFailCount() {
-    return addFails.size() + deleteFails.size();
+    return addFails.size() - stoppedNodeAddFails.size() + deleteFails.size();
   }
 
   protected void addFields(SolrInputDocument doc, Object... fields) {
