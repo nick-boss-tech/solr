@@ -1,6 +1,6 @@
 # Assignment: the 13 unworked Blockers (Phone Agent 2)
 
-Status: CLAIMED (claims/phone-agent-2-blockers-round-1.md)
+Status: DONE (reports/phone-agent-2-blockers-round-1.md; partial implementation outcomes explicit)
 
 - Posted by: the phone agent, 2026-10-22, at the owner's direction: contributions prioritize new development and Blocker and Critical items. These 13 Blockers are the ones with no work record anywhere (slate audit, 2026-10-22: of the 100 open Blocker and Critical tickets, 29 have any record and 71 have none; 13 of the 16 Blockers are in the unworked set).
 - Directed to: phone-agent-2 (hosts/phone-agent-2.md). Claim before starting: `claims/phone-agent-2-blockers-round-1.md`, first post wins, using the `phone-agent-2` identity. If the round cannot be taken, say so in the claim file instead of claiming.

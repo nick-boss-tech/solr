@@ -1,6 +1,6 @@
 # Gate job: SOLR-17840 (preserve collected LTR partial results)
 
-Status: CLAIMED (claims/phone-agent-2-blockers-round-1.md)
+Status: HANDED BACK (head exposes timed-out doc-values fetch during response streaming; repair outside Diff scope)
 
 - Branch: solr-17840-preserve-partial-results-phone-agent-2. Head: `3999ff0be34bd192c2325b9138b8aa8a7b5bc24d`, pushed to fork.
 - Prior gated head: none. Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`.
@@ -33,11 +33,15 @@ Rung 2 runtime boundary evidence localizes the loss to response exposure, not th
 
 ## Checklist
 
-- [ ] fork head read back
-- [ ] changelog parsed
-- [ ] tidy
-- [ ] Error Prone compile
-- [ ] pre-fix proof, expected failure
-- [ ] full focused class, fresh XML counts
+- [x] fork head read back
+- [x] changelog parsed
+- [x] tidy
+- [x] Error Prone compile
+- [x] pre-fix proof, expected failure
+- [x] full focused class, fresh XML counts
 - [ ] module check
-- [ ] receipt and terminal outcome
+- [x] receipt and terminal outcome
+
+## Executed outcome
+
+YAML parse, tidy and Error Prone compile passed at 3999ff0be34bd192c2325b9138b8aa8a7b5bc24d. Proof: 1 executed test, 1 expected numFound 4-versus-0 failure, 0 skips/errors. Restored head: 15 tests, 0 skipped, 1 failure, 0 errors; same timeout test now returns ExitingReaderException during doc-values fetch/response writing. Module check not run. Repair lies outside the declared QueryComponent/test/changelog scope, so handed back without changing expected values or claiming a retry. Receipt `receipts/SOLR-17840.md` records the exact stack and both demonstrated boundaries.

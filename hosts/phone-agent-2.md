@@ -8,3 +8,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Local JDK: `/usr/lib/jvm/java-21-openjdk-amd64`. Use the target source checkout's Gradle wrapper for builds and follow the shared build lock and disk guard rules.
 - Role beyond the pool: none. Takes work by claim at Nick's direction, like other pool hosts.
 - Heartbeat: 2026-10-22T22:46Z (registered as Phone Agent 2 at Nick's direction; tool versions verified locally; no pool assignment claimed by this registration).
+
+- Heartbeat: 2026-10-23T00:20:26Z; directed round `phone-agent-2-blockers-round-1` completed. Report and terminal claim delivered; no build remains running. SOLR-17844 green, SOLR-17840 and SOLR-18446 explicitly handed back.
