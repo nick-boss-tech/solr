@@ -156,3 +156,19 @@ The corrected continuation completed step 4 on `9ce3e5b4ced0cdfd8348848e2c602ada
 This is a static test-code check failure, not a failing test. The bounded retry repair replaces queue access with `LogListener`'s supported filters and `pollMessage()` in those regression tests, preserving the production logger target and redaction/context assertions. No production source or expected values are being changed. The single permitted gate retry will run from step 0 on the new committed/pushed head, with evidence under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-3-retry/`; all attempt-3 phase-1/phase-2 logs remain untouched.
 
 Corrected phase-2 monitor readings: 224,917 of 837,408 inodes free before (26.8587%) and 224,870 after (26.8531%); no 16% stop or 15% guard was approached.
+
+
+### Attempt 3 retry head and checklist
+
+The single permitted full-gate retry is pinned to commit `96ed88e6dc17e50df1d1f8f5e8c33ec84529d23b`, tree `44ec61d3c70b05109353a997332074494092b5de`. Repair commit: `96ed88e6dc17e50df1d1f8f5e8c33ec84529d23b` (`SOLR-16155: gate repair: use supported LogListener API`), touching only `DocumentBuilderTest.java` and `JavabinLoaderTest.java`. It replaces direct `LogListener.getQueue()` / `LogEvent` inspection with `LogListener` substring filters and `pollMessage()`, retaining log-context and sensitive-value assertions; production sources and expected values are unchanged. Fork branch `solr-16155-submit` and upstream `refs/pull/5200/head` both read back as this commit.
+
+Fresh retry evidence directory: `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-3-retry/`. The earlier attempt-3 logs and attempt-1/attempt-2 histories remain preserved.
+
+- [x] Retry repair committed, pushed, and both product and proof worktrees pinned cleanly to the matching head.
+- [ ] Step 0 changelog parse.
+- [ ] Step 1 tidy.
+- [ ] Step 2 Error Prone main and test compilation.
+- [ ] Step 3 both prior-production-code proofs.
+- [ ] Step 4 all eight focused test classes and strict fresh XML checks.
+- [ ] Step 5 core and test-framework module checks recorded separately.
+- [ ] Final branch/PR head verification and gate disposition.
