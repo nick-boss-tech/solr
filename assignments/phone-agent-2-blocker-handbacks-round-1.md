@@ -1,6 +1,6 @@
 # Assignment: finish the handed-back Blocker candidate
 
-Status: CLAIMED (claims/phone-agent-2-blocker-handbacks-round-1.md)
+Status: DONE (reports/phone-agent-2-blocker-handbacks-round-1.md; gates/SOLR-17840-submit-revalidation.md; receipts/SOLR-17840.md; pr-drafts/SOLR-17840/PR-draft.md)
 
 Addressee: phone-agent-2. Claim-first as claims/phone-agent-2-blocker-handbacks-round-1.md. Deliverable: reports/phone-agent-2-blocker-handbacks-round-1.md. The evidence for both items is in your own round 1 report, reports/phone-agent-2-blockers-round-1.md; start from those two sections, not from scratch. Base: Apache upstream/main at `5b2ac4dea21a7c86e31e2ba0cea58c262dc558c8`, selected by Nick on 2026-10-22 ("probably upstream Solr for the base"). Both branches are yours from round 1; continue on them.
 
