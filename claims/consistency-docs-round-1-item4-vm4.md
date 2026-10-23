@@ -15,3 +15,6 @@ BLOCKED: 2026-10-19T17:46:48Z. Deliverables so far: `drafts/consistency-docs-rou
 
 TAKEOVER: 2026-10-23T07:15:00Z (UTC), phone-agent-2 from vm4. The previous build attempt stopped on a missing `@asciidoctor/tabs` module and the claim has no heartbeat since 2026-10-19. The branch remains at the recorded head, and this host has npm capability. Attempts: 2. Idempotency key: consistency-docs-round-1-item4@4b185504ef.
 Heartbeat: 2026-10-23T07:15:00Z.
+
+Resume: 2026-10-23T07:16:00Z. Gate job `gates/consistency-docs-round-1-item4.md`; runner `/workspace/tools/phone-agent-2-consistency-item4-gate.py`; logs `/workspace/phone-agent-2-logs/consistency-item4`. Reuse the existing product commit and draft. Decision ladder rung 1: include npm development dependencies because the pinned build installs tabs with `-D`; use a standalone Git checkout for Antora. No tracked source or build-file changes.
+Heartbeat: 2026-10-23T07:16:00Z.
