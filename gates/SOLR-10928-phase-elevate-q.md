@@ -1,6 +1,6 @@
 # Gate job: SOLR-10928 (Support elevate.q in QueryElevationComponent)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-10928-phase-elevate-q.md)
 
 - Branch: `solr-10928-submit`. Head: `034c9e65b2ce755a0b7dc238e656edc91b103f4b` (fork tip, confirmed by ls-remote on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`. Prior gated head: none recorded.
