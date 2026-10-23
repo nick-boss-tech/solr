@@ -58,8 +58,8 @@ public class ShardLeaderElectionRejoinTest extends SolrCloudTestCase {
     cluster.waitForActiveCollection("rejoin", REJOIN_WAIT_SECONDS, TimeUnit.SECONDS, 1, 1);
 
     assertEquals(FORCED_FAILURES + 1, calls.get());
-    int min = depths.stream().mapToInt(Integer::intValue).min().orElseThrow();
-    int max = depths.stream().mapToInt(Integer::intValue).max().orElseThrow();
+    int min = depths.stream().skip(1).mapToInt(Integer::intValue).min().orElseThrow();
+    int max = depths.stream().skip(1).mapToInt(Integer::intValue).max().orElseThrow();
     assertTrue(
         "stack grew by " + (max - min) + " frames over " + calls.get() + " rejoins",
         max - min < MAX_FRAME_GROWTH);

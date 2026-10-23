@@ -84,6 +84,7 @@ final class ShardLeaderElectionContext extends ShardLeaderElectionContextBase {
   public void close() {
     super.close();
     this.isClosed = true;
+    rejoinExecutor.shutdownNow();
     syncStrategy.close();
   }
 
@@ -497,7 +498,7 @@ final class ShardLeaderElectionContext extends ShardLeaderElectionContextBase {
 
   private void rejoinLeaderElection(SolrCore core) throws InterruptedException, KeeperException {
     // remove our ephemeral and re join the election
-    if (cc.isShutDown()) {
+    if (cc.isShutDown() || isClosed) {
       log.debug("Not rejoining election because CoreContainer is closed");
       return;
     }
