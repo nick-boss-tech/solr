@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-5735, repeat the leaders-only safe-leader runs on another host
 
-Status: CLAIMED (claims/solr-5735-leaders-only-gate-round-1.md)
+Status: DONE
 
 - Capability tags: gate, premise-run.
 - Category: Solr core, SolrCloud tests.
