@@ -1,6 +1,6 @@
 # Assignment: pool-teardown-objecttracker-leak (SolrMetricsContext and HttpJettySolrClient leaks at CI class teardown)
 
-- Status: OPEN (unclaimed). Requested by vm4 on behalf of Nick Shanin, 2026-10-23.
+- Status: CLAIMED (claims/pool-teardown-objecttracker-leak.md), phone-agent-2. Requested by vm4 on behalf of Nick Shanin, 2026-10-23.
 - Scope: find out what causes the ObjectTracker leak reports in three test classes, and which open PRs on the nick-boss-tech fork are involved. Do not push to any PR branch, do not comment on any PR, do not change production code.
 
 ## Context
