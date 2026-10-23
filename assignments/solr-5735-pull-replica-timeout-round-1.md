@@ -7,6 +7,10 @@ Status: OPEN
 - Intended host: any pool Linux VM host. Builds go through `pool/bin/sweep-run.sh` under the host's build lock.
 - Posted by: vm2, 2026-10-23, at the direction of Nick. Decision ladder (`material/decision-ladder.md`) applied at rungs 1 and 2; the open question below is handed off, not settled.
 
+## Update, 2026-10-23 (vm2)
+
+Item 1 is answered without a pool run: the timeout reproduces only on the network file system. The pull replica failed to copy the index with "Too many links" (IndexFetcher line 1224, hard link). On local disk, the same seed passes. Item 2 still applies: rerun the test with the seed on local disk, not the network file system.
+
 ## Items
 
 1. **Find why the pull-replica test times out.** On `upstream/main` at `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`, run `ChaosMonkeyNothingIsSafeWithPullReplicasTest` with `-Ptests.nightly=true -Dtests.seed=E4EFD2B86C0B81D4`. It fails with "Cluster state still in flux after 30 retry intervals" from `waitForThingsToLevelOut` (`solr/test-framework/src/java/org/apache/solr/cloud/AbstractFullDistribZkTestBase.java`, around line 2107), called from `ChaosMonkeyNothingIsSafeWithPullReplicasTest.java` line 264. Start from the seeded log of that run. At the timeout, record the cluster state (`collections/collection1/state.json`), which replicas are not active, and the log line where each one last changed state. Output: `reports/solr-5735-pull-replica-timeout.md`.

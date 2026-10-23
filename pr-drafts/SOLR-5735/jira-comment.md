@@ -1,13 +1,11 @@
 🤖 *AI text below* 🤖 *(reviewed by Nick Shanin)*
 
-The ChaosMonkey tests still fail on current main. Three of the five classes fail, and the failures repeat with the same seed.
+Most of the failures in this ticket depend on the test's file system. One failure still reproduces on local disk.
 
-Run on [commit b73f03976f](https://github.com/apache/solr/commit/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb) with nightly tests enabled and seed `E4EFD2B86C0B81D4`:
+Both runs used [commit b73f03976f](https://github.com/apache/solr/commit/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb), nightly tests on, seed `E4EFD2B86C0B81D4`. The first run used a network file system. The second used local disk.
 
-- `ChaosMonkeyNothingIsSafeWithPullReplicasTest` fails with "Cluster state still in flux after 30 retry intervals". That is the timeout the ticket describes. It fails at [line 264](https://github.com/apache/solr/blob/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb/solr/core/src/test/org/apache/solr/cloud/ChaosMonkeyNothingIsSafeWithPullReplicasTest.java#L264).
-- `ChaosMonkeySafeLeaderTest` fails its check of zero failed index requests (expected 0, got 1) at [line 167](https://github.com/apache/solr/blob/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb/solr/core/src/test/org/apache/solr/cloud/ChaosMonkeySafeLeaderTest.java#L167). `ChaosMonkeySafeLeaderWithPullReplicasTest` fails the same check at [line 209](https://github.com/apache/solr/blob/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb/solr/core/src/test/org/apache/solr/cloud/ChaosMonkeySafeLeaderWithPullReplicasTest.java#L209).
-- Running the three again with the same seed failed the same way. Running `ChaosMonkeySafeLeaderTest` alone with a random seed passed once, so the failures depend on the seed.
-- Each failed index request went to a node that the test had just stopped, 1 to 40 ms after the stop. The error was a closed HTTP/2 channel. The test counts any failed request, so a request in flight during a stop fails the check. The safe-leader tests have asserted zero failed updates since 2014 ([SOLR-5740](https://issues.apache.org/jira/browse/SOLR-5740)).
-- The timeout in `ChaosMonkeyNothingIsSafeWithPullReplicasTest` is not explained yet.
+- `ChaosMonkeyNothingIsSafeWithPullReplicasTest` timed out with "Cluster state still in flux after 30 retry intervals" on the network file system. That message comes from a shard consistency check. The pull replica kept failing to copy the index with "Too many links", which the network file system returned when the copy hard-linked a file ([IndexFetcher, line 1224](https://github.com/apache/solr/blob/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb/solr/core/src/java/org/apache/solr/handler/IndexFetcher.java#L1224)). On local disk the test passed, with no fetch errors.
+- `ChaosMonkeySafeLeaderTest` failed one check (expected 0, got 1) on the network file system. On local disk it passed.
+- `ChaosMonkeySafeLeaderWithPullReplicasTest` fails on both. One update request failed with a `ClosedChannelException` 4 ms after the test stopped the node it was sent to. The test asserts zero failed updates. That assertion has been there since at least 2014 ([SOLR-5740](https://issues.apache.org/jira/browse/SOLR-5740)).
 
-**Recommendation:** Keep open. The seed reproduces the failures. The open questions are whether a request in flight to a stopped node should fail the test, or be retried, and why the cluster state does not settle in the pull-replica test.
+**Recommendation:** Keep open, with a narrower scope. The open question is whether an update request in flight to a stopped node should be retried, or whether the test should allow it. The first two tests passed on local disk, so their failures on the network file system likely come from the environment.
