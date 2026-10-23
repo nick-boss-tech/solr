@@ -88,6 +88,10 @@ Open assignments and gate jobs are listed in [OPEN-WORK.md](../OPEN-WORK.md) at 
 
 A claim is a commitment to finish. Carry it to `DONE:`, or to an `ENDED` line that names the reason the job cannot finish on this host, without stopping to ask permission. Decisions inside the claim follow [material/decision-ladder.md](../material/decision-ladder.md): record the rung used and continue. A tidy change is a gate repair under WORKFLOW.md "Gate repairs"; it is not a stop. The owner is asked only at rung 5, and opening a PR stays owner-approved.
 
+## Upstream CI can stay pending
+
+A PR can sit at `action_required` with no workflow runs, because Apache holds runs for a first-time contributor until a committer approves them. This is expected, and it is not a blocker. Do not wait for CI, do not post asking for approval, and do not treat it as a failed gate. The local gate result on the head is the proof, and the PR body states it. The owner decides whether to ask for approval.
+
 ## Claim a gate job
 
 Copy `pool/templates/claim.md` to the claim path named in the gate job, using `claims/pool-<host>-gate-<GATE_ID>.md`. This keeps claims for two phases of one ticket separate. Fill it and post it with the same steps. Claim before you run anything. Append a heartbeat line at least once an hour and push it. Mark the claim `DONE:` in the same push as the deliverable.

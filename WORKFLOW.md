@@ -62,6 +62,7 @@ There is no local tree to fall behind and nothing to rebase when another host la
 - When two phase heads for one ticket have separate gate jobs, each has its own gate ID and claim. Both results are recorded as separate top sections in the ticket receipt at `receipts/<TICKET>.md`.
 - One gate per host at a time (each host serializes its own Gradle builds behind its local lock). Two hosts may gate different branches in parallel; that is the point of the pool.
 - On green, the gating host pushes the branch if the job says to, writes `receipts/<TICKET>.md`, marks the gate file DONE, and marks the claim DONE.
+- Upstream CI is not a gate. Apache holds Actions runs for a first-time contributor's PR until a committer approves them, so a PR can show `action_required` and no checks indefinitely. Agents do not wait for it, do not ask for it, and do not count it as a failure. The local gate on the head is the proof; the PR body states it. Requesting CI approval is an owner action.
 - A gate that executed tests and failed is repaired and retried only under Gate repairs below; otherwise it is handed back for implementation. A run that never executed tests (environment refusal, VM replacement) may be relaunched once by the claiming or taking-over host.
 
 ## Gate repairs and hand-back
