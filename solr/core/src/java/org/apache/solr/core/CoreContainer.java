@@ -1312,7 +1312,12 @@ public class CoreContainer {
             // we want to close zk stuff last
             zkSys.close();
           } finally {
-            ExecutorUtil.shutdownAndAwaitTermination(customThreadPool);
+            try {
+              ExecutorUtil.shutdownAndAwaitTermination(customThreadPool);
+            } catch (RuntimeException e) {
+              log.warn(
+                  "The closeThreadPool did not terminate; continuing CoreContainer shutdown.", e);
+            }
           }
         }
       }
