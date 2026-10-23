@@ -1,0 +1,67 @@
+diff --git a/solr/core/src/test/org/apache/solr/uninverting/TestFieldCacheSortRandom.java b/solr/core/src/test/org/apache/solr/uninverting/TestFieldCacheSortRandom.java
+index e5d7b1b74c..dfc7ba4baa 100644
+--- a/solr/core/src/test/org/apache/solr/uninverting/TestFieldCacheSortRandom.java
++++ b/solr/core/src/test/org/apache/solr/uninverting/TestFieldCacheSortRandom.java
+@@ -40,10 +40,8 @@ import org.apache.lucene.index.NumericDocValues;
+ import org.apache.lucene.search.ConstantScoreQuery;
+ import org.apache.lucene.search.ConstantScoreScorer;
+ import org.apache.lucene.search.ConstantScoreWeight;
+-import org.apache.lucene.search.FieldComparator;
+ import org.apache.lucene.search.FieldDoc;
+ import org.apache.lucene.search.IndexSearcher;
+-import org.apache.lucene.search.Pruning;
+ import org.apache.lucene.search.Query;
+ import org.apache.lucene.search.QueryVisitor;
+ import org.apache.lucene.search.ScoreMode;
+@@ -201,9 +199,21 @@ public class TestFieldCacheSortRandom extends SolrTestCase {
+                 + sort);
+       }
+ 
+-      @SuppressWarnings("unchecked")
+-      final FieldComparator<BytesRef> fieldComparator =
+-          (FieldComparator<BytesRef>) sf.getComparator(1, Pruning.NONE);
++      final Comparator<BytesRef> valueOrder =
++          new Comparator<BytesRef>() {
++            @Override
++            public int compare(BytesRef a, BytesRef b) {
++              if (a == null) {
++                if (b == null) {
++                  return 0;
++                }
++                return sortMissingLast ? 1 : -1;
++              } else if (b == null) {
++                return sortMissingLast ? -1 : 1;
++              }
++              return a.compareTo(b);
++            }
++          };
+       final Map<Integer, ExpectedHit> expectedByDocID = new HashMap<>();
+       for (ExpectedHit expectedHit : f.matchHits) {
+         ExpectedHit previous = expectedByDocID.putIfAbsent(expectedHit.docID, expectedHit);
+@@ -211,7 +221,7 @@ public class TestFieldCacheSortRandom extends SolrTestCase {
+           assertEquals(
+               "Different sort values observed for document " + expectedHit.docID,
+               0,
+-              fieldComparator.compareValues(previous.value, expectedHit.value));
++              valueOrder.compare(previous.value, expectedHit.value));
+         }
+       }
+       final List<ExpectedHit> expected = new ArrayList<>(expectedByDocID.values());
+@@ -219,7 +229,7 @@ public class TestFieldCacheSortRandom extends SolrTestCase {
+           new Comparator<ExpectedHit>() {
+             @Override
+             public int compare(ExpectedHit first, ExpectedHit second) {
+-              int comparison = fieldComparator.compareValues(first.value, second.value);
++              int comparison = valueOrder.compare(first.value, second.value);
+               comparison = reverse ? -Integer.signum(comparison) : Integer.signum(comparison);
+               if (comparison == 0) {
+                 return Integer.compare(first.docID, second.docID);
+@@ -308,7 +318,7 @@ public class TestFieldCacheSortRandom extends SolrTestCase {
+                 + " with sort "
+                 + sort,
+             0,
+-            fieldComparator.compareValues(expectedHit.value, actualValue));
++            valueOrder.compare(expectedHit.value, actualValue));
+       }
+     }
+ 

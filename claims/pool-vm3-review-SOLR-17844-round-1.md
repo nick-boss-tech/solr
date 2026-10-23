@@ -1,7 +1,7 @@
 # Claim: pool-vm3-review-SOLR-17844-round-1
 
 - Claimant host: vm3, matching `hosts/vm3.md`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: DONE (see the DONE line below).
 - Job or assignment: `assignments/pool-review-solr-17844-round-1.md`.
 - Slice: the whole job.
 - Capability tags used: review (one mutation rerun on the Gradle toolchain if the preserved gate XML is not convincing).
@@ -13,3 +13,7 @@
 
 Heartbeat: 2026-10-23T03:35:30Z
 Heartbeat: 2026-10-23T03:41:52Z
+Heartbeat: 2026-10-23T04:02:32Z
+Result: 2026-10-23T04:02:32Z: verdict FIX FIRST (expected order delegated to the sort under test); mutation and first-failure accounting verified; see `reports/pool-review-solr-17844-round-1.md`. No repair commit.
+
+DONE: 2026-10-23T04:02:32Z. Deliverables: `reports/pool-review-solr-17844-round-1.md`, `reports/pool-review-solr-17844-round-1-proposed-fix.patch`, `receipts/SOLR-17844.md` (draft corrected, review entry added).
