@@ -36,6 +36,7 @@ The test repository for the question-answer package used a 512-bit RSA key. That
 **Compatibility**
 
 This change intentionally rejects SHA-1 signatures on the package and filestore verification paths. Published repositories that still contain SHA-1-signed packages will need to re-sign them with SHA-512 before this Solr version can install them. A published-package inventory was not part of this change.
+
 **Limits**
 
 - Only package and filestore verification changed. The SHA-256 PKI path is unchanged.
