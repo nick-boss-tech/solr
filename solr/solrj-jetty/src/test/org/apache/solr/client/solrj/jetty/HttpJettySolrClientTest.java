@@ -774,6 +774,17 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
     }
   }
 
+  @Test
+  public void testCloseReleasesClientWhenInterrupted() throws Exception {
+    HttpJettySolrClient client = new HttpJettySolrClient.Builder("http://127.0.0.1:1/solr").build();
+    Thread.currentThread().interrupt();
+    try {
+      expectThrows(RuntimeException.class, client::close);
+    } finally {
+      Thread.interrupted();
+    }
+  }
+
   private static void assertIsTimeout(Throwable t) {
     assertThat(t.getMessage(), containsStringIgnoringCase("Timeout"));
   }
