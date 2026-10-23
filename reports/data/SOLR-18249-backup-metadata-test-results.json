@@ -1,0 +1,89 @@
+{
+  "source_head": "b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb",
+  "host": "phone-agent-2",
+  "seed": "18249",
+  "result": "PASS",
+  "counts": {
+    "tests": 6,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0
+  },
+  "started": "2026-10-23T07:28:48.698364+00:00",
+  "ended": "2026-10-23T07:29:33.513396+00:00",
+  "fixture_removed": true,
+  "source_clean": true,
+  "fixture_sha256": "d239b78dc59d600bc686322223c8092019e8bc793895d096458fea0fdade5ee3",
+  "temporary_fixture_published": false,
+  "gradle_arguments": [
+    "--no-daemon",
+    "--max-workers=2",
+    ":solr:core:cleanTest",
+    ":solr:core:test",
+    "--tests",
+    "org.apache.solr.handler.admin.BackupAsyncExpiryProbeTest",
+    "--tests",
+    "org.apache.solr.handler.admin.CoreAdminHandlerTest.testTrackedRequestExpiration",
+    "--tests",
+    "org.apache.solr.handler.admin.api.GetNodeCommandStatusTest",
+    "-Dtests.seed=18249",
+    "-Ptests.jvms=1"
+  ],
+  "suites": [
+    {
+      "name": "org.apache.solr.handler.admin.BackupAsyncExpiryProbeTest",
+      "tests": "1",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-10-23T07:29:26.616Z",
+      "time": "0.737"
+    },
+    {
+      "name": "org.apache.solr.handler.admin.CoreAdminHandlerTest",
+      "tests": "1",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-10-23T07:29:27.406Z",
+      "time": "4.517"
+    },
+    {
+      "name": "org.apache.solr.handler.admin.api.GetNodeCommandStatusTest",
+      "tests": "4",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-10-23T07:29:31.958Z",
+      "time": "0.802"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "focused.log",
+      "sha256": "046facc31356bfd32f03e33b1faf68ad31ffc1d763e37c8ba26c00d51a745674",
+      "bytes": 4991
+    },
+    {
+      "name": "focused.xml/TEST-org.apache.solr.handler.admin.BackupAsyncExpiryProbeTest.xml",
+      "sha256": "55ad19bf363f7879cc6a8e65d06724dd85c165dde91d05ec8681c67c935367b6",
+      "bytes": 935
+    },
+    {
+      "name": "focused.xml/TEST-org.apache.solr.handler.admin.CoreAdminHandlerTest.xml",
+      "sha256": "862efd7023905a0ed7a848d80cd370a1a8fa31b539bc35465c43574f09c39737",
+      "bytes": 9728
+    },
+    {
+      "name": "focused.xml/TEST-org.apache.solr.handler.admin.api.GetNodeCommandStatusTest.xml",
+      "sha256": "44dd43ccbb4fee3464a8828018451d799e4cd8139fa5a57222a67622bd1697d4",
+      "bytes": 1157
+    }
+  ],
+  "attempt_1": {
+    "result": "COMPILE_ONLY_FAILURE",
+    "tests_executed": 0,
+    "reason": "Temporary fixture referenced unavailable assertBusy helper; replaced with bounded synchronization wait.",
+    "fixture_sha256": "45f08d20d2024cdce0540bdbc55f41a3f692bb74ef85beddbcef3aa20e472cab"
+  }
+}
