@@ -40,3 +40,4 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Heartbeat: 2026-10-23T07:42:00Z; claimed integrated SOLR-18555 phase-r4 SolrJ/query gate at unchanged head `07953eab473f3f05853916f7efb4a42edc1edb0c`. The gate requires core, SolrJ, SolrJ HTTP, and reference-guide checks.
 
 - Heartbeat: 2026-10-23T07:44:40Z; SOLR-18555 integrated phase-r4 handed back before any build because the standard runners require a proof the job explicitly does not request and cannot express the stated changelog check. Claim ENDED; no product change, repair, retry, or running build. Gate and receipt record the supported-runner prerequisite.
+- Heartbeat: 2026-10-23T17:36:00Z; claimed `assignments/pool-objectrelease-autocloseable-round-1.md`. Local candidate only, based on current Apache main. No product push or PR action.
