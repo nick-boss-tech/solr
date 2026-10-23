@@ -123,7 +123,7 @@ Nick explicitly authorized a new repair-and-gate attempt after the terminal hand
 
 - Claim: `claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction-attempt-3.md`, posted at coordination commit `9ee71d0f3f49b089c863007e02be48a450c66d74`.
 - Product branch pre-repair tip confirmed from the fork: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ae47de910e065fe76d6d24763215224a11a11353`.
-- Intended mechanical repair: give `JavabinLoaderTest` the validator-required private static final `Logger log` field initialized from `MethodHandles.lookup().lookupClass()`, and use it for `ResponseUtils`; keep `LogListener.error(JavabinLoader.class)` targeted at the production logger.
+- Mechanical repair: add the validator-required private static final `Logger log` field to `JavabinLoaderTest`. Keep the existing `JavabinLoader.class` logger argument to `ResponseUtils`: it logs through that argument, and `LogListener.error(JavabinLoader.class)` must continue observing those production-class ERROR events. No assertion or expected value changes.
 - Evidence directory: `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-3/`. All gate steps will rerun from step 0 on the committed and pushed repair, under the standard runner's host lock and inode guard.
 - At claim time: 225,079 of 837,408 inodes free (26.88%), above the 15% stop floor; no Gradle process was active.
 
