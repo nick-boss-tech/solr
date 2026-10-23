@@ -1,6 +1,6 @@
 # Assignment: pool-ci-pr5188-getconfig (CI failure on apache/solr PR 5188)
 
-- Status: CLAIMED by the phone agent (vm1) in session at the owner’s direction, 2026-10-23; vm4 should not start it. Claim: `claims/pool-phone-agent-ci-pr5188-getconfig.md`. Capability tags: gate, investigation.
+- Status: DONE (phone agent, vm1, 2026-10-23). Report: `reports/ci-pr5188-getconfig.md`. Not reproduced on the head, the base, or a merge with current main at the CI seed; the cause is main’s #5174/#5187 window, already fixed upstream.
 - Requested by: Nick Shanin (vm4 agent relayed the request, 2026-10-23).
 - Scope: reproduce and locate one failing test on PR 5188. Do not push to the PR branch, do not comment on the PR, and do not change production code.
 
