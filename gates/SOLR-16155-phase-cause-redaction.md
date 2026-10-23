@@ -2,10 +2,10 @@
 
 Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction.md)
 
-- Branch: `solr-16155-submit`. Head: `323bafea9e097d05e46f2f088e5034f6fce171ec` (fork ref and PR head read back on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
+- Branch: `solr-16155-submit`. Gated head: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` (tidy repair head, fork tip read back on 2026-10-23). Original assigned head: `323bafea9e097d05e46f2f088e5034f6fce171ec`. If the tip moves before another repair push, stop and record the new tip here.
 - Prior gated tree: `ab394c8d916b6452a35bfcb6ff7002c41ab19ebd`, gated at `53196640988ae04b247dee19abfc074b024335a7` then squashed unchanged to prior PR head `9d1d0e5df9d91d5b18bc62c277c6baff5faee69c`. Those results do not cover this new head.
 - Merge base with upstream/main: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`.
-- Gate ID: `SOLR-16155-phase-cause-redaction`. Claim file: `claims/pool-HOST-gate-SOLR-16155-phase-cause-redaction.md`, replacing HOST with the claiming host.
+- Gate ID: `SOLR-16155-phase-cause-redaction`. Claim file: `claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction.md`.
 - Intended host: any capable Linux host. Capability tags: gate.
 - Module: `:solr:core`; test helper change in `:solr:test-framework`.
 - Focused classes: `org.apache.solr.update.DocumentBuilderTest`, `org.apache.solr.handler.loader.JavabinLoaderTest`, `org.apache.solr.schema.DenseVectorFieldTest`, `org.apache.solr.schema.RankFieldTest`, `org.apache.solr.update.processor.TolerantUpdateProcessorTest`, `org.apache.solr.handler.RequestHandlerBaseTest`, `org.apache.solr.update.SolrCmdDistributorTest`, `org.apache.solr.schema.TestLateInteractionVectorFieldInit`.
@@ -57,7 +57,15 @@ Use the host's standard gate runner under its normal lock. Do not run the build 
 | Test failure outside repair scope, or failed retry | decided: hand back | Record exact task, test, seed, failure text, fresh XML and attempts. Do not alter expected values, delete tests, reattach raw causes, or rerun an unchanged tree. | Standing pool rule |
 | Proof differs from the two stated failures | decided: record and stop | No test edits to manufacture the expected result. A trace-disabled test JVM must be corrected before the proof run; absence of the positive trace assertion is not proof. | Windows implementation |
 | Tip moves before claim or before a repair push | decided: stop | Record live tip and hand back; do not reset or force-push. | Standing pool rule |
-| External communication | decided: no public writes | No PR body edit, comment, JIRA action, email, PR state change or merge. The existing PR description still cites the old proof. Report the new receipt so Nick can authorize its update after proof. | Workspace AGENTS.md |
+| External communication | decided: no public writes | No PR body edit, comment, Jira action, email, PR state change or merge. The existing PR description still cites the old proof. Report the new receipt so Nick can authorize its update after proof. | Workspace AGENTS.md |
+
+## Execution record
+
+- Claim and `CLAIMED` status were pushed atomically at coordination commit `6c9a60492fc9347ef447b23dd98955c7dea1c11e` and read back from the live branch.
+- Assigned head `323bafea9e097d05e46f2f088e5034f6fce171ec` and the 13-file diff scope against `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb` were confirmed. Fork tip remained unchanged before the tidy repair push.
+- Preflight attempt 1 exited 2 before clone or tidy because the host lacked `/workspace/.env` and `/workspace/tmp`; no build or tests ran. Attempt 2 used the authorized process-scoped credential and a scratch directory, exited 3, and produced the tidy patch at `/workspace/gates/logs/phone-agent-2/preflight/SOLR-16155-phase-cause-redaction-attempt-2/tidy.patch`.
+- Tidy repair commit: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, parent `323bafea9e097d05e46f2f088e5034f6fce171ec`, tree `ae47de910e065fe76d6d24763215224a11a11353`. It changes only `JavabinLoaderTest.java`, `DenseVectorFieldTest.java`, and `RankFieldTest.java` formatting. The pushed fork tip reads back as the repair commit.
+- Full gate rerun from step 0 on the repaired head is pending. Gate logs will be recorded under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`.
 
 ## On green
 
@@ -69,10 +77,10 @@ If any step cannot be verified, record the limitation and stop under the appropr
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed
 - [ ] step 0 changelog parse
-- [ ] step 1 tidy clean, or committed and pushed repair recorded
+- [x] step 1 tidy clean, or committed and pushed repair recorded
 - [ ] step 2 Error Prone compilation actually executed
 - [ ] step 3 both boundary regressions fail on the prior PR production code
 - [ ] step 4 focused head tests and compatibility suites pass, counted from fresh XML

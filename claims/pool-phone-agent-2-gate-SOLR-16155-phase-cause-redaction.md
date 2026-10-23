@@ -13,10 +13,13 @@
 - Host toolchain: `JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64`; `GRADLE_USER_HOME=/home/ubuntu/.gradle`.
 - Preflight attempt 1: exit 2 before clone or tidy because `/workspace/.env` and `/workspace/tmp` were absent; no build or tests ran. Attempt 2: exit 3 on the same pinned head, with an authorized tidy patch to three test files at `/workspace/gates/logs/phone-agent-2/preflight/SOLR-16155-phase-cause-redaction-attempt-2/tidy.patch`.
 - Preflight logs: `/workspace/gates/logs/phone-agent-2/preflight/SOLR-16155-phase-cause-redaction` and `/workspace/gates/logs/phone-agent-2/preflight/SOLR-16155-phase-cause-redaction-attempt-2`.
+- Tidy repair pushed to `solr-16155-submit`: commit `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ae47de910e065fe76d6d24763215224a11a11353`; exactly the three test files named by the preflight patch changed.
 - Gate runner and test steps have not started.
 
 Heartbeat: 2026-10-23T18:29:55Z
 
-Plan: apply the preflight tidy output as a single authorized repair commit, fast-forward push it, then rerun the full gate from step 0 on the committed tree.
+Heartbeat: 2026-10-23T18:34:00Z; tidy repair commit `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` is pushed and confirmed at the fork tip. The full gate rerun from step 0 is pending.
+
+Plan: run the full gate from step 0 on the committed repair head, verify the exact proof failures, count the eight focused classes from fresh JUnit XML, and record the two module checks separately.
 
 Result: pending.
