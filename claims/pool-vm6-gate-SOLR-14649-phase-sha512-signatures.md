@@ -17,3 +17,7 @@ Result: 2026-10-23T16:41Z: relaunch `s14649-head-r2` refused at compile, rc=4, b
 Result: 2026-10-23T15:49Z: proof leg (`s14649-proof`) 4 of 4 TestCryptoKeys tests failed as expected; receipt not yet written. Head job `s14649-head` died at 15:53 during its compile step, before any test ran, after the tick worktree's `pool/bin` scripts were replaced mid-run at 15:53:55.
 
 Result: 2026-10-23T16:45Z: inode guard fixed on coordination (`d3614ec136`: a mount reporting zero inode counters is checked through the local root; tests 11 of 11). Head run relaunched as `s14649-head-r3` from a frozen copy of pool/bin at `/workspace/gates/snapshots/s14649-head-r3/bin`, so branch updates cannot change scripts mid-run. Head: `25589eb5e6`.
+
+Result: 2026-10-23T17:02Z: head-focused of `s14649-head-r3` died at about 17:00 with no rc line and no partial XML. compile (rc=0) and head-clean (rc=0) passed on `25589eb5e6`. Not relaunched; gate not GREEN. Next: decide whether to relaunch and how to keep the background run alive across the session sleep.
+
+Heartbeat: 2026-10-23T17:02:00Z
