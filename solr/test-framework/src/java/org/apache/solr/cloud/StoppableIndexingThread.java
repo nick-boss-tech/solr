@@ -41,6 +41,7 @@ public class StoppableIndexingThread extends AbstractFullDistribZkTestBase.Stopp
   protected Set<String> addFails = new HashSet<>();
   protected Set<String> deleteFails = new HashSet<>();
   protected Set<String> stoppedNodeAddFails = new HashSet<>();
+  protected Set<String> stoppedNodeDeleteFails = new HashSet<>();
   protected boolean doDeletes;
   private int numCycles;
   private SolrClient controlClient;
@@ -111,6 +112,9 @@ public class StoppableIndexingThread extends AbstractFullDistribZkTestBase.Stopp
             log.error("ROOT CAUSE for id={}", deleteId, ((SolrServerException) e).getRootCause());
           }
           deleteFails.add(deleteId);
+          if (isCutByStoppedNode(e)) {
+            stoppedNodeDeleteFails.add(deleteId);
+          }
         }
       }
 
@@ -133,8 +137,7 @@ public class StoppableIndexingThread extends AbstractFullDistribZkTestBase.Stopp
           log.error("ROOT CAUSE for id={}", id, ((SolrServerException) e).getRootCause());
         }
         addFails.add(id);
-        if (e instanceof SolrServerException serverException
-            && serverException.getRootCause() instanceof ClosedChannelException) {
+        if (isCutByStoppedNode(e)) {
           stoppedNodeAddFails.add(id);
         }
       }
@@ -176,7 +179,13 @@ public class StoppableIndexingThread extends AbstractFullDistribZkTestBase.Stopp
   }
 
   public int getFailCount() {
-    return addFails.size() - stoppedNodeAddFails.size() + deleteFails.size();
+    return (addFails.size() - stoppedNodeAddFails.size())
+        + (deleteFails.size() - stoppedNodeDeleteFails.size());
+  }
+
+  private static boolean isCutByStoppedNode(Exception e) {
+    return e instanceof SolrServerException serverException
+        && serverException.getRootCause() instanceof ClosedChannelException;
   }
 
   protected void addFields(SolrInputDocument doc, Object... fields) {
