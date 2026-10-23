@@ -10,4 +10,6 @@
 - Links: Ticket or parent: SOLR-14649 (branch `solr-14649-submit`). Category: see pool/work-map.md. Siblings: none known. Supersedes: none.
 - Preflight: `/workspace/gates/logs/vm6/preflight/SOLR-14649-phase-sha512-signatures/`, exit 3 at 2026-10-23T15:30Z. Tidy changed one file, `solr/core/src/test/org/apache/solr/filestore/TestDistribFileStore.java` (formatting only). The patch is `tidy.patch` in that directory. It is applied as a gate repair under WORKFLOW.md "Gate repairs".
 
-Heartbeat: 2026-10-23T15:31:53Z
+Heartbeat: 2026-10-23T16:45:00Z
+
+Result: 2026-10-23T15:49Z: proof leg (`s14649-proof`) 4 of 4 TestCryptoKeys tests failed as expected; receipt not yet written. Head job `s14649-head` died at 15:53 during its compile step, before any test ran, after the tick worktree's `pool/bin` scripts were replaced mid-run at 15:53:55.
