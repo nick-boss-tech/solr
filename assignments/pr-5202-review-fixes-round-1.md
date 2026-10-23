@@ -1,6 +1,6 @@
 # Review assignment: PR #5202 (SOLR-18446) review fixes and draft replies
 
-Status: OPEN
+Status: CLAIMED (claims/pool-windows-pr-5202-review-fixes-round-1.md)
 
 Review only; do not push, post, or edit anything. Claim this assignment before starting, and write the verdict to `reports/pr-5202-review-fixes-round-1.md` when done.
 
