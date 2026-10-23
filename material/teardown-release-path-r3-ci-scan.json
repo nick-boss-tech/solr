@@ -1,0 +1,84 @@
+{
+  "inspectedAtUtc": "2026-10-23T20:02:23Z",
+  "repository": "apache/solr",
+  "selection": "10 latest failed runs of Solr Tests via Crave; stopped on first unavailable log",
+  "patterns": [
+    "TestTlogReplica",
+    "CoreAdminHandlerTest",
+    "TestCoordinatorRole"
+  ],
+  "command": "gh run view RUN --repo apache/solr --log-failed",
+  "limitation": "Only failed-job logs were searched; absence does not establish test execution or a passing result. Remaining selected runs were not scanned.",
+  "rows": [
+    {
+      "runId": "39903819776",
+      "createdAt": "2026-10-23T05:05:19Z",
+      "headSha": "7e0251ee029125152c4d1791660189ef1e9dea06",
+      "status": "read failed-job log",
+      "namedClassLines": 0,
+      "sha256": "4bcafcf553f1784aa97a85a5ea5a01ff1fcbc7c8939fa893e62e88e6f7e5d111"
+    },
+    {
+      "runId": "39882574428",
+      "createdAt": "2026-10-23T01:11:27Z",
+      "headSha": "46869c4d8bc9ab26366a6ba97ba884bc2040911b",
+      "status": "read failed-job log",
+      "namedClassLines": 0,
+      "sha256": "8ec3a49d6d3d9916dd7380b391c19f3eaf9597934a51307efdf49d9ec13edaff"
+    },
+    {
+      "runId": "39745575206",
+      "createdAt": "2026-10-22T08:08:46Z",
+      "headSha": "9356388a9c16e92307f752fad686174f9c1de10a",
+      "status": "read failed-job log",
+      "namedClassLines": 0,
+      "sha256": "d98b203762b169f6d2e8a69505c16d7bfdad040b0c2d82e221cd08788409acb1"
+    },
+    {
+      "runId": "39699700526",
+      "createdAt": "2026-10-22T00:26:32Z",
+      "headSha": "777b9838baad89e99f2863572ef01be1126ee2fb",
+      "status": "read failed-job log",
+      "namedClassLines": 0,
+      "sha256": "3634a80168cf186edeafe1966ce2a57792b5a5e02415037bca31dfc5802787fc"
+    },
+    {
+      "runId": "39669769551",
+      "createdAt": "2026-10-21T20:22:41Z",
+      "headSha": "46e14bcf38b1d8aa9e17578f4d8fced15b597c81",
+      "status": "read failed-job log",
+      "namedClassLines": 0,
+      "sha256": "a6013d075511559bcdd6215d92f5a6249ecf1b5e12d0fb2a943ebeffc1fcce69"
+    },
+    {
+      "runId": "39629219125",
+      "createdAt": "2026-10-21T15:49:53Z",
+      "headSha": "9028f956f5229477a93aca51c556c11075af992a",
+      "status": "log not found; scan stopped"
+    },
+    {
+      "runId": "39619989779",
+      "createdAt": "2026-10-21T14:47:44Z",
+      "headSha": "1e3b4942508964e57f8897b6dda0538fc6d5dd39",
+      "status": "not inspected after unavailable log"
+    },
+    {
+      "runId": "39596535427",
+      "createdAt": "2026-10-21T12:03:02Z",
+      "headSha": "91500069e48cbdaec20d868cca04c1d042e2fda3",
+      "status": "not inspected after unavailable log"
+    },
+    {
+      "runId": "39578521371",
+      "createdAt": "2026-10-21T09:38:26Z",
+      "headSha": "0466d40ce5755432a6cbedd057a6367dc0bff039",
+      "status": "not inspected after unavailable log"
+    },
+    {
+      "runId": "39525701279",
+      "createdAt": "2026-10-21T01:09:56Z",
+      "headSha": "e8f3f0df0af24c28da7b520715a75c07a5e95a65",
+      "status": "not inspected after unavailable log"
+    }
+  ]
+}

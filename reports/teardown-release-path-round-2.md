@@ -1,6 +1,8 @@
 # Teardown release paths, round 2: source findings and prepared experiments
 
-Status: IMPLEMENTED, PROOF PENDING. Windows preparation completed on 2026-10-23. No Java compilation, Gradle tasks, or tests ran on this host. This report is not a reproduction result.
+Status: HANDED BACK after partial Linux proof at ee1eb2474f. Factory-timeout test passed; interrupted-wait method body passed but its class tracker check failed with three Jetty clients and a default client provider context. Container-tail, client-interrupt and fail-before legs did not run. No Java compilation, Gradle tasks, or tests ran on Windows. The preparation below is retained as the original test design, not a green result.
+
+Review/correction: `reports/teardown-release-path-review-round-3.md`. The interrupted-wait fixture joined only the factory close and its caller, not the sibling update-handler/provider close tasks that it also interrupted. Provider and update-handler ownership were omitted from this report's original analysis. A test-only isolation repair is pushed at 68fd05e5300; its Linux proof is a separate assignment, not a retry of the unchanged failed head.
 
 Parent: `assignments/pool-teardown-release-path-round-2.md`. Claim: `claims/pool-windows-teardown-release-path-round-2.md`. Linux continuation: `assignments/pool-teardown-release-path-round-2-linux-proof.md`.
 
@@ -81,7 +83,7 @@ Important baseline difference: f0adb05094 is based on old fork main `498a09aea9`
 | `CoreContainerReleasePathTest.testInterruptedContainerWaitReturnsBeforeFactoryClose` | Interrupt the shutdown worker after the factory task signals entry; no sleeps or timeout expiry needed. | Container returns with interruption preserved and plugin/handler/root closed, while factory context remains tracked. Releasing the latch makes the factory close and removes its entry. Expected to pass both before and after candidates. This models early return; it does not reproduce the Jetty selector's original stall. |
 | `HttpJettySolrClientTest.testCloseReleasesClientWhenInterrupted` | Exact regression from f0adb05094, applied to Apache baseline. | Client close still throws RuntimeException, while successful class cleanup requires no residual tracked client. Existing test covers a client-owned executor, not a factory-shared executor. |
 
-Actual before/after tracker output: PENDING Linux execution for all four experiments. No results from vm4 were re-labelled as execution of these tests. No blanket tracker clearing, release-assertion weakening, class-check changes, or tracker auto-close candidate was included.
+Linux hand-back recorded on coordination at `assignments/pool-teardown-release-path-review-round-3.md`: tidy exit 0 with no changes; factory-timeout command passed; interrupted-wait method body passed, then class check reported `[HttpJettySolrClient, HttpJettySolrClient, SolrMetricsContext, HttpJettySolrClient]`, with the context owned by `HttpSolrClientProvider`. This is not a clean result. Later commands and fail-before were not run. The original log and XML paths are on vm4, and this Windows review has not independently read those raw artifacts. No blanket tracker clearing, release-assertion weakening, class-check changes, or tracker auto-close candidate was included in either proof tree.
 
 ## Exact focused Linux commands
 

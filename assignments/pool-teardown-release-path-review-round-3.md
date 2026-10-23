@@ -1,6 +1,6 @@
 # Assignment: pool-teardown-release-path-review-round-3 (review of the release-path candidate, its proof, and PR 5213)
 
-- Status: CLAIMED (claims/pool-windows-teardown-release-path-review-round-3.md). Windows source review and test-side repair; no builds on this host.
+- Status: DONE (source review and scratch test-side repair; reports/teardown-release-path-review-round-3.md). Runtime proof remains pending in assignments/pool-teardown-release-path-round-3-test-proof.md.
 - Scope: review and challenge the current release-path work and its evidence, and report concerns. Do not change production code on any PR branch, do not push to any PR branch, do not comment on any PR, do not open a PR, do not file a JIRA, do not rerun CI. Scratch branches may be pushed to the fork `nick-boss-tech/solr` as fast-forward pushes only.
 
 ## Current state (as of 2026-10-23 19:45 UTC)
@@ -47,3 +47,11 @@
 - Whether to file a JIRA for the teardown problem and whether to open a PR for `fix-interrupted-http-client-close` or `solr-18564-release-path-r2`.
 - Whether PR #5213 and PR 5192 land, and in what order.
 - Whether to rerun CI, run a full suite, or comment on any PR.
+
+## Review closeout, 2026-10-23
+
+The Windows author of the round-2 tests reviewed the hand-back and recorded that this is self-review, not independent approval. It found a missing sibling-close barrier in the interrupted-wait test: three clients and the provider/update contexts close on workers not joined by the factory or outer-runner latches. A one-file test-only isolation repair is pushed at `68fd05e53002f8c0a1fbff65a5623b5fea96028d` on `solr-18564-release-path-r3-test`. Production code and both original proof refs are unchanged. The exact old four-object identities still need vm4's raw creation stacks.
+
+PR 5213 should stay separate as failure-recovery hygiene. Its after-failure fallback cannot undo the class tracker assertion that already failed and whose diagnostic was already captured. No public action was taken. The nested CI-stall hypothesis remains unproven. The client cherry-pick matches the original patch ID. The bounded CI scan is inconclusive and its limits are recorded in the report and `material/teardown-release-path-r3-ci-scan.json`.
+
+No Windows builds or tests. One focused Linux invocation on the changed test is posted separately, with no retry and no other proof legs. This DONE mark closes the requested source review, not the overall teardown investigation or submission readiness. This chat's scratch worktrees are removed after its report push; fork branches are retained.
