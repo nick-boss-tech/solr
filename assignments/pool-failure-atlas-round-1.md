@@ -1,6 +1,6 @@
 # Pool assignment: failure atlas round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm5-failure-atlas-round-1.md)
 
 Owner direction, 2026-10-19: red builds get classified before they get retried. This assignment writes `pool/guides/failure-atlas.md`: the failure classes the pool has already paid for, each with its signature, its first checks, its classification rule, and what to record. Entries are verified against real logs, gate files, and records on this branch; a class with no instance on record does not get an entry yet.
 
