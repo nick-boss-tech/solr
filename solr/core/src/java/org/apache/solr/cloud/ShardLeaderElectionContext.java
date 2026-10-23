@@ -20,6 +20,7 @@ import java.lang.invoke.MethodHandles;
 import java.util.EnumSet;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.solr.cloud.api.collections.CollectionHandlingUtils;
 import org.apache.solr.cloud.overseer.OverseerAction;
@@ -55,6 +56,8 @@ final class ShardLeaderElectionContext extends ShardLeaderElectionContextBase {
   private final DistributedClusterStateUpdater distributedClusterStateUpdater;
 
   private volatile boolean isClosed = false;
+
+  static volatile Predicate<SolrCore> testForceSyncFailure;
 
   public ShardLeaderElectionContext(
       LeaderElector leaderElector,
@@ -220,6 +223,11 @@ final class ShardLeaderElectionContext extends ShardLeaderElectionContextBase {
           success = result.isSuccess();
         } catch (Exception e) {
           log.error("Exception while trying to sync", e);
+        }
+
+        Predicate<SolrCore> forceFailure = testForceSyncFailure;
+        if (forceFailure != null && forceFailure.test(core)) {
+          success = false;
         }
 
         // solrcloud_debug
