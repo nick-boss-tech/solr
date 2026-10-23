@@ -1,10 +1,10 @@
 🤖 *AI text below* 🤖 *(reviewed by Nick Shanin)*
 
-Stopping a node did not block queries in a test on current main.
+A query sent to a live node did not stall while another node stopped, on current main. The report was a stall of 1 to 5 seconds.
 
-- A two-node SolrCloud test on current main (commit [b73f03976f](https://github.com/apache/solr/commit/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb)) sent a query every 20 ms while one node was stopped. Stopping took 147 ms. None of the 268 queries failed, and the slowest query near the stop took 4 ms.
-- The reporter saw stalls of 1 to 5 seconds on a ten-node cluster behind load balancers. The test used two nodes and no load balancer, so it is not the same setup.
-- Shutdown now publishes the node as DOWN before the containers close. See [ZkController.preClose](https://github.com/apache/solr/blob/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb/solr/core/src/java/org/apache/solr/cloud/ZkController.java#L819) at line 847. The earlier change for this is [384d42b5e3](https://github.com/apache/solr/commit/384d42b5e3be31514ca8c21dbfd706d82914e800) under SOLR-4421.
-- The test was run once and is not committed. It did not cover startup, which the ticket also describes as blocking for 10 to 30 seconds.
+- [`NodeStopQueryStallTest`](https://github.com/nick-boss-tech/solr/blob/9dd93f937177818133d15df58487611fbed40407/solr/core/src/test/org/apache/solr/cloud/NodeStopQueryStallTest.java) runs on [commit b73f03976f](https://github.com/apache/solr/commit/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb). It starts 4 nodes with a 4-shard collection and 2 replicas per shard, sends queries straight to one node that stays up, and stops another node meanwhile. In two runs of each kind of stop, abrupt and graceful, the slowest query during the stop took 13 ms or less. Stopping took about 120 to 145 ms. Zero or one query failed per run, and the failure came back at once.
+- The reporter ran 10 nodes behind load balancers. This test uses 4 nodes in one JVM with no load balancer. A stalled connection to a machine that disappears without closing its sockets would not show up here.
+- The ticket says starting a node stopped blocking queries after SOLR-3655. Only the stop was left open.
+- The stop-time fix is [384d42b5e3](https://github.com/apache/solr/commit/384d42b5e3be31514ca8c21dbfd706d82914e800) (SOLR-4421). The reporter tried it in February 2013 and still saw 3 to 4 seconds of blocking. The node is now published as DOWN before the containers close ([`ZkController.preClose`, line 847](https://github.com/apache/solr/blob/b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb/solr/core/src/java/org/apache/solr/cloud/ZkController.java#L847)). No release was tested.
 
-**Recommendation:** Check the startup delay on a current release before closing. If it does not show there either, close the ticket as Cannot Reproduce.
+**Recommendation:** Close as Cannot Reproduce. If the stall still happens on a current release, a report with the Solr version and the load balancer setup can reopen it, and the test above is a starting point.
