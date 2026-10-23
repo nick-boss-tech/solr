@@ -7,7 +7,7 @@ Status: OPEN
 - Gate ID: `SOLR-14649-phase-sha512-signatures`. Claim file: `claims/pool-<host>-gate-SOLR-14649-phase-sha512-signatures.md`.
 - Intended host: any capable Linux host. WORKFLOW.md lets any capable Linux host claim it if that host is busy.
 - Capability tags: gate.
-- Module: `:solr:core`. Focused class: `org.apache.solr.util.TestCryptoKeys`. Seed: `014649C0FFEE0001`.
+- Module: `:solr:core`. Focused classes: `org.apache.solr.util.TestCryptoKeys`, `org.apache.solr.filestore.TestDistribFileStore`, `org.apache.solr.pkg.TestPackages`, `org.apache.solr.handler.TestContainerPlugin`, `org.apache.solr.pkg.PackageStoreSchemaPluginsTest`, `org.apache.solr.cli.PackageToolTest`. Seed: `014649C0FFEE0001`.
 - Diff scope: 11 files, 199 insertions and 165 deletions: CryptoKeys.java; TestCryptoKeys.java; TestDistribFileStore.java; TestPackages.java; TestContainerPlugin.java; PackageStoreSchemaPluginsTest.java; PackageToolTest.java; runtimecode/sig.txt; question-answer-repository/repository.json; package-manager-internals.adoc; SOLR-14649-package-signatures-sha512.yml.
 - Why: This head switches both package and filestore verifier overloads from SHA1withRSA to SHA512withRSA, adds direct acceptance and rejection coverage, updates signature fixtures, and corrects the Ref Guide signing commands. This is the first proof request for the pushed implementation.
 
@@ -19,7 +19,7 @@ Use the host's standard gate runner. Do not run the build tool directly. Check t
 - Step 1: tidy. If tidy changes any file, apply the tidy output, record its patch and the tidied tree sha in this job, and continue from step 2. WORKFLOW.md, Gate repairs.
 - Step 2: Error Prone compile: `:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true`.
 - Step 3, proof leg: Restore CryptoKeys.java to Base while keeping TestCryptoKeys.java at Head; all four focused tests should fail, with SHA-512 acceptance false and SHA-1 rejection false for both byte-buffer and stream verification. Any other failure shape stops the job and follows the failure-route row.
-- Step 4, focused head run: `:solr:core:cleanTest` first, then `:solr:core:test --tests org.apache.solr.util.TestCryptoKeys -Ptests.seed=014649C0FFEE0001`. Count from the fresh JUnit XML. Nothing else runs on the worktree between the test run and the XML read.
+- Step 4, focused head run: `:solr:core:cleanTest` first, then `:solr:core:test --tests org.apache.solr.util.TestCryptoKeys --tests org.apache.solr.filestore.TestDistribFileStore --tests org.apache.solr.pkg.TestPackages --tests org.apache.solr.handler.TestContainerPlugin --tests org.apache.solr.pkg.PackageStoreSchemaPluginsTest --tests org.apache.solr.cli.PackageToolTest -Ptests.seed=014649C0FFEE0001`. Count all six classes from the fresh JUnit XML. Nothing else runs on the worktree between the test run and the XML read.
 - Step 5: module check `:solr:core:check -x test`.
 
 Failures follow the rows below and WORKFLOW.md, Gate repairs. A failed retry hands the job back.

@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-14649 package signature SHA-512 implementation
 
-Status: CLAIMED (claims/pool-solr-14649-sha512-implementation-windows.md)
+Status: DONE (implementation pushed; exact-head Linux gate open and proof pending)
 
 - Capability tags: implementation.
 - Category: 6, configsets and the filestore.
@@ -12,7 +12,7 @@ Status: CLAIMED (claims/pool-solr-14649-sha512-implementation-windows.md)
 
 ## Items
 
-1. **Implement the SHA-512 package signature change.** Start from fresh `upstream/main` at `79b23df58daac14b92cc35f23b8b81f72098b4ba`. Change the shared package and filestore signature verifier to SHA512withRSA, update the regression tests and any test signatures that depend on the old algorithm, and add coverage that accepts SHA-512 and rejects SHA-1 for both byte-buffer and stream verification. Keep the separate SHA-256 PKI signing path unchanged. Output: pushed `solr-14649-submit` branch and `reports/SOLR-14649-sha512-implementation.md`.
+1. **Implement the SHA-512 package signature change.** Start from fresh `upstream/main` at `79b23df58daac14b92cc35f23b8b81f72098b4ba`. Change the shared package and filestore signature verifier to SHA512withRSA, update the regression tests and any test signatures that depend on the old algorithm, and add coverage that accepts SHA-512 and rejects SHA-1 for both byte-buffer and stream verification. Keep the separate SHA-256 PKI signing path unchanged. Output: pushed `solr-14649-submit` branch, `reports/SOLR-14649-sha512-implementation.md`, and exact-head Linux gate request `gates/SOLR-14649-phase-sha512-signatures.md`.
 
 ## Decisions
 

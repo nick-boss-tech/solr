@@ -11,6 +11,6 @@
 
 Heartbeat: 2026-10-23T08:05:16Z
 
-Result: source implementation committed and pushed to `solr-14649-submit` at `800e91188e0d9f975b9096c9413915ea18713b23`. No tests were run on Windows. The exact-head Linux gate request is being posted; proof remains pending.
+Result: source implementation committed and pushed to `solr-14649-submit` at `800e91188e0d9f975b9096c9413915ea18713b23`. Exact-head Linux gate request `gates/SOLR-14649-phase-sha512-signatures.md` is OPEN. No tests were run on Windows; proof remains pending.
 
-DONE: implementation pushed at `800e91188e0d9f975b9096c9413915ea18713b23`; follow-up gate ID `SOLR-14649-phase-sha512-signatures`.
+DONE: implementation pushed at `800e91188e0d9f975b9096c9413915ea18713b23`; gate request posted and open under `SOLR-14649-phase-sha512-signatures`.
