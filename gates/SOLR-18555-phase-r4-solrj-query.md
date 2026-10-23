@@ -1,6 +1,6 @@
 # Gate job: SOLR-18555 (Integrated supplied-text highlighting with V2 QUERY)
 
-Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-18555-phase-r4-solrj-query.md)
+Status: HANDED BACK (standard runner cannot express the authorized no-new-fragment, no-proof job)
 
 - Branch: `solr-18555-query-client-support`. Head: `07953eab473f3f05853916f7efb4a42edc1edb0c` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `7c859a4d0eeae897542e21046e059f6fca45a6e8`. Prior gated head: none recorded. The earlier OPEN entry at `0c6aae3162f29a7ae2f62fb226cefdf9c365dd63` was updated before a gate host claimed it.
@@ -53,20 +53,32 @@ If any step cannot be verified, record it here and stop.
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed
-- [ ] step 0 changelog check
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed
+- [x] step 0 changelog check
 - [ ] step 1 tidy clean, or repaired and recorded
 - [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg
+- [x] step 3 proof leg (none requested; not run)
 - [ ] step 4a core focused tests counted from fresh XML
 - [ ] step 4b CloudSolrClient focused test counted from fresh XML
 - [ ] step 4c SolrJ HTTP focused test counted from fresh XML
 - [ ] step 5 core, SolrJ, SolrJ HTTP, and reference-guide module checks
-- [ ] receipt written
+- [x] receipt written
 - [ ] job DONE, claim DONE
 
 ## Deliverable and limits
 
 - One fast-forward push with the receipt and the DONE marks, plus any repair commits (WORKFLOW.md, Gate repairs).
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Preflight handback, 2026-10-23T07:44:40Z, phone-agent-2
+
+- Outcome: HANDED BACK (standard runner cannot express the authorized no-new-fragment, no-proof job). This is a runner-capability blocker, not a product or test failure. No build launched, no product edit, no repair commit, and no retry consumed.
+- Head confirmed by `git ls-remote origin refs/heads/solr-18555-query-client-support`: `07953eab473f3f05853916f7efb4a42edc1edb0c`. Clean detached product worktree: `/workspace/solr-18555-r4`. Diff against `7c859a4d0eeae897542e21046e059f6fca45a6e8` matches 13 files, 199 insertions, 17 deletions.
+- Step 0: no changed or new changelog fragment in the base-to-head diff. The inherited `changelog/unreleased/SOLR-18555.yml` exists but is not a new fragment.
+- Standard runner `/workspace/tools/phone-agent-2-hardening-gate-v2.py`: lines 75-81 require an explicit changelog path and otherwise raise `Explicit changelog required for this production gate`; lines 90-102 unconditionally execute and verify a failing proof. Its `resume_from=4-head` mode requires prior successful state at this same head and calls `verify_proof()` as well. No such evidence was supplied or fabricated.
+- Original runner `/workspace/tools/phone-agent-2-hardening-gate.py`: lines 63-72 allow no fragment only for an entirely test-only diff, which this production-and-guide diff is not; lines 80-95 require a failing proof. Neither runner has a supported no-proof mode for this job.
+- Steps 1, 2, 4a, 4b, 4c, and 5: NOT RUN. Fresh XML counts for all six focused classes: unavailable, not zero. Reference-guide `checkSiteLinks`: NOT RUN and not called verified. Step 3: none requested, not run. Seed remains `18555C0FFEE18555`.
+- Evidence: `/workspace/phone-agent-2-logs/SOLR-18555-phase-r4-solrj-query/preflight.json`, with inspected runner snapshots alongside it. Static preflight only; no Gradle invocation and no standard-runner launch that could perform an unauthorized proof.
+- Required next action: supply an approved standard runner that supports this exact no-new-fragment check and explicitly skips proof, then resume at step 1 on the still-pinned head. Keep immediate fresh XML readback after each focused run and all four module checks including `checkSiteLinks`. No direct-build workaround or runner edit was made.
+- Sibling phase-r3 and paused parent gate records remain untouched. Claim ended with this handback, not DONE.
