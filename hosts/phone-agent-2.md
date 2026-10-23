@@ -34,3 +34,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Heartbeat: 2026-10-23T07:31:21.156662+00:00; completed SOLR-18249 source/synthetic investigation. Six focused tests passed; temporary fixture removed, source clean; production match unresolved. No build running. Per owner direction, the separate paired-PR claim is left untouched for owner resolution.
 
 - Heartbeat: 2026-10-23T07:32:00Z; ended the accidental paired PR review claim because its assignment excludes phone-agent-2. The assignment is open again; no review findings, PR actions, or product changes were made.
+
+- Heartbeat: 2026-10-23T07:34:00Z; claimed the recurring merged-PR follow-up promises audit, pass ad, from Store 1. This pass is read-only.
