@@ -23,29 +23,48 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.Signature;
 import org.apache.solr.SolrTestCase;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestCryptoKeys extends SolrTestCase {
+  private byte[] data;
+  private KeyPair keyPair;
+  private byte[] sha512Signature;
+  private byte[] sha1Signature;
 
-  @Test
-  public void testPackageSignaturesRequireSha512() throws Exception {
-    byte[] data = "package artifact".getBytes(StandardCharsets.UTF_8);
+  @Before
+  public void prepareSignatures() throws Exception {
+    data = "package artifact".getBytes(StandardCharsets.UTF_8);
     KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
     keyPairGenerator.initialize(2048);
-    KeyPair keyPair = keyPairGenerator.generateKeyPair();
+    keyPair = keyPairGenerator.generateKeyPair();
+    sha512Signature = sign(data, keyPair, "SHA512withRSA");
+    sha1Signature = sign(data, keyPair, "SHA1withRSA");
+  }
 
-    byte[] sha512Signature = sign(data, keyPair, "SHA512withRSA");
-    byte[] sha1Signature = sign(data, keyPair, "SHA1withRSA");
-
+  @Test
+  public void testByteBufferAcceptsSha512() throws Exception {
     assertTrue(
         "ByteBuffer verification should accept SHA-512",
         CryptoKeys.verify(keyPair.getPublic(), sha512Signature, ByteBuffer.wrap(data)));
+  }
+
+  @Test
+  public void testByteBufferRejectsSha1() throws Exception {
     assertFalse(
         "ByteBuffer verification should reject SHA-1",
         CryptoKeys.verify(keyPair.getPublic(), sha1Signature, ByteBuffer.wrap(data)));
+  }
+
+  @Test
+  public void testInputStreamAcceptsSha512() throws Exception {
     assertTrue(
         "InputStream verification should accept SHA-512",
         CryptoKeys.verify(keyPair.getPublic(), sha512Signature, new ByteArrayInputStream(data)));
+  }
+
+  @Test
+  public void testInputStreamRejectsSha1() throws Exception {
     assertFalse(
         "InputStream verification should reject SHA-1",
         CryptoKeys.verify(keyPair.getPublic(), sha1Signature, new ByteArrayInputStream(data)));
