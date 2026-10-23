@@ -1,5 +1,121 @@
 # Merged PR follow-up promises, ledger, round 1
 
+## Pass dated 2026-10-23, phone-agent-2 (07:35 to 07:39 UTC, pass ad)
+
+Claim: `claims/pool-phone-agent-2-merged-pr-followup-promises-round-1-ad.md`. This pass supersedes earlier factual states; earlier passes remain below as history. External work was read-only. Only this report and its claim are updated on `coordination`. No PR, issue, Jira entry, product branch or email was posted or edited.
+
+### What changed
+
+The merged set is **13**, not 10. Three PRs have merged since the previous pass: #5170 on October 21, then #5030 and #5193 on October 22. The latest merge is #5193 at 2026-10-22T16:46:35Z. All eight seed PRs remain in the merged set.
+
+Three original future promises remain without the specific merge or follow-up opening recorded as their completion condition: #4953, #5001 and #5070. The newly merged #5030 also names its read-side follow-up, but that submission is already present as #5031. Thus this pass tracks four named follow-up items: three open under the evidence-based ledger convention and one already submitted. The SOLR-17393/9637 trigger is not yet due and remains outside the merged-body ledger. The historical owner disposition for #5001 is preserved separately below rather than silently treated as a new technical discharge.
+
+Several old blockers are stale. The custom-language test's independent reviews are satisfied. SOLR-18549 has a current green receipt. The nested-highlighting branch now exists and is gated. The SOLR-13059 six-test changes are on the two open routed-alias PR heads, and their bodies no longer promise a separate follow-up. The old anchor-check offer is not carried by #5180.
+
+### Live census and evidence
+
+The [closed-PR API search](https://api.github.com/search/issues?q=repo%3Aapache%2Fsolr%20author%3Anick-boss-tech%20is%3Apr%20is%3Aclosed%20base%3Amain&per_page=100) returned 26 closed PRs. Each was read through `GET /repos/apache/solr/pulls/{number}`; only author `nick-boss-tech`, base `main` and non-null `merged_at` were retained. This yields 13 merged PRs. The [open-PR search](https://api.github.com/search/issues?q=repo%3Aapache%2Fsolr%20author%3Anick-boss-tech%20is%3Apr%20is%3Aopen&per_page=100) returned 89 PRs, all individually read. Neither search was truncated or marked incomplete. Every merged description below is the live closed PR body, not a draft. All-author repository searches for SOLR-18549, SOLR-17393 and SOLR-9637 returned no PR; SOLR-4841 returned only #5070.
+
+### Current merged-body ledger
+
+| PR and ticket | Merged at (UTC) | Follow-up state |
+| --- | --- | --- |
+| [#4939](https://github.com/apache/solr/pull/4939), SOLR-18135 | 2026-09-24T13:24:24Z | No follow-up promise in the description |
+| [#4953](https://github.com/apache/solr/pull/4953), SOLR-8291 / SOLR-13217 | 2026-09-30T20:04:41Z | OPEN: verified test-only #5004 remains unmerged |
+| [#4995](https://github.com/apache/solr/pull/4995), SOLR-18196 | 2026-10-03T02:06:45Z | No follow-up promise in the description |
+| [#4959](https://github.com/apache/solr/pull/4959), SOLR-18277 | 2026-10-05T10:46:07Z | No follow-up promise in the description |
+| [#5001](https://github.com/apache/solr/pull/5001), SOLR-18317 | 2026-10-05T14:58:58Z | OPEN on the specific server-PR evidence; historical OWNER RULED KEPT noted below |
+| [#4965](https://github.com/apache/solr/pull/4965), SOLR-10198 | 2026-10-07T13:19:33Z | No follow-up promise in the description |
+| [#5012](https://github.com/apache/solr/pull/5012), SOLR-13202 | 2026-10-07T15:03:48Z | No follow-up promise in the description |
+| [#5070](https://github.com/apache/solr/pull/5070), SOLR-4841 | 2026-10-10T10:46:38Z | OPEN: test and reviews ready; follow-up submission absent |
+| [#5062](https://github.com/apache/solr/pull/5062), SOLR-18523 | 2026-10-17T00:11:16Z | No follow-up promise in the description; companion anchor-check offer noted below |
+| [#5027](https://github.com/apache/solr/pull/5027), SOLR-18391 | 2026-10-17T00:24:06Z | No follow-up promise in the description |
+| [#5170](https://github.com/apache/solr/pull/5170), SOLR-18368 context, explicitly no ticket of its own | 2026-10-21T18:08:16Z | No follow-up promise in the description |
+| [#5030](https://github.com/apache/solr/pull/5030), SOLR-15823 | 2026-10-22T11:38:48Z | DISCHARGED as a submission: named levels-GET follow-up #5031 is open |
+| [#5193](https://github.com/apache/solr/pull/5193), SOLR-18565 | 2026-10-22T16:46:35Z | No follow-up promise in the description |
+
+#### #4953: separate SOLR-16130 test-only PR
+
+Promise, verbatim: "This also fixes SOLR-16130, I plan to submit a separate, test-only PR for that."
+
+State: **OPEN under the ledger's recorded merge condition**. [#5004](https://github.com/apache/solr/pull/5004) remains open at `3c48dec4b79faed625c4fb79833d0975a55f3ed7`. Its live body links the fixed root cause to #4953. Its current file list contains only `CrossCollectionJoinQueryTest.java` and the ccjoin test configset's `solrconfig.xml`, confirming the separate test-only submission already exists. `receipts/SOLR-16130.md` records the gate and fail-before proof.
+
+The October 14 pass explicitly retained OPEN until #5004 merges; later passes offered Nick the narrower interpretation that submission alone suffices. This pass does not silently change that recorded convention. Concrete next step: maintainer review and merge of the existing PR, not another test branch or PR. Whose call: maintainers for merge; Nick only if changing the ledger's completion convention.
+
+#### #5001: separate server-side hardening PR
+
+Promise, verbatim: "The server-side hardening that degraded such calls to the local node was split out at reviewer request and is preserved intact on the fork branch `solr-18317-server-submit`, to be opened as its own PR."
+
+State: **OPEN on evidence of the specific server-side opening**. The named branch remains at `ae918a03fa7b622853aa1c5ba3e53ab567e2fef7`; `solr-18317-ready` remains at `c5d63b1a67c1842a70dd4fdec39f39e1bcfd9b16`. The newer standalone proxy fix is `solr-18549-submit` at `b89664d164db46cdac432668e2d9a07ce95fbd37`. `receipts/SOLR-18549.md` records green proof at that tip, with the Java gate at `cf4b86934697` and the later title-only changelog adjustment revalidated. `pr-drafts/solr-18549/PR-draft.md` is explicitly not opened and requires Nick's approval. No SOLR-18549 PR was found.
+
+Historical disposition: the October 14 pass records **OWNER RULED KEPT**, based on the SOLR-15823 GET/PUT pair, and later passes distinguish that ruling from the separate server-side gap. #5030 is now merged; #5031 is open. These facts advance that pair but do not show a separate server-hardening PR was opened. The original promise's degrade-to-local behavior is also not the same as #5030's documented standalone `nodes` rejection with 400. This pass preserves the owner's historical disposition and records the factual gap without making a new owner ruling or claiming a fresh code-coverage audit.
+
+Concrete next step: use the existing gated SOLR-18549 change and draft for the server-side submission, subject to Nick's approval. No new ticket or replacement branch is needed merely because the old SOLR-18317 ticket is resolved. Whose call: Nick for the public opening. No action is executed here.
+
+#### #5070: test through a custom language identifier
+
+Promise, verbatim: "A follow-up submission is planned for a test that runs language detection through a custom identifier."
+
+State: **OPEN as a submission, implementation/review SATISFIED**. `solr-4841-langid-followup-submit` remains at `bf1b01d0dc0ecb0455a19c2cb3276f5a1318d437`. `receipts/SOLR-4841-followup.md` records green proof. Independent review rounds 2 and 3 are already SATISFIED in `reports/SOLR-4841-followup-round-1.md`; the October 22 status scrub explicitly retains ticket filing and PR opening as Nick's public actions (`reports/owner-items-scrub-2026-10-22.md`, second-pass row and public-actions list). A SATISFIED implementation header does not prove the promised submission happened.
+
+The original SOLR-4841 Jira ticket is now Resolved / Fixed, unlike earlier passes. That resolves the original constructor change, not the distinct follow-up submission. The all-author SOLR-4841 PR search still returns only #5070, and no open PR uses the follow-up head.
+
+Concrete next step: approve and file the distinct follow-up ticket, update its packaging references as required by the recorded direction, and approve opening the ready follow-up PR. Do not repeat completed reviews. Whose call: Nick for ticket filing and opening.
+
+#### #5030: named read-side follow-up already submitted
+
+The final body names the levels-GET follow-up as already open. Verbatim:
+
+> Our plan for the read side: the levels GET, which is the read half of the screen this PR migrates and the one place V1 with `nodes=all` already aggregates, is open as [#5031](https://github.com/apache/solr/pull/5031), a separate follow-up PR stacked on an earlier head of this PR; the messages GET and the threshold PUT stay out unless maintainers ask for them, and the follow-up PR names them in its Limits.
+
+State: **DISCHARGED as a named submission**, not merged. [#5031](https://github.com/apache/solr/pull/5031) remains open at `251460b7c14fa4764c04096a69c2c7d279f9d2d2`. Its live body explicitly says it was restacked onto current main after #5030 merged and reports the updated head's tests. This corrects #5030's older description of it as stacked on an earlier head. No new submission is required to fulfill that named plan; maintainer review/merge remains outstanding. The messages GET and threshold PUT are conditional on maintainer requests, not unconditional future promises.
+
+#### Why the other descriptions do not add promises
+
+#4939 and #4995 contain no later-work plan. #4959's unmeasured rollback window, #4965's exclusions and API tradeoffs, and #5012's missing-`v` limitation describe scope or behavior, not planned later work. #5027's "Follow-up at adcda10b501." describes work already in that PR; "Happy to open a follow-up ticket and PR for them on request." is conditional. #5062 says "Happy to open a follow-up ticket for it." and refers to the companion's anchor-check offer; it does not commit to implementing that check. #5170 says "I can add one here, or in a follow-up, on request." about an upgrade note, an offer rather than a commitment. #5193 lists limited investigation and test coverage, with no follow-up plan.
+
+### Pending and conditional shapes outside the merged ledger
+
+- **#5100 / SOLR-18532**, open at `7dfd3d98d0a2f016c520139cbca96ea4a49f6689`. Promise, verbatim: "The SOLR-9865 change edits the same rollback lines and writes back only the previous directory name. Once this change lands, I will follow up on that branch by dropping its rollback edit, so the two do not conflict." **NOT YET DUE / pending merge**. `solr-9865-submit` remains `4937608bb181efae104c0d6f0257f445af50bf52`. After #5100 merges, the concrete next step is removing the overlapping rollback edit and revalidating the existing branch before opening. Nick approves the opening; implementation hosts can carry out the scoped branch work when assigned. This audit changes nothing.
+- **#5104 / SOLR-2681**, open at `a3b1ea7994d932cdf78667f799542d7d823f7d49`. Promise, verbatim: "A follow-up pull request is planned for the nested forms." **PENDING MERGE**, outside this round's merged ledger. The old "no branch" note is obsolete: `solr-2681-nested-submit` exists at `cec42ef4f061ff7b81a4610a91ee76aa83b806ff`, with a green receipt in `receipts/SOLR-2681-nested.md`. `assignments/pool-solr-2681-nested-forms-round-1.md` records the separate follow-up; its ticket and PR are not filed/opened. Next step is Nick's approval for those public actions, not rebuilding the nested fix.
+- **#5061 / SOLR-18119**, closed without merge at 2026-10-18T18:50:40Z, head `660faedd026ddc77f8736a4d1ab5cb89a4253a4a`. Exact old offer: "A follow-up change can restore the anchor check; it is not in this PR." **CLOSED UNMERGED / outside the ledger**, not pending an imminent merge. [#5180](https://github.com/apache/solr/pull/5180) is open at `89c8e184fe7102bebfa946b82b52a8425ab604a5`; its current body concerns release-only Changes.html generation and Jenkins preparation. It contains no anchor-check follow-up wording. It therefore does not establish a replacement for the old anchor offer. Next step, if restoring that coverage is wanted: Nick selects and approves a scoped follow-up; none is created by this audit.
+- **#5089 / SOLR-13943**, open at `aa14590303d059025fe7b5baaaf6ad784ad53787`. This remains the correct PR, not the assignment's #5090. The previous "A follow-up submission for those six tests is planned." is no longer in its live body. The current exact text is: "The six tests in `TimeRoutedAliasUpdateProcessorTest` run in normal mode on this head. No further change is planned." It incorporates #5088's `960355fce36f` changes. **OLD PENDING PLAN REPLACED BY WORK IN EXISTING OPEN PRs**, not a merged discharge. Both PRs remain open; the SOLR-13059 receipt records their proof. No separate `solr-13059-submit` ref exists, but its absence no longer means the six-test work is missing. Maintainers review/merge the existing PRs; no new follow-up is proposed here.
+- **#5088 / SOLR-13696**, open at `960355fce36ff254611190b21b8ceaf3fc887a0e`. Its old promise to restore commitWithin coverage is also gone from the live body. It now explicitly leaves an honest commitWithin check out and says "Maintainers should decide." This is a disclosed coverage tradeoff, not an unconditional submission plan. The old pending promise is not imported into the merged ledger.
+- **#5090 / SOLR-14262**, open at `1e8d2b0075d7fded72ac19a049db27123a46ec10`. No SOLR-13059 follow-up promise in its body; no follow-up promise in the description.
+- **SOLR-17393 then SOLR-9637**: no merged description carries this plan, and all-author searches return no PR for either ticket. Branches remain `626241e647e5fcc5ac6cc485f6a96d4ffe12e00a` and `c50fa4ffd932ede86c36b0748ee6aabe34d30e0a`. The earlier ledger attributes this sequence to drafts, but those two historical draft paths are absent from the current coordination tree, so their old quotations are not presented as newly verified draft evidence. No live merged body names this promise. **NOT YET DUE**. The SOLR-17393 receipt is green at its existing head. Nick approves opening that first PR; only after its merge does the SOLR-9637 rebase/opening sequence become due.
+
+### Public Jira and fork verification
+
+Public Jira REST reads used `GET /jira/rest/api/2/issue/{key}?fields=summary,status,resolution,updated,issuelinks`. The first attempt used GitHub's media type and returned 406; retrying with `Accept: application/json` succeeded for all 13 keys. No unavailable state is carried forward as a successful read.
+
+| Public Jira | Current state |
+| --- | --- |
+| [SOLR-4841](https://issues.apache.org/jira/browse/SOLR-4841) | Resolved / Fixed, changed from prior ledger |
+| [SOLR-18317](https://issues.apache.org/jira/browse/SOLR-18317) | Resolved / Fixed |
+| [SOLR-18549](https://issues.apache.org/jira/browse/SOLR-18549) | Open |
+| [SOLR-16130](https://issues.apache.org/jira/browse/SOLR-16130) | Open |
+| [SOLR-17393](https://issues.apache.org/jira/browse/SOLR-17393) | Open |
+| [SOLR-9637](https://issues.apache.org/jira/browse/SOLR-9637) | Open |
+| [SOLR-18532](https://issues.apache.org/jira/browse/SOLR-18532) | Open |
+| [SOLR-9865](https://issues.apache.org/jira/browse/SOLR-9865) | Open |
+| [SOLR-18119](https://issues.apache.org/jira/browse/SOLR-18119) | Open |
+| [SOLR-13059](https://issues.apache.org/jira/browse/SOLR-13059) | Open |
+| [SOLR-13943](https://issues.apache.org/jira/browse/SOLR-13943) | Open |
+| [SOLR-2681](https://issues.apache.org/jira/browse/SOLR-2681) | Open |
+| [SOLR-15823](https://issues.apache.org/jira/browse/SOLR-15823) | Open |
+
+Fork heads above came from the [matching-ref API](https://api.github.com/repos/nick-boss-tech/solr/git/matching-refs/heads/solr-), which returned 1,239 refs, including the newly recorded nested and SOLR-18549 heads. Relevant live PR bodies and receipts establish the distinctions between built, gated, submitted and merged. No code was rebuilt, no arbitrary fork head was treated as a discharge, and no new owner ruling was inferred from a satisfied implementation status.
+
+### Concrete next steps, none executed
+
+1. Keep #5004 as the single test-only candidate and wait for its review/merge under the existing ledger convention.
+2. Put the existing gated SOLR-18549 draft before Nick for opening approval; preserve the historical #5001 owner disposition alongside the factual server-PR gap.
+3. Put the already-reviewed SOLR-4841 follow-up before Nick for ticket/opening approval; do not repeat its completed review or gate.
+4. Track #5031 as an already-submitted follow-up awaiting review/merge, not as missing work.
+5. Keep #5100 and SOLR-17393 dependent work behind their actual merge triggers. Keep the gated nested fix ready for approved public filing/opening. Do not create redundant SOLR-13059 or anchor-check submissions from stale text.
+
+---
+
 ## Pass dated 2026-10-19, vm4 (overnight recurrence check)
 
 Claim: `claims/pool-vm4-merged-pr-followup-promises-round-1-overnight.md`. Read-only: GitHub API reads only. Nothing posted, filed or edited.
