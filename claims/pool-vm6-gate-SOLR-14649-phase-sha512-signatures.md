@@ -1,7 +1,7 @@
 # Claim: pool-vm6-gate-SOLR-14649-phase-sha512-signatures
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE. Job: `gates/SOLR-14649-phase-sha512-signatures.md`. Mark DONE with the receipt path when the gate lands.
+- Status: HANDED BACK. Job: `gates/SOLR-14649-phase-sha512-signatures.md`. See the job's Run record for the failure.
 - Job or assignment: `gates/SOLR-14649-phase-sha512-signatures.md`.
 - Slice: the whole gate job.
 - Capability tags used: gate.
@@ -21,3 +21,7 @@ Result: 2026-10-23T16:45Z: inode guard fixed on coordination (`d3614ec136`: a mo
 Result: 2026-10-23T17:02Z: head-focused of `s14649-head-r3` died at about 17:00 with no rc line and no partial XML. compile (rc=0) and head-clean (rc=0) passed on `25589eb5e6`. Not relaunched; gate not GREEN. Next: decide whether to relaunch and how to keep the background run alive across the session sleep.
 
 Heartbeat: 2026-10-23T17:02:00Z
+
+Result: 2026-10-23T17:26Z: `s14649-head-r4` head-clean rc=0; head-focused rc=1, 15 tests, 1 failure (`PackageToolTest.testPackageTool`: install of question-answer:1.0.0 gets 400 from the filestore; fixture signature needs SHA-512 re-signing, a test-resource change outside repair scope). Check not run. Gate HANDED BACK; no receipt. Job Run record has the counts and the decision needed from Nick.
+
+DONE: 2026-10-23T17:26Z. Deliverables: `gates/SOLR-14649-phase-sha512-signatures.md` (Run record; Status HANDED BACK). No receipt.

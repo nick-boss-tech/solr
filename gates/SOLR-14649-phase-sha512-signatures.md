@@ -1,6 +1,6 @@
 # Gate job: SOLR-14649 (package signatures require SHA-512)
 
-Status: CLAIMED
+Status: HANDED BACK (head 25589eb5e6: `PackageToolTest.testPackageTool` fails at its install step, the filestore rejects the signed jar with 400. The fixture signature must be regenerated for SHA-512, a test-resource change outside repair scope. Focused run 14 of 15 passed; check step not run.)
 
 - Branch: `solr-14649-submit`. Head: `800e91188e0d9f975b9096c9413915ea18713b23` (fork tip, confirmed by ls-remote on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `79b23df58daac14b92cc35f23b8b81f72098b4ba`. Prior gated head: none recorded.
@@ -46,6 +46,7 @@ No row may leave the choice to the claimant.
 - Step 2 and steps 4 and 5 (job `s14649-head`, started 2026-10-23T15:53Z on the repaired head `25589eb5e6`): died at compile before any test ran. Gradle was not started by the guard; the rebase that replaced `pool/bin` mid-run is the recorded cause.
 - Head run `s14649-head-r2`: refused at compile, rc=4, by the inode guard (NFS `/workspace` reports zero inode counters). Fixed on coordination in `d3614ec136`, which checks the local root when a mount reports zero counters.
 - Head run `s14649-head-r3` (job `/workspace/gates/logs/vm6/s14649-head-r3/`, scripts from `/workspace/gates/snapshots/s14649-head-r3/bin`, head `25589eb5e6`): compile rc=0 (16:45:35Z to 16:54:11Z), head-clean rc=0 (16:54:11Z to 16:54:52Z). head-focused started 16:54:52Z, last log write 16:59:59Z, then the process died with no `rc=` line, no live process at 17:01Z, and no partial test XML. Cause not established from the logs. Possibly the background job does not survive the session sleeping between wakes; this is not verified. Check is at `s14649-head-r3`: the focused run and check step are not done. Gate not GREEN; no receipt written.
+- Head run `s14649-head-r4` (job `/workspace/gates/logs/vm6/s14649-head-r4/`, same head, same seed, frozen scripts): head-clean rc=0 (17:21:44Z to 17:22:56Z); head-focused rc=1 (17:22:56Z to 17:25:33Z); check not run. Focused XML counts: 15 tests, 1 failure, 0 errors, 0 skipped. TestCryptoKeys 4 of 4, TestDistribFileStore 1 of 1, TestContainerPlugin 3 of 3, PackageStoreSchemaPluginsTest 1 of 1, TestPackages 4 of 4 all pass. Failure: `org.apache.solr.cli.PackageToolTest.testPackageTool`, `AssertionError: Non-zero status returned for: [--solr-url, ..., install, question-answer:1.0.0, ...] expected:<0> but was:<1>` (PackageToolTest.java:422, from :125). Server log: the signed PUT of `question-answer-request-handler-1.0.jar.tmp` returns status=400. The fixture `solr/core/src/test-files/solr/question-answer-repository/repository.json` signature was written for the old verifier; the test's own comment (lines 51 to 55) says the jar must be re-signed with `openssl dgst -sha512` for the install step. Re-signing changes a test-resource value, which the Gate repairs section puts out of scope. Not repaired, not relaunched. Decision for Nick: re-sign the fixture as a separate test-resource commit (needs approval), or hand this gate back for implementation.
 
 ## On green
 
