@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-18249 backup metadata path and async-status reproduction, round 1
 
-Status: OPEN
+Status: CLAIMED (claims/pool-solr-18249-backup-metadata-repro-round-1.md)
 
 - Capability tags: review, premise-run.
 - Category: Replication, backup, and restore (category 5 in `pool/work-map.md`).

@@ -28,3 +28,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Heartbeat: 2026-10-23T07:15:00Z; took over consistency-docs item 4 from vm4 for Antora on `docs-streaming-allowlist-note` at `4b185504ef7dd5e4530664995719a0e743564382`. This host has npm capability.
 
 - Heartbeat: 2026-10-23T07:21:40.292402+00:00; completed consistency-docs round 1 item 4 at unchanged `4b185504ef7dd5e4530664995719a0e743564382`. Antora and direct site link validation GREEN. No product change, PR or running build. Receipt: `receipts/consistency-docs-round-1-item4.md`.
+
+- Heartbeat: 2026-10-23T07:25:00Z; claimed the SOLR-18249 backup-metadata and async-status reproduction assignment. This is source/synthetic-test work only; no production access or product changes.
