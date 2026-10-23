@@ -1,6 +1,6 @@
 # Gate job: SOLR-17844 (partition-safe expected-hit oracle)
 
-Status: CLAIMED (claims/phone-agent-2-blockers-round-1.md)
+Status: DONE (GATE GREEN at 08ecc90ff7b5505e576985c8dcb514393314ce2b, phone-agent-2)
 
 - Branch: solr-17844-restore-sort-assertions-phone-agent-2. Head: `08ecc90ff7b5505e576985c8dcb514393314ce2b`.
 - Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`. Previous gate at `0a7ffa07a40c123bd541df3068548247f40055d7` failed and remains recorded as HANDED BACK in `gates/SOLR-17844-phone-agent-2-round-1.md`.
@@ -31,13 +31,15 @@ The corrected oracle remains independent of actual hits. No production sorting c
 
 ## Checklist
 
-- [ ] fork head read back
-- [ ] changelog exemption verified
-- [ ] tidy
-- [ ] Error Prone compile
-- [ ] discriminating mutation
-- [ ] fresh head XML counts
-- [ ] module check
-- [ ] receipt and terminal outcome recorded
+- [x] fork head read back
+- [x] changelog exemption verified
+- [x] tidy
+- [x] Error Prone compile
+- [x] discriminating mutation
+- [x] fresh head XML counts
+- [x] module check
+- [x] receipt and terminal outcome recorded
 
 No external posts, PR opening, ready flip or force push. Commits as Nick Shanin without trailers.
+
+Completed 2026-10-23T00:10:05Z. All steps passed. Mutation proof: 2 executed, 2 expected assertion failures, 0 skipped/errors. Restored head: 2 tests, 0 skipped/failures/errors. Core module check rc=0. Source clean, fork head read back unchanged. Full new top receipt in `receipts/SOLR-17844.md`; failed original gate preserved below it.
