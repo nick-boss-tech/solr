@@ -1,4 +1,5 @@
 # Assignment: Windows run of PR #5118 (SOLR-18010)
+Status: DONE (report: reports/pool-solr-18010-windows-round-1.md; claim: claims/pool-solr-18010-windows-round-1.md).
 
 Pool-open, any Windows host with a JDK 21 and Gradle through `gradlew.bat`. Claim-first as claims/pool-solr-18010-windows-round-1.md. Deliverable: reports/pool-solr-18010-windows-round-1.md.
 
