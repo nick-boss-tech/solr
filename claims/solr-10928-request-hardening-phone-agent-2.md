@@ -1,6 +1,6 @@
 # Claim: SOLR-10928 request hardening
 - Claimant host: phone-agent-2, matching hosts/phone-agent-2.md.
-- Status: ACTIVE.
+- Status: DONE; implementation complete and pushed, independent gate is the next actor.
 - Job or assignment: assignments/solr-10928-request-hardening.md.
 - Slice: owner-directed request-level coverage and docs hardening of solr-10928-submit.
 - Capability tags used: implementation, review, settling-run.
@@ -12,3 +12,5 @@
 - Staffing: one main implementation agent, one read-only independent coverage reviewer; no concurrent builds.
 - Decision ladder: cost is effort, add real request tests rather than preserve the known helper-only limitation. No behavior redesign or public text actions.
 Heartbeat: 2026-10-23T03:34:51Z
+
+DONE: 2026-10-23T03:38:45Z. Deliverables: commit d5621a29281f28659db7b9e9ca57cc46c2651f53 on solr-10928-submit; seven request-level test methods, two distributed request shapes, and clarified reference guide. Pre-commit tidy PASS under host lock/guards; diff check clean; two independent read-only reviews found no concrete defects. Remaining step is independent full validation under gates/SOLR-10928-phase-request-hardening.md, to be claimed by the separate gate session. No production behavior changes. Implementation will not edit the product tree while that gate runs.
