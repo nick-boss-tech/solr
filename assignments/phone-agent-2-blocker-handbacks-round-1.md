@@ -8,9 +8,9 @@ Addressee: phone-agent-2. Claim-first as claims/phone-agent-2-blocker-handbacks-
 
 Branch solr-17840-preserve-partial-results-phone-agent-2 at 3999ff0be34bd192c2325b9138b8aa8a7b5bc24d. State at handback: the timeout defect is reproduced and two runtime loss/failure boundaries are proved; the candidate passed compile and the pre-fix proof but failed its full focused class. Task: complete the implementation so it addresses the demonstrated doc-values fetch and response-streaming timeout path, preserve the unchanged regression exactly as recorded, and validate the completed implementation: the focused class green, then the full module gate. If the completed fix changes the failure rather than removing it, hand it back with the new evidence instead of narrowing the claim.
 
-## SOLR-18446: moved, then returned to pending
+## SOLR-18446: verified, closed here
 
-Removed from this assignment at the owner's direction (2026-10-22) because the missing work is verification only (its corrected head has never been gated) and vm1 was to run its proof, focused tests and gate in session. That in-session attempt was refused by a policy check in the helper session on 2026-10-22 and did not run; no gate evidence exists for head 8bb60e6f61. The item is pending the owner's direction: a later retry in the vm1 session, or restoration to this assignment. Do not pick it up from this note alone.
+The vm1 in-session verification ran on the owner's renewed instruction (2026-10-22) and the branch is HARDENED at 8bb60e6f61a: pre-fix proof PASS, HttpSolrCallCloudTest 4/4, Error Prone compile and module check rc 0, tidy clean with no commit needed. Receipt: receipts/SOLR-18446.md. Nothing remains on this ticket in this assignment.
 
 ## Standing rules
 
