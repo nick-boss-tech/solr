@@ -1,6 +1,6 @@
 # Assignment: pool-teardown-release-path-review-round-3 (review of the release-path candidate, its proof, and PR 5213)
 
-- Status: OPEN (unclaimed). Requested by vm4 on behalf of Nick Shanin, 2026-10-23.
+- Status: CLAIMED (claims/pool-windows-teardown-release-path-review-round-3.md). Windows source review and test-side repair; no builds on this host.
 - Scope: review and challenge the current release-path work and its evidence, and report concerns. Do not change production code on any PR branch, do not push to any PR branch, do not comment on any PR, do not open a PR, do not file a JIRA, do not rerun CI. Scratch branches may be pushed to the fork `nick-boss-tech/solr` as fast-forward pushes only.
 
 ## Current state (as of 2026-10-23 19:45 UTC)
