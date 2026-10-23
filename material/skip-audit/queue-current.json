@@ -6506,16 +6506,16 @@
     "status": "skip",
     "sha": null,
     "base": null,
-    "note": "no repro; log4j-frame StackOverflowError in 7.1 leader election, probable duplicate of SOLR-6213; LIR/election code reworked since.",
+    "note": "duplicate of SOLR-6213, keep open (re-verdict 2026-10-23): the trace repeats the rejoin cycle (runLeaderProcess, joinElection, rejoinLeaderElection, SyncStrategy.sync, PeerSync.sync); the log4j 1 frames are the single logging call where the stack ran out. Close-obsolete overturned.",
     "audit": {
       "verdict": "confirmed-skip",
       "date": "2026-10-05",
       "round": "audit-3",
       "evidence": "audit-3 Tier 1 pass: ticket packet and note re-read (JIRA status Open, 1 comments). Class: no repro or too vague to test. Reason holds: no repro; log4j-frame StackOverflowError in 7.1 leader election, probable duplicate of SOLR-6213; LIR/election code reworked since. Basis is ticket text, not a fresh code repro; no deterministic test could be written from it."
     },
-    "verdict": "close-obsolete",
+    "verdict": "keep-open",
     "draft_branch": "solr-11787-draft-close",
-    "evidence_head": "498a09aea97aac86c2cc7ac114113b946d249942"
+    "evidence_head": "b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb"
   },
   {
     "key": "SOLR-11776",
