@@ -13,4 +13,6 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 
 - Heartbeat: 2026-10-23T06:09:30Z; completed SOLR-16914 unit 15 from the named NEARLY handoff. All three guide regates are GREEN at the unchanged head; no product repair or running build.
 
-- Heartbeat: 2026-10-23T06:12:30Z; took over SOLR-5821 unit 23 from the named NEARLY handoff on the newdev/Blocker/Critical review round. Running the guide regates, then passes 2 and 3.
+- Heartbeat at takeover: 2026-10-23T06:12:30Z; took over SOLR-5821 unit 23 from the named NEARLY handoff on the newdev/Blocker/Critical review round.
+
+- Heartbeat: 2026-10-23T06:21:49.802110+00:00; completed SOLR-5821 unit 23 at `327547d693e098447ff70c536b794aa364508670` with all three guide regates GREEN. No repair, product commit, or running build.
