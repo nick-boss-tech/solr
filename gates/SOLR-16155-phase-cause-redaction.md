@@ -1,8 +1,8 @@
 # Gate job: SOLR-16155 (value-bearing causes in update errors)
 
-Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction-attempt-3.md)
+Status: DONE
 
-- Branch: `solr-16155-submit`. Gated head: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` (tidy repair head, fork tip read back on 2026-10-23). Original assigned head: `323bafea9e097d05e46f2f088e5034f6fce171ec`. If the tip moves before another repair push, stop and record the new tip here.
+- Branch: `solr-16155-submit`. Final gated head: `96ed88e6dc17e50df1d1f8f5e8c33ec84529d23b` (tree `44ec61d3c70b05109353a997332074494092b5de`; fork branch and upstream PR #5200 head ref verified at 2026-10-23T20:38:21Z). Original assigned head: `323bafea9e097d05e46f2f088e5034f6fce171ec`. Pre-repair head: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` (tree `ae47de910e065fe76d6d24763215224a11a11353`).
 - Prior gated tree: `ab394c8d916b6452a35bfcb6ff7002c41ab19ebd`, gated at `53196640988ae04b247dee19abfc074b024335a7` then squashed unchanged to prior PR head `9d1d0e5df9d91d5b18bc62c277c6baff5faee69c`. Those results do not cover this new head.
 - Merge base with upstream/main: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`.
 - Gate ID: `SOLR-16155-phase-cause-redaction`. Claim file: `claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction-attempt-3.md`.
@@ -169,9 +169,9 @@ Fresh retry evidence directory: `/workspace/phone-agent-2-logs/SOLR-16155-phase-
 - [x] Step 1 tidy.
 - [x] Step 2 Error Prone main and test compilation.
 - [x] Step 3 both prior-production-code proofs.
-- [ ] Step 4 all eight focused test classes and strict fresh XML checks.
-- [ ] Step 5 core and test-framework module checks recorded separately.
-- [ ] Final branch/PR head verification and gate disposition.
+- [x] Step 4 all eight focused test classes and strict fresh XML checks: 110 tests, 3 skipped, 0 failures, 0 errors.
+- [x] Step 5 core check and test-framework check recorded separately; both returned 0.
+- [x] Final branch and PR head verified at the gated commit; gate and claim marked DONE and receipt appended.
 
 
 ### Attempt 3 retry phase-2 wrapper correction (2026-10-23T20:32:14.096587+00:00)
@@ -179,3 +179,10 @@ Fresh retry evidence directory: `/workspace/phone-agent-2-logs/SOLR-16155-phase-
 The initial phase-2 wrapper exited before standard-runner step 4 with `RuntimeError: Phase-two evidence already exists: 4-head`. Inspection confirmed `state.json` contains completed steps only through `3-proof-verdict-verified`; `4-head.log` was a zero-byte resume placeholder, not step-4 output, and there were no step-4/5 result files or active Gradle processes. The exact failure remains preserved in `phase-head-runner.log`; the empty file was preserved as `4-head.log.wrapper-placeholder`, with the diagnosis in `phase2-wrapper-preflight-correction.json`. No focused tests or module checks ran during the failed preflight.
 
 This is a continuation of the same retry, not another full retry: the corrected phase-2 wrapper/config will resume the standard runner at the unstarted step 4, reuse steps 0-3 without rerunning them, write continuation-suffixed runner artifacts, and retain the 16% inode monitor and normal host lock. If an actual gate step fails, the one-retry rule applies and this job will be HANDED BACK.
+
+
+### Final attempt 3 retry result (2026-10-23T20:38:21Z): GATE GREEN
+
+The full retry is complete on `96ed88e6dc17e50df1d1f8f5e8c33ec84529d23b` (tree `44ec61d3c70b05109353a997332074494092b5de`). Steps 0 changelog, 1 tidy, and 2 Error Prone main/test compilation returned 0. Step 3 verified both expected single assertion failures against prior production code, each with one test, zero skips, zero errors, and the sensitive cause present in the proof evidence. Step 4 passed across all eight requested classes: 110 tests, 3 skipped, 0 failures, 0 errors. Step 5 `:solr:core:check -x test` returned 0, including `forbiddenApis`; `:solr:test-framework:check -x test` separately returned 0. `full-gate-verdict.json` records `GREEN`, and `state.json` records all steps.
+
+The first phase-2 wrapper invocation stopped before step 4 because it treated an empty resume placeholder as completed evidence. The zero-byte file and the error log were preserved, and the same retry resumed at unstarted step 4 without rerunning steps 0-3. The continuation exited 0. The corrected inode monitor read 26.8280% free before and 26.8236% after, with no stop. The fork branch and upstream PR #5200 head ref both match `96ed88e6dc17e50df1d1f8f5e8c33ec84529d23b`. Evidence: `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-3-retry/`.
