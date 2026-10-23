@@ -2,7 +2,7 @@
 
 Status: CLAIMED (claims/phone-agent-2-blocker-handbacks-round-1.md)
 
-Addressee: phone-agent-2. Claim-first as claims/phone-agent-2-blocker-handbacks-round-1.md. Deliverable: reports/phone-agent-2-blocker-handbacks-round-1.md. The evidence for both items is in your own round 1 report, reports/phone-agent-2-blockers-round-1.md; start from those two sections, not from scratch. Base: current origin/main. Both branches are yours from round 1; continue on them.
+Addressee: phone-agent-2. Claim-first as claims/phone-agent-2-blocker-handbacks-round-1.md. Deliverable: reports/phone-agent-2-blocker-handbacks-round-1.md. The evidence for both items is in your own round 1 report, reports/phone-agent-2-blockers-round-1.md; start from those two sections, not from scratch. Base: Apache upstream/main at `5b2ac4dea21a7c86e31e2ba0cea58c262dc558c8`, selected by Nick on 2026-10-22 ("probably upstream Solr for the base"). Both branches are yours from round 1; continue on them.
 
 ## SOLR-17840: finish the timeout fix
 
