@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-6213, repeat the rejoin regression test on another host
 
-Status: OPEN
+Status: CLAIMED (claims/solr-6213-rejoin-repeat-round-1.md)
 
 - Capability tags: gate, premise-run.
 - Category: Solr core, SolrCloud tests.
