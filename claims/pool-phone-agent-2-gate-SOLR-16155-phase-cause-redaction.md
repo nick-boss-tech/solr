@@ -25,3 +25,5 @@ Plan: run the full gate from step 0 on the committed repair head, verify the exa
 Result: pending.
 
 Heartbeat: 2026-10-23T18:39:53Z; proof/head worktrees are clean at repair head `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, inode guards pass, and the standard-runner wrapper/configs are ready. No Gradle step has started.
+
+Heartbeat: 2026-10-23T18:52:35Z; phase 1 steps 0-3 are verified at `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, including both expected prior-production-code assertion failures. Step 4 has not run; the empty wrapper-created placeholder was documented and removed. Both inode guards pass at 128811/837408 free (15.38%). Phase 2 is next; no cache cleanup or guard bypass will be used.
