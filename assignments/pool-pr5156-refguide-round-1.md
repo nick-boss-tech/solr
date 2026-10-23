@@ -1,6 +1,6 @@
 # Assignment: PR #5156 (SOLR-9396) Ref Guide update (round 1)
 
-Status: CLAIMED (claims/pool-windows-pr5156-refguide-round-1.md)
+Status: DONE (claim claims/pool-windows-pr5156-refguide-round-1.md; deliverable reports/pool-pr5156-refguide-round-1.md)
 Intended host: Any host with implementation capability.
 
 Posted by the phone agent at the owner's direction, 2026-10-22. Source: Eric Pugh's "Nick-Boss-Tech Breach Report" (Claude.ai artifact, October 2026, Refresh 2), quoted on the dev list. Claim before starting by adding `claims/pool-<host>-{name}.md` per WORKFLOW.md. Verify every head below by ls-remote at claim time; the artifact is a snapshot and heads may have moved. If a tip has moved, work at the live tip and record it.
@@ -12,6 +12,7 @@ the subquery transformer asks the index for the fields its subquery references, 
 ## Branch
 
 - PR #5156, branch `solr-9396-submit` at `f62c06588f` when checked 2026-10-22. Ticket: SOLR-9396.
+- Final branch head: `ef437b5feafe4e9607c5b4729de70f68405aa3b1`, verified on the fork and PR #5156 on 2026-10-23.
 
 ## Work
 

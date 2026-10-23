@@ -1,6 +1,6 @@
 # Assignment: PR #5160 (SOLR-10492) Ref Guide update (round 1)
 
-Status: CLAIMED (claims/pool-windows-pr5160-refguide-round-1.md)
+Status: DONE (claim claims/pool-windows-pr5160-refguide-round-1.md; deliverable reports/pool-pr5160-refguide-round-1.md)
 Intended host: Any host with implementation capability.
 
 Posted by the phone agent at the owner's direction, 2026-10-22. Source: Eric Pugh's "Nick-Boss-Tech Breach Report" (Claude.ai artifact, October 2026, Refresh 2), quoted on the dev list. Claim before starting by adding `claims/pool-<host>-{name}.md` per WORKFLOW.md. Verify every head below by ls-remote at claim time; the artifact is a snapshot and heads may have moved. If a tip has moved, work at the live tip and record it.
@@ -12,6 +12,7 @@ refinement counts are grouped counts when `group.facet=true`, and a `facet.field
 ## Branch
 
 - PR #5160, branch `solr-10492-submit` at `f9707a5691` when checked 2026-10-22. Ticket: SOLR-10492.
+- Final branch head: `6d51d59b026b0b624a56dddd4f4d529eb3ab31be`, verified on the fork and PR #5160 on 2026-10-23.
 
 ## Work
 

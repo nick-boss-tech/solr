@@ -1,6 +1,6 @@
 # Assignment: PR #5169 (SOLR-12505) Ref Guide update (round 1)
 
-Status: CLAIMED (claims/pool-windows-pr5169-refguide-round-1.md)
+Status: DONE (claim claims/pool-windows-pr5169-refguide-round-1.md; deliverable reports/pool-pr5169-refguide-round-1.md)
 Intended host: Any host with implementation capability.
 
 Posted by the phone agent at the owner's direction, 2026-10-22. Source: Eric Pugh's "Nick-Boss-Tech Breach Report" (Claude.ai artifact, October 2026, Refresh 2), quoted on the dev list. Claim before starting by adding `claims/pool-<host>-{name}.md` per WORKFLOW.md. Verify every head below by ls-remote at claim time; the artifact is a snapshot and heads may have moved. If a tip has moved, work at the live tip and record it.
@@ -12,6 +12,7 @@ the streaming `fetch()` function returns the fetched fields when the target hand
 ## Branch
 
 - PR #5169, branch `solr-12505-submit` at `cc3b9d681e` when checked 2026-10-22. Ticket: SOLR-12505.
+- Final branch head: `f562683374604c312f2b688662a85736b7eed67f`, verified on the fork and PR #5169 on 2026-10-23.
 
 ## Work
 
