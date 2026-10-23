@@ -125,7 +125,7 @@ public class NodeStopQueryStallTest extends SolrTestCase {
     }
   }
 
-  private static void waitForSamples(Queue<long[]> samples, int count) throws InterruptedException {
+  private static void waitForSamples(Queue<long[]> samples, int count) throws Exception {
     TimeOut timeout = new TimeOut(WAIT_SECONDS, TimeUnit.SECONDS, TimeSource.NANO_TIME);
     timeout.waitFor("not enough query samples", () -> samples.size() >= count);
   }
