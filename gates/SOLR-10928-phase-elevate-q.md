@@ -47,10 +47,10 @@ If any step cannot be verified, record it here and stop.
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed
-- [ ] step 0 changelog check
-- [ ] step 1 tidy clean, or repaired and recorded
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed
+- [x] step 0 changelog check
+- [x] step 1 tidy clean, or repaired and recorded
 - [ ] step 2 Error Prone compile
 - [ ] step 3 proof leg, if requested
 - [ ] step 4 focused head run, counted from fresh XML
@@ -62,3 +62,22 @@ If any step cannot be verified, record it here and stop.
 
 - One fast-forward push with the receipt and the DONE marks, plus any repair commits (WORKFLOW.md, Gate repairs).
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## phone-agent-2 execution record
+
+- Started: 2026-10-23T02:51:49Z.
+- Assigned head confirmed by public ls-remote: `034c9e65b2ce755a0b7dc238e656edc91b103f4b`. Diff scope matches the stated 5 files, 90 insertions and 3 deletions.
+- Worktree: `/workspace/solr`, detached at the assigned head and initially clean.
+- Standard runner: `/workspace/tools/phone-agent-2-hardening-gate-v2.py` (unchanged), invoked by `/workspace/tools/phone-agent-2-10928-gate-proof-guard.py`. The wrapper adds a strict check of exactly both requested proof failures before allowing the head test run.
+- Configuration: `/workspace/tools/phone-agent-2-10928-gate-attempt-1.json`.
+- Attempt 1 evidence: `/workspace/logs/phone-agent-2-SOLR-10928-phase-elevate-q-20261023/attempt-1/`, including `runner.log`, per-step logs, `state.json`, archived XML, and the proof patch. Runner, config, and proof mutation sources are retained there.
+- Toolchain: `/usr/lib/jvm/java-21-openjdk-amd64`; host lock and disk/inode guard are enforced by the standard runner. Preflight free space: 35 GB; free inodes: 465,242. No competing Gradle build was active.
+
+### Tidy repair and retry
+
+- Attempt 1: changelog YAML parsed successfully; `tidy` succeeded but changed only the formatting of `parserQueryString` in `solr/core/src/java/org/apache/solr/handler/component/QueryElevationComponent.java`. No tests ran in this attempt.
+- Exact tidy patch: `/workspace/logs/phone-agent-2-SOLR-10928-phase-elevate-q-20261023/attempt-1/tidy.patch`; committed patch also retained as `tidy-committed.patch`.
+- Tidied tree SHA: `6c54a326b59fc7c98e62851bf518d2d8691b0812`.
+- Repair commit: `1ff57c1b21c22031513f733b641496b77057ea55`, authored and committed as Nick Shanin with no trailers. Fast-forward pushed to `solr-10928-submit`, read back by ls-remote.
+- Decision applied: the stated tidy repair row and WORKFLOW.md Gate repairs. The unchanged standard runner restarts at step 0 on the repaired head as required by the workflow's one-retry rule, then continues through step 2 and the remaining gate. No unchanged-tree retry.
+- Attempt 2 configuration: `/workspace/tools/phone-agent-2-10928-gate-attempt-2.json`; evidence directory: `/workspace/logs/phone-agent-2-SOLR-10928-phase-elevate-q-20261023/attempt-2/`. This is the single repaired-tree retry; any failure hands the job back.
