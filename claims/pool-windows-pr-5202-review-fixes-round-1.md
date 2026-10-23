@@ -1,6 +1,6 @@
 # Claim: SOLR-18446 review fixes and reply drafts
 
-Status: ACTIVE
+Status: DONE
 Host: windows
 Capabilities: review, draft
 Assignment: assignments/pr-5202-review-fixes-round-1.md
@@ -15,3 +15,7 @@ Review only. Source and upstream discussion remain unchanged. The assignment's
 required claim and report are coordination records, the exceptions necessary
 to fulfill its instruction to claim and deliver a verdict. No build or test
 execution on Windows.
+
+DONE: 2026-10-23T22:48:28Z. Deliverable: reports/pr-5202-review-fixes-round-1.md.
+Rename sound; reply 3 post as-is; replies 1, 2 and 4 have replacements.
+No source or upstream discussion changes. Required coordination records only.
