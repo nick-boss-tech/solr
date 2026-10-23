@@ -1157,23 +1157,6 @@ public class QueryComponent extends SearchComponent {
           maxHitsTerminatedEarly = true;
         }
       }
-      Object ath = responseHeader.get(SolrQueryResponse.RESPONSE_HEADER_APPROXIMATE_TOTAL_HITS_KEY);
-      if (ath == null) {
-        approximateTotalHits += numFound;
-      } else {
-        approximateTotalHits += ((Number) ath).longValue();
-      }
-
-      // calculate global maxScore and numDocsFound
-      if (docs.getMaxScore() != null) {
-        maxScore = maxScore == null ? docs.getMaxScore() : Math.max(maxScore, docs.getMaxScore());
-      }
-      numFound += docs.getNumFound();
-
-      if (hitCountIsExact && Boolean.FALSE.equals(docs.getNumFoundExact())) {
-        hitCountIsExact = false;
-      }
-
       @SuppressWarnings("unchecked")
       NamedList<List<Object>> sortFieldValues =
           (NamedList<List<Object>>)
@@ -1191,7 +1174,25 @@ public class QueryComponent extends SearchComponent {
       // shard. This avoids an exception below. if the shard returned partial results but we don't
       // need to unmarshal (a normal scoring query), then merge what we got.
       if (thisResponseIsPartial && sortFieldValues.size() == 0 && needsUnmarshalling) {
+        hitCountIsExact = false;
         continue;
+      }
+
+      Object ath = responseHeader.get(SolrQueryResponse.RESPONSE_HEADER_APPROXIMATE_TOTAL_HITS_KEY);
+      if (ath == null) {
+        approximateTotalHits += docs.getNumFound();
+      } else {
+        approximateTotalHits += ((Number) ath).longValue();
+      }
+
+      // calculate global maxScore and numDocsFound
+      if (docs.getMaxScore() != null) {
+        maxScore = maxScore == null ? docs.getMaxScore() : Math.max(maxScore, docs.getMaxScore());
+      }
+      numFound += docs.getNumFound();
+
+      if (hitCountIsExact && Boolean.FALSE.equals(docs.getNumFoundExact())) {
+        hitCountIsExact = false;
       }
 
       // Checking needsUnmarshalling saves on iterating the SortFields in the SortSpec again.
