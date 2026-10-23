@@ -1,5 +1,5 @@
 # Pool assignment: SOLR-10928 request hardening
-Status: NEARLY (implementation pushed; independent full validation is the remaining step)
+Status: DONE
 - Capability tags: implementation, review, settling-run.
 - Category: Search and query components.
 - Intended capability: Linux implementation and tests; claimed by phone-agent-2.
@@ -28,3 +28,6 @@ Fast-forward pushes only. Commit as Nick Shanin without trailers. No unrelated s
 
 ## Implementation handoff
 Head d5621a29281f28659db7b9e9ca57cc46c2651f53 was fast-forward pushed and read back. Three files changed from the previous head: 183 insertions, 3 deletions. No production source changed. Two independent read-only reviews found no concrete test or implementation defects. Independent gate session is next actor, under gates/SOLR-10928-phase-request-hardening.md. Final report remains reports/solr-10928-request-hardening.md.
+
+## Final result
+DONE 2026-10-23T04:14:10Z. Final branch head `f2001e640a464e8e861ee3c202821b6dcc4bd497` is fast-forward pushed and validation is GREEN. Report: reports/solr-10928-request-hardening.md. Receipt: receipts/SOLR-10928.md. Gate and gate claim complete in the same atomic closeout push. Exact counts: 39 passed on each of two seeds; two override proof failures and one fallback proof failure as expected; Error Prone, tidy, YAML, core check and root check excluding tests passed. Full-suite and exhaustive combination limits are stated in the report.

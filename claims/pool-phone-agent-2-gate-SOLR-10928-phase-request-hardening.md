@@ -1,7 +1,7 @@
 # Claim: pool-phone-agent-2-gate-SOLR-10928-phase-request-hardening
 
 - Claimant host: phone-agent-2, matching `hosts/phone-agent-2.md`.
-- Status: CLAIMED; independent hardening gate for `nick-boss-tech/solr:solr-10928-submit` at `d5621a29281f28659db7b9e9ca57cc46c2651f53`.
+- Status: DONE; GREEN independent hardening gate for `nick-boss-tech/solr:solr-10928-submit` at `d5621a29281f28659db7b9e9ca57cc46c2651f53`.
 - Job or assignment: `gates/SOLR-10928-phase-request-hardening.md`.
 - Slice: hardening gate for `solr-10928-submit` at `d5621a29281f28659db7b9e9ca57cc46c2651f53`, base `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`.
 - Capability tags used: gate.
@@ -15,3 +15,5 @@
 Heartbeat: 2026-10-23T03:40:35Z
 
 Heartbeat: 2026-10-23T03:49:55Z. Same owning host continues, no takeover. Attempt 1 compile failure repaired by f2001e640a464e8e861ee3c202821b6dcc4bd497; one repaired-tree retry starts at step 0. Main session manages background build completion because subagent wait cannot await main-managed jobs.
+
+DONE: 2026-10-23T04:14:10Z. Deliverables: receipts/SOLR-10928.md, gates/SOLR-10928-phase-request-hardening.md, reports/solr-10928-request-hardening.md, and product repair `f2001e640a464e8e861ee3c202821b6dcc4bd497`. Single repaired-tree retry passed all steps, both request-level mutation proofs, 39/39 focused/adjacent tests on both seeds, core and root checks excluding tests. Both attempts preserved under `/workspace/logs/phone-agent-2-SOLR-10928-request-hardening-20261023/`. No build remains running; product source restored clean. Prior terminal claim and receipt section preserved.

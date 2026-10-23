@@ -1,9 +1,9 @@
 # Gate job: SOLR-10928 (Request and distributed elevate.q hardening)
 
-Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-10928-phase-request-hardening.md)
+Status: DONE
 
 - Branch: `solr-10928-submit`. Head: `d5621a29281f28659db7b9e9ca57cc46c2651f53` (fork tip, confirmed by ls-remote on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
-- Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`. Prior gated head: none recorded.
+- Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`. Prior gated head: `1ff57c1b21c22031513f733b641496b77057ea55`.
 - Gate ID: `SOLR-10928-phase-request-hardening`. Claim file: `claims/pool-<host>-gate-SOLR-10928-phase-request-hardening.md`.
 - Intended host: phone-agent-2 independent gate session. WORKFLOW.md lets any capable Linux host claim it if that host is busy.
 - Capability tags: gate.
@@ -47,16 +47,16 @@ If any step cannot be verified, record it here and stop.
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed
-- [ ] step 0 changelog check
-- [ ] step 1 tidy clean, or repaired and recorded
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg, if requested
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] job DONE, claim DONE
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed
+- [x] step 0 changelog check
+- [x] step 1 tidy clean, or repaired and recorded
+- [x] step 2 Error Prone compile
+- [x] step 3 proof leg, if requested
+- [x] step 4 focused head run, counted from fresh XML
+- [x] step 5 module check
+- [x] receipt written
+- [x] job DONE, claim DONE
 
 ## Deliverable and limits
 
@@ -69,3 +69,6 @@ Attempt 1 ran at d5621a29281f28659db7b9e9ca57cc46c2651f53. YAML parse and clean 
 Permitted compiler-directed test repair: f2001e640a464e8e861ee3c202821b6dcc4bd497, `SOLR-10928: gate repair: separate void parameter merge`. Only QueryElevationComponentTest.java changed, terminating the fluent setup then invoking requestParams.add(params) separately. No expected values or production behavior changed. Guarded precommit tidy passed. Repair fast-forward pushed and read back at exact head.
 
 The owning host resumes the same claim after the independent subagent launched its build and returned control to the main session. Single changed-tree retry starts at step 0 on f2001e640a464e8e861ee3c202821b6dcc4bd497, with evidence /workspace/logs/phone-agent-2-SOLR-10928-request-hardening-20261023/gate-attempt-2/run/. Wrapper retains the standard runner namespace so the host lock remains held through supplementary proof/seed/root-check runs. Standard runner unchanged. Any failed retry follows the job's handback rule.
+
+## Completion
+GREEN at 2026-10-23T04:13:00Z on repaired head `f2001e640a464e8e861ee3c202821b6dcc4bd497`. Attempt 1 stopped at compiler error before tests; attempt 2 passed YAML, clean tidy, Error Prone compile, both strict request mutation proofs (exactly 2 and 1 expected assertion failures), 39/39 tests on each of two seeds, core check and root check excluding tests. No skipped/error cases. Fresh XML per-class totals are 4 helper, 23 full component, 1 distributed, 11 rerank on each seed. Restored clean worktree and exact live fork tip reconfirmed. Full details, both attempts, exact proof messages, and coverage limits in `receipts/SOLR-10928.md` and `reports/solr-10928-request-hardening.md`. Evidence `/workspace/logs/phone-agent-2-SOLR-10928-request-hardening-20261023/gate-attempt-2/run/`. No further repair/retry or public discussion action occurred.
