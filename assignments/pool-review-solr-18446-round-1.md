@@ -1,6 +1,6 @@
 # Review assignment: SOLR-18446 path-scoped collection routing (round 1)
 
-Status: OPEN
+Status: CLAIMED (vm3, 2026-10-23T03:16:00Z)
 
 Posted by the phone agent at the owner's direction, 2026-10-22. One reviewer, one branch. Claim before starting by adding `claims/pool-<host>-review-SOLR-18446-round-1.md` per WORKFLOW.md, and work under that claim's lease.
 
