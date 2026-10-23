@@ -13,3 +13,5 @@
 - Constraints: no product source edits unless a gate repair is required by the job; no PR, comment, Jira, email, or public-text action. Push coordination records fast-forward as Nick Shanin with no trailers.
 
 Heartbeat: 2026-10-23T03:40:35Z
+
+Heartbeat: 2026-10-23T03:49:55Z. Same owning host continues, no takeover. Attempt 1 compile failure repaired by f2001e640a464e8e861ee3c202821b6dcc4bd497; one repaired-tree retry starts at step 0. Main session manages background build completion because subagent wait cannot await main-managed jobs.

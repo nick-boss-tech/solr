@@ -62,3 +62,10 @@ If any step cannot be verified, record it here and stop.
 
 - One fast-forward push with the receipt and the DONE marks, plus any repair commits (WORKFLOW.md, Gate repairs).
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Attempt 1 and compiler-directed repair
+Attempt 1 ran at d5621a29281f28659db7b9e9ca57cc46c2651f53. YAML parse and clean tidy passed. Error Prone compile stopped at QueryElevationComponentTest.java:121: `.add(params)` returns void and cannot be used in the fluent assignment. No tests ran. Evidence: /workspace/logs/phone-agent-2-SOLR-10928-request-hardening-20261023/gate-attempt-1/.
+
+Permitted compiler-directed test repair: f2001e640a464e8e861ee3c202821b6dcc4bd497, `SOLR-10928: gate repair: separate void parameter merge`. Only QueryElevationComponentTest.java changed, terminating the fluent setup then invoking requestParams.add(params) separately. No expected values or production behavior changed. Guarded precommit tidy passed. Repair fast-forward pushed and read back at exact head.
+
+The owning host resumes the same claim after the independent subagent launched its build and returned control to the main session. Single changed-tree retry starts at step 0 on f2001e640a464e8e861ee3c202821b6dcc4bd497, with evidence /workspace/logs/phone-agent-2-SOLR-10928-request-hardening-20261023/gate-attempt-2/run/. Wrapper retains the standard runner namespace so the host lock remains held through supplementary proof/seed/root-check runs. Standard runner unchanged. Any failed retry follows the job's handback rule.
