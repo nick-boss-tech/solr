@@ -2,6 +2,13 @@
 
 This page is the order of operations for any agent that posts assignments or gate jobs, or claims them, on this branch. The rules are in [WORKFLOW.md](../WORKFLOW.md). The roles are in [material/coordinator-handoff.md](../material/coordinator-handoff.md). The templates are in [pool/templates/](templates/). The overnight tick job is [pool/cron-prompt.md](cron-prompt.md) (not a file called prompt.md); read it with `git show origin/coordination:pool/cron-prompt.md` if your worktree does not have it.
 
+## New to this branch
+
+This page covers posting and claiming only. To learn the work, read in this order:
+
+1. [`documentation-base.md`](documentation-base.md): the reading order for any agent starting work, and the index of the category briefs and guides.
+2. Your host's file in [`hosts/`](../hosts/): its capabilities and resource snapshot. The host's own `/workspace/AGENTS.md` covers the build environment and is not on this branch.
+
 ## First: your host's AGENTS.md
 
 Each host keeps its own `/workspace/AGENTS.md`, which is not on this branch. Before you claim, post, or commit anything, check that its Preferences section contains this line:
