@@ -177,11 +177,13 @@ public class CoreContainerReleasePathTest extends SolrTestCase {
                         .getMessage()
                         .startsWith(HttpSolrClientProvider.class.getName() + "@"))
             .toList();
-    assertEquals("one default client provider belongs to this container", 1, providerContexts.size());
+    assertEquals(
+        "one default client provider belongs to this container", 1, providerContexts.size());
     resources.addAll(providerContexts);
     for (Object resource : resources) {
       assertTrue(ObjectReleaseTracker.OBJECTS.containsKey(resource));
-      System.out.println("sibling resource: " + ObjectReleaseTracker.OBJECTS.get(resource).getMessage());
+      System.out.println(
+          "sibling resource: " + ObjectReleaseTracker.OBJECTS.get(resource).getMessage());
     }
     return resources;
   }
