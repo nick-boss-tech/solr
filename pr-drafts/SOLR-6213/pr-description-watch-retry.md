@@ -4,7 +4,7 @@
 
 **The retry now stops after three attempts.** The third failure is thrown to the caller, so a join sees the real `KeeperException` and the log shows it. The `NoNode` case, where the node ahead disappeared, still checks again at once, because the next check finds a new node to watch. The limit is `LeaderElector.MAX_WATCH_FAILURES`.
 
-**Proof.** `LeaderElectionTest.testRepeatedWatchFailureIsRaisedInsteadOfRetriedForever` makes every `getData` call on the second elector's ZooKeeper client fail with `NoAuth`. On main (b73f03976f) it fails with `StackOverflowError` after 9 seconds. On this branch (bee5c511da) it passes: the `NoAuth` exception reaches the caller after exactly three `getData` calls. `LeaderElectionTest` as a whole passes on this branch: 6 tests, 0 failures. Run 2026-10-23. The other election tests (`Leader*`, `TestLeaderElection*`) pass on this branch: 16 tests, 0 failures, 2 skipped.
+**Proof.** `LeaderElectionTest.testRepeatedWatchFailureIsRaisedInsteadOfRetriedForever` makes every `getData` call on the second elector's ZooKeeper client fail with `NoAuth`. On main (b73f03976f) it fails with `StackOverflowError` after 9 seconds. On this branch (a55a45e8bab) it passes: the `NoAuth` exception reaches the caller after exactly three `getData` calls. `LeaderElectionTest` as a whole passes on this branch: 6 tests, 0 failures. Run 2026-10-23. The other election tests (`Leader*`, `TestLeaderElection*`) pass on this branch: 16 tests, 0 failures, 2 skipped.
 
 **The choice.** Two routes were available:
 1. Stop after three attempts and throw (this PR).
