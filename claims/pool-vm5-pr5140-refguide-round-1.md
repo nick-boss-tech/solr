@@ -1,7 +1,7 @@
 # Claim: PR #5140 (SOLR-8003) Ref Guide update, round 1
 
 - Claimant host: vm5, matching `hosts/vm5.md`.
-- Status: ACTIVE; mark DONE with the deliverable path when the work lands.
+- Status: DONE; deliverable `reports/pool-pr5140-refguide-round-1.md`.
 - Job or assignment: `assignments/pool-pr5140-refguide-round-1.md`.
 - Slice: the whole assignment.
 - Capability tags used: implementation.
@@ -10,5 +10,9 @@
 - Links: Ticket or parent: SOLR-8003 (PR #5140, branch `solr-8003-submit`). Category: documentation (see `pool/work-map.md`). Siblings: none known. Supersedes: none.
 
 Heartbeat: 2026-10-23T04:09:15Z
+
+Result: 2026-10-23T04:30:00Z: Ref Guide glob section written on solr-8003-submit at 874766b7625; asciidoctor render clean; full guide build not run.
+
+DONE: 2026-10-23T04:30:00Z. Deliverables: reports/pool-pr5140-refguide-round-1.md, solr-ref-guide document-transformers.adoc at 874766b7625.
 
 Append one heartbeat line at least once an hour while the claim is active, and push it.
