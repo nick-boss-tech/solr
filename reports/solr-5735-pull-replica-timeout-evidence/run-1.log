@@ -1,0 +1,130 @@
+Downloading gradle-wrapper.jar from https://raw.githubusercontent.com/gradle/gradle/v8.10.2/gradle/wrapper/gradle-wrapper.jar
+Generating gradle.properties
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Task :build-infra:compileJava
+Note: /workspace/solr-5735-repeatability/build-tools/build-infra/src/main/java/org/apache/lucene/gradle/Checksum.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :build-infra:pluginDescriptors
+> Task :build-infra:processResources
+> Task :build-infra:classes
+> Task :build-infra:jar
+> Task :solr:core:cleanTest UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :solr:core:processResources
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:core:processTestResources
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=E4EFD2B86C0B81D4
+
+> Task :solr:solrj:processResources
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:processResources
+> Task :solr:modules:analysis-extras:processResources NO-SOURCE
+
+> Task :solr:api:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:api:classes
+> Task :solr:api:resolve
+> Task :solr:api:jar
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/solr-5735-repeatability/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/solr-5735-repeatability/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:compileJava
+Note: /workspace/solr-5735-repeatability/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-zookeeper:compileJava
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar
+> Task :solr:solrj-jetty:classes
+> Task :solr:solrj-jetty:jar
+> Task :solr:solrj-zookeeper:classes
+> Task :solr:solrj-zookeeper:jar
+
+> Task :solr:solrj-streaming:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-streaming:classes
+> Task :solr:solrj-streaming:jar
+
+> Task :solr:core:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:classes
+> Task :solr:core:jar
+
+> Task :solr:modules:analysis-extras:compileJava
+Note: /workspace/solr-5735-repeatability/solr/modules/analysis-extras/src/java/org/apache/solr/schema/ICUCollationField.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:analysis-extras:classes
+> Task :solr:modules:analysis-extras:jar
+
+> Task :solr:test-framework:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:test-framework:classes
+> Task :solr:test-framework:jar
+
+> Task :solr:core:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:testClasses
+
+> Task :solr:core:test
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+:solr:core:test (SUCCESS): 1 test(s)
+
+> Task :solr:core:wipeTaskTemp
+The slowest tests (exceeding 500 ms) during this run:
+  56.65s ChaosMonkeyNothingIsSafeWithPullReplicasTest.test (:solr:core)
+The slowest suites (exceeding 1s) during this run:
+  57.76s ChaosMonkeyNothingIsSafeWithPullReplicasTest (:solr:core)
+
+BUILD SUCCESSFUL in 2m 24s
+36 actionable tasks: 35 executed, 1 up-to-date
+rc=0

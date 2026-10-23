@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-5735, the pull-replica timeout (ChaosMonkeyNothingIsSafeWithPullReplicasTest)
 
-Status: CLAIMED: `claims/pool-phone-agent-2-solr-5735-pull-replica-timeout-round-1.md`
+Status: DONE. Item 2: three local-disk reruns passed; `reports/solr-5735-pull-replica-timeout.md`. Prior item 1 finding retained; missing original diagnostics are documented in the report.
 
 - Capability tags: gate, premise-run.
 - Category: Solr core, SolrCloud tests.

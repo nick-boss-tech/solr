@@ -1,6 +1,6 @@
 # Claim: SOLR-5735 pull-replica timeout investigation, round 1
 - Claimant host: phone-agent-2, matching `hosts/phone-agent-2.md`.
-- Status: CLAIMED. Run the same test and seed three times on local disk, then publish the result report.
+- Status: DONE. Three additional local-disk seeded runs passed; report and preserved evidence published.
 - Job or assignment: `assignments/solr-5735-pull-replica-timeout-round-1.md`.
 - Slice: item 2, repeatability check; item 1’s network-filesystem cause is already recorded in the assignment.
 - Capability tags: premise-run, gate.
@@ -9,3 +9,5 @@
 - Lease: live while heartbeats continue, stale 2 hours after the last heartbeat. Attempts: 1. Idempotency key: SOLR-5735@b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb.
 - Links: Ticket SOLR-5735; category Solr core, SolrCloud tests. Siblings: `solr-5735-safeleader-leaders-only` and `solr-5735-stop-cut-updates` are separate existing branches, not the assigned test-only run. Supersedes: none.
 Heartbeat: 2026-10-23T06:58:00Z.
+
+DONE: 2026-10-23T07:06:00Z. Item 2 completed: 3 passes, 0 failures, 0 skips at the pinned head. Deliverable: `reports/solr-5735-pull-replica-timeout.md`; artifacts: `reports/solr-5735-pull-replica-timeout-evidence/`. Item 1 remains the prior recorded network-filesystem diagnosis; its original cluster-state snapshot and replica state-change lines were not present in the inspected records. No product changes or external comments.

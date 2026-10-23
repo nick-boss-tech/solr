@@ -1,0 +1,127 @@
+{
+  "head": "b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb",
+  "seed": "E4EFD2B86C0B81D4",
+  "filesystem": "/dev/vda ext4   /",
+  "runs": [
+    {
+      "name": "run-1",
+      "started": "2026-10-23T06:59:41.124367+00:00",
+      "ended": "2026-10-23T07:02:08.454836+00:00",
+      "rc": 0,
+      "command": [
+        "bash",
+        "/workspace/phone-agent-2-coordination-5735-20261023/pool/bin/sweep-run.sh",
+        "/workspace/solr-5735-repeatability",
+        "/workspace/phone-agent-2-logs/solr-5735-repeatability",
+        "run-1",
+        "--no-daemon",
+        "--max-workers=2",
+        ":solr:core:cleanTest",
+        ":solr:core:test",
+        "--tests",
+        "org.apache.solr.cloud.ChaosMonkeyNothingIsSafeWithPullReplicasTest",
+        "-Ptests.nightly=true",
+        "-Dtests.seed=E4EFD2B86C0B81D4",
+        "-Ptests.jvms=1"
+      ],
+      "counts": {
+        "tests": 1,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "suites": [
+        {
+          "name": "org.apache.solr.cloud.ChaosMonkeyNothingIsSafeWithPullReplicasTest",
+          "tests": "1",
+          "skipped": "0",
+          "failures": "0",
+          "errors": "0",
+          "timestamp": "2026-10-23T07:01:09.224Z",
+          "hostname": "55d52da071bf",
+          "time": "57.601"
+        }
+      ]
+    },
+    {
+      "name": "run-2",
+      "started": "2026-10-23T07:02:08.455833+00:00",
+      "ended": "2026-10-23T07:03:41.599234+00:00",
+      "rc": 0,
+      "command": [
+        "bash",
+        "/workspace/phone-agent-2-coordination-5735-20261023/pool/bin/sweep-run.sh",
+        "/workspace/solr-5735-repeatability",
+        "/workspace/phone-agent-2-logs/solr-5735-repeatability",
+        "run-2",
+        "--no-daemon",
+        "--max-workers=2",
+        ":solr:core:cleanTest",
+        ":solr:core:test",
+        "--tests",
+        "org.apache.solr.cloud.ChaosMonkeyNothingIsSafeWithPullReplicasTest",
+        "-Ptests.nightly=true",
+        "-Dtests.seed=E4EFD2B86C0B81D4",
+        "-Ptests.jvms=1"
+      ],
+      "counts": {
+        "tests": 1,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "suites": [
+        {
+          "name": "org.apache.solr.cloud.ChaosMonkeyNothingIsSafeWithPullReplicasTest",
+          "tests": "1",
+          "skipped": "0",
+          "failures": "0",
+          "errors": "0",
+          "timestamp": "2026-10-23T07:02:46.838Z",
+          "hostname": "55d52da071bf",
+          "time": "53.083"
+        }
+      ]
+    },
+    {
+      "name": "run-3",
+      "started": "2026-10-23T07:03:41.599921+00:00",
+      "ended": "2026-10-23T07:05:15.771669+00:00",
+      "rc": 0,
+      "command": [
+        "bash",
+        "/workspace/phone-agent-2-coordination-5735-20261023/pool/bin/sweep-run.sh",
+        "/workspace/solr-5735-repeatability",
+        "/workspace/phone-agent-2-logs/solr-5735-repeatability",
+        "run-3",
+        "--no-daemon",
+        "--max-workers=2",
+        ":solr:core:cleanTest",
+        ":solr:core:test",
+        "--tests",
+        "org.apache.solr.cloud.ChaosMonkeyNothingIsSafeWithPullReplicasTest",
+        "-Ptests.nightly=true",
+        "-Dtests.seed=E4EFD2B86C0B81D4",
+        "-Ptests.jvms=1"
+      ],
+      "counts": {
+        "tests": 1,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "suites": [
+        {
+          "name": "org.apache.solr.cloud.ChaosMonkeyNothingIsSafeWithPullReplicasTest",
+          "tests": "1",
+          "skipped": "0",
+          "failures": "0",
+          "errors": "0",
+          "timestamp": "2026-10-23T07:04:20.288Z",
+          "hostname": "55d52da071bf",
+          "time": "53.904"
+        }
+      ]
+    }
+  ]
+}
