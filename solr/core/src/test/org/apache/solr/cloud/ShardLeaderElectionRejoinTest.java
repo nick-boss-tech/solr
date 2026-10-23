@@ -18,6 +18,7 @@ package org.apache.solr.cloud;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.junit.After;
@@ -28,6 +29,7 @@ public class ShardLeaderElectionRejoinTest extends SolrCloudTestCase {
 
   private static final int FORCED_FAILURES = 10;
   private static final int MAX_FRAME_GROWTH = 6;
+  private static final long REJOIN_WAIT_SECONDS = 120;
 
   @BeforeClass
   public static void setupCluster() throws Exception {
@@ -53,7 +55,7 @@ public class ShardLeaderElectionRejoinTest extends SolrCloudTestCase {
 
     CollectionAdminRequest.createCollection("rejoin", "conf", 1, 1)
         .processAsync("rejoin-create", cluster.getSolrClient());
-    cluster.waitForActiveCollection("rejoin", 1, 1);
+    cluster.waitForActiveCollection("rejoin", REJOIN_WAIT_SECONDS, TimeUnit.SECONDS, 1, 1);
 
     assertEquals(FORCED_FAILURES + 1, calls.get());
     int min = depths.stream().mapToInt(Integer::intValue).min().orElseThrow();
