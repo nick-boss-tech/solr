@@ -158,9 +158,10 @@ public class TestDistribFileStore extends SolrCloudTestCase {
               .withMethod(SolrRequest.METHOD.GET)
               .build(),
           Map.of(
-              ":files:/package/mypkg/v1.0[0]:name", "runtimelibs.jar",
+              ":files:/package/mypkg/v1.0[0]:name",
+              "runtimelibs.jar",
               ":files:/package/mypkg/v1.0[0]:sha512",
-                  "d01b51de67ae1680a84a813983b1de3b592fc32f1a22b662fc9057da5953abd1b72476388ba342cad21671cd0b805503c78ab9075ff2f3951fdf75fa16981420",
+              "d01b51de67ae1680a84a813983b1de3b592fc32f1a22b662fc9057da5953abd1b72476388ba342cad21671cd0b805503c78ab9075ff2f3951fdf75fa16981420",
               ":files:/package/mypkg/v1.0[0]:sig[0]",
               RUNTIMELIBS_SHA512_SIGNATURE));
 
