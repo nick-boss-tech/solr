@@ -14,7 +14,72 @@ Contributions prioritize new development and Blocker and Critical items, in this
 4. Critical tickets that already have work records move through their own records (follow-ups and reviews of existing work first, per pool/work-stores.md).
 5. Everything else in the backlog follows in the standing pull order.
 
-Coverage behind this list (slate audit, 2026-10-22): of the 100 open Blocker and Critical tickets, 29 have any work record and 71 have none. The 58 below are the Critical half of the unworked set; none has an item or a work product of its own. Two precision notes: SOLR-6213 is named inside SOLR-11787's skip item as a probable duplicate target, and SOLR-12801 inside SOLR-13416's note; read those notes when you reach them, they are context, not coverage. SOLR-13360, SOLR-17370, SOLR-17767 and SOLR-17788 have a PR available: read it first and classify against it instead of duplicating it.
+Coverage at posting (slate audit, 2026-10-22): of the 100 open Blocker and Critical tickets, 29 have any work record and 71 have none. The 58 below were the Critical half of the unworked set; they had no item or work product of their own at posting time. Two precision notes: SOLR-6213 is named inside SOLR-11787's skip item as a probable duplicate target, and SOLR-12801 inside SOLR-13416's note; read those notes when you reach them, they are context, not coverage. SOLR-13360, SOLR-17370, SOLR-17767 and SOLR-17788 have a PR available: read it first and classify against it instead of duplicating it.
+
+## Fork branch audit (snapshot, 2026-10-22)
+
+Searched all 1,629 branch refs on `nick-boss-tech/solr` for each listed ticket number as a digit-bounded token, including branches with custom prefixes. This is a ticket-number branch check, not proof that the ticket is fixed. Recheck before taking work. The work map at `pool/work-map.md` records branches that do not carry a ticket number in their name.
+
+| Ticket | Fork branch status |
+|---|---|
+| SOLR-2908 | No ticket-number branch found |
+| SOLR-4165 | No ticket-number branch found |
+| SOLR-4180 | No ticket-number branch found |
+| SOLR-4285 | No ticket-number branch found |
+| SOLR-4690 | No ticket-number branch found |
+| SOLR-5735 | No ticket-number branch found |
+| SOLR-6213 | No ticket-number branch found |
+| SOLR-6345 | No ticket-number branch found |
+| SOLR-6420 | No ticket-number branch found |
+| SOLR-6683 | No ticket-number branch found |
+| SOLR-6816 | No ticket-number branch found |
+| SOLR-7351 | No ticket-number branch found |
+| SOLR-7889 | No ticket-number branch found |
+| SOLR-7926 | No ticket-number branch found |
+| SOLR-8028 | No ticket-number branch found |
+| SOLR-8096 | No ticket-number branch found |
+| SOLR-8331 | No ticket-number branch found |
+| SOLR-8417 | No ticket-number branch found |
+| SOLR-8887 | No ticket-number branch found |
+| SOLR-8905 | No ticket-number branch found |
+| SOLR-9138 | No ticket-number branch found |
+| SOLR-9170 | No ticket-number branch found |
+| SOLR-9956 | No ticket-number branch found |
+| SOLR-10928 | [`solr-10928-submit`](https://github.com/nick-boss-tech/solr/tree/solr-10928-submit) at `034c9e65b2ce755a0b7dc238e656edc91b103f4b`; [phase gate](../gates/SOLR-10928-phase-elevate-q.md) is OPEN, proof pending |
+| SOLR-10950 | No ticket-number branch found |
+| SOLR-11330 | No ticket-number branch found |
+| SOLR-11668 | No ticket-number branch found |
+| SOLR-11972 | No ticket-number branch found |
+| SOLR-12069 | No ticket-number branch found |
+| SOLR-12415 | No ticket-number branch found |
+| SOLR-12801 | No ticket-number branch found |
+| SOLR-13360 | No ticket-number branch found |
+| SOLR-13460 | No ticket-number branch found |
+| SOLR-13770 | No ticket-number branch found |
+| SOLR-13789 | No ticket-number branch found |
+| SOLR-13850 | No ticket-number branch found |
+| SOLR-14311 | No ticket-number branch found |
+| SOLR-14346 | No ticket-number branch found |
+| SOLR-14593 | No ticket-number branch found |
+| SOLR-14649 | No ticket-number branch found |
+| SOLR-14788 | No ticket-number branch found |
+| SOLR-14833 | No ticket-number branch found |
+| SOLR-14996 | No ticket-number branch found |
+| SOLR-15096 | No ticket-number branch found |
+| SOLR-15412 | No ticket-number branch found |
+| SOLR-15596 | No ticket-number branch found |
+| SOLR-15759 | No ticket-number branch found |
+| SOLR-15998 | No ticket-number branch found |
+| SOLR-16100 | No ticket-number branch found |
+| SOLR-16139 | No ticket-number branch found |
+| SOLR-16509 | No ticket-number branch found |
+| SOLR-17122 | No ticket-number branch found |
+| SOLR-17291 | No ticket-number branch found |
+| SOLR-17370 | No ticket-number branch found |
+| SOLR-17375 | No ticket-number branch found |
+| SOLR-17762 | No ticket-number branch found |
+| SOLR-17767 | No ticket-number branch found |
+| SOLR-17788 | No ticket-number branch found |
 
 ## Claim
 
