@@ -37,6 +37,12 @@ Failures follow the rows below and WORKFLOW.md, Gate repairs. A failed retry han
 
 No row may leave the choice to the claimant.
 
+## Run record
+
+- Preflight (step 5a, vm6): exit 3 at 2026-10-23T15:30Z on head `800e91188e0d9f975b9096c9413915ea18713b23`. Tidy changed one file, `solr/core/src/test/org/apache/solr/filestore/TestDistribFileStore.java`. Patch: `/workspace/gates/logs/vm6/preflight/SOLR-14649-phase-sha512-signatures/tidy.patch`.
+- Step 1 repair (vm6, 2026-10-23T15:36Z): the tidy output applied as one commit, `25589eb5e6c894c3af06fdd12c904573309748bc` ("SOLR-14649: gate repair: tidy TestDistribFileStore"), pushed fast-forward to `solr-14649-submit` from the gate head. Tidied tree sha `ee45250115cbbe492e86313385a31f63482aff18`. Steps 2 to 5 run on this repaired head.
+- Step 3 proof leg, read from the job: the focused class is `TestCryptoKeys` (four `@Test` methods: `testByteBufferAcceptsSha512`, `testByteBufferRejectsSha1`, `testInputStreamAcceptsSha512`, `testInputStreamRejectsSha1`). In a separate worktree at the repaired head, `solr/core/src/java/org/apache/solr/util/CryptoKeys.java` is restored to base `79b23df58daac14b92cc35f23b8b81f72098b4ba`, and the four tests are run with the job seed.
+
 ## On green
 
 1. Write or refresh `receipts/SOLR-14649.md` with a new top section for gate ID `SOLR-14649-phase-sha512-signatures`: head, gate date and host, log path, step results, the proof-leg result (test name and failure text, or none requested), and the focused counts from the fresh XML. Record every attempt, its repair commits and files, and the gated head.
