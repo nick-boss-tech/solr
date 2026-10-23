@@ -3,6 +3,7 @@
 # Runs one Gradle build under this host's lock. Host id, JAVA_HOME and GRADLE_USER_HOME are read from /workspace/AGENTS.md.
 set -u
 W=$1; L=$2; name=$3; shift 3
+BIN=$(cd -- "$(dirname -- "$0")" && pwd)
 agents_value() { sed -n "s/^- $1: \`\([^\`]*\)\`.*/\1/p" /workspace/AGENTS.md 2>/dev/null | head -n1; }
 POOL_HOST=$(agents_value 'Host id')
 [ -n "$POOL_HOST" ] || { echo "missing Host id line in /workspace/AGENTS.md" >&2; exit 3; }
@@ -18,6 +19,12 @@ if ! flock -n 9; then
 fi
 { echo "pre $(date -u +%FT%TZ) | $(df -h / | tail -1 | awk '{print $4" free"}') | $(df -i / | tail -1 | awk '{print $4" ifree"}')"; } > "$L/$name.headroom.log"
 cd "$W" || exit 1
+if ! python3 "$BIN/inode-guard.py" / "$PWD" "$GRADLE_USER_HOME" > "$L/$name.log" 2>&1; then
+  cat "$L/$name.log" >&2
+  cat "$L/$name.log" >> "$L/$name.headroom.log"
+  echo 'rc=4' >> "$L/$name.log"
+  exit 4
+fi
 touch "$L/$name.start"
 ./gradlew "$@" > "$L/$name.log" 2>&1
 rc=$?

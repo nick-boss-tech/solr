@@ -19,7 +19,8 @@ while IFS='|' read -r label args cont; do
   bash "$(dirname "$0")/sweep-run.sh" "$W" "$D" "$label" $args
   rc=$?
   printf '%s\t%s\t%s\t%s\n' "$label" "$rc" "$start" "$(date -u +%FT%TZ)" >> "$D/steps.tsv"
-  if [ "$rc" -ne 0 ] && [ "${cont:-}" != continue ]; then
+  # Inode safety refusal is a hard stop, even for an ordinary-failure continue step.
+  if [ "$rc" -eq 4 ] || { [ "$rc" -ne 0 ] && [ "${cont:-}" != continue ]; }; then
     echo "stopped at $label rc=$rc" > "$D/state"
     exit "$rc"
   fi
