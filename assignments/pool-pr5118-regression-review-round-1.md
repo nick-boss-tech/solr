@@ -23,6 +23,14 @@ Class IV card: standalone security.json edits could interleave their read-modify
 
 `reports/pool-pr5118-regression-review-round-1.md`: the concurrency boundary, the crash-at-each-step accounting, run counts, and the verdict.
 
+## Appendix: what the existing evidence covers (2026-10-23)
+
+The receipt already records base failures for the reader and overlapping-write tests, focused security-handler runs, mutation checks, and crash and disk-full probes. At the current head `d742eb99dd`, the failure-path test class passed 8/8 and Error Prone compilation passed. The module check was run at `46869c4d8b`; the later commits only changed tests. See [`receipts/SOLR-18010.md`](../receipts/SOLR-18010.md#L298-L317). Do not repeat the broad gate or the atomic-write and crash analysis unless this review finds a concrete reason.
+
+The remaining question is narrower: does a pair of real edit requests lose one update? The existing `testConcurrentPersistConfLeavesOneWholeDocument` calls `persistConf` directly and asserts that the final file is one complete document. It does not assert that two request-level changes are both preserved. The current handler serializes `handleRequestBody` on one handler instance, so also state that it does not coordinate separate instances, processes, or nodes. See [`SecurityConfHandlerLocal.java`](https://github.com/nick-boss-tech/solr/blob/d742eb99dd28be761b5f60aea6fbfc832e1b7a50/solr/core/src/java/org/apache/solr/handler/admin/SecurityConfHandlerLocal.java#L63-L124) and [`SecurityConfHandlerTest.java`](https://github.com/nick-boss-tech/solr/blob/d742eb99dd28be761b5f60aea6fbfc832e1b7a50/solr/core/src/test/org/apache/solr/handler/admin/SecurityConfHandlerTest.java#L204-L256).
+
+For this review, test only that remaining request-level question. If it can be reproduced through the supported request path, add a deterministic test showing whether both independent changes survive, run that focused test at the live head and against base production code, and report the fresh counts. If it cannot be reproduced through that path, explain the boundary with code evidence. No broad re-gate is needed unless source code changes; if it does, follow the normal gate rules. Do not change PR #5118's state or post comments. Edit its body only if this review changes a claim, as already allowed in Limits, and record that edit.
+
 ## Limits
 
 Pushes to the branch are authorized (it is the owner's own open PR). No PR state change, no comments, no Jira edits. If the work changes the PR's claims, update the PR description to match and record the edit in the report; description edits on the owner's own PRs carry standing authorization. No em dashes. Commit as Nick Shanin with no trailers.
