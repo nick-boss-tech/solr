@@ -20,7 +20,11 @@ import io.opentelemetry.api.common.Attributes;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -31,6 +35,7 @@ import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.util.ExecutorUtil;
 import org.apache.solr.common.util.ObjectReleaseTracker;
 import org.apache.solr.common.util.SolrNamedThreadFactory;
+import org.apache.solr.common.util.TimeSource;
 import org.apache.solr.handler.RequestHandlerBase;
 import org.apache.solr.handler.component.HttpShardHandlerFactory;
 import org.apache.solr.metrics.SolrMetricsContext;
@@ -40,6 +45,7 @@ import org.apache.solr.security.AuthorizationContext;
 import org.apache.solr.security.AuthorizationPlugin;
 import org.apache.solr.security.AuthorizationResponse;
 import org.apache.solr.security.PermissionNameProvider;
+import org.apache.solr.util.TimeOut;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -96,7 +102,9 @@ public class CoreContainerReleasePathTest extends SolrTestCase {
 
   @Test
   public void testInterruptedContainerWaitReturnsBeforeFactoryClose() throws Exception {
+    Set<Object> previouslyTracked = new HashSet<>(ObjectReleaseTracker.OBJECTS.keySet());
     CoreContainer container = createContainer();
+    List<Object> siblingResources = siblingCloseResources(container, previouslyTracked);
     CloseTrackingAuthorizationPlugin plugin =
         (CloseTrackingAuthorizationPlugin) container.getAuthorizationPlugin();
     CloseTrackingHandler handler = addHandler(container);
@@ -122,6 +130,11 @@ public class CoreContainerReleasePathTest extends SolrTestCase {
             }
           });
       assertTrue(factory.entered.await(CLEANUP_TIMEOUT_SECONDS, TimeUnit.SECONDS));
+      new TimeOut(CLEANUP_TIMEOUT_SECONDS, TimeUnit.SECONDS, TimeSource.NANO_TIME)
+          .waitFor(
+              "update handler and default client provider must finish before factory interruption",
+              () -> siblingResources.stream().noneMatch(ObjectReleaseTracker.OBJECTS::containsKey));
+      System.out.println("sibling owners released before interruption");
       closer.get().interrupt();
       assertTrue(returned.await(CLEANUP_TIMEOUT_SECONDS, TimeUnit.SECONDS));
       assertNull(failure.get());
@@ -137,12 +150,40 @@ public class CoreContainerReleasePathTest extends SolrTestCase {
       assertTrue(factory.finished.await(CLEANUP_TIMEOUT_SECONDS, TimeUnit.SECONDS));
       assertNull(factory.failure.get());
       assertFalse(ObjectReleaseTracker.OBJECTS.containsKey(factory.getSolrMetricsContext()));
-      System.out.println("completed factory tracker: " + ObjectReleaseTracker.checkEmpty());
+      String remaining = ObjectReleaseTracker.checkEmpty();
+      System.out.println("completed factory tracker: " + remaining);
+      assertNull(remaining, remaining);
     } finally {
       factory.release.countDown();
       assertTrue(factory.finished.await(CLEANUP_TIMEOUT_SECONDS, TimeUnit.SECONDS));
       ExecutorUtil.shutdownAndAwaitTermination(runner);
     }
+  }
+
+  private static List<Object> siblingCloseResources(
+      CoreContainer container, Set<Object> previouslyTracked) {
+    List<Object> resources = new ArrayList<>();
+    resources.add(container.getDefaultHttpSolrClient());
+    resources.add(container.getUpdateShardHandler().getUpdateOnlyHttpClient());
+    resources.add(container.getUpdateShardHandler().getRecoveryOnlyHttpClient());
+    resources.add(container.getUpdateShardHandler().getSolrMetricsContext());
+    List<SolrMetricsContext> providerContexts =
+        ObjectReleaseTracker.getTrackedObjectsOfType(SolrMetricsContext.class).stream()
+            .filter(context -> !previouslyTracked.contains(context))
+            .filter(
+                context ->
+                    ObjectReleaseTracker.OBJECTS
+                        .get(context)
+                        .getMessage()
+                        .startsWith(HttpSolrClientProvider.class.getName() + "@"))
+            .toList();
+    assertEquals("one default client provider belongs to this container", 1, providerContexts.size());
+    resources.addAll(providerContexts);
+    for (Object resource : resources) {
+      assertTrue(ObjectReleaseTracker.OBJECTS.containsKey(resource));
+      System.out.println("sibling resource: " + ObjectReleaseTracker.OBJECTS.get(resource).getMessage());
+    }
+    return resources;
   }
 
   private CoreContainer createContainer() throws Exception {
