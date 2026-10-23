@@ -20,6 +20,7 @@ import java.lang.invoke.MethodHandles;
 import java.util.EnumSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import org.apache.lucene.search.MatchAllDocsQuery;
@@ -84,7 +85,7 @@ final class ShardLeaderElectionContext extends ShardLeaderElectionContextBase {
   public void close() {
     super.close();
     this.isClosed = true;
-    rejoinExecutor.shutdownNow();
+    rejoinExecutor.shutdown();
     syncStrategy.close();
   }
 
@@ -507,10 +508,17 @@ final class ShardLeaderElectionContext extends ShardLeaderElectionContextBase {
 
     cancelElection();
 
-    rejoinExecutor.execute(this::joinElectionAfterRejoin);
+    try {
+      rejoinExecutor.execute(this::joinElectionAfterRejoin);
+    } catch (RejectedExecutionException e) {
+      log.debug("Not rejoining election because the context is closed");
+    }
   }
 
   private void joinElectionAfterRejoin() {
+    if (isClosed) {
+      return;
+    }
     try {
       leaderElector.joinElection(this, true);
     } catch (InterruptedException e) {
