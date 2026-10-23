@@ -19,6 +19,7 @@ Census 2026-10-19: 1,567 branches on the fork, 18 with no digits in the name (pl
 | `mergeids-skipped-shard-totals` | SOLR-18539 (filed 2026-10-12 from the side finding) | Working branch for the mergeIds fix; PR #5115 carries the narrowed head. |
 | `combinedquerycomponent-merge-totals` | SOLR-18541 (filed 2026-10-12) | Pre-ticket working branch; the ticket-named successor is `solr-18541-combined-query-merge-totals`, PR #5117. |
 | `gradlew-msys-double-conversion` | SOLR-18540 (filed 2026-10-12) | The fix branch itself; final verification is the owner's own Windows run. |
+| `fix-interrupted-http-client-close` | Teardown investigation, `assignments/pool-teardown-release-path-round-2.md`; related container ticket SOLR-18564 | Published at f0adb05094. Client release candidate, with no PR or new JIRA. Apache-baseline integration and focused proof preparation: `reports/teardown-release-path-round-2.md`. |
 | `consistency-v1-core-backup-permission` | `assignments/pool-consistency-docs-round-1.md` item 2 family | No ticket by design; the vehicle is the owner's call. |
 | `consistency-v2-list-backups-permission` | `assignments/pool-consistency-docs-round-1.md` | Same round, same standing. |
 | `hardening-configset-delete-containment` | `assignments/pool-consistency-docs-round-1.md` | Same round, same standing. |

@@ -1,6 +1,6 @@
 # Assignment: pool-teardown-release-path-round-2 (follow-up to the teardown ObjectTracker leak diagnosis)
 
-- Status: CLAIMED (claims/pool-windows-teardown-release-path-round-2.md). Windows source analysis and deterministic test preparation; Linux execution follows separately.
+- Status: HANDED BACK (Windows source analysis and tests prepared; Linux proof required at assignments/pool-teardown-release-path-round-2-linux-proof.md).
 - Builds on: `assignments/pool-teardown-objecttracker-leak.md` (DONE, report `reports/teardown-objecttracker-leak.md`). Read that report first. This assignment covers the one thing it leaves open: exactly which release call is skipped on each failure path, and whether a candidate change makes the tracker empty.
 - Scope: reproduce each path deterministically on a scratch branch, and test candidate changes there. Do not push to any PR branch, do not comment on any PR, do not open a JIRA issue, do not push a branch to `apache/solr`. Scratch branches go to the fork `nick-boss-tech/solr` as fast-forward pushes only.
 
@@ -10,7 +10,7 @@ An object is released when its owner's close runs and reaches `SolrMetricsContex
 
 1. Container shutdown. `CoreContainer.shutdown()` (around line 1220). Its `finally` (line 1297) submits `shardHandlerFactory.close()` to `customThreadPool` (line 1300), then `updateShardHandler::close`, then `zkSys.close()` (line 1313). Line 1315 calls `ExecutorUtil.shutdownAndAwaitTermination(customThreadPool)`, which waits up to 60 s, then calls `shutdownNow()`, then waits 60 s more. If the second wait also times out, `ExecutorUtil.awaitTermination` throws `RuntimeException("Timeout waiting for pool to shutdown")` (solrj `ExecutorUtil.java`, lines 134-155). That exception escapes `shutdown()`, so the remaining closes after this block never run. Those are the plugin closes, `containerHandlers.close()`, and the root `solrMetricsContext` close. This is the path PR 5192 (SOLR-18564) addresses.
 2. Factory close. `HttpShardHandlerFactory.close()` (lines 345-362). It closes `loadbalancer`, then `defaultClient` via `IOUtils.closeQuietly` (line 353), then shuts down `commExecutor` (line 356), then closes `asyncRequestsGauge` (line 359), then calls `SolrMetricProducer.super.close()` (line 361), which closes the factory's metrics context. The factory's context is a child created by `getChildContext(this)` in `initializeMetrics` (line 461). `getChildContext` does not register the child with its parent (`SolrMetricsContext.java` lines 87-89), so a parent's `close()` never closes it.
-3. Client close. `HttpJettySolrClient.close()` (lines 346-367 on `main`; the local commit `f0adb05094` changes this method). It calls `asyncTracker.waitForComplete()`, then `httpClient.stop()` and `destroy()`, and releases the tracker only at the end. The client's executor is passed in by the factory (`withExecutor(commExecutor)`, `HttpShardHandlerFactory` line 309), so `shutdownExecutor` is false on that path.
+3. Client close. `HttpJettySolrClient.close()` (lines 346-367 on `main`; the published commit `f0adb05094` changes this method). It calls `asyncTracker.waitForComplete()`, then `httpClient.stop()` and `destroy()`, and releases the tracker only at the end. The client's executor is passed in by the factory (`withExecutor(commExecutor)`, `HttpShardHandlerFactory` line 309), so `shutdownExecutor` is false on that path.
 4. Context close. `SolrMetricsContext.close()` (lines 284-287) runs `assert ObjectReleaseTracker.release(this)`, then closes registered closeables.
 5. Test class check. `SolrTestCase` (`solr/test-framework/.../SolrTestCase.java`, lines 97-108) runs `clearObjectTrackerAndCheckEmpty()` only if the class passed. The tracker is JVM-wide, so an object leaked by an earlier class in the same worker JVM is reported at a later class's teardown.
 
@@ -49,3 +49,11 @@ An object is released when its owner's close runs and reaches `SolrMetricsContex
 
 - Whether to file a JIRA for the teardown problem, and whether to open a PR for `fix-interrupted-http-client-close`.
 - Whether to change or comment on PR 5192 or any other PR, rerun CI, or run a full suite.
+
+## Windows preparation handoff, 2026-10-23
+
+Report: `reports/teardown-release-path-round-2.md`. Candidate branch `solr-18564-release-path-r2` at `ee1eb2474f6650f9c8f8a51c6729383496a4256e` is pushed and verified. Separate commits contain tests, factory metrics cleanup, the container-tail candidate, and a cherry-pick of f0adb05094 on the requested Apache baseline. Tests-only baseline branch: `solr-18564-release-path-r2-before`, pinned in the report.
+
+New hypothesis: the outer distributed-test close pool interrupts a container worker after its first 60-second budget; the interrupted inner await cancels factory cleanup and returns without joining it. This can leave the factory context tracked while cleanup is still in progress, with no thrown timeout. The report separates that path from a permanently skipped factory close and prepares a latch-controlled diagnostic. Historical CI causality and before/after tracker outputs remain unproven.
+
+Linux continuation: `assignments/pool-teardown-release-path-round-2-linux-proof.md`. No Java tests or builds ran on Windows. This assignment is not DONE; the remaining actor is a Linux host claiming that continuation. No PR branch, public comment, or JIRA write was made.
