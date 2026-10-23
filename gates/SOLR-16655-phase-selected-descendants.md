@@ -87,3 +87,8 @@ Receipt plus this job's actual run record and DONE marks on coordination, with a
 
 - 2026-10-23T18:21:25Z, phone-agent: the claim prerequisite above is settled. claims/pool-newdev-critblock-review-round-1-solr-16655.md was taken over under WORKFLOW.md Claims rule 4 (last heartbeat 2026-10-20T15:54:54Z; the owner confirms vm3 died many hours ago; the rule 4 gate-log check could not be performed from vm1 because the log is on vm3's disk, recorded in the takeover entry) and marked ENDED with the old-head evidence preserved. gates/SOLR-16655-review-pass-1.md is ENDED with no recorded result.
 - This job is CLAIMED by phone-agent: claims/phone-agent-gate-SOLR-16655-phase-selected-descendants.md.
+
+## Gate run 1 and bounded repair
+
+- Run 1 at 6c5c11aaf5a4c0b27daec2b4ab39a9139e95ef1c (phone-agent, vm1; log gate-16655-phase.log under the host's gate-logs-2026-10-23): steps 0 to 3 passed (changelog parse; tidy clean; Error Prone compile; proof: both named methods failed on patch-parent production with the specified content). A runtime restart killed the run inside step 4; steps 4 and 5 were resumed in the same log. Step 4 passed: FieldMutatingUpdateProcessorTest 37, ParsingFieldUpdateProcessorsTest 44, TestNestedUpdateProcessor 9, MinimalSchemaTest 3, 0 failures. Step 5 failed at :solr:core:forbiddenApisTest: String#formatted (default locale) at TestNestedUpdateProcessor.java:138, a lint failure in the patch's new test.
+- Repair (2026-10-23T18:52:00Z): TestNestedUpdateProcessor now uses String.format(Locale.ROOT, ...) with the text block unchanged; commit 9596593aa808254842b7fa37e469a23f48ecfa46, pushed fast-forward. This is the bounded lint repair in the Decisions table; the gate reruns from step 0 on the repair head.
