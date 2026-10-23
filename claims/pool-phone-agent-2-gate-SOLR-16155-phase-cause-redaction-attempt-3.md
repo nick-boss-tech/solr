@@ -18,3 +18,6 @@ Progress: repair `9ce3e5b4ced0cdfd8348848e2c602adafc1f1f60` is pushed and verifi
 
 Heartbeat: 2026-10-23T20:11:37Z
 Progress: step 4 on `9ce3e5b4ced0cdfd8348848e2c602adafc1f1f60` passed with 110 tests, 3 skips, 0 failures, and 0 errors across all eight focused classes. The core check passed source-pattern validation but failed `forbiddenApisTest` on seven direct Log4j LogEvent/Message references from new test queue inspection; the separate test-framework check passed. Corrected inode monitoring stayed at 26.8587% before and 26.8531% after, with no safety stop. I am replacing direct queue access in the two regression-test files with LogListener filters and safe string polling, preserving error context and sensitive-value assertions, then using the single full-gate retry from step 0 on a new pushed head.
+
+Heartbeat: 2026-10-23T20:19:57Z
+Progress: the second bounded test-only repair is committed and pushed as `96ed88e6dc17e50df1d1f8f5e8c33ec84529d23b`, tree `44ec61d3c70b05109353a997332074494092b5de`. The fork branch `solr-16155-submit` and upstream PR #5200 head ref both read back as this commit. The proof worktree is clean and pinned to the same head. Starting the one permitted full gate retry from step 0 with fresh evidence under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-3-retry/`.
