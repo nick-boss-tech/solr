@@ -93,6 +93,14 @@ the work already done so the answer costs the maintainer nothing.
    text says why it does not. The pointed question stays, but
    it asks the maintainer to confirm or redirect a
    recommendation, not to pick from a bare list.
+   **Rival-PR rule (Nick, 2026-10-22):** an earlier open PR by
+   another author on the same ticket is never posed as a
+   choice, and the text never recommends closing it or claims
+   either PR is "the way to go". Instead, a short note thanks
+   and praises the earlier author, credits whatever this PR
+   takes from theirs, and says plainly that this PR opens the
+   fix fresh because the issue matters. Then it moves on; the
+   earlier PR's fate is its author's and the maintainers'.
 5. **Limits.** What is not covered, not tested, or deliberately out of
    scope. Named, not omitted.
 6. AI header at the top AND the AI footer, on every PR
@@ -103,7 +111,7 @@ the work already done so the answer costs the maintainer nothing.
    Nick Shanin directed the work and takes responsibility for this
    contribution.*" The header does the disclosure; the footer's job
    is the responsibility statement, kept in one line.
-   Comments longer than one sentence carry the header (see `comment-formula.md`); one-sentence
+   Comments longer than one sentence carry the header; one-sentence
    comments stay plain. The footer goes only on PR descriptions and
    new Jira ticket descriptions, never on comments.
 
@@ -177,7 +185,7 @@ module check is sufficient, with tidy and licenses kept current.
 ## Template (approved draft, 2026-10-04)
 
 ```markdown
-🤖 *AI text below* 🤖 *(reviewed by Nick Shanin)*
+🤖 *AI text below* 🤖 *(posted on behalf of Nick Shanin)*
 
 https://issues.apache.org/jira/browse/SOLR-<ticket>
 
