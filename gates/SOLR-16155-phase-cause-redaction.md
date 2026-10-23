@@ -1,6 +1,6 @@
 # Gate job: SOLR-16155 (value-bearing causes in update errors)
 
-Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction.md)
+Status: RETRY (inode safety stop at step 4; next actor: VM2 lane coordinator; resume step 4 only after safe capacity recovery and recorded investigation)
 
 - Branch: `solr-16155-submit`. Gated head: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` (tidy repair head, fork tip read back on 2026-10-23). Original assigned head: `323bafea9e097d05e46f2f088e5034f6fce171ec`. If the tip moves before another repair push, stop and record the new tip here.
 - Prior gated tree: `ab394c8d916b6452a35bfcb6ff7002c41ab19ebd`, gated at `53196640988ae04b247dee19abfc074b024335a7` then squashed unchanged to prior PR head `9d1d0e5df9d91d5b18bc62c277c6baff5faee69c`. Those results do not cover this new head.
@@ -67,7 +67,10 @@ Use the host's standard gate runner under its normal lock. Do not run the build 
 - Tidy repair commit: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, parent `323bafea9e097d05e46f2f088e5034f6fce171ec`, tree `ae47de910e065fe76d6d24763215224a11a11353`. It changes only `JavabinLoaderTest.java`, `DenseVectorFieldTest.java`, and `RankFieldTest.java` formatting. The pushed fork tip reads back as the repair commit.
 - Phase 1 completed on the repaired head under the standard runner. Step 0 parsed the changelog; author Nick Shanin is retained and no `nick` key exists. Step 1 tidy exited 0 with no diff. Step 2 Error Prone compilation exited 0; both `:solr:core:compileJava` and `:solr:core:compileTestJava` executed, with 14 tasks executed and 4 up to date.
 - Step 3 used a separate proof worktree at seed `16155C0FFEE23`, restoring only the six production files from prior head `9d1d0e5df9d91d5b18bc62c277c6baff5faee69c`; tests and `LogListener.trace` remained at the gated head. `DocumentBuilderTest.testFailedUpdateDoesNotLogFieldValue` had one expected assertion failure at line 164; its ERROR Throwable log includes `not-a-number-secret` and `NumberFormatException`. `JavabinLoaderTest.testIOExceptionDoesNotLeakDocumentContents` had one expected assertion failure at line 173 in the v1 serialized error-info check; `-Dsolr.hideStackTrace=false` was picked up, and the raw log includes `IOException: simulated failure for secret customer value`. Its JUnit XML records the suppressed `LogListener.close` assertion for one unconsumed event; the primary line-173 assertion is present. See `phase1-proof-verdict.json` and the two proof logs/XML under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`.
-- Step 4 has not started. The phase-one wrapper paused after step 3; the standard runner had created only an empty `4-head.log` placeholder and no step-4 state. The placeholder was recorded in `4-head-placeholder-note.json` and removed without discarding test output. Phase 2 remains pending; logs are under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`.
+- Phase 1's wrapper pause after step 3 created an empty `4-head.log` placeholder; it was documented in `4-head-placeholder-note.json` and removed before phase 2, with no test output discarded.
+- Phase 2 attempted step 4 on `/workspace/solr-16155-repair` at the gated head. The coordinator sent SIGINT after inode availability fell below the 15% safety threshold. `4-head.log` shows `:solr:core:cleanTest UP-TO-DATE`, compilation completed, and `:solr:core:test` began. `4-head-strict-verdict.json` records the Gradle child return code 130 and no fresh XML (`xml_files: []`); its 0-test parser summary means no XML was available to count, not a test pass. The standard `state.json` has no completed `4-head` entry. `wrapper-error-head.txt` records the missing-class/XML error; `phase2-process.rc` records wrapper exit 1. No step 5 task ran. Logs remain under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`.
+- The coordinator's stop measurement was 118103/837408 free inodes (14.1%); the latest read at 2026-10-23T18:58:53Z was 118032/837408 (14.0949%). No Gradle process remains. `/workspace/solr-16155-proof` (detached) and `/workspace/solr-16155-repair` (`solr-16155-submit`) are clean at `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`. No files were deleted during or after the interruption.
+- This is an environment safety pause, not a verified code-level test failure. The VM2 lane coordinator is the next actor: record the capacity investigation, then resume from step 4 only after safe inode headroom is restored. Reuse verified steps 0-3 and preserve the interrupted logs; no retry or cleanup was done by this host.
 
 ## On green
 
@@ -85,7 +88,7 @@ If any step cannot be verified, record the limitation and stop under the appropr
 - [x] step 1 tidy clean, or committed and pushed repair recorded
 - [x] step 2 Error Prone compilation actually executed
 - [x] step 3 both boundary regressions fail on the prior PR production code
-- [ ] step 4 focused head tests and compatibility suites pass, counted from fresh XML
+- [ ] step 4 not verified: SIGINT interrupted `:solr:core:test` before fresh XML; no focused counts exist
 - [ ] step 5 core and test-framework module checks
 - [ ] fork and PR heads match the gated head
 - [ ] receipt written
@@ -94,5 +97,5 @@ If any step cannot be verified, record the limitation and stop under the appropr
 ## Deliverable and limits
 
 - One fast-forward coordination push containing the receipt and DONE marks, plus any authorized ticket repair commits.
-- Windows static review: diff --check passed; outbound file list and diff reviewed. No Linux proof for this commit exists yet.
+- Windows static review: diff --check passed; outbound file list and diff reviewed. Linux evidence is partial: steps 0-3 are recorded; step 4 was interrupted before fresh XML, step 5 was not run, and no receipt or green gate exists.
 - No force push, no upstream source write, no PR/comment/JIRA/email action. Commit as Nick Shanin without attribution trailers. No em dashes.

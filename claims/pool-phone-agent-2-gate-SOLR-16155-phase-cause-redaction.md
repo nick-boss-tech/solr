@@ -1,7 +1,7 @@
 # Claim: SOLR-16155 phase cause redaction gate
 
 - Claimant host: phone-agent-2, matching `hosts/phone-agent-2.md`.
-- Status: ACTIVE; mark DONE with the receipt and terminal gate status when the gate lands.
+- Status: RETRY (next actor VM2 lane coordinator; resume step 4 only after safe inode headroom and the capacity investigation are recorded).
 - Job or assignment: `gates/SOLR-16155-phase-cause-redaction.md`.
 - Slice: the full gate, including the authorized tidy repair and full rerun from the repaired head.
 - Capability tags used: gate.
@@ -14,15 +14,15 @@
 - Preflight attempt 1: exit 2 before clone or tidy because `/workspace/.env` and `/workspace/tmp` were absent; no build or tests ran. Attempt 2: exit 3 on the same pinned head, with an authorized tidy patch to three test files at `/workspace/gates/logs/phone-agent-2/preflight/SOLR-16155-phase-cause-redaction-attempt-2/tidy.patch`.
 - Preflight logs: `/workspace/gates/logs/phone-agent-2/preflight/SOLR-16155-phase-cause-redaction` and `/workspace/gates/logs/phone-agent-2/preflight/SOLR-16155-phase-cause-redaction-attempt-2`.
 - Tidy repair pushed to `solr-16155-submit`: commit `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ae47de910e065fe76d6d24763215224a11a11353`; exactly the three test files named by the preflight patch changed.
-- Gate runner and test steps have not started.
+- Phase 1 steps 0-3 completed at the repaired head. Phase 2 step 4 was attempted but interrupted by coordinator SIGINT after the inode safety threshold was breached; no fresh JUnit XML or focused counts were produced. See the gate execution record and preserved logs.
 
 Heartbeat: 2026-10-23T18:29:55Z
 
 Heartbeat: 2026-10-23T18:34:00Z; tidy repair commit `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` is pushed and confirmed at the fork tip. The full gate rerun from step 0 is pending.
 
-Plan: run the full gate from step 0 on the committed repair head, verify the exact proof failures, count the eight focused classes from fresh JUnit XML, and record the two module checks separately.
+Plan: VM2 lane coordinator is the next actor. After safe inode headroom is restored and the capacity investigation is recorded, resume at step 4, reuse verified steps 0-3, count only fresh XML, then run step 5. No cleanup or retry was performed by phone-agent-2.
 
-Result: pending.
+Result: 2026-10-23T18:58:53Z: RETRY. Gradle step 4 reached `:solr:core:test` and was interrupted by coordinator SIGINT; child return code 130, wrapper exit code 1, no fresh XML and no test counts, no step 5. Coordinator stop measurement was 118103/837408 free inodes; latest was 118032/837408 (14.0949%). No files were deleted during or after the SIGINT; the documented zero-byte phase-one placeholder had already been removed before this stop. No Gradle process remains. Both worktrees are clean at `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`. Evidence: `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`.
 
 Heartbeat: 2026-10-23T18:39:53Z; proof/head worktrees are clean at repair head `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, inode guards pass, and the standard-runner wrapper/configs are ready. No Gradle step has started.
 
