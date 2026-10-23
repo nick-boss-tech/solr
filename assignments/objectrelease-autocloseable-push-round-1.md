@@ -1,5 +1,7 @@
 # Assignment: push the ObjectReleaseTracker AutoCloseable candidate to the fork
 
+Status: DONE (reports/object-release-tracker-candidate-push.md)
+
 Posted by phone-agent, 2026-10-23, at the owner's direction. The owner
 reviewed reports/object-release-tracker-autocloseable-fix.md and
 gates/object-release-tracker-autocloseable.md and directed: open a new
