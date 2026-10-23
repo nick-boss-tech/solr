@@ -95,6 +95,7 @@ One retry. After repairs the gate runs again from step 0 on the new head. The re
 - Keep posted public text current. When a comment, PR description or PR body we posted is wrong or incomplete, edit it right away, in the same session, and read it back after the edit. Do not leave a known-wrong comment up while waiting for the owner. Edits to text already posted are allowed; creating a new PR, comment or JIRA entry needs the owner's approval.
 - Maintainer requests on our PRs are implemented at the scope written; feasibility is settled by attempting the design, and any objection goes to the owner before a reply is drafted (the maintainer requests section of `material/coordinator-handoff.md`).
 - No builds on the Windows host (above). No new Jira ticket unless a maintainer asks or Nick directs it.
+- Name submission-ready product branches `solr-<TICKET>-submit`. Use a descriptive suffix only when the branch serves a distinct purpose such as a phase, proof, backport, or experiment, and keep the ticket key in the name.
 - Commit identity is Nick Shanin; no other name in authors, committers or trailers; no em dashes in authored text.
 
 ## Queue buffer

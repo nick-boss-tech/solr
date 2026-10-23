@@ -40,7 +40,7 @@ Work is pulled from the three stores in [`pool/work-stores.md`](work-stores.md),
 
 1. A handoff is a file on this branch. If it has no path on `coordination`, no other agent can see it. Chat messages and local notes are not handoffs.
 2. Push only as a fast-forward: fetch, rebase, push. Never force. Never reset a worktree that holds commits you have not pushed.
-3. Work branches go to the fork by default. A branch that exists only in a local worktree is invisible to the owner and to other hosts. Push it to `origin` (nick-boss-tech/solr) under a name that carries its ticket or purpose, when it first has a commit, and again after each commit. Creating a branch is not a PR and needs no approval. Use `git push origin HEAD:refs/heads/<branch>`, fast-forward only.
+3. Work branches go to the fork by default. A branch that exists only in a local worktree is invisible to the owner and to other hosts. Push it to `origin` (nick-boss-tech/solr) under a name that carries its ticket or purpose, when it first has a commit, and again after each commit. For a submission-ready product branch, use `solr-<TICKET>-submit`. Use a descriptive suffix only when the branch serves a distinct purpose such as a phase, proof, backport, or experiment, and keep the ticket key in the name. Creating a branch is not a PR and needs no approval. Use `git push origin HEAD:refs/heads/<branch>`, fast-forward only.
 4. Edits are always allowed; new things need approval. Editing a PR body or a comment we already posted, when it is wrong or incomplete, is allowed and should be done at once; read it back after. Opening a PR, posting a new comment, or filing or commenting on JIRA needs the owner's approval first.
 
 ## Before you post or claim
