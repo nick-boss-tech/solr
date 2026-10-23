@@ -132,9 +132,18 @@ Nick explicitly authorized a new repair-and-gate attempt after the terminal hand
 - [x] Live fork tip, coordination tip, and ended prior claim checked.
 - [x] Fresh superseding claim posted.
 - [x] Minimal logger-pattern repair committed and fast-forward pushed; exact head and tree verified as above.
-- [ ] Step 0 changelog parse and step 1 tidy clean on the pushed head.
-- [ ] Step 2 Error Prone main and test compilation completed, with execution counts recorded.
-- [ ] Step 3 both prior-production-code proof failures verified from fresh XML and logs.
+- [x] Step 0 changelog parse and step 1 tidy clean on the pushed head.
+- [x] Step 2 Error Prone main and test compilation completed, with execution counts recorded.
+- [x] Step 3 both prior-production-code proof failures verified from fresh XML and logs.
 - [ ] Step 4 all eight focused test classes completed; counts, skips, and required assertions recorded.
 - [ ] Step 5 `:solr:core:check -x test` and `:solr:test-framework:check -x test` results recorded separately.
 - [ ] Final fork head/tree verified and gate disposition recorded.
+
+
+### Attempt 3 progress, 2026-10-23T20:00Z
+
+Steps 0 to 2 completed on the pushed head with return code 0: changelog parse, tidy, and Error Prone compilation. The two step-3 proof tests then ran against the prior production files restored in the proof worktree. Each fresh XML contains exactly one test, zero skips, one expected assertion failure, and zero errors. The DocumentBuilder proof failed at `DocumentBuilderTest.java:164`; the Javabin proof failed at `JavabinLoaderTest.java:177`, with the synthetic value-bearing cause present in its log.
+
+The phase wrapper initially returned 1 because its verifier expected line 176 rather than the actual line 177 after adding the logger field. The test outcome was the expected proof failure, not an unexpected test failure. Corrected verification of the already captured XML/logs passed; `3-proof-loader-verdict.json` and `proof-verification-recovery.json` record it. No proof test was rerun. The standard runner created a zero-byte `4-head.log` placeholder before the wrapper stopped; it is preserved as `4-head.log.wrapper-placeholder` and is not a test result. The next phase resumes at step 4.
+
+The first supplemental inode watcher mislabeled `statvfs.f_bavail/f_blocks` block counters as inode counters. Its reported percentage is invalid for inode headroom, and its log is preserved with this correction. The standard runner's independent `f_favail/f_files` 15% guard remained active and did not refuse any step. `df -Pi` showed 225,030 of 837,408 free before the run (26.8722%) and 224,945 after (26.8621%), above both the 16% early-stop and 15% hard floor. No SIGINT or file cleanup occurred. `inode-watch-correction.json` documents the issue; the step-4 continuation uses the corrected counters and 16% stop.
