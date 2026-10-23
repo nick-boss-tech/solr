@@ -146,6 +146,31 @@ same length; the gain is readability. The first drafts under this
 rule are the -simple.md bodies for PRs #5061 and #5062 in the
 round 37 folder.
 
+No signposting (Nick, 2026-10-22). Never announce content before
+presenting it, and never recap it after. Announcing a thing, then
+saying it, then summarizing it makes the reader process the same
+content three times, and it is the pattern he named as what makes
+AI text annoying to humans. Worked examples from the SOLR-16155
+draft, before and after:
+
+- Before: "An example shows what changes. A document with id 42
+  fails because..." After: the text starts with the document
+  itself: "Take a document with id 42 whose price field holds the
+  text abc."
+- Before: "Three things follow. The value abc no longer reaches
+  the client at all..." After: the first of the three sentences
+  stands on its own, with no announcement in front of it.
+- Before: "One question decides it: is dropping the exception text
+  from the response acceptable? If not, that piece can be reverted
+  on its own; the message changes do not depend on it." Then, as
+  the wrap-up, the same question a second time: "Keep the response
+  scrub, or revert just that piece?" After, asked once: "Keep the
+  response scrub, or revert just that piece? It stands on its own;
+  the message changes do not depend on it."
+
+The rule covers section openings and closings in a description and
+whole comments alike: say the thing itself, once.
+
 ## How this maps to the gate
 
 The harden gate already produces every input: tidy, Error Prone
