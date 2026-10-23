@@ -10,7 +10,7 @@ https://issues.apache.org/jira/browse/SOLR-17840
 
 ## What happens today
 
-**An LTR timeout drops four selected hits.** At merge-base `5b2ac4dea21a7c86e31e2ba0cea58c262dc558c8`, the unchanged `timeAllowed=800` test fails `mismatch: '4'!='0' @ response/numFound`. [QueryComponent](https://github.com/nick-boss-tech/solr/blob/5b2ac4dea21a7c86e31e2ba0cea58c262dc558c8/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1861-L1869) returns before publishing; the [LTR test](https://github.com/nick-boss-tech/solr/blob/6829ee47a3d699bfcb07c981189acc18172e725e/solr/modules/ltr/src/test/org/apache/solr/ltr/TestLTRQParserPlugin.java#L144-L176) expects four hits.
+**An LTR timeout drops four selected hits.** At merge-base `5b2ac4dea21a7c86e31e2ba0cea58c262dc558c8`, removing the existing test's `@Ignore("SOLR-17840")` in a disposable worktree lets the unchanged `timeAllowed=800` test fail `mismatch: '4'!='0' @ response/numFound`. [QueryComponent](https://github.com/nick-boss-tech/solr/blob/5b2ac4dea21a7c86e31e2ba0cea58c262dc558c8/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1861-L1869) returns before publishing; the [LTR test](https://github.com/nick-boss-tech/solr/blob/6829ee47a3d699bfcb07c981189acc18172e725e/solr/modules/ltr/src/test/org/apache/solr/ltr/TestLTRQParserPlugin.java#L144-L176) expects four hits.
 
 ## What this change does
 
