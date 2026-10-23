@@ -1,6 +1,6 @@
 # Gate job: SOLR-6213 (rejoin cancellation and retained regressions)
 
-Status: OPEN
+Status: CLAIMED (claims/phone-agent-gate-SOLR-6213-phase-rejoin-cancellation-regate.md)
 
 - Gate ID: SOLR-6213-phase-rejoin-cancellation-regate.
 - Branch: `solr-6213-rejoin-fix`. Head: `2193e0104a3fa5c6235d4f843f1d6930afeb65d1`, confirmed against the fork ref and PR #5210 head on 2026-10-23. If the fork tip has moved at claim time, stop and record the new tip.
