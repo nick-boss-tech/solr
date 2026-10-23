@@ -22,14 +22,14 @@ An assignment lists the tags it needs, and an agent claims only work whose tags 
 - `review`: reading code and writing audit findings. Any host.
 - `draft`: writing PR drafts from receipts. Any host.
 - `records`: reading structured coordination records and producing bounded CSV or record deliverables, without Jira or GitHub writes or source-code changes. A host may claim `records` assignments only when its host file lists this tag.
-- `implementation`: editing branch code and committing. Linux hosts.
+- `implementation`: editing branch source or documentation and committing. Any host whose file in `hosts/` lists this capability may implement; build and test proof stays with a capable Linux host.
 - `gate`: running the full hardening gate (changelog parse, tidy, Error Prone compile, proof run, focused tests, module check). Linux hosts with the Gradle toolchain.
 - `premise-run`, `settling-run`, `sweep`: focused test runs short of a full gate. Linux hosts.
 - `bats`: shell integration test runs. Linux hosts.
 - `selenium`: the Admin UI Selenium suites. The Windows host; a Linux host only if it has Chrome and says so in its host file.
 - `windows-check`: checks that can only run on the Windows host.
 
-The Windows host never claims `gate`, `implementation`, `premise-run`, `settling-run` or `sweep` work: builds stay off that machine (Nick's standing rule). It claims `review`, `draft`, `records`, `selenium` and `windows-check` work.
+The Windows host may claim implementation work when `hosts/windows.md` lists the capability and the assignment's intended host and capability requirements match. It may edit and push branch changes. It does not run Gradle, tidy, gate, premise-run, settling-run, sweep or bats work; required build and test proof stays with a capable Linux host. The Windows host also claims `review`, `draft`, `records`, `selenium` and `windows-check` work.
 
 ## Claims
 

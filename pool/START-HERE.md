@@ -119,7 +119,7 @@ It then commits as Nick Shanin, pushes fast-forward, rebases and retries if the 
 
 ## Hosts
 
-Linux hosts cannot run the PowerShell helper. Use the manual steps above. Windows posts and reviews. It never claims build work (`gate`, `implementation`, `premise-run`, `settling-run`, `sweep`, `bats`).
+Linux hosts cannot run the PowerShell helper. Use the manual steps above. Windows hosts may claim and carry out implementation and review assignments when their host file lists the required capability and the assignment host requirements match. Windows may edit and push branch changes, but does not run tidy, Gradle, gates, premise-run, settling-run, sweep or bats work. Required build and test proof stays with a capable Linux host.
 
 ## Public text
 
