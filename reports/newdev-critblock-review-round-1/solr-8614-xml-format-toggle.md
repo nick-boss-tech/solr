@@ -11,3 +11,11 @@ Head reviewed: 658872c20ab2722b3eb1ebe37f99893cab744680. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-8614-review-pass-1.md`, GATE GREEN at 658872c20a on vm4.
+
+## Pass 2
+
+Review (2026-10-23, vm4), same head 658872c20a. - Re-read the diff at the same head 658872c20a. No new findings in pass 2.
+- Pass 1 design and coverage notes stand, not repaired: per-request writer churn in `LBSolrClient.clientFor`, and no Cloud or LB delegation tests.
+- Repairs: none.
+
+Regate: `gates/SOLR-8614-review-pass-2.md`, GATE GREEN at 658872c20a on vm4.
