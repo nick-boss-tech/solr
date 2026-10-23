@@ -1,6 +1,6 @@
 # Gate job: SOLR-14649 (package signatures require SHA-512)
 
-Status: OPEN
+Status: CLAIMED
 
 - Branch: `solr-14649-submit`. Head: `800e91188e0d9f975b9096c9413915ea18713b23` (fork tip, confirmed by ls-remote on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `79b23df58daac14b92cc35f23b8b81f72098b4ba`. Prior gated head: none recorded.
