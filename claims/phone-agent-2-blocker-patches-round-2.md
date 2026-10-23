@@ -1,6 +1,6 @@
 # Phone Agent 2: failed Blocker patch follow-up
 
-Status: CLAIMED
+Status: DONE (both follow-up branches validated; report and receipts delivered)
 
 - Host: phone-agent-2
 - Started: 2026-10-23T00:25:00Z
@@ -14,3 +14,7 @@ Status: CLAIMED
 - Plan: reuse existing evidence; post phase-specific validation records for completed implementations; preserve failed prior receipts; record exact new-head test evidence. Shared build lock, 85 percent disk guard, 2 GB free-space and 10 percent free-inode floors remain mandatory.
 - Limits: no Jira/GitHub posts or comments, no PR opening or ready flip, no test weakening, no force pushes. No gate-green claim without completed evidence.
 - Deliverable: reports/phone-agent-2-blocker-patches-round-2.md and updated ticket receipts with phase-specific gate files.
+
+## Completion: 2026-10-23T00:53:00Z
+
+DONE: reports/phone-agent-2-blocker-patches-round-2.md; receipts/SOLR-17840.md and receipts/SOLR-18446.md; phase-specific gate records. SOLR-17840 new commit 21bf1dbb6ea2365cb3be7caab74ea853af74dd0d passes 28 focused tests and core/LTR checks. SOLR-18446 existing corrected head 8bb60e6f61abc9827fb58dcae1863cabb33f9796 passes 13 focused tests and core checks. All focused head tests executed with zero skips/failures/errors. Both pass Error Prone. No outstanding build, PR opening, comment or ready flip. Old terminal claim unchanged.
