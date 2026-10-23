@@ -1,6 +1,6 @@
 # Gate job: SOLR-16155 (value-bearing causes in update errors)
 
-Status: RETRY (inode safety stop at step 4; next actor: VM2 lane coordinator; resume step 4 only after safe capacity recovery and recorded investigation)
+Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction.md)
 
 - Branch: `solr-16155-submit`. Gated head: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` (tidy repair head, fork tip read back on 2026-10-23). Original assigned head: `323bafea9e097d05e46f2f088e5034f6fce171ec`. If the tip moves before another repair push, stop and record the new tip here.
 - Prior gated tree: `ab394c8d916b6452a35bfcb6ff7002c41ab19ebd`, gated at `53196640988ae04b247dee19abfc074b024335a7` then squashed unchanged to prior PR head `9d1d0e5df9d91d5b18bc62c277c6baff5faee69c`. Those results do not cover this new head.
@@ -71,6 +71,12 @@ Use the host's standard gate runner under its normal lock. Do not run the build 
 - Phase 2 attempted step 4 on `/workspace/solr-16155-repair` at the gated head. The coordinator sent SIGINT after inode availability fell below the 15% safety threshold. `4-head.log` shows `:solr:core:cleanTest UP-TO-DATE`, compilation completed, and `:solr:core:test` began. `4-head-strict-verdict.json` records the Gradle child return code 130 and no fresh XML (`xml_files: []`); its 0-test parser summary means no XML was available to count, not a test pass. The standard `state.json` has no completed `4-head` entry. `wrapper-error-head.txt` records the missing-class/XML error; `phase2-process.rc` records wrapper exit 1. No step 5 task ran. Logs remain under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`.
 - The coordinator's stop measurement was 118103/837408 free inodes (14.1%); the latest read at 2026-10-23T18:58:53Z was 118032/837408 (14.0949%). No Gradle process remains. `/workspace/solr-16155-proof` (detached) and `/workspace/solr-16155-repair` (`solr-16155-submit`) are clean at `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`. No files were deleted during or after the interruption.
 - This is an environment safety pause, not a verified code-level test failure. The VM2 lane coordinator is the next actor: record the capacity investigation, then resume from step 4 only after safe inode headroom is restored. Reuse verified steps 0-3 and preserve the interrupted logs; no retry or cleanup was done by this host.
+
+## Retry resumption and capacity investigation
+- Resumed: 2026-10-23T19:25:36Z by phone-agent-2 under Nick's direction to reclaim the job if unclaimed. Live coordination tip `7cda32f5781b6c60141ffff11a70dc06524a60db` had no VM2 or other actor claim for this gate. This reactivates the existing phone-agent-2 claim; only step 4 remains to be run, and the interrupted attempt-1 evidence stays preserved.
+- Capacity checked at 2026-10-23T19:25:36Z: root, `/workspace`, and `/home/ubuntu/.gradle` all share `/dev/root` with 837,408 total inodes; 227,668 are available (27.1872%). The 15% guard floor is 125,612, leaving 102,056 inodes above the floor. Available disk space is 31 GiB. The six completed worktrees previously removed with Nick's approval account for the documented recovery; this resumed run has deleted no worktrees, logs, build outputs, shared caches, or other files.
+- No Gradle process was active at preflight. The proof and head worktrees are clean at `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ae47de910e065fe76d6d24763215224a11a11353`. The normal gate lock and 15% inode guard will govern resumed tasks.
+- The preserved attempt-1 directory contains an interrupted `4-head.log` and strict verdict, so continuation evidence will use a separate `attempt-2` directory. Only the verified step 0-3 state and proof evidence will be copied; attempt-1 artifacts will not be overwritten.
 
 ## On green
 

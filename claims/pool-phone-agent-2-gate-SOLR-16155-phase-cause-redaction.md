@@ -1,7 +1,7 @@
 # Claim: SOLR-16155 phase cause redaction gate
 
 - Claimant host: phone-agent-2, matching `hosts/phone-agent-2.md`.
-- Status: RETRY (next actor VM2 lane coordinator; resume step 4 only after safe inode headroom and the capacity investigation are recorded).
+- Status: CLAIMED (step 4 resumed under Nick's direction after confirming no VM2 claim on the live branch).
 - Job or assignment: `gates/SOLR-16155-phase-cause-redaction.md`.
 - Slice: the full gate, including the authorized tidy repair and full rerun from the repaired head.
 - Capability tags used: gate.
@@ -27,3 +27,9 @@ Result: 2026-10-23T18:58:53Z: RETRY. Gradle step 4 reached `:solr:core:test` and
 Heartbeat: 2026-10-23T18:39:53Z; proof/head worktrees are clean at repair head `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, inode guards pass, and the standard-runner wrapper/configs are ready. No Gradle step has started.
 
 Heartbeat: 2026-10-23T18:52:35Z; phase 1 steps 0-3 are verified at `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, including both expected prior-production-code assertion failures. Step 4 has not run; the empty wrapper-created placeholder was documented and removed. Both inode guards pass at 128811/837408 free (15.38%). Phase 2 is next; no cache cleanup or guard bypass will be used.
+
+## Retry resumption, 2026-10-23T19:25:36Z
+- Nick directed phone-agent-2 to reclaim this gate if it was unclaimed. Live coordination tip `7cda32f5781b6c60141ffff11a70dc06524a60db` contained no VM2 or other actor claim for this gate. The existing claim is resumed, not duplicated; no takeover or product-code attempt is being started.
+- Steps 0-3 and their proof evidence are reused from `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/`. The interrupted step 4 produced no fresh JUnit XML, so the focused run resumes at step 4 only. Its new evidence directory is `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-2/`; attempt-1 remains untouched.
+- Capacity investigation: at 2026-10-23T19:25:36Z, `/`, `/workspace`, and `/home/ubuntu/.gradle` had 227,668 of 837,408 inodes free (27.1872%), 102,056 above the 15% guard floor of 125,612, with 31 GiB disk free. No Gradle process was active; both SOLR-16155 worktrees were clean at the gated head. Nick-approved removal of six completed worktrees is already reflected in the recovered count; no SOLR-16155 artifacts or other files were deleted.
+Heartbeat: 2026-10-23T19:25:36Z
