@@ -17,3 +17,5 @@ Append one heartbeat line at least once an hour while the claim is active, and p
 Result: pending.
 
 DONE: pending. Deliverables: `reports/pool-pr5118-regression-review-round-1.md`.
+
+Heartbeat: 2026-10-23T05:44:00Z. Interim result, 2026-10-23T05:44:00Z: request-level test on branch `solr-18010-request-edits-test` (`31461dc35a`). Head `d742eb99dd`: passes, 1 of 1 from fresh XML. Same test with the handler lock removed: fails with a lost update (`expected [alice, bob] but was [bob]`). Two handler instances on one SOLR_HOME, no lock shared: a lost update (`expected [alice, bob] but was [bob]`). Logs are on vm5 under `/workspace/tmp/pool-vm5-5118/logs/`, not on this branch. Base-main leg not yet valid (the test needs main's handler test files); deferred until host memory recovers. Deliverable `reports/pool-pr5118-regression-review-round-1.md` still pending.
