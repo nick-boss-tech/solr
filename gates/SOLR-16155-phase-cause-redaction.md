@@ -1,6 +1,6 @@
 # Gate job: SOLR-16155 (value-bearing causes in update errors)
 
-Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction.md)
+Status: HANDED BACK (the one repaired-head retry failed at :solr:core:check -x test on changed JavabinLoaderTest.java source-pattern violations)
 
 - Branch: `solr-16155-submit`. Gated head: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` (tidy repair head, fork tip read back on 2026-10-23). Original assigned head: `323bafea9e097d05e46f2f088e5034f6fce171ec`. If the tip moves before another repair push, stop and record the new tip here.
 - Prior gated tree: `ab394c8d916b6452a35bfcb6ff7002c41ab19ebd`, gated at `53196640988ae04b247dee19abfc074b024335a7` then squashed unchanged to prior PR head `9d1d0e5df9d91d5b18bc62c277c6baff5faee69c`. Those results do not cover this new head.
@@ -78,6 +78,15 @@ Use the host's standard gate runner under its normal lock. Do not run the build 
 - No Gradle process was active at preflight. The proof and head worktrees are clean at `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ae47de910e065fe76d6d24763215224a11a11353`. The normal gate lock and 15% inode guard will govern resumed tasks.
 - The preserved attempt-1 directory contains an interrupted `4-head.log` and strict verdict, so continuation evidence will use a separate `attempt-2` directory. Only the verified step 0-3 state and proof evidence will be copied; attempt-1 artifacts will not be overwritten.
 
+## Retry verdict and hand-back, 2026-10-23T19:32:31Z
+- Resumed attempt 2 on head `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ae47de910e065fe76d6d24763215224a11a11353`. The proof leg remained verified from attempt 1: both prior-production-code tests failed at their intended assertions and showed `not-a-number-secret` and `secret customer value` in the expected failure evidence.
+- Step 4 ran exactly the eight focused classes at seed `16155C0FFEE23`; fresh JUnit XML is under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-2/4-head-xml/`. Counts: 110 tests, 3 skipped, 0 failures, 0 errors; 107 tests executed and passed; all eight requested classes are present. Per class: RequestHandlerBaseTest 9/0 skips; JavabinLoaderTest 3/0; DenseVectorFieldTest 50/2; RankFieldTest 14/1; TestLateInteractionVectorFieldInit 3/0; DocumentBuilderTest 19/0; SolrCmdDistributorTest 1/0; TolerantUpdateProcessorTest 11/0.
+- Skips: `DenseVectorFieldTest.denseVectorField_shouldBePresentAfterAtomicUpdate` and `denseVectorFieldOnAtomicUpdate_shouldBeUpdatedCorrectly` were assumption-skipped because update log must be enabled for atomic update. `RankFieldTest.testFacetFails` was intentionally ignored in source because this request is not currently rejected for other field types.
+- Required focused assertions passed: `DocumentBuilderTest.testFailedUpdateDoesNotLogFieldValue`, `DocumentBuilderTest.testFieldErrorDetailsAreAvailableAtTrace`, and `JavabinLoaderTest.testIOExceptionDoesNotLeakDocumentContents`. The TRACE test sees `not-a-number-secret` and the original `NumberFormatException` only in the TRACE event, with no public cause. The Javabin test keeps the error at 500 and omits the secret from serialized v1/v2 error details and ERROR log output. RequestHandlerBaseTest's 400/500 checks and the SolrCmdDistributorTest compatibility class also passed.
+- Step 5: `:solr:core:check -x test` returned 1 because `:solr:core:validateSourcePatterns` rejected changed `JavabinLoaderTest.java`: `invalid logger name [log, uses static class name, not specialized logger]` and `invalid logging pattern [not private static final, uses static class name]`. `:solr:test-framework:check -x test` returned 0 (65 tasks, 43 executed, 22 up-to-date). Overall wrapper result is FAILED, exit 16.
+- The live inode monitor did not interrupt the run: free inodes went from 227,621/837,408 (27.1816%) to 225,107/837,408 (26.8814%). This was a source-pattern failure, not a capacity stop. Both product worktrees remain clean; fork ref and PR #5200 head still match the gated SHA.
+- WORKFLOW.md allows one repaired-head retry, and this retry failed at step 5. The required disposition is HANDED BACK to implementation. No further repair, rerun, green receipt, PR edit, comment, or Jira action was made.
+
 ## On green
 
 1. Add a new top section to `receipts/SOLR-16155.md` for this gate ID, with exact gated head, tree, date/host, logs, step results, proof test names and failure evidence, and fresh focused counts. Preserve the old gate history.
@@ -94,14 +103,15 @@ If any step cannot be verified, record the limitation and stop under the appropr
 - [x] step 1 tidy clean, or committed and pushed repair recorded
 - [x] step 2 Error Prone compilation actually executed
 - [x] step 3 both boundary regressions fail on the prior PR production code
-- [ ] step 4 not verified: SIGINT interrupted `:solr:core:test` before fresh XML; no focused counts exist
-- [ ] step 5 core and test-framework module checks
-- [ ] fork and PR heads match the gated head
-- [ ] receipt written
-- [ ] job DONE and claim DONE
+- [x] step 4: fresh focused run at seed `16155C0FFEE23` completed with 110 tests, 3 skips, 0 failures and 0 errors; all eight requested classes are present in fresh XML.
+- [x] step 5: `:solr:core:check -x test` failed with exit 1 on two source-pattern violations in changed `JavabinLoaderTest.java`; separate `:solr:test-framework:check -x test` passed with exit 0.
+- [x] fork ref and PR #5200 head both match gated head `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` at final verification.
+- [ ] green receipt written; not applicable after the retry was handed back.
+- [ ] job DONE and claim DONE; instead the gate is HANDED BACK and the claim is ENDED.
+- [x] gate and claim closed as HANDED BACK/ENDED under WORKFLOW.md after the one retry failed; no further repair or rerun was started.
 
 ## Deliverable and limits
 
-- One fast-forward coordination push containing the receipt and DONE marks, plus any authorized ticket repair commits.
-- Windows static review: diff --check passed; outbound file list and diff reviewed. Linux evidence is partial: steps 0-3 are recorded; step 4 was interrupted before fresh XML, step 5 was not run, and no receipt or green gate exists.
+- Gate outcome: HANDED BACK after the one repaired-head retry failed in step 5. No green receipt or DONE mark is appropriate.
+- Windows static review: `diff --check` passed and outbound files were reviewed. Linux evidence: steps 0-3 reused from attempt 1; step 4 passed 107 executed tests with 3 skips; step 5 core check failed on the logger-pattern rule while test-framework check passed. Full records are under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/` and `attempt-2/`.
 - No force push, no upstream source write, no PR/comment/JIRA/email action. Commit as Nick Shanin without attribution trailers. No em dashes.
