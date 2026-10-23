@@ -33,24 +33,11 @@ The test repository for the question-answer package used a 512-bit RSA key. That
   - `PackageToolTest` 2 of 2
 - Error Prone compile and `:solr:core:check -x test` both pass at the head.
 
-**Choice: reject SHA-1 now, or accept it for one transition release.**
+**Compatibility**
 
-Context: SOLR-14649 asks for SHA-512. Rejecting SHA-1 is a behavior change. A package or repository still signed with SHA-1 stops installing. We have not counted how many published packages use SHA-1.
-
-Decision ladder:
-
-1. If no published repository still signs with SHA-1, rejecting now costs nothing. Go to 3.
-2. If some still sign with SHA-1, rejecting now breaks their installs. Accepting SHA-1 with a warning for one release lets them move first.
-3. Otherwise, reject now.
-
-Recommendation: reject SHA-1 now. The implemented change does this. A warning period only helps if some repository still signs with SHA-1, and that is the open fact.
-
-Question: is rejecting SHA-1 in this release right, or should SHA-1 be accepted with a warning for one release?
-
+This change intentionally rejects SHA-1 signatures on the package and filestore verification paths. Published repositories that still contain SHA-1-signed packages will need to re-sign them with SHA-512 before this Solr version can install them. A published-package inventory was not part of this change.
 **Limits**
 
 - Only package and filestore verification changed. The SHA-256 PKI path is unchanged.
 - The test key rotation touches test resources only.
 - The gate ran `:solr:core` checks and the focused tests above, not the full build for every module.
-
-*AI-generated description. Nick Shanin directed the work and takes responsibility for this contribution.*
