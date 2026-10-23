@@ -7,6 +7,11 @@ import sys
 REFUSED = 4
 
 
+def counters(path):
+    stat = os.statvfs(path)
+    return stat.f_files, stat.f_favail
+
+
 def check_paths(paths):
     for raw in paths:
         path = Path(raw).absolute()
@@ -14,8 +19,10 @@ def check_paths(paths):
         while not path.exists() and path != path.parent:
             path = path.parent
         try:
-            stat = os.statvfs(path)
-            total, free = stat.f_files, stat.f_favail
+            total, free = counters(path)
+            if total == 0 and path != Path("/"):
+                # Network mounts such as NFS report no inode counters; the local root is checked instead, which does not measure the export.
+                total, free = counters(Path("/"))
             if total <= 0 or free < 0 or free > total:
                 raise ValueError("inode counters unavailable or invalid")
         except (OSError, ValueError) as error:

@@ -38,6 +38,13 @@ class GuardTests(unittest.TestCase):
         with patch.object(guard.os, "statvfs", side_effect=OSError("unavailable")), contextlib.redirect_stderr(io.StringIO()):
             self.assertEqual(guard.check_paths(["/"]), 4)
 
+    def test_zero_counters_fall_back_to_root(self):
+        zero = SimpleNamespace(f_files=0, f_favail=0)
+        with patch.object(guard.os, "statvfs", side_effect=[zero, SimpleNamespace(f_files=100, f_favail=80)]), contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(guard.check_paths([str(BIN)]), 0)
+        with patch.object(guard.os, "statvfs", side_effect=[zero, SimpleNamespace(f_files=100, f_favail=15)]), contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(guard.check_paths([str(BIN)]), 4)
+
     def test_all_filesystems(self):
         stats = [SimpleNamespace(f_files=100, f_favail=80), SimpleNamespace(f_files=100, f_favail=15)]
         with patch.object(guard.os, "statvfs", side_effect=stats), contextlib.redirect_stderr(io.StringIO()):
