@@ -1,5 +1,5 @@
 # Pool assignment: ObjectReleaseTracker AutoCloseable failure cleanup
-Status: CLAIMED (claims/pool-phone-agent-2-objectrelease-autocloseable.md)
+Status: DONE
 - Capability tags: implementation, gate.
 - Category: Test quality, with core test infrastructure as the production category.
 - Intended host: any pool Linux host. Claim under `claims/` before starting.
