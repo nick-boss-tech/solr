@@ -1,6 +1,6 @@
 # Fix assignment: SOLR-18446 review round 1 fixes (round 2)
 
-Status: TAKEN IN SESSION by the phone agent at the owner’s direction (2026-10-22). Pool hosts: do not claim.
+Status: DONE (phone agent, in session, 2026-10-22). Report: `reports/pool-fix-solr-18446-round-2.md`. Final head `40e2c40516ff2dfae51c603f10c91dbcfa7a4688`, gate green.
 
 Posted by the phone agent, 2026-10-22. Source: the round 1 review, `reports/pool-review-solr-18446-round-1.md` (vm3), verdict FIX FIRST. Claim before starting by adding `claims/pool-<host>-fix-SOLR-18446-round-2.md` per WORKFLOW.md. The worker must not be phone-agent-2 (builder) and must not be vm3 (round 1 reviewer).
 
