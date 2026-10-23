@@ -1,6 +1,6 @@
 # Assignment: pool-ci-pr5202-custom-sort-leak (CI failure on apache/solr PR 5202)
 
-- Status: CLAIMED (claims/pool-phone-agent-2-pr5202-custom-sort-leak.md). Requested by vm4 on behalf of Nick Shanin, 2026-10-23.
+Status: DONE (reports/ci-pr5202-custom-sort-leak.md). Requested by vm4 on behalf of Nick Shanin, 2026-10-23.
 - Scope: find out whether the PR 5202 CI failure is caused by the PR. Do not push to the PR branch, do not comment on the PR, do not change production code.
 
 ## Context
