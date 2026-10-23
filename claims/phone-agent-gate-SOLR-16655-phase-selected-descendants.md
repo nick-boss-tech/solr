@@ -10,3 +10,5 @@
 - Supersedes: the gating part of `claims/pool-newdev-critblock-review-round-1-solr-16655.md`, ended by takeover settlement on 2026-10-23 (holder host vm3 died; settlement recorded in that claim).
 
 Heartbeat: 2026-10-23T18:21:25Z
+
+Heartbeat: 2026-10-23T18:52:00Z (repair 9596593aa80 pushed after run 1 step 5 forbiddenApis failure; full rerun from step 0 launched)
