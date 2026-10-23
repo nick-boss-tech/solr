@@ -1859,14 +1859,14 @@ public class QueryComponent extends SearchComponent {
       throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, e);
     }
     rb.setResult(result);
+    ResultContext ctx = new BasicResultContext(rb);
+    rsp.addResponse(ctx);
 
     QueryLimits queryLimits = QueryLimits.getCurrentLimits();
     if (queryLimits.maybeExitWithPartialResults("QueryComponent")) {
       return;
     }
 
-    ResultContext ctx = new BasicResultContext(rb);
-    rsp.addResponse(ctx);
     rsp.getToLog()
         .add(
             "hits",
