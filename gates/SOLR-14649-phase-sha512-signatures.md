@@ -1,6 +1,6 @@
 # Gate job: SOLR-14649 (package signatures require SHA-512)
 
-Status: HANDED BACK (head 25589eb5e6: `PackageToolTest.testPackageTool` fails at its install step, the filestore rejects the signed jar with 400. The fixture signature must be regenerated for SHA-512, a test-resource change outside repair scope. Focused run 14 of 15 passed; check step not run.)
+Status: CLAIMED (run 2, claim `claims/pool-vm6-gate-SOLR-14649-phase-sha512-signatures-r2.md`, head `1767e9dce8`). Run 1 was HANDED BACK at head 25589eb5e6. Owner approved the re-sign and the diff-scope widening to the two key files (Nick, 2026-10-23).
 
 - Branch: `solr-14649-submit`. Head: `800e91188e0d9f975b9096c9413915ea18713b23` (fork tip, confirmed by ls-remote on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `79b23df58daac14b92cc35f23b8b81f72098b4ba`. Prior gated head: none recorded.
