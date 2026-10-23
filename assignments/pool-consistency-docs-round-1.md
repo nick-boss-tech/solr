@@ -1,6 +1,6 @@
 # Pool assignment: consistency and documentation accuracy round 1 (backup permissions, configset delete, streaming docs)
 
-Status: OPEN (item 2 DONE by vm4, branch consistency-v2-list-backups-permission at e3f35fe42c; item 1 CLAIMED by vm3; item 3 DONE by vm4, branch hardening-configset-delete-containment at 3905ad78e8; item 4 BLOCKED on the docs build, branch docs-streaming-allowlist-note at 4b185504ef; see reports/consistency-docs-round-1.md)
+Status: OPEN (item 2 DONE by vm4, branch consistency-v2-list-backups-permission at e3f35fe42c; item 1 CLAIMED by vm3; item 3 DONE by vm4, branch hardening-configset-delete-containment at 3905ad78e8; item 4 CLAIMED by phone-agent-2, taking over the stale docs-build handoff on `docs-streaming-allowlist-note` at 4b185504ef; see reports/consistency-docs-round-1.md)
 
 - Capability tags: implementation, docs, records.
 - Intended host: any pool Linux host. One item per claim is fine; the four items are independent. Claim under `claims/` before starting (WORKFLOW.md).

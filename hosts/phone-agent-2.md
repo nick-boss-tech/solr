@@ -24,3 +24,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Heartbeat: 2026-10-23T06:58:00Z; claimed SOLR-5735 item 2, the local-disk repeatability run for the pinned test seed. Three reruns and the diagnostic report are pending.
 
 - Heartbeat: 2026-10-23T07:06:00Z; completed SOLR-5735 item 2, three local ext4 seeded runs passed at unchanged upstream/main `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`. Report and full compressed JUnit artifacts published. No product changes or running build.
+
+- Heartbeat: 2026-10-23T07:15:00Z; took over consistency-docs item 4 from vm4 for Antora on `docs-streaming-allowlist-note` at `4b185504ef7dd5e4530664995719a0e743564382`. This host has npm capability.
