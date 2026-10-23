@@ -40,8 +40,8 @@ public class StoppableIndexingThread extends AbstractFullDistribZkTestBase.Stopp
   protected final List<String> deletes = new ArrayList<>();
   protected Set<String> addFails = new HashSet<>();
   protected Set<String> deleteFails = new HashSet<>();
-  protected Set<String> stoppedNodeAddFails = new HashSet<>();
-  protected Set<String> stoppedNodeDeleteFails = new HashSet<>();
+  private final Set<String> stoppedNodeAddFails = new HashSet<>();
+  private final Set<String> stoppedNodeDeleteFails = new HashSet<>();
   protected boolean doDeletes;
   private int numCycles;
   private SolrClient controlClient;
