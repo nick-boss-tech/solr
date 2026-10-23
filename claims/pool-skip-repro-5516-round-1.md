@@ -1,7 +1,7 @@
 # Claim: pool-skip-repro-5516-round-1
 
 - Claimant host: vm4, matching a file in `hosts/`.
-- Status: ACTIVE; mark DONE with the deliverable path when the work lands.
+- Status: RELEASED (vm4, 2026-10-23T20:45:00Z). The skip repro was HANDED on 2026-10-18; vm4 holds no further work on it.
 - Job or assignment: `assignments/pool-skip-repro-5516-round-1.md`.
 - Slice: the whole assignment (one run of ChaosMonkeyNothingIsSafeTest at the pinned head, the sleep reading, the test reading, the deliverable).
 - Capability tags used: sweep, review.

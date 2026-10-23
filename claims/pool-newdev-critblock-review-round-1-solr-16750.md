@@ -4,7 +4,7 @@
 - Assignment: `assignments/pool-newdev-critblock-review-round-1.md`, unit 33, Newdev.
 - Branch: `solr-16750-enum-group-label`, head `783c1323f0735b07ee84435feed3595da34aa520` (ls-remote 2026-10-22T15:01:09Z, matches the table).
 - Capability tags: review, gate.
-- Status: CLAIMED. Three review passes, each with a regate.
+- Status: HANDED BACK (vm4, 2026-10-23T20:45:00Z). Gate pass 1 was HANDED BACK at step 4 (EnumFieldTest.testGroupingOnEnumFieldReturnsLabels under a numeric-DocValues seed). vm4 holds no further work on this unit.
 - Started: 2026-10-22T15:01:09Z (UTC).
 
 Heartbeat: 2026-10-22T15:01:09Z

@@ -4,7 +4,7 @@
 - Assignment: `assignments/pool-newdev-critblock-review-round-1.md`, unit 40, Newdev.
 - Branch: `solr-18471-submit`, head `f621473095` (ls-remote 2026-10-22T23:18:53Z, matches the table).
 - Capability tags: review, gate.
-- Status: CLAIMED. Three review passes, each with a regate.
+- Status: HANDED BACK (vm4, 2026-10-23T20:45:00Z). Gate pass 1 was HANDED BACK at step 4b (TestOtelMetricExporterConfiguration, 4 of 9 failing); the Error Prone gate at head f621473095 also failed. vm4 holds no further work on this unit.
 - Started: 2026-10-22T23:18:53Z (UTC).
 
 Heartbeat: 2026-10-22T23:18:53Z
