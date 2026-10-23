@@ -1,5 +1,5 @@
 # Pool assignment: SOLR-18506 TestThinCache cleanup after assertion failure
-Status: OPEN (one-off vm5 exception approved by Nick, 2026-10-23).
+Status: CLAIMED by `claims/pool-vm5-solr-18506-test-cleanup.md`. Was OPEN (one-off vm5 exception approved by Nick, 2026-10-23).
 - Capability tags: implementation, gate.
 - Category: Test quality, with Search and query components as the production category.
 - Intended host: vm5 (one-off named-host exception approved by Nick on 2026-10-23). Claim under `claims/` before starting.
