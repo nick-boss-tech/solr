@@ -5,7 +5,7 @@ Run date: 2026-10-23 UTC
 ## Environment and run
 
 - Commit checked: d742eb99dd28be761b5f60aea6fbfc832e1b7a50 on solr-18010-submit. ls-remote matched this SHA before and after the run.
-- Windows: gradlew.bat --version reported Windows 11 10.0 amd64. Get-ComputerInfo reported Windows 10 Enterprise, version 2009, build 26200, 64-bit.
+- Windows: Windows 11 Enterprise 25H2, build 26200.9711, 64-bit. Confirmed by Win32_OperatingSystem (Caption: Microsoft Windows 11 Enterprise, Version: 10.0.26200, BuildNumber: 26200, OSArchitecture: 64-bit). The CurrentVersion registry ProductName field retains the legacy value Windows 10 Enterprise.
 - Java: OpenJDK 21.0.11, Eclipse Temurin 21.0.11+10-LTS.
 - Gradle: 9.7.0 from the repository wrapper.
 - Command: .\gradlew.bat --no-daemon :solr:core:test --tests org.apache.solr.handler.admin.SecurityConfHandlerTest --tests org.apache.solr.handler.admin.SecurityConfHandlerFailurePathsTest --tests org.apache.solr.handler.admin.SecurityConfHandlerReaderTest --tests org.apache.solr.security.BasicAuthStandaloneTest
