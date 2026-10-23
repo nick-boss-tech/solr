@@ -12,4 +12,6 @@
 
 Heartbeat: 2026-10-23T16:45:00Z
 
+Result: 2026-10-23T16:41Z: relaunch `s14649-head-r2` refused at compile, rc=4, by the inode guard (`pool/bin/inode-guard.py`, commit 6b4decacc2, "stop Gradle at 15 percent free inodes"). Cause: `/workspace` is an NFS mount (127.0.0.1:/agents/5yjgb5j855/workspace). `statvfs` reports 0 inodes there, and the guard refuses unavailable counters. `/` has 479583 of 524288 inodes free (91%), so the guard does not see `/`. Gradle has not run for the head. No files were deleted. Next: the owner decides how the guard treats NFS paths. Until then the head run (compile, cleanTest, focused tests, check) cannot run on this host. Proof leg (`s14649-proof`) ran before the guard existed.
+
 Result: 2026-10-23T15:49Z: proof leg (`s14649-proof`) 4 of 4 TestCryptoKeys tests failed as expected; receipt not yet written. Head job `s14649-head` died at 15:53 during its compile step, before any test ran, after the tick worktree's `pool/bin` scripts were replaced mid-run at 15:53:55.
