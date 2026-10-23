@@ -205,6 +205,7 @@ module check is sufficient, with tidy and licenses kept current.
   and check with Nick first.
 - Minimize comments on PRs; correct by editing the description.
 - No "Claude" in commit authors, committers, or trailers.
+- A prepared branch is not finished until its PR description draft exists (Nick, 2026-10-22). The draft lives as the final section of the branch receipt (receipts/SOLR-<n>.md), written when the gate goes green, so any host can open the PR from the record alone.
 - Changelog fragments list the author by name only (`name: Nick Shanin`), with no `nick:` line (Nick, 2026-10-15). The upstream `dev-docs/changelog.adoc` example includes one; remove it from any fragment before committing.
 
 ## Template (approved draft, 2026-10-04)
