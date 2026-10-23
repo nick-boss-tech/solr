@@ -122,7 +122,8 @@ If any step cannot be verified, record the limitation and stop under the appropr
 Nick explicitly authorized a new repair-and-gate attempt after the terminal hand-back. This is a fresh claim, not a reopening or edit of the ended claim. The prior attempt-1 and attempt-2 records and logs remain unchanged.
 
 - Claim: `claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction-attempt-3.md`, posted at coordination commit `9ee71d0f3f49b089c863007e02be48a450c66d74`.
-- Product branch pre-repair tip confirmed from the fork: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ae47de910e065fe76d6d24763215224a11a11353`.
+- Original pre-repair tip confirmed from the fork: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ae47de910e065fe76d6d24763215224a11a11353`. Repair commit: `9ce3e5b4ced0cdfd8348848e2c602adafc1f1f60`, parent `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ef86260f2fcdc363026e714019e97b03dbab87d3`; one test file changed, four insertions.
+- Fork ref and public PR #5200 head both read back as `9ce3e5b4ced0cdfd8348848e2c602adafc1f1f60` at 2026-10-23T19:47:48Z.
 - Mechanical repair: add the validator-required private static final `Logger log` field to `JavabinLoaderTest`. Keep the existing `JavabinLoader.class` logger argument to `ResponseUtils`: it logs through that argument, and `LogListener.error(JavabinLoader.class)` must continue observing those production-class ERROR events. No assertion or expected value changes.
 - Evidence directory: `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-3/`. All gate steps will rerun from step 0 on the committed and pushed repair, under the standard runner's host lock and inode guard.
 - At claim time: 225,079 of 837,408 inodes free (26.88%), above the 15% stop floor; no Gradle process was active.
@@ -130,7 +131,7 @@ Nick explicitly authorized a new repair-and-gate attempt after the terminal hand
 ### Attempt 3 checklist
 - [x] Live fork tip, coordination tip, and ended prior claim checked.
 - [x] Fresh superseding claim posted.
-- [ ] Minimal logger-pattern repair committed and fast-forward pushed; exact head and tree verified.
+- [x] Minimal logger-pattern repair committed and fast-forward pushed; exact head and tree verified as above.
 - [ ] Step 0 changelog parse and step 1 tidy clean on the pushed head.
 - [ ] Step 2 Error Prone main and test compilation completed, with execution counts recorded.
 - [ ] Step 3 both prior-production-code proof failures verified from fresh XML and logs.
