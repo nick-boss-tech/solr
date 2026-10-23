@@ -1,6 +1,6 @@
 # Gate job: SOLR-17752 (corrupted-response diagnostics hardening)
 
-Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-17752-phase-diagnosability-review-round-1.md)
+Status: DONE (gate green at 310e1d02ef15e136016bb66f09aaaef8f836dc1b; see receipt and report)
 
 - Branch: `solr-17752-submit`. Head: `310e1d02ef15e136016bb66f09aaaef8f836dc1b` (fork tip, confirmed by ls-remote on 2026-10-23). First attempt started at `32c33350daf84bb3d540ba1f49badd1d6f9b4a4a`.
 - Prior gated head: `041c5b0b2e44e903e7010a40530de3a24ea9bb06`. Merge-base with upstream/main: `56ec140e3636d5f4150fa87fbf7103529536ac99`.
@@ -27,7 +27,11 @@ Use `/workspace/tools/phone-agent-2-hardening-gate-v2.py` with a fresh config an
 
 At head `32c33350daf84bb3d540ba1f49badd1d6f9b4a4a`, step 0 changelog parsing passed and step 1 tidy completed successfully, but tidy changed only formatting in `TestShardResponseLogging.java`. The runner stopped before Error Prone or tests. The exact patch is `/workspace/phone-agent-2-logs/gate-17752-diagnosability-round-1/tidy.patch`.
 
-The one allowed repair is commit `310e1d02ef15e136016bb66f09aaaef8f836dc1b`, applying that test-formatting patch only. Repaired tree: `e4b07086da31a5224314a12dedd87e0d57ad7335`. The retry starts from step 0 at this pushed head, using the fresh retry log directory above.
+The one allowed repair is commit `310e1d02ef15e136016bb66f09aaaef8f836dc1b`, applying that test-formatting patch only. Repaired tree: `e4b07086da31a5224314a12dedd87e0d57ad7335`.
+
+## Retry result
+
+The full retry completed at head `310e1d02ef15e136016bb66f09aaaef8f836dc1b`. YAML parse, tidy, Error Prone compile, and `:solr:core:check -x test` passed. In the proof leg, the two new `TestShardResponseLogging` tests failed on the prior production source with the expected sensitive response-key and shard-URL markers. On the fixed head, all five focused classes passed: `TestShardResponseLogging` 2/2, `DistributedTermsComponentTest` 1/1, `DistributedExpandComponentTest` 1/1, `DistributedSpellCheckComponentTest` 1/1, and `TestDistributedGrouping` 2/2. Fresh XML total: 7 tests, 0 skipped, 0 failures, 0 errors. Gate result: GREEN. Logs: `/workspace/phone-agent-2-logs/gate-17752-diagnosability-round-1-retry`.
 
 ## Decisions
 
@@ -36,11 +40,12 @@ The one allowed repair is commit `310e1d02ef15e136016bb66f09aaaef8f836dc1b`, app
 | Proof base | decided: restore only `SolrResponseUtil.java` from the prior gated head and keep the added tests | none | Phone Agent 2 |
 | Failure outside repair scope | default: stop and record the exact failure | if repair exceeds WORKFLOW.md Gate repairs, mark HANDED BACK and return the item to implementation | Nick |
 
-## On green
+## Completed
 
-1. Write a new top section in `receipts/SOLR-17752.md` with original head, any repair commits, gated head, host/date, runner/log paths, step results, proof failure text, and fresh XML counts.
-2. Write `reports/pool-pr5171-diagnosability-round-1.md` with emitted fields, the leak-path review, diagnosability findings, test results, verdict, and any PR-description follow-up.
-3. Mark this gate and its claim DONE in the same push as the receipt and report. Refresh `OPEN-WORK.md` and read all posted records back.
+1. Added the green retry to `receipts/SOLR-17752.md`, including the tidy repair, exact proof failures, fresh XML counts, and the PR draft.
+2. Added `reports/pool-pr5171-diagnosability-round-1.md` with the emitted-field audit, leak paths, diagnostic tradeoff, test results, and OPEN-READY verdict.
+3. Updated the existing PR description to match the tested head. Its title and open state remain unchanged; no comment or Jira entry was posted.
+4. Marked this gate, its claim, and the review assignment and claim DONE in the same coordination push. Refreshed `OPEN-WORK.md`.
 
 If any step cannot be verified, record it here and stop.
 
@@ -48,16 +53,15 @@ If any step cannot be verified, record it here and stop.
 
 - [x] head confirmed by ls-remote
 - [x] diff scope confirmed
-- [ ] step 0 changelog YAML parse
-- [ ] step 1 tidy clean, or repaired and recorded
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg, expected failure by content
-- [ ] step 4 focused head run, counted from fresh XML
-- [ ] step 5 module check
-- [ ] receipt written
-- [ ] report written
-- [ ] public PR-description follow-up resolved with Nick
-- [ ] gate DONE, claim DONE
+- [x] step 0 changelog YAML parse
+- [x] step 1 tidy clean after the recorded repair
+- [x] step 2 Error Prone compile
+- [x] step 3 proof leg failed by the two expected leakage markers
+- [x] step 4 focused head run, counted from fresh XML
+- [x] step 5 module check
+- [x] receipt and report written
+- [x] existing PR description updated and read back
+- [x] gate DONE, claim DONE
 
 ## Deliverable and limits
 
