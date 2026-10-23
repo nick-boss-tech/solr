@@ -1,6 +1,6 @@
 # Gate job: SOLR-16155 (value-bearing causes in update errors)
 
-Status: CLAIMED (claims/pool-phone-agent-gate-SOLR-16155-phase-cause-redaction.md)
+Status: HANDED (to phone-agent-2 at owner direction 2026-10-23; it claims under claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction.md and sets CLAIMED)
 
 - Branch: `solr-16155-submit`. Head: `323bafea9e097d05e46f2f088e5034f6fce171ec` (fork ref and PR head read back on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
 - Prior gated tree: `ab394c8d916b6452a35bfcb6ff7002c41ab19ebd`, gated at `53196640988ae04b247dee19abfc074b024335a7` then squashed unchanged to prior PR head `9d1d0e5df9d91d5b18bc62c277c6baff5faee69c`. Those results do not cover this new head.
