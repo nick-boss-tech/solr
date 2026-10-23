@@ -9,6 +9,6 @@
 - Lease: live while heartbeats continue; stale 2 hours after the last heartbeat, and then takeable over under WORKFLOW.md, Claims. Attempts: 1. Idempotency key: SOLR-18010@d742eb99dd28be761b5f60aea6fbfc832e1b7a50.
 - Links: Ticket or parent: SOLR-18010, PR #5118. Category: Permissions and security declarations. Siblings: SOLR-18010 Linux gate and prior security.json Windows checks. Supersedes: none.
 
-Heartbeat: 2026-10-23T03:08:47Z
+Heartbeat: 2026-10-23T04:11:22Z
 
 Result: pending test run.
