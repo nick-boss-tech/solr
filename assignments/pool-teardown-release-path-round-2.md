@@ -1,6 +1,6 @@
 # Assignment: pool-teardown-release-path-round-2 (follow-up to the teardown ObjectTracker leak diagnosis)
 
-- Status: OPEN (unclaimed). Requested by vm4 on behalf of Nick Shanin, 2026-10-23.
+- Status: CLAIMED (claims/pool-windows-teardown-release-path-round-2.md). Windows source analysis and deterministic test preparation; Linux execution follows separately.
 - Builds on: `assignments/pool-teardown-objecttracker-leak.md` (DONE, report `reports/teardown-objecttracker-leak.md`). Read that report first. This assignment covers the one thing it leaves open: exactly which release call is skipped on each failure path, and whether a candidate change makes the tracker empty.
 - Scope: reproduce each path deterministically on a scratch branch, and test candidate changes there. Do not push to any PR branch, do not comment on any PR, do not open a JIRA issue, do not push a branch to `apache/solr`. Scratch branches go to the fork `nick-boss-tech/solr` as fast-forward pushes only.
 
