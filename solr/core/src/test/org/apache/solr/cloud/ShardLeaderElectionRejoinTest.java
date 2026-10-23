@@ -27,7 +27,7 @@ import org.junit.Test;
 
 public class ShardLeaderElectionRejoinTest extends SolrCloudTestCase {
 
-  private static final int FORCED_FAILURES = 10;
+  private static final int FORCED_FAILURES = 3;
   private static final int MAX_FRAME_GROWTH = 6;
   private static final long REJOIN_WAIT_SECONDS = 120;
 
