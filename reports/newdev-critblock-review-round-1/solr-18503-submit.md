@@ -19,3 +19,13 @@ Review (2026-10-23, vm4), same head cc5b84dfcd. - Pass 1 major finding, unchange
 - Repairs: none.
 
 Regate: `gates/SOLR-18503-review-pass-2.md`, GATE GREEN at cc5b84dfcd on vm4.
+
+## Pass 3
+
+Review (2026-10-23, vm4), same head cc5b84dfcd. - Regate on the same head cc5b84dfcd. No new findings in pass 3.
+- Pass 1 and pass 2 findings stand: `getField` scope call is open with the owner, and no test pins the `f` alias or the missing-field error.
+- Repairs: none.
+
+Regate: `gates/SOLR-18503-review-pass-3.md`, GATE GREEN at cc5b84dfcd on vm4.
+
+Final head: cc5b84dfcdd783ec2c2626aba4ba9931bb027893. Unit 42 DONE with the three pass sections.
