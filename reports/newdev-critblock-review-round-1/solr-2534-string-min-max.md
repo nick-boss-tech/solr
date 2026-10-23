@@ -11,3 +11,11 @@ Head reviewed: a75b012a20630acc706eb0427a1d31638b2e0c22. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-2534-review-pass-1.md`, GATE GREEN at a75b012a20 on vm4.
+
+## Pass 2
+
+Review (2026-10-23, vm4), same head a75b012a20. - Re-read the diff at the same head a75b012a20 against the ticket. No new findings in pass 2.
+- Pass 1 minor test-strength items stand, not repaired: `testMultiValuedStringFieldIsRejected` uses `expectThrows(Exception.class, ...)`, and no test covers mixing string and numeric arguments.
+- Repairs: none.
+
+Regate: `gates/SOLR-2534-review-pass-2.md`, GATE GREEN at a75b012a20 on vm4.
