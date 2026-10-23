@@ -1,6 +1,6 @@
 # Claim: paired PR 5117 and 5146 semantic review, round 1
 - Claimant host: phone-agent-2.
-- Status: CLAIMED.
+- Status: ENDED. The assignment explicitly excludes phone-agent-2 because this host prepared the branches. No review findings were published, and no PR activity or product changes occurred.
 - Assignment: assignments/pool-pr5117-5146-pair-review-round-1.md.
 - Slice: all four interaction and merge-order questions; reuse exact-head receipts; no speculative regates.
 - Capability tags: review, implementation, gate.
@@ -14,3 +14,5 @@
 - Decision rung: 1, inspect source and existing proof first.
 - Limits: no new PR, comments, Jira, email, upstream changes or force push. No product change is planned.
 Heartbeat: 2026-10-23T07:26:28.215185+00:00.
+
+ENDED: 2026-10-23T07:32:00Z. Eligibility mismatch: `OPEN-WORK.md` restricts the assignment to a review-side host other than phone-agent-2. Assignment reopened for an eligible host. No review findings, PR comments, or source changes were published.

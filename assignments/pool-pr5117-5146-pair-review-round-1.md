@@ -1,6 +1,6 @@
 # Assignment: PRs #5117 and #5146 pair review, CombinedQueryComponent overlap (round 1)
 
-Status: CLAIMED (claims/pool-phone-agent-2-pr5117-5146-pair-review-round-1.md)
+Status: OPEN
 
 Posted by the phone agent at the owner's direction, 2026-10-22. Source: Eric Pugh's "Nick-Boss-Tech Breach Report" (Claude.ai artifact, October 2026, Refresh 2), quoted on the dev list. Claim before starting by adding `claims/pool-<host>-{name}.md` per WORKFLOW.md. Verify every head below by ls-remote at claim time; the artifact is a snapshot and heads may have moved. If a tip has moved, work at the live tip and record it.
 
