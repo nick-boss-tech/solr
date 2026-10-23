@@ -1,11 +1,11 @@
 # Gate job: SOLR-16155 (value-bearing causes in update errors)
 
-Status: HANDED BACK (the one repaired-head retry failed at :solr:core:check -x test on changed JavabinLoaderTest.java source-pattern violations)
+Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction-attempt-3.md)
 
 - Branch: `solr-16155-submit`. Gated head: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a` (tidy repair head, fork tip read back on 2026-10-23). Original assigned head: `323bafea9e097d05e46f2f088e5034f6fce171ec`. If the tip moves before another repair push, stop and record the new tip here.
 - Prior gated tree: `ab394c8d916b6452a35bfcb6ff7002c41ab19ebd`, gated at `53196640988ae04b247dee19abfc074b024335a7` then squashed unchanged to prior PR head `9d1d0e5df9d91d5b18bc62c277c6baff5faee69c`. Those results do not cover this new head.
 - Merge base with upstream/main: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`.
-- Gate ID: `SOLR-16155-phase-cause-redaction`. Claim file: `claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction.md`.
+- Gate ID: `SOLR-16155-phase-cause-redaction`. Claim file: `claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction-attempt-3.md`.
 - Intended host: any capable Linux host. Capability tags: gate.
 - Module: `:solr:core`; test helper change in `:solr:test-framework`.
 - Focused classes: `org.apache.solr.update.DocumentBuilderTest`, `org.apache.solr.handler.loader.JavabinLoaderTest`, `org.apache.solr.schema.DenseVectorFieldTest`, `org.apache.solr.schema.RankFieldTest`, `org.apache.solr.update.processor.TolerantUpdateProcessorTest`, `org.apache.solr.handler.RequestHandlerBaseTest`, `org.apache.solr.update.SolrCmdDistributorTest`, `org.apache.solr.schema.TestLateInteractionVectorFieldInit`.
@@ -115,3 +115,25 @@ If any step cannot be verified, record the limitation and stop under the appropr
 - Gate outcome: HANDED BACK after the one repaired-head retry failed in step 5. No green receipt or DONE mark is appropriate.
 - Windows static review: `diff --check` passed and outbound files were reviewed. Linux evidence: steps 0-3 reused from attempt 1; step 4 passed 107 executed tests with 3 skips; step 5 core check failed on the logger-pattern rule while test-framework check passed. Full records are under `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-1/` and `attempt-2/`.
 - No force push, no upstream source write, no PR/comment/JIRA/email action. Commit as Nick Shanin without attribution trailers. No em dashes.
+
+
+## Fresh superseding attempt 3, 2026-10-23
+
+Nick explicitly authorized a new repair-and-gate attempt after the terminal hand-back. This is a fresh claim, not a reopening or edit of the ended claim. The prior attempt-1 and attempt-2 records and logs remain unchanged.
+
+- Claim: `claims/pool-phone-agent-2-gate-SOLR-16155-phase-cause-redaction-attempt-3.md`, posted at coordination commit `9ee71d0f3f49b089c863007e02be48a450c66d74`.
+- Product branch pre-repair tip confirmed from the fork: `df0abc65cfe0a6b8ee0695ee48f50023e7f2814a`, tree `ae47de910e065fe76d6d24763215224a11a11353`.
+- Intended mechanical repair: give `JavabinLoaderTest` the validator-required private static final `Logger log` field initialized from `MethodHandles.lookup().lookupClass()`, and use it for `ResponseUtils`; keep `LogListener.error(JavabinLoader.class)` targeted at the production logger.
+- Evidence directory: `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-3/`. All gate steps will rerun from step 0 on the committed and pushed repair, under the standard runner's host lock and inode guard.
+- At claim time: 225,079 of 837,408 inodes free (26.88%), above the 15% stop floor; no Gradle process was active.
+
+### Attempt 3 checklist
+- [x] Live fork tip, coordination tip, and ended prior claim checked.
+- [x] Fresh superseding claim posted.
+- [ ] Minimal logger-pattern repair committed and fast-forward pushed; exact head and tree verified.
+- [ ] Step 0 changelog parse and step 1 tidy clean on the pushed head.
+- [ ] Step 2 Error Prone main and test compilation completed, with execution counts recorded.
+- [ ] Step 3 both prior-production-code proof failures verified from fresh XML and logs.
+- [ ] Step 4 all eight focused test classes completed; counts, skips, and required assertions recorded.
+- [ ] Step 5 `:solr:core:check -x test` and `:solr:test-framework:check -x test` results recorded separately.
+- [ ] Final fork head/tree verified and gate disposition recorded.
