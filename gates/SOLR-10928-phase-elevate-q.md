@@ -5,7 +5,7 @@ Status: OPEN
 - Branch: `solr-10928-submit`. Head: `034c9e65b2ce755a0b7dc238e656edc91b103f4b` (fork tip, confirmed by ls-remote on 2026-10-23). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `b73f03976fa17b857bc0a81bc8af2c6b1c31e0bb`. Prior gated head: none recorded.
 - Gate ID: `SOLR-10928-phase-elevate-q`. Claim file: `claims/pool-<host>-gate-SOLR-10928-phase-elevate-q.md`.
-- Intended host: any capable Linux host. WORKFLOW.md lets any capable Linux host claim it if that host is busy.
+- Intended host: phone-agent-2 (owner direction, 2026-10-22: this gate goes to phone-agent-2). Other hosts: do not claim.
 - Capability tags: gate.
 - Module: `:solr:core`. Focused class: `org.apache.solr.handler.component.QueryElevationComponentParamTest`. Seed: `10928E1E10928E1E`.
 - Diff scope: 5 files, 90 insertions and 3 deletions against Base: solr/core/src/java/org/apache/solr/handler/component/QueryElevationComponent.java; solr/core/src/test/org/apache/solr/handler/component/QueryElevationComponentParamTest.java; solr/solr-ref-guide/modules/query-guide/pages/query-elevation-component.adoc; solr/solrj/src/java/org/apache/solr/common/params/QueryElevationParams.java; changelog/unreleased/SOLR-10928-elevate-q.yml
