@@ -1,6 +1,6 @@
 # Gate job: SOLR-16655 (selected fields beneath unselected child labels)
 
-Status: CLAIMED (claims/phone-agent-gate-SOLR-16655-phase-selected-descendants.md)
+Status: DONE (GATE GREEN at ea300ef237c8d2869f9e40ddc890878a9d233aac; receipt top section in receipts/SOLR-16655.md)
 
 - Branch: `solr-16655-submit`. Head: `6c5c11aaf5a4c0b27daec2b4ab39a9139e95ef1c` (fork and PR head confirmed on 2026-10-23). If the tip moves before claim or execution, record it and stop.
 - Prior gated head and patch parent: `5e2317443f4116a9e97330b0d6ce175cf44b54df`. Merge-base with upstream/main: `14c7aac0d151402b00259e2fb9bf5eed7049ec5d`.
@@ -97,3 +97,7 @@ Receipt plus this job's actual run record and DONE marks on coordination, with a
 
 - The retry-1 gate at 9596593aa808254842b7fa37e469a23f48ecfa46 failed at step 1 (tidy): the repair commit itself was defective. Splitting the text block into a template variable dropped the semicolon after the closing delimiter, so spotless reported a parse error at TestNestedUpdateProcessor.java:138 (';' expected). The branch's intended code never ran in retry 1; the failure was in the repair, recorded here rather than counted as a gate verdict on the patch.
 - Correction: commit ea300ef237c8d2869f9e40ddc890878a9d233aac adds the semicolon (one line), pushed fast-forward. The gate reruns in full from step 0 on ea300ef237c.
+
+## Verdict
+
+- GATE GREEN at ea300ef237c8d2869f9e40ddc890878a9d233aac (tree 4de4735017c7701882a2416c16b31b3a267c2357), full rerun log gate-16655-phase-retry2.log on vm1. Focused: 37 + 44 + 9 + 3 tests, 0 failures. Proof: both named methods failed on patch-parent production with the specified content. Fork tip and PR #5093 head verified equal to the gated head after the run. Completed 2026-10-23T19:21:00Z.
