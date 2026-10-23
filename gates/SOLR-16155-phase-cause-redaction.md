@@ -165,10 +165,17 @@ The single permitted full-gate retry is pinned to commit `96ed88e6dc17e50df1d1f8
 Fresh retry evidence directory: `/workspace/phone-agent-2-logs/SOLR-16155-phase-cause-redaction/attempt-3-retry/`. The earlier attempt-3 logs and attempt-1/attempt-2 histories remain preserved.
 
 - [x] Retry repair committed, pushed, and both product and proof worktrees pinned cleanly to the matching head.
-- [ ] Step 0 changelog parse.
-- [ ] Step 1 tidy.
-- [ ] Step 2 Error Prone main and test compilation.
-- [ ] Step 3 both prior-production-code proofs.
+- [x] Step 0 changelog parse.
+- [x] Step 1 tidy.
+- [x] Step 2 Error Prone main and test compilation.
+- [x] Step 3 both prior-production-code proofs.
 - [ ] Step 4 all eight focused test classes and strict fresh XML checks.
 - [ ] Step 5 core and test-framework module checks recorded separately.
 - [ ] Final branch/PR head verification and gate disposition.
+
+
+### Attempt 3 retry phase-2 wrapper correction (2026-10-23T20:32:14.096587+00:00)
+
+The initial phase-2 wrapper exited before standard-runner step 4 with `RuntimeError: Phase-two evidence already exists: 4-head`. Inspection confirmed `state.json` contains completed steps only through `3-proof-verdict-verified`; `4-head.log` was a zero-byte resume placeholder, not step-4 output, and there were no step-4/5 result files or active Gradle processes. The exact failure remains preserved in `phase-head-runner.log`; the empty file was preserved as `4-head.log.wrapper-placeholder`, with the diagnosis in `phase2-wrapper-preflight-correction.json`. No focused tests or module checks ran during the failed preflight.
+
+This is a continuation of the same retry, not another full retry: the corrected phase-2 wrapper/config will resume the standard runner at the unstarted step 4, reuse steps 0-3 without rerunning them, write continuation-suffixed runner artifacts, and retain the 16% inode monitor and normal host lock. If an actual gate step fails, the one-retry rule applies and this job will be HANDED BACK.
