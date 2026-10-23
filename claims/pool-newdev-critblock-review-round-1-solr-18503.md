@@ -8,3 +8,7 @@
 - Started: 2026-10-23T01:53:31Z (UTC).
 
 Heartbeat: 2026-10-23T01:53:31Z
+
+Result: 2026-10-23T02:26:01Z: pass 1 GREEN at cc5b84dfcd (vm4). Findings: the parser change widens the ticket (major, owner); the reference guide is not gated (minor). Pass 2 next on the same head.
+
+Heartbeat: 2026-10-23T02:26:01Z
