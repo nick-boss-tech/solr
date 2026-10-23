@@ -1,7 +1,7 @@
 # Claim: pool-teardown-objecttracker-leak
 
 - Claimant host: phone-agent-2.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/pool-teardown-objecttracker-leak.md`.
 - Slice: Whole diagnostic assignment, plus read-only diff audit of PR 5206 explicitly requested by Nick. No production edits, PR-branch pushes, PR comments, full module suites, or reruns of executed failing tests.
 - Capability tags used: review, premise-run.
@@ -12,3 +12,9 @@
 - Decision: owner-directed diagnosis takes precedence over unrelated queue work; existing claims and report checked absent at coordination 13d4e721230865c71bb0dcbca82505f3ca751c75.
 
 Heartbeat: 2026-10-23T15:59:00Z.
+
+Heartbeat: 2026-10-23T16:09:49Z.
+
+Result: 2026-10-23T16:09:49Z: Completed read-only diagnosis of all three CI failures and six PRs, including 5206. Assigned baseline passed once per class: CustomSort 1, CloudHttp2 20, ThinCache 2 tests; zero failures/errors/skips. Unresolved CustomSort factory-context path and stale-baseline/encoding limits recorded. No production edits or PR actions.
+
+DONE: 2026-10-23T16:09:49Z. Deliverables: `reports/teardown-objecttracker-leak.md`, `material/teardown-objecttracker-evidence.tar.gz`.
