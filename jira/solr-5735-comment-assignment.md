@@ -10,7 +10,7 @@ Status: HELD (waiting for Nick's approval in the Decisions table; do not claim u
 
 Post one comment on https://issues.apache.org/jira/browse/SOLR-5735, using the text in `pr-drafts/SOLR-5735/jira-comment.md` verbatim. Do not change the text, the markup, or the header.
 
-The comment reports that the ChaosMonkey tests still fail on current main, with a seed that reproduces the failures. It recommends keeping the ticket open.
+The comment reports that the original recovery-thread failure was not seen, that the safe-leader failure comes from the test's random update routing to a replica the monkey stops, and that the pull-replica timeout depends on the file system. It recommends a leaders-only client as the test fix and keeping the ticket open only if the original assertion returns.
 
 ## Decisions
 

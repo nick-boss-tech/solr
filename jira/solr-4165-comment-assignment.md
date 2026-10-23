@@ -10,7 +10,7 @@ Status: HELD (waiting for Nick's approval in the Decisions table; do not claim u
 
 Post one comment on https://issues.apache.org/jira/browse/SOLR-4165, using the text in `pr-drafts/SOLR-4165/jira-comment.md` verbatim. Do not change the text, the markup, or the header.
 
-The comment reports that a stop-side stall did not reproduce on current main. It recommends checking the startup delay before closing.
+The comment reports that a query to a live node did not stall while another node stopped, on current main, in a 4-node test with both abrupt and graceful stops. It recommends closing the ticket as Cannot Reproduce.
 
 ## Decisions
 

@@ -10,7 +10,7 @@ Status: HELD (waiting for Nick's approval in the Decisions table; do not claim u
 
 Post one comment on https://issues.apache.org/jira/browse/SOLR-6213, using the text in `pr-drafts/SOLR-6213/jira-comment.md` verbatim. Do not change the text, the markup, or the header.
 
-The comment reports that the unbounded rejoin recursion is still in the code on main, that the overflow was not reproduced, and it recommends keeping the ticket open.
+The comment reports two separate stack-overflow loops in leader election on main: the failed-watch retry, which is reproduced as a StackOverflowError, and the rejoin recursion, which is shown growing but not run to overflow. It links a branch for each fix and recommends keeping the ticket open.
 
 ## Decisions
 
