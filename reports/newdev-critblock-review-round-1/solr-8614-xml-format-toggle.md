@@ -19,3 +19,13 @@ Review (2026-10-23, vm4), same head 658872c20a. - Re-read the diff at the same h
 - Repairs: none.
 
 Regate: `gates/SOLR-8614-review-pass-2.md`, GATE GREEN at 658872c20a on vm4.
+
+## Pass 3
+
+Review (2026-10-23, vm4), same head 658872c20a. - Regate on the same head 658872c20a. No new findings in pass 3.
+- Pass 1 and pass 2 notes stand, not repaired: per-request writer churn in `LBSolrClient.clientFor`, and no Cloud or LB delegation tests.
+- Repairs: none.
+
+Regate: `gates/SOLR-8614-review-pass-3.md`, GATE GREEN at 658872c20a on vm4.
+
+Final head: 658872c20ab2722b3eb1ebe37f99893cab744680. Unit 44 DONE with the three pass sections.
