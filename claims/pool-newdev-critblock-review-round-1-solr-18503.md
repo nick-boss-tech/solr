@@ -12,3 +12,7 @@ Heartbeat: 2026-10-23T01:53:31Z
 Result: 2026-10-23T02:26:01Z: pass 1 GREEN at cc5b84dfcd (vm4). Findings: the parser change widens the ticket (major, owner); the reference guide is not gated (minor). Pass 2 next on the same head.
 
 Heartbeat: 2026-10-23T02:26:01Z
+
+Result: 2026-10-23T02:44:15Z: pass 2 GREEN at cc5b84dfcd (vm4). Pass 1 findings stand; no test pins the new `f` alias or the missing-field error. Pass 3 next on the same head.
+
+Heartbeat: 2026-10-23T02:44:15Z
