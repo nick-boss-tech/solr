@@ -46,4 +46,4 @@ Pass 1 result: NEARLY at `cd878023d3d0e351700f5365f692423fbe97d972`, blocked on 
 - All three pass regates GREEN at unchanged head `cd878023d3d0e351700f5365f692423fbe97d972`. Repairs: none. No product commit or branch push.
 - Skip convention checked at live coordination tip `efedec1587`: the source README (`solr/solr-ref-guide/README.adoc:29`) documents `-Prefguide.include=false` or `SOLR_REF_GUIDE_INCLUDE=false` for normal assemble/check. That excludes automatic guide dependencies, not an explicit guide-build task. This unit specifically required guide regates in its named handoff and prior receipt; no waiver was found, so they ran.
 - Existing probe and docs-only decision reused; reporter attachment and historical-version behavior remain unverified. No public action performed.
-- Completed local records are prepared for coordinator publication; this subtask did not push coordination.
+- The report, receipt, three gates, DONE claim and host heartbeat are published on coordination. No product branch push or public PR/comment/email action.
