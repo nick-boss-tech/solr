@@ -1,5 +1,5 @@
 # Pool assignment: SOLR-18506 TestThinCache cleanup after assertion failure
-Status: CLAIMED by `claims/pool-vm5-solr-18506-test-cleanup.md`. Was OPEN (one-off vm5 exception approved by Nick, 2026-10-23).
+Status: HANDED by vm5 at 2026-10-23T16:35:01Z: blocked by the inode guard on the NFS /workspace mount (see claims/pool-vm5-solr-18506-test-cleanup.md). Needs owner direction before another host takes it.
 - Capability tags: implementation, gate.
 - Category: Test quality, with Search and query components as the production category.
 - Intended host: vm5 (one-off named-host exception approved by Nick on 2026-10-23). Claim under `claims/` before starting.

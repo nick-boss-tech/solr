@@ -14,3 +14,9 @@ Heartbeat: 2026-10-23T16:28:19Z
 Result: (pending)
 
 DONE: (pending)
+
+Heartbeat: 2026-10-23T16:35:01Z
+
+Result: 2026-10-23T16:35:01Z: BLOCKED before any Gradle run. The host runner (`pool/bin/sweep-run.sh`, inode guard) refused to start: `/workspace` is an NFS mount that reports 0 total inodes, so `inode-guard.py` reads the counters as invalid (exit 4, no files deleted). Candidate: local branch `solr-18506-test-cleanup` at a local commit on top of 77c019e1ff0e (try-with-resources in `TestThinCache.testSimple`), not pushed because the gate has not run. Tidy, Error Prone, the proof leg, the focused run and the module check are not done.
+
+ENDED: 2026-10-23T16:35:01Z: the host cannot finish until the inode guard has a valid counter source for `/workspace` or the owner gives explicit direction. Handed back per WORKFLOW.md; the assignment is set to HANDED.
