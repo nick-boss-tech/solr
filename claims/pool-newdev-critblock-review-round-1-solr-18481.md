@@ -12,3 +12,7 @@ Heartbeat: 2026-10-23T00:31:31Z
 Result: 2026-10-23T01:02:44Z: pass 1 GREEN at 8f687ca04d (vm4). Findings: no test sends a request through the proxy (major); the proof leg does not compile on base (major, a consequence). Pass 2 next on the same head.
 
 Heartbeat: 2026-10-23T01:02:44Z
+
+Result: 2026-10-23T01:20:58Z: pass 2 GREEN at 8f687ca04d (vm4). Pass 1 findings stand. Pass 3 next on the same head.
+
+Heartbeat: 2026-10-23T01:20:58Z

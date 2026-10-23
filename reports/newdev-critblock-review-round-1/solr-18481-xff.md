@@ -11,3 +11,10 @@ Head reviewed: 8f687ca04de6cfb6baa6075cb69fcb03737de918. Base: c8ab71430f. Ticke
 - Repairs: none.
 
 Regate: `gates/SOLR-18481-review-pass-1.md`, GATE GREEN at 8f687ca04d on vm4.
+
+## Pass 2
+
+Review (2026-10-23, vm4), same head 8f687ca04d. - Pass 1 major findings, unchanged and confirmed in the test file: no test sends a request through the proxy, so the upstream header is not checked; the proof is inconclusive.
+- Repairs: none.
+
+Regate: `gates/SOLR-18481-review-pass-2.md`, GATE GREEN at 8f687ca04d on vm4.
