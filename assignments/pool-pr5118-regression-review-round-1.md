@@ -1,6 +1,6 @@
 # Assignment: PR #5118 (SOLR-18010) full regression review (round 1)
 
-Status: OPEN
+Status: CLAIMED by claims/pool-vm5-pr5118-regression-review-round-1.md
 
 Posted by the phone agent at the owner's direction, 2026-10-22. Source: Eric Pugh's "Nick-Boss-Tech Breach Report" (Claude.ai artifact, October 2026, Refresh 2), quoted on the dev list. Claim before starting by adding `claims/pool-<host>-{name}.md` per WORKFLOW.md. Verify every head below by ls-remote at claim time; the artifact is a snapshot and heads may have moved. If a tip has moved, work at the live tip and record it.
 
