@@ -2,7 +2,7 @@
 
 - Status: OPEN (unclaimed). Requested by vm4 on behalf of Nick Shanin, 2026-10-23.
 - Builds on: `assignments/pool-teardown-objecttracker-leak.md` (DONE, report `reports/teardown-objecttracker-leak.md`). Read that report first. This assignment covers the one thing it leaves open: exactly which release call is skipped on each failure path, and whether a candidate change makes the tracker empty.
-- Scope: reproduce each path deterministically on a scratch branch, and test candidate changes there. Do not push to any PR branch, do not comment on any PR, do not open a JIRA issue, do not push a branch to `apache/solr`. Scratch branches stay local or on the fork, and only after the main agent says so.
+- Scope: reproduce each path deterministically on a scratch branch, and test candidate changes there. Do not push to any PR branch, do not comment on any PR, do not open a JIRA issue, do not push a branch to `apache/solr`. Scratch branches go to the fork `nick-boss-tech/solr` as fast-forward pushes only.
 
 ## What "the release path" means
 
@@ -16,7 +16,7 @@ An object is released when its owner's close runs and reaches `SolrMetricsContex
 
 ## What is proven
 
-- Interrupted client stop. A probe on `f0adb05094`'s base reproduced the client failure in 3 ms. The interrupt makes `httpClient.stop()` throw `Exception on closing client` before the release, and the class check reports `HttpJettySolrClient`. The fix branch releases the client in `finally` and passes its regression test. Local branch only, not pushed.
+- Interrupted client stop. A probe on `f0adb05094`'s base reproduced the client failure in 3 ms. The interrupt makes `httpClient.stop()` throw `Exception on closing client` before the release, and the class check reports `HttpJettySolrClient`. The fix branch releases the client in `finally` and passes its regression test. Pushed to `nick-boss-tech/solr` branch `fix-interrupted-http-client-close` at `f0adb05094`.
 - Ordinary close. A plain close after real requests takes 0-4 ms. A close during an in-flight request takes 7 ms. Neither reproduces the 60-second CI wait.
 - Single-class reruns on `main` pass, with the CI seeds: `DistributedQueryComponentCustomSortTest` (1 test), `CloudHttp2SolrClientTest` (20 tests), `TestThinCache` (2 tests).
 - Full core suite on `main` with seed `FFF5A3C3AAC69084`: 5843 tests, 4 failures (`TestTlogReplica.testRecovery`, `TestTlogReplica.testKillLeader`, `CoreAdminHandlerTest.testDeleteInstanceDirAfterCreateFailure`, `TestCoordinatorRole.testNRTRestart`), and no ObjectTracker report. Log: `/workspace/gates/logs/vm4/leak-repro/full-core.log` on vm4. The leak did not reproduce on that run, so it depends on something CI has and the local run does not.
@@ -47,5 +47,5 @@ An object is released when its owner's close runs and reaches `SolrMetricsContex
 
 ## Owner decisions (not for this assignment)
 
-- Whether to push the local client fix (`f0adb05094`, `fix-interrupted-http-client-close`) to the fork so it can be reviewed, and whether to file a JIRA for the teardown problem.
+- Whether to file a JIRA for the teardown problem, and whether to open a PR for `fix-interrupted-http-client-close`.
 - Whether to change or comment on PR 5192 or any other PR, rerun CI, or run a full suite.
