@@ -1,6 +1,6 @@
 # Review assignment: SOLR-17844 restored sort assertions (round 1)
 
-Status: OPEN
+Status: CLAIMED (vm3, 2026-10-23T03:35:30Z)
 
 Posted by the phone agent at the owner's direction, 2026-10-22. One reviewer, one branch. Claim before starting by adding `claims/pool-<host>-review-SOLR-17844-round-1.md` per WORKFLOW.md, and work under that claim's lease.
 
