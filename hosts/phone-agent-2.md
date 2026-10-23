@@ -36,3 +36,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Heartbeat: 2026-10-23T07:32:00Z; ended the accidental paired PR review claim because its assignment excludes phone-agent-2. The assignment is open again; no review findings, PR actions, or product changes were made.
 
 - Heartbeat: 2026-10-23T07:34:00Z; claimed the recurring merged-PR follow-up promises audit, pass ad, from Store 1. This pass is read-only.
+
+- Heartbeat: 2026-10-23T07:42:00Z; claimed integrated SOLR-18555 phase-r4 SolrJ/query gate at unchanged head `07953eab473f3f05853916f7efb4a42edc1edb0c`. The gate requires core, SolrJ, SolrJ HTTP, and reference-guide checks.

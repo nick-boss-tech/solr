@@ -1,10 +1,11 @@
 # Gate job: SOLR-18555 (Integrated supplied-text highlighting with V2 QUERY)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-phone-agent-2-gate-SOLR-18555-phase-r4-solrj-query.md)
 
 - Branch: `solr-18555-query-client-support`. Head: `07953eab473f3f05853916f7efb4a42edc1edb0c` (fork tip, confirmed by ls-remote on 2026-10-20). If the tip has moved at claim time, stop and record the new tip here.
 - Base: `7c859a4d0eeae897542e21046e059f6fca45a6e8`. Prior gated head: none recorded. The earlier OPEN entry at `0c6aae3162f29a7ae2f62fb226cefdf9c365dd63` was updated before a gate host claimed it.
 - Gate ID: `SOLR-18555-phase-r4-solrj-query`. Claim file: `claims/pool-<host>-gate-SOLR-18555-phase-r4-solrj-query.md`.
+- Claimant host: phone-agent-2. Logs: `/workspace/phone-agent-2-logs/SOLR-18555-phase-r4-solrj-query`.
 - Intended host: any capable Linux gate host with the Solr reference-guide npm dependencies available.
 - Capability tags: gate, npm.
 - Modules: `:solr:core`, `:solr:solrj`, `:solr:solrj-jetty`, and `:solr:solr-ref-guide`.
