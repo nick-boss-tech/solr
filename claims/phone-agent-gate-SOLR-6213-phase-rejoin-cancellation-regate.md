@@ -7,3 +7,5 @@
 - Lease: live while heartbeats continue; stale 2 hours after the last heartbeat, and then takeable over under WORKFLOW.md, Claims.
 - Idempotency key: `gate-solr-6213-phase-rejoin-cancellation-regate@2193e0104a3fa5c6235d4f843f1d6930afeb65d1`.
 Heartbeat: 2026-10-23T20:33:00Z
+
+Status: DONE (gate GREEN at 2193e0104a3, 2026-10-23; see receipts/SOLR-6213.md).
