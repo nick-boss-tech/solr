@@ -34,6 +34,7 @@ import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+import org.apache.lucene.util.SuppressForbidden;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.metrics.otel.MetricExporterFactory;
@@ -41,6 +42,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+@SuppressForbidden(reason = "Uses the JDK HTTP server to receive OTLP exports, and reflection to build the exporter for the test")
 public class TestOtelMetricExporterConfiguration extends SolrTestCaseJ4 {
   private Properties previousOtelProperties;
 
