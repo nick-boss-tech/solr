@@ -3,7 +3,7 @@
 Status: CLAIMED (claims/pool-solr-14649-sha512-implementation-windows.md)
 
 - Capability tags: implementation.
-- Category: 7, permissions and security declarations.
+- Category: 6, configsets and the filestore.
 - Intended host: Windows for source implementation; a capable Linux host for the exact-head gate.
 - Posted by: Windows host, 2026-10-23, at the owner's direction in this session.
 - Store: follow-up to `reports/csv-critblock-03.md`. That report checked the manifest digest and explicitly left the signing path unresolved. This is separate from the Linux-only slice in `assignments/pool-criticals-rest-round-1.md`.
