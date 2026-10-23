@@ -1,6 +1,6 @@
 # Pool assignment: focused Linux proof for teardown release paths, round 2
 
-Status: OPEN
+Status: CLAIMED (vm4, 2026-10-23T19:20:00Z; claim `claims/pool-teardown-release-path-round-2-linux-proof.md`)
 
 - Capability tags: implementation, premise-run.
 - Category: Core admin and cores (10), with SolrJ and clients (4) and Test quality (13).
