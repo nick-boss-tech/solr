@@ -1,6 +1,6 @@
 # Pool assignment: SOLR-11787, re-check the close-obsolete verdict against SOLR-6213
 
-Status: OPEN
+Status: CLAIMED (claims/solr-11787-reverdict-round-1.md)
 
 - Capability tags: review, draft.
 - Category: Logging and leader election.
