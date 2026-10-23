@@ -9,7 +9,7 @@
         "artifacts": [
           {
             "url": "question-answer-request-handler-1.0.jar.tmp",
-            "sig": "XI8KgCzsr0UCPfz+fRMz50Iy0eFSzoxnxtqGPiuTfF8dUrtRrR8PCiKJzXTw9v+dGiL920iVLfrbsFcETnLHyyAyVPsQoI932k5MduWtLA0CnBc3j/bF1ZzKglOfxgoM"
+            "sig": "bkxg4pQO3LjVBTwosAJKZgXKtN77Fb1ecre85T6Z8yDVDZKXWZoZO4Qtg+7Sd9fP1iVJpcI/2XGIlFZSK+ivWY1jSFayJ4WKOHM6umMalINLpn6hpth13bowUQb0hpIRJkifR16J+Vjh7vuwbFszzYubkoeUB60Dhx6HbwUhWBkgGXtAGIhZGmWo7QYaVGyI7wMWGh1hI0Ga41taBcpgN3M4BT19kDPryARfd5DlfzIhX0gwEPlb1K1m2n9SJLItZoR31XBQeg81XiM67UERxo9FBq3gLN/QUdIEB5GNDy4WBo5J/M/YDFtR7T81oNNbGh+GPF1guUQLY3TXi/YXug=="
           }
         ],
         "manifest": {
@@ -46,7 +46,7 @@
         "artifacts": [
           {
             "url": "question-answer-request-handler-1.1.jar.tmp",
-            "sig": "qZu+1kY5GmKKhKjiKG/Ws5Xv3NMKyEtX+a+gnwSGzgFsXhVTX3RdFoINnr5O0RGEKOLAXyErgDa6myHsVP1LkesydEiibv93hbA7+BIPdeweOI9rFHFVqRDgNbxvInr3"
+            "sig": "CRd7Irncf+YueBIy0yYEZWJCmdZYZVVlQSmz8tL3CXjtLYGyI4R4pjTOfUzzJmMgSZambVm47rEjtBQiSWVovl5wuvXowRbcVYBdNrm2QkM+WqAnEwFTewDaX/34JAZSxIbpfV0c0w39XnzU2rdoDtxccyUSWFCTgzKg9sjm+3AYhj8HbGwz6vFQRwRkjN00ZVRWkBJ3LRJKmZ+G1gpmycm2LJMZoxzp8GjJMyM9uUYGHKgIJNwNvm9+0kgDE4Gf6SKdkwSuHb7Lau1PjeF6s3NX/n+pbBOBLQR4DNZ9ssQR7cte3xYOGhq6BURVVrcJE7LQMb0U8OxIi3ijgv7RFw=="
           }
         ],
         "manifest": {
