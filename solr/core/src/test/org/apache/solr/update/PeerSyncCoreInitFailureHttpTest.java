@@ -87,7 +87,7 @@ public class PeerSyncCoreInitFailureHttpTest extends SolrTestCaseJ4 {
     try (SolrCore good = jetty.getCoreContainer().getCore("good");
         PeerSync peerSync =
             new PeerSync(
-                good, List.of(jetty.getBaseUrl() + "/bad"), 10, cantReachIsSuccess)) {
+                good, List.of(jetty.getBaseUrl() + "/bad"), 10, cantReachIsSuccess, false, false)) {
       return peerSync.sync();
     }
   }
