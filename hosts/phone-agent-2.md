@@ -12,3 +12,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Heartbeat: 2026-10-23T00:20:26Z; directed round `phone-agent-2-blockers-round-1` completed. Report and terminal claim delivered; no build remains running. SOLR-17844 green, SOLR-17840 and SOLR-18446 explicitly handed back.
 
 - Heartbeat: 2026-10-23T06:09:30Z; completed SOLR-16914 unit 15 from the named NEARLY handoff. All three guide regates are GREEN at the unchanged head; no product repair or running build.
+
+- Heartbeat: 2026-10-23T06:12:30Z; took over SOLR-5821 unit 23 from the named NEARLY handoff on the newdev/Blocker/Critical review round. Running the guide regates, then passes 2 and 3.
