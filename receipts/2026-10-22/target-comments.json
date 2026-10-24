@@ -1,0 +1,52 @@
+[
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18407",
+    "comment_id": "18130097",
+    "created": "2026-10-22T03:02:29.052+0000",
+    "updated": "2026-10-22T03:02:29.052+0000",
+    "excerpt": "> When running Solr 10 on Java 17 ... I'm in disbelief. Solr 10's minimum supported Java version is 21. SolrJ 10 runs with Java 17 but that's not pertinent here.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18407?focusedCommentId=18130097"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17971",
+    "comment_id": "18130281",
+    "created": "2026-10-22T12:17:58.507+0000",
+    "updated": "2026-10-22T12:17:58.507+0000",
+    "excerpt": "Thanks Amrit! And for your review Pierre.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17971?focusedCommentId=18130281"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17780",
+    "comment_id": "18130382",
+    "created": "2026-10-22T14:58:56.175+0000",
+    "updated": "2026-10-22T14:58:56.175+0000",
+    "excerpt": "I chose to backport this issue to 9,x for delivery in 9.12. Why not; automation makes this easy.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17780?focusedCommentId=18130382"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18267",
+    "comment_id": "18130383",
+    "created": "2026-10-22T15:00:51.125+0000",
+    "updated": "2026-10-22T15:00:51.125+0000",
+    "excerpt": "Coming to 9.12 because... why not? Automated backports is a beautiful thing.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18267?focusedCommentId=18130383"
+  },
+  {
+    "person": "Jason Gerlowski",
+    "username": "gerlowskija",
+    "issue": "SOLR-18568",
+    "comment_id": "18130390",
+    "created": "2026-10-22T15:10:45.033+0000",
+    "updated": "2026-10-22T15:10:45.033+0000",
+    "excerpt": "The thread-hangs we found were different I believe, but my team hit the same end-result you describe here (i.e. SolrCores failing to shut down) over in SOLR-18244. Either our shutdown logic needs some close inspection to make sure we catch all of these potential hang-ups, or we should pursue the timeout idea you mentioned. There's been waay too many \"stuck thread\" issues lately...",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18568?focusedCommentId=18130390"
+  }
+]
