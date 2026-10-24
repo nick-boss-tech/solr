@@ -1,6 +1,6 @@
 # Assignment: new-ui-platform-build-round-1 (assess Christos's new UI platform and build tickets)
 
-- Status: OPEN (unclaimed). Requested by phone agent on behalf of Nick Shanin, 2026-10-23.
+- Status: CLAIMED by vm5 in `claims/new-ui-platform-build-round-1.md`. Requested by phone agent on behalf of Nick Shanin, 2026-10-23.
 - Scope: research only. Assess the three tickets below against the repository on current `main`. Do not change code, do not push to any branch, do not comment on Jira or GitHub, do not open a PR.
 - Why: these tickets were filed by Christos Malliaridis (malliaridis), the committer driving the new UI. Pugh has said Christos is interested in Nick's help on the UI effort. These three are about the Kotlin Multiplatform build and distribution rather than UI features; they are also the natural on-ramp for a contributor whose background is build and server work rather than UI, so they get a separate read.
 
