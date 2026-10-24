@@ -1,6 +1,6 @@
 # Assignment: new-ui-index-query-components-round-1 (assess Christos's Index & Query and shared-component UI tickets)
 
-- Status: OPEN (unclaimed). Requested by phone agent on behalf of Nick Shanin, 2026-10-23.
+- Status: CLAIMED (vm4, 2026-10-24T04:13:35Z; claim `claims/new-ui-index-query-components-round-1.md`). Requested by phone agent on behalf of Nick Shanin, 2026-10-23.
 - Scope: research only. Assess the eight tickets below against the new UI code at the repository root (`ui/`, Kotlin Multiplatform) on current `main`. Do not change code, do not push to any branch, do not comment on Jira or GitHub, do not open a PR.
 - Why: these tickets were filed by Christos Malliaridis (malliaridis), the committer driving the new UI. Pugh has said Christos is interested in Nick's help on the UI effort. Before Nick volunteers publicly on any of them, each ticket needs a grounded read: what already exists, what is actually missing, and what the smallest startable slice is.
 
