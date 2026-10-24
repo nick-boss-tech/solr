@@ -1,0 +1,13 @@
+# Claim: solr-17988-docs-refguide-build-round-3
+- Claimant host: `phone-agent-2`, matching `hosts/phone-agent-2.md`.
+- Status: LIVE.
+- Job or assignment: `assignments/solr-17988-docs-refguide-build-round-1.md` (owner-authorized standalone-clone retry of the SOLR-17988 Ref Guide build and checks).
+- Slice: At the fixed docs head `16d3005293d3c6a047277bc586b30e05b6b6ef11`, run exactly `:solr:solr-ref-guide:buildLocalSite`, `:solr:solr-ref-guide:checkSiteLinks`, and `:solr:solr-ref-guide:checkCliDocsUpToDate` in order. Use a true standalone clone with its own `.git` directory, the detached host-standard runner, and the phone-agent-2 Gradle lock. Do not edit docs or source files, retarget the branch, or post PR/Jira/GitHub text.
+- Capability tags used: `npm`, `sweep`. Host: `phone-agent-2`; Node.js 24.19.0, npm 11.17.0, OpenJDK 21.0.12.1 at `/usr/lib/jvm/java-21-openjdk-amd64`; `GRADLE_USER_HOME=/home/ubuntu/.gradle`.
+- Started: 2026-10-24T17:16:20Z (UTC).
+- Lease: live while the clone and run proceed. Host lock: `/workspace/tools/.gradle-phone-agent-2.lock`. Retry attempt: 3. Idempotency key: `solr-17988-docs-refguide-build-round-3@phone-agent-2`.
+- Planned standalone clone: `/workspace/solr-17988-docs-standalone-r3`. Planned logs: `/workspace/logs/solr-17988-docs-refguide-build-round-3/solr-17988-docs-refguide-build-round-3/`.
+- Docs branch: `solr-17988-docs` at the expected fixed SHA; last `git ls-remote` check returned `16d3005293d3c6a047277bc586b30e05b6b6ef11`. Recheck before cloning and stop without retargeting if it moved.
+- Decision ladder: rung 3. The owner's explicit authorization settles the use of a standalone clone after the prior Antora 3.1.12 failure on the linked worktree; the assignment names the exact three tasks and pinned head. The generated local playbook uses the running checkout's root directory with `branches: HEAD`; no playbook or docs changes are authorized.
+- Supersedes: `claims/solr-17988-docs-refguide-build-round-2.md`, whose terminal handoff is `claims/solr-17988-docs-refguide-build-round-2-handed.md`. The initial attempt and round-2 result/logs remain preserved and unchanged.
+- Coordination rule: the original assignment remains `HANDED` and immutable under `WORKFLOW.md`; this retry and its result are recorded only in new add-only claim/report files. The latest refreshed coordination-ui head before claim was `b6b671f964e543c95ba6aef702f62269d243fad0`.
