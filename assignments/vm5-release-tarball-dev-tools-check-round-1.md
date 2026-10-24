@@ -3,6 +3,7 @@
 Status: OPEN
 
 - Intended host: vm5 (it holds the RC3 smoke loop and the release-check setup). Claim as `claims/vm5-release-tarball-dev-tools-check-round-1.md` before starting.
+- Owner direction (2026-10-24, after posting): the RC3 smoke loop is stood down. Its several failing runs already answered the owner's question; start no new RC3 runs. vm5's build capacity goes to this check instead, at full strength (see Method step 3).
 - Capability tags: `records`.
 - Source: PR #5222 (SOLR-18119: Exclude dev-tools from RAT checks) and David Smiley's comment on it, 2026-10-24: https://github.com/apache/solr/pull/5222 (issue comment, 19:17:20Z).
 
@@ -25,7 +26,7 @@ The proposed end state, built locally and never pushed:
 2. Unpack the tarball into a clean directory with no `.git`. This is the no-git case the RAT fallback scan exists for.
 3. From the unpacked tree, using the same toolchain handling as the RC3 loop (record how the Gradle wrapper and properties were supplied, since the archive is not a checkout):
    - Run the RAT task. It must pass in fallback mode.
-   - Run the build check the tree supports: `check -x test` for the root project if the host's budget allows, else `:solr:core:compileJava :solr:core:compileTestJava` plus `:solr:distribution:assembleBinary`, and say which was run.
+   - Run the full check, tests included: the big gate treatment adapted to a tarball (no tidy, no git steps). Root-project `check` if it completes; if a single run cannot cover the root project, run `:solr:core:check` complete and say so plainly in the report, with the reason. A reduced compile-only run does not satisfy this step.
 4. If anything fails, determine whether the failure names a dev-tools path or a file that dev-tools would have supplied. A failure with no dev-tools connection is reported as unrelated, with its own evidence; do not fix either kind in this assignment.
 
 ## Acceptance
