@@ -1,7 +1,7 @@
 # Claim: pool-ui-SOLR-17911
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/pool-ui-tickets-round-1.md`, one ticket per claim. Owner answer A (Nick Shanin, 2026-10-24) granted vm6 the `ui` and `jvm-tests` tags; the host file is updated in this commit.
 - Slice: SOLR-17911 (file content viewer). The component and its test already exist on fork branch `solr-17911-file-content-viewer` at `8047b99ef0`. This claim is the gate: verify the branch's tests and spotless on a fresh checkout of that commit, and record the result. No code change.
 - Capability tags used: ui, jvm-tests.
@@ -16,3 +16,7 @@ Heartbeat: 2026-10-24T07:50:26Z
 Run: job `pool-ui-17911-8047b99ef0-075259`, log dir `/workspace/gates/logs/vm6/pool-ui-17911/`, head `8047b99ef0`, started 2026-10-24T07:53:16Z (UTC). Steps: spotless, then `:shared:jvmTest --tests org.apache.solr.ui.views.files.FileContentViewerTest` through `pool/bin/bg-steps.sh`, with the stand-in libEGL and SOFTWARE_FAST.
 
 Heartbeat: 2026-10-24T07:53:16Z
+
+Result: 2026-10-24T08:07:00Z: PASS at head 8047b99ef0. `:shared:spotlessCheck` rc=0 (BUILD SUCCESSFUL), and `:shared:jvmTest --tests org.apache.solr.ui.views.files.FileContentViewerTest` rc=0 (BUILD SUCCESSFUL in 1m 58s). XML `ui/shared/build/test-results/jvmTest/TEST-org.apache.solr.ui.views.files.FileContentViewerTest.xml`: tests 3, failures 0, errors 0, skipped 0. Log: `/workspace/gates/logs/vm6/pool-ui-17911/pool-ui-17911-8047b99ef0-075259/`. Conclusive for the software-renderer JVM tests; GL is not exercised, and the component uses no Canvas, DrawScope or graphicsLayer, so it is not gl-blast-radius. Note: sweep-run copies only build/test-results/test, so the jvmTest XML was read from the worktree, not from the log dir.
+
+DONE: 2026-10-24T08:07:00Z. Deliverables: this claim; no branch or PR change.
