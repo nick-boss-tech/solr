@@ -7,7 +7,7 @@ Facts about the new UI effort, kept current as the factory learns them. The asse
 - Owner: Christos Malliaridis (malliaridis), committer. Eric Pugh relayed on 2026-10-23 that Christos is interested in Nick's help and would reach out.
 - The new UI is Kotlin with Compose Multiplatform, living at the repository root of apache/solr as `ui/`, with `platform/` and `kotlin-js-store` alongside. It is its own build: `ui/settings.gradle.kts` sets rootProject.name = "solr-ui" (independent sub-project since PR #4650, September 2026). Run its tasks from the repo root as `./gradlew -p ui <task>`.
 - Modules: `ui/shared` (the bulk of the components and tests), `ui/webApp` (the browser app), `ui/desktopApp` (desktop clients; its build already declares native distributions for macOS, Windows, and Linux).
-- SOLR-16465 (migrate the Admin UI) was retitled to a React migration and is Resolved; it is not the live effort. The live effort is this Kotlin UI and the roughly 63 tickets under Christos's name.
+- SOLR-16465 (migrate the Admin UI) was retitled to a React migration and is Resolved; it is not the live effort. The live effort is this Kotlin UI. The ticket census is at `material/ui-tickets.md`: the working set is 67 tickets (the `new-ui` label plus everything Christos reported), 28 of them open, 19 assessed in the round 1 reports and the rest in `assignments/new-ui-assessment-round-2.md`.
 
 ## Test setup
 
