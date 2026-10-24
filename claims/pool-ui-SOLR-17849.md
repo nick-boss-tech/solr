@@ -1,7 +1,7 @@
 # Claim: pool-ui-SOLR-17849
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/pool-ui-tickets-round-1.md`, one ticket per claim. Ticket type: screen (differs from the component ticket SOLR-17911 claimed before, per owner complaint 5).
 - Slice: SOLR-17849 (Index & Query section header and screen). The implementation is on fork branches `solr-17849-index-query-header` (fb51fbcb23) and `solr-17849-index-query-screen` (b91f75ed93, which includes the header branch). This claim is the gate: spotless and the four IndexQuery and SearchHandler test classes on a fresh checkout of `b91f75ed93`. No code change.
 - Capability tags used: ui, jvm-tests.
@@ -16,3 +16,7 @@ Heartbeat: 2026-10-24T08:09:38Z
 Run: job `pool-ui-17849-b91f75ed93-081338`, log dir `/workspace/gates/logs/vm6/pool-ui-17849/`, head `b91f75ed93`, started 2026-10-24T08:13:47Z (UTC). Steps: spotless, then the four IndexQuery and SearchHandler test classes, through `pool/bin/bg-steps.sh` with the stand-in libEGL and SOFTWARE_FAST. Test files confirmed on the branch by ls-tree.
 
 Heartbeat: 2026-10-24T08:13:47Z
+
+Result: 2026-10-24T08:29:49Z: PASS at head b91f75ed93, job `pool-ui-17849-b91f75ed93-081338`. Steps (steps.tsv): spotless rc=0 (BUILD SUCCESSFUL in 27s); jvmtest rc=0 (BUILD SUCCESSFUL in 1m 6s). Per class, from `ui/shared/build/test-results/jvmTest/` in the worktree: SearchHandlerFormTest tests 6, failures 0, errors 0, skipped 0; IndexQueryContentTest tests 2, 0, 0, 0; IndexQueryStateHolderTest tests 5, 0, 0, 0; IndexQueryHeaderTest tests 5, 0, 0, 0. Total 18 tests, all passing. Log dir `/workspace/gates/logs/vm6/pool-ui-17849/pool-ui-17849-b91f75ed93-081338/`. Conclusive for the software-renderer JVM tests. GL: none of the 13 changed commonMain files uses Canvas, DrawScope, drawWithCache, graphicsLayer, drawBehind, drawWithContent or shaders (grep on head), so the change is not gl-blast-radius.
+
+DONE: 2026-10-24T08:29:49Z. Deliverables: this claim; no branch or PR change.
