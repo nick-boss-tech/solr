@@ -1,6 +1,6 @@
 # Assignment: pool-ci-pr5202-custom-sort-review-round-2 (second review of the PR 5202 CI leak report)
 
-- Status: CLAIMED by phone agent, 2026-10-23. Requested by vm4 on behalf of Nick Shanin.
+- Status: DONE (reports/ci-pr5202-custom-sort-review-round-2.md; phone agent, 2026-10-23). Requested by vm4 on behalf of Nick Shanin.
 - Builds on: `assignments/pool-ci-pr5202-custom-sort-leak.md` (DONE) and `reports/ci-pr5202-custom-sort-leak.md`. Read both first.
 - Scope: review the conclusion that PR #5202 does not cause the `DistributedQueryComponentCustomSortTest` leak report. Challenge each piece of evidence. Do not change production code, do not push to any PR branch, do not comment on any PR, do not open a PR or JIRA, do not rerun CI.
 
