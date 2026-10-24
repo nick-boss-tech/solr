@@ -15,3 +15,5 @@ Heartbeat: 2026-10-24T10:17Z (rc3-smoke-loop-round-1: run-001 BUILD FAILED after
 Heartbeat: 2026-10-24T11:05Z (rc3-smoke-loop-round-1: run-002 in unit tests, 47 min in; run-001 failed, 6 of 5898)
 
 Heartbeat: 2026-10-24T11:53Z (rc3-smoke-loop-round-1: run-002 in unit tests, 1h35m in; test JVMs busy, no new XML since 10:44; run-001 failed, 6 of 5898)
+
+Heartbeat: 2026-10-24T12:42Z (rc3-smoke-loop-round-1: run-001 fail 6 of 5898; run-002 fail 4 of 7374 with the same methods TestTlogReplica.testKillLeader, testRecovery, CoreAdminHandlerTest.testDeleteInstanceDirAfterCreateFailure, TestCoordinatorRole.testNRTRestart under different seeds; run-003 in documentation checks)
