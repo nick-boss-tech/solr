@@ -117,3 +117,19 @@ Not verified: no build or test was run. Research only, per the assignment.
 (d) Verdict: NEEDS CHRISTOS. Question: should Solr move to Gradle's native verification metadata with sha256 maintained by Renovate (path 1), or add PGP signature verification with its roughly 100 missing keys (path 2)?
 
 Not verified: no build was run and PR #3828 was not inspected beyond its ticket comment. Research only, per the assignment.
+
+## SOLR-18191: Disable lenient JSON parsing at API level
+
+(a) Ask: stop accepting numbers where the API expects strings, so `"name": 123` fails instead of being converted to `"123"`. The ticket's table covers configset and collection creation: a plain number works, a leading-zero number returns 500, a negative number returns 400, and a very large number returns 500. Open, labels `V2`, `api`, `json`, `pull-request-available`. Unassigned. Comments (renato, malliaridis, 2026-04-20 to 04-24): the author agrees numbers should be rejected, but says the change "can break compatibility" and "should likely be discussed or voted in the dev mailing list". The author asked whether the commenter would start that discussion.
+
+(b) Exists today on main:
+- The v2 request body is read by `solr/core/src/java/org/apache/solr/jersey/MessageBodyReaders.java` (`CachingJsonMessageBodyReader`, line 52). It builds a `JacksonJsonProvider` on `SolrJacksonMapper.getObjectMapper()` and turns on only `JsonParser.Feature.ALLOW_COMMENTS`.
+- `solr/core/src/java/org/apache/solr/jersey/SolrJacksonMapper.java` (`createObjectMapper`, around line 55) sets `FAIL_ON_UNKNOWN_PROPERTIES=false` and the null inclusion. It does not change scalar coercion.
+- Nothing on main sets a coercion option (`CoercionConfig`, `setCoercion`, `ALLOW_COERCION_OF_SCALARS`). Jackson's default is to accept a number for a String field, which is the lenient behavior the ticket describes.
+- The leading-zero row is a parser error from Jackson, not a coercion. Disabling coercion would not change that row. Its 500 status is a separate error-mapping question. Not verified here.
+
+(c) Missing: a decision on scope and a compatibility check. The mapper change is small. Disabling coercion on the shared mapper changes every v2 body that sends a number for a string, and `SolrJacksonMapper` is also used for other readers and writers. Nothing has been run, so the set of existing tests that send numbers for strings is not known.
+
+(d) Verdict: NEEDS CHRISTOS. Question: should numeric input be rejected for all v2 request bodies (a compatibility break that the ticket's author wants on the dev list first), or only for the configset and collection create endpoints?
+
+Not verified: no code change, no test run, no dev-list search. Research only, per the assignment.
