@@ -59,3 +59,19 @@ Finding, a3603260ea (SOLR-17820). The `ClusterStatus.java` and `ClusterStatusTes
 Not verified: the backports were not built or tested here. A patch that applies cleanly shows the premise holds textually, not that it compiles at RC3.
 
 Verdict for item 2: seven of eight CLEAN. One cosmetic finding (a3603260ea, AGENTS.md hunk).
+
+## Item 4: the changelog state (1a45846c45, 3702672a00, bba4024eed, 749712b719)
+
+Verdict: FINDING on the dependency list (cross-category duplicates remain). The SOLR-18450 check is CLEAN. The cuVS point is a question for the owner, not a defect. Checked at RC3 `749712b719` (CHANGELOG.md and `changelog/v10.1.0/`). The RC2 complaint text is not in this assignment, so the "two biggish issues besides" were not checked.
+
+1. Dependency list de-duplicated? Partly. No artifact appears twice within one list. Across lists it does not hold:
+   - `langchain4j`: CHANGELOG.md line 291 lists "langchain4j-* (5 jars) 1.19.0" under "added since 10.0.0". Line 292 lists the same five jars under "upgraded since 10.0.0" (cohere and hugging-face 0.35.0 → 1.19.0-beta29; core, mistral-ai and open-ai 0.35.0 → 1.19.0). At 10.0.0 the 0.35.0 jars were present (`solr/licenses`, e.g. `langchain4j-core-0.35.0.jar.sha1`). They are upgrades, not additions. The version for cohere and hugging-face also differs between the two lines (1.19.0 vs 1.19.0-beta29).
+   - `google-api-services-storage-v1`: line 291 lists rev20260524 under "added", and line 293 lists rev20240621 under "removed". It is one upgrade. The same pattern: `changelog/v10.1.0/dependency-changes-3-removed.yml` carries the removed name.
+   Cause (rung 1, `dev-tools/scripts/dependencyChanges.py`): the summary compares license filenames. A version bump changes the filename, so it appears as a removal plus an addition, or as an addition plus an upgrade. RC3 `solr/licenses` holds `langchain4j-core-1.19.0.jar.sha1` and no 0.35.0 file, which confirms it.
+2. SOLR-18450 not announced: CLEAN. `grep` for 18450, and for the relocated endpoint, finds nothing in CHANGELOG.md or `changelog/v10.1.0/`. Line 96 mentions `/api/cluster/commands`, which is SOLR-16390, not the reverted change.
+3. The cuVS note in the changelog: the changelog carries no 10.1 breakage line. It lists the cuVS feature (line 355, SOLR-17892) and a GPU fix (line 186, SOLR-18210, "Fix for GPU vector indexing silently falling back to using CPU instead") in the same release where GPU indexing is documented as broken (upgrade notes). Whether a known-issue line belongs in the changelog is the owner's convention call. Not a defect. Nothing on this branch shows a known-issues section in the changelog to follow.
+4. The dependencyChanges.py changes do not explain the difference. Commit 1a45846c45 deletes solrbot's per-PR `dependency_update` entries. Commit 3702672a00 extends that to `.yaml` files and to the released folder. Neither changes the filename-based categorization, and 1a45846c45's own docstring says jars that moved are "listed together". The split above is the open issue. Suggested fix for the release manager: key the comparison on artifact name, not filename, or hand-check the three categories against `solr/licenses` before the vote.
+
+Bearing on the vote: none of these change an artifact. They are release-note accuracy findings, and the owner decides whether they block the RC.
+
+Research only; no build or test was run.
