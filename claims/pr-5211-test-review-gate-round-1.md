@@ -12,3 +12,7 @@
 - Decision ladder: the gate is a record of three legs; rung 2 applies to the sensitivity legs. A leg that fails for an unexpected reason is diagnosed, not counted.
 
 Heartbeat: 2026-10-24T17:33:11Z
+
+Result: 2026-10-24T18:06:29Z: gate green on the pinned head `f00c7bde83bf5d82ac4607ecf086a4397eca563b`. Leg 1 (original test, early-return mutation) passes; leg 2 (strengthened test, same mutation) fails at the new assertion, ZkControllerTest.java:252; leg 3 (final head) tidy, Error Prone compile, cleanTest, the focused class (13 tests, 0 failures, 2 existing @Ignore skips) and `:solr:core:check -x test` all pass. Report `reports/pr-5211-test-review-gate-round-1.md`; receipt `receipts/SOLR-18569.md`; comment draft `drafts/pr-5211-review-with-diff-round-1.md`.
+
+DONE: 2026-10-24T18:06:29Z (phase G). Deliverables: the report, the receipt and the comment draft on the board. The gate job file is not edited.
