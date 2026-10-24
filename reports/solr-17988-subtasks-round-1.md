@@ -56,3 +56,16 @@ Verified by vm2 (not vm6) against `releases/solr/10.0.0`.
 Draft: branch `solr-17988-st3` on the fork, head `4103e5602da31ff969184f184ae69f61ea2ad886`, one commit on `upstream/main` `79b23df58d`. The change is in `major-changes-in-solr-10.adoc` only: two bullets for the new-UI variables and one sentence that the classic UI uses `solr.ui.enabled`.
 
 Not verified: the Ref Guide build was not run. The `solr.ui.experimental.enabled` sysprop has no reader in 10.0 code, which the table does not say.
+
+## ST4: the stale sysprop entries (audit gap 5)
+
+Verified by vm2 (not vm6) against `releases/solr/10.0.0`. Result: no doc edit. The audit's gap 5 does not hold.
+
+- `solr.disableFingerprint`, `solr.dns.prevent.reverse.lookup` and `solr.allow.unsafe.resourceloading` are not current property names. Each is the legacy alias of a current name, and the legacy column of `solr-properties.adoc` documents it correctly: line 67 (`solr.index.replication.fingerprint.enabled`), line 31 (`solr.admin.handler.systeminfo.dns.reverse.lookup.enabled`) and line 89 (`solr.resourceloading.restricted.enabled`). The three names appear in 10.0 code only in `solr/solrj/src/resources/DeprecatedSystemPropertyMappings.properties`, which the audit did not account for.
+- The mapping is live in 10.0. `EnvUtils` loads the file (`solr/solrj/src/java/org/apache/solr/common/util/EnvUtils.java` lines 66 and 78) and falls back to the legacy name, with the `!` inversion, when the current name is missing (lines 221 to 226). Removing the rows would break users who still set the legacy names, so the "remove or correct" advice in the audit is wrong.
+- `solr.node` has no entry in the docs. The 10.0 and main reference guide have no row or prose for a bare `solr.node`. `node-roles.adoc` uses only `solr.node.roles`, which is a current property (`node-roles.adoc` lines 39 to 97). The audit's citation appears to match the prefix of `solr.node.roles`.
+- The three legacy names are not sysprops that code reads by their own names. Only the `solr.node` claim is a doc gap, and it does not exist.
+
+Outcome: no confirmed gap, so no draft branch. The claim is DONE with no commit to `solr-17988-st4`.
+
+Not verified: the runtime alias behavior itself (set a legacy name and check the value) was not run. The verdict rests on the mapping code and the 10.0 tree.
