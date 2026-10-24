@@ -69,3 +69,24 @@ Verified by vm2 (not vm6) against `releases/solr/10.0.0`. Result: no doc edit. T
 Outcome: no confirmed gap, so no draft branch. The claim is DONE with no commit to `solr-17988-st4`.
 
 Not verified: the runtime alias behavior itself (set a legacy name and check the value) was not run. The verdict rests on the mapping code and the 10.0 tree.
+
+## ST5: the undocumented renames and the script removal (audit gaps 6 and 7)
+
+Verified by vm2 (not vm6) against `releases/solr/9.10.1` and `releases/solr/10.0.0`. Checked in code, not inferred from names.
+
+Gap 6, the SSL client auth renames. The audit said the mapping was inferred from names. Code confirms it:
+- 9.10.1 `solr/bin/solr` lines 252 and 255 set `-Dsolr.jetty.ssl.needClientAuth` and `-Dsolr.jetty.ssl.wantClientAuth`. `solr/server/etc/jetty-ssl.xml` line 21 reads `solr.jetty.ssl.needClientAuth`.
+- 10.0 `solr/bin/solr` lines 248 and 251 set `-Dsolr.jetty.ssl.need.client.auth.enabled` and `-Dsolr.jetty.ssl.want.client.auth.enabled`. `solr/server/etc/jetty-ssl.xml` lines 22 and 23 read the new names.
+- Neither `DeprecatedSystemPropertyMappings.properties` nor `EnvToSyspropMappings.properties` has an alias for the old names in 9.10.1 or 10.0. So setting the old names in 10.0 has no effect. The mapping is a real rename, not an alias.
+- The environment variables `SOLR_SSL_NEED_CLIENT_AUTH` and `SOLR_SSL_WANT_CLIENT_AUTH` are unchanged in both versions (`solr/bin/solr` lines 247 and 250 in 10.0).
+- No 10.0 doc page mentions either old or new property name, so the upgrade note is the only place the change is stated.
+
+Gap 7, the script removal. Verified:
+- `solr/bin/post` and `solr/bin/postlogs` exist in 9.10.1 and are absent from 10.0.0.
+- Replacements: `bin/solr post` (`SolrCLI.java` line 198 maps `post` to `PostTool`) and `bin/solr postlogs` (`SolrCLI.java` line 199 maps `postlogs` to `PostLogsTool`). `bin/solr` hands unknown commands to `SolrCLI` (`solr/bin/solr` lines 494 to 503), so both forms work.
+- The 10.0 Ref Guide already uses the replacements: `query-guide/pages/logs.adoc` lines 27 to 70 document `bin/solr postlogs`, and `enabling-ssl.adoc` line 359 documents `bin/solr post`. No 10.0 page documents `bin/post` or `bin/postlogs`.
+- The 10.0 upgrade notes do not say the scripts were removed. That is the gap.
+
+Draft: branch `solr-17988-st5` on the fork, head `0965fe75e4dd0491fade1447d8b41aef624be8a1`, one commit on `upstream/main` `79b23df58d`. The change is in `major-changes-in-solr-10.adoc` only: two rename bullets with the no-alias warning, one sentence that the environment variables are unchanged, and one sentence on the script removal.
+
+Not verified: the Ref Guide build was not run. The `wantClientAuth` rename was checked in the same script lines as `needClientAuth`, not by a separate run.
