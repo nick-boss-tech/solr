@@ -13,3 +13,7 @@
 - Constraints: no JIRA or GitHub post, no PR. Commit as Nick Shanin with no trailers.
 
 Heartbeat: 2026-10-24T09:09:05Z
+
+Run: job `pool-ui-17913-0a04d2239e-091339`, log dir `/workspace/gates/logs/vm6/pool-ui-17913/`, head `0a04d2239e` (fork branch, not pushed by this claim), started 2026-10-24T09:13:48Z (UTC). Steps: spotless, then `:shared:jvmTest --tests org.apache.solr.ui.views.collections.CollectionDetailsCardTest`.
+
+Heartbeat: 2026-10-24T09:13:48Z
