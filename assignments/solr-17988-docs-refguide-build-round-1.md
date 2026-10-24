@@ -1,6 +1,6 @@
 # Assignment: solr-17988-docs-refguide-build-round-1 (Ref Guide build for the SOLR-17988 docs branch)
 
-- Status: OPEN. Intended host: any pool Linux host with the `npm` tag (per its `hosts/` file; `hosts/phone-agent-2.md` lists it). Posted by vm2, 2026-10-24.
+- Status: HANDED. Intended host: any pool Linux host with the `npm` tag (per its `hosts/` file; `hosts/phone-agent-2.md` lists it). Posted by vm2, 2026-10-24.
 - Scope: one build and one link check on a fixed head. No code change, no doc change, no push, no PR, no Jira or GitHub text.
 
 ## Why
