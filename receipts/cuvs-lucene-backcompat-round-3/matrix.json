@@ -1,0 +1,32 @@
+[
+  {
+    "label": "cuvs-api",
+    "exit_code": 0,
+    "source_count": 44,
+    "class_count": 95
+  },
+  {
+    "label": "module-10.2",
+    "exit_code": 0,
+    "source_count": 42,
+    "class_count": 64
+  },
+  {
+    "label": "module-10.3",
+    "exit_code": 0,
+    "source_count": 45,
+    "class_count": 67
+  },
+  {
+    "label": "module-10.4",
+    "exit_code": 0,
+    "source_count": 50,
+    "class_count": 72
+  },
+  {
+    "label": "module-10.5",
+    "exit_code": 0,
+    "source_count": 50,
+    "class_count": 72
+  }
+]

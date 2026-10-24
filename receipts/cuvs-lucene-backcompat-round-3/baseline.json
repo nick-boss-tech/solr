@@ -1,0 +1,66 @@
+[
+  {
+    "minor": "10.2",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/classes/baseline-10.2:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/resources:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/module-10.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/cuvs-api.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-core-10.2.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-backward-codecs-10.2.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-codecs-10.2.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-test-framework-10.2.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-analysis-common-10.2.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/randomizedtesting-runner-2.8.3.jar",
+      "BackCompatRunner",
+      "testReadIndices",
+      "testUpgradeIndices"
+    ],
+    "test_source_sha256": "dfcc584643cffb42303984affc19ecb2a645b9f675b68005c02dacd9bd66fab9"
+  },
+  {
+    "minor": "10.3",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/classes/baseline-10.3:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/resources:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/module-10.3.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/cuvs-api.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-core-10.3.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-backward-codecs-10.3.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-codecs-10.3.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-test-framework-10.3.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-analysis-common-10.3.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/randomizedtesting-runner-2.8.3.jar",
+      "BackCompatRunner",
+      "testReadIndices",
+      "testUpgradeIndices"
+    ],
+    "test_source_sha256": "dfcc584643cffb42303984affc19ecb2a645b9f675b68005c02dacd9bd66fab9"
+  },
+  {
+    "minor": "10.4",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/classes/baseline-10.4:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/resources:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/module-10.4.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/cuvs-api.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-core-10.4.0.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-backward-codecs-10.4.0.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-codecs-10.4.0.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-test-framework-10.4.0.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-analysis-common-10.4.0.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/randomizedtesting-runner-2.8.3.jar",
+      "BackCompatRunner",
+      "testReadIndices",
+      "testUpgradeIndices"
+    ],
+    "test_source_sha256": "dfcc584643cffb42303984affc19ecb2a645b9f675b68005c02dacd9bd66fab9"
+  },
+  {
+    "minor": "10.5",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/classes/baseline-10.5:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/resources:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/module-10.5.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/cuvs-api.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-core-10.5.1.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-backward-codecs-10.5.1.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-codecs-10.5.1.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-test-framework-10.5.1.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/lucene-analysis-common-10.5.1.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/inputs-round2/jars/randomizedtesting-runner-2.8.3.jar",
+      "BackCompatRunner",
+      "testReadIndices",
+      "testUpgradeIndices"
+    ],
+    "test_source_sha256": "dfcc584643cffb42303984affc19ecb2a645b9f675b68005c02dacd9bd66fab9"
+  }
+]

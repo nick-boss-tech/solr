@@ -1,0 +1,102 @@
+CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0
+CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0
+Oct 24, 2026 5:15:17 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+Oct 24, 2026 6:15:27 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:27 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:27 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:27 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:28 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:28 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:28 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:29 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:29 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:29 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:29 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:29 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:29 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:30 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:30 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:30 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:31 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Oct 24, 2026 6:15:31 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:31 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Oct 24, 2026 6:15:32 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Oct 24, 2026 6:15:32 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:32 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Oct 24, 2026 6:15:33 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:34 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:34 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:34 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:35 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:35 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:35 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Oct 24, 2026 6:15:35 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:35 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Oct 24, 2026 6:15:36 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:36 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:36 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:36 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:36 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:36 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:36 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Oct 24, 2026 6:15:37 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:37 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Oct 24, 2026 6:15:37 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:37 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:37 PM com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:38 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:38 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:38 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:15:39 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Oct 24, 2026 6:15:39 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:15:39 PM com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat

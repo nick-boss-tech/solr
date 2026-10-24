@@ -1,0 +1,106 @@
+CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0
+CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0
+Oct 24, 2026 9:46:16 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+WARNING: A restricted method in java.lang.foreign.Linker has been called
+WARNING: java.lang.foreign.Linker::downcallHandle has been called by the unnamed module
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for this module
+
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:17 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Ɔ̀wà 24, 2026 4:46:18 Ɔ̀SÁN com.nvidia.cuvs.lucene.BaseAcceleratedHNSWScalarQuantizedVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene104HnswScalarQuantizedVectorsFormat

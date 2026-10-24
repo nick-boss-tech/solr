@@ -1,0 +1,11 @@
+CONTROL_CREATED /workspace/gates/cuvs-backcompat-round-3/material/cuvs-lucene-backcompat-round-3/controls/10.4/resources/backcompat/10.4-Lucene104AcceleratedHNSWCodec.zip codec=Lucene104AcceleratedHNSWCodec
+Oct 24, 2026 9:46:35 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+WARNING: A restricted method in java.lang.foreign.Linker has been called
+WARNING: java.lang.foreign.Linker::downcallHandle has been called by the unnamed module
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for this module
+
+Oct 24, 2026 9:46:35 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java requires Java Runtime version 22 or greater, but found 21
+Oct 24, 2026 9:46:35 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
