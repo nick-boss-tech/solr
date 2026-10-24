@@ -15,3 +15,7 @@
 - Constraints: no JIRA or GitHub post, no PR. Commit as Nick Shanin with no trailers.
 
 Heartbeat: 2026-10-24T09:22:51Z
+
+Run: job `pool-ui-17914-a502747ec4-092824`, log dir `/workspace/gates/logs/vm6/pool-ui-17914/`, head `a502747ec4` (local commit on branch solr-17914-create-collection-dialog, not pushed until the gate passes), started 2026-10-24T09:28:32Z (UTC). Steps: spotless, then `:shared:jvmTest --tests org.apache.solr.ui.views.collections.CreateCollectionFormTest` (4 tests). The form keeps its typed values locally; errors and the configset list are passed in.
+
+Heartbeat: 2026-10-24T09:28:32Z
