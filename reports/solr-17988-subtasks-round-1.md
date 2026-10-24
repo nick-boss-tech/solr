@@ -31,3 +31,28 @@ Verified by vm2 (not vm6) against `releases/solr/10.0.0`.
 Draft: branch `solr-17988-st2` on the fork, head `19a191d34fdea3c679340ea1cc24ae0dd18d3305`, one commit on `upstream/main` `79b23df58d`. Three lines in `solr-control-script-reference.adoc` and three in `upgrading-a-solr-cluster.adoc`. No code change.
 
 Not verified: the Ref Guide build was not run. ST7 runs it on the assembled branch.
+
+## ST1 correction (vm2, after ST3 verification)
+
+The ST1 section above says `SOLR_ADMIN_UI_DISABLED` is replaced by `SOLR_UI_ENABLED`, and that `SOLR_UI_ENABLED=false` disables the Admin UI. That is wrong for 10.0.
+
+- In 9.10.1, `SOLR_ADMIN_UI_DISABLED=true` sets `-DdisableAdminUI=true` (`solr/bin/solr` lines 1254 to 1256), which disables the classic Admin UI.
+- In 10.0, the classic Admin UI is `LoadAdminUiServlet`, which reads the system property `solr.ui.enabled` (`solr/core/src/java/org/apache/solr/servlet/LoadAdminUiServlet.java` line 44). No script maps any environment variable to it (`git grep` for `ui.enabled` in `solr/bin` returns nothing).
+- In 10.0, `SOLR_UI_ENABLED` is read only by the start script, at line 319, to decide whether to add `--module=new-ui`. It controls the new Admin UI module, not the classic UI.
+
+Corrected text: `SOLR_ADMIN_UI_DISABLED` has no environment variable replacement. Disable the classic Admin UI with the system property `solr.ui.enabled=false`, for example in `SOLR_OPTS`. `SOLR_UI_ENABLED` controls only the new Admin UI module. The `solr-properties.adoc` table already lists `solr.ui.enabled`. `SOLR_OPTS` reaches the JVM (`solr/bin/solr` line 679, and the `solr.in.sh` sample at line 100).
+
+Corrected branch: `solr-17988-st1`, head `39284426d4c3834d35c4c22816ec97c521ec81d2`.
+
+## ST3: the undocumented new env vars (audit gap 3)
+
+Verified by vm2 (not vm6) against `releases/solr/10.0.0`.
+
+- `SOLR_UI_ENABLED`: read by the start script only (`solr/bin/solr` line 319). Its effect is to add `--module=new-ui`. No Java code reads it, and no system property is set from it.
+- `SOLR_UI_EXPERIMENTAL_ENABLED`: read by the start script only (`solr/bin/solr` line 320). Setting it to `false` also skips `--module=new-ui`. The `solr.in.sh` sample at lines 253 to 258 says the same.
+- `solr.ui.experimental.enabled`: listed in `solr-properties.adoc` (line 123 on main), but the only 10.0 occurrence in the tree is `DeprecatedSystemPropertyMappings.properties` line 67. No Java code reads it. Not documented further here. Flagged as unverified.
+- `SOLR_CLOUD_WAIT_FOR_ZK_SECONDS`: not read by any 10.0 script. It appears only as a commented sample in `solr.in.cmd` (line 72) and `solr.in.sh` (line 78). The 10.0 Java code reads `solr.cloud.wait.for.zk.seconds` (`NodeConfig.java` line 247). The doc home is the existing `solr-properties.adoc` row at line 49 (`solr.cloud.wait.for.zk.seconds`, legacy `waitForZk`, default 30). That row is accurate and names no environment variable, so it is not changed. The env var is not documented as working.
+
+Draft: branch `solr-17988-st3` on the fork, head `4103e5602da31ff969184f184ae69f61ea2ad886`, one commit on `upstream/main` `79b23df58d`. The change is in `major-changes-in-solr-10.adoc` only: two bullets for the new-UI variables and one sentence that the classic UI uses `solr.ui.enabled`.
+
+Not verified: the Ref Guide build was not run. The `solr.ui.experimental.enabled` sysprop has no reader in 10.0 code, which the table does not say.
