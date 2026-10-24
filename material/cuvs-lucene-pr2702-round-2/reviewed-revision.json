@@ -1,0 +1,8 @@
+{
+  "repo": "NVIDIA/cuvs",
+  "pull": 2702,
+  "head": "23004d0f0de2014f11b09313f04fcf0de7643c3b",
+  "base": "efc7d30ea7498d322b4cf806b67007995632469a",
+  "observedAt": "2026-10-24T20:48:56.625Z",
+  "patchSha256": "d9ad46585c65846cf9b0d4f0ccffbf882e79be593f15897d8775115de810b154"
+}

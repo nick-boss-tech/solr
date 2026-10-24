@@ -1,0 +1,117 @@
+[
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\randomizedtesting-runner-2.8.3.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/carrotsearch/randomizedtesting/randomizedtesting-runner/2.8.3/randomizedtesting-runner-2.8.3.jar",
+    "sha256": "f0aa999a956c37e67c77835336477d1207ae6ad3e4286f3f58c69192c741aacb"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\junit-4.13.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar",
+    "sha256": "8e495b634469d64fb8acfa3495a065cbacc8a0fff55ce1e31007be4c16dc57d3"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-analysis-common-10.2.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-analysis-common/10.2.2/lucene-analysis-common-10.2.2.jar",
+    "sha256": "4dc1acc6b5a43be0049057bc99772dd24717cf0084c7ff79c68c984f120c140b"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-analysis-common-10.3.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-analysis-common/10.3.2/lucene-analysis-common-10.3.2.jar",
+    "sha256": "1403e0df203a9037628015bcd9ca46cfa899430bdfb939374ccecc34cdcdf46b"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-analysis-common-10.4.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-analysis-common/10.4.0/lucene-analysis-common-10.4.0.jar",
+    "sha256": "8e768c9b2a3870f1fc2655181516699e719a56b9aaf8664226a11ae7d90cb4e9"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-analysis-common-10.5.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-analysis-common/10.5.1/lucene-analysis-common-10.5.1.jar",
+    "sha256": "f710afd91a820987a48f3a215e076715b9237b324cf5458281109ef0d2a17b73"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-backward-codecs-10.2.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-backward-codecs/10.2.2/lucene-backward-codecs-10.2.2.jar",
+    "sha256": "2abe4c2d92382805938ae5d43eca4d894c33846df01e49225ce0234d9af49a1d"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-backward-codecs-10.3.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-backward-codecs/10.3.2/lucene-backward-codecs-10.3.2.jar",
+    "sha256": "e87d64b0da4bbe1a18b56fbe697a8cf6e695b2b71da56e61199bfc97781639cd"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-backward-codecs-10.4.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-backward-codecs/10.4.0/lucene-backward-codecs-10.4.0.jar",
+    "sha256": "4e77973982b8e24e4357b18e75f54cffe74b1ab7a354b1b81e1d23d6265de493"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-backward-codecs-10.5.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-backward-codecs/10.5.1/lucene-backward-codecs-10.5.1.jar",
+    "sha256": "0cfe4d9d2af63cf90ddbc974d49337c6747158413587ee35bf4b8d4e288b6389"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-codecs-10.2.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-codecs/10.2.2/lucene-codecs-10.2.2.jar",
+    "sha256": "c3bee894d8132d9268283e73998a02e17d71a3b730515b0597f50a615e087679"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-codecs-10.3.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-codecs/10.3.2/lucene-codecs-10.3.2.jar",
+    "sha256": "0ea341b12eeece05b0daf719537a6b345a0efb7dc6820f1c27f0d0301bd1af72"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-codecs-10.4.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-codecs/10.4.0/lucene-codecs-10.4.0.jar",
+    "sha256": "1046679f2eb254fe59c36112daf05e29fa04fce785d6f9b5cc6ada2e5ba01d32"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-codecs-10.5.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-codecs/10.5.1/lucene-codecs-10.5.1.jar",
+    "sha256": "8a3d644048b290db5b489f899342a4c922c9cb9e51e6b8fb34713a8080f7fd31"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-core-10.2.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-core/10.2.2/lucene-core-10.2.2.jar",
+    "sha256": "9c219c702449a41c16ad60edc58d12f6d2f4989ef555e875e942904209e25029"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-core-10.3.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-core/10.3.2/lucene-core-10.3.2.jar",
+    "sha256": "c835a3cc27cd572c2c8d93771c53adfe97bc11e1abcc353b87a5d290f8a01a08"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-core-10.4.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-core/10.4.0/lucene-core-10.4.0.jar",
+    "sha256": "8f894d211a8123938ccb9ff6827d136747e0eb6b1782ada6ac9086aa911b52e2"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-core-10.5.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-core/10.5.1/lucene-core-10.5.1.jar",
+    "sha256": "2b4912cc792f462e8e7b350f7c958f538ee7ec42da4cf4b65902fb9d546bba53"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-test-framework-10.2.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-test-framework/10.2.2/lucene-test-framework-10.2.2.jar",
+    "sha256": "0681d876cbcf5a6050514edf70c09652d30134bef0cdeb2db90cc807fc71918a"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-test-framework-10.3.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-test-framework/10.3.2/lucene-test-framework-10.3.2.jar",
+    "sha256": "4b30cd03a3672ed7b67d63f2cb2e118e6b58dc349804095ea2fed955a7822a39"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-test-framework-10.4.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-test-framework/10.4.0/lucene-test-framework-10.4.0.jar",
+    "sha256": "0b530e2bbaad53b655ac31c5b3c226a2633010fc5831e6b7c04be1e84942100a"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-test-framework-10.5.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-test-framework/10.5.1/lucene-test-framework-10.5.1.jar",
+    "sha256": "6dedeb9198a251387e65771cc799516546b2c32b530c9e98996ea6b3f05e68ac"
+  },
+  {
+    "path": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\hamcrest-2.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar",
+    "sha256": "5e62846a89f05cd78cd9c1a553f340d002458380c320455dd1f8fc5497a8a1c1"
+  }
+]

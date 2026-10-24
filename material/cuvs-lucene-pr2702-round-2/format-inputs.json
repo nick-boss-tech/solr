@@ -1,0 +1,5 @@
+[
+  "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java",
+  "java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+  "java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java"
+]

@@ -1,0 +1,668 @@
+{
+  "repo": "NVIDIA/cuvs",
+  "head": "23004d0f0de2014f11b09313f04fcf0de7643c3b",
+  "files": [
+    {
+      "path": "java/cuvs-lucene/bench/pom.xml",
+      "sha": "39dd001cc444f90a56711eb3be9dc2815fb6b9d1"
+    },
+    {
+      "path": "java/cuvs-lucene/bench/src/main/java/com/nvidia/cuvs/lucene/benchmarks/AcceleratedHnswIndexingBenchmarks.java",
+      "sha": "4bbdfe9577353e2daa81ee2e9a394c385a19a64b"
+    },
+    {
+      "path": "java/cuvs-lucene/bench/src/main/java/com/nvidia/cuvs/lucene/benchmarks/AcceleratedHnswSearchBenchmarks.java",
+      "sha": "2f6c03ef3a0c16e702e765ae932cbf63c5ec00ab"
+    },
+    {
+      "path": "java/cuvs-lucene/bench/src/main/java/com/nvidia/cuvs/lucene/benchmarks/CagraIndexingBenchmarks.java",
+      "sha": "af207d280c24ddbb1b856397f211ab3ea936e2e9"
+    },
+    {
+      "path": "java/cuvs-lucene/bench/src/main/java/com/nvidia/cuvs/lucene/benchmarks/CagraSearchBenchmarks.java",
+      "sha": "2f7e205495b095264ea923bc95bf2b54b6b976ee"
+    },
+    {
+      "path": "java/cuvs-lucene/bench/src/main/java/com/nvidia/cuvs/lucene/benchmarks/Utils.java",
+      "sha": "ceda520be43447164e8e73262fad2ba509d81d78"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/knn-float-vector-query-102-bits/src/main/java/com/nvidia/cuvs/lucene/CompatKnnFloatVectorQuery.java",
+      "sha": "6a41ed4cbaf3b53fcd9a70ff21203e25fcfb56f5"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/knn-float-vector-query-103-acceptdocs/src/main/java/com/nvidia/cuvs/lucene/CompatKnnFloatVectorQuery.java",
+      "sha": "45c1cb6b45168493bc31ec935e351070555c98b3"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/knn-vectors-reader-102-bits/src/main/java/com/nvidia/cuvs/lucene/CompatKnnVectorsReader.java",
+      "sha": "9539f986a880996b6a7a6f32cc00bf53e8a40761"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/knn-vectors-reader-103-acceptdocs/src/main/java/com/nvidia/cuvs/lucene/CompatKnnVectorsReader.java",
+      "sha": "0f0b1b5d16f0bd0b27c1e19f046ac6314998022f"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/knn-vectors-writer-102-void-merge/src/main/java/com/nvidia/cuvs/lucene/CompatKnnVectorsWriter.java",
+      "sha": "94052e6ced20da6988f658cd57477fe838ded67e"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/knn-vectors-writer-105-deferred-merge/src/main/java/com/nvidia/cuvs/lucene/CompatKnnVectorsWriter.java",
+      "sha": "59060b4c29ad87b4ba893ea0c5a58abf9a03200e"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+      "sha": "ba897c67180103d9c03322af4b456051590deb90"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+      "sha": "dcd6544f4d1c8309eda64be1659ccfd3db232f1f"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.2/pom.xml",
+      "sha": "e74db4da1295c7cdff1c8b60f3991f8079c668ea"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.2/src/main/java/com/nvidia/cuvs/lucene/LuceneCompat.java",
+      "sha": "b8734e0f7c0d7a3ebd01ddd559757bf7cd2f6fd0"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.2/src/main/java/com/nvidia/cuvs/lucene/LuceneProvider.java",
+      "sha": "cdd7073fc107868ca8f85761818d9d27d446ff5c"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.2/src/main/resources/META-INF/services/org.apache.lucene.codecs.Codec",
+      "sha": "faa0684c04ca9bd9379e262059a06f6247dc2a50"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.2/src/main/resources/META-INF/services/org.apache.lucene.codecs.KnnVectorsFormat",
+      "sha": "1f9ceeda67b23ae28617283c5b0ad0f4e8099ab4"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.3/pom.xml",
+      "sha": "71824e4c5f1f8223108dcbf46549a4bd210c33e6"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.3/src/main/java/com/nvidia/cuvs/lucene/LuceneCompat.java",
+      "sha": "67fbe0e0dab5dd907b6cfffaa01c8afdc59564c9"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.3/src/main/resources/META-INF/services/org.apache.lucene.codecs.Codec",
+      "sha": "e503916f2337233711358494d71b308b5311379c"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.3/src/main/resources/META-INF/services/org.apache.lucene.codecs.KnnVectorsFormat",
+      "sha": "1fa8442e488a93da40587d33ec59bc0c6420cb5e"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.3/src/since/java/com/nvidia/cuvs/lucene/Lucene103AcceleratedHNSWBinaryQuantizedCodec.java",
+      "sha": "ff01041d8acb1ded098b1020b202a9ba26f7b24c"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.3/src/since/java/com/nvidia/cuvs/lucene/Lucene103AcceleratedHNSWCodec.java",
+      "sha": "55cfff3f04aacf14cf41ff1160ba5b015704a589"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.3/src/since/java/com/nvidia/cuvs/lucene/Lucene103AcceleratedHNSWScalarQuantizedCodec.java",
+      "sha": "7b0aa830402d10aac5c878e7cf3cbc73bf3aaf14"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.3/src/since/java/com/nvidia/cuvs/lucene/Lucene103CuVSGPUSearchCodec.java",
+      "sha": "c3e5bd08e63b6d3a03456324933dedc80049a3a6"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.4/pom.xml",
+      "sha": "46fc45b5753b36f5062ead2feb55f530e12d51eb"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.4/src/main/java/com/nvidia/cuvs/lucene/LuceneCompat.java",
+      "sha": "b8a7c4be03b89cd08d2ff126d7db4d03383dba9a"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.4/src/main/resources/META-INF/services/org.apache.lucene.codecs.Codec",
+      "sha": "57a189938f4d9ed8b3a078d2614c5f6e8ab75084"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.4/src/main/resources/META-INF/services/org.apache.lucene.codecs.KnnVectorsFormat",
+      "sha": "ab02136604cd2d141d791461eff6b108c85f5a19"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.4/src/since/java/com/nvidia/cuvs/lucene/Lucene104AcceleratedHNSWBinaryQuantizedCodec.java",
+      "sha": "f8b86d07f8be8a7ddf1d04eae610e3ccc83631cd"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.4/src/since/java/com/nvidia/cuvs/lucene/Lucene104AcceleratedHNSWCodec.java",
+      "sha": "1eb3b16d05cea3f619b55ff44ceff736c139fa69"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.4/src/since/java/com/nvidia/cuvs/lucene/Lucene104AcceleratedHNSWScalarQuantizedCodec.java",
+      "sha": "216604baf4ac1d29bf717e73396daeacd01ec8ff"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.4/src/since/java/com/nvidia/cuvs/lucene/Lucene104AcceleratedHNSWScalarQuantizedVectorsFormat.java",
+      "sha": "0ad46768af8a92dda7554b1feba854fc2f5ba3bc"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.4/src/since/java/com/nvidia/cuvs/lucene/Lucene104CuVSGPUSearchCodec.java",
+      "sha": "25b1c98c1586b50b3e11422fd579b5da41983dcd"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.5/pom.xml",
+      "sha": "2063de5dfb8e4b04e696d6558c89d30114077efc"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.5/src/main/java/com/nvidia/cuvs/lucene/LuceneCompat.java",
+      "sha": "dbd6bacabe674a1eb59c5fd8dcc2b4b4dd01ff5b"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.5/src/main/resources/META-INF/services/org.apache.lucene.codecs.Codec",
+      "sha": "57a189938f4d9ed8b3a078d2614c5f6e8ab75084"
+    },
+    {
+      "path": "java/cuvs-lucene/lucene-10.5/src/main/resources/META-INF/services/org.apache.lucene.codecs.KnnVectorsFormat",
+      "sha": "ab02136604cd2d141d791461eff6b108c85f5a19"
+    },
+    {
+      "path": "java/cuvs-lucene/pom.xml",
+      "sha": "e292315afccbe959daf2288a66ed3c3ed98b9e3c"
+    },
+    {
+      "path": "java/cuvs-lucene/relocation/pom.xml",
+      "sha": "05e896708a7c004932b54487b124fb05016688ef"
+    },
+    {
+      "path": "java/cuvs-lucene/src/assembly/jar-with-dependencies.xml",
+      "sha": "6ab70061da4a0b3d3056efe80cf1dd782467a458"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/AcceleratedHNSWParams.java",
+      "sha": "ae99766474a07d08041c0a080b3782215cae2f64"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/AcceleratedHNSWUtils.java",
+      "sha": "391729011f8f4d133afb8701f7a27b52f721fb11"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/BaseAcceleratedHNSWScalarQuantizedVectorsFormat.java",
+      "sha": "60254b4f11b1f96412533fa6ef3a705851dfcd8c"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/CagraIndexParamsFactory.java",
+      "sha": "0badac8a44c274c0bc9b5aecde30dd92cea79e2a"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/CuVS2510GPUSearchCodec.java",
+      "sha": "5b4e2c06c772701358eff789c73736c5d52e542f"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/CuVS2510GPUVectorsFormat.java",
+      "sha": "d0a9ca1119a2647c7ea4b3ddc1f10d6ead6c0010"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/CuVS2510GPUVectorsReader.java",
+      "sha": "0ff41d51d5686676def0de5e4f34e73ee51c039b"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/CuVS2510GPUVectorsWriter.java",
+      "sha": "9accee085b98a7ae0a588adb6428ee0c4844cb1c"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/CuVSCodecs.java",
+      "sha": "33f831d592e1c2169a838514a4732c1e00f8e57a"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/CuVSFilterCodec.java",
+      "sha": "a3c67348d72e37558426577f8f4216cd55344b74"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/FieldWriter.java",
+      "sha": "8e2d9a70e212c05834f2e5886bc3c2d03cc15b2a"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/FilterBitsetCache.java",
+      "sha": "90b673ddffe902548f1bf785f04e7804fdab9d74"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/FilterBitsetCacheConfig.java",
+      "sha": "576678c213d4b45d52c1147fb31c00524364dab9"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/FilterCuVSProvider.java",
+      "sha": "86d53c3d83373bd9120db451fcd46af0c29d37f1"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/FilterCuVSServiceProvider.java",
+      "sha": "1341738df8c790cf6802758921818f9423ef54d9"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/GPUBuiltHnswGraph.java",
+      "sha": "7e9f888e32ce5f1794ae965eb6e8f7db023ca195"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/GPUFieldWriter.java",
+      "sha": "d159c5c144eb74acc72f47d484fd6bea7188d536"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/GPUIndex.java",
+      "sha": "f71c8f6f877c42eb2a9c2242ec798f9086e23f77"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/GPUKnnFloatVectorQuery.java",
+      "sha": "da02ba6827c56caeb12d247f24c70dc987e65d33"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/GPUPerLeafCuVSKnnCollector.java",
+      "sha": "6413c221c3ca9fb6641a4803ce7a9e69750df68d"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/GPUSearchParams.java",
+      "sha": "68e37ae2da245cb390dc31ff624f49ecd968a51e"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/IndexInputInputStream.java",
+      "sha": "0749b70a288e3bce9b492026a7a23c12561cd342"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/IndexOutputOutputStream.java",
+      "sha": "c8c9f796fad1e1025ab4e98643d6605d4ec9422b"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/Lucene101AcceleratedHNSWCodec.java",
+      "sha": "1340cf5c3f24307dba1b602f1171bc73b92f9e25"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/Lucene99AcceleratedHNSWVectorsFormat.java",
+      "sha": "a5199713247916913d0b1e09064726a607d7043b"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/Lucene99AcceleratedHNSWVectorsWriter.java",
+      "sha": "9da98b96c65aeba3a3a77ba0a0392702b178d728"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWBinaryQuantizedCodec.java",
+      "sha": "218f88a17c0ef5921d8ce762eeb86ed9a583f908"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat.java",
+      "sha": "124ac7d991536f646add73fca8e0f9c5b99b3187"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWBinaryQuantizedVectorsWriter.java",
+      "sha": "412ec2817e103a3b3344211406c770b0e8fc0926"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWScalarQuantizedCodec.java",
+      "sha": "4b88660f4d10648c41e0f36609d44f2b7d5f600a"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWScalarQuantizedVectorsFormat.java",
+      "sha": "854b9f89e3d05b4be832a6dad880f22667e0313e"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWScalarQuantizedVectorsWriter.java",
+      "sha": "81cdc9bd92ee86ecefc59501d623d3a5b03a6393"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/LuceneVersionGuard.java",
+      "sha": "f2d25889322ab28e588e99afe98892bf5a757e02"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/ParameterValidation.java",
+      "sha": "750c406e8138aaa78720efa6c4b4707c7cc4350f"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/ThreadLocalCuVSResourcesProvider.java",
+      "sha": "58fc6716ea2f76ce3eb44cd3af2dfe50f1813ad9"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/Utils.java",
+      "sha": "12a2a03d2f267d64d2996bd6454e58ea0d0fcbb1"
+    },
+    {
+      "path": "java/cuvs-lucene/src/main/java/com/nvidia/cuvs/lucene/package-info.java",
+      "sha": "f14c45183aab714b5c84e87f64f82384c62b4914"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/backcompat/GenerateReleasedIndices.java",
+      "sha": "ddcc3df8f387d99ab5bd2fddd8a9b8593cdf06f8"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/BaseCuVSKnnVectorsFormatTestCase.java",
+      "sha": "05df2e2b40c0802396e706e94c98f4c9b58f2b7c"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestAcceleratedHNSWDeletedDocuments.java",
+      "sha": "cd4aaa6ec898a66ad5314875607c4df4c6e15a27"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestAcceleratedHNSWOddGraphDegree.java",
+      "sha": "cfab27e91e658800d7b58f3a03d6396b534ebcc4"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestAcceleratedHNSWParams.java",
+      "sha": "2742129360055da9d17575affe59e7dc2c981a7f"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestAcceleratedHNSWVectorsFormatThrowableHandling.java",
+      "sha": "89bad0c8cadb92a031e872b9116673da89af354d"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompat.java",
+      "sha": "75d7abaa0ec66cd3125a4ac655cdabc7b10edce7"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java",
+      "sha": "203b57469d9122573c6bff0203e307a1aaf311f4"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCagraIndexAtAlignedDimensions.java",
+      "sha": "89d58aa68223c98026621b21f0633efab4e26439"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCagraIndexParamsFactory.java",
+      "sha": "f559ea3808e95ec41b47a282e9cea5dcef14a02c"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCagraToHnswSerializationAndSearch.java",
+      "sha": "acbda63fe63d0ec21c759c801ddfa80ca3345f26"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCagraToHnswSerializationAndSearchWithFallbackWriter.java",
+      "sha": "4edb963e147f2094e0c73ed784792334a6ed66df"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java",
+      "sha": "2dc5e3b8564c1245b315481413b07ac73b97299b"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCuVSAcceleratedHNSWDeletedDocuments.java",
+      "sha": "10d3ceeec2ed2232f2062e74459ef3cccb6ddfec"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCuVSAcceleratedHNSWGaps.java",
+      "sha": "fa0936e67e80ad7115bf1536217736ecba40c9f2"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCuVSDeletedDocuments.java",
+      "sha": "246e480d00d68fa9a8b2602aab68412e3a616772"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCuVSGaps.java",
+      "sha": "31958ef0db2db6d0ffb7842c585693dcf9e0aee9"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCuVSRandomizedHNSWVectorSearch.java",
+      "sha": "2f77f19b8d35d79ce4b2cff56fc05b335074677d"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCuVSRandomizedVectorSearch.java",
+      "sha": "850eb18a4182c310d324ec12b613181b3da258f3"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCuVSVectorsFormat.java",
+      "sha": "947d0da805aef04d20e52e4206d1448ae20094b5"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestFilterBitsetCache.java",
+      "sha": "299f0dafebde40662f119571c83ad3d275a7169b"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestFilteredSingleCtaITopKValidation.java",
+      "sha": "3d3d07011838ee9cd84fb1b0010f7f512507ec36"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestGPUKnnFloatVectorQueryParameters.java",
+      "sha": "6d99ab6c3685fc0bda66676f52db32c109319bf1"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestGPUSearchParams.java",
+      "sha": "714fdcd457d0c94d2b77d6004180058543ffdd03"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestGPUSelectiveFilterFallback.java",
+      "sha": "9e705f37b180ff5ca5b0889ef7f119f40ddf4606"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestIndexOutputOutputStream.java",
+      "sha": "0dbff6a73a2b01f0173086a4fbf30fd45ab87214"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestLucene99AcceleratedHNSWVectorsFormat.java",
+      "sha": "ed95b2c31bc5c9d3cf004e037dfe8a2277d49025"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestMerge.java",
+      "sha": "c5651481d6d0d63e5dcb02f90fc0f72494e1b427"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestMultiSegmentGPUFilterConcurrency.java",
+      "sha": "14eb82c41e52028ed8ffcd9828b1745759189283"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestMultithreadedCuVSGPUSearch.java",
+      "sha": "a7215ca83de908655262907a0ed0918a89519ce0"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestNativeSearchPlanBoundaryRejection.java",
+      "sha": "e476ac32f7a3a3aceab361b322aa43f58007f920"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestPerSegmentGPUFilterSearch.java",
+      "sha": "89ba3989a44886baab6bd4e358f3637257a94bc4"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestQuantizedFallbackWriters.java",
+      "sha": "58b77756608a1a45553f3cf022327626edcdda0c"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestQuantizedVectorsFormats.java",
+      "sha": "9f4347ee34411c0a8ee214a5f5dacb1c446e13c2"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestSegmentMaxConnConsistency.java",
+      "sha": "c5e367977a03ed1495b54e1a024f73e2682e1e26"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestThreadLocalCuVSResourcesProvider.java",
+      "sha": "cce5c6845c2b8b786584914cbe2e25a781d6254c"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestUtils.java",
+      "sha": "22cd509e7b8c8747e29e4cd2ae4a4c37b1e942fe"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestUtilsThrowableHandling.java",
+      "sha": "6aead1bd8de0123da58068e20a95a95a02114afc"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/BbqQuantizer.java",
+      "sha": "04c193cd47424c96f8e90751ed374a25e2bd550f"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/BruteForceIndex.java",
+      "sha": "2725a1ef87d9ab20150d99ed302f7d9ad1402074"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/BruteForceIndexParams.java",
+      "sha": "a9bd9eae4c20daa0250118c87c70529aa0e47d4a"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/BruteForceQuery.java",
+      "sha": "1534ac1a6ba22c9657f879fb49b8dac6f1f8aefa"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CagraCompressionParams.java",
+      "sha": "a10d6f672562376da03f3bd661fdc0d68ee770fb"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CagraIndex.java",
+      "sha": "5320afe4af768190150d392062392338552bd2f2"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CagraIndexParams.java",
+      "sha": "b12fdbc11f53c7a3800a9cf296c4dcd5443a0333"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CagraMergeParams.java",
+      "sha": "b43e264956eece39ed218fd38f782a9b1b6373a8"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CagraQuery.java",
+      "sha": "d38ec625d36b37ad7d4938d4e0e5d6f1fa979b32"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CagraSearchParams.java",
+      "sha": "c3b18cf3fe56c8f476c08a0e373209f914e8d57a"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CuVSAceParams.java",
+      "sha": "eddb40487434a8cfc4554b3cd456227a36b529aa"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CuVSDeviceMatrix.java",
+      "sha": "16b1881ad54d566024acca1fbaa125259703c35a"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CuVSHostMatrix.java",
+      "sha": "62b708f71aa1ab8ed02b32fda1c61a5230ef19c0"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CuVSIvfPqIndexParams.java",
+      "sha": "9c6043a88c1495b9e6cc7e77806876af8c01af43"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CuVSIvfPqParams.java",
+      "sha": "aed5b4b2c6b2c3f42e51ab297fd3d79cbffb0bd4"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CuVSIvfPqSearchParams.java",
+      "sha": "b656e4327603bbf16160adab8b1f0c288b49994a"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CuVSMatrix.java",
+      "sha": "097efb1003cda199999c54fa6910421cd1e31fb9"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CuVSResources.java",
+      "sha": "9fdfcd73b0db5fa1c8c1409cc8dc349de3f73a59"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/CuVSResourcesInfo.java",
+      "sha": "6d57b64509e122dedd8e792c0eefd530976b0116"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/DelegatingScopedAccess.java",
+      "sha": "d661156ee09c78b6fca8c8b186573ec031d64c61"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/FilterBitsetHandle.java",
+      "sha": "9cb5dcf3846b59c33edf813c79e09a75d06087bb"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/GPUInfo.java",
+      "sha": "14030b899f79524e3c6adec6d36cb4f6c24e3c14"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/GPUInfoProvider.java",
+      "sha": "8ca8ed24714985a1dbcb25eafebde97e05aef9b1"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/HnswAceParams.java",
+      "sha": "41370f0ac5ee0601fa4c221471f7cbc9bef5d39d"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/HnswIndex.java",
+      "sha": "50216729a892a8e93ba40a006f90a87ed26c87ff"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/HnswIndexParams.java",
+      "sha": "ea2394a33d7d1ddcf27429dc0e37277cbc89bb6f"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/HnswQuery.java",
+      "sha": "d3aedfd30508226e35e7097ad1cdf5651141195b"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/HnswSearchParams.java",
+      "sha": "b2b1ec75e52d93c39526fef8e556273f2a7df48c"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/LibraryException.java",
+      "sha": "46936f3559aa93136fe27e16b8c74136053c4c13"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/MultiPartitionCagraSearch.java",
+      "sha": "a49aad00338f316c47dea4e26e9824da4ba6c12e"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/MultiPartitionSearchResults.java",
+      "sha": "c0796ed254c201e7d2365894c4e19572db83b9ac"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/RowView.java",
+      "sha": "dccd9ee1230cda45707fe92f94b6175b77910b1a"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/SearchResults.java",
+      "sha": "c0b3f2e1812877bd96cb49b5505e379975f77a35"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/SynchronizedCuVSResources.java",
+      "sha": "d9306f447119d56e3b02949700d32581da659801"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/TieredIndex.java",
+      "sha": "614197f73c19cc00aed6387d029103eee53be001"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/TieredIndexParams.java",
+      "sha": "3f43374956e19b6b9a3e985040fa6ff29966bb7b"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/TieredIndexQuery.java",
+      "sha": "a5a82a2abd9bf18fb68ef1eaa8e8dc12c0450052"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/VamanaIndex.java",
+      "sha": "b23cced2d5c5fcf2c3ae15cec5f9a423c89cbf71"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/VamanaIndexParams.java",
+      "sha": "b0e8ded3418e9bf72ff0f50e0f53f4effb9a7750"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/internal/FilterBitsetPoolConfig.java",
+      "sha": "66694ea85b6ca71f225ce3f16829433fbd7da9c3"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/spi/CuVSProvider.java",
+      "sha": "fcd3481749b960a89321330299039eaae126fbc3"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/spi/CuVSServiceProvider.java",
+      "sha": "b4f16a084c339e5edbd92720a73b6c58e26a4e76"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/spi/ProviderInitializationException.java",
+      "sha": "0c9051a67ee4dcec584bddfbde7a23539ee863a9"
+    },
+    {
+      "path": "java/cuvs-java/src/main/java/com/nvidia/cuvs/spi/UnsupportedProvider.java",
+      "sha": "4244b916763697e2641c7cb7f180e0b0938a6a27"
+    }
+  ],
+  "patchFiles": [
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java",
+      "sha": "0a2628c116e44094165e5feca73d0f74c87f0fd0"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+      "sha": "fa04413d7e5537ba8cd03242908d5306c5a7673d"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+      "sha": "9bdc09a5865d21acb40a8812d867bdbc1293c592"
+    }
+  ]
+}

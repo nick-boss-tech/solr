@@ -1,0 +1,62 @@
+[
+  {
+    "jar": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\module-10.2.jar",
+    "targets": [
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-core-10.2.2.jar",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-backward-codecs-10.2.2.jar",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-codecs-10.2.2.jar"
+    ],
+    "class_count": 64,
+    "checked_constants_and_types": 692,
+    "member_constants": 338,
+    "member_uses": 556,
+    "failure_records": 0,
+    "unique_failures": [],
+    "minor": "10.2"
+  },
+  {
+    "jar": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\module-10.3.jar",
+    "targets": [
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-core-10.3.2.jar",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-backward-codecs-10.3.2.jar",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-codecs-10.3.2.jar"
+    ],
+    "class_count": 67,
+    "checked_constants_and_types": 703,
+    "member_constants": 343,
+    "member_uses": 562,
+    "failure_records": 0,
+    "unique_failures": [],
+    "minor": "10.3"
+  },
+  {
+    "jar": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\module-10.4.jar",
+    "targets": [
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-core-10.4.0.jar",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-backward-codecs-10.4.0.jar",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-codecs-10.4.0.jar"
+    ],
+    "class_count": 72,
+    "checked_constants_and_types": 723,
+    "member_constants": 346,
+    "member_uses": 566,
+    "failure_records": 0,
+    "unique_failures": [],
+    "minor": "10.4"
+  },
+  {
+    "jar": "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\module-10.5.jar",
+    "targets": [
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-core-10.5.1.jar",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-backward-codecs-10.5.1.jar",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-codecs-10.5.1.jar"
+    ],
+    "class_count": 72,
+    "checked_constants_and_types": 729,
+    "member_constants": 346,
+    "member_uses": 566,
+    "failure_records": 0,
+    "unique_failures": [],
+    "minor": "10.5"
+  }
+]

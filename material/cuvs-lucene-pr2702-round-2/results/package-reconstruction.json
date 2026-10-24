@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "sourceFiles": 162,
+  "patchFiles": 3,
+  "canonicalLineEndings": "LF",
+  "patchSha256": "d9ad46585c65846cf9b0d4f0ccffbf882e79be593f15897d8775115de810b154",
+  "checks": [
+    "fresh pinned source download and Git blob verification",
+    "git apply --check --whitespace=error-all",
+    "exact patched Git blob verification",
+    "Google Java Format 1.27.0 dry run"
+  ],
+  "verifiedAt": "2026-10-24T20:53:08.632Z"
+}

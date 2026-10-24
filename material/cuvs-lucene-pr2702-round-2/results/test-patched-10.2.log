@@ -1,0 +1,8 @@
+JUnit version 4.13.2
+....
+Time: 3.662
+
+OK (4 tests)
+
+Oct 24, 2026 4:46:08 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.

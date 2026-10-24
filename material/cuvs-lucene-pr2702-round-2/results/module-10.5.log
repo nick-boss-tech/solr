@@ -1,0 +1,2 @@
+Note: C:\Users\shaninna\dev\Solr-issues\research\cuvs-lucene-upstream\round2\base\java\cuvs-lucene\src\main\java\com\nvidia\cuvs\lucene\GPUKnnFloatVectorQuery.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.

@@ -1,0 +1,21 @@
+{
+  "label": "mask-dropped-10.2",
+  "exit_code": 0,
+  "command": [
+    "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\javac.exe",
+    "--release",
+    "21",
+    "-proc:none",
+    "-implicit:none",
+    "-d",
+    "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\classes\\mask-dropped-10.2",
+    "-cp",
+    "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\module-10.2.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\cuvs-api.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-core-10.2.2.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-backward-codecs-10.2.2.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-codecs-10.2.2.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-test-framework-10.2.2.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\lucene-analysis-common-10.2.2.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\junit-4.13.2.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\hamcrest-2.2.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\jars\\randomizedtesting-runner-2.8.3.jar",
+    "@C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\round2\\javac-mask-dropped-10.2.args"
+  ],
+  "sources": [
+    "mutations\\10.2\\compat\\knn-float-vector-query-102-bits\\src\\main\\java\\com\\nvidia\\cuvs\\lucene\\CompatKnnFloatVectorQuery.java"
+  ],
+  "source_count": 1,
+  "class_count": 1
+}
