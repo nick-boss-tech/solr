@@ -25,16 +25,16 @@ Already-posted text stands; the split applies from 2026-10-23 forward.
 - Jira text is Jira wiki markup: code spans {{like_this}}, links [label|https://...], mentions [~username], bullets start with ` * `.
 - GitHub text is GitHub markdown.
 
-## The ask comment (propose and volunteer)
+## The ask comment (the typical Jira comment)
 
-The shape for soliciting a reviewer before starting work, per Smiley's ask on the dev list (2026-10-23):
+The typical Jira comment is the ask: propose and volunteer, in the open, before starting work. Per Smiley's ask on the dev list (2026-10-23), and in Nick's words: "I looked at this, here is the slice I propose, here are the files I expect to touch, [name], do you want it and will you review."
 
-1. Disclosure per platform.
-2. A named mention of the committer whose recent activity makes them the sponsor candidate.
-3. The reproduction, stated as already done, in one line.
-4. The plan, in one or two sentences: what the fix does, at the level of behavior.
+1. Disclosure per platform (in Jira, the closing footer line).
+2. A named mention of the ticket's sponsor candidate: the committer whose ticket it is or whose recent activity makes them the reviewer candidate. On the new UI tickets this is Christos (malliaridis).
+3. What was looked at, stated as done: the reproduction for a defect, or the code and ticket read for a feature slice, in one line.
+4. The slice proposed, in one or two sentences: the smallest piece that stands on its own, at the level of behavior.
 5. The files the change is expected to touch, named as files and phrased as an expectation ("the files I expect to touch are ..."), so the reader can correct the scope from memory: add a file, remove one, name a different layer.
-6. The question: do you want this, and would you be willing to review it?
+6. The question, to the named committer: do you want this, and would you be willing to review it?
 
 Rules that keep the comment an ask rather than a delivery:
 
