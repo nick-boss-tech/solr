@@ -76,3 +76,27 @@ Not verified: no Windows run, no script change. Research only, per the assignmen
 (d) Verdict: ALREADY DONE on main, fixed by `9ead8599b1` as a side effect of adding read APIs, not as a targeted fix. The 10.0.x line still has the bug. Not a volunteer item as written: the remaining work is a backport decision, a regression test that does not exist, and confirming the `InstallCoreData` route. Smallest first slice: a test under `solr/core/src/test/org/apache/solr/handler/admin/api/` that PUTs and GETs a collection property through the v2 path, run on main and on the 10.0.0 tag. No main-code change is needed on main.
 
 Not verified: no build or test was run for this ticket. Research only, per the assignment.
+
+## SOLR-18214: Base configset during configset creation is not optional
+
+(a) Ask: `baseConfigSet` in the v2 configset create should be truly optional and omittable. The ticket reports that omitting it sends `null`, which fails with "Base ConfigSet does not exist: null", and that `_default` cannot be the fallback once a user has deleted `_default`. Open, Major, reporter malliaridis, labels `newdev`, `pull-request-available`. Jira comments: epugh (2026-04-27) says the semantics feel odd and he will think about it; janhoy and malliaridis (2026-09-04) discuss the choice and say there was no consensus.
+
+(b) Exists today on main (fork `498a09aea9`):
+- `solr/core/src/java/org/apache/solr/handler/configsets/CloneConfigSet.java` lines 65 to 73: the base is checked with `checkConfigExists(requestBody.baseConfigSet)` and passed on unchanged. A null base fails the check. No defaulting happens on the v2 path.
+- `solr/api/src/java/org/apache/solr/client/api/model/CloneConfigsetRequestBody.java` lines 29 to 30: `@JsonProperty(defaultValue = DEFAULT_CONFIGSET)`. The `defaultValue` is schema metadata, not a runtime default; the reported `null` path shows the field stays null when omitted.
+- The command layer already defaults: `solr/core/src/java/org/apache/solr/cloud/ConfigSetCmds.java` line 62 maps an empty base to `DEFAULT_CONFIGSET_NAME`, and line 121 uses `DEFAULT_CONFIGSET_NAME` when `BASE_CONFIGSET` is absent.
+- The reference guide says the default is `_default` (`solr/solr-ref-guide/modules/configuration-guide/pages/configsets-api.adoc` around line 379).
+- Deletion of `_default` is not guarded: no "cannot delete" check was found in `DeleteConfigSet.java` or `ConfigSetCmds.java`.
+- Git: `CloneConfigSet.java` last changed in `7b6d7ce4c4` (SOLR-15701, #4264). History does not show an intentional decision to drop the default.
+- PR: apache/solr #4368, "SOLR-18214: Default configset clone base to _default when omitted", by an external contributor, was closed without merge on 2026-09-04. It changes `CloneConfigSet` to resolve an omitted base to `_default`, with a unit test and a SolrCloud test (`TestConfigSetsAPI.testV2CreateWithoutBaseConfigsetUsesDefault`). Its body reports `:solr:core:test` and `spotlessCheck` passing in Docker on JDK 21. Not reproduced here. The ticket still carries `pull-request-available` with no open PR.
+
+(c) Open design questions, which the ladder does not settle:
+- Option 1, default to `_default`: matches the docs, the command layer, and PR #4368. janhoy calls this back-compatible.
+- Option 2, no base when omitted (the ticket author's stated preference, "I would choose"): changes the documented behavior. janhoy says requiring an explicit base is a back-compat break before 11.0.
+- Option 3, make `_default` undeletable, or give a clear error when the default base is missing: janhoy's alternative for the "users delete `_default`" case. Not settled by any comment.
+- Rung ledger: rung 1 shows the command layer and docs both default to `_default`. Rung 3 is split: the ticket author states option 2 as his choice, while the docs state `_default`. Rung 4 options are recorded above. The choice is between maintainers' stated positions, so it goes to the author.
+
+(d) Verdict: NEEDS CHRISTOS. Question: "When `baseConfigSet` is omitted on the v2 create, should it resolve to `_default` (as the docs, the command layer and PR #4368 do), or create with no base? And should `_default` become undeletable, or should a missing default base get a clear error?"
+Smallest first slice, once option 1 is chosen: resolve an omitted base to `DEFAULT_CONFIGSET_NAME` in `CloneConfigSet.cloneExistingConfigSet` (lines 65 to 73) and add a `CloneConfigSetAPITest` case. The `_default`-deletion part is a separate slice and needs its own decision.
+
+Not verified: no build or test was run. Research only, per the assignment.

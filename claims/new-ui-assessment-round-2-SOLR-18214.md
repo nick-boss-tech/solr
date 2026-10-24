@@ -1,7 +1,7 @@
 # Claim: new-ui-assessment-round-2-SOLR-18214
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/new-ui-assessment-round-2.md`. The assignment stays OPEN: it is sliced one ticket per claim.
 - Slice: SOLR-18214, Base configset during configset creation is not optional.
 - Capability tags used: review. Research only: no code, no comments, no push except this claim and the report section.
@@ -11,3 +11,7 @@
 - Decision ladder: rung 1 for the code and history reads; a probe only if rung 1 leaves two explanations open.
 
 Heartbeat: 2026-10-24T06:25:41Z
+
+Result: 2026-10-24T06:26:36Z: NEEDS CHRISTOS. Options 1 to 3 recorded; the docs and the command layer default to _default, and the ticket author states option 2. Section in reports/new-ui-assessment-round-2.md.
+
+DONE: 2026-10-24T06:26:36Z. Deliverable: `reports/new-ui-assessment-round-2.md` (SOLR-18214 section).
