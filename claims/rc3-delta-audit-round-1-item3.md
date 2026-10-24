@@ -1,7 +1,7 @@
 # Claim: rc3-delta-audit-round-1-item3
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/rc3-delta-audit-round-1.md`, item 3 (the cuvs note). Item 1 is claimed by vm2 in `claims/rc3-delta-audit-round-1-item1.md`; items 2 and 4 stay open for other hosts.
 - Slice: item 3 only, commit bafa4eb93b (cuvs breakage documentation, #5182).
 - Capability tags used: review. Research only: no code, no comments, no push except this claim and the report section.
@@ -11,3 +11,7 @@
 - Decision ladder: rung 1 for the note, the cuvs module, and the Lucene version, read from the code and history; a probe only if rung 1 leaves two explanations open.
 
 Heartbeat: 2026-10-24T06:36:36Z
+
+Result: 2026-10-24T06:39:59Z: CLEAN on substance, two cosmetic wording findings (expected-to-be-fixed claim without a fix version; "accelertion"). Section in reports/rc3-delta-audit-round-1.md.
+
+DONE: 2026-10-24T06:39:59Z. Deliverable: `reports/rc3-delta-audit-round-1.md` (item 3 section).
