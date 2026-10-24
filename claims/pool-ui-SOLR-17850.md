@@ -1,7 +1,7 @@
 # Claim: pool-ui-SOLR-17850
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/pool-ui-tickets-round-1.md`, one ticket per claim. Ticket type: screen (the last claim was a component, SOLR-17909, owner complaint 5).
 - Slice: SOLR-17850 (solr.SearchHandler form), gate only. The implementation is on fork branch `solr-17850-search-handler-form` at `887778ce5d`, based on `c8ab71430f`, with `SearchHandlerForm.kt` and `SearchHandlerFormTest.kt`. This claim verifies the branch's tests and spotless on a fresh checkout. No code change.
 - Open question from the index-query report (not settled by this gate): the ticket's field set needs Christos's answer (report verdict NEEDS CHRISTOS). The gate verifies the branch as written; it does not decide the field set.
@@ -17,3 +17,7 @@ Heartbeat: 2026-10-24T08:54:50Z
 Run: job `pool-ui-17850-887778ce5d-085936`, log dir `/workspace/gates/logs/vm6/pool-ui-17850/`, head `887778ce5d` (fork branch, not pushed by this claim), started 2026-10-24T08:59:44Z (UTC). Steps: spotless, then `:shared:jvmTest --tests org.apache.solr.ui.views.searchhandler.SearchHandlerFormTest`, through `pool/bin/bg-steps.sh` with the stand-in libEGL and SOFTWARE_FAST.
 
 Heartbeat: 2026-10-24T08:59:44Z
+
+Result: 2026-10-24T09:05:37Z: PASS at head 887778ce5d (job `pool-ui-17850-887778ce5d-085936`). spotless rc=0 (BUILD SUCCESSFUL in 1m 1s); `:shared:jvmTest --tests org.apache.solr.ui.views.searchhandler.SearchHandlerFormTest` rc=0 (BUILD SUCCESSFUL in 25s). Tests 6, failures 0, errors 0, skipped 0 (testExecuteReportsDebugMode, testExecuteNeedsANonBlankQuery, testOnlyAdditionalInputsCanBeRemoved, testClearAllResetsToDefaults, testArrayFieldStartsWithOneInputAndAddsMore, testShowsAbbreviationsWithWrittenOutForm). Log dir `/workspace/gates/logs/vm6/pool-ui-17850/`. Conclusive for the software-renderer JVM tests. GL: grep for Canvas, DrawScope, drawWithCache, graphicsLayer, drawBehind, drawWithContent and shader in the searchhandler package at 887778ce5d finds none, so not gl-blast-radius. Not settled by this gate: the field set (report verdict NEEDS CHRISTOS). Fork branch not pushed by this claim.
+
+DONE: 2026-10-24T09:05:37Z. Deliverables: this claim only.
