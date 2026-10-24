@@ -43,3 +43,18 @@ Checked on the branch by reading the code, not by running it:
 Not re-run here. The branch's 3-of-3 result comes from the pool-ui-tickets assignment, which records a gate run on 8047b99ef09 by vm2. The draft says so.
 
 The staged ask therefore asks for the sufficiency decision and offers Options A to C, recommending A (open the PR from the branch, screen wiring later).
+
+## Item 2 (third ticket): SOLR-17849 staged ask (draft, not posted), vm6, 2026-10-24
+
+Draft: `jira/jira-comment-SOLR-17849-draft.md`. Addressee [~sandbergja] (Jane Sandberg), with the question the report named. The ticket has three comments: Sandberg (2025-10-23, "I'd like to work on this ticket", one question about the section name), malliaridis (2025-10-24, answering it: rename to "Index and Query"), malliaridis (2025-09-09, a note on the navigation scope). No later activity, so nothing records that she dropped it.
+
+Correction to the index-query report. Its verdict for SOLR-17849 ("no collection API client, READY TO VOLUNTEER, smallest slice the dropdowns and route") is out of date. Nick's implementation is already on two fork branches:
+- `solr-17849-index-query-header` (`fb51fbcb23`): `views/indexquery/IndexQueryHeader.kt`, `IndexQueryHeaderTest.kt`, strings, and a draft PR description.
+- `solr-17849-index-query-screen` (`b91f75ed93`, merges the header branch and adds three commits): `components/indexquery/data/` (repository and interface), `viewmodel/IndexQueryStateHolder.kt`, `views/indexquery/IndexQueryContent.kt`, hosting in `views/configsets/ConfigsetsContent.kt`, `views/searchhandler/SearchHandlerForm.kt`, and three test files.
+
+Read from the code, not run here. The branch's tests were not repeated in this pass. The draft asks Sandberg first, which is the check the report named before a public claim.
+
+Item status for `assignments/ui-volunteer-drafts-round-1.md` (set here in the report, not in the assignment file):
+- Item 1, SOLR-17861 staged ask: DONE, draft `jira-comment-SOLR-17861-draft.md` (`bbeedc1ec6`).
+- Item 2, one staged ask per READY ticket: SOLR-17909 DONE (`963c0ecb60`); SOLR-17911 DONE (`c5c55bd4e3`, with the stale-report correction); SOLR-17849 DONE (draft, this section). SOLR-17660 excluded: live on the old board with vm2.
+- Item 3, SOLR-17676 probe fold-in: DONE by `5810dc9ac3` (verified in this pass; the draft states the probe result).
