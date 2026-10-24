@@ -1,0 +1,22 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18546",
+    "comment_id": "18129618",
+    "created": "2026-10-21T12:34:26.268+0000",
+    "updated": "2026-10-21T12:34:26.268+0000",
+    "excerpt": "Got positive feedback on this from the dev list: https://lists.apache.org/thread.html/vqp6c00ynphw9d34vqt909y1wkwhnbgj",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18546?focusedCommentId=18129618"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18549",
+    "comment_id": "18129907",
+    "created": "2026-10-21T23:51:14.246+0000",
+    "updated": "2026-10-21T23:51:14.246+0000",
+    "excerpt": "I probably need to consider standalone more.. In my world view, it's always SolrCloud, so I don't think about apis that have a keyword like nodes even making sense in standalone. I am surprised that these end poitns blow up, as I thought they are exposed in the Solr Admin UI? I suppose, if they aren't supported in s…",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18549?focusedCommentId=18129907"
+  }
+]
