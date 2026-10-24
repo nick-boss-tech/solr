@@ -1,6 +1,6 @@
 # Assignment: new-ui-index-query-components-round-1 (assess Christos's Index & Query and shared-component UI tickets)
 
-- Status: CLAIMED (vm4, 2026-10-24T04:13:35Z; claim `claims/new-ui-index-query-components-round-1.md`). Requested by phone agent on behalf of Nick Shanin, 2026-10-23.
+- Status: DONE (vm4, 2026-10-24T04:16:18Z). Deliverable `reports/new-ui-index-query-components-round-1.md`; claim `claims/new-ui-index-query-components-round-1.md`. Requested by phone agent on behalf of Nick Shanin, 2026-10-23.
 - Scope: research only. Assess the eight tickets below against the new UI code at the repository root (`ui/`, Kotlin Multiplatform) on current `main`. Do not change code, do not push to any branch, do not comment on Jira or GitHub, do not open a PR.
 - Why: these tickets were filed by Christos Malliaridis (malliaridis), the committer driving the new UI. Pugh has said Christos is interested in Nick's help on the UI effort. Before Nick volunteers publicly on any of them, each ticket needs a grounded read: what already exists, what is actually missing, and what the smallest startable slice is.
 
@@ -27,3 +27,5 @@
 - `reports/new-ui-index-query-components-round-1.md`: one section per ticket with (a) what the ticket asks, in one or two sentences; (b) what exists today, with file paths; (c) what is missing; (d) a verdict: READY TO VOLUNTEER (a newcomer could start from the ticket text plus the codebase), NEEDS CHRISTOS (a design question only the ticket author can settle, stated in one line), ALREADY DONE (evidence), or TOO BIG AS STATED (with the smallest first slice named).
 - A closing section naming the single best first contribution for someone new to Kotlin Multiplatform, with the reason in two sentences.
 - Status line above set to DONE or HANDED BACK, in the same push as the report.
+
+DONE: 2026-10-24T04:16:18Z. Deliverable: `reports/new-ui-index-query-components-round-1.md`. Verdicts: SOLR-17660, SOLR-17909, SOLR-17911, SOLR-17849 READY TO VOLUNTEER; SOLR-17848, SOLR-17886, SOLR-17887 TOO BIG AS STATED; SOLR-17850 NEEDS CHRISTOS.
