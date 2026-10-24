@@ -18,4 +18,4 @@ The five pools, in order: follow-ups on our open PRs and live UI claims; UI tick
 
 ## The shape of the work
 
-Assess before volunteering, volunteer before building, and line up a reviewer before starting: the staged ask in `comment-formula.md`. A claim is what assigns work. A gate is the only "done" for code. A receipt at the exact live tip settles gate state.
+Assess before volunteering, volunteer before building, and line up a reviewer before starting: the staged ask in `comment-formula.md`. A claim is what assigns work. A gate is the only "done" for code. A receipt at the exact live tip settles gate state. Records are add-only: claim, report, and draft files are added, never edited; shared indexes are generated. Resolve a ticket from its receipt first.
