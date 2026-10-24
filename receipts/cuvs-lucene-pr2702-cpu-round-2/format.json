@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+    "-jar",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/google-java-format-1.27.0-all-deps.jar",
+    "--dry-run",
+    "--set-exit-if-changed",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/patched/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/patched/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/patched/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java"
+  ],
+  "exit_code": 0,
+  "files": [
+    "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java",
+    "java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+    "java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java"
+  ],
+  "formatter_sha256": "ed07239f3cb72e25bf2a0eae63e76831f9f11963bd19fc36a6f1d87016ac1763"
+}

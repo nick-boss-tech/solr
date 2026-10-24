@@ -1,0 +1,146 @@
+[
+  {
+    "label": "test-patched-10.2",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/test-patched-10.2:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/cuvs-api.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-test-framework-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-analysis-common-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 4,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "test-original-10.2-mutant",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/test-original-10.2:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/mask-dropped-10.2:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/cuvs-api.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-test-framework-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-analysis-common-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 1,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "test-patched-10.2-mutant",
+    "exit_code": 1,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/test-patched-10.2:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/mask-dropped-10.2:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/cuvs-api.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-test-framework-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-analysis-common-10.2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 4,
+    "failures": 3,
+    "failed_methods": [
+      "testDeletedDocumentsAreExcluded",
+      "testFilterIsForwarded",
+      "testFilterAndDeletesAreIntersected"
+    ]
+  },
+  {
+    "label": "test-patched-10.3",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/test-patched-10.3:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.3.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/cuvs-api.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.3.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.3.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.3.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-test-framework-10.3.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-analysis-common-10.3.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 4,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "test-patched-10.4",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/test-patched-10.4:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.4.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/cuvs-api.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-test-framework-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-analysis-common-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 4,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "test-original-10.4-mutant",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/test-original-10.4:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/mask-dropped-10.4:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.4.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/cuvs-api.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-test-framework-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-analysis-common-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 1,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "test-patched-10.4-mutant",
+    "exit_code": 1,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/test-patched-10.4:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/mask-dropped-10.4:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.4.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/cuvs-api.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-test-framework-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-analysis-common-10.4.0.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 4,
+    "failures": 3,
+    "failed_methods": [
+      "testDeletedDocumentsAreExcluded",
+      "testFilterIsForwarded",
+      "testFilterAndDeletesAreIntersected"
+    ]
+  },
+  {
+    "label": "test-patched-10.5",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/classes/test-patched-10.5:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.5.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/cuvs-api.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.5.1.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.5.1.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.5.1.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-test-framework-10.5.1.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-analysis-common-10.5.1.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/junit-4.13.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/hamcrest-2.2.jar:/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 4,
+    "failures": 0,
+    "failed_methods": []
+  }
+]

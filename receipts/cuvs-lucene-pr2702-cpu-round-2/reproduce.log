@@ -1,0 +1,271 @@
+Verified existing patched source and all pinned source blobs.
+
+{"label": "cuvs-api", "exit_code": 0, "source_count": 44, "class_count": 95}
+{"label": "module-10.2", "exit_code": 0, "source_count": 42, "class_count": 64}
+{"label": "module-10.3", "exit_code": 0, "source_count": 45, "class_count": 67}
+{"label": "module-10.4", "exit_code": 0, "source_count": 50, "class_count": 72}
+{"label": "module-10.5", "exit_code": 0, "source_count": 50, "class_count": 72}
+{
+  "jar": "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.2.jar",
+  "targets": [
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.2.2.jar",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.2.2.jar",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.2.2.jar"
+  ],
+  "class_count": 64,
+  "checked_constants_and_types": 692,
+  "member_constants": 338,
+  "member_uses": 556,
+  "failure_records": 0,
+  "unique_failures": [],
+  "minor": "10.2"
+}
+{
+  "jar": "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.3.jar",
+  "targets": [
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.3.2.jar",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.3.2.jar",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.3.2.jar"
+  ],
+  "class_count": 67,
+  "checked_constants_and_types": 703,
+  "member_constants": 343,
+  "member_uses": 562,
+  "failure_records": 0,
+  "unique_failures": [],
+  "minor": "10.3"
+}
+{
+  "jar": "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.4.jar",
+  "targets": [
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.4.0.jar",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.4.0.jar",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.4.0.jar"
+  ],
+  "class_count": 72,
+  "checked_constants_and_types": 723,
+  "member_constants": 346,
+  "member_uses": 566,
+  "failure_records": 0,
+  "unique_failures": [],
+  "minor": "10.4"
+}
+{
+  "jar": "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/module-10.5.jar",
+  "targets": [
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-core-10.5.1.jar",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-backward-codecs-10.5.1.jar",
+    "/workspace/gates/cuvs-pr2702-cpu-round-2/material/cuvs-lucene-pr2702-round-2/jars/lucene-codecs-10.5.1.jar"
+  ],
+  "class_count": 72,
+  "checked_constants_and_types": 729,
+  "member_constants": 346,
+  "member_uses": 566,
+  "failure_records": 0,
+  "unique_failures": [],
+  "minor": "10.5"
+}
+{"label": "test-patched-10.2", "exit_code": 0, "source_count": 2, "class_count": 3}
+test-patched-10.2 exit 0 JUnit version 4.13.2
+....
+Time: 0.611
+
+OK (4 tests)
+
+Oct 24, 2026 9:12:53 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+
+{"label": "mask-dropped-10.2", "exit_code": 0, "source_count": 1, "class_count": 1}
+{"label": "test-original-10.2", "exit_code": 0, "source_count": 1, "class_count": 2}
+test-original-10.2-mutant exit 0 JUnit version 4.13.2
+.
+Time: 0.495
+
+OK (1 test)
+
+Oct 24, 2026 9:12:56 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+
+test-patched-10.2-mutant exit 1 ementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+3) testFilterAndDeletesAreIntersected(com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery)
+java.lang.AssertionError: expected:<5> but was:<0>
+	at __randomizedtesting.SeedInfo.seed([18556C0D:C39F7355389E4A1C]:0)
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:647)
+	at org.junit.Assert.assertEquals(Assert.java:633)
+	at com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery.assertAcceptedHits(TestCompatKnnFloatVectorQuery.java:131)
+	at com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery.assertAcceptedDocuments(TestCompatKnnFloatVectorQuery.java:112)
+	at com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery.testFilterAndDeletesAreIntersected(TestCompatKnnFloatVectorQuery.java:76)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1763)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:946)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:982)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:996)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:955)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:840)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:891)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:902)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+FAILURES!!!
+Tests run: 4,  Failures: 3
+
+Oct 24, 2026 9:12:56 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+NOTE: reproduce with: gradlew test --tests TestCompatKnnFloatVectorQuery.testDeletedDocumentsAreExcluded -Dtests.seed=18556C0D -Dtests.locale=kgp-Latn-BR -Dtests.timezone=Asia/Muscat -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+NOTE: reproduce with: gradlew test --tests TestCompatKnnFloatVectorQuery.testFilterIsForwarded -Dtests.seed=18556C0D -Dtests.locale=kgp-Latn-BR -Dtests.timezone=Asia/Muscat -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+NOTE: reproduce with: gradlew test --tests TestCompatKnnFloatVectorQuery.testFilterAndDeletesAreIntersected -Dtests.seed=18556C0D -Dtests.locale=kgp-Latn-BR -Dtests.timezone=Asia/Muscat -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+NOTE: test params are: codec=DeflateWithPresetCompressingStoredFieldsData(storedFieldsFormat=Lucene90CompressingStoredFieldsFormat(compressionMode=BEST_COMPRESSION, chunkSize=85, maxDocsPerChunk=4, blockShift=9), termVectorsFormat=Lucene90CompressingTermVectorsFormat(compressionMode=BEST_COMPRESSION, chunkSize=85, maxDocsPerChunk=4, blockSize=9)), sim=Asserting(RandomSimilarity(queryNorm=false): {}), locale=kgp-Latn-BR, timezone=Asia/Muscat
+NOTE: Linux 6.1.166-24.303.amzn2023.aarch64 aarch64/Eclipse Adoptium 21.0.12.1 (64-bit)/cpus=4,threads=1,free=90892808,total=134217728
+NOTE: All tests run in this JVM: [TestCompatKnnFloatVectorQuery]
+
+{"label": "test-patched-10.3", "exit_code": 0, "source_count": 2, "class_count": 3}
+test-patched-10.3 exit 0 JUnit version 4.13.2
+....
+Time: 0.617
+
+OK (4 tests)
+
+Oct 24, 2026 9:12:58 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+
+{"label": "test-patched-10.4", "exit_code": 0, "source_count": 2, "class_count": 3}
+test-patched-10.4 exit 0 JUnit version 4.13.2
+....
+Time: 0.624
+
+OK (4 tests)
+
+Oct 24, 2026 9:13:00 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+
+{"label": "mask-dropped-10.4", "exit_code": 0, "source_count": 1, "class_count": 1}
+{"label": "test-original-10.4", "exit_code": 0, "source_count": 1, "class_count": 2}
+test-original-10.4-mutant exit 0 JUnit version 4.13.2
+.
+Time: 0.528
+
+OK (1 test)
+
+Oct 24, 2026 9:13:03 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+
+test-patched-10.4-mutant exit 1 StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+3) testFilterAndDeletesAreIntersected(com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery)
+java.lang.AssertionError: filtered document returned: 0
+	at __randomizedtesting.SeedInfo.seed([18556C0D:C39F7355389E4A1C]:0)
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery.assertAcceptedHits(TestCompatKnnFloatVectorQuery.java:134)
+	at com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery.assertAcceptedDocuments(TestCompatKnnFloatVectorQuery.java:123)
+	at com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery.testFilterAndDeletesAreIntersected(TestCompatKnnFloatVectorQuery.java:76)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1763)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:946)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:982)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:996)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:955)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:840)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:891)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:902)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+FAILURES!!!
+Tests run: 4,  Failures: 3
+
+Oct 24, 2026 9:13:04 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+NOTE: reproduce with: gradlew test --tests TestCompatKnnFloatVectorQuery.testDeletedDocumentsAreExcluded -Dtests.seed=18556C0D -Dtests.locale=kgp-Latn-BR -Dtests.timezone=Asia/Muscat -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+NOTE: reproduce with: gradlew test --tests TestCompatKnnFloatVectorQuery.testFilterIsForwarded -Dtests.seed=18556C0D -Dtests.locale=kgp-Latn-BR -Dtests.timezone=Asia/Muscat -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+NOTE: reproduce with: gradlew test --tests TestCompatKnnFloatVectorQuery.testFilterAndDeletesAreIntersected -Dtests.seed=18556C0D -Dtests.locale=kgp-Latn-BR -Dtests.timezone=Asia/Muscat -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+NOTE: test params are: codec=DeflateWithPresetCompressingStoredFieldsData(storedFieldsFormat=Lucene90CompressingStoredFieldsFormat(compressionMode=BEST_COMPRESSION, chunkSize=85, maxDocsPerChunk=4, blockShift=9), termVectorsFormat=Lucene90CompressingTermVectorsFormat(compressionMode=BEST_COMPRESSION, chunkSize=85, maxDocsPerChunk=4, blockSize=9)), sim=Asserting(RandomSimilarity(queryNorm=false): {}), locale=kgp-Latn-BR, timezone=Asia/Muscat
+NOTE: Linux 6.1.166-24.303.amzn2023.aarch64 aarch64/Eclipse Adoptium 21.0.12.1 (64-bit)/cpus=4,threads=1,free=89915432,total=134217728
+NOTE: All tests run in this JVM: [TestCompatKnnFloatVectorQuery]
+
+{"label": "test-patched-10.5", "exit_code": 0, "source_count": 2, "class_count": 3}
+test-patched-10.5 exit 0 JUnit version 4.13.2
+....
+Time: 0.614
+
+OK (4 tests)
+
+Oct 24, 2026 9:13:06 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+
+CPU compile, linkage, JUnit and mutation proofs completed. No GPU proof is claimed.
