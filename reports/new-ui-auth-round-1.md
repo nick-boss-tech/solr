@@ -54,3 +54,11 @@ Sources: Jira REST API (issues.apache.org, public reads, comments, changelog, re
 Neither ticket is a good first UI contribution for a newcomer. The remaining token refresh and ID-token identity work both touch how credentials are stored and sent, so a wrong step there carries real cost, and the reviewer should be Christos. A newcomer could start instead on the non-security items in the `new-ui-index-query-components` set, or on the small KDoc mismatch above, which is not a contribution by itself.
 
 For the security-sensitive path, a reasonable first slice is the refresh implementation in `HttpClientUtils.kt`, after Christos confirms the refresh-failure behavior in (c).
+
+## Follow-up, 2026-10-24: SOLR-17845 status
+
+Rechecked on 2026-10-24 against `main` at `498a09aea9`, open PRs (none touch token refresh), and Jira (no comments after 2026-02-22). Verdict unchanged: the core OAuth flow is done, and token refresh and ID-token identity are open.
+
+New detail on token refresh: Ktor 3.5.2 (`io/ktor/client/plugins/auth/Auth.kt`, the refresh loop on `isUnauthorizedResponse`, default `401`) calls the bearer `refreshTokens` block on a 401. Solr's JWT plugin returns 401 for an expired token (`solr/modules/jwt-auth/src/java/org/apache/solr/security/jwt/JWTAuthPlugin.java` lines 518 to 529 and 692 to 696). So an expired access token should reach the `TODO` in `HttpClientUtils.kt` and throw `NotImplementedError`. This is read from the source. It has not been reproduced against a running Solr.
+
+Draft Jira status note, not posted: `pr-drafts/SOLR-17845/jira-comment.md`. It asks the assignee whether to mark the ticket Resolved with two new sub-tasks, or keep it open, and whether SOLR-17885 closes when refresh lands.
