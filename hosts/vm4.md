@@ -7,8 +7,12 @@ Capabilities verified on this host:
 - Bash 5.1.16 (aarch64). Python 3.11.17 at `/usr/local/bin/python3`. JDK 21.0.12.1 at `/workspace/tools/jdk21`. curl 7.81.0. Git 2.49.1 at `/workspace/tools/git-2.49.1/bin/git`.
 - GitHub archive downloads for the BATS libraries: HTTP 200 from this host on 2026-10-24.
 
+Environment added for PR 5204 (2026-10-24):
+- `lsof` 4.99.7 from conda-forge at `/workspace/tools/lsof-env/bin` (put first on PATH for BATS runs).
+- `/workspace/tools/reap-run.py`: child-subreaper wrapper. This VM's PID 1 does not reap orphaned children, so Solr JVMs left zombies and `solr stop` waited 180 seconds. Wrap each Gradle BATS command with it.
+
 Heartbeat:
-- 2026-10-24T20:52Z: active claim `claims/pr-5204-picocli-review-vm4-round-1-phase-r.md` (PR 5204 review reproduction). Worktree `/workspace/worktrees/pr-5204-r` at the reviewed head.
+- 2026-10-24T21:58Z: active claims `claims/pr-5204-phase-g-final-gate-vm4-round-1.md` (final-head gate, leg 1 running). Earlier: `claims/pr-5204-picocli-review-vm4-round-1-phase-r.md`.
 
 Disk record:
 - 2026-10-18T15:09Z before `chaos-5516-run1`: `/` 4.6G free, 39% used; inodes 481348 free (9% used).
