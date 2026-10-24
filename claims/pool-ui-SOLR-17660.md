@@ -10,7 +10,7 @@
 - Visual check: preview rendered to PNG (`list-empty-filter.png`, `list-filled.png` in the same log dir). The scratch capture test was not committed.
 - Environment note: this host has no GL driver. Skiko needs `libEGL.so.1`; the run used Mesa from conda-forge (`/workspace/tools/mesa-egl/lib`, via LD_LIBRARY_PATH). The pool's `material/ui-test-setup/run-ui-jvm-tests.sh` was not used.
 - Capability tags used: implementation, ui, jvm-tests.
-- Started: 2026-10-24T18:00:00Z (UTC) (approximate). Lease: stale 2 hours after the last heartbeat. Attempts: 1. Idempotency key: pool-ui-SOLR-17660@498a09aea9.
+- Started: 2026-10-24T17:58:17Z (UTC), the claim write time. Lease: stale 2 hours after the last heartbeat. Attempts: 1. Idempotency key: pool-ui-SOLR-17660@498a09aea9.
 - Links: Ticket SOLR-17660 (parent SOLR-17886). Category: ui. Guide: `/workspace/guides/new-ui-figma-ticket-guide.md` on vm4.
 - Constraints: no JIRA or GitHub post, no PR opened. Commit as Nick Shanin with no trailers. No force push.
 
