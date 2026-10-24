@@ -100,3 +100,20 @@ Not verified: no build or test was run for this ticket. Research only, per the a
 Smallest first slice, once option 1 is chosen: resolve an omitted base to `DEFAULT_CONFIGSET_NAME` in `CloneConfigSet.cloneExistingConfigSet` (lines 65 to 73) and add a `CloneConfigSetAPITest` case. The `_default`-deletion part is a separate slice and needs its own decision.
 
 Not verified: no build or test was run. Research only, per the assignment.
+
+## SOLR-17657: Evaluate and update checksum and signature verification
+
+(a) Ask: evaluate Gradle's native dependency verification (`gradle/verification-metadata.xml`, with sha256 and optionally PGP signatures) and move to it if preferred. The ticket's acceptance criteria are: the GitHub workflows keep verifying checksums and optionally signatures; if native, update the developer guide, remove the custom checksum tasks, and remove the checksum files in `solr/licenses`. If not native, extend the existing tasks so the new UI module's checksums are generated too. Open, labels `checksum`, `gradle`, `integrity`, `verification`, `pull-request-available`. Unassigned. The ticket is addressed to Christos Malliaridis (malliaridis).
+
+(b) Exists today on main:
+- `gradle/validation/jar-checks.gradle` holds the custom checksum logic. `validateJarChecksums` (line 209) compares each dependency against `solr/licenses/<jar>.sha1`, and a missing file fails the build (line 223). The file says the checks share state without file outputs, so they must run together.
+- `solr/licenses` holds 373 `.sha1` files and the license and notice files.
+- `.github/renovate.json:26` lists `solr/licenses/*.sha1` as a file filter, so Renovate already regenerates these files on dependency bumps.
+- No `gradle/verification-metadata.xml` exists on main. PR apache/solr#3828, which tests the native approach, has not merged. The ticket's comment from pkarwasz (2025-11-02) describes the experiment: the migration is straightforward, but it raises a maintenance question.
+- The ticket says the new UI module is a Kotlin Multiplatform module that does not use the JavaPlugin, so the jar checks do not cover it. The top-level `settings.gradle` does not include `ui` as a Gradle build from the lines I checked. The `ui/` build is separate, so this is not confirmed here.
+
+(c) Missing: a decision. The pkarwasz comment sets out two paths. (1) Keep sha256 metadata and have Renovate regenerate it with `--write-verification-metadata sha256` during its cleanup run. Integrity only, no authenticity. (2) Add PGP signature verification. That is all-or-nothing: builds fail when a key is missing, and the experiment found about 100 missing keys. Choosing between them is the ticket's open question, and the ticket is addressed to the maintainer.
+
+(d) Verdict: NEEDS CHRISTOS. Question: should Solr move to Gradle's native verification metadata with sha256 maintained by Renovate (path 1), or add PGP signature verification with its roughly 100 missing keys (path 2)?
+
+Not verified: no build was run and PR #3828 was not inspected beyond its ticket comment. Research only, per the assignment.
