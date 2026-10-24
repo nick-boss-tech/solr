@@ -1,17 +1,17 @@
 # Assignment: pr-followups-round-1 (follow-ups on our open PRs and posted notes)
 
-- Status: OPEN. Intended host: any host with the `draft` or `records` tag. Posted by phone agent on behalf of Nick Shanin, 2026-10-23.
-- Scope: drafts and records only. Nothing posts to Jira or GitHub under this assignment; every draft is a deliverable for the owner's go.
+- Status: OPEN. Intended host: any host with the `review`, `draft`, or `records` tag. Posted by phone agent on behalf of Nick Shanin, 2026-10-23; updated 2026-10-24 for the PR #5117 follow-up scope map.
+- Scope: read-only research/records and drafts only. Nothing posts to Jira or GitHub under this assignment; every draft is a deliverable for the owner's go. No implementation work is assigned here.
 
 ## Items
 
 1. **SOLR-17988 follow-up comment (draft, after the PR).** The evidence review and the docs build for this ticket are decomposed as `assignments/solr-17988-subtasks-round-1.md` (one claim per gap, verification first, then assembly). When that assignment's PR is built and opened on the owner's go, deliver the follow-up as an edit of the posted note (comment 18131215), not a second comment: the ticket's only watchers are Eric and Nick, so the owner has directed that the note is free to edit. The edit leads with the audit's findings (the posted note's "looks complete" does not hold for the environment variables; the audit's verdict says so in terms), names the serious gaps with their evidence, and points [~epugh] at the open PR for review, per the engaged-sponsor adjustment in `comment-formula.md`. Deliverable: the edited text drafted at `jira/jira-comment-SOLR-17988-followup-draft.md` plus a COMMENTS.md entry; applying the edit itself is the owner's go at presentation.
-2. **PR #5117 reply (draft).** A commenter asked on 2026-10-23 whether the PR can now be rebased "now that PR #5117 is merged"; #5117 is itself the PR in question and it is open, not merged (the premise is mistaken, likely a wrong number). Draft a brief, friendly reply stating that #5117 is still open, in the GitHub comment shape (header form). Deliverable: the draft text appended to this assignment's report file, `reports/pr-followups-round-1.md`.
+2. **PR #5117 follow-up scope map (research/record).** The original draft reply about “Now that PR #5117 is merged” is superseded: Nick replied on 2026-10-23 that #5117 had been rebased, with the current behavior and proof summary ([comment](https://github.com/apache/solr/pull/5117#issuecomment-6367130985)). Do not draft a duplicate reply. The live PR body offers a follow-up PR on request for the `QueryComponent.mergeIds` partial-shard totals leak. Map that offer to the existing open SOLR-18539, inspect adjacent merge paths and ticket history, and propose a narrow PR/test plan that separates SOLR-18550's remaining exact-union work and the `CombinedQueryComponent` short-list timeout failure. Deliverable: `reports/pr-5117-followup-plan.md`. No code change, Jira write, or public PR write.
 3. **SOLR-16630 sleep/latch thread, closeout (draft).** The conversion Tomas Lobbe asked for on PR #5106 is complete on the branch: the sleep inventory was worked through, the remaining event-waits were converted to latches (commits a31707acfd, 7ab3c03a1c, 136145b598), and Tomas added his own commit (2a35f8de72); the PR head is a02cc7ba6b. What never finished is the reply. Reconcile the standing draft reply with the current head and the gate state in `receipts/SOLR-16630.md` on this board, and deliver the updated draft for the owner's go: it reports the completed conversion, accepts Tomas's commit, and carries no stale counts from the older heads.
 4. **Watch items (no drafting).** Replies on SOLR-18470 and a Smiley review on PR #5202 are the live threads. If either lands, record it here with a timestamp; any response is drafted as a new item under this assignment, not posted.
 
 ## Rules
 
 - One item per claim slice is fine; mark the item you take in your claim.
-- Every draft follows `comment-formula.md` and is listed in `jira/COMMENTS.md` in the same push sequence.
-- Mark this assignment DONE when items 1 and 2 are delivered; item 3 stays open as a standing watch and moves to the next round.
+- Every comment draft follows `comment-formula.md` and is listed in `jira/COMMENTS.md` in the same push sequence.
+- Mark this assignment DONE when items 1, 2, and 3 are delivered; item 4 stays open as a standing watch and moves to the next round.
