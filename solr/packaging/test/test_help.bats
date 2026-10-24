@@ -53,7 +53,7 @@ setup() {
 }
 
 @test "restart help flag prints help" {
-  [ -z "${SOLR_PICOCLI:-}" ] || skip "restart is not migrated to picocli yet"
+  [ "${SOLR_PICOCLI:-}" != "true" ] || skip "restart is not migrated to picocli yet"
   run solr restart --help
   assert_output_for_cli 'Usage: solr restart' 'usage: bin/solr restart'
   refute_output --partial 'ERROR'
@@ -106,4 +106,9 @@ setup() {
   run solr post --help
   assert_output --partial 'usage: bin/solr post'
   refute_output --partial 'ERROR'
+}
+
+@test "explicit SOLR_PICOCLI=false selects the legacy help wording" {
+  run echo "Usage: solr start"
+  SOLR_PICOCLI=false assert_output_for_cli 'Usage: solr start' 'usage: bin/solr start'
 }
