@@ -1,0 +1,62 @@
+[
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 22,
+    "issues": 6
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 12,
+    "issues": 2
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 9,
+    "issues": 4
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 6,
+    "issues": 3
+  },
+  {
+    "username": "jaykay12",
+    "displayName": "Jalaz Kumar",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "gerlowskija",
+    "displayName": "Jason Gerlowski",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "hossman",
+    "displayName": "Chris M. Hostetter",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "ichattopadhyaya",
+    "displayName": "Ishan Chattopadhyaya",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "mlbiscoc",
+    "displayName": "Matthew Biscocho",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "nickshanin",
+    "displayName": "Nick Shanin",
+    "comments": 1,
+    "issues": 1
+  }
+]
