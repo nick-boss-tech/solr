@@ -5,7 +5,8 @@ usage: open-work.py [checkout]   (default: the current directory, a checkout of 
 
 Writes OPEN-WORK.md in the checkout. Unconfirmed notes are carried over from the existing file,
 keyed by path; a path with no note shows its Status line. Files whose status is DONE, META or
-a bare pointer are left out.
+a bare pointer are left out. A file named in the Closes: line of a DONE file is left out, and a
+CLAIMED file whose claim has a DONE: line is left out of the claimed list.
 """
 import datetime, os, re, subprocess, sys
 
@@ -42,6 +43,25 @@ def short(st):
     return st[:160]
 
 
+def claim_done(st):
+    m = re.search(r"claims/[\w.\-]+\.md", st)
+    if not m or not os.path.exists(os.path.join(root, m.group(0))):
+        return False
+    with open(os.path.join(root, m.group(0)), encoding="utf-8") as f:
+        return re.search(r"^DONE:", f.read(), re.M) is not None
+
+
+closed = set()
+for sub in ("assignments", "gates"):
+    for name in os.listdir(os.path.join(root, sub)):
+        if not name.endswith(".md"):
+            continue
+        text = open(os.path.join(root, sub, name), encoding="utf-8").read()
+        if (status_of(text) or "").startswith("DONE"):
+            for line in text.splitlines():
+                if line.startswith("Closes:"):
+                    closed.update(re.findall(r"`((?:assignments|gates)/[^`]+\.md)`", line))
+
 items = {k: [] for k in ("top", "open_a", "open_g", "claimed", "handed", "green", "unconf", "paused")}
 for sub in ("assignments", "gates"):
     for name in sorted(os.listdir(os.path.join(root, sub))):
@@ -50,7 +70,7 @@ for sub in ("assignments", "gates"):
         path = f"{sub}/{name}"
         text = open(os.path.join(root, path), encoding="utf-8").read()
         st = status_of(text)
-        if st is None:
+        if st is None or path in closed or (st.startswith("CLAIMED") and claim_done(st)):
             continue
         title = title_of(text)
         if st.startswith("OPEN"):
