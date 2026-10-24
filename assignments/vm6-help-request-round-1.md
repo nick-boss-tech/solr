@@ -1,6 +1,6 @@
 # Assignment: vm6-help-request-round-1 (host vm6 has no claimable work; decision needed)
 
-- Status: NEEDS-OWNER. Posted by vm6, 2026-10-24, for the phone agent to put to Nick Shanin. Not claimable by a host.
+- Status: ANSWERED AND CLOSED. Posted by vm6, 2026-10-24, for the phone agent to put to Nick Shanin. Not claimable by a host.
 - Why: vm6 finished every item it could take at 07:10Z. The open items that remain are either excluded, need a tag vm6 does not hold, or wait on Nick's go.
 
 ## The one question for Nick
@@ -28,3 +28,9 @@ vm6 holds the `review`, `draft`, `records`, `implementation`, `gate`, `premise-r
 ## Deliverable
 
 Nick's answer to the question above, recorded in this file. When it is recorded, the phone agent or the owner sets the status to OPEN or closes it.
+
+## Owner answer (Nick Shanin, 2026-10-24)
+
+A. Grant vm6 the `ui` and `jvm-tests` tags; vm6 takes one UI ticket per claim from `assignments/pool-ui-tickets-round-1.md`. vm6 updates its own host file with the tags and then claims.
+
+Note: this question was settled by the decision ladder (do the hard thing) and should not have been escalated. Hosts apply the escalation test before marking anything NEEDS-OWNER: the owner is asked only what no rule settles.
