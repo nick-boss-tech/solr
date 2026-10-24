@@ -1,0 +1,72 @@
+[
+  {
+    "file": "lucene-core-10.2.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-core/10.2.0/lucene-core-10.2.0.jar",
+    "sha256": "15fc7bf52454c50e7107b068e2386b3cb2fdf024698bf7965eb3dd33e6813e76"
+  },
+  {
+    "file": "lucene-backward-codecs-10.2.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-backward-codecs/10.2.0/lucene-backward-codecs-10.2.0.jar",
+    "sha256": "5f91c3eba54cf25d990e9c6a3cd13185521ca61c546eb5603f0c258627d0dfc6"
+  },
+  {
+    "file": "lucene-codecs-10.2.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-codecs/10.2.0/lucene-codecs-10.2.0.jar",
+    "sha256": "48aed5ccc90d3173a5484e073050e9396bb7333591e35c23188da48883bed071"
+  },
+  {
+    "file": "lucene-core-10.2.0-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-core/10.2.0/lucene-core-10.2.0-sources.jar",
+    "sha256": "334ac9a086932adec0d8f47713729b9fe46126c9d8b6ce9de277f82edbe7b094"
+  },
+  {
+    "file": "lucene-core-10.4.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-core/10.4.0/lucene-core-10.4.0.jar",
+    "sha256": "8f894d211a8123938ccb9ff6827d136747e0eb6b1782ada6ac9086aa911b52e2"
+  },
+  {
+    "file": "lucene-backward-codecs-10.4.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-backward-codecs/10.4.0/lucene-backward-codecs-10.4.0.jar",
+    "sha256": "4e77973982b8e24e4357b18e75f54cffe74b1ab7a354b1b81e1d23d6265de493"
+  },
+  {
+    "file": "lucene-codecs-10.4.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-codecs/10.4.0/lucene-codecs-10.4.0.jar",
+    "sha256": "1046679f2eb254fe59c36112daf05e29fa04fce785d6f9b5cc6ada2e5ba01d32"
+  },
+  {
+    "file": "lucene-core-10.4.0-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-core/10.4.0/lucene-core-10.4.0-sources.jar",
+    "sha256": "2411eab5a52ef845327fae889a7ed14f2d75d0c765bedb30156fe95195e05e16"
+  },
+  {
+    "file": "cuvs-lucene-25.12.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/nvidia/cuvs/lucene/cuvs-lucene/25.12.0/cuvs-lucene-25.12.0.jar",
+    "sha256": "d794883f7acfc39bda34930cf3c17f397b8aaec5bd041b3975dc57fa594b9216"
+  },
+  {
+    "file": "cuvs-lucene-25.12.0-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/nvidia/cuvs/lucene/cuvs-lucene/25.12.0/cuvs-lucene-25.12.0-sources.jar",
+    "sha256": "c882569608b31058529d805b391a8427b23ae4971eba37382b9fb512e2966ecc"
+  },
+  {
+    "file": "cuvs-java-25.12.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/nvidia/cuvs/cuvs-java/25.12.0/cuvs-java-25.12.0.jar",
+    "sha256": "58768642601669c01b662e2a1fd6fbd368db0c49381249b25be5469ef35cc387"
+  },
+  {
+    "file": "cuvs-lucene-26.10.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/nvidia/cuvs/lucene/cuvs-lucene/26.10.0/cuvs-lucene-26.10.0.jar",
+    "sha256": "68200fefd2b0a3c23d3f1e954465b24b4f85de52993812dd415defc1457668af"
+  },
+  {
+    "file": "cuvs-lucene-26.10.0-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/nvidia/cuvs/lucene/cuvs-lucene/26.10.0/cuvs-lucene-26.10.0-sources.jar",
+    "sha256": "05ae61116c1e9d433cf297a81cc2020ffa49c3d3c9e8ac299a6cdd16eac8b712"
+  },
+  {
+    "file": "cuvs-java-26.10.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/nvidia/cuvs/cuvs-java/26.10.0/cuvs-java-26.10.0.jar",
+    "sha256": "608d6f34dfdf691106ecf4e2284c61edfca2dfefaa5658891c6db0e4dc7ce5cc"
+  }
+]

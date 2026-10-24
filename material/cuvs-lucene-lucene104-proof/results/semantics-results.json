@@ -1,0 +1,36 @@
+[
+  {
+    "label": "semantics-compiled102-runtime102",
+    "exit_code": 0,
+    "command": [
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\java.exe",
+      "-ea",
+      "-cp",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\classes\\harness;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\classes\\affected-10.2.0;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\cuvs-lucene-26.10.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\cuvs-java-26.10.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-core-10.2.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-backward-codecs-10.2.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-codecs-10.2.0.jar",
+      "SortedNodesSemantics"
+    ]
+  },
+  {
+    "label": "semantics-compiled104-runtime102",
+    "exit_code": 0,
+    "command": [
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\java.exe",
+      "-ea",
+      "-cp",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\classes\\harness;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\classes\\affected-10.4.0;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\cuvs-lucene-26.10.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\cuvs-java-26.10.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-core-10.2.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-backward-codecs-10.2.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-codecs-10.2.0.jar",
+      "SortedNodesSemantics"
+    ]
+  },
+  {
+    "label": "semantics-compiled102-runtime104",
+    "exit_code": 0,
+    "command": [
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\java.exe",
+      "-ea",
+      "-cp",
+      "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\classes\\harness;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\classes\\affected-10.2.0;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\cuvs-lucene-26.10.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\cuvs-java-26.10.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-core-10.4.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-backward-codecs-10.4.0.jar;C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-codecs-10.4.0.jar",
+      "SortedNodesSemantics",
+      "replacement-only"
+    ]
+  }
+]

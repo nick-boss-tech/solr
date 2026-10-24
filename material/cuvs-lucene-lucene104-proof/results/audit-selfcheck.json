@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "positive_baseline_failures": 0,
+  "detected": [
+    [
+      "ClassOrDescriptor",
+      "org/apache/lucene/audit/Missing",
+      "",
+      "",
+      "missing class"
+    ],
+    [
+      "Fieldref",
+      "org/apache/lucene/audit/Api",
+      "instanceField",
+      "I",
+      "static/instance mismatch"
+    ],
+    [
+      "Fieldref",
+      "org/apache/lucene/audit/Api",
+      "staticField",
+      "I",
+      "static/instance mismatch"
+    ],
+    [
+      "Methodref",
+      "org/apache/lucene/audit/Api",
+      "inherited",
+      "()V",
+      "missing exact member (name + descriptor)"
+    ],
+    [
+      "Methodref",
+      "org/apache/lucene/audit/Api",
+      "signature",
+      "(I)Ljava/lang/String;",
+      "missing exact member (name + descriptor)"
+    ],
+    [
+      "Methodref",
+      "org/apache/lucene/audit/Api",
+      "staticMethod",
+      "(I)Ljava/lang/String;",
+      "static/instance mismatch"
+    ],
+    [
+      "Methodref",
+      "org/apache/lucene/audit/Base",
+      "staticMethod",
+      "(I)Ljava/lang/String;",
+      "static/instance mismatch"
+    ],
+    [
+      "Methodref",
+      "org/apache/lucene/audit/Shape",
+      "call",
+      "()V",
+      "class/interface reference-kind mismatch"
+    ]
+  ],
+  "covers": [
+    "inherited member resolution",
+    "return-descriptor mismatch",
+    "static-to-instance method",
+    "static-to-instance field",
+    "instance-to-static field",
+    "removed inherited method",
+    "class-to-interface change",
+    "descriptor-only missing class",
+    "method handles",
+    "tableswitch and lookupswitch bytecode"
+  ]
+}

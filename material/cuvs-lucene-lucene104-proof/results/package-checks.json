@@ -1,0 +1,165 @@
+{
+  "status": "PASS",
+  "patch_checks": [
+    {
+      "snapshot": "release",
+      "command": [
+        "C:\\Users\\shaninna\\AppData\\Local\\Programs\\Git\\cmd\\git.exe",
+        "-C",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\release",
+        "apply",
+        "--check",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\cuvs-lucene-lucene104-fix.patch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "snapshot": "upstream",
+      "command": [
+        "C:\\Users\\shaninna\\AppData\\Local\\Programs\\Git\\cmd\\git.exe",
+        "-C",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\upstream",
+        "apply",
+        "--check",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\cuvs-lucene-lucene104-fix.patch"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "release_source_matches_maven_sources": true,
+  "legacy_source_matches_maven_sources": true,
+  "changed_jar_entries": [
+    "com/nvidia/cuvs/lucene/AcceleratedHNSWUtils.class"
+  ],
+  "jar_classes": [
+    "com/nvidia/cuvs/lucene/AcceleratedHNSWParams$Builder.class",
+    "com/nvidia/cuvs/lucene/AcceleratedHNSWParams$Strategy.class",
+    "com/nvidia/cuvs/lucene/AcceleratedHNSWParams.class",
+    "com/nvidia/cuvs/lucene/AcceleratedHNSWUtils$QuantizationType.class",
+    "com/nvidia/cuvs/lucene/AcceleratedHNSWUtils.class",
+    "com/nvidia/cuvs/lucene/CagraIndexParamsFactory.class",
+    "com/nvidia/cuvs/lucene/CuVS2510GPUSearchCodec.class",
+    "com/nvidia/cuvs/lucene/CuVS2510GPUVectorsFormat.class",
+    "com/nvidia/cuvs/lucene/CuVS2510GPUVectorsReader$FieldEntry.class",
+    "com/nvidia/cuvs/lucene/CuVS2510GPUVectorsReader$FloatToFloatFunction.class",
+    "com/nvidia/cuvs/lucene/CuVS2510GPUVectorsReader.class",
+    "com/nvidia/cuvs/lucene/CuVS2510GPUVectorsWriter$CagraMergeInputs.class",
+    "com/nvidia/cuvs/lucene/CuVS2510GPUVectorsWriter$IndexType.class",
+    "com/nvidia/cuvs/lucene/CuVS2510GPUVectorsWriter.class",
+    "com/nvidia/cuvs/lucene/FieldWriter.class",
+    "com/nvidia/cuvs/lucene/FilterBitsetCache$CacheEntry.class",
+    "com/nvidia/cuvs/lucene/FilterBitsetCache$CachedFilterBitset.class",
+    "com/nvidia/cuvs/lucene/FilterBitsetCache$FilterBuilder.class",
+    "com/nvidia/cuvs/lucene/FilterBitsetCache$FilterCacheKey.class",
+    "com/nvidia/cuvs/lucene/FilterBitsetCache.class",
+    "com/nvidia/cuvs/lucene/FilterBitsetCacheConfig.class",
+    "com/nvidia/cuvs/lucene/FilterCuVSProvider.class",
+    "com/nvidia/cuvs/lucene/FilterCuVSServiceProvider.class",
+    "com/nvidia/cuvs/lucene/GPUBuiltHnswGraph$HigherLevelNodesIterator.class",
+    "com/nvidia/cuvs/lucene/GPUBuiltHnswGraph$Level0NodesIterator.class",
+    "com/nvidia/cuvs/lucene/GPUBuiltHnswGraph.class",
+    "com/nvidia/cuvs/lucene/GPUFieldWriter.class",
+    "com/nvidia/cuvs/lucene/GPUIndex.class",
+    "com/nvidia/cuvs/lucene/GPUKnnFloatVectorQuery$1.class",
+    "com/nvidia/cuvs/lucene/GPUKnnFloatVectorQuery$2$1$1$1$1.class",
+    "com/nvidia/cuvs/lucene/GPUKnnFloatVectorQuery$2$1$1$1.class",
+    "com/nvidia/cuvs/lucene/GPUKnnFloatVectorQuery$2$1$1.class",
+    "com/nvidia/cuvs/lucene/GPUKnnFloatVectorQuery$2$1.class",
+    "com/nvidia/cuvs/lucene/GPUKnnFloatVectorQuery$2.class",
+    "com/nvidia/cuvs/lucene/GPUKnnFloatVectorQuery.class",
+    "com/nvidia/cuvs/lucene/GPUPerLeafCuVSKnnCollector.class",
+    "com/nvidia/cuvs/lucene/GPUSearchParams$Builder.class",
+    "com/nvidia/cuvs/lucene/GPUSearchParams$Strategy.class",
+    "com/nvidia/cuvs/lucene/GPUSearchParams.class",
+    "com/nvidia/cuvs/lucene/IndexInputInputStream.class",
+    "com/nvidia/cuvs/lucene/IndexOutputOutputStream.class",
+    "com/nvidia/cuvs/lucene/Lucene101AcceleratedHNSWCodec.class",
+    "com/nvidia/cuvs/lucene/Lucene99AcceleratedHNSWVectorsFormat.class",
+    "com/nvidia/cuvs/lucene/Lucene99AcceleratedHNSWVectorsWriter.class",
+    "com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWBinaryQuantizedCodec.class",
+    "com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWBinaryQuantizedVectorsFormat.class",
+    "com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWBinaryQuantizedVectorsWriter.class",
+    "com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWScalarQuantizedCodec.class",
+    "com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWScalarQuantizedVectorsFormat.class",
+    "com/nvidia/cuvs/lucene/LuceneAcceleratedHNSWScalarQuantizedVectorsWriter.class",
+    "com/nvidia/cuvs/lucene/LuceneProvider.class",
+    "com/nvidia/cuvs/lucene/ThreadLocalCuVSResourcesProvider.class",
+    "com/nvidia/cuvs/lucene/Utils.class",
+    "com/nvidia/cuvs/lucene/package-info.class"
+  ],
+  "jar_sha256": "99cfef0236df141a217c75102e9263c9c0462ac3f82546ead3a1131383c077f1",
+  "javap": [
+    {
+      "command": [
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\javap.exe",
+        "-p",
+        "-s",
+        "-classpath",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-core-10.2.0.jar",
+        "org.apache.lucene.store.IOContext"
+      ],
+      "exit_code": 0,
+      "log": "javap-IOContext-10.2.0.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\javap.exe",
+        "-p",
+        "-s",
+        "-classpath",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-core-10.2.0.jar",
+        "org.apache.lucene.index.LeafReader"
+      ],
+      "exit_code": 0,
+      "log": "javap-LeafReader-10.2.0.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\javap.exe",
+        "-p",
+        "-s",
+        "-classpath",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-core-10.2.0.jar",
+        "org.apache.lucene.codecs.KnnVectorsReader"
+      ],
+      "exit_code": 0,
+      "log": "javap-KnnVectorsReader-10.2.0.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\javap.exe",
+        "-p",
+        "-s",
+        "-classpath",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-core-10.4.0.jar",
+        "org.apache.lucene.store.IOContext"
+      ],
+      "exit_code": 0,
+      "log": "javap-IOContext-10.4.0.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\javap.exe",
+        "-p",
+        "-s",
+        "-classpath",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-core-10.4.0.jar",
+        "org.apache.lucene.index.LeafReader"
+      ],
+      "exit_code": 0,
+      "log": "javap-LeafReader-10.4.0.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\toolchain\\jdk-22.0.2+9\\bin\\javap.exe",
+        "-p",
+        "-s",
+        "-classpath",
+        "C:\\Users\\shaninna\\dev\\Solr-issues\\research\\cuvs-lucene-upstream\\jars\\lucene-core-10.4.0.jar",
+        "org.apache.lucene.codecs.KnnVectorsReader"
+      ],
+      "exit_code": 0,
+      "log": "javap-KnnVectorsReader-10.4.0.log"
+    }
+  ]
+}

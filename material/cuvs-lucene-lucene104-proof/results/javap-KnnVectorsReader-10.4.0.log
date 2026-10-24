@@ -1,0 +1,35 @@
+Compiled from "KnnVectorsReader.java"
+public abstract class org.apache.lucene.codecs.KnnVectorsReader implements java.io.Closeable {
+  protected org.apache.lucene.codecs.KnnVectorsReader();
+    descriptor: ()V
+
+  public abstract void checkIntegrity() throws java.io.IOException;
+    descriptor: ()V
+
+  public abstract org.apache.lucene.index.FloatVectorValues getFloatVectorValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/FloatVectorValues;
+
+  public abstract org.apache.lucene.index.ByteVectorValues getByteVectorValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/ByteVectorValues;
+
+  public abstract void search(java.lang.String, float[], org.apache.lucene.search.KnnCollector, org.apache.lucene.search.AcceptDocs) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;[FLorg/apache/lucene/search/KnnCollector;Lorg/apache/lucene/search/AcceptDocs;)V
+
+  public abstract void search(java.lang.String, byte[], org.apache.lucene.search.KnnCollector, org.apache.lucene.search.AcceptDocs) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;[BLorg/apache/lucene/search/KnnCollector;Lorg/apache/lucene/search/AcceptDocs;)V
+
+  public org.apache.lucene.codecs.KnnVectorsReader getMergeInstance() throws java.io.IOException;
+    descriptor: ()Lorg/apache/lucene/codecs/KnnVectorsReader;
+
+  public void finishMerge() throws java.io.IOException;
+    descriptor: ()V
+
+  public java.util.Map<java.lang.String, java.lang.Long> getOffHeapByteSize(org.apache.lucene.index.FieldInfo);
+    descriptor: (Lorg/apache/lucene/index/FieldInfo;)Ljava/util/Map;
+
+  public static java.util.Map<java.lang.String, java.lang.Long> mergeOffHeapByteSizeMaps(java.util.Map<java.lang.String, java.lang.Long>, java.util.Map<java.lang.String, java.lang.Long>);
+    descriptor: (Ljava/util/Map;Ljava/util/Map;)Ljava/util/Map;
+
+  private static java.util.stream.Stream lambda$mergeOffHeapByteSizeMaps$0(java.util.Map);
+    descriptor: (Ljava/util/Map;)Ljava/util/stream/Stream;
+}

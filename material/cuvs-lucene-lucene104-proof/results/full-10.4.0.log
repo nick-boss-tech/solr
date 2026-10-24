@@ -1,0 +1,28 @@
+C:\Users\shaninna\dev\Solr-issues\research\cuvs-lucene-upstream\release\java\cuvs-lucene\src\main\java\com\nvidia\cuvs\lucene\CuVS2510GPUVectorsReader.java:59: error: CuVS2510GPUVectorsReader is not abstract and does not override abstract method search(String,byte[],KnnCollector,AcceptDocs) in KnnVectorsReader
+public class CuVS2510GPUVectorsReader extends KnnVectorsReader {
+       ^
+C:\Users\shaninna\dev\Solr-issues\research\cuvs-lucene-upstream\release\java\cuvs-lucene\src\main\java\com\nvidia\cuvs\lucene\CuVS2510GPUVectorsReader.java:130: error: cannot find symbol
+      var ioContext = state.context.withReadAdvice(ReadAdvice.SEQUENTIAL);
+                                   ^
+  symbol:   method withReadAdvice(ReadAdvice)
+  location: variable context of type IOContext
+C:\Users\shaninna\dev\Solr-issues\research\cuvs-lucene-upstream\release\java\cuvs-lucene\src\main\java\com\nvidia\cuvs\lucene\CuVS2510GPUVectorsReader.java:456: error: method does not override or implement a method from a supertype
+  @Override
+  ^
+C:\Users\shaninna\dev\Solr-issues\research\cuvs-lucene-upstream\release\java\cuvs-lucene\src\main\java\com\nvidia\cuvs\lucene\CuVS2510GPUVectorsReader.java:610: error: method does not override or implement a method from a supertype
+  @Override
+  ^
+C:\Users\shaninna\dev\Solr-issues\research\cuvs-lucene-upstream\release\java\cuvs-lucene\src\main\java\com\nvidia\cuvs\lucene\GPUKnnFloatVectorQuery.java:311: error: method does not override or implement a method from a supertype
+  @Override
+  ^
+C:\Users\shaninna\dev\Solr-issues\research\cuvs-lucene-upstream\release\java\cuvs-lucene\src\main\java\com\nvidia\cuvs\lucene\GPUKnnFloatVectorQuery.java:321: error: no suitable method found for searchNearestVectors(String,float[],GPUPerLeafCuVSKnnCollector,Bits)
+    context.reader().searchNearestVectors(field, getTargetCopy(), results, acceptDocs);
+                    ^
+    method LeafReader.searchNearestVectors(String,float[],KnnCollector,AcceptDocs) is not applicable
+      (argument mismatch; Bits cannot be converted to AcceptDocs)
+    method LeafReader.searchNearestVectors(String,byte[],KnnCollector,AcceptDocs) is not applicable
+      (argument mismatch; float[] cannot be converted to byte[])
+Note: C:\Users\shaninna\dev\Solr-issues\research\cuvs-lucene-upstream\release\java\cuvs-lucene\src\main\java\com\nvidia\cuvs\lucene\GPUKnnFloatVectorQuery.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+6 errors

@@ -1,0 +1,17 @@
+empty: PASS result=[] exception=null exhausted=true nextIntCalls=0
+single: PASS result=[42] exception=null exhausted=true nextIntCalls=1
+ascending: PASS result=[0, 1, 4, 12, 500] exception=null exhausted=true nextIntCalls=5
+descending: PASS result=[0, 1, 4, 12, 500] exception=null exhausted=true nextIntCalls=5
+duplicates: PASS result=[0, 0, 2, 2, 4, 4, 4] exception=null exhausted=true nextIntCalls=7
+integer-extremes: PASS result=[-2147483648, -1, 0, 1, 2147483647] exception=null exhausted=true nextIntCalls=5
+already-exhausted-size-zero: PASS result=[] exception=null exhausted=true nextIntCalls=0
+partially-consumed-preserves-size: PASS result=[0, 0, 5, 6, 7] exception=null exhausted=true nextIntCalls=3
+size-overstates-remaining: PASS result=[0, 0, 1, 7] exception=null exhausted=true nextIntCalls=2
+size-understates-remaining: PASS result=null exception=class java.lang.ArrayIndexOutOfBoundsException exhausted=false nextIntCalls=3
+zero-size-with-values: PASS result=null exception=class java.lang.ArrayIndexOutOfBoundsException exhausted=false nextIntCalls=1
+lucene-array: PASS result=[1, 9, 9] exhausted=true
+lucene-implicit: PASS result=[0, 1, 2, 3, 4, 5] exhausted=true
+lucene-array-empty: PASS result=[] exhausted=true
+PASS 526 original-versus-patched comparisons; seed=0x18556; arrays, exceptions, positions, nextInt calls and exhaustion matched.
+Oct 24, 2026 4:12:54 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.

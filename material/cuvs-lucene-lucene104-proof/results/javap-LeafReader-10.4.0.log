@@ -1,0 +1,102 @@
+Compiled from "LeafReader.java"
+public abstract class org.apache.lucene.index.LeafReader extends org.apache.lucene.index.IndexReader {
+  private final org.apache.lucene.index.LeafReaderContext readerContext;
+    descriptor: Lorg/apache/lucene/index/LeafReaderContext;
+  static final boolean $assertionsDisabled;
+    descriptor: Z
+  protected org.apache.lucene.index.LeafReader();
+    descriptor: ()V
+
+  public final org.apache.lucene.index.LeafReaderContext getContext();
+    descriptor: ()Lorg/apache/lucene/index/LeafReaderContext;
+
+  public abstract org.apache.lucene.index.IndexReader$CacheHelper getCoreCacheHelper();
+    descriptor: ()Lorg/apache/lucene/index/IndexReader$CacheHelper;
+
+  public final int docFreq(org.apache.lucene.index.Term) throws java.io.IOException;
+    descriptor: (Lorg/apache/lucene/index/Term;)I
+
+  public final long totalTermFreq(org.apache.lucene.index.Term) throws java.io.IOException;
+    descriptor: (Lorg/apache/lucene/index/Term;)J
+
+  public final long getSumDocFreq(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)J
+
+  public final int getDocCount(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)I
+
+  public final long getSumTotalTermFreq(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)J
+
+  public abstract org.apache.lucene.index.Terms terms(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/Terms;
+
+  public final org.apache.lucene.index.PostingsEnum postings(org.apache.lucene.index.Term, int) throws java.io.IOException;
+    descriptor: (Lorg/apache/lucene/index/Term;I)Lorg/apache/lucene/index/PostingsEnum;
+
+  public final org.apache.lucene.index.PostingsEnum postings(org.apache.lucene.index.Term) throws java.io.IOException;
+    descriptor: (Lorg/apache/lucene/index/Term;)Lorg/apache/lucene/index/PostingsEnum;
+
+  public abstract org.apache.lucene.index.NumericDocValues getNumericDocValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/NumericDocValues;
+
+  public abstract org.apache.lucene.index.BinaryDocValues getBinaryDocValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/BinaryDocValues;
+
+  public abstract org.apache.lucene.index.SortedDocValues getSortedDocValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/SortedDocValues;
+
+  public abstract org.apache.lucene.index.SortedNumericDocValues getSortedNumericDocValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/SortedNumericDocValues;
+
+  public abstract org.apache.lucene.index.SortedSetDocValues getSortedSetDocValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/SortedSetDocValues;
+
+  public abstract org.apache.lucene.index.NumericDocValues getNormValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/NumericDocValues;
+
+  public abstract org.apache.lucene.index.DocValuesSkipper getDocValuesSkipper(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/DocValuesSkipper;
+
+  public abstract org.apache.lucene.index.FloatVectorValues getFloatVectorValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/FloatVectorValues;
+
+  public abstract org.apache.lucene.index.ByteVectorValues getByteVectorValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/ByteVectorValues;
+
+  public final org.apache.lucene.search.TopDocs searchNearestVectors(java.lang.String, float[], int, org.apache.lucene.search.AcceptDocs, int) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;[FILorg/apache/lucene/search/AcceptDocs;I)Lorg/apache/lucene/search/TopDocs;
+
+  public final org.apache.lucene.search.TopDocs searchNearestVectors(java.lang.String, byte[], int, org.apache.lucene.search.AcceptDocs, int) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;[BILorg/apache/lucene/search/AcceptDocs;I)Lorg/apache/lucene/search/TopDocs;
+
+  public abstract void searchNearestVectors(java.lang.String, float[], org.apache.lucene.search.KnnCollector, org.apache.lucene.search.AcceptDocs) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;[FLorg/apache/lucene/search/KnnCollector;Lorg/apache/lucene/search/AcceptDocs;)V
+
+  public abstract void searchNearestVectors(java.lang.String, byte[], org.apache.lucene.search.KnnCollector, org.apache.lucene.search.AcceptDocs) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;[BLorg/apache/lucene/search/KnnCollector;Lorg/apache/lucene/search/AcceptDocs;)V
+
+  public abstract org.apache.lucene.index.FieldInfos getFieldInfos();
+    descriptor: ()Lorg/apache/lucene/index/FieldInfos;
+
+  public abstract org.apache.lucene.util.Bits getLiveDocs();
+    descriptor: ()Lorg/apache/lucene/util/Bits;
+
+  public org.apache.lucene.util.LiveDocs getLiveDocsWithDeletedIterator();
+    descriptor: ()Lorg/apache/lucene/util/LiveDocs;
+
+  public abstract org.apache.lucene.index.PointValues getPointValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/PointValues;
+
+  public abstract void checkIntegrity() throws java.io.IOException;
+    descriptor: ()V
+
+  public abstract org.apache.lucene.index.LeafMetaData getMetaData();
+    descriptor: ()Lorg/apache/lucene/index/LeafMetaData;
+
+  public org.apache.lucene.index.IndexReaderContext getContext();
+    descriptor: ()Lorg/apache/lucene/index/IndexReaderContext;
+
+  static {};
+    descriptor: ()V
+}

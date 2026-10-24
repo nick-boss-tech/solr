@@ -1,0 +1,33 @@
+Compiled from "IOContext.java"
+public interface org.apache.lucene.store.IOContext {
+  public static final org.apache.lucene.store.IOContext DEFAULT;
+    descriptor: Lorg/apache/lucene/store/IOContext;
+  public static final org.apache.lucene.store.IOContext READONCE;
+    descriptor: Lorg/apache/lucene/store/IOContext;
+  public static org.apache.lucene.store.IOContext merge(org.apache.lucene.store.MergeInfo);
+    descriptor: (Lorg/apache/lucene/store/MergeInfo;)Lorg/apache/lucene/store/IOContext;
+
+  public static org.apache.lucene.store.IOContext flush(org.apache.lucene.store.FlushInfo);
+    descriptor: (Lorg/apache/lucene/store/FlushInfo;)Lorg/apache/lucene/store/IOContext;
+
+  public abstract org.apache.lucene.store.IOContext$Context context();
+    descriptor: ()Lorg/apache/lucene/store/IOContext$Context;
+
+  public abstract org.apache.lucene.store.MergeInfo mergeInfo();
+    descriptor: ()Lorg/apache/lucene/store/MergeInfo;
+
+  public abstract org.apache.lucene.store.FlushInfo flushInfo();
+    descriptor: ()Lorg/apache/lucene/store/FlushInfo;
+
+  public abstract java.util.Set<org.apache.lucene.store.IOContext$FileOpenHint> hints();
+    descriptor: ()Ljava/util/Set;
+
+  public default <T extends org.apache.lucene.store.IOContext$FileOpenHint> java.util.stream.Stream<T> hints(java.lang.Class<T>);
+    descriptor: (Ljava/lang/Class;)Ljava/util/stream/Stream;
+
+  public abstract org.apache.lucene.store.IOContext withHints(org.apache.lucene.store.IOContext$FileOpenHint...);
+    descriptor: ([Lorg/apache/lucene/store/IOContext$FileOpenHint;)Lorg/apache/lucene/store/IOContext;
+
+  static {};
+    descriptor: ()V
+}

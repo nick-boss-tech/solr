@@ -1,0 +1,26 @@
+Compiled from "KnnVectorsReader.java"
+public abstract class org.apache.lucene.codecs.KnnVectorsReader implements java.io.Closeable {
+  protected org.apache.lucene.codecs.KnnVectorsReader();
+    descriptor: ()V
+
+  public abstract void checkIntegrity() throws java.io.IOException;
+    descriptor: ()V
+
+  public abstract org.apache.lucene.index.FloatVectorValues getFloatVectorValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/FloatVectorValues;
+
+  public abstract org.apache.lucene.index.ByteVectorValues getByteVectorValues(java.lang.String) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;)Lorg/apache/lucene/index/ByteVectorValues;
+
+  public abstract void search(java.lang.String, float[], org.apache.lucene.search.KnnCollector, org.apache.lucene.util.Bits) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;[FLorg/apache/lucene/search/KnnCollector;Lorg/apache/lucene/util/Bits;)V
+
+  public abstract void search(java.lang.String, byte[], org.apache.lucene.search.KnnCollector, org.apache.lucene.util.Bits) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;[BLorg/apache/lucene/search/KnnCollector;Lorg/apache/lucene/util/Bits;)V
+
+  public org.apache.lucene.codecs.KnnVectorsReader getMergeInstance();
+    descriptor: ()Lorg/apache/lucene/codecs/KnnVectorsReader;
+
+  public void finishMerge() throws java.io.IOException;
+    descriptor: ()V
+}

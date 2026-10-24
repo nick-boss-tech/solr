@@ -1,0 +1,58 @@
+Compiled from "IOContext.java"
+public final class org.apache.lucene.store.IOContext extends java.lang.Record {
+  private final org.apache.lucene.store.IOContext$Context context;
+    descriptor: Lorg/apache/lucene/store/IOContext$Context;
+  private final org.apache.lucene.store.MergeInfo mergeInfo;
+    descriptor: Lorg/apache/lucene/store/MergeInfo;
+  private final org.apache.lucene.store.FlushInfo flushInfo;
+    descriptor: Lorg/apache/lucene/store/FlushInfo;
+  private final org.apache.lucene.store.ReadAdvice readAdvice;
+    descriptor: Lorg/apache/lucene/store/ReadAdvice;
+  public static final org.apache.lucene.store.IOContext DEFAULT;
+    descriptor: Lorg/apache/lucene/store/IOContext;
+  public static final org.apache.lucene.store.IOContext READONCE;
+    descriptor: Lorg/apache/lucene/store/IOContext;
+  private static final org.apache.lucene.store.IOContext[] READADVICE_TO_IOCONTEXT;
+    descriptor: [Lorg/apache/lucene/store/IOContext;
+  public org.apache.lucene.store.IOContext(org.apache.lucene.store.IOContext$Context, org.apache.lucene.store.MergeInfo, org.apache.lucene.store.FlushInfo, org.apache.lucene.store.ReadAdvice);
+    descriptor: (Lorg/apache/lucene/store/IOContext$Context;Lorg/apache/lucene/store/MergeInfo;Lorg/apache/lucene/store/FlushInfo;Lorg/apache/lucene/store/ReadAdvice;)V
+
+  private org.apache.lucene.store.IOContext(org.apache.lucene.store.ReadAdvice);
+    descriptor: (Lorg/apache/lucene/store/ReadAdvice;)V
+
+  public org.apache.lucene.store.IOContext(org.apache.lucene.store.FlushInfo);
+    descriptor: (Lorg/apache/lucene/store/FlushInfo;)V
+
+  public org.apache.lucene.store.IOContext(org.apache.lucene.store.MergeInfo);
+    descriptor: (Lorg/apache/lucene/store/MergeInfo;)V
+
+  public org.apache.lucene.store.IOContext withReadAdvice(org.apache.lucene.store.ReadAdvice);
+    descriptor: (Lorg/apache/lucene/store/ReadAdvice;)Lorg/apache/lucene/store/IOContext;
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public org.apache.lucene.store.IOContext$Context context();
+    descriptor: ()Lorg/apache/lucene/store/IOContext$Context;
+
+  public org.apache.lucene.store.MergeInfo mergeInfo();
+    descriptor: ()Lorg/apache/lucene/store/MergeInfo;
+
+  public org.apache.lucene.store.FlushInfo flushInfo();
+    descriptor: ()Lorg/apache/lucene/store/FlushInfo;
+
+  public org.apache.lucene.store.ReadAdvice readAdvice();
+    descriptor: ()Lorg/apache/lucene/store/ReadAdvice;
+
+  private static org.apache.lucene.store.IOContext[] lambda$static$0(int);
+    descriptor: (I)[Lorg/apache/lucene/store/IOContext;
+
+  static {};
+    descriptor: ()V
+}
