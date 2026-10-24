@@ -68,3 +68,7 @@ Three questions: is that first slice the right size, should the core path be in 
 ### Status note answering a stale question (SOLR-16450, posted 2026-10-23)
 
 Answering [~gus]'s question from 2024: yes, this is complete, and the version is 9.1.0. The timeline on the ticket: the original fix resolved it for 9.1 on 2022-10-14; [~hiteshkhamesra] then flagged one more place in {{ZkStateReader}}, and [~ichattopadhyaya] reopened it for that follow-up on 2022-10-18. The follow-up fix ("waitForState to cleanly unregister watches if there is a failure") landed the same day on branch_9_1 as 74f09064947 and on main as 32e0f68a9bc, so both fixes are in the 9.1.0 release. The ticket's fixVersion was removed in January 2023 while it sat reopened; restoring 9.1.0 and closing as Fixed matches the record.
+
+## Follow-up draft, not posted (SOLR-18470, vm6, 2026-10-24)
+
+- **SOLR-18470 follow-up**: short new comment, not an edit of 18131208, drafted at `jira-comment-SOLR-18470-followup-draft.md`. It states that PR #5202 does only the narrowing step, that removal or deprecation for Solr 11 is the project's call, and that no further work happens without a reviewer who said yes. Analysis in `reports/solr-18470-framing-reconciliation-round-1.md`. Waits on Nick's go.

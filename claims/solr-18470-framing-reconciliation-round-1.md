@@ -1,7 +1,7 @@
 # Claim: solr-18470-framing-reconciliation-round-1
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/solr-18470-framing-reconciliation-round-1.md`. One claim covers the whole item.
 - Slice: the whole assignment: the framing gap, what Smiley's reply demands of each artifact, the delivery vehicle, and the draft.
 - Capability tags used: review, draft. Analysis and drafting only: no comment posted or edited on JIRA or GitHub, no PR.
@@ -12,3 +12,7 @@
 - Constraints: the dev-list reply is not in this repository; it is read only as summarized in the assignment. Standing rules from the assignment apply to the draft.
 
 Heartbeat: 2026-10-24T06:47:36Z
+
+Result: 2026-10-24T06:49:07Z: framing gap recorded (the ticket is "remove" and the PR narrows; the comment does not say so); draft recommends a new comment, not an edit. Draft at jira/jira-comment-SOLR-18470-followup-draft.md; listed in jira/COMMENTS.md. Not posted.
+
+DONE: 2026-10-24T06:49:07Z. Deliverables: `reports/solr-18470-framing-reconciliation-round-1.md`, `jira/jira-comment-SOLR-18470-followup-draft.md`.
