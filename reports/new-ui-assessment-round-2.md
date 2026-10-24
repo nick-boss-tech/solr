@@ -33,3 +33,23 @@ Not verified: no build or port was run. Research only, per the assignment.
 (d) Verdict: ALREADY DONE, on the evidence that #3034 raised the daemon's code cache and no later occurrence is recorded. Not reproduced. If the owner wants it confirmed, the next step is one clean build on the gate host with the daemon at 256m, watching for CodeCache errors. That needs a gate-host build, not research. Do not apply the ticket's 120m value to the daemon.
 
 Not verified: no build was run. Research only, per the assignment.
+
+## SOLR-17598: Windows script logic that handles SOLR_LOGS_DIR is faulty
+
+(a) Ask: on Windows, a `SOLR_LOGS_DIR` set in the environment stops Solr from starting, and a path with a space breaks `bin\solr.cmd stop --all`. Sometimes the variable is ignored. The ask is that the environment variable work the same as the value in `solr.in.cmd`. Open, unassigned, no labels. The reporter is not sure the "ignored" case still reproduces. The ticket notes the same may apply to other environment variables on Windows.
+
+(b) Exists today on main, `solr/bin/solr.cmd`:
+- Line 42 to 43: `solr.in.cmd` is loaded before the start logic. `solr/bin/solr.in.cmd:114` has `REM set SOLR_LOGS_DIR=logs`, so the file does not set the variable by default and an environment value reaches the start logic.
+- Lines 909 to 913: an empty `SOLR_LOGS_DIR` falls back to `%SOLR_SERVER_DIR%\logs`. A set value has its double quotes stripped. Paths with spaces are not quoted here, which the `IF [%SOLR_LOGS_DIR%] == []` form tolerates.
+- Lines 917 to 920: if `SOLR_HOME` is under `%SOLR_TIP%\example`, `SOLR_LOGS_DIR` is replaced with `%SOLR_HOME%\..\logs`. This silently ignores the environment value, which matches the "ignored" symptom in the ticket.
+- Lines 1136 to 1139: `SOLR_LOGS_DIR_QUOTED` is quoted and used for `-Dsolr.logs.dir`.
+- Lines 1148 to 1155: `mkdir` and the writability test are quoted.
+- Lines 1158 to 1161: the reserved-name check writes a space-padded pattern file and runs `findstr /i /C:" %SOLR_LOGS_DIR% "`. A path with spaces is compared as a literal, and `findstr` reads `/C:` literally, so spaces are handled.
+- Line 1185: the console log redirect uses delayed expansion, `!SOLR_LOGS_DIR!`. A value containing `!` or `&` is the most likely place for a failure that depends on the value, but the ticket's example is a plain path with spaces.
+- No `SOLR_LOGS_DIR` reference in the stop path. Stop reads the PID and port files, so the stop failure with a space in the logs path is not explained by the logs variable and needs a Windows run to locate.
+
+(c) Missing: a Windows reproduction. This Linux host cannot run `cmd.exe`. The pool's Windows host can, and the assignment's tags allow a Windows check there. Without a run, the start failure has no confirmed cause. The most likely candidates are the delayed-expansion redirect at line 1185 and the `SOLR_HOME` override at line 919.
+
+(d) Verdict: READY TO VOLUNTEER, with a caveat. A newcomer can start from the ticket text and the lines above, but the fix must be checked on Windows, since nothing on Linux exercises these paths. Smallest first slice: on the Windows host, reproduce the three steps in the ticket with `SOLR_LOGS_DIR` set to a path with a space, and record which line fails (`solr.cmd` run with `@echo on` or the stop path). Do not change the script until that is recorded.
+
+Not verified: no Windows run, no script change. Research only, per the assignment.
