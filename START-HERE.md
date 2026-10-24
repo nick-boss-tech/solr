@@ -7,9 +7,10 @@ This board coordinates Nick Shanin's Solr factory. Its mission, set 2026-10-23: 
 1. `WORKFLOW.md`: claims, gates, posting. The rules that govern everything on this branch.
 2. `UI-PLAYBOOK.md`: the UI build, the module map, the test setup, the ticket landscape, and the assessment verdicts.
 3. `pool/decision-map.md`: how an item gets classified and what the standing answers are. Decide from the map; the owner is asked only what passes the escalation test there.
-4. `comment-formula.md` and `jira/COMMENTS.md` before drafting any Jira or GitHub comment. Every comment for a listed ticket is scoped through the formula before it posts, and posting needs the owner's go.
-5. Your host's file in `hosts/`: its capabilities and tags. Claim only work whose tags your host holds.
-6. `pool/owner-complaints-2026-10-19.md` before claiming anything. It outranks habit.
+4. `material/decision-ladder.md`: the order a decision is worked in before it may become a question. Get more information, do the hard thing, defer as a named follow-up; only what survives all three reaches the owner, with the rung recorded in the claim.
+5. `comment-formula.md` and `jira/COMMENTS.md` before drafting any Jira or GitHub comment. Every comment for a listed ticket is scoped through the formula before it posts, and posting needs the owner's go.
+6. Your host's file in `hosts/`: its capabilities and tags. Claim only work whose tags your host holds.
+7. `pool/owner-complaints-2026-10-19.md` before claiming anything. It outranks habit.
 
 ## Where work comes from
 
