@@ -1,7 +1,7 @@
 # Claim: new-ui-auth-round-1
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: CLAIMED. Deliverable `reports/new-ui-auth-round-1.md` (not yet written).
+- Status: DONE. Deliverable `reports/new-ui-auth-round-1.md`.
 - Job or assignment: `assignments/new-ui-auth-round-1.md`.
 - Slice: the whole assignment, both tickets: SOLR-17885, SOLR-17845.
 - Capability tags used: review, records. Research only; no code change, no push except the claim, status line, and report on coordination.
@@ -12,3 +12,7 @@
 - Decision ladder: rung 1 for the reads. Verdicts that fall to the claimant are recorded in the report with the rung used. Any security question that rung 1 to 4 cannot settle goes to NEEDS-OWNER with one question.
 
 Heartbeat: 2026-10-24T04:10:00Z
+
+Result: 2026-10-24T04:25Z: report written. SOLR-17885 NEEDS CHRISTOS (wrapper close scope). SOLR-17845 ALREADY DONE for the core OAuth flow via PR #3754 (merged 2026-02-22); token refresh and ID-token identity open; Jira status stale.
+
+DONE: 2026-10-24T04:25Z. Deliverable: `reports/new-ui-auth-round-1.md`, `assignments/new-ui-auth-round-1.md` (status line).
