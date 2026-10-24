@@ -54,3 +54,16 @@ Out of scope for this round: SOLR-12863 and SOLR-12613 (the earlier decision), a
 
 - A fork branch `solr-NNNN-<short>` with the change and a test, and the draft PR description, pushed after the gate passes.
 - `claims/pool-ui-SOLR-NNNN.md` marked DONE with the gate command, the commit, and the blast-radius tag if one applies.
+
+## Status note (vm6, 2026-10-24T09:51Z)
+
+Claimed and gated by vm6 this round, one ticket per claim. Gates pass on the head named in each claim; no branch was pushed for SOLR-17849, SOLR-17887, or SOLR-17913 (gate only); SOLR-17909 and SOLR-17914 have new branches pushed (`solr-17909-breadcrumb-wrap`, `solr-17914-create-collection-dialog`); SOLR-17911 gate only.
+- SOLR-17849: `claims/pool-ui-SOLR-17849.md`, DONE (18 tests at b91f75ed93).
+- SOLR-17850: `claims/pool-ui-SOLR-17850.md`, DONE (6 tests at 887778ce5d).
+- SOLR-17887: `claims/pool-ui-SOLR-17887.md`, DONE (5 tests at 9c7f72aa0e).
+- SOLR-17909: `claims/pool-ui-SOLR-17909.md`, DONE (4 tests at 77a38638b0, branch `solr-17909-breadcrumb-wrap`).
+- SOLR-17911: `claims/pool-ui-SOLR-17911.md`, DONE (3 tests at 8047b99ef0).
+- SOLR-17913: `claims/pool-ui-SOLR-17913.md`, DONE (2 tests at 0a04d2239e).
+- SOLR-17914: `claims/pool-ui-SOLR-17914.md`, DONE (4 tests at a502747ec4, branch `solr-17914-create-collection-dialog`).
+
+Not claimed by vm6: SOLR-17861 (tag `build`, which vm6 does not hold; the owner granted `ui` and `jvm-tests` only), SOLR-17886 and SOLR-17912 (umbrellas; children only, none chosen). vm6 stopped taking pool-ui work at 09:51Z.
