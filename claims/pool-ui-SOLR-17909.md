@@ -18,3 +18,7 @@
 - Constraints: no JIRA or GitHub post, no PR. Commit as Nick Shanin with no trailers. Gate before the branch is pushed.
 
 Heartbeat: 2026-10-24T08:32:53Z
+
+Run: job `pool-ui-17909-17c6860195-083805`, log dir `/workspace/gates/logs/vm6/pool-ui-17909/`, head `17c6860195` (local commit on branch solr-17909-breadcrumb, not pushed until the gate passes), started 2026-10-24T08:38:29Z (UTC). Steps: spotless, then `:shared:jvmTest --tests org.apache.solr.ui.views.components.SolrBreadcrumbTest`. Files: `SolrBreadcrumb.kt` (commonMain, FlowRow, earlier entries clickable, last entry bold and inert), `SolrBreadcrumbTest.kt` (commonTest; the wrapping test is a pin, labelled as such in the test name), and `PreviewBreadcrumb.kt` (jvmMain preview).
+
+Heartbeat: 2026-10-24T08:38:29Z
