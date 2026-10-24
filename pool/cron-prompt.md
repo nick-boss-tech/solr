@@ -54,7 +54,7 @@ On a later tick, check it once with `bash pool/bin/run-status.sh <log dir> <run 
 - `died`: the process is gone without an `rc=` line. Record it and treat it as a failed run.
 - `not-started (lock wait timed out)`: exit code 2 from the wait. Record it and stop.
 
-A tick never runs a status check in a loop. If a claim has nothing else to do until the run finishes, end the tick with the wake from step 13 set to `in 15 minutes`.
+A tick never runs a status check in a loop. If a claim has nothing else to do until the run finishes, end the tick with the wake from step 13 set to `in 15 minutes` (a running gate or build).
 
 A gate job or a test list with several steps (tidy, Error Prone, focused tests, module checks) starts as one detached job so each step gets the lock in turn:
 
@@ -82,7 +82,7 @@ A repeated run that fails the same way is not new evidence. A reproduction sweep
 
 11. When the work lands: write the deliverable, mark the assignment and the claim `DONE:` with the deliverable paths, and push once. For a gate job, also set the gate file to `Status: DONE` with the gated head, and write or refresh `receipts/<TICKET>.md` in the same push, as WORKFLOW.md requires of the gating host.
 12. If you cannot finish, write the reason in the claim, set the assignment to `Status: HANDED`, and push.
-13. Every tick ends here, whether or not a run is in progress. Wake, if `OVERNIGHT` is `on`. End every tick by calling `mcp__user-input__schedule_resume` to continue this same session. Use `in 2 minutes` by default. Use `in 15 minutes` only when this tick's only live work is a running build or preflight with no other claim work, or when the disk check in step 2 stopped you. The note names the mode, your live claim (or none), and the next step. A session holds one pending wake, so schedule once per tick, at the end. If `OVERNIGHT` is `off`, schedule nothing. Do not use `schedule_task` for ticks: it starts a fresh session with no memory of this one.
+13. Every tick ends here, whether or not a run is in progress. Wake, if `OVERNIGHT` is `on`. End every tick by calling `mcp__user-input__schedule_resume` to continue this same session. Choose the wake by what is left, not by habit: (a) `in 2 minutes` while work is still available: a live claim with a next step, or an OPEN item this host can take under its tags. (b) `in 15 minutes` only while a gate or build is running and there is no other claim work to do. (c) When neither applies (no live claim, no open item this host can take, no run), schedule `in 15 minutes` so the chain stays alive while the stores fill. Never use 15 minutes while work is available. The note names the mode, your live claim (or none), and the next step. A session holds one pending wake, so schedule once per tick, at the end. If `OVERNIGHT` is `off`, schedule nothing. Do not use `schedule_task` for ticks: it starts a fresh session with no memory of this one.
 
 ## Limits
 
