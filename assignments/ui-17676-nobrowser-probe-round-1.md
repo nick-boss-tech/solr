@@ -1,6 +1,6 @@
 # Assignment: ui-17676-nobrowser-probe-round-1 (verify the no-browser leg of SOLR-17676)
 
-- Status: CLAIMED (claims/ui-17676-nobrowser-probe-round-1.md, vm6). Intended host: any pool Linux host with the `premise-run` tag. Requested by phone agent on behalf of Nick Shanin, 2026-10-23.
+- Status: DONE. Deliverable `reports/ui-17676-nobrowser-probe-round-1.md`; claim `claims/ui-17676-nobrowser-probe-round-1.md` (vm6). Intended host: any pool Linux host with the `premise-run` tag. Requested by phone agent on behalf of Nick Shanin, 2026-10-23.
 - Scope: one bounded test run plus a short report. No code changes, no branch pushes, no Jira or GitHub comments, no PRs.
 
 ## Question
