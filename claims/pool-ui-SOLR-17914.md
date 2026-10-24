@@ -1,7 +1,7 @@
 # Claim: pool-ui-SOLR-17914
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/pool-ui-tickets-round-1.md`, one ticket per claim.
 - Ticket type: dialog. The immediately previous claim was a component (SOLR-17913), so complaint 5 is met. The other open types (file tree, configset files) are components too. This ticket has no fork branch, so it is an implementation claim.
 - Slice (smallest first, from `reports/new-ui-collections-configsets-round-1.md`, SOLR-17914 section): the form alone with name, configset picker, shards and replication factor, plus the inline name-exists error and the general error. No advanced options, no tooltips, no host screen (the Collections screen is SOLR-17912, not this claim).
@@ -19,3 +19,7 @@ Heartbeat: 2026-10-24T09:22:51Z
 Run: job `pool-ui-17914-a502747ec4-092824`, log dir `/workspace/gates/logs/vm6/pool-ui-17914/`, head `a502747ec4` (local commit on branch solr-17914-create-collection-dialog, not pushed until the gate passes), started 2026-10-24T09:28:32Z (UTC). Steps: spotless, then `:shared:jvmTest --tests org.apache.solr.ui.views.collections.CreateCollectionFormTest` (4 tests). The form keeps its typed values locally; errors and the configset list are passed in.
 
 Heartbeat: 2026-10-24T09:28:32Z
+
+Result: 2026-10-24T09:34:51Z: PASS at head a502747ec4 (job `pool-ui-17914-a502747ec4-092824`). spotless rc=0 (BUILD SUCCESSFUL in 25s); `:shared:jvmTest --tests org.apache.solr.ui.views.collections.CreateCollectionFormTest` rc=0 (BUILD SUCCESSFUL in 1m 13s). Tests 4, failures 0, errors 0, skipped 0 (testShowsFieldsAndButtons, testShowsInlineErrorWhenNameExists, testCreateIsDisabledWithoutAName, testCreatePassesTheTypedValues). Log dir `/workspace/gates/logs/vm6/pool-ui-17914/`. Conclusive for the software-renderer JVM tests. GL: no Canvas, DrawScope, drawWithCache, graphicsLayer, drawBehind, drawWithContent or shader in the form. Branch pushed fast-forward (new remote branch) to `solr-17914-create-collection-dialog` at `352cd12db8` (gated head `a502747ec4` plus a docs-only PR draft commit). The create call and the Collections screen are not in this change.
+
+DONE: 2026-10-24T09:34:51Z. Deliverables: branch `solr-17914-create-collection-dialog` (352cd12db8), `pr-draft/SOLR-17914.md` on that branch.
