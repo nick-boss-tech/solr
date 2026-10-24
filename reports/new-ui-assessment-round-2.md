@@ -133,3 +133,24 @@ Not verified: no build was run and PR #3828 was not inspected beyond its ticket 
 (d) Verdict: NEEDS CHRISTOS. Question: should numeric input be rejected for all v2 request bodies (a compatibility break that the ticket's author wants on the dev list first), or only for the configset and collection create endpoints?
 
 Not verified: no code change, no test run, no dev-list search. Research only, per the assignment.
+
+## SOLR-18178: Exported configsets from a windows instance are invalid
+
+(a) Ask: a configset exported from a Windows instance should be a valid ZIP. The ticket reports that directory entries are written with backslashes (`lang\stopwords.txt`), so on re-import the files are flattened and schema loading fails with "Can't find resource 'lang/contractions_it.txt'". The named export is the schema-designer "Download Config" URL. Open, Major, reporter malliaridis, labels `configset`, `export`, `windows`, `pull-request-available`.
+
+(b) Exists today on main (fork `498a09aea9`):
+- `solr/core/src/java/org/apache/solr/handler/configsets/DownloadConfigSet.java` line 119: `new ZipEntry(tmpDirectory.relativize(file).toString())`. `Path.toString()` uses the platform separator, so on Windows the entry name carries backslashes. Line 108 does the same for directory entries. This is the mechanism; the symptom matches it.
+- The download is served by `ConfigSetsHandler.java` line 197 (`DownloadConfigSet.class`).
+- The schema-designer URL in the ticket was not found on main. `solr/api/src/java/org/apache/solr/client/api/endpoint/SchemaDesignerApi.java` and `solr/core/src/java/org/apache/solr/handler/designer/SchemaDesigner.java` have no download method. The designer endpoints were moved to JAX-RS in `0f787bfe8a0` (SOLR-18152, #4203). So either the URL moved or it was removed; this read did not establish which. The export code path is the same either way.
+- The upload side has no backslash handling on main: `UploadConfigSet.java` builds the entry name from `zipEntry.getName()` directly.
+- PR apache/solr #4968, "SOLR-18178: Fix configset archive path handling", is open, not a draft, updated 2026-10-12. It changes 9 files (+467, -27): `DownloadConfigSet.java` (a `toZipEntryName` helper that replaces `\` with `/`, lines 132 to 147 in the PR), `UploadConfigSet.java` (normalizes legacy backslash names on upload and rejects unsafe entry paths before any write), `FileSystemConfigSetService.java`, the configsets API doc, and tests in `DownloadConfigSetAPITest.java` (+53) and `UploadConfigSetAPITest.java` (+271). Its body describes a traversal risk: once backslashes become slashes, `..\evil.txt` becomes a live `../` path, so the upload guard is part of the fix.
+- Its author is Nick Shanin (the PR body is posted under his name). The reporter is Christos.
+
+(c) Open:
+- The PR was not built or tested here. Its own description claims results; this read did not check them.
+- Whether the designer download URL is still served (see above).
+- Whether the traversal guard should land in the same PR as the export fix, or separately, is a review question for the PR's reviewer.
+
+(d) Verdict: ALREADY DONE on the PR branch, not on main. PR #4968 covers the ask and is open. No volunteer slice exists for this ticket: the change is already written and in review under the owner's name. The one useful next step is a committer review of #4968, which is a PR action and not a claim for this round.
+
+Not verified: no build or test was run. Research only, per the assignment.
