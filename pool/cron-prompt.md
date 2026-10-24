@@ -2,10 +2,12 @@
 
 This file is the job for every pool Linux host. Each tick reads it from `origin/coordination` at its start, so edits take effect on the next tick. Do not work from any other copy.
 
+> MIGRATED 2026-10-23: this board is closed. The live board is `coordination-ui`; see `MIGRATED.md` at this branch's root. Do not claim new work here.
+
 ## Mode
 
 OVERNIGHT: off
-SKIP QUEUE: open
+SKIP QUEUE: hold
 
 - `OVERNIGHT` is the chain switch. `on` means you keep the chain going by scheduling your own wake at the end of each tick (step 18). `off` means you finish any live claim, schedule nothing, and stop. The human sets this line; you do not change it.
 - `SKIP QUEUE` gates the skip-queue work in steps 6a and 11 to 15. `hold` means take none of it. The human sets it to `open` when the queue list is confirmed.
