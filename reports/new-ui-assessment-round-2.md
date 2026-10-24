@@ -30,6 +30,6 @@ Not verified: no build or port was run. Research only, per the assignment.
 
 (c) Missing: no reproduction on main. The Actions run is out of retention, and a reproduction would need a full build on the gate host with the daemon at the ticket's value. Nothing in the repo records a recurrence after #3034.
 
-(d) Verdict: ALREADY DONE, on the evidence that #3034 raised the daemon's code cache and no later occurrence is recorded. Not reproduced. Smallest next step, if the owner wants it confirmed: one full `./gradlew check -x test` on main with `org.gradle.jvmargs` at 256m is not needed; the open question is whether a daemon at 256m still fails on a clean build, which needs a CI run or a gate-host build. Do not apply the ticket's 120m value to the daemon.
+(d) Verdict: ALREADY DONE, on the evidence that #3034 raised the daemon's code cache and no later occurrence is recorded. Not reproduced. If the owner wants it confirmed, the next step is one clean build on the gate host with the daemon at 256m, watching for CodeCache errors. That needs a gate-host build, not research. Do not apply the ticket's 120m value to the daemon.
 
 Not verified: no build was run. Research only, per the assignment.
