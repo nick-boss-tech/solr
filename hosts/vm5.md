@@ -35,3 +35,5 @@ Heartbeat: 2026-10-24T18:45Z (rc3-smoke-loop-round-1: run-006 in unit tests, abo
 Heartbeat: 2026-10-24T19:49Z (rc3-smoke loop stood down by owner direction; driver stopped, run-007 still running and waiting on the owner to say stop or finish; release check pending the lock)
 
 Heartbeat: 2026-10-24T20:12Z (vm5-release-tarball-dev-tools-check-round-1: archives diff shows dev-tools (39 entries) as the only removed tree; unpacked tree has no .git, dev-tools or dev-docs; RAT passed rc=0 in 3m32s; full root check with --continue running, log /workspace/smoke-rc3/tarball-logs/check.log; run-007 stopped by owner request and recorded in runs/results.tsv)
+
+Heartbeat: 2026-10-24T21:16Z (vm5-release-tarball-dev-tools-check-round-1: full root check still running in :solr:core:test; no failed task yet; RAT passed rc=0)
