@@ -1,0 +1,472 @@
+[
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16155",
+  "comment_id": "17626371",
+  "created": "2022-10-31T04:33:03.423+0000",
+  "updated": "2022-10-31T04:33:03.423+0000",
+  "excerpt": "This is debatable. In \"production\" – okay. When in \"dev\", it's helpful information! Imagine loading a CSV file and not knowing which value it was that had some weird syntax that caused a date to parse wrong (for example). Maybe it was an extra quotation mark or who knows what. At least the document'",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16155?focusedCommentId=17626371"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-16155",
+  "comment_id": "17629541",
+  "created": "2022-11-06T20:29:39.663+0000",
+  "updated": "2022-11-06T20:29:39.663+0000",
+  "excerpt": "Agree we should avoid dumping doc content in error msgs, which ends up in logs, which then ends up in systems like Splunk. Perhaps someone could add some TRACE-level logging to fill the need for debugging this component?",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16155?focusedCommentId=17629541"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-16155",
+  "comment_id": "17889745",
+  "created": "2024-10-15T16:14:44.794+0000",
+  "updated": "2024-10-15T16:14:44.794+0000",
+  "excerpt": "This issue has not been solved. If you want to contribute a fix, help is much appreciated.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16155?focusedCommentId=17889745"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16116",
+  "comment_id": "17688688",
+  "created": "2023-02-14T19:54:21.567+0000",
+  "updated": "2023-02-14T19:54:21.567+0000",
+  "excerpt": "This is exciting! Any update?",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17688688"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16116",
+  "comment_id": "17689269",
+  "created": "2023-02-15T17:36:26.658+0000",
+  "updated": "2023-02-15T17:36:26.658+0000",
+  "excerpt": "No comment on the Hadoop stuff; not my area of interest. But it's a big shame that we have a module that is effectively blocking what we want to do in Solr core. I've been thinking Solr ought to employ some ClassLoader tricks to allow us to configure, on a per-module basis, certain Java packages tha",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17689269"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-16116",
+  "comment_id": "17689387",
+  "created": "2023-02-15T22:56:50.671+0000",
+  "updated": "2023-02-15T22:56:50.671+0000",
+  "excerpt": "Moving hadoop module to a separate build with separate release artifact could be a nice pilot for the project in slimming down the main tarball. I believe the class loader of packages is fairly isolated. Perhaps it could help pave the way for a more mature package manager?",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17689387"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16116",
+  "comment_id": "17689501",
+  "created": "2023-02-16T04:23:21.120+0000",
+  "updated": "2023-02-16T04:23:21.120+0000",
+  "excerpt": "Is the move to Hadoop client libraries easy dependency switching stuff? CC [~krisden] FWIW I started drafting a longer dev list email to draw attention here (deactivating a module deserves a dev thread!) but first want to ascertain if we have an easy option in front of us, or a volunteer to do whate",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17689501"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16116",
+  "comment_id": "17893173",
+  "created": "2024-10-27T04:33:17.984+0000",
+  "updated": "2024-10-27T04:33:17.984+0000",
+  "excerpt": "Could the description and CHANGES.txt articulate to users the effective/perceived outcome to them? If there isn't any, it's an \"Other\" category, not \"Improvement\".",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17893173"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16116",
+  "comment_id": "17905349",
+  "created": "2024-12-13T02:39:10.120+0000",
+  "updated": "2024-12-13T02:39:10.120+0000",
+  "excerpt": "Time to resolve?",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17905349"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16116",
+  "comment_id": "17905350",
+  "created": "2024-12-13T02:43:08.185+0000",
+  "updated": "2024-12-13T02:43:08.185+0000",
+  "excerpt": "And re-title and add a description to communicate what this is and isn't. This isn't a whole-sale migration to Curator with ZK hidden!",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17905350"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16116",
+  "comment_id": "17912239",
+  "created": "2025-01-12T06:51:17.275+0000",
+  "updated": "2025-01-12T06:51:17.275+0000",
+  "excerpt": "I was looking at [flaky failures|https://ge.apache.org/s/mjapfoyz6alvi/tests/task/:solr:core:test/details/org.apache.solr.cloud.BasicDistributedZk2Test/test?top-execution=1] to BasicDistributedZk2Test that you tried to fix via calling blockUntilConnected. But that block is only 50ms and it'll merely",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17912239"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16116",
+  "comment_id": "17912241",
+  "created": "2025-01-12T07:33:39.302+0000",
+  "updated": "2025-01-12T07:33:39.302+0000",
+  "excerpt": "Also, same test but different failing test run on a PR of mine [here|https://github.com/apache/solr/actions/runs/12721792820/job/35465118919?pr=3025] shows interesting behavior. ObjectReleaseTracker shows ZkCollectionTerms and a shard terms as not closed. I looked at the logs closely while examining",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17912241"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-16116",
+  "comment_id": "17925319",
+  "created": "2025-02-08T20:36:01.018+0000",
+  "updated": "2025-02-08T20:36:01.018+0000",
+  "excerpt": "Found another failure of BasicDistributedZk2Test with same symptoms ({{ZkController.onReconnect}}) [here|https://productionresultssa0.blob.core.windows.net/actions-results/8597700e-072f-403c-81cc-2a3fe8b3ee54/workflow-job-run-5264e576-3c6f-51f6-f055-fab409685f20/logs/job/job-logs.txt?rsct=text%2Fpla",
+  "url": "https://issues.apache.org/jira/browse/SOLR-16116?focusedCommentId=17925319"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-14306",
+  "comment_id": "17051873",
+  "created": "2020-03-05T08:08:33.382+0000",
+  "updated": "2020-03-05T08:08:33.382+0000",
+  "excerpt": "Seems Kafka has had the same discussions (see https://cwiki.apache.org/confluence/display/KAFKA/KIP-273+-+Kafka+to+support+using+ETCD+beside+Zookeeper) but I think they ended up with https://cwiki.apache.org/confluence/display/KAFKA/KIP-500%3A+Replace+ZooKeeper+with+a+Self-Managed+Metadata+Quorum in",
+  "url": "https://issues.apache.org/jira/browse/SOLR-14306?focusedCommentId=17051873"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-14306",
+  "comment_id": "17052526",
+  "created": "2020-03-05T21:21:45.181+0000",
+  "updated": "2020-03-05T21:21:45.181+0000",
+  "excerpt": "{quote}It seems that refactoring coordination code into a separate module is a great first step for whichever direction we go in the future. {quote} +1. The single biggest obstacle I sense when helping customers with SolrCloud is Zookeeper. How do we install it, how many, nodes, how to secure it, ca",
+  "url": "https://issues.apache.org/jira/browse/SOLR-14306?focusedCommentId=17052526"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-14306",
+  "comment_id": "17056457",
+  "created": "2020-03-10T22:04:22.659+0000",
+  "updated": "2020-03-10T22:04:22.659+0000",
+  "excerpt": "Overall I'm really encouraged to finally seem some momentum in this direction. Thanks so much Tomas!",
+  "url": "https://issues.apache.org/jira/browse/SOLR-14306?focusedCommentId=17056457"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-14306",
+  "comment_id": "18130678",
+  "created": "2026-10-23T03:57:09.431+0000",
+  "updated": "2026-10-23T03:57:09.431+0000",
+  "excerpt": "I converted the sub-task SOLR-16116 to be a normal issue, and linked it as something that has superseded this issue. I'm inclined to close this issue as won't-do. I see us using Curator recipes directly.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-14306?focusedCommentId=18130678"
+ },
+ {
+  "person": "Eric Pugh",
+  "username": "epugh",
+  "issue": "SOLR-17864",
+  "comment_id": "18015838",
+  "created": "2025-08-24T14:01:04.363+0000",
+  "updated": "2025-08-24T14:01:04.363+0000",
+  "excerpt": "Nice suggestion from [~dsmiley] that we mark inversion of value (true to false, false to true) in DeprecatedSystemPropertyMappings.java by marking the line with a starting !: !solr.hide.stack.trace=solr.responses.stacktrace.enabled Instead of the rules approach I took.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-17864?focusedCommentId=18015838"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-17864",
+  "comment_id": "18047271",
+  "created": "2025-12-23T14:07:45.230+0000",
+  "updated": "2025-12-23T14:07:45.230+0000",
+  "excerpt": "Sorry to say [~epugh] , but the changelog yaml is invalid for this change {code:java} # See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc title: Migrated system properties solr.allowPaths and solr.allowUrls to modern equivalents. type: changed # added, changed, fixed, deprecated, ",
+  "url": "https://issues.apache.org/jira/browse/SOLR-17864?focusedCommentId=18047271"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-17864",
+  "comment_id": "18114692",
+  "created": "2026-09-13T00:45:40.822+0000",
+  "updated": "2026-09-13T00:45:40.822+0000",
+  "excerpt": "This issue is still open... [~epugh] resolve for... 10.0?",
+  "url": "https://issues.apache.org/jira/browse/SOLR-17864?focusedCommentId=18114692"
+ },
+ {
+  "person": "Eric Pugh",
+  "username": "epugh",
+  "issue": "SOLR-17864",
+  "comment_id": "18115167",
+  "created": "2026-09-14T13:53:46.955+0000",
+  "updated": "2026-09-14T13:56:05.098+0000",
+  "excerpt": "I think we are VERY close! I need an approval on [https://github.com/apache/solr/pull/4892] and I need to finish [https://github.com/apache/solr/pull/4893,] and I've updated [https://cwiki.apache.org/confluence/spaces/SOLR/pages/287607235/System+property+naming+structure] a lot.... Yeah, this is on ",
+  "url": "https://issues.apache.org/jira/browse/SOLR-17864?focusedCommentId=18115167"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-17704",
+  "comment_id": "17936038",
+  "created": "2025-03-16T17:07:36.744+0000",
+  "updated": "2025-03-16T17:07:36.744+0000",
+  "excerpt": "I made this a sub-task of SOLR-14306 but I regret it. Maybe that one should be closed and we simply pursue Curator without general abstractions. Although there actually is one here -- DistributedLock and DistributedCollectionLockFactory and DistributedConfigSetLockFactory.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-17704?focusedCommentId=17936038"
+ },
+ {
+  "person": "Eric Pugh",
+  "username": "epugh",
+  "issue": "SOLR-18571",
+  "comment_id": "18130653",
+  "created": "2026-10-23T00:53:32.793+0000",
+  "updated": "2026-10-23T00:53:32.793+0000",
+  "excerpt": "we don't actually really use the \"assign\" at all. It's ifne just to put a comment saying \"im working on this\"..",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18571?focusedCommentId=18130653"
+ },
+ {
+  "person": "Eric Pugh",
+  "username": "epugh",
+  "issue": "SOLR-18571",
+  "comment_id": "18130654",
+  "created": "2026-10-23T00:54:43.288+0000",
+  "updated": "2026-10-23T00:54:43.288+0000",
+  "excerpt": "in my world, I'd love to see it on by default... if it's too memory intensive or otherwise intrusive to be on by default, well, then that kind of defeats the prupose. I think it's great to be able to disable it, but we don't awant to make everythign opt in because maybe someone doesn't know they nee",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18571?focusedCommentId=18130654"
+ },
+ {
+  "person": "Eric Pugh",
+  "username": "epugh",
+  "issue": "SOLR-18566",
+  "comment_id": "18130249",
+  "created": "2026-10-22T10:49:45.377+0000",
+  "updated": "2026-10-22T10:49:45.377+0000",
+  "excerpt": "this a reminder or place holder? Or a goof ticket ;)",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18566?focusedCommentId=18130249"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-17895",
+  "comment_id": "18031431",
+  "created": "2025-10-21T13:49:32.776+0000",
+  "updated": "2025-10-21T13:49:32.776+0000",
+  "excerpt": "I suspect this may be resolved indirectly by switching the implementation of the locks to Curator, SOLR-17704",
+  "url": "https://issues.apache.org/jira/browse/SOLR-17895?focusedCommentId=18031431"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-17895",
+  "comment_id": "18031438",
+  "created": "2025-10-21T14:26:44.313+0000",
+  "updated": "2025-10-21T14:26:44.313+0000",
+  "excerpt": "Probably not related to Curator. It's up to us to place the lock in ZK where we want, regardless of implementation. Perhaps these locks should live underneath the collection znode so that they get cleaned up. But deleting a collection holds a lock on that collection. I think a simple solution is usi",
+  "url": "https://issues.apache.org/jira/browse/SOLR-17895?focusedCommentId=18031438"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-17895",
+  "comment_id": "18130679",
+  "created": "2026-10-23T04:09:57.782+0000",
+  "updated": "2026-10-23T04:09:57.782+0000",
+  "excerpt": "[~sarkaramrit2@gmail.com] What do you think of my comment RE Curator (it's _recipes_)? SOLR-17704 Solr's ZK code per-dated Curator. Only in Solr 10 have we finally made the initial prerequisite step of using Curator for connection management but the biggest value is in its recipes (higher level abst",
+  "url": "https://issues.apache.org/jira/browse/SOLR-17895?focusedCommentId=18130679"
+ },
+ {
+  "person": "Jason Gerlowski",
+  "username": "gerlowskija",
+  "issue": "SOLR-18569",
+  "comment_id": "18131023",
+  "created": "2026-10-23T16:00:46.787+0000",
+  "updated": "2026-10-23T16:00:46.787+0000",
+  "excerpt": "It looks like the \"removeEphemeralLiveNode\" method actually does clean up node_role entries on \"main\" and \"branch_10x\"...it's just branch_9x missing the fix. (It looks like this was something Houston caught as a part of his curator work in SOLR-16116, which couldn't be backported as far as 9.x I gue",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18569?focusedCommentId=18131023"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18093474",
+  "created": "2026-07-03T15:17:54.873+0000",
+  "updated": "2026-07-03T15:17:54.873+0000",
+  "excerpt": "Main branch is now on Jetty 12.1. Keeping this open for eventual backport to branch_10x in time for the 10.1 release. Marking as blocker so we don't forget, but it is not really a blocker, so feel free to release 10.1 without this if there are good reasons to do so.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18093474"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18093563",
+  "created": "2026-07-04T01:54:16.748+0000",
+  "updated": "2026-07-04T02:44:39.027+0000",
+  "excerpt": "The Jetty upgrade is now causing a reproducible test failure (when beasting locally or on slower CI infra) for the TestGracefulJettyShutdown test. Turns out to be an upstream regression introduced in both 12.1.0 and 12.0.36. Only manifests when enabling SOLR_JETTY_GRACEFUL=true. I filed https://gith",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18093563"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18099736",
+  "created": "2026-07-28T13:14:15.587+0000",
+  "updated": "2026-07-28T13:14:15.587+0000",
+  "excerpt": "Update on this - The Jetty issue gained some momentum, now with a PR in review (by [~serhiybzhezytskyy]). The newer Jetty 12.1.11 does NOT fix the bug. We'll have to check on the status of the issue/PR. Right now it looks like we'll have to release 10.1 on older Jetty 12.0.x unless the Jetty project",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18099736"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18102261",
+  "created": "2026-08-05T23:38:19.311+0000",
+  "updated": "2026-08-05T23:38:19.311+0000",
+  "excerpt": "The Jetty issue is now labeled \"High Priority\" and scheduled for Jetty 12.1.13. Release 12.1.12 was done yesterday.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18102261"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18111212",
+  "created": "2026-09-03T17:31:27.915+0000",
+  "updated": "2026-09-03T17:31:27.915+0000",
+  "excerpt": "The Jetty team has moved the fix to 12.1.14, indicating the fix is more complex or less stable than anticipated. Fingers crossed for the 12.1.14 release",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18111212"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18112923",
+  "created": "2026-09-08T16:26:05.621+0000",
+  "updated": "2026-09-08T16:26:05.621+0000",
+  "excerpt": "[~serhiybzhezytskyy] No, I don't think we can. They have still not released a version with a fix to graceful shutdown, so backporting the Jetty upgrade will likely slip to 10.2",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18112923"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18119160",
+  "created": "2026-09-25T11:27:26.312+0000",
+  "updated": "2026-09-25T11:27:26.312+0000",
+  "excerpt": "Agree. I pinged the jetty PR today to request whether the fix will be part of the 2.1.14 train or not. Anyway - I think you must plan the 10.1 release without this.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18119160"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18124966",
+  "created": "2026-10-08T10:04:36.985+0000",
+  "updated": "2026-10-08T10:04:36.985+0000",
+  "excerpt": "[~vassil.velichkov] Thanks for notifying us, will look into it",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18124966"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18124984",
+  "created": "2026-10-08T10:41:21.617+0000",
+  "updated": "2026-10-08T10:41:21.617+0000",
+  "excerpt": "New PR for upgrading to 2.1.14: [https://github.com/apache/solr/pull/5059] Up to RM for 10.1 whether it will be included in 10.1. The PR assumes 10.1, this Jira still targeting 10.2.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18124984"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18297",
+  "comment_id": "18131158",
+  "created": "2026-10-23T20:32:05.046+0000",
+  "updated": "2026-10-23T20:32:05.046+0000",
+  "excerpt": "It did not make the 10.1 train so sits ready for 10.2. Release roadmap is not planned ahead of time.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18297?focusedCommentId=18131158"
+ },
+ {
+  "person": "Jason Gerlowski",
+  "username": "gerlowskija",
+  "issue": "SOLR-17708",
+  "comment_id": "17936875",
+  "created": "2025-03-19T15:49:58.330+0000",
+  "updated": "2025-03-19T15:49:58.330+0000",
+  "excerpt": "One potential way to do this is to override the \"HttpSolrCall.shouldAuthorize\" method in the \"V2HttpCall\" subclass, returning \"false\" for JAX-RS APIs.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-17708?focusedCommentId=17936875"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18525",
+  "comment_id": "18125848",
+  "created": "2026-10-10T14:35:52.127+0000",
+  "updated": "2026-10-10T14:35:52.127+0000",
+  "excerpt": "Nice to see you here Amrit, long time. Some corner case you found here.",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18525?focusedCommentId=18125848"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18446",
+  "comment_id": "18116256",
+  "created": "2026-09-17T07:43:42.910+0000",
+  "updated": "2026-09-17T07:43:42.910+0000",
+  "excerpt": "The \"collection\" parameter is documented here [https://solr.apache.org/guide/solr/latest/deployment-guide/solrcloud-distributed-requests.html#collection-parameter] What seems to happen in the code (HttpSolrCall) is that \"collection\" url param takes precedence if specified. But if not specified, it w",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18446?focusedCommentId=18116256"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-18446",
+  "comment_id": "18116361",
+  "created": "2026-09-17T14:30:01.336+0000",
+  "updated": "2026-09-17T14:30:01.336+0000",
+  "excerpt": "yes; I actually worked on the comma-delimited support and probably added the \"collection\" param in the first place. It was added in the context of time routed aliases, where there is some ambiguity around scope & routing. I'm all for comma delimited list in the path still; I just don't like the coll",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18446?focusedCommentId=18116361"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-18446",
+  "comment_id": "18116371",
+  "created": "2026-09-17T14:35:58.309+0000",
+  "updated": "2026-09-17T14:35:58.309+0000",
+  "excerpt": "Somewhat related is an idea I've had but haven't discussed much. I'll share it here, even though it's very likely it's own discussion/JIRA. The idea is that the URL path establishes the scope of what should be searched, not something lesser (unless of course the URL is augmented to support that, as ",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18446?focusedCommentId=18116371"
+ },
+ {
+  "person": "Jan Høydahl",
+  "username": "janhoy",
+  "issue": "SOLR-18446",
+  "comment_id": "18116384",
+  "created": "2026-09-17T15:14:39.383+0000",
+  "updated": "2026-09-17T15:14:39.383+0000",
+  "excerpt": "Perhaps we should feed this entire discussion along with our current path schemes into some AI and have it reason about a meaningful consistent pattern that is logical and still preserves our need to address shards or replicas. As an example, other APIs out there use special underscore prefix for pa",
+  "url": "https://issues.apache.org/jira/browse/SOLR-18446?focusedCommentId=18116384"
+ },
+ {
+  "person": "Jason Gerlowski",
+  "username": "gerlowskija",
+  "issue": "SOLR-6213",
+  "comment_id": "18028782",
+  "created": "2025-10-09T13:51:39.929+0000",
+  "updated": "2025-10-09T13:51:39.929+0000",
+  "excerpt": "Saw this recently in Solr 9.7 during a period of ZK misconfiguration. The stacktrace looks a bit different, sharing below: {code} o.a.s.c.LeaderElector Failed setting watch => org.apache.zookeeper.KeeperException$NoAuthException: KeeperErrorCode = NoAuth for /collections/collNameRedacted/leader_elec",
+  "url": "https://issues.apache.org/jira/browse/SOLR-6213?focusedCommentId=18028782"
+ },
+ {
+  "person": "David Smiley",
+  "username": "dsmiley",
+  "issue": "SOLR-6213",
+  "comment_id": "18042358",
+  "created": "2025-12-03T01:14:38.060+0000",
+  "updated": "2025-12-03T01:14:38.060+0000",
+  "excerpt": "I ran into this today on my machine doing development. I think ZK may have been shut down uncleanly... when Solr came up it immediately looped through this leader election, consuming the stack and bombed epically. It was repeatable... until at some point it wasn't and didn't happen again. In the cou",
+  "url": "https://issues.apache.org/jira/browse/SOLR-6213?focusedCommentId=18042358"
+ }
+]
