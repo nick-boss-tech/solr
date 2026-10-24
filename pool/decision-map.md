@@ -7,7 +7,8 @@ Classify an item before working it. The standing answers below settle most items
 1. Follow-ups on our open PRs and live UI claims: always in scope.
 2. UI tickets with an assessment verdict of READY TO VOLUNTEER in the round reports: in scope for a staged ask.
 3. Today's signals: a Jira updated today whose latest update is by a committer; an email received today; a CI failure from today; a PR posted today; a promise Nick has made. In scope to assess.
-4. Everything else: out of scope by default. Priority labels (Blocker, Critical) and the newdev tag are not signals. An old ticket whose filer has moved on is cold.
+4. Standing sets: Eric Pugh's tickets from this year (`material/tickets-eric-2026.md`, 42 open at census) and Nick's own reported tickets (`material/tickets-nick.md`, 15 open) are working sets; items from them enter through assessment like anything else.
+5. Everything else: out of scope by default. Priority labels (Blocker, Critical) and the newdev tag are not signals. An old ticket whose filer has moved on is cold.
 
 ## Work type and its standing answer
 
