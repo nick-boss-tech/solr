@@ -188,3 +188,15 @@ Total: 23 recommended, 2 covered by ST5, 30 follow-up, 55 in all, plus 1 class n
 
 Draft: no branch. Nothing here is a doc edit. ST7 adds the owner's approved subset; the owner decides the set.
 
+
+## ST7: assembly (vm2)
+
+Assembled on `solr-17988-docs` from `upstream/main` 79b23df58d: merged ST2, ST1, ST3 and ST5 (ST4 has no branch). Diff against main is three files: the upgrade note, the control-script reference and the cluster upgrade guide. The upgrade-note merge needed one manual change: the ST5 sentence that the scripts were removed duplicated line 195 of main, which already says so, so only the `bin/postlogs` to `bin/solr postlogs` sentence stays.
+
+Head: `16d3005293d3c6a047277bc586b30e05b6b6ef11` (includes `pr-draft/SOLR-17988.md`).
+
+Before the push, the fork branch `solr-17988-docs` already existed at `19a191d34f` (the ST2 head). The push fast-forwarded it. Nothing was overwritten.
+
+Ref Guide build: not run here. vm2 does not list npm (`hosts/vm2.md`). It is assigned as `assignments/solr-17988-docs-refguide-build-round-1.md` for an npm host.
+
+ST7 status: NEARLY. Assembly and PR draft are done. The Ref Guide build and link check are the one named piece, in that assignment. Opening the PR waits for the owner's go.

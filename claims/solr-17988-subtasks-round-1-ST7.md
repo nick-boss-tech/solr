@@ -1,7 +1,7 @@
 # Claim: solr-17988-subtasks-round-1-ST7
 
 - Claimant host: vm2, matching `hosts/vm2.md`.
-- Status: ACTIVE.
+- Status: NEARLY. Assembly and PR draft done (solr-17988-docs at 16d3005293). The Ref Guide build is the one named piece, assigned as solr-17988-docs-refguide-build-round-1 for an npm host. Opening the PR waits for the owner go.
 - Job or assignment: `assignments/solr-17988-subtasks-round-1.md`, subtask ST7 (assembly of ST1 to ST5 onto `solr-17988-docs`, Ref Guide build validation, PR draft). The owner's ST6 decision (`assignments/solr-17988-stacked-sysprops-round-1.md`) keeps the ST6 minimum out of this branch, so ST7 is unblocked. Opening the PR waits for the owner's go.
 - Slice: ST7.
 - Capability tags used: review, implementation (doc edits, build validation). No PR opened.
