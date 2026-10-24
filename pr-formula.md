@@ -198,6 +198,14 @@ updateLicenses check -x test`. Owner ruling (Nick, 2026-10-19):
 the full `check` is not required for our branches; the gate's
 module check is sufficient, with tidy and licenses kept current.
 
+## Approval freeze (2026-10-23, from the #5180 night)
+
+Once a maintainer approves a PR, push nothing to it without the owner's explicit go, even a change the reviewer suggested. An approval freezes the tree in the approver's mind; a new commit after approval tells them the target moved and resets whatever validation they had planned against the approved head. The reviewer's own suggestion can wait a day; the approval cannot be un-spent.
+
+## Frame a design comment in the reviewer's own terms (2026-10-23, from SOLR-18470)
+
+When a ticket's subject is a deprecation or removal, name that question in the comment's own terms. A plan comment that frames the work as narrowing a parameter's authority, while the reviewer frames it as deprecation for a named release, reads as a quiet re-scope of the ticket and lands as a review request for work the reviewer did not agree to scope. State the deprecation question, the narrowing step, and the relation between them, in that order.
+
 ## Standing rules that still apply
 
 - Description edits are Muse's to make; exception: a maintainer
