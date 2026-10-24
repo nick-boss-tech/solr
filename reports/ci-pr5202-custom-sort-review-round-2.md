@@ -47,3 +47,13 @@ One pass per seed on head and base cannot bound an intermittent teardown race; r
 ## What this review did not do
 
 No tests were run, no CI was triggered, the full `:solr:core:test` suite was not run, and nothing was posted to the PR or to Jira. Whether to run the proposed sweep, rerun CI, or comment on PR #5202 stays with the owner, as the assignment states.
+
+## Sweep addendum
+
+Nick approved the repeat sweep proposed in point 4 on 2026-10-23; the sweep finished 2026-10-23 19:03 MDT. Tallied from the sweep summary log (`~/workspace/tools/sweep-5202-logs/summary.txt`):
+
+- Head runs (PR head `1c0a942ff86`): 10 runs, all rc=0, one test each, zero failures and zero errors, no LEAK lines.
+- Base runs (base `79b23df58d`): 10 runs, all rc=0, one test each, zero failures and zero errors, no LEAK lines.
+- Seed: `FFF5A3C3AAC69084` (the same seed as the CI run), alternating head/base. Started 2026-10-23 18:42:14 -06:00, finished 2026-10-23 19:03:07 -06:00.
+
+Meaning for the verdict: unchanged, still not involved. Twenty clean single-class runs at the CI seed produce no LEAK on head or base; the leak-rate bound from the head runs is loose (10 clean runs exclude rates above about 26 percent at 95 percent confidence), but no head-only LEAK appeared, so the question does not reopen. The verdict continues to rest on the creation stacks and the lifecycle code the PR does not touch.
