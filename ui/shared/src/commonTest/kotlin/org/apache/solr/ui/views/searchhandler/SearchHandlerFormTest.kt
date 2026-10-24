@@ -15,10 +15,14 @@
  * limitations under the License.
  */package org.apache.solr.ui.views.searchhandler
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
@@ -116,7 +120,9 @@ class SearchHandlerFormTest {
         setContent {
             var form by remember { mutableStateOf(SearchRequestForm()) }
             resulting = form
-            SearchHandlerForm(form, onFormChange = { form = it }, onExecute = { _, _ -> })
+            Column(Modifier.verticalScroll(rememberScrollState())) {
+                SearchHandlerForm(form, onFormChange = { form = it }, onExecute = { _, _ -> })
+            }
         }
 
         onNodeWithTag("q_input_0").performTextReplacement("*:*")

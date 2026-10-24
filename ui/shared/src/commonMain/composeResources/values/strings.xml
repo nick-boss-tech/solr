@@ -125,4 +125,9 @@
   <string name="title_create_collection">Create Collection</string>
   <string name="label_shards">Shards</string>
   <string name="action_create_collection">Create</string>
+  <string name="label_request_handler">Request Handler</string>
+  <string name="placeholder_select_request_handler">Select a request handler</string>
+  <string name="no_collections_available">No collections are available</string>
+  <string name="no_request_handlers">This collection has no request handlers</string>
+  <string name="index_query_error">The request could not be completed</string>
 </resources>
