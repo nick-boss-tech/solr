@@ -1,6 +1,6 @@
 # Gate job: SOLR-18563 (facet on a new field before commit, receiving replica)
 
-Status: CLAIMED (claims/pool-vm2-gate-SOLR-18563-receiving-replica-facet.md)
+Status: DONE (2026-10-24T06:09:36Z; claims/pool-vm2-gate-SOLR-18563-receiving-replica-facet.md)
 
 - Branch: `solr-18563-receiving-replica-facet-test`. Head: `8ef09875876fe25afdf052a2360df9b23cf18ca0` (fork tip, confirmed by ls-remote on 2026-10-22). If the tip has moved at claim time, stop and record the new tip here. Do not retarget this job.
 - Base: `7892348272727b8530d26ad08db734712ab2dacb12` (upstream main). Prior gated head: none. Merge-base with upstream/main: `7892348272727b8530d26ad08db734712ab2dacb12`.
@@ -44,18 +44,31 @@ This job does not produce a receipt, because its expected result is a failure at
 
 ## Checklist
 
-- [ ] head confirmed by ls-remote
-- [ ] diff scope confirmed
-- [ ] step 0 changelog parse
-- [ ] step 1 tidy clean, or repaired and recorded
-- [ ] step 2 Error Prone compile
-- [ ] step 3 proof leg, pass at base code
-- [ ] step 4 focused head run, counted from fresh XML, failure by content
-- [ ] step 5 module check
-- [ ] result written into this job
-- [ ] job DONE, claim DONE
+- [x] head confirmed by ls-remote
+- [x] diff scope confirmed
+- [x] step 0 changelog parse
+- [x] step 1 tidy clean, or repaired and recorded
+- [x] step 2 Error Prone compile
+- [x] step 3 proof leg, pass at base code
+- [x] step 4 focused head run, counted from fresh XML, failure by content
+- [x] step 5 module check
+- [x] result written into this job
+- [x] job DONE, claim DONE
 
 ## Deliverable and limits
 
 - One fast-forward push with the result section and the DONE marks, plus any repair commit (WORKFLOW.md, Gate repairs).
 - No PR opening or state change, no comment, no JIRA or email, no force push. Commit as Nick Shanin with no trailers. No em dashes.
+
+## Result
+
+Head `8ef09875876fe25afdf052a2360df9b23cf18ca0` (fork tip, confirmed by ls-remote at claim time). Host vm2, gate run 2026-10-24 05:42 to 06:09 UTC. Logs under `/workspace/gates/logs/vm2/gate-18563-{a,b,c,d}/`.
+
+- Base correction. The job names the base as `7892348272727b8530d26ad08db734712ab2dacb12`, which is 42 characters and not a commit. The real base is `78923482727b8530d26ad08db734712ab2dacb12`: the parent of the PR's first commit `9356388a9c`, and an ancestor of upstream/main. The diff against it matches the job (6 files, 469 insertions, 2 deletions). The proof leg ran on this base. Recorded here, not as a retarget.
+- Step 0, changelog parse: pass. `changelog/unreleased/SOLR-18563-additive-schema-api-no-reload.yml` parses as YAML; type `changed`, one link SOLR-18563.
+- Step 1, tidy: pass, no change. `./gradlew tidy` exit 0, worktree clean afterwards. No repair commit.
+- Step 2, Error Prone compile: pass. `:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true`, rc=0 (log `gate-18563-a/errorprone-compile.log`).
+- Step 3, proof leg at base `78923482727b`: pass. Overlay of only `TestManagedSchemaAPI.java` from the head; `:solr:core:cleanTest :solr:core:test --tests ...testFacetOnNewFieldBeforeCommitOnReceivingReplica -Ptests.seed=C0FFEE18563A0001`, rc=0, 1 test SUCCESS (log `gate-18563-b/proof-base.log`).
+- Step 4, focused head run: FAILED, as expected. Same command at head, rc=1 (log `gate-18563-c/head-focused.log`). Fresh XML `solr/core/build/test-results/test/TEST-org.apache.solr.schema.TestManagedSchemaAPI.xml`: tests=1, failures=1, errors=0. Failure type `org.apache.solr.client.solrj.RemoteSolrException`, message contains `SolrException: undefined field: "live_field0"` on the receiving replica's `/select` facet request. This is the expected `undefined field` result. Recorded as the head result, not RED, not relaunched.
+- Step 5, module check: pass. `:solr:core:check -x test`, rc=0 (log `gate-18563-d/module-check.log`). The job stopped at step 4 because that step has no continue flag; step 5 ran as its own job on the same head after step 4 was recorded.
+- Repair commits: none. Receipt: none, per the job (expected-failure head).
