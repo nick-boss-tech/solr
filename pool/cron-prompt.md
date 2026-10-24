@@ -5,7 +5,7 @@ This file is the job for every pool Linux host on this board. Each tick reads it
 ## Mode
 
 OVERNIGHT: off
-INTAKE: hold
+INTAKE: open
 
 - `OVERNIGHT` is the chain switch. `on` means keep the chain going by scheduling your own wake at the end of each tick. `off` means finish any live claim, schedule nothing, and stop. The owner sets this line; you do not change it.
 - `INTAKE` gates new claims. `hold` means take no new work; finish live claims only. `open` means pull from the stores in step 5. The owner sets it.
@@ -17,6 +17,7 @@ INTAKE: hold
 - Before claiming work on any tick, read `pool/owner-complaints-2026-10-19.md`. It outranks habit.
 - There is no main agent. The claimant decides; the owner answers only questions that pass the escalation test in `pool/decision-map.md`.
 - Claim before work, heartbeat hourly, take the claim to the end (WORKFLOW.md). Never poll or sleep inside a tick; run builds detached and end the tick.
+- Claim small: one claim covers one unit of work, about the size of a ticket. When an assignment lists numbered items, claim one item and name it in the claim file; the remaining items stay for other hosts. If a unit turns out to hold several tickets of work, split it in the claim and take one.
 - Decide from `pool/decision-map.md` and `material/decision-ladder.md` before asking the owner anything. Record the rung used in the claim.
 - A finding ends in a fix with the check rerun, a correction to the claim it falsifies, or a recorded non-reproduction with the reason. A thin verdict is worse than an open item: keep it open and say what is missing.
 - Check every claimed item against the WON'T DO shapes in WORKFLOW.md before starting; refuse and clear in the same push.
