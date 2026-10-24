@@ -1,0 +1,6 @@
+Notice for the snakeyaml-engine-* dependencies (ASL license, see snakeyaml-engine-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - it.krzeminski:snakeyaml-engine-kmp-jvm:3.1.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

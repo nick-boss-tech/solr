@@ -1,0 +1,11 @@
+Notice for the ktor-serialization-* dependencies (ASL license, see ktor-serialization-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - io.ktor:ktor-serialization-kotlinx-json-jvm:3.6.0
+  - io.ktor:ktor-serialization-kotlinx-jvm:3.6.0
+  - io.ktor:ktor-serialization-jvm:3.6.0
+  - io.ktor:ktor-serialization-kotlinx-json-wasm-js:3.6.0
+  - io.ktor:ktor-serialization-kotlinx-wasm-js:3.6.0
+  - io.ktor:ktor-serialization-wasm-js:3.6.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

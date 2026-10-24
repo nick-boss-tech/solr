@@ -1,0 +1,7 @@
+Notice for the ktor-sse-* dependencies (ASL license, see ktor-sse-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - io.ktor:ktor-sse-jvm:3.6.0
+  - io.ktor:ktor-sse-wasm-js:3.6.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

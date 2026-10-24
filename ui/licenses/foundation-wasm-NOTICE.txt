@@ -1,0 +1,6 @@
+Notice for the foundation-wasm-* dependencies (ASL license, see foundation-wasm-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.compose.foundation:foundation-wasm-js:1.12.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

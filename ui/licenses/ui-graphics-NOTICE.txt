@@ -1,0 +1,7 @@
+Notice for the ui-graphics-* dependencies (ASL license, see ui-graphics-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.compose.ui:ui-graphics-desktop:1.12.1
+  - org.jetbrains.compose.ui:ui-graphics-wasm-js:1.12.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

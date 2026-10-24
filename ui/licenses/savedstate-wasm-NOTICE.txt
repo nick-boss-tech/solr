@@ -1,0 +1,7 @@
+Notice for the savedstate-wasm-* dependencies (ASL license, see savedstate-wasm-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.savedstate:savedstate-wasm-js:1.4.0
+  - org.jetbrains.androidx.savedstate:savedstate-wasm-js:1.4.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

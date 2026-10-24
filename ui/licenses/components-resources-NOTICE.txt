@@ -1,0 +1,7 @@
+Notice for the components-resources-* dependencies (ASL license, see components-resources-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.compose.components:components-resources-desktop:1.12.1
+  - org.jetbrains.compose.components:components-resources-wasmJs:1.12.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

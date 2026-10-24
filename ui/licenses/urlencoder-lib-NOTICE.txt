@@ -1,0 +1,6 @@
+Notice for the urlencoder-lib-* dependencies (ASL license, see urlencoder-lib-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - net.thauvin.erik.urlencoder:urlencoder-lib-jvm:1.6.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

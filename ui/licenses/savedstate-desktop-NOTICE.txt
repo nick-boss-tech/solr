@@ -1,0 +1,6 @@
+Notice for the savedstate-desktop-* dependencies (ASL license, see savedstate-desktop-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.savedstate:savedstate-desktop:1.4.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

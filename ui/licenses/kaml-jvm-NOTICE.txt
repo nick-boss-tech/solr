@@ -1,0 +1,6 @@
+Notice for the kaml-jvm-* dependencies (ASL license, see kaml-jvm-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - com.charleskorn.kaml:kaml-jvm:0.79.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

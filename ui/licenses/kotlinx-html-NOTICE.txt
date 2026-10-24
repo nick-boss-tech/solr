@@ -1,0 +1,6 @@
+Notice for the kotlinx-html-* dependencies (ASL license, see kotlinx-html-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.kotlinx:kotlinx-html-jvm:0.12.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

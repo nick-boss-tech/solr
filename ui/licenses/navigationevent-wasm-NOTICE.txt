@@ -1,0 +1,6 @@
+Notice for the navigationevent-wasm-* dependencies (ASL license, see navigationevent-wasm-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.navigationevent:navigationevent-wasm-js:1.1.2
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

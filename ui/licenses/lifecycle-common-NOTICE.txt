@@ -1,0 +1,9 @@
+Notice for the lifecycle-common-* dependencies (ASL license, see lifecycle-common-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.lifecycle:lifecycle-common-jvm:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-common-jvm:2.11.0
+  - androidx.lifecycle:lifecycle-common-wasm-js:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-common-wasm-js:2.11.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

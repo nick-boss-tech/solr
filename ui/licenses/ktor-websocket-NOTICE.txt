@@ -1,0 +1,7 @@
+Notice for the ktor-websocket-* dependencies (ASL license, see ktor-websocket-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - io.ktor:ktor-websocket-serialization-jvm:3.6.0
+  - io.ktor:ktor-websocket-serialization-wasm-js:3.6.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

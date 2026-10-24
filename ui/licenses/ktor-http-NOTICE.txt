@@ -1,0 +1,9 @@
+Notice for the ktor-http-* dependencies (ASL license, see ktor-http-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - io.ktor:ktor-http-cio-jvm:3.6.0
+  - io.ktor:ktor-http-jvm:3.6.0
+  - io.ktor:ktor-http-cio-wasm-js:3.6.0
+  - io.ktor:ktor-http-wasm-js:3.6.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

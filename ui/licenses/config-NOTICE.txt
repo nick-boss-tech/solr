@@ -1,0 +1,6 @@
+Notice for the config-* dependencies (ASL license, see config-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - com.typesafe:config:1.4.9
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

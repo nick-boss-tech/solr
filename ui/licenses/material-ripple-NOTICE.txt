@@ -1,0 +1,7 @@
+Notice for the material-ripple-* dependencies (ASL license, see material-ripple-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.compose.material:material-ripple-desktop:1.12.1
+  - org.jetbrains.compose.material:material-ripple-wasm-js:1.12.0-beta01
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

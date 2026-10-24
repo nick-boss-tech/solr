@@ -1,0 +1,21 @@
+Notice for the lifecycle-viewmodel-* dependencies (ASL license, see lifecycle-viewmodel-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.lifecycle:lifecycle-viewmodel-navigation3-desktop:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3-desktop:2.11.0
+  - androidx.lifecycle:lifecycle-viewmodel-desktop:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-desktop:2.11.0
+  - androidx.lifecycle:lifecycle-viewmodel-savedstate-desktop:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-savedstate-desktop:2.11.0
+  - androidx.lifecycle:lifecycle-viewmodel-compose-desktop:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose-desktop:2.11.0
+  - androidx.lifecycle:lifecycle-viewmodel-wasm-js:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-wasm-js:2.11.0
+  - androidx.lifecycle:lifecycle-viewmodel-navigation3-wasm-js:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3-wasm-js:2.11.0
+  - androidx.lifecycle:lifecycle-viewmodel-compose-wasm-js:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose-wasm-js:2.11.0
+  - androidx.lifecycle:lifecycle-viewmodel-savedstate-wasm-js:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-savedstate-wasm-js:2.11.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

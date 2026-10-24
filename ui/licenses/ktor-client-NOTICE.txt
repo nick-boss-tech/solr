@@ -1,0 +1,13 @@
+Notice for the ktor-client-* dependencies (ASL license, see ktor-client-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - io.ktor:ktor-client-auth-jvm:3.6.0
+  - io.ktor:ktor-client-cio-jvm:3.6.0
+  - io.ktor:ktor-client-content-negotiation-jvm:3.6.0
+  - io.ktor:ktor-client-core-jvm:3.6.0
+  - io.ktor:ktor-client-auth-wasm-js:3.6.0
+  - io.ktor:ktor-client-content-negotiation-wasm-js:3.6.0
+  - io.ktor:ktor-client-js-wasm-js:3.6.0
+  - io.ktor:ktor-client-core-wasm-js:3.6.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

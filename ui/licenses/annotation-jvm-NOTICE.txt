@@ -1,0 +1,6 @@
+Notice for the annotation-jvm-* dependencies (ASL license, see annotation-jvm-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.annotation:annotation-jvm:1.9.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

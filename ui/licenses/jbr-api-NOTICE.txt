@@ -1,0 +1,6 @@
+Notice for the jbr-api-* dependencies (ASL license, see jbr-api-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.runtime:jbr-api:1.9.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

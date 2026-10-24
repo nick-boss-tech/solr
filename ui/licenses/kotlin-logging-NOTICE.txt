@@ -1,0 +1,7 @@
+Notice for the kotlin-logging-* dependencies (ASL license, see kotlin-logging-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - io.github.oshai:kotlin-logging-jvm:8.0.4
+  - io.github.oshai:kotlin-logging-wasm-js:8.0.4
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

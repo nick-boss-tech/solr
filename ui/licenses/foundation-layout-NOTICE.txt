@@ -1,0 +1,7 @@
+Notice for the foundation-layout-* dependencies (ASL license, see foundation-layout-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.compose.foundation:foundation-layout-desktop:1.12.1
+  - org.jetbrains.compose.foundation:foundation-layout-wasm-js:1.12.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

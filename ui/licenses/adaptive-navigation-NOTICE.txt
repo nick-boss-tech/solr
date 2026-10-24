@@ -1,0 +1,7 @@
+Notice for the adaptive-navigation-* dependencies (ASL license, see adaptive-navigation-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.compose.material3.adaptive:adaptive-navigation-desktop:1.3.0-rc01
+  - org.jetbrains.compose.material3.adaptive:adaptive-navigation-wasm-js:1.3.0-rc01
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

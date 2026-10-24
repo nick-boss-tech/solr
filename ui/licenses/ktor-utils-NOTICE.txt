@@ -1,0 +1,7 @@
+Notice for the ktor-utils-* dependencies (ASL license, see ktor-utils-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - io.ktor:ktor-utils-jvm:3.6.0
+  - io.ktor:ktor-utils-wasm-js:3.6.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

@@ -1,0 +1,7 @@
+Notice for the ui-text-* dependencies (ASL license, see ui-text-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.compose.ui:ui-text-desktop:1.12.1
+  - org.jetbrains.compose.ui:ui-text-wasm-js:1.12.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

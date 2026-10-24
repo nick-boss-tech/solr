@@ -1,0 +1,14 @@
+Notice for the lifecycle-runtime-* dependencies (ASL license, see lifecycle-runtime-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.lifecycle:lifecycle-runtime-desktop:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-runtime-desktop:2.11.0
+  - androidx.lifecycle:lifecycle-runtime-compose-desktop:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose-desktop:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose-desktop:2.9.6
+  - androidx.lifecycle:lifecycle-runtime-wasm-js:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-runtime-wasm-js:2.11.0
+  - androidx.lifecycle:lifecycle-runtime-compose-wasm-js:2.11.0
+  - org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose-wasm-js:2.11.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

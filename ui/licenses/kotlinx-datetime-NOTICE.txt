@@ -1,0 +1,7 @@
+Notice for the kotlinx-datetime-* dependencies (ASL license, see kotlinx-datetime-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.8.0-0.6.x-compat
+  - org.jetbrains.kotlinx:kotlinx-datetime-wasm-js:0.8.0-0.6.x-compat
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

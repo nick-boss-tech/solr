@@ -1,0 +1,7 @@
+Notice for the ui-geometry-* dependencies (ASL license, see ui-geometry-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.compose.ui:ui-geometry-desktop:1.12.1
+  - org.jetbrains.compose.ui:ui-geometry-wasm-js:1.12.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

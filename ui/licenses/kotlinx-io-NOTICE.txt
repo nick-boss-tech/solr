@@ -1,0 +1,9 @@
+Notice for the kotlinx-io-* dependencies (ASL license, see kotlinx-io-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.kotlinx:kotlinx-io-core-jvm:0.9.1
+  - org.jetbrains.kotlinx:kotlinx-io-bytestring-jvm:0.9.1
+  - org.jetbrains.kotlinx:kotlinx-io-core-wasm-js:0.9.1
+  - org.jetbrains.kotlinx:kotlinx-io-bytestring-wasm-js:0.9.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

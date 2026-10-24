@@ -1,0 +1,6 @@
+Notice for the kotlinx-browser-* dependencies (ASL license, see kotlinx-browser-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

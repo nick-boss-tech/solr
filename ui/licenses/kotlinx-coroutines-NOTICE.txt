@@ -1,0 +1,9 @@
+Notice for the kotlinx-coroutines-* dependencies (ASL license, see kotlinx-coroutines-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.11.0
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.11.0
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.11.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

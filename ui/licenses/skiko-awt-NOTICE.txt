@@ -1,0 +1,11 @@
+Notice for the skiko-awt-* dependencies (ASL license, see skiko-awt-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.skiko:skiko-awt-runtime-linux-arm64:0.150.1
+  - org.jetbrains.skiko:skiko-awt:0.150.1
+  - org.jetbrains.skiko:skiko-awt-runtime-macos-x64:0.150.1
+  - org.jetbrains.skiko:skiko-awt-runtime-macos-arm64:0.150.1
+  - org.jetbrains.skiko:skiko-awt-runtime-windows-x64:0.150.1
+  - org.jetbrains.skiko:skiko-awt-runtime-linux-x64:0.150.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

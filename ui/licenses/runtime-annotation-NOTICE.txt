@@ -1,0 +1,7 @@
+Notice for the runtime-annotation-* dependencies (ASL license, see runtime-annotation-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.compose.runtime:runtime-annotation-jvm:1.12.1
+  - androidx.compose.runtime:runtime-annotation-wasm-js:1.12.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

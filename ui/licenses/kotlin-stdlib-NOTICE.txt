@@ -1,0 +1,8 @@
+Notice for the kotlin-stdlib-* dependencies (ASL license, see kotlin-stdlib-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.kotlin:kotlin-stdlib:2.3.20
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+  - org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.4.20
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

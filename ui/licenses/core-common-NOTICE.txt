@@ -1,0 +1,6 @@
+Notice for the core-common-* dependencies (ASL license, see core-common-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.arch.core:core-common:2.2.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

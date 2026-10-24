@@ -1,0 +1,6 @@
+Notice for the skiko-js-* dependencies (ASL license, see skiko-js-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.skiko:skiko-js-wasm-runtime:0.150.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

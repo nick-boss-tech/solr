@@ -1,0 +1,7 @@
+Notice for the graphics-shapes-* dependencies (ASL license, see graphics-shapes-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.graphics:graphics-shapes-desktop:1.1.0
+  - androidx.graphics:graphics-shapes-wasm-js:1.1.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

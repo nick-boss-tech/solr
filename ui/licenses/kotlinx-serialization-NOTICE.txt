@@ -1,0 +1,12 @@
+Notice for the kotlinx-serialization-* dependencies (ASL license, see kotlinx-serialization-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm:1.11.0
+  - org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.11.0
+  - org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.11.0
+  - org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.7.3
+  - org.jetbrains.kotlinx:kotlinx-serialization-json-io-wasm-js:1.11.0
+  - org.jetbrains.kotlinx:kotlinx-serialization-json-wasm-js:1.11.0
+  - org.jetbrains.kotlinx:kotlinx-serialization-core-wasm-js:1.11.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

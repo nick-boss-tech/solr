@@ -1,0 +1,10 @@
+Notice for the navigationevent-compose-* dependencies (ASL license, see navigationevent-compose-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.navigationevent:navigationevent-compose-desktop:1.1.1
+  - androidx.navigationevent:navigationevent-compose-desktop:1.1.2
+  - org.jetbrains.androidx.navigationevent:navigationevent-compose-desktop:1.1.0
+  - androidx.navigationevent:navigationevent-compose-wasm-js:1.1.2
+  - org.jetbrains.androidx.navigationevent:navigationevent-compose-wasm-js:1.1.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

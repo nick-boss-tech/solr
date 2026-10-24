@@ -1,0 +1,7 @@
+Notice for the animation-core-* dependencies (ASL license, see animation-core-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.compose.animation:animation-core-desktop:1.12.1
+  - org.jetbrains.compose.animation:animation-core-wasm-js:1.12.1
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

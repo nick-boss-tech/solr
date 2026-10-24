@@ -1,0 +1,6 @@
+Notice for the atomicfu-wasm-* dependencies (ASL license, see atomicfu-wasm-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - org.jetbrains.kotlinx:atomicfu-wasm-js:0.33.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.

@@ -1,0 +1,7 @@
+Notice for the annotation-wasm-* dependencies (ASL license, see annotation-wasm-LICENSE-ASL.txt).
+
+The following artifacts are covered by this file:
+  - androidx.annotation:annotation-wasm-js:1.9.1
+  - org.jetbrains.compose.annotation-internal:annotation-wasm-js:1.10.0
+
+None of these artifacts ships a NOTICE file in its JAR or klib, so none is reproduced here.
