@@ -25,3 +25,5 @@ Heartbeat: 2026-10-24T14:18Z (rc3-smoke-loop-round-1: run-003 in unit tests, abo
 Heartbeat: 2026-10-24T15:10Z (rc3-smoke-loop-round-1: host restarted about 15:05Z and killed run-004 (recorded as died). Loop restarted 15:08Z and numbering fixed; run-005 running. Run-001 stdout log was overwritten by a mis-numbered restart; its test.log and XML are intact under tmp/run-001. Partial build output of died run-004 was deleted by mistake.)
 
 Heartbeat: 2026-10-24T15:58Z (rc3-smoke-loop-round-1: run-005 in unit tests, about 50 min in; runs 001 to 003 fail, run-004 died at host restart)
+
+Heartbeat: 2026-10-24T16:53Z (rc3-smoke-loop-round-1: run-005 in unit tests, about 1h45m in; runs 001 to 003 fail, run-004 died at host restart)
