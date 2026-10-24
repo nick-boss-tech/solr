@@ -13,3 +13,7 @@
 - Decision ladder: rung 1 for the codec and the NoSuchMethodError linkage (bytecode of the cuvs-lucene jar against the Lucene jars). Rung 3 for the ticket's expected behavior. Options that change Solr behavior are left to the owner (decision 2 of the assignment).
 
 Heartbeat: 2026-10-24T19:36:08Z
+
+Result: 2026-10-24T19:38:05Z: deliverables on the board: `jira/SOLR-18556-comment-draft-round-1.md` (unposted) and `reports/solr-18556-round-1.md`. The GPU path was not run (no GPU on vm6). The linkage was checked from the published cuvs-lucene 25.12.0 and 26.10.0 jars and Lucene 10.2.0 and 10.4.0 jars with javap. Latest release 26.10.0 still targets Lucene 10.2.0.
+
+DONE: 2026-10-24T19:38:05Z (deliverables). Option choice is Nick's; see `assignments/solr-18556-closure-round-1.md`.
