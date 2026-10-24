@@ -28,3 +28,18 @@ Not verified: the Decompose pop-to-index call against the library version in thi
 ## Item 3: SOLR-17676 probe result folded in (verified, not redone here)
 
 Commit `5810dc9ac3` ("17676 draft: fold in the no-browser probe result (hard fail, not a skip)") already updated `jira/jira-comment-SOLR-17676-draft.md`. Checked: the draft now states the probe result, and the item is covered. No second edit made by this claim.
+
+## Item 2 (second ticket): SOLR-17911 staged ask (draft, not posted), vm6, 2026-10-24
+
+Draft: `jira/jira-comment-SOLR-17911-draft.md`. Addressee [~malliaridis] (reporter; unassigned, no comments, last updated 2025-09-10).
+
+Correction to the index-query report. Its verdict for SOLR-17911 ("no viewer under ui/", READY TO VOLUNTEER, smallest slice a stateless viewer) is out of date. The component already exists on the fork branch `solr-17911-file-content-viewer`, at commit `8047b99ef0`, with two commits by Nick Shanin (`4c069a4c60`, `8047b99ef0`), a draft PR description at `pr-draft/SOLR-17911.md`, and a test file. Nothing is on main.
+
+Checked on the branch by reading the code, not by running it:
+- `ui/shared/src/commonMain/kotlin/org/apache/solr/ui/views/files/FileContentViewer.kt`: plain-string input, numbered lines, gutter in `DisableSelection`, text in `SelectionContainer`, horizontal and vertical scroll.
+- `ui/shared/src/commonTest/kotlin/org/apache/solr/ui/views/files/FileContentViewerTest.kt`: three `@Test` functions (line numbers, escapes, scrolling).
+- The ticket's acceptance criteria are met on the branch, except the optional `editable` parameter, which the ticket allows.
+
+Not re-run here. The branch's 3-of-3 result comes from the pool-ui-tickets assignment, which records a gate run on 8047b99ef09 by vm2. The draft says so.
+
+The staged ask therefore asks for the sufficiency decision and offers Options A to C, recommending A (open the PR from the branch, screen wiring later).

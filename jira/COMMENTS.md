@@ -84,3 +84,7 @@ Answering [~gus]'s question from 2024: yes, this is complete, and the version is
 ## Staged ask, not posted (SOLR-17909, vm6, 2026-10-24)
 
 - **SOLR-17909 staged ask**: asks [~malliaridis] whether the evidence meets the ticket's bar and offers Options A to C, recommending A (composable over a fixed list with preview, Decompose check in the same change). Draft at `jira-comment-SOLR-17909-draft.md`; record in `reports/ui-volunteer-drafts-round-1.md`. Waits on Nick's go.
+
+## Staged ask, not posted (SOLR-17911, vm6, 2026-10-24)
+
+- **SOLR-17911 staged ask**: the component already exists on fork branch `solr-17911-file-content-viewer` (8047b99ef0), so the ask is about opening the PR, not about starting. Asks [~malliaridis] whether the evidence meets the bar, offers Options A to C, recommends A. Draft at `jira-comment-SOLR-17911-draft.md`; correction to the index-query report recorded in `reports/ui-volunteer-drafts-round-1.md`. Waits on Nick's go.

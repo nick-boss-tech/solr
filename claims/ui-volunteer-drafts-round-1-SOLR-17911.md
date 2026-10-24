@@ -1,7 +1,7 @@
 # Claim: ui-volunteer-drafts-round-1-SOLR-17911
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/ui-volunteer-drafts-round-1.md`, item 2, for the READY TO VOLUNTEER ticket SOLR-17911 in `reports/new-ui-index-query-components-round-1.md`. One ticket per claim.
 - Slice: SOLR-17911 (file content viewer) staged-ask draft only. The report says nothing exists on main; a fork branch `solr-17911-file-content-viewer` (8047b99ef09) exists and is checked here.
 - Capability tags used: draft. Drafting only: nothing posted to JIRA or GitHub.
@@ -11,3 +11,7 @@
 - Decision ladder: rung 1 for the branch contents and the test file; the draft states only what is read there.
 
 Heartbeat: 2026-10-24T07:01:41Z
+
+Result: 2026-10-24T07:02:19Z: the component exists on fork branch solr-17911-file-content-viewer (8047b99ef0), so the index-query report verdict is stale. Staged ask drafted; not posted. Test run not repeated here.
+
+DONE: 2026-10-24T07:02:19Z. Deliverables: `jira/jira-comment-SOLR-17911-draft.md`, `reports/ui-volunteer-drafts-round-1.md` (correction and item 2), `jira/COMMENTS.md` entry.
