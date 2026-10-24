@@ -11,3 +11,5 @@ RC3 smoke loop (rc3-smoke-loop-round-1): run-001 started 2026-10-24T08:08Z, log 
 Heartbeat: 2026-10-24T09:12Z (rc3-smoke-loop-round-1: run-001 in unit tests, 1h into the run)
 
 Heartbeat: 2026-10-24T10:17Z (rc3-smoke-loop-round-1: run-001 BUILD FAILED after 1h44m, 6 failures of 5898 in solr:core: RecoveryAfterSoftCommitTest, TestTlogReplica, CoreAdminHandlerTest, TestCoordinatorRole; tmp kept at /workspace/smoke-rc3/tmp/run-001)
+
+Heartbeat: 2026-10-24T11:05Z (rc3-smoke-loop-round-1: run-002 in unit tests, 47 min in; run-001 failed, 6 of 5898)
