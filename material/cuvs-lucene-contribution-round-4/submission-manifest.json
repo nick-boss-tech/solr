@@ -1,0 +1,82 @@
+{
+  "step": "cuvs-lucene-02-submission-package-round-4",
+  "status": "DRAFTS ONLY, NOT POSTED. Owner decision pending.",
+  "checkedAt": "2026-10-24T23:03:39Z",
+  "host": "vm2",
+  "upstream": {
+    "repo": "NVIDIA/cuvs",
+    "prs": [
+      {
+        "number": 2702,
+        "state": "open",
+        "draft": true,
+        "author": "imotov",
+        "base": "efc7d30ea7498d322b4cf806b67007995632469a",
+        "head": "23004d0f0de2014f11b09313f04fcf0de7643c3b",
+        "role": "test base for the step 01 patches; split into the PRs below",
+        "compatDirectory": true
+      },
+      {
+        "number": 2867,
+        "state": "open",
+        "draft": false,
+        "author": "imotov",
+        "base": "main",
+        "head": "1c6bc921126e3fb1a051c91733c77ca75681c146",
+        "reviews": [
+          {"user": "paul-aiyedun", "state": "APPROVED", "submittedAt": "2026-10-22T20:42:37Z"},
+          {"user": "cjnolet", "state": "APPROVED", "submittedAt": "2026-10-22T21:46:35Z"}
+        ],
+        "mergeableState": "blocked",
+        "relatesTo": "NVIDIA/cuvs#2702",
+        "compatDirectory": false,
+        "testBackCompatIndicesBlob": "f6701a14a2d71f5f78c0e03a32c60c72ee210f0e"
+      },
+      {"number": 2769, "state": "closed", "merged": true, "note": "split from 2702"},
+      {"number": 2771, "state": "closed", "merged": true, "note": "split from 2702"}
+    ]
+  },
+  "step01": {
+    "package": "material/cuvs-lucene-contribution-round-4/",
+    "manifestSha256": "38af9de7bbf9b4fab805096b92faf46d9643e13713ef5ba44fe711d92af6cdf8",
+    "readmeSha256": "d07dd5089030b2415039d9f74e4f195f5e118c14307643bbcf9364d04295da89",
+    "combinedPatchSha256": "84688de57719d0600505e42f4a62bfbd8b49373486ee90f6c4d9efbeff73ee5c",
+    "applicableTo": "NVIDIA/cuvs base 23004d0f0de2014f11b09313f04fcf0de7643c3b",
+    "notApplicableTo": "PR 2867 head without a port"
+  },
+  "drafts": [
+    {
+      "path": "drafts/cuvs-lucene-first-contact-round-4.md",
+      "sha256": "cd5847f7d4c75d7d02e60ebacdca024c1781c8ad4500045f35e60cba8d39d0b8",
+      "status": "DRAFT, not reviewed by Nick, not posted",
+      "target": "PR 2867 recommended; PR 2702 alternative"
+    },
+    {
+      "path": "drafts/cuvs-lucene-technical-handoff-round-4.md",
+      "sha256": "05672c525f229df423a2f2c18f38fccce3b83b31f2b13e42af0d30abe41dd457",
+      "status": "DRAFT, not reviewed by Nick, not posted; for an engaged maintainer only"
+    }
+  ],
+  "policy": {
+    "commitAuthor": "Nick Shanin <nick.boss.us@gmail.com>",
+    "trailers": "none",
+    "dco": "no DCO requirement found at base 23004d0f0de or head 1c6bc921126 (CONTRIBUTING pointer, PR template, pr.yaml); no Signed-off-by added",
+    "aiDisclosure": "GitHub comment: header only. PR description: header and one-line footer. Jira: footer only. Reviewed-by wording is proposed until Nick reviews.",
+    "rewriteRequired": false
+  },
+  "proposedCommitSubjects": [
+    "Add CPU regression tests for CompatKnnFloatVectorQuery filters and deletes",
+    "Add archived-index upgrade test with deletes and sparse vectors"
+  ],
+  "proposedCommitSubjectsScope": "for the PR 2702 base only; subjects change if the tests are ported to PR 2867",
+  "deliveryMethod": {
+    "firstContact": "none; the comment carries no patch and no branch link",
+    "whenRequested": "undecided: attach the patch file to the comment, or push a fork branch for preservation (not a PR)"
+  },
+  "readinessDependencies": [
+    "Port the four test files to PR 2867's per-version Lucene module layout, if PR 2867 is the target",
+    "New CPU run on the exact ported head, covering the affected proof legs",
+    "Step 03 readiness review by a host other than vm2"
+  ],
+  "ownerApprovalNeeded": "Approve posting the first-contact comment on the chosen PR, after reviewing its header and text"
+}
