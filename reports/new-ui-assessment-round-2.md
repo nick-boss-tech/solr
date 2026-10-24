@@ -53,3 +53,26 @@ Not verified: no build was run. Research only, per the assignment.
 (d) Verdict: READY TO VOLUNTEER, with a caveat. A newcomer can start from the ticket text and the lines above, but the fix must be checked on Windows, since nothing on Linux exercises these paths. Smallest first slice: on the Windows host, reproduce the three steps in the ticket with `SOLR_LOGS_DIR` set to a path with a space, and record which line fails (`solr.cmd` run with `@echo on` or the stop path). Do not change the script until that is recorded.
 
 Not verified: no Windows run, no script change. Research only, per the assignment.
+
+## SOLR-17898: Updating collection property via v2 API endpoint fails with 500 response
+
+(a) Ask: `PUT /api/collections/{coll}/properties/{name}` with `{"value": "bar"}` should create or update the collection property. Reported as HTTP 500 with the HK2 error "Could not find a suitable constructor in org.apache.solr.handler.admin.api.CollectionProperty". Open, Major, reporter malliaridis, affects 9.9. Comments: utsav00 (2026-04-19) says the PUT returns status 0 on his run; malliaridis (2026-04-20) reproduced it on 10.0.0, found it working on current main, and said he would report back; utsav00 asked for an update on 2026-06-07; no reply recorded.
+
+(b) Exists today:
+- Fork main `498a09aea9`, `solr/core/src/java/org/apache/solr/handler/admin/api/CollectionProperty.java` lines 45 to 50: the three-argument `CoreContainer` constructor carries `@Inject`.
+- That annotation was added by `9ead8599b1` (SOLR-12224, Jason Gerlowski, 2026-01-26, PR #4071), in the same commit that added the list and get read APIs. Before it, the constructor had no annotation (`9ead8599b1^`, line 41).
+- Tag `releases/solr/10.0.0` (apache/solr, commit `6c6c48a6f7`, 2026-02-12): the constructor at line 41 has no annotation, and `9ead8599b1` is not an ancestor of the tag. 10.0.0 has the unannotated constructor, which is the state the ticket reports.
+- Among the 49 admin API classes in the package with a `CoreContainer` constructor, 44 carry `@Inject`. The five without it are the base classes (`AdminAPIBase`, `BackupAPIBase`, `CoreAdminAPIBase`), `InstallCoreData`, and `UpgradeCoreIndex`.
+- The v2 test gap: nothing under `solr/core/src/test` calls the v2 collection-property endpoint (grep for `CollectionProperty` and `api/collections/.../properties` finds no v2 request). A regression on that path would not be caught.
+- Reading that settles the mechanism (rung 1): the failing class and the working class differ only by the annotation on the constructor the error names. The HK2 source was not read, so "HK2 needs `@Inject` on a non-default constructor" is an inference from the error text and this diff.
+- Same pattern, untested: `InstallCoreData` (`solr/core/src/java/org/apache/solr/handler/admin/api/InstallCoreData.java` lines 44 to 50) has a four-argument constructor with no `@Inject`. It is registered as a v2 Jersey resource in `CoreAdminHandler.java` line 333 for `POST /api/cores/{coreName}/install` (`solr/api/src/java/org/apache/solr/client/api/endpoint/InstallCoreDataApi.java` line 32). No test covers that route. By the same mechanism it should fail on main the same way. This is a prediction, not an observation. `UpgradeCoreIndex` has the same shape but is not a registered Jersey resource.
+
+(c) Open:
+- No reproduction was run. Both "fails on 10.0.0 because of the missing annotation" and "the annotation fixes it" are rung 1 inferences. The probe that would settle it: on a checkout of `releases/solr/10.0.0`, PUT the property and expect a 500 with the HK2 message; on main, remove the annotation and expect the same. Neither was run here.
+- Whether the 10.0.x line gets the one-line backport is a release decision for the owner, not something this read can settle.
+- Whether the `InstallCoreData` v2 route is broken on main needs the same probe.
+- The 9.9 line was not checked.
+
+(d) Verdict: ALREADY DONE on main, fixed by `9ead8599b1` as a side effect of adding read APIs, not as a targeted fix. The 10.0.x line still has the bug. Not a volunteer item as written: the remaining work is a backport decision, a regression test that does not exist, and confirming the `InstallCoreData` route. Smallest first slice: a test under `solr/core/src/test/org/apache/solr/handler/admin/api/` that PUTs and GETs a collection property through the v2 path, run on main and on the 10.0.0 tag. No main-code change is needed on main.
+
+Not verified: no build or test was run for this ticket. Research only, per the assignment.
