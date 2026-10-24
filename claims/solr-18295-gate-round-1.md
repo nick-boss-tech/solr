@@ -14,3 +14,7 @@
 - Decision ladder: the job's acceptance and failure rows govern. A failure at the exact head is recorded and diagnosed, not relaunched.
 
 Heartbeat: 2026-10-24T20:11:17Z
+
+Result: 2026-10-24T23:02:12Z: gate on b273b245115beff0cc131448c277dc9bde909a0c. Format, compile, Error Prone, check and final spotless pass; smoke pass; 20 of 20 matched final-head runs pass; synthetic baseline 16 of 20 pass, with 4 pre-commit transport failures at cut followers (see report).
+
+DONE: 2026-10-24T23:02:12Z (gate). Deliverables: `reports/solr-18295-gate-round-1.md` and `receipts/SOLR-18295.md`.
