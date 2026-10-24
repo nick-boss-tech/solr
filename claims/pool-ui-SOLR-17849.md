@@ -12,3 +12,7 @@
 - Constraints: no JIRA or GitHub post, no PR. Commit as Nick Shanin with no trailers.
 
 Heartbeat: 2026-10-24T08:09:38Z
+
+Run: job `pool-ui-17849-b91f75ed93-081338`, log dir `/workspace/gates/logs/vm6/pool-ui-17849/`, head `b91f75ed93`, started 2026-10-24T08:13:47Z (UTC). Steps: spotless, then the four IndexQuery and SearchHandler test classes, through `pool/bin/bg-steps.sh` with the stand-in libEGL and SOFTWARE_FAST. Test files confirmed on the branch by ls-tree.
+
+Heartbeat: 2026-10-24T08:13:47Z
