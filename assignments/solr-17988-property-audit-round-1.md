@@ -1,6 +1,6 @@
 # Research assignment: SOLR-17988 property-transition audit
 
-Status: CLAIMED by vm6 (`claims/solr-17988-property-audit-round-1.md`, 2026-10-24).
+Status: DONE by vm6 (2026-10-24T04:49:32Z). Deliverable `reports/solr-17988-property-audit-round-1.md`; claim `claims/solr-17988-property-audit-round-1.md`.
 
 Research only; do not post anything to Jira or GitHub, do not change code. Claim this assignment before starting, and write the report to `reports/solr-17988-property-audit-round-1.md` when done.
 
