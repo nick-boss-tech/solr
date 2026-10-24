@@ -7,4 +7,4 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Local JDK: `/workspace/jdk/jdk-21.0.12.1+1`. Set `JAVA_HOME` and `GRADLE_USER_HOME=/workspace/gradle-home` before builds.
 - Build lock: `/workspace/tools/.gradle-vm6.lock`, taken by `pool/bin/sweep-run.sh` from the Host id in `/workspace/AGENTS.md`.
 - Role beyond the pool: none. Takes work by claim at Nick's direction, like other pool hosts.
-- Heartbeat: 2026-10-24T18:06:29Z; no live claim. PR 5211 phase I DONE (fork branch solr-18569-pr5211-test-review at f00c7bde83bf); phase G DONE (report, receipts/SOLR-18569.md, unposted comment draft). Next: Nick reviews the comment draft; no public post without his go.
+- Heartbeat: 2026-10-24T18:49:41Z; no live claim. Receipts written by vm6 for its gates: receipts/SOLR-17849, -17850, -17887, -17909, -17911, -17913, -17914 and -17861. Waiting on Nick for the PR 5211 comment draft.
