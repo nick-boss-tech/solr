@@ -39,3 +39,5 @@ Heartbeat: 2026-10-24T20:12Z (vm5-release-tarball-dev-tools-check-round-1: archi
 Heartbeat: 2026-10-24T21:16Z (vm5-release-tarball-dev-tools-check-round-1: full root check still running in :solr:core:test; no failed task yet; RAT passed rc=0)
 
 Heartbeat: 2026-10-24T22:23Z (vm5-release-tarball-dev-tools-check-round-1: full root check still running, no failed task yet; rc3-smiley-failure-comparison-round-1: reports pushed)
+
+Heartbeat: 2026-10-24T23:20Z (rc3-tlogreplica-rootcause-round-1 unit 1: focused TestTlogReplica run at RC3 tip running under the host lock, log /workspace/smoke-rc3/tlog-repro/rc3-tip-run1.log; main worktree /workspace/worktrees/tlog-main ready)
