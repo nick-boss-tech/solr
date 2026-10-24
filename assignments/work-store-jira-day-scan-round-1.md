@@ -11,6 +11,12 @@
 - One live date claim per host.
 - The walk goes backwards one day at a time. The next claimable day is the day before the oldest date folder on the board. The starting folder is 2026-10-23. How far back the walk goes is the owner's call; the 3-month window he named reaches about 2026-07-24.
 
+## Cross-host preflight (before any Jira reads)
+
+- Refresh the live `coordination-ui` branch, then inspect every `receipts/YYYY-MM-DD/` scan folder. A folder with `CLAIM.md` but no `receipt.md` is an unresolved live claim, regardless of its date or host; do not start another scan while one exists. If another host owns it, stand down. If it is your own claim, proceed only with that already-claimed day; do not open a second day.
+- For a new scan, use only the next backward UTC date from the walk above, and verify its folder is absent before creating `CLAIM.md`. Push the create-only claim before reading Jira. If the folder appeared, the claim path already exists, or the push loses a race/is rejected, refresh and stand down; never force-push, rebase a competing claim into place, or overwrite a claim.
+- After filing and publishing `receipt.md`, refresh the branch before claiming the next day. A failed scan remains unresolved until its failure is accurately recorded and the owner resolves the claim; do not silently retry it or advance to another date.
+
 ## The scan (one claim per day)
 
 - Scope: SOLR tickets updated on the claimed UTC day. Query: `project = SOLR AND updated >= "<day>" AND updated < "<next day>"` against `https://issues.apache.org/jira/rest/api/2/search`, paginated at 100.
