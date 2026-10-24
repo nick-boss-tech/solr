@@ -1,6 +1,6 @@
 # Gate job: SOLR-18563 (facet on a new field before commit, receiving replica)
 
-Status: OPEN
+Status: CLAIMED (claims/pool-vm2-gate-SOLR-18563-receiving-replica-facet.md)
 
 - Branch: `solr-18563-receiving-replica-facet-test`. Head: `8ef09875876fe25afdf052a2360df9b23cf18ca0` (fork tip, confirmed by ls-remote on 2026-10-22). If the tip has moved at claim time, stop and record the new tip here. Do not retarget this job.
 - Base: `7892348272727b8530d26ad08db734712ab2dacb12` (upstream main). Prior gated head: none. Merge-base with upstream/main: `7892348272727b8530d26ad08db734712ab2dacb12`.
