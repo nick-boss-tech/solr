@@ -1,0 +1,208 @@
+[
+  {
+    "path": "material/figma/23-5124.png",
+    "bytes": 97137,
+    "width": 520,
+    "height": 572,
+    "sha256": "4049e984317d9c6b97053791b37a8c6317c1d8cfc880dad3cc67a1d829550fd0",
+    "notes": []
+  },
+  {
+    "path": "material/figma/137-12066.png",
+    "bytes": 102866,
+    "width": 520,
+    "height": 572,
+    "sha256": "9d89375637f2661edfbcd65909129f9efb804c52506d87e25a5d48d031cf1b47",
+    "notes": []
+  },
+  {
+    "path": "material/figma/156-4776.png",
+    "bytes": 150096,
+    "width": 520,
+    "height": 572,
+    "sha256": "52aa9a6623e11439583eb019b0f5c4f53aac9620244ce3b348b388c9f8fdb69d",
+    "notes": []
+  },
+  {
+    "path": "material/figma/14-3248.png",
+    "bytes": 49307,
+    "width": 520,
+    "height": 572,
+    "sha256": "38b2968d2218d1a2dbc4c3bf3b6d9c57f303e42081cdc33c67d493edf848f0f8",
+    "notes": []
+  },
+  {
+    "path": "material/figma/13-3972.png",
+    "bytes": 114963,
+    "width": 520,
+    "height": 572,
+    "sha256": "368bffa336e6e85c43285a2da6a1abd3115c559f298f8691ae0798411c489ffc",
+    "notes": []
+  },
+  {
+    "path": "material/figma/13-3977.png",
+    "bytes": 104689,
+    "width": 520,
+    "height": 572,
+    "sha256": "14c0ccee5ef6df086971ba83558db49959e29d90108f7597dc89af76ed8b60ec",
+    "notes": []
+  },
+  {
+    "path": "material/figma/227-7661.png",
+    "bytes": 90492,
+    "width": 520,
+    "height": 572,
+    "sha256": "0fa6c8d87f44ea0d5870a5ef198a5a9b999ea0c972f80f3a2c76def673f6bf13",
+    "notes": []
+  },
+  {
+    "path": "material/figma/227-9235.png",
+    "bytes": 125227,
+    "width": 520,
+    "height": 572,
+    "sha256": "9a5130cadeacef48ce1395f3ebbba697c31a9cb7f6af9d8c3ad29099659d34a1",
+    "notes": []
+  },
+  {
+    "path": "material/figma/87-12957.png",
+    "bytes": 112683,
+    "width": 520,
+    "height": 572,
+    "sha256": "198ea3d7f0dcb13b8add9eecabafb6e891db5902a5e7405e58624c240beba747",
+    "notes": []
+  },
+  {
+    "path": "material/figma/1997-7453.png",
+    "bytes": 128751,
+    "width": 520,
+    "height": 572,
+    "sha256": "8ea7945aa66dec10677f12988ccd516efe35247d65f276eb9c67c146fd3c3b75",
+    "notes": []
+  },
+  {
+    "path": "material/figma/319-20114.png",
+    "bytes": 82014,
+    "width": 520,
+    "height": 572,
+    "sha256": "1e2f38c41b1dabaf9c0bee3eb02f9d8c635859c939f4984c036bf84f7dfb1d2e",
+    "notes": [
+      "Design-sample credential line masked in viewport capture."
+    ]
+  },
+  {
+    "path": "material/figma/394-288.png",
+    "bytes": 284982,
+    "width": 520,
+    "height": 572,
+    "sha256": "943ffc137ef53bbb8dd77a0409d5a4d84c2c2f9279181fb4507803c72e0c1b4b",
+    "notes": []
+  },
+  {
+    "path": "material/figma/render/23-5124.png",
+    "bytes": 741402,
+    "width": 4368,
+    "height": 6000,
+    "sha256": "ac816373690bd30b5713f22f20acedfd7481529c54e73f26623db1f9b011bd07",
+    "notes": []
+  },
+  {
+    "path": "material/figma/render/137-12066.png",
+    "bytes": 86448,
+    "width": 1920,
+    "height": 1080,
+    "sha256": "0a0fe26861eebd6741e554bfbf810bd19dcf3808ac7b4c0de673a4b32b3780c0",
+    "notes": []
+  },
+  {
+    "path": "material/figma/render/156-4776.png",
+    "bytes": 78781,
+    "width": 864,
+    "height": 1632,
+    "sha256": "e7e2d375c413c4f405ad17c39646ea866ae6daa8788b16f16d51f5e9656c3657",
+    "notes": []
+  },
+  {
+    "path": "material/figma/render/14-3248.png",
+    "bytes": 621370,
+    "width": 21810,
+    "height": 2771,
+    "sha256": "cbc24c08a782135cf12a6c7567036e60ada839fa55e61dcf4cd61bec3d00f697",
+    "notes": [
+      "256-color PNG for the under-1-MB limit; token values come from inspector."
+    ]
+  },
+  {
+    "path": "material/figma/render/13-3972.png",
+    "bytes": 122374,
+    "width": 1920,
+    "height": 1080,
+    "sha256": "79d1c7fa0af3fbf183d995a47894aff8a7fe7ecc5859c76d9c68b287232eeef9",
+    "notes": []
+  },
+  {
+    "path": "material/figma/render/13-3977.png",
+    "bytes": 98380,
+    "width": 1280,
+    "height": 720,
+    "sha256": "b5ac74225eff784ef7c38ef6fa5c55e62cad6aaf702f23d05ddd69af3f6a711f",
+    "notes": []
+  },
+  {
+    "path": "material/figma/render/227-7661.png",
+    "bytes": 157210,
+    "width": 1920,
+    "height": 1080,
+    "sha256": "393942715568cb823f0da9caecd286146ca9193075350b4df2862bac517b703f",
+    "notes": []
+  },
+  {
+    "path": "material/figma/render/227-9235.png",
+    "bytes": 130119,
+    "width": 1280,
+    "height": 720,
+    "sha256": "9b2d953a18f4c00e27833a65d05a8024dc16a69f46fe422df294cad7e6553fb3",
+    "notes": []
+  },
+  {
+    "path": "material/figma/render/1997-7453.png",
+    "bytes": 98418,
+    "width": 1280,
+    "height": 720,
+    "sha256": "bc4f0e00c8948be644137fc13343ea471d08ff18c34081493774049a1be76ff1",
+    "notes": []
+  },
+  {
+    "path": "material/figma/render/319-20114.png",
+    "bytes": 94936,
+    "width": 1920,
+    "height": 1080,
+    "sha256": "53ccfe09a1ac3de6cb44ac8b3e5dc1fe795f1cb45869f1821c628893f564d099",
+    "notes": [
+      "Design-sample credential value masked; layout unchanged."
+    ]
+  },
+  {
+    "path": "material/figma/render/394-288.png",
+    "bytes": 394279,
+    "width": 768,
+    "height": 2268,
+    "sha256": "60e3d8aeb05ee5d52624ef93400d80cf0eefeb6f3f6575b8ee90ba38eb65ea20",
+    "notes": []
+  },
+  {
+    "path": "material/figma/tokens-start-card.png",
+    "bytes": 154265,
+    "width": 520,
+    "height": 572,
+    "sha256": "83398164bea9faf9ea3b408fbeae2581889758098cff999111092df3e8dec4aa",
+    "notes": []
+  },
+  {
+    "path": "material/figma/tokens-dashboard-card.png",
+    "bytes": 164047,
+    "width": 520,
+    "height": 572,
+    "sha256": "cc2ecb62ff377082914d1799227fa993a7e9e1d789931c3f0dec3b02002a7bdc",
+    "notes": []
+  }
+]
