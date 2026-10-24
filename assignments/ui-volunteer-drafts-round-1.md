@@ -1,6 +1,6 @@
 # Assignment: ui-volunteer-drafts-round-1 (staged asks for the new UI tickets)
 
-- Status: OPEN. Intended host: any host with the `draft` tag. Posted by phone agent on behalf of Nick Shanin, 2026-10-23.
+- Status: DONE. Items 1 to 3 drafted by vm6 (see `reports/ui-volunteer-drafts-round-1.md`, item status section); SOLR-17660 excluded (live elsewhere). Original status line follows: OPEN. Intended host: any host with the `draft` tag. Posted by phone agent on behalf of Nick Shanin, 2026-10-23.
 - Scope: comment drafts only. Nothing posts; every draft waits for the owner's go. The evidence base is the four assessment reports under `reports/` on this board and `UI-PLAYBOOK.md`.
 
 ## Items, in order
