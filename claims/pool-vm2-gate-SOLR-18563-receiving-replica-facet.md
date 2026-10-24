@@ -11,6 +11,6 @@
 
 Heartbeat: 2026-10-24T05:38:06Z
 
-Result: 2026-10-24T06:09:36Z: head 8ef09875876fe25afdf052a2360df9b23cf18ca0. Steps 0 to 5 run. Step 4 failed with \ as the job expects. Result section in \.
+Result: 2026-10-24T06:09:36Z: head 8ef09875876fe25afdf052a2360df9b23cf18ca0. Steps 0 to 5 run. Step 4 failed with `undefined field: "live_field0"`, as the job expects. Result section in `gates/SOLR-18563-receiving-replica-facet.md`.
 
-DONE: 2026-10-24T06:09:36Z. Deliverables: \ (Status DONE, Result section).
+DONE: 2026-10-24T06:09:36Z. Deliverables: `gates/SOLR-18563-receiving-replica-facet.md` (Status DONE, Result section).
