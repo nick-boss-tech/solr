@@ -27,19 +27,19 @@ Already-posted text stands; the split applies from 2026-10-23 forward.
 
 ## The ask comment (the typical Jira comment)
 
-The typical Jira comment is the ask: propose and volunteer, in the open, before starting work. Per Smiley's ask on the dev list (2026-10-23), and in Nick's words: "I looked at this, here is the slice I propose, here are the files I expect to touch, [name], do you want it and will you review."
+The typical Jira comment opens a conversation in stages (Nick, 2026-10-23). It does not ask for a review commitment; that ask comes only after the other side has engaged.
 
-1. Disclosure per platform (in Jira, the closing footer line).
-2. A named mention of the ticket's sponsor candidate: the committer whose ticket it is or whose recent activity makes them the reviewer candidate. On the new UI tickets this is Christos (malliaridis).
-3. What was looked at, stated as done: the reproduction for a defect, or the code and ticket read for a feature slice, in one line.
-4. The slice proposed, in one or two sentences: the smallest piece that stands on its own, at the level of behavior.
-5. The files the change is expected to touch, named as files and phrased as an expectation ("the files I expect to touch are ..."), so the reader can correct the scope from memory: add a file, remove one, name a different layer.
-6. The question, to the named committer: do you want this, and would you be willing to review it?
+1. **Run some test.** The comment leads with evidence we produced or verified: a reproduction, a test run, a checked claim. Stated plainly, with the run or artifact linked.
+2. **Ask if it is sufficient.** One question, about the evidence: whether it meets the ticket's bar. That judgment is the owner's; it is the one question the comment asks.
+3. **Pose the decision ladder.** The possible states of the ticket, listed as a ladder the owner can step down: what closing now rests on, what staying open would still require, what a follow-up would carry.
+4. **Recommend the scope.** Our recommendation, stated as ours: which rung we would take and why, in one or two sentences.
+5. **Wait for engagement.** No review ask in this comment. If the owner engages and work follows, willingness to review is asked then, and reconfirmed when a PR is posted.
 
-Rules that keep the comment an ask rather than a delivery:
+Companion rules:
 
+- The slice and the files still belong in the comment when work is being proposed: the slice in one or two sentences at the level of behavior, and the files named as an expectation ("the files I expect to touch are ..."), so the reader can correct the scope from memory: add a file, remove one, name a different layer.
 - No branch or diff link by default. A linked diff turns the proposal into finished work asking for review labor before anyone agreed to spend it, and moves the conversation from direction to implementation defense. Exception: when the fix is mechanical enough that the diff is shorter than the argument about it, a diff link may go in the footer, after the question.
-- Wait for an answer before building. Reconfirm willingness when the PR is posted.
+- The addressee is a named mention of the ticket's sponsor candidate: the committer whose ticket it is or whose recent activity makes them the sponsor. On the new UI tickets this is Christos (malliaridis).
 
 ## The status note (evidence comment)
 
