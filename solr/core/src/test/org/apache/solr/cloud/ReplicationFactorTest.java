@@ -27,9 +27,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
-import org.apache.lucene.tests.util.LuceneTestCase.AwaitsFix;
 import org.apache.solr.SolrTestCaseJ4.SuppressSSL;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.client.solrj.response.CollectionAdminResponse;
@@ -49,7 +49,6 @@ import org.slf4j.LoggerFactory;
  * after an add or update.
  */
 @SuppressSSL(bugUrl = "https://issues.apache.org/jira/browse/SOLR-5776")
-@AwaitsFix(bugUrl = "https://issues.apache.org/jira/browse/SOLR-18295") // 28-Jun-2026 flaky
 public class ReplicationFactorTest extends AbstractFullDistribZkTestBase {
 
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -58,6 +57,13 @@ public class ReplicationFactorTest extends AbstractFullDistribZkTestBase {
     super();
     sliceCount = 3;
     fixShardCount(3);
+  }
+
+  @Override
+  protected CloudSolrClient createCloudClient(String defaultCollection) {
+    // Prefer live leaders over the follower proxies that this test deliberately closes.
+    return createNewCloudSolrClient(
+        zkServer.getZkAddress(), defaultCollection, true, 30000, 120000);
   }
 
   /**
