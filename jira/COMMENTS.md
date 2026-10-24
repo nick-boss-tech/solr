@@ -76,3 +76,7 @@ Answering [~gus]'s question from 2024: yes, this is complete, and the version is
 ## GitHub reply draft, not posted (PR #5117, vm6, 2026-10-24)
 
 - **PR #5117 rebase question**: header-form reply that corrects the "PR#5117 is merged" premise (#5172 merged; #5117 is open and already rebased on it). Text in `reports/pr-followups-round-1.md`, item 2. Waits on Nick's go.
+
+## Staged ask, not posted (SOLR-17861, vm6, 2026-10-24)
+
+- **SOLR-17861 staged ask**: asks [~malliaridis] whether the evidence meets the ticket's bar and offers Options A to C, recommending A (a licenses check inside `ui`, after #4650). Draft at `jira-comment-SOLR-17861-draft.md`; record in `reports/ui-volunteer-drafts-round-1.md`. Waits on Nick's go.
