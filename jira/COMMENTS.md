@@ -1,12 +1,10 @@
 # Jira comments: the scoped list
 
-Board note (2026-10-23): this file is the list of record on the coordination-ui board. The goal-files copy is a snapshot from the migration; edit this one.
-
 Every comment for a ticket on this list is scoped through `comment-formula.md` (same folder; the coordination branch root copy governs) before anything posts. Posting still needs Nick's go, per comment. New tickets join the list when a comment is first contemplated, not after it posts.
 
-## Formula review pass (queued, Nick 2026-10-23)
+## Formula review pass (DONE 2026-10-23; review at `formula-review-2026-10-23.md` in this folder)
 
-After the factory refactor: review every Jira comment posted on 2026-10-23 against the new formula (staged form: evidence first, sufficiency question, ladder, recommendation, engagement before any review ask; Jira footer disclosure). They were posted before the formula existed and are expected to fall short. The set: SOLR-18470 (18131208), SOLR-18240 (18131214), SOLR-17988 (18131215), SOLR-12833 (18131218), SOLR-16450 (18131220), SOLR-6213 (18131122, as edited), SOLR-5754 (closure recommendation). Findings first; any edit to a posted comment is a separate decision.
+Reviewed every Jira comment posted on 2026-10-23 against the new formula. Result: no edits proposed. All seven carry the header disclosure, which the formula grandfathers (posted text stands; the footer applies forward). On substance the four status notes and the 5754 closure pass; the 6213 ask is the reconfirmation beat the formula allows, and its mechanism bullet was verified accurate against the PR #5210 diff; SOLR-18470 is the pre-staged specimen, left as posted because the thread is live. One open decision for Nick: whether to apply the footer swap retroactively anyway (recommendation in the review: no).
 
 ## Drafts in hand, not posted
 
