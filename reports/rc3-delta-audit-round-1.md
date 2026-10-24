@@ -35,3 +35,27 @@ Findings (cosmetic, wording only):
 Not verified: the note does not say what a user sees when `cagra_hnsw` is used on 10.1 (an error at index time, or something else). It says only "does not work". Not reproduced: a run needs a GPU or a stubbed codec, and was not attempted.
 
 Research only; no build or test was run.
+
+## Item 2: the cherry-picked fixes (eight commits)
+
+Method: match each backport to its main-branch original by subject, then compare the two patches by `git patch-id`. Identical patch-id means the same change, so the test files that came with the original are in the backport. A patch that differs is read line by line.
+
+| Backport (RC3) | Main original | Patch | Tests in backport | Result |
+| --- | --- | --- | --- | --- |
+| fd42ef4d7f SOLR-18031 `bin/solr post --filetypes` | d97bc70cef | identical | 1 | CLEAN |
+| e884a1bbd8 SolrTestCase reset system properties | 9d7cc2884e | identical | 0 | CLEAN |
+| fb56d1f6cc SOLR-17398 V1 to V2 links | 1d7a1e9062 | identical | 0 | CLEAN |
+| c1e73c1392 SOLR-18400 plugins screen 500 | e34067ae64 | identical | 2 | CLEAN |
+| a3603260ea SOLR-17820 CLUSTERSTATUS health | 7e3b175021 | differs (AGENTS.md hunk only) | 1 | FINDING, cosmetic (below) |
+| c8c86434cd SOLR-18520 package uninstall | 2f2b21be65 | identical | 0 | CLEAN |
+| d43e574fd2 SOLR-18166 linkconfig vestiges | 31d089b1c9 | identical | 0 | CLEAN |
+| a8cda55615 Documented V2 API Conventions | bc428ba81b | identical | 0 | CLEAN |
+
+Finding, a3603260ea (SOLR-17820). The `ClusterStatus.java` and `ClusterStatusTest.java` hunks are the same change as the main commit. The difference is in `AGENTS.md`, which the main commit also edits:
+- The backport adds the line "System properties set in a test are restored after each test by the base classes (`SystemPropertiesRestoreRule`)...". The main-branch line comes from `5e044a331f` (CLI commit, #5054), which is not in the RC2 to RC3 delta. The line is accurate at RC3: `SystemPropertiesRestoreRule` is in `solr/test-framework/.../SolrTestCase.java`. It is still an extra, out of this ticket's scope.
+- The main commit changes "Avoid SolrTestCaseJ4 for new tests" to "Use SolrTestCase instead of SolrTestCaseJ4 for new tests". The backport does not make that edit, and RC3 still says "Avoid".
+- Effect: `AGENTS.md` is a contributor file, not a shipped artifact. It does not affect the vote. Severity: cosmetic.
+
+Not verified: the backports were not built or tested here. A patch that applies cleanly shows the premise holds textually, not that it compiles at RC3.
+
+Verdict for item 2: seven of eight CLEAN. One cosmetic finding (a3603260ea, AGENTS.md hunk).
