@@ -7,4 +7,4 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Local JDK: `/workspace/jdk/jdk-21.0.12.1+1`. Set `JAVA_HOME` and `GRADLE_USER_HOME=/workspace/gradle-home` before builds.
 - Build lock: `/workspace/tools/.gradle-vm6.lock`, taken by `pool/bin/sweep-run.sh` from the Host id in `/workspace/AGENTS.md`.
 - Role beyond the pool: none. Takes work by claim at Nick's direction, like other pool hosts.
-- Heartbeat: 2026-10-24T23:15:27Z; live claim misc-benchmark-cache-auth-vs-response (misc box item 1). SOLR-18295 gate DONE (receipts/SOLR-18295.md). Building apache/solr main 13c693d805 for the benchmark; no timed runs yet.
+- Heartbeat: 2026-10-24T23:43:54Z; no live claim. misc benchmark DONE (report on the board); SOLR-18295 gate DONE; raw logs under /workspace/gates/logs/vm6/misc-benchmark/raw/.
