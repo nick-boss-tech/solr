@@ -1,7 +1,7 @@
 # Claim: pool-ui-SOLR-17909
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/pool-ui-tickets-round-1.md`, one ticket per claim. Ticket type: component (differs from the screen ticket SOLR-17849 claimed just before, owner complaint 5).
 - Slice: SOLR-17909 (breadcrumb component), first slice only: a reusable composable over a list of entries, with a preview and a test. Branch `solr-17909-breadcrumb` from base `c8ab71430f`.
 - Rewritten criteria (the ticket's criteria mention the Decompose childstack; the base commit `c8ab71430f` removed Decompose from the shared module, so those criteria are stale):
@@ -28,3 +28,9 @@ Failed run: job `pool-ui-17909-17c6860195-083805`, head `17c6860195`. spotless r
 Rerun (one, new head): job `pool-ui-17909-77a38638b0-084441`, log dir `/workspace/gates/logs/vm6/pool-ui-17909/`, started 2026-10-24T08:44:52Z (UTC).
 
 Heartbeat: 2026-10-24T08:44:52Z
+
+Result: 2026-10-24T08:51:20Z: PASS at head 77a38638b0 (rerun job `pool-ui-17909-77a38638b0-084441`): spotless rc=0; jvmtest rc=0. `SolrBreadcrumbTest` 4 of 4 (testShowsEveryEntry, testClickingAnEarlierEntryReportsItsIndex, testClickingTheLastEntryReportsNothing, and the wrap test, which is a pin). XML: `ui/shared/build/test-results/jvmTest/TEST-SolrBreadcrumbTest.xml`. Log dir `/workspace/gates/logs/vm6/pool-ui-17909/`. Not gl-blast-radius (no Canvas, DrawScope, graphicsLayer, drawWithCache or shaders in the 13 changed commonMain files).
+
+Branch: pushed to `solr-17909-breadcrumb-wrap` at `8a2d511368` (77a38638b0 plus a docs-only PR draft commit). Process gap, recorded: an earlier branch `solr-17909-breadcrumb` already exists on the fork, by Nick, at `fdb53f6a02` (2026-10-19, same base c8ab71430f). I did not check fork branches for this ticket before claiming, which I did for 17849 and 17911. The earlier branch is not overwritten: it has a single-row `Breadcrumb` that does not wrap, which the ticket requires. The choice of which branch to open as the PR is recorded in the PR draft for the owner.
+
+DONE: 2026-10-24T08:51:20Z. Deliverables: branch `solr-17909-breadcrumb-wrap` (8a2d511368), `pr-draft/SOLR-17909.md` on that branch.
