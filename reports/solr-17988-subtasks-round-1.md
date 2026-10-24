@@ -90,3 +90,101 @@ Gap 7, the script removal. Verified:
 Draft: branch `solr-17988-st5` on the fork, head `0965fe75e4dd0491fade1447d8b41aef624be8a1`, one commit on `upstream/main` `79b23df58d`. The change is in `major-changes-in-solr-10.adoc` only: two rename bullets with the no-alias warning, one sentence that the environment variables are unchanged, and one sentence on the script removal.
 
 Not verified: the Ref Guide build was not run. The `wantClientAuth` rename was checked in the same script lines as `needClientAuth`, not by a separate run.
+
+## ST6: the 56 undocumented new sysprops (audit gap 9)
+
+Assessment only, by vm2 (not vm6), against `releases/solr/10.0.0`. No doc edits.
+
+Scope. The audit appendix lists 56 names. `solr.NumFieldLimitingUpdateRequestProcessorFactory` is a class name used in a test configset, not a property, so it is excluded. The other 55 are each read by 10.0 code, a Jetty XML file or the start script. None has a Ref Guide row.
+
+Not verified. This ranks by what each property controls and where it is read. Defaults, whether a default changed in 10.0, and runtime behavior were not checked.
+
+### Recommended minimum for this PR (T1 to T4, pending the owner's approval)
+
+**T1, cluster behavior toggles** (3 names)
+
+| Property | Where read in 10.0 |
+| --- | --- |
+| `solr.cloud.overseer.enabled` | `solr/core/src/java/org/apache/solr/cloud/ZkController.java` line 381 |
+| `solr.cloud.downgrade.enabled` | `solr/core/src/java/org/apache/solr/cloud/ZkController.java` line 629 |
+| `solr.cloud.prs.enabled` | `solr/core/src/java/org/apache/solr/cloud/api/collections/CreateCollectionCmd.java` line 98 |
+
+**T2, operator security settings** (4 names)
+
+| Property | Where read in 10.0 |
+| --- | --- |
+| `solr.ui.headers.csp.connect-src.urls` | `solr/core/src/java/org/apache/solr/servlet/LoadAdminUiServlet.java` line 46 |
+| `solr.configset.upload.mimetypes.forbidden` | `solr/core/src/java/org/apache/solr/util/FileTypeMagicUtil.java` line 198 |
+| `solr.jetty.keystoreParentPath` | `solr/bin/solr` line 223 |
+| `solr.keystore.reload.enabled` | `solr/bin/solr` line 216 |
+
+**T3, TLS hardening in jetty-ssl.xml** (9 names)
+
+| Property | Where read in 10.0 |
+| --- | --- |
+| `solr.jetty.ssl.sts.max.age.secs` | `solr/server/etc/jetty-ssl.xml` line 47 |
+| `solr.jetty.ssl.sts.include.subdomains.enabled` | `solr/server/etc/jetty-ssl.xml` line 48 |
+| `solr.jetty.ssl.renegotiationAllowed` | `solr/server/etc/jetty-ssl.xml` line 30 |
+| `solr.jetty.ssl.renegotiationLimit` | `solr/server/etc/jetty-ssl.xml` line 31 |
+| `solr.jetty.ssl.sniRequired` | `solr/server/etc/jetty-ssl.xml` line 32 |
+| `solr.jetty.ssl.sni.required.enabled` | `solr/server/etc/jetty-ssl.xml` line 45 |
+| `solr.jetty.ssl.sni.host.check.enabled` | `solr/bin/solr` line 277 |
+| `solr.jetty.ssl.useCipherSuitesOrder` | `solr/server/etc/jetty-ssl.xml` line 27 |
+| `solr.jetty.ssl.provider` | `solr/server/etc/jetty-ssl.xml` line 10 |
+
+**T4, runtime limits and operations** (7 names)
+
+| Property | Where read in 10.0 |
+| --- | --- |
+| `solr.logs.requestlog.enabled` | `solr/core/src/java/org/apache/solr/util/StartupLoggingUtils.java` line 210 |
+| `solr.admin.async.max` | `solr/core/src/java/org/apache/solr/handler/admin/CoreAdminHandler.java` line 369 |
+| `solr.admin.async.timeout.minutes` | `solr/core/src/java/org/apache/solr/handler/admin/CoreAdminHandler.java` line 395 |
+| `solr.admin.async.timeout.completed.minutes` | `solr/core/src/java/org/apache/solr/handler/admin/CoreAdminHandler.java` line 397 |
+| `solr.update.docLockTimeoutMs` | `solr/core/src/java/org/apache/solr/update/UpdateLog.java` line 397 |
+| `solr.pid.dir` | `solr/bin/solr` line 500 |
+| `solr.schemaUpdateTimeoutSeconds` | `solr/core/src/java/org/apache/solr/schema/SchemaManager.java` line 83 |
+
+### Covered by ST5
+
+* `solr.jetty.ssl.need.client.auth.enabled`: the rename note in ST5 covers it.
+* `solr.jetty.ssl.want.client.auth.enabled`: the rename note in ST5 covers it.
+
+### Follow-up, not in this PR (30 names)
+
+Socket, buffer, pool and internal tuning knobs. An operator is unlikely to set most of them, and each needs a sentence on what it does. Listed for the follow-up ticket:
+
+* `jetty.gzip.deflaterPool.capacity`
+* `jetty.gzip.deflaterPool.compressionLevel`
+* `jetty.gzip.deflaterPool.noWrap`
+* `jetty.server.stopTimeout`
+* `solr.OverseerStateUpdateMaxQueueSize`
+* `solr.allowPartialResultsDefault`
+* `solr.blockcache.blockshift`
+* `solr.blockcache.readbuffer.size.default`
+* `solr.exportbuffers.exchange.timeout.sec`
+* `solr.install.symDir`
+* `solr.jetty.http.acceptedReceiveBufferSize`
+* `solr.jetty.http.acceptedSendBufferSize`
+* `solr.jetty.http.acceptedTcpNoDelay`
+* `solr.jetty.http.reuseAddress`
+* `solr.jetty.http.reusePort`
+* `solr.jetty.ssl.acceptedReceiveBufferSize`
+* `solr.jetty.ssl.acceptedSendBufferSize`
+* `solr.jetty.ssl.acceptedTcpNoDelay`
+* `solr.jetty.ssl.reuseAddress`
+* `solr.jetty.ssl.reusePort`
+* `solr.jetty.ssl.sslSessionCacheSize`
+* `solr.jetty.ssl.sslSessionTimeout`
+* `solr.log.cputime`
+* `solr.otelDefaultConfigurator`
+* `solr.search.multiThreaded.queueSize`
+* `solr.solrj.cache.timeout.sec`
+* `solr.solrj.javabin.readMapAsNamedList`
+* `solr.traceHostName`
+* `solr.url.scheme`
+* `solr.use.str.intern`
+
+Total: 23 recommended, 2 covered by ST5, 30 follow-up, 55 in all, plus 1 class name excluded.
+
+Draft: no branch. Nothing here is a doc edit. ST7 adds the owner's approved subset; the owner decides the set.
+
