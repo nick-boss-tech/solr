@@ -154,3 +154,16 @@ Not verified: no code change, no test run, no dev-list search. Research only, pe
 (d) Verdict: ALREADY DONE on the PR branch, not on main. PR #4968 covers the ask and is open. No volunteer slice exists for this ticket: the change is already written and in review under the owner's name. The one useful next step is a committer review of #4968, which is a PR action and not a claim for this round.
 
 Not verified: no build or test was run. Research only, per the assignment.
+
+## Ranking of the eight, by startability for Nick
+
+1. SOLR-17598 (READY TO VOLUNTEER): the ticket text and the lines in its section are enough to start. The fix needs a Windows check, since Linux does not exercise these paths.
+2. SOLR-17585 (ALREADY DONE, not reproduced): a short confirmation build on the gate host would close it. Small, but it is an owner call to close.
+3. SOLR-17572 (TOO BIG AS STATED): the smallest first slice is named and concrete, the 44-line `build-tools/missing-doclet/build.gradle`. Startable once the slice is accepted.
+4. SOLR-17898 (ALREADY DONE on main, 10.0.x open): the open work is a backport decision and a regression test that does not exist. Test-first slice is clear once the owner wants it.
+5. SOLR-18178 (ALREADY DONE on the open PR #4968): no new work; the next step is a committer's review of an existing PR, which is Nick's own PR.
+6. SOLR-18214 (NEEDS CHRISTOS): the choice of omitted-base behavior is the blocker, not the code.
+7. SOLR-17657 (NEEDS CHRISTOS): the choice between Gradle verification metadata and PGP signatures is the blocker.
+8. SOLR-18191 (NEEDS CHRISTOS): the compatibility break needs the dev list first; the scope question is Christos's.
+
+Not verified: no build or test was run for any ticket in this round. Research only, per the assignment.
