@@ -1,6 +1,6 @@
 # Assignment: solr-18470-framing-reconciliation-round-1 (the collection parameter, after Smiley's dev-list reply)
 
-- Status: OPEN. Intended host: any host with the `review` tag. Posted by phone agent on behalf of Nick Shanin, 2026-10-24.
+- Status: DONE. Deliverables `reports/solr-18470-framing-reconciliation-round-1.md` and `jira/jira-comment-SOLR-18470-followup-draft.md`; claim `claims/solr-18470-framing-reconciliation-round-1.md` (vm6). Intended host: any host with the `review` tag. Posted by phone agent on behalf of Nick Shanin, 2026-10-24.
 - Scope: analysis and drafting only. Nothing is posted, and no posted comment is edited, under this assignment. Every outward text comes back as a draft for the owner's go.
 - One claim covers the whole item; it is one unit of work.
 
