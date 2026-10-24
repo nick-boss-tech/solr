@@ -1,0 +1,77 @@
+{
+  "upstream": {
+    "repo": "NVIDIA/cuvs",
+    "base": "23004d0f0de2014f11b09313f04fcf0de7643c3b",
+    "livePrHead": "23004d0f0de2014f11b09313f04fcf0de7643c3b",
+    "livePr": 2702,
+    "checkedAt": "2026-10-24"
+  },
+  "patches": [
+    {
+      "order": 1,
+      "file": "cpu-regression.patch",
+      "sha256": "d9ad46585c65846cf9b0d4f0ccffbf882e79be593f15897d8775115de810b154",
+      "package": "2ad555a87a22acdf617f679ca03f5831f246b4a8",
+      "receipt": "receipts/CUVS-LUCENE-PR2702-CPU-ROUND-2.md"
+    },
+    {
+      "order": 2,
+      "file": "backcompat.patch",
+      "sha256": "56cb5cb10f210e216c36fd413821dd1ddd931e5dd4ed26fc288299c928a84238",
+      "package": "e174c1a3e0dcfccf9d30a31847637733823df84b",
+      "receipt": "receipts/CUVS-LUCENE-BACKCOMPAT-ROUND-3.md"
+    },
+    {
+      "order": 0,
+      "file": "combined-tests.patch",
+      "sha256": "84688de57719d0600505e42f4a62bfbd8b49373486ee90f6c4d9efbeff73ee5c",
+      "derivedFrom": [
+        "cpu-regression.patch",
+        "backcompat.patch"
+      ],
+      "note": "git diff of the sequential application; apply to base with git apply --whitespace=error-all"
+    }
+  ],
+  "files": [
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java",
+      "originalBlob": "2dc5e3b8564c1245b315481413b07ac73b97299b",
+      "finalBlob": "0a2628c116e44094165e5feca73d0f74c87f0fd0",
+      "covers": [
+        "cpu-regression.patch",
+        "2ad555a87a22acdf617f679ca03f5831f246b4a8",
+        "receipts/CUVS-LUCENE-PR2702-CPU-ROUND-2.md"
+      ]
+    },
+    {
+      "path": "java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+      "originalBlob": "ba897c67180103d9c03322af4b456051590deb90",
+      "finalBlob": "fa04413d7e5537ba8cd03242908d5306c5a7673d",
+      "covers": [
+        "cpu-regression.patch",
+        "2ad555a87a22acdf617f679ca03f5831f246b4a8",
+        "receipts/CUVS-LUCENE-PR2702-CPU-ROUND-2.md"
+      ]
+    },
+    {
+      "path": "java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+      "originalBlob": "dcd6544f4d1c8309eda64be1659ccfd3db232f1f",
+      "finalBlob": "9bdc09a5865d21acb40a8812d867bdbc1293c592",
+      "covers": [
+        "cpu-regression.patch",
+        "2ad555a87a22acdf617f679ca03f5831f246b4a8",
+        "receipts/CUVS-LUCENE-PR2702-CPU-ROUND-2.md"
+      ]
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java",
+      "originalBlob": "203b57469d9122573c6bff0203e307a1aaf311f4",
+      "finalBlob": "ee3cd6734e410a58aa08d703b7f944e210bfdf0c",
+      "covers": [
+        "backcompat.patch",
+        "e174c1a3e0dcfccf9d30a31847637733823df84b",
+        "receipts/CUVS-LUCENE-BACKCOMPAT-ROUND-3.md"
+      ]
+    }
+  ]
+}

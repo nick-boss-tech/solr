@@ -1,0 +1,178 @@
+diff --git a/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java b/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java
+--- a/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java
++++ b/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java
+@@ -6,17 +6,25 @@
+ 
+ import java.util.concurrent.atomic.AtomicInteger;
+ import org.apache.lucene.document.Document;
++import org.apache.lucene.document.Field;
+ import org.apache.lucene.document.KnnFloatVectorField;
++import org.apache.lucene.document.StringField;
+ import org.apache.lucene.index.DirectoryReader;
+ import org.apache.lucene.index.IndexWriter;
+ import org.apache.lucene.index.IndexWriterConfig;
+ import org.apache.lucene.index.NoMergePolicy;
++import org.apache.lucene.index.Term;
+ import org.apache.lucene.index.VectorSimilarityFunction;
+ import org.apache.lucene.search.IndexSearcher;
+ import org.apache.lucene.search.KnnCollector;
++import org.apache.lucene.search.Query;
++import org.apache.lucene.search.ScoreDoc;
++import org.apache.lucene.search.TermQuery;
++import org.apache.lucene.search.TopDocs;
+ import org.apache.lucene.search.TopKnnCollector;
+ import org.apache.lucene.store.Directory;
+ import org.apache.lucene.tests.util.LuceneTestCase;
++import org.apache.lucene.util.FixedBitSet;
+ import org.junit.Test;
+ 
+ /** Tests the per-segment search of {@link CompatKnnFloatVectorQuery}, which needs no GPU. */
+@@ -53,6 +61,81 @@
+     }
+   }
+ 
++  @Test
++  public void testFilterIsForwarded() throws Exception {
++    assertAcceptedDocuments(true, 0);
++  }
++
++  @Test
++  public void testDeletedDocumentsAreExcluded() throws Exception {
++    assertAcceptedDocuments(false, 20);
++  }
++
++  @Test
++  public void testFilterAndDeletesAreIntersected() throws Exception {
++    assertAcceptedDocuments(true, 50);
++  }
++
++  private void assertAcceptedDocuments(boolean filtered, int deletedCount) throws Exception {
++    int k = 5;
++    int firstMatching = filtered ? 40 : 0;
++    try (Directory dir = newDirectory()) {
++      IndexWriterConfig cfg = new IndexWriterConfig().setMergePolicy(NoMergePolicy.INSTANCE);
++      try (IndexWriter w = new IndexWriter(dir, cfg)) {
++        for (int i = 0; i < 100; i++) {
++          Document doc = new Document();
++          doc.add(new StringField("id", Integer.toString(i), Field.Store.YES));
++          doc.add(new StringField("allowed", i >= firstMatching ? "yes" : "no", Field.Store.NO));
++          doc.add(
++              new KnnFloatVectorField(
++                  FIELD, new float[] {i, i}, VectorSimilarityFunction.EUCLIDEAN));
++          w.addDocument(doc);
++        }
++        w.commit();
++        for (int i = 0; i < deletedCount; i++) {
++          w.deleteDocuments(new Term("id", Integer.toString(i)));
++        }
++        w.commit();
++      }
++
++      try (DirectoryReader reader = DirectoryReader.open(dir)) {
++        assertEquals(1, reader.leaves().size());
++        assertEquals(100 - deletedCount, reader.numDocs());
++        assertEquals(deletedCount > 0, reader.hasDeletions());
++        Query filter = filtered ? new TermQuery(new Term("allowed", "yes")) : null;
++        CountingQuery query = new CountingQuery(new float[] {0f, 0f}, k, filter);
++        TopDocs hits = new IndexSearcher(reader).search(query, k);
++
++        // There are far more accepted documents than k. Require the approximate adapter to run;
++        // the direct call below also prevents exact-search fallback from masking a regression.
++        assertEquals("segment searches", 1, query.searches.get());
++        assertAcceptedHits(reader, hits, k, firstMatching, deletedCount);
++
++        // Rewrite can rerun a segment exactly and conceal a dropped approximate-search mask.
++        // Also call the adapter directly so this test distinguishes correct forwarding from that
++        // successful fallback. One segment keeps these document IDs equal to the segment ordinals.
++        FixedBitSet acceptDocs = new FixedBitSet(reader.maxDoc());
++        acceptDocs.set(Math.max(firstMatching, deletedCount), reader.maxDoc());
++        TopDocs directHits =
++            TestLuceneCompat.approximateSearch(
++                query, reader.leaves().getFirst(), acceptDocs, Integer.MAX_VALUE);
++        assertEquals("segment searches", 2, query.searches.get());
++        assertAcceptedHits(reader, directHits, k, firstMatching, deletedCount);
++      }
++    }
++  }
++
++  private void assertAcceptedHits(
++      DirectoryReader reader, TopDocs hits, int k, int firstMatching, int deletedCount)
++      throws Exception {
++    assertEquals(k, hits.scoreDocs.length);
++    for (ScoreDoc hit : hits.scoreDocs) {
++      int id = Integer.parseInt(reader.storedFields().document(hit.doc).get("id"));
++      assertTrue("filtered document returned: " + id, id >= firstMatching);
++      assertTrue("deleted document returned: " + id, id >= deletedCount);
++    }
++  }
++
+   private static void addDocs(IndexWriter w, float offset, int count) throws Exception {
+     for (int i = 0; i < count; i++) {
+       Document doc = new Document();
+@@ -69,7 +152,11 @@
+     final AtomicInteger searches = new AtomicInteger();
+ 
+     CountingQuery(float[] target, int k) {
+-      super(FIELD, target, k, null);
++      this(target, k, null);
++    }
++
++    CountingQuery(float[] target, int k, Query filter) {
++      super(FIELD, target, k, filter);
+     }
+ 
+     @Override
+diff --git a/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java b/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
+--- a/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
++++ b/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
+@@ -6,6 +6,7 @@
+ 
+ import java.io.IOException;
+ import org.apache.lucene.index.LeafReader;
++import org.apache.lucene.index.LeafReaderContext;
+ import org.apache.lucene.search.KnnCollector;
+ import org.apache.lucene.search.TopDocs;
+ import org.apache.lucene.util.Bits;
+@@ -14,6 +15,13 @@
+ final class TestLuceneCompat {
+ 
+   private TestLuceneCompat() {}
++
++  /** Calls the query adapter directly, without rewrite's exact-search fallback. */
++  static TopDocs approximateSearch(
++      CompatKnnFloatVectorQuery query, LeafReaderContext context, Bits acceptDocs, int visitedLimit)
++      throws IOException {
++    return query.approximateSearch(context, acceptDocs, visitedLimit, null);
++  }
+ 
+   /**
+    * Calls {@link LeafReader#searchNearestVectors} with the accepted documents given as {@link
+diff --git a/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java b/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
+--- a/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
++++ b/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
+@@ -6,6 +6,7 @@
+ 
+ import java.io.IOException;
+ import org.apache.lucene.index.LeafReader;
++import org.apache.lucene.index.LeafReaderContext;
+ import org.apache.lucene.search.AcceptDocs;
+ import org.apache.lucene.search.KnnCollector;
+ import org.apache.lucene.search.TopDocs;
+@@ -15,6 +16,17 @@
+ final class TestLuceneCompat {
+ 
+   private TestLuceneCompat() {}
++
++  /** Calls the query adapter directly, without rewrite's exact-search fallback. */
++  static TopDocs approximateSearch(
++      CompatKnnFloatVectorQuery query, LeafReaderContext context, Bits acceptDocs, int visitedLimit)
++      throws IOException {
++    return query.approximateSearch(
++        context,
++        AcceptDocs.fromLiveDocs(acceptDocs, context.reader().maxDoc()),
++        visitedLimit,
++        null);
++  }
+ 
+   /**
+    * Calls {@link LeafReader#searchNearestVectors} with the accepted documents given as {@link

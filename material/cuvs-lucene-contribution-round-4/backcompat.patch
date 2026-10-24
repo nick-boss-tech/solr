@@ -1,0 +1,145 @@
+diff --git a/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java b/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java
+--- a/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java
++++ b/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java
+@@ -15,8 +15,12 @@
+ import java.net.URL;
+ import java.nio.file.Files;
+ import java.nio.file.Path;
++import java.util.HashMap;
++import java.util.HashSet;
+ import java.util.List;
++import java.util.Map;
+ import java.util.Random;
++import java.util.Set;
+ import java.util.regex.Matcher;
+ import java.util.regex.Pattern;
+ import java.util.stream.Stream;
+@@ -36,10 +40,12 @@
+ import org.apache.lucene.index.IndexWriterConfig;
+ import org.apache.lucene.index.KnnVectorValues;
+ import org.apache.lucene.index.LeafReader;
++import org.apache.lucene.index.LogDocMergePolicy;
+ import org.apache.lucene.index.NoMergePolicy;
+ import org.apache.lucene.index.SegmentCommitInfo;
+ import org.apache.lucene.index.SegmentInfos;
+ import org.apache.lucene.index.StoredFields;
++import org.apache.lucene.index.Term;
+ import org.apache.lucene.search.IndexSearcher;
+ import org.apache.lucene.search.KnnFloatVectorQuery;
+ import org.apache.lucene.search.ScoreDoc;
+@@ -47,6 +53,7 @@
+ import org.apache.lucene.store.FSDirectory;
+ import org.apache.lucene.tests.util.LuceneTestCase;
+ import org.apache.lucene.tests.util.LuceneTestCase.SuppressSysoutChecks;
++import org.apache.lucene.util.Bits;
+ import org.apache.lucene.util.Version;
+ 
+ /**
+@@ -132,6 +139,107 @@
+     }
+   }
+ 
++  /** Exercises the document-to-vector mapping when old segments have deletions and new gaps. */
++  public void testUpgradeIndicesWithDeletesAndSparseVectors() throws Exception {
++    for (Path zip : indicesReadableByThisRelease()) {
++      Matcher matcher = FILE_NAME.matcher(zip.getFileName().toString());
++      assertTrue(zip.toString(), matcher.matches());
++      Codec codec = currentCodecFor(matcher.group(3));
++      Path indexDir = createTempDir(zip.getFileName().toString());
++      unzip(zip, indexDir);
++      Set<String> expectedDocs = new HashSet<>();
++      Map<String, float[]> expectedVectors = new HashMap<>();
++      Random originalVectors = new Random(42);
++      for (int i = 0; i < NUM_DOCS; i++) {
++        float[] vector = randomVector(originalVectors);
++        if (i % 3 != 0) {
++          expectedDocs.add(Integer.toString(i));
++          expectedVectors.put(Integer.toString(i), vector);
++        }
++      }
++      try (Directory dir = newFSDirectory(indexDir)) {
++        IndexWriterConfig config =
++            new IndexWriterConfig()
++                .setCodec(codec)
++                .setOpenMode(IndexWriterConfig.OpenMode.APPEND)
++                .setUseCompoundFile(false);
++        // Keep old and new segments separate until the explicit merge below.
++        LogDocMergePolicy mergePolicy = new LogDocMergePolicy();
++        mergePolicy.setMergeFactor(100);
++        config.setMergePolicy(mergePolicy);
++        try (IndexWriter writer = new IndexWriter(dir, config)) {
++          for (int i = 0; i < NUM_DOCS; i += 3) {
++            writer.deleteDocuments(new Term(ID_FIELD, Integer.toString(i)));
++          }
++          Random random = new Random(7);
++          for (int i = NUM_DOCS; i < NUM_DOCS + UPGRADE_DOCS; i++) {
++            float[] vector = randomVector(random);
++            Document doc = document(i, vector);
++            expectedDocs.add(Integer.toString(i));
++            if (i % 5 == 0) {
++              doc.removeField(VECTOR_FIELD);
++            } else {
++              expectedVectors.put(Integer.toString(i), vector);
++            }
++            writer.addDocument(doc);
++          }
++          writer.commit();
++          try (DirectoryReader reader = DirectoryReader.open(dir)) {
++            assertTrue(reader.hasDeletions());
++            assertTrue(reader.leaves().size() > 1);
++          }
++          assertLiveDocumentsAndVectors(dir, expectedDocs, expectedVectors);
++          writer.forceMerge(1);
++          writer.commit();
++        }
++        try (DirectoryReader reader = DirectoryReader.open(dir)) {
++          assertEquals(1, reader.leaves().size());
++          assertFalse(reader.hasDeletions());
++        }
++        assertLiveDocumentsAndVectors(dir, expectedDocs, expectedVectors);
++        checkIndex(dir, codec.getName(), null, expectedDocs.size());
++      } catch (AssertionError | Exception e) {
++        throw new AssertionError(
++            "Failed to upgrade sparse vectors with deletes in " + zip.getFileName(), e);
++      }
++    }
++  }
++
++  private static void assertLiveDocumentsAndVectors(
++      Directory dir, Set<String> expectedDocs, Map<String, float[]> expectedVectors)
++      throws IOException {
++    try (DirectoryReader reader = DirectoryReader.open(dir)) {
++      Set<String> actualDocs = new HashSet<>();
++      Set<String> actualVectors = new HashSet<>();
++      for (var context : reader.leaves()) {
++        LeafReader leaf = context.reader();
++        Bits liveDocs = leaf.getLiveDocs();
++        StoredFields storedFields = leaf.storedFields();
++        for (int doc = 0; doc < leaf.maxDoc(); doc++) {
++          if (liveDocs == null || liveDocs.get(doc)) {
++            assertTrue(actualDocs.add(storedFields.document(doc).get(ID_FIELD)));
++          }
++        }
++        FloatVectorValues vectors = leaf.getFloatVectorValues(VECTOR_FIELD);
++        KnnVectorValues.DocIndexIterator it = vectors.iterator();
++        for (int doc = it.nextDoc(); doc != NO_MORE_DOCS; doc = it.nextDoc()) {
++          if (liveDocs == null || liveDocs.get(doc)) {
++            String id = storedFields.document(doc).get(ID_FIELD);
++            assertTrue(actualVectors.add(id));
++            assertTrue("unexpected vector for id " + id, expectedVectors.containsKey(id));
++            assertArrayEquals(
++                "vector for id " + id,
++                expectedVectors.get(id),
++                vectors.vectorValue(it.index()),
++                0f);
++          }
++        }
++      }
++      assertEquals(expectedDocs, actualDocs);
++      assertEquals(expectedVectors.keySet(), actualVectors);
++    }
++  }
++
+   public void testCreateIndices() throws Exception {
+     // Written on the GPU, like the indexes of the applications this test stands for.
+     assumeTrue("cuVS not supported", isSupported());

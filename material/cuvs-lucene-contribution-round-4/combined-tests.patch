@@ -1,0 +1,327 @@
+diff --git a/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java b/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
+index ba897c6..fa04413 100644
+--- a/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
++++ b/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
+@@ -6,6 +6,7 @@ package com.nvidia.cuvs.lucene;
+ 
+ import java.io.IOException;
+ import org.apache.lucene.index.LeafReader;
++import org.apache.lucene.index.LeafReaderContext;
+ import org.apache.lucene.search.KnnCollector;
+ import org.apache.lucene.search.TopDocs;
+ import org.apache.lucene.util.Bits;
+@@ -15,6 +16,13 @@ final class TestLuceneCompat {
+ 
+   private TestLuceneCompat() {}
+ 
++  /** Calls the query adapter directly, without rewrite's exact-search fallback. */
++  static TopDocs approximateSearch(
++      CompatKnnFloatVectorQuery query, LeafReaderContext context, Bits acceptDocs, int visitedLimit)
++      throws IOException {
++    return query.approximateSearch(context, acceptDocs, visitedLimit, null);
++  }
++
+   /**
+    * Calls {@link LeafReader#searchNearestVectors} with the accepted documents given as {@link
+    * Bits}, which is what Lucene 10.2 takes.
+diff --git a/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java b/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
+index dcd6544..9bdc09a 100644
+--- a/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
++++ b/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java
+@@ -6,6 +6,7 @@ package com.nvidia.cuvs.lucene;
+ 
+ import java.io.IOException;
+ import org.apache.lucene.index.LeafReader;
++import org.apache.lucene.index.LeafReaderContext;
+ import org.apache.lucene.search.AcceptDocs;
+ import org.apache.lucene.search.KnnCollector;
+ import org.apache.lucene.search.TopDocs;
+@@ -16,6 +17,17 @@ final class TestLuceneCompat {
+ 
+   private TestLuceneCompat() {}
+ 
++  /** Calls the query adapter directly, without rewrite's exact-search fallback. */
++  static TopDocs approximateSearch(
++      CompatKnnFloatVectorQuery query, LeafReaderContext context, Bits acceptDocs, int visitedLimit)
++      throws IOException {
++    return query.approximateSearch(
++        context,
++        AcceptDocs.fromLiveDocs(acceptDocs, context.reader().maxDoc()),
++        visitedLimit,
++        null);
++  }
++
+   /**
+    * Calls {@link LeafReader#searchNearestVectors} with the accepted documents given as {@link
+    * Bits}. Since Lucene 10.3 it takes them as {@link AcceptDocs}.
+diff --git a/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java b/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java
+index 203b574..ee3cd67 100644
+--- a/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java
++++ b/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java
+@@ -15,8 +15,12 @@ import java.net.URISyntaxException;
+ import java.net.URL;
+ import java.nio.file.Files;
+ import java.nio.file.Path;
++import java.util.HashMap;
++import java.util.HashSet;
+ import java.util.List;
++import java.util.Map;
+ import java.util.Random;
++import java.util.Set;
+ import java.util.regex.Matcher;
+ import java.util.regex.Pattern;
+ import java.util.stream.Stream;
+@@ -36,10 +40,12 @@ import org.apache.lucene.index.IndexWriter;
+ import org.apache.lucene.index.IndexWriterConfig;
+ import org.apache.lucene.index.KnnVectorValues;
+ import org.apache.lucene.index.LeafReader;
++import org.apache.lucene.index.LogDocMergePolicy;
+ import org.apache.lucene.index.NoMergePolicy;
+ import org.apache.lucene.index.SegmentCommitInfo;
+ import org.apache.lucene.index.SegmentInfos;
+ import org.apache.lucene.index.StoredFields;
++import org.apache.lucene.index.Term;
+ import org.apache.lucene.search.IndexSearcher;
+ import org.apache.lucene.search.KnnFloatVectorQuery;
+ import org.apache.lucene.search.ScoreDoc;
+@@ -47,6 +53,7 @@ import org.apache.lucene.store.Directory;
+ import org.apache.lucene.store.FSDirectory;
+ import org.apache.lucene.tests.util.LuceneTestCase;
+ import org.apache.lucene.tests.util.LuceneTestCase.SuppressSysoutChecks;
++import org.apache.lucene.util.Bits;
+ import org.apache.lucene.util.Version;
+ 
+ /**
+@@ -132,6 +139,107 @@ public class TestBackCompatIndices extends LuceneTestCase {
+     }
+   }
+ 
++  /** Exercises the document-to-vector mapping when old segments have deletions and new gaps. */
++  public void testUpgradeIndicesWithDeletesAndSparseVectors() throws Exception {
++    for (Path zip : indicesReadableByThisRelease()) {
++      Matcher matcher = FILE_NAME.matcher(zip.getFileName().toString());
++      assertTrue(zip.toString(), matcher.matches());
++      Codec codec = currentCodecFor(matcher.group(3));
++      Path indexDir = createTempDir(zip.getFileName().toString());
++      unzip(zip, indexDir);
++      Set<String> expectedDocs = new HashSet<>();
++      Map<String, float[]> expectedVectors = new HashMap<>();
++      Random originalVectors = new Random(42);
++      for (int i = 0; i < NUM_DOCS; i++) {
++        float[] vector = randomVector(originalVectors);
++        if (i % 3 != 0) {
++          expectedDocs.add(Integer.toString(i));
++          expectedVectors.put(Integer.toString(i), vector);
++        }
++      }
++      try (Directory dir = newFSDirectory(indexDir)) {
++        IndexWriterConfig config =
++            new IndexWriterConfig()
++                .setCodec(codec)
++                .setOpenMode(IndexWriterConfig.OpenMode.APPEND)
++                .setUseCompoundFile(false);
++        // Keep old and new segments separate until the explicit merge below.
++        LogDocMergePolicy mergePolicy = new LogDocMergePolicy();
++        mergePolicy.setMergeFactor(100);
++        config.setMergePolicy(mergePolicy);
++        try (IndexWriter writer = new IndexWriter(dir, config)) {
++          for (int i = 0; i < NUM_DOCS; i += 3) {
++            writer.deleteDocuments(new Term(ID_FIELD, Integer.toString(i)));
++          }
++          Random random = new Random(7);
++          for (int i = NUM_DOCS; i < NUM_DOCS + UPGRADE_DOCS; i++) {
++            float[] vector = randomVector(random);
++            Document doc = document(i, vector);
++            expectedDocs.add(Integer.toString(i));
++            if (i % 5 == 0) {
++              doc.removeField(VECTOR_FIELD);
++            } else {
++              expectedVectors.put(Integer.toString(i), vector);
++            }
++            writer.addDocument(doc);
++          }
++          writer.commit();
++          try (DirectoryReader reader = DirectoryReader.open(dir)) {
++            assertTrue(reader.hasDeletions());
++            assertTrue(reader.leaves().size() > 1);
++          }
++          assertLiveDocumentsAndVectors(dir, expectedDocs, expectedVectors);
++          writer.forceMerge(1);
++          writer.commit();
++        }
++        try (DirectoryReader reader = DirectoryReader.open(dir)) {
++          assertEquals(1, reader.leaves().size());
++          assertFalse(reader.hasDeletions());
++        }
++        assertLiveDocumentsAndVectors(dir, expectedDocs, expectedVectors);
++        checkIndex(dir, codec.getName(), null, expectedDocs.size());
++      } catch (AssertionError | Exception e) {
++        throw new AssertionError(
++            "Failed to upgrade sparse vectors with deletes in " + zip.getFileName(), e);
++      }
++    }
++  }
++
++  private static void assertLiveDocumentsAndVectors(
++      Directory dir, Set<String> expectedDocs, Map<String, float[]> expectedVectors)
++      throws IOException {
++    try (DirectoryReader reader = DirectoryReader.open(dir)) {
++      Set<String> actualDocs = new HashSet<>();
++      Set<String> actualVectors = new HashSet<>();
++      for (var context : reader.leaves()) {
++        LeafReader leaf = context.reader();
++        Bits liveDocs = leaf.getLiveDocs();
++        StoredFields storedFields = leaf.storedFields();
++        for (int doc = 0; doc < leaf.maxDoc(); doc++) {
++          if (liveDocs == null || liveDocs.get(doc)) {
++            assertTrue(actualDocs.add(storedFields.document(doc).get(ID_FIELD)));
++          }
++        }
++        FloatVectorValues vectors = leaf.getFloatVectorValues(VECTOR_FIELD);
++        KnnVectorValues.DocIndexIterator it = vectors.iterator();
++        for (int doc = it.nextDoc(); doc != NO_MORE_DOCS; doc = it.nextDoc()) {
++          if (liveDocs == null || liveDocs.get(doc)) {
++            String id = storedFields.document(doc).get(ID_FIELD);
++            assertTrue(actualVectors.add(id));
++            assertTrue("unexpected vector for id " + id, expectedVectors.containsKey(id));
++            assertArrayEquals(
++                "vector for id " + id,
++                expectedVectors.get(id),
++                vectors.vectorValue(it.index()),
++                0f);
++          }
++        }
++      }
++      assertEquals(expectedDocs, actualDocs);
++      assertEquals(expectedVectors.keySet(), actualVectors);
++    }
++  }
++
+   public void testCreateIndices() throws Exception {
+     // Written on the GPU, like the indexes of the applications this test stands for.
+     assumeTrue("cuVS not supported", isSupported());
+diff --git a/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java b/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java
+index 2dc5e3b..0a2628c 100644
+--- a/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java
++++ b/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java
+@@ -6,17 +6,25 @@ package com.nvidia.cuvs.lucene;
+ 
+ import java.util.concurrent.atomic.AtomicInteger;
+ import org.apache.lucene.document.Document;
++import org.apache.lucene.document.Field;
+ import org.apache.lucene.document.KnnFloatVectorField;
++import org.apache.lucene.document.StringField;
+ import org.apache.lucene.index.DirectoryReader;
+ import org.apache.lucene.index.IndexWriter;
+ import org.apache.lucene.index.IndexWriterConfig;
+ import org.apache.lucene.index.NoMergePolicy;
++import org.apache.lucene.index.Term;
+ import org.apache.lucene.index.VectorSimilarityFunction;
+ import org.apache.lucene.search.IndexSearcher;
+ import org.apache.lucene.search.KnnCollector;
++import org.apache.lucene.search.Query;
++import org.apache.lucene.search.ScoreDoc;
++import org.apache.lucene.search.TermQuery;
++import org.apache.lucene.search.TopDocs;
+ import org.apache.lucene.search.TopKnnCollector;
+ import org.apache.lucene.store.Directory;
+ import org.apache.lucene.tests.util.LuceneTestCase;
++import org.apache.lucene.util.FixedBitSet;
+ import org.junit.Test;
+ 
+ /** Tests the per-segment search of {@link CompatKnnFloatVectorQuery}, which needs no GPU. */
+@@ -53,6 +61,81 @@ public class TestCompatKnnFloatVectorQuery extends LuceneTestCase {
+     }
+   }
+ 
++  @Test
++  public void testFilterIsForwarded() throws Exception {
++    assertAcceptedDocuments(true, 0);
++  }
++
++  @Test
++  public void testDeletedDocumentsAreExcluded() throws Exception {
++    assertAcceptedDocuments(false, 20);
++  }
++
++  @Test
++  public void testFilterAndDeletesAreIntersected() throws Exception {
++    assertAcceptedDocuments(true, 50);
++  }
++
++  private void assertAcceptedDocuments(boolean filtered, int deletedCount) throws Exception {
++    int k = 5;
++    int firstMatching = filtered ? 40 : 0;
++    try (Directory dir = newDirectory()) {
++      IndexWriterConfig cfg = new IndexWriterConfig().setMergePolicy(NoMergePolicy.INSTANCE);
++      try (IndexWriter w = new IndexWriter(dir, cfg)) {
++        for (int i = 0; i < 100; i++) {
++          Document doc = new Document();
++          doc.add(new StringField("id", Integer.toString(i), Field.Store.YES));
++          doc.add(new StringField("allowed", i >= firstMatching ? "yes" : "no", Field.Store.NO));
++          doc.add(
++              new KnnFloatVectorField(
++                  FIELD, new float[] {i, i}, VectorSimilarityFunction.EUCLIDEAN));
++          w.addDocument(doc);
++        }
++        w.commit();
++        for (int i = 0; i < deletedCount; i++) {
++          w.deleteDocuments(new Term("id", Integer.toString(i)));
++        }
++        w.commit();
++      }
++
++      try (DirectoryReader reader = DirectoryReader.open(dir)) {
++        assertEquals(1, reader.leaves().size());
++        assertEquals(100 - deletedCount, reader.numDocs());
++        assertEquals(deletedCount > 0, reader.hasDeletions());
++        Query filter = filtered ? new TermQuery(new Term("allowed", "yes")) : null;
++        CountingQuery query = new CountingQuery(new float[] {0f, 0f}, k, filter);
++        TopDocs hits = new IndexSearcher(reader).search(query, k);
++
++        // There are far more accepted documents than k. Require the approximate adapter to run;
++        // the direct call below also prevents exact-search fallback from masking a regression.
++        assertEquals("segment searches", 1, query.searches.get());
++        assertAcceptedHits(reader, hits, k, firstMatching, deletedCount);
++
++        // Rewrite can rerun a segment exactly and conceal a dropped approximate-search mask.
++        // Also call the adapter directly so this test distinguishes correct forwarding from that
++        // successful fallback. One segment keeps these document IDs equal to the segment ordinals.
++        FixedBitSet acceptDocs = new FixedBitSet(reader.maxDoc());
++        acceptDocs.set(Math.max(firstMatching, deletedCount), reader.maxDoc());
++        TopDocs directHits =
++            TestLuceneCompat.approximateSearch(
++                query, reader.leaves().getFirst(), acceptDocs, Integer.MAX_VALUE);
++        assertEquals("segment searches", 2, query.searches.get());
++        assertAcceptedHits(reader, directHits, k, firstMatching, deletedCount);
++      }
++    }
++  }
++
++  private void assertAcceptedHits(
++      DirectoryReader reader, TopDocs hits, int k, int firstMatching, int deletedCount)
++      throws Exception {
++    assertEquals(k, hits.scoreDocs.length);
++    for (ScoreDoc hit : hits.scoreDocs) {
++      int id = Integer.parseInt(reader.storedFields().document(hit.doc).get("id"));
++      assertTrue("filtered document returned: " + id, id >= firstMatching);
++      assertTrue("deleted document returned: " + id, id >= deletedCount);
++    }
++  }
++
+   private static void addDocs(IndexWriter w, float offset, int count) throws Exception {
+     for (int i = 0; i < count; i++) {
+       Document doc = new Document();
+@@ -69,7 +152,11 @@ public class TestCompatKnnFloatVectorQuery extends LuceneTestCase {
+     final AtomicInteger searches = new AtomicInteger();
+ 
+     CountingQuery(float[] target, int k) {
+-      super(FIELD, target, k, null);
++      this(target, k, null);
++    }
++
++    CountingQuery(float[] target, int k, Query filter) {
++      super(FIELD, target, k, filter);
+     }
+ 
+     @Override
