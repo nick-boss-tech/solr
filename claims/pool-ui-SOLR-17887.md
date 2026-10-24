@@ -1,7 +1,7 @@
 # Claim: pool-ui-SOLR-17887
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE.
 - Job or assignment: `assignments/pool-ui-tickets-round-1.md`, one ticket per claim.
 - Ticket type: component (file tree). The previous claim was a dialog (SOLR-17914), so complaint 5 is met.
 - Slice: SOLR-17887, gate only. Two fork branches exist. `solr-17887-file-tree` (`9c7f72aa0e`, from base `c8ab71430f`) is the standalone component: `FileTree.kt`, `FileTreeTest.kt`, two drawables, and a draft PR description. `solr-17887-configset-files` (`80e97a1e8e`) is an integration branch that also carries other tickets' work (39 files), so it is not the one gated here. This claim verifies the standalone branch on a fresh checkout. No code change, no push.
@@ -17,3 +17,7 @@ Heartbeat: 2026-10-24T09:37:38Z
 Run: job `pool-ui-17887-9c7f72aa0e-094238`, log dir `/workspace/gates/logs/vm6/pool-ui-17887/`, head `9c7f72aa0e` (fork branch, not pushed by this claim), started 2026-10-24T09:42:47Z (UTC). Steps: spotless, then `:shared:jvmTest --tests org.apache.solr.ui.views.files.FileTreeTest`.
 
 Heartbeat: 2026-10-24T09:42:47Z
+
+Result: 2026-10-24T09:48:36Z: PASS at head 9c7f72aa0e (job `pool-ui-17887-9c7f72aa0e-094238`). spotless rc=0 (BUILD SUCCESSFUL in 25s); `:shared:jvmTest --tests org.apache.solr.ui.views.files.FileTreeTest` rc=0 (BUILD SUCCESSFUL in 1m 11s). Tests 5, failures 0, errors 0, skipped 0 (testChevronExpandsAndCollapsesFolder, testDoubleClickOnFolderNameExpandsFolder, testDoubleClickReportsItem, testHidesChildrenUntilFolderIsExpanded, testSingleClickReportsItem). XML in worktree `/workspace/worktrees/pool-vm6-17887/ui/shared/build/test-results/jvmTest/`. Log dir `/workspace/gates/logs/vm6/pool-ui-17887/`. Conclusive for the software-renderer JVM tests. GL: no Canvas, DrawScope, drawWithCache, graphicsLayer, drawBehind, drawWithContent or shader in FileTree.kt, so not gl-blast-radius. Fork branch not pushed by this claim; the configset-files integration branch was not gated.
+
+DONE: 2026-10-24T09:48:36Z. Deliverables: this claim only.
