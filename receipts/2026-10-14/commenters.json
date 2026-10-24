@@ -1,0 +1,208 @@
+[
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 27,
+    "issues": 8,
+    "automation": true
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 8,
+    "issues": 4
+  },
+  {
+    "username": "hossman",
+    "displayName": "Chris M. Hostetter",
+    "comments": 3,
+    "issues": 3
+  },
+  {
+    "username": "dmitry_key",
+    "displayName": "Dmitry Kan",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 3,
+    "issues": 2
+  },
+  {
+    "username": "gerlowskija",
+    "displayName": "Jason Gerlowski",
+    "comments": 3,
+    "issues": 3
+  },
+  {
+    "username": "elyograg",
+    "displayName": "Shawn Heisey",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "ebwweb",
+    "displayName": "Eric Wheeler",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "erickerickson",
+    "displayName": "Erick Erickson",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "ilan",
+    "displayName": "Ilan Ginzburg",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "mikemccand",
+    "displayName": "Michael McCandless",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "ryantxu",
+    "displayName": "Ryan McKinley",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "smolloy",
+    "displayName": "Steve Molloy",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "yseeley@gmail.com",
+    "displayName": "Yonik Seeley",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "antonyscerri",
+    "displayName": "Antony Scerri",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "githubbot",
+    "displayName": "ASF GitHub Bot",
+    "comments": 1,
+    "issues": 1,
+    "automation": true
+  },
+  {
+    "username": "bereng",
+    "displayName": "Berenguer Blasi",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "bvd",
+    "displayName": "Bram VD",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "choco890",
+    "displayName": "choco",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "crawdaddy78",
+    "displayName": "Crawdaddy",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "jbernste",
+    "displayName": "Joel Bernstein",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "lyuba",
+    "displayName": "Lyubov Romanchuk",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "markus17",
+    "displayName": "Markus Jelsma",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "prateeksolr",
+    "displayName": "Prateek Singhal",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "andyetitmoves",
+    "displayName": "Ramkumar Aiyengar",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "mastersang",
+    "displayName": "Sang Minh Ng",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "simon.endele",
+    "displayName": "Simon Endele",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "sdavids",
+    "displayName": "Steve Davids",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "sbower",
+    "displayName": "Steven Bower",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "sarowe",
+    "displayName": "Steven Rowe",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "uschindler",
+    "displayName": "Uwe Schindler",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "varun",
+    "displayName": "Varun Thacker",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "vzhovtiuk",
+    "displayName": "Vitaliy Zhovtyuk",
+    "comments": 1,
+    "issues": 1
+  }
+]
