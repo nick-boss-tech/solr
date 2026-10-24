@@ -13,3 +13,7 @@
 - Constraints: no JIRA or GitHub post, no PR, no push to the branch. Commit as Nick Shanin with no trailers.
 
 Heartbeat: 2026-10-24T08:54:50Z
+
+Run: job `pool-ui-17850-887778ce5d-085936`, log dir `/workspace/gates/logs/vm6/pool-ui-17850/`, head `887778ce5d` (fork branch, not pushed by this claim), started 2026-10-24T08:59:44Z (UTC). Steps: spotless, then `:shared:jvmTest --tests org.apache.solr.ui.views.searchhandler.SearchHandlerFormTest`, through `pool/bin/bg-steps.sh` with the stand-in libEGL and SOFTWARE_FAST.
+
+Heartbeat: 2026-10-24T08:59:44Z
