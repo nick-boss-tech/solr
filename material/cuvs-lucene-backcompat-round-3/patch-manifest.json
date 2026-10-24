@@ -1,0 +1,9 @@
+{
+  "repo": "NVIDIA/cuvs",
+  "head": "23004d0f0de2014f11b09313f04fcf0de7643c3b",
+  "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java",
+  "before": "203b57469d9122573c6bff0203e307a1aaf311f4",
+  "after": "ee3cd6734e410a58aa08d703b7f944e210bfdf0c",
+  "testSourceSha256": "642076a8446ad90f402ccac1e251903a1b3d990a72323223b3114c1e650cb534",
+  "patchSha256": "56cb5cb10f210e216c36fd413821dd1ddd931e5dd4ed26fc288299c928a84238"
+}

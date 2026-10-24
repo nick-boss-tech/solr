@@ -1,0 +1,53 @@
+{
+  "boardCommit": "2ad555a87a22acdf617f679ca03f5831f246b4a8",
+  "files": [
+    {
+      "path": "material/cuvs-lucene-pr2702-round-2/compile_matrix.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36441ab506a9f5191077ec22e0f32d7e72e3ec1c",
+      "size": 5805,
+      "url": "https://api.github.com/repos/nick-boss-tech/solr/git/blobs/36441ab506a9f5191077ec22e0f32d7e72e3ec1c"
+    },
+    {
+      "path": "material/cuvs-lucene-pr2702-round-2/run_cpu_tests.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "997e14f882a1b32836da86c588bd1e1dcc7896ac",
+      "size": 5563,
+      "url": "https://api.github.com/repos/nick-boss-tech/solr/git/blobs/997e14f882a1b32836da86c588bd1e1dcc7896ac"
+    },
+    {
+      "path": "material/cuvs-lucene-pr2702-round-2/prepare_sources.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "05fe3bae38929819731e1a9d245a35d552da5d54",
+      "size": 2466,
+      "url": "https://api.github.com/repos/nick-boss-tech/solr/git/blobs/05fe3bae38929819731e1a9d245a35d552da5d54"
+    },
+    {
+      "path": "material/cuvs-lucene-pr2702-round-2/source-manifest.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c686f03351928a4942b4358b7d8d943f5a47ef6a",
+      "size": 28102,
+      "url": "https://api.github.com/repos/nick-boss-tech/solr/git/blobs/c686f03351928a4942b4358b7d8d943f5a47ef6a"
+    },
+    {
+      "path": "material/cuvs-lucene-pr2702-round-2/cpu-regression.patch",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "39bbb955c5a4485ef1df496340d3983c8a1e2ff7",
+      "size": 8063,
+      "url": "https://api.github.com/repos/nick-boss-tech/solr/git/blobs/39bbb955c5a4485ef1df496340d3983c8a1e2ff7"
+    },
+    {
+      "path": "material/cuvs-lucene-pr2702-round-2/artifact-manifest.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "88729876846d65b48ae6b0a41db7cb985617bed1",
+      "size": 7863,
+      "url": "https://api.github.com/repos/nick-boss-tech/solr/git/blobs/88729876846d65b48ae6b0a41db7cb985617bed1"
+    }
+  ]
+}

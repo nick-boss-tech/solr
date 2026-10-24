@@ -1,0 +1,7 @@
+CONTROL_CREATED C:\Users\shaninna\dev\Solr-issues\research\cuvs-lucene-upstream\round3\controls\10.4\resources\backcompat\10.4-Lucene104AcceleratedHNSWCodec.zip codec=Lucene104AcceleratedHNSWCodec
+Oct 24, 2026 5:19:59 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+Oct 24, 2026 5:20:01 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 5:20:01 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter

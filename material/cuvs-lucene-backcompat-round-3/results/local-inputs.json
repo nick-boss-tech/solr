@@ -1,0 +1,50 @@
+{
+  "sourceHead": "23004d0f0de2014f11b09313f04fcf0de7643c3b",
+  "sourceBeforeBlob": "203b57469d9122573c6bff0203e307a1aaf311f4",
+  "testSha256": "642076a8446ad90f402ccac1e251903a1b3d990a72323223b3114c1e650cb534",
+  "counts": [
+    {
+      "module": "10.2",
+      "fixtures": 7
+    },
+    {
+      "module": "10.3",
+      "fixtures": 10
+    },
+    {
+      "module": "10.4",
+      "fixtures": 13
+    },
+    {
+      "module": "10.5",
+      "fixtures": 16
+    }
+  ],
+  "classpathJars": [
+    {
+      "path": "round2/cuvs-api.jar",
+      "sha256": "4af554614cc6cc2f06425a994b7ef8dac706e0a92ac56a73a33620f589da3e3e",
+      "size": 86882
+    },
+    {
+      "path": "round2/module-10.2.jar",
+      "sha256": "55837d4fa0c3ec8fca22651ffd42022e6a2b5d5217e73e7e5ffb1b2ae519f567",
+      "size": 126104
+    },
+    {
+      "path": "round2/module-10.3.jar",
+      "sha256": "51b0a935d86be4392b0162585d3262c41e4437d40b6b635cd82d590b5eeb59bb",
+      "size": 127530
+    },
+    {
+      "path": "round2/module-10.4.jar",
+      "sha256": "922294d7e061c1eab39a4999ada8a56db5b25dcc66ae9a0b5e40dbf68b687c3c",
+      "size": 133373
+    },
+    {
+      "path": "round2/module-10.5.jar",
+      "sha256": "cf9b4ea1c940670e0c395b4e0ecee56bbbd1c97d67803bf2fb3e01ecb4a957c1",
+      "size": 133482
+    }
+  ]
+}

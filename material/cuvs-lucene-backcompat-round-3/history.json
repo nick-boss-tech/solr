@@ -1,0 +1,14 @@
+[
+  {
+    "sha": "9f64416c2f956e9f1fb48ffa3bed17ed4a8e35c1",
+    "message": "Fix merge failure on 10.5, again",
+    "date": "2026-10-02T21:16:48Z",
+    "html_url": "https://github.com/NVIDIA/cuvs/commit/9f64416c2f956e9f1fb48ffa3bed17ed4a8e35c1"
+  },
+  {
+    "sha": "ee335be1fec13445a96bc08f5011020200984bfc",
+    "message": "Add support for Lucene 10.2–10.5\n\nBuild a separate jar for each Lucene minor release from 10.2 to 10.5, since Lucene changes its codec\nAPIs between minor releases. All modules compile the same shared sources. Codecs built on an older Lucene release's default codec stay registered so existing indexes can still be read, but they can no longer write.\n\nFixes #2410",
+    "date": "2026-09-30T02:46:48Z",
+    "html_url": "https://github.com/NVIDIA/cuvs/commit/ee335be1fec13445a96bc08f5011020200984bfc"
+  }
+]

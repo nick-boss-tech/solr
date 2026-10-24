@@ -1,0 +1,10 @@
+{
+  "directory": "fresh reproduction-smoke",
+  "preflight_exit_code": 0,
+  "source_blobs": 162,
+  "fixture_archives": 16,
+  "patch_application": "passed --whitespace=error-all",
+  "format": "google-java-format 1.27.0 dry-run passed",
+  "patched_test_blob": "ee3cd6734e410a58aa08d703b7f944e210bfdf0c",
+  "full_tests_in_smoke": false
+}

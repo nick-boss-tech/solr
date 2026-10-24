@@ -1,0 +1,78 @@
+CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0
+CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0
+java.lang.AssertionError: Failed to upgrade sparse vectors with deletes in 10.4-Lucene104AcceleratedHNSWCodec.zip
+	at __randomizedtesting.SeedInfo.seed([18556C0D:522A5B5F5E9E9B7D]:0)
+	at com.nvidia.cuvs.lucene.TestBackCompatIndices.testUpgradeIndicesWithDeletesAndSparseVectors(TestBackCompatIndices.java:203)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1763)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:946)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:982)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:996)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:955)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:840)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:891)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:902)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+Caused by: vector for id 1: arrays first differed at element [0]; expected:<0.6655489> but was:<0.7275637>
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:78)
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:28)
+	at org.junit.Assert.assertArrayEquals(Assert.java:502)
+	at com.nvidia.cuvs.lucene.TestBackCompatIndices.assertLiveDocumentsAndVectors(TestBackCompatIndices.java:230)
+	at com.nvidia.cuvs.lucene.TestBackCompatIndices.testUpgradeIndicesWithDeletesAndSparseVectors(TestBackCompatIndices.java:191)
+	... 37 more
+Caused by: java.lang.AssertionError: expected:<0.6655489> but was:<0.7275637>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:577)
+	at org.junit.Assert.assertEquals(Assert.java:701)
+	at org.junit.internal.InexactComparisonCriteria.assertElementsEqual(InexactComparisonCriteria.java:21)
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:76)
+	... 41 more
+
+CPU_RESULT testUpgradeIndicesWithDeletesAndSparseVectors run=1 failures=1 ignored=0 assumptions=0
+Oct 24, 2026 5:20:08 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+Oct 24, 2026 6:20:15 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:20:15 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:20:16 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:20:16 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+Oct 24, 2026 6:20:18 PM com.nvidia.cuvs.lucene.ThreadLocalCuVSResourcesProvider cuVSResourcesOrNull
+WARNING: cuVS is not supported on this platform or java version: cuvs-java supports only Linux, but os.name is Windows 11
+Oct 24, 2026 6:20:18 PM com.nvidia.cuvs.lucene.Lucene99AcceleratedHNSWVectorsFormat fieldsWriter
+WARNING: GPU based indexing not supported, falling back to using the Lucene99HnswVectorsWriter
+NOTE: reproduce with: gradlew test --tests TestBackCompatIndices.testUpgradeIndicesWithDeletesAndSparseVectors -Dtests.seed=18556C0D -Dtests.locale=en-SC -Dtests.timezone=America/Santarem -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+NOTE: leaving temporary files on disk at: C:\Users\shaninna\AppData\Local\Temp\com.nvidia.cuvs.lucene.TestBackCompatIndices_18556C0D-001
+NOTE: test params are: codec=DeflateWithPresetCompressingStoredFieldsData(storedFieldsFormat=Lucene90CompressingStoredFieldsFormat(compressionMode=BEST_COMPRESSION, chunkSize=100, maxDocsPerChunk=5, blockShift=4), termVectorsFormat=Lucene90CompressingTermVectorsFormat(compressionMode=BEST_COMPRESSION, chunkSize=100, maxDocsPerChunk=5, blockSize=4)), sim=Asserting(RandomSimilarity(queryNorm=true): {}), locale=en-SC, timezone=America/Santarem
+NOTE: Windows 11 10.0 amd64/Eclipse Adoptium 22.0.2 (64-bit)/cpus=4,threads=1,free=499225016,total=536870912
+NOTE: All tests run in this JVM: [TestBackCompatIndices, TestBackCompatIndices, TestBackCompatIndices]

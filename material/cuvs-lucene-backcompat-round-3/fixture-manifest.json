@@ -1,0 +1,130 @@
+[
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.2-Lucene101-Lucene99AcceleratedHNSWVectorsFormat-cuvs-25.12.0.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "c78e454f0f12a6e5af19d5472d55cb7b68f27ebf",
+    "size": 12484,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/c78e454f0f12a6e5af19d5472d55cb7b68f27ebf"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.2-Lucene101AcceleratedHNSWBinaryQuantizedCodec-cuvs-26.08.0.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "3f64f576008485159e7eb6b4eebabf7c8c4eb556",
+    "size": 14327,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/3f64f576008485159e7eb6b4eebabf7c8c4eb556"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.2-Lucene101AcceleratedHNSWBinaryQuantizedCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "e7231f1b8065625b808dd25c2b26bbe554c0524f",
+    "size": 15096,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/e7231f1b8065625b808dd25c2b26bbe554c0524f"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.2-Lucene101AcceleratedHNSWCodec-cuvs-26.08.0.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "8e75d3c622a06bf85eab16cd397919c278acd090",
+    "size": 15868,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/8e75d3c622a06bf85eab16cd397919c278acd090"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.2-Lucene101AcceleratedHNSWCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "6e86f693887e96c7e736e3be870feaceb186d445",
+    "size": 15619,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/6e86f693887e96c7e736e3be870feaceb186d445"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.2-Lucene101AcceleratedHNSWScalarQuantizedCodec-cuvs-26.08.0.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "e9af9af1c5bedeafda9db222878efff9c5bbe462",
+    "size": 17970,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/e9af9af1c5bedeafda9db222878efff9c5bbe462"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.2-Lucene101AcceleratedHNSWScalarQuantizedCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "f856b96bb638b3a45bd7a0aa9286d5f0f1ce4798",
+    "size": 17686,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/f856b96bb638b3a45bd7a0aa9286d5f0f1ce4798"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.3-Lucene103AcceleratedHNSWBinaryQuantizedCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "109f8bfb586460ca458e2b6cca334bb45263e68b",
+    "size": 15016,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/109f8bfb586460ca458e2b6cca334bb45263e68b"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.3-Lucene103AcceleratedHNSWCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "33e038bc543ef329b99d693ab2f585900ccf4427",
+    "size": 15564,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/33e038bc543ef329b99d693ab2f585900ccf4427"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.3-Lucene103AcceleratedHNSWScalarQuantizedCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "661d5bde3290c98867e99e52b084bb47ecee2ee7",
+    "size": 17629,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/661d5bde3290c98867e99e52b084bb47ecee2ee7"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.4-Lucene104AcceleratedHNSWBinaryQuantizedCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "ab1e87beb471afd4d4af89a15960015443eda716",
+    "size": 14986,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/ab1e87beb471afd4d4af89a15960015443eda716"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.4-Lucene104AcceleratedHNSWCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "9c41b085bfc8455874d8225f67309e8861c5c56c",
+    "size": 15609,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/9c41b085bfc8455874d8225f67309e8861c5c56c"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.4-Lucene104AcceleratedHNSWScalarQuantizedCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "ef4163d7a3b20f9a8e09af3621b24c3571d74bbe",
+    "size": 20233,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/ef4163d7a3b20f9a8e09af3621b24c3571d74bbe"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.5-Lucene104AcceleratedHNSWBinaryQuantizedCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "8fcc0b343e2887e42ce0eeb3a2fb85baf6cf2982",
+    "size": 15013,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/8fcc0b343e2887e42ce0eeb3a2fb85baf6cf2982"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.5-Lucene104AcceleratedHNSWCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "14d5803584c94851c0f413e892c14446c6364bba",
+    "size": 15571,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/14d5803584c94851c0f413e892c14446c6364bba"
+  },
+  {
+    "path": "java/cuvs-lucene/src/test/resources/backcompat/10.5-Lucene104AcceleratedHNSWScalarQuantizedCodec.zip",
+    "mode": "100644",
+    "type": "blob",
+    "sha": "5c461cf3c6a9d3bae426239532ef4987109770ca",
+    "size": 20217,
+    "url": "https://api.github.com/repos/NVIDIA/cuvs/git/blobs/5c461cf3c6a9d3bae426239532ef4987109770ca"
+  }
+]
