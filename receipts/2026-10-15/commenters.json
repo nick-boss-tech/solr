@@ -1,0 +1,93 @@
+[
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 14,
+    "issues": 7,
+    "automation": true
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 8,
+    "issues": 2
+  },
+  {
+    "username": "gus",
+    "displayName": "Gus Heck",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "jj380382856",
+    "displayName": "jin jing",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "stillalex",
+    "displayName": "Alex Deparvu",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "arafalov",
+    "displayName": "Alexandre Rafalovitch",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "dpgove",
+    "displayName": "Dennis Gove",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "schnoddelbotz",
+    "displayName": "Jan Hacker",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "jbernste",
+    "displayName": "Joel Bernstein",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "krisden",
+    "displayName": "Kevin Risden",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "mkhl",
+    "displayName": "Mikhail Khludnev",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "noble.paul",
+    "displayName": "Noble Paul",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "serhiybzhezytskyy",
+    "displayName": "Serhiy Bzhezytskyy",
+    "comments": 1,
+    "issues": 1
+  }
+]
