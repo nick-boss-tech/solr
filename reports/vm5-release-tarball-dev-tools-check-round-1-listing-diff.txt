@@ -1,0 +1,43 @@
+# Archive listing diff for the dev-tools export-ignore check (vm5)
+# Lines present in the unmodified PR archive (58d9573ae0e) and absent from the scratch archive (ba22b3eb270). Scratch = PR head plus /dev-tools export-ignore.
+# Entries: PR archive 10034, scratch archive 9995, removed 39.
+# Entries only in the scratch archive: 0.
+dev-tools/
+dev-tools/README.txt
+dev-tools/doap/
+dev-tools/doap/README.txt
+dev-tools/doap/solr.rdf
+dev-tools/scripts/
+dev-tools/scripts/README.md
+dev-tools/scripts/addVersion.py
+dev-tools/scripts/buildAndPushRelease.py
+dev-tools/scripts/changes2logchange.py
+dev-tools/scripts/cherrypick.sh
+dev-tools/scripts/cloud.sh
+dev-tools/scripts/create_line_file_docs.py
+dev-tools/scripts/dependencyChanges.py
+dev-tools/scripts/githubPRs.py
+dev-tools/scripts/logchange.py
+dev-tools/scripts/parseContributorsFromChanges.py
+dev-tools/scripts/refguide/
+dev-tools/scripts/refguide/gen-refguide-redirects.py
+dev-tools/scripts/refguide/htaccess.txt
+dev-tools/scripts/refguide/mappings.csv
+dev-tools/scripts/refguide/new-guide.txt
+dev-tools/scripts/refguide/old-guide.txt
+dev-tools/scripts/refguide/refguide-add-canonical-url.py
+dev-tools/scripts/refguide/refguide-download-js-css.py
+dev-tools/scripts/releaseWizard.py
+dev-tools/scripts/releaseWizard.yaml
+dev-tools/scripts/reproduceJenkinsFailures.py
+dev-tools/scripts/requirements.txt
+dev-tools/scripts/scaffoldNewModule.py
+dev-tools/scripts/scriptutil.py
+dev-tools/scripts/smokeTestRelease.py
+dev-tools/scripts/upload-maven.sh
+dev-tools/scripts/validate-changelog-yaml.py
+dev-tools/scripts/validateChangelogs.py
+dev-tools/test-patch/
+dev-tools/test-patch/jenkins-precommit-script.sh
+dev-tools/test-patch/lucene-solr-yetus-personality.sh
+dev-tools/test-patch/test-patch.sh
