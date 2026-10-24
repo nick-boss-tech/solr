@@ -1,0 +1,22 @@
+--- a/solr/solr-ref-guide/modules/upgrade-notes/pages/major-changes-in-solr-10.adoc
++++ b/solr/solr-ref-guide/modules/upgrade-notes/pages/major-changes-in-solr-10.adoc
+@@ -101,7 +101,7 @@
+ Solr 10.1 upgrades to Lucene 10.4, and a cuVS-lucene (library which powers the GPU accelertion) library version compatible with Lucene 10.4 is not available as of Solr 10.1 release.
+ 
+ If you use GPU acceleration for vector indexing, skip Solr 10.1 and stay on Solr 10.0.x.
+-This is expected to be fixed in a subsequent Solr 10.x release.
++No Solr 10.x release has a fix scheduled yet.
+ ====
+ 
+ === v2 API
+--- a/solr/solr-ref-guide/modules/query-guide/pages/dense-vector-search.adoc
++++ b/solr/solr-ref-guide/modules/query-guide/pages/dense-vector-search.adoc
+@@ -1044,7 +1044,7 @@
+ 
+ [WARNING]
+ ====
+-Vector indexing with GPU acceleration does not work in Solr 10.1 (see SOLR-18556), and is expected to be fixed in a subsequent Solr 10.x release.
++Vector indexing with GPU acceleration does not work in Solr 10.1 (see SOLR-18556). No Solr 10.x release has a fix scheduled yet.
+ See xref:upgrade-notes:major-changes-in-solr-10.adoc#cuvs-gpu-acceleration-broken[Major Changes in Solr 10] for details.
+ ====
+ 
