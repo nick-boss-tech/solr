@@ -41,6 +41,10 @@ Companion rules:
 - No branch or diff link by default. A linked diff turns the proposal into finished work asking for review labor before anyone agreed to spend it, and moves the conversation from direction to implementation defense. Exception: when the fix is mechanical enough that the diff is shorter than the argument about it, a diff link may go in the footer, after the question.
 - The addressee is a named mention of the ticket's sponsor candidate: the committer whose ticket it is or whose recent activity makes them the sponsor. On the new UI tickets this is Christos (malliaridis).
 
+## The engaged-sponsor adjustment
+
+When the ticket is a Blocker or Critical owned by a maintainer with an established working relationship (Eric Pugh is the standing example), the staged ask compresses: the evidence and findings lead, and the comment states that the work is ready (the branch built, the PR ready to open) instead of asking permission to start. Waiting to be allowed would waste a sponsor who has already welcomed the work. The other stages hold: the sufficiency question, the ladder, the recommendation, and the owner's go before anything posts or opens.
+
 ## The status note (evidence comment)
 
 For reporting a finding on a ticket (a stale ticket that looks complete, a failure that reproduces, a check someone asked for):
