@@ -15,3 +15,7 @@
 - Decision ladder: rung 1 for the layout (root convention in `gradle/validation/jar-checks.gradle`: `licenses/<jar>.sha1` and `<jar>-LICENSE-<type>.txt` / `<jar>-NOTICE.txt`). The host is aarch64, so `compose.desktop.currentOs` would resolve linux-arm64 jars; the check names `compose.desktop.linux_x64` explicitly. Rung 4 applies to the presence-check scope, recorded in the report once the classpath is measured.
 
 Heartbeat: 2026-10-24T16:42:07Z
+
+Result: 2026-10-24T17:15:38Z: checksum slice gated green on `solr-17861-ui-license-check` (022acd4ec9, 92aed103a0). Report `reports/pool-ui-SOLR-17861-round-1.md`. Phone-agent assignment `assignments/phone-agent-17861-license-scope-and-handover-round-1.md` carries the LICENSE/NOTICE scope question (ladder and recommendation, option A), NEEDS-OWNER.
+
+DONE: 2026-10-24T17:15:38Z (checksum slice). Deliverables: fork branch `solr-17861-ui-license-check`, `reports/pool-ui-SOLR-17861-round-1.md`, `pr-draft/SOLR-17861.md` on the branch. The LICENSE/NOTICE half is not part of this DONE.
