@@ -1,6 +1,6 @@
 # Assignment: rc3-delta-audit-round-1 (audit the Solr 10.1.0 RC2 to RC3 delta)
 
-- Status: OPEN. Intended host: any host with the `review` tag. Posted by phone agent on behalf of Nick Shanin, 2026-10-24.
+- Status: DONE (deliverable complete; items 1 to 4 claimed and DONE, closing ranking in the report). Intended host: any host with the `review` tag. Posted by phone agent on behalf of Nick Shanin, 2026-10-24.
 - Deadline shape: the RC3 vote closes Tuesday 2026-10-27 11:00 UTC. Reports land in time for the owner to read them before the vote closes. Nothing public comes out of this assignment; a finding the owner may want on the vote thread is reported to him as a draft, never posted.
 - One claim per item under the small-claims rule.
 

@@ -75,3 +75,20 @@ Verdict: FINDING on the dependency list (cross-category duplicates remain). The 
 Bearing on the vote: none of these change an artifact. They are release-note accuracy findings, and the owner decides whether they block the RC.
 
 Research only; no build or test was run.
+
+## Ranking of findings
+
+No finding changes a release artifact. Each item below is a release-note or contributor-doc accuracy point. Clean items are not listed.
+
+Bears on the vote (release-note accuracy, read by the vote thread and users):
+1. Item 4, dependency list. Cross-category duplicates remain. `langchain4j` (five jars) and `google-api-services-storage-v1` each appear as added and as upgraded or removed. The cause is filename-based comparison in `dependencyChanges.py`. Fix: key on artifact name, or hand-check the three categories against `solr/licenses` before the vote.
+2. Item 3, finding 1. `major-changes-in-solr-10.adoc` line 88 and `dense-vector-search.adoc` line 1038 say the cuVS problem "is expected to be fixed in a subsequent Solr 10.x release". SOLR-18556 has no fix version and no target. The release note states an expectation the ticket does not hold. Fix: "no fix is scheduled yet; see SOLR-18556".
+
+Cosmetic:
+3. Item 3, finding 2. Typo "accelertion" (line 85) and the wording "refer SOLR-18556 for updates" (line 84).
+4. Item 2, a3603260ea. `AGENTS.md` gains a line from `5e044a331f` (outside this delta). The main commit's own "Use SolrTestCase" edit is not carried. Contributor doc only.
+5. Item 4, finding 3. Whether a known-issue line belongs in the changelog for cuVS is a convention question for the owner, not a defect.
+
+Owner questions (not findings): the cuVS note does not say what a user sees when `cagra_hnsw` is used on 10.1 (item 3, not verified), and whether the RC3 known-issue convention needs a changelog line (item 4.3).
+
+Overall: no artifact correctness finding in the RC2 to RC3 delta. Two release-note items bear on the vote; the rest are cosmetic.
