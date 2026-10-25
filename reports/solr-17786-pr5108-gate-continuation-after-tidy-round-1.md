@@ -1,0 +1,9 @@
+# SOLR-17786 / PR #5108 gate continuation after tidy repair
+
+**Status: continuing under the superseding post-tidy gate.** This addendum supersedes the stop disposition in `reports/solr-17786-pr5108-gate-preflight-blocked-round-1.md`; that earlier report remains unchanged and accurately records the pre-authorization preflight result.
+
+Nick clarified that the gate itself authorizes the prescribed tidy-dirty repair. He authorized applying only the exact five-file formatting patch captured from the detached preflight, then gating the resulting candidate head. No functional change or extra test was authorized.
+
+The patch was applied in a fresh worktree at the original pinned head `7ba3b78c45c1c2c59225426ec93e975f1c76f24e`. The resulting diff matched the saved `tidy.patch` exactly after matching Git's abbreviated index-hash length; `git diff --check` passed. It changed only `CursorMark.java`, `CursorPagingTest.java`, `DistribCursorPagingTest.java`, `CursorMarkTest.java`, and `CursorMarkParams.java` (73 insertions, 33 deletions). The repair commit is `a3d97ca294f43adce99557fe011da90cd2528ce9`, directly on top of the original head, with author and committer `Nick Shanin <nick.boss.us@gmail.com>` and no trailers. The fork branch was still at the original pinned head immediately before a normal fast-forward push and was verified at the repair commit afterward.
+
+The new gate job is `gates/pr-5108-reverse-cursor-round-1-post-tidy.md`, pinned at the repair commit. The original gate remains immutable. At the time this addendum was written, no claim had been created and no compile, test, mutation, or module-check step had run. A clean detached tidy preflight at the new pinned head is still required before claim and gate execution. The separate #5107 work remains queued for after this gate, not part of this continuation.
