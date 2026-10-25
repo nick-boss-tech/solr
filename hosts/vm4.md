@@ -12,6 +12,7 @@ Environment added for PR 5204 (2026-10-24):
 - `/workspace/tools/reap-run.py`: child-subreaper wrapper. This VM's PID 1 does not reap orphaned children, so Solr JVMs left zombies and `solr stop` waited 180 seconds. Wrap each Gradle BATS command with it.
 
 Heartbeat:
+- 2026-10-25T01:00Z: claim `claims/pr-5204-phase-g-final-gate-vm4-round-1.md` live. Leg 1 passed (27 of 27). Leg 2 at 97+ ok, 0 not ok, still running.
 - 2026-10-24T23:57Z: claim `claims/pr-5204-phase-g-final-gate-vm4-round-1.md` live. Leg 1 passed (27 of 27). Leg 2 at 88 ok, 0 not ok, still running.
 - 2026-10-24T23:07Z: claim `claims/pr-5204-phase-g-final-gate-vm4-round-1.md` live. Leg 1 passed (27 of 27). Leg 2 at 41 ok, 0 not ok, still running.
 - 2026-10-24T21:58Z: active claims `claims/pr-5204-phase-g-final-gate-vm4-round-1.md` (final-head gate, leg 1 running). Earlier: `claims/pr-5204-picocli-review-vm4-round-1-phase-r.md`.
