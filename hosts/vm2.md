@@ -25,3 +25,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T03:04:55Z; critical comments batch 06 done (reports/critical-comments-round-1-batch-06.md, ten drafts). Next: batch 07.
 
 - Heartbeat: 2026-10-25T03:08:52Z; critical comments batch 07 done (reports/critical-comments-round-1-batch-07.md, nine drafts, one already-told). Next: batch 08.
+
+- Heartbeat: 2026-10-25T03:13:22Z; critical comments batch 08 done (reports/critical-comments-round-1-batch-08.md, six drafts, four reason codes). Next: batch 09.
