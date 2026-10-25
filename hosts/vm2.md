@@ -31,3 +31,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T03:18:40Z; critical comments batches 02 to 09 done (reports/critical-comments-round-1-summary-vm2.md). 63 drafts, 13 no-draft reasons. Batch 01 claimed by phone-agent-2. Next: unclaimed work from OPEN-WORK.md; SOLR-14232 draft outstanding.
 
 - Heartbeat: 2026-10-25T03:52:10Z; harmonize H2 six family drafts published (drafts/jira-comments/*.md, not posted, QA pending); harmonize rev4 published. Gates SOLR-18564 and SOLR-10928 running.
+
+- Heartbeat: 2026-10-25T04:09:35Z; SOLR-18564 exact head independently confirmed (receipts/SOLR-18564-vm2-independent.md; vm6 had already gated it). SOLR-10928 vm2 run stopped as duplicate of vm6 green receipt (claims/solr-10928-live-head-regate-vm2-duplicate.md). Build lock free.
