@@ -1,0 +1,7 @@
+testImplicitQueryUsesHighlightQuery failure java.lang.AssertionError: Boost-only text must not be highlighted: SolrDocument{id=2, body_hl=A story about <em>cats</em>. <em>Cats</em> sleep a lot.}
+java.lang.AssertionError: Boost-only text must not be highlighted: SolrDocument{id=2, body_hl=A story about <em>cats</em>. <em>Cats</em> sleep a lot.}
+	at __randomizedtesting.SeedInfo.seed([34795126:DE5DC31FF0D8FBFA]:0)
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.apache.solr.response.transform.TestHighlightAugmenterFactory.assertOnlyUserQueryHighlighted(TestHighlightAugmenterFactory.java:185)

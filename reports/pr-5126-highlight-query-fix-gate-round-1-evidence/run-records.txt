@@ -1,0 +1,44 @@
+SOLR-3479 PR 5126 highlight-query fix gate, round 1 (vm4) run records
+original PR head: 74b09fb443f060caac3f8ec9701909cec276cfb4
+pre-repair fix head: 23c159d06bd86180e0bbd4b474517b60b693f926 (superseded)
+final fix head: 8a685825b6202f45eb981d3b8e7f05b01a5c1829
+JAVA_HOME /workspace/tools/jdk21 (21.0.12.1), runner pool/bin/sweep-run.sh, lock /workspace/tools/.gradle-vm4.lock, seed 34795126
+--- leg1-fail-before
+  headroom: pre 2026-10-25T17:56:49Z | 4.6G free | 479578 ifree rc=1 end 2026-10-25T18:02:51Z | 4.6G free | 479575 ifree 
+  result: BUILD FAILED in 5m 58s rc=1 
+--- leg2-pass-after-full-class
+  headroom: pre 2026-10-25T18:05:42Z | 4.6G free | 479576 ifree rc=0 end 2026-10-25T18:11:39Z | 4.6G free | 479574 ifree 
+  result: BUILD SUCCESSFUL in 5m 54s rc=0 
+--- leg3-neighbor-unified
+  headroom: pre 2026-10-25T18:11:46Z | 4.6G free | 479574 ifree rc=0 end 2026-10-25T18:13:22Z | 4.6G free | 479574 ifree 
+  result: BUILD SUCCESSFUL in 1m 35s rc=0 
+--- leg4a-tidy
+  headroom: pre 2026-10-25T18:13:25Z | 4.6G free | 479574 ifree rc=0 end 2026-10-25T18:14:29Z | 4.6G free | 479574 ifree 
+  result: BUILD SUCCESSFUL in 1m 2s rc=0 
+--- leg4b-compile
+  headroom: pre 2026-10-25T18:14:32Z | 4.6G free | 479574 ifree rc=1 end 2026-10-25T18:16:48Z | 4.6G free | 479572 ifree 
+  result: BUILD FAILED in 2m 15s rc=1 
+--- leg4c-check
+  headroom: pre 2026-10-25T18:16:52Z | 4.6G free | 479572 ifree 
+  result: 
+--- final-leg2-pass-after-full-class
+  headroom: pre 2026-10-25T18:22:52Z | 4.6G free | 479574 ifree rc=0 end 2026-10-25T18:25:44Z | 4.6G free | 479574 ifree 
+  result: BUILD SUCCESSFUL in 2m 51s rc=0 
+--- final-leg3-neighbor-unified
+  headroom: pre 2026-10-25T18:25:50Z | 4.6G free | 479574 ifree rc=0 end 2026-10-25T18:27:11Z | 4.6G free | 479574 ifree 
+  result: BUILD SUCCESSFUL in 1m 20s rc=0 
+--- final-leg4a-tidy
+  headroom: pre 2026-10-25T18:27:15Z | 4.6G free | 479574 ifree rc=0 end 2026-10-25T18:28:13Z | 4.6G free | 479574 ifree 
+  result: BUILD SUCCESSFUL in 57s rc=0 
+--- final-leg4b-compile
+  headroom: pre 2026-10-25T18:28:18Z | 4.6G free | 479574 ifree rc=0 end 2026-10-25T18:33:38Z | 4.6G free | 479572 ifree 
+  result: BUILD SUCCESSFUL in 5m 19s rc=0 
+--- final-leg4c-check
+  headroom: pre 2026-10-25T18:33:45Z | 4.6G free | 479572 ifree rc=0 end 2026-10-25T18:39:25Z | 4.6G free | 479572 ifree 
+  result: BUILD SUCCESSFUL in 5m 38s rc=0 
+--- fresh XML counts
+  leg1-fail-before: tests=1 skipped=0 failures=1 errors=0
+  leg2-pass-after-full-class: tests=11 skipped=0 failures=0 errors=0
+  leg3-neighbor-unified: tests=33 skipped=0 failures=0 errors=0
+  final-leg2-pass-after-full-class: tests=11 skipped=0 failures=0 errors=0
+  final-leg3-neighbor-unified: tests=33 skipped=0 failures=0 errors=0

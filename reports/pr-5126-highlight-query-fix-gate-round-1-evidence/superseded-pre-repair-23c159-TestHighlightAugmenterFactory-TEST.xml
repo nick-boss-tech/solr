@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.response.transform.TestHighlightAugmenterFactory" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-25T18:11:19.855Z" hostname="localhost" time="17.518">
+  <properties/>
+  <testcase name="testImplicitQueryUsesMainParser" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.533"/>
+  <testcase name="testExplicitHighlightQueryOverridesMainQuery" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.013"/>
+  <testcase name="testMultiValuedPassThrough" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.006"/>
+  <testcase name="testRealTimeGet" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.039"/>
+  <testcase name="testErrors" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.01"/>
+  <testcase name="testLocalParams" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.007"/>
+  <testcase name="testImplicitQueryUsesHighlightQuery" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.034"/>
+  <testcase name="testMultipleInstances" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.004"/>
+  <testcase name="testExplicitField" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.005"/>
+  <testcase name="testRequestParamFallback" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.007"/>
+  <testcase name="testFieldFromAlias" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 25, 2026 6:11:20 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1753 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/gate-5126-fix/solr/server/solr/configsets/_default/conf'
+2798 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+4153 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [_ALL_]
+5255 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+6514 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/gate-5126-fix/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001
+9162 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+9163 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/gate-5126-fix/solr/server/solr/configsets/_default
+9414 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/gate-5126-fix/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001/collection1], dataDir=[/workspace/worktrees/gate-5126-fix/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001/collection1/data/]
+14846 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+16108 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+16117 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+16118 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+16365 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/gate-5126-fix/solr/server/solr/configsets/_default/conf ; switching to use InMemory storage instead.
+16741 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+16743 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+16744 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+17235 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults()}}{add=[1 (1880046327419633664)]} 0 416
+17296 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults()}}{add=[2 (1880046327680729088)]} 0 1
+17640 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 11 ms
+17640 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults(commit=true&softCommit=false&waitSearcher=true)}}{commit=} 0 343
+17987 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesMainParser-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&q.alt={!lucene}body_t:fox+OR+title_t:fox)}} hits=2 status=0 QTime=338
+18173 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesMainParser-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q={!edismax+qf%3D'body_t+title_t'+bq%3D'body_t:cats'}fox&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t)}} hits=2 status=0 QTime=30
+18179 INFO  (TEST-TestHighlightAugmenterFactory.testExplicitHighlightQueryOverridesMainQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl.q=body_t:cats)}} hits=2 status=0 QTime=1
+18184 INFO  (TEST-TestHighlightAugmenterFactory.testExplicitHighlightQueryOverridesMainQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dbody_t:cats]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl.q=fox)}} hits=2 status=0 QTime=1
+18186 INFO  (TEST-TestHighlightAugmenterFactory.testExplicitHighlightQueryOverridesMainQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl.q=body_t:cats)}} hits=2 status=0 QTime=1
+18188 INFO  (TEST-TestHighlightAugmenterFactory.testExplicitHighlightQueryOverridesMainQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dbody_t:cats]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl.q=fox)}} hits=2 status=0 QTime=0
+18193 INFO  (TEST-TestHighlightAugmenterFactory.testMultiValuedPassThrough-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,tags_txt:[hl]&sort=id+asc)}} hits=2 status=0 QTime=0
+18234 INFO  (TEST-TestHighlightAugmenterFactory.testRealTimeGet-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/get params={{params(wt=javabin),defaults(fl=id,body_t:[hl]&ids=1)}} status=0 QTime=35
+18241 ERROR (TEST-TestHighlightAugmenterFactory.testErrors-seed#[34795126]) [ x:collection1] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: [hl] needs a field to highlight, named by the 'f' param or by its alias; not a field: [hl]
+	at org.apache.solr.response.transform.HighlightAugmenterFactory.create(HighlightAugmenterFactory.java:91)
+	at org.apache.solr.search.SolrReturnFields.add(SolrReturnFields.java:374)
+	at org.apache.solr.search.SolrReturnFields.parseFieldList(SolrReturnFields.java:180)
+	at org.apache.solr.search.SolrReturnFields.<init>(SolrReturnFields.java:127)
+	at org.apache.solr.search.SolrReturnFields.<init>(SolrReturnFields.java:104)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:170)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:430)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:409)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:238)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.client.solrj.embedded.EmbeddedSolrServer.request(EmbeddedSolrServer.java:227)
+	at org.apache.solr.client.solrj.SolrRequest.process(SolrRequest.java:304)
+	at org.apache.solr.client.solrj.SolrClient.query(SolrClient.java:931)
+	at org.apache.solr.client.solrj.SolrClient.query(SolrClient.java:944)
+	at org.apache.solr.response.transform.TestHighlightAugmenterFactory.query(TestHighlightAugmenterFactory.java:72)
+	at org.apache.solr.response.transform.TestHighlightAugmenterFactory.lambda$testErrors$0(TestHighlightAugmenterFactory.java:257)
+	at org.apache.lucene.tests.util.LuceneTestCase._expectThrows(LuceneTestCase.java:3084)
+	at org.apache.lucene.tests.util.LuceneTestCase.expectThrows(LuceneTestCase.java:2924)
+	at org.apache.lucene.tests.util.LuceneTestCase.expectThrows(LuceneTestCase.java:2915)
+	at org.apache.solr.response.transform.TestHighlightAugmenterFactory.testErrors(TestHighlightAugmenterFactory.java:257)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:54)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+18243 INFO  (TEST-TestHighlightAugmenterFactory.testErrors-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,[hl]&sort=id+asc)}} status=400 QTime=5
+18243 ERROR (TEST-TestHighlightAugmenterFactory.testErrors-seed#[34795126]) [ x:collection1] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Unknown [hl] param: bogus
+	at org.apache.solr.response.transform.HighlightAugmenterFactory.create(HighlightAugmenterFactory.java:106)
+	at org.apache.solr.search.SolrReturnFields.add(SolrReturnFields.java:374)
+	at org.apache.solr.search.SolrReturnFields.parseFieldList(SolrReturnFields.java:180)
+	at org.apache.solr.search.SolrReturnFields.<init>(SolrReturnFields.java:127)
+	at org.apache.solr.search.SolrReturnFields.<init>(SolrReturnFields.java:104)
+	at org.apache.solr.handler.component.QueryComponent.prepare(QueryComponent.java:170)
+	at org.apache.solr.handler.component.SearchHandler.prepareComponents(SearchHandler.java:430)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:409)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:238)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.client.solrj.embedded.EmbeddedSolrServer.request(EmbeddedSolrServer.java:227)
+	at org.apache.solr.client.solrj.SolrRequest.process(SolrRequest.java:304)
+	at org.apache.solr.client.solrj.SolrClient.query(SolrClient.java:931)
+	at org.apache.solr.client.solrj.SolrClient.query(SolrClient.java:944)
+	at org.apache.solr.response.transform.TestHighlightAugmenterFactory.query(TestHighlightAugmenterFactory.java:72)
+	at org.apache.solr.response.transform.TestHighlightAugmenterFactory.lambda$testErrors$1(TestHighlightAugmenterFactory.java:259)
+	at org.apache.lucene.tests.util.LuceneTestCase._expectThrows(LuceneTestCase.java:3084)
+	at org.apache.lucene.tests.util.LuceneTestCase.expectThrows(LuceneTestCase.java:2924)
+	at org.apache.lucene.tests.util.LuceneTestCase.expectThrows(LuceneTestCase.java:2915)
+	at org.apache.solr.response.transform.TestHighlightAugmenterFactory.testErrors(TestHighlightAugmenterFactory.java:259)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:54)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+18244 INFO  (TEST-TestHighlightAugmenterFactory.testErrors-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_t:[hl+bogus%3D1]&sort=id+asc)}} status=400 QTime=0
+18247 INFO  (TEST-TestHighlightAugmenterFactory.testLocalParams-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_hl:[hl+f%3Dbody_t+snippets%3D2+fragsize%3D1+tag.pre%3D'['+tag.post%3D']']&sort=id+asc)}} hits=2 status=0 QTime=0
+18249 INFO  (TEST-TestHighlightAugmenterFactory.testLocalParams-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dbody_t:cats]&sort=id+asc)}} hits=2 status=0 QTime=0
+18250 INFO  (TEST-TestHighlightAugmenterFactory.testLocalParams-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_hl:[hl+f%3Dbody_t+defaultSummary%3Dtrue+fragsize%3D0]&sort=id+asc)}} hits=2 status=0 QTime=0
+18255 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false)}} hits=2 status=0 QTime=0
+18256 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false&hl.q=fox)}} hits=2 status=0 QTime=0
+18258 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false)}} hits=2 status=0 QTime=0
+18271 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=true)}} hits=2 status=0 QTime=11
+18273 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=true&hl.q=fox)}} hits=2 status=0 QTime=1
+18275 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=true)}} hits=2 status=0 QTime=1
+18277 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false)}} hits=2 status=0 QTime=0
+18278 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false&hl.q=fox)}} hits=2 status=0 QTime=0
+18279 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false)}} hits=2 status=0 QTime=0
+18281 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=true)}} hits=2 status=0 QTime=0
+18283 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=true&hl.q=fox)}} hits=2 status=0 QTime=1
+18285 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=true)}} hits=2 status=0 QTime=1
+18289 INFO  (TEST-TestHighlightAugmenterFactory.testMultipleInstances-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_t:[hl],title_t:[hl+tag.pre%3D*+tag.post%3D*]&sort=id+asc)}} hits=2 status=0 QTime=0
+18293 INFO  (TEST-TestHighlightAugmenterFactory.testExplicitField-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc)}} hits=2 status=0 QTime=0
+18294 INFO  (TEST-TestHighlightAugmenterFactory.testExplicitField-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_hl:[hl+f%3Dbody_t+snippets%3D2]&sort=id+asc)}} hits=2 status=0 QTime=0
+18298 INFO  (TEST-TestHighlightAugmenterFactory.testRequestParamFallback-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.tag.pre=[&hl.tag.post=])}} hits=2 status=0 QTime=0
+18299 INFO  (TEST-TestHighlightAugmenterFactory.testRequestParamFallback-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_hl:[hl+f%3Dbody_t+tag.pre%3D<+tag.post%3D>]&sort=id+asc&hl.tag.pre=[)}} hits=2 status=0 QTime=0
+18300 INFO  (TEST-TestHighlightAugmenterFactory.testRequestParamFallback-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_hl:[hl+f%3Dbody_t+tag.pre%3D<+tag.post%3D>]&sort=id+asc&f.body_t.hl.tag.pre=[)}} hits=2 status=0 QTime=0
+18301 INFO  (TEST-TestHighlightAugmenterFactory.testRequestParamFallback-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.snippets=2)}} hits=2 status=0 QTime=0
+18305 INFO  (TEST-TestHighlightAugmenterFactory.testFieldFromAlias-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_t:[hl]&sort=id+asc)}} hits=2 status=0 QTime=0
+18306 INFO  (TEST-TestHighlightAugmenterFactory.testFieldFromAlias-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=body_t:fox+title_t:fox&fl=id,body_t:[hl+f%3Dbody_t]&sort=id+asc)}} hits=2 status=0 QTime=0
+18308 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=595189038
+18309 INFO  (coreCloseExecutor-21-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@5e081d17 collection1
+18310 INFO  (coreCloseExecutor-21-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+oct. 25, 2026 8:11:37 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+AVERTISSEMENT: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+]]></system-err>
+</testsuite>

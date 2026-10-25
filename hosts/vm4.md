@@ -32,3 +32,4 @@ Disk record:
 - 2026-10-24T20:52Z after downloadBats: `/` 4.6G free, 39% used; inodes 479268 free (9% used).
 - 2026-10-25T16:41:07Z: PR 5126 slice Q DONE (claim `claims/pr-5126-query-examples-vm4-round-1-done.md`, branch 022eb6d781). Four runs exit 0; nothing running.
 - 2026-10-25T17:55:55Z: claimed SOLR-3479 PR 5126 fix gate (`claims/pr-5126-highlight-query-gate-vm4-round-1.md`) at fix head 23c159d06b; preflight tidy clean; nothing running yet.
+- 2026-10-25T18:42:12Z: SOLR-3479 PR 5126 fix gate GREEN at 8a685825b6 (claim `claims/pr-5126-highlight-query-gate-vm4-round-1-done.md`). Nothing running; lock free.

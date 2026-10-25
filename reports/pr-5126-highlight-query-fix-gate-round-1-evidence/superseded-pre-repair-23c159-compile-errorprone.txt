@@ -1,0 +1,7 @@
+46:/workspace/worktrees/gate-5126-fix/solr/core/src/java/org/apache/solr/response/transform/HighlightAugmenterFactory.java:195: warning: [ReferenceEquality] Comparison using reference equality instead of value equality
+49:    (see https://errorprone.info/bugpattern/ReferenceEquality)
+51:/workspace/worktrees/gate-5126-fix/solr/core/src/java/org/apache/solr/response/transform/HighlightAugmenterFactory.java:196: warning: [ReferenceEquality] Comparison using reference equality instead of value equality
+54:    (see https://errorprone.info/bugpattern/ReferenceEquality)
+56:error: warnings found and -Werror specified
+69:  /workspace/worktrees/gate-5126-fix/solr/core/src/java/org/apache/solr/response/transform/HighlightAugmenterFactory.java:195: warning: [ReferenceEquality] Comparison using reference equality instead of value equality
+72:      (see https://errorprone.info/bugpattern/ReferenceEquality)

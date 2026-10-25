@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.response.transform.TestHighlightAugmenterFactory" tests="1" skipped="0" failures="1" errors="0" timestamp="2026-10-25T18:02:29.685Z" hostname="localhost" time="19.205">
+  <properties/>
+  <testcase name="testImplicitQueryUsesHighlightQuery" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.567">
+    <failure message="java.lang.AssertionError: Boost-only text must not be highlighted: SolrDocument{id=2, body_hl=A story about &lt;em&gt;cats&lt;/em&gt;. &lt;em&gt;Cats&lt;/em&gt; sleep a lot.}" type="java.lang.AssertionError">java.lang.AssertionError: Boost-only text must not be highlighted: SolrDocument{id=2, body_hl=A story about &lt;em&gt;cats&lt;/em&gt;. &lt;em&gt;Cats&lt;/em&gt; sleep a lot.}
+	at __randomizedtesting.SeedInfo.seed([34795126:DE5DC31FF0D8FBFA]:0)
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.apache.solr.response.transform.TestHighlightAugmenterFactory.assertOnlyUserQueryHighlighted(TestHighlightAugmenterFactory.java:185)
+	at org.apache.solr.response.transform.TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery(TestHighlightAugmenterFactory.java:200)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:54)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 25, 2026 6:02:30 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+2269 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/gate-5126-fail/solr/server/solr/configsets/_default/conf'
+3338 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+4973 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [_ALL_]
+6462 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+7892 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/gate-5126-fail/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001
+11031 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+11031 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/gate-5126-fail/solr/server/solr/configsets/_default
+11332 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/gate-5126-fail/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001/collection1], dataDir=[/workspace/worktrees/gate-5126-fail/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001/collection1/data/]
+16915 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+18139 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+18148 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+18148 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+18408 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/gate-5126-fail/solr/server/solr/configsets/_default/conf ; switching to use InMemory storage instead.
+18780 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+18781 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+18783 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+19311 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults()}}{add=[1 (1880045773374095360)]} 0 432
+19372 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults()}}{add=[2 (1880045773630996480)]} 0 1
+19713 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 10 ms
+19713 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults(commit=true&softCommit=false&waitSearcher=true)}}{commit=} 0 340
+20090 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false)}} hits=2 status=0 QTime=364
+20254 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false&hl.q=fox)}} hits=2 status=0 QTime=1
+20257 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false)}} hits=2 status=0 QTime=1
+20269 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=true)}} hits=2 status=0 QTime=10
+20272 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=true&hl.q=fox)}} hits=2 status=0 QTime=2
+20275 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&sort=id+asc&hl.weightMatches=true&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=true)}} hits=2 status=0 QTime=1
+20276 INFO  (TEST-TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&fl=id,body_hl:[hl+f%3Dbody_t]&sort=id+asc&hl.weightMatches=false&hl.defaultSummary=false&hl.method=unified&hl.fl=body_t&hl=false)}} hits=2 status=0 QTime=0
+NOTE: reproduce with: gradlew test --tests TestHighlightAugmenterFactory.testImplicitQueryUsesHighlightQuery -Dtests.seed=34795126 -Dtests.locale=fr-NC -Dtests.timezone=Asia/Famagusta -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+20283 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=946533176
+20284 INFO  (coreCloseExecutor-21-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@20479e62 collection1
+20284 INFO  (coreCloseExecutor-21-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+oct. 25, 2026 8:02:48 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+AVERTISSEMENT: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+NOTE: leaving temporary files on disk at: /workspace/worktrees/gate-5126-fail/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001
+NOTE: test params are: codec=Asserting(Lucene104): {}, docValues:{}, maxPointsInLeafNode=1261, maxMBSortInHeap=5.42223816356151, sim=Asserting(RandomSimilarity(queryNorm=true): {}), locale=fr-NC, timezone=Asia/Famagusta
+NOTE: Linux 6.1.166-24.303.amzn2023.aarch64 aarch64/Eclipse Adoptium 21.0.12.1 (64-bit)/cpus=1,threads=2,free=161319152,total=257949696
+NOTE: All tests run in this JVM: [TestHighlightAugmenterFactory]
+]]></system-err>
+</testsuite>
