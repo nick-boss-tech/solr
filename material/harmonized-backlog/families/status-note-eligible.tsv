@@ -1,0 +1,70 @@
+key	branch_state	pr	branch	issue_type	priority	updated	summary
+SOLR-2681	pr-open	5104	solr-2681-nested-submit, solr-2681-submit	Bug	Major	2026-10-11	Lucene highlighting unable to extract terms from sub-query of a FunctionQuery
+SOLR-3657	pr-open	5069	solr-3657-submit	Bug	Major	2026-10-09	error message only refers to "source" field when problem parsing value for "dest" field of
+SOLR-3704	pr-open	5103	solr-3704-submit	Bug	Major	2026-10-11	Date range queries fail when highlighting
+SOLR-4374	pr-open	5130	solr-4374-submit	Bug	Major	2026-10-14	Solr could not support numeric field name in return
+SOLR-4540	pr-open	5105	solr-4540-submit	Bug	Major	2026-10-11	High QTime when wildcards in hl.fl are used
+SOLR-5065	pr-open	5071	solr-5065-submit	Bug	Major	2026-10-11	ParseDoubleFieldUpdateProcessorFactory is unable to parse "+" in exponent
+SOLR-5394	pr-open	5131	solr-5394-submit	Bug	Major	2026-10-14	facet.method=fcs seems to be using threads when it shouldn't
+SOLR-5505	pr-open	5072	solr-5505-submit	Bug	Major	2026-10-09	LoggingInfoStream not usabe in a multi-core setup
+SOLR-5887	pr-open	5074	solr-5887-submit	Bug	Major	2026-10-09	Document exception don't give core information
+SOLR-5939	pr-open	5075	solr-5939-draft-pr, solr-5939-submit	Bug	Major	2026-10-09	Wrong request potentially on Error from StreamingSolrServer
+SOLR-5941	pr-open	5076	solr-5941-draft-open, solr-5941-submit	Bug	Major	2026-10-09	CommitTracker should use the default UpdateProcessingChain for autocommit
+SOLR-6045	pr-open	5077	solr-6045-submit	Bug	Major	2026-10-09	atomic updates w/ solrj + BinaryRequestWriter aren't working when adding multiple fields w
+SOLR-6065	pr-open	5078	solr-6065-submit	Bug	Major	2026-10-09	Solr should give you clear error if you try to add too many docs
+SOLR-6207	pr-open	5132	solr-6207-submit	Bug	Major	2026-10-14	SolrQueryRequestBase.getParamString() is misleading if an updated value is set
+SOLR-6759	pr-open	5154	solr-6759-submit	Bug	Major	2026-10-14	ExpandComponent does not call finish() on DelegatingCollectors
+SOLR-6831	pr-open	5134	solr-6831-submit	Bug	Major	2026-10-14	Make facet pivots respect timeout from SolrQueryTimeoutImpl
+SOLR-6973	pr-open	5079	solr-6973-submit	Bug	Major	2026-10-10	Some documents will not update on a cloud server using SignatureUpdateProcessorFactory
+SOLR-6975	pr-open	5135	solr-6975-submit	Bug	Major	2026-10-14	Sort on _docid_ fails for distributed search
+SOLR-7022	pr-open	5080	solr-7022-submit	Bug	Major	2026-10-09	ERROR UpdateHandler java.lang.InterruptedException
+SOLR-7390	pr-open	5136	solr-7390-submit	Bug	Major	2026-10-14	Throw an exception when requesting an unknown document transformer
+SOLR-7498	pr-open	5137	solr-7498-submit	Bug	Major	2026-10-14	Error adding field 'stream_size'='null' msg=For input string: "null" using ContentStreamUp
+SOLR-7504	pr-open	5081	solr-7504-submit	Bug	Major	2026-10-09	Atomic Update causes solr.CountFieldValuesUpdateProcessorFactory to be wrong
+SOLR-7520	pr-open	5138	solr-7520-submit	Bug	Major	2026-10-14	Post filter DelegatingCollector.finish not called for multi-shard queries specifying group
+SOLR-8003	pr-open	5140	solr-8003-combined-tests, solr-8003-on-5188, solr-8003-on-main, solr-8003-squashed, solr-8003-submit	Bug	Major	2026-10-14	*_json:[json] does not match all fields ending in json and apply the Raw
+SOLR-8009	pr-open	5141	solr-8009-submit	Bug	Major	2026-10-14	RealTimeGet NPE with implicit router-based collection
+SOLR-8020	pr-open	5142	solr-8020-submit	Bug	Major	2026-10-14	partial results can generate bad responses
+SOLR-8051	pr-open	5155	solr-8051-submit	Bug	Major	2026-10-14	Global stats NPE if not all cores are up
+SOLR-8088	pr-open	5144	solr-8088-submit	Bug	Major	2026-10-14	Distributed grouping seems to require docValues in 5.x, didn't in 4.x
+SOLR-8240	pr-open	5145	solr-8240-submit	Bug	Major	2026-10-14	mapUniqueKeyOnly=true silently ignores field mapping params f=.. when indexing custom JSON
+SOLR-8939	pr-open	5146	solr-8939-submit	Bug	Major	2026-10-14	Date millisecond resolution lost on distributed queries
+SOLR-9124	pr-open	5147	solr-9124-submit	Bug	Major	2026-10-14	Grouped Results does not support ExactStatsCache
+SOLR-9396	pr-open	5156	solr-9396-submit	Bug	Major	2026-10-14	[subquery] transformer doesn't automatically request needed fields, only other fields in f
+SOLR-9595	pr-open	5157	solr-9595-submit	Bug	Major	2026-10-14	Cache Multi* creations of the SlowCompositeReaderWrapper
+SOLR-9864	pr-open	5150	solr-9864-submit	Bug	Major	2026-10-14	SolrQuery.getCopy() doesn't copy sortClauses
+SOLR-10305	pr-open	5158	solr-10305-submit	Bug	Major	2026-10-15	uniqueKey field store=false will throw null NullPointerException
+SOLR-10424	pr-open	5159	solr-10424-submit	Bug	Major	2026-10-15	/update/docs/json is swallowing all fields
+SOLR-10492	pr-open	5160	solr-10492-submit	Bug	Major	2026-10-14	problem with group faceting, facet.limit in solrcloud
+SOLR-11475	pr-open	5082	solr-11475-submit	Bug	Major	2026-10-09	Endless loop and OOM in PeerSync
+SOLR-11483	pr-open	5083	solr-11483-submit	Bug	Major	2026-10-09	Keep more transaction log files when maxNumLogsToKeep is specified
+SOLR-12245	pr-open	5084	solr-12245-submit	Bug	Major	2026-10-09	DistributedUpdateProcessor doesn't set MDC in some errors
+SOLR-12505	pr-open	5169	solr-12505-submit	Bug	Major	2026-10-16	Streaming expressions - fetch() does not work as expected
+SOLR-12703	pr-open	5085	solr-12703-submit	Bug	Major	2026-10-09	Better validation of bad atomic updates
+SOLR-12705	pr-open	5096	solr-12705-submit	Bug	Major	2026-10-09	ParseDateFieldUpdateProcessorFactory does not work for atomic update values
+SOLR-12864	pr-open	5086	solr-12864-submit	Bug	Major	2026-10-09	Custom JSON parser's echo parameter does not show values
+SOLR-13265	pr-open	5087	solr-13265-submit	Bug	Major	2026-10-09	TLOG replica, updateHandler errors in metrics, no logs
+SOLR-13943	pr-open	5089	solr-13943-submit	Test	Major	2026-10-09	TimeRoutedAliasUpdateProcessorTest.testDateMathInStart: multi-threaded race condition due 
+SOLR-14262	pr-open	5090	solr-14262-submit	Bug	Major	2026-10-09	local commit is (silently - no rf support) ignored during replay
+SOLR-14718	pr-open	5091	solr-14718-submit	Bug	Major	2026-10-09	Multiple flaws in tracking which UpdateCommand is associated with a given failure logged b
+SOLR-16356	pr-open	5092	solr-16356-submit	Bug	Major	2026-10-09	DBQ is noisy during core close
+SOLR-16630	pr-open	5106	solr-16630-submit	Test	Major	2026-10-14	TestCoordinatorRole.testNRTRestart fails 100% of attempts on branch_9x
+SOLR-16673	pr-open	5094	solr-16673-rootfield, solr-16673-rootfield-main, solr-16673-submit, solr-16673-uniquekey, solr-16673-uniquekey-apache, solr-16673-uniquekey-main	Bug	Major	2026-10-13	Strange error when using Schema Designer
+SOLR-16910	pr-open	5095	solr-16910-submit	Bug	Major	2026-10-09	Adjusting LogUpdateProcessorFactory's log level has side effects on SolrCore logging and c
+SOLR-17660	gated-branch		solr-17660-basic-list, solr-17660-basic-list-main, solr-17660-basic-list-upstream	Sub-task	Major	2025-09-01	Implement basic list component in Admin UI
+SOLR-17752	pr-open	5171	solr-17752-submit	Bug	Major	2026-10-16	SolrResponseUtil should not log query on error
+SOLR-17849	gated-branch		solr-17849-index-query-header, solr-17849-index-query-screen	Sub-task	Major	2025-10-24	Implement Index & Query section header
+SOLR-17850	gated-branch		solr-17850-search-handler-form	Sub-task	Major	2025-08-09	Implement solr.SearchHandler UI form
+SOLR-17861	gated-branch		SOLR-17861-kmp-updatelicenses, solr-17861-ui-license-check	Improvement	Minor	2025-08-12	Extend updateLicenses task to cover KMP module
+SOLR-17887	gated-branch		solr-17887-configset-files, solr-17887-file-tree	Sub-task	Major	2025-09-10	Implement File Tree Component
+SOLR-17909	gated-branch		solr-17909-breadcrumb, solr-17909-breadcrumb-wrap	Sub-task	Major	2025-09-09	Implement a Breadcrumb Navigation Component
+SOLR-17911	gated-branch		solr-17911-file-content-viewer	Sub-task	Major	2025-09-10	Implement File Content Viewer Component
+SOLR-17913	gated-branch		solr-17913-collection-details-card	Sub-task	Major	2025-09-10	Implement Collections Details Card
+SOLR-17914	gated-branch		solr-17914-create-collection-dialog, solr-17914-create-collection-dialog-stacked	Sub-task	Major	2025-09-10	Implement Create Collection Dialog
+SOLR-18295	gated-branch		solr-18295-submit	Bug	Major	2026-08-31	ReplicationFactorTest is flaky
+SOLR-18368	pr-merged	5170	solr-18368-submit	Sub-task	Major	2026-08-27	CloudSolrClient.Builder.withInternalClientBuilder
+SOLR-18506	pr-open	5029	solr-18506-on-5205, solr-18506-submit, solr-18506-test-cleanup	Bug	Minor	2026-10-06	TestThinCache.testSimple is flaky: a warming-phase eviction can hit the second cache's own
+SOLR-18530	pr-open	5098	solr-18530-submit	Test	Minor	2026-10-10	RecoveryAfterSoftCommitTest.test fails intermittently with ClosedChannelException after th
+SOLR-18531	pr-open	5101	solr-18531-submit	Test	Minor	2026-10-10	LeaderElectionIntegrationTest fails intermittently with BindException because its restart 
+SOLR-18532	pr-open	5100	solr-18532-submit	Bug	Minor	2026-10-10	RestoreCore rollback deletes index.properties instead of restoring the previous pointer
+SOLR-18539	gated-branch		solr-18539-merge-totals-main	Bug	Major	2026-10-13	QueryComponent.mergeIds counts a partial shard whose documents are skipped in the merged t
