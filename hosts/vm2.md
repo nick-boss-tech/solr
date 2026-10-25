@@ -35,3 +35,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T04:09:35Z; SOLR-18564 exact head independently confirmed (receipts/SOLR-18564-vm2-independent.md; vm6 had already gated it). SOLR-10928 vm2 run stopped as duplicate of vm6 green receipt (claims/solr-10928-live-head-regate-vm2-duplicate.md). Build lock free.
 
 - Heartbeat: 2026-10-25T18:13:07Z; SOLR-17786 round 2 GREEN at fde070281383f113a331a9ec5ccde173b66fac3c (receipts/SOLR-17786.md). Round 1 failed on the forbidden-API check (claims/solr-17786-gate-round-1-two-shard-vm2-verdict-check-failed.md); the ladder repair is claims/solr-17786-forbidden-api-repair-vm2.md. Antora guide: material/antora-ref-guide-gate-guide.md. Public PR submission still needs Nick. Next: wait for owner direction.
+
+- Heartbeat: 2026-10-25T19:34:47Z; posted the reviewed PR 5108 comment (https://github.com/apache/solr/pull/5108#issuecomment-6402197189), owner-approved. Draft: drafts/solr-17786-pr5108-compare-comment-draft-r3.md. Next: wait for reply.
