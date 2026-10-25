@@ -401,6 +401,7 @@ public class CoreAdminHandlerTest extends SolrTestCaseJ4 {
 
   @Test
   public void testDeleteInstanceDirAfterCreateFailure() throws Exception {
+    useFactory(null);
     assumeFalse(
         "Ignore test on windows because it does not delete data directory immediately after unload",
         Constants.WINDOWS);
