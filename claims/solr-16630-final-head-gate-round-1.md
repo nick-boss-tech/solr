@@ -15,3 +15,7 @@
 - Decision ladder: the job's acceptance rule governs. A tidy change at the head would be a GATE INVALID repair (WORKFLOW.md Gate repairs), recorded and not hidden.
 
 Heartbeat: 2026-10-25T00:09:51Z
+
+Result: 2026-10-25T01:14:35Z: legs at head a02cc7ba6b905b511c2390f023e7d89dccac1a03 passed (tidy clean; Error Prone compile rc 0; check -x test rc 0). The first head runs h01 (seed 681E2A715B2CE1D3) and h02 (seed D02E8D0A859FB680) ended rc=1 with the assertion "Pull jetty replicas didn't become active in time" in testNRTRestart. The cause, read from the XML and the log: the PULL replica's index fetch failed with FileSystemException "Too many links" on _0.kdm under the NFS work directory. This is the NFS hard-link problem recorded by vm2 in receipts/SOLR-16630.md. Both attempts are recorded as ENV and not counted, as vm2 did. The driver was stopped after h02, so no further run used the NFS directory.
+
+Setup change, recorded before the rerun: -Ptests.workDir=/tmp/solr16630-tests (local ext4, as vm2 used). Same seeds and the same 10-run plan, plus the base run at 3f5d4c5bf8 with seed 681E2A715B2CE1D3. Relaunched at 2026-10-25T01:14:35Z; logs under solr16630-head-tmp and solr16630-base-tmp.
