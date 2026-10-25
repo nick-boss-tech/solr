@@ -1,0 +1,1805 @@
+{
+  "batch": "h1-001",
+  "assignment": "assignments/harmonize-audits-comment-drafts-round-1.md",
+  "built_from": {
+    "archive": "archive/coordination-2026-10-23 (2cf470f430c)",
+    "queue": "material/skip-audit/queue-current.json",
+    "csv": "material/jira-csv-triage/slice-*.csv (258 files)",
+    "board_receipts": "coordination-ui receipts/SOLR-*.md",
+    "branches": "git ls-remote nick-boss-tech/solr refs/heads/* (live at build time)",
+    "pr_state": "apache/solr pulls?head=nick-boss-tech:<branch>&state=all (live at build time)"
+  },
+  "limits": [
+    "PR state checked only for PRs headed from the fork. PRs by other authors on the same ticket were not searched (phase H2 QA).",
+    "owner_excluded not evaluated: needs Jira reporter and assignee for each key.",
+    "Fix-version citations for close-fixed were not checked (phase H2 QA)."
+  ],
+  "records": [
+    {
+      "key": "SOLR-2778",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0101.csv (SOLR-2778)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2782",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0101.csv (SOLR-2782)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2789",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0102.csv (SOLR-2789)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2800",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0102.csv (SOLR-2800)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2809",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0103.csv (SOLR-2809)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2810",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0103.csv (SOLR-2810)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2820",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0104.csv (SOLR-2820)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2828",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0104.csv (SOLR-2828)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2837",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0105.csv (SOLR-2837)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2840",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0105.csv (SOLR-2840)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2844",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0106.csv (SOLR-2844)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2845",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-2845",
+        "csv": "material/jira-csv-triage/slice-0106.csv (SOLR-2845)",
+        "branch": "solr-2845-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2855",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": "not a bug or by design",
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-2855",
+        "csv": "material/jira-csv-triage/slice-0107.csv (SOLR-2855)",
+        "branch": "solr-2855-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2859",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0107.csv (SOLR-2859)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2865",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-2865",
+        "csv": "material/jira-csv-triage/slice-0108.csv (SOLR-2865)",
+        "branch": "solr-2865-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2866",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0108.csv (SOLR-2866)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2879",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0109.csv (SOLR-2879)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2884",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0109.csv (SOLR-2884)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2897",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0110.csv (SOLR-2897)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2900",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-2900",
+        "csv": "material/jira-csv-triage/slice-0110.csv (SOLR-2900)",
+        "branch": "solr-2900-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2908",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0111.csv (SOLR-2908)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2913",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": "already fixed",
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA; close-fixed: fixing version citation to be checked in phase H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-2913",
+        "csv": "material/jira-csv-triage/slice-0111.csv (SOLR-2913)",
+        "branch": "solr-2913-draft-close"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2917",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0112.csv (SOLR-2917)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2925",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0112.csv (SOLR-2925)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2926",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0113.csv (SOLR-2926)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2928",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-2928",
+        "csv": "material/jira-csv-triage/slice-0113.csv (SOLR-2928)",
+        "branch": "solr-2928-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2931",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0114.csv (SOLR-2931)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2936",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": "already fixed",
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA; close-fixed: fixing version citation to be checked in phase H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-2936",
+        "csv": "material/jira-csv-triage/slice-0114.csv (SOLR-2936)",
+        "branch": "solr-2936-draft-close"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2946",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0115.csv (SOLR-2946)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2963",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0115.csv (SOLR-2963)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2964",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0116.csv (SOLR-2964)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2966",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0116.csv (SOLR-2966)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2974",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0117.csv (SOLR-2974)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2976",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": "already fixed",
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA; close-fixed: fixing version citation to be checked in phase H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-2976",
+        "csv": "material/jira-csv-triage/slice-0117.csv (SOLR-2976)",
+        "branch": "solr-2976-draft-close"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2978",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0118.csv (SOLR-2978)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2988",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-2988",
+        "csv": "material/jira-csv-triage/slice-0118.csv (SOLR-2988)",
+        "branch": "solr-2988-submit"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2991",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0119.csv (SOLR-2991)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2998",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0119.csv (SOLR-2998)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-2999",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0120.csv (SOLR-2999)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3008",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": "not a bug or by design",
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3008",
+        "csv": "material/jira-csv-triage/slice-0120.csv (SOLR-3008)",
+        "branch": "solr-3008-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3018",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0121.csv (SOLR-3018)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3021",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0121.csv (SOLR-3021)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3023",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3023",
+        "csv": "material/jira-csv-triage/slice-0122.csv (SOLR-3023)",
+        "branch": "solr-3023-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3027",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3027",
+        "csv": "material/jira-csv-triage/slice-0122.csv (SOLR-3027)",
+        "branch": "solr-3027-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3028",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0123.csv (SOLR-3028)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3030",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0123.csv (SOLR-3030)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3031",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0124.csv (SOLR-3031)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3034",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3034",
+        "csv": "material/jira-csv-triage/slice-0124.csv (SOLR-3034)",
+        "branch": "solr-3034-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3044",
+      "sources": [
+        "csv",
+        "branch"
+      ],
+      "csv_class": "active",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv active while branch_state draft-branch",
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0125.csv (SOLR-3044)",
+        "branch": "solr-3044-submit"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3050",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3050",
+        "csv": "material/jira-csv-triage/slice-0125.csv (SOLR-3050)",
+        "branch": "solr-3050-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3053",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0126.csv (SOLR-3053)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3055",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0126.csv (SOLR-3055)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3058",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0127.csv (SOLR-3058)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3064",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": "obsolete or removed on main",
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3064",
+        "csv": "material/jira-csv-triage/slice-0127.csv (SOLR-3064)",
+        "branch": "solr-3064-draft-close"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3066",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0128.csv (SOLR-3066)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3070",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0128.csv (SOLR-3070)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3086",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0129.csv (SOLR-3086)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3099",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0129.csv (SOLR-3099)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3101",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0130.csv (SOLR-3101)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3103",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0130.csv (SOLR-3103)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3113",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0131.csv (SOLR-3113)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3114",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0131.csv (SOLR-3114)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3118",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0132.csv (SOLR-3118)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3124",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3124",
+        "csv": "material/jira-csv-triage/slice-0132.csv (SOLR-3124)",
+        "branch": "solr-3124-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3128",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3128",
+        "csv": "material/jira-csv-triage/slice-0133.csv (SOLR-3128)",
+        "branch": "solr-3128-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3136",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0133.csv (SOLR-3136)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3152",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0134.csv (SOLR-3152)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3167",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0134.csv (SOLR-3167)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3173",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0135.csv (SOLR-3173)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3175",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0135.csv (SOLR-3175)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3178",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0136.csv (SOLR-3178)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3179",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0136.csv (SOLR-3179)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3184",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0137.csv (SOLR-3184)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3191",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0137.csv (SOLR-3191)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3192",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0138.csv (SOLR-3192)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3197",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0138.csv (SOLR-3197)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3201",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": "obsolete or removed on main",
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3201",
+        "csv": "material/jira-csv-triage/slice-0139.csv (SOLR-3201)",
+        "branch": "solr-3201-draft-close"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3207",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0139.csv (SOLR-3207)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3212",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0140.csv (SOLR-3212)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3217",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0140.csv (SOLR-3217)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3220",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3220",
+        "csv": "material/jira-csv-triage/slice-0141.csv (SOLR-3220)",
+        "branch": "solr-3220-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3230",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0141.csv (SOLR-3230)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3232",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "active",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0142.csv (SOLR-3232)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3239",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "active",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0142.csv (SOLR-3239)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3243",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3243",
+        "csv": "material/jira-csv-triage/slice-0143.csv (SOLR-3243)",
+        "branch": "solr-3243-submit"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3246",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0143.csv (SOLR-3246)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3248",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0144.csv (SOLR-3248)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3266",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0144.csv (SOLR-3266)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3271",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0145.csv (SOLR-3271)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3277",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0145.csv (SOLR-3277)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3290",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0146.csv (SOLR-3290)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3291",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0146.csv (SOLR-3291)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3296",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0147.csv (SOLR-3296)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3318",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0147.csv (SOLR-3318)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3333",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0148.csv (SOLR-3333)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3350",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0148.csv (SOLR-3350)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3368",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0149.csv (SOLR-3368)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3378",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0149.csv (SOLR-3378)"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3380",
+      "sources": [
+        "skip",
+        "csv",
+        "branch"
+      ],
+      "csv_class": "stale",
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": true,
+      "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+      "citations": {
+        "skip": "queue-current.json key SOLR-3380",
+        "csv": "material/jira-csv-triage/slice-0150.csv (SOLR-3380)",
+        "branch": "solr-3380-draft-open"
+      },
+      "owner_excluded": "not-checked"
+    },
+    {
+      "key": "SOLR-3382",
+      "sources": [
+        "csv"
+      ],
+      "csv_class": "stale",
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "unjudged-stale",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "csv": "material/jira-csv-triage/slice-0150.csv (SOLR-3382)"
+      },
+      "owner_excluded": "not-checked"
+    }
+  ]
+}
