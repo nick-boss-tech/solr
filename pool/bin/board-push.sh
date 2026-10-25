@@ -30,8 +30,8 @@ done
 
 BOARD_TOKEN=$(grep -m1 '^GITHUB_TOKEN=' /workspace/.env | cut -d= -f2- | tr -d '"\r')
 [ -n "$BOARD_TOKEN" ] || { echo "board-push: no GITHUB_TOKEN in /workspace/.env" >&2; exit 6; }
-export BOARD_TOKEN
-CRED='credential.helper=!f() { echo username=x-access-token; echo "password=$BOARD_TOKEN"; }; f'
+AUTH=$(printf 'x-access-token:%s' "$BOARD_TOKEN" | base64 -w0)
+export GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=http.extraheader GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $AUTH"
 ID=(-c user.name="Nick Shanin" -c user.email="nick.boss.us@gmail.com")
 
 cd "$REPO"
@@ -39,7 +39,7 @@ IDX=$(mktemp -u)
 trap 'rm -f "$IDX"' EXIT
 
 for attempt in 1 2 3 4; do
-  timeout 100 git -c "$CRED" fetch -q origin "$BRANCH"
+  timeout 100 git fetch -q origin "$BRANCH"
   TIP=$(git rev-parse FETCH_HEAD)
   GIT_INDEX_FILE=$IDX git read-tree "$TIP"
   for pair in "$@"; do
@@ -53,7 +53,7 @@ for attempt in 1 2 3 4; do
     git show --stat --format= "$C"
     exit 0
   fi
-  if timeout 100 git -c "$CRED" push -q origin "$C:refs/heads/$BRANCH" 2>/dev/null; then
+  if timeout 100 git push -q origin "$C:refs/heads/$BRANCH"; then
     echo "pushed $(git rev-parse --short "$C") to $BRANCH"
     exit 0
   fi
