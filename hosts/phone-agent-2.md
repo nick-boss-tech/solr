@@ -42,3 +42,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 
 - Heartbeat: 2026-10-23T07:44:40Z; SOLR-18555 integrated phase-r4 handed back before any build because the standard runners require a proof the job explicitly does not request and cannot express the stated changelog check. Claim ENDED; no product change, repair, retry, or running build. Gate and receipt record the supported-runner prerequisite.
 - Heartbeat: 2026-10-23T17:36:00Z; claimed `assignments/pool-objectrelease-autocloseable-round-1.md`. Local candidate only, based on current Apache main. No product push or PR action.
+
+- Heartbeat: 2026-10-25T00:53:15Z; claimed `claims/critical-comments-round-1-batch-01.md` under the directed Critical comment-drafting assignment. Scope is batch 01 only; review and individual unposted drafts are in progress.
