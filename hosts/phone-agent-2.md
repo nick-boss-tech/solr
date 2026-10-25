@@ -46,3 +46,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Heartbeat: 2026-10-25T00:53:15Z; claimed `claims/critical-comments-round-1-batch-01.md` under the directed Critical comment-drafting assignment. Scope is batch 01 only; review and individual unposted drafts are in progress.
 
 - Heartbeat: 2026-10-25T03:08:30Z; claimed `claims/warm-ticket-evidence-units-round-2-unit-3-SOLR-18500-phone-agent-2.md` for the read-only SOLR-18500 curl-quoting audit. No build or test planned.
+
+- Heartbeat: 2026-10-25T03:45:30Z; claimed `claims/pool-phone-agent-2-gate-pr-5108-reverse-cursor-round-1-post-tidy.md` for `gates/pr-5108-reverse-cursor-round-1-post-tidy.md` at candidate head `a3d97ca294f43adce99557fe011da90cd2528ce9`. Exact five-file tidy repair is committed and pushed; clean detached preflight completed. The serialized gate commands are pending. #5107 is explicitly sequenced after this gate and remains untouched.
