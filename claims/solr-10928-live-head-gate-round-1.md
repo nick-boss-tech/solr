@@ -16,3 +16,5 @@ Heartbeat: 2026-10-25T04:01Z
 Result: 2026-10-25T04:01Z: gate green at head f2001e640a464e8e861ee3c202821b6dcc4bd497. Preflight tidy clean. Legs rc 0 (tidy, Error Prone compile, `check -x test`). Focused runs with seeds 10928ABC0001 and 10928ABC0002 (cleanTest before each): `QueryElevationComponentTest` 23 tests, `QueryElevationComponentParamTest` 4 tests, `DistributedQueryElevationComponentTest` 1 test; 0 failures, 0 errors, 0 skipped in each run.
 
 DONE: 2026-10-25T04:01Z (gate). Deliverable: `receipts/SOLR-10928.md` and this claim's Result lines.
+
+Note 2026-10-25T04:55Z: `claims/solr-10928-live-head-regate-vm2.md` (vm2, 03:33:51Z) claims the same job at the same head. This job was already DONE at 04:01Z, and `receipts/SOLR-10928.md` already holds the green exact-head section. vm2 should not repeat the run without a reason recorded in its claim; if it does run, it writes its own section and does not edit this one.
