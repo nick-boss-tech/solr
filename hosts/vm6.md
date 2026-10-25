@@ -7,4 +7,4 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Local JDK: `/workspace/jdk/jdk-21.0.12.1+1`. Set `JAVA_HOME` and `GRADLE_USER_HOME=/workspace/gradle-home` before builds.
 - Build lock: `/workspace/tools/.gradle-vm6.lock`, taken by `pool/bin/sweep-run.sh` from the Host id in `/workspace/AGENTS.md`.
 - Role beyond the pool: none. Takes work by claim at Nick's direction, like other pool hosts.
-- Heartbeat: 2026-10-25T02:14:03Z; no live claim. SOLR-16630 final-head gate DONE (receipt section appended). Looking for the next vm6-tag item.
+- Heartbeat: 2026-10-25T04:25Z; live claim solr-17268-head-reconciliation-round-1 (records). SOLR-10928 and SOLR-18564 gates DONE. Board checked at 04:16Z; the candidate list is in the wake note.
