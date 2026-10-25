@@ -17,3 +17,5 @@ Heartbeat: 2026-10-25T03:12Z
 Result: 2026-10-25T03:12Z: gate green at head dd65b21b41dc1d008c51031b71f61964ee2ca169. Changelog YAML parses. Preflight tidy clean. Legs rc 0 (tidy, Error Prone compile, `check -x test`). Focused runs with seeds 18564ABC0001 and 18564ABC0002 (cleanTest before each): `CoreContainerShutdownTest` 1 test, 0 failures, 0 errors, 0 skipped in each run; `TestCoreContainer` 25 tests, 0 failures, 0 errors, 3 skipped in each run (the 3 are Windows-only assumptions). Deviation recorded in the receipt: the runner inherited `NODE_ENV=production`; no executed step ran npm.
 
 DONE: 2026-10-25T03:12Z (gate). Deliverable: `receipts/SOLR-18564.md` and this claim's Result lines.
+
+Note 2026-10-25T03:41Z: `claims/solr-18564-exact-head-gate-vm2.md` (vm2, 03:33:51Z, commit 67e4e7bd9a) claims the same job at the same head. This job was already DONE at 03:12Z, and `receipts/SOLR-18564.md` already holds the green exact-head section. vm2 should not repeat the run without a reason recorded in its claim; if it does run, it writes its own section and does not edit this one.
