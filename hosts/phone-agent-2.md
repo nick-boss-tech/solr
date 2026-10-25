@@ -44,3 +44,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Heartbeat: 2026-10-23T17:36:00Z; claimed `assignments/pool-objectrelease-autocloseable-round-1.md`. Local candidate only, based on current Apache main. No product push or PR action.
 
 - Heartbeat: 2026-10-25T00:53:15Z; claimed `claims/critical-comments-round-1-batch-01.md` under the directed Critical comment-drafting assignment. Scope is batch 01 only; review and individual unposted drafts are in progress.
+
+- Heartbeat: 2026-10-25T03:08:30Z; claimed `claims/warm-ticket-evidence-units-round-2-unit-3-SOLR-18500-phone-agent-2.md` for the read-only SOLR-18500 curl-quoting audit. No build or test planned.
