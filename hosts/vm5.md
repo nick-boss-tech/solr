@@ -43,3 +43,5 @@ Heartbeat: 2026-10-24T22:23Z (vm5-release-tarball-dev-tools-check-round-1: full 
 Heartbeat: 2026-10-24T23:20Z (rc3-tlogreplica-rootcause-round-1 unit 1: focused TestTlogReplica run at RC3 tip running under the host lock, log /workspace/smoke-rc3/tlog-repro/rc3-tip-run1.log; main worktree /workspace/worktrees/tlog-main ready)
 
 Heartbeat: 2026-10-25T00:07Z (rc3-tlogreplica-rootcause-round-1: reproduction report pushed; reading the TLOG recovery path; no Gradle run live; phone-agent reply still pending on assignments/vm5-to-phone-agent-tarball-status-round-1.md)
+
+Heartbeat: 2026-10-25T01:04Z (rc3-tlogreplica-rootcause-round-1 unit 1 and rc3-termsqparser-metrics-leak-round-1 unit 3: unit 3 done; reading new rc3-tlogreplica-peersync-probe-round-1 assignment)
