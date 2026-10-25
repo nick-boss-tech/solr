@@ -6,7 +6,7 @@ I ran the RC3 smoke tester in a loop on one machine (aarch64, 4 CPUs, JDK 21.0.1
 
 Several failures repeat across all five runs and across different random seeds:
 
-* TestCoordinatorRole.testNRTRestart. Its fix is PR #5106 (SOLR-16630), which is not in RC3: https://github.com/apache/solr/pull/5106 . The PR's final-head run passed 10 of 10 times on its own machine. Its base-commit comparison is mixed: an earlier base run failed, and the final-head gate's base run passed, so I would not call that pair complete yet.
+* TestCoordinatorRole.testNRTRestart. Its fix is PR #5106 (SOLR-16630), which is not in RC3: https://github.com/apache/solr/pull/5106 . A factory gate at the PR head passed 10 of 10 runs. Its base-commit comparison is mixed: an earlier base run failed, and the final-head gate's base run passed, so I would not call that pair complete yet.
 * CoreAdminHandlerTest.testDeleteInstanceDirAfterCreateFailure. Filed as SOLR-18587: https://issues.apache.org/jira/browse/SOLR-18587 . No fix yet, and I have not found the cause.
 * TestTlogReplica.testKillLeader and testRecovery, and testOnlyLeaderIndexes in four of the five runs. Filed as SOLR-18586: https://issues.apache.org/jira/browse/SOLR-18586 . No fix yet, and I have not found the cause.
 
