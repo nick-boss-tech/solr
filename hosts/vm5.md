@@ -47,3 +47,5 @@ Heartbeat: 2026-10-25T00:07Z (rc3-tlogreplica-rootcause-round-1: reproduction re
 Heartbeat: 2026-10-25T01:04Z (rc3-tlogreplica-rootcause-round-1 unit 1 and rc3-termsqparser-metrics-leak-round-1 unit 3: unit 3 done; reading new rc3-tlogreplica-peersync-probe-round-1 assignment)
 
 Heartbeat: 2026-10-25T02:06Z (rc3-repro-xml-correction-round-1: TLOG XML overwritten by CoreAdmin runs in scratch worktrees; logs remain the record; CoreAdmin XML archived under smoke-rc3/repro-archive)
+
+Heartbeat: 2026-10-25T16:34Z (rc3-test-failure-causes-round-2: report pushed at 70a2440cc96; SOLR-18587 fixed by matched pairs; TLOG and NRT failures are NFS hard-link (EMLINK) on /workspace; TermsQ fix matched; SOLR-18530 open; waiting for owner on candidate and smoke tmp-dir)
