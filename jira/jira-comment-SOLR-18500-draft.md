@@ -1,0 +1,9 @@
+[~epugh], I audited the current Reference Guide at Apache Solr main commit {{13c693d805f6541f7cec684cd27d28eef7b3b614}}.
+
+My current-main census found {{476}} curl command examples: {{169}} single-quoted URLs, {{94}} double-quoted URLs, {{202}} unquoted URLs, and {{11}} non-literal or other cases. The split is visible in [single-quoted examples|https://github.com/apache/solr/blob/13c693d805f6541f7cec684cd27d28eef7b3b614/solr/solr-ref-guide/modules/configuration-guide/pages/config-api.adoc#L331], [double-quoted examples|https://github.com/apache/solr/blob/13c693d805f6541f7cec684cd27d28eef7b3b614/solr/solr-ref-guide/modules/configuration-guide/pages/configsets-api.adoc#L122], and [unquoted examples|https://github.com/apache/solr/blob/13c693d805f6541f7cec684cd27d28eef7b3b614/solr/solr-ref-guide/modules/configuration-guide/pages/config-api.adoc#L353]. The unquoted [config-set URL|https://github.com/apache/solr/blob/13c693d805f6541f7cec684cd27d28eef7b3b614/solr/solr-ref-guide/modules/configuration-guide/pages/config-sets.adoc#L102] also contains several {{&}} parameters.
+
+The open [PR #5120|https://github.com/apache/solr/pull/5120] proposes single quotes for literal URLs. Its description gives a different census (510 total; 161 single-quoted, 89 double-quoted, 190 unquoted); those three figures leave 70 commands unclassified, and I could not reconcile them with the current-main count. My 11 other cases include variables, abbreviated URLs, and three config-set commands whose URLs are on following lines without shell continuation; if those lines are intended as continuations, the count becomes 169 / 97 / 202 / 8.
+
+Would you like the Reference Guide to use single quotes for every literal URL argument, with an exception only when intentional shell expansion requires it?
+
+🤖 _AI text above_ 🤖 _(reviewed by Nick Shanin)_
