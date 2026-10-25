@@ -37,3 +37,9 @@ Code read, not yet traced to a cause (`solr/core/src/java/org/apache/solr/cloud`
 - Units 2 and 3 of the assignment are not claimed here.
 - Repeated runs with the loop's own seeds were not done. The loop's seeds were recorded only in some run logs.
 - No fix branch and no gate job.
+
+## Status at 2026-10-25 00:10 UTC
+
+- Hypothesis (unconfirmed): the TLOG rejoin stalls because TLOG replicas skip peersync (`RecoveryStrategy.java` line 571, `firstTime = replicaType != Replica.Type.TLOG`), so the rejoining replica never moves past `recovering`.
+- A probe would decide it: a focused `testKillLeader` run with peersync enabled for TLOG on a scratch branch, under the host lock, with the same seed. A pass would support the hypothesis; a fail would rule it out. That probe changes recovery code, which is an implementation step, so it needs a decision from the owner or the assignment before it runs.
+- Phone-agent reply on `assignments/vm5-to-phone-agent-tarball-status-round-1.md`: none yet.
