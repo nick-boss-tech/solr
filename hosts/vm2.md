@@ -27,3 +27,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T03:08:52Z; critical comments batch 07 done (reports/critical-comments-round-1-batch-07.md, nine drafts, one already-told). Next: batch 08.
 
 - Heartbeat: 2026-10-25T03:13:22Z; critical comments batch 08 done (reports/critical-comments-round-1-batch-08.md, six drafts, four reason codes). Next: batch 09.
+
+- Heartbeat: 2026-10-25T03:18:40Z; critical comments batches 02 to 09 done (reports/critical-comments-round-1-summary-vm2.md). 63 drafts, 13 no-draft reasons. Batch 01 claimed by phone-agent-2. Next: unclaimed work from OPEN-WORK.md; SOLR-14232 draft outstanding.
