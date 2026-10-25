@@ -182,6 +182,7 @@ apply from: file('gradle/validation/validate-log-calls.gradle')
 apply from: file('gradle/validation/solr.config-file-sanity.gradle')
 apply from: file('gradle/validation/dependencies.gradle')
 apply from: file('gradle/validation/spotless.gradle')
+apply from: file('gradle/validation/license-headers.gradle')
 
 // Wire up included builds to some validation tasks.
 rootProject.tasks.named("tidy").configure {
