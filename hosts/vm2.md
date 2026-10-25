@@ -7,3 +7,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T00:58:39Z; harmonize H1 all 16 batches DONE (receipts/harmonize-h1-all-16-vm2.md; batches material/harmonized-backlog/batches/h1-NNN-rev2.json). Next: H2 QA of verify-first and close-fixed rows, not started.
 
 - Heartbeat: 2026-10-25T01:00:07Z; harmonize H1 rev3 published (receipts/harmonize-h1-rev3-vm2.md). H2 blocked on second-host QA of H1. Next: look for other unclaimed Linux work.
+
+- Heartbeat: 2026-10-25T02:08:12Z; WON'T DO for harmonize batch-claims round 1 and 2 (claims/wontdo-harmonize-h1-batch-claims-round-*-vm2.md). CI red PR RCA published (reports/ci-red-prs-rca-round-1.md): #5081 infrastructure, #5083 and #5069 need settling runs. H2 still blocked on second-host QA. Next: settling runs or critical implementation triage if unclaimed.
