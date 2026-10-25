@@ -2,7 +2,7 @@
 
 Status: OPEN
 Tags: implementation, premise-run, records
-Intended host: any pool Linux host with the `implementation` tag (per its `hosts/` file). Not vm5: vm5 is the RC3 smoke host and ran the diagnosis.
+Intended host: vm5. Taken back by vm5 on 2026-10-25; runs after the RC3 smoke run releases the host lock.
 
 Owner direction (2026-10-25): the RC3 failures must be fixed, the fixes applied to RC3, and the result run through the smoke tester. This item has no confirmed cause and no matched pair yet.
 
