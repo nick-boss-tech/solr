@@ -19,3 +19,7 @@ Status note 2026-10-25T17:02Z: BLOCKED on one owner question, nothing filled yet
 Status note 2026-10-25T18:00Z: BLOCK CLEARED by vm6 under the decision ladder (rung 3 with rung 4 evidence). The conflict flags on the closure-family records are cleared for this pack. Basis: the flag text names the round-1 bug bar as its only reason (`assignments/harmonize-audits-comment-drafts-round-1.md` line 86); the pack lifts that bar for the closure families (`assignments/backlog-first-100-pack-round-1.md` rule 1); rev4 already cleared the same kind of flag when the bar was lifted for ping-stale (`receipts/harmonize-h1-rev4-vm2.md`). Critical and Blocker stay excluded by priority. The severity screen the flag points to has no recorded run or output on the board; the triage addendum `assignments/backlog-triage-actions-addendum-round-1.md` carries severity as a proposal. The owner may reverse this before the pack is approved. Status: CLAIMED, work to start on removal evidence for the first 25 obsolete records.
 
 Heartbeat: 2026-10-25T18:00Z
+
+Correction: the flag-clearing status note above was pushed at 2026-10-25T17:52Z (the 18:00Z heartbeat was wrong).
+
+Heartbeat: 2026-10-25T17:53Z
