@@ -1,0 +1,5 @@
+Candidate head: 2c8af559c8456ded97811455622fb06786ae74ba
+Mutation: Restore the old zero-row marker behavior: reverse input produces (input, null); forward input produces (null, input).
+Expected witness: CursorMarkTest.testZeroRowCursorMarks fails on the null-marker assertion; compile/setup failure is not an acceptable witness.
+Exact command: ./gradlew :solr:core:test --tests org.apache.solr.search.CursorMarkTest.testZeroRowCursorMarks -Ptests.seed=5108C0DE
+Seed: 5108C0DE

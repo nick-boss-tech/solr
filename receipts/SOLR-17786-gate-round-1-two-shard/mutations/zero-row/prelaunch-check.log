@@ -1,0 +1,12 @@
+timestamp_utc=2026-10-25T04:02:21Z
+head=2c8af559c8456ded97811455622fb06786ae74ba
+--- inode counters ---
+Filesystem     Inodes  IUsed  IFree IUse% Mounted on
+/dev/root      837408 687263 150145   83% /
+/dev/root      837408 687263 150145   83% /
+/dev/root      837408 687263 150145   83% /
+--- process state ---
+ 616466       1       07:05 S java            /usr/lib/jvm/java-21-openjdk-amd64/bin/java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED -XX:ReservedCodeCacheSize=256m -XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -Xmx2g -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/workspace/solr-17786-gate-positive-two-shard/.gradle/tmp -Duser.country -Duser.language=en -Duser.variant -cp /home/ubuntu/.gradle/wrapper/dists/gradle-9.7.0-bin/d4tj7w02tcgubx9zk9hbippn6/gradle-9.7.0/lib/gradle-daemon-server-9.7.0.jar -javaagent:/home/ubuntu/.gradle/wrapper/dists/gradle-9.7.0-bin/d4tj7w02tcgubx9zk9hbippn6/gradle-9.7.0/lib/agents/gradle-instrumentation-agent-9.7.0.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 9.7.0
+ 619237  619231       00:00 S awk             awk NR>1 && tolower($0) ~ /gradle|gradlew|test executor/ {print}
+--- lock ---
+available

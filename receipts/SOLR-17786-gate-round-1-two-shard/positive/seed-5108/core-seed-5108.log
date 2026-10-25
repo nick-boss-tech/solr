@@ -1,0 +1,128 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:solrj:processResources UP-TO-DATE
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources
+> Task :solr:test-framework:processResources
+> Task :solr:modules:analysis-extras:processResources NO-SOURCE
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=5108C0DE
+
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+> Task :solr:solrj:openApiGenerate UP-TO-DATE
+> Task :solr:core:processTestResources
+> Task :solr:api:jar
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+> Task :solr:solrj:compileJava UP-TO-DATE
+> Task :solr:solrj:classes UP-TO-DATE
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj-streaming:classes
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj-jetty:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:solrj-jetty:jar
+> Task :solr:solrj-zookeeper:classes UP-TO-DATE
+> Task :solr:core:compileJava UP-TO-DATE
+> Task :solr:core:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:jar
+> Task :solr:test-framework:compileJava UP-TO-DATE
+> Task :solr:test-framework:classes
+> Task :solr:solrj-streaming:jar
+> Task :solr:test-framework:jar
+> Task :solr:solrj:jar
+
+> Task :solr:modules:analysis-extras:compileJava
+Note: /workspace/solr-17786-gate-positive-two-shard/solr/modules/analysis-extras/src/java/org/apache/solr/schema/ICUCollationField.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:analysis-extras:classes
+> Task :solr:modules:analysis-extras:jar
+> Task :solr:core:jar
+> Task :solr:core:compileTestJava UP-TO-DATE
+> Task :solr:core:testClasses
+
+> Task :solr:core:test
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+:solr:core:test (SUCCESS): 16 test(s)
+
+> Task :solr:core:wipeTaskTemp
+The slowest tests (exceeding 500 ms) during this run:
+  21.72s DistribCursorPagingTest.test (:solr:core)
+  11.80s DistribCursorPagingTest.testReverseCursorPaging (:solr:core)
+   4.35s CursorPagingTest.testRandomSortsOnLargeIndex (:solr:core)
+   1.97s CursorPagingTest.testFacetingWithRandomSorts (:solr:core)
+   1.84s CursorPagingTest.testTimeAllowed (:solr:core)
+The slowest suites (exceeding 1s) during this run:
+  34.63s DistribCursorPagingTest (:solr:core)
+  13.21s CursorPagingTest (:solr:core)
+   5.01s CursorMarkTest (:solr:core)
+   1.19s SortSpecReverseTest (:solr:core)
+
+BUILD SUCCESSFUL in 55s
+35 actionable tasks: 19 executed, 16 up-to-date
+rc=0

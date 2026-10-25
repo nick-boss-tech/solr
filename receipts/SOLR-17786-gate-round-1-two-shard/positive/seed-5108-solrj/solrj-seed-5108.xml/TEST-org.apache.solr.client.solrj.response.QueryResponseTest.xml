@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.client.solrj.response.QueryResponseTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-25T04:00:25.793Z" hostname="55d52da071bf" time="0.84">
+  <properties/>
+  <testcase name="testSimpleGroupResponse" classname="org.apache.solr.client.solrj.response.QueryResponseTest" time="0.071"/>
+  <testcase name="testIntervalFacetsResponse" classname="org.apache.solr.client.solrj.response.QueryResponseTest" time="0.01"/>
+  <testcase name="testQueryResponseSerialization" classname="org.apache.solr.client.solrj.response.QueryResponseTest" time="0.039"/>
+  <testcase name="testGroupResponse" classname="org.apache.solr.client.solrj.response.QueryResponseTest" time="0.006"/>
+  <testcase name="testExplainMapResponse" classname="org.apache.solr.client.solrj.response.QueryResponseTest" time="0.005"/>
+  <testcase name="testCursorDirections" classname="org.apache.solr.client.solrj.response.QueryResponseTest" time="0.003"/>
+  <testcase name="testRangeFacets" classname="org.apache.solr.client.solrj.response.QueryResponseTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 24, 2026 10:00:26 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1285 INFO  (SUITE-QueryResponseTest-seed#[5108C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/solr-17786-gate-positive-two-shard/solr/server/solr/configsets/_default/conf'
+]]></system-err>
+</testsuite>

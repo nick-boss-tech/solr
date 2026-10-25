@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.search.CursorMarkTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-25T04:00:52.357Z" hostname="55d52da071bf" time="6.535">
+  <properties/>
+  <testcase name="testGarbageParsing" classname="org.apache.solr.search.CursorMarkTest" time="0.021"/>
+  <testcase name="testDirectionAndForwardEncoding" classname="org.apache.solr.search.CursorMarkTest" time="0.007"/>
+  <testcase name="testInvalidUsage" classname="org.apache.solr.search.CursorMarkTest" time="0.006"/>
+  <testcase name="testRoundTripParsing" classname="org.apache.solr.search.CursorMarkTest" time="0.13"/>
+  <testcase name="testNextCursorMark" classname="org.apache.solr.search.CursorMarkTest" time="0.009"/>
+  <testcase name="testZeroRowCursorMarks" classname="org.apache.solr.search.CursorMarkTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 24, 2026 10:00:52 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1366 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/solr-17786-gate-positive-two-shard/solr/server/solr/configsets/_default/conf'
+1374 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+1382 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/solr-17786-gate-positive-two-shard/solr/core/build/tmp/tests-tmp/org.apache.solr.search.CursorMarkTest_17786C0DE-001/data-dir-1-001
+1396 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+1425 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+1461 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/solr-17786-gate-positive-two-shard/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/solr-17786-gate-positive-two-shard/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+1462 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (true) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+1480 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+1619 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr-17786-gate-positive-two-shard/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr-17786-gate-positive-two-shard/solr/core/build/resources/test/solr/collection1/lib/classes]
+1999 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.s.IndexSchema Loaded schema sortable/1.6 with uniqueid field id
+2071 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+2077 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+5798 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@4899d79e[provider=null,keyStore=null,trustStore=null]
+5799 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@4899d79e[provider=null,keyStore=null,trustStore=null]
+5836 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@3a2f1b6f[provider=null,keyStore=null,trustStore=null]
+5836 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@3a2f1b6f[provider=null,keyStore=null,trustStore=null]
+5840 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@42651a1f[provider=null,keyStore=null,trustStore=null]
+5840 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@42651a1f[provider=null,keyStore=null,trustStore=null]
+5843 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.e.j.u.s.S.config Trusting all certificates configured for oejus.SslContextFactory$Client@6b453126[provider=null,keyStore=null,trustStore=null]
+5844 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@6b453126[provider=null,keyStore=null,trustStore=null]
+5849 WARN  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+5950 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr-17786-gate-positive-two-shard/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr-17786-gate-positive-two-shard/solr/core/build/resources/test/solr/collection1/lib/classes]
+5993 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema sortable/1.6 with uniqueid field id
+5993 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/solr-17786-gate-positive-two-shard/solr/core/build/resources/test/solr/collection1
+6015 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/solr-17786-gate-positive-two-shard/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/solr-17786-gate-positive-two-shard/solr/core/build/tmp/tests-tmp/org.apache.solr.search.CursorMarkTest_17786C0DE-001/data-dir-1-001/]
+6099 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogByteSizeMergePolicy: [LogByteSizeMergePolicy: minMergeSize=16777216, mergeFactor=44, maxMergeSize=2147483648, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.0]
+6287 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+6842 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+6843 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+6844 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+6853 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=37, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.0]
+6883 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/solr-17786-gate-positive-two-shard/solr/core/build/resources/test/solr/collection1/conf ; switching to use InMemory storage instead.
+6900 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+6904 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+7042 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+7052 INFO  (TEST-CursorMarkTest.testGarbageParsing-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGarbageParsing
+7063 INFO  (TEST-CursorMarkTest.testGarbageParsing-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGarbageParsing
+7070 INFO  (TEST-CursorMarkTest.testDirectionAndForwardEncoding-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testDirectionAndForwardEncoding
+7072 INFO  (TEST-CursorMarkTest.testDirectionAndForwardEncoding-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testDirectionAndForwardEncoding
+7077 INFO  (TEST-CursorMarkTest.testInvalidUsage-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testInvalidUsage
+7078 INFO  (TEST-CursorMarkTest.testInvalidUsage-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testInvalidUsage
+7083 INFO  (TEST-CursorMarkTest.testRoundTripParsing-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testRoundTripParsing
+7208 INFO  (TEST-CursorMarkTest.testRoundTripParsing-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testRoundTripParsing
+7213 INFO  (TEST-CursorMarkTest.testNextCursorMark-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testNextCursorMark
+7217 INFO  (TEST-CursorMarkTest.testNextCursorMark-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testNextCursorMark
+7222 INFO  (TEST-CursorMarkTest.testZeroRowCursorMarks-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testZeroRowCursorMarks
+7223 INFO  (TEST-CursorMarkTest.testZeroRowCursorMarks-seed#[17786C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testZeroRowCursorMarks
+7223 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+7224 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=183614286
+7225 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@436a2c2d collection1
+7230 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Oct 25, 2026 5:00:58 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+7243 INFO  (SUITE-CursorMarkTest-seed#[17786C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+]]></system-err>
+</testsuite>

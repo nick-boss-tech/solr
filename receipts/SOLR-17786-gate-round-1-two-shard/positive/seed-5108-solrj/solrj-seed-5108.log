@@ -1,0 +1,70 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:solrj:processResources UP-TO-DATE
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources UP-TO-DATE
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:processResources UP-TO-DATE
+> Task :solr:solrj:processTestResources
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=5108C0DE
+
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+> Task :solr:solrj:openApiGenerate UP-TO-DATE
+> Task :solr:api:jar UP-TO-DATE
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+> Task :solr:solrj:compileJava UP-TO-DATE
+> Task :solr:solrj:classes UP-TO-DATE
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj-jetty:classes UP-TO-DATE
+> Task :solr:solrj-streaming:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:solrj:jar UP-TO-DATE
+> Task :solr:solrj-zookeeper:classes UP-TO-DATE
+> Task :solr:solrj-jetty:jar UP-TO-DATE
+> Task :solr:solrj-streaming:jar UP-TO-DATE
+> Task :solr:solrj-zookeeper:jar UP-TO-DATE
+> Task :solr:core:compileJava UP-TO-DATE
+> Task :solr:core:classes UP-TO-DATE
+> Task :solr:core:jar UP-TO-DATE
+> Task :solr:test-framework:compileJava UP-TO-DATE
+> Task :solr:test-framework:classes UP-TO-DATE
+> Task :solr:test-framework:jar UP-TO-DATE
+> Task :solr:solrj:compileTestJava UP-TO-DATE
+> Task :solr:solrj:testClasses
+
+> Task :solr:solrj:test
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+:solr:solrj:test (SUCCESS): 7 test(s)
+
+> Task :solr:solrj:wipeTaskTemp
+
+BUILD SUCCESSFUL in 11s
+33 actionable tasks: 8 executed, 25 up-to-date
+rc=0

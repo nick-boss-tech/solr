@@ -1,0 +1,20 @@
+diff --git a/solr/core/src/java/org/apache/solr/search/QueryResult.java b/solr/core/src/java/org/apache/solr/search/QueryResult.java
+index fae9b419d7..b1fd2783e6 100755
+--- a/solr/core/src/java/org/apache/solr/search/QueryResult.java
++++ b/solr/core/src/java/org/apache/solr/search/QueryResult.java
+@@ -99,10 +99,11 @@ public class QueryResult {
+   public void setCursorMarkNoResults(CursorMark providedCursorMark, int numRequested) {
+     if (providedCursorMark != null) {
+       if (numRequested == 0) {
+-        // No page boundary was observed. Keep the supplied boundary in both directions.
+-        setCursorMarkResult(
+-            providedCursorMark.createPrevious(providedCursorMark.getSortValues()),
+-            providedCursorMark.createNext(providedCursorMark.getSortValues()));
++        if (providedCursorMark.isReverse()) {
++          setCursorMarkResult(providedCursorMark, null);
++        } else {
++          setCursorMarkResult(null, providedCursorMark);
++        }
+       } else {
+         // An empty page after requesting documents marks the beginning or end of the results.
+         if (providedCursorMark.isReverse()) {

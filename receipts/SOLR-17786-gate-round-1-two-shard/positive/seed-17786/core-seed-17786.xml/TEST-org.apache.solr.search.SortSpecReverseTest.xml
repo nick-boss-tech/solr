@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.search.SortSpecReverseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-25T04:00:52.324Z" hostname="55d52da071bf" time="1.144">
+  <properties/>
+  <testcase name="testInverseSelectionAndSearchAfter" classname="org.apache.solr.search.SortSpecReverseTest" time="0.439"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 24, 2026 10:00:52 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1351 INFO  (SUITE-SortSpecReverseTest-seed#[17786C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/solr-17786-gate-positive-two-shard/solr/server/solr/configsets/_default/conf'
+]]></system-err>
+</testsuite>
