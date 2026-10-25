@@ -1,0 +1,2308 @@
+{
+  "batch": "h1-012-rev3",
+  "assignment": "assignments/harmonize-audits-comment-drafts-round-1.md",
+  "built_from": {
+    "archive": "archive/coordination-2026-10-23 (2cf470f430c)",
+    "queue": "material/skip-audit/queue-current.json",
+    "csv": "material/jira-csv-triage/slice-*.csv (258 files)",
+    "board_receipts": "coordination-ui receipts/SOLR-*.md",
+    "branches": "git ls-remote nick-boss-tech/solr refs/heads/* (live at build time)",
+    "pr_state": "apache/solr pulls?head=nick-boss-tech:<branch>&state=all (live at build time)",
+    "metadata": "material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv (IssueType, Priority)"
+  },
+  "limits": [
+    "PR state checked only for PRs headed from the fork. PRs by other authors on the same ticket were not searched (phase H2 QA).",
+    "owner_excluded not evaluated: needs Jira reporter and assignee for each key.",
+    "Fix-version citations for close-fixed were not checked (phase H2 QA).",
+    "issue_type and priority come from the 2026-10-18 metadata CSV, not live Jira; keys with no metadata row are not family-eligible."
+  ],
+  "records": [
+    {
+      "key": "SOLR-12369",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12369",
+        "branch": "solr-12369-draft-open",
+        "audit_draft_branch": "solr-12369-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12446",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12446",
+        "branch": "solr-12446-draft-open",
+        "audit_draft_branch": "solr-12446-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12460",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12460",
+        "branch": "solr-12460-draft-open",
+        "audit_draft_branch": "solr-12460-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12487",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12487",
+        "branch": "solr-12487-draft-open",
+        "audit_draft_branch": "solr-12487-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12504",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12504",
+        "branch": "solr-12504-draft-open",
+        "audit_draft_branch": "solr-12504-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12505",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12505",
+        "branch": "solr-12505-submit",
+        "receipt": "receipts/SOLR-12505.md",
+        "pr": "apache/solr PR #5169 from solr-12505-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12532",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12532",
+        "branch": "solr-12532-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12542",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12542",
+        "branch": "solr-12542-draft-open",
+        "audit_draft_branch": "solr-12542-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12543",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12543",
+        "branch": "solr-12543-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12556",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12556",
+        "branch": "solr-12556-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12585",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12585",
+        "branch": "solr-12585-draft-open",
+        "audit_draft_branch": "solr-12585-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12608",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12608",
+        "branch": "solr-12608-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12645",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "obsolete or removed on main",
+      "branch_state": "none",
+      "disposition": "closure-obsolete",
+      "conflict": true,
+      "conflict_note": "bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-12645",
+        "branch": "solr-12645-draft-close",
+        "audit_draft_branch": "solr-12645-draft-close"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12646",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12646",
+        "branch": "solr-12646-draft-close, solr-12646-draft-open",
+        "audit_draft_branch": "solr-12646-draft-close, solr-12646-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12651",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12651",
+        "branch": "solr-12651-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12657",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12657",
+        "branch": "solr-12657-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12659",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12659",
+        "branch": "solr-12659-draft-open",
+        "audit_draft_branch": "solr-12659-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12688",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12688",
+        "branch": "solr-12688-draft-open",
+        "audit_draft_branch": "solr-12688-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12703",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12703",
+        "branch": "solr-12703-submit",
+        "receipt": "receipts/SOLR-12703.md",
+        "pr": "apache/solr PR #5085 from solr-12703-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12705",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12705",
+        "branch": "solr-12705-submit",
+        "receipt": "receipts/SOLR-12705.md",
+        "pr": "apache/solr PR #5096 from solr-12705-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12718",
+      "sources": [
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "branch": "solr-12718, solr-12718-streamcontext-cache"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Improvement",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12743",
+      "sources": [
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "branch": "solr-12743-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Critical",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12748",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12748",
+        "branch": "solr-12748-draft-open",
+        "audit_draft_branch": "solr-12748-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12781",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12781",
+        "branch": "solr-12781-draft-open",
+        "audit_draft_branch": "solr-12781-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12808",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12808",
+        "branch": "solr-12808-draft-open",
+        "audit_draft_branch": "solr-12808-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12819",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12819",
+        "branch": "solr-12819-draft-open",
+        "audit_draft_branch": "solr-12819-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12844",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12844",
+        "branch": "solr-12844-draft-open",
+        "audit_draft_branch": "solr-12844-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12849",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12849",
+        "branch": "solr-12849-submit",
+        "receipt": "receipts/SOLR-12849.md",
+        "pr": "apache/solr PR #5011 from solr-12849-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12850",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12850",
+        "branch": "solr-12850-draft-open",
+        "audit_draft_branch": "solr-12850-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12858",
+      "sources": [
+        "skip"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12858"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12864",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12864",
+        "branch": "solr-12864-submit",
+        "receipt": "receipts/SOLR-12864.md",
+        "pr": "apache/solr PR #5086 from solr-12864-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12871",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12871",
+        "branch": "solr-12871-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12884",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12884",
+        "branch": "solr-12884-draft-open",
+        "audit_draft_branch": "solr-12884-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12900",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12900",
+        "branch": "solr-12900-draft-open",
+        "audit_draft_branch": "solr-12900-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12916",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12916",
+        "branch": "solr-12916-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12918",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12918",
+        "branch": "solr-12918-draft-open",
+        "audit_draft_branch": "solr-12918-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12944",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12944",
+        "branch": "solr-12944-draft-open",
+        "audit_draft_branch": "solr-12944-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12991",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12991",
+        "branch": "solr-12991-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-12998",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-12998",
+        "branch": "solr-12998-submit",
+        "receipt": "receipts/SOLR-12998.md",
+        "pr": "apache/solr PR #5010 from solr-12998-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13009",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13009",
+        "branch": "solr-13009-draft-open",
+        "audit_draft_branch": "solr-13009-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13021",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13021",
+        "branch": "solr-13021-draft-open",
+        "audit_draft_branch": "solr-13021-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13038",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13038",
+        "branch": "solr-13038-draft-open",
+        "audit_draft_branch": "solr-13038-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13056",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13056",
+        "branch": "solr-13056-draft-open",
+        "audit_draft_branch": "solr-13056-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13061",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13061",
+        "branch": "solr-13061-draft-open",
+        "audit_draft_branch": "solr-13061-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13066",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "already fixed",
+      "branch_state": "none",
+      "disposition": "closure-fixed",
+      "conflict": true,
+      "conflict_note": "close-fixed: fixing version citation to be checked in phase H2 QA; bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-13066",
+        "branch": "solr-13066-draft-close",
+        "audit_draft_branch": "solr-13066-draft-close"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13094",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13094",
+        "branch": "solr-13094-draft-open",
+        "audit_draft_branch": "solr-13094-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13097",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13097",
+        "branch": "solr-13097-submit",
+        "receipt": "receipts/SOLR-13097.md",
+        "pr": "apache/solr PR #5016 from solr-13097-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13136",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13136",
+        "branch": "solr-13136-submit",
+        "receipt": "receipts/SOLR-13136.md",
+        "pr": "apache/solr PR #5017 from solr-13136-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13166",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13166",
+        "branch": "solr-13166-draft-open",
+        "audit_draft_branch": "solr-13166-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13167",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "duplicate",
+      "branch_state": "none",
+      "disposition": "closure-duplicate",
+      "conflict": true,
+      "conflict_note": "top verdict close-answered has no crosswalk row; verify-first; bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-13167",
+        "branch": "solr-13167-draft-close",
+        "audit_draft_branch": "solr-13167-draft-close"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13175",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13175",
+        "branch": "solr-13175-draft-open",
+        "audit_draft_branch": "solr-13175-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13182",
+      "sources": [
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "branch": "solr-13182-child-null-parent"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Minor",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13184",
+      "sources": [
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "branch": "solr-13184-joindf-missing-arg"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Minor",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13185",
+      "sources": [
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "branch": "solr-13185-query-parse-null"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Minor",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13186",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13186",
+        "branch": "solr-13186-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13192",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13192",
+        "branch": "solr-13192-draft-open",
+        "audit_draft_branch": "solr-13192-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13195",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13195",
+        "branch": "solr-13195-draft-open",
+        "audit_draft_branch": "solr-13195-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13202",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "pr-merged",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13202",
+        "branch": "solr-13202-submit",
+        "pr": "apache/solr PR #5012 from solr-13202-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13216",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13216",
+        "branch": "solr-13216-draft-open",
+        "audit_draft_branch": "solr-13216-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13233",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13233",
+        "branch": "solr-13233-draft-open",
+        "audit_draft_branch": "solr-13233-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13237",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13237",
+        "branch": "solr-13237-draft-open",
+        "audit_draft_branch": "solr-13237-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13239",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13239",
+        "branch": "solr-13239-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13242",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13242",
+        "branch": "solr-13242-draft-open",
+        "audit_draft_branch": "solr-13242-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13245",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13245",
+        "branch": "solr-13245-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13246",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13246",
+        "branch": "solr-13246-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13247",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13247",
+        "branch": "solr-13247-draft-open",
+        "audit_draft_branch": "solr-13247-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13263",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13263",
+        "branch": "solr-13263-draft-open",
+        "audit_draft_branch": "solr-13263-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13265",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13265",
+        "branch": "solr-13265-submit",
+        "receipt": "receipts/SOLR-13265.md",
+        "pr": "apache/solr PR #5087 from solr-13265-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13270",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "obsolete or removed on main",
+      "branch_state": "none",
+      "disposition": "closure-obsolete",
+      "conflict": true,
+      "conflict_note": "bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-13270",
+        "branch": "solr-13270-draft-close, solr-13270-draft-open",
+        "audit_draft_branch": "solr-13270-draft-close, solr-13270-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13278",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13278",
+        "branch": "solr-13278-draft-close, solr-13278-draft-open",
+        "audit_draft_branch": "solr-13278-draft-close, solr-13278-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13283",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13283",
+        "branch": "solr-13283-draft-open",
+        "audit_draft_branch": "solr-13283-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13291",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13291",
+        "branch": "solr-13291-draft-open",
+        "audit_draft_branch": "solr-13291-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13304",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "obsolete or removed on main",
+      "branch_state": "none",
+      "disposition": "closure-obsolete",
+      "conflict": true,
+      "conflict_note": "bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-13304",
+        "branch": "solr-13304-draft-close",
+        "audit_draft_branch": "solr-13304-draft-close"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13305",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13305",
+        "branch": "solr-13305-draft-open",
+        "audit_draft_branch": "solr-13305-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13310",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13310",
+        "branch": "solr-13310-draft-open",
+        "audit_draft_branch": "solr-13310-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13346",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13346",
+        "branch": "solr-13346-draft-open",
+        "audit_draft_branch": "solr-13346-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13369",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented-hypothetical",
+      "skip_category": null,
+      "branch_state": "draft-branch",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13369",
+        "branch": "solr-13369-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13390",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13390",
+        "branch": "solr-13390-draft-open",
+        "audit_draft_branch": "solr-13390-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13416",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13416",
+        "branch": "solr-13416-draft-open",
+        "audit_draft_branch": "solr-13416-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13455",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "already fixed",
+      "branch_state": "none",
+      "disposition": "closure-fixed",
+      "conflict": true,
+      "conflict_note": "close-fixed: fixing version citation to be checked in phase H2 QA; bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-13455",
+        "branch": "solr-13455-draft-close, solr-13455-draft-open",
+        "audit_draft_branch": "solr-13455-draft-close, solr-13455-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13470",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "duplicate",
+      "branch_state": "none",
+      "disposition": "closure-duplicate",
+      "conflict": true,
+      "conflict_note": "bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-13470",
+        "branch": "solr-13470-draft-open",
+        "audit_draft_branch": "solr-13470-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13471",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13471",
+        "branch": "solr-13471-draft-open",
+        "audit_draft_branch": "solr-13471-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13481",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13481",
+        "branch": "solr-13481-draft-close, solr-13481-draft-open",
+        "audit_draft_branch": "solr-13481-draft-close, solr-13481-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13486",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13486",
+        "branch": "solr-13486-draft-open",
+        "audit_draft_branch": "solr-13486-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13501",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13501",
+        "branch": "solr-13501-draft-close, solr-13501-draft-open",
+        "audit_draft_branch": "solr-13501-draft-close, solr-13501-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13505",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "obsolete or removed on main",
+      "branch_state": "none",
+      "disposition": "closure-obsolete",
+      "conflict": true,
+      "conflict_note": "bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-13505",
+        "branch": "solr-13505-draft-close",
+        "audit_draft_branch": "solr-13505-draft-close"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13524",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13524",
+        "branch": "solr-13524-submit",
+        "receipt": "receipts/SOLR-13524.md",
+        "pr": "apache/solr PR #5013 from solr-13524-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13568",
+      "sources": [
+        "skip",
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13568",
+        "branch": "solr-13568-submit",
+        "receipt": "receipts/SOLR-13568.md",
+        "pr": "apache/solr PR #5014 from solr-13568-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13570",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "already fixed",
+      "branch_state": "none",
+      "disposition": "closure-fixed",
+      "conflict": true,
+      "conflict_note": "close-fixed: fixing version citation to be checked in phase H2 QA; bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-13570",
+        "branch": "solr-13570-draft-close",
+        "audit_draft_branch": "solr-13570-draft-close"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13572",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13572",
+        "branch": "solr-13572-draft-open",
+        "audit_draft_branch": "solr-13572-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13591",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13591",
+        "branch": "solr-13591-draft-close, solr-13591-draft-open",
+        "audit_draft_branch": "solr-13591-draft-close, solr-13591-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13601",
+      "sources": [
+        "skip"
+      ],
+      "csv_class": null,
+      "skip_status": "implemented",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13601"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13616",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13616",
+        "branch": "solr-13616-draft-open",
+        "audit_draft_branch": "solr-13616-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13618",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13618",
+        "branch": "solr-13618-draft-open",
+        "audit_draft_branch": "solr-13618-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13627",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13627",
+        "branch": "solr-13627-draft-open",
+        "audit_draft_branch": "solr-13627-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13654",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13654",
+        "branch": "solr-13654-draft-open",
+        "audit_draft_branch": "solr-13654-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13678",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "already fixed",
+      "branch_state": "none",
+      "disposition": "closure-fixed",
+      "conflict": true,
+      "conflict_note": "close-fixed: fixing version citation to be checked in phase H2 QA; bug in a closure disposition: excluded from closure families; flagged for severity screen",
+      "citations": {
+        "skip": "queue-current.json key SOLR-13678",
+        "branch": "solr-13678-draft-close",
+        "audit_draft_branch": "solr-13678-draft-close"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13687",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": "feature or design request",
+      "branch_state": "none",
+      "disposition": "keep-open",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13687",
+        "branch": "solr-13687-draft-open",
+        "audit_draft_branch": "solr-13687-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13696",
+      "sources": [
+        "branch",
+        "receipt"
+      ],
+      "csv_class": null,
+      "skip_status": null,
+      "skip_category": null,
+      "branch_state": "pr-open",
+      "disposition": "implemented",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "branch": "solr-13696-production-split, solr-13696-submit",
+        "receipt": "receipts/SOLR-13696.md",
+        "pr": "apache/solr PR #5088 from solr-13696-submit"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Test",
+      "priority": "Major",
+      "family_eligible": []
+    },
+    {
+      "key": "SOLR-13698",
+      "sources": [
+        "skip",
+        "branch"
+      ],
+      "csv_class": null,
+      "skip_status": "skip",
+      "skip_category": null,
+      "branch_state": "none",
+      "disposition": "verify-first",
+      "conflict": false,
+      "conflict_note": null,
+      "citations": {
+        "skip": "queue-current.json key SOLR-13698",
+        "branch": "solr-13698-draft-open",
+        "audit_draft_branch": "solr-13698-draft-open"
+      },
+      "owner_excluded": "not-checked",
+      "issue_type": "Bug",
+      "priority": "Major",
+      "family_eligible": []
+    }
+  ]
+}
