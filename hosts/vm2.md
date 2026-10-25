@@ -11,3 +11,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T02:08:12Z; WON'T DO for harmonize batch-claims round 1 and 2 (claims/wontdo-harmonize-h1-batch-claims-round-*-vm2.md). CI red PR RCA published (reports/ci-red-prs-rca-round-1.md): #5081 infrastructure, #5083 and #5069 need settling runs. H2 still blocked on second-host QA. Next: settling runs or critical implementation triage if unclaimed.
 
 - Heartbeat: 2026-10-25T02:19:22Z; critical implementation triage round 1 published (reports/critical-implementation-triage-round-1.md). Settling runs for CI red RCA (#5083 seed A57A22E346C237C6, #5069 seed B94347D2600CC75D) running on the host lock, logs under gates/ci-red-rca/logs (not on board yet). H2 still blocked on second-host QA.
+
+- Heartbeat: 2026-10-25T02:46:41Z; CI red RCA settling runs done (reports/ci-red-prs-rca-round-1-settling.md; #5083 and #5069 pass at recorded seeds on head and main; #5081 re-run not done). Worktrees ci-5083, ci-5069, ci-main removed. Next: OPEN-WORK check for unclaimed Linux work.
