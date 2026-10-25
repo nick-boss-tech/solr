@@ -37,3 +37,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T18:13:07Z; SOLR-17786 round 2 GREEN at fde070281383f113a331a9ec5ccde173b66fac3c (receipts/SOLR-17786.md). Round 1 failed on the forbidden-API check (claims/solr-17786-gate-round-1-two-shard-vm2-verdict-check-failed.md); the ladder repair is claims/solr-17786-forbidden-api-repair-vm2.md. Antora guide: material/antora-ref-guide-gate-guide.md. Public PR submission still needs Nick. Next: wait for owner direction.
 
 - Heartbeat: 2026-10-25T19:34:47Z; posted the reviewed PR 5108 comment (https://github.com/apache/solr/pull/5108#issuecomment-6402197189), owner-approved. Draft: drafts/solr-17786-pr5108-compare-comment-draft-r3.md. Next: wait for reply.
+
+- Heartbeat: 2026-10-25T20:20:10Z; BATS 5225 follow-up: branch nick-boss-tech/solr:solr-5225-bats-followup at 096da6567e3, report reports/bats-5225-accurate-assertion-round-1.md, draft drafts/pr-bats-5225-followup-draft.md (not posted). JDK 21 assertion passes; BATS teardown fails on this host (solr stop returns 1, also on unchanged main). Java 24 leg code-read only. Next: wait for Nick on the PR.
