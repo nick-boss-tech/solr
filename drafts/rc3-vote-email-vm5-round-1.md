@@ -2,7 +2,7 @@ Subject: Re: [VOTE] Release Solr 10.1.0 RC3
 
 Hi all,
 
-I ran the RC3 smoke tester in a loop on one machine (aarch64, 4 CPUs, JDK 21.0.12.1), from the artifacts at rev 749712b71940. Five runs finished and all five failed the build. None passed. Two runs were cut short, one by a host reboot and one by me, so I am not counting them.
+I ran the RC3 smoke tester in a loop on one machine (aarch64, 4 CPUs, JDK 21.0.12.1), from the artifacts at rev 749712b71940. Five runs finished and all five failed the build. None passed. Two runs were cut short, one by a host reboot and one stopped on request, so I am not counting them.
 
 Several failures repeat across all five runs and across different random seeds:
 
