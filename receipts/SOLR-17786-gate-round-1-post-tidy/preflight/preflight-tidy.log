@@ -1,0 +1,142 @@
+Downloading gradle-wrapper.jar from https://raw.githubusercontent.com/gradle/gradle/v8.10.2/gradle/wrapper/gradle-wrapper.jar
+Generating gradle.properties
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Task :build-infra:compileJava
+Note: /workspace/tmp/preflight.5j4CEu/build-tools/build-infra/src/main/java/org/apache/lucene/gradle/Checksum.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :build-infra:pluginDescriptors
+> Task :build-infra:processResources
+> Task :build-infra:classes
+> Task :build-infra:jar
+> Task :build-infra:checkJdkInternalsExportedToGradle UP-TO-DATE
+> Task :missing-doclet:checkJdkInternalsExportedToGradle UP-TO-DATE
+> Task :platform:tidy UP-TO-DATE
+> Task :solr:tidy UP-TO-DATE
+> Task :missing-doclet:spotlessJava
+> Task :missing-doclet:spotlessJavaApply
+> Task :missing-doclet:spotlessApply
+> Task :missing-doclet:tidy
+> Task :versionCatalogFormat
+> Task :checkJdkInternalsExportedToGradle
+> Task :build-infra:spotlessJava
+> Task :build-infra:spotlessJavaApply
+> Task :build-infra:spotlessApply
+> Task :build-infra:tidy
+> Task :solr:cross-dc-manager:spotlessJava
+> Task :tidy
+> Task :solr:cross-dc-manager:spotlessJavaApply
+> Task :solr:cross-dc-manager:spotlessApply
+> Task :solr:cross-dc-manager:tidy
+> Task :solr:distribution:tidy UP-TO-DATE
+> Task :solr:docker:tidy UP-TO-DATE
+> Task :solr:documentation:tidy UP-TO-DATE
+> Task :solr:example:tidy UP-TO-DATE
+> Task :solr:modules:tidy UP-TO-DATE
+> Task :solr:packaging:tidy UP-TO-DATE
+> Task :solr:server:spotlessJava
+> Task :solr:server:spotlessJavaApply
+> Task :solr:server:spotlessApply
+> Task :solr:server:tidy
+> Task :solr:benchmark:spotlessJava
+> Task :solr:benchmark:spotlessJavaApply
+> Task :solr:benchmark:spotlessApply
+> Task :solr:benchmark:tidy
+> Task :solr:solr-ref-guide:spotlessJava
+> Task :solr:solr-ref-guide:spotlessJavaApply
+> Task :solr:solr-ref-guide:spotlessApply
+> Task :solr:solr-ref-guide:tidy
+> Task :solr:api:spotlessJava
+> Task :solr:api:spotlessJavaApply
+> Task :solr:api:spotlessApply
+> Task :solr:api:tidy
+> Task :solr:solrj-jetty:spotlessJava
+> Task :solr:solrj-jetty:spotlessJavaApply
+> Task :solr:solrj-jetty:spotlessApply
+> Task :solr:solrj-jetty:tidy
+> Task :solr:solrj-zookeeper:spotlessJava
+> Task :solr:solrj-zookeeper:spotlessJavaApply
+> Task :solr:solrj-zookeeper:spotlessApply
+> Task :solr:solrj-zookeeper:tidy
+> Task :solr:test-framework:spotlessJava
+> Task :solr:test-framework:spotlessJavaApply
+> Task :solr:test-framework:spotlessApply
+> Task :solr:test-framework:tidy
+> Task :solr:webapp:spotlessJava
+> Task :solr:webapp:spotlessJavaApply
+> Task :solr:webapp:spotlessApply
+> Task :solr:webapp:tidy
+> Task :solr:modules:analysis-extras:spotlessJava
+> Task :solr:modules:analysis-extras:spotlessJavaApply
+> Task :solr:modules:analysis-extras:spotlessApply
+> Task :solr:modules:analysis-extras:tidy
+> Task :solr:modules:clustering:spotlessJava
+> Task :solr:modules:clustering:spotlessJavaApply
+> Task :solr:modules:clustering:spotlessApply
+> Task :solr:modules:clustering:tidy
+> Task :solr:modules:cross-dc:spotlessJava
+> Task :solr:modules:cross-dc:spotlessJavaApply
+> Task :solr:modules:cross-dc:spotlessApply
+> Task :solr:modules:cross-dc:tidy
+> Task :solr:modules:cuvs:spotlessJava
+> Task :solr:modules:cuvs:spotlessJavaApply
+> Task :solr:modules:cuvs:spotlessApply
+> Task :solr:modules:cuvs:tidy
+> Task :solr:modules:extraction:spotlessJava
+> Task :solr:modules:extraction:spotlessJavaApply
+> Task :solr:modules:extraction:spotlessApply
+> Task :solr:modules:extraction:tidy
+> Task :solr:modules:gcs-repository:spotlessJava
+> Task :solr:modules:gcs-repository:spotlessJavaApply
+> Task :solr:modules:gcs-repository:spotlessApply
+> Task :solr:modules:gcs-repository:tidy
+> Task :solr:modules:jwt-auth:spotlessJava
+> Task :solr:modules:jwt-auth:spotlessJavaApply
+> Task :solr:modules:jwt-auth:spotlessApply
+> Task :solr:modules:jwt-auth:tidy
+> Task :solr:modules:langid:spotlessJava
+> Task :solr:modules:langid:spotlessJavaApply
+> Task :solr:modules:langid:spotlessApply
+> Task :solr:modules:langid:tidy
+> Task :solr:modules:language-models:spotlessJava
+> Task :solr:modules:language-models:spotlessJavaApply
+> Task :solr:modules:language-models:spotlessApply
+> Task :solr:modules:language-models:tidy
+> Task :solr:solrj:spotlessJava
+> Task :solr:solrj:spotlessJavaApply
+> Task :solr:solrj:spotlessApply
+> Task :solr:solrj:tidy
+> Task :solr:solrj-streaming:spotlessJava
+> Task :solr:solrj-streaming:spotlessJavaApply
+> Task :solr:solrj-streaming:spotlessApply
+> Task :solr:solrj-streaming:tidy
+> Task :solr:modules:opentelemetry:spotlessJava
+> Task :solr:modules:opentelemetry:spotlessJavaApply
+> Task :solr:modules:opentelemetry:spotlessApply
+> Task :solr:modules:opentelemetry:tidy
+> Task :solr:modules:scripting:spotlessJava
+> Task :solr:modules:scripting:spotlessJavaApply
+> Task :solr:modules:scripting:spotlessApply
+> Task :solr:modules:scripting:tidy
+> Task :solr:modules:s3-repository:spotlessJava
+> Task :solr:modules:s3-repository:spotlessJavaApply
+> Task :solr:modules:s3-repository:spotlessApply
+> Task :solr:modules:s3-repository:tidy
+> Task :solr:webapp:js-client:tidy UP-TO-DATE
+> Task :solr:modules:ltr:spotlessJava
+> Task :solr:modules:ltr:spotlessJavaApply
+> Task :solr:modules:ltr:spotlessApply
+> Task :solr:modules:ltr:tidy
+> Task :solr:modules:sql:spotlessJava
+> Task :solr:modules:sql:spotlessJavaApply
+> Task :solr:modules:sql:spotlessApply
+> Task :solr:modules:sql:tidy
+> Task :solr:core:spotlessJava
+> Task :solr:core:spotlessJavaApply
+> Task :solr:core:spotlessApply
+> Task :solr:core:tidy
+
+BUILD SUCCESSFUL in 59s
+62 actionable tasks: 62 executed
