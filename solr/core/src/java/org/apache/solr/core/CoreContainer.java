@@ -2093,7 +2093,8 @@ public class CoreContainer {
     if (name != null) {
       // check for core-init errors first
       CoreLoadFailure loadFailure = coreInitFailures.remove(name);
-      if (loadFailure != null) {
+      // A failed reload can leave the previous core loaded.
+      if (loadFailure != null && !solrCores.isLoaded(name)) {
         // getting the index directory requires opening a DirectoryFactory with a SolrConfig, etc.,
         // which we may not be able to do because of the init error.  So we just go with what we
         // can glean from the CoreDescriptor - datadir and instancedir
