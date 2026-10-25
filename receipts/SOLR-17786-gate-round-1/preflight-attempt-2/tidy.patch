@@ -1,0 +1,210 @@
+diff --git a/solr/core/src/java/org/apache/solr/search/CursorMark.java b/solr/core/src/java/org/apache/solr/search/CursorMark.java
+index bd7f657..e7d5ed3 100644
+--- a/solr/core/src/java/org/apache/solr/search/CursorMark.java
++++ b/solr/core/src/java/org/apache/solr/search/CursorMark.java
+@@ -140,7 +140,8 @@ public final class CursorMark {
+   }
+ 
+   /**
+-   * Generates a reverse cursor using the first document's values and the original sort specification.
++   * Generates a reverse cursor using the first document's values and the original sort
++   * specification.
+    */
+   public CursorMark createPrevious(List<Object> firstSortValues) {
+     final CursorMark next = new CursorMark(this, true);
+@@ -235,7 +236,8 @@ public final class CursorMark {
+           isReverse = (Boolean) direction;
+           pieces = (List<Object>) cursorMap.get("values");
+         } else {
+-          throw new IllegalArgumentException("Cursor must decode to a values list or direction map");
++          throw new IllegalArgumentException(
++              "Cursor must decode to a values list or direction map");
+         }
+         // Preserve the existing codec round-trip handling for string and binary sort values.
+         for (Object piece : pieces) {
+diff --git a/solr/core/src/test/org/apache/solr/CursorPagingTest.java b/solr/core/src/test/org/apache/solr/CursorPagingTest.java
+index e784496..ff734a4 100644
+--- a/solr/core/src/test/org/apache/solr/CursorPagingTest.java
++++ b/solr/core/src/test/org/apache/solr/CursorPagingTest.java
+@@ -110,33 +110,49 @@ public class CursorPagingTest extends SolrTestCaseJ4 {
+         String query = sort.startsWith("score") ? "{!func}sum(int_dv,1)" : "*:*";
+         Map<?, ?> all =
+             (Map<?, ?>)
+-                fromJSONString(
+-                    assertJQ(req("q", query, "sort", sort, "rows", "20", "fl", "id")));
++                fromJSONString(assertJQ(req("q", query, "sort", sort, "rows", "20", "fl", "id")));
+         List<String> expected = reversePageIds(all);
+         Map<?, ?> first =
+             reversePage(sort, 3, CURSOR_MARK_START, multiThreaded, expected.subList(0, 3));
+         Map<?, ?> second =
+             reversePage(
+-                sort, 3, (String) first.get(CURSOR_MARK_NEXT), multiThreaded, expected.subList(3, 6));
++                sort,
++                3,
++                (String) first.get(CURSOR_MARK_NEXT),
++                multiThreaded,
++                expected.subList(3, 6));
+         Map<?, ?> last =
+             reversePage(
+-                sort, 3, (String) second.get(CURSOR_MARK_NEXT), multiThreaded, expected.subList(6, 8));
++                sort,
++                3,
++                (String) second.get(CURSOR_MARK_NEXT),
++                multiThreaded,
++                expected.subList(6, 8));
+         Map<?, ?> back =
+             reversePage(
+-                sort, 3, (String) last.get(CURSOR_MARK_PREVIOUS), multiThreaded, expected.subList(3, 6));
++                sort,
++                3,
++                (String) last.get(CURSOR_MARK_PREVIOUS),
++                multiThreaded,
++                expected.subList(3, 6));
+         assertEquals(second.get(CURSOR_MARK_NEXT), back.get(CURSOR_MARK_NEXT));
+         assertEquals(second.get(CURSOR_MARK_PREVIOUS), back.get(CURSOR_MARK_PREVIOUS));
+         reversePage(
+             sort, 3, (String) back.get(CURSOR_MARK_NEXT), multiThreaded, expected.subList(6, 8));
+         reversePage(
+-            sort, 3, (String) back.get(CURSOR_MARK_PREVIOUS), multiThreaded, expected.subList(0, 3));
++            sort,
++            3,
++            (String) back.get(CURSOR_MARK_PREVIOUS),
++            multiThreaded,
++            expected.subList(0, 3));
+         reversePage(sort, 3, CURSOR_MARK_END, multiThreaded, expected.subList(5, 8));
+         Map<?, ?> pastEnd =
+             reversePage(sort, 3, (String) last.get(CURSOR_MARK_NEXT), multiThreaded, List.of());
+         assertEquals(last.get(CURSOR_MARK_NEXT), pastEnd.get(CURSOR_MARK_NEXT));
+         assertEquals(CURSOR_MARK_END, pastEnd.get(CURSOR_MARK_PREVIOUS));
+         Map<?, ?> beforeStart =
+-            reversePage(sort, 3, (String) first.get(CURSOR_MARK_PREVIOUS), multiThreaded, List.of());
++            reversePage(
++                sort, 3, (String) first.get(CURSOR_MARK_PREVIOUS), multiThreaded, List.of());
+         assertEquals(first.get(CURSOR_MARK_PREVIOUS), beforeStart.get(CURSOR_MARK_PREVIOUS));
+         assertEquals(CURSOR_MARK_START, beforeStart.get(CURSOR_MARK_NEXT));
+         for (String key : List.of(CURSOR_MARK_NEXT, CURSOR_MARK_PREVIOUS)) {
+@@ -156,12 +172,18 @@ public class CursorPagingTest extends SolrTestCaseJ4 {
+             fromJSONString(
+                 assertJQ(
+                     req(
+-                        "q", sort.startsWith("score") ? "{!func}sum(int_dv,1)" : "*:*",
+-                        "sort", sort,
+-                        "rows", Integer.toString(rows),
+-                        "fl", "id",
+-                        "multiThreaded", Boolean.toString(multiThreaded),
+-                        CURSOR_MARK_PARAM, cursor)));
++                        "q",
++                        sort.startsWith("score") ? "{!func}sum(int_dv,1)" : "*:*",
++                        "sort",
++                        sort,
++                        "rows",
++                        Integer.toString(rows),
++                        "fl",
++                        "id",
++                        "multiThreaded",
++                        Boolean.toString(multiThreaded),
++                        CURSOR_MARK_PARAM,
++                        cursor)));
+     assertNotNull(page.get(CURSOR_MARK_NEXT));
+     assertNotNull(page.get(CURSOR_MARK_PREVIOUS));
+     assertEquals(sort + " cursor=" + cursor, expected, reversePageIds(page));
+diff --git a/solr/core/src/test/org/apache/solr/cloud/DistribCursorPagingTest.java b/solr/core/src/test/org/apache/solr/cloud/DistribCursorPagingTest.java
+index 986c805..d788813 100644
+--- a/solr/core/src/test/org/apache/solr/cloud/DistribCursorPagingTest.java
++++ b/solr/core/src/test/org/apache/solr/cloud/DistribCursorPagingTest.java
+@@ -121,15 +121,23 @@ public class DistribCursorPagingTest extends AbstractFullDistribZkTestBase {
+         for (boolean multiThreaded : new boolean[] {false, true}) {
+           SolrParams base =
+               params(
+-                  "q", query,
+-                  "sort", sort,
+-                  "rows", "3",
+-                  "fl", "id",
+-                  "distrib.singlePass", Boolean.toString(singlePass),
+-                  "multiThreaded", Boolean.toString(multiThreaded));
++                  "q",
++                  query,
++                  "sort",
++                  sort,
++                  "rows",
++                  "3",
++                  "fl",
++                  "id",
++                  "distrib.singlePass",
++                  Boolean.toString(singlePass),
++                  "multiThreaded",
++                  Boolean.toString(multiThreaded));
+           QueryResponse first = reversePage(base, CURSOR_MARK_START, expected.subList(0, 3));
+-          QueryResponse second = reversePage(base, first.getNextCursorMark(), expected.subList(3, 6));
+-          QueryResponse last = reversePage(base, second.getNextCursorMark(), expected.subList(6, 8));
++          QueryResponse second =
++              reversePage(base, first.getNextCursorMark(), expected.subList(3, 6));
++          QueryResponse last =
++              reversePage(base, second.getNextCursorMark(), expected.subList(6, 8));
+           QueryResponse back = reversePage(base, previousCursor(last), expected.subList(3, 6));
+           assertEquals(second.getNextCursorMark(), back.getNextCursorMark());
+           assertEquals(previousCursor(second), previousCursor(back));
+@@ -144,11 +152,16 @@ public class DistribCursorPagingTest extends AbstractFullDistribZkTestBase {
+           assertEquals(CURSOR_MARK_START, beforeStart.getNextCursorMark());
+           SolrParams zeroRows =
+               params(
+-                  "q", query,
+-                  "sort", sort,
+-                  "rows", "0",
+-                  "distrib.singlePass", Boolean.toString(singlePass),
+-                  "multiThreaded", Boolean.toString(multiThreaded));
++                  "q",
++                  query,
++                  "sort",
++                  sort,
++                  "rows",
++                  "0",
++                  "distrib.singlePass",
++                  Boolean.toString(singlePass),
++                  "multiThreaded",
++                  Boolean.toString(multiThreaded));
+           QueryResponse zeroForward = reversePage(zeroRows, second.getNextCursorMark(), List.of());
+           assertEquals(second.getNextCursorMark(), zeroForward.getNextCursorMark());
+           QueryResponse zeroReverse = reversePage(zeroRows, previousCursor(second), List.of());
+diff --git a/solr/core/src/test/org/apache/solr/search/CursorMarkTest.java b/solr/core/src/test/org/apache/solr/search/CursorMarkTest.java
+index 05ead63..60cec25 100644
+--- a/solr/core/src/test/org/apache/solr/search/CursorMarkTest.java
++++ b/solr/core/src/test/org/apache/solr/search/CursorMarkTest.java
+@@ -101,7 +101,8 @@ public class CursorMarkTest extends SolrTestCaseJ4 {
+       CursorMark forward = initial.createNext(List.of(id));
+       try (JavaBinCodec codec = new JavaBinCodec()) {
+         assertTrue(
+-            codec.unmarshal(Base64.getDecoder().decode(forward.getSerializedTotem())) instanceof List);
++            codec.unmarshal(Base64.getDecoder().decode(forward.getSerializedTotem()))
++                instanceof List);
+       }
+       CursorMark reverse = initial.createPrevious(List.of(id));
+       CursorMark parsed = new CursorMark(request.getSchema(), sort);
+@@ -126,7 +127,8 @@ public class CursorMarkTest extends SolrTestCaseJ4 {
+           codec.marshal(invalid, output);
+           String token = Base64.getEncoder().encodeToString(output.toByteArray());
+           assertEquals(
+-              400, expectThrows(SolrException.class, () -> parsed.parseSerializedTotem(token)).code());
++              400,
++              expectThrows(SolrException.class, () -> parsed.parseSerializedTotem(token)).code());
+         }
+       }
+     }
+diff --git a/solr/solrj/src/java/org/apache/solr/common/params/CursorMarkParams.java b/solr/solrj/src/java/org/apache/solr/common/params/CursorMarkParams.java
+index 5b06237..e4cd73b 100644
+--- a/solr/solrj/src/java/org/apache/solr/common/params/CursorMarkParams.java
++++ b/solr/solrj/src/java/org/apache/solr/common/params/CursorMarkParams.java
+@@ -23,9 +23,10 @@ package org.apache.solr.common.params;
+ public interface CursorMarkParams {
+ 
+   /**
+-   * Param clients should specify indicating that they want a cursor based search. The value must
+-   * be {@link #CURSOR_MARK_START} for the beginning, {@link #CURSOR_MARK_END} for the end, or a cursor
+-   * returned through {@link #CURSOR_MARK_NEXT} or {@link #CURSOR_MARK_PREVIOUS} by an earlier search.
++   * Param clients should specify indicating that they want a cursor based search. The value must be
++   * {@link #CURSOR_MARK_START} for the beginning, {@link #CURSOR_MARK_END} for the end, or a cursor
++   * returned through {@link #CURSOR_MARK_NEXT} or {@link #CURSOR_MARK_PREVIOUS} by an earlier
++   * search.
+    */
+   String CURSOR_MARK_PARAM = "cursorMark";
+ 
