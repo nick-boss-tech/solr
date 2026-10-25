@@ -17,3 +17,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T02:50:13Z; CI red RCA settling done (reports/ci-red-prs-rca-round-1-settling.md; worktrees removed). Critical comments batch 02 done (reports/critical-comments-round-1-batch-02.md, ten drafts, not posted). Next: batch 03 if unclaimed.
 
 - Heartbeat: 2026-10-25T02:51:40Z; critical comments batch 03 done (reports/critical-comments-round-1-batch-03.md, eight drafts, two no-draft reasons). Next: batch 04 if unclaimed.
+
+- Heartbeat: 2026-10-25T02:55:58Z; critical comments batch 04 done (reports/critical-comments-round-1-batch-04.md, nine drafts, one no-draft reason). Next: batch 05 if unclaimed.
