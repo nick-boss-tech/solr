@@ -215,7 +215,10 @@ public class SSLTool extends ToolBase {
         throw new IllegalArgumentException("Keystore destinations must differ from input files.");
       }
     }
-    String password = readPassword(params.passwordFile());
+    IncludeFileEditor.checkWritable(include, null);
+    IncludeFileEditor.checkWritable(target, include);
+    IncludeFileEditor.checkWritable(trustTarget, include);
+    String password = readPassword(params.passwordFile(), 6);
     char[] secret = password.toCharArray();
     Path temporary = Files.createTempDirectory("solr-ssl-");
     try {
@@ -242,7 +245,7 @@ public class SSLTool extends ToolBase {
           .environment()
           .put(
               "SOLR_SSL_PEM_PASSWORD",
-              params.keyPasswordFile() == null ? "" : readPassword(params.keyPasswordFile()));
+              params.keyPasswordFile() == null ? "" : readPassword(params.keyPasswordFile(), 1));
       builder.redirectErrorStream(true).redirectOutput(temporary.resolve("openssl.log").toFile());
       Process process = builder.start();
       process.getOutputStream().close();
@@ -297,16 +300,16 @@ public class SSLTool extends ToolBase {
           IncludeFileEditor.update(
                   original, settings, settings.keySet(), IncludeFileEditor.Format.SHELL)
               .getBytes(StandardCharsets.UTF_8));
-      Map<Path, byte[]> previous = new LinkedHashMap<>();
+      Map<Path, IncludeFileEditor.Snapshot> previous = new LinkedHashMap<>();
       for (Path file : files.keySet()) {
-        previous.put(file, Files.exists(file) ? Files.readAllBytes(file) : null);
+        previous.put(file, IncludeFileEditor.snapshot(file));
         if (Files.exists(file)) {
           echo("Backup: " + IncludeFileEditor.backup(file));
         }
       }
       try {
         for (var file : files.entrySet()) {
-          IncludeFileEditor.writePrivate(file.getKey(), file.getValue());
+          IncludeFileEditor.writePrivate(file.getKey(), file.getValue(), include);
         }
         if (params.zkHost() != null) {
           int slash = params.zkHost().indexOf('/');
@@ -336,8 +339,7 @@ public class SSLTool extends ToolBase {
       } catch (Exception failure) {
         for (var file : previous.entrySet()) {
           try {
-            if (file.getValue() == null) Files.deleteIfExists(file.getKey());
-            else IncludeFileEditor.writePrivate(file.getKey(), file.getValue());
+            IncludeFileEditor.restore(file.getKey(), file.getValue());
           } catch (Exception rollback) {
             failure.addSuppressed(rollback);
           }
@@ -359,14 +361,14 @@ public class SSLTool extends ToolBase {
     }
   }
 
-  private static String readPassword(Path path) throws Exception {
+  private static String readPassword(Path path, int minimumLength) throws Exception {
     String value = Files.readString(path).replaceFirst("\\r?\\n$", "");
-    if (value.length() < 6
+    if (value.length() < minimumLength
         || value.indexOf('\n') >= 0
         || value.indexOf('\r') >= 0
         || value.indexOf('\0') >= 0) {
       throw new IllegalArgumentException(
-          "Password files must contain one line of at least six characters.");
+          "Password files must contain one line of at least " + minimumLength + " characters.");
     }
     return value;
   }

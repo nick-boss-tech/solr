@@ -20,6 +20,8 @@ package org.apache.solr.cli;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermissions;
 import org.apache.commons.io.file.PathUtils;
 import org.apache.lucene.util.Constants;
 import org.apache.solr.cloud.SolrCloudTestCase;
@@ -70,6 +72,10 @@ public class AuthToolTest extends SolrCloudTestCase {
     Path solrIncludeFile = Files.createFile(dir.resolve("solrIncludeFile.txt"));
     String sslSetting = Constants.WINDOWS ? "set SOLR_SSL_ENABLED=true" : "SOLR_SSL_ENABLED=true";
     Files.writeString(solrIncludeFile, sslSetting + "\n");
+    boolean posix = solrIncludeFile.getFileSystem().supportedFileAttributeViews().contains("posix");
+    if (posix) {
+      Files.setPosixFilePermissions(solrIncludeFile, PosixFilePermissions.fromString("rw-r-----"));
+    }
     String[] args = {
       "auth",
       "enable",
@@ -94,6 +100,15 @@ public class AuthToolTest extends SolrCloudTestCase {
     assertEquals(
         "httpBasicAuthUser=solr\nhttpBasicAuthPassword=solrRocks",
         Files.readString(dir.resolve("basicAuth.conf")));
+    if (posix) {
+      var includeAccess = Files.readAttributes(solrIncludeFile, PosixFileAttributes.class);
+      var credentialsAccess =
+          Files.readAttributes(dir.resolve("basicAuth.conf"), PosixFileAttributes.class);
+      assertEquals(includeAccess.owner(), credentialsAccess.owner());
+      assertEquals(includeAccess.group(), credentialsAccess.group());
+      assertEquals(PosixFilePermissions.fromString("rw-r-----"), includeAccess.permissions());
+      assertEquals(includeAccess.permissions(), credentialsAccess.permissions());
+    }
     String[] disable = {
       "auth",
       "disable",
@@ -106,6 +121,11 @@ public class AuthToolTest extends SolrCloudTestCase {
     };
     assertEquals(0, runTool(disable, AuthTool.class));
     String disabled = Files.readString(solrIncludeFile);
+    if (posix) {
+      assertEquals(
+          PosixFilePermissions.fromString("rw-r-----"),
+          Files.getPosixFilePermissions(solrIncludeFile));
+    }
     assertTrue(disabled.contains(sslSetting));
     assertTrue(
         disabled.contains(
@@ -114,6 +134,47 @@ public class AuthToolTest extends SolrCloudTestCase {
         "{}",
         new String(
             cluster.getZkClient().getData("/security.json", null, null), StandardCharsets.UTF_8));
+  }
+
+  @Test
+  public void testDirectoryFailurePrecedesSecurityChanges() throws Exception {
+    assumeTrue(
+        "Requires POSIX filesystem",
+        dir.getFileSystem().supportedFileAttributeViews().contains("posix"));
+    Path parent = Files.createDirectory(dir.resolve("include"));
+    Path include = Files.writeString(parent.resolve("solr.in.sh"), "# original\n");
+    var permissions = Files.getPosixFilePermissions(parent);
+    try {
+      Files.setPosixFilePermissions(parent, PosixFilePermissions.fromString("r-xr-xr-x"));
+      assumeFalse("Requires an unprivileged gate user", Files.isWritable(parent));
+      for (String command : new String[] {"enable", "disable"}) {
+        String security = command.equals("enable") ? "{}" : "{\"authentication\":{}}";
+        cluster
+            .getZkClient()
+            .makePath("/security.json", security.getBytes(StandardCharsets.UTF_8), false);
+        String[] args = {
+          "auth",
+          command,
+          "-z",
+          cluster.getZkClient().getZkServerAddress(),
+          "--auth-conf-dir",
+          dir.toString(),
+          "--solr-include-file",
+          include.toString(),
+          "--credentials",
+          "solr:solrRocks"
+        };
+        assertNotEquals(0, runTool(args, AuthTool.class));
+        assertEquals(
+            security,
+            new String(
+                cluster.getZkClient().getData("/security.json", null, null), StandardCharsets.UTF_8));
+        assertEquals("# original\n", Files.readString(include));
+        assertFalse(Files.exists(dir.resolve("basicAuth.conf")));
+      }
+    } finally {
+      Files.setPosixFilePermissions(parent, permissions);
+    }
   }
 
   @Test

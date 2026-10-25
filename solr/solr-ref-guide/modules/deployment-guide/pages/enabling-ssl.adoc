@@ -34,7 +34,7 @@ The certificate must cover the hostnames used by clients and other Solr nodes.
 For a certificate issued by Let's Encrypt, use `fullchain.pem` and `privkey.pem` from your ACME client.
 Obtaining and renewing certificates is a separate step.
 
-Save a keystore password of at least six characters in a file readable only by the user running Solr.
+Save a keystore password of at least six characters in a file readable only by the user running this command.
 The file must contain a single line; a final newline is optional.
 
 [source,bash]
@@ -54,15 +54,24 @@ Omit that option for a user-managed node.
 If you omit it for SolrCloud, set the property separately with `bin/solr cluster --property urlScheme --value https --zk-host <host:port>` before restarting Solr.
 
 The shell script supplies the include file selected by `SOLR_INCLUDE`.
-Use `--solr-include-file /path/to/solr.in.sh` to select another file, such as `/var/solr/solr.in.sh` for a service installation.
+Use `--solr-include-file /path/to/solr.in.sh` to select another file, such as `/etc/default/solr.in.sh` for a service installation.
 Use `--keystore /path/to/solr-ssl.jks` to select the destination; its parent directory must exist and its path must not contain whitespace.
 For PKCS12, supply `--store-type PKCS12`; the default destination then ends in `.p12`.
 For an encrypted PEM key, supply `--key-password-file /path/to/key-password.txt`.
+That file contains the existing key password, which may be shorter than the new keystore password.
 
 Existing destination files and the include file are backed up to unique `.bak` files alongside the originals.
-The tool prints the backup paths and restricts the keystore, truststore, include file, and backups to their owner's access (`0600`).
-The include file contains the keystore password, so run the tool as the Solr service user and protect the password file and backups.
-A failure to update ZooKeeper restores the local files; inspect the cluster property before retrying after a connection failure.
+The tool prints the backup paths and preserves existing POSIX owners and groups.
+Files that already exclude all access by other users retain their group read/write permissions; otherwise permissions become `0600`.
+New keystores and truststores inherit the include file's owner, group, and these restricted permissions.
+For example, an include file owned by `root:solr` with mode `0640` keeps that access and gives new stores the same access.
+Before running the command, ensure the include file and any existing stores have the private ownership and permissions required by your Solr service.
+Choose store directories that the service can traverse.
+The command must run as an account authorized to preserve that ownership and write both the files and their parent directories, including for backups and atomic replacement.
+For a standard root-owned service include file, this generally requires root.
+The include file contains the keystore password; protect it, the password input file, and backups accordingly.
+A failure to update ZooKeeper restores local file contents, owners, groups, and permissions, and removes newly created stores; inspect the cluster property before retrying after a connection failure.
+Extended POSIX ACLs and security labels are not preserved by the atomic replacement; installations using them must manage and verify those attributes separately.
 
 Restart Solr to use the new configuration.
 For SolrCloud, changing `urlScheme` affects every node: prepare certificates and configuration on every node and coordinate the switch to HTTPS across the cluster.

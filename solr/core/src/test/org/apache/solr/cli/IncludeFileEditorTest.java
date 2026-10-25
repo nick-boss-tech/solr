@@ -17,8 +17,11 @@
 
 package org.apache.solr.cli;
 
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.PosixFileAttributeView;
+import java.nio.file.attribute.PosixFileAttributes;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -132,6 +135,98 @@ public class IncludeFileEditorTest extends SolrTestCase {
       assertEquals(
           PosixFilePermissions.fromString("rw-------"), Files.getPosixFilePermissions(backup));
     }
+  }
+
+  @Test
+  public void testPrivateServiceGroupAndNewFiles() throws Exception {
+    Path dir = createTempDir();
+    assumeTrue(
+        "Requires POSIX filesystem",
+        dir.getFileSystem().supportedFileAttributeViews().contains("posix"));
+    Path include = dir.resolve("solr.in.sh");
+    Files.writeString(include, "original");
+    Files.setPosixFilePermissions(include, PosixFilePermissions.fromString("rw-r-----"));
+    var access = Files.readAttributes(include, PosixFileAttributes.class);
+    Path backup = IncludeFileEditor.save(include, "updated");
+    Path credentials = dir.resolve("basicAuth.conf");
+    IncludeFileEditor.writePrivate(credentials, "secret".getBytes(StandardCharsets.UTF_8), include);
+    for (Path file : new Path[] {include, backup, credentials}) {
+      var actual = Files.readAttributes(file, PosixFileAttributes.class);
+      assertEquals(access.owner(), actual.owner());
+      assertEquals(access.group(), actual.group());
+      assertEquals(access.permissions(), actual.permissions());
+    }
+  }
+
+  @Test
+  public void testPublicReferenceDoesNotShareNewSecrets() throws Exception {
+    Path dir = createTempDir();
+    assumeTrue(
+        "Requires POSIX filesystem",
+        dir.getFileSystem().supportedFileAttributeViews().contains("posix"));
+    Path include = dir.resolve("solr.in.sh");
+    Files.writeString(include, "original");
+    Files.setPosixFilePermissions(include, PosixFilePermissions.fromString("rw-r--r--"));
+    Path credentials = dir.resolve("basicAuth.conf");
+    IncludeFileEditor.writePrivate(credentials, new byte[] {1}, include);
+    assertEquals(
+        PosixFilePermissions.fromString("rw-------"), Files.getPosixFilePermissions(credentials));
+  }
+
+  @Test
+  public void testRollbackRestoresOriginalAccess() throws Exception {
+    Path dir = createTempDir();
+    assumeTrue(
+        "Requires POSIX filesystem",
+        dir.getFileSystem().supportedFileAttributeViews().contains("posix"));
+    Path include = dir.resolve("solr.in.sh");
+    Files.writeString(include, "original");
+    Files.setPosixFilePermissions(include, PosixFilePermissions.fromString("rw-r--r--"));
+    var access = Files.readAttributes(include, PosixFileAttributes.class);
+    var snapshot = IncludeFileEditor.snapshot(include);
+    IncludeFileEditor.save(include, "updated");
+    assertEquals(
+        PosixFilePermissions.fromString("rw-------"), Files.getPosixFilePermissions(include));
+    IncludeFileEditor.restore(include, snapshot);
+    assertEquals("original", Files.readString(include));
+    var restored = Files.readAttributes(include, PosixFileAttributes.class);
+    assertEquals(access.owner(), restored.owner());
+    assertEquals(access.group(), restored.group());
+    assertEquals(access.permissions(), restored.permissions());
+    Path created = dir.resolve("new-store");
+    var absent = IncludeFileEditor.snapshot(created);
+    IncludeFileEditor.writePrivate(created, new byte[] {1});
+    IncludeFileEditor.restore(created, absent);
+    assertFalse(Files.exists(created));
+  }
+
+  @Test
+  public void testDifferentOwnerIsPreserved() throws Exception {
+    Path dir = createTempDir();
+    assumeTrue(
+        "Requires POSIX filesystem",
+        dir.getFileSystem().supportedFileAttributeViews().contains("posix"));
+    Path include = dir.resolve("solr.in.sh");
+    Files.writeString(include, "original");
+    var invokingOwner = Files.getOwner(include);
+    assumeTrue(
+        "Run as root in a disposable Linux gate container", invokingOwner.getName().equals("root"));
+    var lookup = dir.getFileSystem().getUserPrincipalLookupService();
+    var serviceOwner = lookup.lookupPrincipalByName("nobody");
+    var serviceGroup = lookup.lookupPrincipalByGroupName("nogroup");
+    Files.setOwner(include, serviceOwner);
+    Files.getFileAttributeView(include, PosixFileAttributeView.class).setGroup(serviceGroup);
+    Files.setPosixFilePermissions(include, PosixFilePermissions.fromString("rw-r-----"));
+    assertNotEquals(invokingOwner, Files.getOwner(include));
+    Path backup = IncludeFileEditor.save(include, "updated");
+    assertEquals(serviceOwner, Files.getOwner(include));
+    assertEquals(serviceOwner, Files.getOwner(backup));
+    assertEquals(serviceGroup, Files.readAttributes(include, PosixFileAttributes.class).group());
+    assertEquals(serviceGroup, Files.readAttributes(backup, PosixFileAttributes.class).group());
+    assertEquals("updated", Files.readString(include));
+    assertEquals("original", Files.readString(backup));
+    assertEquals(
+        PosixFilePermissions.fromString("rw-r-----"), Files.getPosixFilePermissions(include));
   }
 
   @Test

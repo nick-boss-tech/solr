@@ -1,0 +1,10 @@
+title: >
+  Add PEM certificate installation and a secure Solr example, preserving private
+  service-file ownership and group access when updating SSL and authentication settings.
+type: added
+authors:
+  - name: Eric Pugh
+  - name: Nick Shanin
+links:
+  - name: SOLR-8442
+    url: https://issues.apache.org/jira/browse/SOLR-8442

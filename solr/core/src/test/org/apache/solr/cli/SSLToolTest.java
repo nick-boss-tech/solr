@@ -20,7 +20,10 @@ package org.apache.solr.cli;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.security.KeyStore;
+import java.util.LinkedHashMap;
 import java.util.concurrent.TimeUnit;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.cloud.ZkTestServer;
@@ -150,6 +153,78 @@ public class SSLToolTest extends SolrTestCase {
   }
 
   @Test
+  public void testShortKeystorePasswordLeavesConfigurationUntouched() throws Exception {
+    Path dir = prepare();
+    String original = Files.readString(dir.resolve("solr.in.sh"));
+    Files.writeString(dir.resolve("password.txt"), "tiny\n");
+    expectThrows(
+        IllegalArgumentException.class, () -> new SSLTool().configure(params(dir, "JKS", null)));
+    assertEquals(original, Files.readString(dir.resolve("solr.in.sh")));
+    assertFalse(Files.exists(dir.resolve("store")));
+    assertFalse(Files.exists(dir.resolve("store.truststore")));
+  }
+
+  @Test
+  public void testPrivateServiceGroupForNewStores() throws Exception {
+    Path dir = prepare();
+    Path include = dir.resolve("solr.in.sh");
+    Files.setPosixFilePermissions(include, PosixFilePermissions.fromString("rw-r-----"));
+    var access = Files.readAttributes(include, PosixFileAttributes.class);
+    new SSLTool().configure(params(dir, "JKS", null));
+    for (Path file : new Path[] {include, dir.resolve("store"), dir.resolve("store.truststore")}) {
+      var actual = Files.readAttributes(file, PosixFileAttributes.class);
+      assertEquals(access.owner(), actual.owner());
+      assertEquals(access.group(), actual.group());
+      assertEquals(access.permissions(), actual.permissions());
+    }
+  }
+
+  @Test
+  public void testShortExistingPemPassword() throws Exception {
+    Path dir = prepare();
+    ProcessBuilder builder =
+        new ProcessBuilder(
+            "openssl",
+            "pkey",
+            "-in",
+            dir.resolve("key.pem").toString(),
+            "-aes-256-cbc",
+            "-passout",
+            "env:SOLR_SSL_TEST_PEM_PASSWORD",
+            "-out",
+            dir.resolve("encrypted-key.pem").toString());
+    builder.environment().put("SOLR_SSL_TEST_PEM_PASSWORD", "tiny");
+    Process process =
+        builder
+            .redirectErrorStream(true)
+            .redirectOutput(dir.resolve("encrypt.log").toFile())
+            .start();
+    if (!process.waitFor(30, TimeUnit.SECONDS)) {
+      process.destroyForcibly().waitFor();
+      fail("Test key encryption timed out");
+    }
+    assertEquals(Files.readString(dir.resolve("encrypt.log")), 0, process.exitValue());
+    Files.writeString(dir.resolve("key-password.txt"), "tiny\n");
+    new SSLTool()
+        .configure(
+            new SSLTool.SSLParams(
+                dir.resolve("cert.pem"),
+                dir.resolve("encrypted-key.pem"),
+                dir.resolve("password.txt"),
+                dir.resolve("key-password.txt"),
+                dir.resolve("store"),
+                "JKS",
+                dir.resolve("solr.in.sh"),
+                null));
+    char[] password = "Test'$(false)Password".toCharArray();
+    KeyStore store = KeyStore.getInstance("JKS");
+    try (var input = Files.newInputStream(dir.resolve("store"))) {
+      store.load(input, password);
+    }
+    assertNotNull(store.getKey("solr-ssl", password));
+  }
+
+  @Test
   public void testClusterPropertyAndRollback() throws Exception {
     Path dir = prepare();
     ZkTestServer server = new ZkTestServer(createTempDir());
@@ -161,13 +236,37 @@ public class SSLToolTest extends SolrTestCase {
         var properties = new ClusterProperties(client).getClusterProperties();
         assertEquals("https", properties.get("urlScheme"));
       }
-      byte[] originalStore = Files.readAllBytes(dir.resolve("store"));
+      Files.setPosixFilePermissions(
+          dir.resolve("solr.in.sh"), PosixFilePermissions.fromString("rw-r--r--"));
+      Files.setPosixFilePermissions(
+          dir.resolve("store"), PosixFilePermissions.fromString("rw-r-----"));
+      var previous = new LinkedHashMap<Path, IncludeFileEditor.Snapshot>();
+      var access = new LinkedHashMap<Path, PosixFileAttributes>();
+      for (String name : new String[] {"store", "store.truststore", "solr.in.sh"}) {
+        Path file = dir.resolve(name);
+        previous.put(file, IncludeFileEditor.snapshot(file));
+        access.put(file, Files.readAttributes(file, PosixFileAttributes.class));
+      }
       String originalInclude = Files.readString(dir.resolve("solr.in.sh"));
       expectThrows(
           IllegalArgumentException.class,
           () -> new SSLTool().configure(params(dir, "JKS", server.getZkAddress() + "/missing")));
-      assertArrayEquals(originalStore, Files.readAllBytes(dir.resolve("store")));
+      for (var file : previous.entrySet()) {
+        assertArrayEquals(file.getValue().data(), Files.readAllBytes(file.getKey()));
+        var actual = Files.readAttributes(file.getKey(), PosixFileAttributes.class);
+        assertEquals(access.get(file.getKey()).owner(), actual.owner());
+        assertEquals(access.get(file.getKey()).group(), actual.group());
+        assertEquals(access.get(file.getKey()).permissions(), actual.permissions());
+      }
       assertEquals(originalInclude, Files.readString(dir.resolve("solr.in.sh")));
+      Path fresh = prepare();
+      String originalFresh = Files.readString(fresh.resolve("solr.in.sh"));
+      expectThrows(
+          IllegalArgumentException.class,
+          () -> new SSLTool().configure(params(fresh, "PKCS12", server.getZkAddress() + "/missing")));
+      assertFalse(Files.exists(fresh.resolve("store")));
+      assertFalse(Files.exists(fresh.resolve("store.truststore")));
+      assertEquals(originalFresh, Files.readString(fresh.resolve("solr.in.sh")));
     } finally {
       server.shutdown();
     }

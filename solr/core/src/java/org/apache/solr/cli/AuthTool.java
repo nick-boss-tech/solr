@@ -336,6 +336,15 @@ public class AuthTool extends ToolBase {
     ((ObjectNode) userRoleNode).set(username, rolesNode);
     String securityJson = securityJson1.toPrettyString();
 
+    Path includeFile = Path.of(params.solrIncludeFile());
+    Path basicAuthConfFile = Path.of(params.authConfDir(), "basicAuth.conf");
+    if (Files.exists(includeFile) && Files.isWritable(includeFile)) {
+      IncludeFileEditor.checkWritable(includeFile, null);
+      if (Files.isWritable(basicAuthConfFile.getParent())) {
+        IncludeFileEditor.checkWritable(basicAuthConfFile, includeFile);
+      }
+    }
+
     if (!params.updateIncludeFileOnly()) {
       echoIfVerbose("Uploading following security.json: " + securityJson);
       try (SolrZkClient zkClient = zkClient(zkHost)) {
@@ -343,15 +352,12 @@ public class AuthTool extends ToolBase {
       }
     }
 
-    Path includeFile = Path.of(params.solrIncludeFile());
     if (Files.notExists(includeFile) || !Files.isWritable(includeFile)) {
       CLIO.out(
           "Solr include file " + params.solrIncludeFile() + " doesn't exist or is not writeable.");
       printAuthEnablingInstructions(username, password);
       runtime.exit(0);
     }
-    Path basicAuthConfFile = Path.of(params.authConfDir(), "basicAuth.conf");
-
     if (!Files.isWritable(basicAuthConfFile.getParent())) {
       CLIO.out("Cannot write to file: " + basicAuthConfFile.toAbsolutePath());
       printAuthEnablingInstructions(username, password);
@@ -364,7 +370,8 @@ public class AuthTool extends ToolBase {
     IncludeFileEditor.writePrivate(
         basicAuthConfFile,
         ("httpBasicAuthUser=" + username + "\nhttpBasicAuthPassword=" + password)
-            .getBytes(StandardCharsets.UTF_8));
+            .getBytes(StandardCharsets.UTF_8),
+        includeFile);
 
     // update the solr.in.sh file to contain the necessary authentication lines
     updateIncludeFileEnableAuth(includeFile, basicAuthConfFile);
@@ -389,9 +396,12 @@ public class AuthTool extends ToolBase {
   }
 
   private void disableBasicAuth(AuthParams params) throws Exception {
+    Path includeFile = Path.of(params.solrIncludeFile());
+    if (Files.exists(includeFile) && Files.isWritable(includeFile)) {
+      IncludeFileEditor.checkWritable(includeFile, null);
+    }
     clearSecurityJson(params);
 
-    Path includeFile = Path.of(params.solrIncludeFile());
     if (Files.notExists(includeFile) || !Files.isWritable(includeFile)) {
       CLIO.out(
           "Solr include file " + params.solrIncludeFile() + " doesn't exist or is not writeable.");

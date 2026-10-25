@@ -701,6 +701,7 @@ public class RunExampleTool extends ToolBase {
             + ".");
   }
 
+  @SuppressWarnings("ReferenceEquality") // Console input requires the actual System.in stream.
   private String promptPassword(Scanner input, String message) {
     echo(message);
     String value;
