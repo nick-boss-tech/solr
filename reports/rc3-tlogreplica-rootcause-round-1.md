@@ -15,13 +15,21 @@ The RC3 smoke loop's runs showed the same messages for these methods. The loop's
 
 ## Observed state (testKillLeader, main, seed 9D6BB87C4F145405)
 
-After the leader is killed, the collection `tlog_replica_test_kill_leader` ends with:
+The test (`TestTlogReplica.doReplaceLeader`, `solr/core/src/test/org/apache/solr/cloud/TestTlogReplica.java` lines 438 to 487) stops the leader jetty, waits for a new leader (`waitForLeaderChange`), adds and commits a document, then restarts the old leader with `leaderJetty.start()` and waits for `clusterShape(1, 2)` with the message "Expected collection to be 1x2" (line 484). The failure is at that last wait, after the restart, not during the leader kill.
+
+The captured state at that point, for `tlog_replica_test_kill_leader`:
 
 - `core_node2` (TLOG, `127.0.0.1:42099_solr`): `"state":"recovering"`, not leader.
 - `core_node4` (TLOG, `127.0.0.1:44675_solr`): `"state":"active"`, `"leader":"true"`.
 - Both nodes live. The shard is `active`, with 2 TLOG replicas.
 
-The test waits for 1x2 with both replicas active and times out. So the surviving replica does not leave `recovering` after the leader change. The same timeout appears in the other failing methods (their messages: "Replica didn't recover", "Some replicas are not in sync with leader").
+So the replica that rejoins stays in `recovering`, and the shard never reaches 1x2 active.
+
+Code read, not yet traced to a cause (`solr/core/src/java/org/apache/solr/cloud` on main):
+
+- `ZkController.java` lines 1504 to 1512: a TLOG replica that is not leader skips the startup `recoverFromLog()` path and copies over old updates instead.
+- `ZkController.java` lines 1834 to 1855: a non-leader that needs recovery calls `doRecovery`; a TLOG replica whose term is lower than the leader's also goes through `doRecovery`.
+- `RecoveryStrategy.java` line 571: "we temporary ignore peersync for tlog replicas" (`firstTime = replicaType != TLOG`). TLOG recovery therefore follows a different path from NRT. This is the likeliest place the rejoin stalls, and it is a hypothesis until a probe confirms it.
 
 ## Not done in this round
 
