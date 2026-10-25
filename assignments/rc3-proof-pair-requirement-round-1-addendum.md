@@ -1,0 +1,3 @@
+# Addendum: PR #5098 pair, corrected (2026-10-24)
+
+The round-1 note understated the #5098 evidence. Sanjay Dutt's approval review on PR #5098 (2026-10-24T14:23:11Z) supplies a before/after pair from his own runs: the equivalent change run 100 times on Linux with any-replica routing forced, 16 failures before and 0 after, with recovery still exercised every run. So #5098's pair exists and is independent (a committer reviewer's runs), with two limits to state when citing it: it was run on the equivalent change rather than factory-gated on the PR branch, and the before failures are of the any-replica routing form. Cite it as Sanjay's pair, with those limits, not as factory proof.
