@@ -88,3 +88,8 @@ Answering [~gus]'s question from 2024: yes, this is complete, and the version is
 ## Staged ask, not posted (SOLR-17849, vm6, 2026-10-24)
 
 - **SOLR-17849 check with Jane Sandberg**: one question to [~sandbergja] on whether she is still working on the ticket, given Nick's implementation on fork branches `solr-17849-index-query-header` and `solr-17849-index-query-screen`. Draft at `jira-comment-SOLR-17849-draft.md`. Waits on Nick's go.
+
+
+## Critical batch 01 drafts, not posted
+
+SOLR-4180, SOLR-6420, SOLR-5821, SOLR-7351, SOLR-7517, SOLR-5850, SOLR-6683, SOLR-8331, SOLR-8417, and SOLR-7926 now have individual comment drafts at `jira/jira-comment-SOLR-<KEY>-draft.md`. The closure-ready drafts are SOLR-6683, SOLR-7517, and SOLR-8417. See `reports/critical-comments-round-1-batch-01.md` for the evidence and `reports/closure-ready-drafts-index-round-1.md` for the running closure list. All remain unposted pending Nick's go.
