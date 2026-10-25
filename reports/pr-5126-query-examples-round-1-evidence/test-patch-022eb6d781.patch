@@ -1,0 +1,130 @@
+From 022eb6d7811cd876afde3b84115696cb1c6af50e Mon Sep 17 00:00:00 2001
+From: Nick Shanin <nick.boss.us@gmail.com>
+Date: Sun, 25 Oct 2026 16:39:14 +0000
+Subject: [PATCH] SOLR-3479: diagnostic query examples for highlight
+ transformer on PR 5126 head
+
+---
+ .../TestHighlightAugmenterFactory.java        | 94 +++++++++++++++++++
+ 1 file changed, 94 insertions(+)
+
+diff --git a/solr/core/src/test/org/apache/solr/response/transform/TestHighlightAugmenterFactory.java b/solr/core/src/test/org/apache/solr/response/transform/TestHighlightAugmenterFactory.java
+index 9ecd03a453..2428371a7e 100644
+--- a/solr/core/src/test/org/apache/solr/response/transform/TestHighlightAugmenterFactory.java
++++ b/solr/core/src/test/org/apache/solr/response/transform/TestHighlightAugmenterFactory.java
+@@ -17,6 +17,7 @@
+ package org.apache.solr.response.transform;
+ 
+ import java.util.List;
++import java.util.Locale;
+ import org.apache.solr.SolrTestCase;
+ import org.apache.solr.client.solrj.SolrClient;
+ import org.apache.solr.client.solrj.request.SolrQuery;
+@@ -24,6 +25,7 @@ import org.apache.solr.common.SolrDocument;
+ import org.apache.solr.common.SolrException;
+ import org.apache.solr.common.SolrInputDocument;
+ import org.apache.solr.common.params.ModifiableSolrParams;
++import org.apache.solr.common.util.Utils;
+ import org.apache.solr.util.EmbeddedSolrServerTestRule;
+ import org.apache.solr.util.ExternalPaths;
+ import org.junit.BeforeClass;
+@@ -176,4 +178,96 @@ public class TestHighlightAugmenterFactory extends SolrTestCase {
+     e = expectThrows(SolrException.class, () -> query("id,body_t:[hl bogus=1]"));
+     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+   }
++
++  private static String review5126Doc2Highlight(boolean explicitQuery) throws Exception {
++    ModifiableSolrParams params = new ModifiableSolrParams();
++    params.set("q", "fox");
++    params.set("defType", "edismax");
++    params.set("qf", "body_t title_t");
++    params.set("bq", "body_t:cats");
++    params.set("sort", "id asc");
++    params.set("rows", "10");
++    params.set("fl", "id,body_hl:[hl f=body_t]");
++    params.set("hl.method", "unified");
++    params.set("hl.defaultSummary", false);
++    params.set("hl.tag.pre", "<em>");
++    params.set("hl.tag.post", "</em>");
++    params.set("hl.weightMatches", false);
++    if (explicitQuery) {
++      params.set("hl.q", "fox");
++    }
++    var docs = solrTestRule.getSolrClient().query(params).getResults();
++    assertEquals(2, docs.size());
++    assertEquals("2", docs.get(1).getFieldValue("id"));
++    return String.valueOf(docs.get(1).getFieldValue("body_hl"));
++  }
++
++  @Test
++  public void testReview5126ImplicitBoostDiffersFromExplicit() throws Exception {
++    String implicit = review5126Doc2Highlight(false);
++    String explicit = review5126Doc2Highlight(true);
++    System.out.println("PR5126_IMPLICIT_DOC2 " + implicit);
++    System.out.println("PR5126_EXPLICIT_DOC2 " + explicit);
++    assertContains("<em>cats</em>", implicit);
++    assertFalse(explicit, explicit.contains("<em>cats</em>"));
++  }
++
++  @Test
++  public void testReview5126QueryExamples() throws Exception {
++    for (boolean weightMatches : List.of(true, false)) {
++      for (boolean boost : List.of(false, true)) {
++        for (boolean component : List.of(false, true)) {
++          for (String variant : List.of("implicit", "explicit", "local")) {
++            ModifiableSolrParams params = new ModifiableSolrParams();
++            params.set("q", "fox");
++            params.set("defType", "edismax");
++            params.set("qf", "body_t title_t");
++            params.set("sort", "id asc");
++            params.set("rows", "10");
++            params.set(
++                "fl",
++                variant.equals("local")
++                    ? "id,body_hl:[hl f=body_t q=fox]"
++                    : "id,body_hl:[hl f=body_t]");
++            params.set("hl", component);
++            params.set("hl.method", "unified");
++            params.set("hl.fl", "body_t");
++            params.set("hl.defaultSummary", false);
++            params.set("hl.tag.pre", "<em>");
++            params.set("hl.tag.post", "</em>");
++            params.set("hl.weightMatches", weightMatches);
++            if (boost) {
++              params.set("bq", "body_t:cats");
++            }
++            if (variant.equals("explicit")) {
++              params.set("hl.q", "fox");
++            }
++            var response = solrTestRule.getSolrClient().query(params);
++            String label =
++                "variant="
++                    + variant
++                    + " boost="
++                    + boost
++                    + " component="
++                    + component
++                    + " weightMatches="
++                    + weightMatches;
++            System.out.println("PR5126_QUERY " + label + " request=" + params);
++            System.out.println(
++                "PR5126_RESPONSE " + label + " " + Utils.toJSONString(response.getResponse()));
++            var docs = response.getResults();
++            assertEquals(label, 2, docs.size());
++            assertEquals("1", docs.getFirst().getFieldValue("id"));
++            assertEquals("2", docs.get(1).getFieldValue("id"));
++            assertContains("<em>fox</em>", docs.getFirst().getFieldValue("body_hl"));
++            String inline =
++                String.valueOf(docs.get(1).getFieldValue("body_hl")).toLowerCase(Locale.ROOT);
++            if (!boost || !variant.equals("implicit")) {
++              assertFalse(label + " inline=" + inline, inline.contains("<em>cats</em>"));
++            }
++          }
++        }
++      }
++    }
++  }
+ }
+-- 
+2.34.1
+

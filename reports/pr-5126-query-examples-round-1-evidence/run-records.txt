@@ -1,0 +1,19 @@
+PR 5126 slice Q run records (vm4, seed 34795126, JDK 21.0.12.1 /workspace/tools/jdk21, runner pool/bin/sweep-run.sh)
+--- q-focused-1
+headroom: pre 2026-10-25T16:14:01Z | 4.6G free | 479576 ifree rc=0 end 2026-10-25T16:20:31Z | 4.6G free | 479570 ifree 
+BUILD SUCCESSFUL in 6m 26s rc=0 
+--- q-regression-leg2
+headroom: pre 2026-10-25T16:21:44Z | 4.6G free | 479571 ifree rc=0 end 2026-10-25T16:23:19Z | 4.6G free | 479570 ifree 
+BUILD SUCCESSFUL in 1m 34s rc=0 
+--- q-tidy-compile-leg3
+headroom: pre 2026-10-25T16:24:43Z | 4.6G free | 479571 ifree rc=0 end 2026-10-25T16:30:54Z | 4.6G free | 479569 ifree 
+BUILD SUCCESSFUL in 6m 9s rc=0 
+--- q-full-class-leg4
+headroom: pre 2026-10-25T16:32:23Z | 4.6G free | 479569 ifree rc=0 end 2026-10-25T16:36:49Z | 4.6G free | 479569 ifree 
+BUILD SUCCESSFUL in 4m 24s rc=0 
+--- test counts (fresh XML)
+q-focused-1: tests="1" skipped="0" failures="0" errors="0"
+q-regression-leg2: tests="1" skipped="0" failures="0" errors="0"
+q-full-class-leg4: tests="10" skipped="0" failures="0" errors="0"
+--- commit
+022eb6d7811cd876afde3b84115696cb1c6af50e branch solr-3479-pr5126-query-examples-r1; baseline 74b09fb443f060caac3f8ec9701909cec276cfb4

@@ -30,3 +30,4 @@ Disk record:
 - 2026-10-18T15:09Z before `chaos-5516-run1`: `/` 4.6G free, 39% used; inodes 481348 free (9% used).
 - 2026-10-18T15:14Z after `chaos-5516-run1`: `/` 4.6G free, 39% used; inodes 481343 free (9% used).
 - 2026-10-24T20:52Z after downloadBats: `/` 4.6G free, 39% used; inodes 479268 free (9% used).
+- 2026-10-25T16:41:07Z: PR 5126 slice Q DONE (claim `claims/pr-5126-query-examples-vm4-round-1-done.md`, branch 022eb6d781). Four runs exit 0; nothing running.

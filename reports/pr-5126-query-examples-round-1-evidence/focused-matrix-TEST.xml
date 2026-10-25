@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.response.transform.TestHighlightAugmenterFactory" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-25T16:20:08.602Z" hostname="localhost" time="18.208">
+  <properties/>
+  <testcase name="testReview5126QueryExamples" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.607"/>
+  <system-out><![CDATA[PR5126_QUERY variant=implicit boost=false component=false weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true
+PR5126_RESPONSE variant=implicit boost=false component=false weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":360,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=explicit boost=false component=false weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&hl.q=fox
+PR5126_RESPONSE variant=explicit boost=false component=false weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true",
+      "hl.q":"fox"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=local boost=false component=false weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true
+PR5126_RESPONSE variant=local boost=false component=false weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t q=fox]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=implicit boost=false component=true weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true
+PR5126_RESPONSE variant=implicit boost=false component=true weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":11,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=explicit boost=false component=true weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&hl.q=fox
+PR5126_RESPONSE variant=explicit boost=false component=true weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true",
+      "hl.q":"fox"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=local boost=false component=true weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true
+PR5126_RESPONSE variant=local boost=false component=true weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t q=fox]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=implicit boost=true component=false weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats
+PR5126_RESPONSE variant=implicit boost=true component=false weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true",
+      "bq":"body_t:cats"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=explicit boost=true component=false weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats&hl.q=fox
+PR5126_RESPONSE variant=explicit boost=true component=false weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true",
+      "bq":"body_t:cats",
+      "hl.q":"fox"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=local boost=true component=false weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats
+PR5126_RESPONSE variant=local boost=true component=false weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t q=fox]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true",
+      "bq":"body_t:cats"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=implicit boost=true component=true weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats
+PR5126_RESPONSE variant=implicit boost=true component=true weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true",
+      "bq":"body_t:cats"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=explicit boost=true component=true weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats&hl.q=fox
+PR5126_RESPONSE variant=explicit boost=true component=true weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true",
+      "bq":"body_t:cats",
+      "hl.q":"fox"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=local boost=true component=true weightMatches=true request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats
+PR5126_RESPONSE variant=local boost=true component=true weightMatches=true {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t q=fox]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"true",
+      "bq":"body_t:cats"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=implicit boost=false component=false weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false
+PR5126_RESPONSE variant=implicit boost=false component=false weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=explicit boost=false component=false weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&hl.q=fox
+PR5126_RESPONSE variant=explicit boost=false component=false weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false",
+      "hl.q":"fox"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=local boost=false component=false weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false
+PR5126_RESPONSE variant=local boost=false component=false weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t q=fox]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=implicit boost=false component=true weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false
+PR5126_RESPONSE variant=implicit boost=false component=true weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=explicit boost=false component=true weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&hl.q=fox
+PR5126_RESPONSE variant=explicit boost=false component=true weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false",
+      "hl.q":"fox"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=local boost=false component=true weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false
+PR5126_RESPONSE variant=local boost=false component=true weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t q=fox]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=implicit boost=true component=false weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats
+PR5126_RESPONSE variant=implicit boost=true component=false weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false",
+      "bq":"body_t:cats"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2",
+        "body_hl":"A story about <em>cats</em>. <em>Cats</em> sleep a lot."}]}}
+PR5126_QUERY variant=explicit boost=true component=false weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats&hl.q=fox
+PR5126_RESPONSE variant=explicit boost=true component=false weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false",
+      "bq":"body_t:cats",
+      "hl.q":"fox"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=local boost=true component=false weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats
+PR5126_RESPONSE variant=local boost=true component=false weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t q=fox]",
+      "hl":"false",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false",
+      "bq":"body_t:cats"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]}}
+PR5126_QUERY variant=implicit boost=true component=true weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats
+PR5126_RESPONSE variant=implicit boost=true component=true weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false",
+      "bq":"body_t:cats"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2",
+        "body_hl":"A story about <em>cats</em>. <em>Cats</em> sleep a lot."}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=explicit boost=true component=true weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats&hl.q=fox
+PR5126_RESPONSE variant=explicit boost=true component=true weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false",
+      "bq":"body_t:cats",
+      "hl.q":"fox"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+PR5126_QUERY variant=local boost=true component=true weightMatches=false request=q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats
+PR5126_RESPONSE variant=local boost=true component=true weightMatches=false {
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "wt":"javabin",
+      "q":"fox",
+      "defType":"edismax",
+      "qf":"body_t title_t",
+      "sort":"id asc",
+      "rows":"10",
+      "fl":"id,body_hl:[hl f=body_t q=fox]",
+      "hl":"true",
+      "hl.method":"unified",
+      "hl.fl":"body_t",
+      "hl.defaultSummary":"false",
+      "hl.tag.pre":"<em>",
+      "hl.tag.post":"</em>",
+      "hl.weightMatches":"false",
+      "bq":"body_t:cats"}},
+  "response":{
+    "numFound":2,
+    "start":0,
+    "numFoundExact":true,
+    "docs":[
+      {
+        "id":"1",
+        "body_hl":"The <em>fox</em> ran away."},
+      {
+        "id":"2"}]},
+  "highlighting":{
+    "1":{
+      "body_t":["The <em>fox</em> ran away."]},
+    "2":{}}}
+]]></system-out>
+  <system-err><![CDATA[Oct 25, 2026 4:20:09 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+2112 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/pr-5126-q/solr/server/solr/configsets/_default/conf'
+3156 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+4299 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [_ALL_]
+5494 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+6695 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/pr-5126-q/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001
+9451 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+9451 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/pr-5126-q/solr/server/solr/configsets/_default
+9690 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/pr-5126-q/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001/collection1], dataDir=[/workspace/worktrees/pr-5126-q/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001/collection1/data/]
+15475 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+16797 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+16806 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+16806 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+17069 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/pr-5126-q/solr/server/solr/configsets/_default/conf ; switching to use InMemory storage instead.
+17640 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+17642 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+17643 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+18130 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults()}}{add=[1 (1880039332879794176)]} 0 402
+18195 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults()}}{add=[2 (1880039333134598144)]} 0 0
+18552 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 13 ms
+18552 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults(commit=true&softCommit=false&waitSearcher=true)}}{commit=} 0 356
+18922 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true)}} hits=2 status=0 QTime=360
+19098 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&hl.q=fox)}} hits=2 status=0 QTime=1
+19101 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true)}} hits=2 status=0 QTime=0
+19114 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true)}} hits=2 status=0 QTime=11
+19117 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&hl.q=fox)}} hits=2 status=0 QTime=1
+19120 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true)}} hits=2 status=0 QTime=1
+19123 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats)}} hits=2 status=0 QTime=1
+19127 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats&hl.q=fox)}} hits=2 status=0 QTime=1
+19129 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats)}} hits=2 status=0 QTime=0
+19132 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats)}} hits=2 status=0 QTime=1
+19135 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats&hl.q=fox)}} hits=2 status=0 QTime=1
+19137 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=true&bq=body_t:cats)}} hits=2 status=0 QTime=1
+19139 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false)}} hits=2 status=0 QTime=0
+19141 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&hl.q=fox)}} hits=2 status=0 QTime=0
+19143 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false)}} hits=2 status=0 QTime=0
+19144 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false)}} hits=2 status=0 QTime=0
+19146 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&hl.q=fox)}} hits=2 status=0 QTime=1
+19148 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false)}} hits=2 status=0 QTime=1
+19150 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats)}} hits=2 status=0 QTime=0
+19152 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats&hl.q=fox)}} hits=2 status=0 QTime=0
+19153 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=false&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats)}} hits=2 status=0 QTime=0
+19155 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats)}} hits=2 status=0 QTime=1
+19158 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats&hl.q=fox)}} hits=2 status=0 QTime=1
+19159 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126QueryExamples-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t+q%3Dfox]&hl=true&hl.method=unified&hl.fl=body_t&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&bq=body_t:cats)}} hits=2 status=0 QTime=1
+19163 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=345167816
+19164 INFO  (coreCloseExecutor-21-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@79bd3993 collection1
+19165 INFO  (coreCloseExecutor-21-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+oct. 25, 2026 6:20:26 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+AVERTISSEMENT: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+]]></system-err>
+</testsuite>

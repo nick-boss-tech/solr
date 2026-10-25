@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.response.transform.TestHighlightAugmenterFactory" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-25T16:23:11.064Z" hostname="localhost" time="6.487">
+  <properties/>
+  <testcase name="testReview5126ImplicitBoostDiffersFromExplicit" classname="org.apache.solr.response.transform.TestHighlightAugmenterFactory" time="0.227"/>
+  <system-out><![CDATA[PR5126_IMPLICIT_DOC2 A story about <em>cats</em>. <em>Cats</em> sleep a lot.
+PR5126_EXPLICIT_DOC2 null
+]]></system-out>
+  <system-err><![CDATA[Oct 25, 2026 4:23:11 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1197 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/pr-5126-q/solr/server/solr/configsets/_default/conf'
+1574 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+2132 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [_ALL_]
+2651 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+3130 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/pr-5126-q/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001
+4443 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+4443 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/pr-5126-q/solr/server/solr/configsets/_default
+4518 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/pr-5126-q/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001/collection1], dataDir=[/workspace/worktrees/pr-5126-q/solr/core/build/tmp/tests-tmp/org.apache.solr.response.transform.TestHighlightAugmenterFactory_34795126-001/cores-001/collection1/data/]
+5908 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+6177 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+6182 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+6183 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+6316 WARN  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/pr-5126-q/solr/server/solr/configsets/_default/conf ; switching to use InMemory storage instead.
+6435 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+6436 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+6437 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+6654 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults()}}{add=[1 (1880039512464162816)]} 0 192
+6677 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults()}}{add=[2 (1880039512606769152)]} 0 0
+6997 INFO  (searcherExecutor-15-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 4 ms
+6997 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=javabin),defaults(commit=true&softCommit=false&waitSearcher=true)}}{commit=} 0 319
+7133 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126ImplicitBoostDiffersFromExplicit-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl.method=unified&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false)}} hits=2 status=0 QTime=129
+7223 INFO  (TEST-TestHighlightAugmenterFactory.testReview5126ImplicitBoostDiffersFromExplicit-seed#[34795126]) [ x:collection1] o.a.s.c.S.Request path=/select params={{params(wt=javabin),defaults(q=fox&defType=edismax&qf=body_t+title_t&bq=body_t:cats&sort=id+asc&rows=10&fl=id,body_hl:[hl+f%3Dbody_t]&hl.method=unified&hl.defaultSummary=false&hl.tag.pre=<em>&hl.tag.post=</em>&hl.weightMatches=false&hl.q=fox)}} hits=2 status=0 QTime=1
+7227 INFO  (SUITE-TestHighlightAugmenterFactory-seed#[34795126]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=883791456
+7228 INFO  (coreCloseExecutor-21-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@52bcfe4e collection1
+7228 INFO  (coreCloseExecutor-21-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+oct. 25, 2026 6:23:17 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+AVERTISSEMENT: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+]]></system-err>
+</testsuite>
