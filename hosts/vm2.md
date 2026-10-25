@@ -15,3 +15,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T02:46:41Z; CI red RCA settling runs done (reports/ci-red-prs-rca-round-1-settling.md; #5083 and #5069 pass at recorded seeds on head and main; #5081 re-run not done). Worktrees ci-5083, ci-5069, ci-main removed. Next: OPEN-WORK check for unclaimed Linux work.
 
 - Heartbeat: 2026-10-25T02:50:13Z; CI red RCA settling done (reports/ci-red-prs-rca-round-1-settling.md; worktrees removed). Critical comments batch 02 done (reports/critical-comments-round-1-batch-02.md, ten drafts, not posted). Next: batch 03 if unclaimed.
+
+- Heartbeat: 2026-10-25T02:51:40Z; critical comments batch 03 done (reports/critical-comments-round-1-batch-03.md, eight drafts, two no-draft reasons). Next: batch 04 if unclaimed.
