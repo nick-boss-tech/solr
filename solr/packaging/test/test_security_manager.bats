@@ -50,6 +50,13 @@ teardown() {
   backup_dir_other="${backup_dir}-other"
   mkdir -p "${backup_dir_other}"
   run solr api --solr-url "http://localhost:${SOLR_PORT}/solr/admin/collections?action=BACKUP&name=test-fail&collection=COLL_NAME&location=file://${backup_dir_other}"
-  # Java 24+ has no security manager; Solr's allowPaths check rejects it instead
-  assert_output --regexp 'access denied|Could not backup all shards'
+  java_major=$("${JAVA_HOME:+$JAVA_HOME/bin/}java" -version 2>&1 | grep -v '_OPTIONS' | head -1 | awk -F '"' '/version/ {print $2}' | sed -e 's/^1\.//' | sed -e 's/[._-].*$//')
+  if (( java_major >= 24 )); then
+    # bin/solr turns the security manager off on Java 24+, so the allowPaths check rejects the path on each shard.
+    # The coordinator reports only the generic wrapper; the path-specific reason is logged in solr.log.
+    assert_output --partial 'Could not backup all shards'
+    assert_file_contains "${SOLR_LOGS_DIR}/solr.log" "must be relative to SOLR_HOME.*${backup_dir_other}"
+  else
+    assert_output --partial 'access denied'
+  fi
 }
