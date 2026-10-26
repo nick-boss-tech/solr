@@ -11,7 +11,7 @@ Keys: SOLR-6678, SOLR-7947, SOLR-9492, SOLR-10706, SOLR-11776, SOLR-13853, SOLR-
 ## Template (Jira wiki markup, first person)
 
 ```
-[~{REPORTER}] I am checking in on this ticket. Its last activity was on {LAST_ACTIVITY_DATE}. A review of the ticket text found no steps that could be tested, so it has stayed unconfirmed. {KEEP_OPEN_RESPONSE}
+[~{REPORTER}] I am checking in on this ticket. Its last activity was on {LAST_ACTIVITY_DATE}. The ticket does not record a confirmed reproduction on a supported Solr release. {KEEP_OPEN_RESPONSE}
 
 🤖 _AI text above_ 🤖 _(reviewed by Nick Shanin)_
 ```
@@ -28,7 +28,7 @@ Keys: SOLR-6678, SOLR-7947, SOLR-9492, SOLR-10706, SOLR-11776, SOLR-13853, SOLR-
 Record: `material/harmonized-backlog/batches/h1-001-rev4.json`, key SOLR-6678, disposition `ping-stale`, skip category "stale or no reproduction", skip citation `queue-current.json` key SOLR-6678 (audit-3, 2026-10-05, "no repro or too vague to test"). Metadata: Bug, Major, Updated 2020-10-16, summary "Collection/core reload is causing a memory leak".
 
 ```
-[~{REPORTER}] I am checking in on this ticket. Its last activity was on 2020-10-16. A review of the ticket text found no steps that could be tested, so it has stayed unconfirmed. If it still happens on a supported Solr release, a reply with the version and steps will keep it open.
+[~{REPORTER}] I am checking in on this ticket. Its last activity was on 2020-10-16. The ticket does not record a confirmed reproduction on a supported Solr release. If it still happens on a supported Solr release, a reply with the version and steps will keep it open.
 
 🤖 _AI text above_ 🤖 _(reviewed by Nick Shanin)_
 ```
