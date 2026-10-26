@@ -64,6 +64,7 @@ import org.apache.solr.util.ServletFixtures;
 import org.apache.solr.util.ServletFixtures.DebugServlet;
 import org.apache.solr.util.ServletFixtures.SlowServlet;
 import org.apache.solr.util.TimeOut;
+import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.WWWAuthenticationProtocolHandler;
 import org.eclipse.jetty.http.HttpStatus;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
@@ -944,7 +945,7 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
     HttpJettySolrClient client =
         (HttpJettySolrClient)
             builder(solrTestRule.getBaseUrl() + "/", DEFAULT_CONNECTION_TIMEOUT, 2000).build();
-    org.eclipse.jetty.client.HttpClient httpClient = client.getHttpClient();
+    HttpClient httpClient = client.getHttpClient();
     Thread.currentThread().interrupt();
     try {
       client.close();
@@ -971,7 +972,7 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
               .withIdleTimeout(2000, TimeUnit.MILLISECONDS)
               .withExecutor(pool)
               .build();
-      org.eclipse.jetty.client.HttpClient httpClient = client.getHttpClient();
+      HttpClient httpClient = client.getHttpClient();
       Thread.currentThread().interrupt();
       try {
         client.close();
@@ -999,7 +1000,7 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
           new HttpJettySolrClient.Builder(solrTestRule.getBaseUrl() + "/")
               .withHttpClient(parent)
               .build();
-      org.eclipse.jetty.client.HttpClient parentHttpClient = parent.getHttpClient();
+      HttpClient parentHttpClient = parent.getHttpClient();
       Thread.currentThread().interrupt();
       try {
         child.close();
