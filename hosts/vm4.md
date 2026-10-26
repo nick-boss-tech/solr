@@ -35,3 +35,4 @@ Disk record:
 - 2026-10-25T18:42:12Z: SOLR-3479 PR 5126 fix gate GREEN at 8a685825b6 (claim `claims/pr-5126-highlight-query-gate-vm4-round-1-done.md`). Nothing running; lock free.
 - 2026-10-25T19:44:29Z: claimed vm4-comment-assignment-cleanup-round-1 (`claims/vm4-comment-assignment-cleanup-round-1.md`) at board tip 2153d0d51410; records only.
 - 2026-10-26T00:28:24Z: claimed backlog-first-100-unit-4 (`claims/backlog-first-100-unit-4.md`), ping-stale only; shortfall named. Drafts to follow.
+- 2026-10-26T00:30:35Z: Unit 4 BLOCKED (0 of 25). Report `reports/backlog-first-100-unit-4-round-1.md`. Decisions requested from owner.
