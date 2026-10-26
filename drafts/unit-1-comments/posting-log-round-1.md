@@ -83,3 +83,18 @@
 | 2026-10-26 | SOLR-8634 | Owner: post remaining (wave 3) | Owner | Posted, id 18132142, read back |
 | 2026-10-26 | SOLR-9226 | Owner: post remaining (wave 3) | Owner | Posted, id 18132143, read back |
 | 2026-10-26 | SOLR-10112 | Owner: post remaining (wave 3) | Owner | Posted, id 18132144, read back |
+| 2026-10-26 | SOLR-2420 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132145, read back |
+| 2026-10-26 | SOLR-2516 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132146, read back |
+| 2026-10-26 | SOLR-3473 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132147, read back |
+| 2026-10-26 | SOLR-3539 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132148, read back |
+| 2026-10-26 | SOLR-4558 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132149, read back |
+| 2026-10-26 | SOLR-7070 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132150, read back |
+| 2026-10-26 | SOLR-7071 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132151, read back |
+| 2026-10-26 | SOLR-1557 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132152, read back |
+| 2026-10-26 | SOLR-6099 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132153, read back |
+| 2026-10-26 | SOLR-4277 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132154, read back |
+| 2026-10-26 | SOLR-4669 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132155, read back |
+| 2026-10-26 | SOLR-5046 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132156, read back |
+| 2026-10-26 | SOLR-9664 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132157, read back |
+| 2026-10-26 | SOLR-11353 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132158, read back |
+| 2026-10-26 | SOLR-11712 | Owner: post remaining (wave 4, citations verified) | Owner | Posted, id 18132159, read back |
