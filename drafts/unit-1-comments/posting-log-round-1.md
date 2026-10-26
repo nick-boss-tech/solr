@@ -18,3 +18,13 @@
 | 2026-10-26 | SOLR-8879 | Round-4 section A, ask | Owner | Posted, id 18132067, read back |
 | 2026-10-26 | SOLR-9206 | Round-4 section A, ask | Owner | Posted, id 18132068, read back |
 | 2026-10-26 | SOLR-10110 | Round-4 section A, ask | Owner | Posted, id 18132069, read back |
+| 2026-10-26 | SOLR-10332 | Round-4 section A, candidate fix | Owner: post 10 more | Posted, id 18132070, read back |
+| 2026-10-26 | SOLR-10363 | Round-4 section A, candidate fix | Owner | Posted, id 18132071, read back |
+| 2026-10-26 | SOLR-10726 | Round-4 section A, candidate fix | Owner | Posted, id 18132072, read back |
+| 2026-10-26 | SOLR-10751 | Round-4 section A, candidate fix | Owner | Posted, id 18132073, read back |
+| 2026-10-26 | SOLR-10952 | Round-4 section A, candidate fix | Owner | Posted, id 18132074, read back |
+| 2026-10-26 | SOLR-11083 | Round-4 section A, candidate fix | Owner | Posted, id 18132075, read back |
+| 2026-10-26 | SOLR-11577 | Round-4 section A, candidate fix | Owner | Posted, id 18132076, read back |
+| 2026-10-26 | SOLR-9622 | Round-4 section A, candidate fix | Owner | Posted, id 18132077, read back |
+| 2026-10-26 | SOLR-9765 | Round-4 section A, candidate fix | Owner | Posted, id 18132078, read back |
+| 2026-10-26 | SOLR-4486 | Round-4 section A, candidate fix | Owner | Posted, id 18132079, read back |
