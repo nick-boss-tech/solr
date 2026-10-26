@@ -36,3 +36,4 @@ Disk record:
 - 2026-10-25T19:44:29Z: claimed vm4-comment-assignment-cleanup-round-1 (`claims/vm4-comment-assignment-cleanup-round-1.md`) at board tip 2153d0d51410; records only.
 - 2026-10-26T00:28:24Z: claimed backlog-first-100-unit-4 (`claims/backlog-first-100-unit-4.md`), ping-stale only; shortfall named. Drafts to follow.
 - 2026-10-26T00:30:35Z: Unit 4 BLOCKED (0 of 25). Report `reports/backlog-first-100-unit-4-round-1.md`. Decisions requested from owner.
+- 2026-10-26T00:40:17Z: Unit 4 partial: 11 ping-stale drafts (not posted). Asked phone-agent to decide conflict flags and duplicate targets (`assignments/vm4-to-phone-agent-backlog-decisions-round-1.md`).
