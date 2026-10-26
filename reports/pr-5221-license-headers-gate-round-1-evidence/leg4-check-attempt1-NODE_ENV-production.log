@@ -1,0 +1,2014 @@
+Starting a Gradle Daemon, 12 busy and 2 incompatible Daemons could not be reused, use --status for details
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :allHelpFilesExit
+> Task :gradlewScriptsTweaked
+> Task :licenses UP-TO-DATE
+> Task :missing-doclet:compileJava
+> Task :missing-doclet:processResources NO-SOURCE
+> Task :missing-doclet:classes
+> Task :missing-doclet:jar
+> Task :platform:collectJarInfos
+> Task :platform:validateJarChecksums
+> Task :solr:api:validateSourcePatterns
+> Task :solr:api:processResources NO-SOURCE
+> Task :checkWorkingCopyClean
+> Task :rat
+> Task :validateSourcePatterns
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:api:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:api:classes
+> Task :solr:api:jar
+> Task :solr:core:validateSourcePatterns
+> Task :solr:solrj:validateSourcePatterns
+> Task :solr:solrj-jetty:validateSourcePatterns
+> Task :solr:api:resolve
+> Task :solr:solrj-streaming:validateSourcePatterns
+> Task :solr:solrj-zookeeper:validateSourcePatterns
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/gate-5221/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+
+> Task :solr:core:processResources
+> Task :solr:solrj:processResources
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+
+> Task :solr:solrj:openApiGenerate
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/gate-5221/solr/solrj/build/generated
+
+> Task :solr:test-framework:validateSourcePatterns
+> Task :solr:test-framework:processResources
+> Task :solr:modules:cross-dc:validateSourcePatterns
+> Task :solr:modules:cross-dc:processResources NO-SOURCE
+> Task :solr:modules:opentelemetry:validateSourcePatterns
+> Task :solr:modules:opentelemetry:processResources NO-SOURCE
+> Task :solr:modules:analysis-extras:validateSourcePatterns
+> Task :solr:modules:analysis-extras:processResources NO-SOURCE
+> Task :platform:rat
+> Task :platform:validateSourcePatterns
+> Task :solr:distribution:collectJarInfos
+> Task :solr:distribution:validateJarChecksums
+> Task :solr:docker:collectJarInfos
+> Task :solr:docker:validateJarChecksums
+> Task :solr:documentation:collectJarInfos
+> Task :solr:documentation:validateJarChecksums
+> Task :solr:example:collectJarInfos
+> Task :solr:example:validateJarChecksums
+> Task :solr:modules:collectJarInfos
+> Task :solr:modules:validateJarChecksums
+> Task :solr:packaging:collectJarInfos
+> Task :solr:packaging:validateJarChecksums
+> Task :solr:solr-ref-guide:collectJarInfos
+> Task :solr:solr-ref-guide:validateJarChecksums
+> Task :solr:modules:sql:validateSourcePatterns
+> Task :solr:modules:sql:processResources
+> Task :solr:webapp:js-client:collectJarInfos
+> Task :solr:webapp:js-client:validateJarChecksums
+> Task :solr:collectJarInfos
+> Task :solr:validateJarChecksums
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:rat
+> Task :solr:validateConfigFileSanity
+> Task :solr:solrj:generatedSpotless
+> Task :solr:validateSourcePatterns
+> Task :solr:api:ecjLintMain
+> Task :solr:api:forbiddenApisMain
+> Task :solr:api:processTestResources
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:api:renderJavadoc
+> Task :solr:api:javadoc SKIPPED
+
+> Task :solr:api:rat
+*****************************************************
+Summary
+*****************************************************
+Generated at: 2026-10-26T01:20:56Z
+    by Apache Creadur RAT 0.18 (Apache Software Foundation)
+
+-----------------------------------------------------
+Counters
+-----------------------------------------------------
+    (Entries starting with '!' exceed the minimum or maximum values)
+  Approved:           219    A count of approved licenses.
+  Archives:           0    A count of archive files.
+  Binaries:           0    A count of binary files.
+  Document types:     1    A count of distinct document types.
+  Ignored:            0    A count of ignored files.
+  License categories: 1    A count of distinct license categories.
+  License names:      1    A count of distinct license names.
+  Notices:            0    A count of notice files.
+  Standards:          219    A count of standard files.
+  Unapproved:         0    A count of unapproved licenses.
+  Unknown:            0    A count of unknown file types.
+
+
+-----------------------------------------------------
+Licenses detected
+-----------------------------------------------------
+
+Apache License 2.0: 219 
+
+-----------------------------------------------------
+License Categories detected
+-----------------------------------------------------
+
+AL   : 219 
+
+-----------------------------------------------------
+Document Types detected
+-----------------------------------------------------
+
+STANDARD: 219 
+
+*****************************************************
+Detail
+*****************************************************
+
+  Documents with unapproved licenses will start with a '!'
+  The first character on the next line identifies the document type.
+   
+   char         type
+    A       Archive file
+    B       Binary file
+    I       Ignored file
+    N       Notice file
+    S       Standard file
+    U       Unknown file.
+  
+  /build.gradle
+  S         text/plain    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/package-info.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/FileListResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UpsertFieldTypeOperation.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaVersionResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ReloadCoreRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/LogMessagesResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/PurgeUnusedResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UpgradeCoreIndexResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerSchemaDiffResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UpsertDynamicFieldOperation.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerPublishResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/GetClusterPropertyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SetClusterPropertyRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ConfigInfoResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/TaskStatusResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/GetAllAliasPropertiesResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/FileMetaData.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/MergeIndexesRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/RenameCollectionRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/BackupDeletionData.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerUpdateRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaGetFieldTypeInfoResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/RestoreCoreRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SubResponseAccumulatingJerseyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/DeleteSnapshotResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerUpdateResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/BalanceShardUniqueRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ClusterPropertyDetails.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListCollectionPropertiesResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CancelTaskResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UploadToFileStoreResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SnapshotInformation.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerSettingsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListClusterNodesResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ReplicationDetailsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CloneConfigsetRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/AsyncJerseyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/LogLevelChange.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ConfigZnodeVersionResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCollectionRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/LoggingResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/GetSegmentDataResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaListFieldsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/DeleteClusterCommandStatusResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateReplicaRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCoreParams.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/PurgeUnusedFilesRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerAddResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaListFieldTypesResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/DeleteCollectionSnapshotResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ZooKeeperStat.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ActiveTaskDetails.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaUniqueKeyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCollectionBackupDetails.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListAliasesResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ExperimentalResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/DeleteCopyFieldOperation.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/InstallShardDataRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ScaleCollectionRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/FileStoreEntryMetadata.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerAddRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListConfigsetsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/IndexVersionResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaZkVersionResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/TimeRoutedAliasProperties.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/FileStoreDirectoryListingResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/GetClusterCommandStatusResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/MigrateReplicasRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerFileContentsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/GetAliasByNameResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaGetDynamicFieldInfoResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/BalanceReplicasRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaChange.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/AddCopyFieldOperation.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ReplicationBackupRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/AddReplicaPropertyRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerConfigsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCollectionBackupRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/NodeThreadsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/NodeProxyingJerseyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/RestoreCollectionRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/package-info.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/RenameCoreRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/InstallCoreDataRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CoreStatusResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListCollectionSnapshotsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/GetCollectionPropertyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UpsertFieldOperation.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ZooKeeperListChildrenResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/BackupDeletionResponseBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ReplicationBackupResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UnloadCoreRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/Constants.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/RoutedAliasProperties.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/GetAliasPropertyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CollectionStatusResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaListCopyFieldsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaListDynamicFieldsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerAnalyzeResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/IndexType.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCoreResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListCollectionBackupsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UpdateAliasPropertyRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/NodeSystemResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCollectionBackupResponseBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListActiveTaskResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateShardRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/DeleteNodeRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListClusterPropertiesResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCoreSnapshotResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListLevelsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ReloadCollectionRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/DeleteFieldTypeOperation.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCollectionSnapshotResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/LogLevelInfo.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ConfigOverlayResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/DeleteFieldOperation.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/NodeHealthResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SolrJerseyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ReplaceNodeRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/DeleteDynamicFieldOperation.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/FlexibleSolrJerseyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UpdateAliasPropertiesRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaSimilarityResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCollectionSnapshotRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaInfoResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCollectionRouterProperties.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/PublicKeyResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/LogMessageInfo.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SwapCoresRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/NodePropertiesResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/GetNodeCommandStatusResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UpgradeCoreIndexRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CategoryRoutedAliasProperties.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SetThresholdRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/UpdateCollectionPropertyRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaNameResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateCoreBackupRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaGetFieldInfoResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CollectionBackupDetails.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ErrorInfo.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/CreateAliasRequestBody.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListCoreSnapshotsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/ListCollectionsResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/model/SchemaDesignerInfoResponse.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/util/package-info.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/util/SolrVersion.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/util/CoreApiParameters.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/util/ReflectWritable.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/util/StoreApiParameters.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/util/ApiMetadata.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/util/Constants.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/BalanceReplicasApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/TasksApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CollectionBackupApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CreateCoreBackupApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CollectionPropertyApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CollectionSnapshotApis.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/BalanceShardUniqueApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/DeleteCollectionApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/RestoreCoreApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/AliasPropertyApis.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/NodeLoggingApis.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/SyncShardApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ClusterFileStoreApis.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/DeleteAliasApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/SchemaDesignerApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/NodeThreadsApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/package-info.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/GetSchemaApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ListAliasesApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ReplaceNodeApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/SwapCoresApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ConfigsetsApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/SegmentsApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ConfigApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/AddReplicaPropertyApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/SelectApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ClusterCommandsApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CollectionStatusApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CreateAliasApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ListCollectionBackupsApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/DeleteShardApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/DeleteReplicaPropertyApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ClusterPropertyApis.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/InstallShardDataApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/MigrateReplicasApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/DeleteNodeApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/MergeIndexesApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ReloadCollectionApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/DeleteReplicaApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/RenameCollectionApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/InstallCoreDataApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/MetricsApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ReloadCoreApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CoreSnapshotApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/NodeSystemInfoApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/DeleteCollectionBackupApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/UpdateSchemaApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CoreApis.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/RenameCoreApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ReplicationBackupApis.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ListClusterNodesApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CreateCollectionApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/UnloadCoreApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ZooKeeperReadApis.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CreateShardApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/NodeHealthApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ReplicationApis.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ForceLeaderApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/ListCollectionsApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/GetPublicKeyApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/NodePropertiesApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/GetNodeCommandStatusApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/java/org/apache/solr/client/api/endpoint/CreateReplicaApi.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/test/org/apache/solr/util/TestSolrVersion.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+  /src/test/org/apache/solr/client/api/model/SchemaChangeOperationSerializationTest.java
+  S         text/x-java-source    ISO-8859-1
+    AL       AL2.0         Apache License 2.0
+
+
+
+> Task :solr:solrj-jetty:compileJava
+Note: /workspace/worktrees/gate-5221/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-zookeeper:compileJava
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar
+> Task :solr:solrj-jetty:classes
+> Task :solr:solrj-jetty:jar
+> Task :solr:solrj-zookeeper:classes
+> Task :solr:solrj-zookeeper:jar
+
+> Task :solr:solrj-streaming:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj:processTestResources
+> Task :checkJdkInternalsExportedToGradle
+> Task :solr:api:validateLogCalls
+> Task :solr:solrj-streaming:classes
+> Task :solr:solrj-streaming:jar
+> Task :solr:benchmark:validateSourcePatterns
+> Task :solr:benchmark:processResources
+> Task :solr:benchmark:processTestResources
+> Task :solr:core:compileJava
+> Task :solr:solrj:renderJavadoc
+> Task :solr:solrj-jetty:renderJavadoc
+> Task :solr:solrj-streaming:renderJavadoc
+> Task :solr:solrj-zookeeper:renderJavadoc
+> Task :solr:benchmark:rat
+> Task :solr:benchmark:validateLogCalls
+> Task :solr:cross-dc-manager:validateSourcePatterns
+> Task :solr:cross-dc-manager:processResources NO-SOURCE
+> Task :solr:cross-dc-manager:processTestResources
+> Task :solr:cross-dc-manager:rat
+
+> Task :solr:core:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:cross-dc-manager:validateLogCalls
+> Task :solr:distribution:rat
+> Task :solr:distribution:validateSourcePatterns
+> Task :solr:docker:rat
+> Task :solr:docker:validateSourcePatterns
+> Task :solr:documentation:rat
+> Task :solr:documentation:validateSourcePatterns
+> Task :solr:example:rat
+> Task :solr:example:validateSourcePatterns
+> Task :solr:modules:rat
+> Task :solr:modules:validateSourcePatterns
+> Task :solr:packaging:rat
+> Task :solr:packaging:validateSourcePatterns
+> Task :solr:server:ecjLintMain SKIPPED
+> Task :solr:server:validateSourcePatterns
+> Task :solr:server:compileJava SKIPPED
+> Task :solr:server:processResources NO-SOURCE
+> Task :solr:server:classes UP-TO-DATE
+> Task :solr:server:ecjLintTest SKIPPED
+> Task :solr:server:ecjLint
+> Task :solr:server:forbiddenApisMain NO-SOURCE
+> Task :solr:server:compileTestJava NO-SOURCE
+> Task :solr:server:processTestResources NO-SOURCE
+> Task :solr:server:testClasses UP-TO-DATE
+> Task :solr:server:forbiddenApisTest NO-SOURCE
+> Task :solr:server:forbiddenApis UP-TO-DATE
+> Task :solr:server:renderJavadoc SKIPPED
+> Task :solr:server:javadoc SKIPPED
+> Task :solr:server:rat
+> Task :solr:server:spotlessJava
+> Task :solr:server:spotlessJavaCheck
+> Task :solr:server:spotlessCheck
+> Task :solr:server:validateLogCalls
+> Task :solr:solr-ref-guide:ecjLintMain SKIPPED
+> Task :solr:solr-ref-guide:validateSourcePatterns
+> Task :solr:solr-ref-guide:compileJava NO-SOURCE
+> Task :solr:solr-ref-guide:processResources NO-SOURCE
+> Task :solr:solr-ref-guide:classes UP-TO-DATE
+> Task :solr:solr-ref-guide:forbiddenApisMain NO-SOURCE
+> Task :solr:solr-ref-guide:copySolrjTestResources
+> Task :solr:solr-ref-guide:processTestResources NO-SOURCE
+> Task :solr:core:classes
+> Task :solr:core:jar
+
+> Task :solr:modules:cross-dc:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:cross-dc:classes
+> Task :solr:modules:cross-dc:jar
+> Task :solr:modules:opentelemetry:compileJava
+> Task :solr:modules:opentelemetry:classes
+> Task :solr:modules:opentelemetry:jar
+> Task :solr:server:collectJarInfos
+
+> Task :solr:modules:analysis-extras:compileJava
+Note: /workspace/worktrees/gate-5221/solr/modules/analysis-extras/src/java/org/apache/solr/schema/ICUCollationField.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:analysis-extras:classes
+> Task :solr:modules:analysis-extras:jar
+> Task :solr:server:validateJarChecksums
+
+> Task :solr:test-framework:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:test-framework:classes
+> Task :solr:test-framework:jar
+> Task :solr:cross-dc-manager:collectJarInfos
+> Task :solr:modules:analysis-extras:collectJarInfos
+> Task :solr:modules:clustering:collectJarInfos
+> Task :solr:modules:cross-dc:collectJarInfos
+> Task :solr:modules:cuvs:collectJarInfos
+> Task :solr:modules:extraction:collectJarInfos
+> Task :solr:modules:gcs-repository:collectJarInfos
+
+> Task :solr:modules:sql:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:langid:collectJarInfos
+> Task :solr:modules:jwt-auth:collectJarInfos
+> Task :solr:modules:ltr:collectJarInfos
+> Task :solr:modules:opentelemetry:collectJarInfos
+> Task :solr:modules:language-models:collectJarInfos
+> Task :solr:modules:scripting:collectJarInfos
+> Task :solr:modules:sql:collectJarInfos
+> Task :solr:api:collectJarInfos
+> Task :solr:modules:s3-repository:collectJarInfos
+> Task :platform:validateJarLicenses
+> Task :platform:licenses
+> Task :solr:api:validateJarChecksums
+> Task :solr:benchmark:collectJarInfos
+> Task :solr:api:validateJarLicenses
+> Task :solr:api:licenses
+> Task :solr:benchmark:validateJarChecksums
+> Task :solr:benchmark:validateJarLicenses
+> Task :solr:benchmark:licenses
+> Task :solr:core:collectJarInfos
+> Task :solr:cross-dc-manager:validateJarChecksums
+> Task :solr:cross-dc-manager:validateJarLicenses
+> Task :solr:cross-dc-manager:licenses
+> Task :solr:distribution:validateJarLicenses
+> Task :solr:distribution:licenses
+> Task :solr:docker:validateJarLicenses
+> Task :solr:docker:licenses
+> Task :solr:documentation:validateJarLicenses
+> Task :solr:documentation:licenses
+> Task :solr:example:validateJarLicenses
+> Task :solr:example:licenses
+> Task :solr:modules:validateJarLicenses
+> Task :solr:modules:licenses
+> Task :solr:packaging:validateJarLicenses
+> Task :solr:packaging:licenses
+> Task :solr:server:validateJarLicenses
+> Task :solr:server:licenses
+> Task :solr:solr-ref-guide:validateJarLicenses
+> Task :solr:solr-ref-guide:licenses
+> Task :solr:solrj:collectJarInfos
+> Task :solr:core:validateJarChecksums
+> Task :solr:solrj:validateJarChecksums
+> Task :solr:solrj:validateJarLicenses
+> Task :solr:solrj:licenses
+> Task :solr:core:validateJarLicenses
+> Task :solr:core:licenses
+> Task :solr:modules:sql:classes
+> Task :solr:modules:sql:jar
+> Task :solr:solrj-streaming:collectJarInfos
+> Task :solr:solrj-streaming:validateJarChecksums
+> Task :solr:solrj-streaming:validateJarLicenses
+> Task :solr:solrj-streaming:licenses
+> Task :solr:solrj-zookeeper:collectJarInfos
+> Task :solr:solrj-zookeeper:validateJarChecksums
+> Task :solr:solrj-zookeeper:validateJarLicenses
+> Task :solr:solrj-zookeeper:licenses
+> Task :solr:test-framework:collectJarInfos
+> Task :solr:test-framework:validateJarChecksums
+> Task :solr:test-framework:validateJarLicenses
+> Task :solr:test-framework:licenses
+> Task :solr:webapp:collectJarInfos
+> Task :solr:webapp:validateJarChecksums
+> Task :solr:webapp:validateJarLicenses
+> Task :solr:webapp:licenses
+> Task :solr:modules:analysis-extras:validateJarChecksums
+> Task :solr:modules:analysis-extras:validateJarLicenses
+> Task :solr:modules:analysis-extras:licenses
+> Task :solr:modules:clustering:validateJarChecksums
+> Task :solr:modules:clustering:validateJarLicenses
+> Task :solr:modules:clustering:licenses
+> Task :solr:modules:cross-dc:validateJarChecksums
+> Task :solr:modules:cross-dc:validateJarLicenses
+> Task :solr:modules:cross-dc:licenses
+> Task :solr:modules:cuvs:validateJarChecksums
+> Task :solr:modules:cuvs:validateJarLicenses
+> Task :solr:modules:cuvs:licenses
+> Task :solr:modules:extraction:validateJarChecksums
+> Task :solr:modules:extraction:validateJarLicenses
+> Task :solr:modules:extraction:licenses
+> Task :solr:modules:gcs-repository:validateJarChecksums
+> Task :solr:modules:gcs-repository:validateJarLicenses
+> Task :solr:modules:gcs-repository:licenses
+
+> Task :solr:solrj:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:jwt-auth:validateJarChecksums
+> Task :solr:modules:jwt-auth:validateJarLicenses
+> Task :solr:modules:jwt-auth:licenses
+> Task :solr:modules:langid:validateJarChecksums
+> Task :solr:solrj:testClasses
+> Task :solr:modules:langid:validateJarLicenses
+> Task :solr:modules:langid:licenses
+> Task :solr:modules:language-models:validateJarChecksums
+> Task :solr:modules:language-models:validateJarLicenses
+> Task :solr:modules:language-models:licenses
+> Task :solr:modules:ltr:validateJarChecksums
+> Task :solr:modules:ltr:validateJarLicenses
+> Task :solr:modules:ltr:licenses
+> Task :solr:modules:opentelemetry:validateJarChecksums
+> Task :solr:solrj:testJar
+> Task :solr:solrj-jetty:collectJarInfos
+> Task :solr:modules:opentelemetry:validateJarLicenses
+> Task :solr:modules:opentelemetry:licenses
+> Task :solr:solrj-jetty:validateJarChecksums
+> Task :solr:solrj-jetty:validateJarLicenses
+> Task :solr:solrj-jetty:licenses
+> Task :solr:modules:scripting:validateJarChecksums
+> Task :solr:modules:scripting:validateJarLicenses
+> Task :solr:modules:scripting:licenses
+> Task :solr:modules:s3-repository:validateJarChecksums
+> Task :solr:modules:sql:validateJarChecksums
+> Task :solr:modules:s3-repository:validateJarLicenses
+> Task :solr:modules:s3-repository:licenses
+> Task :solr:webapp:js-client:validateJarLicenses
+> Task :solr:webapp:js-client:licenses
+> Task :solr:validateJarLicenses
+> Task :solr:modules:sql:validateJarLicenses
+> Task :solr:modules:sql:licenses
+> Task :solr:checkDanglingLicenseFiles
+> Task :solr:licenses
+> Task :solr:api:ecjLintTest
+> Task :solr:api:ecjLint
+> Task :solr:api:compileTestJava
+> Task :solr:api:testClasses
+> Task :solr:benchmark:ecjLintMain
+
+> Task :solr:api:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:api:forbiddenApis
+> Task :solr:api:spotlessJava
+> Task :solr:api:spotlessJavaCheck
+> Task :solr:api:spotlessCheck
+> Task :solr:benchmark:compileJava
+> Task :solr:benchmark:classes
+> Task :solr:benchmark:ecjLintTest
+> Task :solr:benchmark:ecjLint
+
+> Task :solr:benchmark:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:benchmark:compileTestJava
+> Task :solr:benchmark:testClasses
+
+> Task :solr:benchmark:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:benchmark:forbiddenApis
+> Task :solr:benchmark:spotlessJava
+> Task :solr:benchmark:spotlessJavaCheck
+> Task :solr:benchmark:spotlessCheck
+> Task :solr:cross-dc-manager:ecjLintMain
+
+> Task :solr:cross-dc-manager:compileJava
+Note: /workspace/worktrees/gate-5221/solr/cross-dc-manager/src/java/org/apache/solr/crossdc/manager/messageprocessor/SolrMessageProcessor.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:cross-dc-manager:classes
+> Task :solr:cross-dc-manager:ecjLintTest
+> Task :solr:cross-dc-manager:ecjLint
+
+> Task :solr:cross-dc-manager:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:cross-dc-manager:compileTestJava
+Note: /workspace/worktrees/gate-5221/solr/cross-dc-manager/src/test/org/apache/solr/crossdc/manager/consumer/KafkaCrossDcConsumerTest.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:cross-dc-manager:testClasses
+
+> Task :solr:cross-dc-manager:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:cross-dc-manager:forbiddenApis
+> Task :solr:cross-dc-manager:spotlessJava
+> Task :solr:cross-dc-manager:spotlessJavaCheck
+> Task :solr:cross-dc-manager:spotlessCheck
+> Task :solr:solr-ref-guide:ecjLintTest SKIPPED
+> Task :solr:solr-ref-guide:ecjLint
+
+> Task :solr:solr-ref-guide:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solr-ref-guide:testClasses
+
+> Task :solr:solr-ref-guide:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:solr-ref-guide:forbiddenApis
+> Task :solr:solr-ref-guide:renderJavadoc SKIPPED
+> Task :solr:solr-ref-guide:javadoc SKIPPED
+> Task :solr:solr-ref-guide:rat
+> Task :solr:solr-ref-guide:spotlessJava
+> Task :solr:solr-ref-guide:spotlessJavaCheck
+> Task :solr:solr-ref-guide:spotlessCheck
+> Task :solr:core:renderJavadoc
+> Task :solr:solr-ref-guide:validateLogCalls
+> Task :solr:solrj:ecjLintMain
+> Task :solr:solrj:ecjLintTest
+> Task :solr:solrj:ecjLint
+> Task :solr:solrj:forbiddenApisMain
+
+> Task :solr:solrj:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:solrj:forbiddenApis
+> Task :solr:solrj:javadoc SKIPPED
+> Task :solr:solrj:rat
+> Task :solr:solrj:spotlessJava
+> Task :solr:solrj:spotlessJavaCheck
+> Task :solr:solrj:spotlessCheck
+> Task :solr:solrj:validateLogCalls
+> Task :solr:solrj-jetty:ecjLintMain
+> Task :solr:solrj-jetty:ecjLintTest
+> Task :solr:solrj-jetty:ecjLint
+> Task :solr:solrj-jetty:forbiddenApisMain
+
+> Task :solr:solrj-jetty:compileTestJava
+Note: /workspace/worktrees/gate-5221/solr/solrj-jetty/src/test/org/apache/solr/client/solrj/jetty/HttpJettySolrClientTest.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:processTestResources
+> Task :solr:solrj-jetty:testClasses
+
+> Task :solr:solrj-jetty:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:solrj-jetty:forbiddenApis
+> Task :solr:solrj-jetty:javadoc SKIPPED
+> Task :solr:solrj-jetty:rat
+> Task :solr:solrj-jetty:spotlessJava
+> Task :solr:solrj-jetty:spotlessJavaCheck
+> Task :solr:solrj-jetty:spotlessCheck
+> Task :solr:solrj-jetty:validateLogCalls
+> Task :solr:solrj-streaming:ecjLintMain
+> Task :solr:solrj-streaming:ecjLintTest
+> Task :solr:solrj-streaming:ecjLint
+> Task :solr:solrj-streaming:forbiddenApisMain
+
+> Task :solr:solrj-streaming:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:ecjLintMain
+> Task :solr:test-framework:renderJavadoc
+> Task :solr:benchmark:renderJavadoc
+> Task :solr:benchmark:javadoc SKIPPED
+> Task :solr:modules:cross-dc:renderJavadoc
+> Task :solr:modules:opentelemetry:renderJavadoc
+> Task :solr:cross-dc-manager:renderJavadoc
+> Task :solr:cross-dc-manager:javadoc SKIPPED
+> Task :solr:core:ecjLintTest
+> Task :solr:core:ecjLint
+> Task :solr:solrj-streaming:processTestResources
+> Task :solr:solrj-streaming:testClasses
+
+> Task :solr:core:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:solrj-streaming:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:solrj-streaming:forbiddenApis
+> Task :solr:solrj-streaming:javadoc SKIPPED
+> Task :solr:solrj-streaming:rat
+> Task :solr:solrj-streaming:spotlessJava
+> Task :solr:solrj-streaming:spotlessJavaCheck
+> Task :solr:solrj-streaming:spotlessCheck
+> Task :solr:solrj-streaming:validateLogCalls
+> Task :solr:solrj-zookeeper:ecjLintMain
+> Task :solr:solrj-zookeeper:ecjLintTest
+> Task :solr:solrj-zookeeper:ecjLint
+
+> Task :solr:solrj-zookeeper:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:solrj-zookeeper:compileTestJava
+> Task :solr:solrj-zookeeper:processTestResources
+> Task :solr:solrj-zookeeper:testClasses
+
+> Task :solr:solrj-zookeeper:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:solrj-zookeeper:forbiddenApis
+> Task :solr:solrj-zookeeper:javadoc SKIPPED
+> Task :solr:solrj-zookeeper:rat
+> Task :solr:solrj-zookeeper:spotlessJava
+> Task :solr:solrj-zookeeper:spotlessJavaCheck
+> Task :solr:solrj-zookeeper:spotlessCheck
+> Task :solr:solrj-zookeeper:validateLogCalls
+> Task :solr:test-framework:ecjLintMain
+> Task :solr:test-framework:ecjLintTest
+> Task :solr:test-framework:ecjLint
+
+> Task :solr:test-framework:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:test-framework:compileTestJava
+> Task :solr:test-framework:processTestResources
+> Task :solr:test-framework:testClasses
+
+> Task :solr:test-framework:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:test-framework:forbiddenApis
+> Task :solr:test-framework:javadoc SKIPPED
+> Task :solr:test-framework:rat
+> Task :solr:test-framework:spotlessJava
+> Task :solr:test-framework:spotlessJavaCheck
+> Task :solr:test-framework:spotlessCheck
+> Task :solr:test-framework:validateLogCalls
+> Task :solr:webapp:ecjLintMain SKIPPED
+> Task :solr:webapp:validateSourcePatterns
+> Task :solr:webapp:compileJava NO-SOURCE
+> Task :solr:core:compileTestJava
+> Task :solr:webapp:downloadUiWasm
+> Task :solr:webapp:verifyUiWasm
+
+> Task :solr:webapp:prepareUiResources
+Solr Admin UI: using downloaded artifact for commit 473a55ef64a9a1605e00eb6c1c386887d4cb7dac
+
+> Task :solr:webapp:processResources
+> Task :solr:webapp:classes
+> Task :solr:webapp:ecjLintTest
+> Task :solr:webapp:ecjLint
+> Task :solr:webapp:forbiddenApisMain NO-SOURCE
+
+> Task :solr:webapp:compileTestJava
+Note: /workspace/worktrees/gate-5221/solr/webapp/src/test/org/apache/solr/webapp/AdminUiCollectionsScreenTest.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:webapp:processTestResources
+> Task :solr:webapp:testClasses
+
+> Task :solr:webapp:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:webapp:forbiddenApis
+> Task :solr:webapp:renderJavadoc SKIPPED
+> Task :solr:webapp:javadoc SKIPPED
+> Task :solr:webapp:rat
+> Task :solr:webapp:spotlessJava
+> Task :solr:webapp:spotlessJavaCheck
+> Task :solr:webapp:spotlessCheck
+> Task :solr:webapp:validateLogCalls
+> Task :solr:modules:analysis-extras:ecjLintMain
+> Task :solr:modules:analysis-extras:ecjLintTest
+> Task :solr:modules:analysis-extras:ecjLint
+
+> Task :solr:modules:analysis-extras:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:analysis-extras:compileTestJava
+> Task :solr:modules:analysis-extras:processTestResources
+> Task :solr:modules:analysis-extras:testClasses
+
+> Task :solr:modules:analysis-extras:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:analysis-extras:forbiddenApis
+> Task :solr:modules:analysis-extras:renderJavadoc
+> Task :solr:modules:analysis-extras:javadoc SKIPPED
+
+> Task :solr:core:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:analysis-extras:rat
+> Task :solr:modules:analysis-extras:spotlessJava
+> Task :solr:modules:analysis-extras:spotlessJavaCheck
+> Task :solr:modules:analysis-extras:spotlessCheck
+> Task :solr:modules:analysis-extras:validateLogCalls
+> Task :solr:modules:clustering:ecjLintMain
+> Task :solr:modules:clustering:validateSourcePatterns
+> Task :solr:modules:clustering:compileJava
+> Task :solr:modules:clustering:processResources NO-SOURCE
+> Task :solr:modules:clustering:classes
+> Task :solr:modules:clustering:ecjLintTest
+> Task :solr:modules:clustering:ecjLint
+
+> Task :solr:modules:clustering:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:clustering:compileTestJava
+> Task :solr:modules:clustering:processTestResources
+> Task :solr:modules:clustering:testClasses
+
+> Task :solr:modules:clustering:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:clustering:forbiddenApis
+> Task :solr:modules:clustering:renderJavadoc
+> Task :solr:modules:clustering:javadoc SKIPPED
+> Task :solr:modules:clustering:rat
+> Task :solr:modules:clustering:spotlessJava
+> Task :solr:modules:clustering:spotlessJavaCheck
+> Task :solr:modules:clustering:spotlessCheck
+> Task :solr:modules:clustering:validateLogCalls
+> Task :solr:modules:cross-dc:ecjLintMain
+> Task :solr:modules:cross-dc:ecjLintTest
+> Task :solr:modules:cross-dc:ecjLint
+
+> Task :solr:modules:cross-dc:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:cross-dc:compileTestJava
+Note: /workspace/worktrees/gate-5221/solr/modules/cross-dc/src/test/org/apache/solr/crossdc/handler/MirroringConfigSetsHandlerTest.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:cross-dc:processTestResources
+> Task :solr:modules:cross-dc:testClasses
+
+> Task :solr:modules:cross-dc:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:cross-dc:forbiddenApis
+> Task :solr:modules:cross-dc:javadoc SKIPPED
+> Task :solr:modules:cross-dc:rat
+> Task :solr:modules:cross-dc:spotlessJava
+> Task :solr:modules:cross-dc:spotlessJavaCheck
+> Task :solr:modules:cross-dc:spotlessCheck
+> Task :solr:modules:cross-dc:validateLogCalls
+> Task :solr:modules:cuvs:ecjLintMain
+> Task :solr:modules:cuvs:validateSourcePatterns
+> Task :solr:modules:cuvs:compileJava
+> Task :solr:modules:cuvs:processResources NO-SOURCE
+> Task :solr:modules:cuvs:classes
+> Task :solr:modules:cuvs:ecjLintTest
+> Task :solr:modules:cuvs:ecjLint
+
+> Task :solr:modules:cuvs:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:core:processTestResources
+> Task :solr:core:testClasses
+> Task :solr:modules:cuvs:compileTestJava
+> Task :solr:modules:cuvs:processTestResources
+> Task :solr:modules:cuvs:testClasses
+
+> Task :solr:modules:cuvs:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:cuvs:forbiddenApis
+
+> Task :solr:core:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:cuvs:renderJavadoc
+> Task :solr:modules:cuvs:javadoc SKIPPED
+> Task :solr:modules:cuvs:rat
+> Task :solr:modules:cuvs:spotlessJava
+> Task :solr:modules:cuvs:spotlessJavaCheck
+> Task :solr:modules:cuvs:spotlessCheck
+> Task :solr:modules:cuvs:validateLogCalls
+> Task :solr:modules:extraction:ecjLintMain
+> Task :solr:modules:extraction:validateSourcePatterns
+
+> Task :solr:modules:extraction:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:extraction:processResources
+> Task :solr:modules:extraction:classes
+> Task :solr:modules:extraction:ecjLintTest
+> Task :solr:modules:extraction:ecjLint
+
+> Task :solr:modules:extraction:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:extraction:compileTestJava
+Note: /workspace/worktrees/gate-5221/solr/modules/extraction/src/test/org/apache/solr/handler/extraction/ExtractingRequestHandlerTestAbstract.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:extraction:processTestResources
+> Task :solr:modules:extraction:testClasses
+
+> Task :solr:modules:extraction:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:extraction:forbiddenApis
+> Task :solr:modules:extraction:renderJavadoc
+> Task :solr:modules:extraction:javadoc SKIPPED
+> Task :solr:modules:extraction:rat
+> Task :solr:modules:extraction:spotlessJava
+> Task :solr:modules:extraction:spotlessJavaCheck
+> Task :solr:modules:extraction:spotlessCheck
+> Task :solr:modules:extraction:validateLogCalls
+> Task :solr:modules:gcs-repository:ecjLintMain
+> Task :solr:modules:gcs-repository:validateSourcePatterns
+
+> Task :solr:modules:gcs-repository:compileJava
+Note: /workspace/worktrees/gate-5221/solr/modules/gcs-repository/src/java/org/apache/solr/gcs/GCSConfigParser.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:gcs-repository:processResources NO-SOURCE
+> Task :solr:modules:gcs-repository:classes
+> Task :solr:modules:gcs-repository:ecjLintTest
+> Task :solr:modules:gcs-repository:ecjLint
+
+> Task :solr:modules:gcs-repository:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:gcs-repository:compileTestJava
+Note: /workspace/worktrees/gate-5221/solr/modules/gcs-repository/src/test/org/apache/solr/gcs/ConcurrentDelegatingStorage.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:gcs-repository:processTestResources
+> Task :solr:modules:gcs-repository:testClasses
+
+> Task :solr:modules:gcs-repository:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:gcs-repository:forbiddenApis
+> Task :solr:core:forbiddenApis
+> Task :solr:core:javadoc SKIPPED
+> Task :solr:modules:gcs-repository:renderJavadoc
+> Task :solr:modules:gcs-repository:javadoc SKIPPED
+> Task :solr:core:rat
+> Task :solr:modules:gcs-repository:rat
+> Task :solr:modules:gcs-repository:spotlessJava
+> Task :solr:modules:gcs-repository:spotlessJavaCheck
+> Task :solr:modules:gcs-repository:spotlessCheck
+> Task :solr:modules:gcs-repository:validateLogCalls
+> Task :solr:modules:jwt-auth:ecjLintMain
+> Task :solr:modules:jwt-auth:validateSourcePatterns
+> Task :solr:modules:jwt-auth:compileJava
+> Task :solr:modules:jwt-auth:processResources NO-SOURCE
+> Task :solr:modules:jwt-auth:classes
+> Task :solr:modules:jwt-auth:ecjLintTest
+> Task :solr:modules:jwt-auth:ecjLint
+
+> Task :solr:modules:jwt-auth:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:jwt-auth:compileTestJava
+> Task :solr:modules:jwt-auth:processTestResources
+> Task :solr:modules:jwt-auth:testClasses
+
+> Task :solr:modules:jwt-auth:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:jwt-auth:forbiddenApis
+> Task :solr:modules:jwt-auth:renderJavadoc
+> Task :solr:modules:jwt-auth:javadoc SKIPPED
+> Task :solr:modules:jwt-auth:rat
+> Task :solr:modules:jwt-auth:spotlessJava
+> Task :solr:modules:jwt-auth:spotlessJavaCheck
+> Task :solr:modules:jwt-auth:spotlessCheck
+> Task :solr:modules:jwt-auth:validateLogCalls
+> Task :solr:modules:langid:ecjLintMain
+> Task :solr:modules:langid:validateSourcePatterns
+> Task :solr:modules:langid:compileJava
+> Task :solr:modules:langid:processResources NO-SOURCE
+> Task :solr:modules:langid:classes
+> Task :solr:modules:langid:ecjLintTest
+> Task :solr:modules:langid:ecjLint
+
+> Task :solr:modules:langid:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:langid:compileTestJava
+> Task :solr:modules:langid:processTestResources
+> Task :solr:modules:langid:testClasses
+
+> Task :solr:modules:langid:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:langid:forbiddenApis
+> Task :solr:modules:langid:renderJavadoc
+> Task :solr:modules:langid:javadoc SKIPPED
+> Task :solr:modules:langid:rat
+> Task :solr:modules:langid:spotlessJava
+> Task :solr:modules:langid:spotlessJavaCheck
+> Task :solr:modules:langid:spotlessCheck
+> Task :solr:modules:langid:validateLogCalls
+> Task :solr:modules:language-models:ecjLintMain
+> Task :solr:modules:language-models:validateSourcePatterns
+> Task :solr:modules:language-models:compileJava
+> Task :solr:modules:language-models:processResources NO-SOURCE
+> Task :solr:modules:language-models:classes
+> Task :solr:core:spotlessJava
+> Task :solr:modules:language-models:ecjLintTest
+> Task :solr:modules:language-models:ecjLint
+
+> Task :solr:modules:language-models:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:language-models:compileTestJava
+Note: /workspace/worktrees/gate-5221/solr/modules/language-models/src/test/org/apache/solr/languagemodels/TestLanguageModelBase.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:language-models:processTestResources
+> Task :solr:modules:language-models:testClasses
+
+> Task :solr:modules:language-models:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:language-models:forbiddenApis
+> Task :solr:core:spotlessJavaCheck
+> Task :solr:core:spotlessCheck
+> Task :solr:modules:language-models:renderJavadoc
+> Task :solr:modules:language-models:javadoc SKIPPED
+> Task :solr:modules:language-models:rat
+> Task :solr:modules:language-models:spotlessJava
+> Task :solr:modules:language-models:spotlessJavaCheck
+> Task :solr:modules:language-models:spotlessCheck
+> Task :solr:modules:language-models:validateLogCalls
+> Task :solr:modules:ltr:ecjLintMain
+> Task :solr:modules:ltr:validateSourcePatterns
+
+> Task :solr:modules:ltr:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:ltr:processResources NO-SOURCE
+> Task :solr:modules:ltr:classes
+> Task :solr:modules:ltr:ecjLintTest
+> Task :solr:modules:ltr:ecjLint
+
+> Task :solr:modules:ltr:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:ltr:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:ltr:processTestResources
+> Task :solr:modules:ltr:testClasses
+
+> Task :solr:modules:ltr:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:ltr:forbiddenApis
+> Task :solr:modules:ltr:renderJavadoc
+> Task :solr:modules:ltr:javadoc SKIPPED
+> Task :solr:core:validateLogCalls
+> Task :solr:modules:opentelemetry:ecjLintMain
+> Task :solr:modules:ltr:rat
+> Task :solr:modules:opentelemetry:ecjLintTest
+> Task :solr:modules:opentelemetry:ecjLint
+
+> Task :solr:modules:opentelemetry:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:ltr:spotlessJava
+> Task :solr:modules:ltr:spotlessJavaCheck
+> Task :solr:modules:ltr:spotlessCheck
+> Task :solr:modules:ltr:validateLogCalls
+> Task :solr:modules:opentelemetry:compileTestJava
+> Task :solr:modules:opentelemetry:processTestResources
+> Task :solr:modules:opentelemetry:testClasses
+
+> Task :solr:modules:opentelemetry:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:opentelemetry:forbiddenApis
+> Task :solr:modules:opentelemetry:javadoc SKIPPED
+> Task :solr:modules:s3-repository:ecjLintMain
+> Task :solr:modules:opentelemetry:rat
+> Task :solr:modules:s3-repository:validateSourcePatterns
+> Task :solr:modules:opentelemetry:spotlessJava
+> Task :solr:modules:opentelemetry:spotlessJavaCheck
+> Task :solr:modules:opentelemetry:spotlessCheck
+> Task :solr:modules:opentelemetry:validateLogCalls
+> Task :solr:modules:s3-repository:compileJava
+> Task :solr:modules:s3-repository:processResources NO-SOURCE
+> Task :solr:modules:s3-repository:classes
+> Task :solr:modules:scripting:ecjLintMain
+> Task :solr:modules:scripting:validateSourcePatterns
+
+> Task :solr:modules:scripting:compileJava
+Note: /workspace/worktrees/gate-5221/solr/modules/scripting/src/java/org/apache/solr/scripting/xslt/XSLTUpdateRequestHandler.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:scripting:processResources NO-SOURCE
+> Task :solr:modules:scripting:classes
+> Task :solr:modules:s3-repository:ecjLintTest
+> Task :solr:modules:s3-repository:ecjLint
+
+> Task :solr:modules:s3-repository:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:scripting:ecjLintTest
+> Task :solr:modules:scripting:ecjLint
+
+> Task :solr:modules:scripting:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:s3-repository:compileTestJava
+> Task :solr:modules:s3-repository:processTestResources
+> Task :solr:modules:s3-repository:testClasses
+> Task :solr:modules:scripting:compileTestJava
+
+> Task :solr:modules:s3-repository:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:s3-repository:forbiddenApis
+> Task :solr:modules:scripting:processTestResources
+> Task :solr:modules:scripting:testClasses
+
+> Task :solr:modules:scripting:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:scripting:forbiddenApis
+> Task :solr:modules:s3-repository:renderJavadoc
+> Task :solr:modules:s3-repository:javadoc SKIPPED
+> Task :solr:modules:s3-repository:rat
+> Task :solr:modules:scripting:renderJavadoc
+> Task :solr:modules:scripting:javadoc SKIPPED
+> Task :solr:modules:s3-repository:spotlessJava
+> Task :solr:modules:s3-repository:spotlessJavaCheck
+> Task :solr:modules:s3-repository:spotlessCheck
+> Task :solr:modules:s3-repository:validateLogCalls
+> Task :solr:modules:scripting:rat
+> Task :solr:modules:scripting:spotlessJava
+> Task :solr:modules:scripting:spotlessJavaCheck
+> Task :solr:modules:scripting:spotlessCheck
+> Task :solr:modules:scripting:validateLogCalls
+> Task :solr:webapp:js-client:rat
+> Task :solr:webapp:js-client:validateSourcePatterns
+> Task :platform:check
+> Task :solr:check
+> Task :solr:api:validateOpenApiSpec
+> Task :solr:api:check
+> Task :solr:benchmark:check
+> Task :solr:core:check
+> Task :solr:cross-dc-manager:check
+> Task :solr:distribution:check
+> Task :solr:docker:check
+> Task :solr:documentation:check
+> Task :solr:example:check
+> Task :solr:modules:check
+> Task :solr:packaging:check
+> Task :solr:server:check
+> Task :solr:modules:sql:ecjLintMain
+> Task :solr:modules:sql:ecjLintTest
+> Task :solr:modules:sql:ecjLint
+
+> Task :solr:modules:sql:forbiddenApisMain
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:solr-ref-guide:checkCliDocsUpToDate
+CLI docs are up to date.
+
+> Task :solr:modules:sql:compileTestJava
+> Task :solr:modules:sql:copySolrCoreTestResources
+> Task :solr:modules:sql:processTestResources
+> Task :solr:modules:sql:testClasses
+
+> Task :solr:modules:sql:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:modules:sql:forbiddenApis
+> Task :solr:modules:sql:renderJavadoc
+> Task :solr:modules:sql:javadoc SKIPPED
+> Task :solr:modules:sql:rat
+> Task :solr:modules:sql:spotlessJava
+> Task :solr:modules:sql:spotlessJavaCheck
+> Task :solr:modules:sql:spotlessCheck
+> Task :solr:modules:sql:validateLogCalls
+> Task :precommit
+> Task :check
+> Task :solr:documentation:collectLuceneJavadocs
+> Task :solr:api:renderSiteJavadoc
+> Task :solr:solrj:renderSiteJavadoc
+> Task :solr:solrj-jetty:renderSiteJavadoc
+> Task :solr:solrj-streaming:renderSiteJavadoc
+> Task :solr:solrj-zookeeper:renderSiteJavadoc
+> Task :solr:core:renderSiteJavadoc
+> Task :solr:documentation:changesToHtml
+> Task :solr:server:renderSiteJavadoc SKIPPED
+> Task :solr:solr-ref-guide:renderSiteJavadoc SKIPPED
+> Task :solr:webapp:renderSiteJavadoc SKIPPED
+> Task :solr:solr-ref-guide:nodeSetup
+> Task :solr:test-framework:renderSiteJavadoc
+> Task :solr:benchmark:renderSiteJavadoc
+> Task :solr:modules:cross-dc:renderSiteJavadoc
+> Task :solr:modules:opentelemetry:renderSiteJavadoc
+> Task :solr:cross-dc-manager:renderSiteJavadoc
+> Task :solr:documentation:copyDocumentationAssets
+> Task :solr:documentation:markdownToHtml
+> Task :solr:solr-ref-guide:npmSetup SKIPPED
+
+> Task :solr:solr-ref-guide:downloadAntoraCli
+npm notice
+npm notice New major version of npm available! 10.9.3 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+
+> Task :solr:documentation:createDocumentationIndex
+> Task :solr:solr-ref-guide:downloadAntoraLunrExtension
+> Task :solr:modules:clustering:renderSiteJavadoc
+> Task :solr:modules:analysis-extras:renderSiteJavadoc
+> Task :solr:modules:cuvs:renderSiteJavadoc
+> Task :solr:modules:extraction:renderSiteJavadoc
+> Task :solr:modules:gcs-repository:renderSiteJavadoc
+> Task :solr:modules:jwt-auth:renderSiteJavadoc
+> Task :solr:modules:langid:renderSiteJavadoc
+> Task :solr:modules:language-models:renderSiteJavadoc
+> Task :solr:modules:s3-repository:renderSiteJavadoc
+> Task :solr:modules:ltr:renderSiteJavadoc
+> Task :solr:modules:scripting:renderSiteJavadoc
+> Task :solr:modules:sql:renderSiteJavadoc
+> Task :solr:documentation:documentation
+> Task :solr:solrj:check
+> Task :solr:solrj-jetty:check
+> Task :solr:solrj-streaming:check
+> Task :solr:solrj-zookeeper:check
+> Task :solr:test-framework:check
+> Task :solr:webapp:check
+> Task :solr:modules:analysis-extras:check
+> Task :solr:modules:clustering:check
+> Task :solr:modules:cross-dc:check
+> Task :solr:modules:cuvs:check
+> Task :solr:modules:extraction:check
+> Task :solr:modules:gcs-repository:check
+> Task :solr:modules:jwt-auth:check
+> Task :solr:modules:langid:check
+> Task :solr:modules:language-models:check
+> Task :solr:modules:ltr:check
+> Task :solr:modules:opentelemetry:check
+> Task :solr:modules:s3-repository:check
+> Task :solr:modules:scripting:check
+> Task :solr:modules:sql:check
+> Task :solr:webapp:js-client:check
+> Task :solr:solr-ref-guide:downloadAntoraSiteGenerator
+
+> Task :solr:solr-ref-guide:downloadAsciidoctorMathjaxExtension
+npm warn deprecated @xmldom/xmldom@0.9.10: this version has critical issues, please update to the latest version
+npm warn deprecated mathjax-full@3.2.2: Version 4 replaces this package with the scoped package @mathjax/src
+
+> Task :solr:solr-ref-guide:downloadAsciidoctorTabsExtension
+> Task :solr:solr-ref-guide:downloadAntora
+> Task :solr:solr-ref-guide:buildLocalAntoraPlaybookYaml
+> Task :solr:solr-ref-guide:buildLocalAntoraYaml
+> Task :solr:solr-ref-guide:setupLocalSiteStagingDir
+> Task :solr:solr-ref-guide:buildLocalAntoraSite FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':solr:solr-ref-guide:buildLocalAntoraSite' (registered in build file 'solr/solr-ref-guide/build.gradle').
+> Process 'command '/workspace/worktrees/gate-5221/solr/solr-ref-guide/.gradle/node/nodejs/node-v22.18.0-linux-arm64/bin/npx'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 18m 7s
+554 actionable tasks: 550 executed, 4 up-to-date
+rc=1

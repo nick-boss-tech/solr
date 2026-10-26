@@ -1,0 +1,7 @@
+['/workspace/worktrees/gate-5221/gradlew', '-p', '/tmp/solr-license-headers-nyyecgo2/fixture', '--console=plain', '--no-configuration-cache', 'addLicenseHeaders']
+
+> Task :addLicenseHeaders
+Added license header: Committed.java
+
+BUILD SUCCESSFUL in 3s
+1 actionable task: 1 executed

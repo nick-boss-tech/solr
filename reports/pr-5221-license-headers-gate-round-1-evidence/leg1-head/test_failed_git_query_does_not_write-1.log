@@ -1,0 +1,20 @@
+['/workspace/worktrees/gate-5221/gradlew', '-p', '/tmp/solr-license-headers-2kjyz7cc/fixture', '--console=plain', '--no-configuration-cache', 'addLicenseHeaders', '-PlicenseHeadersBase=8b64eb84c98d1a9a6f8477107ab118956c733e05']
+> Task :addLicenseHeaders FAILED
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Script '/tmp/solr-license-headers-2kjyz7cc/fixture/license-headers.gradle' line: 44
+
+* What went wrong:
+Execution failed for task ':addLicenseHeaders' (registered in script 'license-headers.gradle').
+> addLicenseHeaders: git diff --name-only -z --diff-filter=A 8b64eb84c98d1a9a6f8477107ab118956c733e05...HEAD -- failed: fatal: 8b64eb84c98d1a9a6f8477107ab118956c733e05...HEAD: no merge base
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 3s
+1 actionable task: 1 executed

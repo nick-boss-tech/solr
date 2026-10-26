@@ -1,0 +1,16 @@
+['/workspace/worktrees/gate-5221/gradlew', '-p', '/tmp/solr-license-headers-8u62i873/fixture', '--console=plain', '--no-configuration-cache', 'addLicenseHeaders']
+
+> Task :addLicenseHeaders
+Added license header: Bom.java
+Added license header: Committed.java
+Added license header: Staged.java
+Added license header: StringLiteral.java
+Added license header: Unicode/Café.java
+Added license header: Untracked.java
+Added license header: line
+break/Line.java
+Added license header: space dir/Space.java
+Added license header: tab	name/Tab.java
+
+BUILD SUCCESSFUL in 3s
+1 actionable task: 1 executed

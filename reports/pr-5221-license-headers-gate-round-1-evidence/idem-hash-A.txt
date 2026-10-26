@@ -1,0 +1,1 @@
+4ba743846153476d07b9cea1ba706ef7e983ddd5f3584321bb23b96cdb86b106  /workspace/worktrees/gate-5221/solr/solrj/src/java/org/apache/solr/client/solrj/LicenseHeaderGateProbe.java

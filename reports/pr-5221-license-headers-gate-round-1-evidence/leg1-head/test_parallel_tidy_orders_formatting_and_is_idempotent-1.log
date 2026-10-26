@@ -1,0 +1,16 @@
+['/workspace/worktrees/gate-5221/gradlew', '-p', '/tmp/solr-license-headers-d2o7qyjd/fixture', '--console=plain', '--no-configuration-cache', 'tidy', '--parallel', '--max-workers=2']
+
+> Task :addLicenseHeaders
+Added license header: a/src/Probe.java
+Added license header: b/src/Probe.java
+
+> Task :b:spotlessJava
+> Task :a:spotlessJava
+> Task :b:spotlessJavaApply
+> Task :b:tidy
+> Task :a:spotlessJavaApply
+> Task :a:tidy
+> Task :tidy
+
+BUILD SUCCESSFUL in 3s
+3 actionable tasks: 3 executed

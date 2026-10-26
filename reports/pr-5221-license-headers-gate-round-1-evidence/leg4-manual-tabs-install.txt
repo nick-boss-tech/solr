@@ -1,0 +1,1 @@
+manual: npm install -D @asciidoctor/tabs@1.0.0-beta.6 with NODE_ENV unset, in solr/solr-ref-guide/.gradle/node, rc=0 (gate-owned, ignored dir)

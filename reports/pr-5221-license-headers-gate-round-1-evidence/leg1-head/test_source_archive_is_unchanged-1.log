@@ -1,0 +1,7 @@
+['/workspace/worktrees/gate-5221/gradlew', '-p', '/tmp/solr-license-headers-8kbi5g85/archive', '--console=plain', '--no-configuration-cache', 'addLicenseHeaders']
+
+> Task :addLicenseHeaders
+addLicenseHeaders: no Git metadata; skipping source archive
+
+BUILD SUCCESSFUL in 3s
+1 actionable task: 1 executed

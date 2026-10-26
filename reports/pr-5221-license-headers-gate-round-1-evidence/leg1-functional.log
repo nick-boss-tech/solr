@@ -1,0 +1,18 @@
+test_explicit_base_overrides_defaults (__main__.LicenseHeadersTest.test_explicit_base_overrides_defaults) ... ok
+test_failed_git_query_does_not_write (__main__.LicenseHeadersTest.test_failed_git_query_does_not_write) ... ok
+test_invalid_override_fails_before_writing (__main__.LicenseHeadersTest.test_invalid_override_fails_before_writing) ... ok
+test_linked_git_worktree (__main__.LicenseHeadersTest.test_linked_git_worktree) ... ok
+test_local_main_fallback (__main__.LicenseHeadersTest.test_local_main_fallback) ... ok
+test_missing_base_fails_before_writing (__main__.LicenseHeadersTest.test_missing_base_fails_before_writing) ... ok
+test_new_sources_preserve_notices_and_are_idempotent (__main__.LicenseHeadersTest.test_new_sources_preserve_notices_and_are_idempotent) ... ok
+test_parallel_tidy_orders_formatting_and_is_idempotent (__main__.LicenseHeadersTest.test_parallel_tidy_orders_formatting_and_is_idempotent) ... ok
+test_preserve_existing_notices_and_generated_sources (__main__.LicenseHeadersTest.test_preserve_existing_notices_and_generated_sources) ... ok
+test_remote_upstream_main_without_local_main (__main__.LicenseHeadersTest.test_remote_upstream_main_without_local_main) ... ok
+test_source_archive_is_unchanged (__main__.LicenseHeadersTest.test_source_archive_is_unchanged) ... ok
+test_unicode_git_paths (__main__.LicenseHeadersTest.test_unicode_git_paths) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 58.074s
+
+OK
+rc=0 end 2026-10-26T00:56:55Z

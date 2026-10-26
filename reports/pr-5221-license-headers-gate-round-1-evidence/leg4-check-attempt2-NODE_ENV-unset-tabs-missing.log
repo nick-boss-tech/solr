@@ -1,0 +1,369 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :allHelpFilesExit
+> Task :gradlewScriptsTweaked UP-TO-DATE
+> Task :licenses UP-TO-DATE
+> Task :missing-doclet:compileJava UP-TO-DATE
+> Task :missing-doclet:processResources NO-SOURCE
+> Task :missing-doclet:classes UP-TO-DATE
+> Task :missing-doclet:jar UP-TO-DATE
+> Task :platform:collectJarInfos
+> Task :platform:validateJarChecksums
+> Task :solr:api:validateSourcePatterns UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :solr:core:validateSourcePatterns UP-TO-DATE
+> Task :solr:solrj:validateSourcePatterns UP-TO-DATE
+> Task :solr:solrj-jetty:validateSourcePatterns UP-TO-DATE
+> Task :solr:solrj-streaming:validateSourcePatterns UP-TO-DATE
+> Task :solr:solrj-zookeeper:validateSourcePatterns UP-TO-DATE
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:solrj:processResources UP-TO-DATE
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources UP-TO-DATE
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:validateSourcePatterns UP-TO-DATE
+> Task :solr:test-framework:processResources UP-TO-DATE
+> Task :solr:modules:cross-dc:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:cross-dc:processResources NO-SOURCE
+> Task :solr:modules:opentelemetry:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:opentelemetry:processResources NO-SOURCE
+> Task :solr:modules:analysis-extras:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:analysis-extras:processResources NO-SOURCE
+> Task :platform:rat UP-TO-DATE
+> Task :platform:validateSourcePatterns UP-TO-DATE
+> Task :solr:distribution:collectJarInfos
+> Task :solr:distribution:validateJarChecksums
+> Task :solr:docker:collectJarInfos
+> Task :solr:docker:validateJarChecksums
+> Task :solr:documentation:collectJarInfos
+> Task :solr:documentation:validateJarChecksums
+> Task :solr:example:collectJarInfos
+> Task :solr:example:validateJarChecksums
+> Task :solr:modules:collectJarInfos
+> Task :solr:modules:validateJarChecksums
+> Task :solr:packaging:collectJarInfos
+> Task :solr:packaging:validateJarChecksums
+> Task :solr:solr-ref-guide:collectJarInfos
+> Task :solr:solr-ref-guide:validateJarChecksums
+> Task :solr:solrj:processTestResources UP-TO-DATE
+> Task :solr:modules:sql:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:sql:processResources UP-TO-DATE
+> Task :solr:webapp:js-client:collectJarInfos
+> Task :solr:webapp:js-client:validateJarChecksums
+> Task :solr:collectJarInfos
+> Task :solr:validateJarChecksums
+> Task :solr:rat UP-TO-DATE
+> Task :solr:validateConfigFileSanity
+> Task :solr:validateSourcePatterns UP-TO-DATE
+> Task :solr:api:ecjLintMain UP-TO-DATE
+> Task :solr:api:processTestResources UP-TO-DATE
+> Task :solr:api:renderJavadoc UP-TO-DATE
+> Task :solr:api:rat UP-TO-DATE
+> Task :solr:api:validateLogCalls UP-TO-DATE
+> Task :solr:benchmark:validateSourcePatterns UP-TO-DATE
+> Task :solr:benchmark:processResources UP-TO-DATE
+> Task :solr:benchmark:processTestResources UP-TO-DATE
+> Task :solr:benchmark:rat UP-TO-DATE
+> Task :solr:benchmark:validateLogCalls UP-TO-DATE
+> Task :solr:core:processTestResources UP-TO-DATE
+> Task :checkWorkingCopyClean
+> Task :solr:core:rat UP-TO-DATE
+> Task :solr:core:validateLogCalls UP-TO-DATE
+> Task :solr:cross-dc-manager:validateSourcePatterns UP-TO-DATE
+> Task :solr:cross-dc-manager:processResources NO-SOURCE
+> Task :rat UP-TO-DATE
+> Task :solr:cross-dc-manager:processTestResources UP-TO-DATE
+> Task :solr:cross-dc-manager:rat UP-TO-DATE
+> Task :solr:cross-dc-manager:validateLogCalls UP-TO-DATE
+> Task :solr:distribution:rat UP-TO-DATE
+> Task :solr:distribution:validateSourcePatterns UP-TO-DATE
+> Task :solr:docker:rat UP-TO-DATE
+> Task :solr:docker:validateSourcePatterns UP-TO-DATE
+> Task :solr:documentation:rat UP-TO-DATE
+> Task :solr:documentation:validateSourcePatterns UP-TO-DATE
+> Task :validateSourcePatterns UP-TO-DATE
+> Task :solr:example:rat UP-TO-DATE
+> Task :solr:example:validateSourcePatterns UP-TO-DATE
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:modules:rat UP-TO-DATE
+> Task :checkJdkInternalsExportedToGradle
+> Task :solr:modules:validateSourcePatterns UP-TO-DATE
+> Task :solr:packaging:rat UP-TO-DATE
+> Task :solr:packaging:validateSourcePatterns UP-TO-DATE
+> Task :solr:server:ecjLintMain SKIPPED
+> Task :solr:server:validateSourcePatterns UP-TO-DATE
+> Task :solr:server:compileJava SKIPPED
+> Task :solr:server:processResources NO-SOURCE
+> Task :solr:server:classes UP-TO-DATE
+> Task :solr:server:ecjLintTest SKIPPED
+> Task :solr:server:ecjLint UP-TO-DATE
+> Task :solr:server:forbiddenApisMain NO-SOURCE
+> Task :solr:server:compileTestJava NO-SOURCE
+> Task :solr:server:processTestResources NO-SOURCE
+> Task :solr:server:testClasses UP-TO-DATE
+> Task :solr:server:forbiddenApisTest NO-SOURCE
+> Task :solr:server:forbiddenApis UP-TO-DATE
+> Task :solr:server:renderJavadoc SKIPPED
+> Task :solr:server:javadoc SKIPPED
+> Task :solr:server:rat UP-TO-DATE
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:jar UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+> Task :solr:server:spotlessJava
+> Task :solr:api:forbiddenApisMain UP-TO-DATE
+> Task :solr:api:javadoc SKIPPED
+> Task :solr:server:spotlessJavaCheck
+> Task :solr:server:spotlessCheck
+> Task :solr:server:validateLogCalls UP-TO-DATE
+> Task :solr:solr-ref-guide:ecjLintMain SKIPPED
+> Task :solr:solr-ref-guide:validateSourcePatterns UP-TO-DATE
+> Task :solr:solr-ref-guide:compileJava NO-SOURCE
+> Task :solr:solr-ref-guide:processResources NO-SOURCE
+> Task :solr:solr-ref-guide:classes UP-TO-DATE
+> Task :solr:solr-ref-guide:forbiddenApisMain NO-SOURCE
+> Task :solr:solr-ref-guide:copySolrjTestResources UP-TO-DATE
+> Task :solr:solr-ref-guide:processTestResources NO-SOURCE
+> Task :solr:solr-ref-guide:renderJavadoc SKIPPED
+> Task :solr:solr-ref-guide:javadoc SKIPPED
+> Task :solr:solr-ref-guide:rat UP-TO-DATE
+> Task :solr:solr-ref-guide:validateLogCalls UP-TO-DATE
+> Task :solr:solrj:rat UP-TO-DATE
+> Task :solr:solrj-jetty:processTestResources UP-TO-DATE
+> Task :solr:solrj-jetty:rat UP-TO-DATE
+> Task :solr:solrj-jetty:validateLogCalls UP-TO-DATE
+> Task :solr:solrj-streaming:processTestResources UP-TO-DATE
+> Task :solr:solrj-streaming:rat UP-TO-DATE
+> Task :solr:solrj-streaming:validateLogCalls UP-TO-DATE
+> Task :solr:solrj-zookeeper:processTestResources UP-TO-DATE
+> Task :solr:solrj-zookeeper:rat UP-TO-DATE
+> Task :solr:solrj-zookeeper:validateLogCalls UP-TO-DATE
+> Task :solr:test-framework:processTestResources UP-TO-DATE
+> Task :solr:test-framework:rat UP-TO-DATE
+> Task :solr:test-framework:validateLogCalls UP-TO-DATE
+> Task :solr:webapp:validateSourcePatterns UP-TO-DATE
+> Task :solr:webapp:downloadUiWasm SKIPPED
+> Task :solr:webapp:verifyUiWasm
+> Task :solr:webapp:prepareUiResources UP-TO-DATE
+> Task :solr:webapp:processResources UP-TO-DATE
+> Task :solr:webapp:processTestResources UP-TO-DATE
+> Task :solr:webapp:rat UP-TO-DATE
+> Task :solr:webapp:validateLogCalls UP-TO-DATE
+> Task :solr:modules:analysis-extras:processTestResources UP-TO-DATE
+> Task :solr:modules:analysis-extras:rat UP-TO-DATE
+> Task :solr:modules:analysis-extras:validateLogCalls UP-TO-DATE
+> Task :solr:modules:clustering:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:clustering:processResources NO-SOURCE
+> Task :solr:modules:clustering:processTestResources UP-TO-DATE
+> Task :solr:modules:clustering:rat UP-TO-DATE
+> Task :solr:modules:clustering:validateLogCalls UP-TO-DATE
+> Task :solr:modules:cross-dc:processTestResources UP-TO-DATE
+> Task :solr:modules:cross-dc:rat UP-TO-DATE
+> Task :solr:modules:cross-dc:validateLogCalls UP-TO-DATE
+> Task :solr:modules:cuvs:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:cuvs:processResources NO-SOURCE
+> Task :solr:modules:cuvs:processTestResources UP-TO-DATE
+> Task :solr:modules:cuvs:rat UP-TO-DATE
+> Task :solr:modules:cuvs:validateLogCalls UP-TO-DATE
+> Task :solr:modules:extraction:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:extraction:processResources UP-TO-DATE
+> Task :solr:modules:extraction:processTestResources UP-TO-DATE
+> Task :solr:modules:extraction:rat UP-TO-DATE
+> Task :solr:modules:extraction:validateLogCalls UP-TO-DATE
+> Task :solr:modules:gcs-repository:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:gcs-repository:processResources NO-SOURCE
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/gate-5221/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+
+> Task :solr:modules:gcs-repository:processTestResources UP-TO-DATE
+> Task :solr:modules:gcs-repository:rat UP-TO-DATE
+> Task :solr:modules:gcs-repository:validateLogCalls UP-TO-DATE
+> Task :solr:modules:jwt-auth:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:jwt-auth:processResources NO-SOURCE
+> Task :solr:modules:jwt-auth:processTestResources UP-TO-DATE
+> Task :solr:modules:jwt-auth:rat UP-TO-DATE
+> Task :solr:modules:jwt-auth:validateLogCalls UP-TO-DATE
+> Task :solr:modules:langid:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:langid:processResources NO-SOURCE
+> Task :solr:modules:langid:processTestResources UP-TO-DATE
+> Task :solr:modules:langid:rat UP-TO-DATE
+> Task :solr:modules:langid:validateLogCalls UP-TO-DATE
+> Task :solr:modules:language-models:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:language-models:processResources NO-SOURCE
+> Task :solr:modules:language-models:processTestResources UP-TO-DATE
+> Task :solr:modules:language-models:rat UP-TO-DATE
+> Task :solr:modules:language-models:validateLogCalls UP-TO-DATE
+> Task :solr:modules:ltr:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:ltr:processResources NO-SOURCE
+> Task :solr:modules:ltr:processTestResources UP-TO-DATE
+> Task :solr:modules:ltr:rat UP-TO-DATE
+> Task :solr:modules:ltr:validateLogCalls UP-TO-DATE
+> Task :solr:modules:opentelemetry:processTestResources UP-TO-DATE
+> Task :solr:modules:opentelemetry:rat UP-TO-DATE
+> Task :solr:modules:opentelemetry:validateLogCalls UP-TO-DATE
+> Task :solr:modules:s3-repository:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:s3-repository:processResources NO-SOURCE
+
+> Task :solr:solrj:openApiGenerate
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/gate-5221/solr/solrj/build/generated
+
+> Task :solr:modules:s3-repository:processTestResources UP-TO-DATE
+> Task :solr:modules:s3-repository:rat UP-TO-DATE
+> Task :solr:modules:s3-repository:validateLogCalls UP-TO-DATE
+> Task :solr:modules:scripting:validateSourcePatterns UP-TO-DATE
+> Task :solr:modules:scripting:processResources NO-SOURCE
+> Task :solr:modules:scripting:processTestResources UP-TO-DATE
+> Task :solr:modules:scripting:rat UP-TO-DATE
+> Task :solr:modules:scripting:validateLogCalls UP-TO-DATE
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+> Task :solr:modules:sql:copySolrCoreTestResources
+> Task :solr:modules:sql:processTestResources
+> Task :solr:modules:sql:rat UP-TO-DATE
+> Task :solr:modules:sql:validateLogCalls UP-TO-DATE
+> Task :solr:webapp:js-client:rat UP-TO-DATE
+> Task :solr:webapp:js-client:validateSourcePatterns UP-TO-DATE
+> Task :solr:api:validateOpenApiSpec UP-TO-DATE
+> Task :solr:documentation:collectLuceneJavadocs UP-TO-DATE
+> Task :solr:api:renderSiteJavadoc UP-TO-DATE
+> Task :solr:documentation:changesToHtml UP-TO-DATE
+> Task :solr:documentation:copyDocumentationAssets UP-TO-DATE
+> Task :solr:documentation:markdownToHtml UP-TO-DATE
+> Task :solr:documentation:createDocumentationIndex UP-TO-DATE
+> Task :solr:server:renderSiteJavadoc SKIPPED
+> Task :solr:solr-ref-guide:renderSiteJavadoc SKIPPED
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solr-ref-guide:nodeSetup UP-TO-DATE
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar UP-TO-DATE
+> Task :solr:solrj-jetty:classes UP-TO-DATE
+> Task :solr:solrj-jetty:jar UP-TO-DATE
+> Task :solr:solrj-streaming:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:solrj-streaming:jar UP-TO-DATE
+> Task :solr:solrj-zookeeper:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:jar UP-TO-DATE
+> Task :solr:solrj:renderJavadoc UP-TO-DATE
+> Task :solr:solrj-jetty:renderJavadoc UP-TO-DATE
+> Task :solr:solrj-streaming:renderJavadoc UP-TO-DATE
+> Task :solr:solrj-zookeeper:renderJavadoc UP-TO-DATE
+> Task :solr:solrj:ecjLintMain UP-TO-DATE
+> Task :solr:solrj:forbiddenApisMain UP-TO-DATE
+> Task :solr:solrj:javadoc SKIPPED
+> Task :solr:solrj:validateLogCalls UP-TO-DATE
+> Task :solr:solrj-jetty:ecjLintMain UP-TO-DATE
+> Task :solr:solrj-jetty:forbiddenApisMain UP-TO-DATE
+> Task :solr:solrj-jetty:javadoc SKIPPED
+> Task :solr:solrj-streaming:ecjLintMain UP-TO-DATE
+> Task :solr:solrj-streaming:forbiddenApisMain UP-TO-DATE
+> Task :solr:solrj-streaming:javadoc SKIPPED
+> Task :solr:solrj-zookeeper:ecjLintMain UP-TO-DATE
+> Task :solr:solrj-zookeeper:forbiddenApisMain UP-TO-DATE
+> Task :solr:solrj-zookeeper:javadoc SKIPPED
+> Task :solr:solrj:renderSiteJavadoc UP-TO-DATE
+> Task :solr:solrj-jetty:renderSiteJavadoc UP-TO-DATE
+> Task :solr:solrj-streaming:renderSiteJavadoc UP-TO-DATE
+> Task :solr:solrj-zookeeper:renderSiteJavadoc UP-TO-DATE
+> Task :solr:solr-ref-guide:npmSetup SKIPPED
+> Task :solr:solr-ref-guide:downloadAntoraCli UP-TO-DATE
+> Task :solr:solr-ref-guide:downloadAntoraLunrExtension UP-TO-DATE
+> Task :solr:solr-ref-guide:downloadAntoraSiteGenerator UP-TO-DATE
+> Task :solr:solr-ref-guide:downloadAsciidoctorMathjaxExtension UP-TO-DATE
+> Task :solr:solr-ref-guide:downloadAsciidoctorTabsExtension UP-TO-DATE
+> Task :solr:solr-ref-guide:downloadAntora UP-TO-DATE
+> Task :solr:solr-ref-guide:buildLocalAntoraPlaybookYaml UP-TO-DATE
+> Task :solr:solr-ref-guide:buildLocalAntoraYaml UP-TO-DATE
+> Task :solr:solr-ref-guide:setupLocalSiteStagingDir UP-TO-DATE
+> Task :solr:core:compileJava UP-TO-DATE
+> Task :solr:core:classes UP-TO-DATE
+> Task :solr:core:jar UP-TO-DATE
+> Task :solr:test-framework:compileJava UP-TO-DATE
+> Task :solr:test-framework:classes UP-TO-DATE
+> Task :solr:test-framework:jar UP-TO-DATE
+> Task :solr:modules:cross-dc:compileJava UP-TO-DATE
+> Task :solr:modules:cross-dc:classes UP-TO-DATE
+> Task :solr:modules:cross-dc:jar UP-TO-DATE
+> Task :solr:modules:opentelemetry:compileJava UP-TO-DATE
+> Task :solr:modules:opentelemetry:classes UP-TO-DATE
+> Task :solr:modules:opentelemetry:jar UP-TO-DATE
+> Task :solr:cross-dc-manager:collectJarInfos
+> Task :solr:server:collectJarInfos
+> Task :solr:modules:analysis-extras:collectJarInfos
+> Task :solr:modules:clustering:collectJarInfos
+> Task :solr:modules:cross-dc:collectJarInfos
+> Task :solr:modules:cuvs:collectJarInfos
+> Task :solr:modules:extraction:collectJarInfos
+
+> Task :solr:solr-ref-guide:buildLocalAntoraSite
+[http-timeout] Socket timeout interceptor initialized with minimum timeout 60000ms
+
+> Task :solr:modules:gcs-repository:collectJarInfos
+> Task :solr:modules:jwt-auth:collectJarInfos
+> Task :solr:modules:langid:collectJarInfos
+> Task :solr:modules:language-models:collectJarInfos
+> Task :solr:modules:ltr:collectJarInfos
+> Task :solr:modules:opentelemetry:collectJarInfos
+> Task :solr:modules:s3-repository:collectJarInfos
+> Task :solr:modules:scripting:collectJarInfos
+> Task :solr:modules:analysis-extras:compileJava UP-TO-DATE
+> Task :solr:modules:analysis-extras:classes UP-TO-DATE
+> Task :solr:modules:analysis-extras:jar UP-TO-DATE
+> Task :solr:modules:sql:collectJarInfos
+> Task :platform:validateJarLicenses
+> Task :platform:licenses
+> Task :solr:api:collectJarInfos
+> Task :solr:api:validateJarChecksums
+> Task :solr:api:validateJarLicenses
+> Task :solr:api:licenses
+> Task :solr:benchmark:collectJarInfos
+> Task :solr:benchmark:validateJarChecksums
+
+> Task :solr:solr-ref-guide:buildLocalAntoraSite
+[http-timeout] Socket timeout interceptor initialized with minimum timeout 60000ms
+
+> Task :solr:benchmark:validateJarLicenses
+> Task :solr:benchmark:licenses
+> Task :solr:core:collectJarInfos
+> Task :solr:core:validateJarChecksums
+
+> Task :solr:solr-ref-guide:buildLocalAntoraSite
+{"level":"fatal","time":1792978842632,"name":"antora","hint":"Add the --stacktrace option to see the cause of the error.","msg":"Cannot find module '@asciidoctor/tabs' at path /workspace/worktrees/gate-5221/solr/solr-ref-guide/build/site-staging or /workspace/worktrees/gate-5221/solr/solr-ref-guide/.gradle/node/node_modules/@antora/asciidoc-loader/lib/config\nRequire stack:\n- /workspace/worktrees/gate-5221/solr/solr-ref-guide/.gradle/node/node_modules/@antora/user-require-helper/lib/index.js\n- /workspace/worktrees/gate-5221/solr/solr-ref-guide/.gradle/node/node_modules/@antora/cli/lib/cli.js\n- /workspace/worktrees/gate-5221/solr/solr-ref-guide/.gradle/node/node_modules/@antora/cli/lib/index.js\n- /workspace/worktrees/gate-5221/solr/solr-ref-guide/.gradle/node/node_modules/@antora/cli/bin/antora"}
+
+> Task :solr:solr-ref-guide:buildLocalAntoraSite FAILED
+> Task :solr:core:validateJarLicenses
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':solr:solr-ref-guide:buildLocalAntoraSite' (registered in build file 'solr/solr-ref-guide/build.gradle').
+> Process 'command '/workspace/worktrees/gate-5221/solr/solr-ref-guide/.gradle/node/nodejs/node-v22.18.0-linux-arm64/bin/npx'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1m 32s
+256 actionable tasks: 62 executed, 194 up-to-date
+rc=1

@@ -1,0 +1,11 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:solrj:spotlessJava
+> Task :solr:solrj:spotlessJavaCheck
+
+BUILD SUCCESSFUL in 37s
+6 actionable tasks: 2 executed, 4 up-to-date
+rc=0

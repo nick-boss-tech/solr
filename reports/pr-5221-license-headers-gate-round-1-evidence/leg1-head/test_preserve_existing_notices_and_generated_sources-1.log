@@ -1,0 +1,5 @@
+['/workspace/worktrees/gate-5221/gradlew', '-p', '/tmp/solr-license-headers-5lk9h7_b/fixture', '--console=plain', '--no-configuration-cache', 'addLicenseHeaders']
+> Task :addLicenseHeaders
+
+BUILD SUCCESSFUL in 3s
+1 actionable task: 1 executed

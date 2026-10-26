@@ -1,0 +1,41 @@
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :allHelpFilesExit
+> Task :gradlewScriptsTweaked
+> Task :licenses UP-TO-DATE
+> Task :missing-doclet:compileJava
+> Task :missing-doclet:processResources NO-SOURCE
+> Task :missing-doclet:classes
+> Task :missing-doclet:jar
+> Task :platform:collectJarInfos
+> Task :platform:validateJarChecksums
+> Task :solr:api:validateSourcePatterns
+> Task :solr:api:processResources NO-SOURCE
+> Task :checkWorkingCopyClean
+> Task :rat
+> Task :validateSourcePatterns
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:api:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:validateSourcePatterns
+> Task :solr:api:classes
+> Task :solr:api:jar
+> Task :solr:solrj:validateSourcePatterns
+> Task :solr:solrj-jetty:validateSourcePatterns
+> Task :solr:solrj-streaming:validateSourcePatterns
+> Task :solr:solrj-zookeeper:validateSourcePatterns
+> Task :solr:api:resolve
+> Task :solr:core:processResources
+> Task :solr:solrj:processResources
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE

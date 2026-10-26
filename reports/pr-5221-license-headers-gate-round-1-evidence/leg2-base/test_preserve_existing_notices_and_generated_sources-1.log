@@ -1,0 +1,10 @@
+['/workspace/worktrees/gate-5221/gradlew', '-p', '/tmp/solr-license-headers-udnrgezw/fixture', '--console=plain', '--no-configuration-cache', 'addLicenseHeaders']
+
+> Task :addLicenseHeaders
+addLicenseHeaders: 'git diff --name-only --diff-filter=A main...HEAD' failed; skipping
+Added license header: Generated.java
+Added license header: Spdx.java
+Added license header: ThirdParty.java
+
+BUILD SUCCESSFUL in 3s
+1 actionable task: 1 executed
