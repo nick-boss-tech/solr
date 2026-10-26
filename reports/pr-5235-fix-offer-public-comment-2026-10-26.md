@@ -1,0 +1,12 @@
+# PR 5235: verified fix offer posted
+
+- Posted: 2026-10-26T21:09:32Z, as nick-boss-tech.
+- Comment: https://github.com/apache/solr/pull/5235#issuecomment-6427386421
+- Authorization: Nick's standing clean-gate PR review follow-up authorization in root workspace AGENTS.md, dated 2026-10-26. Actual receipt, required proof legs, live heads and discussion were read before using it. No unresolved patch or response concern remained.
+- PR head before and after posting: 9ff44cdd0b818c6f1296d69651732f794acd76b7. Offered fork head: caf8dde9063fd2470c02d9938b5723e691c0e11e; remote ref verified; ancestry confirmed.
+- Proof snapshot: e9b9b8b1624515329d10a19b46cae8b25ea773a3, receipts/PR-5235-compatibility-fixes-round-3.md. Focused original 12 failing methods / 6 controls passing; fixed 18 passing / 0 skipped. Neighboring detailed counts: solrj 83/1 skipped, Jetty 52/0 skipped, core 4/1 skipped, no failures/errors. Clean tidy; root check passed in a full clone at the same commit/tree with NODE_ENV unset, after the documented Antora worktree failure.
+- Reconciliation report: reports/pr-5235-round-3-proof-reconciliation.md at 9d24f4068061bd829a30bcae6da0f700c19686e8. It supersedes the old self-review's current-head statement, distinguishes observed missing-content exception from source-inferred BAD_REQUEST, and resolves the receipt's loose "three skips" wording by using the detailed counts.
+- Draft: research/branch-reviews/2026-10-26-pr-batch/PR-5235-fix-offer-comment.md in the Windows workspace. Checked disclosure, no en/em dashes, no placeholders, 2,772 visible characters excluding link URLs.
+- The comment links a pinned original-to-tested diff, describes the four fixes, reports measured proof and setup conditions, and includes direct-URL fetch / pinned fast-forward adoption plus all three focused Gradle commands. It does not claim a precompiled binary test or observed status code for the generic case.
+- Separate GET of comment 6427386421 confirmed stored body matches the local draft after line-ending/final-newline normalization; author, URL and timestamp confirmed. Separate PR read-back confirmed head unchanged and no reviews. No duplicate equivalent fix offer existed before posting.
+- No source/test changes, additional gate runs, Jira writes, PR body edits, review approval, merge, new PR, force-push, or contributor-branch change were performed. The author's PR remains at O until the author chooses to adopt the offer.
