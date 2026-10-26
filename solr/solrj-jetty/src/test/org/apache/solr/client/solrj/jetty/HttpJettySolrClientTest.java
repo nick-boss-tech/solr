@@ -57,6 +57,7 @@ import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.ExecutorUtil;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.common.util.ObjectReleaseTracker;
 import org.apache.solr.common.util.SolrNamedThreadFactory;
 import org.apache.solr.common.util.TimeSource;
 import org.apache.solr.util.ServletFixtures;
@@ -937,4 +938,79 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
   }
 
   /* Missed tests : - set cookies via interceptor - invariant params - compression */
+
+  @Test
+  public void testCloseWithInterruptedThreadReleasesOwnedClient() throws Exception {
+    HttpJettySolrClient client =
+        (HttpJettySolrClient)
+            builder(solrTestRule.getBaseUrl() + "/", DEFAULT_CONNECTION_TIMEOUT, 2000).build();
+    org.eclipse.jetty.client.HttpClient httpClient = client.getHttpClient();
+    Thread.currentThread().interrupt();
+    try {
+      client.close();
+      assertTrue(
+          "the caller's interrupt must survive close", Thread.currentThread().isInterrupted());
+    } finally {
+      Thread.interrupted();
+    }
+    assertTrue("owned HttpClient must be stopped", httpClient.isStopped());
+    assertFalse(
+        "client must be released from the tracker", ObjectReleaseTracker.OBJECTS.containsKey(client));
+  }
+
+  @Test
+  public void testCloseWithInterruptedThreadKeepsCallerExecutorUsable() throws Exception {
+    ExecutorService pool =
+        ExecutorUtil.newMDCAwareCachedThreadPool(
+            new SolrNamedThreadFactory("interrupt-close-caller"));
+    try {
+      HttpJettySolrClient client =
+          new HttpJettySolrClient.Builder(solrTestRule.getBaseUrl() + "/")
+              .withConnectionTimeout(DEFAULT_CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS)
+              .withIdleTimeout(2000, TimeUnit.MILLISECONDS)
+              .withExecutor(pool)
+              .build();
+      org.eclipse.jetty.client.HttpClient httpClient = client.getHttpClient();
+      Thread.currentThread().interrupt();
+      try {
+        client.close();
+        assertTrue(
+            "the caller's interrupt must survive close", Thread.currentThread().isInterrupted());
+      } finally {
+        Thread.interrupted();
+      }
+      assertTrue("owned HttpClient must be stopped", httpClient.isStopped());
+      assertFalse("caller-owned executor must not be shut down", pool.isShutdown());
+      assertEquals("alive", pool.submit(() -> "alive").get(5, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(5, TimeUnit.SECONDS));
+    }
+  }
+
+  @Test
+  public void testCloseBorrowedClientWithInterruptLeavesParentRunning() throws Exception {
+    HttpJettySolrClient parent =
+        (HttpJettySolrClient)
+            builder(solrTestRule.getBaseUrl() + "/", DEFAULT_CONNECTION_TIMEOUT, 2000).build();
+    try {
+      HttpJettySolrClient child =
+          new HttpJettySolrClient.Builder(solrTestRule.getBaseUrl() + "/")
+              .withHttpClient(parent)
+              .build();
+      org.eclipse.jetty.client.HttpClient parentHttpClient = parent.getHttpClient();
+      Thread.currentThread().interrupt();
+      try {
+        child.close();
+        assertTrue(
+            "the caller's interrupt must survive close", Thread.currentThread().isInterrupted());
+      } finally {
+        Thread.interrupted();
+      }
+      assertTrue("borrowed close must not stop the parent HttpClient", parentHttpClient.isStarted());
+      assertFalse(parentHttpClient.isStopped());
+    } finally {
+      parent.close();
+    }
+  }
 }
