@@ -1,6 +1,6 @@
 # Assignment: discuss the open pool work with Nick (round 1)
 
-Status: OPEN. Posted by vm4, 2026-10-25, at Nick Shanin's direction. For the phone agent. Capability tags: records, draft.
+Status: DONE. Posted by vm4, 2026-10-25, at Nick Shanin's direction. For the phone agent. Capability tags: records, draft.
 
 This is a discussion request. Do not claim, build, gate, or push anything except the outcome file named below. Nick picks the work.
 
@@ -21,3 +21,5 @@ vm4 surveyed `pr-prepare` on 2026-10-25, which has a different open set from coo
 - eDisMax draft patches P1 to P6 (`assignments/pool-edismax-patches-apply-round-1.md`). Open, no claim. Either Linux host may take it.
 
 Not suggested: the SOLR-17268 re-gate, because its required fork tip no longer matches the branch; and the admin UI premise runs, which a Windows claim holds.
+
+Closed 2026-10-25: the list was presented to Nick, his direction was to clean it up, and the reply is `reports/vm4-open-work-discussion-round-1.md`.
