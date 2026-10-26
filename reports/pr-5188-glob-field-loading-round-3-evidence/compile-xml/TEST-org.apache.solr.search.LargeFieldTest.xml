@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.search.LargeFieldTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-26T20:07:47.767Z" hostname="localhost" time="0.767">
+  <properties/>
+  <testcase name="test" classname="org.apache.solr.search.LargeFieldTest" time="0.191"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[17996 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/solr/solr/server/solr/configsets/_default/conf'
+18007 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/tmp/pr5188/work-r3-post-suites/org.apache.solr.search.LargeFieldTest_5188C0DE-001/data-dir-4-001
+18008 WARN  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=2 numCloses=2
+18008 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-7 for ERROR logs matching regex: ignore_exception
+18008 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+18010 WARN  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+18010 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+18010 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+18011 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+18018 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+18039 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.s.IndexSchema Loaded schema one_field_no_dynamic_field_unique_key/1.7 with uniqueid field str
+18040 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+18040 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+18373 WARN  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+18385 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+18406 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema one_field_no_dynamic_field_unique_key/1.7 with uniqueid field str
+18406 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/solr/solr/core/build/resources/test/solr/collection1
+18406 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/solr/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/tmp/pr5188/work-r3-post-suites/org.apache.solr.search.LargeFieldTest_5188C0DE-001/data-dir-4-001/]
+18428 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=19, maxMergedSegmentMB=72.93951797485352, floorSegmentMB=1.758056640625, forceMergeDeletesPctAllowed=24.602537324581398, segmentsPerTier=28.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.0, deletesPctAllowed=47.681333791684764, targetSearchConcurrency=11
+18457 WARN  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.c.RequestHandlers INVALID paramSet a in requestHandler {type = requestHandler,name = /dump,class = DumpRequestHandler,attributes = {initParams=a, name=/dump, registerPath=/solr,/v2, class=DumpRequestHandler},args = {defaults={a=A, b=B}}}
+18495 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+18495 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+18496 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=47, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=false, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8827332097872262]
+18503 WARN  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/solr/solr/core/build/resources/test/solr/collection1/conf ; switching to use InMemory storage instead.
+18503 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+18504 INFO  (searcherExecutor-80-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+18552 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+18557 INFO  (TEST-LargeFieldTest.test-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting test
+18580 INFO  (TEST-LargeFieldTest.test-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 22
+18741 INFO  (searcherExecutor-80-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+18741 INFO  (TEST-LargeFieldTest.test-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 160
+18743 INFO  (TEST-LargeFieldTest.test-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=101&df=str&fl=str&wt=xml} hits=1 status=0 QTime=1
+18744 INFO  (TEST-LargeFieldTest.test-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=101&df=str&fl=lazyField&wt=xml} hits=1 status=0 QTime=0
+18744 INFO  (TEST-LargeFieldTest.test-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=101&df=str&fl=bigField&wt=xml} hits=1 status=0 QTime=0
+18744 INFO  (TEST-LargeFieldTest.test-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending test
+18745 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+18745 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=860596668
+18745 INFO  (coreCloseExecutor-85-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@7c97df0d collection1
+18746 INFO  (coreCloseExecutor-85-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Otu 26, 2026 4:07:48 P. io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+18754 INFO  (SUITE-LargeFieldTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-7 after muting 0 log messages
+]]></system-err>
+</testsuite>

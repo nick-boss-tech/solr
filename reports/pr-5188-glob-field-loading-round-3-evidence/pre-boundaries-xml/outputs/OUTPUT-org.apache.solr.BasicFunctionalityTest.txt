@@ -1,0 +1,171 @@
+  2> Oct 26, 2026 7:57:58 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+  2> WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+  2> 1964 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/tmp/pr5188/pre-r3/solr/server/solr/configsets/_default/conf'
+  2> 1988 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/tmp/pr5188/work-r3-pre-bound/org.apache.solr.BasicFunctionalityTest_5188C0DE-001/data-dir-1-001
+  2> 2053 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+  2> 2080 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=false
+  2> 2163 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/tmp/pr5188/pre-r3/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/tmp/pr5188/pre-r3/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+  2> 2163 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+  2> 2201 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+  2> 2206 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+  2> 2448 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1/lib, /workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1/lib/classes]
+  2> 2666 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+  2> 2908 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieIntField Solr loaded a deprecated plugin/analysis class [solr.TrieIntField]. Please consult documentation how to replace it accordingly.
+  2> 2918 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieFloatField Solr loaded a deprecated plugin/analysis class [solr.TrieFloatField]. Please consult documentation how to replace it accordingly.
+  2> 2929 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieLongField Solr loaded a deprecated plugin/analysis class [solr.TrieLongField]. Please consult documentation how to replace it accordingly.
+  2> 2940 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieDoubleField Solr loaded a deprecated plugin/analysis class [solr.TrieDoubleField]. Please consult documentation how to replace it accordingly.
+  2> 3019 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieDateField Solr loaded a deprecated plugin/analysis class [solr.TrieDateField]. Please consult documentation how to replace it accordingly.
+  2> 3085 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.WordDelimiterFilterFactory Solr loaded a deprecated plugin/analysis class [solr.WordDelimiterFilterFactory]. Please consult documentation how to replace it accordingly.
+  2> 3439 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+  2> 3788 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+  2> 3816 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+  2> 5961 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+  2> 6513 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1/lib, /workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1/lib/classes]
+  2> 6537 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+  2> 6593 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+  2> 6630 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1
+  2> 6731 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/tmp/pr5188/work-r3-pre-bound/org.apache.solr.BasicFunctionalityTest_5188C0DE-001/data-dir-1-001/]
+  2> 6761 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=19, maxMergedSegmentMB=25.752991676330566, floorSegmentMB=1.7170133590698242, forceMergeDeletesPctAllowed=17.23304480505803, segmentsPerTier=12.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8306212705425147, deletesPctAllowed=42.94094414219121, targetSearchConcurrency=16
+  2> 8311 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+  2> 9061 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+  2> 9064 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+  2> 9065 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+  2> 9093 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogByteSizeMergePolicy: [LogByteSizeMergePolicy: minMergeSize=16777216, mergeFactor=38, maxMergeSize=2147483648, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8154425891018042]
+  2> 9740 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+  2> 9741 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+  2> 9747 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+  2> 9747 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+  2> 9747 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+  2> 9747 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+  2> 9751 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+  2> 9755 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+  2> 9760 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+  2> 9764 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+  2> 9768 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+  2> 9771 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+  2> 9893 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+  2> 9901 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobPrefetchBoundaries
+  2> 10133 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7800 (1880143624907259904)]} 0 207
+  2> 10170 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7801 (1880143625090760704)]} 0 1
+  2> 10172 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7802 (1880143625092857856)]} 0 0
+  2> 10173 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7803 (1880143625093906432)]} 0 0
+  2> 10175 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7804 (1880143625096003584)]} 0 0
+  2> 10176 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7805 (1880143625098100736)]} 0 0
+  2> 10178 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7806 (1880143625099149312)]} 0 0
+  2> 10180 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7807 (1880143625101246464)]} 0 0
+  2> 10181 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7808 (1880143625102295040)]} 0 0
+  2> 10183 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7809 (1880143625104392192)]} 0 0
+  2> 10184 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7810 (1880143625105440768)]} 0 0
+  2> 10186 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7811 (1880143625107537920)]} 0 0
+  2> 10187 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7812 (1880143625108586496)]} 0 0
+  2> 10189 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7813 (1880143625110683648)]} 0 0
+  2> 10190 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7814 (1880143625111732224)]} 0 1
+  2> 10192 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7815 (1880143625113829376)]} 0 0
+  2> 10193 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7816 (1880143625115926528)]} 0 0
+  2> 10195 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7817 (1880143625116975104)]} 0 0
+  2> 10196 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7818 (1880143625119072256)]} 0 0
+  2> 10198 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7819 (1880143625120120832)]} 0 0
+  2> 10199 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7820 (1880143625122217984)]} 0 0
+  2> 10201 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7821 (1880143625123266560)]} 0 0
+  2> 10202 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7822 (1880143625125363712)]} 0 0
+  2> 10203 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7823 (1880143625126412288)]} 0 0
+  2> 10205 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7824 (1880143625127460864)]} 0 0
+  2> 10206 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7825 (1880143625129558016)]} 0 0
+  2> 10208 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7826 (1880143625130606592)]} 0 0
+  2> 10209 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7827 (1880143625131655168)]} 0 0
+  2> 10210 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7828 (1880143625133752320)]} 0 0
+  2> 10212 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7829 (1880143625134800896)]} 0 0
+  2> 10213 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7830 (1880143625135849472)]} 0 0
+  2> 10214 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7831 (1880143625137946624)]} 0 0
+  2> 10216 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7832 (1880143625138995200)]} 0 0
+  2> 10217 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7833 (1880143625140043776)]} 0 0
+  2> 10218 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7834 (1880143625142140928)]} 0 0
+  2> 10219 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7835 (1880143625143189504)]} 0 0
+  2> 10221 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7836 (1880143625144238080)]} 0 0
+  2> 10222 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7837 (1880143625146335232)]} 0 0
+  2> 10223 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7838 (1880143625147383808)]} 0 0
+  2> 10225 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7839 (1880143625148432384)]} 0 0
+  2> 10226 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7840 (1880143625149480960)]} 0 0
+  2> 10227 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7841 (1880143625151578112)]} 0 0
+  2> 10228 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7842 (1880143625152626688)]} 0 0
+  2> 10230 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7843 (1880143625153675264)]} 0 0
+  2> 10231 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7844 (1880143625154723840)]} 0 0
+  2> 10232 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7845 (1880143625156820992)]} 0 0
+  2> 10233 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7846 (1880143625157869568)]} 0 0
+  2> 10234 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7847 (1880143625158918144)]} 0 0
+  2> 10236 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7848 (1880143625159966720)]} 0 0
+  2> 10237 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7849 (1880143625161015296)]} 0 0
+  2> 10238 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7850 (1880143625163112448)]} 0 0
+  2> 10333 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 7 ms
+  2> 10334 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 95
+  2> 10484 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=batch_s:pr5188_prefetch_boundary&rows=50&isShard=false&hl=false&fl=source_s&wt=xml} hits=51 status=0 QTime=149
+  2> 10488 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=batch_s:pr5188_prefetch_boundary&rows=50&isShard=true&hl=false&fl=source_s&wt=xml} hits=51 status=0 QTime=3
+  2> 10490 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=batch_s:pr5188_prefetch_boundary&rows=51&isShard=false&hl=false&fl=source_s&wt=xml} hits=51 status=0 QTime=1
+  2> 10491 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=batch_s:pr5188_prefetch_boundary&rows=51&isShard=true&hl=false&fl=source_s&wt=xml} hits=51 status=0 QTime=0
+  2> 10491 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=batch_s:pr5188_prefetch_boundary&rows=50&isShard=false&hl=false&fl=source_*&wt=xml} hits=51 status=0 QTime=0
+  2> 10560 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{deleteByQuery=batch_s:pr5188_prefetch_boundary (-1880143625429450752)} 0 67
+  2> 10564 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 1 ms
+  2> 10567 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 6
+  2> 10568 INFO  (TEST-BasicFunctionalityTest.testGlobPrefetchBoundaries-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobPrefetchBoundaries
+   >     java.lang.AssertionError: Missing prefetched document for fl=source_* rows=50 isShard=false
+   >         at __randomizedtesting.SeedInfo.seed([5188C0DE:12304113B4AF435F]:0)
+   >         at org.junit.Assert.fail(Assert.java:89)
+   >         at org.junit.Assert.assertTrue(Assert.java:42)
+   >         at org.junit.Assert.assertNotNull(Assert.java:713)
+   >         at org.apache.solr.BasicFunctionalityTest.testGlobPrefetchBoundaries(BasicFunctionalityTest.java:1117)
+   >         at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+   >         at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+   >         at java.base/java.lang.Thread.run(Thread.java:1583)
+  2> NOTE: reproduce with: gradlew test --tests BasicFunctionalityTest.testGlobPrefetchBoundaries -Dtests.seed=5188C0DE -Dtests.locale=en-FK -Dtests.timezone=Europe/Skopje -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+  2> 10574 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+  2> 10574 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1656434883
+  2> 10575 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@2913081e collection1
+  2> 10576 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+  2> Oct 26, 2026 8:58:06 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+  2> WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+  2> 10594 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+  2> NOTE: leaving temporary files on disk at: /workspace/tmp/pr5188/work-r3-pre-bound/org.apache.solr.BasicFunctionalityTest_5188C0DE-001
+  2> NOTE: test params are: codec=Lucene104, sim=Asserting(RandomSimilarity(queryNorm=true): {}), locale=en-FK, timezone=Europe/Skopje
+  2> NOTE: Linux 6.1.166-24.303.amzn2023.aarch64 aarch64/Eclipse Adoptium 21.0.12.1 (64-bit)/cpus=1,threads=1,free=167984968,total=257425408
+  2> NOTE: All tests run in this JVM: [BasicFunctionalityTest]

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.search.ReturnFieldsTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-10-26T20:07:48.607Z" hostname="localhost" time="3.301">
+  <properties/>
+  <testcase name="testLoadsField" classname="org.apache.solr.search.ReturnFieldsTest" time="0.028"/>
+  <testcase name="testHyphenInFieldName" classname="org.apache.solr.search.ReturnFieldsTest" time="0.004"/>
+  <testcase name="testFunkyFieldNames" classname="org.apache.solr.search.ReturnFieldsTest" time="0.014"/>
+  <testcase name="testCopyRename" classname="org.apache.solr.search.ReturnFieldsTest" time="0.008"/>
+  <testcase name="testFunctions" classname="org.apache.solr.search.ReturnFieldsTest" time="0.035"/>
+  <testcase name="testWildcards" classname="org.apache.solr.search.ReturnFieldsTest" time="0.003"/>
+  <testcase name="testSeparators" classname="org.apache.solr.search.ReturnFieldsTest" time="0.004"/>
+  <testcase name="testWhitespace" classname="org.apache.solr.search.ReturnFieldsTest" time="0.005"/>
+  <testcase name="testAliases" classname="org.apache.solr.search.ReturnFieldsTest" time="0.004"/>
+  <testcase name="testWhiteboxSolrDocumentConversion" classname="org.apache.solr.search.ReturnFieldsTest" time="0.009"/>
+  <testcase name="testTrailingDollarInFieldName" classname="org.apache.solr.search.ReturnFieldsTest" time="0.004"/>
+  <testcase name="testToString" classname="org.apache.solr.search.ReturnFieldsTest" time="0.004"/>
+  <testcase name="testMovePk" classname="org.apache.solr.search.ReturnFieldsTest" time="0.016"/>
+  <testcase name="testManyParameters" classname="org.apache.solr.search.ReturnFieldsTest" time="0.003"/>
+  <testcase name="testTrailingDotInFieldName" classname="org.apache.solr.search.ReturnFieldsTest" time="0.004"/>
+  <testcase name="testTransformers" classname="org.apache.solr.search.ReturnFieldsTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[18840 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/solr/solr/server/solr/configsets/_default/conf'
+18850 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/tmp/pr5188/work-r3-post-suites/org.apache.solr.search.ReturnFieldsTest_5188C0DE-001/data-dir-5-001
+18851 WARN  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=2 numCloses=2
+18851 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-8 for ERROR logs matching regex: ignore_exception
+18851 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+18853 WARN  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+18853 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+18853 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+18854 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+18863 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+18880 WARN  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+18902 WARN  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.s.IndexSchema Field text is not multivalued and destination for multiple copyFields (2)
+18983 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.4 with uniqueid field id
+19070 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+19070 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+21257 WARN  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+21283 INFO  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+21300 WARN  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+21316 WARN  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.s.IndexSchema Field text is not multivalued and destination for multiple copyFields (2)
+21399 INFO  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.4 with uniqueid field id
+21486 INFO  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/solr/solr/core/build/resources/test/solr/collection1
+21487 INFO  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/solr/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/tmp/pr5188/work-r3-post-suites/org.apache.solr.search.ReturnFieldsTest_5188C0DE-001/data-dir-5-001/]
+21487 INFO  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=31, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=1.0]
+21529 INFO  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+21529 INFO  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+21530 INFO  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogDocMergePolicy: [LogDocMergePolicy: minMergeSize=1000, mergeFactor=18, maxMergeSize=9223372036854775807, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.0]
+21904 INFO  (coreLoadExecutor-99-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+21905 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+21909 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+21910 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+21910 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+21910 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+21914 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+21919 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+21924 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+21928 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+21933 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+21934 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+21956 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+21961 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1]} 0 4
+21962 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2]} 0 0
+21966 INFO  (searcherExecutor-101-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+21966 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 3
+21971 INFO  (TEST-ReturnFieldsTest.testLoadsField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testLoadsField
+21995 INFO  (TEST-ReturnFieldsTest.testLoadsField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testLoadsField
+21999 INFO  (TEST-ReturnFieldsTest.testHyphenInFieldName-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testHyphenInFieldName
+21999 INFO  (TEST-ReturnFieldsTest.testHyphenInFieldName-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testHyphenInFieldName
+22003 INFO  (TEST-ReturnFieldsTest.testFunkyFieldNames-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFunkyFieldNames
+22012 INFO  (TEST-ReturnFieldsTest.testFunkyFieldNames-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:1&fl=#foo_s&fl=id&wt=xml} hits=1 status=0 QTime=0
+22013 INFO  (TEST-ReturnFieldsTest.testFunkyFieldNames-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFunkyFieldNames
+22017 INFO  (TEST-ReturnFieldsTest.testCopyRename-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testCopyRename
+22017 INFO  (TEST-ReturnFieldsTest.testCopyRename-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:1&fl=id&wt=xml} hits=1 status=0 QTime=0
+22018 INFO  (TEST-ReturnFieldsTest.testCopyRename-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:1&fl=xxx:id&wt=xml} hits=1 status=0 QTime=0
+22019 INFO  (TEST-ReturnFieldsTest.testCopyRename-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:1&fl=id,xxx:id&wt=xml} hits=1 status=0 QTime=0
+22019 INFO  (TEST-ReturnFieldsTest.testCopyRename-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:1&fl=xxx:id,id&wt=xml} hits=1 status=0 QTime=0
+22020 INFO  (TEST-ReturnFieldsTest.testCopyRename-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:1&fl=xxx:id,yyy:id&wt=xml} hits=1 status=0 QTime=0
+22020 INFO  (TEST-ReturnFieldsTest.testCopyRename-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testCopyRename
+22024 INFO  (TEST-ReturnFieldsTest.testFunctions-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFunctions
+22056 INFO  (TEST-ReturnFieldsTest.testFunctions-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFunctions
+22060 INFO  (TEST-ReturnFieldsTest.testWildcards-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testWildcards
+22060 INFO  (TEST-ReturnFieldsTest.testWildcards-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testWildcards
+22064 INFO  (TEST-ReturnFieldsTest.testSeparators-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSeparators
+22064 INFO  (TEST-ReturnFieldsTest.testSeparators-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSeparators
+22068 INFO  (TEST-ReturnFieldsTest.testWhitespace-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testWhitespace
+22070 INFO  (TEST-ReturnFieldsTest.testWhitespace-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testWhitespace
+22074 INFO  (TEST-ReturnFieldsTest.testAliases-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAliases
+22074 INFO  (TEST-ReturnFieldsTest.testAliases-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAliases
+22078 INFO  (TEST-ReturnFieldsTest.testWhiteboxSolrDocumentConversion-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testWhiteboxSolrDocumentConversion
+22083 INFO  (TEST-ReturnFieldsTest.testWhiteboxSolrDocumentConversion-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testWhiteboxSolrDocumentConversion
+22087 INFO  (TEST-ReturnFieldsTest.testTrailingDollarInFieldName-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testTrailingDollarInFieldName
+22087 INFO  (TEST-ReturnFieldsTest.testTrailingDollarInFieldName-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testTrailingDollarInFieldName
+22091 INFO  (TEST-ReturnFieldsTest.testToString-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testToString
+22091 INFO  (TEST-ReturnFieldsTest.testToString-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testToString
+22106 INFO  (TEST-ReturnFieldsTest.testMovePk-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testMovePk
+22107 INFO  (TEST-ReturnFieldsTest.testMovePk-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:1&fl=old_id:id,id:new_id_s&wt=xml} hits=1 status=0 QTime=0
+22107 INFO  (TEST-ReturnFieldsTest.testMovePk-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testMovePk
+22111 INFO  (TEST-ReturnFieldsTest.testManyParameters-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testManyParameters
+22111 INFO  (TEST-ReturnFieldsTest.testManyParameters-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testManyParameters
+22115 INFO  (TEST-ReturnFieldsTest.testTrailingDotInFieldName-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testTrailingDotInFieldName
+22115 INFO  (TEST-ReturnFieldsTest.testTrailingDotInFieldName-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testTrailingDotInFieldName
+22119 INFO  (TEST-ReturnFieldsTest.testTransformers-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testTransformers
+22119 INFO  (TEST-ReturnFieldsTest.testTransformers-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testTransformers
+22119 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+22119 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=44362875
+22120 INFO  (coreCloseExecutor-106-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@58da681c collection1
+22120 INFO  (coreCloseExecutor-106-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+okt. 26, 2026 12:07:51 P.M. io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+22123 INFO  (SUITE-ReturnFieldsTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-8 after muting 0 log messages
+]]></system-err>
+</testsuite>

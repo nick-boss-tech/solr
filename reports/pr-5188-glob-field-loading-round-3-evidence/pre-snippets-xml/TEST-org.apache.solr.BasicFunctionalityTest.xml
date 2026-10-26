@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.BasicFunctionalityTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-26T19:48:43.345Z" hostname="localhost" time="19.135">
+  <properties/>
+  <testcase name="testGlobHighlightSnippets" classname="org.apache.solr.BasicFunctionalityTest" time="1.466"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 26, 2026 7:48:44 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+2820 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/tmp/pr5188/pre-r3/solr/server/solr/configsets/_default/conf'
+2866 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/tmp/pr5188/work-r3-pre-snip/org.apache.solr.BasicFunctionalityTest_5188C0DE-001/data-dir-1-001
+3030 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+3065 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=false
+3227 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/tmp/pr5188/pre-r3/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/tmp/pr5188/pre-r3/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+3228 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+3284 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+3289 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+3773 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1/lib, /workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1/lib/classes]
+4122 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+4664 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieIntField Solr loaded a deprecated plugin/analysis class [solr.TrieIntField]. Please consult documentation how to replace it accordingly.
+4705 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieFloatField Solr loaded a deprecated plugin/analysis class [solr.TrieFloatField]. Please consult documentation how to replace it accordingly.
+4745 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieLongField Solr loaded a deprecated plugin/analysis class [solr.TrieLongField]. Please consult documentation how to replace it accordingly.
+4785 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieDoubleField Solr loaded a deprecated plugin/analysis class [solr.TrieDoubleField]. Please consult documentation how to replace it accordingly.
+5076 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieDateField Solr loaded a deprecated plugin/analysis class [solr.TrieDateField]. Please consult documentation how to replace it accordingly.
+5214 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.WordDelimiterFilterFactory Solr loaded a deprecated plugin/analysis class [solr.WordDelimiterFilterFactory]. Please consult documentation how to replace it accordingly.
+6210 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+6962 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+7016 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+9400 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+10704 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1/lib, /workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1/lib/classes]
+10746 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+10810 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+10847 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1
+11103 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/tmp/pr5188/pre-r3/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/tmp/pr5188/work-r3-pre-snip/org.apache.solr.BasicFunctionalityTest_5188C0DE-001/data-dir-1-001/]
+11174 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=19, maxMergedSegmentMB=25.752991676330566, floorSegmentMB=1.7170133590698242, forceMergeDeletesPctAllowed=17.23304480505803, segmentsPerTier=12.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8306212705425147, deletesPctAllowed=42.94094414219121, targetSearchConcurrency=16
+15606 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+17606 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+17614 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+17615 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+17649 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogByteSizeMergePolicy: [LogByteSizeMergePolicy: minMergeSize=16777216, mergeFactor=38, maxMergeSize=2147483648, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8154425891018042]
+18851 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+18852 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+18857 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+18857 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+18857 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+18858 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+18862 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+18866 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+18870 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+18875 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+18879 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+18881 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+19058 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+19066 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobHighlightSnippets
+19620 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7784 (1880143053461651456)]} 0 482
+19798 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 12 ms
+19799 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 88
+20218 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=source_s&hl=true&hl.method=original&hl.weightMatches=true&hl.fl=title} hits=1 status=0 QTime=418
+20221 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=source_*&hl=true&hl.method=original&hl.weightMatches=true&hl.fl=title} hits=1 status=0 QTime=1
+20228 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=*&hl=true&hl.method=original&hl.weightMatches=true&hl.fl=title} hits=1 status=0 QTime=1
+20273 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=source_s&hl=true&hl.method=original&hl.weightMatches=false&hl.fl=title} hits=1 status=0 QTime=1
+20275 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=source_*&hl=true&hl.method=original&hl.weightMatches=false&hl.fl=title} hits=1 status=0 QTime=1
+20277 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=*&hl=true&hl.method=original&hl.weightMatches=false&hl.fl=title} hits=1 status=0 QTime=0
+20280 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=source_s&hl=true&hl.method=original&hl.weightMatches=true&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=1
+20282 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=source_*&hl=true&hl.method=original&hl.weightMatches=true&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=1
+20285 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=*&hl=true&hl.method=original&hl.weightMatches=true&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=1
+20287 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=source_s&hl=true&hl.method=original&hl.weightMatches=false&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=0
+20289 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=source_*&hl=true&hl.method=original&hl.weightMatches=false&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=0
+20291 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=*&hl=true&hl.method=original&hl.weightMatches=false&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=0
+20322 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=source_s&hl=true&hl.method=unified&hl.weightMatches=true&hl.fl=title} hits=1 status=0 QTime=29
+20324 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=source_*&hl=true&hl.method=unified&hl.weightMatches=true&hl.fl=title} hits=1 status=0 QTime=1
+20327 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=*&hl=true&hl.method=unified&hl.weightMatches=true&hl.fl=title} hits=1 status=0 QTime=1
+20330 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=source_s&hl=true&hl.method=unified&hl.weightMatches=false&hl.fl=title} hits=1 status=0 QTime=1
+20332 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=source_*&hl=true&hl.method=unified&hl.weightMatches=false&hl.fl=title} hits=1 status=0 QTime=1
+20334 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=title:keyword&fq=id:7784&fl=*&hl=true&hl.method=unified&hl.weightMatches=false&hl.fl=title} hits=1 status=0 QTime=0
+20336 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=source_s&hl=true&hl.method=unified&hl.weightMatches=true&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=1
+20338 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=source_*&hl=true&hl.method=unified&hl.weightMatches=true&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=1
+20340 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=*&hl=true&hl.method=unified&hl.weightMatches=true&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=1
+20343 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=source_s&hl=true&hl.method=unified&hl.weightMatches=false&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=1
+20344 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=source_*&hl=true&hl.method=unified&hl.weightMatches=false&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=0
+20346 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7784&fq=id:7784&fl=*&hl=true&hl.method=unified&hl.weightMatches=false&hl.fl=title&hl.q=title:keyword} hits=1 status=0 QTime=1
+20357 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[7784 (-1880143054560559104)]} 0 8
+20517 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 11 ms
+20523 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 165
+20524 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightSnippets-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobHighlightSnippets
+20526 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+20526 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1487778585
+20527 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@62c4dace collection1
+20528 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Oct 26, 2026 8:49:02 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+20556 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+]]></system-err>
+</testsuite>

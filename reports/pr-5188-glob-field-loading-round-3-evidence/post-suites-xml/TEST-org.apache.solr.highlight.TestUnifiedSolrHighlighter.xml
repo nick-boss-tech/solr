@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.highlight.TestUnifiedSolrHighlighter" tests="33" skipped="0" failures="0" errors="0" timestamp="2026-10-26T20:07:44.005Z" hostname="localhost" time="2.645">
+  <properties/>
+  <testcase name="testRangeQuery" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.032"/>
+  <testcase name="testDontReturnEmptyHighlights" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.26"/>
+  <testcase name="testQueryFieldPatternMinimal" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.016"/>
+  <testcase name="testTwoFields" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.012"/>
+  <testcase name="testImpossibleOffsetSource" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.012"/>
+  <testcase name="testMultipleFieldsViaWildcard" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.012"/>
+  <testcase name="testQueryFieldPatternIndexedNotStored" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.017"/>
+  <testcase name="testBreakIteratorWhole" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.025"/>
+  <testcase name="testSimple" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.011"/>
+  <testcase name="testFragsize" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.019"/>
+  <testcase name="testMultiTermQueryEnabledByDefault" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.02"/>
+  <testcase name="testEncoder" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.015"/>
+  <testcase name="testRequireFieldMatch" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.011"/>
+  <testcase name="testDifferentField" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.011"/>
+  <testcase name="testUsingSimplePrePostTagsPerField" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.011"/>
+  <testcase name="testStrictPhrasesCanBeDisabled" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.019"/>
+  <testcase name="testWeightMatchesDisabled" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.023"/>
+  <testcase name="testSurroundQParser" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.021"/>
+  <testcase name="testTags" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.01"/>
+  <testcase name="testQueryFieldPatternComprehensive" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.04"/>
+  <testcase name="testUsingSimplePrePostTags" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.011"/>
+  <testcase name="testPagination" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.01"/>
+  <testcase name="testDefaultSummary" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.011"/>
+  <testcase name="testBreakIteratorWord" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.011"/>
+  <testcase name="testMultiTermQueryCanBeDisabled" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.014"/>
+  <testcase name="testPassageSort" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.019"/>
+  <testcase name="testMultipleSnippetsReturned" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.015"/>
+  <testcase name="testTagsPerField" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.013"/>
+  <testcase name="testStrictPhrasesEnabledByDefault" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.014"/>
+  <testcase name="testComplexPhraseQParser" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.044"/>
+  <testcase name="testEmptySnippet" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.011"/>
+  <testcase name="testBreakIteratorCustom" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.021"/>
+  <testcase name="testRequireFieldMatchWithQueryFieldPattern" classname="org.apache.solr.highlight.TestUnifiedSolrHighlighter" time="0.014"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[14239 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/solr/solr/server/solr/configsets/_default/conf'
+14250 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/tmp/pr5188/work-r3-post-suites/org.apache.solr.highlight.TestUnifiedSolrHighlighter_5188C0DE-001/data-dir-2-001
+14250 WARN  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=49 numCloses=49
+14250 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-5 for ERROR logs matching regex: ignore_exception
+14250 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=false
+14256 WARN  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+14256 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+14256 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+14257 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+14269 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+14299 WARN  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+14319 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.s.IndexSchema Loaded schema unifiedhighlight/1.6 with uniqueid field id
+14320 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+14320 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+15897 WARN  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+15910 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+15929 WARN  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+15933 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema unifiedhighlight/1.6 with uniqueid field id
+15933 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/solr/solr/core/build/resources/test/solr/collection1
+15933 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/solr/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/tmp/pr5188/work-r3-post-suites/org.apache.solr.highlight.TestUnifiedSolrHighlighter_5188C0DE-001/data-dir-2-001/]
+15934 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=21, maxMergedSegmentMB=82.96964168548584, floorSegmentMB=1.885533332824707, forceMergeDeletesPctAllowed=7.422047191168431, segmentsPerTier=25.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.0, deletesPctAllowed=22.04200057267888, targetSearchConcurrency=3
+15986 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+15986 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+15987 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogByteSizeMergePolicy: [LogByteSizeMergePolicy: minMergeSize=16777216, mergeFactor=46, maxMergeSize=2147483648, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8603529875724644]
+15990 WARN  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/solr/solr/core/build/resources/test/solr/collection1/conf ; switching to use InMemory storage instead.
+15990 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+15991 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16052 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+16057 INFO  (TEST-TestUnifiedSolrHighlighter.testRangeQuery-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testRangeQuery
+16057 INFO  (TEST-TestUnifiedSolrHighlighter.testRangeQuery-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16057 INFO  (TEST-TestUnifiedSolrHighlighter.testRangeQuery-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16058 INFO  (TEST-TestUnifiedSolrHighlighter.testRangeQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16060 INFO  (TEST-TestUnifiedSolrHighlighter.testRangeQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16063 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16064 INFO  (TEST-TestUnifiedSolrHighlighter.testRangeQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 3
+16084 INFO  (TEST-TestUnifiedSolrHighlighter.testRangeQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:101&hl=true&hl.q=text:[dob+TO+doe]&hl.method=unified&wt=xml} hits=1 status=0 QTime=19
+16084 INFO  (TEST-TestUnifiedSolrHighlighter.testRangeQuery-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testRangeQuery
+16089 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testDontReturnEmptyHighlights
+16089 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16089 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16090 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16090 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16094 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16094 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 3
+16094 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16094 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16095 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[103]} 0 0
+16098 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16098 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16331 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:document&hl=true&hl=true&hl.fl=text,+text2&sort=id+asc&hl.method=unified&wt=xml} hits=1 status=0 QTime=232
+16345 INFO  (TEST-TestUnifiedSolrHighlighter.testDontReturnEmptyHighlights-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testDontReturnEmptyHighlights
+16349 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryFieldPatternMinimal
+16349 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16349 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16350 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16351 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16354 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16354 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 3
+16356 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text2:crappier&hl=true&hl.fl=text3&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16358 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text2:crappier&hl=true&hl.fl=text3&hl.requireFieldMatch=true&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16360 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text2:crappier&hl=true&hl.fl=text3&hl.queryFieldPattern=text&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16361 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternMinimal-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryFieldPatternMinimal
+16365 INFO  (TEST-TestUnifiedSolrHighlighter.testTwoFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testTwoFields
+16366 INFO  (TEST-TestUnifiedSolrHighlighter.testTwoFields-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16366 INFO  (TEST-TestUnifiedSolrHighlighter.testTwoFields-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16366 INFO  (TEST-TestUnifiedSolrHighlighter.testTwoFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16367 INFO  (TEST-TestUnifiedSolrHighlighter.testTwoFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16370 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16370 INFO  (TEST-TestUnifiedSolrHighlighter.testTwoFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16372 INFO  (TEST-TestUnifiedSolrHighlighter.testTwoFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+text3:document&sort=id+asc&hl=true&hl.fl=text,text3&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16373 INFO  (TEST-TestUnifiedSolrHighlighter.testTwoFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testTwoFields
+16377 INFO  (TEST-TestUnifiedSolrHighlighter.testImpossibleOffsetSource-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testImpossibleOffsetSource
+16378 INFO  (TEST-TestUnifiedSolrHighlighter.testImpossibleOffsetSource-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16378 INFO  (TEST-TestUnifiedSolrHighlighter.testImpossibleOffsetSource-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16378 INFO  (TEST-TestUnifiedSolrHighlighter.testImpossibleOffsetSource-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16379 INFO  (TEST-TestUnifiedSolrHighlighter.testImpossibleOffsetSource-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16382 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16382 INFO  (TEST-TestUnifiedSolrHighlighter.testImpossibleOffsetSource-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16384 ERROR (TEST-TestUnifiedSolrHighlighter.testImpossibleOffsetSource-seed#[5188C0DE]) [] o.a.s.h.RequestHandlerBase Server exception
+java.lang.IllegalArgumentException: field 'text2' was indexed without offsets, cannot highlight
+	at org.apache.lucene.search.uhighlight.FieldHighlighter.highlightOffsetsEnums(FieldHighlighter.java:160)
+	at org.apache.lucene.search.uhighlight.FieldHighlighter.highlightFieldForDoc(FieldHighlighter.java:86)
+	at org.apache.lucene.search.uhighlight.UnifiedHighlighter.highlightFieldsAsObjects(UnifiedHighlighter.java:988)
+	at org.apache.lucene.search.uhighlight.UnifiedHighlighter.highlightFields(UnifiedHighlighter.java:858)
+	at org.apache.solr.highlight.UnifiedSolrHighlighter.doHighlighting(UnifiedSolrHighlighter.java:167)
+	at org.apache.solr.handler.component.HighlightComponent.process(HighlightComponent.java:162)
+	at org.apache.solr.handler.component.SearchHandler.processComponentsLocal(SearchHandler.java:486)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:414)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:238)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.util.TestHarness.query(TestHarness.java:333)
+	at org.apache.solr.util.TestHarness.query(TestHarness.java:313)
+	at org.apache.solr.highlight.TestUnifiedSolrHighlighter.lambda$testImpossibleOffsetSource$0(TestUnifiedSolrHighlighter.java:90)
+	at org.apache.lucene.tests.util.LuceneTestCase._expectThrows(LuceneTestCase.java:3084)
+	at org.apache.lucene.tests.util.LuceneTestCase.expectThrows(LuceneTestCase.java:2924)
+	at org.apache.lucene.tests.util.LuceneTestCase.expectThrows(LuceneTestCase.java:2915)
+	at org.apache.solr.highlight.TestUnifiedSolrHighlighter.testImpossibleOffsetSource(TestUnifiedSolrHighlighter.java:87)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+16385 INFO  (TEST-TestUnifiedSolrHighlighter.testImpossibleOffsetSource-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text2:document&hl.offsetSource=postings&hl.fl=text2&sort=id+asc&hl=true&hl.method=unified&wt=xml} hits=2 status=500 QTime=2
+16385 INFO  (TEST-TestUnifiedSolrHighlighter.testImpossibleOffsetSource-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testImpossibleOffsetSource
+16389 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleFieldsViaWildcard-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testMultipleFieldsViaWildcard
+16390 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleFieldsViaWildcard-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16390 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleFieldsViaWildcard-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16390 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleFieldsViaWildcard-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16391 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleFieldsViaWildcard-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16394 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16394 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleFieldsViaWildcard-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16397 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleFieldsViaWildcard-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+text3:document&sort=id+asc&hl=true&hl.fl=text,text3*&hl.method=unified&wt=xml} hits=2 status=0 QTime=2
+16397 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleFieldsViaWildcard-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testMultipleFieldsViaWildcard
+16402 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryFieldPatternIndexedNotStored
+16402 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16402 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16403 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16403 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16406 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16406 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16408 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text2_indexed_not_stored:crappier&hl=true&hl.fl=text3&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16410 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text2_indexed_not_stored:crappier&hl=true&hl.fl=text3&hl.queryFieldPattern=text,text2&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16412 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text2_indexed_not_stored:crappier&hl=true&hl.fl=text3&hl.queryFieldPattern=text,text2_indexed_not_stored&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16414 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text2_indexed_not_stored:crappier&hl=true&hl.fl=text3&hl.queryFieldPattern=text2*&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16415 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternIndexedNotStored-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryFieldPatternIndexedNotStored
+16419 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testBreakIteratorWhole
+16419 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16419 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16420 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16420 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16423 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16423 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 3
+16424 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[103]} 0 0
+16427 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16427 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16429 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.bs.type=WHOLE&hl.fragsize=-1&hl.method=unified&wt=xml} hits=3 status=0 QTime=1
+16439 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.fragsize=0&hl.method=unified&wt=xml} hits=3 status=0 QTime=9
+16439 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWhole-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testBreakIteratorWhole
+16444 INFO  (TEST-TestUnifiedSolrHighlighter.testSimple-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSimple
+16444 INFO  (TEST-TestUnifiedSolrHighlighter.testSimple-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16444 INFO  (TEST-TestUnifiedSolrHighlighter.testSimple-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16445 INFO  (TEST-TestUnifiedSolrHighlighter.testSimple-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16445 INFO  (TEST-TestUnifiedSolrHighlighter.testSimple-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16448 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16449 INFO  (TEST-TestUnifiedSolrHighlighter.testSimple-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16450 INFO  (TEST-TestUnifiedSolrHighlighter.testSimple-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16451 INFO  (TEST-TestUnifiedSolrHighlighter.testSimple-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSimple
+16455 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFragsize
+16455 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16455 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16456 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16456 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16459 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16460 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16460 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16460 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16461 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[10]} 0 0
+16464 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16464 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16465 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:seventy&hl=true&hl.method=unified&hl.fragAlignRatio=0.5&hl.fragsizeIsMinimum=true&wt=xml} hits=1 status=0 QTime=0
+16466 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:seventy&hl=true&hl.method=unified&hl.fragAlignRatio=0.5&hl.fragsizeIsMinimum=true&hl.fragsize=60&wt=xml} hits=1 status=0 QTime=0
+16467 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:seventy&hl=true&hl.method=unified&hl.fragAlignRatio=0.5&hl.fragsizeIsMinimum=false&wt=xml} hits=1 status=0 QTime=0
+16469 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:seventy&hl=true&hl.method=unified&hl.fragAlignRatio=0.5&hl.fragsize=90&hl.fragsizeIsMinimum=false&wt=xml} hits=1 status=0 QTime=0
+16469 INFO  (TEST-TestUnifiedSolrHighlighter.testFragsize-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFragsize
+16473 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testMultiTermQueryEnabledByDefault
+16473 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16473 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16474 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16475 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16478 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16478 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16478 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16479 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16479 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16482 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16482 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16488 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:av*&sort=id+asc&hl=true&hl.method=unified&wt=xml} hits=1 status=0 QTime=5
+16489 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryEnabledByDefault-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testMultiTermQueryEnabledByDefault
+16493 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testEncoder
+16493 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16494 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16494 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16495 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16498 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16498 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16499 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[103]} 0 0
+16502 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16502 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16504 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.encoder=html&hl.method=unified&wt=xml} hits=3 status=0 QTime=1
+16504 INFO  (TEST-TestUnifiedSolrHighlighter.testEncoder-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testEncoder
+16508 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatch-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testRequireFieldMatch
+16509 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatch-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16509 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatch-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16509 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatch-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16510 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatch-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16513 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16513 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatch-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16514 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatch-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:101&hl=true&hl.q=text:document&hl.fl=text3&hl.method=unified&wt=xml} hits=1 status=0 QTime=0
+16515 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatch-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:101&hl=true&hl.q=text:document&hl.fl=text3&hl.requireFieldMatch=true&hl.method=unified&wt=xml} hits=1 status=0 QTime=0
+16516 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatch-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testRequireFieldMatch
+16520 INFO  (TEST-TestUnifiedSolrHighlighter.testDifferentField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testDifferentField
+16520 INFO  (TEST-TestUnifiedSolrHighlighter.testDifferentField-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16520 INFO  (TEST-TestUnifiedSolrHighlighter.testDifferentField-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16521 INFO  (TEST-TestUnifiedSolrHighlighter.testDifferentField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16521 INFO  (TEST-TestUnifiedSolrHighlighter.testDifferentField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16524 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16525 INFO  (TEST-TestUnifiedSolrHighlighter.testDifferentField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16526 INFO  (TEST-TestUnifiedSolrHighlighter.testDifferentField-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text3:document&sort=id+asc&hl=true&hl.fl=text3&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16527 INFO  (TEST-TestUnifiedSolrHighlighter.testDifferentField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testDifferentField
+16531 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTagsPerField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testUsingSimplePrePostTagsPerField
+16531 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTagsPerField-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16531 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTagsPerField-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16532 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTagsPerField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16532 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTagsPerField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16535 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16535 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTagsPerField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16536 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTagsPerField-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&f.text.hl.simple.pre=[&f.text.hl.simple.post=]&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16537 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTagsPerField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testUsingSimplePrePostTagsPerField
+16541 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testStrictPhrasesCanBeDisabled
+16541 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16542 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16542 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16543 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16545 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16546 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16546 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16546 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16547 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16550 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16550 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16556 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:"strict+phrases"&sort=id+asc&hl=true&hl.usePhraseHighlighter=false&hl.method=unified&wt=xml} hits=1 status=0 QTime=5
+16556 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesCanBeDisabled-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testStrictPhrasesCanBeDisabled
+16561 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testWeightMatchesDisabled
+16561 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16561 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16562 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16562 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16565 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16565 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16566 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16566 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16567 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16569 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16569 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16579 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:"alpha+bravo"&hl=true&hl.weightMatches=false&hl.method=unified&wt=xml} hits=1 status=0 QTime=9
+16579 INFO  (TEST-TestUnifiedSolrHighlighter.testWeightMatchesDisabled-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testWeightMatchesDisabled
+16583 INFO  (TEST-TestUnifiedSolrHighlighter.testSurroundQParser-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSurroundQParser
+16584 INFO  (TEST-TestUnifiedSolrHighlighter.testSurroundQParser-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16584 INFO  (TEST-TestUnifiedSolrHighlighter.testSurroundQParser-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16584 INFO  (TEST-TestUnifiedSolrHighlighter.testSurroundQParser-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16585 INFO  (TEST-TestUnifiedSolrHighlighter.testSurroundQParser-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16588 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16588 INFO  (TEST-TestUnifiedSolrHighlighter.testSurroundQParser-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16600 INFO  (TEST-TestUnifiedSolrHighlighter.testSurroundQParser-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q={!surround+df%3Dtext}2w(second,+document)&hl=true&hl.fl=text&hl.method=unified&wt=xml} hits=1 status=0 QTime=11
+16601 INFO  (TEST-TestUnifiedSolrHighlighter.testSurroundQParser-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSurroundQParser
+16605 INFO  (TEST-TestUnifiedSolrHighlighter.testTags-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testTags
+16605 INFO  (TEST-TestUnifiedSolrHighlighter.testTags-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16605 INFO  (TEST-TestUnifiedSolrHighlighter.testTags-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16606 INFO  (TEST-TestUnifiedSolrHighlighter.testTags-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16606 INFO  (TEST-TestUnifiedSolrHighlighter.testTags-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16609 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16610 INFO  (TEST-TestUnifiedSolrHighlighter.testTags-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16611 INFO  (TEST-TestUnifiedSolrHighlighter.testTags-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.tag.pre=[&hl.tag.post=]&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16612 INFO  (TEST-TestUnifiedSolrHighlighter.testTags-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testTags
+16620 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryFieldPatternComprehensive
+16621 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16621 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16621 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16622 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16625 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16625 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16626 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&hl=true&hl.fl=text&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16628 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16630 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text2&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16632 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text3&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16633 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text&hl.requireFieldMatch=true&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16635 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text2&hl.requireFieldMatch=true&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16636 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text3&hl.requireFieldMatch=true&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16638 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text&hl.queryFieldPattern=text2&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16639 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text&hl.queryFieldPattern=text3&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16641 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text2&hl.queryFieldPattern=text&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16643 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text2&hl.queryFieldPattern=text3&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16644 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text3&hl.queryFieldPattern=text&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16646 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text3&hl.queryFieldPattern=text2&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16647 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text&hl.queryFieldPattern=text2,text3&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16649 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text2&hl.queryFieldPattern=text,text3&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16650 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text3&hl.queryFieldPattern=text,text2&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16651 INFO  (TEST-TestUnifiedSolrHighlighter.testQueryFieldPatternComprehensive-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryFieldPatternComprehensive
+16655 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTags-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testUsingSimplePrePostTags
+16656 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTags-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16656 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTags-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16656 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTags-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16657 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTags-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16660 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16660 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTags-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 3
+16661 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTags-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.simple.pre=[&hl.simple.post=]&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16662 INFO  (TEST-TestUnifiedSolrHighlighter.testUsingSimplePrePostTags-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testUsingSimplePrePostTags
+16666 INFO  (TEST-TestUnifiedSolrHighlighter.testPagination-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testPagination
+16666 INFO  (TEST-TestUnifiedSolrHighlighter.testPagination-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16666 INFO  (TEST-TestUnifiedSolrHighlighter.testPagination-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16667 INFO  (TEST-TestUnifiedSolrHighlighter.testPagination-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16668 INFO  (TEST-TestUnifiedSolrHighlighter.testPagination-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16671 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16671 INFO  (TEST-TestUnifiedSolrHighlighter.testPagination-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16672 INFO  (TEST-TestUnifiedSolrHighlighter.testPagination-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&rows=1&start=1&hl.method=unified&wt=xml} hits=2 status=0 QTime=0
+16672 INFO  (TEST-TestUnifiedSolrHighlighter.testPagination-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testPagination
+16676 INFO  (TEST-TestUnifiedSolrHighlighter.testDefaultSummary-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testDefaultSummary
+16677 INFO  (TEST-TestUnifiedSolrHighlighter.testDefaultSummary-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16677 INFO  (TEST-TestUnifiedSolrHighlighter.testDefaultSummary-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16677 INFO  (TEST-TestUnifiedSolrHighlighter.testDefaultSummary-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16678 INFO  (TEST-TestUnifiedSolrHighlighter.testDefaultSummary-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16681 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16681 INFO  (TEST-TestUnifiedSolrHighlighter.testDefaultSummary-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16683 INFO  (TEST-TestUnifiedSolrHighlighter.testDefaultSummary-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:one+OR+*:*&sort=id+asc&hl=true&hl.defaultSummary=true&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16683 INFO  (TEST-TestUnifiedSolrHighlighter.testDefaultSummary-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testDefaultSummary
+16687 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWord-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testBreakIteratorWord
+16687 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWord-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16688 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWord-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16688 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWord-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16689 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWord-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16691 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16692 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWord-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16693 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWord-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.bs.type=WORD&hl.fragsize=-1&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16694 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorWord-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testBreakIteratorWord
+16698 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testMultiTermQueryCanBeDisabled
+16698 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16698 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16699 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16700 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16702 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16703 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16703 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16703 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16704 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16707 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16707 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16708 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:av*&sort=id+asc&hl=true&hl.highlightMultiTerm=false&hl.method=unified&wt=xml} hits=1 status=0 QTime=1
+16708 INFO  (TEST-TestUnifiedSolrHighlighter.testMultiTermQueryCanBeDisabled-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testMultiTermQueryCanBeDisabled
+16713 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testPassageSort
+16713 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16713 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16714 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16714 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16717 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16717 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16718 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16718 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16719 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16721 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16721 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16723 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&hl=true&hl.snippets=2&hl.bs.type=SENTENCE&hl.fragsize=-1&hl.method=unified&wt=xml} hits=1 status=0 QTime=1
+16726 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&hl=true&hl.snippets=2&hl.bs.type=SENTENCE&hl.fragsize=-1&hl.passageSort=score&hl.method=unified&wt=xml} hits=1 status=0 QTime=2
+16727 ERROR (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: Invalid hl.passageSort value: 'bogus'
+	at org.apache.solr.highlight.UnifiedSolrHighlighter$SolrExtendedUnifiedHighlighter.getPassageSortComparator(UnifiedSolrHighlighter.java:332)
+	at org.apache.lucene.search.uhighlight.UnifiedHighlighter.getFieldHighlighter(UnifiedHighlighter.java:1140)
+	at org.apache.lucene.search.uhighlight.UnifiedHighlighter.highlightFieldsAsObjects(UnifiedHighlighter.java:924)
+	at org.apache.lucene.search.uhighlight.UnifiedHighlighter.highlightFields(UnifiedHighlighter.java:858)
+	at org.apache.solr.highlight.UnifiedSolrHighlighter.doHighlighting(UnifiedSolrHighlighter.java:167)
+	at org.apache.solr.handler.component.HighlightComponent.process(HighlightComponent.java:162)
+	at org.apache.solr.handler.component.SearchHandler.processComponentsLocal(SearchHandler.java:486)
+	at org.apache.solr.handler.component.SearchHandler.processComponents(SearchHandler.java:414)
+	at org.apache.solr.handler.component.SearchHandler.handleRequestBody(SearchHandler.java:238)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.util.TestHarness.query(TestHarness.java:333)
+	at org.apache.solr.util.TestHarness.query(TestHarness.java:313)
+	at org.apache.solr.highlight.TestUnifiedSolrHighlighter.lambda$testPassageSort$1(TestUnifiedSolrHighlighter.java:189)
+	at org.apache.lucene.tests.util.LuceneTestCase._expectThrows(LuceneTestCase.java:3084)
+	at org.apache.lucene.tests.util.LuceneTestCase.expectThrows(LuceneTestCase.java:2924)
+	at org.apache.lucene.tests.util.LuceneTestCase.expectThrows(LuceneTestCase.java:2915)
+	at org.apache.solr.highlight.TestUnifiedSolrHighlighter.testPassageSort(TestUnifiedSolrHighlighter.java:187)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+16728 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&hl=true&hl.passageSort=bogus&hl.method=unified&wt=xml} hits=1 status=400 QTime=1
+16728 INFO  (TEST-TestUnifiedSolrHighlighter.testPassageSort-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testPassageSort
+16732 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testMultipleSnippetsReturned
+16732 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16732 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16733 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16733 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16736 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16736 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16737 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16737 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16738 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16740 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16740 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16742 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.snippets=2&hl.bs.type=SENTENCE&hl.fragsize=-1&hl.method=unified&wt=xml} hits=1 status=0 QTime=0
+16742 INFO  (TEST-TestUnifiedSolrHighlighter.testMultipleSnippetsReturned-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testMultipleSnippetsReturned
+16748 INFO  (TEST-TestUnifiedSolrHighlighter.testTagsPerField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testTagsPerField
+16748 INFO  (TEST-TestUnifiedSolrHighlighter.testTagsPerField-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16748 INFO  (TEST-TestUnifiedSolrHighlighter.testTagsPerField-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16749 INFO  (TEST-TestUnifiedSolrHighlighter.testTagsPerField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16749 INFO  (TEST-TestUnifiedSolrHighlighter.testTagsPerField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16752 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16752 INFO  (TEST-TestUnifiedSolrHighlighter.testTagsPerField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16754 INFO  (TEST-TestUnifiedSolrHighlighter.testTagsPerField-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+text3:document&sort=id+asc&hl=true&hl.fl=text,text3&f.text3.hl.tag.pre=[&f.text3.hl.tag.post=]&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16755 INFO  (TEST-TestUnifiedSolrHighlighter.testTagsPerField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testTagsPerField
+16759 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testStrictPhrasesEnabledByDefault
+16759 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16759 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16760 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16760 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16763 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16763 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16764 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16764 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16764 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16767 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16767 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16769 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:"strict+phrases"&sort=id+asc&hl=true&hl.method=unified&wt=xml} hits=1 status=0 QTime=1
+16770 INFO  (TEST-TestUnifiedSolrHighlighter.testStrictPhrasesEnabledByDefault-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testStrictPhrasesEnabledByDefault
+16774 INFO  (TEST-TestUnifiedSolrHighlighter.testComplexPhraseQParser-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testComplexPhraseQParser
+16774 INFO  (TEST-TestUnifiedSolrHighlighter.testComplexPhraseQParser-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16774 INFO  (TEST-TestUnifiedSolrHighlighter.testComplexPhraseQParser-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16775 INFO  (TEST-TestUnifiedSolrHighlighter.testComplexPhraseQParser-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16775 INFO  (TEST-TestUnifiedSolrHighlighter.testComplexPhraseQParser-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16778 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16778 INFO  (TEST-TestUnifiedSolrHighlighter.testComplexPhraseQParser-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16813 INFO  (TEST-TestUnifiedSolrHighlighter.testComplexPhraseQParser-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q={!complexphrase+df%3Dtext}("sec*+doc*")&hl=true&hl.fl=text&hl.method=unified&wt=xml} hits=1 status=0 QTime=34
+16814 INFO  (TEST-TestUnifiedSolrHighlighter.testComplexPhraseQParser-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testComplexPhraseQParser
+16818 INFO  (TEST-TestUnifiedSolrHighlighter.testEmptySnippet-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testEmptySnippet
+16818 INFO  (TEST-TestUnifiedSolrHighlighter.testEmptySnippet-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16818 INFO  (TEST-TestUnifiedSolrHighlighter.testEmptySnippet-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16819 INFO  (TEST-TestUnifiedSolrHighlighter.testEmptySnippet-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16820 INFO  (TEST-TestUnifiedSolrHighlighter.testEmptySnippet-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16823 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16823 INFO  (TEST-TestUnifiedSolrHighlighter.testEmptySnippet-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16824 INFO  (TEST-TestUnifiedSolrHighlighter.testEmptySnippet-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:one+OR+*:*&sort=id+asc&hl=true&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16825 INFO  (TEST-TestUnifiedSolrHighlighter.testEmptySnippet-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testEmptySnippet
+16829 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testBreakIteratorCustom
+16829 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16829 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16830 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16830 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16833 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16833 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16834 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[103]} 0 0
+16834 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[104]} 0 0
+16837 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16837 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16839 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.method=unified&hl.bs.type=SEPARATOR&hl.bs.separator=#&hl.fragAlignRatio=0.5&hl.fragsize=-1&wt=xml} hits=4 status=0 QTime=1
+16840 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.method=unified&hl.bs.type=SEPARATOR&hl.bs.separator=#&hl.fragAlignRatio=0.5&hl.fragsize=-1&wt=xml} hits=4 status=0 QTime=0
+16842 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.method=unified&hl.bs.type=SEPARATOR&hl.bs.separator=#&hl.fragAlignRatio=0.5&hl.fragsize=70&hl.fragsizeIsMinimum=true&wt=xml} hits=4 status=0 QTime=1
+16843 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.method=unified&hl.bs.type=SEPARATOR&hl.bs.separator=#&hl.fragAlignRatio=0.5&hl.fragsize=70&hl.fragsizeIsMinimum=false&wt=xml} hits=4 status=0 QTime=0
+16844 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.method=unified&hl.bs.type=SEPARATOR&hl.bs.separator=#&hl.fragAlignRatio=0.5&hl.fragsize=90&hl.fragsizeIsMinimum=false&wt=xml} hits=4 status=0 QTime=0
+16846 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document&sort=id+asc&hl=true&hl.method=unified&hl.bs.type=SEPARATOR&hl.bs.separator=#&hl.fragAlignRatio=0.5&hl.fragsize=100&hl.fragsizeIsMinimum=false&wt=xml} hits=4 status=0 QTime=0
+16846 INFO  (TEST-TestUnifiedSolrHighlighter.testBreakIteratorCustom-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testBreakIteratorCustom
+16850 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatchWithQueryFieldPattern-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testRequireFieldMatchWithQueryFieldPattern
+16850 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatchWithQueryFieldPattern-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+16850 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatchWithQueryFieldPattern-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:*} 0 0
+16851 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatchWithQueryFieldPattern-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101]} 0 0
+16851 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatchWithQueryFieldPattern-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102]} 0 0
+16854 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+16854 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatchWithQueryFieldPattern-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+16857 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatchWithQueryFieldPattern-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text,text2,text3&hl.queryFieldPattern=text,text2,text3&hl.requireFieldMatch=false&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16859 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatchWithQueryFieldPattern-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:document+OR+text2:crappy+OR+text3:crappier&hl=true&hl.fl=text,text2,text3&hl.queryFieldPattern=text,text2,text3&hl.requireFieldMatch=true&sort=id+asc&hl.method=unified&wt=xml} hits=2 status=0 QTime=1
+16860 INFO  (TEST-TestUnifiedSolrHighlighter.testRequireFieldMatchWithQueryFieldPattern-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testRequireFieldMatchWithQueryFieldPattern
+16860 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+16860 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=2134419094
+16861 INFO  (coreCloseExecutor-43-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@3b33e804 collection1
+16861 INFO  (coreCloseExecutor-43-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+10월 26, 2026 5:07:46 오후 io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+경고: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+16865 INFO  (SUITE-TestUnifiedSolrHighlighter-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-5 after muting 0 log messages
+]]></system-err>
+</testsuite>
