@@ -990,13 +990,20 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
             for (String selection : new String[] {"source_s", "source_*", "*"}) {
               ModifiableSolrParams params =
                   params(
-                      "q", explicitQuery ? "id:7784" : "title:keyword",
-                      "fq", "id:7784",
-                      "fl", selection,
-                      "hl", "true",
-                      "hl.method", method,
-                      "hl.weightMatches", weightMatches,
-                      "hl.fl", "title");
+                      "q",
+                      explicitQuery ? "id:7784" : "title:keyword",
+                      "fq",
+                      "id:7784",
+                      "fl",
+                      selection,
+                      "hl",
+                      "true",
+                      "hl.method",
+                      method,
+                      "hl.weightMatches",
+                      weightMatches,
+                      "hl.fl",
+                      "title");
               if (explicitQuery) {
                 params.set("hl.q", "title:keyword");
               }
