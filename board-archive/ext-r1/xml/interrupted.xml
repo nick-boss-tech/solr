@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-26T02:39:23.105Z" hostname="localhost" time="5.436">
+  <properties/>
+  <testcase name="testExternalExecutorCloseProbeInterrupted" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="1.206"/>
+  <system-out><![CDATA[PROBE-EVIDENCE arm=interrupted /workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-tmp/ext-probe-interrupted-15976070676561883740/interrupted.log
+]]></system-out>
+  <system-err><![CDATA[Oct 26, 2026 2:39:23 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1757 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/teardown-ext-r1/solr/server/solr/configsets/_default/conf'
+1768 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+1784 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-001/data-dir-1-001
+1797 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+1830 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+1883 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/teardown-ext-r1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/teardown-ext-r1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+1884 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (true) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+2182 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+2184 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+2188 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+2196 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+2198 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@6e1de9f6{/solr,/solr,b=file:///workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@73012bb8{STOPPED}}. May not be supported in future releases.
+2205 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-cwd/
+2213 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@6e1de9f6{/solr,/solr,b=file:///workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@73012bb8{STARTED}}
+2216 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=34083}
+2219 ERROR (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+2219 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+2224 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT d298cd0b42602247bee7bf9e2bcf302e725f6690 [snapshot build, details omitted]
+2224 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+2224 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/teardown-ext-r1/solr
+2224 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-26T02:39:24.369795440Z
+2287 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-001/tempDir-001 (source: servlet config: solr.solr.home)
+2301 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.SolrXmlConfig solr.xml not found in SOLR_HOME, using built-in default
+2301 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/teardown-ext-r1/solr/server/solr/solr.xml
+2432 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+2443 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+2799 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [/workspace/worktrees/teardown-ext-r1/solr/server/solr]
+3232 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+3315 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-001/tempDir-001
+3826 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@6e1de9f6{/solr,/solr,b=file:///workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@73012bb8{STARTED}}
+3829 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@52bece2b{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:۳۴۰۸۳}
+3830 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server Started oejs.Server@22aca107{STARTING}[12.1.14,sto=۰] @1645ms
+3834 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#34083
+4501 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedWordSetResource for path /schema/analysis/stopwords/english
+4502 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory$SynonymManager for path /schema/analysis/synonyms/english
+4502 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedStopFilterFactory to existing ManagedResource /schema/analysis/stopwords/english
+4502 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory to existing ManagedResource /schema/analysis/synonyms/english
+4531 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+4552 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/teardown-ext-r1/solr/server/solr/configsets/sample_techproducts_configs
+4572 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-001/tempDir-001/collection1], dataDir=[/workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-001/tempDir-001/collection1/data/]
+4873 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+5055 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+5056 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+5057 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+5124 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/teardown-ext-r1/solr/server/solr/configsets/sample_techproducts_configs/conf ; switching to use InMemory storage instead.
+5126 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/analysis/stopwords/english
+5127 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_analysis_stopwords_english.json using InMemoryStorage
+5127 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.s.a.ManagedWordSetResource Loaded 0 words for /schema/analysis/stopwords/english
+5127 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/stopwords/english
+5128 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/analysis/synonyms/english
+5128 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.s.a.ManagedSynonymGraphFilterFactory Loaded 0 synonym mappings for /schema/analysis/synonyms/english
+5128 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/synonyms/english
+5148 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.h.c.SuggestComponent Initializing SuggestComponent
+5151 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester init: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+5162 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester Dictionary loaded with params: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+5174 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+5198 INFO  (TEST-HttpJettySolrClientTest.testExternalExecutorCloseProbeInterrupted-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testExternalExecutorCloseProbeInterrupted
+5217 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.S.Request path=null params={q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false&event=firstSearcher} hits=0 status=0 QTime=41
+5218 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.QuerySenderListener QuerySenderListener done.
+5218 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+5218 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+5221 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+6358 WARN  (probe-ext-interrupted-21-thread-2) [] o.e.j.i.ManagedSelector select() failure java.nio.channels.ClosedSelectorException
+6396 INFO  (TEST-HttpJettySolrClientTest.testExternalExecutorCloseProbeInterrupted-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testExternalExecutorCloseProbeInterrupted
+6398 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+6400 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server Stopped oejs.Server@22aca107{STOPPING}[12.1.14,sto=۰]
+6401 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@52bece2b{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:۰}
+6403 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=488245598
+6404 INFO  (coreCloseExecutor-23-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@b1b28fd collection1
+6405 INFO  (coreCloseExecutor-23-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+اکتوبر ۲۶, ۲۰۲۶ ۲:۳۹:۲۸ غ.م. io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+6420 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@6e1de9f6{/solr,/solr,b=file:///workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@73012bb8{STOPPED}}
+]]></system-err>
+</testsuite>
