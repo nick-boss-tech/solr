@@ -1,5 +1,6 @@
 # Assignment: full-scan Jira comment readiness, remaining leads (round 1)
-Status: OPEN
+Status: DONE
+Completed: 2026-10-25. Claim `claims/phone-agent-jira-full-scan-comment-readiness-round-1.md` and report `reports/phone-agent-jira-full-scan-comment-readiness-round-1.md` are on the board; cleanup record in `reports/vm4-open-work-discussion-round-1.md`.
 - Capability tags: `review`, `draft`.
 - Intended host: `phone-agent` (Phone Agent), not `phone-agent-2`. Claim this assignment under `claims/` before starting. Phone-agent creates its own claim; this posting creates no claim.
 - Posted by: Cue at Nick Shanin's direction, 2026-10-24.
