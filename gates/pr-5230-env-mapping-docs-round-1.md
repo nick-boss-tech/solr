@@ -1,6 +1,6 @@
 # Gate: PR 5230 corrected environment guidance, round 1
 
-- Status: CLAIMED by vm3 in `claims/pool-vm3-gate-pr-5230-env-mapping-docs-round-1.md`. Intended host: any capable Linux gate host with JDK 21, Node/npm and the Solr Ref Guide toolchain.
+- Status: DONE. Result: all three Ref Guide tasks passed at `bf285189f74b775165fc53ba305d35dccf880a47` on attempt 3; release probes and launcher checks agree with the corrected prose. Receipt `receipts/SOLR-17988.md`, claim `claims/pool-vm3-gate-pr-5230-env-mapping-docs-round-1.md`. Intended host: any capable Linux gate host with JDK 21, Node/npm and the Solr Ref Guide toolchain.
 - Tags: gate, premise-run. Posted by Windows Codex on Nick's explicit PR 5230 patch instruction.
 - Ticket / PR: SOLR-17988 / https://github.com/apache/solr/pull/5230.
 - Fork branch: `solr-17988-docs`.

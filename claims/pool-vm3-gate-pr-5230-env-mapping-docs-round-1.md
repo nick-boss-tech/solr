@@ -28,4 +28,10 @@ Attempt 1 at `bf285189f74b775165fc53ba305d35dccf880a47`, standalone clone `/work
 
 Attempt 2 (`NODE_ENV` unset, daemon reused from attempt 1): tidy not repeated. `buildLocalSite` exit 1 and `checkSiteLinks` exit 1 again with `Cannot find module '@asciidoctor/tabs'`. `checkCliDocsUpToDate` exit 0. Investigation: the log shows `downloadAsciidoctorTabsExtension UP-TO-DATE`. Gradle kept attempt 1's up-to-date record for a task whose output directory was never created, so npm did not run again. Repair: attempt 3 runs `downloadAsciidoctorTabsExtension --rerun --no-daemon`, checks that `node_modules/@asciidoctor/tabs` exists, then runs the three tasks with `--no-daemon` so the Gradle process does not inherit the older environment. Attempt 2 logs are kept in `attempt-2-tabs-up-to-date/`.
 
-Result: pending attempt 3.
+Attempt 3 (`--rerun` for the tabs task, `--no-daemon` for all Gradle runs): `buildLocalSite` exit 0, `checkSiteLinks` exit 0 (no errors, no warnings), `checkCliDocsUpToDate` exit 0, tracked tree clean after the run. Logs in the log directory: `buildLocalSite.log`, `checkSiteLinks.log`, `checkCliDocsUpToDate.log`, `steps-attempt-3.tsv`.
+
+Heartbeat: 2026-10-26T02:30:00Z: probes, launcher checks and receipt written.
+
+Result: 2026-10-26T02:30:00Z: receipt `receipts/SOLR-17988.md` holds all step results, the probe and launcher evidence, and the corrected PR proof paragraph.
+
+DONE: 2026-10-26T02:30:00Z. Deliverables: `receipts/SOLR-17988.md`, `gates/pr-5230-env-mapping-docs-round-1.md` (Status DONE), and this claim. Log directory: `/workspace/gates/logs/vm3/pr-5230-env-mapping-docs-round-1/`.
