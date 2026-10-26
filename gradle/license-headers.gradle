@@ -15,48 +15,97 @@
  * limitations under the License.
  */
 
-// Adds the ASF license header to new Java files that lack one.
-// Apache RAT (gradlew rat) enforces headers but cannot fix them.
-tasks.register("addLicenseHeaders") {
+import java.nio.file.Files
+import java.nio.file.LinkOption
+
+def addLicenseHeaders = tasks.register("addLicenseHeaders") {
   group = "verification"
-  description = "Prepends the ASF license header to Java files added on this branch (vs. main) or untracked, if missing."
+  description = "Adds the ASF header to new Java files without an existing notice."
 
   doLast {
-    def header = file("gradle/validation/spotless/asl-header.txt").getText('UTF-8')
-    def gitLines = { List<String> cmd ->
-      try {
-        def proc = cmd.execute(null, rootDir)
-        def out = proc.text
-        if (proc.waitFor() != 0) {
-          logger.warn("addLicenseHeaders: '${cmd.join(' ')}' failed; skipping")
-          return []
-        }
-        return out.readLines()
-      } catch (Exception e) {
-        logger.warn("addLicenseHeaders: failed with error (${e.message}); skipping")
-        return []
-      }
+    if (!new File(rootDir, ".git").exists()) {
+      logger.lifecycle("addLicenseHeaders: no Git metadata; skipping source archive")
+      return
     }
 
-    def candidates = gitLines(['git', 'diff', '--name-only', '--diff-filter=A', 'main...HEAD']) +
-        gitLines(['git', 'diff', '--name-only', '--diff-filter=A', 'HEAD']) +
-        gitLines(['git', 'ls-files', '--others', '--exclude-standard'])
-
-    candidates.unique().findAll { it.endsWith('.java') }.each { path ->
-      def f = new File(rootDir, path)
-      if (f.exists()) {
-        def content = f.getText('UTF-8')
-        if (content.contains('Licensed to the Apache Software Foundation')) {
-          return
-        }
-        f.write(header + content, 'UTF-8')
-        logger.lifecycle("Added license header: ${path}")
+    def gitOutput = { List<String> args, boolean optional = false ->
+      def stdout = new ByteArrayOutputStream()
+      def stderr = new ByteArrayOutputStream()
+      def process
+      try {
+        process = new ProcessBuilder(['git'] + args).directory(rootDir).start()
+      } catch (IOException e) {
+        throw new GradleException("addLicenseHeaders requires Git on PATH", e)
       }
+      process.waitForProcessOutput(stdout, stderr)
+      if (process.exitValue() != 0) {
+        if (optional) return null
+        throw new GradleException("addLicenseHeaders: git ${args.join(' ')} failed: " +
+            stderr.toString('UTF-8').trim())
+      }
+      return stdout.toString('UTF-8')
+    }
+
+    def requestedBase = providers.gradleProperty("licenseHeadersBase").orNull
+    def baseRefs = requestedBase == null ?
+        ['refs/remotes/upstream/main', 'refs/remotes/origin/main', 'refs/heads/main'] :
+        [requestedBase]
+    def base = baseRefs.collect { ref ->
+      gitOutput(['rev-parse', '--verify', '--quiet', '--end-of-options', "${ref}^{commit}".toString()], true)?.trim()
+    }.find { it }
+    if (!base) {
+      throw new GradleException("addLicenseHeaders: no comparison ref available; " +
+          "fetch main or set -PlicenseHeadersBase=<ref>")
+    }
+
+    // Read every query before writing, and use NUL separators for literal Git paths.
+    def candidates = [
+        ['diff', '--name-only', '-z', '--diff-filter=A', "${base}...HEAD".toString(), '--'],
+        ['diff', '--name-only', '-z', '--diff-filter=A', 'HEAD', '--'],
+        ['ls-files', '--others', '--exclude-standard', '-z']
+    ].collectMany { gitOutput(it).split('\u0000').toList() }
+        .findAll { it.endsWith('.java') }.toSet()
+    def header = file("gradle/validation/spotless/asl-header.txt").getText('UTF-8')
+        .replace('\r\n', '\n')
+    def generatedParserFiles = ['ParseException.java', 'QueryParser.java',
+        'QueryParserConstants.java', 'QueryParserTokenManager.java', 'Token.java', 'TokenMgrError.java']
+
+    candidates.sort().each { path ->
+      // Included/independent builds have their own formatter task graphs.
+      if (path.startsWith('build-tools/') || path.startsWith('ui/') ||
+          path.tokenize('/').any { it in ['build', '.gradle', 'node_modules', '.git', 'out'] } ||
+          (path.startsWith('solr/core/src/java/org/apache/solr/parser/') &&
+          generatedParserFiles.contains(path.tokenize('/').last()))) {
+        return
+      }
+      def f = new File(rootDir, path)
+      if (!Files.isRegularFile(f.toPath(), LinkOption.NOFOLLOW_LINKS) ||
+          !f.canonicalFile.toPath().startsWith(rootDir.canonicalFile.toPath())) {
+        return
+      }
+      def content = Files.readString(f.toPath())
+      def bom = content.startsWith('\uFEFF') ? '\uFEFF' : ''
+      def body = content.substring(bom.length())
+      // Check leading comments, not license phrases in Java string literals.
+      def comments = (body =~ /(?s)\A\s*(?:(?:\/\*.*?\*\/|\/\/[^\r\n]*(?:\r?\n|\z))\s*)*/)[0]
+      if ((comments =~ /(?i)licen[cs]e|copyright|spdx-license|\u00A9|generated|do not edit/) ||
+          (body =~ /(?m)^\s*@(?:[\w.]+\.)?Generated\b/)) {
+        return
+      }
+      def fileHeader = body.contains('\r\n') ? header.replace('\n', '\r\n') : header
+      f.write(bom + fileHeader + body, 'UTF-8')
+      logger.lifecycle("Added license header: ${path}")
     }
   }
 }
 
-// Run as part of the top level `./gradlew tidy`
 rootProject.tasks.named("tidy").configure {
-  dependsOn "addLicenseHeaders"
+  dependsOn addLicenseHeaders
+}
+
+// Order the actual formatting work, including the dependencies of spotlessApply.
+allprojects {
+  tasks.matching { it.name in ['spotlessJava', 'spotlessJavaApply'] }.configureEach {
+    mustRunAfter addLicenseHeaders
+  }
 }

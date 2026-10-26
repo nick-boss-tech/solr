@@ -14,9 +14,19 @@ prior to running your regular precommit checks. This will reformat
 your code so that it complies with the convention and passes gradle
 'check' task.
 
-'tidy' also internally runs 'addLicenseHeaders', which prepends the ASF license header
-to newly added java files that lack one. You can run it on its own with
-'./gradlew addLicenseHeaders'. Other file types need the header added by hand.
+'tidy' also runs 'addLicenseHeaders' before Java formatting. Run it on its own with
+'./gradlew addLicenseHeaders'. It handles Java files added since main, staged new
+files, and nonignored untracked files. Existing license/copyright notices and
+generated sources are left alone. Other file types, and Java in the independent
+'build-tools/' and 'ui/' builds, need headers added by hand.
+
+The comparison ref is upstream/main, origin/main, or local main, in that order.
+Use '-PlicenseHeadersBase=<ref>' to override it. In a Git checkout, a missing ref
+or failed Git query fails the task before any header is added. Without Git
+metadata (a source archive), the task skips processing. Git must be on PATH.
+
+Functional coverage for this task can be run with
+'python3 dev-tools/scripts/test_license_headers.py' on a Linux development host.
 
 IMPORTANT: There is *no* way to mark sections of the code as excluded
 from formatting. This is by design and cannot be altered. In vast
