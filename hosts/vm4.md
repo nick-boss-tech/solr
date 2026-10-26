@@ -41,3 +41,4 @@ Disk record:
 - 2026-10-26T02:24:48Z: PR 5221 license-header Linux gate GREEN at 2855d3a04f29 (receipt `receipts/PR-5221-license-headers-round-1.md`). Three env failures on leg 4 recorded; clean run in standalone clone. Nothing running.
 - 2026-10-26T03:18:10Z: js-client npm failure traced to NODE_ENV=production in vm4 shell (A fails, B control passes at 7eb288a6). Correction report `reports/js-client-npm-failure-cause-round-1.md`.
 - 2026-10-26T04:17:12Z: PR 5221 revised comment draft (round 2) written, not posted: `reports/pr-5221-license-headers-comment-draft-round-2.md`.
+- 2026-10-26T04:55:34Z: claimed teardown-interrupt-close-fix-final-validation-round-1 (`claims/teardown-interrupt-close-fix-final-validation-vm4-round-1.md`) at fork H 8787c6605a; phase 1 cleanup starting.
