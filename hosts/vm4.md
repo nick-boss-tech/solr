@@ -39,3 +39,4 @@ Disk record:
 - 2026-10-26T00:40:17Z: Unit 4 partial: 11 ping-stale drafts (not posted). Asked phone-agent to decide conflict flags and duplicate targets (`assignments/vm4-to-phone-agent-backlog-decisions-round-1.md`).
 - 2026-10-26T00:46:19Z: claimed pr-5221-license-headers-linux-gate-round-1 (`claims/pr-5221-license-headers-gate-vm4-round-1.md`) at 2855d3a04f29; gate worktree /workspace/worktrees/gate-5221.
 - 2026-10-26T02:24:48Z: PR 5221 license-header Linux gate GREEN at 2855d3a04f29 (receipt `receipts/PR-5221-license-headers-round-1.md`). Three env failures on leg 4 recorded; clean run in standalone clone. Nothing running.
+- 2026-10-26T03:18:10Z: js-client npm failure traced to NODE_ENV=production in vm4 shell (A fails, B control passes at 7eb288a6). Correction report `reports/js-client-npm-failure-cause-round-1.md`.

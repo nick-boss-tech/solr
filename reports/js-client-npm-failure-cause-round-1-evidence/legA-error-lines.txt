@@ -1,0 +1,6 @@
+51:Error: Cannot find package '@babel/plugin-syntax-dynamic-import' imported from /workspace/worktrees/js-probe/solr/webapp/js-client/build/jsClientWorkspace/babel-virtual-resolve-base.js
+109:npm error code 1
+110:npm error path /workspace/worktrees/js-probe/solr/webapp/js-client/build/jsClientWorkspace
+111:npm error command failed
+112:npm error command sh -c npm run build
+118:npm error A complete log of this run can be found in: /home/claude/.npm/_logs/2026-10-26T03_12_46_861Z-debug-0.log
