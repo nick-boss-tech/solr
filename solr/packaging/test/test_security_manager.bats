@@ -55,7 +55,7 @@ teardown() {
     # bin/solr turns the security manager off on Java 24+, so the allowPaths check rejects the path on each shard.
     # The coordinator reports only the generic wrapper; the path-specific reason is logged in solr.log.
     assert_output --partial 'Could not backup all shards'
-    assert_file_contains "${SOLR_LOGS_DIR}/solr.log" "must be relative to SOLR_HOME.*${backup_dir_other}"
+    assert_file_contains "${SOLR_LOGS_DIR}/solr.log" "${backup_dir_other}/test-fail/COLL_NAME.*must be relative to SOLR_HOME"
   else
     assert_output --partial 'access denied'
   fi
