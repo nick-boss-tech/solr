@@ -39,3 +39,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-25T19:34:47Z; posted the reviewed PR 5108 comment (https://github.com/apache/solr/pull/5108#issuecomment-6402197189), owner-approved. Draft: drafts/solr-17786-pr5108-compare-comment-draft-r3.md. Next: wait for reply.
 
 - Heartbeat: 2026-10-25T20:20:10Z; BATS 5225 follow-up: branch nick-boss-tech/solr:solr-5225-bats-followup at 096da6567e3, report reports/bats-5225-accurate-assertion-round-1.md, draft drafts/pr-bats-5225-followup-draft.md (not posted). JDK 21 assertion passes; BATS teardown fails on this host (solr stop returns 1, also on unchanged main). Java 24 leg code-read only. Next: wait for Nick on the PR.
+
+- Heartbeat: 2026-10-26T00:10:59Z; teardown client-interrupt probe round 1 done: verdict incomplete (reports/teardown-client-interrupt-probe-round-1.md, scaffold in reports/teardown-client-interrupt-probe-round-1-scaffold.md; board commit 632b8eaff8e). Without-interrupt arm clean; with-interrupt closer did not return in 30 s, tracker entry remained, closer stack not captured. Next: none claimed; waiting for owner direction on the proposed one-run stack capture.
