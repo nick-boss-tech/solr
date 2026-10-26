@@ -1,0 +1,2262 @@
+{
+ "batch": "h1-005-rev4",
+ "assignment": "assignments/harmonize-audits-comment-drafts-round-1.md",
+ "built_from": {
+  "archive": "archive/coordination-2026-10-23 (2cf470f430c)",
+  "queue": "material/skip-audit/queue-current.json",
+  "csv": "material/jira-csv-triage/slice-*.csv (258 files)",
+  "board_receipts": "coordination-ui receipts/SOLR-*.md",
+  "branches": "git ls-remote nick-boss-tech/solr refs/heads/* (live at build time)",
+  "pr_state": "apache/solr pulls?head=nick-boss-tech:<branch>&state=all (live at build time)",
+  "metadata": "material/jira-issues-csv/solr-jira-metadata-2026-10-18-1792393324869.csv (IssueType, Priority)"
+ },
+ "limits": [
+  "PR state checked only for PRs headed from the fork. PRs by other authors on the same ticket were not searched (phase H2 QA).",
+  "owner_excluded not evaluated: needs Jira reporter and assignee for each key.",
+  "Fix-version citations for close-fixed were not checked (phase H2 QA).",
+  "Rev4 rule: bugs are barred from the four closure families only; ping-stale is open to bugs. Critical and Blocker are barred from all families. Keys with no metadata row are not family-eligible."
+ ],
+ "records": [
+  {
+   "key": "SOLR-3865",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-3865",
+    "csv": "material/jira-csv-triage/slice-0201.csv (SOLR-3865)",
+    "branch": "solr-3865-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3872",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0201.csv (SOLR-3872)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3873",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0202.csv (SOLR-3873)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Task",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3882",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0202.csv (SOLR-3882)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3885",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0203.csv (SOLR-3885)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3887",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0203.csv (SOLR-3887)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3888",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "feature or design request",
+   "branch_state": "none",
+   "disposition": "keep-open",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-3888",
+    "csv": "material/jira-csv-triage/slice-0204.csv (SOLR-3888)",
+    "branch": "solr-3888-draft-open",
+    "audit_draft_branch": "solr-3888-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3894",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0204.csv (SOLR-3894)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "New Feature",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3905",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-3905",
+    "csv": "material/jira-csv-triage/slice-0205.csv (SOLR-3905)",
+    "branch": "solr-3905-draft-open",
+    "audit_draft_branch": "solr-3905-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3907",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0205.csv (SOLR-3907)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3909",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0206.csv (SOLR-3909)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3919",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-3919",
+    "csv": "material/jira-csv-triage/slice-0206.csv (SOLR-3919)",
+    "branch": "solr-3919-draft-open",
+    "audit_draft_branch": "solr-3919-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3923",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-3923",
+    "csv": "material/jira-csv-triage/slice-0207.csv (SOLR-3923)",
+    "branch": "solr-3923-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3925",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0207.csv (SOLR-3925)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3931",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "feature or design request",
+   "branch_state": "none",
+   "disposition": "keep-open",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-3931",
+    "csv": "material/jira-csv-triage/slice-0208.csv (SOLR-3931)",
+    "branch": "solr-3931-draft-open",
+    "audit_draft_branch": "solr-3931-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3944",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-3944",
+    "csv": "material/jira-csv-triage/slice-0208.csv (SOLR-3944)",
+    "branch": "solr-3944-draft-open",
+    "audit_draft_branch": "solr-3944-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3945",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "not a bug or by design",
+   "branch_state": "none",
+   "disposition": "closure-not-a-bug",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-3945",
+    "csv": "material/jira-csv-triage/slice-0209.csv (SOLR-3945)",
+    "branch": "solr-3945-draft-open",
+    "audit_draft_branch": "solr-3945-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [
+    "closure-not-a-bug"
+   ],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-3949",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0209.csv (SOLR-3949)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3950",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "feature or design request",
+   "branch_state": "none",
+   "disposition": "keep-open",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-3950",
+    "csv": "material/jira-csv-triage/slice-0210.csv (SOLR-3950)",
+    "branch": "solr-3950-draft-open",
+    "audit_draft_branch": "solr-3950-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3952",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0210.csv (SOLR-3952)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3955",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0211.csv (SOLR-3955)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3962",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-3962",
+    "csv": "material/jira-csv-triage/slice-0211.csv (SOLR-3962)",
+    "branch": "solr-3962-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3963",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0212.csv (SOLR-3963)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3975",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0212.csv (SOLR-3975)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "New Feature",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3977",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0213.csv (SOLR-3977)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3978",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0213.csv (SOLR-3978)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-3991",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "obsolete or removed on main",
+   "branch_state": "none",
+   "disposition": "closure-obsolete",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-3991",
+    "csv": "material/jira-csv-triage/slice-0214.csv (SOLR-3991)",
+    "branch": "solr-3991-draft-close",
+    "audit_draft_branch": "solr-3991-draft-close"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [
+    "closure-obsolete"
+   ],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-3999",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-3999",
+    "csv": "material/jira-csv-triage/slice-0214.csv (SOLR-3999)",
+    "branch": "solr-3999-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4006",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4006",
+    "csv": "material/jira-csv-triage/slice-0215.csv (SOLR-4006)",
+    "branch": "solr-4006-draft-open",
+    "audit_draft_branch": "solr-4006-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4012",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0215.csv (SOLR-4012)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Test",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4014",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0216.csv (SOLR-4014)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4017",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0216.csv (SOLR-4017)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4021",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "not a bug or by design",
+   "branch_state": "none",
+   "disposition": "closure-not-a-bug",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4021",
+    "csv": "material/jira-csv-triage/slice-0217.csv (SOLR-4021)",
+    "branch": "solr-4021-draft-open",
+    "audit_draft_branch": "solr-4021-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [
+    "closure-not-a-bug"
+   ],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-4023",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "not a bug or by design",
+   "branch_state": "none",
+   "disposition": "closure-not-a-bug",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4023",
+    "csv": "material/jira-csv-triage/slice-0217.csv (SOLR-4023)",
+    "branch": "solr-4023-draft-open",
+    "audit_draft_branch": "solr-4023-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [
+    "closure-not-a-bug"
+   ],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-4035",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0218.csv (SOLR-4035)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "New Feature",
+   "priority": "Trivial",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4037",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4037",
+    "csv": "material/jira-csv-triage/slice-0218.csv (SOLR-4037)",
+    "branch": "solr-4037-draft-open",
+    "audit_draft_branch": "solr-4037-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4039",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4039",
+    "csv": "material/jira-csv-triage/slice-0219.csv (SOLR-4039)",
+    "branch": "solr-4039-draft-open",
+    "audit_draft_branch": "solr-4039-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4040",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4040",
+    "csv": "material/jira-csv-triage/slice-0219.csv (SOLR-4040)",
+    "branch": "solr-4040-draft-open",
+    "audit_draft_branch": "solr-4040-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4041",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0220.csv (SOLR-4041)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4052",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0220.csv (SOLR-4052)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4053",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0221.csv (SOLR-4053)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4056",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0221.csv (SOLR-4056)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "New Feature",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4065",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0222.csv (SOLR-4065)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4069",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4069",
+    "csv": "material/jira-csv-triage/slice-0222.csv (SOLR-4069)",
+    "branch": "solr-4069-draft-open",
+    "audit_draft_branch": "solr-4069-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4070",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0223.csv (SOLR-4070)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4089",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "feature or design request",
+   "branch_state": "none",
+   "disposition": "keep-open",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4089",
+    "csv": "material/jira-csv-triage/slice-0223.csv (SOLR-4089)",
+    "branch": "solr-4089-draft-open",
+    "audit_draft_branch": "solr-4089-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4100",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "not a bug or by design",
+   "branch_state": "none",
+   "disposition": "closure-not-a-bug",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4100",
+    "csv": "material/jira-csv-triage/slice-0224.csv (SOLR-4100)",
+    "branch": "solr-4100-draft-open",
+    "audit_draft_branch": "solr-4100-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [
+    "closure-not-a-bug"
+   ],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-4107",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0224.csv (SOLR-4107)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4113",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "obsolete or removed on main",
+   "branch_state": "none",
+   "disposition": "closure-obsolete",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4113",
+    "csv": "material/jira-csv-triage/slice-0225.csv (SOLR-4113)",
+    "branch": "solr-4113-draft-close",
+    "audit_draft_branch": "solr-4113-draft-close"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [
+    "closure-obsolete"
+   ],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-4122",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4122",
+    "csv": "material/jira-csv-triage/slice-0225.csv (SOLR-4122)",
+    "branch": "solr-4122-draft-open",
+    "audit_draft_branch": "solr-4122-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4130",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "not a bug or by design",
+   "branch_state": "none",
+   "disposition": "closure-not-a-bug",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4130",
+    "csv": "material/jira-csv-triage/slice-0226.csv (SOLR-4130)",
+    "branch": "solr-4130-draft-open",
+    "audit_draft_branch": "solr-4130-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [
+    "closure-not-a-bug"
+   ],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-4132",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0226.csv (SOLR-4132)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4139",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4139",
+    "csv": "material/jira-csv-triage/slice-0227.csv (SOLR-4139)",
+    "branch": "solr-4139-draft-open",
+    "audit_draft_branch": "solr-4139-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4141",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0227.csv (SOLR-4141)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4146",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4146",
+    "csv": "material/jira-csv-triage/slice-0228.csv (SOLR-4146)",
+    "branch": "solr-4146-draft-open",
+    "audit_draft_branch": "solr-4146-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4147",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0228.csv (SOLR-4147)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Test",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4161",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0229.csv (SOLR-4161)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4165",
+   "sources": [
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0229.csv (SOLR-4165)",
+    "branch": "solr-4165-stop-stall-probe"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Critical",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4167",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0230.csv (SOLR-4167)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4169",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4169",
+    "csv": "material/jira-csv-triage/slice-0230.csv (SOLR-4169)",
+    "branch": "solr-4169-draft-open",
+    "audit_draft_branch": "solr-4169-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4172",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0231.csv (SOLR-4172)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4180",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0231.csv (SOLR-4180)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Wish",
+   "priority": "Critical",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4183",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "obsolete or removed on main",
+   "branch_state": "none",
+   "disposition": "closure-obsolete",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4183",
+    "csv": "material/jira-csv-triage/slice-0232.csv (SOLR-4183)",
+    "branch": "solr-4183-draft-close",
+    "audit_draft_branch": "solr-4183-draft-close"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [
+    "closure-obsolete"
+   ],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-4193",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0232.csv (SOLR-4193)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "New Feature",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4211",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0233.csv (SOLR-4211)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "New Feature",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4214",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0233.csv (SOLR-4214)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "New Feature",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4215",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0234.csv (SOLR-4215)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4216",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0234.csv (SOLR-4216)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4235",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0235.csv (SOLR-4235)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4239",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0235.csv (SOLR-4239)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4242",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0236.csv (SOLR-4242)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "New Feature",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4250",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0236.csv (SOLR-4250)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4258",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0237.csv (SOLR-4258)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4270",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0237.csv (SOLR-4270)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4274",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4274",
+    "csv": "material/jira-csv-triage/slice-0238.csv (SOLR-4274)",
+    "branch": "solr-4274-draft-open",
+    "audit_draft_branch": "solr-4274-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4277",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "not a bug or by design",
+   "branch_state": "none",
+   "disposition": "closure-not-a-bug",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4277",
+    "csv": "material/jira-csv-triage/slice-0238.csv (SOLR-4277)",
+    "branch": "solr-4277-draft-open",
+    "audit_draft_branch": "solr-4277-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [
+    "closure-not-a-bug"
+   ],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-4281",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0239.csv (SOLR-4281)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4285",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0239.csv (SOLR-4285)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Critical",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4290",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0240.csv (SOLR-4290)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4295",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0240.csv (SOLR-4295)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4304",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "feature or design request",
+   "branch_state": "none",
+   "disposition": "keep-open",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4304",
+    "csv": "material/jira-csv-triage/slice-0241.csv (SOLR-4304)",
+    "branch": "solr-4304-draft-open",
+    "audit_draft_branch": "solr-4304-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4310",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0241.csv (SOLR-4310)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4322",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0242.csv (SOLR-4322)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4329",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0242.csv (SOLR-4329)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "New Feature",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4335",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-4335",
+    "csv": "material/jira-csv-triage/slice-0243.csv (SOLR-4335)",
+    "branch": "solr-4335-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4336",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-4336",
+    "csv": "material/jira-csv-triage/slice-0243.csv (SOLR-4336)",
+    "branch": "solr-4336-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4338",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4338",
+    "csv": "material/jira-csv-triage/slice-0244.csv (SOLR-4338)",
+    "branch": "solr-4338-draft-open",
+    "audit_draft_branch": "solr-4338-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4344",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "verify-first",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4344",
+    "csv": "material/jira-csv-triage/slice-0244.csv (SOLR-4344)",
+    "branch": "solr-4344-draft-open",
+    "audit_draft_branch": "solr-4344-draft-open"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4350",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0245.csv (SOLR-4350)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4355",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0245.csv (SOLR-4355)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4362",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-4362",
+    "csv": "material/jira-csv-triage/slice-0246.csv (SOLR-4362)",
+    "branch": "solr-4362-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4365",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0246.csv (SOLR-4365)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4366",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-4366",
+    "csv": "material/jira-csv-triage/slice-0247.csv (SOLR-4366)",
+    "branch": "solr-4366-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4367",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "draft-branch",
+   "disposition": "implemented",
+   "conflict": true,
+   "conflict_note": "csv stale while branch_state draft-branch; branch name is a skip-audit draft branch (draft-open or draft-close), not confirmed implementation work; crosswalk gives implemented, which bars closure comments; resolve in H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-4367",
+    "csv": "material/jira-csv-triage/slice-0247.csv (SOLR-4367)",
+    "branch": "solr-4367-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4368",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0248.csv (SOLR-4368)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4374",
+   "sources": [
+    "skip",
+    "csv",
+    "branch",
+    "receipt"
+   ],
+   "csv_class": "has-pr",
+   "skip_status": "implemented-hypothetical",
+   "skip_category": null,
+   "branch_state": "pr-open",
+   "disposition": "implemented",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "skip": "queue-current.json key SOLR-4374",
+    "csv": "material/jira-csv-triage/slice-0248.csv (SOLR-4374)",
+    "branch": "solr-4374-submit",
+    "receipt": "receipts/SOLR-4374.md",
+    "pr": "apache/solr PR #5130 from solr-4374-submit"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4378",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0249.csv (SOLR-4378)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Improvement",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4382",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "already fixed",
+   "branch_state": "none",
+   "disposition": "closure-fixed",
+   "conflict": true,
+   "conflict_note": "close-fixed: fixing version citation to be checked in phase H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-4382",
+    "csv": "material/jira-csv-triage/slice-0249.csv (SOLR-4382)",
+    "branch": "solr-4382-draft-close",
+    "audit_draft_branch": "solr-4382-draft-close"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  },
+  {
+   "key": "SOLR-4387",
+   "sources": [
+    "csv"
+   ],
+   "csv_class": "stale",
+   "skip_status": null,
+   "skip_category": null,
+   "branch_state": "none",
+   "disposition": "unjudged-stale",
+   "conflict": false,
+   "conflict_note": null,
+   "citations": {
+    "csv": "material/jira-csv-triage/slice-0250.csv (SOLR-4387)"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Minor",
+   "family_eligible": []
+  },
+  {
+   "key": "SOLR-4390",
+   "sources": [
+    "skip",
+    "csv",
+    "branch"
+   ],
+   "csv_class": "stale",
+   "skip_status": "skip",
+   "skip_category": "already fixed",
+   "branch_state": "none",
+   "disposition": "closure-fixed",
+   "conflict": true,
+   "conflict_note": "close-fixed: fixing version citation to be checked in phase H2 QA",
+   "citations": {
+    "skip": "queue-current.json key SOLR-4390",
+    "csv": "material/jira-csv-triage/slice-0250.csv (SOLR-4390)",
+    "branch": "solr-4390-draft-close",
+    "audit_draft_branch": "solr-4390-draft-close"
+   },
+   "owner_excluded": "not-checked",
+   "issue_type": "Bug",
+   "priority": "Major",
+   "family_eligible": [],
+   "severity_assigned": "Major",
+   "severity_vs_ticket": "same"
+  }
+ ],
+ "rev5": "2026-10-25, phone agent: severity_assigned and severity_vs_ticket added to every closure-family Bug record; the superseded Bug-barrier clause (barred from closure families; flagged for severity screen) removed from conflict_note; all other clauses kept verbatim; rev4 unchanged. Decision and rule: reports/backlog-first-100-decisions-round-1.md"
+}
