@@ -24,3 +24,19 @@ Verdict: viable.
 
 - No repro implemented, no Gradle run.
 - Next step if the owner agrees: implement both repros as failing tests at seed `787C6229591C6F1E` on RC3-independent main, then gate them. Gate is a separate decision.
+
+## SOLR-3676: lowercased uniqueKey allows duplicates on update
+
+Verdict: viable, deterministic.
+
+- The indexed id comes from the uniqueKey field's analyzed value (`AddUpdateCommand.java`, `getIndexedIdStr()` around lines 112 to 116). A `lowercase` type on `id` therefore changes the indexed id.
+- Repro shape: a single-core test with the schema and `updateLog` from the ticket. Add `{"id":"TEST", ...}` twice and assert `numFound` is 1. The ticket reports 2. This is a plain update test and needs no cloud setup.
+- Not confirmed: why the update lookup misses the existing document. The repro shows the symptom only.
+
+## SOLR-4486: batch command order not kept in SolrCloud
+
+Verdict: viable, but heavier and possibly intermittent.
+
+- Ordering is handled in `DistributedUpdateProcessor` and `DistributedZkUpdateProcessor` (`processDelete` at line 346 of the zk one). A command that reaches a non-owning shard is forwarded, so order depends on routing.
+- Repro shape: a `MiniSolrCloudCluster` test with two shards, one doc owned by the other shard, and a batch of add, add, delete for that id. Assert the doc is gone at the end.
+- Cost: a cloud test takes minutes and may need several seeds to show the race. The gate for this one should use more than one seed.
