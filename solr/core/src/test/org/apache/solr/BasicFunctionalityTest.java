@@ -26,11 +26,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexableField;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.misc.document.LazyDocument;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CommonParams;
@@ -51,9 +53,12 @@ import org.apache.solr.schema.IndexSchemaFactory;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.DocIterator;
 import org.apache.solr.search.DocList;
+import org.apache.solr.search.SolrDocumentFetcher;
+import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.security.AuthorizationContext;
 import org.apache.solr.util.BaseTestHarness;
 import org.apache.solr.util.ErrorLogMuter;
+import org.apache.solr.util.RefCounted;
 import org.apache.solr.util.SolrMetricTestUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -840,6 +845,136 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
     }
 
     req.close();
+  }
+
+  @Test
+  public void testGlobRTGStoredFieldLoading() throws Exception {
+    assertU(
+        adoc(
+            "id", "7781",
+            "title", "keyword",
+            "source_s", "source",
+            "unrelated_s", "unrelated"));
+    assertU(commit());
+
+    RefCounted<SolrIndexSearcher> holder = h.getCore().getRealtimeSearcher();
+    try {
+      SolrIndexSearcher searcher = holder.get();
+      SolrDocumentFetcher fetcher = searcher.getDocFetcher();
+      assertTrue(fetcher.isLazyFieldLoadingEnabled());
+      int docId = searcher.getFirstMatch(new Term("id", "7781"));
+      assertTrue(docId >= 0);
+      for (boolean cached : new boolean[] {false, true}) {
+        for (String selection : new String[] {"tit*", "title"}) {
+          fetcher.getDocumentCache().clear();
+          if (cached) {
+            fetcher.doc(docId, Set.of("source_s"));
+          }
+          assertQ(
+              reqWithPath(
+                  "/get",
+                  "id", "7781",
+                  "wt", "xml",
+                  "fl", selection + ",x:[json f=source_s],unrelated_s:[value v=synthetic]"),
+              "//doc/str[@name='title'][.='keyword']",
+              "//doc/str[@name='x'][.='source']",
+              "//doc/str[@name='unrelated_s'][.='synthetic']",
+              "//doc[count(*)=3]");
+
+          Document doc = fetcher.getDocumentCache().get(docId);
+          assertNotNull(doc);
+          assertUnloadedLazyField(doc, "unrelated_s");
+          assertEquals("keyword", doc.get("title"));
+          assertEquals("source", doc.get("source_s"));
+        }
+      }
+
+      fetcher.getDocumentCache().clear();
+      assertQ(
+          reqWithPath("/get", "id", "7781", "wt", "xml", "fl", "*"),
+          "//doc/str[@name='title'][.='keyword']",
+          "//doc/str[@name='source_s'][.='source']",
+          "//doc/str[@name='unrelated_s'][.='unrelated']");
+
+      fetcher.getDocumentCache().clear();
+      assertQ(
+          reqWithPath(
+              "/get", "id", "7781", "wt", "xml", "fl", "unrelated_s:[value v=synthetic]"),
+          "//doc/str[@name='unrelated_s'][.='synthetic']",
+          "//doc[count(*)=1]");
+      Document doc = fetcher.getDocumentCache().get(docId);
+      assertNotNull(doc);
+      assertUnloadedLazyField(doc, "title");
+      assertUnloadedLazyField(doc, "source_s");
+      assertUnloadedLazyField(doc, "unrelated_s");
+    } finally {
+      holder.decref();
+      assertU(delI("7781"));
+      assertU(commit());
+    }
+  }
+
+  @Test
+  public void testGlobHighlightPrefetch() throws Exception {
+    assertU(
+        adoc(
+            "id", "7783",
+            "title", "keyword",
+            "source_s", "source",
+            "unrelated_s", "unrelated"));
+    assertU(commit());
+
+    try {
+      for (String method : new String[] {"original", "unified"}) {
+        for (String selection : new String[] {"source_s", "source_*"}) {
+          try (SolrQueryRequest req =
+              req(
+                  "q", "id:7783 AND title:keyword",
+                  "fl", selection,
+                  "hl", "true",
+                  "hl.method", method,
+                  "hl.fl", "title")) {
+            SolrDocumentFetcher fetcher = req.getSearcher().getDocFetcher();
+            assertTrue(fetcher.isLazyFieldLoadingEnabled());
+            fetcher.getDocumentCache().clear();
+            SolrQueryResponse rsp = new SolrQueryResponse();
+            h.getCore().execute(h.getCore().getRequestHandler("/select"), req, rsp);
+            assertNull(rsp.getException());
+
+            DocList docs = ((ResultContext) rsp.getResponse()).getDocList();
+            assertEquals(1, docs.size());
+            Document doc = fetcher.getDocumentCache().get(docs.iterator().nextDoc());
+            assertNotNull(doc);
+            for (String name : new String[] {"id", "title", "source_s"}) {
+              assertNotNull(doc.getField(name));
+              assertFalse(
+                  method + ": " + selection + " did not prefetch " + name,
+                  doc.getField(name) instanceof LazyDocument.LazyField);
+            }
+            assertUnloadedLazyField(doc, "unrelated_s");
+            NamedList<?> highlights = (NamedList<?>) rsp.getValues().get("highlighting");
+            NamedList<?> highlightedDoc = (NamedList<?>) highlights.get("7783");
+            assertArrayEquals(
+                new String[] {"<em>keyword</em>"}, (String[]) highlightedDoc.get("title"));
+            assertNull(
+                BaseTestHarness.validateXPath(
+                    req.getResponseWriter().writeToString(req, rsp),
+                    "//result/doc/str[@name='source_s'][.='source']",
+                    "//result/doc[count(*)=1]"));
+          }
+        }
+      }
+    } finally {
+      assertU(delI("7783"));
+      assertU(commit());
+    }
+  }
+
+  private void assertUnloadedLazyField(Document doc, String name) {
+    IndexableField field = doc.getField(name);
+    assertNotNull(field);
+    assertTrue(name + " should remain lazy", field instanceof LazyDocument.LazyField);
+    assertFalse(name + " was loaded", ((LazyDocument.LazyField) field).hasBeenLoaded());
   }
 
   /**
