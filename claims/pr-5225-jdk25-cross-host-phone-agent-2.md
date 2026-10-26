@@ -1,0 +1,11 @@
+# Claim: PR 5225 JDK 25 cross-host BATS diagnostics (phone-agent-2)
+- Claimant host: `phone-agent-2`, matching `hosts/phone-agent-2.md`.
+- Status: LIVE.
+- Owner direction: Nick Shanin asked to try the remaining PR 5225 legs here and clarified that JDK 25 was the concern. OpenJDK 25.0.4.1 is installed.
+- Exact candidate: `nick-boss-tech/solr:solr-5225-bats-followup` at `096da6567e3db6d2bd141e3d2bf556ad1b3d2509`.
+- Important scope: the live gate `gates/pr-5225-allowpaths-denial-round-1.md` still pins a different branch (`solr-pr-5225-allowpaths-tests-submit`) and head `3a32098d870da94d663f2948a1ba4adf32f1675d`. These runs are supplementary diagnostics on the current follow-up branch only, not execution or completion of that gate. The current follow-up branch's BATS file contains one `allowPaths - backup` case; it does not contain the gate record's stated separate explicitly-disabled test case.
+- Slice: run the JDK 25 Commons CLI and Picocli `test_security_manager.bats` diagnostics at the exact candidate head above. Use JDK 21.0.12.1 for Gradle. In each BATS task environment, explicitly set both `JAVA_HOME` and `SOLR_JAVA_HOME` to `/usr/lib/jvm/java-25-openjdk-amd64`, plus `SOLR_INCLUDE=/dev/null` so no discovered include overrides the runtime selection. Set `SOLR_PICOCLI=false`/`true` explicitly for each leg. For Picocli, use a root-build-only init script narrowed to `test/test_security_manager.bats`. Preserve both Gradle logs, fresh BATS XML, and Solr logs under `/workspace/gates/logs/phone-agent-2/pr5225-jdk25/`.
+- Decision ladder: rung 3 (Nick's direct instruction for the additional runtime diagnostics).
+- Restrictions: supplementary proof only; no source/product edits, no test mutations, no PR/Jira action, and no full-gate/GREEN claim. Do not infer results for the separate gate-pinned branch. This does not replace or take over vm2's live assignment.
+- Build safety: use the host's `sweep-run.sh` lock and inode guard; do not clean without explicit path-specific approval.
+- Started: 2026-10-26T00:43Z (UTC). Attempts: 1.
