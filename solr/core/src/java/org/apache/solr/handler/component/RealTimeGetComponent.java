@@ -915,7 +915,7 @@ public class RealTimeGetComponent extends SearchComponent {
       Document doc, IndexSchema schema, ReturnFields returnFields) {
     SolrDocument out = new SolrDocument();
     for (IndexableField f : doc.getFields()) {
-      if (returnFields != null && !returnFields.wantsLuceneField(f.name())) {
+      if (returnFields != null && !returnFields.loadsField(f.name())) {
         continue;
       }
       // Make sure multivalued fields are represented as lists
