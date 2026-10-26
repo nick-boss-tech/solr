@@ -1,0 +1,13 @@
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./SHA256SUMS.txt
+0982c95cd480c3ce4aa25f84452b3da2f16ab7acc38b296cbb7f052fa9f6f2ca  ./fix-after/after-1.headroom.log
+11edec1c19d5c46576dfbba3c4f928fdace8abf1fbe3c4a265844e5abbee9c75  ./fix-after/after-1.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./fix-after/after-1.start
+9a4e881ee2236f0222560053c708a64d21658c1807e25d888daccfc3e5cd1415  ./fix-after/after-1.xml/TEST-org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest.xml
+fe7a9427dca10451dd67e8cb535e38e2a3c1916246c065ae49066c0348c003d7  ./fix-before/before-1.headroom.log
+2196fb43d1920f7b5d9c80340d58c706298e515edd4c737a380568ae84391d94  ./fix-before/before-1.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./fix-before/before-1.start
+26131bbe0a0c0db51ec23b56bec8dccc63b0c531385c575b03176aed2a1a41dc  ./fix-before/before-1.xml/TEST-org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest.xml
+5630a8adf83c2f1da73a84466acce4c9570a92d5103a876a493ffc6812416a57  ./fix-final/final-1.headroom.log
+962cf65d7ab7d7aec7d58473d82695a643f33dbf63d6c839f31f9f48df0c2457  ./fix-final/final-1.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./fix-final/final-1.start
+de2b777b8cf1f4f9bfc2b88f4691a7c212ad15d473910ff00979a20904f2963a  ./fix-final/final-1.xml/TEST-org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest.xml

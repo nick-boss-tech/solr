@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" tests="53" skipped="0" failures="0" errors="0" timestamp="2026-10-26T03:45:28.138Z" hostname="localhost" time="19.367">
+  <properties/>
+  <testcase name="testPerRequestCredentials" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.14"/>
+  <testcase name="testSolrExceptionCodeNotFromSolr" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.143"/>
+  <testcase name="test0IdleTimeout" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.01"/>
+  <testcase name="testAbortIsScopedToOneClient" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.528"/>
+  <testcase name="testFollowRedirect" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.028"/>
+  <testcase name="testSolrExceptionWithNullBaseurl" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.015"/>
+  <testcase name="testRedirectSwapping" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.02"/>
+  <testcase name="testBuilder" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.006"/>
+  <testcase name="testDeleteXml" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.032"/>
+  <testcase name="testConnectionToNonExistentServer" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.007"/>
+  <testcase name="testQueryPost" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.011"/>
+  <testcase name="testSetCredentialsExplicitly" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.009"/>
+  <testcase name="testCloseWithInterruptedThreadReleasesOwnedClient" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.006"/>
+  <testcase name="testAbortFailsAsyncRequestInFlight" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testDoNotFollowRedirect" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testQueryXmlGet" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testQueryPut" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testBadExplicitCredentials" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.004"/>
+  <testcase name="testAsyncGet" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.019"/>
+  <testcase name="testCollectionParameters" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.383"/>
+  <testcase name="testUpdateJavabin" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.009"/>
+  <testcase name="testCloseWithInterruptedThreadKeepsCallerExecutorUsable" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.006"/>
+  <testcase name="testAsyncPost" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="1.464"/>
+  <testcase name="testMultipartUpload" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.022"/>
+  <testcase name="testUpdateDefault" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testGetDefaultSslContextFactory" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.005"/>
+  <testcase name="testRequestTimeoutWithHttpClient" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="5.112"/>
+  <testcase name="testAbortFailsLaterAsyncRequests" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.007"/>
+  <testcase name="testRequestTimeout" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.51"/>
+  <testcase name="testUseOptionalCredentials" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.011"/>
+  <testcase name="testIdleTimeoutWithHttpClient" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="5.111"/>
+  <testcase name="testDelete" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.009"/>
+  <testcase name="testGetRawStream" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testAbortFailsSyncRequestInFlight" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testGetById" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.01"/>
+  <testcase name="testTimeout" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="2.006"/>
+  <testcase name="testUseOptionalCredentialsWithNull" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.01"/>
+  <testcase name="testQueryGet" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testAsyncQueryWithSharedClient" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.013"/>
+  <testcase name="testSetCredentialsWithSysProps" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.037"/>
+  <testcase name="testNoCredentials" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testUpdateXml" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testQueryXmlPost" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testAbortRequiresOptIn" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.005"/>
+  <testcase name="testAbortFailsResponseMidBody" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testQueryXmlPut" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testQueryString" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.018"/>
+  <testcase name="testMalformedOptionalCredentials" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.003"/>
+  <testcase name="testOverrideBaseUrl" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.011"/>
+  <testcase name="testAsyncException" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.008"/>
+  <testcase name="testAbortFailsLaterSyncRequests" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.005"/>
+  <testcase name="testBadHttpFactory" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.012"/>
+  <testcase name="testCloseBorrowedClientWithInterruptLeavesParentRunning" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 26, 2026 3:45:28 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1141 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/teardown-fix-r1/solr/server/solr/configsets/_default/conf'
+1149 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+1165 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-002/data-dir-1-001
+1173 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+1193 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+1239 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/teardown-fix-r1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/teardown-fix-r1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+1239 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (true) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+1459 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+1459 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+1462 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+1468 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+1469 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@5bc6a212{/solr,/solr,b=file:///workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@6614c46a{STOPPED}}. May not be supported in future releases.
+1474 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-cwd/
+1477 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@5bc6a212{/solr,/solr,b=file:///workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@6614c46a{STARTED}}
+1480 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=32867}
+1482 ERROR (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+1482 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+1485 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 423390023a63cdac2d7509e3f2d957b5db6a0b3c [snapshot build, details omitted]
+1486 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+1486 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/teardown-fix-r1/solr
+1486 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-26T03:45:29.035310513Z
+1531 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-002/tempDir-001 (source: servlet config: solr.solr.home)
+1540 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.SolrXmlConfig solr.xml not found in SOLR_HOME, using built-in default
+1540 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/teardown-fix-r1/solr/server/solr/solr.xml
+1647 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+1654 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+2192 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [/workspace/worktrees/teardown-fix-r1/solr/server/solr]
+2495 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+2548 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-002/tempDir-001
+2939 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@5bc6a212{/solr,/solr,b=file:///workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@6614c46a{STARTED}}
+2940 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@60d48719{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:۳۲۸۶۷}
+2941 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server Started oejs.Server@75ede0e4{STARTING}[12.1.14,sto=۰] @1481ms
+2944 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#32867
+3534 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedWordSetResource for path /schema/analysis/stopwords/english
+3535 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory$SynonymManager for path /schema/analysis/synonyms/english
+3535 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedStopFilterFactory to existing ManagedResource /schema/analysis/stopwords/english
+3535 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory to existing ManagedResource /schema/analysis/synonyms/english
+3564 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+3583 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/teardown-fix-r1/solr/server/solr/configsets/sample_techproducts_configs
+3597 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-002/tempDir-001/collection1], dataDir=[/workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientTest_FFF5A3C3AAC69084-002/tempDir-001/collection1/data/]
+3847 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+3964 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+3965 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+3965 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+4023 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/teardown-fix-r1/solr/server/solr/configsets/sample_techproducts_configs/conf ; switching to use InMemory storage instead.
+4025 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/analysis/stopwords/english
+4025 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_analysis_stopwords_english.json using InMemoryStorage
+4025 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.s.a.ManagedWordSetResource Loaded 0 words for /schema/analysis/stopwords/english
+4025 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/stopwords/english
+4026 WARN  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/analysis/synonyms/english
+4026 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.s.a.ManagedSynonymGraphFilterFactory Loaded 0 synonym mappings for /schema/analysis/synonyms/english
+4026 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/synonyms/english
+4043 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.h.c.SuggestComponent Initializing SuggestComponent
+4045 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester init: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+4054 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester Dictionary loaded with params: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+4064 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+4087 INFO  (TEST-HttpJettySolrClientTest.testPerRequestCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testPerRequestCredentials
+4090 INFO  (TEST-HttpJettySolrClientTest.testPerRequestCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-2 for ERROR logs matching regex: Error from server
+4092 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.S.Request path=null params={q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false&event=firstSearcher} hits=0 status=0 QTime=27
+4093 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.QuerySenderListener QuerySenderListener done.
+4093 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+4093 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+4095 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+4218 INFO  (TEST-HttpJettySolrClientTest.testPerRequestCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-2 after muting 0 log messages
+4221 INFO  (TEST-HttpJettySolrClientTest.testPerRequestCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testPerRequestCredentials
+4226 INFO  (TEST-HttpJettySolrClientTest.testSolrExceptionCodeNotFromSolr-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testSolrExceptionCodeNotFromSolr
+4365 INFO  (TEST-HttpJettySolrClientTest.testSolrExceptionCodeNotFromSolr-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testSolrExceptionCodeNotFromSolr
+4369 INFO  (TEST-HttpJettySolrClientTest.test0IdleTimeout-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting test0IdleTimeout
+4375 INFO  (TEST-HttpJettySolrClientTest.test0IdleTimeout-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending test0IdleTimeout
+4379 INFO  (TEST-HttpJettySolrClientTest.testAbortIsScopedToOneClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAbortIsScopedToOneClient
+4904 INFO  (TEST-HttpJettySolrClientTest.testAbortIsScopedToOneClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAbortIsScopedToOneClient
+4908 INFO  (TEST-HttpJettySolrClientTest.testFollowRedirect-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testFollowRedirect
+4925 INFO  (qtp1067586031-24-null-1) [ x:collection1 t:null-1] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=0 status=0 QTime=9
+4931 INFO  (TEST-HttpJettySolrClientTest.testFollowRedirect-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testFollowRedirect
+4935 INFO  (TEST-HttpJettySolrClientTest.testSolrExceptionWithNullBaseurl-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testSolrExceptionWithNullBaseurl
+4946 INFO  (TEST-HttpJettySolrClientTest.testSolrExceptionWithNullBaseurl-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testSolrExceptionWithNullBaseurl
+4950 INFO  (TEST-HttpJettySolrClientTest.testRedirectSwapping-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testRedirectSwapping
+4961 INFO  (qtp1067586031-25-null-2) [ x:collection1 t:null-2] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=0 status=0 QTime=2
+4967 INFO  (TEST-HttpJettySolrClientTest.testRedirectSwapping-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testRedirectSwapping
+4970 INFO  (TEST-HttpJettySolrClientTest.testBuilder-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testBuilder
+4972 INFO  (TEST-HttpJettySolrClientTest.testBuilder-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testBuilder
+4976 INFO  (TEST-HttpJettySolrClientTest.testDeleteXml-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testDeleteXml
+5005 INFO  (TEST-HttpJettySolrClientTest.testDeleteXml-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testDeleteXml
+5008 INFO  (TEST-HttpJettySolrClientTest.testConnectionToNonExistentServer-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testConnectionToNonExistentServer
+5012 INFO  (TEST-HttpJettySolrClientTest.testConnectionToNonExistentServer-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testConnectionToNonExistentServer
+5015 INFO  (TEST-HttpJettySolrClientTest.testQueryPost-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryPost
+5023 INFO  (TEST-HttpJettySolrClientTest.testQueryPost-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryPost
+5026 INFO  (TEST-HttpJettySolrClientTest.testSetCredentialsExplicitly-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testSetCredentialsExplicitly
+5028 INFO  (TEST-HttpJettySolrClientTest.testSetCredentialsExplicitly-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-3 for ERROR logs matching regex: Error from server
+5031 INFO  (TEST-HttpJettySolrClientTest.testSetCredentialsExplicitly-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-3 after muting 0 log messages
+5032 INFO  (TEST-HttpJettySolrClientTest.testSetCredentialsExplicitly-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testSetCredentialsExplicitly
+5035 INFO  (TEST-HttpJettySolrClientTest.testCloseWithInterruptedThreadReleasesOwnedClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testCloseWithInterruptedThreadReleasesOwnedClient
+5037 INFO  (TEST-HttpJettySolrClientTest.testCloseWithInterruptedThreadReleasesOwnedClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testCloseWithInterruptedThreadReleasesOwnedClient
+5041 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsAsyncRequestInFlight-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAbortFailsAsyncRequestInFlight
+5046 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsAsyncRequestInFlight-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAbortFailsAsyncRequestInFlight
+5049 INFO  (TEST-HttpJettySolrClientTest.testDoNotFollowRedirect-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testDoNotFollowRedirect
+5054 INFO  (TEST-HttpJettySolrClientTest.testDoNotFollowRedirect-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testDoNotFollowRedirect
+5057 INFO  (TEST-HttpJettySolrClientTest.testQueryXmlGet-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryXmlGet
+5062 INFO  (TEST-HttpJettySolrClientTest.testQueryXmlGet-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryXmlGet
+5065 INFO  (TEST-HttpJettySolrClientTest.testQueryPut-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryPut
+5069 INFO  (TEST-HttpJettySolrClientTest.testQueryPut-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryPut
+5073 INFO  (TEST-HttpJettySolrClientTest.testBadExplicitCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testBadExplicitCredentials
+5073 INFO  (TEST-HttpJettySolrClientTest.testBadExplicitCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testBadExplicitCredentials
+5077 INFO  (TEST-HttpJettySolrClientTest.testAsyncGet-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAsyncGet
+5092 INFO  (TEST-HttpJettySolrClientTest.testAsyncGet-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAsyncGet
+5096 INFO  (TEST-HttpJettySolrClientTest.testCollectionParameters-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testCollectionParameters
+5168 INFO  (qtp1067586031-28-null-3) [ x:collection1 t:null-3] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[collection (1880082436762632192)]} 0 66
+5447 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-4) [ x:collection1 t:null-4] o.a.s.c.QuerySenderListener QuerySenderListener done.
+5448 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-4) [ x:collection1 t:null-4] o.a.s.c.SolrCore Registered new searcher autowarm time: 2 ms
+5451 INFO  (qtp1067586031-126-null-4) [ x:collection1 t:null-4] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 281
+5464 INFO  (qtp1067586031-123-null-5) [ x:collection1 t:null-5] o.a.s.c.S.Request path=/select params={q=id:collection&wt=javabin} hits=1 status=0 QTime=10
+5473 INFO  (qtp1067586031-23-null-6) [ x:collection1 t:null-6] o.a.s.c.S.Request path=/select params={q=id:collection&wt=javabin} hits=1 status=0 QTime=0
+5475 INFO  (TEST-HttpJettySolrClientTest.testCollectionParameters-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testCollectionParameters
+5479 INFO  (TEST-HttpJettySolrClientTest.testUpdateJavabin-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testUpdateJavabin
+5484 INFO  (TEST-HttpJettySolrClientTest.testUpdateJavabin-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testUpdateJavabin
+5488 INFO  (TEST-HttpJettySolrClientTest.testCloseWithInterruptedThreadKeepsCallerExecutorUsable-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testCloseWithInterruptedThreadKeepsCallerExecutorUsable
+5490 INFO  (TEST-HttpJettySolrClientTest.testCloseWithInterruptedThreadKeepsCallerExecutorUsable-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testCloseWithInterruptedThreadKeepsCallerExecutorUsable
+5494 INFO  (TEST-HttpJettySolrClientTest.testAsyncPost-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAsyncPost
+5517 INFO  (qtp1067586031-23-null-7) [ x:collection1 t:null-7] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{deleteByQuery=*:* (-1880082437160042496)} 0 20
+5549 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-8) [ x:collection1 t:null-8] o.a.s.c.QuerySenderListener QuerySenderListener done.
+5550 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-8) [ x:collection1 t:null-8] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+5608 INFO  (qtp1067586031-124-null-8) [ x:collection1 t:null-8] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=xml}{commit=} 0 88
+5611 INFO  (qtp1067586031-125-null-9) [ x:collection1 t:null-9] o.a.s.c.S.Request path=/select params={q=*:*&wt=xml} hits=0 status=0 QTime=0
+5765 INFO  (qtp1067586031-26-null-10) [ x:collection1 t:null-10] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-0 (1880082437280628736)]} 0 153
+5765 INFO  (qtp1067586031-28-null-11) [ x:collection1 t:null-11] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-1 (1880082437281677312)]} 0 152
+5767 INFO  (qtp1067586031-126-null-12) [ x:collection1 t:null-12] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-2 (1880082437282725888)]} 0 154
+5772 INFO  (qtp1067586031-123-null-13) [ x:collection1 t:null-13] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-3 (1880082437282725889)]} 0 157
+5776 INFO  (qtp1067586031-25-null-14) [ x:collection1 t:null-14] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-4 (1880082437283774464)]} 0 161
+5781 INFO  (qtp1067586031-24-null-15) [ x:collection1 t:null-15] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-5 (1880082437283774465)]} 0 165
+5785 INFO  (qtp1067586031-23-null-16) [ x:collection1 t:null-16] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-6 (1880082437283774466)]} 0 170
+5790 INFO  (qtp1067586031-124-null-17) [ x:collection1 t:null-17] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-7 (1880082437284823040)]} 0 174
+5795 INFO  (qtp1067586031-125-null-18) [ x:collection1 t:null-18] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-8 (1880082437284823041)]} 0 179
+5800 INFO  (qtp1067586031-160-null-19) [ x:collection1 t:null-19] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{add=[KEY-9 (1880082437284823042)]} 0 183
+6847 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-20) [ x:collection1 t:null-20] o.a.s.c.QuerySenderListener QuerySenderListener done.
+6848 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-20) [ x:collection1 t:null-20] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+6851 INFO  (qtp1067586031-26-null-20) [ x:collection1 t:null-20] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=xml}{commit=} 0 1050
+6854 INFO  (qtp1067586031-28-null-21) [ x:collection1 t:null-21] o.a.s.c.S.Request path=/select params={q=*:*&wt=xml} hits=10 status=0 QTime=0
+6867 INFO  (qtp1067586031-126-null-22) [ x:collection1 t:null-22] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=xml}{deleteByQuery=*:* (-1880082438588203008)} 0 8
+6895 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-23) [ x:collection1 t:null-23] o.a.s.c.QuerySenderListener QuerySenderListener done.
+6895 INFO  (searcherExecutor-16-thread-1-processing-collection1 null-23) [ x:collection1 t:null-23] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+6953 INFO  (qtp1067586031-123-null-23) [ x:collection1 t:null-23] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=xml}{commit=} 0 84
+6955 INFO  (TEST-HttpJettySolrClientTest.testAsyncPost-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAsyncPost
+6958 INFO  (TEST-HttpJettySolrClientTest.testMultipartUpload-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testMultipartUpload
+6977 INFO  (TEST-HttpJettySolrClientTest.testMultipartUpload-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testMultipartUpload
+6980 INFO  (TEST-HttpJettySolrClientTest.testUpdateDefault-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testUpdateDefault
+6985 INFO  (TEST-HttpJettySolrClientTest.testUpdateDefault-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testUpdateDefault
+6988 INFO  (TEST-HttpJettySolrClientTest.testGetDefaultSslContextFactory-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testGetDefaultSslContextFactory
+6989 INFO  (TEST-HttpJettySolrClientTest.testGetDefaultSslContextFactory-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testGetDefaultSslContextFactory
+6993 INFO  (TEST-HttpJettySolrClientTest.testRequestTimeoutWithHttpClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testRequestTimeoutWithHttpClient
+12101 INFO  (TEST-HttpJettySolrClientTest.testRequestTimeoutWithHttpClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testRequestTimeoutWithHttpClient
+12105 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsLaterAsyncRequests-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAbortFailsLaterAsyncRequests
+12108 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsLaterAsyncRequests-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAbortFailsLaterAsyncRequests
+12112 INFO  (TEST-HttpJettySolrClientTest.testRequestTimeout-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testRequestTimeout
+12619 INFO  (TEST-HttpJettySolrClientTest.testRequestTimeout-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testRequestTimeout
+12622 INFO  (TEST-HttpJettySolrClientTest.testUseOptionalCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testUseOptionalCredentials
+12626 INFO  (TEST-HttpJettySolrClientTest.testUseOptionalCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-4 for ERROR logs matching regex: Error from server
+12629 INFO  (TEST-HttpJettySolrClientTest.testUseOptionalCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-4 after muting 0 log messages
+12629 INFO  (TEST-HttpJettySolrClientTest.testUseOptionalCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testUseOptionalCredentials
+12633 INFO  (TEST-HttpJettySolrClientTest.testIdleTimeoutWithHttpClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testIdleTimeoutWithHttpClient
+17740 INFO  (TEST-HttpJettySolrClientTest.testIdleTimeoutWithHttpClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testIdleTimeoutWithHttpClient
+17744 INFO  (TEST-HttpJettySolrClientTest.testDelete-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testDelete
+17749 INFO  (TEST-HttpJettySolrClientTest.testDelete-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testDelete
+17752 INFO  (TEST-HttpJettySolrClientTest.testGetRawStream-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testGetRawStream
+17758 INFO  (TEST-HttpJettySolrClientTest.testGetRawStream-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testGetRawStream
+17761 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsSyncRequestInFlight-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAbortFailsSyncRequestInFlight
+17766 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsSyncRequestInFlight-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAbortFailsSyncRequestInFlight
+17769 INFO  (TEST-HttpJettySolrClientTest.testGetById-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testGetById
+17775 INFO  (TEST-HttpJettySolrClientTest.testGetById-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testGetById
+17779 INFO  (TEST-HttpJettySolrClientTest.testTimeout-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testTimeout
+19781 INFO  (TEST-HttpJettySolrClientTest.testTimeout-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testTimeout
+19785 INFO  (TEST-HttpJettySolrClientTest.testUseOptionalCredentialsWithNull-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testUseOptionalCredentialsWithNull
+19788 INFO  (TEST-HttpJettySolrClientTest.testUseOptionalCredentialsWithNull-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-5 for ERROR logs matching regex: Error from server
+19791 INFO  (TEST-HttpJettySolrClientTest.testUseOptionalCredentialsWithNull-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-5 after muting 0 log messages
+19792 INFO  (TEST-HttpJettySolrClientTest.testUseOptionalCredentialsWithNull-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testUseOptionalCredentialsWithNull
+19795 INFO  (TEST-HttpJettySolrClientTest.testQueryGet-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryGet
+19799 INFO  (TEST-HttpJettySolrClientTest.testQueryGet-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryGet
+19803 INFO  (TEST-HttpJettySolrClientTest.testAsyncQueryWithSharedClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAsyncQueryWithSharedClient
+19812 INFO  (TEST-HttpJettySolrClientTest.testAsyncQueryWithSharedClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAsyncQueryWithSharedClient
+19815 INFO  (TEST-HttpJettySolrClientTest.testSetCredentialsWithSysProps-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testSetCredentialsWithSysProps
+19849 INFO  (TEST-HttpJettySolrClientTest.testSetCredentialsWithSysProps-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testSetCredentialsWithSysProps
+19853 INFO  (TEST-HttpJettySolrClientTest.testNoCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testNoCredentials
+19855 INFO  (TEST-HttpJettySolrClientTest.testNoCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-6 for ERROR logs matching regex: Error from server
+19857 INFO  (TEST-HttpJettySolrClientTest.testNoCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-6 after muting 0 log messages
+19858 INFO  (TEST-HttpJettySolrClientTest.testNoCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testNoCredentials
+19861 INFO  (TEST-HttpJettySolrClientTest.testUpdateXml-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testUpdateXml
+19865 INFO  (TEST-HttpJettySolrClientTest.testUpdateXml-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testUpdateXml
+19869 INFO  (TEST-HttpJettySolrClientTest.testQueryXmlPost-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryXmlPost
+19873 INFO  (TEST-HttpJettySolrClientTest.testQueryXmlPost-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryXmlPost
+19876 INFO  (TEST-HttpJettySolrClientTest.testAbortRequiresOptIn-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAbortRequiresOptIn
+19878 INFO  (TEST-HttpJettySolrClientTest.testAbortRequiresOptIn-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAbortRequiresOptIn
+19882 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsResponseMidBody-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAbortFailsResponseMidBody
+19887 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsResponseMidBody-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAbortFailsResponseMidBody
+19890 INFO  (TEST-HttpJettySolrClientTest.testQueryXmlPut-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryXmlPut
+19894 INFO  (TEST-HttpJettySolrClientTest.testQueryXmlPut-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryXmlPut
+19897 INFO  (TEST-HttpJettySolrClientTest.testQueryString-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testQueryString
+19912 INFO  (TEST-HttpJettySolrClientTest.testQueryString-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testQueryString
+19915 INFO  (TEST-HttpJettySolrClientTest.testMalformedOptionalCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testMalformedOptionalCredentials
+19916 INFO  (TEST-HttpJettySolrClientTest.testMalformedOptionalCredentials-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testMalformedOptionalCredentials
+19919 INFO  (TEST-HttpJettySolrClientTest.testOverrideBaseUrl-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testOverrideBaseUrl
+19926 INFO  (TEST-HttpJettySolrClientTest.testOverrideBaseUrl-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testOverrideBaseUrl
+19930 INFO  (TEST-HttpJettySolrClientTest.testAsyncException-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAsyncException
+19934 INFO  (TEST-HttpJettySolrClientTest.testAsyncException-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAsyncException
+19938 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsLaterSyncRequests-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testAbortFailsLaterSyncRequests
+19940 INFO  (TEST-HttpJettySolrClientTest.testAbortFailsLaterSyncRequests-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testAbortFailsLaterSyncRequests
+19943 INFO  (TEST-HttpJettySolrClientTest.testBadHttpFactory-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testBadHttpFactory
+19950 INFO  (TEST-HttpJettySolrClientTest.testBadHttpFactory-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testBadHttpFactory
+19954 INFO  (TEST-HttpJettySolrClientTest.testCloseBorrowedClientWithInterruptLeavesParentRunning-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testCloseBorrowedClientWithInterruptLeavesParentRunning
+19956 INFO  (TEST-HttpJettySolrClientTest.testCloseBorrowedClientWithInterruptLeavesParentRunning-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testCloseBorrowedClientWithInterruptLeavesParentRunning
+19957 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+19958 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server Stopped oejs.Server@75ede0e4{STOPPING}[12.1.14,sto=۰]
+19958 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@60d48719{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:۰}
+19959 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1989215504
+19960 INFO  (coreCloseExecutor-80-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@7c34707a collection1
+19961 INFO  (coreCloseExecutor-80-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+اکتوبر ۲۶, ۲۰۲۶ ۳:۴۵:۴۷ غ.م. io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+19983 INFO  (SUITE-HttpJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@5bc6a212{/solr,/solr,b=file:///workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@6614c46a{STOPPED}}
+]]></system-err>
+</testsuite>

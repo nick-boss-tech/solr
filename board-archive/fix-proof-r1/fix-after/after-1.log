@@ -1,0 +1,110 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:solrj-jetty:cleanTest
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=FFF5A3C3AAC69084
+
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:solrj:processResources UP-TO-DATE
+> Task :solr:solrj:processTestResources UP-TO-DATE
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:solrj-jetty:processTestResources UP-TO-DATE
+> Task :solr:solrj-streaming:processResources UP-TO-DATE
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:processResources UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+> Task :solr:api:jar
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/teardown-fix-r1/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/teardown-fix-r1/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:solrj:classes
+
+> Task :solr:solrj-jetty:compileJava
+Note: /workspace/worktrees/teardown-fix-r1/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:classes
+> Task :solr:solrj-jetty:jar
+> Task :solr:solrj:jar
+> Task :solr:solrj-streaming:classes UP-TO-DATE
+> Task :solr:solrj-streaming:jar
+> Task :solr:solrj-zookeeper:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:jar
+> Task :solr:core:compileJava UP-TO-DATE
+> Task :solr:core:classes UP-TO-DATE
+> Task :solr:test-framework:compileJava UP-TO-DATE
+
+> Task :solr:solrj:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:jar
+> Task :solr:test-framework:classes UP-TO-DATE
+> Task :solr:solrj:testClasses
+> Task :solr:test-framework:jar
+> Task :solr:solrj:testJar
+> Task :solr:solrj-jetty:compileTestJava UP-TO-DATE
+> Task :solr:solrj-jetty:testClasses UP-TO-DATE
+
+> Task :solr:solrj-jetty:test
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+:solr:solrj-jetty:test (SUCCESS): 53 test(s)
+
+> Task :solr:solrj-jetty:wipeTaskTemp
+The slowest tests (exceeding 500 ms) during this run:
+   5.11s HttpJettySolrClientTest.testRequestTimeoutWithHttpClient (:solr:solrj-jetty)
+   5.11s HttpJettySolrClientTest.testIdleTimeoutWithHttpClient (:solr:solrj-jetty)
+   2.01s HttpJettySolrClientTest.testTimeout (:solr:solrj-jetty)
+   1.46s HttpJettySolrClientTest.testAsyncPost (:solr:solrj-jetty)
+   0.53s HttpJettySolrClientTest.testAbortIsScopedToOneClient (:solr:solrj-jetty)
+   0.51s HttpJettySolrClientTest.testRequestTimeout (:solr:solrj-jetty)
+The slowest suites (exceeding 1s) during this run:
+  22.01s HttpJettySolrClientTest (:solr:solrj-jetty)
+
+BUILD SUCCESSFUL in 2m 17s
+37 actionable tasks: 20 executed, 17 up-to-date
+rc=0
