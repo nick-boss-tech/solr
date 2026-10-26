@@ -26,4 +26,6 @@ Attempt 1 at `bf285189f74b775165fc53ba305d35dccf880a47`, standalone clone `/work
 - Investigation: the task `downloadAsciidoctorTabsExtension` runs `npm install -D @asciidoctor/tabs@1.0.0-beta.6` and npm reports "changed 1 package", but the module is absent from `.gradle/node/node_modules`. The host shell has `NODE_ENV=production`, under which npm omits devDependencies, and the tabs package is a devDependency. The failure is in the host environment. The PR head and the repository are unchanged, and no repair to tracked files is needed.
 - Repair: rerun the three tasks at the same head with `NODE_ENV` unset for the Gradle run only. Failed logs are kept in `attempt-1-NODE_ENV-production/`. Tidy stays valid for this head and is not repeated.
 
-Result: pending attempt 2.
+Attempt 2 (`NODE_ENV` unset, daemon reused from attempt 1): tidy not repeated. `buildLocalSite` exit 1 and `checkSiteLinks` exit 1 again with `Cannot find module '@asciidoctor/tabs'`. `checkCliDocsUpToDate` exit 0. Investigation: the log shows `downloadAsciidoctorTabsExtension UP-TO-DATE`. Gradle kept attempt 1's up-to-date record for a task whose output directory was never created, so npm did not run again. Repair: attempt 3 runs `downloadAsciidoctorTabsExtension --rerun --no-daemon`, checks that `node_modules/@asciidoctor/tabs` exists, then runs the three tasks with `--no-daemon` so the Gradle process does not inherit the older environment. Attempt 2 logs are kept in `attempt-2-tabs-up-to-date/`.
+
+Result: pending attempt 3.
