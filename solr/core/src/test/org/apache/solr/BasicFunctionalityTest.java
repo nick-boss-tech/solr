@@ -1023,6 +1023,111 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
     }
   }
 
+  @Test
+  public void testGlobRTGEmptyAndAliasFieldLoading() throws Exception {
+    assertU(
+        adoc(
+            "id", "7785",
+            "title", "keyword",
+            "source_s", "source",
+            "unrelated_s", "unrelated"));
+    assertU(commit());
+
+    RefCounted<SolrIndexSearcher> holder = h.getCore().getRealtimeSearcher();
+    try {
+      SolrIndexSearcher searcher = holder.get();
+      SolrDocumentFetcher fetcher = searcher.getDocFetcher();
+      assertTrue(fetcher.isLazyFieldLoadingEnabled());
+      int docId = searcher.getFirstMatch(new Term("id", "7785"));
+      assertTrue(docId >= 0);
+      fetcher.getDocumentCache().clear();
+
+      assertQ(
+          reqWithPath("/get", "id", "7785", "wt", "xml", "fl", "missing_*"),
+          "count(//doc)=1",
+          "//doc[count(*)=0]");
+      Document cached = fetcher.getDocumentCache().get(docId);
+      assertNotNull(cached);
+      assertUnloadedLazyField(cached, "title");
+      assertUnloadedLazyField(cached, "source_s");
+      assertUnloadedLazyField(cached, "unrelated_s");
+
+      assertQ(
+          reqWithPath(
+              "/get", "id", "7785", "wt", "xml", "fl", "tit*,unrelated_s:source_s"),
+          "//doc/*[@name='title'][normalize-space(.)='keyword']",
+          "//doc/*[@name='unrelated_s'][normalize-space(.)='source']",
+          "//doc[count(*)=2]");
+      assertSame(cached, fetcher.getDocumentCache().get(docId));
+      assertUnloadedLazyField(cached, "unrelated_s");
+
+      assertQ(
+          reqWithPath("/get", "id", "7785", "wt", "xml", "fl", "*"),
+          "//doc/*[@name='title'][normalize-space(.)='keyword']",
+          "//doc/*[@name='source_s'][normalize-space(.)='source']",
+          "//doc/*[@name='unrelated_s'][normalize-space(.)='unrelated']");
+      assertSame(cached, fetcher.getDocumentCache().get(docId));
+    } finally {
+      holder.decref();
+      assertU(delI("7785"));
+      assertU(commit());
+    }
+  }
+
+  @Test
+  public void testGlobPrefetchBoundaries() throws Exception {
+    try {
+      for (int i = 0; i < 51; i++) {
+        assertU(
+            adoc(
+                "id", Integer.toString(7800 + i),
+                "batch_s", "pr5188_prefetch_boundary",
+                "source_s", "source",
+                "unrelated_s", "unrelated"));
+      }
+      assertU(commit());
+
+      for (String selection : new String[] {"source_s", "source_*"}) {
+        for (int rows : new int[] {50, 51}) {
+          for (boolean shard : new boolean[] {false, true}) {
+            try (SolrQueryRequest req =
+                req(
+                    "q", "batch_s:pr5188_prefetch_boundary",
+                    "rows", Integer.toString(rows),
+                    "isShard", Boolean.toString(shard),
+                    "hl", "false",
+                    "fl", selection)) {
+              SolrDocumentFetcher fetcher = req.getSearcher().getDocFetcher();
+              assertTrue(fetcher.isLazyFieldLoadingEnabled());
+              fetcher.getDocumentCache().clear();
+              SolrQueryResponse rsp = new SolrQueryResponse();
+              h.getCore().execute(h.getCore().getRequestHandler("/select"), req, rsp);
+              assertNull(rsp.getException());
+              DocList docs = ((ResultContext) rsp.getResponse()).getDocList();
+              assertEquals(rows, docs.size());
+              DocIterator iter = docs.iterator();
+              while (iter.hasNext()) {
+                Document cached = fetcher.getDocumentCache().get(iter.nextDoc());
+                String context = "fl=" + selection + " rows=" + rows + " isShard=" + shard;
+                if (!shard && rows == 50) {
+                  assertNotNull("Missing prefetched document for " + context, cached);
+                  assertNotNull(cached.getField("source_s"));
+                  assertFalse(cached.getField("source_s") instanceof LazyDocument.LazyField);
+                  assertUnloadedLazyField(cached, "unrelated_s");
+                } else {
+                  assertNull("Unexpected prefetch for " + context, cached);
+                }
+              }
+            }
+          }
+        }
+      }
+    } finally {
+      assertU(delQ("batch_s:pr5188_prefetch_boundary"));
+      assertU(commit());
+    }
+  }
+
   private void assertUnloadedLazyField(Document doc, String name) {
     IndexableField field = doc.getField(name);
     assertNotNull(field);
