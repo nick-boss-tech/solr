@@ -1,7 +1,8 @@
-# PR 5188 glob field loading, repair round 3 (vm6)
+# PR 5188 current API and regression boundaries, repair round 3 (vm6)
 
-- Failed head: `53ad2ccacbf205333f9029ed9f6ebbc93da034f2` (round 2). Its pre-fix RTG leg failed on `unrelated_s should remain lazy`, the predicted assertion. Its pre-fix prefetch leg failed at the `source_s` response check, and the post-fix legs were not run.
-- Cause, verified with lxml on the real response shape: the XML writer indents `arr` children, so the string-value of `<arr name="source_s">\n      <str>source</str>\n    </arr>` includes the surrounding whitespace. `[.='source']` matches nothing, while `[normalize-space(.)='source']` matches one node.
-- Repair commit: `7ac2bc86fed51ed420f3b1a9559e167631e5a3c8` (`PR 5188: normalize whitespace in glob test response checks`), Nick Shanin, no trailers, fast-forward pushed; remote read back as this SHA.
-- Scope: test files only, 11 insertions and 11 deletions. In the same three methods as round 2, `//doc/*[@name='X'][.='v']` became `//doc/*[@name='X'][normalize-space(.)='v']`. No production line changed.
-- Pre-fix overlay for round 3: `e07455a` production plus `BasicFunctionalityTest.java` blob at F3 and `TestPseudoReturnFields.java` blob at F3.
+- Round-3 head H: `f00caeb5e83ac375672ae27fb43ee1546795e98b`. Preflight at H (`/workspace/gates/logs/vm6/preflight/pr5188-round-3`): tidy exit 3, one file. The patch is formatting only: a `reals` call in `testGlobRTGEmptyAndAliasFieldLoading` and the `req(...)` argument list in `testGlobPrefetchBoundaries` are reflowed.
+- Repair commit F6: `555e1bf2398c08b1018ed44c056274c727bd6454` (`PR 5188: format boundary test calls`), Nick Shanin, no trailers, fast-forward pushed; remote read back as this SHA.
+- Production since H: unchanged. Only `BasicFunctionalityTest.java` differs from H.
+- Test blob at F6: `BasicFunctionalityTest.java` `1303fbab6b64abd4289cd0ca4a14f59831a43830`, sha256 `bbbd61eead2610a458a1b4cb1c1b5bed51d89e6f21813398d90bdea4085d8552` (blob at H `190f9f9ed0153eb04cf2c18ca2ddf674123e90df`). `TestPseudoReturnFields.java` blob `b81b328189af7f2a3c273009890c642ed946d44e`, identical to H.
+- Ancestry verified before the run: current PR production `db867d80365510790bb6a04ce33105cd196cf34c` and prior `409183aa9be8c8500942eadf22d036abaf1ead5c` are both ancestors of H.
+- Superseding gate: `gates/pr-5188-glob-field-loading-round-3-superseding-555e1bf.md`. The round-3 gate `gates/pr-5188-glob-field-loading-round-3.md` keeps its head H and is unedited.
