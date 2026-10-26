@@ -7,4 +7,4 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Local JDK: `/workspace/jdk/jdk-21.0.12.1+1`. Set `JAVA_HOME` and `GRADLE_USER_HOME=/workspace/gradle-home` before builds.
 - Build lock: `/workspace/tools/.gradle-vm6.lock`, taken by `pool/bin/sweep-run.sh` from the Host id in `/workspace/AGENTS.md`.
 - Role beyond the pool: none. Takes work by claim at Nick's direction, like other pool hosts.
-- Heartbeat: 2026-10-26T18:57:04Z; PR 5188 round 2 gate green at 409183a (receipt pushed). Earlier: round-1 superseding receipt, and solr-17268 DONE 04:52Z.
+- Heartbeat: 2026-10-26T20:26:35Z; PR 5188 round 3 gate green at 555e1bf (receipt pushed). Earlier: round-2 receipt 7691ee39b2, solr-17268 DONE 04:52Z.
