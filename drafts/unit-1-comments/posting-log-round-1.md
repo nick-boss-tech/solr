@@ -66,3 +66,20 @@
 | 2026-10-26 | SOLR-10030 | Owner: post remaining, citation check passed | Owner | Posted, id 18132115, read back |
 | 2026-10-26 | SOLR-11495 | Owner: post remaining, citation check passed | Owner | Posted, id 18132116, read back |
 | 2026-10-26 | SOLR-11927 | Owner: post remaining, citation check passed | Owner | Posted, id 18132117, read back |
+| 2026-10-26 | SOLR-1780 | Owner: post remaining (wave 3) | Owner | Posted, id 18132128, read back |
+| 2026-10-26 | SOLR-5376 | Owner: post remaining (wave 3) | Owner | Posted, id 18132129, read back |
+| 2026-10-26 | SOLR-6922 | Owner: post remaining (wave 3) | Owner | Posted, id 18132130, read back |
+| 2026-10-26 | SOLR-9352 | Owner: post remaining (wave 3) | Owner | Posted, id 18132131, read back |
+| 2026-10-26 | SOLR-16548 | Owner: post remaining (wave 3) | Owner | Posted, id 18132132, read back |
+| 2026-10-26 | SOLR-11292 | Owner: post remaining (wave 3) | Owner | Posted, id 18132133, read back |
+| 2026-10-26 | SOLR-7521 | Owner: post remaining (wave 3) | Owner | Posted, id 18132134, read back |
+| 2026-10-26 | SOLR-8368 | Owner: post remaining (wave 3) | Owner | Posted, id 18132135, read back |
+| 2026-10-26 | SOLR-11583 | Owner: post remaining (wave 3) | Owner | Posted, id 18132136, read back |
+| 2026-10-26 | SOLR-5235 | Owner: post remaining (wave 3) | Owner | Posted, id 18132137, read back |
+| 2026-10-26 | SOLR-5962 | Owner: post remaining (wave 3) | Owner | Posted, id 18132138, read back |
+| 2026-10-26 | SOLR-6364 | Owner: post remaining (wave 3) | Owner | Posted, id 18132139, read back |
+| 2026-10-26 | SOLR-6714 | Owner: post remaining (wave 3) | Owner | Posted, id 18132140, read back |
+| 2026-10-26 | SOLR-7511 | Owner: post remaining (wave 3) | Owner | Posted, id 18132141, read back |
+| 2026-10-26 | SOLR-8634 | Owner: post remaining (wave 3) | Owner | Posted, id 18132142, read back |
+| 2026-10-26 | SOLR-9226 | Owner: post remaining (wave 3) | Owner | Posted, id 18132143, read back |
+| 2026-10-26 | SOLR-10112 | Owner: post remaining (wave 3) | Owner | Posted, id 18132144, read back |
