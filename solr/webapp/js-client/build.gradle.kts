@@ -58,7 +58,7 @@ val syncJSClientSourceCode = tasks.register<Sync>("syncJSClientSourceCode") {
 val jsClientDownloadDeps = tasks.register<NpmTask>("jsClientDownloadDeps") {
   dependsOn(syncJSClientSourceCode)
 
-  args.set(listOf("install"))
+  args.set(listOf("install", "--include=dev"))
   workingDir.set(jsClientWorkspace)
 
   inputs.dir("$jsClientWorkspace/src")
