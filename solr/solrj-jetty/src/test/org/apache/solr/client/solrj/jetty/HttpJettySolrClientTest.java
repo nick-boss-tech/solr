@@ -955,7 +955,8 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
     }
     assertTrue("owned HttpClient must be stopped", httpClient.isStopped());
     assertFalse(
-        "client must be released from the tracker", ObjectReleaseTracker.OBJECTS.containsKey(client));
+        "client must be released from the tracker",
+        ObjectReleaseTracker.OBJECTS.containsKey(client));
   }
 
   @Test
@@ -1007,7 +1008,8 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
       } finally {
         Thread.interrupted();
       }
-      assertTrue("borrowed close must not stop the parent HttpClient", parentHttpClient.isStarted());
+      assertTrue(
+          "borrowed close must not stop the parent HttpClient", parentHttpClient.isStarted());
       assertFalse(parentHttpClient.isStopped());
     } finally {
       parent.close();
