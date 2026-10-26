@@ -1,0 +1,98 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:core:cleanTest
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/solr/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/solr/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:core:compileJava UP-TO-DATE
+> Task :solr:core:processResources UP-TO-DATE
+> Task :solr:core:classes UP-TO-DATE
+> Task :solr:core:jar UP-TO-DATE
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=5188C0DE
+
+> Task :solr:api:jar UP-TO-DATE
+> Task :solr:test-framework:compileJava UP-TO-DATE
+> Task :solr:core:compileTestJava UP-TO-DATE
+> Task :solr:core:processTestResources UP-TO-DATE
+> Task :solr:core:testClasses UP-TO-DATE
+> Task :solr:solrj:processResources UP-TO-DATE
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar UP-TO-DATE
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-jetty:classes UP-TO-DATE
+> Task :solr:solrj-jetty:jar UP-TO-DATE
+> Task :solr:solrj-streaming:processResources UP-TO-DATE
+> Task :solr:solrj-streaming:classes UP-TO-DATE
+> Task :solr:solrj-streaming:jar UP-TO-DATE
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:solrj-zookeeper:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:jar UP-TO-DATE
+> Task :solr:test-framework:processResources UP-TO-DATE
+> Task :solr:test-framework:classes UP-TO-DATE
+> Task :solr:test-framework:jar UP-TO-DATE
+> Task :solr:modules:analysis-extras:compileJava UP-TO-DATE
+> Task :solr:modules:analysis-extras:processResources NO-SOURCE
+> Task :solr:modules:analysis-extras:classes UP-TO-DATE
+> Task :solr:modules:analysis-extras:jar UP-TO-DATE
+
+> Task :solr:core:test
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+java.security.policy: error adding Permission, java.net.URLPermission:
+	java.util.ServiceConfigurationError: Locale provider adapter "CLDR"cannot be instantiated.
+:solr:core:test (SUCCESS): 111 test(s)
+
+> Task :solr:core:wipeTaskTemp
+The slowest suites (exceeding 1s) during this run:
+   7.54s BasicFunctionalityTest (:solr:core)
+   2.53s ReturnFieldsTest (:solr:core)
+   1.59s TestRetrieveFieldsOptimizer (:solr:core)
+   1.55s TestUnifiedSolrHighlighter (:solr:core)
+   1.49s TestPseudoReturnFields (:solr:core)
+
+BUILD SUCCESSFUL in 2m 12s
+36 actionable tasks: 10 executed, 26 up-to-date

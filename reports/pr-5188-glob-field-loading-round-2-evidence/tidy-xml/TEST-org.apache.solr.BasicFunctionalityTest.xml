@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.BasicFunctionalityTest" tests="25" skipped="0" failures="0" errors="0" timestamp="2026-10-26T17:43:26.437Z" hostname="localhost" time="9.487">
+  <properties/>
+  <testcase name="testRequestHandlerBaseException" classname="org.apache.solr.BasicFunctionalityTest" time="0.026"/>
+  <testcase name="testSolrQueryRequestBaseParams" classname="org.apache.solr.BasicFunctionalityTest" time="0.004"/>
+  <testcase name="testGlobHighlightPrefetch" classname="org.apache.solr.BasicFunctionalityTest" time="0.73"/>
+  <testcase name="testTermVectorFields" classname="org.apache.solr.BasicFunctionalityTest" time="0.075"/>
+  <testcase name="testNotLazyField" classname="org.apache.solr.BasicFunctionalityTest" time="0.029"/>
+  <testcase name="testHTMLStrip" classname="org.apache.solr.BasicFunctionalityTest" time="0.055"/>
+  <testcase name="testTokenizer" classname="org.apache.solr.BasicFunctionalityTest" time="0.024"/>
+  <testcase name="testDefaultFieldValues" classname="org.apache.solr.BasicFunctionalityTest" time="0.109"/>
+  <testcase name="testFieldBoost" classname="org.apache.solr.BasicFunctionalityTest" time="0.03"/>
+  <testcase name="testMultipleUpdatesPerAdd" classname="org.apache.solr.BasicFunctionalityTest" time="0.053"/>
+  <testcase name="testIgnoredFields" classname="org.apache.solr.BasicFunctionalityTest" time="0.022"/>
+  <testcase name="testNonTrivialDeleteByQuery" classname="org.apache.solr.BasicFunctionalityTest" time="0.206"/>
+  <testcase name="testConfigDefaults" classname="org.apache.solr.BasicFunctionalityTest" time="0.044"/>
+  <testcase name="testClientErrorOnMalformedDate" classname="org.apache.solr.BasicFunctionalityTest" time="0.02"/>
+  <testcase name="testSolrParams" classname="org.apache.solr.BasicFunctionalityTest" time="0.003"/>
+  <testcase name="testLazyField" classname="org.apache.solr.BasicFunctionalityTest" time="0.051"/>
+  <testcase name="testKeywordTokenizerFactory" classname="org.apache.solr.BasicFunctionalityTest" time="0.027"/>
+  <testcase name="testAbuseOfSort" classname="org.apache.solr.BasicFunctionalityTest" time="0.029"/>
+  <testcase name="testDateMath" classname="org.apache.solr.BasicFunctionalityTest" time="0.055"/>
+  <testcase name="testSomeStuff" classname="org.apache.solr.BasicFunctionalityTest" time="0.229"/>
+  <testcase name="testGlobRTGStoredFieldLoading" classname="org.apache.solr.BasicFunctionalityTest" time="0.068"/>
+  <testcase name="testPatternReplaceFilter" classname="org.apache.solr.BasicFunctionalityTest" time="0.054"/>
+  <testcase name="testDocBoost" classname="org.apache.solr.BasicFunctionalityTest" time="0.031"/>
+  <testcase name="testClientErrorOnMalformedNumbers" classname="org.apache.solr.BasicFunctionalityTest" time="0.016"/>
+  <testcase name="testXMLWriter" classname="org.apache.solr.BasicFunctionalityTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 26, 2026 5:43:27 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1673 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/solr/solr/server/solr/configsets/_default/conf'
+1703 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/tmp/pr5188/work-post-suites/org.apache.solr.BasicFunctionalityTest_5188C0DE-003/data-dir-1-001
+1778 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+1795 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=false
+1880 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+1881 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+1909 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+1913 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+2150 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+2314 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+2567 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieIntField Solr loaded a deprecated plugin/analysis class [solr.TrieIntField]. Please consult documentation how to replace it accordingly.
+2578 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieFloatField Solr loaded a deprecated plugin/analysis class [solr.TrieFloatField]. Please consult documentation how to replace it accordingly.
+2591 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieLongField Solr loaded a deprecated plugin/analysis class [solr.TrieLongField]. Please consult documentation how to replace it accordingly.
+2602 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieDoubleField Solr loaded a deprecated plugin/analysis class [solr.TrieDoubleField]. Please consult documentation how to replace it accordingly.
+2684 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.TrieDateField Solr loaded a deprecated plugin/analysis class [solr.TrieDateField]. Please consult documentation how to replace it accordingly.
+2752 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.D.s.WordDelimiterFilterFactory Solr loaded a deprecated plugin/analysis class [solr.WordDelimiterFilterFactory]. Please consult documentation how to replace it accordingly.
+3169 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+3544 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+3575 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+4446 WARN  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+5000 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+5018 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrConfig solrconfig.xml: <boolTofilterOptimizer> is currently not implemented and has no effect.
+5068 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+5101 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/solr/solr/core/build/resources/test/solr/collection1
+5207 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/solr/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/tmp/pr5188/work-post-suites/org.apache.solr.BasicFunctionalityTest_5188C0DE-003/data-dir-1-001/]
+5238 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=19, maxMergedSegmentMB=25.752991676330566, floorSegmentMB=1.7170133590698242, forceMergeDeletesPctAllowed=17.23304480505803, segmentsPerTier=12.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8306212705425147, deletesPctAllowed=42.94094414219121, targetSearchConcurrency=16
+6994 WARN  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+7660 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+7664 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+7664 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+7692 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.LogByteSizeMergePolicy: [LogByteSizeMergePolicy: minMergeSize=16777216, mergeFactor=38, maxMergeSize=2147483648, maxMergeSizeForForcedMerge=9223372036854775807, calibrateSizeByDeletes=true, maxMergeDocs=2147483647, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.8154425891018042]
+8325 INFO  (coreLoadExecutor-14-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+8327 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+8331 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: direct
+8331 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: directMQF2
+8331 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+8331 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: multipleFields
+8335 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: jarowinkler
+8339 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: external
+8343 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: freq
+8347 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: fqcn
+8351 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: perDict
+8352 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+8451 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+8457 INFO  (TEST-BasicFunctionalityTest.testRequestHandlerBaseException-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testRequestHandlerBaseException
+8477 INFO  (TEST-BasicFunctionalityTest.testRequestHandlerBaseException-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={wt=xml} status=500 QTime=13
+8477 INFO  (TEST-BasicFunctionalityTest.testRequestHandlerBaseException-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testRequestHandlerBaseException
+8481 INFO  (TEST-BasicFunctionalityTest.testSolrQueryRequestBaseParams-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSolrQueryRequestBaseParams
+8482 INFO  (TEST-BasicFunctionalityTest.testSolrQueryRequestBaseParams-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSolrQueryRequestBaseParams
+8485 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobHighlightPrefetch
+8741 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7783 (1880135160626675712)]} 0 226
+8834 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 7 ms
+8834 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 58
+9043 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7783+AND+title:keyword&fl=source_s&hl=true&hl.method=original&hl.fl=title&wt=xml} hits=1 status=0 QTime=207
+9049 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7783+AND+title:keyword&fl=source_*&hl=true&hl.method=original&hl.fl=title&wt=xml} hits=1 status=0 QTime=3
+9191 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7783+AND+title:keyword&fl=source_s&hl=true&hl.method=unified&hl.fl=title&wt=xml} hits=1 status=0 QTime=141
+9194 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7783+AND+title:keyword&fl=source_*&hl=true&hl.method=unified&hl.fl=title&wt=xml} hits=1 status=0 QTime=1
+9204 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[7783 (-1880135161265258496)]} 0 8
+9209 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 1 ms
+9211 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 7
+9212 INFO  (TEST-BasicFunctionalityTest.testGlobHighlightPrefetch-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobHighlightPrefetch
+9215 INFO  (TEST-BasicFunctionalityTest.testTermVectorFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testTermVectorFields
+9255 INFO  (TEST-BasicFunctionalityTest.testTermVectorFields-seed#[5188C0DE]) [] o.a.s.s.IndexSchema Loaded schema test/1.0 with uniqueid field id
+9287 INFO  (TEST-BasicFunctionalityTest.testTermVectorFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testTermVectorFields
+9290 INFO  (TEST-BasicFunctionalityTest.testNotLazyField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testNotLazyField
+9302 INFO  (TEST-BasicFunctionalityTest.testNotLazyField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7777 (1880135161366970368)]} 0 10
+9310 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9314 INFO  (TEST-BasicFunctionalityTest.testNotLazyField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+9316 INFO  (TEST-BasicFunctionalityTest.testNotLazyField-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7777&fl=id,title,test_hlt&wt=xml} hits=1 status=0 QTime=1
+9316 INFO  (TEST-BasicFunctionalityTest.testNotLazyField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testNotLazyField
+9320 INFO  (TEST-BasicFunctionalityTest.testHTMLStrip-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testHTMLStrip
+9332 INFO  (TEST-BasicFunctionalityTest.testHTMLStrip-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[200 (1880135161395281920)]} 0 11
+9333 INFO  (TEST-BasicFunctionalityTest.testHTMLStrip-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[201 (1880135161407864832)]} 0 0
+9342 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9345 INFO  (TEST-BasicFunctionalityTest.testHTMLStrip-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+9346 INFO  (TEST-BasicFunctionalityTest.testHTMLStrip-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=HTMLwhitetok:A%26#66;C&wt=xml} hits=2 status=0 QTime=0
+9370 INFO  (TEST-BasicFunctionalityTest.testHTMLStrip-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=HTMLwhitetok:%26#65;BC&wt=xml} hits=2 status=0 QTime=0
+9371 INFO  (TEST-BasicFunctionalityTest.testHTMLStrip-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testHTMLStrip
+9374 INFO  (TEST-BasicFunctionalityTest.testTokenizer-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testTokenizer
+9382 INFO  (TEST-BasicFunctionalityTest.testTokenizer-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[4055 (1880135161451905024)]} 0 7
+9383 INFO  (TEST-BasicFunctionalityTest.testTokenizer-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[4056 (1880135161460293632)]} 0 0
+9389 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9392 INFO  (TEST-BasicFunctionalityTest.testTokenizer-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 9
+9394 INFO  (TEST-BasicFunctionalityTest.testTokenizer-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=patterntok:Hello&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+9395 INFO  (TEST-BasicFunctionalityTest.testTokenizer-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=patterntok:Goodbye&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+9396 INFO  (TEST-BasicFunctionalityTest.testTokenizer-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testTokenizer
+9399 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testDefaultFieldValues
+9425 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+9426 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:* (-9223372036854775807)} 0 27
+9446 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[4055 (1880135161519013888)]} 0 7
+9447 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[4056 (1880135161527402496)]} 0 0
+9448 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[4057 (1880135161529499648)]} 0 0
+9454 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9458 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 9
+9499 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=timestamp:[NOW-10MINUTES+TO+NOW]&qt=&start=0&rows=20&wt=xml} hits=3 status=0 QTime=39
+9500 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=multiDefault:muLti-Default&qt=&start=0&rows=20&wt=xml} hits=2 status=0 QTime=0
+9502 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=multiDefault:a&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+9503 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=intDefault:42&qt=&start=0&rows=20&wt=xml} hits=2 status=0 QTime=0
+9505 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=intDefault:[3+TO+5]&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=1
+9505 INFO  (TEST-BasicFunctionalityTest.testDefaultFieldValues-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testDefaultFieldValues
+9509 INFO  (TEST-BasicFunctionalityTest.testFieldBoost-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFieldBoost
+9518 WARN  (TEST-BasicFunctionalityTest.testFieldBoost-seed#[5188C0DE]) [ x:collection1] o.a.s.h.l.XMLLoader Ignoring field boost: 2.0 as index-time boosts are not supported anymore
+9518 INFO  (TEST-BasicFunctionalityTest.testFieldBoost-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1880135161593462784), 2 (1880135161602899968)]} 0 9
+9524 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9531 INFO  (TEST-BasicFunctionalityTest.testFieldBoost-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 12
+9532 INFO  (TEST-BasicFunctionalityTest.testFieldBoost-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:hello&qt=&start=0&rows=20&wt=xml} hits=2 status=0 QTime=0
+9535 INFO  (TEST-BasicFunctionalityTest.testFieldBoost-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:hello&debugQuery=true&wt=xml} hits=2 status=0 QTime=2
+9536 INFO  (TEST-BasicFunctionalityTest.testFieldBoost-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFieldBoost
+9539 INFO  (TEST-BasicFunctionalityTest.testMultipleUpdatesPerAdd-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testMultipleUpdatesPerAdd
+9540 INFO  (TEST-BasicFunctionalityTest.testMultipleUpdatesPerAdd-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+9540 INFO  (TEST-BasicFunctionalityTest.testMultipleUpdatesPerAdd-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:* (-9223372036854775807)} 0 0
+9549 INFO  (TEST-BasicFunctionalityTest.testMultipleUpdatesPerAdd-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1880135161627017216), 2 (1880135161634357248)]} 0 8
+9554 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9557 INFO  (TEST-BasicFunctionalityTest.testMultipleUpdatesPerAdd-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 8
+9588 INFO  (TEST-BasicFunctionalityTest.testMultipleUpdatesPerAdd-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:[0+TO+99]&qt=&start=0&rows=20&wt=xml} hits=2 status=0 QTime=30
+9589 INFO  (TEST-BasicFunctionalityTest.testMultipleUpdatesPerAdd-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testMultipleUpdatesPerAdd
+9592 INFO  (TEST-BasicFunctionalityTest.testIgnoredFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testIgnoredFields
+9600 INFO  (TEST-BasicFunctionalityTest.testIgnoredFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880135161681543168)]} 0 7
+9605 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9609 INFO  (TEST-BasicFunctionalityTest.testIgnoredFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 8
+9611 INFO  (TEST-BasicFunctionalityTest.testIgnoredFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bar_ignored:yo+id:42&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=1
+9611 INFO  (TEST-BasicFunctionalityTest.testIgnoredFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testIgnoredFields
+9614 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testNonTrivialDeleteByQuery
+9615 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+9615 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:* (-9223372036854775807)} 0 0
+9624 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101 (1880135161705660416)]} 0 8
+9625 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102 (1880135161714049024)]} 0 0
+9626 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[103 (1880135161715097600)]} 0 0
+9626 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[104 (1880135161716146176)]} 0 0
+9628 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[105 (1880135161717194752)]} 0 0
+9628 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[106 (1880135161718243328)]} 0 0
+9634 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9637 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 8
+9638 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:[100+TO+110]&qt=&start=0&rows=20&wt=xml} hits=6 status=0 QTime=0
+9647 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&qt=&start=0&rows=20&wt=xml} hits=6 status=0 QTime=7
+9654 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:red&qt=&start=0&rows=20&wt=xml} hits=2 status=0 QTime=0
+9656 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=-text:red&qt=&start=0&rows=20&wt=xml} hits=4 status=0 QTime=1
+9657 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:grape&qt=&start=0&rows=20&wt=xml} hits=2 status=0 QTime=0
+9658 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=-text:grape&qt=&start=0&rows=20&wt=xml} hits=4 status=0 QTime=0
+9660 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=-text:red+-text:grape&qt=&start=0&rows=20&wt=xml} hits=2 status=0 QTime=0
+9661 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q={!lucene+q.op%3DAND+df%3Dtext}grape+green&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+9669 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=-_val_:"{!lucene+q.op%3DAND+df%3Dtext}grape+green"&qt=&start=0&rows=20&wt=xml} hits=5 status=0 QTime=7
+9718 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{deleteByQuery=-*:* (-1880135161763332096)} 0 47
+9728 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 9
+9728 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&qt=&start=0&rows=20&wt=xml} hits=6 status=0 QTime=0
+9739 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{deleteByQuery=-text:grape -text:red (-1880135161824149504)} 0 9
+9741 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9751 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+9752 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&qt=&start=0&rows=20&wt=xml} hits=4 status=0 QTime=0
+9763 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{deleteByQuery={!term f=id}106 (-1880135161851412480)} 0 7
+9766 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9775 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+9775 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&qt=&start=0&rows=20&wt=xml} hits=3 status=0 QTime=0
+9785 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{deleteByQuery=-_val_:"{!lucene q.op=AND df=text}grape green" (-1880135161874481152)} 0 8
+9787 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9797 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+9797 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+9806 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{deleteByQuery=-text:doesnotexist (-1880135161896501248)} 0 7
+9808 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9816 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 9
+9816 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=0
+9817 INFO  (TEST-BasicFunctionalityTest.testNonTrivialDeleteByQuery-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testNonTrivialDeleteByQuery
+9820 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testConfigDefaults
+9829 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880135161919569920)]} 0 8
+9830 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[43 (1880135161930055680)]} 0 0
+9831 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[44 (1880135161931104256)]} 0 0
+9832 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[45 (1880135161932152832)]} 0 0
+9833 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[46 (1880135161933201408)]} 0 0
+9834 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[47 (1880135161934249984)]} 0 0
+9842 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9850 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 15
+9851 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:[42+TO+47]&qt=&start=0&rows=20&wt=xml} hits=6 status=0 QTime=0
+9856 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/defaults params={q=id:[42+TO+47]&wt=xml} hits=6 status=0 QTime=3
+9861 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/defaults params={q=name:Zapp+OR+title:General&wt=xml} hits=2 status=0 QTime=4
+9861 INFO  (TEST-BasicFunctionalityTest.testConfigDefaults-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testConfigDefaults
+9865 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testClientErrorOnMalformedDate
+9865 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-2 for ERROR logs matching regex: NOT_A_DATE
+9866 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+9867 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tdt:NOT_A_DATE&wt=xml} status=400 QTime=0
+9867 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tdt:[NOW+TO+NOT_A_DATE]&wt=xml} status=400 QTime=0
+9868 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+9868 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tdt1:NOT_A_DATE&wt=xml} status=400 QTime=0
+9868 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tdt1:[NOW+TO+NOT_A_DATE]&wt=xml} status=400 QTime=0
+9869 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+9869 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tdtdv:NOT_A_DATE&wt=xml} status=400 QTime=0
+9869 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tdtdv:[NOW+TO+NOT_A_DATE]&wt=xml} status=400 QTime=0
+9870 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+9870 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tdtdv1:NOT_A_DATE&wt=xml} status=400 QTime=0
+9870 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tdtdv1:[NOW+TO+NOT_A_DATE]&wt=xml} status=400 QTime=0
+9870 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+9871 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_dt_dv:NOT_A_DATE&wt=xml} status=400 QTime=0
+9871 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_dt_dv:[NOW+TO+NOT_A_DATE]&wt=xml} status=400 QTime=0
+9871 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+9878 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_dt_dvo:NOT_A_DATE&wt=xml} status=400 QTime=6
+9878 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_dt_dvo:[NOW+TO+NOT_A_DATE]&wt=xml} status=400 QTime=0
+9878 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+9879 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_dt:NOT_A_DATE&wt=xml} status=400 QTime=0
+9879 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_dt:[NOW+TO+NOT_A_DATE]&wt=xml} status=400 QTime=0
+9879 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+9879 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_dt1:NOT_A_DATE&wt=xml} status=400 QTime=0
+9880 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_dt1:[NOW+TO+NOT_A_DATE]&wt=xml} status=400 QTime=0
+9880 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+9881 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-2 after muting 25 log messages
+9881 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedDate-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testClientErrorOnMalformedDate
+9884 INFO  (TEST-BasicFunctionalityTest.testSolrParams-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSolrParams
+9884 INFO  (TEST-BasicFunctionalityTest.testSolrParams-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSolrParams
+9887 INFO  (TEST-BasicFunctionalityTest.testLazyField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testLazyField
+9909 INFO  (TEST-BasicFunctionalityTest.testLazyField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7777 (1880135161997164544)]} 0 17
+9915 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9934 INFO  (TEST-BasicFunctionalityTest.testLazyField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 24
+9935 INFO  (TEST-BasicFunctionalityTest.testLazyField-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7777&fl=id,title&wt=xml} hits=1 status=0 QTime=0
+9935 INFO  (TEST-BasicFunctionalityTest.testLazyField-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7777&fl=id,test_hlt&wt=xml} hits=1 status=0 QTime=0
+9935 INFO  (TEST-BasicFunctionalityTest.testLazyField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testLazyField
+9939 INFO  (TEST-BasicFunctionalityTest.testKeywordTokenizerFactory-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testKeywordTokenizerFactory
+9946 INFO  (TEST-BasicFunctionalityTest.testKeywordTokenizerFactory-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880135162044350464)]} 0 7
+9952 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9960 INFO  (TEST-BasicFunctionalityTest.testKeywordTokenizerFactory-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 13
+9961 INFO  (TEST-BasicFunctionalityTest.testKeywordTokenizerFactory-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:42&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+9962 INFO  (TEST-BasicFunctionalityTest.testKeywordTokenizerFactory-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=keywordtok:"How+nOw+broWn-ish+C.o.w.+?"&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+9962 INFO  (TEST-BasicFunctionalityTest.testKeywordTokenizerFactory-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testKeywordTokenizerFactory
+9966 INFO  (TEST-BasicFunctionalityTest.testAbuseOfSort-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAbuseOfSort
+9973 INFO  (TEST-BasicFunctionalityTest.testAbuseOfSort-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[9999991 (1880135162072662016)]} 0 7
+9974 INFO  (TEST-BasicFunctionalityTest.testAbuseOfSort-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[9999992 (1880135162081050624)]} 0 0
+9980 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9988 INFO  (TEST-BasicFunctionalityTest.testAbuseOfSort-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 13
+9989 INFO  (TEST-BasicFunctionalityTest.testAbuseOfSort-seed#[5188C0DE]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-3 for ERROR logs matching regex: sortabuse
+9990 INFO  (TEST-BasicFunctionalityTest.testAbuseOfSort-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&sort=sortabuse_not_uninvertible+asc&wt=xml} status=400 QTime=0
+9990 INFO  (TEST-BasicFunctionalityTest.testAbuseOfSort-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&sort=sortabuse_t+asc&wt=xml} status=400 QTime=0
+9991 INFO  (TEST-BasicFunctionalityTest.testAbuseOfSort-seed#[5188C0DE]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-3 after muting 4 log messages
+9991 INFO  (TEST-BasicFunctionalityTest.testAbuseOfSort-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAbuseOfSort
+9994 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testDateMath
+9994 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.u.DirectUpdateHandler2 REMOVING ALL DOCUMENTS FROM INDEX
+9995 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.u.p.LogUpdateProcessorFactory {deleteByQuery=*:* (-9223372036854775807)} 0 0
+10003 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1880135162103070720)]} 0 8
+10004 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2 (1880135162112507904)]} 0 0
+10011 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[3 (1880135162113556480)]} 0 7
+10012 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[4 (1880135162120896512)]} 0 0
+10013 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[5 (1880135162121945088)]} 0 0
+10014 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[6 (1880135162122993664)]} 0 0
+10019 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10028 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 13
+10029 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:1976-07-04T12\:08\:56.45Z/SECOND%2B235MILLIS&wt=xml} hits=1 status=0 QTime=0
+10030 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:1976-07-04T12\:08\:56.123Z/MINUTE%2B56SECONDS%2B235MILLIS&wt=xml} hits=1 status=0 QTime=0
+10031 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:"1976-07-04T12:08:56.45Z/SECOND%2B235MILLIS"&wt=xml} hits=1 status=0 QTime=0
+10031 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:"1976-07-04T12:08:56.123Z/MINUTE%2B56SECONDS%2B235MILLIS"&wt=xml} hits=1 status=0 QTime=0
+10032 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q={!term+f%3Dbday}1976-07-04T12:08:56.45Z/SECOND%2B235MILLIS&wt=xml} hits=1 status=0 QTime=0
+10033 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q={!term+f%3Dbday}1976-07-04T12:08:56.123Z/MINUTE%2B56SECONDS%2B235MILLIS&wt=xml} hits=1 status=0 QTime=0
+10034 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q={!term+f%3Dbday}1976-07-04T12:08:56.235Z&wt=xml} hits=1 status=0 QTime=0
+10035 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q={!term+f%3Dbday}1976-07-04T12:08:56.235Z%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS&wt=xml} hits=1 status=0 QTime=0
+10035 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:"1976-07-04T12:08:56.235Z%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS%2B1SECONDS-1SECONDS"&wt=xml} hits=1 status=0 QTime=0
+10036 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[*+TO+1976-07-04T12:08:56.235Z/SECOND]&wt=xml} hits=0 status=0 QTime=0
+10037 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[*+TO+1976-07-04T12:08:56.235Z/SECOND%2B1SECOND]&wt=xml} hits=1 status=0 QTime=0
+10038 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[1976-07-04T12:08:56.235Z/SECOND+TO+1976-07-04T12:08:56.235Z/SECOND%2B1SECOND]&wt=xml} hits=1 status=0 QTime=0
+10039 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[1976-07-04T12:08:56.235Z/MINUTE%2B1MINUTE+TO+*]&wt=xml} hits=5 status=0 QTime=0
+10040 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[*+TO+NOW]&wt=xml} hits=4 status=0 QTime=0
+10041 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[NOW+TO+*]&wt=xml} hits=2 status=0 QTime=0
+10042 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[*+TO+NOW-2YEARS]&wt=xml} hits=1 status=0 QTime=0
+10043 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[NOW%2B1MONTH+TO+*]&wt=xml} hits=1 status=0 QTime=0
+10044 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[NOW-1MONTH+TO+NOW%2B2HOURS]&wt=xml} hits=4 status=0 QTime=0
+10045 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[NOW/DAY+TO+NOW/DAY%2B1DAY]&NOW=205369736000&wt=xml} hits=1 status=0 QTime=0
+10046 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=bday:[NOW/DAY+TO+NOW/DAY%2B1DAY]&TZ=GMT%2B01&NOW=205369736000&wt=xml} hits=0 status=0 QTime=0
+10046 INFO  (TEST-BasicFunctionalityTest.testDateMath-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testDateMath
+10049 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSomeStuff
+10086 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=qlkciyopsbgzyvkylsjhchghjrdf&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=0
+10094 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[42 (-1880135162198491136)]} 0 7
+10095 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880135162206879744)]} 0 1
+10100 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10109 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 13
+10110 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:42+AND+val_s:aa\;bb&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+10111 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:42+AND+val_s:"aa;bb"&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+10112 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:42+AND+val_s:aa&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=0
+10119 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[42 (-1880135162225754112)]} 0 7
+10121 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10130 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+10131 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:42&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=0
+10139 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880135162246725632)]} 0 7
+10140 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880135162255114240)]} 0 0
+10145 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10154 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 13
+10154 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:42&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+10162 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880135162270842880)]} 0 7
+10163 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880135162279231488)]} 0 0
+10168 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10176 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 12
+10179 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:42&qt=&start=0&rows=20&wt=xml} hits=1 status=0 QTime=0
+10187 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101 (1880135162297057280)]} 0 7
+10188 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101 (1880135162304397312)]} 0 0
+10188 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[105 (1880135162305445888)]} 0 0
+10189 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[102 (1880135162306494464)]} 0 0
+10190 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[103 (1880135162307543040)]} 0 0
+10191 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[101 (1880135162307543041)]} 0 0
+10195 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10204 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 12
+10204 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:[100+TO+110]&rows=2147483647&wt=xml} hits=4 status=0 QTime=0
+10206 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:[100+TO+111]&rows=1147483647&wt=xml} hits=4 status=0 QTime=0
+10206 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:[100+TO+110]&qt=&start=0&rows=20&wt=xml} hits=4 status=0 QTime=0
+10213 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[102 (-1880135162325368832)]} 0 6
+10216 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10225 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+10225 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:[100+TO+110]&qt=&start=0&rows=20&wt=xml} hits=3 status=0 QTime=0
+10233 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[105 (-1880135162345291776)]} 0 7
+10236 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10245 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 11
+10245 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:[100+TO+110]&qt=&start=0&rows=20&wt=xml} hits=2 status=0 QTime=0
+10254 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{deleteByQuery=id:[100 TO 110] (-1880135162366263296)} 0 7
+10255 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10264 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+10264 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:[100+TO+110]&qt=&start=0&rows=20&wt=xml} hits=0 status=0 QTime=0
+10270 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.DirectUpdateHandler2 start rollback{}
+10271 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=23, maxMergedSegmentMB=60.41700458526611, floorSegmentMB=1.8399543762207031, forceMergeDeletesPctAllowed=23.017668774239617, segmentsPerTier=22.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.7803641648998457, deletesPctAllowed=22.16056276270111, targetSearchConcurrency=19
+10272 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.DefaultSolrCoreState New IndexWriter is ready to be used.
+10272 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.DirectUpdateHandler2 end_rollback
+10272 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{rollback=} 0 7
+10274 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10275 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 2
+10275 INFO  (TEST-BasicFunctionalityTest.testSomeStuff-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSomeStuff
+10278 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobRTGStoredFieldLoading
+10286 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7781 (1880135162400866304)]} 0 7
+10290 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10300 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 13
+10316 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7781&wt=xml&fl=tit*,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=12
+10317 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7781&wt=xml&fl=title,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=0
+10323 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7781&wt=xml&fl=tit*,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=4
+10324 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7781&wt=xml&fl=title,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=0
+10324 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7781&wt=xml&fl=*} status=0 QTime=0
+10325 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7781&wt=xml&fl=unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=0
+10333 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[7781 (-1880135162450149376)]} 0 7
+10335 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10343 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 10
+10344 INFO  (TEST-BasicFunctionalityTest.testGlobRTGStoredFieldLoading-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobRTGStoredFieldLoading
+10347 INFO  (TEST-BasicFunctionalityTest.testPatternReplaceFilter-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testPatternReplaceFilter
+10355 INFO  (TEST-BasicFunctionalityTest.testPatternReplaceFilter-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1880135162472169472)]} 0 7
+10356 INFO  (TEST-BasicFunctionalityTest.testPatternReplaceFilter-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[2 (1880135162480558080)]} 0 0
+10387 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10396 INFO  (TEST-BasicFunctionalityTest.testPatternReplaceFilter-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 39
+10396 INFO  (TEST-BasicFunctionalityTest.testPatternReplaceFilter-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=patternreplacefilt:Up&wt=xml} hits=0 status=0 QTime=0
+10397 INFO  (TEST-BasicFunctionalityTest.testPatternReplaceFilter-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=patternreplacefilt:__What_s_Up_Doc_&wt=xml} hits=1 status=0 QTime=0
+10398 INFO  (TEST-BasicFunctionalityTest.testPatternReplaceFilter-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=patternreplacefilt:My__fine_feathered_friend_&wt=xml} hits=1 status=0 QTime=0
+10398 INFO  (TEST-BasicFunctionalityTest.testPatternReplaceFilter-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testPatternReplaceFilter
+10402 INFO  (TEST-BasicFunctionalityTest.testDocBoost-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testDocBoost
+10410 INFO  (TEST-BasicFunctionalityTest.testDocBoost-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[1 (1880135162529841152), 2 (1880135162538229760)]} 0 8
+10418 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+10427 INFO  (TEST-BasicFunctionalityTest.testDocBoost-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 16
+10428 INFO  (TEST-BasicFunctionalityTest.testDocBoost-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:hello&qt=&start=0&rows=20&wt=xml} hits=2 status=0 QTime=0
+10429 INFO  (TEST-BasicFunctionalityTest.testDocBoost-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=text:hello&debugQuery=true&wt=xml} hits=2 status=0 QTime=0
+10429 INFO  (TEST-BasicFunctionalityTest.testDocBoost-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testDocBoost
+10432 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testClientErrorOnMalformedNumbers
+10432 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-4 for ERROR logs matching regex: NOT_A_NUMBER
+10433 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10434 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_ti:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10434 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_ti:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10435 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10435 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tf:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10435 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tf:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10435 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10436 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_td:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10436 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_td:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10436 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10436 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tl:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10437 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_tl:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10437 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10437 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_i:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10437 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_i:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10437 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10438 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_f:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10438 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_f:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10438 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10438 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_d:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10438 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_d:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10438 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10439 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_l:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10439 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_l:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10439 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10439 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_i_dv:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10439 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_i_dv:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10440 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10440 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_f_dv:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10440 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_f_dv:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10440 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10440 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_d_dv:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10441 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_d_dv:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10441 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10441 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_l_dv:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10441 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_l_dv:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10442 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10442 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_i_dvo:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10442 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_i_dvo:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10442 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10442 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_f_dvo:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10442 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_f_dvo:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10443 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10443 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_d_dvo:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10443 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_d_dvo:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10443 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10443 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_l_dvo:NOT_A_NUMBER&wt=xml} status=400 QTime=0
+10444 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=malformed_l_dvo:[10+TO+NOT_A_NUMBER]&wt=xml} status=400 QTime=0
+10444 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10444 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10444 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10445 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{} 0 0
+10445 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-4 after muting 52 log messages
+10445 INFO  (TEST-BasicFunctionalityTest.testClientErrorOnMalformedNumbers-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testClientErrorOnMalformedNumbers
+10448 INFO  (TEST-BasicFunctionalityTest.testXMLWriter-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testXMLWriter
+10449 INFO  (TEST-BasicFunctionalityTest.testXMLWriter-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testXMLWriter
+10449 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+10449 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1333393565
+10450 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@4a885ea collection1
+10451 INFO  (coreCloseExecutor-22-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Oct 26, 2026 6:43:35 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+10473 INFO  (SUITE-BasicFunctionalityTest-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 1 log messages
+]]></system-err>
+</testsuite>

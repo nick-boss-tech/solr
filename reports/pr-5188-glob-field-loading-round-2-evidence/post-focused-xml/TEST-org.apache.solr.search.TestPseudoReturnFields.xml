@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.search.TestPseudoReturnFields" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-26T18:39:19.621Z" hostname="localhost" time="1.675">
+  <properties/>
+  <testcase name="testGlobRTGUncommittedFields" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.027"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[11585 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/solr/solr/server/solr/configsets/_default/conf'
+11595 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/tmp/pr5188/work-r2-post-focused/org.apache.solr.search.TestPseudoReturnFields_5188C0DE-001/data-dir-2-001
+11595 WARN  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=7 numCloses=7
+11595 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-2 for ERROR logs matching regex: ignore_exception
+11595 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+11598 WARN  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+11598 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+11598 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+11598 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+11610 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+11677 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.7 with uniqueid field id
+11686 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+11686 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+12945 WARN  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+12956 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+12984 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.7 with uniqueid field id
+12993 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/solr/solr/core/build/resources/test/solr/collection1
+12993 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/solr/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/tmp/pr5188/work-r2-post-focused/org.apache.solr.search.TestPseudoReturnFields_5188C0DE-001/data-dir-2-001/]
+12994 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=4, maxMergedSegmentMB=49.92561721801758, floorSegmentMB=1.0325288772583008, forceMergeDeletesPctAllowed=5.451661207000015, segmentsPerTier=18.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.0, deletesPctAllowed=24.188828223548427, targetSearchConcurrency=11
+13058 WARN  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.c.RequestHandlers INVALID paramSet a in requestHandler {type = requestHandler,name = /dump,class = DumpRequestHandler,attributes = {initParams=a, name=/dump, class=DumpRequestHandler},args = {defaults={a=A, b=B}}}
+13118 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+13118 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+13118 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+13130 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=17, maxMergedSegmentMB=77.28947257995605, floorSegmentMB=1.1819286346435547, forceMergeDeletesPctAllowed=10.413381199956376, segmentsPerTier=12.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=1.0, deletesPctAllowed=32.715043751458516, targetSearchConcurrency=7
+13133 WARN  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/solr/solr/core/build/resources/test/solr/collection1/conf ; switching to use InMemory storage instead.
+13133 INFO  (coreLoadExecutor-36-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+13134 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+13174 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+13190 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880138670386708480)]} 0 15
+13192 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[43 (1880138670404534272)]} 0 0
+13193 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[44 (1880138670405582848)]} 0 0
+13194 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[45 (1880138670406631424)]} 0 0
+13195 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[46 (1880138670407680000)]} 0 0
+13211 INFO  (searcherExecutor-38-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+13214 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 18
+13218 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobRTGUncommittedFields
+13226 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880138670432845824)]} 0 7
+13227 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[7782 (-1880138670441234432)]} 0 0
+13228 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7782 (1880138670442283008)]} 0 0
+13229 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7782&wt=xml} hits=0 status=0 QTime=0
+13230 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7782&fq=&wt=xml&fl=title,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=0
+13231 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7782&fq=&wt=xml&fl=tit*,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=0
+13238 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7782&fq=id:7782&wt=xml&fl=title,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=6
+13239 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7782&fq=id:7782&wt=xml&fl=tit*,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=0
+13240 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7782&wt=xml} hits=0 status=0 QTime=0
+13241 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[7782 (-1880138670454865920)]} 0 0
+13241 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobRTGUncommittedFields
+13241 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+13241 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1143368641
+13242 INFO  (coreCloseExecutor-44-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@537431db collection1
+13242 INFO  (coreCloseExecutor-44-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close() .
+Oct 27, 2026 2:39:21 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+13251 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-2 after muting 0 log messages
+]]></system-err>
+</testsuite>

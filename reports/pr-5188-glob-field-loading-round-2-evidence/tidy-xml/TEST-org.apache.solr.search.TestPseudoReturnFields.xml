@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.search.TestPseudoReturnFields" tests="35" skipped="0" failures="0" errors="0" timestamp="2026-10-26T17:43:38.880Z" hostname="localhost" time="1.326">
+  <properties/>
+  <testcase name="testAllRealFieldsRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.015"/>
+  <testcase name="testFunctions" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.014"/>
+  <testcase name="testScoreAndExplicitRealFields" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.013"/>
+  <testcase name="testFunctionsRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.023"/>
+  <testcase name="testMovePk" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.006"/>
+  <testcase name="testDocIdAugmenterRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.007"/>
+  <testcase name="testFunctionsAndScoreRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.012"/>
+  <testcase name="testScoreAndAllRealFields" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.005"/>
+  <testcase name="testFunctionsAndExplicitRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.009"/>
+  <testcase name="testAugmenters" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.007"/>
+  <testcase name="testGlobsAndTransformerFieldRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.005"/>
+  <testcase name="testAugmentersGlobsExplicitAndScoreOhMy" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.031"/>
+  <testcase name="testGlobsAndExplicitNonStoredDocValues" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.005"/>
+  <testcase name="testMultiValuedRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.017"/>
+  <testcase name="testGlobsAndScore" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.006"/>
+  <testcase name="testGlobRTGUncommittedFields" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.011"/>
+  <testcase name="testAugmentersAndScore" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.007"/>
+  <testcase name="testFunctionsAndScore" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.007"/>
+  <testcase name="testGlobsAndExplicit" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.006"/>
+  <testcase name="testGlobsAndScoreRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.007"/>
+  <testcase name="testGlobs" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.006"/>
+  <testcase name="testFunctionsAndExplicit" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.005"/>
+  <testcase name="testGlobsAndTransformerField" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.006"/>
+  <testcase name="testAugmentersAndExplicit" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.006"/>
+  <testcase name="testAllRealFields" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.004"/>
+  <testcase name="testGlobsAndExplicitRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.007"/>
+  <testcase name="testAugmentersRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.014"/>
+  <testcase name="testAugmentersAndScoreRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.01"/>
+  <testcase name="testAugmentersGlobsExplicitAndScoreOhMyRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.032"/>
+  <testcase name="testGlobsRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.007"/>
+  <testcase name="testScoreAndExplicitRealFieldsRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.006"/>
+  <testcase name="testMultiValued" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.026"/>
+  <testcase name="testFilterAndOneRealFieldRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.011"/>
+  <testcase name="testScoreAndAllRealFieldsRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.007"/>
+  <testcase name="testAugmentersAndExplicitRTG" classname="org.apache.solr.search.TestPseudoReturnFields" time="0.011"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[13420 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/solr/solr/server/solr/configsets/_default/conf'
+13435 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/tmp/pr5188/work-post-suites/org.apache.solr.search.TestPseudoReturnFields_5188C0DE-003/data-dir-4-001
+13436 WARN  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=2 numCloses=2
+13436 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-7 for ERROR logs matching regex: ignore_exception
+13436 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+13438 WARN  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/solr/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+13438 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+13438 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+13438 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore
+13447 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+13480 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.s.IndexSchema Loaded schema test/1.7 with uniqueid field id
+13489 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+13489 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+14200 WARN  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+14211 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.c.SolrResourceLoader Added lib dirs to classloader: [/workspace/solr/solr/core/build/resources/test/solr/collection1/lib, /workspace/solr/solr/core/build/resources/test/solr/collection1/lib/classes]
+14237 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema test/1.7 with uniqueid field id
+14246 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir /workspace/solr/solr/core/build/resources/test/solr/collection1
+14246 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/solr/solr/core/build/resources/test/solr/collection1], dataDir=[/workspace/tmp/pr5188/work-post-suites/org.apache.solr.search.TestPseudoReturnFields_5188C0DE-003/data-dir-4-001/]
+14247 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=4, maxMergedSegmentMB=49.92561721801758, floorSegmentMB=1.0325288772583008, forceMergeDeletesPctAllowed=5.451661207000015, segmentsPerTier=18.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=0.0, deletesPctAllowed=24.188828223548427, targetSearchConcurrency=11
+14256 WARN  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.c.RequestHandlers INVALID paramSet a in requestHandler {type = requestHandler,name = /dump,class = DumpRequestHandler,attributes = {initParams=a, name=/dump, class=DumpRequestHandler},args = {defaults={a=A, b=B}}}
+14287 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+14288 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: disabled
+14288 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+14301 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.u.RandomMergePolicy RandomMergePolicy wrapping class org.apache.lucene.index.TieredMergePolicy: [TieredMergePolicy: maxMergeAtOnce=17, maxMergedSegmentMB=77.28947257995605, floorSegmentMB=1.1819286346435547, forceMergeDeletesPctAllowed=10.413381199956376, segmentsPerTier=12.0, maxCFSSegmentSizeMB=8.796093022208E12, noCFSRatio=1.0, deletesPctAllowed=32.715043751458516, targetSearchConcurrency=7
+14301 WARN  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/solr/solr/core/build/resources/test/solr/collection1/conf ; switching to use InMemory storage instead.
+14302 INFO  (coreLoadExecutor-78-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+14302 INFO  (searcherExecutor-80-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+14338 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ####initCore end
+14346 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[42 (1880135166657036288)]} 0 8
+14348 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[43 (1880135166667522048)]} 0 0
+14349 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[44 (1880135166667522049)]} 0 0
+14349 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[45 (1880135166668570624)]} 0 0
+14350 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[46 (1880135166669619200)]} 0 0
+14354 INFO  (searcherExecutor-80-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+14358 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{commit=} 0 7
+14361 INFO  (TEST-TestPseudoReturnFields.testAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAllRealFieldsRTG
+14369 INFO  (TEST-TestPseudoReturnFields.testAllRealFieldsRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166682202112)]} 0 7
+14370 INFO  (TEST-TestPseudoReturnFields.testAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=} status=0 QTime=0
+14371 INFO  (TEST-TestPseudoReturnFields.testAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=} status=0 QTime=0
+14372 INFO  (TEST-TestPseudoReturnFields.testAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=*} status=0 QTime=0
+14372 INFO  (TEST-TestPseudoReturnFields.testAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=*} status=0 QTime=0
+14373 INFO  (TEST-TestPseudoReturnFields.testAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAllRealFieldsRTG
+14376 INFO  (TEST-TestPseudoReturnFields.testFunctions-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFunctions
+14377 INFO  (TEST-TestPseudoReturnFields.testFunctions-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166696882176)]} 0 0
+14385 INFO  (TEST-TestPseudoReturnFields.testFunctions-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=log(val_i)&wt=xml} hits=5 status=0 QTime=7
+14386 INFO  (TEST-TestPseudoReturnFields.testFunctions-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=log(val_i),abs(val_i)&wt=xml} hits=5 status=0 QTime=0
+14387 INFO  (TEST-TestPseudoReturnFields.testFunctions-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=log(val_i)&fl=abs(val_i)&wt=xml} hits=5 status=0 QTime=0
+14388 INFO  (TEST-TestPseudoReturnFields.testFunctions-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFunctions
+14391 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testScoreAndExplicitRealFields
+14391 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166712610816)]} 0 0
+14399 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score,val_i&wt=xml} hits=5 status=0 QTime=7
+14400 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score&fl=val_i&wt=xml} hits=5 status=0 QTime=0
+14400 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_i&wt=xml} hits=5 status=0 QTime=0
+14401 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testScoreAndExplicitRealFields
+14404 INFO  (TEST-TestPseudoReturnFields.testFunctionsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFunctionsRTG
+14404 INFO  (TEST-TestPseudoReturnFields.testFunctionsRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166726242304)]} 0 0
+14405 INFO  (TEST-TestPseudoReturnFields.testFunctionsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=log(val_i),abs(val_i)} status=0 QTime=0
+14406 INFO  (TEST-TestPseudoReturnFields.testFunctionsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=log(val_i)&fl=abs(val_i)} status=0 QTime=0
+14422 INFO  (TEST-TestPseudoReturnFields.testFunctionsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=log(val_i),abs(val_i)} status=0 QTime=16
+14423 INFO  (TEST-TestPseudoReturnFields.testFunctionsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=log(val_i)&fl=abs(val_i)} status=0 QTime=0
+14423 INFO  (TEST-TestPseudoReturnFields.testFunctionsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFunctionsRTG
+14426 INFO  (TEST-TestPseudoReturnFields.testMovePk-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testMovePk
+14427 INFO  (TEST-TestPseudoReturnFields.testMovePk-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166750359552)]} 0 0
+14428 INFO  (TEST-TestPseudoReturnFields.testMovePk-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=oldid:id,id:newid,val_i,subject,ssto&wt=xml} hits=5 status=0 QTime=0
+14430 INFO  (TEST-TestPseudoReturnFields.testMovePk-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testMovePk
+14433 INFO  (TEST-TestPseudoReturnFields.testDocIdAugmenterRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testDocIdAugmenterRTG
+14434 INFO  (TEST-TestPseudoReturnFields.testDocIdAugmenterRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166756651008)]} 0 0
+14434 INFO  (TEST-TestPseudoReturnFields.testDocIdAugmenterRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=[docid]} status=0 QTime=0
+14436 INFO  (TEST-TestPseudoReturnFields.testDocIdAugmenterRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=[docid]} status=0 QTime=0
+14437 INFO  (TEST-TestPseudoReturnFields.testDocIdAugmenterRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testDocIdAugmenterRTG
+14440 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFunctionsAndScoreRTG
+14440 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166763991040)]} 0 0
+14441 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score&fl=log(val_i)&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14442 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score&fl=log(val_i),abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14442 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score,log(val_i)&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14443 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score,log(val_i),abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14446 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score&fl=log(val_i)&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=2
+14446 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score&fl=log(val_i),abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14447 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score,log(val_i)&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14448 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score,log(val_i),abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14448 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFunctionsAndScoreRTG
+14451 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testScoreAndAllRealFields
+14452 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166775525376)]} 0 0
+14453 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score,*&wt=xml} hits=5 status=0 QTime=0
+14453 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=*,score&wt=xml} hits=5 status=0 QTime=0
+14454 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testScoreAndAllRealFields
+14457 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFunctionsAndExplicitRTG
+14457 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicitRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166781816832)]} 0 0
+14458 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=log(val_i),val_i&wt=xml&id=42} status=0 QTime=0
+14459 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=log(val_i)&fl=val_i&wt=xml&id=42} status=0 QTime=0
+14461 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=log(val_i),val_i&wt=xml&id=99} status=0 QTime=2
+14462 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=log(val_i)&fl=val_i&wt=xml&id=99} status=0 QTime=0
+14462 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFunctionsAndExplicitRTG
+14465 INFO  (TEST-TestPseudoReturnFields.testAugmenters-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAugmenters
+14466 INFO  (TEST-TestPseudoReturnFields.testAugmenters-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166791254016)]} 0 0
+14467 INFO  (TEST-TestPseudoReturnFields.testAugmenters-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=[docid]&wt=xml} hits=5 status=0 QTime=0
+14467 INFO  (TEST-TestPseudoReturnFields.testAugmenters-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=[docid],[shard],[explain],x_alias:[value+v%3D10+t%3Dint]&q=*:*&rows=1} hits=5 status=0 QTime=0
+14468 INFO  (TEST-TestPseudoReturnFields.testAugmenters-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=[docid],[shard]&fl=[explain],x_alias:[value+v%3D10+t%3Dint]&q=*:*&rows=1} hits=5 status=0 QTime=0
+14469 INFO  (TEST-TestPseudoReturnFields.testAugmenters-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=[docid]&fl=[shard]&fl=[explain]&fl=x_alias:[value+v%3D10+t%3Dint]&q=*:*&rows=1} hits=5 status=0 QTime=0
+14469 INFO  (TEST-TestPseudoReturnFields.testAugmenters-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAugmenters
+14472 INFO  (TEST-TestPseudoReturnFields.testGlobsAndTransformerFieldRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobsAndTransformerFieldRTG
+14473 INFO  (TEST-TestPseudoReturnFields.testGlobsAndTransformerFieldRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166797545472)]} 0 0
+14473 INFO  (TEST-TestPseudoReturnFields.testGlobsAndTransformerFieldRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=val_*,x:[json+f%3Dssto]} status=0 QTime=0
+14474 INFO  (TEST-TestPseudoReturnFields.testGlobsAndTransformerFieldRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=val_*,x:[json+f%3Dssto]} status=0 QTime=0
+14474 INFO  (TEST-TestPseudoReturnFields.testGlobsAndTransformerFieldRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobsAndTransformerFieldRTG
+14477 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAugmentersGlobsExplicitAndScoreOhMy
+14478 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166802788352)]} 0 0
+14478 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id,[docid],score,subj*,[explain],val_*} hits=5 status=0 QTime=0
+14479 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id&fl=[docid]&fl=score&fl=subj*&fl=[explain]&fl=val_*} hits=5 status=0 QTime=0
+14486 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id,score,val_*,[explain],[docid],subj*} hits=5 status=0 QTime=0
+14487 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id&fl=score&fl=val_*&fl=[explain]&fl=[docid]&fl=subj*} hits=5 status=0 QTime=0
+14487 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id,subj*,[explain],[docid],score,val_*} hits=5 status=0 QTime=0
+14488 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id&fl=subj*&fl=[explain]&fl=[docid]&fl=score&fl=val_*} hits=5 status=0 QTime=0
+14489 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id,[explain],val_*,[docid],subj*,score} hits=5 status=0 QTime=0
+14490 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id&fl=[explain]&fl=val_*&fl=[docid]&fl=subj*&fl=score} hits=5 status=0 QTime=0
+14490 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=[docid],[explain],val_*,id,score,subj*} hits=5 status=0 QTime=0
+14491 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=[docid]&fl=[explain]&fl=val_*&fl=id&fl=score&fl=subj*} hits=5 status=0 QTime=0
+14492 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score,val_*,[explain],id,subj*,[docid]} hits=5 status=0 QTime=0
+14493 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score&fl=val_*&fl=[explain]&fl=id&fl=subj*&fl=[docid]} hits=5 status=0 QTime=0
+14493 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*,score,[explain],id,subj*,[docid]} hits=5 status=0 QTime=0
+14494 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*&fl=score&fl=[explain]&fl=id&fl=subj*&fl=[docid]} hits=5 status=0 QTime=0
+14495 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=[explain],[docid],score,val_*,id,subj*} hits=5 status=0 QTime=0
+14495 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=[explain]&fl=[docid]&fl=score&fl=val_*&fl=id&fl=subj*} hits=5 status=0 QTime=0
+14496 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score,[docid],[explain],id,val_*,subj*} hits=5 status=0 QTime=0
+14497 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score&fl=[docid]&fl=[explain]&fl=id&fl=val_*&fl=subj*} hits=5 status=0 QTime=0
+14497 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*,id,[docid],subj*,[explain],score} hits=5 status=0 QTime=0
+14498 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*&fl=id&fl=[docid]&fl=subj*&fl=[explain]&fl=score} hits=5 status=0 QTime=0
+14499 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score,[docid],id,[explain],val_*,subj*} hits=5 status=0 QTime=0
+14499 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score&fl=[docid]&fl=id&fl=[explain]&fl=val_*&fl=subj*} hits=5 status=0 QTime=0
+14500 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=[explain],score,id,[docid],subj*,val_*} hits=5 status=0 QTime=0
+14501 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=[explain]&fl=score&fl=id&fl=[docid]&fl=subj*&fl=val_*} hits=5 status=0 QTime=0
+14502 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*,[docid],[explain],id,score,subj*} hits=5 status=0 QTime=0
+14502 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*&fl=[docid]&fl=[explain]&fl=id&fl=score&fl=subj*} hits=5 status=0 QTime=0
+14504 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id,val_*,[docid],score,[explain],subj*} hits=5 status=0 QTime=0
+14505 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=id&fl=val_*&fl=[docid]&fl=score&fl=[explain]&fl=subj*} hits=5 status=0 QTime=0
+14505 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMy-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAugmentersGlobsExplicitAndScoreOhMy
+14509 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitNonStoredDocValues-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobsAndExplicitNonStoredDocValues
+14509 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitNonStoredDocValues-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166836342784)]} 0 0
+14510 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitNonStoredDocValues-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*,_version_&wt=xml} hits=5 status=0 QTime=0
+14510 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitNonStoredDocValues-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobsAndExplicitNonStoredDocValues
+14513 INFO  (TEST-TestPseudoReturnFields.testMultiValuedRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testMultiValuedRTG
+14514 INFO  (TEST-TestPseudoReturnFields.testMultiValuedRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166841585664)]} 0 0
+14515 INFO  (TEST-TestPseudoReturnFields.testMultiValuedRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&fl=val_ss:val_i,+val2_ss:10,+subject&wt=xml} status=0 QTime=0
+14527 INFO  (TEST-TestPseudoReturnFields.testMultiValuedRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&fl=val_ss:val_i,+val2_ss:10,+subject&wt=xml} status=0 QTime=5
+14527 INFO  (TEST-TestPseudoReturnFields.testMultiValuedRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testMultiValuedRTG
+14530 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScore-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobsAndScore
+14531 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScore-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166859411456)]} 0 0
+14532 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*,score&indent=true&wt=xml} hits=5 status=0 QTime=0
+14532 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=val_*,subj*,score&q=*:*&rows=1} hits=5 status=0 QTime=0
+14533 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=val_*&fl=subj*&fl=score&q=*:*&rows=1} hits=5 status=0 QTime=0
+14533 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=val_*&fl=subj*,score&q=*:*&rows=1} hits=5 status=0 QTime=0
+14534 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScore-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobsAndScore
+14537 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobRTGUncommittedFields
+14537 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166865702912)]} 0 0
+14538 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[7782 (-1880135166866751488)]} 0 0
+14539 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[7782 (1880135166866751489)]} 0 0
+14539 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7782&wt=xml} hits=0 status=0 QTime=0
+14540 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7782&fq=&wt=xml&fl=title,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=0
+14540 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7782&fq=&wt=xml&fl=tit*,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=0
+14543 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7782&fq=id:7782&wt=xml&fl=title,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=2
+14544 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=7782&fq=id:7782&wt=xml&fl=tit*,x:[json+f%3Dsource_s],unrelated_s:[value+v%3Dsynthetic]} status=0 QTime=0
+14544 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:7782&wt=xml} hits=0 status=0 QTime=0
+14545 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{delete=[7782 (-1880135166874091520)]} 0 0
+14545 INFO  (TEST-TestPseudoReturnFields.testGlobRTGUncommittedFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobRTGUncommittedFields
+14548 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScore-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAugmentersAndScore
+14549 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScore-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166877237248)]} 0 0
+14549 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=[docid],x_alias:[value+v%3D10+t%3Dint],score,s_alias:score&wt=xml} hits=5 status=0 QTime=0
+14550 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=[docid],x_alias:[value+v%3D10+t%3Dint],[explain],score&q=*:*&rows=1} hits=5 status=0 QTime=0
+14550 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=[docid]&fl=x_alias:[value+v%3D10+t%3Dint],[explain]&fl=score&q=*:*&rows=1} hits=5 status=0 QTime=0
+14551 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=[docid]&fl=x_alias:[value+v%3D10+t%3Dint]&fl=[explain]&fl=score&q=*:*&rows=1} hits=5 status=0 QTime=0
+14551 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScore-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAugmentersAndScore
+14554 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScore-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFunctionsAndScore
+14555 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScore-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166883528704)]} 0 0
+14555 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=log(val_i),score&wt=xml} hits=5 status=0 QTime=0
+14557 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=log(val_i)&fl=score&wt=xml} hits=5 status=0 QTime=0
+14557 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score,log(val_i),abs(val_i)&wt=xml} hits=5 status=0 QTime=0
+14558 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScore-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=score&fl=log(val_i)&fl=abs(val_i)&wt=xml} hits=5 status=0 QTime=0
+14558 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndScore-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFunctionsAndScore
+14561 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicit-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobsAndExplicit
+14562 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicit-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166890868736)]} 0 0
+14562 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicit-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*,id&wt=xml} hits=5 status=0 QTime=0
+14563 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicit-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=val_*,subj*,id&q=*:*&rows=1} hits=5 status=0 QTime=0
+14563 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicit-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=val_*&fl=subj*&fl=id&q=*:*&rows=1} hits=5 status=0 QTime=0
+14564 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicit-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=val_*&fl=subj*,id&q=*:*&rows=1} hits=5 status=0 QTime=0
+14564 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicit-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobsAndExplicit
+14567 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobsAndScoreRTG
+14568 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166897160192)]} 0 0
+14568 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=val_*,score} status=0 QTime=0
+14569 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*,subj*,score&id=42&wt=xml} status=0 QTime=0
+14569 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*&fl=score&id=42&wt=xml} status=0 QTime=0
+14570 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*,score&id=42&wt=xml} status=0 QTime=0
+14570 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=val_*,score} status=0 QTime=0
+14570 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*,subj*,score&id=99&wt=xml} status=0 QTime=0
+14571 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*&fl=score&id=99&wt=xml} status=0 QTime=0
+14571 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*,score&id=99&wt=xml} status=0 QTime=0
+14572 INFO  (TEST-TestPseudoReturnFields.testGlobsAndScoreRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobsAndScoreRTG
+14575 INFO  (TEST-TestPseudoReturnFields.testGlobs-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobs
+14575 INFO  (TEST-TestPseudoReturnFields.testGlobs-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166905548800)]} 0 0
+14576 INFO  (TEST-TestPseudoReturnFields.testGlobs-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*&wt=xml} hits=5 status=0 QTime=0
+14576 INFO  (TEST-TestPseudoReturnFields.testGlobs-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*,subj*,ss*} hits=5 status=0 QTime=0
+14577 INFO  (TEST-TestPseudoReturnFields.testGlobs-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*&fl=subj*,ss*} hits=5 status=0 QTime=0
+14577 INFO  (TEST-TestPseudoReturnFields.testGlobs-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*&fl=subj*&fl=ss*} hits=5 status=0 QTime=0
+14577 INFO  (TEST-TestPseudoReturnFields.testGlobs-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobs
+14581 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicit-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFunctionsAndExplicit
+14581 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicit-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166911840256)]} 0 0
+14582 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicit-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=log(val_i),val_i&wt=xml} hits=5 status=0 QTime=0
+14582 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicit-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=log(val_i)&fl=val_i&wt=xml} hits=5 status=0 QTime=0
+14582 INFO  (TEST-TestPseudoReturnFields.testFunctionsAndExplicit-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFunctionsAndExplicit
+14587 INFO  (TEST-TestPseudoReturnFields.testGlobsAndTransformerField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobsAndTransformerField
+14587 INFO  (TEST-TestPseudoReturnFields.testGlobsAndTransformerField-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166918131712)]} 0 0
+14588 INFO  (TEST-TestPseudoReturnFields.testGlobsAndTransformerField-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=val_*,x:[json+f%3Dssto]&wt=xml} hits=5 status=0 QTime=0
+14588 INFO  (TEST-TestPseudoReturnFields.testGlobsAndTransformerField-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobsAndTransformerField
+14591 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicit-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAugmentersAndExplicit
+14592 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicit-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166923374592)]} 0 0
+14592 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicit-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=id,[docid],[explain],x_alias:[value+v%3D10+t%3Dint]&q=*:*&rows=1} hits=5 status=0 QTime=0
+14593 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicit-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=id&fl=[docid],[explain],x_alias:[value+v%3D10+t%3Dint]&q=*:*&rows=1} hits=5 status=0 QTime=0
+14594 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicit-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={fl=id&fl=[docid]&fl=[explain]&fl=x_alias:[value+v%3D10+t%3Dint]&q=*:*&rows=1} hits=5 status=0 QTime=0
+14594 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicit-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAugmentersAndExplicit
+14597 INFO  (TEST-TestPseudoReturnFields.testAllRealFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAllRealFields
+14598 INFO  (TEST-TestPseudoReturnFields.testAllRealFields-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166928617472)]} 0 0
+14598 INFO  (TEST-TestPseudoReturnFields.testAllRealFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=&wt=xml} hits=5 status=0 QTime=0
+14599 INFO  (TEST-TestPseudoReturnFields.testAllRealFields-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&rows=1&fl=*&wt=xml} hits=5 status=0 QTime=0
+14599 INFO  (TEST-TestPseudoReturnFields.testAllRealFields-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAllRealFields
+14602 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobsAndExplicitRTG
+14603 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166933860352)]} 0 0
+14603 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=val_*,id} status=0 QTime=0
+14604 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*,subj*,id&id=42&wt=xml} status=0 QTime=0
+14604 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*&fl=id&id=42&wt=xml} status=0 QTime=0
+14605 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*,id&id=42&wt=xml} status=0 QTime=0
+14605 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=val_*,id} status=0 QTime=0
+14605 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*,subj*,id&id=99&wt=xml} status=0 QTime=0
+14606 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*&fl=id&id=99&wt=xml} status=0 QTime=0
+14606 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*,id&id=99&wt=xml} status=0 QTime=0
+14607 INFO  (TEST-TestPseudoReturnFields.testGlobsAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobsAndExplicitRTG
+14610 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAugmentersRTG
+14610 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166942248960)]} 0 0
+14611 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[shard],[explain],x_alias:[value+v%3D10+t%3Dint],abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14611 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[shard],abs(val_i)&fl=[explain],x_alias:[value+v%3D10+t%3Dint]&id=42&wt=xml} status=0 QTime=0
+14612 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[shard]&fl=[explain],x_alias:[value+v%3D10+t%3Dint]&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14613 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=[shard]&fl=[explain]&fl=x_alias:[value+v%3D10+t%3Dint]&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14619 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[shard],[explain],x_alias:[value+v%3D10+t%3Dint],abs(val_i)&id=99&wt=xml} status=0 QTime=5
+14619 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[shard],abs(val_i)&fl=[explain],x_alias:[value+v%3D10+t%3Dint]&id=99&wt=xml} status=0 QTime=0
+14620 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[shard]&fl=[explain],x_alias:[value+v%3D10+t%3Dint]&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14620 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=[shard]&fl=[explain]&fl=x_alias:[value+v%3D10+t%3Dint]&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14621 INFO  (TEST-TestPseudoReturnFields.testAugmentersRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAugmentersRTG
+14624 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAugmentersAndScoreRTG
+14625 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166956929024)]} 0 0
+14625 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=x_alias:[value+v%3D10+t%3Dint],score,abs(val_i),[docid]} status=0 QTime=0
+14626 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],x_alias:[value+v%3D10+t%3Dint],[explain],score,abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14626 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=x_alias:[value+v%3D10+t%3Dint],[explain]&fl=[docid],score,abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14627 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=x_alias:[value+v%3D10+t%3Dint]&fl=[explain]&fl=score&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14629 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=x_alias:[value+v%3D10+t%3Dint],score,abs(val_i),[docid]} status=0 QTime=2
+14630 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],x_alias:[value+v%3D10+t%3Dint],[explain],score,abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14630 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=x_alias:[value+v%3D10+t%3Dint],[explain]&fl=[docid],score,abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14631 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=x_alias:[value+v%3D10+t%3Dint]&fl=[explain]&fl=score&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14631 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndScoreRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAugmentersAndScoreRTG
+14634 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAugmentersGlobsExplicitAndScoreOhMyRTG
+14635 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135166967414784)]} 0 0
+14635 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[explain],score,val_*,[docid],subj*,id,abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14636 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[explain]&fl=score&fl=val_*&fl=[docid]&fl=subj*&fl=id&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14639 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[explain],score,val_*,[docid],subj*,id,abs(val_i)&id=99&wt=xml} status=0 QTime=2
+14639 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[explain]&fl=score&fl=val_*&fl=[docid]&fl=subj*&fl=id&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14640 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score,abs(val_i),[docid],id,val_*,[explain],subj*&id=42&wt=xml} status=0 QTime=0
+14640 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score&fl=abs(val_i)&fl=[docid]&fl=id&fl=val_*&fl=[explain]&fl=subj*&id=42&wt=xml} status=0 QTime=0
+14641 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score,abs(val_i),[docid],id,val_*,[explain],subj*&id=99&wt=xml} status=0 QTime=0
+14641 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=score&fl=abs(val_i)&fl=[docid]&fl=id&fl=val_*&fl=[explain]&fl=subj*&id=99&wt=xml} status=0 QTime=0
+14643 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=abs(val_i),[explain],score,[docid],id,subj*,val_*&id=42&wt=xml} status=0 QTime=0
+14644 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=abs(val_i)&fl=[explain]&fl=score&fl=[docid]&fl=id&fl=subj*&fl=val_*&id=42&wt=xml} status=0 QTime=0
+14644 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=abs(val_i),[explain],score,[docid],id,subj*,val_*&id=99&wt=xml} status=0 QTime=0
+14645 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=abs(val_i)&fl=[explain]&fl=score&fl=[docid]&fl=id&fl=subj*&fl=val_*&id=99&wt=xml} status=0 QTime=0
+14645 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=abs(val_i),[docid],[explain],subj*,id,val_*,score&id=42&wt=xml} status=0 QTime=0
+14646 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=abs(val_i)&fl=[docid]&fl=[explain]&fl=subj*&fl=id&fl=val_*&fl=score&id=42&wt=xml} status=0 QTime=0
+14646 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=abs(val_i),[docid],[explain],subj*,id,val_*,score&id=99&wt=xml} status=0 QTime=0
+14647 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=abs(val_i)&fl=[docid]&fl=[explain]&fl=subj*&fl=id&fl=val_*&fl=score&id=99&wt=xml} status=0 QTime=0
+14647 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],subj*,val_*,score,id,abs(val_i),[explain]&id=42&wt=xml} status=0 QTime=0
+14648 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=subj*&fl=val_*&fl=score&fl=id&fl=abs(val_i)&fl=[explain]&id=42&wt=xml} status=0 QTime=0
+14649 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],subj*,val_*,score,id,abs(val_i),[explain]&id=99&wt=xml} status=0 QTime=0
+14649 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=subj*&fl=val_*&fl=score&fl=id&fl=abs(val_i)&fl=[explain]&id=99&wt=xml} status=0 QTime=0
+14650 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id,subj*,[docid],[explain],abs(val_i),val_*,score&id=42&wt=xml} status=0 QTime=0
+14650 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id&fl=subj*&fl=[docid]&fl=[explain]&fl=abs(val_i)&fl=val_*&fl=score&id=42&wt=xml} status=0 QTime=0
+14651 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id,subj*,[docid],[explain],abs(val_i),val_*,score&id=99&wt=xml} status=0 QTime=0
+14651 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id&fl=subj*&fl=[docid]&fl=[explain]&fl=abs(val_i)&fl=val_*&fl=score&id=99&wt=xml} status=0 QTime=0
+14652 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*,subj*,score,id,[explain],[docid],abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14652 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*&fl=score&fl=id&fl=[explain]&fl=[docid]&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14653 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*,subj*,score,id,[explain],[docid],abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14654 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*&fl=score&fl=id&fl=[explain]&fl=[docid]&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14654 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[explain],score,abs(val_i),val_*,id,subj*&id=42&wt=xml} status=0 QTime=0
+14655 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=[explain]&fl=score&fl=abs(val_i)&fl=val_*&fl=id&fl=subj*&id=42&wt=xml} status=0 QTime=0
+14655 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[explain],score,abs(val_i),val_*,id,subj*&id=99&wt=xml} status=0 QTime=0
+14656 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=[explain]&fl=score&fl=abs(val_i)&fl=val_*&fl=id&fl=subj*&id=99&wt=xml} status=0 QTime=0
+14656 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[explain],score,val_*,id,subj*,abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14657 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=[explain]&fl=score&fl=val_*&fl=id&fl=subj*&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14657 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[explain],score,val_*,id,subj*,abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14658 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=[explain]&fl=score&fl=val_*&fl=id&fl=subj*&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14658 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[explain],score,id,subj*,val_*,abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14659 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=[explain]&fl=score&fl=id&fl=subj*&fl=val_*&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14659 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],[explain],score,id,subj*,val_*,abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14660 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=[explain]&fl=score&fl=id&fl=subj*&fl=val_*&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14660 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],score,abs(val_i),val_*,[explain],id,subj*&id=42&wt=xml} status=0 QTime=0
+14661 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=score&fl=abs(val_i)&fl=val_*&fl=[explain]&fl=id&fl=subj*&id=42&wt=xml} status=0 QTime=0
+14661 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid],score,abs(val_i),val_*,[explain],id,subj*&id=99&wt=xml} status=0 QTime=0
+14662 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=[docid]&fl=score&fl=abs(val_i)&fl=val_*&fl=[explain]&fl=id&fl=subj*&id=99&wt=xml} status=0 QTime=0
+14662 INFO  (TEST-TestPseudoReturnFields.testAugmentersGlobsExplicitAndScoreOhMyRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAugmentersGlobsExplicitAndScoreOhMyRTG
+14665 INFO  (TEST-TestPseudoReturnFields.testGlobsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testGlobsRTG
+14666 INFO  (TEST-TestPseudoReturnFields.testGlobsRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135167000969216)]} 0 0
+14667 INFO  (TEST-TestPseudoReturnFields.testGlobsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=val_*} status=0 QTime=0
+14667 INFO  (TEST-TestPseudoReturnFields.testGlobsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*,subj*,ss*&id=42&wt=xml} status=0 QTime=0
+14668 INFO  (TEST-TestPseudoReturnFields.testGlobsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*,ss*&id=42&wt=xml} status=0 QTime=0
+14668 INFO  (TEST-TestPseudoReturnFields.testGlobsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=val_*} status=0 QTime=0
+14669 INFO  (TEST-TestPseudoReturnFields.testGlobsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*,subj*,ss*&id=99&wt=xml} status=0 QTime=0
+14669 INFO  (TEST-TestPseudoReturnFields.testGlobsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=val_*&fl=subj*,ss*&id=99&wt=xml} status=0 QTime=0
+14669 INFO  (TEST-TestPseudoReturnFields.testGlobsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testGlobsRTG
+14673 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testScoreAndExplicitRealFieldsRTG
+14673 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFieldsRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135167008309248)]} 0 0
+14674 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=score,val_i} status=0 QTime=0
+14675 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=score,val_i} status=0 QTime=0
+14675 INFO  (TEST-TestPseudoReturnFields.testScoreAndExplicitRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testScoreAndExplicitRealFieldsRTG
+14678 INFO  (TEST-TestPseudoReturnFields.testMultiValued-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testMultiValued
+14679 INFO  (TEST-TestPseudoReturnFields.testMultiValued-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135167014600704)]} 0 0
+14700 INFO  (TEST-TestPseudoReturnFields.testMultiValued-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=*:*&fq=id:42&fl=id,score&wt=xml} hits=1 status=0 QTime=20
+14700 INFO  (TEST-TestPseudoReturnFields.testMultiValued-seed#[5188C0DE]) [] o.a.s.c.S.Request path=null params={q=id:42&fl=val_ss:val_i,+val2_ss:10&wt=xml} hits=1 status=0 QTime=0
+14701 INFO  (TEST-TestPseudoReturnFields.testMultiValued-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&fl=val_ss:val_i,+val2_ss:10&wt=xml} status=0 QTime=0
+14701 INFO  (TEST-TestPseudoReturnFields.testMultiValued-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testMultiValued
+14704 INFO  (TEST-TestPseudoReturnFields.testFilterAndOneRealFieldRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testFilterAndOneRealFieldRTG
+14705 INFO  (TEST-TestPseudoReturnFields.testFilterAndOneRealFieldRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135167041863680)]} 0 0
+14712 INFO  (TEST-TestPseudoReturnFields.testFilterAndOneRealFieldRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={ids=42,99&wt=xml&fl=id,val_i&fq={!field+f%3D'subject'+v%3D$my_var}&my_var=uncommitted} status=0 QTime=7
+14713 INFO  (TEST-TestPseudoReturnFields.testFilterAndOneRealFieldRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testFilterAndOneRealFieldRTG
+14716 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testScoreAndAllRealFieldsRTG
+14717 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFieldsRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135167054446592)]} 0 0
+14718 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=score,*} status=0 QTime=0
+14719 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=score,*} status=0 QTime=0
+14719 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=42&wt=xml&fl=*,score} status=0 QTime=0
+14720 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={id=99&wt=xml&fl=*,score} status=0 QTime=0
+14721 INFO  (TEST-TestPseudoReturnFields.testScoreAndAllRealFieldsRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testScoreAndAllRealFieldsRTG
+14724 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Starting testAugmentersAndExplicitRTG
+14725 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicitRTG-seed#[5188C0DE]) [ x:collection1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={{params(wt=xml),defaults(wt=xml)}}{add=[99 (1880135167061786624)]} 0 0
+14725 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id,[docid],[explain],x_alias:[value+v%3D10+t%3Dint],abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14727 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id,[docid],abs(val_i)&fl=[explain],x_alias:[value+v%3D10+t%3Dint]&id=42&wt=xml} status=0 QTime=0
+14728 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id&fl=[docid]&fl=[explain]&fl=x_alias:[value+v%3D10+t%3Dint]&fl=abs(val_i)&id=42&wt=xml} status=0 QTime=0
+14731 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id,[docid],[explain],x_alias:[value+v%3D10+t%3Dint],abs(val_i)&id=99&wt=xml} status=0 QTime=2
+14731 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id,[docid],abs(val_i)&fl=[explain],x_alias:[value+v%3D10+t%3Dint]&id=99&wt=xml} status=0 QTime=0
+14732 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.c.S.Request path=/get params={fl=id&fl=[docid]&fl=[explain]&fl=x_alias:[value+v%3D10+t%3Dint]&fl=abs(val_i)&id=99&wt=xml} status=0 QTime=0
+14732 INFO  (TEST-TestPseudoReturnFields.testAugmentersAndExplicitRTG-seed#[5188C0DE]) [] o.a.s.SolrTestCaseJ4 ###Ending testAugmentersAndExplicitRTG
+14732 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###deleteCore
+14732 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1729618322
+14733 INFO  (coreCloseExecutor-86-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@cff543e collection1
+14733 INFO  (coreCloseExecutor-86-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close() .
+Oct 27, 2026 1:43:40 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+14742 INFO  (SUITE-TestPseudoReturnFields-seed#[5188C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-7 after muting 0 log messages
+]]></system-err>
+</testsuite>
