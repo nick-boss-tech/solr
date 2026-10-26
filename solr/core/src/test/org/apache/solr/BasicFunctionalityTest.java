@@ -931,7 +931,8 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
         for (String selection : new String[] {"source_s", "source_*"}) {
           try (SolrQueryRequest req =
               req(
-                  "q", "id:7783 AND title:keyword",
+                  "q", "title:keyword",
+                  "fq", "id:7783",
                   "fl", selection,
                   "hl", "true",
                   "hl.method", method,
@@ -956,11 +957,8 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
             assertUnloadedLazyField(doc, "unrelated_s");
             NamedList<?> highlights = (NamedList<?>) rsp.getValues().get("highlighting");
             NamedList<?> highlightedDoc = (NamedList<?>) highlights.get("7783");
-            if (method.equals("original")) {
-              // unified returns no snippets for this document in this harness, on base too
-              assertArrayEquals(
-                  new String[] {"<em>keyword</em>"}, (String[]) highlightedDoc.get("title"));
-            }
+            assertArrayEquals(
+                new String[] {"<em>keyword</em>"}, (String[]) highlightedDoc.get("title"));
             assertNull(
                 BaseTestHarness.validateXPath(
                     req.getResponseWriter().writeToString(req, rsp),
@@ -971,6 +969,49 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
       }
     } finally {
       assertU(delI("7783"));
+      assertU(commit());
+    }
+  }
+
+  @Test
+  public void testGlobHighlightSnippets() {
+    assertU(
+        adoc(
+            "id", "7784",
+            "title", "keyword",
+            "source_s", "source",
+            "unrelated_s", "unrelated"));
+    assertU(commit());
+
+    try {
+      for (String method : new String[] {"original", "unified"}) {
+        for (boolean explicitQuery : new boolean[] {false, true}) {
+          for (String weightMatches : new String[] {"true", "false"}) {
+            for (String selection : new String[] {"source_s", "source_*", "*"}) {
+              ModifiableSolrParams params =
+                  params(
+                      "q", explicitQuery ? "id:7784" : "title:keyword",
+                      "fq", "id:7784",
+                      "fl", selection,
+                      "hl", "true",
+                      "hl.method", method,
+                      "hl.weightMatches", weightMatches,
+                      "hl.fl", "title");
+              if (explicitQuery) {
+                params.set("hl.q", "title:keyword");
+              }
+              assertQ(
+                  req(params),
+                  "//result[@numFound='1']",
+                  "//result/doc/*[@name='source_s'][normalize-space(.)='source']",
+                  "//lst[@name='highlighting']/lst[@name='7784']/arr[@name='title']"
+                      + "/str[.='<em>keyword</em>']");
+            }
+          }
+        }
+      }
+    } finally {
+      assertU(delI("7784"));
       assertU(commit());
     }
   }
