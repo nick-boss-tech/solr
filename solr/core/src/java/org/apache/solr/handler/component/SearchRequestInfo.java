@@ -75,7 +75,10 @@ public record SearchRequestInfo(
     if (cpuTimes.isEmpty() || !(cpuTimes.getLast() instanceof Long cpuTime)) {
       return null;
     }
-    if (distributed && rsp.getToLog().get(ThreadCpuTimer.LOCAL_CPU_TIME) instanceof Long local) {
+    // Without a published shard total, the header already contains the local CPU fallback.
+    if (distributed
+        && rsp.getToLog().get(ThreadCpuTimer.CPU_TIME) instanceof Long
+        && rsp.getToLog().get(ThreadCpuTimer.LOCAL_CPU_TIME) instanceof Long local) {
       return cpuTime + local;
     }
     return cpuTime;

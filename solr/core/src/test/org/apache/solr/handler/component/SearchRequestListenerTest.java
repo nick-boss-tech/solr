@@ -22,6 +22,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
+import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.SolrQuery;
@@ -30,7 +31,10 @@ import org.apache.solr.client.solrj.request.V2Request;
 import org.apache.solr.client.solrj.response.InputStreamResponseParser;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.cloud.SolrCloudTestCase;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.ShardParams;
 import org.apache.solr.common.util.NamedList;
@@ -113,6 +117,59 @@ public class SearchRequestListenerTest extends SolrCloudTestCase {
     query(COLLECTION, "*:*");
     assertEquals(1, events.size());
     assertEquals(cluster.getJettySolrRunner(0).getNodeName(), events.peek().node());
+  }
+
+  @Test
+  public void testDistributedSubQueriesNotReported() throws Exception {
+    assertSubQueriesNotReported(true);
+  }
+
+  @Test
+  public void testLocalSubQueriesNotReported() throws Exception {
+    assertSubQueriesNotReported(false);
+  }
+
+  private void assertSubQueriesNotReported(boolean distributed) throws Exception {
+    ModifiableSolrParams params = new ModifiableSolrParams();
+    params.set("q", "*:*");
+    params.set("distrib", distributed);
+    params.set("distrib.singlePass", false);
+    params.set("fl", "id,child:[subquery]");
+    params.set("child.q", "{!term f=id v=$row.id}");
+    params.set("child.fl", "id");
+    params.set("child.distrib", false);
+    QueryResponse rsp = new QueryRequest(params).process(nodeClient(), COLLECTION);
+    assertFalse(rsp.getResults().isEmpty());
+    if (distributed) {
+      assertEquals(3, rsp.getResults().getNumFound());
+    }
+    for (SolrDocument doc : rsp.getResults()) {
+      SolrDocumentList children = (SolrDocumentList) doc.getFieldValue("child");
+      assertEquals(1, children.getNumFound());
+      assertEquals(doc.getFieldValue("id"), children.getFirst().getFieldValue("id"));
+    }
+    assertEquals(1, events.size());
+    assertEquals(cluster.getJettySolrRunner(0).getNodeName(), events.peek().node());
+  }
+
+  @Test
+  public void testTopLevelEmbeddedSearchReported() throws Exception {
+    JettySolrRunner jetty = cluster.getJettySolrRunner(0);
+    String coreName =
+        getCollectionState(COLLECTION)
+            .replicaStream()
+            .filter(replica -> replica.getNodeName().equals(jetty.getNodeName()))
+            .map(Replica::getCoreName)
+            .findFirst()
+            .orElseThrow();
+    try (SolrClient client = new EmbeddedSolrServer(jetty.getCoreContainer(), coreName)) {
+      QueryResponse rsp =
+          new QueryRequest(new SolrQuery("*:*").setParam("distrib", false)).process(client);
+      assertFalse(rsp.getResults().isEmpty());
+      assertEquals(1, events.size());
+      assertEquals(jetty.getNodeName(), events.peek().node());
+      assertEquals(0, events.peek().info().shardCount());
+    }
   }
 
   @Test
@@ -210,6 +267,15 @@ public class SearchRequestListenerTest extends SolrCloudTestCase {
     long shardCpuTime = (Long) rsp.getResponseHeader().get(ThreadCpuTimer.CPU_TIME);
     long localCpuTime = (Long) info.rsp().getToLog().get(ThreadCpuTimer.LOCAL_CPU_TIME);
     assertEquals(Long.valueOf(shardCpuTime + localCpuTime), info.cpuTimeMs());
+
+    expectThrows(SolrException.class, () -> query(cpuCollection, "id:("));
+    assertEquals(1, events.size());
+    SearchRequestInfo failed = events.poll().info();
+    assertEquals(NUM_SHARDS, failed.shardCount());
+    assertNotNull(failed.failure());
+    assertNull(failed.rsp().getToLog().get(ThreadCpuTimer.CPU_TIME));
+    assertEquals(
+        failed.rsp().getToLog().get(ThreadCpuTimer.LOCAL_CPU_TIME), failed.cpuTimeMs());
     CollectionAdminRequest.deleteCollection(cpuCollection).process(cluster.getSolrClient());
   }
 

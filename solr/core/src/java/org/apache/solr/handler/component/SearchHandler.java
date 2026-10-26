@@ -65,6 +65,7 @@ import org.apache.solr.pkg.PackageAPI;
 import org.apache.solr.pkg.PackageListeners;
 import org.apache.solr.pkg.SolrPackageLoader;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.request.SolrRequestInfo;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.search.CursorMark;
 import org.apache.solr.search.QueryLimits;
@@ -154,6 +155,7 @@ public class SearchHandler extends RequestHandlerBase
     List<SearchRequestListener> listeners = cc == null ? List.of() : cc.getSearchRequestListeners();
     if (listeners.isEmpty()
         || !notifiesSearchRequestListeners()
+        || SolrRequestInfo.isNestedRequest()
         || req.getParams().getBool(ShardParams.IS_SHARD, false)) {
       return;
     }

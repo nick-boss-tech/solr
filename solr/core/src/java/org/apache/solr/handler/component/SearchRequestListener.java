@@ -18,8 +18,8 @@ package org.apache.solr.handler.component;
 
 /**
  * Notified after a top-level search request completes on the node that coordinated it. Shard
- * sub-requests, real-time get and export are not reported. Implementations must be fast and must
- * not throw.
+ * sub-requests, nested requests, real-time get and export are not reported. Implementations must be
+ * fast and must not throw.
  *
  * @see org.apache.solr.core.CoreContainer#getSearchRequestListeners()
  * @lucene.experimental
