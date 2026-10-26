@@ -17,3 +17,7 @@ Runner: `/workspace/gates/logs/vm6/SOLR-10928-pr5229-fielded-query-round-2/run-f
 Heartbeat: 2026-10-26T01:20:00Z
 
 Result: pending; the gate is running.
+
+Heartbeat: 2026-10-26T02:56:08Z
+
+Result: 2026-10-26T01:43:00Z: first run (`/workspace/gates/logs/vm6/SOLR-10928-pr5229-fielded-query-round-2/runner.log`, evidence under `/tmp/solr-10928-fielded-proof.s6Fu1I`) reached the end of the recipe at head `5275653c66`: tidy 0, head tests passed both seeds via the runner's XML checker, base failed as expected on both seeds with the runner's XML checker passing. Not conclusive as a receipt: `/tmp` was cleared afterwards, so the XML, logs and manifest are gone, and step exit codes were inferred from the script flow. Rerun with identical head, base, seeds and recipe; the only change is the evidence root moved to `/workspace/tmp`, recorded here before the run.
