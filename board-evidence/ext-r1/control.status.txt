@@ -1,0 +1,4 @@
+ext-control-r1 rc=0 end=2026-10-26T02:37:35Z
+evidence_source=/workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-tmp/ext-probe-control-1835144162670924591/control.log
+00c74051eb13390253e6b780d6e703f8fb6fcd093833d36c4968d0e5d6a39b7c  /workspace/gates/gates-vm2/ext-pair-r1/control/evidence.log
+control_check=CLEAN crc=0

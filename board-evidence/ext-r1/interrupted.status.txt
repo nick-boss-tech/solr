@@ -1,0 +1,3 @@
+ext-interrupted-r1 rc=0 end=2026-10-26T02:39:34Z
+evidence_source=/workspace/worktrees/teardown-ext-r1/solr/solrj-jetty/build/tmp/tests-tmp/ext-probe-interrupted-15976070676561883740/interrupted.log
+f1b9cb939bd3887e0094b269e30dd51b38694a52f48a4bcf7376a0591e9c2113  /workspace/gates/gates-vm2/ext-pair-r1/interrupted/evidence.log

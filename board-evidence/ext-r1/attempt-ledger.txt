@@ -1,0 +1,4 @@
+driver pid=27422 started=2026-10-26T02:35:24Z
+attempt ext-control-r1 arm=control test=testExternalExecutorCloseProbeControl pid=27422 start=2026-10-26T02:35:24Z runner=/workspace/gates/gates-vm2/pool-bin/sweep-run.sh
+attempt ext-interrupted-r1 arm=interrupted test=testExternalExecutorCloseProbeInterrupted pid=27422 start=2026-10-26T02:37:35Z runner=/workspace/gates/gates-vm2/pool-bin/sweep-run.sh
+end pair driver 2026-10-26T02:39:34Z
