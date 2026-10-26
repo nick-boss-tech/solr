@@ -50,13 +50,13 @@ class LicenseHeadersTest(unittest.TestCase):
         self.write(".gitignore", "out/\nbuild/\n.gradle/\n")
         self.write("Old.java", "class Old {}\n")
         for name in ("a", "b"):
-            (self.root / name).mkdir()
+            self.write(f"{name}/build.gradle", "// Fixture subproject.\n")
         self.write("build.gradle", """
 tasks.register('tidy')
 subprojects { prj ->
   def formatting = tasks.register('spotlessJava') {
     doLast {
-      def source = file('src/Probe.java')
+      def source = prj.file('src/Probe.java')
       if (source.exists() && !source.getText('UTF-8').startsWith('/*\\n * Licensed to')) {
         throw new GradleException('formatting ran before header insertion: ' + prj.path)
       }
