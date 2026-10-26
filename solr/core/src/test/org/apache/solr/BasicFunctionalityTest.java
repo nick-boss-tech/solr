@@ -879,9 +879,9 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
                   "xml",
                   "fl",
                   selection + ",x:[json f=source_s],unrelated_s:[value v=synthetic]"),
-              "//doc/*[@name='title'][.='keyword']",
-              "//doc/*[@name='x'][.='source']",
-              "//doc/*[@name='unrelated_s'][.='synthetic']",
+              "//doc/*[@name='title'][normalize-space(.)='keyword']",
+              "//doc/*[@name='x'][normalize-space(.)='source']",
+              "//doc/*[@name='unrelated_s'][normalize-space(.)='synthetic']",
               "//doc[count(*)=3]");
 
           Document doc = fetcher.getDocumentCache().get(docId);
@@ -895,14 +895,14 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
       fetcher.getDocumentCache().clear();
       assertQ(
           reqWithPath("/get", "id", "7781", "wt", "xml", "fl", "*"),
-          "//doc/*[@name='title'][.='keyword']",
-          "//doc/*[@name='source_s'][.='source']",
-          "//doc/*[@name='unrelated_s'][.='unrelated']");
+          "//doc/*[@name='title'][normalize-space(.)='keyword']",
+          "//doc/*[@name='source_s'][normalize-space(.)='source']",
+          "//doc/*[@name='unrelated_s'][normalize-space(.)='unrelated']");
 
       fetcher.getDocumentCache().clear();
       assertQ(
           reqWithPath("/get", "id", "7781", "wt", "xml", "fl", "unrelated_s:[value v=synthetic]"),
-          "//doc/*[@name='unrelated_s'][.='synthetic']",
+          "//doc/*[@name='unrelated_s'][normalize-space(.)='synthetic']",
           "//doc[count(*)=1]");
       Document doc = fetcher.getDocumentCache().get(docId);
       assertNotNull(doc);
@@ -961,7 +961,7 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
             assertNull(
                 BaseTestHarness.validateXPath(
                     req.getResponseWriter().writeToString(req, rsp),
-                    "//result/doc/*[@name='source_s'][.='source']",
+                    "//result/doc/*[@name='source_s'][normalize-space(.)='source']",
                     "//result/doc[count(*)=1]"));
           }
         }

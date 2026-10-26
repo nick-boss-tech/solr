@@ -529,9 +529,9 @@ public class TestPseudoReturnFields extends SolrTestCaseJ4 {
                   "xml",
                   "fl",
                   selection + ",x:[json f=source_s],unrelated_s:[value v=synthetic]"),
-              "//doc/*[@name='title'][.='keyword']",
-              "//doc/*[@name='x'][.='source']",
-              "//doc/*[@name='unrelated_s'][.='synthetic']",
+              "//doc/*[@name='title'][normalize-space(.)='keyword']",
+              "//doc/*[@name='x'][normalize-space(.)='source']",
+              "//doc/*[@name='unrelated_s'][normalize-space(.)='synthetic']",
               "//doc[count(*)=3]");
         }
       }
