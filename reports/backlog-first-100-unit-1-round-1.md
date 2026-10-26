@@ -42,6 +42,18 @@ Method: ticket text and comments read from JIRA REST (2026-10-26); code read in 
 
 Reading: code reading is viable and gives a citable basis for about 2 of 5 (SOLR-2420, SOLR-2516, both as design requests). One (SOLR-2855) looks unsafe to close. One (SOLR-3008) is intentional in code but disputed. One is inconclusive. For the 105 pool, expect roughly 40% to be citable and the rest needing a maintainer call. This is a 5-ticket sample, not a rate.
 
+## Second sample: 5 more ticket-text records, same method
+
+| Key | Ticket asks | What the code shows | Closable as not-a-bug? |
+|---|---|---|---|
+| SOLR-3407 | `fl` with digit-leading names returns odd output | No digit-handling found in `ReturnFields` on a quick grep. A commenter ties it to SOLR-2444 (parsing side effect) | Inconclusive. Needs a fresh repro |
+| SOLR-3473 | distributed dedup with non-uniqueKey signatureField | `SignatureUpdateProcessorFactory.java:92` and `:100` reject unsafe combinations in SolrCloud. The ticket's own latest comment says safe use needs those constraints | Yes, as "guarded by config check on main"; cite lines 92 and 100 |
+| SOLR-3539 | rethink `softCommit`/`openSearcher` on commit | Both parameters exist (`UpdateRequestHandler.java:56`). The ticket is a design request | Yes, as a design request |
+| SOLR-3676 | lowercased uniqueKey allows duplicates on update | The ulog keys updates by the indexed id (`UpdateLog.java:866`). Did not confirm the mismatch in the code path. A 2021 commenter reports it still happening | No. Looks like a possible real bug; needs a repro |
+| SOLR-3721 | concurrent recoveries for the same shard | `ZkController.java:1516-1521` waits on a recovery future, which suggests a guard, but I did not confirm it covers this path. The last comment suggests close | Inconclusive |
+
+Reading after 10 tickets: code gives a citable basis for about 4 of 10 (SOLR-2420, SOLR-2516, SOLR-3473, SOLR-3539), counting design requests as citable. Two look unsafe or possibly real (SOLR-2855, SOLR-3676), and SOLR-3008 is disputed. The rest are inconclusive. The sample is small, so the 40% estimate from round 1 holds only loosely.
+
 ## Not done
 
 - No drafts filled, no live Jira checks run for this unit.
