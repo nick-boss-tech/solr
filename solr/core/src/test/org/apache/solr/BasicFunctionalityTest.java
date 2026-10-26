@@ -1053,8 +1053,7 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
       assertUnloadedLazyField(cached, "unrelated_s");
 
       assertQ(
-          reqWithPath(
-              "/get", "id", "7785", "wt", "xml", "fl", "tit*,unrelated_s:source_s"),
+          reqWithPath("/get", "id", "7785", "wt", "xml", "fl", "tit*,unrelated_s:source_s"),
           "//doc/*[@name='title'][normalize-space(.)='keyword']",
           "//doc/*[@name='unrelated_s'][normalize-space(.)='source']",
           "//doc[count(*)=2]");
@@ -1092,11 +1091,16 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
           for (boolean shard : new boolean[] {false, true}) {
             try (SolrQueryRequest req =
                 req(
-                    "q", "batch_s:pr5188_prefetch_boundary",
-                    "rows", Integer.toString(rows),
-                    "isShard", Boolean.toString(shard),
-                    "hl", "false",
-                    "fl", selection)) {
+                    "q",
+                    "batch_s:pr5188_prefetch_boundary",
+                    "rows",
+                    Integer.toString(rows),
+                    "isShard",
+                    Boolean.toString(shard),
+                    "hl",
+                    "false",
+                    "fl",
+                    selection)) {
               SolrDocumentFetcher fetcher = req.getSearcher().getDocFetcher();
               assertTrue(fetcher.isLazyFieldLoadingEnabled());
               fetcher.getDocumentCache().clear();
