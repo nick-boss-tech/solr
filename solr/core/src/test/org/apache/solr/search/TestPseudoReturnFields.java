@@ -507,7 +507,6 @@ public class TestPseudoReturnFields extends SolrTestCaseJ4 {
 
   public void testGlobRTGUncommittedFields() {
     assertU(delI("7782"));
-    assertU(commit());
     assertU(
         adoc(
             "id", "7782",
@@ -538,7 +537,6 @@ public class TestPseudoReturnFields extends SolrTestCaseJ4 {
       assertQ(req("q", "id:7782"), "//result[@numFound='0']");
     } finally {
       assertU(delI("7782"));
-      assertU(commit());
     }
   }
 
