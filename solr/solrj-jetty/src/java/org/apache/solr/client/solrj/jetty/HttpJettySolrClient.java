@@ -347,6 +347,7 @@ public class HttpJettySolrClient extends HttpSolrClient {
   public void close() {
     // we wait for async requests, so far devs don't want to give sugar for this
     asyncTracker.waitForComplete();
+    boolean interrupted = Thread.interrupted();
     try {
       if (closeClient) {
         httpClient.stop();
@@ -363,8 +364,14 @@ public class HttpJettySolrClient extends HttpSolrClient {
     } catch (Exception e) {
       throw new RuntimeException("Exception on closing client", e);
     } finally {
-      if (shutdownExecutor) {
-        ExecutorUtil.shutdownAndAwaitTermination(executor);
+      try {
+        if (shutdownExecutor) {
+          ExecutorUtil.shutdownAndAwaitTermination(executor);
+        }
+      } finally {
+        if (interrupted) {
+          Thread.currentThread().interrupt();
+        }
       }
     }
     assert ObjectReleaseTracker.release(this);
