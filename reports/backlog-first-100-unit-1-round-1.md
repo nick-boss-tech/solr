@@ -1,6 +1,6 @@
 # Unit 1 report: closure-not-a-bug, records 1 to 25 (vm5, round 1, 2026-10-26)
 
-Status: PARTIAL. No drafts filled. The unit cannot deliver 25 drafts as the family template is written. Decision needed from the owner (rung 5).
+Status: PARTIAL. No drafts filled. The 105 ticket-text records have not been code-checked; a 5-ticket sample was checked (below). Decision needed from the owner (rung 5).
 
 ## What was screened
 
@@ -27,6 +27,20 @@ About 11 records have a code or ruling basis that the template can cite honestly
 Choose one:
 1. Keep the template as written. Then Unit 1 has about 11 to 20 fillable drafts and the rest must be dropped from the pack.
 2. Change the template for the ticket-text basis: a closure that says "closing as not a bug on the ticket text and the existing maintainer discussion, with no fresh code check." Then all 125 are fillable after a live check. That changes what the comment says, so it's the owner's call.
+
+## Sample: 5 ticket-text records, code read against apache/main `b73f03976fa`
+
+Method: ticket text and comments read from JIRA REST (2026-10-26); code read in `solr/core/src/java/org/apache/solr` on main.
+
+| Key | Ticket asks | What the code shows | Closable as not-a-bug? |
+|---|---|---|---|
+| SOLR-1557 | shards param: whitespace and multivalued | `HttpShardHandler.prepDistributed` reads `params.get(SHARDS)` (line 473); the split step was not located in this round | Inconclusive |
+| SOLR-2420 | TV component response format | `TermVectorComponent` still builds a NamedList per doc (lines 134, 265): the format is as described | Yes, as a format-change request; cite line 134 |
+| SOLR-2516 | stop caching searchers | Searchers are held and cached on `SolrCore` (`SolrCore.java`, `SolrIndexSearcher` line 614): the behavior is as described | Yes, as a design request; not a bug |
+| SOLR-2855 | huge range facets exhaust memory (overflow was in the client) | No cap on bucket count found in `FacetRangeProcessor`/`FacetRange` (grep for max/limit/too many). Server-side unbounded allocation may still be there | No. Needs maintainer call before any closure |
+| SOLR-3008 | edismax pf with a quoted subphrase "makes no sense" | `ExtendedDismaxQParser.java:308` drops phrase clauses from pf shingling on purpose | Partly: the behavior is intentional in code, but the ticket disputes the design. Maintainer call |
+
+Reading: code reading is viable and gives a citable basis for about 2 of 5 (SOLR-2420, SOLR-2516, both as design requests). One (SOLR-2855) looks unsafe to close. One (SOLR-3008) is intentional in code but disputed. One is inconclusive. For the 105 pool, expect roughly 40% to be citable and the rest needing a maintainer call. This is a 5-ticket sample, not a rate.
 
 ## Not done
 
