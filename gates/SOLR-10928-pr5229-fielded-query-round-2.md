@@ -1,6 +1,6 @@
 # Gate: SOLR-10928 / PR 5229 fielded-query regression and matched proof, round 2
 
-Status: CLAIMED
+Status: DONE
 Tags: gate
 Intended host: Nick's Linux host or any capable Linux gate host with JDK 21, Python 3, Git and flock
 
