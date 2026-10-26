@@ -1,0 +1,129 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :build-infra:compileJava UP-TO-DATE
+> Task :build-infra:pluginDescriptors UP-TO-DATE
+> Task :build-infra:processResources UP-TO-DATE
+> Task :build-infra:classes UP-TO-DATE
+> Task :build-infra:jar UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :checkJdkInternalsExportedToGradle
+> Task :solr:solrj-jetty:validateSourcePatterns
+> Task :gitStatus
+> Task :solr:solrj:processResources UP-TO-DATE
+> Task :solr:solrj:processTestResources UP-TO-DATE
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:api:compileJava UP-TO-DATE
+> Task :solr:api:classes UP-TO-DATE
+> Task :solr:api:resolve UP-TO-DATE
+> Task :solr:solrj-jetty:processTestResources
+> Task :solr:api:jar
+> Task :solr:core:processResources
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/teardown-final-r1/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+
+> Task :solr:solrj-streaming:processResources
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:processResources
+> Task :solr:modules:cross-dc:processResources NO-SOURCE
+> Task :solr:modules:opentelemetry:processResources NO-SOURCE
+> Task :solr:modules:analysis-extras:processResources NO-SOURCE
+> Task :solr:solrj-jetty:validateLogCalls
+
+> Task :solr:solrj:openApiGenerate
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/teardown-final-r1/solr/solrj/build/generated
+
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-streaming:compileJava UP-TO-DATE
+> Task :solr:solrj-zookeeper:compileJava UP-TO-DATE
+> Task :solr:solrj:classes
+> Task :solr:solrj-jetty:ecjLintMain
+> Task :solr:solrj-jetty:compileJava UP-TO-DATE
+> Task :solr:solrj:jar
+> Task :solr:solrj-jetty:classes UP-TO-DATE
+> Task :solr:solrj-jetty:forbiddenApisMain
+> Task :solr:solrj-jetty:jar
+> Task :solr:solrj-streaming:classes
+> Task :solr:core:compileJava UP-TO-DATE
+> Task :solr:test-framework:compileJava UP-TO-DATE
+> Task :solr:solrj-streaming:jar
+> Task :solr:core:classes
+> Task :solr:core:jar
+> Task :solr:solrj-zookeeper:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:jar
+> Task :solr:test-framework:classes
+
+> Task :solr:solrj:compileTestJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:test-framework:jar
+> Task :solr:solrj:testClasses
+> Task :solr:solrj:testJar UP-TO-DATE
+> Task :solr:solrj-jetty:ecjLintTest
+> Task :solr:solrj-jetty:ecjLint
+> Task :solr:solrj-jetty:compileTestJava UP-TO-DATE
+> Task :solr:solrj-jetty:testClasses
+
+> Task :solr:solrj-jetty:forbiddenApisTest
+Bundled signatures 'commons-io-unsafe-2.22.0' not found, choosing next lower available signature: commons-io-unsafe-2.20.0
+
+> Task :solr:solrj-jetty:forbiddenApis
+> Task :solr:solrj-jetty:collectJarInfos
+> Task :solr:solrj-jetty:validateJarChecksums
+
+> Task :solr:modules:cross-dc:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:cross-dc:classes
+> Task :solr:modules:cross-dc:jar
+> Task :solr:server:collectJarInfos
+> Task :solr:modules:opentelemetry:compileJava
+> Task :solr:modules:opentelemetry:classes
+> Task :solr:modules:analysis-extras:collectJarInfos
+> Task :solr:modules:clustering:collectJarInfos
+> Task :solr:modules:opentelemetry:jar
+> Task :solr:modules:cross-dc:collectJarInfos
+> Task :solr:modules:cuvs:collectJarInfos
+> Task :solr:modules:extraction:collectJarInfos
+> Task :solr:cross-dc-manager:collectJarInfos
+> Task :solr:modules:jwt-auth:collectJarInfos
+> Task :solr:modules:langid:collectJarInfos
+> Task :solr:modules:language-models:collectJarInfos
+> Task :solr:modules:ltr:collectJarInfos
+> Task :solr:modules:gcs-repository:collectJarInfos
+> Task :solr:modules:opentelemetry:collectJarInfos
+> Task :solr:modules:scripting:collectJarInfos
+> Task :solr:modules:s3-repository:collectJarInfos
+> Task :solr:solrj-jetty:spotlessJava
+> Task :solr:solrj-jetty:spotlessJavaCheck
+> Task :solr:solrj-jetty:spotlessCheck
+
+> Task :solr:modules:analysis-extras:compileJava
+Note: /workspace/worktrees/teardown-final-r1/solr/modules/analysis-extras/src/java/org/apache/solr/schema/ICUCollationField.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:analysis-extras:classes
+> Task :solr:modules:analysis-extras:jar
+> Task :solr:modules:sql:collectJarInfos
+> Task :solr:solrj-jetty:validateJarLicenses
+> Task :solr:solrj-jetty:licenses
+> Task :solr:solrj-jetty:check
+
+BUILD SUCCESSFUL in 2m 16s
+67 actionable tasks: 52 executed, 15 up-to-date
+rc=0

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.client.solrj.jetty.HttpJettySolrClientProxyTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-26T05:31:32.140Z" hostname="localhost" time="2.604">
+  <properties/>
+  <testcase name="testProxyWithHttpSolrClientJdkImpl" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientProxyTest" time="0.797"/>
+  <testcase name="testProxyWithHttp2SolrClient" classname="org.apache.solr.client.solrj.jetty.HttpJettySolrClientProxyTest" time="0.42"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[30169 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/teardown-final-r1/solr/server/solr/configsets/_default/conf'
+30169 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+30180 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientProxyTest_FFF5A3C3AAC69084-001/data-dir-5-001
+30180 WARN  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=3 numCloses=3
+30180 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-5 for ERROR logs matching regex: ignore_exception
+30181 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+30183 WARN  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/teardown-final-r1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/teardown-final-r1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+30183 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+30191 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+30191 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+30191 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+30192 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+30192 WARN  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@223bb4e3{/solr,/solr,b=file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@2814d0e3{STOPPED}}. May not be supported in future releases.
+30193 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/
+30193 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@223bb4e3{/solr,/solr,b=file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2814d0e3{STARTED}}
+30193 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=35823}
+30193 ERROR (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+30193 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+30193 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 5ec461c4012036faf3fd14363202e82c4686fb07 [snapshot build, details omitted]
+30194 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+30194 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/teardown-final-r1/solr
+30194 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-26T05:31:32.185048735Z
+30194 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientProxyTest_FFF5A3C3AAC69084-001/solrhome-001 (source: servlet config: solr.solr.home)
+30197 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.SolrXmlConfig solr.xml not found in SOLR_HOME, using built-in default
+30197 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/teardown-final-r1/solr/server/solr/solr.xml
+30202 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+30203 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+30960 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [/workspace/worktrees/teardown-final-r1/solr/server/solr]
+30971 WARN  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+30978 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientProxyTest_FFF5A3C3AAC69084-001/solrhome-001
+31026 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@223bb4e3{/solr,/solr,b=file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2814d0e3{STARTED}}
+31026 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@5eb8c95b{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:37205}
+31026 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server Started oejs.Server@c2ae6b7{STARTING}[12.1.14,sto=0] @835ms
+31027 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#35823
+31216 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+31216 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/teardown-final-r1/solr/server/solr/configsets/_default
+31216 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientProxyTest_FFF5A3C3AAC69084-001/solrhome-001/collection1], dataDir=[/workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.HttpJettySolrClientProxyTest_FFF5A3C3AAC69084-001/solrhome-001/collection1/data/]
+31486 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+31486 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+31486 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+31519 WARN  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/teardown-final-r1/solr/server/solr/configsets/_default/conf ; switching to use InMemory storage instead.
+31521 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+31521 INFO  (searcherExecutor-223-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+31522 INFO  (searcherExecutor-223-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+31541 INFO  (TEST-HttpJettySolrClientProxyTest.testProxyWithHttpSolrClientJdkImpl-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testProxyWithHttpSolrClientJdkImpl
+31588 INFO  (SocketProxy-Acceptor-35823) [] o.a.s.u.SocketProxy accepted Socket[addr=/127.0.0.1,port=59142,localport=35823], receiveBufferSize: 218300
+31590 INFO  (SocketProxy-Acceptor-35823) [] o.a.s.u.SocketProxy proxy connection Socket[addr=/127.0.0.1,port=37205,localport=50290], receiveBufferSize=218300
+31595 INFO  (qtp373404142-355-null-526) [ x:collection1 t:null-526] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{} 0 2
+31596 ERROR (qtp373404142-355-null-526) [ x:collection1 t:null-526] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: missing content stream
+	at org.apache.solr.handler.ContentStreamHandlerBase.handleRequestBody(ContentStreamHandlerBase.java:94)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.server.internal.HttpConnection.onFillable(HttpConnection.java:420)
+	at org.eclipse.jetty.server.internal.HttpConnection$FillableCallback.succeeded(HttpConnection.java:1789)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:54)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+31680 INFO  (qtp373404142-356-null-527) [ x:collection1 t:null-527] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[1234 (1880089106729402368)]} 0 73
+31945 INFO  (searcherExecutor-223-thread-1-processing-collection1 null-528) [ x:collection1 t:null-528] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+31948 INFO  (qtp373404142-357-null-528) [ x:collection1 t:null-528] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 264
+31951 INFO  (qtp373404142-358-null-529) [ x:collection1 t:null-529] o.a.s.c.S.Request path=/select params={q=id:1234&wt=javabin} hits=1 status=0 QTime=0
+32009 INFO  (qtp373404142-359-null-530) [ x:collection1 t:null-530] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{deleteByQuery=*:* (-1880089107095355392)} 0 55
+32078 INFO  (searcherExecutor-223-thread-1-processing-collection1 null-531) [ x:collection1 t:null-531] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+32082 INFO  (qtp373404142-354-null-531) [ x:collection1 t:null-531] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 71
+32143 INFO  (qtp373404142-355-null-532) [ x:collection1 t:null-532] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=0 status=0 QTime=0
+32333 INFO  (TEST-HttpJettySolrClientProxyTest.testProxyWithHttpSolrClientJdkImpl-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testProxyWithHttpSolrClientJdkImpl
+32338 INFO  (TEST-HttpJettySolrClientProxyTest.testProxyWithHttp2SolrClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testProxyWithHttp2SolrClient
+32342 INFO  (SocketProxy-Acceptor-35823) [] o.a.s.u.SocketProxy accepted Socket[addr=/127.0.0.1,port=59152,localport=35823], receiveBufferSize: 218300
+32343 INFO  (SocketProxy-Acceptor-35823) [] o.a.s.u.SocketProxy proxy connection Socket[addr=/127.0.0.1,port=37205,localport=50304], receiveBufferSize=218300
+32379 INFO  (qtp373404142-354-null-533) [ x:collection1 t:null-533] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[1234 (1880089107462356992)]} 0 28
+32598 INFO  (searcherExecutor-223-thread-1-processing-collection1 null-534) [ x:collection1 t:null-534] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+32602 INFO  (qtp373404142-355-null-534) [ x:collection1 t:null-534] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 221
+32604 INFO  (qtp373404142-356-null-535) [ x:collection1 t:null-535] o.a.s.c.S.Request path=/select params={q=id:1234&wt=javabin} hits=1 status=0 QTime=0
+32658 INFO  (qtp373404142-357-null-536) [ x:collection1 t:null-536] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{deleteByQuery=*:* (-1880089107776929792)} 0 53
+32688 INFO  (searcherExecutor-223-thread-1-processing-collection1 null-537) [ x:collection1 t:null-537] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+32691 INFO  (qtp373404142-358-null-537) [ x:collection1 t:null-537] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 31
+32751 INFO  (qtp373404142-359-null-538) [ x:collection1 t:null-538] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=0 status=0 QTime=0
+32753 INFO  (TEST-HttpJettySolrClientProxyTest.testProxyWithHttp2SolrClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testProxyWithHttp2SolrClient
+32754 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-5 after muting 0 log messages
+32755 WARN  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.SocketProxy Closing 2 connections to: http://127.0.0.1:35823/solr, target: http://127.0.0.1:37205/solr
+32755 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server Stopped oejs.Server@c2ae6b7{STOPPING}[12.1.14,sto=0]
+32755 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@5eb8c95b{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+32755 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1393911390
+32756 INFO  (coreCloseExecutor-232-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@2bb26497 collection1
+32756 INFO  (coreCloseExecutor-232-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+Oct 26, 2026 5:31:34 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+32772 INFO  (SUITE-HttpJettySolrClientProxyTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@223bb4e3{/solr,/solr,b=file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@2814d0e3{STOPPED}}
+]]></system-err>
+</testsuite>

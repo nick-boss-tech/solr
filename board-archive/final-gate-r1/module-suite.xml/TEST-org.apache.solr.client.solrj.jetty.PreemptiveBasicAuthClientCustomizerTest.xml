@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.client.solrj.jetty.PreemptiveBasicAuthClientCustomizerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-26T05:31:54.967Z" hostname="localhost" time="0.045">
+  <properties/>
+  <testcase name="testSysPropsAndPropsFile" classname="org.apache.solr.client.solrj.jetty.PreemptiveBasicAuthClientCustomizerTest" time="0.004"/>
+  <testcase name="testBadSysPropsCredentials" classname="org.apache.solr.client.solrj.jetty.PreemptiveBasicAuthClientCustomizerTest" time="0.003"/>
+  <testcase name="testCredentialsFromSystemProperties" classname="org.apache.solr.client.solrj.jetty.PreemptiveBasicAuthClientCustomizerTest" time="0.003"/>
+  <testcase name="testCredentialsFromConfigFile" classname="org.apache.solr.client.solrj.jetty.PreemptiveBasicAuthClientCustomizerTest" time="0.022"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[52990 INFO  (SUITE-PreemptiveBasicAuthClientCustomizerTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/teardown-final-r1/solr/server/solr/configsets/_default/conf'
+]]></system-err>
+</testsuite>

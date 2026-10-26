@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-26T05:31:15.044Z" hostname="localhost" time="13.278">
+  <properties/>
+  <testcase name="testGeneralErrorCallbackForNonDocumentError" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="0.01"/>
+  <testcase name="testNaiveLambdaSurvivesNonDocumentError" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="0.009"/>
+  <testcase name="testErrorHandlerWithCustomIdField" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="0.018"/>
+  <testcase name="testFailedDocsAreRecoverableViaErrorHandler" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="0.044"/>
+  <testcase name="testConcurrentUpdate" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="5.015"/>
+  <testcase name="testSocketTimeoutOnCommit" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="0.013"/>
+  <testcase name="testThrowingErrorHandlerDoesNotStopClient" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="0.011"/>
+  <testcase name="testCollectionParameters" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="0.407"/>
+  <testcase name="testConcurrentCollectionUpdate" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="5.443"/>
+  <testcase name="testConnectionErrorIsSolrServerExceptionPreservingCause" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="0.012"/>
+  <testcase name="testConnectionErrorIncludesUrl" classname="org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[13073 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/teardown-final-r1/solr/server/solr/configsets/_default/conf'
+13074 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+13094 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest_FFF5A3C3AAC69084-001/data-dir-3-001
+13094 WARN  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=4 numCloses=4
+13094 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-3 for ERROR logs matching regex: ignore_exception
+13094 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Using TrieFields (NUMERIC_POINTS_SYSPROP=false) w/NUMERIC_DOCVALUES_SYSPROP=false
+13097 WARN  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/teardown-final-r1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/teardown-final-r1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+13097 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+13104 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+13105 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+13105 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-LTS
+13106 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+13106 WARN  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@4cff6aa9{/solr,/solr,b=file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@2d1c9468{STOPPED}}. May not be supported in future releases.
+13107 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/
+13107 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@4cff6aa9{/solr,/solr,b=file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2d1c9468{STARTED}}
+13107 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=37021}
+13107 ERROR (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+13107 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+13107 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 5ec461c4012036faf3fd14363202e82c4686fb07 [snapshot build, details omitted]
+13107 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+13107 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/teardown-final-r1/solr
+13107 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-10-26T05:31:15.098968767Z
+13108 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest_FFF5A3C3AAC69084-001/tempDir-001 (source: servlet config: solr.solr.home)
+13110 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.SolrXmlConfig solr.xml not found in SOLR_HOME, using built-in default
+13111 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/teardown-final-r1/solr/server/solr/solr.xml
+13117 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+13117 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+14929 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [/workspace/worktrees/teardown-final-r1/solr/server/solr]
+14946 WARN  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+14954 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest_FFF5A3C3AAC69084-001/tempDir-001
+15010 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@4cff6aa9{/solr,/solr,b=file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2d1c9468{STARTED}}
+15011 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@2e5e7e6c{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:٣٧٠٢١}
+15011 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server Started oejs.Server@650f6983{STARTING}[12.1.14,sto=٠] @1906ms
+15011 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#37021
+15161 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedWordSetResource for path /schema/analysis/stopwords/english
+15161 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory$SynonymManager for path /schema/analysis/synonyms/english
+15161 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedStopFilterFactory to existing ManagedResource /schema/analysis/stopwords/english
+15161 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory to existing ManagedResource /schema/analysis/synonyms/english
+15170 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+15177 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/teardown-final-r1/solr/server/solr/configsets/sample_techproducts_configs
+15177 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest_FFF5A3C3AAC69084-001/tempDir-001/collection1], dataDir=[/workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-tmp/org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest_FFF5A3C3AAC69084-001/tempDir-001/collection1/data/]
+15288 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+15288 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+15288 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+15322 WARN  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Cannot write to config directory /workspace/worktrees/teardown-final-r1/solr/server/solr/configsets/sample_techproducts_configs/conf ; switching to use InMemory storage instead.
+15322 WARN  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/analysis/stopwords/english
+15322 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Saved JSON object to path _schema_analysis_stopwords_english.json using InMemoryStorage
+15322 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.s.a.ManagedWordSetResource Loaded 0 words for /schema/analysis/stopwords/english
+15322 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/stopwords/english
+15322 WARN  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource No stored data found for /schema/analysis/synonyms/english
+15322 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.s.a.ManagedSynonymGraphFilterFactory Loaded 0 synonym mappings for /schema/analysis/synonyms/english
+15322 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/synonyms/english
+15322 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.h.c.SuggestComponent Initializing SuggestComponent
+15322 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester init: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+15322 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester Dictionary loaded with params: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+15325 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+15327 INFO  (searcherExecutor-104-thread-1-processing-collection1) [ x:collection1] o.a.s.c.S.Request path=null params={q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false&event=firstSearcher} hits=0 status=0 QTime=0
+15327 INFO  (searcherExecutor-104-thread-1-processing-collection1) [ x:collection1] o.a.s.c.QuerySenderListener QuerySenderListener done.
+15327 INFO  (searcherExecutor-104-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+15327 INFO  (searcherExecutor-104-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+15328 INFO  (searcherExecutor-104-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+15345 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testGeneralErrorCallbackForNonDocumentError-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testGeneralErrorCallbackForNonDocumentError
+15351 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testGeneralErrorCallbackForNonDocumentError-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testGeneralErrorCallbackForNonDocumentError
+15355 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testNaiveLambdaSurvivesNonDocumentError-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testNaiveLambdaSurvivesNonDocumentError
+15358 ERROR (concurrentUpdateScheduler-112-thread-1-processing-null) [] o.a.s.c.s.i.ConcurrentUpdateBaseSolrClient$UpdateErrorHandler update error
+org.apache.solr.client.solrj.SolrServerException: Error from server at http://localhost:1/solr: access denied ("java.net.SocketPermission" "127.0.0.1:1" "connect,resolve")
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient$Runner.sendUpdateStream(ConcurrentUpdateBaseSolrClient.java:350)
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient$Runner.run(ConcurrentUpdateBaseSolrClient.java:266)
+	at org.apache.solr.common.util.ExecutorUtil$MDCAwareThreadPoolExecutor.lambda$execute$0(ExecutorUtil.java:390)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.security.AccessControlException: access denied ("java.net.SocketPermission" "127.0.0.1:1" "connect,resolve")
+	at java.base/java.security.AccessControlContext.checkPermission(AccessControlContext.java:488)
+	at java.base/java.security.AccessController.checkPermission(AccessController.java:1071)
+	at java.base/java.lang.SecurityManager.checkPermission(SecurityManager.java:411)
+	at java.base/java.lang.SecurityManager.checkConnect(SecurityManager.java:905)
+	at java.base/sun.nio.ch.SocketChannelImpl.checkRemote(SocketChannelImpl.java:846)
+	at java.base/sun.nio.ch.SocketChannelImpl.blockingConnect(SocketChannelImpl.java:1216)
+	at java.base/sun.nio.ch.SocketAdaptor.connect(SocketAdaptor.java:102)
+	at org.eclipse.jetty.io.ClientConnector.connect(ClientConnector.java:416)
+	at org.eclipse.jetty.io.Transport$Socket.connect(Transport.java:183)
+	at org.eclipse.jetty.http2.client.HTTP2Client.connect(HTTP2Client.java:524)
+	at org.eclipse.jetty.http2.client.transport.HttpClientTransportOverHTTP2.connect(HttpClientTransportOverHTTP2.java:130)
+	at org.eclipse.jetty.http2.client.transport.HttpClientTransportOverHTTP2.connect(HttpClientTransportOverHTTP2.java:125)
+	at org.eclipse.jetty.client.HttpClient$1.connect(HttpClient.java:646)
+	at org.eclipse.jetty.client.HttpClient$1.succeeded(HttpClient.java:620)
+	at org.eclipse.jetty.client.HttpClient$1.succeeded(HttpClient.java:616)
+	at org.eclipse.jetty.util.SocketAddressResolver$Async.lambda$resolve$0(SocketAddressResolver.java:188)
+	... 4 more
+15360 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testNaiveLambdaSurvivesNonDocumentError-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testNaiveLambdaSurvivesNonDocumentError
+15364 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testErrorHandlerWithCustomIdField-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testErrorHandlerWithCustomIdField
+15376 WARN  (concurrentUpdateScheduler-114-thread-1-processing-null) [] o.a.s.c.s.i.ConcurrentUpdateBaseSolrClient Failed to parse error response from http://127.0.0.1:37021/solr/cuss/foo due to: 
+java.lang.RuntimeException: Invalid version (expected 2, but 60) or the data in not in 'javabin' format
+	at org.apache.solr.common.util.JavaBinCodec._init(JavaBinCodec.java:216)
+	at org.apache.solr.common.util.JavaBinCodec.initRead(JavaBinCodec.java:204)
+	at org.apache.solr.common.util.JavaBinCodec.unmarshal(JavaBinCodec.java:197)
+	at org.apache.solr.client.solrj.response.JavaBinResponseParser.processResponse(JavaBinResponseParser.java:47)
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient$Runner.sendUpdateStream(ConcurrentUpdateBaseSolrClient.java:328)
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient$Runner.run(ConcurrentUpdateBaseSolrClient.java:266)
+	at org.apache.solr.common.util.ExecutorUtil$MDCAwareThreadPoolExecutor.lambda$execute$0(ExecutorUtil.java:390)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+15378 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testErrorHandlerWithCustomIdField-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testErrorHandlerWithCustomIdField
+15382 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testFailedDocsAreRecoverableViaErrorHandler-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testFailedDocsAreRecoverableViaErrorHandler
+15414 INFO  (qtp1773817164-158-null-514) [ x:collection1 t:null-514] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[good-1 (1880089089674313728)]} 0 28
+15418 INFO  (qtp1773817164-159-null-515) [ x:collection1 t:null-515] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{} 0 2
+15418 ERROR (qtp1773817164-159-null-515) [ x:collection1 t:null-515] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: ERROR: [doc=bad-1] Error adding field 'popularity'='not-an-int' msg=For input string: "not-an-int"
+	at org.apache.solr.update.DocumentBuilder.toDocument(DocumentBuilder.java:296)
+	at org.apache.solr.update.DocumentBuilder.toDocument(DocumentBuilder.java:100)
+	at org.apache.solr.update.AddUpdateCommand.lambda$makeLuceneDocs$0(AddUpdateCommand.java:233)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.tryAdvance(ArrayList.java:1685)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.lambda$initPartialTraversalState$0(StreamSpliterators.java:292)
+	at java.base/java.util.stream.StreamSpliterators$AbstractWrappingSpliterator.fillBuffer(StreamSpliterators.java:206)
+	at java.base/java.util.stream.StreamSpliterators$AbstractWrappingSpliterator.doAdvance(StreamSpliterators.java:161)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.tryAdvance(StreamSpliterators.java:298)
+	at java.base/java.util.Spliterators$1Adapter.hasNext(Spliterators.java:681)
+	at org.apache.lucene.index.DocumentsWriterPerThread.updateDocuments(DocumentsWriterPerThread.java:250)
+	at org.apache.lucene.index.DocumentsWriter.updateDocuments(DocumentsWriter.java:425)
+	at org.apache.lucene.index.IndexWriter.updateDocuments(IndexWriter.java:1573)
+	at org.apache.lucene.index.IndexWriter.updateDocuments(IndexWriter.java:1549)
+	at org.apache.solr.update.DirectUpdateHandler2.updateDocOrDocValues(DirectUpdateHandler2.java:1180)
+	at org.apache.solr.update.DirectUpdateHandler2.doNormalUpdate(DirectUpdateHandler2.java:527)
+	at org.apache.solr.update.DirectUpdateHandler2.addDoc0(DirectUpdateHandler2.java:482)
+	at org.apache.solr.update.DirectUpdateHandler2.addDoc(DirectUpdateHandler2.java:411)
+	at org.apache.solr.update.processor.RunUpdateProcessorFactory$RunUpdateProcessor.processAdd(RunUpdateProcessorFactory.java:76)
+	at org.apache.solr.update.processor.UpdateRequestProcessor.processAdd(UpdateRequestProcessor.java:54)
+	at org.apache.solr.update.processor.DistributedUpdateProcessor.doLocalAdd(DistributedUpdateProcessor.java:274)
+	at org.apache.solr.update.processor.DistributedUpdateProcessor.doVersionAdd(DistributedUpdateProcessor.java:520)
+	at org.apache.solr.update.processor.DistributedUpdateProcessor.lambda$versionAdd$0(DistributedUpdateProcessor.java:361)
+	at org.apache.solr.update.UpdateLocks.runWithLockInternal(UpdateLocks.java:158)
+	at org.apache.solr.update.UpdateLocks.runWithLock(UpdateLocks.java:100)
+	at org.apache.solr.update.processor.DistributedUpdateProcessor.versionAdd(DistributedUpdateProcessor.java:346)
+	at org.apache.solr.update.processor.DistributedUpdateProcessor.processAdd(DistributedUpdateProcessor.java:240)
+	at org.apache.solr.update.processor.LogUpdateProcessorFactory$LogUpdateProcessor.processAdd(LogUpdateProcessorFactory.java:111)
+	at org.apache.solr.handler.loader.JavabinLoader$1.update(JavabinLoader.java:122)
+	at org.apache.solr.client.solrj.request.JavaBinUpdateRequestCodec$StreamingCodec.readDocs(JavaBinUpdateRequestCodec.java:264)
+	at org.apache.solr.client.solrj.request.JavaBinUpdateRequestCodec$StreamingCodec.readIterator(JavaBinUpdateRequestCodec.java:217)
+	at org.apache.solr.common.util.JavaBinCodec.readObject(JavaBinCodec.java:344)
+	at org.apache.solr.common.util.JavaBinCodec.readVal(JavaBinCodec.java:289)
+	at org.apache.solr.client.solrj.request.JavaBinUpdateRequestCodec$StreamingCodec.readNamedList(JavaBinUpdateRequestCodec.java:203)
+	at org.apache.solr.common.util.JavaBinCodec.readObject(JavaBinCodec.java:309)
+	at org.apache.solr.common.util.JavaBinCodec.readVal(JavaBinCodec.java:289)
+	at org.apache.solr.common.util.JavaBinCodec.unmarshal(JavaBinCodec.java:198)
+	at org.apache.solr.client.solrj.request.JavaBinUpdateRequestCodec$StreamingCodec.unmarshal(JavaBinUpdateRequestCodec.java:185)
+	at org.apache.solr.client.solrj.request.JavaBinUpdateRequestCodec.unmarshal(JavaBinUpdateRequestCodec.java:113)
+	at org.apache.solr.handler.loader.JavabinLoader.parseAndLoadDocs(JavabinLoader.java:134)
+	at org.apache.solr.handler.loader.JavabinLoader.load(JavabinLoader.java:73)
+	at org.apache.solr.handler.UpdateRequestHandler$1.load(UpdateRequestHandler.java:101)
+	at org.apache.solr.handler.ContentStreamHandlerBase.handleRequestBody(ContentStreamHandlerBase.java:99)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:726)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:518)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.NumberFormatException: For input string: "not-an-int"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:662)
+	at java.base/java.lang.Integer.parseInt(Integer.java:778)
+	at org.apache.solr.schema.IntPointField.createField(IntPointField.java:162)
+	at org.apache.solr.schema.PointField.createFields(PointField.java:269)
+	at org.apache.solr.update.DocumentBuilder.addField(DocumentBuilder.java:67)
+	at org.apache.solr.update.DocumentBuilder.addOriginalField(DocumentBuilder.java:340)
+	at org.apache.solr.update.DocumentBuilder.toDocument(DocumentBuilder.java:255)
+	... 82 more
+15421 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testFailedDocsAreRecoverableViaErrorHandler-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testFailedDocsAreRecoverableViaErrorHandler
+15426 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testConcurrentUpdate-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testConcurrentUpdate
+18484 INFO  (searcherExecutor-104-thread-1-processing-collection1) [ x:collection1] o.a.s.c.QuerySenderListener QuerySenderListener done.
+18485 INFO  (searcherExecutor-104-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+20437 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testConcurrentUpdate-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testConcurrentUpdate
+20442 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testSocketTimeoutOnCommit-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 ###Starting testSocketTimeoutOnCommit
+20451 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testSocketTimeoutOnCommit-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.SolrTestCaseJ4 ###Ending testSocketTimeoutOnCommit
+20455 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testThrowingErrorHandlerDoesNotStopClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testThrowingErrorHandlerDoesNotStopClient
+20461 WARN  (concurrentUpdateScheduler-123-thread-1-processing-null) [] o.a.s.c.s.i.ConcurrentUpdateBaseSolrClient Failed to parse error response from http://127.0.0.1:37021/solr/cuss/foo due to: 
+java.lang.RuntimeException: Invalid version (expected 2, but 60) or the data in not in 'javabin' format
+	at org.apache.solr.common.util.JavaBinCodec._init(JavaBinCodec.java:216)
+	at org.apache.solr.common.util.JavaBinCodec.initRead(JavaBinCodec.java:204)
+	at org.apache.solr.common.util.JavaBinCodec.unmarshal(JavaBinCodec.java:197)
+	at org.apache.solr.client.solrj.response.JavaBinResponseParser.processResponse(JavaBinResponseParser.java:47)
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient$Runner.sendUpdateStream(ConcurrentUpdateBaseSolrClient.java:328)
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient$Runner.run(ConcurrentUpdateBaseSolrClient.java:266)
+	at org.apache.solr.common.util.ExecutorUtil$MDCAwareThreadPoolExecutor.lambda$execute$0(ExecutorUtil.java:390)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+20461 ERROR (concurrentUpdateScheduler-123-thread-1-processing-null) [] o.a.s.c.s.i.ConcurrentUpdateBaseSolrClient errorHandler threw while handling a failed update
+java.lang.RuntimeException: handler blew up
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClientTestBase.lambda$testThrowingErrorHandlerDoesNotStopClient$3(ConcurrentUpdateSolrClientTestBase.java:531)
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient.handleError(ConcurrentUpdateBaseSolrClient.java:634)
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient$Runner.sendUpdateStream(ConcurrentUpdateBaseSolrClient.java:337)
+	at org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient$Runner.run(ConcurrentUpdateBaseSolrClient.java:266)
+	at org.apache.solr.common.util.ExecutorUtil$MDCAwareThreadPoolExecutor.lambda$execute$0(ExecutorUtil.java:390)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+20462 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testThrowingErrorHandlerDoesNotStopClient-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testThrowingErrorHandlerDoesNotStopClient
+20466 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testCollectionParameters-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testCollectionParameters
+20493 INFO  (qtp1773817164-162-null-516) [ x:collection1 t:null-516] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[collection (1880089095006322688)]} 0 21
+20833 INFO  (searcherExecutor-104-thread-1-processing-collection1 null-517) [ x:collection1 t:null-517] o.a.s.c.QuerySenderListener QuerySenderListener done.
+20833 INFO  (searcherExecutor-104-thread-1-processing-collection1 null-517) [ x:collection1 t:null-517] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+20837 INFO  (qtp1773817164-163-null-517) [ x:collection1 t:null-517] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 342
+20856 INFO  (qtp1773817164-159-null-518) [ x:collection1 t:null-518] o.a.s.c.S.Request path=/select params={q=id:collection&wt=javabin} hits=1 status=0 QTime=17
+20867 INFO  (qtp1773817164-162-null-519) [ x:collection1 t:null-519] o.a.s.c.S.Request path=/select params={q=id:collection&wt=javabin} hits=1 status=0 QTime=0
+20869 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testCollectionParameters-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testCollectionParameters
+20873 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testConcurrentCollectionUpdate-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testConcurrentCollectionUpdate
+20903 INFO  (qtp1773817164-158-null-520) [ x:collection1 t:null-520] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{deleteByQuery=*:* (-1880089095432044544)} 0 25
+20980 INFO  (qtp1773817164-162-null-522) [ x:collection1 t:null-522] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[0_4 (1880089095460356097), 0_9 (1880089095511736320), 0_11 (1880089095512784896), 0_13 (1880089095512784897), 0_15 (1880089095512784898), 0_18 (1880089095512784899), 0_20 (1880089095512784900), 0_21 (1880089095512784901), 0_24 (1880089095512784902), 0_27 (1880089095512784903), ... (237 adds)]} 0 75
+20984 INFO  (qtp1773817164-161-null-521) [ x:collection1 t:null-521] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[0_0 (1880089095460356096), 1_0 (1880089095516979205), 0_1 (1880089095516979208), 0_2 (1880089095516979210), 0_3 (1880089095516979212), 0_5 (1880089095518027777), 0_6 (1880089095518027779), 0_7 (1880089095518027781), 0_8 (1880089095518027783), 0_10 (1880089095518027785), ... (263 adds)]} 0 80
+24037 INFO  (searcherExecutor-104-thread-1-processing-collection1) [ x:collection1] o.a.s.c.QuerySenderListener QuerySenderListener done.
+24038 INFO  (searcherExecutor-104-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+26289 INFO  (searcherExecutor-104-thread-1-processing-collection1 null-523) [ x:collection1 t:null-523] o.a.s.c.QuerySenderListener QuerySenderListener done.
+26289 INFO  (searcherExecutor-104-thread-1-processing-collection1 null-523) [ x:collection1 t:null-523] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+26299 INFO  (qtp1773817164-163-null-523) [ x:collection1 t:null-523] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 391
+26301 INFO  (qtp1773817164-159-null-524) [ x:collection1 t:null-524] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=500 status=0 QTime=0
+26309 INFO  (qtp1773817164-161-null-525) [ x:collection1 t:null-525] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=500 status=0 QTime=0
+26311 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testConcurrentCollectionUpdate-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testConcurrentCollectionUpdate
+26315 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testConnectionErrorIsSolrServerExceptionPreservingCause-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testConnectionErrorIsSolrServerExceptionPreservingCause
+26323 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testConnectionErrorIsSolrServerExceptionPreservingCause-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testConnectionErrorIsSolrServerExceptionPreservingCause
+26327 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testConnectionErrorIncludesUrl-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Starting testConnectionErrorIncludesUrl
+26331 INFO  (TEST-ConcurrentUpdateJettySolrClientTest.testConnectionErrorIncludesUrl-seed#[FFF5A3C3AAC69084]) [] o.a.s.SolrTestCaseJ4 ###Ending testConnectionErrorIncludesUrl
+26332 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-3 after muting 0 log messages
+26333 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.Server Stopped oejs.Server@650f6983{STOPPING}[12.1.14,sto=٠]
+26333 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@2e5e7e6c{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:٠}
+26333 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=750992622
+26333 INFO  (coreCloseExecutor-138-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@4d9d9cff collection1
+26334 INFO  (coreCloseExecutor-138-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+تشرين الأول ٢٥, ٢٠٢٦ ٨:٣١:٢٨ م io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+26351 INFO  (SUITE-ConcurrentUpdateJettySolrClientTest-seed#[FFF5A3C3AAC69084]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@4cff6aa9{/solr,/solr,b=file:///workspace/worktrees/teardown-final-r1/solr/solrj-jetty/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@2d1c9468{STOPPED}}
+]]></system-err>
+</testsuite>
