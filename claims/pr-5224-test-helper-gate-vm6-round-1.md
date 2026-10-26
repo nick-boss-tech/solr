@@ -10,3 +10,9 @@
 - Decision ladder: rung 1 (helper and test diff), rung 2 (the focused run's XML counts), rung 3 (the gate file's own requirements).
 
 Heartbeat: 2026-10-25T23:45Z
+
+Result: 2026-10-26T00:53Z. Gate round 2 at `72a0daacd3` (superseding `gates/pr-5224-test-helper-round-2.md`): preflight tidy clean; focused 4 of 4 PASS with fresh XML; `check -x test` BUILD SUCCESSFUL; diff check and tree clean. Receipt `receipts/PR-5224-test-helper.md`. An earlier check run in a git worktree failed on the Antora step for environment reasons; the clean full-clone run is the proof.
+
+DONE: 2026-10-26T00:53Z (gate).
+
+Heartbeat: 2026-10-26T00:53Z
