@@ -521,10 +521,14 @@ public class TestPseudoReturnFields extends SolrTestCaseJ4 {
           assertQ(
               reqWithPath(
                   "/get",
-                  "id", "7782",
-                  "fq", fq,
-                  "wt", "xml",
-                  "fl", selection + ",x:[json f=source_s],unrelated_s:[value v=synthetic]"),
+                  "id",
+                  "7782",
+                  "fq",
+                  fq,
+                  "wt",
+                  "xml",
+                  "fl",
+                  selection + ",x:[json f=source_s],unrelated_s:[value v=synthetic]"),
               "//doc/str[@name='title'][.='keyword']",
               "//doc/str[@name='x'][.='source']",
               "//doc/str[@name='unrelated_s'][.='synthetic']",

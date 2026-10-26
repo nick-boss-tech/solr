@@ -873,9 +873,12 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
           assertQ(
               reqWithPath(
                   "/get",
-                  "id", "7781",
-                  "wt", "xml",
-                  "fl", selection + ",x:[json f=source_s],unrelated_s:[value v=synthetic]"),
+                  "id",
+                  "7781",
+                  "wt",
+                  "xml",
+                  "fl",
+                  selection + ",x:[json f=source_s],unrelated_s:[value v=synthetic]"),
               "//doc/str[@name='title'][.='keyword']",
               "//doc/str[@name='x'][.='source']",
               "//doc/str[@name='unrelated_s'][.='synthetic']",
@@ -898,8 +901,7 @@ public class BasicFunctionalityTest extends SolrTestCaseJ4 {
 
       fetcher.getDocumentCache().clear();
       assertQ(
-          reqWithPath(
-              "/get", "id", "7781", "wt", "xml", "fl", "unrelated_s:[value v=synthetic]"),
+          reqWithPath("/get", "id", "7781", "wt", "xml", "fl", "unrelated_s:[value v=synthetic]"),
           "//doc/str[@name='unrelated_s'][.='synthetic']",
           "//doc[count(*)=1]");
       Document doc = fetcher.getDocumentCache().get(docId);

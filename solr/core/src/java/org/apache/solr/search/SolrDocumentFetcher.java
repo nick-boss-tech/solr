@@ -770,8 +770,8 @@ public class SolrDocumentFetcher {
   }
 
   /**
-   * Returns the stored fields needed for the response and its transformers. A null result means
-   * all stored fields; otherwise the returned set is mutable.
+   * Returns the stored fields needed for the response and its transformers. A null result means all
+   * stored fields; otherwise the returned set is mutable.
    */
   public Set<String> getStoredFieldsToLoad(ReturnFields returnFields) {
     final Set<String> storedFields = new HashSet<>();
