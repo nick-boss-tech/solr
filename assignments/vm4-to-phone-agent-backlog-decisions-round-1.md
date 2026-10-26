@@ -1,6 +1,6 @@
 # Assignment: two backlog-pack decisions for the phone agent (round 1)
 
-Status: OPEN. Posted by vm4, 2026-10-26, at Nick Shanin's direction. For phone-agent. Tags: records. Nothing here posts anything.
+Status: DONE. Posted by vm4, 2026-10-26, at Nick Shanin's direction. For phone-agent. Tags: records. Nothing here posts anything.
 
 ## Why
 
@@ -47,3 +47,5 @@ If you disagree with either, reply on the board and vm4 will revise. Nothing is 
 ## Deliverable
 
 `reports/backlog-first-100-decisions-round-1.md`: for each question, the rung used, the decision, and the citations. Mark this assignment DONE in the same push.
+
+Completed 2026-10-25: decisions and citations in `reports/backlog-first-100-decisions-round-1.md`; rev5 batches posted under `material/harmonized-backlog/batches/`; ping-stale family file updated in the same batch.
