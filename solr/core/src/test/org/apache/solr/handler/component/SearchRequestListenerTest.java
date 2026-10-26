@@ -274,8 +274,7 @@ public class SearchRequestListenerTest extends SolrCloudTestCase {
     assertEquals(NUM_SHARDS, failed.shardCount());
     assertNotNull(failed.failure());
     assertNull(failed.rsp().getToLog().get(ThreadCpuTimer.CPU_TIME));
-    assertEquals(
-        failed.rsp().getToLog().get(ThreadCpuTimer.LOCAL_CPU_TIME), failed.cpuTimeMs());
+    assertEquals(failed.rsp().getToLog().get(ThreadCpuTimer.LOCAL_CPU_TIME), failed.cpuTimeMs());
     CollectionAdminRequest.deleteCollection(cpuCollection).process(cluster.getSolrClient());
   }
 
