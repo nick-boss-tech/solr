@@ -17,6 +17,13 @@
 
 Heartbeat: 2026-10-26T01:44:02Z
 
-Preflight: detached tidy preflight is the first step of the run and is recorded in the next heartbeat.
+Heartbeat: 2026-10-26T02:06:00Z
 
-Result: pending.
+Attempt 1 at `bf285189f74b775165fc53ba305d35dccf880a47`, standalone clone `/workspace/pr5230-docs-standalone`:
+- Tidy preflight (`./gradlew tidy`): exit 0, `git diff --exit-code` exit 0, clean status. Logs: `tidy.log`, `tidy-diff.txt`, `tidy-status.txt` in the log directory.
+- `:solr:solr-ref-guide:buildLocalSite`: exit 1. `:solr:solr-ref-guide:checkSiteLinks`: exit 1. Both fail in Antora with `Cannot find module '@asciidoctor/tabs'`.
+- `:solr:solr-ref-guide:checkCliDocsUpToDate`: exit 0 (does not run Antora).
+- Investigation: the task `downloadAsciidoctorTabsExtension` runs `npm install -D @asciidoctor/tabs@1.0.0-beta.6` and npm reports "changed 1 package", but the module is absent from `.gradle/node/node_modules`. The host shell has `NODE_ENV=production`, under which npm omits devDependencies, and the tabs package is a devDependency. The failure is in the host environment. The PR head and the repository are unchanged, and no repair to tracked files is needed.
+- Repair: rerun the three tasks at the same head with `NODE_ENV` unset for the Gradle run only. Failed logs are kept in `attempt-1-NODE_ENV-production/`. Tidy stays valid for this head and is not repeated.
+
+Result: pending attempt 2.
