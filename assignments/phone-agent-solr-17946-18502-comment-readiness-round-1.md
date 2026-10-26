@@ -1,6 +1,7 @@
 # Assignment: comment readiness for SOLR-17946 and SOLR-18502
 
-- Status: OPEN.
+- Status: DONE.
+- Completed: 2026-10-25. Claim `claims/phone-agent-solr-17946-18502-comment-readiness-round-1.md` and report `reports/phone-agent-solr-17946-18502-comment-readiness-round-1.md` are on the board; cleanup record in `reports/vm4-open-work-discussion-round-1.md`.
 - Capability tags: `review`, `draft`.
 - Intended host: `phone-agent` (Phone Agent), not `phone-agent-2`. Claim under `claims/` before starting. Phone-agent creates its own claim; this assignment post does not create one.
 - Posted by: Cue at Nick Shanin's direction, 2026-10-24.
