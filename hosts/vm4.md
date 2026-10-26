@@ -43,3 +43,4 @@ Disk record:
 - 2026-10-26T04:17:12Z: PR 5221 revised comment draft (round 2) written, not posted: `reports/pr-5221-license-headers-comment-draft-round-2.md`.
 - 2026-10-26T04:55:34Z: claimed teardown-interrupt-close-fix-final-validation-round-1 (`claims/teardown-interrupt-close-fix-final-validation-vm4-round-1.md`) at fork H 8787c6605a; phase 1 cleanup starting.
 - 2026-10-26T15:48:42Z: closed teardown final validation vm4 claim (`claims/teardown-interrupt-close-fix-final-validation-vm4-round-1-done.md`). Phase 1 tidy verified at F `5ec461c401`; phase 2 superseded by vm2 green gate at F. Not running phase 2. Lock free.
+- 2026-10-26T16:15:09Z: claimed PR 5232 listener Linux gate round 1 (`claims/pr-5232-listener-followup-linux-vm4-round-1.md`) at F2 `23c68215cf`; superseding gate `gates/pr-5232-listener-followup-f2-round-1.md`. Tidy formatting commit pushed. Gate starting.
