@@ -14,7 +14,7 @@ Two places produce what you saw:
 So a clearer message needs two changes: the message text, and the per-tool log line. There are two ways to do it:
 
  1. Handle it once in {{ToolBase}}. Catch the connect timeout in the shared error path, print a message that says ZooKeeper did not answer within the configured timeout and that the server it points at may be down, and skip the per-tool ERROR trace for that case. This covers every ZooKeeper tool in one place. The message cannot name the host, because {{ToolBase}} does not hold it.
- 2. Route all 12 direct client builders through the {{CLIUtils}} helper, which takes the host and catches the timeout there, and remove the per-tool trace. The message can name the host. This touches 12 files.
+ 2. Route all 12 direct client builders through the {{CLIUtils}} helper, which takes the host and catches the timeout there, and remove the per-tool trace. The message can name the host. This touches 11 files.
 
 The server-side message ({{KeeperErrorCode = ConnectionLoss for /live_nodes}} from {{bin/solr zk ls -s}}, and {{/aliases.json}} from LISTALIASES in the ticket) is raw ZooKeeper text passed through the admin API. Changing it is a separate change to the server's error handling.
 
