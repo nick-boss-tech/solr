@@ -169,7 +169,8 @@ public class AdminUiCoreOverviewErrorsTest extends AdminUiStandaloneTestBase {
       }
       httpResponse
           .getOutputStream()
-          .write(("{\"error\":{\"msg\":\"" + ERROR_MESSAGE + "\"}}").getBytes(StandardCharsets.UTF_8));
+          .write(
+              ("{\"error\":{\"msg\":\"" + ERROR_MESSAGE + "\"}}").getBytes(StandardCharsets.UTF_8));
       lastFailureStatus = status;
     }
   }
