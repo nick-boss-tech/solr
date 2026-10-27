@@ -18,8 +18,8 @@ Is a clearer CLI message what you want for this ticket?
 Possible states for the ticket:
 
  * Close after a CLI message fix that covers every ZooKeeper tool. There are two ways to build it:
- # Handle it once in {{ToolBase}}. Catch the connect timeout in the shared error path, print a message that says ZooKeeper did not answer within the configured timeout and that the server it points at may be down, and skip the per-tool ERROR trace for that case. The message cannot name the host, because {{ToolBase}} does not hold it.
- # Route all 12 direct client builders through the {{CLIUtils}} helper, which takes the host and catches the timeout there, and remove the per-tool trace. The message can name the host. This touches 11 files.
+ ## Handle it once in {{ToolBase}}. Catch the connect timeout in the shared error path, print a message that says ZooKeeper did not answer within the configured timeout and that the server it points at may be down, and skip the per-tool ERROR trace for that case. The message cannot name the host, because {{ToolBase}} does not hold it.
+ ## Route all 12 direct client builders through the {{CLIUtils}} helper, which takes the host and catches the timeout there, and remove the per-tool trace. The message can name the host. This touches 11 files.
  * Keep open for the server-side text. The {{KeeperErrorCode = ConnectionLoss for /live_nodes}} from {{bin/solr zk ls -s}} and the {{/aliases.json}} error from LISTALIASES are raw ZooKeeper text passed through the admin API. Changing them is a separate change to the server's error handling.
  * Split the server-side text into its own ticket.
 
