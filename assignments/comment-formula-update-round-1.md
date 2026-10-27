@@ -1,6 +1,8 @@
 # Assignment: clarify and update the comment formula, round 1
 
-Status: OPEN
+Status: DONE
+
+Completed 2026-10-27 by the phone agent (claim `claims/comment-formula-update-round-1-phone-agent.md`). Deliverables: `reports/comment-formula-update-round-1.md` and `drafts/comment-formula-update-round-1.md`. The proposed formula text is a draft for the board's single writer to apply; nothing in the live `comment-formula.md` was edited.
 
 Posted 2026-10-27. Intended host: any capable review/draft host with access to the coordination-ui board.
 
