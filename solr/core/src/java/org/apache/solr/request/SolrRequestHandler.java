@@ -36,6 +36,10 @@ import org.apache.solr.response.SolrQueryResponse;
  *
  * <p>A single instance of any registered SolrRequestHandler is created via the default constructor
  * and is reused for all relevant queries.
+ *
+ * <p>Core and API dispatch store the originally selected handler in {@link
+ * SolrQueryRequest#getContext()} under the {@code SolrRequestHandler.class} key. Delegation using
+ * the same request preserves that handler, even when the delegate has a different registration.
  */
 public interface SolrRequestHandler extends SolrInfoBean {
 

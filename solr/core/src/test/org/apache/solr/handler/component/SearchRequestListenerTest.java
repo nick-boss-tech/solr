@@ -33,12 +33,12 @@ import org.apache.solr.client.solrj.request.V2Request;
 import org.apache.solr.client.solrj.response.InputStreamResponseParser;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.cloud.SolrCloudTestCase;
+import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
-import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.embedded.JettySolrRunner;
 import org.apache.solr.request.SolrQueryRequest;
@@ -55,6 +55,7 @@ import org.junit.Test;
 
 public class SearchRequestListenerTest extends SolrCloudTestCase {
   private static final String COLLECTION = "listener";
+  private static final String ROUTING_COLLECTION = "listener_routing";
   private static final int NUM_SHARDS = 2;
   private static final Queue<Event> events = new ConcurrentLinkedQueue<>();
 
@@ -64,8 +65,12 @@ public class SearchRequestListenerTest extends SolrCloudTestCase {
 
   @BeforeClass
   public static void setupCluster() throws Exception {
-    configureCluster(2).addConfig("conf", configset("cloud-minimal")).configure();
+    configureCluster(2)
+        .addConfig("conf", configset("cloud-minimal"))
+        .addConfig("routing", configset("search-request-listener-routing"))
+        .configure();
     createCollection(COLLECTION);
+    createCollection(ROUTING_COLLECTION, "routing");
   }
 
   @Before
@@ -83,7 +88,11 @@ public class SearchRequestListenerTest extends SolrCloudTestCase {
   }
 
   private static void createCollection(String name) throws Exception {
-    CollectionAdminRequest.createCollection(name, "conf", NUM_SHARDS, 1)
+    createCollection(name, "conf");
+  }
+
+  private static void createCollection(String name, String config) throws Exception {
+    CollectionAdminRequest.createCollection(name, config, NUM_SHARDS, 1)
         .processAndWait(cluster.getSolrClient(), DEFAULT_TIMEOUT);
     cluster.waitForActiveCollection(name, NUM_SHARDS, NUM_SHARDS);
     new UpdateRequest()
@@ -220,8 +229,7 @@ public class SearchRequestListenerTest extends SolrCloudTestCase {
 
   @Test
   public void testInternalSearchNotReported() throws Exception {
-    CoreContainer cc = cluster.getJettySolrRunner(0).getCoreContainer();
-    try (SolrCore core = cc.getCore(cc.getAllCoreNames().getFirst());
+    try (SolrCore core = jettyCore();
         SolrQueryRequest req =
             new SolrQueryRequestBase(
                 core, new ModifiableSolrParams().set("q", "*:*").set("distrib", false)) {}) {
@@ -272,6 +280,50 @@ public class SearchRequestListenerTest extends SolrCloudTestCase {
     assertEquals(1, events.size());
     assertEquals(NUM_SHARDS, events.peek().info().shardCount());
     assertEquals("/select", events.peek().info().handlerPath());
+  }
+
+  @Test
+  public void testV2OnlySearchReported() throws Exception {
+    try (SolrCore core = jettyCore(ROUTING_COLLECTION)) {
+      assertNull(core.getRequestHandler("/v2-only-select"));
+    }
+    NamedList<Object> rsp =
+        new V2Request.Builder("/collections/" + ROUTING_COLLECTION + "/v2-only-select")
+            .withMethod(SolrRequest.METHOD.GET)
+            .withParams(new ModifiableSolrParams().set("q", "*:*").set("distrib", false))
+            .build()
+            .process(nodeClient())
+            .getResponse();
+    assertFalse(((SolrDocumentList) rsp.get("response")).isEmpty());
+    assertEquals(1, events.size());
+    assertEquals(cluster.getJettySolrRunner(0).getNodeName(), events.peek().node());
+    assertEquals("/v2-only-select", events.peek().info().handlerPath());
+  }
+
+  @Test
+  public void testEmbeddedQtFallbackReported() throws Exception {
+    assertEmbeddedFallbackReported(true);
+  }
+
+  @Test
+  public void testEmbeddedDefaultFallbackReported() throws Exception {
+    assertEmbeddedFallbackReported(false);
+  }
+
+  private void assertEmbeddedFallbackReported(boolean useQt) throws Exception {
+    try (SolrCore core = jettyCore(ROUTING_COLLECTION);
+        SolrClient client = new EmbeddedSolrServer(core)) {
+      assertNull(core.getRequestHandler("/select"));
+      SolrQuery params = new SolrQuery("*:*").setParam("distrib", false);
+      if (useQt) {
+        params.set("qt", "standard");
+      }
+      QueryResponse rsp = new QueryRequest(params).process(client);
+      assertFalse(rsp.getResults().isEmpty());
+      assertEquals(1, events.size());
+      assertEquals(cluster.getJettySolrRunner(0).getNodeName(), events.peek().node());
+      assertEquals("/select", events.peek().info().handlerPath());
+    }
   }
 
   @Test
@@ -340,8 +392,19 @@ public class SearchRequestListenerTest extends SolrCloudTestCase {
   }
 
   private static SolrCore jettyCore() {
-    CoreContainer cc = cluster.getJettySolrRunner(0).getCoreContainer();
-    return cc.getCore(cc.getAllCoreNames().getFirst());
+    return jettyCore(COLLECTION);
+  }
+
+  private static SolrCore jettyCore(String collection) {
+    JettySolrRunner jetty = cluster.getJettySolrRunner(0);
+    String coreName =
+        getCollectionState(collection)
+            .replicaStream()
+            .filter(replica -> replica.getNodeName().equals(jetty.getNodeName()))
+            .map(Replica::getCoreName)
+            .findFirst()
+            .orElseThrow();
+    return jetty.getCoreContainer().getCore(coreName);
   }
 
   private static ResponseBuilder distributedBuilder(SolrQueryRequest req, SolrQueryResponse rsp) {

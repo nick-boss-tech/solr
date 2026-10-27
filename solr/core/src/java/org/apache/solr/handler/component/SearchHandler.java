@@ -65,6 +65,7 @@ import org.apache.solr.pkg.PackageAPI;
 import org.apache.solr.pkg.PackageListeners;
 import org.apache.solr.pkg.SolrPackageLoader;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.request.SolrRequestHandler;
 import org.apache.solr.request.SolrRequestInfo;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.search.CursorMark;
@@ -160,7 +161,7 @@ public class SearchHandler extends RequestHandlerBase
       return;
     }
     String path = (String) req.getContext().get(PATH);
-    if (path == null || req.getCore().getRequestHandler(path) != this) {
+    if (path == null || req.getContext().get(SolrRequestHandler.class) != this) {
       return;
     }
     SearchRequestInfo info = SearchRequestInfo.from(req, rsp);

@@ -2870,6 +2870,8 @@ public class SolrCore implements SolrInfoBean, Closeable {
       throw new SolrException(ErrorCode.BAD_REQUEST, msg);
     }
 
+    // Keep the original dispatch target when a handler delegates using the same request.
+    req.getContext().putIfAbsent(SolrRequestHandler.class, handler);
     preDecorateResponse(req, rsp);
 
     /*

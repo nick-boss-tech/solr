@@ -357,6 +357,7 @@ public class ApiBag {
 
     @Override
     public void call(SolrQueryRequest req, SolrQueryResponse rsp) {
+      req.getContext().putIfAbsent(SolrRequestHandler.class, rh);
       rh.handleRequest(req, rsp);
     }
 
