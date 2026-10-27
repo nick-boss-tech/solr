@@ -204,5 +204,107 @@
     "height": 572,
     "sha256": "cc2ecb62ff377082914d1799227fa993a7e9e1d789931c3f0dec3b02002a7bdc",
     "notes": []
+  },
+  {
+    "path": "material/figma/14-3470.png",
+    "bytes": 543985,
+    "width": 1280,
+    "height": 720,
+    "sha256": "836396c44db47bea02ea9059ee26fe7d48ae32b484d67ef99642fa8f0ac6f7ae",
+    "notes": [
+      "Browser viewport capture; JPEG decoded to PNG without resizing."
+    ]
+  },
+  {
+    "path": "material/figma/2119-22708.png",
+    "bytes": 340471,
+    "width": 1280,
+    "height": 720,
+    "sha256": "c003052c6d5cfb1ed72f2883a4833f66dc4c041ad36313acafdea2aa3700e776",
+    "notes": [
+      "Browser viewport capture; JPEG decoded to PNG without resizing."
+    ]
+  },
+  {
+    "path": "material/figma/2635-33680.png",
+    "bytes": 403131,
+    "width": 1280,
+    "height": 720,
+    "sha256": "18691b7d07a0f243b97aacd28e5c7e51a3dcf115b802ed36f29260c4b32330f3",
+    "notes": [
+      "Browser viewport capture; JPEG decoded to PNG without resizing."
+    ]
+  },
+  {
+    "path": "material/figma/2635-40394.png",
+    "bytes": 362284,
+    "width": 1280,
+    "height": 720,
+    "sha256": "725e33854749fe66b17745a525666185b9e946d3dbc89f19dd1d25d45003278e",
+    "notes": [
+      "Browser viewport capture; JPEG decoded to PNG without resizing."
+    ]
+  },
+  {
+    "path": "material/figma/87-12962.png",
+    "bytes": 389755,
+    "width": 1280,
+    "height": 720,
+    "sha256": "bed4f70612e867df5b11b93744ad8b0ef0211e81c088a43a83e7510ff4ecdf11",
+    "notes": [
+      "Browser viewport capture; JPEG decoded to PNG without resizing.",
+      "Cited Collections page ID; no selected frame and global Styles inspector. Prototype URL identifies page-id=87:12962."
+    ]
+  },
+  {
+    "path": "material/figma/2635-33680-prototype-after-create.png",
+    "bytes": 231507,
+    "width": 1280,
+    "height": 720,
+    "sha256": "93f810cb7c2088e07602084ed0b6b4a38184edad8189268e026bd775c5fac1c4",
+    "notes": [
+      "Browser viewport capture; JPEG decoded to PNG without resizing."
+    ]
+  },
+  {
+    "path": "material/figma/render/14-3470.png",
+    "bytes": 725888,
+    "width": 7768,
+    "height": 7481,
+    "sha256": "6cc9dff6f70c1941ec8c77dd6ac354720fc2429757b086711cc71ef0ae5639f3",
+    "notes": [
+      "Figma native PNG export.",
+      "256-color PNG to meet the under-1-MB limit; dimensions preserved."
+    ]
+  },
+  {
+    "path": "material/figma/render/2119-22708.png",
+    "bytes": 89973,
+    "width": 951,
+    "height": 1521,
+    "sha256": "2487e7a0d2e307b25ccc1c6b4302c2484871244a8672d6fdded6742ac09b8430",
+    "notes": [
+      "Figma native PNG export."
+    ]
+  },
+  {
+    "path": "material/figma/render/2635-33680.png",
+    "bytes": 139309,
+    "width": 1920,
+    "height": 1080,
+    "sha256": "7d24f6bed35d9bf7a45d8971c7f939074a025ddbc1cfc0ef3fea56b8d25af4c6",
+    "notes": [
+      "Figma native PNG export."
+    ]
+  },
+  {
+    "path": "material/figma/render/2635-40394.png",
+    "bytes": 52927,
+    "width": 919,
+    "height": 673,
+    "sha256": "0ba313318b89bfaaa92588966e3af6ea6efe1a7675741707b0217bb048b28363",
+    "notes": [
+      "Figma native PNG export."
+    ]
   }
 ]
