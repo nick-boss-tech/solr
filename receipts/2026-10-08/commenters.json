@@ -1,0 +1,111 @@
+[
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 27,
+    "issues": 6,
+    "automation": true
+  },
+  {
+    "username": "jbernste",
+    "displayName": "Joel Bernstein",
+    "comments": 14,
+    "issues": 1
+  },
+  {
+    "username": "runiu",
+    "displayName": "Ray",
+    "comments": 12,
+    "issues": 1
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 7,
+    "issues": 4
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 7,
+    "issues": 3
+  },
+  {
+    "username": "renato",
+    "displayName": "Renato Haeberli",
+    "comments": 7,
+    "issues": 1
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 6,
+    "issues": 2
+  },
+  {
+    "username": "malliaridis",
+    "displayName": "Christos Malliaridis",
+    "comments": 5,
+    "issues": 1
+  },
+  {
+    "username": "houston",
+    "displayName": "Houston Putman",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "lkot",
+    "displayName": "Lucas Kot-Zaniewski",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "ab",
+    "displayName": "Andrzej Bialecki",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "hossman",
+    "displayName": "Chris M. Hostetter",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "jaykay12",
+    "displayName": "Jalaz Kumar",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "ronnnnnnn",
+    "displayName": "Ron Ben-Yosef",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "erickerickson",
+    "displayName": "Erick Erickson",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "gus",
+    "displayName": "Gus Heck",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "nickshanin",
+    "displayName": "Nick Shanin",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "rahulgoswami",
+    "displayName": "Rahul Goswami",
+    "comments": 1,
+    "issues": 1
+  }
+]
