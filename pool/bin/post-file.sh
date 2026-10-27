@@ -5,12 +5,12 @@
 # Use this for single-file records (claims, reports, receipts, assignments,
 # status edits) instead of a local clone push. There is no local tree to fall
 # behind and nothing to rebase: the commit lands on whatever the tip is when
-# the call is made. Multi-file atomic changes still go through git push.
+# the call is made. Multi-file records go through board-push.sh instead.
 #
 # Usage:
 #   post-file.sh <branch-path> <local-file> <commit-message> [--branch <name>] [--base-sha <blob-sha>]
 #
-# --branch defaults to coordination.
+# --branch defaults to coordination-ui.
 # --base-sha is the git blob SHA of the branch file the caller's edit is based
 # on. If the file on the branch no longer matches it, the post is refused
 # (exit 5) instead of overwriting someone else's newer edit: re-read the
@@ -18,13 +18,15 @@
 #
 # Exit codes: 0 posted; 4 the API refused the write (conflict or validation);
 # 5 stale --base-sha; 6 usage or credential problem.
-# The credential is read from line 2 of ~/.git-credentials and never printed.
+# The credential is read from line 2 of ~/.git-credentials, falling back to
+# the GITHUB_TOKEN environment variable, then to GITHUB_TOKEN in
+# /workspace/.env. It is never printed.
 set -euo pipefail
 
 PATH_ON_BRANCH=""
 LOCAL_FILE=""
 MESSAGE=""
-BRANCH="coordination"
+BRANCH="coordination-ui"
 BASE_SHA=""
 
 while [ $# -gt 0 ]; do
@@ -47,6 +49,10 @@ fi
 [ -f "$LOCAL_FILE" ] || { echo "post-file: no such local file: $LOCAL_FILE" >&2; exit 6; }
 
 TOKEN=$(sed -n '2p' ~/.git-credentials | sed 's|.*://[^:]*:\([^@]*\)@.*|\1|')
+if [ -z "$TOKEN" ] && [ -n "${GITHUB_TOKEN:-}" ]; then TOKEN="$GITHUB_TOKEN"; fi
+if [ -z "$TOKEN" ] && [ -f /workspace/.env ]; then
+  TOKEN=$(grep -E '^GITHUB_TOKEN=' /workspace/.env | head -1 | sed -E 's/^GITHUB_TOKEN=//; s/^"//; s/"$//' | tr -d ' \r')
+fi
 [ -n "$TOKEN" ] || { echo "post-file: could not read the credential" >&2; exit 6; }
 
 API="https://api.github.com/repos/nick-boss-tech/solr/contents/$PATH_ON_BRANCH"
