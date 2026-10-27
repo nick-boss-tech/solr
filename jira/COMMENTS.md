@@ -93,3 +93,19 @@ Answering [~gus]'s question from 2024: yes, this is complete, and the version is
 ## Critical batch 01 drafts, not posted
 
 SOLR-4180, SOLR-6420, SOLR-5821, SOLR-7351, SOLR-7517, SOLR-5850, SOLR-6683, SOLR-8331, SOLR-8417, and SOLR-7926 now have individual comment drafts at `jira/jira-comment-SOLR-<KEY>-draft.md`. The closure-ready drafts are SOLR-6683, SOLR-7517, and SOLR-8417. See `reports/critical-comments-round-1-batch-01.md` for the evidence and `reports/closure-ready-drafts-index-round-1.md` for the running closure list. All remain unposted pending Nick's go.
+
+## vm6 drafts, 2026-10-27 (not posted)
+
+Drafts from vm6's pass over Eric Pugh's open tickets with no live PR. Each one carries the header disclosure and a single question to the reporter. Nothing here is posted. Posting needs Nick's go per comment.
+
+- **SOLR-18138**: CLI message when ZooKeeper is unreachable. Text: `jira-comment-SOLR-18138-draft.md`. Report: `reports/solr-18138-cli-zk-unreachable-round-1.md`.
+- **SOLR-18145**: queryUUID and taskUUID. Text: `jira-comment-SOLR-18145-draft.md`. Report: `reports/solr-18145-taskmanagement-names-round-1.md`.
+- **SOLR-18405**: SLF4J lazy logging, measurement. Text: `jira-comment-SOLR-18405-draft.md`. Report: `reports/solr-18405-slf4j-lazy-logging-round-1.md`.
+- **SOLR-18428, 18429, 18430, 18431**: v2 shard, replica and replica-property reads. Texts: `jira-comment-SOLR-18428-draft.md` through `jira-comment-SOLR-18431-draft.md`. Report: `reports/solr-18428-18431-v2-read-round-1.md`.
+- **SOLR-18461**: curl examples on techproducts. Text: `jira-comment-SOLR-18461-draft.md`. Report: `reports/solr-18461-curl-examples-round-1.md`.
+- **SOLR-18546**: gettingstarted to techproducts. Text: `jira-comment-SOLR-18546-draft.md`. Report: `reports/solr-18546-gettingstarted-round-1.md`.
+- **SOLR-18553**: plurality and consistency. Text: `jira-comment-SOLR-18553-draft.md`. Report: `reports/solr-18553-plurality-audit-round-1.md`.
+- **SOLR-18351**: HOLD. Open PR #5234 (move ContentStream to solr-core) and backport #5235 are not yet considered in the draft. Text: `jira-comment-SOLR-18351-draft.md`. Report: `reports/eric-fresh-scan-round-1.md`.
+- **SOLR-18449**: HOLD. Open PR #4913 (standard test properties naming) is not yet considered in the draft. Text: `jira-comment-SOLR-18449-draft.md`. Report: `reports/solr-18449-test-sysprops-audit-round-1.md`.
+
+Posting path: vm6 has no Jira credentials. Nick posts each text by hand, or the phone agent posts it with Nick's go. Each posting is recorded the day it posts in `receipts/comment-ledger/<YYYY-MM-DD>.md`, per `assignments/scan-streams-and-comment-cap-round-1.md`.
