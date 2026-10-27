@@ -69,16 +69,14 @@ public class SystemInfoResponse extends SolrResponseBase {
       if (nodesInfo.isEmpty()) {
         nodesInfo.put(
             null,
-            JacksonContentWriter.convertValue(
-                removeHeader(response), NodeSystemResponse.class));
+            JacksonContentWriter.convertValue(removeHeader(response), NodeSystemResponse.class));
       }
 
     } else {
       // single-node response
       nodesInfo.put(
           response.get("node").toString(),
-          JacksonContentWriter.convertValue(
-              removeHeader(response), NodeSystemResponse.class));
+          JacksonContentWriter.convertValue(removeHeader(response), NodeSystemResponse.class));
     }
   }
 

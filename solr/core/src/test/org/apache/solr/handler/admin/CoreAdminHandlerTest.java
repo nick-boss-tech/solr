@@ -230,9 +230,10 @@ public class CoreAdminHandlerTest extends SolrTestCaseJ4 {
     assertNotNull("core failures is null", failures);
 
     final var statusByCore =
-        new ObjectMapper().convertValue(
-            resp.getValues().get("status"),
-            new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
+        new ObjectMapper()
+            .convertValue(
+                resp.getValues().get("status"),
+                new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
     assertNotNull("core status is null", statusByCore);
 
     assertEquals("wrong number of core failures", 1, failures.size());

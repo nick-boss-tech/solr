@@ -165,9 +165,10 @@ public class TestManagedSchema extends AbstractBadConfigTestBase {
     assertNull("Exception on create", response.getException());
     NamedList<?> responseValues = response.getValues();
     final var statusByCore =
-        new ObjectMapper().convertValue(
-            responseValues.get("status"),
-            new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
+        new ObjectMapper()
+            .convertValue(
+                responseValues.get("status"),
+                new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
     assertEquals(
         "Schema resource name differs from expected name",
         expectedSchemaResource,

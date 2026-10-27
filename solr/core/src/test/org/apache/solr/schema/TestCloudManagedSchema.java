@@ -63,9 +63,10 @@ public class TestCloudManagedSchema extends AbstractFullDistribZkTestBase {
     var rootClient = jettys.get(which).getSolrClient();
     NamedList<?> namedListResponse = rootClient.request(request);
     final var statusByCore =
-        new ObjectMapper().convertValue(
-            namedListResponse.get("status"),
-            new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
+        new ObjectMapper()
+            .convertValue(
+                namedListResponse.get("status"),
+                new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
     final String coreName = statusByCore.keySet().stream().findFirst().get();
     final var collectionStatus = statusByCore.get(coreName);
     // Make sure the upgrade to managed schema happened

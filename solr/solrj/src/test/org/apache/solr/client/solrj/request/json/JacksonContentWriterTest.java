@@ -55,7 +55,8 @@ public class JacksonContentWriterTest extends SolrTestCase {
           }
         };
     final var exception =
-        expectThrows(IOException.class, () -> new JacksonContentWriter(Map.of("a", 1)).write(output));
+        expectThrows(
+            IOException.class, () -> new JacksonContentWriter(Map.of("a", 1)).write(output));
     assertTrue(exception.getMessage().contains("output failed"));
   }
 
@@ -96,7 +97,9 @@ public class JacksonContentWriterTest extends SolrTestCase {
     public Date when = new Date(1234);
     public Choice choice = Choice.VALUE;
     public String absent = null;
-    @JsonProperty("alias") public String renamed = "shared annotation";
+
+    @JsonProperty("alias")
+    public String renamed = "shared annotation";
   }
 
   public enum Choice {

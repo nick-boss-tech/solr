@@ -245,9 +245,10 @@ public class CoreAdminCreateDiscoverTest extends SolrTestCaseJ4 {
             "testInstanceDirAsPropertyParam"),
         resp);
     final var statusByCore =
-        new ObjectMapper().convertValue(
-            resp.getValues().get("status"),
-            new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
+        new ObjectMapper()
+            .convertValue(
+                resp.getValues().get("status"),
+                new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
     assertNotNull(statusByCore);
     final var coreProps = statusByCore.get("testInstanceDirAsPropertyParam");
     assertNotNull(coreProps);
