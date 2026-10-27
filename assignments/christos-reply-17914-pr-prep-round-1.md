@@ -1,6 +1,6 @@
 # Assignment: SOLR-17914 PR preparation after Christos's reply
 
-Status: CLAIMED (vm4, claim `claims/christos-reply-17914-pr-prep-round-1.md`, started 2026-10-27T20:47:52Z)
+Status: DONE (vm4, deliverable and draft below)
 Tags: implementation, records
 Tag note: the `ui` tag was removed at Nick Shanin's direction on 2026-10-27 so any capable pool host can claim this; only vm6 held `ui`, which left the other pool hosts unable to take Christos's assignments. The ui build facts are in `UI-PLAYBOOK.md`.
 Posted at Nick Shanin's direction on 2026-10-27: every reply from Christos Malliaridis gets its own assignment. This is the assignment for his SOLR-17914 reply.
@@ -24,3 +24,5 @@ A short report at `reports/christos-reply-17914-pr-prep-round-1.md`: live head v
 ## Limits
 
 No PR opening, no Jira post or comment, no GitHub comment. No redesign work toward the in-progress Figma designs.
+
+DONE: . Deliverables: `reports/christos-reply-17914-pr-prep-round-1.md`, `drafts/pr-solr-17914-create-collection-dialog.md`, `receipts/SOLR-17914-stacked-regate-vm4.md`. Re-gate of `5ea0055190` passed; the branch was not changed. Nothing opened or posted.
