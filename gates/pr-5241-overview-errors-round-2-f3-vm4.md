@@ -1,6 +1,6 @@
 # Superseding gate: PR 5241 core overview errors, round 2, formatting-repaired head (vm4)
 
-Status: OPEN. Immutable once posted. Supersedes `gates/pr-5241-overview-errors-round-2.md` for final proof only at the head below. Round 2's requirements are unchanged.
+Status: DONE. Gated head 3b36f32e93d513c58ff14c48db303a296218f84a; receipt receipts/PR-5241-overview-errors.md. Immutable once posted. Supersedes `gates/pr-5241-overview-errors-round-2.md` for final proof only at the head below. Round 2's requirements are unchanged.
 
 - Ticket / PR: SOLR-16398 / https://github.com/apache/solr/pull/5241.
 - Fork / branch: `nick-boss-tech/solr:solr-16398-submit`.

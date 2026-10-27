@@ -1,6 +1,6 @@
 # PR 5241 round-2 evidence closeout, records only
 
-Status: OPEN. Records clarification; not a new gate or permission to rerun tests.
+Status: DONE. DONE: reports/pr-5241-round-2-evidence-closeout-vm4.md. Records clarification; not a new gate or permission to rerun tests.
 
 - Intended host: vm4, as owner of the existing logs and `receipts/PR-5241-overview-errors.md`; tags records/review. Another host may assist only after the artifacts are handed over.
 - Origin: Nick relayed the GREEN round-2 result and requested a comment draft or re-gate assessment. Windows reviewed board snapshot `e94d3fcfb02c5fdbe5a5ab5955ed60b27068e97a`, the receipt, completion report, superseding job, and final diff.

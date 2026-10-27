@@ -15,4 +15,5 @@
 - Preflight at claim time: `/` 40% used, 4.5G free; inodes 10% used.
 - Deliverables: `receipts/PR-5241-overview-errors.md` (updated by the gate host, round-1 history preserved), completion report `reports/pr-5241-overview-errors-gate-round-2.md`.
 
-Status: CLAIMED until the receipt and completion report are pushed. Nothing public (no PR, comment, or JIRA action).
+Status: DONE. Gate GREEN at 3b36f32e93d513c58ff14c48db303a296218f84a.
+DONE: receipts/PR-5241-overview-errors.md (round-2 section), reports/pr-5241-overview-errors-gate-round-2.md, reports/pr-5241-round-2-evidence-closeout-vm4.md. Nothing public (no PR, comment, or JIRA action).
