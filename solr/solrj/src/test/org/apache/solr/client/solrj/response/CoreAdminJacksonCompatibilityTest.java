@@ -32,7 +32,7 @@ public class CoreAdminJacksonCompatibilityTest extends SolrTestCase {
     values.add("status", Map.of("core", Map.of("startTime", new Date(1234), "uptime", 42L)));
     response.setResponse(values);
 
-    assertEquals(new Date(1234), response.getStartTime("core"));
+    assertEquals(1234L, response.getStartTime("core").getTime());
     assertEquals(Long.valueOf(42), response.getUptime("core"));
     assertNull(response.getCoreStatus("missing"));
   }
