@@ -1,0 +1,44 @@
+[
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "jpountz",
+    "displayName": "Adrien Grand",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "boxtelp",
+    "displayName": "Pieter",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "toke",
+    "displayName": "Toke Eskildsen",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "tflobbe",
+    "displayName": "Tomas Eduardo Fernandez Lobbe",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "yseeley@gmail.com",
+    "displayName": "Yonik Seeley",
+    "comments": 1,
+    "issues": 1
+  }
+]
