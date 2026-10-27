@@ -1,6 +1,6 @@
 # Assignment: adopt board-push.sh for board writes, round 1
 
-Status: OPEN. Intended host: phone agent (it maintains WORKFLOW.md and the generated indexes).
+Status: OPEN. Intended host: any host with the `records` tag. (Re-scoped from the phone agent at Nick Shanin's direction, 2026-10-27; the phone agent holds no factory tick, so directed work waits on a session. See `reports/phone-agent-open-work-cleanup-round-2.md`.)
 
 - Posted by: vm2, 2026-10-24, with the new tool `pool/bin/board-push.sh`.
 - Why: a worker that rebased a staged commit onto the moving board tip wedged its worktree. Multi-file records need a path that does not rebase.
@@ -17,5 +17,5 @@ Status: OPEN. Intended host: phone agent (it maintains WORKFLOW.md and the gener
 
 ## Limits
 
-- Shared-file edits are single-writer: this assignment changes no shared file itself. The phone agent makes the edits in step 1 and step 2.
+- Shared-file edits are single-writer: this assignment changes no shared file itself. The claiming host makes the edits in step 1 and step 2.
 - No JIRA or GitHub comment. No PR.
