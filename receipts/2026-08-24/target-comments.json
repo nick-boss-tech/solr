@@ -1,0 +1,12 @@
+[
+  {
+    "person": "Jan Høydahl",
+    "username": "janhoy",
+    "issue": "SOLR-3232",
+    "comment_id": "18107561",
+    "created": "2026-08-24T19:41:04.356+0000",
+    "updated": "2026-08-24T19:41:04.356+0000",
+    "excerpt": "Shall we close this and accept that we have to enter the handler manually in the (old) Admin UI? Make it more fancy in the new one?",
+    "url": "https://issues.apache.org/jira/browse/SOLR-3232?focusedCommentId=18107561"
+  }
+]
