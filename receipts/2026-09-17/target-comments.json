@@ -1,0 +1,22 @@
+[
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17987",
+    "comment_id": "18116356",
+    "created": "2026-09-17T14:15:04.755+0000",
+    "updated": "2026-09-17T14:15:04.755+0000",
+    "excerpt": "And no gauge could possible retain a lambda pointer reference that could \"leak\" in the event Solr forgets to close/unregister something associated with metrics.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17987?focusedCommentId=18116356"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17316",
+    "comment_id": "18116449",
+    "created": "2026-09-17T18:34:18.217+0000",
+    "updated": "2026-09-17T18:34:18.217+0000",
+    "excerpt": "Thanks Serhiy!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17316?focusedCommentId=18116449"
+  }
+]
