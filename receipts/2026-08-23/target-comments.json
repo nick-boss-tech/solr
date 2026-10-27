@@ -1,0 +1,82 @@
+[
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18398",
+    "comment_id": "18107028",
+    "created": "2026-08-23T02:15:07.022+0000",
+    "updated": "2026-08-23T02:15:07.022+0000",
+    "excerpt": "I anticipate this will touch a massive number of source files, albeit in a trivial way. Let's not begin this until closer to the 11.0 release. It will positively affect places attempting to maintain uniqueness, e.g. in the response header. I don't anticipate it will noticeably affect performance.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18398?focusedCommentId=18107028"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-17825",
+    "comment_id": "18107098",
+    "created": "2026-08-23T11:55:19.821+0000",
+    "updated": "2026-08-23T11:55:19.821+0000",
+    "excerpt": "The upgrade to Kafka 4 means that beanutils no longer is included and this is fixed.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17825?focusedCommentId=18107098"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-10091",
+    "comment_id": "18107100",
+    "created": "2026-08-23T11:57:58.650+0000",
+    "updated": "2026-08-23T11:57:58.650+0000",
+    "excerpt": "This has been delivered with the cross-dc capability in the 9x line (I think!)...",
+    "url": "https://issues.apache.org/jira/browse/SOLR-10091?focusedCommentId=18107100"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18342",
+    "comment_id": "18107104",
+    "created": "2026-08-23T11:58:34.721+0000",
+    "updated": "2026-08-23T11:58:34.721+0000",
+    "excerpt": "This is done, thanks!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18342?focusedCommentId=18107104"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18060",
+    "comment_id": "18107131",
+    "created": "2026-08-23T15:11:18.737+0000",
+    "updated": "2026-08-23T15:11:18.737+0000",
+    "excerpt": "Noticed the crossdc backport commits (e.g. SOLR-18060/61/62/63/64/77) use a subject like \"... (cherry-pick from #4106) (#4150)\" to note provenance. Next time, please switch to {{git cherry-pick -x }} instead. It embeds the standard {{(cherry picked from commit )}} line in the commit body, which backport-tracking tooling (and other contributors) actually parse. The hand-written subject note isn't isn't standardized.…",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18060?focusedCommentId=18107131"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-16328",
+    "comment_id": "18107135",
+    "created": "2026-08-23T15:17:35.945+0000",
+    "updated": "2026-08-23T15:17:35.945+0000",
+    "excerpt": "A contributor (more concretely their AI tooling) noticed basically dead code around this interning. It surprised me so I had Claude research what happened: ---- STR_INTERNER_OBJ_BUILDER was introduced in SOLR-16328 (\"intern() strings in DocCollection to reduce memory footprint\"), commit 1b7ff717b19 / 977a8464173 (Noble Paul, 2022-09-07). That PR only touched ClusterState.java and CoreContainer.java — it added the fi…",
+    "url": "https://issues.apache.org/jira/browse/SOLR-16328?focusedCommentId=18107135"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17461",
+    "comment_id": "18107136",
+    "created": "2026-08-23T15:20:30.941+0000",
+    "updated": "2026-08-23T15:21:47.518+0000",
+    "excerpt": "Surprisingly, this is basically, although not exactly, dead code: https://issues.apache.org/jira/browse/SOLR-16328?focusedCommentId=18107135&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-18107135 and so it'll be removed shortly in another PR pending on a related topic.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17461?focusedCommentId=18107136"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18372",
+    "comment_id": "18107141",
+    "created": "2026-08-23T15:49:08.658+0000",
+    "updated": "2026-08-23T15:49:08.658+0000",
+    "excerpt": "IMO it's safe to bring to 10.x. It's too internal. RE \"multiple\"; I don't remember TBH but I was likely hedging in case some advanced/unknown situation I couldn't see needed it. RE {{@Deprecated}} vs {{@lucene.internal}}: The latter doesn't communicate a belief that it shouldn't be needed anymore.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18372?focusedCommentId=18107141"
+  }
+]
