@@ -51,3 +51,5 @@ Heartbeat: 2026-10-25T02:06Z (rc3-repro-xml-correction-round-1: TLOG XML overwri
 Heartbeat: 2026-10-25T16:34Z (rc3-test-failure-causes-round-2: report pushed at 70a2440cc96; SOLR-18587 fixed by matched pairs; TLOG and NRT failures are NFS hard-link (EMLINK) on /workspace; TermsQ fix matched; SOLR-18530 open; waiting for owner on candidate and smoke tmp-dir)
 
 Heartbeat: 2026-10-27T17:29:15Z (pr5112 linux gate: superseding gate at 46bc7e4 green; receipts/PR-5112-target-header-followup.md; gradle-help review claim paused, its heartbeat stale since 07:44Z)
+
+Heartbeat: 2026-10-27T18:54:09Z (SOLR-18564 timeout-type gate at 6ca1cba8061b GREEN: receipts/SOLR-18564-timeout-type-round-1.md)
