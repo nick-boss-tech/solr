@@ -1,0 +1,111 @@
+From bb3876aa83ec26370c261293a8a88bd8ca6ea575 Mon Sep 17 00:00:00 2001
+From: Nick Shanin <nick.boss.us@gmail.com>
+Date: Mon, 26 Oct 2026 23:19:56 +0000
+Subject: [PATCH 1/2] SolrJ: apply tidy formatting to LB attempt-limit changes
+
+---
+ .../org/apache/solr/client/solrj/impl/LBSolrClient.java   | 6 +++---
+ .../solrj/impl/LBAsyncSolrClientAttemptLimitTest.java     | 8 ++------
+ .../client/solrj/impl/LBSolrClientAttemptLimitTest.java   | 6 ++----
+ 3 files changed, 7 insertions(+), 13 deletions(-)
+
+diff --git a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java
+index 725cbe747b1..67b4a68d686 100644
+--- a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java
++++ b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java
+@@ -878,9 +878,9 @@ public abstract class LBSolrClient extends SolrClient {
+    *
+    * @param request the request to execute
+    * @param collection the collection, unless overridden by the selected endpoint
+-   * @param numServersToTry maximum attempts, including the initial attempt; null tries all
+-   *     eligible endpoints, and non-positive values allow no attempts. Retries internal to the
+-   *     underlying HTTP client are outside this limit.
++   * @param numServersToTry maximum attempts, including the initial attempt; null tries all eligible
++   *     endpoints, and non-positive values allow no attempts. Retries internal to the underlying
++   *     HTTP client are outside this limit.
+    * @return the response from the first successful attempt
+    * @throws AttemptLimitExceededException if the configured limit prevents further attempts
+    */
+diff --git a/solr/solrj/src/test/org/apache/solr/client/solrj/impl/LBAsyncSolrClientAttemptLimitTest.java b/solr/solrj/src/test/org/apache/solr/client/solrj/impl/LBAsyncSolrClientAttemptLimitTest.java
+index b8992b239de..87a7847a764 100644
+--- a/solr/solrj/src/test/org/apache/solr/client/solrj/impl/LBAsyncSolrClientAttemptLimitTest.java
++++ b/solr/solrj/src/test/org/apache/solr/client/solrj/impl/LBAsyncSolrClientAttemptLimitTest.java
+@@ -91,8 +91,7 @@ public class LBAsyncSolrClientAttemptLimitTest extends SolrTestCase {
+       req.setNumDeadServersToTry(1);
+       ExecutionException failure =
+           expectThrows(
+-              ExecutionException.class,
+-              () -> client.requestAsync(req).get(1, TimeUnit.MINUTES));
++              ExecutionException.class, () -> client.requestAsync(req).get(1, TimeUnit.MINUTES));
+       assertEquals(List.of(ENDPOINTS.get(0)), client.attempted);
+       assertSame(client.failures.get(ENDPOINTS.get(0)), failure.getCause());
+     }
+@@ -196,10 +195,7 @@ public class LBAsyncSolrClientAttemptLimitTest extends SolrTestCase {
+         ExecutionException failure =
+             expectThrows(
+                 ExecutionException.class,
+-                () ->
+-                    client
+-                        .requestAsync(new Req(request, ENDPOINTS, 3))
+-                        .get(1, TimeUnit.MINUTES));
++                () -> client.requestAsync(new Req(request, ENDPOINTS, 3)).get(1, TimeUnit.MINUTES));
+         assertSame(client.failures.get(ENDPOINTS.get(0)), failure.getCause());
+         assertEquals(List.of(ENDPOINTS.get(0)), client.attempted);
+       }
+diff --git a/solr/solrj/src/test/org/apache/solr/client/solrj/impl/LBSolrClientAttemptLimitTest.java b/solr/solrj/src/test/org/apache/solr/client/solrj/impl/LBSolrClientAttemptLimitTest.java
+index 01ce6c00565..c584f5581e5 100644
+--- a/solr/solrj/src/test/org/apache/solr/client/solrj/impl/LBSolrClientAttemptLimitTest.java
++++ b/solr/solrj/src/test/org/apache/solr/client/solrj/impl/LBSolrClientAttemptLimitTest.java
+@@ -204,8 +204,7 @@ public class LBSolrClientAttemptLimitTest extends SolrTestCase {
+         client.fail(ENDPOINTS.get(0));
+         SolrServerException failure =
+             expectThrows(
+-                SolrServerException.class,
+-                () -> client.request(new Req(request, ENDPOINTS, 3)));
++                SolrServerException.class, () -> client.request(new Req(request, ENDPOINTS, 3)));
+         assertEquals(List.of(ENDPOINTS.get(0)), client.attempted);
+         assertSame(client.failures.get(ENDPOINTS.get(0)), failure);
+       }
+@@ -218,8 +217,7 @@ public class LBSolrClientAttemptLimitTest extends SolrTestCase {
+     assertEquals(limit, failure.getAttempts());
+     assertEquals(limit, failure.getMaxAttempts());
+     assertSame(
+-        client.failures.get(client.attempted.get(client.attempted.size() - 1)),
+-        failure.getCause());
++        client.failures.get(client.attempted.get(client.attempted.size() - 1)), failure.getCause());
+   }
+ 
+   private static class RecordingClient extends LBSolrClient {
+-- 
+2.34.1
+
+
+From 28dbd2edfce1520c354dbc71b555db4ced3fbebe Mon Sep 17 00:00:00 2001
+From: Nick Shanin <nick.boss.us@gmail.com>
+Date: Tue, 27 Oct 2026 00:05:35 +0000
+Subject: [PATCH 2/2] SolrJ: qualify LB attempt-limit javadoc references
+
+---
+ .../apache/solr/client/solrj/impl/LBAsyncSolrClient.java    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBAsyncSolrClient.java b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBAsyncSolrClient.java
+index d5dcb8c1c7e..7fe93139449 100644
+--- a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBAsyncSolrClient.java
++++ b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBAsyncSolrClient.java
+@@ -57,9 +57,9 @@ public abstract class LBAsyncSolrClient extends LBSolrClient {
+    * this method does not actually Load Balance. It is up to the caller to shuffle the List of
+    * Endpoints if Load Balancing is desired.
+    *
+-   * <p>The attempt limit in {@link Req#getNumServersToTry()} includes the initial attempt and
+-   * zombie fallback. Exhaustion completes the future exceptionally with {@link
+-   * AttemptLimitExceededException}, retaining the last failure as its cause.
++   * <p>The attempt limit in {@link LBSolrClient.Req#getNumServersToTry()} includes the initial
++   * attempt and zombie fallback. Exhaustion completes the future exceptionally with {@link
++   * LBSolrClient.AttemptLimitExceededException}, retaining the last failure as its cause.
+    *
+    * @param req the wrapped request to perform
+    * @return a {@link CompletableFuture} that tracks the progress of the async request.
+-- 
+2.34.1
+
