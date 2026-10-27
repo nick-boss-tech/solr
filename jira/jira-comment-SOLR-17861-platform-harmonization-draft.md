@@ -12,6 +12,6 @@ On 2026-10-27, I ran the checksum checks on Windows 11 x64 with Gradle 9.7.0 and
 
 On Linux x86_64 with JDK 21 and Gradle 9.7.0, at the same commit, {{./gradlew -p ui :desktopApp:validateLicenses --console=plain}} passed against the committed files before regeneration, and the full run ({{updateLicenses}}, {{validateLicenses}}, {{spotlessCheck}}, {{check}}) passed, with regeneration leaving the worktree unchanged. The same 105 checksum files, including all five Skiko runtime classifiers, are present, and {{:desktopApp:test}} was {{NO-SOURCE}} there as well.
 
-No macOS host run has been done. The macOS checksums are generated and validated as part of the set on both hosts above, but the checks have not executed on macOS itself. Do the Windows and Linux host results, with all five target classifiers checked, address the concern, or is a separate macOS host run still wanted?
+I do not have access to a macOS host, so the checks cannot be executed on macOS from my side. The macOS checksums are generated and validated as part of the set on both hosts above. Do the Windows and Linux host results, with all five target classifiers checked, address the concern, or would a macOS host run still be needed, in which case it would have to come from someone with a Mac?
 
 🤖 _AI text above_ 🤖 _(reviewed by Nick Shanin)_
