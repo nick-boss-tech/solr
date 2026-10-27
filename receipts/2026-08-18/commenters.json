@@ -1,0 +1,74 @@
+[
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 7,
+    "issues": 1
+  },
+  {
+    "username": "erickerickson",
+    "displayName": "Erick Erickson",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "jbernste",
+    "displayName": "Joel Bernstein",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "sarowe",
+    "displayName": "Steven Rowe",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "yseeley@gmail.com",
+    "displayName": "Yonik Seeley",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "jpountz",
+    "displayName": "Adrien Grand",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "ctargett",
+    "displayName": "Cassandra Targett",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "krisden",
+    "displayName": "Kevin Risden",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "khitrin",
+    "displayName": "Nikolay Khitrin",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "varun",
+    "displayName": "Varun Thacker",
+    "comments": 1,
+    "issues": 1
+  }
+]
