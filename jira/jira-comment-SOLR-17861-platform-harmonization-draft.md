@@ -1,6 +1,6 @@
 # Jira comment draft: SOLR-17861 platform harmonization status
 
-Status: DRAFT (not posted). Shape: status note with one question. Addressee: Christos Malliaridis, replying to his comment 18133004 (2026-10-27) on the operating-system coverage of the checksum checks. Prepared by the phone agent, 2026-10-27, under `assignments/SOLR-17861-windows-linux-comment-harmonization-round-1.md`. Evidence: Windows run recorded in that assignment; Linux gate PASS at the same head in `receipts/SOLR-17861.md`. Posting needs Nick Shanin's explicit go.
+Status: POSTED on 2026-10-27 as Jira comment 18133180, on Nick Shanin's go. Shape: status note with one question. Addressee: Christos Malliaridis, replying to his comment 18133004 (2026-10-27) on the operating-system coverage of the checksum checks. Prepared by the phone agent, 2026-10-27, under `assignments/SOLR-17861-windows-linux-comment-harmonization-round-1.md`. Evidence: Windows run recorded in that assignment; Linux gate PASS at the same head in `receipts/SOLR-17861.md`. Posting needs Nick Shanin's explicit go.
 
 ---
 
