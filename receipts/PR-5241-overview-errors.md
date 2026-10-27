@@ -1,6 +1,20 @@
-# SOLR-16398 gate receipt: PR 5241 core overview replication errors, round 1 (vm4, NOT GREEN)
+# SOLR-16398 gate receipts: PR 5241 core overview replication errors (vm4)
 
-Result: not GREEN. Two blockers, both recorded below. Status stays **Implemented, Proof Pending**.
+## Round 2: GREEN at 3b36f32e93d513c58ff14c48db303a296218f84a
+
+- Gate: `gates/pr-5241-overview-errors-round-2.md`, superseded for the final head by `gates/pr-5241-overview-errors-round-2-f3-vm4.md`. Claim: `claims/pr-5241-overview-errors-gate-vm4-round-2.md`. Completion report: `reports/pr-5241-overview-errors-gate-round-2.md` (has the results table, hashes, and the upstream follow-up draft).
+- Exact pinned head: `3b36f32e93d513c58ff14c48db303a296218f84a` on `nick-boss-tech/solr:solr-16398-submit`, verified by ls-remote after the run. Parent `56365b43ee` (round-2 repair), then `80ca9374f4` (round-1 candidate), then the original PR head `aa8272ef08`.
+- Results at 3b36f32e93: tidy rc 0 with no changes; `git diff --check` rc 0; `:solr:webapp:forbiddenApisTest` rc 0; focused `AdminUiCoreOverviewErrorsTest` 3 tests 0/0/0; neighbors 10 tests in 5 classes 0/0/0; `env -u NODE_ENV ./gradlew check -x test` BUILD SUCCESSFUL rc 0 (557 tasks, in a standalone clone); `node --check` rc 0; fail-before at `aa8272ef08` with only the 3b36 test file: 3 tests, 3 failures, each at its intended UI wait (403 permission banner at line 79, 503 server message at line 89, 401 login form at line 100).
+- Logs: `/workspace/gates/logs/vm4/pr-5241-overview-round-2/`. Fail-before screenshots, page source, and console logs: `f4-failbefore-r2-ui-artifacts/`.
+- Repairs and interruptions in round 2: formatting commit `3b36f32e93` (tidy wrapped one line; pushed fast-forward from `56365b43ee`); driver stopped silently at `56365b43ee` during tidy and at `3b36f32e93` at the focused-leg start, both with no tests run (archived as `interrupted-attempt-1-tidy/` and `interrupted-attempt-2-f1/`); `check -x test` in the gate worktree failed on Antora's "Local content source must be a git repository" because a git worktree's `.git` is a file (archived as `check-attempt-worktree-layout-failure/`, rerun in standalone shallow clone `/workspace/worktrees/gate-pr5241-r2-clone`).
+- Browser setup used in round 2: Chrome for Testing 156.0.8078.4 headless shell, chromedriver 156.0.8078.4 linux-arm64 through `JAVA_TOOL_OPTIONS=-Dwebdriver.chrome.driver=...` with `--no-daemon`. The XML does not record system properties; the browser tests started with no Selenium refusal and passed.
+- Limits: no Windows build or test; no PR, comment, JIRA, or contributor-branch action; the upstream follow-up draft is in the completion report and is not posted.
+
+Round 2 status: GREEN at the pinned head. Public follow-up is Nick's decision.
+
+## Round 1 history (NOT GREEN, kept unchanged)
+
+Result: not GREEN at `80ca9374f4`. Two blockers, both recorded below. Superseded by round 2.
 
 - Gate: `gates/pr-5241-overview-errors-round-1.md` (immutable, not edited).
 - Claim: `claims/pr-5241-overview-errors-gate-vm4-round-1.md` (commit `e3af5b703f`).
