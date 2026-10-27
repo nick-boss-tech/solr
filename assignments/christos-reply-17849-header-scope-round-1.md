@@ -1,6 +1,6 @@
 # Assignment: SOLR-17849 reduce the branch to header only, after Christos's reply
 
-Status: CLAIMED (vm6, claims/christos-reply-17849-header-scope-round-1-vm6.md)
+Status: DONE (vm6, 2026-10-27T20:56:43Z). Reduced branch `solr-17849-header-submit` at `5d90d83d5b`; report `reports/christos-reply-17849-header-scope-round-1.md`; PR draft `drafts/pr-solr-17849-header.md`. Not opened.
 Tags: implementation, gate
 Tag note: the `ui` tag was removed at Nick Shanin's direction on 2026-10-27 so any capable pool host can claim this; only vm6 held `ui`, which left the other pool hosts unable to take Christos's assignments. The ui build facts are in `UI-PLAYBOOK.md`.
 Posted at Nick Shanin's direction on 2026-10-27: every reply from Christos Malliaridis gets its own assignment. This is the assignment for his SOLR-17849 reply.
