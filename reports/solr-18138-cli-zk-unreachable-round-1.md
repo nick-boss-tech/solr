@@ -13,7 +13,7 @@ Pinned main: `e59ce3c97ddb`. Not run: this is a code read. The reporter's output
 
 ## Proposed change, not made
 
-- CLI-only: in `CLIUtils.getSolrZkClient`, catch the connect failure and rethrow with a message that names the ZooKeeper host and the timeout, and says that the node hosting embedded ZooKeeper may be stopped. One change covers the seven call sites (grep count of `getSolrZkClient(`, `solr/core/src/java/org/apache/solr/cli/`).
+- CLI-only: in `CLIUtils.getSolrZkClient`, catch the connect failure and rethrow with a message that names the ZooKeeper host and the timeout, and says that the node hosting embedded ZooKeeper may be stopped. One change covers the six call sites (`git grep -n getSolrZkClient e59ce3c97d -- solr/core/src/java/org/apache/solr/cli/`: six callers plus the definition at CLIUtils.java:395).
 - Server side (not proposed here): the ConnectionLoss text. That needs its own ticket or a decision from Eric.
 
 ## Verdict
@@ -23,4 +23,4 @@ Concrete. The CLI change is small and local, and the ticket asks for it. No code
 ## Not checked
 
 - Whether `bin/solr` (the shell script) prints its own message before calling the CLI.
-- The shape of each of the seven call sites (only the count was taken).
+- The shape of each of the six call sites (only the count was taken).

@@ -10,7 +10,7 @@ I read the CLI ZooKeeper path at apache/solr main {{e59ce3c97d}}. The message yo
  * {{SolrZkClient}} wraps the connect timeout as {{SolrException(SERVER_ERROR, TimeoutException("Timeout while waiting for Zookeeper Client to connect: N ms"))}} ([SolrZkClient.java:201-216|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solrj-zookeeper/src/java/org/apache/solr/common/cloud/SolrZkClient.java#L201-L216]).
  * {{ToolBase}} prints only that message ([ToolBase.java:112-120|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/cli/ToolBase.java#L112-L120]), and the stack trace only with {{--verbose}}.
 
-So the CLI change is local: one catch in {{getSolrZkClient}} that names the ZooKeeper host and says the node hosting embedded ZooKeeper may be stopped. That covers the seven callers.
+So the CLI change is local: one catch in {{getSolrZkClient}} that names the ZooKeeper host and says the node hosting embedded ZooKeeper may be stopped. That covers the six callers (ConfigSetDownloadTool, ConfigSetUploadTool, ZkLsTool, ZkMkrootTool, ZkMvTool, ZkRmTool).
 
 The server-side text ({{KeeperErrorCode = ConnectionLoss for /live_nodes}}) is the raw ZooKeeper message passed through the admin API. Changing it is a separate change.
 
