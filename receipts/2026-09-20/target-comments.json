@@ -1,0 +1,142 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-12961",
+    "comment_id": "18117196",
+    "created": "2026-09-20T00:37:27.063+0000",
+    "updated": "2026-09-20T00:37:27.063+0000",
+    "excerpt": "i think this can be closed as won't do or good enough. I just don't see us having the capacity to maintain a real keywrods capablity, and honestly google and agents figure it out",
+    "url": "https://issues.apache.org/jira/browse/SOLR-12961?focusedCommentId=18117196"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-5467",
+    "comment_id": "18117197",
+    "created": "2026-09-20T00:45:23.827+0000",
+    "updated": "2026-09-20T00:45:23.827+0000",
+    "excerpt": "We have embraced web and need to think about agents and markdown not epub... Please reopen if htis changes!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-5467?focusedCommentId=18117197"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-10728",
+    "comment_id": "18117198",
+    "created": "2026-09-20T00:47:35.805+0000",
+    "updated": "2026-09-20T00:47:35.805+0000",
+    "excerpt": "Still an issue? I think rat works?",
+    "url": "https://issues.apache.org/jira/browse/SOLR-10728?focusedCommentId=18117198"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-10290",
+    "comment_id": "18117199",
+    "created": "2026-09-20T00:48:11.042+0000",
+    "updated": "2026-09-20T00:48:11.042+0000",
+    "excerpt": "I think after many moons, we can close this one! We have a great model.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-10290?focusedCommentId=18117199"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-10290",
+    "comment_id": "18117200",
+    "created": "2026-09-20T00:48:45.459+0000",
+    "updated": "2026-09-20T00:48:45.459+0000",
+    "excerpt": "Since our web appraoch with our built in js based search, I htink the ref guide has been rocking!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-10290?focusedCommentId=18117200"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-11766",
+    "comment_id": "18117201",
+    "created": "2026-09-20T00:49:10.701+0000",
+    "updated": "2026-09-20T00:49:10.701+0000",
+    "excerpt": "anything left on this?",
+    "url": "https://issues.apache.org/jira/browse/SOLR-11766?focusedCommentId=18117201"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-17403",
+    "comment_id": "18117202",
+    "created": "2026-09-20T00:49:50.392+0000",
+    "updated": "2026-09-20T00:49:50.392+0000",
+    "excerpt": "There has been some progress on this topic with the Picocli effort....!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17403?focusedCommentId=18117202"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-15931",
+    "comment_id": "18117203",
+    "created": "2026-09-20T00:50:23.474+0000",
+    "updated": "2026-09-20T00:50:23.474+0000",
+    "excerpt": "This was delivered sometime in the 9x time line!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-15931?focusedCommentId=18117203"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-10329",
+    "comment_id": "18117204",
+    "created": "2026-09-20T00:51:50.153+0000",
+    "updated": "2026-09-20T00:51:50.153+0000",
+    "excerpt": "One thing I ran into recently was \"gettingstarted\" versus \"techproducts\" and it would be nice if our Ref Guide pages leaned into using the techproducts since we all have it for various examples... Plus, it would mkae it easier to test out the commands in the ref guide if they were developed agaisnt a real techproducts. \"LLM, run every curl command in the ref guide\"....",
+    "url": "https://issues.apache.org/jira/browse/SOLR-10329?focusedCommentId=18117204"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-12603",
+    "comment_id": "18117205",
+    "created": "2026-09-20T00:54:45.284+0000",
+    "updated": "2026-09-20T00:54:45.284+0000",
+    "excerpt": "I think the _default does this...",
+    "url": "https://issues.apache.org/jira/browse/SOLR-12603?focusedCommentId=18117205"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-11918",
+    "comment_id": "18117206",
+    "created": "2026-09-20T00:55:42.224+0000",
+    "updated": "2026-09-20T00:55:42.224+0000",
+    "excerpt": "Based on [~igiguere] feedback, closing.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-11918?focusedCommentId=18117206"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-4987",
+    "comment_id": "18117207",
+    "created": "2026-09-20T00:56:09.144+0000",
+    "updated": "2026-09-20T00:56:09.144+0000",
+    "excerpt": "Still want a button in the Solr UI!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-4987?focusedCommentId=18117207"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18414",
+    "comment_id": "18117475",
+    "created": "2026-09-20T20:26:25.783+0000",
+    "updated": "2026-09-20T20:26:25.783+0000",
+    "excerpt": "Thanks for doing this :-)",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18414?focusedCommentId=18117475"
+  },
+  {
+    "person": "Christos Malliaridis",
+    "username": "malliaridis",
+    "issue": "SOLR-18459",
+    "comment_id": "18117500",
+    "created": "2026-09-20T22:22:00.299+0000",
+    "updated": "2026-09-20T22:22:00.299+0000",
+    "excerpt": "[~epugh] Since this is an umbrella ticket and the changes of subtasks are minimal, I think it is worth creating one changelog that covers all sub-tasks, rather than one changelog entry for each sub-task. What do you think?",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18459?focusedCommentId=18117500"
+  }
+]

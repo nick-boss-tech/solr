@@ -1,0 +1,147 @@
+[
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 23,
+    "issues": 8,
+    "automation": true
+  },
+  {
+    "username": "ctargett",
+    "displayName": "Cassandra Targett",
+    "comments": 19,
+    "issues": 5
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 16,
+    "issues": 12
+  },
+  {
+    "username": "hossman",
+    "displayName": "Chris M. Hostetter",
+    "comments": 10,
+    "issues": 5
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 10,
+    "issues": 4
+  },
+  {
+    "username": "jbernste",
+    "displayName": "Joel Bernstein",
+    "comments": 6,
+    "issues": 2
+  },
+  {
+    "username": "arafalov",
+    "displayName": "Alexandre Rafalovitch",
+    "comments": 5,
+    "issues": 1
+  },
+  {
+    "username": "Dmidma",
+    "displayName": "Oussema Hidri",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "ab",
+    "displayName": "Andrzej Bialecki",
+    "comments": 3,
+    "issues": 2
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 3,
+    "issues": 3
+  },
+  {
+    "username": "psalagnac",
+    "displayName": "Pierre Salagnac",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "sanjaydutt",
+    "displayName": "Sanjay Dutt",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "elyograg",
+    "displayName": "Shawn Heisey",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "uschindler",
+    "displayName": "Uwe Schindler",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "varun",
+    "displayName": "Varun Thacker",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "asmehra95",
+    "displayName": "Avtar Singh",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "cpoerschke",
+    "displayName": "Christine Poerschke",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "malliaridis",
+    "displayName": "Christos Malliaridis",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "gus",
+    "displayName": "Gus Heck",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "igiguere",
+    "displayName": "Isabelle Giguere",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "gerlowskija",
+    "displayName": "Jason Gerlowski",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "nazerke",
+    "displayName": "Nazerke Seidan",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "upayavira",
+    "displayName": "Upayavira",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "uwe reh",
+    "displayName": "Uwe Reh",
+    "comments": 1,
+    "issues": 1
+  }
+]
