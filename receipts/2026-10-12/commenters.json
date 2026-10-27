@@ -1,0 +1,69 @@
+[
+  {
+    "username": "gerlowskija",
+    "displayName": "Jason Gerlowski",
+    "comments": 8,
+    "issues": 2
+  },
+  {
+    "username": "abenedetti",
+    "displayName": "Alessandro Benedetti",
+    "comments": 6,
+    "issues": 6
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 4,
+    "issues": 2
+  },
+  {
+    "username": "anshum",
+    "displayName": "Anshum Gupta",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 2,
+    "issues": 1,
+    "automation": true
+  },
+  {
+    "username": "gus",
+    "displayName": "Gus Heck",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "igiguere",
+    "displayName": "Isabelle Giguere",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "msterner",
+    "displayName": "Mikael Sterner",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "houston",
+    "displayName": "Houston Putman",
+    "comments": 1,
+    "issues": 1
+  }
+]
