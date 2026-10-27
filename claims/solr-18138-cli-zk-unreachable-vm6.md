@@ -1,7 +1,7 @@
 # Claim: SOLR-18138 CLI when ZooKeeper is unreachable (vm6)
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: CLAIMED.
+- Status: DONE.
 - Job or assignment: none on the board. Chosen from Jira SOLR-18138 (reporter Eric Pugh, Open, Minor, created 2026-02-26, no comments), from the no-PR list in the fresh-Eric review. Picked on Nick's go, 2026-10-27.
 - Slice: read the CLI ZK connection path at apache/solr main `e59ce3c97ddb`; decide the CLI-side message; draft a Jira comment only.
 - Capability tags used: review, draft.
@@ -11,3 +11,6 @@
 - Decision ladder: rung 1 (code at the pinned SHA: SolrZkClient connect path, CLIUtils.getSolrZkClient, ToolBase error output).
 
 Heartbeat: 2026-10-27T01:34:33Z
+Result: 2026-10-27T01:34:49Z: CLI change identified (CLIUtils.getSolrZkClient, one place, seven callers). Server-side ConnectionLoss text left for a decision. No code change made. Draft asks Eric the scope.
+
+DONE: 2026-10-27T01:34:49Z. Deliverables: `reports/solr-18138-cli-zk-unreachable-round-1.md`, `jira/jira-comment-SOLR-18138-draft.md`.
