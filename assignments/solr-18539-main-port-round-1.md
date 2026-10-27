@@ -1,6 +1,8 @@
 # Assignment: SOLR-18539 QueryComponent totals fix on current main, round 1
 
-Status: OPEN
+Status: DONE
+
+- Completed: 2026-10-24 by vm2 under claim `claims/solr-18539-port-main-round-1.md`. Gate GREEN at the pushed head `9a16d680231` on branch `solr-18539-merge-totals-main`; receipt `receipts/SOLR-18539.md` (fail-before recorded there: both new assertions fail on base). Status flipped in the 2026-10-27 cleanup, `reports/phone-agent-open-work-cleanup-round-2.md`. The only remaining step is the owner's PR-opening go, which is not pool work.
 
 - Intended host: phone agent, or the Linux gate host it hands this to. Tags: implementation, gate.
 - Ticket: SOLR-18539, the follow-up that `reports/pr-5117-followup-plan.md` names for the `QueryComponent.mergeIds` partial-shard totals leak.
