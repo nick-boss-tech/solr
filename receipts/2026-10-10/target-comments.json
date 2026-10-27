@@ -1,0 +1,62 @@
+[
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17916",
+    "comment_id": "18125720",
+    "created": "2026-10-10T02:04:58.540+0000",
+    "updated": "2026-10-10T02:04:58.540+0000",
+    "excerpt": "I agree Jan that this issue deserved a changelog and wasn't properly closed. I'll at least resolve it now.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17916?focusedCommentId=18125720"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17916",
+    "comment_id": "18125723",
+    "created": "2026-10-10T02:24:22.027+0000",
+    "updated": "2026-10-10T02:24:22.027+0000",
+    "excerpt": "Meanwhile [~kotman12] in SOLR-18480 sees value in calling {{abort}} to efficiently/promptly close the SolrClient instead of hanging for a minute if a request is stuck.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17916?focusedCommentId=18125723"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18462",
+    "comment_id": "18125808",
+    "created": "2026-10-10T10:46:06.596+0000",
+    "updated": "2026-10-10T10:46:06.596+0000",
+    "excerpt": "This actually landed in the not linked [https://github.com/apache/solr/pull/4918] PR!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18462?focusedCommentId=18125808"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-13442",
+    "comment_id": "18125843",
+    "created": "2026-10-10T14:25:28.034+0000",
+    "updated": "2026-10-10T14:25:28.034+0000",
+    "excerpt": "Little hard to say exactly when this was done, but all the related sub tasks are completed!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-13442?focusedCommentId=18125843"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-13687",
+    "comment_id": "18125844",
+    "created": "2026-10-10T14:27:49.144+0000",
+    "updated": "2026-10-10T14:27:49.144+0000",
+    "excerpt": "I believe this has been solved.. all the commands take in a solr url that can be anywhere... I'm going to close this, but please reopen if I am incoorect.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-13687?focusedCommentId=18125844"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-13687",
+    "comment_id": "18125845",
+    "created": "2026-10-10T14:28:02.492+0000",
+    "updated": "2026-10-10T14:28:02.492+0000",
+    "excerpt": "Not sure when, but we've done a ton of owrk on the cli.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-13687?focusedCommentId=18125845"
+  }
+]
