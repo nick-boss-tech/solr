@@ -57,3 +57,5 @@ Heartbeat: 2026-10-27T18:54:09Z (SOLR-18564 timeout-type gate at 6ca1cba8061b GR
 Heartbeat: 2026-10-27T20:48:13Z (SOLR-17887 PR prep: draft and report pushed; PR ready to open, awaiting owner)
 
 Heartbeat: 2026-10-27T21:27:22Z (SOLR-17887 internal selection pushed at 03d5efbf; receipts/SOLR-17887-vm5-selection.md; round-2 PR draft drafts/pr-solr-17887-file-tree-round-2.md)
+
+Heartbeat: 2026-10-27T23:17:13Z (SOLR-17887 screen check and selected-icon fix at 025164fb; receipts/SOLR-17887-vm5-screen.md)
