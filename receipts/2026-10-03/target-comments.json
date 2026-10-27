@@ -1,0 +1,22 @@
+[
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-13833",
+    "comment_id": "18122149",
+    "created": "2026-10-03T01:33:10.795+0000",
+    "updated": "2026-10-03T01:33:10.795+0000",
+    "excerpt": "Thanks Nick.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-13833?focusedCommentId=18122149"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18196",
+    "comment_id": "18122153",
+    "created": "2026-10-03T02:08:16.005+0000",
+    "updated": "2026-10-03T02:08:16.005+0000",
+    "excerpt": "[~gslinker] please take a look at the PR. I just merged it but let us know if you think it addresses your concern or not.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18196?focusedCommentId=18122153"
+  }
+]
