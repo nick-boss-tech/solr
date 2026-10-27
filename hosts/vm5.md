@@ -53,3 +53,5 @@ Heartbeat: 2026-10-25T16:34Z (rc3-test-failure-causes-round-2: report pushed at 
 Heartbeat: 2026-10-27T17:29:15Z (pr5112 linux gate: superseding gate at 46bc7e4 green; receipts/PR-5112-target-header-followup.md; gradle-help review claim paused, its heartbeat stale since 07:44Z)
 
 Heartbeat: 2026-10-27T18:54:09Z (SOLR-18564 timeout-type gate at 6ca1cba8061b GREEN: receipts/SOLR-18564-timeout-type-round-1.md)
+
+Heartbeat: 2026-10-27T20:48:13Z (SOLR-17887 PR prep: draft and report pushed; PR ready to open, awaiting owner)
