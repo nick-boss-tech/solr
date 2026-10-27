@@ -17,3 +17,6 @@ Result: pending.
 
 Run (premise setup): `s16139-assemble-ee2f1bf-20261027T100633Z`, `:solr:packaging:assemble` on apache/solr main `ee2f1bf2e0109956145d7fd995da63c4091a589f` (standalone clone `/workspace/worktrees/s16139-clone`), started 2026-10-27T10:06:33Z with `env -u NODE_ENV`. Logs `/workspace/gates/logs/vm4/critical-impl-16139/`.
 Heartbeat: 2026-10-27T10:06:49Z
+
+Premise result (2026-10-27T10:28:46Z): REPRODUCES on main ee2f1bf2e0. Nested terms facet on SortableTextField gives avg/sum 0.0 and min null; the same nested stats on a string field are correct (15, 40, 7). Report `reports/critical-impl-16139-premise-round-1.md`. Solr 8986 stopped. Step 2 (implementation on solr-16139-submit) next.
+Heartbeat: 2026-10-27T10:28:46Z
