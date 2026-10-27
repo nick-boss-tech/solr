@@ -20,3 +20,11 @@ Heartbeat: 2026-10-27T10:06:49Z
 
 Premise result (2026-10-27T10:28:46Z): REPRODUCES on main ee2f1bf2e0. Nested terms facet on SortableTextField gives avg/sum 0.0 and min null; the same nested stats on a string field are correct (15, 40, 7). Report `reports/critical-impl-16139-premise-round-1.md`. Solr process 72898 is a zombie (PID 1 does not reap orphans); port 8986 closed, nothing running. Step 2 (implementation on solr-16139-submit) next.
 Heartbeat: 2026-10-27T10:28:46Z
+
+Probe (before any edit, on main ee2f1bf2e0, packaged Solr 11.0.0-SNAPSHOT):
+- Nested `avg/sum/min(price)` under a terms facet, all terms methods (default, dv, dvhash, stream, enum, smart, uif): correct on `plain_s` (string), 0.0 / 0.0 / null on `sortable_text` (SortableTextField). Counts are correct on both.
+- Filter probes: `fq=sortable_text:"Alpha grp"` 2 hits; `fq={!term f=sortable_text}Alpha grp` 0 hits (parsed `sortable_text:Alpha grp`); `fq={!term f=sortable_text}alpha` 2 hits; `fq={!term f=plain_s}Alpha grp` 2 hits.
+- Cause (code + probe, rung 2): `FacetFieldProcessor.makeBucketQuery` (line ~541) builds the bucket domain with `sf.getType().getFieldTermQuery`. SortableTextField inherits `TextField.getFieldTermQuery`, an exact `TermQuery` on the raw value. The index holds analyzed tokens for `SortableTextField`, so a multi-token bucket value matches nothing. The bucket count comes from the terms enumeration, which is why counts are right.
+- Planned narrow fix (rung 2, from the same index structure): for a SortableTextField with docValues, the bucket domain uses `SortedDocValuesField.newSlowSetQuery(field, bucketValue)`, the exact full-value doc-values form that `SortableTextField.createFields` already writes. Used only in makeBucketQuery; the term parser is unchanged. Tests: a SolrTestCase reproduction with the nested avg over a multi-token SortableTextField, plus the string-field control.
+- Solr 8986 killed (pid 75830); port closed. Clone `/workspace/worktrees/s16139-clone` stays until implementation is done.
+Heartbeat: 2026-10-27T10:35:04Z
