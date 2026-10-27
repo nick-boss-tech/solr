@@ -1,7 +1,7 @@
 # Claim: DistributedExpandComponentTest thread leak settling run, round 1 (vm4)
 
 - Claimant host: vm4, matching `hosts/vm4.md`.
-- Status: ACTIVE; mark DONE with the deliverable path when the report lands.
+- Status: DONE. Classification (b): seed-clean on both trees.
 - Job or assignment: `assignments/distributed-expand-threadleak-settling-round-1.md` (OPEN, not edited).
 - Slice: the whole assignment (both trees, one seed).
 - Capability tags used: premise-run, records.
@@ -22,3 +22,5 @@ Result (branch_9x, 2026-10-27T08:14:11Z): BUILD SUCCESSFUL rc=0 in 20m 23s, seed
 
 Run 2 (apache/main, seed 85F9F77FD74C1D41, head ee2f1bf2e0109956145d7fd995da63c4091a589f): started 2026-10-27T08:14:11Z, run name `de-main-ee2f1bf-20261027T081253Z`, log dir same. Not finished.
 Heartbeat: 2026-10-27T08:14:11Z
+
+DONE: 2026-10-27T08:31:31Z. Deliverables: reports/distributed-expand-threadleak-settling-round-1.md.

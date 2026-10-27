@@ -55,3 +55,4 @@ Disk record:
 - 2026-10-27T06:50Z: wrote records-only evidence closeout `reports/pr-5241-round-2-evidence-closeout-vm4.md` for `assignments/pr-5241-round-2-evidence-closeout.md` (driver-property line in test-worker output, XML totals, fail-before messages, clone check). No tests run.
 - 2026-10-27T07:10:56Z: overnight tick. PR 5241 round-2 claim, superseding gate and evidence closeout marked DONE (receipt and reports already on board). No live claim; INTAKE open, OVERNIGHT on. Disk 40% used, 4.5G free, inodes 11%.
 - 2026-10-27T07:22:14Z: EOL ping batch 6 claim closed with no work (set exhausted by batch 5). EOL assignment marked DONE, held items listed for the owner. No live claim; INTAKE open.
+- 2026-10-27T08:31:31Z: settling run done (both trees seed-clean, report written). Claim and assignment DONE. No live claim; INTAKE open.

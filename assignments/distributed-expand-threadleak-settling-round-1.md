@@ -1,7 +1,9 @@
 # Assignment: settling run for the DistributedExpandComponentTest thread leak on PR 5198's CI (round 1)
 
-Status: OPEN
+Status: DONE
 Tags: premise-run, records
+
+DONE: 2026-10-27T08:31:31Z. Deliverables: reports/distributed-expand-threadleak-settling-round-1.md (classification b: seed-clean on branch_9x dae5ac66f9 and apache/main ee2f1bf2e0, seed 85F9F77FD74C1D41).
 
 Sighting: apache/solr PR #5198 (SOLR-17953 branch_9x backport, merged 2026-10-25 with this check red) failed its Crave test job 121178733450 at seed `85F9F77FD74C1D41`. No test method failed: `DistributedExpandComponentTest` failed at classMethod with `com.carrotsearch.randomizedtesting.ThreadLeakError`, 1 thread leaked from SUITE scope (`httpShardExecutor-420-thread-2`, RUNNABLE at teardown). The PR's change is backup/restore hidden-file filtering and does not touch the expand path; no Jira ticket records this test failing (checked 2026-10-25). "Environment noise" is not a verdict; classify it.
 
