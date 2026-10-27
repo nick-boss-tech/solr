@@ -1,0 +1,39 @@
+[
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 22,
+    "issues": 8,
+    "automation": true
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 6,
+    "issues": 2
+  },
+  {
+    "username": "thomas.woeckinger",
+    "displayName": "Thomas Wöckinger",
+    "comments": 6,
+    "issues": 1
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "gjourdan",
+    "displayName": "Gaël Jourdan",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "meryemgulbudak",
+    "displayName": "Meryem Gülbudak",
+    "comments": 2,
+    "issues": 1
+  }
+]
