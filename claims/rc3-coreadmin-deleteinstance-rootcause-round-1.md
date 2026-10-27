@@ -11,3 +11,6 @@
 - Decision ladder: rung 1 for the code and history; rung 2 for the repro runs.
 
 Heartbeat: 2026-10-25T01:38Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-25T01:38Z, hourly heartbeat required; named assignment assignments/rc3-repeating-failures-rootcause-round-1.md Status: OPEN. The claim is closed for intake. The assignment status is unchanged.

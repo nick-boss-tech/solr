@@ -11,3 +11,6 @@
 - Decision ladder: rung 1 for the tag check; owner placeholders left open (rung 5).
 
 Heartbeat: 2026-10-24T22:53Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-24T22:53Z, hourly heartbeat required; named assignment assignments/bulk-notice-and-housekeeping-repost-round-1.md Status: OPEN. The claim is closed for intake. The assignment status is unchanged.

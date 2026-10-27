@@ -11,3 +11,6 @@
 - Decision ladder: rung 1 for the logs and XML; disagreements named in the receipt.
 
 Heartbeat: 2026-10-25T02:11Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-25T02:11Z, hourly heartbeat required; named assignment assignments/vm5-rc3-clean-receipt-and-email-round-1.md Status: OPEN. The claim is closed for intake. The assignment status is unchanged.

@@ -10,3 +10,6 @@
 - Links: `reports/rc3-tlogreplica-rootcause-round-1.md`, `reports/rc3-coreadmin-deleteinstance-rootcause-round-1.md`, `receipts/rc3-vm5-clean-receipt-round-1.md`. Vote closes 2026-10-27 11:00 UTC. Supersedes: none.
 
 Heartbeat: 2026-10-25T02:47Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-25T02:47Z, hourly heartbeat required; named assignment none n/a. The claim is closed for intake. The assignment status is unchanged.

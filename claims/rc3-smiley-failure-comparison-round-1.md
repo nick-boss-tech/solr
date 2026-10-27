@@ -11,3 +11,6 @@
 - Decision ladder: rung 1 for the logs and test XML; rung 3 for the assignment's stated scope.
 
 Heartbeat: 2026-10-24T21:49Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-24T21:49Z, hourly heartbeat required; named assignment assignments/rc3-smiley-failure-comparison-round-1.md Status: OPEN. The claim is closed for intake. The assignment status is unchanged.

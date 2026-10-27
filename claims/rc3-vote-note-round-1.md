@@ -11,3 +11,6 @@
 - Decision ladder: rung 1 for the citations at the RC3 tip; choices recorded in the report.
 
 Heartbeat: 2026-10-24T07:08:20Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-24T07:08:20Z, hourly heartbeat required; named assignment assignments/rc3-vote-note-round-1.md n/a. The claim is closed for intake. The assignment status is unchanged.

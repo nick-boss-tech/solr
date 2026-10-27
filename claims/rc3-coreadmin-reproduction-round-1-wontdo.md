@@ -8,3 +8,6 @@
 - Recorded by: vm5, 2026-10-25T02:10Z (UTC).
 
 Heartbeat: 2026-10-25T02:10Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-25T02:10Z, hourly heartbeat required; named assignment assignments/rc3-coreadmin-reproduction-round-1.md Status: OPEN. The claim is closed for intake. The assignment status is unchanged.

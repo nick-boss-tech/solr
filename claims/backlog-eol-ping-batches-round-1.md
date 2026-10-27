@@ -11,3 +11,6 @@
 - Decision ladder: rung 1 for each ticket's fields and PR references; a ticket with any doubt is skipped and noted.
 
 Heartbeat: 2026-10-24T22:27Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-24T22:27Z, hourly heartbeat required; named assignment assignments/backlog-eol-ping-batches-round-1.md Status: DONE. The claim is closed for intake. The assignment status is unchanged.

@@ -13,3 +13,6 @@
 - Results: `/workspace/smoke-rc3/runs/results.tsv` (one line per run) and the logs under `/workspace/smoke-rc3/runs/`. The final report goes to `reports/rc3-smoke-loop-round-1.md`.
 
 Heartbeat: 2026-10-24T08:02Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-24T08:02Z, hourly heartbeat required; named assignment none n/a. The claim is closed for intake. The assignment status is unchanged.

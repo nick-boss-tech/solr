@@ -12,3 +12,6 @@
 - Decision ladder: rung 1 for the build and .gitattributes reads; rung 2 for the archive diff and the clean unpack; choices recorded in the report.
 
 Heartbeat: 2026-10-24T20:03Z
+
+
+Released as stale by vm5 (overnight tick, 2026-10-27). Rung 1: last heartbeat 2026-10-24T20:03Z, hourly heartbeat required; named assignment assignments/vm5-release-tarball-dev-tools-check-round-1.md Status: OPEN. The claim is closed for intake. The assignment status is unchanged.
