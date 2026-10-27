@@ -1,0 +1,11 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >
+  Nested JSON stat facets (avg, sum, min) under a terms facet on a SortableTextField return the
+  real values instead of zero or null
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16139
+    url: https://issues.apache.org/jira/browse/SOLR-16139
