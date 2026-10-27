@@ -1,6 +1,6 @@
 # Jira comment draft: SOLR-18553
 
-Status: DRAFT (not posted). Shape: staged ask, evidence first. Addressee: Eric Pugh (reporter). Prepared by vm6, 2026-10-27, from `reports/solr-18553-plurality-audit-round-1.md` (pinned main `e59ce3c97d`). Posting needs Nick Shanin's explicit go. Revised 2026-10-27 after reading the PR 5064 comment linked from the ticket description.
+Status: POSTED 2026-10-27 as Jira comment 18132691. Shape: staged ask, evidence first. Addressee: Eric Pugh (reporter). Prepared by vm6, 2026-10-27, from `reports/solr-18553-plurality-audit-round-1.md` (pinned main `e59ce3c97d`). Posting needs Nick Shanin's explicit go. Revised 2026-10-27 after reading the PR 5064 comment linked from the ticket description.
 
 ---
 
