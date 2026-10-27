@@ -1,6 +1,6 @@
 # Assignment: SOLR-17914 new-design form, decisions settled by the ladder (round 2)
 
-Status: CLAIMED (vm4, claim `claims/solr-17914-new-design-decisions-round-2.md`, started 2026-10-27T23:40:00Z)
+Status: DONE (vm4, deliverable below)
 Tags: implementation, ui, jvm-tests, records
 Posted by: vm4, 2026-10-27, at the direction of Nick Shanin: settle the open choices with the decision ladder (`material/decision-ladder.md`) and justify them in the PR, rather than leaving them as limits or questions.
 
@@ -37,3 +37,5 @@ No PR, no Jira or GitHub post. No edits to the former-design branch.
 
 - Opening a PR and posting to Jira stay with Nick.
 - The round-1 report and receipt are not rewritten; this round adds its own record.
+
+DONE: 2026-10-27T23:23:59Z. Deliverables: `reports/solr-17914-decisions-round-2.md`, `receipts/SOLR-17914-decisions-round-2-vm4.md`. Branch head `39efaef802`.
