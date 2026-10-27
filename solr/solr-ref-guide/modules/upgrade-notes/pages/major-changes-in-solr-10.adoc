@@ -36,6 +36,10 @@ Solr 10.0 requires at least Java 21, while SolrJ 10.0 requires at least Java 17.
 
 == Solr 10.2
 
+=== SolrJ HTTP client base classes restored
+
+Solr 10.1 removed the SolrJ classes `HttpSolrClientBase` and `HttpSolrClientBuilderBase`, which broke binary compatibility for applications compiled against SolrJ 10.0.0: such code fails at runtime with a `NoSuchMethodError` on ordinary HTTP client builder calls. Both classes are restored as top-level classes, so pre-compiled applications work again without recompiling. See SOLR-18600 for details.
+
 === Snapshot commands are now `bin/solr snapshot` sub-commands
 
 The `snapshot-create`, `snapshot-delete`, `snapshot-describe`, `snapshot-export` and `snapshot-list` commands of the experimental picocli command line interface are replaced by the sub-commands of `bin/solr snapshot`:

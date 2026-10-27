@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.List;
 
 /** A CSP that uses Solr HTTP APIs. */
-public class HttpClusterStateProvider<C extends HttpSolrClient>
+public class HttpClusterStateProvider<C extends HttpSolrClientBase>
     extends BaseHttpClusterStateProvider {
   // formerly known as Http2ClusterStateProvider
 
@@ -51,7 +51,7 @@ public class HttpClusterStateProvider<C extends HttpSolrClient>
   @Override
   @SuppressWarnings("unchecked")
   protected C getSolrClient(String baseUrl) {
-    return (C) httpClient.toBuilder(baseUrl).build();
+    return (C) httpClient.builder().withBaseSolrUrl(baseUrl).build();
   }
 
   public C getHttpClient() {
