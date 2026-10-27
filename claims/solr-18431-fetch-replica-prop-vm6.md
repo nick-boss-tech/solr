@@ -1,7 +1,7 @@
 # Claim: SOLR-18431 v2 read endpoint, Fetch Replica Prop (vm6)
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: CLAIMED.
+- Status: DONE.
 - Job or assignment: none on the board. Chosen from Jira SOLR-18431 (reporter Eric Pugh, Open, Major, created 2026-09-08, no comments), from the no-PR list. Picked on Nick's go, 2026-10-27.
 - Slice: confirm at apache/solr main `e59ce3c97ddb` that no v2 read exists for this resource and what data path exists; draft a Jira comment only. No implementation.
 - Capability tags used: review, draft.
@@ -11,3 +11,7 @@
 - Decision ladder: rung 1 (endpoint interfaces and the v1 CLUSTERSTATUS path at the pinned SHA).
 
 Heartbeat: 2026-10-27T01:37:19Z
+
+Result: 2026-10-27T01:37:54Z: gap confirmed at the pinned SHA; the data path exists for single-shard and PRS, and the replica property read has a source. No code change. Draft asks Eric the shape question. Report `reports/solr-18428-18431-v2-read-round-1.md`.
+
+DONE: 2026-10-27T01:37:54Z. Deliverables: `reports/solr-18428-18431-v2-read-round-1.md`, `jira/jira-comment-SOLR-18431-draft.md`.
