@@ -1,7 +1,7 @@
 # Claim: christos-reply-17849-header-field-design-round-3
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: DONE (2026-10-27T22:50:00Z); deliverables below.
 - Job or assignment: follow-on to `claims/christos-reply-17849-header-criteria-round-2-vm6.md` (DONE at `14ff707865`), on branch `solr-17849-header-submit`.
 - Slice: the closed Request Handler field shows the selected handler's class on the same line as its endpoint, as in Figma node `137-12066`, and the two dropdowns take the design's widths (256 and 384 px). Acceptance criterion 10 of SOLR-17849.
 - Capability tags used: ui, jvm-tests, gate, implementation.
@@ -19,3 +19,7 @@
 Heartbeat: 2026-10-27T22:43:27Z
 
 Head: `cf35ab0329c41cdef11429906d1e669d38b9f3a9` on `nick-boss-tech/solr:solr-17849-header-submit` (fast-forward from `14ff707865`; remote SHA verified). Gate input recorded before the run: spotless, then `IndexQueryHeaderTest` (6 tests) on the software renderer.
+
+Result: 2026-10-27T22:45:22Z: job `header-17849-cf35ab0329-224344`, spotless rc=0, jvmTest rc=0; `IndexQueryHeaderTest` 6 of 6 and `IndexQueryStateHolderTest` 3 of 3 pass, 0 failures, 0 errors; conclusive for the software-rendered JVM tests at this head. The screen itself was not rendered.
+
+DONE: 2026-10-27T22:50:00Z. Deliverables: `reports/christos-reply-17849-header-field-design-round-3.md`, `drafts/pr-solr-17849-header.md` (updated to `cf35ab0329`), branch `nick-boss-tech/solr:solr-17849-header-submit` at `cf35ab0329`.
