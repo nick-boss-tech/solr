@@ -14,3 +14,6 @@ Heartbeat: 2026-10-27T12:05:09Z
 Plan: standalone shallow clone of apache/solr main, `:solr:packaging:assemble` through `pool/bin/sweep-run.sh` with `env -u NODE_ENV`. Then on the packaged Solr, run an MLT request (`/mlt` or `mlt=true`) with a TrieDateField (or DatePointField) in the fields and check whether the interesting-terms list is empty. If the premise fails, write the premise report and stop with no branch. If it reproduces, implement narrowly on `solr-7351-submit`, add tests on SolrTestCase or SolrCloudTestCase, push, and request the gate with `pool/bin/request-gate.py`. No PR, JIRA, or GitHub comment.
 
 Result: pending.
+
+Run (premise setup): `s7351-assemble-ee2f1bf-20261027T121031Z`, `:solr:packaging:assemble` on apache/solr main `ee2f1bf2e0109956145d7fd995da63c4091a589f` (standalone clone `/workspace/worktrees/s7351-clone`), started 2026-10-27T12:10:31Z with `env -u NODE_ENV`. Logs `/workspace/gates/logs/vm4/critical-impl-7351/`.
+Heartbeat: 2026-10-27T12:10:48Z
