@@ -21,6 +21,6 @@ Heartbeat: 2026-10-27T09:10:05Z
 Attempt 1 (q12069-assemble-ee2f1bf-20261027T090948Z): BUILD FAILED rc 1 at `:solr:webapp:js-client:jsClientDownloadDeps` (npm run build exit 1). Cause: the launching shell had NODE_ENV=production, which skips devDependencies; no tests ran. Logs kept in `logs/vm4/critical-impl-12069/attempt-1-npm-node-env/`. Relaunch once with `env -u NODE_ENV`: run `q12069-assemble-retry-ee2f1bf-20261027T092631Z`, started 2026-10-27T09:26:31Z.
 Heartbeat: 2026-10-27T09:27:27Z
 
-Result: 2026-10-27T09:49:42Z: premise does NOT reproduce on main ee2f1bf2e0. q.op is applied on the standard parser (AND gives +(+text:a +text:b), 0 hits; OR and default give 1 hit; "ipod black" AND 1 hit vs OR 4). Report `reports/critical-impl-12069-premise-round-1.md`. Solr stopped. No branch, no gate request.
+Result: 2026-10-27T09:49:42Z: premise does NOT reproduce on main ee2f1bf2e0. q.op is applied on the standard parser (AND gives +(+text:a +text:b), 0 hits; OR and default give 1 hit; "ipod black" AND 1 hit vs OR 4). Report `reports/critical-impl-12069-premise-round-1.md`. Solr process 63955 is a zombie (PID 1 on this VM does not reap orphans); port 8985 closed and nothing is running. `bin/solr stop` reported a kill failure. No branch, no gate request.
 
 DONE: 2026-10-27T09:49:42Z. Deliverables: reports/critical-impl-12069-premise-round-1.md (premise failed; implementation stopped by assignment rule).
