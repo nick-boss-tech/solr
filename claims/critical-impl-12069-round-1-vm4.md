@@ -1,7 +1,7 @@
 # Claim: SOLR-12069 q.op on the standard query parser, implementation round 1 (vm4)
 
 - Claimant host: vm4, matching `hosts/vm4.md`.
-- Status: ACTIVE. Step 1 premise run first; implementation only if the premise reproduces.
+- Status: DONE. Premise failed; no implementation.
 - Job or assignment: `assignments/critical-impl-12069-round-1.md` (OPEN, not edited). Source triage: `reports/critical-implementation-triage-round-1.md`, rank 2.
 - Slice: the whole assignment (premise, narrow fix on `solr-12069-submit`, gate request at the stop point).
 - Capability tags used: implementation, premise-run.
@@ -20,3 +20,7 @@ Heartbeat: 2026-10-27T09:10:05Z
 
 Attempt 1 (q12069-assemble-ee2f1bf-20261027T090948Z): BUILD FAILED rc 1 at `:solr:webapp:js-client:jsClientDownloadDeps` (npm run build exit 1). Cause: the launching shell had NODE_ENV=production, which skips devDependencies; no tests ran. Logs kept in `logs/vm4/critical-impl-12069/attempt-1-npm-node-env/`. Relaunch once with `env -u NODE_ENV`: run `q12069-assemble-retry-ee2f1bf-20261027T092631Z`, started 2026-10-27T09:26:31Z.
 Heartbeat: 2026-10-27T09:27:27Z
+
+Result: 2026-10-27T09:49:42Z: premise does NOT reproduce on main ee2f1bf2e0. q.op is applied on the standard parser (AND gives +(+text:a +text:b), 0 hits; OR and default give 1 hit; "ipod black" AND 1 hit vs OR 4). Report `reports/critical-impl-12069-premise-round-1.md`. Solr stopped. No branch, no gate request.
+
+DONE: 2026-10-27T09:49:42Z. Deliverables: reports/critical-impl-12069-premise-round-1.md (premise failed; implementation stopped by assignment rule).
