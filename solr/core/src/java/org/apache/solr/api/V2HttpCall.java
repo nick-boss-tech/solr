@@ -364,8 +364,8 @@ public class V2HttpCall extends HttpSolrCall {
    * <p>This method uses this strategy to differentiate between admin requests that don't require a
    * {@link SolrCore}, but whose path happen to contain a core/collection name (e.g.
    * ADDREPLICAPROP's path of
-   * /collections/collName/shards/shardName/replicas/replicaName/properties), and "REMOTEPROXY"
-   * requests which do require a local SolrCore to process.
+   * /collections/collectionName/shards/shardName/replicas/replicaName/properties), and
+   * "REMOTEPROXY" requests which do require a local SolrCore to process.
    */
   @Override
   protected void handleAdminOrRemoteRequest() throws IOException {

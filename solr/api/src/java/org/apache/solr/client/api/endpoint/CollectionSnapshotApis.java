@@ -34,7 +34,7 @@ import org.apache.solr.client.api.model.ListCollectionSnapshotsResponse;
 /** V2 API definitions for creating, accessing, and deleting collection-level snapshots. */
 public interface CollectionSnapshotApis {
 
-  @Path("/collections/{collName}/snapshots")
+  @Path("/collections/{collectionName}/snapshots")
   interface Create {
     @POST
     @Path("/{snapshotName}")
@@ -43,8 +43,8 @@ public interface CollectionSnapshotApis {
         tags = {"collection-snapshots"})
     CreateCollectionSnapshotResponse createCollectionSnapshot(
         @Parameter(description = "The name of the collection.", required = true)
-            @PathParam("collName")
-            String collName,
+            @PathParam("collectionName")
+            String collectionName,
         @Parameter(description = "The name of the snapshot to be created.", required = true)
             @PathParam("snapshotName")
             String snapshotName,
@@ -53,7 +53,7 @@ public interface CollectionSnapshotApis {
         throws Exception;
   }
 
-  @Path("/collections/{collName}/snapshots/{snapshotName}")
+  @Path("/collections/{collectionName}/snapshots/{snapshotName}")
   interface Delete {
     @DELETE
     @Operation(
@@ -61,12 +61,14 @@ public interface CollectionSnapshotApis {
         tags = {"collection-snapshots"})
     DeleteCollectionSnapshotResponse deleteCollectionSnapshot(
         @Parameter(description = "The name of the collection.", required = true)
-            @PathParam("collName")
-            String collName,
+            @PathParam("collectionName")
+            String collectionName,
         @Parameter(description = "The name of the snapshot to be deleted.", required = true)
             @PathParam("snapshotName")
             String snapshotName,
-        @Parameter(description = "A flag that treats the collName parameter as a collection alias.")
+        @Parameter(
+                description =
+                    "A flag that treats the collectionName parameter as a collection alias.")
             @DefaultValue("false")
             @QueryParam("followAliases")
             boolean followAliases,
@@ -74,7 +76,7 @@ public interface CollectionSnapshotApis {
         throws Exception;
   }
 
-  @Path("/collections/{collName}/snapshots")
+  @Path("/collections/{collectionName}/snapshots")
   interface List {
     @GET
     @Operation(
@@ -82,8 +84,8 @@ public interface CollectionSnapshotApis {
         tags = {"collection-snapshots"})
     ListCollectionSnapshotsResponse listSnapshots(
         @Parameter(description = "The name of the collection.", required = true)
-            @PathParam("collName")
-            String collName)
+            @PathParam("collectionName")
+            String collectionName)
         throws Exception;
   }
 }

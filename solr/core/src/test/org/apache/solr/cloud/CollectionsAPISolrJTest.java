@@ -819,7 +819,7 @@ public class CollectionsAPISolrJTest extends SolrCloudTestCase {
   }
 
   /**
-   * Unit test for the v2 API: GET /api/collections/$collName
+   * Unit test for the v2 API: GET /api/collections/$collectionName
    *
    * <p>Uses the OAS-generated SolrRequest/SolrResponse API binding.
    */

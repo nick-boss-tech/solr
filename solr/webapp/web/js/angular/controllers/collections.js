@@ -95,7 +95,7 @@ solrAdminApp.controller('CollectionsController',
           if (!name || name.indexOf('alias_') === 0) {
               return;
           }
-          CollectionsV2.listCollections({detailed: true, collection: name}, function(error, data, response) {
+          CollectionsV2.listCollections({details: true, collection: name}, function(error, data, response) {
               $timeout(function() {
                   if (error) { ApiErrorHandler.handle(response); return; }
                   var collection = data.collectionsDetail && data.collectionsDetail[name];
@@ -135,7 +135,7 @@ solrAdminApp.controller('CollectionsController',
               $scope.timeout = $timeout($scope.refreshHealth, 10000);
               return;
           }
-          CollectionsV2.listCollections({detailed: true, collection: name}, function(error, data, response) {
+          CollectionsV2.listCollections({details: true, collection: name}, function(error, data, response) {
               $timeout(function() {
                   if (error) {
                       ApiErrorHandler.handle(response);

@@ -53,32 +53,32 @@ public class CreateCollectionSnapshot extends AdminAPIBase
   @Override
   @PermissionName(COLL_EDIT_PERM)
   public CreateCollectionSnapshotResponse createCollectionSnapshot(
-      String collName, String snapshotName, CreateCollectionSnapshotRequestBody requestBody)
+      String collectionName, String snapshotName, CreateCollectionSnapshotRequestBody requestBody)
       throws Exception {
     final var response = instantiateJerseyResponse(CreateCollectionSnapshotResponse.class);
     final CoreContainer coreContainer = fetchAndValidateZooKeeperAwareCoreContainer();
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
 
-    final String collectionName = resolveCollectionName(collName, requestBody.followAliases);
+    final String resolvedName = resolveCollectionName(collectionName, requestBody.followAliases);
 
     final SolrZkClient client = coreContainer.getZkController().getZkClient();
-    if (SolrSnapshotManager.snapshotExists(client, collectionName, snapshotName)) {
+    if (SolrSnapshotManager.snapshotExists(client, resolvedName, snapshotName)) {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,
           "Snapshot with name '"
               + snapshotName
               + "' already exists for collection '"
-              + collectionName
+              + resolvedName
               + "', no action taken.");
     }
 
     submitRemoteMessageAndHandleResponse(
         response,
         CollectionParams.CollectionAction.CREATESNAPSHOT,
-        createRemoteMessage(collName, requestBody.followAliases, snapshotName),
+        createRemoteMessage(collectionName, requestBody.followAliases, snapshotName),
         requestBody.async);
 
-    response.collection = collName;
+    response.collection = collectionName;
     response.followAliases = requestBody.followAliases;
     response.snapshotName = snapshotName;
 

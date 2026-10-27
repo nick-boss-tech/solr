@@ -26,7 +26,8 @@ import jakarta.ws.rs.PathParam;
 import org.apache.solr.client.api.model.AddReplicaPropertyRequestBody;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
 
-@Path("/collections/{collName}/shards/{shardName}/replicas/{replicaName}/properties/{propName}")
+@Path(
+    "/collections/{collectionName}/shards/{shardName}/replicas/{replicaName}/properties/{propName}")
 public interface AddReplicaPropertyApi {
 
   @PUT
@@ -37,8 +38,8 @@ public interface AddReplicaPropertyApi {
       @Parameter(
               description = "The name of the collection the replica belongs to.",
               required = true)
-          @PathParam("collName")
-          String collName,
+          @PathParam("collectionName")
+          String collectionName,
       @Parameter(description = "The name of the shard the replica belongs to.", required = true)
           @PathParam("shardName")
           String shardName,

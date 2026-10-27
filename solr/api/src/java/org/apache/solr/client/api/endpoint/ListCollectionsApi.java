@@ -34,30 +34,30 @@ public interface ListCollectionsApi {
               description =
                   "When true, return the collections, shards, and replicas tree (in"
                       + " 'collectionsDetail') instead of the plain collection name list.")
-          @QueryParam("detailed")
-          Boolean detailed,
+          @QueryParam("details")
+          Boolean details,
       @Parameter(
               description =
-                  "Only used when 'detailed' is true. Collection or alias to return. Omit to"
+                  "Only used when 'details' is true. Collection or alias to return. Omit to"
                       + " return every collection. An alias returns the collections it points"
                       + " at.")
           @QueryParam("collection")
           String collection,
       @Parameter(
               description =
-                  "Only used when 'detailed' is true. Shard or comma-separated shards to return."
+                  "Only used when 'details' is true. Shard or comma-separated shards to return."
                       + " Applied to each selected collection.")
           @QueryParam("shard")
           String shard,
       @Parameter(
               description =
-                  "Only used when 'detailed' is true. Route key of a document. Limits the tree to"
+                  "Only used when 'details' is true. Route key of a document. Limits the tree to"
                       + " the shard that would hold that document.")
           @QueryParam("_route_")
           String routeKey,
       @Parameter(
               description =
-                  "Only used when 'detailed' is true. Include per-replica state when the"
+                  "Only used when 'details' is true. Include per-replica state when the"
                       + " collection uses it.")
           @QueryParam("prs")
           Boolean prs)

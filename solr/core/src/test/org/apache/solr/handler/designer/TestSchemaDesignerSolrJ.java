@@ -23,6 +23,7 @@ import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import org.apache.solr.client.api.model.SchemaDesignerAddResponse;
+import org.apache.solr.client.api.model.SchemaDesignerConfigsResponse;
 import org.apache.solr.client.api.model.SchemaDesignerFileContentsResponse;
 import org.apache.solr.client.api.model.SchemaDesignerInfoResponse;
 import org.apache.solr.client.api.model.SchemaDesignerResponse;
@@ -157,5 +158,17 @@ public class TestSchemaDesignerSolrJ extends SolrCloudTestCase {
         "server should report a validation error for the invalid solrconfig.xml",
         resp.updateFileError);
     assertEquals("<config/>", resp.fileContent);
+  }
+
+  @Test
+  public void testListDesignerConfigsAtConfigsetsPath() throws Exception {
+    final String configSet = "solrjListSmoke";
+    new SchemaDesignerApi.PrepNewSchema(configSet).process(cluster.getSolrClient());
+
+    SchemaDesignerConfigsResponse resp =
+        new SchemaDesignerApi.ListDesignerConfigs().process(cluster.getSolrClient());
+    assertTrue(
+        "prepared configSet should be listed at /schema-designer/configsets",
+        resp.configSets.containsKey(configSet));
   }
 }

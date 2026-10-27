@@ -28,7 +28,7 @@ public class ListCollectionsResponse extends SolrJerseyResponse {
   @JsonProperty("collections")
   public List<String> collections;
 
-  @Schema(description = "Collections, shards, and replicas, present only when detailed=true.")
+  @Schema(description = "Collections, shards, and replicas, present only when details=true.")
   @JsonProperty("collectionsDetail")
   public Map<String, CollectionState> collectionsDetail;
 

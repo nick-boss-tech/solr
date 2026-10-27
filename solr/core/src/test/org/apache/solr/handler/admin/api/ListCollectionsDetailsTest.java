@@ -38,13 +38,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * HTTP tests for {@code GET /api/collections?detailed=true}.
+ * HTTP tests for {@code GET /api/collections?details=true}.
  *
  * <p>The response is the collections, shards, and replicas tree. Live nodes, the alias map, and
  * cluster properties stay on their own endpoints (not this one). v1 {@code CLUSTERSTATUS} still
  * returns them.
  */
-public class ListCollectionsDetailedTest extends SolrCloudTestCase {
+public class ListCollectionsDetailsTest extends SolrCloudTestCase {
 
   private static final String COLLECTION = "clusterstatuscoll";
   private static final String ALIAS = "clusterstatusalias";
@@ -59,7 +59,7 @@ public class ListCollectionsDetailedTest extends SolrCloudTestCase {
 
   @Test
   public void testReturnsCollectionTreeWithoutClusterLevelExtras() throws Exception {
-    Map<String, Object> body = getCollections("?detailed=true");
+    Map<String, Object> body = getCollections("?details=true");
     assertNull(body.get("cluster"));
     assertNull(body.get("live_nodes"));
     assertNull(body.get("aliases"));
@@ -79,7 +79,7 @@ public class ListCollectionsDetailedTest extends SolrCloudTestCase {
   @SuppressWarnings("unchecked")
   public void testGeneratedClientReadsTheTree() throws Exception {
     var req = new CollectionsApi.ListCollections();
-    req.setDetailed(true);
+    req.setDetails(true);
     ListCollectionsResponse response = req.process(cluster.getSolrClient());
     assertNull(response.error);
     assertNull(response.collections);
@@ -118,14 +118,14 @@ public class ListCollectionsDetailedTest extends SolrCloudTestCase {
     Map<String, Object> prs =
         (Map<String, Object>)
             collection(
-                    getCollections("?detailed=true&collection=" + prsCollection + "&prs=true"),
+                    getCollections("?details=true&collection=" + prsCollection + "&prs=true"),
                     prsCollection)
                 .get("PRS");
     assertNotNull(prs);
     assertNotNull(prs.get("states"));
 
     var request = new CollectionsApi.ListCollections();
-    request.setDetailed(true);
+    request.setDetails(true);
     request.setCollection(prsCollection);
     request.setPrs(true);
     CollectionState typed =
@@ -136,27 +136,26 @@ public class ListCollectionsDetailedTest extends SolrCloudTestCase {
   @Test
   public void testCollectionShardAndAliasFilters() throws Exception {
     Map<String, Object> byCollection =
-        collections(getCollections("?detailed=true&collection=" + COLLECTION));
+        collections(getCollections("?details=true&collection=" + COLLECTION));
     assertEquals(Set.of(COLLECTION), byCollection.keySet());
 
     Map<String, Object> oneShard =
         shards(
             collection(
-                getCollections("?detailed=true&collection=" + COLLECTION + "&shard=shard1"),
+                getCollections("?details=true&collection=" + COLLECTION + "&shard=shard1"),
                 COLLECTION));
     assertEquals(Set.of("shard1"), oneShard.keySet());
 
     ContentResponse missingShard =
-        httpGet("?detailed=true&collection=" + COLLECTION + "&shard=nosuchshard");
+        httpGet("?details=true&collection=" + COLLECTION + "&shard=nosuchshard");
     assertEquals(400, missingShard.getStatus());
 
-    assertNotNull(
-        collections(getCollections("?detailed=true&collection=" + ALIAS)).get(COLLECTION));
+    assertNotNull(collections(getCollections("?details=true&collection=" + ALIAS)).get(COLLECTION));
   }
 
   @Test
   public void testUnknownCollectionIsRejected() throws Exception {
-    ContentResponse response = httpGet("?detailed=true&collection=not-a-collection");
+    ContentResponse response = httpGet("?details=true&collection=not-a-collection");
     assertEquals(400, response.getStatus());
     assertTrue(response.getContentAsString().contains("not found"));
   }

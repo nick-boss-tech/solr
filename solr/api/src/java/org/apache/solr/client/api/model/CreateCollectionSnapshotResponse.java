@@ -27,6 +27,6 @@ public class CreateCollectionSnapshotResponse extends SubResponseAccumulatingJer
   @JsonProperty("snapshot")
   public String snapshotName;
 
-  @Schema(description = "A flag that treats the collName parameter as a collection alias.")
+  @Schema(description = "A flag that treats the collectionName parameter as a collection alias.")
   public boolean followAliases;
 }

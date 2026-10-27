@@ -41,7 +41,7 @@ import org.apache.solr.response.SolrQueryResponse;
  *
  * <p>This API (GET /v2/collections) is equivalent to the v1 /admin/collections?action=LIST command
  *
- * <p>With {@code detailed=true}, it instead returns the collections, shards, and replicas tree (in
+ * <p>With {@code details=true}, it instead returns the collections, shards, and replicas tree (in
  * {@code collectionsDetail}) -- the same tree v1 {@code CLUSTERSTATUS} returns under {@code
  * cluster.collections}, without the live-node list, alias map, or cluster properties that accompany
  * it there. Live nodes, aliases, and cluster properties have their own v2 endpoints: {@code GET
@@ -57,13 +57,13 @@ public class ListCollections extends AdminAPIBase implements ListCollectionsApi 
   @Override
   @PermissionName(COLL_READ_PERM)
   public ListCollectionsResponse listCollections(
-      Boolean detailed, String collection, String shard, String routeKey, Boolean prs)
+      Boolean details, String collection, String shard, String routeKey, Boolean prs)
       throws Exception {
     final ListCollectionsResponse response =
         instantiateJerseyResponse(ListCollectionsResponse.class);
     validateZooKeeperAwareCoreContainer(coreContainer);
 
-    if (Boolean.TRUE.equals(detailed)) {
+    if (Boolean.TRUE.equals(details)) {
       if (collection != null) {
         recordCollectionForLogAndTracing(collection, solrQueryRequest);
       }

@@ -55,15 +55,16 @@ public class DeleteReplicaProperty extends AdminAPIBase implements DeleteReplica
   @Override
   @PermissionName(PermissionNameProvider.Name.COLL_EDIT_PERM)
   public SolrJerseyResponse deleteReplicaProperty(
-      String collName, String shardName, String replicaName, String propertyName) throws Exception {
+      String collectionName, String shardName, String replicaName, String propertyName)
+      throws Exception {
     final SolrJerseyResponse response = instantiateJerseyResponse(SolrJerseyResponse.class);
     fetchAndValidateZooKeeperAwareCoreContainer();
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
 
     submitRemoteMessageAndHandleException(
         response,
         CollectionParams.CollectionAction.DELETEREPLICAPROP,
-        createRemoteMessage(collName, shardName, replicaName, propertyName));
+        createRemoteMessage(collectionName, shardName, replicaName, propertyName));
 
     return response;
   }
@@ -85,11 +86,11 @@ public class DeleteReplicaProperty extends AdminAPIBase implements DeleteReplica
 
   // XXX should this command support followAliases?
   public static ZkNodeProps createRemoteMessage(
-      String collName, String shardName, String replicaName, String propName) {
+      String collectionName, String shardName, String replicaName, String propName) {
     final Map<String, Object> messageProperties =
         Map.of(
             COLLECTION_PROP,
-            collName,
+            collectionName,
             SHARD_ID_PROP,
             shardName,
             REPLICA_PROP,

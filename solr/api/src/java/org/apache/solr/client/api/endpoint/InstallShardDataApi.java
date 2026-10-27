@@ -24,14 +24,14 @@ import org.apache.solr.client.api.model.InstallShardDataRequestBody;
 import org.apache.solr.client.api.model.SubResponseAccumulatingJerseyResponse;
 
 /** V2 API definition allowing users to import offline-constructed index into a shard. */
-@Path("/collections/{collName}/shards/{shardName}/install")
+@Path("/collections/{collectionName}/shards/{shardName}/install")
 public interface InstallShardDataApi {
   @POST
   @Operation(
       summary = "Install offline index into an existing shard",
       tags = {"shards"})
   SubResponseAccumulatingJerseyResponse installShardData(
-      @PathParam("collName") String collName,
+      @PathParam("collectionName") String collectionName,
       @PathParam("shardName") String shardName,
       InstallShardDataRequestBody requestBody)
       throws Exception;

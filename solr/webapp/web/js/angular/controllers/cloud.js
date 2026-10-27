@@ -178,7 +178,7 @@ var nodesSubController = function($scope, $timeout, ClusterV2, CollectionsV2, Sy
     var live_nodes = [];
 
     // We build a node-centric view of the cluster state which we can easily consume to render the table
-    CollectionsV2.listCollections({detailed: true}, function (error, data, response) {
+    CollectionsV2.listCollections({details: true}, function (error, data, response) {
       $timeout(function() {
         if (error) { ApiErrorHandler.handle(response); return; }
 

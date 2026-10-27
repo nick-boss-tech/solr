@@ -48,21 +48,21 @@ public class DeleteCollectionSnapshot extends AdminAPIBase
   @Override
   @PermissionName(COLL_EDIT_PERM)
   public DeleteCollectionSnapshotResponse deleteCollectionSnapshot(
-      String collName, String snapshotName, boolean followAliases, String asyncId)
+      String collectionName, String snapshotName, boolean followAliases, String asyncId)
       throws Exception {
     final var response = instantiateJerseyResponse(DeleteCollectionSnapshotResponse.class);
     fetchAndValidateZooKeeperAwareCoreContainer();
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
 
-    final String collectionName = resolveCollectionName(collName, followAliases);
+    final String resolvedName = resolveCollectionName(collectionName, followAliases);
 
     submitRemoteMessageAndHandleResponse(
         response,
         CollectionParams.CollectionAction.DELETESNAPSHOT,
-        createRemoteMessage(collectionName, followAliases, snapshotName),
+        createRemoteMessage(resolvedName, followAliases, snapshotName),
         asyncId);
 
-    response.collection = collName;
+    response.collection = collectionName;
     response.snapshotName = snapshotName;
     response.followAliases = followAliases;
     response.requestId = asyncId;

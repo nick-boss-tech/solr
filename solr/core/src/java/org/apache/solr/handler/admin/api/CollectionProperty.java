@@ -52,14 +52,14 @@ public class CollectionProperty extends AdminAPIBase implements CollectionProper
 
   @Override
   @PermissionName(COLL_READ_PERM)
-  public ListCollectionPropertiesResponse listCollectionProperties(String collName)
+  public ListCollectionPropertiesResponse listCollectionProperties(String collectionName)
       throws Exception {
     final var response = instantiateJerseyResponse(ListCollectionPropertiesResponse.class);
-    ensureRequiredParameterProvided("collName", collName);
+    ensureRequiredParameterProvided("collectionName", collectionName);
     fetchAndValidateZooKeeperAwareCoreContainer();
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
 
-    String resolvedCollection = coreContainer.getAliases().resolveSimpleAlias(collName);
+    String resolvedCollection = coreContainer.getAliases().resolveSimpleAlias(collectionName);
     CollectionProperties cp =
         new CollectionProperties(coreContainer.getZkController().getZkClient());
     Map<String, String> properties = cp.getCollectionProperties(resolvedCollection);
@@ -72,15 +72,15 @@ public class CollectionProperty extends AdminAPIBase implements CollectionProper
 
   @Override
   @PermissionName(COLL_READ_PERM)
-  public GetCollectionPropertyResponse getCollectionProperty(String collName, String propName)
+  public GetCollectionPropertyResponse getCollectionProperty(String collectionName, String propName)
       throws Exception {
     final var response = instantiateJerseyResponse(GetCollectionPropertyResponse.class);
-    ensureRequiredParameterProvided("collName", collName);
+    ensureRequiredParameterProvided("collectionName", collectionName);
     ensureRequiredParameterProvided("propName", propName);
     fetchAndValidateZooKeeperAwareCoreContainer();
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
 
-    String resolvedCollection = coreContainer.getAliases().resolveSimpleAlias(collName);
+    String resolvedCollection = coreContainer.getAliases().resolveSimpleAlias(collectionName);
     CollectionProperties cp =
         new CollectionProperties(coreContainer.getZkController().getZkClient());
     Map<String, String> properties = cp.getCollectionProperties(resolvedCollection);
@@ -90,7 +90,7 @@ public class CollectionProperty extends AdminAPIBase implements CollectionProper
     } else {
       throw new SolrException(
           SolrException.ErrorCode.NOT_FOUND,
-          "Property '" + propName + "' not found for collection '" + collName + "'");
+          "Property '" + propName + "' not found for collection '" + collectionName + "'");
     }
 
     return response;
@@ -99,24 +99,24 @@ public class CollectionProperty extends AdminAPIBase implements CollectionProper
   @Override
   @PermissionName(COLL_EDIT_PERM)
   public SolrJerseyResponse createOrUpdateCollectionProperty(
-      String collName, String propName, UpdateCollectionPropertyRequestBody requestBody)
+      String collectionName, String propName, UpdateCollectionPropertyRequestBody requestBody)
       throws Exception {
     if (requestBody == null) {
       throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "Missing required request body");
     }
     final SolrJerseyResponse response = instantiateJerseyResponse(SolrJerseyResponse.class);
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
-    modifyCollectionProperty(collName, propName, requestBody.value);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
+    modifyCollectionProperty(collectionName, propName, requestBody.value);
     return response;
   }
 
   @Override
   @PermissionName(COLL_EDIT_PERM)
-  public SolrJerseyResponse deleteCollectionProperty(String collName, String propName)
+  public SolrJerseyResponse deleteCollectionProperty(String collectionName, String propName)
       throws Exception {
     final SolrJerseyResponse response = instantiateJerseyResponse(SolrJerseyResponse.class);
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
-    modifyCollectionProperty(collName, propName, null);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
+    modifyCollectionProperty(collectionName, propName, null);
     return response;
   }
 

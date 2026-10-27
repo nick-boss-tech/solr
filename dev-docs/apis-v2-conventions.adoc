@@ -29,15 +29,15 @@ Following these guidelines has given us the following (non-exhaustive) list of v
 * `/api/cluster/properties`
 * `/api/cluster/properties/specificPropertyName`
 * `/api/collections`
-* `/api/collections/specificCollName`
-* `/api/collections/specificCollName/properties`
-* `/api/collections/specificCollName/properties/specificPropertyName`
-* `/api/collections/specificcollName/shards`
-* `/api/collections/specificCollName/shards/specificShardName`
-* `/api/collections/specificCollName/shards/specificShardName/replicas`
-* `/api/collections/specificCollName/shards/specificShardName/replicas/specificReplicaName`
-* `/api/collections/specificCollName/shards/specificShardName/replicas/specificReplicaName/properties`
-* `/api/collections/specificCollName/shards/specificShardName/replicas/specificReplicaName/properties/specificPropertyName`
+* `/api/collections/specificCollectionName`
+* `/api/collections/specificCollectionName/properties`
+* `/api/collections/specificCollectionName/properties/specificPropertyName`
+* `/api/collections/specificCollectionName/shards`
+* `/api/collections/specificCollectionName/shards/specificShardName`
+* `/api/collections/specificCollectionName/shards/specificShardName/replicas`
+* `/api/collections/specificCollectionName/shards/specificShardName/replicas/specificReplicaName`
+* `/api/collections/specificCollectionName/shards/specificShardName/replicas/specificReplicaName/properties`
+* `/api/collections/specificCollectionName/shards/specificShardName/replicas/specificReplicaName/properties/specificPropertyName`
 * `/api/configsets`
 * `/api/configsets/specificConfigsetName`
 * `/api/cores`
@@ -51,6 +51,11 @@ SolrCloud handles most requests as a distributed system, i.e. any request can be
 But not all APIs work this way- some functionality is designed to only return data from the receiving node, such as `/api/node/key` which returns a cryptographic key specific to the receiving node.
 Solr will not proxy these requests.
 To represent this distinction the API design uses the idiosyncratic path `/api/node`, to help distinguish these from other node-related APIs.
+
+== Parameter and Flag Names
+
+Use nouns rather than adjectives for a flag that asks for more data, such as `details` rather than `detailed`.
+Use the same name for the same concept everywhere in the v2 APIs: a collection path parameter is `collectionName`, not `collName`.
 
 == HTTP Methods 
 
@@ -76,7 +81,7 @@ v2 APIs should be consistent in how they report errors.  Throwing a `SolrExcepti
 1. The error code as the HTTP response status code, as `responseHeader.status` and as `error.code`, and
 2. The error message as `error.msg`.
 
-API calls that reference a specific resource (e.g. `specificCollName`, `specificAliasName`, `specificPropertyName` and others per the above list) that do not exist should return `SolrException.ErrorCode.NOT_FOUND` (HTTP 404).
+API calls that reference a specific resource (e.g. `specificCollectionName`, `specificAliasName`, `specificPropertyName` and others per the above list) that do not exist should return `SolrException.ErrorCode.NOT_FOUND` (HTTP 404).
 
 == Exceptional Cases - "Command" APIs
 

@@ -59,7 +59,7 @@ public class AddReplicaProperty extends AdminAPIBase implements AddReplicaProper
   @Override
   @PermissionName(COLL_EDIT_PERM)
   public SolrJerseyResponse addReplicaProperty(
-      String collName,
+      String collectionName,
       String shardName,
       String replicaName,
       String propertyName,
@@ -70,10 +70,10 @@ public class AddReplicaProperty extends AdminAPIBase implements AddReplicaProper
     }
     final SolrJerseyResponse response = instantiateJerseyResponse(SolrJerseyResponse.class);
     fetchAndValidateZooKeeperAwareCoreContainer();
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
 
     final ZkNodeProps remoteMessage =
-        createRemoteMessage(collName, shardName, replicaName, propertyName, requestBody);
+        createRemoteMessage(collectionName, shardName, replicaName, propertyName, requestBody);
     submitRemoteMessageAndHandleException(
         response, CollectionParams.CollectionAction.ADDREPLICAPROP, remoteMessage);
 
@@ -82,13 +82,13 @@ public class AddReplicaProperty extends AdminAPIBase implements AddReplicaProper
   }
 
   public ZkNodeProps createRemoteMessage(
-      String collName,
+      String collectionName,
       String shardName,
       String replicaName,
       String propertyName,
       AddReplicaPropertyRequestBody requestBody) {
     final Map<String, Object> remoteMessage = new HashMap<>();
-    remoteMessage.put(COLLECTION_PROP, collName);
+    remoteMessage.put(COLLECTION_PROP, collectionName);
     remoteMessage.put(PROPERTY_PROP, propertyName);
     remoteMessage.put(SHARD_ID_PROP, shardName);
     remoteMessage.put(REPLICA_PROP, replicaName);

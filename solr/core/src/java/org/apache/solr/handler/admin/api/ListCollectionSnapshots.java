@@ -46,18 +46,18 @@ public class ListCollectionSnapshots extends AdminAPIBase implements CollectionS
   /** This API is analogous to V1's (POST /solr/admin/collections?action=LISTSNAPSHOTS) */
   @Override
   @PermissionName(COLL_READ_PERM)
-  public ListCollectionSnapshotsResponse listSnapshots(String collName) throws Exception {
+  public ListCollectionSnapshotsResponse listSnapshots(String collectionName) throws Exception {
 
     final ListCollectionSnapshotsResponse response =
         instantiateJerseyResponse(ListCollectionSnapshotsResponse.class);
     final CoreContainer coreContainer = fetchAndValidateZooKeeperAwareCoreContainer();
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
 
-    final String collectionName = resolveCollectionName(collName, true);
+    final String resolvedName = resolveCollectionName(collectionName, true);
 
     SolrZkClient client = coreContainer.getZkController().getZkClient();
     Collection<CollectionSnapshotMetaData> m =
-        SolrSnapshotManager.listSnapshots(client, collectionName);
+        SolrSnapshotManager.listSnapshots(client, resolvedName);
 
     final Map<String, Object> snapshots = CollectionUtil.newHashMap(m.size());
     for (CollectionSnapshotMetaData metaData : m) {

@@ -20,7 +20,7 @@ function($scope, $routeParams, $timeout, CollectionsV2, Constants, ApiErrorHandl
   $scope.resetMenu("collection-overview", Constants.IS_COLLECTION_PAGE);
 
   $scope.refresh = function() {
-    CollectionsV2.listCollections({detailed: true, collection: $routeParams.core}, function(error, data, response) {
+    CollectionsV2.listCollections({details: true, collection: $routeParams.core}, function(error, data, response) {
       $timeout(function() {
         if (error) { ApiErrorHandler.handle(response); return; }
         $scope.selectedCollection = data.collectionsDetail[$routeParams.core];

@@ -24,8 +24,8 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-/** Standalone coverage for {@code GET /api/collections?detailed=true}. */
-public class ListCollectionsDetailedStandaloneTest extends SolrTestCase {
+/** Standalone coverage for {@code GET /api/collections?details=true}. */
+public class ListCollectionsDetailsStandaloneTest extends SolrTestCase {
 
   @ClassRule public static final SolrJettyTestRule solrTestRule = new SolrJettyTestRule();
 
@@ -37,7 +37,7 @@ public class ListCollectionsDetailedStandaloneTest extends SolrTestCase {
   @Test
   public void testRequiresSolrCloud() {
     var req = new CollectionsApi.ListCollections();
-    req.setDetailed(true);
+    req.setDetails(true);
     final RemoteSolrException ex =
         expectThrows(RemoteSolrException.class, () -> req.process(solrTestRule.getAdminClient()));
     assertEquals(400, ex.code());

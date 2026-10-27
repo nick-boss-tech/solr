@@ -118,7 +118,7 @@ public interface SchemaDesignerApi {
       throws Exception;
 
   @GET
-  @Path("/configs")
+  @Path("/configsets")
   @Operation(
       summary = "List all configSets available for schema design.",
       description =

@@ -28,14 +28,14 @@ import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.client.api.model.UpdateCollectionPropertyRequestBody;
 
 /** V2 API definitions for modifying collection-level properties. */
-@Path("/collections/{collName}/properties")
+@Path("/collections/{collectionName}/properties")
 public interface CollectionPropertyApi {
   @GET
   @Operation(
       summary = "List all properties for the specified collection",
       tags = {"collection-properties"})
-  ListCollectionPropertiesResponse listCollectionProperties(@PathParam("collName") String collName)
-      throws Exception;
+  ListCollectionPropertiesResponse listCollectionProperties(
+      @PathParam("collectionName") String collectionName) throws Exception;
 
   @GET
   @Path("/{propName}")
@@ -43,7 +43,7 @@ public interface CollectionPropertyApi {
       summary = "Get the value of a specific collection property",
       tags = {"collection-properties"})
   GetCollectionPropertyResponse getCollectionProperty(
-      @PathParam("collName") String collName, @PathParam("propName") String propName)
+      @PathParam("collectionName") String collectionName, @PathParam("propName") String propName)
       throws Exception;
 
   @PUT
@@ -52,7 +52,7 @@ public interface CollectionPropertyApi {
       summary = "Create or update a collection property",
       tags = {"collection-properties"})
   SolrJerseyResponse createOrUpdateCollectionProperty(
-      @PathParam("collName") String collName,
+      @PathParam("collectionName") String collectionName,
       @PathParam("propName") String propName,
       UpdateCollectionPropertyRequestBody requestBody)
       throws Exception;
@@ -63,6 +63,6 @@ public interface CollectionPropertyApi {
       summary = "Delete the specified collection property from the collection",
       tags = {"collection-properties"})
   SolrJerseyResponse deleteCollectionProperty(
-      @PathParam("collName") String collName, @PathParam("propName") String propName)
+      @PathParam("collectionName") String collectionName, @PathParam("propName") String propName)
       throws Exception;
 }

@@ -29,7 +29,8 @@ import org.apache.solr.client.api.model.SolrJerseyResponse;
  *
  * <p>This API is analogous to the v1 /admin/collections?action=DELETEREPLICAPROP command.
  */
-@Path("/collections/{collName}/shards/{shardName}/replicas/{replicaName}/properties/{propName}")
+@Path(
+    "/collections/{collectionName}/shards/{shardName}/replicas/{replicaName}/properties/{propName}")
 public interface DeleteReplicaPropertyApi {
 
   @DELETE
@@ -40,8 +41,8 @@ public interface DeleteReplicaPropertyApi {
       @Parameter(
               description = "The name of the collection the replica belongs to.",
               required = true)
-          @PathParam("collName")
-          String collName,
+          @PathParam("collectionName")
+          String collectionName,
       @Parameter(description = "The name of the shard the replica belongs to.", required = true)
           @PathParam("shardName")
           String shardName,

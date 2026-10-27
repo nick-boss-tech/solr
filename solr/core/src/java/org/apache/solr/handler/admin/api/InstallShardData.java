@@ -58,10 +58,11 @@ public class InstallShardData extends AdminAPIBase implements InstallShardDataAp
   @Override
   @PermissionName(COLL_EDIT_PERM)
   public SubResponseAccumulatingJerseyResponse installShardData(
-      String collName, String shardName, InstallShardDataRequestBody requestBody) throws Exception {
+      String collectionName, String shardName, InstallShardDataRequestBody requestBody)
+      throws Exception {
     final var response = instantiateJerseyResponse(SubResponseAccumulatingJerseyResponse.class);
     final CoreContainer coreContainer = fetchAndValidateZooKeeperAwareCoreContainer();
-    recordCollectionForLogAndTracing(collName, solrQueryRequest);
+    recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
     if (requestBody == null) {
       throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "Required request body missing");
     }
@@ -74,11 +75,11 @@ public class InstallShardData extends AdminAPIBase implements InstallShardDataAp
 
     final ClusterState clusterState =
         coreContainer.getZkController().getZkStateReader().getClusterState();
-    ensureCollectionAndShardExist(clusterState, collName, shardName);
+    ensureCollectionAndShardExist(clusterState, collectionName, shardName);
 
     // Only install data to shards which belong to a collection in read-only mode
     final DocCollection dc =
-        coreContainer.getZkController().getZkStateReader().getCollection(collName);
+        coreContainer.getZkController().getZkStateReader().getCollection(collectionName);
     if (dc.getSlice(shardName).getReplicas().size() > 1 && !dc.isReadOnly()) {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,
@@ -88,7 +89,7 @@ public class InstallShardData extends AdminAPIBase implements InstallShardDataAp
     submitRemoteMessageAndHandleResponse(
         response,
         CollectionParams.CollectionAction.INSTALLSHARDDATA,
-        createRemoteMessage(collName, shardName, requestBody),
+        createRemoteMessage(collectionName, shardName, requestBody),
         requestBody.async);
 
     return response;

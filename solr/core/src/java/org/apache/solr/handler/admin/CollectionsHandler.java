@@ -820,8 +820,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
      */
     /**
      * Superseded by V2, which splits it up: {@link ListCollectionsApi} ({@code GET
-     * /collections?detailed=true}) for the collections tree, {@link ListClusterNodesApi} ({@code
-     * GET /cluster/nodes}), {@link ListAliasesApi} ({@code GET /aliases}) and {@link
+     * /collections?details=true}) for the collections tree, {@link ListClusterNodesApi} ({@code GET
+     * /cluster/nodes}), {@link ListAliasesApi} ({@code GET /aliases}) and {@link
      * ClusterPropertyApis} ({@code GET /cluster/properties}).
      */
     CLUSTERSTATUS_OP(
