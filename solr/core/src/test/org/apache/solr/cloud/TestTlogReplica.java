@@ -64,6 +64,7 @@ import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.CoreDescriptor;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.embedded.JettySolrRunner;
+import org.apache.solr.handler.IndexFetcher;
 import org.apache.solr.update.SolrIndexWriter;
 import org.apache.solr.util.RefCounted;
 import org.apache.solr.util.SolrMetricTestUtils;
@@ -98,6 +99,10 @@ public class TestTlogReplica extends SolrCloudTestCase {
   public static void setupCluster() throws Exception {
     System.setProperty("metricsEnabled", "true");
     System.setProperty("solr.waitToSeeReplicasInStateTimeoutSeconds", "30");
+    // These tests exercise tlog recovery, not the hard link reuse in IndexFetcher. On
+    // filesystems with low hard link limits (EMLINK, seen on NFS) that reuse makes recovery
+    // fail for environmental reasons, so identical files are downloaded instead. SOLR-18586.
+    System.setProperty(IndexFetcher.DISABLE_HARD_LINKS_PROP, "true");
     configureCluster(2) // 2 + random().nextInt(3)
         .addConfig("conf", configset("cloud-minimal-inplace-updates"))
         .configure();

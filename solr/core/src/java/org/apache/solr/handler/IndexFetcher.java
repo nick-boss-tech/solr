@@ -104,6 +104,7 @@ import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.SolrParams;
+import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.ExecutorUtil;
 import org.apache.solr.common.util.FastInputStream;
 import org.apache.solr.common.util.IOUtils;
@@ -139,6 +140,14 @@ import org.slf4j.LoggerFactory;
  */
 public class IndexFetcher {
   private static final int _100K = 100000;
+
+  /**
+   * System property that disables the hard link reuse of an identical local index file during a
+   * complete index fetch, so the file is downloaded instead. Intended for tests and for filesystems
+   * where hard links are unavailable or limited (for example EMLINK on NFS); leave unset in normal
+   * deployments.
+   */
+  public static final String DISABLE_HARD_LINKS_PROP = "solr.indexfetcher.disableHardLinks";
 
   public static final String INDEX_PROPERTIES = "index.properties";
 
@@ -1192,6 +1201,8 @@ public class IndexFetcher {
           FilterDirectory.unwrap(tmpIndexDir));
     }
 
+    boolean disableHardLinks = EnvUtils.getPropertyAsBool(DISABLE_HARD_LINKS_PROP, false);
+
     for (Map<String, Object> file : filesToDownload) {
       String filename = (String) file.get(NAME);
       long size = (Long) file.get(SIZE);
@@ -1210,6 +1221,7 @@ public class IndexFetcher {
         Path localFile = Path.of(indexDirPath, filename);
         if (downloadCompleteIndex
             && doDifferentialCopy
+            && !disableHardLinks
             && compareResult.equal
             && compareResult.checkSummed
             && Files.exists(localFile)) {
