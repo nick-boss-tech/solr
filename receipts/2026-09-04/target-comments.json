@@ -1,0 +1,32 @@
+[
+  {
+    "person": "Jan Høydahl",
+    "username": "janhoy",
+    "issue": "SOLR-18214",
+    "comment_id": "18111426",
+    "created": "2026-09-04T06:51:00.687+0000",
+    "updated": "2026-09-04T06:51:00.687+0000",
+    "excerpt": "There was a PR that went unreviewed and got closed, was that an omission? What's the way forward here? Personally I find it a corner case to first delete _default, but yea, should not break things. Could make _default impossible to delete as an alternative?",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18214?focusedCommentId=18111426"
+  },
+  {
+    "person": "Christos Malliaridis",
+    "username": "malliaridis",
+    "issue": "SOLR-18214",
+    "comment_id": "18111524",
+    "created": "2026-09-04T11:30:56.992+0000",
+    "updated": "2026-09-04T11:30:56.992+0000",
+    "excerpt": "I believe there was no consensus how to address this issue. I would choose the following API behavior: - If the user omits the `baseConfigset` field in the request (null or not set), the configset is created without a base configset (no clone by default) - Is this possible? Can someone create a configset without a base structure? - The user has to set explicitly the `baseConfigset` to `_default` if they want to use…",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18214?focusedCommentId=18111524"
+  },
+  {
+    "person": "Jan Høydahl",
+    "username": "janhoy",
+    "issue": "SOLR-18214",
+    "comment_id": "18111537",
+    "created": "2026-09-04T12:24:44.539+0000",
+    "updated": "2026-09-04T12:24:44.539+0000",
+    "excerpt": "Depends on when you want to land this change. If you require explicit baseConfigset param then that is back-compat-break and cannot land before 11.0. But falling back to _default and making it a protected configset would be back compat.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18214?focusedCommentId=18111537"
+  }
+]

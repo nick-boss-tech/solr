@@ -1,0 +1,50 @@
+[
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "vchandsekar",
+    "displayName": "Vishnu Priya",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "dan2097",
+    "displayName": "Daniel Lowe",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "stillalex",
+    "displayName": "Alex Deparvu",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "malliaridis",
+    "displayName": "Christos Malliaridis",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "magibney",
+    "displayName": "Michael Gibney",
+    "comments": 1,
+    "issues": 1
+  }
+]
