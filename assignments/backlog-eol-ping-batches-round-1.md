@@ -1,7 +1,9 @@
 # Assignment: backlog EOL ping batches (round 1)
 
-Status: OPEN
+Status: DONE
 Tags: draft, records, sweep
+
+DONE: 2026-10-27T07:22:14Z. Deliverables: drafts/backlog-eol-ping-batch-1.md through drafts/backlog-eol-ping-batch-5.md (batch 5 is final; the 71-issue set is exhausted). Held for the owner, not drafted: SOLR-7580 and SOLR-10804 (GitHub hits; PR reference needs a decision), SOLR-9511 and SOLR-7282 (attachments), SOLR-6538 (held since batch 1).
 
 Continue the backlog ping production started in `drafts/backlog-eol-ping-batch-1.md` (10 drafts, verified, awaiting the owner's go). The set: open SOLR issues with fixVersion in (5.0, 5.2, 5.5, 6.2, 6.7, 7.0), type not Bug, priority not Blocker or Critical, not updated since 2023-10-24; 71 issues by live JQL on 2026-10-24, taken in last-updated order. Batch 1 covered the first 10 clean tickets; SOLR-6538 is held for a PR reference and is not part of any batch until that is resolved.
 
