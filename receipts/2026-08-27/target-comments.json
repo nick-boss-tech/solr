@@ -1,0 +1,42 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-112",
+    "comment_id": "18108587",
+    "created": "2026-08-27T01:10:04.479+0000",
+    "updated": "2026-08-27T01:10:04.479+0000",
+    "excerpt": "Closing as obsolete. This need is now met by InitParams (solr/core/src/java/org/apache/solr/core/InitParams.java), which lets a block apply shared defaults/invariants/appends to multiple request handlers by path pattern — the same problem this ticket describes. Please do reopen if you are still interested in this.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-112?focusedCommentId=18108587"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-416",
+    "comment_id": "18108588",
+    "created": "2026-08-27T01:11:47.269+0000",
+    "updated": "2026-08-27T01:11:47.269+0000",
+    "excerpt": "Closing as not a problem. A full search of solr/core, solr/solrj, solr/api, and solr/modules finds zero remaining no-arg .toUpperCase()/.toLowerCase() calls — every call site now supplies an explicit Locale (mostly Locale.ROOT, some Locale.ENGLISH). Beyond the one-time audit requested here, the build now enforces this permanently via the forbidden-apis Gradle plugin's jdk-non-portable bundled signature set (gradle/v…",
+    "url": "https://issues.apache.org/jira/browse/SOLR-416?focusedCommentId=18108588"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-422",
+    "comment_id": "18108589",
+    "created": "2026-08-27T01:12:24.936+0000",
+    "updated": "2026-08-27T01:12:24.936+0000",
+    "excerpt": "Closing as fixed. Classic DisMax now runs the query through SolrPluginUtils.stripUnbalancedQuotes() before parsing, which strips all \" characters when the count is unbalanced (e.g. a lone \"), avoiding malformed phrase syntax. Extended DisMax's splitIntoClauses() detects an unterminated quote at end-of-string and retries the parse with ignoreQuote=true, with parseOriginalQuery() also falling back to parseEscapedQuery…",
+    "url": "https://issues.apache.org/jira/browse/SOLR-422?focusedCommentId=18108589"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18325",
+    "comment_id": "18108756",
+    "created": "2026-08-27T09:37:08.855+0000",
+    "updated": "2026-08-27T09:37:08.855+0000",
+    "excerpt": "i was just looking at this the other night, and yeah, seems like something to be done. I don't know how big the impact is to consumers? It may be a Solr 11 thing? It feels like it would be too much to do in Solr 10? Wish we had done this for 10.0 ;-(.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18325?focusedCommentId=18108756"
+  }
+]
