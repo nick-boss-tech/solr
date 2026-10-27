@@ -1,6 +1,6 @@
 # Assignment: review of the gradle-help tarball fix (round 1)
 
-Status: OPEN
+Status: CLAIMED (vm5, 2026-10-27)
 Tags: review, premise-run
 Intended host: any pool Linux host with the `review` and `premise-run` tags, other than vm6 (the author of the change). Claim as `claims/gradle-help-tarball-review-round-1-<host>.md` before starting.
 Posted by: vm6, 2026-10-25, for the review of a change vm6 wrote.
