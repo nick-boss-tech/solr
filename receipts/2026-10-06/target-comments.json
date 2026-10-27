@@ -1,0 +1,952 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-17422",
+    "comment_id": "18123909",
+    "created": "2026-10-06T16:54:39.564+0000",
+    "updated": "2026-10-06T16:54:39.564+0000",
+    "excerpt": "Fixed with the merge of https://github.com/apache/solr/pull/4952",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17422?focusedCommentId=18123909"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18425",
+    "comment_id": "18123910",
+    "created": "2026-10-06T16:55:38.173+0000",
+    "updated": "2026-10-06T16:55:38.173+0000",
+    "excerpt": "With the merge of [https://github.com/apache/solr/pull/4952] we are done!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18425?focusedCommentId=18123910"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18425",
+    "comment_id": "18123916",
+    "created": "2026-10-06T17:05:03.041+0000",
+    "updated": "2026-10-06T17:05:03.041+0000",
+    "excerpt": "There is a discussion needed about if the other subtasks actually are going to be executed on, if we actually will make those happen.. if so, great, but if not, then let's close those JIRAs. We have lots of APIS to migrate, don't need more.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18425?focusedCommentId=18123916"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18448",
+    "comment_id": "18123917",
+    "created": "2026-10-06T17:06:22.927+0000",
+    "updated": "2026-10-06T17:06:22.927+0000",
+    "excerpt": "THe work in SOLR-18450 actually delivers this!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18448?focusedCommentId=18123917"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-15752",
+    "comment_id": "18123929",
+    "created": "2026-10-06T17:27:45.758+0000",
+    "updated": "2026-10-06T17:27:45.758+0000",
+    "excerpt": "We are moving right along... I'll post an update on where we are.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-15752?focusedCommentId=18123929"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-14265",
+    "comment_id": "18123930",
+    "created": "2026-10-06T17:29:22.272+0000",
+    "updated": "2026-10-06T17:29:22.272+0000",
+    "excerpt": "This effort is very much in progress, between revamped ref guide, new v2 apis, using them in the Solr CLI and Solr Admin UI. That work is in many other JIRAs, so I'd like to close this as a duplicate.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-14265?focusedCommentId=18123930"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18346",
+    "comment_id": "18124046",
+    "created": "2026-10-06T19:54:01.136+0000",
+    "updated": "2026-10-06T19:54:01.136+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18346?focusedCommentId=18124046"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17208",
+    "comment_id": "18124047",
+    "created": "2026-10-06T19:54:01.215+0000",
+    "updated": "2026-10-06T19:54:01.215+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17208?focusedCommentId=18124047"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-13309",
+    "comment_id": "18124048",
+    "created": "2026-10-06T19:54:01.412+0000",
+    "updated": "2026-10-06T19:54:01.412+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-13309?focusedCommentId=18124048"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18195",
+    "comment_id": "18124049",
+    "created": "2026-10-06T19:54:01.586+0000",
+    "updated": "2026-10-06T19:54:01.586+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18195?focusedCommentId=18124049"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18220",
+    "comment_id": "18124051",
+    "created": "2026-10-06T19:54:01.790+0000",
+    "updated": "2026-10-06T19:54:01.790+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18220?focusedCommentId=18124051"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17755",
+    "comment_id": "18124052",
+    "created": "2026-10-06T19:54:01.903+0000",
+    "updated": "2026-10-06T19:54:01.903+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17755?focusedCommentId=18124052"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18406",
+    "comment_id": "18124053",
+    "created": "2026-10-06T19:54:02.014+0000",
+    "updated": "2026-10-06T19:54:02.014+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18406?focusedCommentId=18124053"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18056",
+    "comment_id": "18124055",
+    "created": "2026-10-06T19:54:02.298+0000",
+    "updated": "2026-10-06T19:54:02.298+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18056?focusedCommentId=18124055"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18219",
+    "comment_id": "18124056",
+    "created": "2026-10-06T19:54:02.413+0000",
+    "updated": "2026-10-06T19:54:02.413+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18219?focusedCommentId=18124056"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18408",
+    "comment_id": "18124057",
+    "created": "2026-10-06T19:54:02.510+0000",
+    "updated": "2026-10-06T19:54:02.510+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18408?focusedCommentId=18124057"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18335",
+    "comment_id": "18124058",
+    "created": "2026-10-06T19:54:02.615+0000",
+    "updated": "2026-10-06T19:54:02.615+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18335?focusedCommentId=18124058"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18144",
+    "comment_id": "18124059",
+    "created": "2026-10-06T19:54:02.707+0000",
+    "updated": "2026-10-06T19:54:02.707+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18144?focusedCommentId=18124059"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-15601",
+    "comment_id": "18124060",
+    "created": "2026-10-06T19:54:02.815+0000",
+    "updated": "2026-10-06T19:54:02.815+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-15601?focusedCommentId=18124060"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18073",
+    "comment_id": "18124063",
+    "created": "2026-10-06T19:54:03.139+0000",
+    "updated": "2026-10-06T19:54:03.139+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18073?focusedCommentId=18124063"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17841",
+    "comment_id": "18124064",
+    "created": "2026-10-06T19:54:03.248+0000",
+    "updated": "2026-10-06T19:54:03.248+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17841?focusedCommentId=18124064"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17787",
+    "comment_id": "18124065",
+    "created": "2026-10-06T19:54:03.376+0000",
+    "updated": "2026-10-06T19:54:03.376+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17787?focusedCommentId=18124065"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-7177",
+    "comment_id": "18124066",
+    "created": "2026-10-06T19:54:03.492+0000",
+    "updated": "2026-10-06T19:54:03.492+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-7177?focusedCommentId=18124066"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18271",
+    "comment_id": "18124067",
+    "created": "2026-10-06T19:54:03.692+0000",
+    "updated": "2026-10-06T19:54:03.692+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18271?focusedCommentId=18124067"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18114",
+    "comment_id": "18124068",
+    "created": "2026-10-06T19:54:03.801+0000",
+    "updated": "2026-10-06T19:54:03.801+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18114?focusedCommentId=18124068"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17901",
+    "comment_id": "18124069",
+    "created": "2026-10-06T19:54:03.905+0000",
+    "updated": "2026-10-06T19:54:03.905+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17901?focusedCommentId=18124069"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18198",
+    "comment_id": "18124070",
+    "created": "2026-10-06T19:54:04.004+0000",
+    "updated": "2026-10-06T19:54:04.004+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18198?focusedCommentId=18124070"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17899",
+    "comment_id": "18124072",
+    "created": "2026-10-06T19:54:04.207+0000",
+    "updated": "2026-10-06T19:54:04.207+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17899?focusedCommentId=18124072"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18181",
+    "comment_id": "18124073",
+    "created": "2026-10-06T19:54:04.302+0000",
+    "updated": "2026-10-06T19:54:04.302+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18181?focusedCommentId=18124073"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17870",
+    "comment_id": "18124074",
+    "created": "2026-10-06T19:54:04.401+0000",
+    "updated": "2026-10-06T19:54:04.401+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17870?focusedCommentId=18124074"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18285",
+    "comment_id": "18124075",
+    "created": "2026-10-06T19:54:04.532+0000",
+    "updated": "2026-10-06T19:54:04.532+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18285?focusedCommentId=18124075"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-15352",
+    "comment_id": "18124076",
+    "created": "2026-10-06T19:54:04.626+0000",
+    "updated": "2026-10-06T19:54:04.626+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-15352?focusedCommentId=18124076"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18183",
+    "comment_id": "18124077",
+    "created": "2026-10-06T19:54:04.698+0000",
+    "updated": "2026-10-06T19:54:04.698+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18183?focusedCommentId=18124077"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18237",
+    "comment_id": "18124078",
+    "created": "2026-10-06T19:54:04.795+0000",
+    "updated": "2026-10-06T19:54:04.795+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18237?focusedCommentId=18124078"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18029",
+    "comment_id": "18124079",
+    "created": "2026-10-06T19:54:04.897+0000",
+    "updated": "2026-10-06T19:54:04.897+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18029?focusedCommentId=18124079"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18221",
+    "comment_id": "18124080",
+    "created": "2026-10-06T19:54:04.991+0000",
+    "updated": "2026-10-06T19:54:04.991+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18221?focusedCommentId=18124080"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18089",
+    "comment_id": "18124082",
+    "created": "2026-10-06T19:54:05.199+0000",
+    "updated": "2026-10-06T19:54:05.199+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18089?focusedCommentId=18124082"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18334",
+    "comment_id": "18124083",
+    "created": "2026-10-06T19:54:05.293+0000",
+    "updated": "2026-10-06T19:54:05.293+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18334?focusedCommentId=18124083"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18008",
+    "comment_id": "18124084",
+    "created": "2026-10-06T19:54:05.374+0000",
+    "updated": "2026-10-06T19:54:05.374+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18008?focusedCommentId=18124084"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18194",
+    "comment_id": "18124085",
+    "created": "2026-10-06T19:54:05.550+0000",
+    "updated": "2026-10-06T19:54:05.550+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18194?focusedCommentId=18124085"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18157",
+    "comment_id": "18124086",
+    "created": "2026-10-06T19:54:05.685+0000",
+    "updated": "2026-10-06T19:54:05.685+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18157?focusedCommentId=18124086"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18239",
+    "comment_id": "18124087",
+    "created": "2026-10-06T19:54:05.784+0000",
+    "updated": "2026-10-06T19:54:05.784+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18239?focusedCommentId=18124087"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17319",
+    "comment_id": "18124088",
+    "created": "2026-10-06T19:54:05.901+0000",
+    "updated": "2026-10-06T19:54:05.901+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17319?focusedCommentId=18124088"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18013",
+    "comment_id": "18124089",
+    "created": "2026-10-06T19:54:06.630+0000",
+    "updated": "2026-10-06T19:54:06.630+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18013?focusedCommentId=18124089"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18039",
+    "comment_id": "18124090",
+    "created": "2026-10-06T19:54:06.734+0000",
+    "updated": "2026-10-06T19:54:06.734+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18039?focusedCommentId=18124090"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18074",
+    "comment_id": "18124091",
+    "created": "2026-10-06T19:54:06.836+0000",
+    "updated": "2026-10-06T19:54:06.836+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18074?focusedCommentId=18124091"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-12224",
+    "comment_id": "18124092",
+    "created": "2026-10-06T19:54:06.939+0000",
+    "updated": "2026-10-06T19:54:06.939+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-12224?focusedCommentId=18124092"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17982",
+    "comment_id": "18124093",
+    "created": "2026-10-06T19:54:07.113+0000",
+    "updated": "2026-10-06T19:54:07.113+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17982?focusedCommentId=18124093"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18304",
+    "comment_id": "18124094",
+    "created": "2026-10-06T19:54:07.215+0000",
+    "updated": "2026-10-06T19:54:07.215+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18304?focusedCommentId=18124094"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18176",
+    "comment_id": "18124095",
+    "created": "2026-10-06T19:54:07.346+0000",
+    "updated": "2026-10-06T19:54:07.346+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18176?focusedCommentId=18124095"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18413",
+    "comment_id": "18124096",
+    "created": "2026-10-06T19:54:07.449+0000",
+    "updated": "2026-10-06T19:54:07.449+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18413?focusedCommentId=18124096"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18107",
+    "comment_id": "18124097",
+    "created": "2026-10-06T19:54:07.541+0000",
+    "updated": "2026-10-06T19:54:07.541+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18107?focusedCommentId=18124097"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17903",
+    "comment_id": "18124100",
+    "created": "2026-10-06T19:54:07.812+0000",
+    "updated": "2026-10-06T19:54:07.812+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17903?focusedCommentId=18124100"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-14687",
+    "comment_id": "18124101",
+    "created": "2026-10-06T19:54:08.057+0000",
+    "updated": "2026-10-06T19:54:08.057+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-14687?focusedCommentId=18124101"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18344",
+    "comment_id": "18124102",
+    "created": "2026-10-06T19:54:08.167+0000",
+    "updated": "2026-10-06T19:54:08.167+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18344?focusedCommentId=18124102"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17810",
+    "comment_id": "18124103",
+    "created": "2026-10-06T19:54:08.266+0000",
+    "updated": "2026-10-06T19:54:08.266+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17810?focusedCommentId=18124103"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18202",
+    "comment_id": "18124104",
+    "created": "2026-10-06T19:54:08.363+0000",
+    "updated": "2026-10-06T19:54:08.363+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18202?focusedCommentId=18124104"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18093",
+    "comment_id": "18124105",
+    "created": "2026-10-06T19:54:08.444+0000",
+    "updated": "2026-10-06T19:54:08.444+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18093?focusedCommentId=18124105"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17715",
+    "comment_id": "18124106",
+    "created": "2026-10-06T19:54:08.554+0000",
+    "updated": "2026-10-06T19:54:08.554+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17715?focusedCommentId=18124106"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18071",
+    "comment_id": "18124108",
+    "created": "2026-10-06T19:54:08.778+0000",
+    "updated": "2026-10-06T19:54:08.778+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18071?focusedCommentId=18124108"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18350",
+    "comment_id": "18124109",
+    "created": "2026-10-06T19:54:08.931+0000",
+    "updated": "2026-10-06T19:54:08.931+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18350?focusedCommentId=18124109"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18189",
+    "comment_id": "18124110",
+    "created": "2026-10-06T19:54:09.015+0000",
+    "updated": "2026-10-06T19:54:09.015+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18189?focusedCommentId=18124110"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18327",
+    "comment_id": "18124111",
+    "created": "2026-10-06T19:54:09.131+0000",
+    "updated": "2026-10-06T19:54:09.131+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18327?focusedCommentId=18124111"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18032",
+    "comment_id": "18124112",
+    "created": "2026-10-06T19:54:09.209+0000",
+    "updated": "2026-10-06T19:54:09.209+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18032?focusedCommentId=18124112"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18142",
+    "comment_id": "18124113",
+    "created": "2026-10-06T19:54:09.335+0000",
+    "updated": "2026-10-06T19:54:09.335+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18142?focusedCommentId=18124113"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18293",
+    "comment_id": "18124115",
+    "created": "2026-10-06T19:54:09.496+0000",
+    "updated": "2026-10-06T19:54:09.496+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18293?focusedCommentId=18124115"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18215",
+    "comment_id": "18124116",
+    "created": "2026-10-06T19:54:09.580+0000",
+    "updated": "2026-10-06T19:54:09.580+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18215?focusedCommentId=18124116"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18051",
+    "comment_id": "18124117",
+    "created": "2026-10-06T19:54:09.669+0000",
+    "updated": "2026-10-06T19:54:09.669+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18051?focusedCommentId=18124117"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17707",
+    "comment_id": "18124118",
+    "created": "2026-10-06T19:54:09.755+0000",
+    "updated": "2026-10-06T19:54:09.755+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17707?focusedCommentId=18124118"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18418",
+    "comment_id": "18124119",
+    "created": "2026-10-06T19:54:09.861+0000",
+    "updated": "2026-10-06T19:54:09.861+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18418?focusedCommentId=18124119"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18197",
+    "comment_id": "18124120",
+    "created": "2026-10-06T19:54:09.934+0000",
+    "updated": "2026-10-06T19:54:09.934+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18197?focusedCommentId=18124120"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18328",
+    "comment_id": "18124121",
+    "created": "2026-10-06T19:54:10.066+0000",
+    "updated": "2026-10-06T19:54:10.066+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18328?focusedCommentId=18124121"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18312",
+    "comment_id": "18124122",
+    "created": "2026-10-06T19:54:10.164+0000",
+    "updated": "2026-10-06T19:54:10.164+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18312?focusedCommentId=18124122"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18290",
+    "comment_id": "18124123",
+    "created": "2026-10-06T19:54:10.279+0000",
+    "updated": "2026-10-06T19:54:10.279+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18290?focusedCommentId=18124123"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18155",
+    "comment_id": "18124124",
+    "created": "2026-10-06T19:54:10.390+0000",
+    "updated": "2026-10-06T19:54:10.390+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18155?focusedCommentId=18124124"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18244",
+    "comment_id": "18124126",
+    "created": "2026-10-06T19:54:10.574+0000",
+    "updated": "2026-10-06T19:54:10.574+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18244?focusedCommentId=18124126"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17833",
+    "comment_id": "18124127",
+    "created": "2026-10-06T19:54:10.670+0000",
+    "updated": "2026-10-06T19:54:10.670+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17833?focusedCommentId=18124127"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18096",
+    "comment_id": "18124128",
+    "created": "2026-10-06T19:54:10.782+0000",
+    "updated": "2026-10-06T19:54:10.782+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18096?focusedCommentId=18124128"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18345",
+    "comment_id": "18124129",
+    "created": "2026-10-06T19:54:10.880+0000",
+    "updated": "2026-10-06T19:54:10.880+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18345?focusedCommentId=18124129"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18329",
+    "comment_id": "18124130",
+    "created": "2026-10-06T19:54:10.965+0000",
+    "updated": "2026-10-06T19:54:10.965+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18329?focusedCommentId=18124130"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17353",
+    "comment_id": "18124131",
+    "created": "2026-10-06T19:54:11.051+0000",
+    "updated": "2026-10-06T19:54:11.051+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17353?focusedCommentId=18124131"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18174",
+    "comment_id": "18124132",
+    "created": "2026-10-06T19:54:11.179+0000",
+    "updated": "2026-10-06T19:54:11.179+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18174?focusedCommentId=18124132"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17922",
+    "comment_id": "18124133",
+    "created": "2026-10-06T19:54:11.367+0000",
+    "updated": "2026-10-06T19:54:11.367+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17922?focusedCommentId=18124133"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17973",
+    "comment_id": "18124135",
+    "created": "2026-10-06T19:54:11.549+0000",
+    "updated": "2026-10-06T19:54:11.549+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17973?focusedCommentId=18124135"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17170",
+    "comment_id": "18124136",
+    "created": "2026-10-06T19:54:11.638+0000",
+    "updated": "2026-10-06T19:54:11.638+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17170?focusedCommentId=18124136"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18201",
+    "comment_id": "18124137",
+    "created": "2026-10-06T19:54:11.725+0000",
+    "updated": "2026-10-06T19:54:11.725+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18201?focusedCommentId=18124137"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18216",
+    "comment_id": "18124138",
+    "created": "2026-10-06T19:54:11.854+0000",
+    "updated": "2026-10-06T19:54:11.854+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18216?focusedCommentId=18124138"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17972",
+    "comment_id": "18124140",
+    "created": "2026-10-06T19:54:12.057+0000",
+    "updated": "2026-10-06T19:54:12.057+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17972?focusedCommentId=18124140"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18136",
+    "comment_id": "18124141",
+    "created": "2026-10-06T19:54:12.153+0000",
+    "updated": "2026-10-06T19:54:12.153+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18136?focusedCommentId=18124141"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-8127",
+    "comment_id": "18124142",
+    "created": "2026-10-06T19:54:12.263+0000",
+    "updated": "2026-10-06T19:54:12.263+0000",
+    "excerpt": "Closing after the 9.11.0 release",
+    "url": "https://issues.apache.org/jira/browse/SOLR-8127?focusedCommentId=18124142"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-15752",
+    "comment_id": "18124145",
+    "created": "2026-10-06T20:03:57.445+0000",
+    "updated": "2026-10-06T20:03:57.445+0000",
+    "excerpt": "Fully v1, no v2 equivalent planned: - Metrics (admin/metrics, wt=prometheus) — Plugins/Stats, cloud node metrics - Core Info (:core/admin/info) — Core Overview - Replication (:core/replication) — Replication screen + core overview summary - Update/Documents (:core/:handler, defaults to update) — Documents screen, file uploads - Query (:core/:handler) — Query, Stream, SQL screens (arbitrary handler forwarding) - File…",
+    "url": "https://issues.apache.org/jira/browse/SOLR-15752?focusedCommentId=18124145"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-5044",
+    "comment_id": "18124146",
+    "created": "2026-10-06T20:04:36.639+0000",
+    "updated": "2026-10-06T20:04:36.639+0000",
+    "excerpt": "Please speak up if this remains a issue!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-5044?focusedCommentId=18124146"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18102",
+    "comment_id": "18124147",
+    "created": "2026-10-06T20:05:09.235+0000",
+    "updated": "2026-10-06T20:05:09.235+0000",
+    "excerpt": "This was fixed back in the 10 release window",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18102?focusedCommentId=18124147"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-13161",
+    "comment_id": "18124149",
+    "created": "2026-10-06T20:07:55.637+0000",
+    "updated": "2026-10-06T20:07:55.637+0000",
+    "excerpt": "We are prioritzing the new Solr UI. As. commented on the PR, if you want this in Solr 10x, then please reopen against github.com/apache/solr repo and I'll work to get it added.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-13161?focusedCommentId=18124149"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-11797",
+    "comment_id": "18124154",
+    "created": "2026-10-06T20:17:26.297+0000",
+    "updated": "2026-10-06T20:17:26.297+0000",
+    "excerpt": "So, with the jax-rs apis, we go away from introspection but DO have openapi... There is various ideas around how to host hte openapi spec for poeple to play with it...",
+    "url": "https://issues.apache.org/jira/browse/SOLR-11797?focusedCommentId=18124154"
+  }
+]
