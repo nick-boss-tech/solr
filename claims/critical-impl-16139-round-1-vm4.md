@@ -1,7 +1,7 @@
 # Claim: SOLR-16139 JSON stat facet over SortableTextField, premise run then implementation, round 1 (vm4)
 
 - Claimant host: vm4, matching `hosts/vm4.md`.
-- Status: ACTIVE. Step 1 premise run first; implementation only if the premise reproduces.
+- Status: DONE. Branch pushed; gate requested (stop point reached).
 - Job or assignment: `assignments/critical-impl-16139-round-1.md` (OPEN, not edited). Source triage: `reports/critical-implementation-triage-round-1.md`, rank 3.
 - Slice: the whole assignment (premise, narrow fix on `solr-16139-submit`, gate request at the stop point).
 - Capability tags used: implementation, premise-run.
@@ -31,3 +31,18 @@ Heartbeat: 2026-10-27T10:35:04Z
 
 Fail-before (run `q16139-failbefore-20261027T105238Z`, branch `solr-16139-submit` at main `ee2f1bf2e0`, new test only, seed 16139C0DE, `-Ptests.workDir=/tmp/q16139-tests`, env -u NODE_ENV): BUILD FAILED rc 1 in 3m 42s. XML `logs/vm4/critical-impl-16139/q16139-failbefore-20261027T105238Z.xml/TEST-org.apache.solr.search.facet.SortableTextNestedStatsCloudTest.xml`: 1 test, 1 failure, 0 errors. Failure: `AssertionError: avg grp_sortable Alpha grp expected:<15.0> but was:<0.0>` at the grp_sortable call (test line 76, assertion at line 97). The string-field control (line 75) passed. Matches the premise.
 Heartbeat: 2026-10-27T11:09:34Z
+
+Implementation results:
+- Fail-before (main `ee2f1bf2e0`, new test only, seed 16139C0DE): run `q16139-failbefore-20261027T105238Z`, 1 test, 1 failure. `AssertionError: avg grp_sortable Alpha grp expected:<15.0> but was:<0.0>`. The string control passed.
+- Pass (fix applied, same test and seed): run `q16139-pass-20261027T111013Z`, 1 test, 0 failures, 0 errors. Tidy runs `q16139-tidy-20261027T111013Z` and `q16139-tidy2-*` rc 0, no other file changed.
+- Branch `solr-16139-submit` pushed to the fork as a new branch. Commit `3c719c14d0` (fix and test, Nick Shanin, no trailers), then `3feb4c7` (changelog `changelog/unreleased/SOLR-16139.yml`). Head `3feb4c757370e05ae7c77011511b47af7c80d9e2`, verified by ls-remote. Base `ee2f1bf2e0`. 138 insertions, 0 deletions.
+- Gate request posted: `gates/SOLR-16139.md` on coordination at `7490a09421`, read back OK.
+
+Limits:
+- The distributed refinement path (`FacetFieldProcessor` near line 1138, `ft.getFieldTermQuery` for a bucket value) still uses the exact term query. The fix covers the nested domain in `makeBucketQuery`, not refinement. A multi-shard refinement case was not tested; the test is single-shard.
+- The new test's one string literal is over 100 characters; the formatter does not split string literals, and tidy left the tree unchanged.
+- Only the techproducts-style `collection1` schema fields (`*_sortable`, `*_s`) were tested, on one main tip.
+- No PR, JIRA, or GitHub action. The gate host owns the rest.
+
+DONE: 2026-10-27T11:33:46Z. Deliverables: fork branch `solr-16139-submit` at `3feb4c7`; gate job `gates/SOLR-16139.md`; premise report `reports/critical-impl-16139-premise-round-1.md`.
+
