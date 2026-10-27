@@ -1,0 +1,141 @@
+[
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 22,
+    "issues": 11,
+    "automation": true
+  },
+  {
+    "username": "hossman",
+    "displayName": "Chris M. Hostetter",
+    "comments": 5,
+    "issues": 4
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 5,
+    "issues": 4
+  },
+  {
+    "username": "shikhar",
+    "displayName": "Shikhar Bhushan",
+    "comments": 5,
+    "issues": 1
+  },
+  {
+    "username": "uschindler",
+    "displayName": "Uwe Schindler",
+    "comments": 4,
+    "issues": 4
+  },
+  {
+    "username": "praste",
+    "displayName": "Pushkar Raste",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "werder",
+    "displayName": "Andrey Kudryavtsev",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "lboutros",
+    "displayName": "Ludovic Boutros",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "markrmiller@gmail.com",
+    "displayName": "Mark Miller",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "steff1193",
+    "displayName": "Per Steffensen",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "slindner",
+    "displayName": "Scott Lindner",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "varun",
+    "displayName": "Varun Thacker",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "arafalov",
+    "displayName": "Alexandre Rafalovitch",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "cpoerschke",
+    "displayName": "Christine Poerschke",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "gus",
+    "displayName": "Gus Heck",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "jkrupan",
+    "displayName": "Jack Krupansky",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "johtani",
+    "displayName": "Jun Ohtani",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "liangkaiwen",
+    "displayName": "Kevin Liang",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "MichaelF",
+    "displayName": "Michael",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "vladiceanu",
+    "displayName": "Nick Vladiceanu",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "paulheijman",
+    "displayName": "Paul Heijman",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "rcmuir",
+    "displayName": "Robert Muir",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "rjernst",
+    "displayName": "Ryan Ernst",
+    "comments": 1,
+    "issues": 1
+  }
+]
