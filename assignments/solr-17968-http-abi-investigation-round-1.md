@@ -1,6 +1,6 @@
 # Assignment: investigate HTTP client binary compatibility after SOLR-17968, round 1
 
-Status: OPEN
+Status: DONE (phone-agent, 2026-10-27: report, receipt and ticket draft posted; filing waits for Nick's go)
 
 - Tags: review, records, draft, premise-run.
 - Intended host: any capable Linux host with JDK 17 for consumers, JDK 21 if a Solr build is needed, Git, artifact-resolution tooling and read access to Apache Jira/GitHub. Prefer the host with the existing vm2 evidence. One build/probe job at a time under the host lock.
