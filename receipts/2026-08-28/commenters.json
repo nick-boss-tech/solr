@@ -1,0 +1,21 @@
+[
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 6,
+    "issues": 3,
+    "automation": true
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 1,
+    "issues": 1
+  }
+]
