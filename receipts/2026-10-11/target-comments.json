@@ -1,0 +1,12 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18529",
+    "comment_id": "18125930",
+    "created": "2026-10-11T01:15:42.339+0000",
+    "updated": "2026-10-11T01:15:42.339+0000",
+    "excerpt": "I think you are quite right now that I dug in furthur... I have something to put up in a little bit... It's a single PR that combines a new \"security tutorial\" along with a \"secure_solr\" example app, and new bin/solr commands. My thought was to explore the space a bit on a single PR, and then if it looks like it's going in the right way, then break it up into seperate PRs...",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18529?focusedCommentId=18125930"
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "username": "rcmuir",
+    "displayName": "Robert Muir",
+    "comments": 3,
+    "issues": 2
+  },
+  {
+    "username": "hossman",
+    "displayName": "Chris M. Hostetter",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "jkrupan",
+    "displayName": "Jack Krupansky",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "elektrrrus",
+    "displayName": "Karol Sikora",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "kpentchev",
+    "displayName": "Konstantin Pentchev",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "sarowe",
+    "displayName": "Steven Rowe",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "teofili",
+    "displayName": "Tommaso Teofili",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "mariusz_chruscielewski",
+    "displayName": "Mariusz",
+    "comments": 1,
+    "issues": 1
+  }
+]
