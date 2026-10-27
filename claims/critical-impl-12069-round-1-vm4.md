@@ -14,3 +14,6 @@ Heartbeat: 2026-10-27T09:04:16Z
 Plan: reproduce on the techproducts example with `q=a b` under `q.op=AND` and the default, at `-Ptests.workDir` on local disk, through `pool/bin/sweep-run.sh`. If the premise fails, write the premise report and stop with no branch. If it reproduces, implement narrowly on `solr-12069-submit`, add tests on SolrTestCase or SolrCloudTestCase, push the branch, and request the gate with `pool/bin/request-gate.py`. No PR, JIRA, or GitHub comment.
 
 Result: pending.
+
+Run (premise setup): `q12069-assemble-ee2f1bf-20261027T090948Z`, `:solr:packaging:assemble` on apache/solr main `ee2f1bf2e0109956145d7fd995da63c4091a589f` (standalone clone `/workspace/worktrees/q12069-clone`), started 2026-10-27T09:09:48Z, logs `/workspace/gates/logs/vm4/critical-impl-12069/`. Purpose: a packaged Solr to run techproducts for the q=a b premise check.
+Heartbeat: 2026-10-27T09:10:05Z
