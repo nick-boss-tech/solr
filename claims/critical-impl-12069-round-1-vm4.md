@@ -17,3 +17,6 @@ Result: pending.
 
 Run (premise setup): `q12069-assemble-ee2f1bf-20261027T090948Z`, `:solr:packaging:assemble` on apache/solr main `ee2f1bf2e0109956145d7fd995da63c4091a589f` (standalone clone `/workspace/worktrees/q12069-clone`), started 2026-10-27T09:09:48Z, logs `/workspace/gates/logs/vm4/critical-impl-12069/`. Purpose: a packaged Solr to run techproducts for the q=a b premise check.
 Heartbeat: 2026-10-27T09:10:05Z
+
+Attempt 1 (q12069-assemble-ee2f1bf-20261027T090948Z): BUILD FAILED rc 1 at `:solr:webapp:js-client:jsClientDownloadDeps` (npm run build exit 1). Cause: the launching shell had NODE_ENV=production, which skips devDependencies; no tests ran. Logs kept in `logs/vm4/critical-impl-12069/attempt-1-npm-node-env/`. Relaunch once with `env -u NODE_ENV`: run `q12069-assemble-retry-ee2f1bf-20261027T092631Z`, started 2026-10-27T09:26:31Z.
+Heartbeat: 2026-10-27T09:27:27Z
