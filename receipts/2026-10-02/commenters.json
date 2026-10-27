@@ -1,0 +1,123 @@
+[
+  {
+    "username": "nickshanin",
+    "displayName": "Nick Shanin",
+    "comments": 12,
+    "issues": 12
+  },
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 6,
+    "issues": 2,
+    "automation": true
+  },
+  {
+    "username": "lboutros",
+    "displayName": "Ludovic Boutros",
+    "comments": 5,
+    "issues": 1
+  },
+  {
+    "username": "gerlowskija",
+    "displayName": "Jason Gerlowski",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "yaduvanshi",
+    "displayName": "Sanjay Kumar Yadav",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "erickerickson",
+    "displayName": "Erick Erickson",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "harisekhon",
+    "displayName": "Hari Sekhon",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "elyograg",
+    "displayName": "Shawn Heisey",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "hossman",
+    "displayName": "Chris M. Hostetter",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "jbernste",
+    "displayName": "Joel Bernstein",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "krisden",
+    "displayName": "Kevin Risden",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "khadidja_messaoudi",
+    "displayName": "KHADIDJA MESSAOUDI",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "lucenesolrqa",
+    "displayName": "Lucene/Solr QA",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "psomogyi",
+    "displayName": "Peter Somogyi",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "peterwx",
+    "displayName": "Peter Williams",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "Richard.Walker@ands.org.au",
+    "displayName": "Richard Walker",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "shalin",
+    "displayName": "Shalin Shekhar Mangar",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "tflobbe",
+    "displayName": "Tomas Eduardo Fernandez Lobbe",
+    "comments": 1,
+    "issues": 1
+  }
+]
