@@ -6,7 +6,7 @@ Status: DRAFT (not posted). Shape: status note, evidence first. Addressee: Eric 
 
 I measured the debug and trace calls in {{solr/core/src/java}} at apache/solr main {{e59ce3c97d}}, to see how many would benefit from the lazy form:
 
- * 760 {{log.trace}} and {{log.debug}} calls, 14 of them commented out.
+ * 760 {{log.trace}} and {{log.debug}} calls, 9 of them commented out.
  * 253 are guarded by {{isTraceEnabled()}} or {{isDebugEnabled()}} within three lines.
  * 507 are unguarded. Most pass identifiers, fields or literals, which are cheap to evaluate.
  * The regex finds seven unguarded calls with method-call or concatenation arguments. Four of those are commented out or pass literals. {{PeerSync.java:684}} and {{TransactionLog.java:733}} pass cheap accessors. {{PeerSyncWithLeader.java:162}} calls {{msg()}}, but it sits behind a local {{debug}} flag.

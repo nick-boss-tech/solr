@@ -6,7 +6,7 @@ Pinned main: `e59ce3c97ddb`. Scope: `solr/core/src/java`.
 ## Measurement
 
 1. `git grep -n -E '\blog\.(trace|debug)\('` on `solr/core/src/java`: 760 calls.
-2. Excluding comment-only lines (`^\s*//`): 746 uncommented calls. (Lines that begin with `//` account for the rest of the 760.)
+2. Nine of the 760 are commented-out lines. The guard and argument counts below include them; they do not change the reading.
 3. Guarded: a call is counted as guarded if `isTraceEnabled(` or `isDebugEnabled(` appears within the 3 lines before it. 253 calls are guarded.
 4. Unguarded: 507 calls. Of these, a regex for method-call or concatenation arguments matches 7 lines. Four of the seven are commented out (`ExportBuffers.java:107`, `:160`) or pass only a string literal (`SolrRequestInfo.java:99`, `:132`). `PeerSync.java:684` passes a field-accessor result (`sdoc.getField(ID)`). `TransactionLog.java:733` passes `fos.size()`.
 5. `PeerSyncWithLeader.java:162` calls `msg()`, which reads the ZooKeeper base URL. It sits under `if (debug)` (line 161), a local flag, so it is not counted as unguarded.
