@@ -1,0 +1,12 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-16390",
+    "comment_id": "18119682",
+    "created": "2026-09-26T17:31:43.736+0000",
+    "updated": "2026-09-26T17:31:43.736+0000",
+    "excerpt": "I think it works really well when someone is the Jira \"gardener\" and makign sure the tickets get to done, and they get closed out, or deleted when things become OBE. IN the v2 story, we don't need ALL the tickets at once, we need enough that people know \"what is next\"....",
+    "url": "https://issues.apache.org/jira/browse/SOLR-16390?focusedCommentId=18119682"
+  }
+]
