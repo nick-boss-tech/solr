@@ -1,6 +1,6 @@
 # Jira comment draft: SOLR-18145
 
-Status: DRAFT (not posted). Shape: staged ask, evidence first. Addressee: Eric Pugh (reporter). Prepared by vm6, 2026-10-27, from `report-18145.md` (pinned main `e59ce3c97d`). Posting needs Nick Shanin's explicit go.
+Status: POSTED 2026-10-27 as Jira comment 18132696. Shape: staged ask, evidence first. Addressee: Eric Pugh (reporter). Prepared by vm6, 2026-10-27, from `report-18145.md` (pinned main `e59ce3c97d`). Posting needs Nick Shanin's explicit go.
 
 ---
 
