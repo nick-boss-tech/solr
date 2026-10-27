@@ -1,24 +1,24 @@
-# Owner answers: Figma wrap-up round 1
+# Figma wrap-up: owner answers, round 1
 
-Relayed by vm4 from Nick Shanin's message, 2026-10-24. Answers the owner questions in `assignments/figma-wrap-up-round-1.md`.
+- Assignment: `assignments/figma-wrap-up-round-1.md`, section 3. Recorded by the phone agent on 2026-10-26 from the owner's messages that day. Items the owner has not ruled on are marked as such; nothing below opens a PR or posts anywhere.
 
-- O1 (open PRs for items 1 to 6): no. No PR is opened for any UI branch until the owner says so in a new message.
-- O2 (attribution in PR bodies and commits): no footers. Pool-authored PR bodies and commits carry no attribution line. This does not change the disclosure line the comment formula requires on Jira comments, which Nick set on 2026-10-23. Nick should confirm that reading.
-- O3 (ask Christos before PRs): yes. The staged asks go first.
-- O4 (post the SOLR-17850 question to Christos): yes to asking. Draft comments must exist first. The drafts are in `jira/` (see below). Posting still needs Nick's go on the final wording of each draft.
-- O5 (split SOLR-17849 header first): no answer. Default stands: no split now.
-- O6 (batch head counts as the local check for PR bodies): no answer. Default stands: yes.
-- O7 (default GL-free test route): no answer. Default stands: the pool script `material/ui-test-setup/run-ui-jvm-tests.sh`. Its use is recorded in the vm6 receipts for SOLR-17849, SOLR-17850, SOLR-17887 and SOLR-17911.
-- O8 (Jira actions on SOLR-17660 and the Figma tickets): drafts only. Nothing is assigned, edited or posted.
-- O9 (batch A owner): no answer. Default stands: vm6 keeps it.
+## Decided by the owner
 
-## Drafts (not posted)
+- **O2, attribution line.** No "Generated with Claude Code" footer in PR bodies. The PR formula's AI header and responsibility line are the disclosure.
+- **O6, batch head as gate evidence.** A combined batch run may be cited as a branch's gate evidence in its PR body, provided the body states plainly that the tests ran as part of a batch of related branches. Separate exact-head gates are preferred when time permits but are not required before opening. A failure surfacing later from the batch shape is acceptable to the owner. None of these PRs has been opened yet.
 
-- `jira/jira-comment-SOLR-17850-field-set-v2-draft.md`: the question to Christos on the SearchHandler form's field set. Replaces `jira/jira-comment-SOLR-17850-field-set-draft.md` for posting. The earlier draft is kept as it is.
-- `jira/jira-comment-SOLR-17849-sandbergja-draft.md`: the question to Jane Sandberg on whether she is still taking SOLR-17849.
-- `jira/jira-comment-components-christos-round-1-draft.md`: one comment per component ticket for Christos (SOLR-17660, 17887, 17909, 17911, 17913, 17914), each with its own question.
+## Owner direction for today
 
-## Still open
+- **O1, opening the PRs.** No UI PRs open today (2026-10-26). Future openings remain per-PR owner decisions, expected to return when Christos answers the posted asks; under the creation cap any new PR would be created as a draft.
 
-- Posting any draft: needs Nick's go, per draft.
-- The 17850 field set and the 17849 hold, once Christos answers.
+## Closed by events
+
+- **O3, Christos before PRs.** The staged asks went first: all ten comments posted on 2026-10-26 after Christos asked for the full set. The sequence now is to wait for his answers.
+- **O4, the SOLR-17850 field-set question.** It is inside the posted comment 18132602. The older separate draft is not to be posted.
+- **O9, who runs batch A.** Batch A already ran: vm6's gates plus vm4's combined check. No assignment is needed.
+
+## Defaults standing, owner has not ruled
+
+- **O5, splitting SOLR-17849.** The assignment default applies meanwhile: no split. Revisit if Christos answers the other asks and stalls on SOLR-17850, or asks for the header alone.
+- **O7, GL-free test route.** The proposed default applies meanwhile: the pool script `material/ui-test-setup/run-ui-jvm-tests.sh` first, the vm4 Mesa route as fallback. The one confirming run waits for the next UI gate cycle or PR prep round.
+- **O8, Jira actions.** Covered by the standing rule: no further Jira action on these tickets without the owner's go. The ten posted comments are the action taken.
