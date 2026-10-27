@@ -1,0 +1,9 @@
+# BATS assertion hardening round 1 — phone-agent-2 status update (2026-10-27)
+
+Add-only status update to the [published incomplete claim](https://github.com/nick-boss-tech/solr/blob/coordination-ui/claims/bats-assertion-hardening-round-1-phone-agent-2-incomplete-2026-10-27.md) and [published finish report](https://github.com/nick-boss-tech/solr/blob/coordination-ui/reports/bats-assertion-hardening-finish-round-1-phone-agent-2.md). Those records remain unchanged. The new evidence is detailed in `reports/bats-assertion-hardening-finish-round-1-phone-agent-2-supplement-2026-10-27.md`.
+
+**Status: OPEN / INCOMPLETE; no GREEN receipt.** Candidate head remains `4d5d876d946a4f5ac174a7f68e16f4dd9b5f9f68` on `nick-boss-tech/solr:solr-bats-assertion-hardening-submit`, based on `0d6b2e32f598d772aed094038022a6a588fdfc5a`.
+
+Since the published claim status, the final JDK 21 and JDK 25 Picocli legs passed 18/18 each; final `tidy`, `:solr:packaging:check -x test`, and `git diff --check` passed; Error Prone was skipped, not run. Two pinned-base Group 3 comparisons also ran: the normal base shape rejected the injected add failure only at its later zero-count assertion, while the authenticated base test passed despite the injected failure and zero documents. The hardened candidate rejects the authenticated fault. Full evidence is in the linked supplement.
+
+Remaining: both legacy JDK legs retain four TLS connection-refused failures and one known timeout-precheck skip. The Group 3 response-body-without-`numFound` control is still missing. Group 4 remains incomplete; client-hostname policy is not proven, and its prelaunch requires at least 4 GiB free on the candidate/build filesystem while this host has about 2.2 GB free on `/dev/shm`. Docker is unavailable and the rolling-upgrade case is unrun. Do not bypass the Group 4 guard. No candidate source or production code changed, and no PR/Jira/comment action was taken.
