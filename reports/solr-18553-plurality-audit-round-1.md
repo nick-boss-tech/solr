@@ -46,7 +46,7 @@ The ticket asks for plurality and consistency. Concrete items are F1 and F3 (plu
 
 Findings are concrete. A draft is produced for the owner (Eric) to pick from. No code change is proposed here.
 
-Not checked in this unit: whether any of these names are documented in the Ref Guide in a form that would also need changing (the Ref Guide is a separate tree); whether an open PR already renames any of them (the GitHub search for `SOLR-18553` returned no PR at 2026-10-27 01:40Z).
+Not checked in this unit: whether any of these names are documented in the Ref Guide in a form that would also need changing (the Ref Guide is a separate tree); whether an open PR already renames any of them (the GitHub search for `SOLR-18553` returned no PR on 2026-10-27).
 
 ## Reproduce
 

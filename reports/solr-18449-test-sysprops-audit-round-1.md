@@ -51,7 +51,7 @@ The ticket asks that test-oriented properties start with `test.`. Measured again
 
 Findings are concrete and the census is reproducible. The rename itself needs the maintainer to pick a prefix. No draft is proposed as a closure; the draft asks which prefix to standardize on and offers the list.
 
-Not checked in this unit: whether any `solr.test.*` name is read from an XML config file rather than Java (only Java call sites were scanned); whether any open PR already renames these names (no PR found by search for `SOLR-18449`, checked 2026-10-27 01:50Z).
+Not checked in this unit: whether any `solr.test.*` name is read from an XML config file rather than Java (only Java call sites were scanned); whether any open PR already renames these names (no PR found by search for `SOLR-18449`, checked 2026-10-27).
 
 ## Reproduce
 
