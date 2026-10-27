@@ -20,3 +20,5 @@
 - Constraints: no PR opening, no Jira or GitHub post. Commit as Nick Shanin with no trailers.
 
 Heartbeat: 2026-10-27T21:11:21Z
+
+Head: `14ff7078657e6907212dbaa2bdabeee59e3678c8` on `nick-boss-tech/solr:solr-17849-header-submit` (fast-forward from round 1 `5d90d83d5b`; remote SHA verified). Gate input recorded before the run: spotless, then `IndexQueryHeaderTest` and `IndexQueryStateHolderTest` on the software renderer.
