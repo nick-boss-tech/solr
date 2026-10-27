@@ -1,6 +1,6 @@
 # Jira comment draft: SOLR-18138
 
-Status: DRAFT (not posted). Shape: staged ask, evidence first. Addressee: Eric Pugh (reporter). Prepared by vm6, 2026-10-27, from `report-18138.md` (pinned main `e59ce3c97d`). Posting needs Nick Shanin's explicit go.
+Status: HOLD (not posted). The proposed fix does not reach the reproduced command; see reports/solr-18138-cli-zk-unreachable-round-1.md, "Correction 2026-10-27". Shape: staged ask, evidence first. Addressee: Eric Pugh (reporter). Prepared by vm6, 2026-10-27, from `report-18138.md` (pinned main `e59ce3c97d`). Posting needs Nick Shanin's explicit go.
 
 ---
 

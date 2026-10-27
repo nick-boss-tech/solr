@@ -18,9 +18,21 @@ Pinned main: `e59ce3c97ddb`. Not run: this is a code read. The reporter's output
 
 ## Verdict
 
-Concrete. The CLI change is small and local, and the ticket asks for it. No code change is made in this unit. The draft proposes the CLI change and asks whether the server-side message is wanted too.
+Superseded by the correction below: the first plan (one change in `getSolrZkClient`) does not reach the reproduced command. No code change is made in this unit.
 
 ## Not checked
 
 - Whether `bin/solr` (the shell script) prints its own message before calling the CLI.
 - The shape of each of the six call sites (only the count was taken).
+
+## Correction 2026-10-27: the proposed change does not reach the reproduced command
+
+Checked at `e59ce3c97d` after the first read. The earlier "one change in `getSolrZkClient`" plan is not sufficient.
+
+1. The reproduced command does not use `getSolrZkClient`. `bin/solr zk ls` is registered at `SolrCLI.java:368` to `ZkLsTool`, whose `callTool()` builds its own client directly at `ZkLsTool.java:111-115` (`new SolrZkClient.Builder()`). The ticket's first error comes from that line.
+2. `getSolrZkClient` has six callers, but there are 12 direct `new SolrZkClient.Builder()` sites besides the `CLIUtils` helper: 11 in `solr/core/src/java/org/apache/solr/cli/` and `cli/packagemanager/PackageManager.java:92`, including `ZkCpTool.java:251`, `ClusterTool.java:136`, `AuthTool.java:418`, `UpdateACLTool.java:93,115`, `ConfigSetDownloadTool.java:154`, `ConfigSetUploadTool.java:159`, and `ZkRmTool.java:136`. Any connect timeout from these sites bypasses the proposed catch.
+3. The stack trace in the ticket is not from `ToolBase`. Every ZK tool catches and logs the full exception at ERROR before rethrowing (`ZkLsTool.java:89` and `:119`, `ZkCpTool.java:260`, `ZkRmTool.java:94`, `ZkMvTool.java:117`, `ZkMkrootTool.java:128`, `ConfigSetUploadTool.java:126`, `ConfigSetDownloadTool.java:123`). `ToolBase.call()` (`ToolBase.java:157-165`) prints only the message unless `--verbose`. A change that only rewrites the message would still leave the trace printed by these logs.
+4. `ToolBase` is the one place every tool's error passes through (`runTool` and `call`). A timeout check there would cover all 12 sites, but `ToolBase` does not hold the ZooKeeper host string, so the host name would have to come from the tool.
+5. The ticket also asks about the server error on LISTALIASES (`KeeperErrorCode = ConnectionLoss for /aliases.json`). The draft does not address that question.
+
+Verdict: the plan is incomplete. Options are (a) catch the connect timeout in `ToolBase` and stop the per-tool ERROR trace for that case, which covers all sites with a generic message; or (b) route all 12 direct builders through one helper in `CLIUtils` that names the host, then fix the logging. The draft to Eric must be rewritten after one of these is chosen. It is on HOLD and not posted.
