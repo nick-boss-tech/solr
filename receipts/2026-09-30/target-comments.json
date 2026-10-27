@@ -1,0 +1,12 @@
+[
+  {
+    "person": "Jason Gerlowski",
+    "username": "gerlowskija",
+    "issue": "SOLR-18417",
+    "comment_id": "18120932",
+    "created": "2026-09-30T01:06:03.317+0000",
+    "updated": "2026-09-30T01:06:03.317+0000",
+    "excerpt": "bq. it's not obvious when it's truly done My aim was to create a deprecation PR that'd land on both 'main' and 'branch_10x' (now completed), and then do a removal PR that targets main only. When both those are completed, I'd close this out as \"done\". Let me know if that plan sounds \"off\" to anyone. If there's some element of this that's non-obvious or could be clarified, let me know!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18417?focusedCommentId=18120932"
+  }
+]
