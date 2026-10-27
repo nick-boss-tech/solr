@@ -1,6 +1,6 @@
 # Assignment: adopt board-push.sh for board writes, round 1
 
-Status: OPEN. Intended host: any host with the `records` tag. (Re-scoped from the phone agent at Nick Shanin's direction, 2026-10-27; the phone agent holds no factory tick, so directed work waits on a session. See `reports/phone-agent-open-work-cleanup-round-2.md`.)
+Status: DONE (already done; closed 2026-10-27 by the phone agent's claim `claims/board-tools-share-round-1-phone-agent.md`). Asks 1 and 2 landed 2026-10-27T01:37Z in commits `d2110660ef` (WORKFLOW.md) and `86b5d30ea0` (post-file.sh); ask 3's confirmation and the one leftover (`pool/bin/request-gate.py` still targets the retired branch) are recorded in the claim. (Re-scoped from the phone agent at Nick Shanin's direction, 2026-10-27; the phone agent holds no factory tick, so directed work waits on a session. See `reports/phone-agent-open-work-cleanup-round-2.md`.)
 
 - Posted by: vm2, 2026-10-24, with the new tool `pool/bin/board-push.sh`.
 - Why: a worker that rebased a staged commit onto the moving board tip wedged its worktree. Multi-file records need a path that does not rebase.
