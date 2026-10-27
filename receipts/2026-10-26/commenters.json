@@ -1,0 +1,609 @@
+[
+  {
+    "username": "nickshanin",
+    "displayName": "Nick Shanin",
+    "comments": 113,
+    "issues": 113
+  },
+  {
+    "username": "markrmiller@gmail.com",
+    "displayName": "Mark Miller",
+    "comments": 58,
+    "issues": 18
+  },
+  {
+    "username": "hossman",
+    "displayName": "Chris M. Hostetter",
+    "comments": 47,
+    "issues": 23
+  },
+  {
+    "username": "jira-bot",
+    "displayName": "ASF subversion and git services",
+    "comments": 35,
+    "issues": 13,
+    "automation": true
+  },
+  {
+    "username": "yseeley@gmail.com",
+    "displayName": "Yonik Seeley",
+    "comments": 31,
+    "issues": 18
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 30,
+    "issues": 13
+  },
+  {
+    "username": "varun",
+    "displayName": "Varun Thacker",
+    "comments": 21,
+    "issues": 7
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 19,
+    "issues": 6
+  },
+  {
+    "username": "lboutros",
+    "displayName": "Ludovic Boutros",
+    "comments": 18,
+    "issues": 2
+  },
+  {
+    "username": "elyograg",
+    "displayName": "Shawn Heisey",
+    "comments": 17,
+    "issues": 7
+  },
+  {
+    "username": "sarkaramrit2@gmail.com",
+    "displayName": "Amrit Sarkar",
+    "comments": 13,
+    "issues": 3
+  },
+  {
+    "username": "erickerickson",
+    "displayName": "Erick Erickson",
+    "comments": 12,
+    "issues": 7
+  },
+  {
+    "username": "noble.paul",
+    "displayName": "Noble Paul",
+    "comments": 12,
+    "issues": 5
+  },
+  {
+    "username": "sarowe",
+    "displayName": "Steven Rowe",
+    "comments": 11,
+    "issues": 5
+  },
+  {
+    "username": "andyetitmoves",
+    "displayName": "Ramkumar Aiyengar",
+    "comments": 7,
+    "issues": 1
+  },
+  {
+    "username": "mkhl",
+    "displayName": "Mikhail Khludnev",
+    "comments": 6,
+    "issues": 3
+  },
+  {
+    "username": "cappuccini",
+    "displayName": "Paolo Cappuccini",
+    "comments": 6,
+    "issues": 2
+  },
+  {
+    "username": "rcmuir",
+    "displayName": "Robert Muir",
+    "comments": 6,
+    "issues": 3
+  },
+  {
+    "username": "shalin",
+    "displayName": "Shalin Shekhar Mangar",
+    "comments": 6,
+    "issues": 4
+  },
+  {
+    "username": "caomanhdat",
+    "displayName": "Cao Manh Dat",
+    "comments": 5,
+    "issues": 3
+  },
+  {
+    "username": "malliaridis",
+    "displayName": "Christos Malliaridis",
+    "comments": 5,
+    "issues": 3
+  },
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 5,
+    "issues": 3
+  },
+  {
+    "username": "jbernste",
+    "displayName": "Joel Bernstein",
+    "comments": 5,
+    "issues": 3
+  },
+  {
+    "username": "steff1193",
+    "displayName": "Per Steffensen",
+    "comments": 5,
+    "issues": 1
+  },
+  {
+    "username": "ecil",
+    "displayName": "Eyyub ÇİL",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "ichattopadhyaya",
+    "displayName": "Ishan Chattopadhyaya",
+    "comments": 4,
+    "issues": 3
+  },
+  {
+    "username": "markus17",
+    "displayName": "Markus Jelsma",
+    "comments": 4,
+    "issues": 2
+  },
+  {
+    "username": "timo.schmidt",
+    "displayName": "Timo Hund",
+    "comments": 4,
+    "issues": 1
+  },
+  {
+    "username": "tflobbe",
+    "displayName": "Tomas Eduardo Fernandez Lobbe",
+    "comments": 4,
+    "issues": 2
+  },
+  {
+    "username": "Hronom",
+    "displayName": "Yevhen Tienkaiev",
+    "comments": 4,
+    "issues": 2
+  },
+  {
+    "username": "romseygeek",
+    "displayName": "Alan Woodward",
+    "comments": 3,
+    "issues": 3
+  },
+  {
+    "username": "anshum",
+    "displayName": "Anshum Gupta",
+    "comments": 3,
+    "issues": 2
+  },
+  {
+    "username": "cpoerschke",
+    "displayName": "Christine Poerschke",
+    "comments": 3,
+    "issues": 2
+  },
+  {
+    "username": "jkrupan",
+    "displayName": "Jack Krupansky",
+    "comments": 3,
+    "issues": 2
+  },
+  {
+    "username": "jaykay12",
+    "displayName": "Jalaz Kumar",
+    "comments": 3,
+    "issues": 2
+  },
+  {
+    "username": "gerlowskija",
+    "displayName": "Jason Gerlowski",
+    "comments": 3,
+    "issues": 3
+  },
+  {
+    "username": "kgalal",
+    "displayName": "Khalid Galal",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "mdrob",
+    "displayName": "Mike Drob",
+    "comments": 3,
+    "issues": 2
+  },
+  {
+    "username": "rdeck",
+    "displayName": "Roland Deck",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "uschindler",
+    "displayName": "Uwe Schindler",
+    "comments": 3,
+    "issues": 3
+  },
+  {
+    "username": "arafalov",
+    "displayName": "Alexandre Rafalovitch",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "obeliks",
+    "displayName": "Bernhard Frauendienst",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "Brent212",
+    "displayName": "Brent Pearson",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "cdekok",
+    "displayName": "Chris de Kok",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "david_fennessey",
+    "displayName": "David Fennessey",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "issei2029",
+    "displayName": "Issei Nishigata",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "sandbergja",
+    "displayName": "Jane Sandberg",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "k317h",
+    "displayName": "Keith Laban",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "razen",
+    "displayName": "Manoj Lawrence",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "mportier",
+    "displayName": "Marc Portier",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "psalagnac",
+    "displayName": "Pierre Salagnac",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "sandrozbinden",
+    "displayName": "Sandro Mario Zbinden",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "senthuran",
+    "displayName": "Senthuran Sivananthan",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "serhiybzhezytskyy",
+    "displayName": "Serhiy Bzhezytskyy",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "vassil.velichkov",
+    "displayName": "Vassil Velichkov",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "vinaypothnis",
+    "displayName": "vinay pothnis",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "maxxkia",
+    "displayName": " Masoud Kiaeeha",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "iorixxx",
+    "displayName": "Ahmet Arslan",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "alexey.serba",
+    "displayName": "Alexey Serba",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "ab",
+    "displayName": "Andrzej Bialecki",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "arcadius",
+    "displayName": "Arcadius Ahouansou",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "artem.karpenko",
+    "displayName": "Artem Karpenko",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "boyidai",
+    "displayName": "Boyi Dai",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "cmaroto",
+    "displayName": "Carlos Maroto",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "ctargett",
+    "displayName": "Cassandra Targett",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "ctoomey",
+    "displayName": "Chris Toomey",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "cwinkler",
+    "displayName": "Christian Winkler",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "dboychuck",
+    "displayName": "David Boychuck",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "forest_soup",
+    "displayName": "Forest Soup",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "kellyfj",
+    "displayName": "Frank Kelly",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "kamaci",
+    "displayName": "Furkan Kamaci",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "greggny3",
+    "displayName": "Gregg Donovan",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "gchanan",
+    "displayName": "Gregory Chanan",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "gus",
+    "displayName": "Gus Heck",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "hg@impact.dk",
+    "displayName": "Henrik",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "hgadre",
+    "displayName": "Hrishikesh Gadre",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "mejackreed",
+    "displayName": "Jack Reed",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "jdyer",
+    "displayName": "James Dyer",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "john.wang@gmail.com",
+    "displayName": "John Wang",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "jugnooken",
+    "displayName": "Ken Ip",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "lancenorskog",
+    "displayName": "Lance Norskog",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "lucacavanna",
+    "displayName": "Luca Cavanna",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "marks1900",
+    "displayName": "Mark S",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "martin.grotzke",
+    "displayName": "Martin Grotzke",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "mruckli",
+    "displayName": "Martin Ruckli",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "mihaly.toth",
+    "displayName": "Mihaly Toth",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "munendrasn",
+    "displayName": "Munendra S N",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "pmcarthur",
+    "displayName": "Paul McArthur",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "davispw",
+    "displayName": "Peter Davis",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "puneet22",
+    "displayName": "Puneet Ahuja",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "praste",
+    "displayName": "Pushkar Raste",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "rwhaddad",
+    "displayName": "Ramsey Haddad",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "rjernst",
+    "displayName": "Ryan Ernst",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "ssd532",
+    "displayName": "Sachin Divekar",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "dragonsinth",
+    "displayName": "Scott Blum",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "bkscott",
+    "displayName": "scott hobson",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "shishircc@gmail.com",
+    "displayName": "Shishir Choudhary",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "stephlag",
+    "displayName": "Stephan Lagraulet",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "tburtonwest",
+    "displayName": "Tom Burton-West",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "v.logvinov",
+    "displayName": "Vasili Logvinov",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "vzhovtiuk",
+    "displayName": "Vitaliy Zhovtyuk",
+    "comments": 1,
+    "issues": 1
+  }
+]
