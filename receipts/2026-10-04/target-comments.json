@@ -1,0 +1,22 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-17944",
+    "comment_id": "18123138",
+    "created": "2026-10-04T14:05:16.478+0000",
+    "updated": "2026-10-04T14:05:16.478+0000",
+    "excerpt": "At this point, we're treating Solr MCP as a seperate sub project under the solr umbrella. You download and access the solr mcp artifacts seprately. I think this solves this JIRA.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17944?focusedCommentId=18123138"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-17944",
+    "comment_id": "18123139",
+    "created": "2026-10-04T14:05:59.040+0000",
+    "updated": "2026-10-04T14:05:59.040+0000",
+    "excerpt": "Lots of valuable discussion, and now we are just working through getting to a 1.0 out the door.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17944?focusedCommentId=18123139"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "username": "epugh",
+    "displayName": "Eric Pugh",
+    "comments": 9,
+    "issues": 1
+  },
+  {
+    "username": "ichattopadhyaya",
+    "displayName": "Ishan Chattopadhyaya",
+    "comments": 8,
+    "issues": 1
+  },
+  {
+    "username": "adityaparikh",
+    "displayName": "Aditya Parikh",
+    "comments": 6,
+    "issues": 1
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 5,
+    "issues": 1
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 4,
+    "issues": 1
+  }
+]
