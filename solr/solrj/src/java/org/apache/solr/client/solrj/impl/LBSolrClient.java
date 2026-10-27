@@ -169,7 +169,7 @@ public abstract class LBSolrClient extends SolrClient {
     solrQuery.setDistrib(false);
   }
 
-  public static class Builder<C extends HttpSolrClient> {
+  public static class Builder<C extends HttpSolrClientBase> {
 
     private final C solrClient;
     private final Endpoint[] solrEndpoints;
@@ -619,10 +619,10 @@ public abstract class LBSolrClient extends SolrClient {
   private NamedList<Object> doRequest(
       SolrClient solrClient, String baseUrl, String collection, SolrRequest<?> solrRequest)
       throws SolrServerException, IOException {
-    // Some implementations of LBSolrClient.getClient(...) return a HttpSolrClient that may not
+    // Some implementations of LBSolrClient.getClient(...) return a HttpSolrClientBase that may not
     // be pointed at the desired URL (or any URL for that matter).  We special-case that here to
     // ensure the appropriate URL is provided.
-    if (solrClient instanceof HttpSolrClient hasReqWithUrl) {
+    if (solrClient instanceof HttpSolrClientBase hasReqWithUrl) {
       return hasReqWithUrl.requestWithBaseUrl(baseUrl, solrRequest, collection);
     }
 

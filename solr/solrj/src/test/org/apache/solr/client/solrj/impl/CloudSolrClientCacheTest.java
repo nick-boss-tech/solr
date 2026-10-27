@@ -102,7 +102,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
         CloudSolrClient cloudClient =
             new RandomizingCloudSolrClientBuilder(clusterStateProvider) {
               @Override
-              protected LBSolrClient createOrGetLbClient(HttpSolrClient myClient) {
+              protected LBSolrClient createOrGetLbClient(HttpSolrClientBase myClient) {
                 return mockLbclient;
               }
             }.build()) {

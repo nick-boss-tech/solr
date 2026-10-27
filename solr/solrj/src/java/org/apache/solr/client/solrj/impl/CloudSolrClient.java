@@ -226,7 +226,7 @@ public abstract class CloudSolrClient extends SolrClient {
   }
 
   /** The HttpSolrClient that underlies this one. It has no baseUrl or default collection. */
-  public abstract HttpSolrClient getHttpClient();
+  public abstract HttpSolrClientBase getHttpClient();
 
   public ResponseParser getParser() {
     return getLbClient().getParser();
@@ -1292,12 +1292,12 @@ public abstract class CloudSolrClient extends SolrClient {
     protected Collection<String> zkHosts = new ArrayList<>();
     protected List<String> solrUrls = new ArrayList<>();
     protected String zkChroot;
-    protected HttpSolrClient httpClient;
+    protected HttpSolrClientBase httpClient;
     protected boolean shardLeadersOnly = true;
     protected boolean directUpdatesToLeadersOnly = false;
     protected boolean parallelUpdates = true;
     protected ClusterStateProvider stateProvider;
-    protected HttpSolrClient.BuilderBase<?, ?> internalClientBuilder;
+    protected HttpSolrClientBuilderBase<?, ?> internalClientBuilder;
     protected RequestWriter requestWriter;
     protected ResponseParser responseParser;
     protected long retryExpiryTimeNano =
@@ -1531,6 +1531,10 @@ public abstract class CloudSolrClient extends SolrClient {
      * @return this
      */
     public Builder withHttpClient(HttpSolrClient httpSolrClient) {
+      return withHttpClient((HttpSolrClientBase) httpSolrClient);
+    }
+
+    public Builder withHttpClient(HttpSolrClientBase httpSolrClient) {
       if (this.internalClientBuilder != null) {
         throw new IllegalStateException(
             "The builder can't accept an httpClient AND an internalClientBuilder, only one of those can be provided");
@@ -1548,6 +1552,10 @@ public abstract class CloudSolrClient extends SolrClient {
      * @return this
      */
     public Builder withHttpClientBuilder(HttpSolrClient.BuilderBase<?, ?> internalClientBuilder) {
+      return withHttpClientBuilder((HttpSolrClientBuilderBase<?, ?>) internalClientBuilder);
+    }
+
+    public Builder withHttpClientBuilder(HttpSolrClientBuilderBase<?, ?> internalClientBuilder) {
       if (this.httpClient != null) {
         throw new IllegalStateException(
             "The builder can't accept an httpClient AND an internalClientBuilder, only one of those can be provided");
@@ -1596,7 +1604,7 @@ public abstract class CloudSolrClient extends SolrClient {
       return new CloudHttp2SolrClient(this);
     }
 
-    protected HttpSolrClient createOrGetHttpClient() {
+    protected HttpSolrClientBase createOrGetHttpClient() {
       if (httpClient != null) {
         return httpClient;
       } else if (internalClientBuilder != null) {
@@ -1606,7 +1614,7 @@ public abstract class CloudSolrClient extends SolrClient {
       }
     }
 
-    protected LBSolrClient createOrGetLbClient(HttpSolrClient myClient) {
+    protected LBSolrClient createOrGetLbClient(HttpSolrClientBase myClient) {
       return myClient.createLBSolrClient();
     }
 
@@ -1620,7 +1628,7 @@ public abstract class CloudSolrClient extends SolrClient {
       return stateProvider;
     }
 
-    protected ClusterStateProvider createHttpClusterStateProvider(HttpSolrClient httpClient) {
+    protected ClusterStateProvider createHttpClusterStateProvider(HttpSolrClientBase httpClient) {
       try {
         return new HttpClusterStateProvider<>(solrUrls, httpClient);
       } catch (Exception e) {

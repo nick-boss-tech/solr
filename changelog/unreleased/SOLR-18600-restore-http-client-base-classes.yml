@@ -1,0 +1,10 @@
+title: >
+  Restore HttpSolrClientBase and HttpSolrClientBuilderBase as top-level SolrJ classes, fixing a
+  binary incompatibility introduced in 10.1.0 where code compiled against SolrJ 10.0.0 fails with
+  NoSuchMethodError on ordinary HttpJdkSolrClient/HttpJettySolrClient builder calls
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-18600
+    url: https://issues.apache.org/jira/browse/SOLR-18600
