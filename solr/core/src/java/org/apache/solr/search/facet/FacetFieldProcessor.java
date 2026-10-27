@@ -31,14 +31,18 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import org.apache.lucene.document.SortedDocValuesField;
+import org.apache.lucene.document.SortedSetDocValuesField;
 import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.util.ArrayUtil;
+import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.PriorityQueue;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.schema.FieldType;
 import org.apache.solr.schema.SchemaField;
+import org.apache.solr.schema.SortableTextField;
 import org.apache.solr.search.DocSet;
 import org.apache.solr.search.facet.SlotAcc.SlotContext;
 import org.apache.solr.search.facet.SlotAcc.SweepableSlotAcc;
@@ -538,6 +542,12 @@ abstract class FacetFieldProcessor extends FacetProcessor<FacetField> {
 
   /** Trivial helper method for building up a bucket query given the (Stringified) bucket value */
   protected Query makeBucketQuery(final String bucketValue) {
+    if (sf.getType() instanceof SortableTextField && sf.hasDocValues()) {
+      final List<BytesRef> term = List.of(new BytesRef(bucketValue));
+      return sf.multiValued()
+          ? SortedSetDocValuesField.newSlowSetQuery(sf.getName(), term)
+          : SortedDocValuesField.newSlowSetQuery(sf.getName(), term);
+    }
     return sf.getType().getFieldTermQuery(null, sf, bucketValue);
   }
 
