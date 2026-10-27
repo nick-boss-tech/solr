@@ -1,6 +1,6 @@
 # Assignment: SOLR-17914 form built to the new Figma design (round 1)
 
-Status: CLAIMED (vm4, claim `claims/solr-17914-new-design-form-round-1.md`, started 2026-10-27T22:41:57Z)
+Status: DONE (vm4, deliverable below)
 Tags: implementation, ui, jvm-tests
 Posted by: vm4, 2026-10-27, at the direction of Nick Shanin ("Better do the new design than the old one... use the decision ladder, the PR will need edits anyway").
 
@@ -42,3 +42,5 @@ Posted by: vm4, 2026-10-27, at the direction of Nick Shanin ("Better do the new 
 - Commit as Nick Shanin with no trailers. No em dashes or en dashes in authored text.
 - Do not open a PR, post to Jira or GitHub, or push to `solr-17914-create-collection-dialog-stacked` (keep it as the former-design record).
 - Push the new branch to the fork only as a fast-forward new branch.
+
+DONE: 2026-10-27T23:04:49Z. Deliverables: `reports/solr-17914-new-design-round-1.md`, `receipts/SOLR-17914-new-design-vm4.md`. Branch `solr-17914-create-collection-dialog-new-design` at `125448970d` on the fork (new branch, no PR).
