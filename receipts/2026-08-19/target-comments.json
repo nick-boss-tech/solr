@@ -1,0 +1,12 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18369",
+    "comment_id": "18105912",
+    "created": "2026-08-19T13:03:40.383+0000",
+    "updated": "2026-08-19T13:03:40.383+0000",
+    "excerpt": "We got the first green \"RESOLVED\" in the subtask list!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18369?focusedCommentId=18105912"
+  }
+]
