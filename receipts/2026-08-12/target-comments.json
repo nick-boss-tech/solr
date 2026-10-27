@@ -1,0 +1,62 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-3958",
+    "comment_id": "18103882",
+    "created": "2026-08-12T01:10:45.244+0000",
+    "updated": "2026-08-12T01:10:45.244+0000",
+    "excerpt": "We don't have a \"Overcome by time\" resolution ;)",
+    "url": "https://issues.apache.org/jira/browse/SOLR-3958?focusedCommentId=18103882"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-11953",
+    "comment_id": "18103884",
+    "created": "2026-08-12T01:16:01.573+0000",
+    "updated": "2026-08-12T01:16:01.573+0000",
+    "excerpt": "Apparenlty we bring in JTS as part of SQL module! [https://github.com/apache/solr/blob/main/solr/modules/sql/gradle.lockfile#L184]",
+    "url": "https://issues.apache.org/jira/browse/SOLR-11953?focusedCommentId=18103884"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-15497",
+    "comment_id": "18103885",
+    "created": "2026-08-12T01:17:11.444+0000",
+    "updated": "2026-08-12T01:17:11.444+0000",
+    "excerpt": "Not sure when it was fixed, but it's fixed and we can always open new ones.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-15497?focusedCommentId=18103885"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-2054",
+    "comment_id": "18103887",
+    "created": "2026-08-12T01:22:09.300+0000",
+    "updated": "2026-08-12T01:22:09.300+0000",
+    "excerpt": "this has been a long long time ago.. in a open source project far far away..",
+    "url": "https://issues.apache.org/jira/browse/SOLR-2054?focusedCommentId=18103887"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18288",
+    "comment_id": "18103889",
+    "created": "2026-08-12T01:30:44.368+0000",
+    "updated": "2026-08-12T01:30:44.368+0000",
+    "excerpt": "This has been completed!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18288?focusedCommentId=18103889"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-17602",
+    "comment_id": "18103893",
+    "created": "2026-08-12T01:56:44.219+0000",
+    "updated": "2026-08-12T01:56:44.219+0000",
+    "excerpt": "Interesting. Albeit the issue here can only realistically be satisfied by something in the primary repo. When a PR lands influencing what we ship, we should understand *then* what the impact is.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17602?focusedCommentId=18103893"
+  }
+]
