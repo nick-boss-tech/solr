@@ -1,0 +1,52 @@
+[
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18300",
+    "comment_id": "18108289",
+    "created": "2026-08-26T12:27:42.422+0000",
+    "updated": "2026-08-26T12:27:42.422+0000",
+    "excerpt": "Thanks for confirming!!!!!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18300?focusedCommentId=18108289"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-16918",
+    "comment_id": "18108292",
+    "created": "2026-08-26T12:42:04.617+0000",
+    "updated": "2026-08-26T12:42:04.617+0000",
+    "excerpt": "Now that we've moved to Otel from Dropwizard, `OtelInstrumentedExecutorService`, built on OpenTelemetry replaces this.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-16918?focusedCommentId=18108292"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-17402",
+    "comment_id": "18108374",
+    "created": "2026-08-26T15:48:47.881+0000",
+    "updated": "2026-08-26T15:48:47.881+0000",
+    "excerpt": "This was already done by a standard Solrbot update a while ago!",
+    "url": "https://issues.apache.org/jira/browse/SOLR-17402?focusedCommentId=18108374"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-14349",
+    "comment_id": "18108416",
+    "created": "2026-08-26T17:58:01.644+0000",
+    "updated": "2026-08-26T17:58:01.644+0000",
+    "excerpt": "The upgrade side of this ticket has been done a long time ago... However, the adoption of the Lambda pattern is something we need to discuss and adopt as a project and worht it's own Jira ;)",
+    "url": "https://issues.apache.org/jira/browse/SOLR-14349?focusedCommentId=18108416"
+  },
+  {
+    "person": "Eric Pugh",
+    "username": "epugh",
+    "issue": "SOLR-18405",
+    "comment_id": "18108417",
+    "created": "2026-08-26T18:02:09.980+0000",
+    "updated": "2026-08-26T18:02:09.980+0000",
+    "excerpt": "So, there is a cost to adding lambda, so we don't want to do it blindly, it should be odne on \"expense\" logging calls, which, sigh, is of course a judgment call.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18405?focusedCommentId=18108417"
+  }
+]
