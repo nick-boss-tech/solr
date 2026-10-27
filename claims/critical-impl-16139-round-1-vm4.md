@@ -14,3 +14,6 @@ Heartbeat: 2026-10-27T09:59:26Z
 Plan: standalone shallow clone of apache/solr main, `:solr:packaging:assemble` through `pool/bin/sweep-run.sh` with `env -u NODE_ENV`, then index a SortableTextField and run a nested avg stat facet over JSON facets on the packaged Solr. If the premise fails, write the premise report and stop with no branch. If it reproduces, implement narrowly on `solr-16139-submit`, add tests on SolrTestCase or SolrCloudTestCase, push, and request the gate with `pool/bin/request-gate.py`. No PR, JIRA, or GitHub comment.
 
 Result: pending.
+
+Run (premise setup): `s16139-assemble-ee2f1bf-20261027T100633Z`, `:solr:packaging:assemble` on apache/solr main `ee2f1bf2e0109956145d7fd995da63c4091a589f` (standalone clone `/workspace/worktrees/s16139-clone`), started 2026-10-27T10:06:33Z with `env -u NODE_ENV`. Logs `/workspace/gates/logs/vm4/critical-impl-16139/`.
+Heartbeat: 2026-10-27T10:06:49Z
