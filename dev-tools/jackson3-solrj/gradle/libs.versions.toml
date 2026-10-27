@@ -16,8 +16,9 @@
 [versions]
 solr-baseline = "10.0.0"
 jackson2 = "2.20.0"
+jackson2-annotations = "2.20"
 
 [libraries]
 solr-baseline = { module = "org.apache.solr:solr-solrj", version.ref = "solr-baseline" }
 jackson2-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson2" }
-jackson2-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson2" }
+jackson2-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson2-annotations" }
