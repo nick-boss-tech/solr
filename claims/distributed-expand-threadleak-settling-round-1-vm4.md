@@ -17,3 +17,8 @@ Result: pending.
 
 Run 1 (branch_9x): run name `de-9x-dae5ac6-20261027T073541Z`, log dir `/workspace/gates/logs/vm4/distributed-expand-threadleak`, head `dae5ac66f9c821d0edb26ca62493a1896c001d3b`, started 2026-10-27T07:35:41Z, clone `/workspace/worktrees/de-9x-clone`. Run 2 (apache/main, tip `ee2f1bf2e0109956145d7fd995da63c4091a589f`) starts only after run 1 finishes.
 Heartbeat: 2026-10-27T07:36:36Z
+
+Result (branch_9x, 2026-10-27T08:14:11Z): BUILD SUCCESSFUL rc=0 in 20m 23s, seed 85F9F77FD74C1D41, head dae5ac66f9c821d0edb26ca62493a1896c001d3b, JDK 21 on vm4, -Ptests.file.encoding=ISO-8859-1. XML `/workspace/gates/logs/vm4/distributed-expand-threadleak/de-9x-dae5ac6-20261027T073541Z.xml/`: 1 test, 0 failures, 0 errors, 0 skipped. No ThreadLeakError in the log. Conclusive for this seed on this host and JDK only: the leak did not reproduce. It does not rule out the CI environment (Crave image, security manager settings, timing). Log: `/workspace/gates/logs/vm4/distributed-expand-threadleak/de-9x-dae5ac6-20261027T073541Z.log`.
+
+Run 2 (apache/main, seed 85F9F77FD74C1D41, head ee2f1bf2e0109956145d7fd995da63c4091a589f): started 2026-10-27T08:14:11Z, run name `de-main-ee2f1bf-20261027T081253Z`, log dir same. Not finished.
+Heartbeat: 2026-10-27T08:14:11Z
