@@ -59,7 +59,7 @@ public class SystemInfoResponse extends SolrResponseBase {
         if (node.getKey().endsWith("_solr")) {
           nodesInfo.put(
               node.getKey(),
-              JacksonContentWriter.DEFAULT_MAPPER.convertValue(
+              JacksonContentWriter.convertValue(
                   removeHeader((NamedList<Object>) node.getValue()), NodeSystemResponse.class));
         }
       }
@@ -69,7 +69,7 @@ public class SystemInfoResponse extends SolrResponseBase {
       if (nodesInfo.isEmpty()) {
         nodesInfo.put(
             null,
-            JacksonContentWriter.DEFAULT_MAPPER.convertValue(
+            JacksonContentWriter.convertValue(
                 removeHeader(response), NodeSystemResponse.class));
       }
 
@@ -77,7 +77,7 @@ public class SystemInfoResponse extends SolrResponseBase {
       // single-node response
       nodesInfo.put(
           response.get("node").toString(),
-          JacksonContentWriter.DEFAULT_MAPPER.convertValue(
+          JacksonContentWriter.convertValue(
               removeHeader(response), NodeSystemResponse.class));
     }
   }

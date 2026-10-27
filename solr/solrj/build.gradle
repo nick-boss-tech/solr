@@ -26,10 +26,10 @@ import com.diffplug.gradle.spotless.JavaExtension
 description = 'Solrj - Solr Java Client'
 
 dependencies {
-  api platform(libs.fasterxml.jackson.bom)
-  implementation libs.fasterxml.jackson.core.databind
+  implementation platform(libs.toolsjackson.jackson.bom)
+  implementation libs.toolsjackson.jackson.core.databind
   implementation libs.fasterxml.jackson.core.annotations
-  implementation libs.fasterxml.jackson.core.core
+  implementation libs.toolsjackson.jackson.core.core
   api project(":solr:api")
 
   implementation libs.slf4j.api
@@ -56,6 +56,7 @@ dependencies {
   testImplementation libs.hamcrest.hamcrest
 
   testImplementation libs.commonsio.commonsio
+  testImplementation libs.fasterxml.jackson.core.databind
   testImplementation libs.fasterxml.jackson.dataformat.cbor
 
   testImplementation libs.jakarta.servlet.api

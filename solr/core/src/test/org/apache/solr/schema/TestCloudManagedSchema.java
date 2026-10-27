@@ -17,6 +17,7 @@
 package org.apache.solr.schema;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,6 @@ import org.apache.solr.client.api.model.CoreStatusResponse;
 import org.apache.solr.client.solrj.SolrRequest.METHOD;
 import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
 import org.apache.solr.client.solrj.request.GenericSolrRequest;
-import org.apache.solr.client.solrj.request.json.JacksonContentWriter;
 import org.apache.solr.cloud.AbstractFullDistribZkTestBase;
 import org.apache.solr.common.cloud.SolrZkClient;
 import org.apache.solr.common.params.CoreAdminParams;
@@ -63,7 +63,7 @@ public class TestCloudManagedSchema extends AbstractFullDistribZkTestBase {
     var rootClient = jettys.get(which).getSolrClient();
     NamedList<?> namedListResponse = rootClient.request(request);
     final var statusByCore =
-        JacksonContentWriter.DEFAULT_MAPPER.convertValue(
+        new ObjectMapper().convertValue(
             namedListResponse.get("status"),
             new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
     final String coreName = statusByCore.keySet().stream().findFirst().get();

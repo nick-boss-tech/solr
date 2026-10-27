@@ -17,17 +17,35 @@
 
 package org.apache.solr.client.solrj.request.json;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.OutputStream;
 import org.apache.solr.client.solrj.request.RequestWriter;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.StreamReadConstraints;
+import tools.jackson.core.StreamWriteConstraints;
+import tools.jackson.core.json.JsonFactory;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 /**
  * @lucene.internal
  */
 public class JacksonContentWriter implements RequestWriter.ContentWriter {
 
-  public static final ObjectMapper DEFAULT_MAPPER = new ObjectMapper();
+  public static final ObjectMapper DEFAULT_MAPPER =
+      JsonMapper.builder(
+              JsonFactory.builderWithJackson2Defaults()
+                  .streamReadConstraints(
+                      StreamReadConstraints.builder()
+                          .maxNestingDepth(1000)
+                          .maxStringLength(20_000_000)
+                          .build())
+                  .streamWriteConstraints(
+                      StreamWriteConstraints.builder().maxNestingDepth(1000).build())
+                  .build())
+          .configureForJackson2()
+          .build();
 
   private final Object toWrite;
 
@@ -37,7 +55,34 @@ public class JacksonContentWriter implements RequestWriter.ContentWriter {
 
   @Override
   public void write(OutputStream os) throws IOException {
-    DEFAULT_MAPPER.writeValue(os, toWrite);
+    try {
+      DEFAULT_MAPPER.writeValue(os, toWrite);
+    } catch (JacksonException e) {
+      throw asIOException(e);
+    }
+  }
+
+  /** Converts values while retaining the argument-error contract of Jackson 2. */
+  public static <T> T convertValue(Object value, Class<T> type) {
+    try {
+      return DEFAULT_MAPPER.convertValue(value, type);
+    } catch (JacksonException e) {
+      throw new IllegalArgumentException(e.getMessage(), e);
+    }
+  }
+
+  /** Converts parameterized values while retaining the argument-error contract of Jackson 2. */
+  public static <T> T convertValue(Object value, TypeReference<T> type) {
+    try {
+      return DEFAULT_MAPPER.convertValue(value, type);
+    } catch (JacksonException e) {
+      throw new IllegalArgumentException(e.getMessage(), e);
+    }
+  }
+
+  /** Adapts Jackson failures to SolrJ's stream-reading and stream-writing contracts. */
+  public static IOException asIOException(JacksonException exception) {
+    return new IOException(exception.getMessage(), exception);
   }
 
   @Override

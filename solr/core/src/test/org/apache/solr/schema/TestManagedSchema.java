@@ -17,6 +17,7 @@
 package org.apache.solr.schema;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
 import java.nio.charset.StandardCharsets;
@@ -29,7 +30,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.file.PathUtils;
 import org.apache.lucene.tests.mockfile.FilterPath;
 import org.apache.solr.client.api.model.CoreStatusResponse;
-import org.apache.solr.client.solrj.request.json.JacksonContentWriter;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CoreAdminParams;
 import org.apache.solr.common.util.NamedList;
@@ -165,7 +165,7 @@ public class TestManagedSchema extends AbstractBadConfigTestBase {
     assertNull("Exception on create", response.getException());
     NamedList<?> responseValues = response.getValues();
     final var statusByCore =
-        JacksonContentWriter.DEFAULT_MAPPER.convertValue(
+        new ObjectMapper().convertValue(
             responseValues.get("status"),
             new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
     assertEquals(

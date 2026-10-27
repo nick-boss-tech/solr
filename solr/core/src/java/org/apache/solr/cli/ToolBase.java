@@ -18,10 +18,10 @@
 package org.apache.solr.cli;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.concurrent.Callable;
 import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
-import org.apache.solr.client.solrj.request.json.JacksonContentWriter;
 import org.apache.solr.util.StartupLoggingUtils;
 import picocli.CommandLine;
 
@@ -35,6 +35,8 @@ import picocli.CommandLine;
  * from it, and are not registered as picocli subcommands.
  */
 public abstract class ToolBase implements Tool, Callable<Integer> {
+  private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
+
   @CommandLine.Mixin private HelpMixin helpMixin;
 
   @CommandLine.Option(
@@ -61,10 +63,7 @@ public abstract class ToolBase implements Tool, Callable<Integer> {
 
   protected void echoIfVerbose(Object response) throws JsonProcessingException {
     if (verbose && response != null) {
-      echo(
-          JacksonContentWriter.DEFAULT_MAPPER
-              .writerWithDefaultPrettyPrinter()
-              .writeValueAsString(response));
+      echo(JSON_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(response));
     }
   }
 

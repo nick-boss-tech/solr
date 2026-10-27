@@ -16,11 +16,11 @@
  */
 package org.apache.solr.client.solrj.response;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.Date;
 import java.util.Map;
 import org.apache.solr.client.api.model.CoreStatusResponse;
 import org.apache.solr.client.solrj.request.json.JacksonContentWriter;
+import tools.jackson.core.type.TypeReference;
 
 /**
  * @since solr 1.3
@@ -29,7 +29,7 @@ public class CoreAdminResponse extends SolrResponseBase {
 
   public Map<String, CoreStatusResponse.SingleCoreData> getCoreStatus() {
     final var allCoreStatus = getResponse().get("status");
-    return JacksonContentWriter.DEFAULT_MAPPER.convertValue(
+    return JacksonContentWriter.convertValue(
         allCoreStatus, new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
   }
 

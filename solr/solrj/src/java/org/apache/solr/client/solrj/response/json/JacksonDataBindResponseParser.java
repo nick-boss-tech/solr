@@ -28,6 +28,7 @@ import org.apache.solr.client.solrj.response.ResponseParser;
 import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
+import tools.jackson.core.JacksonException;
 
 /**
  * Parses JSON, deserializing to a domain type (class) via Jackson data-bind.
@@ -66,12 +67,16 @@ public class JacksonDataBindResponseParser<T> extends ResponseParser {
     var mapper = JacksonContentWriter.DEFAULT_MAPPER;
 
     final T parsedVal;
-    if (encoding == null) {
-      parsedVal = mapper.readValue(stream, typeParam);
-    } else {
-      parsedVal =
-          mapper.readValue(
-              new InputStreamReader(stream, IOUtils.charsetForName(encoding)), typeParam);
+    try {
+      if (encoding == null) {
+        parsedVal = mapper.readValue(stream, typeParam);
+      } else {
+        parsedVal =
+            mapper.readValue(
+                new InputStreamReader(stream, IOUtils.charsetForName(encoding)), typeParam);
+      }
+    } catch (JacksonException e) {
+      throw JacksonContentWriter.asIOException(e);
     }
 
     final var result = new SimpleOrderedMap<Object>();
@@ -81,7 +86,7 @@ public class JacksonDataBindResponseParser<T> extends ResponseParser {
     // HttpSolrClientBase.processErrorsAndResponse() can detect and throw RemoteSolrException,
     // matching the exception-throwing behavior of V1 API requests.
     if (parsedVal instanceof SolrJerseyResponse jerseyResponse && jerseyResponse.error != null) {
-      result.add("error", mapper.convertValue(jerseyResponse.error, Map.class));
+      result.add("error", JacksonContentWriter.convertValue(jerseyResponse.error, Map.class));
     }
 
     return result;

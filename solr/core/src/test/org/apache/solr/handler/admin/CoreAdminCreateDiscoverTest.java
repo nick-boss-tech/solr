@@ -17,6 +17,7 @@
 package org.apache.solr.handler.admin;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -26,7 +27,6 @@ import java.util.Map;
 import java.util.Properties;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.api.model.CoreStatusResponse;
-import org.apache.solr.client.solrj.request.json.JacksonContentWriter;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CoreAdminParams;
 import org.apache.solr.core.CorePropertiesLocator;
@@ -245,7 +245,7 @@ public class CoreAdminCreateDiscoverTest extends SolrTestCaseJ4 {
             "testInstanceDirAsPropertyParam"),
         resp);
     final var statusByCore =
-        JacksonContentWriter.DEFAULT_MAPPER.convertValue(
+        new ObjectMapper().convertValue(
             resp.getValues().get("status"),
             new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
     assertNotNull(statusByCore);

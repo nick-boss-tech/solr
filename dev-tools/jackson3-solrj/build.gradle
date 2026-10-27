@@ -1,0 +1,210 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import java.security.MessageDigest
+import java.util.regex.Pattern
+
+plugins {
+  id 'java'
+}
+
+def candidateVersion = providers.gradleProperty('candidateVersion').get()
+def candidateRepository = file(providers.gradleProperty('candidateRepository')
+    .getOrElse('../../build/maven-local'))
+def candidateVersionPattern = Pattern.quote(candidateVersion)
+if (candidateVersion == libs.versions.solr.baseline.get()) {
+  throw new GradleException('The candidate must have a different version from the published baseline')
+}
+
+repositories {
+  maven {
+    name = 'candidatePomRepository'
+    url = candidateRepository
+    metadataSources {
+      mavenPom()
+      ignoreGradleMetadataRedirection()
+    }
+    content {
+      includeVersionByRegex('org.apache.solr', '.*', candidateVersionPattern)
+    }
+  }
+  mavenCentral {
+    metadataSources {
+      mavenPom()
+      ignoreGradleMetadataRedirection()
+    }
+    content {
+      excludeVersionByRegex('org.apache.solr', '.*', candidateVersionPattern)
+    }
+  }
+}
+
+sourceSets {
+  legacy {
+    java.srcDirs = sourceSets.main.java.srcDirs
+  }
+  behavior {}
+  legacyBehavior {
+    java.srcDirs = sourceSets.behavior.java.srcDirs
+  }
+  coexistence {}
+  internalControl {}
+}
+
+dependencies {
+  implementation "org.apache.solr:solr-solrj:${candidateVersion}"
+  legacyImplementation libs.solr.baseline
+  behaviorImplementation "org.apache.solr:solr-solrj:${candidateVersion}"
+  behaviorImplementation libs.jackson2.annotations
+  legacyBehaviorImplementation libs.solr.baseline
+  legacyBehaviorImplementation libs.jackson2.annotations
+  coexistenceImplementation "org.apache.solr:solr-solrj:${candidateVersion}"
+  coexistenceImplementation sourceSets.main.output
+  coexistenceImplementation libs.jackson2.databind
+  internalControlImplementation libs.solr.baseline
+  internalControlImplementation libs.jackson2.databind
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.release = 17
+  options.encoding = 'UTF-8'
+}
+
+def consumerJavaVersion = providers.gradleProperty('consumerJavaVersion')
+    .map { Integer.parseInt(it) }.getOrElse(17)
+tasks.withType(JavaExec).configureEach {
+  javaLauncher = javaToolchains.launcherFor {
+    languageVersion = JavaLanguageVersion.of(consumerJavaVersion)
+  }
+}
+
+def reportDirectory = layout.buildDirectory.dir('reports/compatibility')
+def coordinates = { configuration ->
+  configuration.resolvedConfiguration.resolvedArtifacts.collect {
+    "${it.moduleVersion.id.group}:${it.name}:${it.moduleVersion.id.version}".toString()
+  }.sort()
+}
+
+tasks.register('verifyCandidateDependencies') {
+  doLast {
+    def expectedPom = new File(candidateRepository,
+        "org/apache/solr/solr-solrj/${candidateVersion}/solr-solrj-${candidateVersion}.pom")
+    if (!expectedPom.isFile()) {
+      throw new GradleException("Candidate POM not found: ${expectedPom}")
+    }
+    def artifacts = coordinates(configurations.runtimeClasspath)
+    def forbidden = artifacts.findAll {
+      it.startsWith('com.fasterxml.jackson.core:jackson-core:') ||
+          it.startsWith('com.fasterxml.jackson.core:jackson-databind:')
+    }
+    if (!forbidden.empty) {
+      throw new GradleException("Candidate POM still brings Jackson 2 runtime: ${forbidden}")
+    }
+    ['com.fasterxml.jackson.core:jackson-annotations:',
+     'tools.jackson.core:jackson-core:', 'tools.jackson.core:jackson-databind:'].each { prefix ->
+      if (!artifacts.any { it.startsWith(prefix) }) {
+        throw new GradleException("Expected runtime dependency missing: ${prefix}")
+      }
+    }
+    def report = reportDirectory.get().file('candidate-runtime.txt').asFile
+    report.parentFile.mkdirs()
+    report.text = artifacts.join('\n') + '\n'
+    logger.lifecycle("Candidate runtime, resolved through Maven POMs without exclusions:\n${report.text}")
+    def legacyArtifacts = coordinates(configurations.legacyCompileClasspath)
+    if (!legacyArtifacts.contains("org.apache.solr:solr-solrj:${libs.versions.solr.baseline.get()}".toString())) {
+      throw new GradleException('Legacy compile classpath did not resolve the released baseline')
+    }
+    reportDirectory.get().file('legacy-compile.txt').asFile.text = legacyArtifacts.join('\n') + '\n'
+    reportDirectory.get().file('coexistence-runtime.txt').asFile.text =
+        coordinates(configurations.coexistenceRuntimeClasspath).join('\n') + '\n'
+  }
+}
+
+def consumerTask = { String taskName, sourceSet, runtime, String main ->
+  tasks.register(taskName, JavaExec) {
+    dependsOn sourceSet.classesTaskName, 'verifyCandidateDependencies'
+    classpath = files(sourceSet.output, runtime)
+    mainClass = main
+    jvmArgs '-ea'
+  }
+}
+
+consumerTask('candidateConsumer', sourceSets.main, configurations.runtimeClasspath,
+    'org.apache.solr.compat.StableConsumer')
+consumerTask('baselineConsumer', sourceSets.legacy, configurations.legacyRuntimeClasspath,
+    'org.apache.solr.compat.StableConsumer')
+consumerTask('candidateBehavior', sourceSets.behavior, configurations.behaviorRuntimeClasspath,
+    'org.apache.solr.compat.JacksonBehavior')
+consumerTask('baselineBehavior', sourceSets.legacyBehavior,
+    configurations.legacyBehaviorRuntimeClasspath, 'org.apache.solr.compat.JacksonBehavior')
+consumerTask('jackson2Coexistence', sourceSets.coexistence,
+    files(sourceSets.main.output, configurations.coexistenceRuntimeClasspath),
+    'org.apache.solr.compat.Jackson2Coexistence').configure {
+  dependsOn tasks.classes
+}
+
+def classHashes = { ->
+  def result = [:]
+  sourceSets.legacy.output.classesDirs.asFileTree.matching { include '**/*.class' }.files.sort().each {
+    result[it.absolutePath] = MessageDigest.getInstance('SHA-256')
+        .digest(it.bytes).encodeHex().toString()
+  }
+  result
+}
+consumerTask('binaryConsumer', sourceSets.legacy, configurations.runtimeClasspath,
+    'org.apache.solr.compat.StableConsumer').configure {
+  def before
+  doFirst {
+    before = classHashes()
+    if (before.empty) throw new GradleException('No legacy consumer class files found')
+  }
+  doLast {
+    if (classHashes() != before) throw new GradleException('Legacy consumer bytes changed at runtime')
+    reportDirectory.get().file('legacy-class-sha256.txt').asFile.text =
+        before.collect { path, hash -> "${hash}  ${path}" }.join('\n') + '\n'
+    logger.lifecycle('Released-version consumer bytecode ran unchanged on candidate-only runtime')
+  }
+}
+
+consumerTask('internalFieldControl', sourceSets.internalControl,
+    configurations.coexistenceRuntimeClasspath, 'org.apache.solr.compat.InternalFieldControl')
+consumerTask('baselineInternalFieldControl', sourceSets.internalControl,
+    configurations.internalControlRuntimeClasspath,
+    'org.apache.solr.compat.InternalFieldControl').configure {
+  args 'baseline'
+}
+
+['candidateHttp', 'binaryHttp'].each { taskName ->
+  def fixture = taskName == 'candidateHttp' ? sourceSets.main : sourceSets.legacy
+  consumerTask(taskName, fixture, configurations.runtimeClasspath,
+      'org.apache.solr.compat.StableConsumer').configure {
+    doFirst {
+      def server = providers.gradleProperty('solrUrl').orNull
+      def collection = providers.gradleProperty('solrCollection').orNull
+      if (!server || !collection) {
+        throw new GradleException('HTTP proof requires -PsolrUrl and -PsolrCollection for a disposable core')
+      }
+      args server, collection
+    }
+  }
+}
+
+tasks.register('compatibility') {
+  dependsOn 'candidateConsumer', 'baselineConsumer', 'binaryConsumer', 'candidateBehavior', 'baselineBehavior',
+      'jackson2Coexistence', 'internalFieldControl', 'baselineInternalFieldControl'
+}
+tasks.check.dependsOn 'compatibility'

@@ -20,7 +20,9 @@ import static org.hamcrest.Matchers.instanceOf;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
@@ -120,6 +122,55 @@ public class JacksonDataBindResponseParserTest extends SolrTestCase {
     assertNotNull(result.get("response"));
     assertThat(result.get("response"), instanceOf(PlainPojo.class));
     assertNull("Error extraction only occurs for SolrJerseyResponse types", result.get("error"));
+  }
+
+  @Test
+  public void testMalformedInputRemainsIOException() {
+    final var parser = new JacksonDataBindResponseParser<>(PlainPojo.class);
+    for (String encoding : new String[] {null, "UTF-8"}) {
+      for (String json : new String[] {"{", "{\"value\":", "{\"unknown\":1}"}) {
+        expectThrows(IOException.class, () -> parser.processResponse(toStream(json), encoding));
+      }
+    }
+  }
+
+  @Test
+  public void testExplicitCharacterEncoding() throws IOException {
+    final var parser = new JacksonDataBindResponseParser<>(PlainPojo.class);
+    final var stream =
+        new ByteArrayInputStream("{\"value\":\"caf\u00e9\"}".getBytes(StandardCharsets.UTF_16LE));
+    final var result = parser.processResponse(stream, "UTF-16LE");
+    assertEquals("caf\u00e9", ((PlainPojo) result.get("response")).value);
+  }
+
+  @Test
+  public void testNestedResponseRetainsJackson2DepthLimit() throws IOException {
+    final var parser = new JacksonDataBindResponseParser<>(Object.class);
+    Object value =
+        parser
+            .processResponse(toStream("[".repeat(600) + "0" + "]".repeat(600)), null)
+            .get("response");
+    for (int depth = 0; depth < 600; depth++) {
+      value = ((List<?>) value).get(0);
+    }
+    assertEquals(0, value);
+  }
+
+  @Test
+  public void testInputFailureRemainsIOException() {
+    final var parser = new JacksonDataBindResponseParser<>(PlainPojo.class);
+    for (String encoding : new String[] {null, "UTF-8"}) {
+      final var stream =
+          new InputStream() {
+            @Override
+            public int read() throws IOException {
+              throw new IOException("input failed");
+            }
+          };
+      final var exception =
+          expectThrows(IOException.class, () -> parser.processResponse(stream, encoding));
+      assertTrue(exception.getMessage().contains("input failed"));
+    }
   }
 
   // Minimal POJO for the non-SolrJerseyResponse test above

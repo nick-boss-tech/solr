@@ -19,6 +19,7 @@ package org.apache.solr.handler.admin;
 import static org.apache.solr.handler.admin.CoreAdminHandler.CoreAdminAsyncTracker.COMPLETED;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -36,7 +37,6 @@ import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.request.CoreAdminRequest;
 import org.apache.solr.client.solrj.request.SolrQuery;
-import org.apache.solr.client.solrj.request.json.JacksonContentWriter;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
@@ -230,7 +230,7 @@ public class CoreAdminHandlerTest extends SolrTestCaseJ4 {
     assertNotNull("core failures is null", failures);
 
     final var statusByCore =
-        JacksonContentWriter.DEFAULT_MAPPER.convertValue(
+        new ObjectMapper().convertValue(
             resp.getValues().get("status"),
             new TypeReference<Map<String, CoreStatusResponse.SingleCoreData>>() {});
     assertNotNull("core status is null", statusByCore);
