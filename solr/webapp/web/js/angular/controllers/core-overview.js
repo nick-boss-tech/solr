@@ -24,7 +24,7 @@ var isTruthy = function(value) {
 };
 
 solrAdminApp.controller('CoreOverviewController',
-function($scope, $rootScope, $routeParams, $timeout, Luke, CoreInfo, Update, ReplicationV2, Ping, Constants) {
+function($scope, $rootScope, $routeParams, $timeout, Luke, CoreInfo, Update, ReplicationV2, Ping, Constants, ApiErrorHandler) {
   $scope.resetMenu("overview", Constants.IS_CORE_PAGE);
   $scope.refreshIndex = function() {
     Luke.index({core: $routeParams.core},
@@ -42,7 +42,7 @@ function($scope, $rootScope, $routeParams, $timeout, Luke, CoreInfo, Update, Rep
     ReplicationV2.fetchReplicationDetails($routeParams.core, {}, function(error, data, response) {
       $timeout(function() {
         if (error) {
-          $scope.replicationMessage = "Replication is not configured";
+          ApiErrorHandler.handle(response);
           return;
         }
         $scope.isFollower = isTruthy(data.details.isFollower);
