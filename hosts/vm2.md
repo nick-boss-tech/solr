@@ -57,3 +57,5 @@ Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 - Heartbeat: 2026-10-26T03:50:21Z; interrupted-close fix on new fork branch solr-teardown-interrupt-close-fix (head 8787c6605ad, no PR). Before: 3 focused tests fail on owned and caller-executor (3 tests, 2 failures + tracker check). After: 53/53 in HttpJettySolrClientTest. Report reports/teardown-interrupt-close-fix-round-1.md.
 
 - Heartbeat: 2026-10-26T05:40:08Z; final gate for interrupted-close fix green at 5ec461c4012 (receipts/teardown-interrupt-close-fix-final-validation-round-1.md, board commit 7add353ceaf). tidy, Error Prone compile, module check rc 0; solrj-jetty suite 76/0/0/0 across 7 classes. Archive board-archive/final-gate-r1/. PR draft drafts/teardown-interrupt-close-fix-pr-draft-round-1.md, not posted; no PR opened.
+
+- Heartbeat: 2026-10-27T07:25:04Z; SOLR-18325 round 2 claim (claims/solr-18325-solr10-feasibility-vm2-round-2.md) running the full chain at head 8bfca8edd30 (repairs 958a841, 35a35d6, ed07d0d, 00be45f superseded by 8bfca8e). Overnight mode on; no other live claim.
