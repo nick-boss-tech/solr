@@ -7,8 +7,8 @@ Status: DRAFT (not posted). Shape: staged ask, evidence first. Addressee: Eric P
 I counted where {{gettingstarted}} is used at apache/solr main {{e59ce3c97d}}:
 
  * Ref Guide: 177 lines in 36 files. The largest are {{post-command.adoc}} (21), {{solr-control-script-reference.adoc}} (19), and {{solr-in-docker.adoc}} (13).
- * CLI default: {{bin/solr start -e cloud}} creates a {{gettingstarted}} collection ({{RunExampleTool.java:1188}}), and the schemaless example maps to it ({{RunExampleTool.java:607}}). The {{post}} and {{healthcheck}} help text uses it ({{PostTool.java:95-101}}, {{HealthcheckTool.java:61}}).
- * Tests: {{SolrCloudExampleTest.java:57}} and {{CloudSolrClientCacheTest.java:69}} assert the name.
+ * CLI default: {{bin/solr start -e cloud}} creates a {{gettingstarted}} collection ([RunExampleTool.java:1188|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/cli/RunExampleTool.java#L1188]), and the schemaless example maps to it ([RunExampleTool.java:607|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/cli/RunExampleTool.java#L607]). The {{post}} and {{healthcheck}} help text uses it ([PostTool.java:95-101|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/cli/PostTool.java#L95-L101], [HealthcheckTool.java:61|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/cli/HealthcheckTool.java#L61]).
+ * Tests: [SolrCloudExampleTest.java:57|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/test/org/apache/solr/cli/SolrCloudExampleTest.java#L57] and [CloudSolrClientCacheTest.java:69|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solrj/src/test/org/apache/solr/client/solrj/impl/CloudSolrClientCacheTest.java#L69] assert the name.
 
 A docs-only change does not alter running behaviour. Changing the CLI default would, for anyone who posts to {{gettingstarted}} after {{-e cloud}}.
 

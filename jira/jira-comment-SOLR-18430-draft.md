@@ -4,9 +4,9 @@ Status: DRAFT (not posted). Shape: staged ask, evidence first. Addressee: Eric P
 
 ---
 
-I checked the replica property endpoints at apache/solr main {{e59ce3c97d}}. The v2 API has PUT and DELETE on a single named property ({{AddReplicaPropertyApi.java:29}} and {{DeleteReplicaPropertyApi.java:32}}), and no GET that lists them.
+I checked the replica property endpoints at apache/solr main {{e59ce3c97d}}. The v2 API has PUT and DELETE on a single named property ([AddReplicaPropertyApi.java:29|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/AddReplicaPropertyApi.java#L29] and [DeleteReplicaPropertyApi.java:32|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/DeleteReplicaPropertyApi.java#L32]), and no GET that lists them.
 
-The properties are stored in the replica's state as {{property.<name>}} keys ({{solrj/src/java/org/apache/solr/common/cloud/Replica.java:357-358}} and {{:451}}), so a list read has a source.
+The properties are stored in the replica's state as {{property.<name>}} keys ([Replica.java:357-358|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solrj/src/java/org/apache/solr/common/cloud/Replica.java#L357-L358] and [Replica.java:451|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solrj/src/java/org/apache/solr/common/cloud/Replica.java#L451]), so a list read has a source.
 
 Eric, is a flat map of property name to value the shape you want, as the ticket proposes?
 

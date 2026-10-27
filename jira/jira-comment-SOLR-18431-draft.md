@@ -4,7 +4,7 @@ Status: DRAFT (not posted). Shape: staged ask, evidence first. Addressee: Eric P
 
 ---
 
-I checked the replica property endpoints at apache/solr main {{e59ce3c97d}}. There is a PUT and a DELETE on a single property ({{AddReplicaPropertyApi.java:29}} and {{DeleteReplicaPropertyApi.java:32}}), and no GET for one property. Replica properties are kept as {{property.<name>}} keys in the replica's state ({{Replica.java:357-358}}), which is the same source SOLR-18430 uses.
+I checked the replica property endpoints at apache/solr main {{e59ce3c97d}}. There is a PUT and a DELETE on a single property ([AddReplicaPropertyApi.java:29|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/AddReplicaPropertyApi.java#L29] and [DeleteReplicaPropertyApi.java:32|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/DeleteReplicaPropertyApi.java#L32]), and no GET for one property. Replica properties are kept as {{property.<name>}} keys in the replica's state ([Replica.java:357-358|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solrj/src/java/org/apache/solr/common/cloud/Replica.java#L357-L358]), which is the same source SOLR-18430 uses.
 
 Eric, when the property is not set on the replica, should the GET return 404, or a 200 with no value? The ticket does not say.
 

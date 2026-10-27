@@ -9,7 +9,7 @@ I measured the debug and trace calls in {{solr/core/src/java}} at apache/solr ma
  * 760 {{log.trace}} and {{log.debug}} calls, 9 of them commented out.
  * 253 are guarded by {{isTraceEnabled()}} or {{isDebugEnabled()}} within three lines.
  * 507 are unguarded. Most pass identifiers, fields or literals, which are cheap to evaluate.
- * The regex finds seven unguarded calls with method-call or concatenation arguments. Four of those are commented out or pass literals. {{PeerSync.java:684}} and {{TransactionLog.java:733}} pass cheap accessors. {{PeerSyncWithLeader.java:162}} calls {{msg()}}, but it sits behind a local {{debug}} flag.
+ * The regex finds seven unguarded calls with method-call or concatenation arguments. Four of those are commented out or pass literals. [PeerSync.java:684|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/update/PeerSync.java#L684] and [TransactionLog.java:733|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/update/TransactionLog.java#L733] pass cheap accessors. [PeerSyncWithLeader.java:162|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/update/PeerSyncWithLeader.java#L162] calls {{msg()}}, but it sits behind a local {{debug}} flag.
 
 So I did not find a hot-path call where the argument is clearly expensive. A regex cannot separate cheap accessors from expensive work, so this is a measurement, not an audit.
 

@@ -6,13 +6,13 @@ Status: DRAFT (not posted). Shape: staged ask. Addressee: Eric Pugh (reporter). 
 
 I went through the v2 endpoint interfaces at apache/solr main {{e59ce3c97d}} for plurality and naming consistency. Four items have a file and line each. The two plurality items:
 
- * {{detailed}} is the only adjective-named "return more" flag. Elsewhere the same role uses the {{xxxInfo}} suffix ({{coreInfo}}, {{fieldInfo}}, {{sizeInfo}}, {{indexInfo}}). {{ListCollectionsApi.java:37}}, against {{SegmentsApi.java:57}} and {{CoreApis.java:44}}.
- * The same concept has two path names: {{/schema-designer/configs}} ({{SchemaDesignerApi.java:121}}) and {{/configsets}} ({{ConfigsetsApi.java:46}}). Both list configSets.
+ * {{detailed}} is the only adjective-named "return more" flag. Elsewhere the same role uses the {{xxxInfo}} suffix ({{coreInfo}}, {{fieldInfo}}, {{sizeInfo}}, {{indexInfo}}). [ListCollectionsApi.java:37|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/ListCollectionsApi.java#L37], against [SegmentsApi.java:57|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/SegmentsApi.java#L57] and [CoreApis.java:44|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/CoreApis.java#L44].
+ * The same concept has two path names: {{/schema-designer/configs}} ([SchemaDesignerApi.java:121|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/SchemaDesignerApi.java#L121]) and {{/configsets}} ([ConfigsetsApi.java:46|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/ConfigsetsApi.java#L46]). Both list configSets.
 
 And two consistency items:
 
- * The path parameter for a collection is {{collName}} on 10 sites in 5 files and {{collectionName}} on 14 sites in 12 files ({{CollectionPropertyApi.java:31}} against {{CollectionStatusApi.java:33}}).
- * camelCase segments {{/purgeUnused}} ({{DeleteCollectionBackupApi.java:66}}) and {{/requestHandlers}} ({{ConfigApi.java:76}}), where the other multi-word segments are lowercase or hyphenated.
+ * The path parameter for a collection is {{collName}} on 10 sites in 5 files and {{collectionName}} on 14 sites in 12 files ([CollectionPropertyApi.java:31|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/CollectionPropertyApi.java#L31] against [CollectionStatusApi.java:33|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/CollectionStatusApi.java#L33]).
+ * camelCase segments {{/purgeUnused}} ([DeleteCollectionBackupApi.java:66|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/DeleteCollectionBackupApi.java#L66]) and {{/requestHandlers}} ([ConfigApi.java:76|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/ConfigApi.java#L76]), where the other multi-word segments are lowercase or hyphenated.
 
 I checked the {{/node/...}} singular paths against {{/cluster/nodes}} and did not flag them; they read as singleton against collection.
 

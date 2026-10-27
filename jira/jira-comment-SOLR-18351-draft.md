@@ -4,10 +4,10 @@ Status: DRAFT (not posted). Shape: staged ask. Addressee: Eric Pugh (reporter). 
 
 ---
 
-The gap raised here on 2026-08-21 has been addressed. {{78862e7f54}} (SOLR-18351: remove ContentStream from SolrJ's client write path, #4811, merged 2026-09-02) adds {{RequestWriter.MultipartContentWriter}} with named parts ({{solr/solrj/src/java/org/apache/solr/client/solrj/request/RequestWriter.java:47}}), and the SolrJ module no longer references {{ContentStream}} outside its own two definition files.
+The gap raised here on 2026-08-21 has been addressed. {{78862e7f54}} (SOLR-18351: remove ContentStream from SolrJ's client write path, #4811, merged 2026-09-02) adds {{RequestWriter.MultipartContentWriter}} with named parts ([RequestWriter.java:47|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solrj/src/java/org/apache/solr/client/solrj/request/RequestWriter.java#L47]), and the SolrJ module no longer references {{ContentStream}} outside its own two definition files.
 
-At apache/solr main {{e59ce3c97d}} the type is still declared {{@Deprecated(since = "10.0")}} ({{ContentStream.java:28}}). The remaining references are:
- * core: 29 main files, 109 references (for example {{EmbeddedSolrServer.java:310}}, which builds the {{List<ContentStream>}} for request parts)
+At apache/solr main {{e59ce3c97d}} the type is still declared {{@Deprecated(since = "10.0")}} ([ContentStream.java:28|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solrj/src/java/org/apache/solr/common/util/ContentStream.java#L28]). The remaining references are:
+ * core: 29 main files, 109 references (for example [EmbeddedSolrServer.java:310|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/client/solrj/embedded/EmbeddedSolrServer.java#L310], which builds the {{List<ContentStream>}} for request parts)
  * {{cross-dc}}: 3 files, 12 references
  * {{extraction}}: 1 file, 2 references
  * {{scripting}}: 1 file, 2 references

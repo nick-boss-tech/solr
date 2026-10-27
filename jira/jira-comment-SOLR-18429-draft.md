@@ -4,9 +4,9 @@ Status: DRAFT (not posted). Shape: staged ask, evidence first. Addressee: Eric P
 
 ---
 
-I checked the replica endpoints at apache/solr main {{e59ce3c97d}}. There is a POST to create a replica ({{CreateReplicaApi.java:32}}) and a DELETE on {{/shards/\{shardName\}/replicas/\{replicaName\}}} ({{DeleteReplicaApi.java:45-46}}), and no GET on a single replica.
+I checked the replica endpoints at apache/solr main {{e59ce3c97d}}. There is a POST to create a replica ([CreateReplicaApi.java:32|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/CreateReplicaApi.java#L32]) and a DELETE on {{/shards/\{shardName\}/replicas/\{replicaName\}}} ([DeleteReplicaApi.java:45-46|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/DeleteReplicaApi.java#L45-L46]), and no GET on a single replica.
 
-The v1 CLUSTERSTATUS action can already return PRS per-replica state on its {{prs}} flag ({{ClusterStatus.java:427}}), which is the piece the ticket proposes to include.
+The v1 CLUSTERSTATUS action can already return PRS per-replica state on its {{prs}} flag ([ClusterStatus.java:427|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/handler/admin/ClusterStatus.java#L427]), which is the piece the ticket proposes to include.
 
 Eric, should the single-replica GET include the PRS entry only when the collection has PRS enabled, as the ticket proposes, or should it always show it?
 

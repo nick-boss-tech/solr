@@ -6,11 +6,11 @@ Status: DRAFT (not posted). Shape: staged ask, evidence first. Addressee: Eric P
 
 I read the TaskManagement code at apache/solr main {{e59ce3c97d}}. The two v1 names are the public API, and the v2 API already uses one name for both operations:
 
- * {{queryUUID}} is the v1 cancel parameter ({{TaskCancellationHandler.java:39}}, {{CommonParams.java:181}}). It is also how a caller sets its own query ID ({{QueryComponent.java:1902}}).
- * {{taskUUID}} is the v1 status parameter ({{ActiveTasksListHandler.java:44}}, {{CommonParams.java:184}}).
- * The v2 API takes the task ID as a path segment for both status and cancel ({{TasksApi.java:44-61}}).
- * The ref guide documents the v1 names ({{task-management.adoc:120}} and {{:217}}).
- * Cross-shard forwarding sends both names ({{ActiveTaskQuerySupport.java:104}} and {{:106}}), so a rename changes that path too.
+ * {{queryUUID}} is the v1 cancel parameter ([TaskCancellationHandler.java:39|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/handler/component/TaskCancellationHandler.java#L39], [CommonParams.java:181|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solrj/src/java/org/apache/solr/common/params/CommonParams.java#L181]). It is also how a caller sets its own query ID ([QueryComponent.java:1902|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/handler/component/QueryComponent.java#L1902]).
+ * {{taskUUID}} is the v1 status parameter ([ActiveTasksListHandler.java:44|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/handler/component/ActiveTasksListHandler.java#L44], [CommonParams.java:184|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solrj/src/java/org/apache/solr/common/params/CommonParams.java#L184]).
+ * The v2 API takes the task ID as a path segment for both status and cancel ([TasksApi.java:44-61|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/TasksApi.java#L44-L61]).
+ * The ref guide documents the v1 names ([task-management.adoc:120|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solr-ref-guide/modules/deployment-guide/pages/task-management.adoc#L120] and [task-management.adoc:217|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/solr-ref-guide/modules/deployment-guide/pages/task-management.adoc#L217]).
+ * Cross-shard forwarding sends both names ([ActiveTaskQuerySupport.java:104|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/handler/component/ActiveTaskQuerySupport.java#L104] and [ActiveTaskQuerySupport.java:106|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/handler/component/ActiveTaskQuerySupport.java#L106]), so a rename changes that path too.
 
 So the v2 side is already consistent. Renaming the v1 parameters would break clients that use them.
 

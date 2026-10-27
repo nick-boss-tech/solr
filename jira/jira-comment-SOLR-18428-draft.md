@@ -4,9 +4,9 @@ Status: DRAFT (not posted). Shape: staged ask, evidence first. Addressee: Eric P
 
 ---
 
-I checked the shard endpoints at apache/solr main {{e59ce3c97d}}. The v2 API has POST {{/collections/\{collectionName\}/shards}} ({{CreateShardApi.java:27}}) and DELETE {{/collections/\{collectionName\}/shards/\{shardName\}}} ({{DeleteShardApi.java:29}}), and no GET on a single shard. A GET is a read path only, so it does not conflict with either.
+I checked the shard endpoints at apache/solr main {{e59ce3c97d}}. The v2 API has POST {{/collections/\{collectionName\}/shards}} ([CreateShardApi.java:27|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/CreateShardApi.java#L27]) and DELETE {{/collections/\{collectionName\}/shards/\{shardName\}}} ([DeleteShardApi.java:29|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/api/src/java/org/apache/solr/client/api/endpoint/DeleteShardApi.java#L29]), and no GET on a single shard. A GET is a read path only, so it does not conflict with either.
 
-The data is already there. The v1 CLUSTERSTATUS action takes a {{shard}} parameter and returns that one shard, or "shard not found" ({{ClusterStatus.java:232-233}} and {{:307-316}}). A v2 GET could wrap that path.
+The data is already there. The v1 CLUSTERSTATUS action takes a {{shard}} parameter and returns that one shard, or "shard not found" ([ClusterStatus.java:232-233|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/handler/admin/ClusterStatus.java#L232-L233] and [ClusterStatus.java:307-316|https://github.com/apache/solr/blob/e59ce3c97ddbe030eafadf0623fdcd80c4529c31/solr/core/src/java/org/apache/solr/handler/admin/ClusterStatus.java#L307-L316]). A v2 GET could wrap that path.
 
 Eric, does the response shape in the ticket (the list-view summary plus the replica list) still stand, given that SOLR-18426 (List Shards) had its PR closed without merge?
 
