@@ -49,3 +49,5 @@ Heartbeat: 2026-10-25T01:04Z (rc3-tlogreplica-rootcause-round-1 unit 1 and rc3-t
 Heartbeat: 2026-10-25T02:06Z (rc3-repro-xml-correction-round-1: TLOG XML overwritten by CoreAdmin runs in scratch worktrees; logs remain the record; CoreAdmin XML archived under smoke-rc3/repro-archive)
 
 Heartbeat: 2026-10-25T16:34Z (rc3-test-failure-causes-round-2: report pushed at 70a2440cc96; SOLR-18587 fixed by matched pairs; TLOG and NRT failures are NFS hard-link (EMLINK) on /workspace; TermsQ fix matched; SOLR-18530 open; waiting for owner on candidate and smoke tmp-dir)
+
+Heartbeat: 2026-10-27T17:29:15Z (pr5112 linux gate: superseding gate at 46bc7e4 green; receipts/PR-5112-target-header-followup.md; gradle-help review claim paused, its heartbeat stale since 07:44Z)
