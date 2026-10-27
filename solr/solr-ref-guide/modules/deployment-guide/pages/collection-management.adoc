@@ -513,7 +513,7 @@ curl 'http://localhost:8983/api/collections'
 [[collectionsdetail]]
 === Detailed Collections Tree (V2 Only)
 
-With `detailed=true`, the V2 API returns the collections, shards, and replicas tree, in `collectionsDetail`, including each collection's configuration name and health, instead of the plain collection name list `LIST` returns by default.
+With `details=true`, the V2 API returns the collections, shards, and replicas tree, in `collectionsDetail`, including each collection's configuration name and health, instead of the plain collection name list `LIST` returns by default.
 
 NOTE: This is a v2-only variant of `LIST`.
 See xref:cluster-node-management.adoc#clusterstatus[CLUSTERSTATUS] for the v1 command that returns similar information (plus live nodes, the alias map, and cluster properties).
@@ -538,12 +538,12 @@ The collection health state is reported as the worst state of any shard, e.g., f
 
 [source,bash]
 ----
-curl 'http://localhost:8983/api/collections?detailed=true'
+curl 'http://localhost:8983/api/collections?details=true'
 ----
 
 ==== Detailed Collections Tree Parameters
 
-`detailed`::
+`details`::
 +
 [%autowidth,frame=none]
 |===
@@ -559,7 +559,7 @@ Return the collections, shards, and replicas tree in `collectionsDetail` instead
 |Optional |Default: none
 |===
 +
-Only used when `detailed=true`.
+Only used when `details=true`.
 The collection or alias name for which information is requested.
 If omitted, information on all collections in the cluster will be returned.
 If an alias is supplied, information on the collections in the alias will be returned.
@@ -571,7 +571,7 @@ If an alias is supplied, information on the collections in the alias will be ret
 |Optional |Default: none
 |===
 +
-Only used when `detailed=true`.
+Only used when `details=true`.
 The shard(s) for which information is requested.
 Multiple shard names can be specified as a comma-separated list.
 
@@ -582,7 +582,7 @@ Multiple shard names can be specified as a comma-separated list.
 |Optional |Default: none
 |===
 +
-Only used when `detailed=true`.
+Only used when `details=true`.
 This can be used if you need the details of the shard where a particular document belongs to and you don't know which shard it falls under.
 
 `prs`::
@@ -592,7 +592,7 @@ This can be used if you need the details of the shard where a particular documen
 |Optional |Default: `false`
 |===
 +
-Only used when `detailed=true`.
+Only used when `details=true`.
 Include per-replica state when the collection uses it.
 
 ==== Detailed Collections Tree Response
@@ -605,7 +605,7 @@ The response will include the status of the request and `collectionsDetail`, a m
 
 [source,text]
 ----
-http://localhost:8983/api/collections?detailed=true
+http://localhost:8983/api/collections?details=true
 ----
 
 *Output*
@@ -669,7 +669,7 @@ Adding `collection` and `shard` narrows the tree to just that shard of that coll
 
 [source,text]
 ----
-http://localhost:8983/api/collections?detailed=true&collection=collection1&shard=shard1
+http://localhost:8983/api/collections?details=true&collection=collection1&shard=shard1
 ----
 
 *Output*

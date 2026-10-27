@@ -113,7 +113,7 @@ Users who deploy a proxy in front of Solr should also review this setup to ensur
 
 === V2 API
 
-In Solr 10.2 `GET /api/collections?detailed=true` returns the collections, shards, and replicas tree under `collectionsDetail`.
+In Solr 10.2 `GET /api/collections?details=true` returns the collections, shards, and replicas tree under `collectionsDetail`.
 It does not include `live_nodes`, the alias map, or cluster properties.
 Use `GET /api/cluster/nodes`, `GET /api/aliases`, and `GET /api/cluster/properties` for those.
 

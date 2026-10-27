@@ -28,7 +28,7 @@ These API commands work with a SolrCloud cluster at the entire cluster level, or
 Fetch the cluster status including collections, shards, replicas, configuration name as well as collection aliases and cluster properties.
 
 NOTE: This is a v1-only command.
-The v2 API splits this information up: see xref:collection-management.adoc#collectionsdetail[Detailed Collections Tree] for the collections, shards, and replicas tree (`detailed=true`), and `GET /api/cluster/nodes`, `GET /api/aliases`, and `GET /api/cluster/properties` for live nodes, the alias map, and cluster properties, respectively.
+The v2 API splits this information up: see xref:collection-management.adoc#collectionsdetail[Detailed Collections Tree] for the collections, shards, and replicas tree (`details=true`), and `GET /api/cluster/nodes`, `GET /api/aliases`, and `GET /api/cluster/properties` for live nodes, the alias map, and cluster properties, respectively.
 The two collection-tree responses overlap in content -- same `health` states, same shard/replica fields -- because they cover the same underlying data; they're documented separately because the parameters and response shape otherwise differ between v1 and v2 here.
 
 Additionally, this command reports a `health` status of each collection and shard, in

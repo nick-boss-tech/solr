@@ -23,14 +23,16 @@ import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import org.apache.solr.client.api.model.SchemaDesignerAddResponse;
-import org.apache.solr.client.api.model.SchemaDesignerConfigsResponse;
 import org.apache.solr.client.api.model.SchemaDesignerFileContentsResponse;
 import org.apache.solr.client.api.model.SchemaDesignerInfoResponse;
 import org.apache.solr.client.api.model.SchemaDesignerResponse;
 import org.apache.solr.client.api.model.SchemaDesignerUpdateResponse;
 import org.apache.solr.client.solrj.request.SchemaDesignerApi;
 import org.apache.solr.cloud.SolrCloudTestCase;
+import org.apache.solr.common.util.Utils;
 import org.apache.solr.util.ExternalPaths;
+import org.eclipse.jetty.client.ContentResponse;
+import org.eclipse.jetty.client.HttpClient;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -165,10 +167,14 @@ public class TestSchemaDesignerSolrJ extends SolrCloudTestCase {
     final String configSet = "solrjListSmoke";
     new SchemaDesignerApi.PrepNewSchema(configSet).process(cluster.getSolrClient());
 
-    SchemaDesignerConfigsResponse resp =
-        new SchemaDesignerApi.ListDesignerConfigs().process(cluster.getSolrClient());
+    HttpClient httpClient = cluster.getJettySolrRunner(0).getSolrClient().getHttpClient();
+    ContentResponse rsp =
+        httpClient.GET(
+            cluster.getJettySolrRunner(0).getBaseURLV2() + "/schema-designer/configsets");
+    assertEquals(200, rsp.getStatus());
+    Map<?, ?> body = (Map<?, ?>) Utils.fromJSONString(rsp.getContentAsString());
     assertTrue(
         "prepared configSet should be listed at /schema-designer/configsets",
-        resp.configSets.containsKey(configSet));
+        ((Map<?, ?>) body.get("configSets")).containsKey(configSet));
   }
 }
