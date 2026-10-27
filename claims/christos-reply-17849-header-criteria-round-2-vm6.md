@@ -1,7 +1,7 @@
 # Claim: christos-reply-17849-header-criteria-round-2
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE; mark DONE with the deliverable paths when the work lands.
+- Status: DONE (2026-10-27T21:16:00Z); deliverables below.
 - Job or assignment: follow-on to `assignments/christos-reply-17849-header-scope-round-1.md` (DONE at `5d90d83d5b`), on the same branch `solr-17849-header-submit`.
 - Slice: the header part of the data layer and state holder, so the header meets the ticket's acceptance criteria 1, 3 and 5. Request execution (`execute`, response, executing) stays out. New head, new gate.
 - Capability tags used: ui, jvm-tests, gate, implementation.
@@ -22,3 +22,7 @@
 Heartbeat: 2026-10-27T21:11:21Z
 
 Head: `14ff7078657e6907212dbaa2bdabeee59e3678c8` on `nick-boss-tech/solr:solr-17849-header-submit` (fast-forward from round 1 `5d90d83d5b`; remote SHA verified). Gate input recorded before the run: spotless, then `IndexQueryHeaderTest` and `IndexQueryStateHolderTest` on the software renderer.
+
+Result: 2026-10-27T21:14:46Z: job `header-17849-14ff707865-211244`, spotless rc=0, jvmTest rc=0; `IndexQueryHeaderTest` 5 of 5 and `IndexQueryStateHolderTest` 3 of 3 pass, 0 failures, 0 errors, conclusive for the software-rendered JVM tests at this head. Report `reports/christos-reply-17849-header-criteria-round-2.md`.
+
+DONE: 2026-10-27T21:16:00Z. Deliverables: `reports/christos-reply-17849-header-criteria-round-2.md`, `drafts/pr-solr-17849-header.md` (rewritten for head `14ff707865`), branch `nick-boss-tech/solr:solr-17849-header-submit` at `14ff707865`.
