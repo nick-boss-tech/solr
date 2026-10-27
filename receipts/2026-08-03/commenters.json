@@ -1,0 +1,38 @@
+[
+  {
+    "username": "markrmiller@gmail.com",
+    "displayName": "Mark Miller",
+    "comments": 7,
+    "issues": 2
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 6,
+    "issues": 4
+  },
+  {
+    "username": "hgadre",
+    "displayName": "Hrishikesh Gadre",
+    "comments": 5,
+    "issues": 1
+  },
+  {
+    "username": "cpoerschke",
+    "displayName": "Christine Poerschke",
+    "comments": 2,
+    "issues": 1
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 2,
+    "issues": 2
+  },
+  {
+    "username": "serhiybzhezytskyy",
+    "displayName": "Serhiy Bzhezytskyy",
+    "comments": 2,
+    "issues": 1
+  }
+]
