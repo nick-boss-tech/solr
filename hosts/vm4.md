@@ -57,3 +57,4 @@ Disk record:
 - 2026-10-27T07:22:14Z: EOL ping batch 6 claim closed with no work (set exhausted by batch 5). EOL assignment marked DONE, held items listed for the owner. No live claim; INTAKE open.
 - 2026-10-27T08:31:31Z: settling run done (both trees seed-clean, report written). Claim and assignment DONE. No live claim; INTAKE open.
 - 2026-10-27T11:33:46Z: SOLR-16139 implementation pushed (branch solr-16139-submit at 3feb4c7) and gate requested (gates/SOLR-16139.md at 7490a09421). Claim DONE. Lock free; Solr not running.
+- 2026-10-27T12:33:31Z: SOLR-7351 premise differs (exception on date fields, not empty list); NEEDS-OWNER question recorded in claim and report. Solr killed. Lock free.
