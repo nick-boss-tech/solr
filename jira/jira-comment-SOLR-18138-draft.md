@@ -1,6 +1,6 @@
 # Jira comment draft: SOLR-18138
 
-Status: DRAFT (not posted), redrafted 2026-10-27 to follow comment-formula.md (evidence first, one question, possible states, recommendation, footer). Addressee: [~epugh] (reporter). Prepared by vm6 from `reports/solr-18138-cli-zk-unreachable-round-1.md` (pinned main `e59ce3c97d`). Posting needs Nick Shanin's explicit go.
+Status: POSTED 2026-10-27 05:39 as Jira comment 18132712. Redrafted 2026-10-27 to follow comment-formula.md (evidence first, one question, possible states, recommendation, footer). Addressee: [~epugh] (reporter). Prepared by vm6 from `reports/solr-18138-cli-zk-unreachable-round-1.md` (pinned main `e59ce3c97d`). Posting needs Nick Shanin's explicit go.
 
 ---
 
