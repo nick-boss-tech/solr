@@ -31,6 +31,8 @@ Keep `git diff --check` in the worktree, which has the full history. A shallow c
 
 Record the layout failure in the receipt and keep its log. It is not proof for the check leg.
 
+`pool/bin/sweep-run.sh` now refuses a `check`, `:check`, `solr-ref-guide` or Antora task when the worktree's `.git` is a file. It exits 5 and writes the refusal to the run log, so no Gradle time is spent on it.
+
 ## 2. `NODE_ENV=production` skips devDependencies
 
 Symptom: the Antora or js-client npm steps fail to find devDependencies. The vm4 shell sets `NODE_ENV=production`.

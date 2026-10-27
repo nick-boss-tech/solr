@@ -1,6 +1,7 @@
 #!/bin/bash
 # usage: sweep-run.sh <worktree> <log dir> <run name> <gradle args...>
 # Runs one Gradle build under this host's lock. Host id, JAVA_HOME and GRADLE_USER_HOME are read from /workspace/AGENTS.md.
+# Exit 5: refused, a check or site task was requested in a git worktree (run it in a standalone clone; see pool/guides/gradle-gate-gotchas.md).
 set -u
 W=$1; L=$2; name=$3; shift 3
 BIN=$(cd -- "$(dirname -- "$0")" && pwd)
@@ -19,6 +20,16 @@ if ! flock -n 9; then
 fi
 { echo "pre $(date -u +%FT%TZ) | $(df -h / | tail -1 | awk '{print $4" free"}') | $(df -i / | tail -1 | awk '{print $4" ifree"}')"; } > "$L/$name.headroom.log"
 cd "$W" || exit 1
+if [ -f "$W/.git" ]; then
+  for a in "$@"; do
+    case $a in
+      check|*:check|*solr-ref-guide*|*ntora*)
+        msg="refused: $name runs check or site tasks in a git worktree, and Antora rejects a worktree's .git file. Run them in a standalone clone of the same SHA. See pool/guides/gradle-gate-gotchas.md item 1."
+        echo "$msg" > "$L/$name.log"; echo "$msg" >&2
+        exit 5 ;;
+    esac
+  done
+fi
 if ! python3 "$BIN/inode-guard.py" / "$PWD" "$GRADLE_USER_HOME" > "$L/$name.log" 2>&1; then
   cat "$L/$name.log" >&2
   cat "$L/$name.log" >> "$L/$name.headroom.log"
