@@ -28,3 +28,6 @@ Probe (before any edit, on main ee2f1bf2e0, packaged Solr 11.0.0-SNAPSHOT):
 - Planned narrow fix (rung 2, from the same index structure): for a SortableTextField with docValues, the bucket domain uses `SortedDocValuesField.newSlowSetQuery(field, bucketValue)`, the exact full-value doc-values form that `SortableTextField.createFields` already writes. Used only in makeBucketQuery; the term parser is unchanged. Tests: a SolrTestCase reproduction with the nested avg over a multi-token SortableTextField, plus the string-field control.
 - Solr 8986 killed (pid 75830); port closed. Clone `/workspace/worktrees/s16139-clone` stays until implementation is done.
 Heartbeat: 2026-10-27T10:35:04Z
+
+Fail-before (run `q16139-failbefore-20261027T105238Z`, branch `solr-16139-submit` at main `ee2f1bf2e0`, new test only, seed 16139C0DE, `-Ptests.workDir=/tmp/q16139-tests`, env -u NODE_ENV): BUILD FAILED rc 1 in 3m 42s. XML `logs/vm4/critical-impl-16139/q16139-failbefore-20261027T105238Z.xml/TEST-org.apache.solr.search.facet.SortableTextNestedStatsCloudTest.xml`: 1 test, 1 failure, 0 errors. Failure: `AssertionError: avg grp_sortable Alpha grp expected:<15.0> but was:<0.0>` at the grp_sortable call (test line 76, assertion at line 97). The string-field control (line 75) passed. Matches the premise.
+Heartbeat: 2026-10-27T11:09:34Z
