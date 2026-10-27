@@ -263,7 +263,8 @@ public class SSLToolTest extends SolrTestCase {
       String originalFresh = Files.readString(fresh.resolve("solr.in.sh"));
       expectThrows(
           IllegalArgumentException.class,
-          () -> new SSLTool().configure(params(fresh, "PKCS12", server.getZkAddress() + "/missing")));
+          () ->
+              new SSLTool().configure(params(fresh, "PKCS12", server.getZkAddress() + "/missing")));
       assertFalse(Files.exists(fresh.resolve("store")));
       assertFalse(Files.exists(fresh.resolve("store.truststore")));
       assertEquals(originalFresh, Files.readString(fresh.resolve("solr.in.sh")));

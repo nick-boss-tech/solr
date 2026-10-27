@@ -168,7 +168,8 @@ public class AuthToolTest extends SolrCloudTestCase {
         assertEquals(
             security,
             new String(
-                cluster.getZkClient().getData("/security.json", null, null), StandardCharsets.UTF_8));
+                cluster.getZkClient().getData("/security.json", null, null),
+                StandardCharsets.UTF_8));
         assertEquals("# original\n", Files.readString(include));
         assertFalse(Files.exists(dir.resolve("basicAuth.conf")));
       }

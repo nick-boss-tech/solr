@@ -143,7 +143,8 @@ final class IncludeFileEditor {
             && (!Files.isRegularFile(target)
                 || !Files.isReadable(target)
                 || !Files.isWritable(target)))) {
-      throw new IOException("Configuration file and its parent directory must be writable: " + path);
+      throw new IOException(
+          "Configuration file and its parent directory must be writable: " + path);
     }
     Path probe = Files.createTempFile(target.getParent(), ".solr-config-", ".tmp");
     try {
