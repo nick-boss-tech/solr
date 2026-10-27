@@ -1,0 +1,22 @@
+[
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-7090",
+    "comment_id": "18114693",
+    "created": "2026-09-13T01:14:56.374+0000",
+    "updated": "2026-09-13T01:14:56.374+0000",
+    "excerpt": "Closing as a duplicate of SOLR-7776 done years ago.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-7090?focusedCommentId=18114693"
+  },
+  {
+    "person": "David Smiley",
+    "username": "dsmiley",
+    "issue": "SOLR-18331",
+    "comment_id": "18114705",
+    "created": "2026-09-13T02:40:20.702+0000",
+    "updated": "2026-09-13T02:40:20.702+0000",
+    "excerpt": "Or we write _something_ to ZK (not state.json!) for each shard leader's commit flush. Followers can \"watch\". No need for an HTTP message. That _something_ could be interesting info like number of docs, number of segments, number of bytes, Lucene index generation, commit metadata. This info would in turn be useful for diagnostic purposes without having to consult (query) replicas.",
+    "url": "https://issues.apache.org/jira/browse/SOLR-18331?focusedCommentId=18114705"
+  }
+]
