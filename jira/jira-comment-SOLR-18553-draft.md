@@ -18,6 +18,6 @@ I checked the {{/node/...}} singular paths against {{/cluster/nodes}} and did no
 
 Eric, the PR 5064 review thread prefers {{details}} to {{detailed}}. Does this list meet the bar you had in mind for the ticket?
 
-Possible states for the ticket: close it once the two renames (F1 and F3) land; close it once all four items land; or keep it open for a wider v2 naming decision. The recommendation is the second: F2 and F4 are mechanical, and F1 and F3 rename public endpoints, so those wait for the ticket reporter...
+Possible states for the ticket: close it once the two renames (F1 and F3) land; close it once all four items land; or keep it open for a wider v2 naming decision. The recommendation is the second: F2 and F4 are mechanical, and F1 and F3 rename public endpoints, so those wait for the ticket reporter.
 
 🤖 _AI text above_ 🤖 _(reviewed by Nick Shanin)_
