@@ -1,7 +1,8 @@
 # Assignment: SOLR-17914 PR preparation after Christos's reply
 
 Status: OPEN
-Tags: ui, implementation, records
+Tags: implementation, records
+Tag note: the `ui` tag was removed at Nick Shanin's direction on 2026-10-27 so any capable pool host can claim this; only vm6 held `ui`, which left the other pool hosts unable to take Christos's assignments. The ui build facts are in `UI-PLAYBOOK.md`.
 Posted at Nick Shanin's direction on 2026-10-27: every reply from Christos Malliaridis gets its own assignment. This is the assignment for his SOLR-17914 reply.
 
 ## Source
