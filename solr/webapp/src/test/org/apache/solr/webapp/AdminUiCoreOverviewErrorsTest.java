@@ -24,6 +24,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Properties;
 import org.apache.solr.embedded.JettyConfig;
@@ -166,7 +167,9 @@ public class AdminUiCoreOverviewErrorsTest extends AdminUiStandaloneTestBase {
       if (status == HttpServletResponse.SC_UNAUTHORIZED) {
         httpResponse.setHeader("WWW-Authenticate", "xBasic realm=\"overview-replication\"");
       }
-      httpResponse.getWriter().write("{\"error\":{\"msg\":\"" + ERROR_MESSAGE + "\"}}");
+      httpResponse
+          .getOutputStream()
+          .write(("{\"error\":{\"msg\":\"" + ERROR_MESSAGE + "\"}}").getBytes(StandardCharsets.UTF_8));
       lastFailureStatus = status;
     }
   }
