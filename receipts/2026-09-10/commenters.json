@@ -1,0 +1,56 @@
+[
+  {
+    "username": "ab",
+    "displayName": "Andrzej Bialecki",
+    "comments": 25,
+    "issues": 5
+  },
+  {
+    "username": "dsmiley",
+    "displayName": "David Smiley",
+    "comments": 11,
+    "issues": 6
+  },
+  {
+    "username": "hossman",
+    "displayName": "Chris M. Hostetter",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "janhoy",
+    "displayName": "Jan Høydahl",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "noble.paul",
+    "displayName": "Noble Paul",
+    "comments": 3,
+    "issues": 1
+  },
+  {
+    "username": "ctargett",
+    "displayName": "Cassandra Targett",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "ichattopadhyaya",
+    "displayName": "Ishan Chattopadhyaya",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "shalin",
+    "displayName": "Shalin Shekhar Mangar",
+    "comments": 1,
+    "issues": 1
+  },
+  {
+    "username": "tflobbe",
+    "displayName": "Tomas Eduardo Fernandez Lobbe",
+    "comments": 1,
+    "issues": 1
+  }
+]
