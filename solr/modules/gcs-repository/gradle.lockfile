@@ -229,4 +229,7 @@ org.slf4j:slf4j-api:2.0.20=compileClasspath,jarValidation,runtimeClasspath,runti
 org.threeten:threeten-extra:1.8.0=jarValidation,runtimeClasspath,runtimeLibs,testRuntimeClasspath
 org.threeten:threetenbp:1.7.4=compileClasspath,jarValidation,runtimeClasspath,runtimeLibs,testCompileClasspath,testRuntimeClasspath
 org.xerial.snappy:snappy-java:1.1.10.8=jarValidation,runtimeClasspath,runtimeLibs,solrPlatformLibs,testRuntimeClasspath
+tools.jackson.core:jackson-core:3.2.1=jarValidation,runtimeClasspath,runtimeLibs,solrPlatformLibs,testRuntimeClasspath
+tools.jackson.core:jackson-databind:3.2.1=jarValidation,runtimeClasspath,runtimeLibs,solrPlatformLibs,testRuntimeClasspath
+tools.jackson:jackson-bom:3.2.1=jarValidation,runtimeClasspath,runtimeLibs,solrPlatformLibs,testRuntimeClasspath
 empty=missingdoclet,packaging

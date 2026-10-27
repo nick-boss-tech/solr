@@ -181,4 +181,7 @@ org.semver4j:semver4j:6.0.0=cliClasspath,testRuntimeClasspath
 org.slf4j:jcl-over-slf4j:2.0.20=cliClasspath,testRuntimeClasspath
 org.slf4j:slf4j-api:2.0.20=cliClasspath,testCompileClasspath,testRuntimeClasspath
 org.xerial.snappy:snappy-java:1.1.10.8=cliClasspath,testRuntimeClasspath
+tools.jackson.core:jackson-core:3.2.1=cliClasspath,testRuntimeClasspath
+tools.jackson.core:jackson-databind:3.2.1=cliClasspath,testRuntimeClasspath
+tools.jackson:jackson-bom:3.2.1=cliClasspath,testRuntimeClasspath
 empty=compileClasspath,jarValidation,localPlaybook,missingdoclet,officialPlaybook,refGuide,runtimeClasspath

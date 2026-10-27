@@ -177,4 +177,7 @@ org.slf4j:jcl-over-slf4j:2.0.20=jarValidation,testRuntimeClasspath
 org.slf4j:slf4j-api:2.0.20=jarValidation,runtimeClasspath,swaggerBuild,testCompileClasspath,testRuntimeClasspath
 org.xerial.snappy:snappy-java:1.1.10.8=jarValidation,testRuntimeClasspath
 org.yaml:snakeyaml:2.6=swaggerBuild
+tools.jackson.core:jackson-core:3.2.1=jarValidation,testRuntimeClasspath
+tools.jackson.core:jackson-databind:3.2.1=jarValidation,testRuntimeClasspath
+tools.jackson:jackson-bom:3.2.1=jarValidation,testRuntimeClasspath
 empty=missingdoclet,openApiGeneratorExtra,swaggerDeps
