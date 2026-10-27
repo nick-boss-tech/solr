@@ -1,0 +1,12 @@
+[
+  {
+    "person": "Jan Høydahl",
+    "username": "janhoy",
+    "issue": "SOLR-15929",
+    "comment_id": "18106797",
+    "created": "2026-08-21T22:11:03.131+0000",
+    "updated": "2026-08-21T22:11:03.131+0000",
+    "excerpt": "Hi all. I intend to tackle this with heavy AI assistance h2. Phase 1: Design document in Confluence Check out [this confluence doc|https://cwiki.apache.org/confluence/spaces/SOLR/pages/449282855/SOLR-15929+ASF+compliant+NOTICE+and+LICENSE+files+in+dist] which lays out the proposed approach for cleaning up our LICENSE/NOTICE mess and getting compliant with policy. AI is good at structuring what we have, Claude has al…",
+    "url": "https://issues.apache.org/jira/browse/SOLR-15929?focusedCommentId=18106797"
+  }
+]
