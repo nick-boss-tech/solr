@@ -55,3 +55,5 @@ Heartbeat: 2026-10-27T17:29:15Z (pr5112 linux gate: superseding gate at 46bc7e4 
 Heartbeat: 2026-10-27T18:54:09Z (SOLR-18564 timeout-type gate at 6ca1cba8061b GREEN: receipts/SOLR-18564-timeout-type-round-1.md)
 
 Heartbeat: 2026-10-27T20:48:13Z (SOLR-17887 PR prep: draft and report pushed; PR ready to open, awaiting owner)
+
+Heartbeat: 2026-10-27T21:27:22Z (SOLR-17887 internal selection pushed at 03d5efbf; receipts/SOLR-17887-vm5-selection.md; round-2 PR draft drafts/pr-solr-17887-file-tree-round-2.md)
