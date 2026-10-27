@@ -54,3 +54,7 @@ Not checked in this unit: whether any of these names are documented in the Ref G
 `git grep -n '@QueryParam("detailed")' e59ce3c97d -- solr/api/src/java/org/apache/solr/client/api/endpoint`
 `git grep -n '@Path("/configs")' e59ce3c97d -- solr/api/src/java/org/apache/solr/client/api/endpoint`
 `git grep -n '@Path("/purgeUnused")\|@Path("/requestHandlers")' e59ce3c97d -- solr/api/src/java/org/apache/solr/client/api/endpoint`
+
+## Correction, 2026-10-27
+
+The GitHub PR search for SOLR-18553 returned 0 hits at the time of the audit. No open PR covers this ticket.

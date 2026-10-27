@@ -49,3 +49,7 @@ Jira's comment match returned this ticket because jaykay12 wrote `[~epugh]` in t
 ## Not drafted or excluded
 
 - SOLR-18500: existing draft, excluded by the stream rule.
+
+## Correction, 2026-10-27
+
+The SOLR-18351 section above missed open PRs. apache/solr PR #5234, "SOLR-18351: Move ContentStream to solr-core", is open and unmerged (updated 2026-10-26). PR #5235 is the 10.x backport and is in vm2's gate track. The draft's ask may already be answered by #5234; check it before posting.

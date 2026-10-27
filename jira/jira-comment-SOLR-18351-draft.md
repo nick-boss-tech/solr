@@ -18,3 +18,5 @@ Eric, the ticket says "Remove". Is this remaining list what you expected for it,
 Possible states: close the ticket once the core handlers and the modules move, or keep it open and split the core handlers into their own sub-task first. The recommendation is the second: the core handlers are the bulk of the 109 references, and a sub-task lets each handler change land on its own.
 
 🤖 _AI text above_ 🤖 _(reviewed by Nick Shanin)_
+
+Correction for Nick before posting: apache/solr PR #5234 ("SOLR-18351: Move ContentStream to solr-core") is open, and PR #5235 is the 10.x backport. This draft does not mention either.

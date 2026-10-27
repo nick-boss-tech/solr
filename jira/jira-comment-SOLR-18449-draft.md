@@ -15,3 +15,5 @@ The example in the ticket, {{test.solr.cloud.replica.autorecovery.skip.enabled}}
 Eric, the ticket asks for the {{test.}} prefix. Which prefix should the test-only names standardize on: {{test.}} for all 30, or keep {{solr.tests.}} and rename the rest to match?
 
 🤖 _AI text above_ 🤖 _(reviewed by Nick Shanin)_
+
+Correction for Nick before posting: apache/solr PR #4913, "SOLR-18449 standard test properties naming", is open. This draft does not account for it, so check that PR's prefix choice before posting.

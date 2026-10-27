@@ -58,3 +58,7 @@ Not checked in this unit: whether any `solr.test.*` name is read from an XML con
 `git grep -n -E '(System\.getProperty|System\.setProperty|System\.clearProperty|systemSetPropertyS?|systemClearProperty|getProperty|setProperty)\(\s*"[^"]+"' e59ce3c97d -- 'solr/*/src/test/*.java' 'solr/test-framework/*.java'`
 `git grep -n 'solrcloud.skip.autorecovery' e59ce3c97d -- solr`
 `git grep -n -E 'solr\.tests?\.|test\.solr' e59ce3c97d -- solr/solr-ref-guide`
+
+## Correction, 2026-10-27
+
+This report said no open PR was found for SOLR-18449. That was wrong: the search was not run for this key. apache/solr PR #4913, "SOLR-18449 standard test properties naming", is open and unmerged (last updated 2026-10-09). This audit did not read its diff. Before any rename is proposed, the PR's prefix choice should be compared with the census above.
