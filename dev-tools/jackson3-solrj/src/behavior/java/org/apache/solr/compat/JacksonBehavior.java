@@ -45,7 +45,8 @@ public class JacksonBehavior {
     require(!json.contains("secret") && !json.contains("must-not-appear"), "shared @JsonIgnore");
     require(writer.getContentType().startsWith("application/json"), "writer content type");
 
-    var parser = new JacksonDataBindResponseParser<>(Payload.class);
+    JacksonDataBindResponseParser<Payload> parser =
+        new JacksonDataBindResponseParser<>(Payload.class);
     for (String encoding : new String[] {null, "UTF-8"}) {
       var input = new TrackedInput(output.toByteArray());
       var parsed = (Payload) parser.processResponse(input, encoding).get("response");
@@ -57,16 +58,23 @@ public class JacksonBehavior {
     var malformed = new TrackedInput("{bad json".getBytes(StandardCharsets.UTF_8));
     expectIOException(() -> parser.processResponse(malformed, "UTF-8"), "malformed JSON");
     require(malformed.closed, "parser closes supplied input after malformed JSON");
-    expectIOException(() -> parser.processResponse(bytes("{\"unknown\":1}"), null), "unknown property");
-    expectIOException(() -> new JacksonContentWriter(new Object()).write(new ByteArrayOutputStream()),
+    expectIOException(
+        () -> parser.processResponse(bytes("{\"unknown\":1}"), null), "unknown property");
+    expectIOException(
+        () -> new JacksonContentWriter(new Object()).write(new ByteArrayOutputStream()),
         "empty bean");
-    expectIOException(() -> writer.write(new OutputStream() {
-      @Override
-      public void write(int value) throws IOException {
-        throw new IOException("deliberate consumer output failure");
-      }
-    }), "output I/O failure");
-    System.out.println("PASS shared annotations, typed JSON, dates, Unicode, and IOException boundaries");
+    expectIOException(
+        () ->
+            writer.write(
+                new OutputStream() {
+                  @Override
+                  public void write(int value) throws IOException {
+                    throw new IOException("deliberate consumer output failure");
+                  }
+                }),
+        "output I/O failure");
+    System.out.println(
+        "PASS shared annotations, typed JSON, dates, Unicode, and IOException boundaries");
     System.out.println(
         "STREAM_OWNERSHIP outputClosed=true inputClosed=true readerInputClosed=true"
             + " malformedInputClosed=true");
@@ -125,7 +133,6 @@ public class JacksonBehavior {
 
     public Date created;
 
-    @JsonIgnore
-    public String secret;
+    @JsonIgnore public String secret;
   }
 }
