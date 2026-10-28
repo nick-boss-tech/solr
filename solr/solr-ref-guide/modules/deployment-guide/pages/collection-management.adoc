@@ -1014,6 +1014,8 @@ It is the responsibility of the user to switch to the target collection for read
 MIGRATE is not transactional. A failed request can leave partial data in the target collection.
 When cleanup succeeds, Solr restores the previous forwarding rule and applies buffered updates to preserve writes forwarded by earlier migrations.
 If routing cleanup fails or routing-rule installation cannot be confirmed, the target can remain buffering and require operator intervention before retrying.
+An assertion failure after confirmed rule installation is cleaned up and reported as a failed request.
+Fatal JVM errors are not recovered by this cleanup.
 
 [tabs#migratecollection-request]
 ======

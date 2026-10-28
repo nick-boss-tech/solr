@@ -512,7 +512,7 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
       throw e;
-    } catch (Exception e) {
+    } catch (Exception | AssertionError e) {
       if (routingRuleAdded) {
         cleanupFailedMigrate(
             adminCmdContext,
@@ -528,6 +528,11 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
             new SolrException(
                 SolrException.ErrorCode.SERVER_ERROR,
                 "Routing-rule installation was not confirmed; target remains buffering"));
+      }
+      if (e instanceof AssertionError) {
+        // Overseer resets tasks that escape with Error; report this as a failed command instead.
+        throw new SolrException(
+            SolrException.ErrorCode.SERVER_ERROR, "MIGRATE assertion failed: " + e.getMessage(), e);
       }
       throw e;
     }
@@ -564,7 +569,8 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
   /**
    * Restores the previous routing rule before replaying the core-wide buffer. The buffer may
    * contain updates from earlier migrations, so it cannot be discarded. A failed migration can
-   * leave partial data on the target. Cleanup errors are suppressed on the original failure.
+   * leave partial data on the target. Cleanup exceptions and assertion failures are suppressed on
+   * the original failure; fatal errors propagate.
    */
   void cleanupFailedMigrate(
       AdminCmdContext adminCmdContext,
@@ -574,7 +580,7 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
       RoutingRule previousRule,
       RoutingRule installedRule,
       Replica targetLeader,
-      Exception failure) {
+      Throwable failure) {
     try {
       Map<String, Object> props = new HashMap<>();
       props.put(Overseer.QUEUE_OPERATION, OverseerAction.REMOVEROUTINGRULE.toLower());
@@ -609,7 +615,7 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
                 return previousRule != null
                     && previousRule.getProperties().equals(rule.getProperties());
               });
-    } catch (Exception e) {
+    } catch (Exception | AssertionError e) {
       addCleanupFailure(failure, e);
       return;
     }
@@ -634,12 +640,12 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
           shardHandler,
           true,
           "MIGRATE cleanup failed to apply buffered updates");
-    } catch (Exception e) {
+    } catch (Exception | AssertionError e) {
       addCleanupFailure(failure, e);
     }
   }
 
-  private static void addCleanupFailure(Exception failure, Exception cleanupFailure) {
+  private static void addCleanupFailure(Throwable failure, Throwable cleanupFailure) {
     if (cleanupFailure instanceof InterruptedException) {
       Thread.currentThread().interrupt();
     }

@@ -77,6 +77,23 @@ public class MigrateCmdCleanupTest extends SolrTestCase {
   }
 
   @Test
+  public void testRemovalAssertionKeepsTargetBuffering() throws Exception {
+    AssertionError failure = new AssertionError("routing cleanup assertion");
+    doThrow(failure).when(context).offerStateUpdate(any(MapWriter.class));
+    assertCleanupStops(failure);
+  }
+
+  @Test
+  public void testReplayAssertionIsSuppressed() {
+    AssertionError cleanupFailure = new AssertionError("replay request assertion");
+    doThrow(cleanupFailure).when(context).newShardHandler();
+    Throwable original = new AssertionError("original migration assertion");
+    cleanup(original);
+    assertArrayEquals(new Throwable[] {cleanupFailure}, original.getSuppressed());
+    verify(context).newShardHandler();
+  }
+
+  @Test
   public void testInterruptedRemovalKeepsTargetBuffering() throws Exception {
     InterruptedException failure = new InterruptedException("cleanup interrupted");
     doThrow(failure).when(context).offerStateUpdate(any(MapWriter.class));
@@ -88,8 +105,14 @@ public class MigrateCmdCleanupTest extends SolrTestCase {
     }
   }
 
-  private void assertCleanupStops(Exception cleanupFailure) {
+  private void assertCleanupStops(Throwable cleanupFailure) {
     Exception original = new Exception("original migration failure");
+    cleanup(original);
+    verify(context, never()).newShardHandler();
+    assertArrayEquals(new Throwable[] {cleanupFailure}, original.getSuppressed());
+  }
+
+  private void cleanup(Throwable original) {
     RoutingRule installed =
         new RoutingRule(
             Map.of("routeRanges", "0-ffff", "targetCollection", "target", "expireAt", "1000"));
@@ -103,8 +126,6 @@ public class MigrateCmdCleanupTest extends SolrTestCase {
             installed,
             mock(Replica.class),
             original);
-    assertArrayEquals(new Throwable[] {cleanupFailure}, original.getSuppressed());
-    verify(context, never()).newShardHandler();
   }
 
   private static Predicate<DocCollection> anyStatePredicate() {

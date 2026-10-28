@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.SolrClient;
@@ -38,9 +39,11 @@ import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.cloud.RoutingRule;
 import org.apache.solr.common.cloud.Slice;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.TimeSource;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.update.UpdateLog;
+import org.apache.solr.util.SolrMetricTestUtils;
 import org.apache.solr.util.TestInjection;
 import org.apache.solr.util.TimeOut;
 import org.apache.zookeeper.KeeperException;
@@ -249,6 +252,8 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
         .process(cluster.getSolrClient());
 
     AtomicBoolean writesAcknowledged = new AtomicBoolean();
+    AtomicLong updatedVersion = new AtomicLong();
+    AtomicLong failedKeyVersion = new AtomicLong();
     TestInjection.migrateAfterRoutingRule =
         () -> {
           try {
@@ -262,20 +267,27 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
             cluster.getSolrClient().add(source, document("id", "a!updated", "n_ti", 2));
             cluster.getSolrClient().deleteById(source, "a!deleted");
             cluster.getSolrClient().add(source, document("id", "b!1", "n_ti", 3));
+            updatedVersion.set(documentVersion(source, "a!updated"));
+            failedKeyVersion.set(documentVersion(source, "b!1"));
             Replica leader = getCollectionState(target).getLeader("shard1");
             try (SolrCore core =
-                    cluster
-                        .getReplicaJetty(leader)
-                        .getCoreContainer()
-                        .getCore(leader.getCoreName());
-                UpdateLog.RecentUpdates updates =
-                    core.getUpdateHandler().getUpdateLog().getRecentUpdates()) {
+                cluster
+                    .getReplicaJetty(leader)
+                    .getCoreContainer()
+                    .getCore(leader.getCoreName())) {
               assertEquals(
                   UpdateLog.State.BUFFERING, core.getUpdateHandler().getUpdateLog().getState());
+              var labels =
+                  SolrMetricTestUtils.newCloudLabelsBuilder(core).label("category", "TLOG").build();
+              var bufferedOps =
+                  SolrMetricTestUtils.getGaugeDatapoint(
+                      core, "solr_core_update_log_buffered_ops", labels);
+              assertNotNull("The buffer operation-count metric must be available", bufferedOps);
               assertEquals(
                   "All acknowledged writes must be in the target buffer",
-                  3,
-                  updates.getBufferUpdates().size());
+                  3.0,
+                  bufferedOps.getValue(),
+                  0.0);
             }
             writesAcknowledged.set(true);
           } catch (Exception e) {
@@ -322,6 +334,61 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
             .query(target, new SolrQuery("id:\"b!1\" AND n_ti:3"))
             .getResults()
             .getNumFound());
+    assertEquals(updatedVersion.get(), documentVersion(target, "a!updated"));
+    assertEquals(failedKeyVersion.get(), documentVersion(target, "b!1"));
+  }
+
+  @Test
+  public void testRetryAfterMigrateAssertionFailure() throws Exception {
+    String source = "assertionFailure-source";
+    String target = "assertionFailure-target";
+    CollectionAdminRequest.createCollection(source, "conf", 1, 1).process(cluster.getSolrClient());
+    CollectionAdminRequest.createCollection(target, "conf", 1, 1).process(cluster.getSolrClient());
+    cluster.getSolrClient().add(source, new SolrInputDocument("id", "a!1"));
+    cluster.getSolrClient().commit(source);
+    AtomicInteger attempts = new AtomicInteger();
+    TestInjection.migrateAfterRoutingRule =
+        () -> {
+          if (attempts.incrementAndGet() == 1) {
+            throw new AssertionError("injected MIGRATE assertion failure");
+          }
+        };
+    try {
+      RemoteSolrException failure =
+          expectThrows(
+              RemoteSolrException.class,
+              () ->
+                  CollectionAdminRequest.migrateData(source, target, "a!")
+                      .process(cluster.getSolrClient()));
+      assertTrue(
+          failure.getMessage(), failure.getMessage().contains("injected MIGRATE assertion failure"));
+    } finally {
+      TestInjection.migrateAfterRoutingRule = null;
+    }
+    assertEquals("The assertion must fail the command rather than retry it", 1, attempts.get());
+    assertFailedMigrateUndone(source, target);
+    CollectionAdminRequest.migrateData(source, target, "a!").process(cluster.getSolrClient());
+    cluster.getSolrClient().commit(target);
+    assertEquals(
+        1,
+        cluster
+            .getSolrClient()
+            .query(target, new SolrQuery("*:*"))
+            .getResults()
+            .getNumFound());
+  }
+
+  private long documentVersion(String collection, String id) throws Exception {
+    var doc =
+        cluster
+            .getSolrClient()
+            .getById(collection, id, new ModifiableSolrParams().set("fl", "id,_version_"));
+    assertNotNull(doc);
+    Object version = doc.getFieldValue("_version_");
+    assertTrue("Replayed documents must retain their source version", version instanceof Number);
+    long result = ((Number) version).longValue();
+    assertTrue("A document version must be positive", result > 0);
+    return result;
   }
 
   @Test
