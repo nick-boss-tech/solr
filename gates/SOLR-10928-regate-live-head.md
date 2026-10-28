@@ -1,6 +1,8 @@
 # Gate job: SOLR-10928 live head re-gate (elevate.q)
 
-Status: OPEN
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice, phone agent): executed by vm6 on 2026-10-25 at the pinned head `f2001e640a46`; all legs rc 0 and the focused classes passed in both runs. Recorded in `receipts/SOLR-10928.md`, section 'Live-head gate, 2026-10-25'.
 Tags: gate
 
 - Branch: `solr-10928-submit` on the fork (nick-boss-tech/solr).
