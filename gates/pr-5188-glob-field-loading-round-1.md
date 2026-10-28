@@ -1,6 +1,8 @@
 # Gate: PR 5188 glob RTG field loading and lazy prefetch, round 1
 
-Status: OPEN
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice 2, phone agent): superseded by the round-1 chain ending at `gates/pr-5188-glob-field-loading-round-1-superseding-51e92b6.md`, which executed; see `receipts/PR-5188-glob-field-loading-round-1.md`. PR 5188 is merged.
 Tags: gate, implementation, review
 Intended host: any capable Linux gate host with JDK 21, Python 3, Git and the supported Solr runner, one build at a time under its host lock.
 
