@@ -15,14 +15,14 @@ Jobs and heads:
 2. G to H (`98d1127`), a repair to two compile errors found in G's focused leg:
    - `MigrateCmd.java:580`: `new ZkNodeProps(...)` was given `Map` values for `expectedRule` and `restoreRule` through the `String...` constructor. Repaired by building a `HashMap` with the same keys and values, then `new ZkNodeProps(props)`. `SliceMutator` reads both keys as maps, and a null `restoreRule` means remove the rule. Semantics unchanged.
    - `MigrateRouteKeyTest.java`: 8 `new SolrInputDocument("id", ..., "n_ti", ...)` calls do not compile, because `SolrInputDocument(String...)` takes strings only. Routed through a private `document(Object...)` helper that calls `addField`. Assertions and data unchanged.
-   - Both edits were tidied before commit. Tidy at H then ran clean: rc 0, no tree change, `git diff --check` clean.
+   - Both edits were compiled (`:solr:core:compileTestJava` rc 0 at 03:23:38, before tidy), then tidied (tidy rewrote only these two files), then committed. The committed tree compiled in the focused run at H, which executed tests.
+   - Tidy at H ran clean: rc 0, no tree change, `git diff --check` clean.
 
 ## Results at H (all times UTC)
 
 | Step | Command | Time | Result |
 | --- | --- | --- | --- |
 | tidy | `./gradlew tidy` at H | 03:27:09 to 03:28:49, rc 0 | `git diff --exit-code` rc 0, untracked 0, `git diff --check` rc 0 |
-| compile (main and test) | `:solr:core:compileTestJava` at H, after the repair | 03:23:38, rc 0 | compiles |
 | focused, seed 5253C0DE | `:solr:core:cleanTest :solr:core:test` with MigrateRouteKeyTest, MigrateCmdCleanupTest, SliceMutatorRoutingRuleTest | 03:28:55 to 03:32:17, rc 1 | 15 executed, 1 failure, 0 errors, 0 skipped |
 
 Focused XML, `focused-xml/`:
