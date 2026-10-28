@@ -2,7 +2,7 @@
 
 https://issues.apache.org/jira/browse/SOLR-17914
 
-**Stacked on SOLR-17913. Merge that first.** Until it merges, this diff also shows the collection details card. Christos Malliaridis is the sponsor and promised reviewer. He offered the former designs as a temporary way to create collections while the new designs are in progress (comment 18133018). This PR follows the new work-in-progress design (Figma node 2635-40394), so the layout may change when that design is final.
+Part of this diff is the SOLR-17913 collection details card. The create dialog builds on it, so it is included here. SOLR-17913 was not part of the work Christos Malliaridis asked for, and no approval was sought for it; it is here only because SOLR-17914 requires it. The card is on its own branch, `solr-17913-collection-details-card`, gated at its head, and it can be split out or opened as its own PR if that is preferred. Christos is the sponsor and promised reviewer for this ticket. He offered the former designs as a temporary way to create collections while the new designs are in progress (comment 18133018). This PR follows the new work-in-progress design (Figma node 2635-40394), so the layout may change when that design is final.
 
 ## What happens today
 
