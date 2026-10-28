@@ -8,4 +8,7 @@
 - Links: SOLR-18351, Apache PR 5235 (not changed by this gate).
 - Capability tags used: gate.
 
-Heartbeat: 2026-10-28T20:57Z
+Heartbeat: 2026-10-28T21:29Z (DONE)
+
+- Status: DONE at fork head `e2ad60e`.
+- DONE: `receipts/PR-5235-upload-contentwriter-fix-round-1.md`, `reports/pr-5235-upload-contentwriter-fix-round-1-outcome.md`. Logs in `/workspace/gates/logs/vm4/pr5235-upload-contentwriter-fix-round-1/`.

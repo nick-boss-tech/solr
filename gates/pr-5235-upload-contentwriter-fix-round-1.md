@@ -1,6 +1,6 @@
 # Gate: PR 5235 ConfigSet upload ContentWriter fix, round 1
 
-Status: CLAIMED (vm4, 2026-10-28T20:57Z)
+Status: DONE (vm4, 2026-10-28T21:29Z). Receipt: `receipts/PR-5235-upload-contentwriter-fix-round-1.md`. Green on Linux at `e2ad60e`; Windows and Apache head `ccace897` not covered.
 Tags: gate, review, records
 Intended host: any capable Linux gate host with JDK 21, Git, Python 3, the branch Gradle wrapper, and normal Solr build dependencies. Run one gate at a time under the host build lock.
 
