@@ -54,6 +54,12 @@ public class AliasCollectionApiLockTest extends SolrCloudTestCase {
     CollectionAdminRequest.createAlias(ALIAS, COLLECTION).process(cluster.getSolrClient());
   }
 
+  private static CollectionAdminRequest.Delete deleteFollowingAliases(String collection) {
+    CollectionAdminRequest.Delete request = CollectionAdminRequest.deleteCollection(collection);
+    request.setFollowAliases(true);
+    return request;
+  }
+
   @Test
   public void testAliasedCommandWaitsForCollectionLock() throws Exception {
     Slice slice = getCollectionState(COLLECTION).getSlices().iterator().next();
@@ -125,9 +131,7 @@ public class AliasCollectionApiLockTest extends SolrCloudTestCase {
     boolean originalReleased = false;
     try {
       targetLock = collectionLock(target);
-      CollectionAdminRequest.deleteCollection(alias)
-          .setFollowAliases(true)
-          .processAsync(asyncId, cluster.getSolrClient());
+      deleteFollowingAliases(alias).processAsync(asyncId, cluster.getSolrClient());
       String lockDir =
           originalLock.getLockId().substring(0, originalLock.getLockId().lastIndexOf('/'));
       new TimeOut(WAIT_SECONDS, TimeUnit.SECONDS, TimeSource.NANO_TIME)
@@ -167,9 +171,7 @@ public class AliasCollectionApiLockTest extends SolrCloudTestCase {
         targetLock.release();
       }
     }
-    CollectionAdminRequest.deleteCollection(alias)
-        .setFollowAliases(true)
-        .process(cluster.getSolrClient());
+    deleteFollowingAliases(alias).process(cluster.getSolrClient());
     var reader = cluster.getZkStateReader();
     reader.forceUpdateCollection(target);
     reader.aliasesManager.update();

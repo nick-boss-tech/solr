@@ -51,16 +51,19 @@ public class AliasCollectionApiOverseerTest extends SolrCloudTestCase {
     cluster.deleteAllCollections();
   }
 
+  private static CollectionAdminRequest.Delete deleteFollowingAliases(String collection) {
+    CollectionAdminRequest.Delete request = CollectionAdminRequest.deleteCollection(collection);
+    request.setFollowAliases(true);
+    return request;
+  }
+
   @Test
   public void testMultiCollectionAliasReturnsBadRequest() throws Exception {
     createCollectionsAndAlias("multiAlias", true);
     SolrException error =
         expectThrows(
             SolrException.class,
-            () ->
-                CollectionAdminRequest.deleteCollection("multiAlias")
-                    .setFollowAliases(true)
-                    .process(cluster.getSolrClient()));
+            () -> deleteFollowingAliases("multiAlias").process(cluster.getSolrClient()));
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, error.code());
     assertTrue(error.getMessage().contains("points to more than 1 collection"));
     assertCollectionsExist();
@@ -70,9 +73,7 @@ public class AliasCollectionApiOverseerTest extends SolrCloudTestCase {
   public void testAsyncMultiCollectionAliasPreservesErrorDetails() throws Exception {
     createCollectionsAndAlias("multiAlias", true);
     String asyncId = "deleteMultiCollectionAlias";
-    CollectionAdminRequest.deleteCollection("multiAlias")
-        .setFollowAliases(true)
-        .processAsync(asyncId, cluster.getSolrClient());
+    deleteFollowingAliases("multiAlias").processAsync(asyncId, cluster.getSolrClient());
     assertEquals(
         RequestStatusState.FAILED,
         CollectionAdminRequest.requestStatus(asyncId)
@@ -134,9 +135,7 @@ public class AliasCollectionApiOverseerTest extends SolrCloudTestCase {
   @Test
   public void testStableAliasStillDeletesCollectionAndAlias() throws Exception {
     createCollectionsAndAlias("stableAlias", false);
-    CollectionAdminRequest.deleteCollection("stableAlias")
-        .setFollowAliases(true)
-        .process(cluster.getSolrClient());
+    deleteFollowingAliases("stableAlias").process(cluster.getSolrClient());
     var reader = cluster.getZkStateReader();
     reader.forceUpdateCollection("aliasOriginal");
     reader.aliasesManager.update();
