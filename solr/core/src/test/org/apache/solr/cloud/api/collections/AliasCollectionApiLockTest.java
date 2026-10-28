@@ -24,6 +24,7 @@ import org.apache.solr.client.solrj.response.RequestStatusState;
 import org.apache.solr.cloud.DistributedLock;
 import org.apache.solr.cloud.SolrCloudTestCase;
 import org.apache.solr.cloud.ZkDistributedCollectionLockFactory;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.Slice;
 import org.apache.solr.common.params.CollectionAdminParams;
 import org.apache.solr.common.params.CollectionParams.CollectionAction;
@@ -100,6 +101,93 @@ public class AliasCollectionApiLockTest extends SolrCloudTestCase {
         CollectionAdminRequest.requestStatus(asyncId)
             .waitFor(cluster.getSolrClient(), WAIT_SECONDS));
     assertNull(getCollectionState(COLLECTION).getReplica(replica));
+  }
+
+  @Test
+  public void testAliasRetargetedWhileWaitingDoesNotDeleteUnlockedCollection() throws Exception {
+    String original = "retargetOriginal";
+    String target = "retargetTarget";
+    String alias = "retargetAlias";
+    String asyncId = "deleteRetargetedAlias";
+    CollectionAdminRequest.createCollection(original, "conf", 1, 1)
+        .process(cluster.getSolrClient());
+    CollectionAdminRequest.createCollection(target, "conf", 1, 1)
+        .process(cluster.getSolrClient());
+    cluster.waitForActiveCollection(original, 1, 1);
+    cluster.waitForActiveCollection(target, 1, 1);
+    CollectionAdminRequest.createAlias(alias, original).process(cluster.getSolrClient());
+    var commandReader =
+        cluster.getJettySolrRunner(0).getCoreContainer().getZkController().getZkStateReader();
+    commandReader.aliasesManager.update();
+    assertEquals(original, commandReader.getAliases().resolveSimpleAlias(alias));
+
+    DistributedLock originalLock = collectionLock(original);
+    DistributedLock targetLock = null;
+    boolean originalReleased = false;
+    try {
+      targetLock = collectionLock(target);
+      CollectionAdminRequest.deleteCollection(alias)
+          .setFollowAliases(true)
+          .processAsync(asyncId, cluster.getSolrClient());
+      String lockDir =
+          originalLock.getLockId().substring(0, originalLock.getLockId().lastIndexOf('/'));
+      new TimeOut(WAIT_SECONDS, TimeUnit.SECONDS, TimeSource.NANO_TIME)
+          .waitFor(
+              "DELETE did not queue behind the original collection lock",
+              () -> state(asyncId) != RequestStatusState.SUBMITTED || waiters(lockDir) > 0);
+      assertEquals(RequestStatusState.SUBMITTED, state(asyncId));
+
+      CollectionAdminRequest.createAlias(alias, target).process(cluster.getSolrClient());
+      new TimeOut(WAIT_SECONDS, TimeUnit.SECONDS, TimeSource.NANO_TIME)
+          .waitFor(
+              "Alias update did not reach the command node",
+              () -> target.equals(commandReader.getAliases().resolveSimpleAlias(alias)));
+      originalLock.release();
+      originalReleased = true;
+
+      assertEquals(
+          RequestStatusState.FAILED,
+          CollectionAdminRequest.requestStatus(asyncId)
+              .waitFor(cluster.getSolrClient(), WAIT_SECONDS));
+      var response =
+          CollectionAdminRequest.requestStatus(asyncId).process(cluster.getSolrClient());
+      SolrException error = (SolrException) response.getException();
+      assertNotNull(error);
+      assertEquals(SolrException.ErrorCode.CONFLICT.code, error.code());
+      assertTrue(error.getMessage().contains("Collection alias changed"));
+      assertTrue(targetLock.isAcquired());
+      commandReader.forceUpdateCollection(original);
+      commandReader.forceUpdateCollection(target);
+      assertNotNull(commandReader.getClusterState().getCollectionOrNull(original));
+      assertNotNull(commandReader.getClusterState().getCollectionOrNull(target));
+      assertEquals(target, commandReader.getAliases().resolveSimpleAlias(alias));
+    } finally {
+      if (!originalReleased) {
+        originalLock.release();
+      }
+      if (targetLock != null) {
+        targetLock.release();
+      }
+    }
+    CollectionAdminRequest.deleteCollection(alias)
+        .setFollowAliases(true)
+        .process(cluster.getSolrClient());
+    var reader = cluster.getZkStateReader();
+    reader.forceUpdateCollection(target);
+    reader.aliasesManager.update();
+    assertNull(reader.getClusterState().getCollectionOrNull(target));
+    assertNotNull(reader.getClusterState().getCollectionOrNull(original));
+    assertFalse(reader.getAliases().hasAlias(alias));
+  }
+
+  private static DistributedLock collectionLock(String collection) throws Exception {
+    DistributedLock lock =
+        new ZkDistributedCollectionLockFactory(
+                cluster.getZkClient(),
+                DistributedCollectionConfigSetCommandRunner.ZK_COLLECTION_LOCKS)
+            .createLock(true, LockLevel.COLLECTION, collection, null, null, null);
+    lock.waitUntilAcquired();
+    return lock;
   }
 
   private static RequestStatusState state(String asyncId) {

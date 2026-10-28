@@ -70,6 +70,7 @@ public class DeleteShardCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collectionName = extCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(collectionName);
 
     log.info("Delete shard invoked");
     Slice slice = adminCmdContext.getClusterState().getCollection(collectionName).getSlice(sliceId);

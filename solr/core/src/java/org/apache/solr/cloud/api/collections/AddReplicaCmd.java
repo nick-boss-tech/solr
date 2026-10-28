@@ -101,6 +101,7 @@ public class AddReplicaCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collectionName = extCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(collectionName);
 
     DocCollection coll = adminCmdContext.getClusterState().getCollection(collectionName);
     if (coll == null) {

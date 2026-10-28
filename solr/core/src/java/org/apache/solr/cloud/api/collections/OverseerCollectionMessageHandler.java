@@ -28,6 +28,7 @@ import static org.apache.solr.common.params.CommonParams.NAME;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
@@ -132,6 +133,10 @@ public class OverseerCollectionMessageHandler implements OverseerMessageHandler,
         AdminCmdContext adminCmdContext =
             new AdminCmdContext(action, message.getStr(ASYNC))
                 .withLockId(lock.id())
+                .withLockedCollectionName(
+                    lock instanceof CollectionLock collectionLock
+                        ? collectionLock.collectionName()
+                        : null)
                 .withCallingLockId(message.getStr(CALLING_LOCK_ID_HEADER))
                 .withClusterState(cloudManager.getClusterState());
         command.call(adminCmdContext, message, results);
@@ -195,14 +200,36 @@ public class OverseerCollectionMessageHandler implements OverseerMessageHandler,
       sessionId = batchSessionId;
     }
 
-    return lockSession.lock(
-        getCollectionAction(message.getStr(Overseer.QUEUE_OPERATION)),
-        Arrays.asList(
-            CollectionHandlingUtils.lockCollectionName(
-                message, getTaskKey(message), zkStateReader.getAliases()),
-            message.getStr(ZkStateReader.SHARD_ID_PROP),
-            message.getStr(ZkStateReader.REPLICA_PROP)),
-        callingLockId);
+    String collectionName =
+        CollectionHandlingUtils.lockCollectionName(
+            message, getTaskKey(message), zkStateReader.getAliases());
+    Lock lock =
+        lockSession.lock(
+            getCollectionAction(message.getStr(Overseer.QUEUE_OPERATION)),
+            Arrays.asList(
+                collectionName,
+                message.getStr(ZkStateReader.SHARD_ID_PROP),
+                message.getStr(ZkStateReader.REPLICA_PROP)),
+            callingLockId);
+    return lock == null ? null : new CollectionLock(collectionName, lock);
+  }
+
+  /** Retains the collection selected at acquisition until command execution. */
+  private record CollectionLock(String collectionName, Lock delegate) implements Lock {
+    @Override
+    public void unlock() {
+      delegate.unlock();
+    }
+
+    @Override
+    public String id() {
+      return delegate.id();
+    }
+
+    @Override
+    public boolean validateSubpath(int lockLevel, List<String> path) {
+      return delegate.validateSubpath(lockLevel, path);
+    }
   }
 
   @Override

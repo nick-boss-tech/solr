@@ -74,6 +74,7 @@ public class BackupCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collectionName = extCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(collectionName);
     String backupName = message.getStr(NAME);
     String repo = message.getStr(CoreAdminParams.BACKUP_REPOSITORY);
     boolean backupConfigset = message.getBool(CoreAdminParams.BACKUP_CONFIGSET, true);

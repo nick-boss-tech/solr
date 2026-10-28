@@ -425,7 +425,7 @@ public class DistributedCollectionConfigSetCommandRunner {
 
           // Block this thread until all required locks are acquired.
           lock.waitUntilAcquired();
-          adminCmdContext.withLockId(lock.getLockId());
+          adminCmdContext.withLockId(lock.getLockId()).withLockedCollectionName(lockCollName);
 
           // Got the lock so moving from submitted to running if we run for an async task (if
           // asyncId is null the asyncTaskTracker calls do nothing).

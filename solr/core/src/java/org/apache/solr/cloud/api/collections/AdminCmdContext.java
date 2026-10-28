@@ -17,6 +17,7 @@
 
 package org.apache.solr.cloud.api.collections;
 
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.params.CollectionParams;
 
@@ -26,6 +27,7 @@ public class AdminCmdContext {
   private String lockId;
   private String callingLockId;
   private ClusterState clusterState;
+  private String lockedCollectionName;
 
   public AdminCmdContext(CollectionParams.CollectionAction action) {
     this(action, null);
@@ -76,6 +78,26 @@ public class AdminCmdContext {
   public AdminCmdContext withClusterState(ClusterState clusterState) {
     this.clusterState = clusterState;
     return this;
+  }
+
+  AdminCmdContext withLockedCollectionName(String collectionName) {
+    if (action.lockLevel != CollectionParams.LockLevel.NONE) {
+      this.lockedCollectionName = collectionName;
+    }
+    return this;
+  }
+
+  /** Reject alias resolution that would execute outside the acquired collection lock. */
+  void verifyLockedCollection(String collectionName) {
+    if (lockedCollectionName != null && !lockedCollectionName.equals(collectionName)) {
+      throw new SolrException(
+          SolrException.ErrorCode.CONFLICT,
+          "Collection alias changed while acquiring the lock: locked "
+              + lockedCollectionName
+              + " but resolved to "
+              + collectionName
+              + ". Retry the request.");
+    }
   }
 
   public AdminCmdContext subRequestContext(CollectionParams.CollectionAction action) {

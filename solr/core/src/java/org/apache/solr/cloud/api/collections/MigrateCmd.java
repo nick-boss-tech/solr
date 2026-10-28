@@ -86,6 +86,7 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
       sourceCollectionName = extSourceCollectionName;
       targetCollectionName = extTargetCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(sourceCollectionName);
 
     DocCollection sourceCollection =
         adminCmdContext.getClusterState().getCollection(sourceCollectionName);

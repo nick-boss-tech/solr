@@ -63,6 +63,7 @@ public class RenameCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collectionName = extCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(collectionName);
     if (!adminCmdContext.getClusterState().hasCollection(collectionName)) {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,

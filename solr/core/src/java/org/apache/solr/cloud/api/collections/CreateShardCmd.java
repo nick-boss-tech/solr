@@ -65,6 +65,7 @@ public class CreateShardCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collectionName = extCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(collectionName);
     ClusterState clusterState = adminCmdContext.getClusterState();
     DocCollection collection = clusterState.getCollection(collectionName);
 

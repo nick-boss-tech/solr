@@ -156,6 +156,7 @@ public class SplitShardCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collectionName = extCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(collectionName);
 
     log.debug("Split shard invoked: {}", message);
     ZkStateReader zkStateReader = ccc.getZkStateReader();

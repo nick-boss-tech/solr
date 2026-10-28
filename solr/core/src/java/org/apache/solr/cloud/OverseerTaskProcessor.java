@@ -16,6 +16,7 @@
  */
 package org.apache.solr.cloud;
 
+import static org.apache.solr.cloud.api.collections.CollectionHandlingUtils.addExceptionToNamedList;
 import static org.apache.solr.common.params.CollectionAdminParams.CALLING_LOCK_ID_HEADER;
 import static org.apache.solr.common.params.CommonAdminParams.ASYNC;
 import static org.apache.solr.common.params.CommonParams.ID;
@@ -345,7 +346,7 @@ public class OverseerTaskProcessor implements SolrInfoBean, Runnable, Closeable 
               log.error(
                   "Error occurred while trying to acquire lock for task [{}]", head.getId(), e);
               NamedList<Object> errResp = new NamedList<>();
-              errResp.add("exception", e.getMessage());
+              addExceptionToNamedList(operation, e, errResp);
               OverseerSolrResponse response = new OverseerSolrResponse(errResp);
               if (asyncId != null) {
                 failureMap.put(asyncId, OverseerSolrResponseSerializer.serialize(response));

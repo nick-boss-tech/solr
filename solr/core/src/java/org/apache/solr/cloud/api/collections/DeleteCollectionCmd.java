@@ -86,6 +86,7 @@ public class DeleteCollectionCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collection = extCollection;
     }
+    adminCmdContext.verifyLockedCollection(collection);
 
     // verify the placement modifications caused by the deletion are allowed
     DocCollection coll = zkStateReader.getClusterState().getCollectionOrNull(collection);

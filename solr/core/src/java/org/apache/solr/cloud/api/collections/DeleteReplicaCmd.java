@@ -94,6 +94,7 @@ public class DeleteReplicaCmd implements CollectionApiCommand {
     } else {
       collectionName = extCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(collectionName);
 
     DocCollection coll = adminCmdContext.getClusterState().getCollection(collectionName);
     Slice slice = coll.getSlice(shard);
@@ -120,6 +121,7 @@ public class DeleteReplicaCmd implements CollectionApiCommand {
     CollectionHandlingUtils.checkRequired(message, COLLECTION_PROP, COUNT_PROP);
     int count = Integer.parseInt(message.getStr(COUNT_PROP));
     String collectionName = message.getStr(COLLECTION_PROP);
+    adminCmdContext.verifyLockedCollection(collectionName);
     String shard = message.getStr(SHARD_ID_PROP);
     DocCollection coll = adminCmdContext.getClusterState().getCollection(collectionName);
     Slice slice = null;

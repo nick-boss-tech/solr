@@ -68,6 +68,7 @@ public class DeleteSnapshotCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collectionName = extCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(collectionName);
     String commitName = message.getStr(CoreAdminParams.COMMIT_NAME);
     NamedList<Object> shardRequestResults = new NamedList<>();
     ShardHandler shardHandler = ccc.newShardHandler();

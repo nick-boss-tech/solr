@@ -71,6 +71,7 @@ public class CreateSnapshotCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collectionName = extCollectionName;
     }
+    adminCmdContext.verifyLockedCollection(collectionName);
 
     String commitName = message.getStr(CoreAdminParams.COMMIT_NAME);
     SolrZkClient zkClient = ccc.getZkStateReader().getZkClient();

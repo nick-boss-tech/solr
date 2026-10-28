@@ -1,7 +1,8 @@
-title: "Collection API commands with followAliases=true now lock the collection the alias points to, not the alias name."
+title: "Collection API commands with followAliases=true lock the resolved collection and reject alias retargeting that would execute outside that lock. Invalid aliases retain their 400 response in Overseer mode."
 type: fixed
 authors:
   - name: Amrit Sarkar
+  - name: Nick Shanin
 links:
   - name: SOLR-18589
     url: https://issues.apache.org/jira/browse/SOLR-18589

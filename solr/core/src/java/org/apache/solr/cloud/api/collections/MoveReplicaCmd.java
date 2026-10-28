@@ -84,6 +84,7 @@ public class MoveReplicaCmd implements CollApiCmds.CollectionApiCommand {
     } else {
       collection = extCollection;
     }
+    adminCmdContext.verifyLockedCollection(collection);
 
     DocCollection coll = adminCmdContext.getClusterState().getCollection(collection);
     if (coll == null) {
