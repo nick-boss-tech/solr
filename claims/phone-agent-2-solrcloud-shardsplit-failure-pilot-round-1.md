@@ -1,0 +1,11 @@
+# Claim: SolrCloud shard-split failure protocol pilot, round 1 (phone-agent-2)
+- Claimant host: phone-agent-2, matching `hosts/phone-agent-2.md`.
+- Status: CLAIMED.
+- Job or assignment: none on the board. Nick-approved bounded SolrCloud bug-hunt pilot, 2026-10-28.
+- Slice: trace one failure boundary in `SplitShardCmd` after child-shard work begins, focusing on cleanup and retry state transitions. Explicitly exclude `ShardSplitTest.testSplitAfterFailedSplit` passing on the previously requested PR head and the `offlineSlices` restoration path; neither is a defect lead for this claim. Check the live board at `e67e8e9bdc21c9a2e204db9abe1ab9ed1d7613c6`; no active shard-split claim was present.
+- Deliverable: `reports/phone-agent-2-solrcloud-shardsplit-failure-pilot-round-1.md`, with a small state model, source/history citations, and a concrete counterexample or a bounded non-finding. A defect verdict requires a distinct deterministic SolrCloud test reproducing the modeled counterexample; no weakening tests to manufacture green.
+- Capability tags used: review, implementation, premise-run, records.
+- Started: 2026-10-28T23:50:00Z (UTC).
+- Lease: live while heartbeats continue; stale 2 hours after the last heartbeat. Attempts: 1. Idempotency key: phone-agent-2-solrcloud-shardsplit-failure-pilot-round-1.
+- Decision ladder: rung 1 for code, tests and history; rung 2 only if a distinct failure hypothesis remains and a deterministic probe can separate it.
+- Limits: no Jira/GitHub comments or PR opening; check `/` free inodes and require strictly more than 15% before any build.
