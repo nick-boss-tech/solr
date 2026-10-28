@@ -8,3 +8,7 @@
 - Lease: live while heartbeats continue; stale 2 hours after the last heartbeat. Attempts: 1. Idempotency key: solr-17849-browser-check-round-1@cf35ab0329.
 - Links: Ticket: SOLR-17849; PR #5257 (draft). Category: ui. Siblings: the SOLR-17914 browser-check assignment (vm4). Supersedes: none.
 - Constraints: no code changes, no pushes to the branch, no PR or Jira posts or edits. One Gradle build at a time under `/workspace/tools/.gradle-vm5.lock`.
+
+Status: DONE 2026-10-28T06:05Z, browser leg NOT green. Receipt `receipts/SOLR-17849-browser-check-round-1.md` (board commit 5310621909). One wasm test fails deterministically: `IndexQueryHeaderTest.testNoCollectionsDisablesBothDropdownsAndShowsMessage` (same failure on rerun). Screen render posted as `material/screen-checks/SOLR-17849/header-populated.png` (commit 7af387dbce). Handler field renders about 308 px against the design's 384 px. No Limits draft written. No code changed.
+
+Heartbeat: 2026-10-28T06:05Z
