@@ -271,10 +271,7 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
             failedKeyVersion.set(documentVersion(source, "b!1"));
             Replica leader = getCollectionState(target).getLeader("shard1");
             try (SolrCore core =
-                cluster
-                    .getReplicaJetty(leader)
-                    .getCoreContainer()
-                    .getCore(leader.getCoreName())) {
+                cluster.getReplicaJetty(leader).getCoreContainer().getCore(leader.getCoreName())) {
               assertEquals(
                   UpdateLog.State.BUFFERING, core.getUpdateHandler().getUpdateLog().getState());
               var labels =
@@ -361,7 +358,8 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
                   CollectionAdminRequest.migrateData(source, target, "a!")
                       .process(cluster.getSolrClient()));
       assertTrue(
-          failure.getMessage(), failure.getMessage().contains("injected MIGRATE assertion failure"));
+          failure.getMessage(),
+          failure.getMessage().contains("injected MIGRATE assertion failure"));
     } finally {
       TestInjection.migrateAfterRoutingRule = null;
     }
@@ -370,12 +368,7 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
     CollectionAdminRequest.migrateData(source, target, "a!").process(cluster.getSolrClient());
     cluster.getSolrClient().commit(target);
     assertEquals(
-        1,
-        cluster
-            .getSolrClient()
-            .query(target, new SolrQuery("*:*"))
-            .getResults()
-            .getNumFound());
+        1, cluster.getSolrClient().query(target, new SolrQuery("*:*")).getResults().getNumFound());
   }
 
   private long documentVersion(String collection, String id) throws Exception {
