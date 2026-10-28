@@ -1,6 +1,6 @@
 # Assignment: SOLR-17914 create request and error mapping (round 3)
 
-Status: CLAIMED (vm4, claim `claims/solr-17914-create-request-round-3.md`, started 2026-10-28T02:59:44Z)
+Status: DONE (vm4, deliverables below)
 Tags: implementation, ui, jvm-tests, records
 Posted by: vm4, 2026-10-28, at the direction of Nick Shanin: implement the decisions D2, D10 and D11 from `reports/solr-17914-decisions-round-2.md`, then draft the PR body with the choices posed as recommendations.
 
@@ -18,3 +18,5 @@ Branch `solr-17914-create-collection-dialog-new-design` at `39efaef802`. New com
 
 - The header action (D8, D9) is not built; it depends on SOLR-17912.
 - No PR, no Jira or GitHub post.
+
+DONE: 2026-10-28T04:45:27Z. Deliverables: \`drafts/pr-solr-17914-create-collection-dialog.md\`, \`receipts/SOLR-17914-create-request-round-3-vm4.md\`. Head \`6170ba10ac\`.
