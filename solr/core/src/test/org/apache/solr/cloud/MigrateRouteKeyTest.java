@@ -240,8 +240,8 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
     String target = "preserveUpdates-target";
     CollectionAdminRequest.createCollection(source, "conf", 1, 1).process(cluster.getSolrClient());
     CollectionAdminRequest.createCollection(target, "conf", 1, 1).process(cluster.getSolrClient());
-    cluster.getSolrClient().add(source, new SolrInputDocument("id", "a!updated", "n_ti", 1));
-    cluster.getSolrClient().add(source, new SolrInputDocument("id", "a!deleted", "n_ti", 1));
+    cluster.getSolrClient().add(source, document("id", "a!updated", "n_ti", 1));
+    cluster.getSolrClient().add(source, document("id", "a!deleted", "n_ti", 1));
     cluster.getSolrClient().add(source, new SolrInputDocument("id", "b!1"));
     cluster.getSolrClient().commit(source);
     CollectionAdminRequest.migrateData(source, target, "a!")
@@ -259,11 +259,9 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
                 .getZkController()
                 .getZkStateReader()
                 .forceUpdateCollection(source);
-            cluster
-                .getSolrClient()
-                .add(source, new SolrInputDocument("id", "a!updated", "n_ti", 2));
+            cluster.getSolrClient().add(source, document("id", "a!updated", "n_ti", 2));
             cluster.getSolrClient().deleteById(source, "a!deleted");
-            cluster.getSolrClient().add(source, new SolrInputDocument("id", "b!1", "n_ti", 3));
+            cluster.getSolrClient().add(source, document("id", "b!1", "n_ti", 3));
             Replica leader = getCollectionState(target).getLeader("shard1");
             try (SolrCore core =
                     cluster
@@ -332,7 +330,7 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
     String target = "restoreRule-target";
     CollectionAdminRequest.createCollection(source, "conf", 1, 1).process(cluster.getSolrClient());
     CollectionAdminRequest.createCollection(target, "conf", 1, 1).process(cluster.getSolrClient());
-    cluster.getSolrClient().add(source, new SolrInputDocument("id", "a!1", "n_ti", 1));
+    cluster.getSolrClient().add(source, document("id", "a!1", "n_ti", 1));
     cluster.getSolrClient().commit(source);
     CollectionAdminRequest.migrateData(source, target, "a!")
         .setForwardTimeout(600)
@@ -357,7 +355,7 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
     RoutingRule restored = currentRoutingRule(source, "a!");
     assertNotNull("An existing rule must survive a failed repeated migration", restored);
     assertEquals(previousRule, restored.getProperties());
-    cluster.getSolrClient().add(source, new SolrInputDocument("id", "a!1", "n_ti", 2));
+    cluster.getSolrClient().add(source, document("id", "a!1", "n_ti", 2));
     cluster.getSolrClient().commit(target);
     assertEquals(
         1,
@@ -375,7 +373,7 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
     CollectionAdminRequest.createCollection(source, "conf", 1, 1).process(cluster.getSolrClient());
     CollectionAdminRequest.createCollection(target, "conf", 4, 1).process(cluster.getSolrClient());
     for (int i = 0; i < 100; i++) {
-      cluster.getSolrClient().add(source, new SolrInputDocument("id", "a/1!" + i, "n_ti", 1));
+      cluster.getSolrClient().add(source, document("id", "a/1!" + i, "n_ti", 1));
     }
     cluster.getSolrClient().commit(source);
     AtomicInteger transfers = new AtomicInteger();
@@ -418,11 +416,19 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
       }
     }
     assertNotNull(forwardedId);
-    cluster.getSolrClient().add(source, new SolrInputDocument("id", forwardedId, "n_ti", 2));
+    cluster.getSolrClient().add(source, document("id", forwardedId, "n_ti", 2));
     cluster.getSolrClient().commit(target);
     assertEquals(
         1,
         cluster.getSolrClient().query(target, new SolrQuery("n_ti:2")).getResults().getNumFound());
+  }
+
+  private static SolrInputDocument document(Object... fieldsAndValues) {
+    SolrInputDocument doc = new SolrInputDocument();
+    for (int i = 0; i < fieldsAndValues.length; i += 2) {
+      doc.addField((String) fieldsAndValues[i], fieldsAndValues[i + 1]);
+    }
+    return doc;
   }
 
   private RoutingRule currentRoutingRule(String collection, String key) throws Exception {

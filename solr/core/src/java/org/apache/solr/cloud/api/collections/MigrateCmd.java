@@ -576,20 +576,14 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
       Replica targetLeader,
       Exception failure) {
     try {
-      ZkNodeProps m =
-          new ZkNodeProps(
-              Overseer.QUEUE_OPERATION,
-              OverseerAction.REMOVEROUTINGRULE.toLower(),
-              COLLECTION_PROP,
-              sourceCollection,
-              SHARD_ID_PROP,
-              sourceShard,
-              "routeKey",
-              routeKey,
-              "expectedRule",
-              installedRule.getProperties(),
-              "restoreRule",
-              previousRule == null ? null : previousRule.getProperties());
+      Map<String, Object> props = new HashMap<>();
+      props.put(Overseer.QUEUE_OPERATION, OverseerAction.REMOVEROUTINGRULE.toLower());
+      props.put(COLLECTION_PROP, sourceCollection);
+      props.put(SHARD_ID_PROP, sourceShard);
+      props.put("routeKey", routeKey);
+      props.put("expectedRule", installedRule.getProperties());
+      props.put("restoreRule", previousRule == null ? null : previousRule.getProperties());
+      ZkNodeProps m = new ZkNodeProps(props);
       log.info("Restoring routing rule after failed MIGRATE: {}", m);
       if (ccc.getDistributedClusterStateUpdater().isDistributedStateUpdate()) {
         ccc.getDistributedClusterStateUpdater()
