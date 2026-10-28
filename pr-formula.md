@@ -216,6 +216,42 @@ When a ticket's subject is a deprecation or removal, name that question in the c
 - A prepared branch is not finished until its PR description draft exists (Nick, 2026-10-22). The draft lives as the final section of the branch receipt (receipts/SOLR-<n>.md), written when the gate goes green, so any host can open the PR from the record alone.
 - Changelog fragments list the author by name only (`name: Nick Shanin`), with no `nick:` line (Nick, 2026-10-15). The upstream `dev-docs/changelog.adoc` example includes one; remove it from any fragment before committing.
 
+## Worked example: offering a tested fix on an existing PR (2026-10-27)
+
+Use the [posted PR 5251 follow-up](https://github.com/apache/solr/pull/5251#issuecomment-6457683261) as an example when offering a completed, verified patch to another contributor. Nick approved this wording and its diff link and fast-forward commands. The proof is in [receipts/SOLR-18598.md](receipts/SOLR-18598.md), GREEN at `e7834ca954505c27778e59a61140bf02490226a6`; the original contributor head is `ca539cad196f26c78e14a1dc698b84e0f5c1f22e`.
+
+- Lead with the tested fix and a pinned diff from the contributor's head to the tested commit. State the behavior changed and the relevant compatibility preserved.
+- Include passing focused and neighboring test counts, the exact tested head, and completed formatting, build and documentation checks. State material execution conditions such as unsetting `NODE_ENV`.
+- Summarize the fail-before result alongside the positive proof. Claim only observed failures or behavior established by the code; this example reports missing rejections and an array-bounds exception, not a measured wrong count.
+- Verify ancestry against the current PR head, then give commands to fetch and fast-forward to the tested commit without rewriting the contributor's history.
+- End with one question about including the ready patch. The contributor decides whether to take it; the comment does not ask them to design work that is already implemented.
+
+For this clean, exact-head follow-up, the pinned diff and pull-in commands belong in the comment. The default no-diff rule for an unsolicited proposal in `comment-formula.md` does not require another decision about whether this completed fix is mechanical. Existing public-posting authorization rules still apply. Keep internal draft-status lines out of the posted text, and use the reviewed-by-Nick disclosure after Nick has reviewed the wording. Copy the structure, not this example's ticket-specific counts, hashes or environment claims.
+
+Posted text, verbatim:
+
+> 🤖 *AI text below* 🤖 *(reviewed by Nick Shanin)*
+>
+> Hi @elangelo, I have a tested follow-up for the mixed-precision case you noted: [one-commit diff](https://github.com/nick-boss-tech/solr/compare/ca539cad196f26c78e14a1dc698b84e0f5c1f22e...e7834ca954505c27778e59a61140bf02490226a6).
+>
+> It rejects different register counts or widths before union, with an error naming `solr.facet.hll.log2m` and both layouts. Different explicit thresholds still merge. It also adds regression tests and documents the restart requirement.
+>
+> Verified on Linux at `e7834ca…`, using JDK 21.0.12.1, Gradle 9.7.0 and seed `5251C0DE`:
+>
+> - 11 focused tests, 12 local/distributed JSON facet cases, and 27 neighboring tests passed, with no skips.
+> - Tidy, root `check -x test`, and reference-guide build/link checks passed, with `NODE_ENV` unset.
+> - All five rejection regressions fail against the original production code: four allow the mismatch, and the smaller-source merge throws `ArrayIndexOutOfBoundsException`.
+>
+> The commit is a fast-forward of the current PR head:
+>
+> ```sh
+> git switch json-facet-hll-precision
+> git fetch https://github.com/nick-boss-tech/solr.git solr-18598-submit
+> git merge --ff-only e7834ca954505c27778e59a61140bf02490226a6
+> ```
+>
+> Would you like to include this guard in the PR?
+
 ## Template (approved draft, 2026-10-04)
 
 ```markdown
