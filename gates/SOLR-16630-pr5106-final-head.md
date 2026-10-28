@@ -1,6 +1,8 @@
 # Gate job: PR 5106 final head (SOLR-16630, TestCoordinatorRole.testNRTRestart)
 
-Status: OPEN
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice, phone agent): executed by vm6 on 2026-10-25 at the pinned head `a02cc7ba6b90`; all standard legs rc 0 and 10 of 10 focused runs passed. Recorded in `receipts/SOLR-16630.md`, section 'Final-head gate, 2026-10-25'.
 Tags: gate
 
 - Branch: `solr-16630-submit` on the fork (nick-boss-tech/solr).
