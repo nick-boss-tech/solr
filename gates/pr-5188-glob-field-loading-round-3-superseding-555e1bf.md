@@ -1,6 +1,8 @@
 # Gate: PR 5188 current API and regression boundaries, superseding round 3 (pinned `555e1bf`)
 
-Status: OPEN
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice 2, phone agent): executed by vm6 at the pinned head `555e1bf`; the receipt `receipts/PR-5188-glob-field-loading-round-3.md` records the full run with the proof pair. PR 5188 is merged.
 Tags: gate, implementation, review
 Intended host: vm6 (Linux, JDK 21.0.12.1+1), claim `claims/pr-5188-round-3-gate-vm6.md`.
 Supersedes: `gates/pr-5188-glob-field-loading-round-3.md` at head H `f00caeb5e83ac375672ae27fb43ee1546795e98b`, under its repair rule (tidy changed one test file). Repair: `reports/pr-5188-glob-field-loading-repair-round-3.md`.
