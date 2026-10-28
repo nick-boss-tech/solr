@@ -1,6 +1,8 @@
 # Gate: PR 5188 full snippet and field-loading proof, superseding round 2 (pinned `409183a`)
 
-Status: OPEN
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice 2, phone agent): executed by vm6 at the pinned head `409183a`; the receipt `receipts/PR-5188-glob-field-loading-round-2.md` records the full run with the proof pair. PR 5188 is merged.
 Tags: gate, implementation, review
 Intended host: vm6 (Linux, JDK 21.0.12.1+1), claim `claims/pr-5188-glob-field-loading-round-2-vm6.md`.
 Supersedes: `gates/pr-5188-glob-field-loading-round-2.md` at head H `cb8d3dcf0172515e11b92a9d1c7d9aa186f1364c`, under its repair rule (tidy changed one test file). Repair: `reports/pr-5188-glob-field-loading-repair-round-2.md`.
