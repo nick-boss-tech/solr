@@ -52,7 +52,8 @@ public class SliceMutatorRoutingRuleTest extends SolrTestCase {
     assertEquals(previous.getProperties(), routingRule(restored).getProperties());
     assertEquals(
         installed.getProperties(),
-        state.getCollection("source")
+        state
+            .getCollection("source")
             .getSlice("shard1")
             .getRoutingRules()
             .get("a!")
@@ -101,9 +102,12 @@ public class SliceMutatorRoutingRuleTest extends SolrTestCase {
   private static Map<String, Object> baseMessage() {
     return new HashMap<>(
         Map.of(
-            ZkStateReader.COLLECTION_PROP, "source",
-            ZkStateReader.SHARD_ID_PROP, "shard1",
-            "routeKey", "a!"));
+            ZkStateReader.COLLECTION_PROP,
+            "source",
+            ZkStateReader.SHARD_ID_PROP,
+            "shard1",
+            "routeKey",
+            "a!"));
   }
 
   private static ZkWriteCommand mutate(

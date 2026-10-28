@@ -221,7 +221,8 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
 
     String routeKey = sourceRouter.getRouteKeyNoSuffix(splitKey) + "!";
     Map<String, RoutingRule> routingRules =
-        zkStateReader.getCollection(sourceCollection.getName())
+        zkStateReader
+            .getCollection(sourceCollection.getName())
             .getSlice(sourceSlice.getName())
             .getRoutingRules();
     RoutingRule previousRule = routingRules == null ? null : routingRules.get(routeKey);
@@ -628,8 +629,7 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
       }
       ModifiableSolrParams params = new ModifiableSolrParams();
       params.set(
-          CoreAdminParams.ACTION,
-          CoreAdminParams.CoreAdminAction.REQUESTAPPLYUPDATES.toString());
+          CoreAdminParams.ACTION, CoreAdminParams.CoreAdminAction.REQUESTAPPLYUPDATES.toString());
       params.set(CoreAdminParams.NAME, targetLeader.getStr("core"));
       ShardHandler shardHandler = ccc.newShardHandler();
       ShardRequestTracker shardRequestTracker =

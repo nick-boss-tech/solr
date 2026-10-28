@@ -259,7 +259,8 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
                 .getZkController()
                 .getZkStateReader()
                 .forceUpdateCollection(source);
-            cluster.getSolrClient()
+            cluster
+                .getSolrClient()
                 .add(source, new SolrInputDocument("id", "a!updated", "n_ti", 2));
             cluster.getSolrClient().deleteById(source, "a!deleted");
             cluster.getSolrClient().add(source, new SolrInputDocument("id", "b!1", "n_ti", 3));
@@ -300,14 +301,16 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
     assertEquals(
         "An earlier migration's buffered update must be replayed",
         1,
-        cluster.getSolrClient()
+        cluster
+            .getSolrClient()
             .query(target, new SolrQuery("id:\"a!updated\" AND n_ti:2"))
             .getResults()
             .getNumFound());
     assertEquals(
         "An earlier migration's buffered delete must be replayed",
         0,
-        cluster.getSolrClient()
+        cluster
+            .getSolrClient()
             .query(target, new SolrQuery("id:\"a!deleted\""))
             .getResults()
             .getNumFound());
@@ -316,7 +319,8 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
     assertEquals(
         "A failed migration may leave partial target data, but must preserve acknowledged writes",
         1,
-        cluster.getSolrClient()
+        cluster
+            .getSolrClient()
             .query(target, new SolrQuery("id:\"b!1\" AND n_ti:3"))
             .getResults()
             .getNumFound());
@@ -357,7 +361,8 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
     cluster.getSolrClient().commit(target);
     assertEquals(
         1,
-        cluster.getSolrClient()
+        cluster
+            .getSolrClient()
             .query(target, new SolrQuery("id:\"a!1\" AND n_ti:2"))
             .getResults()
             .getNumFound());
@@ -417,10 +422,7 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
     cluster.getSolrClient().commit(target);
     assertEquals(
         1,
-        cluster.getSolrClient()
-            .query(target, new SolrQuery("n_ti:2"))
-            .getResults()
-            .getNumFound());
+        cluster.getSolrClient().query(target, new SolrQuery("n_ti:2")).getResults().getNumFound());
   }
 
   private RoutingRule currentRoutingRule(String collection, String key) throws Exception {
