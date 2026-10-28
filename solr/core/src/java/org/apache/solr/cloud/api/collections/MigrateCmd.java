@@ -51,6 +51,7 @@ import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.handler.component.ShardHandler;
+import org.apache.solr.util.TestInjection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -218,6 +219,32 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
     Replica targetLeader =
         zkStateReader.getLeaderRetry(targetCollection.getName(), targetSlice.getName(), 10000);
 
+    String routeKey = sourceRouter.getRouteKeyNoSuffix(splitKey) + "!";
+    Map<String, RoutingRule> routingRules =
+        zkStateReader.getCollection(sourceCollection.getName())
+            .getSlice(sourceSlice.getName())
+            .getRoutingRules();
+    RoutingRule previousRule = routingRules == null ? null : routingRules.get(routeKey);
+    if (previousRule != null) {
+      previousRule = new RoutingRule(previousRule.shallowCopy());
+      if (!targetCollection.getName().equals(previousRule.getTargetCollectionName())) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST,
+            "Routing rule for " + routeKey + " already forwards to another collection");
+      }
+    }
+    String expireAt = RoutingRule.makeExpiryAt(timeout);
+    Map<String, Object> ruleProps =
+        previousRule == null ? new HashMap<>() : previousRule.shallowCopy();
+    ruleProps.put(
+        "routeRanges",
+        previousRule == null
+            ? splitRange.toString()
+            : previousRule.getRouteRangesStr() + "," + splitRange);
+    ruleProps.put("targetCollection", targetCollection.getName());
+    ruleProps.put("expireAt", expireAt);
+    RoutingRule installedRule = new RoutingRule(ruleProps);
+
     if (log.isInfoEnabled()) {
       log.info(
           "Asking target leader node: {} core: {} to buffer updates",
@@ -237,8 +264,7 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
       shardRequestTracker.processResponses(
           results, shardHandler, true, "MIGRATE failed to request node to buffer updates");
     }
-    // From here on, the target leader is buffering updates. If MIGRATE fails before it is asked
-    // to apply them, undo the routing rule and the buffering, or the target stays buffering.
+    boolean routingRuleAdded = false;
     try {
       ZkNodeProps m =
           new ZkNodeProps(
@@ -249,13 +275,13 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
               SHARD_ID_PROP,
               sourceSlice.getName(),
               "routeKey",
-              sourceRouter.getRouteKeyNoSuffix(splitKey) + "!",
+              routeKey,
               "range",
               splitRange.toString(),
               "targetCollection",
               targetCollection.getName(),
               "expireAt",
-              RoutingRule.makeExpiryAt(timeout));
+              expireAt);
       log.info("Adding routing rule: {}", m);
       if (ccc.getDistributedClusterStateUpdater().isDistributedStateUpdate()) {
         ccc.getDistributedClusterStateUpdater()
@@ -281,8 +307,9 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
                   Slice s = c.getSlice(sourceSlice.getName());
                   Map<String, RoutingRule> rules = s.getRoutingRules();
                   if (rules != null) {
-                    RoutingRule rule = rules.get(sourceRouter.getRouteKeyNoSuffix(splitKey) + "!");
-                    return rule != null && rule.getRouteRanges().contains(splitRange);
+                    RoutingRule rule = rules.get(routeKey);
+                    return rule != null
+                        && installedRule.getProperties().equals(rule.getProperties());
                   }
                   return false;
                 });
@@ -291,6 +318,8 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
             SolrException.ErrorCode.SERVER_ERROR, "Could not add routing rule: " + m, e);
       }
       log.info("Routing rule added successfully");
+      routingRuleAdded = true;
+      assert TestInjection.injectMigrateAfterRoutingRule();
 
       // Create temp core on source shard
       Replica sourceLeader =
@@ -483,13 +512,22 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
       Thread.currentThread().interrupt();
       throw e;
     } catch (Exception e) {
-      cleanupFailedMigrate(
-          adminCmdContext,
-          sourceCollection,
-          sourceSlice,
-          sourceRouter.getRouteKeyNoSuffix(splitKey) + "!",
-          targetLeader,
-          e);
+      if (routingRuleAdded) {
+        cleanupFailedMigrate(
+            adminCmdContext,
+            sourceCollection.getName(),
+            sourceSlice.getName(),
+            routeKey,
+            previousRule,
+            installedRule,
+            targetLeader,
+            e);
+      } else {
+        e.addSuppressed(
+            new SolrException(
+                SolrException.ErrorCode.SERVER_ERROR,
+                "Routing-rule installation was not confirmed; target remains buffering"));
+      }
       throw e;
     }
     log.info("Asking target leader to apply buffered updates");
@@ -523,17 +561,17 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
   }
 
   /**
-   * Undoes what a failed MIGRATE did before it asked the target leader to apply its buffered
-   * updates: removes the routing rule from the source shard, then drops the target leader's
-   * buffered updates, so that the target leaves the buffering state and a retry can start again.
-   * The source shard still has the documents that were forwarded. Errors are added to the failure
-   * as suppressed exceptions.
+   * Restores the previous routing rule before replaying the core-wide buffer. The buffer may
+   * contain updates from earlier migrations, so it cannot be discarded. A failed migration can
+   * leave partial data on the target. Cleanup errors are suppressed on the original failure.
    */
-  private void cleanupFailedMigrate(
+  void cleanupFailedMigrate(
       AdminCmdContext adminCmdContext,
-      DocCollection sourceCollection,
-      Slice sourceSlice,
+      String sourceCollection,
+      String sourceShard,
       String routeKey,
+      RoutingRule previousRule,
+      RoutingRule installedRule,
       Replica targetLeader,
       Exception failure) {
     try {
@@ -542,12 +580,16 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
               Overseer.QUEUE_OPERATION,
               OverseerAction.REMOVEROUTINGRULE.toLower(),
               COLLECTION_PROP,
-              sourceCollection.getName(),
+              sourceCollection,
               SHARD_ID_PROP,
-              sourceSlice.getName(),
+              sourceShard,
               "routeKey",
-              routeKey);
-      log.info("Removing routing rule of failed MIGRATE: {}", m);
+              routeKey,
+              "expectedRule",
+              installedRule.getProperties(),
+              "restoreRule",
+              previousRule == null ? null : previousRule.getProperties());
+      log.info("Restoring routing rule after failed MIGRATE: {}", m);
       if (ccc.getDistributedClusterStateUpdater().isDistributedStateUpdate()) {
         ccc.getDistributedClusterStateUpdater()
             .doSingleStateUpdate(
@@ -558,34 +600,36 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
       } else {
         ccc.offerStateUpdate(m);
       }
-      // Updates forwarded until the rule is gone would be indexed by the target once it is no
-      // longer buffering, so wait for the removal before dropping the buffered updates.
+      // Do not resume target processing until the failed transfer's routing change is undone.
       ccc.getZkStateReader()
           .waitForState(
-              sourceCollection.getName(),
+              sourceCollection,
               60,
               TimeUnit.SECONDS,
               c -> {
-                if (c == null || c.getSlice(sourceSlice.getName()) == null) return true;
-                Map<String, RoutingRule> rules =
-                    c.getSlice(sourceSlice.getName()).getRoutingRules();
-                return rules == null || !rules.containsKey(routeKey);
+                if (c == null || c.getSlice(sourceShard) == null) return true;
+                Map<String, RoutingRule> rules = c.getSlice(sourceShard).getRoutingRules();
+                RoutingRule rule = rules == null ? null : rules.get(routeKey);
+                if (rule == null) return previousRule == null || previousRule.isExpired();
+                return previousRule != null
+                    && previousRule.getProperties().equals(rule.getProperties());
               });
     } catch (Exception e) {
       addCleanupFailure(failure, e);
+      return;
     }
 
     try {
       if (log.isInfoEnabled()) {
         log.info(
-            "Asking target leader node: {} core: {} to drop buffered updates",
+            "Asking target leader node: {} core: {} to apply buffered updates after failed MIGRATE",
             targetLeader.getNodeName(),
             targetLeader.getStr("core"));
       }
       ModifiableSolrParams params = new ModifiableSolrParams();
       params.set(
           CoreAdminParams.ACTION,
-          CoreAdminParams.CoreAdminAction.REQUESTDROPBUFFEREDUPDATES.toString());
+          CoreAdminParams.CoreAdminAction.REQUESTAPPLYUPDATES.toString());
       params.set(CoreAdminParams.NAME, targetLeader.getStr("core"));
       ShardHandler shardHandler = ccc.newShardHandler();
       ShardRequestTracker shardRequestTracker =
@@ -595,7 +639,7 @@ public class MigrateCmd implements CollApiCmds.CollectionApiCommand {
           new NamedList<>(),
           shardHandler,
           true,
-          "MIGRATE failed to request node to drop buffered updates");
+          "MIGRATE cleanup failed to apply buffered updates");
     } catch (Exception e) {
       addCleanupFailure(failure, e);
     }

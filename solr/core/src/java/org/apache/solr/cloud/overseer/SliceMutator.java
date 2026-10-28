@@ -288,7 +288,22 @@ public class SliceMutator {
     }
     Map<String, RoutingRule> routingRules = slice.getRoutingRules();
     if (routingRules != null) {
-      routingRules.remove(routeKeyStr); // no rules left
+      routingRules = new HashMap<>(routingRules);
+      Object expectedRule = message.get("expectedRule");
+      if (expectedRule != null) {
+        RoutingRule current = routingRules.get(routeKeyStr);
+        if (current == null || !current.getProperties().equals(expectedRule)) {
+          return ZkStateWriter.NO_OP;
+        }
+      }
+      Object restoreRule = message.get("restoreRule");
+      if (restoreRule == null) {
+        routingRules.remove(routeKeyStr);
+      } else {
+        @SuppressWarnings("unchecked")
+        Map<String, Object> restored = new HashMap<>((Map<String, Object>) restoreRule);
+        routingRules.put(routeKeyStr, new RoutingRule(restored));
+      }
       Map<String, Object> props = slice.shallowCopy();
       props.put("routingRules", routingRules);
       Slice newSlice = new Slice(slice.getName(), slice.getReplicasCopy(), props, collectionName);

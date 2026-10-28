@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -28,7 +31,9 @@ import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.SolrQuery;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.RequestStatusState;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.cloud.CompositeIdRouter;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.cloud.RoutingRule;
@@ -36,6 +41,7 @@ import org.apache.solr.common.cloud.Slice;
 import org.apache.solr.common.util.TimeSource;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.update.UpdateLog;
+import org.apache.solr.util.TestInjection;
 import org.apache.solr.util.TimeOut;
 import org.apache.zookeeper.KeeperException;
 import org.junit.BeforeClass;
@@ -226,6 +232,202 @@ public class MigrateRouteKeyTest extends SolrCloudTestCase {
           Map<String, RoutingRule> routingRules = c.getSlice("shard1").getRoutingRules();
           return routingRules == null || !routingRules.containsKey("a!");
         });
+  }
+
+  @Test
+  public void testFailedMigratePreservesEarlierForwardedUpdates() throws Exception {
+    String source = "preserveUpdates-source";
+    String target = "preserveUpdates-target";
+    CollectionAdminRequest.createCollection(source, "conf", 1, 1).process(cluster.getSolrClient());
+    CollectionAdminRequest.createCollection(target, "conf", 1, 1).process(cluster.getSolrClient());
+    cluster.getSolrClient().add(source, new SolrInputDocument("id", "a!updated", "n_ti", 1));
+    cluster.getSolrClient().add(source, new SolrInputDocument("id", "a!deleted", "n_ti", 1));
+    cluster.getSolrClient().add(source, new SolrInputDocument("id", "b!1"));
+    cluster.getSolrClient().commit(source);
+    CollectionAdminRequest.migrateData(source, target, "a!")
+        .setForwardTimeout(600)
+        .process(cluster.getSolrClient());
+
+    AtomicBoolean writesAcknowledged = new AtomicBoolean();
+    TestInjection.migrateAfterRoutingRule =
+        () -> {
+          try {
+            Replica sourceLeader = getCollectionState(source).getLeader("shard1");
+            cluster
+                .getReplicaJetty(sourceLeader)
+                .getCoreContainer()
+                .getZkController()
+                .getZkStateReader()
+                .forceUpdateCollection(source);
+            cluster.getSolrClient()
+                .add(source, new SolrInputDocument("id", "a!updated", "n_ti", 2));
+            cluster.getSolrClient().deleteById(source, "a!deleted");
+            cluster.getSolrClient().add(source, new SolrInputDocument("id", "b!1", "n_ti", 3));
+            Replica leader = getCollectionState(target).getLeader("shard1");
+            try (SolrCore core =
+                    cluster
+                        .getReplicaJetty(leader)
+                        .getCoreContainer()
+                        .getCore(leader.getCoreName());
+                UpdateLog.RecentUpdates updates =
+                    core.getUpdateHandler().getUpdateLog().getRecentUpdates()) {
+              assertEquals(
+                  UpdateLog.State.BUFFERING, core.getUpdateHandler().getUpdateLog().getState());
+              assertEquals(
+                  "All acknowledged writes must be in the target buffer",
+                  3,
+                  updates.getBufferUpdates().size());
+            }
+            writesAcknowledged.set(true);
+          } catch (Exception e) {
+            throw new RuntimeException(e);
+          }
+          throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, "injected MIGRATE failure");
+        };
+    try {
+      RemoteSolrException failure =
+          expectThrows(
+              RemoteSolrException.class,
+              () ->
+                  CollectionAdminRequest.migrateData(source, target, "b!")
+                      .process(cluster.getSolrClient()));
+      assertTrue(failure.getMessage(), failure.getMessage().contains("injected MIGRATE failure"));
+    } finally {
+      TestInjection.migrateAfterRoutingRule = null;
+    }
+    assertTrue(writesAcknowledged.get());
+    cluster.getSolrClient().commit(target);
+    assertEquals(
+        "An earlier migration's buffered update must be replayed",
+        1,
+        cluster.getSolrClient()
+            .query(target, new SolrQuery("id:\"a!updated\" AND n_ti:2"))
+            .getResults()
+            .getNumFound());
+    assertEquals(
+        "An earlier migration's buffered delete must be replayed",
+        0,
+        cluster.getSolrClient()
+            .query(target, new SolrQuery("id:\"a!deleted\""))
+            .getResults()
+            .getNumFound());
+    assertNotNull(currentRoutingRule(source, "a!"));
+    assertNull(currentRoutingRule(source, "b!"));
+    assertEquals(
+        "A failed migration may leave partial target data, but must preserve acknowledged writes",
+        1,
+        cluster.getSolrClient()
+            .query(target, new SolrQuery("id:\"b!1\" AND n_ti:3"))
+            .getResults()
+            .getNumFound());
+  }
+
+  @Test
+  public void testFailedMigrateRestoresExistingRule() throws Exception {
+    String source = "restoreRule-source";
+    String target = "restoreRule-target";
+    CollectionAdminRequest.createCollection(source, "conf", 1, 1).process(cluster.getSolrClient());
+    CollectionAdminRequest.createCollection(target, "conf", 1, 1).process(cluster.getSolrClient());
+    cluster.getSolrClient().add(source, new SolrInputDocument("id", "a!1", "n_ti", 1));
+    cluster.getSolrClient().commit(source);
+    CollectionAdminRequest.migrateData(source, target, "a!")
+        .setForwardTimeout(600)
+        .process(cluster.getSolrClient());
+    Map<String, Object> previousRule = currentRoutingRule(source, "a!").shallowCopy();
+
+    TestInjection.migrateAfterRoutingRule =
+        () -> {
+          throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, "injected MIGRATE failure");
+        };
+    try {
+      RemoteSolrException failure =
+          expectThrows(
+              RemoteSolrException.class,
+              () ->
+                  CollectionAdminRequest.migrateData(source, target, "a!")
+                      .process(cluster.getSolrClient()));
+      assertTrue(failure.getMessage(), failure.getMessage().contains("injected MIGRATE failure"));
+    } finally {
+      TestInjection.migrateAfterRoutingRule = null;
+    }
+    RoutingRule restored = currentRoutingRule(source, "a!");
+    assertNotNull("An existing rule must survive a failed repeated migration", restored);
+    assertEquals(previousRule, restored.getProperties());
+    cluster.getSolrClient().add(source, new SolrInputDocument("id", "a!1", "n_ti", 2));
+    cluster.getSolrClient().commit(target);
+    assertEquals(
+        1,
+        cluster.getSolrClient()
+            .query(target, new SolrQuery("id:\"a!1\" AND n_ti:2"))
+            .getResults()
+            .getNumFound());
+  }
+
+  @Test
+  public void testFailedMultiShardMigratePreservesEarlierRange() throws Exception {
+    String source = "preserveRange-source";
+    String target = "preserveRange-target";
+    CollectionAdminRequest.createCollection(source, "conf", 1, 1).process(cluster.getSolrClient());
+    CollectionAdminRequest.createCollection(target, "conf", 4, 1).process(cluster.getSolrClient());
+    for (int i = 0; i < 100; i++) {
+      cluster.getSolrClient().add(source, new SolrInputDocument("id", "a/1!" + i, "n_ti", 1));
+    }
+    cluster.getSolrClient().commit(source);
+    AtomicInteger transfers = new AtomicInteger();
+    AtomicReference<RoutingRule> completedRange = new AtomicReference<>();
+    TestInjection.migrateAfterRoutingRule =
+        () -> {
+          if (transfers.incrementAndGet() == 1) {
+            try {
+              completedRange.set(new RoutingRule(currentRoutingRule(source, "a!").shallowCopy()));
+            } catch (Exception e) {
+              throw new RuntimeException(e);
+            }
+          } else {
+            throw new SolrException(
+                SolrException.ErrorCode.SERVER_ERROR, "injected MIGRATE failure");
+          }
+        };
+    try {
+      expectThrows(
+          RemoteSolrException.class,
+          () ->
+              CollectionAdminRequest.migrateData(source, target, "a/1!")
+                  .setForwardTimeout(600)
+                  .process(cluster.getSolrClient()));
+    } finally {
+      TestInjection.migrateAfterRoutingRule = null;
+    }
+    assertEquals(2, transfers.get());
+    RoutingRule restored = currentRoutingRule(source, "a!");
+    assertNotNull("The first successful transfer's rule must survive", restored);
+    assertEquals(completedRange.get().getProperties(), restored.getProperties());
+    DocCollection state = getCollectionState(source);
+    CompositeIdRouter router = (CompositeIdRouter) state.getRouter();
+    String forwardedId = null;
+    for (int i = 0; i < 100; i++) {
+      String id = "a/1!" + i;
+      if (restored.getRouteRanges().get(0).includes(router.sliceHash(id, null, null, state))) {
+        forwardedId = id;
+        break;
+      }
+    }
+    assertNotNull(forwardedId);
+    cluster.getSolrClient().add(source, new SolrInputDocument("id", forwardedId, "n_ti", 2));
+    cluster.getSolrClient().commit(target);
+    assertEquals(
+        1,
+        cluster.getSolrClient()
+            .query(target, new SolrQuery("n_ti:2"))
+            .getResults()
+            .getNumFound());
+  }
+
+  private RoutingRule currentRoutingRule(String collection, String key) throws Exception {
+    cluster.getZkStateReader().forceUpdateCollection(collection);
+    Map<String, RoutingRule> rules =
+        cluster.getZkStateReader().getCollection(collection).getSlice("shard1").getRoutingRules();
+    return rules == null ? null : rules.get(key);
   }
 
   @Test

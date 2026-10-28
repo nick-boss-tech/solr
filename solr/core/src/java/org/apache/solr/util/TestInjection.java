@@ -139,6 +139,8 @@ public class TestInjection {
 
   public static volatile CountDownLatch splitLatch = null;
 
+  public static volatile Runnable migrateAfterRoutingRule = null;
+
   public static volatile CountDownLatch directUpdateLatch = null;
 
   public static volatile CountDownLatch reindexLatch = null;
@@ -211,6 +213,7 @@ public class TestInjection {
     splitFailureBeforeReplicaCreation = null;
     splitFailureAfterReplicaCreation = null;
     splitLatch = null;
+    migrateAfterRoutingRule = null;
     directUpdateLatch = null;
     reindexLatch = null;
     reindexFailure = null;
@@ -231,6 +234,12 @@ public class TestInjection {
     for (Timer timer : timers) {
       timer.cancel();
     }
+  }
+
+  public static boolean injectMigrateAfterRoutingRule() {
+    Runnable hook = migrateAfterRoutingRule;
+    if (LUCENE_TEST_CASE != null && hook != null) hook.run();
+    return true;
   }
 
   public static boolean injectWrongIndexFingerprint() {

@@ -1011,6 +1011,10 @@ The MIGRATE command is used to migrate all documents having a given routing key 
 The source collection will continue to have the same data as-is but it will start re-routing write requests to the target collection for the number of seconds specified by the `forward.timeout` parameter.
 It is the responsibility of the user to switch to the target collection for reads and writes after the MIGRATE action completes.
 
+MIGRATE is not transactional. A failed request can leave partial data in the target collection.
+When cleanup succeeds, Solr restores the previous forwarding rule and applies buffered updates to preserve writes forwarded by earlier migrations.
+If routing cleanup fails or routing-rule installation cannot be confirmed, the target can remain buffering and require operator intervention before retrying.
+
 [tabs#migratecollection-request]
 ======
 V1 API::
