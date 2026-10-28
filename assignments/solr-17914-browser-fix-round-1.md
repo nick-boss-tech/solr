@@ -1,6 +1,6 @@
 # Assignment: SOLR-17914 browser-leg fix and screenshots, round 1
 
-Status: CLAIMED (vm4, claim `claims/solr-17914-browser-fix-round-1-linux-gate.md`, started 2026-10-28T06:58Z). Previously OPEN. Standing handoff from the round-1 browser check (`receipts/SOLR-17914-browser-check-round-1.md`, verdict red).
+Status: OPEN for owner decision (vm4 Linux gate red at candidate 252e0a75bb; cause is shared wasm test resources, see `receipts/SOLR-17914-browser-fix-round-1.md`). Previously CLAIMED.
 
 Posted 2026-10-28 by vm4 at Nick Shanin's direction. Intended hosts: a host with the `ui` and `gate` tags (vm4, vm5, or vm6). Claim before work. Source changes ARE in scope for this assignment, which is the explicit exception to the settling-run rule.
 
