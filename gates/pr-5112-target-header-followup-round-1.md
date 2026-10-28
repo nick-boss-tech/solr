@@ -1,6 +1,8 @@
 # Gate: PR 5112 target header routing follow-up, round 1
 
-Status: OPEN
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice, phone agent): superseded by `gates/pr-5112-target-header-followup-round-1-superseding-46bc7e4.md` before execution; the superseding job carries the proof.
 
 - Tags: gate, premise-run, review.
 - Intended host: any capable Linux gate host with the branch's JDK/toolchain, serialized behind its host build lock.
