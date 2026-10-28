@@ -148,10 +148,8 @@ public class AliasCollectionApiLockTest extends SolrCloudTestCase {
       originalLock.release();
       originalReleased = true;
 
-      assertEquals(
-          RequestStatusState.FAILED,
-          CollectionAdminRequest.requestStatus(asyncId)
-              .waitFor(cluster.getSolrClient(), WAIT_SECONDS));
+      new TimeOut(WAIT_SECONDS, TimeUnit.SECONDS, TimeSource.NANO_TIME)
+          .waitFor("Async delete did not fail", () -> state(asyncId) == RequestStatusState.FAILED);
       var response = CollectionAdminRequest.requestStatus(asyncId).process(cluster.getSolrClient());
       SolrException error = (SolrException) response.getException();
       assertNotNull(error);

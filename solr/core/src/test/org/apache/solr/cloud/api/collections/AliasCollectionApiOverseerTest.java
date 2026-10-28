@@ -16,6 +16,7 @@
  */
 package org.apache.solr.cloud.api.collections;
 
+import java.util.concurrent.TimeUnit;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.response.RequestStatusState;
 import org.apache.solr.cloud.Overseer;
@@ -29,7 +30,9 @@ import org.apache.solr.common.params.CollectionAdminParams;
 import org.apache.solr.common.params.CollectionParams.CollectionAction;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.common.util.TimeSource;
 import org.apache.solr.handler.component.HttpShardHandlerFactory;
+import org.apache.solr.util.TimeOut;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -57,6 +60,16 @@ public class AliasCollectionApiOverseerTest extends SolrCloudTestCase {
     return request;
   }
 
+  private static RequestStatusState state(String asyncId) {
+    try {
+      return CollectionAdminRequest.requestStatus(asyncId)
+          .process(cluster.getSolrClient())
+          .getRequestStatus();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   @Test
   public void testMultiCollectionAliasReturnsBadRequest() throws Exception {
     createCollectionsAndAlias("multiAlias", true);
@@ -74,10 +87,8 @@ public class AliasCollectionApiOverseerTest extends SolrCloudTestCase {
     createCollectionsAndAlias("multiAlias", true);
     String asyncId = "deleteMultiCollectionAlias";
     deleteFollowingAliases("multiAlias").processAsync(asyncId, cluster.getSolrClient());
-    assertEquals(
-        RequestStatusState.FAILED,
-        CollectionAdminRequest.requestStatus(asyncId)
-            .waitFor(cluster.getSolrClient(), WAIT_SECONDS));
+    new TimeOut(WAIT_SECONDS, TimeUnit.SECONDS, TimeSource.NANO_TIME)
+        .waitFor("Async delete did not fail", () -> state(asyncId) == RequestStatusState.FAILED);
     var response = CollectionAdminRequest.requestStatus(asyncId).process(cluster.getSolrClient());
     assertTrue(response.getResponse().get("exception") instanceof NamedList<?>);
     SolrException error = (SolrException) response.getException();
