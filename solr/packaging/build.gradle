@@ -312,6 +312,10 @@ def configureBatsTask(BatsTask task, String outputName, boolean usePicocli) {
   task.reportDir = integrationTestOutput
   task.inputs.dir(distDir)
   task.inputs.dir('test')  // Track .bats test files and helper as inputs
+  // Changing an image must rerun the opt-in version-compatibility test.
+  ['SOLR_RELEASE_IMAGE', 'SOLR_SNAPSHOT_IMAGE', 'SOLR_RELEASE_VERSION'].each {imageSetting ->
+    task.inputs.property(imageSetting, project.providers.environmentVariable(imageSetting).orElse(''))
+  }
   task.outputs.dir(integrationTestOutput)
 
   task.doFirst {
