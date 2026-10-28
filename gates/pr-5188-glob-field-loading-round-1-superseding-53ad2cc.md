@@ -1,6 +1,8 @@
 # Gate: PR 5188 glob RTG field loading and lazy prefetch, superseding round 2 (pinned `53ad2cc`)
 
-Status: OPEN
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice 2, phone agent): aborted before the post-fix legs and superseded by the `7ac2bc8` job, per its own gate file.
 Tags: gate, implementation, review
 Intended host: vm6 (Linux, JDK 21.0.12.1+1), claim `claims/pr-5188-glob-field-loading-round-1-vm6.md`.
 Supersedes: `gates/pr-5188-glob-field-loading-round-1-superseding-b428596.md` for head `b428596`, which failed (`reports/pr-5188-glob-field-loading-gate-failure-round-1.md`). Repair: `reports/pr-5188-glob-field-loading-repair-round-2.md`.
