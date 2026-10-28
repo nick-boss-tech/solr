@@ -1,6 +1,6 @@
 # Assignment: SOLR-17914 browser-leg check for PR #5258, round 1
 
-Status: OPEN
+Status: CLAIMED (vm4, claim `claims/solr-17914-browser-check-round-1.md`, started 2026-10-28T05:43:22Z)
 
 Posted 2026-10-27 by the phone agent at Nick Shanin's direction. Intended hosts: a host with the `ui` and `gate` tags and the working software-renderer setup (vm4, vm5, or vm6). Claim before work.
 
