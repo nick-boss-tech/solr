@@ -1,6 +1,6 @@
 # Gate: SOLR-17914 Windows candidate, browser fix round 1
 
-Status: OPEN. Linux proof and screenshots pending. This is the execution handoff for the Windows implementation slice; it does not replace the original assignment's acceptance rules.
+Status: SUPERSEDED by `receipts/SOLR-17914-wasm-test-resources.md` (green at PR #5258 head `bb7a4f32eb`). The candidate `252e0a75bb` is not used. This file does not replace the original assignment's acceptance rules.
 
 - Parent assignment: `assignments/solr-17914-browser-fix-round-1.md`.
 - Implementation report: `reports/solr-17914-browser-fix-round-1-windows-implementation.md`.

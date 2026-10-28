@@ -1,6 +1,6 @@
 # Assignment: SOLR-17914 browser-leg fix and screenshots, round 1
 
-Status: OPEN for owner decision (vm4 Linux gate red at candidate 252e0a75bb; cause is shared wasm test resources, see `receipts/SOLR-17914-browser-fix-round-1.md`). Previously CLAIMED.
+Status: DONE for the dialog and card tests at PR #5258 head `bb7a4f32eb`. The wasm browser leg and full `ui check` pass. See `receipts/SOLR-17914-wasm-test-resources.md`. The original red receipt `receipts/SOLR-17914-browser-fix-round-1.md` and candidate `252e0a75bb` are superseded. The screenshot deliverable is in the PR body, and the board copy is pending an owner decision.
 
 Posted 2026-10-28 by vm4 at Nick Shanin's direction. Intended hosts: a host with the `ui` and `gate` tags (vm4, vm5, or vm6). Claim before work. Source changes ARE in scope for this assignment, which is the explicit exception to the settling-run rule.
 
