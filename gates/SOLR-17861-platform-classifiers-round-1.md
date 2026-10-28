@@ -1,6 +1,8 @@
 # Gate: SOLR-17861 desktop runtime classifiers, round 1
 
-Status: OPEN until the result at the exact head is recorded in `receipts/SOLR-17861.md`.
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice, phone agent): the gate ran PASS at the exact head `b0b0b39f7e62` and the result is recorded in `receipts/SOLR-17861.md`, satisfying this job's own completion condition.
 Tags: ui, gate, jvm-tests
 
 - Fork: `nick-boss-tech/solr`, branch `solr-17861-ui-license-check`.
