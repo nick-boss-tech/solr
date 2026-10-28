@@ -1,6 +1,8 @@
 # Gate: PR 5188 full snippet and field-loading proof, round 2
 
-Status: OPEN
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice 2, phone agent): superseded by `gates/pr-5188-glob-field-loading-round-2-superseding-409183a.md` under its repair rule, which executed; see `receipts/PR-5188-glob-field-loading-round-2.md`.
 Tags: gate, implementation, review
 Intended host: any capable Linux gate host with JDK 21, Python 3, Git and the supported serialized Solr runner.
 
