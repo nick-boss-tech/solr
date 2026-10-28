@@ -1,6 +1,8 @@
 # Gate: PR 5112 target header routing follow-up, superseding round 1 at 46bc7e4
 
-Status: OPEN, superseding `gates/pr-5112-target-header-followup-round-1.md`.
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice, phone agent): GREEN at the exact head `46bc7e428b5b` by vm5 on 2026-10-27, recorded in `receipts/PR-5112-target-header-followup.md`. Supersedes `gates/pr-5112-target-header-followup-round-1.md`.
 
 - Tags: gate, premise-run, review.
 - Intended host: vm5 (claim `claims/pr-5112-target-header-followup-linux-round-2-vm5.md`).
