@@ -23,7 +23,7 @@ Commands mirror the round-1 gate's required legs. Logs and XML under `~/workspac
 - testUpload, seed `4478EC01207498A8` (UTF-8, security manager): rc 0. Fresh XML: 1 test, 0 failures, 0 errors, 0 skipped.
 - Full `TestConfigSetAdminRequest`, seed `5235C0FFEE18351`: rc 0. Fresh XML: 5 tests, 0 failures, 0 errors, 0 skipped.
 
-A local fail-before run at B under the first CI seed was launched in the same chain; its result is recorded in an addendum when it lands. The upstream CI result above is the fail-before evidence of record.
+Local confirmation at B, same chain, seed `747FA8C56DB2B91B`: rc 1; fresh XML 1 test, 1 failure, the identical NullPointerException (`getContentWriter` returned null). The proof pair is complete at matched shape: the method fails at B and passes at F under the same seed and flags.
 
 ## Scope
 
