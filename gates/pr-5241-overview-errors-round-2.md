@@ -1,6 +1,8 @@
 # Gate repair: PR 5241 core overview errors, round 2
 
-Status: OPEN. Supersedes `gates/pr-5241-overview-errors-round-1.md` for final offered-head proof. The old job, receipt, claim, and logs remain intact as NOT GREEN evidence.
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice, phone agent): superseded by `gates/pr-5241-overview-errors-round-2-f3-vm4.md` (already DONE) for final proof at head `3b36f32e93d5`, recorded in `receipts/PR-5241-overview-errors.md`. Supersedes `gates/pr-5241-overview-errors-round-1.md`; the NOT GREEN evidence stands.
 
 - Ticket / PR: SOLR-16398 / https://github.com/apache/solr/pull/5241.
 - Fork / branch: `nick-boss-tech/solr:solr-16398-submit`.
