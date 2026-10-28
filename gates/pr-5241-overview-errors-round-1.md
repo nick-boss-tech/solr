@@ -1,6 +1,8 @@
 # Gate: PR 5241 core overview replication errors, round 1
 
-Status: OPEN. Immutable once posted; proves only the exact head below.
+Status: DONE
+
+Completed 2026-10-28 (cleanup slice, phone agent): this round finished NOT GREEN and was superseded for final proof by the round-2 chain ending at head `3b36f32e93d5`; its evidence stands as recorded. Final proof: `receipts/PR-5241-overview-errors.md`.
 
 - Ticket and upstream PR: SOLR-16398, https://github.com/apache/solr/pull/5241.
 - Intended host: any available capable Linux gate host with JDK 21, Chrome/Chromium, chromedriver or Selenium Manager access, and the branch's Gradle and generated JS client dependencies. This is the AngularJS `solr/webapp` module, not the Kotlin `ui/` build.
