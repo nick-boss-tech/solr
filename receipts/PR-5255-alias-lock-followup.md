@@ -1,9 +1,9 @@
 # Receipt: PR 5255 alias-lock follow-up (SOLR-18589), gate round 4 (vm5)
 
 - Gate job: `gates/pr-5255-alias-lock-followup-round-4.md`. Claim: `claims/pr-5255-alias-lock-followup-gate-round-4-vm5.md`. Supersedes rounds 1 to 3 (`gates/pr-5255-alias-lock-followup-round-1.md` and the round-2 and round-3 claims with their verdicts).
-- Head: `52dacc23b5bb67d254c111c948733da7bc4a9f81` on `nick-boss-tech/solr:solr-18589-submit`. Parent and negative proof base: `1edd6a113b2a9e1b029f509c9279f4fb58683bba`. Round 1 head `fd49245a38ba779f78840477dbf6db34b92c5f6b` is three commits below the head.
+- Head: `52dacc23b5bb67d254c111c948733da7bc4a9f81` on `nick-boss-tech/solr:solr-18589-submit`. Parent and negative proof base: `1edd6a113b2a9e1b029f509c9279f4fb58683bba`. The head is three commits above round 1 head `fd49245a38ba779f78840477dbf6db34b92c5f6b`.
 - Commits above round 1, each a fast-forward by Nick Shanin with no trailers: `c09411a16c` (tidy formatting of `AliasCollectionApiLockTest.java`), `bf5098b3da` (test compile repair: five chained `setFollowAliases(true).process*` calls on a `void` setter replaced by a helper), `52dacc23b5` (test read-order repair: `waitFor` deletes a finished async status, so both tests now poll for FAILED and read it once).
-- Production code: unchanged from round 1, `solr/core/src/java` diff against parent is empty for the follow-up delta, which is in the tests and in the earlier round-1 production change. Diff against parent: 19 files, 338 insertions, 11 deletions.
+- Production code: the round-1 production change is unchanged. The three round-4 commits touch only `solr/core/src/test`. Diff against parent: 19 files, 338 insertions, 11 deletions.
 - Host: vm5, Linux aarch64, JDK 21.0.12.1+1 at `/workspace/jdk/jdk-21.0.12.1+1`, Gradle 9.7.0 through the wrapper, `GRADLE_USER_HOME=/workspace/gradle-home`, `NODE_ENV` unset, host lock `/workspace/tools/.gradle-vm5.lock`.
 - Logs and XML: `/workspace/gates/logs/vm5/pr-5255-alias-lock-followup-round-4/` (`results.txt` is the timeline; `xml-*` directories hold the fresh test XML).
 
