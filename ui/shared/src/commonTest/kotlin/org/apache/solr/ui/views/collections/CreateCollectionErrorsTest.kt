@@ -21,6 +21,10 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.v2.runComposeUiTest
 import org.apache.solr.ui.domain.CreateCollectionResult
+import org.apache.solr.ui.shared.generated.resources.Res
+import org.apache.solr.ui.shared.generated.resources.error_collection_name_exists
+import org.apache.solr.ui.shared.generated.resources.error_create_collection_general
+import org.jetbrains.compose.resources.getString
 import kotlin.test.Test
 
 class CreateCollectionErrorsTest {
@@ -28,6 +32,8 @@ class CreateCollectionErrorsTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun testNameExistsShowsTheNameError() = runComposeUiTest {
+        // Resolve the web resource before asserting on the error rendered by the form.
+        getString(Res.string.error_collection_name_exists)
         setContent {
             CreateCollectionForm(
                 configsets = emptyList(),
@@ -37,6 +43,7 @@ class CreateCollectionErrorsTest {
                 onCancel = {},
             )
         }
+        awaitIdle()
 
         onNodeWithText("A collection with this name already exists").assertExists()
     }
@@ -44,6 +51,7 @@ class CreateCollectionErrorsTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun testFailureWithoutMessageShowsTheFallback() = runComposeUiTest {
+        getString(Res.string.error_create_collection_general)
         setContent {
             CreateCollectionForm(
                 configsets = emptyList(),
@@ -53,6 +61,7 @@ class CreateCollectionErrorsTest {
                 onCancel = {},
             )
         }
+        awaitIdle()
 
         onNodeWithText("Could not create the collection.").assertExists()
     }
