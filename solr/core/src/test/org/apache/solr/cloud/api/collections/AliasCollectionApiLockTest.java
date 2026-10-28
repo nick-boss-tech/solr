@@ -111,8 +111,7 @@ public class AliasCollectionApiLockTest extends SolrCloudTestCase {
     String asyncId = "deleteRetargetedAlias";
     CollectionAdminRequest.createCollection(original, "conf", 1, 1)
         .process(cluster.getSolrClient());
-    CollectionAdminRequest.createCollection(target, "conf", 1, 1)
-        .process(cluster.getSolrClient());
+    CollectionAdminRequest.createCollection(target, "conf", 1, 1).process(cluster.getSolrClient());
     cluster.waitForActiveCollection(original, 1, 1);
     cluster.waitForActiveCollection(target, 1, 1);
     CollectionAdminRequest.createAlias(alias, original).process(cluster.getSolrClient());
@@ -149,8 +148,7 @@ public class AliasCollectionApiLockTest extends SolrCloudTestCase {
           RequestStatusState.FAILED,
           CollectionAdminRequest.requestStatus(asyncId)
               .waitFor(cluster.getSolrClient(), WAIT_SECONDS));
-      var response =
-          CollectionAdminRequest.requestStatus(asyncId).process(cluster.getSolrClient());
+      var response = CollectionAdminRequest.requestStatus(asyncId).process(cluster.getSolrClient());
       SolrException error = (SolrException) response.getException();
       assertNotNull(error);
       assertEquals(SolrException.ErrorCode.CONFLICT.code, error.code());
