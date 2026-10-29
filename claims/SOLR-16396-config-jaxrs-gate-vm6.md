@@ -14,3 +14,12 @@
 
 Heartbeat: 2026-10-29T01:11:37Z
 
+Heartbeat: 2026-10-29T01:36:15Z (resume after VM restart)
+
+Steps recorded before the restart, job `solr16396-r1-f8ba76d` (log dir `/workspace/gates/logs/vm6/solr16396-r1-f8ba76d/`), head `f8ba76d` (tidy commit on `6f15772`):
+- tidy: rc 0, 2026-10-29T01:14:35Z to 01:17:52Z.
+- errorprone-compile: rc 0, 01:17:52Z to 01:24:44Z.
+- solrj-generation: rc 0, 01:24:44Z to 01:26:09Z.
+- focused-tests: interrupted by a VM restart (no rc, no state file). Not counted.
+
+Resume: job `solr16396-r1-f8ba76d-resume` runs focused-tests and module-check at `f8ba76d` after the restart, with the same seed-free command as the job steps. Reason: environment change (VM restart), which the failed-run rule allows; the earlier steps are not rerun.
