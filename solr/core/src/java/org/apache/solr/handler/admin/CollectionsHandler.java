@@ -196,6 +196,7 @@ import org.apache.solr.handler.admin.api.ListCollectionSnapshots;
 import org.apache.solr.handler.admin.api.ListCollections;
 import org.apache.solr.handler.admin.api.MigrateDocsAPI;
 import org.apache.solr.handler.admin.api.MigrateReplicas;
+import org.apache.solr.handler.admin.api.ModifyCollection;
 import org.apache.solr.handler.admin.api.MoveReplicaAPI;
 import org.apache.solr.handler.admin.api.RebalanceLeadersAPI;
 import org.apache.solr.handler.admin.api.ReloadCollectionAPI;
