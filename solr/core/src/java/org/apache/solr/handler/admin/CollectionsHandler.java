@@ -1237,6 +1237,7 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         ForceLeader.class,
         InstallShardData.class,
         ListClusterNodes.class,
+        ListNodeRoles.class,
         ListCollections.class,
         ListCollectionBackups.class,
         ReloadCollectionAPI.class,

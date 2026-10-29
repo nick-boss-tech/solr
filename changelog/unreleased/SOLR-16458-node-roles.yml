@@ -1,0 +1,4 @@
+name: SOLR-16458
+type: added
+title: "V2 API: migrate the cluster node-roles listings (all roles, by role, by role and mode, by node, supported roles) to JAX-RS under /api/cluster/node-roles"
+links: https://issues.apache.org/jira/browse/SOLR-16458
