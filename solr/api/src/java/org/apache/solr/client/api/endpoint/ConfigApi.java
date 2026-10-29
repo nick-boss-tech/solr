@@ -26,6 +26,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
 import org.apache.solr.client.api.model.ConfigInfoResponse;
+import org.apache.solr.client.api.model.ConfigParamsResponse;
 import org.apache.solr.client.api.model.ConfigOverlayResponse;
 import org.apache.solr.client.api.model.ConfigZnodeVersionResponse;
 import org.apache.solr.client.api.util.StoreApiParameters;
@@ -116,6 +117,23 @@ public interface ConfigApi {
     @Operation(
         summary = "Fetch a single named entry within a config section",
         tags = {"config"})
+    @GET
+    @Path("/params")
+    @Operation(
+        summary = "Fetch all request parameter sets ('paramsets') defined for the core.",
+        tags = {"config"})
+    ConfigParamsResponse getAllParamSets();
+
+    @GET
+    @Path("/params/{paramSetName}")
+    @Operation(
+        summary = "Fetch a single request parameter set ('paramset') by name.",
+        tags = {"config"})
+    ConfigParamsResponse getSingleParamSet(
+        @PathParam("paramSetName")
+            @Parameter(description = "Name of the parameter set")
+            String paramSetName);
+
     ConfigInfoResponse getConfigComponentByName(
         @PathParam("component") @Parameter(description = "Name of the config component")
             String component,

@@ -32,6 +32,7 @@ import java.util.Set;
 import org.apache.solr.api.JerseyResource;
 import org.apache.solr.client.api.endpoint.ConfigApi;
 import org.apache.solr.client.api.model.ConfigInfoResponse;
+import org.apache.solr.client.api.model.ConfigParamsResponse;
 import org.apache.solr.client.api.model.ConfigOverlayResponse;
 import org.apache.solr.client.api.model.ConfigZnodeVersionResponse;
 import org.apache.solr.common.MapWriter;
@@ -43,6 +44,7 @@ import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.common.util.StrUtils;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.core.PluginInfo;
+import org.apache.solr.core.RequestParams;
 import org.apache.solr.handler.RequestHandlerBase;
 import org.apache.solr.handler.SolrConfigHandler;
 import org.apache.solr.jersey.NullKeyTolerantMap;
@@ -183,6 +185,33 @@ public class GetConfig extends JerseyResource implements ConfigApi.Get {
     response.overlay =
         Utils.convertToMap(
             solrQueryRequest.getCore().getSolrConfig().getOverlay(), new LinkedHashMap<>());
+    return response;
+  }
+
+  @Override
+  @PermissionName(CONFIG_READ_PERM)
+  public ConfigParamsResponse getAllParamSets() {
+    final var requestParams = solrQueryRequest.getCore().getSolrConfig().getRequestParams();
+    final var response = instantiateJerseyResponse(ConfigParamsResponse.class);
+    response.znodeVersion = requestParams.getZnodeVersion();
+    @SuppressWarnings("unchecked")
+    final Map<String, Object> converted =
+        Utils.convertToMap(requestParams, new LinkedHashMap<>());
+    response.params = (Map<String, Object>) converted.get(RequestParams.NAME);
+    return response;
+  }
+
+  @Override
+  @PermissionName(CONFIG_READ_PERM)
+  public ConfigParamsResponse getSingleParamSet(String paramSetName) {
+    final var requestParams = solrQueryRequest.getCore().getSolrConfig().getRequestParams();
+    final var response = instantiateJerseyResponse(ConfigParamsResponse.class);
+    response.znodeVersion = requestParams.getZnodeVersion();
+    final var paramSet = requestParams.getParams(paramSetName);
+    if (paramSet != null) {
+      response.params =
+          Map.of(paramSetName, Utils.convertToMap(paramSet, new LinkedHashMap<>()));
+    }
     return response;
   }
 

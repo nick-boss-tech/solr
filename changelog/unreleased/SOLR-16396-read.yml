@@ -1,0 +1,4 @@
+name: SOLR-16396
+type: added
+title: "V2 API: migrate the config paramset read APIs (list paramsets, fetch single paramset) to JAX-RS under /api/cores/{core}/config/params"
+links: https://issues.apache.org/jira/browse/SOLR-16396
