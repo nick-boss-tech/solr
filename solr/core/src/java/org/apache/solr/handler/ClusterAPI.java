@@ -18,9 +18,7 @@
 package org.apache.solr.handler;
 
 import static org.apache.solr.client.solrj.SolrRequest.METHOD.GET;
-import static org.apache.solr.client.solrj.SolrRequest.METHOD.POST;
 import static org.apache.solr.common.params.CollectionParams.CollectionAction.OVERSEERSTATUS;
-import static org.apache.solr.security.PermissionNameProvider.Name.COLL_EDIT_PERM;
 import static org.apache.solr.security.PermissionNameProvider.Name.COLL_READ_PERM;
 
 import java.io.IOException;
@@ -48,7 +46,6 @@ import org.apache.zookeeper.KeeperException;
 public class ClusterAPI {
   private final CollectionsHandler collectionsHandler;
   private final ConfigSetsHandler configSetsHandler;
-
 
   public ClusterAPI(CollectionsHandler ch, ConfigSetsHandler configSetsHandler) {
     this.collectionsHandler = ch;
@@ -205,6 +202,4 @@ public class ClusterAPI {
   private CoreContainer getCoreContainer() {
     return collectionsHandler.getCoreContainer();
   }
-
-
 }
