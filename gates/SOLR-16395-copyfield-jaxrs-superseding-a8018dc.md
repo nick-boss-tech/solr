@@ -4,7 +4,7 @@
 - Branch: `solr-16395-copyfield-jaxrs` on `nick-boss-tech/solr`. Proof head: `a8018dc65b40be750dcc97cf012845cc61811d21`, one commit above `ff39f2dab67e8ae4aa4494a4c1059bef35a5a165`.
 - Change in the new commit: one line in `V2UpdateSchemaCopyFieldsTest`, `System.setProperty("solr.index.updatelog.enabled", "false")`, which the core config needs. No production code changed.
 - Base: `74197140a666d4f0396b68484c2bf9df7e79221e`.
-- Status: CLAIMED (vm4, 2026-10-29T04:34Z)
+- Status: DONE (vm4, 2026-10-29T04:55Z). Green at `a8018dc65b`. Receipt: `receipts/SOLR-16395.md`.
 - Intended host: any capable Linux host. Capability tags: gate.
 - Steps, in order: changelog YAML parse; tidy with clean-tree check; Error Prone compile of `:solr:api:compileJava :solr:core:compileJava :solr:core:compileTestJava`; `:solr:solrj:compileJava`; focused tests `V2UpdateSchemaErrorCaseTests`, `V2UpdateSchemaCopyFieldsTest` and `GetSchemaAPITest` after `cleanTest`; `:solr:core:check -x test`; final tidy and clean-tree check.
 - On green: write `receipts/SOLR-16395.md` at the new head and mark this job DONE. On failure: record the failing leg and log paths here and in the receipt; do not fix code on this job.
