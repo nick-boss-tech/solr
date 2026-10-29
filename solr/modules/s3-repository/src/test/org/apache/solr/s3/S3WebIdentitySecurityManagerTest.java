@@ -50,7 +50,8 @@ public class S3WebIdentitySecurityManagerTest extends SolrTestCase {
         "/",
         exchange -> {
           try (exchange) {
-            request.set(new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8));
+            request.set(
+                new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8));
             byte[] response =
                 """
                 <AssumeRoleWithWebIdentityResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
@@ -76,14 +77,16 @@ public class S3WebIdentitySecurityManagerTest extends SolrTestCase {
       runProbe(policy, temporaryDirectory, token, sts.getAddress().getPort());
       assertNotNull("The web identity provider must call STS", request.get());
       assertTrue(request.get(), request.get().contains("Action=AssumeRoleWithWebIdentity"));
-      assertTrue(request.get(), request.get().contains("WebIdentityToken=dummy-web-identity-token"));
+      assertTrue(
+          request.get(), request.get().contains("WebIdentityToken=dummy-web-identity-token"));
     } finally {
       sts.stop(0);
     }
   }
 
   @SuppressWarnings("SystemGetProperty")
-  private void runProbe(Path policy, Path temporaryDirectory, Path token, int port) throws Exception {
+  private void runProbe(Path policy, Path temporaryDirectory, Path token, int port)
+      throws Exception {
     Path output = temporaryDirectory.resolve("probe.log");
     ProcessBuilder builder =
         new ProcessBuilder(
@@ -120,7 +123,8 @@ public class S3WebIdentitySecurityManagerTest extends SolrTestCase {
       assertEquals("STS probe failed: " + Files.readString(output), 0, process.exitValue());
     } finally {
       process.destroyForcibly();
-      assertTrue("STS probe did not stop", process.waitFor(PROCESS_TIMEOUT_SECONDS, TimeUnit.SECONDS));
+      assertTrue(
+          "STS probe did not stop", process.waitFor(PROCESS_TIMEOUT_SECONDS, TimeUnit.SECONDS));
     }
   }
 
