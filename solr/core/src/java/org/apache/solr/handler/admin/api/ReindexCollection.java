@@ -47,8 +47,8 @@ import org.apache.solr.response.SolrQueryResponse;
  *
  * <p>This API (POST /v2/collections/{collectionName}/reindex) is analogous to the v1
  * /admin/collections?action=REINDEXCOLLECTION command. The request is translated to the same
- * parameters the v1 API produced and run through {@link CollectionsHandler}, so both APIs share
- * one implementation.
+ * parameters the v1 API produced and run through {@link CollectionsHandler}, so both APIs share one
+ * implementation.
  */
 public class ReindexCollection extends AdminAPIBase implements ReindexCollectionApi {
 
@@ -117,8 +117,7 @@ public class ReindexCollection extends AdminAPIBase implements ReindexCollection
 
     final var collectionsHandler =
         (CollectionsHandler) coreContainer.getRequestHandler(COLLECTIONS_HANDLER_PATH);
-    collectionsHandler.handleRequestBody(
-        wrapParams(solrQueryRequest, v1Params), solrQueryResponse);
+    collectionsHandler.handleRequestBody(wrapParams(solrQueryRequest, v1Params), solrQueryResponse);
     if (solrQueryResponse.getException() != null) {
       throw solrQueryResponse.getException();
     }

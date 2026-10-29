@@ -62,8 +62,7 @@ public class OverseerStatus extends AdminAPIBase implements OverseerStatusApi {
 
     final var collectionsHandler =
         (CollectionsHandler) coreContainer.getRequestHandler(COLLECTIONS_HANDLER_PATH);
-    collectionsHandler.handleRequestBody(
-        wrapParams(solrQueryRequest, v1Params), solrQueryResponse);
+    collectionsHandler.handleRequestBody(wrapParams(solrQueryRequest, v1Params), solrQueryResponse);
     if (solrQueryResponse.getException() != null) {
       throw solrQueryResponse.getException();
     }
