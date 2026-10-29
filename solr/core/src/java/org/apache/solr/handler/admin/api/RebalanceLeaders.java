@@ -23,9 +23,10 @@ import static org.apache.solr.common.cloud.ZkStateReader.MAX_WAIT_SECONDS_PROP;
 import static org.apache.solr.security.PermissionNameProvider.Name.COLL_EDIT_PERM;
 
 import jakarta.inject.Inject;
+import java.util.Map;
 import org.apache.solr.client.api.endpoint.RebalanceLeadersApi;
+import org.apache.solr.client.api.model.FlexibleSolrJerseyResponse;
 import org.apache.solr.client.api.model.RebalanceLeadersRequestBody;
-import org.apache.solr.client.api.model.SubResponseAccumulatingJerseyResponse;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.jersey.PermissionName;
@@ -50,9 +51,10 @@ public class RebalanceLeaders extends AdminAPIBase implements RebalanceLeadersAp
 
   @Override
   @PermissionName(COLL_EDIT_PERM)
-  public SubResponseAccumulatingJerseyResponse rebalanceLeaders(
+  @SuppressWarnings("unchecked")
+  public FlexibleSolrJerseyResponse rebalanceLeaders(
       String collectionName, RebalanceLeadersRequestBody requestBody) throws Exception {
-    final var response = instantiateJerseyResponse(SubResponseAccumulatingJerseyResponse.class);
+    final var response = instantiateJerseyResponse(FlexibleSolrJerseyResponse.class);
     fetchAndValidateZooKeeperAwareCoreContainer();
     ensureRequiredParameterProvided(COLLECTION_PROP, collectionName);
     recordCollectionForLogAndTracing(collectionName, solrQueryRequest);
@@ -73,8 +75,8 @@ public class RebalanceLeaders extends AdminAPIBase implements RebalanceLeadersAp
     new org.apache.solr.handler.admin.RebalanceLeaders(
             solrQueryRequest, solrQueryResponse, coreContainer.getCollectionsHandler())
         .execute();
-    response.successfulSubResponsesByNodeName =
-        solrQueryResponse.getValues().asMap(Integer.MAX_VALUE);
+    final Map<String, Object> results = solrQueryResponse.getValues().asMap(Integer.MAX_VALUE);
+    results.forEach(response::setUnknownProperty);
     return response;
   }
 }

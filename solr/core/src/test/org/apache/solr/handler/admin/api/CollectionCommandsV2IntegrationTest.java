@@ -93,9 +93,12 @@ public class CollectionCommandsV2IntegrationTest extends SolrCloudTestCase {
         .process(cluster.getSolrClient());
     cluster.waitForActiveCollection(collection, 2, 4);
 
-    postV2(
-        "/collections/" + collection + "/rebalance-leaders",
-        "{\"maxAtOnce\": 2, \"maxWaitSeconds\": 30}");
+    V2Response response =
+        postV2(
+            "/collections/" + collection + "/rebalance-leaders",
+            "{\"maxAtOnce\": 2, \"maxWaitSeconds\": 30}");
+
+    assertNotNull(response.getResponse().get("Summary"));
   }
 
   @Test
@@ -123,7 +126,7 @@ public class CollectionCommandsV2IntegrationTest extends SolrCloudTestCase {
         });
   }
 
-  private static void postV2(String path, String payload) throws Exception {
+  private static V2Response postV2(String path, String payload) throws Exception {
     V2Request request =
         new V2Request.Builder(path)
             .withMethod(SolrRequest.METHOD.POST)
@@ -132,6 +135,7 @@ public class CollectionCommandsV2IntegrationTest extends SolrCloudTestCase {
     request.setResponseParser(new JsonMapResponseParser());
     V2Response response = request.process(cluster.getSolrClient());
     assertEquals(0, response.getStatus());
+    return response;
   }
 
   private static boolean isActive(Slice slice) {
