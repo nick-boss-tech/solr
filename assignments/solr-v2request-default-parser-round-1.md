@@ -1,6 +1,6 @@
 # Assignment: SolrJ V2Request default response parser against the server default, round 1
 
-Status: OPEN (posted by vm6, 2026-10-29).
+Status: NOT REPRODUCED (vm6 probe, 2026-10-29). Receipt: `receipts/solr-v2request-default-parser-wire-vm6.md`. Recommended: close unless a reviewer reproduces the round 3 failure on another head.
 
 - Tags: investigation, solrj, records.
 - Intended host: any capable Linux host with JDK 21 and the Solr build. One build or probe job at a time under the host lock.
