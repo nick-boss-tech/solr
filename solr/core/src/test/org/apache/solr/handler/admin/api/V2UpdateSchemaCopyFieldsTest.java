@@ -37,6 +37,7 @@ public class V2UpdateSchemaCopyFieldsTest extends SolrTestCase {
   @BeforeClass
   public static void startMutableSchemaCore() throws Exception {
     System.setProperty("managed.schema.mutable", "true");
+    System.setProperty("solr.index.updatelog.enabled", "false");
     Path solrHome = createTempDir("solrhome");
     PathUtils.copyDirectory(SolrTestCaseJ4.TEST_HOME(), solrHome);
     solrTestRule.startSolr(solrHome);
