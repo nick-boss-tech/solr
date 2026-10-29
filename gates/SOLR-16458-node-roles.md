@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16458-node-roles
-- Head: 7d93118791bc54455ce647b252e18c727eea8d11
+- Head: 67a7243a93a394a521b052f8b8b4e6af5f952e84
+- Superseded head: 7d93118791bc54455ce647b252e18c727eea8d11 (tidy clean; compile failed: ListNodeRoles imported DistribStateManager from the wrong package, and CollectionsHandler lacked the ListNodeRoles import; fixed in 67a7243a93a)
 - Superseded head: ca2675f5173c03e9c38c0bb5701e7e98ed8f0234 (tidy removed one unused java.util.Set import left in ClusterAPI by the endpoint removal; formatting-only commit 7d93118791 on top, per the step 1 rule)
 - Base: origin/main 3db71000514e1edaa8e6ae0426fce92ca97990e3
 - Worktree if needed: ~/workspace/solr-worktrees/16458-noderoles
