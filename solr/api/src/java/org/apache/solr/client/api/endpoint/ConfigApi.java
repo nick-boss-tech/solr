@@ -108,7 +108,6 @@ public interface ConfigApi {
         @PathParam("paramSetName") @Parameter(description = "Name of the parameter set")
             String paramSetName);
 
-
     // TODO: Keep this regex in sync with GetConfig.MIGRATED_CONFIG_COMPONENTS
     @GET
     @Path(
