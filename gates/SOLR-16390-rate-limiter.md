@@ -1,4 +1,4 @@
-Status: OPEN
+Status: DONE
 Tags: gate
 
 # Gate job: SOLR-16390 cluster set-ratelimiter (JAX-RS)
@@ -54,3 +54,7 @@ from CollectionsHandler.getJerseyResources().
 - Failure: record the failing leg and first error in this job and in
   receipts/SOLR-16390-ratelimiter.md; do not fix code on this job. Fixes return to the phone
   agent as new work.
+
+## Result
+
+PASS at 61a48beac7fb381d2df64d630d9ffd448fa69880 (phone agent, 2026-10-29): tidy clean, Error Prone compile rc 0, V2ClusterAPIMappingTest 1/1, TestRequestRateLimiter 3 passed and 1 skipped of 4, :solr:core:check -x test rc 0. Receipt: receipts/SOLR-16390-ratelimiter.md. The head history above records the four fix rounds it took to get there.
