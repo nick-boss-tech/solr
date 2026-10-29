@@ -64,7 +64,6 @@ public class V2ClusterAPIMappingTest extends SolrTestCaseJ4 {
     apiBag = new ApiBag(false);
     final ClusterAPI clusterAPI = new ClusterAPI(mockCollectionsHandler, mockConfigSetHandler);
     apiBag.registerObject(clusterAPI);
-    apiBag.registerObject(clusterAPI.commands);
   }
 
   @Test

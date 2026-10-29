@@ -84,8 +84,7 @@ public class TestCollectionAPIs extends SolrTestCaseJ4 {
 
       ClusterAPI clusterAPI = new ClusterAPI(collectionsHandler, null);
       apiBag.registerObject(clusterAPI);
-      apiBag.registerObject(clusterAPI.commands);
-    }
+      }
 
     compareOutput(
         apiBag,
