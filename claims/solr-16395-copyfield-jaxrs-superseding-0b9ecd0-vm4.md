@@ -9,3 +9,5 @@
 - Capability tags used: gate.
 
 Heartbeat: 2026-10-29T02:53Z
+
+- Status: DONE, RED at `0b9ecd0`. Receipt: `receipts/SOLR-16395-0b9ecd0.md`.
