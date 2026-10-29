@@ -35,10 +35,10 @@ import org.apache.solr.response.SolrQueryResponse;
  * V2 API for browsing the contents of ZooKeeper.
  *
  * <p>This API (GET /v2/cluster/zookeeper/files) is analogous to the v1 /admin/zookeeper API. The
- * response content is built by {@link ZookeeperInfoHandler}, the v1 handler, so both APIs serve
- * the same tree and znode detail. Unlike the v1 API, which requires the security-read permission
- * for the security.json path, this API runs entirely under the zookeeper-read permission and
- * refuses the security.json path; use the v1 API for that path.
+ * response content is built by {@link ZookeeperInfoHandler}, the v1 handler, so both APIs serve the
+ * same tree and znode detail. Unlike the v1 API, which requires the security-read permission for
+ * the security.json path, this API runs entirely under the zookeeper-read permission and refuses
+ * the security.json path; use the v1 API for that path.
  */
 public class ZookeeperFiles extends AdminAPIBase implements ZookeeperFilesApi {
 

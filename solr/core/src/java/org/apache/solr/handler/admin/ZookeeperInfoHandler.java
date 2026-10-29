@@ -378,8 +378,8 @@ public final class ZookeeperInfoHandler extends RequestHandlerBase {
 
   /**
    * Builds the path-view response data for the given ZooKeeper path, as served by this handler.
-   * Used by the v2 ZooKeeper files API. The security.json path is refused here: the v1 request
-   * path guards it with the security-read permission, which the v2 API does not carry.
+   * Used by the v2 ZooKeeper files API. The security.json path is refused here: the v1 request path
+   * guards it with the security-read permission, which the v2 API does not carry.
    *
    * @param rawPath the ZooKeeper path, not yet normalized
    * @param detail whether to include the znode detail block for the path
