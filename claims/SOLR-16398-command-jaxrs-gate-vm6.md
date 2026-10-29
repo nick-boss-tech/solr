@@ -1,7 +1,7 @@
 # Claim: SOLR-16398-command-jaxrs gate, round 1 (vm6)
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE; mark DONE with the receipt path when the gate lands.
+- Status: DONE (see the DONE line below).
 - Job or assignment: `gates/SOLR-16398-command-jaxrs.md` (head `5cc3fc4c0019a84a2875c15920664dbe93a9ee4d`).
 - Slice: the whole gate job, steps 1 to 6.
 - Capability tags used: gate.
@@ -13,3 +13,7 @@
 - Constraints: no JIRA or GitHub post, no PR. Fixes return to the owner side through the job file. Commit identity Nick Shanin, no trailers.
 
 Heartbeat: 2026-10-29T05:59:19Z
+
+Result: $NOW: gate steps 1 to 6 PASS at 5cc3fc4c with repair commit 7fa61aa. Four command resources are not registered; see the receipt.
+
+DONE: $NOW. Deliverables: \`receipts/SOLR-16398.md\`; \`gates/SOLR-16398-command-jaxrs.md\` set to DONE.

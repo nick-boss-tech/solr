@@ -1,7 +1,7 @@
 # Gate job: SOLR-16398, JAX-RS collection command APIs (split-shard, move-replica, rebalance-leaders, migrate-docs)
 
 - Branch: solr-16398-command-jaxrs. Head: 5cc3fc4c0019a84a2875c15920664dbe93a9ee4d (fork tip, verified by ls-remote 2026-10-28; one commit on origin/main 74197140a666). Base: 74197140a666d4f0396b68484c2bf9df7e79221e.
-- Status: CLAIMED (vm6, claim `claims/SOLR-16398-command-jaxrs-gate-vm6.md`, 2026-10-29T05:59:19Z)
+- Status: DONE (steps 1 to 6 pass at 5cc3fc4c plus repair commit 7fa61aa; four command resources not registered, see `receipts/SOLR-16398.md`).
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Capability tags: gate.
 - Why: the branch was implemented 2026-10-28 at the owner's direction with builds waived; this gate is its first verification. It replaces the annotated SplitShardAPI, MoveReplicaAPI, RebalanceLeadersAPI, and MigrateDocsAPI with JAX-RS resources that build the same overseer messages the v1 translations produced and submit them through AdminAPIBase. Behavior risk concentrates in the message keys: split.key, target.collection, forward.timeout, and the property.* flattening of split-shard coreProperties.
 - Steps, in order:
