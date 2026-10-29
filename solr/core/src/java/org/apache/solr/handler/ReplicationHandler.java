@@ -331,9 +331,17 @@ public class ReplicationHandler extends RequestHandlerBase
     } else if (command.equalsIgnoreCase(CMD_FETCH_INDEX)) {
       fetchIndex(solrParams, rsp);
     } else if (command.equalsIgnoreCase(CMD_DISABLE_POLL)) {
-      disablePoll(rsp);
+      if (disablePoll()) {
+        rsp.add(STATUS, OK_STATUS);
+      } else {
+        reportErrorOnResponse(rsp, "No follower configured", null);
+      }
     } else if (command.equalsIgnoreCase(CMD_ENABLE_POLL)) {
-      enablePoll(rsp);
+      if (enablePoll()) {
+        rsp.add(STATUS, OK_STATUS);
+      } else {
+        reportErrorOnResponse(rsp, "No follower configured", null);
+      }
     } else if (command.equalsIgnoreCase(CMD_ABORT_FETCH)) {
       if (abortFetch()) {
         rsp.add(STATUS, OK_STATUS);
@@ -422,14 +430,17 @@ public class ReplicationHandler extends RequestHandlerBase
   @SuppressWarnings("deprecation")
   private void deleteSnapshot(ModifiableSolrParams params, SolrQueryResponse rsp) {
     params.required().get(NAME);
+    deleteBackup(
+        params.get(NAME),
+        params.get(CoreAdminParams.BACKUP_REPOSITORY),
+        params.get(CoreAdminParams.BACKUP_LOCATION),
+        // commitName is not documented in ref guide for the backup option.
+        // copying to here, an dit may be that both are just null?
+        params.get(CoreAdminParams.COMMIT_NAME));
+    rsp.add(STATUS, OK_STATUS);
+  }
 
-    String repoName = params.get(CoreAdminParams.BACKUP_REPOSITORY);
-    String location = params.get(CoreAdminParams.BACKUP_LOCATION);
-
-    // commitName is not documented in ref guide for the backup option.
-    // copying to here, an dit may be that both are just null?
-    String commitName = params.get(CoreAdminParams.COMMIT_NAME);
-
+  public void deleteBackup(String name, String repoName, String location, String commitName) {
     CoreContainer cc = core.getCoreContainer();
     BackupRepository repo = null;
     if (repoName != null) {
@@ -452,11 +463,9 @@ public class ReplicationHandler extends RequestHandlerBase
     }
 
     URI locationUri = repo.createDirectoryURI(location);
-    SnapShooter snapShooter =
-        new SnapShooter(repo, core, locationUri, params.get(NAME), commitName);
+    SnapShooter snapShooter = new SnapShooter(repo, core, locationUri, name, commitName);
     snapShooter.validateDeleteSnapshot();
     snapShooter.deleteSnapAsync(this);
-    rsp.add(STATUS, OK_STATUS);
   }
 
   private void fetchIndex(SolrParams solrParams, SolrQueryResponse rsp)
@@ -466,17 +475,8 @@ public class ReplicationHandler extends RequestHandlerBase
       reportErrorOnResponse(rsp, "No follower configured or no 'leaderUrl' specified", null);
       return;
     }
-    final SolrParams paramsCopy = new ModifiableSolrParams(solrParams);
     final IndexFetchResult[] results = new IndexFetchResult[1];
-    Thread fetchThread =
-        new Thread(
-            () -> {
-              IndexFetchResult result = doFetch(paramsCopy, false);
-              results[0] = result;
-            },
-            "explicit-fetchindex-cmd");
-    fetchThread.setDaemon(false);
-    fetchThread.start();
+    Thread fetchThread = startFetchThread(new ModifiableSolrParams(solrParams), results);
     if (solrParams.getBool(WAIT, false)) {
       fetchThread.join();
       if (results[0] == null) {
@@ -489,6 +489,38 @@ public class ReplicationHandler extends RequestHandlerBase
     } else {
       rsp.add(STATUS, OK_STATUS);
     }
+  }
+
+  /**
+   * Starts an index fetch from the given leader without waiting for it to complete, as the v2
+   * fetch-index API does. Progress and outcome are observable through the replication details.
+   */
+  public void fetchIndex(String leaderUrl, Boolean compression) {
+    if (!isFollower && leaderUrl == null) {
+      throw new SolrException(
+          ErrorCode.BAD_REQUEST, "No follower configured or no 'leaderUrl' specified");
+    }
+    final var params = new ModifiableSolrParams();
+    if (leaderUrl != null) {
+      params.set(LEADER_URL, leaderUrl);
+    }
+    if (compression != null) {
+      params.set(COMPRESSION, String.valueOf(compression));
+    }
+    startFetchThread(params, new IndexFetchResult[1]);
+  }
+
+  private Thread startFetchThread(SolrParams params, IndexFetchResult[] results) {
+    Thread fetchThread =
+        new Thread(
+            () -> {
+              IndexFetchResult result = doFetch(params, false);
+              results[0] = result;
+            },
+            "explicit-fetchindex-cmd");
+    fetchThread.setDaemon(false);
+    fetchThread.start();
+    return fetchThread;
   }
 
   private List<NamedList<Object>> getCommits() {
@@ -588,14 +620,19 @@ public class ReplicationHandler extends RequestHandlerBase
 
   private void restore(SolrParams params, SolrQueryResponse rsp, SolrQueryRequest req)
       throws IOException {
+    restoreBackup(
+        params.get(NAME),
+        params.get(CoreAdminParams.BACKUP_LOCATION),
+        params.get(CoreAdminParams.BACKUP_REPOSITORY));
+    rsp.add(STATUS, OK_STATUS);
+  }
+
+  public void restoreBackup(String name, String location, String repoName) throws IOException {
     if (restoreFuture != null && !restoreFuture.isDone()) {
       throw new SolrException(
           ErrorCode.BAD_REQUEST,
           "Restore in progress. Cannot run multiple restore operations" + "for the same core");
     }
-    String name = params.get(NAME);
-    String location = params.get(CoreAdminParams.BACKUP_LOCATION);
-    String repoName = params.get(CoreAdminParams.BACKUP_REPOSITORY);
     CoreContainer cc = core.getCoreContainer();
     BackupRepository repo = null;
     if (repoName != null) {
@@ -649,7 +686,6 @@ public class ReplicationHandler extends RequestHandlerBase
       MDC.put("RestoreCore.backupName", name);
       restoreFuture = restoreExecutor.submit(restoreCore);
       currentRestoreName = name;
-      rsp.add(STATUS, OK_STATUS);
     } finally {
       MDC.remove("RestoreCore.core");
       MDC.remove("RestoreCore.backupLocation");
@@ -852,23 +888,25 @@ public class ReplicationHandler extends RequestHandlerBase
     }
   }
 
-  private void disablePoll(SolrQueryResponse rsp) {
+  /** Returns whether a polling fetcher was available to disable. */
+  public boolean disablePoll() {
     if (pollingIndexFetcher != null) {
       pollDisabled.set(true);
       log.info("inside disable poll, value of pollDisabled = {}", pollDisabled);
-      rsp.add(STATUS, OK_STATUS);
+      return true;
     } else {
-      reportErrorOnResponse(rsp, "No follower configured", null);
+      return false;
     }
   }
 
-  private void enablePoll(SolrQueryResponse rsp) {
+  /** Returns whether a polling fetcher was available to enable. */
+  public boolean enablePoll() {
     if (pollingIndexFetcher != null) {
       pollDisabled.set(false);
       log.info("inside enable poll, value of pollDisabled = {}", pollDisabled);
-      rsp.add(STATUS, OK_STATUS);
+      return true;
     } else {
-      reportErrorOnResponse(rsp, "No follower configured", null);
+      return false;
     }
   }
 

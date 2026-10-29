@@ -54,14 +54,20 @@ public class DumpRequestHandler extends RequestHandlerBase {
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   @Override
-  @SuppressWarnings({"unchecked"})
   public void handleRequestBody(SolrQueryRequest req, SolrQueryResponse rsp) throws IOException {
+    rsp.getValues().addAll(dumpRequestValues(req));
+  }
+
+  /** Builds the dump of the request's parameters and context that this handler serves. */
+  @SuppressWarnings({"unchecked"})
+  public NamedList<Object> dumpRequestValues(SolrQueryRequest req) throws IOException {
+    final var values = new SimpleOrderedMap<Object>();
     // Show params
-    rsp.add("params", new SimpleOrderedMap<>(req.getParams()));
+    values.add("params", new SimpleOrderedMap<>(req.getParams()));
     String[] parts = req.getParams().getParams("urlTemplateValues");
     if (parts != null && parts.length > 0) {
       Map<String, String> map = new LinkedHashMap<>();
-      rsp.getValues().add("urlTemplateValues", map);
+      values.add("urlTemplateValues", map);
       for (String part : parts) {
         map.put(part, req.getPathTemplateValues().get(part));
       }
@@ -70,7 +76,7 @@ public class DumpRequestHandler extends RequestHandlerBase {
     String[] returnParams = req.getParams().getParams("param");
     if (returnParams != null) {
       @SuppressWarnings({"unchecked"})
-      NamedList<Object> params = (NamedList<Object>) rsp.getValues().get("params");
+      NamedList<Object> params = (NamedList<Object>) values.get("params");
       for (String returnParam : returnParams) {
         String[] vals = req.getParams().getParams(returnParam);
         if (vals != null) {
@@ -85,11 +91,11 @@ public class DumpRequestHandler extends RequestHandlerBase {
 
     if (req.getParams().getBool("getdefaults", false)) {
       NamedList<?> def = (NamedList<?>) initArgs.get(PluginInfo.DEFAULTS);
-      rsp.add("getdefaults", def);
+      values.add("getdefaults", def);
     }
 
     if (req.getParams().getBool("initArgs", false)) {
-      rsp.add("initArgs", initArgs);
+      values.add("initArgs", initArgs);
     }
 
     // Write the streams...
@@ -105,10 +111,11 @@ public class DumpRequestHandler extends RequestHandlerBase {
         stream.add("stream", StrUtils.stringFromReader(content.getReader()));
         streams.add(stream);
       }
-      rsp.add("streams", streams);
+      values.add("streams", streams);
     }
 
-    rsp.add("context", req.getContext());
+    values.add("context", req.getContext());
+    return values;
   }
 
   //////////////////////// SolrInfoMBeans methods //////////////////////

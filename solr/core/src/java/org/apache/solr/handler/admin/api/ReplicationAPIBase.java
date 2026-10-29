@@ -46,11 +46,13 @@ import org.apache.lucene.store.IndexInput;
 import org.apache.lucene.store.RateLimiter;
 import org.apache.solr.api.JerseyResource;
 import org.apache.solr.client.api.model.CommitsResponse;
+import org.apache.solr.client.api.model.FetchIndexRequestBody;
 import org.apache.solr.client.api.model.FileListResponse;
 import org.apache.solr.client.api.model.FileMetaData;
 import org.apache.solr.client.api.model.IndexVersionResponse;
 import org.apache.solr.client.api.model.ReplicationDetailsResponse;
 import org.apache.solr.client.api.model.ReplicationEnabledRequestBody;
+import org.apache.solr.client.api.model.RestoreRequestBody;
 import org.apache.solr.client.api.model.RestoreStatusResponse;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.common.SolrException;
@@ -110,6 +112,62 @@ public abstract class ReplicationAPIBase extends JerseyResource {
     ReplicationHandler replicationHandler =
         (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
     replicationHandler.setReplicationEnabled(requestBody.enabled);
+    return instantiateJerseyResponse(SolrJerseyResponse.class);
+  }
+
+  protected SolrJerseyResponse doFetchIndex(FetchIndexRequestBody requestBody) {
+    ReplicationHandler replicationHandler =
+        (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
+    replicationHandler.fetchIndex(
+        requestBody == null ? null : requestBody.leaderUrl,
+        requestBody == null ? null : requestBody.compression);
+    return instantiateJerseyResponse(SolrJerseyResponse.class);
+  }
+
+  protected SolrJerseyResponse doAbortFetch() {
+    ReplicationHandler replicationHandler =
+        (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
+    if (!replicationHandler.abortFetch()) {
+      throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "No follower configured");
+    }
+    return instantiateJerseyResponse(SolrJerseyResponse.class);
+  }
+
+  protected SolrJerseyResponse doEnablePoll() {
+    ReplicationHandler replicationHandler =
+        (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
+    if (!replicationHandler.enablePoll()) {
+      throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "No follower configured");
+    }
+    return instantiateJerseyResponse(SolrJerseyResponse.class);
+  }
+
+  protected SolrJerseyResponse doDisablePoll() {
+    ReplicationHandler replicationHandler =
+        (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
+    if (!replicationHandler.disablePoll()) {
+      throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "No follower configured");
+    }
+    return instantiateJerseyResponse(SolrJerseyResponse.class);
+  }
+
+  protected SolrJerseyResponse doRestoreIndex(RestoreRequestBody requestBody) throws IOException {
+    ReplicationHandler replicationHandler =
+        (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
+    replicationHandler.restoreBackup(
+        requestBody == null ? null : requestBody.name,
+        requestBody == null ? null : requestBody.location,
+        requestBody == null ? null : requestBody.repository);
+    return instantiateJerseyResponse(SolrJerseyResponse.class);
+  }
+
+  protected SolrJerseyResponse doDeleteBackup(RestoreRequestBody requestBody) {
+    ensureRequiredRequestBodyProvided(requestBody);
+    ensureRequiredParameterProvided("name", requestBody.name);
+    ReplicationHandler replicationHandler =
+        (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
+    replicationHandler.deleteBackup(
+        requestBody.name, requestBody.repository, requestBody.location, null);
     return instantiateJerseyResponse(SolrJerseyResponse.class);
   }
 

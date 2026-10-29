@@ -36,7 +36,6 @@ import org.apache.solr.client.api.model.CommitsResponse;
 import org.apache.solr.client.api.model.FetchIndexRequestBody;
 import org.apache.solr.client.api.model.FileListResponse;
 import org.apache.solr.client.api.model.IndexVersionResponse;
-import org.apache.solr.client.api.model.ReplicationCommandResponse;
 import org.apache.solr.client.api.model.ReplicationDetailsResponse;
 import org.apache.solr.client.api.model.ReplicationEnabledRequestBody;
 import org.apache.solr.client.api.model.RestoreRequestBody;
@@ -147,7 +146,7 @@ public interface ReplicationApis {
   @Operation(
       summary = "Fetch the index from the leader, as the v1 command=fetchindex request does.",
       tags = {"replication"})
-  ReplicationCommandResponse fetchIndex(FetchIndexRequestBody requestBody) throws Exception;
+  SolrJerseyResponse fetchIndex(FetchIndexRequestBody requestBody) throws Exception;
 
   @POST
   @CoreApiParameters
@@ -155,7 +154,7 @@ public interface ReplicationApis {
   @Operation(
       summary = "Abort an in-progress index fetch, as the v1 command=abortfetch request does.",
       tags = {"replication"})
-  ReplicationCommandResponse abortFetch() throws Exception;
+  SolrJerseyResponse abortFetch() throws Exception;
 
   @POST
   @CoreApiParameters
@@ -164,7 +163,7 @@ public interface ReplicationApis {
       summary =
           "Enable polling for replication updates, as the v1 command=enablepoll request does.",
       tags = {"replication"})
-  ReplicationCommandResponse enablePoll() throws Exception;
+  SolrJerseyResponse enablePoll() throws Exception;
 
   @POST
   @CoreApiParameters
@@ -173,7 +172,7 @@ public interface ReplicationApis {
       summary =
           "Disable polling for replication updates, as the v1 command=disablepoll request does.",
       tags = {"replication"})
-  ReplicationCommandResponse disablePoll() throws Exception;
+  SolrJerseyResponse disablePoll() throws Exception;
 
   @POST
   @CoreApiParameters
@@ -181,7 +180,7 @@ public interface ReplicationApis {
   @Operation(
       summary = "Restore the index from a backup, as the v1 command=restore request does.",
       tags = {"replication"})
-  ReplicationCommandResponse restoreIndex(RestoreRequestBody requestBody) throws Exception;
+  SolrJerseyResponse restoreIndex(RestoreRequestBody requestBody) throws Exception;
 
   @POST
   @CoreApiParameters
@@ -189,5 +188,5 @@ public interface ReplicationApis {
   @Operation(
       summary = "Delete a backup snapshot, as the v1 command=deletebackup request does.",
       tags = {"replication"})
-  ReplicationCommandResponse deleteBackup(RestoreRequestBody requestBody) throws Exception;
+  SolrJerseyResponse deleteBackup(RestoreRequestBody requestBody) throws Exception;
 }

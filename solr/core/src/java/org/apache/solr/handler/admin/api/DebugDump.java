@@ -29,7 +29,6 @@ import org.apache.solr.core.SolrCore;
 import org.apache.solr.handler.DumpRequestHandler;
 import org.apache.solr.jersey.PermissionName;
 import org.apache.solr.request.SolrQueryRequest;
-import org.apache.solr.response.SolrQueryResponse;
 
 /**
  * V2 API for dumping a request's parameters and context.
@@ -41,34 +40,21 @@ public class DebugDump extends JerseyResource implements DebugDumpApi {
 
   private final SolrCore solrCore;
   private final SolrQueryRequest solrQueryRequest;
-  private final SolrQueryResponse solrQueryResponse;
 
   @Inject
-  public DebugDump(
-      SolrCore solrCore, SolrQueryRequest solrQueryRequest, SolrQueryResponse solrQueryResponse) {
+  public DebugDump(SolrCore solrCore, SolrQueryRequest solrQueryRequest) {
     this.solrCore = solrCore;
     this.solrQueryRequest = solrQueryRequest;
-    this.solrQueryResponse = solrQueryResponse;
   }
 
   @Override
   @PermissionName(CORE_READ_PERM)
   public DebugDumpResponse dumpRequest() throws Exception {
     final var dumpHandler = (DumpRequestHandler) solrCore.getRequestHandler("/debug/dump");
-    dumpHandler.handleRequestBody(solrQueryRequest, solrQueryResponse);
-    if (solrQueryResponse.getException() != null) {
-      throw solrQueryResponse.getException();
-    }
-
     final var response = instantiateJerseyResponse(DebugDumpResponse.class);
-    solrQueryResponse
-        .getValues()
-        .forEach(
-            (name, value) -> {
-              if (!"responseHeader".equals(name)) {
-                response.values.put(name, convertValue(value));
-              }
-            });
+    dumpHandler
+        .dumpRequestValues(solrQueryRequest)
+        .forEach((name, value) -> response.values.put(name, convertValue(value)));
     return response;
   }
 

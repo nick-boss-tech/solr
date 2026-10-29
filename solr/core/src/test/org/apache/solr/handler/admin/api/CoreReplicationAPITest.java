@@ -18,6 +18,7 @@
 package org.apache.solr.handler.admin.api;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import io.opentelemetry.api.trace.Span;
@@ -32,12 +33,14 @@ import org.apache.lucene.util.Constants;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.api.model.CommitsResponse;
 import org.apache.solr.client.api.model.CommitsResponse.CommitDetails;
+import org.apache.solr.client.api.model.FetchIndexRequestBody;
 import org.apache.solr.client.api.model.FileListResponse;
 import org.apache.solr.client.api.model.FileMetaData;
 import org.apache.solr.client.api.model.IndexVersionResponse;
 import org.apache.solr.client.api.model.ReplicationDetailsResponse;
 import org.apache.solr.client.api.model.ReplicationDetailsResponse.ReplicationDetails;
 import org.apache.solr.client.api.model.ReplicationEnabledRequestBody;
+import org.apache.solr.client.api.model.RestoreRequestBody;
 import org.apache.solr.client.api.model.RestoreStatusResponse;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.core.SolrCore;
@@ -126,6 +129,82 @@ public class CoreReplicationAPITest extends SolrTestCaseJ4 {
     SolrException ex =
         expectThrows(
             SolrException.class, () -> coreReplicationAPI.setReplicationEnabled(emptyBody));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
+  }
+
+  @Test
+  public void testFetchIndexDelegatesToHandler() {
+    final var body = new FetchIndexRequestBody();
+    body.leaderUrl = "http://leader:8983/solr/core";
+    body.compression = true;
+    assertNotNull(coreReplicationAPI.fetchIndex(body));
+    verify(mockReplicationHandler).fetchIndex("http://leader:8983/solr/core", Boolean.TRUE);
+  }
+
+  @Test
+  public void testFetchIndexAcceptsNullBody() {
+    assertNotNull(coreReplicationAPI.fetchIndex(null));
+    verify(mockReplicationHandler).fetchIndex(null, null);
+  }
+
+  @Test
+  public void testAbortFetch() {
+    when(mockReplicationHandler.abortFetch()).thenReturn(true);
+    assertNotNull(coreReplicationAPI.abortFetch());
+  }
+
+  @Test
+  public void testAbortFetchWithNothingToAbort() {
+    when(mockReplicationHandler.abortFetch()).thenReturn(false);
+    SolrException ex = expectThrows(SolrException.class, () -> coreReplicationAPI.abortFetch());
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
+  }
+
+  @Test
+  public void testEnableAndDisablePoll() {
+    when(mockReplicationHandler.enablePoll()).thenReturn(true);
+    when(mockReplicationHandler.disablePoll()).thenReturn(true);
+    assertNotNull(coreReplicationAPI.enablePoll());
+    assertNotNull(coreReplicationAPI.disablePoll());
+  }
+
+  @Test
+  public void testEnablePollWithNoFollower() {
+    when(mockReplicationHandler.enablePoll()).thenReturn(false);
+    SolrException ex = expectThrows(SolrException.class, () -> coreReplicationAPI.enablePoll());
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
+  }
+
+  @Test
+  public void testDisablePollWithNoFollower() {
+    when(mockReplicationHandler.disablePoll()).thenReturn(false);
+    SolrException ex = expectThrows(SolrException.class, () -> coreReplicationAPI.disablePoll());
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
+  }
+
+  @Test
+  public void testRestoreDelegatesToHandler() throws IOException {
+    final var body = new RestoreRequestBody();
+    body.name = "snapshot1";
+    body.location = "/backups";
+    body.repository = "repo";
+    assertNotNull(coreReplicationAPI.restoreIndex(body));
+    verify(mockReplicationHandler).restoreBackup("snapshot1", "/backups", "repo");
+  }
+
+  @Test
+  public void testDeleteBackupDelegatesToHandler() {
+    final var body = new RestoreRequestBody();
+    body.name = "snapshot1";
+    assertNotNull(coreReplicationAPI.deleteBackup(body));
+    verify(mockReplicationHandler).deleteBackup("snapshot1", null, null, null);
+  }
+
+  @Test
+  public void testDeleteBackupRequiresName() {
+    SolrException ex =
+        expectThrows(
+            SolrException.class, () -> coreReplicationAPI.deleteBackup(new RestoreRequestBody()));
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
   }
 
