@@ -1,4 +1,4 @@
-Status: OPEN
+Status: DONE
 Tags: gate
 
 # Gate job: SOLR-16458 cluster node-roles listings (JAX-RS)
@@ -47,3 +47,7 @@ check.
 - Failure: record the failing leg and first error in this job and in
   receipts/SOLR-16458-node-roles.md; do not fix code on this job. Fixes return to the phone
   agent as new work.
+
+## Result
+
+PASS at 67a7243a93a394a521b052f8b8b4e6af5f952e84 (phone agent, 2026-10-29): tidy clean, Error Prone compile rc 0, NodeRolesTest 1/1, V2ClusterAPIMappingTest 1/1, :solr:core:check -x test rc 0. Receipt: receipts/SOLR-16458-node-roles.md.
