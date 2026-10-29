@@ -1,6 +1,6 @@
 # Assignment: SolrJ V2Request default response parser against the server default, round 1
 
-Status: CLOSED (2026-10-29, owner directed, after vm6 probe). Not reproduced; no action. Receipt: `receipts/solr-v2request-default-parser-wire-vm6.md`. Reopen only if the round 3 default-split failure reappears on a later head.
+Status: CLOSED (2026-10-29), SUPERSEDED. The question was answered in part (the client sends wt=javabin) but the "not reproduced" conclusion was wrong: the failure is reproducible on a node that hosts no replica of the collection. Explanation and options: `receipts/solr-wt-ignored-non-hosting-node-round-1.md`. Reopen as a server-side routing item if the owner wants it.
 
 - Tags: investigation, solrj, records.
 - Intended host: any capable Linux host with JDK 21 and the Solr build. One build or probe job at a time under the host lock.

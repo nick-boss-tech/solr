@@ -2,6 +2,7 @@
 
 - Assignment: `assignments/solr-v2request-default-parser-round-1.md`, questions 1 and 2. Claim: `claims/solr-v2request-default-parser-wire-vm6.md`. Host: vm6.
 - Result: the mismatch recorded in SOLR-16398 round 3 does not reproduce on the current head, and the explanation recorded there is wrong. Not a binary-compatibility issue.
+- CORRECTION (2026-10-29, later): the round 3 failure is real and intermittent. It is a server-side routing bug that leaves `wt` unhonored when the receiving node hosts no replica of the collection. See `receipts/solr-wt-ignored-non-hosting-node-round-1.md`. The "not reproduced" conclusion below is superseded.
 - Raw evidence: `/workspace/gates/logs/vm6/v2probe/` (wire log, probe sources, Jetty stderr, probe test XML).
 
 ## Evidence
