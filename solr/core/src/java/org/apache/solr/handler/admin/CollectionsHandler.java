@@ -194,6 +194,7 @@ import org.apache.solr.handler.admin.api.ListClusterNodes;
 import org.apache.solr.handler.admin.api.ListCollectionBackups;
 import org.apache.solr.handler.admin.api.ListCollectionSnapshots;
 import org.apache.solr.handler.admin.api.ListCollections;
+import org.apache.solr.handler.admin.api.ListNodeRoles;
 import org.apache.solr.handler.admin.api.MigrateDocsAPI;
 import org.apache.solr.handler.admin.api.MigrateReplicas;
 import org.apache.solr.handler.admin.api.ModifyCollectionAPI;

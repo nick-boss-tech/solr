@@ -27,7 +27,7 @@ import org.apache.solr.client.api.endpoint.NodeRolesApi;
 import org.apache.solr.client.api.model.NodeRolesForNodeResponse;
 import org.apache.solr.client.api.model.NodeRolesResponse;
 import org.apache.solr.client.api.model.SupportedRolesResponse;
-import org.apache.solr.cloud.DistribStateManager;
+import org.apache.solr.client.solrj.cloud.DistribStateManager;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.ZkStateReader;
 import org.apache.solr.core.CoreContainer;
