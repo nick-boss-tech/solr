@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16398-replication-commands
-- Head: bb6f0e7d5d71f970aca6d8c5bff30ecd81ee2e4c
+- Head: eaf0141332748f91943b4ee704d06b2570c24ac3
+- Superseded head: bb6f0e7d5d71f970aca6d8c5bff30ecd81ee2e4c (tidy import order, line joins, and a duplicate static import removed in CoreReplication; formatting-only commit eaf0141332 on top, per the step 1 rule)
 - Base: origin/main 3db71000514e1edaa8e6ae0426fce92ca97990e3
 - Worktree if needed: ~/workspace/solr-worktrees/16398-replication
 - Ticket: SOLR-16398
