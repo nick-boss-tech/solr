@@ -92,6 +92,23 @@ public interface ConfigApi {
             @Parameter(description = "Include package metadata (_packageinfo_)")
             boolean meta);
 
+    @GET
+    @Path("/params")
+    @Operation(
+        summary = "Fetch all request parameter sets ('paramsets') defined for the core.",
+        tags = {"config"})
+    ConfigParamsResponse getAllParamSets();
+
+    @GET
+    @Path("/params/{paramSetName}")
+    @Operation(
+        summary = "Fetch a single request parameter set ('paramset') by name.",
+        tags = {"config"})
+    ConfigParamsResponse getSingleParamSet(
+        @PathParam("paramSetName") @Parameter(description = "Name of the parameter set")
+            String paramSetName);
+
+
     // TODO: Keep this regex in sync with GetConfig.MIGRATED_CONFIG_COMPONENTS
     @GET
     @Path(
@@ -117,22 +134,6 @@ public interface ConfigApi {
     @Operation(
         summary = "Fetch a single named entry within a config section",
         tags = {"config"})
-    @GET
-    @Path("/params")
-    @Operation(
-        summary = "Fetch all request parameter sets ('paramsets') defined for the core.",
-        tags = {"config"})
-    ConfigParamsResponse getAllParamSets();
-
-    @GET
-    @Path("/params/{paramSetName}")
-    @Operation(
-        summary = "Fetch a single request parameter set ('paramset') by name.",
-        tags = {"config"})
-    ConfigParamsResponse getSingleParamSet(
-        @PathParam("paramSetName") @Parameter(description = "Name of the parameter set")
-            String paramSetName);
-
     ConfigInfoResponse getConfigComponentByName(
         @PathParam("component") @Parameter(description = "Name of the config component")
             String component,
