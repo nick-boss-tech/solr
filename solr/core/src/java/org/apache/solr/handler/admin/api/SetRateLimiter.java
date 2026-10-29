@@ -24,19 +24,18 @@ import org.apache.solr.client.api.endpoint.SetRateLimiterApi;
 import org.apache.solr.client.api.model.SetRateLimiterRequestBody;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.client.solrj.request.beans.RateLimiterPayload;
-import org.apache.solr.common.cloud.ClusterProperties;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.cloud.ClusterProperties;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.jersey.PermissionName;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
-import org.apache.solr.common.cloud.ClusterProperties;
 
 /**
  * V2 API for setting the cluster request rate-limiter configuration.
  *
- * <p>This API (PUT /v2/cluster/rate-limiters) is analogous to the v1 POST /cluster
- * set-ratelimiter command; both write the configuration to the same cluster property.
+ * <p>This API (PUT /v2/cluster/rate-limiters) is analogous to the v1 POST /cluster set-ratelimiter
+ * command; both write the configuration to the same cluster property.
  */
 public class SetRateLimiter extends AdminAPIBase implements SetRateLimiterApi {
 
