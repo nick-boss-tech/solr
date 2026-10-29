@@ -63,3 +63,5 @@ Heartbeat: 2026-10-27T23:17:13Z (SOLR-17887 screen check and selected-icon fix a
 Heartbeat: 2026-10-28T18:50:55Z (pr-5255-alias-lock-followup gate round 2: claimed at c09411a16c after tidy repair; focused proof not yet run)
 
 Heartbeat: 2026-10-29T00:36Z; stale-claim review round 1 recorded at reports/stale-claims-and-superseded-gates-round-1.md. Gradle-help tarball claim claims/gradle-help-tarball-review-round-1-vm5.md has no heartbeat since 2026-10-27 and is open for takeover. No Gradle or gate run started.
+
+Heartbeat: 2026-10-29T16:00Z (SOLR-18610 web identity gate round 1, claim claims/pr-5264-web-identity-gate-round-1-vm5.md; repairs at 41400946a3 and f93d00367d; final proof chain running under the host lock)
