@@ -1,4 +1,4 @@
-Status: OPEN
+Status: DONE
 Tags: gate
 
 # Gate job: SOLR-16391 modify-collection and ping healthcheck-file JAX-RS migration
@@ -50,3 +50,7 @@ V2CollectionAPIMappingTest. Not yet compiled anywhere; this gate is the first ch
   Status to DONE.
 - Failure: record the failing leg and first error in this job and in receipts/SOLR-16391.md;
   do not fix code on this job. Fixes return to the phone agent as new work.
+
+## Result
+
+PASS at 301d5c34e46e257d716a786f5950634c8885d808 (phone agent, 2026-10-29): tidy clean, Error Prone compile rc 0 including SolrJ OpenAPI generation, V2CollectionAPIMappingTest 3/3, PingRequestHandlerTest 6/6, :solr:core:check -x test rc 0. Receipt: receipts/SOLR-16391.md.
