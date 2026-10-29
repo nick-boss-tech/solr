@@ -31,19 +31,37 @@ public interface PingHealthCheckApi {
   @Operation(
       summary = "Create the ping handler's healthcheck file, enabling the ping.",
       tags = {"cores"})
-  HealthCheckFileResponse enableHealthCheckFile(@Parameter(description = "The name of the core whose ping handler to configure.", required = true) @PathParam("coreName") String coreName) throws Exception;
+  HealthCheckFileResponse enableHealthCheckFile(
+      @Parameter(
+              description = "The name of the core whose ping handler to configure.",
+              required = true)
+          @PathParam("coreName")
+          String coreName)
+      throws Exception;
 
   @POST
   @Path("/disable")
   @Operation(
       summary = "Delete the ping handler's healthcheck file, disabling the ping.",
       tags = {"cores"})
-  HealthCheckFileResponse disableHealthCheckFile(@Parameter(description = "The name of the core whose ping handler to configure.", required = true) @PathParam("coreName") String coreName) throws Exception;
+  HealthCheckFileResponse disableHealthCheckFile(
+      @Parameter(
+              description = "The name of the core whose ping handler to configure.",
+              required = true)
+          @PathParam("coreName")
+          String coreName)
+      throws Exception;
 
   @GET
   @Path("/status")
   @Operation(
       summary = "Report whether the ping handler's healthcheck file is present.",
       tags = {"cores"})
-  HealthCheckFileResponse getHealthCheckFileStatus(@Parameter(description = "The name of the core whose ping handler to configure.", required = true) @PathParam("coreName") String coreName) throws Exception;
+  HealthCheckFileResponse getHealthCheckFileStatus(
+      @Parameter(
+              description = "The name of the core whose ping handler to configure.",
+              required = true)
+          @PathParam("coreName")
+          String coreName)
+      throws Exception;
 }
