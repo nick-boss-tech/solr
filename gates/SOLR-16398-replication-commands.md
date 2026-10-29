@@ -1,4 +1,4 @@
-Status: OPEN
+Status: DONE
 Tags: gate
 
 # Gate job: SOLR-16398 replication command APIs and debug dump (JAX-RS)
@@ -53,3 +53,7 @@ indexVersion to the v1 "indexVersion" parameter.
 - Failure: record the failing leg and first error in this job and in
   receipts/SOLR-16398-replication.md; do not fix code on this job. Fixes return to the phone
   agent as new work.
+
+## Result
+
+PASS at e1939da6e0e7cc5bd68e44193084e35fc970b218 (phone agent, 2026-10-29): tidy clean, Error Prone compile rc 0 including SolrJ OpenAPI generation, CoreReplicationAPITest 18 tests with 1 platform-assumption skip and 0 failures, TestReplicationHandler 25 of 25 skipped (the whole class is nightly-gated; standing behavior), :solr:core:check -x test rc 0. Receipt: receipts/SOLR-16398-replication.md.
