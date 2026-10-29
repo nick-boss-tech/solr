@@ -17,8 +17,11 @@
 
 package org.apache.solr.client.solrj.jetty;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.client.solrj.impl.HttpSolrClientBase;
 import org.apache.solr.client.solrj.impl.HttpSolrClientBuilderBase;
@@ -36,11 +39,9 @@ public class HttpJettySolrClientBinaryCompatTest extends SolrTestCase {
 
     for (String name :
         new String[] {"withConnectionTimeout", "withRequestTimeout", "withIdleTimeout"}) {
-      assertEquals(
-          HttpSolrClientBuilderBase.class,
-          HttpJettySolrClient.Builder.class
-              .getMethod(name, long.class, TimeUnit.class)
-              .getReturnType());
+      assertTrue(
+          returnTypes(HttpJettySolrClient.Builder.class, name, long.class, TimeUnit.class)
+              .contains(HttpSolrClientBuilderBase.class));
     }
 
     assertTrue(
@@ -69,5 +70,12 @@ public class HttpJettySolrClientBinaryCompatTest extends SolrTestCase {
     } finally {
       client.close();
     }
+  }
+
+  private static Set<Class<?>> returnTypes(Class<?> c, String name, Class<?>... params) {
+    return Arrays.stream(c.getMethods())
+        .filter(m -> m.getName().equals(name) && Arrays.equals(m.getParameterTypes(), params))
+        .map(Method::getReturnType)
+        .collect(Collectors.toSet());
   }
 }

@@ -18,6 +18,7 @@
 package org.apache.solr.client.solrj.impl;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Locale;
@@ -115,16 +116,12 @@ public class HttpSolrClientBinaryCompatTest extends SolrTestCase {
     // is the descriptor shape pre-compiled consumers link against.
     for (String name :
         new String[] {"withConnectionTimeout", "withRequestTimeout", "withIdleTimeout"}) {
-      assertEquals(
-          HttpSolrClientBuilderBase.class,
-          HttpSolrClientBuilderBase.class
-              .getMethod(name, long.class, TimeUnit.class)
-              .getReturnType());
-      assertEquals(
-          HttpSolrClientBuilderBase.class,
-          HttpJdkSolrClient.Builder.class
-              .getMethod(name, long.class, TimeUnit.class)
-              .getReturnType());
+      assertTrue(
+          returnTypes(HttpSolrClientBuilderBase.class, name, long.class, TimeUnit.class)
+              .contains(HttpSolrClientBuilderBase.class));
+      assertTrue(
+          returnTypes(HttpJdkSolrClient.Builder.class, name, long.class, TimeUnit.class)
+              .contains(HttpSolrClientBuilderBase.class));
     }
 
     // The JDK builder carries the bridges for the released build() and withHttpClient descriptors.
@@ -222,5 +219,12 @@ public class HttpSolrClientBinaryCompatTest extends SolrTestCase {
     } finally {
       executor.shutdownNow();
     }
+  }
+
+  private static Set<Class<?>> returnTypes(Class<?> c, String name, Class<?>... params) {
+    return Arrays.stream(c.getMethods())
+        .filter(m -> m.getName().equals(name) && Arrays.equals(m.getParameterTypes(), params))
+        .map(Method::getReturnType)
+        .collect(Collectors.toSet());
   }
 }

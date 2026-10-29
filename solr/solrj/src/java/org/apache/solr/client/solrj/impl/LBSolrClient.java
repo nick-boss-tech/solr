@@ -215,6 +215,7 @@ public abstract class LBSolrClient extends SolrClient {
       return this;
     }
 
+    @Override
     public C getSolrClient() {
       return solrClient;
     }
