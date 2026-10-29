@@ -8,4 +8,7 @@
 - Lease: live while heartbeats continue; stale 2 hours after the last heartbeat. Attempts: 2.
 - Capability tags used: gate.
 
-Heartbeat: 2026-10-29T01:30Z
+Heartbeat: 2026-10-29T02:00Z (DONE, green)
+
+- Status: DONE, GREEN at `f0fb1d15b1`.
+- DONE: `receipts/SOLR-16395.md`. Logs: `/workspace/gates/logs/vm4/solr-16395-copyfield-jaxrs-f0fb1d1/`.
