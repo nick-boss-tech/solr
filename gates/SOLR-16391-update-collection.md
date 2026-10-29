@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16391-update-collection
-- Head: ef6150fae43476a5606f9e2a148a33748b224270
+- Head: 301d5c34e46e257d716a786f5950634c8885d808
+- Superseded head: ef6150fae43476a5606f9e2a148a33748b224270 (tidy re-sorted the corrected JerseyResource import in PingHealthCheck; formatting-only commit 301d5c34e4 on top, per the step 1 rule)
 - Superseded head: 6b51a6e765255a33d79b416a0e4e2142bbb480f0 (OpenAPI generation passed; core compile failed: PingHealthCheck imported JerseyResource from org.apache.solr.jersey instead of org.apache.solr.api, and CollectionsHandler lacked the ModifyCollection import; fixed in ef6150fae43)
 - Superseded head: 46c451d8ed7b1476ac7a00dd6f1a38605d1f8dcb (tidy reformatted the new path-parameter declarations in PingHealthCheckApi; formatting-only commit 6b51a6e765 on top, per the step 1 rule)
 - Superseded head: 114229c6add8ab6eef59e188c17e05e7e0894db2 (tidy clean; SolrJ OpenAPI generation failed spec validation: PingHealthCheckApi declared {coreName} in its class path but no method declared the path parameter; declared on all three operations in 46c451d8ed7)
