@@ -171,6 +171,26 @@ draft, before and after:
 The rule covers section openings and closings in a description and
 whole comments alike: say the thing itself, once.
 
+## Collapsible verification (Nick, 2026-10-29)
+
+In PR descriptions and PR follow-up comments, wrap the Linux verification in a closed-by-default HTML `<details>` block with a `<summary>` naming the verification and exact tested head. Keep the test counts, seeds, formatting/build/documentation checks, fail-before results, evidence links and execution conditions inside the block. Preserve failures and limitations in the verification text; collapsing it must not change or overstate the result. Keep behavior, design choices, the pinned diff and commands for taking the changes outside the block.
+
+Use this structure, with a blank line after `</summary>` and before `</details>` so GitHub renders Markdown inside it:
+
+```markdown
+<details>
+<summary>Linux verification at TESTED_HEAD</summary>
+
+- <Focused and neighbouring test counts, seeds, failures and skips.>
+- <Formatting, build and documentation checks and material execution conditions.>
+
+<Fail-before results and linked evidence.>
+
+</details>
+```
+
+This rule applies to new drafts. The posted worked example below remains verbatim; wrap its verification section when using its structure for a new description or comment.
+
 ## How this maps to the gate
 
 The harden gate already produces every input: tidy, Error Prone
