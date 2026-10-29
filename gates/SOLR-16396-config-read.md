@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16396-config-read
-- Head: b8169ff932bbec2e71a29acbece53bceda05da7f
+- Head: d4aa535520425e9309cc69975c65c865f42a7d0a
+- Superseded head: b8169ff932bbec2e71a29acbece53bceda05da7f (tidy removed one extra blank line left by the paramset move in ConfigApi; formatting-only commit d4aa535520 on top, per the step 1 rule)
 - Superseded head: f2fa83bb153258d1c381e8d0618091bbbd0e47a0 (tidy clean; api compile failed: the paramset operations were inserted between the annotations and the signature of getConfigComponentByName, stacking duplicate annotations; moved below it in b8169ff932)
 - Superseded head: c0bce1c24a5a0b7f7bd6e10a228a9b4151e6a76e (tidy import order, line joins, and one unused import in the mapping test; formatting-only commit f2fa83bb15 on top, per the step 1 rule)
 - Base: origin/main 3db71000514e1edaa8e6ae0426fce92ca97990e3
