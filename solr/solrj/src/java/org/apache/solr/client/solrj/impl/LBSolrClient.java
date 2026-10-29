@@ -169,7 +169,14 @@ public abstract class LBSolrClient extends SolrClient {
     solrQuery.setDistrib(false);
   }
 
-  public static class Builder<C extends HttpSolrClientBase> {
+  /**
+   * Lets javac emit the HttpSolrClientBase-returning bridge for {@link Builder#getSolrClient()}.
+   */
+  interface SolrClientAccess {
+    HttpSolrClientBase getSolrClient();
+  }
+
+  public static class Builder<C extends HttpSolrClient> implements SolrClientAccess {
 
     private final C solrClient;
     private final Endpoint[] solrEndpoints;
@@ -180,6 +187,11 @@ public abstract class LBSolrClient extends SolrClient {
     public Builder(C solrClient, Endpoint... endpoints) {
       this.solrClient = solrClient;
       this.solrEndpoints = endpoints;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Builder(HttpSolrClientBase solrClient, Endpoint... endpoints) {
+      this((C) HttpSolrClient.asHttpSolrClient(solrClient), endpoints);
     }
 
     /**

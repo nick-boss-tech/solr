@@ -20,7 +20,11 @@ package org.apache.solr.client.solrj.impl;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Constructor;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.request.RequestWriter;
+import org.apache.solr.client.solrj.response.ResponseParser;
 import org.apache.solr.common.params.CollectionAdminParams;
 import org.apache.solr.common.params.CommonAdminParams;
 import org.apache.solr.common.params.CommonParams;
@@ -96,6 +100,14 @@ public abstract class HttpSolrClient extends HttpSolrClientBase {
     HTTP_JETTY_SOLR_CLIENT_BUILDER_CTOR = ctor;
   }
 
+  static HttpSolrClient asHttpSolrClient(HttpSolrClientBase client) {
+    if (client != null && !(client instanceof HttpSolrClient)) {
+      throw new IllegalArgumentException(
+          "Expected an HttpSolrClient but got " + client.getClass().getName());
+    }
+    return (HttpSolrClient) client;
+  }
+
   /**
    * Provides a new builder of an {@link HttpSolrClient}. The implementation will try to create a
    * {@code org.apache.solr.client.solrj.jetty.HttpJettySolrClient} if available, otherwise will
@@ -131,5 +143,86 @@ public abstract class HttpSolrClient extends HttpSolrClientBase {
 
     @Override
     public abstract C build();
+
+    // Redeclared with this nested return type (10.1 descriptors); javac adds the 10.0 bridges.
+    @Override
+    public B withHttpClient(C httpSolrClient) {
+      return super.withHttpClient(httpSolrClient);
+    }
+
+    @Override
+    public B withBaseSolrUrl(String baseSolrUrl) {
+      return super.withBaseSolrUrl(baseSolrUrl);
+    }
+
+    @Override
+    public B withRequestWriter(RequestWriter requestWriter) {
+      return super.withRequestWriter(requestWriter);
+    }
+
+    @Override
+    public B withResponseParser(ResponseParser responseParser) {
+      return super.withResponseParser(responseParser);
+    }
+
+    @Override
+    public B withDefaultCollection(String defaultCoreOrCollection) {
+      return super.withDefaultCollection(defaultCoreOrCollection);
+    }
+
+    @Override
+    public B withFollowRedirects(boolean followRedirects) {
+      return super.withFollowRedirects(followRedirects);
+    }
+
+    @Override
+    public B withExecutor(ExecutorService executor) {
+      return super.withExecutor(executor);
+    }
+
+    @Override
+    public B withBasicAuthCredentials(String user, String pass) {
+      return super.withBasicAuthCredentials(user, pass);
+    }
+
+    @Override
+    public B withTheseParamNamesInTheUrl(Set<String> urlParamNames) {
+      return super.withTheseParamNamesInTheUrl(urlParamNames);
+    }
+
+    @Override
+    public B withMaxConnectionsPerHost(int max) {
+      return super.withMaxConnectionsPerHost(max);
+    }
+
+    @Override
+    public B withIdleTimeout(long idleConnectionTimeout, TimeUnit unit) {
+      return super.withIdleTimeout(idleConnectionTimeout, unit);
+    }
+
+    @Override
+    public B withConnectionTimeout(long connectionTimeout, TimeUnit unit) {
+      return super.withConnectionTimeout(connectionTimeout, unit);
+    }
+
+    @Override
+    public B withRequestTimeout(long requestTimeout, TimeUnit unit) {
+      return super.withRequestTimeout(requestTimeout, unit);
+    }
+
+    @Override
+    public B useHttp1_1(boolean useHttp1_1) {
+      return super.useHttp1_1(useHttp1_1);
+    }
+
+    @Override
+    public B withProxyConfiguration(String host, int port, boolean isSocks4, boolean isSecure) {
+      return super.withProxyConfiguration(host, port, isSocks4, isSecure);
+    }
+
+    @Override
+    public B withOptionalBasicAuthCredentials(String credentials) {
+      return super.withOptionalBasicAuthCredentials(credentials);
+    }
   }
 }

@@ -1,7 +1,7 @@
 title: >
-  Restore HttpSolrClientBase and HttpSolrClientBuilderBase as top-level SolrJ classes, fixing a
-  binary incompatibility introduced in 10.1.0 where code compiled against SolrJ 10.0.0 fails with
-  NoSuchMethodError on ordinary HttpJdkSolrClient/HttpJettySolrClient builder calls
+  Restore HttpSolrClientBase and HttpSolrClientBuilderBase as top-level SolrJ classes, and the
+  10.0 method signatures that use them, so code compiled against SolrJ 10.0.0 runs again on this
+  version, while code compiled against SolrJ 10.1.0 keeps running
 type: fixed
 authors:
   - name: Nick Shanin

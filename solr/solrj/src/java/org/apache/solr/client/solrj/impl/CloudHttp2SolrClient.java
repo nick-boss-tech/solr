@@ -32,7 +32,7 @@ public class CloudHttp2SolrClient extends CloudSolrClient {
 
   private final ClusterStateProvider stateProvider;
   private final LBSolrClient lbClient;
-  private final HttpSolrClientBase myClient;
+  private final HttpSolrClient myClient;
   private final boolean clientIsInternal;
 
   /**
@@ -103,7 +103,7 @@ public class CloudHttp2SolrClient extends CloudSolrClient {
   }
 
   @Override
-  public HttpSolrClientBase getHttpClient() {
+  public HttpSolrClient getHttpClient() {
     return myClient;
   }
 }

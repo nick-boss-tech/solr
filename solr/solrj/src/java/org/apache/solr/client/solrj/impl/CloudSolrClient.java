@@ -90,7 +90,7 @@ import org.slf4j.MDC;
  * core or node becomes unavailable. It's able to know where to route requests due to its knowledge
  * of the SolrCloud "cluster state".
  */
-public abstract class CloudSolrClient extends SolrClient {
+public abstract class CloudSolrClient extends SolrClient implements HttpClientAccess {
 
   public static final String STATE_VERSION = "_stateVer_";
   static final int DEFAULT_STATE_REFRESH_PARALLELISM = 5;
@@ -226,7 +226,7 @@ public abstract class CloudSolrClient extends SolrClient {
   }
 
   /** The HttpSolrClient that underlies this one. It has no baseUrl or default collection. */
-  public abstract HttpSolrClientBase getHttpClient();
+  public abstract HttpSolrClient getHttpClient();
 
   public ResponseParser getParser() {
     return getLbClient().getParser();
@@ -1292,12 +1292,12 @@ public abstract class CloudSolrClient extends SolrClient {
     protected Collection<String> zkHosts = new ArrayList<>();
     protected List<String> solrUrls = new ArrayList<>();
     protected String zkChroot;
-    protected HttpSolrClientBase httpClient;
+    protected HttpSolrClient httpClient;
     protected boolean shardLeadersOnly = true;
     protected boolean directUpdatesToLeadersOnly = false;
     protected boolean parallelUpdates = true;
     protected ClusterStateProvider stateProvider;
-    protected HttpSolrClientBuilderBase<?, ?> internalClientBuilder;
+    protected HttpSolrClient.BuilderBase<?, ?> internalClientBuilder;
     protected RequestWriter requestWriter;
     protected ResponseParser responseParser;
     protected long retryExpiryTimeNano =
@@ -1539,7 +1539,7 @@ public abstract class CloudSolrClient extends SolrClient {
         throw new IllegalStateException(
             "The builder can't accept an httpClient AND an internalClientBuilder, only one of those can be provided");
       }
-      this.httpClient = httpSolrClient;
+      this.httpClient = HttpSolrClient.asHttpSolrClient(httpSolrClient);
       return this;
     }
 
@@ -1560,8 +1560,13 @@ public abstract class CloudSolrClient extends SolrClient {
         throw new IllegalStateException(
             "The builder can't accept an httpClient AND an internalClientBuilder, only one of those can be provided");
       }
-      this.internalClientBuilder = internalClientBuilder;
+      this.internalClientBuilder = (HttpSolrClient.BuilderBase<?, ?>) internalClientBuilder;
       return this;
+    }
+
+    public Builder withInternalClientBuilder(
+        HttpSolrClientBuilderBase<?, ?> internalClientBuilder) {
+      return withHttpClientBuilder(internalClientBuilder);
     }
 
     /**
@@ -1604,7 +1609,7 @@ public abstract class CloudSolrClient extends SolrClient {
       return new CloudHttp2SolrClient(this);
     }
 
-    protected HttpSolrClientBase createOrGetHttpClient() {
+    protected HttpSolrClient createOrGetHttpClient() {
       if (httpClient != null) {
         return httpClient;
       } else if (internalClientBuilder != null) {
@@ -1612,6 +1617,10 @@ public abstract class CloudSolrClient extends SolrClient {
       } else {
         return HttpSolrClient.builder(null).build();
       }
+    }
+
+    protected LBSolrClient createOrGetLbClient(HttpSolrClient myClient) {
+      return createOrGetLbClient((HttpSolrClientBase) myClient);
     }
 
     protected LBSolrClient createOrGetLbClient(HttpSolrClientBase myClient) {
@@ -1626,6 +1635,10 @@ public abstract class CloudSolrClient extends SolrClient {
         timeoutAware.setZkConnectTimeout(zkConnectTimeout);
       }
       return stateProvider;
+    }
+
+    protected ClusterStateProvider createHttpClusterStateProvider(HttpSolrClient httpClient) {
+      return createHttpClusterStateProvider((HttpSolrClientBase) httpClient);
     }
 
     protected ClusterStateProvider createHttpClusterStateProvider(HttpSolrClientBase httpClient) {

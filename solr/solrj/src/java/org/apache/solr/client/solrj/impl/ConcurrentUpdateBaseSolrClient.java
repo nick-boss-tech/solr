@@ -57,7 +57,7 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private static final Update END_UPDATE = new Update(null, null);
 
-  private HttpSolrClientBase client;
+  private HttpSolrClient client;
   protected final String basePath;
   protected final CustomBlockingQueue<Update> queue;
   private final ExecutorService scheduler;
@@ -113,6 +113,11 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
     private final Semaphore available;
     private final int queueSize;
     private final E backdoorE;
+
+    // Released 10.0.0 signature; the second int was unused there as well.
+    public CustomBlockingQueue(int queueSize, int unused, E backdoorE) {
+      this(queueSize, backdoorE);
+    }
 
     public CustomBlockingQueue(int queueSize, E backdoorE) {
       queue = new LinkedBlockingQueue<>();
@@ -710,9 +715,14 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
   }
 
   /** Constructs {@link ConcurrentUpdateBaseSolrClient} instances from provided configuration. */
-  public abstract static class Builder {
+  /** Lets javac emit the HttpSolrClientBase-returning bridge for {@link Builder#getClient()}. */
+  interface ClientAccess {
+    HttpSolrClientBase getClient();
+  }
+
+  public abstract static class Builder implements ClientAccess {
     protected long idleTimeoutMillis;
-    protected HttpSolrClientBase client;
+    protected HttpSolrClient client;
     protected String baseSolrUrl;
     protected String defaultCollection;
     protected int queueSize = 10;
@@ -741,8 +751,12 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
      *     internally. Callers are responsible for closing the provided client (after closing any
      *     clients created by this builder)
      */
-    public Builder(String baseSolrUrl, HttpSolrClientBase client) {
+    public Builder(String baseSolrUrl, HttpSolrClient client) {
       this(baseSolrUrl, client, false);
+    }
+
+    public Builder(String baseSolrUrl, HttpSolrClientBase client) {
+      this(baseSolrUrl, HttpSolrClient.asHttpSolrClient(client), false);
     }
 
     /**
@@ -765,10 +779,14 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
      *     ConcurrentUpdateBaseSolrClient should assume responsibility for closing the provided
      *     'client'
      */
-    public Builder(String baseSolrUrl, HttpSolrClientBase client, boolean closeHttpClient) {
+    public Builder(String baseSolrUrl, HttpSolrClient client, boolean closeHttpClient) {
       this.baseSolrUrl = baseSolrUrl;
       this.client = client;
       this.closeHttpClient = closeHttpClient;
+    }
+
+    public Builder(String baseSolrUrl, HttpSolrClientBase client, boolean closeHttpClient) {
+      this(baseSolrUrl, HttpSolrClient.asHttpSolrClient(client), closeHttpClient);
     }
 
     /**
@@ -883,7 +901,7 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
      */
     public abstract ConcurrentUpdateBaseSolrClient build();
 
-    public HttpSolrClientBase getClient() {
+    public HttpSolrClient getClient() {
       return client;
     }
   }

@@ -230,6 +230,12 @@ public class HttpJdkSolrClient extends HttpSolrClient {
   }
 
   protected PreparedRequest prepareRequest(
+      SolrRequest<?> solrRequest, String collection, String overrideBaseUrl)
+      throws SolrServerException, IOException {
+    return prepareRequest(overrideBaseUrl, solrRequest, collection);
+  }
+
+  protected PreparedRequest prepareRequest(
       String overrideBaseUrl, SolrRequest<?> solrRequest, String collection)
       throws SolrServerException, IOException {
     checkClosed();

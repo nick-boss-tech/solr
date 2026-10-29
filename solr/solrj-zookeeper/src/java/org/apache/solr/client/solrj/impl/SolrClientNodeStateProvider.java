@@ -257,7 +257,7 @@ public class SolrClientNodeStateProvider implements NodeStateProvider, MapWriter
           (ZkClientClusterStateProvider) cloudSolrClient.getClusterStateProvider();
     }
 
-    protected HttpSolrClientBase httpSolrClient() {
+    protected HttpSolrClient httpSolrClient() {
       return cloudSolrClient.getHttpClient();
     }
 
