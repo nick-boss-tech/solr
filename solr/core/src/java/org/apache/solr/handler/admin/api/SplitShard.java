@@ -56,8 +56,7 @@ public class SplitShard extends AdminAPIBase implements SplitShardApi {
   @Override
   @PermissionName(COLL_EDIT_PERM)
   public SubResponseAccumulatingJerseyResponse splitShard(
-      String collectionName, String shardName, SplitShardRequestBody requestBody)
-      throws Exception {
+      String collectionName, String shardName, SplitShardRequestBody requestBody) throws Exception {
     final var response = instantiateJerseyResponse(SubResponseAccumulatingJerseyResponse.class);
     fetchAndValidateZooKeeperAwareCoreContainer();
     ensureRequiredParameterProvided(COLLECTION_PROP, collectionName);
