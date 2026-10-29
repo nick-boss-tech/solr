@@ -17,6 +17,8 @@
 package org.apache.solr.s3;
 
 import com.sun.net.httpserver.HttpServer;
+import java.io.File;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -84,6 +86,27 @@ public class S3WebIdentitySecurityManagerTest extends SolrTestCase {
     }
   }
 
+  /** The shipped policy plus read access to the child's classpath. */
+  @SuppressWarnings("SystemGetProperty")
+  private static Path childPolicy(Path shippedPolicy, Path temporaryDirectory) throws IOException {
+    StringBuilder policy =
+        new StringBuilder(Files.readString(shippedPolicy, StandardCharsets.UTF_8));
+    policy.append("\ngrant {\n");
+    for (String entry : System.getProperty("java.class.path").split(File.pathSeparator)) {
+      Path path = Path.of(entry).toAbsolutePath();
+      String target = path.toString().replace("\\", "\\\\").replace("\"", "\\\"");
+      policy
+          .append("  permission java.io.FilePermission \"")
+          .append(target)
+          .append(Files.isDirectory(path) ? "/-" : "")
+          .append("\", \"read\";\n");
+    }
+    policy.append("};\n");
+    Path file = temporaryDirectory.resolve("security.policy");
+    Files.writeString(file, policy, StandardCharsets.UTF_8);
+    return file;
+  }
+
   @SuppressWarnings("SystemGetProperty")
   private void runProbe(Path policy, Path temporaryDirectory, Path token, int port)
       throws Exception {
@@ -93,7 +116,7 @@ public class S3WebIdentitySecurityManagerTest extends SolrTestCase {
             Path.of(System.getProperty("java.home"), "bin", "java").toString(),
             "-Djava.security.manager",
             // Replace the default policy so a user's ~/.java.policy cannot hide missing grants.
-            "-Djava.security.policy==" + policy.toUri(),
+            "-Djava.security.policy==" + childPolicy(policy, temporaryDirectory).toUri(),
             "-Djava.io.tmpdir=" + temporaryDirectory,
             "-Duser.home=" + temporaryDirectory,
             "-Daws.region=us-east-1",
