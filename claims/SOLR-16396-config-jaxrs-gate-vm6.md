@@ -1,7 +1,7 @@
 # Claim: SOLR-16396-config-jaxrs gate, round 1 (vm6)
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE; mark DONE with the receipt path when the gate lands.
+- Status: DONE (see the DONE line below).
 - Job or assignment: `gates/SOLR-16396-config-jaxrs.md` (head `6f1577221646dec1dd4ada8e409faa552d4f2913`).
 - Slice: the whole gate job, steps 1 to 6.
 - Capability tags used: gate.
@@ -23,3 +23,7 @@ Steps recorded before the restart, job `solr16396-r1-f8ba76d` (log dir `/workspa
 - focused-tests: interrupted by a VM restart (no rc, no state file). Not counted.
 
 Resume: job `solr16396-r1-f8ba76d-resume` runs focused-tests and module-check at `f8ba76d` after the restart, with the same seed-free command as the job steps. Reason: environment change (VM restart), which the failed-run rule allows; the earlier steps are not rerun.
+
+Result: 2026-10-29T01:43:24Z: gate PASS at `f8ba76d` (tidy rc 0 with commit f8ba76d, Error Prone compile rc 0, SolrJ generation rc 0, focused tests 3 of 3 in job solr16396-r1-f8ba76d-resume, module check rc 0). Receipt `receipts/SOLR-16396.md`.
+
+DONE: 2026-10-29T01:43:24Z. Deliverables: `receipts/SOLR-16396.md`; `gates/SOLR-16396-config-jaxrs.md` set to DONE.
