@@ -10,3 +10,6 @@ Status: CLAIMED (Linux positive proof at superseding head)
 - Competing claims: none for this head. Round-1 claim `claims/pr-5238-ubi-contract-linux-round-1-vm4.md` ended at the tidy halt.
 - Plan: reuse the standalone full clone at `/workspace/worktrees/gate-5238-clone`, checked out detached at the new head, then run the round-2 driver under the host lock. Logs under `/workspace/gates/logs/vm4/pr5238-ubi-contract-linux-round-2/`.
 - Constraints: no GitHub PR, comment, or Jira write. No further fork push unless tidy changes files, in which case the run stops and reports. No force push.
+Status: DONE (Linux positive proof at `c2c387064a`)
+
+DONE: `receipts/PR-5238-ubi-contract.md` and `reports/pr-5238-ubi-contract-linux-round-2.md`. Round 2 GREEN at `c2c387064a`; nothing running.
