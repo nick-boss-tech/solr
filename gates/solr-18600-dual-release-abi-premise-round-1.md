@@ -1,6 +1,6 @@
 # Gate premise: SOLR-18600 dual-release HTTP ABI investigation, round 1
 
-Status: OPEN. Diagnostic/design proof, not a promotion gate for the existing restoration.
+Status: CLAIMED (vm6, claim `claims/solr-18600-dual-release-abi-premise-round-1-vm6.md`, 2026-10-29T23:04:50Z). Diagnostic/design proof, not a promotion gate for the existing restoration.
 
 - Tags: gate, premise-run, review, records. Intended host: any capable Linux gate host; vm2 preferred while its prior artifacts are available. The preference is not exclusive ownership. Follow hosts/pool-linux.md, the host build lock and current claims.
 - Request: Nick asked whether further checks should go to the gate. Post this bounded investigation to establish the compatibility repair path for callers compiled against BOTH 10.0.0 and 10.1.0.
