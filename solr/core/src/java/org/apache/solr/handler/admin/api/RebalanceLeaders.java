@@ -18,16 +18,15 @@
 package org.apache.solr.handler.admin.api;
 
 import static org.apache.solr.common.cloud.ZkStateReader.COLLECTION_PROP;
+import static org.apache.solr.common.cloud.ZkStateReader.MAX_AT_ONCE_PROP;
+import static org.apache.solr.common.cloud.ZkStateReader.MAX_WAIT_SECONDS_PROP;
 import static org.apache.solr.security.PermissionNameProvider.Name.COLL_EDIT_PERM;
 
 import jakarta.inject.Inject;
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.solr.client.api.endpoint.RebalanceLeadersApi;
 import org.apache.solr.client.api.model.RebalanceLeadersRequestBody;
 import org.apache.solr.client.api.model.SubResponseAccumulatingJerseyResponse;
-import org.apache.solr.common.cloud.ZkNodeProps;
-import org.apache.solr.common.params.CollectionParams;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.jersey.PermissionName;
 import org.apache.solr.request.SolrQueryRequest;
@@ -61,16 +60,21 @@ public class RebalanceLeaders extends AdminAPIBase implements RebalanceLeadersAp
       requestBody = new RebalanceLeadersRequestBody();
     }
 
-    final Map<String, Object> messageProps = new HashMap<>();
-    messageProps.put(COLLECTION_PROP, collectionName);
-    insertIfNotNull(messageProps, "maxAtOnce", requestBody.maxAtOnce);
-    insertIfNotNull(messageProps, "maxWaitSeconds", requestBody.maxWaitSeconds);
+    final var params = new ModifiableSolrParams(solrQueryRequest.getParams());
+    params.set(COLLECTION_PROP, collectionName);
+    if (requestBody.maxAtOnce != null) {
+      params.set(MAX_AT_ONCE_PROP, requestBody.maxAtOnce);
+    }
+    if (requestBody.maxWaitSeconds != null) {
+      params.set(MAX_WAIT_SECONDS_PROP, requestBody.maxWaitSeconds);
+    }
+    solrQueryRequest.setParams(params);
 
-    submitRemoteMessageAndHandleResponse(
-        response,
-        CollectionParams.CollectionAction.REBALANCELEADERS,
-        new ZkNodeProps(messageProps),
-        null);
+    new org.apache.solr.handler.admin.RebalanceLeaders(
+            solrQueryRequest, solrQueryResponse, coreContainer.getCollectionsHandler())
+        .execute();
+    response.successfulSubResponsesByNodeName =
+        solrQueryResponse.getValues().asMap(Integer.MAX_VALUE);
     return response;
   }
 }

@@ -194,12 +194,15 @@ import org.apache.solr.handler.admin.api.ListClusterNodes;
 import org.apache.solr.handler.admin.api.ListCollectionBackups;
 import org.apache.solr.handler.admin.api.ListCollectionSnapshots;
 import org.apache.solr.handler.admin.api.ListCollections;
+import org.apache.solr.handler.admin.api.MigrateDocs;
 import org.apache.solr.handler.admin.api.MigrateReplicas;
 import org.apache.solr.handler.admin.api.ModifyCollectionAPI;
+import org.apache.solr.handler.admin.api.MoveReplica;
 import org.apache.solr.handler.admin.api.ReloadCollectionAPI;
 import org.apache.solr.handler.admin.api.RenameCollection;
 import org.apache.solr.handler.admin.api.ReplaceNode;
 import org.apache.solr.handler.admin.api.RestoreCollection;
+import org.apache.solr.handler.admin.api.SplitShard;
 import org.apache.solr.handler.admin.api.SyncShard;
 import org.apache.solr.handler.api.V2ApiUtils;
 import org.apache.solr.logging.MDCLoggingContext;
@@ -1241,6 +1244,10 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         MigrateReplicas.class,
         BalanceReplicas.class,
         RestoreCollection.class,
+        SplitShard.class,
+        MoveReplica.class,
+        org.apache.solr.handler.admin.api.RebalanceLeaders.class,
+        MigrateDocs.class,
         SyncShard.class,
         CollectionProperty.class,
         DeleteNode.class,

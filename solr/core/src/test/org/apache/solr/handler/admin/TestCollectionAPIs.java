@@ -17,7 +17,6 @@
 
 package org.apache.solr.handler.admin;
 
-import static org.apache.solr.client.solrj.SolrRequest.METHOD.POST;
 import static org.apache.solr.cloud.Overseer.QUEUE_OPERATION;
 import static org.apache.solr.common.params.CollectionAdminParams.PROPERTY_NAME;
 import static org.apache.solr.common.params.CollectionAdminParams.PROPERTY_VALUE;
@@ -86,27 +85,6 @@ public class TestCollectionAPIs extends SolrTestCaseJ4 {
       apiBag.registerObject(clusterAPI);
       apiBag.registerObject(clusterAPI.commands);
     }
-
-    compareOutput(
-        apiBag,
-        "/collections/collName/shards",
-        POST,
-        "{split:{shard:shard1, ranges: '0-1f4,1f5-3e8,3e9-5dc', coreProperties : {prop1:prop1Val, prop2:prop2Val} }}",
-        "{collection: collName , shard : shard1, ranges :'0-1f4,1f5-3e8,3e9-5dc', operation : splitshard, property.prop1:prop1Val, property.prop2: prop2Val}");
-
-    compareOutput(
-        apiBag,
-        "/collections/collName/shards",
-        POST,
-        "{split:{ splitKey:id12345, coreProperties : {prop1:prop1Val, prop2:prop2Val} }}",
-        "{collection: collName , split.key : id12345 , operation : splitshard, property.prop1:prop1Val, property.prop2: prop2Val}");
-
-    compareOutput(
-        apiBag,
-        "/collections/coll1",
-        POST,
-        "{migrate-docs : {forwardTimeout: 1800, target: coll2, splitKey: 'a123!'} }",
-        "{operation : migrate ,collection : coll1, target.collection:coll2, forward.timeout:1800, split.key:'a123!'}");
   }
 
   ZkNodeProps compareOutput(
