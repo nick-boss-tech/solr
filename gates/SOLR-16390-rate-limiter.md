@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16390-rate-limiter
-- Head: 629037642bd5720aeee77065e23718177fd1d6ff
+- Head: 61a48beac7fb381d2df64d630d9ffd448fa69880
+- Superseded head: 629037642bd5720aeee77065e23718177fd1d6ff (compiled; tidy then fixed one brace indent in TestCollectionAPIs left by the registration removal; formatting-only commit 61a48beac7 on top, per the step 1 rule)
 - Superseded head: 93b7e7c736b4fcd73ddd9ed251896b8a8a980d30 (main compile passed; test compile failed on two ApiBag registrations of clusterAPI.commands in V2ClusterAPIMappingTest and TestCollectionAPIs; removed in 629037642bd)
 - Superseded head: eea2bbfda3ee46a2c0fe3d5c39390aca12b255bc (tidy clean; Error Prone compile failed on two references the removal missed: CoreContainer still registered clusterAPI.commands, and CollectionsHandler lacked the SetRateLimiter import; fixed in 59636a55aa1 and 93b7e7c736b)
 - Superseded head: 2450061eb015205a363bd255574148079a111f27 (parsed and tidied, but tidy then
