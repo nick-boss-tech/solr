@@ -139,6 +139,13 @@ public class TestInjection {
 
   public static volatile CountDownLatch splitLatch = null;
 
+  public static volatile CountDownLatch splitBeforeFirstReplicaReachedLatch = null;
+  public static volatile CountDownLatch splitBeforeFirstReplicaReleaseLatch = null;
+  public static volatile String splitFirstReplicaShardForTest = null;
+
+  public static volatile CountDownLatch deleteShardAfterConstructionReachedLatch = null;
+  public static volatile CountDownLatch deleteShardAfterConstructionReleaseLatch = null;
+
   public static volatile CountDownLatch directUpdateLatch = null;
 
   public static volatile CountDownLatch reindexLatch = null;
@@ -211,6 +218,11 @@ public class TestInjection {
     splitFailureBeforeReplicaCreation = null;
     splitFailureAfterReplicaCreation = null;
     splitLatch = null;
+    splitBeforeFirstReplicaReachedLatch = null;
+    splitBeforeFirstReplicaReleaseLatch = null;
+    splitFirstReplicaShardForTest = null;
+    deleteShardAfterConstructionReachedLatch = null;
+    deleteShardAfterConstructionReleaseLatch = null;
     directUpdateLatch = null;
     reindexLatch = null;
     reindexFailure = null;
@@ -540,6 +552,35 @@ public class TestInjection {
       }
     }
     return true;
+  }
+
+  public static void injectSplitBeforeFirstReplicaForTest(String shardName) {
+    splitFirstReplicaShardForTest = shardName;
+    awaitTestLatch(
+        "SplitShardCmd before first child replica creation",
+        splitBeforeFirstReplicaReachedLatch,
+        splitBeforeFirstReplicaReleaseLatch);
+  }
+
+  public static void injectDeleteShardAfterConstructionForTest() {
+    awaitTestLatch(
+        "DeleteShardCmd after child enters construction",
+        deleteShardAfterConstructionReachedLatch,
+        deleteShardAfterConstructionReleaseLatch);
+  }
+
+  private static void awaitTestLatch(
+      String location, CountDownLatch reachedLatch, CountDownLatch releaseLatch) {
+    if (releaseLatch == null) return;
+    if (reachedLatch != null) reachedLatch.countDown();
+    try {
+      log.info("Waiting in {} for up to 60s", location);
+      if (!releaseLatch.await(60, TimeUnit.SECONDS)) {
+        log.warn("Timed out waiting in {}", location);
+      }
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
   }
 
   public static boolean injectDirectUpdateLatch() {

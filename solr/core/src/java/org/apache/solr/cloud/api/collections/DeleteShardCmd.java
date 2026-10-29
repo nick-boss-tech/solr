@@ -43,6 +43,7 @@ import org.apache.solr.common.cloud.ZkStateReader;
 import org.apache.solr.common.params.CoreAdminParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
+import org.apache.solr.util.TestInjection;
 import org.apache.zookeeper.KeeperException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -122,6 +123,7 @@ public class DeleteShardCmd implements CollApiCmds.CollectionApiCommand {
       } else {
         ccc.offerStateUpdate(m);
       }
+      TestInjection.injectDeleteShardAfterConstructionForTest();
     }
 
     try {

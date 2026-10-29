@@ -774,7 +774,12 @@ public class SplitShardCmd implements CollApiCmds.CollectionApiCommand {
 
       t = timings.sub("createCoresForReplicas");
       // 11. now actually create replica cores on sub shard nodes
+      boolean firstReplica = true;
       for (Map<String, Object> replica : replicas) {
+        if (firstReplica) {
+          TestInjection.injectSplitBeforeFirstReplicaForTest((String) replica.get(SHARD_ID_PROP));
+          firstReplica = false;
+        }
         new AddReplicaCmd(ccc)
             .addReplica(
                 adminCmdContext.subRequestContext(ADDREPLICA).withClusterState(clusterState),
