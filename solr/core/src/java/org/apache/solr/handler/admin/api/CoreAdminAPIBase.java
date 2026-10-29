@@ -124,9 +124,9 @@ public abstract class CoreAdminAPIBase extends JerseyResource {
    */
   /**
    * Runs a CoreAdmin action by delegating to the {@link CoreAdminHandler} with the provided v1
-   * parameters. Intended for v2 APIs whose implementation still lives in a CoreAdmin operation;
-   * the parameters must include the CoreAdmin 'action' to run. Any exception the handler records
-   * on the response is rethrown so the JAX-RS layer can surface it as an API error.
+   * parameters. Intended for v2 APIs whose implementation still lives in a CoreAdmin operation; the
+   * parameters must include the CoreAdmin 'action' to run. Any exception the handler records on the
+   * response is rethrown so the JAX-RS layer can surface it as an API error.
    */
   protected SolrJerseyResponse invokeCoreAdminAction(Map<String, Object> v1Params)
       throws Exception {

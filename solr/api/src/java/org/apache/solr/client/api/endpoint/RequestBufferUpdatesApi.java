@@ -28,6 +28,5 @@ public interface RequestBufferUpdatesApi {
   @Operation(
       summary = "Request that a core buffer its updates.",
       tags = {"cores"})
-  SolrJerseyResponse requestBufferUpdates(@PathParam("coreName") String coreName)
-      throws Exception;
+  SolrJerseyResponse requestBufferUpdates(@PathParam("coreName") String coreName) throws Exception;
 }

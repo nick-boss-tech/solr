@@ -32,5 +32,6 @@ public interface PrepareCoreRecoveryApi {
       tags = {"cores"})
   SolrJerseyResponse prepareCoreRecovery(
       @PathParam("coreName") String coreName,
-      @RequestBody PrepareCoreRecoveryRequestBody requestBody) throws Exception;
+      @RequestBody PrepareCoreRecoveryRequestBody requestBody)
+      throws Exception;
 }

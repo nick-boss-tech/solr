@@ -16,22 +16,21 @@
  */
 package org.apache.solr.handler.admin.api;
 
+import static org.apache.solr.common.params.CommonAdminParams.SPLIT_KEY;
 import static org.apache.solr.common.params.CommonParams.ACTION;
+import static org.apache.solr.common.params.CommonParams.PATH;
+import static org.apache.solr.common.params.CoreAdminParams.CORE;
+import static org.apache.solr.common.params.CoreAdminParams.TARGET_CORE;
 import static org.apache.solr.security.PermissionNameProvider.Name.CORE_EDIT_PERM;
 
 import jakarta.inject.Inject;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import static org.apache.solr.common.params.CommonAdminParams.SPLIT_KEY;
-import static org.apache.solr.common.params.CommonParams.PATH;
-import static org.apache.solr.common.params.CoreAdminParams.CORE;
-import static org.apache.solr.common.params.CoreAdminParams.TARGET_CORE;
-
 import org.apache.solr.client.api.endpoint.SplitCoreApi;
+import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.client.api.model.SplitCoreRequestBody;
 import org.apache.solr.common.params.CoreAdminParams;
-import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.handler.admin.CoreAdminHandler;
 import org.apache.solr.jersey.PermissionName;
@@ -65,8 +64,7 @@ public class SplitCore extends CoreAdminAPIBase implements SplitCoreApi {
     }
 
     final Map<String, Object> v1Params = new HashMap<>();
-    v1Params.put(
-        ACTION, CoreAdminParams.CoreAdminAction.SPLIT.name().toLowerCase(Locale.ROOT));
+    v1Params.put(ACTION, CoreAdminParams.CoreAdminAction.SPLIT.name().toLowerCase(Locale.ROOT));
     v1Params.put(CORE, coreName);
     if (requestBody.path != null && !requestBody.path.isEmpty()) {
       v1Params.put(PATH, requestBody.path.toArray(new String[0]));
