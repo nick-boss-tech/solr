@@ -23,6 +23,7 @@ import static org.apache.solr.security.PermissionNameProvider.Name.CORE_READ_PER
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.StreamingOutput;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import org.apache.solr.client.api.endpoint.ReplicationApis;
 import org.apache.solr.client.api.model.CommitsResponse;
 import org.apache.solr.client.api.model.FetchIndexRequestBody;
@@ -195,7 +196,7 @@ public class CoreReplication extends ReplicationAPIBase implements ReplicationAp
     }
 
     final var response = instantiateJerseyResponse(ReplicationCommandResponse.class);
-    final var details = new java.util.LinkedHashMap<String, Object>();
+    final var details = new LinkedHashMap<>();
     solrQueryResponse
         .getValues()
         .forEach(
@@ -212,7 +213,7 @@ public class CoreReplication extends ReplicationAPIBase implements ReplicationAp
 
   private static Object convertValue(Object value) {
     if (value instanceof NamedList<?> namedList) {
-      final var map = new java.util.LinkedHashMap<String, Object>();
+      final var map = new LinkedHashMap<>();
       namedList.forEach((name, v) -> map.put(name, convertValue(v)));
       return map;
     }
