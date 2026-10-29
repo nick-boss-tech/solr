@@ -163,7 +163,7 @@ public class UpdateSchema extends JerseyResource implements UpdateSchemaApi {
     ensureRequiredRequestBodyProvided(requestBody);
     if (requestBody.destinations == null || requestBody.destinations.isEmpty()) {
       throw new SolrException(
-          SolrException.ErrorCode.BAD_REQUEST, "Missing required parameter: 'dest'");
+          SolrException.ErrorCode.BAD_REQUEST, "Missing required parameter: dest");
     }
     requestBody.source = sourceField;
     requestBody.operationType = "add-copy-field";
