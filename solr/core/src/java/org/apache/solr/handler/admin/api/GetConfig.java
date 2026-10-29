@@ -32,8 +32,8 @@ import java.util.Set;
 import org.apache.solr.api.JerseyResource;
 import org.apache.solr.client.api.endpoint.ConfigApi;
 import org.apache.solr.client.api.model.ConfigInfoResponse;
-import org.apache.solr.client.api.model.ConfigParamsResponse;
 import org.apache.solr.client.api.model.ConfigOverlayResponse;
+import org.apache.solr.client.api.model.ConfigParamsResponse;
 import org.apache.solr.client.api.model.ConfigZnodeVersionResponse;
 import org.apache.solr.common.MapWriter;
 import org.apache.solr.common.SolrException;
@@ -195,8 +195,7 @@ public class GetConfig extends JerseyResource implements ConfigApi.Get {
     final var response = instantiateJerseyResponse(ConfigParamsResponse.class);
     response.znodeVersion = requestParams.getZnodeVersion();
     @SuppressWarnings("unchecked")
-    final Map<String, Object> converted =
-        Utils.convertToMap(requestParams, new LinkedHashMap<>());
+    final Map<String, Object> converted = Utils.convertToMap(requestParams, new LinkedHashMap<>());
     response.params = (Map<String, Object>) converted.get(RequestParams.NAME);
     return response;
   }
@@ -209,8 +208,7 @@ public class GetConfig extends JerseyResource implements ConfigApi.Get {
     response.znodeVersion = requestParams.getZnodeVersion();
     final var paramSet = requestParams.getParams(paramSetName);
     if (paramSet != null) {
-      response.params =
-          Map.of(paramSetName, Utils.convertToMap(paramSet, new LinkedHashMap<>()));
+      response.params = Map.of(paramSetName, Utils.convertToMap(paramSet, new LinkedHashMap<>()));
     }
     return response;
   }
