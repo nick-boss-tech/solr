@@ -1,4 +1,4 @@
-Status: OPEN
+Status: DONE
 Tags: gate
 
 # Gate job: SOLR-16396 config paramset read APIs (JAX-RS)
@@ -51,3 +51,7 @@ this gate is the first check.
   Status to DONE.
 - Failure: record the failing leg and first error in this job and in receipts/SOLR-16396-read.md;
   do not fix code on this job. Fixes return to the phone agent as new work.
+
+## Result
+
+PASS at dc89f6c64f8a8e21eccb19d995d1b6c5de5678e9 (phone agent, 2026-10-29): tidy clean, Error Prone compile rc 0 including SolrJ OpenAPI generation, V2ConfigAPIMappingTest 2/2, TestConfigOverlay 2/2, TestReqParamsAPI 1/1, :solr:core:check -x test rc 0. Receipt: receipts/SOLR-16396-read.md.
