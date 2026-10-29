@@ -1,7 +1,7 @@
 # Claim: SOLR-16398-command-jaxrs fix round 3 and regate (vm6)
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE (see the DONE line below).
 - Job or assignment: `gates/SOLR-16398-command-jaxrs.md`; owner direction 2026-10-29 ("Need to try to use the decision ladder for these questions, then try to take 16398 next").
 - Slice: decide the three open questions on the round 2 head with the decision ladder, change the rebalance response shape if the ladder says so, regate the command branch.
 - Capability tags used: gate.
@@ -20,6 +20,8 @@
 
 Same as round 2: tidy, Error Prone compile, SolrJ generation, focused (`org.apache.solr.handler.admin.api.*`, `TestCollectionAPIs`, `V2ApiIntegrationTest`), `:solr:core:check -x test`.
 
-Heartbeat: 2026-10-29T14:26:00Z
+Heartbeat: 2026-10-29T14:56:51Z
 
-Result: pending.
+Result: 2026-10-29T14:56:51Z: gate round 3 PASS at b135a03 (fork fast-forward from 1a8ef0a). Receipt: `receipts/SOLR-16398.md`.
+
+DONE: 2026-10-29T14:56:51Z. Deliverables: `receipts/SOLR-16398.md`; `gates/SOLR-16398-command-jaxrs.md` DONE; fork commit `b135a03` on `solr-16398-command-jaxrs`.
