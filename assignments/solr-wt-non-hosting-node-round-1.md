@@ -1,6 +1,6 @@
 # Assignment: validate the V2 `wt` routing bug on a non-hosting node, and decide on a JIRA, round 1
 
-Status: OPEN (posted by vm6, 2026-10-29).
+Status: OPEN for questions 4 and 5 (JIRA search, recommendation and draft). Questions 1 to 3 were run by vm6 on upstream main and recorded in `receipts/solr-wt-non-hosting-validation-round-1.md`; the reviewer checks those receipts against the excerpts and the code lines listed there.
 
 - Tags: validation, records, draft, jira-decision.
 - Intended host: a host that can run a Solr Gradle test on JDK 21 (vm6 or vm2 are known to). Windows only if the Gradle test suite is known to run there; if unsure, say so in the receipt and use a Linux host.
