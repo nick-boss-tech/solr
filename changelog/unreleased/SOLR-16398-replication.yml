@@ -1,0 +1,4 @@
+name: SOLR-16398
+type: added
+title: "V2 API: add JAX-RS replication command APIs (fetch index, abort fetch, enable/disable polling, restore, delete backup) and a debug dump API under /api/cores/{core}"
+links: https://issues.apache.org/jira/browse/SOLR-16398

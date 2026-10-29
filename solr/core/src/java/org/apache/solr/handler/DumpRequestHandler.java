@@ -28,7 +28,9 @@ import org.apache.solr.common.util.ContentStream;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.common.util.StrUtils;
+import org.apache.solr.api.JerseyResource;
 import org.apache.solr.core.PluginInfo;
+import org.apache.solr.handler.admin.api.DebugDump;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrRequestHandler;
 import org.apache.solr.response.SolrQueryResponse;
@@ -37,6 +39,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DumpRequestHandler extends RequestHandlerBase {
+
+  @Override
+  public java.util.Collection<Class<? extends JerseyResource>> getJerseyResources() {
+    return java.util.List.of(DebugDump.class);
+  }
+
+  @Override
+  public Boolean registerV2() {
+    return Boolean.TRUE;
+  }
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   @Override
