@@ -25,6 +25,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.solr.api.JerseyResource;
 import org.apache.solr.client.api.endpoint.UpdateSchemaApi;
+import org.apache.solr.client.api.model.AddCopyFieldOperation;
+import org.apache.solr.client.api.model.DeleteCopyFieldOperation;
 import org.apache.solr.client.api.model.DeleteDynamicFieldOperation;
 import org.apache.solr.client.api.model.DeleteFieldOperation;
 import org.apache.solr.client.api.model.DeleteFieldTypeOperation;
@@ -147,6 +149,66 @@ public class UpdateSchema extends JerseyResource implements UpdateSchemaApi {
     deleteFieldTypeOp.operationType = "delete-field-type";
 
     runWithSchemaManager(List.of(deleteFieldTypeOp));
+
+    return response;
+  }
+
+  @Override
+  @PermissionName(PermissionNameProvider.Name.SCHEMA_EDIT_PERM)
+  public SolrJerseyResponse addCopyField(String sourceField, AddCopyFieldOperation requestBody)
+      throws Exception {
+    final var response = instantiateJerseyResponse(SolrJerseyResponse.class);
+    ensureSchemaMutable();
+    ensureRequiredParameterProvided("sourceField", sourceField);
+    ensureRequiredRequestBodyProvided(requestBody);
+    if (requestBody.destinations == null || requestBody.destinations.isEmpty()) {
+      throw new SolrException(
+          SolrException.ErrorCode.BAD_REQUEST, "Missing required parameter: 'dest'");
+    }
+    requestBody.source = sourceField;
+    requestBody.operationType = "add-copy-field";
+
+    runWithSchemaManager(List.of(requestBody));
+
+    return response;
+  }
+
+  @Override
+  @PermissionName(PermissionNameProvider.Name.SCHEMA_EDIT_PERM)
+  public SolrJerseyResponse deleteCopyField(String sourceField, String destField) throws Exception {
+    final var response = instantiateJerseyResponse(SolrJerseyResponse.class);
+    ensureSchemaMutable();
+    ensureRequiredParameterProvided("sourceField", sourceField);
+    ensureRequiredParameterProvided("destField", destField);
+
+    final var deleteCopyFieldOp = new DeleteCopyFieldOperation();
+    deleteCopyFieldOp.source = sourceField;
+    deleteCopyFieldOp.destinations = List.of(destField);
+    deleteCopyFieldOp.operationType = "delete-copy-field";
+
+    runWithSchemaManager(List.of(deleteCopyFieldOp));
+
+    return response;
+  }
+
+  @Override
+  @PermissionName(PermissionNameProvider.Name.SCHEMA_EDIT_PERM)
+  public SolrJerseyResponse deleteCopyFields(String sourceField) throws Exception {
+    final var response = instantiateJerseyResponse(SolrJerseyResponse.class);
+    ensureSchemaMutable();
+    ensureRequiredParameterProvided("sourceField", sourceField);
+
+    final var existingDestinations =
+        solrCore.getLatestSchema().getCopyFieldsList(sourceField).stream()
+            .map(copyField -> copyField.getDestination().getName())
+            .collect(Collectors.toList());
+
+    final var deleteCopyFieldOp = new DeleteCopyFieldOperation();
+    deleteCopyFieldOp.source = sourceField;
+    deleteCopyFieldOp.destinations = existingDestinations;
+    deleteCopyFieldOp.operationType = "delete-copy-field";
+
+    runWithSchemaManager(List.of(deleteCopyFieldOp));
 
     return response;
   }
