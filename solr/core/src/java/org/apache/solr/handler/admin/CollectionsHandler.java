@@ -1243,6 +1243,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         RenameCollection.class,
         ReplaceNode.class,
         MigrateReplicas.class,
+        OverseerStatus.class,
+        ReindexCollection.class,
         BalanceReplicas.class,
         RestoreCollection.class,
         SyncShard.class,

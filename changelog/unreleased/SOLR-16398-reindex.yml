@@ -1,0 +1,4 @@
+name: SOLR-16398
+type: added
+title: "V2 API: add JAX-RS reindex-collection (POST /api/collections/{collection}/reindex) and overseer status (GET /api/cluster/overseer/status) APIs"
+links: https://issues.apache.org/jira/browse/SOLR-16398
