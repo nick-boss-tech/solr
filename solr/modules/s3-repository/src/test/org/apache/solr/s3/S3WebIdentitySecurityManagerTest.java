@@ -17,7 +17,6 @@
 package org.apache.solr.s3;
 
 import com.sun.net.httpserver.HttpServer;
-import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
@@ -36,6 +35,8 @@ import software.amazon.awssdk.auth.credentials.WebIdentityTokenFileCredentialsPr
 public class S3WebIdentitySecurityManagerTest extends SolrTestCase {
   private static final int PROCESS_TIMEOUT_SECONDS = 60;
 
+  @SuppressForbidden(
+      reason = "The local STS stub uses the JDK HTTP server; no shared fixture exists")
   public void testWebIdentityCredentialsWithSecurityManager() throws Exception {
     assumeTrue("Java 24+ cannot enable the Security Manager", Runtime.version().feature() < 24);
     assertNotNull(
@@ -92,7 +93,8 @@ public class S3WebIdentitySecurityManagerTest extends SolrTestCase {
     StringBuilder policy =
         new StringBuilder(Files.readString(shippedPolicy, StandardCharsets.UTF_8));
     policy.append("\ngrant {\n");
-    for (String entry : System.getProperty("java.class.path").split(File.pathSeparator)) {
+    for (String entry :
+        System.getProperty("java.class.path").split(System.getProperty("path.separator"))) {
       Path path = Path.of(entry).toAbsolutePath();
       String target = path.toString().replace("\\", "\\\\").replace("\"", "\\\"");
       policy
