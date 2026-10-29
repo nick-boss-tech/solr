@@ -196,7 +196,6 @@ import org.apache.solr.handler.admin.api.ListCollectionSnapshots;
 import org.apache.solr.handler.admin.api.ListCollections;
 import org.apache.solr.handler.admin.api.MigrateDocsAPI;
 import org.apache.solr.handler.admin.api.MigrateReplicas;
-import org.apache.solr.handler.admin.api.ModifyCollectionAPI;
 import org.apache.solr.handler.admin.api.MoveReplicaAPI;
 import org.apache.solr.handler.admin.api.RebalanceLeadersAPI;
 import org.apache.solr.handler.admin.api.ReloadCollectionAPI;
@@ -884,8 +883,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         }),
     // XXX should this command support followAliases?
     /**
-     * V2 equivalent: {@link ModifyCollectionAPI} ({@code POST /collections/{collection}} with the
-     * {@code modify} command).
+     * V2 equivalent: {@link org.apache.solr.handler.admin.api.ModifyCollection} ({@code POST
+     * /collections/{collection}}).
      */
     MODIFYCOLLECTION_OP(
         MODIFYCOLLECTION,
@@ -1243,6 +1242,7 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         RenameCollection.class,
         ReplaceNode.class,
         MigrateReplicas.class,
+        ModifyCollection.class,
         BalanceReplicas.class,
         RestoreCollection.class,
         SyncShard.class,
@@ -1262,7 +1262,6 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
     final List<Api> apis = new ArrayList<>();
     apis.addAll(AnnotatedApi.getApis(new SplitShardAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new MigrateDocsAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new ModifyCollectionAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new MoveReplicaAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new RebalanceLeadersAPI(this)));
     return apis;

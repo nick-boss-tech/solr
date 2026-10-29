@@ -27,7 +27,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
+import org.apache.solr.api.JerseyResource;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
@@ -35,6 +38,7 @@ import org.apache.solr.common.params.ShardParams;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.SolrCore;
+import org.apache.solr.handler.admin.api.PingHealthCheck;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrRequestHandler;
 import org.apache.solr.response.SolrQueryResponse;
@@ -333,6 +337,24 @@ public class PingRequestHandler extends RequestHandlerBase implements SolrCoreAw
   @Override
   public Boolean registerV2() {
     return Boolean.TRUE;
+  }
+
+  @Override
+  public Collection<Class<? extends JerseyResource>> getJerseyResources() {
+    return List.of(PingHealthCheck.class);
+  }
+
+  /** Creates or deletes the healthcheck file, as the v1 action=enable/disable requests do. */
+  public void setHealthCheckFileEnabled(boolean enable) {
+    handleEnable(enable);
+  }
+
+  /** Returns "enabled", "disabled", or "not_configured", as the v1 action=status request does. */
+  public String healthCheckFileStatus() {
+    if (healthcheck == null) {
+      return "not_configured";
+    }
+    return isPingDisabled() ? "disabled" : "enabled";
   }
 
   @Override

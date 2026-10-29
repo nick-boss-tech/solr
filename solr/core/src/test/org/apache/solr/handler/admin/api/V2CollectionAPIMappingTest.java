@@ -51,7 +51,6 @@ public class V2CollectionAPIMappingTest extends V2ApiMappingTest<CollectionsHand
   public void populateApiBag() {
     final CollectionsHandler collectionsHandler = getRequestHandler();
     apiBag.registerObject(new MigrateDocsAPI(collectionsHandler));
-    apiBag.registerObject(new ModifyCollectionAPI(collectionsHandler));
     apiBag.registerObject(new MoveReplicaAPI(collectionsHandler));
     apiBag.registerObject(new RebalanceLeadersAPI(collectionsHandler));
   }
@@ -64,34 +63,6 @@ public class V2CollectionAPIMappingTest extends V2ApiMappingTest<CollectionsHand
   @Override
   public boolean isCoreSpecific() {
     return false;
-  }
-
-  @Test
-  public void testModifyCollectionAllProperties() throws Exception {
-    final SolrParams v1Params =
-        captureConvertedV1Params(
-            "/collections/collName",
-            "POST",
-            "{ 'modify': {"
-                + "'replicationFactor': 123, "
-                + "'readOnly': true, "
-                + "'config': 'techproducts_config', "
-                + "'async': 'requestTrackingId', "
-                + "'properties': {"
-                + "     'foo': 'bar', "
-                + "     'baz': 456 "
-                + "}"
-                + "}}");
-
-    assertEquals(
-        CollectionParams.CollectionAction.MODIFYCOLLECTION.lowerName, v1Params.get(ACTION));
-    assertEquals("collName", v1Params.get(COLLECTION));
-    assertEquals(123, v1Params.getPrimitiveInt(ZkStateReader.REPLICATION_FACTOR));
-    assertTrue(v1Params.getPrimitiveBool(ZkStateReader.READ_ONLY));
-    assertEquals("techproducts_config", v1Params.get(COLL_CONF));
-    assertEquals("requestTrackingId", v1Params.get(ASYNC));
-    assertEquals("bar", v1Params.get("property.foo"));
-    assertEquals(456, v1Params.getPrimitiveInt("property.baz"));
   }
 
   @Test

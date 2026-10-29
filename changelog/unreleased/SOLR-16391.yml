@@ -1,0 +1,4 @@
+name: SOLR-16391
+type: added
+title: "V2 API: migrate modify-collection to JAX-RS (POST /api/collections/{collection}) and add JAX-RS ping healthcheck-file enable, disable, and status under /api/cores/{core}/ping/healthcheck-file"
+links: https://issues.apache.org/jira/browse/SOLR-16391
