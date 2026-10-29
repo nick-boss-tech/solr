@@ -14,6 +14,6 @@
 
 Heartbeat: 2026-10-29T05:59:19Z
 
-Result: $NOW: gate steps 1 to 6 PASS at 5cc3fc4c with repair commit 7fa61aa. Four command resources are not registered; see the receipt.
+Result: 2026-10-29T06:24:01Z: gate steps 1 to 6 PASS at 5cc3fc4c with repair commit 7fa61aa. Four command resources are not registered; see the receipt.
 
-DONE: $NOW. Deliverables: \`receipts/SOLR-16398.md\`; \`gates/SOLR-16398-command-jaxrs.md\` set to DONE.
+DONE: 2026-10-29T06:24:01Z. Deliverables: `receipts/SOLR-16398.md`; `gates/SOLR-16398-command-jaxrs.md` set to DONE.
