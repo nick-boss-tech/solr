@@ -1,4 +1,4 @@
-Status: OPEN
+Status: DONE
 Tags: gate
 
 # Gate job: SOLR-16398 reindex-collection and overseer status (JAX-RS)
@@ -46,3 +46,7 @@ arrive nested under a "success" key.
 - Failure: record the failing leg and first error in this job and in
   receipts/SOLR-16398-reindex.md; do not fix code on this job. Fixes return to the phone agent
   as new work.
+
+## Result
+
+PASS at 528a9eb954941ad87c9ca3b636dd9495aa245551 (phone agent, 2026-10-29): tidy clean, Error Prone compile rc 0, V2CollectionAPIMappingTest 4/4, ReindexCollectionTest 7/7, :solr:core:check -x test rc 0. Receipt: receipts/SOLR-16398-reindex.md.
