@@ -121,9 +121,6 @@ public class CoreReplication extends ReplicationAPIBase implements ReplicationAp
       if (requestBody.leaderUrl != null) {
         params.set(ReplicationHandler.LEADER_URL, requestBody.leaderUrl);
       }
-      if (requestBody.indexVersion != null) {
-        params.set("indexVersion", requestBody.indexVersion);
-      }
       if (requestBody.compression != null) {
         params.set("compression", requestBody.compression);
       }

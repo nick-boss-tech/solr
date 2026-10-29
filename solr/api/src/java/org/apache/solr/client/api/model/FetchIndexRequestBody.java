@@ -22,7 +22,5 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class FetchIndexRequestBody {
   @JsonProperty public String leaderUrl;
 
-  @JsonProperty public Long indexVersion;
-
   @JsonProperty public Boolean compression;
 }
