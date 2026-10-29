@@ -153,9 +153,9 @@ public class SolrConfigHandler extends RequestHandlerBase
 
   /**
    * Runs config-edit operations supplied programmatically instead of parsed from a request body.
-   * Used by the v2 (JAX-RS) config APIs, which build {@link CommandOperation}s from their URL
-   * paths and request bodies; the operations are validated, applied, and persisted exactly as if
-   * they had arrived through {@link #handleRequestBody}. Failures propagate to the caller.
+   * Used by the v2 (JAX-RS) config APIs, which build {@link CommandOperation}s from their URL paths
+   * and request bodies; the operations are validated, applied, and persisted exactly as if they had
+   * arrived through {@link #handleRequestBody}. Failures propagate to the caller.
    *
    * @param forParams true to run the operations as paramset commands, false for config overlay
    *     commands
@@ -453,7 +453,11 @@ public class SolrConfigHandler extends RequestHandlerBase
                   } else {
                     overlay =
                         updateNamedPlugin(
-                            info, op, overlay, prefix.equals("create") || prefix.equals("add"), false);
+                            info,
+                            op,
+                            overlay,
+                            prefix.equals("create") || prefix.equals("add"),
+                            false);
                   }
                 } else {
                   op.unknownOperation();

@@ -23,8 +23,8 @@ import org.apache.solr.handler.admin.api.GetConfigAPI;
 import org.junit.Test;
 
 /**
- * Unit tests for the GET /v2/c/collectionName/config APIs. The POST (modify) config APIs are
- * JAX-RS resources and are not covered by this annotated-API mapping test.
+ * Unit tests for the GET /v2/c/collectionName/config APIs. The POST (modify) config APIs are JAX-RS
+ * resources and are not covered by this annotated-API mapping test.
  */
 public class V2ConfigAPIMappingTest extends V2ApiMappingTest<SolrConfigHandler> {
 

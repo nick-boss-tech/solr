@@ -33,10 +33,9 @@ import org.apache.solr.client.api.util.StoreApiParameters;
  * individual solrconfig components, config properties, and paramsets.
  *
  * <p>Component definitions are free-form maps, mirroring the JSON bodies of the v1 config API
- * commands they replace (e.g. 'add-searchcomponent' or 'update-requesthandler'); the component
- * name is taken from the URL path rather than the body. A "PUT" creates the component if it does
- * not exist and replaces it if it does, mirroring the upsert semantics used elsewhere in the v2
- * APIs.
+ * commands they replace (e.g. 'add-searchcomponent' or 'update-requesthandler'); the component name
+ * is taken from the URL path rather than the body. A "PUT" creates the component if it does not
+ * exist and replaces it if it does, mirroring the upsert semantics used elsewhere in the v2 APIs.
  */
 @Path(INDEX_PATH_PREFIX + "/config")
 public interface ModifyConfigApi {
@@ -104,8 +103,7 @@ public interface ModifyConfigApi {
   @Operation(
       summary = "Unset a config property.",
       tags = {"collection-config"})
-  SolrJerseyResponse unsetProperty(@PathParam("propertyName") String propertyName)
-      throws Exception;
+  SolrJerseyResponse unsetProperty(@PathParam("propertyName") String propertyName) throws Exception;
 
   @PUT
   @Path("/userproperties/{propertyName}")
