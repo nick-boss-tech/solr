@@ -40,6 +40,7 @@ public class V2UpdateSchemaCopyFieldsTest extends SolrTestCase {
     Path solrHome = createTempDir("solrhome");
     PathUtils.copyDirectory(SolrTestCaseJ4.TEST_HOME(), solrHome);
     solrTestRule.startSolr(solrHome);
+    SolrTestCaseJ4.newRandomConfig();
     solrTestRule
         .newCollection()
         .withConfigSet(solrHome.resolve("collection1").resolve("conf"))
