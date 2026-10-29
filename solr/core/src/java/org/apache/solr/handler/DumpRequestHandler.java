@@ -21,6 +21,7 @@ import static org.apache.solr.common.params.CommonParams.NAME;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +42,8 @@ import org.slf4j.LoggerFactory;
 public class DumpRequestHandler extends RequestHandlerBase {
 
   @Override
-  public java.util.Collection<Class<? extends JerseyResource>> getJerseyResources() {
-    return java.util.List.of(DebugDump.class);
+  public Collection<Class<? extends JerseyResource>> getJerseyResources() {
+    return List.of(DebugDump.class);
   }
 
   @Override
