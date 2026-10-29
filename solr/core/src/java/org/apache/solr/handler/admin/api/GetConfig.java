@@ -190,11 +190,11 @@ public class GetConfig extends JerseyResource implements ConfigApi.Get {
 
   @Override
   @PermissionName(CONFIG_READ_PERM)
+  @SuppressWarnings("unchecked")
   public ConfigParamsResponse getAllParamSets() {
     final var requestParams = solrQueryRequest.getCore().getSolrConfig().getRequestParams();
     final var response = instantiateJerseyResponse(ConfigParamsResponse.class);
     response.znodeVersion = requestParams.getZnodeVersion();
-    @SuppressWarnings("unchecked")
     final Map<String, Object> converted = Utils.convertToMap(requestParams, new LinkedHashMap<>());
     response.params = (Map<String, Object>) converted.get(RequestParams.NAME);
     return response;
