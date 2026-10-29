@@ -93,6 +93,7 @@ public interface ConfigApi {
             boolean meta);
 
     @GET
+    @StoreApiParameters
     @Path("/params")
     @Operation(
         summary = "Fetch all request parameter sets ('paramsets') defined for the core.",
@@ -100,6 +101,7 @@ public interface ConfigApi {
     ConfigParamsResponse getAllParamSets();
 
     @GET
+    @StoreApiParameters
     @Path("/params/{paramSetName}")
     @Operation(
         summary = "Fetch a single request parameter set ('paramset') by name.",
