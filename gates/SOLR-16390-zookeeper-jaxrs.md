@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16390-zookeeper-jaxrs
-- Head: 66d3775134e8169952bd1c1d97a28befac7c29f6
+- Head: 43301932ec6e081d85730837bb864b7d1a7e9e0c
+- Superseded head: 66d3775134e8169952bd1c1d97a28befac7c29f6 (tidy modified two comment blocks; formatting-only commit 43301932 on top, per the step 1 rule)
 - Base: origin/main 74197140a666d4f0396b68484c2bf9df7e79221e
 - Worktree if needed: ~/workspace/solr-worktrees/16390-zk
 - Ticket: SOLR-16390 (the sheet's ZooKeeper rows; the ticket covers the v2 cluster migration)
