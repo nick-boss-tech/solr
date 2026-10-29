@@ -45,8 +45,8 @@ import org.apache.solr.response.SolrQueryResponse;
  *
  * <p>This API (POST /v2/collections/{collectionName}) is analogous to the v1
  * /admin/collections?action=MODIFYCOLLECTION command. The request is translated to the same
- * parameters the v1 API produced and run through {@link CollectionsHandler}, so both APIs share
- * one implementation.
+ * parameters the v1 API produced and run through {@link CollectionsHandler}, so both APIs share one
+ * implementation.
  */
 public class ModifyCollection extends AdminAPIBase implements ModifyCollectionApi {
 
@@ -91,15 +91,13 @@ public class ModifyCollection extends AdminAPIBase implements ModifyCollectionAp
 
     final var collectionsHandler =
         (CollectionsHandler) coreContainer.getRequestHandler(COLLECTIONS_HANDLER_PATH);
-    collectionsHandler.handleRequestBody(
-        wrapParams(solrQueryRequest, v1Params), solrQueryResponse);
+    collectionsHandler.handleRequestBody(wrapParams(solrQueryRequest, v1Params), solrQueryResponse);
     if (solrQueryResponse.getException() != null) {
       throw solrQueryResponse.getException();
     }
 
     final var response = instantiateJerseyResponse(ModifyCollectionResponse.class);
-    response.success =
-        (Map<String, Object>) solrQueryResponse.getValues().get("success");
+    response.success = (Map<String, Object>) solrQueryResponse.getValues().get("success");
     return response;
   }
 }
