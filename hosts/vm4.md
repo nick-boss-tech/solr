@@ -60,3 +60,4 @@ Disk record:
 - 2026-10-27T12:33:31Z: SOLR-7351 premise differs (exception on date fields, not empty list); NEEDS-OWNER question recorded in claim and report. Solr killed. Lock free.
 - 2026-10-27T20:58:58Z: christos-reply-17914-pr-prep-round-1 re-gate at 5ea0055190. Disk before and after: 38% used, 2.8G of 7.8G. Inodes 9% used (44746 of 524288). Clean worktree removed after the gate.
 - 2026-10-28T05:46Z before SOLR-17914 browser-check round 1: `/` 4.6G free, 39% used (2.8G used); inodes 44985 used (9% used). 2026-10-28T06:12Z after the run and cleanup: `/` 4.3G free, 43% used (3.2G used); inodes 75533 used (15% used). Logs kept under `/workspace/gates/logs/vm4/solr-17914-browser-check-round-1/`.
+- 2026-10-29T05:55Z: claimed SOLR-18178 rebased configset upload round 1 gate (`claims/solr-18178-rebased-head-round-1-vm4.md`) at `d6abc36c94`. Lock free; Solr not running.
