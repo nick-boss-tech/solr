@@ -142,6 +142,7 @@ public interface ReplicationApis {
       @RequestBody(required = true) ReplicationEnabledRequestBody requestBody);
 
   @POST
+  @CoreApiParameters
   @Path("/fetch-index")
   @Operation(
       summary = "Fetch the index from the leader, as the v1 command=fetchindex request does.",
@@ -149,6 +150,7 @@ public interface ReplicationApis {
   ReplicationCommandResponse fetchIndex(FetchIndexRequestBody requestBody) throws Exception;
 
   @POST
+  @CoreApiParameters
   @Path("/abort-fetch")
   @Operation(
       summary = "Abort an in-progress index fetch, as the v1 command=abortfetch request does.",
@@ -156,6 +158,7 @@ public interface ReplicationApis {
   ReplicationCommandResponse abortFetch() throws Exception;
 
   @POST
+  @CoreApiParameters
   @Path("/enable-poll")
   @Operation(
       summary =
@@ -164,6 +167,7 @@ public interface ReplicationApis {
   ReplicationCommandResponse enablePoll() throws Exception;
 
   @POST
+  @CoreApiParameters
   @Path("/disable-poll")
   @Operation(
       summary =
@@ -172,6 +176,7 @@ public interface ReplicationApis {
   ReplicationCommandResponse disablePoll() throws Exception;
 
   @POST
+  @CoreApiParameters
   @Path("/restore")
   @Operation(
       summary = "Restore the index from a backup, as the v1 command=restore request does.",
@@ -179,6 +184,7 @@ public interface ReplicationApis {
   ReplicationCommandResponse restoreIndex(RestoreRequestBody requestBody) throws Exception;
 
   @POST
+  @CoreApiParameters
   @Path("/delete-backup")
   @Operation(
       summary = "Delete a backup snapshot, as the v1 command=deletebackup request does.",
