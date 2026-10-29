@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16396-config-read
-- Head: c0bce1c24a5a0b7f7bd6e10a228a9b4151e6a76e
+- Head: f2fa83bb153258d1c381e8d0618091bbbd0e47a0
+- Superseded head: c0bce1c24a5a0b7f7bd6e10a228a9b4151e6a76e (tidy import order, line joins, and one unused import in the mapping test; formatting-only commit f2fa83bb15 on top, per the step 1 rule)
 - Base: origin/main 3db71000514e1edaa8e6ae0426fce92ca97990e3
 - Worktree if needed: ~/workspace/solr-worktrees/16396-configread
 - Ticket: SOLR-16396 (companion to the gated write-side branch solr-16396-config-jaxrs; both are
