@@ -97,9 +97,7 @@ public class SearchRequestListenerUbiTest extends SolrCloudTestCase {
         Map.of(
             "add-searchcomponent",
             Map.of("name", "ubi-prepare", "class", UbiPreparationComponent.class.getName()));
-    cluster
-        .getSolrClient()
-        .request(new ConfigRequest(Utils.toJSONString(component)), collection);
+    cluster.getSolrClient().request(new ConfigRequest(Utils.toJSONString(component)), collection);
     Map<String, Object> handlers =
         Map.of(
             "add-requesthandler",
@@ -109,9 +107,7 @@ public class SearchRequestListenerUbiTest extends SolrCloudTestCase {
                     "class", "solr.SearchHandler",
                     "last-components", List.of("ubi-prepare")),
                 Map.of("name", "/plain", "class", "solr.SearchHandler")));
-    cluster
-        .getSolrClient()
-        .request(new ConfigRequest(Utils.toJSONString(handlers)), collection);
+    cluster.getSolrClient().request(new ConfigRequest(Utils.toJSONString(handlers)), collection);
     new UpdateRequest()
         .add("id", "1")
         .add("id", "2")
