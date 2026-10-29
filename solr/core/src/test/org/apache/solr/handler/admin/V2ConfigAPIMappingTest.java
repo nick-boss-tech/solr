@@ -20,11 +20,12 @@ package org.apache.solr.handler.admin;
 import org.apache.solr.api.AnnotatedApi;
 import org.apache.solr.handler.SolrConfigHandler;
 import org.apache.solr.handler.admin.api.GetConfigAPI;
-import org.apache.solr.handler.admin.api.ModifyConfigComponentAPI;
-import org.apache.solr.handler.admin.api.ModifyParamSetAPI;
 import org.junit.Test;
 
-/** Unit tests for the GET and POST /v2/c/collectionName/config APIs. */
+/**
+ * Unit tests for the GET /v2/c/collectionName/config APIs. The POST (modify) config APIs are
+ * JAX-RS resources and are not covered by this annotated-API mapping test.
+ */
 public class V2ConfigAPIMappingTest extends V2ApiMappingTest<SolrConfigHandler> {
 
   @Override
@@ -40,8 +41,6 @@ public class V2ConfigAPIMappingTest extends V2ApiMappingTest<SolrConfigHandler> 
   @Override
   public void populateApiBag() {
     apiBag.registerObject(new GetConfigAPI(getRequestHandler()));
-    apiBag.registerObject(new ModifyConfigComponentAPI(getRequestHandler()));
-    apiBag.registerObject(new ModifyParamSetAPI(getRequestHandler()));
   }
 
   @Test
@@ -60,15 +59,5 @@ public class V2ConfigAPIMappingTest extends V2ApiMappingTest<SolrConfigHandler> 
     final String[] getSingleParamsetApiPaths = getSingleParamSetApi.getEndPoint().path();
     assertEquals(1, getSingleParamsetApiPaths.length);
     assertEquals("/config/params/{paramset}", getSingleParamsetApiPaths[0]);
-  }
-
-  @Test
-  public void testModifyConfigComponentApis() {
-    assertAnnotatedApiExistsFor("POST", "config");
-  }
-
-  @Test
-  public void testModifyParamsetApis() {
-    assertAnnotatedApiExistsFor("POST", "/config/params");
   }
 }

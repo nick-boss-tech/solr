@@ -83,8 +83,6 @@ import org.apache.solr.core.SolrCore;
 import org.apache.solr.core.SolrResourceLoader;
 import org.apache.solr.handler.admin.api.GetConfig;
 import org.apache.solr.handler.admin.api.GetConfigAPI;
-import org.apache.solr.handler.admin.api.ModifyConfigComponentAPI;
-import org.apache.solr.handler.admin.api.ModifyParamSetAPI;
 import org.apache.solr.handler.api.V2ApiUtils;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrRequestHandler;
@@ -151,6 +149,29 @@ public class SolrConfigHandler extends RequestHandlerBase
       default:
         throw SchemaHandler.getUnexpectedHttpMethodException(httpMethod.name());
     }
+  }
+
+  /**
+   * Runs config-edit operations supplied programmatically instead of parsed from a request body.
+   * Used by the v2 (JAX-RS) config APIs, which build {@link CommandOperation}s from their URL
+   * paths and request bodies; the operations are validated, applied, and persisted exactly as if
+   * they had arrived through {@link #handleRequestBody}. Failures propagate to the caller.
+   *
+   * @param forParams true to run the operations as paramset commands, false for config overlay
+   *     commands
+   */
+  public void processConfigCommands(
+      List<CommandOperation> ops, SolrQueryRequest req, boolean forParams) throws Exception {
+    if (!configEditingEnabled || isImmutableConfigSet) {
+      final String reason =
+          !configEditingEnabled
+              ? "due to " + CONFIG_EDITING_ENABLED_ARG + " setting"
+              : "because ConfigSet is marked immutable";
+      throw new SolrException(
+          SolrException.ErrorCode.FORBIDDEN, " solrconfig editing is not enabled " + reason);
+    }
+    new Command(req, new SolrQueryResponse(), SolrRequest.METHOD.POST.name())
+        .runConfigOps(ops, forParams);
   }
 
   @Override
@@ -249,32 +270,43 @@ public class SolrConfigHandler extends RequestHandlerBase
       List<CommandOperation> ops = ApiBag.readCommands(req.getContentStreams(), resp.getValues());
       if (ops == null) return;
       try {
-        for (; ; ) {
-          ArrayList<CommandOperation> opsCopy = new ArrayList<>(ops.size());
-          for (CommandOperation op : ops) opsCopy.add(op.getCopy());
-          try {
-            if (parts.size() > 1 && RequestParams.NAME.equals(parts.get(1))) {
-              RequestParams params =
-                  RequestParams.getFreshRequestParams(
-                      req.getCore().getResourceLoader(),
-                      req.getCore().getSolrConfig().getRequestParams());
-              handleParams(opsCopy, params);
-            } else {
-              ConfigOverlay overlay =
-                  SolrConfig.getConfigOverlay(req.getCore().getResourceLoader());
-              handleCommands(opsCopy, overlay);
-            }
-            break; // succeeded . so no need to go over the loop again
-          } catch (ZkController.ResourceModifiedInZkException e) {
-            // retry
-            if (log.isInfoEnabled()) {
-              log.info("Race condition, the node is modified in ZK by someone else", e);
-            }
-          }
-        }
+        runConfigOps(ops, parts.size() > 1 && RequestParams.NAME.equals(parts.get(1)));
       } catch (Exception e) {
         resp.setException(e);
         resp.add(CommandOperation.ERR_MSGS, List.of(SchemaManager.getErrorStr(e)));
+      }
+    }
+
+    /**
+     * Runs the given config-edit operations, retrying if a concurrent modification is detected in
+     * ZooKeeper. Unlike {@link #handlePOST()}, failures propagate to the caller instead of being
+     * recorded on a response, so v2 (JAX-RS) resources can surface them as API errors.
+     *
+     * @param forParams true to run the operations as paramset commands, false for config overlay
+     *     commands
+     */
+    private void runConfigOps(List<CommandOperation> ops, boolean forParams) throws IOException {
+      for (; ; ) {
+        ArrayList<CommandOperation> opsCopy = new ArrayList<>(ops.size());
+        for (CommandOperation op : ops) opsCopy.add(op.getCopy());
+        try {
+          if (forParams) {
+            RequestParams params =
+                RequestParams.getFreshRequestParams(
+                    req.getCore().getResourceLoader(),
+                    req.getCore().getSolrConfig().getRequestParams());
+            handleParams(opsCopy, params);
+          } else {
+            ConfigOverlay overlay = SolrConfig.getConfigOverlay(req.getCore().getResourceLoader());
+            handleCommands(opsCopy, overlay);
+          }
+          break; // succeeded . so no need to go over the loop again
+        } catch (ZkController.ResourceModifiedInZkException e) {
+          // retry
+          if (log.isInfoEnabled()) {
+            log.info("Race condition, the node is modified in ZK by someone else", e);
+          }
+        }
       }
     }
 
@@ -416,10 +448,12 @@ public class SolrConfigHandler extends RequestHandlerBase
                   SolrConfig.SolrPluginInfo info = namedPlugins.get(name);
                   if ("delete".equals(prefix)) {
                     overlay = deleteNamedComponent(op, overlay, info.getCleanTag());
+                  } else if ("upsert".equals(prefix)) {
+                    overlay = updateNamedPlugin(info, op, overlay, false, true);
                   } else {
                     overlay =
                         updateNamedPlugin(
-                            info, op, overlay, prefix.equals("create") || prefix.equals("add"));
+                            info, op, overlay, prefix.equals("create") || prefix.equals("add"), false);
                   }
                 } else {
                   op.unknownOperation();
@@ -476,7 +510,8 @@ public class SolrConfigHandler extends RequestHandlerBase
         SolrConfig.SolrPluginInfo info,
         CommandOperation op,
         ConfigOverlay overlay,
-        boolean isCeate) {
+        boolean isCeate,
+        boolean isUpsert) {
       String name = op.getStr(NAME);
       String clz =
           info.options.contains(REQUIRE_CLASS)
@@ -488,7 +523,7 @@ public class SolrConfigHandler extends RequestHandlerBase
       if (op.hasError()) return overlay;
       if (!verifyClass(op, clz, info.clazz)) return overlay;
       if (pluginExists(info, overlay, name)) {
-        if (isCeate) {
+        if (isCeate && !isUpsert) {
           op.addError(
               formatString(
                   " ''{0}'' already exists . Do an ''{1}'' , if you want to change it ",
@@ -498,7 +533,7 @@ public class SolrConfigHandler extends RequestHandlerBase
           return overlay.addNamedPlugin(op.getDataMap(), info.getCleanTag());
         }
       } else {
-        if (isCeate) {
+        if (isCeate || isUpsert) {
           return overlay.addNamedPlugin(op.getDataMap(), info.getCleanTag());
         } else {
           op.addError(
@@ -682,7 +717,7 @@ public class SolrConfigHandler extends RequestHandlerBase
   public static final String SET = "set";
   public static final String UPDATE = "update";
   public static final String CREATE = "create";
-  private static final Set<String> cmdPrefixes = Set.of(CREATE, UPDATE, "delete", "add");
+  private static final Set<String> cmdPrefixes = Set.of(CREATE, UPDATE, "delete", "add", "upsert");
 
   /**
    * Block up to a specified maximum time until we see agreement on the schema version in ZooKeeper
@@ -951,8 +986,6 @@ public class SolrConfigHandler extends RequestHandlerBase
   public Collection<Api> getApis() {
     final List<Api> apis = new ArrayList<>();
     apis.addAll(AnnotatedApi.getApis(new GetConfigAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new ModifyConfigComponentAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new ModifyParamSetAPI(this)));
     return apis;
   }
 
