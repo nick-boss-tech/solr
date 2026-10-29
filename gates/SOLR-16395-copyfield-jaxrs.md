@@ -1,7 +1,7 @@
 # Gate job: SOLR-16395, JAX-RS schema copy-field endpoints
 
 - Branch: solr-16395-copyfield-jaxrs. Head: 425ec1e402c (fork tip, verified by ls-remote 2026-10-28; two commits on origin/main 74197140a666). Base: 74197140a666d4f0396b68484c2bf9df7e79221e.
-- Status: CLAIMED (vm4, 2026-10-29T00:50Z)
+- Status: RED (vm4, 2026-10-29T01:14Z). Focused test fails at `425ec1e402`; see `receipts/SOLR-16395.md`. Nothing fixed on this job.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Capability tags: gate.
 - Why: the branch was implemented 2026-10-28 at the owner's direction with builds waived; this gate is its first verification. It adds POST /schema/copyfields/{sourceField} and DELETE /schema/copyfields/{sourceField}/{destField} and /{sourceField} to UpdateSchemaApi and UpdateSchema, addressing copy-fields by their source and destination fields (resolving the TODO in UpdateSchemaApi), plus error-case tests and a changelog fragment.
 - Steps, in order:
