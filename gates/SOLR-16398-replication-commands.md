@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16398-replication-commands
-- Head: 956d95d66a358bf7c57cf222a5d8259d8fb94e91
+- Head: e1939da6e0e7cc5bd68e44193084e35fc970b218
+- Superseded head: 956d95d66a358bf7c57cf222a5d8259d8fb94e91 (Error Prone flagged fully qualified Collection and List in DumpRequestHandler.getJerseyResources, the same pattern; de-qualified in e1939da6e0. A sweep of the branch diff for other fully qualified java.util uses in added code came back empty.)
 - Superseded head: 218aa604a4e6dc5239eeeb3645e71a876acec65f (the LinkedHashMap import fix used the diamond form under var, which inferred Map<Object, Object>; explicit type arguments restored in 956d95d66a)
 - Superseded head: 07678f5155a5b46a70738dba14cbbafc8a9d1c30 (tidy clean; Error Prone failed under -Werror on two fully qualified LinkedHashMap uses in the CoreReplication response harvest; imported in 218aa604a4)
 - Superseded head: b941aadf092a056d9d7ae699488c80fc02c9ed8b (tidy re-sorted the corrected JerseyResource import in DebugDump; formatting-only commit 07678f5155 on top, per the step 1 rule)
