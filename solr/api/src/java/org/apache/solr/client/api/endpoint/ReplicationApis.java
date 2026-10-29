@@ -37,9 +37,9 @@ import org.apache.solr.client.api.model.FetchIndexRequestBody;
 import org.apache.solr.client.api.model.FileListResponse;
 import org.apache.solr.client.api.model.IndexVersionResponse;
 import org.apache.solr.client.api.model.ReplicationCommandResponse;
-import org.apache.solr.client.api.model.RestoreRequestBody;
 import org.apache.solr.client.api.model.ReplicationDetailsResponse;
 import org.apache.solr.client.api.model.ReplicationEnabledRequestBody;
+import org.apache.solr.client.api.model.RestoreRequestBody;
 import org.apache.solr.client.api.model.RestoreStatusResponse;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.client.api.util.CoreApiParameters;
@@ -158,14 +158,16 @@ public interface ReplicationApis {
   @POST
   @Path("/enable-poll")
   @Operation(
-      summary = "Enable polling for replication updates, as the v1 command=enablepoll request does.",
+      summary =
+          "Enable polling for replication updates, as the v1 command=enablepoll request does.",
       tags = {"replication"})
   ReplicationCommandResponse enablePoll() throws Exception;
 
   @POST
   @Path("/disable-poll")
   @Operation(
-      summary = "Disable polling for replication updates, as the v1 command=disablepoll request does.",
+      summary =
+          "Disable polling for replication updates, as the v1 command=disablepoll request does.",
       tags = {"replication"})
   ReplicationCommandResponse disablePoll() throws Exception;
 

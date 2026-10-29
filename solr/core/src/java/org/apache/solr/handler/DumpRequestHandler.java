@@ -24,11 +24,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.solr.api.JerseyResource;
 import org.apache.solr.common.util.ContentStream;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.common.util.StrUtils;
-import org.apache.solr.api.JerseyResource;
 import org.apache.solr.core.PluginInfo;
 import org.apache.solr.handler.admin.api.DebugDump;
 import org.apache.solr.request.SolrQueryRequest;
@@ -49,6 +49,7 @@ public class DumpRequestHandler extends RequestHandlerBase {
   public Boolean registerV2() {
     return Boolean.TRUE;
   }
+
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   @Override

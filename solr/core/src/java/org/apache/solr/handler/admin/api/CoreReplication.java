@@ -16,7 +16,6 @@
  */
 package org.apache.solr.handler.admin.api;
 
-import static org.apache.solr.security.PermissionNameProvider.Name.CORE_EDIT_PERM;
 import static org.apache.solr.common.params.CommonParams.NAME;
 import static org.apache.solr.security.PermissionNameProvider.Name.CORE_EDIT_PERM;
 import static org.apache.solr.security.PermissionNameProvider.Name.CORE_READ_PERM;
@@ -26,21 +25,21 @@ import jakarta.ws.rs.core.StreamingOutput;
 import java.io.IOException;
 import org.apache.solr.client.api.endpoint.ReplicationApis;
 import org.apache.solr.client.api.model.CommitsResponse;
-import org.apache.solr.client.api.model.FileListResponse;
 import org.apache.solr.client.api.model.FetchIndexRequestBody;
+import org.apache.solr.client.api.model.FileListResponse;
 import org.apache.solr.client.api.model.IndexVersionResponse;
 import org.apache.solr.client.api.model.ReplicationCommandResponse;
-import org.apache.solr.client.api.model.RestoreRequestBody;
-import org.apache.solr.common.params.CoreAdminParams;
-import org.apache.solr.common.params.ModifiableSolrParams;
-import org.apache.solr.common.util.NamedList;
-import org.apache.solr.handler.ReplicationHandler;
 import org.apache.solr.client.api.model.ReplicationDetailsResponse;
 import org.apache.solr.client.api.model.ReplicationEnabledRequestBody;
+import org.apache.solr.client.api.model.RestoreRequestBody;
 import org.apache.solr.client.api.model.RestoreStatusResponse;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.params.CoreAdminParams;
+import org.apache.solr.common.params.ModifiableSolrParams;
+import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.SolrCore;
+import org.apache.solr.handler.ReplicationHandler;
 import org.apache.solr.jersey.PermissionName;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
@@ -115,8 +114,7 @@ public class CoreReplication extends ReplicationAPIBase implements ReplicationAp
 
   @Override
   @PermissionName(CORE_EDIT_PERM)
-  public ReplicationCommandResponse fetchIndex(FetchIndexRequestBody requestBody)
-      throws Exception {
+  public ReplicationCommandResponse fetchIndex(FetchIndexRequestBody requestBody) throws Exception {
     final var params = new ModifiableSolrParams();
     params.set(ReplicationHandler.COMMAND, ReplicationHandler.CMD_FETCH_INDEX);
     if (requestBody != null) {
@@ -159,15 +157,13 @@ public class CoreReplication extends ReplicationAPIBase implements ReplicationAp
 
   @Override
   @PermissionName(CORE_EDIT_PERM)
-  public ReplicationCommandResponse restoreIndex(RestoreRequestBody requestBody)
-      throws Exception {
+  public ReplicationCommandResponse restoreIndex(RestoreRequestBody requestBody) throws Exception {
     return runReplicationCommand(backupParams(ReplicationHandler.CMD_RESTORE, requestBody));
   }
 
   @Override
   @PermissionName(CORE_EDIT_PERM)
-  public ReplicationCommandResponse deleteBackup(RestoreRequestBody requestBody)
-      throws Exception {
+  public ReplicationCommandResponse deleteBackup(RestoreRequestBody requestBody) throws Exception {
     return runReplicationCommand(backupParams(ReplicationHandler.CMD_DELETE_BACKUP, requestBody));
   }
 
@@ -194,8 +190,7 @@ public class CoreReplication extends ReplicationAPIBase implements ReplicationAp
    */
   private ReplicationCommandResponse runReplicationCommand(ModifiableSolrParams params)
       throws Exception {
-    final var replicationHandler =
-        (ReplicationHandler) solrCore.getRequestHandler("/replication");
+    final var replicationHandler = (ReplicationHandler) solrCore.getRequestHandler("/replication");
     solrQueryRequest.setParams(params);
     replicationHandler.handleRequestBody(solrQueryRequest, solrQueryResponse);
     if (solrQueryResponse.getException() != null) {
