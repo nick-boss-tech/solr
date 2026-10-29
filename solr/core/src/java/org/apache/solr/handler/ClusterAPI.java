@@ -20,7 +20,6 @@ package org.apache.solr.handler;
 import static org.apache.solr.client.solrj.SolrRequest.METHOD.GET;
 import static org.apache.solr.client.solrj.SolrRequest.METHOD.POST;
 import static org.apache.solr.common.params.CollectionParams.CollectionAction.OVERSEERSTATUS;
-import static org.apache.solr.core.RateLimiterConfig.RL_CONFIG_KEY;
 import static org.apache.solr.security.PermissionNameProvider.Name.COLL_EDIT_PERM;
 import static org.apache.solr.security.PermissionNameProvider.Name.COLL_READ_PERM;
 
@@ -30,13 +29,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import org.apache.solr.api.Command;
 import org.apache.solr.api.EndPoint;
-import org.apache.solr.api.PayloadObj;
 import org.apache.solr.client.solrj.cloud.DistribStateManager;
-import org.apache.solr.client.solrj.request.beans.RateLimiterPayload;
 import org.apache.solr.common.SolrException;
-import org.apache.solr.common.cloud.ClusterProperties;
 import org.apache.solr.common.cloud.ZkStateReader;
 import org.apache.solr.common.params.DefaultSolrParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
@@ -54,7 +49,6 @@ public class ClusterAPI {
   private final CollectionsHandler collectionsHandler;
   private final ConfigSetsHandler configSetsHandler;
 
-  public final Commands commands = new Commands();
 
   public ClusterAPI(CollectionsHandler ch, ConfigSetsHandler configSetsHandler) {
     this.collectionsHandler = ch;
@@ -212,19 +206,4 @@ public class ClusterAPI {
     return collectionsHandler.getCoreContainer();
   }
 
-  @EndPoint(method = POST, path = "/cluster", permission = COLL_EDIT_PERM)
-  public class Commands {
-    @Command(name = "set-ratelimiter")
-    public void setRateLimiters(PayloadObj<RateLimiterPayload> payLoad) {
-      RateLimiterPayload rateLimiterConfig = payLoad.get();
-      ClusterProperties clusterProperties =
-          new ClusterProperties(getCoreContainer().getZkController().getZkClient());
 
-      try {
-        clusterProperties.update(rateLimiterConfig, RL_CONFIG_KEY);
-      } catch (Exception e) {
-        throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, "Error in API", e);
-      }
-    }
-  }
-}

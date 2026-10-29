@@ -1254,7 +1254,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         CreateCollectionSnapshot.class,
         DeleteCollectionSnapshot.class,
         ClusterProperty.class,
-        ClusterCommands.class);
+        ClusterCommands.class,
+        SetRateLimiter.class);
   }
 
   @Override

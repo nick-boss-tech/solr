@@ -1,0 +1,4 @@
+name: SOLR-16390
+type: added
+title: "V2 API: migrate the cluster set-ratelimiter command to JAX-RS (PUT /api/cluster/rate-limiters)"
+links: https://issues.apache.org/jira/browse/SOLR-16390
