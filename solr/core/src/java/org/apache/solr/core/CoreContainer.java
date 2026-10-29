@@ -866,7 +866,6 @@ public class CoreContainer {
             CONFIGSETS_HANDLER_PATH, cfg.getConfigSetsHandlerClass(), ConfigSetsHandler.class);
     ClusterAPI clusterAPI = new ClusterAPI(collectionsHandler, configSetsHandler);
     registerV2Api(clusterAPI);
-    registerV2Api(clusterAPI.commands);
 
     if (isZooKeeperAware()) {
       registerV2Api(SchemaDesigner.class);
