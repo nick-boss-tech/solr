@@ -26,17 +26,19 @@ import java.lang.invoke.MethodHandles;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.apache.solr.api.JerseyResource;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.SolrZkClient;
 import org.apache.solr.common.cloud.ZkDynamicConfig;
-import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.handler.RequestHandlerBase;
+import org.apache.solr.handler.admin.api.ZookeeperStatus;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.security.AuthorizationContext;
@@ -75,7 +77,16 @@ public class ZookeeperStatusHandler extends RequestHandlerBase {
 
   @Override
   public void handleRequestBody(SolrQueryRequest req, SolrQueryResponse rsp) throws Exception {
-    NamedList<Object> values = rsp.getValues();
+    rsp.getValues().add("zkStatus", fetchZkStatus());
+  }
+
+  @Override
+  public Collection<Class<? extends JerseyResource>> getJerseyResources() {
+    return List.of(ZookeeperStatus.class);
+  }
+
+  /** Returns the ZooKeeper ensemble status served by this handler, for the v2 status API. */
+  public Map<String, Object> fetchZkStatus() throws Exception {
     if (cores.isZooKeeperAware()) {
       String zkHost = cores.getZkController().getZkServerAddress();
       ZkDynamicConfig dynConfig = null;
@@ -90,7 +101,7 @@ public class ZookeeperStatusHandler extends RequestHandlerBase {
           log.warn("{} - Continuing with static connection string", e.toString());
         }
       }
-      values.add("zkStatus", getZkStatus(zkHost, dynConfig));
+      return getZkStatus(zkHost, dynConfig);
     } else {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,

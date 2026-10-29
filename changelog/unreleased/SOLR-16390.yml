@@ -1,0 +1,4 @@
+name: SOLR-16390
+type: added
+title: "V2 API: add JAX-RS ZooKeeper files and status APIs under /api/cluster/zookeeper, backed by the existing v1 handlers"
+links: https://issues.apache.org/jira/browse/SOLR-16390

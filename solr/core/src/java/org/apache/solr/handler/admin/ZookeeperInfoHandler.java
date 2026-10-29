@@ -25,6 +25,7 @@ import java.lang.invoke.MethodHandles;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -39,6 +40,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.util.BytesRef;
+import org.apache.solr.api.JerseyResource;
 import org.apache.solr.cloud.ZkController;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
@@ -57,6 +59,7 @@ import org.apache.solr.common.util.SuppressForbidden;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.handler.RequestHandlerBase;
+import org.apache.solr.handler.admin.api.ZookeeperFiles;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.security.AuthorizationContext;
@@ -371,6 +374,33 @@ public final class ZookeeperInfoHandler extends RequestHandlerBase {
     builder.build();
 
     addMapToResponse(builder.getDataMap(), rsp);
+  }
+
+  /**
+   * Builds the path-view response data for the given ZooKeeper path, as served by this handler.
+   * Used by the v2 ZooKeeper files API. The security.json path is refused here: the v1 request
+   * path guards it with the security-read permission, which the v2 API does not carry.
+   *
+   * @param rawPath the ZooKeeper path, not yet normalized
+   * @param detail whether to include the znode detail block for the path
+   * @return the response data (the tree, and the znode detail when requested)
+   */
+  public Map<String, Object> fetchPathView(String rawPath, boolean detail) throws Exception {
+    String path = normalizePath(rawPath);
+    if (path.equals(SOLR_SECURITY_CONF_PATH)) {
+      throw new SolrException(
+          ErrorCode.FORBIDDEN,
+          "Reading " + path + " requires the security-read permission; use the v1 API");
+    }
+    ZkPathResponseBuilder builder =
+        new ZkPathResponseBuilder(cores.getZkController(), path, detail, false);
+    builder.build();
+    return builder.getDataMap();
+  }
+
+  @Override
+  public Collection<Class<? extends JerseyResource>> getJerseyResources() {
+    return List.of(ZookeeperFiles.class);
   }
 
   /** Ensures the paging support is initialized (thread-safe lazy initialization). */
