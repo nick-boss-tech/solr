@@ -196,7 +196,7 @@ public class CoreReplication extends ReplicationAPIBase implements ReplicationAp
     }
 
     final var response = instantiateJerseyResponse(ReplicationCommandResponse.class);
-    final var details = new LinkedHashMap<>();
+    final var details = new LinkedHashMap<String, Object>();
     solrQueryResponse
         .getValues()
         .forEach(
@@ -213,7 +213,7 @@ public class CoreReplication extends ReplicationAPIBase implements ReplicationAp
 
   private static Object convertValue(Object value) {
     if (value instanceof NamedList<?> namedList) {
-      final var map = new LinkedHashMap<>();
+      final var map = new LinkedHashMap<String, Object>();
       namedList.forEach((name, v) -> map.put(name, convertValue(v)));
       return map;
     }
