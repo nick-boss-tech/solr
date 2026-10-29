@@ -1,7 +1,7 @@
 # Gate job: SOLR-16396, JAX-RS config modification APIs
 
 - Branch: solr-16396-config-jaxrs. Head: 6f1577221646dec1dd4ada8e409faa552d4f2913 (fork tip, verified by ls-remote 2026-10-28; one commit on origin/main 74197140a666). Base: 74197140a666d4f0396b68484c2bf9df7e79221e.
-- Status: PASS on the patched local head a645bff (round 2, not pushed); round 1 watch-item leg failed at f8ba76d. See receipts/SOLR-16396.md.
+- Status: PASS at the fork head `a645bff` (round 2, pushed to the fork at the owner's direction). Round 1 watch-item leg failed at f8ba76d. See `receipts/SOLR-16396.md`.
 - Intended host: any capable Linux host, under the WORKFLOW.md claim rules. Capability tags: gate.
 - Why: the branch was implemented 2026-10-28 at the owner's direction with builds waived; this gate is its first verification, and it is a behavior-bearing refactor: ModifyConfigComponentAPI becomes a JAX-RS resource implementing the new ModifyConfigApi interface, ModifyParamSetAPI is deleted, and SolrConfigHandler gains a processConfigCommands entry point plus an 'upsert' command prefix. The v1 request path (handleRequestBody) is refactored to share the new runner and must behave identically.
 - Steps, in order:
