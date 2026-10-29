@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16391-update-collection
-- Head: 114229c6add8ab6eef59e188c17e05e7e0894db2
+- Head: 46c451d8ed7b1476ac7a00dd6f1a38605d1f8dcb
+- Superseded head: 114229c6add8ab6eef59e188c17e05e7e0894db2 (tidy clean; SolrJ OpenAPI generation failed spec validation: PingHealthCheckApi declared {coreName} in its class path but no method declared the path parameter; declared on all three operations in 46c451d8ed7)
 - Superseded head: aae6592199e997e56a83cc80ebd5df91c0f47f04 (tidy joined lines in ModifyCollection and removed two unused imports from V2CollectionAPIMappingTest; formatting-only commit 114229c6ad on top, per the step 1 rule)
 - Base: origin/main 3db71000514e1edaa8e6ae0426fce92ca97990e3
 - Worktree if needed: ~/workspace/solr-worktrees/16391-updatecoll
