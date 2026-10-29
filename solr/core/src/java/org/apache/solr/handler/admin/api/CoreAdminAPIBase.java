@@ -16,12 +16,16 @@
  */
 package org.apache.solr.handler.admin.api;
 
+import static org.apache.solr.common.params.CommonParams.CORES_HANDLER_PATH;
+
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 import org.apache.solr.api.JerseyResource;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.core.CoreContainer;
+import org.apache.solr.handler.ClusterAPI;
 import org.apache.solr.handler.admin.CoreAdminHandler;
 import org.apache.solr.handler.api.V2ApiUtils;
 import org.apache.solr.logging.MDCLoggingContext;
@@ -118,6 +122,27 @@ public abstract class CoreAdminAPIBase extends JerseyResource {
   /**
    * Helper RuntimeException to allow passing checked exceptions to the caller of the handle method.
    */
+  /**
+   * Runs a CoreAdmin action by delegating to the {@link CoreAdminHandler} with the provided v1
+   * parameters. Intended for v2 APIs whose implementation still lives in a CoreAdmin operation;
+   * the parameters must include the CoreAdmin 'action' to run. Any exception the handler records
+   * on the response is rethrown so the JAX-RS layer can surface it as an API error.
+   */
+  protected SolrJerseyResponse invokeCoreAdminAction(Map<String, Object> v1Params)
+      throws Exception {
+    final var coreAdminHandler =
+        (CoreAdminHandler) coreContainer.getRequestHandler(CORES_HANDLER_PATH);
+    if (coreAdminHandler == null) {
+      throw new SolrException(
+          SolrException.ErrorCode.SERVER_ERROR, "Core admin handler is not available");
+    }
+    coreAdminHandler.handleRequestBody(ClusterAPI.wrapParams(req, v1Params), rsp);
+    if (rsp.getException() != null) {
+      throw rsp.getException();
+    }
+    return instantiateJerseyResponse(SolrJerseyResponse.class);
+  }
+
   protected static class CoreAdminAPIBaseException extends RuntimeException {
     Exception trueException;
 
