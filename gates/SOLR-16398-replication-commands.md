@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16398-replication-commands
-- Head: 07678f5155a5b46a70738dba14cbbafc8a9d1c30
+- Head: 218aa604a4e6dc5239eeeb3645e71a876acec65f
+- Superseded head: 07678f5155a5b46a70738dba14cbbafc8a9d1c30 (tidy clean; Error Prone failed under -Werror on two fully qualified LinkedHashMap uses in the CoreReplication response harvest; imported in 218aa604a4)
 - Superseded head: b941aadf092a056d9d7ae699488c80fc02c9ed8b (tidy re-sorted the corrected JerseyResource import in DebugDump; formatting-only commit 07678f5155 on top, per the step 1 rule)
 - Superseded head: 11d159b95dbddae9579809faa82a4105a5bb5176 (OpenAPI generation passed; core compile failed: DebugDump had the wrong JerseyResource package, and CoreReplication set a Long into ModifiableSolrParams for an indexVersion body field that the v1 fetchindex path never reads; the field and its mapping are removed, import fixed, in b941aadf09)
 - Superseded head: 1f11ad8c2fed898c30883a5a928a9f2bd710f590 (the six replication operations passed spec validation; the remaining error was DebugDumpApi with the same missing CoreApiParameters annotation; fixed in 11d159b95d)
