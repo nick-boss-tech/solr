@@ -17,41 +17,60 @@
 
 package org.apache.solr.handler.admin.api;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+import java.nio.file.Path;
+import org.apache.commons.io.file.PathUtils;
+import org.apache.solr.SolrTestCase;
 import org.apache.solr.SolrTestCaseJ4;
-import org.junit.AfterClass;
+import org.apache.solr.common.params.ModifiableSolrParams;
+import org.apache.solr.core.SolrCore;
+import org.apache.solr.request.SolrQueryRequestBase;
+import org.apache.solr.util.EmbeddedSolrServerTestRule;
 import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 
-public class V2UpdateSchemaCopyFieldsTest extends SolrTestCaseJ4 {
+public class V2UpdateSchemaCopyFieldsTest extends SolrTestCase {
+
+  @ClassRule
+  public static final EmbeddedSolrServerTestRule solrTestRule = new EmbeddedSolrServerTestRule();
 
   @BeforeClass
-  public static void initCoreWithMutableSchema() throws Exception {
+  public static void startMutableSchemaCore() throws Exception {
     System.setProperty("managed.schema.mutable", "true");
-    initCore("solrconfig-managed-schema.xml", "schema-rest.xml");
-  }
-
-  @AfterClass
-  public static void clearMutableSchemaProperty() {
-    System.clearProperty("managed.schema.mutable");
+    Path solrHome = createTempDir("solrhome");
+    PathUtils.copyDirectory(SolrTestCaseJ4.TEST_HOME(), solrHome);
+    solrTestRule.startSolr(solrHome);
+    solrTestRule
+        .newCollection()
+        .withConfigSet(solrHome.resolve("collection1").resolve("conf"))
+        .withConfigFile("solrconfig-managed-schema.xml")
+        .withSchemaFile("schema-rest.xml")
+        .create();
   }
 
   @Test
   public void testDeleteCopyFieldsForSourceWithoutCopyFieldsIsNoOp() throws Exception {
-    final var api = new UpdateSchema(h.getCore(), req());
-    api.deleteCopyFields("no_such_copy_source");
-    assertTrue(h.getCore().getLatestSchema().getCopyFieldsList("no_such_copy_source").isEmpty());
+    try (SolrCore core =
+        solrTestRule.getCoreContainer().getCore(SolrTestCaseJ4.DEFAULT_TEST_CORENAME)) {
+      new UpdateSchema(core, request(core)).deleteCopyFields("no_such_copy_source");
+
+      assertTrue(core.getLatestSchema().getCopyFieldsList("no_such_copy_source").isEmpty());
+    }
   }
 
   @Test
   public void testDeleteCopyFieldsRemovesEveryDestinationOfSource() throws Exception {
-    assertFalse(h.getCore().getLatestSchema().getCopyFieldsList("copyfield_source").isEmpty());
+    try (SolrCore core =
+        solrTestRule.getCoreContainer().getCore(SolrTestCaseJ4.DEFAULT_TEST_CORENAME)) {
+      assertFalse(core.getLatestSchema().getCopyFieldsList("copyfield_source").isEmpty());
 
-    final var api = new UpdateSchema(h.getCore(), req());
-    api.deleteCopyFields("copyfield_source");
+      new UpdateSchema(core, request(core)).deleteCopyFields("copyfield_source");
 
-    assertTrue(h.getCore().getLatestSchema().getCopyFieldsList("copyfield_source").isEmpty());
+      assertTrue(core.getLatestSchema().getCopyFieldsList("copyfield_source").isEmpty());
+    }
+  }
+
+  private static SolrQueryRequestBase request(SolrCore core) {
+    return new SolrQueryRequestBase(core, new ModifiableSolrParams()) {};
   }
 }
