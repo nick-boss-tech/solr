@@ -48,19 +48,19 @@ public class PingHealthCheck extends JerseyResource implements PingHealthCheckAp
 
   @Override
   @PermissionName(CORE_EDIT_PERM)
-  public HealthCheckFileResponse enableHealthCheckFile() throws Exception {
+  public HealthCheckFileResponse enableHealthCheckFile(String coreName) throws Exception {
     return setEnabled(true);
   }
 
   @Override
   @PermissionName(CORE_EDIT_PERM)
-  public HealthCheckFileResponse disableHealthCheckFile() throws Exception {
+  public HealthCheckFileResponse disableHealthCheckFile(String coreName) throws Exception {
     return setEnabled(false);
   }
 
   @Override
   @PermissionName(CORE_READ_PERM)
-  public HealthCheckFileResponse getHealthCheckFileStatus() throws Exception {
+  public HealthCheckFileResponse getHealthCheckFileStatus(String coreName) throws Exception {
     final var response = instantiateJerseyResponse(HealthCheckFileResponse.class);
     response.status = fetchPingHandler().healthCheckFileStatus();
     return response;

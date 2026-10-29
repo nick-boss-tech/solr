@@ -17,9 +17,11 @@
 package org.apache.solr.client.api.endpoint;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import org.apache.solr.client.api.model.HealthCheckFileResponse;
 
 @Path("/cores/{coreName}/ping/healthcheck-file")
@@ -29,19 +31,19 @@ public interface PingHealthCheckApi {
   @Operation(
       summary = "Create the ping handler's healthcheck file, enabling the ping.",
       tags = {"cores"})
-  HealthCheckFileResponse enableHealthCheckFile() throws Exception;
+  HealthCheckFileResponse enableHealthCheckFile(@Parameter(description = "The name of the core whose ping handler to configure.", required = true) @PathParam("coreName") String coreName) throws Exception;
 
   @POST
   @Path("/disable")
   @Operation(
       summary = "Delete the ping handler's healthcheck file, disabling the ping.",
       tags = {"cores"})
-  HealthCheckFileResponse disableHealthCheckFile() throws Exception;
+  HealthCheckFileResponse disableHealthCheckFile(@Parameter(description = "The name of the core whose ping handler to configure.", required = true) @PathParam("coreName") String coreName) throws Exception;
 
   @GET
   @Path("/status")
   @Operation(
       summary = "Report whether the ping handler's healthcheck file is present.",
       tags = {"cores"})
-  HealthCheckFileResponse getHealthCheckFileStatus() throws Exception;
+  HealthCheckFileResponse getHealthCheckFileStatus(@Parameter(description = "The name of the core whose ping handler to configure.", required = true) @PathParam("coreName") String coreName) throws Exception;
 }
