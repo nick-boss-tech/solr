@@ -20,10 +20,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import org.apache.solr.client.api.model.DebugDumpResponse;
+import org.apache.solr.client.api.util.CoreApiParameters;
 
 @Path("/cores/{coreName}/debug/dump")
 public interface DebugDumpApi {
   @GET
+  @CoreApiParameters
   @Operation(
       summary = "Dump the request's parameters and context for the specified core (debug aid).",
       tags = {"cores"})
