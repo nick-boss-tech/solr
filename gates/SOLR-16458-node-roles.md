@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16458-node-roles
-- Head: ca2675f5173c03e9c38c0bb5701e7e98ed8f0234
+- Head: 7d93118791bc54455ce647b252e18c727eea8d11
+- Superseded head: ca2675f5173c03e9c38c0bb5701e7e98ed8f0234 (tidy removed one unused java.util.Set import left in ClusterAPI by the endpoint removal; formatting-only commit 7d93118791 on top, per the step 1 rule)
 - Base: origin/main 3db71000514e1edaa8e6ae0426fce92ca97990e3
 - Worktree if needed: ~/workspace/solr-worktrees/16458-noderoles
 - Ticket: SOLR-16458 (checked before taking: PR #4171 under this ticket migrated NodeHealth
