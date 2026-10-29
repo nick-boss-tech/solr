@@ -83,6 +83,7 @@ import org.apache.solr.core.SolrCore;
 import org.apache.solr.core.SolrResourceLoader;
 import org.apache.solr.handler.admin.api.GetConfig;
 import org.apache.solr.handler.admin.api.GetConfigAPI;
+import org.apache.solr.handler.admin.api.ModifyConfigComponentAPI;
 import org.apache.solr.handler.api.V2ApiUtils;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrRequestHandler;
@@ -995,7 +996,7 @@ public class SolrConfigHandler extends RequestHandlerBase
 
   @Override
   public Collection<Class<? extends JerseyResource>> getJerseyResources() {
-    return List.of(GetConfig.class);
+    return List.of(GetConfig.class, ModifyConfigComponentAPI.class);
   }
 
   @Override

@@ -24,6 +24,8 @@ import static org.apache.solr.handler.SolrConfigHandler.UNSET_PROPERTY;
 import static org.apache.solr.handler.SolrConfigHandler.UNSET_USER_PROPERTY;
 
 import jakarta.inject.Inject;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -75,6 +77,29 @@ public class ModifyConfigComponentAPI extends JerseyResource implements ModifyCo
   public ModifyConfigComponentAPI(SolrCore solrCore, SolrQueryRequest solrQueryRequest) {
     this.solrCore = solrCore;
     this.solrQueryRequest = solrQueryRequest;
+  }
+
+  @Override
+  @PermissionName(PermissionNameProvider.Name.CONFIG_EDIT_PERM)
+  public SolrJerseyResponse runConfigCommands(String requestBody) throws Exception {
+    final var response = instantiateJerseyResponse(SolrJerseyResponse.class);
+    runConfigOps(parseCommandBundle(requestBody), false);
+    return response;
+  }
+
+  @Override
+  @PermissionName(PermissionNameProvider.Name.CONFIG_EDIT_PERM)
+  public SolrJerseyResponse runParamSetCommands(String requestBody) throws Exception {
+    final var response = instantiateJerseyResponse(SolrJerseyResponse.class);
+    runConfigOps(parseCommandBundle(requestBody), true);
+    return response;
+  }
+
+  private static List<CommandOperation> parseCommandBundle(String requestBody) throws IOException {
+    if (requestBody == null || requestBody.isBlank()) {
+      throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "Missing required request body");
+    }
+    return CommandOperation.parse(new StringReader(requestBody));
   }
 
   @Override

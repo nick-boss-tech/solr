@@ -169,6 +169,42 @@ public class TestSolrConfigHandler extends RestTestBase {
     reqhandlertests(restTestHarness);
   }
 
+  public void testUpsertRequestHandler() throws Exception {
+    RestTestHarness harness = restTestHarness;
+    runConfigCommand(
+        harness,
+        "/config",
+        "{ 'upsert-requesthandler' : { 'name' : '/upserted', 'class': 'org.apache.solr.handler.DumpRequestHandler', 'startup' : 'lazy' } }");
+    testForResponseElement(
+        harness,
+        "/config/overlay",
+        asList("overlay", "requestHandler", "/upserted", "startup"),
+        "lazy",
+        TIMEOUT_S);
+
+    runConfigCommand(
+        harness,
+        "/config",
+        "{ 'upsert-requesthandler' : { 'name' : '/upserted', 'class': 'org.apache.solr.handler.DumpRequestHandler', 'startup' : 'eager' } }");
+    testForResponseElement(
+        harness,
+        "/config/overlay",
+        asList("overlay", "requestHandler", "/upserted", "startup"),
+        "eager",
+        TIMEOUT_S);
+
+    runConfigCommandExpectFailure(
+        harness,
+        "/config",
+        "{ 'create-requesthandler' : { 'name' : '/upserted', 'class': 'org.apache.solr.handler.DumpRequestHandler' } }",
+        "already exists");
+    runConfigCommandExpectFailure(
+        harness,
+        "/config",
+        "{ 'update-requesthandler' : { 'name' : '/missing', 'class': 'org.apache.solr.handler.DumpRequestHandler' } }",
+        "does not exist");
+  }
+
   public static void runConfigCommand(RestTestHarness harness, String uri, String payload)
       throws IOException {
     String json = SolrTestCaseJ4.json(payload);
@@ -186,7 +222,6 @@ public class TestSolrConfigHandler extends RestTestBase {
     log.info("going to send config command. path {} , payload: {}", uri, payload);
     String response = harness.post(uri, json);
     Map<?, ?> map = (Map<?, ?>) Utils.fromJSONString(response);
-    assertNotNull(response, map.get("errorMessages"));
     assertNotNull(response, map.get("error"));
     assertTrue(
         "Expected status != 0: " + response,

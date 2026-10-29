@@ -21,6 +21,7 @@ import static org.apache.solr.client.api.util.Constants.INDEX_PATH_PREFIX;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -39,6 +40,25 @@ import org.apache.solr.client.api.util.StoreApiParameters;
  */
 @Path(INDEX_PATH_PREFIX + "/config")
 public interface ModifyConfigApi {
+
+  @POST
+  @StoreApiParameters
+  @Operation(
+      summary =
+          "Run a bundle of solrconfig commands, each keyed by its command name (for example"
+              + " 'set-property' or 'create-requesthandler'), as the v1 config API does.",
+      tags = {"collection-config"})
+  SolrJerseyResponse runConfigCommands(String requestBody) throws Exception;
+
+  @POST
+  @Path("/params")
+  @StoreApiParameters
+  @Operation(
+      summary =
+          "Run a bundle of paramset commands, each keyed by its command name (for example"
+              + " 'set' or 'delete'), as the v1 config API's /config/params does.",
+      tags = {"collection-config"})
+  SolrJerseyResponse runParamSetCommands(String requestBody) throws Exception;
 
   @PUT
   @Path("/{componentType}/{componentName}")
