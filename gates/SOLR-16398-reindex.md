@@ -9,7 +9,8 @@ Runner tags needed: gate
 ## Branch under gate
 
 - Fork branch: solr-16398-reindex
-- Head: fa1dfe82b7bfcc6a859c77ce4106df51dbfb5d6f
+- Head: 528a9eb954941ad87c9ca3b636dd9495aa245551
+- Superseded head: fa1dfe82b7bfcc6a859c77ce4106df51dbfb5d6f (tidy clean; compile failed: CollectionsHandler lacked the OverseerStatus and ReindexCollection imports; fixed in 528a9eb9549)
 - Superseded head: 5e595f66930a6f74487759ae99212ea2c26635b5 (tidy joined lines and reflowed javadoc in the two new resource files; formatting-only commit fa1dfe82b7 on top, per the step 1 rule)
 - Base: origin/main 3db71000514e1edaa8e6ae0426fce92ca97990e3
 - Worktree if needed: ~/workspace/solr-worktrees/16398-reindex
