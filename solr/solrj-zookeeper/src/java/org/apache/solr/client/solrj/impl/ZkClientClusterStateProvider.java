@@ -147,6 +147,11 @@ public class ZkClientClusterStateProvider
         : (String) state.get().getProperties().get("policy");
   }
 
+  @Override
+  public void connect() {
+    getZkStateReader();
+  }
+
   public ZkStateReader getZkStateReader() {
     if (isClosed) { // quick check...
       throw new AlreadyClosedException();

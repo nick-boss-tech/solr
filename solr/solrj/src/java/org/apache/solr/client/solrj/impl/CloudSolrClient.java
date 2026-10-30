@@ -43,6 +43,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -228,6 +229,42 @@ public abstract class CloudSolrClient extends SolrClient implements HttpClientAc
   /** The HttpSolrClient that underlies this one. It has no baseUrl or default collection. */
   @Override
   public abstract HttpSolrClient getHttpClient();
+
+  /**
+   * Connect to the zookeeper ensemble. This is an optional method that may be used to force a
+   * connection before any other requests are sent.
+   *
+   * @deprecated Call {@link ClusterStateProvider#getLiveNodes()} instead.
+   */
+  @Deprecated
+  public void connect() {
+    getClusterStateProvider().connect();
+  }
+
+  /**
+   * Connect to a cluster. If the cluster is not ready, retry connection up to a given timeout.
+   *
+   * @param duration the timeout
+   * @param timeUnit the units of the timeout
+   * @throws TimeoutException if the cluster is not ready after the timeout
+   * @throws InterruptedException if the wait is interrupted
+   * @deprecated Call {@link ClusterStateProvider#getLiveNodes()} instead.
+   */
+  @Deprecated
+  public void connect(long duration, TimeUnit timeUnit)
+      throws TimeoutException, InterruptedException {
+    long timeout = System.nanoTime() + timeUnit.toNanos(duration);
+    while (System.nanoTime() < timeout) {
+      try {
+        connect();
+        return;
+      } catch (RuntimeException e) {
+        // not ready yet, then...
+      }
+      TimeUnit.MILLISECONDS.sleep(250);
+    }
+    throw new TimeoutException("Timed out waiting for cluster");
+  }
 
   public ResponseParser getParser() {
     return getLbClient().getParser();

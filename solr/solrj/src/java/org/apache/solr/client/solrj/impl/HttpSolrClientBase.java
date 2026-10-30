@@ -120,7 +120,7 @@ public abstract class HttpSolrClientBase extends SolrClient {
 
   protected String getRequestUrl(SolrRequest<?> solrRequest, String collection)
       throws MalformedURLException {
-    return ClientUtils.buildRequestUrl(solrRequest, serverBaseUrl, collection);
+    return ClientUtils.buildRequestUrl(solrRequest, getBaseURL(), collection);
   }
 
   protected ResponseParser responseParser(SolrRequest<?> solrRequest) {

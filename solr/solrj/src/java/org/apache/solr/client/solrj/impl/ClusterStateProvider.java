@@ -61,6 +61,14 @@ public interface ClusterStateProvider extends SolrCloseable {
   Set<String> getLiveNodes();
 
   /**
+   * @deprecated Call {@link #getLiveNodes()} instead.
+   */
+  @Deprecated
+  default void connect() {
+    getLiveNodes();
+  }
+
+  /**
    * Given a collection alias, returns a list of collections it points to, or returns a singleton
    * list of the input if it's not an alias.
    */
