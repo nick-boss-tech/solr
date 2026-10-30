@@ -159,8 +159,7 @@ public class UBIRecordingContextTest extends SolrCloudTestCase {
 
   @Test
   public void testDisabledRecordingLeavesNoRecord() throws Exception {
-    QueryResponse response =
-        query(false, params("1", "query-A", "first query").set("ubi", false));
+    QueryResponse response = query(false, params("1", "query-A", "first query").set("ubi", false));
     assertEquals(0, response.getStatus());
     assertEquals(1, response.getResults().getNumFound());
     assertNull(response.getResponse().get("ubi"));
