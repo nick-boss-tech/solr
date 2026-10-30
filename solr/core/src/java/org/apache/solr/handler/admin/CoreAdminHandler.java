@@ -61,13 +61,13 @@ import org.apache.solr.handler.admin.api.GetNodeCommandStatus;
 import org.apache.solr.handler.admin.api.InstallCoreData;
 import org.apache.solr.handler.admin.api.MergeIndexes;
 import org.apache.solr.handler.admin.api.OverseerOperationAPI;
-import org.apache.solr.handler.admin.api.PrepareCoreRecoveryAPI;
+import org.apache.solr.handler.admin.api.PrepareCoreRecovery;
 import org.apache.solr.handler.admin.api.RejoinLeaderElectionAPI;
 import org.apache.solr.handler.admin.api.ReloadCore;
 import org.apache.solr.handler.admin.api.RenameCore;
 import org.apache.solr.handler.admin.api.RequestApplyCoreUpdatesAPI;
 import org.apache.solr.handler.admin.api.RequestBufferUpdatesAPI;
-import org.apache.solr.handler.admin.api.RequestCoreRecoveryAPI;
+import org.apache.solr.handler.admin.api.RequestCoreRecovery;
 import org.apache.solr.handler.admin.api.RequestSyncShardAPI;
 import org.apache.solr.handler.admin.api.RestoreCore;
 import org.apache.solr.handler.admin.api.SplitCoreAPI;
@@ -316,8 +316,6 @@ public class CoreAdminHandler extends RequestHandlerBase implements PermissionNa
     apis.addAll(AnnotatedApi.getApis(new OverseerOperationAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new SplitCoreAPI(this)));
     // Internal APIs
-    apis.addAll(AnnotatedApi.getApis(new RequestCoreRecoveryAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new PrepareCoreRecoveryAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new RequestApplyCoreUpdatesAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new RequestSyncShardAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new RequestBufferUpdatesAPI(this)));
@@ -339,7 +337,9 @@ public class CoreAdminHandler extends RequestHandlerBase implements PermissionNa
         SwapCores.class,
         RenameCore.class,
         MergeIndexes.class,
-        GetNodeCommandStatus.class);
+        GetNodeCommandStatus.class,
+        PrepareCoreRecovery.class,
+        RequestCoreRecovery.class);
   }
 
   public interface CoreAdminOp {

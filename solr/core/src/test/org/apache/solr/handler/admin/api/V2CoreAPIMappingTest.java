@@ -22,14 +22,12 @@ import static org.apache.solr.common.params.CommonAdminParams.SPLIT_KEY;
 import static org.apache.solr.common.params.CommonParams.ACTION;
 import static org.apache.solr.common.params.CommonParams.PATH;
 import static org.apache.solr.common.params.CoreAdminParams.CORE;
-import static org.apache.solr.common.params.CoreAdminParams.CORE_NODE_NAME;
 import static org.apache.solr.common.params.CoreAdminParams.NAME;
 import static org.apache.solr.common.params.CoreAdminParams.RANGES;
 import static org.apache.solr.common.params.CoreAdminParams.TARGET_CORE;
 
 import java.util.Arrays;
 import java.util.List;
-import org.apache.solr.common.cloud.ZkStateReader;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.handler.admin.CoreAdminHandler;
 import org.apache.solr.handler.admin.V2ApiMappingTest;
@@ -62,8 +60,6 @@ public class V2CoreAPIMappingTest extends V2ApiMappingTest<CoreAdminHandler> {
   public void populateApiBag() {
     final CoreAdminHandler handler = getRequestHandler();
     apiBag.registerObject(new SplitCoreAPI(handler));
-    apiBag.registerObject(new RequestCoreRecoveryAPI(handler));
-    apiBag.registerObject(new PrepareCoreRecoveryAPI(handler));
     apiBag.registerObject(new RequestApplyCoreUpdatesAPI(handler));
     apiBag.registerObject(new RequestSyncShardAPI(handler));
     apiBag.registerObject(new RequestBufferUpdatesAPI(handler));
@@ -95,40 +91,6 @@ public class V2CoreAPIMappingTest extends V2ApiMappingTest<CoreAdminHandler> {
     final List<String> targetCoreEntries = Arrays.asList(v1Params.getParams(TARGET_CORE));
     assertEquals(2, targetCoreEntries.size());
     assertTrue(targetCoreEntries.containsAll(List.of("core1", "core2")));
-  }
-
-  @Test
-  public void testRequestCoreRecoveryAllParams() throws Exception {
-    final SolrParams v1Params =
-        captureConvertedV1Params("/cores/coreName", "POST", "{\"request-recovery\": {}}");
-
-    assertEquals("requestrecovery", v1Params.get(ACTION));
-    assertEquals("coreName", v1Params.get(CORE));
-  }
-
-  @Test
-  public void testPrepareCoreRecoveryAllParams() throws Exception {
-    final SolrParams v1Params =
-        captureConvertedV1Params(
-            "/cores/coreName",
-            "POST",
-            "{\"prep-recovery\": {"
-                + "\"nodeName\": \"someNodeName\", "
-                + "\"coreNodeName\": \"someCoreNodeName\", "
-                + "\"state\": \"someState\", "
-                + "\"checkLive\": true, "
-                + "\"onlyIfLeader\": true"
-                + "\"onlyIfLeaderActive\": true "
-                + "}}");
-
-    assertEquals("preprecovery", v1Params.get(ACTION));
-    assertEquals("coreName", v1Params.get(CORE));
-    assertEquals("someNodeName", v1Params.get("nodeName"));
-    assertEquals("someCoreNodeName", v1Params.get(CORE_NODE_NAME));
-    assertEquals("someState", v1Params.get(ZkStateReader.STATE_PROP));
-    assertTrue(v1Params.getPrimitiveBool("checkLive"));
-    assertTrue(v1Params.getPrimitiveBool("onlyIfLeader"));
-    assertTrue(v1Params.getPrimitiveBool("onlyIfLeaderActive"));
   }
 
   @Test
