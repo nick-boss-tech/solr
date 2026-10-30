@@ -194,11 +194,10 @@ import org.apache.solr.handler.admin.api.ListClusterNodes;
 import org.apache.solr.handler.admin.api.ListCollectionBackups;
 import org.apache.solr.handler.admin.api.ListCollectionSnapshots;
 import org.apache.solr.handler.admin.api.ListCollections;
-import org.apache.solr.handler.admin.api.MigrateDocsAPI;
+import org.apache.solr.handler.admin.api.MigrateDocs;
 import org.apache.solr.handler.admin.api.MigrateReplicas;
 import org.apache.solr.handler.admin.api.ModifyCollectionAPI;
 import org.apache.solr.handler.admin.api.MoveReplicaAPI;
-import org.apache.solr.handler.admin.api.RebalanceLeadersAPI;
 import org.apache.solr.handler.admin.api.ReloadCollectionAPI;
 import org.apache.solr.handler.admin.api.RenameCollection;
 import org.apache.solr.handler.admin.api.ReplaceNode;
@@ -719,8 +718,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
           return null;
         }),
     /**
-     * V2 equivalent: {@link MigrateDocsAPI} ({@code POST /collections/{collection}} with the {@code
-     * migrate-docs} command).
+     * V2 equivalent: {@link org.apache.solr.handler.admin.api.MigrateDocs} ({@code POST
+     * /collections/{collection}/migrate}).
      */
     MIGRATE_OP(
         MIGRATE,
@@ -873,8 +872,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
           return null;
         }),
     /**
-     * V2 equivalent: {@link RebalanceLeadersAPI} ({@code POST /collections/{collection}} with the
-     * {@code rebalance-leaders} command).
+     * V2 equivalent: {@link org.apache.solr.handler.admin.api.RebalanceLeaders} ({@code POST
+     * /collections/{collection}/rebalance-leaders}).
      */
     REBALANCELEADERS_OP(
         REBALANCELEADERS,
@@ -1245,6 +1244,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         MigrateReplicas.class,
         BalanceReplicas.class,
         RestoreCollection.class,
+        org.apache.solr.handler.admin.api.RebalanceLeaders.class,
+        MigrateDocs.class,
         SyncShard.class,
         CollectionProperty.class,
         DeleteNode.class,
@@ -1261,10 +1262,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
   public Collection<Api> getApis() {
     final List<Api> apis = new ArrayList<>();
     apis.addAll(AnnotatedApi.getApis(new SplitShardAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new MigrateDocsAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new ModifyCollectionAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new MoveReplicaAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new RebalanceLeadersAPI(this)));
     return apis;
   }
 

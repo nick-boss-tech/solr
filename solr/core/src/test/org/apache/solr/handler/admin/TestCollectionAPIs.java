@@ -100,13 +100,6 @@ public class TestCollectionAPIs extends SolrTestCaseJ4 {
         POST,
         "{split:{ splitKey:id12345, coreProperties : {prop1:prop1Val, prop2:prop2Val} }}",
         "{collection: collName , split.key : id12345 , operation : splitshard, property.prop1:prop1Val, property.prop2: prop2Val}");
-
-    compareOutput(
-        apiBag,
-        "/collections/coll1",
-        POST,
-        "{migrate-docs : {forwardTimeout: 1800, target: coll2, splitKey: 'a123!'} }",
-        "{operation : migrate ,collection : coll1, target.collection:coll2, forward.timeout:1800, split.key:'a123!'}");
   }
 
   ZkNodeProps compareOutput(
