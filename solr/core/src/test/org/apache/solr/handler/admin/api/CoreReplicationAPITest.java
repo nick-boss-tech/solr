@@ -18,6 +18,7 @@
 package org.apache.solr.handler.admin.api;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import io.opentelemetry.api.trace.Span;
@@ -32,6 +33,7 @@ import org.apache.lucene.util.Constants;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.api.model.CommitsResponse;
 import org.apache.solr.client.api.model.CommitsResponse.CommitDetails;
+import org.apache.solr.client.api.model.FetchIndexRequestBody;
 import org.apache.solr.client.api.model.FileListResponse;
 import org.apache.solr.client.api.model.FileMetaData;
 import org.apache.solr.client.api.model.IndexVersionResponse;
@@ -126,6 +128,34 @@ public class CoreReplicationAPITest extends SolrTestCaseJ4 {
     SolrException ex =
         expectThrows(
             SolrException.class, () -> coreReplicationAPI.setReplicationEnabled(emptyBody));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
+  }
+
+  @Test
+  public void testFetchIndexDelegatesToHandler() {
+    final var body = new FetchIndexRequestBody();
+    body.leaderUrl = "http://leader:8983/solr/core";
+    body.compression = true;
+    assertNotNull(coreReplicationAPI.fetchIndex(body));
+    verify(mockReplicationHandler).fetchIndex("http://leader:8983/solr/core", Boolean.TRUE);
+  }
+
+  @Test
+  public void testFetchIndexAcceptsNullBody() {
+    assertNotNull(coreReplicationAPI.fetchIndex(null));
+    verify(mockReplicationHandler).fetchIndex(null, null);
+  }
+
+  @Test
+  public void testAbortFetch() {
+    when(mockReplicationHandler.abortFetch()).thenReturn(true);
+    assertNotNull(coreReplicationAPI.abortFetch());
+  }
+
+  @Test
+  public void testAbortFetchWithNothingToAbort() {
+    when(mockReplicationHandler.abortFetch()).thenReturn(false);
+    SolrException ex = expectThrows(SolrException.class, () -> coreReplicationAPI.abortFetch());
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, ex.code());
   }
 

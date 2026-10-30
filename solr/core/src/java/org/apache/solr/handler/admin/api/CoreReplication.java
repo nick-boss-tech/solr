@@ -24,6 +24,7 @@ import jakarta.ws.rs.core.StreamingOutput;
 import java.io.IOException;
 import org.apache.solr.client.api.endpoint.ReplicationApis;
 import org.apache.solr.client.api.model.CommitsResponse;
+import org.apache.solr.client.api.model.FetchIndexRequestBody;
 import org.apache.solr.client.api.model.FileListResponse;
 import org.apache.solr.client.api.model.IndexVersionResponse;
 import org.apache.solr.client.api.model.ReplicationDetailsResponse;
@@ -102,5 +103,17 @@ public class CoreReplication extends ReplicationAPIBase implements ReplicationAp
   @PermissionName(CORE_EDIT_PERM)
   public SolrJerseyResponse setReplicationEnabled(ReplicationEnabledRequestBody requestBody) {
     return doSetReplicationEnabled(requestBody);
+  }
+
+  @Override
+  @PermissionName(CORE_EDIT_PERM)
+  public SolrJerseyResponse fetchIndex(FetchIndexRequestBody requestBody) {
+    return doFetchIndex(requestBody);
+  }
+
+  @Override
+  @PermissionName(CORE_EDIT_PERM)
+  public SolrJerseyResponse abortFetch() {
+    return doAbortFetch();
   }
 }

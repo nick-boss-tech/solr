@@ -466,17 +466,8 @@ public class ReplicationHandler extends RequestHandlerBase
       reportErrorOnResponse(rsp, "No follower configured or no 'leaderUrl' specified", null);
       return;
     }
-    final SolrParams paramsCopy = new ModifiableSolrParams(solrParams);
     final IndexFetchResult[] results = new IndexFetchResult[1];
-    Thread fetchThread =
-        new Thread(
-            () -> {
-              IndexFetchResult result = doFetch(paramsCopy, false);
-              results[0] = result;
-            },
-            "explicit-fetchindex-cmd");
-    fetchThread.setDaemon(false);
-    fetchThread.start();
+    Thread fetchThread = startFetchThread(new ModifiableSolrParams(solrParams), results);
     if (solrParams.getBool(WAIT, false)) {
       fetchThread.join();
       if (results[0] == null) {
@@ -489,6 +480,38 @@ public class ReplicationHandler extends RequestHandlerBase
     } else {
       rsp.add(STATUS, OK_STATUS);
     }
+  }
+
+  /**
+   * Starts an index fetch from the given leader without waiting for it to complete, as the v2
+   * fetch-index API does. Progress and outcome are observable through the replication details.
+   */
+  public void fetchIndex(String leaderUrl, Boolean compression) {
+    if (!isFollower && leaderUrl == null) {
+      throw new SolrException(
+          ErrorCode.BAD_REQUEST, "No follower configured or no 'leaderUrl' specified");
+    }
+    final var params = new ModifiableSolrParams();
+    if (leaderUrl != null) {
+      params.set(LEADER_URL, leaderUrl);
+    }
+    if (compression != null) {
+      params.set(COMPRESSION, String.valueOf(compression));
+    }
+    startFetchThread(params, new IndexFetchResult[1]);
+  }
+
+  private Thread startFetchThread(SolrParams params, IndexFetchResult[] results) {
+    Thread fetchThread =
+        new Thread(
+            () -> {
+              IndexFetchResult result = doFetch(params, false);
+              results[0] = result;
+            },
+            "explicit-fetchindex-cmd");
+    fetchThread.setDaemon(false);
+    fetchThread.start();
+    return fetchThread;
   }
 
   private List<NamedList<Object>> getCommits() {

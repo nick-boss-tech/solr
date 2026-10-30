@@ -46,6 +46,7 @@ import org.apache.lucene.store.IndexInput;
 import org.apache.lucene.store.RateLimiter;
 import org.apache.solr.api.JerseyResource;
 import org.apache.solr.client.api.model.CommitsResponse;
+import org.apache.solr.client.api.model.FetchIndexRequestBody;
 import org.apache.solr.client.api.model.FileListResponse;
 import org.apache.solr.client.api.model.FileMetaData;
 import org.apache.solr.client.api.model.IndexVersionResponse;
@@ -110,6 +111,24 @@ public abstract class ReplicationAPIBase extends JerseyResource {
     ReplicationHandler replicationHandler =
         (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
     replicationHandler.setReplicationEnabled(requestBody.enabled);
+    return instantiateJerseyResponse(SolrJerseyResponse.class);
+  }
+
+  protected SolrJerseyResponse doFetchIndex(FetchIndexRequestBody requestBody) {
+    ReplicationHandler replicationHandler =
+        (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
+    replicationHandler.fetchIndex(
+        requestBody == null ? null : requestBody.leaderUrl,
+        requestBody == null ? null : requestBody.compression);
+    return instantiateJerseyResponse(SolrJerseyResponse.class);
+  }
+
+  protected SolrJerseyResponse doAbortFetch() {
+    ReplicationHandler replicationHandler =
+        (ReplicationHandler) solrCore.getRequestHandler(ReplicationHandler.PATH);
+    if (!replicationHandler.abortFetch()) {
+      throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "No follower configured");
+    }
     return instantiateJerseyResponse(SolrJerseyResponse.class);
   }
 
