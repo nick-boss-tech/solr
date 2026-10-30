@@ -15,3 +15,5 @@
 - Decision ladder: rung 1 for the tidy diff (line wrap only); rung 3 for the gate's proof shape.
 
 Heartbeat: 2026-10-29T23:57Z
+
+Heartbeat: 2026-10-30T00:27Z (attempt 2 started)
