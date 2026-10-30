@@ -1,0 +1,189 @@
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import org.apache.solr.client.solrj.impl.CloudHttp2SolrClient;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient;
+import org.apache.solr.client.solrj.impl.HttpClusterStateProvider;
+import org.apache.solr.client.solrj.impl.HttpJdkSolrClient;
+import org.apache.solr.client.solrj.impl.HttpSolrClientBase;
+import org.apache.solr.client.solrj.impl.HttpSolrClientBuilderBase;
+import org.apache.solr.client.solrj.impl.LBSolrClient;
+import org.apache.solr.client.solrj.request.QueryRequest;
+import org.apache.solr.client.solrj.request.JavaBinRequestWriter;
+import org.apache.solr.client.solrj.response.XMLResponseParser;
+import org.apache.solr.common.params.ModifiableSolrParams;
+
+public class Cohort100 {
+  static final String URL = "http://127.0.0.1:1/solr";
+  static int failed;
+
+  interface Body {
+    void run() throws Exception;
+  }
+
+  static void local(String name, Body body) {
+    try {
+      body.run();
+      System.out.println("PASS " + name);
+    } catch (Throwable t) {
+      failed++;
+      System.out.println("FAIL " + name + ": " + t + causes(t));
+    }
+  }
+
+  static void reachesClient(String name, Body body) {
+    try {
+      body.run();
+      System.out.println("PASS " + name + " (no exception)");
+    } catch (Exception e) {
+      System.out.println("PASS " + name + " (reached client: " + e + ")");
+    } catch (Throwable t) {
+      failed++;
+      System.out.println("FAIL " + name + ": " + t + causes(t));
+    }
+  }
+
+  static String causes(Throwable t) {
+    StringBuilder sb = new StringBuilder();
+    for (Throwable c = t.getCause(); c != null; c = c.getCause()) sb.append(" <- ").append(c);
+    return sb.toString();
+  }
+
+  static void check(boolean ok, String what) {
+    if (!ok) throw new AssertionError(what);
+  }
+
+  public static void main(String[] args) throws Exception {
+    HttpJdkSolrClient existing = new HttpJdkSolrClient.Builder(URL).build();
+    HttpSolrClientBase asBase = existing;
+
+    local("jdk.fluent.chain", () -> {
+      ExecutorService ex = Executors.newSingleThreadExecutor();
+      try (HttpSolrClientBase c =
+          new HttpJdkSolrClient.Builder(URL)
+              .withBaseSolrUrl(URL)
+              .withRequestWriter(new JavaBinRequestWriter())
+              .withResponseParser(new XMLResponseParser())
+              .withDefaultCollection("c1")
+              .withFollowRedirects(false)
+              .withExecutor(ex)
+              .withTheseParamNamesInTheUrl(Set.of("shards"))
+              .withMaxConnectionsPerHost(4)
+              .withIdleTimeout(5, TimeUnit.SECONDS)
+              .withConnectionTimeout(10, TimeUnit.SECONDS)
+              .withRequestTimeout(30, TimeUnit.SECONDS)
+              .useHttp1_1(true)
+              .withProxyConfiguration("127.0.0.1", 3128, false, false)
+              .build()) {
+        check(c != null, "built");
+      } finally {
+        ex.shutdown();
+      }
+    });
+
+    local("jdk.fluent.basicAuth", () -> {
+      try (HttpSolrClientBase c =
+          new HttpJdkSolrClient.Builder(URL).withBasicAuthCredentials("u", "p").build()) {
+        check(c != null, "built");
+      }
+      try (HttpSolrClientBase c =
+          new HttpJdkSolrClient.Builder(URL).withOptionalBasicAuthCredentials("u:p").build()) {
+        check(c != null, "built");
+      }
+    });
+
+    local("jdk.withHttpClient.typedAsJdk", () -> {
+      try (HttpSolrClientBase c = new HttpJdkSolrClient.Builder(URL).withHttpClient(existing).build()) {
+        check(c != null, "built");
+      }
+    });
+
+    local("jdk.builder.instance.returnsBaseBuilder", () -> {
+      HttpSolrClientBuilderBase<?, ?> b = existing.builder();
+      try (HttpSolrClientBase c = b.withBaseSolrUrl(URL).build()) {
+        check(c != null, "built");
+      }
+    });
+
+    local("cloud.withHttpClient.ownership", () -> {
+      try (CloudHttp2SolrClient cloud =
+          new CloudSolrClient.Builder(List.of(URL)).withHttpClient(asBase).build()) {
+        check(cloud.getHttpClient() == asBase, "cloud getHttpClient returns supplied client");
+      }
+    });
+
+    local("cloud.withHttpClientBuilder", () -> {
+      try (CloudHttp2SolrClient cloud =
+          new CloudSolrClient.Builder(List.of(URL))
+              .withHttpClientBuilder(new HttpJdkSolrClient.Builder(URL))
+              .build()) {
+        check(cloud.getHttpClient() != null, "cloud internal client");
+      }
+    });
+
+    local("cloud.withInternalClientBuilder", () -> {
+      try (CloudHttp2SolrClient cloud =
+          new CloudSolrClient.Builder(List.of(URL))
+              .withInternalClientBuilder(new HttpJdkSolrClient.Builder(URL))
+              .build()) {
+        check(cloud.getHttpClient() != null, "cloud internal client");
+      }
+    });
+
+    local("provider.ctorAndGetter", () -> {
+      HttpClusterStateProvider<HttpJdkSolrClient> p =
+          new HttpClusterStateProvider<>(List.of(URL), existing);
+      check(p.getHttpClient() == existing, "provider getHttpClient returns supplied client");
+      p.close();
+    });
+
+    local("lb.ctorAndGetter", () -> {
+      @SuppressWarnings({"rawtypes", "unchecked"})
+      LBSolrClient.Builder lbb = new LBSolrClient.Builder(existing, new LBSolrClient.Endpoint(URL));
+      HttpSolrClientBase s = (HttpSolrClientBase) lbb.getSolrClient();
+      check(s == existing, "lb getSolrClient returns supplied client");
+      try (LBSolrClient lb = (LBSolrClient) lbb.build()) {
+        check(lb != null, "lb built");
+      }
+    });
+
+    reachesClient("lb.requestDispatch", () -> {
+      @SuppressWarnings({"rawtypes", "unchecked"})
+      LBSolrClient.Builder lbb = new LBSolrClient.Builder(existing, new LBSolrClient.Endpoint(URL));
+      try (LBSolrClient lb = (LBSolrClient) lbb.build()) {
+        lb.request(new QueryRequest(new ModifiableSolrParams().set("q", "*:*")), "c1");
+      }
+    });
+
+    local("concurrent.builder.ctorAndGetter", () -> {
+      ConcurrentUpdateBaseSolrClient.Builder cb =
+          new ConcurrentUpdateBaseSolrClient.Builder(URL, asBase) {
+            @Override
+            public ConcurrentUpdateBaseSolrClient build() {
+              return null;
+            }
+          };
+      check(cb.getClient() == asBase, "concurrent getClient returns supplied client");
+      ConcurrentUpdateBaseSolrClient.Builder cb3 =
+          new ConcurrentUpdateBaseSolrClient.Builder(URL, asBase, true) {
+            @Override
+            public ConcurrentUpdateBaseSolrClient build() {
+              return null;
+            }
+          };
+      check(cb3.getClient() == asBase, "concurrent getClient (3-arg) returns supplied client");
+    });
+
+    reachesClient("solrRequest.processWithBaseUrl", () -> {
+      new QueryRequest(new ModifiableSolrParams().set("q", "*:*"))
+          .processWithBaseUrl(asBase, URL, null);
+    });
+
+    existing.close();
+    System.out.println(failed == 0 ? "COHORT OK" : "COHORT FAILED " + failed);
+    System.exit(failed == 0 ? 0 : 1);
+  }
+}

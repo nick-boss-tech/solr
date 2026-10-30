@@ -1,0 +1,64 @@
+import com.sun.net.httpserver.HttpServer;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.CopyOnWriteArrayList;
+import org.apache.solr.client.solrj.impl.HttpJdkSolrClient;
+import org.apache.solr.client.solrj.request.QueryRequest;
+import org.apache.solr.client.solrj.response.XMLResponseParser;
+import org.apache.solr.common.params.ModifiableSolrParams;
+
+public class ProbeC {
+  static final String BODY = "<?xml version=\"1.0\"?><response><lst name=\"responseHeader\"><int name=\"status\">0</int><int name=\"QTime\">1</int></lst><result name=\"response\" numFound=\"0\" start=\"0\"/></response>";
+
+  static HttpServer server(String name, CopyOnWriteArrayList<String> hits) throws Exception {
+    HttpServer s = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+    s.createContext("/", ex -> {
+      hits.add(name + " " + ex.getRequestMethod() + " " + ex.getRequestURI().getPath());
+      byte[] b = BODY.getBytes(StandardCharsets.UTF_8);
+      ex.getResponseHeaders().add("Content-Type", "application/xml;charset=UTF-8");
+      ex.sendResponseHeaders(200, b.length);
+      try (OutputStream o = ex.getResponseBody()) { o.write(b); }
+    });
+    s.start();
+    return s;
+  }
+
+  static class Sub extends HttpJdkSolrClient {
+    final String reported;
+    Sub(String serverBaseUrl, String reported, HttpJdkSolrClient.Builder b) {
+      super(serverBaseUrl, b);
+      this.reported = reported;
+    }
+    @Override public String getBaseURL() { return reported; }
+  }
+
+  public static void main(String[] args) throws Exception {
+    CopyOnWriteArrayList<String> hits = new CopyOnWriteArrayList<>();
+    HttpServer a = server("A", hits), b = server("B", hits);
+    String urlA = "http://127.0.0.1:" + a.getAddress().getPort() + "/solr";
+    String urlB = "http://127.0.0.1:" + b.getAddress().getPort() + "/solr";
+    try (Sub sub = new Sub(urlA, urlB, new HttpJdkSolrClient.Builder(urlA).withResponseParser(new XMLResponseParser()))) {
+      sub.request(new QueryRequest(new ModifiableSolrParams().set("q", "*:*")), "c1");
+      System.out.println("RESULT dispatch-request-hit " + hits.get(hits.size() - 1));
+    } catch (Throwable t) {
+      System.out.println("RESULT dispatch-request EXC " + t.getClass().getName() + ": " + t.getMessage());
+    }
+    hits.clear();
+    try (Sub sub = new Sub(urlA, urlB, new HttpJdkSolrClient.Builder(urlA).withResponseParser(new XMLResponseParser()))) {
+      sub.requestWithBaseUrl(null, new QueryRequest(new ModifiableSolrParams().set("q", "*:*")), "c1");
+      System.out.println("RESULT dispatch-requestWithBaseUrl-null-hit " + hits.get(hits.size() - 1));
+    } catch (Throwable t) {
+      System.out.println("RESULT dispatch-requestWithBaseUrl-null EXC " + t.getClass().getName() + ": " + t.getMessage());
+    }
+    hits.clear();
+    try (HttpJdkSolrClient plain = new HttpJdkSolrClient.Builder(urlA).withResponseParser(new XMLResponseParser()).build()) {
+      plain.request(new QueryRequest(new ModifiableSolrParams().set("q", "*:*")), "c1");
+      System.out.println("RESULT plain-request-status-ok hit=" + hits.get(hits.size() - 1));
+    } catch (Throwable t) {
+      System.out.println("RESULT plain-request EXC " + t.getClass().getName() + ": " + t.getMessage());
+    }
+    a.stop(0); b.stop(0);
+    System.exit(0);
+  }
+}

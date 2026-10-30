@@ -1,0 +1,120 @@
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import org.apache.solr.client.solrj.impl.LBSolrClient;
+import org.apache.solr.client.solrj.jetty.CloudJettySolrClient;
+import org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClient;
+import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
+import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
+import org.apache.solr.client.solrj.request.JavaBinRequestWriter;
+import org.apache.solr.client.solrj.request.QueryRequest;
+import org.apache.solr.client.solrj.response.XMLResponseParser;
+import org.apache.solr.common.params.ModifiableSolrParams;
+
+public class Jetty100 {
+  static final String URL = "http://127.0.0.1:1/solr";
+  static int failed;
+
+  interface Body {
+    void run() throws Exception;
+  }
+
+  static void local(String name, Body body) {
+    try {
+      body.run();
+      System.out.println("PASS " + name);
+    } catch (Throwable t) {
+      failed++;
+      System.out.println("FAIL " + name + ": " + t);
+    }
+  }
+
+  static void reachesClient(String name, Body body) {
+    try {
+      body.run();
+      System.out.println("PASS " + name + " (no exception)");
+    } catch (Exception e) {
+      System.out.println("PASS " + name + " (reached client: " + e + ")");
+    } catch (Throwable t) {
+      failed++;
+      System.out.println("FAIL " + name + ": " + t);
+    }
+  }
+
+  static void check(boolean ok, String what) {
+    if (!ok) throw new AssertionError(what);
+  }
+
+  public static void main(String[] args) throws Exception {
+    HttpJettySolrClient existing = new HttpJettySolrClient.Builder(URL).build();
+
+    local("jetty.fluent.chain", () -> {
+      try (HttpJettySolrClient c =
+          new HttpJettySolrClient.Builder(URL)
+              .withBaseSolrUrl(URL)
+              .withRequestWriter(new JavaBinRequestWriter())
+              .withResponseParser(new XMLResponseParser())
+              .withDefaultCollection("c1")
+              .withFollowRedirects(false)
+              .withTheseParamNamesInTheUrl(Set.of("shards"))
+              .withMaxConnectionsPerHost(4)
+              .withIdleTimeout(5, TimeUnit.SECONDS)
+              .withConnectionTimeout(10, TimeUnit.SECONDS)
+              .withRequestTimeout(30, TimeUnit.SECONDS)
+              .withBasicAuthCredentials("u", "p")
+              .useHttp1_1(true)
+              .build()) {
+        check(c != null, "built");
+      }
+    });
+
+    local("jetty.withOptionalBasicAuth", () -> {
+      try (HttpJettySolrClient c =
+          new HttpJettySolrClient.Builder(URL).withOptionalBasicAuthCredentials("u:p").build()) {
+        check(c != null, "built");
+      }
+    });
+
+    local("jetty.builderInstance.returnsBaseBuilder", () -> {
+      org.apache.solr.client.solrj.impl.HttpSolrClientBuilderBase<?, ?> b = existing.builder();
+      try (org.apache.solr.client.solrj.impl.HttpSolrClientBase c = b.withBaseSolrUrl(URL).build()) {
+        check(c != null, "built");
+      }
+    });
+
+    local("lb.jettyCtorAndGetter", () -> {
+      LBJettySolrClient.Builder lbb = new LBJettySolrClient.Builder(existing, new LBSolrClient.Endpoint(URL));
+      check(lbb.getSolrClient() == existing, "lb getSolrClient returns supplied client");
+      try (LBSolrClient lb = lbb.build()) {
+        check(lb != null, "lb built");
+      }
+    });
+
+    reachesClient("lb.jettyRequestDispatch", () -> {
+      try (LBSolrClient lb = new LBJettySolrClient.Builder(existing, new LBSolrClient.Endpoint(URL)).build()) {
+        lb.request(new QueryRequest(new ModifiableSolrParams().set("q", "*:*")), "c1");
+      }
+    });
+
+    local("concurrent.jettyBuilder.ctorAndGetter", () -> {
+      ConcurrentUpdateJettySolrClient.Builder cb = new ConcurrentUpdateJettySolrClient.Builder(URL, existing);
+      check(cb.getClient() == existing, "concurrent getClient returns supplied client");
+      ConcurrentUpdateJettySolrClient.Builder cb3 = new ConcurrentUpdateJettySolrClient.Builder(URL, existing, true);
+      check(cb3.getClient() == existing, "concurrent getClient (3-arg) returns supplied client");
+    });
+
+    local("cloud.jettyWithHttpClient.ownership", () -> {
+      try (org.apache.solr.client.solrj.impl.CloudHttp2SolrClient cloud = new CloudJettySolrClient.Builder(List.of(URL)).withHttpClient(existing).build()) {
+        check(cloud.getHttpClient() == existing, "cloud getHttpClient returns supplied client");
+      }
+    });
+
+    reachesClient("solrRequest.processWithBaseUrl", () -> {
+      new QueryRequest(new ModifiableSolrParams().set("q", "*:*")).processWithBaseUrl(existing, URL, null);
+    });
+
+    existing.close();
+    System.out.println(failed == 0 ? "COHORT OK" : "COHORT FAILED " + failed);
+    System.exit(failed == 0 ? 0 : 1);
+  }
+}

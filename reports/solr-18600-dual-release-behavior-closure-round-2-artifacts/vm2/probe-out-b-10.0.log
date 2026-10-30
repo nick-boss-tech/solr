@@ -1,0 +1,7 @@
+RESULT legacy-concurrentUpdate-identity OK true
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+RESULT legacy-cloud-withHttpClient-identity OK true
+RESULT legacy-lb-ctor-identity OK true
+RESULT legacy-provider-ctor-identity OK true

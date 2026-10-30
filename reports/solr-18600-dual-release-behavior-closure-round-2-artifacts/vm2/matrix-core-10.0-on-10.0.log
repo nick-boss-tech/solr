@@ -1,0 +1,16 @@
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+PASS jdk.fluent.chain
+PASS jdk.fluent.basicAuth
+PASS jdk.withHttpClient.typedAsJdk
+PASS jdk.builder.instance.returnsBaseBuilder
+PASS cloud.withHttpClient.ownership
+PASS cloud.withHttpClientBuilder
+PASS cloud.withInternalClientBuilder
+PASS provider.ctorAndGetter
+PASS lb.ctorAndGetter
+PASS lb.requestDispatch (reached client: org.apache.solr.client.solrj.SolrServerException: No live SolrServers available to handle this request)
+PASS concurrent.builder.ctorAndGetter
+PASS solrRequest.processWithBaseUrl (reached client: java.net.ConnectException)
+COHORT OK

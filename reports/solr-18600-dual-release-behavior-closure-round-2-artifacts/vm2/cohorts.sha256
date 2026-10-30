@@ -1,0 +1,11 @@
+bb556d4f7e74cae507270dae0f96ab2f008e12af75457973901ec45efadbf4eb  cohorts/core-10.0/Cohort100$1.class
+e5169bed617d4944d3bc14205fcc7b5ee9cf3015ee6b14e061da48fd77ed304e  cohorts/core-10.0/Cohort100$2.class
+509bc703c57bde386aae56b051b19289efaa56ac1fb1cbaf70acfa8fe367a6ba  cohorts/core-10.0/Cohort100$Body.class
+24df2cbd11f36aafbda6798aa4574f3e9720e51c5a413c3b755cc59683cc10b0  cohorts/core-10.0/Cohort100.class
+63596a1c9537c4dc3c46a0cfc182c41ca4cb0b0d4845facaa245188498111479  cohorts/core-10.1/Cohort101$1.class
+d7c2b439fe19c9bea12c05a8e3dfd3e52f393e58052dcda2d74d0b2ea8dddae6  cohorts/core-10.1/Cohort101$Body.class
+fc9a00fcba0a1c921a6a5d404ee0b73b53f16ef62db546759b5ef769bc30c844  cohorts/core-10.1/Cohort101.class
+14973e1682ea1847aca2de5a63a539c3f934c62dee8f026bc54eb516da65f8f4  cohorts/jetty-10.0/Jetty100$Body.class
+e5de7aefc9d80e35ec749e925c7b265837795d321a78a35454534c0fccba1e80  cohorts/jetty-10.0/Jetty100.class
+803acf6acd4673a614cae246edce242fd110064632a098062112d27de5624644  cohorts/jetty-10.1/Jetty101$Body.class
+e4e2061f79e480802f784af291925faf3df66e28048baf261b86624b6ad2026c  cohorts/jetty-10.1/Jetty101.class

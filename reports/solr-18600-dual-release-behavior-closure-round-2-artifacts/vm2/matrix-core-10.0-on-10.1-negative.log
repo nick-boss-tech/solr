@@ -1,0 +1,2 @@
+Error: Unable to initialize main class Cohort100
+Caused by: java.lang.NoClassDefFoundError: org/apache/solr/client/solrj/impl/HttpSolrClientBase

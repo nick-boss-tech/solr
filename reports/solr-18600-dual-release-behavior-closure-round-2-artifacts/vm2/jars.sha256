@@ -1,0 +1,9 @@
+2e111ea260a4748b3944aa95c47bf8885004f58fcf10808d642821e8d8cb7819  build/solr-solrj-final.jar
+eba144a935fb4a200420a302c50e22b90d779f86281a0de73c1ba1173d576aee  /workspace/poc/solr-10-binary-break/lib/10.0.0/solr-api-10.0.0.jar
+59178b49e43ffed3d4845b73c0b3302bd77e1b0e3c10c5c4550ba8499bdb3fac  /workspace/poc/solr-10-binary-break/lib/10.0.0/solr-solrj-10.0.0.jar
+bdabdf9200c2f9a0be586cfe0b56491c11ef40c39594fd6841c51007458d1e0d  /workspace/poc/solr-10-binary-break/lib/10.1.0/solr-api-10.1.0.jar
+115fcfbe1ed8ce04f7da8e200d20ce9105a567b40d6ec33727fcbd0667118bb4  /workspace/poc/solr-10-binary-break/lib/10.1.0/solr-solrj-10.1.0.jar
+19a6252b25fbb96987fa534c72605e8093d03f972ffeafee5f9361e2f8d8abe3  /workspace/gates/logs/vm2/solr18600-additive/mods/10.0.0/solr-solrj-jetty-10.0.0.jar
+449f6af2c15b6c667a7a6d382d5f7fe8e382ebb8a5ccb5b2c42513e187d8bda9  /workspace/gates/logs/vm2/solr18600-additive/mods/10.0.0/solr-solrj-zookeeper-10.0.0.jar
+0723d41eee194758945caea301d5fb36729934b0879217a153ea3fbc7b6ccf3c  /workspace/gates/logs/vm2/solr18600-additive/mods/10.1.0/solr-solrj-jetty-10.1.0.jar
+fb8463ea8b8efd8ae047d660a32a17667498ac5aefdc598f5bfa40f1d9416a4f  /workspace/gates/logs/vm2/solr18600-additive/mods/10.1.0/solr-solrj-zookeeper-10.1.0.jar
