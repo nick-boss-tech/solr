@@ -23,7 +23,6 @@ import static org.apache.solr.common.params.CommonParams.ACTION;
 import static org.apache.solr.common.params.CommonParams.PATH;
 import static org.apache.solr.common.params.CoreAdminParams.CORE;
 import static org.apache.solr.common.params.CoreAdminParams.CORE_NODE_NAME;
-import static org.apache.solr.common.params.CoreAdminParams.NAME;
 import static org.apache.solr.common.params.CoreAdminParams.RANGES;
 import static org.apache.solr.common.params.CoreAdminParams.TARGET_CORE;
 
@@ -64,9 +63,7 @@ public class V2CoreAPIMappingTest extends V2ApiMappingTest<CoreAdminHandler> {
     apiBag.registerObject(new SplitCoreAPI(handler));
     apiBag.registerObject(new RequestCoreRecoveryAPI(handler));
     apiBag.registerObject(new PrepareCoreRecoveryAPI(handler));
-    apiBag.registerObject(new RequestApplyCoreUpdatesAPI(handler));
     apiBag.registerObject(new RequestSyncShardAPI(handler));
-    apiBag.registerObject(new RequestBufferUpdatesAPI(handler));
   }
 
   @Test
@@ -132,29 +129,11 @@ public class V2CoreAPIMappingTest extends V2ApiMappingTest<CoreAdminHandler> {
   }
 
   @Test
-  public void testApplyCoreUpdatesAllParams() throws Exception {
-    final SolrParams v1Params =
-        captureConvertedV1Params("/cores/coreName", "POST", "{\"request-apply-updates\": {}}");
-
-    assertEquals("requestapplyupdates", v1Params.get(ACTION));
-    assertEquals("coreName", v1Params.get(NAME));
-  }
-
-  @Test
   public void testSyncShardAllParams() throws Exception {
     final SolrParams v1Params =
         captureConvertedV1Params("/cores/coreName", "POST", "{\"request-sync-shard\": {}}");
 
     assertEquals("requestsyncshard", v1Params.get(ACTION));
     assertEquals("coreName", v1Params.get(CORE));
-  }
-
-  @Test
-  public void testRequestBufferUpdatesAllParams() throws Exception {
-    final SolrParams v1Params =
-        captureConvertedV1Params("/cores/coreName", "POST", "{\"request-buffer-updates\": {}}");
-
-    assertEquals("requestbufferupdates", v1Params.get(ACTION));
-    assertEquals("coreName", v1Params.get(NAME));
   }
 }
