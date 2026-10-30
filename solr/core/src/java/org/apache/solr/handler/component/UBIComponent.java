@@ -28,7 +28,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -392,7 +391,7 @@ public class UBIComponent extends SearchComponent implements SolrCoreAware {
     }
     StringBuilder sb = new StringBuilder();
 
-    Set<String> fields = Collections.singleton(schema.getUniqueKeyField().getName());
+    Set<String> fields = Set.of(schema.getUniqueKeyField().getName());
     for (DocIterator iter = dl.iterator(); iter.hasNext(); ) {
       sb.append(schema.printableUniqueKey(searcher.getDocFetcher().doc(iter.nextDoc(), fields)))
           .append(',');
