@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.OAuthStateHolderTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:04.723Z" hostname="localhost" time="0.001">
+  <properties/>
+  <testcase name="WHEN authenticate THEN AuthenticationStarted is emitted[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.OAuthStateHolderTest" time="0.001"/>
+  <testcase name="WHEN unexpected error during authenticate THEN error state is set and emitted[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.OAuthStateHolderTest" time="0.0"/>
+  <testcase name="WHEN authentication succeeds THEN Authenticated is emitted[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.OAuthStateHolderTest" time="0.0"/>
+  <testcase name="WHEN authentication fails THEN AuthenticationFailed is emitted[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.OAuthStateHolderTest" time="0.0"/>
+  <testcase name="WHEN unauthorized THEN error is mapped to InvalidCredentialsException[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.OAuthStateHolderTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

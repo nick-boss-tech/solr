@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:07.157Z" hostname="localhost" time="0.001">
+  <properties/>
+  <testcase name="testShowsFieldsAndButtons[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.0"/>
+  <testcase name="testAdvancedOptionsAreHiddenUntilOpened[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.0"/>
+  <testcase name="testShowsInlineErrorWhenNameExists[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.001"/>
+  <testcase name="testCreateIsDisabledWithoutAName[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.0"/>
+  <testcase name="testSelectsConfigsetWhenInitiallyEmptyListIsLoaded[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.0"/>
+  <testcase name="testDefaultsAndShardStepperFeedCreate[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.0"/>
+  <testcase name="testCreatePassesTheTypedValuesAndAdvancedRouter[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.0"/>
+  <testcase name="testRejectsNamesTheServerRejects[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.0"/>
+  <testcase name="testRejectsPullOnlyCollection[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.0"/>
+  <testcase name="testRejectsMalformedProperties[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionFormTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

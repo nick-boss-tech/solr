@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionErrorsTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:07.157Z" hostname="localhost" time="0.0">
+  <properties/>
+  <testcase name="testNameExistsShowsTheNameError[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionErrorsTest" time="0.0"/>
+  <testcase name="testFailureWithoutMessageShowsTheFallback[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionErrorsTest" time="0.0"/>
+  <testcase name="testFailureWithMessageShowsTheServerMessage[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.collections.CreateCollectionErrorsTest" time="0.0"/>
+  <system-out><![CDATA[Accessing `memory` via `wasmExports` is deprecated. Use `kotlin.wasm.unsafe.wasmMemory` or update dependencies. Read more: https://kotl.in/vr3szr]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

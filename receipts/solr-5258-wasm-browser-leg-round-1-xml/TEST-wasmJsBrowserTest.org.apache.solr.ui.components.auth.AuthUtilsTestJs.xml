@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTestJs" tests="4" skipped="1" failures="0" errors="0" timestamp="2026-10-30T19:58:04.721Z" hostname="localhost" time="0.001">
+  <properties/>
+  <testcase name="WHEN generate redirect URI with defaults THEN redirect URI appends callback to the end[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTestJs" time="0.0"/>
+  <testcase name="WHEN generate redirect URI with defaults THEN no double slash exists[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTestJs" time="0.0"/>
+  <testcase name="WHEN generate redirect URI THEN redirect URI contains current origin[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTestJs" time="0.0"/>
+  <testcase name="WHEN generate redirect URI with custom path THEN only custom path included[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTestJs" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

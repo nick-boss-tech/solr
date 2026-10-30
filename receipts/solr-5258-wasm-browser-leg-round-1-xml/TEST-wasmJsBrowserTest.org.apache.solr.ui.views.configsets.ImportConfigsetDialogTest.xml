@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.views.configsets.ImportConfigsetDialogTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:07.159Z" hostname="localhost" time="0.001">
+  <properties/>
+  <testcase name="WHEN configset file selected THEN import button enabled[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.configsets.ImportConfigsetDialogTest" time="0.0"/>
+  <testcase name="WHEN configset file selected THEN configset name autofilled with modified file name[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.configsets.ImportConfigsetDialogTest" time="0.0"/>
+  <testcase name="GIVEN configset file selected WHEN clearing configset file THEN import button disabled[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.configsets.ImportConfigsetDialogTest" time="0.0"/>
+  <testcase name="GIVEN configset file selected WHEN clearing configset name THEN import button disabled[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.configsets.ImportConfigsetDialogTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

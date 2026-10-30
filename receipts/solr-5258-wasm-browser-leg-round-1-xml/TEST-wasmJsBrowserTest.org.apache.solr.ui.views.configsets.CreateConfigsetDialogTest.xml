@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.views.configsets.CreateConfigsetDialogTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:07.159Z" hostname="localhost" time="0.0">
+  <properties/>
+  <testcase name="WHEN configset name typed THEN creation button enabled[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.configsets.CreateConfigsetDialogTest" time="0.0"/>
+  <testcase name="GIVEN configset name WHEN clearing configset name THEN creation button disabled[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.configsets.CreateConfigsetDialogTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

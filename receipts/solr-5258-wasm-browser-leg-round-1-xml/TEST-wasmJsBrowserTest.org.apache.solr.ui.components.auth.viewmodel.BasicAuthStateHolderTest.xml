@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.BasicAuthStateHolderTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:04.723Z" hostname="localhost" time="0.0">
+  <properties/>
+  <testcase name="GIVEN valid credentials WHEN authenticate THEN Authenticated with BasicAuthMethod emitted[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.BasicAuthStateHolderTest" time="0.0"/>
+  <testcase name="GIVEN invalid credentials WHEN authenticate THEN invalid credentials emitted[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.BasicAuthStateHolderTest" time="0.0"/>
+  <testcase name="GIVEN error state WHEN credentials change THEN error reset emitted[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.viewmodel.BasicAuthStateHolderTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

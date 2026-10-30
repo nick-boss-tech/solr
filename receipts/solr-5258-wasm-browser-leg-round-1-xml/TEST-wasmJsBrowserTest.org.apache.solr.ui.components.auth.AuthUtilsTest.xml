@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:04.711Z" hostname="localhost" time="0.01">
+  <properties/>
+  <testcase name="WHEN generate code verifier THEN length is CODE_VERIFIER_LENGTH[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTest" time="0.002"/>
+  <testcase name="WHEN generate code verifier THEN used characters in CODE_VERIFIER_CHARSET[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTest" time="0.0"/>
+  <testcase name="WHEN generate OAuth state THEN length is STATE_LENGTH[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTest" time="0.0"/>
+  <testcase name="WHEN generate OAuth state THEN used characters in STATE_CHARSET[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTest" time="0.0"/>
+  <testcase name="GIVEN valid code verifier WHEN generate code challenge THEN all output characters are URL safe[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTest" time="0.0"/>
+  <testcase name="GIVEN valid code verifier WHEN generate hashed code challenge THEN all characters are URL safe[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTest" time="0.0"/>
+  <testcase name="GIVEN valid fixed code verifier WHEN generate hashed code challenge THEN no paddings included[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.auth.AuthUtilsTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

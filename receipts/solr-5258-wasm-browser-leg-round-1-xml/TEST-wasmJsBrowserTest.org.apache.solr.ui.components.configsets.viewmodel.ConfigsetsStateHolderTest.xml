@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.components.configsets.viewmodel.ConfigsetsStateHolderTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:04.725Z" hostname="localhost" time="0.0">
+  <properties/>
+  <testcase name="GIVEN configsets WHEN initialized THEN configsets fetched[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.configsets.viewmodel.ConfigsetsStateHolderTest" time="0.0"/>
+  <testcase name="GIVEN configsets WHEN configsets fetched THEN configsets sorted[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.configsets.viewmodel.ConfigsetsStateHolderTest" time="0.0"/>
+  <testcase name="GIVEN configsets WHEN configset selected THEN selectedConfigset updated[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.configsets.viewmodel.ConfigsetsStateHolderTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.components.environment.viewmodel.EnvironmentStateHolderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:04.726Z" hostname="localhost" time="0.0">
+  <properties/>
+  <testcase name="GIVEN system data and java properties WHEN initialized THEN state contains them[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.environment.viewmodel.EnvironmentStateHolderTest" time="0.0"/>
+  <testcase name="GIVEN loaded state WHEN fetchSystemData THEN state contains new data[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.environment.viewmodel.EnvironmentStateHolderTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

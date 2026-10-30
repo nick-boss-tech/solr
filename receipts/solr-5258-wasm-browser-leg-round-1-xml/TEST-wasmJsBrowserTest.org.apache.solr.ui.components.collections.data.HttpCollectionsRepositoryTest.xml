@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.components.collections.data.HttpCollectionsRepositoryTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:04.724Z" hostname="localhost" time="0.001">
+  <properties/>
+  <testcase name="testPostsTheCollectionAsARequestBody[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.collections.data.HttpCollectionsRepositoryTest" time="0.0"/>
+  <testcase name="testMapsTheDuplicateNameErrorToNameExists[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.collections.data.HttpCollectionsRepositoryTest" time="0.0"/>
+  <testcase name="testAliasConflictIsNotMappedToNameExists[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.collections.data.HttpCollectionsRepositoryTest" time="0.0"/>
+  <testcase name="testKeepsTheServerMessageForOtherFailures[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.collections.data.HttpCollectionsRepositoryTest" time="0.0"/>
+  <testcase name="testFailureWithoutAJsonBodyHasNoMessage[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.collections.data.HttpCollectionsRepositoryTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

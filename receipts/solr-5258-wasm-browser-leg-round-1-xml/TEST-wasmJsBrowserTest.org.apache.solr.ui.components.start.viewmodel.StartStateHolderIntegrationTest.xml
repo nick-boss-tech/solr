@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.components.start.viewmodel.StartStateHolderIntegrationTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-30T19:58:04.726Z" hostname="localhost" time="0.002">
+  <properties/>
+  <testcase name="GIVEN initial state WHEN connect THEN use default Solr URL[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.start.viewmodel.StartStateHolderIntegrationTest" time="0.002"/>
+  <testcase name="GIVEN invalid URL WHEN connect THEN invalidUrlError[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.start.viewmodel.StartStateHolderIntegrationTest" time="0.0"/>
+  <testcase name="GIVEN valid Solr URL WHEN connect THEN connection request sent[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.start.viewmodel.StartStateHolderIntegrationTest" time="0.0"/>
+  <testcase name="GIVEN a solr instance with no auth WHEN connect THEN event Connected[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.start.viewmodel.StartStateHolderIntegrationTest" time="0.0"/>
+  <testcase name="GIVEN input error WHEN input changes THEN error resets[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.components.start.viewmodel.StartStateHolderIntegrationTest" time="0.0"/>
+  <system-out><![CDATA[kotlin-logging: initializing... active logger factory: DirectLoggerFactory]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

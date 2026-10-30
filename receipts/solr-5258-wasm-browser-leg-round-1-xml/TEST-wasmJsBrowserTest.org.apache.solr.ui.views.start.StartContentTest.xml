@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wasmJsBrowserTest.org.apache.solr.ui.views.start.StartContentTest" tests="5" skipped="1" failures="0" errors="0" timestamp="2026-10-30T19:58:07.160Z" hostname="localhost" time="0.001">
+  <properties/>
+  <testcase name="WHEN initialized THEN input is empty[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.start.StartContentTest" time="0.001"/>
+  <testcase name="GIVEN input error THEN error text shown[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.start.StartContentTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="WHEN on connect clicked THEN onConnect called[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.start.StartContentTest" time="0.0"/>
+  <testcase name="WHEN isConnecting THEN connect inputs disabled[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.start.StartContentTest" time="0.0"/>
+  <testcase name="WHEN isConnecting THEN loading indicator displayed[wasmJs, browser, ChromeHeadless156.0.8078.4, Linux0.0.0]" classname="wasmJsBrowserTest.org.apache.solr.ui.views.start.StartContentTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
