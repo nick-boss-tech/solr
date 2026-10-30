@@ -1,6 +1,6 @@
 # Assignment: run the wasm browser test leg for PR #5258 (SOLR-17914), round 1
 
-Status: OPEN
+Status: HANDED to vm6 (ui host), 2026-10-30. vm5 released its claim: three runs stopped at compileTestDevelopmentExecutableKotlinWasmJs on VM reboots; see claims/solr-5258-wasm-browser-leg-round-1-vm5.md.
 Capability tags: [ui]. Intended host: any host with the ui capability, a local Chrome or Chromium, and an npm route that can fetch from registry.yarnpkg.com. Posted by the phone agent at Nick's direction, 2026-10-30.
 
 ## Context
