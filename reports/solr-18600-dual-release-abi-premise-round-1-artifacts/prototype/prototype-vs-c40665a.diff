@@ -1,0 +1,319 @@
+diff --git a/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java b/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java
+index 056218c..de80b1b 100644
+--- a/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java
++++ b/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java
+@@ -346,6 +346,10 @@ public class HttpJettySolrClient extends HttpSolrClient {
+     httpClient.getProxyConfiguration().addProxy(proxy);
+   }
+ 
++  public void addListenerFactory(HttpListenerFactory factory) {
++    this.listenerFactory.add(factory);
++  }
++
+   @Override
+   public void close() {
+     // we wait for async requests, so far devs don't want to give sugar for this
+@@ -1029,7 +1033,8 @@ public class HttpJettySolrClient extends HttpSolrClient {
+     return asyncTracker.availablePermits();
+   }
+ 
+-  public static class Builder extends BuilderBase<Builder, HttpJettySolrClient> {
++  public static class Builder extends BuilderBase<Builder, HttpJettySolrClient>
++      implements LegacySSLConfigAccess {
+ 
+     private HttpClient httpClient;
+ 
+@@ -1093,6 +1098,7 @@ public class HttpJettySolrClient extends HttpSolrClient {
+       return this;
+     }
+ 
++    @Override
+     public BuilderBase<Builder, HttpJettySolrClient> withSSLConfig(SSLConfig sslConfig) {
+       this.sslConfig = sslConfig;
+       return this;
+diff --git a/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/LegacySSLConfigAccess.java b/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/LegacySSLConfigAccess.java
+new file mode 100644
+index 0000000..1f5392f
+--- /dev/null
++++ b/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/LegacySSLConfigAccess.java
+@@ -0,0 +1,7 @@
++package org.apache.solr.client.solrj.jetty;
++
++import org.apache.solr.client.solrj.impl.HttpSolrClientBuilderBase;
++
++interface LegacySSLConfigAccess {
++  HttpSolrClientBuilderBase<?, ?> withSSLConfig(SSLConfig sslConfig);
++}
+diff --git a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/CloudHttp2SolrClient.java b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/CloudHttp2SolrClient.java
+index 16c8344..9098884 100644
+--- a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/CloudHttp2SolrClient.java
++++ b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/CloudHttp2SolrClient.java
+@@ -103,7 +103,7 @@ public class CloudHttp2SolrClient extends CloudSolrClient {
+   }
+ 
+   @Override
+-  public HttpSolrClientBase getHttpClient() {
+-    return myClient;
++  public HttpSolrClient getHttpClient() {
++    return (HttpSolrClient) myClient;
+   }
+ }
+diff --git a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/CloudSolrClient.java b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/CloudSolrClient.java
+index 1d58b42..599e8d7 100644
+--- a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/CloudSolrClient.java
++++ b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/CloudSolrClient.java
+@@ -90,7 +90,7 @@ import org.slf4j.MDC;
+  * core or node becomes unavailable. It's able to know where to route requests due to its knowledge
+  * of the SolrCloud "cluster state".
+  */
+-public abstract class CloudSolrClient extends SolrClient {
++public abstract class CloudSolrClient extends SolrClient implements LegacyAccessors.HttpClientAccess {
+ 
+   public static final String STATE_VERSION = "_stateVer_";
+   static final int DEFAULT_STATE_REFRESH_PARALLELISM = 5;
+@@ -226,7 +226,7 @@ public abstract class CloudSolrClient extends SolrClient {
+   }
+ 
+   /** The HttpSolrClient that underlies this one. It has no baseUrl or default collection. */
+-  public abstract HttpSolrClientBase getHttpClient();
++  public abstract HttpSolrClient getHttpClient();
+ 
+   public ResponseParser getParser() {
+     return getLbClient().getParser();
+@@ -1555,6 +1555,11 @@ public abstract class CloudSolrClient extends SolrClient {
+       return withHttpClientBuilder((HttpSolrClientBuilderBase<?, ?>) internalClientBuilder);
+     }
+ 
++    @Deprecated(since = "9.10")
++    public Builder withInternalClientBuilder(HttpSolrClientBuilderBase<?, ?> internalClientBuilder) {
++      return withHttpClientBuilder(internalClientBuilder);
++    }
++
+     public Builder withHttpClientBuilder(HttpSolrClientBuilderBase<?, ?> internalClientBuilder) {
+       if (this.httpClient != null) {
+         throw new IllegalStateException(
+diff --git a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/ConcurrentUpdateBaseSolrClient.java b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/ConcurrentUpdateBaseSolrClient.java
+index 8f3ebea..425769b 100644
+--- a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/ConcurrentUpdateBaseSolrClient.java
++++ b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/ConcurrentUpdateBaseSolrClient.java
+@@ -114,6 +114,10 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
+     private final int queueSize;
+     private final E backdoorE;
+ 
++    public CustomBlockingQueue(int queueSize, int maxConsumers, E backdoorE) {
++      this(queueSize, backdoorE);
++    }
++
+     public CustomBlockingQueue(int queueSize, E backdoorE) {
+       queue = new LinkedBlockingQueue<>();
+       available = new Semaphore(queueSize);
+@@ -710,7 +714,7 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
+   }
+ 
+   /** Constructs {@link ConcurrentUpdateBaseSolrClient} instances from provided configuration. */
+-  public abstract static class Builder {
++  public abstract static class Builder implements LegacyAccessors.ClientAccess {
+     protected long idleTimeoutMillis;
+     protected HttpSolrClientBase client;
+     protected String baseSolrUrl;
+@@ -741,6 +745,14 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
+      *     internally. Callers are responsible for closing the provided client (after closing any
+      *     clients created by this builder)
+      */
++    public Builder(String baseSolrUrl, HttpSolrClient client) {
++      this(baseSolrUrl, (HttpSolrClientBase) client);
++    }
++
++    public Builder(String baseSolrUrl, HttpSolrClient client, boolean closeHttpClient) {
++      this(baseSolrUrl, (HttpSolrClientBase) client, closeHttpClient);
++    }
++
+     public Builder(String baseSolrUrl, HttpSolrClientBase client) {
+       this(baseSolrUrl, client, false);
+     }
+@@ -883,8 +895,8 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
+      */
+     public abstract ConcurrentUpdateBaseSolrClient build();
+ 
+-    public HttpSolrClientBase getClient() {
+-      return client;
++    public HttpSolrClient getClient() {
++      return (HttpSolrClient) client;
+     }
+   }
+ 
+diff --git a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/HttpClusterStateProvider.java b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/HttpClusterStateProvider.java
+index 4f86245..cd5d674 100644
+--- a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/HttpClusterStateProvider.java
++++ b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/HttpClusterStateProvider.java
+@@ -21,8 +21,8 @@ import java.io.IOException;
+ import java.util.List;
+ 
+ /** A CSP that uses Solr HTTP APIs. */
+-public class HttpClusterStateProvider<C extends HttpSolrClientBase>
+-    extends BaseHttpClusterStateProvider {
++public class HttpClusterStateProvider<C extends HttpSolrClient>
++    extends BaseHttpClusterStateProvider implements LegacyAccessors.HttpClientAccess {
+   // formerly known as Http2ClusterStateProvider
+ 
+   final C httpClient;
+@@ -43,6 +43,11 @@ public class HttpClusterStateProvider<C extends HttpSolrClientBase>
+     initConfiguredNodes(solrUrls);
+   }
+ 
++  @SuppressWarnings("unchecked")
++  public HttpClusterStateProvider(List<String> solrUrls, HttpSolrClientBase httpClient) throws Exception {
++    this(solrUrls, (C) httpClient);
++  }
++
+   @Override
+   public void close() throws IOException {
+     super.close();
+diff --git a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/HttpSolrClient.java b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/HttpSolrClient.java
+index 9c8466e..1293934 100644
+--- a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/HttpSolrClient.java
++++ b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/HttpSolrClient.java
+@@ -28,6 +28,11 @@ import org.apache.solr.common.params.CoreAdminParams;
+ import org.apache.solr.common.params.ShardParams;
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
++import java.util.concurrent.ExecutorService;
++import java.util.concurrent.TimeUnit;
++import org.apache.solr.client.solrj.SolrRequest;
++import org.apache.solr.client.solrj.request.RequestWriter;
++import org.apache.solr.client.solrj.response.ResponseParser;
+ 
+ /**
+  * A simple/direct {@link SolrClient} using HTTP.
+@@ -131,5 +136,85 @@ public abstract class HttpSolrClient extends HttpSolrClientBase {
+ 
+     @Override
+     public abstract C build();
++
++    @Override
++    public B withHttpClient(C httpSolrClient) {
++      return super.withHttpClient(httpSolrClient);
++    }
++
++    @Override
++    public B withBaseSolrUrl(String baseSolrUrl) {
++      return super.withBaseSolrUrl(baseSolrUrl);
++    }
++
++    @Override
++    public B withRequestWriter(RequestWriter requestWriter) {
++      return super.withRequestWriter(requestWriter);
++    }
++
++    @Override
++    public B withResponseParser(ResponseParser responseParser) {
++      return super.withResponseParser(responseParser);
++    }
++
++    @Override
++    public B withDefaultCollection(String defaultCoreOrCollection) {
++      return super.withDefaultCollection(defaultCoreOrCollection);
++    }
++
++    @Override
++    public B withFollowRedirects(boolean followRedirects) {
++      return super.withFollowRedirects(followRedirects);
++    }
++
++    @Override
++    public B withExecutor(ExecutorService executor) {
++      return super.withExecutor(executor);
++    }
++
++    @Override
++    public B withBasicAuthCredentials(String user, String pass) {
++      return super.withBasicAuthCredentials(user, pass);
++    }
++
++    @Override
++    public B withTheseParamNamesInTheUrl(Set<String> urlParamNames) {
++      return super.withTheseParamNamesInTheUrl(urlParamNames);
++    }
++
++    @Override
++    public B withMaxConnectionsPerHost(int max) {
++      return super.withMaxConnectionsPerHost(max);
++    }
++
++    @Override
++    public B withIdleTimeout(long idleConnectionTimeout, TimeUnit unit) {
++      return super.withIdleTimeout(idleConnectionTimeout, unit);
++    }
++
++    @Override
++    public B withConnectionTimeout(long connectionTimeout, TimeUnit unit) {
++      return super.withConnectionTimeout(connectionTimeout, unit);
++    }
++
++    @Override
++    public B withRequestTimeout(long requestTimeout, TimeUnit unit) {
++      return super.withRequestTimeout(requestTimeout, unit);
++    }
++
++    @Override
++    public B useHttp1_1(boolean useHttp1_1) {
++      return super.useHttp1_1(useHttp1_1);
++    }
++
++    @Override
++    public B withProxyConfiguration(String host, int port, boolean isSocks4, boolean isSecure) {
++      return super.withProxyConfiguration(host, port, isSocks4, isSecure);
++    }
++
++    @Override
++    public B withOptionalBasicAuthCredentials(String credentials) {
++      return super.withOptionalBasicAuthCredentials(credentials);
++    }
+   }
+ }
+diff --git a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java
+index 5bb8174..0ca47bd 100644
+--- a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java
++++ b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java
+@@ -169,7 +169,7 @@ public abstract class LBSolrClient extends SolrClient {
+     solrQuery.setDistrib(false);
+   }
+ 
+-  public static class Builder<C extends HttpSolrClientBase> {
++  public static class Builder<C extends HttpSolrClient> implements LegacyAccessors.SolrClientAccess {
+ 
+     private final C solrClient;
+     private final Endpoint[] solrEndpoints;
+@@ -177,6 +177,11 @@ public abstract class LBSolrClient extends SolrClient {
+         TimeUnit.MILLISECONDS.convert(60, TimeUnit.SECONDS); // 1 minute between checks
+     protected String defaultCollection;
+ 
++    @SuppressWarnings("unchecked")
++    public Builder(HttpSolrClientBase solrClient, Endpoint... endpoints) {
++      this((C) solrClient, endpoints);
++    }
++
+     public Builder(C solrClient, Endpoint... endpoints) {
+       this.solrClient = solrClient;
+       this.solrEndpoints = endpoints;
+diff --git a/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LegacyAccessors.java b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LegacyAccessors.java
+new file mode 100644
+index 0000000..a92e504
+--- /dev/null
++++ b/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LegacyAccessors.java
+@@ -0,0 +1,15 @@
++package org.apache.solr.client.solrj.impl;
++
++final class LegacyAccessors {
++  interface HttpClientAccess {
++    HttpSolrClientBase getHttpClient();
++  }
++
++  interface ClientAccess {
++    HttpSolrClientBase getClient();
++  }
++
++  interface SolrClientAccess {
++    HttpSolrClientBase getSolrClient();
++  }
++}

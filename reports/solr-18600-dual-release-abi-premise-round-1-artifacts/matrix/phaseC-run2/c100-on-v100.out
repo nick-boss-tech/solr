@@ -1,0 +1,18 @@
+ROW jdk.withConnectionTimeout.build OK
+ROW jdk.withRequestTimeout.build OK
+ROW jdk.withHttpClient.jdk OK
+ROW jdk.withHttpClient.base OK
+ROW jdk.builderBridge.build OK
+ROW jdk.requestWithBaseUrl REACHED java.net.ConnectException: null
+ROW jetty.withConnectionTimeout.build OK
+ROW cloud.getHttpClient OK
+ROW cloud.withHttpClient.base OK
+ROW cloud.withHttpClientBuilder OK
+ROW clusterStateProvider.ctor.getHttpClient OK
+ROW concurrentUpdate.builder.getClient OK
+ROW lb.builder.getSolrClient OK
+ROW solrRequest.processWithBaseUrl REACHED java.net.ConnectException: null
+ROW jetty.withSSLConfig.build OK
+ROW cloud.withInternalClientBuilder OK
+ROW jetty.addListenerFactory OK
+exit=0

@@ -1,0 +1,12 @@
+8a80a46babb4d1d2e7746bf3ff93797059eb56e59a7b311582c00188aec72e68  base/solr/solrj/build/libs/solr-solrj-10.2.0-SNAPSHOT.jar
+717a5fd066d53cb248222ec38e4e132092c58f26e69e4b44cdeea0ed60051012  base/solr/solrj-jetty/build/libs/solr-solrj-jetty-10.2.0-SNAPSHOT.jar
+2bff6b88e76c48ea6b2220c95d9fb4e50a1536071bc97b612c3d4fd372fba43f  base/solr/solrj-zookeeper/build/libs/solr-solrj-zookeeper-10.2.0-SNAPSHOT.jar
+c53a41d4b0d7d84a452b277a37206a4c3de6325d85745b24afcb06fbc1175571  base/solr/api/build/libs/solr-api-10.2.0-SNAPSHOT.jar
+6f8f3a4090a80cd843a59841fd6afd8bd7facb49a9d60aa70f10b11afbf5289d  fork/solr/solrj/build/libs/solr-solrj-10.2.0-SNAPSHOT.jar
+eef7ed6c0ac4782d769973acca363a6defa1465bf5699dfbe1d5cb14fb3f64e7  fork/solr/solrj-jetty/build/libs/solr-solrj-jetty-10.2.0-SNAPSHOT.jar
+c8ca6e52288d403e6f5b7ff1bee8f26900ad82bec87ff38dc2c74324e22f0230  fork/solr/solrj-zookeeper/build/libs/solr-solrj-zookeeper-10.2.0-SNAPSHOT.jar
+9660b00723b30f2673165920852c9b21fb61f4fee28cc4a9a81a6c17295755e2  fork/solr/api/build/libs/solr-api-10.2.0-SNAPSHOT.jar
+29c7520955e74e5b707615eaf73600bedc1ee1d1842f379facf7a0cc300a661a  proto/solr/solrj/build/libs/solr-solrj-10.2.0-SNAPSHOT.jar
+d4378d99c9e3366120d7b86e290cde90696f0068cfe6ca377e807282dab88419  proto/solr/solrj-jetty/build/libs/solr-solrj-jetty-10.2.0-SNAPSHOT.jar
+fba3a064618c25826b996805a69e6e1b0585c7a89a1b1d652de6fae57b6d7ebc  proto/solr/solrj-zookeeper/build/libs/solr-solrj-zookeeper-10.2.0-SNAPSHOT.jar
+9660b00723b30f2673165920852c9b21fb61f4fee28cc4a9a81a6c17295755e2  proto/solr/api/build/libs/solr-api-10.2.0-SNAPSHOT.jar

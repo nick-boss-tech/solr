@@ -1,0 +1,21 @@
+repositories { mavenCentral() }
+def cohorts = ['v100': '10.0.0', 'v101': '10.1.0']
+cohorts.each { name, ver ->
+  configurations.create(name)
+  dependencies.add(name, "org.apache.solr:solr-solrj:${ver}")
+  dependencies.add(name, "org.apache.solr:solr-solrj-jetty:${ver}")
+  dependencies.add(name, "org.apache.solr:solr-solrj-zookeeper:${ver}")
+  dependencies.add(name, "org.apache.solr:solr-api:${ver}")
+}
+tasks.register('resolveCohorts') {
+  doLast {
+    cohorts.each { name, ver ->
+      def out = new File(projectDir, "out/${name}")
+      out.mkdirs()
+      def cfg = configurations.getByName(name)
+      def files = cfg.resolve()
+      new File(out, 'classpath.txt').text = files.collect { it.absolutePath }.join('\n') + '\n'
+      println "${name} ${ver}: ${files.size()} jars"
+    }
+  }
+}

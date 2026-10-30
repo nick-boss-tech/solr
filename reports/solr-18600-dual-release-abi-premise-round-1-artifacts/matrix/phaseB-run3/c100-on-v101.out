@@ -1,0 +1,15 @@
+ROW jdk.withConnectionTimeout.build LINKAGE java.lang.NoSuchMethodError: 'org.apache.solr.client.solrj.impl.HttpSolrClientBuilderBase org.apache.solr.client.solrj.impl.HttpJdkSolrClient$Builder.withConnectionTimeout(long, java.util.concurrent.TimeUnit)'
+ROW jdk.withRequestTimeout.build LINKAGE java.lang.NoSuchMethodError: 'org.apache.solr.client.solrj.impl.HttpSolrClientBuilderBase org.apache.solr.client.solrj.impl.HttpJdkSolrClient$Builder.withRequestTimeout(long, java.util.concurrent.TimeUnit)'
+ROW jdk.withHttpClient.jdk OK
+ROW jdk.withHttpClient.base LINKAGE java.lang.NoClassDefFoundError: org/apache/solr/client/solrj/impl/HttpSolrClientBase
+ROW jdk.builderBridge.build LINKAGE java.lang.NoClassDefFoundError: org/apache/solr/client/solrj/impl/HttpSolrClientBuilderBase
+ROW jdk.requestWithBaseUrl REACHED java.net.ConnectException: null
+ROW jetty.withConnectionTimeout.build LINKAGE java.lang.NoSuchMethodError: 'org.apache.solr.client.solrj.impl.HttpSolrClientBuilderBase org.apache.solr.client.solrj.jetty.HttpJettySolrClient$Builder.withConnectionTimeout(long, java.util.concurrent.TimeUnit)'
+ROW cloud.getHttpClient LINKAGE java.lang.NoSuchMethodError: 'org.apache.solr.client.solrj.impl.HttpSolrClientBase org.apache.solr.client.solrj.impl.CloudHttp2SolrClient.getHttpClient()'
+ROW cloud.withHttpClient.base LINKAGE java.lang.NoClassDefFoundError: org/apache/solr/client/solrj/impl/HttpSolrClientBase
+ROW cloud.withHttpClientBuilder LINKAGE java.lang.NoClassDefFoundError: org/apache/solr/client/solrj/impl/HttpSolrClientBuilderBase
+ROW clusterStateProvider.ctor.getHttpClient LINKAGE java.lang.NoClassDefFoundError: org/apache/solr/client/solrj/impl/HttpSolrClientBase
+ROW concurrentUpdate.builder.getClient LINKAGE java.lang.NoClassDefFoundError: org/apache/solr/client/solrj/impl/HttpSolrClientBase
+ROW lb.builder.getSolrClient LINKAGE java.lang.NoClassDefFoundError: org/apache/solr/client/solrj/impl/HttpSolrClientBase
+ROW solrRequest.processWithBaseUrl LINKAGE java.lang.NoClassDefFoundError: org/apache/solr/client/solrj/impl/HttpSolrClientBase
+exit=0

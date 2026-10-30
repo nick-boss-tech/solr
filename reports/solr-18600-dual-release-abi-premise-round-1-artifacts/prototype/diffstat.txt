@@ -1,0 +1,10 @@
+ .../client/solrj/jetty/HttpJettySolrClient.java    |  8 +-
+ .../client/solrj/jetty/LegacySSLConfigAccess.java  |  7 ++
+ .../client/solrj/impl/CloudHttp2SolrClient.java    |  4 +-
+ .../solr/client/solrj/impl/CloudSolrClient.java    |  9 ++-
+ .../solrj/impl/ConcurrentUpdateBaseSolrClient.java | 18 ++++-
+ .../solrj/impl/HttpClusterStateProvider.java       |  9 ++-
+ .../solr/client/solrj/impl/HttpSolrClient.java     | 85 ++++++++++++++++++++++
+ .../solr/client/solrj/impl/LBSolrClient.java       |  7 +-
+ .../solr/client/solrj/impl/LegacyAccessors.java    | 15 ++++
+ 9 files changed, 151 insertions(+), 11 deletions(-)

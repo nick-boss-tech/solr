@@ -1,0 +1,10 @@
+== v100
+449f6af2c15b6c667a7a6d382d5f7fe8e382ebb8a5ccb5b2c42513e187d8bda9  /workspace/gradle-home/caches/modules-2/files-2.1/org.apache.solr/solr-solrj-zookeeper/10.0.0/b01beee9d9313fbc3ff7d5f9e25935cfb9aedeac/solr-solrj-zookeeper-10.0.0.jar
+19a6252b25fbb96987fa534c72605e8093d03f972ffeafee5f9361e2f8d8abe3  /workspace/gradle-home/caches/modules-2/files-2.1/org.apache.solr/solr-solrj-jetty/10.0.0/40ce3ee11ef0fef3d95aeafc9c8d2fac8c3edabd/solr-solrj-jetty-10.0.0.jar
+59178b49e43ffed3d4845b73c0b3302bd77e1b0e3c10c5c4550ba8499bdb3fac  /workspace/gradle-home/caches/modules-2/files-2.1/org.apache.solr/solr-solrj/10.0.0/14bc98a779223cb982b86744ca3eab5a5d5d0a25/solr-solrj-10.0.0.jar
+eba144a935fb4a200420a302c50e22b90d779f86281a0de73c1ba1173d576aee  /workspace/gradle-home/caches/modules-2/files-2.1/org.apache.solr/solr-api/10.0.0/c865e60dae5851259af260a1d6704dd7b5438cbe/solr-api-10.0.0.jar
+== v101
+0723d41eee194758945caea301d5fb36729934b0879217a153ea3fbc7b6ccf3c  /workspace/gradle-home/caches/modules-2/files-2.1/org.apache.solr/solr-solrj-jetty/10.1.0/527115ebffac932cf77ee3fbb355c56617930d37/solr-solrj-jetty-10.1.0.jar
+fb8463ea8b8efd8ae047d660a32a17667498ac5aefdc598f5bfa40f1d9416a4f  /workspace/gradle-home/caches/modules-2/files-2.1/org.apache.solr/solr-solrj-zookeeper/10.1.0/5b07a44edf0862e3f51ceff81f3ea7be46a7a233/solr-solrj-zookeeper-10.1.0.jar
+115fcfbe1ed8ce04f7da8e200d20ce9105a567b40d6ec33727fcbd0667118bb4  /workspace/gradle-home/caches/modules-2/files-2.1/org.apache.solr/solr-solrj/10.1.0/5eeecf5af9e46b602c51fc3c96731f028d3f27f5/solr-solrj-10.1.0.jar
+bdabdf9200c2f9a0be586cfe0b56491c11ef40c39594fd6841c51007458d1e0d  /workspace/gradle-home/caches/modules-2/files-2.1/org.apache.solr/solr-api/10.1.0/e504badac1720a7b2792165ba38a52c9d5c4e185/solr-api-10.1.0.jar
