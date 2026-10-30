@@ -1,6 +1,6 @@
 # Assignment: PR 2452 UBI context fix, rework and Linux gate
 
-Status: OPEN
+Status: CLAIMED (vm4; claims/pr-2452-ubi-context-rework-vm4-round-1.md, started 2026-10-30T01:50:57Z)
 
 ## Authorization and ownership
 
