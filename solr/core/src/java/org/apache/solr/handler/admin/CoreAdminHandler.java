@@ -60,7 +60,7 @@ import org.apache.solr.handler.admin.api.CreateCoreBackup;
 import org.apache.solr.handler.admin.api.GetNodeCommandStatus;
 import org.apache.solr.handler.admin.api.InstallCoreData;
 import org.apache.solr.handler.admin.api.MergeIndexes;
-import org.apache.solr.handler.admin.api.OverseerOperationAPI;
+import org.apache.solr.handler.admin.api.OverseerOperation;
 import org.apache.solr.handler.admin.api.PrepareCoreRecoveryAPI;
 import org.apache.solr.handler.admin.api.RejoinLeaderElectionAPI;
 import org.apache.solr.handler.admin.api.ReloadCore;
@@ -70,7 +70,7 @@ import org.apache.solr.handler.admin.api.RequestBufferUpdatesAPI;
 import org.apache.solr.handler.admin.api.RequestCoreRecoveryAPI;
 import org.apache.solr.handler.admin.api.RequestSyncShardAPI;
 import org.apache.solr.handler.admin.api.RestoreCore;
-import org.apache.solr.handler.admin.api.SplitCoreAPI;
+import org.apache.solr.handler.admin.api.SplitCore;
 import org.apache.solr.handler.admin.api.SwapCores;
 import org.apache.solr.handler.admin.api.UnloadCore;
 import org.apache.solr.logging.MDCLoggingContext;
@@ -313,8 +313,6 @@ public class CoreAdminHandler extends RequestHandlerBase implements PermissionNa
   public Collection<Api> getApis() {
     final List<Api> apis = new ArrayList<>();
     apis.addAll(AnnotatedApi.getApis(new RejoinLeaderElectionAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new OverseerOperationAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new SplitCoreAPI(this)));
     // Internal APIs
     apis.addAll(AnnotatedApi.getApis(new RequestCoreRecoveryAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new PrepareCoreRecoveryAPI(this)));
@@ -339,7 +337,10 @@ public class CoreAdminHandler extends RequestHandlerBase implements PermissionNa
         SwapCores.class,
         RenameCore.class,
         MergeIndexes.class,
-        GetNodeCommandStatus.class);
+        GetNodeCommandStatus.class,
+        SplitCore.class,
+        // Internal APIs
+        OverseerOperation.class);
   }
 
   public interface CoreAdminOp {

@@ -62,23 +62,6 @@ public class V2NodeAPIMappingTest extends SolrTestCaseJ4 {
   }
 
   @Test
-  public void testOverseerOpApiAllProperties() throws Exception {
-    final SolrParams v1Params =
-        captureConvertedCoreV1Params(
-            "/node",
-            "POST",
-            "{"
-                + "\"overseer-op\": {"
-                + "\"op\": \"asdf\", "
-                + "\"electionNode\": \"someNodeName\""
-                + "}}");
-
-    assertEquals("overseerop", v1Params.get(ACTION));
-    assertEquals("asdf", v1Params.get("op"));
-    assertEquals("someNodeName", v1Params.get("electionNode"));
-  }
-
-  @Test
   public void testRejoinLeaderElectionApiAllProperties() throws Exception {
     final SolrParams v1Params =
         captureConvertedCoreV1Params(
@@ -137,7 +120,6 @@ public class V2NodeAPIMappingTest extends SolrTestCaseJ4 {
   }
 
   private static void registerAllNodeApis(ApiBag apiBag, CoreAdminHandler coreHandler) {
-    apiBag.registerObject(new OverseerOperationAPI(coreHandler));
     apiBag.registerObject(new RejoinLeaderElectionAPI(coreHandler));
   }
 }
