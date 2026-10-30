@@ -62,13 +62,13 @@ import org.apache.solr.handler.admin.api.InstallCoreData;
 import org.apache.solr.handler.admin.api.MergeIndexes;
 import org.apache.solr.handler.admin.api.OverseerOperationAPI;
 import org.apache.solr.handler.admin.api.PrepareCoreRecoveryAPI;
-import org.apache.solr.handler.admin.api.RejoinLeaderElectionAPI;
+import org.apache.solr.handler.admin.api.RejoinLeaderElection;
 import org.apache.solr.handler.admin.api.ReloadCore;
 import org.apache.solr.handler.admin.api.RenameCore;
 import org.apache.solr.handler.admin.api.RequestApplyCoreUpdatesAPI;
 import org.apache.solr.handler.admin.api.RequestBufferUpdatesAPI;
 import org.apache.solr.handler.admin.api.RequestCoreRecoveryAPI;
-import org.apache.solr.handler.admin.api.RequestSyncShardAPI;
+import org.apache.solr.handler.admin.api.RequestSyncShard;
 import org.apache.solr.handler.admin.api.RestoreCore;
 import org.apache.solr.handler.admin.api.SplitCoreAPI;
 import org.apache.solr.handler.admin.api.SwapCores;
@@ -312,14 +312,12 @@ public class CoreAdminHandler extends RequestHandlerBase implements PermissionNa
   @Override
   public Collection<Api> getApis() {
     final List<Api> apis = new ArrayList<>();
-    apis.addAll(AnnotatedApi.getApis(new RejoinLeaderElectionAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new OverseerOperationAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new SplitCoreAPI(this)));
     // Internal APIs
     apis.addAll(AnnotatedApi.getApis(new RequestCoreRecoveryAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new PrepareCoreRecoveryAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new RequestApplyCoreUpdatesAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new RequestSyncShardAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new RequestBufferUpdatesAPI(this)));
 
     return apis;
@@ -339,7 +337,10 @@ public class CoreAdminHandler extends RequestHandlerBase implements PermissionNa
         SwapCores.class,
         RenameCore.class,
         MergeIndexes.class,
-        GetNodeCommandStatus.class);
+        GetNodeCommandStatus.class,
+        RequestSyncShard.class,
+        // Internal APIs
+        RejoinLeaderElection.class);
   }
 
   public interface CoreAdminOp {

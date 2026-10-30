@@ -78,27 +78,6 @@ public class V2NodeAPIMappingTest extends SolrTestCaseJ4 {
     assertEquals("someNodeName", v1Params.get("electionNode"));
   }
 
-  @Test
-  public void testRejoinLeaderElectionApiAllProperties() throws Exception {
-    final SolrParams v1Params =
-        captureConvertedCoreV1Params(
-            "/node",
-            "POST",
-            "{"
-                + "\"rejoin-leader-election\": {"
-                + "\"collection\": \"someCollection\", "
-                + "\"coreNodeName\": \"someNodeName\","
-                + "\"core\": \"someCore\","
-                + "\"rejoinAtHead\": true"
-                + "}}");
-
-    assertEquals("rejoinleaderelection", v1Params.get(ACTION));
-    assertEquals("someCollection", v1Params.get("collection"));
-    assertEquals("someNodeName", v1Params.get("core_node_name"));
-    assertEquals("someCore", v1Params.get("core"));
-    assertEquals("true", v1Params.get("rejoinAtHead"));
-  }
-
   private SolrParams captureConvertedCoreV1Params(String path, String method, String v2RequestBody)
       throws Exception {
     return doCaptureParams(
@@ -138,6 +117,5 @@ public class V2NodeAPIMappingTest extends SolrTestCaseJ4 {
 
   private static void registerAllNodeApis(ApiBag apiBag, CoreAdminHandler coreHandler) {
     apiBag.registerObject(new OverseerOperationAPI(coreHandler));
-    apiBag.registerObject(new RejoinLeaderElectionAPI(coreHandler));
   }
 }

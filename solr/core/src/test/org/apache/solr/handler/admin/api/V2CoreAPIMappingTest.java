@@ -65,7 +65,6 @@ public class V2CoreAPIMappingTest extends V2ApiMappingTest<CoreAdminHandler> {
     apiBag.registerObject(new RequestCoreRecoveryAPI(handler));
     apiBag.registerObject(new PrepareCoreRecoveryAPI(handler));
     apiBag.registerObject(new RequestApplyCoreUpdatesAPI(handler));
-    apiBag.registerObject(new RequestSyncShardAPI(handler));
     apiBag.registerObject(new RequestBufferUpdatesAPI(handler));
   }
 
@@ -138,15 +137,6 @@ public class V2CoreAPIMappingTest extends V2ApiMappingTest<CoreAdminHandler> {
 
     assertEquals("requestapplyupdates", v1Params.get(ACTION));
     assertEquals("coreName", v1Params.get(NAME));
-  }
-
-  @Test
-  public void testSyncShardAllParams() throws Exception {
-    final SolrParams v1Params =
-        captureConvertedV1Params("/cores/coreName", "POST", "{\"request-sync-shard\": {}}");
-
-    assertEquals("requestsyncshard", v1Params.get(ACTION));
-    assertEquals("coreName", v1Params.get(CORE));
   }
 
   @Test
