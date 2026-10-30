@@ -1,0 +1,5 @@
+# Receipt: SOLR-17861 PR opened (phone agent, 2026-10-30)
+
+Fulfills assignment christos-reply-17861-pr-prep-round-1. At Nick's go, PR #5270 "SOLR-17861: Extend updateLicenses to cover the KMP module" was opened as a draft against main at b0b0b39f7e62fa0247e133d4019bbb23f9def446, the gated head (diff: ui/desktopApp/build.gradle.kts plus 105 checksum files under ui/licenses). Christos Malliaridis invited this PR on the ticket on 2026-10-30 so the approach discussion continues on the code.
+
+Before opening, the phone agent re-ran :desktopApp:validateLicenses on Linux at the exact head (2026-10-30, rc 0, log ~/workspace/tools/gate-17861-validate.log), complementing the Windows 11 run recorded on the ticket at the same commit. The PR body poses Christos's mechanism question as its choice to check, with the enumeration recommendation, and names the limits: no macOS host run, the enumeration rule for future per-OS dependencies, and the LICENSE/NOTICE presence question staying with packaging. No Jira comment has been posted about the opening yet.
