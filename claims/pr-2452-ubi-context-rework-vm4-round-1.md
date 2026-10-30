@@ -17,3 +17,12 @@ Status: CLAIMED (implementation, then Linux proof)
 ## Erratum (add-only)
 
 - The full PR 2452 head in this claim was mistyped as `6402b4b528a3ec8daa134772abc84532380e3f7c`. The correct full SHA is `6402b4b528d3ec8daa134772abc84532380e3f7c`. See `gates/pr-2452-ubi-context-round-1.md` for the misfired launch record.
+
+## Decision record (add-only): forbidden-API check on the PR head
+
+- Choice: the root check fails in `forbiddenApisMain` on `Collections.singleton` in `UBIComponent.java`, a violation already in PR head `6402b4b528` (line 391, introduced by `79863b459a`). Options: (a) a separate one-line `Set.of` commit on the candidate, then a superseding gate; (b) report the failure and offer only the race fix.
+- Rung 1 (code and history): `git log -S` places the call in `79863b459a` on the PR head. It is the only use of `Collections` in the file. Baseline run `forbiddenApisMain` on B fails with the same violation, so the candidate did not cause it.
+- Rung 3 (intent): the assignment authorizes "formatting, compilation and bounded test/setup repair" and requires the root check to pass. A one-line static-check substitution is bounded and does not add feature design.
+- Rung 4 (choice): option (a), as a separate commit so the race fix stays independent. `Set.of` and `Collections.singleton` both return an immutable one-element set; the element is non-null (`getName()`).
+- Rung 5 not needed: the change does not widen approved scope under rung 3.
+- Candidate: `b48c4509a0375f93080f8be50520c18dba23aa29` on `nick-boss-tech/solr:ubi-pr2452-context-submit`, one commit above `bbc00109d0`. Superseding gate: `gates/pr-2452-ubi-context-round-3.md`. Full proof is re-run on both sides at this head.
