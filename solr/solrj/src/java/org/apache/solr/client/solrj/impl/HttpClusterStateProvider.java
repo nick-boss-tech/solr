@@ -60,6 +60,7 @@ public class HttpClusterStateProvider<C extends HttpSolrClient> extends BaseHttp
     return (C) httpClient.builder().withBaseSolrUrl(baseUrl).build();
   }
 
+  @Override
   public C getHttpClient() {
     return httpClient;
   }

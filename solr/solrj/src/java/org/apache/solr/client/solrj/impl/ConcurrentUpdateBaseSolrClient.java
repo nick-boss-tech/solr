@@ -901,6 +901,7 @@ public abstract class ConcurrentUpdateBaseSolrClient extends SolrClient {
      */
     public abstract ConcurrentUpdateBaseSolrClient build();
 
+    @Override
     public HttpSolrClient getClient() {
       return client;
     }

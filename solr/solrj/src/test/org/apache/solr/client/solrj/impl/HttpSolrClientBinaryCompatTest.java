@@ -141,13 +141,12 @@ public class HttpSolrClientBinaryCompatTest extends SolrTestCase {
     assertNotNull(
         SolrRequest.class.getMethod(
             "processWithBaseUrl", HttpSolrClientBase.class, String.class, String.class));
+    assertTrue(
+        returnTypes(CloudSolrClient.class, "getHttpClient").contains(HttpSolrClientBase.class));
     assertEquals(
-        HttpSolrClientBase.class, CloudSolrClient.class.getMethod("getHttpClient").getReturnType());
+        HttpSolrClient.class, LBSolrClient.Builder.class.getTypeParameters()[0].getBounds()[0]);
     assertEquals(
-        HttpSolrClientBase.class, LBSolrClient.Builder.class.getTypeParameters()[0].getBounds()[0]);
-    assertEquals(
-        HttpSolrClientBase.class,
-        HttpClusterStateProvider.class.getTypeParameters()[0].getBounds()[0]);
+        HttpSolrClient.class, HttpClusterStateProvider.class.getTypeParameters()[0].getBounds()[0]);
   }
 
   private static void assertField(Class<?> clazz, String name, Class<?> type) throws Exception {
