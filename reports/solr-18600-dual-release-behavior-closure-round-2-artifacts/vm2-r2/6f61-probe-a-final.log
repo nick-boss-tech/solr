@@ -1,0 +1,5 @@
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+RESULT connect-no-args EXC java.lang.NoSuchMethodError: 'void org.apache.solr.client.solrj.impl.CloudHttp2SolrClient.connect()' ms=262
+RESULT connect-timeout-1s EXC java.lang.NoSuchMethodError: 'void org.apache.solr.client.solrj.impl.CloudHttp2SolrClient.connect(long, java.util.concurrent.TimeUnit)' ms=0

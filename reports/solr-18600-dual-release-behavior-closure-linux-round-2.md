@@ -47,3 +47,14 @@ Rerun on the frozen, already-compiled round-1 cohorts, against jars built from `
 ## Portable artifacts
 
 Published with the receipt as `reports/solr-18600-dual-release-behavior-closure-round-2-artifacts/vm2/`: runners (`run-final.sh`, `run-probes.sh`), probe sources, frozen cohort sources, class and jar hash manifests (`cohorts.sha256`, `jars.sha256`, `probes/sources.sha256`), and full outputs. The host-specific dependency list is `cp-solrj.txt`. The jars are not published; they can be rebuilt from `6f61b6dbaf96` with the recorded javac commands.
+
+## Round-2 repair result (branch `solr-18600-additive-r2`, head `cdde1029dd5c`)
+
+Full gate passed. Receipt has the matrix and probe comparison.
+
+- A (connect): restored the released 10.0 surface and failure behavior. The successful-initialization, transient-failure, interruption and closed-provider cases are still untested.
+- C (dispatch): the 10.1 behavior is restored. The 10.0 override behavior is not preserved. This is the documented conflict the review agent accepted.
+- B (custom client): still a blocker. The 10.1 getter returns `HttpSolrClient`, so a custom `HttpSolrClientBase` cannot be returned through it without a cast that throws. Accepting the constructor and failing only in the getter would still be a `ClassCastException` on that path. Owner decision needed: an agreed exclusion for the custom non-`HttpSolrClient` base, or a different design.
+- D: response content checked; borrowed-client closure and protected-member closure not run.
+
+HOLD. Nothing public. The fork branch `solr-18600-additive-r2` is a new branch, not the submission branch.

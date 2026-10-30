@@ -1,0 +1,30 @@
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.apache.solr.client.solrj.impl.CloudHttp2SolrClient;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
+
+public class ProbeA {
+  static final String URL = "http://127.0.0.1:1/solr";
+
+  static void check(String name, Runnable r) {
+    long t0 = System.nanoTime();
+    try {
+      r.run();
+      System.out.println("RESULT " + name + " OK ms=" + (System.nanoTime() - t0) / 1_000_000);
+    } catch (Throwable t) {
+      System.out.println("RESULT " + name + " EXC " + t.getClass().getName() + ": " + t.getMessage() + " ms=" + (System.nanoTime() - t0) / 1_000_000);
+    }
+  }
+
+  public static void main(String[] args) {
+    check("connect-no-args", () -> {
+      CloudHttp2SolrClient c = new CloudSolrClient.Builder(List.of(URL)).build();
+      try { c.connect(); } finally { c.close(); }
+    });
+    check("connect-timeout-1s", () -> {
+      CloudHttp2SolrClient c = new CloudSolrClient.Builder(List.of(URL)).build();
+      try { c.connect(1, TimeUnit.SECONDS); } catch (InterruptedException | java.util.concurrent.TimeoutException e) { throw new RuntimeException(e); } finally { c.close(); }
+    });
+    System.exit(0);
+  }
+}

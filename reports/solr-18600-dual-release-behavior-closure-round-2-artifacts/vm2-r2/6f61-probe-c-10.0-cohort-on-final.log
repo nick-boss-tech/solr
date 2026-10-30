@@ -1,0 +1,6 @@
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+RESULT dispatch-request-hit A GET /solr/c1/select
+RESULT dispatch-requestWithBaseUrl-null-hit A GET /solr/c1/select
+RESULT plain-request-status-ok hit=A GET /solr/c1/select

@@ -1,0 +1,12 @@
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+PASS jetty.fluent.chain
+PASS jetty.withOptionalBasicAuth
+PASS static.jettyBuilder.baseUrl
+PASS lb.jettyCtorAndGetter
+PASS lb.jettyRequestDispatch (reached client: org.apache.solr.client.solrj.SolrServerException: No live SolrServers available to handle this request)
+PASS concurrent.jettyBuilder.ctorAndGetter
+PASS cloud.jettyWithHttpClient.ownership
+PASS solrRequest.processWithBaseUrl (reached client: org.apache.solr.client.solrj.SolrServerException: Server refused connection at: http://127.0.0.1:1/solr/select)
+COHORT OK

@@ -67,3 +67,20 @@ Dispatch detail (ProbeC): a subclass of `HttpJdkSolrClient` overrides `getBaseUR
 ## Restoring the Java sources
 
 Java fixture sources are published with a `.txt` suffix (`cohort-*.java.txt`, `probe-Probe*.java.txt`) so the board's Java format hook does not reject them. The bytes are unchanged. To rerun, remove the `.txt` suffix from each file. `probe-sources.sha256` and the cohort hashes in `cohorts.sha256` identify the original names.
+
+## Round-2 repair on branch `solr-18600-additive-r2` at `cdde1029dd5c` (pushed as a new fork branch; `solr-18600-additive` not touched)
+
+Changes: restored `CloudSolrClient.connect()` and `connect(long, TimeUnit)` (released 10.0 waiting contract, with the info log omitted), a deprecated default `ClusterStateProvider.connect()` delegating to `getLiveNodes()`, a `ZkClientClusterStateProvider.connect()` checking the state reader, and `HttpSolrClientBase.getRequestUrl` using `getBaseURL()` as 10.1 does. Jar `build-r2/solr-solrj-r2.jar` (hash in `jars-r2.sha256`).
+
+Gate, exact head `cdde1029dd5c`: changelog YAML parsed under uv (see the r1 note), tidy rc=0 (no changes), Error Prone rc=0 (0 warnings), `check -x test` for solrj, solrj-jetty and solrj-zookeeper rc=0, focused SolrJ tests rc=0, focused Jetty tests rc=0, `:solr:core:check -x test` rc=0. Logs: `gate-r2/steps.txt`.
+
+Consumer matrix on the r2 jar (`run-final.sh` with `FINAL_JAR` set): 10/10 rows as expected, the same as on `6f61b6dbaf96`.
+
+Probe comparison, `6f61b6dbaf96` against r2 (`probes/out-6f61b6dbaf96` vs `probes/out`):
+
+- A (connect): on `6f61b6dbaf96` the 10.0 consumer got `NoSuchMethodError`. On r2 it gets the released 10.0 failures: `RuntimeException` "Failed fetching live_nodes" for no-arg connect and `TimeoutException` after about 1 s for timed connect. Successful eager initialization is not tested.
+- B (custom client): unchanged on r2. All four legacy paths still throw `IllegalArgumentException`. Blocker, see report.
+- C (dispatch): the 10.1-compiled overriding subclass now reaches B on final, as on 10.1. The 10.0-compiled overriding subclass also reaches B on r2, where 10.0 reaches A. This is the documented difference.
+- D (requests): parsed response status is 0 on all four runs, both cohorts on both releases and on r2.
+
+Not run: borrowed-client closure and protected-member closure.

@@ -1,0 +1,13 @@
+2026-10-30T04:32:34Z START gate head=cdde1029dd5c status=0
+2026-10-30T04:32:34Z changelog-yaml rc=1
+2026-10-30T04:35:01Z tidy rc=0 tidy-diff-exit=0 changed=0
+2026-10-30T04:35:01Z START errorprone head=cdde1029dd5c
+2026-10-30T04:42:22Z errorprone rc=0 skipped=0 warnings=0
+2026-10-30T04:42:22Z START check solrj modules head=cdde1029dd5c
+2026-10-30T04:46:52Z check-solrj-modules rc=0
+2026-10-30T04:46:52Z START focused tests head=cdde1029dd5c
+2026-10-30T04:49:12Z tests-solrj rc=0
+2026-10-30T04:51:31Z tests-jetty rc=0
+2026-10-30T04:51:31Z START core check -x test head=cdde1029dd5c
+2026-10-30T04:55:59Z check-core rc=0
+2026-10-30T04:55:59Z GATEDONE

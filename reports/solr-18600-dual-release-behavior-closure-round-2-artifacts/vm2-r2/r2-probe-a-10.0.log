@@ -1,0 +1,5 @@
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+RESULT connect-no-args EXC java.lang.RuntimeException: Failed fetching live_nodes from [http://127.0.0.1:1/solr]. If you think your Solr cluster is up and is accessible, you could try re-creating a new CloudSolrClient using working solr URLs. ms=329
+RESULT connect-timeout-1s EXC java.lang.RuntimeException: java.util.concurrent.TimeoutException: Timed out waiting for cluster ms=1011

@@ -1,0 +1,64 @@
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import org.apache.solr.client.solrj.SolrRequest;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import org.apache.solr.client.solrj.impl.ConcurrentUpdateBaseSolrClient;
+import org.apache.solr.client.solrj.impl.HttpClusterStateProvider;
+import org.apache.solr.client.solrj.impl.HttpJdkSolrClient;
+import org.apache.solr.client.solrj.impl.HttpSolrClientBase;
+import org.apache.solr.client.solrj.impl.HttpSolrClientBuilderBase;
+import org.apache.solr.client.solrj.impl.LBSolrClient;
+import org.apache.solr.common.util.NamedList;
+
+public class ProbeB {
+  static final String URL = "http://127.0.0.1:1/solr";
+
+  static class CustomBase extends HttpSolrClientBase {
+    CustomBase(String url) {
+      super(url, new HttpJdkSolrClient.Builder(url));
+    }
+    @Override public HttpSolrClientBuilderBase<?, ?> builder() { throw new UnsupportedOperationException(); }
+    @Override protected LBSolrClient createLBSolrClient() { return null; }
+    @Override protected boolean isFollowRedirects() { return false; }
+    @Override protected boolean processorAcceptsMimeType(java.util.Collection<String> a, String b) { return false; }
+    @Override protected String allProcessorSupportedContentTypesCommaDelimited(java.util.Collection<String> a) { return ""; }
+    @Override protected void updateDefaultMimeTypeForParser() {}
+    @Override public NamedList<Object> requestWithBaseUrl(String b, SolrRequest<?> r, String c) { throw new UnsupportedOperationException(); }
+    @Override public CompletableFuture<NamedList<Object>> requestAsync(SolrRequest<?> r, String c) { throw new UnsupportedOperationException(); }
+    @Override public NamedList<Object> request(SolrRequest<?> r, String c) { throw new UnsupportedOperationException(); }
+    @Override public void close() {}
+  }
+
+  interface Check { Object run() throws Exception; }
+
+  static void check(String name, Check c) {
+    try {
+      System.out.println("RESULT " + name + " OK " + c.run());
+    } catch (Throwable t) {
+      System.out.println("RESULT " + name + " EXC " + t.getClass().getName() + ": " + t.getMessage());
+    }
+  }
+
+  public static void main(String[] args) {
+    CustomBase custom = new CustomBase(URL);
+    check("legacy-concurrentUpdate-identity", () -> {
+      ConcurrentUpdateBaseSolrClient.Builder b = new ConcurrentUpdateBaseSolrClient.Builder(URL, custom) {
+        @Override public ConcurrentUpdateBaseSolrClient build() { return null; }
+      };
+      return b.getClient() == custom;
+    });
+    check("legacy-cloud-withHttpClient-identity", () -> {
+      org.apache.solr.client.solrj.impl.CloudHttp2SolrClient c = new CloudSolrClient.Builder(List.of(URL)).withHttpClient(custom).build();
+      return c.getHttpClient() == custom;
+    });
+    check("legacy-lb-ctor-identity", () -> {
+      LBSolrClient.Builder<?> b = new LBSolrClient.Builder<>(custom, new LBSolrClient.Endpoint(URL));
+      return b.getSolrClient() == custom;
+    });
+    check("legacy-provider-ctor-identity", () -> {
+      HttpClusterStateProvider<?> p = new HttpClusterStateProvider<>(List.of(URL), custom);
+      return p.getHttpClient() == custom;
+    });
+    System.exit(0);
+  }
+}
