@@ -366,8 +366,12 @@ public class UBIComponent extends SearchComponent implements SolrCoreAware {
 
     stream = constructStream(streamFactory, streamExpression);
 
-    streamContext.put("ubi-query", ubiQuery);
-    stream.setStreamContext(streamContext);
+    // Streams may retain and mutate their context while another request is recording.
+    StreamContext requestContext = new StreamContext();
+    requestContext.getEntries().putAll(streamContext.getEntries());
+    requestContext.setSolrClientCache(streamContext.getSolrClientCache());
+    requestContext.put("ubi-query", ubiQuery);
+    stream.setStreamContext(requestContext);
 
     getTuple(stream);
   }
