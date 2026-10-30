@@ -25,3 +25,8 @@ A failure in legs 3 to 5 is recorded and preserved, not retried. A tidy change t
 ## Interpretation
 
 This gate tests the isolation of recording context on the PR 2452 UBI feature at B and F only. It does not establish readiness of the full UBI draft, a listener migration, background ingestion, multi-shard merging, redaction, or production overhead. Any public offer must state that it addresses recording-context isolation only.
+
+## Erratum (add-only)
+
+- The full SHA for B in this record was written as `6402b4b528a3ec8daa134772abc84532380e3f7c`. The correct full SHA is `6402b4b528d3ec8daa134772abc84532380e3f7c`, matching `git ls-remote` for `refs/pull/2452/head`. The short form `6402b4b528` is unambiguous.
+- A driver launched with the wrong SHA failed the baseline step at once (`fatal: reference is not a tree`), then ran `checkout-candidate` and began `test-pass-c01`, which was stopped before its result. Those artifacts are kept in `misfire-1/` under the gate log directory. No test result from that launch is cited. The driver was relaunched from the top with the correct SHA.

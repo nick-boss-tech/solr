@@ -13,3 +13,7 @@ Status: CLAIMED (implementation, then Linux proof)
 - Competing claims: none found for PR 2452 in `claims/` or `gates/`. The Windows analysis claim `claims/pr-5238-ubi-context-windows-round-1.md` is the retired slice's record and is not active here.
 - Deliverables: pushed `ubi-pr2452-context-submit` candidate; `gates/pr-2452-ubi-context-round-1.md`; `reports/pr-2452-ubi-context-rework-and-gate-round-1.md`; `receipts/PR-2452-ubi-context.md`; offer draft in the report.
 - Constraints: no PR comment, PR create or edit, Jira write, push to epugh/solr or apache/solr, force push, or merge. Commits as Nick Shanin, no trailers.
+
+## Erratum (add-only)
+
+- The full PR 2452 head in this claim was mistyped as `6402b4b528a3ec8daa134772abc84532380e3f7c`. The correct full SHA is `6402b4b528d3ec8daa134772abc84532380e3f7c`. See `gates/pr-2452-ubi-context-round-1.md` for the misfired launch record.
