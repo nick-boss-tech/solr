@@ -11,7 +11,7 @@
 - Seed: `17241C0FFEE17241`.
 - Capability tags used: gate, implementation (tidy repair only). No PR, public comment, or JIRA action.
 - Started: 2026-10-29T23:57Z (UTC).
-- Lease: live while heartbeats continue; stale 2 hours after the last heartbeat. Attempts: 1. Idempotency key: SOLR-17241-wt-format-round-2@7a5a998ee9b07d36b6389dd3e2ef2d4246a1588e.
+- Lease: live while heartbeats continue; stale 2 hours after the last heartbeat. Attempts: 2 (attempt 1 crashed with the VM at 2026-10-30T00:09Z during candidate test compilation; its logs are in `solr17241-wt-format-round-2-attempt1-crashed/`; attempt 2 reruns every leg from tidy). Idempotency key: SOLR-17241-wt-format-round-2@7a5a998ee9b07d36b6389dd3e2ef2d4246a1588e.
 - Decision ladder: rung 1 for the tidy diff (line wrap only); rung 3 for the gate's proof shape.
 
 Heartbeat: 2026-10-29T23:57Z
