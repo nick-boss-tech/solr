@@ -10,3 +10,7 @@ Status: CLAIMED (Linux positive proof)
 - Competing claims: `claims/pr-5238-ubi-contract-windows-round-1.md` (Windows implementation, not a Linux run). No other live Linux claim for this job.
 - Plan: preflight tidy at the exact head in a detached worktree, then the two seed runs of `SearchRequestListenerUbiTest`, `SearchRequestListenerTest`, neighbor classes, and a clean standalone-clone root `check -x test` with NODE_ENV unset. Logs under `/workspace/gates/logs/vm4/pr5238-ubi-contract-linux-round-1/`.
 - Constraints: no GitHub PR, comment, or Jira write. No fork push unless tidy changes files, in which case the run stops and reports. No force push.
+
+Status: CLOSED (halted at tidy at `de4d222bb1`; superseded by round 2 at `c2c387064a`)
+
+CLOSED: `reports/pr-5238-ubi-contract-linux-round-1-closeout.md`. No test ran at round 1. Proof is in `receipts/PR-5238-ubi-contract.md`.
