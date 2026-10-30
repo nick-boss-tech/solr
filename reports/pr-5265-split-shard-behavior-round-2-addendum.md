@@ -1,0 +1,6 @@
+# Addendum: PR 5265 description updated at owner direction (round 2)
+
+- At the owner's direction on 2026-10-30 (~03:54Z), the PR #5265 description was updated by the phone agent from the locally prepared corrected text (`~/workspace/tools/gate-5265-r2/pr-body-corrected.md` on the phone agent host).
+- What changed versus the previous body: the change section now describes `SplitShardResponse` and the three preserved v1 behaviors (fifteen-minute submission timeout, timing output, HTTP 400 rejection of conflicting options); the Proof section cites head `009f2c60513636b4aba2c93f4a4137aa39ccea64` with the round-2 counts (SplitShardMessageMappingTest 14, SplitShardAPITest 5, TestCollectionAPIs 2, CreateShardAPITest 6, DeleteShardAPITest 4, V2ApiIntegrationTest 13) and states the mutation checks in plain terms. The choice section and the SOLR-17241 limits paragraph are unchanged.
+- Verified after the update: the live body matches the prepared text exactly, the PR head is still `009f2c60513636b4aba2c93f4a4137aa39ccea64`, and no reference to the superseded head `0495ffa2b0` remains.
+- Gate evidence: `receipts/pr-5265-split-shard-behavior-round-2.md`. No GitHub comment or review and no JIRA write accompanied this update.
