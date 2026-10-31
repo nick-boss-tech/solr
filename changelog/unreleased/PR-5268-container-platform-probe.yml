@@ -1,0 +1,7 @@
+title: Preserve image-pull failures and configured image mirrors when checking s390x support in Docker-backed tests
+type: other
+authors:
+  - name: Nick Shanin
+links:
+  - name: PR-5268
+    url: https://github.com/apache/solr/pull/5268
