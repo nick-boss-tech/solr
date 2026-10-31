@@ -38,8 +38,8 @@ public final class TestcontainersUtil {
 
   /**
    * Assumes Docker/Testcontainers is available and, on s390x, that the specified image supports
-   * linux/s390x. Unavailable Docker or a missing platform skips the calling test via {@link Assume};
-   * other pull failures propagate.
+   * linux/s390x. Unavailable Docker or a missing platform skips the calling test via {@link
+   * Assume}; other pull failures propagate.
    *
    * @param dockerImage the Docker image to check
    */
@@ -88,12 +88,14 @@ public final class TestcontainersUtil {
       return true;
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
-      throw new IllegalStateException("Interrupted pulling " + dockerImage + " for linux/" + S390X, e);
+      throw new IllegalStateException(
+          "Interrupted pulling " + dockerImage + " for linux/" + S390X, e);
     } catch (DockerClientException | NotFoundException e) {
       // Docker reports platform absence in the pull error, rather than a structured platform field.
       if (e.getMessage() != null
           && e.getMessage()
-              .contains("no matching manifest for linux/" + S390X + " in the manifest list entries")) {
+              .contains(
+                  "no matching manifest for linux/" + S390X + " in the manifest list entries")) {
         return false;
       }
       throw e;

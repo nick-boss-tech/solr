@@ -104,8 +104,7 @@ public class TestcontainersUtilTest extends SolrTestCase {
 
   public void testOtherPlatformMismatchPropagates() {
     var error =
-        new NotFoundException(
-            "no matching manifest for linux/amd64 in the manifest list entries");
+        new NotFoundException("no matching manifest for linux/amd64 in the manifest list entries");
     when(pull.exec(any(PullImageResultCallback.class))).thenThrow(error);
     assertSame(error, expectThrows(NotFoundException.class, () -> probe(COMPLETED_PULL_TIMEOUT)));
   }
