@@ -10,3 +10,8 @@ write path; settle whether a reused document instance / reused field
 value lists trigger the CME. Scratch probe only, never committed.
 Report to reports/critical-impl-8028-premise-batch-2.md. No PR, no
 Jira/GitHub post.
+
+Status: DONE. Verdict REPRODUCED (concurrent mutation of a shared
+backing list during marshal; sequential and mutation-free concurrent
+marshals clean). Report at
+reports/critical-impl-8028-premise-batch-2.md, verified by read-back.
