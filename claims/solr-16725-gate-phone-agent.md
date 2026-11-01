@@ -1,7 +1,7 @@
 # Claim: SOLR-16725 gate (phone agent)
 
 - Claimant host: phone agent (this VM, Linux gate host).
-- Status: CLAIMED.
+- Status: DONE.
 - Job: board-work-2026-11-01, fixed queue item 3 follow-on,
   gate of the existing SOLR-16725 branch.
 - Governing files: reports/critical-impl-16725-premise-batch-2.md
@@ -21,4 +21,8 @@
   which the branch does not normalize.
 - Capability tags used: gate.
 - Started: 2026-11-01T21:55Z (UTC).
+- Result: GATE GREEN at the exact head, proof pair complete
+  (pre-fix proof fails, head test passes, seed
+  16725C0FFEE16725). Receipt: receipts/SOLR-16725.md.
+  Finished: 2026-11-01, about 15:30 MST.
 - No PR, no GitHub comments, no Jira posts, comments, or tickets.
