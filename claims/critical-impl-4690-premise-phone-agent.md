@@ -12,4 +12,8 @@ reproduces on current main.
 Report to reports/critical-impl-4690-premise-batch-2.md. No PR, no
 Jira/GitHub post.
 
-Status: CLAIMED
+Status: DONE. Verdict NOT REPRODUCED (all 7 legs, incl. boost
+function, grouping, original highlighter, and explicit hl.q,
+returned highlighted snippets on main 83d560030fde, seed
+4690C0FFEE4690). Report at
+reports/critical-impl-4690-premise-batch-2.md, verified by read-back.
