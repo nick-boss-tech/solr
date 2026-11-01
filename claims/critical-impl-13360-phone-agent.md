@@ -15,7 +15,7 @@
 - Started: 2026-11-01T20:03Z (UTC).
 - Lease: live while this run continues.
 
-Result: DONE 2026-11-01T20:45Z. Branch solr-13360-submit pushed at
+Result: DONE 2026-11-01T20:30Z. Branch solr-13360-submit pushed at
 0d55e64c9b77475f005d330106c32689d5aa4a82 (base 83d560030fde).
 Proof pair: new test fails 3/4 without the fix (SIOOBE through
 getCollation), passes 4/4 with it; full gate HARDENED (tidy clean,
@@ -24,4 +24,4 @@ check ok). Receipt:
 reports/critical-impl-13360-implementation.md at
 9b9bd6381691cf1cec0e3f4b6a10823bf40da4e6.
 
-DONE: 2026-11-01T20:45Z.
+DONE: 2026-11-01T20:30Z.
