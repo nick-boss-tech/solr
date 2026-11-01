@@ -21,6 +21,7 @@ import static org.apache.solr.common.params.CommonParams.ID;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.lucene.index.IndexReader;
@@ -209,12 +210,23 @@ public class SpellCheckCollator {
     StringBuilder collation = new StringBuilder(origQuery);
     int offset = 0;
     String corr = "";
-    for (int i = 0; i < corrections.size(); i++) {
-      SpellCheckCorrection correction = corrections.get(i);
+    // Corrections are not guaranteed to arrive in offset order, and synonym expansion can
+    // produce several corrections for overlapping spans. Replacements are applied left to
+    // right in the original query, so sort by start offset and skip any correction that
+    // overlaps one already applied; applying them in arrival order corrupts the offsets
+    // and throws StringIndexOutOfBoundsException (SOLR-13360). Corrections already in
+    // increasing, non-overlapping order are unaffected.
+    List<SpellCheckCorrection> ordered = new ArrayList<>(corrections);
+    ordered.sort(Comparator.comparingInt(c -> c.getOriginal().startOffset()));
+    int lastEnd = 0;
+    for (int i = 0; i < ordered.size(); i++) {
+      SpellCheckCorrection correction = ordered.get(i);
       SpellCheckToken tok = correction.getOriginal();
       // we are replacing the query in order, but injected terms might cause
       // illegal offsets due to previous replacements.
       if (tok.positionIncrement() == 0) continue;
+      if (tok.startOffset() < lastEnd) continue;
+      lastEnd = tok.endOffset();
       corr = correction.getCorrection();
       boolean addParenthesis = false;
       Character requiredOrProhibited = null;
