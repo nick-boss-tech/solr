@@ -51,6 +51,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.RequestWriter;
 import org.apache.solr.client.solrj.request.SolrQuery;
+import org.apache.solr.client.solrj.request.SystemInfoRequest;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.ResponseParser;
 import org.apache.solr.client.solrj.util.ClientUtils;
@@ -743,24 +744,56 @@ public abstract class LBSolrClient extends SolrClient {
     return requestWriter;
   }
 
+  /**
+   * Reads the status out of a raw response's header. Returns 0 when no header is present, matching
+   * {@code QueryResponse.getStatus}.
+   */
+  private static int getResponseStatus(NamedList<Object> responseRaw) {
+    Object header = responseRaw.get("responseHeader");
+    if (header instanceof NamedList<?> headerList) {
+      Object status = headerList.get("status");
+      if (status instanceof Number number) {
+        return number.intValue();
+      }
+    }
+    return 0;
+  }
+
   private void checkAZombieServer(EndpointWrapper zombieServer) {
     final Endpoint zombieEndpoint = zombieServer.getEndpoint();
     try {
       log.debug("Checking zombie server {} for {}", zombieServer, this);
-      QueryRequest queryRequest = new QueryRequest(solrQuery);
-      // First the one on the endpoint, then the default collection
+      // First the one on the endpoint, then the default collection. A plain
+      // null-tolerant choice, not requireNonNullElse, which throws when both
+      // are null: that is exactly the collection-less case below.
       final String effectiveCollection =
-          Objects.requireNonNullElse(zombieEndpoint.getCore(), getDefaultCollection());
-      final var responseRaw =
-          doRequest(
-              getClient(zombieEndpoint),
-              zombieEndpoint.getBaseUrl(),
-              effectiveCollection,
-              queryRequest);
-      QueryResponse resp = new QueryResponse();
-      resp.setResponse(responseRaw);
+          zombieEndpoint.getCore() != null ? zombieEndpoint.getCore() : getDefaultCollection();
+      final boolean serverUp;
+      if (effectiveCollection != null) {
+        QueryResponse resp = new QueryResponse();
+        resp.setResponse(
+            doRequest(
+                getClient(zombieEndpoint),
+                zombieEndpoint.getBaseUrl(),
+                effectiveCollection,
+                new QueryRequest(solrQuery)));
+        serverUp = resp.getStatus() == 0;
+      } else {
+        // No core or collection is known for this endpoint, so there is no
+        // collection to query. Probe a node-level admin endpoint instead,
+        // which any live node answers.
+        // Only the response header is inspected, so the probe does not
+        // depend on the admin response shape.
+        NamedList<Object> responseRaw =
+            doRequest(
+                getClient(zombieEndpoint),
+                zombieEndpoint.getBaseUrl(),
+                null,
+                new SystemInfoRequest());
+        serverUp = getResponseStatus(responseRaw) == 0;
+      }
 
-      if (resp.getStatus() == 0) {
+      if (serverUp) {
         // server has come back up.
         reviveZombieServer(zombieEndpoint);
       }

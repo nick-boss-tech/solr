@@ -1,0 +1,12 @@
+# See https://github.com/apache/solr/blob/main/dev-docs/changelog.adoc
+
+title: >-
+  LBSolrClient's zombie-server check now probes a node-level admin endpoint when no core or
+  collection is known for the endpoint, so a restarted node is revived instead of staying a
+  zombie forever
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-14346
+    url: https://issues.apache.org/jira/browse/SOLR-14346
