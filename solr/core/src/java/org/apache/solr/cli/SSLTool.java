@@ -188,7 +188,7 @@ public class SSLTool extends ToolBase {
         throw new IllegalArgumentException("Keystore destinations must differ from input files.");
       }
     }
-    String password = readPassword(params.passwordFile());
+    String password = readPassword(params.passwordFile(), true);
     char[] secret = password.toCharArray();
     Path temporary = Files.createTempDirectory("solr-ssl-");
     try {
@@ -215,7 +215,7 @@ public class SSLTool extends ToolBase {
           .environment()
           .put(
               "SOLR_SSL_PEM_PASSWORD",
-              params.keyPasswordFile() == null ? "" : readPassword(params.keyPasswordFile()));
+              params.keyPasswordFile() == null ? "" : readPassword(params.keyPasswordFile(), false));
       builder.redirectErrorStream(true).redirectOutput(temporary.resolve("openssl.log").toFile());
       Process process = builder.start();
       process.getOutputStream().close();
@@ -259,8 +259,6 @@ public class SSLTool extends ToolBase {
       settings.put("SOLR_SSL_TRUST_STORE", trustTarget.toString());
       settings.put("SOLR_SSL_TRUST_STORE_PASSWORD", password);
       settings.put("SOLR_SSL_TRUST_STORE_TYPE", type);
-      settings.put("SOLR_SSL_NEED_CLIENT_AUTH", "false");
-      settings.put("SOLR_SSL_WANT_CLIENT_AUTH", "false");
       settings.put("SOLR_SSL_CHECK_PEER_NAME", "true");
       Map<Path, byte[]> files = new LinkedHashMap<>();
       files.put(target, serialize(store, secret));
@@ -325,14 +323,16 @@ public class SSLTool extends ToolBase {
     }
   }
 
-  private static String readPassword(Path path) throws Exception {
+  private static String readPassword(Path path, boolean keystorePassword) throws Exception {
     String value = Files.readString(path).replaceFirst("\\r?\\n$", "");
-    if (value.length() < 6
+    if (value.isEmpty()
         || value.indexOf('\n') >= 0
         || value.indexOf('\r') >= 0
         || value.indexOf('\0') >= 0) {
-      throw new IllegalArgumentException(
-          "Password files must contain one line of at least six characters.");
+      throw new IllegalArgumentException("Password files must contain one nonempty line.");
+    }
+    if (keystorePassword && value.length() < 6) {
+      throw new IllegalArgumentException("The keystore password must contain at least six characters.");
     }
     return value;
   }

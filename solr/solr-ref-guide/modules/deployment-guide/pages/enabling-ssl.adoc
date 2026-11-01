@@ -48,7 +48,8 @@ bin/solr ssl --cert /path/to/fullchain.pem \
 
 This installs `server/etc/solr-ssl.keystore.jks` and a separate truststore, relative to the Solr installation.
 The truststore contains the running JDK's trusted certificates and the supplied certificate chain.
-The tool configures HTTPS with hostname verification enabled and client certificate authentication disabled.
+The tool configures HTTPS with hostname verification enabled and preserves existing client certificate authentication settings.
+If client certificate authentication has not been configured, Solr's default is disabled.
 It sets `urlScheme=https` in ZooKeeper when `--zk-host` is supplied.
 Omit that option for a user-managed node.
 If you omit it for SolrCloud, set the property separately with `bin/solr cluster --property urlScheme --value https --zk-host <host:port>` before restarting Solr.
@@ -58,6 +59,7 @@ Use `--solr-include-file /path/to/solr.in.sh` to select another file, such as `/
 Use `--keystore /path/to/solr-ssl.jks` to select the destination; its parent directory must exist and its path must not contain whitespace.
 For PKCS12, supply `--store-type PKCS12`; the default destination then ends in `.p12`.
 For an encrypted PEM key, supply `--key-password-file /path/to/key-password.txt`.
+The existing key password must be nonempty and on one line; the six-character minimum applies only to the new keystore password.
 
 Existing files are updated in place, preserving their ownership and permissions.
 New files are restricted to their owner's access (`0600`).
@@ -70,6 +72,7 @@ For SolrCloud, changing `urlScheme` affects every node: prepare certificates and
 The tool does not restart nodes or update advertised hostnames.
 Run it again after certificate renewal to install the renewed files.
 Rebuilding the truststore also refreshes its copy of the JDK's trusted certificates.
+The generated truststore contains the JDK certificates and supplied certificate chain; restore any additional private trust anchors before restarting a deployment that requires them.
 
 For all options, see xref:cli/solr-ssl.adoc[].
 

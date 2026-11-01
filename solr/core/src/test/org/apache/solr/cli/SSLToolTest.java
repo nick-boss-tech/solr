@@ -94,6 +94,98 @@ public class SSLToolTest extends SolrTestCase {
         zkHost);
   }
 
+  private SSLTool.SSLParams encryptedParams(Path dir, String suppliedPassword) throws Exception {
+    Path key = dir.resolve("encrypted-key.pem");
+    Path log = dir.resolve("encrypt-key.log");
+    ProcessBuilder builder =
+        new ProcessBuilder(
+                "openssl",
+                "pkey",
+                "-in",
+                dir.resolve("key.pem").toString(),
+                "-aes-256-cbc",
+                "-passout",
+                "env:TEST_PEM_PASSWORD",
+                "-out",
+                key.toString())
+            .redirectErrorStream(true)
+            .redirectOutput(log.toFile());
+    builder.environment().put("TEST_PEM_PASSWORD", "tiny");
+    Process process = builder.start();
+    process.getOutputStream().close();
+    if (!process.waitFor(30, TimeUnit.SECONDS)) {
+      process.destroyForcibly().waitFor();
+      fail("Test key encryption timed out");
+    }
+    assertEquals(Files.readString(log), 0, process.exitValue());
+    Path pemPassword = dir.resolve("pem-password.txt");
+    Files.writeString(pemPassword, suppliedPassword + "\n");
+    return new SSLTool.SSLParams(
+        dir.resolve("cert.pem"),
+        key,
+        dir.resolve("password.txt"),
+        pemPassword,
+        dir.resolve("store"),
+        "JKS",
+        dir.resolve("solr.in.sh"),
+        null);
+  }
+
+  @Test
+  public void testClientAuthenticationSettingsArePreserved() throws Exception {
+    for (boolean required : new boolean[] {true, false}) {
+      Path dir = prepare();
+      String policy =
+          "export SOLR_SSL_NEED_CLIENT_AUTH="
+              + required
+              + "\nSOLR_SSL_WANT_CLIENT_AUTH='"
+              + !required
+              + "'\n";
+      Files.writeString(dir.resolve("solr.in.sh"), policy);
+      new SSLTool().configure(params(dir, "JKS", null));
+      assertTrue(Files.readString(dir.resolve("solr.in.sh")).startsWith(policy));
+    }
+  }
+
+  @Test
+  public void testShortExistingPemPassword() throws Exception {
+    Path dir = prepare();
+    new SSLTool().configure(encryptedParams(dir, "tiny"));
+    KeyStore store = KeyStore.getInstance("JKS");
+    char[] password = Files.readString(dir.resolve("password.txt")).stripTrailing().toCharArray();
+    try (var input = Files.newInputStream(dir.resolve("store"))) {
+      store.load(input, password);
+    }
+    assertEquals("RSA", store.getKey("solr-ssl", password).getAlgorithm());
+  }
+
+  @Test
+  public void testWrongPemPasswordLeavesConfigurationUntouched() throws Exception {
+    Path dir = prepare();
+    String original = Files.readString(dir.resolve("solr.in.sh"));
+    var encrypted = encryptedParams(dir, "wrong-password");
+    var error =
+        expectThrows(IllegalArgumentException.class, () -> new SSLTool().configure(encrypted));
+    assertTrue(error.getMessage().contains("OpenSSL could not convert"));
+    assertEquals(original, Files.readString(dir.resolve("solr.in.sh")));
+    assertFalse(Files.exists(dir.resolve("store")));
+    assertFalse(Files.exists(dir.resolve("store.truststore")));
+  }
+
+  @Test
+  public void testShortKeystorePasswordLeavesConfigurationUntouched() throws Exception {
+    Path dir = prepare();
+    String original = Files.readString(dir.resolve("solr.in.sh"));
+    Files.writeString(dir.resolve("password.txt"), "tiny\n");
+    var error =
+        expectThrows(
+            IllegalArgumentException.class, () -> new SSLTool().configure(params(dir, "JKS", null)));
+    assertTrue(error.getMessage().contains("six characters"));
+    assertEquals(original, Files.readString(dir.resolve("solr.in.sh")));
+    assertFalse(Files.exists(dir.resolve("store")));
+    assertFalse(Files.exists(dir.resolve("store.truststore")));
+  }
+
   @Test
   public void testBothFormats() throws Exception {
     for (String type : new String[] {"JKS", "PKCS12"}) {

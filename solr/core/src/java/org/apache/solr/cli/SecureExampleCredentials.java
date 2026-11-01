@@ -24,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Properties;
+import org.apache.solr.security.Sha256AuthenticationProvider;
 
 /** Persists HTTP credentials so the secure example can restart without password prompts. */
 final class SecureExampleCredentials {
@@ -75,8 +76,12 @@ final class SecureExampleCredentials {
       throw new IllegalArgumentException(
           "The administrator username must differ from index and search.");
     }
+    String password = value.substring(colon + 1);
+    if (!Sha256AuthenticationProvider.isPasswordAllowed(username, password)) {
+      throw new IllegalArgumentException("The administrator username and password must differ.");
+    }
     credentials.setProperty("admin.username", username);
-    setPassword("admin", value.substring(colon + 1));
+    setPassword("admin", password);
   }
 
   Path file() {

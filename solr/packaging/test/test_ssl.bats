@@ -80,6 +80,48 @@ configure_ssl() {
   assert_output --regexp 'SSL certificate problem|certificate verify failed|self-signed certificate'
 }
 
+@test "ssl certificate renewal preserves required client authentication" {
+  export SOLR_INCLUDE="${BATS_TEST_TMPDIR}/solr.in.sh"
+  touch "$SOLR_INCLUDE"
+  export SOLR_HOST_ADVERTISE=localhost
+  run solr start
+  assert_success
+  configure_ssl
+  printf '%s\n' 'SOLR_SSL_NEED_CLIENT_AUTH=true' 'SOLR_SSL_WANT_CLIENT_AUTH=false' >> "$SOLR_INCLUDE"
+  run solr stop --all
+  assert_success
+  run solr start
+  assert_success
+
+  run curl --noproxy localhost,127.0.0.1 --silent --show-error --fail-with-body \
+    --cacert "$ssl_dir/cert.pem" --cert "$ssl_dir/cert.pem" --key "$ssl_dir/key.pem" \
+    "https://localhost:${SOLR_PORT}/api/node/system"
+  assert_success
+
+  run solr stop --all
+  assert_success
+  run openssl req -x509 -newkey rsa:2048 -nodes \
+    -keyout "$ssl_dir/key.pem" -out "$ssl_dir/cert.pem" \
+    -days 2 -subj '/CN=localhost' -config "$ssl_dir/openssl.cnf" -extensions v3
+  assert_success
+  run solr ssl --cert "$ssl_dir/cert.pem" --key "$ssl_dir/key.pem" \
+    --password-file "$ssl_dir/password.txt" --keystore "$ssl_dir/solr.jks"
+  assert_success
+  run solr start
+  assert_success
+
+  run curl --noproxy localhost,127.0.0.1 --silent --show-error --fail-with-body \
+    --cacert "$ssl_dir/cert.pem" --cert "$ssl_dir/cert.pem" --key "$ssl_dir/key.pem" \
+    "https://localhost:${SOLR_PORT}/api/node/system"
+  assert_success
+  assert_output --partial '"mode":"solrcloud"'
+
+  # Without --fail, an HTTP denial would still succeed; the TLS connection itself must fail.
+  run curl --noproxy localhost,127.0.0.1 --silent --show-error --connect-timeout 5 --max-time 10 \
+    --cacert "$ssl_dir/cert.pem" "https://localhost:${SOLR_PORT}/api/node/system"
+  assert_failure
+}
+
 @test "use different hostname when not checking peer-name" {
   # Create a keystore
   export ssl_dir="${BATS_TEST_TMPDIR}/ssl"

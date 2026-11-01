@@ -29,6 +29,24 @@ teardown() {
   solr stop --all >/dev/null 2>&1
 }
 
+@test "secure example rejects unusable administrator credentials before configuring security" {
+  export SOLR_SECURITY_AUTH_BASICAUTH_ALLOWUSERASPASSWORD=false
+  run solr start -e secure-setup --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT" \
+    --credentials alice:alice
+  assert_failure
+  assert_output --partial 'administrator username and password must differ'
+  run test ! -e "$SOLR_HOME/http-credentials.properties"
+  assert_success
+  run test ! -e "$SOLR_HOME/zk-credentials.properties"
+  assert_success
+  run test ! -e "$SOLR_HOME/tls"
+  assert_success
+  run test ! -e "$SOLR_HOME/zoo_data"
+  assert_success
+  run test ! -e "${SOLR_HOME}-node2"
+  assert_success
+}
+
 @test "secure example configures HTTPS before users and reuses it on restart" {
   run solr start -e secure-setup --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT"
   assert_success

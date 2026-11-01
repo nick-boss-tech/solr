@@ -20,6 +20,7 @@ package org.apache.solr.cli;
 import java.nio.file.Files;
 import java.nio.file.attribute.PosixFilePermissions;
 import org.apache.solr.SolrTestCase;
+import org.apache.solr.security.Sha256AuthenticationProvider;
 
 /** Checks that customized HTTP credentials survive an example restart. */
 public class SecureExampleCredentialsTest extends SolrTestCase {
@@ -53,5 +54,25 @@ public class SecureExampleCredentialsTest extends SolrTestCase {
     var home = createTempDir();
     Files.writeString(home.resolve("http-credentials.properties"), "admin.username=solr\n");
     expectThrows(IllegalStateException.class, () -> new SecureExampleCredentials(home));
+  }
+
+  public void testRejectsUnusableAdministratorBeforeSaving() throws Exception {
+    System.setProperty(Sha256AuthenticationProvider.ALLOW_USER_AS_PASSWORD_PROP, "false");
+    var accounts = new SecureExampleCredentials(createTempDir());
+    expectThrows(IllegalArgumentException.class, () -> accounts.setAdministrator("alice:alice"));
+    assertEquals("solr", accounts.adminUsername());
+    assertEquals("SolrRocks", accounts.password("admin"));
+    assertFalse(Files.exists(accounts.file()));
+  }
+
+  public void testAdministratorPasswordCompatibilityOverride() throws Exception {
+    System.setProperty(Sha256AuthenticationProvider.ALLOW_USER_AS_PASSWORD_PROP, "true");
+    var home = createTempDir();
+    var accounts = new SecureExampleCredentials(home);
+    accounts.setAdministrator("alice:alice");
+    accounts.save();
+    var restored = new SecureExampleCredentials(home);
+    assertEquals("alice", restored.adminUsername());
+    assertEquals("alice", restored.password("admin"));
   }
 }
