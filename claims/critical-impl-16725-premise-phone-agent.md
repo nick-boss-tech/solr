@@ -23,4 +23,10 @@ in scope.
 Report to reports/critical-impl-16725-premise-batch-2.md. No PR, no
 Jira/GitHub post.
 
-Status: CLAIMED.
+Status: DONE. Verdict REPRODUCED (tlogReplicas and pullReplicas:
+source String, restored Long, on batch base 83d560030fde, seed
+16725C0FFEE16725; replicationFactor/nrtReplicas Long on both sides;
+maxShardsPerNode absent from both outputs here). Report at
+reports/critical-impl-16725-premise-batch-2.md, verified by
+read-back. Next unit is a gate of the existing solr-16725-submit
+branch at 550af28313, not a fresh implementation.
