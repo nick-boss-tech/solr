@@ -78,11 +78,6 @@ public class SolrIgnoredThreadsFilter implements ThreadFilter {
       return true;
     }
 
-    // CURATOR-720
-    if (threadName.equals("OverseerExitThread")) {
-      return true;
-    }
-
     // JVM JFR (Java Flight Recorder) periodic tasks thread
     if (threadName.equals("JFR Periodic Tasks")) {
       return true;

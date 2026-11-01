@@ -1674,6 +1674,19 @@ public class OverseerTest extends SolrTestCaseJ4 {
     }
   }
 
+  @Test
+  public void testOverseerExitRemovesLeaderNodeBeforeClose() throws Exception {
+    SolrZkClient overseerClient = electNewOverseer(server.getZkAddress());
+    try {
+      final String leaderPath = Overseer.OVERSEER_ELECT + "/leader";
+      assertTrue(overseerClient.exists(leaderPath));
+      overseers.get(0).close();
+      assertFalse(overseerClient.exists(leaderPath));
+    } finally {
+      overseerClient.close();
+    }
+  }
+
   private SolrZkClient electNewOverseer(String address)
       throws InterruptedException,
           KeeperException,
