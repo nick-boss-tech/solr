@@ -156,12 +156,23 @@ public abstract class AnalysisRequestHandlerBase extends RequestHandlerBase {
     return namedList;
   }
 
-  /** The analyzer used to analyze index-time values of the given field type. */
+  /**
+   * The analyzer used to analyze index-time values of the given field type.
+   *
+   * <p>The handler closes token streams, but does not close the returned analyzer. Overrides are
+   * responsible for the lifecycle of any analyzers they create.
+   */
   protected Analyzer getIndexAnalyzer(FieldType fieldType) {
     return fieldType.getIndexAnalyzer();
   }
 
-  /** The analyzer used to analyze query-time values of the given field type. */
+  /**
+   * The analyzer used to analyze query-time values of the given field type.
+   *
+   * <p>This may be called separately for query analysis and matching. The handler closes token
+   * streams, but does not close the returned analyzer. Overrides are responsible for the lifecycle of
+   * any analyzers they create.
+   */
   protected Analyzer getQueryAnalyzer(FieldType fieldType) {
     return fieldType.getQueryAnalyzer();
   }

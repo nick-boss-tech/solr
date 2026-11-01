@@ -17,6 +17,8 @@
 package org.apache.solr.handler;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.util.NamedList;
 
@@ -26,6 +28,38 @@ import org.apache.solr.common.util.NamedList;
  * @since solr 1.4
  */
 public abstract class AnalysisRequestHandlerTestBase extends SolrTestCaseJ4 {
+
+  @SuppressWarnings("unchecked")
+  protected void assertCustomAnalysis(
+      NamedList<?> index, NamedList<?> query, String queryValue, boolean firstTokenMatches) {
+    assertEquals(1, index.size());
+    assertEquals(1, query.size());
+    List<NamedList<?>> indexTokens = (List<NamedList<?>>) index.getVal(0);
+    List<NamedList<?>> queryTokens = (List<NamedList<?>>) query.getVal(0);
+    assertEquals(2, indexTokens.size());
+    assertToken(
+        indexTokens.get(0),
+        new TokenInfo("one", null, "word", 0, 3, 1, new int[] {1}, null, firstTokenMatches));
+    assertEquals(firstTokenMatches ? Boolean.TRUE : null, indexTokens.get(0).get("match"));
+    assertToken(
+        indexTokens.get(1),
+        new TokenInfo("two", null, "word", 4, 7, 2, new int[] {2}, null, false));
+    assertNull(indexTokens.get(1).get("match"));
+    assertEquals(1, queryTokens.size());
+    assertToken(
+        queryTokens.get(0),
+        new TokenInfo(
+            queryValue.toLowerCase(Locale.ROOT),
+            null,
+            "word",
+            0,
+            queryValue.length(),
+            1,
+            new int[] {1},
+            null,
+            false));
+    assertNull(queryTokens.get(0).get("match"));
+  }
 
   protected void assertToken(NamedList<?> token, TokenInfo info) {
     assertEquals(info.getText(), token.get("text"));

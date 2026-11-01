@@ -18,6 +18,7 @@ package org.apache.solr.handler;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ import org.apache.lucene.analysis.core.WhitespaceTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.FlagsAttribute;
 import org.apache.lucene.analysis.tokenattributes.FlagsAttributeImpl;
+import org.apache.lucene.tests.analysis.MockAnalyzer;
 import org.apache.lucene.tests.analysis.MockTokenizer;
 import org.apache.lucene.util.AttributeFactory;
 import org.apache.solr.analysis.TokenizerChain;
@@ -42,6 +44,7 @@ import org.apache.solr.common.params.AnalysisParams;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.handler.custom.CustomAnalysisHandlers;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrQueryRequestBase;
 import org.apache.solr.schema.FieldType;
@@ -58,6 +61,44 @@ import org.junit.Test;
 public class FieldAnalysisRequestHandlerTest extends AnalysisRequestHandlerTestBase {
 
   private FieldAnalysisRequestHandler handler;
+
+  @Test
+  public void testCustomAnalyzers() {
+    assertCustomAnalyzers("ONE TWO", false);
+  }
+
+  @Test
+  public void testCustomAnalyzersShowMatch() {
+    assertCustomAnalyzers("ONE", true);
+  }
+
+  @SuppressWarnings("rawtypes")
+  private void assertCustomAnalyzers(String queryValue, boolean firstTokenMatches) {
+    try (Analyzer indexAnalyzer = new MockAnalyzer(random(), MockTokenizer.WHITESPACE, true);
+        Analyzer queryAnalyzer = new MockAnalyzer(random(), MockTokenizer.KEYWORD, true)) {
+      CustomAnalysisHandlers.FieldHandler customHandler =
+          new CustomAnalysisHandlers.FieldHandler(indexAnalyzer, queryAnalyzer);
+      FieldAnalysisRequest request = new FieldAnalysisRequest();
+      request.addFieldType("whitetok");
+      request.addFieldName("whitetok");
+      request.setFieldValue("ONE TWO");
+      request.setQuery(queryValue);
+      request.setShowMatch(true);
+
+      NamedList<NamedList> result =
+          ((FieldAnalysisRequestHandler) customHandler)
+              .handleAnalysisRequest(request, h.getCore().getLatestSchema());
+      assertEquals(Arrays.asList(null, "whitetok"), customHandler.getAnalyzedFieldNames());
+      for (String group : List.of("field_types", "field_names")) {
+        NamedList<?> analysis = (NamedList<?>) result.get(group).get("whitetok");
+        assertCustomAnalysis(
+            (NamedList<?>) analysis.get("index"),
+            (NamedList<?>) analysis.get("query"),
+            queryValue,
+            firstTokenMatches);
+      }
+    }
+  }
 
   @Override
   @Before

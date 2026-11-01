@@ -23,6 +23,8 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.tests.analysis.MockAnalyzer;
 import org.apache.lucene.tests.analysis.MockTokenizer;
 import org.apache.solr.client.solrj.request.DocumentAnalysisRequest;
 import org.apache.solr.common.SolrInputDocument;
@@ -31,6 +33,7 @@ import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.ContentStream;
 import org.apache.solr.common.util.ContentStreamBase;
 import org.apache.solr.common.util.NamedList;
+import org.apache.solr.handler.custom.CustomAnalysisHandlers;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrQueryRequestBase;
 import org.junit.Before;
@@ -45,6 +48,43 @@ import org.junit.Test;
 public class DocumentAnalysisRequestHandlerTest extends AnalysisRequestHandlerTestBase {
 
   private DocumentAnalysisRequestHandler handler;
+
+  @Test
+  public void testCustomAnalyzers() {
+    assertCustomAnalyzers("ONE TWO", false);
+  }
+
+  @Test
+  public void testCustomAnalyzersShowMatch() {
+    assertCustomAnalyzers("ONE", true);
+  }
+
+  private void assertCustomAnalyzers(String queryValue, boolean firstTokenMatches) {
+    try (Analyzer indexAnalyzer = new MockAnalyzer(random(), MockTokenizer.WHITESPACE, true);
+        Analyzer queryAnalyzer = new MockAnalyzer(random(), MockTokenizer.KEYWORD, true)) {
+      DocumentAnalysisRequestHandler customHandler =
+          new CustomAnalysisHandlers.DocumentHandler(indexAnalyzer, queryAnalyzer);
+      SolrInputDocument document = new SolrInputDocument();
+      document.addField("id", "1");
+      document.addField("whitetok", "ONE TWO");
+      DocumentAnalysisRequest request =
+          new DocumentAnalysisRequest()
+              .setQuery(queryValue)
+              .setShowMatch(true)
+              .addDocument(document);
+
+      NamedList<Object> result =
+          customHandler.handleAnalysisRequest(request, h.getCore().getLatestSchema());
+      NamedList<?> documentAnalysis = (NamedList<?>) result.get("1");
+      NamedList<?> fieldAnalysis = (NamedList<?>) documentAnalysis.get("whitetok");
+      NamedList<?> indexValues = (NamedList<?>) fieldAnalysis.get("index");
+      assertCustomAnalysis(
+          (NamedList<?>) indexValues.get("ONE TWO"),
+          (NamedList<?>) fieldAnalysis.get("query"),
+          queryValue,
+          firstTokenMatches);
+    }
+  }
 
   @BeforeClass
   public static void beforeClass() throws Exception {
