@@ -26,3 +26,12 @@ Status: CLAIMED (implementation, then Linux proof)
 - Rung 4 (choice): option (a), as a separate commit so the race fix stays independent. `Set.of` and `Collections.singleton` both return an immutable one-element set; the element is non-null (`getName()`).
 - Rung 5 not needed: the change does not widen approved scope under rung 3.
 - Candidate: `b48c4509a0375f93080f8be50520c18dba23aa29` on `nick-boss-tech/solr:ubi-pr2452-context-submit`, one commit above `bbc00109d0`. Superseding gate: `gates/pr-2452-ubi-context-round-3.md`. Full proof is re-run on both sides at this head.
+
+## Handoff (add-only, vm4)
+
+- Status: HANDED at `b48c4509a0375f93080f8be50520c18dba23aa29`, after a host crash during the root check. Gate: `gates/pr-2452-ubi-context-round-3.md`.
+- Done at this head: fail-before on B (2 of 5 failed at the identity comparison, expected `[query-B, query-A]`, actual `[query-B, query-B]`); baseline-clean; pass-after `11994C01` 5/5 and `11994C02` 5/5; neighbors 23/23; `tidy` and clean tree.
+- Not done: root `check -x test` (no `:test` tasks in its log; rerun needed with `NODE_ENV` unset), `git diff --check B F`, final clean tree at F. No report or receipt is updated; `reports/pr-2452-ubi-context-rework-and-gate-round-1.md` and `receipts/PR-2452-ubi-context.md` still say proof pending.
+- Logs: `/workspace/gates/logs/vm4/pr2452-ubi-context-round-3/` (`state.txt`, `driver.out`, per-step `.log`, `.rc`, `-xml/`). Driver: `run.sh` in the same directory; it skips any step that has a `.rc`.
+- Clone: `/workspace/worktrees/pr2452-clone`, clean at `b48c4509a0`. Kept for the next host; remove after closeout.
+- Not posted or pushed anywhere outside the board: no PR comment, PR edit, Jira write, or contributor-branch push.
