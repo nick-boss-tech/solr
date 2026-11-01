@@ -1,6 +1,6 @@
 # Assignment: SOLR-16013 Overseer gives up its election node before closing, round 1
 
-Status: CLAIMED (phase 1, implementation and records) by vm6, 2026-11-01. Phase 2 (gate) is a separate claim. Carried from the archived board `coordination` (assignment commit 3b53a1c638) because this board is the live one.
+Status: PHASE 1 DONE (vm6, 2026-11-01T05:21:09Z): reports/solr-16013-implementation-round-1.md. Phase 2 (gate) OPEN: its own claim, gating the fork head 37b01337eb (the fix already on solr-16013-submit; no new commit in phase 1).
 
 Trigger: Nick's Overseer tail census (2026-10-31), Group D. Nick directed two-phase assignments on 2026-10-31: implementation first, gate second, one claim per phase.
 

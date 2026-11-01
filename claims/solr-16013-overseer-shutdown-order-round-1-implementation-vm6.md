@@ -1,7 +1,7 @@
 # Claim: solr-16013-overseer-shutdown-order-round-1, phase 1 implementation (vm6)
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE.
+- Status: DONE, phase 1 only.
 - Job or assignment: `assignments/solr-16013-overseer-shutdown-order-round-1.md` (carried to this board from `coordination` at 3b53a1c638). Phase 1 only; the gate is a separate claim after the phase 1 report lands.
 - Slice: phase 1 as written: census, confirm the shutdown ordering at main, implement or record a verdict, tests or a stated proof limit, report. Push to fork branch `solr-16013-submit` only if a change is needed.
 - Capability tags used: implementation, records.
@@ -11,4 +11,9 @@
 - Ordering at main, read by rung 1: `solr/core/src/java/org/apache/solr/cloud/ZkController.java` `close()` submits the overseer elector context close and the overseer close as two independent tasks on `closeThreadPool`, and the session-ending `zkClient.close()` runs on the calling thread without waiting for them.
 - Links: Ticket or parent: SOLR-16013 (https://issues.apache.org/jira/browse/SOLR-16013). Category: implementation of an existing ticket. Siblings: `pool/` records for SOLR-16013 on the archived board. Supersedes: none.
 
-Heartbeat: 2026-11-01T05:19:16Z
+
+Heartbeat: 2026-11-01T05:21:09Z
+
+Result: 2026-11-01T05:21:09Z: the fix is already on solr-16013-submit at 37b01337eb and meets the assignment; no commit or fork push in phase 1; report and census recorded.
+
+DONE: 2026-11-01T05:21:09Z. Deliverables: reports/solr-16013-implementation-round-1.md.
