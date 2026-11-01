@@ -14,3 +14,13 @@
 - Limits: no PR opening, no draft-to-ready flip, no GitHub comment,
   no Jira post, comment, or ticket. Pushes to Nick's own fork
   branches only.
+
+- Status: DONE, 2026-11-01 ~14:35 MST. Verdict: NO narrow fix, NO
+  branch. Fix shape settled against the ticket thread and the
+  current Lucene 10.4.0 API: EdgeNGram offsets are set in Lucene
+  (lucene-analysis-common), not Solr, with no offset option; the
+  principled fix is a Lucene design decision, and the Solr-side
+  workarounds (offset-rewriting post-filter, highlighter span
+  surgery) were evaluated and set aside with reasons. Report:
+  reports/critical-impl-7926-implementation.md at
+  24b6338a38f4e030c4894e6cc8a962ed70dcfe26.
