@@ -1,0 +1,7 @@
+title: Overseer queue length metrics for the state update queue and the collection work queue no longer report the same value.
+type: fixed # added, changed, fixed, deprecated, removed, dependency_update, security, other
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16793
+    url: https://issues.apache.org/jira/browse/SOLR-16793

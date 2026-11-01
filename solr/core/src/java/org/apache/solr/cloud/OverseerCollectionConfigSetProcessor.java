@@ -50,7 +50,7 @@ public class OverseerCollectionConfigSetProcessor extends OverseerTaskProcessor 
         stats,
         overseer,
         overseerNodePrioritizer,
-        overseer.getCollectionQueue(zkStateReader.getZkClient(), stats),
+        overseer.getCollectionQueue(zkStateReader.getZkClient()),
         Overseer.getRunningMap(zkStateReader.getZkClient()),
         Overseer.getCompletedMap(zkStateReader.getZkClient()),
         Overseer.getFailureMap(zkStateReader.getZkClient()),
