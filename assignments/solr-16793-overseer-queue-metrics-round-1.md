@@ -1,6 +1,6 @@
 # Assignment: SOLR-16793 Overseer queue length metrics report the same value for all queues, round 1
 
-Status: OPEN. Capability tags: implementation, records (phase 1); gate (phase 2, separate claim). Host: any capable pool Linux host.
+Status: CLAIMED. Capability tags: implementation, records (phase 1); gate (phase 2, separate claim). Host: any capable pool Linux host.
 
 Trigger: Nick's Overseer tail census (2026-10-31) placed this in Group D, small fixes whose mechanism is already specified on the ticket. Nick directed two-phase assignments on 2026-10-31: implementation first, gate second, one claim per phase.
 
