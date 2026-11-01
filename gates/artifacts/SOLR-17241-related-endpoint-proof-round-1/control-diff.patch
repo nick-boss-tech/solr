@@ -1,0 +1,73 @@
+diff --git a/solr/core/src/java/org/apache/solr/jersey/MediaTypeOverridingFilter.java b/solr/core/src/java/org/apache/solr/jersey/MediaTypeOverridingFilter.java
+index 5b4b0e761fe..70122f29425 100644
+--- a/solr/core/src/java/org/apache/solr/jersey/MediaTypeOverridingFilter.java
++++ b/solr/core/src/java/org/apache/solr/jersey/MediaTypeOverridingFilter.java
+@@ -21,7 +21,6 @@ import static jakarta.ws.rs.core.HttpHeaders.ACCEPT;
+ import static jakarta.ws.rs.core.HttpHeaders.CONTENT_TYPE;
+ import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
+ import static org.apache.solr.common.params.CommonParams.WT;
+-import static org.apache.solr.jersey.RequestContextKeys.SOLR_PARAMS;
+ import static org.apache.solr.jersey.RequestContextKeys.SOLR_QUERY_REQUEST;
+ 
+ import jakarta.ws.rs.container.ContainerRequestContext;
+@@ -32,7 +31,6 @@ import jakarta.ws.rs.core.Context;
+ import java.io.IOException;
+ import java.util.List;
+ import org.apache.solr.api.JerseyResource;
+-import org.apache.solr.common.params.SolrParams;
+ import org.apache.solr.handler.admin.ZookeeperRead;
+ import org.apache.solr.handler.api.V2ApiUtils;
+ import org.apache.solr.request.SolrQueryRequest;
+@@ -67,11 +65,8 @@ public class MediaTypeOverridingFilter implements ContainerResponseFilter {
+ 
+     final SolrQueryRequest solrQueryRequest =
+         (SolrQueryRequest) requestContext.getProperty(SOLR_QUERY_REQUEST);
+-    // Collection-scoped Jersey requests can be served without a local SolrQueryRequest.
+-    final var params =
+-        (solrQueryRequest != null)
+-            ? solrQueryRequest.getParams()
+-            : (SolrParams) requestContext.getProperty(SOLR_PARAMS);
++    // TODO Is it valid for SQRequest to be null?
++    final var params = (solrQueryRequest != null) ? solrQueryRequest.getParams() : null;
+     if (params != null && params.get(WT) != null) { // Override for 'wt'
+       final String mediaType = V2ApiUtils.getMediaTypeFromWtParam(params, null);
+       if (mediaType != null) {
+diff --git a/solr/core/src/java/org/apache/solr/jersey/MessageBodyWriters.java b/solr/core/src/java/org/apache/solr/jersey/MessageBodyWriters.java
+index fad5dbc33d9..cf4d5a434ab 100644
+--- a/solr/core/src/java/org/apache/solr/jersey/MessageBodyWriters.java
++++ b/solr/core/src/java/org/apache/solr/jersey/MessageBodyWriters.java
+@@ -18,7 +18,6 @@
+ package org.apache.solr.jersey;
+ 
+ import static org.apache.solr.client.solrj.response.JavaBinResponseParser.JAVABIN_CONTENT_TYPE_V2;
+-import static org.apache.solr.jersey.RequestContextKeys.SOLR_PARAMS;
+ import static org.apache.solr.jersey.RequestContextKeys.SOLR_QUERY_REQUEST;
+ import static org.apache.solr.jersey.RequestContextKeys.SOLR_QUERY_RESPONSE;
+ import static org.apache.solr.response.QueryResponseWriter.CONTENT_TYPE_TEXT_UTF8;
+@@ -35,10 +34,8 @@ import java.io.IOException;
+ import java.io.OutputStream;
+ import java.lang.annotation.Annotation;
+ import java.lang.reflect.Type;
+-import org.apache.solr.common.params.SolrParams;
+ import org.apache.solr.handler.api.V2ApiUtils;
+ import org.apache.solr.request.SolrQueryRequest;
+-import org.apache.solr.request.SolrQueryRequestBase;
+ import org.apache.solr.response.CSVResponseWriter;
+ import org.apache.solr.response.JavaBinResponseWriter;
+ import org.apache.solr.response.PrometheusResponseWriter;
+@@ -167,14 +164,8 @@ public class MessageBodyWriters {
+         throws IOException, WebApplicationException {
+       final ContainerRequestContext requestContext =
+           resourceContext.getResource(ContainerRequestContext.class);
+-      final SolrQueryRequest existingRequest =
+-          (SolrQueryRequest) requestContext.getProperty(SOLR_QUERY_REQUEST);
+-      // Collection-scoped requests served by a non-hosting node have no SolrQueryRequest
+       final SolrQueryRequest solrQueryRequest =
+-          existingRequest != null
+-              ? existingRequest
+-              : new SolrQueryRequestBase(
+-                  null, (SolrParams) requestContext.getProperty(SOLR_PARAMS));
++          (SolrQueryRequest) requestContext.getProperty(SOLR_QUERY_REQUEST);
+       final SolrQueryResponse solrQueryResponse =
+           (SolrQueryResponse) requestContext.getProperty(SOLR_QUERY_RESPONSE);
+ 
