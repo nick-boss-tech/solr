@@ -15,4 +15,9 @@ on current main.
 Report to reports/critical-impl-14346-premise-batch-2.md. No PR, no
 Jira/GitHub post.
 
-Status: CLAIMED.
+Status: DONE. Verdict REPRODUCED (2-node cluster probe on main
+83d560030fde, seed 14346C0FFEE14346: ticket-case LB client over
+root base URLs left the restarted node zombie after 15s of 1s
+alive checks; withDefaultCollection control revived). Report at
+reports/critical-impl-14346-premise-batch-2.md, verified by
+read-back.
