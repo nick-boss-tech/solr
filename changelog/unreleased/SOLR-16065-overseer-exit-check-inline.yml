@@ -1,0 +1,9 @@
+title: >
+  Overseer checks whether it is still the leader on exit in the exiting thread instead of a
+  leaked separate thread
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16065
+    url: https://issues.apache.org/jira/browse/SOLR-16065
