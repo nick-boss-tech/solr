@@ -1,6 +1,6 @@
 # Claim: PR 5238 ubi-contract round 2 gate closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (round-2 gate file marked DONE, Status line only, verified by read-back).
 
 - Job: gates/pr-5238-ubi-contract-round-2-vm4.md only. The
   round-1 gate is deliberately untouched: round 2 supersedes
