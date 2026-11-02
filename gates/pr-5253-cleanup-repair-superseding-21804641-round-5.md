@@ -1,6 +1,6 @@
 # Gate: SOLR-18601 cleanup repair, superseding round 5 at 21804641
 
-Status: OPEN. Immutable once posted. Supersedes `gates/pr-5253-cleanup-repair-superseding-45dbc3a-round-4.md` for proof at the head below. Round 4's requirements apply unchanged, with K in place of J.
+Status: DONE GREEN (vm2), with one owner-accepted pre-existing neighbour failure (`CoreAdminHandlerTest.testDeleteInstanceDirAfterCreateFailure`, failing identically on upstream). Receipts `receipts/PR-5253-cleanup-repair-round-5.md` and `receipts/PR-5253-cleanup-repair-round-5-closed.md`. The job file was never flipped; closed in the 2026-11-02 cleanup.
 
 ## Decision recorded before the run (decision ladder, `material/decision-ladder.md`)
 
