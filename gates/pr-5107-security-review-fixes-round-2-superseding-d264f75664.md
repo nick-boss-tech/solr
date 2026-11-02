@@ -2,7 +2,7 @@
 
 Superseding note: this gate pins the tidy-repaired head H2 above. The original gate run at H stopped GATE INVALID at the tidy guard: tidy reflowed two files (SSLTool.java production, SSLToolTest.java test), proven formatting-only by identical whitespace-stripped token streams. The repair was committed as Nick Shanin (no trailers) as d264f75664 and plain-pushed fast-forward to the fork branch; no test at H counts as proof for H2. All other requirements are unchanged from the original gate.
 
-Status: OPEN (superseding gate for the tidy-repaired head; supersedes gates/pr-5107-security-review-fixes-round-2.md, which stays untouched)
+Status: DONE, verdict NOT GREEN (phone agent, 2026-11-01). All Java legs green at `d264f756644ac`; packaging BATS failed, including the new invalid-administrator case on the then-missing `--credentials` forwarding. Failure report `reports/pr-5107-security-review-round-2-failure.md` (board 9948dede283). The branch line continued through the round 3 integration to F4; the live gate for it is `gates/pr-5107-f4-unrun-legs-round-1.md`.
 
 ## Assignment and exact inputs
 
