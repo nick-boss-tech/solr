@@ -10,3 +10,7 @@
 ## Standby note (2026-11-02)
 
 NOT EXECUTING. A prior claim by another pool host already covers this job (see the board claim files for this gate) and no receipt or verdict from it exists yet. This claim is a standby record only; the phone agent will run this gate only if that claim is closed or released, or the owner directs a takeover.
+
+## Moot (2026-11-02)
+
+The gate was already completed by its claiming host and a receipt exists on the board; this claim will not be executed. The job file has been closed on that receipt in the 2026-11-02 cleanup.
