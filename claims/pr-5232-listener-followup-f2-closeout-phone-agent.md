@@ -1,6 +1,6 @@
 # Claim: PR 5232 listener followup F2 gate closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (F2 gate file marked DONE, Status line only, verified by read-back).
 
 - Job: gates/pr-5232-listener-followup-f2-round-1.md only. The
   original round-1 gate is deliberately untouched: its head
