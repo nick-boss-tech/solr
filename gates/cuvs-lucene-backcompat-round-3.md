@@ -1,6 +1,6 @@
 # Gate: cuvs-lucene archived-index compatibility, round 3
 
-Status: OPEN
+Status: DONE (gate GREEN, receipt receipts/CUVS-LUCENE-BACKCOMPAT-ROUND-3.md; closeout 2026-11-01, claims/cuvs-lucene-backcompat-round-3-closeout-phone-agent.md).
 
 - Intended host: any capable Linux CPU gate host, one gate at a time.
 - Capability tags: gate, records.
