@@ -1,6 +1,6 @@
 # Gate: SOLR-18601 / PR 5253 migration cleanup, superseding round 2 at 98d1127
 
-Status: OPEN. Immutable once posted. Supersedes `gates/pr-5253-cleanup-superseding-cc8c423-round-1.md` (board `3c03ad95773`) for the exact head below, which in turn superseded `gates/pr-5253-cleanup-round-1.md` (board `3e84be3f668`). The original job and round 1 stay unchanged.
+Status: SUPERSEDED by round 5 (`gates/pr-5253-cleanup-repair-superseding-21804641-round-5.md`, DONE GREEN). Closed in the 2026-11-02 cleanup.
 
 ## Why superseded
 
