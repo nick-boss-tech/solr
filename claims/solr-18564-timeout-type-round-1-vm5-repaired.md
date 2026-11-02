@@ -1,7 +1,7 @@
 # Claim: SOLR-18564 / PR 5192 typed executor timeout follow-up, Linux gate, round 1
 
 - Claimant host: vm5, matching the Host id line in `hosts/vm5.md`.
-- Status: ACTIVE; a receipt at the exact head is the completion record.
+- Status: DONE, GREEN at 6ca1cba8061b. Receipt: receipts/SOLR-18564-timeout-type-round-1.md. Closeout 2026-11-01, claims/solr-18564-timeout-type-superseding-closeout-phone-agent.md.
 - Job or assignment: `gates/SOLR-18564-pr5192-timeout-type-round-1.md`.
 - Slice: the whole gate at head `6ca1cba8061b3c6298040634972afc4361f55add` (changelog parse, tidy, Error Prone compile, focused suites with seeds 18564ABC0001 and 18564ABC0002, matched mutation, `check -x test` with NODE_ENV unset).
 - Capability tags used: gate, premise-run.
