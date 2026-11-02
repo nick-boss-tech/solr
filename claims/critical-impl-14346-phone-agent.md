@@ -14,4 +14,6 @@ hardening gate, push to the fork, and post a receipt at
 reports/critical-impl-14346-implementation.md. No PR, no Jira/GitHub
 post.
 
-Status: CLAIMED.
+Status: DONE. Branch solr-14346-submit gated GREEN at
+7a78b8cbdea19dcd906c8347b77d1c13a235ab06 and pushed; receipt at
+reports/critical-impl-14346-implementation.md (3c43f3d8a96ff04e34befaf01ab1a0b0b7ba6c2e).
