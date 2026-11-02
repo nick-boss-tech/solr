@@ -1,6 +1,6 @@
 # Gate: PR 5238 client search dispatch, round 1
 
-Status: OPEN
+Status: DONE GREEN (vm2). Gate passed at F1 `ede5646e2b2281bf4fc1483c2867f0f047088527`; receipt `receipts/PR-5238-client-dispatch.md`. The job file was never flipped; closed in the 2026-11-02 cleanup.
 
 - Tags: gate, premise-run, review. Intended host: any capable pool Linux gate host with the branch's JDK/toolchain, supporting thread CPU timing. One gate at a time under the host build lock.
 - Source: Nick's direct October 26 request to code regressions and a fix for the PR 5238 review finding, then send it to a gate agent.
