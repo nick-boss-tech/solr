@@ -1,6 +1,6 @@
 # Claim: SOLR-18552 9x owner-items gate closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (gate file and original claim marked DONE, Status lines only, verified by read-back).
 
 - Job: gates/SOLR-18552-9x-owner-items.md.
 - Basis: receipt receipts/SOLR-18552.md already carries "9.x
