@@ -2,21 +2,25 @@
 
 Status: DRAFT, prepared by the phone agent on 2026-11-02 after the
 round 3 partial gate at F2 `7e531b083182366f8b6e7f00a3781ce3cbb713de`
-(receipt `receipts/PR-5107-security-integration-round-3-partial.md`).
-Posting needs Nick's per-text go. Target: a comment on apache/solr
-PR 5107 (Eric Pugh's draft, SOLR-8442).
+(receipt `receipts/PR-5107-security-integration-round-3-partial.md`),
+and revised the same day to head F3
+`e75405eff845eda0e0f4f252d447347e2206acbe`, which removes the two
+scoped changelog fragments at Nick's direction (the PR author owns
+the changelog entry). Posting needs Nick's per-text go. Target: a
+comment on apache/solr PR 5107 (Eric Pugh's draft, SOLR-8442).
 
 ---
 
 🤖 *AI text below* 🤖 *(reviewed by Nick Shanin)*
 
-Prepared fixes for the November 2 review, integrated with your current head: [compare 7d193dac0f...F2](https://github.com/apache/solr/compare/7d193dac0f4abc441488f0ac2a9a734983d4fcd2...nick-boss-tech:solr-8442-security-review-r2-submit)
+Prepared fixes for the November 2 review, integrated with your current head: [compare 7d193dac0f...F3](https://github.com/apache/solr/compare/7d193dac0f4abc441488f0ac2a9a734983d4fcd2...nick-boss-tech:solr-8442-security-review-r2-submit)
 
-The branch merges your head `7d193dac0f` with the security-review fixes (both histories preserved, no rebase) and adds one repair commit on top. RunExampleTool already accepts `--credentials`; `bin/solr` rejected the option as unsupported, so the repair teaches the shell script to forward `--credentials` and `-u` to example starts as separate arguments, and to reject missing option values and credentials on a plain start before anything starts. The ZooKeeper client-address selection moved back above the logging guard so the log-call validator accepts it again. The secure-example BATS fixture now also covers the credential aliases, password rotation through the API, and a wrong-CA rejection followed by a correct-CA success. Two scoped changelog fragments are included, and the generated CLI start page is synchronized at the head.
+The branch merges your head `7d193dac0f` with the security-review fixes (both histories preserved, no rebase) and adds one repair commit on top. RunExampleTool already accepts `--credentials`; `bin/solr` rejected the option as unsupported, so the repair teaches the shell script to forward `--credentials` and `-u` to example starts as separate arguments, and to reject missing option values and credentials on a plain start before anything starts. The ZooKeeper client-address selection moved back above the logging guard so the log-call validator accepts it again. The secure-example BATS fixture now also covers the credential aliases, password rotation through the API, and a wrong-CA rejection followed by a correct-CA success. The generated CLI start page is synchronized at the head. No changelog fragment rides along; the PR's entry is yours to write.
 
 <details>
-<summary>Verification on Linux at 7e531b083182366f8b6e7f00a3781ce3cbb713de</summary>
+<summary>Verification on Linux at e75405eff845eda0e0f4f252d447347e2206acbe</summary>
 
+- This head differs from the gated head `7e531b083182366f8b6e7f00a3781ce3cbb713de` only by the removal of the two scoped changelog fragments; no code or test file changed, and tidy re-verified clean at this head. The runs below are from the gated head.
 - `:solr:solr-ref-guide:generateCliDocs` leaves the tree clean; `:solr:core:compileTestJava` and `:solr:core:validateLogCalls` pass; tidy is clean.
 - With the security manager: SecureExampleCredentialsTest 5 of 5, SecureExampleZkTest 3 of 3, CLIUtilsTest 10 of 10, AuthToolTest and AuthToolPicocliTest 3 of 3 each; SSLToolTest and IncludeFileEditorTest pass with their usual external-process skips under the manager.
 - Without the security manager: SSLToolTest 9 of 9 with no skips, IncludeFileEditorTest 7 of 7, and both secure-setup example methods pass in each parser class.
@@ -32,7 +36,7 @@ To take the branch onto your PR head (your head is an ancestor, so this fast-for
 ```
 git switch SOLR-8442
 git fetch https://github.com/nick-boss-tech/solr.git solr-8442-security-review-r2-submit
-git merge --ff-only 7e531b083182366f8b6e7f00a3781ce3cbb713de
+git merge --ff-only e75405eff845eda0e0f4f252d447347e2206acbe
 ```
 
 You're welcome to take the commits or adapt the changes.
