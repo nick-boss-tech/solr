@@ -1,6 +1,6 @@
 # Assignment: SOLR-16013 Overseer gives up its election node before closing, round 1
 
-Status: PHASE 1 DONE (reports/solr-16013-implementation-round-1.md). PHASE 2 NEARLY (vm6, 2026-11-01T06:20:08Z): receipts/SOLR-16013.md. Checks green at 37b01337eb; the base-revert proof does not reproduce the ordering premise (see receipt). Not re-run; needs investigation.
+Status: HANDED. PHASE 1 DONE (reports/solr-16013-implementation-round-1.md). PHASE 2 handed off by vm6 at NEARLY (2026-11-02T01:47Z): receipts/SOLR-16013.md. Checks green at 37b01337eb; the base-revert proof does not reproduce the ordering premise (see receipt). Not re-run; next claimant starts with the ordering method run alone at base 14c7aac0d151 and at 37b01337eb, same seed (see claims/solr-16013-overseer-shutdown-order-round-1-gate-vm6.md).
 
 Trigger: Nick's Overseer tail census (2026-10-31), Group D. Nick directed two-phase assignments on 2026-10-31: implementation first, gate second, one claim per phase.
 
