@@ -1,6 +1,6 @@
 # Gate: adjacent UBI recording context regression, round 1
 
-Status: OPEN
+Status: WITHDRAWN by `gates/pr-5238-ubi-context-round-1-standdown.md` (the stand-down record states it supersedes this execution request; the replacement is the PR 2452 rework assignment). Closed in the 2026-11-02 cleanup.
 
 ## Assignment and exact revisions
 
