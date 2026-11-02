@@ -1,6 +1,6 @@
 # Gate: PR 5107 at F4, legs that cannot run on the phone agent host, round 1
 
-Status: OPEN.
+Status: CLAIMED by vm6 (see claims/pr-5107-f4-unrun-legs-round-1-vm6.md).
 
 ## Why this gate exists
 
