@@ -1,6 +1,6 @@
 # Gate addendum: PR 5235 round 3 self-review correction
 
-Status: OPEN
+Status: CLOSED with its parent job `gates/pr-5235-compatibility-fixes-round-3.md` in the 2026-11-02 cleanup (superseded there, and the line has since advanced past the addendum's head).
 Tags: gate, premise-run, review, records
 Intended host: the host claiming gates/pr-5235-compatibility-fixes-round-3.md
 
