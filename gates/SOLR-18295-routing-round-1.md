@@ -1,6 +1,6 @@
 # Gate: SOLR-18295 leaders-first routing, round 1
 
-Status: OPEN
+Status: DONE. Gate executed by vm6 at the pinned head `b273b245115b` (test-file change only, 20 of 20 fresh runs pass); receipt `receipts/SOLR-18295.md`. Closed in the 2026-11-02 cleanup.
 
 - Tags: gate, settling-run. Intended host: any capable Linux gate host; serialize under its build lock. Windows implementation only; no local Gradle or tests ran.
 - Source: Nick's explicit October 24 request to implement a branch, and `claims/solr-18295-routing-implementation-round-1.md`.
