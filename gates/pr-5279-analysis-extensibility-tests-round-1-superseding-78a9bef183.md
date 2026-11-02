@@ -1,6 +1,6 @@
 # Gate for analysis handler extensibility tests round 1 (superseding head)
 
-Status: OPEN. Supersedes `gates/pr-5279-analysis-extensibility-tests-round-1.md` for execution at the repaired head only; the original job is unchanged and proves nothing by itself at the old head.
+Status: DONE. Gate finished GREEN at H2 78a9bef183e710833517a32c1691dfd2c2d9a7df; receipt receipts/PR-5279-analysis-extensibility-tests.md at 8772b77bdb6df926a6359d9b90e5bb9dd0ef174c. Supersedes `gates/pr-5279-analysis-extensibility-tests-round-1.md` for execution at the repaired head only; the original job is unchanged and proves nothing by itself at the old head.
 
 ## Identity and ownership
 
