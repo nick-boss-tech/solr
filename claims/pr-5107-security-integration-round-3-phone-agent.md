@@ -1,7 +1,7 @@
 # Claim: PR 5107 integrated security fixes round 3, partial gate (phone agent)
 
 - Claimant host: phone-agent, matching `hosts/phone-agent.md`.
-- Status: CLAIMED, taking over the handed vm6 claim
+- Status: DONE (PARTIAL gate at F2; receipt `receipts/PR-5107-security-integration-round-3-partial.md`). Took over the handed vm6 claim
   (`claims/pr-5107-security-integration-round-3-vm6.md`, HANDED at
   2026-11-02T17:11:43Z after two vm6 host restarts). Authorized by Nick
   in the main chat on 2026-11-02.
@@ -41,3 +41,14 @@
 - Deliverables: `receipts/PR-5107-security-integration-round-3-partial.md`
   and an add-only completion report, written by this host. No PR
   comment, review, or Jira action.
+
+- Result (2026-11-02): generateCliDocs clean; compile and
+  validateLogCalls pass; both unit runs pass with all required
+  executions; the three-test original-production pair fails before
+  with the intended signatures; final tidy clean. Root
+  `check -x test` failed at `:solr:webapp:verifyUiWasm` (checksum
+  mismatch on the prebuilt UI bundle), reproduced identically at the
+  contributor head A with a different downloaded hash, so it
+  pre-exists at A and is outside this branch's delta. BATS legs
+  skipped by owner direction, named in the receipt. Completion
+  report: `reports/pr-5107-security-integration-round-3-partial-gate-round-1.md`.
