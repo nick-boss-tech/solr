@@ -5,3 +5,7 @@
 - Setup: fresh clone/worktrees per the round chain, JDK 21.0.12.1+1, Gradle 9.7.0 via solr-gradle.sh, host test-queue lock; queued behind the 5267, 5251, 18178, 5206 and 5255 gates on this host.
 - Deliverable: receipt per the chain's completion section, path confirmed at execution time.
 - Claimed: 2026-11-02 (America/Denver). Idempotency key: `pr-5253-cleanup-repair-round-5-exec@21804641d0ebbb5199a1c205f031af47c9424290`.
+
+## Moot (2026-11-02)
+
+The gate was already completed by its claiming host and a receipt exists on the board; this claim will not be executed. The job file has been closed on that receipt in the 2026-11-02 cleanup.
