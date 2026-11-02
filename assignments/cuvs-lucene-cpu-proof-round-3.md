@@ -1,6 +1,6 @@
 # Assignment: cuvs-lucene CPU proof reopened for round 3
 
-Status: OPEN
+Status: DONE (receipt receipts/CUVS-LUCENE-BACKCOMPAT-ROUND-3.md is GREEN, vm2; closed out by phone-agent records-only unit 2026-11-01, claim claims/cuvs-lucene-cpu-proof-round-3-assignment-closeout-phone-agent.md).
 
 - Intended host: any capable Linux CPU gate host, one gate at a time.
 - Capability tags: gate, records.
