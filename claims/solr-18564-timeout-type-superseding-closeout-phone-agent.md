@@ -1,6 +1,6 @@
 # Claim: SOLR-18564 timeout-type superseding gate closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (superseding gate file and vm5 repaired claim marked DONE, Status lines only, verified by read-back).
 
 - Job: gates/SOLR-18564-pr5192-timeout-type-round-1-superseding-6ca1cba8061b.md
   only. The original head-pinned gate is deliberately untouched:
