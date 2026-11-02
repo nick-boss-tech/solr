@@ -21,4 +21,4 @@ approximates them).
 Report to reports/critical-impl-11668-premise-batch-2.md. No PR, no
 Jira/GitHub post.
 
-Status: CLAIMED.
+Status: DONE. Verdict NOT REPRODUCED (both legs on main 83d560030fde, seed 11668C0FFEE11668: existing-harness pair and ticket-faithful no-weight EdgeNGram variant built and queried clean, no StackOverflowError). Report at reports/critical-impl-11668-premise-batch-2.md, verified by read-back.
