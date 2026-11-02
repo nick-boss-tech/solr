@@ -1,6 +1,6 @@
 # Gate: SOLR-18589 alias lock follow-up, round 2 (superseding round 1)
 
-Status: OPEN
+Status: SUPERSEDED by round 4 (`gates/pr-5255-alias-lock-followup-round-4.md`, DONE GREEN). Closed in the 2026-11-02 cleanup.
 
 - Tags: gate, premise-run, review. Host: vm5 (Linux, JDK 21.0.12.1, Gradle 9.7.0 through the wrapper).
 - Supersedes: `gates/pr-5255-alias-lock-followup-round-1.md`, which stays immutable. Round 1's exact head `fd49245a38ba779f78840477dbf6db34b92c5f6b` failed the tidy preflight: `AliasCollectionApiLockTest.java` needed formatting.
