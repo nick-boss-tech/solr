@@ -48,3 +48,5 @@ POSTED; bodies read back byte-identical from the GitHub API).
 No GitHub or Jira action beyond the three comments already posted. Gate
 files are closed by a Status-line-only edit pointing here, per the owner's
 direction.
+
+Addendum: the dependent assignment assignments/pr-5278-license-gate-remaining-legs-round-1.md (finish the 5278 gate remaining legs, and write the PR 5276 receipt) was unclaimed and is closed by the same direction; its Status line now reads CLOSED with a pointer here.
