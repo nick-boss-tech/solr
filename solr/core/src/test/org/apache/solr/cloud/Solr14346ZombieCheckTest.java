@@ -26,6 +26,7 @@ import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.params.SolrParams;
+import org.apache.solr.common.util.SuppressForbidden;
 import org.apache.solr.common.util.TimeSource;
 import org.apache.solr.embedded.JettySolrRunner;
 import org.apache.solr.util.TimeOut;
@@ -120,6 +121,7 @@ public class Solr14346ZombieCheckTest extends SolrCloudTestCase {
     }
   }
 
+  @SuppressForbidden(reason = "test reads the LB client's private zombie map to observe revival")
   private static Set<String> zombieBaseUrls(LBSolrClient lb) throws Exception {
     Field field = LBSolrClient.class.getDeclaredField("zombieServers");
     field.setAccessible(true);
