@@ -1,6 +1,6 @@
 # Assignment: finish PR 5278 license gate, remaining legs, round 1
 
-Status: OPEN. Continues `gates/pr-5278-license-metadata-round-1.md` (the immutable job) after the vm2 handback `claims/pr-5278-license-metadata-gate-round-1-vm2-handback.md`. Capability: gate, records. Host: any capable Linux host with JDK 11 and Gradle 8.10 wrapper, no Docker needed.
+Status: CLOSED (2026-11-02, owner direction). The parent gate is closed as superseded by the posted PR comment route; see reports/pr-5274-5276-5278-license-gates-closure-round-1.md. The PR 5276 receipt task in this assignment is closed with it. No receipt will be written.
 
 - Pinned head H: `cb8c6ab2752b5202b52c7479b9b77ee7806b350e`; parent P `82f60b1b7976c187541a6f6808a781bb7f8b9228`. Fork branch `pr-5278-jcl-license-metadata`. Refresh the fork and PR head before proof; stop and report if either moved.
 - Claim first: add a new execution claim naming this assignment and the host. Do not edit the handback or the job.
