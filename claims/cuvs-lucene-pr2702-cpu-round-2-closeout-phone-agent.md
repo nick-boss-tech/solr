@@ -1,6 +1,6 @@
 # Claim: cuvs-lucene pr2702 cpu round 2 gate closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (gate file marked DONE, Status line only, verified by read-back).
 
 - Job: gates/cuvs-lucene-pr2702-cpu-round-2.md only.
 - Basis: receipt receipts/CUVS-LUCENE-PR2702-CPU-ROUND-2.md
