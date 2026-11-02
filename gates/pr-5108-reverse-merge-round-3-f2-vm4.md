@@ -1,6 +1,6 @@
 # Gate: PR 5108 deterministic reverse shard merge, round 3, at repaired head F2 (superseding)
 
-Status: OPEN. Immutable once pushed. Proves only the exact head below.
+Status: DONE GREEN (vm4). Gate passed at F2 `495d3fbdbe07bfb474b43d77b89f8c033bbeb8fd`; receipt `receipts/SOLR-17786-round-3-vm4.md`. The job file was never flipped; closed in the 2026-11-02 cleanup.
 Supersedes: `gates/pr-5108-reverse-merge-round-3.md` for proof. That job named `c5a16393d2b0d2ad8b05f66697a906733e551b69`, which tidy changes by one line in `DistribCursorPagingTest.java`. The original job's own preflight rule requires a repair commit and a superseding job pinned to the repaired head.
 
 - Exact head F2: `495d3fbdbe07bfb474b43d77b89f8c033bbeb8fd` (commit "SOLR-17786: tidy the local query call in DistribCursorPagingTest", Nick Shanin, no trailers, one commit above `c5a16393d2`).
