@@ -1,6 +1,6 @@
 # Assignment: SOLR-16065 run checkIfIamStillLeader outside a thread in the Overseer, round 1
 
-Status: OPEN. Capability tags: implementation, records (phase 1); gate (phase 2, separate claim). Host: any capable pool Linux host.
+Status: DONE. Capability tags: implementation, records (phase 1); gate (phase 2, separate claim). Host: any capable pool Linux host. Phase 1 report reports/solr-16065-implementation-round-1.md; phase 2 gate receipt receipts/SOLR-16065.md (GREEN).
 
 Trigger: Nick's Overseer tail census (2026-10-31), Group D. Nick directed two-phase assignments on 2026-10-31: implementation first, gate second, one claim per phase.
 
