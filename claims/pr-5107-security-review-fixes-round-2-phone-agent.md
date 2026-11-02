@@ -2,7 +2,7 @@
 
 - Host: phone agent (Linux gate host, JDK 21.0.12.1+1, Gradle 9.7.0 via
   ~/workspace/tools/solr-gradle.sh, serialized through the test-queue flock).
-- Status: CLAIMED.
+- Status: DONE, FAIL.
 - Unit: Linux gate for `gates/pr-5107-security-review-fixes-round-2.md`.
   Fork branch `nick-boss-tech/solr:solr-8442-security-review-r2-submit` at
   pinned head H `795b821a36e7d395b80ee3473bea4de82875e397`, one commit above
@@ -28,3 +28,12 @@
   Superseding gate gates/pr-5107-security-review-fixes-round-2-
   superseding-d264f75664.md pins H2; the original gate file is untouched.
   Runner retargeted to H2 and relaunched; no test at H counts as proof.
+- Outcome 2026-11-01 ~21:40 MST: gate NOT GREEN, runner ended GATE FAILED
+  (packaging false). Unit legs green (tidy, compile, default-SM 5/5
+  SecureExampleCredentialsTest methods, no-SM SSLToolTest 9/0/0/0);
+  packaging SOLR_PICOCLI=false failed 10/10 BATS cases: 9 on the root-user
+  refusal (environmental, bin/solr exits without --force on this root host)
+  and the new invalid-administrator case on bin/solr having no
+  --credentials flag (implementation handback). Failure report
+  reports/pr-5107-security-review-fixes-round-2-gate-round-1.md.
+  Steps 6-10 did not run. Branch unchanged at H2, fork ref still H2.
