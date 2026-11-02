@@ -33,6 +33,8 @@ Record the layout failure in the receipt and keep its log. It is not proof for t
 
 `pool/bin/sweep-run.sh` now refuses a `check`, `:check`, `solr-ref-guide` or Antora task when the worktree's `.git` is a file. It exits 5 and writes the refusal to the run log, so no Gradle time is spent on it.
 
+Recurrence note (2026-11-01, phone agent): this trap has now cost a gate leg at least four times: SOLR-5821 (2026-10-03, ref-guide build in a linked worktree), SOLR-18555 (2026-10-19, `:solr:solr-ref-guide:check -x test` failed identically at the branch head and at base in worktrees), SOLR-17988 (2026-10-24, round 2 failed in a worktree, round 3 passed in a standalone clone), and PR 5279 (2026-11-01, a 12m 31s worktree root `check -x test` failed on this task alone, 525 tasks executed; the same head then passed the full root check in a normal clone). The sweep-run.sh refusal only protects runs launched through sweep-run.sh. Ad hoc gate runners (the phone agent's `~/workspace/tools/*-gate-runner.sh` pattern is one example) bypass it and keep hitting the same failure. Rule for any runner not launched through sweep-run.sh: before starting a root `check` or any ref-guide leg, test that the checkout's `.git` is a directory; if it is a file, run that leg in a normal clone at the same head from the start, and state the layout in the receipt. Do not spend the worktree run first.
+
 ## 2. `NODE_ENV=production` skips devDependencies
 
 Symptom: the Antora or js-client npm steps fail to find devDependencies. The vm4 shell sets `NODE_ENV=production`.
