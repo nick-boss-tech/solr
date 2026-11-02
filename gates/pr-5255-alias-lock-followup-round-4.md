@@ -1,6 +1,6 @@
 # Gate: SOLR-18589 alias lock follow-up, round 4 (superseding rounds 1 and 2)
 
-Status: OPEN
+Status: DONE GREEN (vm5). Gate passed at `52dacc23b5bb67d254c111c948733da7bc4a9f81`; receipt `receipts/PR-5255-alias-lock-followup.md`. The job file was never flipped; closed in the 2026-11-02 cleanup.
 
 - Tags: gate, premise-run, review. Host: vm5 (Linux, JDK 21.0.12.1, Gradle 9.7.0 through the wrapper).
 - Supersedes: `gates/pr-5255-alias-lock-followup-round-1.md` and round 2 (round-2 claim `claims/pr-5255-alias-lock-followup-gate-round-2-vm5.md`, failure verdict `claims/pr-5255-alias-lock-followup-gate-round-2-vm5-verdict-compile-failed.md`). Round 3 ended in a failure verdict at `claims/pr-5255-alias-lock-followup-gate-round-3-vm5-verdict-test-status-read.md`: two focused tests read a REQUESTSTATUS after SolrJ `waitFor` had deleted it.
