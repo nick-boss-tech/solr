@@ -1,6 +1,6 @@
 # Gate: interrupted-close fix, final validation round 1
 
-Status: OPEN until its receipt. Immutable job.
+Status: DONE (gate green for F 5ec461c4012036faf3fd14363202e82c4686fb07, receipt receipts/teardown-interrupt-close-fix-final-validation-round-1.md; closeout 2026-11-01, claims/teardown-final-validation-closeout-phone-agent.md). Immutable job.
 
 - Fork: nick-boss-tech/solr, branch solr-teardown-interrupt-close-fix.
 - Exact head F: 5ec461c4012036faf3fd14363202e82c4686fb07 (parent H 8787c6605ad5a5d322e9bca253235cd73142f101, commit "Import HttpClient in the new interrupt-close tests").
