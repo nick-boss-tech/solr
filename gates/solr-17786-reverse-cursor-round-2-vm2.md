@@ -1,6 +1,6 @@
 # Gate: SOLR-17786 / PR 5108 reverse cursor candidate, round 2 (supersedes round 1 two-shard)
 
-Status: OPEN. Host: vm2. Tags: gate, settling-run.
+Status: DONE GREEN (vm2). Gate passed at `fde070281383f113a331a9ec5ccde173b66fac3c`; receipt `receipts/SOLR-17786.md`. The job file was never flipped; closed in the 2026-11-02 cleanup.
 
 ## Immutable input
 
