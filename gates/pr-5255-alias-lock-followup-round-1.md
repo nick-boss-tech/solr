@@ -1,6 +1,6 @@
 # Gate: SOLR-18589 alias lock follow-up, round 1
 
-Status: SUPERSEDED by round 4 (`gates/pr-5255-alias-lock-followup-round-4.md`, DONE GREEN at `52dacc23b5bb`; receipt `receipts/PR-5255-alias-lock-followup.md`). Its requirements text is the governing text for round 4 and stays as the reference. Closed in the 2026-11-02 cleanup.
+Status: SUPERSEDED by round 4 (`gates/pr-5255-alias-lock-followup-round-4.md`, DONE per its receipt with one inherited-skip exception awaiting the owner's call). Its requirements text governed round 4 and stays as the reference. Closed in the 2026-11-02 cleanup.
 
 - Tags: gate, premise-run, review. Intended host: any capable Linux gate host with JDK 21 and the pinned branch's Gradle/build dependencies, one gate at a time under its host build lock.
 - Source: Nick's request to implement and gate both PR 5255 review findings.
