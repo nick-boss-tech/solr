@@ -1,6 +1,6 @@
 # Interrupted client-close fix: final preparation and Linux validation, round 1
 
-Status: OPEN
+Status: DONE (gate green for F, receipt receipts/teardown-interrupt-close-fix-final-validation-round-1.md; closeout 2026-11-01, claims/teardown-final-validation-closeout-phone-agent.md).
 Tags: implementation, gate, records
 Intended host: any available capable pool Linux host with these tags and JDK 21.0.12.1+1; vm2 holds the original proof artifacts
 
