@@ -430,6 +430,13 @@ public class RunExampleTool extends ToolBase {
       description = "Zookeeper connection string.")
   private String zkHost;
 
+  @picocli.CommandLine.Option(
+      names = {"-u", "--credentials"},
+      paramLabel = "credentials",
+      description =
+          "Credentials in the format username:password. Example: --credentials solr:SolrRocks")
+  private String credentialsOpt;
+
   @picocli.CommandLine.Parameters(
       arity = "0..*",
       paramLabel = "ARG",
@@ -482,7 +489,8 @@ public class RunExampleTool extends ToolBase {
         .addOption(USER_MANAGED_OPTION)
         .addOption(MEMORY_OPTION)
         .addOption(JVM_OPTS_OPTION)
-        .addOption(CommonCLIOptions.ZK_HOST_OPTION);
+        .addOption(CommonCLIOptions.ZK_HOST_OPTION)
+        .addOption(CommonCLIOptions.CREDENTIALS_OPTION);
   }
 
   @Override
@@ -1789,7 +1797,13 @@ public class RunExampleTool extends ToolBase {
 
     StartSolrParams startParams =
         new StartSolrParams(
-            exampleType, hostOpt, memoryOpt, jvmOptsOpt, forceOpt, null, readExtraArgs(extraArgs));
+            exampleType,
+            hostOpt,
+            memoryOpt,
+            jvmOptsOpt,
+            forceOpt,
+            credentialsOpt,
+            readExtraArgs(extraArgs));
 
     if ("cloud".equals(exampleType)) {
       runCloudExample(

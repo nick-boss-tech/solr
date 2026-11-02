@@ -63,6 +63,14 @@ public class SolrCLIRunExamplePicocliTest extends TestSolrCLIRunExample {
   }
 
   @Test
+  public void testCredentialsOptionIsAccepted() {
+    // runImpl reads the credentials value via CommonCLIOptions.CREDENTIALS_OPTION.
+    assertEquals(
+        "solr:SolrRocks", parsedValue(parse("--credentials", "solr:SolrRocks"), "--credentials"));
+    assertEquals("solr:SolrRocks", parsedValue(parse("-u", "solr:SolrRocks"), "--credentials"));
+  }
+
+  @Test
   public void testScriptInputsIsTheOptionTheScriptPasses() {
     assertEquals("1,2", parsedValue(parse("--script-inputs", "1,2"), "--script-inputs"));
   }
