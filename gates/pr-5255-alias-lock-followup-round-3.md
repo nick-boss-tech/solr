@@ -1,6 +1,6 @@
 # Gate: SOLR-18589 alias lock follow-up, round 3 (superseding rounds 1 and 2)
 
-Status: SUPERSEDED by round 4 (`gates/pr-5255-alias-lock-followup-round-4.md`, DONE GREEN). Closed in the 2026-11-02 cleanup.
+Status: SUPERSEDED by round 4 (`gates/pr-5255-alias-lock-followup-round-4.md`, DONE per its receipt with one inherited-skip exception awaiting the owner's call). Closed in the 2026-11-02 cleanup.
 
 - Tags: gate, premise-run, review. Host: vm5 (Linux, JDK 21.0.12.1, Gradle 9.7.0 through the wrapper).
 - Supersedes: `gates/pr-5255-alias-lock-followup-round-1.md` and round 2 (no round-2 job file; the round-2 claim is `claims/pr-5255-alias-lock-followup-gate-round-2-vm5.md`). Both stay immutable. Round 2 ended in a failure verdict at `claims/pr-5255-alias-lock-followup-gate-round-2-vm5-verdict-compile-failed.md`: the focused test failed to compile at `c09411a16c`.
