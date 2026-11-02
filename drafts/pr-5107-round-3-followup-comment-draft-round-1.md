@@ -1,6 +1,18 @@
 # Draft: PR 5107 round 3 follow-up comment (NOT POSTED)
 
-Status: DRAFT, prepared by the phone agent on 2026-11-02 after the
+Status: POSTED on 2026-11-02 at Nick's go as PR 5107 comment
+6585431435 (https://github.com/apache/solr/pull/5107#issuecomment-6585431435),
+authored nick-boss-tech, body read back byte-identical after posting.
+Post-posting audit of the non-proof text (same day, at Nick's
+direction): every claim verified against the code and the live PR,
+with one correction edited into the posted comment: "adds one repair
+commit on top" became "adds three commits on top: the repair itself,
+the generated start-page synchronization, and the removal of the two
+scoped changelog fragments," because three commits sit above the
+integration merge. The body below is the pre-edit version; the live
+comment carries that one sentence in its corrected form.
+
+Prepared by the phone agent on 2026-11-02 after the
 round 3 partial gate at F2 `7e531b083182366f8b6e7f00a3781ce3cbb713de`
 (receipt `receipts/PR-5107-security-integration-round-3-partial.md`),
 and revised the same day to head F3
