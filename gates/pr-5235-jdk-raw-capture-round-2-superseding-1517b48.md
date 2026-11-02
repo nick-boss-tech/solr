@@ -1,6 +1,6 @@
 # Gate: PR 5235 JDK raw-body capture follow-up, superseding round 2 (pinned `1517b48953dd`)
 
-Status: OPEN
+Status: CLOSED (superseded by branch advance, 2026-11-02 cleanup). The pinned head `1517b48953dd` is an ancestor of the `solr-18351-submit` tip `e2ad60ecedda`, gated GREEN by vm4 on 2026-10-28 for the upload-contentwriter job; PR #5235 has merged into branch_10x. This job's legs were not separately executed at its pin; no green is claimed for them here.
 Tags: gate, premise-run. Intended host: vm2 (Linux, JDK 21.0.12.1+1), claim `claims/pr-5235-jdk-raw-capture-round-2-vm2.md`.
 Supersedes: `gates/pr-5235-jdk-raw-capture-round-2.md` for the test head only, under its tidy-repair rule.
 
