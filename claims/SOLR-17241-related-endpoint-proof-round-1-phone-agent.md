@@ -1,6 +1,6 @@
 # Claim: SOLR-17241 related endpoint proof, round 1 (phone agent)
 
-Status: CLAIMED by the phone agent, 2026-11-01T05:20Z (approx., at claim post time). Taking over after vm2's partial run and handoff (gates/SOLR-17241-related-endpoint-proof-round-1-handoff-vm2.md); vm2's claim is released and its candidate XML stays on vm2, so the candidate probe is re-run here for local fresh XML.
+Status: DONE, PASS at 86d86e3d3e54230b5f3e7b6aa758a189b3b2ed6b. Receipt: receipts/SOLR-17241-related-endpoint-proof-round-1.md. Closeout 2026-11-01, claims/solr-17241-related-endpoint-proof-closeout-phone-agent.md. Taking over after vm2's partial run and handoff (gates/SOLR-17241-related-endpoint-proof-round-1-handoff-vm2.md); vm2's claim is released and its candidate XML stays on vm2, so the candidate probe is re-run here for local fresh XML.
 
 - Job: gates/SOLR-17241-related-endpoint-proof-round-1.md. Idempotency key: SOLR-17241-related-endpoint-proof-round-1@86d86e3d3e54230b5f3e7b6aa758a189b3b2ed6b.
 - Production head: 86d86e3d3e54230b5f3e7b6aa758a189b3b2ed6b. Verified at claim time: PR apache/solr#5266 open at that head; fork refs/heads/solr-17241-submit at that head.
