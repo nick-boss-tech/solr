@@ -1,6 +1,6 @@
 # Gate: SOLR-18601 / PR 5253 migration cleanup follow-up, round 1
 
-Status: OPEN. Immutable once posted. Proves only the exact head below.
+Status: SUPERSEDED by the round 5 gate (DONE GREEN). Its own receipt: `receipts/PR-5253-cleanup-round-1.md`. Closed in the 2026-11-02 cleanup.
 
 - Required tags: gate, review, records. Intended host: any capable Linux CPU gate host with JDK 21, Git, Python 3, Gradle 9.7.0 from this branch's wrapper and the Solr build dependencies. One build at a time under the host's build lock and normal disk/inode guards.
 - Fork: nick-boss-tech/solr. Branch: solr-18601-submit.
