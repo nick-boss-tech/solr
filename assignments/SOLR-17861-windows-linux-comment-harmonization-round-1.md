@@ -1,6 +1,6 @@
 # Assignment: SOLR-17861 Windows and Linux comment harmonization, round 1
 
-Status: OPEN. The Linux run has passed at the expected head; verify the live branch and receipt before drafting.
+Status: DONE (deliverable posted 2026-10-27 as Jira comment 18133180; closeout 2026-11-01, claims/solr-17861-harmonization-closeout-phone-agent.md).
 
 - Owner direction: Nick Shanin, 2026-10-27, to carry the Windows evidence into a JIRA comment draft that can be combined with the Linux result.
 - Capability tags: `draft`, `records`.
