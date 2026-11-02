@@ -1,6 +1,6 @@
 # Gate: PR 5235 compatibility fixes, superseding round 3 (pinned `caf8dde9063f`)
 
-Status: OPEN
+Status: CLOSED (superseded by branch advance, 2026-11-02 cleanup). The pinned head `caf8dde9063f` is an ancestor of the `solr-18351-submit` tip `e2ad60ecedda`, which vm4 gated GREEN on 2026-10-28 for the upload-contentwriter job, and PR #5235 has merged into branch_10x. This job's legs were not separately executed at `caf8dde9063f`; no green is claimed for them here.
 Tags: gate, premise-run, review, records. Intended host: vm2, claim `claims/pr-5235-compatibility-fixes-round-3-vm2.md`.
 Supersedes: `gates/pr-5235-compatibility-fixes-round-3.md` for the fixed head only, under its tidy-repair rule.
 
