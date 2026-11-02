@@ -1,6 +1,6 @@
 # Gate job: SOLR-18552 9.x launcher default (owner-items round 1, item 1)
 
-Status: OPEN
+Status: DONE (gate DONE at f7cf67fc124, receipt receipts/SOLR-18552.md; closeout 2026-11-01, claims/solr-18552-9x-owner-items-closeout-phone-agent.md).
 
 - Ticket: SOLR-18552. Branch: `solr-18552-sharedarena-9x`. Head: `f7cf67fc124` (commit `SOLR-18552: default sharedArenaMaxPermits to 64 in solr.cmd on 9.x, add changelog`, on top of `cd7cc695fb`).
 - Decision: `reports/owner-items-scrub-2026-10-22.md` (rung 1, main line already sets the default in both launchers).
