@@ -1,6 +1,6 @@
 # Gate: PR 2452 UBI recording context fix, Linux round 2 (superseding)
 
-Status: OPEN (exact-head gate; proof pending)
+Status: SUPERSEDED by `gates/pr-2452-ubi-context-round-3.md`. Closed in the 2026-11-02 cleanup.
 
 - Supersedes: `gates/pr-2452-ubi-context-round-1.md`, whose tidy clean-tree check failed on one rewrapped line of the test at `37be6eedfe`.
 - Assignment: `assignments/pr-2452-ubi-context-rework-and-gate-round-1.md`. Claim: `claims/pr-2452-ubi-context-rework-vm4-round-1.md`. Executing host: vm4.
