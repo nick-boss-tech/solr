@@ -1,6 +1,6 @@
 # Assignment: Overseer tail verdicts, batch B (superseded by later work), round 1
 
-Status: OPEN. Capability tags: records. Host: any capable pool host.
+Status: DONE. Capability tags: records. Host: any capable pool host.
 
 Trigger: Nick's Overseer tail census (2026-10-31) placed these five tickets
 in Group B: asks that later work appears to have superseded. Posted by the
