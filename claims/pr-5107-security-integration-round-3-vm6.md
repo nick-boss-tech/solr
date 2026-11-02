@@ -12,4 +12,7 @@
 - Links: Ticket or parent: SOLR-8442, PR 5107, fork branch nick-boss-tech/solr:solr-8442-security-review-r2-submit. Category: gate. Siblings: gates/pr-5107-security-review-fixes-round-2*.md (superseded), claims/pr-5107-security-integration-windows-round-3.md. Supersedes: none.
 - Verified inputs at claim time: F 4b04ba0c5f412403ac46db64364d90324b90b55d (fork ref); C 25c88fb1c432120b98f7af668cf58be0052d13d0 and H2 d264f756644ac2fb8b56c09c42a0c737198c148a and A 7d193dac0f4abc441488f0ac2a9a734983d4fcd2 are ancestors of F; M d2d2bd269060877814ba1152c650b39bb2a60b70 has parents H2 and A.
 
-Heartbeat: 2026-11-02T16:29:54Z
+
+Result: 2026-11-02T16:48:24Z: VM restarted during generateCliDocs (no test run was executing; that gradle leg was interrupted, its log kept as gencli.interrupted-vm-restart.log). tidy-1 at 4b04ba0c5f4 passed rc=0 with no file changes. Driver resumed from generateCliDocs with the same head and commands; the interrupted leg is a crash, not a test failure, so it is re-run once.
+
+Heartbeat: 2026-11-02T16:48:24Z
