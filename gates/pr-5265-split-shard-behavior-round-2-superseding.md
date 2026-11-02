@@ -1,6 +1,6 @@
 # Gate: split-shard migration behavior repairs, round 2 (superseding, tidy repair)
 
-Status: CLAIMED by phone agent (claim: `claims/pr-5265-split-shard-behavior-round-2-phone-agent.md`); running.
+Status: DONE GREEN (phone agent). Gate passed at candidate `009f2c60513636b4aba2c93f4a4137aa39ccea64`; receipt `receipts/pr-5265-split-shard-behavior-round-2.md`. Closed in the 2026-11-02 cleanup.
 
 - Supersedes: `gates/pr-5265-split-shard-behavior-round-2.md` at candidate `b1f09ab79a3d3f1943e62898512447f836342b34`. That gate's tidy step reformatted three branch files (line rewraps only: `AdminAPIBase.java`, `SplitShardAPITest.java`, `SplitShardMessageMappingTest.java`; no semantic change), so per that job's own rule the repair was committed and proof restarts at the new head.
 - New candidate: `009f2c60513636b4aba2c93f4a4137aa39ccea64` on `nick-boss-tech/solr:solr-16398-split-shard` (`b1f09ab79a` plus tidy commit `009f2c6051`, author Nick Shanin). Remote head and live PR #5265 head to be re-verified at the end of the run.
