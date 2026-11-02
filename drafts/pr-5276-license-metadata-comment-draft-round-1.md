@@ -1,6 +1,6 @@
 # Draft comment: PR 5276 license metadata (round 1)
 
-Status: DRAFT. Not posted. Awaiting Nick's per-text go.
+Status: POSTED 2026-11-02 after Nick's per-text go. Comment: https://github.com/apache/solr/pull/5276#issuecomment-6581875127 (author nick-boss-tech; body read back byte-identical, details/summary verified).
 Pinned identities (verified live 2026-11-02): PR head P a6d008eb38d508b0179c71bd6a862e2a7b40fb24
 (branch renovate-9x/grpc-and-netty); repair head H 5f9613e13865b73b992d8321142e61ceddee2b92
 (fork branch pr-5276-license-metadata, one commit on P).
