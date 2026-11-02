@@ -1,6 +1,6 @@
 # Gate job: SOLR-18564 / PR 5192 exact-head gate
 
-Status: OPEN
+Status: DONE (exact-head gate complete 2026-10-25, vm6; receipt section in receipts/SOLR-18564.md; closeout 2026-11-01, claims/solr-18564-exact-head-gate-closeout-phone-agent.md).
 Tags: gate
 
 - PR: apache/solr#5192, open and ready. Branch: `corecontainer-shutdown-closes` on the fork.
