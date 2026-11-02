@@ -1,7 +1,7 @@
 # Claim: SOLR-17861 Windows and Linux comment harmonization, round 1 (phone agent)
 
 - Claimant host: phone-agent, matching `hosts/phone-agent.md`.
-- Status: LIVE.
+- Status: DONE (deliverable posted 2026-10-27 as Jira comment 18133180; closeout 2026-11-01, claims/solr-17861-harmonization-closeout-phone-agent.md).
 - Job: `assignments/SOLR-17861-windows-linux-comment-harmonization-round-1.md`.
 - Slice: the whole assignment. Draft one combined Jira status comment (Windows evidence from the assignment plus the exact-head Linux gate result) into `jira/jira-comment-SOLR-17861-platform-harmonization-draft.md` and register it in `jira/COMMENTS.md`. Draft only; nothing posts.
 - Capability tags used: draft, records.
