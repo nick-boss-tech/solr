@@ -1,6 +1,6 @@
 # Gate: PR 5265 CI failure repair, round 1 (exact head)
 
-Status: CLAIMED by phone agent (claim: `claims/pr-5265-ci-failure-repair-round-1-phone-agent.md`); Selenium capability verified on the claiming host (Chromium 155.0.8059.80, ChromeDriver 155.0.8059.84 via Selenium Manager); running.
+Status: DONE PARTIAL (phone agent, 2026-11-02). All legs green at candidate `16b0d50218bf` except the Admin UI Selenium leg: the claiming host's only Chromium is the Hatch-managed build, which cannot start under WebDriver, so that leg remains for a host with a stock browser build. Receipt: `receipts/PR-5265-ci-failure-repair-round-1.md`.
 
 - Assignment: `assignments/pr-5265-ci-failure-repair-round-1.md`.
 - Report: `reports/pr-5265-ci-failure-repair-round-1.md`.
