@@ -1,6 +1,6 @@
 # Assignment: Overseer tail verdicts, batch A (design and scale asks that removal retires), round 1
 
-Status: OPEN. Capability tags: records. Host: any capable pool host.
+Status: DONE. Capability tags: records. Host: any capable pool host.
 
 Trigger: Nick's Overseer tail census (2026-10-31) placed these seven tickets
 in Group A: design and scale asks aimed at making the Overseer itself faster
