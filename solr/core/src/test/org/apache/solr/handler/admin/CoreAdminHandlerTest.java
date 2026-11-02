@@ -444,6 +444,10 @@ public class CoreAdminHandlerTest extends SolrTestCaseJ4 {
     unloadReq.setCoreName("corex");
     unloadReq.process(runner.getSolrClient());
 
+    assertFalse(
+        "The core was still loaded after unload following a failed core reload",
+        runner.getCoreContainer().isLoaded("corex"));
+
     runner.stop();
 
     assertTrue(
