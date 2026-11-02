@@ -1,6 +1,6 @@
 # Gate: PR 5235 ContentStream compatibility premises, round 1
 
-Status: OPEN
+Status: SUPERSEDED by `gates/pr-5235-compatibility-premise-superseding-a7215a5.md`. Closed in the 2026-11-02 cleanup.
 
 - Tags: gate, premise-run. Intended host: any capable Linux gate host with JDK 21, Git, Python 3, and the branch's Gradle toolchain/dependencies. Serialize under the host's build lock.
 - Source: Nick's October 26 request for executable tests for the four PR 5235 review findings.
