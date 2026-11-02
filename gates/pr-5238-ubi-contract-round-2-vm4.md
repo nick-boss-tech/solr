@@ -1,6 +1,6 @@
 # Gate: listener UBI contract proof, round 2 (superseding head)
 
-Status: OPEN
+Status: DONE (gate GREEN at c2c387064a, receipt receipts/PR-5238-ubi-contract.md; closeout 2026-11-01, claims/pr-5238-ubi-contract-round-2-closeout-phone-agent.md).
 
 - Supersedes: `gates/pr-5238-ubi-contract-round-1.md` at `de4d222bb12302eb0e10aeb5697bae307eb2cd22`. The round-1 run halted at the tidy clean-tree check, before any test ran. The round-1 job file is unchanged.
 - Exact candidate: `c2c387064a83def34cece4163eccded28318caeb` on `nick-boss-tech/solr:solr-11994-pr5238-ubi-submit`, one commit above `de4d222bb1`.
