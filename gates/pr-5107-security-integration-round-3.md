@@ -1,6 +1,6 @@
 # Gate: PR 5107 integrated security fixes, round 3
 
-Status: CLAIMED by vm6 (partial gate; BATS skipped by owner direction, see claims/pr-5107-security-integration-round-3-vm6.md)
+Status: DONE (PARTIAL at the superseding head F2 `7e531b083182366f8b6e7f00a3781ce3cbb713de` via `gates/pr-5107-security-integration-round-3-superseding-7e531b0.md`; receipt `receipts/PR-5107-security-integration-round-3-partial.md`. BATS legs skipped by owner direction.)
 
 ## Scope and exact inputs
 
