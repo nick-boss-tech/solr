@@ -1,6 +1,6 @@
 # Gate: SOLR-17786 / PR 5108 reverse cursor candidate, round 1 two-shard
 
-Status: OPEN
+Status: SUPERSEDED by `gates/solr-17786-reverse-cursor-round-2-vm2.md` (its title states it supersedes the round 1 two-shard job). Closed in the 2026-11-02 cleanup.
 
 Intended host: any capable Linux CPU gate host, serialized behind its build lock.
 Tags: gate, premise-run, settling-run. Repairs require implementation capability.
