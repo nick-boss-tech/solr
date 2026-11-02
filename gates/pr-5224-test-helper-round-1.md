@@ -1,6 +1,6 @@
 # Gate: PR 5224 test helper reader lifetime, round 1
 
-Status: OPEN
+Status: CLOSED (moot, 2026-11-02 cleanup). Upstream PR #5224 merged 2026-10-31 and the fork branch has moved past the pinned implementation head `1f3ed5658862`; the gate as pinned can no longer run. No execution was recorded against it.
 
 - Tags: gate. Intended host: any capable Linux gate host; serialize under the host's build lock.
 - Source: Nick's October 25 request to build a helper without the premature reader closure and test it.
