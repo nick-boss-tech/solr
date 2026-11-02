@@ -1,4 +1,4 @@
-# Draft: SOLR-18614 comment (Jira wiki markup) — not posted, needs Nick's approval
+# SOLR-18614 comment (Jira wiki markup) — POSTED 2026-11-02 as Jira comment 18136889, read back byte-identical; posted by the phone agent at Nick's go after review
 
 Target: https://issues.apache.org/jira/browse/SOLR-18614
 Suggested link after posting (for whoever has rights): SOLR-18614 "duplicates" SOLR-18579.
