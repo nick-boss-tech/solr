@@ -1,6 +1,6 @@
 # Gate for analysis handler extensibility tests round 1
 
-Status: OPEN.
+Status: DONE (gate GREEN 2026-11-01 at final head H2 78a9bef183e710833517a32c1691dfd2c2d9a7df; receipt receipts/PR-5279-analysis-extensibility-tests.md; closeout 2026-11-01, claims/pr-5279-gate-closeout-phone-agent.md).
 
 ## Identity and ownership
 
