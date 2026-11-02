@@ -170,8 +170,8 @@ public abstract class AnalysisRequestHandlerBase extends RequestHandlerBase {
    * The analyzer used to analyze query-time values of the given field type.
    *
    * <p>This may be called separately for query analysis and matching. The handler closes token
-   * streams, but does not close the returned analyzer. Overrides are responsible for the lifecycle of
-   * any analyzers they create.
+   * streams, but does not close the returned analyzer. Overrides are responsible for the lifecycle
+   * of any analyzers they create.
    */
   protected Analyzer getQueryAnalyzer(FieldType fieldType) {
     return fieldType.getQueryAnalyzer();
