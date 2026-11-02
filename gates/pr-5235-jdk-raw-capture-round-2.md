@@ -1,6 +1,6 @@
 # Gate: PR 5235 JDK raw-body capture follow-up, round 2
 
-Status: OPEN
+Status: SUPERSEDED by `gates/pr-5235-jdk-raw-capture-round-2-superseding-1517b48.md`. Closed in the 2026-11-02 cleanup.
 
 - Tags: gate, premise-run. Intended host: any capable Linux gate host with JDK 21 and this branch's build dependencies; serialize under the host build lock.
 - Source: follow-up to Nick's test request and completed premise gate. This is a diagnosed test-harness repair, not a blind repeat of the failed gate.
