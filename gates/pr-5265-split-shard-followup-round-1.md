@@ -1,6 +1,6 @@
 # Gate: PR 5265 split-shard follow-up, round 1 (exact head)
 
-Status: CLAIMED by phone agent (see `claims/pr-5265-split-shard-followup-round-1-phone-agent.md`); running.
+Status: DONE GREEN (phone agent). Gate passed at `0495ffa2b0`; receipt `receipts/pr-5265-split-shard-followup-round-1.md`. Closed in the 2026-11-02 cleanup.
 
 - Assignment: `assignments/pr-5265-split-shard-followup-round-1.md`.
 - Fork: nick-boss-tech/solr, branch `solr-16398-split-shard`.
