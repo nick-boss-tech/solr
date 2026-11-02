@@ -1,6 +1,6 @@
 # Gate: cuvs-lucene PR 2702 acceptance-mask CPU regression, round 2
 
-Status: OPEN
+Status: DONE (gate GREEN, receipt receipts/CUVS-LUCENE-PR2702-CPU-ROUND-2.md; closeout 2026-11-01, claims/cuvs-lucene-pr2702-cpu-round-2-closeout-phone-agent.md).
 
 - Intended host: any capable Linux CPU gate host. No GPU is needed or requested.
 - Capability tags: `gate`, `records`.
