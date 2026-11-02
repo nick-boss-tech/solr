@@ -1,6 +1,6 @@
 # Assignment: Overseer tail reproductions, batch C (old bug reports needing a live-or-dead verdict), round 1
 
-Status: OPEN. Capability tags: records, premise-run. Host: any capable pool host.
+Status: DONE. Capability tags: records, premise-run. Host: any capable pool host.
 
 Trigger: Nick's Overseer tail census (2026-10-31) placed these seven tickets
 in Group C: old bug reports needing a live-or-dead verdict, plus the two
