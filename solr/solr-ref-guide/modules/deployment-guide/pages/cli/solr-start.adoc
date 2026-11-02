@@ -37,7 +37,8 @@ bin/solr start [-fhqy] [--force] [--user-managed] [--verbose]
                [--data-home=<dataHome>] [-e=<example>] [--example-dir=<exampleDir>]
                [--host=<host>] [-j=<jettyParams>] [--jvm-opts=<jvmOpts>]
                [-m=<memory>] [-p=<port>] [--script-inputs=<values>]
-               [--server-dir=<serverDir>] [--solr-home=<solrHome>] [-z=<zkHost>]
+               [--server-dir=<serverDir>] [--solr-home=<solrHome>]
+               [-u=username:password] [-z=<zkHost>]
 ....
 
 // end::picocli-generated-man-section-synopsis[]
@@ -96,6 +97,9 @@ Starts Solr
 
 *--solr-home*=_<solrHome>_::
   Set solr.solr.home system property; default is 'server/solr'. Ignored in examples mode
+
+*-u*, *--credentials*=_username:password_::
+  Credentials for starting an example with -e (Unix/macOS only)
 
 *--user-managed*::
   Start Solr in standalone mode. Default is SolrCloud (ZooKeeper) mode.

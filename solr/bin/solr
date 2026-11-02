@@ -428,6 +428,8 @@ function print_usage() {
     echo ""
     echo "  --script-inputs <values> Don't prompt for input; comma delimited list of inputs read when running examples that accept user input."
     echo ""
+    echo "  -u/--credentials <username:password> Credentials for starting an example with -e."
+    echo ""
     echo "  --force               If attempting to start Solr as the root user, the script will exit with a warning that running Solr as \"root\" can cause problems."
     echo "                          It is possible to override this warning with the '--force' parameter."
     echo ""
@@ -693,6 +695,7 @@ FORCE=false
 SOLR_OPTS=(${SOLR_OPTS:-})
 SCRIPT_SOLR_OPTS=()
 PASS_TO_RUN_EXAMPLE=()
+EXAMPLE_CREDENTIALS_PROVIDED=false
 SOLR_MODE="solrcloud"
 CLOUD_FLAG_SET=false
 USER_MANAGED_FLAG_SET=false
@@ -851,6 +854,15 @@ if [ $# -gt 0 ]; then
             PASS_TO_RUN_EXAMPLE+=("--no-prompt")
             shift
         ;;
+        -u|--credentials)
+            if [[ -z "${2:-}" || "${2:0:1}" == "-" ]]; then
+              print_usage "$SCRIPT_CMD" "Credentials in username:password form are required when using the $1 option!"
+              exit 1
+            fi
+            PASS_TO_RUN_EXAMPLE+=("--credentials" "$2")
+            EXAMPLE_CREDENTIALS_PROVIDED=true
+            shift 2
+        ;;
         --script-inputs)
         if [[ -z "$2" || "${2:0:1}" == "-" ]]; then
           print_usage "$SCRIPT_CMD" "Session input values are required when using the $1 option!"
@@ -898,6 +910,11 @@ if [ $# -gt 0 ]; then
         ;;
     esac
   done
+fi
+
+if [[ "$EXAMPLE_CREDENTIALS_PROVIDED" == "true" && ( "$SCRIPT_CMD" != "start" || -z "${EXAMPLE:-}" ) ]]; then
+  print_usage "$SCRIPT_CMD" "The --credentials option requires start with -e/--example."
+  exit 1
 fi
 
 # Default placement plugin

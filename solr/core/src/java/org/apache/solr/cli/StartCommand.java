@@ -97,6 +97,12 @@ public class StartCommand implements Callable<Integer> {
   String example;
 
   @CommandLine.Option(
+      names = {"-u", "--credentials"},
+      paramLabel = "username:password",
+      description = "Credentials for starting an example with -e (Unix/macOS only)")
+  String credentials;
+
+  @CommandLine.Option(
       names = "--jvm-opts",
       description = "Additional JVM parameters, e.g., --jvm-opts \"-verbose:gc\"")
   String jvmOpts;
@@ -233,6 +239,9 @@ public class StartCommand implements Callable<Integer> {
 
           --example-dir <dir>
               Override the directory containing example configurations.
+
+          -u, --credentials <username:password>
+              Credentials for starting an example with -e (Unix/macOS only).
 
           --force
               Override warning when attempting to start Solr as the root user.

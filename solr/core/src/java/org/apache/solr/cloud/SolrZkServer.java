@@ -177,8 +177,8 @@ public class SolrZkServer {
             },
             "embeddedZkServer");
 
+    InetSocketAddress clientAddress = getClientAddress();
     if (log.isInfoEnabled()) {
-      InetSocketAddress clientAddress = getClientAddress();
       log.info(
           "STARTING EMBEDDED ENSEMBLE ZOOKEEPER SERVER at {}:{}",
           clientAddress.getAddress().getHostAddress(),

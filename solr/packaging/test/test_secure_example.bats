@@ -31,10 +31,12 @@ teardown() {
 
 @test "secure example rejects unusable administrator credentials before configuring security" {
   export SOLR_SECURITY_AUTH_BASICAUTH_ALLOWUSERASPASSWORD=false
-  run solr start -e secure-setup --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT" \
-    --credentials alice:alice
-  assert_failure
-  assert_output --partial 'administrator username and password must differ'
+  for credentials_option in --credentials -u; do
+    run solr start -e secure-setup --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT" \
+      "$credentials_option" alice:alice
+    assert_failure
+    assert_output --partial 'administrator username and password must differ'
+  done
   run test ! -e "$SOLR_HOME/http-credentials.properties"
   assert_success
   run test ! -e "$SOLR_HOME/zk-credentials.properties"
@@ -47,8 +49,23 @@ teardown() {
   assert_success
 }
 
+@test "secure example validates credentials option values before starting" {
+  run solr start -e secure-setup --credentials
+  assert_failure
+  assert_output --partial 'Credentials in username:password form are required'
+  run solr start -e secure-setup -u --no-prompt
+  assert_failure
+  assert_output --partial 'Credentials in username:password form are required'
+  run solr start --credentials alice:ExamplePassword
+  assert_failure
+  assert_output --partial 'The --credentials option requires start with -e/--example'
+  run test ! -e "$SOLR_HOME/tls"
+  assert_success
+}
+
 @test "secure example configures HTTPS before users and reuses it on restart" {
-  run solr start -e secure-setup --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT"
+  run solr start -e secure-setup --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT" \
+    --credentials solr:SolrRocks --verbose
   assert_success
   assert_output --partial 'Verify HTTPS in another terminal:'
   assert_output --partial 'curl --cacert'
@@ -69,7 +86,7 @@ ZooKeeper account credentials are saved in $SOLR_HOME/zk-credentials.properties.
   assert_output --partial "--zk-credentials 'zk-admin:SolrRocks'"
 
 
-  run bash -c 'printf "\n" | openssl s_client -connect "$1" -servername localhost -CAfile "$2" -verify_return_error' \
+  run bash -c 'printf "\n" | openssl s_client -connect "$1" -servername localhost -verify_hostname localhost -CAfile "$2" -verify_return_error' \
     _ "localhost:${ZK_PORT}" "$SOLR_HOME/tls/cert.pem"
   assert_success
   assert_output --partial 'Verify return code: 0 (ok)'
@@ -187,6 +204,16 @@ ZooKeeper account credentials are saved in $SOLR_HOME/zk-credentials.properties.
   assert_success
   assert_output --partial 'security.json'
 
+  run openssl req -x509 -newkey rsa:2048 -nodes \
+    -keyout "$BATS_TEST_TMPDIR/untrusted-key.pem" -out "$BATS_TEST_TMPDIR/untrusted-cert.pem" \
+    -days 2 -subj '/CN=untrusted'
+  assert_success
+  run env SOLR_INCLUDE=/dev/null SOLR_ZK_CREDS_AND_ACLS= \
+    solr zk ls / --zk-tls-ca-file "$BATS_TEST_TMPDIR/untrusted-cert.pem" \
+    --zk-host "localhost:${ZK_PORT}/solr" --zk-credentials zk-admin:SolrRocks
+  assert_failure
+  refute_output --partial 'NoAuth'
+
   run env SOLR_PICOCLI=true solr zk ls / --zk-tls-ca-file "$SOLR_HOME/tls/cert.pem" --zk-host "localhost:${ZK_PORT}/solr" --zk-credentials zk-admin:SolrRocks
   assert_success
   assert_output --partial 'security.json'
@@ -214,11 +241,18 @@ ZooKeeper account credentials are saved in $SOLR_HOME/zk-credentials.properties.
   assert_failure
   assert_output --partial 'NoAuth'
 
+  run curl --noproxy localhost,127.0.0.1 --silent --show-error --fail-with-body --cacert "$SOLR_HOME/tls/cert.pem" \
+    --user solr:SolrRocks -H 'Content-Type: application/json' \
+    --data-binary '{"set-user":{"solr":"RestartRocks"}}' \
+    "https://localhost:${SOLR_PORT}/api/cluster/security/authentication"
+  assert_success
+
   run solr stop -p "$SOLR2_PORT"
   assert_output --partial 'Sending stop command'
   run solr stop -p "$SOLR_PORT"
   assert_output --partial 'Sending stop command'
-  run solr start -e secure-setup --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT"
+  run solr start -e secure-setup --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT" \
+    -u solr:RestartRocks --verbose
   assert_success
   assert_output --partial "Reusing the example's HTTPS configuration."
   assert_output --partial "Reusing the example's ZooKeeper credentials and ACL configuration."
@@ -238,4 +272,22 @@ ZooKeeper account credentials are saved in $SOLR_HOME/zk-credentials.properties.
     --user search:SolrRocks "https://localhost:${SOLR2_PORT}/solr/techproducts/select?q=*:*&rows=0"
   assert_success
   assert_output --partial '"numFound":32'
+
+  run curl --noproxy localhost,127.0.0.1 --silent --show-error --fail-with-body --cacert "$SOLR_HOME/tls/cert.pem" \
+    --user solr:RestartRocks "https://localhost:${SOLR_PORT}/api/node/system"
+  assert_success
+  run curl --noproxy localhost,127.0.0.1 --silent --show-error --fail-with-body --cacert "$SOLR_HOME/tls/cert.pem" \
+    --user solr:SolrRocks "https://localhost:${SOLR_PORT}/api/node/system"
+  assert_failure
+  assert_output --partial '401'
+
+  run solr stop -p "$SOLR2_PORT"
+  assert_success
+  run solr stop -p "$SOLR_PORT"
+  assert_success
+  run solr start -e secure-setup --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT" --verbose
+  assert_success
+  run curl --noproxy localhost,127.0.0.1 --silent --show-error --fail-with-body --cacert "$SOLR_HOME/tls/cert.pem" \
+    --user solr:RestartRocks "https://localhost:${SOLR_PORT}/api/node/system"
+  assert_success
 }
