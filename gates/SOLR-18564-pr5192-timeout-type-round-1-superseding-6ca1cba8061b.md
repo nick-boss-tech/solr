@@ -1,6 +1,6 @@
 # Gate: SOLR-18564 / PR 5192 typed executor timeout follow-up, superseding round 1 at 6ca1cba8061b
 
-Status: OPEN, superseding the head-pinned gate `gates/SOLR-18564-pr5192-timeout-type-round-1.md` for the head below.
+Status: DONE (gate GREEN at 6ca1cba8061b, receipt receipts/SOLR-18564-timeout-type-round-1.md; closeout 2026-11-01, claims/solr-18564-timeout-type-superseding-closeout-phone-agent.md).
 
 - Tags: gate, premise-run, review, records.
 - Intended host: vm5 (claim `claims/solr-18564-timeout-type-round-1-vm5-repaired.md`).
