@@ -15,4 +15,7 @@
 
 Result: 2026-11-02T16:48:24Z: VM restarted during generateCliDocs (no test run was executing; that gradle leg was interrupted, its log kept as gencli.interrupted-vm-restart.log). tidy-1 at 4b04ba0c5f4 passed rc=0 with no file changes. Driver resumed from generateCliDocs with the same head and commands; the interrupted leg is a crash, not a test failure, so it is re-run once.
 
-Heartbeat: 2026-11-02T16:48:24Z
+
+Result: 2026-11-02T16:53:17Z: generateCliDocs at 4b04ba0c5f4 rc=0 but changed the start page: solr/solr-ref-guide/modules/deployment-guide/pages/cli/solr-start.adoc, lines 40-41 of the synopsis, where the generated text wraps `-u=username:password` across two lines. The gate requires the start page to match its annotations, so F does not meet that check as committed. Diff kept at /workspace/gates/logs/vm6/pr-5107-security-integration-round-3-partial/gencli.start-page.diff. Not fixed by vm6: the gate's repair path (ordinary commit above F, plain push to the fork, superseding gate pinned to the new head) is a fork-branch change that needs Nick's go. Clone reset to clean F; the Java legs (compile and validateLogCalls, default and no-security-manager runs, original-production pair) continue at F; check -x test follows. The Java results are evidence at F only, not a green gate.
+
+Heartbeat: 2026-11-02T16:53:17Z
