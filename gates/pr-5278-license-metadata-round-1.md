@@ -1,6 +1,6 @@
 # Gate assignment: PR 5278 repaired license metadata, round 1
 
-Status: OPEN. Implemented, Proof Pending. Windows does not claim execution.
+Status: CLOSED (2026-11-02, owner direction). Superseded by the posted PR comment route; see reports/pr-5274-5276-5278-license-gates-closure-round-1.md. Not GREEN; no receipt will be written.
 
 ## Identity and capability
 
