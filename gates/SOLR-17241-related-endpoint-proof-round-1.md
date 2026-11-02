@@ -1,6 +1,6 @@
 # Gate: SOLR-17241 related backup and ADDREPLICA response proof, round 1
 
-Status: OPEN, unclaimed. Supplemental proof; no public writes or PR-head changes.
+Status: DONE (gate PASS 2026-11-01, receipt receipts/SOLR-17241-related-endpoint-proof-round-1.md; closeout 2026-11-01, claims/solr-17241-related-endpoint-proof-closeout-phone-agent.md).
 
 - Owner request: Nick asked on 2026-10-30 to assign further Linux testing so the PR 5266 body can replace its statement that backup and ADDREPLICA are untested. This is an authorized proof assignment, not a production implementation request.
 - Capability tags: gate, premise-run, review, records.
