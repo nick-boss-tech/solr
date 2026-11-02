@@ -1,6 +1,6 @@
 # Gate: SOLR-18601 cleanup repair, superseding round 4 at 45dbc3a
 
-Status: OPEN. Immutable once posted. Supersedes `gates/pr-5253-cleanup-repair-round-3.md` (board `7f93a5fa3a9`) for proof at the exact head below. Round 3's requirements apply unchanged except the head values named here.
+Status: SUPERSEDED by round 5 (`gates/pr-5253-cleanup-repair-superseding-21804641-round-5.md`, DONE GREEN with an owner-accepted pre-existing neighbour failure). Closed in the 2026-11-02 cleanup.
 
 ## Why superseded
 
