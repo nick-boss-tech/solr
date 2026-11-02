@@ -1,6 +1,6 @@
 # Gate: SOLR-18613 changelog-only completion, round 1
 
-Status: OPEN
+Status: DONE (GREEN, metadata-only, at b49413e5ab5217ec45f1693fa9eff6c3e11f78dc; receipt `receipts/SOLR-18613-changelog-round-1.md`, completion report `reports/SOLR-18613-changelog-gate-round-1.md`)
 
 - Ticket: https://issues.apache.org/jira/browse/SOLR-18613
 - Tags: gate, records. Intended host: any capable Linux gate host with JDK 21, Python 3 with PyYAML, the pinned Gradle/build dependencies, and a serialized host build lock.
