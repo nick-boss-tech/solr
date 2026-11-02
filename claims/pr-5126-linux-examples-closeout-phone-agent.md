@@ -1,7 +1,7 @@
 # Claim: PR 5126 Linux examples assignment closeout (phone agent)
 
 - Claimant host: phone agent.
-- Status: CLAIMED.
+- Status: DONE.
 - Job: `assignments/pr-5126-linux-examples-round-1.md`, closeout only.
 - Basis: slice Q DONE by vm4 (`claims/pr-5126-query-examples-vm4-round-1-done.md`,
   report `reports/pr-5126-query-examples-round-1.md` plus revision 1, reply
