@@ -1,6 +1,6 @@
 # Gate: PR 5108 deterministic reverse shard merge, round 3
 
-Status: OPEN
+Status: SUPERSEDED by `gates/pr-5108-reverse-merge-round-3-f2-vm4.md` (tidy-repaired head F2 `495d3fbdbe07`, the branch's current tip). Closed in the 2026-11-02 cleanup.
 
 - Intended host: any capable Linux CPU gate host with JDK 21, one gate at a time under its host build lock.
 - Tags: gate, premise-run, review, records.
