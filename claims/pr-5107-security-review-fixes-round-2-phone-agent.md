@@ -20,3 +20,11 @@
 - No PR, no Jira/GitHub post. No production fix inside the gate; a
   formatting-only tidy diff stops the gate as GATE INVALID for the
   standing repair rule, it is not folded in silently.
+- Tidy repair 2026-11-01 ~21:25 MST: the first runner run stopped GATE
+  INVALID at the tidy guard (tidy reflowed SSLTool.java and SSLToolTest.java,
+  proven formatting-only by identical whitespace-stripped token streams).
+  Repair committed as Nick Shanin, no trailers, as d264f75664 and
+  plain-pushed fast-forward to the fork branch (verified by ls-remote).
+  Superseding gate gates/pr-5107-security-review-fixes-round-2-
+  superseding-d264f75664.md pins H2; the original gate file is untouched.
+  Runner retargeted to H2 and relaunched; no test at H counts as proof.
