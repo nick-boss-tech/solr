@@ -1,6 +1,6 @@
 # Claim: SOLR-17241 wt-format round 3 gate closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (gate file marked DONE, Status line only, verified by read-back).
 
 - Job: gates/SOLR-17241-wt-format-round-3.md.
 - Basis: vm5's claim claims/SOLR-17241-wt-format-gate-round-3-vm5.md
