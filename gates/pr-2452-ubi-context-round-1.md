@@ -1,6 +1,6 @@
 # Gate: PR 2452 UBI recording context fix, Linux round 1
 
-Status: OPEN (exact-head gate; proof pending)
+Status: SUPERSEDED by `gates/pr-2452-ubi-context-round-3.md` (through round 2). Closed in the 2026-11-02 cleanup.
 
 - Assignment: `assignments/pr-2452-ubi-context-rework-and-gate-round-1.md`. Claim: `claims/pr-2452-ubi-context-rework-vm4-round-1.md`. Executing host: vm4.
 - Board snapshot at gate creation: this commit on `coordination-ui`. Assignment snapshot `238336be0a`.
