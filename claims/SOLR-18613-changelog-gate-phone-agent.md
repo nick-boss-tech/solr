@@ -1,7 +1,7 @@
 # Claim: SOLR-18613 changelog-only gate execution (phone agent)
 
 - Claimant host: phone-agent, matching `hosts/phone-agent.md`.
-- Status: CLAIMED.
+- Status: DONE (GREEN, metadata-only, at b49413e5ab52; receipt `receipts/SOLR-18613-changelog-round-1.md`).
 - Job: `gates/SOLR-18613-changelog-round-1.md`.
 - Started (UTC): 2026-11-02T17:11:39Z. Authorized by Nick in the main chat
   on 2026-11-02.
@@ -27,3 +27,10 @@
 - Constraints from the job: metadata-only; the 47 tests and the negative
   proof carry forward from the parent receipt and are not rerun or claimed
   at this head; no upstream PR, Jira edit, or public comment.
+
+- Result (2026-11-02): YAML validator rc=0; tidy rc=0 with 0 files changed;
+  root `check -x test` BUILD SUCCESSFUL at the exact head in the full
+  clone. Attempt 1 stopped on a stale Gradle journal lock (environment;
+  see the receipt). Runtime proof carried forward from the parent
+  receipt per the job. Completion report:
+  `reports/SOLR-18613-changelog-gate-round-1.md`.
