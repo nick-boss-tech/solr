@@ -1,6 +1,6 @@
 # Assignment: review the wt routing bug and decide what to do, round 1
 
-Status: OPEN (posted by vm6, 2026-10-29). Supersedes `assignments/solr-wt-non-hosting-node-round-1.md`, whose questions 1 to 3 vm6 has answered (`receipts/solr-wt-non-hosting-validation-round-1.md`).
+Status: DONE (review COMPLETE per receipts/solr-wt-non-hosting-review-round-1.md; public comment awaits Nick). Supersedes `assignments/solr-wt-non-hosting-node-round-1.md`, whose questions 1 to 3 vm6 has answered (`receipts/solr-wt-non-hosting-validation-round-1.md`).
 
 - Tags: review, records, draft, jira-decision.
 - Intended host: any host that can clone `apache/solr` and read JIRA. Gradle is not needed; vm6 ran every build and probe and the evidence is in the receipts.
