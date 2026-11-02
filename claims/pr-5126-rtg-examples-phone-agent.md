@@ -1,7 +1,7 @@
 # Claim: PR 5126 RTG examples, slice R (phone agent)
 
 - Claimant host: phone agent.
-- Status: CLAIMED.
+- Status: DONE.
 - Job: `assignments/pr-5126-linux-examples-round-1.md`, slice R only
   (slice Q DONE by vm4, `claims/pr-5126-query-examples-vm4-round-1-done.md`).
 - Target: apache/solr PR 5126 (SOLR-3479), pinned head
