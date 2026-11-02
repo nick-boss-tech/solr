@@ -179,7 +179,8 @@ public class SSLToolTest extends SolrTestCase {
     Files.writeString(dir.resolve("password.txt"), "tiny\n");
     var error =
         expectThrows(
-            IllegalArgumentException.class, () -> new SSLTool().configure(params(dir, "JKS", null)));
+            IllegalArgumentException.class,
+            () -> new SSLTool().configure(params(dir, "JKS", null)));
     assertTrue(error.getMessage().contains("six characters"));
     assertEquals(original, Files.readString(dir.resolve("solr.in.sh")));
     assertFalse(Files.exists(dir.resolve("store")));

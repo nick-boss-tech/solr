@@ -215,7 +215,9 @@ public class SSLTool extends ToolBase {
           .environment()
           .put(
               "SOLR_SSL_PEM_PASSWORD",
-              params.keyPasswordFile() == null ? "" : readPassword(params.keyPasswordFile(), false));
+              params.keyPasswordFile() == null
+                  ? ""
+                  : readPassword(params.keyPasswordFile(), false));
       builder.redirectErrorStream(true).redirectOutput(temporary.resolve("openssl.log").toFile());
       Process process = builder.start();
       process.getOutputStream().close();
@@ -332,7 +334,8 @@ public class SSLTool extends ToolBase {
       throw new IllegalArgumentException("Password files must contain one nonempty line.");
     }
     if (keystorePassword && value.length() < 6) {
-      throw new IllegalArgumentException("The keystore password must contain at least six characters.");
+      throw new IllegalArgumentException(
+          "The keystore password must contain at least six characters.");
     }
     return value;
   }
