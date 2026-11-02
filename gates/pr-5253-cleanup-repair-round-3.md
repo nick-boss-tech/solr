@@ -1,6 +1,6 @@
 # Gate: SOLR-18601 cleanup oracle and assertion repair, superseding round 3
 
-Status: OPEN. Immutable once posted. This is a repaired input after an executed failure, not a blind rerun.
+Status: SUPERSEDED by round 5 (`gates/pr-5253-cleanup-repair-superseding-21804641-round-5.md`, DONE GREEN). Receipt for round 3 itself: `receipts/PR-5253-cleanup-repair-round-3.md`. Closed in the 2026-11-02 cleanup.
 
 Supersedes gates/pr-5253-cleanup-superseding-98d1127-round-2.md for proof at the new exact head. Keep all earlier jobs and the NOT GREEN receipt receipts/PR-5253-cleanup-round-1.md as history.
 
