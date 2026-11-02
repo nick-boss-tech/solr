@@ -1,6 +1,6 @@
 # Gate: SOLR-17786 / PR 5108 reverse cursor candidate, round 1
 
-Status: OPEN
+Status: SUPERSEDED by the later round files for this line (`gates/solr-17786-reverse-cursor-round-2-vm2.md` for the cursor proof; the branch's current head is covered by `gates/pr-5108-reverse-merge-round-3-f2-vm4.md`). Closed in the 2026-11-02 cleanup.
 
 Intended host: any capable Linux CPU gate host, serialized behind its build lock.
 Tags: gate, premise-run, settling-run. Repairs require implementation capability.
