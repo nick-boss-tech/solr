@@ -1,4 +1,4 @@
-# Draft: SOLR-18537 scope comment, round 2 (for Nick's per-text go; not posted)
+# SOLR-18537 scope comment, round 2 (POSTED 2026-11-02, Jira comment 18136782, read back byte-identical)
 
 Round 2 reframing (2026-11-02): Smiley, the ticket's assignee,
 commented at 20:58Z volunteering for the deprecation himself:
