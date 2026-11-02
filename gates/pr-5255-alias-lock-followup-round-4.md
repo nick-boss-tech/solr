@@ -1,6 +1,6 @@
 # Gate: SOLR-18589 alias lock follow-up, round 4 (superseding rounds 1 and 2)
 
-Status: DONE GREEN (vm5). Gate passed at `52dacc23b5bb67d254c111c948733da7bc4a9f81`; receipt `receipts/PR-5255-alias-lock-followup.md`. The job file was never flipped; closed in the 2026-11-02 cleanup.
+Status: DONE (vm5), verdict per receipt: every required step passed at `52dacc23b5bb67d254c111c948733da7bc4a9f81` except one inherited `@AwaitsFix` skip in the neighboring suites, so under the job's strict zero-skip bar the receipt does not call it a clean GREEN; whether the inherited skip is acceptable is the owner's decision. Receipt `receipts/PR-5255-alias-lock-followup.md`. Closed in the 2026-11-02 cleanup (an earlier closure line today overstated this as GREEN and is corrected by this line).
 
 - Tags: gate, premise-run, review. Host: vm5 (Linux, JDK 21.0.12.1, Gradle 9.7.0 through the wrapper).
 - Supersedes: `gates/pr-5255-alias-lock-followup-round-1.md` and round 2 (round-2 claim `claims/pr-5255-alias-lock-followup-gate-round-2-vm5.md`, failure verdict `claims/pr-5255-alias-lock-followup-gate-round-2-vm5-verdict-compile-failed.md`). Round 3 ended in a failure verdict at `claims/pr-5255-alias-lock-followup-gate-round-3-vm5-verdict-test-status-read.md`: two focused tests read a REQUESTSTATUS after SolrJ `waitFor` had deleted it.
