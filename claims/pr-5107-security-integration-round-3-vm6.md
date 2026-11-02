@@ -1,7 +1,7 @@
 # Claim: PR 5107 integrated security fixes round 3, partial gate (vm6)
 
 - Claimant host: vm6, matching `hosts/vm6.md`.
-- Status: ACTIVE, PARTIAL gate. BATS packaging legs are skipped by owner direction (2026-11-02, "skip bats and docker for this gate"). No green verdict is possible for this gate; the receipt will say PARTIAL.
+- Status: HANDED, PARTIAL gate (vm6 host restarted twice; hand-off to the next claimant). BATS packaging legs are skipped by owner direction (2026-11-02, "skip bats and docker for this gate"). No green verdict is possible for this gate; the receipt will say PARTIAL.
 - Job or assignment: `gates/pr-5107-security-integration-round-3.md`.
 - Slice: tidy preflight, generateCliDocs, `compileTestJava` and `validateLogCalls`, default security-manager Java run, no-security-manager Java run, the three-test original-production Java pair (restore only SSLTool.java and SecureExampleCredentials.java from A in a separate clone), and final `tidy` plus `check -x test` at F. Not run: packaging BATS in both parser modes, the BATS original-production pair, the shell pair, and the non-root BATS account requirement.
 - Capability tags used: gate, records. Tag `bats` is not held and is not used.
@@ -21,4 +21,9 @@ Result: 2026-11-02T16:53:17Z: generateCliDocs at 4b04ba0c5f4 rc=0 but changed th
 
 Result: 2026-11-02T16:58:39Z: owner direction to patch the generated start-page mismatch. Committed F2 7e531b083182366f8b6e7f00a3781ce3cbb713de above F as Nick Shanin (no trailers), fast-forward push to solr-8442-security-review-r2-submit, verified by ls-remote. Superseding gate gates/pr-5107-security-integration-round-3-superseding-7e531b0.md pins F2. Driver restarted at F2 in logs/vm6/pr-5107-security-integration-round-3-partial-F2/ (tidy, generateCliDocs, compile and validateLogCalls, default and no-security-manager Java runs, original-production pair, check -x test, tidy). Runs at F are not proof for F2.
 
-Heartbeat: 2026-11-02T16:58:39Z
+
+Result: 2026-11-02T17:11:43Z: HANDED. The vm6 host restarted again (uptime 3 min at hand-off). The driver was killed during generateCliDocs at F2; no test or check leg was running. At hand-off: tidy at F2 7e531b083182366f8b6e7f00a3781ce3cbb713de passed rc=0 with no changes (logs/vm6/pr-5107-security-integration-round-3-partial-F2/tidy-1.*). Clone /workspace/tmp/5107-r3/clone-F is at F2 and clean. Clone-P /workspace/tmp/5107-r3/clone-P is at F2 for the pair step, with no A files restored yet; the driver restores them.
+
+Next claimant, from F2 only: (1) check uid and free space; (2) start /workspace/tmp/5107-r3/driver-f2.sh minus its first tidy leg (the script header and run() function are reusable; run generateCliDocs, then compile-validate, unit-sm, unit-nosm, pair-original, check -x test, tidy-final), appending to the same driver.status; (3) confirm generateCliDocs leaves clone-F clean; if it does not, stop and hand back. Keep the gencli.interrupted log name intact and do not rerun tidy-1. Then write the PARTIAL receipt receipts/PR-5107-security-integration-round-3-partial.md listing every skipped BATS leg.
+
+Heartbeat: 2026-11-02T17:11:43Z (final; claim handed)

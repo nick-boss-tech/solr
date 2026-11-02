@@ -2,7 +2,7 @@
 
 Superseding note: this gate pins head F2 `7e531b083182366f8b6e7f00a3781ce3cbb713de`, one ordinary commit above F `4b04ba0c5f412403ac46db64364d90324b90b55d`. F2 adds only the generated CLI start-page synchronization in `solr/solr-ref-guide/modules/deployment-guide/pages/cli/solr-start.adoc` (the synopsis line wrap of `-u=username:password` that `:solr:solr-ref-guide:generateCliDocs` produces). The round 3 gate `gates/pr-5107-security-integration-round-3.md` stays unchanged. No proof at F counts for F2.
 
-Status: CLAIMED by vm6 (partial gate). Owner direction 2026-11-02: skip BATS and the packaging legs for this gate. A partial run cannot produce a green verdict; the receipt will say PARTIAL and name every skipped leg.
+Status: HANDED from vm6 (partial gate, see claim hand-off). Owner direction 2026-11-02: skip BATS and the packaging legs for this gate. A partial run cannot produce a green verdict; the receipt will say PARTIAL and name every skipped leg.
 
 ## Pinned inputs
 
