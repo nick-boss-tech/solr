@@ -1,6 +1,6 @@
 # Gate: PR 5107 integrated security fixes, round 3
 
-Status: OPEN
+Status: CLAIMED by vm6 (partial gate; BATS skipped by owner direction, see claims/pr-5107-security-integration-round-3-vm6.md)
 
 ## Scope and exact inputs
 

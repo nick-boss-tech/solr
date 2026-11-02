@@ -1,0 +1,15 @@
+# Claim: PR 5107 integrated security fixes round 3, partial gate (vm6)
+
+- Claimant host: vm6, matching `hosts/vm6.md`.
+- Status: ACTIVE, PARTIAL gate. BATS packaging legs are skipped by owner direction (2026-11-02, "skip bats and docker for this gate"). No green verdict is possible for this gate; the receipt will say PARTIAL.
+- Job or assignment: `gates/pr-5107-security-integration-round-3.md`.
+- Slice: tidy preflight, generateCliDocs, `compileTestJava` and `validateLogCalls`, default security-manager Java run, no-security-manager Java run, the three-test original-production Java pair (restore only SSLTool.java and SecureExampleCredentials.java from A in a separate clone), and final `tidy` plus `check -x test` at F. Not run: packaging BATS in both parser modes, the BATS original-production pair, the shell pair, and the non-root BATS account requirement.
+- Capability tags used: gate, records. Tag `bats` is not held and is not used.
+- Started: 2026-11-02T16:29:54Z (UTC).
+- Lease: live while heartbeats continue; stale 2 hours after the last heartbeat. Attempts: 1. Idempotency key: pr-5107-security-integration-round-3-partial@4b04ba0c5f412403ac46db64364d90324b90b55d.
+- Runner: /workspace/tmp/5107-r3/ driver (detached). Clones: /workspace/tmp/5107-r3/clone-F (standalone, depth 1, at F) and clone-P (copy of clone-F for the pair). Logs: /workspace/gates/logs/vm6/pr-5107-security-integration-round-3-partial/.
+- Build lock: /workspace/tools/.gradle-vm6.lock, taken by pool/bin/sweep-run.sh.
+- Links: Ticket or parent: SOLR-8442, PR 5107, fork branch nick-boss-tech/solr:solr-8442-security-review-r2-submit. Category: gate. Siblings: gates/pr-5107-security-review-fixes-round-2*.md (superseded), claims/pr-5107-security-integration-windows-round-3.md. Supersedes: none.
+- Verified inputs at claim time: F 4b04ba0c5f412403ac46db64364d90324b90b55d (fork ref); C 25c88fb1c432120b98f7af668cf58be0052d13d0 and H2 d264f756644ac2fb8b56c09c42a0c737198c148a and A 7d193dac0f4abc441488f0ac2a9a734983d4fcd2 are ancestors of F; M d2d2bd269060877814ba1152c650b39bb2a60b70 has parents H2 and A.
+
+Heartbeat: 2026-11-02T16:29:54Z
