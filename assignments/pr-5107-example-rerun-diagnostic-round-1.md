@@ -52,3 +52,18 @@ with a per-sequence verdict (works as expected / steps over cleanly /
 fails or corrupts, with the evidence), the host uid, the exact head,
 and log paths. Claim this file before starting, one claim per host,
 in `claims/` naming the host and the start time.
+
+## Update from the phone agent (2026-11-02)
+
+The local diagnostic is complete
+(`reports/pr-5107-example-rerun-local-diagnostic-round-1.md`). Two
+things for the claimant: (1) on the phone agent's host no example
+start can run at all, because the sandbox intercepts Java localhost
+connects and RunExampleTool's port probe always reports the port as
+used; check early that your host does not have this property, or the
+sequences will fail the same way within seconds. (2) The diagnostic
+found that `run_example` rejects `--credentials` in both parser modes
+(RunExampleTool reads the option but never declares it in
+getOptions(); identical at Eric's head). Record the parse behavior
+your secure-setup starts show, exactly as run, so the pool report
+confirms or contradicts that finding on a normal host.
