@@ -16,8 +16,6 @@
  */
 package org.apache.solr.handler.configsets;
 
-import static org.apache.solr.cloud.Overseer.QUEUE_OPERATION;
-import static org.apache.solr.cloud.OverseerConfigSetMessageHandler.CONFIGSETS_ACTION_PREFIX;
 import static org.apache.solr.handler.admin.ConfigSetsHandler.CONFIG_SET_TIMEOUT;
 
 import java.io.IOException;
@@ -25,25 +23,15 @@ import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import org.apache.solr.api.JerseyResource;
-import org.apache.solr.client.solrj.SolrResponse;
-import org.apache.solr.cloud.OverseerSolrResponseSerializer;
-import org.apache.solr.cloud.OverseerTaskQueue;
-import org.apache.solr.cloud.api.collections.DistributedCollectionConfigSetCommandRunner;
 import org.apache.solr.common.SolrException;
-import org.apache.solr.common.cloud.ZkNodeProps;
 import org.apache.solr.common.params.ConfigSetParams;
 import org.apache.solr.common.util.ContentStream;
 import org.apache.solr.common.util.EnvUtils;
-import org.apache.solr.common.util.SimpleOrderedMap;
-import org.apache.solr.common.util.Utils;
 import org.apache.solr.core.ConfigSetService;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.response.SolrQueryResponse;
-import org.apache.zookeeper.KeeperException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,15 +69,11 @@ public class ConfigSetAPIBase extends JerseyResource {
       log.info("Invoked ConfigSet Action :{} with params {} ", action.toLower(), messageToSend);
     }
 
-    Optional<DistributedCollectionConfigSetCommandRunner> distribCommandRunner =
-        coreContainer.getZkController().getDistributedCommandRunner();
-    if (distribCommandRunner.isPresent()) {
-      distribCommandRunner
-          .get()
-          .runConfigSetCommand(rsp, action, messageToSend, CONFIG_SET_TIMEOUT);
-    } else {
-      sendToOverseer(rsp, action, messageToSend);
-    }
+    coreContainer
+        .getZkController()
+        .getDistributedCommandRunner()
+        .get()
+        .runConfigSetCommand(rsp, action, messageToSend, CONFIG_SET_TIMEOUT);
   }
 
   protected void ensureConfigSetUploadEnabled() {
@@ -110,58 +94,5 @@ public class ConfigSetAPIBase extends JerseyResource {
     }
 
     return contentStreamsIterator.next().getStream();
-  }
-
-  private void sendToOverseer(
-      SolrQueryResponse rsp, ConfigSetParams.ConfigSetAction action, Map<String, Object> result)
-      throws KeeperException, InterruptedException {
-    // We need to differentiate between collection and configsets actions since they currently
-    // use the same underlying queue.
-    result.put(QUEUE_OPERATION, CONFIGSETS_ACTION_PREFIX + action.toLower());
-    ZkNodeProps props = new ZkNodeProps(result);
-    handleResponse(action.toLower(), props, rsp, CONFIG_SET_TIMEOUT);
-  }
-
-  private void handleResponse(String operation, ZkNodeProps m, SolrQueryResponse rsp, long timeout)
-      throws KeeperException, InterruptedException {
-    long time = System.nanoTime();
-
-    OverseerTaskQueue.QueueEvent event =
-        coreContainer.getZkController().getOverseerConfigSetQueue().offer(Utils.toJSON(m), timeout);
-    if (event.getBytes() != null) {
-      SolrResponse response = OverseerSolrResponseSerializer.deserialize(event.getBytes());
-      rsp.getValues().addAll(response.getResponse());
-      SimpleOrderedMap<?> exp = (SimpleOrderedMap<?>) response.getResponse().get("exception");
-      if (exp != null) {
-        Integer code = (Integer) exp.get("rspCode");
-        rsp.setException(
-            new SolrException(
-                code != null && code != -1
-                    ? SolrException.ErrorCode.getErrorCode(code)
-                    : SolrException.ErrorCode.SERVER_ERROR,
-                (String) exp.get("msg")));
-      }
-    } else {
-      if (System.nanoTime() - time
-          >= TimeUnit.NANOSECONDS.convert(timeout, TimeUnit.MILLISECONDS)) {
-        throw new SolrException(
-            SolrException.ErrorCode.SERVER_ERROR,
-            operation + " the configset time out:" + timeout / 1000 + "s");
-      } else if (event.getWatchedEvent() != null) {
-        throw new SolrException(
-            SolrException.ErrorCode.SERVER_ERROR,
-            operation
-                + " the configset error [Watcher fired on path: "
-                + event.getWatchedEvent().getPath()
-                + " state: "
-                + event.getWatchedEvent().getState()
-                + " type "
-                + event.getWatchedEvent().getType()
-                + "]");
-      } else {
-        throw new SolrException(
-            SolrException.ErrorCode.SERVER_ERROR, operation + " the configset unknown case");
-      }
-    }
   }
 }

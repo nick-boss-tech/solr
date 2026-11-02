@@ -198,7 +198,7 @@ public class TestRebalanceLeaders extends SolrCloudTestCase {
   private Set<String> asyncIds(ZkController zkController) throws Exception {
     Optional<DistributedCollectionConfigSetCommandRunner> runner =
         zkController.getDistributedCommandRunner();
-    if (runner.isPresent()) {
+    if (!zkController.isOverseerEnabled()) {
       return new HashSet<>(runner.get().getTrackedAsyncIds());
     }
     Set<String> ids = new HashSet<>(zkController.getOverseerCompletedMap().keys());

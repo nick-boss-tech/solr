@@ -1,0 +1,10 @@
+title: >
+  ConfigSet API commands (create, delete) now always run through the distributed
+  command runner instead of the Overseer queue. The Overseer ConfigSet message
+  handler was removed; Collection API routing is unchanged.
+type: changed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-16542
+    url: https://issues.apache.org/jira/browse/SOLR-16542

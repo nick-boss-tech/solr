@@ -160,7 +160,6 @@ public class ZkController implements Closeable {
 
   private final ZkDistributedQueue overseerJobQueue;
   private final OverseerTaskQueue overseerCollectionQueue;
-  private final OverseerTaskQueue overseerConfigSetQueue;
 
   private final DistributedMap overseerRunningMap;
   private final DistributedMap overseerCompletedMap;
@@ -237,6 +236,8 @@ public class ZkController implements Closeable {
   private final Compressor compressor;
 
   private final DistributedClusterStateUpdater distributedClusterStateUpdater;
+
+  private final boolean overseerEnabled;
 
   private final Optional<DistributedCollectionConfigSetCommandRunner> distributedCommandRunner;
 
@@ -393,14 +394,15 @@ public class ZkController implements Closeable {
       log.info(
           "The Overseer is disabled.  Cluster commands & state updates will happen on any/all nodes.");
     }
+    this.overseerEnabled = overseerEnabled;
     // These "distributed" things replace the Overseer when that's disabled
     this.distributedClusterStateUpdater =
         new DistributedClusterStateUpdater(
             !overseerEnabled, cloudConfig.getMinStateByteLenForCompression(), compressor);
+    // The runner is always constructed: ConfigSet commands always run distributed, while
+    // Collection commands use it only when the Overseer is disabled (see isOverseerEnabled).
     this.distributedCommandRunner =
-        !overseerEnabled
-            ? Optional.of(new DistributedCollectionConfigSetCommandRunner(cc, zkClient))
-            : Optional.empty();
+        Optional.of(new DistributedCollectionConfigSetCommandRunner(cc, zkClient));
 
     init();
 
@@ -410,7 +412,6 @@ public class ZkController implements Closeable {
       this.overseerJobQueue = overseer.getStateUpdateQueue();
     }
     this.overseerCollectionQueue = overseer.getCollectionQueue(zkClient);
-    this.overseerConfigSetQueue = overseer.getConfigSetQueue(zkClient);
     this.sysPropsCacher = new NodesSysPropsCacher(cc.getDefaultHttpSolrClient(), zkStateReader);
     assert ObjectReleaseTracker.track(this);
   }
@@ -780,18 +781,28 @@ public class ZkController implements Closeable {
     return sysPropsCacher;
   }
 
-  /** Non-empty if the Collection API is executed in a distributed way (Overseer is disabled). */
+  /**
+   * True when the Overseer processes Collection API commands. ConfigSet commands always run
+   * distributed.
+   */
+  public boolean isOverseerEnabled() {
+    return overseerEnabled;
+  }
+
+  /**
+   * The distributed command runner. Always present: ConfigSet commands always use it, while
+   * Collection commands use it only when the Overseer is disabled.
+   */
   public Optional<DistributedCollectionConfigSetCommandRunner> getDistributedCommandRunner() {
     return this.distributedCommandRunner;
   }
 
   /** Waits for pending tasks to complete. Should be called before {@link #close()}. */
   public void waitForPendingTasksToComplete() {
-    if (distributedCommandRunner.isPresent()) {
-      // Local (i.e. distributed) Collection API processing
-      distributedCommandRunner.get().stopAndWaitForPendingTasksToComplete();
-    } else {
-      // Overseer based processing
+    // Local (i.e. distributed) ConfigSet API processing always runs through the runner.
+    distributedCommandRunner.get().stopAndWaitForPendingTasksToComplete();
+    if (overseerEnabled) {
+      // Overseer based Collection API processing
       getOverseerCollectionQueue().allowOverseerPendingTasksToComplete();
     }
   }
@@ -2484,10 +2495,6 @@ public class ZkController implements Closeable {
 
   public OverseerTaskQueue getOverseerCollectionQueue() {
     return overseerCollectionQueue;
-  }
-
-  public OverseerTaskQueue getOverseerConfigSetQueue() {
-    return overseerConfigSetQueue;
   }
 
   public DistributedMap getOverseerRunningMap() {

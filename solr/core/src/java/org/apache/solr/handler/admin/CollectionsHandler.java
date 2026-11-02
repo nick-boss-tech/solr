@@ -356,7 +356,7 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
     // updates (but the other way around is ok). See constructor of CloudConfig.
     Optional<DistributedCollectionConfigSetCommandRunner> distribCommandRunner =
         zkController.getDistributedCommandRunner();
-    if (distribCommandRunner.isPresent()) {
+    if (!zkController.isOverseerEnabled()) {
       return distribCommandRunner.get().runCollectionCommand(adminCmdContext, m, timeout);
     } else { // Sending the Collection API message to Overseer via a Zookeeper queue
       String operation = adminCmdContext.getAction().lowerName;
@@ -798,8 +798,7 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         DISTRIBUTEDAPIPROCESSING,
         (req, rsp, h) -> {
           NamedList<Object> results = new NamedList<>();
-          boolean isDistributedApi =
-              h.coreContainer.getZkController().getDistributedCommandRunner().isPresent();
+          boolean isDistributedApi = !h.coreContainer.getZkController().isOverseerEnabled();
           results.add("isDistributedApi", isDistributedApi);
           rsp.getValues().addAll(results);
           return null;

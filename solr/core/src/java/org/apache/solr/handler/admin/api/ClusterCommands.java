@@ -81,7 +81,7 @@ public class ClusterCommands extends AdminAPIBase implements ClusterCommandsApi 
         instantiateJerseyResponse(GetClusterCommandStatusResponse.class);
     final ZkController zkController = coreContainer.getZkController();
 
-    if (zkController.getDistributedCommandRunner().isEmpty()) {
+    if (zkController.isOverseerEnabled()) {
       if (zkController.getOverseerRunningMap().contains(requestId)) {
         setStatus(response, RUNNING, requestId);
       } else if (zkController.getOverseerCompletedMap().contains(requestId)) {
@@ -147,7 +147,7 @@ public class ClusterCommands extends AdminAPIBase implements ClusterCommandsApi 
         instantiateJerseyResponse(DeleteClusterCommandStatusResponse.class);
     final ZkController zkController = coreContainer.getZkController();
 
-    if (zkController.getDistributedCommandRunner().isEmpty()) {
+    if (zkController.isOverseerEnabled()) {
       Collection<String> completed = zkController.getOverseerCompletedMap().keys();
       Collection<String> failed = zkController.getOverseerFailureMap().keys();
       for (String asyncId : completed) {
