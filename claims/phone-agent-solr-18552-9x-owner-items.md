@@ -1,4 +1,5 @@
 # Claim: SOLR-18552 9.x owner-items gate (phone agent, in session)
+Status: DONE (gate DONE at f7cf67fc124, receipt receipts/SOLR-18552.md; closeout 2026-11-01, claims/solr-18552-9x-owner-items-closeout-phone-agent.md).
 
 - Gate job: `gates/SOLR-18552-9x-owner-items.md` (Status OPEN).
 - Branch: `solr-18552-sharedarena-9x`, head `f7cf67fc124`.
