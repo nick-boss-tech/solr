@@ -1,6 +1,6 @@
 # Claim: teardown final validation closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (gate file and assignment marked DONE, Status lines only, verified by read-back).
 
 - Job: gates/teardown-interrupt-close-fix-final-validation-round-1.md
   and assignments/teardown-interrupt-close-fix-final-validation-round-1.md.
