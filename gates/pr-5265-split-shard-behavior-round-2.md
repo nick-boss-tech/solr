@@ -1,6 +1,6 @@
 # Gate: split-shard migration behavior repairs, round 2
 
-Status: OPEN
+Status: SUPERSEDED by `gates/pr-5265-split-shard-behavior-round-2-superseding.md` (tidy repair moved the candidate to `009f2c605136`). Closed in the 2026-11-02 cleanup.
 
 - Target: PR 5265, SOLR-16398, `nick-boss-tech/solr:solr-16398-split-shard`.
 - Exact candidate: `b1f09ab79a3d3f1943e62898512447f836342b34`.
