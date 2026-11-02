@@ -10,4 +10,4 @@
 - Runner: `~/workspace/tools/5279-gate-runner.sh`, run in the foreground via the runtime's backgrounded exec (detached nohup launches died twice on the SOLR-16725 gate). Output: `~/workspace/tools/5279-gate-runner.out`. Logs and fresh JUnit XML copies under `~/workspace/tools/5279-gate-*`.
 - Scope: tidy (clean required), focused `:solr:core` tests FieldAnalysisRequestHandlerTest + DocumentAnalysisRequestHandlerTest at seed 5279C0DE, root `check -x test` (with the current-CA truststore, as the PR 2452 round-3 gate did; the `:kotlinWasmNpmInstall` yarn leg is a known VM egress split if it fails, to be disclosed, never silently dropped), three mutation legs at fresh F worktrees (never committed).
 - Public actions: none. No PR, no comment, no Jira.
-- Status: CLAIMED.
+- Status: DONE. Gate finished GREEN at H2 78a9bef183e710833517a32c1691dfd2c2d9a7df; receipt receipts/PR-5279-analysis-extensibility-tests.md at 8772b77bdb6df926a6359d9b90e5bb9dd0ef174c.
