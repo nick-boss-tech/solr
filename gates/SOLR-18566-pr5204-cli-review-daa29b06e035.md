@@ -1,6 +1,6 @@
 # Gate job: SOLR-18566 PR 5204 CLI review, final head daa29b06e035
 
-Status: OPEN (immutable job; completion is derived from `receipts/SOLR-18566.md` when a gating host writes it).
+Status: DONE (gated by vm4 at daa29b06e035, receipt receipts/SOLR-18566.md; closeout 2026-11-01, claims/solr-18566-gate-closeout-phone-agent.md). Immutable job.
 
 - Ticket: SOLR-18566 (PR https://github.com/apache/solr/pull/5204, reviewed head `7eb288a6f5777770d4472fc2c550b66e0d1cec12`).
 - Branch: `nick-boss-tech/solr:solr-18566-pr5204-cli-review`.
