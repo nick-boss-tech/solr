@@ -1,6 +1,6 @@
 # Gate: listener UBI contract proof, round 1
 
-Status: OPEN
+Status: SUPERSEDED by `gates/pr-5238-ubi-contract-round-2-vm4.md`, which ran DONE GREEN at `c2c387064a` (receipt `receipts/PR-5238-ubi-contract.md`). Closed in the 2026-11-02 cleanup.
 
 - Required tags: gate, review, records.
 - Intended host: a capable Linux Solr gate host with JDK 21, the pinned Gradle distribution and dependencies; one gate at a time under its host lock.
