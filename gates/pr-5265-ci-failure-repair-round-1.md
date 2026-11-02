@@ -1,6 +1,6 @@
 # Gate: PR 5265 CI failure repair, round 1 (exact head)
 
-Status: OPEN; awaiting a Linux gate host with verified Selenium/browser support for the required Admin UI leg.
+Status: CLAIMED by phone agent (claim: `claims/pr-5265-ci-failure-repair-round-1-phone-agent.md`); Selenium capability verified on the claiming host (Chromium 155.0.8059.80, ChromeDriver 155.0.8059.84 via Selenium Manager); running.
 
 - Assignment: `assignments/pr-5265-ci-failure-repair-round-1.md`.
 - Report: `reports/pr-5265-ci-failure-repair-round-1.md`.
