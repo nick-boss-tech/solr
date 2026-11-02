@@ -1,6 +1,6 @@
 # Claim: SOLR-18178 rebased-head round 1 gate (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE, GREEN at d6abc36c94687dc5744a7573bafb1ce473acc75f. Receipt: receipts/SOLR-18178-rebased-20261028.md.
 
 - Job: gates/solr-18178-rebased-head-round-1.md.
 - Head: d6abc36c94687dc5744a7573bafb1ce473acc75f on
