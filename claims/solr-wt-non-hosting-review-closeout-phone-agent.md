@@ -1,7 +1,7 @@
 # Claim: SOLR wt non-hosting review assignment closeout (phone agent)
 
 - Claimant host: phone agent.
-- Status: CLAIMED.
+- Status: DONE.
 - Job: `assignments/solr-wt-non-hosting-review-round-1.md`, closeout only.
 - Basis: review COMPLETE per `receipts/solr-wt-non-hosting-review-round-1.md`
   (Windows round 1, Status REVIEW COMPLETE) and its DONE claim
