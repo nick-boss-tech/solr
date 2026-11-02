@@ -20,4 +20,10 @@ expected to FAIL, head focused test expected to PASS at seed
 :solr:modules:ltr:check -x test), receipt at receipts/SOLR-11310.md.
 No PR, no Jira/GitHub post.
 
-Status: CLAIMED.
+Status: DONE. Verdict GATE GREEN at the exact head
+e38ddec5279c465f65a2fa2de22ee9c92e0f5e31 (changelog rc=0; tidy rc=0
+clean; Error Prone compile BUILD SUCCESSFUL; pre-fix proof 1 test
+1 failure as expected; head test 1 test 0 failures, seed
+11310C0FFEE11310, fresh JUnit XML; :solr:core:check -x test and
+:solr:modules:ltr:check -x test both BUILD SUCCESSFUL). Receipt at
+receipts/SOLR-11310.md. No branch change, nothing re-pushed.
