@@ -1,6 +1,6 @@
 # Claim: SOLR-17241 related endpoint proof closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (gate file and original claim marked DONE, Status lines only, verified by read-back).
 
 - Job: gates/SOLR-17241-related-endpoint-proof-round-1.md.
 - Basis: receipt receipts/SOLR-17241-related-endpoint-proof-round-1.md
