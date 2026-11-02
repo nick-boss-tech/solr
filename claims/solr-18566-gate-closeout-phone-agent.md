@@ -1,6 +1,6 @@
 # Claim: SOLR-18566 gate closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (gate file marked DONE, Status line only, verified by read-back).
 
 - Job: gates/SOLR-18566-pr5204-cli-review-daa29b06e035.md only.
 - Basis: the gate file states completion is derived from
