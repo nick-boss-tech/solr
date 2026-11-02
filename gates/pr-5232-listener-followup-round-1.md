@@ -1,6 +1,6 @@
 # Gate: PR 5232 listener correctness follow-up, round 1
 
-Status: OPEN
+Status: DONE GREEN (vm4) via the superseding F2 gate. Receipt `receipts/PR-5232-listener-followup.md`: GREEN at F2 `23c68215cf0c858b7dd1ceda6b945d2d9daaa174` (the branch's current tip) with discriminating fail-before evidence on the parent. Closed in the 2026-11-02 cleanup.
 
 - Tags: gate, premise-run, review. Intended host: any capable Linux gate host with the branch's JDK/toolchain; one gate at a time under the host build lock.
 - Source: Nick's October 26 request to produce a branch on top of PR 5232 fixing the two review findings.
