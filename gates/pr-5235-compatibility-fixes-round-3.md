@@ -1,6 +1,6 @@
 # Gate: PR 5235 compatibility fixes, round 3
 
-Status: OPEN
+Status: SUPERSEDED by `gates/pr-5235-compatibility-fixes-round-3-superseding-caf8dde.md` (per that file). Closed in the 2026-11-02 cleanup.
 Tags: gate, premise-run, review, records
 Intended host: vm2 (prior proof host), or any capable Linux gate host if unclaimed; JDK 21, branch Gradle wrapper, Python 3 and normal Solr build dependencies. One gate at a time under the host build lock.
 
