@@ -17,4 +17,4 @@ run on current main stands on its own.
 Report to reports/critical-impl-11310-premise-batch-2.md. No PR, no
 Jira/GitHub post.
 
-Status: CLAIMED.
+Status: DONE. Verdict REPRODUCED (branch test verbatim on main 83d560030fde, seed 11310C0FFEE11310: 1 test, 1 failure, elevated doc "1" expected first but was "0"). Report at reports/critical-impl-11310-premise-batch-2.md, verified by read-back.
