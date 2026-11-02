@@ -1,6 +1,6 @@
 # Gate: SOLR-18613, LB attempt limits, published-head verification
 
-Status: OPEN
+Status: DONE (GATE GREEN at c2d2c6259462a7e848008b065d65df69a1b82ebb; receipt `receipts/SOLR-18613.md`, completion report `reports/SOLR-18613-published-head-gate-round-1.md`)
 
 - Ticket: https://issues.apache.org/jira/browse/SOLR-18613
 - Tags: gate, premise-run. Intended host: any capable Linux gate host with JDK 21, Git, Python 3, and the pinned branch's Gradle/build dependencies, one gate at a time under its host build lock.
