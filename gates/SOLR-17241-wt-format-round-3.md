@@ -1,6 +1,6 @@
 # Gate: SOLR-17241 wt response format on non-hosting collection nodes, round 3
 
-Status: OPEN, claimed by vm5 (see `claims/SOLR-17241-wt-format-gate-round-3-vm5.md`). Public comment HOLD.
+Status: DONE (gate PASS at 86d86e3d3e54230b5f3e7b6aa758a189b3b2ed6b, receipt receipts/SOLR-17241.md round 3 section; closeout 2026-11-01, claims/solr-17241-wt-format-round-3-closeout-phone-agent.md). Public comment HOLD.
 
 - Supersedes: `gates/SOLR-17241-wt-format-round-2.md`. Round 2 pinned `7a5a998ee9b07d36b6389dd3e2ef2d4246a1588e` and FAILED at `V2ApiIntegrationTest.testReloadHonorsWtOnNonHostingNode` (javabin writer NPE, `req` null, non-hosting node). Receipt: `receipts/SOLR-17241.md` at round 2.
 - Fork: nick-boss-tech/solr, branch `solr-17241-submit`.
