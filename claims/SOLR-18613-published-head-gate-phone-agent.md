@@ -1,7 +1,7 @@
 # Claim: SOLR-18613 published-head gate execution (phone agent)
 
 - Claimant host: phone-agent, matching `hosts/phone-agent.md`.
-- Status: CLAIMED.
+- Status: DONE (GATE GREEN at the published head; receipt `receipts/SOLR-18613.md`).
 - Job: `gates/SOLR-18613-published-head-round-1.md`.
 - Started (UTC): 2026-11-02T16:33:39Z. Authorized by Nick in the main chat
   on 2026-11-02 ("Yes claim it").
@@ -24,3 +24,10 @@
 - Constraints from the job: no source or changelog edits; no upstream PR,
   public comment, or Jira edit. Repairs, if any leg fails, only per the
   job's repair rules with a superseding exact-head job.
+
+- Result (2026-11-02): tidy clean; focused suites 47 tests, 0 failures,
+  0 errors, 0 skipped at seed 5B407A2D9C1310E7; root `check -x test`
+  BUILD SUCCESSFUL in the full clone; negative proof reconciled and
+  carried forward per the job (see the receipt). Fork ref verified at
+  `c2d2c6259462a7e848008b065d65df69a1b82ebb` before and after. Completion
+  report: `reports/SOLR-18613-published-head-gate-round-1.md`.
