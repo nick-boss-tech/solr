@@ -1,6 +1,6 @@
 # Draft comment: PR 5278 JCL license metadata (round 1)
 
-Status: DRAFT. Not posted. Awaiting Nick's per-text go.
+Status: POSTED 2026-11-02 after Nick's per-text go. Comment: https://github.com/apache/solr/pull/5278#issuecomment-6581876754 (author nick-boss-tech; body read back byte-identical, details/summary verified).
 Pinned identities (verified live 2026-11-02): PR head P 82f60b1b7976c187541a6f6808a781bb7f8b9228
 (branch renovate-9x/logging); repair head H cb8c6ab2752b5202b52c7479b9b77ee7806b350e
 (fork branch pr-5278-jcl-license-metadata, one commit on P).
