@@ -1,6 +1,6 @@
 # Gate: SOLR-18432 prerelease normalization tests, round 1
 
-Status: OPEN. Immutable once posted. Proves only the pinned positive head below.
+Status: SUPERSEDED by `gates/pr-5254-snapshot-join-round-2.md` for the submit branch's new head (that file states it replaces this job). Closed in the 2026-11-02 cleanup. Round 2 requires a Docker/BATS host, which no pool host currently is.
 
 - Required tags: gate, review, records. Intended host: any capable Linux CPU gate host with JDK 21, Git, Python 3, this branch's Gradle 9.7.0 wrapper distribution and build dependencies. Serialize behind the host build lock; follow its normal disk/inode guards.
 - Fork: nick-boss-tech/solr. Branch: solr-18432-submit.
