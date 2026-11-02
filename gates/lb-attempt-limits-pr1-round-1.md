@@ -1,6 +1,6 @@
 # Gate: LB attempt-limit enforcement, PR 1, round 1
 
-Status: OPEN
+Status: DONE (superseded pin). The pinned head `7a226ef031f8` is an ancestor of the published head, which was gated GREEN twice by the phone agent: `receipts/SOLR-18613.md` at `c2d2c6259462` and `receipts/SOLR-18613-changelog-round-1.md` at `b49413e5ab52`. Closed in the 2026-11-02 cleanup.
 
 - Tags: gate, premise-run. Intended host: any capable Linux gate host with JDK 21, Git and Python 3, serialized under its build lock.
 - Source: Nick's October 26 instruction to implement only PR 1 of the mailing-list proposal. Do not implement client defaults/overrides, shard controls or PRs 2 and 3.
