@@ -1,6 +1,6 @@
 # Claim: cuvs-lucene backcompat round 3 gate closeout (phone agent)
 
-Status: CLAIMED by the phone agent.
+Status: DONE (gate file marked DONE, Status line only, verified by read-back).
 
 - Job: gates/cuvs-lucene-backcompat-round-3.md only.
 - Basis: receipt receipts/CUVS-LUCENE-BACKCOMPAT-ROUND-3.md
