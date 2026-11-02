@@ -1,6 +1,6 @@
 # Gate: PR 5232 listener correctness follow-up at F2, round 1 (superseding)
 
-Status: OPEN. Immutable once pushed. Proves only the exact head F2 below.
+Status: DONE (gate GREEN at F2 23c68215cf0c858b7dd1ceda6b945d2d9daaa174, receipt receipts/PR-5232-listener-followup.md; closeout 2026-11-01, claims/pr-5232-listener-followup-f2-closeout-phone-agent.md). Immutable once pushed.
 Supersedes: `gates/pr-5232-listener-followup-round-1.md`, which named head `b3a11484f13feaab55fe4f27504bfce3d1bdd2ef`. That head is tidy-dirty by one line in `SearchRequestListenerTest.java`, so the job's own rule requires a formatting commit and a superseding gate before proof.
 
 - Exact head F2: `23c68215cf0c858b7dd1ceda6b945d2d9daaa174` (commit "SOLR-11994: tidy the CPU assertion line in SearchRequestListenerTest", author Nick Shanin, no trailers, one commit above b3a11484f1).
