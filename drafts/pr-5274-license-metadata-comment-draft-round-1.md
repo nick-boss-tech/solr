@@ -1,6 +1,6 @@
 # Draft comment: PR 5274 JCL license metadata (round 1)
 
-Status: DRAFT. Not posted. Awaiting Nick's per-text go.
+Status: POSTED 2026-11-02 after Nick's per-text go. Comment: https://github.com/apache/solr/pull/5274#issuecomment-6581878450 (author nick-boss-tech; body read back byte-identical, details/summary verified).
 Pinned identities (verified live 2026-11-02): PR head P 3f827a780a292feddeb58077dc531fc3c0086d0c
 (branch renovate/all-non-major-dependencies); repair head H e3bcf3af6fcb544c624efdcb4329ce5ef5a271f3
 (fork branch pr-5274-jcl-license-metadata, one commit on P). The repair diff is identical
