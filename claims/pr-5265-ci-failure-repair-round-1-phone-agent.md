@@ -7,3 +7,7 @@
 - Known risk carried in the open: leg 2 also builds the generated JS client bundle (node toolchain), and this VM's npm egress has failed for other modules before; if the bundle build fails, the receipt records that leg as blocked with the log, and the gate closes PARTIAL at best, per the job's own rule.
 - Deliverables: gate receipt at `receipts/PR-5265-ci-failure-repair-round-1.md`, report at `reports/pr-5265-ci-failure-repair-round-1.md`, gate and claim marked DONE with the verdict. No public PR/JIRA write is authorized by this gate.
 - Claimed: 2026-11-02 (America/Denver). Idempotency key: `pr-5265-ci-failure-repair-round-1-gate@16b0d50218bf82dc0d28158a63602c2d3da2ef3a`.
+
+## Closeout
+
+DONE PARTIAL, 2026-11-02. Receipt `receipts/PR-5265-ci-failure-repair-round-1.md`, report `reports/pr-5265-ci-failure-repair-round-1.md`. The pre-claim capability check verified the driver resolves; the browser itself then proved unable to start under WebDriver (Hatch-managed Chromium build requiring its harness policy switches), so the Admin UI leg is recorded blocked on this host with both attempts logged, and the gate file names what the leg still needs.
