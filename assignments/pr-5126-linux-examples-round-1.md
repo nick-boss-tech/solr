@@ -1,6 +1,6 @@
 # Assignment: PR 5126 executable highlighting examples on Linux, round 1
 
-Status: OPEN
+Status: DONE (slice Q DONE by vm4, slice R DONE by phone agent; reply draft awaits Nick).
 
 - Posted: 2026-10-25 by the Windows review chat, at Nick's explicit request to hand examples to the Linux VMs before replying.
 - Capability tags: `premise-run, implementation, review, draft`.
