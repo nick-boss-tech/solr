@@ -191,7 +191,7 @@ import org.apache.solr.handler.admin.api.ListCollections;
 import org.apache.solr.handler.admin.api.MigrateDocsAPI;
 import org.apache.solr.handler.admin.api.MigrateReplicas;
 import org.apache.solr.handler.admin.api.ModifyCollectionAPI;
-import org.apache.solr.handler.admin.api.MoveReplicaAPI;
+import org.apache.solr.handler.admin.api.MoveReplica;
 import org.apache.solr.handler.admin.api.RebalanceLeadersAPI;
 import org.apache.solr.handler.admin.api.ReloadCollectionAPI;
 import org.apache.solr.handler.admin.api.RenameCollection;
@@ -990,8 +990,8 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
           return null;
         }),
     /**
-     * V2 equivalent: {@link MoveReplicaAPI} ({@code POST /collections/{collection}} with the {@code
-     * move-replica} command).
+     * V2 equivalent: {@link org.apache.solr.handler.admin.api.MoveReplica} ({@code POST
+     * /collections/{collection}} with the {@code move-replica} command).
      */
     MOVEREPLICA_OP(
         MOVEREPLICA,
@@ -1194,6 +1194,7 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
         BalanceReplicas.class,
         RestoreCollection.class,
         SplitShard.class,
+        MoveReplica.class,
         SyncShard.class,
         CollectionProperty.class,
         DeleteNode.class,
@@ -1211,7 +1212,6 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
     final List<Api> apis = new ArrayList<>();
     apis.addAll(AnnotatedApi.getApis(new MigrateDocsAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new ModifyCollectionAPI(this)));
-    apis.addAll(AnnotatedApi.getApis(new MoveReplicaAPI(this)));
     apis.addAll(AnnotatedApi.getApis(new RebalanceLeadersAPI(this)));
     return apis;
   }

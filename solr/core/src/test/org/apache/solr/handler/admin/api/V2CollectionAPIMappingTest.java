@@ -52,7 +52,6 @@ public class V2CollectionAPIMappingTest extends V2ApiMappingTest<CollectionsHand
     final CollectionsHandler collectionsHandler = getRequestHandler();
     apiBag.registerObject(new MigrateDocsAPI(collectionsHandler));
     apiBag.registerObject(new ModifyCollectionAPI(collectionsHandler));
-    apiBag.registerObject(new MoveReplicaAPI(collectionsHandler));
     apiBag.registerObject(new RebalanceLeadersAPI(collectionsHandler));
   }
 
@@ -92,35 +91,6 @@ public class V2CollectionAPIMappingTest extends V2ApiMappingTest<CollectionsHand
     assertEquals("requestTrackingId", v1Params.get(ASYNC));
     assertEquals("bar", v1Params.get("property.foo"));
     assertEquals(456, v1Params.getPrimitiveInt("property.baz"));
-  }
-
-  @Test
-  public void testMoveReplicaAllProperties() throws Exception {
-    final SolrParams v1Params =
-        captureConvertedV1Params(
-            "/collections/collName",
-            "POST",
-            "{ 'move-replica': {"
-                + "'sourceNode': 'someSourceNode', "
-                + "'targetNode': 'someTargetNode', "
-                + "'replica': 'someReplica', "
-                + "'shard': 'someShard', "
-                + "'waitForFinalState': true, "
-                + "'timeout': 123, "
-                + "'inPlaceMove': true, "
-                + "'followAliases': true "
-                + "}}");
-
-    assertEquals(CollectionParams.CollectionAction.MOVEREPLICA.lowerName, v1Params.get(ACTION));
-    assertEquals("collName", v1Params.get(COLLECTION));
-    assertEquals("someSourceNode", v1Params.get("sourceNode"));
-    assertEquals("someTargetNode", v1Params.get("targetNode"));
-    assertEquals("someReplica", v1Params.get("replica"));
-    assertEquals("someShard", v1Params.get("shard"));
-    assertTrue(v1Params.getPrimitiveBool("waitForFinalState"));
-    assertEquals(123, v1Params.getPrimitiveInt("timeout"));
-    assertTrue(v1Params.getPrimitiveBool("inPlaceMove"));
-    assertTrue(v1Params.getPrimitiveBool("followAliases"));
   }
 
   @Test
