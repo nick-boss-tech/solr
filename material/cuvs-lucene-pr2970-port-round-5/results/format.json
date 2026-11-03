@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+    "-jar",
+    "/workspace/tmp/cuvs-05/run2/jars/google-java-format-1.27.0-all-deps.jar",
+    "--skip-javadoc-formatting",
+    "--dry-run",
+    "--set-exit-if-changed",
+    "/workspace/tmp/cuvs-05/run2/patched/java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+    "/workspace/tmp/cuvs-05/run2/patched/java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+    "/workspace/tmp/cuvs-05/run2/patched/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java",
+    "/workspace/tmp/cuvs-05/run2/patched/java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java"
+  ],
+  "exit_code": 0,
+  "formatter_sha256": "ed07239f3cb72e25bf2a0eae63e76831f9f11963bd19fc36a6f1d87016ac1763"
+}

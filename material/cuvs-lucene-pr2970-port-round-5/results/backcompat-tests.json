@@ -1,0 +1,148 @@
+[
+  {
+    "label": "backcompat-base-10.2",
+    "minor": "10.2",
+    "lucene": "10.2.0",
+    "exit_code": 0,
+    "methods": [
+      "testReadIndices",
+      "testUpgradeIndices"
+    ],
+    "cpu_results": [
+      "CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0",
+      "CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0"
+    ],
+    "fixtures": [
+      "25.12.0/10.2/Lucene99AcceleratedHNSWVectorsFormat.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWBinaryQuantizedCodec.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWCodec.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWScalarQuantizedCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWBinaryQuantizedCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWScalarQuantizedCodec.zip"
+    ],
+    "test_source_sha256": "c871bcacb2c16a46854c72005d29570ba452ad95a1e6f076efdcdd04631596b4",
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/backcompat-base-10.2:/workspace/tmp/cuvs-05/run2/base/java/cuvs-lucene/src/test/resources:/workspace/tmp/cuvs-05/run2/module-10.2.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "BackCompatRunner",
+      "testReadIndices",
+      "testUpgradeIndices"
+    ]
+  },
+  {
+    "label": "backcompat-port-10.2",
+    "minor": "10.2",
+    "lucene": "10.2.0",
+    "exit_code": 0,
+    "methods": [
+      "testReadIndices",
+      "testUpgradeIndices",
+      "testUpgradeIndicesWithDeletesAndSparseVectors"
+    ],
+    "cpu_results": [
+      "CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0",
+      "CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0",
+      "CPU_RESULT testUpgradeIndicesWithDeletesAndSparseVectors run=1 failures=0 ignored=0 assumptions=0"
+    ],
+    "fixtures": [
+      "25.12.0/10.2/Lucene99AcceleratedHNSWVectorsFormat.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWBinaryQuantizedCodec.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWCodec.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWScalarQuantizedCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWBinaryQuantizedCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWScalarQuantizedCodec.zip"
+    ],
+    "test_source_sha256": "f51d4281625c588970c1c8aba7af7d3f7771555fca3e0eb6bddc990ffd27c66e",
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/backcompat-port-10.2:/workspace/tmp/cuvs-05/run2/base/java/cuvs-lucene/src/test/resources:/workspace/tmp/cuvs-05/run2/module-10.2.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "BackCompatRunner",
+      "testReadIndices",
+      "testUpgradeIndices",
+      "testUpgradeIndicesWithDeletesAndSparseVectors"
+    ]
+  },
+  {
+    "label": "backcompat-base-10.3",
+    "minor": "10.3",
+    "lucene": "10.3.2",
+    "exit_code": 0,
+    "methods": [
+      "testReadIndices",
+      "testUpgradeIndices"
+    ],
+    "cpu_results": [
+      "CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0",
+      "CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0"
+    ],
+    "fixtures": [
+      "25.12.0/10.2/Lucene99AcceleratedHNSWVectorsFormat.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWBinaryQuantizedCodec.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWCodec.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWScalarQuantizedCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWBinaryQuantizedCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWScalarQuantizedCodec.zip"
+    ],
+    "test_source_sha256": "c871bcacb2c16a46854c72005d29570ba452ad95a1e6f076efdcdd04631596b4",
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/backcompat-base-10.3:/workspace/tmp/cuvs-05/run2/base/java/cuvs-lucene/src/test/resources:/workspace/tmp/cuvs-05/run2/module-10.3.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "BackCompatRunner",
+      "testReadIndices",
+      "testUpgradeIndices"
+    ]
+  },
+  {
+    "label": "backcompat-port-10.3",
+    "minor": "10.3",
+    "lucene": "10.3.2",
+    "exit_code": 0,
+    "methods": [
+      "testReadIndices",
+      "testUpgradeIndices",
+      "testUpgradeIndicesWithDeletesAndSparseVectors"
+    ],
+    "cpu_results": [
+      "CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0",
+      "CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0",
+      "CPU_RESULT testUpgradeIndicesWithDeletesAndSparseVectors run=1 failures=0 ignored=0 assumptions=0"
+    ],
+    "fixtures": [
+      "25.12.0/10.2/Lucene99AcceleratedHNSWVectorsFormat.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWBinaryQuantizedCodec.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWCodec.zip",
+      "26.08.0/10.2/Lucene101AcceleratedHNSWScalarQuantizedCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWBinaryQuantizedCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWCodec.zip",
+      "26.10.0/10.2/Lucene101AcceleratedHNSWScalarQuantizedCodec.zip"
+    ],
+    "test_source_sha256": "f51d4281625c588970c1c8aba7af7d3f7771555fca3e0eb6bddc990ffd27c66e",
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/backcompat-port-10.3:/workspace/tmp/cuvs-05/run2/base/java/cuvs-lucene/src/test/resources:/workspace/tmp/cuvs-05/run2/module-10.3.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "BackCompatRunner",
+      "testReadIndices",
+      "testUpgradeIndices",
+      "testUpgradeIndicesWithDeletesAndSparseVectors"
+    ]
+  }
+]

@@ -1,0 +1,52 @@
+Verified 113 pinned source blobs and applied port.patch (4 files, final blobs match).
+google-java-format 1.27.0 (--skip-javadoc-formatting): no change.
+PREFLIGHT OK: sources, patch, dependencies and formatting verified; nothing compiled or run.
+Verified 113 pinned source blobs and applied port.patch (4 files, final blobs match).
+google-java-format 1.27.0 (--skip-javadoc-formatting): no change.
+{"label": "cuvs-api", "exit_code": 0, "source_count": 44, "class_count": 99}
+{"label": "module-10.2", "exit_code": 0, "source_count": 41, "class_count": 66}
+{"label": "module-10.3", "exit_code": 0, "source_count": 44, "class_count": 69}
+{"label": "query-base-10.2", "exit_code": 0, "source_count": 1, "class_count": 2}
+{"label": "query-port-10.2", "exit_code": 0, "source_count": 2, "class_count": 3}
+{"label": "mask-dropped-10.2", "exit_code": 0, "source_count": 1, "class_count": 1}
+query-base-10.2 exit 0 3 run 0 failures []
+query-port-10.2 exit 0 6 run 0 failures []
+query-base-10.2-mask-dropped exit 0 3 run 0 failures []
+query-port-10.2-mask-dropped exit 1 6 run 3 failures ['testDeletedDocumentsAreExcluded', 'testFilterAndDeletesAreIntersected', 'testFilterIsForwarded']
+{"label": "query-base-10.3", "exit_code": 0, "source_count": 1, "class_count": 2}
+{"label": "query-port-10.3", "exit_code": 0, "source_count": 2, "class_count": 3}
+{"label": "mask-dropped-10.3", "exit_code": 0, "source_count": 1, "class_count": 1}
+query-base-10.3 exit 0 3 run 0 failures []
+query-port-10.3 exit 0 6 run 0 failures []
+query-base-10.3-mask-dropped exit 0 3 run 0 failures []
+query-port-10.3-mask-dropped exit 1 6 run 3 failures ['testDeletedDocumentsAreExcluded', 'testFilterAndDeletesAreIntersected', 'testFilterIsForwarded']
+{"label": "backcompat-base-10.2", "exit_code": 0, "source_count": 2, "class_count": 2}
+backcompat-base-10.2 exit 0
+  CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0
+{"label": "backcompat-port-10.2", "exit_code": 0, "source_count": 2, "class_count": 2}
+backcompat-port-10.2 exit 0
+  CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndicesWithDeletesAndSparseVectors run=1 failures=0 ignored=0 assumptions=0
+{"label": "backcompat-base-10.3", "exit_code": 0, "source_count": 2, "class_count": 2}
+backcompat-base-10.3 exit 0
+  CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0
+{"label": "backcompat-port-10.3", "exit_code": 0, "source_count": 2, "class_count": 2}
+backcompat-port-10.3 exit 0
+  CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndicesWithDeletesAndSparseVectors run=1 failures=0 ignored=0 assumptions=0
+{"label": "control-10.2", "exit_code": 0, "source_count": 3, "class_count": 3}
+control-10.2 exit 1
+  CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndicesWithDeletesAndSparseVectors run=1 failures=1 ignored=0 assumptions=0
+{"label": "control-10.3", "exit_code": 0, "source_count": 3, "class_count": 3}
+control-10.3 exit 1
+  CPU_RESULT testReadIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndices run=1 failures=0 ignored=0 assumptions=0
+  CPU_RESULT testUpgradeIndicesWithDeletesAndSparseVectors run=1 failures=1 ignored=0 assumptions=0
+VERIFIED {"query_positive_executions": 18, "query_mask_dropped_expected_failures": 6, "backcompat_positive_method_executions": 10, "backcompat_fixture_cases": 70, "data_fault_expected_failures": 2}
+PASS: CPU compile, query mask tests with mutations, archived-index tests with data-fault controls. No GPU proof is claimed.

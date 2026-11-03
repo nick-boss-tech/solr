@@ -1,0 +1,162 @@
+[
+  {
+    "label": "query-base-10.2",
+    "minor": "10.2",
+    "lucene": "10.2.0",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/query-base-10.2:/workspace/tmp/cuvs-05/run2/module-10.2.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 3,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "query-port-10.2",
+    "minor": "10.2",
+    "lucene": "10.2.0",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/query-port-10.2:/workspace/tmp/cuvs-05/run2/module-10.2.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 6,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "query-base-10.2-mask-dropped",
+    "minor": "10.2",
+    "lucene": "10.2.0",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/query-base-10.2:/workspace/tmp/cuvs-05/run2/classes/mask-dropped-10.2:/workspace/tmp/cuvs-05/run2/module-10.2.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 3,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "query-port-10.2-mask-dropped",
+    "minor": "10.2",
+    "lucene": "10.2.0",
+    "exit_code": 1,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/query-port-10.2:/workspace/tmp/cuvs-05/run2/classes/mask-dropped-10.2:/workspace/tmp/cuvs-05/run2/module-10.2.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.2.0.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 6,
+    "failures": 3,
+    "failed_methods": [
+      "testDeletedDocumentsAreExcluded",
+      "testFilterAndDeletesAreIntersected",
+      "testFilterIsForwarded"
+    ]
+  },
+  {
+    "label": "query-base-10.3",
+    "minor": "10.3",
+    "lucene": "10.3.2",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/query-base-10.3:/workspace/tmp/cuvs-05/run2/module-10.3.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 3,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "query-port-10.3",
+    "minor": "10.3",
+    "lucene": "10.3.2",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/query-port-10.3:/workspace/tmp/cuvs-05/run2/module-10.3.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 6,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "query-base-10.3-mask-dropped",
+    "minor": "10.3",
+    "lucene": "10.3.2",
+    "exit_code": 0,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/query-base-10.3:/workspace/tmp/cuvs-05/run2/classes/mask-dropped-10.3:/workspace/tmp/cuvs-05/run2/module-10.3.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 3,
+    "failures": 0,
+    "failed_methods": []
+  },
+  {
+    "label": "query-port-10.3-mask-dropped",
+    "minor": "10.3",
+    "lucene": "10.3.2",
+    "exit_code": 1,
+    "command": [
+      "/workspace/jdk/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Dtests.seed=18556C0D",
+      "-Djava.awt.headless=true",
+      "-cp",
+      "/workspace/tmp/cuvs-05/run2/classes/query-port-10.3:/workspace/tmp/cuvs-05/run2/classes/mask-dropped-10.3:/workspace/tmp/cuvs-05/run2/module-10.3.jar:/workspace/tmp/cuvs-05/run2/cuvs-api.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-core-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-backward-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-codecs-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-test-framework-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/lucene-analysis-common-10.3.2.jar:/workspace/tmp/cuvs-05/run2/jars/junit-4.13.2.jar:/workspace/tmp/cuvs-05/run2/jars/hamcrest-2.2.jar:/workspace/tmp/cuvs-05/run2/jars/randomizedtesting-runner-2.8.3.jar",
+      "org.junit.runner.JUnitCore",
+      "com.nvidia.cuvs.lucene.TestCompatKnnFloatVectorQuery"
+    ],
+    "tests_run": 6,
+    "failures": 3,
+    "failed_methods": [
+      "testDeletedDocumentsAreExcluded",
+      "testFilterAndDeletesAreIntersected",
+      "testFilterIsForwarded"
+    ]
+  }
+]

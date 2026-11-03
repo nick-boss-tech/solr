@@ -1,0 +1,28 @@
+{
+  "repo": "NVIDIA/cuvs",
+  "pr": 2970,
+  "head": "3602ef0a8047ef222ad994a316d69ffec26e98bd",
+  "patchSha256": "3185ea28f53520e9fd1e8b72d83b15d3f912c2cb88b6591c3c97989d19a8c36d",
+  "files": [
+    {
+      "path": "java/cuvs-lucene/compat/leaf-reader-102-bits/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+      "before": "ba897c67180103d9c03322af4b456051590deb90",
+      "after": "fa04413d7e5537ba8cd03242908d5306c5a7673d"
+    },
+    {
+      "path": "java/cuvs-lucene/compat/leaf-reader-103-acceptdocs/src/test/java/com/nvidia/cuvs/lucene/TestLuceneCompat.java",
+      "before": "dcd6544f4d1c8309eda64be1659ccfd3db232f1f",
+      "after": "9bdc09a5865d21acb40a8812d867bdbc1293c592"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestBackCompatIndices.java",
+      "before": "ab1ea443f2e00408d8f57c620249c672e8afb285",
+      "after": "cfcab142c250f96aed4131d61b5056271ac2635f"
+    },
+    {
+      "path": "java/cuvs-lucene/src/test/java/com/nvidia/cuvs/lucene/TestCompatKnnFloatVectorQuery.java",
+      "before": "66409f694311d0a54d60db539359b92e03d89043",
+      "after": "f2692a1f698a3974994315772355327edb340530"
+    }
+  ]
+}
