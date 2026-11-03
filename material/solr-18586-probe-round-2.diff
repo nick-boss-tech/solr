@@ -1,0 +1,222 @@
+diff --git a/solr/core/src/java/org/apache/solr/cloud/RecoveryStrategy.java b/solr/core/src/java/org/apache/solr/cloud/RecoveryStrategy.java
+index 38a0d8a0d1e..f9602cf0b59 100644
+--- a/solr/core/src/java/org/apache/solr/cloud/RecoveryStrategy.java
++++ b/solr/core/src/java/org/apache/solr/cloud/RecoveryStrategy.java
+@@ -246,7 +246,9 @@ public class RecoveryStrategy implements Runnable, Closeable {
+ 
+     // send commit if replica could be a leader
+     if (replicaType.leaderEligible) {
++      traceRecoveryProbe("commitOnLeader.before", leaderCore);
+       commitOnLeader(leaderBaseUrl, leaderCore);
++      traceRecoveryProbe("commitOnLeader.after", leaderCore);
+     }
+ 
+     // use rep handler directly, so we can do this sync rather than async
+@@ -268,7 +270,9 @@ public class RecoveryStrategy implements Runnable, Closeable {
+     try {
+       // Stash the RH so the fetch can be aborted if RecoveryStrategy is closed mid-fetch
+       replicationHandlerDoingFetch = replicationHandler;
++      traceRecoveryProbe("doFetch.before", leaderCore);
+       boolean success = replicationHandler.doFetch(solrParams, false).getSuccessful();
++      traceRecoveryProbe("doFetch.after", leaderCore);
+       if (!success) {
+         throw new SolrException(ErrorCode.SERVER_ERROR, "Replication for recovery failed.");
+       }
+@@ -446,7 +450,9 @@ public class RecoveryStrategy implements Runnable, Closeable {
+             log.info("Stopping background replicate from leader process");
+             zkController.stopReplicationFromLeader(coreName);
+           }
++          traceRecoveryProbe("replicate.before", leader.getCoreUrl());
+           replicate(zkController.getNodeName(), core, leader);
++          traceRecoveryProbe("replicate.after", leader.getCoreUrl());
+ 
+           if (isClosed()) {
+             if (log.isInfoEnabled()) {
+@@ -646,7 +652,9 @@ public class RecoveryStrategy implements Runnable, Closeable {
+     while (!successfulRecovery && !Thread.currentThread().isInterrupted() && !isClosed()) {
+       try {
+         CloudDescriptor cloudDesc = this.coreDescriptor.getCloudDescriptor();
++        traceRecoveryProbe("pingLeader.before", ourUrl);
+         final Replica leader = pingLeader(ourUrl, this.coreDescriptor, true);
++        traceRecoveryProbe("pingLeader.after", ourUrl);
+         if (isClosed()) {
+           log.info("RecoveryStrategy has been closed");
+           break;
+@@ -669,7 +677,9 @@ public class RecoveryStrategy implements Runnable, Closeable {
+         log.info("Begin buffering updates. core=[{}]", coreName);
+         Span.current().addEvent("bufferUpdates");
+         // recalling buffer updates will drop the old buffer tlog
++        traceRecoveryProbe("bufferUpdates.before", ulog.getState());
+         ulog.bufferUpdates();
++        traceRecoveryProbe("bufferUpdates.after", ulog.getState());
+ 
+         if (log.isInfoEnabled()) {
+           log.info(
+@@ -693,7 +703,9 @@ public class RecoveryStrategy implements Runnable, Closeable {
+           break;
+         }
+ 
++        traceRecoveryProbe("prepRecovery.before", leader.getCoreUrl());
+         sendPrepRecoveryCmd(leader.getBaseUrl(), leader.getCoreName(), slice);
++        traceRecoveryProbe("prepRecovery.after", leader.getCoreUrl());
+ 
+         if (isClosed()) {
+           log.info("RecoveryStrategy has been closed");
+@@ -742,7 +754,9 @@ public class RecoveryStrategy implements Runnable, Closeable {
+             cloudDebugLog(core, "synced");
+ 
+             log.info("Replaying updates buffered during PeerSync.");
++            traceRecoveryProbe("replay.before", ulog.getState());
+             replayFuture = replay(core);
++            traceRecoveryProbe("replay.after", ulog.getState());
+ 
+             // sync success
+             successfulRecovery = true;
+@@ -761,14 +775,18 @@ public class RecoveryStrategy implements Runnable, Closeable {
+ 
+         try {
+ 
++          traceRecoveryProbe("replicate.before", leader.getCoreUrl());
+           replicate(zkController.getNodeName(), core, leader);
++          traceRecoveryProbe("replicate.after", leader.getCoreUrl());
+ 
+           if (isClosed()) {
+             log.info("RecoveryStrategy has been closed");
+             break;
+           }
+ 
++          traceRecoveryProbe("replay.before", ulog.getState());
+           replayFuture = replay(core);
++          traceRecoveryProbe("replay.after", ulog.getState());
+ 
+           if (isClosed()) {
+             log.info("RecoveryStrategy has been closed");
+@@ -793,7 +811,9 @@ public class RecoveryStrategy implements Runnable, Closeable {
+           Span.current().addEvent("publishActive");
+           try {
+             if (replicaType.replicateFromLeader) {
++              traceRecoveryProbe("startBackgroundReplication.before", coreName);
+               zkController.startReplicationFromLeader(coreName, true);
++              traceRecoveryProbe("startBackgroundReplication.after", coreName);
+             }
+             zkController.publish(this.coreDescriptor, Replica.State.ACTIVE);
+           } catch (Exception e) {
+@@ -947,6 +967,12 @@ public class RecoveryStrategy implements Runnable, Closeable {
+     }
+   }
+ 
++  private void traceRecoveryProbe(String phase, Object detail) {
++    log.warn(
++        "SOLR18586_PROBE node={} core={} replica={} type={} attempt={} phase={} detail={}",
++        zkController.getNodeName(), coreName, coreZkNodeName, replicaType, retries, phase, detail);
++  }
++
+   private void setOutcome(String outcome) {
+     this.outcome = outcome;
+     Span.current().addEvent(outcome);
+@@ -985,7 +1011,16 @@ public class RecoveryStrategy implements Runnable, Closeable {
+                 null) // leader core omitted since client only used for 'admin' request
+             .withIdleTimeout(readTimeout, TimeUnit.MILLISECONDS)
+             .build()) {
+-      prevSendPreRecoveryHttpUriRequest = new FutureTask<>(() -> client.request(prepCmd));
++      prevSendPreRecoveryHttpUriRequest =
++          new FutureTask<>(
++              () -> {
++                try {
++                  return client.request(prepCmd);
++                } catch (Exception e) {
++                  log.warn("SOLR18586_PROBE prepRecovery request failed core=" + coreName, e);
++                  throw e;
++                }
++              });
+       log.info("Sending prep recovery command to [{}]; [{}]", leaderBaseUrl, prepCmd);
+       prevSendPreRecoveryHttpUriRequest.run();
+     }
+diff --git a/solr/core/src/java/org/apache/solr/cloud/ZkController.java b/solr/core/src/java/org/apache/solr/cloud/ZkController.java
+index 2a16644ab2c..ae581e951d2 100644
+--- a/solr/core/src/java/org/apache/solr/cloud/ZkController.java
++++ b/solr/core/src/java/org/apache/solr/cloud/ZkController.java
+@@ -1505,7 +1505,9 @@ public class ZkController implements Closeable {
+         if (isTlogReplicaAndNotLeader) {
+           String commitVersion = ReplicateFromLeader.getCommitVersion(core);
+           if (commitVersion != null) {
++            log.warn("SOLR18586_PROBE copyOld.before core={} commitVersion={}", coreName, commitVersion);
+             ulog.copyOverOldUpdates(Long.parseLong(commitVersion));
++            log.warn("SOLR18586_PROBE copyOld.after core={}", coreName);
+           }
+         }
+         // we will call register again after zk expiration and on reload
+@@ -1536,6 +1538,7 @@ public class ZkController implements Closeable {
+           skipRecovery = checkSkipRecoveryReplicaProp(core, replica);
+         }
+ 
++        log.warn("SOLR18586_PROBE checkRecovery.before core={} leader={} skip={}", coreName, isLeader, skipRecovery);
+         boolean didRecovery =
+             checkRecovery(
+                 recoverReloadedCores,
+@@ -1547,6 +1550,7 @@ public class ZkController implements Closeable {
+                 core,
+                 cc,
+                 afterExpiration);
++        log.warn("SOLR18586_PROBE checkRecovery.after core={} scheduled={}", coreName, didRecovery);
+         if (!didRecovery) {
+           if (replica.getType().replicateFromLeader && !isLeader) {
+             startReplicationFromLeader(coreName, replica.getType().requireTransactionLog);
+@@ -1890,6 +1894,7 @@ public class ZkController implements Closeable {
+       String collection = cd.getCloudDescriptor().getCollectionName();
+ 
+       log.debug("publishing state={}", state);
++      log.warn("SOLR18586_PROBE publish.before node={} core={} state={}", getNodeName(), cd.getName(), state);
+       // System.out.println(Thread.currentThread().getStackTrace()[3]);
+ 
+       assert collection != null && collection.length() > 0;
+@@ -1916,7 +1921,9 @@ public class ZkController implements Closeable {
+ 
+       try (SolrCore core = cc.getCore(cd.getName())) {
+         if (core != null && state == Replica.State.ACTIVE) {
++          log.warn("SOLR18586_PROBE ensureSearcher.before core={}", cd.getName());
+           ensureRegisteredSearcher(core);
++          log.warn("SOLR18586_PROBE ensureSearcher.after core={}", cd.getName());
+         }
+         if (core != null && core.getDirectoryFactory().isSharedStorage()) {
+           if (core.getDirectoryFactory().isSharedStorage()) {
+@@ -1978,6 +1985,7 @@ public class ZkController implements Closeable {
+           overseerJobQueue.offer(m);
+         }
+       }
++      log.warn("SOLR18586_PROBE publish.after node={} core={} state={}", getNodeName(), cd.getName(), state);
+     } finally {
+       MDCLoggingContext.clear();
+     }
+diff --git a/solr/core/src/java/org/apache/solr/update/DefaultSolrCoreState.java b/solr/core/src/java/org/apache/solr/update/DefaultSolrCoreState.java
+index 1134a47f677..0fbece4004b 100644
+--- a/solr/core/src/java/org/apache/solr/update/DefaultSolrCoreState.java
++++ b/solr/core/src/java/org/apache/solr/update/DefaultSolrCoreState.java
+@@ -292,6 +292,7 @@ public final class DefaultSolrCoreState extends SolrCoreState
+   @Override
+   public void doRecovery(CoreContainer cc, CoreDescriptor cd) {
+ 
++    log.warn("SOLR18586_PROBE recovery.scheduled core={}", cd.getName());
+     Runnable recoveryTask =
+         new Runnable() {
+           @Override
+@@ -321,7 +322,9 @@ public final class DefaultSolrCoreState extends SolrCoreState
+                 recoveryWaiting.incrementAndGet();
+                 cancelRecovery();
+ 
++                log.warn("SOLR18586_PROBE recoveryLock.before core={}", cd.getName());
+                 recoveryLock.lock();
++                log.warn("SOLR18586_PROBE recoveryLock.after core={}", cd.getName());
+                 try {
+                   // don't use recoveryLock.getQueueLength() for this
+                   if (recoveryWaiting.decrementAndGet() > 0) {
+@@ -344,7 +347,9 @@ public final class DefaultSolrCoreState extends SolrCoreState
+                   Future<?> future =
+                       cc.getUpdateShardHandler().getRecoveryExecutor().submit(recoveryStrat);
+                   try {
++                    log.warn("SOLR18586_PROBE recoveryFuture.before core={}", cd.getName());
+                     future.get();
++                    log.warn("SOLR18586_PROBE recoveryFuture.after core={}", cd.getName());
+                   } catch (InterruptedException e) {
+                     Thread.currentThread().interrupt();
+                     throw new SolrException(ErrorCode.SERVER_ERROR, e);
