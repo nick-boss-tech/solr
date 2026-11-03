@@ -7,3 +7,7 @@
 - Logs and XML: `~/workspace/tools/5267-gate-logs/` (fresh JUnit XML copied out after each run, before any cleanTest).
 - Deliverable: receipt at `receipts/PR-5267-replication-factor-tests-round-1.md` plus an execution completion report; the job file and the Windows implementation claim stay unchanged, per the job.
 - Claimed: 2026-11-02 (America/Denver). Idempotency key: `pr-5267-replication-factor-tests-round-1-exec@b244ae94d6c84eec06bf1de5754e566b0fdb88d1`.
+
+## Closeout (2026-11-02)
+
+Status: DONE GREEN. Gate passed at F `b244ae94d6c84eec06bf1de5754e566b0fdb88d1`; receipt `receipts/PR-5267-replication-factor-tests-round-1.md`, completion report `reports/pr-5267-replication-factor-tests-round-1.md`.
