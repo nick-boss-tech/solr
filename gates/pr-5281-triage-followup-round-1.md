@@ -1,6 +1,6 @@
 # Gate: advisory PR triage follow-up, round 1
 
-Status: OPEN
+Status: DONE (GREEN 2026-11-03, vm2; all five legs at H1 6bcaa9e1191; receipt receipts/PR-5281-triage-followup-round-1.md).
 
 Tags: gate, review, records.
 Intended host: any available capable Linux CPU gate host with Python 3/venv, Git, Bash, jq, actionlint/ShellCheck, JDK 21 and this branch's Gradle wrapper/build dependencies.

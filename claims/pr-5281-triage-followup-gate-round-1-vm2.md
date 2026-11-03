@@ -1,7 +1,7 @@
 # Claim: pr-5281-triage-followup-gate-round-1-vm2
 
 - Claimant host: vm2 (Linux aarch64 pool host, `hosts/vm2.md`).
-- Status: LIVE.
+- Status: DONE.
 - Job: `gates/pr-5281-triage-followup-round-1.md`, whole job.
 - Slice: the full five-leg Linux proof for PR 5281 advisory triage follow-up at H1 `6bcaa9e1191fb8d0c6def2eaf005b602bf882e40` (positive offline suite, H0 fail-before, rendered output boundary, workflow lint/offline wiring, formatting and root checks), then the named receipt.
 - Capability tags used: gate, review, records.
@@ -16,3 +16,5 @@
 - Constraints: Python/GitHub Actions tooling patch, no Solr Java production/test changes, no changelog fragment. No model/GitHub credentials needed for offline tests. Do not call the live LLM or post a comment as part of this gate. No force push, no change to David's branch, no upstream write. Commit as Nick Shanin with no trailers.
 
 Heartbeat: 2026-11-03T17:11Z
+
+DONE: 2026-11-03T17:30:00Z. Deliverables: receipts/PR-5281-triage-followup-round-1.md (all five legs green at H1 6bcaa9e1191fb8d0c6def2eaf005b602bf882e40).
