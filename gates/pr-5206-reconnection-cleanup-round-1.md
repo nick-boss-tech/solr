@@ -1,6 +1,6 @@
 # Gate: PR 5206 reconnection assertion and listener cleanup, round 1
 
-Status: OPEN
+Status: DONE GREEN (phone agent). Gate passed at `6c6ff8d9a0e173c02b5a11f8ad3b13a59ebd36fa`; phase receipt `receipts/SOLR-18576-pr5206-review-fixes-round-1.md`, report `reports/pr-5206-reconnection-cleanup-round-1-gate.md`.
 Tags: gate, review, records.
 Intended host: any available capable Linux gate host with JDK 21 and the pinned branch's build dependencies, serialized under its host build lock.
 Posted by: windows, on Nick's direct request, 2026-10-27.
