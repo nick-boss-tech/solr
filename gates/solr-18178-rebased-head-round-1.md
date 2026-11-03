@@ -1,6 +1,6 @@
 # Gate: SOLR-18178 rebased configset archive upload, round 1
 
-Status: OPEN
+Status: DONE GREEN (phone agent). Gate passed at `d6abc36c94687dc5744a7573bafb1ce473acc75f`; receipt `receipts/SOLR-18178-rebased-20261028.md`.
 
 - Tags: gate. Intended host: any capable Linux gate host with JDK 21 and this branch's toolchain and dependencies; one build at a time under the host's build lock.
 - Source: Nick's October 28 direct request to rebase PR 4968 and update its body, following the Windows review. This is proof for a new head, not a rerun of the old green receipt.
