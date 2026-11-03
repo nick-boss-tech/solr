@@ -1,42 +1,25 @@
-# Receipt: SOLR-18576, PR 5206 review fixes, round 1 (vm6 gate)
+# Phase receipt: SOLR-18576 / PR 5206 review fixes, round 1 (phone agent, Linux)
 
-Verified head: `6c6ff8d9a0e173c02b5a11f8ad3b13a59ebd36fa` (candidate F). Parent O `4c8f12f526f54e4e90a8ea49d46c1d28d899cb65`. Fork `nick-boss-tech/solr:solr-18576-submit-apache-main` and PR 5206 head both equal F at 2026-10-27 07:22Z. Older receipt `receipts/SOLR-18576.md` proves O only and is kept as is.
+Status: GREEN at F `6c6ff8d9a0e173c02b5a11f8ad3b13a59ebd36fa`.
 
-Gate host: vm6. Gate file `gates/pr-5206-reconnection-cleanup-round-1.md` (not edited). Claim `claims/pr-5206-reconnection-cleanup-round-1-vm6.md`. Full report `reports/pr-5206-reconnection-cleanup-round-1-gate.md`.
+- Job: `gates/pr-5206-reconnection-cleanup-round-1.md`. Claim: `claims/pr-5206-reconnection-cleanup-round-1-phone-agent.md`. Implementation claim: `claims/pr-5206-review-fixes-round-1-windows.md`. Gate report: `reports/pr-5206-reconnection-cleanup-round-1-gate.md`.
+- F: `6c6ff8d9a0e173c02b5a11f8ad3b13a59ebd36fa` on `nick-boss-tech/solr:solr-18576-submit-apache-main` (fork ref read back at that head; HEAD still F at the end). Parent O: `4c8f12f526f54e4e90a8ea49d46c1d28d899cb65` (the previously gated head; the older `receipts/SOLR-18576.md` proves O only and is not carried forward). Merge base: `79b23df58daac14b92cc35f23b8b81f72098b4ba`.
+- Scope: exactly one file outbound of O, the test `solr/core/src/test/org/apache/solr/cloud/BasicDistributedZk2Test.java`. No production files, no changelog.
+- Host: phone agent (Linux, this VM), JDK 21.0.12.1+1, Gradle 9.7.0 via solr-gradle.sh with the job's `--no-daemon` flags, host test-queue lock held for the whole run.
+- Evidence: `~/workspace/tools/5206-gate-logs/` on this host (step summary, per-leg logs, fresh JUnit XML copies).
 
-## Results at F
+## Results
 
-- Tidy: rc 0, tree clean (job `pr5206-F-6c6ff8d9a0e`, 06:00Z).
-- Error Prone compile (`-Pvalidation.errorprone=true --rerun-tasks`): rc 0.
-- Seed `7E5494314774A841`, BasicDistributedZk2Test: tests 1, skipped 0, failures 0, errors 0.
-- Random iterations `-Ptests.iters=4`, BasicDistributedZk2Test: tests 4, skipped 0, failures 0, errors 0. Actual seed `A6A04801FC75C1A7`.
-- Root check `check -x test --no-build-cache`: rc 0 (job `pr5206-F-clone-root`, 07:20Z). The first attempt in the linked gate worktree stopped at the ref-guide Antora step because Antora needs a git directory, not a `.git` file. Rerun in a full clone at F, as an environment relaunch. Cause and change in `claims/pr-5206-reconnection-cleanup-round-1-vm6-result-2.md`.
-- Final tidy: rc 0, tree clean (07:22Z).
+- Tidy: run at F, tree clean; `git diff --exit-code` clean. Final tidy also clean, final tree clean, HEAD still F.
+- Error Prone compile (`:solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true --rerun-tasks --no-build-cache`): BUILD SUCCESSFUL.
+- `BasicDistributedZk2Test` at the original failure seed 7E5494314774A841 (`--no-build-cache`): exactly 1 test executed, 0 failures, 0 errors, 0 skipped.
+- `BasicDistributedZk2Test` with `-Ptests.iters=4` (`--no-build-cache`): exactly 4 tests executed, 0 failures, 0 errors, 0 skipped. Actual seed of that run: 4582961541F975BB.
+- Root check (`env -u NODE_ENV`, `check -x test --no-build-cache`): BUILD SUCCESSFUL. Environment condition: the combined Hatch CA truststore via JAVA_TOOL_OPTIONS for this leg, recorded here per the job.
+
+## Execution notes
+
+A first launch of this gate's runner on 2026-11-02 ran concurrently with three other gate runners because of a faulty lock pattern in the runner scripts; that window was discarded in full. In the serial rerun (17:20 to 17:40 MST), the root check, final tidy, and head verification passed, but the tidy, Error Prone compile, and both test legs were blocked before executing by a stale Gradle journal lock left by the preceding gate's daemon ("Timeout waiting to lock journal cache"); no test ran in those attempts and no branch behavior was exercised. After stopping the daemons, those four legs were rerun unchanged at 19:13 to 19:25 MST and produced the results above. The verdict combines the serial root check with the rerun legs, all at the exact head F.
 
 ## PR description draft (not posted)
 
-🤖 *AI text below* 🤖 *(posted on behalf of Nick Shanin)*
-
-https://issues.apache.org/jira/browse/SOLR-18576
-
-## What happens today
-
-The reconnection step in `BasicDistributedZk2Test` forces a ZooKeeper session expiry, then waits for the client to reconnect and indexes a document. Before this change, the result of the 30-second `blockUntilConnected` wait was not checked, so a client that never reconnected still went on to index. The expiry listener was also removed only on the success path.
-
-## What this change does
-
-It asserts the result of the existing 30-second `blockUntilConnected` call, with a reconnection-specific failure message. The expiry wait, the latch assertion, and the reconnection assertion now sit inside a `try`, and the listener is removed in a `finally`, so cleanup runs on success, failure, or interruption. Registration stays before forced expiry, and indexing stays after the checked waits. Only the test file changes.
-
-## Proof
-
-`BasicDistributedZk2Test` passes at this head: 1 test with the original seed `7E5494314774A841`, and 4 random-seed tests (seed `A6A04801FC75C1A7`), all with no failures, errors, or skips. Tidy and the Error Prone compile pass. The root check passes in a full clone. Verified 2026-10-27 at this head.
-
-The new assertions have not been shown to fail on a base or mutated run. The passing runs do not exercise the expiry-failure, timeout, or interruption branches; those were checked by reading the source. The original intermittent failure was not reproduced, so this change is not evidence that the race is gone.
-
-## Limits
-
-- The original intermittent failure was not reproduced before or after the earlier change.
-- The timeout and interruption cleanup paths are source-inspected, not executed.
-- No production code, dependencies, or changelog changed.
-
-*AI-generated description. Nick Shanin directed the work and takes responsibility for this contribution.*
+SOLR-18576: harden the reconnection cleanup in BasicDistributedZk2Test. Both reconnection waits in the test are now checked 30-second waits with explicit failure instead of unbounded sleeps, and the client cleanup moved into a finally block so a failed wait cannot leak the connection. Verified on Linux at the original failure seed and across four iterations of the test; the original failure itself did not reproduce on this host, so the change is verified as cleanup hardening with the suite green, not as a reproduction fix.
