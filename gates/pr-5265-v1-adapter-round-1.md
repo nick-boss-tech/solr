@@ -1,6 +1,6 @@
 # Gate: PR 5265 v1 SPLITSHARD adapter (round 1)
 
-Status: OPEN
+Status: DONE (GREEN at 7a020053d19435e29036d96d2741ce890cef75c6; receipt receipts/PR-5265-v1-adapter-round-1.md; one disclosed pre-existing intermittent ShardSplitTest failure, reproduced at base)
 Ticket: SOLR-16398
 PR: apache/solr#5265
 Branch: solr-16398-split-shard
