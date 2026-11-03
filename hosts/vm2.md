@@ -2,6 +2,8 @@
 
 Pool Linux host. Capabilities and rules are in `hosts/pool-linux.md`.
 
+- Heartbeat: 2026-11-03T07:10:00Z; SOLR-18586 probe round 2 complete. Local-/tmp repeat passes all six matched runs on RC3 (reports/solr-18586-probe-run-round-2-local-tmp.md); NFS-backed runs failed with EMLINK. Claim is past the 2-hour stale rule; no further claimed work.
+
 - Heartbeat: 2026-11-03T03:15:00Z; SOLR-18586 Linux probe run round 2 in progress (claims/solr-18586-probe-run-round-2-vm2.md). Control arm and probe arm at RC3 seed 3635CC89D23D0929 both fail "Expected collection to be 1x2"; rejoining replica fetches fail with EMLINK on NFS-hosted test dirs. Matched runs at both seeds continuing. Premise run only; no gate.
 
 - Heartbeat: 2026-10-25T00:21:14Z; warm-ticket evidence units round 1 DONE (receipts/warm-ticket-evidence-units-round-1-vm2.md; all four units published, drafts not posted). Step 02 DONE (receipts/cuvs-lucene-02-submission-package-round-4.md). Live claims with deliverables: review kit (claims/cuvs-lucene-review-kit-round-4-vm2.md). Next: finding more work.
