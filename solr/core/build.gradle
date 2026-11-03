@@ -107,6 +107,7 @@ dependencies {
 
   implementation libs.eclipse.jetty.client
   implementation libs.eclipse.jetty.http
+  implementation libs.eclipse.jetty.server
   implementation libs.eclipse.jetty.util
 
   // ZooKeeper
@@ -185,7 +186,6 @@ dependencies {
   testImplementation libs.apache.lucene.testframework
 
   testImplementation libs.eclipse.jetty.io
-  testImplementation libs.eclipse.jetty.server
   testImplementation libs.eclipse.jetty.ee10.servlet
   testImplementation libs.carrotsearch.randomizedtesting.runner
   testImplementation libs.junit.junit

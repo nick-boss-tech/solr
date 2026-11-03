@@ -1,0 +1,7 @@
+title: Restore Jetty HTTP request and thread pool metrics, lost when the Dropwizard Jetty instrumentation was removed, as a new solr.jetty registry
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-18616
+    url: https://issues.apache.org/jira/browse/SOLR-18616

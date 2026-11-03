@@ -46,7 +46,9 @@ import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.NodeConfig;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.core.SolrXmlConfig;
+import org.apache.solr.metrics.JettyServerMetrics;
 import org.apache.solr.util.StartupLoggingUtils;
+import org.eclipse.jetty.server.handler.ContextHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,6 +66,7 @@ public class CoreContainerProvider implements ServletContextListener {
 
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private CoreContainer cores;
+  private JettyServerMetrics jettyServerMetrics;
 
   /**
    * Acquires an instance from the context. Never null.
@@ -128,6 +131,10 @@ public class CoreContainerProvider implements ServletContextListener {
     //    }
 
     cores = null;
+    if (jettyServerMetrics != null) {
+      jettyServerMetrics.close();
+      jettyServerMetrics = null;
+    }
     if (cc != null) {
       cc.shutdown();
     }
@@ -179,6 +186,7 @@ public class CoreContainerProvider implements ServletContextListener {
               });
 
       coresInit = createCoreContainer(computeSolrHome(servletContext), extraProperties);
+      initJettyServerMetrics(coresInit);
 
       if (log.isDebugEnabled()) {
         log.debug("user.dir={}", System.getProperty("user.dir"));
@@ -193,6 +201,16 @@ public class CoreContainerProvider implements ServletContextListener {
       log.trace("init() done");
       this.cores = coresInit; // crucially final assignment
     }
+  }
+
+  private void initJettyServerMetrics(CoreContainer cc) {
+    // contextInitialized runs within the scope of the Solr context, so its handler is current
+    ContextHandler contextHandler = ContextHandler.getCurrentContextHandler();
+    if (contextHandler == null || contextHandler.getServer() == null) {
+      log.warn("Unable to locate the Jetty Server; Jetty metrics are unavailable");
+      return;
+    }
+    jettyServerMetrics = new JettyServerMetrics(cc.getMetricManager(), contextHandler.getServer());
   }
 
   private void logWelcomeBanner(Properties props) {

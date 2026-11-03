@@ -135,6 +135,31 @@ Solr exposes metrics for the internal Jetty-based HTTP client used for distribut
 | `solr_client_request_async_permits{state="available"}` | gauge | Number of async request permits currently available (i.e., not in use). When this approaches zero, new distributed requests will block waiting for a permit.
 |===
 
+=== Jetty Registry
+
+The `solr.jetty` registry reports on the Jetty HTTP server that hosts Solr.
+Request metrics cover every HTTP request Jetty receives, including requests that never reach a Solr collection or core (for example, requests to paths that do not exist), which no other Solr metric sees.
+Thread pool metrics show how close the Jetty request thread pool is to saturation.
+
+Request metrics come from Jetty's `StatisticsHandler`, which the default `server/etc/jetty.xml` installs as the outermost handler.
+If a customized `jetty.xml` omits it, only the thread pool metrics are reported.
+
+[cols="2,1,3",options="header"]
+|===
+| Prometheus Metric Name | Type | Description
+| `jetty_requests` | counter | Total HTTP requests received.
+| `jetty_requests_active` | gauge | HTTP requests currently in progress.
+| `jetty_responses{status_class="4xx"}` | counter | Total HTTP responses, by status class (`1xx`, `2xx`, `3xx`, `4xx`, `5xx`).
+| `jetty_request_failures` | counter | Total HTTP requests that failed without producing a response.
+| `jetty_request_time_milliseconds` | counter | Total time spent processing HTTP requests. Divide its rate by the rate of `jetty_requests` for the mean request time.
+| `jetty_request_read_bytes` | counter | Total request body bytes read by Solr (bodies that are never read, e.g. of rejected requests, are not counted).
+| `jetty_response_written_bytes` | counter | Total response body bytes written.
+| `jetty_thread_pool_threads{state="busy"}` | gauge | Jetty request threads, by state (`busy`, `idle`).
+| `jetty_thread_pool_threads_limit{state="max"}` | gauge | Configured thread limits, by state (`min`, `max`), set by `solr.jetty.threads.min` and `solr.jetty.threads.max`.
+| `jetty_thread_pool_utilization` | gauge | Fraction of the maximum threads in use, from 0.0 to 1.0.
+| `jetty_thread_pool_queue_size` | gauge | Jobs waiting for a free Jetty thread.
+|===
+
 == Core Level Metrics
 
 === Index Merge Metrics

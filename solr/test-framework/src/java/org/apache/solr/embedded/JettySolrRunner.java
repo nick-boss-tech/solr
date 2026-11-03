@@ -87,6 +87,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.GracefulHandler;
+import org.eclipse.jetty.server.handler.StatisticsHandler;
 import org.eclipse.jetty.session.DefaultSessionIdManager;
 import org.eclipse.jetty.util.resource.ResourceFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
@@ -401,7 +402,8 @@ public class JettySolrRunner implements SolrBackend {
       chain = rwh;
     }
 
-    server.setHandler(chain);
+    // Mimic jetty.xml: outermost StatisticsHandler feeds the solr.jetty metrics registry
+    server.setHandler(new StatisticsHandler(chain));
 
     if (config.enableGracefulShutdown) {
       // Mimic "graceful.mod"

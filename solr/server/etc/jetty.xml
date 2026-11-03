@@ -177,8 +177,14 @@
     <!-- =========================================================== -->
     <!-- Set handler Collection Structure                            -->
     <!-- =========================================================== -->
+    <!-- StatisticsHandler is outermost so it counts every request, including those that do not -->
+    <!-- reach the Solr webapp; Solr reads its counters into the solr.jetty metrics registry.    -->
     <Set name="handler">
-      <Ref refid="RewriteHandler"/>
+      <New id="StatisticsHandler" class="org.eclipse.jetty.server.handler.StatisticsHandler">
+        <Set name="handler">
+          <Ref refid="RewriteHandler"/>
+        </Set>
+      </New>
     </Set>
 
     <!-- =========================================================== -->
