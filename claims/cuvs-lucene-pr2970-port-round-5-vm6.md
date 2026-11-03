@@ -13,4 +13,4 @@
 - Limits: no upstream push, PR, comment, or Jira write. Drafts (step 02 revision 2) are not part of this claim.
 - Links: Parent: SOLR-18556, NVIDIA/cuvs PR 2970 and PR 2702. Siblings: `assignments/cuvs-lucene-03-readiness-review-round-4.md`, `claims/cuvs-lucene-03-readiness-review-round-4-vm6.md`. Supersedes: none (round 2 and round 3 evidence stands for PR 2702 `23004d0f`).
 
-Heartbeat: 2026-11-03T02:46:38Z
+Heartbeat: 2026-11-03T02:53:59Z; port written (4 test files, additions only), Check A smoke green on 10.2.0 and 10.3.2 with mask mutation failing the 3 new tests; harness dry run in progress.
