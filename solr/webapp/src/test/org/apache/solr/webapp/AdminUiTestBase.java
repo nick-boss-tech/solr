@@ -167,7 +167,8 @@ public abstract class AdminUiTestBase extends SolrCloudTestCase {
       String name = t.getName();
       // JDK java.net.http client worker/selector threads (used by Selenium) are daemon
       // threads in a shared pool that outlive WebDriver.quit()
-      return name.startsWith("HttpClient-")
+      return name.startsWith("JdkHttpClient-")
+          || name.startsWith("HttpClient-")
           // reaps the external chromedriver/chrome processes
           || name.startsWith("process reaper")
           // selenium driver-service startup checker pool, terminates on its own
