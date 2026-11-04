@@ -128,6 +128,17 @@ public abstract class AbstractConfigSetUploadFromRepositoryTest extends SolrClou
   }
 
   @Test
+  public void testUploadDotPrefixedDirectoriesFromRepository() throws Exception {
+    final URI dir = newTestDir();
+    stageFile(dir, ".metadata/resource.txt", "resource");
+    final String name = uniqueName("dotdir");
+
+    uploadRequest(name, dir).process(cluster.getSolrClient());
+
+    assertEquals("resource", read(name, ".metadata/resource.txt"));
+  }
+
+  @Test
   public void testOverwriteFalseRejectsExistingConfigSet() throws Exception {
     final URI dir = newTestDir();
     stageFile(dir, "solrconfig.xml", "<new/>");

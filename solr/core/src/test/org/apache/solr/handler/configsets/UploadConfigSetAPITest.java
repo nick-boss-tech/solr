@@ -332,4 +332,23 @@ public class UploadConfigSetAPITest extends SolrTestCase {
     assertEquals(SolrException.ErrorCode.FORBIDDEN.code, e.code());
     assertFalse(configSetService.checkConfigExists("newconfig"));
   }
+
+  @Test
+  public void testRepositoryUploadRejectsBodyWhenAvailableIsZero() throws Exception {
+    final InputStream stream =
+        new ByteArrayInputStream("not empty".getBytes(StandardCharsets.UTF_8)) {
+          @Override
+          public int available() {
+            return 0;
+          }
+        };
+    final var api = new UploadConfigSet(mockCoreContainer, null, null);
+
+    final var e =
+        expectThrows(
+            SolrException.class,
+            () -> api.uploadConfigSet("newconfig", true, false, "local", "/repository", stream));
+
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+  }
 }

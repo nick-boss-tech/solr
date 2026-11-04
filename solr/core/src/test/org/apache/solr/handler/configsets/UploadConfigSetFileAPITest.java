@@ -18,6 +18,7 @@
 package org.apache.solr.handler.configsets;
 
 import static org.apache.solr.SolrTestCaseJ4.assumeWorkingMockito;
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.when;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.common.SolrException;
@@ -123,6 +125,32 @@ public class UploadConfigSetFileAPITest extends SolrTestCase {
                     "newconfig", "solrconfig.xml", "local", disallowed.toString(), null));
 
     assertEquals(SolrException.ErrorCode.FORBIDDEN.code, e.code());
+    assertFalse(configSetService.checkConfigExists("newconfig"));
+  }
+
+  @Test
+  public void testSingleFileUploadRejectsSymbolicLink() throws Exception {
+    final Path repositoryDir = createTempDir("repository");
+    assumeTrue(
+        "Symbolic links require filesystem support",
+        Files.getFileStore(repositoryDir).supportsFileAttributeView("posix"));
+    final Path outsideFile = createTempDir("outside-repository").resolve("secret.txt");
+    Files.writeString(outsideFile, "secret");
+    final Path link = repositoryDir.resolve("linked.txt");
+    Files.createSymbolicLink(link, outsideFile);
+    final var repository = new LocalFileSystemRepository();
+    repository.init(new NamedList<>());
+    when(mockCoreContainer.newBackupRepository(any())).thenReturn(repository);
+
+    final var api = new UploadConfigSet(mockCoreContainer, null, null);
+    final var e =
+        expectThrows(
+            SolrException.class,
+            () ->
+                api.uploadConfigSetFile(
+                    "newconfig", "schema.xml", "local", link.toString(), null));
+
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
     assertFalse(configSetService.checkConfigExists("newconfig"));
   }
 }
