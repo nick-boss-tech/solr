@@ -28,7 +28,6 @@ import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.NodeApi;
 import org.apache.solr.client.solrj.response.RequestStatusState;
 import org.apache.solr.cloud.SolrCloudTestCase;
-import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.cloud.Slice;
@@ -99,12 +98,14 @@ public class DeleteNodeAPITest extends SolrCloudTestCase {
     }
 
     var request = new NodeApi.DeleteNode(nodeToBeDecommissioned);
+    SubResponseAccumulatingJerseyResponse response = request.process(cloudClient);
     if (shouldFail) {
-      SolrException exception =
-          expectThrows(SolrException.class, () -> request.process(cloudClient));
-      assertEquals(500, exception.code());
+      assertEquals(500, response.responseHeader.status);
+      assertNotNull(
+          "Expected request to fail, there should be failures sent back",
+          response.failedSubResponsesByNodeName);
     } else {
-      SubResponseAccumulatingJerseyResponse response = request.process(cloudClient);
+      assertEquals(0, response.responseHeader.status);
       assertNull(
           "Expected request to not fail, there should be no failures sent back",
           response.failedSubResponsesByNodeName);
@@ -118,7 +119,7 @@ public class DeleteNodeAPITest extends SolrCloudTestCase {
   }
 
   @Test
-  public void testDeleteNodeFailureReturnsHttp500() throws Exception {
+  public void testDeleteNodeFailureSetsResponseStatus() throws Exception {
     CloudSolrClient cloudClient = cluster.getSolrClient();
     String coll = "deletenodetest_coll_failing";
     ArrayList<String> nodes =
@@ -137,9 +138,9 @@ public class DeleteNodeAPITest extends SolrCloudTestCase {
             .orElseThrow();
 
     var request = new NodeApi.DeleteNode(nodeToBeDecommissioned);
-    SolrException exception =
-        expectThrows(SolrException.class, () -> request.process(cloudClient));
-    assertEquals(500, exception.code());
+    SubResponseAccumulatingJerseyResponse response = request.process(cloudClient);
+    assertEquals(500, response.responseHeader.status);
+    assertNotNull(response.failedSubResponsesByNodeName);
   }
 
   @Test
