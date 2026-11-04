@@ -126,8 +126,7 @@ public class DeleteNodeAPITest extends SolrCloudTestCase {
   public void testDeleteNodeFailureReturnsHttp500() throws Exception {
     CloudSolrClient cloudClient = cluster.getSolrClient();
     String coll = "deletenodetest_coll_failing";
-    ArrayList<String> nodes =
-        new ArrayList<>(cloudClient.getClusterStateProvider().getLiveNodes());
+    ArrayList<String> nodes = new ArrayList<>(cloudClient.getClusterStateProvider().getLiveNodes());
     Collections.shuffle(nodes, random());
     CollectionAdminRequest.Create create =
         CollectionAdminRequest.createCollection(coll, "conf1", 5, 1, 0, 0);
