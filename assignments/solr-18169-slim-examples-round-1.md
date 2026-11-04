@@ -1,6 +1,6 @@
 # Assignment: implement SOLR-18169, the slim image shouldn't have examples (any capable host, round 1)
 
-Status: OPEN. Implementation assignment. Claim first in `claims/solr-18169.md` on this branch, then do the work. No PR, no Jira comment, and no GitHub comment is part of this assignment; those need the owner's separate go.
+Status: DONE. Implemented by the Windows host (claim `claims/solr-18169.md`) and gated GREEN on Linux at final head `dd90eafa345fb71e514a3f28dd0ffc6a8c9e8168`; receipt `receipts/SOLR-18169-round-1.md`. No PR opened and no Jira or GitHub comment posted; those need the owner's separate go.
 
 ## The ticket
 
