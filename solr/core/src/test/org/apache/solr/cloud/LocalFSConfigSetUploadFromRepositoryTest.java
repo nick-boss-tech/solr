@@ -125,7 +125,10 @@ public class LocalFSConfigSetUploadFromRepositoryTest
     stageFile(dir, "solrconfig.xml", "<config/>");
     final Path outsideDir = createTempDir("outside-repository");
     Files.writeString(outsideDir.resolve("secret.txt"), "secret");
-    Files.createSymbolicLink(Path.of(dir).resolve("linked"), outsideDir);
+    // The link is created through the default filesystem (Path.of), so the
+    // target has to be a default-filesystem path for the same directory,
+    // not the test-framework temp path.
+    Files.createSymbolicLink(Path.of(dir).resolve("linked"), Path.of(outsideDir.toUri()));
     final String name = "symlink-" + UUID.randomUUID();
     final String encodedLocation = URLEncoder.encode(locationParam(dir), StandardCharsets.UTF_8);
 

@@ -36,6 +36,9 @@ grant {
   permission java.io.FilePermission "/path/to/solr/home/lib", "read";
 
   permission java.nio.file.LinkPermission "hard";
+  // Tests that stage symbolic links (for example the configset upload
+  // symlink rejection tests) create them under the security manager.
+  permission java.nio.file.LinkPermission "symbolic";
 
   permission java.security.SecurityPermission "putProviderProperty.SolrTestNonSecure";
 
