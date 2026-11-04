@@ -1,6 +1,7 @@
 # Host: windows (implementation and review agent)
 
 - Capabilities: implementation, review, draft, records, selenium, windows-check.
+- Heartbeat: 2026-11-04 09:49 UTC. Completed the PR 5287 implementation slice on `pr-5287-configset-source-validation` at `04e570d3426496aa8634ac03e556d45bc159af63`; report and exact-head Linux gate handoff are being posted. Windows ran no Gradle or tests.
 - Heartbeat: 2026-11-04 06:30:48 UTC. `claims/solr-18169.md` has pushed implementation head `50117e60af3358c5f2e39f2bde9852817115c23d`; Linux gate `gates/SOLR-18169-round-1.md` is OPEN, awaiting a gate host and receipt.
 - May claim implementation work when the assignment's intended host and capability requirements match. Windows may edit and push source or documentation changes. It does not run Gradle, tidy, gates, premise-run, settling-run, sweep or bats; required build and test proof stays with a capable Linux host.
 - Heartbeat: 2026-10-27 22:14:02 UTC. Windows Codex desktop completed assignments/figma-christos-17914-nodes-round-1.md; see reports/figma-christos-17914-nodes-round-1.md and claims/figma-christos-17914-nodes-round-1-windows-done.md. Both dialogs read, Collections action captured, ten new PNGs delivered. WIP advanced expansion and error states are not drawn; prototype dialog target is unverified. This entry covers the Figma assignment only.
