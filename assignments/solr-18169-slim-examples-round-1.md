@@ -1,6 +1,6 @@
 # Assignment: implement SOLR-18169, the slim image shouldn't have examples (any capable host, round 1)
 
-Status: DONE. Implemented by the Windows host (claim `claims/solr-18169.md`) and gated GREEN on Linux at final head `dd90eafa345fb71e514a3f28dd0ffc6a8c9e8168`; receipt `receipts/SOLR-18169-round-1.md`. No PR opened and no Jira or GitHub comment posted; those need the owner's separate go.
+Status: DONE. Implemented by the Windows host (claim `claims/solr-18169.md`); gated GREEN on Linux at the fork-base head `dd90eafa345f` (receipt `receipts/SOLR-18169-round-1.md`), then rebased onto apache main and re-gated GREEN at `f5a5480383a2e8d25d1411ec1d813da593305952` (receipt `receipts/SOLR-18169-round-2.md`). Opened as draft PR #5289 at the owner's go; no Jira comment posted.
 
 ## The ticket
 
