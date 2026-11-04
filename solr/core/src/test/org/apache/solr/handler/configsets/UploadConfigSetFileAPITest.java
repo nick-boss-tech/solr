@@ -147,8 +147,7 @@ public class UploadConfigSetFileAPITest extends SolrTestCase {
         expectThrows(
             SolrException.class,
             () ->
-                api.uploadConfigSetFile(
-                    "newconfig", "schema.xml", "local", link.toString(), null));
+                api.uploadConfigSetFile("newconfig", "schema.xml", "local", link.toString(), null));
 
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
     assertFalse(configSetService.checkConfigExists("newconfig"));
