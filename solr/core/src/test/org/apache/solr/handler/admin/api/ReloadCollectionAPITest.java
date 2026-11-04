@@ -77,6 +77,9 @@ public class ReloadCollectionAPITest extends MockV2APITest {
     final NamedList<Object> failedSubResponses = new NamedList<>();
     failedSubResponses.add("node1", "reload failed");
     final NamedList<Object> remoteResponseValues = new NamedList<>();
+    final NamedList<Object> successfulSubResponses = new NamedList<>();
+    successfulSubResponses.add("node2", "reload succeeded");
+    remoteResponseValues.add("success", successfulSubResponses);
     remoteResponseValues.add("failure", failedSubResponses);
     when(mockCommandRunner.runCollectionCommand(any(), any(), anyLong()))
         .thenReturn(new OverseerSolrResponse(remoteResponseValues));
@@ -85,6 +88,7 @@ public class ReloadCollectionAPITest extends MockV2APITest {
         api.reloadCollection("someCollName", new ReloadCollectionRequestBody());
 
     assertEquals(500, response.responseHeader.status);
+    assertSame(successfulSubResponses, response.successfulSubResponsesByNodeName);
     assertSame(failedSubResponses, response.failedSubResponsesByNodeName);
     assertEquals(Integer.valueOf(500), queryResponse.getHttpStatusCodeOverride());
     assertNull(queryResponse.getException());

@@ -17,6 +17,7 @@
 
 package org.apache.solr.jersey;
 
+import static org.apache.solr.SolrTestCaseJ4.assumeWorkingMockito;
 import static org.apache.solr.jersey.RequestContextKeys.SOLR_QUERY_REQUEST;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -25,32 +26,40 @@ import static org.mockito.Mockito.when;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerResponseContext;
 import java.util.Set;
-import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.SolrTestCase;
 import org.apache.solr.client.api.model.SubResponseAccumulatingJerseyResponse;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrQueryRequestBase;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class PostRequestDecorationFilterTest extends SolrTestCaseJ4 {
+/** Unit tests for HTTP status decoration of Jersey responses. */
+public class PostRequestDecorationFilterTest extends SolrTestCase {
+
+  @BeforeClass
+  public static void ensureWorkingMockito() {
+    assumeWorkingMockito();
+  }
 
   @Test
   public void testNonZeroResponseHeaderStatusIsUsedForHttpStatus() throws Exception {
     final ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
     final ContainerResponseContext responseContext = mock(ContainerResponseContext.class);
-    final SolrQueryRequest solrQueryRequest =
-        new SolrQueryRequestBase(null, new ModifiableSolrParams()) {};
-    final SubResponseAccumulatingJerseyResponse response =
-        new SubResponseAccumulatingJerseyResponse();
-    response.responseHeader.status = 500;
+    try (SolrQueryRequest solrQueryRequest =
+        new SolrQueryRequestBase(null, new ModifiableSolrParams()) {}) {
+      final SubResponseAccumulatingJerseyResponse response =
+          new SubResponseAccumulatingJerseyResponse();
+      response.responseHeader.status = 500;
 
-    when(requestContext.getPropertyNames()).thenReturn(Set.of(SOLR_QUERY_REQUEST));
-    when(requestContext.getProperty(SOLR_QUERY_REQUEST)).thenReturn(solrQueryRequest);
-    when(responseContext.hasEntity()).thenReturn(true);
-    when(responseContext.getEntity()).thenReturn(response);
+      when(requestContext.getPropertyNames()).thenReturn(Set.of(SOLR_QUERY_REQUEST));
+      when(requestContext.getProperty(SOLR_QUERY_REQUEST)).thenReturn(solrQueryRequest);
+      when(responseContext.hasEntity()).thenReturn(true);
+      when(responseContext.getEntity()).thenReturn(response);
 
-    new PostRequestDecorationFilter().filter(requestContext, responseContext);
+      new PostRequestDecorationFilter().filter(requestContext, responseContext);
 
-    verify(responseContext).setStatus(500);
+      verify(responseContext).setStatus(500);
+    }
   }
 }

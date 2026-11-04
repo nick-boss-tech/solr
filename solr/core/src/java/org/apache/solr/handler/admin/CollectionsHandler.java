@@ -325,7 +325,23 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
     Exception exp = overseerResponse.getException();
     if (exp != null) {
       rsp.setException(exp);
+    } else if (hasFailedSubResponses(overseerResponse.getResponse().get("failure"))) {
+      rsp.setHttpStatusCodeOverride(ErrorCode.SERVER_ERROR.code);
     }
+  }
+
+  /** Returns whether a collection command's failure value contains any failed sub-responses. */
+  public static boolean hasFailedSubResponses(Object failedSubResponses) {
+    if (failedSubResponses instanceof NamedList<?> failures) {
+      return failures.size() > 0;
+    }
+    if (failedSubResponses instanceof Map<?, ?> failures) {
+      return !failures.isEmpty();
+    }
+    if (failedSubResponses instanceof Collection<?> failures) {
+      return !failures.isEmpty();
+    }
+    return failedSubResponses != null;
   }
 
   public static long DEFAULT_COLLECTION_OP_TIMEOUT = 180 * 1000;

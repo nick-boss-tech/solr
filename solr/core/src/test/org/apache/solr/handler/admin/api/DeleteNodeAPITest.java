@@ -21,17 +21,21 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.apache.solr.client.api.model.SubResponseAccumulatingJerseyResponse;
+import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.NodeApi;
+import org.apache.solr.client.solrj.response.InputStreamResponseParser;
 import org.apache.solr.client.solrj.response.RequestStatusState;
 import org.apache.solr.cloud.SolrCloudTestCase;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.cloud.Slice;
 import org.apache.solr.common.util.StrUtils;
+import org.apache.solr.common.util.Utils;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -119,7 +123,7 @@ public class DeleteNodeAPITest extends SolrCloudTestCase {
   }
 
   @Test
-  public void testDeleteNodeFailureSetsResponseStatus() throws Exception {
+  public void testDeleteNodeFailureReturnsHttp500() throws Exception {
     CloudSolrClient cloudClient = cluster.getSolrClient();
     String coll = "deletenodetest_coll_failing";
     ArrayList<String> nodes =
@@ -137,10 +141,52 @@ public class DeleteNodeAPITest extends SolrCloudTestCase {
             .findFirst()
             .orElseThrow();
 
-    var request = new NodeApi.DeleteNode(nodeToBeDecommissioned);
-    SubResponseAccumulatingJerseyResponse response = request.process(cloudClient);
-    assertEquals(500, response.responseHeader.status);
-    assertNotNull(response.failedSubResponsesByNodeName);
+    assertDeleteNodeHttpResponses(nodeToBeDecommissioned, 500);
+    assertEquals(
+        docColl.getReplicasOnNode(nodeToBeDecommissioned).size(),
+        cloudClient
+            .getClusterStateProvider()
+            .getCollection(coll)
+            .getReplicasOnNode(nodeToBeDecommissioned)
+            .size());
+  }
+
+  @Test
+  public void testDeleteNodeSuccessReturnsHttp200() throws Exception {
+    String emptyNode =
+        cluster.getSolrClient().getClusterStateProvider().getLiveNodes().iterator().next();
+    assertDeleteNodeHttpResponses(emptyNode, 200);
+  }
+
+  private void assertDeleteNodeHttpResponses(String node, int expectedHttpStatus) throws Exception {
+    var v2Request =
+        new NodeApi.DeleteNode(node) {
+          @Override
+          public InputStreamResponseParser getResponseParser() {
+            return new InputStreamResponseParser("json");
+          }
+        };
+    for (SolrRequest<?> request : List.of(CollectionAdminRequest.deleteNode(node), v2Request)) {
+      request.setResponseParser(new InputStreamResponseParser("json"));
+      var rawResponse = cluster.getSolrClient().request(request);
+      String body = InputStreamResponseParser.consumeResponseToString(rawResponse);
+      assertEquals(
+          body,
+          expectedHttpStatus,
+          ((Number) rawResponse.get(InputStreamResponseParser.HTTP_STATUS_KEY)).intValue());
+      Map<?, ?> response = (Map<?, ?>) Utils.fromJSONString(body);
+      Map<?, ?> header = (Map<?, ?>) response.get("responseHeader");
+      assertEquals(
+          body, expectedHttpStatus == 200 ? 0 : 500, ((Number) header.get("status")).intValue());
+      if (expectedHttpStatus == 500) {
+        assertNotNull(body, response.get("failure"));
+        assertTrue(
+            body,
+            response.get("failure").toString().contains("Can't delete the only existing non-PULL"));
+      } else {
+        assertNull(body, response.get("failure"));
+      }
+    }
   }
 
   @Test
@@ -189,6 +235,7 @@ public class DeleteNodeAPITest extends SolrCloudTestCase {
     var request = new NodeApi.DeleteNode(nodeToBeDecommissioned);
     request.setAsync(asyncId);
     SubResponseAccumulatingJerseyResponse response = request.process(cloudClient);
+    assertEquals(0, response.responseHeader.status);
     assertNull(
         "Expected request to not fail, any failures will be returned in the async status response",
         response.failedSubResponsesByNodeName);

@@ -17,24 +17,42 @@
 
 package org.apache.solr.core;
 
-import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.SolrTestCase;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.request.SolrQueryRequestBase;
 import org.apache.solr.response.SolrQueryResponse;
 import org.junit.Test;
 
-public class SolrCoreResponseStatusTest extends SolrTestCaseJ4 {
+/** Unit tests for status overrides in the V1 response header. */
+public class SolrCoreResponseStatusTest extends SolrTestCase {
 
   @Test
   public void testHttpStatusOverrideIsAddedToResponseHeader() {
-    final var request = new SolrQueryRequestBase(null, new ModifiableSolrParams()) {};
-    final var response = new SolrQueryResponse();
-    response.addResponseHeader(new SimpleOrderedMap<>());
-    response.setHttpStatusCodeOverride(500);
+    try (var request = new SolrQueryRequestBase(null, new ModifiableSolrParams()) {}) {
+      final var response = new SolrQueryResponse();
+      response.addResponseHeader(new SimpleOrderedMap<>());
+      response.setHttpStatusCodeOverride(500);
 
-    SolrCore.postDecorateResponse(null, request, response);
+      SolrCore.postDecorateResponse(null, request, response);
 
-    assertEquals(500, response.getResponseHeader().get("status"));
+      assertEquals(500, response.getResponseHeader().get("status"));
+    }
+  }
+
+  @Test
+  public void testExceptionTakesPrecedenceOverStatusOverride() {
+    try (var request = new SolrQueryRequestBase(null, new ModifiableSolrParams()) {}) {
+      final var response = new SolrQueryResponse();
+      response.addResponseHeader(new SimpleOrderedMap<>());
+      response.setHttpStatusCodeOverride(500);
+      response.setException(
+          new SolrException(SolrException.ErrorCode.BAD_REQUEST, "invalid request"));
+
+      SolrCore.postDecorateResponse(null, request, response);
+
+      assertEquals(400, response.getResponseHeader().get("status"));
+    }
   }
 }

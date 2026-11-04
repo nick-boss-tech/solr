@@ -23,6 +23,8 @@ import static org.apache.solr.common.params.CollectionAdminParams.PROPERTY_NAME;
 import static org.apache.solr.common.params.CollectionAdminParams.PROPERTY_VALUE;
 import static org.apache.solr.common.params.CommonParams.NAME;
 import static org.apache.solr.common.util.Utils.fromJSONString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -32,6 +34,8 @@ import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.api.Api;
 import org.apache.solr.api.ApiBag;
 import org.apache.solr.client.solrj.SolrRequest;
+import org.apache.solr.cloud.OverseerSolrResponse;
+import org.apache.solr.cloud.api.collections.AdminCmdContext;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.ZkNodeProps;
 import org.apache.solr.common.params.CollectionParams;
@@ -40,9 +44,12 @@ import org.apache.solr.common.params.MultiMapSolrParams;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.CommandOperation;
 import org.apache.solr.common.util.ContentStreamBase;
+import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.Pair;
+import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.core.CoreContainer;
+import org.apache.solr.core.SolrCore;
 import org.apache.solr.handler.ClusterAPI;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.request.SolrQueryRequestBase;
@@ -93,6 +100,107 @@ public class TestCollectionAPIs extends SolrTestCaseJ4 {
         POST,
         "{migrate-docs : {forwardTimeout: 1800, target: coll2, splitKey: 'a123!'} }",
         "{operation : migrate ,collection : coll1, target.collection:coll2, forward.timeout:1800, split.key:'a123!'}");
+  }
+
+  @Test
+  public void testLegacyMoveReplicaFailureSetsResponseStatus() throws Exception {
+    NamedList<Object> failures = new NamedList<>();
+    failures.add("node1", "replica cleanup failed");
+    for (Object failure :
+        List.of(
+            failures,
+            Map.of("node1", "replica cleanup failed"),
+            List.of("replica cleanup failed"),
+            "replica cleanup failed")) {
+      NamedList<Object> remoteResponse = new NamedList<>();
+      remoteResponse.add("success", Map.of("node2", "replica created"));
+      remoteResponse.add("failure", failure);
+      assertLegacyMoveReplicaResponse(remoteResponse, 500);
+    }
+  }
+
+  @Test
+  public void testLegacyMoveReplicaEmptyFailuresKeepSuccessStatus() throws Exception {
+    assertLegacyMoveReplicaResponse(new NamedList<>(), 0);
+    for (Object failure : List.of(new NamedList<>(), Map.of(), List.of())) {
+      NamedList<Object> remoteResponse = new NamedList<>();
+      remoteResponse.add("failure", failure);
+      assertLegacyMoveReplicaResponse(remoteResponse, 0);
+    }
+  }
+
+  @Test
+  public void testLegacyMoveReplicaExceptionTakesPrecedence() throws Exception {
+    NamedList<Object> remoteResponse = new NamedList<>();
+    remoteResponse.add("failure", "replica cleanup failed");
+    NamedList<Object> exception = new NamedList<>();
+    exception.add("rspCode", 400);
+    exception.add("msg", "invalid move");
+    remoteResponse.add("exception", exception);
+    assertLegacyMoveReplicaResponse(remoteResponse, 400);
+  }
+
+  private void assertLegacyMoveReplicaResponse(NamedList<Object> remoteResponse, int expectedStatus)
+      throws Exception {
+    assumeWorkingMockito();
+    CoreContainer coreContainer = mock(CoreContainer.class);
+    when(coreContainer.isZooKeeperAware()).thenReturn(true);
+    try (CollectionsHandler handler =
+        new CollectionsHandler(coreContainer) {
+          @Override
+          public OverseerSolrResponse submitCollectionApiCommand(
+              AdminCmdContext context, ZkNodeProps message, long timeout) {
+            assertEquals(CollectionParams.CollectionAction.MOVEREPLICA, context.getAction());
+            assertEquals("coll1", message.getStr("collection"));
+            assertEquals("core_node1", message.getStr("replica"));
+            assertEquals("node2", message.getStr("targetNode"));
+            return new OverseerSolrResponse(remoteResponse);
+          }
+        }) {
+      ModifiableSolrParams requestParams = new ModifiableSolrParams();
+      requestParams.set("action", "MOVEREPLICA");
+      requestParams.set("collection", "coll1");
+      requestParams.set("replica", "core_node1");
+      requestParams.set("targetNode", "node2");
+      try (SolrQueryRequest request = new SolrQueryRequestBase(null, requestParams) {}) {
+        SolrQueryResponse response = new SolrQueryResponse();
+        SolrCore.preDecorateResponse(request, response);
+        handler.handleRequestBody(request, response);
+        SolrCore.postDecorateResponse(handler, request, response);
+        assertLegacyMoveReplicaResponseValues(remoteResponse, response, expectedStatus);
+      }
+
+      ApiBag apiBag = new ApiBag(false);
+      for (Api api : handler.getApis()) {
+        apiBag.register(api);
+      }
+      var context =
+          makeCall(
+              apiBag,
+              "/collections/coll1",
+              POST,
+              "{\"move-replica\":{\"targetNode\":\"node2\",\"replica\":\"core_node1\"}}");
+      try (SolrQueryRequest request = context.first()) {
+        SolrQueryResponse response = context.second();
+        response.addResponseHeader(new SimpleOrderedMap<>());
+        SolrCore.postDecorateResponse(handler, request, response);
+        assertLegacyMoveReplicaResponseValues(remoteResponse, response, expectedStatus);
+      }
+    }
+  }
+
+  private static void assertLegacyMoveReplicaResponseValues(
+      NamedList<Object> remoteResponse, SolrQueryResponse response, int expectedStatus) {
+    assertEquals(expectedStatus, response.getResponseHeader().get("status"));
+    assertEquals(
+        expectedStatus == 500 ? Integer.valueOf(500) : null, response.getHttpStatusCodeOverride());
+    assertSame(remoteResponse.get("success"), response.getValues().get("success"));
+    assertSame(remoteResponse.get("failure"), response.getValues().get("failure"));
+    if (expectedStatus == 400) {
+      assertEquals(400, ((SolrException) response.getException()).code());
+    } else {
+      assertNull(response.getException());
+    }
   }
 
   ZkNodeProps compareOutput(
