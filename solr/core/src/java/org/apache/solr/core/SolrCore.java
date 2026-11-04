@@ -2970,6 +2970,8 @@ public class SolrCore implements SolrInfoBean, Closeable {
     if (exception != null) {
       if (exception instanceof SolrException) status = ((SolrException) exception).code();
       else status = 500;
+    } else if (rsp.getHttpStatusCodeOverride() != null) {
+      status = rsp.getHttpStatusCodeOverride();
     }
     responseHeader.add("status", status);
     responseHeader.add("QTime", qtime);

@@ -830,6 +830,8 @@ public class HttpSolrCall {
                 core != null && core.getCoreContainer().hideStackTrace());
         solrRsp.add("error", info);
         response.setStatus(code);
+      } else if (solrRsp.getHttpStatusCodeOverride() != null) {
+        response.setStatus(solrRsp.getHttpStatusCodeOverride());
       }
 
       if (Method.HEAD != reqMethod) {

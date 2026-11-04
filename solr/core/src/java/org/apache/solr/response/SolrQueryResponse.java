@@ -113,6 +113,9 @@ public class SolrQueryResponse {
   /** Should this response be tagged with HTTP caching headers? */
   protected boolean httpCaching = true;
 
+  /** Optional HTTP status code to use without replacing the response with an exception. */
+  private Integer httpStatusCodeOverride;
+
   /*
   // another way of returning an error
   int errCode;
@@ -255,6 +258,19 @@ public class SolrQueryResponse {
    */
   public Exception getException() {
     return err;
+  }
+
+  /**
+   * Sets the HTTP status code for a response that needs to report a failure while retaining its
+   * structured response values.
+   */
+  public void setHttpStatusCodeOverride(int statusCode) {
+    httpStatusCodeOverride = statusCode;
+  }
+
+  /** Returns the HTTP status code override, or {@code null} when there is none. */
+  public Integer getHttpStatusCodeOverride() {
+    return httpStatusCodeOverride;
   }
 
   /** Set response header */

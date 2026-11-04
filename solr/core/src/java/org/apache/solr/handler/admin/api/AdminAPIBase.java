@@ -22,6 +22,7 @@ import static org.apache.solr.handler.admin.CollectionsHandler.DEFAULT_COLLECTIO
 
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import java.util.Collection;
 import java.util.Map;
 import org.apache.solr.api.JerseyResource;
 import org.apache.solr.client.api.model.AsyncJerseyResponse;
@@ -33,6 +34,7 @@ import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.ZkNodeProps;
 import org.apache.solr.common.params.CollectionParams;
+import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.handler.admin.CollectionsHandler;
 import org.apache.solr.logging.MDCLoggingContext;
@@ -218,7 +220,25 @@ public abstract class AdminAPIBase extends JerseyResource {
     response.failedSubResponsesByNodeName = remoteResponse.getResponse().get("failure");
     response.warning = (String) remoteResponse.getResponse().get("warning");
 
+    if (hasFailedSubResponses(response.failedSubResponsesByNodeName)) {
+      response.responseHeader.status = SolrException.ErrorCode.SERVER_ERROR.code;
+      solrQueryResponse.setHttpStatusCodeOverride(SolrException.ErrorCode.SERVER_ERROR.code);
+    }
+
     return remoteResponse;
+  }
+
+  private static boolean hasFailedSubResponses(Object failedSubResponses) {
+    if (failedSubResponses instanceof NamedList<?> failures) {
+      return failures.size() > 0;
+    }
+    if (failedSubResponses instanceof Map<?, ?> failures) {
+      return !failures.isEmpty();
+    }
+    if (failedSubResponses instanceof Collection<?> failures) {
+      return !failures.isEmpty();
+    }
+    return failedSubResponses != null;
   }
 
   protected static void insertIfNotNull(Map<String, Object> destination, String key, Object value) {

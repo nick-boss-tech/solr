@@ -67,5 +67,8 @@ public class PostRequestDecorationFilter implements ContainerResponseFilter {
 
     final SolrJerseyResponse response = (SolrJerseyResponse) responseContext.getEntity();
     response.responseHeader.qTime = Math.round(solrQueryRequest.getRequestTimer().getTime());
+    if (response.responseHeader.status != 0) {
+      responseContext.setStatus(response.responseHeader.status);
+    }
   }
 }

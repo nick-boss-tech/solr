@@ -1,0 +1,7 @@
+title: "Collection Admin APIs return an error status when distributed sub-requests fail"
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-6595
+    url: https://issues.apache.org/jira/browse/SOLR-6595

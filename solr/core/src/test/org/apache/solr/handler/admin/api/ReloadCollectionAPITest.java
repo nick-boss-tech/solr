@@ -18,11 +18,16 @@
 package org.apache.solr.handler.admin.api;
 
 import static org.apache.solr.common.params.CoreAdminParams.NAME;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import org.apache.solr.client.api.model.ReloadCollectionRequestBody;
+import org.apache.solr.client.api.model.SubResponseAccumulatingJerseyResponse;
+import org.apache.solr.cloud.OverseerSolrResponse;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CollectionParams;
+import org.apache.solr.common.util.NamedList;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -65,5 +70,38 @@ public class ReloadCollectionAPITest extends MockV2APITest {
           assertEquals(1, message.size());
           assertEquals("someCollName", message.get(NAME));
         });
+  }
+
+  @Test
+  public void testFailedSubRequestReturnsServerErrorStatus() throws Exception {
+    final NamedList<Object> failedSubResponses = new NamedList<>();
+    failedSubResponses.add("node1", "reload failed");
+    final NamedList<Object> remoteResponseValues = new NamedList<>();
+    remoteResponseValues.add("failure", failedSubResponses);
+    when(mockCommandRunner.runCollectionCommand(any(), any(), anyLong()))
+        .thenReturn(new OverseerSolrResponse(remoteResponseValues));
+
+    final SubResponseAccumulatingJerseyResponse response =
+        api.reloadCollection("someCollName", new ReloadCollectionRequestBody());
+
+    assertEquals(500, response.responseHeader.status);
+    assertSame(failedSubResponses, response.failedSubResponsesByNodeName);
+    assertEquals(Integer.valueOf(500), queryResponse.getHttpStatusCodeOverride());
+    assertNull(queryResponse.getException());
+  }
+
+  @Test
+  public void testEmptyFailureSubResponsesKeepSuccessStatus() throws Exception {
+    final NamedList<Object> remoteResponseValues = new NamedList<>();
+    remoteResponseValues.add("failure", new NamedList<>());
+    when(mockCommandRunner.runCollectionCommand(any(), any(), anyLong()))
+        .thenReturn(new OverseerSolrResponse(remoteResponseValues));
+
+    final SubResponseAccumulatingJerseyResponse response =
+        api.reloadCollection("someCollName", new ReloadCollectionRequestBody());
+
+    assertEquals(0, response.responseHeader.status);
+    assertNull(queryResponse.getHttpStatusCodeOverride());
+    assertNull(queryResponse.getException());
   }
 }
