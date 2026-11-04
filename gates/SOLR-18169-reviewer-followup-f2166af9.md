@@ -1,6 +1,6 @@
 # Gate: SOLR-18169 PR 5289 reviewer follow-up, round 3
 
-Status: OPEN. Implemented, Proof Pending. Supersedes `gates/SOLR-18169-reviewer-followup-a8d2cfb1.md` and `gates/SOLR-18169-reviewer-followup-4f3346a3.md`. Older jobs do not prove this candidate.
+Status: DONE GREEN (phone-agent-2, 2026-11-04). All required proof passed at `f2166af983d2536d51e4b7ba3bc875e89cbdc1bd`; receipt: `receipts/SOLR-18169-reviewer-followup-f2166af9.md`. Supersedes `gates/SOLR-18169-reviewer-followup-a8d2cfb1.md` and `gates/SOLR-18169-reviewer-followup-4f3346a3.md`. Older jobs do not prove this candidate.
 
 - PR: https://github.com/apache/solr/pull/5289 (draft).
 - Ticket: SOLR-18169.
@@ -15,7 +15,7 @@ Status: OPEN. Implemented, Proof Pending. Supersedes `gates/SOLR-18169-reviewer-
 - Modules: `solr/packaging`, `solr/core`, `solr/solr-ref-guide`.
 - Focused seed: `18169C0FFEE18169`.
 - Idempotency key: `SOLR-18169-reviewer-followup@f2166af983d2536d51e4b7ba3bc875e89cbdc1bd`.
-- Claimant: unclaimed. Nick will take this implementation to the gate after review. Refresh the fork head and board and check for a live execution claim before claiming.
+- Claimant: `phone-agent-2` under Nick's direct authorization. Completed claim: `claims/pool-phone-agent-2-gate-SOLR-18169-reviewer-followup-round-3.md`; GREEN receipt: `receipts/SOLR-18169-reviewer-followup-f2166af9.md`.
 - Suggested logs: `/workspace/gates/logs/<host>/solr18169-reviewer-followup-r3/`.
 - Receipt: `receipts/SOLR-18169-reviewer-followup-f2166af9.md`, owned by the executing host.
 
