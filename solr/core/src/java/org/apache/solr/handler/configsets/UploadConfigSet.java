@@ -164,6 +164,7 @@ public class UploadConfigSet extends ConfigSetAPIBase
             SolrException.ErrorCode.BAD_REQUEST,
             "The location " + source + " does not exist in the backup repository");
       }
+      ensureLocalRepositoryPathAllowed(repository, source);
 
       // Read everything before writing so a failure doesn't leave a half-uploaded configset.
       final Map<String, byte[]> files = new LinkedHashMap<>();
@@ -193,24 +194,37 @@ public class UploadConfigSet extends ConfigSetAPIBase
 
   private static void ensureSingleSource(boolean fromRepository, InputStream requestBody)
       throws IOException {
-    if (fromRepository && requestBody != null && requestBody.available() > 0) {
+    if (fromRepository && requestBody != null && requestBody.read() != -1) {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,
           "An upload must provide either a request body or a repository location, not both.");
     }
   }
 
-  private static void readConfigFilesFromRepository(
+  private void ensureLocalRepositoryPathAllowed(BackupRepository repository, URI path)
+      throws IOException {
+    if ("file".equals(repository.createURI("x").getScheme())) {
+      final Path localPath = Path.of(path);
+      if (Files.isSymbolicLink(localPath)) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST,
+            "Symbolic links are not allowed when uploading a configset from a local repository.");
+      }
+      coreContainer.assertPathAllowed(localPath.toRealPath());
+    }
+  }
+
+  private void readConfigFilesFromRepository(
       BackupRepository repository, URI dir, String prefix, Map<String, byte[]> files)
       throws IOException {
     for (String name : repository.listAll(dir)) {
       final String filePath = prefix + name;
-      switch (repository.getPathType(repository.resolve(dir, name))) {
+      final URI path = repository.resolve(dir, name);
+      ensureLocalRepositoryPathAllowed(repository, path);
+      switch (repository.getPathType(path)) {
         case DIRECTORY:
-          if (!name.startsWith(".")) {
-            readConfigFilesFromRepository(
-                repository, repository.resolveDirectory(dir, name), filePath + "/", files);
-          }
+          readConfigFilesFromRepository(
+              repository, repository.resolveDirectory(dir, name), filePath + "/", files);
           break;
         case FILE:
           if (ConfigSetService.isFileForbiddenInConfigSets(filePath)) {
@@ -318,8 +332,13 @@ public class UploadConfigSet extends ConfigSetAPIBase
       final URI dir = repository.createDirectoryURI(slash == 0 ? "/" : trimmed.substring(0, slash));
       final String name = trimmed.substring(slash + 1);
       final URI file = repository.resolve(dir, name);
-      if (!repository.exists(file)
-          || repository.getPathType(file) != BackupRepository.PathType.FILE) {
+      if (!repository.exists(file)) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST,
+            "The location " + file + " is not a file in the backup repository");
+      }
+      ensureLocalRepositoryPathAllowed(repository, file);
+      if (repository.getPathType(file) != BackupRepository.PathType.FILE) {
         throw new SolrException(
             SolrException.ErrorCode.BAD_REQUEST,
             "The location " + file + " is not a file in the backup repository");

@@ -112,6 +112,22 @@ public class ConfigSetAPIBase extends JerseyResource {
     return contentStreamsIterator.next().getStream();
   }
 
+  public static void ensureNoRequestBody(SolrQueryRequest req) throws IOException {
+    final Iterable<ContentStream> contentStreams = req.getContentStreams();
+    if (contentStreams == null) {
+      return;
+    }
+
+    for (ContentStream contentStream : contentStreams) {
+      final InputStream inputStream = contentStream.getStream();
+      if (inputStream != null && inputStream.read() != -1) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST,
+            "An upload must provide either a request body or a repository location, not both.");
+      }
+    }
+  }
+
   private void sendToOverseer(
       SolrQueryResponse rsp, ConfigSetParams.ConfigSetAction action, Map<String, Object> result)
       throws KeeperException, InterruptedException {

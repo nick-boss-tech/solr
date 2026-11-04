@@ -107,6 +107,9 @@ public class ConfigSetsHandler extends RequestHandlerBase implements PermissionN
         }
         final var fromRepository = repository != null;
         final var filePath = req.getParams().get(ConfigSetParams.FILE_PATH, "");
+        if (fromRepository) {
+          ConfigSetAPIBase.ensureNoRequestBody(req);
+        }
         final var configSetData =
             fromRepository ? null : ConfigSetAPIBase.ensureNonEmptyInputStream(req);
         if (filePath.isEmpty()) { // Uploading a whole configset

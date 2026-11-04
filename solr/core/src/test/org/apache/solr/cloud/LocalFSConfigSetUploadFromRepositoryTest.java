@@ -16,8 +16,14 @@
  */
 package org.apache.solr.cloud;
 
+import static org.junit.Assume.assumeTrue;
+
 import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.UUID;
 import org.apache.solr.cloud.api.collections.AbstractConfigSetUploadFromRepositoryTest;
 import org.apache.solr.cloud.api.collections.AbstractInstallShardTest;
 import org.eclipse.jetty.client.ContentResponse;
@@ -80,6 +86,57 @@ public class LocalFSConfigSetUploadFromRepositoryTest
         put("rawform/files/solrconfig.xml", "application/x-www-form-urlencoded", "<config/>");
     assertEquals(form.getContentAsString(), 200, form.getStatus());
     assertTrue(cluster.getZkClient().exists("/configs/rawform/solrconfig.xml"));
+  }
+
+  @Test
+  public void testV1RejectsBodyWhenRepositoryIsProvided() throws Exception {
+    final URI dir = newTestDir();
+    stageFile(dir, "solrconfig.xml", "<config/>");
+    final String name = "v1both-" + UUID.randomUUID();
+    final var jetty = cluster.getJettySolrRunners().getFirst();
+    final String url =
+        jetty.getBaseUrl()
+            + "/admin/configs?action=UPLOAD&name="
+            + name
+            + "&repository="
+            + REPOSITORY_NAME
+            + "&location="
+            + URLEncoder.encode(locationParam(dir), StandardCharsets.UTF_8);
+
+    final var response =
+        jetty
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(url)
+            .method(HttpMethod.POST)
+            .body(new StringRequestContent("application/json", "{\"a\":1}"))
+            .send();
+
+    assertEquals(response.getContentAsString(), 400, response.getStatus());
+    assertFalse(cluster.getZkClient().exists("/configs/" + name));
+  }
+
+  @Test
+  public void testUploadFromRepositoryRejectsSymbolicLinkDirectories() throws Exception {
+    assumeTrue(
+        "Symbolic links require filesystem support",
+        Files.getFileStore(repositoryDir).supportsFileAttributeView("posix"));
+    final URI dir = newTestDir();
+    stageFile(dir, "solrconfig.xml", "<config/>");
+    final Path outsideDir = createTempDir("outside-repository");
+    Files.writeString(outsideDir.resolve("secret.txt"), "secret");
+    Files.createSymbolicLink(Path.of(dir).resolve("linked"), outsideDir);
+    final String name = "symlink-" + UUID.randomUUID();
+    final String encodedLocation = URLEncoder.encode(locationParam(dir), StandardCharsets.UTF_8);
+
+    final var response =
+        put(
+            name + "?repository=" + REPOSITORY_NAME + "&location=" + encodedLocation,
+            "application/octet-stream",
+            "");
+
+    assertEquals(response.getContentAsString(), 400, response.getStatus());
+    assertFalse(cluster.getZkClient().exists("/configs/" + name));
   }
 
   private ContentResponse put(String path, String contentType, String body) throws Exception {
