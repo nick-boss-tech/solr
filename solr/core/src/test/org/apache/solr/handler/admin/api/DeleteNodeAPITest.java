@@ -28,6 +28,7 @@ import org.apache.solr.client.solrj.request.CollectionAdminRequest;
 import org.apache.solr.client.solrj.request.NodeApi;
 import org.apache.solr.client.solrj.response.RequestStatusState;
 import org.apache.solr.cloud.SolrCloudTestCase;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.cloud.Slice;
@@ -98,23 +99,47 @@ public class DeleteNodeAPITest extends SolrCloudTestCase {
     }
 
     var request = new NodeApi.DeleteNode(nodeToBeDecommissioned);
-    SubResponseAccumulatingJerseyResponse response = request.process(cloudClient);
+    if (shouldFail) {
+      SolrException exception =
+          expectThrows(SolrException.class, () -> request.process(cloudClient));
+      assertEquals(500, exception.code());
+    } else {
+      SubResponseAccumulatingJerseyResponse response = request.process(cloudClient);
+      assertNull(
+          "Expected request to not fail, there should be no failures sent back",
+          response.failedSubResponsesByNodeName);
+    }
 
     if (log.isInfoEnabled()) {
       log.info(
           "####### DocCollection after: {}",
           cloudClient.getClusterStateProvider().getClusterState().getCollection(coll));
     }
+  }
 
-    if (shouldFail) {
-      assertNotNull(
-          "Expected request to fail, there should be failures sent back",
-          response.failedSubResponsesByNodeName);
-    } else {
-      assertNull(
-          "Expected request to not fail, there should be no failures sent back",
-          response.failedSubResponsesByNodeName);
-    }
+  @Test
+  public void testDeleteNodeFailureReturnsHttp500() throws Exception {
+    CloudSolrClient cloudClient = cluster.getSolrClient();
+    String coll = "deletenodetest_coll_failing";
+    ArrayList<String> nodes =
+        new ArrayList<>(cloudClient.getClusterStateProvider().getLiveNodes());
+    Collections.shuffle(nodes, random());
+    CollectionAdminRequest.Create create =
+        CollectionAdminRequest.createCollection(coll, "conf1", 5, 1, 0, 0);
+    create.setCreateNodeSet(StrUtils.join(nodes, ','));
+    cloudClient.request(create);
+
+    DocCollection docColl = cloudClient.getClusterStateProvider().getCollection(coll);
+    String nodeToBeDecommissioned =
+        nodes.stream()
+            .filter(node -> !docColl.getReplicasOnNode(node).isEmpty())
+            .findFirst()
+            .orElseThrow();
+
+    var request = new NodeApi.DeleteNode(nodeToBeDecommissioned);
+    SolrException exception =
+        expectThrows(SolrException.class, () -> request.process(cloudClient));
+    assertEquals(500, exception.code());
   }
 
   @Test
