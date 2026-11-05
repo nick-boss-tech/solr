@@ -159,7 +159,8 @@ public class NodeTargetProxyFilterTest extends SolrCloudTestCase {
   @Test
   public void testEncodedQueryParamProxiesGet() throws Exception {
     for (String path : List.of("/solr/admin/info/system", "/api/node/system")) {
-      for (String key : List.of("%58-Solr-targetNode", "X%2dSolr-targetNode", "X%2DSolr-targetNode")) {
+      for (String key :
+          List.of("%58-Solr-targetNode", "X%2dSolr-targetNode", "X%2DSolr-targetNode")) {
         var rsp =
             receivingNode
                 .getSolrClient()
