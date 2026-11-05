@@ -1,0 +1,8 @@
+# Claim: pr-5291-params-factory-fixes rounds 1-2, phone agent
+
+- Claimant host: phone agent (Linux VM). Claimed 2026-11-04 evening MST at Nick Shanin's direction in the main chat ("5291 gate").
+- Jobs: `gates/pr-5291-params-factory-fixes-round-1.md` as superseded for execution by `gates/pr-5291-params-factory-fixes-round-2.md`. Implementation claim: `claims/pr-5291-params-factory-fixes-round-1-windows.md`; report: `reports/pr-5291-params-factory-fixes-round-1.md`.
+- Pins: contributor H0 `600e0ec4afd82004a94852c419892897be14e6f0` (live PR 5291 head, unchanged); implementation H1 `f2952c41c7c023aa6e79868df9efe8c65b02c993`; base `82abb86bb5b7326fe48c117e4de69981a43e4251`.
+- Preflight outcome: detached tidy at H1 was NOT clean; it wrapped one `expectThrows` line in `SolrParamTest.java`. Per the job's repair route and the owner's standing tidy rule, the formatting-only repair was committed as `199911b298fac80f4cea5e3de553675b64f6a6a9`, plain-pushed, and read back through the fork refs API. All proof runs at H2 `199911b298fac80f4cea5e3de553675b64f6a6a9`. The first tidy attempt at H1 also hit the host's stale-daemon Gradle journal lock once (left by the preceding gate); daemons killed, lock cleared, rerun produced the formatting diff. Logs under `~/workspace/tools/gate-5291/` on this host.
+- Runner: `~/workspace/tools/solr-gradle.sh` (Gradle 9.7.0, vendored JDK 21), serialized under the host build lock; root `check -x test` will run in a normal clone with the SHA explicitly fetched and `rev-parse HEAD` recorded (host Antora and clone rules), layout disclosed in the receipt.
+- Receipt target: `receipts/PR-5291-params-factory-fixes-round-1.md`. Execution state follows in the receipt and an updated claim.
