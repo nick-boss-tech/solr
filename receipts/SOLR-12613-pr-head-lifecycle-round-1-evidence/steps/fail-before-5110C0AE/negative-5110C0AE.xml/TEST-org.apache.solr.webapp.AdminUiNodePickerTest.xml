@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.webapp.AdminUiNodePickerTest" tests="4" skipped="0" failures="4" errors="0" timestamp="2026-11-05T20:03:53.129Z" hostname="0609f7968656" time="97.021">
+  <properties/>
+  <testcase name="testSystemInfoFailureStillRefreshesLocalCoreMenu" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="4.228">
+    <failure message="java.lang.AssertionError: Failure to discover system info must not prevent a local core refresh" type="java.lang.AssertionError">java.lang.AssertionError: Failure to discover system info must not prevent a local core refresh
+	at __randomizedtesting.SeedInfo.seed([5110C0AE:70C28030C03F807C]:0)
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.apache.solr.webapp.AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu(AdminUiNodePickerTest.java:244)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+</failure>
+  </testcase>
+  <testcase name="testRestoredSelectionTargetsInitialCoreMenuRequest" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="30.242">
+    <failure message="java.lang.AssertionError: Timed out waiting for visible element at By.id: node-selector-item" type="java.lang.AssertionError">java.lang.AssertionError: Timed out waiting for visible element at By.id: node-selector-item
+	at __randomizedtesting.SeedInfo.seed([5110C0AE:516A9F98FE941EA4]:0)
+	at org.apache.solr.webapp.AdminUiTestBase.poll(AdminUiTestBase.java:417)
+	at org.apache.solr.webapp.AdminUiTestBase.waitFor(AdminUiTestBase.java:379)
+	at org.apache.solr.webapp.AdminUiNodePickerTest.clearPersistedNodeSelection(AdminUiNodePickerTest.java:40)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:993)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#node\-selector\-item&quot;}
+  (Session info: chrome=155.0.8059.39)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.47.0', revision: '9175ed9 9175ed94d83e87cc3abeb7c9fd91367d17849d35'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.18.38+', java.version: '21.0.12.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [949444bd5bb1e902030ddf3c7a3f4467, findElement {value=node-selector-item, using=id}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 155.0.8059.39, chrome: {chromedriverVersion: 155.0.8059.84 (5869fe313571..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:42283}, goog:processID: 537030, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:42283/devtoo..., se:cdpVersion: 155.0.8059.39, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:cmtgKey: true, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 949444bd5bb1e902030ddf3c7a3f4467
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:143)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:217)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:175)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:653)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:173)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:417)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:411)
+	at org.apache.solr.webapp.AdminUiTestBase.poll(AdminUiTestBase.java:402)
+	... 46 more
+</failure>
+  </testcase>
+  <testcase name="testCoreMenuKeepsNewestRefreshForSameNode" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="30.174">
+    <failure message="java.lang.AssertionError: Timed out waiting for visible element at By.id: node-selector-item" type="java.lang.AssertionError">java.lang.AssertionError: Timed out waiting for visible element at By.id: node-selector-item
+	at __randomizedtesting.SeedInfo.seed([5110C0AE:7F2EBFAB5C18A4]:0)
+	at org.apache.solr.webapp.AdminUiTestBase.poll(AdminUiTestBase.java:417)
+	at org.apache.solr.webapp.AdminUiTestBase.waitFor(AdminUiTestBase.java:379)
+	at org.apache.solr.webapp.AdminUiNodePickerTest.clearPersistedNodeSelection(AdminUiNodePickerTest.java:40)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:993)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#node\-selector\-item&quot;}
+  (Session info: chrome=155.0.8059.39)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.47.0', revision: '9175ed9 9175ed94d83e87cc3abeb7c9fd91367d17849d35'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.18.38+', java.version: '21.0.12.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [949444bd5bb1e902030ddf3c7a3f4467, findElement {value=node-selector-item, using=id}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 155.0.8059.39, chrome: {chromedriverVersion: 155.0.8059.84 (5869fe313571..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:42283}, goog:processID: 537030, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:42283/devtoo..., se:cdpVersion: 155.0.8059.39, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:cmtgKey: true, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 949444bd5bb1e902030ddf3c7a3f4467
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:143)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:217)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:175)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:653)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:173)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:417)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:411)
+	at org.apache.solr.webapp.AdminUiTestBase.poll(AdminUiTestBase.java:402)
+	... 46 more
+</failure>
+  </testcase>
+  <testcase name="testCoreMenuIgnoresLateResponseFromPreviousNode" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="30.345">
+    <failure message="java.lang.AssertionError: Timed out waiting for visible element at By.id: node-selector-item" type="java.lang.AssertionError">java.lang.AssertionError: Timed out waiting for visible element at By.id: node-selector-item
+	at __randomizedtesting.SeedInfo.seed([5110C0AE:9633153DE21DDEA]:0)
+	at org.apache.solr.webapp.AdminUiTestBase.poll(AdminUiTestBase.java:417)
+	at org.apache.solr.webapp.AdminUiTestBase.waitFor(AdminUiTestBase.java:379)
+	at org.apache.solr.webapp.AdminUiNodePickerTest.clearPersistedNodeSelection(AdminUiNodePickerTest.java:40)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:993)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+	at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+	at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+	at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+	at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+	at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+	at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#node\-selector\-item&quot;}
+  (Session info: chrome=155.0.8059.39)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.47.0', revision: '9175ed9 9175ed94d83e87cc3abeb7c9fd91367d17849d35'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.18.38+', java.version: '21.0.12.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [949444bd5bb1e902030ddf3c7a3f4467, findElement {value=node-selector-item, using=id}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 155.0.8059.39, chrome: {chromedriverVersion: 155.0.8059.84 (5869fe313571..., userDataDir: /tmp/org.chromium.Chromium....}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:42283}, goog:processID: 537030, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:42283/devtoo..., se:cdpVersion: 155.0.8059.39, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:cmtgKey: true, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 949444bd5bb1e902030ddf3c7a3f4467
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:143)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:217)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:175)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:653)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:173)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:417)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:411)
+	at org.apache.solr.webapp.AdminUiTestBase.poll(AdminUiTestBase.java:402)
+	... 46 more
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 05, 2026 1:03:53 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1314 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-12613-lifecycle-fail-before/solr/server/solr/configsets/_default/conf'
+1322 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+1331 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/data-dir-1-001
+1346 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+1378 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+1450 WARN  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-12613-lifecycle-fail-before/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+1450 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.SolrTestCaseJ4.SuppressSSL(bugUrl="Admin UI browser tests drive plain http")
+Nov 06, 2026 6:03:55 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 155
+2664 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSystemInfoFailureStillRefreshesLocalCoreMenu
+2689 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster Starting cluster of 2 servers in /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001
+2692 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer TEST_PATH() does not exist - solrj test?
+2695 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer STARTING ZK TEST SERVER
+2697 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer ZkTestServer requires the 'stat' command, temporarily manipulating your whitelist
+2699 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer client port: /127.0.0.1:0
+2700 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Starting server
+2729 WARN  (ZkTestServer Run Thread) [] o.a.z.s.ServerCnxnFactory maxCnxns is not configured, using default value 0.
+2799 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer start zk server on port: 37795
+3074 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3075 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3140 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3162 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3175 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3183 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3184 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3200 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3201 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3202 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3203 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3204 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3205 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3205 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3206 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3206 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3206 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3208 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3209 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3210 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3210 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3214 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+3555 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+3555 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+3557 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+3557 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+3563 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-1-24.04.4-Ubuntu
+3563 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-1-24.04.4-Ubuntu
+3570 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+3570 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+3586 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@3df9d1a5{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@7a23b75e{STARTED}}
+3586 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@337acc0e{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@59e227ce{STARTED}}
+3589 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=44615, zkHost=127.0.0.1:37795/solr}
+3589 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=38365, zkHost=127.0.0.1:37795/solr}
+3592 ERROR (jetty-launcher-8-thread-2) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+3592 ERROR (jetty-launcher-8-thread-1) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+3593 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+3593 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+3595 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT f02bb7bb06decce976c3ed2fdfbf5907764c2183 [snapshot build, details omitted]
+3595 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT f02bb7bb06decce976c3ed2fdfbf5907764c2183 [snapshot build, details omitted]
+3596 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+3596 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+3596 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-12613-lifecycle-fail-before/solr
+3596 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-12613-lifecycle-fail-before/solr
+3596 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T20:03:56.100409107Z
+3596 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T20:03:56.100402408Z
+3667 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node1 (source: servlet config: solr.solr.home)
+3667 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node2 (source: servlet config: solr.solr.home)
+3677 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3677 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3678 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3678 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3679 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3679 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3680 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3680 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3682 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3682 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3683 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3683 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3683 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3683 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3684 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+3684 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+3787 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node2/solr.xml
+3787 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node1/solr.xml
+3872 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+3878 INFO  (jetty-launcher-8-thread-1) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+3878 INFO  (jetty-launcher-8-thread-2) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+4138 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:37795/solr
+4138 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:37795/solr
+4152 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+4152 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+4152 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+4152 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+4153 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+4153 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+4154 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+4155 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+4156 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+4156 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+4157 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4157 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4157 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4158 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4158 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+4158 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+4265 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+4265 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+4266 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+4267 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+4268 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+4268 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+4269 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4269 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4269 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4269 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4306 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+4306 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+4330 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.a.s.c.ZkController The Overseer is disabled.  Cluster commands & state updates will happen on any/all nodes.
+4330 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.s.c.ZkController The Overseer is disabled.  Cluster commands & state updates will happen on any/all nodes.
+4378 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.s.c.OverseerElectionContext I am going to be the leader 127.0.0.1:38365_solr
+4380 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:44615_solr
+4382 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.s.c.Overseer Overseer (id=72072226859581447-127.0.0.1:38365_solr-n_0000000000) starting
+4393 INFO  (zkCallback-40-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+4393 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+4408 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.s.c.ZkController Publish node=127.0.0.1:38365_solr as DOWN
+4409 INFO  (OverseerStateUpdate-72072226859581447-127.0.0.1:38365_solr-n_0000000000) [n:127.0.0.1:38365_solr] o.a.s.c.Overseer Starting to work on the main queue : 127.0.0.1:38365_solr
+4412 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:38365_solr
+4415 INFO  (zkCallback-40-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+4416 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+4441 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+4441 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+4631 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node2
+4631 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node1
+5197 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@337acc0e{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@59e227ce{STARTED}}
+5197 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@3df9d1a5{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@7a23b75e{STARTED}}
+5201 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@6d8302a1{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:38365}
+5201 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@167de1c0{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:44615}
+5202 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:44615_solr] o.e.j.s.Server Started oejs.Server@5bce4fb1{STARTING}[12.1.14,sto=0] @1644ms
+5202 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:38365_solr] o.e.j.s.Server Started oejs.Server@7872e8b6{STARTING}[12.1.14,sto=0] @1644ms
+5209 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForAllNodes: numServers=2
+5209 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:38365_solr
+5210 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+5210 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+5211 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+5212 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+5213 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+5214 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+5214 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+5215 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (2)
+5216 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.s.i.ZkClientClusterStateProvider Cluster at 127.0.0.1:37795/solr ready
+5217 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:44615_solr
+5674 INFO  (qtp155692994-72-null-1) [n:127.0.0.1:38365_solr t:null-1] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038106&indexInfo=false} entity={} status=0 QTime=64
+5688 INFO  (qtp155692994-80-null-2) [n:127.0.0.1:38365_solr t:null-2] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038107} entity={} status=0 QTime=80
+5994 INFO  (qtp155692994-76-null-3) [n:127.0.0.1:38365_solr t:null-3] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038489} entity={} status=0 QTime=6
+5995 INFO  (qtp155692994-82-null-4) [n:127.0.0.1:38365_solr t:null-4] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038489} entity={} status=0 QTime=7
+6008 INFO  (qtp155692994-72-null-6) [n:127.0.0.1:38365_solr t:null-6] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038504&detailed=true} entity={} status=0 QTime=5
+6008 INFO  (qtp155692994-78-null-5) [n:127.0.0.1:38365_solr t:null-5] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038504} entity={} status=0 QTime=5
+6028 INFO  (qtp155692994-80-null-7) [n:127.0.0.1:38365_solr t:null-7] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038525} entity={} status=0 QTime=4
+6029 INFO  (qtp155692994-82-null-9) [n:127.0.0.1:38365_solr t:null-9] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038531} entity={} status=0 QTime=1
+6029 INFO  (qtp155692994-74-null-8) [n:127.0.0.1:38365_solr t:null-8] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038530} entity={} status=0 QTime=1
+6030 INFO  (qtp155692994-76-null-10) [n:127.0.0.1:38365_solr t:null-10] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038531} entity={} status=0 QTime=2
+6060 INFO  (qtp155692994-82-null-14) [n:127.0.0.1:38365_solr t:null-14] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038559} entity={} status=0 QTime=2
+6144 INFO  (qtp155692994-76-null-11) [n:127.0.0.1:38365_solr t:null-11] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=5
+6144 INFO  (qtp556791600-83-null-11) [n:127.0.0.1:44615_solr t:null-11] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=5
+6172 INFO  (qtp556791600-81-null-13) [n:127.0.0.1:44615_solr t:null-13] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793909038503} status=0 QTime=33
+6172 INFO  (qtp155692994-82-null-12) [n:127.0.0.1:38365_solr t:null-12] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793909038503} status=0 QTime=33
+6181 INFO  (qtp155692994-74-null-13) [n:127.0.0.1:38365_solr t:null-13] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:44615_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793909038503} status=0 QTime=146
+6181 INFO  (qtp155692994-78-null-12) [n:127.0.0.1:38365_solr t:null-12] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:38365_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793909038503} status=0 QTime=147
+6207 INFO  (qtp155692994-72-null-11) [n:127.0.0.1:38365_solr t:null-11] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038535&nodes=127.0.0.1:38365_solr,127.0.0.1:44615_solr} entity={} status=0 QTime=174
+6232 INFO  (qtp155692994-80-null-15) [n:127.0.0.1:38365_solr t:null-15] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038728} entity={} status=0 QTime=6
+6238 INFO  (qtp155692994-74-null-17) [n:127.0.0.1:38365_solr t:null-17] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038739} entity={} status=0 QTime=1
+6238 INFO  (qtp155692994-82-null-16) [n:127.0.0.1:38365_solr t:null-16] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038739} entity={} status=0 QTime=1
+6334 INFO  (qtp155692994-72-null-18) [n:127.0.0.1:38365_solr t:null-18] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038834&indexInfo=false} entity={} status=0 QTime=2
+6337 INFO  (qtp155692994-80-null-19) [n:127.0.0.1:38365_solr t:null-19] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038835} entity={} status=0 QTime=5
+6344 INFO  (qtp155692994-76-null-21) [n:127.0.0.1:38365_solr t:null-21] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038845} entity={} status=0 QTime=1
+6344 INFO  (qtp155692994-82-null-20) [n:127.0.0.1:38365_solr t:null-20] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038845} entity={} status=0 QTime=1
+6357 INFO  (qtp155692994-78-null-22) [n:127.0.0.1:38365_solr t:null-22] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038857&detailed=true} entity={} status=0 QTime=2
+6360 INFO  (qtp155692994-74-null-23) [n:127.0.0.1:38365_solr t:null-23] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038857} entity={} status=0 QTime=5
+6369 INFO  (qtp155692994-72-null-24) [n:127.0.0.1:38365_solr t:null-24] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038869} entity={} status=0 QTime=2
+6371 INFO  (qtp155692994-80-null-25) [n:127.0.0.1:38365_solr t:null-25] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038873} entity={} status=0 QTime=1
+6372 INFO  (qtp155692994-76-null-26) [n:127.0.0.1:38365_solr t:null-26] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038873} entity={} status=0 QTime=1
+6374 INFO  (qtp155692994-82-null-27) [n:127.0.0.1:38365_solr t:null-27] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038873} entity={} status=0 QTime=1
+6381 INFO  (qtp556791600-75-null-30) [n:127.0.0.1:44615_solr t:null-30] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793909038857} status=0 QTime=3
+6382 INFO  (qtp155692994-76-null-29) [n:127.0.0.1:38365_solr t:null-29] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793909038857} status=0 QTime=3
+6383 INFO  (qtp155692994-72-null-30) [n:127.0.0.1:38365_solr t:null-30] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:44615_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793909038857} status=0 QTime=6
+6384 INFO  (qtp556791600-73-null-28) [n:127.0.0.1:44615_solr t:null-28] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=4
+6383 INFO  (qtp155692994-74-null-29) [n:127.0.0.1:38365_solr t:null-29] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:38365_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793909038857} status=0 QTime=6
+6385 INFO  (qtp155692994-80-null-28) [n:127.0.0.1:38365_solr t:null-28] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=6
+6386 INFO  (qtp155692994-82-null-31) [n:127.0.0.1:38365_solr t:null-31] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038886} entity={} status=0 QTime=2
+6389 INFO  (qtp155692994-78-null-28) [n:127.0.0.1:38365_solr t:null-28] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909038879&nodes=127.0.0.1:38365_solr,127.0.0.1:44615_solr} entity={} status=0 QTime=13
+6592 INFO  (qtp155692994-76-null-32) [n:127.0.0.1:38365_solr t:null-32] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909039089} entity={} status=0 QTime=5
+6598 INFO  (qtp155692994-74-null-34) [n:127.0.0.1:38365_solr t:null-34] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909039100} entity={} status=0 QTime=1
+6598 INFO  (qtp155692994-82-null-35) [n:127.0.0.1:38365_solr t:null-35] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909039100} entity={} status=0 QTime=1
+6601 INFO  (qtp155692994-72-null-33) [n:127.0.0.1:38365_solr t:null-33] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909039089} entity={} status=0 QTime=5
+6603 INFO  (qtp155692994-78-null-37) [n:127.0.0.1:38365_solr t:null-37] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909039105&indexInfo=false} entity={} status=0 QTime=1
+6604 INFO  (qtp155692994-80-null-36) [n:127.0.0.1:38365_solr t:null-36] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793909039105} entity={} status=0 QTime=2
+6743 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSystemInfoFailureStillRefreshesLocalCoreMenu
+6876 ERROR (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.w.AdminUiTestBase UI test failure artifacts saved to /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/ui-failure-testSystemInfoFailureStillRefreshesLocalCoreMenu-001
+NOTE: reproduce with: gradlew test --tests AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu -Dtests.seed=5110C0AE -Dtests.locale=mg-MG -Dtests.timezone=Etc/GMT-10 -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+6889 INFO  (TEST-AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testRestoredSelectionTargetsInitialCoreMenuRequest
+36987 INFO  (TEST-AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testRestoredSelectionTargetsInitialCoreMenuRequest
+37122 ERROR (TEST-AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest-seed#[5110C0AE]) [] o.a.s.w.AdminUiTestBase UI test failure artifacts saved to /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/ui-failure-testRestoredSelectionTargetsInitialCoreMenuRequest-001
+NOTE: reproduce with: gradlew test --tests AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest -Dtests.seed=5110C0AE -Dtests.locale=mg-MG -Dtests.timezone=Etc/GMT-10 -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+37134 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testCoreMenuKeepsNewestRefreshForSameNode
+67186 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testCoreMenuKeepsNewestRefreshForSameNode
+67299 ERROR (TEST-AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode-seed#[5110C0AE]) [] o.a.s.w.AdminUiTestBase UI test failure artifacts saved to /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/ui-failure-testCoreMenuKeepsNewestRefreshForSameNode-001
+NOTE: reproduce with: gradlew test --tests AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode -Dtests.seed=5110C0AE -Dtests.locale=mg-MG -Dtests.timezone=Etc/GMT-10 -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+67307 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testCoreMenuIgnoresLateResponseFromPreviousNode
+97523 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testCoreMenuIgnoresLateResponseFromPreviousNode
+97645 ERROR (TEST-AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode-seed#[5110C0AE]) [] o.a.s.w.AdminUiTestBase UI test failure artifacts saved to /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/ui-failure-testCoreMenuIgnoresLateResponseFromPreviousNode-001
+NOTE: reproduce with: gradlew test --tests AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode -Dtests.seed=5110C0AE -Dtests.locale=mg-MG -Dtests.timezone=Etc/GMT-10 -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+97778 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+97886 INFO  (jetty-closer-66-thread-1) [] o.e.j.s.Server Stopped oejs.Server@7872e8b6{STOPPING}[12.1.14,sto=0]
+97886 INFO  (jetty-closer-66-thread-2) [] o.e.j.s.Server Stopped oejs.Server@5bce4fb1{STOPPING}[12.1.14,sto=0]
+97891 INFO  (jetty-closer-66-thread-1) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@6d8302a1{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+97891 INFO  (jetty-closer-66-thread-2) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@167de1c0{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+97894 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=820941602
+97894 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=2017163052
+97894 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:38365_solr
+97894 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:44615_solr
+97903 INFO  (zkCallback-39-thread-2) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+97903 INFO  (zkCallback-40-thread-2) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+97904 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.ZkController Publish this node as DOWN...
+97904 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.ZkController Publish this node as DOWN...
+97904 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.ZkController Publish node=127.0.0.1:44615_solr as DOWN
+97904 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.ZkController Publish node=127.0.0.1:38365_solr as DOWN
+97912 INFO  (closeThreadPool-72-thread-1) [] o.a.s.c.Overseer Overseer (id=72072226859581447-127.0.0.1:38365_solr-n_0000000000) closing
+Nov 06, 2026 6:05:30 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+97912 INFO  (OverseerStateUpdate-72072226859581447-127.0.0.1:38365_solr-n_0000000000) [n:127.0.0.1:38365_solr] o.a.s.c.Overseer Overseer Loop exiting : 127.0.0.1:38365_solr
+Nov 06, 2026 6:05:30 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+97913 INFO  (closeThreadPool-72-thread-2) [] o.a.s.c.Overseer Overseer (id=72072226859581447-127.0.0.1:38365_solr-n_0000000000) closing
+97914 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+97914 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+98016 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.Overseer Overseer (id=72072226859581447-127.0.0.1:38365_solr-n_0000000000) closing
+98021 INFO  (jetty-closer-66-thread-2) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@337acc0e{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@59e227ce{STOPPED}}
+98021 INFO  (jetty-closer-66-thread-1) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@3df9d1a5{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@7a23b75e{STOPPED}}
+98022 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.c.ZkTestServer Shutting down ZkTestServer.
+98023 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+98125 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+98229 WARN  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Watch limit violations: 
+Maximum concurrent create/delete watches above limit:
+
+	3	/solr/aliases.json
+	3	/solr/clusterprops.json
+	2	/solr/packages.json
+	2	/solr/security.json
+
+Maximum concurrent data watches above limit:
+
+	20	/zookeeper/config
+
+Maximum concurrent children watches above limit:
+
+	9	/solr/live_nodes
+	3	/solr/collections
+
+98236 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+NOTE: leaving temporary files on disk at: /workspace/worktrees/solr-12613-lifecycle-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001
+NOTE: test params are: codec=Asserting(Lucene104): {}, docValues:{}, maxPointsInLeafNode=833, maxMBSortInHeap=5.911562206394843, sim=Asserting(RandomSimilarity(queryNorm=false): {}), locale=mg-MG, timezone=Etc/GMT-10
+NOTE: Linux 6.18.38+ amd64/Ubuntu 21.0.12.1 (64-bit)/cpus=1,threads=4,free=165380736,total=338165760
+NOTE: All tests run in this JVM: [AdminUiNodePickerTest]
+]]></system-err>
+</testsuite>

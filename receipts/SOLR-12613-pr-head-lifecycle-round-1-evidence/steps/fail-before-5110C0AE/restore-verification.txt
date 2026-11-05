@@ -1,0 +1,9 @@
+Checkout: /workspace/worktrees/solr-12613-lifecycle-fail-before
+HEAD: f02bb7bb06decce976c3ed2fdfbf5907764c2183
+Restored app.js expected/actual blob: d23e89b33a13eac833872a57f1b9d8ce10e82dea / d23e89b33a13eac833872a57f1b9d8ce10e82dea
+Candidate test expected/actual blob: 81d46cc2cdd9ce2d7cb27382be66ab4f21e6f87c / 81d46cc2cdd9ce2d7cb27382be66ab4f21e6f87c
+Final tracked/untracked status: clean
+F source restored; no PR or fork ref changed.
+Root-check checkout: /workspace/worktrees/solr-12613-lifecycle-root
+Root-check HEAD: f02bb7bb06decce976c3ed2fdfbf5907764c2183
+Root-check .git entry: directory

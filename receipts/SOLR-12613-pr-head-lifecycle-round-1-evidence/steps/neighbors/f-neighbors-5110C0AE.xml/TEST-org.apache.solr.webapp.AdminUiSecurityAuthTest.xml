@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.webapp.AdminUiSecurityAuthTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-05T19:58:29.269Z" hostname="0609f7968656" time="3.731">
+  <properties/>
+  <testcase name="testLoginAndSecurityScreen" classname="org.apache.solr.webapp.AdminUiSecurityAuthTest" time="3.161"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[12371 INFO  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-12613-lifecycle-root/solr/server/solr/configsets/_default/conf'
+12371 INFO  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+12372 INFO  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiSecurityAuthTest_5110C0AE-001/data-dir-2-001
+12372 WARN  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=6 numCloses=6
+12373 INFO  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-2 for ERROR logs matching regex: ignore_exception
+12374 INFO  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+12377 WARN  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-12613-lifecycle-root/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-12613-lifecycle-root/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+12377 INFO  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.SolrTestCaseJ4.SuppressSSL(bugUrl="Admin UI browser tests drive plain http")
+nov 05, 2026 8:58:29 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 155
+12921 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testLoginAndSecurityScreen
+12927 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster Starting cluster of 2 servers in /workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiSecurityAuthTest_5110C0AE-001/tempDir-001
+12931 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer TEST_PATH() does not exist - solrj test?
+12937 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer STARTING ZK TEST SERVER
+12946 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer ZkTestServer requires the 'stat' command, temporarily manipulating your whitelist
+12951 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer client port: /127.0.0.1:0
+12952 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Starting server
+13000 WARN  (ZkTestServer Run Thread) [] o.a.z.s.ServerCnxnFactory maxCnxns is not configured, using default value 0.
+13048 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer start zk server on port: 35875
+13081 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13081 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13158 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+13192 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13206 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13217 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13218 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13241 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13242 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13243 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+13244 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13246 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13246 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13246 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13247 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+13247 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13247 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13248 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13249 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13250 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13250 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13254 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+13368 INFO  (jetty-launcher-56-thread-1) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+13368 INFO  (jetty-launcher-56-thread-2) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+13368 INFO  (jetty-launcher-56-thread-1) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+13368 INFO  (jetty-launcher-56-thread-2) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+13368 INFO  (jetty-launcher-56-thread-1) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-1-24.04.4-Ubuntu
+13368 INFO  (jetty-launcher-56-thread-2) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-1-24.04.4-Ubuntu
+13370 INFO  (jetty-launcher-56-thread-1) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+13370 INFO  (jetty-launcher-56-thread-2) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+13372 INFO  (jetty-launcher-56-thread-2) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@77a9f413{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@daf3960{STARTED}}
+13372 INFO  (jetty-launcher-56-thread-1) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@6e4d92f6{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@341fbf08{STARTED}}
+13373 INFO  (jetty-launcher-56-thread-2) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=35179, zkHost=127.0.0.1:35875/solr}
+13373 INFO  (jetty-launcher-56-thread-1) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=39941, zkHost=127.0.0.1:35875/solr}
+13373 ERROR (jetty-launcher-56-thread-1) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+13373 ERROR (jetty-launcher-56-thread-2) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+13373 INFO  (jetty-launcher-56-thread-1) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+13373 INFO  (jetty-launcher-56-thread-2) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+13373 INFO  (jetty-launcher-56-thread-2) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT f02bb7bb06decce976c3ed2fdfbf5907764c2183 [snapshot build, details omitted]
+13373 INFO  (jetty-launcher-56-thread-1) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT f02bb7bb06decce976c3ed2fdfbf5907764c2183 [snapshot build, details omitted]
+13373 INFO  (jetty-launcher-56-thread-2) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+13374 INFO  (jetty-launcher-56-thread-1) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+13374 INFO  (jetty-launcher-56-thread-2) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-12613-lifecycle-root/solr
+13374 INFO  (jetty-launcher-56-thread-1) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-12613-lifecycle-root/solr
+13374 INFO  (jetty-launcher-56-thread-1) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T19:58:30.298140001Z
+13374 INFO  (jetty-launcher-56-thread-2) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T19:58:30.298121284Z
+13374 INFO  (jetty-launcher-56-thread-2) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiSecurityAuthTest_5110C0AE-001/tempDir-001/node2 (source: servlet config: solr.solr.home)
+13374 INFO  (jetty-launcher-56-thread-1) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiSecurityAuthTest_5110C0AE-001/tempDir-001/node1 (source: servlet config: solr.solr.home)
+13375 WARN  (jetty-launcher-56-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13375 WARN  (jetty-launcher-56-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13375 WARN  (jetty-launcher-56-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13375 WARN  (jetty-launcher-56-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13376 INFO  (jetty-launcher-56-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+13376 INFO  (jetty-launcher-56-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+13377 INFO  (jetty-launcher-56-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13378 INFO  (jetty-launcher-56-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13379 INFO  (jetty-launcher-56-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13379 INFO  (jetty-launcher-56-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13380 INFO  (jetty-launcher-56-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13381 INFO  (jetty-launcher-56-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13382 INFO  (jetty-launcher-56-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13383 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+13383 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+13384 INFO  (jetty-launcher-56-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13485 INFO  (jetty-launcher-56-thread-1) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiSecurityAuthTest_5110C0AE-001/tempDir-001/node1/solr.xml
+13486 INFO  (jetty-launcher-56-thread-2) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiSecurityAuthTest_5110C0AE-001/tempDir-001/node2/solr.xml
+13490 INFO  (jetty-launcher-56-thread-1) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+13490 INFO  (jetty-launcher-56-thread-1) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+13490 INFO  (jetty-launcher-56-thread-2) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+13507 INFO  (jetty-launcher-56-thread-2) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:35875/solr
+13507 INFO  (jetty-launcher-56-thread-1) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:35875/solr
+13520 WARN  (jetty-launcher-56-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13520 WARN  (jetty-launcher-56-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13520 WARN  (jetty-launcher-56-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13520 WARN  (jetty-launcher-56-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13521 INFO  (jetty-launcher-56-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+13521 INFO  (jetty-launcher-56-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+13522 INFO  (jetty-launcher-56-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13522 INFO  (jetty-launcher-56-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13523 INFO  (jetty-launcher-56-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13523 INFO  (jetty-launcher-56-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13524 INFO  (jetty-launcher-56-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13524 INFO  (jetty-launcher-56-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13524 INFO  (jetty-launcher-56-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13524 INFO  (jetty-launcher-56-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13524 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+13524 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+13630 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+13630 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+13631 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13632 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13633 INFO  (jetty-launcher-56-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13633 INFO  (jetty-launcher-56-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13634 INFO  (jetty-launcher-56-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13634 INFO  (jetty-launcher-56-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13634 INFO  (jetty-launcher-56-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13634 INFO  (jetty-launcher-56-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13675 WARN  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+13675 WARN  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+13700 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.ZkController The Overseer is enabled.  It will process all cluster commands & state updates.
+13700 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.a.s.c.ZkController The Overseer is enabled.  It will process all cluster commands & state updates.
+13717 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.OverseerElectionContext I am going to be the leader 127.0.0.1:35179_solr
+13719 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.Overseer Overseer (id=72072205540720648-127.0.0.1:35179_solr-n_0000000000) starting
+13720 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:39941_solr
+13736 INFO  (zkCallback-87-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+13736 INFO  (zkCallback-89-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+13760 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+13771 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.a.s.c.CoreContainer Initializing authentication plugin: solr.BasicAuthPlugin
+13777 WARN  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.a.s.c.CoreContainer Solr authentication is enabled, but SSL is off.  Consider enabling SSL to protect user credentials and data with encryption.
+13783 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.ZkController Publish node=127.0.0.1:35179_solr as DOWN
+13783 INFO  (OverseerStateUpdate-72072205540720648-127.0.0.1:35179_solr-n_0000000000) [n:127.0.0.1:35179_solr] o.a.s.c.Overseer Starting to work on the main queue : 127.0.0.1:35179_solr
+13787 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:35179_solr
+13790 INFO  (zkCallback-87-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+13791 INFO  (zkCallback-89-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+13794 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+13794 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.CoreContainer Initializing authentication plugin: solr.BasicAuthPlugin
+13795 WARN  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.CoreContainer Solr authentication is enabled, but SSL is off.  Consider enabling SSL to protect user credentials and data with encryption.
+13810 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiSecurityAuthTest_5110C0AE-001/tempDir-001/node2
+13866 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiSecurityAuthTest_5110C0AE-001/tempDir-001/node1
+13944 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@77a9f413{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@daf3960{STARTED}}
+13945 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@38ea0166{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:35179}
+13945 INFO  (jetty-launcher-56-thread-2) [n:127.0.0.1:35179_solr] o.e.j.s.Server Started oejs.Server@7253e241{STARTING}[12.1.14,sto=0] @576ms
+13987 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@6e4d92f6{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@341fbf08{STARTED}}
+13988 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@2290b0aa{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:39941}
+13988 INFO  (jetty-launcher-56-thread-1) [n:127.0.0.1:39941_solr] o.e.j.s.Server Started oejs.Server@6f9a13b2{STARTING}[12.1.14,sto=0] @619ms
+13992 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForAllNodes: numServers=2
+13992 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:35179_solr
+13993 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13993 WARN  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+13993 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+13994 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+13996 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+13997 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13997 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+13998 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (2)
+13999 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.s.i.ZkClientClusterStateProvider Cluster at 127.0.0.1:35875/solr ready
+14000 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:39941_solr
+14789 INFO  (qtp1535867094-145-null-87) [n:127.0.0.1:35179_solr t:null-87] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711696} entity={} status=0 QTime=14
+14806 INFO  (qtp1535867094-147-null-88) [n:127.0.0.1:35179_solr t:null-88] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711696} entity={} status=0 QTime=5
+14814 INFO  (qtp1535867094-143-null-89) [n:127.0.0.1:35179_solr t:null-89] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711729} entity={} status=0 QTime=6
+14819 INFO  (qtp1535867094-147-null-90) [n:127.0.0.1:35179_solr t:null-90] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711729} entity={} status=0 QTime=9
+14838 INFO  (qtp1535867094-137-null-92) [n:127.0.0.1:35179_solr t:null-92] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711747} entity={} status=0 QTime=7
+14839 INFO  (qtp1535867094-145-null-91) [n:127.0.0.1:35179_solr t:null-91] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711748&detailed=true} entity={} status=0 QTime=10
+14864 INFO  (qtp1535867094-139-null-94) [n:127.0.0.1:35179_solr t:null-94] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711783} entity={} status=0 QTime=1
+14865 INFO  (qtp1535867094-141-null-93) [n:127.0.0.1:35179_solr t:null-93] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711781} entity={} status=0 QTime=4
+14868 INFO  (qtp1535867094-143-null-95) [n:127.0.0.1:35179_solr t:null-95] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711782} entity={} status=0 QTime=1
+14871 INFO  (qtp1535867094-141-null-96) [n:127.0.0.1:35179_solr t:null-96] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711782} entity={} status=0 QTime=1
+14905 INFO  (qtp1535867094-208-null-97) [n:127.0.0.1:35179_solr t:null-97] o.a.s.s.HttpSolrCall [admin] path=/admin/info/key params={omitHeader=true&wt=javabin} status=0 QTime=1
+14905 INFO  (qtp1535867094-209-null-99) [n:127.0.0.1:35179_solr t:null-99] o.a.s.s.HttpSolrCall [admin] path=/admin/info/key params={omitHeader=true&wt=javabin} status=0 QTime=0
+14907 INFO  (qtp1535867094-141-null-97) [n:127.0.0.1:35179_solr t:null-97] o.a.s.s.PKIAuthenticationPlugin New key obtained from node=127.0.0.1:35179_solr, key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMgmSVfl+E2Nj/oKAP2TceWh17pk6Ugsw5A5nLH+OeMB/WeWJZg/NEDda8SXfQDEVRmw5P+2IZypPASzfCrc6yECAwEAAQ==
+14908 INFO  (qtp728186897-144-null-99) [n:127.0.0.1:39941_solr t:null-99] o.a.s.s.PKIAuthenticationPlugin New key obtained from node=127.0.0.1:35179_solr, key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMgmSVfl+E2Nj/oKAP2TceWh17pk6Ugsw5A5nLH+OeMB/WeWJZg/NEDda8SXfQDEVRmw5P+2IZypPASzfCrc6yECAwEAAQ==
+14909 INFO  (qtp1535867094-139-null-100) [n:127.0.0.1:35179_solr t:null-100] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711822} entity={} status=0 QTime=8
+14916 INFO  (qtp1535867094-141-null-97) [n:127.0.0.1:35179_solr t:null-97] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=15
+14918 INFO  (qtp728186897-146-null-97) [n:127.0.0.1:39941_solr t:null-97] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=17
+14942 INFO  (qtp1535867094-147-null-98) [n:127.0.0.1:35179_solr t:null-98] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793908711747} status=0 QTime=40
+14942 INFO  (qtp728186897-144-null-99) [n:127.0.0.1:39941_solr t:null-99] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793908711747} status=0 QTime=45
+14947 INFO  (qtp1535867094-137-null-97) [n:127.0.0.1:35179_solr t:null-97] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711793&nodes=127.0.0.1:35179_solr,127.0.0.1:39941_solr} entity={} status=0 QTime=74
+14949 INFO  (qtp1535867094-145-null-98) [n:127.0.0.1:35179_solr t:null-98] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:35179_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793908711747} status=0 QTime=74
+14950 INFO  (qtp1535867094-143-null-99) [n:127.0.0.1:35179_solr t:null-99] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:39941_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793908711747} status=0 QTime=73
+15054 INFO  (qtp1535867094-209-null-101) [n:127.0.0.1:35179_solr t:null-101] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711970} entity={} status=0 QTime=5
+15063 INFO  (qtp1535867094-208-null-103) [n:127.0.0.1:35179_solr t:null-103] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711981} entity={} status=0 QTime=1
+15063 INFO  (qtp1535867094-139-null-102) [n:127.0.0.1:35179_solr t:null-102] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908711982} entity={} status=0 QTime=1
+15182 INFO  (qtp1535867094-145-null-104) [n:127.0.0.1:35179_solr t:null-104] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712098} entity={} status=0 QTime=6
+15190 INFO  (qtp1535867094-137-null-105) [n:127.0.0.1:35179_solr t:null-105] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712110} entity={} status=0 QTime=2
+15190 INFO  (qtp1535867094-143-null-106) [n:127.0.0.1:35179_solr t:null-106] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712110} entity={} status=0 QTime=1
+15206 INFO  (qtp1535867094-141-null-108) [n:127.0.0.1:35179_solr t:null-108] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712124&detailed=true} entity={} status=0 QTime=3
+15207 INFO  (qtp1535867094-209-null-107) [n:127.0.0.1:35179_solr t:null-107] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712123} entity={} status=0 QTime=5
+15226 INFO  (qtp1535867094-208-null-109) [n:127.0.0.1:35179_solr t:null-109] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712142} entity={} status=0 QTime=4
+15229 INFO  (qtp1535867094-139-null-110) [n:127.0.0.1:35179_solr t:null-110] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712147} entity={} status=0 QTime=3
+15231 INFO  (qtp1535867094-147-null-111) [n:127.0.0.1:35179_solr t:null-111] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712149} entity={} status=0 QTime=3
+15233 INFO  (qtp1535867094-145-null-112) [n:127.0.0.1:35179_solr t:null-112] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712149} entity={} status=0 QTime=3
+15255 INFO  (qtp1535867094-208-null-114) [n:127.0.0.1:35179_solr t:null-114] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793908712123} status=0 QTime=3
+15255 INFO  (qtp728186897-136-null-115) [n:127.0.0.1:39941_solr t:null-115] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793908712123} status=0 QTime=7
+15258 INFO  (qtp1535867094-139-null-116) [n:127.0.0.1:35179_solr t:null-116] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712170} entity={} status=0 QTime=5
+15258 INFO  (qtp1535867094-209-null-113) [n:127.0.0.1:35179_solr t:null-113] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=9
+15261 INFO  (qtp1535867094-141-null-115) [n:127.0.0.1:35179_solr t:null-115] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:39941_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793908712123} status=0 QTime=17
+15264 INFO  (qtp728186897-142-null-113) [n:127.0.0.1:39941_solr t:null-113] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=14
+15269 INFO  (qtp1535867094-143-null-113) [n:127.0.0.1:35179_solr t:null-113] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712161&nodes=127.0.0.1:35179_solr,127.0.0.1:39941_solr} entity={} status=0 QTime=30
+15272 INFO  (qtp1535867094-137-null-114) [n:127.0.0.1:35179_solr t:null-114] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:35179_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793908712123} status=0 QTime=30
+15318 INFO  (qtp1535867094-139-null-117) [n:127.0.0.1:35179_solr t:null-117] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712235} entity={} status=0 QTime=4
+15318 INFO  (qtp1535867094-145-null-118) [n:127.0.0.1:35179_solr t:null-118] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712234} entity={} status=0 QTime=4
+15354 INFO  (qtp1535867094-208-null-120) [n:127.0.0.1:35179_solr t:null-120] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712272} entity={} status=0 QTime=2
+15354 INFO  (qtp1535867094-209-null-121) [n:127.0.0.1:35179_solr t:null-121] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=1
+15355 INFO  (qtp1535867094-141-null-119) [n:127.0.0.1:35179_solr t:null-119] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712272} entity={} status=0 QTime=3
+15364 INFO  (qtp1535867094-143-null-122) [n:127.0.0.1:35179_solr t:null-122] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authentication params={wt=json&_=1793908712234} status=0 QTime=0
+15381 INFO  (qtp1535867094-145-null-123) [n:127.0.0.1:35179_solr t:null-123] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793908712299} entity={} status=0 QTime=3
+15493 INFO  (qtp1535867094-137-null-124) [n:127.0.0.1:35179_solr t:null-124] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authentication params={wt=json&_=1793908712234} status=0 QTime=10
+15493 INFO  (zkCallback-89-thread-1) [] o.a.s.c.CoreContainer Security node changed, reloading security.json
+15493 INFO  (zkCallback-87-thread-1) [] o.a.s.c.CoreContainer Security node changed, reloading security.json
+15493 INFO  (zkCallback-89-thread-1) [] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+15493 INFO  (zkCallback-89-thread-1) [] o.a.s.c.CoreContainer Initializing authentication plugin: solr.BasicAuthPlugin
+15493 INFO  (zkCallback-87-thread-1) [] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+15494 INFO  (zkCallback-87-thread-1) [] o.a.s.c.CoreContainer Initializing authentication plugin: solr.BasicAuthPlugin
+15495 INFO  (qtp1535867094-209-null-125) [n:127.0.0.1:35179_solr t:null-125] o.a.s.s.HttpSolrCall [admin] path=/admin/authentication params={wt=javabin} status=0 QTime=0
+15497 INFO  (qtp1535867094-141-null-126) [n:127.0.0.1:35179_solr t:null-126] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authentication params={wt=json&_=1793908712234} status=0 QTime=0
+15503 INFO  (qtp1535867094-208-null-127) [n:127.0.0.1:35179_solr t:null-127] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=3
+15504 INFO  (zkCallback-87-thread-1) [] o.a.s.c.CoreContainer Security node changed, reloading security.json
+15504 INFO  (zkCallback-89-thread-1) [] o.a.s.c.CoreContainer Security node changed, reloading security.json
+15504 INFO  (zkCallback-87-thread-1) [] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+15504 INFO  (zkCallback-89-thread-1) [] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+15507 INFO  (qtp1535867094-143-null-128) [n:127.0.0.1:35179_solr t:null-128] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=0
+15510 INFO  (qtp1535867094-145-null-129) [n:127.0.0.1:35179_solr t:null-129] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=0
+15513 INFO  (qtp1535867094-147-null-130) [n:127.0.0.1:35179_solr t:null-130] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authentication params={wt=json&_=1793908712234} status=0 QTime=0
+15748 INFO  (qtp1535867094-139-null-131) [n:127.0.0.1:35179_solr t:null-131] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=0
+15754 INFO  (qtp1535867094-209-null-133) [n:127.0.0.1:35179_solr t:null-133] o.a.s.s.HttpSolrCall [admin] path=/admin/authorization params={wt=javabin} status=0 QTime=0
+15756 INFO  (qtp1535867094-137-null-132) [n:127.0.0.1:35179_solr t:null-132] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=2
+15756 INFO  (zkCallback-89-thread-1) [] o.a.s.c.CoreContainer Security node changed, reloading security.json
+15756 INFO  (zkCallback-89-thread-1) [] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+15756 INFO  (zkCallback-87-thread-1) [] o.a.s.c.CoreContainer Security node changed, reloading security.json
+15756 INFO  (zkCallback-87-thread-1) [] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+15759 INFO  (qtp1535867094-141-null-134) [n:127.0.0.1:35179_solr t:null-134] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=0
+15762 INFO  (qtp1535867094-208-null-135) [n:127.0.0.1:35179_solr t:null-135] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=0
+15764 INFO  (qtp1535867094-143-null-136) [n:127.0.0.1:35179_solr t:null-136] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authentication params={wt=json&_=1793908712234} status=0 QTime=0
+16008 INFO  (qtp1535867094-145-null-137) [n:127.0.0.1:35179_solr t:null-137] o.a.s.s.HttpSolrCall [admin] path=/admin/authorization params={wt=javabin} status=0 QTime=0
+16052 INFO  (qtp1535867094-147-null-138) [n:127.0.0.1:35179_solr t:null-138] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=4
+16052 INFO  (zkCallback-89-thread-1) [] o.a.s.c.CoreContainer Security node changed, reloading security.json
+16052 INFO  (zkCallback-89-thread-1) [] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+16052 INFO  (zkCallback-87-thread-1) [] o.a.s.c.CoreContainer Security node changed, reloading security.json
+16052 INFO  (zkCallback-87-thread-1) [] o.a.s.c.CoreContainer Initializing authorization plugin: solr.RuleBasedAuthorizationPlugin
+16060 INFO  (qtp1535867094-209-null-139) [n:127.0.0.1:35179_solr t:null-139] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=0
+16061 INFO  (qtp1535867094-137-null-140) [n:127.0.0.1:35179_solr t:null-140] o.a.s.s.HttpSolrCall [admin] path=/admin/authorization params={wt=javabin} status=0 QTime=0
+16064 INFO  (qtp1535867094-141-null-141) [n:127.0.0.1:35179_solr t:null-141] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authorization params={wt=json&_=1793908712234} status=0 QTime=0
+16067 INFO  (qtp1535867094-208-null-142) [n:127.0.0.1:35179_solr t:null-142] o.a.s.s.HttpSolrCall [admin] path=/cluster/security/authentication params={wt=json&_=1793908712234} status=0 QTime=0
+16077 INFO  (TEST-AdminUiSecurityAuthTest.testLoginAndSecurityScreen-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testLoginAndSecurityScreen
+16150 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+16254 INFO  (jetty-closer-111-thread-2) [] o.e.j.s.Server Stopped oejs.Server@6f9a13b2{STOPPING}[12.1.14,sto=0]
+16256 INFO  (jetty-closer-111-thread-2) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@2290b0aa{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+16257 INFO  (jetty-closer-111-thread-2) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=640329627
+16257 INFO  (jetty-closer-111-thread-2) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:39941_solr
+16257 INFO  (jetty-closer-111-thread-1) [] o.e.j.s.Server Stopped oejs.Server@7253e241{STOPPING}[12.1.14,sto=0]
+16261 INFO  (jetty-closer-111-thread-1) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@38ea0166{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+16261 INFO  (jetty-closer-111-thread-1) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=146832649
+16262 INFO  (jetty-closer-111-thread-1) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:35179_solr
+16262 INFO  (zkCallback-89-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (1)
+16264 INFO  (zkCallback-87-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+16264 INFO  (zkCallback-89-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (0)
+16265 INFO  (jetty-closer-111-thread-2) [] o.a.s.c.ZkController Publish this node as DOWN...
+16265 INFO  (jetty-closer-111-thread-2) [] o.a.s.c.ZkController Publish node=127.0.0.1:39941_solr as DOWN
+16265 INFO  (jetty-closer-111-thread-1) [] o.a.s.c.ZkController Publish this node as DOWN...
+16265 INFO  (jetty-closer-111-thread-1) [] o.a.s.c.ZkController Publish node=127.0.0.1:35179_solr as DOWN
+nov 05, 2026 8:58:33 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+16273 INFO  (closeThreadPool-116-thread-1) [] o.a.s.c.Overseer Overseer (id=72072205540720648-127.0.0.1:35179_solr-n_0000000000) closing
+nov 05, 2026 8:58:33 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+16273 INFO  (OverseerStateUpdate-72072205540720648-127.0.0.1:35179_solr-n_0000000000) [n:127.0.0.1:35179_solr] o.a.s.c.Overseer Overseer Loop exiting : 127.0.0.1:35179_solr
+16274 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+16276 INFO  (closeThreadPool-116-thread-2) [] o.a.s.c.Overseer Overseer (id=72072205540720648-127.0.0.1:35179_solr-n_0000000000) closing
+16277 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+16377 INFO  (jetty-closer-111-thread-1) [] o.a.s.c.Overseer Overseer (id=72072205540720648-127.0.0.1:35179_solr-n_0000000000) closing
+16379 INFO  (jetty-closer-111-thread-1) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@77a9f413{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@daf3960{STOPPED}}
+16379 INFO  (jetty-closer-111-thread-2) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@6e4d92f6{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-root/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@341fbf08{STOPPED}}
+16381 INFO  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.a.s.c.ZkTestServer Shutting down ZkTestServer.
+16381 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+16483 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+16586 WARN  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Watch limit violations: 
+Maximum concurrent create/delete watches above limit:
+
+	3	/solr/aliases.json
+	3	/solr/clusterprops.json
+	2	/solr/packages.json
+	2	/solr/security.json
+
+Maximum concurrent data watches above limit:
+
+	20	/zookeeper/config
+	8	/solr/security.json
+
+Maximum concurrent children watches above limit:
+
+	10	/solr/live_nodes
+	3	/solr/overseer/queue
+	3	/solr/collections
+
+16589 INFO  (SUITE-AdminUiSecurityAuthTest-seed#[5110C0AE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-2 after muting 0 log messages
+]]></system-err>
+</testsuite>
