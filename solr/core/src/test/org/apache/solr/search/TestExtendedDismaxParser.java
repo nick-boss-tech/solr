@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.Matchers.not;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -1191,6 +1192,56 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         "//*[@numFound='2']",
         "//str[@name='id'][.='145']",
         "//str[@name='id'][.='146']");
+  }
+
+  public void testEmptyPhraseBoostClauses() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      for (String q : Arrays.asList("wireless", "subject:wireless")) {
+        String parsed =
+            getParsedQuery(
+                req(
+                    "q", q,
+                    "qf", "subject",
+                    "pf", "subject^10",
+                    "sow", sow,
+                    "defType", "edismax",
+                    "debugQuery", "true"));
+        assertThat(parsed, allOf(not(containsString("^10.0")), not(containsString("()"))));
+      }
+    }
+  }
+
+  public void testMatchAllDocsWithPhraseBoost() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      try (SolrQueryRequest req = req("qf", "subject", "pf", "subject^10", "sow", sow)) {
+        assertThat(QParser.getParser("*:*", "edismax", req).getQuery(), isA(MatchAllDocsQuery.class));
+      }
+    }
+  }
+
+  public void testAnalyzedSingleTermKeepsPhraseBoost() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      String splitParsed =
+          getParsedQuery(
+              req(
+                  "q", "wi-fi",
+                  "qf", "subject",
+                  "pf", "subject^10",
+                  "sow", sow,
+                  "defType", "edismax",
+                  "debugQuery", "true"));
+      assertThat(splitParsed, containsString("(subject:\"wi fi\")^10.0"));
+      String synonymParsed =
+          getParsedQuery(
+              req(
+                  "q", "usa",
+                  "qf", "subject",
+                  "pf", "subject^10",
+                  "sow", sow,
+                  "defType", "edismax",
+                  "debugQuery", "true"));
+      assertThat(synonymParsed, containsString("(subject:\"unit state ? america\")^10.0"));
+    }
   }
 
   // test phrase fields including pf2 pf3 and phrase slop
