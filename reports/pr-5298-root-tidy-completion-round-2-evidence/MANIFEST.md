@@ -1,0 +1,14 @@
+# Evidence manifest: PR 5298 root tidy completion round 2 (phone-agent)
+
+Archive: evidence.tar.gz
+Archive SHA-256: a46c03c3fcbaea7237f75c0997364768e9c117992575cb6a558068e021bfa0ab
+
+Contents (SHA-256 per file):
+ea9c51bc7ad4c82f483a417a263601d3f0c1bda15bf5c9f83761b57ce10f466c  run.log
+e533d3f451ffa5673f5c7f12ae8ad58e568d0f67e6e84d36f06303459919b7c2  tidy.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  status-before.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  status-after.txt
+8c444e0a61fae749c06a5bf093c27d33f3141aaf17ae7777adea61f265146f17  readback.txt
+38fc9d6e16e692cf509b838a4ada57484f188c01b8fcb8ec3f09cd875f4c8aa4  run.sh
+1cb9438594e47e48f62bf8b4e7b084599cf33993ade6dd8f5a4c0a92472cfb79  claim.md
+1cfe17b9c87b37ec23dad36baf5f3a11a41c1084413640d2a1cf660ccdab64a4  receipt-draft.md
