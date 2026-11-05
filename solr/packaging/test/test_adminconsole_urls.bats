@@ -51,14 +51,83 @@ teardown() {
   assert_output --partial "{"
 }
 
-@test "assert admin console static assets are revalidated and versioned" {
+@test "assert admin console static assets require revalidation" {
   run solr start
+  assert_success
 
-  run curl -s -I http://localhost:${SOLR_PORT}/solr/libs/solr/index.js
-  assert_output --partial "Cache-Control: no-cache"
+  for asset in libs/solr/index.js css/angular/chosen.css; do
+    run curl -fsS --head "http://localhost:${SOLR_PORT}/solr/${asset}"
+    assert_success
+    assert_line --regexp '^HTTP/[0-9.]+ 200([[:space:]]|$)'
+    assert_line --regexp '^[Cc]ache-[Cc]ontrol: no-cache[[:space:]]*$'
+  done
+}
 
-  run curl -s http://localhost:${SOLR_PORT}/solr/
+@test "assert admin console static assets support conditional requests" {
+  run solr start
+  assert_success
+
+  local asset_url="http://localhost:${SOLR_PORT}/solr/libs/solr/index.js"
+  local headers="${BATS_TEST_TMPDIR}/asset.headers"
+  local original="${BATS_TEST_TMPDIR}/original.js"
+  local revalidated="${BATS_TEST_TMPDIR}/revalidated.js"
+  local stale="${BATS_TEST_TMPDIR}/stale.js"
+
+  run curl -fsS --dump-header "${headers}" --output "${original}" --write-out '%{http_code}' "${asset_url}"
+  assert_success
+  assert_output "200"
+  assert [ -s "${original}" ]
+
+  run cat "${headers}"
+  assert_success
+  assert_line --regexp '^[Cc]ache-[Cc]ontrol: no-cache[[:space:]]*$'
+
+  run awk 'tolower($1) == "last-modified:" {sub(/^[^:]*: */, ""); sub(/\r$/, ""); print}' "${headers}"
+  assert_success
+  assert_output --regexp '^[A-Z][a-z]{2}, [0-9]{2} [A-Z][a-z]{2} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} GMT$'
+  local last_modified="${output}"
+
+  run curl -fsS --header "If-Modified-Since: ${last_modified}" --dump-header "${headers}" --output "${revalidated}" --write-out '%{http_code}' "${asset_url}"
+  assert_success
+  assert_output "304"
+  assert [ ! -s "${revalidated}" ]
+
+  run cat "${headers}"
+  assert_success
+  assert_line --regexp '^[Cc]ache-[Cc]ontrol: no-cache[[:space:]]*$'
+
+  run curl -fsS --header 'If-Modified-Since: Thu, 01 Jan 1970 00:00:00 GMT' --output "${stale}" --write-out '%{http_code}' "${asset_url}"
+  assert_success
+  assert_output "200"
+
+  run cmp "${original}" "${stale}"
+  assert_success
+}
+
+@test "assert admin console references a versioned client asset" {
+  run solr start
+  assert_success
+
+  local page="${BATS_TEST_TMPDIR}/index.html"
+  run curl -fsS --output "${page}" --write-out '%{http_code}' "http://localhost:${SOLR_PORT}/solr/"
+  assert_success
+  assert_output "200"
+
+  run cat "${page}"
+  assert_success
+  assert_output --partial "<html"
+  assert_output --regexp 'src="libs/solr/index[.]js[?]_=[^"[:space:]]+"'
+  refute_output --partial '${version}'
   refute_output --regexp '(src|href)="[^"]+\.(js|css)"'
+
+  run sed -n 's/.*src="\(libs\/solr\/index\.js?_[^"]*\)".*/\1/p' "${page}"
+  assert_success
+  assert_output --regexp '^libs/solr/index[.]js[?]_=[^"[:space:]]+$'
+  local client_ref="${output}"
+
+  run curl -fsS --output /dev/null --write-out '%{http_code}' "http://localhost:${SOLR_PORT}/solr/${client_ref}"
+  assert_success
+  assert_output "200"
 }
 
 @test "assert CSP header contains custom connect src URLs" {
