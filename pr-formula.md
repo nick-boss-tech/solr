@@ -115,6 +115,28 @@ the work already done so the answer costs the maintainer nothing.
    comments stay plain. The footer goes only on PR descriptions and
    new Jira ticket descriptions, never on comments.
 
+## Headings and the draft status line (Nick, 2026-11-05, from PR #5283)
+
+Section titles are level-2 markdown headings (`## What happens
+today`), never a bold-only line. GitHub renders a bold line at body
+font size, so a description whose titles are bold reads in a
+different font size from every other PR; PR #5283 shipped that way
+and had to be fixed by edit. The presentation rule below still
+applies under each heading: the section opens with a bold one-line
+summary.
+
+When a PR is opened or held as a draft, one plain status line goes
+directly under the AI header, before the Jira line, so a reader
+sees the state before the content. For a cap draft the line is:
+"Draft status is due to Nick Shanin's open-PR cap; the change is
+complete and ready for review." When the draft state is deliberate
+for another reason, the line names that reason instead (precedent,
+PR #5299: "Draft status is deliberate: parts of this suite can only
+run under upstream CI, as the Limits section states. The change is
+complete and ready for review."). A ready PR carries no status
+line; when a draft flips to ready, the line comes out in the same
+edit pass that verifies the rest of the description.
+
 Length guide: the whole description should read in about one
 screenful, roughly under 3,500 characters unless the ticket is
 unusually complex.
