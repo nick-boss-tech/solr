@@ -1232,16 +1232,24 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
                   "defType", "edismax",
                   "debugQuery", "true"));
       assertThat(splitParsed, containsString("(subject:\"wi fi\")^10.0"));
+    }
+  }
+
+  public void testSingleTermSynonymKeepsPhraseBoost() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      // The unanalyzed qf field keeps this phrase exclusive to the pf clause.
       String synonymParsed =
           getParsedQuery(
               req(
-                  "q", "usa",
-                  "qf", "subject",
+                  "q", "grackle",
+                  "qf", "id",
                   "pf", "subject^10",
                   "sow", sow,
                   "defType", "edismax",
                   "debugQuery", "true"));
-      assertThat(synonymParsed, containsString("(subject:\"unit state ? america\")^10.0"));
+      assertThat(
+          synonymParsed,
+          allOf(containsString("subject:\"crow blackbird\""), containsString("^10.0")));
     }
   }
 
