@@ -1,0 +1,15 @@
+# Adjacent follow-up plan: delivered and advanced to implementation
+
+Status: Planning deliverable complete. Implementation is authorized by Nick's newer active goal and tracked under `assignments/solr-12613-adjacent-implementation-round-1.md`; exact-head Linux proof remains pending.
+
+This fulfills the report requested by `assignments/solr-12613-adjacent-followup-plan-round-1.md`. The original implementation hold was explicitly released by the subsequent chat goal to implement code/tests using separate branches. The add-only implementation assignment and `claims/solr-12613-adjacent-windows-round-1.md` govern the resumed work. Do not treat this delivered planning item as a new implementation claim or ask the owner to release the superseded hold again.
+
+The original first slice, C1 system-info validation status, overlaps the existing SOLR-18549 fork implementation: source at `b89664d164db46cdac432668e2d9a07ce95fbd37` already rethrows SolrException. That evidence displaces the provisional recommendation; no duplicate production fix was made.
+
+Four separable contributions were instead authored and pushed: encoded targeting keys (C2), second-hop encoded-path coverage (C5), obsolete core-menu responses (C3), and request-specific Metrics/Nodes/log reads with optional cluster log aggregation (C4 / SOLR-18619). The complete revision table, exact file scopes, overlap decisions, baseline strategy and Linux gate/receipt specifications are in `reports/solr-12613-adjacent-implementation-round-1.md` and its linked slice reports/gates. All are self-contained board records.
+
+The core baseline integrates main `07ccc73cd24e26e59da169ca35b3fd5f64c35986` with picker `73b30956ff2c0f7b16f6af3bceacf95bda8271b9` at `6ec2e527ad716bde74404b2037bb1a1e6c52f79c`. The UI baseline additionally preserves the existing gated browser prerequisites at `b45bae5da3a151c7b439ff4e42009c383b538fae`. Both merges were conflict-free. The PR is still open; compare baseline-to-candidate to isolate our delta, and reconcile with the actual upstream merge before an independent follow-up PR is opened.
+
+Nick directed use of the decision ladder for the logging product default and asked that the choice be posed in the PR. The addendum `claims/solr-12613-adjacent-decision-ladder-round-1.md` records the evidence and rung-4 proposal: selected-node default, explicit All nodes option, origin/failure labels and local standalone behavior; the alternative is always aggregating cloud messages. An unposted draft appears in the SOLR-18619 implementation report. No renewed owner question or public posting was made.
+
+Source review covers correctness, architecture, maintenance/reuse and proposed verification. Sixteen existing/new source scopes were not conflated into one readiness claim: each independent branch has its own head/baseline and required gate, and C5 remains coverage-only. No runtime or browser outcome was obtained on Windows. No required Linux receipt is yet present at the audited board snapshot. Planning is delivered; code remains Implemented, Proof Pending.
