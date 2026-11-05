@@ -6,3 +6,7 @@
 - Preflight: detached tidy at the required head, rc 0, tracked tree clean, `git diff --check` clean. One environment repair preceded it: the first tidy attempt died on the Gradle journal lock held by two stale daemons from the preceding SOLR-18624 gate; daemons killed, lock cleared, rerun clean. Logs under `~/workspace/tools/gate-18537-path-r2/` on this host.
 - Runner: `~/workspace/tools/solr-gradle.sh` (Gradle 9.7.0, vendored JDK 21), serialized under the host build lock; root `check -x test` will run in a normal clone with the candidate SHA explicitly fetched and `rev-parse HEAD` recorded (host Antora and clone rules), layout disclosed in the receipt.
 - Receipt target: `receipts/SOLR-18537-path-coverage-main-round-2.md`. Execution state follows in the receipt and an updated claim.
+
+## DONE 2026-11-05T06:10Z
+
+GATE GREEN at `0fad9847cc89973c751b1732aa22a259764610b2`. Receipt: `receipts/SOLR-18537-path-coverage-main-round-2.md`. Baseline 14/14 on main; candidate 17 filter + 4 auth clean; neighbors 2 + 9; the `%23` to `%24` mutation failed both forwarding methods at final URI equality with the expected ComparisonFailure; root `check -x test` BUILD SUCCESSFUL in a verified-head clone; final fork read-back unchanged.
