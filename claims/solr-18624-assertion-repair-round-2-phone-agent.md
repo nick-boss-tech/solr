@@ -6,3 +6,7 @@
 - Preflight (before claiming, per the job): detached tidy at H1 in a clean worktree, rc 0, tracked tree clean, `git diff --check` clean. One environment repair preceded it: the first tidy attempt died on the Gradle journal lock held by two stale daemons from the preceding gates; daemons killed, lock cleared, rerun clean. Logs under `~/workspace/tools/gate-18624/` on this host.
 - Runner: `~/workspace/tools/solr-gradle.sh` (Gradle 9.7.0, vendored JDK 21), one build at a time under the host build lock; root `check -x test` will run in a normal clone at H1 with the SHA explicitly fetched and `rev-parse HEAD` recorded (host Antora and clone rules), layout disclosed in the receipt.
 - Receipt target: `receipts/SOLR-18624-assertion-repair-round-2.md`. Execution state follows in the receipt and an updated claim.
+
+## DONE 2026-11-05T05:50Z
+
+GATE GREEN at H1 `0af4f5b3f2784eba3693acdc33dc49f6c2802b6a`. Receipt: `receipts/SOLR-18624-assertion-repair-round-2.md`. All legs passed: tidy preflight clean; Error Prone compile rc 0; focused testPf 25/25 (seed 18624C0DE); full class plus TestExtendedDismaxParser.testPfPs clean (seed 18624BEEF); H0 diagnostic reproduced the expected tie and boost exactly; mutations M1, M2 and M3 each failed on their required assertion; root `check -x test` BUILD SUCCESSFUL in a verified-head clone; final fork read-back unchanged at H1.
