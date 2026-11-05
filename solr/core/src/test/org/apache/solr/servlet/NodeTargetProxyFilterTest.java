@@ -19,6 +19,7 @@ package org.apache.solr.servlet;
 
 import static org.apache.solr.servlet.NodeTargetProxyFilter.TARGET_NODE_HEADER;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import org.apache.solr.client.solrj.SolrRequest;
@@ -216,9 +217,33 @@ public class NodeTargetProxyFilterTest extends SolrCloudTestCase {
     assertEncodedPathPreservedAcrossReplicaHop(false);
   }
 
+  @Test
+  public void testAmbiguousEncodedPathsRemainRejected() throws Exception {
+    for (String encodedPath : List.of("/a%25b", "/a%2523b")) {
+      for (boolean useHeader : new boolean[] {true, false}) {
+        String query = "?wt=json";
+        if (!useHeader) {
+          query += "&" + TARGET_NODE_HEADER + "=" + targetNode.getNodeName();
+        }
+        var request =
+            receivingNode
+                .getSolrClient()
+                .getHttpClient()
+                .newRequest(receivingNode.getBaseUrl().toString())
+                .path("/solr/" + COLLECTION + "/echo" + encodedPath + query);
+        if (useHeader) {
+          request.headers(h -> h.add(TARGET_NODE_HEADER, targetNode.getNodeName()));
+        }
+        var response = request.send();
+        assertEquals(400, response.getStatus());
+        assertTrue(response.getContentAsString().contains("Ambiguous URI"));
+      }
+    }
+  }
+
   @SuppressWarnings("unchecked")
   private void assertEncodedPathPreservedAcrossReplicaHop(boolean useHeader) throws Exception {
-    String encodedPath = "/a%20b%23c%25d%2523e";
+    String encodedPath = "/a%20b%23c";
     var queryParams = params().set("marker", "space # % +");
     if (!useHeader) {
       queryParams.set(TARGET_NODE_HEADER, targetNode.getNodeName());
@@ -232,9 +257,9 @@ public class NodeTargetProxyFilterTest extends SolrCloudTestCase {
     }
     NamedList<Object> rsp = receivingNode.getSolrClient().request(req);
 
-    assertEquals("/solr/" + COLLECTION + "/echo" + encodedPath, rsp.get("requestURI"));
     NamedList<?> echoedParams = (NamedList<?>) rsp.get("params");
     assertEquals("1", echoedParams.get(HttpSolrCall.INTERNAL_REQUEST_COUNT));
+    assertEquals("/solr/" + COLLECTION + "/echo" + encodedPath, rsp.get("requestURI"));
     assertEquals("space # % +", echoedParams.get("marker"));
     assertNull(echoedParams.get(TARGET_NODE_HEADER));
     Map<String, Object> headers = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
