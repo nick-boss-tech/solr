@@ -517,6 +517,7 @@ solrAdminApp.controller('MainController', function($scope, $route, $rootScope, $
 
   $rootScope.exceptions={};
   var cloudLandingDone = false;
+  var coreStatusGeneration = 0;
 
   $rootScope.toggleException = function() {
     $scope.showException=!$scope.showException;
@@ -535,6 +536,8 @@ solrAdminApp.controller('MainController', function($scope, $route, $rootScope, $
   }
 
   var loadCoresForSelectedNode = function(pageType) {
+    var generation = ++coreStatusGeneration;
+    var selectedNode = NodeTarget.state.selectedNode;
     if (NodeTarget.needsSelection()) {
       $scope.cores = [];
       delete $scope.currentCore;
@@ -543,6 +546,9 @@ solrAdminApp.controller('MainController', function($scope, $route, $rootScope, $
     }
     CoresV2.getAllCoreStatus(NodeTarget.withNodes({indexInfo: false}), function(error, data, response) {
       $timeout(function() {
+        if (generation !== coreStatusGeneration || selectedNode !== NodeTarget.state.selectedNode) {
+          return;
+        }
         if (error) { ApiErrorHandler.handle(response); return; }
         var payload = NodeTarget.unwrap(data, response) || {};
         var status = payload.status || {};

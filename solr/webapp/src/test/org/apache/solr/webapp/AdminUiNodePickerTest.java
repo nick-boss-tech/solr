@@ -133,4 +133,125 @@ public class AdminUiNodePickerTest extends AdminUiTestBase {
         driver.findElement(By.id("selected-node-badge")).isDisplayed());
     assertNoSevereConsoleErrors();
   }
+
+  @Test
+  public void testCoreMenuIgnoresLateResponseFromPreviousNode() throws Exception {
+    assertCoreMenuIgnoresOlderResponse(true);
+  }
+
+  @Test
+  public void testCoreMenuKeepsNewestRefreshForSameNode() throws Exception {
+    assertCoreMenuIgnoresOlderResponse(false);
+  }
+
+  private void assertCoreMenuIgnoresOlderResponse(boolean changeNode) throws Exception {
+    String localNode = cluster.getJettySolrRunner(0).getNodeName();
+    String remoteNode = cluster.getJettySolrRunner(1).getNodeName();
+    openPage("", By.id("index"));
+    selectNode(remoteNode);
+    waitForTextContains(DASHBOARD_NODE, remoteNode);
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    try {
+      js.executeScript(
+          """
+          var injector = angular.element(document.body).injector();
+          var api = injector.get('CoresV2');
+          var scope = angular.element(document.body).scope();
+          window.coreStatusQueue = {
+            api: api, original: api.getAllCoreStatus, scope: scope, callbacks: []
+          };
+          api.getAllCoreStatus = function(opts, callback) {
+            var queue = window.coreStatusQueue;
+            var entry = {callback: callback, ready: false};
+            queue.callbacks.push(entry);
+            return queue.original.call(api, opts, function(error) {
+              entry.error = error;
+              entry.ready = true;
+            });
+          };
+          scope.$apply(function() {
+            scope.resetMenu('index', injector.get('Constants').IS_ROOT_PAGE);
+          });
+          """);
+      waitUntil(
+          "the older core request is queued",
+          () ->
+              Boolean.TRUE.equals(
+                  js.executeScript(
+                      "var entries = window.coreStatusQueue.callbacks;"
+                          + "return entries.length >= 1 && entries[0].ready && !entries[0].error;")));
+      if (changeNode) {
+        selectNode(localNode);
+        waitForTextContains(DASHBOARD_NODE, localNode);
+      } else {
+        js.executeScript(
+            """
+            var injector = angular.element(document.body).injector();
+            var scope = window.coreStatusQueue.scope;
+            scope.$apply(function() {
+              scope.resetMenu('index', injector.get('Constants').IS_ROOT_PAGE);
+            });
+            """);
+      }
+      waitUntil(
+          "the newer core request is queued",
+          () ->
+              Boolean.TRUE.equals(
+                  js.executeScript(
+                      "var entries = window.coreStatusQueue.callbacks;"
+                          + "return entries.length >= 2 && entries[entries.length - 1].ready"
+                          + " && !entries[entries.length - 1].error;")));
+      js.executeScript(
+          """
+          var callbacks = window.coreStatusQueue.callbacks;
+          var payload = {status: {new_core: {name: 'new_core'}}, initFailures: {}};
+          callbacks[callbacks.length - 1].callback(null, payload, {body: payload});
+          """);
+      waitUntil(
+          "the newer core inventory is rendered",
+          () ->
+              Boolean.TRUE.equals(
+                  js.executeScript(
+                      """
+                      return Array.from(document.querySelectorAll('#core-selector option'))
+                        .some(function(option) { return option.textContent === 'new_core'; });
+                      """)));
+      js.executeScript(
+          """
+          var payload = {status: {old_core: {name: 'old_core'}}, initFailures: {}};
+          window.coreStatusQueue.callbacks[0].callback(null, payload, {body: payload});
+          angular.element(document.body).injector().get('$timeout')(function() {
+            window.coreStatusQueue.released = true;
+          });
+          """);
+      waitUntil(
+          "the older callback and its digest have completed",
+          () ->
+              Boolean.TRUE.equals(
+                  js.executeScript("return window.coreStatusQueue.released === true;")));
+      assertEquals(
+          "A late response must not replace the current core menu",
+          "new_core",
+          js.executeScript(
+              "return window.coreStatusQueue.scope.cores.map(function(core) { return core.name; })"
+                  + ".join(',');"));
+      assertTrue(
+          Boolean.TRUE.equals(
+              js.executeScript(
+                  """
+                  var options = Array.from(document.querySelectorAll('#core-selector option'));
+                  return options.some(function(option) { return option.textContent === 'new_core'; })
+                    && !options.some(function(option) { return option.textContent === 'old_core'; });
+                  """)));
+      assertNoSevereConsoleErrors();
+    } finally {
+      js.executeScript(
+          """
+          if (window.coreStatusQueue) {
+            window.coreStatusQueue.api.getAllCoreStatus = window.coreStatusQueue.original;
+            delete window.coreStatusQueue;
+          }
+          """);
+    }
+  }
 }
