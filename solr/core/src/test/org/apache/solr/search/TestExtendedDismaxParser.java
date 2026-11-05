@@ -1196,32 +1196,76 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
 
   // When no phrase qualifies for the pf boost, no empty phrase clause should be added
   public void testNoEmptyPhraseBoostClause() throws Exception {
-    // Single-token query: minClauseSize discards the one-position phrase
-    String singleTokenParsed =
-        getParsedQuery(
-            req(
-                "q", "wireless",
-                "qf", "subject",
-                "pf", "subject^10",
-                "defType", "edismax",
-                "debugQuery", "true"));
-    assertThat(singleTokenParsed, allOf(not(containsString("^10.0")), not(containsString("()"))));
+    for (String sow : Arrays.asList("true", "false")) {
+      String parsed =
+          getParsedQuery(
+              req(
+                  "q", "wireless",
+                  "qf", "subject",
+                  "pf", "subject^10",
+                  "sow", sow,
+                  "defType", "edismax",
+                  "debugQuery", "true"));
+      assertThat(parsed, allOf(not(containsString("^10.0")), not(containsString("()"))));
+    }
+  }
 
+  public void testNoEmptyPhraseBoostClauseForFieldedQuery() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      String parsed =
+          getParsedQuery(
+              req(
+                  "q", "subject:wireless",
+                  "qf", "subject",
+                  "pf", "subject^10",
+                  "sow", sow,
+                  "defType", "edismax",
+                  "debugQuery", "true"));
+      assertThat(parsed, allOf(not(containsString("^10.0")), not(containsString("()"))));
+    }
+  }
+
+  public void testAnalyzedSingleTermKeepsPhraseBoost() throws Exception {
     // Whitespace-free query that analyzes into multiple tokens keeps its phrase boost
-    String multiTokenParsed =
-        getParsedQuery(
-            req(
-                "q", "wi-fi",
-                "qf", "subject",
-                "pf", "subject^10",
-                "defType", "edismax",
-                "debugQuery", "true"));
-    assertThat(multiTokenParsed, containsString("(subject:\"wi fi\")^10.0"));
+    for (String sow : Arrays.asList("true", "false")) {
+      String multiTokenParsed =
+          getParsedQuery(
+              req(
+                  "q", "wi-fi",
+                  "qf", "subject",
+                  "pf", "subject^10",
+                  "sow", sow,
+                  "defType", "edismax",
+                  "debugQuery", "true"));
+      assertThat(multiTokenParsed, containsString("(subject:\"wi fi\")^10.0"));
+    }
+  }
 
+  public void testMatchAllDocsWithPhraseBoost() throws Exception {
     // q=*:* must reduce to a MatchAllDocsQuery even when pf is set
-    try (SolrQueryRequest req = req("qf", "subject", "pf", "subject^10")) {
-      Query matchAll = QParser.getParser("*:*", "edismax", req).getQuery();
-      assertThat(matchAll, isA(MatchAllDocsQuery.class));
+    for (String sow : Arrays.asList("true", "false")) {
+      try (SolrQueryRequest req = req("qf", "subject", "pf", "subject^10", "sow", sow)) {
+        Query matchAll = QParser.getParser("*:*", "edismax", req).getQuery();
+        assertThat(matchAll, isA(MatchAllDocsQuery.class));
+      }
+    }
+  }
+
+  public void testSingleTermSynonymKeepsPhraseBoost() throws Exception {
+    for (String sow : Arrays.asList("true", "false")) {
+      // The unanalyzed qf field keeps this phrase exclusive to the pf clause.
+      String synonymParsed =
+          getParsedQuery(
+              req(
+                  "q", "grackle",
+                  "qf", "id",
+                  "pf", "subject^10",
+                  "sow", sow,
+                  "defType", "edismax",
+                  "debugQuery", "true"));
+      assertThat(
+          synonymParsed,
+          allOf(containsString("subject:\"crow blackbird\""), containsString("^10.0")));
     }
   }
 
