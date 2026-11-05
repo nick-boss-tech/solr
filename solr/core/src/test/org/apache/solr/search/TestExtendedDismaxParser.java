@@ -1214,7 +1214,8 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
   public void testMatchAllDocsWithPhraseBoost() throws Exception {
     for (String sow : Arrays.asList("true", "false")) {
       try (SolrQueryRequest req = req("qf", "subject", "pf", "subject^10", "sow", sow)) {
-        assertThat(QParser.getParser("*:*", "edismax", req).getQuery(), isA(MatchAllDocsQuery.class));
+        assertThat(
+            QParser.getParser("*:*", "edismax", req).getQuery(), isA(MatchAllDocsQuery.class));
       }
     }
   }
