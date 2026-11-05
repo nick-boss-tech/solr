@@ -1,10 +1,9 @@
 # Claim: PR 5298 DocValues prefetch gate round 1, phone-agent
 
-Status: CLAIMED, executing
+Status: DONE, GATE FAILED at candidate H
 Job: `gates/pr-5298-dv-prefetch-round-1.md`.
 Executor: phone-agent (Linux, this VM).
-Claimed 2026-11-05 after detached tidy preflight, at Nick's direction ("5298 gate" after the PR 5299 JDK 25 legs).
+Claimed and executed 2026-11-05 at Nick's direction.
 
-Inputs read back before claiming: live PR #5298 head and fork branch `pr-5188-glob-field-loading-followup` both at candidate H `4d547451e3914de441fc897ea6a8c0652a48736a`; reviewed parent B `7ee68a7000b67bed06ad3130ffff27a086a56aad`.
-Preflight: normal clones `~/workspace/solr-clones/5298-h` (HEAD H, tree `f472273219cd544598f9f590ca1fd1e21f0e449a`, `.git` a directory) and `~/workspace/solr-clones/5298-p` (HEAD B, tree `aa0d11ffc812a635a1b3b2446cd36c259983a05a`), both with the candidate fetched explicitly from the fork. Tidy at H: rc 0, tracked tree clean afterward. Host: JDK 21 (vendored Temurin 21.0.12.1+1), Gradle 9.7.0 via the host runner, test-queue lock held by the chain, disk 68 percent used. Seed `5298C0DE` for every test leg.
-Evidence: `~/workspace/tools/gate-5298/` on this VM, plus the durable evidence set filed with the execution report.
+Result: report `reports/pr-5298-dv-prefetch-gate-round-1.md`; receipt `receipts/PR-5298-dv-prefetch-round-1.md`; evidence `reports/pr-5298-dv-prefetch-round-1-evidence/`.
+At candidate H `4d547451e3914de441fc897ea6a8c0652a48736a`: tidy clean; pre-fix proof complete (all three new methods fail at the parent with the intended prefetch assertion); Error Prone compile and root `check -x test` pass. The gate fails on two findings: (1) the three new tests never set `wt`, so their XPath checks run against a JSON response and fail with a SAX prolog error (production output verified correct in the captured response); (2) `LargeFieldTest` regresses at H versus the parent (passes alone at B, fails alone at H, same seed), caused by the follow-up commit's production prefetch change. No repair was applied in this gate; a repair round at a new head is the path to green, and the repair scope decision is Nick's.
