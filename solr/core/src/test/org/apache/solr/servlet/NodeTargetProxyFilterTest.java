@@ -289,6 +289,43 @@ public class NodeTargetProxyFilterTest extends SolrCloudTestCase {
     assertEquals("/solr/" + COLLECTION + "/echo" + encodedPath, rsp.get("requestURI"));
   }
 
+  @Test
+  public void testEncodedPathPreservedAcrossReplicaHopWithHeader() throws Exception {
+    assertEncodedPathPreservedAcrossReplicaHop(true);
+  }
+
+  @Test
+  public void testEncodedPathPreservedAcrossReplicaHopWithQueryParam() throws Exception {
+    assertEncodedPathPreservedAcrossReplicaHop(false);
+  }
+
+  @SuppressWarnings("unchecked")
+  private void assertEncodedPathPreservedAcrossReplicaHop(boolean useHeader) throws Exception {
+    String encodedPath = "/a%20b%23c%25d%2523e";
+    var queryParams = params().set("marker", "space # % +");
+    if (!useHeader) {
+      queryParams.set(TARGET_NODE_HEADER, targetNode.getNodeName());
+    }
+    var req =
+        new GenericSolrRequest(
+            SolrRequest.METHOD.GET, "/" + COLLECTION + "/echo" + encodedPath, queryParams);
+    req.addHeader("X-Other", "kept");
+    if (useHeader) {
+      req.addHeader(TARGET_NODE_HEADER, targetNode.getNodeName());
+    }
+    NamedList<Object> rsp = receivingNode.getSolrClient().request(req);
+
+    assertEquals("/solr/" + COLLECTION + "/echo" + encodedPath, rsp.get("requestURI"));
+    NamedList<?> echoedParams = (NamedList<?>) rsp.get("params");
+    assertEquals("1", echoedParams.get(HttpSolrCall.INTERNAL_REQUEST_COUNT));
+    assertEquals("space # % +", echoedParams.get("marker"));
+    assertNull(echoedParams.get(TARGET_NODE_HEADER));
+    Map<String, Object> headers = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    headers.putAll((Map<String, ?>) rsp.get("headers"));
+    assertEquals("kept", headers.get("X-Other"));
+    assertFalse(headers.containsKey(TARGET_NODE_HEADER));
+  }
+
   /** Jetty accepts query characters that are invalid in a URI (e.g. a local-params '{'). */
   @Test
   public void testUnencodedQueryCharsProxied() throws Exception {
