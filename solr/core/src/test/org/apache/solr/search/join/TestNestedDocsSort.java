@@ -20,6 +20,7 @@ import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.request.SolrQueryRequest;
 import org.apache.solr.search.SolrCache;
 import org.apache.solr.search.SortSpec;
@@ -39,6 +40,89 @@ public class TestNestedDocsSort extends SolrTestCaseJ4 {
   @BeforeClass
   public static void beforeClass() throws Exception {
     initCore("solrconfig.xml", "schema.xml");
+  }
+
+  public void testNumericChildMissingValues() {
+    for (String type : new String[] {"i", "l", "f", "d"}) {
+      String field = "child_sort_" + type + "_p";
+      indexMissingSortDocuments(field);
+      assertChildOrder(field, "asc", "3", "4", "5", "1", "2");
+      assertChildOrder(field, "desc", "2", "1", "3", "4", "5");
+
+      field = "child_sort_first_" + type;
+      indexMissingSortDocuments(field);
+      assertChildOrder(field, "asc", "2", "3", "4", "5", "1");
+      assertChildOrder(field, "desc", "2", "1", "3", "4", "5");
+
+      field = "child_sort_last_" + type;
+      indexMissingSortDocuments(field);
+      assertChildOrder(field, "asc", "3", "4", "5", "1", "2");
+      assertChildOrder(field, "desc", "2", "1", "3", "4", "5");
+    }
+  }
+
+  public void testStringChildMissingFirst() {
+    indexMissingSortDocuments("nullfirst");
+    assertChildOrder("nullfirst", "asc", "2", "3", "4", "5", "1");
+    assertChildOrder("nullfirst", "desc", "1", "2", "3", "4", "5");
+  }
+
+  public void testStringChildMissingLast() {
+    indexMissingSortDocuments("child_sort_s1");
+    assertChildOrder("child_sort_s1", "asc", "3", "4", "5", "1", "2");
+    assertChildOrder("child_sort_s1", "desc", "2", "1", "3", "4", "5");
+  }
+
+  public void testFilteredChildrenDoNotSupplyMissingValues() {
+    indexMissingSortDocuments("child_sort_first_i", true);
+    assertChildOrder("child_sort_first_i", "asc", "3", "4", "5", "1", "2");
+    assertChildOrder("child_sort_first_i", "desc", "2", "1", "3", "4", "5");
+  }
+
+  private void indexMissingSortDocuments(String field) {
+    indexMissingSortDocuments(field, false);
+  }
+
+  private void indexMissingSortDocuments(String field, boolean excludeMissingChild) {
+    assertU(delQ("*:*"));
+    SolrInputDocument valued = sdoc("id", "1", "type_s1", "parent");
+    valued.addChildDocument(sdoc("id", "11", "type_s1", "child", field, "1"));
+    SolrInputDocument mixed = sdoc("id", "2", "type_s1", "parent");
+    mixed.addChildDocument(sdoc("id", "21", "type_s1", "child", field, "2"));
+    mixed.addChildDocument(
+        sdoc("id", "22", "type_s1", excludeMissingChild ? "excluded" : "child"));
+    SolrInputDocument missing = sdoc("id", "3", "type_s1", "parent");
+    missing.addChildDocument(sdoc("id", "31", "type_s1", "child"));
+    SolrInputDocument empty = sdoc("id", "4", "type_s1", "parent");
+    SolrInputDocument excluded = sdoc("id", "5", "type_s1", "parent");
+    excluded.addChildDocument(sdoc("id", "51", "type_s1", "excluded", field, "9"));
+    for (SolrInputDocument parent :
+        new SolrInputDocument[] {valued, mixed, missing, empty, excluded}) {
+      assertU(adoc(parent));
+    }
+    assertU(commit());
+  }
+
+  private void assertChildOrder(String field, String direction, String... ids) {
+    String[] assertions = new String[ids.length + 1];
+    assertions[0] = "//result[@name='response'][@numFound='" + ids.length + "']";
+    for (int i = 0; i < ids.length; i++) {
+      assertions[i + 1] = "//result/doc[" + (i + 1) + "]/str[@name='id'][.='" + ids[i] + "']";
+    }
+    assertQ(
+        field + " " + direction,
+        req(
+            "q",
+            "type_s1:parent",
+            "parents",
+            "{!parent which=type_s1:parent}type_s1:child",
+            "sort",
+            "childfield(" + field + ",$parents) " + direction + ",id asc",
+            "fl",
+            "id",
+            "rows",
+            "10"),
+        assertions);
   }
 
   public void testEquality() {

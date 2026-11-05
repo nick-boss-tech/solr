@@ -626,6 +626,15 @@
 
   <field name="nullfirst" type="string" indexed="true" stored="true" sortMissingFirst="true" multiValued="false"/>
 
+  <field name="child_sort_first_i" type="pint" indexed="false" stored="false" multiValued="false" sortMissingFirst="true"/>
+  <field name="child_sort_last_i" type="pint" indexed="false" stored="false" multiValued="false" sortMissingLast="true"/>
+  <field name="child_sort_first_l" type="plong" indexed="false" stored="false" multiValued="false" sortMissingFirst="true"/>
+  <field name="child_sort_last_l" type="plong" indexed="false" stored="false" multiValued="false" sortMissingLast="true"/>
+  <field name="child_sort_first_f" type="pfloat" indexed="false" stored="false" multiValued="false" sortMissingFirst="true"/>
+  <field name="child_sort_last_f" type="pfloat" indexed="false" stored="false" multiValued="false" sortMissingLast="true"/>
+  <field name="child_sort_first_d" type="pdouble" indexed="false" stored="false" multiValued="false" sortMissingFirst="true"/>
+  <field name="child_sort_last_d" type="pdouble" indexed="false" stored="false" multiValued="false" sortMissingLast="true"/>
+
   <field name="dateRange" type="dateRange" multiValued="true"/>
 
   <field name="cat" type="string" indexed="true" stored="true" multiValued="true"/>
