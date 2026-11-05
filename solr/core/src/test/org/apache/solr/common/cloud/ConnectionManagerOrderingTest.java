@@ -198,7 +198,8 @@ public class ConnectionManagerOrderingTest extends SolrTestCase {
   private ConnectionManager newManager(
       SolrZkClient client, ZkClientConnectionStrategy strategy, OnReconnect onReconnect) {
     when(client.getZkClientTimeout()).thenReturn(TIMEOUT_MS);
-    when(client.wrapWatcher(any(Watcher.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    when(client.wrapWatcher(any(Watcher.class)))
+        .thenAnswer(invocation -> invocation.getArgument(0));
     return new ConnectionManager(
         "ordering test", client, "unused", strategy, onReconnect, null, () -> false);
   }

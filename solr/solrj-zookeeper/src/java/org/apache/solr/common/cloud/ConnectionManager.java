@@ -340,15 +340,15 @@ public class ConnectionManager implements Watcher {
     long expire =
         System.nanoTime() + TimeUnit.NANOSECONDS.convert(waitForConnection, TimeUnit.MILLISECONDS);
     long left = 1;
-    while ((!connected
-            || (connectingKeeper != null && !connectingKeeper.getState().isConnected()))
+    while ((!connected || (connectingKeeper != null && !connectingKeeper.getState().isConnected()))
         && left > 0) {
       if (isClosed()) {
         break;
       }
       // Its Expired callback is queued behind this reconnect, so it cannot release the wait.
       if (connectingKeeper != null && !connectingKeeper.getState().isAlive()) {
-        throw new TimeoutException("Replacement ZooKeeper session ended before reconnect completed");
+        throw new TimeoutException(
+            "Replacement ZooKeeper session ended before reconnect completed");
       }
       try {
         wait(500);
