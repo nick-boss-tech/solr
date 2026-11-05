@@ -499,7 +499,7 @@ public class StreamTool extends ToolBase {
   }
 
   private static ModifiableSolrParams params(String... params) {
-    return ModifiableSolrParams.of(params);
+    return ModifiableSolrParams.ofPairs(params);
   }
 
   public static class StandardInStream extends TupleStream implements Expressible {

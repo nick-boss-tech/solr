@@ -522,9 +522,38 @@ public abstract class SolrParams
    * values. A null name or value is treated as "".
    *
    * @throws IllegalArgumentException if the length is odd
+   * @throws NullPointerException if the array is null
    */
-  public static SolrParams of(String... namesAndValues) {
-    return new MultiMapSolrParams(
-        Collections.unmodifiableMap(ModifiableSolrParams.of(namesAndValues).getMap()));
+  public static SolrParams ofPairs(String... namesAndValues) {
+    if (namesAndValues.length == 0) {
+      return of();
+    }
+    return new ImmutableSolrParams(namesAndValues);
+  }
+
+  /** Owns its values and copies them at the public array boundary. */
+  private static final class ImmutableSolrParams extends SolrParams {
+    private final Map<String, String[]> values;
+
+    private ImmutableSolrParams(String[] namesAndValues) {
+      values = Collections.unmodifiableMap(ModifiableSolrParams.ofPairs(namesAndValues).getMap());
+    }
+
+    @Override
+    public String get(String param) {
+      String[] vals = values.get(param);
+      return vals == null ? null : vals[0];
+    }
+
+    @Override
+    public String[] getParams(String param) {
+      String[] vals = values.get(param);
+      return vals == null ? null : vals.clone();
+    }
+
+    @Override
+    public Iterator<String> getParameterNamesIterator() {
+      return values.keySet().iterator();
+    }
   }
 }

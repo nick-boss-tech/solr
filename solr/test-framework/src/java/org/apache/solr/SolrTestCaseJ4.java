@@ -1204,7 +1204,7 @@ public abstract class SolrTestCaseJ4 extends SolrTestCase {
    * @return the ModifiableSolrParams generated from the given list of strings.
    */
   public static ModifiableSolrParams params(String... params) {
-    return ModifiableSolrParams.of(params);
+    return ModifiableSolrParams.ofPairs(params);
   }
 
   public static Map<String, String> map(String... params) {

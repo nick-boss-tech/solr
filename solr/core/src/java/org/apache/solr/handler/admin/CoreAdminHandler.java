@@ -257,7 +257,7 @@ public class CoreAdminHandler extends RequestHandlerBase implements PermissionNa
   }
 
   public static ModifiableSolrParams params(String... params) {
-    return ModifiableSolrParams.of(params);
+    return ModifiableSolrParams.ofPairs(params);
   }
 
   //////////////////////// SolrInfoMBeans methods //////////////////////

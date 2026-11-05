@@ -419,23 +419,94 @@ public class SolrParamTest extends SolrTestCase {
   }
 
   public void testOfNamesAndValues() {
-    assertFalse(SolrParams.of(new String[0]).iterator().hasNext());
+    assertSame(SolrParams.of(), SolrParams.ofPairs());
+    assertFalse(SolrParams.ofPairs(new String[0]).iterator().hasNext());
 
-    SolrParams p = SolrParams.of("a", "1", "b", "2", "a", "3");
+    SolrParams p = SolrParams.ofPairs("a", "1", "b", "2", "a", "3");
     assertFalse(p instanceof ModifiableSolrParams);
     assertArrayEquals(new String[] {"1", "3"}, p.getParams("a"));
     assertEquals("2", p.get("b"));
+    assertNull(p.get("missing"));
+    assertNull(p.getParams("missing"));
+    assertEquals(List.of("a", "b"), iterToList(p.getParameterNamesIterator()));
+    assertEquals("?a=1&a=3&b=2", p.toQueryString());
+    assertEquals(params("a", "1", "a", "3", "b", "2"), p);
 
-    // Not modifiable, even through the backing map
-    assertTrue(p instanceof MultiMapSolrParams);
-    Map<String, String[]> map = ((MultiMapSolrParams) p).getMap();
-    expectThrows(UnsupportedOperationException.class, () -> map.put("c", new String[] {"4"}));
-    expectThrows(UnsupportedOperationException.class, () -> map.remove("a"));
-
-    expectThrows(IllegalArgumentException.class, () -> SolrParams.of("a", "1", "b"));
+    expectThrows(IllegalArgumentException.class, () -> SolrParams.ofPairs("a"));
+    expectThrows(IllegalArgumentException.class, () -> SolrParams.ofPairs("a", "1", "b"));
+    expectThrows(NullPointerException.class, () -> SolrParams.ofPairs((String[]) null));
 
     assertEquals("", SolrParams.of("a", (String) null).get("a"));
     assertEquals("1", SolrParams.of((String) null, "1").get(""));
-    assertEquals("", SolrParams.of("a", "1", "b", null).get("b"));
+    assertEquals("", SolrParams.ofPairs("a", "1", "b", null).get("b"));
+    assertArrayEquals(
+        new String[] {"", "1"}, SolrParams.ofPairs(null, null, "", "1").getParams(""));
+  }
+
+  public void testOfPairsGetParamsIsIsolated() {
+    SolrParams p = SolrParams.ofPairs("a", "1", "a", "2");
+    p.getParams("a")[0] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
+    p.getFieldParams("field", "a")[1] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
+    assertEquals("1", p.get("a"));
+  }
+
+  public void testOfPairsIteratorIsIsolated() {
+    SolrParams p = SolrParams.ofPairs("a", "1", "a", "2");
+    Iterator<Map.Entry<String, String[]>> entries = p.iterator();
+    Map.Entry<String, String[]> entry = entries.next();
+    entry.getValue()[0] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
+    expectThrows(UnsupportedOperationException.class, () -> entry.setValue(new String[] {"changed"}));
+    expectThrows(UnsupportedOperationException.class, entries::remove);
+    Iterator<String> names = p.getParameterNamesIterator();
+    assertEquals("a", names.next());
+    expectThrows(UnsupportedOperationException.class, names::remove);
+    p.stream().findFirst().orElseThrow().getValue()[1] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
+  }
+
+  public void testOfPairsMapViewIsIsolated() {
+    SolrParams p = SolrParams.ofPairs("a", "1", "a", "2");
+    Map<String, String[]> map = MultiMapSolrParams.asMultiMap(p);
+    map.get("a")[0] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
+  }
+
+  public void testOfPairsMapCopyIsIsolated() {
+    SolrParams p = SolrParams.ofPairs("a", "1", "a", "2");
+    Map<String, String[]> map = MultiMapSolrParams.asMultiMap(p, true);
+    map.get("a")[0] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
+  }
+
+  public void testOfPairsWriteMapIsIsolated() throws Exception {
+    SolrParams p = SolrParams.ofPairs("a", "1", "a", "2");
+    Map<String, Object> serialized = new HashMap<>();
+    p.writeMap(
+        (key, value) -> {
+          serialized.put(key.toString(), value);
+          return null;
+        });
+    ((String[]) serialized.get("a"))[0] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
+  }
+
+  public void testOfPairsModifiableCopyIsIsolated() {
+    SolrParams p = SolrParams.ofPairs("a", "1", "a", "2");
+    ModifiableSolrParams copy = ModifiableSolrParams.of(p);
+    copy.getParams("a")[0] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
+    copy.add("a", "3");
+    assertArrayEquals(new String[] {"changed", "2", "3"}, copy.getParams("a"));
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
+  }
+
+  public void testOfPairsCopiesInput() {
+    String[] input = {"a", "1", "a", "2"};
+    SolrParams p = SolrParams.ofPairs(input);
+    input[1] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
   }
 }

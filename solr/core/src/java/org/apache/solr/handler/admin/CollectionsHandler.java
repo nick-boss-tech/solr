@@ -454,7 +454,7 @@ public class CollectionsHandler extends RequestHandlerBase implements Permission
   }
 
   public static ModifiableSolrParams params(String... params) {
-    return ModifiableSolrParams.of(params);
+    return ModifiableSolrParams.ofPairs(params);
   }
 
   //////////////////////// SolrInfoMBeans methods //////////////////////

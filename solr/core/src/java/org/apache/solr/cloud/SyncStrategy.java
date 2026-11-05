@@ -412,6 +412,6 @@ public class SyncStrategy {
   }
 
   public static ModifiableSolrParams params(String... params) {
-    return ModifiableSolrParams.of(params);
+    return ModifiableSolrParams.ofPairs(params);
   }
 }

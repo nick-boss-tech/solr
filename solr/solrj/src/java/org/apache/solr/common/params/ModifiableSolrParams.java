@@ -77,8 +77,9 @@ public class ModifiableSolrParams extends SolrParams {
    * values. A null name or value is treated as "".
    *
    * @throws IllegalArgumentException if the length is odd
+   * @throws NullPointerException if the array is null
    */
-  public static ModifiableSolrParams of(String... namesAndValues) {
+  public static ModifiableSolrParams ofPairs(String... namesAndValues) {
     if (namesAndValues.length % 2 != 0) {
       throw new IllegalArgumentException("Names and values must come in pairs");
     }

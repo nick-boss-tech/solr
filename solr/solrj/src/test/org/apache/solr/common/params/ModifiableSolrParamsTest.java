@@ -56,27 +56,42 @@ public class ModifiableSolrParamsTest extends SolrTestCase {
     assertSame(result, modifiable);
 
     // input is null
-    result = ModifiableSolrParams.of((SolrParams) null);
+    result = ModifiableSolrParams.of(null);
     assertNotNull(result);
     assertEquals(0, result.size());
   }
 
   public void testOfNamesAndValues() {
     assertEquals(0, ModifiableSolrParams.of().size());
-    assertEquals(0, ModifiableSolrParams.of(new String[0]).size());
+    assertEquals(0, ModifiableSolrParams.ofPairs().size());
+    assertEquals(0, ModifiableSolrParams.ofPairs(new String[0]).size());
     assertEquals("v", ModifiableSolrParams.of("k", "v").get("k"));
 
-    ModifiableSolrParams result = ModifiableSolrParams.of("a", "1", "b", "2", "a", "3");
+    ModifiableSolrParams result = ModifiableSolrParams.ofPairs("a", "1", "b", "2", "a", "3");
     assertArrayEquals(new String[] {"1", "3"}, result.getParams("a"));
     assertEquals("2", result.get("b"));
     result.set("c", "4"); // mutable
     assertEquals("4", result.get("c"));
 
-    expectThrows(IllegalArgumentException.class, () -> ModifiableSolrParams.of("a", "1", "b"));
+    expectThrows(IllegalArgumentException.class, () -> ModifiableSolrParams.ofPairs("a"));
+    expectThrows(IllegalArgumentException.class, () -> ModifiableSolrParams.ofPairs("a", "1", "b"));
+    expectThrows(NullPointerException.class, () -> ModifiableSolrParams.ofPairs((String[]) null));
 
     assertEquals("", ModifiableSolrParams.of("a", (String) null).get("a"));
     assertEquals("1", ModifiableSolrParams.of((String) null, "1").get(""));
-    assertEquals("", ModifiableSolrParams.of("a", null, "b", "2").get("a"));
+    assertEquals("", ModifiableSolrParams.ofPairs("a", null, "b", "2").get("a"));
+    assertArrayEquals(
+        new String[] {"", "1"}, ModifiableSolrParams.ofPairs(null, null, "", "1").getParams(""));
+  }
+
+  public void testOfPairsCopiesInput() {
+    String[] input = {"a", "1", "a", "2"};
+    ModifiableSolrParams result = ModifiableSolrParams.ofPairs(input);
+    input[1] = "changed";
+    assertArrayEquals(new String[] {"1", "2"}, result.getParams("a"));
+    result.add("a", "3");
+    assertArrayEquals(new String[] {"1", "2", "3"}, result.getParams("a"));
+    assertArrayEquals(new String[] {"a", "changed", "a", "2"}, input);
   }
 
   public void testAdd() {
