@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.Matchers.not;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -1191,6 +1192,37 @@ public class TestExtendedDismaxParser extends SolrTestCaseJ4 {
         "//*[@numFound='2']",
         "//str[@name='id'][.='145']",
         "//str[@name='id'][.='146']");
+  }
+
+  // When no phrase qualifies for the pf boost, no empty phrase clause should be added
+  public void testNoEmptyPhraseBoostClause() throws Exception {
+    // Single-token query: minClauseSize discards the one-position phrase
+    String singleTokenParsed =
+        getParsedQuery(
+            req(
+                "q", "wireless",
+                "qf", "subject",
+                "pf", "subject^10",
+                "defType", "edismax",
+                "debugQuery", "true"));
+    assertThat(singleTokenParsed, allOf(not(containsString("^10.0")), not(containsString("()"))));
+
+    // Whitespace-free query that analyzes into multiple tokens keeps its phrase boost
+    String multiTokenParsed =
+        getParsedQuery(
+            req(
+                "q", "wi-fi",
+                "qf", "subject",
+                "pf", "subject^10",
+                "defType", "edismax",
+                "debugQuery", "true"));
+    assertThat(multiTokenParsed, containsString("(subject:\"wi fi\")^10.0"));
+
+    // q=*:* must reduce to a MatchAllDocsQuery even when pf is set
+    try (SolrQueryRequest req = req("qf", "subject", "pf", "subject^10")) {
+      Query matchAll = QParser.getParser("*:*", "edismax", req).getQuery();
+      assertThat(matchAll, isA(MatchAllDocsQuery.class));
+    }
   }
 
   // test phrase fields including pf2 pf3 and phrase slop
