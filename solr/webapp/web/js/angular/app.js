@@ -535,6 +535,14 @@ solrAdminApp.controller('MainController', function($scope, $route, $rootScope, $
     return hasAllRequiredPermissions(permissions, $scope.usersPermissions);
   }
 
+  var clearNodeTarget = function() {
+    NodeTarget.clear();
+    $scope.liveNodes = [];
+    $scope.selectedNode = null;
+    $scope.viewingRemoteNode = false;
+    $scope.needsNodeSelection = false;
+  };
+
   var loadCoresForSelectedNode = function(pageType) {
     var generation = ++coreStatusGeneration;
     var selectedNode = NodeTarget.state.selectedNode;
@@ -575,18 +583,14 @@ solrAdminApp.controller('MainController', function($scope, $route, $rootScope, $
 
   $scope.refresh();
   $scope.resetMenu = function(page, pageType) {
-    // Standalone never hits listClusterNodes; fetch cores here (also before mode is known).
-    if (!$scope.isCloudEnabled) {
-      loadCoresForSelectedNode(pageType);
-    }
-
     SystemV2.getNodeSystemInfo({}, function(error, data, response) {
       $timeout(function() {
         if (error) {
           ApiErrorHandler.handle(response);
           // Settle mode so pages waiting on isCloudEnabled do not hang.
           $scope.isCloudEnabled = false;
-          NodeTarget.clear();
+          clearNodeTarget();
+          loadCoresForSelectedNode(pageType);
           return;
         }
         $scope.isCloudEnabled = !!(data.mode && data.mode.match(/solrcloud/i));
@@ -601,11 +605,8 @@ solrAdminApp.controller('MainController', function($scope, $route, $rootScope, $
         $scope.usersPermissions = data.security.permissions;
         $scope.isSecurityEnabled = data.security.authenticationPlugin != null;
         if (!$scope.isCloudEnabled) {
-          NodeTarget.clear();
-          $scope.liveNodes = [];
-          $scope.selectedNode = null;
-          $scope.viewingRemoteNode = false;
-          $scope.needsNodeSelection = false;
+          clearNodeTarget();
+          loadCoresForSelectedNode(pageType);
         } else if (data.node) {
           NodeTarget.setLocalNode(data.node);
           $scope.localNode = data.node;
