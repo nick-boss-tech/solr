@@ -458,7 +458,8 @@ public class SolrParamTest extends SolrTestCase {
     Map.Entry<String, String[]> entry = entries.next();
     entry.getValue()[0] = "changed";
     assertArrayEquals(new String[] {"1", "2"}, p.getParams("a"));
-    expectThrows(UnsupportedOperationException.class, () -> entry.setValue(new String[] {"changed"}));
+    expectThrows(
+        UnsupportedOperationException.class, () -> entry.setValue(new String[] {"changed"}));
     expectThrows(UnsupportedOperationException.class, entries::remove);
     Iterator<String> names = p.getParameterNamesIterator();
     assertEquals("a", names.next());
