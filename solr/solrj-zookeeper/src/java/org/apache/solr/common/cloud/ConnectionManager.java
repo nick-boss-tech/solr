@@ -236,7 +236,7 @@ public class ConnectionManager implements Watcher {
                 @Override
                 public void update(ZooKeeper keeper) {
                   try {
-                    waitForConnected(Long.MAX_VALUE);
+                    waitForConnected(Long.MAX_VALUE, keeper);
 
                     try {
                       client.updateKeeper(keeper);
@@ -331,13 +331,24 @@ public class ConnectionManager implements Watcher {
    * @param waitForConnection time to wait, in ms
    */
   public synchronized void waitForConnected(long waitForConnection) throws TimeoutException {
+    waitForConnected(waitForConnection, null);
+  }
+
+  private synchronized void waitForConnected(long waitForConnection, ZooKeeper connectingKeeper)
+      throws TimeoutException {
     log.info("Waiting up to {}ms for client to connect to ZooKeeper", waitForConnection);
     long expire =
         System.nanoTime() + TimeUnit.NANOSECONDS.convert(waitForConnection, TimeUnit.MILLISECONDS);
     long left = 1;
-    while (!connected && left > 0) {
+    while ((!connected
+            || (connectingKeeper != null && !connectingKeeper.getState().isConnected()))
+        && left > 0) {
       if (isClosed()) {
         break;
+      }
+      // Its Expired callback is queued behind this reconnect, so it cannot release the wait.
+      if (connectingKeeper != null && !connectingKeeper.getState().isAlive()) {
+        throw new TimeoutException("Replacement ZooKeeper session ended before reconnect completed");
       }
       try {
         wait(500);
@@ -347,7 +358,7 @@ public class ConnectionManager implements Watcher {
       }
       left = expire - System.nanoTime();
     }
-    if (!connected) {
+    if (!connected || (connectingKeeper != null && !connectingKeeper.getState().isConnected())) {
       throw new TimeoutException(
           "Could not connect to ZooKeeper "
               + zkServerAddress
