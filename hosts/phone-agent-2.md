@@ -92,3 +92,5 @@ Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](
 - Heartbeat: 2026-11-04T21:21:50Z; SOLR-18619 Selenium failure-repair gate completed GREEN at 35b5c45ec6ddb8ec8d54b89bbf9ca97368d2a8ca: 11/11 selected tests passed, `:solr:webapp:check -x test` passed, exact fork ref and clean tracked tree verified; Gradle daemon stopped and host lock free. Final receipt is being posted.
 
 - Heartbeat: 2026-11-05T19:36:08Z; claimed the exact-head SOLR-12613 PR #5110 lifecycle gate at `f02bb7bb06decce976c3ed2fdfbf5907764c2183`. Detached tidy preflight is clean at this head; required Selenium proof is pending. Host lock was free and root inode headroom was 51.73% free at claim. No source, PR, or comment changes.
+
+- Heartbeat: 2026-11-05T21:04:46Z; claimed exact-head SOLR-12613 round-2 lifecycle gate at F2 `b0e096ae19ad637107227e1bc04e951b9023a680`; detached tidy preflight passed (62 actionable tasks). No gate proof leg has started. PR #5110 remains at P; no source/PR/comment writes. Logs: `/workspace/gates/logs/phone-agent-2/solr-12613-pr-head-lifecycle-round-2/`. Enforcing the 15% free-inode stop floor.
