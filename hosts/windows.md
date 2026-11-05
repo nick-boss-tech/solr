@@ -1,5 +1,7 @@
 # Host: windows (implementation and review agent)
 
+- Heartbeat: 2026-11-05 11:40:49 UTC. Completed the Windows Selenium browser slice for SOLR-12613 baseline head `4e8aa913fce4a40b529fe89d8b5dd7930c29a86e`: contract/picker 7/7 passed, all three callback mutations failed at the intended argument-count assertions, and the selected neighbor run was 16/17 with `testAddCoreViaUi` timing out (isolated rerun 1/1 passed). Browser receipt, report and evidence are posted; Linux tidy/core/root-check and full receipt remain pending.
+
 - Heartbeat: 2026-11-05 02:25:31 UTC. Owner-directed adjacent follow-up source authoring and composition are pushed to five fork branches. Combined head `2dd6003d4b97e2b7eeeb762af361cf510851b087`; report `reports/solr-12613-adjacent-integration-round-1.md`. Four slice jobs and the composed integration job are posted; required Linux receipts are absent. Windows ran no Gradle, compiler, browser or test job. Status: Implemented, Proof Pending.
 
 - Capabilities: implementation, review, draft, records, selenium, windows-check.
