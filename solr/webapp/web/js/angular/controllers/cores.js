@@ -40,7 +40,9 @@ solrAdminApp.controller('CoreAdminController',
               var firstCore;
               for (firstCore in cores) break;
               $scope.selectedCore = firstCore;
-              $location.path("/~cores/" + $scope.selectedCore).replace();
+              if (!$scope.showAdd) {
+                $location.path("/~cores/" + $scope.selectedCore).replace();
+              }
             }
             $scope.core = cores[$scope.selectedCore];
             $scope.corelist = [];

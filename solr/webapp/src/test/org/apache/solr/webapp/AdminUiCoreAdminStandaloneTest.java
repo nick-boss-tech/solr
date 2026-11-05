@@ -25,6 +25,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 
 /**
  * Tests the Core Admin screen's write actions - add, rename, swap and unload - which only apply to
@@ -84,6 +85,16 @@ public class AdminUiCoreAdminStandaloneTest extends AdminUiStandaloneTestBase {
   }
 
   @Test
+  public void testInitialCoreStatusKeepsAddCoreFormOpen() throws Exception {
+    assertInitialCoreStatusNavigation(true);
+  }
+
+  @Test
+  public void testInitialCoreStatusStillSelectsDefaultCore() throws Exception {
+    assertInitialCoreStatusNavigation(false);
+  }
+
+  @Test
   public void testRenameCoreViaUi() throws Exception {
     openPage("~cores/renamecore", By.id("cores"));
     click(By.cssSelector("#cores #rename"));
@@ -126,6 +137,100 @@ public class AdminUiCoreAdminStandaloneTest extends AdminUiStandaloneTestBase {
 
     waitUntil("core unloadcore should be gone", () -> !coreExists("unloadcore"));
     assertNoSevereConsoleErrors();
+  }
+
+  private void assertInitialCoreStatusNavigation(boolean openAddForm) throws Exception {
+    openPage("", By.id("index"));
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    try {
+      js.executeScript(
+          """
+          var injector = angular.element(document.body).injector();
+          var api = injector.get('CoresV2');
+          var state = {
+            api: api, original: api.getAllCoreStatus, captured: false, ready: false
+          };
+          window.initialCoreStatus = state;
+          api.getAllCoreStatus = function(opts, callback) {
+            var isCoreAdminRead = !Object.prototype.hasOwnProperty.call(opts || {}, 'indexInfo');
+            if (state.captured || !isCoreAdminRead) {
+              return state.original.apply(api, arguments);
+            }
+            state.captured = true;
+            state.callback = callback;
+            return state.original.call(api, opts, function(error, data) {
+              state.failed = !!error;
+              state.data = data;
+              state.ready = true;
+            });
+          };
+          """);
+      driver.get(baseUrl + "/index.html#/~cores");
+      waitFor(By.cssSelector("#content #cores"));
+      waitUntil(
+          "the initial Core Admin status response is held",
+          () ->
+              Boolean.TRUE.equals(
+                  js.executeScript("return window.initialCoreStatus.ready === true;")));
+      assertEquals(
+          "The real initial status request must succeed",
+          Boolean.FALSE,
+          js.executeScript("return window.initialCoreStatus.failed;"));
+      String firstCore =
+          (String)
+              js.executeScript("return Object.keys(window.initialCoreStatus.data.status)[0];");
+      assertNotNull("The standalone fixture must have a default core", firstCore);
+      if (openAddForm) {
+        click(By.cssSelector("#content #cores #add"));
+        setText(By.id("add_name"), "pending-core");
+        setText(By.id("add_instanceDir"), "pending-instance");
+      }
+      js.executeScript(
+          """
+          var state = window.initialCoreStatus;
+          state.api.getAllCoreStatus = state.original;
+          state.callback(null, state.data, {body: state.data});
+          angular.element(document.body).injector().get('$timeout')(function() {
+            state.delivered = true;
+          });
+          """);
+      waitUntil(
+          "the initial Core Admin status callback has settled",
+          () ->
+              Boolean.TRUE.equals(
+                  js.executeScript("return window.initialCoreStatus.delivered === true;")));
+      String path =
+          (String)
+              js.executeScript(
+                  "return angular.element(document.body).injector().get('$location').path();");
+      if (openAddForm) {
+        assertEquals(
+            "Loading the default core must not navigate away from an open Add Core form",
+            "/~cores",
+            path);
+        assertTrue(
+            "The Add Core form must stay visible",
+            driver.findElement(By.id("add_name")).isDisplayed());
+        assertEquals("pending-core", driver.findElement(By.id("add_name")).getAttribute("value"));
+        assertEquals(
+            "pending-instance", driver.findElement(By.id("add_instanceDir")).getAttribute("value"));
+      } else {
+        assertEquals(
+            "Default-core navigation must remain when no Add Core form is open",
+            "/~cores/" + firstCore,
+            path);
+      }
+      assertNoSevereConsoleErrors();
+    } finally {
+      js.executeScript(
+          """
+          if (window.initialCoreStatus) {
+            var state = window.initialCoreStatus;
+            state.api.getAllCoreStatus = state.original;
+            delete window.initialCoreStatus;
+          }
+          """);
+    }
   }
 
   private boolean coreExists(String coreName) {
