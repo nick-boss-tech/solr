@@ -119,7 +119,10 @@ public class AdminUiLoggingScreenTest extends AdminUiTestBase {
           remoteNode);
       click(By.id("log-all-nodes"));
       waitForPageContains("healthy log probe");
-      assertTrue(driver.findElement(By.id("log-node-errors")).getText().contains(remoteNode));
+      assertTrue(
+          "The failed node must be named beside the retained healthy messages",
+          driver.findElements(By.id("log-node-errors")).stream()
+              .anyMatch(e -> e.getText().contains(remoteNode)));
       assertTrue(
           driver.findElements(By.cssSelector("#viewer td.node")).stream()
               .anyMatch(e -> e.getText().equals(localNode)));
@@ -154,8 +157,11 @@ public class AdminUiLoggingScreenTest extends AdminUiTestBase {
           0L,
           js.executeScript(
               "return angular.element(document.getElementById('viewer')).scope().events.length;"));
-      assertTrue(driver.findElement(By.id("log-node-errors")).getText().contains(localNode));
-      assertTrue(driver.findElement(By.id("log-node-errors")).getText().contains(remoteNode));
+      for (String node : List.of(localNode, remoteNode)) {
+        assertTrue(
+            driver.findElements(By.id("log-node-errors")).stream()
+                .anyMatch(e -> e.getText().contains(node)));
+      }
       assertNoSevereConsoleErrors();
     } finally {
       js.executeScript(
