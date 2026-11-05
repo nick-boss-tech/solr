@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.webapp.AdminUiNodePickerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-05T21:15:26.262Z" hostname="0609f7968656" time="16.247">
+  <properties/>
+  <testcase name="testCloudLandingShowsNodesAndEmptyNodeSelector" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="4.539"/>
+  <testcase name="testSystemInfoFailureStillRefreshesLocalCoreMenu" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="0.872"/>
+  <testcase name="testNodeSelectionSurvivesInAppNavigation" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="1.2"/>
+  <testcase name="testRestoredSelectionTargetsInitialCoreMenuRequest" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="1.098"/>
+  <testcase name="testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="1.189"/>
+  <testcase name="testCoreMenuKeepsNewestRefreshForSameNode" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="1.549"/>
+  <testcase name="testLoggingLevelsHidesNodeBadge" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="2.019"/>
+  <testcase name="testCoreMenuIgnoresLateResponseFromPreviousNode" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="1.418"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 05, 2026 2:15:26 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1240 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/server/solr/configsets/_default/conf'
+1250 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+1259 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/data-dir-1-001
+1278 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+1318 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+1383 WARN  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+1383 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.SolrTestCaseJ4.SuppressSSL(bugUrl="Admin UI browser tests drive plain http")
+Nov 06, 2026 7:15:28 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 155
+2971 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testCloudLandingShowsNodesAndEmptyNodeSelector
+2995 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster Starting cluster of 2 servers in /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001
+2997 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer TEST_PATH() does not exist - solrj test?
+3000 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer STARTING ZK TEST SERVER
+3004 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer ZkTestServer requires the 'stat' command, temporarily manipulating your whitelist
+3006 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer client port: /127.0.0.1:0
+3006 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Starting server
+3039 WARN  (ZkTestServer Run Thread) [] o.a.z.s.ServerCnxnFactory maxCnxns is not configured, using default value 0.
+3105 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer start zk server on port: 43649
+3384 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3385 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3451 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3474 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3488 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3496 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3497 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3514 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3515 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3516 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3518 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3519 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3519 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3519 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3520 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3520 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3521 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3522 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3523 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3524 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3524 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3527 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+3866 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+3866 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+3868 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+3868 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+3872 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-1-24.04.4-Ubuntu
+3872 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-1-24.04.4-Ubuntu
+3880 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+3880 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+3896 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@68768d38{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@3bbbd889{STARTED}}
+3896 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@55cb0aff{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@6bd6c1a7{STARTED}}
+3900 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=46415, zkHost=127.0.0.1:43649/solr}
+3900 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=43091, zkHost=127.0.0.1:43649/solr}
+3903 ERROR (jetty-launcher-8-thread-1) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+3903 ERROR (jetty-launcher-8-thread-2) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+3903 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+3903 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+3906 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT b0e096ae19ad637107227e1bc04e951b9023a680 [snapshot build, details omitted]
+3906 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT b0e096ae19ad637107227e1bc04e951b9023a680 [snapshot build, details omitted]
+3906 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+3906 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+3907 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr
+3907 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr
+3907 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T21:15:29.568233101Z
+3907 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T21:15:29.568241422Z
+3977 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node2 (source: servlet config: solr.solr.home)
+3977 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node1 (source: servlet config: solr.solr.home)
+3990 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3990 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3990 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3990 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+3991 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3991 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+3992 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3992 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+3994 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3994 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+3995 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3995 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3995 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3995 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+3996 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+3996 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+4098 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node1/solr.xml
+4098 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node2/solr.xml
+4199 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+4208 INFO  (jetty-launcher-8-thread-1) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+4208 INFO  (jetty-launcher-8-thread-2) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+4499 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:43649/solr
+4499 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:43649/solr
+4510 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+4510 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+4511 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+4511 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+4512 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+4512 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+4513 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+4513 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+4515 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+4515 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+4516 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4516 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4516 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4516 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+4516 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+4516 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4624 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+4624 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+4625 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+4625 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+4627 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+4627 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+4628 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4628 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4628 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4628 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+4670 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+4670 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+4698 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.s.c.ZkController The Overseer is enabled.  It will process all cluster commands & state updates.
+4698 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.a.s.c.ZkController The Overseer is enabled.  It will process all cluster commands & state updates.
+4713 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.s.c.OverseerElectionContext I am going to be the leader 127.0.0.1:43091_solr
+4715 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:46415_solr
+4717 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.s.c.Overseer Overseer (id=72072508236169223-127.0.0.1:43091_solr-n_0000000000) starting
+4728 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+4728 INFO  (zkCallback-40-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+4768 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+4769 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.s.c.ZkController Publish node=127.0.0.1:43091_solr as DOWN
+4770 INFO  (OverseerStateUpdate-72072508236169223-127.0.0.1:43091_solr-n_0000000000) [n:127.0.0.1:43091_solr] o.a.s.c.Overseer Starting to work on the main queue : 127.0.0.1:43091_solr
+4773 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:43091_solr
+4775 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+4775 INFO  (zkCallback-40-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+4778 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+4854 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node1
+4854 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node2
+5440 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@68768d38{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@3bbbd889{STARTED}}
+5440 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@55cb0aff{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@6bd6c1a7{STARTED}}
+5444 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@176bea58{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:46415}
+5444 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@24e9a51d{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:43091}
+5445 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:46415_solr] o.e.j.s.Server Started oejs.Server@283196db{STARTING}[12.1.14,sto=0] @1576ms
+5445 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:43091_solr] o.e.j.s.Server Started oejs.Server@794007c1{STARTING}[12.1.14,sto=0] @1576ms
+5451 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForAllNodes: numServers=2
+5451 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:46415_solr
+5451 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+5452 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+5452 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+5453 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+5455 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+5455 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+5456 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+5457 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (2)
+5458 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.s.i.ZkClientClusterStateProvider Cluster at 127.0.0.1:43649/solr ready
+5458 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:43091_solr
+5949 INFO  (qtp488114078-83-null-1) [n:127.0.0.1:46415_solr t:null-1] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331523} entity={} status=0 QTime=80
+6279 INFO  (qtp488114078-81-null-3) [n:127.0.0.1:46415_solr t:null-3] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331933} entity={} status=0 QTime=5
+6281 INFO  (qtp488114078-79-null-2) [n:127.0.0.1:46415_solr t:null-2] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331933} entity={} status=0 QTime=6
+6295 INFO  (qtp488114078-75-null-4) [n:127.0.0.1:46415_solr t:null-4] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331949&detailed=true} entity={} status=0 QTime=4
+6295 INFO  (qtp488114078-73-null-5) [n:127.0.0.1:46415_solr t:null-5] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331949} entity={} status=0 QTime=5
+6311 INFO  (qtp488114078-83-null-6) [n:127.0.0.1:46415_solr t:null-6] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331966} entity={} status=0 QTime=3
+6316 INFO  (qtp488114078-77-null-7) [n:127.0.0.1:46415_solr t:null-7] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331974} entity={} status=0 QTime=1
+6317 INFO  (qtp488114078-79-null-8) [n:127.0.0.1:46415_solr t:null-8] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331975} entity={} status=0 QTime=1
+6320 INFO  (qtp488114078-81-null-9) [n:127.0.0.1:46415_solr t:null-9] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331974} entity={} status=0 QTime=1
+6322 INFO  (qtp488114078-75-null-10) [n:127.0.0.1:46415_solr t:null-10] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331980} entity={} status=0 QTime=1
+6428 INFO  (qtp488114078-73-null-11) [n:127.0.0.1:46415_solr t:null-11] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=5
+6428 INFO  (qtp2102642425-82-null-11) [n:127.0.0.1:43091_solr t:null-11] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=5
+6454 INFO  (qtp488114078-75-null-12) [n:127.0.0.1:46415_solr t:null-12] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913331949} status=0 QTime=32
+6454 INFO  (qtp2102642425-80-null-13) [n:127.0.0.1:43091_solr t:null-13] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913331949} status=0 QTime=32
+6461 INFO  (qtp488114078-77-null-12) [n:127.0.0.1:46415_solr t:null-12] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913331949} status=0 QTime=138
+6461 INFO  (qtp488114078-83-null-13) [n:127.0.0.1:46415_solr t:null-13] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913331949} status=0 QTime=138
+6483 INFO  (qtp488114078-81-null-11) [n:127.0.0.1:46415_solr t:null-11] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913331981&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=161
+6711 INFO  (qtp488114078-79-null-14) [n:127.0.0.1:46415_solr t:null-14] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332365} entity={} status=0 QTime=4
+6717 INFO  (qtp488114078-77-null-16) [n:127.0.0.1:46415_solr t:null-16] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332375} entity={} status=0 QTime=1
+6717 INFO  (qtp488114078-75-null-17) [n:127.0.0.1:46415_solr t:null-17] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332375} entity={} status=0 QTime=1
+6719 INFO  (qtp488114078-73-null-15) [n:127.0.0.1:46415_solr t:null-15] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332365} entity={} status=0 QTime=4
+6725 INFO  (qtp488114078-81-null-19) [n:127.0.0.1:46415_solr t:null-19] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332383} entity={} status=0 QTime=2
+6726 INFO  (qtp488114078-83-null-18) [n:127.0.0.1:46415_solr t:null-18] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332383&indexInfo=false} entity={} status=0 QTime=2
+6958 INFO  (qtp488114078-75-null-20) [n:127.0.0.1:46415_solr t:null-20] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332612} entity={} status=0 QTime=5
+6968 INFO  (qtp488114078-81-null-22) [n:127.0.0.1:46415_solr t:null-22] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332626} entity={} status=0 QTime=1
+6968 INFO  (qtp488114078-73-null-21) [n:127.0.0.1:46415_solr t:null-21] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332626} entity={} status=0 QTime=1
+6979 INFO  (qtp488114078-79-null-24) [n:127.0.0.1:46415_solr t:null-24] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332636&detailed=true} entity={} status=0 QTime=2
+6980 INFO  (qtp488114078-83-null-23) [n:127.0.0.1:46415_solr t:null-23] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332636} entity={} status=0 QTime=4
+6987 INFO  (qtp488114078-77-null-25) [n:127.0.0.1:46415_solr t:null-25] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332645} entity={} status=0 QTime=2
+6994 INFO  (qtp488114078-81-null-27) [n:127.0.0.1:46415_solr t:null-27] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332653} entity={} status=0 QTime=1
+6994 INFO  (qtp488114078-75-null-26) [n:127.0.0.1:46415_solr t:null-26] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332653} entity={} status=0 QTime=1
+6997 INFO  (qtp488114078-73-null-28) [n:127.0.0.1:46415_solr t:null-28] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332653} entity={} status=0 QTime=1
+7003 INFO  (qtp488114078-81-null-31) [n:127.0.0.1:46415_solr t:null-31] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913332635} status=0 QTime=3
+7003 INFO  (qtp2102642425-74-null-30) [n:127.0.0.1:43091_solr t:null-30] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913332635} status=0 QTime=3
+7004 INFO  (qtp2102642425-72-null-29) [n:127.0.0.1:43091_solr t:null-29] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+7004 INFO  (qtp488114078-83-null-30) [n:127.0.0.1:46415_solr t:null-30] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913332635} status=0 QTime=6
+7005 INFO  (qtp488114078-77-null-31) [n:127.0.0.1:46415_solr t:null-31] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913332635} status=0 QTime=6
+7004 INFO  (qtp488114078-75-null-29) [n:127.0.0.1:46415_solr t:null-29] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=4
+7006 INFO  (qtp488114078-73-null-32) [n:127.0.0.1:46415_solr t:null-32] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332663} entity={} status=0 QTime=1
+7009 INFO  (qtp488114078-79-null-29) [n:127.0.0.1:46415_solr t:null-29] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332657&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=11
+7316 INFO  (qtp488114078-81-null-33) [n:127.0.0.1:46415_solr t:null-33] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332970} entity={} status=0 QTime=5
+7322 INFO  (qtp488114078-83-null-34) [n:127.0.0.1:46415_solr t:null-34] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332980} entity={} status=0 QTime=1
+7322 INFO  (qtp488114078-77-null-35) [n:127.0.0.1:46415_solr t:null-35] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332980} entity={} status=0 QTime=1
+7326 INFO  (qtp488114078-75-null-36) [n:127.0.0.1:46415_solr t:null-36] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913332985} entity={} status=0 QTime=1
+7451 INFO  (qtp488114078-73-null-37) [n:127.0.0.1:46415_solr t:null-37] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333105} entity={} status=0 QTime=4
+7457 INFO  (qtp488114078-83-null-40) [n:127.0.0.1:46415_solr t:null-40] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333115} entity={} status=0 QTime=1
+7457 INFO  (qtp488114078-81-null-39) [n:127.0.0.1:46415_solr t:null-39] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333115} entity={} status=0 QTime=1
+7462 INFO  (qtp2102642425-78-null-38) [n:127.0.0.1:43091_solr t:null-38] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333105} entity={} status=0 QTime=4
+7468 INFO  (qtp488114078-77-null-41) [n:127.0.0.1:46415_solr t:null-41] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333126} entity={} status=0 QTime=1
+7470 INFO  (qtp2102642425-76-null-42) [n:127.0.0.1:43091_solr t:null-42] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333126&indexInfo=false} entity={} status=0 QTime=1
+7500 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testCloudLandingShowsNodesAndEmptyNodeSelector
+7507 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSystemInfoFailureStillRefreshesLocalCoreMenu
+7614 INFO  (qtp488114078-81-null-43) [n:127.0.0.1:46415_solr t:null-43] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333269} entity={} status=0 QTime=4
+7620 INFO  (qtp488114078-79-null-44) [n:127.0.0.1:46415_solr t:null-44] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333278} entity={} status=0 QTime=1
+7620 INFO  (qtp488114078-77-null-45) [n:127.0.0.1:46415_solr t:null-45] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333278} entity={} status=0 QTime=1
+7624 INFO  (qtp488114078-75-null-46) [n:127.0.0.1:46415_solr t:null-46] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333282} entity={} status=0 QTime=1
+7625 INFO  (qtp2102642425-82-null-47) [n:127.0.0.1:43091_solr t:null-47] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333282&indexInfo=false} entity={} status=0 QTime=0
+7628 INFO  (qtp2102642425-80-null-48) [n:127.0.0.1:43091_solr t:null-48] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333283} entity={} status=0 QTime=3
+7810 INFO  (qtp488114078-81-null-49) [n:127.0.0.1:46415_solr t:null-49] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333464} entity={} status=0 QTime=4
+7811 INFO  (qtp488114078-79-null-50) [n:127.0.0.1:46415_solr t:null-50] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333465} entity={} status=0 QTime=5
+7820 INFO  (qtp488114078-77-null-51) [n:127.0.0.1:46415_solr t:null-51] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333478} entity={} status=0 QTime=1
+7820 INFO  (qtp488114078-75-null-52) [n:127.0.0.1:46415_solr t:null-52] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333479} entity={} status=0 QTime=1
+7827 INFO  (qtp488114078-73-null-53) [n:127.0.0.1:46415_solr t:null-53] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333485&indexInfo=false} entity={} status=0 QTime=1
+7827 INFO  (qtp488114078-83-null-54) [n:127.0.0.1:46415_solr t:null-54] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333486} entity={} status=0 QTime=1
+8008 INFO  (qtp488114078-75-null-55) [n:127.0.0.1:46415_solr t:null-55] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333663} entity={} status=0 QTime=4
+8016 INFO  (qtp488114078-77-null-57) [n:127.0.0.1:46415_solr t:null-57] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333674} entity={} status=0 QTime=1
+8016 INFO  (qtp488114078-73-null-56) [n:127.0.0.1:46415_solr t:null-56] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333674} entity={} status=0 QTime=1
+8024 INFO  (qtp488114078-81-null-59) [n:127.0.0.1:46415_solr t:null-59] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333683&detailed=true} entity={} status=0 QTime=1
+8026 INFO  (qtp488114078-83-null-58) [n:127.0.0.1:46415_solr t:null-58] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333682} entity={} status=0 QTime=3
+8037 INFO  (qtp488114078-75-null-61) [n:127.0.0.1:46415_solr t:null-61] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333695} entity={} status=0 QTime=1
+8037 INFO  (qtp488114078-79-null-60) [n:127.0.0.1:46415_solr t:null-60] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333695} entity={} status=0 QTime=1
+8037 INFO  (qtp488114078-73-null-62) [n:127.0.0.1:46415_solr t:null-62] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333696} entity={} status=0 QTime=0
+8037 INFO  (qtp488114078-77-null-63) [n:127.0.0.1:46415_solr t:null-63] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333696} entity={} status=0 QTime=0
+8045 INFO  (qtp2102642425-74-null-65) [n:127.0.0.1:43091_solr t:null-65] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913333682} status=0 QTime=2
+8046 INFO  (qtp488114078-79-null-66) [n:127.0.0.1:46415_solr t:null-66] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913333682} status=0 QTime=2
+8047 INFO  (qtp488114078-73-null-64) [n:127.0.0.1:46415_solr t:null-64] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+8047 INFO  (qtp488114078-83-null-65) [n:127.0.0.1:46415_solr t:null-65] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913333682} status=0 QTime=5
+8047 INFO  (qtp488114078-75-null-66) [n:127.0.0.1:46415_solr t:null-66] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913333682} status=0 QTime=5
+8048 INFO  (qtp2102642425-72-null-64) [n:127.0.0.1:43091_solr t:null-64] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=4
+8050 INFO  (qtp488114078-81-null-64) [n:127.0.0.1:46415_solr t:null-64] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333700&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=9
+8051 INFO  (qtp488114078-77-null-67) [n:127.0.0.1:46415_solr t:null-67] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333709} entity={} status=0 QTime=1
+8222 INFO  (qtp488114078-83-null-68) [n:127.0.0.1:46415_solr t:null-68] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333877} entity={} status=0 QTime=4
+8222 INFO  (qtp488114078-79-null-69) [n:127.0.0.1:46415_solr t:null-69] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333876} entity={} status=0 QTime=4
+8227 INFO  (qtp488114078-75-null-70) [n:127.0.0.1:46415_solr t:null-70] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333886} entity={} status=0 QTime=0
+8227 INFO  (qtp488114078-73-null-71) [n:127.0.0.1:46415_solr t:null-71] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333886} entity={} status=0 QTime=1
+8233 INFO  (qtp488114078-77-null-72) [n:127.0.0.1:46415_solr t:null-72] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333891&indexInfo=false} entity={} status=0 QTime=1
+8233 INFO  (qtp488114078-81-null-73) [n:127.0.0.1:46415_solr t:null-73] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913333892} entity={} status=0 QTime=1
+8345 INFO  (qtp488114078-83-null-74) [n:127.0.0.1:46415_solr t:null-74] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334003&indexInfo=false} entity={} status=0 QTime=1
+8374 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSystemInfoFailureStillRefreshesLocalCoreMenu
+8379 INFO  (TEST-AdminUiNodePickerTest.testNodeSelectionSurvivesInAppNavigation-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testNodeSelectionSurvivesInAppNavigation
+8483 INFO  (qtp488114078-73-null-75) [n:127.0.0.1:46415_solr t:null-75] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334139} entity={} status=0 QTime=3
+8488 INFO  (qtp488114078-77-null-76) [n:127.0.0.1:46415_solr t:null-76] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334147} entity={} status=0 QTime=0
+8489 INFO  (qtp488114078-81-null-77) [n:127.0.0.1:46415_solr t:null-77] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334148} entity={} status=0 QTime=1
+8500 INFO  (qtp488114078-79-null-78) [n:127.0.0.1:46415_solr t:null-78] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334158&detailed=true} entity={} status=0 QTime=1
+8502 INFO  (qtp488114078-83-null-79) [n:127.0.0.1:46415_solr t:null-79] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334158} entity={} status=0 QTime=3
+8511 INFO  (qtp488114078-75-null-80) [n:127.0.0.1:46415_solr t:null-80] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334170} entity={} status=0 QTime=0
+8512 INFO  (qtp488114078-77-null-82) [n:127.0.0.1:46415_solr t:null-82] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334172} entity={} status=0 QTime=0
+8513 INFO  (qtp488114078-81-null-83) [n:127.0.0.1:46415_solr t:null-83] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334172} entity={} status=0 QTime=0
+8512 INFO  (qtp488114078-73-null-81) [n:127.0.0.1:46415_solr t:null-81] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334170} entity={} status=0 QTime=2
+8519 INFO  (qtp2102642425-78-null-85) [n:127.0.0.1:43091_solr t:null-85] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913334158} status=0 QTime=2
+8519 INFO  (qtp488114078-81-null-86) [n:127.0.0.1:46415_solr t:null-86] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913334158} status=0 QTime=2
+8520 INFO  (qtp488114078-77-null-84) [n:127.0.0.1:46415_solr t:null-84] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+8520 INFO  (qtp488114078-75-null-86) [n:127.0.0.1:46415_solr t:null-86] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913334158} status=0 QTime=4
+8520 INFO  (qtp488114078-83-null-85) [n:127.0.0.1:46415_solr t:null-85] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913334158} status=0 QTime=5
+8521 INFO  (qtp2102642425-76-null-84) [n:127.0.0.1:43091_solr t:null-84] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+8524 INFO  (qtp488114078-79-null-84) [n:127.0.0.1:46415_solr t:null-84] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334174&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=9
+8529 INFO  (qtp488114078-73-null-87) [n:127.0.0.1:46415_solr t:null-87] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334186} entity={} status=0 QTime=1
+8689 INFO  (qtp488114078-81-null-88) [n:127.0.0.1:46415_solr t:null-88] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334344} entity={} status=0 QTime=4
+8694 INFO  (qtp488114078-83-null-90) [n:127.0.0.1:46415_solr t:null-90] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334353} entity={} status=0 QTime=0
+8695 INFO  (qtp488114078-75-null-89) [n:127.0.0.1:46415_solr t:null-89] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334344} entity={} status=0 QTime=3
+8695 INFO  (qtp488114078-77-null-91) [n:127.0.0.1:46415_solr t:null-91] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334353} entity={} status=0 QTime=1
+8698 INFO  (qtp488114078-79-null-92) [n:127.0.0.1:46415_solr t:null-92] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334357&indexInfo=false} entity={} status=0 QTime=0
+8699 INFO  (qtp488114078-73-null-93) [n:127.0.0.1:46415_solr t:null-93] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334358} entity={} status=0 QTime=1
+8884 INFO  (qtp488114078-75-null-94) [n:127.0.0.1:46415_solr t:null-94] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334539} entity={} status=0 QTime=4
+8893 INFO  (qtp488114078-77-null-96) [n:127.0.0.1:46415_solr t:null-96] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334552} entity={} status=0 QTime=1
+8893 INFO  (qtp488114078-79-null-95) [n:127.0.0.1:46415_solr t:null-95] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334552} entity={} status=0 QTime=1
+8904 INFO  (qtp488114078-81-null-98) [n:127.0.0.1:46415_solr t:null-98] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334562&detailed=true} entity={} status=0 QTime=1
+8905 INFO  (qtp488114078-73-null-97) [n:127.0.0.1:46415_solr t:null-97] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334561} entity={} status=0 QTime=3
+8915 INFO  (qtp488114078-75-null-100) [n:127.0.0.1:46415_solr t:null-100] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334574} entity={} status=0 QTime=0
+8916 INFO  (qtp488114078-79-null-102) [n:127.0.0.1:46415_solr t:null-102] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334575} entity={} status=0 QTime=0
+8916 INFO  (qtp488114078-77-null-101) [n:127.0.0.1:46415_solr t:null-101] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334575} entity={} status=0 QTime=0
+8916 INFO  (qtp488114078-83-null-99) [n:127.0.0.1:46415_solr t:null-99] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334573} entity={} status=0 QTime=2
+8922 INFO  (qtp488114078-83-null-105) [n:127.0.0.1:46415_solr t:null-105] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913334561} status=0 QTime=1
+8922 INFO  (qtp2102642425-82-null-104) [n:127.0.0.1:43091_solr t:null-104] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913334561} status=0 QTime=1
+8923 INFO  (qtp488114078-73-null-104) [n:127.0.0.1:46415_solr t:null-104] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913334561} status=0 QTime=4
+8923 INFO  (qtp488114078-75-null-105) [n:127.0.0.1:46415_solr t:null-105] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913334561} status=0 QTime=3
+8924 INFO  (qtp488114078-77-null-103) [n:127.0.0.1:46415_solr t:null-103] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+8924 INFO  (qtp2102642425-80-null-103) [n:127.0.0.1:43091_solr t:null-103] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+8926 INFO  (qtp488114078-81-null-103) [n:127.0.0.1:46415_solr t:null-103] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334578&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=8
+8933 INFO  (qtp488114078-79-null-106) [n:127.0.0.1:46415_solr t:null-106] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334591} entity={} status=0 QTime=1
+9100 INFO  (qtp488114078-83-null-107) [n:127.0.0.1:46415_solr t:null-107] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334755} entity={} status=0 QTime=4
+9105 INFO  (qtp488114078-77-null-110) [n:127.0.0.1:46415_solr t:null-110] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334763} entity={} status=0 QTime=0
+9105 INFO  (qtp488114078-73-null-109) [n:127.0.0.1:46415_solr t:null-109] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334763} entity={} status=0 QTime=0
+9105 INFO  (qtp488114078-75-null-108) [n:127.0.0.1:46415_solr t:null-108] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334755} entity={} status=0 QTime=3
+9109 INFO  (qtp488114078-81-null-111) [n:127.0.0.1:46415_solr t:null-111] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334768&indexInfo=false} entity={} status=0 QTime=0
+9110 INFO  (qtp488114078-79-null-112) [n:127.0.0.1:46415_solr t:null-112] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334769} entity={} status=0 QTime=1
+9317 INFO  (qtp488114078-83-null-113) [n:127.0.0.1:46415_solr t:null-113] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334972} entity={} status=0 QTime=4
+9322 INFO  (qtp488114078-77-null-115) [n:127.0.0.1:46415_solr t:null-115] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334980} entity={} status=0 QTime=0
+9322 INFO  (qtp488114078-75-null-116) [n:127.0.0.1:46415_solr t:null-116] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334981} entity={} status=0 QTime=0
+9324 INFO  (qtp2102642425-74-null-114) [n:127.0.0.1:43091_solr t:null-114] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334972} entity={} status=0 QTime=3
+9326 INFO  (qtp2102642425-72-null-117) [n:127.0.0.1:43091_solr t:null-117] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334984&indexInfo=false} entity={} status=0 QTime=0
+9327 INFO  (qtp488114078-79-null-118) [n:127.0.0.1:46415_solr t:null-118] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913334985} entity={} status=0 QTime=1
+9410 INFO  (qtp2102642425-78-null-119) [n:127.0.0.1:43091_solr t:null-119] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335066} entity={} status=0 QTime=1
+9410 INFO  (qtp488114078-77-null-120) [n:127.0.0.1:46415_solr t:null-120] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335066} entity={} status=0 QTime=3
+9417 INFO  (qtp488114078-73-null-121) [n:127.0.0.1:46415_solr t:null-121] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335076} entity={} status=0 QTime=0
+9417 INFO  (qtp488114078-81-null-122) [n:127.0.0.1:46415_solr t:null-122] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335076} entity={} status=0 QTime=0
+9493 INFO  (qtp2102642425-76-null-123) [n:127.0.0.1:43091_solr t:null-123] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335150&indexInfo=false} entity={} status=0 QTime=1
+9494 INFO  (qtp488114078-83-null-124) [n:127.0.0.1:46415_solr t:null-124] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335151} entity={} status=0 QTime=1
+9575 INFO  (TEST-AdminUiNodePickerTest.testNodeSelectionSurvivesInAppNavigation-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testNodeSelectionSurvivesInAppNavigation
+9580 INFO  (TEST-AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testRestoredSelectionTargetsInitialCoreMenuRequest
+9599 INFO  (qtp488114078-77-null-125) [n:127.0.0.1:46415_solr t:null-125] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335254} entity={} status=0 QTime=3
+9604 INFO  (qtp488114078-73-null-127) [n:127.0.0.1:46415_solr t:null-127] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335263} entity={} status=0 QTime=0
+9605 INFO  (qtp488114078-83-null-128) [n:127.0.0.1:46415_solr t:null-128] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335264} entity={} status=0 QTime=1
+9606 INFO  (qtp2102642425-82-null-126) [n:127.0.0.1:43091_solr t:null-126] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335254} entity={} status=0 QTime=3
+9609 INFO  (qtp2102642425-80-null-129) [n:127.0.0.1:43091_solr t:null-129] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335267&indexInfo=false} entity={} status=0 QTime=1
+9610 INFO  (qtp488114078-77-null-130) [n:127.0.0.1:46415_solr t:null-130] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335267} entity={} status=0 QTime=2
+9693 INFO  (qtp488114078-81-null-131) [n:127.0.0.1:46415_solr t:null-131] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335349} entity={} status=0 QTime=4
+9698 INFO  (qtp488114078-83-null-132) [n:127.0.0.1:46415_solr t:null-132] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335357} entity={} status=0 QTime=1
+9698 INFO  (qtp488114078-79-null-133) [n:127.0.0.1:46415_solr t:null-133] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335357} entity={} status=0 QTime=1
+9703 INFO  (qtp2102642425-72-null-135) [n:127.0.0.1:43091_solr t:null-135] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335361&indexInfo=false} entity={} status=0 QTime=0
+9705 INFO  (qtp2102642425-74-null-134) [n:127.0.0.1:43091_solr t:null-134] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335361} entity={} status=0 QTime=3
+9707 INFO  (qtp488114078-73-null-136) [n:127.0.0.1:46415_solr t:null-136] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335366} entity={} status=0 QTime=1
+9883 INFO  (qtp488114078-81-null-137) [n:127.0.0.1:46415_solr t:null-137] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335538} entity={} status=0 QTime=4
+9888 INFO  (qtp488114078-83-null-138) [n:127.0.0.1:46415_solr t:null-138] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335538} entity={} status=0 QTime=3
+9891 INFO  (qtp488114078-79-null-139) [n:127.0.0.1:46415_solr t:null-139] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335550} entity={} status=0 QTime=0
+9891 INFO  (qtp488114078-77-null-140) [n:127.0.0.1:46415_solr t:null-140] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335550} entity={} status=0 QTime=0
+9896 INFO  (qtp488114078-73-null-142) [n:127.0.0.1:46415_solr t:null-142] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335556&indexInfo=false} entity={} status=0 QTime=0
+9897 INFO  (qtp488114078-75-null-141) [n:127.0.0.1:46415_solr t:null-141] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335556} entity={} status=0 QTime=1
+10081 INFO  (qtp488114078-77-null-143) [n:127.0.0.1:46415_solr t:null-143] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335736} entity={} status=0 QTime=4
+10086 INFO  (qtp488114078-73-null-145) [n:127.0.0.1:46415_solr t:null-145] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335745} entity={} status=0 QTime=1
+10086 INFO  (qtp488114078-79-null-144) [n:127.0.0.1:46415_solr t:null-144] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335745} entity={} status=0 QTime=1
+10100 INFO  (qtp488114078-81-null-146) [n:127.0.0.1:46415_solr t:null-146] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335758&detailed=true} entity={} status=0 QTime=1
+10102 INFO  (qtp488114078-75-null-147) [n:127.0.0.1:46415_solr t:null-147] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335758} entity={} status=0 QTime=3
+10105 INFO  (qtp488114078-83-null-148) [n:127.0.0.1:46415_solr t:null-148] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335763} entity={} status=0 QTime=1
+10111 INFO  (qtp488114078-77-null-149) [n:127.0.0.1:46415_solr t:null-149] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335770} entity={} status=0 QTime=0
+10112 INFO  (qtp488114078-73-null-150) [n:127.0.0.1:46415_solr t:null-150] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335771} entity={} status=0 QTime=0
+10112 INFO  (qtp488114078-79-null-151) [n:127.0.0.1:46415_solr t:null-151] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335771} entity={} status=0 QTime=0
+10117 INFO  (qtp488114078-79-null-154) [n:127.0.0.1:46415_solr t:null-154] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913335758} status=0 QTime=1
+10117 INFO  (qtp2102642425-78-null-153) [n:127.0.0.1:43091_solr t:null-153] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913335758} status=0 QTime=1
+10118 INFO  (qtp488114078-83-null-153) [n:127.0.0.1:46415_solr t:null-153] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913335758} status=0 QTime=4
+10119 INFO  (qtp488114078-77-null-154) [n:127.0.0.1:46415_solr t:null-154] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913335758} status=0 QTime=4
+10119 INFO  (qtp488114078-73-null-152) [n:127.0.0.1:46415_solr t:null-152] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+10119 INFO  (qtp2102642425-76-null-152) [n:127.0.0.1:43091_solr t:null-152] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=2
+10122 INFO  (qtp488114078-81-null-152) [n:127.0.0.1:46415_solr t:null-152] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335773&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=8
+10125 INFO  (qtp488114078-75-null-155) [n:127.0.0.1:46415_solr t:null-155] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335783} entity={} status=0 QTime=1
+10309 INFO  (qtp488114078-79-null-156) [n:127.0.0.1:46415_solr t:null-156] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335965} entity={} status=0 QTime=3
+10313 INFO  (qtp488114078-83-null-157) [n:127.0.0.1:46415_solr t:null-157] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335965} entity={} status=0 QTime=2
+10315 INFO  (qtp488114078-77-null-158) [n:127.0.0.1:46415_solr t:null-158] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335974} entity={} status=0 QTime=1
+10316 INFO  (qtp488114078-73-null-159) [n:127.0.0.1:46415_solr t:null-159] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335974} entity={} status=0 QTime=0
+10327 INFO  (qtp488114078-81-null-160) [n:127.0.0.1:46415_solr t:null-160] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335986&indexInfo=false} entity={} status=0 QTime=0
+10329 INFO  (qtp488114078-75-null-161) [n:127.0.0.1:46415_solr t:null-161] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913335986} entity={} status=0 QTime=1
+10509 INFO  (qtp488114078-79-null-162) [n:127.0.0.1:46415_solr t:null-162] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336164} entity={} status=0 QTime=4
+10514 INFO  (qtp488114078-73-null-164) [n:127.0.0.1:46415_solr t:null-164] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336173} entity={} status=0 QTime=0
+10514 INFO  (qtp488114078-77-null-165) [n:127.0.0.1:46415_solr t:null-165] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336173} entity={} status=0 QTime=0
+10516 INFO  (qtp2102642425-82-null-163) [n:127.0.0.1:43091_solr t:null-163] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336164} entity={} status=0 QTime=3
+10519 INFO  (qtp2102642425-80-null-166) [n:127.0.0.1:43091_solr t:null-166] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336177&indexInfo=false} entity={} status=0 QTime=0
+10519 INFO  (qtp488114078-75-null-167) [n:127.0.0.1:46415_solr t:null-167] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336177} entity={} status=0 QTime=1
+10632 INFO  (qtp488114078-77-null-168) [n:127.0.0.1:46415_solr t:null-168] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336287} entity={} status=0 QTime=4
+10638 INFO  (qtp488114078-83-null-169) [n:127.0.0.1:46415_solr t:null-169] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336296} entity={} status=0 QTime=0
+10638 INFO  (qtp488114078-75-null-170) [n:127.0.0.1:46415_solr t:null-170] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336296} entity={} status=0 QTime=0
+10643 INFO  (qtp488114078-81-null-171) [n:127.0.0.1:46415_solr t:null-171] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336301} entity={} status=0 QTime=1
+10644 INFO  (qtp2102642425-74-null-172) [n:127.0.0.1:43091_solr t:null-172] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336302&indexInfo=false} entity={} status=0 QTime=0
+10646 INFO  (qtp2102642425-72-null-173) [n:127.0.0.1:43091_solr t:null-173] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336302} entity={} status=0 QTime=3
+10673 INFO  (TEST-AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testRestoredSelectionTargetsInitialCoreMenuRequest
+10678 INFO  (TEST-AdminUiNodePickerTest.testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload
+10783 INFO  (qtp488114078-83-null-174) [n:127.0.0.1:46415_solr t:null-174] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336440} entity={} status=0 QTime=3
+10789 INFO  (qtp488114078-79-null-175) [n:127.0.0.1:46415_solr t:null-175] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336448} entity={} status=0 QTime=1
+10789 INFO  (qtp488114078-81-null-176) [n:127.0.0.1:46415_solr t:null-176] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336447} entity={} status=0 QTime=1
+10794 INFO  (qtp2102642425-78-null-178) [n:127.0.0.1:43091_solr t:null-178] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336451&indexInfo=false} entity={} status=0 QTime=0
+10796 INFO  (qtp2102642425-76-null-177) [n:127.0.0.1:43091_solr t:null-177] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336452} entity={} status=0 QTime=3
+10797 INFO  (qtp488114078-75-null-179) [n:127.0.0.1:46415_solr t:null-179] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336456} entity={} status=0 QTime=1
+10971 INFO  (qtp488114078-83-null-180) [n:127.0.0.1:46415_solr t:null-180] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336627} entity={} status=0 QTime=3
+10976 INFO  (qtp488114078-79-null-182) [n:127.0.0.1:46415_solr t:null-182] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336635} entity={} status=0 QTime=0
+10976 INFO  (qtp488114078-73-null-183) [n:127.0.0.1:46415_solr t:null-183] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336635} entity={} status=0 QTime=0
+10977 INFO  (qtp488114078-81-null-181) [n:127.0.0.1:46415_solr t:null-181] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336627} entity={} status=0 QTime=3
+10979 INFO  (qtp488114078-75-null-184) [n:127.0.0.1:46415_solr t:null-184] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336639&indexInfo=false} entity={} status=0 QTime=0
+10981 INFO  (qtp488114078-77-null-185) [n:127.0.0.1:46415_solr t:null-185] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336640} entity={} status=0 QTime=1
+11165 INFO  (qtp488114078-79-null-186) [n:127.0.0.1:46415_solr t:null-186] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336819} entity={} status=0 QTime=4
+11177 INFO  (qtp488114078-81-null-187) [n:127.0.0.1:46415_solr t:null-187] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336835} entity={} status=0 QTime=1
+11177 INFO  (qtp488114078-75-null-188) [n:127.0.0.1:46415_solr t:null-188] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336835} entity={} status=0 QTime=1
+11188 INFO  (qtp488114078-83-null-189) [n:127.0.0.1:46415_solr t:null-189] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336846&detailed=true} entity={} status=0 QTime=1
+11190 INFO  (qtp488114078-77-null-190) [n:127.0.0.1:46415_solr t:null-190] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336846} entity={} status=0 QTime=3
+11200 INFO  (qtp488114078-73-null-191) [n:127.0.0.1:46415_solr t:null-191] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336858} entity={} status=0 QTime=1
+11201 INFO  (qtp488114078-79-null-192) [n:127.0.0.1:46415_solr t:null-192] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336860} entity={} status=0 QTime=0
+11203 INFO  (qtp488114078-75-null-193) [n:127.0.0.1:46415_solr t:null-193] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336861} entity={} status=0 QTime=0
+11203 INFO  (qtp488114078-81-null-194) [n:127.0.0.1:46415_solr t:null-194] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336861} entity={} status=0 QTime=0
+11210 INFO  (qtp2102642425-82-null-196) [n:127.0.0.1:43091_solr t:null-196] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913336846} status=0 QTime=1
+11210 INFO  (qtp488114078-81-null-197) [n:127.0.0.1:46415_solr t:null-197] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913336846} status=0 QTime=1
+11211 INFO  (qtp488114078-73-null-197) [n:127.0.0.1:46415_solr t:null-197] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913336846} status=0 QTime=4
+11211 INFO  (qtp488114078-79-null-195) [n:127.0.0.1:46415_solr t:null-195] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=4
+11212 INFO  (qtp2102642425-80-null-195) [n:127.0.0.1:43091_solr t:null-195] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+11212 INFO  (qtp488114078-77-null-196) [n:127.0.0.1:46415_solr t:null-196] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913336846} status=0 QTime=5
+11216 INFO  (qtp488114078-83-null-195) [n:127.0.0.1:46415_solr t:null-195] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336865&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=10
+11216 INFO  (qtp488114078-75-null-198) [n:127.0.0.1:46415_solr t:null-198] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913336873} entity={} status=0 QTime=1
+11399 INFO  (qtp488114078-81-null-200) [n:127.0.0.1:46415_solr t:null-200] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337053} entity={} status=0 QTime=4
+11400 INFO  (qtp488114078-73-null-199) [n:127.0.0.1:46415_solr t:null-199] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337054} entity={} status=0 QTime=5
+11405 INFO  (qtp488114078-79-null-202) [n:127.0.0.1:46415_solr t:null-202] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337064} entity={} status=0 QTime=0
+11406 INFO  (qtp488114078-77-null-201) [n:127.0.0.1:46415_solr t:null-201] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337064} entity={} status=0 QTime=1
+11416 INFO  (qtp488114078-75-null-204) [n:127.0.0.1:46415_solr t:null-204] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337075&indexInfo=false} entity={} status=0 QTime=0
+11416 INFO  (qtp488114078-83-null-203) [n:127.0.0.1:46415_solr t:null-203] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337074} entity={} status=0 QTime=1
+11630 INFO  (qtp488114078-73-null-205) [n:127.0.0.1:46415_solr t:null-205] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337286} entity={} status=0 QTime=3
+11635 INFO  (qtp488114078-79-null-208) [n:127.0.0.1:46415_solr t:null-208] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337294} entity={} status=0 QTime=0
+11635 INFO  (qtp488114078-77-null-207) [n:127.0.0.1:46415_solr t:null-207] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337294} entity={} status=0 QTime=0
+11637 INFO  (qtp2102642425-74-null-206) [n:127.0.0.1:43091_solr t:null-206] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337286} entity={} status=0 QTime=3
+11639 INFO  (qtp488114078-83-null-210) [n:127.0.0.1:46415_solr t:null-210] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337298} entity={} status=0 QTime=1
+11639 INFO  (qtp2102642425-72-null-209) [n:127.0.0.1:43091_solr t:null-209] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337297&indexInfo=false} entity={} status=0 QTime=0
+11781 INFO  (qtp488114078-77-null-211) [n:127.0.0.1:46415_solr t:null-211] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337436} entity={} status=0 QTime=4
+11786 INFO  (qtp488114078-81-null-213) [n:127.0.0.1:46415_solr t:null-213] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337444} entity={} status=0 QTime=1
+11786 INFO  (qtp488114078-83-null-212) [n:127.0.0.1:46415_solr t:null-212] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337445} entity={} status=0 QTime=1
+11795 INFO  (qtp488114078-75-null-214) [n:127.0.0.1:46415_solr t:null-214] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337453} entity={} status=0 QTime=1
+11795 INFO  (qtp2102642425-78-null-215) [n:127.0.0.1:43091_solr t:null-215] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337453&indexInfo=false} entity={} status=0 QTime=0
+11799 INFO  (qtp2102642425-76-null-216) [n:127.0.0.1:43091_solr t:null-216] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337454} entity={} status=0 QTime=3
+11862 INFO  (TEST-AdminUiNodePickerTest.testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload
+11866 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testCoreMenuKeepsNewestRefreshForSameNode
+11978 INFO  (qtp488114078-83-null-217) [n:127.0.0.1:46415_solr t:null-217] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337634} entity={} status=0 QTime=3
+11983 INFO  (qtp488114078-75-null-218) [n:127.0.0.1:46415_solr t:null-218] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337642} entity={} status=0 QTime=0
+11983 INFO  (qtp488114078-73-null-219) [n:127.0.0.1:46415_solr t:null-219] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337642} entity={} status=0 QTime=0
+11988 INFO  (qtp2102642425-82-null-220) [n:127.0.0.1:43091_solr t:null-220] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337646&indexInfo=false} entity={} status=0 QTime=0
+11991 INFO  (qtp2102642425-80-null-221) [n:127.0.0.1:43091_solr t:null-221] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337646} entity={} status=0 QTime=3
+11992 INFO  (qtp488114078-81-null-222) [n:127.0.0.1:46415_solr t:null-222] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337650} entity={} status=0 QTime=1
+12176 INFO  (qtp488114078-75-null-224) [n:127.0.0.1:46415_solr t:null-224] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337832} entity={} status=0 QTime=3
+12176 INFO  (qtp488114078-83-null-223) [n:127.0.0.1:46415_solr t:null-223] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337831} entity={} status=0 QTime=4
+12182 INFO  (qtp488114078-73-null-225) [n:127.0.0.1:46415_solr t:null-225] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337840} entity={} status=0 QTime=0
+12182 INFO  (qtp488114078-79-null-226) [n:127.0.0.1:46415_solr t:null-226] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337841} entity={} status=0 QTime=1
+12187 INFO  (qtp488114078-81-null-227) [n:127.0.0.1:46415_solr t:null-227] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337846&indexInfo=false} entity={} status=0 QTime=0
+12194 INFO  (qtp488114078-77-null-228) [n:127.0.0.1:46415_solr t:null-228] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913337851} entity={} status=0 QTime=2
+12395 INFO  (qtp488114078-73-null-229) [n:127.0.0.1:46415_solr t:null-229] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338050} entity={} status=0 QTime=3
+12401 INFO  (qtp488114078-79-null-230) [n:127.0.0.1:46415_solr t:null-230] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338059} entity={} status=0 QTime=1
+12401 INFO  (qtp488114078-81-null-231) [n:127.0.0.1:46415_solr t:null-231] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338059} entity={} status=0 QTime=1
+12413 INFO  (qtp488114078-83-null-233) [n:127.0.0.1:46415_solr t:null-233] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338070&detailed=true} entity={} status=0 QTime=2
+12414 INFO  (qtp488114078-77-null-232) [n:127.0.0.1:46415_solr t:null-232] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338070} entity={} status=0 QTime=3
+12424 INFO  (qtp488114078-73-null-235) [n:127.0.0.1:46415_solr t:null-235] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338084} entity={} status=0 QTime=0
+12425 INFO  (qtp488114078-75-null-234) [n:127.0.0.1:46415_solr t:null-234] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338083} entity={} status=0 QTime=1
+12427 INFO  (qtp488114078-81-null-237) [n:127.0.0.1:46415_solr t:null-237] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338086} entity={} status=0 QTime=0
+12427 INFO  (qtp488114078-79-null-236) [n:127.0.0.1:46415_solr t:null-236] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338086} entity={} status=0 QTime=0
+12431 INFO  (qtp2102642425-74-null-239) [n:127.0.0.1:43091_solr t:null-239] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913338070} status=0 QTime=2
+12431 INFO  (qtp488114078-77-null-240) [n:127.0.0.1:46415_solr t:null-240] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913338070} status=0 QTime=1
+12432 INFO  (qtp488114078-73-null-238) [n:127.0.0.1:46415_solr t:null-238] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+12432 INFO  (qtp2102642425-72-null-238) [n:127.0.0.1:43091_solr t:null-238] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=2
+12432 INFO  (qtp488114078-79-null-240) [n:127.0.0.1:46415_solr t:null-240] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913338070} status=0 QTime=3
+12432 INFO  (qtp488114078-81-null-239) [n:127.0.0.1:46415_solr t:null-239] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913338070} status=0 QTime=4
+12434 INFO  (qtp488114078-83-null-238) [n:127.0.0.1:46415_solr t:null-238] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338087&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=7
+12437 INFO  (qtp488114078-75-null-241) [n:127.0.0.1:46415_solr t:null-241] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338095} entity={} status=0 QTime=1
+12593 INFO  (qtp488114078-79-null-242) [n:127.0.0.1:46415_solr t:null-242] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338249} entity={} status=0 QTime=4
+12593 INFO  (qtp488114078-77-null-243) [n:127.0.0.1:46415_solr t:null-243] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338248} entity={} status=0 QTime=4
+12598 INFO  (qtp488114078-73-null-245) [n:127.0.0.1:46415_solr t:null-245] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338257} entity={} status=0 QTime=0
+12598 INFO  (qtp488114078-81-null-244) [n:127.0.0.1:46415_solr t:null-244] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338257} entity={} status=0 QTime=0
+12603 INFO  (qtp488114078-83-null-246) [n:127.0.0.1:46415_solr t:null-246] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338262&indexInfo=false} entity={} status=0 QTime=0
+12604 INFO  (qtp488114078-75-null-247) [n:127.0.0.1:46415_solr t:null-247] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338263} entity={} status=0 QTime=1
+12817 INFO  (qtp2102642425-78-null-249) [n:127.0.0.1:43091_solr t:null-249] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338470} entity={} status=0 QTime=3
+12817 INFO  (qtp488114078-77-null-248) [n:127.0.0.1:46415_solr t:null-248] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338469} entity={} status=0 QTime=6
+12827 INFO  (qtp488114078-73-null-250) [n:127.0.0.1:46415_solr t:null-250] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338486} entity={} status=0 QTime=1
+12827 INFO  (qtp488114078-81-null-251) [n:127.0.0.1:46415_solr t:null-251] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338485} entity={} status=0 QTime=1
+12834 INFO  (qtp488114078-75-null-253) [n:127.0.0.1:46415_solr t:null-253] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338493} entity={} status=0 QTime=1
+12834 INFO  (qtp2102642425-76-null-252) [n:127.0.0.1:43091_solr t:null-252] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338492&indexInfo=false} entity={} status=0 QTime=0
+12856 INFO  (qtp488114078-77-null-254) [n:127.0.0.1:46415_solr t:null-254] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338512} entity={} status=0 QTime=3
+12861 INFO  (qtp488114078-81-null-256) [n:127.0.0.1:46415_solr t:null-256] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338520} entity={} status=0 QTime=0
+12861 INFO  (qtp488114078-79-null-255) [n:127.0.0.1:46415_solr t:null-255] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338519} entity={} status=0 QTime=0
+12864 INFO  (qtp488114078-73-null-257) [n:127.0.0.1:46415_solr t:null-257] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338523} entity={} status=0 QTime=1
+12865 INFO  (qtp2102642425-82-null-258) [n:127.0.0.1:43091_solr t:null-258] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338523&indexInfo=false} entity={} status=0 QTime=0
+13122 INFO  (qtp488114078-83-null-259) [n:127.0.0.1:46415_solr t:null-259] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338778} entity={} status=0 QTime=4
+13127 INFO  (qtp488114078-81-null-261) [n:127.0.0.1:46415_solr t:null-261] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338786} entity={} status=0 QTime=0
+13127 INFO  (qtp488114078-77-null-260) [n:127.0.0.1:46415_solr t:null-260] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338785} entity={} status=0 QTime=0
+13131 INFO  (qtp488114078-73-null-263) [n:127.0.0.1:46415_solr t:null-263] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338790} entity={} status=0 QTime=1
+13131 INFO  (qtp2102642425-80-null-262) [n:127.0.0.1:43091_solr t:null-262] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913338789&indexInfo=false} entity={} status=0 QTime=0
+13410 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testCoreMenuKeepsNewestRefreshForSameNode
+13416 INFO  (TEST-AdminUiNodePickerTest.testLoggingLevelsHidesNodeBadge-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testLoggingLevelsHidesNodeBadge
+13532 INFO  (qtp488114078-77-null-264) [n:127.0.0.1:46415_solr t:null-264] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339187} entity={} status=0 QTime=4
+13537 INFO  (qtp488114078-73-null-265) [n:127.0.0.1:46415_solr t:null-265] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339196} entity={} status=0 QTime=0
+13537 INFO  (qtp488114078-81-null-266) [n:127.0.0.1:46415_solr t:null-266] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339195} entity={} status=0 QTime=0
+13544 INFO  (qtp488114078-79-null-267) [n:127.0.0.1:46415_solr t:null-267] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339202} entity={} status=0 QTime=1
+13545 INFO  (qtp2102642425-72-null-268) [n:127.0.0.1:43091_solr t:null-268] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339202&indexInfo=false} entity={} status=0 QTime=0
+13548 INFO  (qtp2102642425-74-null-269) [n:127.0.0.1:43091_solr t:null-269] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339203} entity={} status=0 QTime=3
+13714 INFO  (qtp488114078-77-null-270) [n:127.0.0.1:46415_solr t:null-270] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339368} entity={} status=0 QTime=4
+13714 INFO  (qtp488114078-81-null-271) [n:127.0.0.1:46415_solr t:null-271] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339369} entity={} status=0 QTime=4
+13719 INFO  (qtp488114078-79-null-272) [n:127.0.0.1:46415_solr t:null-272] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339378} entity={} status=0 QTime=0
+13719 INFO  (qtp488114078-73-null-273) [n:127.0.0.1:46415_solr t:null-273] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339378} entity={} status=0 QTime=0
+13728 INFO  (qtp488114078-83-null-275) [n:127.0.0.1:46415_solr t:null-275] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339387&indexInfo=false} entity={} status=0 QTime=0
+13729 INFO  (qtp488114078-75-null-274) [n:127.0.0.1:46415_solr t:null-274] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339387} entity={} status=0 QTime=1
+13903 INFO  (qtp488114078-79-null-276) [n:127.0.0.1:46415_solr t:null-276] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339559} entity={} status=0 QTime=3
+13907 INFO  (qtp488114078-83-null-278) [n:127.0.0.1:46415_solr t:null-278] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339566} entity={} status=0 QTime=0
+13907 INFO  (qtp488114078-73-null-277) [n:127.0.0.1:46415_solr t:null-277] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339566} entity={} status=0 QTime=0
+13917 INFO  (qtp488114078-77-null-279) [n:127.0.0.1:46415_solr t:null-279] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339575&detailed=true} entity={} status=0 QTime=1
+13918 INFO  (qtp488114078-75-null-280) [n:127.0.0.1:46415_solr t:null-280] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339575} entity={} status=0 QTime=3
+13929 INFO  (qtp488114078-79-null-282) [n:127.0.0.1:46415_solr t:null-282] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339588} entity={} status=0 QTime=0
+13930 INFO  (qtp488114078-81-null-281) [n:127.0.0.1:46415_solr t:null-281] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339588} entity={} status=0 QTime=1
+13930 INFO  (qtp488114078-73-null-283) [n:127.0.0.1:46415_solr t:null-283] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339590} entity={} status=0 QTime=0
+13931 INFO  (qtp488114078-83-null-284) [n:127.0.0.1:46415_solr t:null-284] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339590} entity={} status=0 QTime=0
+13937 INFO  (qtp2102642425-78-null-286) [n:127.0.0.1:43091_solr t:null-286] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913339575} status=0 QTime=2
+13937 INFO  (qtp488114078-73-null-287) [n:127.0.0.1:46415_solr t:null-287] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913339575} status=0 QTime=2
+13937 INFO  (qtp488114078-81-null-285) [n:127.0.0.1:46415_solr t:null-285] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+13938 INFO  (qtp2102642425-76-null-285) [n:127.0.0.1:43091_solr t:null-285] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=2
+13938 INFO  (qtp488114078-79-null-287) [n:127.0.0.1:46415_solr t:null-287] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913339575} status=0 QTime=4
+13938 INFO  (qtp488114078-75-null-286) [n:127.0.0.1:46415_solr t:null-286] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913339575} status=0 QTime=5
+13940 INFO  (qtp488114078-77-null-285) [n:127.0.0.1:46415_solr t:null-285] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339593&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=7
+13948 INFO  (qtp488114078-83-null-288) [n:127.0.0.1:46415_solr t:null-288] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339606} entity={} status=0 QTime=1
+14101 INFO  (qtp488114078-73-null-289) [n:127.0.0.1:46415_solr t:null-289] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339757} entity={} status=0 QTime=3
+14106 INFO  (qtp488114078-75-null-291) [n:127.0.0.1:46415_solr t:null-291] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339765} entity={} status=0 QTime=0
+14106 INFO  (qtp488114078-81-null-292) [n:127.0.0.1:46415_solr t:null-292] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339765} entity={} status=0 QTime=0
+14107 INFO  (qtp488114078-79-null-290) [n:127.0.0.1:46415_solr t:null-290] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339757} entity={} status=0 QTime=3
+14109 INFO  (qtp488114078-77-null-293) [n:127.0.0.1:46415_solr t:null-293] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339768&indexInfo=false} entity={} status=0 QTime=0
+14110 INFO  (qtp488114078-83-null-294) [n:127.0.0.1:46415_solr t:null-294] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339769} entity={} status=0 QTime=1
+14297 INFO  (qtp488114078-73-null-295) [n:127.0.0.1:46415_solr t:null-295] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339953} entity={} status=0 QTime=3
+14301 INFO  (qtp488114078-79-null-298) [n:127.0.0.1:46415_solr t:null-298] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339961} entity={} status=0 QTime=0
+14301 INFO  (qtp488114078-81-null-297) [n:127.0.0.1:46415_solr t:null-297] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339961} entity={} status=0 QTime=0
+14303 INFO  (qtp2102642425-82-null-296) [n:127.0.0.1:43091_solr t:null-296] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339953} entity={} status=0 QTime=3
+14306 INFO  (qtp488114078-83-null-300) [n:127.0.0.1:46415_solr t:null-300] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339964} entity={} status=0 QTime=1
+14306 INFO  (qtp2102642425-80-null-299) [n:127.0.0.1:43091_solr t:null-299] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913339964&indexInfo=false} entity={} status=0 QTime=0
+14379 INFO  (qtp488114078-81-null-301) [n:127.0.0.1:46415_solr t:null-301] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340034} entity={} status=0 QTime=4
+14380 INFO  (qtp2102642425-72-null-302) [n:127.0.0.1:43091_solr t:null-302] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340035&since=0} entity={} status=0 QTime=3
+14389 INFO  (qtp488114078-75-null-303) [n:127.0.0.1:46415_solr t:null-303] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340048} entity={} status=0 QTime=0
+14390 INFO  (qtp488114078-83-null-304) [n:127.0.0.1:46415_solr t:null-304] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340049} entity={} status=0 QTime=0
+14412 INFO  (qtp2102642425-74-null-306) [n:127.0.0.1:43091_solr t:null-306] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340069&indexInfo=false} entity={} status=0 QTime=0
+14412 INFO  (qtp488114078-81-null-305) [n:127.0.0.1:46415_solr t:null-305] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340070} entity={} status=0 QTime=1
+14481 INFO  (qtp488114078-77-null-307) [n:127.0.0.1:46415_solr t:null-307] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340137} entity={} status=0 QTime=3
+14483 INFO  (qtp488114078-75-null-308) [n:127.0.0.1:46415_solr t:null-308] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340137} entity={} status=0 QTime=5
+14484 INFO  (qtp488114078-83-null-309) [n:127.0.0.1:46415_solr t:null-309] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340144} entity={} status=0 QTime=0
+14484 INFO  (qtp488114078-81-null-310) [n:127.0.0.1:46415_solr t:null-310] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340144} entity={} status=0 QTime=0
+14488 INFO  (qtp488114078-79-null-312) [n:127.0.0.1:46415_solr t:null-312] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340147} entity={} status=0 QTime=1
+14489 INFO  (qtp2102642425-78-null-311) [n:127.0.0.1:43091_solr t:null-311] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913340147&indexInfo=false} entity={} status=0 QTime=0
+15429 INFO  (TEST-AdminUiNodePickerTest.testLoggingLevelsHidesNodeBadge-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testLoggingLevelsHidesNodeBadge
+15434 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testCoreMenuIgnoresLateResponseFromPreviousNode
+15494 INFO  (qtp488114078-83-null-313) [n:127.0.0.1:46415_solr t:null-313] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341149} entity={} status=0 QTime=3
+15494 INFO  (qtp2102642425-76-null-314) [n:127.0.0.1:43091_solr t:null-314] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341150} entity={} status=0 QTime=2
+15499 INFO  (qtp488114078-75-null-316) [n:127.0.0.1:46415_solr t:null-316] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341158} entity={} status=0 QTime=0
+15499 INFO  (qtp488114078-79-null-315) [n:127.0.0.1:46415_solr t:null-315] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341158} entity={} status=0 QTime=0
+15595 INFO  (qtp488114078-83-null-317) [n:127.0.0.1:46415_solr t:null-317] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341251} entity={} status=0 QTime=3
+15600 INFO  (qtp488114078-75-null-319) [n:127.0.0.1:46415_solr t:null-319] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341259} entity={} status=0 QTime=0
+15600 INFO  (qtp488114078-81-null-318) [n:127.0.0.1:46415_solr t:null-318] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341259} entity={} status=0 QTime=0
+15603 INFO  (qtp488114078-79-null-320) [n:127.0.0.1:46415_solr t:null-320] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341262} entity={} status=0 QTime=1
+15604 INFO  (qtp2102642425-80-null-322) [n:127.0.0.1:43091_solr t:null-322] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341263&indexInfo=false} entity={} status=0 QTime=0
+15606 INFO  (qtp2102642425-82-null-321) [n:127.0.0.1:43091_solr t:null-321] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341263} entity={} status=0 QTime=2
+15775 INFO  (qtp488114078-83-null-323) [n:127.0.0.1:46415_solr t:null-323] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341431} entity={} status=0 QTime=3
+15782 INFO  (qtp488114078-75-null-325) [n:127.0.0.1:46415_solr t:null-325] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341441} entity={} status=0 QTime=0
+15782 INFO  (qtp488114078-79-null-326) [n:127.0.0.1:46415_solr t:null-326] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341441} entity={} status=0 QTime=0
+15782 INFO  (qtp488114078-81-null-324) [n:127.0.0.1:46415_solr t:null-324] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341431} entity={} status=0 QTime=3
+15785 INFO  (qtp488114078-77-null-328) [n:127.0.0.1:46415_solr t:null-328] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341444&indexInfo=false} entity={} status=0 QTime=0
+15785 INFO  (qtp488114078-73-null-327) [n:127.0.0.1:46415_solr t:null-327] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341444} entity={} status=0 QTime=1
+15973 INFO  (qtp488114078-75-null-329) [n:127.0.0.1:46415_solr t:null-329] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341629} entity={} status=0 QTime=3
+15978 INFO  (qtp488114078-77-null-330) [n:127.0.0.1:46415_solr t:null-330] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341638} entity={} status=0 QTime=0
+15978 INFO  (qtp488114078-81-null-331) [n:127.0.0.1:46415_solr t:null-331] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341637} entity={} status=0 QTime=0
+15992 INFO  (qtp488114078-83-null-333) [n:127.0.0.1:46415_solr t:null-333] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341649&detailed=true} entity={} status=0 QTime=1
+15993 INFO  (qtp488114078-73-null-332) [n:127.0.0.1:46415_solr t:null-332] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341649} entity={} status=0 QTime=3
+15996 INFO  (qtp488114078-79-null-334) [n:127.0.0.1:46415_solr t:null-334] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341654} entity={} status=0 QTime=1
+16004 INFO  (qtp488114078-77-null-336) [n:127.0.0.1:46415_solr t:null-336] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341664} entity={} status=0 QTime=0
+16004 INFO  (qtp488114078-81-null-337) [n:127.0.0.1:46415_solr t:null-337] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341664} entity={} status=0 QTime=0
+16004 INFO  (qtp488114078-75-null-335) [n:127.0.0.1:46415_solr t:null-335] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341663} entity={} status=0 QTime=0
+16009 INFO  (qtp488114078-83-null-338) [n:127.0.0.1:46415_solr t:null-338] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341667} entity={} status=0 QTime=1
+16012 INFO  (qtp2102642425-72-null-340) [n:127.0.0.1:43091_solr t:null-340] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913341649} status=0 QTime=2
+16013 INFO  (qtp488114078-81-null-341) [n:127.0.0.1:46415_solr t:null-341] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913341649} status=0 QTime=1
+16013 INFO  (qtp488114078-79-null-340) [n:127.0.0.1:46415_solr t:null-340] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:43091_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913341649} status=0 QTime=4
+16013 INFO  (qtp488114078-75-null-339) [n:127.0.0.1:46415_solr t:null-339] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+16013 INFO  (qtp2102642425-74-null-339) [n:127.0.0.1:43091_solr t:null-339] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+16014 INFO  (qtp488114078-77-null-341) [n:127.0.0.1:46415_solr t:null-341] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:46415_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913341649} status=0 QTime=3
+16016 INFO  (qtp488114078-73-null-339) [n:127.0.0.1:46415_solr t:null-339] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341668&nodes=127.0.0.1:43091_solr,127.0.0.1:46415_solr} entity={} status=0 QTime=7
+16178 INFO  (qtp488114078-83-null-342) [n:127.0.0.1:46415_solr t:null-342] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341834} entity={} status=0 QTime=3
+16183 INFO  (qtp488114078-79-null-344) [n:127.0.0.1:46415_solr t:null-344] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341842} entity={} status=0 QTime=0
+16183 INFO  (qtp488114078-77-null-345) [n:127.0.0.1:46415_solr t:null-345] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341842} entity={} status=0 QTime=0
+16184 INFO  (qtp488114078-81-null-343) [n:127.0.0.1:46415_solr t:null-343] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341834} entity={} status=0 QTime=3
+16186 INFO  (qtp488114078-73-null-347) [n:127.0.0.1:46415_solr t:null-347] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341846&indexInfo=false} entity={} status=0 QTime=0
+16187 INFO  (qtp488114078-75-null-346) [n:127.0.0.1:46415_solr t:null-346] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913341845} entity={} status=0 QTime=1
+16365 INFO  (qtp488114078-83-null-348) [n:127.0.0.1:46415_solr t:null-348] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342021} entity={} status=0 QTime=3
+16373 INFO  (qtp2102642425-78-null-349) [n:127.0.0.1:43091_solr t:null-349] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342021} entity={} status=0 QTime=3
+16374 INFO  (qtp488114078-79-null-350) [n:127.0.0.1:46415_solr t:null-350] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342033} entity={} status=0 QTime=0
+16374 INFO  (qtp488114078-81-null-351) [n:127.0.0.1:46415_solr t:null-351] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342033} entity={} status=0 QTime=0
+16380 INFO  (qtp2102642425-76-null-352) [n:127.0.0.1:43091_solr t:null-352] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342037&indexInfo=false} entity={} status=0 QTime=0
+16380 INFO  (qtp488114078-75-null-353) [n:127.0.0.1:46415_solr t:null-353] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342038} entity={} status=0 QTime=1
+16407 INFO  (qtp488114078-83-null-354) [n:127.0.0.1:46415_solr t:null-354] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342061} entity={} status=0 QTime=4
+16412 INFO  (qtp488114078-81-null-356) [n:127.0.0.1:46415_solr t:null-356] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342070} entity={} status=0 QTime=1
+16412 INFO  (qtp488114078-79-null-355) [n:127.0.0.1:46415_solr t:null-355] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342070} entity={} status=0 QTime=1
+16417 INFO  (qtp2102642425-80-null-357) [n:127.0.0.1:43091_solr t:null-357] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342075&indexInfo=false} entity={} status=0 QTime=0
+16417 INFO  (qtp488114078-75-null-358) [n:127.0.0.1:46415_solr t:null-358] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342075} entity={} status=0 QTime=1
+16781 INFO  (qtp488114078-83-null-359) [n:127.0.0.1:46415_solr t:null-359] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342437} entity={} status=0 QTime=3
+16782 INFO  (qtp488114078-73-null-360) [n:127.0.0.1:46415_solr t:null-360] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342436} entity={} status=0 QTime=4
+16795 INFO  (qtp488114078-79-null-362) [n:127.0.0.1:46415_solr t:null-362] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342453} entity={} status=0 QTime=0
+16795 INFO  (qtp488114078-81-null-361) [n:127.0.0.1:46415_solr t:null-361] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342453} entity={} status=0 QTime=0
+16798 INFO  (qtp488114078-75-null-363) [n:127.0.0.1:46415_solr t:null-363] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342458&indexInfo=false} entity={} status=0 QTime=0
+16799 INFO  (qtp488114078-77-null-364) [n:127.0.0.1:46415_solr t:null-364] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913342458} entity={} status=0 QTime=1
+16848 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testCoreMenuIgnoresLateResponseFromPreviousNode
+16933 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+17040 INFO  (jetty-closer-62-thread-2) [] o.e.j.s.Server Stopped oejs.Server@794007c1{STOPPING}[12.1.14,sto=0]
+17040 INFO  (jetty-closer-62-thread-1) [] o.e.j.s.Server Stopped oejs.Server@283196db{STOPPING}[12.1.14,sto=0]
+17043 INFO  (jetty-closer-62-thread-2) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@24e9a51d{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+17043 INFO  (jetty-closer-62-thread-1) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@176bea58{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+17045 INFO  (jetty-closer-62-thread-1) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=244982964
+17045 INFO  (jetty-closer-62-thread-2) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=850840355
+17045 INFO  (jetty-closer-62-thread-2) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:43091_solr
+17045 INFO  (jetty-closer-62-thread-1) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:46415_solr
+17048 INFO  (zkCallback-40-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+17048 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+17050 INFO  (jetty-closer-62-thread-2) [] o.a.s.c.ZkController Publish this node as DOWN...
+17050 INFO  (jetty-closer-62-thread-2) [] o.a.s.c.ZkController Publish node=127.0.0.1:43091_solr as DOWN
+17050 INFO  (jetty-closer-62-thread-1) [] o.a.s.c.ZkController Publish this node as DOWN...
+17050 INFO  (jetty-closer-62-thread-1) [] o.a.s.c.ZkController Publish node=127.0.0.1:46415_solr as DOWN
+17056 INFO  (closeThreadPool-68-thread-1) [] o.a.s.c.Overseer Overseer (id=72072508236169223-127.0.0.1:43091_solr-n_0000000000) closing
+Nov 06, 2026 7:15:42 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+17057 INFO  (OverseerStateUpdate-72072508236169223-127.0.0.1:43091_solr-n_0000000000) [n:127.0.0.1:43091_solr] o.a.s.c.Overseer Overseer Loop exiting : 127.0.0.1:43091_solr
+Nov 06, 2026 7:15:42 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+17058 INFO  (closeThreadPool-68-thread-2) [] o.a.s.c.Overseer Overseer (id=72072508236169223-127.0.0.1:43091_solr-n_0000000000) closing
+17058 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+17058 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+17160 INFO  (jetty-closer-62-thread-2) [] o.a.s.c.Overseer Overseer (id=72072508236169223-127.0.0.1:43091_solr-n_0000000000) closing
+17164 INFO  (jetty-closer-62-thread-2) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@68768d38{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@3bbbd889{STOPPED}}
+17164 INFO  (jetty-closer-62-thread-1) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@55cb0aff{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@6bd6c1a7{STOPPED}}
+17165 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.c.ZkTestServer Shutting down ZkTestServer.
+17165 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+17267 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+17371 WARN  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Watch limit violations: 
+Maximum concurrent create/delete watches above limit:
+
+	3	/solr/aliases.json
+	3	/solr/clusterprops.json
+	2	/solr/packages.json
+	2	/solr/security.json
+
+Maximum concurrent data watches above limit:
+
+	20	/zookeeper/config
+
+Maximum concurrent children watches above limit:
+
+	9	/solr/live_nodes
+	3	/solr/overseer/queue
+	3	/solr/collections
+
+17386 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+]]></system-err>
+</testsuite>

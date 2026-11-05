@@ -1,0 +1,9 @@
+created_utc=2026-11-05T21:25:18Z
+head=b0e096ae19ad637107227e1bc04e951b9023a680
+p_head=6b5d830132b941faa85856347099ade8b190be0e
+candidate_test_path=solr/webapp/src/test/org/apache/solr/webapp/AdminUiNodePickerTest.java
+candidate_test_blob=d1ec6d38d0b5eb0e4fff712b17b9e1c8ebd54ee0
+candidate_test_sha256=9fcbf636a249528c636d4cda046eaf8a651a4042fae208a6254ff494423e9a8c
+candidate_appjs_blob=d23e89b33a13eac833872a57f1b9d8ce10e82dea
+restored_p_appjs_blob=aabe50a0c8eede83bac329296a629ff5a276b2eb
+tracked_status= M solr/webapp/web/js/angular/app.js

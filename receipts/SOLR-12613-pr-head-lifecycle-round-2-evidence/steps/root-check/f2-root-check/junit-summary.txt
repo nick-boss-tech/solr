@@ -1,0 +1,6 @@
+xml_files=0
+testcases=0
+tests=0
+failures=0
+errors=0
+skipped=0

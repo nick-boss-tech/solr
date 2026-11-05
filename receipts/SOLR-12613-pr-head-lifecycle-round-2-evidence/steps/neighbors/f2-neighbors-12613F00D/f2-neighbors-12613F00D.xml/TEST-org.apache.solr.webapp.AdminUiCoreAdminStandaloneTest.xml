@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-05T21:23:14.181Z" hostname="0609f7968656" time="9.377">
+  <properties/>
+  <testcase name="testStandaloneMenus" classname="org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest" time="1.132"/>
+  <testcase name="testRenameCoreViaUi" classname="org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest" time="0.74"/>
+  <testcase name="testUnloadCoreViaUi" classname="org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest" time="0.632"/>
+  <testcase name="testSwapCoresViaUi" classname="org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest" time="0.807"/>
+  <testcase name="testAddCoreViaUi" classname="org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest" time="0.933"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 05, 2026 2:23:14 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1263 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/server/solr/configsets/_default/conf'
+1277 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/data-dir-1-001
+1292 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+1324 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+1361 WARN  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+1362 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.SolrTestCaseJ4.SuppressSSL(bugUrl="Admin UI browser tests drive plain http")
+1405 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+nov 05, 2026 10:23:16 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 155
+2611 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Writing core.properties file to /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/renamecore
+2634 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Writing core.properties file to /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapa
+2646 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Writing core.properties file to /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapb
+2654 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Writing core.properties file to /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/unloadcore
+2851 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+2852 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+2856 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-1-24.04.4-Ubuntu
+2863 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+2878 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@561a7164{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@6ea36ff{STARTED}}
+2882 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=42335}
+2886 ERROR (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+2886 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+2888 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT b0e096ae19ad637107227e1bc04e951b9023a680 [snapshot build, details omitted]
+2889 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+2889 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr
+2889 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T21:23:16.463596127Z
+3065 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001 (source: servlet config: solr.solr.home)
+3076 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/solr.xml
+3162 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+3168 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+3883 WARN  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+3985 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.CorePropertiesLocator Found 4 core definitions underneath /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001
+3985 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.CorePropertiesLocator Cores are: [renamecore, swapa, swapb, unloadcore]
+4393 INFO  (coreLoadExecutor-15-thread-1) [ x:renamecore] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+4394 INFO  (coreLoadExecutor-15-thread-2) [ x:swapa] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+4394 INFO  (coreLoadExecutor-15-thread-3) [ x:swapb] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+4394 INFO  (coreLoadExecutor-15-thread-1) [ x:renamecore] o.a.s.c.CoreContainer Creating SolrCore 'renamecore' using configuration from instancedir /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/renamecore
+4394 INFO  (coreLoadExecutor-15-thread-2) [ x:swapa] o.a.s.c.CoreContainer Creating SolrCore 'swapa' using configuration from instancedir /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapa
+4394 INFO  (coreLoadExecutor-15-thread-3) [ x:swapb] o.a.s.c.CoreContainer Creating SolrCore 'swapb' using configuration from instancedir /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapb
+4446 INFO  (coreLoadExecutor-15-thread-3) [ x:swapb] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapb], dataDir=[/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapb/data/]
+4447 INFO  (coreLoadExecutor-15-thread-1) [ x:renamecore] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/renamecore], dataDir=[/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/renamecore/data/]
+4448 INFO  (coreLoadExecutor-15-thread-2) [ x:swapa] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapa], dataDir=[/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapa/data/]
+4618 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@561a7164{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@6ea36ff{STARTED}}
+4623 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@58b009a{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:42335}
+4625 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.Server Started oejs.Server@77cfacd7{STARTING}[12.1.14,sto=0] @1772ms
+4885 WARN  (coreLoadExecutor-15-thread-1) [ x:renamecore] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+5224 INFO  (coreLoadExecutor-15-thread-2) [ x:swapa] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+5225 INFO  (coreLoadExecutor-15-thread-3) [ x:swapb] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+5225 INFO  (coreLoadExecutor-15-thread-1) [ x:renamecore] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+5226 INFO  (coreLoadExecutor-15-thread-1) [ x:renamecore] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+5226 INFO  (coreLoadExecutor-15-thread-1) [ x:renamecore] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+5227 INFO  (coreLoadExecutor-15-thread-2) [ x:swapa] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+5227 INFO  (coreLoadExecutor-15-thread-2) [ x:swapa] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+5226 INFO  (coreLoadExecutor-15-thread-3) [ x:swapb] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+5228 INFO  (coreLoadExecutor-15-thread-3) [ x:swapb] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+5271 INFO  (coreLoadExecutor-15-thread-2) [ x:swapa] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapa/conf
+5271 INFO  (coreLoadExecutor-15-thread-1) [ x:renamecore] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/renamecore/conf
+5274 INFO  (coreLoadExecutor-15-thread-3) [ x:swapb] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/swapb/conf
+5608 INFO  (coreLoadExecutor-15-thread-2) [ x:swapa] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+5608 INFO  (coreLoadExecutor-15-thread-1) [ x:renamecore] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+5609 INFO  (coreLoadExecutor-15-thread-3) [ x:swapb] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+5611 INFO  (searcherExecutor-19-thread-1-processing-swapb) [ x:swapb] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+5611 INFO  (searcherExecutor-18-thread-1-processing-renamecore) [ x:renamecore] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+5612 INFO  (searcherExecutor-21-thread-1-processing-swapa) [ x:swapa] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+5614 INFO  (searcherExecutor-19-thread-1-processing-swapb) [ x:swapb] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+5614 INFO  (searcherExecutor-21-thread-1-processing-swapa) [ x:swapa] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+5615 INFO  (searcherExecutor-18-thread-1-processing-renamecore) [ x:renamecore] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+5649 INFO  (coreLoadExecutor-15-thread-3) [ x:unloadcore] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+5649 INFO  (coreLoadExecutor-15-thread-3) [ x:unloadcore] o.a.s.c.CoreContainer Creating SolrCore 'unloadcore' using configuration from instancedir /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/unloadcore
+5649 INFO  (coreLoadExecutor-15-thread-3) [ x:unloadcore] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/unloadcore], dataDir=[/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/unloadcore/data/]
+5732 INFO  (coreLoadExecutor-15-thread-3) [ x:unloadcore] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+5733 INFO  (coreLoadExecutor-15-thread-3) [ x:unloadcore] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+5733 INFO  (coreLoadExecutor-15-thread-3) [ x:unloadcore] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+5736 INFO  (coreLoadExecutor-15-thread-3) [ x:unloadcore] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/unloadcore/conf
+5737 INFO  (coreLoadExecutor-15-thread-3) [ x:unloadcore] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+5738 INFO  (searcherExecutor-35-thread-1-processing-unloadcore) [ x:unloadcore] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+5739 INFO  (searcherExecutor-35-thread-1-processing-unloadcore) [ x:unloadcore] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+5749 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testStandaloneMenus-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testStandaloneMenus
+6360 INFO  (qtp591232573-46-null-1) [ t:null-1] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913799789} entity={} status=0 QTime=137
+6478 INFO  (qtp591232573-44-null-2) [ t:null-2] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800039&indexInfo=false} entity={} status=0 QTime=10
+6483 INFO  (qtp591232573-47-null-3) [ t:null-3] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800043} entity={} status=0 QTime=11
+6641 INFO  (qtp591232573-44-null-4) [ t:null-4] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800205} entity={} status=0 QTime=8
+6655 INFO  (qtp591232573-48-null-6) [ t:null-6] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800220} entity={} status=0 QTime=4
+6659 INFO  (qtp591232573-47-null-5) [ t:null-5] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800219&indexInfo=false} entity={} status=0 QTime=9
+6733 INFO  (qtp591232573-43-null-7) [ t:null-7] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800298} entity={} status=0 QTime=7
+6744 INFO  (qtp591232573-44-null-11) [ x:swapa t:null-11] o.a.s.c.S.Request path=/admin/ping params={action=status&wt=json&_=1793913800183&ts=1793913800183} status=0 QTime=12
+6743 INFO  (qtp591232573-47-null-9) [ x:swapa t:null-9] o.a.s.c.S.Request path=/admin/info params={wt=json&_=1793913800298} status=0 QTime=11
+6745 INFO  (qtp591232573-46-null-8) [ x:swapa t:null-8] o.a.s.c.S.Request method=GET path= query-params={_=1793913800299} entity={} status=0 QTime=17
+6748 INFO  (qtp591232573-48-null-10) [ x:swapa t:null-10] o.a.s.c.S.Request path=/admin/luke params={numTerms=0&show=index&wt=json&_=1793913800297} status=0 QTime=17
+6749 INFO  (qtp591232573-45-null-12) [ t:null-12] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800314&indexInfo=false} entity={} status=0 QTime=1
+6870 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testStandaloneMenus-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testStandaloneMenus
+6877 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testRenameCoreViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testRenameCoreViaUi
+6901 INFO  (qtp591232573-43-null-13) [ t:null-13] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800467} entity={} status=0 QTime=5
+6911 INFO  (qtp591232573-47-null-14) [ t:null-14] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800467} entity={} status=0 QTime=6
+6913 INFO  (qtp591232573-46-null-15) [ t:null-15] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800481&indexInfo=false} entity={} status=0 QTime=3
+7032 INFO  (qtp591232573-44-null-16) [ t:null-16] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800591} entity={} status=0 QTime=11
+7040 INFO  (qtp591232573-47-null-17) [ t:null-17] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800610&indexInfo=false} entity={} status=0 QTime=2
+7043 INFO  (qtp591232573-45-null-18) [ t:null-18] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800610} entity={} status=0 QTime=4
+7102 INFO  (qtp591232573-48-null-20) [ t:null-20] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800670} entity={} status=0 QTime=3
+7102 INFO  (qtp591232573-46-null-19) [ t:null-19] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800670} entity={} status=0 QTime=4
+7116 INFO  (qtp591232573-44-null-21) [ t:null-21] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913800686&indexInfo=false} entity={} status=0 QTime=2
+7522 INFO  (qtp591232573-43-null-22) [ t:null-22] o.a.s.c.S.Request method=POST path= query-params={} entity={  "to":"renamedcore"} status=0 QTime=50
+7544 INFO  (qtp591232573-44-null-24) [ t:null-24] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801110} entity={} status=0 QTime=3
+7546 INFO  (qtp591232573-48-null-23) [ t:null-23] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801110} entity={} status=0 QTime=6
+7554 INFO  (qtp591232573-46-null-25) [ t:null-25] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801123&indexInfo=false} entity={} status=0 QTime=2
+7592 INFO  (qtp591232573-45-null-26) [ t:null-26] o.a.s.s.HttpSolrCall [admin] path=/admin/cores params={wt=javabin} status=0 QTime=2
+7606 INFO  (qtp591232573-48-null-27) [ t:null-27] o.a.s.s.HttpSolrCall [admin] path=/admin/cores params={wt=javabin} status=0 QTime=1
+7612 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testRenameCoreViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testRenameCoreViaUi
+7617 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testUnloadCoreViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testUnloadCoreViaUi
+7660 INFO  (qtp591232573-44-null-28) [ t:null-28] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801221} entity={} status=0 QTime=7
+7662 INFO  (qtp591232573-47-null-29) [ t:null-29] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801222} entity={} status=0 QTime=6
+7669 INFO  (qtp591232573-43-null-30) [ t:null-30] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801240&indexInfo=false} entity={} status=0 QTime=1
+7776 INFO  (qtp591232573-48-null-31) [ t:null-31] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801342} entity={} status=0 QTime=5
+7792 INFO  (qtp591232573-44-null-32) [ t:null-32] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801360&indexInfo=false} entity={} status=0 QTime=2
+7795 INFO  (qtp591232573-47-null-33) [ t:null-33] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801360} entity={} status=0 QTime=4
+7850 INFO  (qtp591232573-43-null-35) [ t:null-35] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801418} entity={} status=0 QTime=4
+7850 INFO  (qtp591232573-46-null-34) [ t:null-34] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801417} entity={} status=0 QTime=4
+7857 INFO  (qtp591232573-45-null-36) [ t:null-36] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801428&indexInfo=false} entity={} status=0 QTime=1
+7983 INFO  (qtp591232573-44-null-37) [ t:null-37] o.a.s.s.HttpSolrCall [admin] path=/admin/cores params={wt=javabin} status=0 QTime=1
+7992 INFO  (qtp591232573-48-null-38) [ x:unloadcore t:null-38] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@10bd93fd unloadcore
+7994 INFO  (qtp591232573-48-null-38) [ x:unloadcore t:null-38] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+8000 INFO  (qtp591232573-48-null-38) [ t:null-38] o.a.s.c.S.Request method=POST path= query-params={} entity={} status=0 QTime=17
+8017 INFO  (qtp591232573-43-null-40) [ t:null-40] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801585} entity={} status=0 QTime=2
+8017 INFO  (qtp591232573-47-null-39) [ t:null-39] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801584} entity={} status=0 QTime=4
+8031 INFO  (qtp591232573-45-null-42) [ t:null-42] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801601} entity={} status=0 QTime=1
+8032 INFO  (qtp591232573-46-null-41) [ t:null-41] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801601} entity={} status=0 QTime=3
+8036 INFO  (qtp591232573-44-null-43) [ t:null-43] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801607&indexInfo=false} entity={} status=0 QTime=0
+8042 INFO  (qtp591232573-48-null-44) [ t:null-44] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913801613&indexInfo=false} entity={} status=0 QTime=2
+8239 INFO  (qtp591232573-47-null-45) [ t:null-45] o.a.s.s.HttpSolrCall [admin] path=/admin/cores params={wt=javabin} status=0 QTime=1
+8244 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testUnloadCoreViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testUnloadCoreViaUi
+8249 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testSwapCoresViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testSwapCoresViaUi
+8325 INFO  (qtp591232573-43-null-46) [ x:swapa t:null-46] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[swap-doc (1881054958689714176)]} 0 71
+8435 INFO  (searcherExecutor-21-thread-1-processing-swapa null-47) [ x:swapa t:null-47] o.a.s.c.SolrCore Registered new searcher autowarm time: 5 ms
+8435 INFO  (qtp591232573-45-null-47) [ x:swapa t:null-47] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={waitSearcher=true&commit=true&softCommit=false&wt=javabin}{commit=} 0 104
+8465 INFO  (qtp591232573-46-null-48) [ x:swapa t:null-48] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=1 status=0 QTime=25
+8485 INFO  (qtp591232573-44-null-49) [ x:swapb t:null-49] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=0 status=0 QTime=1
+8516 INFO  (qtp591232573-48-null-50) [ t:null-50] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802083} entity={} status=0 QTime=4
+8523 INFO  (qtp591232573-43-null-52) [ t:null-52] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802094&indexInfo=false} entity={} status=0 QTime=1
+8524 INFO  (qtp591232573-47-null-51) [ t:null-51] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802083} entity={} status=0 QTime=4
+8686 INFO  (qtp591232573-44-null-53) [ t:null-53] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802251} entity={} status=0 QTime=5
+8697 INFO  (qtp591232573-48-null-54) [ t:null-54] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802268&indexInfo=false} entity={} status=0 QTime=1
+8701 INFO  (qtp591232573-43-null-55) [ t:null-55] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802268} entity={} status=0 QTime=4
+8756 INFO  (qtp591232573-45-null-57) [ t:null-57] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802324} entity={} status=0 QTime=3
+8758 INFO  (qtp591232573-47-null-56) [ t:null-56] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802324} entity={} status=0 QTime=6
+8766 INFO  (qtp591232573-46-null-58) [ t:null-58] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802337&indexInfo=false} entity={} status=0 QTime=1
+9018 INFO  (qtp591232573-44-null-59) [ x:swapa t:null-59] o.a.s.c.CoreContainer swapped: swapa with swapb
+9020 INFO  (qtp591232573-44-null-59) [ x:swapa t:null-59] o.a.s.c.S.Request method=POST path= query-params={} entity={  "with":"swapb"} status=0 QTime=17
+9023 INFO  (qtp591232573-48-null-60) [ x:swapa t:null-60] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=1 status=0 QTime=8
+9035 INFO  (qtp591232573-43-null-61) [ x:swapb t:null-61] o.a.s.c.S.Request path=/select params={q=*:*&wt=javabin} hits=0 status=0 QTime=1
+9042 INFO  (qtp591232573-43-null-63) [ t:null-63] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802606} entity={} status=0 QTime=2
+9046 INFO  (qtp591232573-47-null-62) [ t:null-62] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802606} entity={} status=0 QTime=8
+9051 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testSwapCoresViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testSwapCoresViaUi
+9057 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testAddCoreViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testAddCoreViaUi
+9059 INFO  (qtp591232573-46-null-64) [ t:null-64] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802628&indexInfo=false} entity={} status=0 QTime=3
+9084 INFO  (qtp591232573-44-null-65) [ t:null-65] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802651} entity={} status=0 QTime=5
+9098 INFO  (qtp591232573-48-null-66) [ t:null-66] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802651} entity={} status=0 QTime=10
+9104 INFO  (qtp591232573-47-null-67) [ t:null-67] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802674&indexInfo=false} entity={} status=0 QTime=1
+9222 INFO  (qtp591232573-45-null-68) [ t:null-68] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802788} entity={} status=0 QTime=4
+9234 INFO  (qtp591232573-47-null-69) [ t:null-69] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802800&indexInfo=false} entity={} status=0 QTime=3
+9242 INFO  (qtp591232573-48-null-70) [ t:null-70] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802800} entity={} status=0 QTime=7
+9285 INFO  (qtp591232573-43-null-72) [ t:null-72] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802853} entity={} status=0 QTime=4
+9286 INFO  (qtp591232573-46-null-71) [ t:null-71] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802853} entity={} status=0 QTime=4
+9292 INFO  (qtp591232573-44-null-73) [ t:null-73] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802863&indexInfo=false} entity={} status=0 QTime=1
+9301 INFO  (qtp591232573-47-null-75) [ t:null-75] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802869} entity={} status=0 QTime=2
+9302 INFO  (qtp591232573-45-null-74) [ t:null-74] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802869} entity={} status=0 QTime=4
+9312 INFO  (qtp591232573-48-null-76) [ t:null-76] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913802884&indexInfo=false} entity={} status=0 QTime=1
+9712 INFO  (qtp591232573-43-null-78) [ t:null-78] o.a.s.s.HttpSolrCall [admin] path=/admin/cores params={wt=javabin} status=0 QTime=1
+9716 INFO  (qtp591232573-46-null-77) [ x:addedcore t:null-77] o.a.s.h.a.a.CreateCore core create command "org.apache.solr.client.api.model.CreateCoreParams@6c44343"
+9775 INFO  (qtp591232573-46-null-77) [ x:addedcore t:null-77] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+9775 INFO  (qtp591232573-46-null-77) [ x:addedcore t:null-77] o.a.s.c.CoreContainer Creating SolrCore 'addedcore' using configuration from instancedir /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/addedcore
+9776 INFO  (qtp591232573-46-null-77) [ x:addedcore t:null-77] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/addedcore], dataDir=[/workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/addedcore/data/]
+9853 INFO  (qtp591232573-46-null-77) [ x:addedcore t:null-77] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+9854 INFO  (qtp591232573-46-null-77) [ x:addedcore t:null-77] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+9854 INFO  (qtp591232573-46-null-77) [ x:addedcore t:null-77] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+9858 INFO  (qtp591232573-46-null-77) [ x:addedcore t:null-77] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiCoreAdminStandaloneTest_12613F00D-001/standalone-home-001/addedcore/conf
+9859 INFO  (qtp591232573-46-null-77) [ x:addedcore t:null-77] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+9859 INFO  (searcherExecutor-42-thread-1-processing-addedcore null-77) [ x:addedcore t:null-77] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+9860 INFO  (searcherExecutor-42-thread-1-processing-addedcore null-77) [ x:addedcore t:null-77] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+9861 INFO  (qtp591232573-46-null-77) [ t:null-77] o.a.s.s.HttpSolrCall method=POST path= query-params={} entity={  "name":"addedcore",  "instanceDir":"addedcore",  "dataDir":"data",  "schema":"schema.xml",  "config":"solrconfig.xml"} status=0 QTime=154
+9874 INFO  (qtp591232573-47-null-80) [ t:null-80] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913803444} entity={} status=0 QTime=2
+9875 INFO  (qtp591232573-44-null-79) [ t:null-79] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913803443} entity={} status=0 QTime=3
+9880 INFO  (qtp591232573-45-null-81) [ t:null-81] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913803452&indexInfo=false} entity={} status=0 QTime=0
+9967 INFO  (qtp591232573-48-null-82) [ t:null-82] o.a.s.s.HttpSolrCall [admin] path=/admin/cores params={wt=javabin} status=0 QTime=1
+9984 INFO  (TEST-AdminUiCoreAdminStandaloneTest.testAddCoreViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testAddCoreViaUi
+9991 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.Server Stopped oejs.Server@77cfacd7{STOPPING}[12.1.14,sto=0]
+9992 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@58b009a{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+9993 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=772798441
+9995 INFO  (coreCloseExecutor-48-thread-2) [ x:swapb] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@38611895 swapa
+9995 INFO  (coreCloseExecutor-48-thread-3) [ x:renamedcore] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@2325a9f1 renamedcore
+9994 INFO  (coreCloseExecutor-48-thread-1) [ x:swapa] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@11294f54 swapb
+9995 INFO  (coreCloseExecutor-48-thread-4) [ x:addedcore] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@56cee397 addedcore
+9995 INFO  (coreCloseExecutor-48-thread-2) [ x:swapb] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+9995 INFO  (coreCloseExecutor-48-thread-3) [ x:renamedcore] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+9995 INFO  (coreCloseExecutor-48-thread-1) [ x:swapa] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+9995 INFO  (coreCloseExecutor-48-thread-4) [ x:addedcore] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+nov 05, 2026 10:23:23 PM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+10004 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@561a7164{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-F2/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@6ea36ff{STOPPED}}
+10086 INFO  (SUITE-AdminUiCoreAdminStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+]]></system-err>
+</testsuite>

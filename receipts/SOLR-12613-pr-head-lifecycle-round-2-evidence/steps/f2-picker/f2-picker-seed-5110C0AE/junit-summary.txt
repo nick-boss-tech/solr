@@ -1,0 +1,14 @@
+xml_files=1
+testcases=8
+tests=8
+failures=0
+errors=0
+skipped=0
+org.apache.solr.webapp.AdminUiNodePickerTest#testCloudLandingShowsNodesAndEmptyNodeSelector failure=0 error=0 skipped=0
+org.apache.solr.webapp.AdminUiNodePickerTest#testSystemInfoFailureStillRefreshesLocalCoreMenu failure=0 error=0 skipped=0
+org.apache.solr.webapp.AdminUiNodePickerTest#testNodeSelectionSurvivesInAppNavigation failure=0 error=0 skipped=0
+org.apache.solr.webapp.AdminUiNodePickerTest#testRestoredSelectionTargetsInitialCoreMenuRequest failure=0 error=0 skipped=0
+org.apache.solr.webapp.AdminUiNodePickerTest#testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload failure=0 error=0 skipped=0
+org.apache.solr.webapp.AdminUiNodePickerTest#testCoreMenuKeepsNewestRefreshForSameNode failure=0 error=0 skipped=0
+org.apache.solr.webapp.AdminUiNodePickerTest#testLoggingLevelsHidesNodeBadge failure=0 error=0 skipped=0
+org.apache.solr.webapp.AdminUiNodePickerTest#testCoreMenuIgnoresLateResponseFromPreviousNode failure=0 error=0 skipped=0

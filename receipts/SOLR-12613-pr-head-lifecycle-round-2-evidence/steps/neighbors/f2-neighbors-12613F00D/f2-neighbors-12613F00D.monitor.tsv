@@ -1,0 +1,12 @@
+2026-11-05T21:23:01+00:00	before	inodes_free=712912/1868096	free_pct=38.1625	disk_free_bytes=44876038144
+2026-11-05T21:23:04+00:00	sample	inodes_free=712904/1868096	free_pct=38.1621	disk_free_bytes=44875886592
+2026-11-05T21:23:07+00:00	sample	inodes_free=712904/1868096	free_pct=38.1621	disk_free_bytes=44875862016
+2026-11-05T21:23:10+00:00	sample	inodes_free=712904/1868096	free_pct=38.1621	disk_free_bytes=44875808768
+2026-11-05T21:23:13+00:00	sample	inodes_free=712894/1868096	free_pct=38.1615	disk_free_bytes=44875071488
+2026-11-05T21:23:16+00:00	sample	inodes_free=711717/1868096	free_pct=38.0985	disk_free_bytes=44863311872
+2026-11-05T21:23:19+00:00	sample	inodes_free=711193/1868096	free_pct=38.0705	disk_free_bytes=44851572736
+2026-11-05T21:23:22+00:00	sample	inodes_free=710771/1868096	free_pct=38.0479	disk_free_bytes=44839514112
+2026-11-05T21:23:25+00:00	sample	inodes_free=711923/1868096	free_pct=38.1096	disk_free_bytes=44856430592
+2026-11-05T21:23:28+00:00	sample	inodes_free=712158/1868096	free_pct=38.1221	disk_free_bytes=44814929920
+2026-11-05T21:23:31+00:00	sample	inodes_free=712881/1868096	free_pct=38.1608	disk_free_bytes=44875669504
+2026-11-05T21:23:31+00:00	after rc=0	inodes_free=712881/1868096	free_pct=38.1608	disk_free_bytes=44875669504

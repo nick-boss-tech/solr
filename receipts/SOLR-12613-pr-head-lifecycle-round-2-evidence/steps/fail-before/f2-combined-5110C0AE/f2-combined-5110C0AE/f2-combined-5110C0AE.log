@@ -1,0 +1,1079 @@
+Downloading gradle-wrapper.jar from https://raw.githubusercontent.com/gradle/gradle/v8.10.2/gradle/wrapper/gradle-wrapper.jar
+Generating gradle.properties
+Starting a Gradle Daemon, 2 incompatible Daemons could not be reused, use --status for details
+
+> Task :build-infra:compileJava
+Note: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/build-tools/build-infra/src/main/java/org/apache/lucene/gradle/Checksum.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :build-infra:pluginDescriptors
+> Task :build-infra:processResources
+> Task :build-infra:classes
+> Task :build-infra:jar
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=5110C0AE
+
+> Task :solr:webapp:cleanTest UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources
+> Task :solr:solrj:processResources
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:core:processResources
+> Task :solr:modules:sql:processResources
+> Task :solr:test-framework:processResources
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:webapp:downloadUiWasm SKIPPED
+> Task :solr:webapp:verifyUiWasm
+
+> Task :solr:webapp:prepareUiResources
+Solr Admin UI: using downloaded artifact for commit 473a55ef64a9a1605e00eb6c1c386887d4cb7dac
+
+> Task :solr:webapp:processResources
+> Task :solr:webapp:processTestResources
+
+> Task :solr:api:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:api:classes
+> Task :solr:api:jar
+> Task :solr:webapp:js-client:nodeSetup
+> Task :solr:webapp:js-client:npmSetup SKIPPED
+> Task :solr:api:resolve
+
+> Task :solr:solrj:openApiGenerate
+Cleaned up output directory /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+
+> Task :solr:webapp:js-client:downloadBrowserify
+
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+added 178 packages, and changed 1 package in 3s
+
+39 packages are looking for funding
+  run `npm fund` for details
+
+> Task :solr:api:buildJSClient
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+
+> Task :solr:solrj:openApiGenerate
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/solrj/build/generated
+
+> Task :solr:api:buildJSClient
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/api/build/generated/js
+
+> Task :solr:webapp:js-client:syncJSClientSourceCode
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+
+> Task :solr:solrj:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:webapp:js-client:jsClientDownloadDeps
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
+npm warn deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+npm warn deprecated @babel/plugin-proposal-json-strings@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-json-strings instead.
+npm warn deprecated @babel/plugin-proposal-export-namespace-from@7.18.9: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-export-namespace-from instead.
+npm warn deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+npm warn deprecated @babel/plugin-proposal-logical-assignment-operators@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-logical-assignment-operators instead.
+npm warn deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@7.1.6: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated formidable@1.2.6: Please upgrade to latest, formidable@v2 or formidable@v3! Check these notes: https://bit.ly/2ZEqIau
+
+> Task :solr:solrj-jetty:compileJava
+Note: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar
+> Task :solr:solrj-jetty:classes
+> Task :solr:solrj-jetty:jar
+> Task :solr:solrj-zookeeper:compileJava
+> Task :solr:solrj-zookeeper:classes
+> Task :solr:solrj-zookeeper:jar
+
+> Task :solr:webapp:js-client:jsClientDownloadDeps
+npm warn deprecated @sinonjs/text-encoding@0.7.3: Deprecated: no longer maintained and no longer used by Sinon packages. See
+npm warn deprecated   https://github.com/sinonjs/nise/issues/243 for replacement details.
+npm warn deprecated superagent@5.3.1: Please upgrade to superagent v10.2.2+, see release notes at https://github.com/forwardemail/superagent/releases/tag/v10.2.2 - maintenance is supported by Forward Email @ https://forwardemail.net
+npm warn deprecated sinon@7.5.0: 16.1.1
+
+> v2_api@11.0.0 prepare
+> npm run build
+
+
+> v2_api@11.0.0 build
+> babel src -d dist
+
+
+> Task :solr:solrj-streaming:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:solrj-streaming:classes
+> Task :solr:solrj-streaming:jar
+
+> Task :solr:webapp:js-client:jsClientDownloadDeps
+Successfully compiled 221 files with Babel (4001ms).
+
+added 332 packages, and audited 333 packages in 11s
+
+43 packages are looking for funding
+  run `npm fund` for details
+
+6 vulnerabilities (1 low, 5 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> Task :solr:webapp:js-client:jsClientBuild
+
+> v2_api@11.0.0 build
+> babel src -d dist
+
+Successfully compiled 221 files with Babel (4038ms).
+
+> Task :solr:webapp:js-client:generateJsClientBundle
+> Task :solr:webapp:js-client:finalizeJsBundleDir
+
+> Task :solr:core:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:core:classes
+> Task :solr:core:jar
+> Task :solr:webapp:compileJava NO-SOURCE
+> Task :solr:webapp:classes
+
+> Task :solr:modules:sql:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:modules:sql:classes
+> Task :solr:modules:sql:jar
+
+> Task :solr:test-framework:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:test-framework:classes
+> Task :solr:test-framework:jar
+
+> Task :solr:webapp:compileTestJava
+Note: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/src/test/org/apache/solr/webapp/AdminUiCollectionsScreenTest.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :solr:webapp:testClasses
+
+> Task :solr:webapp:test
+WARNING: Using incubator modules: jdk.incubator.vector
+
+AdminUiNodePickerTest > testSystemInfoFailureStillRefreshesLocalCoreMenu FAILED
+    java.lang.AssertionError: Failure to discover system info must not prevent a local core refresh
+        at __randomizedtesting.SeedInfo.seed([5110C0AE:70C28030C03F807C]:0)
+        at org.junit.Assert.fail(Assert.java:89)
+        at org.junit.Assert.assertTrue(Assert.java:42)
+        at org.apache.solr.webapp.AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu(AdminUiNodePickerTest.java:242)
+        at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+        at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+        at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+        at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+        at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+        at java.base/java.lang.Thread.run(Thread.java:1583)
+
+AdminUiNodePickerTest > testRestoredSelectionTargetsInitialCoreMenuRequest FAILED
+    java.lang.AssertionError: Every initial core-menu request must target the restored node: [{target=null, url=/api/cores?indexInfo=false&_=1793913991503}, {target=127.0.0.1:45477_solr, url=/api/cores?indexInfo=false&_=1793913991516}]
+        at __randomizedtesting.SeedInfo.seed([5110C0AE:516A9F98FE941EA4]:0)
+        at org.junit.Assert.fail(Assert.java:89)
+        at org.junit.Assert.assertTrue(Assert.java:42)
+        at org.apache.solr.webapp.AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest(AdminUiNodePickerTest.java:194)
+        at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+        at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+        at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+        at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+        at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+        at java.base/java.lang.Thread.run(Thread.java:1583)
+
+AdminUiNodePickerTest > testCoreMenuKeepsNewestRefreshForSameNode FAILED
+    org.junit.ComparisonFailure: A late response must not replace the current core menu expected:<[new]_core> but was:<[old]_core>
+        at __randomizedtesting.SeedInfo.seed([5110C0AE:7F2EBFAB5C18A4]:0)
+        at app//org.junit.Assert.assertEquals(Assert.java:117)
+        at app//org.apache.solr.webapp.AdminUiNodePickerTest.assertCoreMenuIgnoresOlderResponse(AdminUiNodePickerTest.java:352)
+        at app//org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode(AdminUiNodePickerTest.java:145)
+        at java.base@21.0.12.1/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+        at java.base@21.0.12.1/java.lang.reflect.Method.invoke(Method.java:580)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+        at app//org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+        at app//com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at app//org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+        at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at app//org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+        at app//org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at app//org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at app//com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+        at app//com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at app//com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+        at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at app//org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at app//org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at app//org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+        at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+        at java.base@21.0.12.1/java.lang.Thread.run(Thread.java:1583)
+
+AdminUiNodePickerTest > testCoreMenuIgnoresLateResponseFromPreviousNode FAILED
+    org.junit.ComparisonFailure: A late response must not replace the current core menu expected:<[new]_core> but was:<[old]_core>
+        at __randomizedtesting.SeedInfo.seed([5110C0AE:9633153DE21DDEA]:0)
+        at app//org.junit.Assert.assertEquals(Assert.java:117)
+        at app//org.apache.solr.webapp.AdminUiNodePickerTest.assertCoreMenuIgnoresOlderResponse(AdminUiNodePickerTest.java:352)
+        at app//org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode(AdminUiNodePickerTest.java:140)
+        at java.base@21.0.12.1/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+        at java.base@21.0.12.1/java.lang.reflect.Method.invoke(Method.java:580)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+        at app//org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+        at app//com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at app//org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+        at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at app//org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+        at app//org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at app//org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+        at app//com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at app//com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+        at app//com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at app//com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+        at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at app//org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at app//org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at app//org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+        at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at app//com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+        at java.base@21.0.12.1/java.lang.Thread.run(Thread.java:1583)
+
+org.apache.solr.webapp.AdminUiNodePickerTest > test suite's output saved to /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/test-results/test/outputs/OUTPUT-org.apache.solr.webapp.AdminUiNodePickerTest.txt, copied below:
+  2> Nov 05, 2026 2:26:24 PM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+  2> WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+  2> 1265 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/server/solr/configsets/_default/conf'
+  2> 1276 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+  2> 1285 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/data-dir-1-001
+  2> 1300 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+  2> 1333 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+  2> 1400 WARN  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+  2> 1401 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.SolrTestCaseJ4.SuppressSSL(bugUrl="Admin UI browser tests drive plain http")
+  2> Nov 06, 2026 7:26:25 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+  2> WARNING: Unable to find CDP implementation matching 155
+  2> 2521 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testSystemInfoFailureStillRefreshesLocalCoreMenu
+  2> 2543 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster Starting cluster of 2 servers in /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001
+  2> 2546 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer TEST_PATH() does not exist - solrj test?
+  2> 2550 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer STARTING ZK TEST SERVER
+  2> 2552 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer ZkTestServer requires the 'stat' command, temporarily manipulating your whitelist
+  2> 2554 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer client port: /127.0.0.1:0
+  2> 2555 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Starting server
+  2> 2585 WARN  (ZkTestServer Run Thread) [] o.a.z.s.ServerCnxnFactory maxCnxns is not configured, using default value 0.
+  2> 2653 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.ZkTestServer start zk server on port: 40029
+  2> 2928 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 2928 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 2995 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 3020 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 3034 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 3044 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3044 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3060 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 3060 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 3062 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 3063 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 3065 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 3065 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 3065 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 3066 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 3066 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3066 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3067 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 3068 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 3070 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3070 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3073 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 3413 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+  2> 3413 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+  2> 3415 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+  2> 3415 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+  2> 3419 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-1-24.04.4-Ubuntu
+  2> 3419 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.12.1+1-1-24.04.4-Ubuntu
+  2> 3427 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+  2> 3427 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+  2> 3443 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@77ad8ed8{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@10c9f878{STARTED}}
+  2> 3443 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@184ca19a{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@5c2c2e31{STARTED}}
+  2> 3447 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=45477, zkHost=127.0.0.1:40029/solr}
+  2> 3447 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=34975, zkHost=127.0.0.1:40029/solr}
+  2> 3450 ERROR (jetty-launcher-8-thread-1) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+  2> 3450 ERROR (jetty-launcher-8-thread-2) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+  2> 3450 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+  2> 3450 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+  2> 3453 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT b0e096ae19ad637107227e1bc04e951b9023a680 [snapshot build, details omitted]
+  2> 3453 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT b0e096ae19ad637107227e1bc04e951b9023a680 [snapshot build, details omitted]
+  2> 3454 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+  2> 3454 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+  2> 3454 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr
+  2> 3454 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr
+  2> 3454 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T21:26:26.789462860Z
+  2> 3454 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T21:26:26.789497687Z
+  2> 3528 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node1 (source: servlet config: solr.solr.home)
+  2> 3528 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node2 (source: servlet config: solr.solr.home)
+  2> 3539 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 3539 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 3540 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 3540 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 3541 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 3541 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 3542 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 3542 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 3544 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 3544 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 3545 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3545 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3545 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3546 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 3546 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 3546 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 3649 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node2/solr.xml
+  2> 3649 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node1/solr.xml
+  2> 3745 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+  2> 3753 INFO  (jetty-launcher-8-thread-1) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+  2> 3753 INFO  (jetty-launcher-8-thread-2) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+  2> 4044 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:40029/solr
+  2> 4044 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:40029/solr
+  2> 4054 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 4054 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 4055 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 4055 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 4056 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 4056 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 4057 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 4057 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 4058 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 4059 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 4060 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 4060 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 4060 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 4060 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 4060 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 4060 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 4168 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 4168 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 4169 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 4169 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 4171 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 4171 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 4172 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 4172 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 4172 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 4172 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 4212 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+  2> 4212 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+  2> 4237 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.s.c.ZkController The Overseer is disabled.  Cluster commands & state updates will happen on any/all nodes.
+  2> 4237 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.a.s.c.ZkController The Overseer is disabled.  Cluster commands & state updates will happen on any/all nodes.
+  2> 4288 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.s.c.OverseerElectionContext I am going to be the leader 127.0.0.1:45477_solr
+  2> 4290 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:34975_solr
+  2> 4294 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.s.c.Overseer Overseer (id=72072551307739143-127.0.0.1:45477_solr-n_0000000000) starting
+  2> 4303 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+  2> 4303 INFO  (zkCallback-40-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+  2> 4319 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.s.c.ZkController Publish node=127.0.0.1:45477_solr as DOWN
+  2> 4319 INFO  (OverseerStateUpdate-72072551307739143-127.0.0.1:45477_solr-n_0000000000) [n:127.0.0.1:45477_solr] o.a.s.c.Overseer Starting to work on the main queue : 127.0.0.1:45477_solr
+  2> 4321 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:45477_solr
+  2> 4323 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+  2> 4323 INFO  (zkCallback-40-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+  2> 4344 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+  2> 4345 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+  2> 4511 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node2
+  2> 4511 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/tempDir-001/node1
+  2> 5062 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@184ca19a{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@5c2c2e31{STARTED}}
+  2> 5062 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@77ad8ed8{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@10c9f878{STARTED}}
+  2> 5067 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@35fd1304{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:34975}
+  2> 5067 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@4f28c9f7{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:45477}
+  2> 5068 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:34975_solr] o.e.j.s.Server Started oejs.Server@542f0f30{STARTING}[12.1.14,sto=0] @1652ms
+  2> 5068 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:45477_solr] o.e.j.s.Server Started oejs.Server@dc1d330{STARTING}[12.1.14,sto=0] @1652ms
+  2> 5073 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForAllNodes: numServers=2
+  2> 5074 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:34975_solr
+  2> 5074 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 5074 WARN  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 5075 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 5076 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 5077 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 5078 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 5078 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 5080 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (2)
+  2> 5081 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.s.i.ZkClientClusterStateProvider Cluster at 127.0.0.1:40029/solr ready
+  2> 5082 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:45477_solr
+  2> 5575 INFO  (qtp958609094-77-null-2) [n:127.0.0.1:34975_solr t:null-2] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913988834&indexInfo=false} entity={} status=0 QTime=68
+  2> 5589 INFO  (qtp958609094-79-null-1) [n:127.0.0.1:34975_solr t:null-1] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913988835} entity={} status=0 QTime=85
+  2> 5898 INFO  (qtp958609094-72-null-3) [n:127.0.0.1:34975_solr t:null-3] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989224} entity={} status=0 QTime=6
+  2> 5898 INFO  (qtp958609094-75-null-4) [n:127.0.0.1:34975_solr t:null-4] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989224} entity={} status=0 QTime=6
+  2> 5912 INFO  (qtp958609094-81-null-5) [n:127.0.0.1:34975_solr t:null-5] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989240} entity={} status=0 QTime=5
+  2> 5912 INFO  (qtp958609094-77-null-6) [n:127.0.0.1:34975_solr t:null-6] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989241&detailed=true} entity={} status=0 QTime=5
+  2> 5929 INFO  (qtp958609094-79-null-7) [n:127.0.0.1:34975_solr t:null-7] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989259} entity={} status=0 QTime=3
+  2> 5931 INFO  (qtp958609094-74-null-8) [n:127.0.0.1:34975_solr t:null-8] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989263} entity={} status=0 QTime=1
+  2> 5931 INFO  (qtp958609094-72-null-9) [n:127.0.0.1:34975_solr t:null-9] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989264} entity={} status=0 QTime=1
+  2> 5935 INFO  (qtp958609094-75-null-10) [n:127.0.0.1:34975_solr t:null-10] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989263} entity={} status=0 QTime=1
+  2> 5947 INFO  (qtp958609094-74-null-14) [n:127.0.0.1:34975_solr t:null-14] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989278} entity={} status=0 QTime=2
+  2> 6054 INFO  (qtp958609094-79-null-11) [n:127.0.0.1:34975_solr t:null-11] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=6
+  2> 6054 INFO  (qtp1606657592-82-null-11) [n:127.0.0.1:45477_solr t:null-11] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=6
+  2> 6078 INFO  (qtp958609094-74-null-12) [n:127.0.0.1:34975_solr t:null-12] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913989240} status=0 QTime=30
+  2> 6078 INFO  (qtp1606657592-80-null-13) [n:127.0.0.1:45477_solr t:null-13] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913989240} status=0 QTime=30
+  2> 6084 INFO  (qtp958609094-72-null-13) [n:127.0.0.1:34975_solr t:null-13] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:45477_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913989240} status=0 QTime=146
+  2> 6084 INFO  (qtp958609094-77-null-12) [n:127.0.0.1:34975_solr t:null-12] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:34975_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913989240} status=0 QTime=146
+  2> 6116 INFO  (qtp958609094-81-null-11) [n:127.0.0.1:34975_solr t:null-11] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989269&nodes=127.0.0.1:34975_solr,127.0.0.1:45477_solr} entity={} status=0 QTime=180
+  2> 6319 INFO  (qtp958609094-79-null-16) [n:127.0.0.1:34975_solr t:null-16] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989646} entity={} status=0 QTime=6
+  2> 6319 INFO  (qtp958609094-75-null-15) [n:127.0.0.1:34975_solr t:null-15] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989645} entity={} status=0 QTime=6
+  2> 6327 INFO  (qtp958609094-74-null-17) [n:127.0.0.1:34975_solr t:null-17] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989658} entity={} status=0 QTime=1
+  2> 6327 INFO  (qtp958609094-72-null-18) [n:127.0.0.1:34975_solr t:null-18] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989659} entity={} status=0 QTime=1
+  2> 6338 INFO  (qtp958609094-77-null-19) [n:127.0.0.1:34975_solr t:null-19] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989670&indexInfo=false} entity={} status=0 QTime=1
+  2> 6339 INFO  (qtp958609094-81-null-20) [n:127.0.0.1:34975_solr t:null-20] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989670} entity={} status=0 QTime=2
+  2> 6561 INFO  (qtp958609094-72-null-21) [n:127.0.0.1:34975_solr t:null-21] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989892&indexInfo=false} entity={} status=0 QTime=2
+  2> 6564 INFO  (qtp958609094-74-null-22) [n:127.0.0.1:34975_solr t:null-22] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989892} entity={} status=0 QTime=5
+  2> 6569 INFO  (qtp958609094-77-null-24) [n:127.0.0.1:34975_solr t:null-24] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989902} entity={} status=0 QTime=1
+  2> 6569 INFO  (qtp958609094-81-null-23) [n:127.0.0.1:34975_solr t:null-23] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989902} entity={} status=0 QTime=1
+  2> 6584 INFO  (qtp958609094-75-null-26) [n:127.0.0.1:34975_solr t:null-26] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989915&detailed=true} entity={} status=0 QTime=2
+  2> 6586 INFO  (qtp958609094-79-null-25) [n:127.0.0.1:34975_solr t:null-25] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989915} entity={} status=0 QTime=4
+  2> 6593 INFO  (qtp958609094-72-null-27) [n:127.0.0.1:34975_solr t:null-27] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989925} entity={} status=0 QTime=2
+  2> 6597 INFO  (qtp958609094-77-null-28) [n:127.0.0.1:34975_solr t:null-28] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989928} entity={} status=0 QTime=1
+  2> 6598 INFO  (qtp958609094-74-null-29) [n:127.0.0.1:34975_solr t:null-29] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989928} entity={} status=0 QTime=1
+  2> 6601 INFO  (qtp958609094-75-null-31) [n:127.0.0.1:34975_solr t:null-31] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989928} entity={} status=0 QTime=1
+  2> 6603 INFO  (qtp958609094-81-null-30) [n:127.0.0.1:34975_solr t:null-30] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989934} entity={} status=0 QTime=2
+  2> 6608 INFO  (qtp958609094-75-null-33) [n:127.0.0.1:34975_solr t:null-33] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913989915} status=0 QTime=3
+  2> 6608 INFO  (qtp1606657592-73-null-32) [n:127.0.0.1:45477_solr t:null-32] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=4
+  2> 6608 INFO  (qtp958609094-74-null-32) [n:127.0.0.1:34975_solr t:null-32] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=5
+  2> 6609 INFO  (qtp1606657592-71-null-34) [n:127.0.0.1:45477_solr t:null-34] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913989915} status=0 QTime=3
+  2> 6609 INFO  (qtp958609094-72-null-33) [n:127.0.0.1:34975_solr t:null-33] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:34975_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913989915} status=0 QTime=6
+  2> 6610 INFO  (qtp958609094-77-null-34) [n:127.0.0.1:34975_solr t:null-34] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:45477_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913989915} status=0 QTime=7
+  2> 6614 INFO  (qtp958609094-79-null-32) [n:127.0.0.1:34975_solr t:null-32] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913989935&nodes=127.0.0.1:34975_solr,127.0.0.1:45477_solr} entity={} status=0 QTime=13
+  2> 6792 INFO  (qtp958609094-81-null-36) [n:127.0.0.1:34975_solr t:null-36] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990119} entity={} status=0 QTime=5
+  2> 6792 INFO  (qtp958609094-75-null-35) [n:127.0.0.1:34975_solr t:null-35] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990120} entity={} status=0 QTime=5
+  2> 6803 INFO  (qtp958609094-72-null-37) [n:127.0.0.1:34975_solr t:null-37] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990135} entity={} status=0 QTime=1
+  2> 6803 INFO  (qtp958609094-74-null-38) [n:127.0.0.1:34975_solr t:null-38] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990135} entity={} status=0 QTime=1
+  2> 6812 INFO  (qtp958609094-77-null-39) [n:127.0.0.1:34975_solr t:null-39] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990144&indexInfo=false} entity={} status=0 QTime=1
+  2> 6813 INFO  (qtp958609094-79-null-40) [n:127.0.0.1:34975_solr t:null-40] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990145} entity={} status=0 QTime=2
+  2> 6933 INFO  (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testSystemInfoFailureStillRefreshesLocalCoreMenu
+  2> 7043 ERROR (TEST-AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu-seed#[5110C0AE]) [] o.a.s.w.AdminUiTestBase UI test failure artifacts saved to /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/ui-failure-testSystemInfoFailureStillRefreshesLocalCoreMenu-001
+   >     java.lang.AssertionError: Failure to discover system info must not prevent a local core refresh
+   >         at __randomizedtesting.SeedInfo.seed([5110C0AE:70C28030C03F807C]:0)
+   >         at org.junit.Assert.fail(Assert.java:89)
+   >         at org.junit.Assert.assertTrue(Assert.java:42)
+   >         at org.apache.solr.webapp.AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu(AdminUiNodePickerTest.java:242)
+   >         at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+   >         at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+   >         at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+   >         at java.base/java.lang.Thread.run(Thread.java:1583)
+  2> NOTE: reproduce with: gradlew test --tests AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu -Dtests.seed=5110C0AE -Dtests.locale=mg-MG -Dtests.timezone=Etc/GMT-10 -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+  2> 7058 INFO  (TEST-AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testRestoredSelectionTargetsInitialCoreMenuRequest
+  2> 7175 INFO  (qtp958609094-74-null-41) [n:127.0.0.1:34975_solr t:null-41] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990506&indexInfo=false} entity={} status=0 QTime=1
+  2> 7178 INFO  (qtp958609094-72-null-42) [n:127.0.0.1:34975_solr t:null-42] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990507} entity={} status=0 QTime=5
+  2> 7184 INFO  (qtp958609094-79-null-44) [n:127.0.0.1:34975_solr t:null-44] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990516} entity={} status=0 QTime=1
+  2> 7184 INFO  (qtp958609094-77-null-43) [n:127.0.0.1:34975_solr t:null-43] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990516} entity={} status=0 QTime=1
+  2> 7194 INFO  (qtp958609094-81-null-45) [n:127.0.0.1:34975_solr t:null-45] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990526&detailed=true} entity={} status=0 QTime=2
+  2> 7196 INFO  (qtp958609094-75-null-46) [n:127.0.0.1:34975_solr t:null-46] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990525} entity={} status=0 QTime=3
+  2> 7203 INFO  (qtp958609094-74-null-47) [n:127.0.0.1:34975_solr t:null-47] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990534} entity={} status=0 QTime=2
+  2> 7206 INFO  (qtp958609094-72-null-48) [n:127.0.0.1:34975_solr t:null-48] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990538} entity={} status=0 QTime=1
+  2> 7208 INFO  (qtp958609094-77-null-50) [n:127.0.0.1:34975_solr t:null-50] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990540} entity={} status=0 QTime=1
+  2> 7209 INFO  (qtp958609094-79-null-49) [n:127.0.0.1:34975_solr t:null-49] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990540} entity={} status=0 QTime=1
+  2> 7214 INFO  (qtp958609094-79-null-52) [n:127.0.0.1:34975_solr t:null-52] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913990525} status=0 QTime=2
+  2> 7214 INFO  (qtp1606657592-76-null-53) [n:127.0.0.1:45477_solr t:null-53] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913990525} status=0 QTime=2
+  2> 7215 INFO  (qtp958609094-72-null-51) [n:127.0.0.1:34975_solr t:null-51] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+  2> 7215 INFO  (qtp1606657592-78-null-51) [n:127.0.0.1:45477_solr t:null-51] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+  2> 7216 INFO  (qtp958609094-75-null-52) [n:127.0.0.1:34975_solr t:null-52] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:34975_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913990525} status=0 QTime=5
+  2> 7216 INFO  (qtp958609094-74-null-53) [n:127.0.0.1:34975_solr t:null-53] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:45477_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913990525} status=0 QTime=5
+  2> 7219 INFO  (qtp958609094-81-null-51) [n:127.0.0.1:34975_solr t:null-51] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990543&nodes=127.0.0.1:34975_solr,127.0.0.1:45477_solr} entity={} status=0 QTime=9
+  2> 7219 INFO  (qtp958609094-77-null-54) [n:127.0.0.1:34975_solr t:null-54] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990550} entity={} status=0 QTime=1
+  2> 7403 INFO  (qtp958609094-79-null-56) [n:127.0.0.1:34975_solr t:null-56] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990730} entity={} status=0 QTime=5
+  2> 7403 INFO  (qtp958609094-75-null-55) [n:127.0.0.1:34975_solr t:null-55] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990731} entity={} status=0 QTime=5
+  2> 7410 INFO  (qtp958609094-72-null-58) [n:127.0.0.1:34975_solr t:null-58] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990742} entity={} status=0 QTime=1
+  2> 7410 INFO  (qtp958609094-74-null-57) [n:127.0.0.1:34975_solr t:null-57] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990742} entity={} status=0 QTime=1
+  2> 7415 INFO  (qtp958609094-81-null-60) [n:127.0.0.1:34975_solr t:null-60] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990748&indexInfo=false} entity={} status=0 QTime=0
+  2> 7415 INFO  (qtp958609094-77-null-59) [n:127.0.0.1:34975_solr t:null-59] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990747} entity={} status=0 QTime=1
+  2> 7608 INFO  (qtp958609094-72-null-62) [n:127.0.0.1:34975_solr t:null-62] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990939&indexInfo=false} entity={} status=0 QTime=1
+  2> 7611 INFO  (qtp958609094-74-null-61) [n:127.0.0.1:34975_solr t:null-61] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990939} entity={} status=0 QTime=4
+  2> 7618 INFO  (qtp958609094-81-null-64) [n:127.0.0.1:34975_solr t:null-64] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990951} entity={} status=0 QTime=1
+  2> 7619 INFO  (qtp958609094-77-null-63) [n:127.0.0.1:34975_solr t:null-63] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990951} entity={} status=0 QTime=1
+  2> 7629 INFO  (qtp958609094-75-null-65) [n:127.0.0.1:34975_solr t:null-65] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990960&detailed=true} entity={} status=0 QTime=2
+  2> 7632 INFO  (qtp958609094-79-null-66) [n:127.0.0.1:34975_solr t:null-66] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990960} entity={} status=0 QTime=5
+  2> 7641 INFO  (qtp958609094-72-null-67) [n:127.0.0.1:34975_solr t:null-67] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990972} entity={} status=0 QTime=2
+  2> 7644 INFO  (qtp958609094-81-null-70) [n:127.0.0.1:34975_solr t:null-70] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990976} entity={} status=0 QTime=0
+  2> 7644 INFO  (qtp958609094-77-null-69) [n:127.0.0.1:34975_solr t:null-69] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990977} entity={} status=0 QTime=0
+  2> 7644 INFO  (qtp958609094-74-null-68) [n:127.0.0.1:34975_solr t:null-68] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990975} entity={} status=0 QTime=1
+  2> 7649 INFO  (qtp958609094-75-null-71) [n:127.0.0.1:34975_solr t:null-71] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990981} entity={} status=0 QTime=1
+  2> 7653 INFO  (qtp958609094-77-null-73) [n:127.0.0.1:34975_solr t:null-73] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913990960} status=0 QTime=2
+  2> 7654 INFO  (qtp958609094-81-null-72) [n:127.0.0.1:34975_solr t:null-72] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=4
+  2> 7655 INFO  (qtp1606657592-82-null-74) [n:127.0.0.1:45477_solr t:null-74] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913990960} status=0 QTime=3
+  2> 7655 INFO  (qtp958609094-72-null-73) [n:127.0.0.1:34975_solr t:null-73] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:34975_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913990960} status=0 QTime=6
+  2> 7655 INFO  (qtp1606657592-80-null-72) [n:127.0.0.1:45477_solr t:null-72] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+  2> 7656 INFO  (qtp958609094-74-null-74) [n:127.0.0.1:34975_solr t:null-74] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:45477_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913990960} status=0 QTime=6
+  2> 7658 INFO  (qtp958609094-79-null-72) [n:127.0.0.1:34975_solr t:null-72] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913990982&nodes=127.0.0.1:34975_solr,127.0.0.1:45477_solr} entity={} status=0 QTime=10
+  2> 7831 INFO  (qtp958609094-75-null-75) [n:127.0.0.1:34975_solr t:null-75] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991160} entity={} status=0 QTime=4
+  2> 7838 INFO  (qtp958609094-77-null-76) [n:127.0.0.1:34975_solr t:null-76] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991160} entity={} status=0 QTime=3
+  2> 7839 INFO  (qtp958609094-81-null-77) [n:127.0.0.1:34975_solr t:null-77] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991171} entity={} status=0 QTime=1
+  2> 7839 INFO  (qtp958609094-72-null-78) [n:127.0.0.1:34975_solr t:null-78] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991171} entity={} status=0 QTime=1
+  2> 7844 INFO  (qtp958609094-79-null-80) [n:127.0.0.1:34975_solr t:null-80] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991177&indexInfo=false} entity={} status=0 QTime=0
+  2> 7844 INFO  (qtp958609094-74-null-79) [n:127.0.0.1:34975_solr t:null-79] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991176} entity={} status=0 QTime=1
+  2> 8047 INFO  (qtp958609094-75-null-81) [n:127.0.0.1:34975_solr t:null-81] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991375} entity={} status=0 QTime=4
+  2> 8051 INFO  (qtp1606657592-71-null-82) [n:127.0.0.1:45477_solr t:null-82] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991376} entity={} status=0 QTime=4
+  2> 8053 INFO  (qtp958609094-77-null-84) [n:127.0.0.1:34975_solr t:null-84] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991386} entity={} status=0 QTime=0
+  2> 8053 INFO  (qtp958609094-72-null-83) [n:127.0.0.1:34975_solr t:null-83] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991386} entity={} status=0 QTime=1
+  2> 8058 INFO  (qtp958609094-74-null-86) [n:127.0.0.1:34975_solr t:null-86] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991390} entity={} status=0 QTime=1
+  2> 8059 INFO  (qtp1606657592-73-null-85) [n:127.0.0.1:45477_solr t:null-85] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991390&indexInfo=false} entity={} status=0 QTime=1
+  2> 8171 INFO  (qtp958609094-72-null-87) [n:127.0.0.1:34975_solr t:null-87] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991503&indexInfo=false} entity={} status=0 QTime=1
+  2> 8174 INFO  (qtp958609094-81-null-88) [n:127.0.0.1:34975_solr t:null-88] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991503} entity={} status=0 QTime=4
+  2> 8180 INFO  (qtp958609094-74-null-89) [n:127.0.0.1:34975_solr t:null-89] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991512} entity={} status=0 QTime=1
+  2> 8180 INFO  (qtp958609094-79-null-90) [n:127.0.0.1:34975_solr t:null-90] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991513} entity={} status=0 QTime=1
+  2> 8185 INFO  (qtp1606657592-76-null-91) [n:127.0.0.1:45477_solr t:null-91] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991516&indexInfo=false} entity={} status=0 QTime=1
+  2> 8188 INFO  (qtp1606657592-78-null-92) [n:127.0.0.1:45477_solr t:null-92] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991516} entity={} status=0 QTime=3
+  2> 8193 INFO  (qtp958609094-72-null-93) [n:127.0.0.1:34975_solr t:null-93] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991524} entity={} status=0 QTime=1
+  2> 8220 INFO  (TEST-AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testRestoredSelectionTargetsInitialCoreMenuRequest
+  2> 8332 ERROR (TEST-AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest-seed#[5110C0AE]) [] o.a.s.w.AdminUiTestBase UI test failure artifacts saved to /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/ui-failure-testRestoredSelectionTargetsInitialCoreMenuRequest-001
+   >     java.lang.AssertionError: Every initial core-menu request must target the restored node: [{target=null, url=/api/cores?indexInfo=false&_=1793913991503}, {target=127.0.0.1:45477_solr, url=/api/cores?indexInfo=false&_=1793913991516}]
+   >         at __randomizedtesting.SeedInfo.seed([5110C0AE:516A9F98FE941EA4]:0)
+   >         at org.junit.Assert.fail(Assert.java:89)
+   >         at org.junit.Assert.assertTrue(Assert.java:42)
+   >         at org.apache.solr.webapp.AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest(AdminUiNodePickerTest.java:194)
+   >         at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+   >         at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+   >         at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+   >         at java.base/java.lang.Thread.run(Thread.java:1583)
+  2> NOTE: reproduce with: gradlew test --tests AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest -Dtests.seed=5110C0AE -Dtests.locale=mg-MG -Dtests.timezone=Etc/GMT-10 -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+  2> 8339 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testCoreMenuKeepsNewestRefreshForSameNode
+  2> 8454 INFO  (qtp958609094-79-null-95) [n:127.0.0.1:34975_solr t:null-95] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991785&indexInfo=false} entity={} status=0 QTime=1
+  2> 8456 INFO  (qtp958609094-75-null-94) [n:127.0.0.1:34975_solr t:null-94] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991785} entity={} status=0 QTime=4
+  2> 8462 INFO  (qtp958609094-77-null-96) [n:127.0.0.1:34975_solr t:null-96] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991794} entity={} status=0 QTime=1
+  2> 8462 INFO  (qtp958609094-72-null-97) [n:127.0.0.1:34975_solr t:null-97] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991794} entity={} status=0 QTime=1
+  2> 8466 INFO  (qtp958609094-81-null-98) [n:127.0.0.1:34975_solr t:null-98] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991798} entity={} status=0 QTime=1
+  2> 8468 INFO  (qtp1606657592-82-null-99) [n:127.0.0.1:45477_solr t:null-99] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991799&indexInfo=false} entity={} status=0 QTime=0
+  2> 8471 INFO  (qtp1606657592-80-null-100) [n:127.0.0.1:45477_solr t:null-100] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991799} entity={} status=0 QTime=4
+  2> 8643 INFO  (qtp958609094-77-null-101) [n:127.0.0.1:34975_solr t:null-101] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991972} entity={} status=0 QTime=4
+  2> 8643 INFO  (qtp958609094-75-null-102) [n:127.0.0.1:34975_solr t:null-102] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991971} entity={} status=0 QTime=4
+  2> 8649 INFO  (qtp958609094-81-null-103) [n:127.0.0.1:34975_solr t:null-103] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991982} entity={} status=0 QTime=1
+  2> 8649 INFO  (qtp958609094-72-null-104) [n:127.0.0.1:34975_solr t:null-104] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991981} entity={} status=0 QTime=1
+  2> 8659 INFO  (qtp958609094-79-null-106) [n:127.0.0.1:34975_solr t:null-106] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991992&indexInfo=false} entity={} status=0 QTime=0
+  2> 8659 INFO  (qtp958609094-74-null-105) [n:127.0.0.1:34975_solr t:null-105] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913991991} entity={} status=0 QTime=1
+  2> 8862 INFO  (qtp958609094-81-null-108) [n:127.0.0.1:34975_solr t:null-108] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992193&indexInfo=false} entity={} status=0 QTime=1
+  2> 8864 INFO  (qtp958609094-72-null-107) [n:127.0.0.1:34975_solr t:null-107] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992193} entity={} status=0 QTime=4
+  2> 8875 INFO  (qtp958609094-74-null-109) [n:127.0.0.1:34975_solr t:null-109] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992207} entity={} status=0 QTime=1
+  2> 8875 INFO  (qtp958609094-79-null-110) [n:127.0.0.1:34975_solr t:null-110] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992207} entity={} status=0 QTime=0
+  2> 8890 INFO  (qtp958609094-75-null-111) [n:127.0.0.1:34975_solr t:null-111] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992221&detailed=true} entity={} status=0 QTime=2
+  2> 8892 INFO  (qtp958609094-77-null-112) [n:127.0.0.1:34975_solr t:null-112] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992221} entity={} status=0 QTime=3
+  2> 8899 INFO  (qtp958609094-81-null-113) [n:127.0.0.1:34975_solr t:null-113] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992231} entity={} status=0 QTime=1
+  2> 8903 INFO  (qtp958609094-72-null-114) [n:127.0.0.1:34975_solr t:null-114] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992235} entity={} status=0 QTime=1
+  2> 8904 INFO  (qtp958609094-74-null-116) [n:127.0.0.1:34975_solr t:null-116] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992237} entity={} status=0 QTime=1
+  2> 8904 INFO  (qtp958609094-79-null-115) [n:127.0.0.1:34975_solr t:null-115] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992237} entity={} status=0 QTime=1
+  2> 8911 INFO  (qtp958609094-72-null-118) [n:127.0.0.1:34975_solr t:null-118] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913992221} status=0 QTime=2
+  2> 8911 INFO  (qtp1606657592-71-null-117) [n:127.0.0.1:45477_solr t:null-117] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913992221} status=0 QTime=2
+  2> 8913 INFO  (qtp958609094-81-null-117) [n:127.0.0.1:34975_solr t:null-117] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:45477_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913992221} status=0 QTime=5
+  2> 8913 INFO  (qtp958609094-77-null-118) [n:127.0.0.1:34975_solr t:null-118] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:34975_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913992221} status=0 QTime=5
+  2> 8913 INFO  (qtp958609094-74-null-119) [n:127.0.0.1:34975_solr t:null-119] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+  2> 8913 INFO  (qtp1606657592-73-null-119) [n:127.0.0.1:45477_solr t:null-119] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+  2> 8916 INFO  (qtp958609094-75-null-119) [n:127.0.0.1:34975_solr t:null-119] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992240&nodes=127.0.0.1:34975_solr,127.0.0.1:45477_solr} entity={} status=0 QTime=8
+  2> 8919 INFO  (qtp958609094-79-null-120) [n:127.0.0.1:34975_solr t:null-120] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992252} entity={} status=0 QTime=1
+  2> 9101 INFO  (qtp958609094-72-null-121) [n:127.0.0.1:34975_solr t:null-121] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992430} entity={} status=0 QTime=4
+  2> 9106 INFO  (qtp958609094-74-null-123) [n:127.0.0.1:34975_solr t:null-123] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992439} entity={} status=0 QTime=0
+  2> 9106 INFO  (qtp958609094-77-null-124) [n:127.0.0.1:34975_solr t:null-124] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992439} entity={} status=0 QTime=1
+  2> 9107 INFO  (qtp958609094-81-null-122) [n:127.0.0.1:34975_solr t:null-122] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992430} entity={} status=0 QTime=3
+  2> 9110 INFO  (qtp958609094-79-null-125) [n:127.0.0.1:34975_solr t:null-125] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992443&indexInfo=false} entity={} status=0 QTime=0
+  2> 9111 INFO  (qtp958609094-75-null-126) [n:127.0.0.1:34975_solr t:null-126] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992443} entity={} status=0 QTime=1
+  2> 9303 INFO  (qtp958609094-72-null-127) [n:127.0.0.1:34975_solr t:null-127] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992632} entity={} status=0 QTime=3
+  2> 9304 INFO  (qtp1606657592-76-null-128) [n:127.0.0.1:45477_solr t:null-128] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992633} entity={} status=0 QTime=3
+  2> 9309 INFO  (qtp958609094-77-null-130) [n:127.0.0.1:34975_solr t:null-130] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992641} entity={} status=0 QTime=1
+  2> 9310 INFO  (qtp958609094-81-null-129) [n:127.0.0.1:34975_solr t:null-129] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992642} entity={} status=0 QTime=1
+  2> 9315 INFO  (qtp958609094-75-null-132) [n:127.0.0.1:34975_solr t:null-132] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992647} entity={} status=0 QTime=1
+  2> 9315 INFO  (qtp1606657592-78-null-131) [n:127.0.0.1:45477_solr t:null-131] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992647&indexInfo=false} entity={} status=0 QTime=0
+  2> 9338 INFO  (qtp958609094-72-null-133) [n:127.0.0.1:34975_solr t:null-133] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992669} entity={} status=0 QTime=3
+  2> 9344 INFO  (qtp958609094-77-null-134) [n:127.0.0.1:34975_solr t:null-134] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992676} entity={} status=0 QTime=1
+  2> 9344 INFO  (qtp958609094-74-null-135) [n:127.0.0.1:34975_solr t:null-135] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992676} entity={} status=0 QTime=1
+  2> 9348 INFO  (qtp958609094-81-null-136) [n:127.0.0.1:34975_solr t:null-136] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992680} entity={} status=0 QTime=2
+  2> 9349 INFO  (qtp1606657592-82-null-137) [n:127.0.0.1:45477_solr t:null-137] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992681&indexInfo=false} entity={} status=0 QTime=1
+  2> 9607 INFO  (qtp958609094-79-null-138) [n:127.0.0.1:34975_solr t:null-138] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992936} entity={} status=0 QTime=3
+  2> 9611 INFO  (qtp958609094-77-null-139) [n:127.0.0.1:34975_solr t:null-139] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992944} entity={} status=0 QTime=1
+  2> 9611 INFO  (qtp958609094-72-null-140) [n:127.0.0.1:34975_solr t:null-140] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992944} entity={} status=0 QTime=1
+  2> 9615 INFO  (qtp958609094-74-null-141) [n:127.0.0.1:34975_solr t:null-141] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992948} entity={} status=0 QTime=1
+  2> 9616 INFO  (qtp1606657592-80-null-142) [n:127.0.0.1:45477_solr t:null-142] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913992948&indexInfo=false} entity={} status=0 QTime=0
+  2> 9895 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testCoreMenuKeepsNewestRefreshForSameNode
+  2> 10009 ERROR (TEST-AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode-seed#[5110C0AE]) [] o.a.s.w.AdminUiTestBase UI test failure artifacts saved to /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/ui-failure-testCoreMenuKeepsNewestRefreshForSameNode-001
+   >     org.junit.ComparisonFailure: A late response must not replace the current core menu expected:<[new]_core> but was:<[old]_core>
+   >         at __randomizedtesting.SeedInfo.seed([5110C0AE:7F2EBFAB5C18A4]:0)
+   >         at app//org.junit.Assert.assertEquals(Assert.java:117)
+   >         at app//org.apache.solr.webapp.AdminUiNodePickerTest.assertCoreMenuIgnoresOlderResponse(AdminUiNodePickerTest.java:352)
+   >         at app//org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode(AdminUiNodePickerTest.java:145)
+   >         at java.base@21.0.12.1/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+   >         at java.base@21.0.12.1/java.lang.reflect.Method.invoke(Method.java:580)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+   >         at app//org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+   >         at app//com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at app//org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+   >         at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at app//org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+   >         at app//org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at app//org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at app//com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+   >         at app//com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at app//com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+   >         at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at app//org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at app//org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at app//org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+   >         at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+   >         at java.base@21.0.12.1/java.lang.Thread.run(Thread.java:1583)
+  2> NOTE: reproduce with: gradlew test --tests AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode -Dtests.seed=5110C0AE -Dtests.locale=mg-MG -Dtests.timezone=Etc/GMT-10 -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+  2> 10016 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Starting testCoreMenuIgnoresLateResponseFromPreviousNode
+  2> 10122 INFO  (qtp958609094-77-null-144) [n:127.0.0.1:34975_solr t:null-144] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993454&indexInfo=false} entity={} status=0 QTime=1
+  2> 10124 INFO  (qtp958609094-72-null-143) [n:127.0.0.1:34975_solr t:null-143] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993454} entity={} status=0 QTime=3
+  2> 10130 INFO  (qtp958609094-81-null-145) [n:127.0.0.1:34975_solr t:null-145] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993463} entity={} status=0 QTime=0
+  2> 10130 INFO  (qtp958609094-74-null-146) [n:127.0.0.1:34975_solr t:null-146] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993463} entity={} status=0 QTime=1
+  2> 10134 INFO  (qtp958609094-75-null-147) [n:127.0.0.1:34975_solr t:null-147] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993466} entity={} status=0 QTime=1
+  2> 10135 INFO  (qtp1606657592-73-null-148) [n:127.0.0.1:45477_solr t:null-148] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993467&indexInfo=false} entity={} status=0 QTime=0
+  2> 10138 INFO  (qtp1606657592-71-null-149) [n:127.0.0.1:45477_solr t:null-149] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993467} entity={} status=0 QTime=2
+  2> 10323 INFO  (qtp958609094-72-null-151) [n:127.0.0.1:34975_solr t:null-151] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993652} entity={} status=0 QTime=4
+  2> 10324 INFO  (qtp958609094-81-null-150) [n:127.0.0.1:34975_solr t:null-150] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993653} entity={} status=0 QTime=4
+  2> 10332 INFO  (qtp958609094-74-null-152) [n:127.0.0.1:34975_solr t:null-152] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993665} entity={} status=0 QTime=0
+  2> 10333 INFO  (qtp958609094-75-null-153) [n:127.0.0.1:34975_solr t:null-153] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993665} entity={} status=0 QTime=1
+  2> 10336 INFO  (qtp958609094-79-null-154) [n:127.0.0.1:34975_solr t:null-154] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993669&indexInfo=false} entity={} status=0 QTime=0
+  2> 10337 INFO  (qtp958609094-77-null-155) [n:127.0.0.1:34975_solr t:null-155] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993670} entity={} status=0 QTime=1
+  2> 10528 INFO  (qtp958609094-74-null-156) [n:127.0.0.1:34975_solr t:null-156] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993859&indexInfo=false} entity={} status=0 QTime=1
+  2> 10530 INFO  (qtp958609094-75-null-157) [n:127.0.0.1:34975_solr t:null-157] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993859} entity={} status=0 QTime=3
+  2> 10535 INFO  (qtp958609094-77-null-158) [n:127.0.0.1:34975_solr t:null-158] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993868} entity={} status=0 QTime=0
+  2> 10535 INFO  (qtp958609094-79-null-159) [n:127.0.0.1:34975_solr t:null-159] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993868} entity={} status=0 QTime=1
+  2> 10549 INFO  (qtp958609094-81-null-161) [n:127.0.0.1:34975_solr t:null-161] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993881&detailed=true} entity={} status=0 QTime=1
+  2> 10550 INFO  (qtp958609094-72-null-160) [n:127.0.0.1:34975_solr t:null-160] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993880} entity={} status=0 QTime=3
+  2> 10554 INFO  (qtp958609094-74-null-162) [n:127.0.0.1:34975_solr t:null-162] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993887} entity={} status=0 QTime=1
+  2> 10561 INFO  (qtp958609094-75-null-163) [n:127.0.0.1:34975_solr t:null-163] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993895} entity={} status=0 QTime=0
+  2> 10563 INFO  (qtp958609094-77-null-164) [n:127.0.0.1:34975_solr t:null-164] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993896} entity={} status=0 QTime=0
+  2> 10563 INFO  (qtp958609094-79-null-165) [n:127.0.0.1:34975_solr t:null-165] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993896} entity={} status=0 QTime=1
+  2> 10568 INFO  (qtp958609094-77-null-167) [n:127.0.0.1:34975_solr t:null-167] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913993880} status=0 QTime=1
+  2> 10568 INFO  (qtp1606657592-76-null-168) [n:127.0.0.1:45477_solr t:null-168] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913993880} status=0 QTime=1
+  2> 10569 INFO  (qtp958609094-72-null-167) [n:127.0.0.1:34975_solr t:null-167] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:34975_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913993880} status=0 QTime=4
+  2> 10569 INFO  (qtp958609094-74-null-168) [n:127.0.0.1:34975_solr t:null-168] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:45477_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793913993880} status=0 QTime=4
+  2> 10570 INFO  (qtp1606657592-78-null-166) [n:127.0.0.1:45477_solr t:null-166] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3
+  2> 10570 INFO  (qtp958609094-75-null-166) [n:127.0.0.1:34975_solr t:null-166] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=4
+  2> 10573 INFO  (qtp958609094-81-null-166) [n:127.0.0.1:34975_solr t:null-166] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993898&nodes=127.0.0.1:34975_solr,127.0.0.1:45477_solr} entity={} status=0 QTime=8
+  2> 10577 INFO  (qtp958609094-79-null-169) [n:127.0.0.1:34975_solr t:null-169] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913993910} entity={} status=0 QTime=1
+  2> 10746 INFO  (qtp958609094-77-null-170) [n:127.0.0.1:34975_solr t:null-170] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994075} entity={} status=0 QTime=4
+  2> 10750 INFO  (qtp958609094-74-null-173) [n:127.0.0.1:34975_solr t:null-173] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994083} entity={} status=0 QTime=0
+  2> 10750 INFO  (qtp958609094-75-null-172) [n:127.0.0.1:34975_solr t:null-172] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994083} entity={} status=0 QTime=0
+  2> 10751 INFO  (qtp958609094-77-null-171) [n:127.0.0.1:34975_solr t:null-171] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994075} entity={} status=0 QTime=3
+  2> 10755 INFO  (qtp958609094-79-null-175) [n:127.0.0.1:34975_solr t:null-175] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994088&indexInfo=false} entity={} status=0 QTime=0
+  2> 10755 INFO  (qtp958609094-81-null-174) [n:127.0.0.1:34975_solr t:null-174] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994088} entity={} status=0 QTime=1
+  2> 10948 INFO  (qtp958609094-72-null-176) [n:127.0.0.1:34975_solr t:null-176] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994277} entity={} status=0 QTime=4
+  2> 10953 INFO  (qtp958609094-77-null-178) [n:127.0.0.1:34975_solr t:null-178] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994286} entity={} status=0 QTime=0
+  2> 10953 INFO  (qtp958609094-75-null-179) [n:127.0.0.1:34975_solr t:null-179] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994285} entity={} status=0 QTime=1
+  2> 10954 INFO  (qtp1606657592-82-null-177) [n:127.0.0.1:45477_solr t:null-177] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994277} entity={} status=0 QTime=3
+  2> 10957 INFO  (qtp958609094-79-null-180) [n:127.0.0.1:34975_solr t:null-180] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994289} entity={} status=0 QTime=1
+  2> 10957 INFO  (qtp1606657592-80-null-181) [n:127.0.0.1:45477_solr t:null-181] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994290&indexInfo=false} entity={} status=0 QTime=0
+  2> 10979 INFO  (qtp958609094-72-null-182) [n:127.0.0.1:34975_solr t:null-182] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994310} entity={} status=0 QTime=3
+  2> 10983 INFO  (qtp958609094-77-null-184) [n:127.0.0.1:34975_solr t:null-184] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994316} entity={} status=0 QTime=0
+  2> 10983 INFO  (qtp958609094-75-null-183) [n:127.0.0.1:34975_solr t:null-183] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994316} entity={} status=0 QTime=0
+  2> 10987 INFO  (qtp1606657592-73-null-185) [n:127.0.0.1:45477_solr t:null-185] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994319&indexInfo=false} entity={} status=0 QTime=0
+  2> 10987 INFO  (qtp958609094-79-null-186) [n:127.0.0.1:34975_solr t:null-186] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994319} entity={} status=0 QTime=1
+  2> 11347 INFO  (qtp958609094-81-null-188) [n:127.0.0.1:34975_solr t:null-188] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994675} entity={} status=0 QTime=4
+  2> 11347 INFO  (qtp958609094-72-null-187) [n:127.0.0.1:34975_solr t:null-187] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994676} entity={} status=0 QTime=4
+  2> 11352 INFO  (qtp958609094-77-null-190) [n:127.0.0.1:34975_solr t:null-190] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994685} entity={} status=0 QTime=0
+  2> 11352 INFO  (qtp958609094-75-null-189) [n:127.0.0.1:34975_solr t:null-189] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994685} entity={} status=0 QTime=0
+  2> 11360 INFO  (qtp958609094-79-null-191) [n:127.0.0.1:34975_solr t:null-191] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994693&indexInfo=false} entity={} status=0 QTime=0
+  2> 11362 INFO  (qtp958609094-74-null-192) [n:127.0.0.1:34975_solr t:null-192] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793913994694} entity={} status=0 QTime=1
+  2> 11409 INFO  (TEST-AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode-seed#[5110C0AE]) [] o.a.s.SolrTestCaseJ4 ###Ending testCoreMenuIgnoresLateResponseFromPreviousNode
+  2> 11521 ERROR (TEST-AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode-seed#[5110C0AE]) [] o.a.s.w.AdminUiTestBase UI test failure artifacts saved to /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001/ui-failure-testCoreMenuIgnoresLateResponseFromPreviousNode-001
+   >     org.junit.ComparisonFailure: A late response must not replace the current core menu expected:<[new]_core> but was:<[old]_core>
+   >         at __randomizedtesting.SeedInfo.seed([5110C0AE:9633153DE21DDEA]:0)
+   >         at app//org.junit.Assert.assertEquals(Assert.java:117)
+   >         at app//org.apache.solr.webapp.AdminUiNodePickerTest.assertCoreMenuIgnoresOlderResponse(AdminUiNodePickerTest.java:352)
+   >         at app//org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode(AdminUiNodePickerTest.java:140)
+   >         at java.base@21.0.12.1/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+   >         at java.base@21.0.12.1/java.lang.reflect.Method.invoke(Method.java:580)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+   >         at app//org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+   >         at app//com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at app//org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+   >         at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at app//org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+   >         at app//org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at app//org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+   >         at app//com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at app//com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+   >         at app//com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at app//com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+   >         at app//org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at app//org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at app//org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at app//org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+   >         at app//org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at app//com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at app//com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+   >         at java.base@21.0.12.1/java.lang.Thread.run(Thread.java:1583)
+  2> NOTE: reproduce with: gradlew test --tests AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode -Dtests.seed=5110C0AE -Dtests.locale=mg-MG -Dtests.timezone=Etc/GMT-10 -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+  2> 11603 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 11709 INFO  (jetty-closer-66-thread-2) [] o.e.j.s.Server Stopped oejs.Server@dc1d330{STOPPING}[12.1.14,sto=0]
+  2> 11709 INFO  (jetty-closer-66-thread-1) [] o.e.j.s.Server Stopped oejs.Server@542f0f30{STOPPING}[12.1.14,sto=0]
+  2> 11711 INFO  (jetty-closer-66-thread-2) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@4f28c9f7{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+  2> 11711 INFO  (jetty-closer-66-thread-1) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@35fd1304{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+  2> 11713 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=291945784
+  2> 11713 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=709070420
+  2> 11714 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:45477_solr
+  2> 11714 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:34975_solr
+  2> 11719 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+  2> 11719 INFO  (zkCallback-40-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+  2> 11721 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.ZkController Publish this node as DOWN...
+  2> 11721 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.ZkController Publish this node as DOWN...
+  2> 11721 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.ZkController Publish node=127.0.0.1:34975_solr as DOWN
+  2> 11721 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.ZkController Publish node=127.0.0.1:45477_solr as DOWN
+  2> 11725 INFO  (closeThreadPool-71-thread-1) [] o.a.s.c.Overseer Overseer (id=72072551307739143-127.0.0.1:45477_solr-n_0000000000) closing
+  2> Nov 06, 2026 7:26:35 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+  2> WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+  2> Nov 06, 2026 7:26:35 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+  2> WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+  2> 11726 INFO  (OverseerStateUpdate-72072551307739143-127.0.0.1:45477_solr-n_0000000000) [n:127.0.0.1:45477_solr] o.a.s.c.Overseer Overseer Loop exiting : 127.0.0.1:45477_solr
+  2> 11727 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 11727 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 11728 INFO  (closeThreadPool-71-thread-2) [] o.a.s.c.Overseer Overseer (id=72072551307739143-127.0.0.1:45477_solr-n_0000000000) closing
+  2> 11829 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.Overseer Overseer (id=72072551307739143-127.0.0.1:45477_solr-n_0000000000) closing
+  2> 11844 INFO  (jetty-closer-66-thread-1) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@77ad8ed8{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@10c9f878{STOPPED}}
+  2> 11844 INFO  (jetty-closer-66-thread-2) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@184ca19a{/solr,/solr,b=file:///workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@5c2c2e31{STOPPED}}
+  2> 11845 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.c.ZkTestServer Shutting down ZkTestServer.
+  2> 11846 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 11947 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 12050 WARN  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Watch limit violations: 
+  2> Maximum concurrent create/delete watches above limit:
+  2> 
+  2> 	3	/solr/aliases.json
+  2> 	3	/solr/clusterprops.json
+  2> 	2	/solr/packages.json
+  2> 	2	/solr/security.json
+  2> 
+  2> Maximum concurrent data watches above limit:
+  2> 
+  2> 	20	/zookeeper/config
+  2> 
+  2> Maximum concurrent children watches above limit:
+  2> 
+  2> 	9	/solr/live_nodes
+  2> 	3	/solr/collections
+  2> 
+  2> 12054 INFO  (SUITE-AdminUiNodePickerTest-seed#[5110C0AE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+  2> NOTE: leaving temporary files on disk at: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/tmp/tests-tmp/org.apache.solr.webapp.AdminUiNodePickerTest_5110C0AE-001
+  2> NOTE: test params are: codec=Asserting(Lucene104): {}, docValues:{}, maxPointsInLeafNode=833, maxMBSortInHeap=5.911562206394843, sim=Asserting(RandomSimilarity(queryNorm=false): {}), locale=mg-MG, timezone=Etc/GMT-10
+  2> NOTE: Linux 6.18.38+ amd64/Ubuntu 21.0.12.1 (64-bit)/cpus=1,threads=5,free=275723376,total=326107136
+  2> NOTE: All tests run in this JVM: [AdminUiNodePickerTest]
+
+:solr:webapp:test (FAILURE): 4 test(s), 4 failure(s)
+
+4 tests completed, 4 failed
+
+> Task :solr:webapp:test FAILED
+> Task :solr:webapp:wipeTaskTemp
+ERROR: The following test(s) have failed:
+  - org.apache.solr.webapp.AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu (:solr:webapp)
+    Test history: https://develocity.apache.org/scans/tests?search.rootProjectNames=solr-root&tests.container=org.apache.solr.webapp.AdminUiNodePickerTest&tests.test=testSystemInfoFailureStillRefreshesLocalCoreMenu http://fucit.org/solr-jenkins-reports/history-trend-of-recent-failures.html#series/org.apache.solr.webapp.AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu
+    Test output: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/test-results/test/outputs/OUTPUT-org.apache.solr.webapp.AdminUiNodePickerTest.txt
+    Reproduce with: ./gradlew :solr:webapp:test --tests "org.apache.solr.webapp.AdminUiNodePickerTest.testSystemInfoFailureStillRefreshesLocalCoreMenu" "-Ptests.jvmargs=-XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:ReservedCodeCacheSize=120m" -Ptests.seed=5110C0AE -Ptests.useSecurityManager=true -Ptests.file.encoding=UTF-8 -Ptests.selenium=true
+
+  - org.apache.solr.webapp.AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest (:solr:webapp)
+    Test history: https://develocity.apache.org/scans/tests?search.rootProjectNames=solr-root&tests.container=org.apache.solr.webapp.AdminUiNodePickerTest&tests.test=testRestoredSelectionTargetsInitialCoreMenuRequest http://fucit.org/solr-jenkins-reports/history-trend-of-recent-failures.html#series/org.apache.solr.webapp.AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest
+    Test output: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/test-results/test/outputs/OUTPUT-org.apache.solr.webapp.AdminUiNodePickerTest.txt
+    Reproduce with: ./gradlew :solr:webapp:test --tests "org.apache.solr.webapp.AdminUiNodePickerTest.testRestoredSelectionTargetsInitialCoreMenuRequest" "-Ptests.jvmargs=-XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:ReservedCodeCacheSize=120m" -Ptests.seed=5110C0AE -Ptests.useSecurityManager=true -Ptests.file.encoding=UTF-8 -Ptests.selenium=true
+
+  - org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode (:solr:webapp)
+    Test history: https://develocity.apache.org/scans/tests?search.rootProjectNames=solr-root&tests.container=org.apache.solr.webapp.AdminUiNodePickerTest&tests.test=testCoreMenuKeepsNewestRefreshForSameNode http://fucit.org/solr-jenkins-reports/history-trend-of-recent-failures.html#series/org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode
+    Test output: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/test-results/test/outputs/OUTPUT-org.apache.solr.webapp.AdminUiNodePickerTest.txt
+    Reproduce with: ./gradlew :solr:webapp:test --tests "org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuKeepsNewestRefreshForSameNode" "-Ptests.jvmargs=-XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:ReservedCodeCacheSize=120m" -Ptests.seed=5110C0AE -Ptests.useSecurityManager=true -Ptests.file.encoding=UTF-8 -Ptests.selenium=true
+
+  - org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode (:solr:webapp)
+    Test history: https://develocity.apache.org/scans/tests?search.rootProjectNames=solr-root&tests.container=org.apache.solr.webapp.AdminUiNodePickerTest&tests.test=testCoreMenuIgnoresLateResponseFromPreviousNode http://fucit.org/solr-jenkins-reports/history-trend-of-recent-failures.html#series/org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode
+    Test output: /workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/test-results/test/outputs/OUTPUT-org.apache.solr.webapp.AdminUiNodePickerTest.txt
+    Reproduce with: ./gradlew :solr:webapp:test --tests "org.apache.solr.webapp.AdminUiNodePickerTest.testCoreMenuIgnoresLateResponseFromPreviousNode" "-Ptests.jvmargs=-XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:ReservedCodeCacheSize=120m" -Ptests.seed=5110C0AE -Ptests.useSecurityManager=true -Ptests.file.encoding=UTF-8 -Ptests.selenium=true
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':solr:webapp:test'.
+> There were failing tests. See the results at: file:///workspace/worktrees/solr-12613-lifecycle-round2-fail-before/solr/webapp/build/test-results/test/
+
+BUILD FAILED in 1m 14s
+48 actionable tasks: 47 executed, 1 up-to-date
+rc=1
