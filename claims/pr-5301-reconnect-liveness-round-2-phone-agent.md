@@ -1,10 +1,10 @@
-# Claim: PR 5301 reconnect liveness gate round 2, phone-agent
+# Claim: PR 5301 reconnect liveness gate, round 2 (execution)
 
-Status: CLAIMED, executing
-Jobs: `gates/pr-5301-reconnect-liveness-round-1.md` as superseded on the exact head by `gates/pr-5301-reconnect-liveness-round-2.md`.
-Executor: phone-agent (Linux, this VM).
-Claimed 2026-11-05 at Nick's direction ("5301 gate" after the 5298 gate).
+Status: DONE, GATE FAILED
+Host: phone-agent (Linux, this VM)
+Job: gates/pr-5301-reconnect-liveness-round-2.md
+Legs: 2026-11-05T22:16:01Z to 22:33:40Z; diagnostics to 22:57:45Z.
 
-Inputs read back before claiming: fork branch `solr-18623-reconnect-liveness` at H2 `27a9cf105b25f1bf3d604534cf8bdd8674c470fc` (H1 `19579b2ed239` plus the gate's formatting-only tidy repair, plain-pushed and read back; repair report `reports/pr-5301-reconnect-repair-round-1.md`); PR #5301 at contributor H0 `01e820f0539cddc4697d26176d216614a776a99a`, base branch_9x. No earlier execution claim exists for this gate.
-Preflight: three normal clones at H2 (`~/workspace/solr-clones/5301-pos`, `5301-nega`, `5301-negb`), `.git` a directory in each; tidy at the repaired head is clean by construction (the tidy output is the repair commit) and re-verified in the positive legs. Host: JDK 21 (Temurin 21.0.12.1+1), Gradle 8.10 via the host runner for branch_9x, test-queue lock held by the chain, disk 68 percent used. Seed `5301C0DE` for every test leg.
-Evidence: `~/workspace/tools/gate-5301/` on this VM, with the receipt at `receipts/PR-5301-reconnect-liveness-round-1.md`.
+Candidate H2: 27a9cf105b25f1bf3d604534cf8bdd8674c470fc (fork branch solr-18623-reconnect-liveness). Contributor head H0: 01e820f0539cddc4697d26176d216614a776a99a, base branch_9x. Fixed seed: 5301C0DE.
+
+Result: ordering suite 5 of 5, ConnectionManagerTest and SolrZkClientTest pass, both negative legs discriminate exactly as specified, changelog generation produces both SOLR-18623 entries. GATE FAILED on two findings in the change as offered: (1) root check fails at validateSourcePatterns, ConnectionManagerOrderingTest uses Mockito without assumeWorkingMockito(); (2) TestConnectionManagerReconnectStress fails reproducibly at the pinned seed (two runs, same sub-seed 5301C0DE:AEBABCFD74B0F4C6, same expireSession assertion). The Error Prone compile failure was proven pre-existing at H0 (FloatRangeFieldTest, outside the diff) and is not counted against the branch. Receipt: receipts/PR-5301-reconnect-liveness-round-1.md. Report: reports/pr-5301-reconnect-gate-round-2.md. Evidence: reports/pr-5301-reconnect-liveness-round-1-evidence/.
