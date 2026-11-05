@@ -141,7 +141,7 @@ solrAdminServices.factory('NodeRequests',
 
       function withNodes(opts) {
         opts = opts || {};
-        if (isRemote()) {
+        if (state.localNode && state.selectedNode) {
           pendingTarget = state.selectedNode;
         }
         return opts;

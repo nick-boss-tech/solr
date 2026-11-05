@@ -134,6 +134,40 @@ public class AdminUiNodeScreensTest extends AdminUiTestBase {
   }
 
   @Test
+  public void testSelectedLocalNodeReadsRemainPinned() throws Exception {
+    String localNode = cluster.getJettySolrRunner(0).getNodeName();
+    openPage("", By.id("index"));
+    waitForTextContains(By.cssSelector("#content #index .node dd"), localNode);
+    startNodeRequestCapture();
+    try {
+      String[][] pages = {
+        {"~java-properties", "java-properties", "/api/node/properties"},
+        {"~threads", "thread-dump", "/api/node/threads"}
+      };
+      for (String[] page : pages) {
+        driver.get(baseUrl + "/index.html#/" + page[0]);
+        waitFor(By.id(page[1]));
+        waitUntil(
+            "the selected-local request was sent at " + page[2],
+            () -> !capturedNodeRequests(page[2]).isEmpty());
+        assertTrue(
+            "The selected node must be pinned even when it served the UI at " + page[2],
+            capturedNodeRequests(page[2]).stream().allMatch(r -> localNode.equals(r.get("target"))));
+      }
+      waitUntil(
+          "the selected-local core-menu request was sent",
+          () -> !capturedNodeRequests("/api/cores").isEmpty());
+      assertTrue(
+          "Core-menu reads must stay pinned to the selected local node",
+          capturedNodeRequests("/api/cores").stream()
+              .allMatch(r -> localNode.equals(r.get("target"))));
+      assertNoSevereConsoleErrors();
+    } finally {
+      stopNodeRequestCapture();
+    }
+  }
+
+  @Test
   public void testCloudNodesRetainHealthyDataWhenSystemInfoFails() throws Exception {
     openPage("", By.id("index"));
     String localNode = cluster.getJettySolrRunner(0).getNodeName();
