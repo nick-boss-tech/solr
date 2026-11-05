@@ -16,6 +16,7 @@
  */
 package org.apache.solr.common.cloud;
 
+import static org.apache.solr.SolrTestCaseJ4.assumeWorkingMockito;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
@@ -39,11 +40,17 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.EventType;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.ZooKeeper;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /** Deterministic state-ordering and replacement-session recovery tests. */
 public class ConnectionManagerOrderingTest extends SolrTestCase {
   private static final int TIMEOUT_MS = 60_000;
+
+  @BeforeClass
+  public static void beforeClass() {
+    assumeWorkingMockito();
+  }
 
   @Test
   public void testStaleDisconnectedDoesNotUndoConnectedState() {

@@ -194,8 +194,8 @@ public class TestConnectionManagerReconnectStress extends SolrTestCase {
     // The proxy may have had no live connection to drop, so try again if nothing was noticed.
     for (int attempt = 0; slowDisconnects.delayed.get() == disconnectsSeen; attempt++) {
       assertTrue("Could not drop the ZooKeeper connection", attempt < 10);
-      proxy.close();
-      proxy.reopen();
+      // Drop the client connection without rebinding the listener during reconnect.
+      proxy.halfClose();
       try {
         new TimeOut(5, TimeUnit.SECONDS, TimeSource.NANO_TIME)
             .waitFor(
