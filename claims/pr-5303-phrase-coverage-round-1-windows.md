@@ -1,0 +1,14 @@
+# Claim: PR 5303 phrase-boost coverage, round 1, Windows
+
+Status: CLAIMED
+
+- Authority: Nick's explicit instruction to build the test-only additions and hand off to the gate.
+- Snapshot: `efcffaefd4e41969baf131de5cbbd813d9c0b237`. Relevant board/root/host instructions are unchanged from the prior reviewed snapshot. No competing PR 5303/SOLR-18625 claim, gate, report or receipt was found; the proposed fork branch ref is absent.
+- Contributor PR: apache/solr #5303, Ian Springer, branch SOLR-18625, OPEN at H `e7f66ef3220f412bc3a54b566ca78ce4a906715e`; fetched PR ref matches H. Base/merge base `1fc38d1e40cb12512aba2b1990b22b04111dad2d`. No comments/reviews at refreshed read.
+- Slice: add optional regression/preservation coverage only in `solr/core/src/test/org/apache/solr/search/TestExtendedDismaxParser.java`. Preserve Ian's production and changelog blobs. No schema, synonym file, fixture/helper/API or dependency changes.
+- Fork branch: `nick-boss-tech/solr:pr-5303-phrase-coverage`; task worktree `wt/PR-5303-phrase-coverage`. Preserve contributor ancestry and add an ordinary commit under Nick's identity; never push to Ian's branch or upstream.
+- Tests: retain testNoEmptyPhraseBoostClause with plain-token and fielded-only inputs in both sow modes; isolate match-all and wi-fi preservation; add configured grackle/crow-blackbird preservation with qf=id to isolate pf. Reuse existing request helpers and synonyms; do not copy the invalid usa expectation or our old production/changelog commits.
+- Decision ladder rung 1: the current fix is correct and executable-code-equivalent to our older candidate; missing cases are coverage opportunities, not newly established production bugs. Rung 2 requires new exact-head Linux proof. H with its existing tests and the coverage head with added tests are both expected to pass. Use isolated compiling mutations to discriminate the assertions; a missing API, compilation error or skipped test is not proof.
+- Gate plan: run H and new head suites; preserve tests unchanged for mutation runs, prove omission of the empty-result filter and the over-aggressive one-raw-clause shortcut, and separately exercise both sow modes. The zero-clause guard is not independently proven by a query-shape assertion because the later empty-result filter protects correctness too; no parser-allocation or speedup claim.
+- Windows runs no Gradle, compiler, formatter, tests or mutations. Source patch must be committed/plain-pushed and remote SHA independently verified in this session. Post an implementation report and exact-head Linux gate with a distinct receipt.
+- No PR opening, public review/comment, live body edit, JIRA write, contributor/upstream push or force push is authorized by this claim. No public offer is made before the new proof is reviewed and the live PR reconciled.
