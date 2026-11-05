@@ -1,0 +1,10 @@
+# Claim: core-menu initialization follow-up, Windows round 2
+
+- Parent assignment `assignments/solr-12613-adjacent-implementation-round-1.md`; continues the active owner goal to implement adjacent code and tests.
+- Host windows; tags implementation, review, records. Started 2026-11-05 UTC (November 4 Eastern). Attempts 1; lease 2 hours after last host activity.
+- Slice: strengthen C3's request ownership at initial mode/selection discovery, retaining a local-core fallback when system info is denied/unavailable. Exact outbound files remain app.js and AdminUiNodePickerTest.java.
+- Branch `pr-5110-followup-selection-lifecycle`, current head `e59bc25bf6dda7d3ca05ec6aad727d6ed7c51bd4`; UI baseline `b45bae5da3a151c7b439ff4e42009c383b538fae`.
+- Evidence: resetMenu invokes loadCoresForSelectedNode while isCloudEnabled is unknown. NodeTarget.isRemote needs localNode, which is unavailable on fresh bootstrap, so a persisted remote selection can issue an untargeted initial request. The generation/selection callback guard alone does not establish that the request was sent to the intended node. Source inspection also shows the metadata-error branch clears targeting and returns without requesting permitted local cores once cloud mode was already known.
+- Decision rung 1: make the first core read follow mode/target initialization. Use a direct local read after standalone detection and after metadata failure, and the existing live-node path for cloud mode. Add a pre-bootstrap outgoing-header test for restored selection and a controlled metadata-failure/local-refresh test. Tests are authored, not executed, on Windows.
+- Board revalidated at `c857038010c499a1347af837b9ab7b7a273314ac`: no required Linux receipt or gate claim has arrived. The old C3 head/gate will be superseded by a new pushed head and full gate; do not transfer proof or execute an old-head job after the fork moves.
+- Deliverables: `reports/solr-12613-adjacent-selection-lifecycle-round-2.md` and `gates/solr-12613-adjacent-selection-lifecycle-round-2.md`, with remote SHA read-back and baseline proof for all required C3 regressions. Other source branches are untouched.
