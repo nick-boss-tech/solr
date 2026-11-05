@@ -1436,10 +1436,18 @@ public class ExtendedDismaxQParser extends QParser {
           case FIELD: // fallthrough
           case PHRASE:
             Query query;
-            if (val == null) {
-              query = super.getFieldQuery(field, vals, false);
-            } else {
-              query = super.getFieldQuery(field, val, type == QType.PHRASE, false);
+            int previousSlop = getPhraseSlop();
+            try {
+              if (type == QType.PHRASE) {
+                setPhraseSlop(slop);
+              }
+              if (val == null) {
+                query = super.getFieldQuery(field, vals, false);
+              } else {
+                query = super.getFieldQuery(field, val, type == QType.PHRASE, false);
+              }
+            } finally {
+              setPhraseSlop(previousSlop);
             }
             // Boolean query on a whitespace-separated string
             // If these were synonyms we would have a SynonymQuery

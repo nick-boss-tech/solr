@@ -89,15 +89,19 @@ public class TestMultiWordSynonyms extends SolrTestCaseJ4 {
     }
   }
 
-  @Test
-  public void testPf() {
-    // test phrase fields including pf2 pf3 and phrase slop
-    // same as edismax test, but "bar" is synonym for "tropical cyclone" here
+  private static void indexPfDocs() {
     assertU(adoc("id", "10", "text", "foo bar a b c", "boost_d", "1.0"));
     assertU(adoc("id", "11", "text", "foo a bar b c", "boost_d", "2.0"));
     assertU(adoc("id", "12", "text", "foo a b bar c", "boost_d", "3.0"));
     assertU(adoc("id", "13", "text", "foo a b c bar", "boost_d", "4.0"));
     assertU(commit());
+  }
+
+  @Test
+  public void testPf() {
+    // test phrase fields including pf2 pf3 and phrase slop
+    // same as edismax test, but "bar" is synonym for "tropical cyclone" here
+    indexPfDocs();
 
     assertQ(
         "function boosts must determine baseline scores",
@@ -247,6 +251,105 @@ public class TestMultiWordSynonyms extends SolrTestCaseJ4 {
         "//doc/str[@name='id'][.='13']",
         "//str[@name='parsedquery'][contains(.,'(text:bar text:\"tropical cyclone\"~2)^10.0')]",
         "//str[@name='parsedquery'][contains(.,'(text:\"cyclone foo\"~2)^10.0')]");
+  }
+
+  @Test
+  public void testExplicitSlopWithMultiWordSynonymsLucene() {
+    assertExplicitSlopWithMultiWordSynonyms("lucene");
+  }
+
+  @Test
+  public void testExplicitSlopWithMultiWordSynonymsEdismax() {
+    assertExplicitSlopWithMultiWordSynonyms("edismax");
+  }
+
+  private void assertExplicitSlopWithMultiWordSynonyms(String defType) {
+    indexPfDocs();
+    assertQ(
+        req(
+            "defType", defType,
+            "df", "text",
+            "qf", "text",
+            "q", "\"bar foo\"~2",
+            "fq", "id:10",
+            "debugQuery", "true"),
+        "//result[@name='response'][@numFound='1']",
+        "//str[@name='parsedquery'][contains(.,'text:\"bar foo\"~2')]",
+        "//str[@name='parsedquery'][contains(.,'text:\"tropical cyclone foo\"~2')]");
+    assertQ(
+        req(
+            "defType", defType,
+            "df", "text",
+            "qf", "text",
+            "q", "\"bar foo\"~0",
+            "fq", "id:10"),
+        "//result[@name='response'][@numFound='0']");
+    assertQ(
+        "explicit slop must not become the default for the following phrase",
+        req(
+            "defType", defType,
+            "df", "text",
+            "qf", "text",
+            "q", "+\"bar foo\"~2 +\"bar foo\"",
+            "fq", "id:10"),
+        "//result[@name='response'][@numFound='0']");
+  }
+
+  @Test
+  public void testExplicitSlopOverridesQsWithMultiWordSynonyms() {
+    indexPfDocs();
+    assertQ(
+        req(
+            "defType", "edismax",
+            "qf", "text",
+            "q", "\"bar foo\"~0",
+            "qs", "2",
+            "fq", "id:10"),
+        "//result[@name='response'][@numFound='0']");
+    assertQ(
+        req(
+            "defType", "edismax",
+            "qf", "text",
+            "q", "\"bar foo\"",
+            "qs", "2",
+            "fq", "id:10"),
+        "//result[@name='response'][@numFound='1']");
+  }
+
+  @Test
+  public void testPhraseSlopAfterSubQuery() {
+    indexPfDocs();
+    assertQ(
+        req("defType", "lucene", "df", "text", "q", "text:\"foo b\"~2", "fq", "id:11"),
+        "//result[@name='response'][@numFound='1']");
+    assertQ(
+        req(
+            "defType", "lucene",
+            "df", "text",
+            "q", "+_query_:\"{!term f=text}foo\" +text:\"foo b\"~2",
+            "fq", "id:11"),
+        "//result[@name='response'][@numFound='1']");
+  }
+
+  @Test
+  public void testNestedParserKeepsItsOwnPhraseSlop() {
+    indexPfDocs();
+    assertQ(
+        req(
+            "defType", "lucene",
+            "df", "text",
+            "q", "_query_:\"{!lucene v=$nested}\"~0",
+            "nested", "text:\"foo b\"~2",
+            "fq", "id:11"),
+        "//result[@name='response'][@numFound='1']");
+    assertQ(
+        req(
+            "defType", "lucene",
+            "df", "text",
+            "q", "_query_:\"{!lucene v=$nested}\"~1",
+            "nested", "text:\"foo b\"",
+            "fq", "id:11"),
+        "//result[@name='response'][@numFound='0']");
   }
 
   @Test
