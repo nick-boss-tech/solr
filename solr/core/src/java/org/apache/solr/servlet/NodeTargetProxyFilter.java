@@ -76,8 +76,16 @@ public class NodeTargetProxyFilter extends CoreContainerAwareHttpFilter {
     String queryString = req.getQueryString();
     if ("GET".equals(req.getMethod())
         && queryString != null
-        && queryString.contains(TARGET_NODE_HEADER)) { // cheap; avoid double-parse
-      SolrParams params = SolrRequestParsers.parseQueryString(queryString);
+        // A parameter name may contain escaped characters, including the initial 'X'.
+        && (queryString.contains(TARGET_NODE_HEADER) || queryString.indexOf('%') >= 0)) {
+      SolrParams params;
+      try {
+        params = SolrRequestParsers.parseQueryString(queryString);
+      } catch (SolrException e) {
+        // Do not let AuthenticationFilter turn a malformed query into an authentication error.
+        res.sendError(e.code(), e.getMessage());
+        return;
+      }
       String paramTargetNode = params.get(TARGET_NODE_HEADER);
       if (paramTargetNode != null) {
         if (targetNode != null) {
